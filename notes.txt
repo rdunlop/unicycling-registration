@@ -1,0 +1,104 @@
+This describes the different models, and their properties
+
+Registration Period:
+- Start Date - Date that registration opens
+- End Date - Last Date of registration at this price (inclusive)
+- Non-Competitor Cost during this period
+- Competitor Cost during this period
+
+
+Event Configuration: (usually only ONE of these)
+- Registration Closed - Global setting, usually not used (automatically closes based on Registration Period)
+- Webmaster E-mail address - Where any errors are sent
+- Event Name - Full Name of the event
+- Event Short-Name - Short Name of the event
+- Event Start Date - Used for calculating the "Age" of the competitors
+- Currency String - String to print next to the prices to indicate the currency being used
+- Artistic Closed Date - Last date that artistic events can be signed up
+- Standard Skill Closed Date - Last date that the standard skill events can be signed up
+- T-Shirt order Closed Date - Last date to add/change t-shirt sizes.
+
+
+Category:
+- Name - Name of this event Category
+
+Event:
+- Name - Name of this competition
+- Description - Optional longer description of this event
+- Category - The Category that this event should be grouped/listed with
+- ChampionCalculation - Is this event included in the "Champion" calculation
+ - XXX should this be a separate table, instead of a boolean?
+- PossibleValues
+ - XXX another table?
+- CellType (text, checkbox, multiple)
+
+User:
+- Email
+- Password (encrypted)
+- Admin (boolean)
+* Registration(s)
+
+Registrant:
+- First Name
+- Middle Initial
+- Last Name
+- Birthday
+- Gender
+- Address1
+- Address2
+- City
+- State
+- Country
+- Zip Code
+- Phone
+- Mobile
+- Email
+
+Registrant Details:
+- T-Shirt Size
+- Native Language
+- Team/Club Name
+- Team/Club Contact Person
+- IUF ID
+
+EmergencyContact:
+* Registrant
+- Name
+- Relationship To Registrant
+- Attending
+- Primary Phone
+- Other Phone
+- Language if other than English
+- Comments
+
+Parent/Guardian:
+- Name
+- Address1
+- Address2
+- City
+- State
+- Country
+- Zip Code
+- Phone
+- Adult Responsible for Minor
+
+TShirtSizes:
+- Size
+
+
+
+Not yet determined:
+- Paypal
+- Best Times
+- How to do multiple Options for an event (ie: standard vs unlimited)
+- Volunteers??
+- How to store the user's selections (registrationID, EventId, Value)?
+
+
+To Be answered by the Event Organizers:
+- Will you be selling extra T-Shirts during registration
+ - Question 1) Does a registration include a t-shirt in the cost?
+ - Question 2) Does the non-competitor get the same T-Shirt?
+ - Question 3) Can a registrant request/pay for more than their 1-free t-Shirt?
+ - Question 4) What sizes of T-Shirts will you be selling?
+ - 
