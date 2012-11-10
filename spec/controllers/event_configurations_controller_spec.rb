@@ -24,7 +24,10 @@ describe EventConfigurationsController do
   # EventConfiguration. As you add validations to EventConfiguration, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      short_name: "something short",
+      long_name: "Something Long"
+    }
   end
 
   # This should return the minimal set of values that should be in the session
