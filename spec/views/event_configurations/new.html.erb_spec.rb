@@ -2,17 +2,8 @@ require 'spec_helper'
 
 describe "event_configurations/new" do
   before(:each) do
-    assign(:event_configuration, stub_model(EventConfiguration,
-      :short_name => "MyString",
-      :long_name => "MyString",
-      :location => "MyString",
-      :dates_description => "MyString",
-      :event_url => "MyString",
-      :logo => "",
-      :currency => "MyString",
-      :contact_email => "MyString",
-      :closed => false
-    ).as_new_record)
+    assign(:event_configuration, 
+           FactoryGirl.create(:event_configuration))
   end
 
   it "renders new event_configuration form" do
@@ -25,7 +16,7 @@ describe "event_configurations/new" do
       assert_select "input#event_configuration_location", :name => "event_configuration[location]"
       assert_select "input#event_configuration_dates_description", :name => "event_configuration[dates_description]"
       assert_select "input#event_configuration_event_url", :name => "event_configuration[event_url]"
-      assert_select "input#event_configuration_logo", :name => "event_configuration[logo]"
+      assert_select "input#event_configuration_logo_image", :name => "event_configuration[logo_image]"
       assert_select "input#event_configuration_currency", :name => "event_configuration[currency]"
       assert_select "input#event_configuration_contact_email", :name => "event_configuration[contact_email]"
       assert_select "input#event_configuration_closed", :name => "event_configuration[closed]"

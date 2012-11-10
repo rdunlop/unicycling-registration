@@ -2,18 +2,18 @@
 
 FactoryGirl.define do
   factory :event_configuration do
-    short_name "MyString"
-    long_name "MyString"
-    location "MyString"
-    dates_description "MyString"
-    event_url "MyString"
-    start_date "2012-11-10"
-    logo ""
-    currency "MyString"
-    contact_email "MyString"
+    short_name "My conv"
+    long_name "Some really nice convention"
+    location "Somewhere"
+    dates_description "X through Y"
+    event_url "http://www.naucc.com"
+    start_date "2013-1-1"
+    #logo ""
+    currency "$"
+    contact_email "robin@dunlopweb.com"
     closed false
-    artistic_closed_date "2012-11-10"
-    standard_skill_closed_date "2012-11-10"
-    tshirt_closed_date "2012-11-10"
+    artistic_closed_date "2013-1-10"
+    standard_skill_closed_date "2013-3-10"
+    tshirt_closed_date "2013-5-10"
   end
 end
