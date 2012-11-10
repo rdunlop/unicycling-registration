@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "can be created by factory girl" do
+    user = FactoryGirl.create(:user)
+    user.valid?.should == true
+  end
 end
