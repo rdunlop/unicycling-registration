@@ -1,0 +1,43 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+HERE = File.dirname(__FILE__)
+INFRA_DIR = "#{HERE}/vagrant"
+RAILS_DIR = "#{HERE}/../"
+
+Vagrant::Config.run do |config|
+
+  config.vm.box = "precise64"
+
+  # The url from where the 'config.vm.box' box will be fetched if it
+  # doesn't already exist on the user's system.
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  # Forward a port from the guest to the host, which allows for outside
+  # computers to access the VM, whereas host only networking does not.
+  # config.vm.forward_port 80, 8080
+  config.vm.forward_port 9292, 9292
+
+  config.vm.share_folder "rails_app", "/home/vagrant/workspace", "#{RAILS_DIR}"
+
+  # Enable provisioning with chef solo, specifying a cookbooks path, roles
+  # path, and data_bags path (all relative to this Vagrantfile), and adding 
+  # some recipes and/or roles.
+  #
+  # config.vm.provision :chef_solo do |chef|
+  #   chef.cookbooks_path = "../my-recipes/cookbooks"
+  #   chef.roles_path = "../my-recipes/roles"
+  #   chef.data_bags_path = "../my-recipes/data_bags"
+  #   chef.add_recipe "mysql"
+  #   chef.add_role "web"
+  #
+  #   # You may also specify custom JSON attributes:
+  #   chef.json = { :mysql_password => "foo" }
+  # end
+
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = ["#{INFRA_DIR}/cookbooks"]
+    chef.roles_path = ["#{INFRA_DIR}/roles"]
+    chef.add_role "vagrant_postgres91_utf8_rails"
+  end
+end

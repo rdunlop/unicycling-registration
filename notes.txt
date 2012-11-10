@@ -102,3 +102,9 @@ To Be answered by the Event Organizers:
  - Question 3) Can a registrant request/pay for more than their 1-free t-Shirt?
  - Question 4) What sizes of T-Shirts will you be selling?
  - 
+
+
+ Should not be able to change the type of a given field once created.
+ Should warn about changing the name of an event, because it may change the value of the....
+ Cascade delete....
+
