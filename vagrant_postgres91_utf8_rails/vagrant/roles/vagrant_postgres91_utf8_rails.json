@@ -25,6 +25,7 @@
         "recipe[workstation::locale]",
 
         "recipe[workstation::default]",
+        "recipe[workstation::vim]",
         "recipe[workstation::git]",
         "recipe[workstation::ruby]",
         "recipe[workstation::bundler]",
