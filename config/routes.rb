@@ -1,4 +1,10 @@
 Workspace::Application.routes.draw do
+  resources :event_configurations do
+    member do
+      get 'logo'
+    end
+  end
+
   get "welcome/index"
 
   get "welcome/help"

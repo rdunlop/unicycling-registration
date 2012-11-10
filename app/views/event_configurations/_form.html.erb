@@ -1,0 +1,69 @@
+<%= form_for(@event_configuration, :html => {:multipart=> true}) do |f| %>
+  <% if @event_configuration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event_configuration.errors.count, "error") %> prohibited this event_configuration from being saved:</h2>
+
+      <ul>
+      <% @event_configuration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :short_name %><br />
+    <%= f.text_field :short_name %>
+  </div>
+  <div class="field">
+    <%= f.label :long_name %><br />
+    <%= f.text_field :long_name %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :dates_description %><br />
+    <%= f.text_field :dates_description %>
+  </div>
+  <div class="field">
+    <%= f.label :event_url %><br />
+    <%= f.text_field :event_url %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :logo_image %><br />
+    <%= f.file_field :logo_image %>
+  </div>
+  <div class="field">
+    <%= f.label :currency %><br />
+    <%= f.text_field :currency %>
+  </div>
+  <div class="field">
+    <%= f.label :contact_email %><br />
+    <%= f.text_field :contact_email %>
+  </div>
+  <div class="field">
+    <%= f.label :closed %><br />
+    <%= f.check_box :closed %>
+  </div>
+  <div class="field">
+    <%= f.label :artistic_closed_date %><br />
+    <%= f.date_select :artistic_closed_date %>
+  </div>
+  <div class="field">
+    <%= f.label :standard_skill_closed_date %><br />
+    <%= f.date_select :standard_skill_closed_date %>
+  </div>
+  <div class="field">
+    <%= f.label :tshirt_closed_date %><br />
+    <%= f.date_select :tshirt_closed_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

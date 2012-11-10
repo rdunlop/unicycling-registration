@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121110203042) do
+ActiveRecord::Schema.define(:version => 20121110222629) do
+
+  create_table "event_configurations", :force => true do |t|
+    t.string   "short_name"
+    t.string   "long_name"
+    t.string   "location"
+    t.string   "dates_description"
+    t.string   "event_url"
+    t.date     "start_date"
+    t.binary   "logo_binary"
+    t.string   "currency"
+    t.string   "contact_email"
+    t.boolean  "closed"
+    t.date     "artistic_closed_date"
+    t.date     "standard_skill_closed_date"
+    t.date     "tshirt_closed_date"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "logo_filename"
+    t.string   "logo_type"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

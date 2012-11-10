@@ -7,22 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-      <div class="top_nav">Unicycling Registration</div>
+  <div class="top_nav">
+    <%= link_to 'Configuration', event_configurations_path %>
+    <% if current_user.nil? %>
+      <%= link_to 'Sign in', new_user_session_path %>
+    <% else %>
+      <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+    <% end %>
+  </div>
 
-      <% if current_user.nil? %>
-        <%= link_to 'Sign in', new_user_session_path %>
-      <% else %>
-        <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
-      <% end %>
+  <div class="main_nav">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </div>
 
-      <div class="main_nav">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-        <%= yield %>
-      </div>
-
-      <div class="bottom_nav">
-        <p>Copyright &copy; Robin Dunlop</p>
-      </div>
+  <div class="bottom_nav">
+    <p>Copyright &copy; Robin Dunlop</p>
+  </div>
 </body>
 </html>

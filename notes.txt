@@ -8,11 +8,16 @@ Registration Period:
 
 
 Event Configuration: (usually only ONE of these)
-- Registration Closed - Global setting, usually not used (automatically closes based on Registration Period)
-- Webmaster E-mail address - Where any errors are sent
 - Event Name - Full Name of the event
 - Event Short-Name - Short Name of the event
+- Event Location String - Used for displaying on the main page/banner
+- Event Date range String - Used for displaying on the main page/banner
+- Logo (Binary)
+- Event URL - Used for a link from the main banner to the Event's other-info website
 - Event Start Date - Used for calculating the "Age" of the competitors
+
+- contact E-mail address - Where any registration inquiries are sent
+- Registration Closed - Global setting, usually not used (automatically closes based on Registration Period)
 - Currency String - String to print next to the prices to indicate the currency being used
 - Artistic Closed Date - Last date that artistic events can be signed up
 - Standard Skill Closed Date - Last date that the standard skill events can be signed up

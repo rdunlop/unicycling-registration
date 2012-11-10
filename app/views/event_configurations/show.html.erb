@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Short name:</b>
+  <%= @event_configuration.short_name %>
+</p>
+
+<p>
+  <b>Long name:</b>
+  <%= @event_configuration.long_name %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @event_configuration.location %>
+</p>
+
+<p>
+  <b>Dates description:</b>
+  <%= @event_configuration.dates_description %>
+</p>
+
+<p>
+  <b>Event url:</b>
+  <%= @event_configuration.event_url %>
+</p>
+
+<p>
+  <b>Logo:</b>
+  <%= @event_configuration.logo_filename %>
+  <%= image_tag(logo_event_configuration_path(@event_configuration), :alt => "Image", :width => "300px") %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @event_configuration.start_date %>
+</p>
+
+<p>
+  <b>Currency:</b>
+  <%= @event_configuration.currency %>
+</p>
+
+<p>
+  <b>Contact email:</b>
+  <%= @event_configuration.contact_email %>
+</p>
+
+<p>
+  <b>Closed:</b>
+  <%= @event_configuration.closed %>
+</p>
+
+<p>
+  <b>Artistic closed date:</b>
+  <%= @event_configuration.artistic_closed_date %>
+</p>
+
+<p>
+  <b>Standard skill closed date:</b>
+  <%= @event_configuration.standard_skill_closed_date %>
+</p>
+
+<p>
+  <b>Tshirt closed date:</b>
+  <%= @event_configuration.tshirt_closed_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_configuration_path(@event_configuration) %> |
+<%= link_to 'Back', event_configurations_path %>
