@@ -16,25 +16,20 @@ class AttendingController < ApplicationController
   def create
     choices = params[:event_choices]
     choices.each do |choice, value|
-      rc = RegistrantChoice.new
-      rc.registrant = @registrant
-      rc.event_choice = EventChoice.find(choice.to_i)
-      rc.value = value
-      rc.save
+      @ec = EventChoice.find(choice.to_i)
+      existing_entry = RegistrantChoice.where({:registrant_id => @registrant.id, :event_choice_id => @ec.id})
+
+      if existing_entry.count == 0
+        entry = RegistrantChoice.new
+      else
+        entry = existing_entry.first
+      end
+      entry.registrant = @registrant
+      entry.event_choice = @ec
+      entry.value = value
+      entry.save!
     end
 
-    respond_to do |format|
-      format.html { redirect_to @registrant }
-    end
-  end
-
-  def edit
-    respond_to do |format|
-      format.html # edit.html.erb
-    end
-  end
-
-  def update
     respond_to do |format|
       format.html { redirect_to @registrant }
     end

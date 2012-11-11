@@ -8,7 +8,7 @@ Workspace::Application.routes.draw do
 
   resources :registrants do
     member do
-      resources :attending, :only => [:new, :create, :edit, :update]
+      resources :attending, :only => [:new, :create]
     end
   end
 

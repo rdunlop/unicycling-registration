@@ -29,28 +29,19 @@ describe AttendingController do
       }
     end
     it "returns http success" do
-      get 'create', {:id => @reg, :event_choices => @attributes}
+      post 'create', {:id => @reg, :event_choices => @attributes}
       response.should redirect_to (@reg)
     end
 
     it "creates a corresponding event_choice when checkbox is selected" do
-      get 'create', {:id => @reg, :event_choices => @attributes}
+      post 'create', {:id => @reg, :event_choices => @attributes}
+      RegistrantChoice.count.should == 1
+    end
+    it "doesn't create a new entry if one already exists" do
+      RegistrantChoice.count.should == 0
+      post 'create', {:id => @reg, :event_choices => @attributes}
+      post 'create', {:id => @reg, :event_choices => @attributes}
       RegistrantChoice.count.should == 1
     end
   end
-
-  describe "GET 'edit'" do
-    it "returns http success" do
-      get 'edit', {:id => @reg}
-      response.should be_success
-    end
-  end
-
-  describe "PUT 'update'" do
-    it "returns http success" do
-      put 'update', {:id => @reg}
-      response.should redirect_to(@reg)
-    end
-  end
-
 end

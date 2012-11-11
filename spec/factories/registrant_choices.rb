@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :registrant_choice do
-    registrant_id 1
-    event_choice_id 1
-    value "MyString"
+    registrant # FactoryGirl
+    event_choice # FactoryGirl
+    value "0"
   end
 end
