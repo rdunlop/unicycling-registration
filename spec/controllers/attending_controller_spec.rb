@@ -25,7 +25,7 @@ describe AttendingController do
     before(:each) do
       @ec1 = FactoryGirl.create(:event_choice)
       @attributes = {
-        "#{@ec1.id}" => "1"
+        @ec1.choicename => "1"
       }
     end
     it "returns http success" do
@@ -46,7 +46,7 @@ describe AttendingController do
     end
 
     it "updates the value from 1 to 0" do
-      post 'create', {:id => @reg, :event_choices => {"#{@ec1.id}" => "0"}}
+      post 'create', {:id => @reg, :event_choices => {@ec1.choicename => "0"}}
       RegistrantChoice.first.value.should == "0"
     end
   end

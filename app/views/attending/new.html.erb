@@ -1,16 +1,15 @@
 <h1>Attending#new</h1>
 <p>Find me in app/views/attending/new.html.erb</p>
 
-<%= form_tag(attending_index_path(@registrant), {:method => "post"}) do %>
-    <% @events.each do |event| %>
-        <h1><%= event %></h1>
-        <% event.event_choices.each do |choice| %>
-            <b>Choice: <%= choice %></b>
-            <%= hidden_field_tag("event_choices[#{choice.id}]", "0", {:id => "fake_#{choice.id}"}) %>
-            <%= check_box_tag("event_choices[#{choice.id}]", "1", @registrant.chose(choice)) %>
-            <br />
-        <% end %>
-        <hr />
+<% x = RegistrantChoicesFacade.new(@registrant) %>
+<%= form_for(x, :url => attending_index_path(@registrant), :as => :event_choices) do |f| %>
+  <% @events.each do |event| %>
+    <h1><%= event %></h1>
+    <% event.event_choices.each do |choice| %>
+      <b>Choice: <%= choice %></b>
+      <%= f.check_box(choice.choicename) %>
+      <br />
     <% end %>
-    <%= submit_tag 'Submit' %>
+  <% end %>
+  <%= submit_tag 'Submit' %>
 <% end %>

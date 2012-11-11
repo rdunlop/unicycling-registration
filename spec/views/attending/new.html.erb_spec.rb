@@ -17,7 +17,7 @@ describe "attending/new.html.erb" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => attending_index_path(@registrant), :method => "post" do
-      assert_select "input#event_choices_#{@ec1.id}", :name => "event_choices[#{@ec1.id}]"
+      assert_select "input#event_choices_#{@ec1.choicename}", :name => "event_choices[#{@ec1.choicename}]"
 
       assert_select "input[type='checkbox']", 2 do
         assert_select "[checked='checked']", 0
@@ -60,7 +60,7 @@ describe "attending/new.html.erb" do
       render
 
       assert_select "form" do
-        assert_select "input[type='hidden'][name='event_choices[#{@ec1.id}]']"
+        assert_select "input[type='hidden'][name='event_choices[#{@ec1.choicename}]']"
       end
     end
   end

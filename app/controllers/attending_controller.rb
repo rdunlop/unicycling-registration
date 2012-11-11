@@ -14,20 +14,10 @@ class AttendingController < ApplicationController
   end
 
   def create
+    rcf = RegistrantChoicesFacade.new(@registrant)
     choices = params[:event_choices]
     choices.each do |choice, value|
-      @ec = EventChoice.find(choice.to_i)
-      existing_entry = RegistrantChoice.where({:registrant_id => @registrant.id, :event_choice_id => @ec.id})
-
-      if existing_entry.count == 0
-        entry = RegistrantChoice.new
-      else
-        entry = existing_entry.first
-      end
-      entry.registrant = @registrant
-      entry.event_choice = @ec
-      entry.value = value
-      entry.save!
+      rcf.send("#{choice}=", value)
     end
 
     respond_to do |format|

@@ -36,4 +36,8 @@ describe EventChoice do
     @ec.cell_type = "robin"
     @ec.valid?.should == false
   end
+
+  it "has a choicename" do
+    @ec.choicename.should == "choice#{@ec.id}"
+  end
 end
