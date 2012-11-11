@@ -1,4 +1,6 @@
 Workspace::Application.routes.draw do
+  resources :event_choices
+
   resources :events
 
   resources :categories

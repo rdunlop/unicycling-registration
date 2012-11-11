@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event:</b>
+  <%= @event_choice.event_id %>
+</p>
+
+<p>
+  <b>Export name:</b>
+  <%= @event_choice.export_name %>
+</p>
+
+<p>
+  <b>Cell type:</b>
+  <%= @event_choice.cell_type %>
+</p>
+
+<p>
+  <b>Multiple values:</b>
+  <%= @event_choice.multiple_values %>
+</p>
+
+<p>
+  <b>Label:</b>
+  <%= @event_choice.label %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @event_choice.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_choice_path(@event_choice) %> |
+<%= link_to 'Back', event_choices_path %>

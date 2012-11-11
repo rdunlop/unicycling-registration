@@ -1,0 +1,33 @@
+<h1>Listing event_choices</h1>
+
+<table>
+  <tr>
+    <th>Event</th>
+    <th>Export name</th>
+    <th>Cell type</th>
+    <th>Multiple values</th>
+    <th>Label</th>
+    <th>Position</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @event_choices.each do |event_choice| %>
+  <tr>
+    <td><%= event_choice.event_id %></td>
+    <td><%= event_choice.export_name %></td>
+    <td><%= event_choice.cell_type %></td>
+    <td><%= event_choice.multiple_values %></td>
+    <td><%= event_choice.label %></td>
+    <td><%= event_choice.position %></td>
+    <td><%= link_to 'Show', event_choice %></td>
+    <td><%= link_to 'Edit', edit_event_choice_path(event_choice) %></td>
+    <td><%= link_to 'Destroy', event_choice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event choice', new_event_choice_path %>

@@ -33,6 +33,7 @@ Event:
 - CategoryID - The Category that this event should be grouped/listed with
 
 EventChoice:
+- Label - Displayed next to this option
 - exportName - label for exporting this data 
 - EventID - The event that this choice is associated with
 - CellType (text, checkbox, multiple)

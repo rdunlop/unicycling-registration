@@ -1,0 +1,41 @@
+<%= form_for(@event_choice) do |f| %>
+  <% if @event_choice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event_choice.errors.count, "error") %> prohibited this event_choice from being saved:</h2>
+
+      <ul>
+      <% @event_choice.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :event_id %><br />
+    <%= f.select :event_id, Event.all.map{|n| [n.name, n.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :export_name %><br />
+    <%= f.text_field :export_name %>
+  </div>
+  <div class="field">
+    <%= f.label :cell_type %><br />
+    <%= f.text_field :cell_type %>
+  </div>
+  <div class="field">
+    <%= f.label :multiple_values %><br />
+    <%= f.text_field :multiple_values %>
+  </div>
+  <div class="field">
+    <%= f.label :label %><br />
+    <%= f.text_field :label %>
+  </div>
+  <div class="field">
+    <%= f.label :position %><br />
+    <%= f.number_field :position %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
