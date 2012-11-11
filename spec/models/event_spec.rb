@@ -26,4 +26,12 @@ describe Event do
     @ec = FactoryGirl.create(:event_choice, :event => @ev)
     @ev.event_choices = [@ec]
   end
+
+  it "sorts event choices by position" do
+    @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :position => 3)
+    @ec1 = FactoryGirl.create(:event_choice, :event => @ev, :position => 1)
+    @ec2 = FactoryGirl.create(:event_choice, :event => @ev, :position => 2)
+
+    @ev.event_choices = [@ec1, @ec2, @ec3]
+  end
 end

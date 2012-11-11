@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   attr_accessible :category_id, :description, :name, :position
 
-  has_many :event_choices
+  has_many :event_choices, :order => "event_choices.position"
   belongs_to :category
 
   validates :name, :presence => true
