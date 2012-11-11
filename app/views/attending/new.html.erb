@@ -17,6 +17,8 @@
               <%= f.check_box(choice.choicename) %>
             <% elsif choice.cell_type == "text" %>
               <%= f.text_field(choice.choicename) %>
+            <% elsif choice.cell_type == "multiple" %>
+              <%= f.select(choice.choicename, choice.values, {:include_blank => true}) %>
             <% end %>
             <br />
           <% end %>

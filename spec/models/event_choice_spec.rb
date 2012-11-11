@@ -37,6 +37,11 @@ describe EventChoice do
     @ec.valid?.should == true
   end
 
+  it "can have a cell_type of 'multiple'" do
+    @ec.cell_type = "multiple"
+    @ec.valid?.should == true
+  end
+
   it "cannot have an arbitrary cell_type" do
     @ec.cell_type = "robin"
     @ec.valid?.should == false
@@ -44,5 +49,16 @@ describe EventChoice do
 
   it "has a choicename" do
     @ec.choicename.should == "choice#{@ec.id}"
+  end
+
+  describe "when parsing the multiple_values" do
+    it "can parse single value" do
+      @ec.multiple_values = "one"
+      @ec.values.should == ["one"]
+    end
+    it "can parse 2 values" do
+      @ec.multiple_values = "one, two"
+      @ec.values.should == ["one", "two"]
+    end
   end
 end

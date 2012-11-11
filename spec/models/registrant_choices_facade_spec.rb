@@ -61,4 +61,29 @@ describe RegistrantChoicesFacade do
       rc.value.should == "Hello"
     end
   end
+  
+  describe "with a 'multiple' choice" do
+    before(:each) do
+      @ec = FactoryGirl.create(:event_choice, :cell_type => 'multiple')
+    end
+
+    it "has nil value if reg_choice is not present" do
+      @rcf.send(@ec.choicename).should == nil
+    end
+
+    it "has '' value if text is set to ''" do
+      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec, :value => "")
+      @rcf.send(@ec.choicename).should == ''
+    end
+    it "has 'hello' value if text is set to 'hello'" do
+      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec, :value => "hello")
+      @rcf.send(@ec.choicename).should == 'hello'
+    end
+
+    it "sets value to 'hello' if it is set to 'hello'" do
+      @rcf.send("#{@ec.choicename}=", "Hello")
+      rc = RegistrantChoice.first
+      rc.value.should == "Hello"
+    end
+  end
 end

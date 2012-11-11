@@ -4,9 +4,13 @@ class EventChoice < ActiveRecord::Base
   belongs_to :event
 
   validates :export_name, {:presence => true, :uniqueness => true}
-  validates :cell_type, :inclusion => {:in => %w(boolean text), :message => "%{value} must be either 'boolean' or 'text' or '...'"}
+  validates :cell_type, :inclusion => {:in => %w(boolean text multiple), :message => "%{value} must be either 'boolean' or 'text' or 'multiple' or '...'"}
 
   def choicename
     "choice#{id}"
+  end
+
+  def values
+    multiple_values.split(%r{,\s*})
   end
 end
