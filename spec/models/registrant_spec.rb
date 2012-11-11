@@ -47,4 +47,9 @@ describe Registrant do
     @reg.gender = "Other"
     @reg.valid?.should == false
   end
+
+  it "has event_choices" do
+    @ec = FactoryGirl.create(:registrant_choice, :registrant => @reg)
+    @reg.registrant_choices.should == [@ec]
+  end
 end

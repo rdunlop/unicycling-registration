@@ -10,4 +10,7 @@ class Registrant < ActiveRecord::Base
 
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
 
+
+  has_many :registrant_choices
+
 end
