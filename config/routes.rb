@@ -1,11 +1,18 @@
 Workspace::Application.routes.draw do
+
   resources :event_choices
 
   resources :events
 
   resources :categories
 
-  resources :registrants
+  resources :registrants do
+    member do
+      resources :attending, :only => [:new, :create, :edit, :update]
+    end
+  end
+
+
 
   resources :event_configurations do
     member do

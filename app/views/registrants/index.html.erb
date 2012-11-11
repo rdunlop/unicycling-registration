@@ -16,6 +16,7 @@
     <th>Phone</th>
     <th>Mobile</th>
     <th>Email</th>
+    <th>ATTENDING</th>
     <th></th>
     <th></th>
     <th></th>
@@ -37,6 +38,7 @@
     <td><%= registrant.phone %></td>
     <td><%= registrant.mobile %></td>
     <td><%= registrant.email %></td>
+    <td><%= link_to "Atending", attending_index_path(registrant) %></td>
     <td><%= link_to 'Show', registrant %></td>
     <td><%= link_to 'Edit', edit_registrant_path(registrant) %></td>
     <td><%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %></td>

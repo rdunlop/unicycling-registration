@@ -20,4 +20,10 @@ describe Event do
   it "should have name as to_s" do
     @ev.to_s.should == @ev.name
   end
+
+
+  it "has many even_choices" do
+    @ec = FactoryGirl.create(:event_choice, :event => @ev)
+    @ev.event_choices = [@ec]
+  end
 end

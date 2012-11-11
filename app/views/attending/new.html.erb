@@ -1,0 +1,15 @@
+<h1>Attending#new</h1>
+<p>Find me in app/views/attending/new.html.erb</p>
+
+<%= form_tag(attending_index_path(@registrant), {:method => "post"}) do %>
+    <% @events.each do |event| %>
+        <h1><%= event %></h1>
+        <% event.event_choices.each do |choice| %>
+            <b>Choice: <%= choice %></b>
+            <%= check_box_tag("event_choice#{choice.id}") %>
+            <br />
+        <% end %>
+        <hr />
+    <% end %>
+    <%= submit_tag 'Submit' %>
+<% end %>
