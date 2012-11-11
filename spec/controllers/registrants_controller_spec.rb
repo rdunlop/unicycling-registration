@@ -19,6 +19,11 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe RegistrantsController do
+   before(:each) do
+     user = FactoryGirl.create(:user)
+     sign_in user
+   end
+
 
   # This should return the minimal set of attributes required to create a valid
   # Registrant. As you add validations to Registrant, be sure to
@@ -34,17 +39,10 @@ describe RegistrantsController do
     }
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # RegistrantsController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
-
   describe "GET index" do
     it "assigns all registrants as @registrants" do
       registrant = Registrant.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:registrants).should eq([registrant])
     end
   end
@@ -52,14 +50,14 @@ describe RegistrantsController do
   describe "GET show" do
     it "assigns the requested registrant as @registrant" do
       registrant = Registrant.create! valid_attributes
-      get :show, {:id => registrant.to_param}, valid_session
+      get :show, {:id => registrant.to_param}
       assigns(:registrant).should eq(registrant)
     end
   end
 
   describe "GET new" do
     it "assigns a new registrant as @registrant" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:registrant).should be_a_new(Registrant)
     end
   end
@@ -67,7 +65,7 @@ describe RegistrantsController do
   describe "GET edit" do
     it "assigns the requested registrant as @registrant" do
       registrant = Registrant.create! valid_attributes
-      get :edit, {:id => registrant.to_param}, valid_session
+      get :edit, {:id => registrant.to_param}
       assigns(:registrant).should eq(registrant)
     end
   end
@@ -76,18 +74,18 @@ describe RegistrantsController do
     describe "with valid params" do
       it "creates a new Registrant" do
         expect {
-          post :create, {:registrant => valid_attributes}, valid_session
+          post :create, {:registrant => valid_attributes}
         }.to change(Registrant, :count).by(1)
       end
 
       it "assigns a newly created registrant as @registrant" do
-        post :create, {:registrant => valid_attributes}, valid_session
+        post :create, {:registrant => valid_attributes}
         assigns(:registrant).should be_a(Registrant)
         assigns(:registrant).should be_persisted
       end
 
       it "redirects to the created registrant" do
-        post :create, {:registrant => valid_attributes}, valid_session
+        post :create, {:registrant => valid_attributes}
         response.should redirect_to(Registrant.last)
       end
     end
@@ -96,14 +94,14 @@ describe RegistrantsController do
       it "assigns a newly created but unsaved registrant as @registrant" do
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        post :create, {:registrant => {}}, valid_session
+        post :create, {:registrant => {}}
         assigns(:registrant).should be_a_new(Registrant)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        post :create, {:registrant => {}}, valid_session
+        post :create, {:registrant => {}}
         response.should render_template("new")
       end
     end
@@ -118,18 +116,18 @@ describe RegistrantsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Registrant.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => registrant.to_param, :registrant => {'these' => 'params'}}, valid_session
+        put :update, {:id => registrant.to_param, :registrant => {'these' => 'params'}}
       end
 
       it "assigns the requested registrant as @registrant" do
         registrant = Registrant.create! valid_attributes
-        put :update, {:id => registrant.to_param, :registrant => valid_attributes}, valid_session
+        put :update, {:id => registrant.to_param, :registrant => valid_attributes}
         assigns(:registrant).should eq(registrant)
       end
 
       it "redirects to the registrant" do
         registrant = Registrant.create! valid_attributes
-        put :update, {:id => registrant.to_param, :registrant => valid_attributes}, valid_session
+        put :update, {:id => registrant.to_param, :registrant => valid_attributes}
         response.should redirect_to(registrant)
       end
     end
@@ -139,7 +137,7 @@ describe RegistrantsController do
         registrant = Registrant.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registrant.to_param, :registrant => {}}, valid_session
+        put :update, {:id => registrant.to_param, :registrant => {}}
         assigns(:registrant).should eq(registrant)
       end
 
@@ -147,7 +145,7 @@ describe RegistrantsController do
         registrant = Registrant.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registrant.to_param, :registrant => {}}, valid_session
+        put :update, {:id => registrant.to_param, :registrant => {}}
         response.should render_template("edit")
       end
     end
@@ -157,13 +155,13 @@ describe RegistrantsController do
     it "destroys the requested registrant" do
       registrant = Registrant.create! valid_attributes
       expect {
-        delete :destroy, {:id => registrant.to_param}, valid_session
+        delete :destroy, {:id => registrant.to_param}
       }.to change(Registrant, :count).by(-1)
     end
 
     it "redirects to the registrants list" do
       registrant = Registrant.create! valid_attributes
-      delete :destroy, {:id => registrant.to_param}, valid_session
+      delete :destroy, {:id => registrant.to_param}
       response.should redirect_to(registrants_url)
     end
   end

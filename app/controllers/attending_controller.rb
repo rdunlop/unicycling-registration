@@ -1,4 +1,7 @@
 class AttendingController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource :registrant
+
   before_filter :load_registrant
 
   def load_registrant

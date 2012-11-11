@@ -19,6 +19,11 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe EventConfigurationsController do
+   before(:each) do
+     user = FactoryGirl.create(:admin_user)
+     sign_in user
+   end
+
 
   # This should return the minimal set of attributes required to create a valid
   # EventConfiguration. As you add validations to EventConfiguration, be sure to
@@ -30,17 +35,10 @@ describe EventConfigurationsController do
     }
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # EventConfigurationsController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
-
   describe "GET index" do
     it "assigns all event_configurations as @event_configurations" do
       event_configuration = EventConfiguration.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:event_configurations).should eq([event_configuration])
     end
   end
@@ -48,14 +46,14 @@ describe EventConfigurationsController do
   describe "GET show" do
     it "assigns the requested event_configuration as @event_configuration" do
       event_configuration = EventConfiguration.create! valid_attributes
-      get :show, {:id => event_configuration.to_param}, valid_session
+      get :show, {:id => event_configuration.to_param}
       assigns(:event_configuration).should eq(event_configuration)
     end
   end
 
   describe "GET new" do
     it "assigns a new event_configuration as @event_configuration" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:event_configuration).should be_a_new(EventConfiguration)
     end
   end
@@ -63,7 +61,7 @@ describe EventConfigurationsController do
   describe "GET edit" do
     it "assigns the requested event_configuration as @event_configuration" do
       event_configuration = EventConfiguration.create! valid_attributes
-      get :edit, {:id => event_configuration.to_param}, valid_session
+      get :edit, {:id => event_configuration.to_param}
       assigns(:event_configuration).should eq(event_configuration)
     end
   end
@@ -72,18 +70,18 @@ describe EventConfigurationsController do
     describe "with valid params" do
       it "creates a new EventConfiguration" do
         expect {
-          post :create, {:event_configuration => valid_attributes}, valid_session
+          post :create, {:event_configuration => valid_attributes}
         }.to change(EventConfiguration, :count).by(1)
       end
 
       it "assigns a newly created event_configuration as @event_configuration" do
-        post :create, {:event_configuration => valid_attributes}, valid_session
+        post :create, {:event_configuration => valid_attributes}
         assigns(:event_configuration).should be_a(EventConfiguration)
         assigns(:event_configuration).should be_persisted
       end
 
       it "redirects to the created event_configuration" do
-        post :create, {:event_configuration => valid_attributes}, valid_session
+        post :create, {:event_configuration => valid_attributes}
         response.should redirect_to(EventConfiguration.last)
       end
     end
@@ -92,14 +90,14 @@ describe EventConfigurationsController do
       it "assigns a newly created but unsaved event_configuration as @event_configuration" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
-        post :create, {:event_configuration => {}}, valid_session
+        post :create, {:event_configuration => {}}
         assigns(:event_configuration).should be_a_new(EventConfiguration)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
-        post :create, {:event_configuration => {}}, valid_session
+        post :create, {:event_configuration => {}}
         response.should render_template("new")
       end
     end
@@ -114,18 +112,18 @@ describe EventConfigurationsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         EventConfiguration.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => event_configuration.to_param, :event_configuration => {'these' => 'params'}}, valid_session
+        put :update, {:id => event_configuration.to_param, :event_configuration => {'these' => 'params'}}
       end
 
       it "assigns the requested event_configuration as @event_configuration" do
         event_configuration = EventConfiguration.create! valid_attributes
-        put :update, {:id => event_configuration.to_param, :event_configuration => valid_attributes}, valid_session
+        put :update, {:id => event_configuration.to_param, :event_configuration => valid_attributes}
         assigns(:event_configuration).should eq(event_configuration)
       end
 
       it "redirects to the event_configuration" do
         event_configuration = EventConfiguration.create! valid_attributes
-        put :update, {:id => event_configuration.to_param, :event_configuration => valid_attributes}, valid_session
+        put :update, {:id => event_configuration.to_param, :event_configuration => valid_attributes}
         response.should redirect_to(event_configuration)
       end
     end
@@ -135,7 +133,7 @@ describe EventConfigurationsController do
         event_configuration = EventConfiguration.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event_configuration.to_param, :event_configuration => {}}, valid_session
+        put :update, {:id => event_configuration.to_param, :event_configuration => {}}
         assigns(:event_configuration).should eq(event_configuration)
       end
 
@@ -143,7 +141,7 @@ describe EventConfigurationsController do
         event_configuration = EventConfiguration.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event_configuration.to_param, :event_configuration => {}}, valid_session
+        put :update, {:id => event_configuration.to_param, :event_configuration => {}}
         response.should render_template("edit")
       end
     end
@@ -153,13 +151,13 @@ describe EventConfigurationsController do
     it "destroys the requested event_configuration" do
       event_configuration = EventConfiguration.create! valid_attributes
       expect {
-        delete :destroy, {:id => event_configuration.to_param}, valid_session
+        delete :destroy, {:id => event_configuration.to_param}
       }.to change(EventConfiguration, :count).by(-1)
     end
 
     it "redirects to the event_configurations list" do
       event_configuration = EventConfiguration.create! valid_attributes
-      delete :destroy, {:id => event_configuration.to_param}, valid_session
+      delete :destroy, {:id => event_configuration.to_param}
       response.should redirect_to(event_configurations_url)
     end
   end

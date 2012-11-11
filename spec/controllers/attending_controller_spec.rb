@@ -3,6 +3,7 @@ require 'spec_helper'
 describe AttendingController do
   before(:each) do
     @reg = FactoryGirl.create(:registrant)
+    sign_in FactoryGirl.create(:user)
   end
 
   describe "GET 'new'" do

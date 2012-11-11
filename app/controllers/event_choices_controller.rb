@@ -1,4 +1,7 @@
 class EventChoicesController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+
   # GET /event_choices
   # GET /event_choices.json
   def index

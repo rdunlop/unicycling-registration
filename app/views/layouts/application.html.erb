@@ -8,11 +8,22 @@
 </head>
 <body>
   <div class="top_nav">
-    <%= link_to 'Configuration', event_configurations_path %>
-    <%= link_to 'Categories', categories_path %>
-    <%= link_to 'Events', events_path %>
-    <%= link_to 'Event Choices', event_choices_path %>
-    <%= link_to 'Registrants', registrants_path %>
+    <% if can? :manage, EventConfiguration %>
+      <%= link_to 'Configuration', event_configurations_path %>
+    <% end %>
+    <% if can? :manage, Category %>
+      <%= link_to 'Categories', categories_path %>
+    <% end %>
+    <% if can? :manage, Event %>
+      <%= link_to 'Events', events_path %>
+    <% end %>
+    <% if can? :manage, EventChoice %>
+      <%= link_to 'Event Choices', event_choices_path %>
+    <% end %>
+    <% if can? :manage, Registrant %>
+      <%= link_to 'Registrants', registrants_path %>
+    <% end %>
+
     <% if current_user.nil? %>
       <%= link_to 'Sign in', new_user_session_path %>
     <% else %>
