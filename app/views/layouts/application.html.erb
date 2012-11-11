@@ -10,6 +10,7 @@
   <div class="top_nav">
     <%= link_to 'Configuration', event_configurations_path %>
     <%= link_to 'Categories', categories_path %>
+    <%= link_to 'Events', events_path %>
     <% if current_user.nil? %>
       <%= link_to 'Sign in', new_user_session_path %>
     <% else %>

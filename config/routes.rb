@@ -1,4 +1,6 @@
 Workspace::Application.routes.draw do
+  resources :events
+
   resources :categories
 
   resources :registrants

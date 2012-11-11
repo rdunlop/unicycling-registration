@@ -30,12 +30,26 @@ Category:
 Event:
 - Name - Name of this competition
 - Description - Optional longer description of this event
-- Category - The Category that this event should be grouped/listed with
-- ChampionCalculation - Is this event included in the "Champion" calculation
- - XXX should this be a separate table, instead of a boolean?
-- PossibleValues
- - XXX another table?
+- CategoryID - The Category that this event should be grouped/listed with
+
+EventChoice:
+- exportName - label for exporting this data 
+- EventID - The event that this choice is associated with
 - CellType (text, checkbox, multiple)
+- MultipleValues (String, comma-separated, for the 'multiple' option)
+
+RegistrantChoice:
+- registrantId - Who
+- eventChoiceID - Chose against which question
+- eventChoiceValue - What did they choose? (stored as string, but translated based on the CellType of the EventChoice)
+
+TODO (flesh out and implement)
+BestTimeType:
+- Name
+- Description
+- Initial Value
+- Increment step(s)?
+...
 
 User:
 - Email
@@ -114,3 +128,6 @@ To Be answered by the Event Organizers:
  Cascade delete....
 
 Countries should be from a list (not text-input)
+N+1 queries
+default sort orders
+Validations from RecordValidator
