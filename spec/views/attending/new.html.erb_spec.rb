@@ -31,12 +31,12 @@ describe "attending/new.html.erb" do
       @registrant = @rc.registrant
       @attending = @rc
       @events = [@rc.event_choice.event]
+
+      @ec1 = @rc.event_choice
     end
 
     it "displays the checkbox as checked off" do
       render
-
-      @ec1 = @rc.event_choice
 
       assert_select "form", :action => attending_index_path(@registrant), :method => "post" do
         assert_select "input[type='checkbox']", 1 do
@@ -49,8 +49,6 @@ describe "attending/new.html.erb" do
       @rc.save
       render
 
-      @ec1 = @rc.event_choice
-
       assert_select "form", :action => attending_index_path(@registrant), :method => "post" do
         assert_select "input[type='checkbox']", 1 do
           assert_select "[checked='checked']", 0
@@ -62,9 +60,7 @@ describe "attending/new.html.erb" do
       render
 
       assert_select "form" do
-        assert_select "input[type='hidden']" do
-          assert_select "input[name='event_choices[#{@ec1.id}]']"
-        end
+        assert_select "input[type='hidden'][name='event_choices[#{@ec1.id}]']"
       end
     end
   end
