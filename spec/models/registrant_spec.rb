@@ -52,4 +52,21 @@ describe Registrant do
     @ec = FactoryGirl.create(:registrant_choice, :registrant => @reg)
     @reg.registrant_choices.should == [@ec]
   end
+
+  describe "shortcut for event_choices" do
+    it "returns 0 if the given choice doesn't exist" do
+      ec = FactoryGirl.create(:event_choice)
+      @reg.chose(ec).should == false
+    end
+    it "returns 1 if the given choice was made" do
+      ec = FactoryGirl.create(:event_choice)
+      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => ec, :value => "1")
+      @reg.chose(ec).should == true
+    end
+    it "returns 0 if the given choice was made to be 0" do
+      ec = FactoryGirl.create(:event_choice)
+      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => ec, :value => "0")
+      @reg.chose(ec).should == false
+    end
+  end
 end

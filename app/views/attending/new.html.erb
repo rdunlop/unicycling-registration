@@ -6,7 +6,8 @@
         <h1><%= event %></h1>
         <% event.event_choices.each do |choice| %>
             <b>Choice: <%= choice %></b>
-            <%= check_box_tag("event_choices[#{choice.id}]", nil, RegistrantChoice.where({:registrant_id => @registrant.id, :event_choice_id => choice.id}).count > 0) %>
+            <%= hidden_field_tag("event_choices[#{choice.id}]", "0", {:id => "fake_#{choice.id}"}) %>
+            <%= check_box_tag("event_choices[#{choice.id}]", "1", @registrant.chose(choice)) %>
             <br />
         <% end %>
         <hr />

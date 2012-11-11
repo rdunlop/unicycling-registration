@@ -13,4 +13,17 @@ class Registrant < ActiveRecord::Base
 
   has_many :registrant_choices
 
+
+  def chose(event_choice)
+    choices = registrant_choices.where({:event_choice_id => event_choice.id})
+    if choices.count > 0
+      if choices.first.value == "1"
+        true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
 end

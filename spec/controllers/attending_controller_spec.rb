@@ -37,11 +37,17 @@ describe AttendingController do
       post 'create', {:id => @reg, :event_choices => @attributes}
       RegistrantChoice.count.should == 1
     end
+
     it "doesn't create a new entry if one already exists" do
       RegistrantChoice.count.should == 0
       post 'create', {:id => @reg, :event_choices => @attributes}
       post 'create', {:id => @reg, :event_choices => @attributes}
       RegistrantChoice.count.should == 1
+    end
+
+    it "updates the value from 1 to 0" do
+      post 'create', {:id => @reg, :event_choices => {"#{@ec1.id}" => "0"}}
+      RegistrantChoice.first.value.should == "0"
     end
   end
 end

@@ -44,5 +44,28 @@ describe "attending/new.html.erb" do
         end
       end
     end
+    it "renders as not-checked-off if value is '0'" do
+      @rc.value = "0"
+      @rc.save
+      render
+
+      @ec1 = @rc.event_choice
+
+      assert_select "form", :action => attending_index_path(@registrant), :method => "post" do
+        assert_select "input[type='checkbox']", 1 do
+          assert_select "[checked='checked']", 0
+        end
+      end
+    end
+
+    it "displays a hidden form field" do
+      render
+
+      assert_select "form" do
+        assert_select "input[type='hidden']" do
+          assert_select "input[name='event_choices[#{@ec1.id}]']"
+        end
+      end
+    end
   end
 end
