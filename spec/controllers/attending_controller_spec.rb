@@ -12,12 +12,12 @@ describe AttendingController do
     end
 
     it "returns a list of all of the events" do
-      @event1 = FactoryGirl.create(:event, :position => 1)
-      @event3 = FactoryGirl.create(:event, :position => 3)
-      @event2 = FactoryGirl.create(:event, :position => 2)
+      @category1 = FactoryGirl.create(:category, :position => 1)
+      @category3 = FactoryGirl.create(:category, :position => 3)
+      @category2 = FactoryGirl.create(:category, :position => 2)
 
       get 'new', {:id => @reg}
-      assigns(:events).should == [@event1, @event2, @event3]
+      assigns(:categories).should == [@category1, @category2, @category3]
     end
   end
 

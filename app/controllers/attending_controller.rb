@@ -6,7 +6,7 @@ class AttendingController < ApplicationController
   end
 
   def new
-    @events = Event.all.sort {|a,b| a.position <=> b.position}
+    @categories = Category.all.sort {|a,b| a.position <=> b.position}
 
     respond_to do |format|
       format.html # index.html.erb

@@ -3,12 +3,21 @@
 
 <% x = RegistrantChoicesFacade.new(@registrant) %>
 <%= form_for(x, :url => attending_index_path(@registrant), :as => :event_choices) do |f| %>
-  <% @events.each do |event| %>
-    <h1><%= event %></h1>
-    <% event.event_choices.each do |choice| %>
-      <b>Choice: <%= choice %></b>
-      <%= f.check_box(choice.choicename) %>
-      <br />
+  <% @categories.each do |category| %>
+
+    <h1><%= category %></h1>
+
+    <% category.events.each do |event| %>
+      <div class="event">
+        <span class="event_title"><%= event %></span>
+        <span class="event_choices">
+          <% event.event_choices.each do |choice| %>
+            <%= f.label choice.choicename %>
+            <%= f.check_box(choice.choicename) %>
+            <br />
+          <% end %>
+        </span>
+      </div>
     <% end %>
   <% end %>
   <%= submit_tag 'Submit' %>

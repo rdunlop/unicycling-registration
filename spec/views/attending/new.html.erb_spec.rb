@@ -6,7 +6,10 @@ describe "attending/new.html.erb" do
 
     @ev1 = FactoryGirl.create(:event)
     @ev2 = FactoryGirl.create(:event)
-    @events = [@ev1, @ev2]
+    @cat2 = @ev2.category
+    @cat2.position = 2
+    @cat2.save
+    @categories = [@ev1.category, @ev2.category]
 
     @ec1 = FactoryGirl.create(:event_choice, :event => @ev1)
     @ec2 = FactoryGirl.create(:event_choice, :event => @ev2)
@@ -30,7 +33,7 @@ describe "attending/new.html.erb" do
       @rc = FactoryGirl.create(:registrant_choice, :value => "1")
       @registrant = @rc.registrant
       @attending = @rc
-      @events = [@rc.event_choice.event]
+      @categories = [@rc.event_choice.event.category]
 
       @ec1 = @rc.event_choice
     end
