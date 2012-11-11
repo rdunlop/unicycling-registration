@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First name:</b>
+  <%= @registrant.first_name %>
+</p>
+
+<p>
+  <b>Middle initial:</b>
+  <%= @registrant.middle_initial %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @registrant.last_name %>
+</p>
+
+<p>
+  <b>Birthday:</b>
+  <%= @registrant.birthday %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @registrant.gender %>
+</p>
+
+<p>
+  <b>Address line 1:</b>
+  <%= @registrant.address_line_1 %>
+</p>
+
+<p>
+  <b>Address line 2:</b>
+  <%= @registrant.address_line_2 %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @registrant.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @registrant.state %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%= @registrant.country %>
+</p>
+
+<p>
+  <b>Zip code:</b>
+  <%= @registrant.zip_code %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @registrant.phone %>
+</p>
+
+<p>
+  <b>Mobile:</b>
+  <%= @registrant.mobile %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @registrant.email %>
+</p>
+
+
+<%= link_to 'Edit', edit_registrant_path(@registrant) %> |
+<%= link_to 'Back', registrants_path %>

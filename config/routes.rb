@@ -1,4 +1,6 @@
 Workspace::Application.routes.draw do
+  resources :registrants
+
   resources :event_configurations do
     member do
       get 'logo'

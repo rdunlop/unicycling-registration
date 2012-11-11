@@ -1,0 +1,49 @@
+<h1>Listing registrants</h1>
+
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Middle initial</th>
+    <th>Last name</th>
+    <th>Birthday</th>
+    <th>Gender</th>
+    <th>Address line 1</th>
+    <th>Address line 2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Country</th>
+    <th>Zip code</th>
+    <th>Phone</th>
+    <th>Mobile</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @registrants.each do |registrant| %>
+  <tr>
+    <td><%= registrant.first_name %></td>
+    <td><%= registrant.middle_initial %></td>
+    <td><%= registrant.last_name %></td>
+    <td><%= registrant.birthday %></td>
+    <td><%= registrant.gender %></td>
+    <td><%= registrant.address_line_1 %></td>
+    <td><%= registrant.address_line_2 %></td>
+    <td><%= registrant.city %></td>
+    <td><%= registrant.state %></td>
+    <td><%= registrant.country %></td>
+    <td><%= registrant.zip_code %></td>
+    <td><%= registrant.phone %></td>
+    <td><%= registrant.mobile %></td>
+    <td><%= registrant.email %></td>
+    <td><%= link_to 'Show', registrant %></td>
+    <td><%= link_to 'Edit', edit_registrant_path(registrant) %></td>
+    <td><%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Registrant', new_registrant_path %>
