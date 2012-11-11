@@ -14,6 +14,7 @@ class RegistrantChoicesFacade
   end
 
   # as per http://stackoverflow.com/questions/291132/method-missing-gotchas-in-ruby
+  # I MAY want to enhance this re: http://dondoh.tumblr.com/post/4142258573/formtastic-without-activerecord
 
   def respond_to?(sym)
     valid_choice?(sym) || super(sym)
@@ -36,26 +37,47 @@ class RegistrantChoicesFacade
   end
 
   def get_value(sym)
-    ec = EventChoice.find(sym[/choice(\d+)/,1])
-    @registrant.chose(ec)
+    event_choice = EventChoice.find(sym[/choice(\d+)/,1])
+
+    choices = @registrant.registrant_choices.where({:event_choice_id => event_choice.id})
+    if event_choice.cell_type == 'boolean'
+      if choices.count > 0
+        if choices.first.value == "1"
+          true
+        else
+          false
+        end
+      else
+        false
+      end
+    else
+      if choices.count > 0
+        choices.first.value
+      else
+        nil
+      end
+    end
   end
 
   # given the registrant, and the sym (choice), set/update the value
   def set_value(sym, args)
-    ec = EventChoice.find(sym[/choice(\d+)/,1])
-    existing_entry = RegistrantChoice.where({:registrant_id => @registrant.id, :event_choice_id => ec.id})
+    event_choice = EventChoice.find(sym[/choice(\d+)/,1])
+    existing_entry = RegistrantChoice.where({:registrant_id => @registrant.id, :event_choice_id => event_choice.id})
     if existing_entry.count == 0
       entry = RegistrantChoice.new
     else
       entry = existing_entry.first
     end
     entry.registrant = @registrant
-    entry.event_choice = ec
-    # boolean
-    if args == true
-      entry.value = "1"
+    entry.event_choice = event_choice
+    if event_choice.cell_type == "boolean"
+      if args == "1"
+        entry.value = "1"
+      else
+        entry.value = "0"
+      end
     else
-      entry.value = "0"
+      entry.value = args
     end
     entry.save!
   end

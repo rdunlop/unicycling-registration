@@ -13,7 +13,11 @@
         <span class="event_choices">
           <% event.event_choices.each do |choice| %>
             <%= f.label choice.choicename %>
-            <%= f.check_box(choice.choicename) %>
+            <% if choice.cell_type == "boolean" %>
+              <%= f.check_box(choice.choicename) %>
+            <% elsif choice.cell_type == "text" %>
+              <%= f.text_field(choice.choicename) %>
+            <% end %>
             <br />
           <% end %>
         </span>

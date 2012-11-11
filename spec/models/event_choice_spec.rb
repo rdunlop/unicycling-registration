@@ -32,6 +32,11 @@ describe EventChoice do
     @ec.valid?.should == true
   end
 
+  it "can have a cell_type of text" do
+    @ec.cell_type = "text"
+    @ec.valid?.should == true
+  end
+
   it "cannot have an arbitrary cell_type" do
     @ec.cell_type = "robin"
     @ec.valid?.should == false
