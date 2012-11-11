@@ -22,9 +22,20 @@ describe AttendingController do
   end
 
   describe "POST 'create'" do
+    before(:each) do
+      @ec1 = FactoryGirl.create(:event_choice)
+      @attributes = {
+        "#{@ec1.id}" => "1"
+      }
+    end
     it "returns http success" do
-      get 'create', {:id => @reg}
+      get 'create', {:id => @reg, :event_choices => @attributes}
       response.should redirect_to (@reg)
+    end
+
+    it "creates a corresponding event_choice when checkbox is selected" do
+      get 'create', {:id => @reg, :event_choices => @attributes}
+      RegistrantChoice.count.should == 1
     end
   end
 

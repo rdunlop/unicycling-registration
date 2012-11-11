@@ -6,7 +6,7 @@
         <h1><%= event %></h1>
         <% event.event_choices.each do |choice| %>
             <b>Choice: <%= choice %></b>
-            <%= check_box_tag("event_choice#{choice.id}") %>
+            <%= check_box_tag("event_choices[#{choice.id}]") %>
             <br />
         <% end %>
         <hr />
