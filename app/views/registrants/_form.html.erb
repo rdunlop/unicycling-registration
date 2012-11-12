@@ -11,61 +11,84 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :middle_initial %><br />
-    <%= f.text_field :middle_initial %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday, {:start_year => 1900, :include_blank => true} %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :address_line_1 %><br />
-    <%= f.text_field :address_line_1 %>
-  </div>
-  <div class="field">
-    <%= f.label :address_line_2 %><br />
-    <%= f.text_field :address_line_2 %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
-  </div>
-  <div class="field">
-    <%= f.label :zip_code %><br />
-    <%= f.text_field :zip_code %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :mobile %><br />
-    <%= f.text_field :mobile %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+  <div class="data_block">
+    <h2>Registrant Details</h2>
+    <fieldset>
+      <legend>Name</legend>
+      <span>
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
+      </span>
+      <span>
+        <%= f.label :middle_initial %>
+        <%= f.text_field :middle_initial %>
+      </span>
+      <span>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+      </span>
+    </fieldset>
+
+    <fieldset>
+      <legend>Birthday</legend>
+      <span>
+        <%= f.label :birthday %>
+        <%= f.date_select :birthday, {:start_year => 1900, :include_blank => true} %>
+      </span>
+    </fieldset>
+
+    <fieldset>
+      <legend>Gender</legend>
+      <span>
+        <%= f.label :gender %>
+        <%= f.text_field :gender %>
+      </span>
+    </fieldset>
+    <fieldset>
+      <legend>Address</legend>
+      <span>
+        <%= f.label :address_line_1 %>
+        <%= f.text_field :address_line_1 %>
+      </span>
+      <span>
+        <%= f.label :address_line_2 %>
+        <%= f.text_field :address_line_2 %>
+      </span>
+      <span>
+        <%= f.label :city %>
+        <%= f.text_field :city %>
+      </span>
+      <span>
+        <%= f.label :state %>
+        <%= f.text_field :state %>
+      </span>
+      <span>
+        <%= f.label :country %>
+        <%= f.text_field :country %>
+      </span>
+      <span>
+        <%= f.label :zip_code %>
+        <%= f.text_field :zip_code %>
+      </span>
+    </fieldset>
+    <fieldset>
+      <legend>Phone</legend>
+      <span>
+        <%= f.label :phone %>
+        <%= f.text_field :phone %>
+      </span>
+      <span>
+        <%= f.label :mobile %>
+        <%= f.text_field :mobile %>
+      </span>
+    </fieldset>
+    <fieldset>
+      <legend>Email</legend>
+      <span>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </span>
+    </fieldset>
   </div>
   <div class="actions">
     <%= f.submit %>
