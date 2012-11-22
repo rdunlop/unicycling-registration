@@ -1,13 +1,13 @@
 <h1>Events</h1>
 <% x = RegistrantChoicesFacade.new(@registrant) %>
-<div id="tabs">
 <%= form_for(x, :url => attending_index_path(@registrant), :as => :event_choices) do |f| %>
-  <ul>
+  <div id="tabs">
+    <ul>
+      <% @categories.each do |category| %>
+        <li><a href="#tabs-<%= category.id %>"><%= category %></a></li>
+      <% end %>
+    </ul>
     <% @categories.each do |category| %>
-      <li><a href="#tabs-<%= category.id %>"><%= category %></a></li>
-    <% end %>
-  </ul>
-  <% @categories.each do |category| %>
       <div id="tabs-<%= category.id %>">
         <% category.events.each do |event| %>
           <div class="event">
@@ -31,9 +31,9 @@
         <% end %>
       </div>
     <% end %>
-  <% end %>
-</div>
-<%= submit_tag 'Submit' %>
+  </div>
+  <%= submit_tag 'Submit' %>
+<% end %>
 <script>
   $(function() {
     $( "#tabs" ).tabs();

@@ -12,7 +12,7 @@ class AttendingController < ApplicationController
     @categories = Category.all.sort {|a,b| a.position <=> b.position}
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # new.html.erb
     end
   end
 
