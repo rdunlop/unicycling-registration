@@ -27,7 +27,7 @@ describe "registrants/new" do
       assert_select "input#registrant_first_name", :name => "registrant[first_name]"
       assert_select "input#registrant_middle_initial", :name => "registrant[middle_initial]"
       assert_select "input#registrant_last_name", :name => "registrant[last_name]"
-      assert_select "input#registrant_gender", :name => "registrant[gender]"
+      assert_select "input#registrant_gender_male", :name => "registrant[gender]"
       assert_select "input#registrant_address_line_1", :name => "registrant[address_line_1]"
       assert_select "input#registrant_address_line_2", :name => "registrant[address_line_2]"
       assert_select "input#registrant_city", :name => "registrant[city]"
