@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :registration_period do
-    start_date "2012-11-22"
-    end_date "2012-11-22"
-    competitor_cost 1
-    noncompetitor_cost 1
+    start_date "2012-11-23"
+    end_date "2012-11-27"
+    competitor_cost 10
+    noncompetitor_cost 5
     name "MyString"
   end
 end

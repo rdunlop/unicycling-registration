@@ -28,7 +28,12 @@ describe RegistrationPeriodsController do
   # RegistrationPeriod. As you add validations to RegistrationPeriod, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      start_date: Date.new(2013, 01, 20),
+      end_date: Date.new(2013, 02, 20),
+      competitor_cost: 100,
+      noncompetitor_cost: 50
+    }
   end
 
   describe "GET index" do
