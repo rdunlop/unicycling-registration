@@ -22,7 +22,7 @@
           <span class="fee">230</span>
           <img src="/images/paid.png" class="status_image" title="paid">
           <img src="/images/incomplete.png" class="status_image" title="not yet paid">
-          TEMP: <%= link_to "Atending", attending_index_path(registrant) %>
+          TEMP: <%= link_to "Atending", new_attending_path(registrant) %>
           <%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
       <% end %>

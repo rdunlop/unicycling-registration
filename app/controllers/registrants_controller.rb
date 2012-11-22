@@ -47,7 +47,7 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       if @registrant.save
-        format.html { redirect_to @registrant, notice: 'Registrant was successfully created.' }
+        format.html { redirect_to new_attending_path(@registrant), notice: 'Registrant was successfully created.' }
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
         format.html { render action: "new" }
@@ -63,7 +63,7 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       if @registrant.update_attributes(params[:registrant])
-        format.html { redirect_to @registrant, notice: 'Registrant was successfully updated.' }
+        format.html { redirect_to new_attending_path(@registrant), notice: 'Registrant was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,75 +1,42 @@
-<p id="notice"><%= notice %></p>
+<fieldset class="data_block">
+  <legend>Registration Summary</legend>
+  <div>
+    <b>Name:</b>
+    <%= @registrant.first_name %>
+    <%= @registrant.middle_initial %>
+    <%= @registrant.last_name %>
+  </div>
+  <div>
+    <b>Gender:</b>
+    <%= @registrant.gender %>
+    <b>Birthday:</b>
+    <%= @registrant.birthday %>
+  </div>
+  <div>
+    <b>Address:</b>
+    <%= @registrant.address_line_1 %><br />
+    <%= @registrant.address_line_2 %><br />
+    <%= @registrant.city %>
+    <%= @registrant.state %>
+    <%= @registrant.country %>
+    <%= @registrant.zip_code %>
+  </div>
+  <div>
+    <b>Phone:</b>
+    <%= @registrant.phone %>
+  </div>
 
-<p>
-  <b>First name:</b>
-  <%= @registrant.first_name %>
-</p>
+  <div>
+    <b>Mobile:</b>
+    <%= @registrant.mobile %>
+  </div>
 
-<p>
-  <b>Middle initial:</b>
-  <%= @registrant.middle_initial %>
-</p>
+  <div>
+    <b>Email:</b>
+    <%= @registrant.email %>
+  </div>
+</fieldset>
 
-<p>
-  <b>Last name:</b>
-  <%= @registrant.last_name %>
-</p>
-
-<p>
-  <b>Birthday:</b>
-  <%= @registrant.birthday %>
-</p>
-
-<p>
-  <b>Gender:</b>
-  <%= @registrant.gender %>
-</p>
-
-<p>
-  <b>Address line 1:</b>
-  <%= @registrant.address_line_1 %>
-</p>
-
-<p>
-  <b>Address line 2:</b>
-  <%= @registrant.address_line_2 %>
-</p>
-
-<p>
-  <b>City:</b>
-  <%= @registrant.city %>
-</p>
-
-<p>
-  <b>State:</b>
-  <%= @registrant.state %>
-</p>
-
-<p>
-  <b>Country:</b>
-  <%= @registrant.country %>
-</p>
-
-<p>
-  <b>Zip code:</b>
-  <%= @registrant.zip_code %>
-</p>
-
-<p>
-  <b>Phone:</b>
-  <%= @registrant.phone %>
-</p>
-
-<p>
-  <b>Mobile:</b>
-  <%= @registrant.mobile %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @registrant.email %>
-</p>
-
-
+<hr />
 <%= link_to 'Edit', edit_registrant_path(@registrant) %> |
 <%= link_to 'Back', registrants_path %>

@@ -86,7 +86,7 @@ describe RegistrantsController do
 
       it "redirects to the created registrant" do
         post :create, {:registrant => valid_attributes}
-        response.should redirect_to(Registrant.last)
+        response.should redirect_to(new_attending_path(Registrant.last))
       end
     end
 
@@ -128,7 +128,7 @@ describe RegistrantsController do
       it "redirects to the registrant" do
         registrant = Registrant.create! valid_attributes
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
-        response.should redirect_to(registrant)
+        response.should redirect_to(new_attending_path(Registrant.last))
       end
     end
 
