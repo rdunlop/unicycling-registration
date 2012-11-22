@@ -1,5 +1,5 @@
 class Registrant < ActiveRecord::Base
-  attr_accessible :address_line_1, :address_line_2, :birthday, :city, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip_code
+  attr_accessible :address_line_1, :address_line_2, :birthday, :city, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip_code, :user_id
 
   validates :birthday, :presence => true
   validates :first_name, :presence => true
@@ -7,10 +7,12 @@ class Registrant < ActiveRecord::Base
   validates :city, :presence => true
   validates :country, :presence => true
   validates :gender, :presence => true
+  validates :user_id, :presence => true
 
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
 
 
+  belongs_to :user
   has_many :registrant_choices
 
 

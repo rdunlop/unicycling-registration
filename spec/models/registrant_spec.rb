@@ -9,6 +9,11 @@ describe Registrant do
     @reg.valid?.should == true
   end
 
+  it "requires a user" do
+    @reg.user = nil
+    @reg.valid?.should == false
+  end
+
   it "requires a birthday" do
     @reg.birthday = nil
     @reg.valid?.should == false

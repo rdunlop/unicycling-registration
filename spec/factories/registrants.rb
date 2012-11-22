@@ -16,5 +16,6 @@ FactoryGirl.define do
     phone "MyString"
     mobile "MyString"
     email "MyString"
+    user # FactoryGirl
   end
 end

@@ -5,7 +5,7 @@ class RegistrantsController < ApplicationController
   # GET /registrants
   # GET /registrants.json
   def index
-    @registrants = Registrant.all
+    @registrants = current_user.registrants
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,6 +44,7 @@ class RegistrantsController < ApplicationController
   # POST /registrants.json
   def create
     @registrant = Registrant.new(params[:registrant])
+    @registrant.user = current_user
 
     respond_to do |format|
       if @registrant.save

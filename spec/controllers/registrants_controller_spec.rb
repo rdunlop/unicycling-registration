@@ -20,8 +20,8 @@ require 'spec_helper'
 
 describe RegistrantsController do
    before(:each) do
-     user = FactoryGirl.create(:user)
-     sign_in user
+     @user = FactoryGirl.create(:user)
+     sign_in @user
    end
 
 
@@ -35,6 +35,7 @@ describe RegistrantsController do
       gender: "Male",
       city: "Chicago",
       country: "USA",
+      user_id: @user.id,
       birthday: Date.new(1982, 01, 19)
     }
   end
@@ -42,6 +43,7 @@ describe RegistrantsController do
   describe "GET index" do
     it "assigns all registrants as @registrants" do
       registrant = Registrant.create! valid_attributes
+      other_reg = FactoryGirl.create(:registrant)
       get :index, {}
       assigns(:registrants).should eq([registrant])
     end
@@ -76,6 +78,20 @@ describe RegistrantsController do
         expect {
           post :create, {:registrant => valid_attributes}
         }.to change(Registrant, :count).by(1)
+      end
+
+      it "assigns the registrant to the current user" do
+        expect {
+          post :create, {:registrant => {
+          first_name: "Robin",
+          last_name: "Dunlop",
+          gender: "Male",
+          city: "Chicago",
+          country: "USA",
+          birthday: Date.new(1982, 01, 19)
+          }}
+        }.to change(Registrant, :count).by(1)
+        Registrant.last.user.should == @user
       end
 
       it "assigns a newly created registrant as @registrant" do
