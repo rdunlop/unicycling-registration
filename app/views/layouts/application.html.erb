@@ -24,6 +24,9 @@
     <% if can? :manage, Registrant %>
       <%= link_to 'Registrants', registrants_path %>
     <% end %>
+    <% if can? :manage, RegistrationPeriod %>
+      <%= link_to 'Registration Periods', registration_periods_path %>
+    <% end %>
 
     <% if current_user.nil? %>
       <%= link_to 'Sign in', new_user_session_path %>

@@ -1,0 +1,37 @@
+<%= form_for(@registration_period) do |f| %>
+  <% if @registration_period.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@registration_period.errors.count, "error") %> prohibited this registration_period from being saved:</h2>
+
+      <ul>
+      <% @registration_period.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :competitor_cost %><br />
+    <%= f.number_field :competitor_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :noncompetitor_cost %><br />
+    <%= f.number_field :noncompetitor_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<h1>Listing registration_periods</h1>
+
+<table>
+  <tr>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Competitor cost</th>
+    <th>Noncompetitor cost</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @registration_periods.each do |registration_period| %>
+  <tr>
+    <td><%= registration_period.start_date %></td>
+    <td><%= registration_period.end_date %></td>
+    <td><%= registration_period.competitor_cost %></td>
+    <td><%= registration_period.noncompetitor_cost %></td>
+    <td><%= registration_period.name %></td>
+    <td><%= link_to 'Show', registration_period %></td>
+    <td><%= link_to 'Edit', edit_registration_period_path(registration_period) %></td>
+    <td><%= link_to 'Destroy', registration_period, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Registration period', new_registration_period_path %>

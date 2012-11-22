@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Start date:</b>
+  <%= @registration_period.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @registration_period.end_date %>
+</p>
+
+<p>
+  <b>Competitor cost:</b>
+  <%= @registration_period.competitor_cost %>
+</p>
+
+<p>
+  <b>Noncompetitor cost:</b>
+  <%= @registration_period.noncompetitor_cost %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @registration_period.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_registration_period_path(@registration_period) %> |
+<%= link_to 'Back', registration_periods_path %>
