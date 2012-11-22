@@ -5,16 +5,38 @@
   <div class="noncompetitor registration_button"><%= link_to 'Non-Competitor', new_registrant_path %></div>
 </div>
 
-<fieldset class="registrations_box">
-  <legend>Registrations</legend>
+<br />
+<br />
+
+
+<div>
+  <fieldset class="registrations_box">
+    <legend>Registrations</legend>
     <div class="registrants">
       <% @registrants.each do |registrant| %>
         <div class="registrant">
-          <span><%= link_to registrant.name, registrant %></span>
+          <span class="<%= registrant.competitor ? "competitor" : "noncompetitor" %>">
+            <%= link_to registrant.name, registrant %>
+          </span>
           (<%= link_to 'edit', edit_registrant_path(registrant) %>)
-    TEMP: <%= link_to "Atending", attending_index_path(registrant) %>
-    <%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <span class="fee">230</span>
+          <img src="/images/paid.png" class="status_image" title="paid">
+          <img src="/images/incomplete.png" class="status_image" title="not yet paid">
+          TEMP: <%= link_to "Atending", attending_index_path(registrant) %>
+          <%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
       <% end %>
     </div>
-</fieldset>
+  </fieldset>
+
+  <div class="registrations_box">
+    <div class="payment_process">
+      <a class="payment_link">
+        Pay Now ($330)
+      </a>
+    </div>
+    <div>
+      Prices Increase March 1st
+    </div>
+  </div>
+</div>

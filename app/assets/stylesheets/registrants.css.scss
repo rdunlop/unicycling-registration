@@ -10,6 +10,9 @@
 .noncompetitor {
   background-color: blue;
 }
+.payment_process {
+  background-color: yellow;
+}
 
 .competitor, .noncompetitor {
   a {
@@ -20,8 +23,15 @@
   a:visited {
     color: white;
   }
-  cursor: pointer;
 }
+
+.fee:before {
+  content: '$';
+}
+.status_image {
+  height: 20px;
+}
+
 
 
 // LAYOUT
@@ -38,7 +48,6 @@
     display: inline-block;
     width: 320px;
     text-align: center;
-    margin-left: 30px;
     border-bottom-left-radius: 11px;
     border-bottom-right-radius: 11px;
     border-top-left-radius: 11px;
@@ -46,8 +55,20 @@
   }
 }
 .registrations_box {
-  margin-top: 30px;
   display: inline-block;
+}
+
+.payment_process {
+  a {
+    display: block;
+    height: 40px;
+  }
+  display: inline-block;
+  width: 100px;
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 11px;
+  border-top-left-radius: 11px;
+  border-top-right-radius: 11px;
 }
 
 .data_block {
