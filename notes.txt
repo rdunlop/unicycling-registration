@@ -142,3 +142,4 @@ prevent form leaving modified form page
 Are the Address/etc fields REQUIRED?
 Sholud we have a "phoenetic pronunciation" field?
 Fix styling of page when errors occur
+Add Tests for when a configuration doesn't exist yet (ensure the site loads/etc)
