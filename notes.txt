@@ -132,3 +132,6 @@ Countries should be from a list (not text-input)
 N+1 queries
 default sort orders
 Validations from RecordValidator
+
+Check that the placeholder text works in other browsers, or add jquery fix for it?
+

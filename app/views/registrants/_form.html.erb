@@ -12,82 +12,68 @@
   <% end %>
 
   <div class="data_block">
-    <h2>Registrant Details</h2>
+    <h2>Competitor</h2>
     <fieldset>
-      <legend>Name</legend>
+      <legend>Base Details</legend>
       <span>
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name %>
+        <%= f.label :first_name, 'Name' %>
+        <%= f.text_field :first_name, :placeholder => 'First' %>
+        <%= f.text_field :middle_initial, :size => 3 %>
+        <%= f.text_field :last_name, :placeholder => 'Last' %>
       </span>
-      <span>
-        <%= f.label :middle_initial %>
-        <%= f.text_field :middle_initial %>
-      </span>
-      <span>
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name %>
-      </span>
-    </fieldset>
-
-    <fieldset>
-      <legend>Birthday</legend>
       <span>
         <%= f.label :birthday %>
         <%= f.date_select :birthday, {:start_year => 1900, :include_blank => true} %>
       </span>
-    </fieldset>
-
-    <fieldset>
-      <legend>Gender</legend>
       <span>
-        <%= f.label :gender %>
-        <%= f.text_field :gender %>
+        <%= f.label :gender_male, 'Male' %>
+        <%= f.radio_button :gender, 'Male' %>
+        <%= f.label :gender_female, 'Female' %>
+        <%= f.radio_button :gender, 'Female' %>
       </span>
     </fieldset>
     <fieldset>
-      <legend>Address</legend>
-      <span>
-        <%= f.label :address_line_1 %>
-        <%= f.text_field :address_line_1 %>
-      </span>
-      <span>
-        <%= f.label :address_line_2 %>
-        <%= f.text_field :address_line_2 %>
-      </span>
-      <span>
-        <%= f.label :city %>
-        <%= f.text_field :city %>
-      </span>
-      <span>
-        <%= f.label :state %>
-        <%= f.text_field :state %>
-      </span>
-      <span>
-        <%= f.label :country %>
-        <%= f.text_field :country %>
-      </span>
-      <span>
-        <%= f.label :zip_code %>
-        <%= f.text_field :zip_code %>
-      </span>
-    </fieldset>
-    <fieldset>
-      <legend>Phone</legend>
-      <span>
-        <%= f.label :phone %>
-        <%= f.text_field :phone %>
-      </span>
-      <span>
-        <%= f.label :mobile %>
-        <%= f.text_field :mobile %>
-      </span>
-    </fieldset>
-    <fieldset>
-      <legend>Email</legend>
-      <span>
-        <%= f.label :email %>
-        <%= f.text_field :email %>
-      </span>
+      <legend>Contact Information</legend>
+      <fieldset class="data_block">
+        <legend>Competitor Details</legend>
+        <span>
+          <%= f.label :address_line_1 %>
+          <%= f.text_field :address_line_1 %>
+        </span>
+        <span>
+          <%= f.label :address_line_2 %>
+          <%= f.text_field :address_line_2 %>
+        </span>
+        <span>
+          <%= f.label :city %>
+          <%= f.text_field :city %>
+        </span>
+        <span>
+          <%= f.label :state %>
+          <%= f.text_field :state %>
+          <%= f.label :zip_code %>
+          <%= f.text_field :zip_code %>
+        </span>
+        <span>
+          <%= f.label :country %>
+          <%= f.text_field :country %>
+        </span>
+        <span>
+          <%= f.label :phone %>
+          <%= f.text_field :phone %>
+        </span>
+        <span>
+          <%= f.label :mobile %>
+          <%= f.text_field :mobile %>
+        </span>
+        <span>
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+        </span>
+      </fieldset>
+      <fieldset class="data_block">
+        <legend>Emergency Contact</legend>
+      </fieldset>
     </fieldset>
   </div>
   <div class="actions">

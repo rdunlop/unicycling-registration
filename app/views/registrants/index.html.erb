@@ -2,7 +2,7 @@
 
 <div class="registration_sign_up">
   <div class="competitor registration_button"><%= link_to 'Competitor', new_registrant_path %></div>
-  <div class="noncompetitor registration_button"><%= link_to 'Non-Competitor', new_registrant_path %></div>
+  <div class="noncompetitor registration_button"><%= link_to 'Non-Competitor', new_registrant_path, data: {confirm: 'Not yet implemented'} %></div>
 </div>
 
 <br />
@@ -31,7 +31,7 @@
 
   <div class="registrations_box">
     <div class="payment_process">
-      <a class="payment_link">
+      <a class="payment_link" href="#" onclick="alert('not yet implemented'); return false;">
         Pay Now ($330)
       </a>
     </div>
