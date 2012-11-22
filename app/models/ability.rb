@@ -6,6 +6,7 @@ class Ability
     else
       can :manage, :all
     end
+    can :logo, EventConfiguration
 
     # Define abilities for the passed in user here. For example:
     #

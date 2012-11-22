@@ -1,5 +1,5 @@
 class EventConfigurationsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:logo]
   load_and_authorize_resource
 
 
