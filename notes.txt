@@ -143,3 +143,7 @@ Are the Address/etc fields REQUIRED?
 Sholud we have a "phoenetic pronunciation" field?
 Fix styling of page when errors occur
 Add Tests for when a configuration doesn't exist yet (ensure the site loads/etc)
+
+Do not display the registrations list if I have no registrations
+Display a message about receiving a confirmation e-mail when I sign Up.
+More personalized "Welcome Email" which has details about what they're confirming, etc.

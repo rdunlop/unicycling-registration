@@ -33,6 +33,7 @@
     <% else %>
       <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
     <% end %>
+    <%= link_to 'Help', welcome_help_path %>
   </div>
   <div class="banner">
     <% unless @config.new_record? %>
