@@ -138,3 +138,6 @@ Check that the placeholder text works in other browsers, or add jquery fix for i
 CSS Reset?
 smidget?
 prevent form leaving modified form page
+
+Are the Address/etc fields REQUIRED?
+Sholud we have a "phoenetic pronunciation" field?

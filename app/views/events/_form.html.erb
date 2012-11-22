@@ -20,7 +20,7 @@
     <%= f.select :category_id, Category.all.map{|c| [c.name, c.id]} %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label :description %> (unused)<br />
     <%= f.text_field :description %>
   </div>
   <div class="field">
