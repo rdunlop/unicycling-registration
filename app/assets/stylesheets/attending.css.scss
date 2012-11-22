@@ -1,3 +1,11 @@
 // Place all the styles related to the attending controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.event {
+  text-align: left;
+}
+.event_choice {
+  display: inline-block;
+  min-width: 150px;
+}

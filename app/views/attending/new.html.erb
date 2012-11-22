@@ -11,18 +11,20 @@
       <div id="tabs-<%= category.id %>">
         <% category.events.each do |event| %>
           <div class="event">
-            <span class="event_title"><%= event %></span>
             <span class="event_choices">
               <% event.event_choices.each do |choice| %>
-                <%= f.label choice.choicename %>
-                <% if choice.cell_type == "boolean" %>
-                  <%= f.check_box(choice.choicename) %>
-                <% elsif choice.cell_type == "text" %>
-                  <%= f.text_field(choice.choicename) %>
-                <% elsif choice.cell_type == "multiple" %>
-                  <%= f.select(choice.choicename, choice.values, {:include_blank => true}) %>
-                <% end %>
-                <br />
+                <span class="event_choice">
+                  <% if choice.cell_type == "boolean" %>
+                    <%= f.check_box(choice.choicename) %>
+                    <%= f.label choice.choicename, event %>
+                  <% elsif choice.cell_type == "text" %>
+                    <%= f.label choice.choicename, choice.label %>
+                    <%= f.text_field choice.choicename, :placeholder => choice.label  %>
+                  <% elsif choice.cell_type == "multiple" %>
+                    <%= f.label choice.choicename, choice.label %>
+                    <%= f.select(choice.choicename, choice.values, {:include_blank => true}) %>
+                  <% end %>
+                </span>
               <% end %>
             </span>
           </div>
