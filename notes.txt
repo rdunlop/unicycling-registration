@@ -134,4 +134,5 @@ default sort orders
 Validations from RecordValidator
 
 Check that the placeholder text works in other browsers, or add jquery fix for it?
-
+ - add http://selectivizr.com/ ??
+CSS Reset?

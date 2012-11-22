@@ -1,30 +1,40 @@
-<h1>Attending#new</h1>
-<p>Find me in app/views/attending/new.html.erb</p>
-
+<h1>Events</h1>
 <% x = RegistrantChoicesFacade.new(@registrant) %>
+<div id="tabs">
 <%= form_for(x, :url => attending_index_path(@registrant), :as => :event_choices) do |f| %>
+  <ul>
+    <% @categories.each do |category| %>
+      <li><a href="#tabs-<%= category.id %>"><%= category %></a></li>
+    <% end %>
+  </ul>
   <% @categories.each do |category| %>
-
-    <h1><%= category %></h1>
-
-    <% category.events.each do |event| %>
-      <div class="event">
-        <span class="event_title"><%= event %></span>
-        <span class="event_choices">
-          <% event.event_choices.each do |choice| %>
-            <%= f.label choice.choicename %>
-            <% if choice.cell_type == "boolean" %>
-              <%= f.check_box(choice.choicename) %>
-            <% elsif choice.cell_type == "text" %>
-              <%= f.text_field(choice.choicename) %>
-            <% elsif choice.cell_type == "multiple" %>
-              <%= f.select(choice.choicename, choice.values, {:include_blank => true}) %>
-            <% end %>
-            <br />
-          <% end %>
-        </span>
+      <div id="tabs-<%= category.id %>">
+        <% category.events.each do |event| %>
+          <div class="event">
+            <span class="event_title"><%= event %></span>
+            <span class="event_choices">
+              <% event.event_choices.each do |choice| %>
+                <%= f.label choice.choicename %>
+                <% if choice.cell_type == "boolean" %>
+                  <%= f.check_box(choice.choicename) %>
+                <% elsif choice.cell_type == "text" %>
+                  <%= f.text_field(choice.choicename) %>
+                <% elsif choice.cell_type == "multiple" %>
+                  <%= f.select(choice.choicename, choice.values, {:include_blank => true}) %>
+                <% end %>
+                <br />
+              <% end %>
+            </span>
+          </div>
+        <% end %>
       </div>
     <% end %>
   <% end %>
-  <%= submit_tag 'Submit' %>
-<% end %>
+</div>
+<%= submit_tag 'Submit' %>
+<script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+
