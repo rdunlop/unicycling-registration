@@ -45,6 +45,7 @@ class RegistrantsController < ApplicationController
   def create
     @registrant = Registrant.new(params[:registrant])
     @registrant.user = current_user
+    @registrant.competitor = true
 
     respond_to do |format|
       if @registrant.save

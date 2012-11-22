@@ -17,5 +17,13 @@ FactoryGirl.define do
     mobile "MyString"
     email "MyString"
     user # FactoryGirl
+    competitor true
+
+    factory :competitor do
+      competitor true
+    end
+    factory :noncompetitor do
+      competitor false
+    end
   end
 end

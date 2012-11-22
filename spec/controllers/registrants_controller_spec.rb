@@ -42,7 +42,7 @@ describe RegistrantsController do
 
   describe "GET index" do
     it "assigns all registrants as @registrants" do
-      registrant = Registrant.create! valid_attributes
+      registrant = FactoryGirl.create(:competitor, :user => @user)
       other_reg = FactoryGirl.create(:registrant)
       get :index, {}
       assigns(:registrants).should eq([registrant])
@@ -51,7 +51,7 @@ describe RegistrantsController do
 
   describe "GET show" do
     it "assigns the requested registrant as @registrant" do
-      registrant = Registrant.create! valid_attributes
+      registrant = FactoryGirl.create(:competitor, :user => @user)
       get :show, {:id => registrant.to_param}
       assigns(:registrant).should eq(registrant)
     end
@@ -66,7 +66,7 @@ describe RegistrantsController do
 
   describe "GET edit" do
     it "assigns the requested registrant as @registrant" do
-      registrant = Registrant.create! valid_attributes
+      registrant = FactoryGirl.create(:competitor, :user => @user)
       get :edit, {:id => registrant.to_param}
       assigns(:registrant).should eq(registrant)
     end
@@ -92,6 +92,11 @@ describe RegistrantsController do
           }}
         }.to change(Registrant, :count).by(1)
         Registrant.last.user.should == @user
+      end
+
+      it "sets the registrant as a competitor" do
+        post :create, {:registrant => valid_attributes}
+        Registrant.last.competitor.should == true
       end
 
       it "assigns a newly created registrant as @registrant" do
@@ -126,7 +131,7 @@ describe RegistrantsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested registrant" do
-        registrant = Registrant.create! valid_attributes
+        registrant = FactoryGirl.create(:competitor, :user => @user)
         # Assuming there are no other registrants in the database, this
         # specifies that the Registrant created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -136,13 +141,13 @@ describe RegistrantsController do
       end
 
       it "assigns the requested registrant as @registrant" do
-        registrant = Registrant.create! valid_attributes
+        registrant = FactoryGirl.create(:competitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
         assigns(:registrant).should eq(registrant)
       end
 
       it "redirects to the registrant" do
-        registrant = Registrant.create! valid_attributes
+        registrant = FactoryGirl.create(:competitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
         response.should redirect_to(new_attending_path(Registrant.last))
       end
@@ -150,7 +155,7 @@ describe RegistrantsController do
 
     describe "with invalid params" do
       it "assigns the registrant as @registrant" do
-        registrant = Registrant.create! valid_attributes
+        registrant = FactoryGirl.create(:competitor, :user => @user)
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
         put :update, {:id => registrant.to_param, :registrant => {}}
@@ -158,7 +163,7 @@ describe RegistrantsController do
       end
 
       it "re-renders the 'edit' template" do
-        registrant = Registrant.create! valid_attributes
+        registrant = FactoryGirl.create(:competitor, :user => @user)
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
         put :update, {:id => registrant.to_param, :registrant => {}}
@@ -169,14 +174,14 @@ describe RegistrantsController do
 
   describe "DELETE destroy" do
     it "destroys the requested registrant" do
-      registrant = Registrant.create! valid_attributes
+      registrant = FactoryGirl.create(:competitor, :user => @user)
       expect {
         delete :destroy, {:id => registrant.to_param}
       }.to change(Registrant, :count).by(-1)
     end
 
     it "redirects to the registrants list" do
-      registrant = Registrant.create! valid_attributes
+      registrant = FactoryGirl.create(:competitor, :user => @user)
       delete :destroy, {:id => registrant.to_param}
       response.should redirect_to(registrants_url)
     end

@@ -14,6 +14,11 @@ describe Registrant do
     @reg.valid?.should == false
   end
 
+  it "must have a valid competitor value" do
+    @reg.competitor = nil
+    @reg.valid?.should == false
+  end
+
   it "requires a birthday" do
     @reg.birthday = nil
     @reg.valid?.should == false

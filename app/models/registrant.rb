@@ -9,6 +9,7 @@ class Registrant < ActiveRecord::Base
   validates :gender, :presence => true
   validates :user_id, :presence => true
 
+  validates :competitor, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
 
 
@@ -18,10 +19,5 @@ class Registrant < ActiveRecord::Base
 
   def name
     self.first_name + " " + self.last_name
-  end
-
-  def competitor
-    # temporary function
-    true
   end
 end
