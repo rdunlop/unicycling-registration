@@ -20,8 +20,6 @@ Workspace::Application.routes.draw do
     end
   end
 
-  get "welcome/index"
-
   get "welcome/help"
 
   devise_for :users
