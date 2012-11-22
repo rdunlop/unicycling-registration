@@ -1,51 +1,20 @@
-<h1>Listing registrants</h1>
+<h1>Registration</h1>
 
-<table>
-  <tr>
-    <th>First name</th>
-    <th>Middle initial</th>
-    <th>Last name</th>
-    <th>Birthday</th>
-    <th>Gender</th>
-    <th>Address line 1</th>
-    <th>Address line 2</th>
-    <th>City</th>
-    <th>State</th>
-    <th>Country</th>
-    <th>Zip code</th>
-    <th>Phone</th>
-    <th>Mobile</th>
-    <th>Email</th>
-    <th>ATTENDING</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="registration_sign_up">
+  <div class="competitor registration_button"><%= link_to 'Competitor', new_registrant_path %></div>
+  <div class="noncompetitor registration_button"><%= link_to 'Non-Competitor', new_registrant_path %></div>
+</div>
 
-<% @registrants.each do |registrant| %>
-  <tr>
-    <td><%= registrant.first_name %></td>
-    <td><%= registrant.middle_initial %></td>
-    <td><%= registrant.last_name %></td>
-    <td><%= registrant.birthday %></td>
-    <td><%= registrant.gender %></td>
-    <td><%= registrant.address_line_1 %></td>
-    <td><%= registrant.address_line_2 %></td>
-    <td><%= registrant.city %></td>
-    <td><%= registrant.state %></td>
-    <td><%= registrant.country %></td>
-    <td><%= registrant.zip_code %></td>
-    <td><%= registrant.phone %></td>
-    <td><%= registrant.mobile %></td>
-    <td><%= registrant.email %></td>
-    <td><%= link_to "Atending", attending_index_path(registrant) %></td>
-    <td><%= link_to 'Show', registrant %></td>
-    <td><%= link_to 'Edit', edit_registrant_path(registrant) %></td>
-    <td><%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Registrant', new_registrant_path %>
+<fieldset class="registrations_box">
+  <legend>Registrations</legend>
+    <div class="registrants">
+      <% @registrants.each do |registrant| %>
+        <div class="registrant">
+          <span><%= link_to registrant.name, registrant %></span>
+          (<%= link_to 'edit', edit_registrant_path(registrant) %>)
+    TEMP: <%= link_to "Atending", attending_index_path(registrant) %>
+    <%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
+    </div>
+</fieldset>

@@ -52,4 +52,8 @@ describe Registrant do
     @ec = FactoryGirl.create(:registrant_choice, :registrant => @reg)
     @reg.registrant_choices.should == [@ec]
   end
+
+  it "has a name field" do
+    @reg.name.should == @reg.first_name + " " + @reg.last_name
+  end
 end

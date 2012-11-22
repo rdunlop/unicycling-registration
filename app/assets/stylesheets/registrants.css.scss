@@ -2,6 +2,53 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// STYLING
+.competitor {
+  background-color: green;
+}
+
+.noncompetitor {
+  background-color: blue;
+}
+
+.competitor, .noncompetitor {
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+  }
+  a:visited {
+    color: white;
+  }
+  cursor: pointer;
+}
+
+
+// LAYOUT
+.registration_sign_up {
+  text-align: center;
+
+  .registration_button {
+    a {
+      height: 60px;
+      display: block;
+      padding-top: 30px; // makes the text start in the center
+    }
+    //text-align: center;
+    display: inline-block;
+    width: 320px;
+    text-align: center;
+    margin-left: 30px;
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+  }
+}
+.registrations_box {
+  margin-top: 30px;
+  display: inline-block;
+}
 
 .data_block {
   h2 {

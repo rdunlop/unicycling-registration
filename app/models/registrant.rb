@@ -13,4 +13,8 @@ class Registrant < ActiveRecord::Base
 
   has_many :registrant_choices
 
+
+  def name
+    self.first_name + " " + self.last_name
+  end
 end
