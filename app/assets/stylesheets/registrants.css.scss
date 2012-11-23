@@ -58,6 +58,14 @@
   display: inline-block;
 }
 
+.registrant {
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 11px;
+  border-top-left-radius: 11px;
+  border-top-right-radius: 11px;
+  padding: 3px;
+}
+
 .payment_process {
   a {
     display: block;

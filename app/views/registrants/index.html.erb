@@ -14,8 +14,8 @@
     <legend>Registrations</legend>
     <div class="registrants">
       <% @registrants.each do |registrant| %>
-        <div class="registrant">
-          <span class="<%= registrant.competitor ? "competitor" : "noncompetitor" %>">
+        <div>
+          <span class="registrant <%= registrant.competitor ? "competitor" : "noncompetitor" %>">
             <%= link_to registrant.name, registrant %>
           </span>
           (<%= link_to 'edit', edit_registrant_path(registrant) %>)
@@ -24,7 +24,7 @@
             <img src="/images/incomplete.png" class="status_image" title="not yet paid">
           <% else %>
             <img src="/images/paid.png" class="status_image" title="paid">
-          <% end %>`
+          <% end %>
           <%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
       <% end %>
