@@ -6,5 +6,5 @@ class PaymentDetail < ActiveRecord::Base
   validates :amount, :presence => true
 
   belongs_to :registrant #XXX has_one?
-  belongs_to :payment, :autosave => true, :inverse_of => :payment_details
+  belongs_to :payment, :inverse_of => :payment_details
 end

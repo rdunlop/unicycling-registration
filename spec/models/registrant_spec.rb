@@ -58,6 +58,10 @@ describe Registrant do
     @reg.valid?.should == false
   end
 
+  it "has a to_s" do
+    @reg.to_s.should == @reg.first_name + " " + @reg.last_name
+  end
+
   it "has event_choices" do
     @ec = FactoryGirl.create(:registrant_choice, :registrant => @reg)
     @reg.registrant_choices.should == [@ec]
