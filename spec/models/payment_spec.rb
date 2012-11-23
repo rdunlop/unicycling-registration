@@ -23,4 +23,9 @@ describe Payment do
     @pay.user = nil
     @pay.valid?.should == false
   end
+
+  it "has payment_details" do
+    pd = FactoryGirl.create(:payment_detail, :payment => @pay)
+    @pay.payment_details.should == [pd]
+  end
 end

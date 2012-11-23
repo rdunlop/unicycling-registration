@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
     self.admin = false if self.admin.nil?
     self.super_admin = false if self.super_admin.nil?
   end
+
+  def to_s
+    email
+  end
 end

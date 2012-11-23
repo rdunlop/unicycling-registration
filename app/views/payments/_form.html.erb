@@ -11,26 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :completed %><br />
-    <%= f.check_box :completed %>
-  </div>
-  <div class="field">
-    <%= f.label :cancelled %><br />
-    <%= f.check_box :cancelled %>
-  </div>
-  <div class="field">
-    <%= f.label :transaction_id %><br />
-    <%= f.text_field :transaction_id %>
-  </div>
-  <div class="field">
-    <%= f.label :completed_date %><br />
-    <%= f.datetime_select :completed_date %>
-  </div>
+  <table>
+    <% @payment.payment_details.each do |pd| %>
+      <tr>
+        <td><%= pd.registrant %></td>
+        <td><%= pd.amount %></td>
+      </tr>
+    <% end %>
+  </table>
   <div class="actions">
     <%= f.submit %>
   </div>

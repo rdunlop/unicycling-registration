@@ -56,6 +56,24 @@ describe PaymentsController do
     it "assigns a new payment as @payment" do
       get :new, {}
       assigns(:payment).should be_a_new(Payment)
+      assigns(:payment).payment_details.should == []
+    end
+
+    describe "for a user with a registrant owing money" do
+      before(:each) do
+        @reg = FactoryGirl.create(:competitor, :user => @user)
+        @reg_period = FactoryGirl.create(:registration_period, :competitor_cost => 200)
+      end
+      it "assigns a new payment_detail for the registrant" do
+        get :new, {}
+        pd = assigns(:payment).payment_details.first
+        pd.registrant.should == @reg
+      end
+      it "sets the amount to the owing amount" do
+        get :new, {}
+        pd = assigns(:payment).payment_details.first
+        pd.amount.should == 200
+      end
     end
   end
 

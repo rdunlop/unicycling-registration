@@ -28,6 +28,11 @@ class PaymentsController < ApplicationController
   # GET /payments/new.json
   def new
     @payment = Payment.new
+    current_user.registrants.each do |reg|
+      pd = @payment.payment_details.build()
+      pd.registrant = reg
+      pd.amount = reg.amount_owing
+    end
 
     respond_to do |format|
       format.html # new.html.erb

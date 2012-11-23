@@ -20,4 +20,8 @@ class Registrant < ActiveRecord::Base
   def name
     self.first_name + " " + self.last_name
   end
+
+  def amount_owing
+    200
+  end
 end
