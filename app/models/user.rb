@@ -24,4 +24,12 @@ class User < ActiveRecord::Base
   def to_s
     email
   end
+
+  def total_owing
+    total = 0
+    self.registrants.each do |reg|
+      total += reg.amount_owing
+    end
+    total
+  end
 end

@@ -14,6 +14,7 @@ describe "registrants/index" do
         :last_name => "Goeres"
       )
     ])
+    @total_owing = 40
   end
 
   it "renders a list of registrants" do
@@ -21,5 +22,6 @@ describe "registrants/index" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "span", :text => "Robin Dunlop".to_s, :count => 1
     assert_select "span", :text => "Caitlin Goeres".to_s, :count => 1
+    assert_select "a", :text => "Pay Now ($40)".to_s, :count => 1
   end
 end

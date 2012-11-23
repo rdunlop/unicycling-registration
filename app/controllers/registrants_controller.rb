@@ -6,6 +6,7 @@ class RegistrantsController < ApplicationController
   # GET /registrants.json
   def index
     @registrants = current_user.registrants
+    @total_owing = current_user.total_owing
 
     respond_to do |format|
       format.html # index.html.erb

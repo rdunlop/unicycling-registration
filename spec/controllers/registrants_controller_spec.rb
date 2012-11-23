@@ -47,6 +47,11 @@ describe RegistrantsController do
       get :index, {}
       assigns(:registrants).should eq([registrant])
     end
+    it "assigns the total_owing from the user" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      get :index, {}
+      assigns(:total_owing).should == registrant.amount_owing
+    end
   end
 
   describe "GET show" do
@@ -55,6 +60,7 @@ describe RegistrantsController do
       get :show, {:id => registrant.to_param}
       assigns(:registrant).should eq(registrant)
     end
+
     it "cannot read another user's registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       sign_in FactoryGirl.create(:user)
