@@ -8,6 +8,17 @@ class Ability
     end
     can :logo, EventConfiguration
 
+    # allow the user to upgrade their account in TEST MODE
+    @config = EventConfiguration.first
+    if @config.nil?
+      @config = EventConfiguration.new
+    end
+    if !@config.test_mode
+      cannot :admin, EventConfiguration
+      cannot :super_admin, EventConfiguration
+      cannot :normal, EventConfiguration
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

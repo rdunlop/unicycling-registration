@@ -9,6 +9,15 @@
 </head>
 <body>
   <div class="top_nav">
+    <% if !current_user.nil? and  @config.test_mode %>
+      <div class="test_mode">
+        <h2>Test Mode Enabled</h2>
+        <span>Current User is <%= current_user.admin ? "Admin" : current_user.super_admin ? "Super Admin" : "Normal User" %></span>
+        <%= link_to 'Make Me ADMIN', welcome_admin_path, :method => :post %>
+        <%= link_to 'Make Me SUPER ADMIN', welcome_super_admin_path, :method => :post %>
+        <%= link_to 'Make Me NORMAL', welcome_normal_path, :method => :post %>
+      </div>
+    <% end %>
     <% if can? :manage, EventConfiguration %>
       <%= link_to 'Configuration', event_configurations_path %>
     <% end %>

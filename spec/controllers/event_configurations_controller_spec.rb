@@ -162,4 +162,59 @@ describe EventConfigurationsController do
     end
   end
 
+  describe "as a logged in user" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      sign_in @user
+    end
+
+    describe "POST 'admin'" do
+      it "redirects to root" do
+        post 'admin'
+        response.should redirect_to(root_path)
+      end
+      it "changes my user to admin" do
+        post 'admin'
+        @user.reload
+        @user.admin.should == true
+      end
+      it "cannot change if config test_mode is disabled" do
+        FactoryGirl.create(:event_configuration, :test_mode => false)
+        post 'admin'
+        @user.reload
+        @user.admin.should == false
+      end
+    end
+
+    describe "POST 'super_admin'" do
+      it "redirects to root" do
+        post 'super_admin'
+        response.should redirect_to(root_path)
+      end
+      it "changes my user to super_admin" do
+        post 'super_admin'
+        @user.reload
+        @user.super_admin.should == true
+      end
+      it "cannot change if config test_mode is disabled" do
+        FactoryGirl.create(:event_configuration, :test_mode => false)
+        post 'super_admin'
+        @user.reload
+        @user.super_admin.should == false
+      end
+    end
+
+    describe "POST 'normal'" do
+      it "redirects to root" do
+        post 'normal'
+        response.should redirect_to(root_path)
+      end
+      it "changes my user to normal" do
+        post 'normal'
+        @user.reload
+        @user.admin.should == false
+        @user.super_admin.should == false
+      end
+    end
+  end
 end

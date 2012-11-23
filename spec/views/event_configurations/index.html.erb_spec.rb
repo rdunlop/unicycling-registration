@@ -18,5 +18,6 @@ describe "event_configurations/index" do
     assert_select "tr>td", :text => "$".to_s, :count => 1
     assert_select "tr>td", :text => "robin@dunlopweb.com".to_s, :count => 1
     assert_select "tr>td", :text => false.to_s, :count => 1
+    assert_select "tr>td", :text => true.to_s, :count => 1
   end
 end

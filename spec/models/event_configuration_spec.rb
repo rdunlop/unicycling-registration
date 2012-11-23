@@ -31,4 +31,14 @@ describe EventConfiguration do
     @ev.event_url = "http://www.google.com"
     @ev.valid?.should == true
   end
+
+  it "must have a test_mode" do
+    @ev.test_mode = nil
+    @ev.valid?.should == false
+  end
+
+  it "defaults test_mode to true" do
+    ev = EventConfiguration.new
+    ev.test_mode.should == true
+  end
 end

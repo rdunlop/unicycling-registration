@@ -17,6 +17,11 @@ Workspace::Application.routes.draw do
 
 
   resources :event_configurations do
+    collection do
+      post 'admin'
+      post 'super_admin'
+      post 'normal'
+    end
     member do
       get 'logo'
     end

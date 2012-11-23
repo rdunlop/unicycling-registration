@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122221525) do
+ActiveRecord::Schema.define(:version => 20121122224224) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20121122221525) do
     t.datetime "updated_at",                 :null => false
     t.string   "logo_filename"
     t.string   "logo_type"
+    t.boolean  "test_mode"
   end
 
   create_table "events", :force => true do |t|
@@ -115,6 +116,8 @@ ActiveRecord::Schema.define(:version => 20121122221525) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.boolean  "admin"
+    t.boolean  "super_admin"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

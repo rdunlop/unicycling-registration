@@ -15,5 +15,6 @@ FactoryGirl.define do
     artistic_closed_date "2013-1-10"
     standard_skill_closed_date "2013-3-10"
     tshirt_closed_date "2013-5-10"
+    test_mode true
   end
 end

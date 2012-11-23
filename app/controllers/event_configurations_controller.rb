@@ -93,4 +93,35 @@ class EventConfigurationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # FOR THE TEST_MODE flags
+  def admin
+    current_user.admin = true
+    current_user.super_admin = false
+    current_user.save
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
+    end
+  end
+
+  def super_admin
+    current_user.admin = false
+    current_user.super_admin = true
+    current_user.save
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
+    end
+  end
+
+  def normal
+    current_user.admin = false
+    current_user.super_admin = false
+    current_user.save
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
+    end
+  end
 end
