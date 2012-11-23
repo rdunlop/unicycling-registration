@@ -55,6 +55,22 @@ describe RegistrantsController do
       get :show, {:id => registrant.to_param}
       assigns(:registrant).should eq(registrant)
     end
+    it "cannot read another user's registrant" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      sign_in FactoryGirl.create(:user)
+      get :show, {:id => registrant.to_param}
+      response.should redirect_to(root_path)
+    end
+    describe "as an admin" do
+      before(:each) do
+        sign_in FactoryGirl.create(:admin_user)
+      end
+      it "Can read other users registrant" do
+        registrant = FactoryGirl.create(:competitor, :user => @user)
+        get :show, {:id => registrant.to_param}
+        assigns(:registrant).should eq(registrant)
+      end
+    end
   end
 
   describe "GET new" do

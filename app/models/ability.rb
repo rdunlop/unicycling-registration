@@ -1,17 +1,26 @@
 class Ability
   include CanCan::Ability
 
+  def is_admin(user)
+    user.admin || user.super_admin
+  end
+
   def initialize(user)
     if user.nil?
     else
-      can :manage, Category
-      can :manage, EventChoice
-      if user.admin
+      if is_admin(user)
+        can :manage, Category
+        can :manage, Event
+        can :manage, EventChoice
         can :manage, EventConfiguration
+        can :manage, Registrant
+        can :manage, RegistrationPeriod
+      else
+        can :manage, Registrant do |reg|
+          reg.user == user
+        end
+        can :create, Registrant #XXX necessary?
       end
-      can :manage, Event
-      can :manage, Registrant
-      can :manage, RegistrationPeriod
     end
     can :logo, EventConfiguration
 

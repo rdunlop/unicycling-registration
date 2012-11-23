@@ -35,6 +35,18 @@ describe EventsController do
     }
   end
 
+  describe "as a normal user" do
+    before(:each) do 
+      @user = FactoryGirl.create(:user)
+      sign_in @user 
+    end   
+
+    it "Cannot read events" do
+      get :index
+      response.should redirect_to(root_path)
+    end
+  end
+
   describe "GET index" do
     it "assigns all events as @events" do
       event = Event.create! valid_attributes

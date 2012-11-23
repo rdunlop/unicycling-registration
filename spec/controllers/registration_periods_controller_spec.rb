@@ -36,6 +36,19 @@ describe RegistrationPeriodsController do
     }
   end
 
+
+  describe "as a normal user" do
+    before(:each) do 
+      @user = FactoryGirl.create(:user)
+      sign_in @user 
+    end   
+
+    it "Cannot read registration_periods" do
+      get :index
+      response.should redirect_to(root_path)
+    end   
+  end
+
   describe "GET index" do
     it "assigns all registration_periods as @registration_periods" do
       registration_period = RegistrationPeriod.create! valid_attributes
