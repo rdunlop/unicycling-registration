@@ -1,5 +1,7 @@
 Workspace::Application.routes.draw do
 
+  resources :payments
+
   resources :registration_periods
 
   resources :event_choices

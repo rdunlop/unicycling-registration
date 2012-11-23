@@ -36,6 +36,9 @@
     <% if can? :manage, RegistrationPeriod %>
       <%= link_to 'Registration Periods', registration_periods_path %>
     <% end %>
+    <% if can? :manage, Payment %>
+      <%= link_to 'Payments', payments_path %>
+    <% end %>
 
     <% if current_user.nil? %>
       <%= link_to 'Sign in', new_user_session_path %>

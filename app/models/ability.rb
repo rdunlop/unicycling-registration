@@ -8,6 +8,8 @@ class Ability
   def initialize(user)
     if user.nil?
     else
+      can :manage, Payment
+      can :manage, PaymentDetail
       if is_admin(user)
         can :manage, Category
         can :manage, Event

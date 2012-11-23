@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @payment.user_id %>
+</p>
+
+<p>
+  <b>Completed:</b>
+  <%= @payment.completed %>
+</p>
+
+<p>
+  <b>Cancelled:</b>
+  <%= @payment.cancelled %>
+</p>
+
+<p>
+  <b>Transaction:</b>
+  <%= @payment.transaction_id %>
+</p>
+
+<p>
+  <b>Completed date:</b>
+  <%= @payment.completed_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_payment_path(@payment) %> |
+<%= link_to 'Back', payments_path %>
