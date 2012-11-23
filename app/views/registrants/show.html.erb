@@ -37,6 +37,26 @@
   </div>
 </fieldset>
 
+<% x = RegistrantChoicesFacade.new(@registrant) %>
+<fieldset class="data_block">
+  <legend>Events</legend>
+  <% Category.all.each do |cat| %>
+    <fieldset>
+      <legend><%= cat %></legend>
+      <% cat.events.each do |event| %>
+        <% event.event_choices.each do |ec| %>
+          <% val = x.send(ec.choicename) %>
+          <% if val %>
+            <%= event %> - 
+            <%= ec.label %>:<%= val %>
+            <br />
+          <% end %>
+        <% end %>
+      <% end %>
+    </fieldset>
+  <% end %>
+</fieldset>
+
 <hr />
 <%= link_to 'Edit', edit_registrant_path(@registrant) %> |
 <%= link_to 'Back', registrants_path %>
