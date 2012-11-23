@@ -28,4 +28,14 @@ describe Payment do
     pd = FactoryGirl.create(:payment_detail, :payment => @pay)
     @pay.payment_details.should == [pd]
   end
+
+  it "saves associated details when the payment is saved" do
+    pay = FactoryGirl.build(:payment)
+    pd = pay.payment_details.build()
+    pd.registrant = FactoryGirl.create(:registrant)
+    pd.amount = 100
+    PaymentDetail.all.count.should == 0
+    pay.save
+    PaymentDetail.all.count.should == 1
+  end
 end

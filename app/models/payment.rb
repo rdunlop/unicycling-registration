@@ -1,10 +1,13 @@
 class Payment < ActiveRecord::Base
   attr_accessible :cancelled, :completed, :completed_date, :transaction_id, :user_id
+  attr_accessible :payment_details_attributes
+
 
   validates :user_id, :presence => true
 
   belongs_to :user
-  has_many :payment_details
+  has_many :payment_details, :inverse_of => :payment
+  accepts_nested_attributes_for :payment_details
 
   after_initialize :init
 

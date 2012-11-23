@@ -1,10 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>User:</b>
-  <%= @payment.user_id %>
-</p>
-
 <p>
   <b>Completed:</b>
   <%= @payment.completed %>
@@ -16,7 +9,7 @@
 </p>
 
 <p>
-  <b>Transaction:</b>
+  <b>TransactionID:</b>
   <%= @payment.transaction_id %>
 </p>
 
@@ -24,6 +17,11 @@
   <b>Completed date:</b>
   <%= @payment.completed_date %>
 </p>
+
+Details:
+<% @payment.payment_details.each do |pd| %>
+  <%= pd.registrant %> - <%= pd.amount %><br />
+<% end %>
 
 
 <%= link_to 'Edit', edit_payment_path(@payment) %> |

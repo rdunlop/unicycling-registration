@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :payment_detail do
-    payment_id 1
-    registrant_id 1
+    payment # FactoryGirl
+    registrant # FactoryGirl
     amount "9.99"
   end
 end

@@ -12,10 +12,10 @@
   <% end %>
 
   <table>
-    <% @payment.payment_details.each do |pd| %>
+    <%= f.fields_for :payment_details do |pf| %>
       <tr>
-        <td><%= pd.registrant %></td>
-        <td><%= pd.amount %></td>
+        <td><%= pf.hidden_field :registrant_id %><%= pf.object.registrant %></td>
+        <td><%= pf.hidden_field :amount %><%= pf.object.amount %></td>
       </tr>
     <% end %>
   </table>

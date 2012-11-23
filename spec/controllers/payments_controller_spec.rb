@@ -108,6 +108,18 @@ describe PaymentsController do
         post :create, {:payment => valid_attributes}
         Payment.last.user.should == @user
       end
+      describe "with nested attributes for payment_details" do
+        it "creates the payment_detail" do
+          post :create, {:payment => {
+            :payment_details_attributes => [
+              {
+                :registrant_id => 1,
+                :amount => 100
+             }]
+          }}
+          PaymentDetail.count.should == 1
+        end
+      end
     end
 
     describe "with invalid params" do
