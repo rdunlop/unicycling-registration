@@ -22,6 +22,15 @@ class Registrant < ActiveRecord::Base
   end
 
   def amount_owing
-    200
+    rp = RegistrationPeriod.relevant_period(Date.today)
+    if rp.nil?
+      0
+    else
+      if self.competitor
+        return rp.competitor_cost
+      else
+        return rp.noncompetitor_cost
+      end
+    end
   end
 end

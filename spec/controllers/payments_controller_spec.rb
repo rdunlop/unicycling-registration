@@ -70,6 +70,7 @@ describe PaymentsController do
         pd.registrant.should == @reg
       end
       it "sets the amount to the owing amount" do
+        @user.registrants.count.should == 1
         get :new, {}
         pd = assigns(:payment).payment_details.first
         pd.amount.should == 200

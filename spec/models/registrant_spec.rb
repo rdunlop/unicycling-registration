@@ -66,4 +66,20 @@ describe Registrant do
   it "has a name field" do
     @reg.name.should == @reg.first_name + " " + @reg.last_name
   end
+  it "has an owing cost of 0 by default" do
+    @reg.amount_owing.should == 0
+  end
+
+  describe "with a registration_period" do
+    before(:each) do
+      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2022, 01, 01), :competitor_cost => 100, :noncompetitor_cost => 50)
+    end
+    it "can determine its owing cost" do
+      @reg.amount_owing.should == 100
+    end
+    it "a non-competior should owe different cost" do
+      @noncomp = FactoryGirl.create(:noncompetitor)
+      @noncomp.amount_owing.should == 50
+    end
+  end
 end
