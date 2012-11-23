@@ -20,8 +20,8 @@ require 'spec_helper'
 
 describe EventConfigurationsController do
    before(:each) do
-     user = FactoryGirl.create(:admin_user)
-     sign_in user
+     @user = FactoryGirl.create(:admin_user)
+     sign_in @user
    end
 
 
@@ -166,6 +166,20 @@ describe EventConfigurationsController do
     before(:each) do
       @user = FactoryGirl.create(:user)
       sign_in @user
+    end
+
+    it "Cannot view configurations" do
+      get :index
+      response.should redirect_to(root_path)
+    end
+    it "Cannot edit configuration" do
+      event_configuration = EventConfiguration.create! valid_attributes
+      get :edit, {:id => event_configuration.to_param}
+      response.should redirect_to(root_path)
+    end
+    it "Cannot new configuration" do
+      get :new
+      response.should redirect_to(root_path)
     end
 
     describe "POST 'admin'" do

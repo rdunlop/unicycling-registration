@@ -4,7 +4,14 @@ class Ability
   def initialize(user)
     if user.nil?
     else
-      can :manage, :all
+      can :manage, Category
+      can :manage, EventChoice
+      if user.admin
+        can :manage, EventConfiguration
+      end
+      can :manage, Event
+      can :manage, Registrant
+      can :manage, RegistrationPeriod
     end
     can :logo, EventConfiguration
 
@@ -13,10 +20,11 @@ class Ability
     if @config.nil?
       @config = EventConfiguration.new
     end
-    if !@config.test_mode
-      cannot :admin, EventConfiguration
-      cannot :super_admin, EventConfiguration
-      cannot :normal, EventConfiguration
+
+    if @config.test_mode
+      can :admin, EventConfiguration
+      can :super_admin, EventConfiguration
+      can :normal, EventConfiguration
     end
 
     # Define abilities for the passed in user here. For example:
