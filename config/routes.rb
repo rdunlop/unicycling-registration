@@ -35,7 +35,7 @@ Workspace::Application.routes.draw do
 
   get "welcome/help"
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
