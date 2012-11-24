@@ -146,16 +146,10 @@ Add Tests for when a configuration doesn't exist yet (ensure the site loads/etc)
 
 More personalized "Welcome Email" which has details about what they're confirming, etc.
 Possibly use "stripes" for the creditcard vendor.
-Add Permissions on the Payment object
 Better Calendar for Birthday.
-
-Better Alignment of the Competitor Details  ??
 
 strikethrough the past registration Periods
 Highlight the current registration period
-
-Better Visibility of the Tabs. ("Netx Tab" or "Submit")
-Team Name is for the Relay. Border the Event and it's choices.
 
 Clear additinoal Fields when an event is un-checked.
 
@@ -163,10 +157,6 @@ Competitor Information is Almost never Changed.
 
 Better way to navigate back to Registrants page.
 Make the Pay Now a button-like-thing.. For a Sinlge Registrant, Make the Pay Now part of the regsitration.
-put the pay-now button UNDER the other values, as a "Subtotal".
-"Prices increase in 2 days."
-
-
 
 
 UNICON 2012 data analysis:
