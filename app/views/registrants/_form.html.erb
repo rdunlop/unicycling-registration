@@ -13,22 +13,23 @@
 
   <div class="data_block">
     <h2>Competitor</h2>
+    <span class="required">Required fields</span>
     <fieldset class="data_block">
       <legend>Base Details</legend>
       <span>
-        <%= f.label :first_name, 'Name' %>
+        <%= f.label :first_name, 'Name', :class => "required" %>
         <%= f.text_field :first_name, :placeholder => 'First' %>
         <%= f.text_field :middle_initial, :size => 3 %>
         <%= f.text_field :last_name, :placeholder => 'Last' %>
       </span>
       <span>
-        <%= f.label :birthday %>
+        <%= f.label :birthday, :class => "required" %>
         <%= f.date_select :birthday, {:start_year => 1900, :include_blank => true} %>
       </span>
       <span>
-        <%= f.label :gender_male, 'Male' %>
+        <%= f.label :gender_male, 'Male', :class => "required" %>
         <%= f.radio_button :gender, 'Male' %>
-        <%= f.label :gender_female, 'Female' %>
+        <%= f.label :gender_female, 'Female', :class => "required" %>
         <%= f.radio_button :gender, 'Female' %>
       </span>
     </fieldset>
@@ -48,7 +49,7 @@
           <%= f.text_field :address_line_2 %>
         </span>
         <span>
-          <%= f.label :city %>
+          <%= f.label :city, :class => "required" %>
           <%= f.text_field :city %>
         </span>
         <span>
@@ -58,7 +59,7 @@
           <%= f.text_field :zip_code %>
         </span>
         <span>
-          <%= f.label :country %>
+          <%= f.label :country, :class => "required" %>
           <%= f.text_field :country %>
         </span>
         <span>
@@ -80,6 +81,6 @@
     </fieldset>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Next Page', :class => "competitor registration_button" %>
   </div>
 <% end %>

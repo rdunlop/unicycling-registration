@@ -149,7 +149,6 @@ Possibly use "stripes" for the creditcard vendor.
 Add Permissions on the Payment object
 Better Calendar for Birthday.
 
-Required fields should be clearer
 Better Alignment of the Competitor Details  ??
 
 strikethrough the past registration Periods

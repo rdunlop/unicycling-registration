@@ -56,6 +56,11 @@ a.competitor:visited, a.noncompetitor:visited, a.payment_link:visited {
   content: '$';
 }
 
+.required:after {
+  content: " *";
+}
+
+
 .status_image {
   height: 20px;
 }
