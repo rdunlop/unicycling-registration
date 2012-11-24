@@ -41,19 +41,18 @@
 <fieldset class="data_block">
   <legend>Events</legend>
   <% Category.all.each do |cat| %>
-    <fieldset>
-      <legend><%= cat %></legend>
-      <% cat.events.each do |event| %>
-        <% event.event_choices.each do |ec| %>
-          <% val = x.send(ec.choicename) %>
-          <% if val %>
-            <%= event %> - 
-            <%= ec.label %>:<%= val %>
-            <br />
+    <% if @registrant.categories.all.include?(cat) %>
+      <fieldset>
+        <legend><%= cat %></legend>
+        <ul>
+          <% cat.events.each do |event| %>
+            <% if x.has_event?(event) %>
+              <li><%= x.describe_event(event) %></li>
+            <% end %>
           <% end %>
-        <% end %>
-      <% end %>
-    </fieldset>
+        </ul>
+      </fieldset>
+    <% end %>
   <% end %>
 </fieldset>
 

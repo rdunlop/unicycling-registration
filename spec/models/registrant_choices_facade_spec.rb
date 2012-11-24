@@ -31,10 +31,10 @@ describe RegistrantChoicesFacade do
       rc.value.should == "1"
     end
 
-    it "has sets value to '0' if is set to false" do
+    it "has deletes the entryif it is set to false" do
+      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec, :value => "1")
       @rcf.send("#{@ec.choicename}=", "0")
-      rc = RegistrantChoice.first
-      rc.value.should == "0"
+      RegistrantChoice.count.should == 0
     end
   end
 
@@ -60,6 +60,11 @@ describe RegistrantChoicesFacade do
       rc = RegistrantChoice.first
       rc.value.should == "Hello"
     end
+    it "deletes the entry if set to ''" do
+      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec, :value => "hello")
+      @rcf.send("#{@ec.choicename}=", "")
+      RegistrantChoice.count.should == 0
+    end
   end
   
   describe "with a 'multiple' choice" do
@@ -84,6 +89,48 @@ describe RegistrantChoicesFacade do
       @rcf.send("#{@ec.choicename}=", "Hello")
       rc = RegistrantChoice.first
       rc.value.should == "Hello"
+    end
+    it "deletes the entry if set to ''" do
+      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec, :value => "hello")
+      @rcf.send("#{@ec.choicename}=", "")
+      RegistrantChoice.count.should == 0
+    end
+  end
+
+  describe "with a boolean choice event" do
+    before(:each) do
+      @event = FactoryGirl.create(:event)
+      @ec = FactoryGirl.create(:event_choice, :event => @event)
+      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec, :value => "1")
+    end
+    it "can determine whether it has the event" do
+      @rcf.has_event?(@event).should == true
+      @rcf.has_event?(FactoryGirl.create(:event)).should == false
+    end
+    it "can describe the event" do
+      @rcf.describe_event(@event).should == @event.name
+    end
+    describe "and a text field" do
+      before(:each) do
+        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Team", :position => 2, :cell_type => "text")
+        @rc2 = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec2, :value => "My Team")
+      end
+      it "can describe the event" do
+        @rcf.describe_event(@event).should == "#{@event.name} - #{@ec2.label}: #{@rc2.value}"
+      end
+    end
+    describe "and a select field" do
+      before(:each) do
+        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Category", :position => 2, :cell_type => "multiple")
+        @rc2 = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec2, :value => "Advanced")
+      end
+      it "can describe the event" do
+        @rcf.describe_event(@event).should == "#{@event.name} - #{@ec2.label}: #{@rc2.value}"
+      end
+      it "doesn't break without a registrant choice" do
+        @rc2.destroy
+        @rcf.describe_event(@event).should == "#{@event.name}"
+      end
     end
   end
 end

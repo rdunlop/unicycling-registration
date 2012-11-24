@@ -15,6 +15,9 @@ class Registrant < ActiveRecord::Base
 
   belongs_to :user
   has_many :registrant_choices
+  has_many :event_choices, :through => :registrant_choices
+  has_many :events, :through => :event_choices
+  has_many :categories, :through => :events
   has_many :payment_details
 
 

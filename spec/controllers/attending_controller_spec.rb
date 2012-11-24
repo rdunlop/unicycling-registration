@@ -46,9 +46,9 @@ describe AttendingController do
       RegistrantChoice.count.should == 1
     end
 
-    it "updates the value from 1 to 0" do
+    it "deletes the choice when set to 0" do
       post 'create', {:id => @reg, :event_choices => {@ec1.choicename => "0"}}
-      RegistrantChoice.first.value.should == "0"
+      RegistrantChoice.count.should == 0
     end
   end
 end

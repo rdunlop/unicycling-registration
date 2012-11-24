@@ -74,6 +74,24 @@ describe Registrant do
     @reg.amount_owing.should == 0
   end
 
+  describe "with a registrant_choice" do
+    before(:each) do
+      @rc = FactoryGirl.create(:registrant_choice, :registrant => @reg)
+    end
+    it "can access its registrant choices" do
+      @reg.registrant_choices.should == [@rc]
+    end
+    it "can access the event_choices" do
+      @reg.event_choices.should == [@rc.event_choice]
+    end
+    it "can access the events" do
+      @reg.events.should == [@rc.event_choice.event]
+    end
+    it "can access the categories" do
+      @reg.categories.should == [@rc.event_choice.event.category]
+    end
+  end
+
   describe "with a registration_period" do
     before(:each) do
       @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2022, 01, 01), :competitor_cost => 100, :noncompetitor_cost => 50)

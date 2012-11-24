@@ -74,11 +74,43 @@ class RegistrantChoicesFacade
       if args == "1"
         entry.value = "1"
       else
-        entry.value = "0"
+        entry.destroy
+        return
       end
     else
-      entry.value = args
+      if args.empty?
+        entry.destroy
+        return
+      else
+        entry.value = args
+      end
     end
     entry.save!
+  end
+
+
+  # does this registrant have this event checked off?
+  def has_event?(event)
+    enablement_choice = EventChoice.where({:event_id => event.id, :position => 1})
+    if enablement_choice.empty?
+      false
+    else
+      self.get_value(enablement_choice.first.choicename)
+    end
+  end
+
+  def describe_event(event)
+    description = event.name
+
+    details = EventChoice.where({:event_id => event.id})
+    details.all.each do |ec|
+      if ec.position != 1
+        my_val = self.get_value(ec.choicename)
+        unless my_val.nil?
+          description += " - " + ec.label + ": " + my_val
+        end
+      end
+    end
+    description
   end
 end
