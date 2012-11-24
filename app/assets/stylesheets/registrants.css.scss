@@ -44,11 +44,11 @@ $noncompetitor_hover: #3487C9;
   background-color: #A01A1A;
 }
 
-a.competitor, a.noncompetitor, a.payment_link {
+.competitor, .noncompetitor, .payment_link {
   color: white;
   text-decoration: none;
 }
-a.competitor:visited, a.noncompetitor:visited, a.payment_link:visited {
+.competitor:visited, .noncompetitor:visited, .payment_link:visited {
   color: white;
 }
 
@@ -83,6 +83,8 @@ a.competitor:visited, a.noncompetitor:visited, a.payment_link:visited {
   display: inline-block;
   width: 220px;
   padding: 10px 15px;
+  font-size: 18px;
+  cursor: pointer;
 
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
