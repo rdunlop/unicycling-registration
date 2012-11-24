@@ -1,8 +1,8 @@
 <h1>Registration</h1>
 
 <div class="registration_sign_up">
-  <%= link_to 'Competitor', new_registrant_path, :class => "competitor registration_button" %>
-  <%= link_to 'Non-Competitor', new_registrant_path, :class => "noncompetitor registration_button", data: {confirm: 'Not yet implemented'} %>
+  <%= link_to 'New Competitor', new_registrant_path, :class => "competitor registration_button" %>
+  <%= link_to 'New Non-Competitor', new_registrant_path, :class => "noncompetitor registration_button", data: {confirm: 'Not yet implemented'} %>
 </div>
 
 <br />
@@ -34,7 +34,15 @@
         <%= link_to "Pay Now ($" +  @total_owing.to_s + ")", new_payment_path, :class => "payment_link" %>
       </div>
       <div>
-        Prices Increase March 1st
+        Prices Increase in 
+        <%
+          rp = RegistrationPeriod.relevant_period(Date.today)
+          if rp.nil?
+        %>
+         [Unknown]
+       <% else %>
+         <%= distance_of_time_in_words(Date.today, rp.end_date) + " (" + ((rp.end_date) + 1).strftime("%b %e") + ")" %>
+        <% end %>
       </div>
     </div>
   </div>
