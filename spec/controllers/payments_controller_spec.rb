@@ -36,6 +36,26 @@ describe PaymentsController do
     }
   end
 
+  describe "POST fake_complete" do
+    it "sets the payment as completed" do
+      payment = FactoryGirl.create(:payment, :user => @user)
+      post :fake_complete, {:id => payment.to_param}
+      payment.reload
+      payment.completed.should == true
+    end
+    it "redirects to registrants page" do
+      payment = FactoryGirl.create(:payment, :user => @user)
+      post :fake_complete, {:id => payment.to_param}
+      response.should redirect_to registrants_path
+    end
+    it "cannot change if config test_mode is disabled" do
+      FactoryGirl.create(:event_configuration, :test_mode => false)
+      payment = FactoryGirl.create(:payment, :user => @user)
+      post :fake_complete, {:id => payment.to_param}
+      payment.reload
+      payment.completed.should == false
+    end
+  end
   describe "GET index" do
     it "assigns all payments as @payments" do
       payment = FactoryGirl.create(:payment, :user => @user)

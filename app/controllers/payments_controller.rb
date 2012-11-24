@@ -89,4 +89,14 @@ class PaymentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def fake_complete
+    @payment = Payment.find(params[:id])
+    @payment.completed = true
+    @payment.save
+
+    respond_to do |format|
+      format.html { redirect_to registrants_path }
+    end
+  end
 end

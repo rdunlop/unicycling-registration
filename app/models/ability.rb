@@ -32,10 +32,16 @@ class Ability
       @config = EventConfiguration.new
     end
 
+    # disable for all
+    cannot :admin, EventConfiguration
+    cannot :super_admin, EventConfiguration
+    cannot :normal, EventConfiguration
+    cannot :fake_complete, Payment
     if @config.test_mode
       can :admin, EventConfiguration
       can :super_admin, EventConfiguration
       can :normal, EventConfiguration
+      can :fake_complete, Payment
     end
 
     # Define abilities for the passed in user here. For example:

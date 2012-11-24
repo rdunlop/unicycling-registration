@@ -1,8 +1,13 @@
+
+<p>
+  <b>PaymentID:</b>
+  <%= @payment.id %>
+</p>
+
 <p>
   <b>Completed:</b>
   <%= @payment.completed %>
 </p>
-
 <p>
   <b>Cancelled:</b>
   <%= @payment.cancelled %>
@@ -21,6 +26,17 @@
 Details:
 <% @payment.payment_details.each do |pd| %>
   <%= pd.registrant %> - <%= pd.amount %><br />
+<% end %>
+<br />
+
+<div>
+  <a class="registration_button" href="#" onclick="alert('not yet implemented'); return false;">Go to Credit Card Vendor</a>
+</div>
+
+<% if @config.test_mode %>
+  <div class="test_mode">
+    <%= link_to 'Pretend to pay by credit card', fake_complete_payment_path(@payment) %>
+  </div>
 <% end %>
 
 

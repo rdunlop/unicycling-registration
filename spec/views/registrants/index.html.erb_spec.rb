@@ -20,8 +20,8 @@ describe "registrants/index" do
   it "renders a list of registrants" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "span", :text => "Robin Dunlop".to_s, :count => 1
-    assert_select "span", :text => "Caitlin Goeres".to_s, :count => 1
+    assert_select "a", :text => "Robin Dunlop".to_s, :count => 1
+    assert_select "a", :text => "Caitlin Goeres".to_s, :count => 1
     assert_select "a", :text => "Pay Now ($40)".to_s, :count => 1
   end
 end

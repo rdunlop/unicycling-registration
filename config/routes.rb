@@ -1,6 +1,10 @@
 Workspace::Application.routes.draw do
 
-  resources :payments
+  resources :payments do
+    member do
+      post 'fake_complete'
+    end
+  end
 
   resources :registration_periods
 

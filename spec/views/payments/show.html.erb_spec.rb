@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "payments/show" do
   before(:each) do
+    @config = FactoryGirl.create(:event_configuration)
     @payment = assign(:payment, stub_model(Payment,
       :user_id => 1,
       :completed => false,
