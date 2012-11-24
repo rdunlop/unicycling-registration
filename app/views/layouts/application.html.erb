@@ -31,7 +31,7 @@
     </div>
     <div class="banner">
       <% unless @config.new_record? %>
-        <span class="logo"><%= image_tag(logo_event_configuration_path(@config), :width => "300px") %></span>
+        <%= image_tag(logo_event_configuration_path(@config), :class => "logo") %>
       <% end %>
       <div class="base_details">
         <ul>

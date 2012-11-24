@@ -7,11 +7,18 @@
         <li><a href="#tabs-<%= category.id %>"><%= category %></a></li>
       <% end %>
     </ul>
-    <% @categories.each do |category| %>
+    <% @categories.each_index do |index| %>
+      <% category = @categories[index]
+      if index >= @categories.length
+        next_category = nil
+      else
+        next_category = @categories[index + 1]
+      end
+    %>
       <div id="tabs-<%= category.id %>">
         <% category.events.each do |event| %>
           <div class="event">
-            <span class="event_choices">
+            <div class="event_choices">
               <% event.event_choices.each do |choice| %>
                 <span class="event_choice">
                   <% if choice.cell_type == "boolean" %>
@@ -26,8 +33,11 @@
                   <% end %>
                 </span>
               <% end %>
-            </span>
+            </div>
           </div>
+        <% end %>
+        <% unless next_category.nil? %>
+          <a class="nexttab" href="#tabs-<%= next_category.id %>">Next Tab</a>
         <% end %>
       </div>
     <% end %>
@@ -36,6 +46,9 @@
 <% end %>
 <script>
   $(function() {
-    $( "#tabs" ).tabs();
+    $( "#tabs" ).tabs({ heightStyle: "auto"}); // Not working in current version of jqueryUI (must upgrade)
+    $(".nexttab").click(function() {
+      $("#tabs").tabs("select", this.hash);
+    });
   });
 </script>
