@@ -31,9 +31,7 @@
   <div>
     <div class="registrations_box">
       <div class="payment_process">
-        <a class="payment_link" href="#" onclick="alert('not yet implemented'); return false;">
-          Pay Now ($<%= @total_owing %>)
-        </a>
+        <%= link_to "Pay Now ($" +  @total_owing.to_s + ")", new_payment_path, :class => "payment_link" %>
       </div>
       <div>
         Prices Increase March 1st

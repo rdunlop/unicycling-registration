@@ -15,7 +15,7 @@
     <%= f.fields_for :payment_details do |pf| %>
       <tr>
         <td><%= pf.hidden_field :registrant_id %><%= pf.object.registrant %></td>
-        <td><%= pf.hidden_field :amount %><%= pf.object.amount %></td>
+        <td><%= pf.hidden_field :amount %>$<%= pf.object.amount %></td>
       </tr>
     <% end %>
   </table>
