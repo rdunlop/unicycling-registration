@@ -42,4 +42,18 @@ describe User do
       @user.total_owing.should == 40
     end
   end
+
+  describe "with related registrants" do
+    before(:each) do
+      @reg1 = FactoryGirl.create(:competitor, :user => @user)
+      @reg2 = FactoryGirl.create(:noncompetitor, :user => @user)
+      @reg3 = FactoryGirl.create(:competitor, :user => @user)
+
+      @reg1.first_name = "holly"
+      @reg1.save
+    end
+    it "orders the registrants by id" do
+      @user.registrants.should == [@reg1, @reg2, @reg3]
+    end
+  end
 end

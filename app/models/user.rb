@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :admin, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :super_admin, :inclusion => { :in => [true, false] } # because it's a boolean
 
-  has_many :registrants
+  has_many :registrants, :order => "registrants.id"
 
   after_initialize :init
 
