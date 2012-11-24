@@ -35,7 +35,7 @@ Details:
 
 <% if @config.test_mode %>
   <div class="test_mode">
-    <%= link_to 'Pretend to pay by credit card', fake_complete_payment_path(@payment) %>
+    <%= link_to 'Pretend to pay by credit card', fake_complete_payment_path(@payment), :method => :post %>
   </div>
 <% end %>
 
