@@ -25,10 +25,10 @@
 }
 
 .top_nav {
-  background: #eeeeee;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: black;
+  overflow: auto;
 }
 .top_left_nav, .top_right_nav, .banner {
   float: left;
@@ -50,7 +50,6 @@
 }
 
 .main_nav {
-  clear: both;
   text-align: center;
   h1 {
     background: #55D169;
