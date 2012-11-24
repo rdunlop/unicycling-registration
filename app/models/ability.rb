@@ -8,8 +8,6 @@ class Ability
   def initialize(user)
     if user.nil?
     else
-      can :manage, Payment
-      can :manage, PaymentDetail
       if is_admin(user)
         can :manage, Category
         can :manage, Event
@@ -17,11 +15,17 @@ class Ability
         can :manage, EventConfiguration
         can :manage, Registrant
         can :manage, RegistrationPeriod
+        can :manage, Payment
       else
-        can :manage, Registrant do |reg|
+        can [:read, :update], Registrant do |reg|
           reg.user == user
         end
-        can :create, Registrant #XXX necessary?
+        can :create, Registrant #XXX necessary because we set the user in the controller?
+
+        can [:new, :create], Payment
+        can :show, Payment do |payment|
+          payment.user == user
+        end
       end
     end
     can :logo, EventConfiguration

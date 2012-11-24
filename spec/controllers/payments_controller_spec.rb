@@ -57,10 +57,22 @@ describe PaymentsController do
     end
   end
   describe "GET index" do
+    before(:each) do
+      sign_in FactoryGirl.create(:super_admin_user)
+    end
     it "assigns all payments as @payments" do
       payment = FactoryGirl.create(:payment, :user => @user)
       get :index, {}
       assigns(:payments).should eq([payment])
+    end
+    describe "as normal user" do
+      before(:each) do
+        sign_in @user
+      end
+      it "cannot read index" do
+        get :index, {}
+        response.should redirect_to(root_path)
+      end
     end
   end
 
@@ -170,6 +182,9 @@ describe PaymentsController do
   end
 
   describe "PUT update" do
+    before(:each) do
+      sign_in FactoryGirl.create(:super_admin_user)
+    end
     describe "with valid params" do
       it "updates the requested payment" do
         payment = FactoryGirl.create(:payment, :user => @user)
@@ -191,6 +206,16 @@ describe PaymentsController do
         payment = FactoryGirl.create(:payment, :user => @user)
         put :update, {:id => payment.to_param, :payment => valid_attributes}
         response.should redirect_to(payment)
+      end
+      describe "as normal user" do
+        before(:each) do
+          sign_in @user
+        end
+        it "cannot update a payment" do
+          payment = FactoryGirl.create(:payment, :user => @user)
+          put :update, {:id => payment.to_param, :payment => valid_attributes}
+          response.should redirect_to(root_path)
+        end
       end
     end
 
@@ -214,6 +239,9 @@ describe PaymentsController do
   end
 
   describe "DELETE destroy" do
+    before(:each) do
+      sign_in FactoryGirl.create(:super_admin_user)
+    end
     it "destroys the requested payment" do
       payment = FactoryGirl.create(:payment, :user => @user)
       expect {
@@ -225,6 +253,16 @@ describe PaymentsController do
       payment = FactoryGirl.create(:payment, :user => @user)
       delete :destroy, {:id => payment.to_param}
       response.should redirect_to(payments_url)
+    end
+    describe "as a normal user" do
+      before(:each) do
+        sign_in @user
+      end
+      it "cannot delete" do
+        payment = FactoryGirl.create(:payment, :user => @user)
+        delete :destroy, {:id => payment.to_param}
+        response.should redirect_to(root_path)
+      end
     end
   end
 

@@ -195,6 +195,9 @@ describe RegistrantsController do
   end
 
   describe "DELETE destroy" do
+    before(:each) do
+      sign_in FactoryGirl.create(:admin_user)
+    end
     it "destroys the requested registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       expect {
@@ -206,6 +209,17 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       delete :destroy, {:id => registrant.to_param}
       response.should redirect_to(registrants_url)
+    end
+
+    describe "as normal user" do
+      before(:each) do
+        sign_in @user
+      end
+      it "cannot destroy a registrat" do
+        registrant = FactoryGirl.create(:competitor, :user => @user)
+        delete :destroy, {:id => registrant.to_param}
+        response.should redirect_to(root_path)
+      end
     end
   end
 
