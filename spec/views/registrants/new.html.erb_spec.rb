@@ -39,4 +39,24 @@ describe "registrants/new" do
       assert_select "input#registrant_email", :name => "registrant[email]"
     end
   end
+  describe "registration_periods/_list" do
+    before(:each) do
+      @registration_period = FactoryGirl.create(:registration_period, 
+                                                :start_date => Date.new(2012, 01, 10),
+                                                :end_date => Date.new(2012, 02, 11),
+                                                :competitor_cost => 100,
+                                                :noncompetitor_cost => 50)
+    end
+
+    it "renders dates in nice formats" do
+      render
+      # Run the generator again with the --webrat flag if you want to use webrat matchers
+      rendered.should match(/Jan 10, 2012/)
+      rendered.should match(/Feb 11, 2012/)
+    end
+    it "lists competitor costs" do
+      render
+      render.should match(/\$100/)
+    end
+  end
 end

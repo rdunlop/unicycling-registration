@@ -1,0 +1,18 @@
+<fieldset class="data_block">
+    <legend>Registration Cost</legend>
+    <table>
+        <% RegistrationPeriod.all.each do |period| %>
+            <tr>
+                <td>From</td>
+                <td><%=period.start_date.strftime("%b %d, %Y") %></td>
+                <td> to </td>
+                <td><%=period.end_date.strftime("%b %d, %Y") %></td>
+                <% if competitor %>
+                  <td><b>$<%=period.competitor_cost %></b></td>
+                <% else %>
+                  <td><b>$<%=period.noncompetitor_cost %></b></td>
+                <% end %>
+            </tr>
+        <% end %>
+    </table>
+</fieldset>

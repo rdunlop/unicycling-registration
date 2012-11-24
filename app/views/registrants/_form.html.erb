@@ -32,18 +32,9 @@
         <%= f.radio_button :gender, 'Female' %>
       </span>
     </fieldset>
-    <fieldset class="data_block">
-      <legend>Registration Cost</legend>
-      <table>
-        <% RegistrationPeriod.all.each do |period| %>
-          <tr>
-            <td><%=period.start_date %></td>
-            <td><%=period.end_date %></td>
-            <td><%=period.competitor_cost %></td>
-          </tr>
-        <% end %>
-    </table>
-    </fieldset>
+
+    <%= render :partial => "registration_periods/list", :locals => {:competitor => true} %>
+
     <fieldset>
       <legend>Contact Information</legend>
       <fieldset class="data_block">
