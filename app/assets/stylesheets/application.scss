@@ -13,9 +13,6 @@
  */
 
 .banner {
-  border-bottom-color: black;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
   text-align: center;
 }
 
@@ -25,11 +22,23 @@
 
 .top_nav {
   background: #eeeeee;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: black;
 }
+.top_left_nav, .top_right_nav, .banner {
+  float: left;
+  width: 33%;
+}
+.top_right_nav {
+  text-align: right;
+}
+
 
 .test_mode {
   color: red;
   padding-bottom: 10px;
+  background: #FFE0E0;
 }
 
 .bottom_nav {
@@ -37,6 +46,7 @@
 }
 
 .main_nav {
+  clear: both;
   text-align: center;
   h1 {
     background: #55D169;

@@ -8,56 +8,62 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if !current_user.nil? and  @config.test_mode %>
+    <div class="test_mode">
+      <h2>Test Mode Enabled</h2>
+      <span>Current User is <%= current_user.admin ? "Admin" : current_user.super_admin ? "Super Admin" : "Normal User" %></span>
+      <%= link_to 'Make Me ADMIN', admin_event_configurations_path, :method => :post %>
+      <%= link_to 'Make Me SUPER ADMIN', super_admin_event_configurations_path, :method => :post %>
+      <%= link_to 'Make Me NORMAL', normal_event_configurations_path, :method => :post %>
+    </div>
+  <% end %>
   <div class="top_nav">
-    <% if !current_user.nil? and  @config.test_mode %>
-      <div class="test_mode">
-        <h2>Test Mode Enabled</h2>
-        <span>Current User is <%= current_user.admin ? "Admin" : current_user.super_admin ? "Super Admin" : "Normal User" %></span>
-        <%= link_to 'Make Me ADMIN', admin_event_configurations_path, :method => :post %>
-        <%= link_to 'Make Me SUPER ADMIN', super_admin_event_configurations_path, :method => :post %>
-        <%= link_to 'Make Me NORMAL', normal_event_configurations_path, :method => :post %>
-      </div>
-    <% end %>
-    <% if can? :manage, EventConfiguration %>
-      <%= link_to 'Configuration', event_configurations_path %>
-    <% end %>
-    <% if can? :manage, Category %>
-      <%= link_to 'Categories', categories_path %>
-    <% end %>
-    <% if can? :manage, Event %>
-      <%= link_to 'Events', events_path %>
-    <% end %>
-    <% if can? :manage, EventChoice %>
-      <%= link_to 'Event Choices', event_choices_path %>
-    <% end %>
-    <% if can? :manage, Registrant %>
-      <%= link_to 'Registrants', registrants_path %>
-    <% end %>
-    <% if can? :manage, RegistrationPeriod %>
-      <%= link_to 'Registration Periods', registration_periods_path %>
-    <% end %>
-    <% if can? :manage, Payment %>
-      <%= link_to 'Payments', payments_path %>
-    <% end %>
+    <div class="top_left_nav">
+      <%= link_to 'Main', root_url %><br />
+      <br />
 
-    <% if current_user.nil? %>
-      <%= link_to 'Sign in', new_user_session_path %>
-    <% else %>
-      <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
-    <% end %>
-    <%= link_to 'Help', welcome_help_path %>
-  </div>
-  <div class="banner">
-    <% unless @config.new_record? %>
-      <span class="logo"><%= image_tag(logo_event_configuration_path(@config), :width => "300px") %></span>
-    <% end %>
-    <div class="base_details">
-      <ul>
-        <li><%= @config.short_name %></li>
-        <li><%= @config.long_name %></li>
-        <li><%= @config.location %></li>
-        <li><%= @config.dates_description %></li>
-      </ul>
+      <% if current_user.nil? %>
+        <%= link_to 'Sign in', new_user_session_path %><br />
+      <% else %>
+        <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %><br />
+      <% end %>
+      <%= link_to 'Help', welcome_help_path %><br />
+    </div>
+    <div class="banner">
+      <% unless @config.new_record? %>
+        <span class="logo"><%= image_tag(logo_event_configuration_path(@config), :width => "300px") %></span>
+      <% end %>
+      <div class="base_details">
+        <ul>
+          <li><%= @config.short_name %></li>
+          <li><%= @config.long_name %></li>
+          <li><%= @config.location %></li>
+          <li><%= @config.dates_description %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="top_right_nav">
+      <% if can? :manage, EventConfiguration %>
+        <%= link_to 'Configuration', event_configurations_path %><br />
+      <% end %>
+      <% if can? :manage, Category %>
+        <%= link_to 'Categories', categories_path %><br />
+      <% end %>
+      <% if can? :manage, Event %>
+        <%= link_to 'Events', events_path %><br />
+      <% end %>
+      <% if can? :manage, EventChoice %>
+        <%= link_to 'Event Choices', event_choices_path %><br />
+      <% end %>
+      <% if can? :manage, Registrant %>
+        <%= link_to 'Registrants', registrants_path %><br />
+      <% end %>
+      <% if can? :manage, RegistrationPeriod %>
+        <%= link_to 'Registration Periods', registration_periods_path %><br />
+      <% end %>
+      <% if can? :manage, Payment %>
+        <%= link_to 'Payments', payments_path %><br />
+      <% end %>
     </div>
   </div>
 
