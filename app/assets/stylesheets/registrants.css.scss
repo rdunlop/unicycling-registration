@@ -3,31 +3,59 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // STYLING
+$competitor: #12AC50;
+$competitor_hover: #4CD673;
+$noncompetitor: #266DA5;
+$noncompetitor_hover: #3487C9;
+
 .competitor {
-  background-color: green;
+  background-color: $competitor;
+  border-color: #208d74;
+}
+.competitor:hover {
+  background-color: $competitor_hover;
+  border-color: #0d7733;
+}
+.competitor:active {
+  background-color: #55ff55;
+  border-color: #205f3c;
 }
 
 .noncompetitor {
-  background-color: blue;
+  background-color: $noncompetitor;
+  border-color: #2F7BB6;
 }
-.payment_process {
-  background-color: yellow;
+.noncompetitor:hover {
+  background-color: $noncompetitor_hover;
+  border-color: #3C607C;
+}
+.noncompetitor:active {
+  background-color: #5555ff;
+  border-color: #17466B;
 }
 
-.competitor, .noncompetitor {
-  a {
-    color: white;
-    text-decoration: none;
-    font-size: 22px;
-  }
-  a:visited {
-    color: white;
-  }
+.payment_link {
+  background-color: #AC2B2B;
+}
+.payment_link:hover {
+  background-color: #D61414;
+}
+.payment_link:active {
+  background-color: #A01A1A;
+}
+
+a.competitor, a.noncompetitor, a.payment_link {
+  color: white;
+  text-decoration: none;
+}
+a.competitor:visited, a.noncompetitor:visited, a.payment_link:visited {
+  color: white;
 }
 
 .fee:before {
   content: '$';
 }
+
 .status_image {
   height: 20px;
 }
@@ -37,24 +65,53 @@
 // LAYOUT
 .registration_sign_up {
   text-align: center;
-
-  .registration_button {
-    a {
-      height: 60px;
-      display: block;
-      padding-top: 30px; // makes the text start in the center
-    }
-    //text-align: center;
-    display: inline-block;
-    width: 320px;
-    text-align: center;
-    border-bottom-left-radius: 11px;
-    border-bottom-right-radius: 11px;
-    border-top-left-radius: 11px;
-    border-top-right-radius: 11px;
+  a {
+    margin-right: 7%;
+    margin-left: 7%;
+    margin-top: 21px;
   }
 }
+
+.registration_button {
+  text-decoration: none;
+  display: inline-block;
+  width: 220px;
+  padding: 10px 15px;
+
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+
+  border: solid 1px;
+
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+
+  //text-align: center;
+  //border-bottom-left-radius: 11px;
+  //border-bottom-right-radius: 11px;
+  //border-top-left-radius: 11px;
+  //border-top-right-radius: 11px;
+}
+.registration_button:hover, .registration_button:focus {
+  border: solid 1px;
+  text-decoration: none;
+}
+.registration_button:active {
+  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+  border: solid 1px;
+}
+
 .registrations_box {
+  margin-top: 20px;
   display: inline-block;
 }
 
@@ -66,17 +123,30 @@
   padding: 3px;
 }
 
-.payment_process {
-  a {
-    display: block;
-    height: 40px;
-  }
+.payment_link {
+  width: 150px;
   display: inline-block;
+  padding: 10px;
+  text-decoration: none;
+
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+
+  border: solid 1px;
+
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.payment_process {
   width: 100px;
-  border-bottom-left-radius: 11px;
-  border-bottom-right-radius: 11px;
-  border-top-left-radius: 11px;
-  border-top-right-radius: 11px;
 }
 
 .data_block {

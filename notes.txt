@@ -150,3 +150,132 @@ More personalized "Welcome Email" which has details about what they're confirmin
 Possibly use "stripes" for the creditcard vendor.
 Set the order of various sets (like: Registrants)
 Add Permissions on the Payment object
+Better Calendar for Birthday.
+
+Required fields should be clearer
+Registration Cost should be clearer (include a $ symbol)
+Better Alignment of the Competitor Details  ??
+Better Visibility of the Tabs. ("Netx Tab" or "Submit")
+Team Name is for the Relay. Border the Event and it's choices.
+
+Clear additinoal Fields when an event is un-checked.
+Destroy should be renamed. and changed to be a different delete.
+
+Competitor Information is Almost never Changed.
+
+Better way to navigate back to Registrants page.
+Make the Pay Now a button-like-thing.. For a Sinlge Registrant, Make the Pay Now part of the regsitration.
+put the pay-now button UNDER the other values, as a "Subtotal".
+Make the "Competitor" and "NonCompetitor" look less like "Titles".
+"Prices increase in 2 days."
+
+
+
+
+UNICON 2012 data analysis:
+1477 User Accounts
+885 of those users actually Have a registrant
+1844 Registrations
+
+
+select num_records, count(*) as registrants_per_user, (num_records*count(*)) as total_registrations, ((num_records*count(*)) / 1844 * 100) as perc from (select count(*) as num_records from reg_user INNER JOIN reg_registration ON reg_user.userid = reg_registration.userid  group by reg_user.userid) as A group by num_records
+
+num_records registrants_per_user    total_registrations perc
+1   578 578 31.3449
+2   128 256 13.8829
+3   68  204 11.0629
+4   57  228 12.3644  67% 4-or-less
+5   20  100 5.4230
+6   6   36  1.9523  There are ~30 users below this, accounting for 25% of my registrants (small, but powerful)
+8   4   32  1.7354
+11  1   11  0.5965
+12  5   60  3.2538
+13  4   52  2.8200
+14  2   28  1.5184
+16  2   32  1.7354
+17  1   17  0.9219
+19  1   19  1.0304
+20  2   40  2.1692
+21  1   21  1.1388
+22  1   22  1.1931
+24  1   24  1.3015
+25  1   25  1.3557
+29  1   29  1.5727
+30  1   30  1.6269
+
+488 - Non Competitor
+1356 - Competitor
+
+1350 Payments
+899 Payments (after removing 'excel' and 12345 transactions).
+
+How many payments were made against only one record at a time:
+
+1   658 73.1924
+2   97  10.7898
+3   41  4.5606
+4   43  4.7831
+5   13  1.4461
+6   6   0.6674
+7   3   0.3337
+8   4   0.4449
+9   5   0.5562
+10  1   0.1112
+11  2   0.2225
+12  4   0.4449
+13  3   0.3337
+14  2   0.2225
+15  1   0.1112
+17  2   0.2225
+18  1   0.1112
+19  1   0.1112
+20  3   0.3337
+21  3   0.3337
+22  1   0.1112
+23  3   0.3337
+25  1   0.1112
+28  1   0.1112
+
+Best Times:
+400 chose 100m
+360 chose 10k
+100 chose marathon
+
+
+
+NAUCC 2011
+229 User Accounts
+How many actually have registrants: 229
+227 Competitors
+91 Non-Competitors
+
+318 Registrantions
+
+Number of registrants per user:
+1 108 108 47% -> 34%
+2 27  54  23% -> 16%
+3 16  48  21% -> 15%
+4 11  44  19% -> 14%
+5 4   20  8%  -> 5%
+6 2   12  5%  -> 4%
+32 1  32  14% -> 10%
+
+
+
+Number of registrants per payment:
+199 Payments5
+
+1 141 47%
+2 24  16%
+3 17  17
+4 11  14
+5  3  5
+6  2  4
+15 1  5
+
+
+Best Times:
+13 ppl chose 100m
+10 ppl chose 400m
+21 ppl chose 10k
+9 ppl chose marathon

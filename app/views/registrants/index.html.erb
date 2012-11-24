@@ -1,23 +1,20 @@
 <h1>Registration</h1>
 
 <div class="registration_sign_up">
-  <div class="competitor registration_button"><%= link_to 'Competitor', new_registrant_path %></div>
-  <div class="noncompetitor registration_button"><%= link_to 'Non-Competitor', new_registrant_path, data: {confirm: 'Not yet implemented'} %></div>
+  <%= link_to 'Competitor', new_registrant_path, :class => "competitor registration_button" %>
+  <%= link_to 'Non-Competitor', new_registrant_path, :class => "noncompetitor registration_button", data: {confirm: 'Not yet implemented'} %>
 </div>
 
 <br />
 <br />
 
 
-<div>
+<% unless @registrants.empty? %>
   <fieldset class="registrations_box">
     <legend>Registrations</legend>
-    <div class="registrants">
       <% @registrants.each do |registrant| %>
         <div>
-          <span class="registrant <%= registrant.competitor ? "competitor" : "noncompetitor" %>">
-            <%= link_to registrant.name, registrant %>
-          </span>
+          <%= link_to registrant.name, registrant, :class =>  "registrant " + (registrant.competitor ? "competitor" : "noncompetitor") %>
           (<%= link_to 'edit', edit_registrant_path(registrant) %>)
           <span class="fee"><%= registrant.amount_owing %></span>
           <% if registrant.amount_owing > 0 %>
@@ -25,20 +22,22 @@
           <% else %>
             <img src="/images/paid.png" class="status_image" title="paid">
           <% end %>
-          <%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
       <% end %>
-    </div>
   </fieldset>
+<% end %>
 
-  <div class="registrations_box">
-    <div class="payment_process">
-      <a class="payment_link" href="#" onclick="alert('not yet implemented'); return false;">
-        Pay Now ($<%= @total_owing %>)
-      </a>
-    </div>
-    <div>
-      Prices Increase March 1st
+<% if @total_owing > 0 %>
+  <div>
+    <div class="registrations_box">
+      <div class="payment_process">
+        <a class="payment_link" href="#" onclick="alert('not yet implemented'); return false;">
+          Pay Now ($<%= @total_owing %>)
+        </a>
+      </div>
+      <div>
+        Prices Increase March 1st
+      </div>
     </div>
   </div>
-</div>
+<% end %>
