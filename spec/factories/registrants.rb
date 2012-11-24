@@ -5,7 +5,7 @@ FactoryGirl.define do
     first_name "FirstMyString"
     middle_initial "MMyString"
     last_name "LastMyString"
-    birthday "2012-11-10"
+    birthday Date.new(2012,11,10)
     gender "Male"
     address_line_1 "Adr1MyString"
     address_line_2 "Adr2MyString"
