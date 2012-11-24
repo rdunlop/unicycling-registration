@@ -16,7 +16,7 @@
         <div>
           <%= link_to registrant.name, registrant, :class =>  "registrant " + (registrant.competitor ? "competitor" : "noncompetitor") %>
           (<%= link_to 'edit', edit_registrant_path(registrant) %>)
-          <span class="fee"><%= registrant.amount_owing %></span>
+          <span class="fee"><%= registrant.registration_cost %></span>
           <% if registrant.amount_owing > 0 %>
             <img src="/images/incomplete.png" class="status_image" title="not yet paid">
           <% else %>

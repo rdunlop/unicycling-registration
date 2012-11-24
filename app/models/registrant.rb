@@ -15,13 +15,14 @@ class Registrant < ActiveRecord::Base
 
   belongs_to :user
   has_many :registrant_choices
+  has_many :payment_details
 
 
   def name
     self.first_name + " " + self.last_name
   end
 
-  def amount_owing
+  def registration_cost
     rp = RegistrationPeriod.relevant_period(Date.today)
     if rp.nil?
       0
@@ -32,6 +33,20 @@ class Registrant < ActiveRecord::Base
         return rp.noncompetitor_cost
       end
     end
+  end
+
+  def amount_owing
+    return self.registration_cost - self.amount_paid
+  end
+
+  def amount_paid
+    total = 0
+    self.payment_details.each do |pd|
+      if pd.payment.completed
+        total += pd.amount
+      end
+    end
+    total
   end
 
   def to_s

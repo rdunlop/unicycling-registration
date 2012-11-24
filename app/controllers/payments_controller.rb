@@ -29,9 +29,11 @@ class PaymentsController < ApplicationController
   def new
     @payment = Payment.new
     current_user.registrants.each do |reg|
-      pd = @payment.payment_details.build()
-      pd.registrant = reg
-      pd.amount = reg.amount_owing
+      if reg.amount_owing > 0
+        pd = @payment.payment_details.build()
+        pd.registrant = reg
+        pd.amount = reg.amount_owing
+      end
     end
 
     respond_to do |format|

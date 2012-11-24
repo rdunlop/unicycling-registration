@@ -85,5 +85,21 @@ describe Registrant do
       @noncomp = FactoryGirl.create(:noncompetitor)
       @noncomp.amount_owing.should == 50
     end
+
+    describe "with a completed payment" do
+      before(:each) do
+        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => 100)
+      end
+      it "should have associated payment_details" do
+        @reg.payment_details.should == [@payment_detail]
+      end
+      it "should have an amount_paid" do
+        @reg.amount_paid.should == 100
+      end
+      it "should owe 0" do
+        @reg.amount_owing.should == 0
+      end
+    end
   end
 end

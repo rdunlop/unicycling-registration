@@ -88,12 +88,22 @@ describe PaymentsController do
         get :new, {}
         pd = assigns(:payment).payment_details.first
         pd.registrant.should == @reg
+        assigns(:payment).payment_details.first.should == assigns(:payment).payment_details.last
       end
       it "sets the amount to the owing amount" do
         @user.registrants.count.should == 1
         get :new, {}
         pd = assigns(:payment).payment_details.first
         pd.amount.should == 200
+      end
+      it "only assigns registrants that owe money" do
+        @other_reg = FactoryGirl.create(:competitor, :user => @user)
+        @payment = FactoryGirl.create(:payment, :completed => true)
+        @pd = FactoryGirl.create(:payment_detail, :registrant => @other_reg, :payment => @payment, :amount => 200)
+        get :new, {}
+        pd = assigns(:payment).payment_details.first
+        pd.registrant.should == @reg
+        assigns(:payment).payment_details.first.should == assigns(:payment).payment_details.last
       end
     end
   end
