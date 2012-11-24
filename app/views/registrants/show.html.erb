@@ -10,7 +10,7 @@
     <b>Gender:</b>
     <%= @registrant.gender %>
     <b>Birthday:</b>
-    <%= @registrant.birthday %>
+    <%= @registrant.birthday.strftime("%d-%b-%Y") %>
   </div>
   <div>
     <b>Address:</b>
