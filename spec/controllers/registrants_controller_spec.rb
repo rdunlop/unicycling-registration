@@ -36,6 +36,7 @@ describe RegistrantsController do
       city: "Chicago",
       country: "USA",
       user_id: @user.id,
+      competitor: true,
       birthday: Date.new(1982, 01, 19)
     }
   end
@@ -80,9 +81,17 @@ describe RegistrantsController do
   end
 
   describe "GET new" do
-    it "assigns a new registrant as @registrant" do
+    it "assigns a new competitor as @registrant" do
       get :new, {}
       assigns(:registrant).should be_a_new(Registrant)
+      assigns(:registrant).competitor.should == true
+    end
+  end
+  describe "GET new_noncompetitor" do
+    it "assigns a new noncompetitor as @registrant" do
+      get :new_noncompetitor, {}
+      assigns(:registrant).should be_a_new(Registrant)
+      assigns(:registrant).competitor.should == false
     end
   end
 
@@ -110,6 +119,7 @@ describe RegistrantsController do
           gender: "Male",
           city: "Chicago",
           country: "USA",
+          competitor: true,
           birthday: Date.new(1982, 01, 19)
           }}
         }.to change(Registrant, :count).by(1)
@@ -168,10 +178,15 @@ describe RegistrantsController do
         assigns(:registrant).should eq(registrant)
       end
 
-      it "redirects to the registrant" do
+      it "redirects competitors to the events" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
         response.should redirect_to(new_attending_path(Registrant.last))
+      end
+      it "redirects noncompetitors to the registrant" do
+        registrant = FactoryGirl.create(:noncompetitor, :user => @user)
+        put :update, {:id => registrant.to_param, :registrant => valid_attributes.merge({:competitor => false})}
+        response.should redirect_to(Registrant.last)
       end
     end
 

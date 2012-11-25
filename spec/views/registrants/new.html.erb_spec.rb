@@ -2,21 +2,12 @@ require 'spec_helper'
 
 describe "registrants/new" do
   before(:each) do
-    assign(:registrant, stub_model(Registrant,
-      :first_name => "MyString",
-      :middle_initial => "MyString",
-      :last_name => "MyString",
-      :gender => "MyString",
-      :address_line_1 => "MyString",
-      :address_line_2 => "MyString",
-      :city => "MyString",
-      :state => "MyString",
-      :country => "MyString",
-      :zip_code => "MyString",
-      :phone => "MyString",
-      :mobile => "MyString",
-      :email => "MyString"
-    ).as_new_record)
+    @registrant = FactoryGirl.create(:competitor)
+    @registration_period = FactoryGirl.create(:registration_period, 
+                                              :start_date => Date.new(2012, 01, 10),
+                                              :end_date => Date.new(2012, 02, 11),
+                                              :competitor_cost => 100,
+                                              :noncompetitor_cost => 50)
   end
 
   it "renders new registrant form" do
@@ -36,27 +27,40 @@ describe "registrants/new" do
       assert_select "input#registrant_zip_code", :name => "registrant[zip_code]"
       assert_select "input#registrant_phone", :name => "registrant[phone]"
       assert_select "input#registrant_mobile", :name => "registrant[mobile]"
+      assert_select "input#registrant_competitor", :name => "registrant[competitor]"
       assert_select "input#registrant_email", :name => "registrant[email]"
     end
   end
-  describe "registration_periods/_list" do
-    before(:each) do
-      @registration_period = FactoryGirl.create(:registration_period, 
-                                                :start_date => Date.new(2012, 01, 10),
-                                                :end_date => Date.new(2012, 02, 11),
-                                                :competitor_cost => 100,
-                                                :noncompetitor_cost => 50)
-    end
+  it "renders dates in nice formats" do
+    render
+    # Run the generator again with the --webrat flag if you want to use webrat matchers
+    rendered.should match(/Jan 10, 2012/)
+    rendered.should match(/Feb 11, 2012/)
+  end
+  it "lists competitor costs" do
+    render
+    rendered.should match(/\$100/)
+  end
+  it "displays the 'Next Page' button" do
+    render
+    assert_select "input[value='Next Page']", 1
+  end
 
-    it "renders dates in nice formats" do
-      render
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Jan 10, 2012/)
-      rendered.should match(/Feb 11, 2012/)
+  describe "as non-competitor" do
+    before(:each) do
+      @registrant.competitor = false
     end
-    it "lists competitor costs" do
+    it "displays the words Non-Competitor" do
       render
-      render.should match(/\$100/)
+      assert_select "h2", :text => "Non-Competitor"
+    end
+    it "displays the registration_period for non-competitors" do
+      render
+      rendered.should match(/\$50/)
+    end
+    it "displays the 'Save Registration' button" do
+      render
+      assert_select "input[value='Save Registration']", 1
     end
   end
 end

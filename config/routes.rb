@@ -15,6 +15,9 @@ Workspace::Application.routes.draw do
   resources :categories
 
   resources :registrants do
+    collection do
+      get :new_noncompetitor
+    end
     member do
       resources :attending, :only => [:new, :create]
     end

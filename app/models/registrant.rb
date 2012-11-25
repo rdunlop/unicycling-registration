@@ -1,5 +1,5 @@
 class Registrant < ActiveRecord::Base
-  attr_accessible :address_line_1, :address_line_2, :birthday, :city, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip_code, :user_id
+  attr_accessible :address_line_1, :address_line_2, :birthday, :city, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip_code, :user_id, :competitor
 
   validates :birthday, :presence => true
   validates :first_name, :presence => true

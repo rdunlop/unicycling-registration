@@ -21,6 +21,7 @@ class Ability
           reg.user == user
         end
         can :create, Registrant #XXX necessary because we set the user in the controller?
+        can :new_noncompetitor, Registrant #XXX necessary because we set the user in the controller?
 
         can [:new, :create], Payment
         can :show, Payment do |payment|

@@ -12,7 +12,8 @@
   <% end %>
 
   <div class="data_block">
-    <h2>Competitor</h2>
+    <%= f.hidden_field :competitor %>
+    <h2><%= @registrant.competitor ? "Competitor" : "Non-Competitor" %></h2>
     <span class="required">Required fields</span>
     <fieldset class="data_block">
       <legend>Base Details</legend>
@@ -34,7 +35,7 @@
       </span>
     </fieldset>
 
-    <%= render :partial => "registration_periods/list", :locals => {:competitor => true} %>
+    <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
 
     <fieldset>
       <legend>Contact Information</legend>
@@ -81,6 +82,10 @@
     </fieldset>
   </div>
   <div class="actions">
-    <%= f.submit 'Next Page', :class => "competitor registration_button" %>
+    <% if @registrant.competitor %>
+      <%= f.submit 'Next Page', :class => "competitor registration_button" %>
+    <% else %>
+      <%= f.submit 'Save Registration', :class => "noncompetitor registration_button" %>
+    <% end %>
   </div>
 <% end %>
