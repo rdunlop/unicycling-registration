@@ -71,7 +71,7 @@ describe "attending/new.html.erb" do
 
   describe "for a text choice" do
     before(:each) do
-      @ec1 = FactoryGirl.create(:event_choice, :event => @ev1, :cell_type => "text")
+      @ec1 = FactoryGirl.create(:event_choice, :event => @ev1, :cell_type => "text", :position => 2)
       rc = @registrant.registrant_choices.build
       rc.event_choice_id = @ec1.id
     end
@@ -103,7 +103,7 @@ describe "attending/new.html.erb" do
 
   describe "for multiple choice" do
     before(:each) do
-      @ec1 = FactoryGirl.create(:event_choice, :event => @ev1, :cell_type => "multiple", :multiple_values => "one, two, three")
+      @ec1 = FactoryGirl.create(:event_choice, :event => @ev1, :cell_type => "multiple", :multiple_values => "one, two, three", :position => 2)
     end
 
     it "presents me with a select box" do
