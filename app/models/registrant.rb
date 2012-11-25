@@ -14,7 +14,12 @@ class Registrant < ActiveRecord::Base
 
 
   belongs_to :user
-  has_many :registrant_choices
+
+  # may move into another object
+  attr_accessible :registrant_choices_attributes
+  has_many :registrant_choices #, :inverse_of :registrant
+  accepts_nested_attributes_for :registrant_choices
+
   has_many :event_choices, :through => :registrant_choices
   has_many :events, :through => :event_choices
   has_many :categories, :through => :events
@@ -54,5 +59,43 @@ class Registrant < ActiveRecord::Base
 
   def to_s
     name
+  end
+
+  def has_event_in_category?(category)
+    category.events.each do |ev|
+      if self.has_event?(ev)
+        return true
+      end
+    end
+    false
+  end
+
+  # does this registrant have this event checked off?
+  def has_event?(event)
+    enablement_choice = event.event_choices.where({:position => 1})
+    if enablement_choice.empty?
+      false
+    else
+      my_val = self.registrant_choices.where({:event_choice_id => enablement_choice.first.id}).first
+      if my_val.nil?
+        false
+      else
+        my_val.value == "1"
+      end
+    end
+  end
+
+  def describe_event(event)
+    description = event.name
+
+    event.event_choices.each do |ec|
+      if ec.position != 1
+        my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
+        unless my_val.nil?
+          description += " - " + ec.label + ": " + my_val.value
+        end
+      end
+    end
+    description
   end
 end

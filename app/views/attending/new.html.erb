@@ -1,35 +1,45 @@
 <h1>Events</h1>
-<% x = RegistrantChoicesFacade.new(@registrant) %>
-<%= form_for(x, :url => attending_index_path(@registrant), :as => :event_choices) do |f| %>
+<%= form_for(setup_registrant_choices(@registrant), :url => attending_index_path(@registrant), :method => :post) do |f| %>
   <div id="tabs">
     <ul>
       <% @categories.each do |category| %>
         <li><a href="#tabs-<%= category.id %>"><%= category %></a></li>
       <% end %>
     </ul>
-    <% @categories.each_index do |index| %>
-      <% category = @categories[index]
+
+    <% @categories.each_index do |index|
+      category = @categories[index]
       if index >= @categories.length
         next_category = nil
       else
         next_category = @categories[index + 1]
-      end
-    %>
+      end %>
       <div id="tabs-<%= category.id %>">
         <% category.events.each do |event| %>
           <div class="event">
             <div class="event_choices">
               <% event.event_choices.each do |choice| %>
                 <span class="event_choice">
-                  <% if choice.cell_type == "boolean" %>
-                    <%= f.check_box(choice.choicename) %>
-                    <%= f.label choice.choicename, event %>
-                  <% elsif choice.cell_type == "text" %>
-                    <%= f.label choice.choicename, choice.label %>
-                    <%= f.text_field choice.choicename, :placeholder => choice.label  %>
-                  <% elsif choice.cell_type == "multiple" %>
-                    <%= f.label choice.choicename, choice.label %>
-                    <%= f.select(choice.choicename, choice.values, {:include_blank => true}) %>
+                  <% 
+                    found_rc = nil
+                    rc = @registrant.registrant_choices.each do |rc|
+                    if rc.event_choice_id == choice.id
+                      found_rc = rc
+                      break
+                    end
+                  end %>
+                  <%= f.fields_for :registrant_choices, found_rc do |ec| %>
+                    <%= ec.hidden_field :event_choice_id %>
+                    <% if ec.object.event_choice.cell_type == "boolean" %>
+                      <%= ec.check_box :value %>
+                      <%= ec.label :value, choice.event %>
+                    <% elsif ec.object.event_choice.cell_type == "text" %>
+                      <%= ec.label :value, choice.label %>
+                      <%= ec.text_field :value, :placeholder => ec.object.event_choice.label  %>
+                    <% elsif ec.object.event_choice.cell_type == "multiple" %>
+                      <%= ec.label :value, choice.label %>
+                      <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true} %>
+                    <% end %>
                   <% end %>
                 </span>
               <% end %>
@@ -41,12 +51,12 @@
         <% end %>
       </div>
     <% end %>
+    <%= submit_tag 'Save Registration', :class => "competitor registration_button" %>
   </div>
-  <%= submit_tag 'Save Registration', :class => "competitor registration_button" %>
 <% end %>
 <script>
   $(function() {
-    $( "#tabs" ).tabs({ heightStyle: "auto"}); // Not working in current version of jqueryUI (must upgrade)
+    $( "#tabs" ).tabs({ heightStyle: "auto"});
     $(".nexttab").click(function() {
       $("#tabs").tabs("select", this.hash);
     });

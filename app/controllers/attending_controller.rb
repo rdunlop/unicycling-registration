@@ -8,8 +8,12 @@ class AttendingController < ApplicationController
     @registrant = Registrant.find(params[:id])
   end
 
-  def new
+  def load_categories
     @categories = Category.all.sort {|a,b| a.position <=> b.position}
+  end
+
+  def new
+    load_categories
 
     respond_to do |format|
       format.html # new.html.erb
@@ -17,14 +21,14 @@ class AttendingController < ApplicationController
   end
 
   def create
-    rcf = RegistrantChoicesFacade.new(@registrant)
-    choices = params[:event_choices]
-    choices.each do |choice, value|
-      rcf.send("#{choice}=", value)
-    end
 
     respond_to do |format|
-      format.html { redirect_to @registrant }
+      if @registrant.update_attributes(params[:registrant])
+        format.html { redirect_to @registrant, notice: 'Attending was successfully created.' }
+      else
+        load_categories
+        format.html { render action: "new" }
+      end
     end
   end
 end

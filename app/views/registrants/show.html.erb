@@ -42,17 +42,16 @@
 </div>
 
 <div>
-  <% x = RegistrantChoicesFacade.new(@registrant) %>
   <h3>Events</h3>
   <div class="data_block">
     <% Category.all.each do |cat| %>
-      <% if @registrant.categories.all.include?(cat) %>
+      <% if @registrant.has_event_in_category?(cat) %>
         <fieldset class="data_block">
           <legend><%= cat %></legend>
           <ul>
             <% cat.events.each do |event| %>
-              <% if x.has_event?(event) %>
-                <li><%= x.describe_event(event) %></li>
+              <% if @registrant.has_event?(event) %>
+                <li><%= @registrant.describe_event(event) %></li>
               <% end %>
             <% end %>
           </ul>

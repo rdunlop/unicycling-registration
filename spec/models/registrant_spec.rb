@@ -120,4 +120,45 @@ describe Registrant do
       end
     end
   end
+
+  describe "with a boolean choice event" do
+    before(:each) do
+      @event = FactoryGirl.create(:event)
+      @ec = FactoryGirl.create(:event_choice, :event => @event)
+      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec, :value => "1")
+    end
+    it "can determine whether it has the event" do
+      @reg.has_event?(@event).should == true
+      @reg.has_event?(FactoryGirl.create(:event)).should == false
+    end
+    it "can describe the event" do
+      @reg.describe_event(@event).should == @event.name
+    end
+    it "can determine whether it has the category" do
+      @reg.has_event_in_category?(@event.category).should == true
+      @reg.has_event_in_category?(FactoryGirl.create(:category)).should == false
+    end
+    describe "and a text field" do
+      before(:each) do
+        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Team", :position => 2, :cell_type => "text")
+        @rc2 = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec2, :value => "My Team")
+      end
+      it "can describe the event" do
+        @reg.describe_event(@event).should == "#{@event.name} - #{@ec2.label}: #{@rc2.value}"
+      end
+    end
+    describe "and a select field" do
+      before(:each) do
+        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Category", :position => 2, :cell_type => "multiple")
+        @rc2 = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec2, :value => "Advanced")
+      end
+      it "can describe the event" do
+        @reg.describe_event(@event).should == "#{@event.name} - #{@ec2.label}: #{@rc2.value}"
+      end
+      it "doesn't break without a registrant choice" do
+        @rc2.destroy
+        @reg.describe_event(@event).should == "#{@event.name}"
+      end
+    end
+  end
 end

@@ -26,29 +26,27 @@ describe AttendingController do
     before(:each) do
       @ec1 = FactoryGirl.create(:event_choice)
       @attributes = {
-        @ec1.choicename => "1"
-      }
+        :registrant_choices_attributes => [
+          { :value => "1",
+            :event_choice_id => @ec1.id
+          }
+      ]}
     end
     it "returns http success" do
-      post 'create', {:id => @reg, :event_choices => @attributes}
+      post 'create', {:id => @reg, :registrant => @attributes}
       response.should redirect_to (@reg)
     end
 
     it "creates a corresponding event_choice when checkbox is selected" do
-      post 'create', {:id => @reg, :event_choices => @attributes}
+      post 'create', {:id => @reg, :registrant => @attributes}
       RegistrantChoice.count.should == 1
     end
 
     it "doesn't create a new entry if one already exists" do
       RegistrantChoice.count.should == 0
-      post 'create', {:id => @reg, :event_choices => @attributes}
-      post 'create', {:id => @reg, :event_choices => @attributes}
+      post 'create', {:id => @reg, :registrant => @attributes}
+      post 'create', {:id => @reg, :registrant => @attributes}
       RegistrantChoice.count.should == 1
-    end
-
-    it "deletes the choice when set to 0" do
-      post 'create', {:id => @reg, :event_choices => {@ec1.choicename => "0"}}
-      RegistrantChoice.count.should == 0
     end
   end
 end
