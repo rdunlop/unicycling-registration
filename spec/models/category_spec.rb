@@ -27,4 +27,12 @@ describe Category do
 
     cat.events.should == [event1, event2, event3]
   end
+
+  it "destroy related events upon destroy" do
+    cat = FactoryGirl.create(:category)
+    event1 = FactoryGirl.create(:event, :category => cat, :position => 1)
+    Event.all.count.should == 1
+    cat.destroy
+    Event.all.count.should == 0
+  end
 end

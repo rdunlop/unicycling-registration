@@ -90,6 +90,11 @@ describe Registrant do
     it "can access the categories" do
       @reg.categories.should == [@rc.event_choice.event.category]
     end
+    it "Destroys the related registrant_choice upon destroy" do
+      RegistrantChoice.all.count.should == 1
+      @reg.destroy
+      RegistrantChoice.all.count.should == 0
+    end
   end
 
   describe "with a registration_period" do

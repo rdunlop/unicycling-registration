@@ -34,4 +34,11 @@ describe Event do
 
     @ev.event_choices = [@ec1, @ec2, @ec3]
   end
+  it "destroys associated event_choices upon destroy" do
+    @ec1 = FactoryGirl.create(:event_choice, :event => @ev, :position => 1)
+
+    EventChoice.all.count.should == 1
+    @ev.destroy
+    EventChoice.all.count.should == 0
+  end
 end

@@ -160,6 +160,7 @@ Competitor Information is Almost never Changed.
 
 Better way to navigate back to Registrants page.
 Make the Pay Now a button-like-thing.. For a Sinlge Registrant, Make the Pay Now part of the regsitration.
+add ability to restrict deletion of registrants and users, if there are related records in payments.
 
 
 UNICON 2012 data analysis:
@@ -269,3 +270,4 @@ Best Times:
 10 ppl chose 400m
 21 ppl chose 10k
 9 ppl chose marathon
+

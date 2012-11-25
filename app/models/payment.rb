@@ -6,7 +6,7 @@ class Payment < ActiveRecord::Base
   validates :user_id, :presence => true
 
   belongs_to :user
-  has_many :payment_details, :inverse_of => :payment
+  has_many :payment_details, :inverse_of => :payment, :dependent => :destroy
   accepts_nested_attributes_for :payment_details
 
   after_initialize :init

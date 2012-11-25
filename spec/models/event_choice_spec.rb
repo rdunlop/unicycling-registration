@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EventChoice do
   before(:each) do
     @event = FactoryGirl.create(:event)
-    @ec = FactoryGirl.create(:event_choice, :event => @event)
+    @ec = FactoryGirl.create(:event_choice, :event => @event, :position => 2)
   end
   it "is valid from FactoryGirl" do
     @ec.valid?.should == true
@@ -61,4 +61,26 @@ describe EventChoice do
       @ec.values.should == ["one", "two"]
     end
   end
+
+  describe "with associated registrant_choice" do
+    before(:each) do
+      @rc = FactoryGirl.create(:registrant_choice, :event_choice => @ec)
+    end
+    it "deletes the RC when deleted" do
+      RegistrantChoice.all.count.should == 1
+      @ec.destroy
+      RegistrantChoice.all.count.should == 0
+    end
+  end
+
+  it "must be a boolean to be in position 1" do
+    @ec.cell_type = "boolean"
+    @ec.position = 1
+    @ec.valid?.should == true
+    @ec.cell_type = "multiple"
+    @ec.valid?.should == false
+    @ec.cell_type = "text"
+    @ec.valid?.should == false
+  end
+
 end

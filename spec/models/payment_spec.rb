@@ -38,4 +38,12 @@ describe Payment do
     pay.save
     PaymentDetail.all.count.should == 1
   end
+
+  it "destroys related payment_details upon destroy" do
+    pay = FactoryGirl.create(:payment)
+    pd = FactoryGirl.create(:payment_detail, :payment => pay)
+    PaymentDetail.all.count.should == 1
+    pay.destroy
+    PaymentDetail.all.count.should == 0
+  end
 end

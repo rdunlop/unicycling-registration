@@ -2,9 +2,11 @@ class EventChoice < ActiveRecord::Base
   attr_accessible :cell_type, :event_id, :export_name, :label, :multiple_values, :position
 
   belongs_to :event
+  has_many :registrant_choices, :dependent => :destroy
 
   validates :export_name, {:presence => true, :uniqueness => true}
   validates :cell_type, :inclusion => {:in => %w(boolean text multiple), :message => "%{value} must be either 'boolean' or 'text' or 'multiple' or '...'"}
+  validate :position_1_must_be_boolean
 
   def choicename
     "choice#{id}"
@@ -12,5 +14,11 @@ class EventChoice < ActiveRecord::Base
 
   def values
     multiple_values.split(%r{,\s*})
+  end
+
+  def position_1_must_be_boolean
+    if self.position == 1 and self.cell_type != "boolean"
+      errors[:cell_type] << "Only 'boolean' types are allowed in position 1"
+    end
   end
 end
