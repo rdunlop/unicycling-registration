@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :cell_type %><br />
-    <%= f.text_field :cell_type %>
+    <%= f.select :cell_type, ['boolean', 'text', 'multiple'] %>
   </div>
   <div class="field">
     <%= f.label :multiple_values %><br />
