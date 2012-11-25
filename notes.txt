@@ -138,6 +138,9 @@ Check that the placeholder text works in other browsers, or add jquery fix for i
 CSS Reset?
 smidget?
 prevent form leaving modified form page
+Use a local JqueryUI
+Try different ways of displaying the Event Catgories.
+Use SASS to inherit css properties.
 
 Are the Address/etc fields REQUIRED?
 Sholud we have a "phoenetic pronunciation" field?
