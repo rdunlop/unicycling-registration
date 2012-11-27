@@ -21,6 +21,21 @@ $noncompetitor_hover: #3487C9;
   border-color: #205f3c;
 }
 
+.competitor_link {
+  text-decoration: none;
+  color: $competitor;
+}
+.competitor_link:visited {
+  color: $competitor;
+}
+.noncompetitor_link {
+  text-decoration: none;
+  color: $noncompetitor;
+}
+.noncompetitor_link:visited {
+  color: $noncompetitor;
+}
+
 .noncompetitor {
   background-color: $noncompetitor;
   border-color: #2F7BB6;
@@ -78,10 +93,10 @@ $noncompetitor_hover: #3487C9;
 }
 
 // http://www.usabilitypost.com/2012/01/10/pressed-button-state-with-css3/
-.registration_button {
+@mixin button($width) {
   text-decoration: none;
   display: inline-block;
-  width: 220px;
+  width:$width;
   padding: 10px 15px;
   font-size: 18px;
   cursor: pointer;
@@ -107,6 +122,9 @@ $noncompetitor_hover: #3487C9;
   //border-top-left-radius: 11px;
   //border-top-right-radius: 11px;
 }
+.registration_button {
+  @include button(220px);
+}
 .registration_button:hover, .registration_button:focus {
   border: solid 1px;
   text-decoration: none;
@@ -120,7 +138,7 @@ $noncompetitor_hover: #3487C9;
 
 .registrations_box {
   margin-top: 20px;
-  display: inline-block;
+  display: inline;
 }
 
 .registrant {
@@ -131,26 +149,28 @@ $noncompetitor_hover: #3487C9;
   padding: 3px;
 }
 
+.registrant_summary {
+  padding: 0;
+
+}
+.registrant_edit_button {
+  @include button(30px);
+}
+
 .payment_link {
-  width: 150px;
-  display: inline-block;
-  padding: 10px;
-  text-decoration: none;
+  @include button(150px);
+}
 
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
+.unpaid {
+  color: red;
+}
 
-  border: solid 1px;
+.paid {
+  color: darkgreen;
+}
 
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  transition-duration: 0.2s;
+.prices_increase {
+  font-size: 12px;
 }
 
 .payment_process {

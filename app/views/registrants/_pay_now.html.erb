@@ -1,20 +1,14 @@
-<% if total_owing > 0 %>
-  <div>
-    <div class="registrations_box">
-      <div class="payment_process">
-        <%= link_to "Pay Now ($" +  total_owing.to_s + ")", new_payment_path, :class => "payment_link" %>
-      </div>
-      <div>
-        Prices Increase in 
-        <%
-          rp = RegistrationPeriod.relevant_period(Date.today)
-          if rp.nil?
-        %>
-         [Unknown]
-       <% else %>
-         <%= distance_of_time_in_words(Date.today, rp.end_date) + " (" + ((rp.end_date) + 1).strftime("%b %e") + ")" %>
-        <% end %>
-      </div>
-    </div>
+<div class="registrations_box">
+  <div class="payment_process">
+    <%= link_to "Pay Now", new_payment_path, :class => "payment_link" %>
   </div>
-<% end %>
+  <div class="prices_increase">
+    Prices Increase in 
+    <% rp = RegistrationPeriod.relevant_period(Date.today) %>
+    <%if rp.nil?  %>
+      [Unknown]
+    <% else %>
+      <%= distance_of_time_in_words(Date.today, rp.end_date) + " (" + ((rp.end_date) + 1).strftime("%b %e") + ")" %>
+    <% end %>
+  </div>
+</div>
