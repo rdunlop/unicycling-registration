@@ -2,6 +2,12 @@ class RegistrantsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
+  before_filter :load_cotagories, :only => [:new, :edit]
+
+  def load_categories
+    @categories = Category.all.sort {|a,b| a.position <=> b.position}
+  end
+
   # GET /registrants
   # GET /registrants.json
   def index

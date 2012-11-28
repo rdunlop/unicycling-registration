@@ -1,5 +1,6 @@
-<h1>Events</h1>
-<%= form_for(setup_registrant_choices(@registrant), :url => attending_index_path(@registrant), :method => :post) do |f| %>
+<% @categories = categories
+   @registrant = registrant
+ %>
   <div id="tabs">
     <ul>
       <% @categories.each do |category| %>
@@ -51,9 +52,7 @@
         <% end %>
       </div>
     <% end %>
-    <%= submit_tag 'Save Registration', :class => "competitor registration_button" %>
   </div>
-<% end %>
 <script>
   $(function() {
     $( "#tabs" ).tabs({ heightStyle: "auto"});

@@ -1,4 +1,4 @@
-<%= form_for(@registrant) do |f| %>
+<%= form_for(setup_registrant_choices(@registrant)) do |f| %>
   <% if @registrant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@registrant.errors.count, "error") %> prohibited this registrant from being saved:</h2>
@@ -37,49 +37,9 @@
 
     <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
 
-    <fieldset>
-      <legend>Contact Information</legend>
-      <fieldset class="data_block">
-        <legend>Competitor Details</legend>
-        <span>
-          <%= f.label :address_line_1 %>
-          <%= f.text_field :address_line_1 %>
-        </span>
-        <span>
-          <%= f.label :address_line_2 %>
-          <%= f.text_field :address_line_2 %>
-        </span>
-        <span>
-          <%= f.label :city, :class => "required" %>
-          <%= f.text_field :city %>
-        </span>
-        <span>
-          <%= f.label :state %>
-          <%= f.text_field :state %>
-          <%= f.label :zip_code %>
-          <%= f.text_field :zip_code %>
-        </span>
-        <span>
-          <%= f.label :country, :class => "required" %>
-          <%= f.text_field :country %>
-        </span>
-        <span>
-          <%= f.label :phone %>
-          <%= f.text_field :phone %>
-        </span>
-        <span>
-          <%= f.label :mobile %>
-          <%= f.text_field :mobile %>
-        </span>
-        <span>
-          <%= f.label :email %>
-          <%= f.text_field :email %>
-        </span>
-      </fieldset>
-      <fieldset class="data_block">
-        <legend>Emergency Contact</legend>
-      </fieldset>
-    </fieldset>
+    <%= render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f } %>
+
+    <%= render :partial => "contact_info", :locals => { :f => f } %>
   </div>
   <div class="actions">
     <% if @registrant.competitor %>

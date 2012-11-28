@@ -17,7 +17,7 @@ class Registrant < ActiveRecord::Base
 
   # may move into another object
   attr_accessible :registrant_choices_attributes
-  has_many :registrant_choices, :dependent => :destroy #, :inverse_of :registrant
+  has_many :registrant_choices, :dependent => :destroy, :inverse_of => :registrant
   accepts_nested_attributes_for :registrant_choices
 
   has_many :event_choices, :through => :registrant_choices
