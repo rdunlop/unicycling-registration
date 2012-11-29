@@ -2,12 +2,14 @@ require 'spec_helper'
 
 describe "registrants/new" do
   before(:each) do
-    @registrant = FactoryGirl.create(:competitor)
+    @registrant = FactoryGirl.build(:competitor)
     @registration_period = FactoryGirl.create(:registration_period, 
                                               :start_date => Date.new(2012, 01, 10),
                                               :end_date => Date.new(2012, 02, 11),
                                               :competitor_cost => 100,
                                               :noncompetitor_cost => 50)
+    @ev1 = FactoryGirl.create(:event)
+    @categories = [@ev1.category]
   end
 
   it "renders new registrant form" do
@@ -19,16 +21,7 @@ describe "registrants/new" do
       assert_select "input#registrant_middle_initial", :name => "registrant[middle_initial]"
       assert_select "input#registrant_last_name", :name => "registrant[last_name]"
       assert_select "input#registrant_gender_male", :name => "registrant[gender]"
-      assert_select "input#registrant_address_line_1", :name => "registrant[address_line_1]"
-      assert_select "input#registrant_address_line_2", :name => "registrant[address_line_2]"
-      assert_select "input#registrant_city", :name => "registrant[city]"
-      assert_select "input#registrant_state", :name => "registrant[state]"
-      assert_select "input#registrant_country", :name => "registrant[country]"
-      assert_select "input#registrant_zip_code", :name => "registrant[zip_code]"
-      assert_select "input#registrant_phone", :name => "registrant[phone]"
-      assert_select "input#registrant_mobile", :name => "registrant[mobile]"
       assert_select "input#registrant_competitor", :name => "registrant[competitor]"
-      assert_select "input#registrant_email", :name => "registrant[email]"
     end
   end
   it "renders dates in nice formats" do
@@ -61,6 +54,134 @@ describe "registrants/new" do
     it "displays the 'Save Registration' button" do
       render
       assert_select "input[value='Save Registration']", 1
+    end
+  end
+
+  describe "the events lists" do
+
+    describe "for a boolean choice" do
+      before(:each) do
+        @ec1 = FactoryGirl.create(:event_choice, :event => @ev1)
+        rc = @registrant.registrant_choices.build
+        rc.event_choice_id = @ec1.id
+      end
+      it "should have the checkbox" do
+        render
+
+        # Run the generator again with the --webrat flag if you want to use webrat matchers
+        assert_select "form", :action => registrants_path, :method => "post" do
+          assert_select "input#registrant_registrant_choices_attributes_0_event_choice_id", :name => "registrant[registrant_choices_attributes][0][event_choice_id]" do
+            assert_select "input[value='#{@ec1.id}']"
+          end
+          assert_select "input#registrant_registrant_choices_attributes_0_value", :name => "registrant[registrant_choices_attributes][0][value]" do
+            assert_select "input[value='1']"
+          end
+        end
+      end
+      describe "With existing selections" do
+        before(:each) do
+          @rc = FactoryGirl.create(:registrant_choice, :value => "1")
+          @registrant = @rc.registrant
+          @attending = @rc
+          @categories = [@rc.event_choice.event.category]
+
+          @ec1 = @rc.event_choice
+        end
+
+        it "displays the checkbox as checked off" do
+          render
+
+          assert_select "form", :action => registrant_path(@registrant), :method => "put" do
+            assert_select "input[type='checkbox']", 1 do
+              assert_select "[checked='checked']", 1
+            end
+          end
+        end
+        it "renders as not-checked-off if value is '0'" do
+          @rc.value = "0"
+          @rc.save
+          render
+
+          assert_select "form", :action => registrant_path(@registrant), :method => "put" do
+            assert_select "input[type='checkbox']", 1 do
+              assert_select "[checked='checked']", 0
+            end
+          end
+        end
+
+        it "displays a hidden form field" do
+          render
+
+          assert_select "form" do
+            assert_select "input[type='hidden'][name='registrant[registrant_choices_attributes][0][value]']"
+          end
+        end
+      end
+    end
+
+    describe "for a text choice" do
+      before(:each) do
+        @ec1 = FactoryGirl.create(:event_choice, :event => @ev1, :cell_type => "text", :position => 2)
+      end
+      describe "without a choice selected" do
+        before(:each) do
+          rc = @registrant.registrant_choices.build
+          rc.event_choice_id = @ec1.id
+        end
+        it "should have the text input" do
+          render
+
+          assert_select "form", :action => registrants_path, :method => "post" do
+            assert_select "input#registrant_registrant_choices_attributes_0_event_choice_id", :name => "registrant[registrant_choices_attributes][0][event_choice_id]" do
+              assert_select "input[value='#{@ec1.id}']"
+            end
+            assert_select "input#registrant_registrant_choices_attributes_0_value", :name => "registrant[registrant_choices_attributes][0][value]" do
+              assert_select "input[type='text']", 1
+            end
+          end
+        end
+      end
+      describe "for already present choice" do
+        before(:each) do
+          rc = @registrant.registrant_choices.build
+          rc.event_choice_id = @ec1.id
+          rc.value = "Hello"
+        end
+        it "displays the text if already present in user's choice" do
+          render
+
+          assert_select "input#registrant_registrant_choices_attributes_0_value", :name => "registrant[registrant_choices_attributes][0][value]" do
+            assert_select "input[type='text'][value='Hello']", 1
+          end
+        end
+      end
+    end
+
+    describe "for multiple choice" do
+      before(:each) do
+        @ec1 = FactoryGirl.create(:event_choice, :event => @ev1, :cell_type => "multiple", :multiple_values => "one, two, three", :position => 2)
+      end
+
+      it "presents me with a select box" do
+        render
+
+        assert_select "#tabs" do
+          assert_select "select", 1
+        end
+      end
+
+      it "has the 3+1(blank) values as options" do
+        render
+
+        assert_select "#tabs" do
+          assert_select "select" do
+            assert_select "option", 4
+            assert_select "option[value='one']"
+            assert_select "option[value='two']"
+            assert_select "option[value='three']"
+          end
+        end
+      end
     end
   end
 end

@@ -86,7 +86,16 @@ describe RegistrantsController do
       assigns(:registrant).should be_a_new(Registrant)
       assigns(:registrant).competitor.should == true
     end
+    it "returns a list of all of the events" do
+      @category1 = FactoryGirl.create(:category, :position => 1)
+      @category3 = FactoryGirl.create(:category, :position => 3)
+      @category2 = FactoryGirl.create(:category, :position => 2)
+
+      get 'new', {:id => @reg}
+      assigns(:categories).should == [@category1, @category2, @category3]
+    end
   end
+
   describe "GET new_noncompetitor" do
     it "assigns a new noncompetitor as @registrant" do
       get :new_noncompetitor, {}
@@ -100,6 +109,23 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       get :edit, {:id => registrant.to_param}
       assigns(:registrant).should eq(registrant)
+    end
+  end
+
+  describe "GET contact_info" do
+    it "assigns the requested registrant as @registrant" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      get :contact_info, {:id => registrant.to_param}
+      assigns(:registrant).should eq(registrant)
+      response.should be_success
+    end
+  end
+
+  describe "PUT update_contact_info" do
+    it "redirects to the registrant show page" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      put :update_contact_info, {:id => registrant.to_param}
+      response.should redirect_to(registrant)
     end
   end
 
@@ -139,7 +165,7 @@ describe RegistrantsController do
 
       it "redirects to the created registrant" do
         post :create, {:registrant => valid_attributes}
-        response.should redirect_to(new_attending_path(Registrant.last))
+        response.should redirect_to(contact_info_registrant_path(Registrant.last))
       end
     end
 
@@ -156,6 +182,37 @@ describe RegistrantsController do
         Registrant.any_instance.stub(:save).and_return(false)
         post :create, {:registrant => {}}
         response.should render_template("new")
+      end
+      it "has categories" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        category1 = FactoryGirl.create(:category, :position => 1)
+        Registrant.any_instance.stub(:save).and_return(false)
+        post :create, {:registrant => {}}
+        assigns(:categories).should == [category1]
+      end
+    end
+    describe "When creating nested registrant choices" do
+      before(:each) do
+        @reg = FactoryGirl.create(:registrant)
+        @ec1 = FactoryGirl.create(:event_choice)
+        @attributes = valid_attributes.merge({
+          :registrant_choices_attributes => [
+            { :value => "1",
+              :event_choice_id => @ec1.id
+        }
+        ]})
+      end
+
+      it "creates a corresponding event_choice when checkbox is selected" do
+        post 'create', {:id => @reg, :registrant => @attributes}
+        RegistrantChoice.count.should == 1
+      end
+
+      it "doesn't create a new entry if one already exists" do
+        RegistrantChoice.count.should == 0
+        put 'update', {:id => @reg, :registrant => @attributes}
+        put 'create', {:id => @reg, :registrant => @attributes}
+        RegistrantChoice.count.should == 1
       end
     end
   end
@@ -178,15 +235,15 @@ describe RegistrantsController do
         assigns(:registrant).should eq(registrant)
       end
 
-      it "redirects competitors to the events" do
+      it "redirects competitors to the contact_info" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
-        response.should redirect_to(new_attending_path(Registrant.last))
+        response.should redirect_to(contact_info_registrant_path(Registrant.last))
       end
-      it "redirects noncompetitors to the registrant" do
+      it "redirects noncompetitors to the contact_info" do
         registrant = FactoryGirl.create(:noncompetitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes.merge({:competitor => false})}
-        response.should redirect_to(Registrant.last)
+        response.should redirect_to(contact_info_registrant_path(Registrant.last))
       end
     end
 

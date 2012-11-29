@@ -2,7 +2,7 @@ class RegistrantsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_cotagories, :only => [:new, :edit]
+  before_filter :load_categories, :only => [:new, :edit]
 
   def load_categories
     @categories = Category.all.sort {|a,b| a.position <=> b.position}
@@ -53,6 +53,24 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  def contact_info
+    @registrant = Registrant.find(params[:id])
+  end
+
+  def update_contact_info
+    @registrant = Registrant.find(params[:id])
+
+    respond_to do |format|
+      if @registrant.update_attributes(params[:registrant])
+        format.html { redirect_to @registrant, notice: 'Registrant was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @registrant.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /registrants/1/edit
   def edit
     @registrant = Registrant.find(params[:id])
@@ -66,13 +84,10 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       if @registrant.save
-        if @registrant.competitor # go to page 2
-          format.html { redirect_to new_attending_path(@registrant), notice: 'Registrant was successfully created.' }
-          format.json { render json: @registrant, status: :created, location: @registrant }
-        else
-          format.html { redirect_to @registrant, notice: 'Registrant was successfully created.' }
-        end
+        format.html { redirect_to contact_info_registrant_path(@registrant), notice: 'Registrant was successfully created.' }
+        format.json { render json: @registrant, status: :created, location: @registrant }
       else
+        load_categories
         format.html { render action: "new" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end
@@ -86,12 +101,8 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       if @registrant.update_attributes(params[:registrant])
-        if @registrant.competitor
-          format.html { redirect_to new_attending_path(@registrant), notice: 'Registrant was successfully updated.' }
-          format.json { head :no_content }
-        else
-          format.html {redirect_to @registrant, notice: 'Registrant was successfully updated.' }
-        end
+        format.html { redirect_to contact_info_registrant_path(@registrant), notice: 'Registrant was successfully updated.' }
+        format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }

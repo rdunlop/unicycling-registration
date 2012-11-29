@@ -1,0 +1,26 @@
+<h1>Contact Info</h1>
+
+<%= form_for(@registrant, :url => update_contact_info_registrant_path(@registrant)) do |f| %>
+  <% if @registrant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@registrant.errors.count, "error") %> prohibited this registrant from being saved:</h2>
+
+      <ul>
+      <% @registrant.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="data_block">
+    <%= render :partial => "contact_info", :locals => { :f => f } %>
+  </div>
+  <div class="actions">
+    <% if @registrant.competitor %>
+      <%= f.submit 'Save Registration', :class => "competitor registration_button" %>
+    <% else %>
+      <%= f.submit 'Save Registration', :class => "noncompetitor registration_button" %>
+    <% end %>
+  </div>
+<% end %>

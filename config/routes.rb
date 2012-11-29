@@ -19,7 +19,8 @@ Workspace::Application.routes.draw do
       get :new_noncompetitor
     end
     member do
-      resources :attending, :only => [:new, :create]
+      get :contact_info
+      put :update_contact_info
     end
   end
 

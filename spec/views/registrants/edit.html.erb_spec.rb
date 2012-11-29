@@ -17,6 +17,7 @@ describe "registrants/edit" do
       :mobile => "MyString",
       :email => "MyString"
     ))
+    @categories = [FactoryGirl.create(:category)]
   end
 
   it "renders the edit registrant form" do
@@ -28,15 +29,6 @@ describe "registrants/edit" do
       assert_select "input#registrant_middle_initial", :name => "registrant[middle_initial]"
       assert_select "input#registrant_last_name", :name => "registrant[last_name]"
       assert_select "input#registrant_gender_male", :name => "registrant[gender]"
-      assert_select "input#registrant_address_line_1", :name => "registrant[address_line_1]"
-      assert_select "input#registrant_address_line_2", :name => "registrant[address_line_2]"
-      assert_select "input#registrant_city", :name => "registrant[city]"
-      assert_select "input#registrant_state", :name => "registrant[state]"
-      assert_select "input#registrant_country", :name => "registrant[country]"
-      assert_select "input#registrant_zip_code", :name => "registrant[zip_code]"
-      assert_select "input#registrant_phone", :name => "registrant[phone]"
-      assert_select "input#registrant_mobile", :name => "registrant[mobile]"
-      assert_select "input#registrant_email", :name => "registrant[email]"
     end
   end
 end

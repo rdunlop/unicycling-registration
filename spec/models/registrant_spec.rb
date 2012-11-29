@@ -39,14 +39,15 @@ describe Registrant do
     @reg.valid?.should == false
   end
 
-  it "requires country" do
-    @reg.gender = nil
-    @reg.valid?.should == false
-  end
-  it "requires city" do
-    @reg.city = nil
-    @reg.valid?.should == false
-  end
+  #it "requires country" do
+    #@reg.gender = nil
+    #@reg.valid?.should == false
+  #end
+
+  #it "requires city" do
+    ##@reg.city = nil
+    #@reg.valid?.should == false
+  #end
   it "has either Male or Female gender" do
     @reg.gender = "Male"
     @reg.valid?.should == true
