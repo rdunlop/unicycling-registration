@@ -37,7 +37,9 @@
 
     <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
 
-    <%= render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f } %>
+    <% unless @categories.nil? %>
+      <%= render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f } %>
+    <% end %>
 
   </div>
   <div class="actions">

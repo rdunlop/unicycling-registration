@@ -1,47 +1,53 @@
 require 'spec_helper'
 
 describe "registrants/new" do
-  before(:each) do
-    @registrant = FactoryGirl.build(:competitor)
-    @registration_period = FactoryGirl.create(:registration_period, 
-                                              :start_date => Date.new(2012, 01, 10),
-                                              :end_date => Date.new(2012, 02, 11),
-                                              :competitor_cost => 100,
-                                              :noncompetitor_cost => 50)
-    @ev1 = FactoryGirl.create(:event)
-    @categories = [@ev1.category]
-  end
-
-  it "renders new registrant form" do
-    render
-
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form", :action => registrants_path, :method => "post" do
-      assert_select "input#registrant_first_name", :name => "registrant[first_name]"
-      assert_select "input#registrant_middle_initial", :name => "registrant[middle_initial]"
-      assert_select "input#registrant_last_name", :name => "registrant[last_name]"
-      assert_select "input#registrant_gender_male", :name => "registrant[gender]"
-      assert_select "input#registrant_competitor", :name => "registrant[competitor]"
+  describe "Competitor" do
+    before(:each) do
+      @registrant = FactoryGirl.build(:competitor)
+      @registration_period = FactoryGirl.create(:registration_period, 
+                                                :start_date => Date.new(2012, 01, 10),
+                                                :end_date => Date.new(2012, 02, 11),
+                                                :competitor_cost => 100,
+                                                :noncompetitor_cost => 50)
+      @categories = [] # none are _needed_
     end
-  end
-  it "renders dates in nice formats" do
-    render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Jan 10, 2012/)
-    rendered.should match(/Feb 11, 2012/)
-  end
-  it "lists competitor costs" do
-    render
-    rendered.should match(/\$100/)
-  end
-  it "displays the 'Next Page' button" do
-    render
-    assert_select "input[value='Next Page']", 1
+
+    it "renders new registrant form" do
+      render
+
+      # Run the generator again with the --webrat flag if you want to use webrat matchers
+      assert_select "form", :action => registrants_path, :method => "post" do
+        assert_select "input#registrant_first_name", :name => "registrant[first_name]"
+        assert_select "input#registrant_middle_initial", :name => "registrant[middle_initial]"
+        assert_select "input#registrant_last_name", :name => "registrant[last_name]"
+        assert_select "input#registrant_gender_male", :name => "registrant[gender]"
+        assert_select "input#registrant_competitor", :name => "registrant[competitor]"
+      end
+    end
+    it "renders dates in nice formats" do
+      render
+      # Run the generator again with the --webrat flag if you want to use webrat matchers
+      rendered.should match(/Jan 10, 2012/)
+      rendered.should match(/Feb 11, 2012/)
+    end
+    it "lists competitor costs" do
+      render
+      rendered.should match(/\$100/)
+    end
+    it "displays the 'Next Page' button" do
+      render
+      assert_select "input[value='Next Page']", 1
+    end
   end
 
   describe "as non-competitor" do
     before(:each) do
-      @registrant.competitor = false
+      @registrant = FactoryGirl.build(:noncompetitor)
+      @registration_period = FactoryGirl.create(:registration_period, 
+                                                :start_date => Date.new(2012, 01, 10),
+                                                :end_date => Date.new(2012, 02, 11),
+                                                :competitor_cost => 100,
+                                                :noncompetitor_cost => 50)
     end
     it "displays the words Non-Competitor" do
       render
@@ -58,7 +64,16 @@ describe "registrants/new" do
   end
 
   describe "the events lists" do
-
+    before(:each) do
+      @registrant = FactoryGirl.build(:competitor)
+      @registration_period = FactoryGirl.create(:registration_period, 
+                                                :start_date => Date.new(2012, 01, 10),
+                                                :end_date => Date.new(2012, 02, 11),
+                                                :competitor_cost => 100,
+                                                :noncompetitor_cost => 50)
+      @ev1 = FactoryGirl.create(:event)
+      @categories = [@ev1.category]
+    end
     describe "for a boolean choice" do
       before(:each) do
         @ec1 = FactoryGirl.create(:event_choice, :event => @ev1)
