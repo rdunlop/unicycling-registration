@@ -1,5 +1,7 @@
 Workspace::Application.routes.draw do
 
+  resources :expense_items
+
   resources :payments do
     member do
       post 'fake_complete'

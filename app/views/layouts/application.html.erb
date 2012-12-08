@@ -54,6 +54,9 @@
       <% if can? :manage, EventChoice %>
         <%= link_to 'Event Choices', event_choices_path %><br />
       <% end %>
+      <% if can? :manage, ExpenseItem %>
+        <%= link_to 'Expense Items', expense_items_path %><br />
+      <% end %>
       <% if can? :manage, Registrant %>
         <%= link_to 'Registrants', registrants_path %><br />
       <% end %>
