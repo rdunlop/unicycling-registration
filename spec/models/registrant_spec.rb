@@ -68,6 +68,13 @@ describe Registrant do
     @reg.registrant_choices.should == [@ec]
   end
 
+  it "has expense_items" do
+    @item = FactoryGirl.create(:expense_item)
+    @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
+    @reg.registrant_expense_items.should == [@rei]
+    @reg.expense_items.should == [@item]
+  end
+
   it "has a name field" do
     @reg.name.should == @reg.first_name + " " + @reg.last_name
   end
