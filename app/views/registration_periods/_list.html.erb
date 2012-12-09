@@ -8,9 +8,9 @@
                 <td> to </td>
                 <td><%=period.end_date.strftime("%b %d, %Y") %></td>
                 <% if competitor %>
-                  <td><b>$<%=period.competitor_cost %></b></td>
+                  <td><b>$<%=period.competitor_expense_item.cost %></b></td>
                 <% else %>
-                  <td><b>$<%=period.noncompetitor_cost %></b></td>
+                  <td><b>$<%=period.noncompetitor_expense_item.cost %></b></td>
                 <% end %>
             </tr>
         <% end %>

@@ -3,11 +3,13 @@ require 'spec_helper'
 describe "registrants/contact_info" do
   before(:each) do
     @registrant = FactoryGirl.create(:competitor)
+    @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
+    @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
     @registration_period = FactoryGirl.create(:registration_period, 
                                               :start_date => Date.new(2012, 01, 10),
                                               :end_date => Date.new(2012, 02, 11),
-                                              :competitor_cost => 100,
-                                              :noncompetitor_cost => 50)
+                                              :competitor_expense_item => @comp_exp,
+                                              :noncompetitor_expense_item => @noncomp_exp)
   end
 
   it "renders new contact_info form" do
@@ -34,11 +36,6 @@ describe "registrants/contact_info" do
   describe "Competitor" do
     before(:each) do
       @registrant = FactoryGirl.create(:competitor)
-      @registration_period = FactoryGirl.create(:registration_period, 
-                                                :start_date => Date.new(2012, 01, 10),
-                                                :end_date => Date.new(2012, 02, 11),
-                                                :competitor_cost => 100,
-                                                :noncompetitor_cost => 50)
       @categories = [] # none are _needed_
     end
     it "renders dates in nice formats" do
@@ -56,11 +53,6 @@ describe "registrants/contact_info" do
   describe "as non-competitor" do
     before(:each) do
       @registrant = FactoryGirl.create(:noncompetitor)
-      @registration_period = FactoryGirl.create(:registration_period, 
-                                                :start_date => Date.new(2012, 01, 10),
-                                                :end_date => Date.new(2012, 02, 11),
-                                                :competitor_cost => 100,
-                                                :noncompetitor_cost => 50)
     end
     it "displays the registration_period for non-competitors" do
       render

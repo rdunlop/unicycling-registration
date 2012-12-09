@@ -44,9 +44,7 @@ describe "registrants/new" do
       @registrant = FactoryGirl.build(:competitor)
       @registration_period = FactoryGirl.create(:registration_period, 
                                                 :start_date => Date.new(2012, 01, 10),
-                                                :end_date => Date.new(2012, 02, 11),
-                                                :competitor_cost => 100,
-                                                :noncompetitor_cost => 50)
+                                                :end_date => Date.new(2012, 02, 11))
       @ev1 = FactoryGirl.create(:event)
       @categories = [@ev1.category]
     end

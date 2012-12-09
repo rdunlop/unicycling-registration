@@ -20,12 +20,12 @@
     <%= f.date_select :end_date %>
   </div>
   <div class="field">
-    <%= f.label :competitor_cost %><br />
-    <%= f.number_field :competitor_cost %>
+    <%= f.label :competitor_expense_item_id %><br />
+    <%= f.select :competitor_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }  %>
   </div>
   <div class="field">
-    <%= f.label :noncompetitor_cost %><br />
-    <%= f.number_field :noncompetitor_cost %>
+    <%= f.label :noncompetitor_expense_item_id %><br />
+    <%= f.select :noncompetitor_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] } %>
   </div>
   <div class="field">
     <%= f.label :name %><br />

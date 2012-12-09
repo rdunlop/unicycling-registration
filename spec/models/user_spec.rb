@@ -28,9 +28,9 @@ describe User do
   it "can sum the amount owing from all registrants" do
     @user.total_owing.should == 0
   end
-  describe "with a registration period" do
+  describe "with an expense_item" do
     before(:each) do
-      @rp = FactoryGirl.create(:registration_period, :competitor_cost => 100, :noncompetitor_cost => 40)
+      @rp = FactoryGirl.create(:registration_period)
     end
 
     it "calculates the cost of a competitor" do
@@ -39,7 +39,7 @@ describe User do
     end
     it "calculates the cost of a noncompetitor" do
       @comp = FactoryGirl.create(:noncompetitor, :user => @user)
-      @user.total_owing.should == 40
+      @user.total_owing.should == 50
     end
   end
 

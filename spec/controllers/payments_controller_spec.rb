@@ -93,8 +93,8 @@ describe PaymentsController do
 
     describe "for a user with a registrant owing money" do
       before(:each) do
+        @reg_period = FactoryGirl.create(:registration_period)
         @reg = FactoryGirl.create(:competitor, :user => @user)
-        @reg_period = FactoryGirl.create(:registration_period, :competitor_cost => 200)
       end
       it "assigns a new payment_detail for the registrant" do
         get :new, {}
@@ -106,12 +106,12 @@ describe PaymentsController do
         @user.registrants.count.should == 1
         get :new, {}
         pd = assigns(:payment).payment_details.first
-        pd.amount.should == 200
+        pd.amount.should == 100
       end
       it "only assigns registrants that owe money" do
         @other_reg = FactoryGirl.create(:competitor, :user => @user)
         @payment = FactoryGirl.create(:payment, :completed => true)
-        @pd = FactoryGirl.create(:payment_detail, :registrant => @other_reg, :payment => @payment, :amount => 200)
+        @pd = FactoryGirl.create(:payment_detail, :registrant => @other_reg, :payment => @payment, :amount => 100)
         get :new, {}
         pd = assigns(:payment).payment_details.first
         pd.registrant.should == @reg

@@ -118,29 +118,41 @@ describe Registrant do
 
   describe "with a registration_period" do
     before(:each) do
-      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2022, 01, 01), :competitor_cost => 100, :noncompetitor_cost => 50)
-    end
-    it "can determine its owing cost" do
-      @reg.amount_owing.should == 100
+      @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
+      @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
+      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2022, 01, 01), :competitor_expense_item => @comp_exp, :noncompetitor_expense_item => @noncomp_exp)
     end
     it "a non-competior should owe different cost" do
       @noncomp = FactoryGirl.create(:noncompetitor)
       @noncomp.amount_owing.should == 50
     end
 
+    it "creates an associated expense_item for a competitor" do
+      @comp = FactoryGirl.create(:competitor)
+      @comp.expense_items.count.should == 1
+      @comp.expense_items.should == [@comp_exp]
+    end
+
+    it "creates an associated expense_item for a noncompetitor" do
+      @comp = FactoryGirl.create(:noncompetitor)
+      @comp.expense_items.count.should == 1
+      @comp.expense_items.should == [@noncomp_exp]
+    end
+
     describe "with a completed payment" do
       before(:each) do
+        @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment, :completed => true)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => 100)
+        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100)
       end
       it "should have associated payment_details" do
-        @reg.payment_details.should == [@payment_detail]
+        @comp.payment_details.should == [@payment_detail]
       end
       it "should have an amount_paid" do
-        @reg.amount_paid.should == 100
+        @comp.amount_paid.should == 100
       end
       it "should owe 0" do
-        @reg.amount_owing.should == 0
+        @comp.amount_owing.should == 0
       end
     end
   end

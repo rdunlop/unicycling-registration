@@ -31,6 +31,8 @@ class Registrant < ActiveRecord::Base
 
   has_many :payment_details
 
+  before_create :build_associated_registration_expense_item
+
 
   def name
     self.first_name + " " + self.last_name
@@ -44,21 +46,21 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def registration_cost
+  # When the model is created, associate a registration cost item
+  def build_associated_registration_expense_item
     rp = RegistrationPeriod.relevant_period(Date.today)
-    if rp.nil?
-      0
-    else
+    unless rp.nil?
       if self.competitor
-        return rp.competitor_cost
+        registration_expense_item = rp.competitor_expense_item
       else
-        return rp.noncompetitor_cost
+        registration_expense_item = rp.noncompetitor_expense_item
       end
+      self.registrant_expense_items.build({:expense_item_id => registration_expense_item.id})
     end
   end
 
   def amount_owing
-    return self.registration_cost - self.amount_paid
+    return self.expenses_total - self.amount_paid
   end
 
   def amount_paid

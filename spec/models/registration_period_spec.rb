@@ -19,20 +19,20 @@ describe RegistrationPeriod do
     @rp.valid?.should == false
   end
 
-  it "must have a competitor cost" do
-    @rp.competitor_cost = nil
+  it "must have a competitor_expense_item" do
+    @rp.competitor_expense_item = nil
     @rp.valid?.should == false
   end
 
-  it "must have a noncompetitor cost" do
-    @rp.noncompetitor_cost = nil
+  it "must have a noncompetitor_expense_item" do
+    @rp.noncompetitor_expense_item = nil
     @rp.valid?.should == false
   end
 
   describe "with existing periods" do
     before(:each) do
-      @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 01), :end_date => Date.new(2012,02,02), :competitor_cost => 100, :noncompetitor_cost => 50)
-      @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 02, 03), :end_date => Date.new(2012,04,04), :competitor_cost => 200, :noncompetitor_cost => 75)
+      @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 01), :end_date => Date.new(2012,02,02))
+      @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 02, 03), :end_date => Date.new(2012,04,04))
     end
 
     it "can retrieve period" do

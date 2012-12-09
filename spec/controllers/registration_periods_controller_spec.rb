@@ -22,6 +22,8 @@ describe RegistrationPeriodsController do
   before(:each) do
     user = FactoryGirl.create(:admin_user)
     sign_in user
+    @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
+    @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -31,8 +33,8 @@ describe RegistrationPeriodsController do
     {
       start_date: Date.new(2013, 01, 20),
       end_date: Date.new(2013, 02, 20),
-      competitor_cost: 100,
-      noncompetitor_cost: 50
+      competitor_expense_item_id: @comp_exp.id,
+      noncompetitor_expense_item_id: @noncomp_exp.id
     }
   end
 

@@ -270,3 +270,9 @@ Best Times:
 21 ppl chose 10k
 9 ppl chose marathon
 
+
+
+
+QUESTONS:
+- Should the 'auto-create an associated expense_item' occur in the controller, or in the model?
+

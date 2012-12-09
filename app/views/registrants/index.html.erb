@@ -16,13 +16,13 @@
               <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
             </td>
             <td>
-              <span class="fee"><%= registrant.registration_cost %></span>
+              <span class="fee"><%= registrant.expenses_total %></span>
             </td>
             <td>
               <% if registrant.amount_owing > 0 %>
-                <span class="unpaid">unpaid</span>
+                <span class="unpaid"><span class="fee"><%= registrant.amount_owing %></span> Unpaid</span>
               <% else %>
-                <span class="paid">paid</span>
+                <span class="paid">Paid</span>
               <% end %>
             </td>
           </tr>
