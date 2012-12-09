@@ -1,0 +1,9 @@
+<div>
+  Add new Item:<br />
+  <%= form_for RegistrantExpenseItem.new, :url => single_registrant_expenses_url, :remote => true do |ff| %>
+    <%#= ff.error_messages %>
+    <%= ff.label :expense_item %>
+    <%= ff.select :expense_item_id, ExpenseItem.all.map{|em| [em.name, em.id]} %>
+    <%= ff.submit %>
+  <% end %>
+</div>

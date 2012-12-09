@@ -24,8 +24,10 @@ class Registrant < ActiveRecord::Base
   has_many :events, :through => :event_choices
   has_many :categories, :through => :events
 
+  attr_accessible :registrant_expense_items_attributes
   has_many :registrant_expense_items
   has_many :expense_items, :through => :registrant_expense_items
+  accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
 
   has_many :payment_details
 

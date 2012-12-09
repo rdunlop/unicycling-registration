@@ -13,6 +13,10 @@
     </div>
   <% end %>
 
+
+  <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
+  <%= render :partial => "expenses", :locals => {:current_expenses => @registrant.registrant_expense_items} %>
+
   <div class="data_block">
     <%= render :partial => "contact_info", :locals => { :f => f } %>
   </div>
@@ -24,3 +28,4 @@
     <% end %>
   </div>
 <% end %>
+<%= render :partial => "new_expenses" %>

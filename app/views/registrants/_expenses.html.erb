@@ -1,0 +1,10 @@
+<div class="expenses">
+  <fieldset>
+    <legend>Expenses</legend>
+    <div id="expense_lines">
+      <% current_expenses.each do |ce| %>
+        <%= render :partial => "/registrant_expenses/registrant_expense_item", :locals => { :registrant_expense_item => ce} %>
+      <% end %>
+    </div>
+  </fieldset>
+</div>

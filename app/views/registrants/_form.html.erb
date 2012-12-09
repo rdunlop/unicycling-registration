@@ -35,8 +35,6 @@
       </span>
     </fieldset>
 
-    <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
-
     <% unless @categories.nil? %>
       <%= render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f } %>
     <% end %>

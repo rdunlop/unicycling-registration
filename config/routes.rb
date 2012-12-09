@@ -24,9 +24,15 @@ Workspace::Application.routes.draw do
       get :contact_info
       put :update_contact_info
     end
+    resources :registrant_expenses, :only => [:new, :destroy]
   end
 
-
+  # for AJAX use:
+  resources :registrant_expenses, :only => [] do
+    collection do
+      post 'single'
+    end
+  end
 
   resources :event_configurations do
     collection do
