@@ -68,18 +68,29 @@ describe Registrant do
     @reg.registrant_choices.should == [@ec]
   end
 
-  it "has expense_items" do
-    @item = FactoryGirl.create(:expense_item)
-    @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
-    @reg.registrant_expense_items.should == [@rei]
-    @reg.expense_items.should == [@item]
-  end
 
   it "has a name field" do
     @reg.name.should == @reg.first_name + " " + @reg.last_name
   end
   it "has an owing cost of 0 by default" do
     @reg.amount_owing.should == 0
+  end
+  it "always displays the expenses_total" do
+    @reg.expenses_total.should == 0
+  end
+
+  describe "with an expense_item" do
+    before(:each) do
+      @item = FactoryGirl.create(:expense_item)
+      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
+    end
+    it "has expense_items" do
+      @reg.registrant_expense_items.should == [@rei]
+      @reg.expense_items.should == [@item]
+    end
+    it "describes the expense_total as the sum" do
+      @reg.expenses_total.should == @item.cost
+    end
   end
 
   describe "with a registrant_choice" do

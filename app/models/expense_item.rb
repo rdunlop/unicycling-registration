@@ -5,4 +5,9 @@ class ExpenseItem < ActiveRecord::Base
   validates :description, :presence => true
   validates :position, :presence => true
   validates :cost, :presence => true
+
+
+  def to_s
+    name
+  end
 end

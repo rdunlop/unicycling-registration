@@ -39,6 +39,30 @@
       <%= @registrant.email %>
     </div>
   </fieldset>
+  <fieldset class="data_block">
+    <legend>Expenses</legend>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @registrant.expense_items.each do |item| %>
+          <tr>
+            <td><%= item %></td>
+            <td><%= item.cost %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <th>Subtotal</th>
+          <th><%= @registrant.expenses_total %></th>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
 </div>
 
 <div>

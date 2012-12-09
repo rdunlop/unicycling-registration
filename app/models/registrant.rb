@@ -36,6 +36,14 @@ class Registrant < ActiveRecord::Base
     self.first_name + " " + self.last_name
   end
 
+  def expenses_total
+    if expense_items.count > 0
+      expense_items.map {|ei| ei.cost} .reduce(:+)
+    else
+      0
+    end
+  end
+
   def registration_cost
     rp = RegistrationPeriod.relevant_period(Date.today)
     if rp.nil?

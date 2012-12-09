@@ -25,4 +25,7 @@ describe ExpenseItem do
     @item.cost = nil
     @item.valid?.should == false
   end
+  it "should have a decent description" do
+    @item.to_s.should == @item.name
+  end
 end
