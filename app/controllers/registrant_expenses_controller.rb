@@ -3,7 +3,7 @@ class RegistrantExpensesController < ApplicationController
   load_and_authorize_resource :except => [:single]
   skip_authorization_check :only => [:single]
 
-  respond_to :js
+  respond_to :html, :js
 
   # AJAX call to render the new expenses line item(s)
   def single
