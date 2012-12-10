@@ -25,4 +25,21 @@ describe RegistrantExpenseItem do
     @rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @item)
     @rei.expense_item.should == @item
   end
+  it "is initial not paid_for" do
+    @rei.paid_for?.should == false
+  end
+  describe "when a payment has been made" do
+    before(:each) do
+      @item = FactoryGirl.create(:expense_item)
+      @rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @item)
+      @reg = @rei.registrant
+      @pd = FactoryGirl.create(:payment_detail, :registrant => @reg, :expense_item => @item, :amount => @item.cost)
+      @payment = @pd.payment
+      @payment.completed = true
+      @payment.save
+    end
+    it "is paid_for" do
+      @rei.paid_for?.should == true
+    end
+  end
 end

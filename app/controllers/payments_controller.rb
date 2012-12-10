@@ -30,9 +30,15 @@ class PaymentsController < ApplicationController
     @payment = Payment.new
     current_user.registrants.each do |reg|
       if reg.amount_owing > 0
-        pd = @payment.payment_details.build()
-        pd.registrant = reg
-        pd.amount = reg.amount_owing
+        reg.registrant_expense_items.each do |rei|
+          unless rei.paid_for?
+            ei = rei.expense_item
+            pd = @payment.payment_details.build()
+            pd.registrant = reg
+            pd.amount = ei.cost
+            pd.expense_item = ei
+          end
+        end
       end
     end
 

@@ -23,4 +23,8 @@ describe PaymentDetail do
     @pd.amount = nil
     @pd.valid?.should == false
   end
+  it "must have an item" do
+    @pd.expense_item = nil
+    @pd.valid?.should == false
+  end
 end

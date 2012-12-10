@@ -5,5 +5,6 @@ FactoryGirl.define do
     payment # FactoryGirl
     registrant # FactoryGirl
     amount "9.99"
+    expense_item # FactoryGirl
   end
 end

@@ -108,14 +108,29 @@ describe PaymentsController do
         pd = assigns(:payment).payment_details.first
         pd.amount.should == 100
       end
+      it "associates the payment_detail with the expense_item" do
+        get :new, {}
+        pd = assigns(:payment).payment_details.first
+        pd.expense_item.should == @reg_period.competitor_expense_item
+      end
       it "only assigns registrants that owe money" do
         @other_reg = FactoryGirl.create(:competitor, :user => @user)
         @payment = FactoryGirl.create(:payment, :completed => true)
-        @pd = FactoryGirl.create(:payment_detail, :registrant => @other_reg, :payment => @payment, :amount => 100)
+        @pd = FactoryGirl.create(:payment_detail, :registrant => @other_reg, :payment => @payment, :amount => 100, :expense_item => @reg_period.competitor_expense_item)
         get :new, {}
         pd = assigns(:payment).payment_details.first
         pd.registrant.should == @reg
         assigns(:payment).payment_details.first.should == assigns(:payment).payment_details.last
+      end
+      it "handles registrants who have paid, but owe more" do
+        @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg)
+        @payment = FactoryGirl.create(:payment, :completed => true)
+        @pd = FactoryGirl.create(:payment_detail, :registrant => @reg, :payment => @payment, :amount => 100, :expense_item => @reg_period.competitor_expense_item)
+        get :new, {}
+        pd = assigns(:payment).payment_details.first
+        pd.registrant.should == @reg
+        assigns(:payment).payment_details.first.should == assigns(:payment).payment_details.last
+        pd.expense_item.should == @rei.expense_item
       end
     end
   end
@@ -152,10 +167,12 @@ describe PaymentsController do
       end
       describe "with nested attributes for payment_details" do
         it "creates the payment_detail" do
+          @ei = FactoryGirl.create(:expense_item)
           post :create, {:payment => {
             :payment_details_attributes => [
               {
                 :registrant_id => 1,
+                :expense_item_id => @ei.id,
                 :amount => 100
              }]
           }}

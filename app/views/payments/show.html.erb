@@ -25,7 +25,7 @@
 
 Details:
 <% @payment.payment_details.each do |pd| %>
-  <%= pd.registrant %> - <%= pd.amount %><br />
+  <%= pd.registrant %> - <%= pd.expense_item %> - <%= pd.amount %><br />
 <% end %>
 <br />
 

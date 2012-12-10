@@ -34,6 +34,7 @@ describe Payment do
     pd = pay.payment_details.build()
     pd.registrant = FactoryGirl.create(:registrant)
     pd.amount = 100
+    pd.expense_item = FactoryGirl.create(:expense_item)
     PaymentDetail.all.count.should == 0
     pay.save
     PaymentDetail.all.count.should == 1
