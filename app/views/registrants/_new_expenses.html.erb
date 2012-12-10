@@ -1,9 +1,9 @@
-<div>
-  Add new Item:<br />
+<fieldset class="data_block">
+  <legend>Add T-Shirts</legend>
   <%= form_for RegistrantExpenseItem.new, :url => single_registrant_expenses_url, :remote => true do |ff| %>
     <%#= ff.error_messages %>
-    <%= ff.label :expense_item %>
+    <%= ff.label :expense_item, 'Item' %>
     <%= ff.select :expense_item_id, ExpenseItem.all.map{|em| [em.name, em.id]} %>
-    <%= ff.submit %>
+    <%= ff.submit 'Add Item' %>
   <% end %>
-</div>
+</fieldset>

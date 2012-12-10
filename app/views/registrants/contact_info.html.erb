@@ -1,5 +1,6 @@
 <h1>Contact Info</h1>
 
+<%= render :partial => "new_expenses" %>
 <%= form_for(@registrant, :url => update_contact_info_registrant_path(@registrant)) do |f| %>
   <% if @registrant.errors.any? %>
     <div id="error_explanation">
@@ -14,8 +15,10 @@
   <% end %>
 
 
-  <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
-  <%= render :partial => "expenses", :locals => {:current_expenses => @registrant.registrant_expense_items} %>
+  <div>
+    <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
+    <%= render :partial => "expenses", :locals => {:current_expenses => @registrant.registrant_expense_items} %>
+  </div>
 
   <div class="data_block">
     <%= render :partial => "contact_info", :locals => { :f => f } %>
@@ -28,4 +31,3 @@
     <% end %>
   </div>
 <% end %>
-<%= render :partial => "new_expenses" %>
