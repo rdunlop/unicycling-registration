@@ -1,25 +1,31 @@
 <h1>Listing categories</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Position</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div style="float:left">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Position</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @categories.each do |category| %>
-  <tr>
-    <td><%= category.name %></td>
-    <td><%= category.position %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td><%= category.position %></td>
+        <td><%= link_to 'Edit', edit_category_path(category) %></td>
+        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
 
-<br />
+  <br />
 
-<h3>New Category</h3>
-<%= render 'form' %>
+  <h3>New Category</h3>
+  <%= render 'form' %>
+</div>
+
+<div style="float: right">
+  <%= render :partial => "/attending/preview" %>
+</div>
