@@ -50,20 +50,6 @@ describe CategoriesController do
       category = Category.create! valid_attributes
       get :index, {}
       assigns(:categories).should eq([category])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested category as @category" do
-      category = Category.create! valid_attributes
-      get :show, {:id => category.to_param}
-      assigns(:category).should eq(category)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new category as @category" do
-      get :new, {}
       assigns(:category).should be_a_new(Category)
     end
   end
@@ -92,23 +78,25 @@ describe CategoriesController do
 
       it "redirects to the created category" do
         post :create, {:category => valid_attributes}
-        response.should redirect_to(Category.last)
+        response.should redirect_to(categories_path)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved category as @category" do
         # Trigger the behavior that occurs when invalid params are submitted
+        category = Category.create! valid_attributes
         Category.any_instance.stub(:save).and_return(false)
         post :create, {:category => {}}
         assigns(:category).should be_a_new(Category)
+        assigns(:categories).should == [category]
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
         post :create, {:category => {}}
-        response.should render_template("new")
+        response.should render_template("index")
       end
     end
   end
@@ -134,7 +122,7 @@ describe CategoriesController do
       it "redirects to the category" do
         category = Category.create! valid_attributes
         put :update, {:id => category.to_param, :category => valid_attributes}
-        response.should redirect_to(category)
+        response.should redirect_to(categories_path)
       end
     end
 

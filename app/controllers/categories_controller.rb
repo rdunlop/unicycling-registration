@@ -2,36 +2,20 @@ class CategoriesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
+
+  def load_categories
+    @categories = Category.all
+  end
+
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    load_categories
+    @category = Category.new
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @categories }
-    end
-  end
-
-  # GET /categories/1
-  # GET /categories/1.json
-  def show
-    @category = Category.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @category }
-    end
-  end
-
-  # GET /categories/new
-  # GET /categories/new.json
-  def new
-    @category = Category.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @category }
     end
   end
 
@@ -47,10 +31,11 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
-        format.json { render json: @category, status: :created, location: @category }
+        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
+        format.json { render json: @category, status: :created, location: categories_path }
       else
-        format.html { render action: "new" }
+        load_categories
+        format.html { render action: "index" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
@@ -63,7 +48,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.update_attributes(params[:category])
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+        format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

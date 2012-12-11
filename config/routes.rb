@@ -14,7 +14,7 @@ Workspace::Application.routes.draw do
 
   resources :events
 
-  resources :categories
+  resources :categories, :except => [:new, :show]
 
   resources :registrants do
     collection do
