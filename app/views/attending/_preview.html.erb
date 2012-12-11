@@ -1,4 +1,5 @@
 <h2>Preview</h2>
+<% @categories = Category.all %>
 <% @registrant = Registrant.new %>
 <%= form_for setup_registrant_choices(@registrant) do |f| %>
   <% unless @categories.nil? %>

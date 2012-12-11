@@ -1,29 +1,35 @@
 <h1>Listing events</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Description</th>
-    <th>Position</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div style="float:left">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Position</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @events.each do |event| %>
-  <tr>
-    <td><%= event.name %></td>
-    <td><%= event.category %></td>
-    <td><%= event.description %></td>
-    <td><%= event.position %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.category %></td>
+        <td><%= event.description %></td>
+        <td><%= event.position %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
 
-<br />
+  <br />
 
-<%= link_to 'New Event', new_event_path %>
+  <%= link_to 'New Event', new_event_path %>
+</div>
+
+<div style="float: right">
+  <%= render :partial => "/attending/preview" %>
+</div>
