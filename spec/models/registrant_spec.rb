@@ -160,7 +160,7 @@ describe Registrant do
   describe "with a boolean choice event" do
     before(:each) do
       @event = FactoryGirl.create(:event)
-      @ec = FactoryGirl.create(:event_choice, :event => @event)
+      @ec = @event.event_choices.first
       rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec, :value => "1")
     end
     it "can determine whether it has the event" do

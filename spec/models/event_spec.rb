@@ -35,10 +35,16 @@ describe Event do
     @ev.event_choices = [@ec1, @ec2, @ec3]
   end
   it "destroys associated event_choices upon destroy" do
-    @ec1 = FactoryGirl.create(:event_choice, :event => @ev, :position => 1)
-
     EventChoice.all.count.should == 1
     @ev.destroy
     EventChoice.all.count.should == 0
+  end
+
+  it "creates an associated event_choice automatically" do
+    @ev.event_choices.count.should == 1
+    @choice = @ev.event_choices.first
+    @choice.cell_type.should == 'boolean'
+    @choice.position.should == 1
+    @choice.export_name.should == @ev.name + "_yn"
   end
 end

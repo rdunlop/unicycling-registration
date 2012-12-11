@@ -50,7 +50,7 @@ describe "registrants/new" do
     end
     describe "for a boolean choice" do
       before(:each) do
-        @ec1 = FactoryGirl.create(:event_choice, :event => @ev1)
+        @ec1 = @ev1.event_choices.first
         rc = @registrant.registrant_choices.build
         rc.event_choice_id = @ec1.id
       end
@@ -69,7 +69,7 @@ describe "registrants/new" do
       end
       describe "With existing selections" do
         before(:each) do
-          @rc = FactoryGirl.create(:registrant_choice, :value => "1")
+          @rc = FactoryGirl.create(:registrant_choice, :value => "1", :event_choice => @ec1)
           @registrant = @rc.registrant
           @attending = @rc
           @categories = [@rc.event_choice.event.category]
@@ -121,10 +121,10 @@ describe "registrants/new" do
           render
 
           assert_select "form", :action => registrants_path, :method => "post" do
-            assert_select "input#registrant_registrant_choices_attributes_0_event_choice_id", :name => "registrant[registrant_choices_attributes][0][event_choice_id]" do
+            assert_select "input#registrant_registrant_choices_attributes_1_event_choice_id", :name => "registrant[registrant_choices_attributes][1][event_choice_id]" do
               assert_select "input[value='#{@ec1.id}']"
             end
-            assert_select "input#registrant_registrant_choices_attributes_0_value", :name => "registrant[registrant_choices_attributes][0][value]" do
+            assert_select "input#registrant_registrant_choices_attributes_1_value", :name => "registrant[registrant_choices_attributes][1][value]" do
               assert_select "input[type='text']", 1
             end
           end
@@ -139,7 +139,7 @@ describe "registrants/new" do
         it "displays the text if already present in user's choice" do
           render
 
-          assert_select "input#registrant_registrant_choices_attributes_0_value", :name => "registrant[registrant_choices_attributes][0][value]" do
+          assert_select "input#registrant_registrant_choices_attributes_1_value", :name => "registrant[registrant_choices_attributes][1][value]" do
             assert_select "input[type='text'][value='Hello']", 1
           end
         end
