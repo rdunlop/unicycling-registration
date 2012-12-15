@@ -8,7 +8,7 @@ describe "registrants/index" do
     end
     it "should not render the registrants list" do
       render
-      assert_select "fieldset", :count => 0
+      assert_select "legend", :text => "Registrations", :count => 0
     end
     it "should not render the amonut owing block" do
       render
@@ -31,6 +31,10 @@ describe "registrants/index" do
         )
       ])
       @total_owing = 40
+    end
+    it "should render the registrants list" do
+      render
+      assert_select "legend", :text => "Registrations", :count => 1
     end
 
     it "renders a list of registrants" do

@@ -1,6 +1,8 @@
 <h1>Registration</h1>
 
 <%= render :partial => "/registrants/links" %>
+<%= render :partial => "registration_periods/list", :locals => {:competitor => true } %>
+<%= render :partial => "registration_periods/list", :locals => {:competitor => false } %>
 
 <% unless @registrants.empty? %>
   <div>
