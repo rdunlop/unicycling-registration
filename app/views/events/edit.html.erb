@@ -14,21 +14,44 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :category_id %><br />
+    <%= f.label :category_id %>
     <%= f.select :category_id, Category.all.map{|c| [c.name, c.id]} %>
   </div>
   <div class="field">
-    <%= f.label :description %> (unused)<br />
+    <%= f.label :description %> (unused)
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :position %><br />
+    <%= f.label :position %>
     <%= f.number_field :position %>
   </div>
+  <h3>Event Choices</h3>
+  <%= f.fields_for :event_choices do |ec| %>
+    <div class="field">
+      <%= ec.label :export_name %>
+      <%= ec.text_field :export_name %>
+    </div>
+    <div class="field">
+      <%= ec.label :cell_type %>
+      <%= ec.select :cell_type, ['boolean', 'text', 'multiple'] %>
+    </div>
+    <div class="field">
+      <%= ec.label :multiple_values %>
+      <%= ec.text_field :multiple_values %>
+    </div>
+    <div class="field">
+      <%= ec.label :label %>
+      <%= ec.text_field :label %>
+    </div>
+    <div class="field">
+      <%= ec.label :position %>
+      <%= ec.number_field :position %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -145,6 +145,20 @@ describe EventsController do
         response.should render_template("edit")
       end
     end
+    describe "with nested event_choices" do
+      it "accepts nested attributes" do
+        event = FactoryGirl.create(:event)
+        expect {
+          put :update, {:id => event.to_param, :event => { 
+          :name => "My Name", 
+          :event_choices_attributes => [ 
+            { 
+          :export_name => "100m", 
+          :cell_type => "boolean" 
+        }] }}
+        }.to change(EventChoice, :count).by(1)
+      end
+    end
   end
 
   describe "DELETE destroy" do

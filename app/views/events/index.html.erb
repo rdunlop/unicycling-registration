@@ -10,7 +10,6 @@
       <th>Position</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
 
     <% @events.each do |event| %>
@@ -21,6 +20,14 @@
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% event.event_choices.each do |event_choice| %>
+        <tr>
+          <th>Event Choice</th>
+          <td><%= event_choice.label %></td>
+          <td><%= event_choice.cell_type %></td>
+          <td><%= event_choice.position %></td>
+        </tr>
+      <% end %>
     <% end %>
   </table>
 

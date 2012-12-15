@@ -1,7 +1,9 @@
 class Event < ActiveRecord::Base
-  attr_accessible :category_id, :description, :name, :position
+  attr_accessible :category_id, :description, :name, :position, :event_choices_attributes
 
   has_many :event_choices, :order => "event_choices.position", :dependent => :destroy
+  accepts_nested_attributes_for :event_choices
+
   belongs_to :category
 
   validates :name, :presence => true
