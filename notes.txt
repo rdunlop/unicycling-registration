@@ -276,3 +276,8 @@ Best Times:
 QUESTONS:
 - Should the 'auto-create an associated expense_item' occur in the controller, or in the model?
 
+
+For Nan:
+- CSS Reset?
+- Style of the a hrefs, so that they are visible.
+- Help with the banner
