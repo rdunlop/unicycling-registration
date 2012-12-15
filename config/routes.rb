@@ -12,10 +12,10 @@ Workspace::Application.routes.draw do
 
   resources :event_choices
 
-  resources :events, :except => [:index]
+  resources :events, :except => [:index, :new, :show, :create]
 
   resources :categories, :except => [:new, :show] do
-    resources :events, :only => [:index]
+    resources :events, :only => [:index, :create]
   end
 
   resources :registrants do

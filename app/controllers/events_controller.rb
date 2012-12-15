@@ -2,37 +2,20 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
+  def load_category
+    @category = Category.find(params[:category_id])
+  end
+
   # GET /events
   # GET /events.json
   def index
-    @category = Category.find(params[:category_id])
+    load_category
     @events = @category.events
+    @event = Event.new
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
-    end
-  end
-
-  # GET /events/1
-  # GET /events/1.json
-  def show
-    @event = Event.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @event }
-    end
-  end
-
-  # GET /events/new
-  # GET /events/new.json
-  def new
-    @event = Event.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @event }
     end
   end
 
@@ -44,14 +27,16 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
+    load_category
+    @event = @category.events.build(params[:event])
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render json: @event, status: :created, location: @event }
+        format.html { redirect_to category_events_path(@event.category), notice: 'Event was successfully created.' }
+        format.json { render json: @event, status: :created, location: category_events_path(@event.category) }
       else
-        format.html { render action: "new" }
+        load_category
+        format.html { render action: "index" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -64,7 +49,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to category_events_path(@event.category), notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -77,10 +62,11 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
+    @category = @event.category
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to events_url }
+      format.html { redirect_to category_events_path(@category) }
       format.json { head :no_content }
     end
   end

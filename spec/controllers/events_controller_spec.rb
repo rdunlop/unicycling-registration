@@ -31,8 +31,7 @@ describe EventsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-    name: "My Event",
-    category_id: @category.id
+    name: "My Event"
     }
   end
 
@@ -50,32 +49,18 @@ describe EventsController do
 
   describe "GET index" do
     it "assigns all events as @events" do
-      event = Event.create! valid_attributes
+      event = FactoryGirl.create(:event, :category => @category)
       event2 = FactoryGirl.create(:event)
       get :index, {:category_id => @category.id}
       assigns(:events).should eq([event])
-      assigns(:category).should eq(@category)
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested event as @event" do
-      event = Event.create! valid_attributes
-      get :show, {:id => event.to_param}
-      assigns(:event).should eq(event)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new event as @event" do
-      get :new, {}
       assigns(:event).should be_a_new(Event)
+      assigns(:category).should eq(@category)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested event as @event" do
-      event = Event.create! valid_attributes
+      event = FactoryGirl.create(:event, :category => @category)
       get :edit, {:id => event.to_param}
       assigns(:event).should eq(event)
     end
@@ -85,19 +70,19 @@ describe EventsController do
     describe "with valid params" do
       it "creates a new Event" do
         expect {
-          post :create, {:event => valid_attributes}
+          post :create, {:event => valid_attributes, :category_id => @category.id}
         }.to change(Event, :count).by(1)
       end
 
       it "assigns a newly created event as @event" do
-        post :create, {:event => valid_attributes}
+        post :create, {:event => valid_attributes, :category_id => @category.id}
         assigns(:event).should be_a(Event)
         assigns(:event).should be_persisted
       end
 
       it "redirects to the created event" do
-        post :create, {:event => valid_attributes}
-        response.should redirect_to(Event.last)
+        post :create, {:event => valid_attributes, :category_id => @category.id}
+        response.should redirect_to(category_events_path(@category))
       end
     end
 
@@ -105,15 +90,15 @@ describe EventsController do
       it "assigns a newly created but unsaved event as @event" do
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
-        post :create, {:event => {}}
+        post :create, {:event => {}, :category_id => @category.id}
         assigns(:event).should be_a_new(Event)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
-        post :create, {:event => {}}
-        response.should render_template("new")
+        post :create, {:event => {}, :category_id => @category.id}
+        response.should render_template("index")
       end
     end
   end
@@ -121,7 +106,7 @@ describe EventsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested event" do
-        event = Event.create! valid_attributes
+        event = FactoryGirl.create(:event)
         # Assuming there are no other events in the database, this
         # specifies that the Event created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -131,21 +116,21 @@ describe EventsController do
       end
 
       it "assigns the requested event as @event" do
-        event = Event.create! valid_attributes
+        event = FactoryGirl.create(:event)
         put :update, {:id => event.to_param, :event => valid_attributes}
         assigns(:event).should eq(event)
       end
 
       it "redirects to the event" do
-        event = Event.create! valid_attributes
+        event = FactoryGirl.create(:event, :category => @category)
         put :update, {:id => event.to_param, :event => valid_attributes}
-        response.should redirect_to(event)
+        response.should redirect_to(category_events_path(@category))
       end
     end
 
     describe "with invalid params" do
       it "assigns the event as @event" do
-        event = Event.create! valid_attributes
+        event = FactoryGirl.create(:event)
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
         put :update, {:id => event.to_param, :event => {}}
@@ -153,7 +138,7 @@ describe EventsController do
       end
 
       it "re-renders the 'edit' template" do
-        event = Event.create! valid_attributes
+        event = FactoryGirl.create(:event)
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
         put :update, {:id => event.to_param, :event => {}}
@@ -164,16 +149,16 @@ describe EventsController do
 
   describe "DELETE destroy" do
     it "destroys the requested event" do
-      event = Event.create! valid_attributes
+      event = FactoryGirl.create(:event)
       expect {
         delete :destroy, {:id => event.to_param}
       }.to change(Event, :count).by(-1)
     end
 
     it "redirects to the events list" do
-      event = Event.create! valid_attributes
+      event = FactoryGirl.create(:event, :category => @category)
       delete :destroy, {:id => event.to_param}
-      response.should redirect_to(events_url)
+      response.should redirect_to(category_events_path(@category))
     end
   end
 

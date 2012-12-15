@@ -46,10 +46,7 @@
         <%= link_to 'Configuration', event_configurations_path %><br />
       <% end %>
       <% if can? :manage, Category %>
-        <%= link_to 'Categories', categories_path %><br />
-      <% end %>
-      <% if can? :manage, Event %>
-        <%= link_to 'Events', events_path %><br />
+        <%= link_to 'Event Configuration', categories_path %><br />
       <% end %>
       <% if can? :manage, EventChoice %>
         <%= link_to 'Event Choices', event_choices_path %><br />

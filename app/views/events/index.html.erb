@@ -18,7 +18,6 @@
         <td><%= event.name %></td>
         <td><%= event.description %></td>
         <td><%= event.position %></td>
-        <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -26,8 +25,8 @@
   </table>
 
   <br />
-
-  <%= link_to 'New Event', new_event_path %>
+  <h3>New Event</h3>
+  <%= render :partial => "form" %>
 </div>
 
 <div style="float: right">
