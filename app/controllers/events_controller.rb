@@ -5,7 +5,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @category = Category.find(params[:category_id])
+    @events = @category.events
 
     respond_to do |format|
       format.html # index.html.erb

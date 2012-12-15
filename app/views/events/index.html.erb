@@ -1,10 +1,11 @@
 <h1>Listing events</h1>
 
+<h2>Category: <%= @category.to_s %></h2>
+
 <div style="float:left">
   <table>
     <tr>
       <th>Name</th>
-      <th>Category</th>
       <th>Description</th>
       <th>Position</th>
       <th></th>
@@ -15,7 +16,6 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
-        <td><%= event.category %></td>
         <td><%= event.description %></td>
         <td><%= event.position %></td>
         <td><%= link_to 'Show', event %></td>

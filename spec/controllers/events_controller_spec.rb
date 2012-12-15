@@ -22,6 +22,7 @@ describe EventsController do
    before(:each) do
      user = FactoryGirl.create(:admin_user)
      sign_in user
+     @category = FactoryGirl.create(:category)
    end
 
 
@@ -31,7 +32,7 @@ describe EventsController do
   def valid_attributes
     {
     name: "My Event",
-    category_id: 1
+    category_id: @category.id
     }
   end
 
@@ -42,7 +43,7 @@ describe EventsController do
     end   
 
     it "Cannot read events" do
-      get :index
+      get :index, {:category_id => @category.id}
       response.should redirect_to(root_path)
     end
   end
@@ -50,8 +51,10 @@ describe EventsController do
   describe "GET index" do
     it "assigns all events as @events" do
       event = Event.create! valid_attributes
-      get :index, {}
+      event2 = FactoryGirl.create(:event)
+      get :index, {:category_id => @category.id}
       assigns(:events).should eq([event])
+      assigns(:category).should eq(@category)
     end
   end
 
