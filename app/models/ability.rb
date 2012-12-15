@@ -18,7 +18,7 @@ class Ability
         can :manage, RegistrationPeriod
         can :manage, Payment
       else
-        can [:read, :update, :contact_info, :update_contact_info], Registrant do |reg|
+        can [:read, :update, :items, :update_items], Registrant do |reg|
           reg.user == user
         end
         can :create, Registrant #XXX necessary because we set the user in the controller?

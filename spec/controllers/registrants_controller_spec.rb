@@ -112,19 +112,19 @@ describe RegistrantsController do
     end
   end
 
-  describe "GET contact_info" do
+  describe "GET items" do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
-      get :contact_info, {:id => registrant.to_param}
+      get :items, {:id => registrant.to_param}
       assigns(:registrant).should eq(registrant)
       response.should be_success
     end
   end
 
-  describe "PUT update_contact_info" do
+  describe "PUT update_items" do
     it "redirects to the registrant show page" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
-      put :update_contact_info, {:id => registrant.to_param}
+      put :update_items, {:id => registrant.to_param}
       response.should redirect_to(registrant)
     end
   end
@@ -165,7 +165,7 @@ describe RegistrantsController do
 
       it "redirects to the created registrant" do
         post :create, {:registrant => valid_attributes}
-        response.should redirect_to(contact_info_registrant_path(Registrant.last))
+        response.should redirect_to(items_registrant_path(Registrant.last))
       end
     end
 
@@ -235,15 +235,15 @@ describe RegistrantsController do
         assigns(:registrant).should eq(registrant)
       end
 
-      it "redirects competitors to the contact_info" do
+      it "redirects competitors to the items" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
-        response.should redirect_to(contact_info_registrant_path(Registrant.last))
+        response.should redirect_to(items_registrant_path(Registrant.last))
       end
-      it "redirects noncompetitors to the contact_info" do
+      it "redirects noncompetitors to the items" do
         registrant = FactoryGirl.create(:noncompetitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes.merge({:competitor => false})}
-        response.should redirect_to(contact_info_registrant_path(Registrant.last))
+        response.should redirect_to(items_registrant_path(Registrant.last))
       end
     end
 

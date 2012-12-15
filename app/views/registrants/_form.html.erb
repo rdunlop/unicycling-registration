@@ -38,13 +38,20 @@
     <% unless @categories.nil? %>
       <%= render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f } %>
     <% end %>
+    <div>
+      <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
+    </div>
+
+    <div class="data_block">
+      <%= render :partial => "contact_info", :locals => { :f => f } %>
+    </div>
 
   </div>
   <div class="actions">
     <% if @registrant.competitor %>
-      <%= f.submit 'Next Page', :class => "competitor registration_button" %>
+      <%= f.submit 'Next Page (T-Shirts...)', :class => "competitor registration_button" %>
     <% else %>
-      <%= f.submit 'Save Registration', :class => "noncompetitor registration_button" %>
+      <%= f.submit 'Next Page (T-Shirts...)', :class => "noncompetitor registration_button" %>
     <% end %>
   </div>
 <% end %>

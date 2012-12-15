@@ -53,11 +53,11 @@ class RegistrantsController < ApplicationController
     end
   end
 
-  def contact_info
+  def items
     @registrant = Registrant.find(params[:id])
   end
 
-  def update_contact_info
+  def update_items
     @registrant = Registrant.find(params[:id])
 
     respond_to do |format|
@@ -84,7 +84,7 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       if @registrant.save
-        format.html { redirect_to contact_info_registrant_path(@registrant), notice: 'Registrant was successfully created.' }
+        format.html { redirect_to items_registrant_path(@registrant), notice: 'Registrant was successfully created.' }
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
         load_categories
@@ -101,7 +101,7 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       if @registrant.update_attributes(params[:registrant])
-        format.html { redirect_to contact_info_registrant_path(@registrant), notice: 'Registrant was successfully updated.' }
+        format.html { redirect_to items_registrant_path(@registrant), notice: 'Registrant was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

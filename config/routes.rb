@@ -23,8 +23,8 @@ Workspace::Application.routes.draw do
       get :new_noncompetitor
     end
     member do
-      get :contact_info
-      put :update_contact_info
+      get :items
+      put :update_items
     end
     resources :registrant_expenses, :only => [:new, :destroy]
   end

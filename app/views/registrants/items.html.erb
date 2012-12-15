@@ -1,7 +1,9 @@
-<h1>Contact Info</h1>
+<h1>Items</h1>
+
+<h2><%= @registrant %></h2>
 
 <%= render :partial => "new_expenses" %>
-<%= form_for(@registrant, :url => update_contact_info_registrant_path(@registrant)) do |f| %>
+<%= form_for(@registrant, :url => update_items_registrant_path(@registrant)) do |f| %>
   <% if @registrant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@registrant.errors.count, "error") %> prohibited this registrant from being saved:</h2>
@@ -16,18 +18,14 @@
 
 
   <div>
-    <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
     <%= render :partial => "expenses", :locals => {:current_expenses => @registrant.registrant_expense_items} %>
   </div>
 
-  <div class="data_block">
-    <%= render :partial => "contact_info", :locals => { :f => f } %>
-  </div>
   <div class="actions">
     <% if @registrant.competitor %>
-      <%= f.submit 'Save Registration', :class => "competitor registration_button" %>
+      <%= f.submit 'Save + Continue', :class => "competitor registration_button" %>
     <% else %>
-      <%= f.submit 'Save Registration', :class => "noncompetitor registration_button" %>
+      <%= f.submit 'Save + Continue', :class => "noncompetitor registration_button" %>
     <% end %>
   </div>
 <% end %>
