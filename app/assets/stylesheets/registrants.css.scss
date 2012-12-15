@@ -154,7 +154,7 @@ $noncompetitor_hover: #3487C9;
 
 }
 .registrant_edit_button {
-  @include button(30px);
+  @include button(auto);
 }
 
 .payment_link {

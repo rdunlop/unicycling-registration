@@ -13,10 +13,11 @@
               <%= link_to registrant.name, registrant, :class =>  (registrant.competitor ? "competitor_link" : "noncompetitor_link") %>
             </td>
             <td>
-              <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+              <span class="fee"><%= registrant.expenses_total %></span>
             </td>
             <td>
-              <span class="fee"><%= registrant.expenses_total %></span>
+              <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+              <%= link_to 'See Summary', registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
             </td>
             <td>
               <% if registrant.amount_owing > 0 %>
