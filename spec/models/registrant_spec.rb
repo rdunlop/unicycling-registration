@@ -97,6 +97,23 @@ describe Registrant do
     it "lists the item as an owing_expense_item" do
       @reg.owing_expense_items.should == [@item]
     end
+    describe "with a second expense_item" do
+      before(:each) do
+        @rei2 = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
+      end
+      it "should list both items" do
+        @reg.owing_expense_items.should == [@item, @item]
+      end
+      describe "having paid for one of the items" do
+        before(:each) do
+          @payment = FactoryGirl.create(:payment, :completed => true)
+          @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @item.cost, :expense_item => @item)
+        end
+        it "lists one remaining item as owing" do
+          @reg.owing_expense_items.should == [@item]
+        end
+      end
+    end
   end
 
   describe "with a registrant_choice" do

@@ -72,7 +72,11 @@ class Registrant < ActiveRecord::Base
     paid_items = self.paid_expense_items
     unpaid_items = []
     items.each do |item|
-      unless paid_items.include?(item)
+      if paid_items.include?(item)
+        # remove one entry from the paid items, so that we don't think we 
+        # have paid for multiple of this item
+        paid_items.slice!(paid_items.index(item))
+      else
         unpaid_items << item
       end
     end
