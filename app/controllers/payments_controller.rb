@@ -29,16 +29,12 @@ class PaymentsController < ApplicationController
   def new
     @payment = Payment.new
     current_user.registrants.each do |reg|
-      if reg.amount_owing > 0
-        reg.registrant_expense_items.each do |rei|
-          unless rei.paid_for?
-            ei = rei.expense_item
-            pd = @payment.payment_details.build()
-            pd.registrant = reg
-            pd.amount = ei.cost
-            pd.expense_item = ei
-          end
-        end
+      items = reg.owing_expense_items
+      items.each do |item|
+        pd = @payment.payment_details.build()
+        pd.registrant = reg
+        pd.amount = item.cost
+        pd.expense_item = item
       end
     end
 

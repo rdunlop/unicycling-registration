@@ -91,6 +91,9 @@ describe Registrant do
     it "describes the expense_total as the sum" do
       @reg.expenses_total.should == @item.cost
     end
+    it "lists the item as an owing_expense_item" do
+      @reg.owing_expense_items.should == [@item]
+    end
   end
 
   describe "with a registrant_choice" do
@@ -122,28 +125,39 @@ describe Registrant do
       @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
       @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2022, 01, 01), :competitor_expense_item => @comp_exp, :noncompetitor_expense_item => @noncomp_exp)
     end
-    it "a non-competior should owe different cost" do
-      @noncomp = FactoryGirl.create(:noncompetitor)
-      @noncomp.amount_owing.should == 50
+
+    describe "as a non-Competitor" do
+      before(:each) do
+        @noncomp = FactoryGirl.create(:noncompetitor)
+      end
+      it "should owe different cost" do
+        @noncomp.amount_owing.should == 50
+      end
+      it "retrieves the non-comp registration_item" do
+        @noncomp.registration_item.should == @noncomp_exp
+      end
+      it "lists the item as an owing_expense_item" do
+        @noncomp.owing_expense_items.should == [@noncomp_exp]
+      end
     end
 
-    it "creates an associated expense_item for a competitor" do
-      @comp = FactoryGirl.create(:competitor)
-      @comp.expense_items.count.should == 1
-      @comp.expense_items.should == [@comp_exp]
-    end
-
-    it "creates an associated expense_item for a noncompetitor" do
-      @comp = FactoryGirl.create(:noncompetitor)
-      @comp.expense_items.count.should == 1
-      @comp.expense_items.should == [@noncomp_exp]
+    describe "as a Competitor" do
+      before(:each) do
+        @comp = FactoryGirl.create(:competitor)
+      end
+      it "retrieves the comp registration_item" do
+        @comp.registration_item.should == @comp_exp
+      end
+      it "lists the item as an owing_expense_item" do
+        @comp.owing_expense_items.should == [@comp_exp]
+      end
     end
 
     describe "with a completed payment" do
       before(:each) do
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment, :completed => true)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100)
+        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100, :expense_item => @comp_exp)
       end
       it "should have associated payment_details" do
         @comp.payment_details.should == [@payment_detail]
@@ -153,6 +167,12 @@ describe Registrant do
       end
       it "should owe 0" do
         @comp.amount_owing.should == 0
+      end
+      it "lists the paid_expense_items" do
+        @comp.paid_expense_items.should == [@payment_detail.expense_item]
+      end
+      it "lists no items as an owing_expense_item" do
+        @comp.owing_expense_items.should == []
       end
     end
   end

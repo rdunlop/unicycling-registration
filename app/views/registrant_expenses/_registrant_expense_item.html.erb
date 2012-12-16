@@ -1,10 +1,16 @@
 <% index = registrant_expense_item.new_record? ? "replace_with_js": registrant_expense_item.id %>
 <%= fields_for "registrant[registrant_expense_items_attributes][]", registrant_expense_item do |rfei| %>
-  <div>
-    <%= rfei.object.expense_item.name %>
-    <%= rfei.object.expense_item.cost %>
-    <%= rfei.hidden_field :expense_item_id, :index => index %>
-    <%= rfei.hidden_field :id, :index => index %>
-    Delete: <%= rfei.check_box :_destroy, :index => index %>
-  </div>
+  <tr>
+    <td>
+      <%= rfei.object.expense_item.name %>
+    </td>
+    <td>
+      <%= rfei.object.expense_item.cost %>
+      <%= rfei.hidden_field :expense_item_id, :index => index %>
+      <%= rfei.hidden_field :id, :index => index %>
+    </td>
+    <td>
+      Delete: <%= rfei.check_box :_destroy, :index => index %>
+    </td>
+  </tr>
 <% end %>

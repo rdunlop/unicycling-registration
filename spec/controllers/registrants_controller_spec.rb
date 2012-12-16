@@ -36,7 +36,6 @@ describe RegistrantsController do
       city: "Chicago",
       country: "USA",
       user_id: @user.id,
-      competitor: true,
       birthday: Date.new(1982, 01, 19)
     }
   end
@@ -131,9 +130,12 @@ describe RegistrantsController do
 
   describe "POST create" do
     describe "with valid params" do
+      before(:each) do
+        @comp_attributes = valid_attributes.merge({:competitor => true})
+      end
       it "creates a new Registrant" do
         expect {
-          post :create, {:registrant => valid_attributes}
+          post :create, {:registrant => @comp_attributes}
         }.to change(Registrant, :count).by(1)
       end
 
@@ -153,18 +155,18 @@ describe RegistrantsController do
       end
 
       it "sets the registrant as a competitor" do
-        post :create, {:registrant => valid_attributes}
+        post :create, {:registrant => @comp_attributes}
         Registrant.last.competitor.should == true
       end
 
       it "assigns a newly created registrant as @registrant" do
-        post :create, {:registrant => valid_attributes}
+        post :create, {:registrant => @comp_attributes}
         assigns(:registrant).should be_a(Registrant)
         assigns(:registrant).should be_persisted
       end
 
       it "redirects to the created registrant" do
-        post :create, {:registrant => valid_attributes}
+        post :create, {:registrant => @comp_attributes}
         response.should redirect_to(items_registrant_path(Registrant.last))
       end
     end
@@ -196,6 +198,7 @@ describe RegistrantsController do
         @reg = FactoryGirl.create(:registrant)
         @ec1 = FactoryGirl.create(:event_choice)
         @attributes = valid_attributes.merge({
+          :competitor => true,
           :registrant_choices_attributes => [
             { :value => "1",
               :event_choice_id => @ec1.id
@@ -242,7 +245,7 @@ describe RegistrantsController do
       end
       it "redirects noncompetitors to the items" do
         registrant = FactoryGirl.create(:noncompetitor, :user => @user)
-        put :update, {:id => registrant.to_param, :registrant => valid_attributes.merge({:competitor => false})}
+        put :update, {:id => registrant.to_param, :registrant => valid_attributes}
         response.should redirect_to(items_registrant_path(Registrant.last))
       end
     end

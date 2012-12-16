@@ -18,7 +18,7 @@
 
 
   <div>
-    <%= render :partial => "expenses", :locals => {:current_expenses => @registrant.registrant_expense_items} %>
+    <%= render :partial => "expenses", :locals => {:registrant => @registrant} %>
   </div>
 
   <div class="actions">

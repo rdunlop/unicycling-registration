@@ -31,23 +31,56 @@ class Registrant < ActiveRecord::Base
 
   has_many :payment_details
 
-  before_create :build_associated_registration_expense_item
-
-
   def name
     self.first_name + " " + self.last_name
   end
 
-  def expenses_total
-    if expense_items.count > 0
-      expense_items.map {|ei| ei.cost} .reduce(:+)
-    else
-      0
-    end
+  def to_s
+    name
   end
 
-  # When the model is created, associate a registration cost item
-  def build_associated_registration_expense_item
+  ###### Expenses ##########
+
+  # returns a list of expense_items that this registrant hasn't paid for
+  # INCLUDING the registration cost
+  def owing_expense_items
+    items = self.expense_items # XXX combine with expenses_total?
+
+    reg_item = registration_item
+    unless reg_item.nil?
+      items << registration_item
+    end
+
+    paid_items = self.paid_expense_items
+    unpaid_items = []
+    items.each do |item|
+      unless paid_items.include?(item)
+        unpaid_items << item
+      end
+    end
+    unpaid_items
+  end
+
+  # returns a list of paid-for expense_items
+  def paid_expense_items
+    details = self.payment_details.map{|pd| pd.expense_item }
+  end
+
+  def expenses_total
+    if expense_items.count > 0
+      total = expense_items.map {|ei| ei.cost} .reduce(:+)
+    else
+      total = 0
+    end
+
+    reg = self.registration_item
+    unless reg.nil?
+      total += reg.cost
+    end
+    total
+  end
+
+  def registration_item
     rp = RegistrationPeriod.relevant_period(Date.today)
     unless rp.nil?
       if self.competitor
@@ -55,8 +88,8 @@ class Registrant < ActiveRecord::Base
       else
         registration_expense_item = rp.noncompetitor_expense_item
       end
-      self.registrant_expense_items.build({:expense_item_id => registration_expense_item.id})
     end
+    registration_expense_item
   end
 
   def amount_owing
@@ -73,10 +106,9 @@ class Registrant < ActiveRecord::Base
     total
   end
 
-  def to_s
-    name
-  end
 
+
+  ############# Events Selection ########
   def has_event_in_category?(category)
     category.events.each do |ev|
       if self.has_event?(ev)

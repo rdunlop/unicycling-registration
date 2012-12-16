@@ -1,9 +1,6 @@
 <fieldset class="data_block">
   <legend>Add T-Shirts</legend>
-  <%= form_for RegistrantExpenseItem.new, :url => single_registrant_expenses_url, :remote => true do |ff| %>
-    <%#= ff.error_messages %>
-    <%= ff.label :expense_item, 'Item' %>
-    <%= ff.select :expense_item_id, ExpenseItem.all.map{|em| [em.name, em.id]} %>
-    <%= ff.submit 'Add Item' %>
+  <% ExpenseItem.all.each do |ei| %>
+    <%= render :partial => "new_expense", :locals => { :item => ei } %>
   <% end %>
 </fieldset>

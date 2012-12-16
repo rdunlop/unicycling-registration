@@ -1,10 +1,21 @@
+<%# locals: registrant %>
 <div class="expenses data_block">
   <fieldset>
-    <legend>Expenses</legend>
-    <div id="expense_lines">
-      <% current_expenses.each do |ce| %>
+    <legend><%= registrant.to_s %>'s Expenses</legend>
+    <table id="expense_lines">
+      <% registrant.registrant_expense_items.each do |ce| %>
         <%= render :partial => "/registrant_expenses/registrant_expense_item", :locals => { :registrant_expense_item => ce} %>
       <% end %>
-    </div>
+    </table>
+    <% reg_item = registrant.registration_item %>
+    <% unless reg_item.nil? %>
+      <table>
+        <tr>
+          <th>Registration Fee</tH>
+          <td><%= reg_item.to_s %></td>
+          <td><%= reg_item.cost.to_s %></td>
+        </tr>
+      </table>
+    <% end %>
   </fieldset>
 </div>
