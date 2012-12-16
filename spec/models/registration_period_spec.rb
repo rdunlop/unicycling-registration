@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RegistrationPeriod do
   before(:each) do
-    @rp = FactoryGirl.create(:registration_period)
+    @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 11,03), :end_date => Date.new(2012,11,07))
   end
 
   it "is valid from FactoryGirl" do
@@ -41,6 +41,14 @@ describe RegistrationPeriod do
 
     it "gets nil for missing section" do
       RegistrationPeriod.relevant_period(Date.new(2010,01,01)).should == nil
+    end
+    describe "with more registration periods" do
+      before(:each) do
+        @rp0 = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 02, 03), :end_date => Date.new(2010,04,04))
+      end
+      it "returns the periods in ascending date order" do
+        RegistrationPeriod.all.should == [@rp0, @rp1, @rp2, @rp]
+      end
     end
 
     describe "when searching for a paid-for registration period" do

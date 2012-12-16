@@ -1,6 +1,8 @@
 class RegistrationPeriod < ActiveRecord::Base
   attr_accessible :competitor_expense_item_id, :end_date, :name, :noncompetitor_expense_item_id, :start_date
 
+  default_scope order('start_date ASC')
+
   validates :start_date, :presence => true
   validates :end_date, :presence => true
   validates :competitor_expense_item, :presence => true
