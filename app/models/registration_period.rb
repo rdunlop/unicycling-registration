@@ -10,12 +10,35 @@ class RegistrationPeriod < ActiveRecord::Base
   belongs_to :noncompetitor_expense_item, :class_name => "ExpenseItem"
 
 
+  def current_period?(date = Date.today)
+    return (self.start_date < date and date < self.end_date)
+  end
+
+  def past_period?(date = Date.today)
+    return (self.end_date < date)
+  end
+
   def self.relevant_period(date)
     RegistrationPeriod.all.each do |rp|
-      if rp.start_date < date and date < rp.end_date
+      if rp.current_period?(date)
         return rp
       end
     end
     return nil
+  end
+
+  def self.paid_for_period(competitor, paid_items)
+    RegistrationPeriod.all.each do |rp|
+      if competitor
+        if paid_items.include?(rp.competitor_expense_item)
+          return rp
+        end
+      else
+        if paid_items.include?(rp.noncompetitor_expense_item)
+          return rp
+        end
+      end
+    end
+    nil
   end
 end

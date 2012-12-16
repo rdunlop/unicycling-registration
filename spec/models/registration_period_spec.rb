@@ -42,5 +42,28 @@ describe RegistrationPeriod do
     it "gets nil for missing section" do
       RegistrationPeriod.relevant_period(Date.new(2010,01,01)).should == nil
     end
+
+    describe "when searching for a paid-for registration period" do
+      it "can retrieve the matching registration_period" do
+        RegistrationPeriod.paid_for_period(true, []).should == nil
+      end
+      it "can retrieve a matching competitor period" do
+        RegistrationPeriod.paid_for_period(true, [@rp1.competitor_expense_item]).should == @rp1
+        RegistrationPeriod.paid_for_period(true, [@rp2.competitor_expense_item]).should == @rp2
+      end
+      it "can retrieve a matching noncompetitor period" do
+        RegistrationPeriod.paid_for_period(false, [@rp1.noncompetitor_expense_item]).should == @rp1
+        RegistrationPeriod.paid_for_period(false, [@rp2.noncompetitor_expense_item]).should == @rp2
+      end
+    end
+
+    it "can identify the current period" do
+      @rp1.current_period?(Date.new(2012,01,14)).should == true
+      @rp2.current_period?(Date.new(2012,01,14)).should == false
+    end
+    it "can identify past periods" do
+      @rp1.past_period?(Date.new(2012,02,20)).should == true
+      @rp2.past_period?(Date.new(2012,02,20)).should == false
+    end
   end
 end

@@ -104,7 +104,13 @@ class Registrant < ActiveRecord::Base
 
 
   def registration_item
-    rp = RegistrationPeriod.relevant_period(Date.today)
+    paid_reg_period = RegistrationPeriod.paid_for_period(self.competitor, self.paid_expense_items)
+    unless paid_reg_period.nil?
+      rp = paid_reg_period
+    else
+      rp = RegistrationPeriod.relevant_period(Date.today)
+    end
+
     unless rp.nil?
       if self.competitor
         registration_expense_item = rp.competitor_expense_item
