@@ -9,7 +9,7 @@
     </thead>
 
     <tbody>
-      <% @registrant.expense_items.each do |item| %>
+      <% @registrant.all_expense_items.each do |item| %>
         <tr>
           <td><%= item %></td>
           <td><%= item.cost %></td>

@@ -175,6 +175,28 @@ describe Registrant do
         @comp.owing_expense_items.should == []
       end
     end
+    describe "with an incomplete payment" do
+      before(:each) do
+        @comp = FactoryGirl.create(:competitor)
+        @payment = FactoryGirl.create(:payment, :completed => false)
+        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100, :expense_item => @comp_exp)
+      end
+      it "should have associated payment_details" do
+        @comp.payment_details.should == [@payment_detail]
+      end
+      it "should not have an amount_paid" do
+        @comp.amount_paid.should == 0
+      end
+      it "should owe 100" do
+        @comp.amount_owing.should == 100
+      end
+      it "lists the paid_expense_items" do
+        @comp.paid_expense_items.should == []
+      end
+      it "lists no items as an owing_expense_item" do
+        @comp.owing_expense_items.should == [@comp_exp]
+      end
+    end
   end
 
   describe "with a boolean choice event" do

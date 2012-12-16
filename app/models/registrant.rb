@@ -41,15 +41,33 @@ class Registrant < ActiveRecord::Base
 
   ###### Expenses ##########
 
-  # returns a list of expense_items that this registrant hasn't paid for
-  # INCLUDING the registration cost
-  def owing_expense_items
+  # return a list of _ALL_ of the expense_items for this registrant
+  #  PAID FOR or NOT
+  def all_expense_items
     items = self.expense_items # XXX combine with expenses_total?
 
     reg_item = registration_item
     unless reg_item.nil?
       items << registration_item
     end
+    items
+  end
+
+  def expenses_total
+    items = self.all_expense_items
+
+    if items.size > 0
+      total = items.map {|item| item.cost} .reduce(:+)
+    else
+      total = 0
+    end
+  end
+
+
+  # returns a list of expense_items that this registrant hasn't paid for
+  # INCLUDING the registration cost
+  def owing_expense_items
+    items = self.all_expense_items
 
     paid_items = self.paid_expense_items
     unpaid_items = []
@@ -61,24 +79,25 @@ class Registrant < ActiveRecord::Base
     unpaid_items
   end
 
-  # returns a list of paid-for expense_items
-  def paid_expense_items
-    details = self.payment_details.map{|pd| pd.expense_item }
+  def amount_owing
+    return self.expenses_total - self.amount_paid
   end
 
-  def expenses_total
-    if expense_items.count > 0
-      total = expense_items.map {|ei| ei.cost} .reduce(:+)
+
+  # returns a list of paid-for expense_items
+  def paid_expense_items
+    details = self.payment_details.select {|pd| pd.payment.completed == true } .map{|pd| pd.expense_item }
+  end
+
+  def amount_paid
+    items = self.paid_expense_items
+    if items.size > 0
+      total = items.map {|item| item.cost} .reduce(:+)
     else
       total = 0
     end
-
-    reg = self.registration_item
-    unless reg.nil?
-      total += reg.cost
-    end
-    total
   end
+
 
   def registration_item
     rp = RegistrationPeriod.relevant_period(Date.today)
@@ -91,21 +110,6 @@ class Registrant < ActiveRecord::Base
     end
     registration_expense_item
   end
-
-  def amount_owing
-    return self.expenses_total - self.amount_paid
-  end
-
-  def amount_paid
-    total = 0
-    self.payment_details.each do |pd|
-      if pd.payment.completed
-        total += pd.amount
-      end
-    end
-    total
-  end
-
 
 
   ############# Events Selection ########
