@@ -38,6 +38,9 @@ describe Registrant do
     @reg.gender = nil
     @reg.valid?.should == false
   end
+  it "has no paid_expense_items" do
+    @reg.paid_expense_items.should == []
+  end
 
   #it "requires country" do
     #@reg.gender = nil

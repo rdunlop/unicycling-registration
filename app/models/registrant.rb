@@ -44,7 +44,7 @@ class Registrant < ActiveRecord::Base
   # return a list of _ALL_ of the expense_items for this registrant
   #  PAID FOR or NOT
   def all_expense_items
-    items = self.expense_items # XXX combine with expenses_total?
+    items = self.registrant_expense_items.map{|rei| rei.expense_item}
 
     reg_item = registration_item
     unless reg_item.nil?
