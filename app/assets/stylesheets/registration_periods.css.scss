@@ -1,3 +1,11 @@
 // Place all the styles related to the RegistrationPeriods controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.current_reg_period {
+  background-color: lightgreen;
+}
+
+.past_reg_period {
+  text-decoration: line-through;
+}

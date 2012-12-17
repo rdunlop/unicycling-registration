@@ -3,7 +3,7 @@
     <table>
         <% RegistrationPeriod.all.each do |period| %>
           <% if period.past_period? %>
-            <tr class="current_reg_period">
+            <tr class="past_reg_period">
           <% elsif period.current_period? %>
             <tr class="current_reg_period">
           <% else %>
