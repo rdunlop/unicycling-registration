@@ -76,7 +76,9 @@ class ExpenseItemsController < ApplicationController
   # DELETE /expense_items/1.json
   def destroy
     @expense_item = ExpenseItem.find(params[:id])
-    @expense_item.destroy
+    unless @expense_item.destroy
+      flash[:alert] = @expense_item.errors.full_messages
+    end
 
     respond_to do |format|
       format.html { redirect_to expense_items_url }

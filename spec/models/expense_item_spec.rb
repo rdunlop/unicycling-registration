@@ -28,4 +28,16 @@ describe ExpenseItem do
   it "should have a decent description" do
     @item.to_s.should == @item.name
   end
+
+  describe "when an associated payment has been created" do
+    before(:each) do
+      @payment = FactoryGirl.create(:payment_detail, :expense_item => @item)
+    end
+
+    it "should not be able to destroy this item" do
+      ExpenseItem.all.count.should == 1
+      @item.destroy
+      ExpenseItem.all.count.should == 1
+    end
+  end
 end
