@@ -150,9 +150,6 @@ More personalized "Welcome Email" which has details about what they're confirmin
 Possibly use "stripes" for the creditcard vendor.
 Better Calendar for Birthday.
 
-strikethrough the past registration Periods
-Highlight the current registration period
-
 Clear additinoal Fields when an event is un-checked.
 
 Competitor Information is Almost never Changed.
@@ -271,10 +268,6 @@ Best Times:
 9 ppl chose marathon
 
 
-
-
-QUESTONS:
-- Should the 'auto-create an associated expense_item' occur in the controller, or in the model?
 
 
 For Nan:

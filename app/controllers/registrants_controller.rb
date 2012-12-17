@@ -5,7 +5,7 @@ class RegistrantsController < ApplicationController
   before_filter :load_categories, :only => [:new, :edit]
 
   def load_categories
-    @categories = Category.all.sort {|a,b| a.position <=> b.position}
+    @categories = Category.all
   end
 
   # GET /registrants
@@ -87,7 +87,11 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to items_registrant_path(@registrant), notice: 'Registrant was successfully created.' }
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
-        load_categories
+        if @registrant.competitor
+          load_categories
+        else
+          @categories = []
+        end
         format.html { render action: "new" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end

@@ -189,8 +189,14 @@ describe RegistrantsController do
         # Trigger the behavior that occurs when invalid params are submitted
         category1 = FactoryGirl.create(:category, :position => 1)
         Registrant.any_instance.stub(:save).and_return(false)
-        post :create, {:registrant => {}}
+        post :create, {:registrant => {:competitor => true}}
         assigns(:categories).should == [category1]
+      end
+      it "should not load categories for a noncompetitor" do
+        category1 = FactoryGirl.create(:category, :position => 1)
+        Registrant.any_instance.stub(:save).and_return(false)
+        post :create, {:registrant => {:competitor => false}}
+        assigns(:categories).should == []
       end
     end
     describe "When creating nested registrant choices" do
