@@ -18,6 +18,15 @@ describe Category do
     cat = FactoryGirl.create(:category)
     cat.to_s.should == cat.name
   end
+  describe "with multiple categories" do
+    before(:each) do
+      @category2 = FactoryGirl.create(:category, :position => 2)
+      @category1 = FactoryGirl.create(:category, :position => 1)
+    end
+    it "lists them in position order" do
+      Category.all.should == [@category1, @category2]
+    end
+  end
 
   it "events should be sorted by position" do
     cat = FactoryGirl.create(:category)
