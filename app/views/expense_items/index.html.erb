@@ -1,31 +1,36 @@
 <h1>Listing expense_items</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Cost</th>
-    <th>Export name</th>
-    <th>Position</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div style="float: left">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Cost</th>
+      <th>Export name</th>
+      <th>Position</th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @expense_items.each do |expense_item| %>
-  <tr>
-    <td><%= expense_item.name %></td>
-    <td><%= expense_item.description %></td>
-    <td><%= expense_item.cost %></td>
-    <td><%= expense_item.export_name %></td>
-    <td><%= expense_item.position %></td>
-    <td><%= link_to 'Show', expense_item %></td>
-    <td><%= link_to 'Edit', edit_expense_item_path(expense_item) %></td>
-    <td><%= link_to 'Destroy', expense_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    <% @expense_items.each do |expense_item| %>
+      <tr>
+        <td><%= expense_item.name %></td>
+        <td><%= expense_item.description %></td>
+        <td><%= expense_item.cost %></td>
+        <td><%= expense_item.export_name %></td>
+        <td><%= expense_item.position %></td>
+        <td><%= link_to 'Edit', edit_expense_item_path(expense_item) %></td>
+        <td><%= link_to 'Destroy', expense_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div style="float: right">
+  <%= render :partial => "/registrants/new_expenses" %>
+</div>
 
-<br />
+<div style="clear: both">
+  <h1>New expense_item</h1>
 
-<%= link_to 'New Expense item', new_expense_item_path %>
+  <%= render 'form' %>
+</div>

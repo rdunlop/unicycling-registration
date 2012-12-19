@@ -1,6 +1,6 @@
 Workspace::Application.routes.draw do
 
-  resources :expense_items
+  resources :expense_items, :except => [:new, :show]
 
   resources :payments do
     member do

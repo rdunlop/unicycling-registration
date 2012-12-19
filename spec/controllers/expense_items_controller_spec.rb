@@ -41,20 +41,6 @@ describe ExpenseItemsController do
       expense_item = ExpenseItem.create! valid_attributes
       get :index, {}
       assigns(:expense_items).should eq([expense_item])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested expense_item as @expense_item" do
-      expense_item = ExpenseItem.create! valid_attributes
-      get :show, {:id => expense_item.to_param}
-      assigns(:expense_item).should eq(expense_item)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new expense_item as @expense_item" do
-      get :new, {}
       assigns(:expense_item).should be_a_new(ExpenseItem)
     end
   end
@@ -83,7 +69,7 @@ describe ExpenseItemsController do
 
       it "redirects to the created expense_item" do
         post :create, {:expense_item => valid_attributes}
-        response.should redirect_to(ExpenseItem.last)
+        response.should redirect_to(expense_items_path)
       end
     end
 
@@ -125,7 +111,7 @@ describe ExpenseItemsController do
       it "redirects to the expense_item" do
         expense_item = ExpenseItem.create! valid_attributes
         put :update, {:id => expense_item.to_param, :expense_item => valid_attributes}
-        response.should redirect_to(expense_item)
+        response.should redirect_to(expense_items_path)
       end
     end
 

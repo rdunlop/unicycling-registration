@@ -1,6 +1,6 @@
 <fieldset class="data_block">
   <legend>Add T-Shirts</legend>
   <% ExpenseItem.all.each do |ei| %>
-    <%= render :partial => "new_expense", :locals => { :item => ei } %>
+    <%= render :partial => "/registrants/new_expense", :locals => { :item => ei } %>
   <% end %>
 </fieldset>

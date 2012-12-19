@@ -6,6 +6,7 @@ class ExpenseItemsController < ApplicationController
   # GET /expense_items.json
   def index
     @expense_items = ExpenseItem.all
+    @expense_item = ExpenseItem.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,17 +25,6 @@ class ExpenseItemsController < ApplicationController
     end
   end
 
-  # GET /expense_items/new
-  # GET /expense_items/new.json
-  def new
-    @expense_item = ExpenseItem.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @expense_item }
-    end
-  end
-
   # GET /expense_items/1/edit
   def edit
     @expense_item = ExpenseItem.find(params[:id])
@@ -47,8 +37,8 @@ class ExpenseItemsController < ApplicationController
 
     respond_to do |format|
       if @expense_item.save
-        format.html { redirect_to @expense_item, notice: 'Expense item was successfully created.' }
-        format.json { render json: @expense_item, status: :created, location: @expense_item }
+        format.html { redirect_to expense_items_path, notice: 'Expense item was successfully created.' }
+        format.json { render json: @expense_item, status: :created, location: expense_items_path }
       else
         format.html { render action: "new" }
         format.json { render json: @expense_item.errors, status: :unprocessable_entity }
@@ -63,7 +53,7 @@ class ExpenseItemsController < ApplicationController
 
     respond_to do |format|
       if @expense_item.update_attributes(params[:expense_item])
-        format.html { redirect_to @expense_item, notice: 'Expense item was successfully updated.' }
+        format.html { redirect_to expense_items_path, notice: 'Expense item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
