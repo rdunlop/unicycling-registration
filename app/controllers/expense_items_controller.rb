@@ -40,7 +40,7 @@ class ExpenseItemsController < ApplicationController
         format.html { redirect_to expense_items_path, notice: 'Expense item was successfully created.' }
         format.json { render json: @expense_item, status: :created, location: expense_items_path }
       else
-        format.html { render action: "new" }
+        format.html { render action: "index" }
         format.json { render json: @expense_item.errors, status: :unprocessable_entity }
       end
     end
