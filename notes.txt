@@ -280,3 +280,17 @@ For Nan:
 - Add more destroy-restrict codes (see payment_detail<->expense_item)
 
 - should expense items be destroyed when an expenseGroup is destroyed?
+- ExpenseGroups should be listed in the 'position' order
+
+
+TO DO:
+- Add Administrative Options similar to what we had on the old registration site:
+ - Edit any registration
+ - Add Admin User
+ - Reset password for any user
+ - View Payments Report (what does this entail?)
+ - Multi-record delete
+ - Modification logs
+ - Enter a "Wire Payment" (also, mark a registration/etc as paid, for some reason)
+ - Delete a registration
+ - Delete a payment
