@@ -12,6 +12,9 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :expense_group_id %>
+    <%= f.select :expense_group_id, ExpenseGroup.all.map {|eg| [eg.group_name, eg.id] }  %>
+    <br />
     <%= f.label :name %>
     <%= f.text_field :name %>
     <br />

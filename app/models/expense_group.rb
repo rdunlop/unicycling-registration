@@ -3,4 +3,10 @@ class ExpenseGroup < ActiveRecord::Base
 
   validates :group_name, :presence => true
   validates :visible, :inclusion => { :in => [true, false] } # because it's a boolean
+
+  has_many :expense_items
+
+  def to_s
+    group_name
+  end
 end

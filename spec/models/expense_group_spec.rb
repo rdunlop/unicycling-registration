@@ -18,4 +18,7 @@ describe ExpenseGroup do
     @group.visible = true
     @group.valid?.should == true
   end
+  it "should have a nice to_s" do
+    @group.to_s.should == @group.group_name
+  end
 end

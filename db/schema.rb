@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220010348) do
+ActiveRecord::Schema.define(:version => 20121220012452) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -75,8 +75,9 @@ ActiveRecord::Schema.define(:version => 20121220010348) do
     t.decimal  "cost"
     t.string   "export_name"
     t.integer  "position"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "expense_group_id"
   end
 
   create_table "payment_details", :force => true do |t|

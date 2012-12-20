@@ -25,6 +25,10 @@ describe ExpenseItem do
     @item.cost = nil
     @item.valid?.should == false
   end
+  it "must have an expense group" do
+    @item.expense_group = nil
+    @item.valid?.should == false
+  end
   it "should have a decent description" do
     @item.to_s.should == @item.name
   end

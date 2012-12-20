@@ -4,6 +4,8 @@ describe ExpenseItemsController do
   before(:each) do
     @admin = FactoryGirl.create(:admin_user)
     sign_in @admin
+
+    @expense_group = FactoryGirl.create(:expense_group)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -14,6 +16,7 @@ describe ExpenseItemsController do
       :name => "Small T-Shirt",
       :description => "Small NAUCC T-Shirt",
       :cost => 15.00,
+      :expense_group_id => @expense_group.id,
       :position => 1
     }
   end

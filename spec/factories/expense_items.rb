@@ -7,5 +7,6 @@ FactoryGirl.define do
     cost "9.99"
     export_name "t_shirt_small"
     position 1
+    expense_group # FactoryGirl
   end
 end

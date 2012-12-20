@@ -3,6 +3,7 @@
 <div style="float: left">
   <table>
     <tr>
+      <th>Group Name</th>
       <th>Name</th>
       <th>Description</th>
       <th>Cost</th>
@@ -14,6 +15,7 @@
 
     <% @expense_items.each do |expense_item| %>
       <tr>
+        <td><%= expense_item.expense_group %></td>
         <td><%= expense_item.name %></td>
         <td><%= expense_item.description %></td>
         <td><%= expense_item.cost %></td>
