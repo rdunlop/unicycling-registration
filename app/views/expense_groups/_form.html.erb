@@ -1,0 +1,27 @@
+<%= form_for(@expense_group) do |f| %>
+  <% if @expense_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@expense_group.errors.count, "error") %> prohibited this expense_group from being saved:</h2>
+
+      <ul>
+      <% @expense_group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :group_name %>
+    <%= f.text_field :group_name %>
+    <br />
+    <%= f.label :visible %>
+    <%= f.check_box :visible %>
+    <br />
+    <%= f.label :position %>
+    <%= f.number_field :position %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

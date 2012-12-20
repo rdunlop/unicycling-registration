@@ -1,5 +1,7 @@
 Workspace::Application.routes.draw do
 
+  resources :expense_groups
+
   resources :expense_items, :except => [:new, :show]
 
   resources :payments do

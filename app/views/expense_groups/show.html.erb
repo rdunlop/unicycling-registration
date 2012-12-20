@@ -1,0 +1,18 @@
+<p>
+  <b>Group name:</b>
+  <%= @expense_group.group_name %>
+</p>
+
+<p>
+  <b>Visible:</b>
+  <%= @expense_group.visible %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @expense_group.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_expense_group_path(@expense_group) %> |
+<%= link_to 'Back', expense_groups_path %>

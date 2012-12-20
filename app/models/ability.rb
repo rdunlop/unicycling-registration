@@ -13,6 +13,7 @@ class Ability
         can :manage, Event
         can :manage, EventChoice
         can :manage, EventConfiguration
+        can :manage, ExpenseGroup
         can :manage, ExpenseItem
         can :manage, Registrant
         can :manage, RegistrationPeriod
