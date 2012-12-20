@@ -21,4 +21,20 @@ describe ExpenseGroup do
   it "should have a nice to_s" do
     @group.to_s.should == @group.group_name
   end
+
+  it "should only list the visible groups" do
+    @group2 = FactoryGirl.create(:expense_group, :visible => true)
+    ExpenseGroup.visible.all == [@group]
+  end
+
+  describe "with expense_items" do
+    before(:each) do
+      @item2 = FactoryGirl.create(:expense_item, :expense_group => @group, :position => 2)
+      @item1 = FactoryGirl.create(:expense_item, :expense_group => @group, :position => 1)
+    end
+    it "orders the items by position" do
+      @group.expense_items.should == [@item1, @item2]
+    end
+  end
+
 end

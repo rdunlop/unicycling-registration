@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :expense_group do
     group_name "MyString"
-    visible false
+    visible true
     position 1
   end
 end

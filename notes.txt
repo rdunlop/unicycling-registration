@@ -278,3 +278,5 @@ For Nan:
 - Registration Periods should have unique expense items (so that we can directly match a payment)
 - Registration Preidos should also have unique items between comp and non-comp
 - Add more destroy-restrict codes (see payment_detail<->expense_item)
+
+- should expense items be destroyed when an expenseGroup is destroyed?

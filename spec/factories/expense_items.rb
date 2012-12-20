@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :expense_item do
-    name "T-Shirt (S)"
+    sequence(:name) {|n| "T-Shirt Size ##{n}" }
     description "TShirt Small"
     cost "9.99"
     export_name "t_shirt_small"

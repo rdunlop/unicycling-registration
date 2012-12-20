@@ -4,7 +4,9 @@ class ExpenseGroup < ActiveRecord::Base
   validates :group_name, :presence => true
   validates :visible, :inclusion => { :in => [true, false] } # because it's a boolean
 
-  has_many :expense_items
+  has_many :expense_items,:order => "expense_items.position"
+
+  scope :visible, where(:visible => true)
 
   def to_s
     group_name
