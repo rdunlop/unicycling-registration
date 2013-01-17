@@ -33,7 +33,11 @@
                     <%= ec.hidden_field :event_choice_id %>
                     <% if ec.object.event_choice.cell_type == "boolean" %>
                       <%= ec.check_box :value %>
-                      <%= ec.label :value, choice.event %>
+                      <% if choice.label.blank? %>
+                        <%= ec.label :value, choice.event %>
+                      <% else %>
+                        <%= ec.label :value, choice.label %>
+                      <% end %>
                     <% elsif ec.object.event_choice.cell_type == "text" %>
                       <%= ec.label :value, choice.label %>
                       <%= ec.text_field :value, :placeholder => ec.object.event_choice.label  %>

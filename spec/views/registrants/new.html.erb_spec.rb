@@ -93,7 +93,14 @@ describe "registrants/new" do
             assert_select "input[type='checkbox']", 1 do
               assert_select "[checked='checked']", 1
             end
+            assert_select "label", :text => @ec1.event
           end
+        end
+        it "displays the checkbox label as the event_choice label, if defined" do
+          @ec1.label = "Other Label"
+          @ec1.save
+          render
+          assert_select "label", :text => @ec1.label
         end
         it "renders as not-checked-off if value is '0'" do
           @rc.value = "0"
