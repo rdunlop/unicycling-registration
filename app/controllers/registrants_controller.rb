@@ -2,10 +2,10 @@ class RegistrantsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_categories, :only => [:new, :edit]
-
   def load_categories
-    @categories = Category.all
+    if @registrant.competitor
+      @categories = Category.all
+    end
   end
 
   # GET /registrants
@@ -36,6 +36,7 @@ class RegistrantsController < ApplicationController
   def new
     @registrant = Registrant.new
     @registrant.competitor = true
+    load_categories
 
     respond_to do |format|
       format.html # new.html.erb
@@ -74,6 +75,7 @@ class RegistrantsController < ApplicationController
   # GET /registrants/1/edit
   def edit
     @registrant = Registrant.find(params[:id])
+    load_categories
   end
 
   # POST /registrants
@@ -87,11 +89,7 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to items_registrant_path(@registrant), notice: 'Registrant was successfully created.' }
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
-        if @registrant.competitor
-          load_categories
-        else
-          @categories = []
-        end
+        load_categories
         format.html { render action: "new" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end

@@ -100,6 +100,7 @@ describe RegistrantsController do
       get :new_noncompetitor, {}
       assigns(:registrant).should be_a_new(Registrant)
       assigns(:registrant).competitor.should == false
+      assigns(:categories).should == nil
     end
   end
 
@@ -108,6 +109,13 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       get :edit, {:id => registrant.to_param}
       assigns(:registrant).should eq(registrant)
+    end
+    it "should not load categories for a noncompetitor" do
+      category1 = FactoryGirl.create(:category, :position => 1)
+      registrant = FactoryGirl.create(:noncompetitor, :user => @user)
+      get :edit, {:id => registrant.to_param}
+      response.should be_success
+      assigns(:categories).should == nil
     end
   end
 
@@ -196,7 +204,7 @@ describe RegistrantsController do
         category1 = FactoryGirl.create(:category, :position => 1)
         Registrant.any_instance.stub(:save).and_return(false)
         post :create, {:registrant => {:competitor => false}}
-        assigns(:categories).should == []
+        assigns(:categories).should == nil
       end
     end
     describe "When creating nested registrant choices" do
