@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe EventChoicesController do
   before(:each) do
-    sign_in FactoryGirl.create(:admin_user)
+    sign_in FactoryGirl.create(:super_admin_user)
   end
 
   # This should return the minimal set of attributes required to create a valid

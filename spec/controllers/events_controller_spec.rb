@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe EventsController do
    before(:each) do
-     user = FactoryGirl.create(:admin_user)
+     user = FactoryGirl.create(:super_admin_user)
      sign_in user
      @category = FactoryGirl.create(:category)
    end

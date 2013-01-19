@@ -1,14 +1,10 @@
 class Ability
   include CanCan::Ability
 
-  def is_admin(user)
-    user.admin || user.super_admin
-  end
-
   def initialize(user)
     if user.nil?
     else
-      if is_admin(user)
+      if user.super_admin
         can :manage, Category
         can :manage, Event
         can :manage, EventChoice
@@ -18,6 +14,8 @@ class Ability
         can :manage, Registrant
         can :manage, RegistrationPeriod
         can :manage, Payment
+      elsif user.admin
+        can :manage, Registrant
       else
         can [:read, :update, :items, :update_items], Registrant do |reg|
           reg.user == user

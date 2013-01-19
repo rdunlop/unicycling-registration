@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe RegistrationPeriodsController do
   before(:each) do
-    user = FactoryGirl.create(:admin_user)
+    user = FactoryGirl.create(:super_admin_user)
     sign_in user
     @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
     @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)

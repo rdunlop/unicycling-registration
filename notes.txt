@@ -299,17 +299,17 @@ TO DO:
 
  My Current "MUST do before Live" list (in MY priority order):
  - Add ability to log the changes to records, for audit reasons
- - Integrate with e-mail accounts during registration, which requires that the user confirm their e-mail address before they can access the site (this will prevent 99% of spam).
+ DONE - Integrate with e-mail accounts during registration, which requires that the user confirm their e-mail address before they can access the site (this will prevent 99% of spam).
  - Integrate with Paypal (NEED Dave to have A PAYPAL ?merchant? ACCOUNT)
  - Add ability for Admin to edit ANY registration easily
  - Add "Payments" report, to list number of expense items paid (Registrations, T-Shirts, etc)
  - Add "Events" report, to list number of users signed up for each event. (MUni XC Beginner, etc)
  - Add ability to "Delete" a registration (possibly make this available to normal users).
  - Fix some styling of the page, to make it easier to follow the flow of the system.
- - Fix the display of the "Basketball" Team Name field to be labelled correctly (this is a systemic problem).
+ DONE- Fix the display of the "Basketball" Team Name field to be labelled correctly (this is a systemic problem).
  - Remove the "Emergency Contact" portion, if we are not using it.
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
- - Hide the advanced admin tools in the "Super Admin" menu.
+ DONE - Hide the advanced admin tools in the "Super Admin" menu.
  - Add something that helps describe What "Category" to sign up for when choosing "Individual Freestyle" (Categories are: "Age Group", "Jr. Expert", "Expert").
  - Update the Costs for all Expense Items
  - Create a "LIVE" site (we will still have a TEST site).

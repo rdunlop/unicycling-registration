@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ExpenseGroupsController do
   before(:each) do
-    @admin = FactoryGirl.create(:admin_user)
+    @admin = FactoryGirl.create(:super_admin_user)
     sign_in @admin
   end
 
