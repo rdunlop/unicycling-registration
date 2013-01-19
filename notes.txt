@@ -326,4 +326,5 @@ TO DO:
  - Validate the data better, which will prevent people from Choosing a Category without choosing the event itself.
  - Add notice to entice Non-Competitors to become Competitors
  - Add ability to mark a Registration as paid, to deal with "Dave said that I could go for free" scenario(s).
+ - Serve the logo from a better (cached) fashion
 
