@@ -12,6 +12,7 @@ class Registrant < ActiveRecord::Base
   validates :competitor, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
 
+  has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
   belongs_to :user
 

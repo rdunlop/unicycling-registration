@@ -5,6 +5,8 @@ class Payment < ActiveRecord::Base
 
   validates :user_id, :presence => true
 
+  has_paper_trail
+
   belongs_to :user
   has_many :payment_details, :inverse_of => :payment, :dependent => :destroy
   accepts_nested_attributes_for :payment_details

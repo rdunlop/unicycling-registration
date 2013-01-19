@@ -1,4 +1,8 @@
 Workspace::Application.configure do
+  config.after_initialize do
+      PaperTrail.enabled = false
+  end
+
   config.action_mailer.default_url_options = { :host => 'localhost:9292' }
   # Settings specified here will take precedence over those in config/application.rb
 

@@ -95,6 +95,9 @@ GEM
     multipart-post (1.1.5)
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
+    paper_trail (2.7.0)
+      activerecord (~> 3.0)
+      railties (~> 3.0)
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.4)
@@ -200,6 +203,7 @@ DEPENDENCIES
   factory_girl_rails
   foreman
   jquery-rails
+  paper_trail (~> 2)
   pg
   rails (= 3.2.10)
   rake

@@ -6,6 +6,8 @@ class PaymentDetail < ActiveRecord::Base
   validates :amount, :presence => true
   validates :expense_item, :presence => true
 
+  has_paper_trail
+
   belongs_to :registrant #XXX has_one?
   belongs_to :payment, :inverse_of => :payment_details
   belongs_to :expense_item
