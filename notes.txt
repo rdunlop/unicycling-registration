@@ -317,6 +317,7 @@ TO DO:
 
  My Current "Nice to have" list:
  - Create new Ability class for admin controllers
+ - Add ability for user to see their payments (#payment#index?)
  - Make all currencies "xx.xx" format.
  - Improve the "Summary" page to be prettier, and better at printing.
  - Choose a better colour scheme, and better logo

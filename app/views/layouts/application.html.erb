@@ -60,9 +60,6 @@
       <% if can? :manage, RegistrationPeriod %>
         <%= link_to 'Registration Periods', registration_periods_path %><br />
       <% end %>
-      <% if can? :manage, Payment %>
-        <%= link_to 'Payments', payments_path %><br />
-      <% end %>
       <!-- ADMIN VIEWS -->
       <% if can? :manage, Registrant %>
         <%= link_to 'Registrants', admin_registrants_path %><br />
