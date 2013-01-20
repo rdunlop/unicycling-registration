@@ -1,0 +1,10 @@
+<h1>Payments</h1>
+
+<table>
+<% @payments.each do |payment| %>
+  <tr>
+    <td><%= payment %></td>
+    <td><%= link_to payment, payment %></td>
+  <?tr>
+<% end %>
+</table>

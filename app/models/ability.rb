@@ -16,6 +16,7 @@ class Ability
         can :manage, Payment
       elsif user.admin
         can :manage, Registrant
+        can :manage, Payment
       else
         can [:read, :update, :items, :update_items], Registrant do |reg|
           reg.user == user

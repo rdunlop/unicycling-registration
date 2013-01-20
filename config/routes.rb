@@ -5,6 +5,7 @@ Workspace::Application.routes.draw do
   #
   namespace :admin do
     resources :registrants, :only => [:index]
+    resources :payments, :only => [:index]
   end
   resources :expense_groups
 
