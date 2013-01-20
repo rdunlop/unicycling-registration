@@ -316,6 +316,7 @@ TO DO:
 
 
  My Current "Nice to have" list:
+ - Create new Ability class for admin controllers
  - Make all currencies "xx.xx" format.
  - Improve the "Summary" page to be prettier, and better at printing.
  - Choose a better colour scheme, and better logo

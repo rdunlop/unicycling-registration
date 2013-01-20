@@ -1,5 +1,11 @@
 Workspace::Application.routes.draw do
 
+  # ADMIN
+  #
+  #
+  namespace :admin do
+    resources :registrants, :only => [:index]
+  end
   resources :expense_groups
 
   resources :expense_items, :except => [:new, :show]

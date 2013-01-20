@@ -1,0 +1,10 @@
+<h1>Registrants</h1>
+
+<table>
+<% @registrants.each do |registrant| %>
+  <tr>
+    <td><%= registrant %></td>
+    <td><%= link_to registrant.name, registrant %></td>
+  <?tr>
+<% end %>
+</table>
