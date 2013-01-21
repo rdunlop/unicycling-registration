@@ -27,7 +27,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event %></td>
+        <td><%= link_to event, admin_event_path(event) %></td>
         <td><%= event.num_competitors %></td>
       </tr>
     <% end %>

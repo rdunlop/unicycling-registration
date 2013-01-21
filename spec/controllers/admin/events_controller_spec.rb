@@ -34,4 +34,11 @@ describe Admin::EventsController do
     end
   end
 
+  describe "GET show" do
+    it "assigns the requested event as @event" do
+      event = FactoryGirl.create(:event)
+      get :show, {:id => event.to_param}
+      assigns(:event).should == event
+    end
+  end
 end

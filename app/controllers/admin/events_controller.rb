@@ -8,4 +8,8 @@ class Admin::EventsController < Admin::BaseController
     @num_non_competitors = Registrant.where({:competitor => false}).count
     @num_registrants = @num_competitors + @num_non_competitors
   end
+
+  def show
+    @event = Event.find(params[:id])
+  end
 end
