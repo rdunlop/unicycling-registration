@@ -1,0 +1,18 @@
+<h1>All Registrants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registrants.each do |registrant| %>
+      <tr>
+        <td><%= registrant %></td>
+        <td><%= registrant.country %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

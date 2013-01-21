@@ -20,6 +20,11 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  # GET /registrants/all
+  def all
+    @registrants = Registrant.all
+  end
+
   # GET /registrants/1
   # GET /registrants/1.json
   def show

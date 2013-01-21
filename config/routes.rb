@@ -30,6 +30,7 @@ Workspace::Application.routes.draw do
   resources :registrants do
     collection do
       get :new_noncompetitor
+      get :all
     end
     member do
       get :items

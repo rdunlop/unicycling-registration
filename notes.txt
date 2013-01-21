@@ -329,4 +329,5 @@ TO DO:
  - Add notice to entice Non-Competitors to become Competitors
  - Add ability to mark a Registration as paid, to deal with "Dave said that I could go for free" scenario(s).
  - Serve the logo from a better (cached) fashion
+ - All sortnig of the "all registrants" page according to the columns (use jquery?)
 

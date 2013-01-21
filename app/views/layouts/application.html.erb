@@ -24,6 +24,10 @@
       <% if current_user.nil? %>
         <%= link_to 'Sign in', new_user_session_path %><br />
       <% else %>
+        <%= link_to 'My Registrations', registrants_path %><br />
+        <%= link_to 'My Payments', payments_path %><br />
+        <br />
+        <%= link_to 'All Registrants', all_registrants_path %><br />
         <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %><br />
       <% end %>
       <%= link_to 'Help', welcome_help_path %><br />

@@ -36,6 +36,15 @@ describe RegistrantsController do
     end
   end
 
+  describe "get all" do
+    it "assigns all registrants as @registrants" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      other_reg = FactoryGirl.create(:registrant)
+      get :all, {}
+      assigns(:registrants).should eq([registrant, other_reg])
+    end
+  end
+
   describe "GET show" do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
