@@ -28,11 +28,11 @@ describe Event do
   end
 
   it "sorts event choices by position" do
-    @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :position => 3)
-    @ec1 = FactoryGirl.create(:event_choice, :event => @ev, :position => 1)
+    @ec4 = FactoryGirl.create(:event_choice, :event => @ev, :position => 4)
     @ec2 = FactoryGirl.create(:event_choice, :event => @ev, :position => 2)
+    @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :position => 3)
 
-    @ev.event_choices = [@ec1, @ec2, @ec3]
+    @ev.event_choices.should == [@ev.primary_choice, @ec2, @ec3, @ec4]
   end
   it "destroys associated event_choices upon destroy" do
     EventChoice.all.count.should == 1
@@ -46,5 +46,29 @@ describe Event do
     @choice.cell_type.should == 'boolean'
     @choice.position.should == 1
     @choice.export_name.should == @ev.name + "_yn"
+  end
+  it "has a primary_choice" do
+    @ev.primary_choice.should == @ev.event_choices.first
+  end
+
+  describe "when a user has chosen an event" do
+    before(:each) do
+      @reg_choice = FactoryGirl.create(:registrant_choice)
+      @ev = @reg_choice.event_choice.event
+      @ec = FactoryGirl.create(:registrant_choice, :registrant => @reg_choice.registrant, :event_choice => @ev.primary_choice, :value => "1")
+    end
+
+    it "will know that it is selected" do
+      @ev.num_competitors.should == 1
+    end
+    it "will not count entries which are not selected" do
+      @ec.value = "0"
+      @ec.save
+      @ev.num_competitors.should == 0
+    end
+    it "will not count if no one has selected the choice" do
+      event = FactoryGirl.create(:event)
+      event.num_competitors.should == 0
+    end
   end
 end

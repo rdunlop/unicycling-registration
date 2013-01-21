@@ -7,6 +7,7 @@ class EventChoice < ActiveRecord::Base
   validates :export_name, {:presence => true, :uniqueness => true}
   validates :cell_type, :inclusion => {:in => %w(boolean text multiple), :message => "%{value} must be either 'boolean' or 'text' or 'multiple' or '...'"}
   validate :position_1_must_be_boolean
+  validates :position, :uniqueness => {:scope => [:event_id]}
 
   def choicename
     "choice#{id}"

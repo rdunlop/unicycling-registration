@@ -1,0 +1,35 @@
+<h1>Events Report</h1>
+
+<table>
+  <caption>Overview</caption>
+  <thead>
+    <tr>
+      <th>Number of Registrations</th>
+      <th>Competitors</th>
+      <th>Non-Competitors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @num_registrants %></td>
+      <td><%= @num_competitors %></td>
+      <td><%= @num_non_competitors %></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<table>
+  <caption>Event-Competitor-Breakdown</caption>
+  <thead>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event %></td>
+        <td><%= event.num_competitors %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

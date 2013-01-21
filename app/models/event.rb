@@ -15,7 +15,16 @@ class Event < ActiveRecord::Base
     self.event_choices.build({:position => 1, :cell_type => 'boolean', :export_name => "#{self.name}_yn" })
   end
 
+  def primary_choice
+    event_choices.where({:position => 1}).first
+  end
+
   def to_s
     name
+  end
+
+  # determine the number of people who have signed up for this event
+  def num_competitors
+    primary_choice.registrant_choices.where({:value => "1"}).count
   end
 end

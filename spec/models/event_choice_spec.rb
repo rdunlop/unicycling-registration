@@ -74,13 +74,29 @@ describe EventChoice do
   end
 
   it "must be a boolean to be in position 1" do
-    @ec.cell_type = "boolean"
-    @ec.position = 1
-    @ec.valid?.should == true
-    @ec.cell_type = "multiple"
-    @ec.valid?.should == false
-    @ec.cell_type = "text"
-    @ec.valid?.should == false
+    ec = @event.primary_choice
+    ec.cell_type = "boolean"
+    ec.position = 1
+    ec.valid?.should == true
+    ec.cell_type = "multiple"
+    ec.valid?.should == false
+    ec.cell_type = "text"
+    ec.valid?.should == false
+  end
+
+  it "cannot have duplicate positions" do
+    @ev = FactoryGirl.create(:event)
+    @ec = @ev.event_choices.first
+    ec2 = FactoryGirl.build(:event_choice, :event => @ev)
+    ec2.position = 1
+    ec2.valid?.should == false
+  end
+  it "can have the same position but in different events" do
+    @ev = FactoryGirl.create(:event)
+    @ev2 = FactoryGirl.create(:event)
+    ec1 = FactoryGirl.create(:event_choice, :event => @ev, :position => 2)
+    ec2 = FactoryGirl.build(:event_choice, :event => @ev2, :position => 2)
+    ec2.valid?.should == true
   end
 
 end

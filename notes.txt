@@ -331,3 +331,5 @@ TO DO:
  - Serve the logo from a better (cached) fashion
  - All sortnig of the "all registrants" page according to the columns (use jquery?)
 
+
+- Prevent events from having no position-1-event-choice-boolean

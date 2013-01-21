@@ -7,6 +7,6 @@ FactoryGirl.define do
     cell_type "boolean"
     multiple_values nil
     label "Attending"
-    position 1
+    position 2
   end
 end
