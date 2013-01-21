@@ -6,16 +6,13 @@
       <% registrant.registrant_expense_items.each do |ce| %>
         <%= render :partial => "/registrant_expenses/registrant_expense_item", :locals => { :registrant_expense_item => ce} %>
       <% end %>
-    </table>
-    <% reg_item = registrant.registration_item %>
-    <% unless reg_item.nil? %>
-      <table>
+      <% reg_item = registrant.registration_item %>
+      <% unless reg_item.nil? %>
         <tr>
-          <th>Registration Fee</tH>
-          <td><%= reg_item.to_s %></td>
+          <td>Registration Fee</td>
           <td><%= reg_item.cost.to_s %></td>
         </tr>
-      </table>
-    <% end %>
+      <% end %>
+    </table>
   </fieldset>
 </div>
