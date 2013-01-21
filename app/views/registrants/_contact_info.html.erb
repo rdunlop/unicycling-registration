@@ -21,39 +21,42 @@
     <span>
       <%= f.label :email %>
       <%= f.text_field :email %>
+      <b>Important:</b> Provide your email address to receive updates to registration, schedule, and new events.
     </span>
   </fieldset>
   <fieldset class="data_block">
     <legend>Emergency Contact</legend>
+    <b>In case of emergency</b>
     <span>
-      <%= f.label :emergency_name, :class => "required" %>
+      <%= f.label :emergency_name, "Name", :class => "required" %>
       <%= f.text_field :emergency_name %>
     </span>
     <span>
-      <%= f.label :emergency_relationship, :class => "required" %>
+      <%= f.label :emergency_relationship, "Relationship", :class => "required" %>
       <%= f.text_field :emergency_relationship %>
     </span>
     <span>
-      <%= f.label :emergency_attending %>
+      <%= f.label :emergency_attending, "Attending?" %>
       <%= f.check_box :emergency_attending %>
     </span>
     <span>
-      <%= f.label :emergency_primary_phone, :class => "required" %>
+      <%= f.label :emergency_primary_phone, "Primary Phone", :class => "required" %>
       <%= f.text_field :emergency_primary_phone %>
     </span>
     <span>
-      <%= f.label :emergency_other_phone %>
+      <%= f.label :emergency_other_phone, "Other Phone" %>
       <%= f.text_field :emergency_other_phone %>
     </span>
   </fieldset>
   <fieldset class="data_block">
     <legend>Responsible Adult (for registrants Under the age of 18)</legend>
+    <span><b>The following adult, attending the convention, will be responsible for the registered minor</b></span>
     <span>
-      <%= f.label :responsible_adult_name %>
+      <%= f.label :responsible_adult_name, "Name" %>
       <%= f.text_field :responsible_adult_name %>
     </span>
     <span>
-      <%= f.label :responsible_adult_phone %>
+      <%= f.label :responsible_adult_phone, "Phone" %>
       <%= f.text_field :responsible_adult_phone %>
     </span>
   </fieldset>
