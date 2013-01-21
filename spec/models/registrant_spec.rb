@@ -42,15 +42,6 @@ describe Registrant do
     @reg.paid_expense_items.should == []
   end
 
-  #it "requires country" do
-    #@reg.gender = nil
-    #@reg.valid?.should == false
-  #end
-
-  #it "requires city" do
-    ##@reg.city = nil
-    #@reg.valid?.should == false
-  #end
   it "has either Male or Female gender" do
     @reg.gender = "Male"
     @reg.valid?.should == true
@@ -59,6 +50,25 @@ describe Registrant do
     @reg.valid?.should == true
 
     @reg.gender = "Other"
+    @reg.valid?.should == false
+  end
+
+  it "requires country" do
+    @reg.country = nil
+    @reg.valid?.should == false
+  end
+
+  it "requires emergency_contact name" do
+    @reg.emergency_name = nil
+    @reg.valid?.should == false
+  end
+
+  it "requires emergency_contact relationship" do
+    @reg.emergency_relationship = nil
+    @reg.valid?.should == false
+  end
+  it "requires emergency_contact primary_phone" do
+    @reg.emergency_primary_phone = nil
     @reg.valid?.should == false
   end
 

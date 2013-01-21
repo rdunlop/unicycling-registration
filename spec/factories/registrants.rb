@@ -7,17 +7,23 @@ FactoryGirl.define do
     last_name "LastMyString"
     birthday Date.new(2012,11,10)
     gender "Male"
-    address_line_1 "Adr1MyString"
-    address_line_2 "Adr2MyString"
-    city "CityMyString"
     state "StateMyString"
     country "CountMyString"
-    zip_code "ZipMyString"
     phone "PhoMyString"
     mobile "IMobMyString"
     email "EmailMyString"
     user # FactoryGirl
     competitor true
+    club "TCUC"
+    club_contact "Connie Cotter"
+    usa_member_number "00001"
+    emergency_name "Caitlin Goeres"
+    emergency_relationship "SO"
+    emergency_attending false
+    emergency_primary_phone "306-555-1212"
+    emergency_other_phone nil
+    responsible_adult_name nil
+    responsible_adult_phone nil
 
     factory :competitor do
       competitor true

@@ -90,8 +90,10 @@ describe "registrants/new" do
           render
 
           assert_select "form", :action => registrant_path(@registrant), :method => "put" do
-            assert_select "input[type='checkbox']", 1 do
-              assert_select "[checked='checked']", 1
+            assert_select "div[id='tabs']" do
+              assert_select "input[type='checkbox']", 1 do
+                assert_select "[checked='checked']", 1
+              end
             end
             assert_select "label", :text => @ec1.event
           end
@@ -108,8 +110,10 @@ describe "registrants/new" do
           render
 
           assert_select "form", :action => registrant_path(@registrant), :method => "put" do
-            assert_select "input[type='checkbox']", 1 do
-              assert_select "[checked='checked']", 0
+            assert_select "div[id='tabs']" do
+              assert_select "input[type='checkbox']", 1 do
+                assert_select "[checked='checked']", 0
+              end
             end
           end
         end
@@ -200,15 +204,21 @@ describe "registrants/new" do
 
       # Run the generator again with the --webrat flag if you want to use webrat matchers
       assert_select "form", :action => registrant_path(@registrant), :method => "put" do
-        assert_select "input#registrant_address_line_1", :name => "registrant[address_line_1]"
-        assert_select "input#registrant_address_line_2", :name => "registrant[address_line_2]"
-        assert_select "input#registrant_city", :name => "registrant[city]"
         assert_select "input#registrant_state", :name => "registrant[state]"
         assert_select "input#registrant_country", :name => "registrant[country]"
-        assert_select "input#registrant_zip_code", :name => "registrant[zip_code]"
         assert_select "input#registrant_phone", :name => "registrant[phone]"
         assert_select "input#registrant_mobile", :name => "registrant[mobile]"
         assert_select "input#registrant_email", :name => "registrant[email]"
+        assert_select "input#registrant_club", :name => "registrant[club]"
+        assert_select "input#registrant_club_contact", :name => "registrant[club_contact]"
+        assert_select "input#registrant_usa_member_number", :name => "registrant[usa_member_number]"
+        assert_select "input#registrant_emergency_name", :name => "registrant[emergency_name]"
+        assert_select "input#registrant_emergency_relationship", :name => "registrant[emergency_relationship]"
+        assert_select "input#registrant_emergency_attending", :name => "registrant[emergency_attending]"
+        assert_select "input#registrant_emergency_primary_phone", :name => "registrant[emergency_primary_phone]"
+        assert_select "input#registrant_emergency_other_phone", :name => "registrant[emergency_other_phone]"
+        assert_select "input#registrant_responsible_adult_name", :name => "registrant[responsible_adult_name]"
+        assert_select "input#registrant_responsible_adult_phone", :name => "registrant[responsible_adult_phone]"
       end
     end
   end

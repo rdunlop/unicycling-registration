@@ -15,8 +15,17 @@ describe RegistrantsController do
       first_name: "Robin",
       last_name: "Dunlop",
       gender: "Male",
-      city: "Chicago",
       country: "USA",
+      club: "TCUC",
+      club_contact: "Connie",
+      usa_member_number: "12345",
+      emergency_name: "Caitlin",
+      emergency_relationship: "Sig. Oth.",
+      emergency_attending: true,
+      emergency_primary_phone: "306-222-1212",
+      emergency_other_phone: "911",
+      responsible_adult_name: "Andy",
+      responsible_adult_phone: "312-555-5555",
       user_id: @user.id,
       birthday: Date.new(1982, 01, 19)
     }
@@ -144,9 +153,13 @@ describe RegistrantsController do
           first_name: "Robin",
           last_name: "Dunlop",
           gender: "Male",
-          city: "Chicago",
           country: "USA",
           competitor: true,
+          birthday: Date.new(1982, 01, 19),
+          emergency_name: "Caitlin",
+          emergency_relationship: "Sig. Oth.",
+          emergency_primary_phone: "306-222-1212",
+          user_id: @user.id,
           birthday: Date.new(1982, 01, 19)
           }}
         }.to change(Registrant, :count).by(1)

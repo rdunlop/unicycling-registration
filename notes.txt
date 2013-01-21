@@ -286,7 +286,7 @@ For Nan:
 TO DO:
 - Add Administrative Options similar to what we had on the old registration site:
  DONE - Edit any registration
- - Add Admin User
+ DONE - Add Admin User
  - Reset password for any user
  - View Payments Report (what does this entail?)
  - Multi-record delete
@@ -298,19 +298,19 @@ TO DO:
 
 
  My Current "MUST do before Live" list (in MY priority order):
- - Fix the bottom line of the registration costs to be clearer
+ DONE - Fix the bottom line of the registration costs to be clearer
  - Under 18 needs a valid parent/guardian 
- - Need to have Emergency details
+ DONE - Need to have Emergency details
  - ***** Need to be able to validate that choices are not selected without accompanying data
  - Make "Sign Up" a button, and clearer.
- - Inclued the prices on the Source tables
-- *** Add Club *** (has no category, has club name)
+ DONE - Inclued the prices on the Source tables
+ - *** Add Club competition *** (has no category, has club name)
 
 
  - Add ability to log the changes to records, for audit reasons
  DONE - Integrate with e-mail accounts during registration, which requires that the user confirm their e-mail address before they can access the site (this will prevent 99% of spam).
  - Integrate with Paypal (NEED Dave to have A PAYPAL ?merchant? ACCOUNT)
- - Add ability for Admin to edit ANY registration easily
+ DONE - Add ability for Admin to edit ANY registration easily
  - Add "Payments" report, to list number of expense items paid (Registrations, T-Shirts, etc)
  - Add "Events" report, to list number of users signed up for each event. (MUni XC Beginner, etc)
  - Add ability to "Delete" a registration (possibly make this available to normal users).
@@ -328,7 +328,7 @@ Scott:
  - Make the Team Name box have a 'select-from-previous-data' option
  DONE - Make Expense Items -> Delete a button
  - Buttons for comp and non-comp need to line up with boxes below
- - Club, and State
+ DONE - Club, and State
  - Next page (Costs...)
  - favicon
  DONE? - Should be able to choose who can be paid for of all the to-be-paid.s
@@ -342,6 +342,7 @@ Scott:
  - How do we get BEST TIMES?
  - No Jr Expert???? Beginner/Intermediate....
  - Reg Summary page should be Nicer to look at...the boxes are unclear (perhaps multiple columns of 409px each....)
+ - running total of expenses on the "Items" page of registration?
 
 
 Connie:
@@ -349,27 +350,27 @@ Connie:
  DONE? - See a page where people can see who is signed up so far (As Dave for approval).
 
  - Keep State, Country (required), USA by default (dropdown for countries, Canada 2nd, not text input)
- - ADD "Primary Team or Club Name", "Primary Team or Club Contact"
- - Phone, Mobile
- - Optional field: USA ID
- - Emergency COntact:
- * Name:  
- Relationship to participant: 
- Attending:: Y/Name
- * Primary Telephone Number:  
- Other Phone Numbers
+ DONE - ADD "Primary Team or Club Name", "Primary Team or Club Contact"
+ DONE - Phone, Mobile
+ DONE - Optional field: USA ID
+ DONE - Emergency COntact:
+       - Name:  
+       - Relationship to participant: 
+       - Attending:: Y/Name
+       - Primary Telephone Number:  
+       - Other Phone Numbers
 
- - The "Person responsible"  should have nName AND PHone number (optoial)
+       - The "Person responsible"  should have nName AND PHone number (optoial)
 
  - Email (please leave us your e-mail so that we can keep you informed of critical updates)
 
-- Make Club auto-completing/choosing thing (like: group name)
-- Multi-Edit
-- Under 18, need Parent/Guardian ON-Site
-- Perhaps don't show the "name" of the registration Periods
-- Payment Choice page "unselect-all" button
-- Link from competitions to their websites.
-- *** Add Club *** (has no category, has club name)
+ - Make Club auto-completing/choosing thing (like: group name)
+ - Multi-Edit
+ - Under 18, need Parent/Guardian ON-Site
+ DONE - Perhaps don't show the "name" of the registration Periods
+ - Payment Choice page "unselect-all" button
+ - Link from competitions to their websites.
+ - *** Add Club *** (has no category, has club name)
 
 QUESTIONS:
 - Q: USA Individual categories choices

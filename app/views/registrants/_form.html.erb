@@ -33,6 +33,16 @@
         <%= f.label :gender_female, 'Female', :class => "required" %>
         <%= f.radio_button :gender, 'Female' %>
       </span>
+      <span>
+        <%= f.label :club, "Primary Team or Club Name" %>
+        <%= f.text_field :club %><br />
+        <%= f.label :club_contact, "Primary Team or Club Contact" %>
+        <%= f.text_field :club_contact %>
+      </span>
+      <span>
+        <%= f.label :usa_member_number, "USA Membership number" %>
+        <%= f.text_field :usa_member_number %><br />
+      </span>
     </fieldset>
 
     <% unless @categories.nil? %>

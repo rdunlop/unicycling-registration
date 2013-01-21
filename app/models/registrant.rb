@@ -1,16 +1,22 @@
 class Registrant < ActiveRecord::Base
-  attr_accessible :address_line_1, :address_line_2, :birthday, :city, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip_code, :user_id, :competitor
+  attr_accessible :birthday, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :user_id, :competitor
+  attr_accessible :club, :club_contact, :usa_member_number, :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone
+  attr_accessible :responsible_adult_name, :responsible_adult_phone
 
   validates :birthday, :presence => true
   validates :first_name, :presence => true
   validates :last_name, :presence => true
-  #validates :city, :presence => true
-  #validates :country, :presence => true
+  validates :country, :presence => true
   validates :gender, :presence => true
   validates :user_id, :presence => true
 
   validates :competitor, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
+
+  # contact-info block
+  validates :emergency_name, :presence => true
+  validates :emergency_relationship, :presence => true
+  validates :emergency_primary_phone, :presence => true
 
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 

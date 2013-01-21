@@ -3,25 +3,11 @@
   <fieldset class="data_block">
     <legend>Competitor Details</legend>
     <span>
-      <%= f.label :address_line_1 %>
-      <%= f.text_field :address_line_1 %>
-    </span>
-    <span>
-      <%= f.label :address_line_2 %>
-      <%= f.text_field :address_line_2 %>
-    </span>
-    <span>
-      <%= f.label :city %>
-      <%= f.text_field :city %>
-    </span>
-    <span>
       <%= f.label :state %>
       <%= f.text_field :state %>
-      <%= f.label :zip_code %>
-      <%= f.text_field :zip_code %>
     </span>
     <span>
-      <%= f.label :country %>
+      <%= f.label :country, :class => "required" %>
       <%= f.text_field :country %>
     </span>
     <span>
@@ -39,5 +25,36 @@
   </fieldset>
   <fieldset class="data_block">
     <legend>Emergency Contact</legend>
+    <span>
+      <%= f.label :emergency_name, :class => "required" %>
+      <%= f.text_field :emergency_name %>
+    </span>
+    <span>
+      <%= f.label :emergency_relationship, :class => "required" %>
+      <%= f.text_field :emergency_relationship %>
+    </span>
+    <span>
+      <%= f.label :emergency_attending %>
+      <%= f.check_box :emergency_attending %>
+    </span>
+    <span>
+      <%= f.label :emergency_primary_phone, :class => "required" %>
+      <%= f.text_field :emergency_primary_phone %>
+    </span>
+    <span>
+      <%= f.label :emergency_other_phone %>
+      <%= f.text_field :emergency_other_phone %>
+    </span>
+  </fieldset>
+  <fieldset class="data_block">
+    <legend>Responsible Adult (for registrants Under the age of 18)</legend>
+    <span>
+      <%= f.label :responsible_adult_name %>
+      <%= f.text_field :responsible_adult_name %>
+    </span>
+    <span>
+      <%= f.label :responsible_adult_phone %>
+      <%= f.text_field :responsible_adult_phone %>
+    </span>
   </fieldset>
 </fieldset>

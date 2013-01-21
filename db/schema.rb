@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119045101) do
+ActiveRecord::Schema.define(:version => 20130121182154) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -120,19 +120,25 @@ ActiveRecord::Schema.define(:version => 20130119045101) do
     t.string   "last_name"
     t.date     "birthday"
     t.string   "gender"
-    t.string   "address_line_1"
-    t.string   "address_line_2"
-    t.string   "city"
     t.string   "state"
     t.string   "country"
-    t.string   "zip_code"
     t.string   "phone"
     t.string   "mobile"
     t.string   "email"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.integer  "user_id"
     t.boolean  "competitor"
+    t.string   "club"
+    t.string   "club_contact"
+    t.string   "usa_member_number"
+    t.string   "emergency_name"
+    t.string   "emergency_relationship"
+    t.boolean  "emergency_attending"
+    t.string   "emergency_primary_phone"
+    t.string   "emergency_other_phone"
+    t.string   "responsible_adult_name"
+    t.string   "responsible_adult_phone"
   end
 
   create_table "registration_periods", :force => true do |t|
