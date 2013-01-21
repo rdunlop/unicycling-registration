@@ -16,11 +16,49 @@
       <tr>
         <td><%= pf.hidden_field :registrant_id %><%= pf.object.registrant %></td>
         <td><%= pf.hidden_field :expense_item_id %><%= pf.object.expense_item %></td>
-        <td><%= pf.hidden_field :amount %>$<%= pf.object.amount %></td>
+        <td><%= pf.hidden_field :amount, "data-cents" => pf.object.amount * 100 %>$<%= pf.object.amount %></td>
+        <td><%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %></td>
+        <td><%= check_box_tag :anon, nil, :checked => "checked" %></td>
       </tr>
     <% end %>
+    <tr>
+      <th colspan="4">Total</th>
+      <th id="total_field"></th>
+    </tr>
   </table>
   <div class="actions">
     <%= f.submit 'Start Payment', :class => "payment_link registration_button" %>
   </div>
+  <script>
+    function findDeleteCheck(el) {
+      var row = el.parent().parent();
+      var del = row.find("input[type='checkbox']").first();
+      return del;
+    }
+    function calculateTotal() {
+      var all_values = $("input[data-cents]");
+      var total = 0;
+      all_values.each(function() {
+        var el = $(this);
+        var not_included = findDeleteCheck(el);
+        if (not_included.attr('checked')) {
+        }
+        else
+        {
+          total += parseInt(el.data("cents"));
+        }
+      });
+      return total;
+    }
+    $(document).ready(function() {
+      $("#anon").live("change", function() {
+        var el = $(this);
+        var del = findDeleteCheck(el);
+        del.attr('checked', !el.attr('checked'));
+        $("#total_field").html(calculateTotal());
+      });
+      // calculate initially
+      $("#total_field").html(calculateTotal());
+    });
+  </script>
 <% end %>
