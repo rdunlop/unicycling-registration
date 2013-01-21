@@ -56,4 +56,16 @@ describe User do
       @user.registrants.should == [@reg1, @reg2, @reg3]
     end
   end
+
+  describe "with 3 users" do
+    before(:each) do
+      @b = FactoryGirl.create(:user, :email => "b@b.com")
+      @a = FactoryGirl.create(:admin_user, :email => "a@a.com")
+      @c = FactoryGirl.create(:super_admin_user, :email => "c@c.com")
+    end
+
+    it "lists them in alphabetical order" do
+      User.all.should == [@a, @b, @c, @user]
+    end
+  end
 end

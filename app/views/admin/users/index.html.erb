@@ -1,0 +1,25 @@
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Admin?</th>
+      <th>SuperAdmin?</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user %></td>
+      <td><%= user.admin %></td>
+      <td><%= user.super_admin %></td>
+      <td>
+        <%= form_for([:admin, user], :url => admin_admin_user_path(user), :html => { :method => :put }) do |f| %>
+          <%= f.submit "Toggle Admin" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

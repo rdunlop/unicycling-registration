@@ -14,6 +14,7 @@ class Ability
         can :manage, Registrant
         can :manage, RegistrationPeriod
         can :manage, Payment
+        can :manage, User
       elsif user.admin
         can :manage, Registrant
         can :manage, Payment

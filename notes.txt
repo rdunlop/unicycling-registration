@@ -285,7 +285,7 @@ For Nan:
 
 TO DO:
 - Add Administrative Options similar to what we had on the old registration site:
- - Edit any registration
+ DONE - Edit any registration
  - Add Admin User
  - Reset password for any user
  - View Payments Report (what does this entail?)
@@ -298,6 +298,15 @@ TO DO:
 
 
  My Current "MUST do before Live" list (in MY priority order):
+ - Fix the bottom line of the registration costs to be clearer
+ - Under 18 needs a valid parent/guardian 
+ - Need to have Emergency details
+ - ***** Need to be able to validate that choices are not selected without accompanying data
+ - Make "Sign Up" a button, and clearer.
+ - Inclued the prices on the Source tables
+- *** Add Club *** (has no category, has club name)
+
+
  - Add ability to log the changes to records, for audit reasons
  DONE - Integrate with e-mail accounts during registration, which requires that the user confirm their e-mail address before they can access the site (this will prevent 99% of spam).
  - Integrate with Paypal (NEED Dave to have A PAYPAL ?merchant? ACCOUNT)
@@ -313,6 +322,66 @@ TO DO:
  - Add something that helps describe What "Category" to sign up for when choosing "Individual Freestyle" (Categories are: "Age Group", "Jr. Expert", "Expert").
  - Update the Costs for all Expense Items
  - Create a "LIVE" site (we will still have a TEST site).
+
+Scott:
+ - On Events Tabs, have a "previous" link too
+ - Make the Team Name box have a 'select-from-previous-data' option
+ DONE - Make Expense Items -> Delete a button
+ - Buttons for comp and non-comp need to line up with boxes below
+ - Club, and State
+ - Next page (Costs...)
+ - favicon
+ DONE? - Should be able to choose who can be paid for of all the to-be-paid.s
+ - Admin should be able to identify Who+WHAT has been received/paid for.
+ - ReceivedCheque should have "notes"
+ - Pay now get's its own line
+ - Payment page checkmarks with running total. When boxes are checked, highlight line.
+
+ - Admin page for the events page....should show the events..blah blah blah.....num people signed up singend-up-and-paid.
+ - Immediate errors display when typing in.
+ - How do we get BEST TIMES?
+ - No Jr Expert???? Beginner/Intermediate....
+ - Reg Summary page should be Nicer to look at...the boxes are unclear (perhaps multiple columns of 409px each....)
+
+
+Connie:
+ - Make "Sign Up" a button, and clearer.
+ DONE? - See a page where people can see who is signed up so far (As Dave for approval).
+
+ - Keep State, Country (required), USA by default (dropdown for countries, Canada 2nd, not text input)
+ - ADD "Primary Team or Club Name", "Primary Team or Club Contact"
+ - Phone, Mobile
+ - Optional field: USA ID
+ - Emergency COntact:
+ * Name:  
+ Relationship to participant: 
+ Attending:: Y/Name
+ * Primary Telephone Number:  
+ Other Phone Numbers
+
+ - The "Person responsible"  should have nName AND PHone number (optoial)
+
+ - Email (please leave us your e-mail so that we can keep you informed of critical updates)
+
+- Make Club auto-completing/choosing thing (like: group name)
+- Multi-Edit
+- Under 18, need Parent/Guardian ON-Site
+- Perhaps don't show the "name" of the registration Periods
+- Payment Choice page "unselect-all" button
+- Link from competitions to their websites.
+- *** Add Club *** (has no category, has club name)
+
+QUESTIONS:
+- Q: USA Individual categories choices
+- NOTE: 2 hours for Group/Club competition.
+- Q: Gorup categories Small/Large/Expert?
+
+- *** CHange WW to be clearer that it's 0-10, 11+ age ***
+- Q: Are we doing slows?
+- NICE: Standard Skill Electronic.
+- Q: Downhill Gliding (ask Dave, perhaps a workshop?)
+- Dave(Lisa) - talk to Ann about PayPal setup and use.
+
 
 
  My Current "Nice to have" list:

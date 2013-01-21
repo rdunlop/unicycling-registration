@@ -7,6 +7,11 @@ Workspace::Application.routes.draw do
     resources :registrants, :only => [:index]
     resources :payments, :only => [:index]
     resources :events, :only => [:index, :show]
+    resources :users, :only => [:index] do
+      member do
+        put :admin
+      end
+    end
   end
   resources :expense_groups
 
