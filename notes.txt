@@ -315,8 +315,8 @@ TO DO:
  - Add "Events" report, to list number of users signed up for each event. (MUni XC Beginner, etc)
  - Add ability to "Delete" a registration (possibly make this available to normal users).
  - Fix some styling of the page, to make it easier to follow the flow of the system.
- DONE- Fix the display of the "Basketball" Team Name field to be labelled correctly (this is a systemic problem).
- - Remove the "Emergency Contact" portion, if we are not using it.
+ DONE - Fix the display of the "Basketball" Team Name field to be labelled correctly (this is a systemic problem).
+ DONE - Remove the "Emergency Contact" portion, if we are not using it.
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
  DONE - Hide the advanced admin tools in the "Super Admin" menu.
  - Add something that helps describe What "Category" to sign up for when choosing "Individual Freestyle" (Categories are: "Age Group", "Jr. Expert", "Expert").
@@ -362,7 +362,7 @@ Connie:
 
        - The "Person responsible"  should have nName AND PHone number (optoial)
 
- - Email (please leave us your e-mail so that we can keep you informed of critical updates)
+ DONE - Email (please leave us your e-mail so that we can keep you informed of critical updates)
 
  - Make Club auto-completing/choosing thing (like: group name)
  - Multi-Edit
