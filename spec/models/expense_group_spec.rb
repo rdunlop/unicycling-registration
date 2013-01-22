@@ -37,4 +37,24 @@ describe ExpenseGroup do
     end
   end
 
+  describe "with multiple expense groups" do
+    before(:each) do
+      @group.position = 1
+      @group.visible = false
+      @group.save
+      @group3 = FactoryGirl.create(:expense_group, :position => 3)
+      @group2 = FactoryGirl.create(:expense_group, :position => 2)
+      @group4 = FactoryGirl.create(:expense_group, :position => 4)
+    end
+
+    it "lists them in order" do
+      ExpenseGroup.all.should == [@group, @group2, @group3, @group4]
+    end
+
+    it "lists the 'visible' ones in order" do
+      ExpenseGroup.visible.should == [@group2, @group3, @group4]
+    end
+  end
+
+
 end

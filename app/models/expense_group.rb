@@ -6,6 +6,7 @@ class ExpenseGroup < ActiveRecord::Base
 
   has_many :expense_items,:order => "expense_items.position"
 
+  default_scope order('position ASC')
   scope :visible, where(:visible => true)
 
   def to_s

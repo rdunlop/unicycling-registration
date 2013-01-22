@@ -16,6 +16,7 @@ gem 'exception_notification'
 gem 'pg'
 
 group :development, :test, :cucumber do
+    gem 'brakeman'
     gem 'factory_girl_rails'
     gem 'rspec-rails'
     gem 'capybara'

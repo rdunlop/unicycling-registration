@@ -298,27 +298,44 @@ TO DO:
 
 
  My Current "MUST do before Live" list (in MY priority order):
- DONE - Fix the bottom line of the registration costs to be clearer
- - Under 18 needs a valid parent/guardian 
+ - Figure out why buttler-wobble has a negative cost-owing.
+ - Ask Scott/Connie about which rulebook that will be used at NAUCC. (see "NAUCC 2012 Registration website - Pre-Alpha" Email for Dave's comment)
+ - Write up a formal description of how the MUni categories can be attempted, based on Dave's:
+ Lining up at the start of the Advanced will wipe out any Beginner score. It will be necessary to do all MUni awards the last day for that reason.  People cannot have scores for both.  I do think some will have reservations about Moraine- which is fine.  I'd rather see someone who is uncomfortable on more than the beginner Muni course (very similar to past conventions Beginner MUni courses) stay at the Beginner Level.  We want people to compete at their comfort level.  
+
+ Moraine is much more difficult than the Advanced and Expert course of last year due to the terrain- elevation and technicality.  I want to make sure Advanced riders know what they're getting into.  That being said, it isn't a bad course if you walk a few sections.  Technical prowess isn't necessary, but it's different from the courses I've seen at past conventions.  The natural terrain is harder.  I've hopefully tried to convey that from the videos on the site, but people don't read or pay attention.
+
+ Advanced/Expert- no on the XC.  As in the past, they could mix the uphill/downhill, but the highest level attempted counts and puts them in the highest category for overall.
+
+ AND:
+ Trials- Adv/Expert.  The typical method has been to have the Advanced go and then the top riders get to go to the Expert round.  That's what we were figuring for this year.  Trials- Beginner would be the other category.
+
+ - Add a warning for the Advanced/Expert MUni XC, MUST have water in order to compete (not allowed to start unless they are bringing some form of water bottle).
+ - Use a new logo, as provided by Dave's E-mail 
+
+
+
+ DONE? - Fix the bottom line of the registration costs to be clearer
  DONE - Need to have Emergency details
+ DONE - Inclued the prices on the Source tables
+ DONE - Integrate with e-mail accounts during registration, which requires that the user confirm their e-mail address before they can access the site (this will prevent 99% of spam).
+ DONE - Add ability for Admin to edit ANY registration easily
+ DONE - Fix the display of the "Basketball" Team Name field to be labelled correctly (this is a systemic problem).
+ DONE - Remove the "Emergency Contact" portion, if we are not using it.
+ DONE - Hide the advanced admin tools in the "Super Admin" menu.
+ - Add analytics gathering of pages/tabs
+ - Add notice that "A Release/Waiver must be signed by all competitors, and by parent/guardian for anyone < 18"
+ - Under 18 needs a valid parent/guardian 
  - ***** Need to be able to validate that choices are not selected without accompanying data
  - Make "Sign Up" a button, and clearer.
- DONE - Inclued the prices on the Source tables
  - *** Add Club competition *** (has no category, has club name)
-
-
  - Add ability to log the changes to records, for audit reasons
- DONE - Integrate with e-mail accounts during registration, which requires that the user confirm their e-mail address before they can access the site (this will prevent 99% of spam).
  - Integrate with Paypal (NEED Dave to have A PAYPAL ?merchant? ACCOUNT)
- DONE - Add ability for Admin to edit ANY registration easily
  - Add "Payments" report, to list number of expense items paid (Registrations, T-Shirts, etc)
  - Add "Events" report, to list number of users signed up for each event. (MUni XC Beginner, etc)
  - Add ability to "Delete" a registration (possibly make this available to normal users).
  - Fix some styling of the page, to make it easier to follow the flow of the system.
- DONE - Fix the display of the "Basketball" Team Name field to be labelled correctly (this is a systemic problem).
- DONE - Remove the "Emergency Contact" portion, if we are not using it.
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
- DONE - Hide the advanced admin tools in the "Super Admin" menu.
  - Add something that helps describe What "Category" to sign up for when choosing "Individual Freestyle" (Categories are: "Age Group", "Jr. Expert", "Expert").
  - Update the Costs for all Expense Items
  - Create a "LIVE" site (we will still have a TEST site).
