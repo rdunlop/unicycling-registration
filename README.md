@@ -42,6 +42,7 @@ Start the local server
 ----------------------
 
 (inside the VM) Create a local .env file:
+
 * `cd workspace`
 * `$ echo "PORT=9292" > .env`
 * `$ echo "RACK_ENV=development" >> .env`
@@ -75,6 +76,7 @@ Run the test suite
 ------------------
 
 (inside the VM)
+
 * `cd workspace`
 * `rspec spec`
 
