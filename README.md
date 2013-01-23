@@ -22,6 +22,8 @@ Getting Started
 Set your local git credentials
 ------------------------------
 
+* `$ cd ~/unicycling-registration/ (Or wherever the working directory is)`
+
 * `$ git config --local user.name "Robin Dunlop" (Enter YOUR name instead)`
 * `$ git config --local user.email robin@dunlopweb.com (Enter YOUR email instead)`
 
