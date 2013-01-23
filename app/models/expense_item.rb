@@ -21,6 +21,6 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def to_s
-    name
+    self.expense_group.to_s + " - " + name
   end
 end

@@ -263,6 +263,7 @@ TO DO (MUST be done BEFORE LIVE):
  - Add notice that "A Release/Waiver must be signed by all competitors, and by parent/guardian for anyone < 18"
  - Change Artistic Age Groups to match NAUCC requirements (No Jr Expert???? Beginner/Intermediate....)
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
+ - Prevent changing a payment's contents after it is _paid_
  - Update the Costs for all Expense Items
  - Create a "LIVE" site (we will still have a TEST site).
 
@@ -275,6 +276,8 @@ TO DO (MUST be done SOON after LIVE (if not before)):
  - Add ability for user to see their payments (#payment#index?)
  - Delete a registration
  - Delete a payment
+ - Add ability to "log in as any user" for debugging purposes.
+ - Log all logs to an external (persistent) store
 
 
 TO DO (SHOULD be done):

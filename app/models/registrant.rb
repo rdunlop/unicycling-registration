@@ -48,16 +48,26 @@ class Registrant < ActiveRecord::Base
 
   ###### Expenses ##########
 
+  # Indicates that this registrant has paid their registration_fee
+  def reg_paid?
+    reg_item = registration_item
+    unless reg_item.nil?
+      return paid_expense_items.include?(reg_item)
+    end
+    false
+  end
+
   # return a list of _ALL_ of the expense_items for this registrant
   #  PAID FOR or NOT
   def all_expense_items
-    items = self.registrant_expense_items.map{|rei| rei.expense_item}
+    items  = owing_expense_items
+    items += paid_expense_items
 
-    reg_item = registration_item
-    unless reg_item.nil?
-      items << registration_item
-    end
     items
+  end
+
+  def amount_owing
+    return self.expenses_total - self.amount_paid
   end
 
   def expenses_total
@@ -74,24 +84,15 @@ class Registrant < ActiveRecord::Base
   # returns a list of expense_items that this registrant hasn't paid for
   # INCLUDING the registration cost
   def owing_expense_items
-    items = self.all_expense_items
+    items = self.registrant_expense_items.map{|rei| rei.expense_item}
 
-    paid_items = self.paid_expense_items
-    unpaid_items = []
-    items.each do |item|
-      if paid_items.include?(item)
-        # remove one entry from the paid items, so that we don't think we 
-        # have paid for multiple of this item
-        paid_items.slice!(paid_items.index(item))
-      else
-        unpaid_items << item
+    unless reg_paid?
+      reg_item = registration_item
+      unless reg_item.nil?
+        items << registration_item
       end
     end
-    unpaid_items
-  end
-
-  def amount_owing
-    return self.expenses_total - self.amount_paid
+    items
   end
 
 
