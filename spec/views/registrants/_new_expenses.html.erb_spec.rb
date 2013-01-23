@@ -17,8 +17,8 @@ describe "registrants/_new_expenses" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "fieldset", 1 do
       assert_select "legend", :text => "Add " + @group.group_name
-      assert_select "label", :text => @item1
-      assert_select "label", :text => @item3, :count => 0
+      assert_select "label", :text => @item1.name
+      assert_select "label", :text => @item3.name, :count => 0
     end
   end
 end

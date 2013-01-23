@@ -3,16 +3,37 @@
   <fieldset>
     <legend><%= registrant.to_s %>'s Expenses</legend>
     <table id="expense_lines">
+      <% registrant.paid_expense_items.each do |pei| %>
+        <tr>
+          <td><%= pei.name %></td>
+          <td><%= pei.cost %></td>
+          <td>(Paid)</td>
+        </tr>
+      <% end %>
       <% registrant.registrant_expense_items.each do |ce| %>
         <%= render :partial => "/registrant_expenses/registrant_expense_item", :locals => { :registrant_expense_item => ce} %>
       <% end %>
-      <% reg_item = registrant.registration_item %>
-      <% unless reg_item.nil? %>
-        <tr>
-          <td>Registration Fee</td>
-          <td><%= reg_item.cost.to_s %></td>
-        </tr>
+      <% unless registrant.reg_paid? %>
+        <% reg_item = registrant.registration_item %>
+        <% unless reg_item.nil? %>
+          <tr>
+            <td>Registration Fee</td>
+            <td><%= reg_item.cost.to_s %></td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
   </fieldset>
 </div>
+ <script>
+   $(document).ready(function() {
+     // XXX This should be a call to 'on' instead of 'live'
+     $(".delete_expenses_button").live("click", function() {
+       button = $(this);
+       check = $("#" + button.data("thing"));
+       check.prop('checked', true);
+       row = $("#" + button.data("row"));
+       row.fadeOut(500);
+     });
+   });
+ </script>

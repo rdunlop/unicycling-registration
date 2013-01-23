@@ -30,7 +30,7 @@ describe ExpenseItem do
     @item.valid?.should == false
   end
   it "should have a decent description" do
-    @item.to_s.should == @item.name
+    @item.to_s.should == @item.expense_group.to_s + " - " + @item.name
   end
 
   describe "when an associated payment has been created" do

@@ -107,21 +107,16 @@ describe Registrant do
     it "lists the item as an owing_expense_item" do
       @reg.owing_expense_items.should == [@item]
     end
-    describe "with a second expense_item" do
+    describe "having paid for the item once, but still having it as a registrant_expense_item" do
       before(:each) do
-        @rei2 = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
+        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @item.cost, :expense_item => @item)
       end
-      it "should list both items" do
-        @reg.owing_expense_items.should == [@item, @item]
+      it "lists one remaining item as owing" do
+        @reg.owing_expense_items.should == [@item]
       end
-      describe "having paid for one of the items" do
-        before(:each) do
-          @payment = FactoryGirl.create(:payment, :completed => true)
-          @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @item.cost, :expense_item => @item)
-        end
-        it "lists one remaining item as owing" do
-          @reg.owing_expense_items.should == [@item]
-        end
+      it "lists the item as paid for" do
+        @reg.paid_expense_items.should == [@item]
       end
     end
   end
@@ -219,6 +214,9 @@ describe Registrant do
       it "lists no items as an owing_expense_item" do
         @comp.owing_expense_items.should == []
       end
+      it "knows that the registration_fee has been paid" do
+        @comp.reg_paid?.should == true
+      end
     end
 
     describe "with an incomplete payment" do
@@ -241,6 +239,9 @@ describe Registrant do
       end
       it "lists no items as an owing_expense_item" do
         @comp.owing_expense_items.should == [@comp_exp]
+      end
+      it "knows that the registration_fee has NOT been paid" do
+        @comp.reg_paid?.should == false
       end
     end
   end

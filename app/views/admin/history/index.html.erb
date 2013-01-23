@@ -1,0 +1,40 @@
+<h1>History Report</h1>
+
+<table>
+  <caption>All</caption>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Object Type</th>
+      <th>Event</th>
+      <th>Modified-By</th>
+      <th>Registrant</th>
+      <th>User</th>
+      <th>Description of changes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @versions.each do |version| %>
+      <tr>
+        <td><%= version.created_at %></td>
+        <td><%= version.item_type %></td>
+        <td><%= version.event %></td>
+        <td>
+          <% unless version.whodunnit.nil? %>
+            <%= User.find(version.whodunnit) %>
+          <% end %>
+        </td>
+        <td>
+          <% unless version.registrant_id.nil? %>
+            <%= Registrant.find(version.registrant_id) %>
+          <% end %>
+        </td>
+        <td>
+          <% unless version.user_id.nil? %>
+            <%= User.find(version.user_id) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

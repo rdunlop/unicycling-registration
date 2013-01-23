@@ -106,7 +106,7 @@ describe PaymentsController do
         @user.registrants.count.should == 1
         get :new, {}
         pd = assigns(:payment).payment_details.first
-        pd.amount.should == 100
+        pd.amount.should == @reg_period.competitor_expense_item.cost
       end
       it "associates the payment_detail with the expense_item" do
         get :new, {}

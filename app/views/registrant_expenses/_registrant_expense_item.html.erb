@@ -14,16 +14,4 @@
       <%= button_tag "Delete", :class => "delete_expenses_button", "data-row" => "row" + index.to_s, "data-thing" => index, :onclick => "return false" %>
     </td>
   </tr>
-  <script>
-    $(document).ready(function() {
-      // XXX This should be a call to 'on' instead of 'live'
-      $(".delete_expenses_button").live("click", function() {
-        button = $(this);
-        check = $("#" + button.data("thing"));
-        check.prop('checked', true);
-        row = $("#" + button.data("row"));
-        row.fadeOut(500);
-      });
-    });
-  </script>
 <% end %>

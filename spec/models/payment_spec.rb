@@ -47,4 +47,38 @@ describe Payment do
     pay.destroy
     PaymentDetail.all.count.should == 0
   end
+
+  describe "a payment for a tshirt" do
+    before(:each) do
+      @pd = FactoryGirl.create(:payment_detail, :payment => @pay)
+      @reg = @pd.registrant
+      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item)
+    end
+
+    it "registrant owes for this item" do
+      @reg.owing_expense_items.should == [@rei.expense_item]
+    end
+    describe "when the payment is paid" do
+      before(:each) do
+        @pay.completed = true
+        @pay.save
+      end
+      it "registrant no longer owes" do
+        @reg.owing_expense_items.should == []
+      end
+      it "registrant has paid item" do
+        @reg.paid_expense_items.should == [@pd.expense_item]
+      end
+
+      describe "when the payment is saved after being paid" do
+        before(:each) do
+          @rei2 = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item)
+          @pay.save
+        end
+        it "doesn't remove more items from the registrant_expenses" do
+          @reg.owing_expense_items.should == [@rei2.expense_item]
+        end
+      end
+    end
+  end
 end

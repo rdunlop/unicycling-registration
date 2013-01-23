@@ -239,12 +239,10 @@ For Nan:
 ================================================================================
 TO DO (MUST be done BEFORE LIVE):
 - Add Administrative Options similar to what we had on the old registration site:
- - Figure out why buttler-wobble has a negative cost-owing.
-  - It's because it's possible to delete reg items after having paid for them.
-  - We don't have it associated from payment_detail to registration_expense_item because of the "Magic choosing of registration cost based on period of time".
 
  - Modification logs
   - Add ability to log the changes to records, for audit reasons
+  - I have gotten the initial page working, but more is capabilities are required
 
  - Validate the data better, which will prevent people from Choosing a Category without choosing the event itself.
   - ***** Need to be able to validate that choices are not selected without accompanying data
@@ -263,6 +261,7 @@ TO DO (MUST be done BEFORE LIVE):
  - Add notice that "A Release/Waiver must be signed by all competitors, and by parent/guardian for anyone < 18"
  - Change Artistic Age Groups to match NAUCC requirements (No Jr Expert???? Beginner/Intermediate....)
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
+ - Prevent changing a payment's contents after it is _paid_
  - Update the Costs for all Expense Items
  - Create a "LIVE" site (we will still have a TEST site).
 
@@ -275,6 +274,8 @@ TO DO (MUST be done SOON after LIVE (if not before)):
  - Add ability for user to see their payments (#payment#index?)
  - Delete a registration
  - Delete a payment
+ - Add ability to "log in as any user" for debugging purposes.
+ - Log all logs to an external (persistent) store
 
 
 TO DO (SHOULD be done):
@@ -286,6 +287,8 @@ TO DO (SHOULD be done):
   - This allows an admin to mark a record/item as paid without PayPal
   - ReceivedCheque should have "notes"
  - Country is a required field
+ - Perhaps don't show the "name" of the registration Periods (it's confusing?)
+  - It's still showing during the payment-process steps
 
 
 
@@ -344,7 +347,9 @@ DONE:
  - Add Emergency COntact: - Name:  - Relationship to participant: - Attending:: Y/Name - Primary Telephone Number:  - Other Phone Numbers
  - Add The "Person responsible"  should have nName AND PHone number (optional)
  - Email ("please leave us your e-mail so that we can keep you informed of critical updates")
- - Perhaps don't show the "name" of the registration Periods (it's confusing?)
+ - Figure out why buttler-wobble has a negative cost-owing.
+  - It's because it was possible to delete reg items after having paid for them.
+  - I have fixed this 
 
 
 
