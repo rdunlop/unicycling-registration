@@ -12,6 +12,7 @@ Workspace::Application.routes.draw do
         put :admin
       end
     end
+    resources :history, :only => [:index] 
   end
   resources :expense_groups
 
