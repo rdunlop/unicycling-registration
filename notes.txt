@@ -240,6 +240,8 @@ For Nan:
 TO DO (MUST be done BEFORE LIVE):
 - Add Administrative Options similar to what we had on the old registration site:
  - Figure out why buttler-wobble has a negative cost-owing.
+  - It's because it's possible to delete reg items after having paid for them.
+  - We don't have it associated from payment_detail to registration_expense_item because of the "Magic choosing of registration cost based on period of time".
 
  - Modification logs
   - Add ability to log the changes to records, for audit reasons
