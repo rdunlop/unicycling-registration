@@ -21,6 +21,7 @@ class Payment < ActiveRecord::Base
 
   def update_registrant_items
     return true unless self.completed == true
+    return true unless self.completed_changed?
 
     payment_details.each do |pd|
       rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id}).first

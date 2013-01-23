@@ -69,6 +69,16 @@ describe Payment do
       it "registrant has paid item" do
         @reg.paid_expense_items.should == [@pd.expense_item]
       end
+
+      describe "when the payment is saved after being paid" do
+        before(:each) do
+          @rei2 = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item)
+          @pay.save
+        end
+        it "doesn't remove more items from the registrant_expenses" do
+          @reg.owing_expense_items.should == [@rei2.expense_item]
+        end
+      end
     end
   end
 end
