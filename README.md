@@ -51,6 +51,16 @@ Start the server:
 
 * `$ foreman start` (this will not return)
 
+SERVER RUNNING
+--------------
+
+* When the server is running, you can access it at http://localhost:9292
+
+Email-Service
+-------------
+
+* The server /may/ need an outgoing e-mail account in order to function nicely. (see README.rdoc)
+
 To Stop the server
 ------------------
 
