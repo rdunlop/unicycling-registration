@@ -26,6 +26,7 @@ class Registrant < ActiveRecord::Base
   attr_accessible :registrant_choices_attributes
   has_many :registrant_choices, :dependent => :destroy, :inverse_of => :registrant
   accepts_nested_attributes_for :registrant_choices
+  validate :choices_are_all_set_or_none_set
 
   has_many :event_choices, :through => :registrant_choices
   has_many :events, :through => :event_choices
@@ -37,6 +38,36 @@ class Registrant < ActiveRecord::Base
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
 
   has_many :payment_details
+
+
+  def choices_are_all_set_or_none_set
+    # for each event that we have choices made
+     # determine if we have values for ALL or NONE of the choices for that event
+    # loop
+    events_to_validate = self.registrant_choices.map{|rc| rc.event_choice}.map{|ec| ec.event}.uniq
+
+    events_to_validate.each do |event|
+      count_not_selected = 0
+      count_selected = 0
+      event.event_choices.each do |event_choice|
+        # using .select instead of .where, because we need to validate not-yet-saved data
+        reg_choice = self.registrant_choices.select{|rc| rc.event_choice_id == event_choice.id}.first
+        if reg_choice.nil?
+          count_not_selected += 1
+        else
+          if reg_choice.has_value?
+            count_selected += 1
+          else
+            count_not_selected += 1
+          end
+        end
+      end
+      if count_not_selected != 0 and count_selected != 0
+        errors[:base] = event.to_s + " choice combination invalid (please fill them all or clear them all)"
+      end
+    end
+    true
+  end
 
   def name
     self.first_name + " " + self.last_name

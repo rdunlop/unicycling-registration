@@ -80,6 +80,7 @@ describe "registrants/new" do
         before(:each) do
           @rc = FactoryGirl.create(:registrant_choice, :value => "1", :event_choice => @ec1)
           @registrant = @rc.registrant
+          @registrant.reload
           @attending = @rc
           @categories = [@rc.event_choice.event.category]
 

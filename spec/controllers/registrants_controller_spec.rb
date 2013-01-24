@@ -218,7 +218,7 @@ describe RegistrantsController do
         @attributes = valid_attributes.merge({
           :competitor => true,
           :registrant_choices_attributes => [
-            { :value => "1",
+            { :value => "0",
               :event_choice_id => @ec1.id
         }
         ]})

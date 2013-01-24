@@ -244,8 +244,6 @@ TO DO (MUST be done BEFORE LIVE):
   - Add ability to log the changes to records, for audit reasons
   - I have gotten the initial page working, but more is capabilities are required
 
- - Validate the data better, which will prevent people from Choosing a Category without choosing the event itself.
-  - ***** Need to be able to validate that choices are not selected without accompanying data
   - Clear additinoal Fields when an event is un-checked.
 
  - Under 18 needs a valid parent/guardian 
@@ -351,6 +349,8 @@ DONE:
  - Figure out why buttler-wobble has a negative cost-owing.
   - It's because it was possible to delete reg items after having paid for them.
   - I have fixed this 
+ - Validate the data better, which will prevent people from Choosing a Category without choosing the event itself.
+  - Validate that choices are not selected without accompanying data
 
 
 
