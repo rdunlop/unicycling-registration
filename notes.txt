@@ -328,6 +328,7 @@ Scott's suggestions:
  - Immediate errors display when typing in.
  - How do we get BEST TIMES?
  - Reg Summary page should be Nicer to look at...the boxes are unclear (perhaps multiple columns of 409px each....)
+ - Automatically start the rails server when vagrant starts
 
 
 DONE:

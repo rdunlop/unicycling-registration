@@ -41,3 +41,15 @@ DOMAIN=rulebook.unicycling.org
 
 2. Upload the code
         <tt>git push heroku master</tt>
+
+
+== Backup data from the heroku instance
+
+1. Create a snapshot (assuming that the heroku app is named uniregtest)
+        <tt>heroku pgbackups:capture --expire --app uniregtest</tt>
+
+2. Download the backup
+        <tt>curl -o latest.dump `heroku pgbackups:url --app uniregtest`</tt>
+
+3. Import the data (from inside your VM)
+        <tt>PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_development latest.dump</tt>
