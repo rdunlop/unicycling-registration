@@ -15,10 +15,15 @@
   min-width: 150px;
 }
 
-.nexttab {
-  display: block;
-  text-align: center;
+.tabs {
+  text-align:center;
+  }
+.nexttab,
+.prevtab {
+  display: inline-block;
+  width:200px;
   padding: 10px;
 }
-.nexttab:hover {
+.nexttab:hover,
+.prevtab:hover {
 }

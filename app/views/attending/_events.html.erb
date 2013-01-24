@@ -10,6 +10,11 @@
 
     <% @categories.each_index do |index|
       category = @categories[index]
+      if index == 0
+        prev_category = nil
+      else
+        prev_category = @categories[index - 1]
+      end
       if index >= @categories.length
         next_category = nil
       else
@@ -51,9 +56,14 @@
             </div>
           </div>
         <% end %>
+        <div class="tabs">
+        <% unless prev_category.nil? %>
+          <a class="prevtab" href="#tabs-<%= prev_category.id %>">Prev Tab</a>
+        <% end %>
         <% unless next_category.nil? %>
           <a class="nexttab" href="#tabs-<%= next_category.id %>">Next Tab</a>
         <% end %>
+        </div>
       </div>
     <% end %>
   </div>
