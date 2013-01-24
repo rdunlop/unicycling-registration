@@ -17,6 +17,8 @@ class Registrant < ActiveRecord::Base
   validates :emergency_name, :presence => true
   validates :emergency_relationship, :presence => true
   validates :emergency_primary_phone, :presence => true
+  validates :responsible_adult_name, :presence => true, :if => :minor?
+  validates :responsible_adult_phone, :presence => true, :if => :minor?
 
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
@@ -72,6 +74,23 @@ class Registrant < ActiveRecord::Base
       end
     end
     true
+  end
+
+  def minor?
+    self.age < 18
+  end
+
+  def age
+    config = EventConfiguration.first
+    if config.nil?
+      99
+    else
+      if (self.birthday.month < config.start_date.month) or (self.birthday.month == config.start_date.month and self.birthday.day <= config.start_date.day)
+        config.start_date.year - self.birthday.year
+      else
+        (config.start_date.year - 1) - self.birthday.year
+      end
+    end
   end
 
   def name

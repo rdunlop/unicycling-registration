@@ -347,4 +347,45 @@ describe Registrant do
       end
     end
   end
+  describe "with an event configuration (and starting date)" do
+    before(:each) do
+      FactoryGirl.create(:event_configuration, :start_date => Date.new(2012,05,20))
+    end
+    describe "and a registrant born on the starting day in 1982" do
+      before(:each) do
+        @reg.birthday = Date.new(1982, 05, 20)
+      end
+      it "should have an age of 30" do
+        @reg.age.should == 30
+      end
+    end
+    describe "and a registrant born the day after the starting date in 1982" do
+      before(:each) do
+        @reg.birthday = Date.new(1982, 05, 21)
+      end
+      it "should have an age of 29" do
+        @reg.age.should == 29
+      end
+    end
+    describe "with a 12 year old registrant" do
+      before(:each) do
+        @reg.birthday = Date.new(2000, 01, 22)
+      end
+      it "requires the responsible_adult_name" do
+        @reg.responsible_adult_name = nil
+        @reg.responsible_adult_phone = "Something"
+        @reg.valid?.should == false
+      end
+      it "requires the responsible_adult_phone" do
+        @reg.responsible_adult_name = "Something"
+        @reg.responsible_adult_phone = nil
+        @reg.valid?.should == false
+      end
+      it "is valid if name and phone are present" do
+        @reg.responsible_adult_name = "Jane"
+        @reg.responsible_adult_phone = "1-800-stuff"
+        @reg.valid?.should == true
+      end
+    end
+  end
 end
