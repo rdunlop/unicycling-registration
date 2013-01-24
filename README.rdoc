@@ -42,6 +42,9 @@ DOMAIN=rulebook.unicycling.org
 2. Upload the code
         <tt>git push heroku master</tt>
 
+3. Install the pgbackups addon (so that you can take backups/dumps)
+        <tt> heroku addons:add pgbackups</tt>
+
 
 == Backup data from the heroku instance
 
