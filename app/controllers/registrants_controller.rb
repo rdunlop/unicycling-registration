@@ -111,6 +111,7 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to items_registrant_path(@registrant), notice: 'Registrant was successfully updated.' }
         format.json { head :no_content }
       else
+        load_categories
         format.html { render action: "edit" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end

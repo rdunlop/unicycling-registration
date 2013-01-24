@@ -276,6 +276,13 @@ describe RegistrantsController do
         put :update, {:id => registrant.to_param, :registrant => {}}
         assigns(:registrant).should eq(registrant)
       end
+      it "loads the categories" do
+        registrant = FactoryGirl.create(:competitor, :user => @user)
+        category1 = FactoryGirl.create(:category, :position => 1)
+        Registrant.any_instance.stub(:save).and_return(false)
+        put :update, {:id => registrant.to_param, :registrant => {}}
+        assigns(:categories).should == [category1]
+      end
 
       it "re-renders the 'edit' template" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
