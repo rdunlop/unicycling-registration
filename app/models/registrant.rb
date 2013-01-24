@@ -63,6 +63,11 @@ class Registrant < ActiveRecord::Base
         end
       end
       if count_not_selected != 0 and count_selected != 0
+        # set the error message for each of the registrant_choices that we have
+        event_reg_choices = self.registrant_choices.select{|rc| event.event_choices.include?(rc.event_choice)}
+        event_reg_choices.each do |erc|
+          erc.errors[:value] = "" # causes the field to be highlighted
+        end
         errors[:base] = event.to_s + " choice combination invalid (please fill them all or clear them all)"
       end
     end

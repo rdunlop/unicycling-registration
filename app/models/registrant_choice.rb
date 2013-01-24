@@ -9,7 +9,6 @@ class RegistrantChoice < ActiveRecord::Base
   belongs_to :event_choice
   belongs_to :registrant, :inverse_of => :registrant_choices
 
-
   def has_value?
     if event_choice.cell_type == "boolean"
       return self.value != "0"
