@@ -244,7 +244,6 @@ TO DO (MUST be done BEFORE LIVE):
   - Add ability to log the changes to records, for audit reasons
   - I have gotten the initial page working, but more is capabilities are required
 
-  - Clear additinoal Fields when an event is un-checked.
 
  - Under 18 needs a valid parent/guardian 
   - Under 18, need Parent/Guardian ON-Site
@@ -315,6 +314,7 @@ TO DO (NICE to be done):
  - Allow sortnig of the "all registrants" page according to the columns (use jquery?)
  - expense items be destroyed when an expenseGroup is destroyed
  - Prevent events from having no position-1-event-choice-boolean
+ - Clear additional Fields when an event is un-checked.
 
 Scott's suggestions:
  - Make the Team Name box have a 'select-from-previous-data' option
