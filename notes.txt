@@ -311,6 +311,8 @@ TO DO (NICE to be done):
  - expense items be destroyed when an expenseGroup is destroyed
  - Prevent events from having no position-1-event-choice-boolean
  - Clear additional Fields when an event is un-checked.
+ - Prevent users from specifying invalidly formatted phone numbers
+ - Prevent users from specifying invalidly formatted email addresses?
 
 Scott's suggestions:
  - Make the Team Name box have a 'select-from-previous-data' option
