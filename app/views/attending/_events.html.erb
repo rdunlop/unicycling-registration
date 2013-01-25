@@ -72,6 +72,11 @@
     $( "#tabs" ).tabs({ heightStyle: "auto"});
     $(".nexttab").click(function() {
       $("#tabs").tabs("select", this.hash);
+      return false;
+    });
+    $(".prevtab").click(function() {
+      $("#tabs").tabs("select", this.hash);
+      return false;
     });
   });
 </script>
