@@ -41,4 +41,7 @@ Workspace::Application.configure do
   config.active_support.deprecation = :stderr
 
   ENV['DOMAIN'] = 'localhost'
+
+  PAYPAL_BASE_URL = "https://www.sandbox.paypal.com"
+  ENV['PAYPAL_ACCOUNT'] = "robin+merchant@dunlopweb.com"
 end

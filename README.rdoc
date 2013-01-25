@@ -56,3 +56,25 @@ DOMAIN=rulebook.unicycling.org
 
 3. Import the data (from inside your VM)
         <tt>PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_development latest.dump</tt>
+
+
+== Configure for integration with Paypal
+
+1. Set the merchant account in the environment variables
+      echo "PAYPAL_ACCOUNT=robin@dunlopweb.com" >> .env
+
+      heroku config add PAYPAL_ACCOUNT=robin@dunlopweb.com
+
+2. Configure your paypal account to send out IPN notifications;
+  The <notification url> will be the hosted website URL, with /payments/notification at the end. Example: http://uniregtest.herokuapp.com/payments/notification
+
+. Login to merchant account -> Profile -> Instant Payment Notification Preferences -> Enter <notification url> and select radio button “Receive IPN messages” -> Save
+
+3. Enable Payment Data Transfer, and Auto Return:
+  <return_url> will be http://uniregtest.herokuapp.com/payments/
+
+  "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> Payment Data Transfer On), Auto Return ON: Return URL: <return_url>
+
+4. Need to set the "PayPal Account Optional" setting on so that people don't have to have a paypal account to pay
+  "My Account -> PRofile -> Sellers Preferences -> Website Payment Preferences -> PayPal Account Optional (On) -> save"
+

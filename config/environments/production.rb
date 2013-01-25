@@ -64,4 +64,6 @@ Workspace::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  PAYPAL_BASE_URL = "https://www.paypal.com"
 end

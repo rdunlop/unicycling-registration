@@ -23,14 +23,34 @@
   <%= @payment.completed_date %>
 </p>
 
-Details:
-<% @payment.payment_details.each do |pd| %>
-  <%= pd.registrant %> - <%= pd.expense_item %> - <%= pd.amount %><br />
-<% end %>
-<br />
+<table>
+  <caption>Payment Details:</caption>
+  <thead>
+    <tr>
+      <td>Registrant</td>
+      <td>Item</td>
+      <td>Cost</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payment.payment_details.each do |pd| %>
+      <tr>
+        <td>
+          <%= pd.registrant %>
+        </td>
+        <td>
+          <%= pd.expense_item %>
+        </td>
+        <td>
+          <%= pd.amount %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <div>
-  <a class="registration_button" href="#" onclick="alert('not yet implemented'); return false;">Go to Credit Card Vendor</a>
+  <%= link_to "Pay with Paypal", @payment.paypal_url(payments_url, payments_url), :class => "registration_button", :confirm => "This functionality is still being developed. Continue?" %>
 </div>
 
 <% if @config.test_mode %>
