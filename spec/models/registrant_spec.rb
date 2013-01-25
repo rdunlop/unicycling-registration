@@ -23,6 +23,11 @@ describe Registrant do
     @reg.birthday = nil
     @reg.valid?.should == false
   end
+  it "can not have a birthday, while having a configuration" do
+    FactoryGirl.create(:event_configuration)
+    @reg.birthday = nil
+    @reg.valid?.should == false
+  end
 
   it "requires first name" do
     @reg.first_name = nil
