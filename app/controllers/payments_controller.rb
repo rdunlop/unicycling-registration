@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
-  before_filter :authenticate_user!
-  load_and_authorize_resource
+  before_filter :authenticate_user!, :except => [:notification]
+  load_and_authorize_resource :except => [:notification]
+  skip_authorization_check :only => [:notification]
 
   # GET /payments
   # GET /payments.json
@@ -102,5 +103,30 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to registrants_path }
     end
+  end
+
+  # PayPal notification endpoint
+  def notification
+    paypal = PaypalConfirmer.new(params, request.raw_post)
+    Notifications.ipn_received(request.body).deliver
+    if paypal.valid?
+      if paypal.correct_paypal_account? and paypal.completed?
+        if Payment.exists?(paypal.order_number)
+          payment = Payment.find(paypal.order_number)
+          if payment.completed
+            Notifications.ipn_received("Payment already completed " + paypal.order_number).deliver
+          else
+            payment.completed = true
+            payment.transaction_id = paypal.transaction_id
+            payment.completed_date = Date.today
+            payment.save
+            Notifications.payment_completed(payment).deliver
+          end
+        else
+          Notifications.ipn_received("Unable to find Payment " + paypal.order_number).deliver
+        end
+      end
+    end
+    render :nothing => true
   end
 end

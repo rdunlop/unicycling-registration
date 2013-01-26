@@ -283,4 +283,84 @@ describe PaymentsController do
     end
   end
 
+  describe "without a user signed in" do
+    before(:each) do
+      sign_out @user
+    end
+
+    describe "with a valid IPN for a valid payment" do
+      before(:each) do
+        @payment = FactoryGirl.create(:payment, :transaction_id => nil, :completed_date => nil)
+        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :amount => 19.99)
+      end
+      it "is OK even when incomplete" do
+        post :notification, {:payment_status => "Incomplete"}
+        response.should be_success
+      end
+      it "sends an e-mail for IPN receipt" do
+        ActionMailer::Base.deliveries.clear
+        post :notification, {:payment_status => "Incomplete"}
+        num_deliveries = ActionMailer::Base.deliveries.size
+        num_deliveries.should == 1
+      end
+      describe "with a valid post" do
+        before(:each) do
+          @attributes =  {
+            :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, 
+            :payment_status => "Completed",
+            :txn_id => "12345",
+            :invoice => @payment.id.to_s
+          }
+        end
+        it "sets the payment as completed" do
+          post :notification, @attributes
+          response.should be_success
+          @payment.reload
+          @payment.completed.should == true
+        end
+        it "sets the transaction number" do
+          post :notification, @attributes
+          response.should be_success
+          @payment.reload
+          @payment.transaction_id.should == "12345"
+        end
+        it "sets the trasaction_date to today" do
+          post :notification, @attributes
+          response.should be_success
+          @payment.reload
+          @payment.completed_date.should == Date.today
+        end
+      end
+      describe "with an incorrect payment_id" do
+        before(:each) do
+          @attributes =  {
+            :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, 
+            :payment_status => "Completed",
+            :txn_id => "12345",
+            :invoice => (@payment.id + 100).to_s
+          }
+        end
+        it "sends an IPN message" do
+          ActionMailer::Base.deliveries.clear
+          post :notification, @attributes
+          response.should be_success
+          num_deliveries = ActionMailer::Base.deliveries.size
+          num_deliveries.should == 2 # one for IPN, one for error
+        end
+      end
+      it "doesn't set the payment if the wrong paypal account is specified" do
+        post :notification, {:receiver_email => "bob@bob.com", :payment_status => "Completed", :invoice => @payment.id.to_s}
+        response.should be_success
+        @payment.reload
+        @payment.completed.should == false
+      end
+      it "should send an e-mail to notify of payment receipt" do
+        ActionMailer::Base.deliveries.clear
+        post :notification, {:receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        response.should be_success
+        num_deliveries = ActionMailer::Base.deliveries.size
+        num_deliveries.should == 2 # one for IPN, one for success
+      end
+    end
+  end
 end

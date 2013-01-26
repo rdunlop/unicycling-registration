@@ -34,7 +34,7 @@ describe Payment do
     return_url = "my_url"
     notify_url = "notify_url"
     @pay.paypal_url(return_url, notify_url).should == "https://www.sandbox.paypal.com/cgi-bin/webscr?" +
-      "business=" + "robin%2Bmerchant%40dunlopweb.com" +
+      "business=" + "ROBIN%2Bmerchant%40dunlopweb.com" +
       "&cancel_return=" + return_url +
       "&cmd=_cart" +
       "&currency_code=USD" +
@@ -48,7 +48,7 @@ describe Payment do
     @pd = FactoryGirl.create(:payment_detail, :payment => @pay)
     @pay.paypal_url(return_url, notify_url).should == "https://www.sandbox.paypal.com/cgi-bin/webscr?" +
       "amount_1=" + @pd.amount.to_s +
-      "&business=" + "robin%2Bmerchant%40dunlopweb.com" +
+      "&business=" + "ROBIN%2Bmerchant%40dunlopweb.com" +
       "&cancel_return=" + return_url +
       "&cmd=_cart" +
       "&currency_code=USD" +

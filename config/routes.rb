@@ -19,6 +19,10 @@ Workspace::Application.routes.draw do
   resources :expense_items, :except => [:new, :show]
 
   resources :payments do
+    collection do
+      post 'notification'
+    end
+
     member do
       post 'fake_complete'
     end
