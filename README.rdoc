@@ -63,7 +63,7 @@ DOMAIN=rulebook.unicycling.org
 1. Set the merchant account in the environment variables
       echo "PAYPAL_ACCOUNT=robin@dunlopweb.com" >> .env
 
-      heroku config add PAYPAL_ACCOUNT=robin@dunlopweb.com
+      heroku config:add PAYPAL_ACCOUNT=robin@dunlopweb.com
 
 2. Configure your paypal account to send out IPN notifications;
   The <notification url> will be the hosted website URL, with /payments/notification at the end. Example: http://uniregtest.herokuapp.com/payments/notification
@@ -71,6 +71,7 @@ DOMAIN=rulebook.unicycling.org
 . Login to merchant account -> Profile -> Instant Payment Notification Preferences -> Enter <notification url> and select radio button “Receive IPN messages” -> Save
 
 3. Enable Payment Data Transfer, and Auto Return:
+  ****** SKIP THIS STEP ****
   <return_url> will be http://uniregtest.herokuapp.com/payments/
 
   "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> Payment Data Transfer On), Auto Return ON: Return URL: <return_url>
