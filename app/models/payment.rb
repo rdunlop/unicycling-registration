@@ -31,27 +31,7 @@ class Payment < ActiveRecord::Base
     end
   end
 
-  def paypal_url(return_url, notify_url)
-    # Reference: https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_html_Appx_websitestandard_htmlvariables
-    #
-    values = {
-      :business => ENV['PAYPAL_ACCOUNT'],
-      :cmd => '_cart',
-      :upload => 1,
-      :return => return_url,
-      :invoice => id,
-      :notify_url => notify_url,
-      :no_shipping => 2, # I require a shipping address?
-      :currency_code => "USD",
-      :cancel_return => return_url
-    }
-    payment_details.each_with_index do |item, index|
-      values.merge!({
-        "amount_#{index+1}" => item.amount,
-        "item_name_#{index+1}" => item.expense_item.to_s,
-        "quantity_#{index+1}" => 1
-      })
-    end
-    PAYPAL_BASE_URL + "/cgi-bin/webscr?" + values.to_query
+  def paypal_post_url
+    PAYPAL_BASE_URL + "/cgi-bin/webscr"
   end
 end

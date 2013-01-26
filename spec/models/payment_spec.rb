@@ -30,34 +30,8 @@ describe Payment do
     @pay.payment_details.should == [pd]
   end
 
-  it "has a paypal_url" do
-    return_url = "my_url"
-    notify_url = "notify_url"
-    @pay.paypal_url(return_url, notify_url).should == "https://www.sandbox.paypal.com/cgi-bin/webscr?" +
-      "business=" + "ROBIN%2Bmerchant%40dunlopweb.com" +
-      "&cancel_return=" + return_url +
-      "&cmd=_cart" +
-      "&currency_code=USD" +
-      "&invoice=" + @pay.id.to_s + 
-      "&no_shipping=2" +
-      "&notify_url=" + notify_url + "&return=" + return_url + "&upload=1"
-  end
-  it "has a paypal_url with items" do
-    return_url = "my_url"
-    notify_url = "notify_url"
-    @pd = FactoryGirl.create(:payment_detail, :payment => @pay)
-    @pay.paypal_url(return_url, notify_url).should == "https://www.sandbox.paypal.com/cgi-bin/webscr?" +
-      "amount_1=" + @pd.amount.to_s +
-      "&business=" + "ROBIN%2Bmerchant%40dunlopweb.com" +
-      "&cancel_return=" + return_url +
-      "&cmd=_cart" +
-      "&currency_code=USD" +
-      "&invoice=" + @pay.id.to_s + 
-      "&item_name_1=" + CGI.escape(@pd.expense_item.to_s) +
-      "&no_shipping=2" +
-      "&notify_url=" + notify_url + 
-      "&quantity_1=1" +
-      "&return=" + return_url + "&upload=1"
+  it "has a paypal_post_url" do
+    @pay.paypal_post_url.should == "https://www.sandbox.paypal.com/cgi-bin/webscr"
   end
 
   it "saves associated details when the payment is saved" do

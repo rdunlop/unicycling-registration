@@ -50,7 +50,23 @@
 </table>
 
 <div>
-  <%= link_to "Pay with Paypal", @payment.paypal_url(payments_url, payments_url), :class => "registration_button", :confirm => "This functionality is still being developed. Continue?" %>
+  <%= form_tag @payment.paypal_post_url do %>
+    <%= hidden_field_tag :business, ENV["PAYPAL_ACCOUNT"] %>
+    <%= hidden_field_tag :cancel_return, payments_url %>
+    <%= hidden_field_tag :cmd, "_cart" %>
+    <%= hidden_field_tag :currency_code, "USD" %>
+    <%= hidden_field_tag :invoice, @payment.id.to_s %>
+    <%= hidden_field_tag :no_shipping, "2" %>
+    <%= hidden_field_tag :notify_url, notification_payments_url %>
+    <%= hidden_field_tag :return, payments_url %>
+    <%= hidden_field_tag :upload, "1" %>
+    <% @payment.payment_details.each_with_index do |pd, index| %>
+      <%= hidden_field_tag "amount_#{index + 1}", pd.amount.to_s %>
+      <%= hidden_field_tag "item_name_#{index + 1}", pd.expense_item.to_s %>
+      <%= hidden_field_tag "quantity_#{index + 1}", "1" %>
+    <% end %>
+    <%= submit_tag "Pay with Paypal", :class => "registration_button", :confirm => "This functionality is still being developed. Continue?" %>
+  <% end %>
 </div>
 
 <% if @config.test_mode %>
