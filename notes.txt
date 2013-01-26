@@ -244,7 +244,11 @@ TO DO (MUST be done BEFORE LIVE):
   - Add ability to log the changes to records, for audit reasons
   - I have gotten the initial page working, but more is capabilities are required
 
- - Integrate with Paypal (NEED Dave to have A PAYPAL ?merchant? ACCOUNT)
+ - PayPal
+  - create a "payment summary" page which addresses paypal's requirements
+  - change documentation to allow for auto-return
+  - Find a way to enable/disable paypal-sandbox in production without a code commit
+  - Allow Users to see their payments (/payments)
 
  - View Payments Report (what does this entail?)
   - Add "Payments" report, to list number of expense items paid (Registrations, T-Shirts, etc)
@@ -256,6 +260,7 @@ TO DO (MUST be done BEFORE LIVE):
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
  - Prevent changing a payment's contents after it is _paid_
  - Update the Costs for all Expense Items
+ - Work with Dave to configure his paypal account appropriately
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
@@ -351,6 +356,7 @@ DONE:
   - Validate that choices are not selected without accompanying data
  ?- Under 18 needs a valid parent/guardian 
  ? - Under 18, need Parent/Guardian ON-Site
+ - Paypal integration work (Post, and return IPN)
 
 
 ------------------------------------------------------------------------------------------------------------------
