@@ -48,4 +48,14 @@ class Payment < ActiveRecord::Base
     end
     total
   end
+
+  def self.paid_expense_items
+    all = []
+    Payment.all.each do |payment|
+      next unless payment.completed
+
+      all += payment.payment_details.map{ |ei| ei.expense_item }
+    end
+    all
+  end
 end

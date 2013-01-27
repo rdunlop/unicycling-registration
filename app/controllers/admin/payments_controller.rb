@@ -5,5 +5,7 @@ class Admin::PaymentsController < Admin::BaseController
   def index
     @payments = Payment.all
     @total_received = Payment.total_received
+    @expense_groups = ExpenseGroup.all
+    @paid_expense_items = Payment.paid_expense_items
   end
 end

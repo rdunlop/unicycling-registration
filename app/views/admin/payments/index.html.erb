@@ -14,6 +14,43 @@
   </tbody>
 </table>
 
+<hr />
+<h2>Expenses by Group</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        Group
+      </th>
+      <th>
+        Entry
+      </th>
+      <th>
+        Num paid
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @expense_groups.each do |group| %>
+      <% group.expense_items.each do |item| %>
+        <tr>
+          <td>
+            <%= group %>
+          </td>
+          <td>
+            <%= item %>
+          </td>
+          <td>
+            <%= @paid_expense_items.count(item) %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<hr />
 <table>
   <tr>
     <th>User</th>

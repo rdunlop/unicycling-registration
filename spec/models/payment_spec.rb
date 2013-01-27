@@ -67,6 +67,11 @@ describe Payment do
       pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
       Payment.total_received.should == 15.33
     end
+
+    it "returns the set of paid expense_items" do
+      pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
+      Payment.paid_expense_items.should == [pd.expense_item]
+    end
   end
 
 
