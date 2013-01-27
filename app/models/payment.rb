@@ -34,4 +34,18 @@ class Payment < ActiveRecord::Base
   def paypal_post_url
     PAYPAL_BASE_URL + "/cgi-bin/webscr"
   end
+
+  def total_amount
+    payment_details.reduce(0) { |memo, pd| memo + pd.amount }
+  end
+
+  def self.total_received
+    total = 0
+    Payment.all.each do |payment|
+      next unless payment.completed
+
+      total += payment.total_amount
+    end
+    total
+  end
 end

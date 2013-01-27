@@ -25,9 +25,16 @@ describe Payment do
     @pay.valid?.should == false
   end
 
-  it "has payment_details" do
-    pd = FactoryGirl.create(:payment_detail, :payment => @pay)
-    @pay.payment_details.should == [pd]
+  describe "with payment details" do
+    before(:each) do
+      @pd = FactoryGirl.create(:payment_detail, :payment => @pay)
+    end
+    it "has payment_details" do
+      @pay.payment_details.should == [@pd]
+    end
+    it "can calcalate the payment total-amount" do
+      @pay.total_amount.should == @pd.amount
+    end
   end
 
   it "has a paypal_post_url" do
@@ -52,6 +59,17 @@ describe Payment do
     pay.destroy
     PaymentDetail.all.count.should == 0
   end
+
+  describe "with a completed payment" do
+    let (:payment) { FactoryGirl.create(:payment, :completed => true) }
+
+    it "can determien the toatl received" do
+      pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
+      Payment.total_received.should == 15.33
+    end
+  end
+
+
 
   describe "a payment for a tshirt" do
     before(:each) do

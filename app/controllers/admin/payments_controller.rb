@@ -4,5 +4,6 @@ class Admin::PaymentsController < Admin::BaseController
 
   def index
     @payments = Payment.all
+    @total_received = Payment.total_received
   end
 end
