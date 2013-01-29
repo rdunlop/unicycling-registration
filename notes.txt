@@ -260,13 +260,15 @@ TO DO (MUST be done BEFORE LIVE):
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
  - Prevent changing a payment's contents after it is _paid_
  - Have a link to a PDF of the waiver that must be signed by ALL participants (and make it obvious)
+ - Make a note that the Name/Country is listed for all registrants to see.
+ - Request info about allergies?
  - Update the Costs for all Expense Items
  - Work with Dave to configure his paypal account appropriately
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
+ - Payments page which lists all Unpaid Registrations (and e-mail contact info?)
  - Choose a better colour scheme
- - Use better logo
  - Multi-Edit (allows updating the selection of multiple people's choices)
  - Multi-record delete (allows removing multiple people from an event sign-up)
  - Enter a "Wire Payment" (also, mark a registration/etc as paid, for some reason)

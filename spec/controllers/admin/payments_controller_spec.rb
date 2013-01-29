@@ -35,6 +35,10 @@ describe Admin::PaymentsController do
       get :index, {}
       assigns(:paid_expense_items).should == [payment_detail.expense_item]
     end
+    it "assigns a set of expense_items as all_expense_items" do
+      get :index, {}
+      assigns(:all_expense_items).should == [payment_detail.expense_item]
+    end
   end
 
 end

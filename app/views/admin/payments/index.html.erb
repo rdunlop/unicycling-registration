@@ -29,6 +29,12 @@
       <th>
         Num paid
       </th>
+      <th>
+        Num unpaid
+      </th>
+      <th>
+        Num total
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -43,6 +49,12 @@
           </td>
           <td>
             <%= @paid_expense_items.count(item) %>
+          </td>
+          <td>
+            <%= (@all_expense_items.count(item) - @paid_expense_items.count(item)) %>
+          </td>
+          <td>
+            <%= @all_expense_items.count(item) %>
           </td>
         </tr>
       <% end %>

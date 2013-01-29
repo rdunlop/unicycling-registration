@@ -112,6 +112,15 @@ class Registrant < ActiveRecord::Base
     false
   end
 
+  # ALL registrants
+  def self.all_expense_items
+    total = []
+    Registrant.all.each do |reg|
+      total += reg.all_expense_items
+    end
+    total
+  end
+
   # return a list of _ALL_ of the expense_items for this registrant
   #  PAID FOR or NOT
   def all_expense_items
