@@ -30,7 +30,7 @@ class RegistrationPeriod < ActiveRecord::Base
   end
 
   def self.paid_for_period(competitor, paid_items)
-    RegistrationPeriod.all.each do |rp|
+    RegistrationPeriod.includes(:noncompetitor_expense_item).includes(:competitor_expense_item).each do |rp|
       if competitor
         if paid_items.include?(rp.competitor_expense_item)
           return rp

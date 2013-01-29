@@ -1,7 +1,7 @@
 <div>
   <h3>Events</h3>
   <div class="data_block">
-    <% Category.all.each do |cat| %>
+    <% Category.includes(:events).all.each do |cat| %>
       <% if @registrant.has_event_in_category?(cat) %>
         <fieldset class="data_block">
           <legend><%= cat %></legend>

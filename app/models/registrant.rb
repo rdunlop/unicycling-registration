@@ -35,11 +35,11 @@ class Registrant < ActiveRecord::Base
   has_many :categories, :through => :events
 
   attr_accessible :registrant_expense_items_attributes
-  has_many :registrant_expense_items
+  has_many :registrant_expense_items, :include => :expense_item
   has_many :expense_items, :through => :registrant_expense_items
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
 
-  has_many :payment_details
+  has_many :payment_details, :include => :payment
 
 
   def choices_are_all_set_or_none_set
@@ -115,7 +115,7 @@ class Registrant < ActiveRecord::Base
   # ALL registrants
   def self.all_expense_items
     total = []
-    Registrant.all.each do |reg|
+    Registrant.includes(:registrant_expense_items).includes(:payment_details).each do |reg|
       total += reg.all_expense_items
     end
     total

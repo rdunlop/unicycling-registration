@@ -4,7 +4,7 @@ class RegistrantsController < ApplicationController
 
   def load_categories
     if @registrant.competitor
-      @categories = Category.all
+      @categories = Category.includes(:events).all
     end
   end
 

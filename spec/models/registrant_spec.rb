@@ -136,7 +136,7 @@ describe Registrant do
           @rei2 = FactoryGirl.create(:registrant_expense_item, :expense_item => @ei)
         end
         it "has expenses from both registrants" do
-          Registrant.all_expense_items.should == [@item, @item, @ei]
+          Registrant.all_expense_items.should =~ [@item, @item, @ei]
         end
       end
     end

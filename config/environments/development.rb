@@ -1,4 +1,8 @@
 Workspace::Application.configure do
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+  end
 
   config.action_mailer.default_url_options = { :host => 'localhost:9292' }
 

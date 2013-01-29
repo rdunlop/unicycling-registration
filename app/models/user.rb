@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   has_paper_trail :meta => {:user_id => :id }
 
-  has_many :registrants, :order => "registrants.id"
+  has_many :registrants, :order => "registrants.id", :include => [:registrant_expense_items, :payment_details]
 
   after_initialize :init
 
