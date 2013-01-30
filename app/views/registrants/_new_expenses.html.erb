@@ -1,8 +1,10 @@
 <% ExpenseGroup.visible.includes(:expense_items).all.each do |expense_group| %>
   <fieldset class="data_block">
     <legend>Add <%= expense_group %></legend>
-    <% expense_group.expense_items.each do |ei| %>
-      <%= render :partial => "/registrants/new_expense", :locals => { :item => ei } %>
-    <% end %>
+    <table>
+      <% expense_group.expense_items.each do |ei| %>
+        <%= render :partial => "/registrants/new_expense", :locals => { :item => ei } %>
+      <% end %>
+    </table>
   </fieldset>
 <% end %>

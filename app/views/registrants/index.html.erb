@@ -15,7 +15,7 @@
               <%= link_to registrant.name, registrant, :class =>  (registrant.competitor ? "competitor_link" : "noncompetitor_link") %>
             </td>
             <td>
-              <span class="fee"><%= registrant.expenses_total %></span>
+              <span class="fee"><%= fcost(registrant.expenses_total) %></span>
             </td>
             <td>
               <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
@@ -23,7 +23,7 @@
             </td>
             <td>
               <% if registrant.amount_owing > 0 %>
-                <span class="unpaid"><span class="fee"><%= registrant.amount_owing %></span> Unpaid</span>
+                <span class="unpaid"><span class="fee"><%= fcost(registrant.amount_owing) %></span> Unpaid</span>
               <% else %>
                 <span class="paid">Paid</span>
               <% end %>
@@ -32,7 +32,7 @@
         <% end %>
         <tr>
           <td colspan="2">Total Amount Owing:</td>
-          <td><span class="fee"><%= @total_owing %></span></td>
+          <td><span class="fee"><%= fcost(@total_owing) %></span></td>
         </tr>
       </table>
     </fieldset>

@@ -16,14 +16,14 @@
       <tr>
         <td><%= pf.hidden_field :registrant_id %><%= pf.object.registrant %></td>
         <td><%= pf.hidden_field :expense_item_id %><%= pf.object.expense_item %></td>
-        <td><%= pf.hidden_field :amount, "data-cents" => pf.object.amount * 100 %>$<%= pf.object.amount %></td>
+        <td><%= pf.hidden_field :amount, "data-cents" => pf.object.amount * 100 %><span class="fee"><%= fcost(pf.object.amount) %></span></td>
         <td><%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %></td>
         <td><%= check_box_tag :anon, nil, :checked => "checked" %></td>
       </tr>
     <% end %>
     <tr>
       <th colspan="4">Total</th>
-      <th id="total_field"></th>
+      <th class="fee" id="total_field"></th>
     </tr>
   </table>
   <div class="actions">
@@ -37,7 +37,7 @@
     }
     function calculateTotal() {
       var all_values = $("input[data-cents]");
-      var total = 0;
+      var total_cents = 0;
       all_values.each(function() {
         var el = $(this);
         var not_included = findDeleteCheck(el);
@@ -45,10 +45,10 @@
         }
         else
         {
-          total += parseInt(el.data("cents"));
+          total_cents += parseInt(el.data("cents"));
         }
       });
-      return total;
+      return (total_cents / 100).toFixed(2);
     }
     $(document).ready(function() {
       $("#anon").live("change", function() {

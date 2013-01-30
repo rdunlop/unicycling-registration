@@ -12,12 +12,16 @@
       <% @registrant.all_expense_items.each do |item| %>
         <tr>
           <td><%= item %></td>
-          <td><%= item.cost %></td>
+          <td>
+            <span class="fee"><%= fcost(item.cost) %></span>
+          </td>
         </tr>
       <% end %>
       <tr>
         <th>Subtotal</th>
-        <th><%= @registrant.expenses_total %></th>
+        <th>
+          <span class="fee"><%= fcost(@registrant.expenses_total) %></span>
+        </th>
       </tr>
     </tbody>
   </table>

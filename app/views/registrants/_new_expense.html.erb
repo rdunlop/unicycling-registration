@@ -1,10 +1,16 @@
 <%# locals: item %>
-<div>
-  <%= form_for RegistrantExpenseItem.new(:expense_item_id => item.id), :url => single_registrant_expenses_url, :remote => true do |ff| %>
-    <%#= ff.error_messages %>
-    <%= ff.label :expense_item, item.name %>
-    <%= item.cost.to_s %>
-    <%= ff.hidden_field :expense_item_id %>
-    <%= ff.submit 'Add Item' %>
-  <% end %>
-</div>
+<tr>
+  <td>
+    <%= item.name %>
+  </td>
+  <td>
+    <span class="fee"><%= fcost(item.cost) %></span>
+  </td>
+  <td>
+    <%= form_for RegistrantExpenseItem.new(:expense_item_id => item.id), :url => single_registrant_expenses_url, :remote => true do |ff| %>
+      <%#= ff.error_messages %>
+      <%= ff.hidden_field :expense_item_id %>
+      <%= ff.submit 'Add Item' %>
+    <% end %>
+  </td>
+</tr>

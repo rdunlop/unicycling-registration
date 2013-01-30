@@ -42,7 +42,7 @@
           <%= pd.expense_item %>
         </td>
         <td>
-          <%= pd.amount %>
+          <span class="fee"><%= fcost(pd.amount) %></span>
         </td>
       </tr>
     <% end %>

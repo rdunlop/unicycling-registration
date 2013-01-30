@@ -6,7 +6,7 @@
       <% registrant.paid_expense_items.each do |pei| %>
         <tr>
           <td><%= pei.name %></td>
-          <td><%= pei.cost %></td>
+          <td><span class="fee"><%= fcost(pei.cost) %></span></td>
           <td>(Paid)</td>
         </tr>
       <% end %>
@@ -18,7 +18,7 @@
         <% unless reg_item.nil? %>
           <tr>
             <td>Registration Fee</td>
-            <td><%= reg_item.cost.to_s %></td>
+            <td><span class="fee"><%= fcost(reg_item.cost) %></span></td>
           </tr>
         <% end %>
       <% end %>
