@@ -58,20 +58,30 @@ describe PaymentsController do
   end
   describe "GET index" do
     before(:each) do
-      sign_in FactoryGirl.create(:super_admin_user)
+      @super_admin = FactoryGirl.create(:super_admin_user)
+      sign_in @super_admin
+      @payment = FactoryGirl.create(:payment, :user => @user)
     end
     it "assigns all payments as @payments" do
-      payment = FactoryGirl.create(:payment, :user => @user)
       get :index, {}
-      assigns(:payments).should eq([payment])
+      assigns(:payments).should eq([@payment])
     end
     describe "as normal user" do
       before(:each) do
         sign_in @user
       end
-      it "cannot read index" do
+      it "can read index" do
         get :index, {}
-        response.should redirect_to(root_path)
+        response.should be_success
+      end
+      it "receives a list of payments" do
+        get :index, {}
+        assigns(:payments).should eq([@payment])
+      end
+      it "does not include other people's payments" do
+        p2 = FactoryGirl.create(:payment, :user => @super_admin)
+        get :index, {}
+        assigns(:payments).should eq([@payment])
       end
     end
   end
@@ -135,14 +145,6 @@ describe PaymentsController do
     end
   end
 
-  describe "GET edit" do
-    it "assigns the requested payment as @payment" do
-      payment = FactoryGirl.create(:payment, :user => @user)
-      get :edit, {:id => payment.to_param}
-      assigns(:payment).should eq(payment)
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Payment" do
@@ -194,63 +196,6 @@ describe PaymentsController do
         Payment.any_instance.stub(:save).and_return(false)
         post :create, {:payment => {}}
         response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    before(:each) do
-      sign_in FactoryGirl.create(:super_admin_user)
-    end
-    describe "with valid params" do
-      it "updates the requested payment" do
-        payment = FactoryGirl.create(:payment, :user => @user)
-        # Assuming there are no other payments in the database, this
-        # specifies that the Payment created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Payment.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => payment.to_param, :payment => {'these' => 'params'}}
-      end
-
-      it "assigns the requested payment as @payment" do
-        payment = FactoryGirl.create(:payment, :user => @user)
-        put :update, {:id => payment.to_param, :payment => valid_attributes}
-        assigns(:payment).should eq(payment)
-      end
-
-      it "redirects to the payment" do
-        payment = FactoryGirl.create(:payment, :user => @user)
-        put :update, {:id => payment.to_param, :payment => valid_attributes}
-        response.should redirect_to(payment)
-      end
-      describe "as normal user" do
-        before(:each) do
-          sign_in @user
-        end
-        it "cannot update a payment" do
-          payment = FactoryGirl.create(:payment, :user => @user)
-          put :update, {:id => payment.to_param, :payment => valid_attributes}
-          response.should redirect_to(root_path)
-        end
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the payment as @payment" do
-        payment = FactoryGirl.create(:payment, :user => @user)
-        # Trigger the behavior that occurs when invalid params are submitted
-        Payment.any_instance.stub(:save).and_return(false)
-        put :update, {:id => payment.to_param, :payment => {}}
-        assigns(:payment).should eq(payment)
-      end
-
-      it "re-renders the 'edit' template" do
-        payment = FactoryGirl.create(:payment, :user => @user)
-        # Trigger the behavior that occurs when invalid params are submitted
-        Payment.any_instance.stub(:save).and_return(false)
-        put :update, {:id => payment.to_param, :payment => {}}
-        response.should render_template("edit")
       end
     end
   end

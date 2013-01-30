@@ -19,16 +19,12 @@ class Ability
         can :manage, Registrant
         can :manage, Payment
       else
-        can [:read, :update, :items, :update_items, :all], Registrant do |reg|
-          reg.user == user
-        end
+        can [:read, :update, :items, :update_items, :all], Registrant, :user_id => user.id
         can :create, Registrant #XXX necessary because we set the user in the controller?
         can :new_noncompetitor, Registrant #XXX necessary because we set the user in the controller?
 
         can [:new, :create], Payment
-        can :show, Payment do |payment|
-          payment.user == user
-        end
+        can :read, Payment, :user_id => user.id
       end
     end
     can :logo, EventConfiguration

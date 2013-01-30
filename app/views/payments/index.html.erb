@@ -1,4 +1,4 @@
-<h1>Listing payments</h1>
+<h1>Listing Payments</h1>
 
 <table>
   <tr>
@@ -7,8 +7,6 @@
     <th>Cancelled</th>
     <th>Transaction</th>
     <th>Completed date</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -19,9 +17,7 @@
     <td><%= payment.cancelled %></td>
     <td><%= payment.transaction_id %></td>
     <td><%= payment.completed_date %></td>
-    <td><%= link_to 'Show', payment %></td>
-    <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
-    <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show Details', payment %></td>
   </tr>
 <% end %>
 </table>
