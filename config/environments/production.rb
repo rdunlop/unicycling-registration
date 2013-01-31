@@ -67,4 +67,6 @@ Workspace::Application.configure do
 
   #PAYPAL_BASE_URL = "https://www.paypal.com"
   PAYPAL_BASE_URL = "https://www.sandbox.paypal.com"
+  
+  MIXPANEL_TOKEN = "89428d48b735d9d38ff0773d268580b2"
 end

@@ -248,7 +248,6 @@ TO DO (MUST be done BEFORE LIVE):
   - create a "payment summary" page which addresses paypal's requirements
   - change documentation to allow for auto-return
   - Find a way to enable/disable paypal-sandbox in production without a code commit
-  - Allow Users to see their payments (/payments)
   - Prevent people from starting a payment, and then finishing it months later for cheap.
 
  - Add "Events" report, to list number of users signed up for each event. (MUni XC Beginner, etc)
@@ -358,6 +357,7 @@ DONE:
  ?- Under 18 needs a valid parent/guardian 
  ? - Under 18, need Parent/Guardian ON-Site
  - Paypal integration work (Post, and return IPN)
+  - Allow Users to see their payments (/payments)
  - View Payments Report (what does this entail?)
   - Add "Payments" report, to list number of expense items paid (Registrations, T-Shirts, etc)
  - Make all currencies "xx.xx" format.

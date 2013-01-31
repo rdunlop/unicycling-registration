@@ -1,4 +1,7 @@
 <h1>Registration</h1>
+<script type="text/javascript">
+    mixpanel.track("Main Registration Landing Page Loaded")
+</script>
 
 <%= render :partial => "/registrants/links" %>
 <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %>
