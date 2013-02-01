@@ -1,6 +1,6 @@
 <h1>New Registration</h1>
 <script type="text/javascript">
-    mixpanel.track("New Registrant Page Loaded")
+  mixpanel.track("New Registrant Page Loaded", {'competitor': <%= @registrant.competitor %>})
 </script>
 
 <%= render 'form' %>

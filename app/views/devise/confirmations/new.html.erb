@@ -1,6 +1,6 @@
 <h2>Resend confirmation instructions</h2>
 <script type="text/javascript">
-    mixpanel.track("Resend Confirmation Page Loaded")
+    mixpanel.track_forms("form", "Resend Confirmation")
 </script>
 
 <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
