@@ -58,10 +58,10 @@
         <% end %>
         <div class="tabs">
         <% unless prev_category.nil? %>
-          <a class="prevtab" href="#tabs-<%= prev_category.id %>">Prev Tab</a>
+          <a class="prevtab registration_button" href="#tabs-<%= prev_category.id %>">Prev Tab</a>
         <% end %>
         <% unless next_category.nil? %>
-          <a class="nexttab" href="#tabs-<%= next_category.id %>">Next Tab</a>
+          <a class="nexttab competitor registration_button" href="#tabs-<%= next_category.id %>">Next Tab</a>
         <% end %>
         </div>
       </div>
@@ -71,6 +71,7 @@
   $(function() {
     $( "#tabs" ).tabs({ heightStyle: "auto"});
     $(".nexttab").click(function() {
+      $(this).removeClass("competitor");
       $("#tabs").tabs("select", this.hash);
       return false;
     });
