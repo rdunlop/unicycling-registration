@@ -10,6 +10,7 @@
       <th>Position</th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
 
     <% @events.each do |event| %>
@@ -17,6 +18,7 @@
         <td><%= event.name %></td>
         <td><%= event.description %></td>
         <td><%= event.position %></td>
+        <td><%= link_to 'Event Choices', event_event_choices_path(event) %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

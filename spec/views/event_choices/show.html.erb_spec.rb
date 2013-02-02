@@ -2,22 +2,22 @@ require 'spec_helper'
 
 describe "event_choices/show" do
   before(:each) do
-    @event_choice = assign(:event_choice, stub_model(EventChoice,
-      :event_id => 1,
+    @event = FactoryGirl.create(:event)
+    @event_choice = FactoryGirl.create(:event_choice,
+      :event => @event,
       :export_name => "Export Name",
-      :cell_type => "Cell Type",
+      :cell_type => "boolean",
       :multiple_values => "Multiple Values",
       :label => "Label",
       :position => 2
-    ))
+    )
   end
 
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/1/)
     rendered.should match(/Export Name/)
-    rendered.should match(/Cell Type/)
+    rendered.should match(/boolean/)
     rendered.should match(/Multiple Values/)
     rendered.should match(/Label/)
     rendered.should match(/2/)

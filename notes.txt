@@ -240,6 +240,7 @@ For Nan:
 TO DO (MUST be done BEFORE LIVE):
 - Add Administrative Options similar to what we had on the old registration site:
 
+ - Change to use a sendgrid account instead of my personal gmail account?
  - Modification logs
   - Add ability to log the changes to records, for audit reasons
   - I have gotten the initial page working, but more is capabilities are required
@@ -264,6 +265,7 @@ TO DO (MUST be done BEFORE LIVE):
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
+ - Prevent changing the prices of expense_items (especially after payments with those items exist)
  - Payments page which lists all Unpaid Registrations (and e-mail contact info?)
  - Choose a better colour scheme
  - Multi-Edit (allows updating the selection of multiple people's choices)

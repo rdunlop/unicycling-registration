@@ -21,6 +21,7 @@ require 'spec_helper'
 describe EventChoicesController do
   before(:each) do
     sign_in FactoryGirl.create(:super_admin_user)
+    @event = FactoryGirl.create(:event)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -29,8 +30,7 @@ describe EventChoicesController do
   def valid_attributes
     {
     export_name: "100m",
-    cell_type: "boolean",
-    event_id: 1
+    cell_type: "boolean"
     }
   end
 
@@ -43,7 +43,7 @@ describe EventChoicesController do
     end
 
     it "Cannot read event_choices" do
-      get :index
+      get :index, {:event_id => @event.id}
       response.should redirect_to(root_path)
     end
   end
@@ -51,9 +51,19 @@ describe EventChoicesController do
 
   describe "GET index" do
     it "assigns all event_choices as @event_choices" do
-      event_choice = EventChoice.create! valid_attributes
-      get :index, {}
-      assigns(:event_choices).should eq([event_choice])
+      event_choice = EventChoice.create! valid_attributes.merge({:event_id => @event.id})
+      get :index, {:event_id => @event.id}
+      assigns(:event_choices).should eq(@event.event_choices)
+    end
+    it "does not show event choices from other events" do
+      event_choice = FactoryGirl.create(:event_choice)
+      get :index, {:event_id => @event.id}
+      assigns(:event_choices).should eq(@event.event_choices)
+    end
+    it "assigns a new event_choice" do
+      event_choice = EventChoice.create! valid_attributes.merge({:event_id => @event.id})
+      get :index, {:event_id => @event.id}
+      assigns(:event_choice).should be_a_new(EventChoice)
     end
   end
 
@@ -62,13 +72,6 @@ describe EventChoicesController do
       event_choice = EventChoice.create! valid_attributes
       get :show, {:id => event_choice.to_param}
       assigns(:event_choice).should eq(event_choice)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new event_choice as @event_choice" do
-      get :new, {}
-      assigns(:event_choice).should be_a_new(EventChoice)
     end
   end
 
@@ -84,19 +87,19 @@ describe EventChoicesController do
     describe "with valid params" do
       it "creates a new EventChoice" do
         expect {
-          post :create, {:event_choice => valid_attributes}
+          post :create, {:event_id => @event.id, :event_choice => valid_attributes}
         }.to change(EventChoice, :count).by(1)
       end
 
       it "assigns a newly created event_choice as @event_choice" do
-        post :create, {:event_choice => valid_attributes}
+        post :create, {:event_id => @event.id, :event_choice => valid_attributes}
         assigns(:event_choice).should be_a(EventChoice)
         assigns(:event_choice).should be_persisted
       end
 
       it "redirects to the created event_choice" do
-        post :create, {:event_choice => valid_attributes}
-        response.should redirect_to(EventChoice.last)
+        post :create, {:event_id => @event.id, :event_choice => valid_attributes}
+        response.should redirect_to(event_event_choices_path(@event))
       end
     end
 
@@ -104,15 +107,20 @@ describe EventChoicesController do
       it "assigns a newly created but unsaved event_choice as @event_choice" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventChoice.any_instance.stub(:save).and_return(false)
-        post :create, {:event_choice => {}}
+        post :create, {:event_id => @event.id, :event_choice => {}}
         assigns(:event_choice).should be_a_new(EventChoice)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventChoice.any_instance.stub(:save).and_return(false)
-        post :create, {:event_choice => {}}
-        response.should render_template("new")
+        post :create, {:event_id => @event.id, :event_choice => {}}
+        response.should render_template("index")
+      end
+      it "loads the event" do
+        EventChoice.any_instance.stub(:save).and_return(false)
+        post :create, {:event_id => @event.id, :event_choice => {}}
+        assigns(:event).should == @event
       end
     end
   end
@@ -163,16 +171,17 @@ describe EventChoicesController do
 
   describe "DELETE destroy" do
     it "destroys the requested event_choice" do
-      event_choice = EventChoice.create! valid_attributes
+      event_choice = FactoryGirl.create(:event_choice)
       expect {
         delete :destroy, {:id => event_choice.to_param}
       }.to change(EventChoice, :count).by(-1)
     end
 
     it "redirects to the event_choices list" do
-      event_choice = EventChoice.create! valid_attributes
+      event_choice = FactoryGirl.create(:event_choice)
+      event = event_choice.event
       delete :destroy, {:id => event_choice.to_param}
-      response.should redirect_to(event_choices_url)
+      response.should redirect_to(event_event_choices_path(event))
     end
   end
 
