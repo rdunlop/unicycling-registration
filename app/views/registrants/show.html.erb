@@ -69,15 +69,18 @@
       <%= @registrant.responsible_adult_phone %>
     </div>
   </fieldset>
+  <div class="data_block">
+    <%= render :partial => "registrant_expenses" %>
+    <div style="text-align: center">
+      <%= link_to 'Edit Items', items_registrant_path(@registrant) %>
+    </div>
+  </div>
+
   <%= render :partial => "registrant_events" %>
 
   <%= link_to 'Edit Details/Events', edit_registrant_path(@registrant) %>
   <hr />
 
-  <%= render :partial => "registrant_expenses" %>
-  <div>
-    <%= link_to 'Edit Items', items_registrant_path(@registrant) %>
-  </div>
 
   <hr />
 
