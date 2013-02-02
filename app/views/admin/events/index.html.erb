@@ -23,10 +23,14 @@
 <table>
   <caption>Event-Competitor-Breakdown</caption>
   <thead>
+    <th>Category</th>
+    <th>Event Name</th>
+    <th>Number Of competitors</th>
   </thead>
   <tbody>
     <% @events.each do |event| %>
       <tr>
+        <td><%= event.category %></td>
         <td><%= link_to event, admin_event_path(event) %></td>
         <td><%= event.num_competitors %></td>
       </tr>

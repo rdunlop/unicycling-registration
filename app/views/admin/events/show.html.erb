@@ -6,6 +6,7 @@
     <th>Name</th>
     <th>Country</th>
     <% @event.event_choices.each do |choice| %>
+      <% next unless choice.position > 1 %>
       <th><%= choice.label %></th>
     <% end %>
   </thead>
@@ -14,9 +15,10 @@
       <% next unless reg_choice.value == "1"  %>
       <tr>
         <td><%= reg_choice.registrant %></td>
-        <td><%= reg_choice.registrant %></td>
+        <td><%= reg_choice.registrant.country %></td>
         <% @event.event_choices.each do |choice| %>
           <% choice.registrant_choices.where({:registrant_id => reg_choice.registrant.id}).each do |reg| %>
+            <% next unless reg.event_choice.position > 1 %>
             <td><%= reg.value %></td>
           <% end %>
         <% end %>

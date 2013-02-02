@@ -251,10 +251,7 @@ TO DO (MUST be done BEFORE LIVE):
   - Find a way to enable/disable paypal-sandbox in production without a code commit
   - Prevent people from starting a payment, and then finishing it months later for cheap.
 
- - Add "Events" report, to list number of users signed up for each event. (MUni XC Beginner, etc)
- - Add analytics gathering of pages/tabs
  - Add notice that "A Release/Waiver must be signed by all competitors, and by parent/guardian for anyone < 18"
- - Change Artistic Age Groups to match NAUCC requirements (No Jr Expert???? Beginner/Intermediate....)
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
  - Prevent changing a payment's contents after it is _paid_
  - Have a link to a PDF of the waiver that must be signed by ALL participants (and make it obvious)
@@ -363,6 +360,9 @@ DONE:
  - View Payments Report (what does this entail?)
   - Add "Payments" report, to list number of expense items paid (Registrations, T-Shirts, etc)
  - Make all currencies "xx.xx" format.
+ - Add analytics gathering of pages/tabs
+ - Change Artistic Age Groups to match NAUCC requirements (No Jr Expert???? Beginner/Intermediate....)
+ - Add "Events" report, to list number of users signed up for each event. (MUni XC Beginner, etc)
 
 
 ------------------------------------------------------------------------------------------------------------------
