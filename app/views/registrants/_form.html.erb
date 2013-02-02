@@ -44,13 +44,11 @@
         <%= f.text_field :usa_member_number %><br />
       </span>
     </fieldset>
+    <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
 
     <% unless @categories.nil? %>
       <%= render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f } %>
     <% end %>
-    <div>
-      <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
-    </div>
 
     <div class="data_block">
       <%= render :partial => "contact_info", :locals => { :f => f } %>

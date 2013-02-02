@@ -21,7 +21,6 @@
     <span>
       <%= f.label :email %>
       <%= f.text_field :email %>
-      <b>Important:</b> Provide your email address to receive updates to registration, schedule, and new events.
     </span>
   </fieldset>
   <fieldset class="data_block">
@@ -49,8 +48,7 @@
     </span>
   </fieldset>
   <fieldset class="data_block">
-    <legend>Responsible Adult (for registrants Under the age of 18)</legend>
-    <span><b>The following adult, attending the convention, will be responsible for the registered minor</b></span>
+    <legend>Responsible Adult (for Registrants Under the age of 18)</legend>
     <span>
       <%= f.label :responsible_adult_name, "Name" %>
       <%= f.text_field :responsible_adult_name %>
@@ -60,4 +58,9 @@
       <%= f.text_field :responsible_adult_phone %>
     </span>
   </fieldset>
+  <br />
+  <b>Important:</b> Provide your email address to receive updates to registration, schedule, and new events.
+  <br />
+  <br />
+  The "Responsible Adult", will be responsible for the registered minor.
 </fieldset>
