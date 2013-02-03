@@ -238,9 +238,9 @@ For Nan:
 
 ================================================================================
 TO DO (MUST be done BEFORE LIVE):
+ - remove the mixpanel key from git, add to documentation.
 - Add Administrative Options similar to what we had on the old registration site:
 
- - Change to use a sendgrid account instead of my personal gmail account?
  - Modification logs
   - Add ability to log the changes to records, for audit reasons
   - I have gotten the initial page working, but more is capabilities are required
@@ -257,11 +257,14 @@ TO DO (MUST be done BEFORE LIVE):
  - Update the Costs for all Expense Items and registration periods
  - Work with Dave to configure his paypal account appropriately
  - Try it with different browsers
+ - do we want a link and/or popup beside each of the events, so that people can easily reference the events?
  - Do we require that Paypal have a shipping address?
  - Should the "NAUCC logo" be a link to uninationals.com?
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
+ - Export/Import functions for the WHOLE dataset?
+ - Replace the 'Copyright" with a "Developed by" statement?
  - Prevent changing the prices of expense_items (especially after payments with those items exist)
  - Payments page which lists all Unpaid Registrations (and e-mail contact info?)
  - Choose a better colour scheme
