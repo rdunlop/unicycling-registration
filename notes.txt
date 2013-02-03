@@ -246,9 +246,6 @@ TO DO (MUST be done BEFORE LIVE):
   - I have gotten the initial page working, but more is capabilities are required
 
  - PayPal
-  - create a "payment summary" page which addresses paypal's requirements
-  - change documentation to allow for auto-return
-  - Find a way to enable/disable paypal-sandbox in production without a code commit
   - Prevent people from starting a payment, and then finishing it months later for cheap.
 
  - Add notice that "A Release/Waiver must be signed by all competitors, and by parent/guardian for anyone < 18"
@@ -260,6 +257,7 @@ TO DO (MUST be done BEFORE LIVE):
  - Update the Costs for all Expense Items and registration periods
  - Work with Dave to configure his paypal account appropriately
  - Try it with different browsers
+ - Do we require that Paypal have a shipping address?
  - Should the "NAUCC logo" be a link to uninationals.com?
  - Create a "LIVE" site (we will still have a TEST site).
 
@@ -356,6 +354,9 @@ DONE:
  ? - Under 18, need Parent/Guardian ON-Site
  - Paypal integration work (Post, and return IPN)
   - Allow Users to see their payments (/payments)
+  - create a "payment summary" page which addresses paypal's requirements
+  - change documentation to allow for auto-return
+  - Find a way to enable/disable paypal-sandbox in production without a code commit
  - View Payments Report (what does this entail?)
   - Add "Payments" report, to list number of expense items paid (Registrations, T-Shirts, etc)
  - Make all currencies "xx.xx" format.

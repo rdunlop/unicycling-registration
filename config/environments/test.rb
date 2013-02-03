@@ -42,6 +42,5 @@ Workspace::Application.configure do
 
   ENV['DOMAIN'] = 'localhost'
 
-  PAYPAL_BASE_URL = "https://www.sandbox.paypal.com"
   ENV['PAYPAL_ACCOUNT'] = "ROBIN+merchant@dunlopweb.com"
 end

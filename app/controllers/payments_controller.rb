@@ -106,6 +106,5 @@ class PaymentsController < ApplicationController
 
   # PayPal return endpoint
   def success
-    @payment = Payment.find(params[:invoice])
   end
 end

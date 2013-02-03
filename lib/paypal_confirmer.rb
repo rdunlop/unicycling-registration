@@ -8,7 +8,7 @@ class PaypalConfirmer
   end
 
   def valid?
-    base_page_url = PAYPAL_BASE_URL
+    base_page_url = EventConfiguration.paypal_base_url
     uri = URI.parse(base_page_url + '/cgi-bin/webscr?cmd=_notify-validate')
 
     http = Net::HTTP.new(uri.host, uri.port)

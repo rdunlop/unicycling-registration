@@ -18,4 +18,16 @@ class EventConfiguration < ActiveRecord::Base
     self.logo_type = input_data.content_type.chomp
     self.logo_binary = input_data.read
   end
+
+  def self.paypal_base_url
+    paypal_test_url = "https://www.sandbox.paypal.com"
+    paypal_live_url = "https://www.paypal.com"
+
+    ec = EventConfiguration.first
+    if ec.nil? or ec.test_mode
+      paypal_test_url
+    else
+      paypal_live_url
+    end
+  end
 end

@@ -1,12 +1,4 @@
 
-<h2>Payment Summary</h2>
-<%= render :partial => "summary", :locals => {:payment => @payment } %>
-
-<br />
-<h3>Payment Confirmation: <b>
-    <% if @payment.completed %>
-      Received
-    <% else %>
-      Not yet received
-    <% end %>
-</b></h3>
+<h2>Payment Complete</h2>
+Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you. 
+You may log into your account and choose "My Payments" to view details of this transaction.

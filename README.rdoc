@@ -70,7 +70,7 @@ DOMAIN=rulebook.unicycling.org
 
 . Login to merchant account -> Profile -> Instant Payment Notification Preferences -> Enter <notification url> and select radio button “Receive IPN messages” -> Save
 
-3. Enable Payment Data Transfer, and Auto Return:
+3. Enable Auto Return:
   <return_url> will be http://uniregtest.herokuapp.com/payments/
 
   "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> Payment Data Transfer On), Auto Return ON: Return URL: <return_url>

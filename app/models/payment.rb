@@ -33,7 +33,7 @@ class Payment < ActiveRecord::Base
   end
 
   def paypal_post_url
-    PAYPAL_BASE_URL + "/cgi-bin/webscr"
+    EventConfiguration.paypal_base_url + "/cgi-bin/webscr"
   end
 
   def total_amount

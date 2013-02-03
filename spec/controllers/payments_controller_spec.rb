@@ -315,14 +315,8 @@ describe PaymentsController do
 
     describe "when directed to the payment_success page" do
       it "can get there without being logged in" do
-        invoice = FactoryGirl.create(:payment)
-        get :success, {:invoice => invoice.to_param, :txn_id => "12345"}
+        get :success, {}
         response.should be_success
-      end
-      it "loads the payment into payment" do
-        invoice = FactoryGirl.create(:payment)
-        get :success, {:invoice => invoice.to_param, :txn_id => "12345"}
-        assigns(:payment).should == invoice
       end
     end
   end

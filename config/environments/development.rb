@@ -42,6 +42,5 @@ Workspace::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  PAYPAL_BASE_URL = "https://www.sandbox.paypal.com"
   MIXPANEL_TOKEN = "f0ae9ba6863f13945a1d369c6ba36e0b";
 end

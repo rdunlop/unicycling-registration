@@ -37,8 +37,18 @@ describe Payment do
     end
   end
 
-  it "has a paypal_post_url" do
-    @pay.paypal_post_url.should == "https://www.sandbox.paypal.com/cgi-bin/webscr"
+  describe "without any global configu" do
+    it "has a test paypal_post_url" do
+      @pay.paypal_post_url.should == "https://www.sandbox.paypal.com/cgi-bin/webscr"
+    end
+  end
+  describe "With a global config with test mode disabled" do
+    before(:each) do
+      FactoryGirl.create(:event_configuration, :test_mode => false)
+    end
+    it "has a REAL paypal_post_url" do
+      @pay.paypal_post_url.should == "https://www.paypal.com/cgi-bin/webscr"
+    end
   end
 
   it "saves associated details when the payment is saved" do
