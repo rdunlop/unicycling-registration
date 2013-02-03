@@ -13,7 +13,7 @@ $nonfocus_hover: #3487C9;
 @mixin button($width) {
   text-decoration: none;
   display: inline-block;
-  width:$width;
+  min-width:$width;
   padding: 10px 15px;
   font-size: 18px;
   cursor: pointer;
@@ -40,6 +40,9 @@ $nonfocus_hover: #3487C9;
   //border-top-right-radius: 11px;
 }
 
+.focus_button:visited, .nonfocus_button:visited {
+  color: black;
+}
 .focus_button {
   @include button(220px);
   margin: 10px;
@@ -47,6 +50,7 @@ $nonfocus_hover: #3487C9;
   border-color: #208d74;
 }
 .focus_button:hover, .registration_button:focus {
+  color: white;
   border: solid 1px;
   text-decoration: none;
   background-color: $focus_hover;
@@ -69,7 +73,8 @@ $nonfocus_hover: #3487C9;
   background-color: $nonfocus;
   border-color: #2F7BB6;
 }
-.nonfocus_button:hover, .registration_button:nonfocus {
+.nonfocus_button:hover {
+  color: white;
   border: solid 1px;
   text-decoration: none;
   background-color: $nonfocus_hover;
