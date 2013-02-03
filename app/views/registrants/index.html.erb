@@ -9,6 +9,7 @@
     <ul>
       <li>Sign Up for events</li>
       <% ExpenseGroup.all.each do |eg| %>
+        <% next unless eg.visible %>
         <li>Choose <%= eg %></li>
       <% end %>
       <li>Pay for Registrations</li>
