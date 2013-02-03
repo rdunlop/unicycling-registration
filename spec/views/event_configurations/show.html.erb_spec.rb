@@ -14,7 +14,7 @@ describe "event_configurations/show" do
     rendered.should match(/X through Y/)
     rendered.should match(/http:\/\/www.naucc.com/)
     rendered.should match(/$/)
-    rendered.should match(/robin@dunlopweb.com/)
+    rendered.should match(@event_configuration.contact_email)
     rendered.should match(/false/)
   end
 end

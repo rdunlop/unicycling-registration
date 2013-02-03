@@ -9,7 +9,7 @@ class Notifications < ActionMailer::Base
   def ipn_received(contents)
     @contents = contents
 
-    mail to: "robin@dunlopweb.com"
+    mail to: EventConfiguration.contact_email
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -20,6 +20,6 @@ class Notifications < ActionMailer::Base
   def payment_completed(payment)
     @payment_number = payment.id
 
-    mail to: "robin@dunlopweb.com"
+    mail to: payment.user.email, bcc: EventConfiguration.contact_email
   end
 end

@@ -11,7 +11,7 @@ describe Admin::UsersController do
       admin_user = FactoryGirl.create(:admin_user)
       user = FactoryGirl.create(:user)
       get :index, {}
-      assigns(:users).should eq([@super_user, admin_user, user])
+      assigns(:users).should =~ [@super_user, admin_user, user]
     end
   end
 

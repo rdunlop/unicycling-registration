@@ -34,6 +34,8 @@ MAIL_FULL_EMAIL=rulebook@unicycling.org
 MAIL_TLS=false
 DOMAIN=rulebook.unicycling.org
 
+NOTE: the MAIL_FULL_EMAIL is the e-mail address all e-mail will be address "FROM".
+
 == Deploying to Heroku
 
 1. Create a new heroku instance

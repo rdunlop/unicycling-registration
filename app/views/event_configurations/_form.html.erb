@@ -11,61 +11,76 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :short_name %><br />
-    <%= f.text_field :short_name %>
-  </div>
-  <div class="field">
-    <%= f.label :long_name %><br />
-    <%= f.text_field :long_name %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :dates_description %><br />
-    <%= f.text_field :dates_description %>
-  </div>
-  <div class="field">
-    <%= f.label :event_url %><br />
-    <%= f.text_field :event_url %>
-  </div>
-  <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date %>
-  </div>
-  <div class="field">
-    <%= f.label :logo_image %><br />
-    <%= f.file_field :logo_image %>
-  </div>
-  <div class="field">
-    <%= f.label :currency %><br />
-    <%= f.text_field :currency %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_email %><br />
-    <%= f.text_field :contact_email %>
-  </div>
-  <div class="field">
-    <%= f.label :closed %><br />
-    <%= f.check_box :closed %>
-  </div>
-  <div class="field">
-    <%= f.label :artistic_closed_date %><br />
-    <%= f.date_select :artistic_closed_date %>
-  </div>
-  <div class="field">
-    <%= f.label :standard_skill_closed_date %><br />
-    <%= f.date_select :standard_skill_closed_date %>
-  </div>
-  <div class="field">
-    <%= f.label :tshirt_closed_date %><br />
-    <%= f.date_select :tshirt_closed_date %>
-  </div>
-  <div class="field">
-    <%= f.label :test_mode %><br />
-    <%= f.check_box :test_mode %>
+  <div style="text-align: left">
+    <div>
+      <%= f.label :short_name %>
+      <%= f.text_field :short_name %><br />
+      Not currently used
+    </div>
+    <div>
+      <%= f.label :long_name %>
+      <%= f.text_field :long_name %><br />
+    </div>
+    <div class="field">
+      <%= f.label :location %>
+      <%= f.text_field :location %><br />
+    </div>
+    <div class="field">
+      <%= f.label :dates_description %>
+      <%= f.text_field :dates_description %><br />
+    </div>
+    <div class="field">
+      <%= f.label :event_url %>
+      <%= f.text_field :event_url %><br />
+      Not currently used
+    </div>
+    <div class="field">
+      <%= f.label :start_date %>
+      <%= f.date_select :start_date %><br />
+      This date is used to calculate the "age" of each registrant
+    </div>
+    <div class="field">
+      <%= f.label :logo_image %>
+      <%= f.file_field :logo_image %><br />
+      This logo is displayed at the top of the site.
+    </div>
+    <div class="field">
+      <%= f.label :currency %>
+      <%= f.text_field :currency %><br />
+      Not currently used
+    </div>
+    <div class="field">
+      <%= f.label :contact_email %>
+      <%= f.text_field :contact_email %><br />
+      Any errors will be sent to this e-mail address.<br />
+      All Payment notifications will be BCC'd to this e-mail address<br />
+    </div>
+    <div class="field">
+      <%= f.label :closed %>
+      <%= f.check_box :closed %><br />
+      Not currently used
+    </div>
+    <div class="field">
+      <%= f.label :artistic_closed_date %>
+      <%= f.date_select :artistic_closed_date %><br />
+      Not currently used
+    </div>
+    <div class="field">
+      <%= f.label :standard_skill_closed_date %>
+      <%= f.date_select :standard_skill_closed_date %><br />
+      Not currently used
+    </div>
+    <div class="field">
+      <%= f.label :tshirt_closed_date %>
+      <%= f.date_select :tshirt_closed_date %><br />
+      Not currently used
+    </div>
+    <div class="field">
+      <%= f.label :test_mode %>
+      <%= f.check_box :test_mode %><br />
+      Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.<br />
+      Enabling this causes all payments to be sent to the paypal sandbox, instead of the "live" site<br />
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe "event_configurations/index" do
   before(:each) do
+    @ec = FactoryGirl.create(:event_configuration)
     assign(:event_configurations, [
-           FactoryGirl.create(:event_configuration)
+           @ec
     ])
   end
 
@@ -16,7 +17,7 @@ describe "event_configurations/index" do
     assert_select "tr>td", :text => "X through Y".to_s, :count => 1
     assert_select "tr>td", :text => "http://www.naucc.com".to_s, :count => 1
     assert_select "tr>td", :text => "$".to_s, :count => 1
-    assert_select "tr>td", :text => "robin@dunlopweb.com".to_s, :count => 1
+    assert_select "tr>td", :text => @ec.contact_email.to_s, :count => 1
     assert_select "tr>td", :text => false.to_s, :count => 1
     assert_select "tr>td", :text => true.to_s, :count => 1
   end

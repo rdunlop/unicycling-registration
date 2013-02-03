@@ -30,4 +30,13 @@ class EventConfiguration < ActiveRecord::Base
       paypal_live_url
     end
   end
+
+  def self.contact_email
+    ec = EventConfiguration.first
+    if ec.nil?
+      ""
+    else
+      ec.contact_email
+    end
+  end
 end
