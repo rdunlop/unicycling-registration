@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Position</th>
+      <th>Link</th>
       <th></th>
       <th></th>
       <th></th>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= category.name %></td>
         <td><%= category.position %></td>
+        <td><%= category.info_url %></td>
         <td><%= link_to 'Events', category_events_path(category) %></td>
         <td><%= link_to 'Edit', edit_category_path(category) %></td>
         <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>

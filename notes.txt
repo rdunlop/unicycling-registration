@@ -258,7 +258,6 @@ TO DO (MUST be done BEFORE LIVE):
  - Update the Costs for all Expense Items and registration periods
  - Work with Dave to configure his paypal account appropriately
  - Try it with different browsers
- - do we want a link and/or popup beside each of the events, so that people can easily reference the events?
  - Do we require that Paypal have a shipping address?
  - Do you want to be BCC'd on all payment received messages?
  - Can I make the Payment deadline "listed + 1 day"?
@@ -379,6 +378,7 @@ DONE:
  - Add notice that "A Release/Waiver must be signed by all competitors, and by parent/guardian for anyone < 18"
  - Have a link to a PDF of the waiver that must be signed by ALL participants (and make it obvious)
  - Should the "NAUCC logo" be a link to uninationals.com?
+ - do we want a link and/or popup beside each of the events, so that people can easily reference the events?
 
 
 ------------------------------------------------------------------------------------------------------------------

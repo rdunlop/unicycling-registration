@@ -21,6 +21,11 @@
         next_category = @categories[index + 1]
       end %>
       <div id="tabs-<%= category.id %>">
+        <% unless category.info_url.nil? %>
+          <div class="event_link">
+            <%= link_to "More Info [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link"} %>
+          </div>
+        <% end %>
         <% category.events.each do |event| %>
           <div class="event">
             <div class="event_choices">

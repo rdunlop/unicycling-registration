@@ -12,6 +12,13 @@
  *= require_tree .
  */
 
+.external_link {
+  color: blue;
+}
+.external_link:visited {
+  color: blue;
+}
+
 .banner {
   text-align: center;
 }

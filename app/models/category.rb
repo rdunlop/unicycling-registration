@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  attr_accessible :name, :position
+  attr_accessible :name, :position, :info_url
 
   default_scope order('position ASC')
 

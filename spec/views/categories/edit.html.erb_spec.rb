@@ -15,6 +15,7 @@ describe "categories/edit" do
     assert_select "form", :action => categories_path(@category), :method => "post" do
       assert_select "input#category_name", :name => "category[name]"
       assert_select "input#category_position", :name => "category[position]"
+      assert_select "input#category_info_url", :name => "category[info_url]"
     end
   end
 end
