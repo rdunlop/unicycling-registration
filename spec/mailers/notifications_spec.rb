@@ -8,8 +8,9 @@ describe Notifications do
     let(:mail) { Notifications.ipn_received("something") }
 
     it "renders the headers" do
+      ENV['ERROR_EMAIL'] = "robin+e@dunlopweb.com"
       mail.subject.should eq("Ipn received")
-      mail.to.should eq([@ec.contact_email])
+      mail.to.should eq(["robin+e@dunlopweb.com"])
       mail.from.should eq(["from@example.com"])
     end
 
@@ -24,9 +25,10 @@ describe Notifications do
     let(:mail) { Notifications.payment_completed(payment) }
 
     it "renders the headers" do
+      ENV['PAYMENT_NOTICE_EMAIL'] = "robin+p@dunlopweb.com"
       mail.subject.should eq("Payment completed")
       mail.to.should eq([payment.user.email])
-      mail.bcc.should eq([@ec.contact_email])
+      mail.bcc.should eq(["robin+p@dunlopweb.com"])
       mail.from.should eq(["from@example.com"])
     end
 

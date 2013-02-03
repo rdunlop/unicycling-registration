@@ -260,11 +260,14 @@ TO DO (MUST be done BEFORE LIVE):
  - Try it with different browsers
  - do we want a link and/or popup beside each of the events, so that people can easily reference the events?
  - Do we require that Paypal have a shipping address?
+ - Do you want to be BCC'd on all payment received messages?
+ - Can I make the Payment deadline "listed + 1 day"?
  - Confirm link to Waiver PDF
  - Confirm link to Nationals Site
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
+ - Disable the IPN e-mail, once it is confirmed to be working.
  - test that the "Registration Periods" upgrade correctly. (Give a day of grace?)
  - Export/Import functions for the WHOLE dataset?
  - Replace the 'Copyright" with a "Developed by" statement?

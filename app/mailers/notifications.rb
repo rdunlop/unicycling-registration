@@ -8,9 +8,10 @@ class Notifications < ActionMailer::Base
   #   en.notifications.ipn_received.subject
   #
   def ipn_received(contents)
+    # XXX this action should be disabled soon.
     @contents = contents
 
-    mail to: EventConfiguration.contact_email
+    mail to: ENV['ERROR_EMAIL']
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -23,6 +24,6 @@ class Notifications < ActionMailer::Base
     @total_amount = payment.total_amount
     @event_name = EventConfiguration.long_name
 
-    mail to: payment.user.email, bcc: EventConfiguration.contact_email
+    mail to: payment.user.email, bcc: ENV['PAYMENT_NOTICE_EMAIL']
   end
 end
