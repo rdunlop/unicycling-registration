@@ -1,0 +1,12 @@
+
+<h2>Payment Summary</h2>
+<%= render :partial => "summary", :locals => {:payment => @payment } %>
+
+<br />
+<h3>Payment Confirmation: <b>
+    <% if @payment.completed %>
+      Received
+    <% else %>
+      Not yet received
+    <% end %>
+</b></h3>

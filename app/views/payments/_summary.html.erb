@@ -1,0 +1,49 @@
+<p>
+  <b>PaymentID:</b>
+  <%= @payment.id %>
+</p>
+
+<p>
+  <b>Completed:</b>
+  <%= @payment.completed %>
+</p>
+<p>
+  <b>Cancelled:</b>
+  <%= @payment.cancelled %>
+</p>
+
+<p>
+  <b>TransactionID:</b>
+  <%= @payment.transaction_id %>
+</p>
+
+<p>
+  <b>Completed date:</b>
+  <%= @payment.completed_date %>
+</p>
+
+<table>
+  <caption>Payment Details:</caption>
+  <thead>
+    <tr>
+      <td>Registrant</td>
+      <td>Item</td>
+      <td>Cost</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payment.payment_details.each do |pd| %>
+      <tr>
+        <td>
+          <%= pd.registrant %>
+        </td>
+        <td>
+          <%= pd.expense_item %>
+        </td>
+        <td>
+          <span class="fee"><%= fcost(pd.amount) %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
