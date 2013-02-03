@@ -39,4 +39,13 @@ class EventConfiguration < ActiveRecord::Base
       ec.contact_email
     end
   end
+
+  def self.long_name
+    ec = EventConfiguration.first
+    if ec.nil?
+      ""
+    else
+      ec.long_name
+    end
+  end
 end
