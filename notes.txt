@@ -238,7 +238,10 @@ For Nan:
 
 ================================================================================
 TO DO (MUST be done BEFORE LIVE):
- - remove the mixpanel key from git, add to documentation.
+ - Remvoe secret key
+ - Add exception handler e-mail
+ - Follow hugo's example for configuration blocks.
+
 - Add Administrative Options similar to what we had on the old registration site:
 
  - Modification logs
@@ -369,6 +372,7 @@ DONE:
  - Reg Summary page should be Nicer to look at...the boxes are unclear (perhaps multiple columns of 409px each....)
  - On Events Tabs, have a "previous" link too
  - Add ability for user to see their payments (#payment#index?)
+ - remove the mixpanel key from git, add to documentation.
 
 
 ------------------------------------------------------------------------------------------------------------------

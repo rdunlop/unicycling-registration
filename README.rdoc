@@ -1,42 +1,72 @@
 == Welcome to the Unicycling Registration Application.
 
+== Configuration
+
+You must configure the following settings for each system that you run.
+
+For Development (local) system, use the following syntax:
+
+echo "<variable>=<value>" >> .env
+
+For Production (heroku) system, use the following syntax:
+
+heroku config:add <variable>=<value>
+
+
 == Set the configuration variables (for local work)
+
+These are necessary to get a local environment configured, but are not needed on heroku.
+
 echo "RACK_ENV=development" > .env
 echo "PORT=9292" >> .env
 
-echo "MAIL_SERVER=smtp.gmail.com" >> .env
-echo "MAIL_PORT=587" >> .env
-echo "MAIL_DOMAIN=dunlopweb.com" >> .env
-echo "MAIL_USERNAME=robin@dunlopweb.com" >> .env
-echo "MAIL_PASSWORD=something" >> .env
-echo "MAIL_FULL_EMAIL=robin@dunlopweb.com" >> .env
-echo "DOMAIN=localhost:9292" >> .env
+
+== Email system
+
+The following is used to configure the outgoing e-mail system.
+Specify a real email account, with username and password.
+The "Full E-mail" will be the e-mail address in the "From" line.
+
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=587
+MAIL_DOMAIN=dunlopweb.com
+MAIL_USERNAME=robin@dunlopweb.com
+MAIL_PASSWORD=something
+MAIL_FULL_EMAIL=robin@dunlopweb.com
+
+On Non-GMail systems, you may need to set the MAIL_TLS=false variable too (see initializers/mailer.rb)
+
+== Domain
+
+The following setting is used to build the links in the e-mails, set it to the hostname of the deployed application
+
+DOMAIN=uniregtest.herokuapp.com
+
+or 
+
+DOMAIN=localhost:9292
+
+== Paypal Account
+
+Specify the paypal account "Merchan account" that will be paid.
+
+PAYPAL_ACCOUNT=robin@dunlopweb.com
+
+Specify whether to use the LIVE or TEST PAYPAL ACCOUNT (default: Test)
+
+PAYPAL_TEST=false
+
+== Mixpanel Account
+
+Mixpanel is a service for tracking the way that users interact with the site.
+
+Adding a mixpanel token enables us to track the flow of users.
+
+MIXPANEL_TOKEN=<token>
 
 
-== Set up the configuration variables (on heroku)
-heroku config:add MAIL_SERVER=smtp.gmail.com
-heroku config:add MAIL_PORT=587
-heroku config:add MAIL_DOMAIN=dunlopweb.com
-heroku config:add MAIL_USERNAME=robin@dunlopweb.com
-heroku config:add MAIL_PASSWORD=something
-heroku config:add MAIL_FULL_EMAIL=robin@dunlopweb.com
-heroku config:add DOMAIN=uniregtest.herokuapp.com
 
-== On Non-GMail systems, you may need to set the MAIL_TLS=false variable too (see initializers/mailer.rb)
-
-Current values for Unicycling.org rulebook are:
-MAIL_SERVER=unicycling.org
-MAIL_PORT=25
-MAIL_DOMAIN=unicycling.org
-MAIL_USERNAME=rulebook@unicycling.org
-MAIL_PASSWORD=********
-MAIL_FULL_EMAIL=rulebook@unicycling.org
-MAIL_TLS=false
-DOMAIN=rulebook.unicycling.org
-
-NOTE: the MAIL_FULL_EMAIL is the e-mail address all e-mail will be address "FROM".
-
-== Deploying to Heroku
+= Deploying to Heroku
 
 1. Create a new heroku instance
         <tt>heroku create cedar,.....something</tt>
@@ -66,6 +96,8 @@ NOTE: the MAIL_FULL_EMAIL is the e-mail address all e-mail will be address "FROM
       echo "PAYPAL_ACCOUNT=robin@dunlopweb.com" >> .env
 
       heroku config:add PAYPAL_ACCOUNT=robin@dunlopweb.com
+
+      Disable paypal test mode using PAYPAL_TEST=false (see above)
 
 2. Configure your paypal account to send out IPN notifications;
   The <notification url> will be the hosted website URL, with /payments/notification at the end. Example: http://uniregtest.herokuapp.com/payments/notification

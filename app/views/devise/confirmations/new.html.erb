@@ -1,7 +1,9 @@
 <h2>Resend confirmation instructions</h2>
-<script type="text/javascript">
+<% if mixpanel? %>
+  <script type="text/javascript">
     mixpanel.track_forms("form", "Resend Confirmation")
-</script>
+  </script>
+<% end %>
 
 <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>

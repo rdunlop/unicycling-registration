@@ -42,9 +42,9 @@ describe Payment do
       @pay.paypal_post_url.should == "https://www.sandbox.paypal.com/cgi-bin/webscr"
     end
   end
-  describe "With a global config with test mode disabled" do
+  describe "With an environment config with test mode disabled" do
     before(:each) do
-      FactoryGirl.create(:event_configuration, :test_mode => false)
+      ENV["PAYPAL_TEST"] = "false"
     end
     it "has a REAL paypal_post_url" do
       @pay.paypal_post_url.should == "https://www.paypal.com/cgi-bin/webscr"

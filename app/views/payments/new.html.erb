@@ -1,7 +1,9 @@
 <h1>New payment</h1>
-<script type="text/javascript">
+<% if mixpanel? %>
+  <script type="text/javascript">
     mixpanel.track("New Payment Page Loaded")
-</script>
+  </script>
+<% end %>
 
 <div>
   The following records are going to be paid for:

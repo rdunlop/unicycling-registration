@@ -23,8 +23,7 @@ class EventConfiguration < ActiveRecord::Base
     paypal_test_url = "https://www.sandbox.paypal.com"
     paypal_live_url = "https://www.paypal.com"
 
-    ec = EventConfiguration.first
-    if ec.nil? or ec.test_mode
+    if ENV['PAYPAL_TEST'].nil? or ENV['PAYPAL_TEST'] == "true"
       paypal_test_url
     else
       paypal_live_url
