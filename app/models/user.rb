@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
   has_many :registrants, :order => "registrants.id", :include => [:registrant_expense_items, :payment_details]
 
+  has_many :payments
+
   after_initialize :init
 
   def init

@@ -2,9 +2,8 @@
 
 <table>
   <tr>
-    <th>User</th>
-    <th>Completed</th>
-    <th>Cancelled</th>
+    <th>Invoice Number</th> 
+    <th>Amount</th> 
     <th>Transaction</th>
     <th>Completed date</th>
     <th></th>
@@ -12,9 +11,8 @@
 
 <% @payments.each do |payment| %>
   <tr>
-    <td><%= payment.user %></td>
-    <td><%= payment.completed %></td>
-    <td><%= payment.cancelled %></td>
+    <td><%= payment.id %></td>
+    <td><span class="fee"><%= fcost(payment.total_amount) %></span></td>
     <td><%= payment.transaction_id %></td>
     <td><%= payment.completed_date %></td>
     <td><%= link_to 'Show Details', payment %></td>
@@ -24,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New Payment', new_payment_path %>
+<%= link_to 'Start New Payment', new_payment_path %>

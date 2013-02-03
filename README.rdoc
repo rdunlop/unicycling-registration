@@ -71,11 +71,10 @@ DOMAIN=rulebook.unicycling.org
 . Login to merchant account -> Profile -> Instant Payment Notification Preferences -> Enter <notification url> and select radio button “Receive IPN messages” -> Save
 
 3. Enable Payment Data Transfer, and Auto Return:
-  ****** SKIP THIS STEP ****
   <return_url> will be http://uniregtest.herokuapp.com/payments/
 
   "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> Payment Data Transfer On), Auto Return ON: Return URL: <return_url>
 
-4. Need to set the "PayPal Account Optional" setting on so that people don't have to have a paypal account to pay
+4. Set the "PayPal Account Optional" setting on so that people don't have to have a paypal account to pay
   "My Account -> PRofile -> Sellers Preferences -> Website Payment Preferences -> PayPal Account Optional (On) -> save"
 

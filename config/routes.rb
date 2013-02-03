@@ -21,6 +21,7 @@ Workspace::Application.routes.draw do
   resources :payments do
     collection do
       post 'notification'
+      get 'success'
     end
 
     member do

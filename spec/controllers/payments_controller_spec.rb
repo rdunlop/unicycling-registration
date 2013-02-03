@@ -60,11 +60,11 @@ describe PaymentsController do
     before(:each) do
       @super_admin = FactoryGirl.create(:super_admin_user)
       sign_in @super_admin
-      @payment = FactoryGirl.create(:payment, :user => @user)
+      @payment = FactoryGirl.create(:payment, :user => @user, :completed => true)
     end
-    it "assigns all payments as @payments" do
+    it "doesn't assign other people's payments as @payments" do
       get :index, {}
-      assigns(:payments).should eq([@payment])
+      assigns(:payments).should eq([])
     end
     describe "as normal user" do
       before(:each) do
@@ -80,6 +80,11 @@ describe PaymentsController do
       end
       it "does not include other people's payments" do
         p2 = FactoryGirl.create(:payment, :user => @super_admin)
+        get :index, {}
+        assigns(:payments).should eq([@payment])
+      end
+      it "doesn't list my payments which are not completed" do
+        incomplete_payment = FactoryGirl.create(:payment, :completed => false, :user => @user)
         get :index, {}
         assigns(:payments).should eq([@payment])
       end
@@ -305,6 +310,19 @@ describe PaymentsController do
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 2 # one for IPN, one for success
+      end
+    end
+
+    describe "when directed to the payment_success page" do
+      it "can get there without being logged in" do
+        invoice = FactoryGirl.create(:payment)
+        get :success, {:invoice => invoice.to_param, :txn_id => "12345"}
+        response.should be_success
+      end
+      it "loads the payment into payment" do
+        invoice = FactoryGirl.create(:payment)
+        get :success, {:invoice => invoice.to_param, :txn_id => "12345"}
+        assigns(:payment).should == invoice
       end
     end
   end

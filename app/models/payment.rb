@@ -2,6 +2,7 @@ class Payment < ActiveRecord::Base
   attr_accessible :cancelled, :completed, :completed_date, :transaction_id, :user_id
   attr_accessible :payment_details_attributes
 
+  scope :completed, where(:completed => true)
 
   validates :user_id, :presence => true
 

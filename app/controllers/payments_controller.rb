@@ -1,12 +1,14 @@
 class PaymentsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:notification]
-  load_and_authorize_resource :except => [:notification]
-  skip_authorization_check :only => [:notification]
-  skip_before_filter :verify_authenticity_token, :only => [:notification]
+  before_filter :authenticate_user!, :except => [:notification, :success]
+  load_and_authorize_resource :except => [:notification, :success]
+  skip_authorization_check :only => [:notification, :success]
+  skip_before_filter :verify_authenticity_token, :only => [:notification, :success]
 
   # GET /payments
   # GET /payments.json
   def index
+    @payments = current_user.payments.completed
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @payments }
@@ -100,5 +102,10 @@ class PaymentsController < ApplicationController
       end
     end
     render :nothing => true
+  end
+
+  # PayPal return endpoint
+  def success
+    @payment = Payment.find(params[:invoice])
   end
 end
