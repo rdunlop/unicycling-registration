@@ -2,22 +2,18 @@
 
 <h2>Welcome to the <%= EventConfiguration.long_name %> Registration Site.</h2>
 
-<div style="text-align: left">
-  From this page, you can:
-  <ul>
-    <li>create new Registrations
-    <ul>
-      <li>Sign Up for events</li>
-      <% ExpenseGroup.all.each do |eg| %>
-        <% next unless eg.visible %>
-        <li>Choose <%= eg %></li>
-      <% end %>
-      <li>Pay for Registrations</li>
-      <li>and more.</li>
-    </ul>
-    </li>
-  </ul>
-</div>
+<% if mixpanel? %>
+  <script type="text/javascript">
+    mixpanel.track("Main Registration Landing Page Loaded")
+  </script>
+<% end %>
+
+<%= render :partial => "/registrants/links" %>
+<%= render :partial => "registration_periods/list", :locals => {:competitor => true } %>
+<%= render :partial => "registration_periods/list", :locals => {:competitor => false } %>
+
+<hr />
+
 <p>
   Once you have created your registrations, be sure to submit payment.
 </p>
@@ -29,17 +25,6 @@ Registering takes about 15 minutes.<br />
 After you have finished your registration, you are still able to change your data.<br />
 In order to schedule events properly, On-Site registration will not offer all of the events/items that pre-registration allows.<br />
 </p>
-
-<% if mixpanel? %>
-  <script type="text/javascript">
-    mixpanel.track("Main Registration Landing Page Loaded")
-  </script>
-<% end %>
-
-<%= render :partial => "/registrants/links" %>
-<%= render :partial => "registration_periods/list", :locals => {:competitor => true } %>
-<%= render :partial => "registration_periods/list", :locals => {:competitor => false } %>
-
 <% unless @registrants.empty? %>
   <div>
     <fieldset class="registrations_box">
