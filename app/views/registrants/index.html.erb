@@ -1,4 +1,27 @@
 <h1>Registration</h1>
+
+<h2>Welcome to the <%= EventConfiguration.long_name %> Registration Site.</h2>
+
+<div style="text-align: left">
+  From this page, you can:
+  <ul>
+    <li>create new Registrations
+    <ul>
+      <li>Sign Up for events</li>
+      <% ExpenseGroup.all.each do |eg| %>
+        <li>Choose <%= eg %></li>
+      <% end %>
+      <li>Pay for Registrations</li>
+      <li>and more.</li>
+    </ul>
+    </li>
+  </ul>
+</div>
+<p>
+  Once you have created your registrations, be sure to submit payment.
+</p>
+<p>NOTE! - It is the <b>date of your payment that defines the registration fee</b>, NOT the registration date.</p>
+<%= render :partial => "/registrants/waiver" %>
 <% if mixpanel? %>
   <script type="text/javascript">
     mixpanel.track("Main Registration Landing Page Loaded")
@@ -12,7 +35,7 @@
 <% unless @registrants.empty? %>
   <div>
     <fieldset class="registrations_box">
-      <legend>Registrations</legend>
+      <legend>My Registrations</legend>
       <table class="registrant_summary">
         <% @registrants.each do |registrant| %>
           <tr>

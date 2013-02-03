@@ -1,88 +1,21 @@
 <h1>Registration Summary</h1>
 
 <div>
-  <fieldset class="data_block">
-    <legend>Registration Summary</legend>
-    <div>
-      <b>Name:</b>
-      <%= @registrant.first_name %>
-      <%= @registrant.middle_initial %>
-      <%= @registrant.last_name %>
-    </div>
-    <div>
-      <b>Gender:</b>
-      <%= @registrant.gender %>
-      <b>Birthday:</b>
-      <%= @registrant.birthday.strftime("%d-%b-%Y") %>
-    </div>
-    <div>
-      <b>Address:</b>
-      <%= @registrant.state %>
-      <%= @registrant.country %>
-    </div>
-    <div>
-      <b>Phone:</b>
-      <%= @registrant.phone %>
-    </div>
-
-    <div>
-      <b>Mobile:</b>
-      <%= @registrant.mobile %>
-    </div>
-
-    <div>
-      <b>Email:</b>
-      <%= @registrant.email %>
-    </div>
-    <div>
-      <b>Team/Club:</b>
-      <%= @registrant.club %>
-    </div>
-    <div>
-      <b>Team/Club Contact:</b>
-      <%= @registrant.club_contact %>
-    </div>
-    <div>
-      <b>USA Member Number:</b>
-      <%= @registrant.usa_member_number %>
-    </div>
-    <div>
-      <b>Emergency Contact Name</b>
-      <%= @registrant.emergency_name %>
-    </div>
-    <div>
-      <b>Emergency Contact Relationship</b>
-      <%= @registrant.emergency_relationship %>
-    </div>
-    <div>
-      <b>Emergency Contact Attending</b>
-      <%= @registrant.emergency_attending %>
-    </div>
-    <div>
-      <b>Emergency Contact Phone</b>
-      <%= @registrant.emergency_primary_phone %>
-      <%= @registrant.emergency_other_phone %>
-    </div>
-    <div>
-      <b>Responsible Adult</b>
-      <%= @registrant.responsible_adult_name %>
-      <%= @registrant.responsible_adult_phone %>
-    </div>
-  </fieldset>
+  <%= render :partial => "summary" %>
   <div class="data_block">
     <%= render :partial => "registrant_expenses" %>
     <div style="text-align: center">
       <%= link_to 'Edit Items', items_registrant_path(@registrant) %>
     </div>
   </div>
-
+</div>
+<%= render :partial => "/registrants/waiver" %>
+<div>
   <%= render :partial => "registrant_events" %>
 
   <%= link_to 'Edit Details/Events', edit_registrant_path(@registrant) %>
-  <hr />
-
-
-  <hr />
+</div>
+<hr />
 
 <div>
   <div class="data_block">

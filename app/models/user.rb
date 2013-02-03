@@ -38,4 +38,13 @@ class User < ActiveRecord::Base
     end
     total
   end
+
+  def has_minor?
+    self.registrants.each do |reg|
+      if reg.minor?
+        return true
+      end
+    end
+    false
+  end
 end

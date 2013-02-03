@@ -31,5 +31,11 @@ FactoryGirl.define do
     factory :noncompetitor do
       competitor false
     end
+
+    factory :minor_competitor do
+      competitor true
+      responsible_adult_name "Bob Smith"
+      responsible_adult_phone "911"
+    end
   end
 end

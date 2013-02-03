@@ -55,6 +55,15 @@ describe User do
     it "orders the registrants by id" do
       @user.registrants.should == [@reg1, @reg2, @reg3]
     end
+
+    it "determines if the user has a related minor" do
+      @user.has_minor?.should == false
+    end
+    it "says no_minors if there are none" do
+      FactoryGirl.create(:event_configuration, :start_date => Date.today)
+      @reg4 = FactoryGirl.create(:minor_competitor, :user => @user, :birthday => Date.today - 10.years)
+      @user.has_minor?.should == true
+    end
   end
 
   describe "with 3 users" do

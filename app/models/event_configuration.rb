@@ -1,5 +1,5 @@
 class EventConfiguration < ActiveRecord::Base
-  attr_accessible :artistic_closed_date, :closed, :contact_email, :currency, :dates_description, :event_url, :location, :logo_image, :long_name, :short_name, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode
+  attr_accessible :artistic_closed_date, :closed, :contact_email, :currency, :dates_description, :event_url, :location, :logo_image, :long_name, :short_name, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :waiver_url
 
   validates :short_name, :presence => true
   validates :long_name, :presence => true
@@ -47,4 +47,37 @@ class EventConfiguration < ActiveRecord::Base
       ec.long_name
     end
   end
+
+  def self.start_date
+    ec = EventConfiguration.first
+    if ec.nil?
+      nil
+    else
+      ec.start_date
+    end
+  end
+
+  def self.waiver_url
+    ec = EventConfiguration.first
+    if ec.nil? or ec.waiver_url.empty?
+      nil
+    else
+      ec.waiver_url
+    end
+  end
+
+  def self.exists?
+    !EventConfiguration.first.nil?
+  end
+
+  def self.event_url
+    ec = EventConfiguration.first
+    if ec.nil? or ec.event_url.empty?
+      nil
+    else
+      ec.event_url
+    end
+  end
+
+
 end

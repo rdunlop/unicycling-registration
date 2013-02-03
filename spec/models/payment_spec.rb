@@ -37,11 +37,6 @@ describe Payment do
     end
   end
 
-  describe "without any global configu" do
-    it "has a test paypal_post_url" do
-      @pay.paypal_post_url.should == "https://www.sandbox.paypal.com/cgi-bin/webscr"
-    end
-  end
   describe "With an environment config with test mode disabled" do
     before(:each) do
       ENV["PAYPAL_TEST"] = "false"

@@ -81,14 +81,14 @@ class Registrant < ActiveRecord::Base
   end
 
   def age
-    config = EventConfiguration.first
-    if config.nil? or self.birthday.nil?
+    start_date = EventConfiguration.start_date
+    if start_date.nil? or self.birthday.nil?
       99
     else
-      if (self.birthday.month < config.start_date.month) or (self.birthday.month == config.start_date.month and self.birthday.day <= config.start_date.day)
-        config.start_date.year - self.birthday.year
+      if (self.birthday.month < start_date.month) or (self.birthday.month == start_date.month and self.birthday.day <= start_date.day)
+        start_date.year - self.birthday.year
       else
-        (config.start_date.year - 1) - self.birthday.year
+        (start_date.year - 1) - self.birthday.year
       end
     end
   end

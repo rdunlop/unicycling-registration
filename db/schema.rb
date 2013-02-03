@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130121182154) do
+ActiveRecord::Schema.define(:version => 20130203204847) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20130121182154) do
     t.string   "logo_filename"
     t.string   "logo_type"
     t.boolean  "test_mode"
+    t.string   "waiver_url"
   end
 
   create_table "events", :force => true do |t|

@@ -251,10 +251,8 @@ TO DO (MUST be done BEFORE LIVE):
  - PayPal
   - Prevent people from starting a payment, and then finishing it months later for cheap.
 
- - Add notice that "A Release/Waiver must be signed by all competitors, and by parent/guardian for anyone < 18"
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
  - Prevent changing a payment's contents after it is _paid_
- - Have a link to a PDF of the waiver that must be signed by ALL participants (and make it obvious)
  - Make a note that the Name/Country is listed for all registrants to see.
  - Request info about allergies?
  - Update the Costs for all Expense Items and registration periods
@@ -262,10 +260,12 @@ TO DO (MUST be done BEFORE LIVE):
  - Try it with different browsers
  - do we want a link and/or popup beside each of the events, so that people can easily reference the events?
  - Do we require that Paypal have a shipping address?
- - Should the "NAUCC logo" be a link to uninationals.com?
+ - Confirm link to Waiver PDF
+ - Confirm link to Nationals Site
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
+ - test that the "Registration Periods" upgrade correctly. (Give a day of grace?)
  - Export/Import functions for the WHOLE dataset?
  - Replace the 'Copyright" with a "Developed by" statement?
  - Prevent changing the prices of expense_items (especially after payments with those items exist)
@@ -373,6 +373,9 @@ DONE:
  - On Events Tabs, have a "previous" link too
  - Add ability for user to see their payments (#payment#index?)
  - remove the mixpanel key from git, add to documentation.
+ - Add notice that "A Release/Waiver must be signed by all competitors, and by parent/guardian for anyone < 18"
+ - Have a link to a PDF of the waiver that must be signed by ALL participants (and make it obvious)
+ - Should the "NAUCC logo" be a link to uninationals.com?
 
 
 ------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-<h1>Listing event_configurations</h1>
+<h1>Event Configurations</h1>
 
 <table>
   <tr>
@@ -7,6 +7,7 @@
     <th>Location</th>
     <th>Dates description</th>
     <th>Event url</th>
+    <th>Waiver url</th>
     <th>Start date</th>
     <th>Logo</th>
     <th>Currency</th>
@@ -28,6 +29,7 @@
     <td><%= event_configuration.location %></td>
     <td><%= event_configuration.dates_description %></td>
     <td><%= event_configuration.event_url %></td>
+    <td><%= event_configuration.waiver_url %></td>
     <td><%= event_configuration.start_date %></td>
     <td><%= image_tag(logo_event_configuration_path(event_configuration), :width => "100px") %></td>
     <td><%= event_configuration.currency %></td>

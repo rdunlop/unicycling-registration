@@ -25,11 +25,15 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <nav>
     <ul>
       <li>
-      <% unless @config.new_record? %>
-        <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), root_url, :class => "logo_link" %>
-      <% else %>
-        <%= link_to 'Main Menu', root_url %>
+      <% if EventConfiguration.exists? %>
+        <% target_url = EventConfiguration.event_url %>
+        <% if target_url.nil? %>
+          <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), root_url, {:class => "logo_link"} %>
+        <% else %>
+          <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), target_url, {:class => "logo_link", :target => "_blank"} %>
+        <% end %>
       <% end %>
+      <li><%= link_to 'Main Menu', root_url %></li>
       </li>
       <% if current_user.nil? %>
         <li><%= link_to 'Sign in', new_user_session_path %></li>
