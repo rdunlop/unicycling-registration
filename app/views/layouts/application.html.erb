@@ -20,27 +20,56 @@
       <%= link_to 'Make Me NORMAL', normal_event_configurations_path, :method => :post %>
     </div>
   <% end %>
-  <div class="top_nav">
-    <div class="top_left_nav">
-      <%= link_to 'Main Menu', root_url %><br />
-      <br />
-
+    <nav>
+    <ul>
+      <li>
+      <% unless @config.new_record? %>
+        <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), root_url, :class => "logo_link" %>
+      <% else %>
+        <%= link_to 'Main Menu', root_url %>
+      <% end %>
+      </li>
       <% if current_user.nil? %>
-        <%= link_to 'Sign in', new_user_session_path %><br />
+        <li><%= link_to 'Sign in', new_user_session_path %></li>
       <% else %>
         <script type="text/javascript">mixpanel.identify("<%= current_user %>")</script>
-        <%= link_to 'My Registrations', registrants_path %><br />
-        <%= link_to 'My Payments', payments_path %><br />
-        <br />
-        <%= link_to 'All Registrants', all_registrants_path %><br />
-        <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %><br />
+        <li><%= link_to 'My Registrations', registrants_path %></li>
+        <li><%= link_to 'My Payments', payments_path %></li>
+        <li><%= link_to 'All Registrants', all_registrants_path %></li>
       <% end %>
-      <%= link_to 'Help', welcome_help_path %><br />
-    </div>
+      <!-- ADMIN VIEWS -->
+      <% if can? :manage, Registrant %>
+        <li><%= link_to 'Admin', "#" %>
+        <ul>
+          <% if can? :manage, EventConfiguration %>
+            <li><%= link_to 'Configuration', event_configurations_path %></li>
+          <% end %>
+          <% if can? :manage, Category %>
+            <li><%= link_to 'Event Configuration', categories_path %></li>
+          <% end %>
+          <% if can? :manage, ExpenseGroup %>
+            <li><%= link_to 'Expense Groups', expense_groups_path %></li>
+          <% end %>
+          <% if can? :manage, ExpenseItem %>
+            <li><%= link_to 'Expense Items', expense_items_path %></li>
+          <% end %>
+          <% if can? :manage, RegistrationPeriod %>
+            <li><%= link_to 'Registration Periods', registration_periods_path %></li>
+          <% end %>
+          <li><%= link_to 'Registrants (edit)', admin_registrants_path %></li>
+          <li><%= link_to 'Payments', admin_payments_path %></li>
+          <li><%= link_to 'Events Report', admin_events_path %></li>
+          <li><%= link_to 'Modification History', admin_history_index_path %></li>
+        </ul>
+        </li>
+      <% end %>
+      <li><%= link_to 'Help', welcome_help_path %></li>
+      <% unless current_user.nil? %>
+        <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+      <% end %>
+    </ul>
+    </nav>
     <div class="banner">
-      <% unless @config.new_record? %>
-        <%= image_tag(logo_event_configuration_path(@config), :class => "logo") %>
-      <% end %>
       <div class="base_details">
         <ul>
           <li><%= @config.short_name %></li>
@@ -50,31 +79,6 @@
         </ul>
       </div>
     </div>
-    <div class="top_right_nav">
-      <% if can? :manage, EventConfiguration %>
-        <%= link_to 'Configuration', event_configurations_path %><br />
-      <% end %>
-      <% if can? :manage, Category %>
-        <%= link_to 'Event Configuration', categories_path %><br />
-      <% end %>
-      <% if can? :manage, ExpenseGroup %>
-        <%= link_to 'Expense Groups', expense_groups_path %><br />
-      <% end %>
-      <% if can? :manage, ExpenseItem %>
-        <%= link_to 'Expense Items', expense_items_path %><br />
-      <% end %>
-      <% if can? :manage, RegistrationPeriod %>
-        <%= link_to 'Registration Periods', registration_periods_path %><br />
-      <% end %>
-      <!-- ADMIN VIEWS -->
-      <% if can? :manage, Registrant %>
-        <%= link_to 'Registrants (edit)', admin_registrants_path %><br />
-        <%= link_to 'Payments', admin_payments_path %><br />
-        <%= link_to 'Events Report', admin_events_path %><br />
-        <%= link_to 'Modification History', admin_history_index_path %><br />
-      <% end %>
-    </div>
-  </div>
 
   <div class="main_nav">
     <p class="notice"><%= notice %></p>

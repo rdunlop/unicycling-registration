@@ -257,8 +257,10 @@ TO DO (MUST be done BEFORE LIVE):
  - Have a link to a PDF of the waiver that must be signed by ALL participants (and make it obvious)
  - Make a note that the Name/Country is listed for all registrants to see.
  - Request info about allergies?
- - Update the Costs for all Expense Items
+ - Update the Costs for all Expense Items and registration periods
  - Work with Dave to configure his paypal account appropriately
+ - Try it with different browsers
+ - Should the "NAUCC logo" be a link to uninationals.com?
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
@@ -268,7 +270,6 @@ TO DO (MUST be done SOON after LIVE (if not before)):
  - Multi-Edit (allows updating the selection of multiple people's choices)
  - Multi-record delete (allows removing multiple people from an event sign-up)
  - Enter a "Wire Payment" (also, mark a registration/etc as paid, for some reason)
- - Add ability for user to see their payments (#payment#index?)
  - Delete a registration
  - Delete a payment
  - Add ability to "log in as any user" for debugging purposes.
@@ -290,7 +291,6 @@ TO DO (SHOULD be done):
 
 
 TO DO (NICE to be done):
- - On Events Tabs, have a "previous" link too
  - running total of expenses on the "Items" page of registration?
  - Payment Choice page "unselect-all" button
  - Countries should be from a list (not text-input)
@@ -327,7 +327,6 @@ Scott's suggestions:
  - Payment page checkmarks with running total. When boxes are checked, highlight line.
  - Immediate errors display when typing in.
  - How do we get BEST TIMES?
- - Reg Summary page should be Nicer to look at...the boxes are unclear (perhaps multiple columns of 409px each....)
  - Automatically start the rails server when vagrant starts
 
 
@@ -363,6 +362,9 @@ DONE:
  - Add analytics gathering of pages/tabs
  - Change Artistic Age Groups to match NAUCC requirements (No Jr Expert???? Beginner/Intermediate....)
  - Add "Events" report, to list number of users signed up for each event. (MUni XC Beginner, etc)
+ - Reg Summary page should be Nicer to look at...the boxes are unclear (perhaps multiple columns of 409px each....)
+ - On Events Tabs, have a "previous" link too
+ - Add ability for user to see their payments (#payment#index?)
 
 
 ------------------------------------------------------------------------------------------------------------------

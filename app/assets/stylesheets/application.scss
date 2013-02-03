@@ -16,7 +16,10 @@
   text-align: center;
 }
 .logo {
-  width: 300px;
+  height: 38px;
+}
+.logo_link {
+  padding: 5px;
 }
 
 .banner .base_details ul {
@@ -30,12 +33,9 @@
   border-bottom-color: black;
   overflow: auto;
 }
-.top_left_nav, .top_right_nav, .banner {
-  float: left;
-  width: 33%;
-}
-.top_right_nav {
-  text-align: right;
+
+.banner {
+  width: 100%;
 }
 
 

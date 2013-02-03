@@ -1,0 +1,79 @@
+
+$background: #55D169;
+$backgroundgrad: rgb(226, 228, 226);
+$backgroundhover: rgb(85, 209, 105);
+$backgroundhovergrad: rgb(34, 233, 66);
+$height: 50px;
+
+nav {
+  text-align: center;
+}
+
+nav ul ul {
+  display: none;
+}
+
+  nav ul li:hover > ul {
+    display: block;
+  }
+
+
+nav ul {
+  background: #efefef; 
+  background: linear-gradient(top, $background 0%, $backgroundgrad 100%);  
+  background: -moz-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
+  background: -webkit-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
+  box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
+  padding: 0 20px;
+  border-radius: 10px;  
+  list-style: none;
+  position: relative;
+  display: inline-table;
+}
+  nav ul:after {
+    content: ""; clear: both; display: block;
+  }
+
+  nav ul li {
+    float: left;
+    max-height: $height;
+  }
+    nav ul li:hover {
+      background: #4b545f;
+      background: linear-gradient(top, $backgroundhover 0%, $backgroundhovergrad 40%);
+      background: -moz-linear-gradient(top, $backgroundhover 0%, $backgroundhovergrad 40%);
+      background: -webkit-linear-gradient(top, $backgroundhover 0%, $backgroundhovergrad 40%);
+    }
+      nav ul li:hover a {
+        background: $backgroundhover;
+        color: #fff;
+      }
+    
+    nav ul li a {
+      display: block; padding: ($height/3) 40px;
+      color: #757575; text-decoration: none;
+    }
+      
+    
+  nav ul ul {
+    background: #5f6975; border-radius: 0px; padding: 0;
+    position: absolute; top: 100%;
+  }
+    nav ul ul li {
+      float: none; 
+      border-top: 1px solid #6b727c;
+      border-bottom: 1px solid #575f6a; position: relative;
+    }
+      nav ul ul li a {
+        padding: ($height/3) 40px;
+        color: #fff;
+      } 
+        nav ul ul li a:hover {
+          background: #4b545f;
+        }
+    
+  nav ul ul ul {
+    position: absolute; left: 100%; top:0;
+  }
+    
+
