@@ -238,7 +238,6 @@ For Nan:
 
 ================================================================================
 TO DO (MUST be done BEFORE LIVE):
- - Remvoe secret key
  - Add exception handler e-mail
  - Follow hugo's example for configuration blocks.
 
@@ -380,6 +379,7 @@ DONE:
  - Should the "NAUCC logo" be a link to uninationals.com?
  - do we want a link and/or popup beside each of the events, so that people can easily reference the events?
  - Clean up the Payment#show page, so that it looks more professional before going to Paypal.
+ - Remove secret key
 
 
 ------------------------------------------------------------------------------------------------------------------

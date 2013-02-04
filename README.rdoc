@@ -71,6 +71,14 @@ Adding a mixpanel token enables us to track the flow of users.
 MIXPANEL_TOKEN=<token>
 
 
+== Secret hash
+
+The 'Secret' key is required in order to generate secure cookies. With this in place, users can return to the site and have their accounts still logged in (this is a good thing).
+
+SECRET=`rake secret`
+
+(I use 'rake secret' (with backticks) to generate a random secure value. I only run it once, and it should be a different value for your production system)
+
 
 = Deploying to Heroku
 
