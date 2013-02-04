@@ -11,9 +11,7 @@ describe "payments/show" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/1/)
-    rendered.should match(/false/)
-    rendered.should match(/false/)
-    rendered.should match(/Transaction/)
+    rendered.should match(/#{@payment_detail.registrant}/)
   end
   it "renders a form for the paypal integration" do
     render
