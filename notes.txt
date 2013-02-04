@@ -250,7 +250,6 @@ TO DO (MUST be done BEFORE LIVE):
 
  - PayPal
   - Prevent people from starting a payment, and then finishing it months later for cheap.
-  - Clean up the Payment#show page, so that it looks more professional before going to Paypal.
 
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
  - Prevent changing a payment's contents after it is _paid_
@@ -359,8 +358,8 @@ DONE:
   - I have fixed this 
  - Validate the data better, which will prevent people from Choosing a Category without choosing the event itself.
   - Validate that choices are not selected without accompanying data
- ?- Under 18 needs a valid parent/guardian 
- ? - Under 18, need Parent/Guardian ON-Site
+ - Under 18 needs a valid parent/guardian 
+  - Under 18, need Parent/Guardian ON-Site
  - Paypal integration work (Post, and return IPN)
   - Allow Users to see their payments (/payments)
   - create a "payment summary" page which addresses paypal's requirements
@@ -380,6 +379,7 @@ DONE:
  - Have a link to a PDF of the waiver that must be signed by ALL participants (and make it obvious)
  - Should the "NAUCC logo" be a link to uninationals.com?
  - do we want a link and/or popup beside each of the events, so that people can easily reference the events?
+ - Clean up the Payment#show page, so that it looks more professional before going to Paypal.
 
 
 ------------------------------------------------------------------------------------------------------------------
