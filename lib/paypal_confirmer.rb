@@ -52,4 +52,8 @@ class PaypalConfirmer
   def order_number
     @params["invoice"]
   end
+
+  def payment_date
+    @params["payment_date"]
+  end
 end

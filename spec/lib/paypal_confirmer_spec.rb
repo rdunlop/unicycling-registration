@@ -50,4 +50,11 @@ describe PaypalConfirmer do
     confirmer = PaypalConfirmer.new(params, {})
     confirmer.order_number.should == "10"
   end
+  it "has the correct payment date" do
+    params = {
+      "payment_date" => "17:11:42 Jul 15, 2008 PDT"
+    }
+    confirmer = PaypalConfirmer.new(params, {})
+    confirmer.payment_date.should == "17:11:42 Jul 15, 2008 PDT"
+  end
 end

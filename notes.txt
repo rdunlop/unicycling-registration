@@ -250,6 +250,7 @@ TO DO (MUST be done BEFORE LIVE):
 
  - PayPal
   - Prevent people from starting a payment, and then finishing it months later for cheap.
+  - Clean up the Payment#show page, so that it looks more professional before going to Paypal.
 
  - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
  - Prevent changing a payment's contents after it is _paid_

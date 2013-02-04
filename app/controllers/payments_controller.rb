@@ -92,7 +92,8 @@ class PaymentsController < ApplicationController
           else
             payment.completed = true
             payment.transaction_id = paypal.transaction_id
-            payment.completed_date = Date.today
+            payment.completed_date = DateTime.now
+            payment.payment_date = paypal.payment_date
             payment.save
             Notifications.payment_completed(payment).deliver
           end

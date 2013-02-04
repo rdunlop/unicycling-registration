@@ -12,19 +12,31 @@
   <% end %>
 
   <table>
-    <%= f.fields_for :payment_details do |pf| %>
+    <thead>
       <tr>
-        <td><%= pf.hidden_field :registrant_id %><%= pf.object.registrant %></td>
-        <td><%= pf.hidden_field :expense_item_id %><%= pf.object.expense_item %></td>
-        <td><%= pf.hidden_field :amount, "data-cents" => pf.object.amount * 100 %><span class="fee"><%= fcost(pf.object.amount) %></span></td>
-        <td><%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %></td>
-        <td><%= check_box_tag :anon, nil, :checked => "checked" %></td>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-    <tr>
-      <th colspan="4">Total</th>
-      <th class="fee" id="total_field"></th>
-    </tr>
+    </thead>
+    <tbody>
+      <%= f.fields_for :payment_details do |pf| %>
+        <tr>
+          <td><%= pf.hidden_field :registrant_id %><%= pf.object.registrant %></td>
+          <td><%= pf.hidden_field :expense_item_id %><%= pf.object.expense_item %></td>
+          <td><%= pf.hidden_field :amount, "data-cents" => pf.object.amount * 100 %><span class="fee"><%= fcost(pf.object.amount) %></span></td>
+          <td><%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %></td>
+          <td><%= check_box_tag :anon, nil, :checked => "checked" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2">Total</th>
+        <th class="fee" id="total_field"></th>
+      </tr>
+    </tfoot>
   </table>
   <div class="actions">
     <%= f.submit 'Start Payment', :class => "payment_link registration_button" %>

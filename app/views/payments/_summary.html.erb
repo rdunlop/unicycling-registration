@@ -1,26 +1,20 @@
+<% # locals: payment %>
 <p>
   <b>PaymentID:</b>
-  <%= @payment.id %>
+  <%= payment.id %>
 </p>
 
-<p>
-  <b>Completed:</b>
-  <%= @payment.completed %>
-</p>
-<p>
-  <b>Cancelled:</b>
-  <%= @payment.cancelled %>
-</p>
-
-<p>
+<% if payment.completed %>
+  <p>
   <b>TransactionID:</b>
   <%= @payment.transaction_id %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Completed date:</b>
   <%= @payment.completed_date %>
-</p>
+  </p>
+<% end %>
 
 <table>
   <caption>Payment Details:</caption>
@@ -46,4 +40,10 @@
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="2">Total</th>
+      <th><span class="fee"><%= fcost(payment.total_amount) %><span></th>
+    </tr>
+  </tfoot>
 </table>

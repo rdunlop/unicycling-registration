@@ -259,6 +259,7 @@ describe PaymentsController do
             :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, 
             :payment_status => "Completed",
             :txn_id => "12345",
+            :payment_date => "Some Paypal payment date",
             :invoice => @payment.id.to_s
           }
         end
@@ -274,11 +275,19 @@ describe PaymentsController do
           @payment.reload
           @payment.transaction_id.should == "12345"
         end
-        it "sets the trasaction_date to today" do
+        it "sets the completed_date to today" do
+          t = DateTime.now
+          DateTime.stub(:now).and_return(t)
           post :notification, @attributes
           response.should be_success
           @payment.reload
-          @payment.completed_date.should == Date.today
+          @payment.completed_date.to_i.should == t.to_i
+        end
+        it "sets the payment_date to the received payment_date string" do
+          post :notification, @attributes
+          response.should be_success
+          @payment.reload
+          @payment.payment_date.should == "Some Paypal payment date"
         end
       end
       describe "with an incorrect payment_id" do
