@@ -13,6 +13,9 @@ For Production (heroku) system, use the following syntax:
 heroku config:add <variable>=<value>
 
 
+Eventually, these may be replaced using thor:
+http://blog.leshill.org/blog/2010/11/02/heroku-environment-variables.html
+
 == Set the configuration variables (for local work)
 
 These are necessary to get a local environment configured, but are not needed on heroku.

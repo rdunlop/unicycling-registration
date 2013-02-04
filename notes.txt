@@ -265,6 +265,7 @@ TO DO (MUST be done BEFORE LIVE):
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
+ - Ensure that payments from the previous payment period are stored properly during movement
  - Disable the IPN e-mail, once it is confirmed to be working.
  - test that the "Registration Periods" upgrade correctly. (Give a day of grace?)
  - Export/Import functions for the WHOLE dataset?
@@ -306,7 +307,6 @@ TO DO (NICE to be done):
  - Make Club auto-completing/choosing thing (like: group name)
  - Admin page for the events page....should show num people signed up vs num people signed-up-and-paid.
  - Add something that helps describe What "Category" to sign up for when choosing "Individual Freestyle" (Categories are: "Age Group", "Jr. Expert", "Expert").
- - Link from competitions to their websites. (add the ability to open a popup window to a different URL on each of the Events?)
  - Fix styling of page when errors occur
  - default sort orders (all models?)
  - Improve the "Summary" page to be prettier, and better at printing.
@@ -380,6 +380,7 @@ DONE:
  - do we want a link and/or popup beside each of the events, so that people can easily reference the events?
  - Clean up the Payment#show page, so that it looks more professional before going to Paypal.
  - Remove secret key
+ - Link from competitions to their websites. (add the ability to open a popup window to a different URL on each of the Events?)
 
 
 ------------------------------------------------------------------------------------------------------------------
