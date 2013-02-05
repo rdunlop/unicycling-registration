@@ -39,6 +39,15 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
+  def self.short_name
+    ec = EventConfiguration.first
+    if ec.nil?
+      ""
+    else
+      ec.short_name
+    end
+  end
+
   def self.long_name
     ec = EventConfiguration.first
     if ec.nil?
