@@ -30,6 +30,7 @@ nav ul {
   position: relative;
   display: inline-table;
   font-size: 14px;
+  max-height: $height;
 }
   nav ul:after {
     content: ""; clear: both; display: block;
@@ -37,7 +38,6 @@ nav ul {
 
   nav ul li {
     float: left;
-    max-height: $height;
   }
     nav ul li:hover {
       background: #4b545f;
@@ -80,4 +80,7 @@ nav ul {
     position: absolute; left: 100%; top:0;
   }
     
+nav .logo_link {
+  padding: 7px 0;
+}
 
