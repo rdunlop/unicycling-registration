@@ -239,7 +239,6 @@ For Nan:
 ================================================================================
 TO DO (MUST be done BEFORE LIVE):
 - Bold the menu that I'm on?
- - Add exception handler e-mail
  - Follow hugo's example for configuration blocks.
 
 - Add Administrative Options similar to what we had on the old registration site:
@@ -385,6 +384,8 @@ DONE:
  - Clean up the Payment#show page, so that it looks more professional before going to Paypal.
  - Remove secret key
  - Link from competitions to their websites. (add the ability to open a popup window to a different URL on each of the Events?)
+ - Forgotten passwords. add it to the notice, to bring them to the forgot password page
+ - Add exception handler e-mail
 
 
 ------------------------------------------------------------------------------------------------------------------

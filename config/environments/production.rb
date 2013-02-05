@@ -65,3 +65,7 @@ Workspace::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
+
+Workspace::Application.config.middleware.use ExceptionNotifier,
+  :email_prefix => "[Registration Exception] ",
+  :exception_recipients => [ENV['ERROR_EMAIL']]
