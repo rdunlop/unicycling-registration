@@ -33,7 +33,6 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), target_url, {:class => "logo_link", :target => "_blank"} %>
         <% end %>
       <% end %>
-      <li><%= link_to 'Main Menu', root_url %></li>
       </li>
       <% if current_user.nil? %>
         <li><%= link_to 'Sign in', new_user_session_path %></li>
@@ -80,7 +79,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
       <% end %>
     </ul>
     </nav>
-    <div class="banner">
+    <% if current_user.nil? %>
       <div class="base_details">
         <ul>
           <li><%= @config.short_name %></li>
@@ -89,7 +88,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <li><%= @config.dates_description %></li>
         </ul>
       </div>
-    </div>
+    <% end %>
 
   <div class="main_nav">
     <p class="notice"><%= notice %></p>

@@ -238,6 +238,9 @@ For Nan:
 
 ================================================================================
 TO DO (MUST be done BEFORE LIVE):
+- Make the sign in and sign up buttons the same width/height
+- Bold the menu that I'm on?
+- Remove the NAUCC text from most pages.
  - Add exception handler e-mail
  - Follow hugo's example for configuration blocks.
 
@@ -269,7 +272,10 @@ TO DO (MUST be done SOON after LIVE (if not before)):
  - Disable the IPN e-mail, once it is confirmed to be working.
  - test that the "Registration Periods" upgrade correctly. (Give a day of grace?)
  - Export/Import functions for the WHOLE dataset?
+ - Export to Excel format
+ - Export to UCP format?
  - Replace the 'Copyright" with a "Developed by" statement?
+ - Add a "feedback" form that e-mails me.
  - Prevent changing the prices of expense_items (especially after payments with those items exist)
  - Payments page which lists all Unpaid Registrations (and e-mail contact info?)
  - Choose a better colour scheme

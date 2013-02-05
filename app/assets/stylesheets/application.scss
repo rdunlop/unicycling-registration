@@ -19,9 +19,6 @@
   color: blue;
 }
 
-.banner {
-  text-align: center;
-}
 .logo {
   height: 38px;
 }
@@ -29,9 +26,12 @@
   padding: 5px;
 }
 
-.banner .base_details ul {
+.base_details ul {
   list-style-type: none;
   padding: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
 }
 
 .top_nav {
@@ -40,11 +40,6 @@
   border-bottom-color: black;
   overflow: auto;
 }
-
-.banner {
-  width: 100%;
-}
-
 
 .test_mode {
   color: red;
@@ -58,9 +53,6 @@
 
 .main_nav {
   text-align: center;
-  h1 {
-    background: #55D169;
-  }
 }
 
 .notice {
