@@ -49,6 +49,10 @@ $nonfocus_hover: #3487C9;
   background-color: $focus;
   border-color: #208d74;
 }
+a.focus_button, a.nonfocus_button {
+  padding: 10px 0px;
+}
+
 .focus_button:hover, .registration_button:focus {
   color: white;
   border: solid 1px;

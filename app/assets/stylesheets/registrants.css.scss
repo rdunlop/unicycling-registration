@@ -112,7 +112,7 @@ $noncompetitor_hover: #3487C9;
 @mixin button($width) {
   text-decoration: none;
   display: inline-block;
-  width:$width;
+  min-width:$width;
   padding: 10px 15px;
   font-size: 18px;
   cursor: pointer;
