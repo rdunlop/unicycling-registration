@@ -1,6 +1,6 @@
 
-$background: #55D169;
-$backgroundgrad: rgb(226, 228, 226);
+$background: rgb(18, 172, 80);
+$backgroundgrad: rgb(76, 214, 115);
 $backgroundhover: rgb(85, 209, 105);
 $backgroundhovergrad: rgb(34, 233, 66);
 $height: 50px;
@@ -29,6 +29,7 @@ nav ul {
   list-style: none;
   position: relative;
   display: inline-table;
+  font-size: 14px;
 }
   nav ul:after {
     content: ""; clear: both; display: block;
@@ -49,9 +50,10 @@ nav ul {
         color: #fff;
       }
     
-    nav ul li a {
+    nav ul li a,
+    nav ul li a:visited {
       display: block; padding: ($height/3) 40px;
-      color: #757575; text-decoration: none;
+      color: #333; text-decoration: none;
     }
       
     
@@ -61,15 +63,17 @@ nav ul {
   }
     nav ul ul li {
       float: none; 
-      border-top: 1px solid #6b727c;
-      border-bottom: 1px solid #575f6a; position: relative;
+      border-top: 1px solid rgb(18, 172, 80);
+      position: relative;
     }
-      nav ul ul li a {
+      nav ul ul li a,
+      nav ul ul li a:visited {
         padding: ($height/3) 40px;
         color: #fff;
       } 
         nav ul ul li a:hover {
           background: #4b545f;
+          color: #fff;
         }
     
   nav ul ul ul {
