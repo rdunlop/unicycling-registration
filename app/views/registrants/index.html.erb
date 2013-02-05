@@ -8,9 +8,16 @@
   </script>
 <% end %>
 
-<%= render :partial => "/registrants/links" %>
-<%= render :partial => "registration_periods/list", :locals => {:competitor => true } %>
-<%= render :partial => "registration_periods/list", :locals => {:competitor => false } %>
+<div class="competitor_sign_up">
+  <%= link_to 'New Competitor', new_registrant_path, :class => "competitor registration_button" %>
+  <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %>
+</div>
+<div class="non-competitor_sign_up">
+  <%= link_to 'New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
+  <%= render :partial => "registration_periods/list", :locals => {:competitor => false } %>
+</div>
+
+<div style="clear:both;"></div> <!-- ugly but required to clear a new line -->
 
 <hr />
 

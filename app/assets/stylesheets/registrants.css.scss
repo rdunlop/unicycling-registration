@@ -83,13 +83,29 @@ $noncompetitor_hover: #3487C9;
 
 
 // LAYOUT
-.registration_sign_up {
-  text-align: center;
+.registration_sign_up{
+  
+}
+
+.competitor_sign_up,
+.non-competitor_sign_up {
+  display: block;
+  margin: 0 1% 20px;
+  width:48%;
   a {
     margin-right: 7%;
     margin-left: 7%;
-    margin-top: 21px;
   }
+}
+
+.competitor_sign_up {
+  float:left;
+  text-align: right;
+}
+
+.non-competitor_sign_up {
+  float:right;
+  text-align: left;
 }
 
 // http://www.usabilitypost.com/2012/01/10/pressed-button-state-with-css3/
@@ -124,6 +140,8 @@ $noncompetitor_hover: #3487C9;
 }
 .registration_button {
   @include button(220px);
+  margin-bottom:10px;
+  text-align:center;
 }
 .registration_button:hover, .registration_button:focus {
   border: solid 1px;
