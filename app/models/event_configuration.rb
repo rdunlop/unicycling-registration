@@ -59,7 +59,7 @@ class EventConfiguration < ActiveRecord::Base
 
   def self.waiver_url
     ec = EventConfiguration.first
-    if ec.nil? or ec.waiver_url.empty?
+    if ec.nil? or ec.waiver_url.nil? or  ec.waiver_url.empty?
       nil
     else
       ec.waiver_url
@@ -72,7 +72,7 @@ class EventConfiguration < ActiveRecord::Base
 
   def self.event_url
     ec = EventConfiguration.first
-    if ec.nil? or ec.event_url.empty?
+    if ec.nil? or ec.event_url.nil? or  ec.event_url.empty?
       nil
     else
       ec.event_url
