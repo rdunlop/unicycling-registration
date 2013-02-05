@@ -1,5 +1,6 @@
 <h1>My Payments</h1>
 
+<% if !@payments.blank? %>
 <table>
   <tr>
     <th>Invoice Number</th> 
@@ -19,6 +20,7 @@
   </tr>
 <% end %>
 </table>
+<% end %>
 
 <br />
 
