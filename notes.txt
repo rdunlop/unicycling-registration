@@ -238,9 +238,7 @@ For Nan:
 
 ================================================================================
 TO DO (MUST be done BEFORE LIVE):
-- Make the sign in and sign up buttons the same width/height
 - Bold the menu that I'm on?
-- Remove the NAUCC text from most pages.
  - Add exception handler e-mail
  - Follow hugo's example for configuration blocks.
 

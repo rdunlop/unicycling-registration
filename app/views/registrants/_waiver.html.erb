@@ -1,4 +1,4 @@
-<% if EventConfiguration.waiver_url %>
+<% unless EventConfiguration.waiver_url.nil? %>
   <div>
   <p>
   <b>Every</b> competitor must bring a filled out <%= link_to "Waiver", EventConfiguration.waiver_url, {:target => "_blank", :class => "external_link"} %> to the Competition</b>
