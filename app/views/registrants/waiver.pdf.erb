@@ -72,7 +72,7 @@
 
 	
 		</div>
-		<p>
+		<p style="text-indent: 1.5em; margin: 0">
 		I acknowledge that by signing this document, I am assuming risks, and agreeing to 
 		indemnify, not to sue, and release from liability the organizer of this event and 
 		their respective agents, employees, volunteers, members, clubs, sponsors, promoters, 
@@ -82,7 +82,7 @@
 		listed above.  I have read it carefully before signing, and I understand what it 
 		means and what I am agreeing to by signing.
 		</p>
-		<p>
+		<p style="text-indent: 1.5em; margin: 0">
 		In consideration of the issuance of a license to me by one or more Releasees or the 
 		acceptance of my application for entry in the above event, I hereby freely agree to 
 		and make the following contractual representations and agreements.  I ACKNOWLEDGE 
@@ -113,7 +113,7 @@
 	
 	</div>
 	<div style="width:48%; float:right;">
-		<p>
+		<p style="text-indent: 1.5em; margin: 0">
 		I agree it is my sole responsibility to be familiar with the event course and agenda, 
 		the Releasees' rules, and any special regulation for the event and agree to comply 
 		with all such rules and regulations.  I understand and agree that situations may 
@@ -126,12 +126,12 @@
 		injury, and assume all responsibility and liability for the selection of such a 
 		helmet.  
 		</p>
-		<p>
+		<p style="text-indent: 1.5em; margin: 0">
 		I have no physical or medical condition which would endanger myself or others if I 
 		participate in this event, or would interfere with my ability to safely participate 
 		in this event. 
 		</p>
-		<p>
+		<p style="text-indent: 1.5em; margin: 0">
 		I agree, for myself and my Successors, that the above representations are 
 		contractually binding, and are not mere recitals, and that should I or my Successors 
 		assert a claim contrary to what I have agreed to in this contract, the claiming party 
@@ -140,7 +140,7 @@
 		modification of any provision shall not be construed as a waiver or modification of 
 		any other provision heron or as consent to any subsequent waiver or modification.  
 		</p>
-		<p>
+		<p style="text-indent: 1.5em; margin-top: 0">
 		I consent to release by any third party to Releasees and their insurance carriers of 
 		my name and medical information that may relate solely to any injury or death I may 
 		suffer arising from the event.  Every term and provision of this contract is intended 
@@ -152,11 +152,13 @@
 		<span class="signature"> Signature ____________________ &nbsp; Date ___________ </span>
 		
 		<% if @event_age.nil? or @event_age < 18 %>
+			<br />
+			<br />
 			<p>
 			CONSENT AND RELEASE OF PARENT OR GUARDIAN, IF ABOVE ENTRANT IS UNDER 18 YEARS OF AGE 
 			ON JULY 21, 2013.
 			</p>
-			<p>
+			<p style="text-indent: 1.5em; margin-top: 0">
 			I am the parent or guardian of 
 			<span style="text-decoration:underline;"><%= @registrant %></span> 
 			(child).  My Child is fit 
@@ -169,7 +171,8 @@
 			costs) as a direct or indirect result of injury or death to me or my Child because of 
 			my Child's participation in the event, WHETHER CAUSE BY THE NEGLIGENCE OF THE 
 			RELEASEES OR OTHERS TO THE MAXIMUM EXTENT PERMITED BY LAW.  I PROMISE NOT TOE SUE 
-			RELEASEES on my behalf or on behalf of my Child regarding any claim arising fro
+			RELEASEES on my behalf or on behalf of my Child regarding any claim arising 
+			from my Child's participation in the event.
 			</p>
 			<span class="parent_signature">Parent Signature _______________ &nbsp; Date ___________ </span>	
 		<% end %>
