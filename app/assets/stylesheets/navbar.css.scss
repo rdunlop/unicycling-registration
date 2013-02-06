@@ -50,6 +50,18 @@ nav ul {
         background: $backgroundhover;
         color: #fff;
       }
+  nav ul li:hover a.logo_link {
+    background: #efefef; 
+    background: linear-gradient(top, $background 0%, $backgroundgrad 100%);  
+    background: -moz-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
+    background: -webkit-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
+    
+    }
+    
+ nav .logo_link {
+  padding: 7px;
+}
+   
     
     nav ul li a,
     nav ul li a:visited {
@@ -81,7 +93,4 @@ nav ul {
     position: absolute; left: 100%; top:0;
   }
     
-nav .logo_link {
-  padding: 7px 0;
-}
 
