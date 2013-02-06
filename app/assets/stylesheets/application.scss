@@ -70,5 +70,10 @@
 
 table {
  margin: 0 auto; // centers tables
+ }
+ 
+table.alternate,
+.competitor_sign_up table,
+.non-competitor_sign_up table { 
  border-collapse: collapse;
 }
