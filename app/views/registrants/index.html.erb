@@ -17,20 +17,8 @@
   </div>
 </div>
 
-<hr />
-
-<p>
-  Once you have created your registrations, be sure to submit payment.
-</p>
-<p>NOTE! - It is the <b>date of your payment that defines the registration fee</b>, NOT the registration date.</p>
-<%= render :partial => "/registrants/waiver" %>
-
-<p>
-Registering takes about 15 minutes.<br />
-After you have finished your registration, you are still able to change your data.<br />
-In order to schedule events properly, On-Site registration will not offer all of the events/items that pre-registration allows.<br />
-</p>
 <% unless @registrants.empty? %>
+<hr />
   <div>
     <fieldset class="registrations_box">
       <legend>My Registrations</legend>
@@ -67,3 +55,18 @@ In order to schedule events properly, On-Site registration will not offer all of
 <% if @total_owing > 0 %>
   <%= render :partial => "/registrants/pay_now", :locals => {:total_owing => @total_owing } %>
 <% end %>
+
+
+<hr />
+
+<p>
+  Once you have created your registrations, be sure to submit payment.
+</p>
+<p>NOTE! - It is the <b>date of your payment that defines the registration fee</b>, NOT the registration date.</p>
+<%= render :partial => "/registrants/waiver" %>
+
+<p>
+Registering takes about 15 minutes.<br />
+After you have finished your registration, you are still able to change your data.<br />
+In order to schedule events properly, On-Site registration will not offer all of the events/items that pre-registration allows.<br />
+</p>
