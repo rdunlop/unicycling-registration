@@ -28,6 +28,21 @@ class RegistrantsController < ApplicationController
   # GET /registrants/1/waiver
   def waiver
     @registrant = Registrant.find(params[:id])
+    @club = "?"
+    @registrant_id = "?"
+    @event_age = 10
+    @address = "?"
+    @city = "Madison"
+    @state = "?"
+    @zip = "?"
+    @country = "?"
+    @phone = "?"
+    @mobile = "?"
+    @email = "?"
+    @user = current_user
+    @emergency_name = "?"
+    @emergency_primary_phone = "?"
+    @emergency_other_phone = "?"
     render :pdf => "waiver"
   end
 
