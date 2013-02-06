@@ -57,7 +57,8 @@ describe RegistrantsController do
   describe "GET waiver" do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
-      get :waiver, {:id => registrant.to_param}
+      get :waiver, {:format => 'pdf', :id => registrant.to_param}
+      response.should be_success
       assigns(:registrant).should eq(registrant)
     end
   end
