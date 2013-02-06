@@ -54,6 +54,14 @@ describe RegistrantsController do
     end
   end
 
+  describe "GET waiver" do
+    it "assigns the requested registrant as @registrant" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      get :waiver, {:id => registrant.to_param}
+      assigns(:registrant).should eq(registrant)
+    end
+  end
+
   describe "GET show" do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)

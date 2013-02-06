@@ -19,7 +19,7 @@ class Ability
         can :manage, Registrant
         can :manage, Payment
       else
-        can [:read, :update, :items, :update_items, :all], Registrant, :user_id => user.id
+        can [:read, :update, :items, :update_items, :all, :waiver], Registrant, :user_id => user.id
         can :create, Registrant #XXX necessary because we set the user in the controller?
         can :new_noncompetitor, Registrant #XXX necessary because we set the user in the controller?
 

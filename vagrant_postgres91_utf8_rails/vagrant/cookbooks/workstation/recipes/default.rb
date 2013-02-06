@@ -4,3 +4,7 @@ package 'nodejs'
 # for nokogiri (required for cancan)
 package 'libxslt-dev'
 package 'libxml2-dev'
+
+# required to get PDF generator working
+package 'libxrender1'
+package 'fontconfig'

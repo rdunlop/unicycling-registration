@@ -238,10 +238,12 @@ For Nan:
 
 ================================================================================
 TO DO (MUST be done BEFORE LIVE):
+- mixpanel revenue?
 - Bold the menu that I'm on?
  - Follow hugo's example for configuration blocks.
 
 - Add Administrative Options similar to what we had on the old registration site:
+ - Add link to arbitrary event to uninationals site
 
  - Modification logs
   - Add ability to log the changes to records, for audit reasons

@@ -49,6 +49,7 @@ Workspace::Application.routes.draw do
     member do
       get :items
       put :update_items
+      get :waiver
     end
     resources :registrant_expenses, :only => [:new, :destroy]
   end

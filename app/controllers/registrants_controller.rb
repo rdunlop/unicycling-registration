@@ -25,6 +25,12 @@ class RegistrantsController < ApplicationController
     @registrants = Registrant.all
   end
 
+  # GET /registrants/1/waiver
+  def waiver
+    @registrant = Registrant.find(params[:id])
+    render :pdf => "waiver"
+  end
+
   # GET /registrants/1
   # GET /registrants/1.json
   def show
