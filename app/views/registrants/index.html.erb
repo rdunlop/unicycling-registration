@@ -6,16 +6,16 @@
   </script>
 <% end %>
 
-<div class="competitor_sign_up">
-  <%= link_to 'New Competitor', new_registrant_path, :class => "competitor registration_button" %>
-  <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %>
+<div>
+  <div class="competitor_sign_up">
+    <%= link_to 'New Competitor', new_registrant_path, :class => "competitor registration_button" %>
+    <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %>
+  </div>
+  <div class="non-competitor_sign_up">
+    <%= link_to 'New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
+    <%= render :partial => "registration_periods/list", :locals => {:competitor => false } %>
+  </div>
 </div>
-<div class="non-competitor_sign_up">
-  <%= link_to 'New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
-  <%= render :partial => "registration_periods/list", :locals => {:competitor => false } %>
-</div>
-
-<div style="clear:both;"></div> <!-- ugly but required to clear a new line -->
 
 <hr />
 
@@ -62,9 +62,8 @@ In order to schedule events properly, On-Site registration will not offer all of
         </tr>
       </table>
     </fieldset>
-  <% end %>
-  <% if @total_owing > 0 %>
-    <%= render :partial => "/registrants/pay_now", :locals => {:total_owing => @total_owing } %>
-  <% end %>
-</div>
-
+  </div>
+<% end %>
+<% if @total_owing > 0 %>
+  <%= render :partial => "/registrants/pay_now", :locals => {:total_owing => @total_owing } %>
+<% end %>

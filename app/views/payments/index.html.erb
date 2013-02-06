@@ -1,25 +1,25 @@
 <h1>My Payments</h1>
 
-<% if !@payments.blank? %>
-<table class="payments">
-  <tr>
-    <th>Invoice Number</th> 
-    <th>Amount</th> 
-    <th>Transaction</th>
-    <th>Completed date</th>
-    <th></th>
-  </tr>
+<% unless @payments.empty? %>
+  <table class="payments">
+    <tr>
+      <th>Invoice Number</th> 
+      <th>Amount</th> 
+      <th>Transaction</th>
+      <th>Completed date</th>
+      <th></th>
+    </tr>
 
-<% @payments.each do |payment| %>
-  <tr>
-    <td><%= payment.id %></td>
-    <td><span class="fee"><%= fcost(payment.total_amount) %></span></td>
-    <td><%= payment.transaction_id %></td>
-    <td><%= payment.completed_date %></td>
-    <td><%= link_to 'Show Details', payment %></td>
-  </tr>
-<% end %>
-</table>
+    <% @payments.each do |payment| %>
+      <tr>
+        <td><%= payment.id %></td>
+        <td><span class="fee"><%= fcost(payment.total_amount) %></span></td>
+        <td><%= payment.transaction_id %></td>
+        <td><%= payment.completed_date %></td>
+        <td><%= link_to 'Show Details', payment %></td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
 
 <br />
