@@ -7,7 +7,7 @@ FactoryGirl.define do
     location "Somewhere"
     dates_description "X through Y"
     event_url "http://www.naucc.com"
-    start_date "2013-1-1"
+    start_date Date.new(2013,1,1)
     #logo ""
     currency "$"
     contact_email "robinc@dunlopweb.com"

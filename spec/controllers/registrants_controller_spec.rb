@@ -61,6 +61,43 @@ describe RegistrantsController do
       response.should be_success
       assigns(:registrant).should eq(registrant)
     end
+
+    it "sets the event-related variables" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
+      get :waiver, {:format => 'pdf', :id => registrant.to_param}
+
+      assigns(:event_name).should == c.long_name
+      assigns(:event_start_date).should == "Jul 21, 2013"
+    end
+
+    it "sets the contact details" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
+      get :waiver, {:format => 'pdf', :id => registrant.to_param}
+
+      assigns(:name).should == registrant.to_s
+      assigns(:club).should == registrant.club
+      assigns(:registrant_id).should == registrant.id
+      assigns(:age).should == registrant.age
+      #assigns(:city).should == registrant.city
+      assigns(:state).should == registrant.state
+      #assigns(:zip).should == registrant.zip
+      assigns(:country).should == registrant.country
+      assigns(:phone).should == registrant.phone
+      assigns(:mobile).should == registrant.mobile
+      assigns(:email).should == registrant.email
+      assigns(:user_email).should == @user.email
+    end
+    it "sets the emergency-variables" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
+      get :waiver, {:format => 'pdf', :id => registrant.to_param}
+
+      assigns(:emergency_name).should == registrant.emergency_name
+      assigns(:emergency_primary_phone).should == registrant.emergency_primary_phone
+      assigns(:emergency_other_phone).should == registrant.emergency_other_phone
+    end
   end
 
   describe "GET show" do
