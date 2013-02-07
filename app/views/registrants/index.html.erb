@@ -34,6 +34,7 @@
             <td>
               <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
               <%= link_to 'See Summary', registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+              <%= link_to 'Legal Waiver', waiver_registrant_path(registrant, :format => 'pdf'), :class => "waiver_link" %>
             </td>
             <td>
               <% if registrant.amount_owing > 0 %>

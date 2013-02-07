@@ -57,7 +57,10 @@ class RegistrantsController < ApplicationController
     @emergency_primary_phone = @registrant.emergency_primary_phone
     @emergency_other_phone = @registrant.emergency_other_phone
 
-    render :pdf => "waiver"
+    respond_to do |format|
+      format.html { render action: "waiver" }
+      format.pdf { render :pdf => "waiver" }
+    end
   end
 
   # GET /registrants/1
