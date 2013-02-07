@@ -64,7 +64,10 @@ Registrant:
 - Last Name
 - Birthday
 - Gender
+- Address
+- City
 - State
+- Zip
 - Country
 - Phone
 - Mobile
@@ -273,7 +276,6 @@ TO DO (MUST be done SOON after LIVE (if not before)):
  - Export/Import functions for the WHOLE dataset?
  - Export to Excel format
  - Export to UCP format?
- - Replace the 'Copyright" with a "Developed by" statement?
  - Add a "feedback" form that e-mails me.
  - Prevent changing the prices of expense_items (especially after payments with those items exist)
  - Payments page which lists all Unpaid Registrations (and e-mail contact info?)
@@ -388,6 +390,7 @@ DONE:
  - Link from competitions to their websites. (add the ability to open a popup window to a different URL on each of the Events?)
  - Forgotten passwords. add it to the notice, to bring them to the forgot password page
  - Add exception handler e-mail
+- Replace the 'Copyright" with a "Developed by" statement?
 
 
 ------------------------------------------------------------------------------------------------------------------
