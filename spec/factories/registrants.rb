@@ -7,8 +7,11 @@ FactoryGirl.define do
     last_name "LastMyString"
     birthday Date.new(1990,11,10)
     gender "Male"
+    address "1234 fake street"
+    city "madison"
     state "StateMyString"
     country "CountMyString"
+    zip "12345"
     phone "PhoMyString"
     mobile "IMobMyString"
     email "EmailMyString"

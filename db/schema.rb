@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204011724) do
+ActiveRecord::Schema.define(:version => 20130207054944) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -142,6 +142,9 @@ ActiveRecord::Schema.define(:version => 20130204011724) do
     t.string   "emergency_other_phone"
     t.string   "responsible_adult_name"
     t.string   "responsible_adult_phone"
+    t.string   "address"
+    t.string   "city"
+    t.string   "zip"
   end
 
   create_table "registration_periods", :force => true do |t|

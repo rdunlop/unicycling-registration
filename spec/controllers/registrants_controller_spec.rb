@@ -15,7 +15,10 @@ describe RegistrantsController do
       first_name: "Robin",
       last_name: "Dunlop",
       gender: "Male",
+      city: "Madison",
+      state: "WI",
       country: "USA",
+      zip: "12345",
       club: "TCUC",
       club_contact: "Connie",
       usa_member_number: "12345",
@@ -80,9 +83,10 @@ describe RegistrantsController do
       assigns(:club).should == registrant.club
       assigns(:registrant_id).should == registrant.id
       assigns(:age).should == registrant.age
-      #assigns(:city).should == registrant.city
+      assigns(:address).should == registrant.address
+      assigns(:city).should == registrant.city
       assigns(:state).should == registrant.state
-      #assigns(:zip).should == registrant.zip
+      assigns(:zip).should == registrant.zip
       assigns(:country).should == registrant.country
       assigns(:phone).should == registrant.phone
       assigns(:mobile).should == registrant.mobile

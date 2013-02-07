@@ -43,10 +43,10 @@ class RegistrantsController < ApplicationController
     @registrant_id = @registrant.id
     @age = @registrant.age
 
-    @address = "?"
-    @city = "Madison"
+    @address = @registrant.address
+    @city = @registrant.city
     @state = @registrant.state
-    @zip = "?"
+    @zip = @registrant.zip
     @country = @registrant.country
     @phone = @registrant.phone
     @mobile = @registrant.mobile
