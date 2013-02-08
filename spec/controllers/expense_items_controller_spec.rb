@@ -16,6 +16,8 @@ describe ExpenseItemsController do
       :name => "Small T-Shirt",
       :description => "Small NAUCC T-Shirt",
       :cost => 15.00,
+      :has_details => false,
+      :details_label => nil,
       :expense_group_id => @expense_group.id,
       :position => 1
     }

@@ -8,5 +8,7 @@ FactoryGirl.define do
     export_name "t_shirt_small"
     position 1
     expense_group # FactoryGirl
+    has_details false
+    details_label nil
   end
 end

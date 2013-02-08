@@ -25,10 +25,20 @@ describe ExpenseItem do
     @item.cost = nil
     @item.valid?.should == false
   end
+  it "must have a value for the has_details field" do
+    @item.has_details = nil
+    @item.valid?.should == false
+  end
+  it "should have a default of no details" do
+    item = ExpenseItem.new
+    item.has_details.should == false
+  end
+
   it "must have an expense group" do
     @item.expense_group = nil
     @item.valid?.should == false
   end
+
   it "should have a decent description" do
     @item.to_s.should == @item.expense_group.to_s + " - " + @item.name
   end
