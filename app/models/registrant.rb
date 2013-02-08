@@ -156,17 +156,21 @@ class Registrant < ActiveRecord::Base
   # returns a list of expense_items that this registrant hasn't paid for
   # INCLUDING the registration cost
   def owing_expense_items
-    items = self.registrant_expense_items.map{|rei| rei.expense_item}
+    items = self.owing_expense_items_with_details.map{|eid| eid.first}
+  end
+
+  # pass back the details too, so that we don't mis-associate them when building the payment
+  def owing_expense_items_with_details
+    items = self.registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
 
     unless reg_paid?
       reg_item = registration_item
       unless reg_item.nil?
-        items << registration_item
+        items << [registration_item, nil]
       end
     end
     items
   end
-
 
   # returns a list of paid-for expense_items
   def paid_expense_items

@@ -137,15 +137,24 @@ describe PaymentsController do
         pd.registrant.should == @reg
         assigns(:payment).payment_details.first.should == assigns(:payment).payment_details.last
       end
-      it "handles registrants who have paid, but owe more" do
-        @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg)
-        @payment = FactoryGirl.create(:payment, :completed => true)
-        @pd = FactoryGirl.create(:payment_detail, :registrant => @reg, :payment => @payment, :amount => 100, :expense_item => @reg_period.competitor_expense_item)
-        get :new, {}
-        pd = assigns(:payment).payment_details.first
-        pd.registrant.should == @reg
-        assigns(:payment).payment_details.first.should == assigns(:payment).payment_details.last
-        pd.expense_item.should == @rei.expense_item
+      describe "has paid, but owes for more items" do
+        before(:each) do
+          @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :details => "Additional Details")
+          @payment = FactoryGirl.create(:payment, :completed => true)
+          @pd = FactoryGirl.create(:payment_detail, :registrant => @reg, :payment => @payment, :amount => 100, :expense_item => @reg_period.competitor_expense_item)
+        end
+        it "handles registrants who have paid, but owe more" do
+          get :new, {}
+          pd = assigns(:payment).payment_details.first
+          pd.registrant.should == @reg
+          assigns(:payment).payment_details.first.should == assigns(:payment).payment_details.last
+          pd.expense_item.should == @rei.expense_item
+        end
+        it "copies the details" do
+          get :new, {}
+          pd = assigns(:payment).payment_details.first
+          pd.details.should == "Additional Details"
+        end
       end
     end
   end
@@ -180,6 +189,7 @@ describe PaymentsController do
               {
                 :registrant_id => 1,
                 :expense_item_id => @ei.id,
+                :details => "Additional Details",
                 :amount => 100
              }]
           }}

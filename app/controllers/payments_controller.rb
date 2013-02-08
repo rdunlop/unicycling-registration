@@ -28,12 +28,15 @@ class PaymentsController < ApplicationController
   # GET /payments/new.json
   def new
     current_user.registrants.each do |reg|
-      items = reg.owing_expense_items
-      items.each do |item|
+      items = reg.owing_expense_items_with_details
+      items.each do |item_pair|
+        item = item_pair[0]
+        details = item_pair[1]
         pd = @payment.payment_details.build()
         pd.registrant = reg
         pd.amount = item.cost
         pd.expense_item = item
+        pd.details = details
       end
     end
 
