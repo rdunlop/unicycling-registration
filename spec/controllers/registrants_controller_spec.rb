@@ -68,10 +68,13 @@ describe RegistrantsController do
     it "sets the event-related variables" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
+      Date.stub!(:today).and_return(Date.new(2012,01,22))
       get :waiver, {:format => 'pdf', :id => registrant.to_param}
 
       assigns(:event_name).should == c.long_name
       assigns(:event_start_date).should == "Jul 21, 2013"
+
+      assigns(:today_date).should == "January 22, 2012"
     end
 
     it "sets the contact details" do
