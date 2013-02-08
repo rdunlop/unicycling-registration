@@ -187,6 +187,16 @@ describe RegistrantsController do
       put :update_items, {:id => registrant.to_param}
       response.should redirect_to(registrant)
     end
+    it "accepts a new registrant_expense_item" do
+      ei = FactoryGirl.create(:expense_item)
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      put :update_items, {:id => registrant.to_param, :registrant => { 
+        :registrant_expense_items_attributes => {
+        "1234" => { :expense_item_id => ei.id.to_s, :id => "", :details => "Hello Werld", :_destroy => "0" }
+      } }}
+      registrant.reload
+      registrant.registrant_expense_items.count.should == 1
+    end
   end
 
   describe "POST create" do

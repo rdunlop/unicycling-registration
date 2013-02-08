@@ -22,4 +22,29 @@ describe "registrants/items" do
     render
     assert_select "input[value='Save + Continue']", 1
   end
+
+
+  describe "with existing expense_items" do
+    before(:each) do
+      @item = FactoryGirl.create(:registrant_expense_item, :registrant => @registrant)
+    end
+
+    it "should render the list of expense items" do
+      render
+
+      assert_select "form", :action => update_items_registrant_url(@registrant), :method => "put" do
+        assert_select "td", :text => @item.expense_item.name
+      end
+    end
+    it "should render the details field, if enabled" do
+      ei = @item.expense_item
+      ei.has_details = true
+      ei.details_label = "What is your family?"
+      ei.save!
+
+      render
+      assert_select "label", :text => "What is your family?"
+      assert_select "input#registrant_registrant_expense_items_attributes_" + @item.id.to_s + "_details"
+    end
+  end
 end

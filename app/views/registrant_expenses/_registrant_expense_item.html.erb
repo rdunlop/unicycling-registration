@@ -10,6 +10,12 @@
       <%= rfei.hidden_field :id, :index => index %>
     </td>
     <td>
+      <% if rfei.object.expense_item.has_details %>
+        <%= rfei.label :details, rfei.object.expense_item.details_label %>
+        <%= rfei.text_field :details %>
+      <% end %>
+    </td>
+    <td>
       <%= rfei.check_box :_destroy, :id => index, :index => index, :style => "display: none" %>
       <%= button_tag "Delete", :class => "delete_expenses_button", "data-row" => "row" + index.to_s, "data-thing" => index, :onclick => "return false" %>
     </td>

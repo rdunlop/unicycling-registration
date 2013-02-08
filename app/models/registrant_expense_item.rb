@@ -1,5 +1,5 @@
 class RegistrantExpenseItem < ActiveRecord::Base
-  attr_accessible :expense_item_id, :registrant_id
+  attr_accessible :expense_item_id, :registrant_id, :details
 
   belongs_to :registrant
   belongs_to :expense_item
