@@ -322,14 +322,14 @@ describe Registrant do
       FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "1", :registrant => @reg)
       @reg.valid?.should == true
     end
-    describe "with a second event_choice for an event" do
+    describe "with a second (boolean) event_choice for an event" do
       before(:each) do
         @ec2 = FactoryGirl.create(:event_choice, :event => @ev)
       end
-      it "should be invalid if we only check off the primary_choice" do
+      it "should be valid if we only check off the primary_choice" do
         FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "1", :registrant => @reg)
         @reg.reload
-        @reg.valid?.should == false
+        @reg.valid?.should == true
       end
       it "should be valid if we check off both event_choices" do
         FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "1", :registrant => @reg)
@@ -353,13 +353,13 @@ describe Registrant do
         @reg.reload
         @reg.valid?.should == false
       end
-      it "should be valid if we check off both event_choices" do
+      it "should be valid if we fill in both event_choices" do
         FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "1", :registrant => @reg)
         FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "hello there", :registrant => @reg)
         @reg.reload
         @reg.valid?.should == true
       end
-      it "should be invalid if we only check off the second_choice" do
+      it "should be invalid if we fill in only the second_choice" do
         FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "goodbye", :registrant => @reg)
         FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "0", :registrant => @reg)
         @reg.reload

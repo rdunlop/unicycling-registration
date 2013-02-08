@@ -52,20 +52,27 @@ class Registrant < ActiveRecord::Base
     events_to_validate.each do |event|
       count_not_selected = 0
       count_selected = 0
+
+      primary_choice_selected = self.registrant_choices.select{|rc| rc.event_choice_id == event.primary_choice.id }.first
+      if primary_choice_selected.nil? or not primary_choice_selected.has_value?
+        event_selected = false
+      else
+        event_selected = true
+      end
+
       event.event_choices.each do |event_choice|
+        next if event_choice == event.primary_choice
+
         # using .select instead of .where, because we need to validate not-yet-saved data
         reg_choice = self.registrant_choices.select{|rc| rc.event_choice_id == event_choice.id}.first
-        if reg_choice.nil?
+        if reg_choice.nil? or not reg_choice.has_value?
+          next if event_choice.cell_type == "boolean"
           count_not_selected += 1
         else
-          if reg_choice.has_value?
-            count_selected += 1
-          else
-            count_not_selected += 1
-          end
+          count_selected += 1
         end
       end
-      if count_not_selected != 0 and count_selected != 0
+      if (event_selected and count_not_selected != 0) or (!event_selected and count_selected != 0)
         # set the error message for each of the registrant_choices that we have
         event_reg_choices = self.registrant_choices.select{|rc| event.event_choices.include?(rc.event_choice)}
         event_reg_choices.each do |erc|
