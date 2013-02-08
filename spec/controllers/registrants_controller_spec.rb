@@ -190,7 +190,7 @@ describe RegistrantsController do
     it "accepts a new registrant_expense_item" do
       ei = FactoryGirl.create(:expense_item)
       registrant = FactoryGirl.create(:competitor, :user => @user)
-      put :update_items, {:id => registrant.to_param, :registrant => { 
+      put :update_items, {:id => registrant.to_param, :registrant => {
         :registrant_expense_items_attributes => {
         "1234" => { :expense_item_id => ei.id.to_s, :id => "", :details => "Hello Werld", :_destroy => "0" }
       } }}
