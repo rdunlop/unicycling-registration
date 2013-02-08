@@ -33,6 +33,9 @@
         </td>
         <td>
           <%= pd.expense_item %>
+          <% unless pd.details.blank? %>
+            <%= "(" + pd.details + ")" %>
+          <% end %>
         </td>
         <td>
           <span class="fee"><%= fcost(pd.amount) %></span>
