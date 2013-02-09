@@ -33,7 +33,7 @@
           </td>
           <td><%= pf.hidden_field :amount, "data-cents" => pf.object.amount * 100 %><span class="fee"><%= fcost(pf.object.amount) %></span></td>
           <td><%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %></td>
-          <td><%= check_box_tag :anon, nil, :checked => "checked" %></td>
+          <td><%= check_box_tag :anon, nil, true, :class => "anon" %></td>
         </tr>
       <% end %>
     </tbody>
@@ -59,7 +59,7 @@
       all_values.each(function() {
         var el = $(this);
         var not_included = findDeleteCheck(el);
-        if (not_included.attr('checked')) {
+        if (not_included.prop('checked')) {
         }
         else
         {
@@ -68,13 +68,13 @@
       });
       return (total_cents / 100).toFixed(2);
     }
+    $(document).on("change", "#anon", function() {
+      var el = $(this);
+      var del = findDeleteCheck(el);
+      del.prop('checked', !el.prop('checked'));
+      $("#total_field").html(calculateTotal());
+    });
     $(document).ready(function() {
-      $("#anon").live("change", function() {
-        var el = $(this);
-        var del = findDeleteCheck(el);
-        del.attr('checked', !el.attr('checked'));
-        $("#total_field").html(calculateTotal());
-      });
       // calculate initially
       $("#total_field").html(calculateTotal());
     });
