@@ -67,6 +67,7 @@ class RegistrantsController < ApplicationController
   # GET /registrants/1.json
   def show
     @registrant = Registrant.find(params[:id])
+    @has_minor = current_user.has_minor?
 
     respond_to do |format|
       format.html # show.html.erb
