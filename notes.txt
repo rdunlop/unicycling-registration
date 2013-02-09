@@ -242,7 +242,6 @@ For Nan:
 ================================================================================
 TO DO (MUST be done BEFORE LIVE):
 - mixpanel revenue?
-- Bold the menu that I'm on?
  - Follow hugo's example for configuration blocks.
 
 - Add Administrative Options similar to what we had on the old registration site:
@@ -264,8 +263,6 @@ TO DO (MUST be done BEFORE LIVE):
  - Do we require that Paypal have a shipping address?
  - Do you want to be BCC'd on all payment received messages?
  - Can I make the Payment deadline "listed + 1 day"?
- - Confirm link to Waiver PDF
- - Confirm link to Nationals Site
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
@@ -303,6 +300,7 @@ TO DO (SHOULD be done):
 
 
 TO DO (NICE to be done):
+ - Bold the menu that I'm on?
  - running total of expenses on the "Items" page of registration?
  - Payment Choice page "unselect-all" button
  - Countries should be from a list (not text-input)
