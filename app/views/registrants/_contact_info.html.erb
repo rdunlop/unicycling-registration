@@ -3,15 +3,15 @@
   <fieldset class="data_block">
     <legend>Competitor Details</legend>
     <span>
-      <%= f.label :address %>
+      <%= f.label :address, :class => "required" %>
       <%= f.text_field :address %>
     </span>
     <span>
-      <%= f.label :city %>
+      <%= f.label :city, :class => "required" %>
       <%= f.text_field :city %>
     </span>
     <span>
-      <%= f.label :state %>
+      <%= f.label :state, :class => "required" %>
       <%= f.text_field :state %>
     </span>
     <span>
@@ -19,7 +19,7 @@
       <%= f.text_field :country %>
     </span>
     <span>
-      <%= f.label :zip %>
+      <%= f.label :zip, :class => "required" %>
       <%= f.text_field :zip %>
     </span>
     <span>

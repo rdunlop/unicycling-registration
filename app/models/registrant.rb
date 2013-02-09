@@ -7,7 +7,11 @@ class Registrant < ActiveRecord::Base
   validates :birthday, :presence => true
   validates :first_name, :presence => true
   validates :last_name, :presence => true
+  validates :address, :presence => true
+  validates :city, :presence => true
+  validates :state, :presence => true
   validates :country, :presence => true
+  validates :zip, :presence => true
   validates :gender, :presence => true
   validates :user_id, :presence => true
 

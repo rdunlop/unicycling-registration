@@ -58,6 +58,23 @@ describe Registrant do
     @reg.valid?.should == false
   end
 
+  it "requires address" do
+    @reg.address = nil
+    @reg.valid?.should == false
+  end
+  it "requires city" do
+    @reg.city = nil
+    @reg.valid?.should == false
+  end
+  it "requires state" do
+    @reg.state = nil
+    @reg.valid?.should == false
+  end
+  it "requires zip" do
+    @reg.zip = nil
+    @reg.valid?.should == false
+  end
+
   it "requires country" do
     @reg.country = nil
     @reg.valid?.should == false
