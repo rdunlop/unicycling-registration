@@ -58,7 +58,7 @@ describe RegistrantsController do
     end
   end
 
-  describe "GET waiver" do
+  describe "GET waiver", :pdf_generation => true do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       get :waiver, {:format => 'pdf', :id => registrant.to_param}
