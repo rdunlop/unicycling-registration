@@ -2,65 +2,125 @@
   <legend>Contact Information</legend>
   <fieldset class="data_block">
     <legend>Competitor Details</legend>
-    <span>
-      <%= f.label :address, :class => "required" %>
-      <%= f.text_field :address %>
-    </span>
-    <span>
-      <%= f.label :city, :class => "required" %>
-      <%= f.text_field :city %>
-    </span>
-    <span>
-      <%= f.label :state, :class => "required" %>
-      <%= f.text_field :state %>
-    </span>
-    <span>
-      <%= f.label :country, :class => "required" %>
-      <%= f.text_field :country %>
-    </span>
-    <span>
-      <%= f.label :zip, :class => "required" %>
-      <%= f.text_field :zip %>
-    </span>
-    <span>
-      <%= f.label :phone %>
-      <%= f.text_field :phone %>
-    </span>
-    <span>
-      <%= f.label :mobile %>
-      <%= f.text_field :mobile %>
-    </span>
-    <span>
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-    </span>
+    <table>
+      <tr>
+        <td>
+          <%= f.label :address, :class => "required" %>
+        </td>
+        <td>
+          <%= f.text_field :address %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :city, :class => "required" %>
+        </td>
+        <td>
+          <%= f.text_field :city %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :state, :class => "required" %>
+        </td>
+        <td>
+          <%= f.text_field :state %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :country, :class => "required" %>
+        </td>
+        <td>
+          <%= f.text_field :country %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :zip, :class => "required" %>
+        </td>
+        <td>
+          <%= f.text_field :zip %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :phone %>
+        </td>
+        <td>
+          <%= f.text_field :phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :mobile %>
+        </td>
+        <td>
+          <%= f.text_field :mobile %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :email %>
+        </td>
+        <td>
+          <%= f.text_field :email %>
+        </td>
+      </tr>
+    </table>
   </fieldset>
   <fieldset class="data_block">
     <legend>Emergency Contact</legend>
-    <b>In case of emergency</b>
-    <span>
-      <%= f.label :emergency_name, "Name", :class => "required" %>
-      <%= f.text_field :emergency_name %>
-    </span>
-    <span>
-      <%= f.label :emergency_relationship, "Relationship", :class => "required" %>
-      <%= f.text_field :emergency_relationship %>
-    </span>
-    <span>
-      <%= f.label :emergency_attending, "Attending?" %>
-      <%= f.check_box :emergency_attending %>
-    </span>
-    <span>
-      <%= f.label :emergency_primary_phone, "Primary Phone", :class => "required" %>
-      <%= f.text_field :emergency_primary_phone %>
-    </span>
-    <span>
-      <%= f.label :emergency_other_phone, "Other Phone" %>
-      <%= f.text_field :emergency_other_phone %>
-    </span>
+    <table>
+      <tr>
+        <th colspan="2">
+          <b>In case of emergency</b>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :emergency_name, "Name", :class => "required" %>
+        </td>
+        <td>
+          <%= f.text_field :emergency_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :emergency_relationship, "Relationship", :class => "required" %>
+        </td>
+        <td>
+          <%= f.text_field :emergency_relationship %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :emergency_attending, "Attending?" %>
+        </td>
+        <td>
+          <%= f.check_box :emergency_attending %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :emergency_primary_phone, "Primary Phone", :class => "required" %>
+        </td>
+        <td>
+          <%= f.text_field :emergency_primary_phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :emergency_other_phone, "Other Phone" %>
+        </td>
+        <td>
+          <%= f.text_field :emergency_other_phone %>
+        </td>
+      </tr>
+    </table>
   </fieldset>
   <fieldset class="data_block">
-    <legend>Responsible Adult (for Registrants Under the age of 18)</legend>
+    <legend>Responsible Adult<br /><span class="extra_info">(for Registrants Under the age of 18)</span></legend>
     <span>
       <%= f.label :responsible_adult_name, "Name" %>
       <%= f.text_field :responsible_adult_name %>
