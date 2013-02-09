@@ -7,10 +7,25 @@ Build Status on TravisCI: [![Build Status](https://travis-ci.org/rdunlop/unicycl
 How to contribute time/effort to the Registration Site
 ------------------------------------------------------
 
+Code Contribututions
+--------------------
+
 * Check out this project, and use the provided vagrantbox to do development/testing
+* Fork the project
 * For any changes, include updated/added unit tests, and ensure that the whole suite runs
-* Push changes to bitbucket
-* Request that the changes be pushed to the 'prod' site by robin
+* Create a pull request
+
+Idea Contributions
+------------------
+
+* If you have an improvement, feel free to open an Issues ticket, or send me a
+  message
+
+Bug Reports
+-----------
+
+Please log all bugs in the "Issues"
+
 
 Development Setup instructions:
 -------------------------------
