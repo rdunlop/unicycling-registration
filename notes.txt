@@ -301,9 +301,9 @@ TO DO (SHOULD be done):
 
 
 TO DO (NICE to be done):
+ - Payment Choice page "unselect-all" button
  - Bold the menu that I'm on?
  - running total of expenses on the "Items" page of registration?
- - Payment Choice page "unselect-all" button
  - Countries should be from a list (not text-input)
    - USA by default (dropdown for countries, Canada 2nd, not text input)
  - More personalized "Welcome Email" which has details about what they're confirming, etc.
