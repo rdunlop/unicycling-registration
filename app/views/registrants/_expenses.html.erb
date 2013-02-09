@@ -26,14 +26,11 @@
   </fieldset>
 </div>
  <script>
-   $(document).ready(function() {
-     // XXX This should be a call to 'on' instead of 'live'
-     $(".delete_expenses_button").live("click", function() {
-       button = $(this);
-       check = $("#" + button.data("thing"));
-       check.prop('checked', true);
-       row = $("#" + button.data("row"));
-       row.fadeOut(500);
-     });
+   $(document).on("click", ".delete_expenses_button", function() {
+     button = $(this);
+     check = $("#" + button.data("thing"));
+     check.prop('checked', true);
+     row = $("#" + button.data("row"));
+     row.fadeOut(500);
    });
  </script>
