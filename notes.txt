@@ -1,0 +1,477 @@
+This describes the different models, and their properties
+
+Registration Period:
+- Start Date - Date that registration opens
+- End Date - Last Date of registration at this price (inclusive)
+- Non-Competitor Cost during this period
+- Competitor Cost during this period
+
+
+Event Configuration: (usually only ONE of these)
+- Event Name - Full Name of the event
+- Event Short-Name - Short Name of the event
+- Event Location String - Used for displaying on the main page/banner
+- Event Date range String - Used for displaying on the main page/banner
+- Logo (Binary)
+- Event URL - Used for a link from the main banner to the Event's other-info website
+- Event Start Date - Used for calculating the "Age" of the competitors
+
+- contact E-mail address - Where any registration inquiries are sent
+- Registration Closed - Global setting, usually not used (automatically closes based on Registration Period)
+- Currency String - String to print next to the prices to indicate the currency being used
+- Artistic Closed Date - Last date that artistic events can be signed up
+- Standard Skill Closed Date - Last date that the standard skill events can be signed up
+- T-Shirt order Closed Date - Last date to add/change t-shirt sizes.
+
+
+Category:
+- Name - Name of this event Category
+
+Event:
+- Name - Name of this competition
+- Description - Optional longer description of this event
+- CategoryID - The Category that this event should be grouped/listed with
+
+EventChoice:
+- Label - Displayed next to this option
+- exportName - label for exporting this data 
+- EventID - The event that this choice is associated with
+- CellType (text, checkbox, multiple)
+- MultipleValues (String, comma-separated, for the 'multiple' option)
+
+RegistrantChoice:
+- registrantId - Who
+- eventChoiceID - Chose against which question
+- eventChoiceValue - What did they choose? (stored as string, but translated based on the CellType of the EventChoice)
+
+TODO (flesh out and implement)
+BestTimeType:
+- Name
+- Description
+- Initial Value
+- Increment step(s)?
+...
+
+User:
+- Email
+- Password (encrypted)
+- Admin (boolean)
+* Registration(s)
+
+Registrant:
+- First Name
+- Middle Initial
+- Last Name
+- Birthday
+- Gender
+- Address
+- City
+- State
+- Zip
+- Country
+- Phone
+- Mobile
+- Email
+
+- Club Name
+- Club Contact Name
+- USA Member Number
+- Emergency Contact Name
+- Emergency Contact Relationship
+- Emergency Contact Attending?
+- Emergency Contact Primary Phone
+- Emergency Contact Other Phone
+- Emergency Contact Name
+- Responsible Adult Name
+- Responsible Adult Phone
+
+
+Not yet determined:
+- Paypal
+- Best Times
+
+To Be answered by the Event Organizers:
+
+ Should not be able to change the type of a given field once created.
+ Should warn about changing the name of an event, because it may change the value of the....
+ Cascade delete....
+
+N+1 queries
+Validations from RecordValidator
+
+Check that the placeholder text works in other browsers, or add jquery fix for it?
+ - add http://selectivizr.com/ ??
+CSS Reset?
+smidget?
+prevent form leaving modified form page
+Try different ways of displaying the Event Catgories.
+Use SASS to inherit css properties.
+
+Add Tests for when a configuration doesn't exist yet (ensure the site loads/etc)
+
+Possibly use "stripes" for the creditcard vendor.
+Competitor Information is Almost never Changed.
+
+Better way to navigate back to Registrants page.
+Make the Pay Now a button-like-thing.. For a Sinlge Registrant, Make the Pay Now part of the regsitration.
+add ability to restrict deletion of registrants and users, if there are related records in payments.
+
+
+UNICON 2012 data analysis:
+1477 User Accounts
+885 of those users actually Have a registrant
+1844 Registrations
+
+
+select num_records, count(*) as registrants_per_user, (num_records*count(*)) as total_registrations, ((num_records*count(*)) / 1844 * 100) as perc from (select count(*) as num_records from reg_user INNER JOIN reg_registration ON reg_user.userid = reg_registration.userid  group by reg_user.userid) as A group by num_records
+
+num_records registrants_per_user    total_registrations perc
+1   578 578 31.3449
+2   128 256 13.8829
+3   68  204 11.0629
+4   57  228 12.3644  67% 4-or-less
+5   20  100 5.4230
+6   6   36  1.9523  There are ~30 users below this, accounting for 25% of my registrants (small, but powerful)
+8   4   32  1.7354
+11  1   11  0.5965
+12  5   60  3.2538
+13  4   52  2.8200
+14  2   28  1.5184
+16  2   32  1.7354
+17  1   17  0.9219
+19  1   19  1.0304
+20  2   40  2.1692
+21  1   21  1.1388
+22  1   22  1.1931
+24  1   24  1.3015
+25  1   25  1.3557
+29  1   29  1.5727
+30  1   30  1.6269
+
+488 - Non Competitor
+1356 - Competitor
+
+1350 Payments
+899 Payments (after removing 'excel' and 12345 transactions).
+
+How many payments were made against only one record at a time:
+
+1   658 73.1924
+2   97  10.7898
+3   41  4.5606
+4   43  4.7831
+5   13  1.4461
+6   6   0.6674
+7   3   0.3337
+8   4   0.4449
+9   5   0.5562
+10  1   0.1112
+11  2   0.2225
+12  4   0.4449
+13  3   0.3337
+14  2   0.2225
+15  1   0.1112
+17  2   0.2225
+18  1   0.1112
+19  1   0.1112
+20  3   0.3337
+21  3   0.3337
+22  1   0.1112
+23  3   0.3337
+25  1   0.1112
+28  1   0.1112
+
+Best Times:
+400 chose 100m
+360 chose 10k
+100 chose marathon
+
+
+
+NAUCC 2011
+229 User Accounts
+How many actually have registrants: 229
+227 Competitors
+91 Non-Competitors
+
+318 Registrantions
+
+Number of registrants per user:
+1 108 108 47% -> 34%
+2 27  54  23% -> 16%
+3 16  48  21% -> 15%
+4 11  44  19% -> 14%
+5 4   20  8%  -> 5%
+6 2   12  5%  -> 4%
+32 1  32  14% -> 10%
+
+
+
+Number of registrants per payment:
+199 Payments5
+
+1 141 47%
+2 24  16%
+3 17  17
+4 11  14
+5  3  5
+6  2  4
+15 1  5
+
+
+Best Times:
+13 ppl chose 100m
+10 ppl chose 400m
+21 ppl chose 10k
+9 ppl chose marathon
+
+
+
+
+For Nan:
+- CSS Reset?
+- Style of the a hrefs, so that they are visible.
+- Help with the banner
+
+- Registration Periods should have unique expense items (so that we can directly match a payment) (ie. No two registration periods should have the same expense items)
+- Registration Preidos should also have unique items between comp and non-comp
+- Add more destroy-restrict codes (see payment_detail<->expense_item)
+
+
+
+================================================================================
+TO DO (MUST be done BEFORE LIVE):
+- mixpanel revenue?
+ - Follow hugo's example for configuration blocks.
+
+- Add Administrative Options similar to what we had on the old registration site:
+ - Add link to arbitrary event to uninationals site
+
+ - Modification logs
+  - Add ability to log the changes to records, for audit reasons
+  - I have gotten the initial page working, but more is capabilities are required
+
+ - PayPal
+  - Prevent people from starting a payment, and then finishing it months later for cheap.
+
+ - Have Connie Approve the site (specifically, are we gathering enough data, in her expert opinion).
+ - Prevent changing a payment's contents after it is _paid_
+ - Make a note that the Name/Country is listed for all registrants to see.
+ - Update the Costs for all Expense Items and registration periods
+ - Work with Dave to configure his paypal account appropriately
+ - Try it with different browsers
+ - Do we require that Paypal have a shipping address?
+ - Do you want to be BCC'd on all payment received messages?
+ - Can I make the Payment deadline "listed + 1 day"?
+ - Create a "LIVE" site (we will still have a TEST site).
+
+TO DO (MUST be done SOON after LIVE (if not before)):
+ - "Copy Address from <family member>" link.
+ - Ensure that payments from the previous payment period are stored properly during movement
+ - Disable the IPN e-mail, once it is confirmed to be working.
+ - test that the "Registration Periods" upgrade correctly. (Give a day of grace?)
+ - Export/Import functions for the WHOLE dataset?
+ - Export to Excel format
+ - Export to UCP format?
+ - Add a "feedback" form that e-mails me.
+ - Prevent changing the prices of expense_items (especially after payments with those items exist)
+ - Payments page which lists all Unpaid Registrations (and e-mail contact info?)
+ - Choose a better colour scheme
+ - Multi-Edit (allows updating the selection of multiple people's choices)
+ - Multi-record delete (allows removing multiple people from an event sign-up)
+ - Enter a "Wire Payment" (also, mark a registration/etc as paid, for some reason)
+ - Delete a registration
+ - Delete a payment
+ - Add ability to "log in as any user" for debugging purposes.
+ - Log all logs to an external (persistent) store
+
+
+TO DO (SHOULD be done):
+ - Make "Sign Up" a button, and clearer.
+ - Create new Ability class for admin controllers (allows better control of admin access)
+ - Add ability to "Delete" a registration (possibly make this available to normal users).
+ - Fix some styling of the page, to make it easier to follow the flow of the system.
+ - Admin should be able to "receive a cheque"
+  - This allows an admin to mark a record/item as paid without PayPal
+  - ReceivedCheque should have "notes"
+ - Country is a required field
+ - Perhaps don't show the "name" of the registration Periods (it's confusing?)
+  - It's still showing during the payment-process steps
+
+
+
+TO DO (NICE to be done):
+ - Payment Choice page "unselect-all" button
+ - Bold the menu that I'm on?
+ - running total of expenses on the "Items" page of registration?
+ - Countries should be from a list (not text-input)
+   - USA by default (dropdown for countries, Canada 2nd, not text input)
+ - More personalized "Welcome Email" which has details about what they're confirming, etc.
+ - Better Calendar for Birthday.
+ - favicon
+ - Make Club auto-completing/choosing thing (like: group name)
+ - Admin page for the events page....should show num people signed up vs num people signed-up-and-paid.
+ - Add something that helps describe What "Category" to sign up for when choosing "Individual Freestyle" (Categories are: "Age Group", "Jr. Expert", "Expert").
+ - Fix styling of page when errors occur
+ - default sort orders (all models?)
+ - Improve the "Summary" page to be prettier, and better at printing.
+ - Test the site on multiple browsers
+ - User Test the site to see about usability improvements
+ - Integrate with USA Membership site
+ - Add notice to entice Non-Competitors to become Competitors
+ - Add ability to mark a Registration as paid, to deal with "Dave said that I could go for free" scenario(s).
+ - Serve the logo from a better (cached) fashion
+ - Allow sortnig of the "all registrants" page according to the columns (use jquery?)
+ - expense items be destroyed when an expenseGroup is destroyed
+ - Prevent events from having no position-1-event-choice-boolean
+ - Clear additional Fields when an event is un-checked.
+ - Prevent users from specifying invalidly formatted phone numbers
+ - Prevent users from specifying invalidly formatted email addresses?
+
+Scott's suggestions:
+ - Make the Team Name box have a 'select-from-previous-data' option
+ - Buttons for comp and non-comp need to line up with boxes below
+ - Next page (Costs...)
+ - Admin should be able to identify Who+WHAT has been received/paid for.
+ - Pay now gets its own line
+ - Payment page checkmarks with running total. When boxes are checked, highlight line.
+ - Immediate errors display when typing in.
+ - How do we get BEST TIMES?
+ - Automatically start the rails server when vagrant starts
+
+
+DONE:
+ - Edit any registration
+ - Ability to Add Admin User
+ - Fix the bottom line of the registration costs to be clearer
+ - Need to have Emergency details
+ - Include the prices on the Source tables
+ - Fix the display of the "Basketball" Team Name field to be labelled correctly (this is a systemic problem).
+ - Hide the advanced admin tools in the "Super Admin" menu.
+ - Add Club Artistic competition (has no category, has club name)
+ - Make Expense Items -> Delete a button
+ - Should be able to choose what will be paid for of all the to-be-paids
+ - See a page where people can see who is signed up so far
+ - ADD "Primary Team or Club Name", "Primary Team or Club Contact"
+ - Add Optional field: USA ID
+ - Add Emergency COntact: - Name:  - Relationship to participant: - Attending:: Y/Name - Primary Telephone Number:  - Other Phone Numbers
+ - Add The "Person responsible"  should have nName AND PHone number (optional)
+ - Email ("please leave us your e-mail so that we can keep you informed of critical updates")
+ - Figure out why buttler-wobble has a negative cost-owing.
+  - It's because it was possible to delete reg items after having paid for them.
+  - I have fixed this 
+ - Validate the data better, which will prevent people from Choosing a Category without choosing the event itself.
+  - Validate that choices are not selected without accompanying data
+ - Under 18 needs a valid parent/guardian 
+  - Under 18, need Parent/Guardian ON-Site
+ - Paypal integration work (Post, and return IPN)
+  - Allow Users to see their payments (/payments)
+  - create a "payment summary" page which addresses paypal's requirements
+  - change documentation to allow for auto-return
+  - Find a way to enable/disable paypal-sandbox in production without a code commit
+ - View Payments Report (what does this entail?)
+  - Add "Payments" report, to list number of expense items paid (Registrations, T-Shirts, etc)
+ - Make all currencies "xx.xx" format.
+ - Add analytics gathering of pages/tabs
+ - Change Artistic Age Groups to match NAUCC requirements (No Jr Expert???? Beginner/Intermediate....)
+ - Add "Events" report, to list number of users signed up for each event. (MUni XC Beginner, etc)
+ - Reg Summary page should be Nicer to look at...the boxes are unclear (perhaps multiple columns of 409px each....)
+ - On Events Tabs, have a "previous" link too
+ - Add ability for user to see their payments (#payment#index?)
+ - remove the mixpanel key from git, add to documentation.
+ - Add notice that "A Release/Waiver must be signed by all competitors, and by parent/guardian for anyone < 18"
+ - Have a link to a PDF of the waiver that must be signed by ALL participants (and make it obvious)
+ - Should the "NAUCC logo" be a link to uninationals.com?
+ - do we want a link and/or popup beside each of the events, so that people can easily reference the events?
+ - Clean up the Payment#show page, so that it looks more professional before going to Paypal.
+ - Remove secret key
+ - Link from competitions to their websites. (add the ability to open a popup window to a different URL on each of the Events?)
+ - Forgotten passwords. add it to the notice, to bring them to the forgot password page
+ - Add exception handler e-mail
+- Replace the 'Copyright" with a "Developed by" statement?
+
+
+------------------------------------------------------------------------------------------------------------------
+
+Dave,
+
+The following is my understanding of your answer to the "Can you compete in multiple categories of muni?" question.
+
+1)
+- Yes, a competitor can ride in both the Beginner and Advanced categories of Uphill
+ (same for Downhill, and XC)
+
+2) If a competitor rides in both Beginner and Advanced for Uphill, only their Advanced score will be counted (their beginner score will be eliminated)
+ (same for Downhill, and XC)
+
+3) It is possible for a competitor to ride both the Advanced AND Expert Uphill
+  - If they ride the Expert, their Advanced score is eliminated
+ - It is possible for a competitor to ride both the Advanced AND Expert Downhill
+  - If they ride the Expert, their Advanced score is eliminated
+*****
+ - It IS NOT possible for a competitor to ride both the Advanced and Expert XC
+******
+
+4) I'm not 100% clear on your statement "the highest level attempted counts and puts them in the highest category for overall"
+ - Is there a "MUni Overall Beginner" award? (and "MUni Overall Advanced" and "Muni Overall Expert"?)
+
+ - If someone competes in the Beginner Uphill, and the Advanced Downhill....does their Beginner Uphill score get eliminated?
+
+5)
+As a result of these thoughts, this is the data I think I should gather:
+[Y/N] MUni Uphill
+ - Categories: ["Beginner", "Advanced/Expert"]
+[Y/N] MUni Downhill
+ - Categories: ["Beginner", "Advanced/Expert"]
+[Y/N] MUni Cross-Country
+ - Categories: ["Beginner", "Advanced", "Expert"]
+
+
+I worry that if we make a big deal about the difficulty of Moraine, many competitors will do the beginner "just in case the advanced looks too hard when we get there", which will make the Beginner courses quite busy. I'm not sure if there's a good solution to this.
+
+Quote from Dave:
+ "Lining up at the start of the Advanced will wipe out any Beginner score. It will be necessary to do all MUni awards the last day for that reason.  People cannot have scores for both.  I do think some will have reservations about Moraine- which is fine.  I'd rather see someone who is uncomfortable on more than the beginner Muni course (very similar to past conventions Beginner MUni courses) stay at the Beginner Level.  We want people to compete at their comfort level.  
+
+ Moraine is much more difficult than the Advanced and Expert course of last year due to the terrain- elevation and technicality.  I want to make sure Advanced riders know what they're getting into.  That being said, it isn't a bad course if you walk a few sections.  Technical prowess isn't necessary, but it's different from the courses I've seen at past conventions.  The natural terrain is harder.  I've hopefully tried to convey that from the videos on the site, but people don't read or pay attention.
+
+ Advanced/Expert- no on the XC.  As in the past, they could mix the uphill/downhill, but the highest level attempted counts and puts them in the highest category for overall."
+
+------------------------------------------------------------------------------------------------------------------
+ AND:
+ Trials- Adv/Expert.  The typical method has been to have the Advanced go and then the top riders get to go to the Expert round.  That's what we were figuring for this year.  Trials- Beginner would be the other category.
+
+ - Add a warning for the Advanced/Expert MUni XC, MUST have water in order to compete (not allowed to start unless they are bringing some form of water bottle).
+
+
+
+
+QUESTIONS:
+- Q: USA Individual categories choices
+- NOTE: 2 hours for Group/Club competition.
+- Q: Gorup categories Small/Large/Expert?
+
+- *** CHange WW to be clearer that it's 0-10, 11+ age ***
+- NICE: Standard Skill Electronic.
+- Q: Downhill Gliding (ask Dave, perhaps a workshop?)
+- Dave(Lisa) - talk to Ann about PayPal setup and use.
+
+
+
+
+QUESTIONS:
+Scott, Connie,
+
+A question has come up about the Rulebook. Which rulebook will be in effect for NAUCC 2013? Currently, the plan is to use the 2010 USA Rulebook.
+
+Quote from Dave:
+"The IUF is in the process of being revised.  I know the USA was looking to match the IUF.  I noticed the USA almost had no updates in their revisions, but I think there are areas that need addressed.  Specifically geared hubs and points scoring for overall MUni and Distance titles.  I suppose it's my fault that I didn't push for these revisions (since I am on the committee) at the time the rulebook was being looked at, but honestly- I ran out of time with the unicycling organizing local and for NAUCC 2013, the day job- we are at a critical time with curriculum, and paying attention to the IUF happenings in Distance and MUni.  I hope I don't sound like I'm trying to make excuses.  It was a long December and there's reason to believe that maybe this year will be better than the last (Counting Crows).
+
+ I linked the 2010 edition of the USA on the competitions page with a disclaimer.
+
+ I know at this point if some of the proposals pass at the IUF level and the USA adopts the rulebook in it's entirety we will not be compliant on some issues- specifically the measurement accuracy for the road courses and the muni ratings system.  I don't have time to redo all those courses and I think using the word marathon outweighs saying "about a marathon'  because a GPS unit isn't considered accurate enough. I'm thinking from the perspective of marketing unicycling to the general public, not for world record use.  I see the need for a UNICON, but at this level with the amount of local organizers it isn't going to happen.  I will say that our courses will be A LOT more close in accuracy than last year's NAUCC.  I used a consumer GPS and a reasonably well calibrated bike computer to measure all the road courses.  Besides, with the terrain, if Scott beats world records on these courses he will obliterate them in Montreal.
+
+ I hope this point made sense."
+
+-------------
+
+Text!!!
