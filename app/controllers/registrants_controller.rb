@@ -58,8 +58,8 @@ class RegistrantsController < ApplicationController
     @emergency_other_phone = @registrant.emergency_other_phone
 
     respond_to do |format|
-      format.html { render action: "waiver", :layout => nil, :formats => [:pdf] }
-      format.pdf { render :pdf => "waiver" }
+      format.html { render action: "waiver", :layout => nil }
+      format.pdf { render :pdf => "waiver", :formats => [:html] }
     end
   end
 
