@@ -1,6 +1,9 @@
 Registration Site
 =================
 
+Build Status on TravisCI: [![Build Status](https://travis-ci.org/rdunlop/unicycling-registration.png?branch=master)](https://travis-ci.org/rdunlop/unicycling-registration) [![Dependency Status](https://gemnasium.com/rdunlop/unicycling-registration.png)](https://gemnasium.com/rdunlop/unicycling-registration)
+
+
 How to contribute time/effort to the Registration Site
 ------------------------------------------------------
 
