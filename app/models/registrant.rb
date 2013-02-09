@@ -218,11 +218,11 @@ class Registrant < ActiveRecord::Base
 
   # does this registrant have this event checked off?
   def has_event?(event)
-    enablement_choice = event.event_choices.where({:position => 1})
-    if enablement_choice.empty?
+    enablement_choice = event.primary_choice
+    if enablement_choice.nil?
       false
     else
-      my_val = self.registrant_choices.where({:event_choice_id => enablement_choice.first.id}).first
+      my_val = self.registrant_choices.where({:event_choice_id => enablement_choice.id}).first
       if my_val.nil?
         false
       else
@@ -238,7 +238,7 @@ class Registrant < ActiveRecord::Base
       if ec.position != 1
         my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
         unless my_val.nil?
-          description += " - " + ec.label + ": " + my_val.value
+          description += " - " + ec.label + ": " + my_val.describe_value
         end
       end
     end

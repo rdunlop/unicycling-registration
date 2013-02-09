@@ -343,6 +343,10 @@ describe Registrant do
         @reg.reload
         @reg.valid?.should == false
       end
+      it "should describe the event" do
+        FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "1", :registrant => @reg)
+        @reg.describe_event(@ev).should == "#{@ev.name} - #{@ec2.label}: yes"
+      end
     end
     describe "with a second event_choice (text-style) for an event" do
       before(:each) do

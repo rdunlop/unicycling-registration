@@ -20,4 +20,12 @@ class RegistrantChoice < ActiveRecord::Base
       return false
     end
   end
+
+  def describe_value
+    if event_choice.cell_type == "boolean"
+      self.value != "0" ? "yes" : "no"
+    else
+      self.value
+    end
+  end
 end
