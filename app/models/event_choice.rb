@@ -22,4 +22,8 @@ class EventChoice < ActiveRecord::Base
       errors[:cell_type] << "Only 'boolean' types are allowed in position 1"
     end
   end
+
+  def to_s
+    self.event.to_s + " - " + self.export_name
+  end
 end

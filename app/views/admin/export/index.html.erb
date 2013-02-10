@@ -12,3 +12,7 @@ The download/upload system:
   File: <%= f.file_field :events_file -%><br />
   <%= f.submit 'Submit' %>
 <% end %>
+
+
+<hr />
+<%= link_to 'Download Event Info', admin_export_download_events_path(:format => :xls) %>

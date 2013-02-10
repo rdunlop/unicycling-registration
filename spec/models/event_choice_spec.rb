@@ -51,6 +51,10 @@ describe EventChoice do
     @ec.choicename.should == "choice#{@ec.id}"
   end
 
+  it "has a to_s" do
+    @ec.to_s.should == @ec.event.to_s + " - " + @ec.export_name
+  end
+
   describe "when parsing the multiple_values" do
     it "can parse single value" do
       @ec.multiple_values = "one"

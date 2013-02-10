@@ -13,6 +13,7 @@ gem 'paper_trail', '~> 2'
 gem 'exception_notification'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-heroku'
+gem 'spreadsheet'
 
 #gem 'sqlite3'
 gem 'pg'

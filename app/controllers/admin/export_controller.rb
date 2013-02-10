@@ -114,4 +114,42 @@ class Admin::ExportController < Admin::BaseController
       format.html { redirect_to admin_export_index_path }
     end
   end
+
+  def download_events
+
+    event_choices = Event.all.flat_map{ |ev| ev.event_choices }
+    event_titles = event_choices.map{|ec| ec.to_s}
+    titles = ["Registrant Name", "Age", "Gender"] + event_titles
+    competitor_data = []
+    Registrant.all.each do |reg|
+      comp_base = [reg.name, reg.age, reg.gender]
+      reg_event_data = []
+      event_choices.each do |ec|
+        rc = reg.registrant_choices.where({:event_choice_id => ec.id}).first
+        if rc.nil?
+          reg_event_data += [nil]
+        else
+          reg_event_data += [rc.describe_value]
+        end
+      end
+      competitor_data << ([reg.name, reg.age, reg.gender] + reg_event_data)
+    end
+    @data = [titles] + competitor_data
+
+    s = Spreadsheet::Workbook.new
+
+    sheet = s.create_worksheet
+    @data.each_with_index do |row, row_number|
+      row.each_with_index do |cell, column_number|
+        sheet[row_number,column_number] = cell
+      end
+    end
+
+    report = StringIO.new
+    s.write report
+
+    respond_to do |format|
+      format.xls { send_data report.string, :filename => "download_events#{Date.today}.xls" }
+    end
+  end
 end

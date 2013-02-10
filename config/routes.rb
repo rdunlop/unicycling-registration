@@ -13,6 +13,7 @@ Workspace::Application.routes.draw do
       get :download_data
       get :download_configuration
       post :upload
+      get :download_events
     end
     resources :users, :only => [:index] do
       member do
