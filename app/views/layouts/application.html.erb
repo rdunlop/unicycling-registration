@@ -69,6 +69,9 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% if can? :manage, EventConfiguration %>
             <li><%= link_to 'Export/Import', admin_export_index_path %></li>
           <% end %>
+          <% if can? :manage, User %>
+            <li><%= link_to 'Set User as admin', admin_users_path %></li>
+          <% end %>
           <li><%= link_to 'Registrants (edit)', admin_registrants_path %></li>
           <li><%= link_to 'Payments', admin_payments_path %></li>
           <li><%= link_to 'Events Report', admin_events_path %></li>
