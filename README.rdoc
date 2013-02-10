@@ -45,6 +45,8 @@ PAYMENT_NOTICE_EMAIL=robin+nauccpayments@dunlopweb.com
 The following e-mail will receive all error messages and other low-level messages
 ERROR_EMAIL=robin+nauccerrors@dunlopweb.com
 
+NOTE: In development, ALL E-MAIL will be sent to the ERROR_EMAIL address, but in production it will flow as expected.
+
 == Domain
 
 The following setting is used to build the links in the e-mails, set it to the hostname of the deployed application
