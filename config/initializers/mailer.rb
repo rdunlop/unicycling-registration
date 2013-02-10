@@ -10,3 +10,13 @@ ActionMailer::Base.smtp_settings = {
 ActionMailer::Base.default :from => ENV['MAIL_FULL_EMAIL']
 
 ActionMailer::Base.default_url_options[:host] = ENV['DOMAIN']
+
+if Rails.env.development?
+  class OverrideMailRecipient
+    def self.delivering_email(mail)
+      mail.body = "DEVELOPMENT-OVERRIDE. Was being sent to " + mail.to.first + "\n" + mail.body.to_s
+      mail.to = ENV['ERROR_EMAIL']
+    end
+  end
+  ActionMailer::Base.register_interceptor(OverrideMailRecipient)
+end
