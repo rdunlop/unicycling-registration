@@ -25,7 +25,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <nav>
     <ul>
       <li>
-      <% if EventConfiguration.exists? %>
+      <% if EventConfiguration.configuration_exists? %>
         <% target_url = EventConfiguration.event_url %>
         <% if target_url.nil? %>
           <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), root_url, {:class => "logo_link"} %>
@@ -65,6 +65,9 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% end %>
           <% if can? :manage, RegistrationPeriod %>
             <li><%= link_to 'Registration Periods', registration_periods_path %></li>
+          <% end %>
+          <% if can? :manage, EventConfiguration %>
+            <li><%= link_to 'Export/Import', admin_export_index_path %></li>
           <% end %>
           <li><%= link_to 'Registrants (edit)', admin_registrants_path %></li>
           <li><%= link_to 'Payments', admin_payments_path %></li>

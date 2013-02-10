@@ -7,6 +7,12 @@ Workspace::Application.routes.draw do
     resources :registrants, :only => [:index]
     resources :payments, :only => [:index]
     resources :events, :only => [:index, :show]
+
+    namespace :export do
+      get :index
+      get :download
+      post :upload
+    end
     resources :users, :only => [:index] do
       member do
         put :admin

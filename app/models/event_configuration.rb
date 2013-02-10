@@ -75,7 +75,7 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
-  def self.exists?
+  def self.configuration_exists?
     !EventConfiguration.first.nil?
   end
 
@@ -86,6 +86,10 @@ class EventConfiguration < ActiveRecord::Base
     else
       ec.event_url
     end
+  end
+
+  def as_json(options={})
+    super(:except => [:logo_binary])
   end
 
 

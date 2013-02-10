@@ -26,6 +26,7 @@ TO DO (MUST be done BEFORE LIVE):
  - Create a "LIVE" site (we will still have a TEST site).
 
 TO DO (MUST be done SOON after LIVE (if not before)):
+ - Prevent deleting ExpenseGroup if an ExpenseItem cannot be deleted (due to constraint)
  - "Copy Address from <family member>" link.
  - Ensure that payments from the previous payment period are stored properly during movement
  - Disable the IPN e-mail, once it is confirmed to be working.
