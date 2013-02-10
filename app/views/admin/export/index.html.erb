@@ -5,7 +5,8 @@ The download/upload system:
 <b>BE <u>VERY</u> Careful with this system. it DELETES EVERYTHING</b>
 <ul>
   <li>Doesn't include the logo</li>
-<%= link_to 'Download Data', admin_export_download_path(:format => :json) %>
+  <%= link_to 'Download Configuration', admin_export_download_configuration_path(:format => :json) %><br />
+  <%= link_to 'Download Data', admin_export_download_data_path(:format => :json) %>
 
 <%= form_for :convert, :url=>admin_export_upload_path, :html => {:multipart=>true} do |f| -%>
   File: <%= f.file_field :events_file -%><br />

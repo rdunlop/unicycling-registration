@@ -10,7 +10,8 @@ Workspace::Application.routes.draw do
 
     namespace :export do
       get :index
-      get :download
+      get :download_data
+      get :download_configuration
       post :upload
     end
     resources :users, :only => [:index] do

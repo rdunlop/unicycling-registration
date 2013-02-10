@@ -89,7 +89,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(:except => [:logo_binary])
+    super(:except => [:logo_binary, :logo_type, :logo_filename])
   end
 
 
