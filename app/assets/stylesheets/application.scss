@@ -83,11 +83,17 @@
 }
 
 table {
- margin: 0 auto; // centers tables
- }
- 
+  margin: 0 auto; // centers tables
+}
+
+table.alternate {
+  td {
+    padding: 0px 10px;
+  }
+}
+
 table.alternate,
 .competitor_sign_up table,
 .non-competitor_sign_up table { 
- border-collapse: collapse;
+  border-collapse: collapse;
 }

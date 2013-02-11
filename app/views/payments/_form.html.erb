@@ -32,8 +32,10 @@
             <% end %>
           </td>
           <td><%= pf.hidden_field :amount, "data-cents" => pf.object.amount * 100 %><span class="fee"><%= fcost(pf.object.amount) %></span></td>
-          <td><%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %></td>
-          <td><%= check_box_tag :anon, nil, true, :class => "anon" %></td>
+          <td>
+            <%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %>
+            <%= check_box_tag :anon, nil, true, :class => "anon" %>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -41,6 +43,7 @@
       <tr>
         <th colspan="3">Total</th>
         <th class="fee" id="total_field"></th>
+        <th></th>
       </tr>
     </tfoot>
   </table>
