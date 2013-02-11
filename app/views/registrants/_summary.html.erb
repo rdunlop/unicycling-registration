@@ -47,24 +47,24 @@
     <%= @registrant.usa_member_number %>
   </div>
   <div>
-    <b>Emergency Contact Name</b>
+    <b>Emergency Contact Name:</b>
     <%= @registrant.emergency_name %>
   </div>
   <div>
-    <b>Emergency Contact Relationship</b>
+    <b>Emergency Contact Relationship:</b>
     <%= @registrant.emergency_relationship %>
   </div>
   <div>
-    <b>Emergency Contact Attending</b>
-    <%= @registrant.emergency_attending %>
+    <b>Emergency Contact Attending:</b>
+    <%= @registrant.emergency_attending ? "yes":"no" %>
   </div>
   <div>
-    <b>Emergency Contact Phone</b>
+    <b>Emergency Contact Phone:</b>
     <%= @registrant.emergency_primary_phone %>
     <%= @registrant.emergency_other_phone %>
   </div>
   <div>
-    <b>Responsible Adult</b>
+    <b>Responsible Adult:</b>
     <%= @registrant.responsible_adult_name %>
     <%= @registrant.responsible_adult_phone %>
   </div>
