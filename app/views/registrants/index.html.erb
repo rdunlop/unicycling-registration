@@ -8,11 +8,10 @@
 
 <div>
   <div class="competitor_sign_up">
-    <%= link_to 'New Competitor', new_registrant_path, :class => "competitor registration_button" %>
+    <%= link_to 'New Competitor', new_registrant_path, :class => "competitor registration_button" %><br />
     <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %>
-  </div>
-  <div class="non-competitor_sign_up">
-    <%= link_to 'New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
+  </div><div class="non-competitor_sign_up">
+    <%= link_to 'New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %><br />
     <%= render :partial => "registration_periods/list", :locals => {:competitor => false } %>
   </div>
 </div>

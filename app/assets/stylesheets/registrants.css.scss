@@ -89,22 +89,23 @@ $noncompetitor_hover: #3487C9;
 
 .competitor_sign_up,
 .non-competitor_sign_up {
-  display: block;
-  margin: 0 1% 20px;
-  width:48%;
+  display: inline-block;
+  margin: 0;
+  width:50%;
   a {
     margin-right: 7%;
     margin-left: 7%;
   }
+  fieldset {
+    min-width: 300px;
+  }
 }
 
 .competitor_sign_up {
-  float:left;
   text-align: right;
 }
 
 .non-competitor_sign_up {
-  float:right;
   text-align: left;
 }
 
