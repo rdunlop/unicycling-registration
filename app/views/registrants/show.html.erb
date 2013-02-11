@@ -12,9 +12,13 @@
 <%= render :partial => "/registrants/waiver" %>
 <%= link_to 'Print Legal Waiver', waiver_registrant_path(@registrant, :format => 'pdf'), {:class => "waiver_link", :target => "_blank" } %>
 <div>
-  <%= render :partial => "registrant_events" %>
+  <% if @registrant.competitor %>
+    <%= render :partial => "registrant_events" %>
 
-  <%= link_to 'Edit Details/Events', edit_registrant_path(@registrant) %>
+    <%= link_to 'Edit Details/Events', edit_registrant_path(@registrant) %>
+  <% else %>
+    <%= link_to 'Edit Details', edit_registrant_path(@registrant) %>
+  <% end %>
 </div>
 <hr />
 
