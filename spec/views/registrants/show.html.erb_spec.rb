@@ -26,7 +26,7 @@ describe "registrants/show" do
       rendered.should match(/#{@registrant.usa_member_number}/)
       rendered.should match(/#{@registrant.emergency_name}/)
       rendered.should match(/#{@registrant.emergency_relationship}/)
-      rendered.should match(/#{@registrant.emergency_attending}/)
+      rendered.should match(/#{@registrant.emergency_attending ? "yes" : "no"}/)
       rendered.should match(/#{@registrant.emergency_primary_phone}/)
       rendered.should match(/#{@registrant.emergency_other_phone}/)
       rendered.should match(/#{@registrant.responsible_adult_name}/)
