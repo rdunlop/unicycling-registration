@@ -12,6 +12,16 @@
  *= require_tree .
  */
 
+
+.dev_banner {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: red;
+  font-size: 20px;
+  text-align: center;
+  z-index: 100;
+}
 .external_link {
   color: blue;
 }

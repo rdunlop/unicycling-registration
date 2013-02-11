@@ -23,7 +23,6 @@ These are necessary to get a local environment configured, but are not needed on
 echo "RACK_ENV=development" > .env
 echo "PORT=9292" >> .env
 
-
 == Email system
 
 The following is used to configure the outgoing e-mail system.
@@ -84,6 +83,11 @@ SECRET=`rake secret`
 
 (I use 'rake secret' (with backticks) to generate a random secure value. I only run it once, and it should be a different value for your production system)
 
+== Production flag
+
+Setting this flag will remove the "Development Site" banner
+
+DEVELOPMENT_BANNER=false
 
 = Deploying to Heroku
 

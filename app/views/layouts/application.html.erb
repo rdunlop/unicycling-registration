@@ -14,6 +14,9 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
   <% end %>
 </head>
 <body>
+  <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
+    <div class="dev_banner">Development (test) System. Please don't pay unless you know what you're doing.</div>
+  <% end %>
   <% if !current_user.nil? and  @config.test_mode %>
     <div class="test_mode">
       <h2>Test Mode Enabled</h2>
