@@ -36,31 +36,35 @@ div {
 #notice {
   color: green;
 }
-
 .field_with_errors {
+  display:inline;
+  clear:none;
+}
+.field_with_errors label {
+  display:inline;
+  clear:none;
   padding: 2px;
-  background-color: red;
-  display: inline;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
 }
 
 #error_explanation {
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
+  padding: 8px 35px 8px 14px;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
-  h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff;
-  }
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
   ul li {
     font-size: 12px;
-    list-style: square;
+    list-style: none;
   }
 }
