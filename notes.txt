@@ -78,8 +78,6 @@ Caitlin's Notes:
 Denis:
 - Treats the sign-in as a sign-up.
 - Where do I provide e-mail my e-mail address
-- "Next Tab" is not what you think it is.
- - "Next Category?" instead of "Next Tab" (and change the color/styling to be very different)
 - "What am I doing on the t-shirt page"?
 - "Show my registrations" means "about robin's competitions?"
 - "add another new registration" not possible from the registration summary. How do I do that?
@@ -97,14 +95,9 @@ NEED To make the registration deadlines clear.
 Mom:
 - "New Competitor" as a button isn't clear. it looks like a banner/description.
  - "Click here" 
-- Make the Name boxes smaller (to avoid making it possible to fill in both names in one box)
-- Too many years available in the bithday.
-- "number" (USA) should be capitalized.
-- Rename "Track" to "Track & Field"?
 - "Previous tab" is very light....confused by its behaviour/need/meaning.
 - "Individual" should say "what type of expense is this" (ie: USA memberships).
 - "How to fix the birthday" (have a link under the "Registration Summary" block?
-- "Next tab" looks like I should click on it, but I'm confused.
 - Remove the "Show" link.
 - I should not be allowed to leave the registration page with changes made.
 - "Waiver" is weird if the "I am the parent guardian" part is filled in for a >18 year old.
