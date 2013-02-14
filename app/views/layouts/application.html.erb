@@ -101,7 +101,9 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <% end %>
 
   <div class="main_nav">
-    <p class="notice"><%= notice %></p>
+    <% unless notice.blank? %>
+    <p class="alert"><%= notice %></p>
+    <% end %>
     <% unless alert.blank? %>
     <p class="alert"><%= alert %></p>
     <% end %>
