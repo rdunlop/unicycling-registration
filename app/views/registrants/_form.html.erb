@@ -4,8 +4,10 @@
       <h2><%= pluralize(@registrant.errors.count, "error") %> prohibited this registrant from being saved:</h2>
 
       <ul>
-      <% @registrant.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <% @registrant.errors.each do |attribute,error_message| %>
+          <% next if attribute == :gender_male %>
+          <% next if attribute == :gender_female %>
+          <li><%= @registrant.errors.full_message(attribute, error_message )%></li>
       <% end %>
       </ul>
     </div>

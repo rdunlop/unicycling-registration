@@ -17,6 +17,7 @@ class Registrant < ActiveRecord::Base
 
   validates :competitor, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
+  validate  :gender_present
 
   # contact-info block
   validates :emergency_name, :presence => true
@@ -46,6 +47,12 @@ class Registrant < ActiveRecord::Base
 
   has_many :payment_details, :include => :payment
 
+  def gender_present
+    if gender.blank?
+      errors[:gender_male] = "" # Cause the label to be highlighted
+      errors[:gender_female] = "" # Cause the label to be highlighted
+    end
+  end
 
   def choices_are_all_set_or_none_set
     # for each event that we have choices made
