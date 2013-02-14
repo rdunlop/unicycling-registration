@@ -2,7 +2,7 @@
 <%= fields_for "registrant[registrant_expense_items_attributes][]", registrant_expense_item do |rfei| %>
   <tr id="<%= "row" + index.to_s %>">
     <td>
-      <%= rfei.object.expense_item.name %>
+      <%= rfei.object.expense_item %>
     </td>
     <td>
       <span class="fee"><%= fcost(rfei.object.expense_item.cost) %></span>

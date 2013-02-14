@@ -5,7 +5,7 @@
     <table id="expense_lines">
       <% registrant.paid_expense_items.each do |pei| %>
         <tr>
-          <td><%= pei.name %></td>
+          <td><%= pei %></td>
           <td><span class="fee"><%= fcost(pei.cost) %></span></td>
           <td>(Paid)</td>
         </tr>

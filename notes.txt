@@ -39,8 +39,6 @@ TO DO (SHOULD be done):
 
 
 TO DO (NICE to be done):
- - More personalized "Welcome Email" which has details about what they're confirming, etc.
- - Make Club auto-completing/choosing thing (like: group name)
  - Admin page for the events page....should show num people signed up vs num people signed-up-and-paid.
  - Add something that helps describe What "Category" to sign up for when choosing "Individual Freestyle" (Categories are: "Age Group", "Jr. Expert", "Expert").
  - default sort orders (all models?)
@@ -95,10 +93,6 @@ NEED To make the registration deadlines clear.
 Mom:
 - "New Competitor" as a button isn't clear. it looks like a banner/description.
  - "Click here" 
-- "Previous tab" is very light....confused by its behaviour/need/meaning.
-- "Individual" should say "what type of expense is this" (ie: USA memberships).
-- "How to fix the birthday" (have a link under the "Registration Summary" block?
-- Remove the "Show" link.
 - I should not be allowed to leave the registration page with changes made.
 - "Waiver" is weird if the "I am the parent guardian" part is filled in for a >18 year old.
 - "Today's Date" is incorrect.
