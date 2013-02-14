@@ -28,9 +28,9 @@ describe "registrants/new" do
         assert_select "input#registrant_competitor", :name => "registrant[competitor]"
       end
     end
-    it "displays the 'Next Page' button" do
+    it "displays the 'Continue' button" do
       render
-      assert_select "input[value='Next Page (T-Shirts...)']", 1
+      assert_select "input[value='Continue (Expenses...)']", 1
     end
   end
 
@@ -44,7 +44,7 @@ describe "registrants/new" do
     end
     it "displays the 'Save Registration' button" do
       render
-      assert_select "input[value='Next Page (T-Shirts...)']", 1
+      assert_select "input[value='Continue (Expenses...)']", 1
     end
   end
 

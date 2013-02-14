@@ -20,7 +20,7 @@ describe "registrants/items" do
   end
   it "displays the 'Save Registration' button" do
     render
-    assert_select "input[value='Save + Continue']", 1
+    assert_select "input[value='Continue']", 1
   end
 
 

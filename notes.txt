@@ -11,8 +11,6 @@ TO DO (MUST be done BEFORE LIVE):
  - Update the Costs for all Expense Items and registration periods
  - Work with Dave to configure his paypal account appropriately
  - Try it with different browsers
- - Do we require that Paypal have a shipping address?
- - Do you want to be BCC'd on all payment received messages?
  - Can I make the Payment deadline "listed + 1 day"?
  - Create a "LIVE" site (we will still have a TEST site).
 
@@ -61,7 +59,6 @@ TO DO (NICE to be done):
 
 Scott's suggestions:
  - Make the Team Name box have a 'select-from-previous-data' option
- - Next page (Costs...)
  - Admin should be able to identify Who+WHAT has been received/paid for.
  - Pay now gets its own line
  - Payment page checkmarks with running total. When boxes are checked, highlight line.
@@ -70,18 +67,13 @@ Scott's suggestions:
  - Automatically start the rails server when vagrant starts
 
 Caitlin's Notes:
- - remove the old registration period.
- - What if I don't have a Zip (put a postal code thing too)
- - State (choose based on Canada/USA?)
  - Don't need a phone number?
   - Why need an emergency contact phone number, but not mine.
  - Tabs confused her. ...previous/next is weird.
- - "Ticket" for final party is weird.
  - should be instructions for "print and sign" the waiver?
  - After adding a new thing, goes to the T-Shirt page again....want to go back to the registration summary page.
   - Need to deal with how to get to the T-Shrit page....?
   - "Save and return to Registrant List"
- - If I don't select hockey/basketball, it should delete the text in the team name.
 
 Denis:
 - Treats the sign-in as a sign-up.
