@@ -56,7 +56,6 @@ TO DO (NICE to be done):
  - NICE: Standard Skill Electronic.
 
 Scott's suggestions:
- - Make the Team Name box have a 'select-from-previous-data' option
  - Admin should be able to identify Who+WHAT has been received/paid for.
  - Pay now gets its own line
  - Payment page checkmarks with running total. When boxes are checked, highlight line.
@@ -67,7 +66,6 @@ Scott's suggestions:
 Caitlin's Notes:
  - Don't need a phone number?
   - Why need an emergency contact phone number, but not mine.
- - Tabs confused her. ...previous/next is weird.
  - should be instructions for "print and sign" the waiver?
  - After adding a new thing, goes to the T-Shirt page again....want to go back to the registration summary page.
   - Need to deal with how to get to the T-Shrit page....?
