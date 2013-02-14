@@ -83,6 +83,61 @@ Caitlin's Notes:
   - "Save and return to Registrant List"
  - If I don't select hockey/basketball, it should delete the text in the team name.
 
+Denis:
+- Treats the sign-in as a sign-up.
+- password requirements should be listed.
+- Where do I provide e-mail my e-mail address
+- "Next Tab" is not what you think it is.
+ - "Next Category?" instead of "Next Tab" (and change the color/styling to be very different)
+- "What am I doing on the t-shirt page"?
+- "Family membership: how many, or names of"
+- "Continue" instead of "Save and Continue"
+- "Show my registrations" means "about robin's competitions?"
+- "add another new registration" not possible from the registration summary. How do I do that?
+ - I can use "My registrations" to create new.
+ - "Done" or "new registraiton"?
+- "Show my registrations" is like a "Continue"
+- "Competitor  details" for a non-compeitor.
+- Is team required to be asked for a non-competitor?
+- Always go back to the Registration smumary page (on return from the payment success)
+- How do I finish?
+ - Make the Waiver thing biggenr, bolder, etc. make it a apage in the flow.
+
+NEED To make the registration deadlines clear.
+- Exiting with a balance due, cause a popup?
+
+Mom:
+- "why am I signing up instead of signing up"
+ - maybe I'm already registered?
+ - "New users need to sign-up"
+ - "Sign up", is unclear as a button....causes confusion that it doesn't use the e-mail and password.
+- The "Sign up page isn't different enough, makes it confusing that you have to do it all again".
+- "period after "Compeition" word".
+- "New Competitor" as a button isn't clear. it looks like a banner/description.
+ - "Click here" 
+- Make the Name boxes smaller (to avoid making it possible to fill in both names in one box)
+- Too many years available in the bithday.
+- "number" (USA) should be capitalized.
+- Rename "Track" to "Track & Field"?
+- "Previous tab" is very light....confused by its behaviour/need/meaning.
+- "Individual" should say "what type of expense is this" (ie: USA memberships).
+- "How to fix the birthday" (have a link under the "Registration Summary" block?
+- "Next tab" looks like I should click on it, but I'm confused.
+- Remove the "Show" link.
+- I should not be allowed to leave the registration page with changes made.
+- "Waiver" is weird if the "I am the parent guardian" part is filled in for a >18 year old.
+- "Today's Date" is incorrect.
+- "Why is Legal Waiver" in red? I can ignore the Red, I guess.
+- "Legal Waiver" is still showing in red? why?
+- Need to tell the person that an e-mail will be sent to them with their payment details.
+- Also, on the "See Summary" page, it should describe the "Paid" payments.
+
+- "Log in" instead of "Sign In". ("Register" as the thing to get onto the site. Registering is fun.).
+
+Robin:
+- do we want to describe why register as a non-competitor.
+- Payment Details (show) header is not th tags (should be).
+
 -------------
 
 TODO (flesh out and implement)
