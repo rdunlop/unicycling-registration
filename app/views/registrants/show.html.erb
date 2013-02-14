@@ -20,18 +20,15 @@
   <% if @registrant.competitor %>
     <%= render :partial => "registrant_events" %>
 
-    <%= link_to 'Edit Details/Events', edit_registrant_path(@registrant) %>
-  <% else %>
-    <%= link_to 'Edit Details', edit_registrant_path(@registrant) %>
+    <%= link_to 'Edit Events', edit_registrant_path(@registrant) %>
   <% end %>
 </div>
 <hr />
 
 <div>
-  <div class="data_block">
-    <%= render :partial => "/registrants/pay_now" %>
-  </div>
-  <div class="data_block">
-    <%= link_to 'Show My Registrations', registrants_path %>
-  </div>
+  <% if @registrant.competitor %>
+    <%= link_to 'Done', registrants_path, {:class => "competitor registration_button"} %>
+  <% else %>
+    <%= link_to 'Done', registrants_path, {:class => "noncompetitor registration_button"} %>
+  <% end %>
 </div>

@@ -96,13 +96,9 @@ Mom:
 - "Why is Legal Waiver" in red? I can ignore the Red, I guess.
 - "Legal Waiver" is still showing in red? why?
 - Need to tell the person that an e-mail will be sent to them with their payment details.
-- Also, on the "See Summary" page, it should describe the "Paid" payments.
-
-- "Log in" instead of "Sign In". ("Register" as the thing to get onto the site. Registering is fun.).
 
 Robin:
 - do we want to describe why register as a non-competitor.
-- Payment Details (show) header is not th tags (should be).
 
 -------------
 
