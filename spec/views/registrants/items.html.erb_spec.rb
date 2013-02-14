@@ -33,7 +33,7 @@ describe "registrants/items" do
       render
 
       assert_select "form", :action => update_items_registrant_url(@registrant), :method => "put" do
-        assert_select "td", :text => @item.expense_item.name
+        assert_select "td", :text => @item.expense_item
       end
     end
     it "should render the details field, if enabled" do
