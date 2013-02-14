@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h2>Sign Up</h2>
 <% if mixpanel? %>
   <script type="text/javascript">
     mixpanel.track_forms("form", "Sign-Up")
@@ -19,7 +19,7 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.submit "Sign up", :class => "focus_button" %></div>
+  <div><%= f.submit "Sign Up", :class => "focus_button" %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>

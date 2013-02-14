@@ -83,7 +83,6 @@ Denis:
  - "Next Category?" instead of "Next Tab" (and change the color/styling to be very different)
 - "What am I doing on the t-shirt page"?
 - "Family membership: how many, or names of"
-- "Continue" instead of "Save and Continue"
 - "Show my registrations" means "about robin's competitions?"
 - "add another new registration" not possible from the registration summary. How do I do that?
  - I can use "My registrations" to create new.

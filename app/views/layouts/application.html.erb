@@ -39,7 +39,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
       <% end %>
       </li>
       <% if current_user.nil? %>
-        <li><%= link_to 'Sign in', new_user_session_path %></li>
+        <li><%= link_to 'Log In', new_user_session_path %></li>
       <% else %>
         <% if mixpanel? %>
           <script type="text/javascript">
