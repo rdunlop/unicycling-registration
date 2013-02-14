@@ -121,14 +121,24 @@
   </fieldset>
   <fieldset class="data_block">
     <legend>Responsible Adult<br /><span class="extra_info">(for Registrants Under the age of 18)</span></legend>
-    <span>
-      <%= f.label :responsible_adult_name, "Name" %>
-      <%= f.text_field :responsible_adult_name %>
-    </span>
-    <span>
-      <%= f.label :responsible_adult_phone, "Phone" %>
-      <%= f.text_field :responsible_adult_phone %>
-    </span>
+    <table>
+      <tr>
+        <td>
+          <%= f.label :responsible_adult_name, "Name" %>
+        </td>
+        <td>
+          <%= f.text_field :responsible_adult_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :responsible_adult_phone, "Phone" %>
+        </td>
+        <td>
+          <%= f.text_field :responsible_adult_phone %>
+        </td>
+      </tr>
+    </table>
   </fieldset>
   <br />
   <b>Important:</b> Provide your email address to receive updates to registration, schedule, and new events.

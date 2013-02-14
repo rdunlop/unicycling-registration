@@ -95,7 +95,6 @@ NEED To make the registration deadlines clear.
 - Exiting with a balance due, cause a popup?
 
 Mom:
-- "period after "Compeition" word".
 - "New Competitor" as a button isn't clear. it looks like a banner/description.
  - "Click here" 
 - Make the Name boxes smaller (to avoid making it possible to fill in both names in one box)

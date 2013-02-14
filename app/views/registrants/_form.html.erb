@@ -21,13 +21,13 @@
       <legend>Base Details</legend>
       <span>
         <%= f.label :first_name, 'Name', :class => "required" %>
-        <%= f.text_field :first_name, :placeholder => 'First', :autofocus => "true" %>
-        <%= f.text_field :middle_initial, :size => 3 %>
-        <%= f.text_field :last_name, :placeholder => 'Last' %>
+        <%= f.text_field :first_name, :placeholder => 'First', :size => 12, :autofocus => "true" %>
+        <%= f.text_field :middle_initial, :size => 1 %>
+        <%= f.text_field :last_name, :placeholder => 'Last', :size => 15 %>
       </span>
       <span>
         <%= f.label :birthday, :class => "required" %>
-        <%= f.date_select :birthday, {:start_year => 1900, :end_year => Time.now.year, :include_blank => true, :order => [:day, :month, :year]} %>
+        <%= f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true, :order => [:month, :day, :year]} %>
       </span>
       <span>
         <%= f.label :gender_male, 'Male', :class => "required" %>
@@ -39,11 +39,11 @@
         <%= f.label :club, "Primary Team or Club Name" %>
         <%= f.text_field :club %><br />
         <%= f.label :club_contact, "Primary Team or Club Contact" %>
-        <%= f.text_field :club_contact %>
+        <%= f.text_field :club_contact, :size => 25  %>
       </span>
       <span>
-        <%= f.label :usa_member_number, "USA Membership number" %>
-        <%= f.text_field :usa_member_number %><br />
+        <%= f.label :usa_member_number, "USA Membership Number" %>
+        <%= f.text_field :usa_member_number, :size => 5 %><br />
       </span>
     </fieldset>
     <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
