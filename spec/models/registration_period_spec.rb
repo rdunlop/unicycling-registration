@@ -29,6 +29,16 @@ describe RegistrationPeriod do
     @rp.valid?.should == false
   end
 
+  it "must have onsite set" do
+    @rp.onsite = nil
+    @rp.valid?.should == false
+  end
+
+  it "is not onsite by default" do
+    rp = RegistrationPeriod.new
+    rp.onsite.should == false
+  end
+
   describe "with existing periods" do
     before(:each) do
       @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 01), :end_date => Date.new(2012,02,02))

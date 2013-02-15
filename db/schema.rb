@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130215063448) do
+ActiveRecord::Schema.define(:version => 20130215171403) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20130215063448) do
     t.datetime "updated_at",                    :null => false
     t.integer  "competitor_expense_item_id"
     t.integer  "noncompetitor_expense_item_id"
+    t.boolean  "onsite"
   end
 
   create_table "users", :force => true do |t|

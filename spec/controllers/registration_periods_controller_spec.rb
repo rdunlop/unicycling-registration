@@ -33,6 +33,8 @@ describe RegistrationPeriodsController do
     {
       start_date: Date.new(2013, 01, 20),
       end_date: Date.new(2013, 02, 20),
+      onsite: false,
+      name: "Early",
       competitor_expense_item_id: @comp_exp.id,
       noncompetitor_expense_item_id: @noncomp_exp.id
     }
