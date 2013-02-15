@@ -15,8 +15,8 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
 </head>
 <body>
   <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
-    <div class="dev_banner">Development (test) System. Please don't pay unless you know what you're doing.
-      <a id="dev_banner_remover" href="#">[x]</a>
+    <div class="dev_banner">Non-Live System.
+      <a id="dev_banner_remover" href="#" title="Remove dev banner">[x]</a>
     </div>
     <script>
       $("#dev_banner_remover").on("click", function() {

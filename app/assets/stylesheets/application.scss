@@ -14,14 +14,18 @@
 
 
 .dev_banner {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: red;
-  font-size: 20px;
-  text-align: center;
-  z-index: 100;
+  font-weight: bold;
   color: white;
+  position: fixed;
+  top: 80px;
+  left: -60px;
+  width: 300px;
+  text-align: center;
+  transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  background-color: red;
+  z-index: 1000000;
 }
 .external_link {
   color: blue;
