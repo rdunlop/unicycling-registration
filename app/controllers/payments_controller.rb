@@ -85,7 +85,6 @@ class PaymentsController < ApplicationController
   # PayPal notification endpoint
   def notification
     paypal = PaypalConfirmer.new(params, request.raw_post)
-    Notifications.ipn_received(request.raw_post).deliver
     if paypal.valid?
       if paypal.correct_paypal_account? and paypal.completed?
         if Payment.exists?(paypal.order_number)

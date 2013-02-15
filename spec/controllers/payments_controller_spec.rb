@@ -257,12 +257,6 @@ describe PaymentsController do
         post :notification, {:payment_status => "Incomplete"}
         response.should be_success
       end
-      it "sends an e-mail for IPN receipt" do
-        ActionMailer::Base.deliveries.clear
-        post :notification, {:payment_status => "Incomplete"}
-        num_deliveries = ActionMailer::Base.deliveries.size
-        num_deliveries.should == 1
-      end
       describe "with a valid post" do
         before(:each) do
           @attributes =  {
@@ -314,7 +308,7 @@ describe PaymentsController do
           post :notification, @attributes
           response.should be_success
           num_deliveries = ActionMailer::Base.deliveries.size
-          num_deliveries.should == 2 # one for IPN, one for error
+          num_deliveries.should == 1 # one for error
         end
       end
       it "doesn't set the payment if the wrong paypal account is specified" do
@@ -328,7 +322,7 @@ describe PaymentsController do
         post :notification, {:receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
-        num_deliveries.should == 2 # one for IPN, one for success
+        num_deliveries.should == 1 # one for success
       end
     end
 
