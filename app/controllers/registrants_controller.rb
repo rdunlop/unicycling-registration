@@ -30,7 +30,7 @@ class RegistrantsController < ApplicationController
     @registrant = Registrant.find(params[:id])
 
 
-    @today_date = Date.today.strftime("%B %-d, %Y")
+    @today_date = Date.today.to_time_in_current_zone.strftime("%B %-d, %Y")
 
     config = EventConfiguration.first
     unless config.nil?
