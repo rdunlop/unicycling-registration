@@ -7,5 +7,6 @@ FactoryGirl.define do
     association :competitor_expense_item, factory: :expense_item, cost: 100
     association :noncompetitor_expense_item, factory: :expense_item, cost: 50
     name "Name"
+    onsite false
   end
 end

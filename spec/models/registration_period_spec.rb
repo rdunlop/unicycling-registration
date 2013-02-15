@@ -39,6 +39,10 @@ describe RegistrationPeriod do
     rp.onsite.should == false
   end
 
+  it "calculates the closed_date as the day of the end date" do
+    RegistrationPeriod.closed_date.should == Date.new(2012, 11,07)
+  end
+
   describe "with existing periods" do
     before(:each) do
       @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 01), :end_date => Date.new(2012,02,02))
@@ -51,6 +55,11 @@ describe RegistrationPeriod do
 
     it "gets nil for missing section" do
       RegistrationPeriod.relevant_period(Date.new(2010,01,01)).should == nil
+    end
+    it "disregards onsite registration periods for closed_date" do
+      @rp.onsite = true
+      @rp.save!
+      RegistrationPeriod.closed_date.should == Date.new(2012, 04, 04)
     end
     describe "with more registration periods" do
       before(:each) do

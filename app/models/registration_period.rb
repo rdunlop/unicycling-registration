@@ -29,6 +29,15 @@ class RegistrationPeriod < ActiveRecord::Base
     return (self.end_date < date)
   end
 
+  def self.closed_date
+    closed_date = nil
+    RegistrationPeriod.all.each do |rp|
+      next if rp.onsite
+      closed_date = rp.end_date
+    end
+    closed_date
+  end
+
   def self.relevant_period(date)
     RegistrationPeriod.all.each do |rp|
       if rp.current_period?(date)

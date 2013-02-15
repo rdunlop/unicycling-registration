@@ -75,6 +75,10 @@ $noncompetitor_hover: #3487C9;
   content: " *";
 }
 
+div.required {
+  text-align: left;
+}
+
 
 .status_image {
   height: 20px;
@@ -95,9 +99,6 @@ $noncompetitor_hover: #3487C9;
   a {
     margin-right: 7%;
     margin-left: 7%;
-  }
-  fieldset {
-    min-width: 300px;
   }
 }
 
