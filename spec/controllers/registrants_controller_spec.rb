@@ -144,8 +144,22 @@ describe RegistrantsController do
       @category3 = FactoryGirl.create(:category, :position => 3)
       @category2 = FactoryGirl.create(:category, :position => 2)
 
-      get 'new', {:id => @reg}
+      get 'new'
       assigns(:categories).should == [@category1, @category2, @category3]
+    end
+    it "sets other_registrant as nil" do
+      get :new
+      assigns(:other_registrant).should == nil
+    end
+
+    describe "when another registrant already exists" do
+      before(:each) do
+        @other_reg = FactoryGirl.create(:registrant, :user => @user)
+      end
+      it "should set it as other_reg" do
+        get :new
+        assigns(:other_registrant).should == @other_reg
+      end
     end
   end
 

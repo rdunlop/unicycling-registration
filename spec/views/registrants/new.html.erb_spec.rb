@@ -241,7 +241,7 @@ describe "registrants/new" do
     end
     it "lists competitor costs" do
       render
-      rendered.should match(/\$100/)
+      rendered.should match(/100/)
     end
   end
 
@@ -251,7 +251,7 @@ describe "registrants/new" do
     end
     it "displays the registration_period for non-competitors" do
       render
-      rendered.should match(/\$50/)
+      rendered.should match(/50/)
     end
   end
 end

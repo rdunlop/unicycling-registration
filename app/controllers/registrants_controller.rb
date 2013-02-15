@@ -8,6 +8,12 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  def load_other_reg
+    unless current_user.registrants.empty?
+      @other_registrant = current_user.registrants.first
+    end
+  end
+
   # GET /registrants
   # GET /registrants.json
   def index
@@ -81,6 +87,7 @@ class RegistrantsController < ApplicationController
     @registrant = Registrant.new
     @registrant.competitor = true
     load_categories
+    load_other_reg
 
     respond_to do |format|
       format.html # new.html.erb
@@ -91,6 +98,7 @@ class RegistrantsController < ApplicationController
   def new_noncompetitor
     @registrant = Registrant.new
     @registrant.competitor = false
+    load_other_reg
 
     respond_to do |format|
       format.html { render action: "new" } # new.html.erb

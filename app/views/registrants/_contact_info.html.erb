@@ -3,6 +3,24 @@
   <fieldset class="data_block">
     <legend>Address</legend>
     <table>
+      <% unless other_registrant.nil? %>
+        <tr>
+          <td colspan="2">
+            <a href="#" id="copy_address">Copy Address from <%= other_registrant.name %></a>
+          </td>
+          <script>
+            $("#copy_address").on("click", function() {
+              $('#registrant_address').val('<%= escape_javascript(other_registrant.address) %>');
+              $('#registrant_city').val('<%= escape_javascript(other_registrant.city) %>');
+              $('#registrant_state').val('<%= escape_javascript(other_registrant.state) %>');
+              $('#registrant_country').val('<%= escape_javascript(other_registrant.country) %>');
+              $('#registrant_zip').val('<%= escape_javascript(other_registrant.zip) %>');
+              $('#registrant_phone').val('<%= escape_javascript(other_registrant.phone) %>');
+              return false;
+            });
+          </script>
+        </tr>
+      <% end %>
       <tr>
         <td>
           <%= f.label :address, :class => "required" %>
