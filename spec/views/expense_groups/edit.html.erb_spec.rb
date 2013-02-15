@@ -17,6 +17,7 @@ describe "expense_groups/edit" do
       assert_select "input#expense_group_group_name", :name => "expense_group[group_name]"
       assert_select "input#expense_group_visible", :name => "expense_group[visible]"
       assert_select "input#expense_group_position", :name => "expense_group[position]"
+      assert_select "input#expense_group_info_url", :name => "expense_group[info_url]"
     end
   end
 end

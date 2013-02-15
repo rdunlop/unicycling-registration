@@ -3,6 +3,7 @@
 <table class="alternate">
   <tr>
     <th>Group name</th>
+    <th>Info Url</th>
     <th>Visible</th>
     <th>Position</th>
     <th></th>
@@ -13,6 +14,7 @@
 <% @expense_groups.each do |expense_group| %>
   <tr>
     <td><%= expense_group.group_name %></td>
+    <td><%= expense_group.info_url %></td>
     <td><%= expense_group.visible %></td>
     <td><%= expense_group.position %></td>
     <td><%= link_to 'Show', expense_group %></td>

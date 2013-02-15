@@ -12,6 +12,7 @@ describe ExpenseGroupsController do
   def valid_attributes
     {
       group_name: "T-Shirts",
+      info_url: "http://google.com",
       visible: true
     }
   end

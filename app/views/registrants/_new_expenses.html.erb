@@ -2,6 +2,15 @@
   <fieldset class="data_block">
     <legend>Add <%= expense_group %></legend>
     <table>
+      <% unless expense_group.info_url.blank? %>
+        <tr>
+          <td colspan="3">
+            <div class="event_link">
+              <%= link_to 'More Info [' + expense_group.to_s + ']', expense_group.info_url, {:target => "_blank", :class=> "external_link"} %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
       <% expense_group.expense_items.each do |ei| %>
         <%= render :partial => "/registrants/new_expense", :locals => { :item => ei } %>
       <% end %>
