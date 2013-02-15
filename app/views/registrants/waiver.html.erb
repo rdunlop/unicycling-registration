@@ -1,25 +1,24 @@
-<div class="container" style="font-size:11px;">
-  <div style="text-align:center;"><strong style="font-size:13px;"><%= @event_name %>
+<div class="container" style="font-size:11px; font-family: 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif;">
+  <div style="text-align:center;"><strong style="font-size:18px;"><%= @event_name %>
       <br /> Competitive and Non-Competitive Event Release Form</strong>
   </div>
   <br />
-  <br />
 
   <div style="width:48%; float:left;">
-    <div class="fields">
-      <p>
-      COMPLETE THE FOLLOWING:
+    <div class="fields" style="font-size:13px;">
+      <p><span style="font-weight:bold;">Complete the following:</span>
       <br />
-      TODAY'S DATE: &nbsp; 
+      <br />
+      Today's date: &nbsp; 
       <span style="text-decoration:underline;"><%= @today_date %></span>
       <br />
-      CLUB/TEAM NAME: &nbsp; 
+      Club/team name: &nbsp; 
       <span style="text-decoration:underline;"><%= @club %></span>
       <br />
-      ID/RACER NUMBER: &nbsp; 
+      Id/racer number: &nbsp; 
       <span style="text-decoration:underline;"><%= @registrant_id %></span>
       <br />
-      RACING AGE, AS OF JULY 21, 2013: &nbsp; 
+      Racing age, as of July 21, 2013: &nbsp; 
       <span style="text-decoration:underline;"><%= @age %></span>
       <% if @age.nil? or @age < 18 %>
         <br />
@@ -28,20 +27,20 @@
       </p>
 
       <p>
-      NAME: &nbsp; 
+      Name: &nbsp; 
       <span style="text-decoration:underline;"><%= @name %></span>
       <br />
-      ADDRESS: &nbsp; 
+      Address: &nbsp; 
       <span style="text-decoration:underline;"><%= @address %></span>
       <br />
-      CITY: &nbsp;
+      City: &nbsp;
       <span style="text-decoration:underline;"><%= @city %></span>
       <br />
-      STATE, ZIP AND COUNTRY: &nbsp; 
+      State, Zip and Country: &nbsp; 
       <span style="text-decoration:underline;"><%= @state %> <%= @zip %>, 
         <%= @country %></span>
       <br />
-      PHONE: &nbsp; 
+      Phone: &nbsp; 
       <span style="text-decoration:underline;">
         <% unless @phone.blank? %> 
           <%= @phone %>
@@ -51,7 +50,7 @@
         <% end %>
       </span>
       <br />
-      E-MAIL: &nbsp;
+      Email: &nbsp;
       <span style="text-decoration:underline;">
         <% unless @email.blank? %>
           <%= @email %> 
@@ -59,10 +58,10 @@
         <% end %>
       </span>
       <br />
-      EMERGENCY CONTACT: &nbsp;
+      Emergency contact: &nbsp;
       <span style="text-decoration:underline;"><%= @emergency_name %></span>
       <br />
-      EMERGENCY CONTACT PHONE: &nbsp;
+      Emergency contact phone: &nbsp;
       <span style="text-decoration:underline;"><%= @emergency_primary_phone %>
         <% unless @emergency_other_phone.blank? %>
           , <%= @emergency_other_phone %>
@@ -113,6 +112,7 @@
 
   </div>
   <div style="width:48%; float:right;">
+  	<br />
     <p style="text-indent: 1.5em; margin: 0">
     I agree it is my sole responsibility to be familiar with the event course and agenda, 
     the Releasees' rules, and any special regulation for the event and agree to comply 
@@ -148,14 +148,18 @@
     that shall not affect the other terms and provisions, which shall remain binding and 
     enforceable.
     </p>
-
-    <span class="signature"> Signature __________________________________ <br /><br /> Date ___________ </span>
+    <br />
+	<hr style="height:1px;color:#444;background-color:#444;border:none;" />
+    <div class="signature" style="font-size:14px;">
+    	<span style="float:left">Signature</span>
+    	<span style="float:right;">Date</span>
+    </div>
 
     <br />
     <br />
-    <p>
-    CONSENT AND RELEASE OF PARENT OR GUARDIAN, IF ABOVE ENTRANT IS UNDER 18 YEARS OF AGE 
-    ON <%= @event_start_date %>.
+    <p style="font-weight:bold;">
+    Consent and release of parent or guardian, if above entrant is under 18 years of age 
+    on <%= @event_start_date %>.
     </p>
     <p style="text-indent: 1.5em; margin-top: 0">
     I am the parent or guardian of 
@@ -173,7 +177,12 @@
     RELEASEES on my behalf or on behalf of my Child regarding any claim arising 
     from my Child's participation in the event.
     </p>
-    <span class="parent_signature">Parent Signature _______________________________ <br /><br /> Date ___________ </span>    
+     <br />
+	<hr style="height:1px;color:#444;background-color:#444;border:none;" />
+    <div class="signature" style="font-size:14px;">
+    	<span style="float:left">Parent Signature</span>
+    	<span style="float:right;">Date</span>
+    </div>   
 
   </div>
 </div>
