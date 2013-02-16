@@ -18,14 +18,21 @@
   color: white;
   position: fixed;
   top: 80px;
-  left: -60px;
-  width: 300px;
+  left: -70px;
+  width: 350px;
   text-align: center;
   transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   background-color: red;
   z-index: 1000000;
+}
+#dev_banner_remover {
+float:right;
+clear:none;
+padding:10px 50px 0 0;
+color:black;
+text-decoration:none;
 }
 .external_link {
   color: blue;
