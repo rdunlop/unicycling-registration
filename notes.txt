@@ -95,6 +95,13 @@ Mom:
 - "Legal Waiver" is still showing in red? why?
 - Need to tell the person that an e-mail will be sent to them with their payment details.
 
+Connie:
+- Why is the address below the events
+- Can we add "levels" to the Indiviudal/Pairs categores
+- Are we doing Standard skill?
+- Validate the age of competitors for Individual freestyle categores?
+- R: I don't like the fact that I need to scroll on the "Items" page.
+
 Robin:
 - do we want to describe why register as a non-competitor.
 
