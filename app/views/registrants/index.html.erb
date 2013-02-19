@@ -6,13 +6,24 @@
   </script>
 <% end %>
 
+<% if EventConfiguration.closed? %>
+  <div class="registration_closed">
+    <h2>Online Registration is now closed</h2>
+    You cannot make any more changes to your registration details.<br />
+    If you have any outstanding payments, you may be able to continue this registration on-site (at the discretion of the event-organizers)
+  </div>
+<% end %>
 <div>
   <div class="competitor_sign_up">
-    <%= link_to 'Create New Competitor', new_registrant_path, :class => "competitor registration_button" %>
+    <% if can? :create, Registrant %>
+      <%= link_to 'Create New Competitor', new_registrant_path, :class => "competitor registration_button" %>
+    <% end %>
     <br /><br />
     <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %><br /><br />
   </div><div class="non-competitor_sign_up">
-    <%= link_to 'Create New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
+    <% if can? :new_noncompetitor, Registrant %>
+      <%= link_to 'Create New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
+    <% end %>
     <br /><br />
   <%= render :partial => "registration_periods/list", :locals => {:competitor => false } %><br /><br />
   </div>
@@ -33,7 +44,9 @@
               <span class="fee"><%= fcost(registrant.expenses_total) %></span>
             </td>
             <td>
-              <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+              <% if can? :update, registrant %>
+                <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+              <% end %>
               <%= link_to 'See Summary', registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
               <%= link_to 'Legal Waiver', waiver_registrant_path(registrant, :format => 'pdf'), {:class => "waiver_link", :target => "_blank" } %>
             </td>

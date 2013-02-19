@@ -3,15 +3,19 @@
 <div>
   <div class="data_block">
     <%= render :partial => "summary" %>
-    <div style="text-align: center">
-      <%= link_to 'Edit Registration', edit_registrant_path(@registrant) %>
-    </div>
+    <% if can? :update, @registrant %>
+      <div style="text-align: center">
+        <%= link_to 'Edit Registration', edit_registrant_path(@registrant) %>
+      </div>
+    <% end %>
   </div>
   <div class="data_block">
     <%= render :partial => "registrant_expenses" %>
-    <div style="text-align: center">
-      <%= link_to 'Edit Items', items_registrant_path(@registrant) %>
-    </div>
+    <% if can? :update_items, @registrant %>
+      <div style="text-align: center">
+        <%= link_to 'Edit Items', items_registrant_path(@registrant) %>
+      </div>
+    <% end %>
   </div>
 </div>
 <%= render :partial => "/registrants/waiver" %>
@@ -20,7 +24,9 @@
   <% if @registrant.competitor %>
     <%= render :partial => "registrant_events" %>
 
-    <%= link_to 'Edit Events', edit_registrant_path(@registrant) %>
+    <% if can? :update, @registrant %>
+      <%= link_to 'Edit Events', edit_registrant_path(@registrant) %>
+    <% end %>
   <% end %>
 </div>
 <hr />

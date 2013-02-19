@@ -161,6 +161,15 @@ describe RegistrantsController do
         assigns(:other_registrant).should == @other_reg
       end
     end
+    describe "when the system is 'closed'" do
+      before(:each) do
+        FactoryGirl.create(:event_configuration, :closed => true)
+      end
+      it "should not succeed" do
+        get :new
+        response.should_not be_success
+      end
+    end
   end
 
   describe "GET new_noncompetitor" do

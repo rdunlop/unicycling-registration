@@ -92,5 +92,13 @@ class EventConfiguration < ActiveRecord::Base
     super(:except => [:logo_binary, :logo_type, :logo_filename])
   end
 
+  def self.closed?
+    ec = EventConfiguration.first
+    unless ec.nil?
+      ec.closed
+    else
+      false
+    end
+  end
 
 end

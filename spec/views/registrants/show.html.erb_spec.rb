@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe "registrants/show" do
+  before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    controller.stub(:current_ability) { @ability }
+  end
+
   describe "for a competitor" do
     before(:each) do
       @registrant = FactoryGirl.create(:competitor, :birthday => Date.new(2012, 01, 05))

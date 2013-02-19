@@ -19,12 +19,15 @@ class Ability
         can :manage, Registrant
         can :manage, Payment
       else
-        can [:read, :update, :items, :update_items, :all, :waiver], Registrant, :user_id => user.id
-        can :create, Registrant #XXX necessary because we set the user in the controller?
-        can :new_noncompetitor, Registrant #XXX necessary because we set the user in the controller?
-
-        can [:new, :create], Payment
+        can [:read, :all, :waiver], Registrant, :user_id => user.id
         can :read, Payment, :user_id => user.id
+
+        unless EventConfiguration.closed?
+          can [:update, :items, :update_items], Registrant, :user_id => user.id
+          can :create, Registrant #XXX necessary because we set the user in the controller?
+          can :new_noncompetitor, Registrant #XXX necessary because we set the user in the controller?
+          can [:new, :create], Payment
+        end
       end
     end
     can :logo, EventConfiguration

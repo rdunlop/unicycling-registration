@@ -24,4 +24,6 @@
 
 <br />
 
-<%= link_to 'Start New Payment', new_payment_path %>
+<% if can? :new, Payment %>
+  <%= link_to 'Start New Payment', new_payment_path %>
+<% end %>

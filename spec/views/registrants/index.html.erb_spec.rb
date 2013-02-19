@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe "registrants/index" do
+  before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    controller.stub(:current_ability) { @ability }
+  end
+
   describe "with no registrants" do
     before(:each) do
       @registrants = []
@@ -38,6 +44,7 @@ describe "registrants/index" do
     end
 
     it "renders a list of registrants" do
+      @ability.can :create, Payment
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
       assert_select "a", :text => "Robin Dunlop".to_s, :count => 1
