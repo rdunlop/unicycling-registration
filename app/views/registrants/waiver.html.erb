@@ -154,32 +154,33 @@
 
     <br />
     <br />
-    <p style="font-weight:bold;">
-    Consent and release of parent or guardian, if above entrant is under 18 years of age 
-    on <%= @event_start_date %>.
-    </p>
-    <p style="text-indent: 1.5em; margin-top: 0">
-    I am the parent or guardian of 
-    <span style="text-decoration:underline;"><%= @name %></span> 
-    (child).  My Child is fit 
-    for the event, and I consent to my Child's participation.  I HAVE READ AND I 
-    UNDERSTAND THE ABOVE CONTRACT.  In consideration of allowing my Child to participate, 
-    I consent to the contract and agree that ITS TERMS SHALL LIKEWISE BIND ME, MY CHILD, 
-    and our heirs, legal representatives, and assignees.  I HEREBY RELEASE AND SHALL 
-    DEFEND, INDEMNIFY AND HOLD HARMLESS THE RELEASEES FROM EVERY CLAIM AND LIABILITY that 
-    I or my Child may allege against the Releasees (including reasonable legal fees and 
-    costs) as a direct or indirect result of injury or death to me or my Child because of 
-    my Child's participation in the event, WHETHER CAUSE BY THE NEGLIGENCE OF THE 
-    RELEASEES OR OTHERS TO THE MAXIMUM EXTENT PERMITED BY LAW.  I PROMISE NOT TOE SUE 
-    RELEASEES on my behalf or on behalf of my Child regarding any claim arising 
-    from my Child's participation in the event.
-    </p>
-     <br />
-     <hr style="height:1px;color:#444;background-color:#444;border:none;" />
-    <div class="signature" style="font-size:14px;">
-      <span style="float:left">Parent/Guardian Signature</span>
-      <span style="float:right;">Date</span>
-    </div>   
-
+    <% if @age.nil? or @age < 18 %>
+		<p style="font-weight:bold;">
+		Consent and release of parent or guardian, if above entrant is under 18 years of age 
+		on <%= @event_start_date %>.
+		</p>
+		<p style="text-indent: 1.5em; margin-top: 0">
+		I am the parent or guardian of 
+		<span style="text-decoration:underline;"><%= @name %></span> 
+		(child).  My Child is fit 
+		for the event, and I consent to my Child's participation.  I HAVE READ AND I 
+		UNDERSTAND THE ABOVE CONTRACT.  In consideration of allowing my Child to participate, 
+		I consent to the contract and agree that ITS TERMS SHALL LIKEWISE BIND ME, MY CHILD, 
+		and our heirs, legal representatives, and assignees.  I HEREBY RELEASE AND SHALL 
+		DEFEND, INDEMNIFY AND HOLD HARMLESS THE RELEASEES FROM EVERY CLAIM AND LIABILITY that 
+		I or my Child may allege against the Releasees (including reasonable legal fees and 
+		costs) as a direct or indirect result of injury or death to me or my Child because of 
+		my Child's participation in the event, WHETHER CAUSE BY THE NEGLIGENCE OF THE 
+		RELEASEES OR OTHERS TO THE MAXIMUM EXTENT PERMITED BY LAW.  I PROMISE NOT TOE SUE 
+		RELEASEES on my behalf or on behalf of my Child regarding any claim arising 
+		from my Child's participation in the event.
+		</p>
+		 <br />
+		 <hr style="height:1px;color:#444;background-color:#444;border:none;" />
+		<div class="signature" style="font-size:14px;">
+		  <span style="float:left">Parent/Guardian Signature</span>
+		  <span style="float:right;">Date</span>
+		</div>
+    <% end %>
   </div>
 </div>
