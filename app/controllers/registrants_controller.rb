@@ -46,7 +46,6 @@ class RegistrantsController < ApplicationController
 
     @name = @registrant.to_s
     @club = @registrant.club
-    @registrant_id = @registrant.id
     @age = @registrant.age
 
     @address = @registrant.address

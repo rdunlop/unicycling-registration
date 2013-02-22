@@ -85,7 +85,6 @@ describe RegistrantsController do
 
       assigns(:name).should == registrant.to_s
       assigns(:club).should == registrant.club
-      assigns(:registrant_id).should == registrant.id
       assigns(:age).should == registrant.age
       assigns(:address).should == registrant.address
       assigns(:city).should == registrant.city
