@@ -9,20 +9,20 @@
     </thead>
 
     <tbody>
-      <% @registrant.all_expense_items.each do |item| %>
-        <tr>
-          <td><%= item %></td>
-          <td>
-            <span class="fee"><%= fcost(item.cost) %></span>
-          </td>
-        </tr>
-      <% end %>
-      <tr>
-        <th>Subtotal</th>
-        <th>
-          <span class="fee"><%= fcost(@registrant.expenses_total) %></span>
-        </th>
-      </tr>
+		<% @registrant.paid_expense_items.each do |pei| %>
+			<tr>
+			  <td><%= pei %></td>
+			  <td><span class="fee"><%= fcost(pei.cost) %></span></td>
+			  <td>&#x2713;</td>
+			</tr>
+		<% end %>
+		<% @registrant.owing_expense_items.each do |ce| %>
+			<tr>
+			  <td><%= ce %></td>
+			  <td><span class="fee"><%= fcost(ce.cost) %></span></td>
+			  <td>&#x2717;</td>
+			</tr>
+		<% end %>
     </tbody>
   </table>
 </fieldset>
