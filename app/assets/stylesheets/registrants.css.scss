@@ -232,3 +232,13 @@ div.data_block {
 fieldset legend {
   text-align: center;
 }
+
+input.ui-tooltip {
+padding: 1px;
+
+position:relative;
+top: 0px;
+max-width: 10000px;
+box-shadow: none;
+z-index:1;
+}
