@@ -47,6 +47,11 @@ describe EventChoice do
     @ec.valid?.should == false
   end
 
+  it "must have a autocomplete value" do
+    @ec.autocomplete = nil
+    @ec.valid?.should == false
+  end
+
   it "has a choicename" do
     @ec.choicename.should == "choice#{@ec.id}"
   end
@@ -74,6 +79,10 @@ describe EventChoice do
       RegistrantChoice.all.count.should == 1
       @ec.destroy
       RegistrantChoice.all.count.should == 0
+    end
+
+    it "lists unique event_choice values" do
+      @ec.unique_values.should == [@rc.value]
     end
   end
 

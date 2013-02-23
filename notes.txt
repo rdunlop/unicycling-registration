@@ -31,6 +31,7 @@ TO DO (SHOULD be done):
   - It's still showing during the payment-process steps
   **
   - CLEARER that kids must have a Parent/Guardian sign the waiver form. (page for waiver)
+ - Add javascript tests for event_choice#autocomplete
 
 
 
