@@ -8,10 +8,14 @@ class EventChoicesController < ApplicationController
     @event = Event.find(params[:event_id])
   end
 
+  def load_choices
+    @event_choices = @event.event_choices
+  end
+
   # GET /event_choices
   # GET /event_choices.json
   def index
-    @event_choices = @event.event_choices
+    load_choices
     @event_choice = EventChoice.new
 
     respond_to do |format|
@@ -47,6 +51,7 @@ class EventChoicesController < ApplicationController
         format.html { redirect_to event_event_choices_path(@event), notice: 'Event choice was successfully created.' }
         format.json { render json: @event_choice, status: :created, location: event_event_choices(@event) }
       else
+        load_choices
         format.html { render action: "index" }
         format.json { render json: @event_choice.errors, status: :unprocessable_entity }
       end
