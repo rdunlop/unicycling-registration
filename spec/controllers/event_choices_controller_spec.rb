@@ -30,7 +30,8 @@ describe EventChoicesController do
   def valid_attributes
     {
     export_name: "100m",
-    cell_type: "boolean"
+    cell_type: "boolean",
+    autocomplete: false
     }
   end
 

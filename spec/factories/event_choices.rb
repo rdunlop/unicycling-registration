@@ -8,5 +8,6 @@ FactoryGirl.define do
     multiple_values nil
     label "Attending"
     position 2
+    autocomplete false
   end
 end

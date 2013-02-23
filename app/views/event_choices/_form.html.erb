@@ -31,6 +31,11 @@
     <%= f.label :position %><br />
     <%= f.number_field :position %>
   </div>
+  <div class="field">
+    <%= f.label :autocomplete %><br />
+    <%= f.check_box :autocomplete %><br />
+    Enabling this option will cause Auto-complete suggestions to be presented to each registrant. (If Scott says his Team is "The Scott Team", when a different user types "The" into the "Team", "The Scott Team" will be suggested).
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
