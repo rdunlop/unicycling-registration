@@ -53,6 +53,13 @@
           <%= f.text_field :country %>
         </td>
       </tr>
+      <script>
+        $(function() {
+          $("#registrant_country").autocomplete({
+            source: ["Canada", "United States"]
+          });
+        });
+      </script>
       <tr>
         <td>
           <%= f.label :zip, :class => "required" %>
