@@ -43,13 +43,13 @@ class EventChoicesController < ApplicationController
   # POST /event_choices
   # POST /event_choices.json
   def create
-    @event_choice = @event.event_choices.new(params[:event_choice])
+    @event_choice = EventChoice.new(params[:event_choice])
     @event_choice.event = @event
 
     respond_to do |format|
       if @event_choice.save
         format.html { redirect_to event_event_choices_path(@event), notice: 'Event choice was successfully created.' }
-        format.json { render json: @event_choice, status: :created, location: event_event_choices(@event) }
+        format.json { render json: @event_choice, status: :created, location: event_event_choices_path(@event) }
       else
         load_choices
         format.html { render action: "index" }
