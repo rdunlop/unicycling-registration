@@ -21,7 +21,7 @@
       <legend>Base Details</legend>
       <span>
         <%= f.label :first_name, 'Name', :class => "required" %>
-        <%= f.text_field :first_name, :placeholder => 'First', :size => 12, :autofocus => "true", :class => "ui-tooltip", :title => "Hover!" %>
+        <%= f.text_field :first_name, :placeholder => 'First', :size => 12, :autofocus => "true" %>
         <%= f.text_field :middle_initial, :size => 1 %>
         <%= f.text_field :last_name, :placeholder => 'Last', :size => 15 %>
       </span>
@@ -43,7 +43,7 @@
       </span>
       <span>
         <%= f.label :usa_member_number, "USA Membership Number" %>
-        <%= f.text_field :usa_member_number, :size => 5 %><br />
+        <%= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{@config.short_name}" %><br />
       </span>
     </fieldset>
     <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
