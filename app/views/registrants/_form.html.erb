@@ -43,7 +43,7 @@
       </span>
       <span>
         <%= f.label :usa_member_number, "USA Membership Number" %>
-        <%= f.text_field :usa_member_number, :size => 5 %><br />
+        <%= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{@config.short_name}" %><br />
       </span>
     </fieldset>
     <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
