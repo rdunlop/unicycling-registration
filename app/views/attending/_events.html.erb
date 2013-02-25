@@ -47,10 +47,16 @@
                   <%= f.fields_for :registrant_choices, found_rc do |ec| %>
                     <%= ec.hidden_field :event_choice_id %>
                     <% if ec.object.event_choice.cell_type == "boolean" %>
-                      <%= ec.check_box :value, :class => (primary ? "primary_checkbox" : "") %>
                       <% if choice.label.blank? %>
-                        <%= ec.label :value, choice.event %>
+                        <% label = choice.event %>
                       <% else %>
+                        <% label = choice.label %>
+                      <% end %>
+                      <% if primary %>
+                        <%= ec.check_box :value, :class => "primary_checkbox" %>
+                        <%= ec.label :value, label, :title => event.description %>
+                      <% else %>
+                        <%= ec.check_box :value %>
                         <%= ec.label :value, choice.label %>
                       <% end %>
                     <% elsif ec.object.event_choice.cell_type == "text" %>
