@@ -89,7 +89,7 @@
           <%= f.label :email %>
         </td>
         <td>
-          <%= f.text_field :email %>
+          <%= f.text_field :email, :class => "ui-tooltip", :title => "Provide your email address to receive updates to registration, schedule, and new events." %>
         </td>
       </tr>
     </table>
@@ -145,14 +145,15 @@
     </table>
   </fieldset>
   <fieldset class="data_block">
-    <legend>Responsible Adult<br /><span class="extra_info">(for Registrants Under the age of 18)</span></legend>
+    <legend>Responsible Adult</legend>
+    <span class="extra_info">(for Registrants Under the age of 18)</span>
     <table>
       <tr>
         <td>
           <%= f.label :responsible_adult_name, "Name" %>
         </td>
         <td>
-          <%= f.text_field :responsible_adult_name %>
+          <%= f.text_field :responsible_adult_name, :class => "ui-tooltip", :title => "The 'Responsible Adult' will be responsible for the registered minor." %>
         </td>
       </tr>
       <tr>
@@ -165,9 +166,4 @@
       </tr>
     </table>
   </fieldset>
-  <br />
-  <b>Important:</b> Provide your email address to receive updates to registration, schedule, and new events.
-  <br />
-  <br />
-  The "Responsible Adult", will be responsible for the registered minor.
 </fieldset>
