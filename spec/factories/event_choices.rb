@@ -6,7 +6,7 @@ FactoryGirl.define do
     sequence(:export_name) {|n| "field_#{n}"}
     cell_type "boolean"
     multiple_values nil
-    label "Attending"
+    label "Event_choice chosen"
     position 2
     autocomplete false
   end

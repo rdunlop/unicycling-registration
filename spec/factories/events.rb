@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :event do
-    sequence(:name) {|n| "Name of Event ##{n}" }
     category # FactoryGirl
     description "Some Description"
     position 1

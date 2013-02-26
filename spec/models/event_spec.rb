@@ -7,10 +7,6 @@ describe Event do
   it "is valid from FactoryGirl" do
     @ev.valid?.should == true
   end
-  it "requires a name" do
-    @ev.name = nil
-    @ev.valid?.should == false
-  end
 
   it "requires a category" do
     @ev.category = nil
@@ -45,7 +41,7 @@ describe Event do
     @choice = @ev.event_choices.first
     @choice.cell_type.should == 'boolean'
     @choice.position.should == 1
-    @choice.export_name.should == @ev.name + "_yn"
+    @choice.export_name.should == "new_event_yn"
   end
   it "has a primary_choice" do
     @ev.primary_choice.should == @ev.event_choices.first

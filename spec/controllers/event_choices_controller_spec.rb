@@ -31,7 +31,8 @@ describe EventChoicesController do
     {
     export_name: "100m",
     cell_type: "boolean",
-    autocomplete: false
+    autocomplete: false,
+    label: "My event choice"
     }
   end
 

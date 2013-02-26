@@ -9,6 +9,11 @@ describe EventChoice do
     @ec.valid?.should == true
   end
 
+  it "requires a label" do
+    @ec.label = nil
+    @ec.valid?.should == false
+  end
+
   it "requires a export_name" do
     @ec.export_name = nil
     @ec.valid?.should == false

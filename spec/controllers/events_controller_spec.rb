@@ -31,7 +31,6 @@ describe EventsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-    name: "My Event"
     }
   end
 
@@ -150,11 +149,11 @@ describe EventsController do
         event = FactoryGirl.create(:event)
         expect {
           put :update, {:id => event.to_param, :event => { 
-          :name => "My Name", 
           :event_choices_attributes => [ 
             { 
           :export_name => "100m", 
-          :cell_type => "boolean" 
+          :cell_type => "boolean",
+          :label => "My event Choice"
         }] }}
         }.to change(EventChoice, :count).by(1)
       end

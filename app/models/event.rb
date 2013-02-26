@@ -1,22 +1,25 @@
 class Event < ActiveRecord::Base
-  attr_accessible :category_id, :description, :name, :position, :event_choices_attributes
+  attr_accessible :category_id, :description, :position, :event_choices_attributes
 
   has_many :event_choices, :order => "event_choices.position", :dependent => :destroy
   accepts_nested_attributes_for :event_choices
 
   belongs_to :category
 
-  validates :name, :presence => true
   validates :category_id, :presence => true
 
   before_create :build_associated_event_choice
 
   def build_associated_event_choice
-    self.event_choices.build({:position => 1, :cell_type => 'boolean', :export_name => "#{self.name}_yn" })
+    self.event_choices.build({:position => 1, :cell_type => 'boolean', :label => "New Event", :export_name => "new_event_yn" })
   end
 
   def primary_choice
     event_choices.where({:position => 1}).first
+  end
+
+  def name
+    primary_choice.label
   end
 
   def to_s
