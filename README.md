@@ -95,6 +95,13 @@ Setting this flag will remove the "Development Site" banner
 
 DEVELOPMENT_BANNER=false
 
+Memcache
+--------
+
+When deploying, please install a memcache client on your heroku instance:
+
+ `$ heroku addons:add memcache`
+
 Email System integration
 ------------------------
 

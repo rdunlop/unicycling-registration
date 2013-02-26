@@ -14,6 +14,7 @@ gem 'exception_notification'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-heroku'
 gem 'spreadsheet'
+gem 'dalli'
 
 #gem 'sqlite3'
 gem 'pg'

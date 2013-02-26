@@ -8,3 +8,6 @@ package 'libxml2-dev'
 # required to get PDF generator working
 package 'libxrender1'
 package 'fontconfig'
+
+# required for memcache
+package 'memcached'
