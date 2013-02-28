@@ -74,7 +74,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% if can? :manage, RegistrationPeriod %>
             <li><%= link_to 'Registration Periods', registration_periods_path %></li>
           <% end %>
-          <% if can? :manage, EventConfiguration %>
+          <% if can? :manage, :all %>
             <li><%= link_to 'Export/Import', admin_export_index_path %></li>
           <% end %>
           <% if can? :manage, User %>

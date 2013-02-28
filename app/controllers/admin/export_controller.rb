@@ -1,11 +1,6 @@
 class Admin::ExportController < Admin::BaseController
   before_filter :authenticate_user!
-  skip_authorization_check # XXX because I'm using the BaseController for auth
-  before_filter :super_user_check
-
-  def super_user_check
-    redirect_to root_url unless current_user.super_admin?
-  end
+  authorize_resource :class => false
 
   def index
   end

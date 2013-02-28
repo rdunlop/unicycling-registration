@@ -1,6 +1,6 @@
 class Admin::HistoryController < Admin::BaseController
   before_filter :authenticate_user!
-  skip_authorization_check # XXX because I'm using the BaseController for auth
+  authorize_resource :class => false
 
   def index
     @versions = Version.all
