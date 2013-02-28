@@ -36,7 +36,7 @@
           <td><%= pf.hidden_field :amount %><span class="fee"><%= fcost(pf.object.amount) %></span></td>
           <td>
             <%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %>
-            <%= check_box_tag :anon, nil, true, :class => "anon", "data-cents" => pf.object.amount * 100 %>
+            <%= check_box_tag :anon, nil, true, :class => "anon", :id => nil, "data-cents" => pf.object.amount * 100 %>
           </td>
         </tr>
       <% end %>
@@ -52,46 +52,4 @@
   <div class="actions">
     <%= f.submit 'Start Payment', :class => "payment_link registration_button" %>
   </div>
-  <script>
-    function findDeleteCheck(el) {
-      var row = el.parent().parent();
-      var del = row.find("input[type='checkbox']").first();
-      return del;
-    }
-    function calculateTotal() {
-      var all_values = $("input[data-cents]");
-      var total_cents = 0;
-      all_values.each(function() {
-        var el = $(this);
-        if (el.prop('checked')) {
-          total_cents += parseInt(el.data("cents"));
-        }
-      });
-      return (total_cents / 100).toFixed(2);
-    }
-    $(document).on("change", "#anon", function() {
-      var el = $(this);
-      var del = findDeleteCheck(el);
-      del.prop('checked', !el.prop('checked'));
-      $("#total_field").html(calculateTotal());
-    });
-    $(document).on("click", "#unselect_all", function() {
-      select_all(false);
-    });
-    $(document).on("click", "#select_all", function() {
-      select_all(true);
-    });
-    function select_all(check_on) {
-      $(".anon").each(function() {
-        el = $(this);
-        if (el.prop('checked') != check_on) {
-          el.trigger("click");
-        }
-      });
-    }
-    $(document).ready(function() {
-      // calculate initially
-      $("#total_field").html(calculateTotal());
-    });
-  </script>
 <% end %>

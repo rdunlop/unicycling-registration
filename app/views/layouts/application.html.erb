@@ -15,31 +15,20 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
 </head>
 <body>
   <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
-    <div class="dev_banner"><a id="dev_banner_remover" href="#" title="Remove dev banner">[x]</a>
-    Non-Live System. <br />
-    Second Line.
-      
+    <div class="dev_banner">
+      Non-Live System.
+      <a id="dev_banner_remover" href="#" class="banner_remover" data-banner-class="dev_banner" title="Remove dev banner">[x]</a>
     </div>
-    <script>
-      $("#dev_banner_remover").on("click", function() {
-        $(".dev_banner").remove();
-      });
-    </script>
   <% end %>
   <% if !current_user.nil? and  @config.test_mode %>
     <div class="test_mode">
-      <a id="test_mode_remover" href="#" title="Remove test banner">[x]</a>
+      <a id="test_mode_remover" href="#" class="banner_remover" data-banner-class="test_mode" title="Remove test banner">[x]</a>
       <h2>Test Mode Enabled</h2>
       <span>Current User is <%= current_user.admin ? "Admin" : current_user.super_admin ? "Super Admin" : "Normal User" %></span>
       <%= link_to 'Make Me ADMIN', admin_event_configurations_path, :method => :post %>
       <%= link_to 'Make Me SUPER ADMIN', super_admin_event_configurations_path, :method => :post %>
       <%= link_to 'Make Me NORMAL', normal_event_configurations_path, :method => :post %>
     </div>
-     <script>
-      $("#test_mode_remover").on("click", function() {
-        $(".test_mode").remove();
-      });
-    </script>
   <% end %>
     <nav>
     <ul>
