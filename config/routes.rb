@@ -4,7 +4,11 @@ Workspace::Application.routes.draw do
   #
   #
   namespace :admin do
-    resources :registrants, :only => [:index]
+    resources :registrants, :only => [:index] do
+      collection do
+        get :bag_labels
+      end
+    end
     resources :payments, :only => [:index]
     resources :events, :only => [:index, :show]
 
