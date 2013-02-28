@@ -18,6 +18,6 @@ class Admin::RegistrantsController < Admin::BaseController
       pdf.text name, :align => :center, :size => 10, :inline_format => true
     end
 
-    send_data labels, :filename => "names.pdf", :type => "application/pdf"
+    send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
   end
 end
