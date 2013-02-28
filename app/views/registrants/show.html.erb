@@ -4,7 +4,7 @@
   <div class="data_block">
     <%= render :partial => "summary" %>
     <% if can? :update, @registrant %>
-      <div style="text-align: center">
+      <div class="edit_link_block">
         <%= link_to 'Edit Registration', edit_registrant_path(@registrant) %>
       </div>
     <% end %>
@@ -12,7 +12,7 @@
   <div class="data_block">
     <%= render :partial => "registrant_expenses" %>
     <% if can? :update_items, @registrant %>
-      <div style="text-align: center">
+      <div class="edit_link_block">
         <%= link_to 'Edit Items', items_registrant_path(@registrant) %>
       </div>
     <% end %>

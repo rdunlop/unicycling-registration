@@ -25,12 +25,3 @@
     </table>
   </fieldset>
 </div>
- <script>
-   $(document).on("click", ".delete_expenses_button", function() {
-     button = $(this);
-     check = $("#" + button.data("thing"));
-     check.prop('checked', true);
-     row = $("#" + button.data("row"));
-     row.fadeOut(500);
-   });
- </script>

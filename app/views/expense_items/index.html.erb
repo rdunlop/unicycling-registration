@@ -1,6 +1,6 @@
 <h1>Listing expense_items</h1>
 
-<div style="float: left">
+<div class="configuration_settings_block">
   <table id="list" class="alternate">
     <tr>
       <th>Group Name</th>
@@ -27,11 +27,11 @@
     <% end %>
   </table>
 </div>
-<div style="float: right">
+<div class="configuration_preview_block">
   <%= render :partial => "/registrants/new_expenses" %>
 </div>
 
-<div style="clear: both">
+<div class="configuration_new_entry_form">
   <h2>New expense_item</h2>
 
   <%= render 'form' %>

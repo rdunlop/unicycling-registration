@@ -17,7 +17,7 @@
     </td>
     <td>
       <%= rfei.check_box :_destroy, :id => index, :index => index, :style => "display: none" %>
-      <%= button_tag "Delete", :class => "delete_expenses_button", "data-row" => "row" + index.to_s, "data-thing" => index, :onclick => "return false" %>
+      <%= button_tag "Delete", :class => "delete_expenses_button", "data-row-id" => "row" + index.to_s, "data-checkbox-id" => index %>
     </td>
   </tr>
 <% end %>

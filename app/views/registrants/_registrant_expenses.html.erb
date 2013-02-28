@@ -5,24 +5,25 @@
       <tr>
         <th>Item</th>
         <th>Cost</th>
+        <th>Paid?</th>
       </tr>
     </thead>
 
     <tbody>
-		<% @registrant.paid_expense_items.each do |pei| %>
-			<tr>
-			  <td><%= pei %></td>
-			  <td><span class="fee"><%= fcost(pei.cost) %></span></td>
-			  <td>&#x2713;</td>
-			</tr>
-		<% end %>
-		<% @registrant.owing_expense_items.each do |ce| %>
-			<tr>
-			  <td><%= ce %></td>
-			  <td><span class="fee"><%= fcost(ce.cost) %></span></td>
-			  <td>&#x2717;</td>
-			</tr>
-		<% end %>
+      <% @registrant.paid_expense_items.each do |pei| %>
+        <tr>
+          <td><%= pei %></td>
+          <td><span class="fee"><%= fcost(pei.cost) %></span></td>
+          <td>&#x2713;</td>
+        </tr>
+      <% end %>
+      <% @registrant.owing_expense_items.each do |ce| %>
+        <tr>
+          <td><%= ce %></td>
+          <td><span class="fee"><%= fcost(ce.cost) %></span></td>
+          <td>&#x2717;</td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </fieldset>

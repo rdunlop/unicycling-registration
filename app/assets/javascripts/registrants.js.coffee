@@ -10,3 +10,14 @@ $ ->
   $("#show-option").tooltip show:
     effect: "slideDown"
     delay: 250
+
+$ ->
+  $(document).on "click", "#copy_address", ->
+    $('#registrant_address').val($(this).data("address"));
+    $('#registrant_city').val($(this).data("city"));
+    $('#registrant_state').val($(this).data("state"));
+    $('#registrant_country').val($(this).data("country"));
+    $('#registrant_zip').val($(this).data("zip"));
+    $('#registrant_phone').val($(this).data("phone"));
+    return false;
+

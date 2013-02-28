@@ -1,7 +1,7 @@
 <h1>Listing event_choices for <%= @event %></h1>
 
 
-<div style="float: left">
+<div class="configuration_settings_block">
   <table>
     <tr>
       <th>Export name</th>
@@ -27,15 +27,14 @@
       </tr>
     <% end %>
   </table>
-  <br />
-
-  <h3>New event_choice</h3>
-
-  <%= render 'form' %>
-
-  <%= link_to 'Back', category_events_path(@event.category) %>
 </div>
 
-<div style="float: right">
+<div class="configuration_preview_block">
   <%= render :partial => "/attending/preview" %>
+</div>
+
+<div class="configuration_new_entry_form">
+  <h3>New event_choice</h3>
+  <%= render 'form' %>
+  <%= link_to 'Back', category_events_path(@event.category) %>
 </div>
