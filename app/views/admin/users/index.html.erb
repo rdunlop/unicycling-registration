@@ -8,6 +8,7 @@
       <th> </th>
       <th>SuperAdmin?</th>
       <th>ClubAdmin?</th>
+      <th>Club</th>
       <th> </th>
     </tr>
   </thead>
@@ -23,8 +24,10 @@
       </td>
       <td><%= user.super_admin %></td>
       <td><%= user.club_admin %></td>
+      <td><%= user.club %></td>
       <td>
         <%= form_for([:club_admin, user], :url => club_admin_admin_user_path(user), :html => { :method => :put }) do |f| %>
+          <%= f.text_field :club, :placeholder => 'Club', :size => 20 %>
           <%= f.submit "Toggle Club Admin" %>
         <% end %>
       </td>

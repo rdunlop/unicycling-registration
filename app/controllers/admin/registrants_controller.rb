@@ -6,8 +6,16 @@ class Admin::RegistrantsController < Admin::BaseController
     @registrants = Registrant.all
   end
   
-  def club
-    @registrants = Registrant.all #change to all registrants in club
+  def club 
+    @registrants = Registrant.all
+    
+    #this is supposed to list all registrants of a particular club. It's not working...
+    @club_registrants = [ ]
+    @registrants.each do |reg|
+      if reg.club == current_user.club
+        @club_registrants << reg
+	  end    
+    end
   end
 
   def bag_labels
