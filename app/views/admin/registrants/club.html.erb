@@ -1,0 +1,21 @@
+<h1>Edit Registrants</h1>
+
+<table class="alternate">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Summary</th>
+      <th>Edit</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @club_registrants.each do |registrant| %>
+    <tr>
+      <td><%= registrant %></td>
+      <td><%= link_to "Summary", registrant_path(registrant) %></td>
+      <td><%= link_to "Edit", edit_registrant_path(registrant) %></td>
+      <td><%= registrant.user %></td>
+    </tr>
+  <% end %>
+</table>

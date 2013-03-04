@@ -98,6 +98,8 @@ class EventConfigurationsController < ApplicationController
   def admin
     current_user.admin = true
     current_user.super_admin = false
+    current_user.club_admin = false
+    current_user.normal = false
     current_user.save
 
     respond_to do |format|
@@ -108,6 +110,20 @@ class EventConfigurationsController < ApplicationController
   def super_admin
     current_user.admin = false
     current_user.super_admin = true
+    current_user.club_admin = false
+    current_user.normal = false
+    current_user.save
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
+    end
+  end
+
+  def club_admin
+    current_user.admin = false
+    current_user.super_admin = false
+    current_user.club_admin = true
+    current_user.normal = false
     current_user.save
 
     respond_to do |format|
@@ -118,6 +134,8 @@ class EventConfigurationsController < ApplicationController
   def normal
     current_user.admin = false
     current_user.super_admin = false
+    current_user.club_admin = false
+    current_user.normal = true
     current_user.save
 
     respond_to do |format|

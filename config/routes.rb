@@ -4,7 +4,7 @@ Workspace::Application.routes.draw do
   #
   #
   namespace :admin do
-    resources :registrants, :only => [:index] do
+    resources :registrants, :only => [:index, :show, :club] do
       collection do
         get :bag_labels
       end
@@ -22,6 +22,7 @@ Workspace::Application.routes.draw do
     resources :users, :only => [:index] do
       member do
         put :admin
+        put :club_admin
       end
     end
     resources :history, :only => [:index] 
@@ -77,6 +78,7 @@ Workspace::Application.routes.draw do
     collection do
       post 'admin'
       post 'super_admin'
+      post 'club_admin'
       post 'normal'
     end
     member do

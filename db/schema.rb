@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225001906) do
+ActiveRecord::Schema.define(:version => 20130304105708) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -181,6 +181,9 @@ ActiveRecord::Schema.define(:version => 20130225001906) do
     t.datetime "updated_at",                             :null => false
     t.boolean  "admin"
     t.boolean  "super_admin"
+    t.boolean  "club_admin"
+    t.boolean  "normal"
+    t.string   "club"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
