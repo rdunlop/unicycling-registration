@@ -6,6 +6,6 @@ class Admin::BaseController < ApplicationController
   # NOTE: http://www.rubyfleebie.com/restful-admin-controllers-and-views-with-rails/
 
   def verify_admin
-    redirect_to root_url unless (current_user.admin? or current_user.super_admin?)
+    redirect_to root_url unless (current_user.admin? or current_user.super_admin? or current_user.club_admin?)
   end
 end

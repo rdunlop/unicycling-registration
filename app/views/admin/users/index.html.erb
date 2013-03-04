@@ -5,8 +5,10 @@
     <tr>
       <th>Email</th>
       <th>Admin?</th>
+      <th> </th>
       <th>SuperAdmin?</th>
-      <th>Action</th>
+      <th>ClubAdmin?</th>
+      <th> </th>
     </tr>
   </thead>
   <tbody>
@@ -14,10 +16,16 @@
     <tr>
       <td><%= user %></td>
       <td><%= user.admin %></td>
-      <td><%= user.super_admin %></td>
       <td>
         <%= form_for([:admin, user], :url => admin_admin_user_path(user), :html => { :method => :put }) do |f| %>
           <%= f.submit "Toggle Admin" %>
+        <% end %>
+      </td>
+      <td><%= user.super_admin %></td>
+      <td><%= user.club_admin %></td>
+      <td>
+        <%= form_for([:club_admin, user], :url => club_admin_admin_user_path(user), :html => { :method => :put }) do |f| %>
+          <%= f.submit "Toggle Club Admin" %>
         <% end %>
       </td>
     </tr>

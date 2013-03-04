@@ -5,6 +5,10 @@ class Admin::RegistrantsController < Admin::BaseController
   def index
     @registrants = Registrant.all
   end
+  
+  def club
+    @registrants = Registrant.all #change to all registrants in club
+  end
 
   def bag_labels
     @registrants = Registrant.all

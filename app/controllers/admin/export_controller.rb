@@ -23,7 +23,7 @@ class Admin::ExportController < Admin::BaseController
   end
 
   def user_data
-    [ [User,                false,  ["admin", "super_admin"], []],
+    [ [User,                false,  ["admin", "super_admin", "club_admin"], []],
       [Registrant,          true,   [], []],
       [RegistrantChoice,    true,   [], []],
       [RegistrantExpenseItem, true, [], []],
