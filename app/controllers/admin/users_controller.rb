@@ -18,14 +18,14 @@ class Admin::UsersController < Admin::BaseController
   
   def club_admin
     @user = User.find(params[:id])
-    @user.club_admin = !@user.club_admin
-    @user.save
 
 	respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to admin_users_path, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
+        @user.club_admin = !@user.club_admin
+        @user.save
         format.html { redirect_to admin_users_path }
       end
     end

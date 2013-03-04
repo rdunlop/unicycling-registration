@@ -28,7 +28,7 @@
       <td>
         <%= form_for([:club_admin, user], :url => club_admin_admin_user_path(user), :html => { :method => :put }) do |f| %>
           <%= f.text_field :club, :placeholder => 'Club', :size => 20 %>
-          <%= f.submit "Toggle Club Admin" %>
+          <%= f.submit "Toggle/Update Club Admin" %>
         <% end %>
       </td>
     </tr>
