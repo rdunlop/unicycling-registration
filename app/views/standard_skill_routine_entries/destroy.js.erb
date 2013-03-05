@@ -1,0 +1,11 @@
+$("a").bind('ajax:success', function() {
+    $(this).closest('tr').fadeOut('slow', function() {
+
+    <% # This same code appears in the create.js.erb %>
+    $('.skill_entry').remove();
+    <% @standard_skill_routine.standard_skill_routine_entries.each do |entry| %>
+    $('#skills').append("<%= escape_javascript(render :partial => "skill_entry", :object => entry) %>");
+    <% end %>
+    $("#skill_total").html(<%= @standard_skill_routine.total_skill_points %>)
+    });
+});

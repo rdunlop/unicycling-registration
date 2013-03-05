@@ -1,0 +1,18 @@
+<% # passed in variable named 'form' %>
+<%= form_for([@standard_skill_routine, form], :remote => true) do |f| %>
+  <%= render :partial => "/shared/error_messages", :object => form %>
+
+  <span id="errors"></span>
+
+  <div class="field">
+    <%= f.label :position, 'Insert at position' %>
+    <%= f.number_field :position, { :min => 1, :max => 18 } %>
+  </div>
+  <div class="field">
+    <%= f.label :standard_skill_entry_id, 'Skill' %><br />
+    <%= f.select(:standard_skill_entry_id, StandardSkillEntry.all.map{ |ent| [ent, ent.id]}) %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Insert New' %>
+  </div>
+<% end %>

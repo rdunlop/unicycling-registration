@@ -1,0 +1,9 @@
+<h1>Upload Standard Skill Entries CSV file</h1>
+
+<%= form_for :dump, :url=>{:controller=>"standard_skill_entries", :action=>"upload"}, :html => {:multipart=>true} do |f| -%>
+<%= f.file_field :file -%>
+<%= f.submit 'Submit' %>
+
+<% end %>
+
+<%= link_to 'Back', standard_skill_entries_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225001906) do
+ActiveRecord::Schema.define(:version => 20130302200405) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -161,6 +161,29 @@ ActiveRecord::Schema.define(:version => 20130225001906) do
     t.integer  "competitor_expense_item_id"
     t.integer  "noncompetitor_expense_item_id"
     t.boolean  "onsite"
+  end
+
+  create_table "standard_skill_entries", :force => true do |t|
+    t.integer  "number"
+    t.string   "letter"
+    t.decimal  "points",      :precision => 6, :scale => 2
+    t.string   "description"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  create_table "standard_skill_routine_entries", :force => true do |t|
+    t.integer  "standard_skill_routine_id"
+    t.integer  "standard_skill_entry_id"
+    t.integer  "position"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  create_table "standard_skill_routines", :force => true do |t|
+    t.integer  "registrant_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|

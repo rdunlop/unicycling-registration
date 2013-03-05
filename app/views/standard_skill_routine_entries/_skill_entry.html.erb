@@ -1,0 +1,14 @@
+<% return if skill_entry.new_record? %>
+<tr class="skill_entry" id="<%= "skill" + skill_entry.id.to_s %>">
+  <td><%= skill_entry.position %></td>
+  <td><%= skill_entry.standard_skill_entry.number %></td>
+  <td><%= skill_entry.standard_skill_entry.letter %></td>
+  <td><%= skill_entry.standard_skill_entry.points %></td>
+  <td><%= skill_entry.standard_skill_entry.description %></td>
+  <td>
+    <% if can? :destroy, skill_entry %>
+      <%= link_to 'destroy', [@standard_skill_routine, skill_entry], remote: true, confirm: 'Are you sure?', method: :delete %>
+    <% end %>
+  </td>
+</tr>
+

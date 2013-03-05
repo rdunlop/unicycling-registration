@@ -174,6 +174,15 @@ optional.
 MIXPANEL_TOKEN=<token>
 
 
+Seed Data
+---------
+
+There are a number of tables which have non-user-editable data in them (such as
+StandardSkillEntry). In order to initially populate these, please run db:seed
+
+ `$ rake db:seed`
+
+
 Event Configuration
 -------------------
 
@@ -187,7 +196,7 @@ as the expense details for registration.
  * Create an "Event Configuration" with your basic details, which includes the
    Name of the competition as well as logo and URL links to supporting
    information.
-* ,Create some Expense Groups and Expense Items
+* Create some Expense Groups and Expense Items
  * Create some Registration Periods
  * Create some Categories, and Events within those categories.
 

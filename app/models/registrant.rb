@@ -47,6 +47,13 @@ class Registrant < ActiveRecord::Base
 
   has_many :payment_details, :include => :payment
 
+  has_one :standard_skill_routine, :dependent => :destroy
+
+  # for use when assigning competitor IDs
+  def external_id
+    id
+  end
+
   def gender_present
     if gender.blank?
       errors[:gender_male] = "" # Cause the label to be highlighted

@@ -14,6 +14,8 @@ class AdminAbility
       if user.super_admin
         can :manage, :export
         can :manage, User
+        can :manage, StandardSkillEntry
+        can :manage, StandardSkillRoutine
       end
     end
   end

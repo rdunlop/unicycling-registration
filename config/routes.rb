@@ -19,12 +19,25 @@ Workspace::Application.routes.draw do
       post :upload
       get :download_events
     end
+
     resources :users, :only => [:index] do
       member do
         put :admin
       end
     end
     resources :history, :only => [:index] 
+
+    resources :standard_skill_entries, :only => [] do
+      collection do
+        get :upload_file
+        post :upload
+      end
+    end
+    resources :standard_skill_routines, :only => [] do
+      collection do
+        get :download_file
+      end
+    end
   end
   resources :expense_groups
 
@@ -64,7 +77,13 @@ Workspace::Application.routes.draw do
       get :waiver
     end
     resources :registrant_expenses, :only => [:new, :destroy]
+    resources :standard_skill_routines, :only => [:create]
   end
+
+  resources :standard_skill_routines, :only => [:show] do
+    resources :standard_skill_routine_entries, :only => [:destroy, :create]
+  end
+  resources :standard_skill_entries, :only => [:index]
 
   # for AJAX use:
   resources :registrant_expenses, :only => [] do

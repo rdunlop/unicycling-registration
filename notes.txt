@@ -1,4 +1,6 @@
 TO DO (MUST be done BEFORE LIVE):
+ - Link from Registration to StandardSkillRoutine entry form, only for those with Standard Skill Event selected?
+
 - mixpanel revenue?
  - Improve the "success" page (http://reg.uninationals2013.com/payments/success?tx=8PY73818JH738005M&st=Completed&amt=120.00&cc=USD&cm=&item_number=)
 - Add Administrative Options similar to what we had on the old registration site:
@@ -19,10 +21,10 @@ TO DO (MUST be done SOON after LIVE (if not before)):
  - Multi-record delete (allows removing multiple people from an event sign-up)
  - Enter a "Wire Payment" (also, mark a registration/etc as paid, for some reason)
  - Log all logs to an external (persistent) store
+ - :dependent => :restrict
 
 
 TO DO (SHOULD be done):
- - Create new Ability class for admin controllers (allows better control of admin access)
  - Fix some styling of the page, to make it easier to follow the flow of the system.
  - Admin should be able to "receive a cheque"
   - This allows an admin to mark a record/item as paid without PayPal
@@ -32,7 +34,10 @@ TO DO (SHOULD be done):
   **
   - CLEARER that kids must have a Parent/Guardian sign the waiver form. (page for waiver)
  - Add javascript tests for event_choice#autocomplete
-
+ - Re-arrange StandardSkillRoutineEntry/StandardSkillRoutine validations (move into Routine)
+ - JS/CSS for standardSkill should be moved into asset pipeline
+ - Ability to read StandardSkill Routines even after Online Registration is closed.
+ - Ability to print PDF of standard Skill Routine, for practicing by competitor?
 
 
 TO DO (NICE to be done):
@@ -49,8 +54,6 @@ TO DO (NICE to be done):
  - Allow sortnig of the "all registrants" page according to the columns (use jquery?)
  - expense items be destroyed when an expenseGroup is destroyed
  - Prevent events from having no position-1-event-choice-boolean
- - Clear additional Fields when an event is un-checked.
- - NICE: Standard Skill Electronic.
 
 Scott's suggestions:
  - Admin should be able to identify Who+WHAT has been received/paid for.
@@ -75,10 +78,8 @@ Denis:
 - Where do I provide e-mail my e-mail address
 - "What am I doing on the t-shirt page"?
 - "Show my registrations" means "about robin's competitions?"
-- "add another new registration" not possible from the registration summary. How do I do that?
  - I can use "My registrations" to create new.
  - "Done" or "new registraiton"?
-- "Show my registrations" is like a "Continue"
 - Is team required to be asked for a non-competitor?
 - Always go back to the Registration smumary page (on return from the payment success)
 - How do I finish?

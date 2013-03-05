@@ -1,0 +1,22 @@
+<% if @standard_skill_routine_entry.errors.any? %>
+
+  var errors = $("<ul />");
+  <% @standard_skill_routine_entry.errors.full_messages.each do |error| %>
+    errors.append('<li><%= escape_javascript( error ) %></li>');
+  <% end %>
+        
+  // Display errors on form
+  $('#errors').html($("<div id=\"error_explanation\" />").append(errors));
+<% else %>
+
+  <% # This same code appears in the destroy.js.erb %>
+  $('.skill_entry').remove();
+  <% @all_routine_entries.each do |entry| %>
+  $('#skills').append("<%= escape_javascript(render :partial => "skill_entry", :object => entry) %>");
+  <% end %>
+  /* Animatedly show the new entry */
+  $("#skill<%= @standard_skill_routine_entry.id %>").hide().fadeIn();
+  $("#skill_total").html(<%= @standard_skill_routine.total_skill_points %>)
+
+  $('#errors').empty()
+<% end %>

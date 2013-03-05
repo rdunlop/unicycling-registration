@@ -1,0 +1,19 @@
+<h1>Standard-Skill Entries</h1>
+<p>These are the available Standard Skill entries</p>
+<table>
+  <tr>
+    <th>Number</th>
+    <th>Letter</th>
+    <th>Points</th>
+    <th>Description</th>
+  </tr>
+<% @standard_skill_entries.each do |entry| %>
+  <tr>
+    <td><%= entry.number %></td>
+    <td><%= entry.letter %></td>
+    <td><%= entry.points %></td>
+    <td><%= entry.description %></td>
+  </tr>
+<% end %>
+</table>
+

@@ -16,6 +16,7 @@ gem 'wkhtmltopdf-heroku'
 gem 'spreadsheet'
 gem 'prawn-labels'
 gem 'dalli'
+gem 'acts_as_list'
 
 #gem 'sqlite3'
 gem 'pg'

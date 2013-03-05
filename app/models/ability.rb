@@ -13,23 +13,36 @@ class Ability
         can :manage, ExpenseItem
         can :manage, Registrant
         can :manage, RegistrationPeriod
+        can :manage, StandardSkillRoutineEntry
+        can :manage, StandardSkillRoutine
+        can :all, StandardSkillRoutine
         can :manage, Payment
         can :manage, User
       elsif user.admin
         can :manage, Registrant
         can :manage, Payment
+        can :manage, StandardSkillRoutineEntry
+        can :manage, StandardSkillRoutine
       else
         can [:read, :all, :waiver], Registrant, :user_id => user.id
         can :read, Payment, :user_id => user.id
 
         unless EventConfiguration.closed?
           can [:update, :items, :update_items], Registrant, :user_id => user.id
-          can :create, Registrant #XXX necessary because we set the user in the controller?
-          can :new_noncompetitor, Registrant #XXX necessary because we set the user in the controller?
+          can :create, Registrant # necessary because we set the user in the controller?
+          can :new_noncompetitor, Registrant # necessary because we set the user in the controller?
           can [:new, :create], Payment
+          can :manage, StandardSkillRoutine do |routine|
+            user.registrants.include?(routine.registrant)
+          end
+          can :create, StandardSkillRoutine # necessary because we set the registrant in the controller?
+          can :manage, StandardSkillRoutineEntry do |entry|
+            can? :destroy, entry.standard_skill_routine
+          end
         end
       end
     end
+    can :read, StandardSkillEntry
     can :logo, EventConfiguration
 
     # allow the user to upgrade their account in TEST MODE
