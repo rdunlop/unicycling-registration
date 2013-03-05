@@ -12,8 +12,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :club
 
-  validates :admin, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :super_admin, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :club_admin, :inclusion => { :in => [true, false] } # because it's a boolean
 
   has_paper_trail :meta => {:user_id => :id }
@@ -25,8 +23,6 @@ class User < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.admin = false if self.admin.nil?
-    self.super_admin = false if self.super_admin.nil?
     self.club_admin = false if self.club_admin.nil?
   end
 

@@ -9,22 +9,6 @@ describe User do
     @user.valid?.should == true
   end
 
-  it "has a value for the admin" do
-    @user.admin = nil
-    @user.valid?.should == false
-  end
-
-  it "has a value for the super_admin" do
-    @user.super_admin = nil
-    @user.valid?.should == false
-  end
-
-  it "has false for admin/super_admin by default" do
-    user = User.new
-    user.admin.should == false
-    user.super_admin.should == false
-  end
-
   it "can sum the amount owing from all registrants" do
     @user.total_owing.should == 0
   end

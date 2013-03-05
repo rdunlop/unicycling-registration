@@ -190,13 +190,13 @@ describe EventConfigurationsController do
       it "changes my user to admin" do
         post 'admin'
         @user.reload
-        @user.admin.should == true
+        @user.has_role?(:admin).should == true
       end
       it "cannot change if config test_mode is disabled" do
         FactoryGirl.create(:event_configuration, :test_mode => false)
         post 'admin'
         @user.reload
-        @user.admin.should == false
+        @user.has_role?(:admin).should == false
       end
     end
 
@@ -208,13 +208,13 @@ describe EventConfigurationsController do
       it "changes my user to super_admin" do
         post 'super_admin'
         @user.reload
-        @user.super_admin.should == true
+        @user.has_role?(:super_admin).should == true
       end
       it "cannot change if config test_mode is disabled" do
         FactoryGirl.create(:event_configuration, :test_mode => false)
         post 'super_admin'
         @user.reload
-        @user.super_admin.should == false
+        @user.has_role?(:super_admin).should == false
       end
     end
 
@@ -226,8 +226,8 @@ describe EventConfigurationsController do
       it "changes my user to normal" do
         post 'normal'
         @user.reload
-        @user.admin.should == false
-        @user.super_admin.should == false
+        @user.has_role?(:admin).should == false
+        @user.has_role?(:super_admin).should == false
       end
     end
   end

@@ -96,8 +96,6 @@ class EventConfigurationsController < ApplicationController
 
   # FOR THE TEST_MODE flags
   def admin
-    current_user.admin = true
-    current_user.super_admin = false
     current_user.club_admin = false
     current_user.save
 
@@ -111,8 +109,6 @@ class EventConfigurationsController < ApplicationController
   end
 
   def super_admin
-    current_user.admin = false
-    current_user.super_admin = true
     current_user.club_admin = false
     current_user.save
 
@@ -126,8 +122,6 @@ class EventConfigurationsController < ApplicationController
   end
 
   def club_admin
-    current_user.admin = false
-    current_user.super_admin = false
     current_user.club_admin = true
     current_user.save
 
@@ -141,8 +135,6 @@ class EventConfigurationsController < ApplicationController
   end
 
   def normal
-    current_user.admin = false
-    current_user.super_admin = false
     current_user.club_admin = false
     current_user.save
 
