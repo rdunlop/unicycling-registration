@@ -1,5 +1,6 @@
 TO DO (MUST be done BEFORE LIVE):
  - Link from Registration to StandardSkillRoutine entry form, only for those with Standard Skill Event selected?
+ - Add tests which ensure that the layout/application is working correctly (was broken when not signed in)
 
 - mixpanel revenue?
  - Improve the "success" page (http://reg.uninationals2013.com/payments/success?tx=8PY73818JH738005M&st=Completed&amt=120.00&cc=USD&cm=&item_number=)

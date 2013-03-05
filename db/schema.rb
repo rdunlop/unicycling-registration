@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304105708) do
+ActiveRecord::Schema.define(:version => 20130305135539) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -205,7 +205,6 @@ ActiveRecord::Schema.define(:version => 20130304105708) do
     t.boolean  "admin"
     t.boolean  "super_admin"
     t.boolean  "club_admin"
-    t.boolean  "normal"
     t.string   "club"
   end
 

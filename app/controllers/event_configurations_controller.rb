@@ -99,7 +99,6 @@ class EventConfigurationsController < ApplicationController
     current_user.admin = true
     current_user.super_admin = false
     current_user.club_admin = false
-    current_user.normal = false
     current_user.save
 
     respond_to do |format|
@@ -111,7 +110,6 @@ class EventConfigurationsController < ApplicationController
     current_user.admin = false
     current_user.super_admin = true
     current_user.club_admin = false
-    current_user.normal = false
     current_user.save
 
     respond_to do |format|
@@ -123,7 +121,6 @@ class EventConfigurationsController < ApplicationController
     current_user.admin = false
     current_user.super_admin = false
     current_user.club_admin = true
-    current_user.normal = false
     current_user.save
 
     respond_to do |format|
@@ -135,7 +132,6 @@ class EventConfigurationsController < ApplicationController
     current_user.admin = false
     current_user.super_admin = false
     current_user.club_admin = false
-    current_user.normal = true
     current_user.save
 
     respond_to do |format|
