@@ -15,4 +15,19 @@ class Admin::UsersController < Admin::BaseController
       format.html { redirect_to admin_users_path }
     end
   end
+
+  def club_admin
+    @user = User.find(params[:id])
+    @user.club = params[:user][:club]
+    @user.club_admin = !@user.club_admin
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to admin_users_path, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to admin_users_path }
+      end
+    end
+  end
 end

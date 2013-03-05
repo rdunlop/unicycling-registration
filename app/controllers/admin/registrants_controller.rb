@@ -6,6 +6,18 @@ class Admin::RegistrantsController < Admin::BaseController
     @registrants = Registrant.all
   end
 
+  def club
+    @registrants = Registrant.all
+
+    #this is supposed to list all registrants of a particular club. It's not working...
+    @club_registrants = [ ]
+    @registrants.each do |reg|
+      if reg.club == current_user.club
+        @club_registrants << reg
+      end
+    end
+  end
+
   def bag_labels
     @registrants = Registrant.all
 
@@ -18,6 +30,6 @@ class Admin::RegistrantsController < Admin::BaseController
       pdf.text name, :align => :center, :size => 10, :inline_format => true
     end
 
-    send_data labels, :filename => "names.pdf", :type => "application/pdf"
+    send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
   end
 end

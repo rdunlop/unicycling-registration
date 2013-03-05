@@ -17,6 +17,7 @@ gem 'spreadsheet'
 gem 'prawn-labels'
 gem 'dalli'
 gem 'acts_as_list'
+gem 'rolify'
 
 #gem 'sqlite3'
 gem 'pg'
