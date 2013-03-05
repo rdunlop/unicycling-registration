@@ -16,14 +16,14 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user %></td>
-      <td><%= user.admin %></td>
+      <td><%= user.has_role? :admin %></td>
       <td>
         <%= form_for([:admin, user], :url => admin_admin_user_path(user), :html => { :method => :put }) do |f| %>
           <%= f.submit "Toggle Admin" %>
         <% end %>
       </td>
-      <td><%= user.super_admin %></td>
-      <td><%= user.club_admin %></td>
+      <td><%= user.has_role? :super_admin %></td>
+      <td><%= user.has_role? :club_admin %></td>
       <td><%= user.club %></td>
       <td>
         <%= form_for([:club_admin, user], :url => club_admin_admin_user_path(user), :html => { :method => :put }) do |f| %>

@@ -192,6 +192,7 @@ as the expense details for registration.
 
 * Create an account (using the "Sign Up" page)
 * Use the "heroku console" to set this user as "super_admin: true"
+ * `u = User.find(1); u.add_role :super_admin;`
 * Log into the site
  * Create an "Event Configuration" with your basic details, which includes the
    Name of the competition as well as logo and URL links to supporting

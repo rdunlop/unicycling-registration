@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     if user.nil?
     else
-      if user.super_admin
+      if user.has_role? :super_admin
         can :manage, Category
         can :manage, Event
         can :manage, EventChoice
@@ -18,7 +18,7 @@ class Ability
         can :all, StandardSkillRoutine
         can :manage, Payment
         can :manage, User
-      elsif user.admin
+      elsif user.has_role? :admin
         can :manage, Registrant
         can :manage, Payment
         can :manage, StandardSkillRoutineEntry

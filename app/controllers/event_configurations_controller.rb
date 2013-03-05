@@ -101,6 +101,10 @@ class EventConfigurationsController < ApplicationController
     current_user.club_admin = false
     current_user.save
 
+    current_user.add_role :admin
+    current_user.remove_role :super_admin
+    current_user.remove_role :club_admin
+
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
     end
@@ -111,6 +115,10 @@ class EventConfigurationsController < ApplicationController
     current_user.super_admin = true
     current_user.club_admin = false
     current_user.save
+
+    current_user.remove_role :admin
+    current_user.add_role :super_admin
+    current_user.remove_role :club_admin
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
@@ -123,6 +131,10 @@ class EventConfigurationsController < ApplicationController
     current_user.club_admin = true
     current_user.save
 
+    current_user.remove_role :admin
+    current_user.remove_role :super_admin
+    current_user.add_role :club_admin
+
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
     end
@@ -133,6 +145,10 @@ class EventConfigurationsController < ApplicationController
     current_user.super_admin = false
     current_user.club_admin = false
     current_user.save
+
+    current_user.remove_role :super_admin
+    current_user.remove_role :admin
+    current_user.remove_role :club_admin
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }

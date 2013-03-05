@@ -24,7 +24,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <div class="test_mode">
       <a id="test_mode_remover" href="#" class="banner_remover" data-banner-class="test_mode" title="Remove test banner">[x]</a>
       <h2>Test Mode Enabled</h2>
-      <span>Current User is <%= current_user.admin ? "Admin" : current_user.super_admin ? "Super Admin" : current_user.club_admin ? "Club Admin" : "Normal User" %></span>
+      <span>Current User is <%= current_user.has_role?(:admin) ? "Admin" : current_user.has_role?(:super_admin) ? "Super Admin" : current_user.has_role?(:club_admin) ? "Club Admin" : "Normal User" %></span>
       <%= link_to 'Make Me ADMIN', admin_event_configurations_path, :method => :post %>
       <%= link_to 'Make Me SUPER ADMIN', super_admin_event_configurations_path, :method => :post %>
       <%= link_to 'Make Me CLUB ADMIN', club_admin_event_configurations_path, :method => :post %>

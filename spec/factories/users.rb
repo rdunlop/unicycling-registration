@@ -5,14 +5,12 @@ FactoryGirl.define do
     sequence(:email) {|n| "me#{n}@dunlopweb.com" }
     password "something"
     password_confirmation "something"
-    admin false
-    super_admin false
 
     factory :admin_user do
-      admin true
+      after(:create) {|user| user.add_role :admin }
     end
     factory :super_admin_user do
-      super_admin true
+      after(:create) {|user| user.add_role :super_admin }
     end
 
     after(:create) { |user| user.confirm! }

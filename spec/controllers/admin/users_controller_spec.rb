@@ -24,14 +24,14 @@ describe Admin::UsersController do
         put :admin, {:id => @user.to_param}
         response.should redirect_to(admin_users_path)
         @user.reload
-        @user.admin.should == true
+        @user.has_role?(:admin).should == true
       end
       it "can change an admin back to a user" do
         admin = FactoryGirl.create(:admin_user)
         put :admin, {:id => admin.to_param}
         response.should redirect_to(admin_users_path)
         admin.reload
-        admin.admin.should == false
+        admin.has_role?(:admin).should == false
       end
 
       it "is not possible as a normal admin user" do
@@ -42,7 +42,7 @@ describe Admin::UsersController do
         put :admin, {:id => @user.to_param}
         response.should redirect_to(root_path)
         @user.reload
-        @user.admin.should == false
+        @user.has_role?(:admin).should == false
       end
     end
   end
