@@ -1,3 +1,39 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.event_edit td:first-child { 
+  text-align: right; 
+}
+
+.event_edit td:first-child + td {
+  text-align: left;
+}
+
+.event_edit td.center {
+  text-align: center;
+}
+
+.event_edit td {
+padding: 2px 5px
+}
+
+.event_listing td:first-child { 
+  text-align: right; 
+}
+
+.event_listing th:first-child { 
+  text-align: right; 
+}
+
+.event_listing td:first-child + td { 
+  text-align: left; 
+}
+
+.event_listing tr:first-child td {  
+  padding-bottom: 10px;
+}
+
+.event_listing tr:first-child th:first-child { 
+  text-align: center; 
+}

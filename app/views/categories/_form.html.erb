@@ -12,15 +12,21 @@
   <% end %>
 
   <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <br />
-    <%= f.label :position %>
-    <%= f.number_field :position %>
-    <br />
-    <%= f.label :info_url %>
-    <%= f.text_field :info_url %>
-    <br />
-    <%= f.submit %>
+	  <table class="category_form">
+	  <tr>
+		<td><%= f.label :name %></td>
+		<td><%= f.text_field :name %></td>
+	  </tr>
+	  <tr>
+		<td><%= f.label :position %></td>
+		<td><%= f.number_field :position %></td>
+	  </tr>
+	  <tr>
+		<td><%= f.label :info_url %></td>
+		<td><%= f.text_field :info_url %></td>
+	  </tr>
+	  <tr>
+		<td colspan="2" class="center"><%= f.submit %></td>
+	  </table>
   </div>
 <% end %>
