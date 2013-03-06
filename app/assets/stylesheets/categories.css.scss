@@ -13,3 +13,24 @@
 .configuration_new_entry_form {
   clear: both;
 }
+
+.category_form td:first-child { 
+  text-align: right; 
+}
+
+.category_form td:first-child + td {
+  text-align: left;
+}
+
+.category_form td.center {
+  text-align: center;
+}
+
+.category_form td {
+padding:0px;
+}
+
+table.category_form {
+clear:none;
+display:inline-block;
+}

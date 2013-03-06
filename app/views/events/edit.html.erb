@@ -12,49 +12,50 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= @event.name %>
-  </div>
-  <div class="field">
-    <%= f.label :category_id %>
-    <%= f.select :category_id, Category.all.map{|c| [c.name, c.id]} %>
-  </div>
-  <div class="field">
-    <%= f.label :description %> (unused)
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :position %>
-    <%= f.number_field :position %>
-  </div>
-  <h3>Event Choices</h3>
+<table class="event_edit">
+  <tr>
+    <td><h3>Event:</h3></td>
+    <td><h3><%= @event.name %></h3></td>
+  </tr>
+  <tr>
+    <td><%= f.label :category_id %></td>
+    <td><%= f.select :category_id, Category.all.map{|c| [c.name, c.id]} %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :description %> (unused)</td>
+    <td><%= f.text_field :description %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :position %></td>
+    <td><%= f.number_field :position %></td>
+  </tr>
+  <td class="center" colspan="2"><h3>Event Choices</h3></td>
   <%= f.fields_for :event_choices do |ec| %>
-    <div class="field">
-      <%= ec.label :export_name %>
-      <%= ec.text_field :export_name %>
-    </div>
-    <div class="field">
-      <%= ec.label :cell_type %>
-      <%= ec.select :cell_type, ['boolean', 'text', 'multiple'] %>
-    </div>
-    <div class="field">
-      <%= ec.label :multiple_values %>
-      <%= ec.text_field :multiple_values %>
-    </div>
-    <div class="field">
-      <%= ec.label :label %>
-      <%= ec.text_field :label %>
-    </div>
-    <div class="field">
-      <%= ec.label :position %>
-      <%= ec.number_field :position %>
-    </div>
+    <tr>
+      <td><%= ec.label :export_name %></td>
+      <td><%= ec.text_field :export_name %></td>
+    </tr>
+    <tr>
+      <td><%= ec.label :cell_type %></td>
+      <td><%= ec.select :cell_type, ['boolean', 'text', 'multiple'] %></td>
+    </tr>
+    <tr>
+      <td><%= ec.label :multiple_values %></td>
+      <td><%= ec.text_field :multiple_values %></td>
+    </tr>
+    <tr>
+      <td><%= ec.label :label %></td>
+      <td><%= ec.text_field :label %></td>
+    </tr>
+    <tr>
+      <td><%= ec.label :position %></td>
+      <td><%= ec.number_field :position %></td>
+    </tr>
   <% end %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <tr>
+    <td class="center" colspan="2"><%= f.submit %></td>
+  </tr>
 <% end %>
-
+</table>
 <%= link_to 'Show', @event %> |
 <%= link_to 'Back', category_events_path(@event.category) %>

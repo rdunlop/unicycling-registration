@@ -3,10 +3,11 @@
 <h2>Category: <%= @category.to_s %></h2>
 
 <div class="configuration_settings_block">
-  <table>
+  <table class="event_listing">
     <tr>
       <th>Name</th>
       <th>Description</th>
+      <th>Type</th>
       <th>Position</th>
       <th></th>
       <th></th>
@@ -15,8 +16,8 @@
 
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.name %></td>
-        <td><%= event.description %></td>
+        <th><%= event.name %></th>
+        <td colspan="2"><%= event.description %></td>
         <td><%= event.position %></td>
         <td><%= link_to 'Event Choices', event_event_choices_path(event) %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
@@ -24,22 +25,22 @@
       </tr>
       <% event.event_choices.each do |event_choice| %>
         <tr>
-          <th>Event Choice</th>
+          <td>&lfloor;</td>
           <td><%= event_choice.label %></td>
           <td><%= event_choice.cell_type %></td>
           <td><%= event_choice.position %></td>
         </tr>
       <% end %>
+      <tr><td>&nbsp;</td></tr>
     <% end %>
   </table>
 
 </div>
-
 <div class="configuration_preview_block">
   <%= render :partial => "/attending/preview" %>
 </div>
-
 <div class="configuration_new_entry_form">
+<br />
   <h3>New Event</h3>
   <%= render :partial => "form" %>
   <%= link_to 'Back', categories_path %>
