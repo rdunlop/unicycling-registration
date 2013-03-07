@@ -79,7 +79,7 @@ Workspace::Application.routes.draw do
       get :waiver
     end
     resources :registrant_expenses, :only => [:new, :destroy]
-    resources :standard_skill_routines, :only => [:create]
+    resources :standard_skill_routines, :only => [:index, :create]
   end
 
   resources :standard_skill_routines, :only => [:show] do

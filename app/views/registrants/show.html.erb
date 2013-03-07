@@ -29,9 +29,9 @@
     <% end %>
   <% end %>
 </div>
-<% if false and can? :create, StandardSkillRoutineEntry %>
+<% if @registrant.has_standard_skill? %>
   <hr />
-  <%= link_to 'Standard Skill Routine', registrant_standard_skill_routines_path(@registrant), :method => :post %>
+  <%= render :partial => "/standard_skill_routines/routine_links", :locals => {:registrant => @registrant} %>
 <% end %>
 <hr />
 

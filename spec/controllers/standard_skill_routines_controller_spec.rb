@@ -14,7 +14,7 @@ describe StandardSkillRoutinesController do
     {
       }
   end
-  
+
   describe "GET show" do
     it "assigns the requested routine as @standard_skill_routine" do
       routine = FactoryGirl.create(:standard_skill_routine, :registrant => @registrant)

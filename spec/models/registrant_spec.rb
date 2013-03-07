@@ -182,6 +182,24 @@ describe Registrant do
       RegistrantChoice.all.count.should == 0
     end
   end
+  describe "with a standard_skill registrant_choice" do
+    before(:each) do
+      event = FactoryGirl.create(:event)
+      event_choice = event.primary_choice
+      event_choice.label = "Standard Skill"
+      event_choice.save!
+      @rc = FactoryGirl.create(:registrant_choice, :event_choice => event_choice, :registrant => @reg, :value => "1")
+      @reg.reload
+    end
+    it "should list as having standard skill" do
+      @reg.has_standard_skill?.should == true
+    end
+    it "should not list if not selected" do
+      @rc.value = "0"
+      @rc.save!
+      @reg.has_standard_skill?.should == false
+    end
+  end
 
   describe "with a registration_period" do
     before(:each) do

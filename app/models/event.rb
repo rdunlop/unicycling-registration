@@ -22,6 +22,11 @@ class Event < ActiveRecord::Base
     primary_choice.label
   end
 
+  # does this entry represent the Standard Skill event?
+  def standard_skill?
+    name == "Standard Skill"
+  end
+
   def to_s
     name
   end

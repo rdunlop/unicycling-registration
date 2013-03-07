@@ -119,6 +119,15 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def has_standard_skill?
+    registrant_choices.each do |rc|
+      if rc.event_choice.event.standard_skill?
+        return rc.has_value?
+      end
+    end
+    false
+  end
+
   def name
     self.first_name + " " + self.last_name
   end

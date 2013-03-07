@@ -17,6 +17,13 @@ describe Event do
     @ev.to_s.should == @ev.name
   end
 
+  it "describes itself as StandardSkill if named so" do
+    @ev.standard_skill?.should == false
+    choice = @ev.primary_choice
+    choice.label = "Standard Skill"
+    choice.save
+    @ev.standard_skill?.should == true
+  end
 
   it "has many even_choices" do
     @ec = FactoryGirl.create(:event_choice, :event => @ev)
