@@ -2,7 +2,8 @@ TO DO (MUST be done BEFORE LIVE):
  - Remove club_admin column (using rolify now)
  - Create ability to invite people for clubs admin
  - Restrict permsissions of "admin" user to ????
- - Add ability for admin user to see payments
+ - Add tests for the club-admin (or whatever it becomes) flows
+ - Add ability for admin user to see/create new payments (but not delete?)
  - Link from Registration to StandardSkillRoutine entry form, only for those with Standard Skill Event selected?
  - Add tests which ensure that the layout/application is working correctly (was broken when not signed in)
 

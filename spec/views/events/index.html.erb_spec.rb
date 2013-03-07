@@ -14,8 +14,10 @@ describe "events/index" do
   it "renders a list of events" do
     render
     assert_select "h2", :text => "Category: " + @category.to_s
-    # This is the same label 4x, because 2 for the event names, and  2 for the event_choice names
-    assert_select "tr>td", :text => @ev1.to_s, :count => 4
+    # This is the same label 2x, because 2 for the event names,
+    assert_select "tr>th", :text => @ev1.to_s, :count => 2
+    # and  2 for the event_choice names
+    assert_select "tr>td", :text => @ev1.to_s, :count => 2
   end
 
   it "renders new event form" do
