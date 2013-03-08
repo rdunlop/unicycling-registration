@@ -26,4 +26,10 @@ class Notifications < ActionMailer::Base
 
     mail to: payment.user.email, bcc: ENV['PAYMENT_NOTICE_EMAIL']
   end
+
+  def send_feedback(feedback)
+    @feedback = feedback
+
+    mail to: ENV['ERROR_EMAIL'], subject: 'Feedback'
+  end
 end

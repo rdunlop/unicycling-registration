@@ -107,6 +107,7 @@ Workspace::Application.routes.draw do
   end
 
   get "welcome/help"
+  post "welcome/feedback"
   get "welcome/confirm"
 
   devise_for :users, :controllers => { :registrations => "registrations" }

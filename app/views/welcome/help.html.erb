@@ -15,4 +15,11 @@
   </ul>
 </div>
 
-If you have any problems or questions about registration, please contact <%= EventConfiguration.contact_email %>
+If you have any problems or questions about registration, please contact <%= EventConfiguration.contact_email %><br /><br /> or submit feedback:<br />
+
+<h4>Feedback</h4>
+<%= form_tag welcome_feedback_path do %>
+  <%= text_area_tag "feedback", nil, {:cols => 100, :rows => 6 } %><br />
+  <%= submit_tag "Send Feedback", :class => "focus_button" %>
+<% end %>
+ 

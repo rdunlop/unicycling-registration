@@ -123,7 +123,7 @@ On Non-GMail systems, you may need to set the MAIL_TLS=false variable too (see i
 The following e-mail will receive a CC of every payment confirmation sent
 PAYMENT_NOTICE_EMAIL=robin+nauccpayments@dunlopweb.com
 
-The following e-mail will receive all error messages and other low-level messages
+The following e-mail will receive all error messages, "feedback", and other low-level messages
 ERROR_EMAIL=robin+nauccerrors@dunlopweb.com
 
 
