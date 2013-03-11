@@ -19,3 +19,9 @@ $(document).ready(function() {
     $("." + $(this).data("banner-class")).remove();
   });
 });
+
+$(document).ready(function () {
+	$("input[type='submit']").click(function() {
+	   $(this).prop("disabled", true);
+	});
+});
