@@ -22,11 +22,22 @@ calculateTotal = ->
       total_cents += parseInt(el.data("cents"));
   return (total_cents / 100).toFixed(2);
 
+payment_submit_text = null
+
 $(document).on "change", ".anon", ->
   el = $(this);
   del = findDeleteCheck(el);
   del.prop('checked', !el.prop('checked'));
   $("#total_field").html(calculateTotal());
+  #/ change and disable payment button if no payment items are selected
+  if calculateTotal() is "0.00"
+    $("form").click ->
+      $("#payment_submit", this)[0].disabled = true
+      $("#payment_submit", this)[0].value = "Select an item..."
+  else
+    $("form").click ->
+      $("#payment_submit", this)[0].disabled = false
+      $("#payment_submit", this)[0].value = payment_submit_text
 
 $(document).on "click", "#unselect_all", ->
     select_all(false);
@@ -42,6 +53,13 @@ select_all = (check_on) ->
   return false
 
 $(document).ready ->
+  payment_submit_text = $("#payment_submit")[0].value
   #/ calculate initially
   $("#total_field").html(calculateTotal());
+  #/ change and disable payment button if no payment items exist
+  all_values = $("input[data-cents]");
+  if all_values.length is 0
+    $("form").ready ->
+      $("#payment_submit", this)[0].disabled = true
+      $("#payment_submit", this)[0].value = "No items..."
 
