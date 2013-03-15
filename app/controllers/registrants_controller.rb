@@ -179,9 +179,8 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to registrants_url, notice: 'Registrant deleted' }
         format.json { head :no_content }
       else
-        load_for_index
-        format.html { render action: "index" }
-        format.json { rendor json: @registrants }
+        format.html { render action: "edit" }
+        format.json { rendor json: @registrant }
       end
     end
   end
