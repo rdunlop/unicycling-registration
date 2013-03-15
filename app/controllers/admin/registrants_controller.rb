@@ -4,11 +4,11 @@ class Admin::RegistrantsController < Admin::BaseController
   skip_authorization_check :only => [:undelete]
 
   def index
-    @registrants = Registrant.full_list
+    @registrants = Registrant.unscoped.all
   end
 
   def undelete
-    @registrant = Registrant.full_list.find(params[:id])
+    @registrant = Registrant.unscoped.find(params[:id])
     @registrant.deleted = false
 
     respond_to do |format|
@@ -16,7 +16,7 @@ class Admin::RegistrantsController < Admin::BaseController
         format.html { redirect_to admin_registrants_path, notice: 'Registrant was successfully undeleted.' }
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
-        @registrants = Registrant.full_list
+        @registrants = Registrant.unscoped
         format.html { render action: "index" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end

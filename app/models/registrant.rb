@@ -48,7 +48,6 @@ class Registrant < ActiveRecord::Base
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
 
   default_scope where(:deleted => false)
-  scope :full_list, where({:deleted => [true, false]}) # this un-does the deleted scope
 
   has_many :payment_details, :include => :payment
 
