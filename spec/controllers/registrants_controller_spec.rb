@@ -418,6 +418,19 @@ describe RegistrantsController do
         response.should redirect_to(root_path)
       end
     end
+
+    describe "when the registrant has an associated payment" do
+      before(:each) do
+        @registrant = FactoryGirl.create(:competitor, :user => @user)
+        @payment_details = FactoryGirl.create(:payment_detail, :registrant => @registrant)
+      end
+
+      it "should not be able to delete the registrant" do
+        delete :destroy, {:id => @registrant.to_param}
+        @registrant.reload
+        @registrant.deleted.should == false
+      end
+    end
   end
 
 end

@@ -26,6 +26,7 @@ class Registrant < ActiveRecord::Base
   validates :emergency_primary_phone, :presence => true
   validates :responsible_adult_name, :presence => true, :if => :minor?
   validates :responsible_adult_phone, :presence => true, :if => :minor?
+  validate :no_payments_when_deleted
 
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
@@ -68,6 +69,12 @@ class Registrant < ActiveRecord::Base
     if gender.blank?
       errors[:gender_male] = "" # Cause the label to be highlighted
       errors[:gender_female] = "" # Cause the label to be highlighted
+    end
+  end
+
+  def no_payments_when_deleted
+    if self.payment_details.count > 0 and self.deleted
+      errors[:base] << "Cannot delete a registration which has payments (started or completed)"
     end
   end
 
