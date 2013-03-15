@@ -21,7 +21,8 @@ $(document).ready(function() {
 });
 
 $(document).ready(function () {
-	$("input[type='submit']").click(function() {
-	   $(this).prop("disabled", true);
+	$('form').submit(function() {
+		$("input[type='submit']", this).attr("disabled", "disabled");
+		$("input[type='submit']", this).val("Please wait...");
 	});
 });
