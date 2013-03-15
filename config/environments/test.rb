@@ -42,5 +42,7 @@ Workspace::Application.configure do
 
   ENV['DOMAIN'] = 'localhost'
 
+  ENV['MAIL_FULL_EMAIL'] = "from@example.com"
   ENV['PAYPAL_ACCOUNT'] = "ROBIN+merchant@dunlopweb.com"
+  ENV['SECRET'] = "somesecretstringisreallylongenoughtobesecurecheckpassing"
 end

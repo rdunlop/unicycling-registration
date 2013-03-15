@@ -16,6 +16,13 @@
   <div class="data_block">
     <%= f.hidden_field :competitor %>
     <h2><%= @registrant.competitor ? "Competitor" : "Non-Competitor" %></h2>
+    <% unless @registrant.new_record? %>
+      <div class="delete_link">
+        <% if can? :delete, @registrant %>
+          <%= link_to 'Delete', registrant_path(@registrant), :confirm => "Are you sure you want to delete this registration", :method => :delete %>
+        <% end %>
+      </div>
+    <% end %>
     <div class="required">Required fields</div>
     <fieldset class="data_block">
       <legend>Base Details</legend>

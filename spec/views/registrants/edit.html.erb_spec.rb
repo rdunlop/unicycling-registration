@@ -18,6 +18,9 @@ describe "registrants/edit" do
       :email => "MyString"
     ))
     @categories = [FactoryGirl.create(:category)]
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    controller.stub(:current_ability) { @ability }
   end
 
   it "renders the edit registrant form" do

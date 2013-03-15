@@ -9,6 +9,9 @@ describe "registrants/new" do
                                               :end_date => Date.new(2012, 02, 11),
                                               :competitor_expense_item => @comp_exp,
                                               :noncompetitor_expense_item => @noncomp_exp)
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    controller.stub(:current_ability) { @ability }
   end
   describe "Competitor" do
     before(:each) do

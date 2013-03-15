@@ -395,6 +395,13 @@ describe RegistrantsController do
       }.to change(Registrant, :count).by(-1)
     end
 
+    it "sets the registrant as 'deleted'" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      delete :destroy, {:id => registrant.to_param}
+      registrant.reload
+      registrant.deleted.should == true
+    end
+
     it "redirects to the registrants list" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       delete :destroy, {:id => registrant.to_param}
@@ -409,6 +416,19 @@ describe RegistrantsController do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         delete :destroy, {:id => registrant.to_param}
         response.should redirect_to(root_path)
+      end
+    end
+
+    describe "when the registrant has an associated payment" do
+      before(:each) do
+        @registrant = FactoryGirl.create(:competitor, :user => @user)
+        @payment_details = FactoryGirl.create(:payment_detail, :registrant => @registrant)
+      end
+
+      it "should not be able to delete the registrant" do
+        delete :destroy, {:id => @registrant.to_param}
+        @registrant.reload
+        @registrant.deleted.should == false
       end
     end
   end

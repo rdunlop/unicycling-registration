@@ -28,7 +28,7 @@ class Ability
         can :read, Payment, :user_id => user.id
 
         unless EventConfiguration.closed?
-          can [:update, :items, :update_items], Registrant, :user_id => user.id
+          can [:update, :items, :update_items, :delete], Registrant, :user_id => user.id
           can :create, Registrant # necessary because we set the user in the controller?
           can :new_noncompetitor, Registrant # necessary because we set the user in the controller?
           can [:new, :create], Payment
