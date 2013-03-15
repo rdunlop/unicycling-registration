@@ -8,6 +8,7 @@
       <th>Name</th>
       <th>Summary</th>
       <th>Edit</th>
+      <th>Deleted?</th>
       <th>User</th>
     </tr>
   </thead>
@@ -17,6 +18,11 @@
       <td><%= registrant %></td>
       <td><%= link_to "Summary", registrant_path(registrant) %></td>
       <td><%= link_to "Edit", edit_registrant_path(registrant) %></td>
+      <td>
+        <% if registrant.deleted %>
+          <%= link_to 'Undelete', undelete_admin_registrant_path(registrant), :method => :post %>
+        <% end %>
+      </td>
       <td><%= registrant.user %></td>
     </tr>
   <% end %>

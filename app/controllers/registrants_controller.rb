@@ -14,11 +14,15 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  def load_for_index
+    @registrants = current_user.registrants
+    @total_owing = current_user.total_owing
+  end
+
   # GET /registrants
   # GET /registrants.json
   def index
-    @registrants = current_user.registrants
-    @total_owing = current_user.total_owing
+    load_for_index
 
     respond_to do |format|
       format.html # index.html.erb
@@ -168,11 +172,17 @@ class RegistrantsController < ApplicationController
   # DELETE /registrants/1.json
   def destroy
     @registrant = Registrant.find(params[:id])
-    @registrant.destroy
+    @registrant.deleted = true
 
     respond_to do |format|
-      format.html { redirect_to registrants_url }
-      format.json { head :no_content }
+      if @registrant.save
+        format.html { redirect_to registrants_url, notice: 'Registrant deleted' }
+        format.json { head :no_content }
+      else
+        load_for_index
+        format.html { render action: "index" }
+        format.json { rendor json: @registrants }
+      end
     end
   end
 end

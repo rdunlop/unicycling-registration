@@ -9,6 +9,9 @@ Workspace::Application.routes.draw do
         get :bag_labels
         get :club
       end
+      member do
+        post :undelete
+      end
     end
     resources :payments, :only => [:index]
     resources :events, :only => [:index, :show]

@@ -14,6 +14,11 @@ describe Registrant do
     @reg.valid?.should == false
   end
 
+  it "requires a deleted status" do
+    @reg.deleted = nil
+    @reg.valid?.should == false
+  end
+
   it "must have a valid competitor value" do
     @reg.competitor = nil
     @reg.valid?.should == false
@@ -92,6 +97,11 @@ describe Registrant do
   it "requires emergency_contact primary_phone" do
     @reg.emergency_primary_phone = nil
     @reg.valid?.should == false
+  end
+
+  it "defaults the deleted flag to false" do
+    reg = Registrant.new
+    reg.deleted.should == false
   end
 
   it "has a to_s" do

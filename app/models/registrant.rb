@@ -17,6 +17,7 @@ class Registrant < ActiveRecord::Base
 
   validates :competitor, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
+  validates :deleted, :inclusion => {:in => [true, false] } # because it's a boolean
   validate  :gender_present
 
   # contact-info block
@@ -45,9 +46,18 @@ class Registrant < ActiveRecord::Base
   has_many :expense_items, :through => :registrant_expense_items
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
 
+  default_scope where(:deleted => false)
+  scope :full_list, where({:deleted => [true, false]}) # this un-does the deleted scope
+
   has_many :payment_details, :include => :payment
 
   has_one :standard_skill_routine, :dependent => :destroy
+
+  after_initialize :init
+
+  def init
+    self.deleted = false if self.deleted.nil?
+  end
 
   # for use when assigning competitor IDs
   def external_id

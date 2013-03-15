@@ -48,6 +48,9 @@
                 <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
               <% end %>
               <%= link_to 'See Summary', registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+              <% if can? :delete, registrant %>
+                <%= link_to 'Delete', registrant_path(registrant), :confirm => "Are you sure you want to delete this registration", :method => :delete %>
+              <% end %>
               <%= link_to 'Legal Waiver', waiver_registrant_path(registrant, :format => 'pdf'), {:class => "waiver_link", :target => "_blank" } %>
             </td>
             <td>

@@ -16,4 +16,19 @@ describe Admin::RegistrantsController do
     end
   end
 
+  describe "POST undelete" do
+    it "un-deletes a deleted registration" do
+      registrant = FactoryGirl.create(:competitor, :user => @user, :deleted => true)
+      post :undelete, {:id => registrant.id }
+      registrant.reload
+      registrant.deleted.should == false
+    end
+
+    it "redirects to the index" do
+      registrant = FactoryGirl.create(:competitor, :user => @user, :deleted => true)
+      post :undelete, {:id => registrant.id }
+      response.should redirect_to(admin_registrants_path)
+    end
+  end
+
 end

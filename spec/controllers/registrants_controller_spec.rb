@@ -395,6 +395,13 @@ describe RegistrantsController do
       }.to change(Registrant, :count).by(-1)
     end
 
+    it "sets the registrant as 'deleted'" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      delete :destroy, {:id => registrant.to_param}
+      registrant.reload
+      registrant.deleted.should == true
+    end
+
     it "redirects to the registrants list" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       delete :destroy, {:id => registrant.to_param}

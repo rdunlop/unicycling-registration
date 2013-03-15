@@ -1,9 +1,26 @@
 class Admin::RegistrantsController < Admin::BaseController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:undelete]
+  skip_authorization_check :only => [:undelete]
 
   def index
-    @registrants = Registrant.all
+    @registrants = Registrant.full_list
+  end
+
+  def undelete
+    @registrant = Registrant.full_list.find(params[:id])
+    @registrant.deleted = false
+
+    respond_to do |format|
+      if @registrant.save
+        format.html { redirect_to admin_registrants_path, notice: 'Registrant was successfully undeleted.' }
+        format.json { render json: @registrant, status: :created, location: @registrant }
+      else
+        @registrants = Registrant.full_list
+        format.html { render action: "index" }
+        format.json { render json: @registrant.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def club
