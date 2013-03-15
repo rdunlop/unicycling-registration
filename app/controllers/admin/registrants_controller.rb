@@ -1,14 +1,17 @@
 class Admin::RegistrantsController < Admin::BaseController
   before_filter :authenticate_user!
-  load_and_authorize_resource :except => [:undelete]
-  skip_authorization_check :only => [:undelete]
+  before_filter :find_registrant, :only => [:undelete]
+  load_and_authorize_resource
 
   def index
     @registrants = Registrant.unscoped.all
   end
 
-  def undelete
+  def find_registrant
     @registrant = Registrant.unscoped.find(params[:id])
+  end
+
+  def undelete
     @registrant.deleted = false
 
     respond_to do |format|
