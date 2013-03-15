@@ -19,3 +19,10 @@ $(document).ready(function() {
     $("." + $(this).data("banner-class")).remove();
   });
 });
+
+$(document).ready(function () {
+	$('form').submit(function() {
+		$("input[type='submit']", this).attr("disabled", "disabled");
+		$("input[type='submit']", this).val("Please wait...");
+	});
+});
