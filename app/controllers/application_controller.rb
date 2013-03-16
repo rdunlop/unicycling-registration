@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   check_authorization :unless => :devise_controller?
+  skip_authorization_check :if => :rails_admin_controller?
+
+  def rails_admin_controller?
+    false
+  end
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message

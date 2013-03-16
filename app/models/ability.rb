@@ -5,6 +5,10 @@ class Ability
     if user.nil?
     else
       if user.has_role? :super_admin
+        can :access, :rails_admin
+        can :dashboard
+        can :manage, :all
+
         can :manage, Category
         can :manage, Event
         can :manage, EventChoice

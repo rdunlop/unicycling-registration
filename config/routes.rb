@@ -119,6 +119,8 @@ Workspace::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations" }
 
+  mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
