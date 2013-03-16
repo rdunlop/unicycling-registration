@@ -1,0 +1,27 @@
+<h1>Age Group Types</h1>
+
+<p>An Age Group Type describes how competitors are segregated into different competitor groups</p>
+
+<div>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% @age_group_types.each do |age_group_type| %>
+      <tr>
+        <td><%= age_group_type.name %></td>
+        <td><%= link_to 'Edit', edit_admin_age_group_type_path(age_group_type) %></td>
+        <td><%= link_to 'Destroy', admin_age_group_type_path(age_group_type), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <br />
+
+  <h3>New Category</h3>
+  <%= render 'form' %>
+</div>

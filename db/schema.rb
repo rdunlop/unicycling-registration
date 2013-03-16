@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315005052) do
+ActiveRecord::Schema.define(:version => 20130316191104) do
+
+  create_table "age_group_entries", :force => true do |t|
+    t.integer  "age_group_type_id"
+    t.string   "short_description"
+    t.string   "long_description"
+    t.integer  "start_age"
+    t.integer  "end_age"
+    t.string   "gender"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "age_group_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"

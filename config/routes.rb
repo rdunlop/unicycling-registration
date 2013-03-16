@@ -4,6 +4,10 @@ Workspace::Application.routes.draw do
   #
   #
   namespace :admin do
+    resources :age_group_types, :except => [:show] do
+      #resources :age_group_entries
+    end
+
     resources :registrants, :only => [:index, :show] do
       collection do
         get :bag_labels
