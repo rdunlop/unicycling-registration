@@ -21,8 +21,8 @@ $(document).ready(function() {
 });
 
 $(document).ready(function () {
-	$('form').submit(function() {
-		$("input[type='submit']", this).attr("disabled", "disabled");
-		$("input[type='submit']", this).val("Please wait...");
-	});
+  $('form').submit(function() {
+    $("input[type='submit']", this).attr("disabled", "disabled");
+    $("input[type='submit']", this).val("Please wait...");
+  });
 });
