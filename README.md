@@ -58,9 +58,13 @@ read the instructions for github and heroku.
 * Download the code from github
 * Download the heroku tool
 * Create a new heroku instance
+
     $ heroku create cedar uniregtest
+
 * Upload the code
+
     $ git push heroku master
+
 * Configure the Base Settings for the application (see below)
 * Configure the Event Configuration (offered events/prices) (see below)
 
@@ -93,7 +97,7 @@ Production flag
 
 Setting this flag will remove the "Development Site" banner
 
-    EVELOPMENT_BANNER=false
+    DEVELOPMENT_BANNER=false
 
 Memcache
 --------
@@ -194,7 +198,9 @@ as the expense details for registration.
 
 * Create an account (using the "Sign Up" page)
 * Use the "heroku console" to set this user as "super_admin: true"
+
      u = User.find(1); u.add_role :super_admin;
+
 * Log into the site
  * Create an "Event Configuration" with your basic details, which includes the
    Name of the competition as well as logo and URL links to supporting
@@ -268,8 +274,11 @@ Each of the settings in the "Base Settings" section above will need to be
 configured. Some of these settings should be configured differently:
 
     PAYPAL_TEST=true
+
  * causes the paypal "sandbox" to be the destination for payments
+
     DOMAIN=localhost:9292
+
  * causes "Confirmation" e-mails to have links which you can click on which will
    validate your e-mail address.
 
@@ -301,6 +310,7 @@ To Stop the server
 ------------------
 
 * Press Ctrl-C on the Server console
+
     exit
     vagrant halt
 
@@ -331,13 +341,17 @@ To Run the test suite
 In order to create a database backup from heroku for use on your development
 system (if so desired):
 * Install the pgbackups addon (so that you can take backups/dumps)
+
     $ heroku addons:add pgbackups
 
 * Create a snapshot
+
     $ heroku pgbackups:capture --expire
 
 * Download the backup
+
     $ curl -o latest.dump `heroku pgbackups:url`
 
 * Import the data (from inside your VM)
+
     $ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_development latest.dump
