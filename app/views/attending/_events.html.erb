@@ -8,18 +8,7 @@
       <% end %>
     </ul>
 
-    <% @categories.each_index do |index|
-      category = @categories[index]
-      if index == 0
-        prev_category = nil
-      else
-        prev_category = @categories[index - 1]
-      end
-      if index >= @categories.length
-        next_category = nil
-      else
-        next_category = @categories[index + 1]
-      end %>
+    <% @categories.each do |category| %>
       <div id="tabs-<%= category.id %>">
         <% unless category.info_url.nil? %>
           <div class="event_link">
