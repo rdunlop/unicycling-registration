@@ -7,4 +7,8 @@ class AgeGroupEntry < ActiveRecord::Base
   validates :short_description, :presence => true
   validates :gender, :inclusion => {:in => %w(Male Female Mixed), :message => "%{value} must be either 'Male', 'Female' or 'Mixed'"}
 
+
+  def to_s
+    short_description
+  end
 end

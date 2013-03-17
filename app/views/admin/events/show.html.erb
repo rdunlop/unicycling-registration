@@ -1,28 +1,57 @@
 <h1><%= @event %> Report</h1>
 
-<table>
-  <caption>Event-Competitor-Breakdown</caption>
-  <thead>
-    <th>Name</th>
-    <th>Country</th>
-    <% @event.event_choices.each do |choice| %>
-      <% next unless choice.position > 1 %>
-      <th><%= choice.label %></th>
-    <% end %>
-  </thead>
-  <tbody>
-    <% @event.primary_choice.registrant_choices.each do |reg_choice| %>
-      <% next unless reg_choice.value == "1"  %>
+<% if @event.event_categories.count == 1 %>
+  <% agt = @event.event_categories.first.age_group_type %>
+  <table>
+    <caption><%= agt %> Competitors</caption>
+    <thead>
       <tr>
-        <td><%= reg_choice.registrant %></td>
-        <td><%= reg_choice.registrant.country %></td>
-        <% @event.event_choices.each do |choice| %>
-          <% choice.registrant_choices.where({:registrant_id => reg_choice.registrant.id}).each do |reg| %>
-            <% next unless reg.event_choice.position > 1 %>
-            <td><%= reg.value %></td>
-          <% end %>
-        <% end %>
+        <th>Name</th>
+        <th>Id</th>
+        <th>Age Group</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Country</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @event.primary_choice.registrant_choices.each do |reg_choice| %>
+        <% next unless reg_choice.value == "1" %>
+        <tr>
+          <td><%= reg_choice.registrant %></td>
+          <td><%= reg_choice.registrant.external_id %></td>
+          <td><%= agt.age_group_entry_for(reg_choice.registrant.age, reg_choice.registrant.gender) %></td>
+          <td><%= reg_choice.registrant.age %></td>
+          <td><%= reg_choice.registrant.country %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <table>
+    <caption>NO-CATEGORY Event-Competitor-Breakdown</caption>
+    <thead>
+      <th>Name</th>
+      <th>Country</th>
+      <% @event.event_choices.each do |choice| %>
+        <% next unless choice.position > 1 %>
+        <th><%= choice.label %></th>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @event.primary_choice.registrant_choices.each do |reg_choice| %>
+        <% next unless reg_choice.value == "1"  %>
+        <tr>
+          <td><%= reg_choice.registrant %></td>
+          <td><%= reg_choice.registrant.country %></td>
+          <% @event.event_choices.each do |choice| %>
+            <% choice.registrant_choices.where({:registrant_id => reg_choice.registrant.id}).each do |reg| %>
+              <% next unless reg.event_choice.position > 1 %>
+              <td><%= reg.value %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
