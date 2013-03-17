@@ -29,7 +29,7 @@
   </div>
   <div class="field">
     <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
+    <%= f.select :gender, ['Male', 'Female', 'Mixed'] %>
   </div>
   <div class="actions">
     <%= f.submit %>
