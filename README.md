@@ -58,9 +58,9 @@ read the instructions for github and heroku.
 * Download the code from github
 * Download the heroku tool
 * Create a new heroku instance
- * `$ heroku create cedar uniregtest`
+    $ heroku create cedar uniregtest
 * Upload the code
- * `$ git push heroku master`
+    $ git push heroku master
 * Configure the Base Settings for the application (see below)
 * Configure the Event Configuration (offered events/prices) (see below)
 
@@ -73,7 +73,7 @@ be changed by any users of the system (neither normal users, nor admins).
 These settings are base settings such as security keys (secret hash), usernames/passwords for
 e-mail system integration, and paypal account details.
 
-`heroku config:add <variable>=<value>`
+    heroku config:add <variable>=<value>
 
 Eventually, these may be replaced using thor:
 http://blog.leshill.org/blog/2010/11/02/heroku-environment-variables.html
@@ -84,7 +84,7 @@ Secret Hash
 
 The 'Secret' key is required in order to generate secure cookies. With this in place, users can return to the site and have their accounts still logged in (this is a good thing).
 
-* `SECRET=<run rake secret on the command line>'
+    SECRET=<run rake secret on the command line>
 
 (I use 'rake secret' (from my development environment) to generate a random secure value. I only run it once, and it should be a different value for each of your system). If you don't have a development environment, type approximately a  hundred numbers as your "SECRET"
 
@@ -93,14 +93,14 @@ Production flag
 
 Setting this flag will remove the "Development Site" banner
 
-* `DEVELOPMENT_BANNER=false`
+    EVELOPMENT_BANNER=false
 
 Memcache
 --------
 
 When deploying, please install a memcache client on your heroku instance:
 
- `$ heroku addons:add memcache`
+    $ heroku addons:add memcache
 
 Email System integration
 ------------------------
@@ -111,27 +111,27 @@ The following is used to configure the outgoing e-mail system.
 Specify a real email account, with username and password.
 The "Full E-mail" will be the e-mail address in the "From" line.
 
-* `MAIL_SERVER=smtp.gmail.com`
-* `MAIL_PORT=587`
-* `MAIL_DOMAIN=dunlopweb.com`
-* `MAIL_USERNAME=robin@dunlopweb.com`
-* `MAIL_PASSWORD=something`
-* `MAIL_FULL_EMAIL=robin@dunlopweb.com`
+    MAIL_SERVER=smtp.gmail.com
+    MAIL_PORT=587
+    MAIL_DOMAIN=dunlopweb.com
+    MAIL_USERNAME=robin@dunlopweb.com
+    MAIL_PASSWORD=something
+    MAIL_FULL_EMAIL=robin@dunlopweb.com
 
 On Non-GMail systems, you may need to set the MAIL_TLS=false variable too (see initializers/mailer.rb)
 
 The following e-mail will receive a CC of every payment confirmation sent
 
-* `PAYMENT_NOTICE_EMAIL=robin+nauccpayments@dunlopweb.com`
+    PAYMENT_NOTICE_EMAIL=robin+nauccpayments@dunlopweb.com
 
 The following e-mail will receive all error messages, "feedback", and other low-level messages
 
-* `ERROR_EMAIL=robin+nauccerrors@dunlopweb.com`
+    ERROR_EMAIL=robin+nauccerrors@dunlopweb.com
 
 
 The DOMAIN setting is used to build the links in the e-mails, set it to the hostname of the deployed application
 
-* `DOMAIN=uniregtest.herokuapp.com`
+    DOMAIN=uniregtest.herokuapp.com
 
 If you want to host your system from a different URL (search heroku
 documentation for details), you should set the DOMAIN to the URL that you will be using.
@@ -142,11 +142,11 @@ Paypal Account
 
 Specify the paypal account "Merchant Account" that will be paid.
 
-* `PAYPAL_ACCOUNT=robin@dunlopweb.com`
+    PAYPAL_ACCOUNT=robin@dunlopweb.com
 
 Specify whether to use the LIVE or TEST PAYPAL Site (default: Test)
 
-* `PAYPAL_TEST=false`
+    PAYPAL_TEST=false
 
 
 Paypal Settings required for proper integration:
@@ -173,7 +173,7 @@ Mixpanel is a service for tracking the way that users interact with the site.
 Adding a mixpanel token enables us to track the flow of users. This setting is
 optional.
 
-* `MIXPANEL_TOKEN=<token>`
+    MIXPANEL_TOKEN=<token>
 
 
 Seed Data
@@ -182,7 +182,7 @@ Seed Data
 There are a number of tables which have non-user-editable data in them (such as
 StandardSkillEntry). In order to initially populate these, please run db:seed
 
- `$ rake db:seed`
+    $ rake db:seed
 
 
 Event Configuration
@@ -194,7 +194,7 @@ as the expense details for registration.
 
 * Create an account (using the "Sign Up" page)
 * Use the "heroku console" to set this user as "super_admin: true"
- * `u = User.find(1); u.add_role :super_admin;`
+     u = User.find(1); u.add_role :super_admin;
 * Log into the site
  * Create an "Event Configuration" with your basic details, which includes the
    Name of the competition as well as logo and URL links to supporting
@@ -236,10 +236,10 @@ Getting Started with Development
 Set your local git credentials
 ------------------------------
 
-* `$ cd ~/unicycling-registration/ (Or wherever the working directory is)`
+    $ cd ~/unicycling-registration/ (Or wherever the working directory is)
 
-* `$ git config --local user.name "Robin Dunlop" (Enter YOUR name instead)`
-* `$ git config --local user.email robin@dunlopweb.com (Enter YOUR email instead)`
+    $ git config --local user.name "Robin Dunlop" (Enter YOUR name instead)
+    $ git config --local user.email robin@dunlopweb.com (Enter YOUR email instead)
 
 Install the required software
 -----------------------------
@@ -250,9 +250,9 @@ Install the required software
 Start the Development Environment
 =================================
 
-* `cd vagrant_postgres91_utf8_rails`
-* `vagrant up (this will also create the databases, and run the bundler)`
-* `vagrant ssh`
+    cd vagrant_postgres91_utf8_rails
+    vagrant up (this will also create the databases, and run the bundler)
+    vagrant ssh
 
 Start the local server
 ----------------------
@@ -260,16 +260,16 @@ Start the local server
 (inside the VM) Create a local .env file. This file will contain all of the base
 settings, as well as some others that need to be configured properly:
 
-* `cd workspace`
-* `$ echo "PORT=9292" > .env`
-* `$ echo "RACK_ENV=development" >> .env`
+    cd workspace
+    $ echo "PORT=9292" > .env
+    $ echo "RACK_ENV=development" >> .env
 
 Each of the settings in the "Base Settings" section above will need to be
 configured. Some of these settings should be configured differently:
 
-* `PAYPAL_TEST=true`
+    PAYPAL_TEST=true
  * causes the paypal "sandbox" to be the destination for payments
-* `DOMAIN=localhost:9292`
+    DOMAIN=localhost:9292
  * causes "Confirmation" e-mails to have links which you can click on which will
    validate your e-mail address.
 
@@ -285,7 +285,7 @@ instances:
 
 Start the server:
 
-* `$ foreman start` (this will not return)
+    $ foreman start (this will not return)
 
 SERVER RUNNING
 --------------
@@ -301,8 +301,8 @@ To Stop the server
 ------------------
 
 * Press Ctrl-C on the Server console
-* `exit`
-* `vagrant halt`
+    exit
+    vagrant halt
 
 
 If making changes to the logic
@@ -314,30 +314,30 @@ This step is necessary if you make changes to the db schema in development, or i
 
 (inside the VM)
 
-* `cd workspace`
-* `rake db:migrate`
-* `RAILS_ENV=test rake db:migrate`
+    cd workspace
+    rake db:migrate
+    RAILS_ENV=test rake db:migrate
 
 To Run the test suite
 ---------------------
 
 (inside the VM)
 
-* `cd workspace`
-* `rspec spec`
+    cd workspace
+    rspec spec
 
 
 
 In order to create a database backup from heroku for use on your development
 system (if so desired):
-*. Install the pgbackups addon (so that you can take backups/dumps)
-   `$ heroku addons:add pgbackups `
+* Install the pgbackups addon (so that you can take backups/dumps)
+    $ heroku addons:add pgbackups
 
 * Create a snapshot
-  `$ heroku pgbackups:capture --expire`
+    $ heroku pgbackups:capture --expire
 
 * Download the backup
-  `$ curl -o latest.dump `heroku pgbackups:url`
+    $ curl -o latest.dump `heroku pgbackups:url`
 
-* `Import the data (from inside your VM)`
-  `$ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_development latest.dump`
+* Import the data (from inside your VM)
+    $ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_development latest.dump
