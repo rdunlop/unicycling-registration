@@ -23,7 +23,7 @@ class EventChoice < ActiveRecord::Base
 
   def values
     if cell_type == "category"
-      event.event_categories.map { |ec| ec.name }
+      event.event_categories.map { |ec| [ec.name, ec.id] }
     else
       multiple_values.split(%r{,\s*})
     end

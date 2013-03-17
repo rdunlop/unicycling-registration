@@ -89,7 +89,7 @@ describe EventChoice do
     it "should return the categories in values" do
       @ec.cell_type = "category"
       @ec.save!
-      @ec.values.should == ["ein", "zwei"]
+      @ec.values.should == [["ein", @cat1.id], ["zwei", @cat2.id]]
     end
   end
 

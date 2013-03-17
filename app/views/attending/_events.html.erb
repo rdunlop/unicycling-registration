@@ -64,8 +64,8 @@
                       <%= ec.label :value, choice.label %>
                       <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true} %>
                     <% elsif ec.object.event_choice.cell_type == "category" %>
-                      <%= ec.label :value, choice.label %>
-                      <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true} %>
+                      <%= ec.label :event_category_id, choice.label %>
+                      <%= ec.select :event_category_id, ec.object.event_choice.values, {:include_blank => true} %>
                     <% end %>
                   <% end %>
                 </span>

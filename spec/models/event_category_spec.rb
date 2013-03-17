@@ -22,4 +22,14 @@ describe EventCategory do
     @ec.age_group_type = FactoryGirl.create(:age_group_type)
     @ec.valid?.should == true
   end
+
+  describe "with some registrant_choices" do
+    before(:each) do
+      @rc = FactoryGirl.create(:registrant_choice, :event_choice => FactoryGirl.create(:event_choice, :cell_type => "category"), :event_category => @ec)
+    end
+
+    it "has associated registrant_choices" do
+      @ec.registrant_choices.should == [@rc]
+    end
+  end
 end

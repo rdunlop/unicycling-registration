@@ -111,6 +111,7 @@ class Registrant < ActiveRecord::Base
         event_reg_choices = self.registrant_choices.select{|rc| event.event_choices.include?(rc.event_choice)}
         event_reg_choices.each do |erc|
           erc.errors[:value] = "" # causes the field to be highlighted
+          erc.errors[:event_category_id] = "" # causes the field to be highlighted
         end
         errors[:base] = event.to_s + " choice combination invalid (please fill them all or clear them all)"
       end

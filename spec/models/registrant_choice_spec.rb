@@ -51,18 +51,22 @@ describe RegistrantChoice do
     before(:each) do
       @ec = @rc.event_choice
       @ec.cell_type = "category"
-      # didn't initialize the event_categories
+      @ecat = FactoryGirl.create(:event_category)
+      @rc.event_category = @ecat
       @ec.save!
     end
     it "has_value with a selection" do
-      @rc.value = "hello"
-      @rc.save!
       @rc.has_value?.should == true
     end
-    it "has no value when blank" do
-      @rc.value = ""
-      @rc.save!
+    it "has no value when no_association" do
+      @rc.event_category = nil
       @rc.has_value?.should == false
+    end
+    it "has a event_category" do
+      @rc.event_category.should == @ecat
+    end
+    it "should describe the value by the association" do
+      @rc.describe_value.should == @ecat.to_s
     end
   end
 
