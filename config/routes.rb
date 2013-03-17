@@ -5,8 +5,9 @@ Workspace::Application.routes.draw do
   #
   namespace :admin do
     resources :age_group_types, :except => [:show] do
-      #resources :age_group_entries
+      resources :age_group_entries, :only => [:index, :create]
     end
+    resources :age_group_entries, :except => [:index, :create]
 
     resources :registrants, :only => [:index, :show] do
       collection do

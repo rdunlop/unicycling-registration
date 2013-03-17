@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Short description:</b>
+  <%= @age_group_entry.short_description %>
+</p>
+
+<p>
+  <b>Long description:</b>
+  <%= @age_group_entry.long_description %>
+</p>
+
+<p>
+  <b>Start age:</b>
+  <%= @age_group_entry.start_age %>
+</p>
+
+<p>
+  <b>End age:</b>
+  <%= @age_group_entry.end_age %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @age_group_entry.gender %>
+</p>
+
+
+<%= link_to 'Edit', edit_age_group_entry_path(@age_group_entry) %> |
+<%= link_to 'Back', age_group_entries_path %>

@@ -17,6 +17,7 @@ class AdminAbility
         can :manage, StandardSkillEntry
         can :manage, StandardSkillRoutine
         can :manage, AgeGroupType
+        can :manage, AgeGroupEntry
       end
     end
   end
