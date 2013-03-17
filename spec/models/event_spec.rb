@@ -13,15 +13,19 @@ describe Event do
     @ev.valid?.should == false
   end
 
+  it "requires a name" do
+    @ev.name = nil
+    @ev.valid?.should == false
+  end
+
   it "should have name as to_s" do
     @ev.to_s.should == @ev.name
   end
 
   it "describes itself as StandardSkill if named so" do
     @ev.standard_skill?.should == false
-    choice = @ev.primary_choice
-    choice.label = "Standard Skill"
-    choice.save
+    @ev.name = "Standard Skill"
+    @ev.save!
     @ev.standard_skill?.should == true
   end
 

@@ -49,7 +49,7 @@
                     <% if ec.object.event_choice.cell_type == "boolean" %>
                       <% if primary %>
                         <%= ec.check_box :value, :class => "primary_checkbox" %>
-                        <%= ec.label :value, choice.label, :title => event.description %>
+                        <%= ec.label :value, event.to_s, :title => event.description %>
                       <% else %>
                         <%= ec.check_box :value %>
                         <%= ec.label :value, choice.label %>

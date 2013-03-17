@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :event do
     category # FactoryGirl
+    name "Teh event"
     description "Some Description"
     position 1
   end

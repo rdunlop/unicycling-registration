@@ -31,6 +31,7 @@ describe EventsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
+      name: "Event Name"
     }
   end
 

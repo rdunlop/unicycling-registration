@@ -21,6 +21,10 @@
       <td><%= f.select :category_id, Category.all.map{|c| [c.name, c.id]} %></td>
     </tr>
     <tr>
+      <td><%= f.label :name %></td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
       <td><%= f.label :description %> (unused)</td>
       <td><%= f.text_field :description %></td>
     </tr>

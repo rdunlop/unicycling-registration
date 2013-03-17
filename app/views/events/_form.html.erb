@@ -12,7 +12,8 @@
   <% end %>
 
   <div class="field">
-    The Name will be derived from the first event_choice's label.
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :title => "'Standard Skill' is a special name, it causes a link on the registration form summary" %>
   </div>
   <div class="field">
     <%= f.label :description %> (unused)<br />

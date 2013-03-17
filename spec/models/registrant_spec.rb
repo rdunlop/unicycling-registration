@@ -194,10 +194,8 @@ describe Registrant do
   end
   describe "with a standard_skill registrant_choice" do
     before(:each) do
-      event = FactoryGirl.create(:event)
+      event = FactoryGirl.create(:event, :name => "Standard Skill")
       event_choice = event.primary_choice
-      event_choice.label = "Standard Skill"
-      event_choice.save!
       @rc = FactoryGirl.create(:registrant_choice, :event_choice => event_choice, :registrant => @reg, :value => "1")
       @reg.reload
     end

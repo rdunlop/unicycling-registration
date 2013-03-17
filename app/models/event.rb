@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :category_id, :description, :position, :event_choices_attributes
+  attr_accessible :category_id, :description, :position, :event_choices_attributes, :name
 
   has_many :event_choices, :order => "event_choices.position", :dependent => :destroy
   accepts_nested_attributes_for :event_choices
@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :category
 
+  validates :name, :presence => true
   validates :category_id, :presence => true
 
   before_create :build_associated_event_choice
@@ -18,10 +19,6 @@ class Event < ActiveRecord::Base
 
   def primary_choice
     event_choices.where({:position => 1}).first
-  end
-
-  def name
-    primary_choice.label
   end
 
   # does this entry represent the Standard Skill event?
