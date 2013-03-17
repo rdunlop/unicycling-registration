@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :event_category do
     event # FactoryGirl
+    age_group_type # FactoryGirl
     sequence(:name) {|n| "EventCategory #{n}"}
     position 1
   end

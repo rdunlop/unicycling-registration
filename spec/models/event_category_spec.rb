@@ -17,4 +17,9 @@ describe EventCategory do
   it "has an event" do
     @ec.event.should == @event
   end
+
+  it "can have an age_group_type" do
+    @ec.age_group_type = FactoryGirl.create(:age_group_type)
+    @ec.valid?.should == true
+  end
 end

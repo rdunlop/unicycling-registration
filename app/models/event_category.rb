@@ -1,7 +1,8 @@
 class EventCategory < ActiveRecord::Base
-  attr_accessible :name, :event_id, :position
+  attr_accessible :name, :event_id, :position, :age_group_type_id
 
   belongs_to :event
+  belongs_to :age_group_type
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
   validates :position, :uniqueness => {:scope => [:event_id]}
