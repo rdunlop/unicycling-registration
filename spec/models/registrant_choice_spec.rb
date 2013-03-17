@@ -47,6 +47,25 @@ describe RegistrantChoice do
       @rc.has_value?.should == false
     end
   end
+  describe "when a category input has a value" do
+    before(:each) do
+      @ec = @rc.event_choice
+      @ec.cell_type = "category"
+      # didn't initialize the event_categories
+      @ec.save!
+    end
+    it "has_value with a selection" do
+      @rc.value = "hello"
+      @rc.save!
+      @rc.has_value?.should == true
+    end
+    it "has no value when blank" do
+      @rc.value = ""
+      @rc.save!
+      @rc.has_value?.should == false
+    end
+  end
+
   describe "when a text input has a value" do
     before(:each) do
       @ec = @rc.event_choice

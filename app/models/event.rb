@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
   has_many :event_choices, :order => "event_choices.position", :dependent => :destroy
   accepts_nested_attributes_for :event_choices
 
+  has_many :event_categories, :dependent => :destroy, :order => "position"
+
   belongs_to :category
 
   validates :category_id, :presence => true

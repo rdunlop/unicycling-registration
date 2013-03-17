@@ -25,7 +25,7 @@ describe Event do
     @ev.standard_skill?.should == true
   end
 
-  it "has many even_choices" do
+  it "has many event_choices" do
     @ec = FactoryGirl.create(:event_choice, :event => @ev)
     @ev.event_choices = [@ec]
   end
@@ -50,6 +50,13 @@ describe Event do
     @choice.position.should == 1
     @choice.export_name.should == "new_event_yn"
   end
+
+  it "has many event_categories" do
+    @ecat1 = FactoryGirl.create(:event_category, :event => @ev, :position => 1)
+    @ecat2 = FactoryGirl.create(:event_category, :event => @ev, :name => "Other", :position => 2)
+    @ev.event_categories.should == [@ecat1, @ecat2]
+  end
+
   it "has a primary_choice" do
     @ev.primary_choice.should == @ev.event_choices.first
   end

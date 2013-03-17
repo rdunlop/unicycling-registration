@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :cell_type %><br />
-    <%= f.select :cell_type, ['boolean', 'text', 'multiple'] %>
+    <%= f.select :cell_type, ['boolean', 'text', 'multiple', 'category'], {},{:title => "'Category' uses the event_categories defined on the associated Event for the possible values."} %>
   </div>
   <div class="field">
     <%= f.label :multiple_values %><br />
-    <%= f.text_field :multiple_values %>
+    <%= f.text_field :multiple_values, :title => "Only used with the 'multiple' option" %><br />
   </div>
   <div class="field">
     <%= f.label :label %><br />

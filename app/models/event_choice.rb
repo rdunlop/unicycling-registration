@@ -6,7 +6,7 @@ class EventChoice < ActiveRecord::Base
 
   validates :label, {:presence => true}
   validates :export_name, {:presence => true, :uniqueness => true}
-  validates :cell_type, :inclusion => {:in => %w(boolean text multiple), :message => "%{value} must be either 'boolean' or 'text' or 'multiple' or '...'"}
+  validates :cell_type, :inclusion => {:in => %w(boolean text multiple category), :message => "%{value} must be either 'boolean' or 'text', 'multiple' or 'category'"}
   validate :position_1_must_be_boolean
   validates :position, :uniqueness => {:scope => [:event_id]}
   validates :autocomplete, :inclusion => {:in => [true, false] } # because it's a boolean
@@ -22,7 +22,11 @@ class EventChoice < ActiveRecord::Base
   end
 
   def values
-    multiple_values.split(%r{,\s*})
+    if cell_type == "category"
+      event.event_categories.map { |ec| ec.name }
+    else
+      multiple_values.split(%r{,\s*})
+    end
   end
 
   def position_1_must_be_boolean

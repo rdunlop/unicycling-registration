@@ -47,6 +47,11 @@ describe EventChoice do
     @ec.valid?.should == true
   end
 
+  it "can have a cell_type of 'category'" do
+    @ec.cell_type = "category"
+    @ec.valid?.should == true
+  end
+
   it "cannot have an arbitrary cell_type" do
     @ec.cell_type = "robin"
     @ec.valid?.should == false
@@ -73,6 +78,18 @@ describe EventChoice do
     it "can parse 2 values" do
       @ec.multiple_values = "one, two"
       @ec.values.should == ["one", "two"]
+    end
+  end
+
+  describe "when parsing the category's values" do
+    before(:each) do
+      @cat2 = FactoryGirl.create(:event_category, :event => @event, :name => "zwei", :position => 2)
+      @cat1 = FactoryGirl.create(:event_category, :event => @event, :name => "ein", :position => 1)
+    end
+    it "should return the categories in values" do
+      @ec.cell_type = "category"
+      @ec.save!
+      @ec.values.should == ["ein", "zwei"]
     end
   end
 

@@ -14,6 +14,8 @@ class RegistrantChoice < ActiveRecord::Base
       return self.value != "0"
     elsif event_choice.cell_type == "multiple"
       return self.value != ""
+    elsif event_choice.cell_type == "category"
+      return self.value != ""
     elsif event_choice.cell_type == "text"
       return self.value != ""
     else
