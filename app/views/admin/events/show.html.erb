@@ -2,31 +2,17 @@
 
 <% if @event.event_categories.count == 1 %>
   <% agt = @event.event_categories.first.age_group_type %>
-  <table>
-    <caption><%= agt %> Competitors</caption>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Id</th>
-        <th>Age Group</th>
-        <th>Gender</th>
-        <th>Age</th>
-        <th>Country</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @event.primary_choice.registrant_choices.each do |reg_choice| %>
-        <% next unless reg_choice.value == "1" %>
-        <tr>
-          <td><%= reg_choice.registrant %></td>
-          <td><%= reg_choice.registrant.external_id %></td>
-          <td><%= agt.age_group_entry_for(reg_choice.registrant.age, reg_choice.registrant.gender) %></td>
-          <td><%= reg_choice.registrant.age %></td>
-          <td><%= reg_choice.registrant.country %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render :partial => "display_category", :locals => {
+    :age_group_type => agt, 
+    :event_category => @event.event_categories.first,
+    :registrant_choices => @event.primary_choice.registrant_choices} %>
+<% elsif @event.event_categories.count > 1 %>
+  <% @event.event_categories.each do |ecat| %>
+    <%= render :partial => "display_category", :locals => {
+      :age_group_type => ecat.age_group_type, 
+      :event_category => ecat,
+      :registrant_choices => ecat.registrant_choices } %>
+  <% end %>
 <% else %>
   <table>
     <caption>NO-CATEGORY Event-Competitor-Breakdown</caption>
