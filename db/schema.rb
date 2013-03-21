@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130317225834) do
+ActiveRecord::Schema.define(:version => 20130320035053) do
 
   create_table "age_group_entries", :force => true do |t|
     t.integer  "age_group_type_id"
@@ -151,9 +151,17 @@ ActiveRecord::Schema.define(:version => 20130317225834) do
     t.integer  "registrant_id"
     t.integer  "event_choice_id"
     t.string   "value"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "registrant_event_sign_ups", :force => true do |t|
+    t.integer  "registrant_id"
+    t.boolean  "signed_up"
+    t.integer  "event_category_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.integer  "event_category_id"
+    t.integer  "event_id"
   end
 
   create_table "registrant_expense_items", :force => true do |t|

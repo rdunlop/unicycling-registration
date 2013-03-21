@@ -36,6 +36,11 @@ class Registrant < ActiveRecord::Base
   attr_accessible :registrant_choices_attributes
   has_many :registrant_choices, :dependent => :destroy, :inverse_of => :registrant
   accepts_nested_attributes_for :registrant_choices
+
+  attr_accessible :registrant_event_sign_ups_attributes
+  has_many :registrant_event_sign_ups, :dependent => :destroy , :inverse_of => :registrant
+  accepts_nested_attributes_for :registrant_event_sign_ups
+
   validate :choices_are_all_set_or_none_set
 
   has_many :event_choices, :through => :registrant_choices
@@ -81,22 +86,23 @@ class Registrant < ActiveRecord::Base
     # for each event that we have choices made
      # determine if we have values for ALL or NONE of the choices for that event
     # loop
-    events_to_validate = self.registrant_choices.map{|rc| rc.event_choice}.map{|ec| ec.event}.uniq
+    sign_up_events = self.registrant_event_sign_ups.map{|resu| resu.event}
+    choice_events = self.registrant_choices.map{|rc| rc.event_choice}.map{|ec| ec.event}
 
-    events_to_validate.each do |event|
+    events_to_validate = sign_up_events + choice_events
+
+    events_to_validate.uniq.each do |event|
       count_not_selected = 0
       count_selected = 0
 
-      primary_choice_selected = self.registrant_choices.select{|rc| rc.event_choice_id == event.primary_choice.id }.first
-      if primary_choice_selected.nil? or not primary_choice_selected.has_value?
+      primary_choice_selected = self.registrant_event_sign_ups.select {|resu| resu.event_id == event.id}.first
+      if primary_choice_selected.nil? or not primary_choice_selected.signed_up
         event_selected = false
       else
         event_selected = true
       end
 
       event.event_choices.each do |event_choice|
-        next if event_choice == event.primary_choice
-
         # using .select instead of .where, because we need to validate not-yet-saved data
         reg_choice = self.registrant_choices.select{|rc| rc.event_choice_id == event_choice.id}.first
         if reg_choice.nil? or not reg_choice.has_value?
@@ -113,7 +119,10 @@ class Registrant < ActiveRecord::Base
           erc.errors[:value] = "" # causes the field to be highlighted
           erc.errors[:event_category_id] = "" # causes the field to be highlighted
         end
-        errors[:base] = event.to_s + " choice combination invalid (please fill them all or clear them all)"
+        unless primary_choice_selected.nil?
+          primary_choice_selected.errors[:signed_up] = "" # the primary checkbox
+        end
+        errors[:base] << event.to_s + " choice combination invalid (please fill them all or clear them all)"
       end
     end
     true
@@ -137,9 +146,10 @@ class Registrant < ActiveRecord::Base
   end
 
   def has_standard_skill?
-    registrant_choices.each do |rc|
-      if rc.event_choice.event.standard_skill?
-        return rc.has_value?
+    registrant_event_sign_ups.each do |rc|
+      next if rc.event_category.nil?
+      if rc.event_category.event.standard_skill?
+        return rc.signed_up
       end
     end
     false
@@ -262,28 +272,22 @@ class Registrant < ActiveRecord::Base
 
   # does this registrant have this event checked off?
   def has_event?(event)
-    enablement_choice = event.primary_choice
-    if enablement_choice.nil?
-      false
-    else
-      my_val = self.registrant_choices.where({:event_choice_id => enablement_choice.id}).first
-      if my_val.nil?
-        false
-      else
-        my_val.value == "1"
-      end
-    end
+    self.registrant_event_sign_ups.where({:event_id => event.id, :signed_up => true}).any?
   end
 
   def describe_event(event)
     description = event.name
 
+    resu = registrant_event_sign_ups.where({:event_id => event.id, :signed_up => true}).first
+    # only add the Category if there are more than 1
+    if event.event_categories.count > 1
+      description += " - Category: " + resu.event_category.to_s unless resu.nil?
+    end
+
     event.event_choices.each do |ec|
-      if ec.position != 1
-        my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
-        unless my_val.nil?
-          description += " - " + ec.label + ": " + my_val.describe_value
-        end
+      my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
+      unless my_val.nil?
+        description += " - " + ec.label + ": " + my_val.describe_value
       end
     end
     description

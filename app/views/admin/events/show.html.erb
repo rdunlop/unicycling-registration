@@ -1,43 +1,8 @@
 <h1><%= @event %> Report</h1>
 
-<% if @event.event_categories.count == 1 %>
-  <% agt = @event.event_categories.first.age_group_type %>
+<% @event.event_categories.each do |ecat| %>
   <%= render :partial => "display_category", :locals => {
-    :age_group_type => agt, 
-    :event_category => @event.event_categories.first,
-    :registrant_choices => @event.primary_choice.registrant_choices} %>
-<% elsif @event.event_categories.count > 1 %>
-  <% @event.event_categories.each do |ecat| %>
-    <%= render :partial => "display_category", :locals => {
-      :age_group_type => ecat.age_group_type, 
-      :event_category => ecat,
-      :registrant_choices => ecat.registrant_choices } %>
+    :age_group_type => ecat.age_group_type, 
+    :event_category => ecat,
+    :registrant_event_sign_ups => ecat.registrant_event_sign_ups } %>
   <% end %>
-<% else %>
-  <table>
-    <caption>NO-CATEGORY Event-Competitor-Breakdown</caption>
-    <thead>
-      <th>Name</th>
-      <th>Country</th>
-      <% @event.event_choices.each do |choice| %>
-        <% next unless choice.position > 1 %>
-        <th><%= choice.label %></th>
-      <% end %>
-    </thead>
-    <tbody>
-      <% @event.primary_choice.registrant_choices.each do |reg_choice| %>
-        <% next unless reg_choice.value == "1"  %>
-        <tr>
-          <td><%= reg_choice.registrant %></td>
-          <td><%= reg_choice.registrant.country %></td>
-          <% @event.event_choices.each do |choice| %>
-            <% choice.registrant_choices.where({:registrant_id => reg_choice.registrant.id}).each do |reg| %>
-              <% next unless reg.event_choice.position > 1 %>
-              <td><%= reg.value %></td>
-            <% end %>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>

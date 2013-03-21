@@ -6,6 +6,12 @@ module ApplicationHelper
         new_cc.event_choice_id = ec.id
       end
     end
+    Event.all.each do |ev|
+      if registrant.registrant_event_sign_ups.select { |resu| resu.event_id == ev.id}.empty?
+        new_resu = registrant.registrant_event_sign_ups.build
+        new_resu.event = ev
+      end
+    end
     registrant
   end
 

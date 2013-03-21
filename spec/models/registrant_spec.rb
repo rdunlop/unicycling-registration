@@ -114,6 +114,11 @@ describe Registrant do
     @reg.registrant_choices.should == [@ec]
   end
 
+  it "has registrant_event_sign_ups" do
+    @resu = FactoryGirl.create(:registrant_event_sign_up, :registrant => @reg)
+    @reg.reload
+    @reg.registrant_event_sign_ups.should == [@resu]
+  end
 
   it "has a name field" do
     @reg.name.should == @reg.first_name + " " + @reg.last_name
@@ -195,15 +200,15 @@ describe Registrant do
   describe "with a standard_skill registrant_choice" do
     before(:each) do
       event = FactoryGirl.create(:event, :name => "Standard Skill")
-      event_choice = event.primary_choice
-      @rc = FactoryGirl.create(:registrant_choice, :event_choice => event_choice, :registrant => @reg, :value => "1")
+      event_category = event.event_categories.first
+      @rc = FactoryGirl.create(:registrant_event_sign_up, :event => event, :event_category => event_category, :registrant => @reg, :signed_up => true)
       @reg.reload
     end
     it "should list as having standard skill" do
       @reg.has_standard_skill?.should == true
     end
     it "should not list if not selected" do
-      @rc.value = "0"
+      @rc.signed_up = false
       @rc.save!
       @reg.has_standard_skill?.should == false
     end
@@ -314,8 +319,8 @@ describe Registrant do
   describe "with a boolean choice event" do
     before(:each) do
       @event = FactoryGirl.create(:event)
-      @ec = @event.event_choices.first
-      rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec, :value => "1")
+      @ec = @event.event_categories.first
+      rc = FactoryGirl.create(:registrant_event_sign_up, :registrant => @reg, :event => @event, :event_category => @ec, :signed_up => true)
     end
     it "can determine whether it has the event" do
       @reg.has_event?(@event).should == true
@@ -330,7 +335,7 @@ describe Registrant do
     end
     describe "and a text field" do
       before(:each) do
-        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Team", :position => 2, :cell_type => "text")
+        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Team", :position => 1, :cell_type => "text")
         @rc2 = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec2, :value => "My Team")
       end
       it "can describe the event" do
@@ -339,7 +344,7 @@ describe Registrant do
     end
     describe "and a select field" do
       before(:each) do
-        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Category", :position => 2, :cell_type => "multiple")
+        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Category", :position => 1, :cell_type => "multiple")
         @rc2 = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec2, :value => "Advanced")
       end
       it "can describe the event" do
@@ -355,14 +360,14 @@ describe Registrant do
   describe "with a single event_choices for an event" do
     before(:each) do
       @ev = FactoryGirl.create(:event)
-      @ec1 = @ev.primary_choice
+      @ec1 = @ev.event_categories.first
     end
 
     it "is valid without having selection" do
       @reg.valid?.should == true
     end
     it "is valid when having checked off this event" do
-      FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "1", :registrant => @reg)
+      FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
       @reg.valid?.should == true
     end
     describe "with a second (boolean) event_choice for an event" do
@@ -370,19 +375,21 @@ describe Registrant do
         @ec2 = FactoryGirl.create(:event_choice, :event => @ev)
       end
       it "should be valid if we only check off the primary_choice" do
-        FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "1", :registrant => @reg)
+        FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
         @reg.reload
         @reg.valid?.should == true
       end
       it "should be valid if we check off both event_choices" do
-        FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "1", :registrant => @reg)
+        @reg.reload
+        @reg.valid?.should == true
+        FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
         FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "1", :registrant => @reg)
         @reg.reload
         @reg.valid?.should == true
       end
       it "should be invalid if we only check off the second_choice" do
         FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "1", :registrant => @reg)
-        FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "0", :registrant => @reg)
+        FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => false, :registrant => @reg)
         @reg.reload
         @reg.valid?.should == false
       end
@@ -396,19 +403,19 @@ describe Registrant do
         @ec2 = FactoryGirl.create(:event_choice, :event => @ev, :cell_type => "text")
       end
       it "should be invalid if we only check off the primary_choice" do
-        FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "1", :registrant => @reg)
+        FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
         @reg.reload
         @reg.valid?.should == false
       end
       it "should be valid if we fill in both event_choices" do
-        FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "1", :registrant => @reg)
+        FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
         FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "hello there", :registrant => @reg)
         @reg.reload
         @reg.valid?.should == true
       end
       it "should be invalid if we fill in only the second_choice" do
         FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "goodbye", :registrant => @reg)
-        FactoryGirl.create(:registrant_choice, :event_choice => @ec1, :value => "0", :registrant => @reg)
+        FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => false, :registrant => @reg)
         @reg.reload
         @reg.valid?.should == false
       end

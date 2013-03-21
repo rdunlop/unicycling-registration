@@ -18,11 +18,11 @@ describe Admin::ExportController do
       it "lists the event titles" do
         get :download_events, {:format => 'pdf' }
         data = assigns(:data)
-        data[0].should == ["Registrant Name", "Age", "Gender", @ev.primary_choice.to_s]
+        data[0].should == ["Registrant Name", "Age", "Gender", @ev.event_categories.first.to_s]
       end
       it "lists the each event_choice separately, with event-prefixed" do
         get :download_events, {:format => 'pdf' }
-        ec = EventChoice.all.first
+        ec = EventCategory.all.first
         data = assigns(:data)
         data[0].should == ["Registrant Name", "Age", "Gender", ec.to_s]
       end
@@ -38,12 +38,13 @@ describe Admin::ExportController do
         end
         describe "with a registration choice for the event" do
           before(:each) do
-            @rc = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ev.primary_choice, :value => "1")
+            @ecat = @ev.event_categories.first
+            @rc = FactoryGirl.create(:registrant_event_sign_up, :registrant => @reg, :event_category => @ecat, :event => @ev, :signed_up => true)
           end
           it "has a value in the target column" do
             get :download_events, {:format => 'pdf' }
             data = assigns(:data)
-            data[1][3].should == @rc.describe_value
+            data[1][3].should == true
           end
         end
       end

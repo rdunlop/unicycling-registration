@@ -17,8 +17,6 @@ describe "events/index" do
     # This is the same label 2x, because 2 for the event names,
     assert_select "tr>th", :text => @ev1.to_s, :count => 1
     assert_select "tr>th", :text => @ev2.to_s, :count => 1
-    # and  2 for the event_choice names
-    assert_select "tr>td", :text => @ev1.primary_choice.label, :count => 2
   end
 
   it "renders new event form" do

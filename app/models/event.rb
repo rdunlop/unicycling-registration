@@ -4,21 +4,32 @@ class Event < ActiveRecord::Base
   has_many :event_choices, :order => "event_choices.position", :dependent => :destroy
   accepts_nested_attributes_for :event_choices
 
-  has_many :event_categories, :dependent => :destroy, :order => "position"
+  has_many :event_categories, :dependent => :destroy, :order => "position", :inverse_of => :event
+  accepts_nested_attributes_for :event_categories
+  attr_accessible :event_categories_attributes
 
-  belongs_to :category
+  has_many :registrant_event_sign_ups, :dependent => :destroy, :inverse_of => :event
+
+  belongs_to :category, :inverse_of => :events
 
   validates :name, :presence => true
   validates :category_id, :presence => true
 
-  before_create :build_associated_event_choice
+  before_validation :build_event_category
 
-  def build_associated_event_choice
-    self.event_choices.build({:position => 1, :cell_type => 'boolean', :label => "New Event", :export_name => "new_event_yn" })
+
+  def build_event_category
+    if self.event_categories.empty?
+      self.event_categories.build({:name => "All", :position => 1})
+    end
   end
 
-  def primary_choice
-    event_choices.where({:position => 1}).first
+  validate :has_event_category
+
+  def has_event_category
+    if self.event_categories.empty?
+      errors[:base] << "Must define an event category"
+    end
   end
 
   # does this entry represent the Standard Skill event?
@@ -32,6 +43,6 @@ class Event < ActiveRecord::Base
 
   # determine the number of people who have signed up for this event
   def num_competitors
-    primary_choice.registrant_choices.where({:value => "1"}).count
+    registrant_event_sign_ups.where({:signed_up => true}).count
   end
 end

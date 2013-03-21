@@ -13,7 +13,7 @@ describe EventCategoriesController do
   def valid_attributes
     {
     name: "Unlimited",
-    position: 1,
+    position: 2,
     age_group_type_id: @act.id
     }
   end
@@ -40,7 +40,7 @@ describe EventCategoriesController do
       assigns(:event_categories).should eq(@event.event_categories)
     end
     it "does not show event choices from other events" do
-      event_category = FactoryGirl.create(:event_category)
+      event_category = FactoryGirl.create(:event).event_categories.first
       get :index, {:event_id => @event.id}
       assigns(:event_categories).should eq(@event.event_categories)
     end
@@ -155,14 +155,14 @@ describe EventCategoriesController do
 
   describe "DELETE destroy" do
     it "destroys the requested event_category" do
-      event_category = FactoryGirl.create(:event_category)
+      event_category = FactoryGirl.create(:event_category, :event => @event, :position => 2)
       expect {
         delete :destroy, {:id => event_category.to_param}
       }.to change(EventCategory, :count).by(-1)
     end
 
     it "redirects to the event_categories list" do
-      event_category = FactoryGirl.create(:event_category)
+      event_category = FactoryGirl.create(:event_category, :event => @event, :position => 2)
       event = event_category.event
       delete :destroy, {:id => event_category.to_param}
       response.should redirect_to(event_event_categories_path(event))

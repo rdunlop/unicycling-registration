@@ -12,6 +12,7 @@ class EventsController < ApplicationController
     load_category
     @events = @category.events
     @event = Event.new
+    @event.event_categories.build
 
     respond_to do |format|
       format.html # index.html.erb

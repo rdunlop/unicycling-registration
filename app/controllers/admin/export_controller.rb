@@ -112,12 +112,26 @@ class Admin::ExportController < Admin::BaseController
 
   def download_events
 
+    event_categories = Event.all.flat_map{ |ev| ev.event_categories }
+    event_categories_titles = event_categories.map{|ec| ec.to_s}
+
     event_choices = Event.all.flat_map{ |ev| ev.event_choices }
     event_titles = event_choices.map{|ec| ec.to_s}
-    titles = ["Registrant Name", "Age", "Gender"] + event_titles
+
+    titles = ["Registrant Name", "Age", "Gender"] + event_categories_titles + event_titles
     competitor_data = []
     Registrant.all.each do |reg|
       comp_base = [reg.name, reg.age, reg.gender]
+      reg_sign_up_data = []
+      event_categories.each do |ec|
+        rc = reg.registrant_event_sign_ups.where({:event_category_id => ec.id}).first
+        if rc.nil?
+          reg_sign_up_data += [nil]
+        else
+          reg_sign_up_data += [rc.signed_up]
+        end
+      end
+
       reg_event_data = []
       event_choices.each do |ec|
         rc = reg.registrant_choices.where({:event_choice_id => ec.id}).first
@@ -127,7 +141,7 @@ class Admin::ExportController < Admin::BaseController
           reg_event_data += [rc.describe_value]
         end
       end
-      competitor_data << ([reg.name, reg.age, reg.gender] + reg_event_data)
+      competitor_data << ([reg.name, reg.age, reg.gender] + reg_sign_up_data + reg_event_data)
     end
     @data = [titles] + competitor_data
 

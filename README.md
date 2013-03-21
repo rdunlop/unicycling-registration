@@ -354,4 +354,6 @@ system (if so desired):
 
 * Import the data (from inside your VM)
 
+    $ PGPASSWORD=password dropdb -U postgres -h localhost app_development
+    $ PGPASSWORD=password createdb -U postgres -h localhost app_development
     $ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_development latest.dump

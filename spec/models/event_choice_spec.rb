@@ -47,11 +47,6 @@ describe EventChoice do
     @ec.valid?.should == true
   end
 
-  it "can have a cell_type of 'category'" do
-    @ec.cell_type = "category"
-    @ec.valid?.should == true
-  end
-
   it "cannot have an arbitrary cell_type" do
     @ec.cell_type = "robin"
     @ec.valid?.should == false
@@ -81,18 +76,6 @@ describe EventChoice do
     end
   end
 
-  describe "when parsing the category's values" do
-    before(:each) do
-      @cat2 = FactoryGirl.create(:event_category, :event => @event, :name => "zwei", :position => 2)
-      @cat1 = FactoryGirl.create(:event_category, :event => @event, :name => "ein", :position => 1)
-    end
-    it "should return the categories in values" do
-      @ec.cell_type = "category"
-      @ec.save!
-      @ec.values.should == [["ein", @cat1.id], ["zwei", @cat2.id]]
-    end
-  end
-
   describe "with associated registrant_choice" do
     before(:each) do
       @rc = FactoryGirl.create(:registrant_choice, :event_choice => @ec)
@@ -108,20 +91,9 @@ describe EventChoice do
     end
   end
 
-  it "must be a boolean to be in position 1" do
-    ec = @event.primary_choice
-    ec.cell_type = "boolean"
-    ec.position = 1
-    ec.valid?.should == true
-    ec.cell_type = "multiple"
-    ec.valid?.should == false
-    ec.cell_type = "text"
-    ec.valid?.should == false
-  end
-
   it "cannot have duplicate positions" do
     @ev = FactoryGirl.create(:event)
-    @ec = @ev.event_choices.first
+    FactoryGirl.create(:event_choice, :event => @ev, :position => 1)
     ec2 = FactoryGirl.build(:event_choice, :event => @ev)
     ec2.position = 1
     ec2.valid?.should == false

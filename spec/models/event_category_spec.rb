@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe EventCategory do
   before(:each) do
-    @event = FactoryGirl.create(:event)
-    @ec = FactoryGirl.create(:event_category, :event => @event, :position => 1)
+    @ev = FactoryGirl.create(:event)
+    @ec = @ev.event_categories.first
   end
   it "is valid from FactoryGirl" do
     @ec.valid?.should == true
@@ -15,7 +15,7 @@ describe EventCategory do
   end
 
   it "has an event" do
-    @ec.event.should == @event
+    @ec.event.should == @ev
   end
 
   it "can have an age_group_type" do
@@ -25,11 +25,11 @@ describe EventCategory do
 
   describe "with some registrant_choices" do
     before(:each) do
-      @rc = FactoryGirl.create(:registrant_choice, :event_choice => FactoryGirl.create(:event_choice, :cell_type => "category"), :event_category => @ec)
+      @rc = FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec)
     end
 
-    it "has associated registrant_choices" do
-      @ec.registrant_choices.should == [@rc]
+    it "has associated registrant_event_sign_ups" do
+      @ec.registrant_event_sign_ups.should == [@rc]
     end
   end
 end

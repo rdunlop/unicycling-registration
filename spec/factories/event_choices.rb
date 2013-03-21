@@ -7,7 +7,7 @@ FactoryGirl.define do
     cell_type "boolean"
     multiple_values nil
     label "Event_choice chosen"
-    position 2
+    position 1
     autocomplete false
   end
 end

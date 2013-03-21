@@ -7,7 +7,13 @@
         <% @registrant.errors.each do |attribute,error_message| %>
           <% next if attribute == :gender_male %>
           <% next if attribute == :gender_female %>
-          <li><%= @registrant.errors.full_message(attribute, error_message )%></li>
+          <% next if "#{attribute}" == "registrant_event_sign_ups.signed_up" %>
+          <% next if "#{attribute}" == "registrant_event_sign_ups.event_category_id" %>
+          <% if "#{attribute}" == "registrant_event_sign_ups.base" %>
+            <li><%= error_message %></li>
+          <% else %>
+            <li><%= @registrant.errors.full_message(attribute, error_message )%></li>
+          <% end %>
       <% end %>
       </ul>
     </div>

@@ -1,4 +1,5 @@
 TO DO (MUST be done BEFORE LIVE):
+ - Add a scope for signed_up registrant_event_sign_ups (to get rid of the "if category is nil"
  - Remove club_admin column (using rolify now)
  - Create ability to invite people for clubs admin
  - Restrict permsissions of "admin" user to ????

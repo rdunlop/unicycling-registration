@@ -23,6 +23,17 @@
     <%= f.label :position %><br />
     <%= f.number_field :position %>
   </div>
+  <h2>Event Categories</h2>
+  <%= f.fields_for :event_categories do |ec| %>
+    <div>
+      <%= ec.label :name %><br />
+      <%= ec.text_field :name %>
+    </div>
+    <div>
+      <%= ec.label :position %><br />
+      <%= ec.number_field :position %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

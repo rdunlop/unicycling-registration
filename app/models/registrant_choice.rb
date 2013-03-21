@@ -1,14 +1,13 @@
 class RegistrantChoice < ActiveRecord::Base
-  attr_accessible :event_choice_id, :registrant_id, :value, :event_category_id
+  attr_accessible :event_choice_id, :registrant_id, :value
 
-  validates :event_choice_id, :presence => true
+  validates :event_choice_id, :presence => true, :uniqueness => {:scope => [:registrant_id]}
   validates :registrant, :presence => true
 
   has_paper_trail :meta => { :registrant_id => :registrant_id }
 
   belongs_to :event_choice
   belongs_to :registrant, :inverse_of => :registrant_choices
-  belongs_to :event_category # for use when event_choice is 'category' type
 
   def has_value?
     if event_choice.cell_type == "boolean"
@@ -27,8 +26,6 @@ class RegistrantChoice < ActiveRecord::Base
   def describe_value
     if event_choice.cell_type == "boolean"
       self.value != "0" ? "yes" : "no"
-    elsif event_choice.cell_type == "category"
-      self.event_category.to_s unless self.event_category.nil?
     else
       self.value
     end

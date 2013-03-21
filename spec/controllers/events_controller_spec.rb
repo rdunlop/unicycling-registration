@@ -84,6 +84,20 @@ describe EventsController do
         post :create, {:event => valid_attributes, :category_id => @category.id}
         response.should redirect_to(category_events_path(@category))
       end
+
+      it "doesn't create a category if one is supplied" do
+        post :create, {
+          :category_id => @category.id,
+          :event => {:name => "Sample Event",
+          :event_categories_attributes => [ 
+            { 
+            :name => "The Categorie", 
+            :position => 1
+        }] }}
+        ev = Event.last
+        ev.event_categories.first.name.should == "The Categorie"
+        ev.event_categories.count.should == 1
+      end
     end
 
     describe "with invalid params" do

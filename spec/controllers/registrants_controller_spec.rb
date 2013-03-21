@@ -303,27 +303,66 @@ describe RegistrantsController do
     end
     describe "When creating nested registrant choices" do
       before(:each) do
-        @reg = FactoryGirl.create(:registrant)
-        @ec1 = FactoryGirl.create(:event_choice)
+        @reg = FactoryGirl.create(:registrant, :user => @user)
+        @ev = FactoryGirl.create(:event)
+        @ec = FactoryGirl.create(:event_choice, :event => @ev)
         @attributes = valid_attributes.merge({
           :competitor => true,
+          :registrant_event_sign_ups_attributes => [
+            { :signed_up => "1",
+              :event_category_id => @ev.event_categories.first.id,
+              :event_id => @ev.id
+            }
+          ],
           :registrant_choices_attributes => [
-            { :value => "0",
-              :event_choice_id => @ec1.id
-        }
-        ]})
+            { :event_choice_id => @ec.id,
+              :value => "1"
+            }
+          ]
+        })
       end
 
       it "creates a corresponding event_choice when checkbox is selected" do
-        post 'create', {:id => @reg, :registrant => @attributes}
-        RegistrantChoice.count.should == 1
+        expect {
+          post 'create', {:id => @reg, :registrant => @attributes}
+        }.to change(RegistrantChoice, :count).by(1)
       end
 
       it "doesn't create a new entry if one already exists" do
         RegistrantChoice.count.should == 0
-        put 'update', {:id => @reg, :registrant => @attributes}
-        put 'create', {:id => @reg, :registrant => @attributes}
+        put :update, {:id => @reg.id, :registrant => @attributes}
         RegistrantChoice.count.should == 1
+      end
+    end
+
+    describe "when creating registrant_event_sign_ups" do
+      before(:each) do
+        @reg = FactoryGirl.create(:registrant)
+        @ecat = FactoryGirl.create(:event).event_categories.first
+        @attributes = valid_attributes.merge({
+          :competitor => true,
+          :registrant_event_sign_ups_attributes => [
+            { :event_category_id => @ecat.id,
+              :event_id => @ecat.event.id,
+              :signed_up => "1"
+        }
+        ]
+        })
+        @new_attributes = valid_attributes.merge({
+          :competitor => true,
+          :registrant_event_sign_ups_attributes => [
+            { :event_category_id => @ecat.id,
+              :event_id => @ecat.event.id,
+              :signed_up => "0"
+        }
+        ]
+        })
+      end
+
+      it "creates corresponding registrant_event_sign_ups" do
+        expect {
+          post 'create', {:id => @reg, :registrant => @attributes}
+        }.to change(RegistrantEventSignUp, :count).by(1)
       end
     end
   end

@@ -20,8 +20,8 @@
         <th><%= event.name %></th>
         <td colspan="2"><%= event.description %></td>
         <td><%= event.position %></td>
-        <td><%= link_to 'Event Choices', event_event_choices_path(event) %></td>
         <td><%= link_to 'Event Categories', event_event_categories_path(event) %></td>
+        <td><%= link_to 'Event Choices', event_event_choices_path(event) %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

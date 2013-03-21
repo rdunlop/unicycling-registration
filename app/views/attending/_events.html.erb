@@ -18,14 +18,33 @@
         <% category.events.each do |event| %>
           <div class="event">
             <div class="event_choices">
+              <span class="event_sign_up event_choice">
+                <%
+                  found_resu = nil
+                  @registrant.registrant_event_sign_ups.each do |resu|
+                    if resu.event_id == event.id
+                      found_resu = resu
+                    end
+                  end
+                %>
+                <%= f.fields_for :registrant_event_sign_ups, found_resu do |resu| %>
+                  <%= resu.hidden_field :event_id %>
+                  <%= resu.check_box :signed_up, :class => "primary_checkbox" %>
+                  <%= resu.label :signed_up, event.to_s, :title => event.description %>
+                  <% if event.event_categories.count == 1 %>
+                    <%= resu.hidden_field :event_category_id, :value => event.event_categories.first.id %>
+                  <% else %>
+                    </span>
+                    <span class="event_choice">
+                    <%= resu.label :event_category_id, 'Category' %>
+                    <%= resu.select :event_category_id, event.event_categories.map{ |ec| [ec.name, ec.id] }, :include_blank => true %>
+                  <% end %>
+                <% end %>
+              </span>
               <% event.event_choices.each do |choice| %>
                 <span class="event_choice">
                   <% 
                     found_rc = nil
-                    primary = false
-                    if event.primary_choice == choice
-                      primary = true
-                    end
 
                     rc = @registrant.registrant_choices.each do |rc|
                     if rc.event_choice_id == choice.id
@@ -36,13 +55,8 @@
                   <%= f.fields_for :registrant_choices, found_rc do |ec| %>
                     <%= ec.hidden_field :event_choice_id %>
                     <% if ec.object.event_choice.cell_type == "boolean" %>
-                      <% if primary %>
-                        <%= ec.check_box :value, :class => "primary_checkbox" %>
-                        <%= ec.label :value, event.to_s, :title => event.description %>
-                      <% else %>
-                        <%= ec.check_box :value %>
-                        <%= ec.label :value, choice.label %>
-                      <% end %>
+                      <%= ec.check_box :value %>
+                      <%= ec.label :value, choice.label %>
                     <% elsif ec.object.event_choice.cell_type == "text" %>
                       <%= ec.label :value, choice.label %>
                       <% if ec.object.event_choice.autocomplete %>
@@ -63,9 +77,6 @@
                     <% elsif ec.object.event_choice.cell_type == "multiple" %>
                       <%= ec.label :value, choice.label %>
                       <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true} %>
-                    <% elsif ec.object.event_choice.cell_type == "category" %>
-                      <%= ec.label :event_category_id, choice.label %>
-                      <%= ec.select :event_category_id, ec.object.event_choice.values, {:include_blank => true} %>
                     <% end %>
                   <% end %>
                 </span>

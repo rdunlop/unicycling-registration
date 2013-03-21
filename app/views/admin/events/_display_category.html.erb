@@ -1,9 +1,9 @@
 <% @age_group_type = age_group_type %>
 <% @event_category = event_category %>
-<% @registrant_choices = registrant_choices %>
+<% @registrant_event_sign_ups = registrant_event_sign_ups.where({:signed_up => true}) %>
 <hr />
 <table>
-  <caption><%= @event_category %> Competitors (<%= @registrant_choices.count %>)</caption>
+  <caption><%= @event_category %> Competitors (<%= @registrant_event_sign_ups.count %>)</caption>
   <thead>
     <tr>
       <th>Name</th>
@@ -15,18 +15,17 @@
     </tr>
   </thead>
   <tbody>
-    <% @registrant_choices.each do |reg_choice| %>
-      <% next unless reg_choice.value == "1" or !reg_choice.event_category.nil? %>
+    <% @registrant_event_sign_ups.each do |resu| %>
       <tr>
-        <td><%= reg_choice.registrant %></td>
-        <td><%= reg_choice.registrant.external_id %></td>
+        <td><%= resu.registrant %></td>
+        <td><%= resu.registrant.external_id %></td>
         <td>
           <% unless @age_group_type.nil? %>
-            <%= @age_group_type.age_group_entry_for(reg_choice.registrant.age, reg_choice.registrant.gender) %>
+            <%= @age_group_type.age_group_entry_for(resu.registrant.age, resu.registrant.gender) %>
           <% end %>
         </td>
-        <td><%= reg_choice.registrant.age %></td>
-        <td><%= reg_choice.registrant.country %></td>
+        <td><%= resu.registrant.age %></td>
+        <td><%= resu.registrant.country %></td>
       </tr>
     <% end %>
   </tbody>
