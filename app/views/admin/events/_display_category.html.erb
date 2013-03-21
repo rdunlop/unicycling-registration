@@ -19,7 +19,7 @@
       <tr>
         <td><%= resu.registrant %></td>
         <td><%= resu.registrant.external_id %></td>
-        <td>
+        <td colspan="2">
           <% unless @age_group_type.nil? %>
             <%= @age_group_type.age_group_entry_for(resu.registrant.age, resu.registrant.gender) %>
           <% end %>
