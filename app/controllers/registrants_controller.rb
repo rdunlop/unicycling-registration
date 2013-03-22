@@ -32,7 +32,7 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/all
   def all
-    @registrants = Registrant.all
+    @registrants = Registrant.order(:id)
   end
 
   # GET /registrants/1/waiver

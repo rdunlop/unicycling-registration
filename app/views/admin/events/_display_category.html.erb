@@ -16,6 +16,7 @@
   </thead>
   <tbody>
     <% @registrant_event_sign_ups.each do |resu| %>
+      <% next if resu.registrant.nil? %>
       <tr>
         <td><%= resu.registrant %></td>
         <td><%= resu.registrant.external_id %></td>
