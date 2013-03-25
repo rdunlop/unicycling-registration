@@ -20,13 +20,18 @@ class RegistrationPeriod < ActiveRecord::Base
   end
 
 
+  # We allow registrations to arrive 1 day _after_ the end date,
+  # to account for timezone differences, and 'last minute' shoppers.
+  def last_day
+    self.end_date + 1.day
+  end
 
   def current_period?(date = Date.today)
-    return (self.start_date < date and date < self.end_date)
+    return (self.start_date <= date and date <= last_day)
   end
 
   def past_period?(date = Date.today)
-    return (self.end_date < date)
+    return (self.last_day < date)
   end
 
   def self.closed_date

@@ -145,6 +145,21 @@ describe Registrant do
     it "lists the item as an owing_expense_item" do
       @reg.owing_expense_items.should == [@item]
     end
+    it "lists no details for its items" do
+      @reg.owing_expense_items_with_details.should == [[@item, nil]]
+    end
+
+    describe "With an expense_item having text details" do
+      before(:each) do
+        @rei.details = "These are some details"
+        @rei.save!
+      end
+
+      it "should transfer the text along" do
+        @reg.owing_expense_items_with_details.should == [[@item, "These are some details"]]
+      end
+    end
+
     describe "having paid for the item once, but still having it as a registrant_expense_item" do
       before(:each) do
         @payment = FactoryGirl.create(:payment, :completed => true)

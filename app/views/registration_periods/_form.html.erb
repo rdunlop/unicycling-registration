@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :start_date %><br />
+    <%= f.label :start_date, :title => "Specify the Date following the previous period's 'End Date'"  %><br />
     <%= f.date_select :start_date %>
   </div>
   <div class="field">
-    <%= f.label :end_date %><br />
+    <%= f.label :end_date, :title => "Specify the last date that these prices apply" %><br />
     <%= f.date_select :end_date %>
   </div>
   <div class="field">
@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :onsite %><br />
-    <%= f.check_box :onsite %>
+    <%= f.check_box :onsite, :title => "This causes the 'Online Registration Closes' banner to be displayed appropriately in the Cost tables" %>
   </div>
   <div class="actions">
     <%= f.submit %>

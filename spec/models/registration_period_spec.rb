@@ -56,6 +56,15 @@ describe RegistrationPeriod do
     it "gets nil for missing section" do
       RegistrationPeriod.relevant_period(Date.new(2010,01,01)).should == nil
     end
+
+    it "returns the first registration period INCLUDING the day AFTER the period ends" do
+      RegistrationPeriod.relevant_period(Date.new(2012,02,03)).should == @rp1
+    end
+
+    it "returns the second registration period +2 days after the first period ends" do
+      RegistrationPeriod.relevant_period(Date.new(2012,02,04)).should == @rp2
+    end
+
     it "disregards onsite registration periods for closed_date" do
       @rp.onsite = true
       @rp.save!

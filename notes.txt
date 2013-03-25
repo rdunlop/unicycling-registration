@@ -1,11 +1,11 @@
 TO DO (MUST be done BEFORE LIVE):
+ - Add in-place eding of tables (like the Registration Periods entries?)
  - Add a scope for signed_up registrant_event_sign_ups (to get rid of the "if category is nil"
  - Remove club_admin column (using rolify now)
  - Create ability to invite people for clubs admin
  - Restrict permsissions of "admin" user to ????
  - Add tests for the club-admin (or whatever it becomes) flows
  - Add ability for admin user to see/create new payments (but not delete?)
- - Link from Registration to StandardSkillRoutine entry form, only for those with Standard Skill Event selected?
  - Add tests which ensure that the layout/application is working correctly (was broken when not signed in)
 
 - mixpanel revenue?
@@ -17,7 +17,6 @@ TO DO (MUST be done BEFORE LIVE):
  - Prevent changing a payment's contents after it is _paid_
  - Make a note that the Name/Country is listed for all registrants to see.
  - Try it with different browsers
- - Can I make the Payment deadline "listed + 1 day"?
 
 TO DO (MUST be done SOON after LIVE (if not before)):
  - Follow hugo's example for configuration blocks.
