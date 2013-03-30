@@ -1,0 +1,33 @@
+<p>
+  <b>Event category:</b>
+  <%= @time_result.event_category_id %>
+</p>
+
+<p>
+  <b>Minutes:</b>
+  <%= @time_result.minutes %>
+</p>
+
+<p>
+  <b>Seconds:</b>
+  <%= @time_result.seconds %>
+</p>
+
+<p>
+  <b>Thousands:</b>
+  <%= @time_result.thousands %>
+</p>
+
+<p>
+  <b>Disqualified:</b>
+  <%= @time_result.disqualified %>
+</p>
+
+<p>
+  <b>Registrant:</b>
+  <%= @time_result.registrant_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_category_time_result_path(@time_result.event_category, @time_result) %> |
+<%= link_to 'Back', event_category_time_results_path(@time_result.event_category) %>

@@ -67,7 +67,10 @@ Workspace::Application.routes.draw do
   resources :registration_periods
 
   resources :event_choices, :except => [:index, :create, :new]
-  resources :event_categories, :except => [:index, :create, :new]
+  resources :event_categories, :except => [:index, :create, :new] do
+    resources :time_results, :only => [:index, :create]
+  end
+  resources :time_results, :except => [:index, :new, :show, :create]
 
   resources :events, :except => [:index, :new, :show, :create] do
     resources :event_choices, :only => [:index, :create]

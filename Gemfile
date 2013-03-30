@@ -24,15 +24,15 @@ gem 'rails_admin'
 gem 'pg'
 
 group :development, :test, :cucumber do
-    gem 'bullet'
-    gem 'brakeman'
-    gem 'factory_girl_rails'
-    gem 'rspec-rails'
-    gem 'capybara'
-    gem 'spork-rails'
-    gem 'syntax'
-    gem 'watchr'
-    gem 'foreman'
+  gem 'bullet'
+  gem 'brakeman'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'spork-rails'
+  gem 'syntax'
+  gem 'watchr'
+  gem 'foreman'
 end
 
 # Gems used only for assets and not required

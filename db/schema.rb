@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320035053) do
+ActiveRecord::Schema.define(:version => 20130330181749) do
 
   create_table "age_group_entries", :force => true do |t|
     t.integer  "age_group_type_id"
@@ -247,6 +247,19 @@ ActiveRecord::Schema.define(:version => 20130320035053) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  create_table "time_results", :force => true do |t|
+    t.integer  "event_category_id"
+    t.integer  "minutes"
+    t.integer  "seconds"
+    t.integer  "thousands"
+    t.boolean  "disqualified"
+    t.integer  "registrant_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "time_results", ["event_category_id"], :name => "index_time_results_on_event_category_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

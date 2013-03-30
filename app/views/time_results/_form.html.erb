@@ -1,0 +1,47 @@
+<%= form_for(@time_result.new_record? ? [@time_result.event_category, @time_result] : [@time_result]) do |f| %>
+  <% if @time_result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@time_result.errors.count, "error") %> prohibited this time_result from being saved:</h2>
+
+      <ul>
+      <% @time_result.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= f.label :registrant_id %></th>
+        <th><%= f.label :minutes %></th>
+        <th><%= f.label :seconds %></th>
+        <th><%= f.label :thousands %></th>
+        <th><%= f.label :disqualified %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= f.number_field :registrant_id, :autofocus => "true" %>
+        </td>
+        <td>
+          <%= f.number_field :minutes %>
+        </td>
+        <td>
+          <%= f.number_field :seconds %>
+        </td>
+        <td>
+          <%= f.number_field :thousands %>
+        </td>
+        <td>
+          <%= f.check_box :disqualified %>
+        </td>
+        <td>
+          <%= f.submit %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

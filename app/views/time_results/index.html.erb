@@ -1,0 +1,42 @@
+<h1>Listing Time Results for <%= @event_category.event %> - <%= @event_category %></h1>
+
+<%= render 'form' %>
+
+<table class="sortable">
+  <thead>
+    <tr>
+      <th colspan="2">Registrant</th>
+      <th colspan="3">Time</th>
+      <td></td>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Minutes</th>
+      <th>Seconds</th>
+      <th>Thousands</th>
+      <th>Disqualified</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @time_results.each do |time_result| %>
+      <tr>
+        <td><%= time_result.registrant_id %></td>
+        <td><%= time_result.registrant %></td>
+        <td><%= time_result.minutes %></td>
+        <td><%= time_result.seconds %></td>
+        <td><%= time_result.thousands %></td>
+        <td><%= time_result.disqualified %></td>
+        <td><%= link_to 'Edit', edit_time_result_path(time_result) %></td>
+        <td><%= link_to 'Destroy', time_result, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
