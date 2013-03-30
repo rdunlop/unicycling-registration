@@ -12,8 +12,15 @@ class TimeResultsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @time_results }
-      format.pdf { render :pdf => "index", 
-                          :layout => "pdf.html", 
+    end
+
+  end
+
+  def results
+    respond_to do |format|
+      format.html # results.html.erb
+      format.pdf { render :pdf => "results",
+                          :layout => "pdf.html",
                           :print_media_type => true,
                           :footer => {:left => '[date] [time]', :center => @config.short_name, :right => '[page] of [topage]'},
                           :page_size => 'Letter',

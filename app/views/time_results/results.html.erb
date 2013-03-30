@@ -1,0 +1,30 @@
+<h1>Time Results for <%= @event_category.event %> - <%= @event_category %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Age Group</th>
+      <th>Place</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @time_results.each do |time_result| %>
+      <tr>
+        <td><%= time_result.full_time %></td>
+        <td><%= time_result.registrant_id %></td>
+        <td><%= time_result.registrant %></td>
+        <td><%= time_result.registrant.gender %></td>
+        <td><%= "XXX" %></td>
+        <td><%= time_result.place %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+

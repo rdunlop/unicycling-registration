@@ -16,4 +16,18 @@ class TimeResult < ActiveRecord::Base
     self.seconds = 0 if self.seconds.nil?
     self.thousands = 0 if self.thousands.nil?
   end
+
+  def full_time
+    hours = minutes / 60
+    if hours > 0
+      remaining_minutes = minutes % 60
+      "#{hours}:#{remaining_minutes.to_s.rjust(2,"0")}:#{seconds.to_s.rjust(2, "0")}:#{thousands.to_s.rjust(3,"0")}"
+    else
+      "#{minutes}:#{seconds.to_s.rjust(2, "0")}:#{thousands.to_s.rjust(3,"0")}"
+    end
+  end
+
+  def place
+    1
+  end
 end
