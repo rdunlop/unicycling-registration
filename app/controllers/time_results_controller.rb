@@ -12,16 +12,12 @@ class TimeResultsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @time_results }
-    end
-  end
-
-  # GET event_categories/1/time_results/1
-  # GET event_categories/1/time_results/1.json
-  def show
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @time_result }
+      format.pdf { render :pdf => "index", 
+                          :layout => "pdf.html", 
+                          :print_media_type => true,
+                          :footer => {:left => '[date] [time]', :center => @config.short_name, :right => '[page] of [topage]'},
+                          :page_size => 'Letter',
+                          :formats => [:html] }
     end
   end
 

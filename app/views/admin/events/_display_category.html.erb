@@ -1,9 +1,7 @@
 <% @age_group_type = age_group_type %>
 <% @event_category = event_category %>
-<% @registrant_event_sign_ups = registrant_event_sign_ups.where({:signed_up => true}) %>
-<hr />
-<table>
-  <caption><%= @event_category %> Competitors (<%= @registrant_event_sign_ups.count %>)</caption>
+<% @registrant_event_sign_ups = registrant_event_sign_ups %>
+<table class="sortable">
   <thead>
     <tr>
       <th>Name</th>
@@ -20,11 +18,12 @@
       <tr>
         <td><%= resu.registrant %></td>
         <td><%= resu.registrant.external_id %></td>
-        <td colspan="2">
+        <td>
           <% unless @age_group_type.nil? %>
             <%= @age_group_type.age_group_entry_for(resu.registrant.age, resu.registrant.gender) %>
           <% end %>
         </td>
+        <td><%= resu.registrant.gender %></td>
         <td><%= resu.registrant.age %></td>
         <td><%= resu.registrant.country %></td>
       </tr>

@@ -9,5 +9,10 @@ class Admin::EventsController < Admin::BaseController
   end
 
   def show
+
+    respond_to do |format|
+      format.html { render action: "show" } #, :layout => nil }
+      format.pdf { render :pdf => "show", :formats => [:html] }
+    end
   end
 end

@@ -1,6 +1,13 @@
 <h1>Listing Time Results for <%= @event_category.event %> - <%= @event_category %></h1>
 
-<%= render 'form' %>
+<style media="print" type="text/css">
+  .non_printable {
+    display: none;
+  }
+</style>
+<div class="non_printable">
+  <%= render 'form' %>
+</div>
 
 <table class="sortable">
   <thead>
@@ -31,8 +38,8 @@
         <td><%= time_result.seconds %></td>
         <td><%= time_result.thousands %></td>
         <td><%= time_result.disqualified %></td>
-        <td><%= link_to 'Edit', edit_time_result_path(time_result) %></td>
-        <td><%= link_to 'Destroy', time_result, :confirm => 'Are you sure?', :method => :delete %></td>
+        <td class="non_printable"><%= link_to 'Edit', edit_time_result_path(time_result) %></td>
+        <td class="non_printable"><%= link_to 'Destroy', time_result, :confirm => 'Are you sure?', :method => :delete %></td>
       </tr>
     <% end %>
   </tbody>
