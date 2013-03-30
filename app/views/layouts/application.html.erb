@@ -66,6 +66,9 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% if can? :manage, Category %>
             <li><%= link_to 'Event Configuration', categories_path %></li>
           <% end %>
+          <% if can? :manage, AgeGroupType %>
+            <li><%= link_to 'Age Group Type', admin_age_group_types_path %></li>
+          <% end %>
           <% if can? :manage, ExpenseGroup %>
             <li><%= link_to 'Expense Groups', expense_groups_path %></li>
           <% end %>
