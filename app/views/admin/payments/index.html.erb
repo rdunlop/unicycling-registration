@@ -1,6 +1,6 @@
 <h1>Listing payments</h1>
 
-<table class="alternate">
+<table>
   <caption>Payments Summary</caption>
   <thead>
     <tr>
@@ -17,7 +17,7 @@
 <hr />
 <h2>Expenses by Group</h2>
 
-<table class="alternate">
+<table class="sortable">
   <thead>
     <tr>
       <th>
@@ -63,32 +63,37 @@
 </table>
 
 <hr />
-<table class="alternate">
-  <tr>
-    <th>User</th>
-    <th>Completed</th>
-    <th>Cancelled</th>
-    <th>Transaction</th>
-    <th>Completed date</th>
-    <th>Payment date</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @payments.each do |payment| %>
-  <tr>
-    <td><%= payment.user %></td>
-    <td><%= payment.completed %></td>
-    <td><%= payment.cancelled %></td>
-    <td><%= payment.transaction_id %></td>
-    <td><%= payment.completed_date %></td>
-    <td><%= payment.payment_date %></td>
-    <td><%= link_to 'Show', payment %></td>
-    <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
-    <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Payment ID</th>
+      <th>User</th>
+      <th>Completed</th>
+      <th>Cancelled</th>
+      <th>Transaction</th>
+      <th>Completed date</th>
+      <th>Payment date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payments.each do |payment| %>
+      <tr>
+        <td><%= payment.id %></td>
+        <td><%= payment.user %></td>
+        <td><%= payment.completed %></td>
+        <td><%= payment.cancelled %></td>
+        <td><%= payment.transaction_id %></td>
+        <td><%= payment.completed_date %></td>
+        <td><%= payment.payment_date %></td>
+        <td><%= link_to 'Show', payment %></td>
+        <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
+        <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </thead>
 </table>
 
 <br />

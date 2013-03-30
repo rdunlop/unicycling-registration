@@ -28,3 +28,20 @@ $(document).ready(function () {
     });
   }
 });
+
+/* Generic sorting dataTable */
+$(document).ready(function() {
+  $(".sortable").each(function() {
+    $(this).dataTable({
+      "bInfo": false,
+      "bPaginate": false
+    });
+  });
+  $("#all_registrants").dataTable({
+    "aoColumnDefs": [
+      {"bVisible": false, "aTargets": [0] }
+    ],
+    "bInfo": false,
+    "bPaginate": false
+  });
+});

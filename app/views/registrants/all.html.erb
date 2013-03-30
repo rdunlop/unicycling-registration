@@ -1,15 +1,17 @@
 <h1>All Registrants</h1>
 
-<table class="alternate">
+<table id="all_registrants">
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
       <th>Country</th>
     </tr>
   </thead>
   <tbody>
-    <% @registrants.each do |registrant| %>
+    <% @registrants.each_with_index do |registrant, index| %>
       <tr>
+        <td><%= index + 1 %></td>
         <td><%= registrant %></td>
         <td><%= registrant.country %></td>
       </tr>

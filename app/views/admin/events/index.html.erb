@@ -1,26 +1,27 @@
 <h1>Events Report</h1>
 
-<table class="alternate">
+<table>
   <caption>Overview</caption>
-  <thead>
+  <tr>
+    <th>Competitors</th>
+    <td><%= @num_competitors %></td>
+  </tr>
+  <tr>
+    <th>Non-Competitors</th>
+    <td><%= @num_non_competitors %></td>
+  </tr>
+  <tr>
+    <th>Total Registrations</th>
+    <td><b><%= @num_registrants %></b></td>
+  </tr>
     <tr>
-      <th>Number of Registrations</th>
-      <th>Competitors</th>
-      <th>Non-Competitors</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @num_registrants %></td>
-      <td><%= @num_competitors %></td>
-      <td><%= @num_non_competitors %></td>
     </tr>
   </tbody>
 </table>
 
 <hr />
 
-<table class="alternate">
+<table class="sortable">
   <caption>Event-Competitor-Breakdown</caption>
   <thead>
     <th>Category</th>
