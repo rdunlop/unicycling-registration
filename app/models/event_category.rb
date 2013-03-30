@@ -12,4 +12,8 @@ class EventCategory < ActiveRecord::Base
   def to_s
     self.name
   end
+
+  def num_competitors
+    registrant_event_sign_ups.count
+  end
 end

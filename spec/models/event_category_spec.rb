@@ -31,5 +31,9 @@ describe EventCategory do
     it "has associated registrant_event_sign_ups" do
       @ec.registrant_event_sign_ups.should == [@rc]
     end
+
+    it "can count the number of signed_up competitors" do
+      @ec.num_competitors.should == 1
+    end
   end
 end

@@ -26,15 +26,19 @@
   <thead>
     <th>Category</th>
     <th>Event Name</th>
-    <th>Number Of competitors</th>
+    <th>Event Category</th>
+    <th>Number Of competitors Signed Up</th>
   </thead>
   <tbody>
     <% @events.each do |event| %>
-      <tr>
-        <td><%= event.category %></td>
-        <td><%= link_to event, admin_event_path(event) %></td>
-        <td><%= event.num_competitors %></td>
-      </tr>
+      <% event.event_categories.each do |ecat| %>
+        <tr>
+          <td><%= event.category %></td>
+          <td><%= link_to event, admin_event_path(event) %></td>
+          <td><%= link_to ecat, event_category_time_results_path(ecat) %></td>
+          <td><%= ecat.num_competitors %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
