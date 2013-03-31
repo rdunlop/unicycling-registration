@@ -1,6 +1,7 @@
 TO DO (MUST be done BEFORE LIVE):
  - Default sort order for AgeGroupEntry.
  - Ability to copy one gender to another gender
+  - Ability to "Create both" at the same time ,instead?
   - Prevent one gender's results from affecting another gender's?
  - Cache the age of the registrant
  - Add in-place eding of tables (like the Registration Periods entries?)
