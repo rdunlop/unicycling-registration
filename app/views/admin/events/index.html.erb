@@ -29,6 +29,7 @@
     <th>Event Category</th>
     <th># Signed Up</th>
     <th>Sign Up List</th>
+    <th>Num Time Results</th>
     <th>Time Results</th>
   </thead>
   <tbody>
@@ -43,6 +44,7 @@
             <%= link_to "HTML", admin_event_path(event) %>
             <%= link_to "PDF", admin_event_path(event, :format => "pdf") %>
           </td>
+          <td><%= ecat.time_results.count %></td>
           <td>
             <%= link_to "Enter Data", event_category_time_results_path(ecat) %>
             <%= link_to "View (HTML)", results_event_category_time_results_path(ecat) %>
