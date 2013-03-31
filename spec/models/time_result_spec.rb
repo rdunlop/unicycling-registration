@@ -100,8 +100,8 @@ describe TimeResult do
     @tr.full_time_in_thousands.should == 62003
   end
 
-  it "by default has zero place" do
-    @tr.place.should == 0
+  it "by default has nil place" do
+    @tr.place.should == nil
   end
 
   it "can store the place" do
