@@ -24,7 +24,7 @@
     <h2><%= @registrant.competitor ? "Competitor" : "Non-Competitor" %></h2>
     <% unless @registrant.new_record? %>
       <div class="delete_link">
-        <% if can? :delete, @registrant %>
+        <% if can? :destroy, @registrant %>
           <%= link_to 'Delete', registrant_path(@registrant), :confirm => "Are you sure you want to delete this registration", :method => :delete %>
         <% end %>
       </div>
