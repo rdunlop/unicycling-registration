@@ -425,7 +425,7 @@ describe RegistrantsController do
 
   describe "DELETE destroy" do
     before(:each) do
-      sign_in FactoryGirl.create(:admin_user)
+      sign_in @user
     end
     it "destroys the requested registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
@@ -451,8 +451,8 @@ describe RegistrantsController do
       before(:each) do
         sign_in @user
       end
-      it "cannot destroy a registrat" do
-        registrant = FactoryGirl.create(:competitor, :user => @user)
+      it "cannot destroy another user's registrant" do
+        registrant = FactoryGirl.create(:competitor)
         delete :destroy, {:id => registrant.to_param}
         response.should redirect_to(root_path)
       end
