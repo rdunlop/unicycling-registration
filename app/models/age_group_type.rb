@@ -11,6 +11,14 @@ class AgeGroupType < ActiveRecord::Base
                             :age => age, :gender => gender).first
   end
 
+  def as_json(options={})
+    options = {
+      :except => [:id, :updated_at, :created_at],
+      :methods => [:age_group_entries]
+    }
+    super(options)
+  end
+
   def to_s
     name
   end

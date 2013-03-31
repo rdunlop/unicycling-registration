@@ -1,7 +1,14 @@
 <h1>Export Menu</h1>
 
 The download/upload system:
+<h2>Age Groups</h2>
+Download: <%= link_to 'Download AgeGroups', admin_export_download_event_configuration_path(:format => :json) %><br /><br />
+Upload: <%= form_for :convert, :url=>admin_export_upload_event_configuration_path do |f| -%>
+  AgeGroup descriptions (JSON): <%= f.text_area :data, {:cols => 100, :rows => 6 } -%><br />
+  <%= f.submit 'Submit' %>
+<% end %>
 
+<hr />
 <b>BE <u>VERY</u> Careful with this system. it DELETES EVERYTHING</b>
 <ul>
   <li>Doesn't include the logo</li>

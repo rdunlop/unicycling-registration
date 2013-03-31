@@ -23,6 +23,12 @@ Workspace::Application.routes.draw do
 
     namespace :export do
       get :index
+
+      # NEW routes
+      get :download_event_configuration
+      post :upload_event_configuration
+
+      # OLD routes
       get :download_data
       get :download_configuration
       post :upload

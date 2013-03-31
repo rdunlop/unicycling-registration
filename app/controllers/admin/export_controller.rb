@@ -5,6 +5,45 @@ class Admin::ExportController < Admin::BaseController
   def index
   end
 
+  def download_event_configuration
+    obj = {}
+    obj["age_group_types"] = AgeGroupType.all
+    respond_to do |format|
+      format.json { render :json => obj }
+    end
+  end
+
+  # POST /admin/export/upload_event_configuration
+  # Receives JSON data in the 'data' field
+  def upload_event_configuration
+    json = JSON.parse(params[:convert][:data])
+
+    updates = ""
+    json["age_group_types"].each do |agt|
+      age_group_type_model = AgeGroupType.find_by_name(agt["name"])
+      if age_group_type_model.nil?
+        values = agt
+        values = values.clone
+        values.delete("age_group_entries")
+        age_group_type_model = AgeGroupType.create(values)
+        updates +=  "created AgeGroupType: #{age_group_type_model}\n"
+      end
+      entries = agt["age_group_entries"]
+      entries.each do |age|
+        age_group_entry_model = age_group_type_model.age_group_entries.find_by_short_description(age["short_description"])
+        if age_group_entry_model.nil?
+          age_group_entry_model = age_group_type_model.age_group_entries.build(age)
+          age_group_entry_model.save!
+          updates += "created AgeGroupEntry: #{age_group_entry_model}\n"
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to admin_export_index_path, :notice => updates }
+    end
+  end
+
   def configuration_data
     # Class                 Delete  SkipValues   SkipCallbacks
     [ [EventConfiguration,  true,   [], []],
