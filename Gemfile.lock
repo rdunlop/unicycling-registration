@@ -109,7 +109,7 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    libv8 (3.3.10.4)
+    libv8 (3.11.8.17)
     libwebsocket (0.1.5)
       addressable
     mail (2.5.3)
@@ -180,6 +180,7 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.4)
     remotipart (1.0.5)
     rolify (3.2.0)
     rspec-core (2.12.2)
@@ -230,8 +231,9 @@ GEM
     syntax (1.0.0)
     temple (0.5.5)
     terminal-table (1.4.5)
-    therubyracer (0.10.2)
-      libv8 (~> 3.3.10)
+    therubyracer (0.11.4)
+      libv8 (~> 3.11.8.12)
+      ref
     thor (0.18.1)
     tilt (1.3.6)
     treetop (1.4.12)
