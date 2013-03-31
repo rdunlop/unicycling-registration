@@ -36,4 +36,14 @@ describe EventCategory do
       @ec.num_competitors.should == 1
     end
   end
+
+  describe "with some time_results" do
+    before(:each) do
+      @tr = FactoryGirl.create(:time_result, :event_category => @ec)
+    end
+
+    it "has associated time_results" do
+      @ec.time_results.should == [@tr]
+    end
+  end
 end

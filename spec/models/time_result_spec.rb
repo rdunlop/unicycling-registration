@@ -93,4 +93,19 @@ describe TimeResult do
     @tr.full_time.should == "1:01:10:123"
   end
 
+  it "can return the full time in thousands" do
+    @tr.minutes = 1
+    @tr.seconds = 2
+    @tr.thousands = 3
+    @tr.full_time_in_thousands.should == 62003
+  end
+
+  it "by default has zero place" do
+    @tr.place.should == 0
+  end
+
+  it "can store the place" do
+    @tr.place = 1
+    @tr.place.should == 1
+  end
 end

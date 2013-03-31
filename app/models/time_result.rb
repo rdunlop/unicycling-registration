@@ -27,7 +27,22 @@ class TimeResult < ActiveRecord::Base
     end
   end
 
+  def full_time_in_thousands
+    (minutes * 60000) + (seconds * 1000) + thousands
+  end
+
+  def place=(place)
+    Rails.cache.write("/time_results/#{id}-#{updated_at}/place", place)
+  end
+
   def place
-    1
+    calc = RaceCalculator.new(event_category)
+    stored_place = Rails.cache.fetch("/time_results/#{id}-#{updated_at}/place")
+    if stored_place.nil?
+      calc.update_places
+      Rails.cache.fetch("/time_results/#{id}-#{updated_at}/place")
+    else
+      stored_place
+    end
   end
 end
