@@ -1,5 +1,5 @@
 class TimeResult < ActiveRecord::Base
-  belongs_to :event_category
+  belongs_to :event_category, :touch => true
   belongs_to :registrant
   attr_accessible :disqualified, :minutes, :registrant_id, :seconds, :thousands, :event_category_id
 
@@ -32,17 +32,22 @@ class TimeResult < ActiveRecord::Base
   end
 
   def place=(place)
-    Rails.cache.write("/time_results/#{id}-#{updated_at}/place", place)
+    Rails.cache.write(place_key, place)
   end
 
   def place
-    calc = RaceCalculator.new(event_category)
-    stored_place = Rails.cache.fetch("/time_results/#{id}-#{updated_at}/place")
+    stored_place = Rails.cache.fetch(place_key)
     if stored_place.nil?
+      calc = RaceCalculator.new(event_category)
       calc.update_places
-      Rails.cache.fetch("/time_results/#{id}-#{updated_at}/place")
+      Rails.cache.fetch(place_key)
     else
       stored_place
     end
+  end
+
+  private
+  def place_key
+    "/event_category/#{event_category.id}-#{event_category.updated_at}/time_results/#{id}-#{updated_at}/place"
   end
 end
