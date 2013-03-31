@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Registrant do
   before(:each) do
-    @reg = FactoryGirl.create(:registrant)
+    @reg = FactoryGirl.create(:competitor)
   end
 
   it "has a valid reg from FactoryGirl" do
@@ -21,6 +21,11 @@ describe Registrant do
 
   it "must have a valid competitor value" do
     @reg.competitor = nil
+    @reg.valid?.should == false
+  end
+
+  it "requires an bib_number" do
+    @reg.bib_number = nil
     @reg.valid?.should == false
   end
 
@@ -106,6 +111,43 @@ describe Registrant do
 
   it "has a to_s" do
     @reg.to_s.should == @reg.first_name + " " + @reg.last_name
+  end
+
+  it "bib_number is set to 1 as a competitor" do
+    @reg.bib_number.should == 1
+  end
+  it "bib_number is set to 2000 as a non-competitor" do
+    @nreg = FactoryGirl.create(:noncompetitor)
+    @nreg.bib_number.should == 2000
+  end
+
+  describe "with a second competitor" do
+    before(:each) do
+      @reg2 = FactoryGirl.create(:competitor)
+    end
+    it "assigns the second competitor bib_number 2" do
+      @reg2.bib_number.should == 2
+    end
+  end
+  describe "with a deleted competitor" do
+    before(:each) do
+      @reg.deleted = true
+      @reg.save!
+    end
+    it "can build a competitor" do
+      @reg2 = FactoryGirl.create(:competitor)
+      @reg2.external_id.should == 2
+    end
+  end
+
+  describe "with a second noncompetitor" do
+    before(:each) do
+      @nreg1 = FactoryGirl.create(:noncompetitor)
+      @nreg2 = FactoryGirl.create(:noncompetitor)
+    end
+    it "assigns the second noncompetitor bib_number 2001" do
+      @nreg2.bib_number.should == 2001
+    end
   end
 
   it "has event_choices" do

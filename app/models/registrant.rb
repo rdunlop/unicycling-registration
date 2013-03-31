@@ -14,6 +14,8 @@ class Registrant < ActiveRecord::Base
   validates :zip, :presence => true
   validates :gender, :presence => true
   validates :user_id, :presence => true
+  before_validation :set_bib_number, :on => :create
+  validates :bib_number, :presence => true
 
   validates :competitor, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
@@ -60,13 +62,32 @@ class Registrant < ActiveRecord::Base
 
   after_initialize :init
 
-  def init
-    self.deleted = false if self.deleted.nil?
+  def set_bib_number
+    if self.bib_number.nil?
+      if self.competitor
+        prev_value = Registrant.unscoped.where({:competitor => true}).maximum("bib_number")
+        if prev_value.nil?
+          self.bib_number = 1
+        else
+          self.bib_number = prev_value + 1
+        end
+      else
+        prev_value = Registrant.unscoped.where({:competitor => false}).maximum("bib_number")
+        if prev_value.nil?
+          self.bib_number = 2000
+        else
+          self.bib_number = prev_value + 1
+        end
+      end
+    end
   end
 
-  # for use when assigning competitor IDs
   def external_id
-    id
+    bib_number
+  end
+
+  def init
+    self.deleted = false if self.deleted.nil?
   end
 
   def gender_present

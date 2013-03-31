@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130330181749) do
+ActiveRecord::Schema.define(:version => 20130331211232) do
 
   create_table "age_group_entries", :force => true do |t|
     t.integer  "age_group_type_id"
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20130330181749) do
     t.string   "city"
     t.string   "zip"
     t.boolean  "deleted"
+    t.integer  "bib_number"
   end
 
   create_table "registration_periods", :force => true do |t|
