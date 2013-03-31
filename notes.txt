@@ -1,4 +1,7 @@
 TO DO (MUST be done BEFORE LIVE):
+ - Default sort order for AgeGroupEntry.
+ - Ability to copy one gender to another gender
+  - Prevent one gender's results from affecting another gender's?
  - Cache the age of the registrant
  - Add in-place eding of tables (like the Registration Periods entries?)
  - Add a scope for signed_up registrant_event_sign_ups (to get rid of the "if category is nil"

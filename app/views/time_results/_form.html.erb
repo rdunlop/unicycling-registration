@@ -24,7 +24,9 @@
     <tbody>
       <tr>
         <td>
-          <%= f.number_field :registrant_id, :autofocus => "true" %>
+          <div class="ui-widget">
+            <%= f.select :registrant_id, Registrant.where({:competitor => true}).all.map {|reg| ["#{reg.external_id}: #{reg.name}", reg.id]}, :include_blank => true %>
+          </div>
         </td>
         <td>
           <%= f.number_field :minutes %>
@@ -44,4 +46,10 @@
       </tr>
     </tbody>
   </table>
+ 
+  <script>
+  $(function() {
+    $( "#time_result_registrant_id" ).combobox();
+  });
+  </script>
 <% end %>
