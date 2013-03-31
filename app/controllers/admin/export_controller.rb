@@ -44,6 +44,47 @@ class Admin::ExportController < Admin::BaseController
     end
   end
 
+  def download_registrants
+    obj = {}
+    obj["registrants"] = Registrant.all
+    respond_to do |format|
+      format.json { render :json => obj }
+    end
+  end
+
+  # POST /admin/export/upload_registrants
+  # Receives JSON data in the 'data' field
+  def upload_registrants
+    json = JSON.parse(params[:convert][:data])
+
+    updates = ""
+    json["registrants"].each do |reg|
+      registrant_model = Registrant.find_by_bib_number(reg["bib_number"])
+      if registrant_model.nil?
+        # determine if we need to create a user object
+        user_model = User.find_by_email(reg["user_email"])
+        if user_model.nil?
+          user_model = User.new({:email => reg["user_email"]})
+          user_model.save(:validate => false)
+        end
+        values = reg
+        values = values.clone
+        values.delete("user_email")
+        bib_number = values["bib_number"]
+        values.delete("bib_number")
+        registrant_model = Registrant.new(values)
+        registrant_model.user = user_model
+        registrant_model.bib_number = bib_number
+        registrant_model.save(:validate => false)
+        updates +=  "created Registrant: #{registrant_model}\n"
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to admin_export_index_path, :notice => updates }
+    end
+  end
+
   def configuration_data
     # Class                 Delete  SkipValues   SkipCallbacks
     [ [EventConfiguration,  true,   [], []],

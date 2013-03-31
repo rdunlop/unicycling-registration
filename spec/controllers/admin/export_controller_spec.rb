@@ -108,6 +108,73 @@ describe Admin::ExportController do
     end
   end
 
+  describe "GET download_registrants" do
+    describe "with no dota" do
+      it "returns no entries for registranst" do
+        get :download_registrants, {:format => 'json' }
+        parsed_body = JSON.parse(response.body)
+        parsed_body.should == { "registrants" => [] }
+      end
+    end
+    describe "with a single registrant and user" do
+      before(:each) do
+        @reg = FactoryGirl.create(:registrant, :birthday => Date.new(1982, 05, 20))
+      end
+      it "returns the single registrant, with associated user email" do
+        get :download_registrants, {:format => 'json' }
+        parsed_body = JSON.parse(response.body)
+        parsed_body.should == {
+          "registrants" => [
+            { "first_name" => @reg.first_name,
+              "last_name" => @reg.last_name,
+              "gender" => @reg.gender,
+              "birthday" => "1982-05-20",
+              "bib_number" => @reg.bib_number,
+              "user_email" => @reg.user.email,
+            }
+          ] }
+      end
+    end
+  end
+
+  describe "POST upload_registrants" do
+    before(:each) do
+      @data = {"registrants" => []}
+    end
+    # set the included data as json
+    let(:submit) { {:convert => {:data => @data.to_json} } }
+
+    describe "with no data" do
+      it "creates no models" do
+        post :upload_registrants, submit
+      end
+    end
+    describe "with a single registrant" do
+      before(:each) do
+        @data["registrants"] = [{"bib_number" => "1", "birthday" => "1982-05-19", "first_name" => "Bob", "last_name" => "Smith", "competitor" => true, "user_email" => "user@email.com"}]
+      end
+      it "creates the registrant" do
+        expect {
+          post :upload_registrants, submit
+        }.to change(Registrant, :count).by(1)
+        flash[:notice].should == "created Registrant: Bob Smith\n"
+        r = Registrant.last
+        r.birthday.should == Date.new(1982, 05, 19)
+        r.first_name.should == "Bob"
+        r.last_name.should == "Smith"
+        r.competitor.should == true
+        r.bib_number.should == 1
+        r.user.email.should == "user@email.com"
+      end
+      it "doesn't create the Registrant if one already exists with that bib_number" do
+        FactoryGirl.create(:registrant, :bib_number => 1)
+        expect {
+          post :upload_registrants, submit
+        }.to change(Registrant, :count).by(0)
+      end
+    end
+  end
+
 
   describe "GET download_events" do
     it "without any events or registrants, only prints the headers" do

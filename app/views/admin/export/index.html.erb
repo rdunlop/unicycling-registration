@@ -8,6 +8,13 @@ Upload: <%= form_for :convert, :url=>admin_export_upload_event_configuration_pat
   <%= f.submit 'Submit' %>
 <% end %>
 
+<h2>Registrants</h2>
+Download: <%= link_to 'Download Registrants', admin_export_download_registrants_path(:format => :json) %><br /><br />
+Upload: <%= form_for :convert, :url=>admin_export_upload_registrants_path do |f| -%>
+  Registrants (JSON): <%= f.text_area :data, {:cols => 100, :rows => 6 } -%><br />
+  <%= f.submit 'Submit' %>
+<% end %>
+
 <hr />
 <b>BE <u>VERY</u> Careful with this system. it DELETES EVERYTHING</b>
 <ul>
