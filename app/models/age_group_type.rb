@@ -1,7 +1,7 @@
 class AgeGroupType < ActiveRecord::Base
   attr_accessible :name, :description
 
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => true
 
   has_many :age_group_entries, :dependent => :destroy
 

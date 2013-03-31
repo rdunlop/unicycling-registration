@@ -33,4 +33,10 @@ describe AgeGroupType do
       @agt.age_group_entry_for(10, "Female").should == @age1
     end
   end
+
+  it "must have a unique name" do
+    agt = FactoryGirl.create(:age_group_type)
+    agt2 = FactoryGirl.build(:age_group_type, :name => agt.name)
+    agt2.valid?.should == false
+  end
 end
