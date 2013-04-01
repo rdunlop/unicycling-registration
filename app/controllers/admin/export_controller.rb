@@ -85,6 +85,40 @@ class Admin::ExportController < Admin::BaseController
     end
   end
 
+  def download_time_results
+    obj = {}
+    event_category = EventCategory.find(params[:event_category_id])
+    obj["time_results"] = event_category.time_results
+    respond_to do |format|
+      format.json { render :json => obj }
+    end
+  end
+
+  # POST /admin/export/upload_time_results
+  # Receives JSON data in the 'data' field
+  def upload_time_results
+    json = JSON.parse(params[:convert][:data])
+    event_category = EventCategory.find(params[:convert][:event_category_id])
+
+    created_records = 0
+    json["time_results"].each do |tr|
+      reg = Registrant.find_by_bib_number(tr["bib_number"])
+      new_tr = TimeResult.new({:registrant_id => reg.id,
+                              :minutes => tr["minutes"],
+                              :seconds => tr["seconds"],
+                              :thousands => tr["thousands"],
+                              :event_category_id => event_category.id,
+                              :disqualified => tr["disqualified"]})
+      new_tr.save
+      created_records += 1
+    end
+
+    respond_to do |format|
+      format.html { redirect_to admin_export_index_path, :notice => "Created #{created_records} records" }
+    end
+  end
+
+
   def configuration_data
     # Class                 Delete  SkipValues   SkipCallbacks
     [ [EventConfiguration,  true,   [], []],

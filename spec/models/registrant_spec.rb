@@ -519,4 +519,16 @@ describe Registrant do
       end
     end
   end
+
+  describe "with a time_result" do
+    before(:each) do
+      @ev = FactoryGirl.create(:event)
+      @ec = @ev.event_categories.first
+    end
+    it "destroys the associated time_results" do
+      @tr = FactoryGirl.create(:time_result, :registrant => @reg, :event_category => @ec)
+      @reg.destroy
+      TimeResult.count.should == 0
+    end
+  end
 end

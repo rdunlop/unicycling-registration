@@ -7,7 +7,7 @@ describe Admin::ExportController do
   end
 
   describe "GET download_event_configuration" do
-    describe "with no dota" do
+    describe "with no data" do
       it "returns no entries for age_group_types" do
         get :download_event_configuration, {:format => 'json' }
         parsed_body = JSON.parse(response.body)
@@ -109,7 +109,7 @@ describe Admin::ExportController do
   end
 
   describe "GET download_registrants" do
-    describe "with no dota" do
+    describe "with no data" do
       it "returns no entries for registranst" do
         get :download_registrants, {:format => 'json' }
         parsed_body = JSON.parse(response.body)
@@ -151,7 +151,7 @@ describe Admin::ExportController do
     end
     describe "with a single registrant" do
       before(:each) do
-        @data["registrants"] = [{"bib_number" => "1", "birthday" => "1982-05-19", "first_name" => "Bob", "last_name" => "Smith", "competitor" => true, "user_email" => "user@email.com"}]
+        @data["registrants"] = [{"bib_number" => 1, "birthday" => "1982-05-19", "first_name" => "Bob", "last_name" => "Smith", "competitor" => true, "user_email" => "user@email.com"}]
       end
       it "creates the registrant" do
         expect {
@@ -175,6 +175,85 @@ describe Admin::ExportController do
     end
   end
 
+  describe "GET download_time_results" do
+    before(:each) do
+      @ev = FactoryGirl.create(:event)
+      @ec = @ev.event_categories.first
+    end
+    describe "with no data" do
+      it "returns no entries for event" do
+        get :download_time_results, {:event_category_id => @ec.id, :format => 'json' }
+        parsed_body = JSON.parse(response.body)
+        parsed_body.should == { "time_results" => [] }
+      end
+    end
+    describe "with a single time_result" do
+      before(:each) do
+        @reg = FactoryGirl.create(:competitor)
+        @tr = FactoryGirl.create(:time_result, :event_category => @ec, :registrant => @reg, :minutes => 45, :seconds => 22, :thousands => 123, :disqualified => false)
+      end
+      it "returns the single time_result" do
+        get :download_time_results, {:event_category_id => @ec.id, :format => 'json' }
+        parsed_body = JSON.parse(response.body)
+        parsed_body.should == {
+          "time_results" => [
+            { "bib_number" => 1,
+              "minutes" => 45,
+              "seconds" => 22,
+              "thousands" => 123,
+              "disqualified" => false
+            }
+          ] }
+      end
+    end
+  end
+
+  describe "POST upload_time_results" do
+    before(:each) do
+      @data = {"time_results" => []}
+      @ev = FactoryGirl.create(:event)
+      @ec = @ev.event_categories.first
+      @reg = FactoryGirl.create(:competitor)
+    end
+    # set the included data as json
+    let(:submit) { {:convert => {:event_category_id => @ec.id, :data => @data.to_json} } }
+
+    describe "with no data" do
+      it "creates no models" do
+        post :upload_time_results, submit
+      end
+    end
+    describe "with a single time_result" do
+      before(:each) do
+        @data["time_results"] = [{ "bib_number" => @reg.bib_number, "minutes" => 45, "seconds" => 22, "thousands" => 123, "disqualified" => false }]
+      end
+      it "creates the time_result" do
+        expect {
+          post :upload_time_results, submit
+        }.to change(TimeResult, :count).by(1)
+        flash[:notice].should == "Created 1 records"
+        r = TimeResult.last
+        r.registrant.bib_number.should == 1
+        r.minutes.should == 45
+        r.seconds.should == 22
+        r.thousands.should == 123
+        r.disqualified.should == false
+      end
+      it "can translate true strings" do
+        @data["time_results"] = [{ "bib_number" => @reg.bib_number, "minutes" => 45, "seconds" => 22, "thousands" => 123, "disqualified" => "true" }]
+        post :upload_time_results, submit
+        r = TimeResult.last
+        r.disqualified.should == true
+      end
+
+      it "can translate false string" do
+        @data["time_results"] = [{ "bib_number" => @reg.bib_number, "minutes" => 45, "seconds" => 22, "thousands" => 123, "disqualified" => "false" }]
+        post :upload_time_results, submit
+        r = TimeResult.last
+        r.disqualified.should == false
+      end
+    end
+  end
 
   describe "GET download_events" do
     it "without any events or registrants, only prints the headers" do

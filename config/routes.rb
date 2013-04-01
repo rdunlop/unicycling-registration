@@ -29,6 +29,8 @@ Workspace::Application.routes.draw do
       post :upload_event_configuration
       get :download_registrants
       post :upload_registrants
+      get :download_time_results
+      post :upload_time_results
 
       # OLD routes
       get :download_data

@@ -58,6 +58,8 @@ class Registrant < ActiveRecord::Base
 
   has_many :payment_details, :include => :payment
 
+  has_many :time_results, :dependent => :destroy
+
   has_one :standard_skill_routine, :dependent => :destroy
 
   after_initialize :init

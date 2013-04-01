@@ -17,6 +17,7 @@ class TimeResultsController < ApplicationController
   end
 
   def results
+    @time_results = @time_results.order("disqualified, minutes, seconds, thousands")
     respond_to do |format|
       format.html # results.html.erb
       format.pdf { render :pdf => "results",
