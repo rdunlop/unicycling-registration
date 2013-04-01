@@ -1,7 +1,7 @@
 class AgeGroupEntry < ActiveRecord::Base
   attr_accessible :age_group_type_id, :end_age, :gender, :long_description, :short_description, :start_age
 
-  belongs_to :age_group_type
+  belongs_to :age_group_type, :touch => true
 
   validates :age_group_type, :presence => true
   validates :short_description, :presence => true

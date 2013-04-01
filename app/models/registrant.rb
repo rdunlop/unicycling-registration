@@ -156,14 +156,16 @@ class Registrant < ActiveRecord::Base
   end
 
   def age
-    start_date = EventConfiguration.start_date
-    if start_date.nil? or self.birthday.nil?
-      99
-    else
-      if (self.birthday.month < start_date.month) or (self.birthday.month == start_date.month and self.birthday.day <= start_date.day)
-        start_date.year - self.birthday.year
+    Rails.cache.fetch("/registrants/#{id}-#{updated_at}/age") do
+      start_date = EventConfiguration.start_date
+      if start_date.nil? or self.birthday.nil?
+        99
       else
-        (start_date.year - 1) - self.birthday.year
+        if (self.birthday.month < start_date.month) or (self.birthday.month == start_date.month and self.birthday.day <= start_date.day)
+          start_date.year - self.birthday.year
+        else
+          (start_date.year - 1) - self.birthday.year
+        end
       end
     end
   end
