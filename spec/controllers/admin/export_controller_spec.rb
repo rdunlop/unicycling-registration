@@ -60,7 +60,7 @@ describe Admin::ExportController do
         expect {
           post :upload_event_configuration, submit
         }.to change(AgeGroupType, :count).by(1)
-        flash[:notice].should == "created AgeGroupType: MyGroup\n"
+        flash[:notice].should == "Created 1 records"
       end
       it "doesn't create the age_group_type if one already exists with that name" do
         FactoryGirl.create(:age_group_type, :name => "MyGroup")
@@ -91,7 +91,7 @@ describe Admin::ExportController do
               post :upload_event_configuration, submit
             }.to change(AgeGroupEntry, :count).by(1)
             @agt.age_group_entries.count.should == 1
-            flash[:notice].should == "created AgeGroupEntry: short\n"
+            flash[:notice].should == "Created 1 records"
           end
         end
         describe "when the age_group_entry exists, for a different age_group_type" do
@@ -157,7 +157,7 @@ describe Admin::ExportController do
         expect {
           post :upload_registrants, submit
         }.to change(Registrant, :count).by(1)
-        flash[:notice].should == "created Registrant: Bob Smith\n"
+        flash[:notice].should == "Created 1 records"
         r = Registrant.last
         r.birthday.should == Date.new(1982, 05, 19)
         r.first_name.should == "Bob"

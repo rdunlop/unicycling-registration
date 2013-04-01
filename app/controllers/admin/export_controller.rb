@@ -18,7 +18,7 @@ class Admin::ExportController < Admin::BaseController
   def upload_event_configuration
     json = JSON.parse(params[:convert][:data])
 
-    updates = ""
+    created_records = 0
     json["age_group_types"].each do |agt|
       age_group_type_model = AgeGroupType.find_by_name(agt["name"])
       if age_group_type_model.nil?
@@ -26,7 +26,7 @@ class Admin::ExportController < Admin::BaseController
         values = values.clone
         values.delete("age_group_entries")
         age_group_type_model = AgeGroupType.create(values)
-        updates +=  "created AgeGroupType: #{age_group_type_model}\n"
+        created_records += 1
       end
       entries = agt["age_group_entries"]
       entries.each do |age|
@@ -34,13 +34,13 @@ class Admin::ExportController < Admin::BaseController
         if age_group_entry_model.nil?
           age_group_entry_model = age_group_type_model.age_group_entries.build(age)
           age_group_entry_model.save!
-          updates += "created AgeGroupEntry: #{age_group_entry_model}\n"
+          created_records += 1
         end
       end
     end
 
     respond_to do |format|
-      format.html { redirect_to admin_export_index_path, :notice => updates }
+      format.html { redirect_to admin_export_index_path, :notice => "Created #{created_records} records" }
     end
   end
 
@@ -57,7 +57,7 @@ class Admin::ExportController < Admin::BaseController
   def upload_registrants
     json = JSON.parse(params[:convert][:data])
 
-    updates = ""
+    created_records = 0
     json["registrants"].each do |reg|
       registrant_model = Registrant.find_by_bib_number(reg["bib_number"])
       if registrant_model.nil?
@@ -76,12 +76,12 @@ class Admin::ExportController < Admin::BaseController
         registrant_model.user = user_model
         registrant_model.bib_number = bib_number
         registrant_model.save(:validate => false)
-        updates +=  "created Registrant: #{registrant_model}\n"
+        created_records += 1
       end
     end
 
     respond_to do |format|
-      format.html { redirect_to admin_export_index_path, :notice => updates }
+      format.html { redirect_to admin_export_index_path, :notice => "Created #{created_records} records" }
     end
   end
 
