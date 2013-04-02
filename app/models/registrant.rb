@@ -14,6 +14,8 @@ class Registrant < ActiveRecord::Base
   validates :zip, :presence => true
   validates :gender, :presence => true
   validates :user_id, :presence => true
+  before_validation :set_bib_number, :on => :create
+  validates :bib_number, :presence => true
 
   validates :competitor, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
@@ -56,17 +58,38 @@ class Registrant < ActiveRecord::Base
 
   has_many :payment_details, :include => :payment
 
+  has_many :time_results, :dependent => :destroy
+
   has_one :standard_skill_routine, :dependent => :destroy
 
   after_initialize :init
 
-  def init
-    self.deleted = false if self.deleted.nil?
+  def set_bib_number
+    if self.bib_number.nil?
+      if self.competitor
+        prev_value = Registrant.unscoped.where({:competitor => true}).maximum("bib_number")
+        if prev_value.nil?
+          self.bib_number = 1
+        else
+          self.bib_number = prev_value + 1
+        end
+      else
+        prev_value = Registrant.unscoped.where({:competitor => false}).maximum("bib_number")
+        if prev_value.nil?
+          self.bib_number = 2000
+        else
+          self.bib_number = prev_value + 1
+        end
+      end
+    end
   end
 
-  # for use when assigning competitor IDs
   def external_id
-    id
+    bib_number
+  end
+
+  def init
+    self.deleted = false if self.deleted.nil?
   end
 
   def gender_present
@@ -133,14 +156,16 @@ class Registrant < ActiveRecord::Base
   end
 
   def age
-    start_date = EventConfiguration.start_date
-    if start_date.nil? or self.birthday.nil?
-      99
-    else
-      if (self.birthday.month < start_date.month) or (self.birthday.month == start_date.month and self.birthday.day <= start_date.day)
-        start_date.year - self.birthday.year
+    Rails.cache.fetch("/registrants/#{id}-#{updated_at}/age") do
+      start_date = EventConfiguration.start_date
+      if start_date.nil? or self.birthday.nil?
+        99
       else
-        (start_date.year - 1) - self.birthday.year
+        if (self.birthday.month < start_date.month) or (self.birthday.month == start_date.month and self.birthday.day <= start_date.day)
+          start_date.year - self.birthday.year
+        else
+          (start_date.year - 1) - self.birthday.year
+        end
       end
     end
   end
@@ -157,6 +182,18 @@ class Registrant < ActiveRecord::Base
 
   def name
     self.first_name + " " + self.last_name
+  end
+
+  def user_email
+    user.email
+  end
+
+  def as_json(options={})
+    options = {
+      :only => [:first_name, :last_name, :gender, :birthday, :bib_number],
+      :methods => [:user_email]
+    }
+    super(options)
   end
 
   def to_s

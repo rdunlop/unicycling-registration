@@ -16,9 +16,8 @@ class RaceCalculator
     count = 1
     previous_time = 0
     tied_place = 0
-    age_group_type = @age_group_entry.age_group_type
 
-    @event_category.time_results.order("minutes, seconds, thousands").each do |tr|
+    @event_category.time_results.includes(:registrant, :event_category).order("minutes, seconds, thousands").each do |tr|
 
       # only perform updates on the specified age group entry set
       next if tr.age_group_entry != @age_group_entry

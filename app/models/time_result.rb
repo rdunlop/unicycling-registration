@@ -17,6 +17,17 @@ class TimeResult < ActiveRecord::Base
     self.thousands = 0 if self.thousands.nil?
   end
 
+  def bib_number
+    registrant.bib_number
+  end
+  def as_json(options={})
+    options = {
+      :except => [:id, :created_at, :updated_at, :registrant_id, :event_category_id],
+      :methods => [:bib_number]
+    }
+    super(options)
+  end
+
   def full_time
     hours = minutes / 60
     if hours > 0

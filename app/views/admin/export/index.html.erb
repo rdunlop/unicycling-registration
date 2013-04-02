@@ -1,7 +1,34 @@
 <h1>Export Menu</h1>
 
 The download/upload system:
+<h2>Age Groups</h2>
+Download: <%= link_to 'Download AgeGroups', admin_export_download_event_configuration_path(:format => :json) %><br /><br />
+Upload: <%= form_for :convert, :url=>admin_export_upload_event_configuration_path do |f| -%>
+  AgeGroup descriptions (JSON): <%= f.text_area :data, {:cols => 100, :rows => 6 } -%><br />
+  <%= f.submit 'Submit' %>
+<% end %>
 
+<h2>Registrants</h2>
+Download: <%= link_to 'Download Registrants', admin_export_download_registrants_path(:format => :json) %><br /><br />
+Upload: <%= form_for :convert, :url=>admin_export_upload_registrants_path do |f| -%>
+  Registrants (JSON): <%= f.text_area :data, {:cols => 100, :rows => 6 } -%><br />
+  <%= f.submit 'Submit' %>
+<% end %>
+
+<h2>Time Data</h2>
+Download:
+<ul>
+  <% EventCategory.all.each do |ec| %>
+    <li><%= link_to "#{ec.event} - #{ec}", admin_export_download_time_results_path(:format => :json, :event_category_id => ec.id) %></li>
+  <% end %>
+</ul>
+Upload: <%= form_for :convert, :url=>admin_export_upload_time_results_path do |f| -%>
+  Event Category: <%= f.select :event_category_id, EventCategory.all.map { |ec| ["#{ec.event} - #{ec}", ec.id] } %><br />
+  Time Results (JSON): <%= f.text_area :data, {:cols => 100, :rows => 6 } -%><br />
+  <%= f.submit 'Submit' %>
+<% end %>
+
+<hr />
 <b>BE <u>VERY</u> Careful with this system. it DELETES EVERYTHING</b>
 <ul>
   <li>Doesn't include the logo</li>
