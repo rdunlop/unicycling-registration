@@ -268,7 +268,8 @@ RailsAdmin.config do |config|
   #     configure :logo_filename, :string 
   #     configure :logo_type, :string 
   #     configure :test_mode, :boolean 
-  #     configure :waiver_url, :string 
+  #     configure :waiver_url, :string
+  #     configure :comp_noncomp_url, :string 
 
   #   # Cross-section configuration:
 

@@ -18,13 +18,17 @@
     <% if can? :create, Registrant %>
       <%= link_to 'Create New Competitor', new_registrant_path, :class => "competitor registration_button" %>
     <% end %>
-    <br /><br />
-    <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %><br /><br />
   </div><div class="non-competitor_sign_up">
     <% if can? :new_noncompetitor, Registrant %>
       <%= link_to 'Create New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
     <% end %>
-    <br /><br />
+  </div>
+  <div class="sign_up_difference">
+    <%= link_to "What's the difference?", EventConfiguration.comp_noncomp_url, :class => "", :title =>"Click here for more information!" %>
+  </div>
+  <div class="competitor_sign_up">
+    <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %><br /><br />
+  </div><div class="non-competitor_sign_up">
   <%= render :partial => "registration_periods/list", :locals => {:competitor => false } %><br /><br />
   </div>
 </div>
