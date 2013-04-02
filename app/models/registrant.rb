@@ -76,7 +76,7 @@ class Registrant < ActiveRecord::Base
       else
         prev_value = Registrant.unscoped.where({:competitor => false}).maximum("bib_number")
         if prev_value.nil?
-          self.bib_number = 2000
+          self.bib_number = 2001
         else
           self.bib_number = prev_value + 1
         end
