@@ -116,9 +116,9 @@ describe Registrant do
   it "bib_number is set to 1 as a competitor" do
     @reg.bib_number.should == 1
   end
-  it "bib_number is set to 2000 as a non-competitor" do
+  it "bib_number is set to 2001 as a non-competitor" do
     @nreg = FactoryGirl.create(:noncompetitor)
-    @nreg.bib_number.should == 2000
+    @nreg.bib_number.should == 2001
   end
 
   describe "with a second competitor" do
@@ -145,8 +145,8 @@ describe Registrant do
       @nreg1 = FactoryGirl.create(:noncompetitor)
       @nreg2 = FactoryGirl.create(:noncompetitor)
     end
-    it "assigns the second noncompetitor bib_number 2001" do
-      @nreg2.bib_number.should == 2001
+    it "assigns the second noncompetitor bib_number 2002" do
+      @nreg2.bib_number.should == 2002
     end
   end
 
