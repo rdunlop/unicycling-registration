@@ -106,6 +106,15 @@ When deploying, please install a memcache client on your heroku instance:
 
     $ heroku addons:add memcache
 
+Database
+--------
+
+For any non-trivial number of registrations, you will quickly reach 10,000 rows in the database (each registrant is ~100 rows, due to one row per event choice, etc).
+Heroku's 'dev' plan (free plan) allows 10,000 rows, so if you're hosting this for an event, you should upgrade to a paid tier database.
+The 'basic' tier is $9, an allows 10,000,000 rows (many more than you're likely to need)
+
+See https://devcenter.heroku.com/articles/upgrade-heroku-postgres-with-pgbackups
+
 Email System integration
 ------------------------
 
