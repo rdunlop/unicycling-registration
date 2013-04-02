@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402141518) do
+ActiveRecord::Schema.define(:version => 20130402141647) do
 
   create_table "age_group_entries", :force => true do |t|
     t.integer  "age_group_type_id"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20130402141518) do
     t.string   "logo_type"
     t.boolean  "test_mode"
     t.string   "waiver_url"
+    t.string   "comp_noncomp_url"
   end
 
   create_table "events", :force => true do |t|

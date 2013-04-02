@@ -29,6 +29,11 @@
 </p>
 
 <p>
+  <b>Comp/Non-Comp url:</b>
+  <%= @event_configuration.comp_noncomp_url %>
+</p>
+
+<p>
   <b>Logo:</b>
   <%= @event_configuration.logo_filename %>
   <%= image_tag(logo_event_configuration_path(@event_configuration), :alt => "Image", :width => "300px") %>

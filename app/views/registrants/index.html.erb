@@ -24,7 +24,7 @@
     <% end %>
   </div>
   <div class="sign_up_difference">
-    <%= link_to "What's the difference?", "http://uninationals2013.com/reg/", :class => "", :title =>"Click here for more information!" %>
+    <%= link_to "What's the difference?", EventConfiguration.comp_noncomp_url, :class => "", :title =>"Click here for more information!" %>
   </div>
   <div class="competitor_sign_up">
     <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %><br /><br />

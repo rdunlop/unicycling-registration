@@ -1,9 +1,10 @@
 class EventConfiguration < ActiveRecord::Base
-  attr_accessible :artistic_closed_date, :closed, :contact_email, :currency, :dates_description, :event_url, :location, :logo_image, :long_name, :short_name, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :waiver_url
+  attr_accessible :artistic_closed_date, :closed, :contact_email, :currency, :dates_description, :event_url, :location, :logo_image, :long_name, :short_name, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :waiver_url, :comp_noncomp_url
 
   validates :short_name, :presence => true
   validates :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
+  validates :comp_noncomp_url, :format => URI::regexp(%w(http https)), :unless => "comp_noncomp_url.nil?"
 
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
 
@@ -72,6 +73,15 @@ class EventConfiguration < ActiveRecord::Base
       nil
     else
       ec.waiver_url
+    end
+  end
+
+  def self.comp_noncomp_url
+    ec = EventConfiguration.first
+    if ec.nil? or ec.comp_noncomp_url.nil? or  ec.comp_noncomp_url.empty?
+      nil
+    else
+      ec.comp_noncomp_url
     end
   end
 

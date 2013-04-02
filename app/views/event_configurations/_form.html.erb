@@ -40,9 +40,14 @@
       Currently unused
     </div>
     <div class="field">
+      <%= f.label :comp_noncomp_url %>
+      <%= f.text_field :comp_noncomp_url %><br />
+      A link to text that describes the difference between Comptitors and Non-comptitors.
+    </div>
+    <div class="field">
       <%= f.label :start_date %>
       <%= f.date_select :start_date %><br />
-      This date is used to calculate the "age" of each registrant
+      This date is used to calculate the "age" of each registrant.
     </div>
     <div class="field">
       <%= f.label :logo_image %>
