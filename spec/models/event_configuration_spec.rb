@@ -32,6 +32,11 @@ describe EventConfiguration do
     @ev.valid?.should == true
   end
 
+  it "can have a blank comp_noncomp_url" do
+    @ev.comp_noncomp_url = ""
+    @ev.valid?.should == true
+  end
+
   it "must have a test_mode" do
     @ev.test_mode = nil
     @ev.valid?.should == false

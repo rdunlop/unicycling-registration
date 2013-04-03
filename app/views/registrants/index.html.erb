@@ -23,9 +23,11 @@
       <%= link_to 'Create New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
     <% end %>
   </div>
-  <div class="sign_up_difference">
-    <%= link_to "What's the difference?", EventConfiguration.comp_noncomp_url, :class => "", :title =>"Click here for more information!" %>
-  </div>
+  <% unless EventConfiguration.comp_noncomp_url.nil? %>
+    <div class="sign_up_difference">
+      <%= link_to "What's the difference?", EventConfiguration.comp_noncomp_url, :class => "", :title =>"Click here for more information!", :target => "_blank" %>
+    </div>
+  <% end %>
   <div class="competitor_sign_up">
     <%= render :partial => "registration_periods/list", :locals => {:competitor => true } %><br /><br />
   </div><div class="non-competitor_sign_up">

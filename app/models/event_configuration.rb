@@ -4,7 +4,7 @@ class EventConfiguration < ActiveRecord::Base
   validates :short_name, :presence => true
   validates :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
-  validates :comp_noncomp_url, :format => URI::regexp(%w(http https)), :unless => "comp_noncomp_url.nil?"
+  validates :comp_noncomp_url, :format => URI::regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
 
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
 
