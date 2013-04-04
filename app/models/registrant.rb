@@ -62,6 +62,8 @@ class Registrant < ActiveRecord::Base
 
   has_one :standard_skill_routine, :dependent => :destroy
 
+  belongs_to :wheel_size
+
   after_initialize :init
 
   def set_bib_number
@@ -81,6 +83,18 @@ class Registrant < ActiveRecord::Base
           self.bib_number = prev_value + 1
         end
       end
+    end
+  end
+
+  def default_wheel_size
+    if self.wheel_size.nil?
+      if self.age > 10
+        WheelSize.find_by_description("24\" Wheel")
+      else
+        WheelSize.find_by_description("20\" Wheel")
+      end
+    else
+      self.wheel_size
     end
   end
 

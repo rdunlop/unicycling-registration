@@ -1,4 +1,4 @@
-<%= form_for([:admin, @age_group_type, @age_group_entry]) do |f| %>
+  <%= form_for([:admin, @age_group_type, @age_group_entry]) do |f| %>
   <% if @age_group_entry.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@age_group_entry.errors.count, "error") %> prohibited this age_group_entry from being saved:</h2>
@@ -26,6 +26,11 @@
   <div class="field">
     <%= f.label :end_age %><br />
     <%= f.number_field :end_age %>
+  </div>
+  <div class="field">
+    <%= f.label :wheel_size_id, 'Required Wheel Size' %><br />
+    <%= f.select :wheel_size_id, WheelSize.all.map { |ws| [ws.description, ws.id] }, :include_blank => true  %><br />
+    Specify "blank" to ignore the competitor's specified wheel size.
   </div>
   <div class="field">
     <%= f.label :gender %><br />

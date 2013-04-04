@@ -336,6 +336,7 @@ This step is necessary if you make changes to the db schema in development, or i
     cd workspace
     rake db:migrate
     RAILS_ENV=test rake db:migrate
+    RAILS_ENV=test rake db:seed
 
 To Run the test suite
 ---------------------

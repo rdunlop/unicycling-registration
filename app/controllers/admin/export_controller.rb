@@ -32,7 +32,17 @@ class Admin::ExportController < Admin::BaseController
       entries.each do |age|
         age_group_entry_model = age_group_type_model.age_group_entries.find_by_short_description(age["short_description"])
         if age_group_entry_model.nil?
+          wheel_size_name = age["wheel_size_name"]
+          age.delete("wheel_size_name")
+          unless wheel_size_name.nil?
+            wheel_size = WheelSize.find_or_create_by_description(wheel_size_name)
+            if wheel_size.new_record?
+              wheel_size.position = 1
+              wheel_size.save!
+            end
+          end
           age_group_entry_model = age_group_type_model.age_group_entries.build(age)
+          age_group_entry_model.wheel_size = wheel_size
           age_group_entry_model.save!
           created_records += 1
         end

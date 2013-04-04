@@ -19,6 +19,11 @@ describe AgeGroupEntry do
     @age_group_entry.valid?.should == false
   end
 
+  it "has a wheel_size" do
+    @age_group_entry.wheel_size = FactoryGirl.create(:wheel_size)
+  end
+
+
   it "requires gender be valid" do
     @age_group_entry.gender = nil
     @age_group_entry.valid?.should == false

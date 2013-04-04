@@ -9,6 +9,8 @@ describe RaceCalculator do
       @age_group_entry = FactoryGirl.create(:age_group_entry) # 0-100 age group
       @event_category.age_group_type = @age_group_entry.age_group_type
       @event_category.save!
+      FactoryGirl.create(:event_configuration, :start_date => Date.new(2013,01,01))
+      # Note: Registrants are born in 1990, thus are 22 years old
       @tr1 = FactoryGirl.create(:time_result, :event_category => @event_category)
       @tr2 = FactoryGirl.create(:time_result, :event_category => @event_category)
       @tr3 = FactoryGirl.create(:time_result, :event_category => @event_category)
@@ -68,14 +70,14 @@ describe RaceCalculator do
       @tr1.place.should == 1
     end
 
-    it "places DQ's as 0" do
+    it "places DQ's as 'DQ'" do
       @tr1.thousands = 1
       @tr1.disqualified = true
       @tr1.save!
 
       @calc.update_places
 
-      @tr1.place.should == 0
+      @tr1.place.should == "DQ"
     end
 
     it "places fast times first" do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402141647) do
+ActiveRecord::Schema.define(:version => 20130403023402) do
 
   create_table "age_group_entries", :force => true do |t|
     t.integer  "age_group_type_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130402141647) do
     t.string   "gender"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "wheel_size_id"
   end
 
   create_table "age_group_types", :force => true do |t|
@@ -203,6 +204,7 @@ ActiveRecord::Schema.define(:version => 20130402141647) do
     t.string   "zip"
     t.boolean  "deleted"
     t.integer  "bib_number"
+    t.integer  "wheel_size_id"
   end
 
   create_table "registration_periods", :force => true do |t|
@@ -307,5 +309,12 @@ ActiveRecord::Schema.define(:version => 20130402141647) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "wheel_sizes", :force => true do |t|
+    t.integer  "position"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end

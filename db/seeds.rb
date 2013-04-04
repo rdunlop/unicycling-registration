@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+if WheelSize.count == 0
+  WheelSize.create(:position => 1, :description => "16\" Wheel")
+  WheelSize.create(:position => 2, :description => "20\" Wheel")
+  WheelSize.create(:position => 3, :description => "24\" Wheel")
+end
+
 if StandardSkillEntry.count == 0
   StandardSkillEntry.create(:description => "riding", :number => 1, :letter => 'a', :points => 1.0)
   StandardSkillEntry.create(:description => "riding - c", :number => 1, :letter => 'b', :points => 1.3)

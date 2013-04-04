@@ -22,6 +22,7 @@ describe Admin::AgeGroupEntriesController do
   before(:each) do
     sign_in FactoryGirl.create(:super_admin_user)
     @age_group_type = FactoryGirl.create(:age_group_type)
+    @ws = FactoryGirl.create(:wheel_size)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -30,6 +31,7 @@ describe Admin::AgeGroupEntriesController do
   def valid_attributes
     { :short_description => "All Ages",
       :gender => "Male",
+      :wheel_size_id => @ws.id
     }
   end
 

@@ -489,6 +489,11 @@ describe Registrant do
       it "should have an age of 30" do
         @reg.age.should == 30
       end
+
+      it "should have a wheel_size of 24\"" do
+        ws = FactoryGirl.create(:wheel_size, :description => "24\" Wheel")
+        @reg.default_wheel_size.should == ws
+      end
     end
     describe "and a registrant born the day after the starting date in 1982" do
       before(:each) do
@@ -498,9 +503,9 @@ describe Registrant do
         @reg.age.should == 29
       end
     end
-    describe "with a 12 year old registrant" do
+    describe "with a 10 year old registrant" do
       before(:each) do
-        @reg.birthday = Date.new(2000, 01, 22)
+        @reg.birthday = Date.new(2002, 01, 22)
       end
       it "requires the responsible_adult_name" do
         @reg.responsible_adult_name = nil
@@ -516,6 +521,10 @@ describe Registrant do
         @reg.responsible_adult_name = "Jane"
         @reg.responsible_adult_phone = "1-800-stuff"
         @reg.valid?.should == true
+      end
+      it "should have a 20\" wheel" do
+        ws = FactoryGirl.create(:wheel_size, :description => "20\" Wheel")
+        @reg.default_wheel_size.should == ws
       end
     end
   end

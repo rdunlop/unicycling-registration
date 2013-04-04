@@ -17,7 +17,8 @@ describe Admin::ExportController do
     describe "with a single age_group_type and age_group_entry" do
       before(:each) do
         @agt = FactoryGirl.create(:age_group_type)
-        @age = FactoryGirl.create(:age_group_entry, :age_group_type => @agt, :long_description => "long", :short_description => "short")
+        @ws = FactoryGirl.create(:wheel_size, :description => "20\" Wheel")
+        @age = FactoryGirl.create(:age_group_entry, :age_group_type => @agt, :long_description => "long", :short_description => "short", :wheel_size => @ws)
       end
       it "returns the single age_group_type, with embedded age_group_entry" do
         get :download_event_configuration, {:format => 'json' }
@@ -30,6 +31,7 @@ describe Admin::ExportController do
                 { "start_age" => 1,
                   "end_age" => 100,
                   "gender" => "Male",
+                  "wheel_size_name" => "20\" Wheel",
                   "short_description" => "short",
                   "long_description" => "long"
                  }
@@ -74,6 +76,7 @@ describe Admin::ExportController do
             "end_age" => 100,
             "gender" => "Male",
             "short_description" => "short",
+            "wheel_size_name" => nil,
             "long_description" => "long"
           }]
         end
@@ -102,6 +105,16 @@ describe Admin::ExportController do
             expect {
               post :upload_event_configuration, submit
             }.to change(AgeGroupEntry, :count).by(1)
+          end
+        end
+        describe "when the wheel_size is specified" do
+          before(:each) do
+            @data["age_group_types"][0]["age_group_entries"][0]["wheel_size_name"] = "20\" Wheel"
+          end
+          it "creates a new WheelSize" do
+            expect {
+              post :upload_event_configuration, submit
+            }.to change(WheelSize, :count).by(1)
           end
         end
       end

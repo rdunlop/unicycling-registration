@@ -32,6 +32,22 @@ describe AgeGroupType do
       @age1.save!
       @agt.age_group_entry_for(10, "Female").should == @age1
     end
+
+    describe "When the age_group_entry has a wheel size" do
+      before(:each) do
+        @ws20 = FactoryGirl.create(:wheel_size, :description => "20\" Wheel")
+        @ws24 = FactoryGirl.create(:wheel_size, :description => "24\" Wheel")
+        @age1.wheel_size = @ws20
+        @age1.save
+        @age1b = FactoryGirl.create(:age_group_entry, :age_group_type => @agt, :start_age => 0, :end_age => 12, :gender => "Male", :wheel_size => @ws24)
+      end
+      it "puts the rider on a 20\" wheel in the correct age group" do
+        @agt.age_group_entry_for(10, "Male", @ws20).should == @age1
+      end
+      it "puts the rider on a 24\" wheel in the correct age group" do
+        @agt.age_group_entry_for(10, "Male", @ws24).should == @age1b
+      end
+    end
   end
 
   it "must have a unique name" do
