@@ -3,6 +3,7 @@ class AdjustNonCompetitorsTo2001 < ActiveRecord::Migration
   end
 
   def up
+    Registrant.reset_column_information
     Registrant.where("bib_number >= 2000").order("bib_number DESC").each do |reg|
       reg.bib_number +=1
       reg.save!
@@ -10,6 +11,7 @@ class AdjustNonCompetitorsTo2001 < ActiveRecord::Migration
   end
 
   def down
+    Registrant.reset_column_information
     Registrant.where("bib_number > 2000").order("bib_number ASC").each do |reg|
       reg.bib_number -=1
       reg.save!
