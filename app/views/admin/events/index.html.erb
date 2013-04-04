@@ -31,6 +31,7 @@
     <th>Sign Up List</th>
     <th>Num Time Results</th>
     <th>Time Results</th>
+    <th>Final Head Candidates</th>
   </thead>
   <tbody>
     <% @events.each do |event| %>
@@ -49,6 +50,9 @@
             <%= link_to "Enter Data", event_category_time_results_path(ecat) %>
             <%= link_to "View (HTML)", results_event_category_time_results_path(ecat) %>
             <%= link_to "View (PDF)", results_event_category_time_results_path(ecat, :format => "pdf") %>
+          </td>
+          <td>
+            <%= link_to "Candidates", final_candidates_event_category_time_results_path(ecat) %>
           </td>
         </tr>
       <% end %>

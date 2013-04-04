@@ -29,6 +29,14 @@ class TimeResultsController < ApplicationController
     end
   end
 
+  def final_candidates
+    @male_time_results = @time_results.includes(:registrant, :event_category).where(:registrants => {:gender => "Male"}).order("disqualified, minutes, seconds, thousands")
+    @female_time_results = @time_results.includes(:registrant, :event_category).where(:registrants => {:gender => "Female"}).order("disqualified, minutes, seconds, thousands")
+    respond_to do |format|
+      format.html # final_candidates.html.erb
+    end
+  end
+
   # GET event_categories/1/time_results/1/edit
   def edit
     @time_result = TimeResult.find(params[:id])

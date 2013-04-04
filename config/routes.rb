@@ -81,6 +81,7 @@ Workspace::Application.routes.draw do
     resources :time_results, :only => [:index, :create] do
       collection do
         get :results
+        get :final_candidates
       end
     end
   end

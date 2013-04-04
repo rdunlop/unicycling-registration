@@ -1,4 +1,5 @@
 TO DO (MUST be done BEFORE LIVE):
+ - Restrict Final heat candidates to 24" wheel size. (via query?)
  - Default sort order for AgeGroupEntry.
  - Ability to copy one gender to another gender
   - Ability to "Create both" at the same time ,instead?
