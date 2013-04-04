@@ -29,6 +29,8 @@ class TimeResult < ActiveRecord::Base
   end
 
   def full_time
+    return "" if disqualified
+
     hours = minutes / 60
     if hours > 0
       remaining_minutes = minutes % 60
@@ -62,14 +64,16 @@ class TimeResult < ActiveRecord::Base
   end
 
   def place
-    stored_place = Rails.cache.fetch(place_key)
-    if stored_place.nil?
+    return "DQ" if disqualified
+
+    found_place = Rails.cache.fetch(place_key)
+    if found_place.nil?
       calc = RaceCalculator.new(event_category, registrant.age, registrant.gender)
       calc.update_places
-      Rails.cache.fetch(place_key)
-    else
-      stored_place
+      found_place = Rails.cache.fetch(place_key)
     end
+
+    found_place
   end
 
   private

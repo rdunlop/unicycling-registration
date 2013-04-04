@@ -71,11 +71,19 @@ describe TimeResult do
     @tr.valid?.should == false
   end
 
-  it "can print the full time when all values exist" do
-    @tr.minutes = 19
-    @tr.seconds = 16
-    @tr.thousands = 701
-    @tr.full_time.should == "19:16:701"
+  describe "when it has a time" do
+    before(:each) do
+      @tr.minutes = 19
+      @tr.seconds = 16
+      @tr.thousands = 701
+    end
+    it "can print the full time when all values exist" do
+      @tr.full_time.should == "19:16:701"
+    end
+    it "doesn't print the values if it is disqualified" do
+      @tr.disqualified = true
+      @tr.full_time.should == ""
+    end
   end
 
   it "can print the full time when the numbers start with 0" do
@@ -98,6 +106,11 @@ describe TimeResult do
     @tr.seconds = 2
     @tr.thousands = 3
     @tr.full_time_in_thousands.should == 62003
+  end
+
+  it "returns DQ if disqualified" do
+    @tr.disqualified = true
+    @tr.place.should == "DQ"
   end
 
   it "by default has nil place" do
