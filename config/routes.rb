@@ -1,5 +1,7 @@
 Workspace::Application.routes.draw do
 
+
+
   # ADMIN
   #
   #
@@ -139,6 +141,21 @@ Workspace::Application.routes.draw do
   get "welcome/confirm"
 
   devise_for :users, :controllers => { :registrations => "registrations" }
+
+  resources :users, :only => [] do
+    resources :additional_registrant_accesses, :only => [:index, :new, :create] do
+      collection do
+        get :invitations
+      end
+    end
+  end
+  resources :additional_registrant_accesses, :only => [] do
+    member do
+      put :accept_readonly
+      delete :decline
+    end
+  end
+
 
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
 

@@ -1,0 +1,36 @@
+<h1>Registrant Record requests</h1>
+
+<p>
+On this page, you can make requests to be granted readonly access to other users' registrant information.<br /><br />
+If the request is accepted, you will be able to view their events, and pay for their registration.<br />
+You will not be granted access to their address or contact information
+</p>
+
+<table>
+  <caption>Current Request Statuses</caption>
+  <thead>
+    <tr>
+      <th>Registrant</th>
+      <th>Declined?</th>
+      <th>Accepted readonly?</th>
+      <th>Date created</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @additional_registrant_accesses.each do |additional_registrant_access| %>
+      <tr>
+        <td><%= additional_registrant_access.registrant %></td>
+        <td><%= additional_registrant_access.declined %></td>
+        <td><%= additional_registrant_access.accepted_readonly %></td>
+        <td><%= additional_registrant_access.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Additional registrant access', new_user_additional_registrant_access_path(@user) %>

@@ -62,6 +62,8 @@ class Registrant < ActiveRecord::Base
 
   has_one :standard_skill_routine, :dependent => :destroy
 
+  has_many :additional_registrant_accesses, :dependent => :destroy
+
   belongs_to :wheel_size
 
   after_initialize :init

@@ -28,6 +28,11 @@ class Ability
         can :manage, StandardSkillRoutineEntry
         can :manage, StandardSkillRoutine
       else
+        can :read, User, :id => user.id
+        can [:read, :new, :create], AdditionalRegistrantAccess, :user_id => user.id
+        can [:invitations, :decline, :accept_readonly], AdditionalRegistrantAccess do |aca|
+          aca.registrant.user == user
+        end
         can [:read, :all, :waiver], Registrant, :user_id => user.id
         can :read, Payment, :user_id => user.id
 

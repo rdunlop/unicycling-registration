@@ -197,6 +197,11 @@ StandardSkillEntry). In order to initially populate these, please run db:seed
 
     $ rake db:seed
 
+When running the system somewhere other than in vagrant, 
+you can use the db:setup command to create the database, tables, and seed:
+
+    $ rake db:setup
+
 
 Event Configuration
 -------------------
@@ -336,7 +341,6 @@ This step is necessary if you make changes to the db schema in development, or i
     cd workspace
     rake db:migrate
     RAILS_ENV=test rake db:migrate
-    RAILS_ENV=test rake db:seed
 
 To Run the test suite
 ---------------------

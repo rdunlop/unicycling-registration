@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403023402) do
+ActiveRecord::Schema.define(:version => 20130404132653) do
+
+  create_table "additional_registrant_accesses", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "registrant_id"
+    t.boolean  "declined"
+    t.boolean  "accepted_readonly"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "age_group_entries", :force => true do |t|
     t.integer  "age_group_type_id"

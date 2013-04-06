@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
 
   has_many :payments
 
+  has_many :additional_registrant_accesses
+
   after_initialize :init
 
   def init
