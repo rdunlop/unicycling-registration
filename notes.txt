@@ -1,4 +1,20 @@
 TO DO (MUST be done BEFORE LIVE):
+ - Add foreign key indices on all *_id columns
+ - Should I titlize the names of the registrants?
+ - add unique constraints on database level?
+  - when using unicorn to serve multiple people at once, what do I need to consider?
+ - move assets/stylesheets assets/jaavscripts into vendor (or lib?)/assets/stylesheets and javascripts (jquery, etc) (images too)
+  - require shared
+  - require friend
+ - Use nesting in scss to combine things that have common parents
+ - Remove all json responds to, except where I need it. (and remove all respond_to blocks).
+ - Make more events AJAX instead of refresh the page.
+ - Use "div_for" instead of writing div id's by hand.
+  - For Standard Skill?
+  - For Expenses?
+
+ - use delegate to get rid of law-of-demeter violations (allow_nil?)
+
  - Restrict Final heat candidates to 24" wheel size. (via query?)
  - Default sort order for AgeGroupEntry.
  - Ability to copy one gender to another gender

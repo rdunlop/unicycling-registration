@@ -10,6 +10,8 @@ class TimeResult < ActiveRecord::Base
 
   scope :fastest_first, order("disqualified, minutes, seconds, thousands")
 
+  delegate :bib_number, to: :registrant
+
   after_initialize :init
 
   def init
@@ -19,9 +21,6 @@ class TimeResult < ActiveRecord::Base
     self.thousands = 0 if self.thousands.nil?
   end
 
-  def bib_number
-    registrant.bib_number
-  end
   def as_json(options={})
     options = {
       :except => [:id, :created_at, :updated_at, :registrant_id, :event_category_id],

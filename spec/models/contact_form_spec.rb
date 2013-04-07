@@ -27,4 +27,11 @@ describe Event do
     @cf.registrants= "my registrants"
     @cf.registrants.should == "my registrants"
   end
+
+  it "can be updated by a user object" do
+    @reg = FactoryGirl.create(:competitor, :first_name => "Bob", :last_name => "Smith")
+    @cf.update_from_user(@reg.user)
+    @cf.username.should == @reg.user.email
+    @cf.registrants.should == "Bob Smith"
+  end
 end
