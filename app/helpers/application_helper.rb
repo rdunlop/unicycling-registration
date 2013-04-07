@@ -15,10 +15,6 @@ module ApplicationHelper
     registrant
   end
 
-  def fcost(cost)
-    number_with_precision(cost, :precision => 2)
-  end
-
   def mixpanel?
     !ENV['MIXPANEL_TOKEN'].nil?
   end

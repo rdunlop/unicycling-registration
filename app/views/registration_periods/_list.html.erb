@@ -15,13 +15,13 @@
                 <td><%=period.start_date.strftime("%b %d, %Y") %></td>
                 <td> to </td>
                 <td><%=period.end_date.strftime("%b %d, %Y") %></td>
-                <td><b><span class="fee">
+                <td><b>
                 <% if competitor %>
-                  <%= fcost(period.competitor_expense_item.cost) %>
+                  <%= number_to_currency(period.competitor_expense_item.cost) %>
                 <% else %>
-                  <%= fcost(period.noncompetitor_expense_item.cost) %>
+                  <%= number_to_currency(period.noncompetitor_expense_item.cost) %>
                 <% end %>
-                </span></b></td>
+                </b></td>
             </tr>
             <% if period.end_date == closed_date %>
               <tr>

@@ -47,7 +47,7 @@
               <%= link_to registrant.name, registrant, :class =>  (registrant.competitor ? "competitor_link" : "noncompetitor_link") %>
             </td>
             <td>
-              <span class="fee"><%= fcost(registrant.expenses_total) %></span>
+              <%= number_to_currency(registrant.expenses_total) %>
             </td>
             <td>
               <% if can? :update, registrant %>
@@ -58,7 +58,7 @@
             </td>
             <td>
               <% if registrant.amount_owing > 0 %>
-                <span class="unpaid"><span class="fee"><%= fcost(registrant.amount_owing) %></span> Unpaid</span>
+                <span class="unpaid"><%= number_to_currency(registrant.amount_owing) %> Unpaid</span>
               <% else %>
                 <span class="paid">Paid</span>
               <% end %>
@@ -67,7 +67,7 @@
         <% end %>
         <tr>
           <td colspan="2">Total Amount Owing:</td>
-          <td><span class="fee"><%= fcost(@total_owing) %></span></td>
+          <td><%= number_to_currency(@total_owing) %></td>
         </tr>
       </table>
     </fieldset>

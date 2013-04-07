@@ -38,7 +38,7 @@
           <% end %>
         </td>
         <td>
-          <span class="fee"><%= fcost(pd.amount) %></span>
+          <%= number_to_currency(pd.amount) %>
         </td>
       </tr>
     <% end %>
@@ -46,7 +46,7 @@
   <tfoot>
     <tr>
       <th colspan="2">Total</th>
-      <th><span class="fee"><%= fcost(payment.total_amount) %></span></th>
+      <th><%= number_to_currency(payment.total_amount) %></th>
     </tr>
   </tfoot>
 </table>

@@ -20,7 +20,7 @@ calculateTotal = ->
     el = $(this);
     if (el.prop('checked')) 
       total_cents += parseInt(el.data("cents"));
-  return (total_cents / 100).toFixed(2);
+  return "$" + (total_cents / 100).toFixed(2);
 
 $(document).on "change", ".anon", ->
   el = $(this);

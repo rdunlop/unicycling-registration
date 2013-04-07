@@ -4,7 +4,7 @@
     <%= item.name %>
   </td>
   <td>
-    <span class="fee"><%= fcost(item.cost) %></span>
+    <%= number_to_currency(item.cost) %>
   </td>
   <td>
     <%= form_for RegistrantExpenseItem.new(:expense_item_id => item.id), :url => single_registrant_expenses_url, :remote => true do |ff| %>

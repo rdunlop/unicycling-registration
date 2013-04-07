@@ -13,7 +13,7 @@
     <% @payments.each do |payment| %>
       <tr>
         <td><%= payment.id %></td>
-        <td><span class="fee"><%= fcost(payment.total_amount) %></span></td>
+        <td><%= number_to_currency(payment.total_amount) %></td>
         <td><%= payment.transaction_id %></td>
         <td><%= payment.completed_date %></td>
         <td><%= link_to 'Show Details', payment %></td>
