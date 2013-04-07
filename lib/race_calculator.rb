@@ -1,26 +1,34 @@
 class RaceCalculator
 
-  def initialize(event_category, age, gender)
+  def initialize(event_category)
     @event_category = event_category
-    age_group_type = event_category.age_group_type
+  end
+
+  # update the places for all age groups
+  def update_all_places
+    age_group_type = @event_category.age_group_type
     unless age_group_type.nil?
-      @age_group_entry = age_group_type.age_group_entry_for(age, gender)
+      age_group_type.age_group_entries.each do |age|
+        update_places(age.to_s)
+      end
     end
   end
 
+
+  private
   # update the places for an event, fastest first.
   # DQ are marked as place = 0
   # results with time==0 are marked as place = 0
-  def update_places
-    return 0 if @age_group_entry.nil?
+  def update_places(age_group_entry_description)
+    return 0 if age_group_entry_description.nil?
     count = 1
     previous_time = 0
     tied_place = 0
 
-    @event_category.time_results.includes(:registrant, :event_category).order("minutes, seconds, thousands").each do |tr|
+    @event_category.time_results.includes(:registrant => :default_wheel_size, :event_category => {}).order("minutes, seconds, thousands").each do |tr|
 
       # only perform updates on the specified age group entry set
-      next if tr.age_group_entry != @age_group_entry
+      next if tr.age_group_entry_description != age_group_entry_description
 
       current_time = tr.full_time_in_thousands
 

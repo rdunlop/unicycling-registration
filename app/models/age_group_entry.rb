@@ -2,6 +2,7 @@ class AgeGroupEntry < ActiveRecord::Base
   attr_accessible :age_group_type_id, :end_age, :gender, :long_description, :short_description, :start_age, :wheel_size_id
 
   validates :age_group_type, :short_description, :presence => true
+  validates :short_description, :uniqueness => {:scope => :age_group_type_id}
   validates :gender, :inclusion => {:in => %w(Male Female Mixed), :message => "%{value} must be either 'Male', 'Female' or 'Mixed'"}
 
   belongs_to :age_group_type, :touch => true

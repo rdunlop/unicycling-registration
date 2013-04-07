@@ -82,6 +82,7 @@ Workspace::Application.routes.draw do
   resources :event_categories, :except => [:index, :create, :new] do
     resources :time_results, :only => [:index, :create] do
       collection do
+        put :set_places
         get :results
         get :final_candidates
       end

@@ -14,9 +14,18 @@ describe AgeGroupEntry do
     @age_group_entry.valid?.should == false
   end
   
-  it "requires a short_desrciption" do
+  it "requires a short_description" do
     @age_group_entry.short_description = nil
     @age_group_entry.valid?.should == false
+  end
+
+  it "must have a unique short_description" do
+    age2 = FactoryGirl.build(:age_group_entry, :short_description => @age_group_entry.short_description, :age_group_type => @age_group_entry.age_group_type)
+    age2.valid?.should == false
+  end
+  it "can have the same short_description, as long as it has a different age_group_type" do
+    age2 = FactoryGirl.build(:age_group_entry, :short_description => @age_group_entry.short_description)
+    age2.valid?.should == true
   end
 
   it "has a wheel_size" do

@@ -7,6 +7,7 @@ class TimeResultsController < ApplicationController
   # GET event_categories/1/time_results
   # GET event_categories/1/time_results.json
   def index
+    @time_results = @time_results.includes(:registrant)
     @time_result = @event_category.time_results.build
 
     respond_to do |format|
@@ -35,6 +36,12 @@ class TimeResultsController < ApplicationController
     respond_to do |format|
       format.html # final_candidates.html.erb
     end
+  end
+
+  def set_places
+    @calc = RaceCalculator.new(@event_category)
+    @calc.update_all_places
+    redirect_to event_category_time_results_path(@event_category), :notice => "All Places updated"
   end
 
   # GET event_categories/1/time_results/1/edit

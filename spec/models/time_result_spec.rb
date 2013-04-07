@@ -114,7 +114,7 @@ describe TimeResult do
   end
 
   it "by default has nil place" do
-    @tr.place.should == nil
+    @tr.place.should == "Unknown"
   end
 
   it "can store the place" do

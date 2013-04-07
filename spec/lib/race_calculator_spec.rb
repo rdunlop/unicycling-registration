@@ -16,12 +16,12 @@ describe RaceCalculator do
       @tr3 = FactoryGirl.create(:time_result, :event_category => @event_category)
       @tr4 = FactoryGirl.create(:time_result, :event_category => @event_category)
 
-      @calc = RaceCalculator.new(@event_category, 5, 'Male') # set up the young age group entry
+      @calc = RaceCalculator.new(@event_category)
     end
     describe "with 2 age_groups" do
       before(:each) do
         @age_group_type = @age_group_entry.age_group_type
-        @age_group_entry2 = FactoryGirl.create(:age_group_entry, :age_group_type => @age_group_type, :start_age => 50, :end_age => 100)
+        @age_group_entry2 = FactoryGirl.create(:age_group_entry, :age_group_type => @age_group_type, :start_age => 50, :end_age => 100, :short_description => "50-100")
         @age_group_entry.start_age = 0
         @age_group_entry.end_age = 49
         @age_group_entry.save!
@@ -45,7 +45,7 @@ describe RaceCalculator do
         @reg.save!
         @reg.age.should == 60
 
-        @calc.update_places
+        @calc.update_all_places
 
         @tr1.place.should == 1 # not a tie, different groups
         @tr2.place.should == 1 # not a tie, different groups
@@ -53,7 +53,7 @@ describe RaceCalculator do
     end
 
     it "places everyone as 0 if they have no time" do
-      @calc.update_places
+      @calc.update_all_places
 
       @tr1.place.should == 0
       @tr2.place.should == 0
@@ -65,7 +65,7 @@ describe RaceCalculator do
       @tr1.thousands = 1
       @tr1.save!
 
-      @calc.update_places
+      @calc.update_all_places
 
       @tr1.place.should == 1
     end
@@ -75,7 +75,7 @@ describe RaceCalculator do
       @tr1.disqualified = true
       @tr1.save!
 
-      @calc.update_places
+      @calc.update_all_places
 
       @tr1.place.should == "DQ"
     end
@@ -92,7 +92,7 @@ describe RaceCalculator do
       @tr2.minutes = 2
       @tr2.save!
 
-      @calc.update_places
+      @calc.update_all_places
 
       @tr1.place.should == 2
       @tr2.place.should == 1
@@ -106,7 +106,7 @@ describe RaceCalculator do
         @tr2.save!
       end
       it "ties for first" do
-        @calc.update_places
+        @calc.update_all_places
 
         @tr1.place.should == 1
         @tr2.place.should == 1
@@ -116,7 +116,7 @@ describe RaceCalculator do
         @tr3.minutes = 2
         @tr3.save!
 
-        @calc.update_places
+        @calc.update_all_places
 
         @tr3.place.should == 3
       end
@@ -131,7 +131,7 @@ describe RaceCalculator do
         end
 
         it "ties 3 for first, and one for 4th" do
-          @calc.update_places
+          @calc.update_all_places
 
           @tr1.place.should == 1
           @tr2.place.should == 1

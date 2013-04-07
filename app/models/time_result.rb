@@ -45,13 +45,9 @@ class TimeResult < ActiveRecord::Base
     (minutes * 60000) + (seconds * 1000) + thousands
   end
 
-  def place=(place)
-    Rails.cache.write(place_key, place)
-  end
 
   def age_group_entry_description
-    agt = event_category.age_group_type
-    ag_entry_description = agt.age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id)
+    ag_entry_description = event_category.age_group_type.try(:age_group_entry_description, registrant.age, registrant.gender, registrant.default_wheel_size.id)
     if ag_entry_description.nil?
       "No Age Group for #{registrant.age}-#{registrant.gender}"
     else
@@ -59,17 +55,14 @@ class TimeResult < ActiveRecord::Base
     end
   end
 
+  def place=(place)
+    Rails.cache.write(place_key, place)
+  end
+
   def place
     return "DQ" if disqualified
 
-    found_place = Rails.cache.fetch(place_key)
-    if found_place.nil?
-      calc = RaceCalculator.new(event_category, registrant.age, registrant.gender)
-      calc.update_places
-      found_place = Rails.cache.fetch(place_key)
-    end
-
-    found_place
+    Rails.cache.fetch(place_key) || "Unknown"
   end
 
   private
