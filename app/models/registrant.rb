@@ -34,7 +34,7 @@ class Registrant < ActiveRecord::Base
   attr_accessible :registrant_event_sign_ups_attributes
   has_many :registrant_event_sign_ups, :dependent => :destroy , :inverse_of => :registrant
   accepts_nested_attributes_for :registrant_event_sign_ups
-  #has_many :sign_ups, :class_name => 'RegistrantEventSignUp', :conditions => ['signed_up = ?', true]
+  has_many :signed_up_events, :class_name => 'RegistrantEventSignUp', :conditions => ['signed_up = ?', true]
 
   validate :choices_are_all_set_or_none_set
 
@@ -181,10 +181,10 @@ class Registrant < ActiveRecord::Base
   end
 
   def has_standard_skill?
-    registrant_event_sign_ups.each do |rc|
+    signed_up_events.each do |rc|
       next if rc.event_category.nil?
       if rc.event_category.event.standard_skill?
-        return rc.signed_up
+        return true
       end
     end
     false
@@ -319,13 +319,13 @@ class Registrant < ActiveRecord::Base
 
   # does this registrant have this event checked off?
   def has_event?(event)
-    self.registrant_event_sign_ups.where({:event_id => event.id, :signed_up => true}).any?
+    self.signed_up_events.where({:event_id => event.id}).any?
   end
 
   def describe_event(event)
     description = event.name
 
-    resu = registrant_event_sign_ups.where({:event_id => event.id, :signed_up => true}).first
+    resu = signed_up_events.where({:event_id => event.id}).first
     # only add the Category if there are more than 1
     if event.event_categories.count > 1
       description += " - Category: " + resu.event_category.to_s unless resu.nil?
