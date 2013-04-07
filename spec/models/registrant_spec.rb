@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe Registrant do
   before(:each) do
-    @ws20 = FactoryGirl.create(:wheel_size, :description => "20\" Wheel")
-    @ws24 = FactoryGirl.create(:wheel_size, :description => "24\" Wheel")
     @reg = FactoryGirl.create(:competitor)
   end
 
@@ -487,18 +485,20 @@ describe Registrant do
     describe "and a registrant born on the starting day in 1982" do
       before(:each) do
         @reg.birthday = Date.new(1982, 05, 20)
+        @reg.save
       end
       it "should have an age of 30" do
         @reg.age.should == 30
       end
 
       it "should have a wheel_size of 24\"" do
-        @reg.default_wheel_size.should == @ws24
+        @reg.default_wheel_size.should == WheelSize.find_by_description("24\" Wheel")
       end
     end
     describe "and a registrant born the day after the starting date in 1982" do
       before(:each) do
         @reg.birthday = Date.new(1982, 05, 21)
+        @reg.save
       end
       it "should have an age of 29" do
         @reg.age.should == 29
@@ -524,7 +524,7 @@ describe Registrant do
       it "should have a 20\" wheel" do
         @reg.default_wheel_size = nil
         @reg.valid?.should == true
-        @reg.default_wheel_size.should == @ws20
+        @reg.default_wheel_size.should == WheelSize.find_by_description("20\" Wheel")
       end
     end
   end

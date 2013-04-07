@@ -17,7 +17,7 @@ describe Admin::ExportController do
     describe "with a single age_group_type and age_group_entry" do
       before(:each) do
         @agt = FactoryGirl.create(:age_group_type)
-        @ws = FactoryGirl.create(:wheel_size, :description => "20\" Wheel")
+        @ws = FactoryGirl.create(:wheel_size_20)
         @age = FactoryGirl.create(:age_group_entry, :age_group_type => @agt, :long_description => "long", :short_description => "short", :wheel_size => @ws)
       end
       it "returns the single age_group_type, with embedded age_group_entry" do
@@ -109,7 +109,7 @@ describe Admin::ExportController do
         end
         describe "when the wheel_size is specified" do
           before(:each) do
-            @data["age_group_types"][0]["age_group_entries"][0]["wheel_size_name"] = "20\" Wheel"
+            @data["age_group_types"][0]["age_group_entries"][0]["wheel_size_name"] = "16\" Wheel"
           end
           it "creates a new WheelSize" do
             expect {

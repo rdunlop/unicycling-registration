@@ -225,6 +225,8 @@ describe RegistrantsController do
   describe "POST create" do
     describe "with valid params" do
       before(:each) do
+        @ws20 = FactoryGirl.create(:wheel_size_20)
+        @ws24 = FactoryGirl.create(:wheel_size_24)
         @comp_attributes = valid_attributes.merge({:competitor => true})
       end
       it "creates a new Registrant" do

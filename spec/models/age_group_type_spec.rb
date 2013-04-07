@@ -35,8 +35,8 @@ describe AgeGroupType do
 
     describe "When the age_group_entry has a wheel size" do
       before(:each) do
-        @ws20 = FactoryGirl.create(:wheel_size, :description => "20\" Wheel")
-        @ws24 = FactoryGirl.create(:wheel_size, :description => "24\" Wheel")
+        @ws20 = FactoryGirl.create(:wheel_size_20)
+        @ws24 = FactoryGirl.create(:wheel_size_24)
         @age1.wheel_size = @ws20
         @age1.save
         @age1b = FactoryGirl.create(:age_group_entry, :age_group_type => @agt, :start_age => 0, :end_age => 12, :gender => "Male", :wheel_size => @ws24)

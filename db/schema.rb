@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130407164730) do
+ActiveRecord::Schema.define(:version => 20130407170925) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20130407164730) do
     t.boolean  "deleted"
     t.integer  "bib_number"
     t.integer  "wheel_size_id"
+    t.integer  "age"
   end
 
   create_table "registration_periods", :force => true do |t|
