@@ -3,10 +3,7 @@ class RegistrationPeriod < ActiveRecord::Base
 
   default_scope order('start_date ASC')
 
-  validates :start_date, :presence => true
-  validates :end_date, :presence => true
-  validates :competitor_expense_item, :presence => true
-  validates :noncompetitor_expense_item, :presence => true
+  validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
 
   belongs_to :competitor_expense_item, :class_name => "ExpenseItem"
   belongs_to :noncompetitor_expense_item, :class_name => "ExpenseItem"

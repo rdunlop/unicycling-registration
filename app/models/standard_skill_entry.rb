@@ -2,10 +2,8 @@ class StandardSkillEntry < ActiveRecord::Base
 
   has_many :standard_skill_routine_entries, :dependent => :destroy
 
-  validates :number, :presence => true
+  validates :number, :points, :description, :presence => true
   validates :letter, :presence => true, :uniqueness => {:scope => :number } # not allowed to have the same number/letter pair twice
-  validates :points, :presence => true
-  validates :description, :presence => true
 
   attr_accessible :number, :letter, :points, :description
 

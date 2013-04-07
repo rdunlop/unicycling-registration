@@ -2,12 +2,8 @@ class ExpenseItem < ActiveRecord::Base
   attr_accessible :cost, :description, :export_name, :name, :position, :expense_group_id, :has_details, :details_label
 
   default_scope order('expense_group_id ASC, position ASC')
-  
-  validates :name, :presence => true
-  validates :description, :presence => true
-  validates :position, :presence => true
-  validates :cost, :presence => true
-  validates :expense_group, :presence => true
+
+  validates :name, :description, :position, :cost, :expense_group, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
 
   has_many :payment_details

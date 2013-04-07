@@ -1,18 +1,13 @@
 class Registrant < ActiveRecord::Base
   attr_accessible :address, :birthday, :city, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip
   attr_accessible :user_id, :competitor
-  attr_accessible :club, :club_contact, :usa_member_number, :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone
+  attr_accessible :club, :club_contact, :usa_member_number
+  attr_accessible :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone
   attr_accessible :responsible_adult_name, :responsible_adult_phone
 
-  validates :birthday, :presence => true
-  validates :first_name, :presence => true
-  validates :last_name, :presence => true
-  validates :address, :presence => true
-  validates :city, :presence => true
-  validates :state, :presence => true
-  validates :country, :presence => true
-  validates :zip, :presence => true
-  validates :gender, :presence => true
+  validates :first_name, :last_name, :birthday, :gender, :presence => true
+  validates :address, :city, :state, :country, :zip, :presence => true
+
   validates :user_id, :presence => true
   before_validation :set_bib_number, :on => :create
   validates :bib_number, :presence => true
@@ -23,11 +18,8 @@ class Registrant < ActiveRecord::Base
   validate  :gender_present
 
   # contact-info block
-  validates :emergency_name, :presence => true
-  validates :emergency_relationship, :presence => true
-  validates :emergency_primary_phone, :presence => true
-  validates :responsible_adult_name, :presence => true, :if => :minor?
-  validates :responsible_adult_phone, :presence => true, :if => :minor?
+  validates :emergency_name, :emergency_relationship, :emergency_primary_phone, :presence => true
+  validates :responsible_adult_name, :responsible_adult_phone, :presence => true, :if => :minor?
   validate :no_payments_when_deleted
 
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
@@ -42,6 +34,7 @@ class Registrant < ActiveRecord::Base
   attr_accessible :registrant_event_sign_ups_attributes
   has_many :registrant_event_sign_ups, :dependent => :destroy , :inverse_of => :registrant
   accepts_nested_attributes_for :registrant_event_sign_ups
+  #has_many :sign_ups, :class_name => 'RegistrantEventSignUp', :conditions => ['signed_up = ?', true]
 
   validate :choices_are_all_set_or_none_set
 

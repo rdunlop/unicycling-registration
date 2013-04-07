@@ -1,12 +1,10 @@
 class AgeGroupEntry < ActiveRecord::Base
   attr_accessible :age_group_type_id, :end_age, :gender, :long_description, :short_description, :start_age, :wheel_size_id
 
-  belongs_to :age_group_type, :touch => true
-
-  validates :age_group_type, :presence => true
-  validates :short_description, :presence => true
+  validates :age_group_type, :short_description, :presence => true
   validates :gender, :inclusion => {:in => %w(Male Female Mixed), :message => "%{value} must be either 'Male', 'Female' or 'Mixed'"}
 
+  belongs_to :age_group_type, :touch => true
   belongs_to :wheel_size
 
   # possibly replace this with override serializable hash (https://github.com/rails/rails/pull/2200)

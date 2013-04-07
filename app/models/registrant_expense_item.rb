@@ -6,7 +6,6 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   has_paper_trail :meta => { :registrant_id => :registrant_id }
 
-  validates :expense_item, :presence => true
-  validates :registrant, :presence => true
+  validates :expense_item, :registrant, :presence => true
 
 end

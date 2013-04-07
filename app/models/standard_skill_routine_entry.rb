@@ -5,9 +5,8 @@ class StandardSkillRoutineEntry < ActiveRecord::Base
 
     attr_accessible :standard_skill_routine_id, :standard_skill_entry_id, :position
 
-    validates :standard_skill_entry_id, :presence => true
+    validates :standard_skill_entry_id, :standard_skill_routine_id, :presence => true
     validates :position, :presence => true, :numericality => {:only_integer => true}
-    validates :standard_skill_routine_id, :presence => true
 
     validate :no_more_than_18_skill_entries
     validate :no_more_than_12_non_riding_skills
