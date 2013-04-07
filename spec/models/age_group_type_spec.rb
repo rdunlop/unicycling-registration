@@ -33,6 +33,15 @@ describe AgeGroupType do
       @agt.age_group_entry_for(10, "Female").should == @age1
     end
 
+    describe "when searching a no-wheel-size age_group while using a wheel size" do
+      before(:each) do
+        @ws = FactoryGirl.create(:wheel_size_20)
+      end
+      it "still finds the age group entry" do
+        @agt.age_group_entry_for(10, "Male", @ws.id).should == @age1
+      end
+    end
+
     describe "When the age_group_entry has a wheel size" do
       before(:each) do
         @ws20 = FactoryGirl.create(:wheel_size_20)

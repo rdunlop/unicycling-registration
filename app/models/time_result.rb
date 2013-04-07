@@ -49,18 +49,13 @@ class TimeResult < ActiveRecord::Base
     Rails.cache.write(place_key, place)
   end
 
-  def age_group_entry
-    agt = event_category.age_group_type
-    return nil if agt.nil?
-    agt.age_group_entry_for(registrant.age, registrant.gender)
-  end
-
   def age_group_entry_description
-    ag_entry = age_group_entry
-    if ag_entry.nil?
+    agt = event_category.age_group_type
+    ag_entry_description = agt.age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id)
+    if ag_entry_description.nil?
       "No Age Group for #{registrant.age}-#{registrant.gender}"
     else
-      "#{ag_entry.start_age} - #{ag_entry.end_age}"
+      ag_entry_description
     end
   end
 

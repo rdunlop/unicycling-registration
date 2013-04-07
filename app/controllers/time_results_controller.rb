@@ -17,7 +17,7 @@ class TimeResultsController < ApplicationController
   end
 
   def results
-    @time_results = @time_results.includes(:registrant, :event_category).fastest_first
+    @time_results = @time_results.includes(:registrant => :default_wheel_size, :event_category => {}).fastest_first
     respond_to do |format|
       format.html # results.html.erb
       format.pdf { render :pdf => "results",
