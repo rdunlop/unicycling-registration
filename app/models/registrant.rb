@@ -57,7 +57,9 @@ class Registrant < ActiveRecord::Base
 
   has_many :additional_registrant_accesses, :dependent => :destroy
 
-  belongs_to :wheel_size
+  before_validation :set_default_wheel_size
+  belongs_to :default_wheel_size, :class_name => "WheelSize", :foreign_key => :wheel_size_id
+  validates :default_wheel_size, :presence => true
 
   after_initialize :init
 
@@ -82,15 +84,13 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def default_wheel_size
-    if self.wheel_size.nil?
+  def set_default_wheel_size
+    if self.default_wheel_size.nil?
       if self.age > 10
-        WheelSize.find_by_description("24\" Wheel")
+        self.default_wheel_size = WheelSize.find_by_description("24\" Wheel")
       else
-        WheelSize.find_by_description("20\" Wheel")
+        self.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
       end
-    else
-      self.wheel_size
     end
   end
 

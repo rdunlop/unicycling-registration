@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Registrant do
   before(:each) do
+    @ws20 = FactoryGirl.create(:wheel_size, :description => "20\" Wheel")
+    @ws24 = FactoryGirl.create(:wheel_size, :description => "24\" Wheel")
     @reg = FactoryGirl.create(:competitor)
   end
 
@@ -491,8 +493,7 @@ describe Registrant do
       end
 
       it "should have a wheel_size of 24\"" do
-        ws = FactoryGirl.create(:wheel_size, :description => "24\" Wheel")
-        @reg.default_wheel_size.should == ws
+        @reg.default_wheel_size.should == @ws24
       end
     end
     describe "and a registrant born the day after the starting date in 1982" do
@@ -506,25 +507,24 @@ describe Registrant do
     describe "with a 10 year old registrant" do
       before(:each) do
         @reg.birthday = Date.new(2002, 01, 22)
+        @reg.responsible_adult_name = "Something"
+        @reg.responsible_adult_phone = "Something"
       end
       it "requires the responsible_adult_name" do
         @reg.responsible_adult_name = nil
-        @reg.responsible_adult_phone = "Something"
         @reg.valid?.should == false
       end
       it "requires the responsible_adult_phone" do
-        @reg.responsible_adult_name = "Something"
         @reg.responsible_adult_phone = nil
         @reg.valid?.should == false
       end
       it "is valid if name and phone are present" do
-        @reg.responsible_adult_name = "Jane"
-        @reg.responsible_adult_phone = "1-800-stuff"
         @reg.valid?.should == true
       end
       it "should have a 20\" wheel" do
-        ws = FactoryGirl.create(:wheel_size, :description => "20\" Wheel")
-        @reg.default_wheel_size.should == ws
+        @reg.default_wheel_size = nil
+        @reg.valid?.should == true
+        @reg.default_wheel_size.should == @ws20
       end
     end
   end
