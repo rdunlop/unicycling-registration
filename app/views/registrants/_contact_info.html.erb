@@ -68,7 +68,7 @@
           <%= f.label :phone %>
         </td>
         <td>
-          <%= f.text_field :phone %>
+          <%= f.telephone_field :phone %>
         </td>
       </tr>
       <tr>
@@ -76,7 +76,7 @@
           <%= f.label :mobile %>
         </td>
         <td>
-          <%= f.text_field :mobile %>
+          <%= f.telephone_field :mobile %>
         </td>
       </tr>
       <tr>
@@ -84,7 +84,7 @@
           <%= f.label :email %>
         </td>
         <td>
-          <%= f.text_field :email, :class => "ui-tooltip", :title => "Provide your email address to receive updates to registration, schedule, and new events." %>
+          <%= f.email_field :email, :class => "ui-tooltip", :title => "Provide your email address to receive updates to registration, schedule, and new events." %>
         </td>
       </tr>
     </table>
@@ -126,7 +126,7 @@
           <%= f.label :emergency_primary_phone, "Primary Phone", :class => "required" %>
         </td>
         <td>
-          <%= f.text_field :emergency_primary_phone %>
+          <%= f.telephone_field :emergency_primary_phone %>
         </td>
       </tr>
       <tr>
@@ -134,7 +134,7 @@
           <%= f.label :emergency_other_phone, "Other Phone" %>
         </td>
         <td>
-          <%= f.text_field :emergency_other_phone %>
+          <%= f.telephone_field :emergency_other_phone %>
         </td>
       </tr>
     </table>
@@ -156,7 +156,7 @@
           <%= f.label :responsible_adult_phone, "Phone" %>
         </td>
         <td>
-          <%= f.text_field :responsible_adult_phone %>
+          <%= f.telephone_field :responsible_adult_phone %>
         </td>
       </tr>
     </table>
