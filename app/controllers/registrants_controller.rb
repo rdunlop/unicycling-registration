@@ -14,15 +14,11 @@ class RegistrantsController < ApplicationController
     end
   end
 
-  def load_for_index
-    @registrants = current_user.registrants
-    @total_owing = current_user.total_owing
-  end
-
   # GET /registrants
   # GET /registrants.json
   def index
-    load_for_index
+    @registrants = current_user.registrants
+    @total_owing = current_user.total_owing
 
     respond_to do |format|
       format.html # index.html.erb

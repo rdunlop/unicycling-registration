@@ -68,6 +68,7 @@ class Registrant < ActiveRecord::Base
 
   after_initialize :init
 
+
   def set_bib_number
     if self.bib_number.nil?
       if self.competitor

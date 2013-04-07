@@ -12,8 +12,8 @@ class EventChoicesController < ApplicationController
     @event_choices = @event.event_choices
   end
 
-  # GET /event_choices
-  # GET /event_choices.json
+  # GET /event/1/event_choices
+  # GET /event/1/event_choices.json
   def index
     load_choices
     @event_choice = EventChoice.new
@@ -40,11 +40,10 @@ class EventChoicesController < ApplicationController
     @event_choice = EventChoice.find(params[:id])
   end
 
-  # POST /event_choices
-  # POST /event_choices.json
+  # POST /event/1/event_choices
+  # POST /event/1/event_choices.json
   def create
-    @event_choice = EventChoice.new(params[:event_choice])
-    @event_choice.event = @event
+    @event_choice = @event.event_choices.new(params[:event_choice])
 
     respond_to do |format|
       if @event_choice.save
