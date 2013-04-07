@@ -17,7 +17,7 @@ class TimeResultsController < ApplicationController
   end
 
   def results
-    @time_results = @time_results.includes(:registrant, :event_category).order("disqualified, minutes, seconds, thousands")
+    @time_results = @time_results.includes(:registrant, :event_category).fastest_first
     respond_to do |format|
       format.html # results.html.erb
       format.pdf { render :pdf => "results",
@@ -30,8 +30,8 @@ class TimeResultsController < ApplicationController
   end
 
   def final_candidates
-    @male_time_results = @time_results.includes(:registrant, :event_category).where(:registrants => {:gender => "Male"}).order("disqualified, minutes, seconds, thousands")
-    @female_time_results = @time_results.includes(:registrant, :event_category).where(:registrants => {:gender => "Female"}).order("disqualified, minutes, seconds, thousands")
+    @male_time_results = @time_results.includes(:registrant, :event_category).where(:registrants => {:gender => "Male"}).fastest_first
+    @female_time_results = @time_results.includes(:registrant, :event_category).where(:registrants => {:gender => "Female"}).fastest_first
     respond_to do |format|
       format.html # final_candidates.html.erb
     end
