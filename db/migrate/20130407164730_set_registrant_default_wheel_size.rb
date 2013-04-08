@@ -32,6 +32,9 @@ class SetRegistrantDefaultWheelSize < ActiveRecord::Migration
   end
 
   def up
+    WheelSize.find_or_create_by_position_and_description(1, "16\" Wheel")
+    WheelSize.find_or_create_by_position_and_description(2, "20\" Wheel")
+    WheelSize.find_or_create_by_position_and_description(3, "24\" Wheel")
     EventConfiguration.reset_column_information
     WheelSize.reset_column_information
     Registrant.reset_column_information
