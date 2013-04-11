@@ -7,7 +7,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
   # GET /additional_registrant_accesses
   # GET /additional_registrant_accesses.json
   def index
-    @additional_registrant_accesses = AdditionalRegistrantAccess.all
+    @additional_registrant_accesses = current_user.additional_registrant_accesses
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +17,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
 
   # GET /users/1/additional_registrant_accesses/invitations
   def invitations
-    @additional_registrant_accesses = @user.registrants.map{ |reg| reg.additional_registrant_accesses}.flatten
+    @additional_registrant_accesses = @user.invitations
   end
 
   # GET /additional_registrant_accesses/new
@@ -70,7 +70,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
 
     respond_to do |format|
       if @additional_registrant_access.update_attributes({:declined => true})
-        format.html { redirect_to invitations_user_additional_registrant_accesses_path(user) }
+        format.html { redirect_to invitations_user_additional_registrant_accesses_path(user), notice: 'Request declined' }
         format.json { head :no_content }
       else
         format.html { redirect_to invitations_user_additional_registrant_accesses_path(user) }

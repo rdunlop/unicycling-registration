@@ -40,12 +40,24 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       other_reg = FactoryGirl.create(:registrant)
       get :index, {}
-      assigns(:registrants).should eq([registrant])
+      assigns(:my_registrants).should eq([registrant])
+      assigns(:shared_registrants).should == []
     end
     it "assigns the total_owing from the user" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       get :index, {}
       assigns(:total_owing).should == registrant.amount_owing
+    end
+
+    describe "when I have been granted additional_access" do
+      before(:each) do 
+        @other_reg = FactoryGirl.create(:competitor)
+        FactoryGirl.create(:additional_registrant_access, :user => @user, :accepted_readonly => true, :registrant => @other_reg)
+      end
+      it "shows the registrant" do
+        get :index, {}
+        assigns(:shared_registrants).should == [@other_reg]
+      end
     end
   end
 

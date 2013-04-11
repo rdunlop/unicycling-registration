@@ -12,60 +12,62 @@
     <b>Birthday:</b>
     <%= @registrant.birthday.strftime("%d-%b-%Y") %>
   </div>
-  <div>
-    <b>Address:</b>
-    <%= @registrant.address %>
-    <%= @registrant.city %>
-    <%= @registrant.state %>
-    <%= @registrant.country %>
-    <%= @registrant.zip %>
-  </div>
-  <div>
-    <b>Phone:</b>
-    <%= @registrant.phone %>
-  </div>
+  <% if can? :read_contact_info, @registrant  %>
+    <div>
+      <b>Address:</b>
+      <%= @registrant.address %>
+      <%= @registrant.city %>
+      <%= @registrant.state %>
+      <%= @registrant.country %>
+      <%= @registrant.zip %>
+    </div>
+    <div>
+      <b>Phone:</b>
+      <%= @registrant.phone %>
+    </div>
 
-  <div>
-    <b>Mobile:</b>
-    <%= @registrant.mobile %>
-  </div>
+    <div>
+      <b>Mobile:</b>
+      <%= @registrant.mobile %>
+    </div>
 
-  <div>
-    <b>Email:</b>
-    <%= @registrant.email %>
-  </div>
-  <div>
-    <b>Team/Club:</b>
-    <%= @registrant.club %>
-  </div>
-  <div>
-    <b>Team/Club Contact:</b>
-    <%= @registrant.club_contact %>
-  </div>
-  <div>
-    <b>USA Member Number:</b>
-    <%= @registrant.usa_member_number %>
-  </div>
-  <div>
-    <b>Emergency Contact Name:</b>
-    <%= @registrant.emergency_name %>
-  </div>
-  <div>
-    <b>Emergency Contact Relationship:</b>
-    <%= @registrant.emergency_relationship %>
-  </div>
-  <div>
-    <b>Emergency Contact Attending:</b>
-    <%= @registrant.emergency_attending ? "yes":"no" %>
-  </div>
-  <div>
-    <b>Emergency Contact Phone:</b>
-    <%= @registrant.emergency_primary_phone %>
-    <%= @registrant.emergency_other_phone %>
-  </div>
-  <div>
-    <b>Responsible Adult:</b>
-    <%= @registrant.responsible_adult_name %>
-    <%= @registrant.responsible_adult_phone %>
-  </div>
+    <div>
+      <b>Email:</b>
+      <%= @registrant.email %>
+    </div>
+    <div>
+      <b>Team/Club:</b>
+      <%= @registrant.club %>
+    </div>
+    <div>
+      <b>Team/Club Contact:</b>
+      <%= @registrant.club_contact %>
+    </div>
+    <div>
+      <b>USA Member Number:</b>
+      <%= @registrant.usa_member_number %>
+    </div>
+    <div>
+      <b>Emergency Contact Name:</b>
+      <%= @registrant.emergency_name %>
+    </div>
+    <div>
+      <b>Emergency Contact Relationship:</b>
+      <%= @registrant.emergency_relationship %>
+    </div>
+    <div>
+      <b>Emergency Contact Attending:</b>
+      <%= @registrant.emergency_attending ? "yes":"no" %>
+    </div>
+    <div>
+      <b>Emergency Contact Phone:</b>
+      <%= @registrant.emergency_primary_phone %>
+      <%= @registrant.emergency_other_phone %>
+    </div>
+    <div>
+      <b>Responsible Adult:</b>
+      <%= @registrant.responsible_adult_name %>
+      <%= @registrant.responsible_adult_phone %>
+    </div>
+  <% end %>
 </fieldset>

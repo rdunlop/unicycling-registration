@@ -5,6 +5,8 @@ class AdditionalRegistrantAccess < ActiveRecord::Base
   belongs_to :user
   validates :user, :registrant, :presence => true
 
+  scope :permitted, where(:accepted_readonly => true)
+
   after_initialize :init
 
   def init

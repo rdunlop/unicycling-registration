@@ -9,8 +9,8 @@ describe "registrants/index" do
 
   describe "with no registrants" do
     before(:each) do
-      @registrants = []
-      @total_owing = 0
+      @my_registrants = []
+      @shared_registrants = []
     end
     it "should not render the registrants list" do
       render
@@ -24,19 +24,11 @@ describe "registrants/index" do
 
   describe "with 2 registrants" do
     before(:each) do
-      assign(:registrants, [
-        FactoryGirl.create(:registrant,
-        :first_name => "Robin",
-        :middle_initial => "A",
-        :last_name => "Dunlop"
-        ),
-        FactoryGirl.create(:registrant,
-        :first_name => "Caitlin",
-        :middle_initial => "E",
-        :last_name => "Goeres"
-        )
-      ])
-      @total_owing = 40
+      @my_registrants = [
+        FactoryGirl.create(:registrant, :first_name => "Robin", :last_name => "Dunlop"),
+        FactoryGirl.create(:registrant, :first_name => "Caitlin", :last_name => "Goeres")]
+      @shared_registrants = []
+      @exp = FactoryGirl.create(:registrant_expense_item, :registrant => @my_registrants[0])
     end
     it "should render the registrants list" do
       render

@@ -33,7 +33,15 @@ class Ability
         can [:invitations, :decline, :accept_readonly], AdditionalRegistrantAccess do |aca|
           aca.registrant.user == user
         end
-        can [:read, :all, :waiver], Registrant, :user_id => user.id
+
+        can :read, Registrant do |reg|
+          user.accessible_registrants.include? (reg)
+        end
+        # allow viewing the contact_info block (additional_registrant_accesess don't allow this)
+        can :read_contact_info, Registrant, :user_id => user.id
+
+        can [:all, :waiver], Registrant, :user_id => user.id
+
         can :read, Payment, :user_id => user.id
 
         unless EventConfiguration.closed?

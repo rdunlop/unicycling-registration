@@ -5,6 +5,7 @@ describe "registrants/show" do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }
+    @ability.can :read_contact_info, Registrant
   end
 
   describe "for a competitor" do

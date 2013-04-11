@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   # GET /payments/new.json
   def new
-    current_user.registrants.each do |reg|
+    current_user.accessible_registrants.each do |reg|
       items = reg.owing_expense_items_with_details
       items.each do |item_pair|
         item = item_pair[0]

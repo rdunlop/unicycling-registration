@@ -17,8 +17,8 @@ class RegistrantsController < ApplicationController
   # GET /registrants
   # GET /registrants.json
   def index
-    @registrants = current_user.registrants
-    @total_owing = current_user.total_owing
+    @my_registrants = current_user.registrants
+    @shared_registrants = current_user.accessible_registrants - @my_registrants
 
     respond_to do |format|
       format.html # index.html.erb

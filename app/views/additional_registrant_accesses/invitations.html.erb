@@ -22,6 +22,7 @@ It does <u>Not</u> provide access to:
       <th>Requested by</th>
       <th>Registrant Entry Requested</th>
       <th>Date Requested</th>
+      <th>Accepted?</th>
       <th>Accept</th>
       <th>Reject</th>
     </tr>
@@ -32,8 +33,9 @@ It does <u>Not</u> provide access to:
         <td><%= ara.user %></td>
         <td><%= ara.registrant %></td>
         <td><%= ara.created_at %></td>
-        <td><%= link_to 'Accept (readonly)', accept_readonly_additional_registrant_access_path(ara) %></td>
-        <td><%= link_to 'Decline', decline_additional_registrant_access_path(ara) %></td>
+        <td><%= ara.accepted_readonly %></td>
+        <td><%= link_to 'Accept (readonly)', accept_readonly_additional_registrant_access_path(ara), method: :put, confirm: "Are you sure you want to provide access?" %></td>
+        <td><%= link_to 'Decline', decline_additional_registrant_access_path(ara), method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
