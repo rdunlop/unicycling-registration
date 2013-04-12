@@ -19,6 +19,7 @@ class WelcomeController < ApplicationController
         format.html { redirect_to welcome_help_path, notice: 'Feedback sent successfully.' }
       end
     else
+      @user = current_user
       render "help"
     end
   end

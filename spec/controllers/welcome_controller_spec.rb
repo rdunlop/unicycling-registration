@@ -14,6 +14,10 @@ describe WelcomeController do
       post 'feedback', {:contact_form => { :feedback => "Hello WorlD"}}
       response.should redirect_to(welcome_help_path)
     end
+    it "returns an error when no feedback" do
+      post "feedback", {:contact_form => {} }
+      response.should render_template("help")
+    end
     it "sends a message" do
       ActionMailer::Base.deliveries.clear
       post :feedback, { :contact_form => {:feedback => "Hello werld" }}
@@ -33,6 +37,10 @@ describe WelcomeController do
         @user = FactoryGirl.create(:user)
         sign_in @user
         @registrant = FactoryGirl.create(:competitor, :user => @user)
+      end
+      it "assigns the user object when feedback error" do
+        post "feedback", {:contact_form => {} }
+        assigns(:user).should == @user
       end
 
       it "includes the user's e-mail (and names of registrants)" do
