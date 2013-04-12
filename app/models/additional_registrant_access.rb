@@ -13,4 +13,10 @@ class AdditionalRegistrantAccess < ActiveRecord::Base
     self.accepted_readonly = false if self.accepted_readonly.nil?
     self.declined = false if self.declined.nil?
   end
+
+  def status
+    return "Declined" if declined
+    return "Accepted" if accepted_readonly
+    "New"
+  end
 end

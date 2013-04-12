@@ -1,0 +1,28 @@
+<% registrant = registrant_list_entry %>
+<tr class="<%= shared ? "shared" : "my" %>_registrant">
+  <td>
+    <%= link_to registrant.name, registrant, :class =>  (registrant.competitor ? "competitor_link" : "noncompetitor_link") %>
+  </td>
+  <td>
+    <%= number_to_currency(registrant.expenses_total) %>
+  </td>
+  <td>
+    <% if can? :update, registrant %>
+      <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to 'See Summary', registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+  </td>
+  <td>
+    <%= link_to 'Legal Waiver', waiver_registrant_path(registrant, :format => 'pdf'), {:class => "waiver_link", :target => "_blank" } %>
+  </td>
+  <td>
+    <% amount_owing = registrant.amount_owing %>
+    <% if amount_owing > 0 %>
+      <span class="unpaid"><%= number_to_currency(amount_owing) %> Unpaid</span>
+    <% else %>
+      <span class="paid">Paid</span>
+    <% end %>
+  </td>
+</tr>

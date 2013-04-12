@@ -22,6 +22,20 @@ describe AdditionalRegistrantAccessesController do
     end
   end
 
+  describe "GET invitations" do
+    it "assigns all invitations for me to @invitations" do
+      my_reg = FactoryGirl.create(:registrant, :user => @user)
+      ada = FactoryGirl.create(:additional_registrant_access, :registrant => my_reg)
+      get :invitations, {:user_id => @user.id}
+      assigns(:additional_registrant_accesses).should eq([ada])
+    end
+    it "doesn't assign other people's invitations" do
+      ada = FactoryGirl.create(:additional_registrant_access)
+      get :invitations, {:user_id => @user.id}
+      assigns(:additional_registrant_accesses).should eq([])
+    end
+  end
+
   describe "GET new" do
     it "assigns a new additional_registrant_access as @additional_registrant_access" do
       get :new, {:user_id => @user.id}

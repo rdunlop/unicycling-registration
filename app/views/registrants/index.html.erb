@@ -6,6 +6,13 @@
   </script>
 <% end %>
 
+<% if @display_invitation_request %>
+  <div class="invitation_access_banner">
+    You have been asked to share a registration with another user.
+    <%= link_to "See the Registration Access", invitations_user_additional_registrant_accesses_path(current_user) %> page for details.
+  </div> 
+<% end %>
+
 <% if EventConfiguration.closed? %>
   <div class="registration_closed">
     <h2>Online Registration is now closed</h2>
@@ -35,8 +42,11 @@
   </div>
 </div>
 
-<%= render :partial => "registrant_list", :object => @my_registrants, :locals => { :list_name => "My"} %>
-<%= render :partial => "registrant_list", :object => @shared_registrants, :locals => { :list_name => "Shared"} %>
+<% if @shared_registrants.count > 0 %>
+  <div>The Registrants list includes Registrants shared to you. See the <%= link_to "Registrant Access", user_additional_registrant_accesses_path(current_user) %> page for details.
+  </div>
+<% end %>
+<%= render :partial => "registrants_list", :locals => {:shared_list => @shared_registrants, :my_registrants_list => @my_registrants} %>
 
 <hr />
 

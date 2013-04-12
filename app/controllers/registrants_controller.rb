@@ -19,6 +19,7 @@ class RegistrantsController < ApplicationController
   def index
     @my_registrants = current_user.registrants
     @shared_registrants = current_user.accessible_registrants - @my_registrants
+    @display_invitation_request = current_user.invitations.count > 0
 
     respond_to do |format|
       format.html # index.html.erb

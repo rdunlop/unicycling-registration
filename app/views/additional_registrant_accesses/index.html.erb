@@ -6,31 +6,29 @@ If the request is accepted, you will be able to view their events, and pay for t
 You will not be granted access to their address or contact information
 </p>
 
-<table>
-  <caption>Current Request Statuses</caption>
-  <thead>
-    <tr>
-      <th>Registrant</th>
-      <th>Declined?</th>
-      <th>Accepted readonly?</th>
-      <th>Date created</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @additional_registrant_accesses.each do |additional_registrant_access| %>
+<% unless @additional_registrant_accesses.empty? %>
+  <table>
+    <caption>Current Request Statuses</caption>
+    <thead>
       <tr>
-        <td><%= additional_registrant_access.registrant %></td>
-        <td><%= additional_registrant_access.declined %></td>
-        <td><%= additional_registrant_access.accepted_readonly %></td>
-        <td><%= additional_registrant_access.created_at %></td>
+        <th>Registrant</th>
+        <th>Status</th>
+        <th>Date created</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br />
+    <tbody>
+      <% @additional_registrant_accesses.each do |additional_registrant_access| %>
+        <tr class="invitation_<%= additional_registrant_access.status %>">
+          <td><%= additional_registrant_access.registrant %></td>
+          <td><%= additional_registrant_access.status %></td>
+          <td><%= additional_registrant_access.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Additional registrant access', new_user_additional_registrant_access_path(@user) %>
+  <br />
+<% end %>
+
+<%= link_to 'Request Access to a Registration', new_user_additional_registrant_access_path(@user) %>

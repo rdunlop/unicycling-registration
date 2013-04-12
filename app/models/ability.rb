@@ -30,7 +30,8 @@ class Ability
       else
         can :read, User, :id => user.id
         can [:read, :new, :create], AdditionalRegistrantAccess, :user_id => user.id
-        can [:invitations, :decline, :accept_readonly], AdditionalRegistrantAccess do |aca|
+        can :invitations, AdditionalRegistrantAccess
+        can [:decline, :accept_readonly], AdditionalRegistrantAccess do |aca|
           aca.registrant.user == user
         end
 

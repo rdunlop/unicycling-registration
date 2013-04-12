@@ -7,7 +7,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
   # GET /additional_registrant_accesses
   # GET /additional_registrant_accesses.json
   def index
-    @additional_registrant_accesses = current_user.additional_registrant_accesses
+    @additional_registrant_accesses = @user.additional_registrant_accesses
 
     respond_to do |format|
       format.html # index.html.erb

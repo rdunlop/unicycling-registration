@@ -183,7 +183,11 @@ div.required {
 
 .registrant_summary {
   padding: 0;
+  border-collapse: collapse;
 
+  .shared_registrant {
+    background-color: rgb(238, 236, 236);
+  }
 }
 .registrant_edit_button {
   @include button(auto);

@@ -59,6 +59,16 @@ describe RegistrantsController do
         assigns(:shared_registrants).should == [@other_reg]
       end
     end
+    describe "when I have been requested to grant additional_access" do
+      before(:each) do
+        @my_reg = FactoryGirl.create(:registrant, :user => @user)
+        FactoryGirl.create(:additional_registrant_access, :user => @user, :accepted_readonly => true, :registrant => @my_reg)
+      end
+      it "displays a banner" do
+        get :index, {}
+        assigns(:display_invitation_request).should == true
+      end
+    end
   end
 
   describe "get all" do
