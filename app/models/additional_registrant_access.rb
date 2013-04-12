@@ -4,6 +4,7 @@ class AdditionalRegistrantAccess < ActiveRecord::Base
   belongs_to :registrant
   belongs_to :user
   validates :user, :registrant, :presence => true
+  validates :registrant_id, :uniqueness => {:scope => [:user_id]}
 
   scope :permitted, where(:accepted_readonly => true)
 

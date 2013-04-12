@@ -27,6 +27,11 @@ describe AdditionalRegistrantAccess do
     ara.accepted_readonly.should == false
   end
 
+  it "Cannot have a duplicate request" do
+    ara2 = FactoryGirl.build(:additional_registrant_access, :user => @ara.user, :registrant => @ara.registrant)
+    ara2.valid?.should == false
+  end
+
   describe "when neither declined nor accepeted" do
     before(:each) do
       @ara.declined = false
