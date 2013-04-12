@@ -60,6 +60,14 @@ describe AdditionalRegistrantAccessesController do
         post :create, {:user_id => @user.id, :additional_registrant_access => valid_attributes}
         response.should redirect_to(user_additional_registrant_accesses_path(@user))
       end
+      it "creates an e-mail to the target registrants' user" do
+        ActionMailer::Base.deliveries.clear
+        post :create, {:user_id => @user.id, :additional_registrant_access => valid_attributes}
+        num_deliveries = ActionMailer::Base.deliveries.size
+        num_deliveries.should == 1
+        mail = ActionMailer::Base.deliveries.first
+        mail.to.should == [@reg.user.email]
+      end
     end
 
     describe "with invalid params" do
@@ -80,25 +88,41 @@ describe AdditionalRegistrantAccessesController do
   end
 
   describe "PUT accepted_readonly" do
-    it "cannot accept its own invitation" do
-      additional_registrant_access = FactoryGirl.create(:additional_registrant_access, :user => @user, :registrant => @reg)
-      expect {
-        put :accept_readonly, {:id => additional_registrant_access.to_param}
-      }.to_not change(additional_registrant_access, :accepted_readonly).from(false).to(true)
-    end
-    it "redirects to the root if unauthorized" do
-      additional_registrant_access = FactoryGirl.create(:additional_registrant_access, :user => @user, :registrant => @reg)
-      put :accept_readonly, {:id => additional_registrant_access.to_param}
-      response.should redirect_to(root_path)
-    end
+    describe "with a request" do
+      before(:each) do
+        @additional_registrant_access = FactoryGirl.create(:additional_registrant_access, :user => @user, :registrant => @reg)
+      end
 
-    it "allows the registrant's user to accept the invitation" do
-      sign_out @user
-      sign_in @reg.user
-      additional_registrant_access = FactoryGirl.create(:additional_registrant_access, :user => @user, :registrant => @reg)
-      expect {
-        put :accept_readonly, {:id => additional_registrant_access.to_param}
-      }.to_not change(additional_registrant_access, :accepted_readonly).from(false).to(true)
+      it "cannot accept its own invitation" do
+        expect {
+          put :accept_readonly, {:id => @additional_registrant_access.to_param}
+        }.to_not change(@additional_registrant_access, :accepted_readonly).from(false).to(true)
+      end
+      it "redirects to the root if unauthorized" do
+        put :accept_readonly, {:id => @additional_registrant_access.to_param}
+        response.should redirect_to(root_path)
+      end
+
+      describe "when signed in as the target of the invitation" do
+        before(:each) do
+          sign_out @user
+          sign_in @reg.user
+        end
+
+        it "allows the registrant's user to accept the invitation" do
+          expect {
+            put :accept_readonly, {:id => @additional_registrant_access.to_param}
+          }.to_not change(@additional_registrant_access, :accepted_readonly).from(false).to(true)
+        end
+        it "creates an e-mail to the requesting user" do
+          ActionMailer::Base.deliveries.clear
+          put :accept_readonly, {:id => @additional_registrant_access.to_param}
+          num_deliveries = ActionMailer::Base.deliveries.size
+          num_deliveries.should == 1
+          mail = ActionMailer::Base.deliveries.first
+          mail.to.should == [@user.email]
+        end
+      end
     end
   end
 

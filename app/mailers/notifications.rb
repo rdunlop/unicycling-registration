@@ -20,4 +20,18 @@ class Notifications < ActionMailer::Base
 
     mail to: ENV['ERROR_EMAIL'], subject: 'Feedback'
   end
+
+  def request_registrant_access(target_registrant, requesting_user)
+
+    @target_registration = target_registrant.to_s
+    @requesting_user_email = requesting_user.email
+
+    mail to: target_registrant.user.email, subject: 'Requesting access to your Registration'
+  end
+
+  def registrant_access_accepted(target_registrant, requesting_user)
+    @target_registration = target_registrant.to_s
+
+    mail to: requesting_user.email, subject: 'Registrantion Access Granted'
+  end
 end
