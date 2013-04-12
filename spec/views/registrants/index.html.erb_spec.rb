@@ -14,7 +14,7 @@ describe "registrants/index" do
     end
     it "should not render the registrants list" do
       render
-      assert_select "legend", :text => "My Registrations", :count => 0
+      assert_select "legend", :text => "Registrations", :count => 0
     end
     it "should not render the amonut owing block" do
       render

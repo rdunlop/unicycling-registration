@@ -43,11 +43,6 @@ describe RegistrantsController do
       assigns(:my_registrants).should eq([registrant])
       assigns(:shared_registrants).should == []
     end
-    it "assigns the total_owing from the user" do
-      registrant = FactoryGirl.create(:competitor, :user => @user)
-      get :index, {}
-      assigns(:total_owing).should == registrant.amount_owing
-    end
 
     describe "when I have been granted additional_access" do
       before(:each) do 

@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
 
   def help
     @contact_form = ContactForm.new
+    @user = current_user
   end
 
   def feedback
