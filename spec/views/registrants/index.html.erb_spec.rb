@@ -32,7 +32,7 @@ describe "registrants/index" do
     end
     it "should render the registrants list" do
       render
-      assert_select "legend", :text => "My Registrations", :count => 1
+      assert_select "legend", :text => "Registrations", :count => 1
     end
 
     it "renders a list of registrants" do
