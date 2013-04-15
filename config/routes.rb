@@ -20,7 +20,7 @@ Workspace::Application.routes.draw do
         post :undelete
       end
     end
-    resources :payments, :only => [:index]
+    resources :payments, :only => [:index, :new, :create] 
     resources :events, :only => [:index, :show]
 
     namespace :export do

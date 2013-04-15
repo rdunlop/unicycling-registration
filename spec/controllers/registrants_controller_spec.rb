@@ -44,24 +44,53 @@ describe RegistrantsController do
       assigns(:shared_registrants).should == []
     end
 
-    describe "when I have been granted additional_access" do
-      before(:each) do 
-        @other_reg = FactoryGirl.create(:competitor)
-        FactoryGirl.create(:additional_registrant_access, :user => @user, :accepted_readonly => true, :registrant => @other_reg)
-      end
-      it "shows the registrant" do
-        get :index, {}
-        assigns(:shared_registrants).should == [@other_reg]
+    describe "as the sender of a registration request" do
+      describe "when I have been granted additional_access" do
+        before(:each) do
+          @other_reg = FactoryGirl.create(:competitor)
+          FactoryGirl.create(:additional_registrant_access, :user => @user, :accepted_readonly => true, :registrant => @other_reg)
+        end
+        it "shows the registrant" do
+          get :index, {}
+          assigns(:shared_registrants).should == [@other_reg]
+        end
       end
     end
-    describe "when I have been requested to grant additional_access" do
+
+    describe "as the receiver of a registration request" do
       before(:each) do
+        @other_user = FactoryGirl.create(:user)
         @my_reg = FactoryGirl.create(:registrant, :user => @user)
-        FactoryGirl.create(:additional_registrant_access, :user => @user, :accepted_readonly => true, :registrant => @my_reg)
+        @req = FactoryGirl.create(:additional_registrant_access, :user => @other_user, :accepted_readonly => false, :registrant => @my_reg)
       end
+
       it "displays a banner" do
         get :index, {}
         assigns(:display_invitation_request).should == true
+        assigns(:display_invitation_manage_banner).should == false
+      end
+
+      describe "when I have accepted the request" do
+        before(:each) do
+          @req.accepted_readonly = true
+          @req.save!
+        end
+        it "displays the manage banner" do
+          get :index, {}
+          assigns(:display_invitation_request).should == false
+          assigns(:display_invitation_manage_banner).should == true
+        end
+        describe "when I have a second request" do
+          before(:each) do
+            @my_2nd_reg = FactoryGirl.create(:registrant, :user => @user)
+            FactoryGirl.create(:additional_registrant_access, :user => @other_user, :accepted_readonly => false, :registrant => @my_2nd_reg)
+          end
+          it "displays the invitation banner" do
+            get :index, {}
+            assigns(:display_invitation_request).should == true
+            assigns(:display_invitation_manage_banner).should == true
+          end
+        end
       end
     end
   end

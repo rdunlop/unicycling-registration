@@ -1,4 +1,7 @@
 TO DO (MUST be done BEFORE LIVE):
+- Make the "shared registrant" banner disappear (or de-highlight) when accepted
+- Prevent users from saving a payment in progress over the boundary?
+
  - Add foreign key indices on all *_id columns
  - Should I titlize the names of the registrants?
  - add unique constraints on database level?

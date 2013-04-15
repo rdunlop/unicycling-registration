@@ -12,6 +12,12 @@
     <%= link_to "See the Registration Access", invitations_user_additional_registrant_accesses_path(@user) %> page for details.
   </div> 
 <% end %>
+<% if @display_invitation_manage_banner %>
+  <div class="invitation_manage_banner">
+    You have shared your registration with another user.
+    <%= link_to "See the Registration Access", invitations_user_additional_registrant_accesses_path(@user) %> to adjust settings.
+  </div> 
+<% end %>
 
 <% if EventConfiguration.closed? %>
   <div class="registration_closed">
