@@ -41,4 +41,47 @@ describe Admin::PaymentsController do
     end
   end
 
+  describe "POST create" do
+    before(:each) do
+      @ei = FactoryGirl.create(:expense_item)
+      @reg = FactoryGirl.create(:registrant)
+    end
+
+    it "can create a payment" do
+      expect {
+        post :create, {:payment => {
+        :note => "Volunteered",
+        :payment_details_attributes => [
+          {
+        :registrant_id => @reg.id,
+        :expense_item_id => @ei.id,
+        :details => "Additional Details"
+        }]
+        }}
+      }.to change(Payment, :count).by(1)
+      p = Payment.last
+      p.note.should == "Volunteered"
+      p.completed.should == true
+      pd = PaymentDetail.last
+      pd.amount.should == @ei.cost
+    end
+    it "can handle receiving incomplete payment_details" do
+      expect {
+        post :create, {:payment => {
+        :note => "Volunteered",
+        :payment_details_attributes => [
+          {
+        :registrant_id => @reg.id,
+        :expense_item_id => @ei.id,
+        :details => "Additional Details"
+          },
+          {
+        :registrant_id => '',
+        :expense_item_id => @ei.id,
+        :details => "Additional Details"
+        }]
+        }}
+      }.to change(PaymentDetail, :count).by(1)
+    end
+  end
 end

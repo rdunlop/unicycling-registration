@@ -1,16 +1,17 @@
 class Payment < ActiveRecord::Base
-  attr_accessible :cancelled, :completed, :completed_date, :payment_date, :transaction_id, :user_id
+  attr_accessible :cancelled, :completed, :completed_date, :payment_date, :transaction_id, :user_id, :note
   attr_accessible :payment_details_attributes
 
   scope :completed, where(:completed => true)
 
   validates :user_id, :presence => true
+  validate :transaction_id_or_note
 
   has_paper_trail
 
   belongs_to :user
   has_many :payment_details, :inverse_of => :payment, :dependent => :destroy
-  accepts_nested_attributes_for :payment_details
+  accepts_nested_attributes_for :payment_details, :reject_if => proc { |attributes| attributes['registrant_id'].blank? }
 
   after_save :update_registrant_items
   after_initialize :init
@@ -18,6 +19,14 @@ class Payment < ActiveRecord::Base
   def init
     self.cancelled = false if self.cancelled.nil?
     self.completed = false if self.completed.nil?
+  end
+
+  def transaction_id_or_note
+    if completed
+      if transaction_id.blank? and note.blank?
+        errors[:base] << "Transaction ID or Note must be filled in"
+      end
+    end
   end
 
   def update_registrant_items
