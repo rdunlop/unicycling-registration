@@ -96,12 +96,8 @@ class EventConfigurationsController < ApplicationController
 
   # FOR THE TEST_MODE flags
   def admin
-    current_user.club_admin = false
-    current_user.save
-
     current_user.add_role :admin
     current_user.remove_role :super_admin
-    current_user.remove_role :club_admin
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
@@ -109,25 +105,8 @@ class EventConfigurationsController < ApplicationController
   end
 
   def super_admin
-    current_user.club_admin = false
-    current_user.save
-
     current_user.remove_role :admin
     current_user.add_role :super_admin
-    current_user.remove_role :club_admin
-
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
-    end
-  end
-
-  def club_admin
-    current_user.club_admin = true
-    current_user.save
-
-    current_user.remove_role :admin
-    current_user.remove_role :super_admin
-    current_user.add_role :club_admin
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
@@ -135,12 +114,8 @@ class EventConfigurationsController < ApplicationController
   end
 
   def normal
-    current_user.club_admin = false
-    current_user.save
-
     current_user.remove_role :super_admin
     current_user.remove_role :admin
-    current_user.remove_role :club_admin
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }

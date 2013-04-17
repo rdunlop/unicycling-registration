@@ -10,9 +10,6 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :club
-
-  validates :club_admin, :inclusion => { :in => [true, false] } # because it's a boolean
 
   has_paper_trail :meta => {:user_id => :id }
 
@@ -22,12 +19,6 @@ class User < ActiveRecord::Base
   has_many :invitations, :through => :registrants, :class_name => "AdditionalRegistrantAccess", :source => :additional_registrant_accesses
 
   has_many :payments
-
-  after_initialize :init
-
-  def init
-    self.club_admin = false if self.club_admin.nil?
-  end
 
   def to_s
     email
