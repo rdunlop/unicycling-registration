@@ -95,7 +95,6 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% if can? :manage, Registrant %>
             <li><%= link_to 'Modification History', admin_history_index_path %></li>
           <% end %>
-          <li><%= link_to 'Edit Club Registrants', club_admin_registrants_path %></li>
         </ul>
         </li>
       <% end %>
