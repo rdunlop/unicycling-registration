@@ -420,6 +420,10 @@ The Competition Results Data (for judging)
 * AgeGroupEntries: Each age entry has a start-age and end-age.
 * WheelSize: The wheel size that the age enty must use, and the competitor must
   use.
+* EventClass: The style of competition (Artistic, Street, Two-Attempt-Distance,
+  etc)
+* JudgeType: describes the various types of judges that we have (Presentation,
+  Technical, Street, etc) and their scoring behaviors.
 
 * TimeResult: The results of a timed race for a registrant
 

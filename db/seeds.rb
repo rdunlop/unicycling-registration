@@ -6,6 +6,74 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+if EventClass.count == 0
+  EventClass.create(:name => "Freestyle")
+  EventClass.create(:name => "Flatland")
+  EventClass.create(:name => "Two Attempt Distance")
+  EventClass.create(:name => "Street")
+end
+
+if JudgeType.count == 0
+  JudgeType.create(:name => "Presentation", 
+                   :val_1_description => "Mistakes",
+                   :val_2_description => "Choreography & Style",
+                   :val_3_description => "Originality of Performance & Showmanship",
+                   :val_4_description => "Interpretation",
+                   :val_1_max => 10,
+                   :val_2_max => 10,
+                   :val_3_max => 10,
+                   :val_4_max => 10,
+                   :event_class_id => EventClass.find_by_name("Freestyle").id
+                  )
+  JudgeType.create(:name => "Technical",
+                   :val_1_description => "Variety & Originality of Skills",
+                   :val_2_description => "Transitions & Mastery",
+                   :val_3_description => "Level of Difficulty",
+                   :val_4_description => "Interpretation",
+                   :val_1_max => 10,
+                   :val_2_max => 10,
+                   :val_3_max => 10,
+                   :val_4_max => 10,
+                   :event_class_id => EventClass.find_by_name("Freestyle").id
+                  )
+
+  JudgeType.create(:name => "Flatland Judge Type",
+                   :val_1_description => "?",
+                   :val_2_description => "?",
+                   :val_3_description => "?",
+                   :val_4_description => "?",
+                   :val_1_max => 10,
+                   :val_2_max => 10,
+                   :val_3_max => 10,
+                   :val_4_max => 10,
+                   :event_class_id => EventClass.find_by_name("Flatland").id
+                  )
+
+  JudgeType.create(:name => "Distance Judge Type",
+                   :val_1_description => "?",
+                   :val_2_description => "?",
+                   :val_3_description => "?",
+                   :val_4_description => "?",
+                   :val_1_max => 10,
+                   :val_2_max => 10,
+                   :val_3_max => 10,
+                   :val_4_max => 10,
+                   :event_class_id => EventClass.find_by_name("Two Attempt Distance").id
+                  )
+
+  JudgeType.create(:name => "Street Judge Type",
+                   :val_1_description => "?",
+                   :val_2_description => "?",
+                   :val_3_description => "?",
+                   :val_4_description => "?",
+                   :val_1_max => 10,
+                   :val_2_max => 10,
+                   :val_3_max => 10,
+                   :val_4_max => 10,
+                   :event_class_id => EventClass.find_by_name("Street").id
+                  )
+end
+
 if WheelSize.count == 0
   WheelSize.create(:position => 1, :description => "16\" Wheel")
   WheelSize.create(:position => 2, :description => "20\" Wheel")

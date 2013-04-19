@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417151946) do
+ActiveRecord::Schema.define(:version => 20130419223059) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -70,6 +70,12 @@ ActiveRecord::Schema.define(:version => 20130417151946) do
     t.boolean  "autocomplete"
   end
 
+  create_table "event_classes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "event_configurations", :force => true do |t|
     t.string   "short_name"
     t.string   "long_name"
@@ -122,6 +128,21 @@ ActiveRecord::Schema.define(:version => 20130417151946) do
     t.integer  "expense_group_id"
     t.boolean  "has_details"
     t.string   "details_label"
+  end
+
+  create_table "judge_types", :force => true do |t|
+    t.string   "name"
+    t.string   "val_1_description"
+    t.string   "val_2_description"
+    t.string   "val_3_description"
+    t.string   "val_4_description"
+    t.integer  "val_1_max"
+    t.integer  "val_2_max"
+    t.integer  "val_3_max"
+    t.integer  "val_4_max"
+    t.integer  "event_class_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "payment_details", :force => true do |t|
