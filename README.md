@@ -371,3 +371,60 @@ system (if so desired):
     $ PGPASSWORD=password dropdb -U postgres -h localhost app_development
     $ PGPASSWORD=password createdb -U postgres -h localhost app_development
     $ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_development latest.dump
+
+
+Comments on the database schema
+===============================
+
+The Base Schema (used for all other data)
+-----------------------------------------
+
+* EventConfiguration: Site-wide configuration table.
+* Registrant: Holds Details on an individual registrant. They may be
+  competitors, or non-competitors
+* User: a log-in-able account email/passwordt
+
+The Event-Registration Schema (for registration details)
+--------------------------------------------------------
+* RegistrationPeriod: the date-range that each registration price will be
+  available
+
+* AdditionalRegistrantAccess: allows sharing registration details between User
+  accounts
+
+* Category: Specifies the categories of events that will be offered (Racing,
+  Artistic, etc)
+* Event: An event that can be signed up for (100m, MUni Downhill, etc)
+* EventCategory: the sub-classification of the Event that I have signed up for.
+* EventChoice: Additional Options that are requested when registering for an
+  event.
+* RegistrantChoice: The EventChoice chosen for the event by the registrant.
+* RegistrantEventSignUp: Indication that a registrant is choosing the event.
+
+* ExpenseGroup: Name for a group of expense items (T-Shirts, Dinner Tickets,
+  etc)
+* ExpenseItem: Specific Items that registrants can buy.
+* Payment: A payment that the registrant has created
+* PaymentDetails: individual line-items in the payment
+* RegistrantExpenseItem: Items that the registrant has chosen. BEFORE paying for
+  them.
+
+* StandardSkillEntry: A skill that can be chosen for Standard Skill
+* StandardSkillRoutineEntry: Chosen skill for registrant's Standard Skill
+  Routine
+* StandardSkillRoutine: A Registrant's Standard Skill Routine
+
+The Competition Results Data (for judging)
+------------------------------------------
+* AgeGroupType: A defined set of age ranges.
+* AgeGroupEntries: Each age entry has a start-age and end-age.
+* WheelSize: The wheel size that the age enty must use, and the competitor must
+  use.
+
+* TimeResult: The results of a timed race for a registrant
+
+Misc:
+-----
+* RailsAdminHistory: Supporting the railsAdmin console
+* Roles: supporting Admin/Superadmin roles
+

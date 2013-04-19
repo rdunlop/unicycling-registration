@@ -1,4 +1,11 @@
 TO DO (MUST be done BEFORE LIVE):
+- Create Judge Type From Unicycling (Pre-populate in Migration?)
+- Create Judge between EventCategory, AgeGroupEntry, JudgeType, User, Position
+- Create Competitor for EventCategory, Position, CustomExternalId, CustomExternalName
+- Add ability to show the registrants "Signed up" for an Event (eg: Individual Ferestyl, Male, 15+)
+ - Add ability to "Reorder Competitors" (which will create a Competitor object and set the Position.
+ - Create Member object which associates registrant(s) with Competitor.
+
 - Make the "shared registrant" banner disappear (or de-highlight) when accepted
 - Prevent users from saving a payment in progress over the boundary?
 
