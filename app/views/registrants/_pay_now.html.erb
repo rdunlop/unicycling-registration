@@ -4,12 +4,16 @@
       <%= link_to "Pay Now", new_payment_path, :class => "payment_link" %>
     </div>
     <div class="prices_increase">
-      Prices Increase in 
+      Prices Increase
       <% rp = RegistrationPeriod.relevant_period(Date.today) %>
       <%if rp.nil?  %>
         [Unknown]
       <% else %>
-        <%= distance_of_time_in_words(DateTime.now, rp.end_date) + " (" + ((rp.end_date) + 1).strftime("%b %e") + ")" %>
+        <% if (DateTime.now > rp.end_date) %>
+          very soon
+        <% else %>
+          in <%= distance_of_time_in_words(DateTime.now, rp.end_date) + " (" + ((rp.end_date) + 1).strftime("%b %e") + ")" %>
+        <% end %>
       <% end %>
     </div>
   <% end %>
