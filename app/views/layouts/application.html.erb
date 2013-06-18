@@ -92,8 +92,8 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% if can? :manage, Registrant %>
             <li><%= link_to 'Events Report', admin_events_path %></li>
           <% end %>
-          <% if can? :manage, Registrant %>
-            <li><%= link_to 'Modification History', admin_history_index_path %></li>
+          <% if can? :access, :rails_admin %>
+            <li><%= link_to 'Modification History', rails_admin_path %></li>
           <% end %>
         </ul>
         </li>
