@@ -1,5 +1,5 @@
 class EventConfiguration < ActiveRecord::Base
-  attr_accessible :artistic_closed_date, :closed, :contact_email, :currency, :dates_description, :event_url, :location, :logo_image, :long_name, :short_name, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :waiver_url, :comp_noncomp_url
+  attr_accessible :artistic_closed_date, :contact_email, :currency, :dates_description, :event_url, :location, :logo_image, :long_name, :short_name, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :waiver_url, :comp_noncomp_url
 
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
@@ -66,6 +66,22 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
+  def self.closed_date
+    last_online_rp = RegistrationPeriod.last_online_period
+    last_online_rp.end_date unless last_online_rp.nil?
+  end
+
+  def self.closed?(today = Date.today)
+    last_online_rp = RegistrationPeriod.last_online_period
+
+    if last_online_rp.nil?
+      false
+    else
+      last_online_rp.last_day < today
+    end
+  end
+
+
   def self.waiver_url
     ec = EventConfiguration.first
     if ec.nil? or ec.waiver_url.nil? or  ec.waiver_url.empty?
@@ -99,15 +115,6 @@ class EventConfiguration < ActiveRecord::Base
 
   def as_json(options={})
     super(:except => [:logo_binary, :logo_type, :logo_filename])
-  end
-
-  def self.closed?
-    ec = EventConfiguration.first
-    unless ec.nil?
-      ec.closed
-    else
-      false
-    end
   end
 
 end

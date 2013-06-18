@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419223059) do
+ActiveRecord::Schema.define(:version => 20130618144359) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(:version => 20130419223059) do
     t.binary   "logo_binary"
     t.string   "currency"
     t.string   "contact_email"
-    t.boolean  "closed"
     t.date     "artistic_closed_date"
     t.date     "standard_skill_closed_date"
     t.date     "tshirt_closed_date"

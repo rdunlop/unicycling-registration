@@ -208,9 +208,10 @@ describe RegistrantsController do
     end
     describe "when the system is 'closed'" do
       before(:each) do
-        FactoryGirl.create(:event_configuration, :closed => true)
+        FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2010,02,02))
       end
       it "should not succeed" do
+        EventConfiguration.closed?.should == true
         get :new
         response.should_not be_success
       end

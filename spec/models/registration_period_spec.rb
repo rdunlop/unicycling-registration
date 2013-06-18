@@ -39,8 +39,8 @@ describe RegistrationPeriod do
     rp.onsite.should == false
   end
 
-  it "calculates the closed_date as the day of the end date" do
-    RegistrationPeriod.closed_date.should == Date.new(2012, 11,07)
+  it "can determine the last online registration period" do
+    RegistrationPeriod.last_online_period.should == @rp
   end
 
   describe "with existing periods" do
@@ -65,10 +65,10 @@ describe RegistrationPeriod do
       RegistrationPeriod.relevant_period(Date.new(2012,02,04)).should == @rp2
     end
 
-    it "disregards onsite registration periods for closed_date" do
+    it "disregards onsite registration periods for last_online_period" do
       @rp.onsite = true
       @rp.save!
-      RegistrationPeriod.closed_date.should == Date.new(2012, 04, 04)
+      RegistrationPeriod.last_online_period.should == @rp2
     end
     describe "with more registration periods" do
       before(:each) do

@@ -31,13 +31,13 @@ class RegistrationPeriod < ActiveRecord::Base
     return (self.last_day < date)
   end
 
-  def self.closed_date
-    closed_date = nil
+  def self.last_online_period
+    last_period = nil
     RegistrationPeriod.all.each do |rp|
       next if rp.onsite
-      closed_date = rp.end_date
+      last_period = rp
     end
-    closed_date
+    last_period
   end
 
   def self.relevant_period(date)

@@ -20,6 +20,6 @@ class AddExternalIdToRegistrant < ActiveRecord::Migration
   end
 
   def down
-    drop_column :regsitrants, :external_id
+    remove_column :regsitrants, :external_id
   end
 end

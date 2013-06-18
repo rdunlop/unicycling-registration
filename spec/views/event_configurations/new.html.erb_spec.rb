@@ -19,7 +19,6 @@ describe "event_configurations/new" do
       assert_select "input#event_configuration_logo_image", :name => "event_configuration[logo_image]"
       assert_select "input#event_configuration_currency", :name => "event_configuration[currency]"
       assert_select "input#event_configuration_contact_email", :name => "event_configuration[contact_email]"
-      assert_select "input#event_configuration_closed", :name => "event_configuration[closed]"
       assert_select "input#event_configuration_test_mode", :name => "event_configuration[test_mode]"
     end
   end

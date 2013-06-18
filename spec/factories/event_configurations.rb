@@ -11,7 +11,6 @@ FactoryGirl.define do
     #logo ""
     currency "$"
     contact_email "robinc@dunlopweb.com"
-    closed false
     artistic_closed_date "2013-1-10"
     standard_skill_closed_date "2013-3-10"
     tshirt_closed_date "2013-5-10"
