@@ -30,6 +30,7 @@ describe EventConfigurationsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
+      standard_skill_closed_date: Date.tomorrow,
       short_name: "something short",
       long_name: "Something Long"
     }

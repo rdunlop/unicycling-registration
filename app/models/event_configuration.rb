@@ -4,6 +4,7 @@ class EventConfiguration < ActiveRecord::Base
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI::regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
+  validates :standard_skill_closed_date, :presence => true
 
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
 
@@ -78,6 +79,15 @@ class EventConfiguration < ActiveRecord::Base
       false
     else
       last_online_rp.last_day < today
+    end
+  end
+
+  def self.standard_skill_closed?(today = Date.today)
+    ec = EventConfiguration.first
+    if ec.nil?
+      false
+    else
+      ec.standard_skill_closed_date <= today
     end
   end
 

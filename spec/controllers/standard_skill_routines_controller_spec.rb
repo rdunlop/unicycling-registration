@@ -43,5 +43,16 @@ describe StandardSkillRoutinesController do
       post :create, {:registrant_id => FactoryGirl.create(:registrant).id}
       response.should redirect_to(root_path)
     end
+
+    describe "when standard skill is closde" do
+      before(:each) do
+        FactoryGirl.create(:event_configuration, :standard_skill_closed_date => Date.yesterday)
+      end
+
+      it "cannot create a new routine" do
+        post :create, {:registrant_id => @registrant.id}
+        response.should redirect_to(root_path)
+      end
+    end
   end
 end

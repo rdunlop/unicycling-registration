@@ -81,6 +81,17 @@ describe StandardSkillRoutineEntriesController do
         response.should render_template("show")
       end
     end
+    describe "when standard_skill is closed" do
+      before(:each) do
+        FactoryGirl.create(:event_configuration, :standard_skill_closed_date => Date.yesterday)
+      end
+
+      it "Cannot create new entries" do
+        expect {
+          post :create, {:standard_skill_routine_id => @routine.id, :standard_skill_routine_entry => @valid_attributes}
+        }.to change(StandardSkillRoutineEntry, :count).by(0)
+      end
+    end
   end
 
   describe "DELETE destroy" do

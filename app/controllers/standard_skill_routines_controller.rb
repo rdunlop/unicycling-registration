@@ -10,7 +10,7 @@ class StandardSkillRoutinesController < ApplicationController
 
   # POST /registrants/:id/standard_skill_routines/
   def create
-    authorize! :edit, @registrant
+    authorize! :read, @registrant
     routine = StandardSkillRoutine.new
     routine.registrant = @registrant
     routine.save!

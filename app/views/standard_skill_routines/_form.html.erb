@@ -13,6 +13,6 @@
     <%= f.select(:standard_skill_entry_id, StandardSkillEntry.all.map{ |ent| [ent, ent.id]}) %>
   </div>
   <div class="actions">
-    <%= f.submit 'Insert New' %>
+    <%= f.submit 'Insert New', :class => "multiclick" %>
   </div>
 <% end %>

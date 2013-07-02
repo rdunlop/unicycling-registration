@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EventConfiguration do
   before(:each) do
-    @ev = FactoryGirl.build(:event_configuration)
+    @ev = FactoryGirl.build(:event_configuration, :standard_skill_closed_date => Date.new(2013, 5, 5))
   end
 
   it "is valid from factoryGirl" do
@@ -49,6 +49,19 @@ describe EventConfiguration do
 
   it "should be open if no periods are defined" do
     EventConfiguration.closed?.should == false
+  end
+
+  it "should NOT have standard_skill_closed by default " do
+    EventConfiguration.standard_skill_closed?(Date.new(2013,1,1)).should == false
+  end
+
+  describe "with the standard_skill_closed_date defined" do
+    it "should be closed on the 5th" do
+      @ev.save!
+      EventConfiguration.standard_skill_closed?(Date.new(2013,5,4)).should == false
+      EventConfiguration.standard_skill_closed?(Date.new(2013,5,5)).should == true
+      EventConfiguration.standard_skill_closed?(Date.new(2013,5,6)).should == true
+    end
   end
 
   describe "with a registration period" do
