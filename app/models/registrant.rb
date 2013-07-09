@@ -54,6 +54,7 @@ class Registrant < ActiveRecord::Base
   # For event competitions/results
   has_many :members, :dependent => :destroy
   has_many :competitors, :through => :members
+  has_many :event_categories, :through => :competitors
 
   has_many :time_results, :dependent => :destroy
 

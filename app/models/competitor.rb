@@ -4,12 +4,12 @@ class Competitor < ActiveRecord::Base
     belongs_to :event_category
     acts_as_list :scope => :event_category
 
-    #has_many :scores, :dependent => :destroy
-    #has_many :boundary_scores, :dependent => :destroy
-    #has_many :street_scores, :dependent => :destroy
-    #has_many :standard_execution_scores, :dependent => :destroy
-    #has_many :standard_difficulty_scores, :dependent => :destroy
-    #has_many :distance_attempts, :dependent => :destroy, :order => "distance DESC, id DESC"
+    has_many :scores, :dependent => :destroy
+    has_many :boundary_scores, :dependent => :destroy
+    has_many :street_scores, :dependent => :destroy
+    has_many :standard_execution_scores, :dependent => :destroy
+    has_many :standard_difficulty_scores, :dependent => :destroy
+    has_many :distance_attempts, :dependent => :destroy, :order => "distance DESC, id DESC"
 
     attr_accessible :event_category_id, :position, :registrant_ids, :custom_external_id, :custom_name
     accepts_nested_attributes_for :registrants

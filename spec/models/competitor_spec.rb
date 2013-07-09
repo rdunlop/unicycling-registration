@@ -160,10 +160,10 @@ describe Competitor do
             @cr.save
 
             @score = Score.new
-            @score.Val1 = 1.0
-            @score.Val2 = 2.0
-            @score.Val3 = 3.0
-            @score.Val4 = 4.0
+            @score.val_1 = 1.0
+            @score.val_2 = 2.0
+            @score.val_3 = 3.0
+            @score.val_4 = 4.0
             @score.judge = FactoryGirl.create(:judge,
                                                           :user => FactoryGirl.create(:admin_user),
                                                           :judge_type => FactoryGirl.create(:judge_type))
@@ -220,7 +220,7 @@ describe Competitor do
   end
   describe "with a street_score" do
     before(:each) do
-      @comp = FactoryGirl.create(:competitor)
+      @comp = FactoryGirl.create(:event_competitor)
     end
 
     it "should be createable from the competitor" do
@@ -234,7 +234,7 @@ describe Competitor do
   end
   describe "with a distance attempt" do
     before(:each) do
-      @comp = FactoryGirl.create(:competitor)
+      @comp = FactoryGirl.create(:event_competitor)
       @da = DistanceAttempt.new
     end
     it "should be accessible from the competitor" do
@@ -298,7 +298,7 @@ describe Competitor do
 
     describe "when attempts have already been made" do
       before (:each) do
-        @comp = FactoryGirl.create(:competitor)
+        @comp = FactoryGirl.create(:event_competitor)
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 10, :fault => false)
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
       end

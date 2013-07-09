@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709030641) do
+ActiveRecord::Schema.define(:version => 20130709055458) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(:version => 20130709030641) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "boundary_scores", :force => true do |t|
+    t.integer  "competitor_id"
+    t.integer  "judge_id"
+    t.integer  "number_of_people"
+    t.integer  "major_dismount"
+    t.integer  "minor_dismount"
+    t.integer  "major_boundary"
+    t.integer  "minor_boundary"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "position"
@@ -56,6 +68,15 @@ ActiveRecord::Schema.define(:version => 20130709030641) do
     t.string   "custom_name"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+  end
+
+  create_table "distance_attempts", :force => true do |t|
+    t.integer  "competitor_id"
+    t.decimal  "distance",      :precision => 4, :scale => 0
+    t.boolean  "fault"
+    t.integer  "judge_id"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
   end
 
   create_table "event_categories", :force => true do |t|
@@ -149,6 +170,14 @@ ActiveRecord::Schema.define(:version => 20130709030641) do
     t.integer  "val_3_max"
     t.integer  "val_4_max"
     t.integer  "event_class_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "judges", :force => true do |t|
+    t.integer  "event_category_id"
+    t.integer  "judge_type_id"
+    t.integer  "user_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
@@ -276,6 +305,39 @@ ActiveRecord::Schema.define(:version => 20130709030641) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
+  create_table "scores", :force => true do |t|
+    t.integer  "competitor_id"
+    t.decimal  "val_1",         :precision => 5, :scale => 3
+    t.decimal  "val_2",         :precision => 5, :scale => 3
+    t.decimal  "val_3",         :precision => 5, :scale => 3
+    t.decimal  "val_4",         :precision => 5, :scale => 3
+    t.text     "notes"
+    t.integer  "judge_id"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+  end
+
+  create_table "standard_difficulty_scores", :force => true do |t|
+    t.integer  "competitor_id"
+    t.integer  "standard_skill_routine_entry_id"
+    t.integer  "judge_id"
+    t.integer  "devaluation"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  create_table "standard_execution_scores", :force => true do |t|
+    t.integer  "competitor_id"
+    t.integer  "standard_skill_routine_entry_id"
+    t.integer  "judge_id"
+    t.integer  "wave"
+    t.integer  "line"
+    t.integer  "cross"
+    t.integer  "circle"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
   create_table "standard_skill_entries", :force => true do |t|
     t.integer  "number"
     t.string   "letter"
@@ -297,6 +359,14 @@ ActiveRecord::Schema.define(:version => 20130709030641) do
     t.integer  "registrant_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "street_scores", :force => true do |t|
+    t.integer  "competitor_id"
+    t.integer  "judge_id"
+    t.decimal  "val_1",         :precision => 5, :scale => 3
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
   end
 
   create_table "time_results", :force => true do |t|
