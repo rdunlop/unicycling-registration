@@ -6,6 +6,9 @@ class EventCategory < ActiveRecord::Base
   has_many :registrant_event_sign_ups, :dependent => :destroy
   has_many :time_results
 
+  has_many :competitors, :dependent => :destroy, :order => "position"
+  has_many :registrants, :through => :competitors
+
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
   validates :position, :uniqueness => {:scope => [:event_id]}
 

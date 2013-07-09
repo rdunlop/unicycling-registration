@@ -1,0 +1,60 @@
+<h1>Freestyle - <%=@judge.event %> Judging Form</h1>
+<h2><%= @judge.judge_type.name %> Judge</h2>
+
+<% if cannot? :create_scores, @judge.event %>
+    <p class="event_locked">Scores for this event are now locked (closed)</p>
+<% end %>
+
+<h3>Judge: <%= @judge %></h3>
+
+<% # this page displays each competitor, and, IF PRESENT, the score for that competitor %>
+
+    <% # Display the scores, but allow one for editing %>
+    <%= conditional_form_for([@judge, @score.try(:competitor), @score], !@score.nil?) do |f| %>
+    <%= render :partial => "/shared/error_messages", :object => @score %>
+    <%= render :partial => "/shared/error_messages", :object => @boundary_score %>
+
+    <table class="judging">
+        <%= render :partial => "/scores/judge_header", :object => @judge %>
+        <tbody>
+
+    <% @judge.competitors.each do |competitor| %>
+    <tr id="competitor<%= competitor.id %>">
+        <% score = @judge.scores.where(:competitor_id => competitor.id).first %>
+        <% @boundary_score = @judge.boundary_scores.where(:competitor_id => competitor.id).first if @boundary_score.nil? %>
+        <% if @score.nil? or @score.competitor_id != competitor.id %>
+            <%= render :partial => "/competitors/single_competitor", :locals => {:update_link => @score.nil?, :competitor => competitor, :score => score } %>
+        <% else %>
+            <%= render :partial => "/competitors/competitor_basic", :object => competitor %>
+            <% # can make the hashes into a helper %>
+            <td class="judging_category">
+                <% unless @boundary_score.nil? %>
+                    <%= fields_for @boundary_score do |b|%>
+                        <%= b.label :number_of_people %>
+                        <%= b.number_field :number_of_people, {:min => 0, :autofocus => true } %>
+                        <%= b.label :major_dismount %>
+                        <%= b.number_field :major_dismount, {:min => 0 } %>
+                        <%= b.label :minor_dismount %>
+                        <%= b.number_field :minor_dismount, {:min => 0 } %>
+                        <%= b.label :major_boundary %>
+                        <%= b.number_field :major_boundary, {:min => 0 } %>
+                        <%= b.label :minor_boundary %>
+                        <%= b.number_field :minor_boundary, {:min => 0 } %>
+                    <% end %>
+                <% else %>
+                    <%= f.number_field :Val1, {:min => 0, :max => @judge.judge_type.Val1max, :step => 0.001, :autofocus => true } %>
+                <% end %>
+            </td>
+            <td class="judging_category"><%= f.number_field :Val2, {:min => 0, :max => @judge.judge_type.Val2max, :step => 0.001 } %></td>
+            <td class="judging_category"><%= f.number_field :Val3, {:min => 0, :max => @judge.judge_type.Val3max, :step => 0.001 } %></td>
+            <td class="judging_category"><%= f.number_field :Val4, {:min => 0, :max => @judge.judge_type.Val4max, :step => 0.001 } %></td>
+            <td></td>
+            <td></td>
+            <td><%= f.submit 'Save' %></td>
+        <% end %>
+    </tr>
+    <% end %>
+        </tbody>
+    </table>
+    <% end %>
+

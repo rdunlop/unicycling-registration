@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618144359) do
+ActiveRecord::Schema.define(:version => 20130709030641) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(:version => 20130618144359) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "info_url"
+  end
+
+  create_table "competitors", :force => true do |t|
+    t.integer  "event_category_id"
+    t.integer  "position"
+    t.integer  "custom_external_id"
+    t.string   "custom_name"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "event_categories", :force => true do |t|
@@ -142,6 +151,13 @@ ActiveRecord::Schema.define(:version => 20130618144359) do
     t.integer  "event_class_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+  end
+
+  create_table "members", :force => true do |t|
+    t.integer  "competitor_id"
+    t.integer  "registrant_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "payment_details", :force => true do |t|

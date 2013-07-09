@@ -18,4 +18,8 @@ module ApplicationHelper
   def mixpanel?
     !ENV['MIXPANEL_TOKEN'].nil?
   end
+
+  def numeric?(val)
+    Float(val) != nil rescue false
+  end
 end

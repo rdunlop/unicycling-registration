@@ -76,8 +76,17 @@ Workspace::Application.routes.draw do
 
   resources :registration_periods
 
+  resources :competitors, :only => [:edit, :update, :destroy]
   resources :event_choices, :except => [:index, :create, :new]
   resources :event_categories, :except => [:index, :create, :new] do
+    resources :competitors, :only => [:index, :new, :create, :destroy] do
+      collection do
+        post :upload
+        post :add_all
+        delete :destroy_all
+      end
+    end
+
     resources :time_results, :only => [:index, :create] do
       collection do
         put :set_places

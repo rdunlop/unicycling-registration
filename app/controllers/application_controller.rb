@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   protect_from_forgery
   check_authorization :unless => :devise_controller?
   skip_authorization_check :if => :rails_admin_controller?

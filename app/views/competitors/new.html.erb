@@ -1,0 +1,14 @@
+<h3><%= @event_category.event %> - <%= @event_category %></h3>
+
+<div>
+      <%= render :partial => "/competitors/competitors", :object => @event_category.competitors %>
+      <hr />
+      <%= render :partial => "/competitors/form", :object => @competitor %>
+</div>
+<div class="import">
+    <%= render :partial => "upload" %>
+</div>
+
+<div class="bottom-nav">
+<%= link_to 'Back', event_category_path(@event_category) %>
+</div>

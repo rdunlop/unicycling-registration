@@ -1,0 +1,23 @@
+    <% # this page displays a single competitor "competitor"
+       #  If a score is present, displays the score for that competitor. 
+       #  If 'update_link' is set, displays a link to update that score %>
+    <tr>
+        <% if score.nil? %>
+            <%= render :partial => "/competitors/competitor_basic", :object => competitor %>
+            <%= render :partial => "/scores/blank_score" %>
+        <% else %>
+            <%= render :partial => "/scores/score_with_total", :object => score %>
+        <% end %>
+
+        <% if update_link %>
+            <% if can? :create_scores, @judge.event %>
+                <% if score.nil? %>
+                    <td><%= link_to 'Update', new_judge_competitor_score_path(@judge, competitor) %></td>
+                <% else %>
+                    <td><%= link_to 'Update', edit_judge_competitor_score_path(score.judge, score.competitor, score) %></td>
+                <% end %>
+            <% end %>
+        <% else %>
+            <td></td>
+        <% end %>
+    </tr>

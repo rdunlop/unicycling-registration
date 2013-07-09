@@ -1,0 +1,12 @@
+<h3>Competitors for this Event:</h3>
+<% unless competitors.empty? %>
+  <table>
+    <tr>
+      <th>Order</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th></th>
+    </tr>
+    <%= render :partial => "/competitors/competitor", :collection => competitors %>
+  </table>
+<% end %>

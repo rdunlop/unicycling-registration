@@ -1,0 +1,7 @@
+<% fields_for :registrants do |reg| %>
+<div class="field">
+  <%= reg.label :registrant_id %><br />
+  <%= reg.select(:registrant_id, Registrant.all.map{ |reg| [reg, reg.id]}) %>
+</div>
+<% end %>
+

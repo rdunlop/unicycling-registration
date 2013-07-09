@@ -27,6 +27,7 @@ class Ability
         can :manage, Payment
         can :manage, StandardSkillRoutineEntry
         can :manage, StandardSkillRoutine
+        can :manage, Competitor
       else
         can :read, User, :id => user.id
         can [:read, :new, :create], AdditionalRegistrantAccess, :user_id => user.id

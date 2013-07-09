@@ -1,0 +1,15 @@
+<% # variable 'form' is being passed in %>
+<%= semantic_form_for [form.event_category, form] do |f| %>
+  <%= f.semantic_errors %>
+  <%= f.inputs do %>
+    <%= f.input :position %>
+    <%= f.input :registrants, :collection => Registrant.where(:competitor => true).order(:bib_number) %>
+    <%= f.input :custom_external_id %>
+    <%= f.input :custom_name %>
+  <% end %>
+  <%= f.actions %>
+<% end %>
+<hr />
+ <%= link_to 'Add All', add_all_event_category_competitors_path(form.event_category), confirm: 'Are you sure you want to add ALL registrants?', method: :post %>
+ <br />
+ <%= link_to 'Destroy All', destroy_all_event_category_competitors_path(form.event_category), confirm: 'Are you sure you want to Destroy ALL competitors?', method: :delete %>
