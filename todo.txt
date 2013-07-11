@@ -1,0 +1,21 @@
+- Synchronize data between UCP and UDA.
+ - Export Registration-configuration data from UDA to UCP
+ - Export Registration data from UDA to UCP
+ - Export Payment data from UDA to UCP
+ - Export Competitor-assignment from UCP to UDA
+- Improve ability to modify/manage registration data on UDA for on-site modifications.
+
+
+Standard Skill:
+- Bring across tests
+- Figure out how to isolate the logic (create a new model?)
+- Add "Print list" option for standard skill report.
+- Add administrative option which shows signed-up vs filled-out.
+
+#21 Running total of expense items on the "Items" page enhancement
+#7  Registration Period should increase automatically b
+Remove Version table and paper_trail...replace with something else?
+
+TODO:
+Add ability to download payment and address details?
+Make page views more responsive

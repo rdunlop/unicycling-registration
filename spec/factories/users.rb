@@ -14,13 +14,12 @@ FactoryGirl.define do
     end
 
     factory :judge_user do
-      # XXX should be a judge Type?
-      after(:create) {|user| user.add_role :admin }
       after(:create) {|user| user.add_role :judge }
     end
 
     factory :chief_judge do
-      after(:create) {|user| user.add_role :chief_judge }
+      after(:create) {|user| user.add_role :judge }
+      after(:create) {|user| user.add_role :chief_judge, EventCategory }
     end
 
     after(:create) { |user| user.confirm! }

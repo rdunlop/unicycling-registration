@@ -6,13 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-if EventClass.count == 0
-  EventClass.create(:name => "Freestyle")
-  EventClass.create(:name => "Flatland")
-  EventClass.create(:name => "Two Attempt Distance")
-  EventClass.create(:name => "Street")
-end
-
 if JudgeType.count == 0
   JudgeType.create(:name => "Presentation", 
                    :val_1_description => "Mistakes",

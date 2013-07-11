@@ -103,12 +103,15 @@ Admin: (e.g. Connie)
  - Able to view/modify Payment/Registration data
 
 Judge:
- - Able to view the judge-data entry system
+ - Able to view/use the judge-data entry system
+ - Able to judge any event, in any way (judges are not event-specific)
+ - Able to ONLY view their own scores
 
 Chief Judge (for an event):
- - Able to do everything a judge can do
  - Able to do assign judges
+ - Able to do everything a judge can do (when they self-assign themselves as a judge)
  - Able to see the results that judges have entered
+ - Able to "Lock" event_categories once scoring is completed
 
 
 
