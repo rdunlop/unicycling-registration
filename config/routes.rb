@@ -2,7 +2,7 @@ Workspace::Application.routes.draw do
 
 
 
-  # ADMIN
+  # ADMIN (for use in Setting up the system)
   #
   #
   namespace :admin do
@@ -59,6 +59,10 @@ Workspace::Application.routes.draw do
       end
     end
   end
+
+  #### For Registration creation purposes
+  ###
+
   resources :expense_groups
 
   resources :expense_items, :except => [:new, :show]
@@ -76,26 +80,7 @@ Workspace::Application.routes.draw do
 
   resources :registration_periods
 
-  resources :competitors, :only => [:edit, :update, :destroy]
   resources :event_choices, :except => [:index, :create, :new]
-  resources :event_categories, :except => [:index, :create, :new] do
-    resources :competitors, :only => [:index, :new, :create, :destroy] do
-      collection do
-        post :upload
-        post :add_all
-        delete :destroy_all
-      end
-    end
-
-    resources :time_results, :only => [:index, :create] do
-      collection do
-        put :set_places
-        get :results
-        get :final_candidates
-      end
-    end
-  end
-  resources :time_results, :except => [:index, :new, :show, :create]
 
   resources :events, :except => [:index, :new, :show, :create] do
     resources :event_choices, :only => [:index, :create]
@@ -162,6 +147,64 @@ Workspace::Application.routes.draw do
       delete :decline
     end
   end
+
+  ###############################################
+  ### For event-data-gathering/reporting purposes
+  ###############################################
+
+  resources :judges, :only => [:update]
+
+  resources :competitors, :only => [:edit, :update, :destroy]
+  resources :event_categories, :except => [:index, :create, :new] do
+    member do
+      get :export_scores
+      # view scores
+      get :freestyle_scores
+      get :distance_attempts
+    end
+    resources :competitors, :only => [:index, :new, :create, :destroy] do
+      collection do
+        post :upload
+        post :add_all
+        delete :destroy_all
+      end
+    end
+
+    resources :time_results, :only => [:index, :create] do
+      collection do
+        put :set_places
+        get :results
+        get :final_candidates
+      end
+    end
+    resources :judges,      :only => [:new, :create, :destroy] do
+      collection do
+        post :copy_judges
+      end
+    end
+  end
+  resources :time_results, :except => [:index, :new, :show, :create]
+
+  resources :judges, :only => [] do
+    resources :competitors, :only => [:index] do
+      resources :scores, :only => [:new, :edit, :create, :update]
+
+      # display chosen competitors current scores, and update them
+      resources :standard_scores, :only => [:new, :create]
+      resources :distance_attempts, :only => [:new, :create]
+      resources :boundary_scores
+    end
+
+    #choose the desired competitor to add scores to
+    resources :standard_scores, :only => [:index]
+    resources :distance_attempts, :only => [:index] do
+      collection do
+        get :list
+      end
+    end
+    resources :street_scores, :only => [:index, :create, :destroy]
+  end
+
 
 
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'

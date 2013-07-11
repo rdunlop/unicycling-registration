@@ -1,0 +1,160 @@
+Unicycling Software - Overall Design Document
+=============================================
+
+Purpose:
+
+ * Describe the interfaces and responsibilities of each system in the Unicycling software ecosystem.
+ * Reference each of the software pieces, so that you can choose which one(s) you need for your event.
+
+
+
+
+Registration (Ruby on Rails)
+============
+
+The Registration system is an online application which is designed to be hosted months before the competition.
+It allows the event organizers to configure the offered events, and set the prices for competitor/non-competitor registrations.
+It is easily able to be configured to work with paypal for online payment processing.
+
+Inputs:
+
+* Requires configuration of the details of the unicycling competition
+ * Which races/competitions
+ * Date of competition
+
+Outputs:
+
+* Set of unique registration records, each of which is associated with multiple events, and multiple details for those events.
+
+UCP (Access database)
+===
+
+The Unicycling Convention Program (UCP) is a pair of Microsoft Access databases. It is able to:
+ * Perform registration-handling functions (data input)
+ * Perform Age Group configuration (for event organizers to know how many people in each event/category)
+  * Note: Age group calculation are not well defined
+ * Perform Judging score input, calculation and reporting
+ * Perform reporting of both event-sign-up
+ * Perform reporting of event-results
+
+Inputs:
+
+* Can be configured using the output of the Registration system, or can be configured independently
+* Can import (soon) data from the Registration system
+
+
+Judging (Ruby on Rails)
+=======
+
+The Judging application is to be used by judges during the competitins themselves.
+It is designed to be used by the judges for data entry/transcription.
+
+Inputs:
+
+* Requires configuration of the events, as well as the list of judges who can judge the event.
+ * This is an output from UCP
+
+Outputs:
+
+1) A report of raw scores, which can be imported into UCP
+
+2) [soon] A report of the resulting scores, places, which can be used for other reporting purposes?
+
+
+-------------------------
+Data Flow analysis/ideas:
+
+
+1) Registration Details:
+ - Name/Contact
+  - Event sign up choices
+
+Used for configuring/populating UCP
+
+2) Event Configuration Details:
+ - Event names
+  - Event choices
+
+Used for configuring UCP?
+ 
+
+3) Event-Competitor Details:
+ - Name/ID - Event configuration
+
+Used for configuring the Judging Application
+
+
+4) Judging Results:
+ - Competitor, Judge, Scores
+
+Used for transferring data back into UCP for the "official" calculations.
+
+
+
+------
+ROLES:
+------
+
+SuperAdmin: (e.g.: Robin)
+ - Configures the system, is given the power to destroy everything, and shoot themselves in the foot often.
+
+Admin: (e.g. Connie)
+ - Able to do many things that normal users cannot
+ - Able to view/modify Payment/Registration data
+
+Judge:
+ - Able to view the judge-data entry system
+
+Chief Judge (for an event):
+ - Able to do everything a judge can do
+ - Able to do assign judges
+ - Able to see the results that judges have entered
+
+
+
+
+=============================
+How would I like it to work?
+
+
+Registration gathering:
+- Event organizers configure the events being offered, adding/removing as desired.
+- Event organizers define the prices and price-increase schedule
+- Registration opens, and payment is received.
+
+Event Configuration:
+- Event organizers can use the initial event-configuration to seed this system, which then presents them with the options/configuration-dials necessary to fully define each event/age-groups.
+- This system can run independently of the Registration site, and does not require any "payment" system integration (allows import of excel file for registrant details)
+- Outputs a list of Event/competitor lists, which can be used to determine who is competing when/where.
+
+Judging data application:
+- Is designed to be used by trusted/trained personnel for inputting race data.
+- Each race may initially be configured with a list of "competitors in this event"
+- Each race may initially be configured with the judging rules, which determines the "type" of the race, such as Slow race, multi-lap, group, etc.
+- Data-verification steps are built in, which allow easy manual-checking of data entry.
+- Outputs a list of raw data entered
+
+- This system can also import data from itself, which allows the system to be used in a distributed manner, and re-synchronized easily.
+ - The data file will contain everything that has been entered, which allows re-creation of the same results on any other instance of the system.
+
+Awards printing and results printing/displaying:
+- Outputs a list of results of competition, which can be posted, and shows who-won, etc.
+- Maintains a list of "released reports", for ease of publishing results/etc.
+- Data can be entered via import of electronic-data files, or manually.
+
+QUESITON:
+- Which system deals with calculating the overall winners? (probably the judging data application?)
+
+------
+Things that UCP does that are not handled by the above design:
+
+- Generate reports of Overall chamipions
+- Generate repotrs for "Expert T-Shirts"
+- Standard Skill Data entry/judging/reporting
+- Medals formatting and report printing
+- Basketball data entry/processing (UCP doesn't really do this either)
+- Report of the results for a competitor (summary format)
+- Printing Start-lists (well, maybe by the new judging system?)
+- Allow easy addition of new registrants (multiple systems need multiple-updates)
+- 
+

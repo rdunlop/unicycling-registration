@@ -26,11 +26,15 @@ class Judge < ActiveRecord::Base
         user.email
     end
 
+    def event
+      event_category.event
+    end
+
     def to_s
         name
     end
     def get_scores
-        if event_category.event.event_class.name == "Street"
+        if event_category.event.event_class == "Street"
             self.street_scores
         else
             self.scores

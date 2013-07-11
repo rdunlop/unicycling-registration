@@ -1,0 +1,25 @@
+<% unless @competitor.nil? %>
+    <div>
+        <div class="competitor_details">
+            <span>ID: <%= @competitor.external_id %></span>
+            <span>Name: <%= @competitor.name %></span>
+            <span>Age: <%= @competitor.age %></span>
+            <span>Gender: <%= @competitor.gender %></span>
+            <span class="status <%= @competitor.status_code %>"><%= @competitor.status %></span>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <%= semantic_form_for(@distance_attempt, :url => judge_competitor_distance_attempts_path(@judge, @competitor)) do |f| %>
+          <%= f.semantic_errors %>
+          <%= f.inputs do %>
+            <%= f.input :distance, :input_html => {:autofocus => true, :autocomplete => 'off'}, :required => false %>
+            <%= f.input :fault %>
+          <% end %>
+          <%= f.actions do
+            f.action :submit, :button_html => {:class => 'add_distance_attempt_button'}, :label => 'Add Attempt'
+          end %>
+        <% end %>
+    </div>
+<% end %>

@@ -1,0 +1,19 @@
+<h3>Judges assigned for this Event:</h3>
+<!-- ************** Judges ********************* -->
+<% unless assigned_judges.empty? %>
+    <table>
+      <tr>
+        <th>Judge</th>
+        <th>Type</th>
+        <th></th>
+      </tr>
+      <% assigned_judges.each do |judge| %>
+        <tr>
+          <td><%= judge %></td>
+          <td><%= scoring_link(judge) %></td>
+          <td><%= link_to t('Destroy'), event_category_judge_path(judge.event_category, judge), confirm: 'Are you sure?', method: :delete %></td>
+        </tr><%
+      end
+    %>
+    </table>
+<% end %>

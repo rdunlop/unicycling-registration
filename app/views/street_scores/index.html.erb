@@ -1,0 +1,38 @@
+<h1>Event: <%=@event.name %> - Street Scores</h1>
+<h2>Judge: <%=@judge %></h2>
+
+<%= render :partial => 'form' %>
+
+<hr class="competitor_separator" />
+
+<% unless @street_scores.empty? %>
+    <table class="top_distance_attempts">
+        <caption>Street Scores</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Competitor</th>
+                <th>Entered Points</th>
+                <th class="derived">Judged Place</th>
+                <th class="derived">Judged Points</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+    <% @street_scores.each do |ss| %>
+        <% if ss.new_record?
+               next
+           end %>
+        <tr>
+            <td><%= ss.competitor.external_id %></td>
+            <td><%= ss.competitor.name %></td>
+            <td><%= ss.Val1 %></td>
+            <td class="derived"><%= @event.score_judged_place(ss) %></td>
+            <td class="derived"><%= @event.score_judged_points(ss) %></td>
+            <td><%= link_to t('Destroy'), judge_street_score_path(@judge, ss), confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+    <% end %>
+        </tbody>
+    </table>
+<% end %>

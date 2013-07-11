@@ -1,0 +1,13 @@
+<tr id="competitor<%=score.competitor.id%>">
+  <td><%= score.competitor.position %></td>
+  <td><%= score.competitor.external_id %></td>
+  <td><%= score.competitor.name %></td>
+  <td><%= score.val_1 %></td>
+  <td><%= score.val_2 %></td>
+  <td><%= score.val_3 %></td>
+  <td><%= score.val_4 %></td>
+  <td><%= score.Total %></td>
+  <td><%= score.judge_points %></td>
+  <td><%= score.notes %></td>
+  <td><%= link_to 'Update', edit_judge_score_path(score.judge, score) %></td>
+</tr>

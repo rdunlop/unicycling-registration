@@ -1,0 +1,11 @@
+
+<% if attempt.fault %>
+    <tr class="fault">
+<% else %>
+    <tr>
+<% end %>
+
+    <td><%= attempt.distance %></td>
+    <td><%= attempt.fault ? "yes" : "no" %></td>
+    <td><%= link_to t('Destroy'), distance_attempt_path(attempt.id), confirm: 'Are you sure?', method: :delete %></td>
+</tr>

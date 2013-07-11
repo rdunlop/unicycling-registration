@@ -1,0 +1,247 @@
+Person_ID,100M,400M,800M,10M Wheel Walk,30MWheel Walk,One Foot,Slow Forward,Slow Backward,Obsticle Course,High Jump,Long Jump,Juggling,Ultimate Wheel,Coasting,Relay Raqce,Basketball,Hockey,CrossCountry,10K,Marathon,Criterium,Standard Skill,Individual,Pairs,Pairs Partner,Group,Group Name,Traditional Club,Intermediate Club,All Club,Flatland,Street,Trials,UpHill,Downhill,Traditional Club Name,Intermediate Club Name,All Club Name
+10001,1,1,1,0,0,0,0,0,1,0,1,0,0,0,1,0,1,1,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Beginner,1,1,,,
+10002,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,0,Not Participating,Not Participating,,0,,1,1,1,Not Participating,Not Participating,Not Participating,1,1,RTUC AGSW,RTUC AGSW,RTUC AGSW
+10003,1,1,1,0,1,1,1,1,1,0,0,0,1,0,1,1,1,1,0,0,1,0,Not Participating,Advanced,Grace Alexander,1,RTUC AGSW,1,1,1,Not Participating,Not Participating,Advanced,1,1,RTUC AGSW,RTUC AGSW,RTUC AGSW
+10004,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,1,1,,,
+10005,1,1,1,0,1,1,1,1,1,0,0,1,0,0,1,1,1,0,1,0,0,0,Not Participating,Not Participating,,1,RTUC,1,0,1,Not Participating,Not Participating,Not Participating,0,0,RTUC,RTUC,RTUC
+10006,1,1,1,0,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,Not Participating,Not Participating,,1,RTUC,1,0,1,Not Participating,Not Participating,Not Participating,0,0,RTUC,RTUC,RTUC
+10007,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Advanced,1,1,,,
+10008,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10009,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10010,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,0,1,1,1,0,1,0,Expert,Expert,Avonlea Schmitz ,0,TCUC,1,0,0,Not Participating,Not Participating,Not Participating,1,1,TCUC,TCUC,TCUC
+10011,1,1,1,0,1,1,1,1,1,0,0,0,0,0,1,0,1,1,0,0,1,0,Expert,Advanced,Liam Koehler,1,TCUC,1,0,0,Not Participating,Not Participating,Not Participating,1,1,TCUC,TCUC,TCUC
+10014,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10013,1,1,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Advanced,1,1,,,
+10167,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1,0,1,1,1,0,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,1,1,,,
+10168,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,Expert,Not Participating,,0,,1,0,1,Advanced,Not Participating,Advanced,0,0,tcuc,,tcuc
+10169,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10041,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10016,0,1,1,0,0,0,0,0,1,1,0,1,0,0,0,1,1,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Advanced,Advanced,Advanced,1,1,,,
+10017,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,1,1,,,
+10018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10019,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10020,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10022,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10025,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Advanced,1,1,,,
+10026,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Advanced,1,1,,,
+10027,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1,1,0,0,1,1,Tykes,Not Participating,,0,Mad Uni,0,0,1,Not Participating,Not Participating,Not Participating,1,1,Mad Uni,Mad Uni,Mad Uni
+10028,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1,1,1,0,1,0,Novice B,Not Participating,,0,Mad Uni,0,0,1,Not Participating,Not Participating,Advanced,1,1,Mad Uni,Mad Uni,Mad Uni
+10029,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10030,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Advanced,Beginner,Not Participating,0,0,,,
+10031,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Beginner,Beginner,Not Participating,0,0,,,
+10032,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10033,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10051,1,1,0,1,1,0,0,0,0,1,1,1,0,1,0,0,0,0,0,0,0,1,Not Participating,Not Participating,,0,,0,0,0,Advanced,Advanced,Advanced,0,1
+10052,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10053,1,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,1
+10034,1,1,1,0,0,1,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,Not Participating,Not Participating,,0,,0,0,1,Not Participating,Not Participating,Advanced,1,1
+10035,1,1,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,Not Participating,Not Participating,,0,,0,0,1,Not Participating,Not Participating,Not Participating,0,0
+10036,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Beginner,Advanced,Advanced,0,1
+10037,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,1,1
+10038,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10039,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10040,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10219,1,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10042,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10043,1,1,1,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,Not Participating,Intermediate A,Alison Cotter,0,,0,0,0,Not Participating,Not Participating,Beginner,1,1
+10045,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,Not Participating,Novice A,Marin Cohan,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10266,1,1,1,0,1,1,0,0,1,1,1,1,0,1,0,0,0,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Advanced,Advanced,Advanced,1,1,
+10267,0,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,1,0,Not Participating,Not Participating,,0,,0,0,0,Beginner,Not Participating,Advanced,1,1,
+10268,1,1,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,Intermediate B,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10057,1,1,1,0,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1,0,1,1,Expert,Expert,Jalenica Troutman-Watson,1,TBA,1,0,0,Not Participating,Not Participating,Beginner,1,1,PPUT
+10099,1,1,1,0,1,1,1,1,1,1,1,0,1,0,0,0,0,1,1,1,1,0,Not Participating,Not Participating,,0,,1,0,0,Not Participating,Not Participating,Beginner,1,1,TCUC
+10046,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10047,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10048,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10049,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10050,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Advanced,0,0,
+10106,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10054,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10055,0,1,1,0,1,0,1,0,1,0,0,0,1,0,0,0,0,1,1,0,1,0,Not Participating,Not Participating,Greta Koehler,1,Party Rockers,1,0,0,Not Participating,Not Participating,Beginner,0,1,Twin Cities Unicycle Club
+10056,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,Advanced,Expert,Benjamin Koehler,1,Party Rockers,1,0,0,Not Participating,Not Participating,Beginner,1,1,Twin Cities Unicycle Club
+10225,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Advanced,Beginner,Beginner,0,1,
+10058,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Beginner,1,1,
+10059,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1,1,1,0,1,1,Not Participating,Not Participating,,0,,1,0,0,Not Participating,Not Participating,Not Participating,0,0,TCUC,
+10060,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,
+10061,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,1,1,0,0,0,0,Expert,Expert,Danielle Chevalier,1,Guys,1,0,0,Advanced,Advanced,Advanced,1,1,TCUC,
+10062,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,0,1,1,1,0,1,0,Expert,Expert,Rachel Sindelar,0,,1,0,0,Not Participating,Not Participating,Beginner,1,1,TCUC,
+10063,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,0,1,0,Advanced,Intermediate A,Neala Chevalier,1,TCUC Girls,1,0,0,Not Participating,Not Participating,Beginner,1,1,TCUC,
+10064,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,Not Participating,Not Participating,,1,TCUC Guys,1,0,0,Advanced,Advanced,Advanced,1,1,TCUC,
+10075,1,1,1,0,0,1,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,Intermediate B,Intermediate B,Gwen Luccio,1,Amreican Women,0,1,0,Not Participating,Not Participating,Beginner,1,1,,PPUT Intermediate
+10076,1,1,1,0,0,1,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,Intermediate B,Intermediate B,Grace Luccio,1,American Women,0,1,0,Not Participating,Not Participating,Beginner,1,1,,PPUT Intermediate
+10077,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,
+10078,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,
+10079,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,Novice A,Intermediate B,A.J. ,1,PPUT Juniors,0,1,0,Not Participating,Not Participating,Beginner,1,1,,PPUT
+10080,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,
+10081,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,
+10082,1,1,1,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,1,1,Intermediate A,Intermediate A,Kaitlyn Rogers,1,American Women,0,1,0,Not Participating,Not Participating,Beginner,1,1,,PPUT Intermediate
+10083,1,1,1,0,1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,1,1,Advanced,Advanced,Shane Dowling,1,PPUT Monsters,1,0,0,Not Participating,Not Participating,Beginner,1,1,PPUT,
+10084,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,
+10085,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,Not Participating,Not Participating,,0,,1,0,0,Not Participating,Not Participating,Beginner,1,1,PPUT
+10086,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,1,Expert,Expert,Jalenica Troutman-Watson,1,TBA,1,0,0,Not Participating,Not Participating,Not Participating,1,1,PPUT
+10087,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10088,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,1,Expert,Expert,Tony Torchia,1,tbd,1,0,0,Not Participating,Not Participating,Beginner,0,0,pput
+10089,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,Expert,Expert,Sara Shilot,1,tbd,1,0,0,Not Participating,Not Participating,Beginner,1,1,pput
+10090,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10091,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Expert,Chantelle Troutman-Watson,0,,0,0,0,Advanced,Advanced,Advanced,0,0,
+10093,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,Novice A,Novice A,Piper Hawley,1,,0,0,0,Not Participating,Not Participating,Beginner,0,0,
+10094,1,1,1,1,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,1,1,Intermediate A,Intermediate A,Hannah Oberg,1,,0,0,0,Not Participating,Not Participating,Beginner,0,0,
+10259,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10260,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10261,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10095,1,1,1,0,1,1,1,1,1,1,1,0,1,0,1,0,0,1,1,0,1,1,Advanced,Advanced,Briana Dowling,1,PPUT Monsters,1,0,0,Not Participating,Not Participating,Beginner,1,1,PPUT
+10096,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,Intermediate A,Advanced,Elizabeth Dowling,1,PPUT Monsters,1,0,0,Not Participating,Not Participating,Beginner,1,1,PPUT
+10097,1,1,1,1,0,1,1,1,1,1,1,0,1,0,1,0,0,1,1,0,1,1,Intermediate A,Advanced,Austin Oberg,1,PPUT Monsters,1,0,0,Not Participating,Not Participating,Beginner,1,1,PPUT
+10098,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,
+10100,1,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,Not Participating,Intermediate A,Megan Johnson,0,,0,0,0,Not Participating,Not Participating,Beginner,1,1,,,
+10101,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,Advanced,Advanced,David Adwan,1,Surfers,1,0,0,Not Participating,Not Participating,Beginner,1,1,PPUT,,
+10102,1,1,1,1,0,1,1,1,1,1,1,0,0,0,1,0,0,1,1,0,1,1,Intermediate B,Intermediate B,Ruby Harlin,1,Surfers,0,1,0,Not Participating,Not Participating,Beginner,1,1,,PPUT Intermediate,
+10103,1,1,1,0,0,0,1,1,1,0,1,0,0,0,1,0,0,0,0,0,0,1,Novice B,Not Participating,,1,Club Neon,0,0,0,Not Participating,Not Participating,Beginner,1,1,,,
+10104,1,1,1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,0,1,1,Novice A,Novice B,Ben Rogers,0,,0,1,0,Not Participating,Not Participating,Beginner,0,0,,PPUT Intermediate,
+10105,1,1,1,0,1,1,1,1,1,0,0,1,0,0,1,0,1,1,1,0,1,0,Not Participating,Not Participating,,0,,1,0,0,Not Participating,Not Participating,Not Participating,1,1,TCUC,,
+10107,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10108,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10109,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10110,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Beginner,0,0,,,
+10111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Beginner,0,0,,,
+10112,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10113,1,1,1,0,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,1,Not Participating,Not Participating,Not Participating,0,0,,,RTUC
+10114,1,1,0,0,0,1,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10115,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10116,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10117,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10118,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10119,1,1,1,0,1,1,1,1,1,0,0,1,0,0,1,1,1,1,1,1,1,0,Not Participating,Adult Intermediate,,1,RTUC Advanced,1,0,1,Not Participating,Not Participating,Not Participating,1,1,RTUC,,RTUC 
+10120,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,Not Participating,Intermediate A,Katie Helton,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10121,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10122,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10123,1,1,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1,0,0,0,Not Participating,Adult Novice,Joan Rayford,0,,0,0,0,Not Participating,Not Participating,Not Participating,1,1,,,
+10124,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10125,1,1,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1,0,1,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,1,1,,RTUC,RTUC
+10129,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10130,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10131,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,Not Participating,Not Participating,,0,,1,0,1,Not Participating,Not Participating,Advanced,1,1,RTUC,,RTUC
+10132,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10133,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10134,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10135,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10136,1,1,1,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,0,1,0,Adult Intermediate,Adult Novice,Lauren Atkinson,0,,1,0,1,Not Participating,Not Participating,Beginner,1,1,RTUC,,RTUC
+10137,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10138,1,1,1,1,0,1,1,1,1,0,0,0,0,0,1,0,1,1,1,0,1,0,Novice B,Adult Novice,Mark Atkinson,0,,0,1,1,Not Participating,Not Participating,Not Participating,1,1,,RTUC,RTUC
+10139,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,1,1,,RTUC,RTUC
+10140,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10141,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10142,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10143,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10145,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,Not Participating,Not Participating,,1,RTUC Moms,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10146,1,1,1,1,0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,Not Participating,Not Participating,,0,,1,0,1,Not Participating,Not Participating,Not Participating,1,1,RTCU,,RTUC
+10147,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10148,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10149,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,1,1,,RTUC,RTUC
+10150,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,1,1,Not Participating,Not Participating,,0,,1,0,0,Not Participating,Not Participating,Not Participating,1,1,TCUC Show Group,,
+10151,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,1,0,Not Participating,Expert,Sam Sindelar,1,,1,0,0,Not Participating,Not Participating,Not Participating,0,0,TCUC Show Group,,
+10152,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10153,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10158,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,0,Not Participating,Not Participating,,0,,1,0,1,Not Participating,Not Participating,Not Participating,1,1,RTUC,,RTUC
+10160,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10161,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10162,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10163,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10164,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10165,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,Intermediate A,Not Participating,,1,RTUC,1,0,1,Not Participating,Not Participating,Beginner,1,1,RTUC,,RTUC
+10166,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10171,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,1,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10170,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Advanced,Advanced,Advanced,0,1,,,
+10173,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10174,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10175,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10176,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10177,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10178,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10179,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10180,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10181,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10182,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,1,Not Participating,Not Participating,Not Participating,0,0,,,RTUC
+10183,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10184,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10185,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10186,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,Expert,Not Participating,,0,,1,0,0,Not Participating,Not Participating,Advanced,1,1,TCUC Show Group,,
+10187,1,1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,1,0,1,0,0,0,Not Participating,Not Participating,,0,,1,0,0,Not Participating,Not Participating,Advanced,0,0,TCUC Show Group,,
+10188,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,Novice A,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,1,,,
+10189,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10191,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Not Participating,Not Participating,,0, ,1,0,1,Not Participating,Not Participating,Not Participating,0,0,RTUC,,RTUC
+10192,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,1,RTUC,0,1,1,Not Participating,Not Participating,Not Participating,0,0, ,RTUC,RTUC
+10193,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10196,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,1,0,,,
+10197,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10198,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Advanced,Advanced,Advanced,0,1,,,
+10199,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Not Participating,Not Participating,,0,,0,0,1,Not Participating,Not Participating,Not Participating,0,0,,,TCUC
+10200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10201,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10202,1,1,1,1,1,1,0,0,1,0,0,0,0,0,1,0,0,1,1,0,0,0,Not Participating,Not Participating,,0,TCUC Show Group,1,0,0,Not Participating,Not Participating,Beginner,1,1,Twin Cities Unicycle Club,,
+10203,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10204,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10205,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,0,0,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Beginner,1,1,,,
+10206,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10262,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10263,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10207,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10208,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10209,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10210,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10211,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,1,1
+10212,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10213,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10214,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10215,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10216,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Beginner,0,1
+10217,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,1
+10218,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,1,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10224,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Advanced,Advanced,Not Participating,0,0
+10229,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10230,1,1,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10231,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10233,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Beginner,Advanced,Not Participating,0,0
+10234,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0
+10236,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10237,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10238,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10239,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10240,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,1,1,,,
+10241,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Not Participating,Not Participating,,0,,1,0,1,Not Participating,Not Participating,Not Participating,0,0,RTUC advanced group,,RTUC
+10242,1,1,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Advanced,1,1,,,
+10243,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10244,1,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Beginner,0,1,,,
+10248,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10246,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10247,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10249,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10250,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10251,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10252,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Adult Novice,Jim DeWitt,1,RTUC 6,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10253,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10254,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10255,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10258,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10269,1,0,1,0,1,1,1,1,1,0,0,1,1,0,1,1,1,0,0,0,0,1,Adult Intermediate,Not Participating,,0,,0,1,0,Not Participating,Not Participating,Not Participating,0,0,,rtuc,
+10270,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10271,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10272,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10273,1,1,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10274,1,1,1,0,1,1,1,1,1,0,0,1,1,1,0,0,0,1,1,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Beginner,1,1,,,
+10275,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10276,1,1,1,0,0,0,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,Not Participating,Novice B,Nicole Matthews,0,,0,1,1,Beginner,Beginner,Beginner,0,0,,RTUC,RTUC
+10277,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10278,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10279,1,1,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,1,1,,,
+10280,1,1,1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,1,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Beginner,1,1,,,
+10281,1,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,Not Participating,Intermediate A,Megan Johnson,0,,0,0,0,Not Participating,Not Participating,Beginner,1,1,,,
+10282,1,1,1,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,Not Participating,Adult Novice,Jay Sinclair,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC,RTUC
+10283,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10284,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10285,1,1,1,0,0,0,1,0,1,0,0,0,0,0,1,1,1,0,1,0,0,0,Not Participating,Not Participating,,0,,0,1,1,Not Participating,Not Participating,Not Participating,0,0,,RTUC Intermediate,RTUC
+10286,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Not Participating,Not Participating,,1,RTUC Moms,0,0,0,Not Participating,Not Participating,Not Participating,0,0,,,
+10287,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,Not Participating,Not Participating,,0,,1,0,1,Not Participating,Not Participating,Not Participating,0,0,RTUC Advanced,,RTUC

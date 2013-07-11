@@ -1,0 +1,16 @@
+<h2><%= @event_category.event %> - <%= @event_category %></h2>
+
+<div class="judges">
+      <%=  render :partial => "assigned_judges", :object => @event_category.judges %> <!-- BADLY NAMED partial -->
+      <hr />
+      <h4>Add new Judge for this event:</h4>
+      <%= render :partial => "form", :object => @judge %>
+      <hr />
+</div>
+<div class="judges">
+    <h4>Copy Judges from another Event</h4>
+    <%= render :partial => "copy_judges" %>
+</div>
+
+
+<%= link_to 'Back', event_category_path(@event_category) %>

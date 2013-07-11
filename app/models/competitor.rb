@@ -23,6 +23,9 @@ class Competitor < ActiveRecord::Base
         name
     end
 
+    def event
+      event_category.event
+    end
 
     def name
         unless custom_name.nil? or custom_name.empty?

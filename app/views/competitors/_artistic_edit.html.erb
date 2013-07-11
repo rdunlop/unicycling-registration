@@ -1,7 +1,7 @@
-<h1>Freestyle - <%=@judge.event %> Judging Form</h1>
+<h1>Freestyle - <%=@judge.event_category %> Judging Form</h1>
 <h2><%= @judge.judge_type.name %> Judge</h2>
 
-<% if cannot? :create_scores, @judge.event %>
+<% if cannot? :create_scores, @judge.event_category %>
     <p class="event_locked">Scores for this event are now locked (closed)</p>
 <% end %>
 
@@ -42,12 +42,12 @@
                         <%= b.number_field :minor_boundary, {:min => 0 } %>
                     <% end %>
                 <% else %>
-                    <%= f.number_field :Val1, {:min => 0, :max => @judge.judge_type.Val1max, :step => 0.001, :autofocus => true } %>
+                    <%= f.number_field :val_1, {:min => 0, :max => @judge.judge_type.val_1_max, :step => 0.001, :autofocus => true } %>
                 <% end %>
             </td>
-            <td class="judging_category"><%= f.number_field :Val2, {:min => 0, :max => @judge.judge_type.Val2max, :step => 0.001 } %></td>
-            <td class="judging_category"><%= f.number_field :Val3, {:min => 0, :max => @judge.judge_type.Val3max, :step => 0.001 } %></td>
-            <td class="judging_category"><%= f.number_field :Val4, {:min => 0, :max => @judge.judge_type.Val4max, :step => 0.001 } %></td>
+            <td class="judging_category"><%= f.number_field :val_2, {:min => 0, :max => @judge.judge_type.val_2_max, :step => 0.001 } %></td>
+            <td class="judging_category"><%= f.number_field :val_3, {:min => 0, :max => @judge.judge_type.val_3_max, :step => 0.001 } %></td>
+            <td class="judging_category"><%= f.number_field :val_4, {:min => 0, :max => @judge.judge_type.val_4_max, :step => 0.001 } %></td>
             <td></td>
             <td></td>
             <td><%= f.submit 'Save' %></td>

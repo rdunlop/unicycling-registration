@@ -13,6 +13,16 @@ FactoryGirl.define do
       after(:create) {|user| user.add_role :super_admin }
     end
 
+    factory :judge_user do
+      # XXX should be a judge Type?
+      after(:create) {|user| user.add_role :admin }
+      after(:create) {|user| user.add_role :judge }
+    end
+
+    factory :chief_judge do
+      after(:create) {|user| user.add_role :chief_judge }
+    end
+
     after(:create) { |user| user.confirm! }
   end
 end

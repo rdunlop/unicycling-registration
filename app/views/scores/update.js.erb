@@ -1,0 +1,16 @@
+<% if @score.errors.any? %>
+  var errors = $("<ul />");
+  <% @score.errors.full_messages.each do |error| %>
+    errors.append('<li><%= escape_javascript( error ) %></li>');
+  <% end %>
+
+  // Display errors on form
+  $('#notice').html($("<div id=\"error_explanation\" />").append(errors));
+
+
+<% else %>
+  var cur = $("#competitor<%=@competitor.id %>");
+  cur.replaceWith($("<%= escape_javascript(render :partial => "/scores/score_with_total", :object => @score) %>"));
+
+  $('#notice').empty();
+<% end %>

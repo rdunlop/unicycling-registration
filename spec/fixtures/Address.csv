@@ -1,0 +1,104 @@
+Address_ID,Address1,Address2,City,State,Zip,Country,Telephone,Email,Club,Club Contact,T Youth Medium,T Youth Large,T Adault Small,T Adault Medium,T Adault Large,T Adault X Large,T Adault XX Large,T Adault XX Large,Registration Fee,T-Shirt Fee,USA Fee,Dinner Fee
+10005,3200 90th st,,urbandale,IA,50322,USA,5157200441,Kendra.Vance42@gmail.com,,,0,0,1,0,0,0,0,0,90.00,15.00,20.00,5.00
+10007,1846 Gilman,,Garden City,MI,48135,USA,734-634-2313,wgrzych@comcast.net,RTUC,Wendy Grzych,0,0,0,0,0,0,0,0,225.00,0.00,0.00,15.00
+10008,35011 Munger,,Livonia,MI,48154,USA,734-788-2988,Hans@DataChauffeur.com,RTUC,Wendy,0,0,0,0,2,0,0,0,180.00,30.00,0.00,10.00
+10009,31 Melbourne Ave SE,,Minneapolis,MN,55414,USA,651-500-8049,godofmildew@gmail.com,TCUC,,0,0,0,0,0,0,1,0,80.00,15.00,0.00,5.00
+10010,1118 Heritage Drive,,Shakopee,MN,55379,USA,952-496-2784,,TCUC,Connie Cotter,0,1,0,0,3,0,0,0,310.00,60.00,0.00,20.00
+10013,233 East Wacker Drive,Apartment 2203,Chicago,IL,60601,United States,3123421302,robin@dunlopweb.com,,,0,0,0,1,0,0,0,0,90.00,15.00,20.00,5.00
+10014,"15 Sherman Ter, #1",,Madison,WI,53704,USA,608 441-9833,djbuege@gmail.com,Madison Unicyclists,Patricia Wilton,0,0,0,0,1,0,0,0,80.00,15.00,20.00,0.00
+10016,1773 Alameda St,,Roseville,MN,55113-6531,United States,6514891825,zellercpa@goldengate.net,tcuc,,0,0,0,1,1,0,0,0,155.00,30.00,0.00,10.00
+10017,351 Copperfield Lane,,Herndon,VA,20170,United States,7034005843,james@amazingjames.com,,,0,0,0,1,0,0,0,0,80.00,15.00,20.00,0.00
+10018,511 Wilbor Ave,,Huron,OH,44839,USA,4194333552,egtomczyk@gmail.com,,,0,0,0,1,1,0,0,0,235.00,30.00,35.00,65.00
+10019,548 North Elm Street,,Butler,PA,16001,United States,7242833653,dynt10@gmail.com,Butler Wobble,Lisa Krack,0,0,0,2,0,0,0,0,155.00,30.00,35.00,10.00
+10020,1134 Sherman Ave,,Madison,WI,53703,USA,608.284.1484,jill.cohan@gmail.com,Mad Uni,Randy Stefan,1,0,0,2,0,0,0,0,225.00,45.00,0.00,15.00
+10021,413 Russell Street,,Madison,WI,53704,USA,608-225-7647,kathran94@charter.net,Madison Unicyclists,Ann O'Brien,0,0,0,1,2,0,0,0,180.00,45.00,35.00,40.00
+10022,Line 16 #5088,,St.Marys,ON,n4x1c9,Canada,519-229-6657,lisakilpis@hotmail.com,,,1,0,0,1,0,0,0,0,180.00,30.00,0.00,25.00
+10023,448 Jean Street,,Madison,WI,53703,USA,608 2560590,panofsmith@tds.net,MadUni,Randy Stefan,2,0,0,1,0,0,0,0,155.00,45.00,35.00,10.00
+10024,141 sylvain rd,,Saint Johnsbury ,VT,05819,USA,802 323 7291,theunipsyho@gmail.com,,,0,0,0,0,1,0,0,0,90.00,15.00,20.00,0.00
+10025,6000 STATE ROUTE 86,,WINDSOR,OH,440999744,USA,4402725033,dwhite@orwell.net,unattached,,0,0,0,0,0,1,0,0,90.00,15.00,20.00,0.00
+10026,2150 State Route 981,,Alverton,Pa,15612,USA,724-493-3251,bncmidl@cvzoom.net,The Wonders Unicycle Club,Bob Griffin,0,0,0,1,1,0,0,0,155.00,30.00,35.00,15.00
+10027,Urb. Lamela #121,,Isabela,PR,00662,Puerto Rico,787-560-3489,ca99medina@hotmail.com,PR,PR,0,0,0,0,0,0,0,0,90.00,0.00,20.00,0.00
+10028,4901 Hermsmeier Ln,,Madison,WI,53714,United States,6082227515,karinjohnson@charter.net,Madison Unicyclists,Patricia Wilton,0,1,1,0,0,0,0,0,155.00,30.00,35.00,0.00
+10029,1510 38th St S,,St. Cloud,MN,56301,USA,320-252-2769,lowesemail@gmail.com,,,0,0,0,0,0,0,0,0,270.00,0.00,0.00,0.00
+10030,po box 323,,north bend,wa,98045,USA,4252465142,pputnews@yahoo.com,pput,Lori Shilot,0,0,1,0,0,0,0,0,80.00,15.00,35.00,5.00
+10034,1318 45th Ave NE,,Minneapolis,MN,55421,USA,6124236630,constance.cotter@gmail.com,TCUC,Connie Cotter,0,1,0,0,0,0,0,0,80.00,15.00,0.00,0.00
+10038,17151 Centralia,,Redford,Mi,48240,United States,3135303696,lowrym3@gmail.com,RTUC,Wendy G,0,0,0,3,0,1,0,0,195.00,60.00,0.00,0.00
+10039,351 pacific street,,brooklyn,ny,11217,United States,2156452637,sui.james@gmail.com,NYUC,James Sui,0,0,0,3,0,0,0,0,130.00,45.00,0.00,10.00
+10041,140 Croixview Drive S.,,Afton,MN,55001,United States of America,(651)436-3615,kjchevy@dishup.us,Twin Cities Unicycle Club,Constance Cotter,0,0,0,0,0,0,0,0,225.00,0.00,0.00,15.00
+10043,607 Krug St,,Kitchener,ON,N2B1L9,Canada,2262202707,Motocrossm@hotmail.com,Kitchener Unicyclists,,0,0,0,0,0,0,0,0,90.00,0.00,20.00,0.00
+10044,518 East Pearl Street,,Butler,PA,16001,USA,724-822-4954,isaac.mckeever@gmail.com,Butler Wobble,Lisa Krack,0,0,0,0,1,0,0,0,90.00,15.00,20.00,5.00
+10045,10113 Dupont Ave. S.,,Bloomington,MN,55431,USA,952-797-3200,mkoehler@visi.com,TCUC,Connie Cotter,0,1,0,1,1,0,0,0,490.00,45.00,0.00,30.00
+10048,42810 se 172nd place,,North Bend,WA,98045,USA,425-260-9051,pkluccio@earthlink.net,PPUT,Alan Tepper,0,1,1,0,1,0,1,0,180.00,60.00,35.00,40.00
+10049,600 Se 5th St.,,north bend ,wa,98045,USA,425-246-4024,kellyharlin@comcast.net,PPUT ,Alan Tepper,0,0,0,1,1,0,1,0,80.00,45.00,35.00,35.00
+10050,17404 426th Ave SE,,North Bend,Wa,98045,USA,425-417-2060,kim.oberg@centurytel.net,PPUT,Alan Tepper,0,1,0,1,1,0,0,0,180.00,45.00,35.00,25.00
+10051,1121 forester blvd sw,,North Bend,WA,98045,USA,2066019956,pputnews@yahoo.com,PPUT,Alan Tepper,0,0,0,0,1,0,0,0,80.00,15.00,35.00,5.00
+10052,po box 323,,north bend,wa,98045,usa,4252465142,pputnews@yahoo.com,pput,alan tepper,0,0,1,0,1,0,0,0,80.00,30.00,35.00,20.00
+10053,PO Box 648,,North Bend,WA,98045,,425 442-2099,lmdct2003@hotmail.com,PPUT,Alan Tepper,0,0,1,1,0,1,0,0,180.00,45.00,35.00,25.00
+10054,PO box 648,,North Bend ,Wa,89045,USA,425-301-7625,torchiat@hotmail.com,pput,Alen Tepper,0,0,0,0,0,1,0,0,80.00,15.00,20.00,5.00
+10055,345 SE 12th PL,,North Bend,WA,98045,USA,425-785-8229,berryrogers@comcast.net,Panther Pride Unicycle Team,Alan Tepper,0,0,0,3,0,1,0,1,180.00,75.00,35.00,55.00
+10056,12305 415th Ave SE,,North Bend,WA,98045,USA,425.888.6126,dowlingpa@gmail.com,PPUT,Alan Tepper,0,1,2,0,0,0,0,0,270.00,45.00,35.00,30.00
+10057,514 Meadowlark Drive,,Madison,WI,53714,U.S.A.,(608)239-5135,nancie.cotter@gmail.com,Madison Unicyclist,Ann O'Brien,0,0,0,1,0,0,0,0,90.00,15.00,35.00,5.00
+10058,42600 120th Street SE,,North Bend,WA,98045,United States of America,425-888-9011,coug@clearwire.net,PPUT,Alan Tepper,0,0,1,0,0,0,0,0,90.00,15.00,35.00,5.00
+10059,1425 SW 13th Place,,North Bend,WA,98045,USA,206-369-6179,nkjhome@hotmail.com,PPUT,Alan Tepper,2,0,0,0,0,0,0,0,180.00,30.00,0.00,10.00
+10060,210 SE 10th St,,North Bend,WA,98045,USA,4258885467,rage@thehawleyfamily.net,Panther Pride,Coach Tepper,0,1,0,0,0,0,0,0,80.00,15.00,35.00,5.00
+10061,528 Marshall Avenue,,St. Paul,MN,55102,United States,6128404588,natlanzatella@gmail.com,TCUC,Connie Cotter,0,0,1,0,0,0,0,0,90.00,15.00,0.00,5.00
+10062,229 Meadowlake,,Canton,MI,48188,USA,734-397-2114,jeannewinn@gmail.com,RTUC,Wendy Grzych,0,0,1,1,0,2,0,0,155.00,60.00,0.00,25.00
+10063,6955 Foxthorn Dr.,,Canton,MI,48187,USA,571-338-8741,prmullen@yahoo.com,RTUC,Wendy,0,0,1,0,2,0,0,0,155.00,45.00,35.00,25.00
+10064,3710 Hollyhock,,West Bloomfield,Mi,48322,USA,248-757-2913,Csemrau@Gmail.com,RTUC,Carol Brichford,0,0,0,3,0,0,0,0,335.00,45.00,0.00,40.00
+10065,5301 Detroit St,,Dearborn Heights ,MI,48125,USA,313-562-2399,carolalexander@comcast.net,RTUC,Wendy Grzych,0,0,1,1,0,0,0,1,155.00,45.00,0.00,40.00
+10066,18 Ferman St.,,MILAN,MI,48160,USA,734 439-2982,sinclair.jay@sbcglobal.net,RTUC,Wendy Grzych,0,0,1,1,1,0,0,0,155.00,45.00,35.00,25.00
+10067,2135 Ridge Ave,,Ann Arbor,MI,48104,United States,7344764944,a2dan@sbcglobal.net,RTUC,Wendy Grzych,0,0,0,0,0,0,0,0,90.00,0.00,0.00,20.00
+10068,441 Dorchester Way,,Milford,MI,48381,USA,248-685-2868,styd2006@yahoo.com,RTUC,Wendy Grzych,0,0,0,0,0,0,0,0,270.00,0.00,0.00,5.00
+10069,41557 Fallbrook Road,,Northville,MI,48167,USA,248 924 2924,susanandmark@comcast.net,RTUC,Wendy Grzych,2,0,0,2,0,0,0,0,360.00,60.00,0.00,20.00
+10070,9615 Ingram,,Livonia,MI,48150,USA,3134014689,cmc4cmc@sbcglobal.net,RTUC,Wendy Grzych,0,0,0,2,0,1,0,0,225.00,45.00,0.00,30.00
+10071,30867 Richland,,Livonia,MI,48150,United States,7344224372,mwittenb@sbcglobal.net,RTUC,Wendy Gryzch,0,0,1,1,1,1,0,0,270.00,60.00,0.00,30.00
+10072,30676 Minton,,Livonia,MI,48150,United States,7342662081,crazymonkey706@hotmail.com,RTUC,Wendy Gryzch,0,0,0,1,0,0,0,0,80.00,15.00,0.00,5.00
+10073,8711 Osprey Lane,,Chanhassen,MN,55317,United States,952 212 8287,reneebschmitz@gmail.com,TCUC,Connie Cotter,0,0,0,0,0,0,0,0,180.00,0.00,0.00,40.00
+10074,9402 Gillman,,Livonia,Mi,48150,,7346732159,flameuni@hotmail.com,RTUC,Wendy,0,0,0,1,0,0,0,0,90.00,15.00,20.00,5.00
+10076,11101 Mayfield St,,Livonia,MI,48150,USA,734-765-5825,djvisscher@gmail.com,RTUC,Wendy,0,2,1,0,0,1,0,0,225.00,60.00,0.00,45.00
+10077,14219 Sunset St.,,Livonia,MI,48154,U.S.A.,734-751-0237,MStobier@aol.com,RTUC,Wendy Gryzch,0,0,0,0,2,0,0,0,155.00,30.00,0.00,10.00
+10078,Smallwood,"135 56th Place, SE",Washington,DC,20019,USA,(202)582-8957,smallwoodrobin@yahoo.com,Circle Seven,Robin Smallwood,0,0,0,0,2,0,0,0,80.00,30.00,35.00,5.00
+10079,6347 Urbandale ln n,,maple grove,MN,55311,United States,763 478 9228,lesleyhackett01@gmail.com,Twin Cities Unicycle Club,Connie Cotter,0,0,0,0,1,0,0,0,80.00,15.00,0.00,0.00
+10081,8969 Crown St,,Livonia,MI,48150,USA,734-525-5747,peterz@mi.rr.com,RTUC,Wendy Grzych,0,0,0,1,1,0,0,0,155.00,30.00,0.00,0.00
+10082,1060 Rustic Road 4,,Glenwood City,WI,54013,USA ,651-245-1953,Christopher.c.obrien@gmail.com,Tcuc,Connie cotter,0,2,0,0,2,0,0,0,360.00,60.00,0.00,20.00
+10084,26150 Greythorne Trail,,Farmington Hills,MI,48334,United States,248-442-2813,jackiemat1990@yahoo.com,RTUC,,0,0,2,1,1,0,1,0,155.00,75.00,35.00,0.00
+10085,4226 7th St. NE,,Columbia Heights,MN,55421,USA,763-218-7562,bkghugo@comcast.net,TCUC,Connie Cotter,1,0,0,2,1,0,0,0,225.00,60.00,0.00,40.00
+10086,29 Roslyn Road,,Grosse Pointe Shores,MI,48236,USA,313-891-5217,Joanne@EganSystems.com,RTUC,Wendy Gryzch,0,0,0,0,1,1,1,0,155.00,45.00,0.00,25.00
+10087,2153 E Sanoque Ct,,Gilbert,AZ,85298,USA,541550-9335,cbrick09@gmail.com,Arizona Unicycle Club,,0,0,0,0,0,0,0,0,80.00,0.00,20.00,5.00
+10090,1070 Hampton Rd,,Grosse Pointe Woods,MI,48236,USA,3134216458,meshmec@gmail.com,,,0,0,0,1,0,0,0,0,80.00,15.00,20.00,0.00
+10091,4410 Jewel Ct. N,,Plymouth,MN,55446,USA,7633836990,alviani6@comcast.net,Twin Cities Unicycle Club,Connie Cotter,0,0,0,0,1,0,0,0,80.00,15.00,0.00,0.00
+10092,5275 Oxford St N,,Shoreview,MN,55126,USA,651-484-7034,billgilby@comcast.net,tcuc,Constance Cotter,0,0,0,1,0,1,0,0,155.00,30.00,0.00,0.00
+10093,750 Crosby Drive,,Hudson,Wi,54016,United States,7153863851,juliekovacic@yahoo.com,TCUC,Connie Cotter,0,0,0,1,0,0,0,0,160.00,15.00,0.00,0.00
+10094,4047 86th LN NE,,Blaine,MN,55014,USA,763-390-0044,email@gilby.com,TCUC,Connie Cotter,0,0,0,0,1,0,0,0,80.00,15.00,0.00,5.00
+10095,685 North 130 West,,Lindon,Ut,84042,USA,(801) 472-2541,uniguy100@hotmail,,self,0,0,0,0,0,0,0,0,80.00,0.00,20.00,5.00
+10096,363 W. Johnson St.,4,Ishpeming,MI,49849,USA,906-631-7953,johanna.boyle@gmail.com,,,0,0,1,0,0,0,0,0,40.00,15.00,20.00,5.00
+10097,18812 Southampton,,Livonia,MI,48152,United States,248 4774629,jdewitt@twmi.rr.com,RTUC,Wendy,0,0,0,1,1,0,0,0,180.00,30.00,0.00,0.00
+10098,336 69th St N,,Mahtomedi,MN,55115,USA,6517485704,iisdjp@hotmail.com,TCUC,Connie Cotter,0,0,0,0,3,0,1,0,180.00,60.00,0.00,40.00
+10100,207 OAK ST,,BUTLER,PA,16001,USA,724-287-1011,rcarr7@hotmail.com,BUTLER WOBBLE,DAVE KRACK,0,0,0,0,2,0,0,0,90.00,30.00,0.00,20.00
+10101,306 Old Plank Road,,Butler,Pa,16002,USA,7242859420,unicycle@zoominternet.net,Butler Wooble,Lisa Krack,0,0,0,2,1,0,0,0,170.00,45.00,20.00,0.00
+10103,115 Westwood Manor,,Butler,PA,16001,USA,7247126669,sew2004@zoominternet.net,Butler Wobble,Dave Krack,0,0,0,1,0,0,0,0,90.00,15.00,20.00,0.00
+10106,2918 Winslow Place,,Fort Wayne,IN,46815,United States,(260)241-8296,9myemail@gmail.com,,,0,0,0,0,1,0,0,0,90.00,15.00,20.00,0.00
+10109,442 magpie ct ,,Kissimmee,FL,34759,United State ,(407)557-0862,candido1970@gmail,,,0,0,0,0,0,0,0,0,90.00,0.00,20.00,0.00
+10111,9746 France Ct,,Lakeville,MN,55044,USA,952-461-5628,Treyflip96@gmail.com,TCUC,Connie Cotter,0,0,0,0,0,0,0,0,90.00,0.00,20.00,0.00
+10113,1915 Lakeview Ln,,Highland,MI,48357,usa,2488871157,kellykayaks@yahoo.com,RTUC,,0,0,0,1,0,0,0,0,90.00,15.00,0.00,5.00
+10114,38158 hixford,,westland,mi,48185,usa,7347297533,mikep1430@gmail.com,rtuc,w.grynch,0,0,0,0,2,0,0,0,90.00,30.00,20.00,20.00
+10117,7800 holly park ct nw,,bremerton,wa,98312,USA,360-621-8948,mjosal@me.com,,,0,0,0,0,1,0,0,0,90.00,15.00,20.00,5.00
+10119,23907 Tuck Road,,Farmington Hills,MI,48336,United States,(248) 207-1010,dlbachleda@yahoo.com,RTUC,Wendy Grzych,0,0,1,2,1,0,1,0,90.00,75.00,0.00,65.00
+10121,1148 JVL Court,,Marietta,GA,30066,USA,678-494-4962,amy@unicycle.com,,,0,0,0,1,0,0,0,0,90.00,15.00,35.00,0.00
+10122,814 Gilman,,Garden City,MI,48135,United states,734-765-6062,r.raub18@yahoo.com,RTUC,Wendy Grzych,0,0,0,0,0,0,0,0,90.00,0.00,20.00,0.00
+10123,9251 edinboro rd ,,McKean,PA,16426,United States of America,1-814-476-0088,cwurst@cathedral-prep.com,Butler Wobble,,0,0,0,1,0,0,0,0,90.00,15.00,20.00,20.00
+10124,11 Springwood Ave.,,Ardsley,NY,10502,United States of America,914-674-1971,jmoore914@gmail.com,,,0,0,0,0,0,0,0,0,90.00,0.00,20.00,0.00
+10125,16159 Rosemont,,Detroit,MI,48219,US,313-410-4752,agoodamy@aol.com,RTUC,Wendy,0,0,0,1,0,1,0,0,180.00,30.00,0.00,10.00
+10126,35730 Fredericksburg road,,Farmington Hills,MI,48331,USA,248 943 2761,mekaratemom@gmail.com,RTUC,Wendy Grzych,0,0,0,2,0,1,0,0,270.00,45.00,0.00,15.00
+10127,7265 N. Silvery Ln,,Dearborn Heights,MI,48127,USA,313-565-9843,kvsusanka@hotmail.com,RTUC,Wendy Grzych,0,0,0,0,0,0,0,0,90.00,0.00,0.00,5.00
+10129,117 North Marquette Street,#1,Madison,WI,53704,United States,608 249-6033,carlkham@yahoo.com,Madison Unicyclists,,0,0,0,0,0,1,0,0,260.00,15.00,0.00,0.00
+10132,26084 clancy,,roseville,mi,48066,usa,586 329 5359,rah1023@hotmail.com,rtuc,,0,1,0,0,0,2,0,1,90.00,60.00,0.00,5.00
+10133,1009 MeadowBrook Drive,,Canonsburg,Pa,15317,USA,724-747-0538,rgriffin@ebenefits.com,The Wonders,Bob Griffin - me,0,0,1,1,1,0,0,0,270.00,45.00,0.00,0.00
+10134,2150 State Rt. 981,,Alverton,PA,15612,USA,(724) 493-3251,bncmidl@cvzoom.net,The Wonders Unicycle Club,Bob Griffin,0,0,0,1,1,0,0,0,180.00,30.00,0.00,10.00
+10135,303E Lincoln Street,,Findlay,OH,45840,USA,(419) 422-8959,janlayne@ymail.com,Wow 4-H Club,,0,0,0,1,0,0,0,0,40.00,15.00,0.00,5.00
+10136,702 Coulidge St.,,Plymouth,MI,48170,USA,(313) 410-6172,joylwolf@yahoo.com,RTUC,Wendy Gryzch,0,0,0,2,1,0,0,0,90.00,45.00,0.00,35.00
+10137,799 Yorktown Place,,Eagan,MN,55123,USA,(651) 408-5411,unitimmy@gmail.com,TCUC,Connie Cotter,0,0,0,0,2,1,0,0,180.00,45.00,0.00,0.00
+10138,514 Medowlark Dr.,,Madison,WI,53714,USA,(608) 221-1632,nancie.cotter@gmail.com,Madison Unicyclists,,0,0,1,0,0,0,0,0,90.00,15.00,35.00,5.00
+10139,14857 Park,,Livonia,MI,48154,USA,(734) 788-2922,rayfordj2002@yahoo.com,RTUC,Wendy Gryzch,0,0,0,1,0,0,0,0,90.00,15.00,0.00,5.00
+10141,Po Box 564,,Prospect,PA,16052,USA,7245046413,nathanburtner,Butler Wobble,Lisa Krack,0,0,0,0,1,0,0,0,130.00,15.00,20.00,10.00
+10144,11421 Marion,,Redford,MI,48239,USA,313.283.5834,daveh@dholden.com,RTUC,Wendy Grzych,0,0,1,2,0,0,0,0,270.00,45.00,0.00,15.00

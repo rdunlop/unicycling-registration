@@ -1,0 +1,39 @@
+<h1>Event: <%=@event.name %> - Distance Attempts</h1>
+
+<%= render :partial => 'competitor_lookup' %>
+
+<% unless @distance_attempts.empty? %>
+    <table class="top_distance_attempts">
+        <caption>All Distance Attempts</caption>
+        <thead>
+            <tr>
+                <th>Distance</th>
+                <th>ID</th>
+                <th>Competitor</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Finished</th>
+                <th>Judge</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+    <% @distance_attempts.each do |da| %>
+        <tr>
+            <td><%= da.distance %></td>
+            <td><%= da.competitor.external_id %></td>
+            <td><%= da.competitor %></td>
+            <td><%= da.competitor.gender %></td>
+            <td><%= da.competitor.age %></td>
+            <td><%= da.competitor.double_fault? ? "yes": "no" %></td>
+            <td><%= da.judge.name %></td>
+            <td><%= da.created_at %></td>
+        </tr>
+    <% end %>
+        </tbody>
+    </table>
+<% end %>
+
+<br />
+<%= link_to 'Back', judge_distance_attempts_path(@judge) %>

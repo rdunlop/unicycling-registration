@@ -10,7 +10,7 @@
         <% end %>
 
         <% if update_link %>
-            <% if can? :create_scores, @judge.event %>
+            <% if can? :create_scores, @judge.event_category %>
                 <% if score.nil? %>
                     <td><%= link_to 'Update', new_judge_competitor_score_path(@judge, competitor) %></td>
                 <% else %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709055458) do
+ActiveRecord::Schema.define(:version => 20130710142728) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20130709055458) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "age_group_type_id"
+    t.boolean  "locked"
   end
 
   create_table "event_choices", :force => true do |t|
@@ -98,12 +99,6 @@ ActiveRecord::Schema.define(:version => 20130709055458) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.boolean  "autocomplete"
-  end
-
-  create_table "event_classes", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "event_configurations", :force => true do |t|
@@ -135,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20130709055458) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "name"
+    t.string   "event_class"
   end
 
   create_table "expense_groups", :force => true do |t|
@@ -169,9 +165,10 @@ ActiveRecord::Schema.define(:version => 20130709055458) do
     t.integer  "val_2_max"
     t.integer  "val_3_max"
     t.integer  "val_4_max"
-    t.integer  "event_class_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "event_class"
+    t.boolean  "boundary_calculation_enabled"
   end
 
   create_table "judges", :force => true do |t|

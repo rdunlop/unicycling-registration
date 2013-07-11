@@ -28,6 +28,35 @@ class Ability
         can :manage, StandardSkillRoutineEntry
         can :manage, StandardSkillRoutine
         can :manage, Competitor
+
+        # judge
+        can :read, EventCategory
+        can :create_scores, EventCategory do |event_category|
+          !event_category.locked
+        end
+        can :read, Registrant
+        can :read, Competitor
+        can :create, Score
+        can [:read, :update], Score do |score|
+          score.try(:user) == user
+        end
+        can :create, StreetScore
+        can [:read, :update, :destroy], StreetScore do |score|
+          score.try(:user) == user
+        end
+        can :manage, DistanceAttempt
+        # XXX
+        EventCategory.all.each do |ev|
+          if user.has_role?(:chief_judge, ev.event)
+            can :administer, EventCategory
+          end
+        end
+        can :distance_attempts, EventCategory do |ev|
+          user.has_role?(:chief_judge, ev)
+        end
+        can :freestyle_scores, EventCategory do |ev|
+          user.has_role?(:chief_judge, ev)
+        end
       else
         can :read, User, :id => user.id
         can [:read, :new, :create], AdditionalRegistrantAccess, :user_id => user.id

@@ -18,6 +18,29 @@ describe Event do
     @ev.valid?.should == false
   end
 
+  describe "the event_class" do
+    it "can be blank" do
+      @ev.event_class = nil
+      @ev.valid?.should == true
+    end
+    it "can be Freestyle" do
+      @ev.event_class = "Freestyle"
+      @ev.valid?.should == true
+    end
+    it "can be Flatland" do
+      @ev.event_class = "Flatland"
+      @ev.valid?.should == true
+    end
+    it "can be Street" do
+      @ev.event_class = "Street"
+      @ev.valid?.should == true
+    end
+    it "can be Two Attempt Distance" do
+      @ev.event_class = "Two Attempt Distance"
+      @ev.valid?.should == true
+    end
+  end
+
   it "should have name as to_s" do
     @ev.to_s.should == @ev.name
   end

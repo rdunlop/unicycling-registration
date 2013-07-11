@@ -1,0 +1,247 @@
+Person_ID,Address_ID,First Name,Middle Initial,Last Name,Bmonth,Bday,Byear,Sex,USA #,Race Age,Registration Type,Attending Dinner,Adult On-Site
+10001,10005,Kendra,E,Vance,2,5,1993,Female,,19-29,Rider,1,
+10002,10007,Wendy,S,Grzych,3,22,1968,Female,,40-49,Rider,1,Wendy Grzych
+10003,10007,Amanda,L,Grzych,4,15,1994,Female,,17-18,Rider,1,Amanda Grzych
+10004,10007,Dale ,A,Grzych,5,23,1996,Male,,15-16,Rider,1,Wendy/Amanda Grzych
+10005,10008,Hans,E,Mills,6,4,1964,Male,6587,40-49,Rider,1,
+10006,10008,David,H,Mills,8,1,1996,Male,6590,15-16,Rider,1,Hans Mills
+10007,10009,Max,A,Dingemans,8,22,1986,Male,5053,19-29,Rider,1,
+10008,10010,Ken,,Sindelar,6,21,1963,Male,,40-49,Rider,1,
+10009,10010,JoAnn,,Sindelar,10,15,1964,Female,,00-06,Non-Competitor,1,
+10010,10010,Sam,,Sindelar,3,3,1995,Male,,17-18,Rider,1,
+10011,10010,Rachel,,Sindelar,10,15,1998,Female,,13-14,Rider,1,
+10014,10013,Robin,A,Dunlop,5,20,1982,Male,,30-39,Rider,1,
+10013,10014,Douglas ,J,Buege,4,10,1966,Male,,40-49,Rider,0,
+10167,10016,Peter,,Zeller,4,29,1960,Male,,50+,Rider,1,
+10168,10016,Alex,,Zeller,10,15,1994,Male,,17-18,Rider,1,Pete & mel
+10169,10016,mel,,zeller,4,21,2012,Male,,00-06,Non-Rider,0,
+10041,10017,James,E,Richardson,6,28,1984,Male,,19-29,Rider,0,James RIchardson
+10016,10018,Kevin,A,Tomczyk,7,15,1996,Male,,15-16,Rider,1,Mike/Elaine Tomczyk
+10017,10018,Stephen ,J,Tomczyk,2,11,1995,Male,,17-18,Rider,1,Mike/Elaine Tomczyk
+10018,10018,Theresa,R,Tomczyk,7,23,1998,Female,,13-14,Non-Competitor,1,Mike/Elaine Tomczyk
+10019,10018,Catherine,I,Tomczyk,1,24,2001,Female,,11-12,Non-Competitor,1,Mike/Elaine Tomczyk
+10020,10018,Mike,J,Tomczyk,9,29,1961,Male,,50+,Non-Rider,1,
+10021,10018,Elaine,G,Tomczyk,11,30,1962,Female,,40-49,Non-Rider,1,
+10022,10018,Michelle,R,Tomczyk,9,5,1989,Female,,19-29,Non-Rider,1,
+10025,10019,Lisa,,Krack,1,23,1973,Female,,30-39,Rider,1,
+10026,10019,David,,Krack,6,13,1972,Male,,40-49,Rider,1,
+10027,10020,Marin,H,Cohan,6,23,2003,Female,,09-10,Rider,1,Jill Cohan
+10028,10020,Hayden ,L,Cohan,8,19,2000,Male,,11-12,Rider,1,Jill Cohan
+10029,10020,Jill,R,Cohan,2,24,1968,Female,,40-49,Rider,1,
+10030,10021,Isaiah ,J,Stefan,10,5,1996,Male,,15-16,Rider,1,Randy Stefan
+10031,10021,Wil,D,Stefan,10,14,1998,Male,,13-14,Rider,1,Randy Stefan
+10032,10021,Randy,M,Stefan,6,15,1959,Male,,00-06,Non-Rider,1,
+10033,10021,Kathy,A,Hodgkins,3,15,1962,Male,,00-06,Non-Rider,1,
+10051,10022,Jack,C,Sebben,1,31,1998,Male,,13-14,Rider,1,Lisa Kilpis
+10052,10022,Lisa,M,Kilpis,6,27,1968,Female,,40-49,Non-Rider,1,
+10053,10022,Steven,D,Sebben,11,18,2001,Male,,09-10,Rider,1,Lisa Kilpis
+10034,10023,Martin,A,Panofsky,9,2,2001,Male,101242,09-10,Rider,1,David Panofsky
+10035,10023,Sylvie,I,Panofsky,3,15,2004,Female,,07-08,Rider,1,David Panofsky
+10036,10024,Casey,M,Pappalardo,11,29,1994,Male,,00-06,Rider,0,
+10037,10025,Dave,,White,10,7,1955,Male,,50+,Rider,0,
+10038,10026,William,P,Miedel,10,22,1954,Male,6785,50+,Rider,1,
+10039,10026,Chad,A,Miedel,4,19,1994,Male,6786,17-18,Rider,1,
+10040,10026,Nancy,M,Miedel,12,26,1958,Female,7600,50+,Non-Rider,1,
+10219,10027,Carlos,,Medina,5,1,1970,Male,,40-49,Rider,0,Carlos Medina
+10042,10028,Karin,,Johnson,12,27,1972,Female,,00-06,Non-Rider,0,
+10043,10028,Megan,,Johnson,11,16,1999,Female,,11-12,Rider,0,Karin Johnson
+10045,10028,Lauren,,Johnson,3,16,2003,Female,,09-10,Rider,0,Karin Johnson
+10266,10029,Trey,D,Lowe,2,10,1994,Male,,17-18,Rider,0,
+10267,10029,Braden,M,Lowe,12,25,1995,Male,,15-16,Rider,0,
+10268,10029,Taylor,J,Lowe,5,14,2001,Female,,11-12,Rider,0,
+10057,10030,Sara,,Shilot,8,19,1995,Female,,15-16,Rider,1,Lori Shilot
+10099,10034,Constance,,Cotter,11,19,1964,Female,849,40-49,Rider,0,
+10046,10038,Marie,,Lowry,6,7,1961,Female,,00-06,Non-Competitor,0,Self
+10047,10038,Claire ,,Lowry,7,8,1995,Female,,17-18,Rider,0,Marie Lowry
+10048,10038,Adele,,Lowry,4,23,1997,Female,,15-16,Rider,0,Marie Lowry
+10049,10038,Robert ,,Ouellette,2,22,1941,Male,,00-06,Non-Rider,0,Self
+10050,10039,James,,Sui,10,16,1992,Male,,19-29,Rider,1,
+10106,10039,Bonnie,,Messing,3,10,1961,Female,,50+,Non-Competitor,1,
+10054,10041,Kimberly ,D,Chevalier,11,3,1969,Female,100140,40-49,Rider,1,
+10055,10041,Neala,M,Chevalier,7,23,1999,Female,100141,11-12,Rider,1,
+10056,10041,Danielle,N,Chevalier,4,18,1997,Female,100142,15-16,Rider,1,
+10225,10043,Matt,A,Manson,5,31,1998,Male,,13-14,Rider,0,
+10058,10044,Isaac,,McKeever,4,4,1984,Male,,19-29,Rider,1,
+10059,10045,Stephen,C,Koehler,7,28,1957,Male,100062,50+,Rider,1,same
+10060,10045,Mary,J,Koehler,11,8,1962,Female,100622,00-06,Non-Competitor,1,same
+10061,10045,Benjamin,C,Koehler,4,23,1996,Male,100064,15-16,Rider,1,Stephen Koehler
+10062,10045,Liam,R,Koehler,5,30,1998,Male,100087,13-14,Rider,1,Stephen Koehler
+10063,10045,Greta,R,Koehler,7,22,2001,Female,100621,11-12,Rider,1,Stephen Koehler
+10064,10045,Grant,A,Koehler,4,15,1993,Male,100063,19-29,Rider,1,same
+10075,10048,Grace,K,Luccio,2,4,2001,Female,,11-12,Rider,1,Krista Luccio
+10076,10048,Gwen,E,Luccio,8,23,2003,Female,,07-08,Rider,1,Krista Luccio
+10077,10048,Krista ,D,Luccio,3,5,1973,Female,,00-06,Non-Rider,1,Krista Luccio
+10078,10048,Paul,A,Luccio,3,14,1973,Male,,00-06,Non-Rider,1,Krista Luccio
+10079,10049,Ruby ,L,Harlin,5,28,2001,Female,,11-12,Rider,1,Kelly Harlin
+10080,10049,Kelly ,K,Harlin,10,18,1966,Female,,00-06,Non-Rider,1,Kelly Harlin
+10081,10049,Tom,A,Harlin,9,5,1970,Male,,00-06,Non-Rider,1,Tom Harlin
+10082,10050,Hannah,R,Oberg,4,9,2000,Female,,11-12,Rider,1,Kim Oberg
+10083,10050,Austin,T,Oberg,6,19,2001,Male,,09-10,Rider,1,Kim Oberg
+10084,10050,Kim,,Oberg,12,22,1967,Female,,00-06,Non-Rider,1,Kim Oberg
+10085,10051,David,,Adwan,4,9,1996,Male,,15-16,Rider,1,Donna Adwan
+10086,10052,Sara,E,Shilot,8,19,1995,Female,,15-16,Rider,1,Lori Shilot
+10087,10052,Lori,L,Shilot,1,6,1961,Female,,00-06,Non-Rider,1,Lori Shilot
+10088,10053,Chantelle ,A,Troutman -Watson,5,5,1994,Female,,17-18,Rider,1,Melanie Troutman
+10089,10053,Jalenica,L,Troutman-Watson,5,31,1996,Female,,15-16,Rider,1,Melanie Troutman
+10090,10053,Melanie,S,Troutman,1,26,1961,Female,,00-06,Non-Rider,1,
+10091,10054,Tony,J,Torchia,8,2,1994,Male,,17-18,Rider,1,Melanie Troutman 
+10093,10055,Benjamin,G,Rogers,7,16,2001,Male,,09-10,Rider,1,Berry Rogers
+10094,10055,Kaitlyn,E,Rogers,3,14,1999,Female,,13-14,Rider,1,Berry Rogers
+10259,10055,Berry,,Rogers,2,22,1963,Male,,40-49,Non-Rider,1,Berry Rogers
+10260,10055,Glynis,,Rogers,12,7,1967,Female,,40-49,Non-Rider,1,Berry Rogers
+10261,10055,Adam,,Rogers,7,16,2001,Male,,09-10,Non-Rider,1,Berry Rogers
+10095,10056,Elizabeth,A,Dowling,4,27,1998,Female,,13-14,Rider,1,Pam Dowling
+10096,10056,Briana,M,Dowling,12,13,1999,Female,,11-12,Rider,1,Pam Dowling
+10097,10056,Shane,C,Dowling,2,11,2002,Male,,09-10,Rider,1,Pam Dowling
+10098,10056,Pamela,A,Dowling,10,17,1966,Female,,40-49,Non-Rider,1,
+10100,10057,Alison,M,Cotter,3,6,2000,Female,,11-12,Rider,1,
+10101,10058,Ryan,D,Moore,5,17,1998,Male,,13-14,Rider,1,Robby Moore
+10102,10059,A.J.,,Kinsella-Johnson,9,4,2002,Male,,09-10,Rider,1,Nancy Kinsella-Johns
+10103,10059,Zoe,O,Kinsella-Johnson,5,28,2005,Female,,07-08,Rider,1,Nancy Kinsella-Johns
+10104,10060,Piper,N,Hawley,1,9,2003,Female,,09-10,Rider,1,Rage Hawley
+10105,10061,Natalie,G,Lanzatella,11,25,1983,Female,,19-29,Rider,1,
+10107,10062,Ashton,C,Winn,7,15,1996,Male,,15-16,Rider,1,Jeanne Winn
+10108,10062,Bailey,H,Winn,9,15,1997,Female,,13-14,Rider,1,Jeanne Winn
+10109,10062,Jeanne,M,Winn,10,11,1970,Female,,00-06,Non-Rider,1,self
+10110,10063,John,B,Mullen,9,1,1996,Male,,15-16,Rider,1,
+10111,10063,Daniel,B,Mullen,8,5,1999,Male,,11-12,Rider,1,
+10112,10063,Patty,,Mullen,4,7,1963,Female,,40-49,Non-Rider,1,yes
+10113,10064,Brian,A,Semrau,5,15,2000,Male,5758,11-12,Rider,1,
+10114,10064,Devin,A,Semrau,10,6,1991,Male,5374,19-29,Rider,1,
+10115,10064,Cindy,L,Semrau,4,1,1965,Female,5756,40-49,Rider,1,
+10116,10064,Peter,A,Semrau,1,20,1996,Male,5376,15-16,Rider,1,
+10117,10064,Geoff,,Semrau,1,19,1966,Male,5757,40-49,Non-Rider,1,
+10118,10064,Jolica,,Dias,11,10,1991,Female,,19-29,Non-Competitor,1,
+10119,10065,Grace,A,Alexander,10,11,1993,Female,,17-18,Rider,1,Carol Alexander
+10120,10065,Jenna,M,Alexander,9,30,1997,Female,,13-14,Rider,1,Carol Alexander
+10121,10065,Carol,A,Alexander,2,26,1965,Female,,00-06,Non-Rider,1,
+10122,10065,John ,N,Alexander,4,13,1964,Male,,00-06,Non-Rider,1,
+10123,10066,Jay,,Sinclair,7,30,1954,Male,4668,50+,Rider,1,
+10124,10066,Pamela,,Sinclair,10,24,1953,Female,4666,50+,Non-Rider,1,
+10125,10066,Margaret,,Sinclair,7,23,1990,Female,4667,19-29,Rider,1,
+10129,10067,Dan,L,Harrison,5,24,1948,Male,,50+,Rider,1,
+10130,10067,Jan,M,Shubitowski,8,1,1951,Female,,50+,Non-Rider,1,
+10131,10068,Stephen ,M,Ebaugh,7,30,1993,Male,,17-18,Rider,1,
+10132,10068,Ben,B,Ebaugh,7,16,1996,Male,,15-16,Rider,0,Lori or Michael
+10133,10068,Peter,G,Ebaugh,7,26,1998,Male,,13-14,Rider,0,Lori or Michael
+10134,10068,Lori,A,Ebaugh,3,5,1959,Female,,50+,Non-Rider,0,
+10135,10068,Michael ,D,Ebaugh,9,12,1958,Male,,50+,Non-Rider,0,
+10136,10069,Mark,H,Atkinson,8,28,1967,Male,100677,40-49,Rider,1,
+10137,10069,Susan,A,Atkinson,1,27,1969,Female,100678,40-49,Rider,1,
+10138,10069,Lauren,E,Atkinson,3,8,2003,Female,100679,09-10,Rider,1,Mark Atkinson
+10139,10069,Charlotte,A,Atkinson,4,20,2005,Female,100680,07-08,Rider,1,Mark Atkinson
+10140,10070,Katie,M,Crombez,8,27,1994,Female,,17-18,Rider,1,Mary Crombez
+10141,10070,Emily,A,Crombez,5,3,1996,Female,,15-16,Rider,1,Mary Crombez
+10142,10070,Dale,S,Crombez,2,24,1967,Male,,40-49,Rider,1,
+10143,10070,Mary,M,Crombez,6,7,1966,Female,,40-49,Non-Rider,1,
+10145,10071,Mary,P,Wittenberg,6,27,1966,Female,7628,40-49,Rider,1,
+10146,10071,Mitch,,Wittenberg,9,4,1993,Male,7626,17-18,Rider,1,
+10147,10071,Patricia,E,Wittenberg,8,21,1996,Female,7629,15-16,Rider,1,Mary Wittenberg
+10148,10071,John,C,Wittenberg,12,13,1965,Male,7627,40-49,Non-Rider,1,
+10149,10072,Tristan,M,Crawford,2,15,1996,Male,,15-16,Rider,1,Mary Wittenberg
+10150,10073,Aaron,J,Schmitz,2,15,1994,Male,,17-18,Rider,1,Kevin/ Renee Schmitz
+10151,10073,Avonlea,J,Schmitz,10,15,1996,Female,,15-16,Rider,1,Kevin/Renee Schmitz
+10152,10073,Kevin ,M,Schmitz,4,20,1960,Male,,00-06,Non-Rider,1,
+10153,10073,Renee,B,Schmitz,9,12,1961,Female,,00-06,Non-Rider,1,
+10158,10074,Thomas,,Wieske,10,29,1981,Male,,30-39,Rider,1,
+10160,10076,Daniel,J,Visscher,5,29,1971,Male,100676,40-49,Rider,1,
+10161,10076,Donna,M,Visscher,4,5,1972,Female,101068,40-49,Non-Rider,1,
+10162,10076,Emma,M,Visscher,10,6,1998,Female,100681,13-14,Non-Rider,1,Dan Visscher
+10163,10076,Catherine,G,Visscher,6,7,2001,Female,101069,11-12,Rider,1,Dan Visscher
+10164,10076,Beatrice,A,Visscher,9,8,2002,Female,101073,09-10,Rider,1,Dan Visscher
+10165,10077,Tyler,,McManman,12,19,1995,Male,,15-16,Rider,1,Michelle Stobierski
+10166,10077,Michelle Stobierski,,Stobierski,8,13,1971,Female,,40-49,Rider,1,
+10171,10078,Robin,N,Smallwood,12,31,1958,Female,,50+,Rider,1,
+10170,10079,David,S,Hackett,5,27,1997,Male,,15-16,Rider,0,Lesley Hackett
+10173,10081,Evan,,Zobel,9,22,1998,Male,100865,13-14,Rider,0,Dad or Mom
+10174,10081,Peter,,Zobel,10,14,1965,Male,100864,40-49,Rider,0,
+10175,10081,Gretchen,,Zobel,8,5,1969,Female,100866,00-06,Non-Rider,0,
+10176,10081,Fiona,,Zobel,4,29,1997,Female,100867,00-06,Non-Rider,0,
+10177,10082,Matthew,A,O'Brien,4,27,2003,Male,,09-10,Rider,1,
+10178,10082,Makayla,J,O'Brien,3,2,2000,Female,,11-12,Rider,1,
+10179,10082,Tanya,M,O'Brien,7,28,1973,Female,,30-39,Rider,1,
+10180,10082,Chris,C,O'Brien,10,15,1972,Male,,30-39,Rider,1,
+10181,10084,Ian,A,Matthews,5,20,1998,Male,,13-14,Rider,0,Thurston Matthews
+10182,10084,Nicole,M,Matthews,9,9,2001,Female,,09-10,Rider,0,Thurston Matthews
+10183,10084,Krystal,E,Matthews,3,11,1993,Female,,19-29,Non-Rider,0,Thurston Matthews
+10184,10084,Thurston,S,Matthews,9,7,1967,Male,,40-49,Non-Rider,0,
+10185,10084,Jacqueline,M,Matthews,7,14,1967,Female,,40-49,Non-Rider,0,
+10186,10085,Christopher,D,Hugo,7,20,1995,Male,6611,15-16,Rider,1,Bill/Brenda Hugo
+10187,10085,Benjamin,B,Hugo,5,16,1997,Male,6612,15-16,Rider,0,Bill/Brenda Hugo
+10188,10085,William (Will),I,Hugo,10,4,2004,Male,7097,07-08,Rider,1,Bill/Brenda Hugo
+10189,10085,William (Bill),D,Hugo,11,12,1961,Male,6610,00-06,Non-Rider,1,
+10190,10085,Brenda,K,Hugo,5,13,1964,Female,6613,00-06,Non-Rider,1,
+10191,10086,Aaron ,R,Egan,8,1,1991,Male,,19-29,Rider,1,
+10192,10086,Joanne,L,Egan,8,26,1947,Female,,50+,Rider,1,
+10193,10086,Alan,P,Egan,1,18,1949,Male,,50+,Non-Rider,1,
+10196,10087,Carol,,Bricker,1,10,1967,Female,,40-49,Rider,1,
+10197,10090,James,M,Reich,11,27,1991,Male,,19-29,Rider,0,
+10198,10091,Kyle,J,Alviani,12,23,1994,Male,,17-18,Rider,0,Lesley Hackett
+10199,10092,Bill,R,Gilbertson,5,29,1951,Male,,50+,Rider,0,
+10200,10092,Diane,F,Gilbertson,7,27,1950,Female,,50+,Rider,0,
+10201,10093,Julie,L,Kovacic,7,20,1961,Female,,00-06,Non-Competitor,0,??
+10202,10093,Shelley,D,Kovacic,8,27,1998,Female,,13-14,Rider,0,
+10203,10093,Renee ,C,Kovacic,4,28,2000,Female,,11-12,Non-Competitor,0,
+10204,10094,Kevin,,Gilbertson,9,1,1979,Male,2171,30-39,Rider,1,
+10205,10095,Guy,L,Hansen,11,20,1953,Male,,50+,Rider,1,
+10206,10096,Johanna,M,Boyle,9,19,1985,Female,,19-29,Non-Competitor,1,
+10262,10097,Jim,,DeWitt,6,16,1962,Male,,50+,Rider,0,
+10263,10097,Matt ,,DeWitt,8,12,1996,Male,,15-16,Rider,0,
+10207,10098,Gavin,O,Prentice,3,23,1994,Male,,00-06,Rider,1,David Prentice
+10208,10098,Ian,M,Prentice,4,11,1995,Male,,00-06,Rider,1,David Prentice
+10209,10098,David,J,Prentice,5,26,1959,Male,,00-06,Non-Rider,1,
+10210,10098,Colleen,M,OKeefe,8,6,1961,Female,,00-06,Non-Rider,1,
+10211,10100,RICK,,CARR,1,28,1953,Male,,50+,Rider,1,
+10212,10100,SHELIA,,CARR,9,1,1946,Female,,00-06,Non-Rider,1,
+10213,10101,Adam,W,Holl,7,8,1997,Male,100669,15-16,Rider,0,David Holl
+10214,10101,David ,W,Holl,5,20,2012,Male,,00-06,Non-Competitor,0,
+10215,10101,Marcia,M,Holl,5,20,2012,Male,,00-06,Non-Competitor,0,
+10216,10103,Steven,E,Walter,10,10,1985,Male,,19-29,Rider,0,
+10217,10106,Paul,J,Wooten,12,20,1993,Male,,17-18,Rider,0,
+10218,10109,candido,,santiago,5,1,1970,Male,,40-49,Rider,0,candido santiago
+10224,10111,Lars,J,Anderson,5,25,1996,Male,TCUC,15-16,Rider,0,Wendi Anderson
+10229,10113,Dennis,R,Kelly,5,26,1952,Male,,50+,Rider,1,
+10230,10114,michael,,parsons,2,15,1964,Male,,40-49,Rider,1,
+10231,10114,kris ,,parsons,1,21,1969,Female,,40-49,Non-Rider,1,
+10233,10117,Matthew,r,Josal,11,28,1987,Male,,19-29,Rider,1,
+10234,10119,Michael,Z,Bachleda,3,17,2000,Male,,11-12,Rider,1,Paul Bachleda
+10235,10119,Spencer,J,Bachleda,3,12,1998,Male,,13-14,Non-Rider,1,Paul Bachleda
+10236,10119,Paul ,A,Bachleda,6,24,1962,Male,,50+,Non-Rider,1,
+10237,10119,Diana,L,Bachleda,4,12,1963,Female,,40-49,Non-Rider,1,
+10238,10119,Daniel,A,Bachleda,4,27,1996,Male,,15-16,Non-Rider,1,
+10239,10121,Amy,,Drummond,2,28,1963,Female,5713,00-06,Non-Rider,0,
+10240,10121,Josh,,Torrans,7,18,1978,Male,100473,30-39,Rider,0,
+10241,10122,Ronnie,R,Raub,7,1,1991,Female,6925,19-29,Rider,0,
+10242,10123,Connor,J,Wurst,5,20,1997,Male,,15-16,Rider,1,Cheryll Wurst
+10243,10123,Cheryll,A,Wurst,3,3,1965,Female,,00-06,Non-Rider,1,Cheryll Wurst
+10244,10124,Jake,M,Moore,9,14,1993,Male,,17-18,Rider,0,
+10248,10124,Ellen,T,Moore,2,7,1964,Male,,00-06,Non-Rider,0,
+10246,10125,Amy,L,Good,9,19,1956,Female,7245,50+,Rider,1,
+10247,10125,Justin,M,Finkel,3,2,1995,Male,7247,17-18,Rider,1,Amy Good
+10249,10126,Ambria,M,Hopfe,3,25,1998,Female,100703,13-14,Rider,1,MaryEllen
+10250,10126,MaryEllen,,Hopfe,2,24,1959,Female,100701,50+,Rider,1,
+10251,10126,William,D,Hopfe,5,2,1959,Male,100702,50+,Rider,1,
+10252,10127,Kathy,,Susanka,8,22,1964,Female,4114,40-49,Rider,1,
+10253,10129,Carl ,K,Ham,5,14,1970,Male,,40-49,Rider,0,
+10254,10129,Kerry,M,Ham,3,12,1969,Female,,40-49,Non-Competitor,0,
+10255,10129,Kira,S,Ham,3,7,2003,Female,,09-10,Non-Competitor,0,Kerry Ham
+10258,10129,    , , ,3,7,2003,Female,,09-10,Rider,0,
+10269,10132,raymond ,a,hintz,10,23,1968,Male,2021,40-49,Rider,1,
+10270,10133,Robert,E,Griffin,11,27,1959,Male,,50+,Rider,0,
+10271,10133,Nancy,L,Griffin,9,17,1961,Female,,50+,Rider,0,
+10272,10133,Spencer,B,Griffin,9,12,1994,Male,,17-18,Rider,0,
+10273,10134,William,P,Miedel,10,22,1954,Male,6785,50+,Rider,1,
+10274,10134,Chad,A,Miedel,4,19,1994,Male,6786,17-18,Rider,1,
+10275,10135,Janet,S,Layne,8,2,1936,Female,501,50+,Non-Competitor,1,
+10276,10136,Noelle,,Wolf,6,17,2000,Female,,11-12,Rider,1,Joy/Chris Wolf
+10277,10136,Joy,,Wolf,6,24,2012,Female,,00-06,Non-Rider,1,
+10278,10136,Chris,,Wolf,6,24,2012,Male,,00-06,Non-Rider,1,
+10279,10137,Timothy,A,Lee,11,1,1957,Male,6710,50+,Rider,0,
+10280,10137,Bruce,,Lee,6,24,2012,Male,6713,13-14,Rider,0,Timothy Lee
+10281,10138,Alison,M,Cotter,3,6,2000,Female,,11-12,Rider,1,Karin Johnson
+10282,10139,Joan,F,Rayford,6,3,1961,Female,4993,50+,Rider,1,
+10283,10141,Nathan,B,Burtner,10,28,1983,Male,,19-29,Rider,1,
+10284,10141,Julie,R,Burtner,7,24,1984,Female,,19-29,Non-Competitor,1,
+10285,10144,David,,Holden,5,15,1964,Male,6019,40-49,Rider,1,
+10286,10144,Cathy,,Holden,7,21,1966,Female,6020,40-49,Rider,1,
+10287,10144,Katrina,,Holden,5,29,1992,Female,6022,19-29,Rider,1,

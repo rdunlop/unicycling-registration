@@ -1,0 +1,12 @@
+  <%= render :partial => "/competitors/competitor_basic", :object => score_with_total.competitor %>
+  <td><%= score_with_total.val_1 %></td>
+  <td><%= score_with_total.val_2 %></td>
+  <td><%= score_with_total.val_3 %></td>
+  <td><%= score_with_total.val_4 %></td>
+  <td class="derived"><%= score_with_total.Total %></td>
+  <% if score_with_total.tied %>
+    <td class="derived tied">
+  <% else %>
+    <td class="derived">
+  <% end %>
+  <%= score_with_total.competitor.event_category.score_judged_place(score_with_total) %></td>
