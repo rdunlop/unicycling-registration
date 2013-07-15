@@ -3,6 +3,7 @@ class EventCategoriesController < ApplicationController
   load_and_authorize_resource
 
   before_filter :load_event, :only => [:index, :create]
+  before_filter :load_event_category, :only => [:sign_ups, :freestyle_scores, :lock]
 
   def load_event
     @event = Event.find(params[:event_id])
@@ -10,6 +11,10 @@ class EventCategoriesController < ApplicationController
 
   def load_categories
     @event_categories = @event.event_categories
+  end
+
+  def load_event_category
+    @event_category = EventCategory.find(params[:id])
   end
 
   # GET /event_categories
@@ -86,4 +91,26 @@ class EventCategoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def sign_ups
+    @registrants = @event_category.registrant_event_sign_ups.map{|resu| resu.registrant }
+  end
+
+  def freestyle_scores
+  end
+
+  def lock
+    if @event_category.locked?
+      @event_category.locked = false
+    else
+      @event_category.locked = true
+    end
+
+    if @event_category.save
+      format.html { redirect_to @event_category, notice: 'Updated lock status' }
+    else
+      format.html { redirect_to @event_category, notice: 'Unable to update lock status' }
+    end
+  end
 end
+

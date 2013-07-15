@@ -122,7 +122,7 @@ describe ScoresController do
       it "redirects to the score" do
         score = @signed_in_scores[0]
         put :update, {:id => score.to_param, :score => valid_attributes, :judge_id => @judge, :competitor_id => @comp.id}
-        response.should redirect_to(judge_competitors_url(@judge))
+        response.should redirect_to(judge_scores_url(@judge))
       end
     end
     describe "with a boundary_score" do

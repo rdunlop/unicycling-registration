@@ -1,0 +1,32 @@
+<h1>Track Events</h1>
+
+  <table class="event_listing">
+    <tr>
+      <th>Event</th>
+      <th>Event-Category</th>
+      <th># Results</th>
+      <th>Competitors</th>
+      <th>Enter Results</th>
+      <th>View Results</th>
+      <th>Expert Candidates</th>
+    </tr>
+
+    <% @events.each do |event| %>
+      <% event.event_categories.each do |ec| %>
+        <tr>
+          <th><%= event.name %></th>
+          <td><%= ec %></td>
+          <td><%= link_to 'Competitors', event_category_competitors_path(ec) %></td>
+          <td><%= ec.time_results.count %></td>
+          <td><%= link_to 'Enter Results', event_category_time_results_path(ec) %></td>
+          <td>
+            <%= link_to "View (HTML)", results_event_category_time_results_path(ec) %>
+            <%= link_to "View (PDF)", results_event_category_time_results_path(ec, :format => "pdf") %>
+          </td>
+          <td>
+            <%= link_to "Candidates", final_candidates_event_category_time_results_path(ec) %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>

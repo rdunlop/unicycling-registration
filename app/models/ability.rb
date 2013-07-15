@@ -78,7 +78,7 @@ class Ability
         can :manage, StandardSkillRoutine
       end
       unless EventConfiguration.standard_skill_closed?
-        can :manage, StandardSkillRoutine do |routine|
+        can [:read, :create, :destroy], StandardSkillRoutine do |routine|
           user.registrants.include?(routine.registrant)
         end
         can :create, StandardSkillRoutine # necessary because we set the registrant in the controller?

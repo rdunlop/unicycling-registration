@@ -1,1 +1,26 @@
-<%= render :partial => "artistic_edit" %>
+<h1><%= @event_category %> - Competitors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @competitors.each do |competitor| %>
+      <tr>
+        <td><%= competitor.position %></td>
+        <td><%= competitor.external_id %></td>
+        <td><%= competitor.name %></td>
+        <td><%= competitor.age %></td>
+        <td><%= competitor.gender %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Upload or Create Competitor', new_event_category_competitor_path(@event_category) %>

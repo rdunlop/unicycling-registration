@@ -46,7 +46,7 @@ describe "Ability" do
           @routine = FactoryGirl.create(:standard_skill_routine, :registrant => registration)
         end
 
-        it { should be_able_to(:manage, @routine) }
+        it { should be_able_to(:destroy, @routine) }
       end
     end
 

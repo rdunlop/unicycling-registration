@@ -3,7 +3,7 @@ class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_event_category, :only => [:new, :create, :upload, :add_all, :destroy_all]
+  before_filter :load_event_category, :only => [:index, :new, :create, :upload, :add_all, :destroy_all]
 
   def load_event_category
     @event_category = EventCategory.find(params[:event_category_id])
@@ -16,7 +16,6 @@ class CompetitorsController < ApplicationController
 
   # GET /judges/1/competitors
   def index
-    @judge = Judge.find(params[:judge_id])
   end
 
   # GET /competitors/1/edit

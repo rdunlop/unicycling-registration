@@ -7,7 +7,7 @@
                 <%= label_tag(:competitor_id) %>
                 <%= select_tag(:competitor_id, options_from_collection_for_select(@competitors, "id", "name"), {:include_blank => true}) %>
                 <%= label_tag(:score) %>
-                <%= text_field_tag(:score, @score.Val1) %>
+                <%= text_field_tag(:score, @score.val_1) %>
                 <%= submit_tag('Add Attempt') %>
         <% end %>
     </div>

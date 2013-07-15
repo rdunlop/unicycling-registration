@@ -23,6 +23,10 @@
     <%= f.label :position %><br />
     <%= f.number_field :position %>
   </div>
+  <div class="field">
+    <%= f.label :event_class %><br />
+    <%= f.select :event_class, ["Freestyle", "Two Attempt Distance", "Flatland", "Street"] %>
+  </div>
   <h2>Event Categories</h2>
   <%= f.fields_for :event_categories do |ec| %>
     <div>

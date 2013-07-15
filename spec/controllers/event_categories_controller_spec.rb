@@ -169,4 +169,13 @@ describe EventCategoriesController do
     end
   end
 
+  describe "GET sign_ups" do
+    it "lists all of the currently sign-up registrants" do
+      reg = FactoryGirl.create(:registrant)
+      event_category = FactoryGirl.create(:event_category, :event => @event, :position => 2)
+      FactoryGirl.create(:registrant_event_sign_up, :event => @event, :event_category => event_category, :signed_up => true, :registrant => reg)
+      get :sign_ups, {:id => event_category.to_param}
+      assigns(:registrants).should == [reg]
+    end
+  end
 end

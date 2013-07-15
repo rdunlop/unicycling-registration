@@ -67,4 +67,17 @@ class JudgesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def index
+    @events = Event.all
+  end
+
+  def chief
+    ev = Event.find(params[:event_id])
+    user = User.find(params[:user_id])
+    user.add_role(:chief_judge, ev)
+
+    redirect_to judges_path, notice: 'Created Chief Judge'
+  end
+    
 end

@@ -1,4 +1,4 @@
-<h1>Event: <%=@event.name %> - Street Scores</h1>
+<h1>Event: <%=@event_category.name %> - Street Scores</h1>
 <h2>Judge: <%=@judge %></h2>
 
 <%= render :partial => 'form' %>
@@ -27,9 +27,9 @@
         <tr>
             <td><%= ss.competitor.external_id %></td>
             <td><%= ss.competitor.name %></td>
-            <td><%= ss.Val1 %></td>
-            <td class="derived"><%= @event.score_judged_place(ss) %></td>
-            <td class="derived"><%= @event.score_judged_points(ss) %></td>
+            <td><%= ss.val_1 %></td>
+            <td class="derived"><%= @event_category.score_judged_place(ss) %></td>
+            <td class="derived"><%= @event_category.score_judged_points(ss) %></td>
             <td><%= link_to t('Destroy'), judge_street_score_path(@judge, ss), confirm: 'Are you sure?', method: :delete %></td>
         </tr>
     <% end %>

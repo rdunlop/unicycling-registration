@@ -45,9 +45,8 @@ Workspace::Application.routes.draw do
         put :admin
       end
     end
-    resources :history, :only => [:index] 
 
-    resources :standard_skill_entries, :only => [] do
+    resources :standard_skill_entries, :only => [:index] do
       collection do
         get :upload_file
         post :upload
@@ -85,6 +84,12 @@ Workspace::Application.routes.draw do
   resources :events, :except => [:index, :new, :show, :create] do
     resources :event_choices, :only => [:index, :create]
     resources :event_categories, :only => [:index, :create]
+    collection do
+      get 'freestyle'
+      get 'flatland'
+      get 'street'
+      get 'track'
+    end
   end
 
   resources :categories, :except => [:new, :show] do
@@ -95,6 +100,7 @@ Workspace::Application.routes.draw do
     collection do
       get :new_noncompetitor
       get :all
+      get :usa_memberships
     end
     member do
       get :items
@@ -105,7 +111,7 @@ Workspace::Application.routes.draw do
     resources :standard_skill_routines, :only => [:index, :create]
   end
 
-  resources :standard_skill_routines, :only => [:show] do
+  resources :standard_skill_routines, :only => [:show, :index] do
     resources :standard_skill_routine_entries, :only => [:destroy, :create]
   end
   resources :standard_skill_entries, :only => [:index]
@@ -152,7 +158,7 @@ Workspace::Application.routes.draw do
   ### For event-data-gathering/reporting purposes
   ###############################################
 
-  resources :judges, :only => [:update]
+  resources :judges, :only => [:update, :index]
 
   resources :competitors, :only => [:edit, :update, :destroy]
   resources :event_categories, :except => [:index, :create, :new] do
@@ -161,6 +167,9 @@ Workspace::Application.routes.draw do
       # view scores
       get :freestyle_scores
       get :distance_attempts
+      get :sign_ups
+      post :lock
+      delete :lock
     end
     resources :competitors, :only => [:index, :new, :create, :destroy] do
       collection do
@@ -186,7 +195,10 @@ Workspace::Application.routes.draw do
   resources :time_results, :except => [:index, :new, :show, :create]
 
   resources :judges, :only => [] do
-    resources :competitors, :only => [:index] do
+    collection do
+        post :chief
+    end
+    resources :competitors, :only => [] do
       resources :scores, :only => [:new, :edit, :create, :update]
 
       # display chosen competitors current scores, and update them
@@ -196,6 +208,7 @@ Workspace::Application.routes.draw do
     end
 
     #choose the desired competitor to add scores to
+    resources :scores, :only => [:index]
     resources :standard_scores, :only => [:index]
     resources :distance_attempts, :only => [:index] do
       collection do
@@ -204,6 +217,7 @@ Workspace::Application.routes.draw do
     end
     resources :street_scores, :only => [:index, :create, :destroy]
   end
+  resources :distance_attempts, :only => [:update, :destroy]
 
 
 

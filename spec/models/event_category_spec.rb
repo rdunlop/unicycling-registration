@@ -14,8 +14,33 @@ describe EventCategory do
     @ec.valid?.should == false
   end
 
+  describe "with a user" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+    it "says there are no judges" do
+      @ec.has_judge(@user).should == false
+      @ec.get_judge(@user).should == nil
+    end
+
+    describe "as a judge" do
+      before(:each) do
+        @judge = FactoryGirl.create(:judge, :event_category => @ec, :user => @user)
+      end
+
+      it "has judge" do
+        @ec.has_judge(@user).should == true
+        @ec.get_judge(@user).should == @judge
+      end
+    end
+  end
+
   it "has an event" do
     @ec.event.should == @ev
+  end
+
+  it "uses the event name in its name" do
+    @ec.to_s.should == @ev.to_s + " - " + @ec.name
   end
 
   it "can have an age_group_type" do

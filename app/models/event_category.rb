@@ -19,7 +19,15 @@ class EventCategory < ActiveRecord::Base
   validates :position, :uniqueness => {:scope => [:event_id]}
 
   def to_s
-    self.name
+    event.to_s + " - " + self.name
+  end
+
+  def get_judge(user)
+    return judges.where({:user_id => user.id}).first
+  end
+
+  def has_judge(user)
+    return !get_judge(user).nil?
   end
 
   def num_competitors

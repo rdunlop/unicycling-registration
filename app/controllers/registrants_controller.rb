@@ -34,6 +34,10 @@ class RegistrantsController < ApplicationController
     @registrants = Registrant.order(:id)
   end
 
+  def usa_memberships
+    @registrants = Registrant.all
+  end
+
   # GET /registrants/1/waiver
   def waiver
     @registrant = Registrant.find(params[:id])

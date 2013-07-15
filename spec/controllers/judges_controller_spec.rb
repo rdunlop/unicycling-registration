@@ -108,4 +108,12 @@ describe JudgesController do
     end
   end
 
+  describe "POST chief" do
+    it "creates a new chief judge" do
+        user = FactoryGirl.create(:user)
+        event = FactoryGirl.create(:event)
+        post :chief, {:user_id => user.id, :event_id => event.id}
+        User.with_role(:chief_judge, event).should == [user]
+    end
+  end
 end

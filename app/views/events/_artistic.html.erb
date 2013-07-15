@@ -1,0 +1,43 @@
+  <table class="event_listing">
+    <tr>
+      <th>Event</th>
+      <th>Event-Category</th>
+      <th>Scores</th>
+      <th>Sign-Ups</th>
+      <th>Competitor List</th>
+      <th>Am I Judging?</th>
+      <th>Locked?</th>
+      <th>All Results</th>
+    </tr>
+
+    <% @events.each do |event| %>
+      <% event.event_categories.each do |ec| %>
+        <% if ec.has_judge(current_user)
+            @i_am_judge = true
+            @judge = ec.get_judge(current_user)
+            %><tr><% 
+        else 
+            @i_am_judge = false
+            @judge = nil
+            %><tr class="no_judge"><%
+        end %>
+          <th><%= event.name %></th>
+          <td><%= ec %></td>
+          <td><%= link_to 'Enter Results', 'new_judge_competitor_score_path(@judge, ec.id)' %></td>
+          <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %></td>
+          <td><%= link_to 'Competitors', event_category_competitors_path(ec) %></td>
+          <td><%= @i_am_judge ? "Yes" : "No" %></td>
+          <td><%= ec.locked? %>
+          <% if can? :lock, event %>
+            <% if ec.locked? %>
+                <%= link_to 'Unock', lock_event_category_path(ec), :method => :delete %>
+            <% else %>
+                <%= link_to 'Lock', lock_event_category_path(ec), :method => :post %>
+            <% end %>
+          <% end %>
+          </td>
+          <td><%= link_to 'View', freestyle_scores_event_category_path(ec) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>

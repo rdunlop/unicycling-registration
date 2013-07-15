@@ -71,4 +71,20 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def freestyle
+    @events = Event.where({:event_class => "Freestyle"})
+  end
+
+  def flatland
+    @events = Event.where({:event_class => "Flatland"})
+  end
+
+  def street
+    @events = Event.where({:event_class => "Street"})
+  end
+
+  def track
+    @events = Event.where({:event_class => "Two Attempt Distance"})
+  end
 end

@@ -2,11 +2,22 @@ class ScoresController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :find_judge_and_competitor
+  before_filter :find_judge
+  before_filter :find_competitor, :except => [:index]
 
-  def find_judge_and_competitor
+  def find_judge
     @judge = Judge.find_by_id(params[:judge_id])
+  end
+
+  def find_competitor
     @competitor = Competitor.find_by_id(params[:competitor_id])
+  end
+
+  # GET /judges/1/scores
+  def index
+    respond_to do |format|
+        format.html
+    end
   end
 
   # GET /judges/1/competitors/2/scores/new
@@ -49,7 +60,7 @@ class ScoresController < ApplicationController
         if @judge.judge_type.boundary_calculation_enabled
             @boundary_score.save
         end
-        format.html { redirect_to judge_competitors_path(@judge), notice: 'Score was successfully created.' }
+        format.html { redirect_to judge_scores_path(@judge), notice: 'Score was successfully created.' }
         format.json { render json: @score, status: :created, location: @score }
       else
         format.html { render action: "new" }
@@ -90,7 +101,7 @@ class ScoresController < ApplicationController
 
     respond_to do |format|
       if @score.update_attributes(params[:score])
-        format.html { redirect_to judge_competitors_url(@judge), notice: 'Score was successfully updated.' }
+        format.html { redirect_to judge_scores_url(@judge), notice: 'Score was successfully updated.' }
         format.json { head :no_content }
         format.js
       else

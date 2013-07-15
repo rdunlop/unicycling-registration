@@ -21,7 +21,7 @@
           </thead>
 
           <tbody>
-            <% @competitor.registrants.first.standard_skill_routine_entries.each do |skill| %>
+            <% @competitor.registrants.first.standard_skill_routine.standard_skill_routine_entries.each do |skill| %>
               <% difficulty_score = @judge.standard_difficulty_scores.find_by_competitor_id_and_standard_skill_routine_entry_id(@competitor.id, skill.id) %>
               <% execution_score = @judge.standard_execution_scores.find_by_competitor_id_and_standard_skill_routine_entry_id(@competitor.id, skill.id) %>
               <% next if execution_score.nil? or difficulty_score.nil? %>

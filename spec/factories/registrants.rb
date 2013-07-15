@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :registrant do
-    first_name "FirstMyString"
+    sequence(:first_name) {|n| "FirstMyString #{n}" }
     middle_initial "MMyString"
     last_name "LastMyString"
     birthday Date.new(1990,11,10)

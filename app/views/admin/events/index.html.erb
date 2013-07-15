@@ -26,34 +26,28 @@
   <thead>
     <th>Category</th>
     <th>Event Name</th>
+    <th>Sign Up List</th>
     <th>Event Category</th>
     <th># Signed Up</th>
-    <th>Sign Up List</th>
-    <th>Num Time Results</th>
-    <th>Time Results</th>
-    <th>Final Head Candidates</th>
   </thead>
   <tbody>
     <% @events.each do |event| %>
+      <% new_event = true %>
       <% event.event_categories.each do |ecat| %>
         <tr>
-          <td><%= event.category %></td>
-          <td><%= link_to event, admin_event_path(event) %></td>
+          <% if new_event %>
+            <td><%= event.category %></td>
+            <td><%= event %></td>
+            <% new_event = false %>
+            <td>
+              <%= link_to "HTML", admin_event_path(event) %>
+              <%= link_to "PDF", admin_event_path(event, :format => "pdf") %>
+            </td>
+          <% else %>
+            <td colspan="3"></td>
+          <% end %>
           <td><%= ecat %></td>
           <td><%= ecat.num_competitors %></td>
-          <td>
-            <%= link_to "HTML", admin_event_path(event) %>
-            <%= link_to "PDF", admin_event_path(event, :format => "pdf") %>
-          </td>
-          <td><%= ecat.time_results.count %></td>
-          <td>
-            <%= link_to "Enter Data", event_category_time_results_path(ecat) %>
-            <%= link_to "View (HTML)", results_event_category_time_results_path(ecat) %>
-            <%= link_to "View (PDF)", results_event_category_time_results_path(ecat, :format => "pdf") %>
-          </td>
-          <td>
-            <%= link_to "Candidates", final_candidates_event_category_time_results_path(ecat) %>
-          </td>
         </tr>
       <% end %>
     <% end %>

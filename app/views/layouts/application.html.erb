@@ -20,90 +20,157 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
       <a id="dev_banner_remover" href="#" class="banner_remover" data-banner-class="dev_banner" title="Remove dev banner">[x]</a>
     </div>
   <% end %>
-  <% if !current_user.nil? and  @config.test_mode %>
-    <div class="test_mode">
-      <a id="test_mode_remover" href="#" class="banner_remover" data-banner-class="test_mode" title="Remove test banner">[x]</a>
-      <h2>Test Mode Enabled</h2>
-      <span>Current User is <%= current_user.has_role?(:admin) ? "Admin" : current_user.has_role?(:super_admin) ? "Super Admin" : "Normal User" %></span>
-      <%= link_to 'Make Me ADMIN', admin_event_configurations_path, :method => :post %>
-      <%= link_to 'Make Me SUPER ADMIN', super_admin_event_configurations_path, :method => :post %>
-      <%= link_to 'Make Me NORMAL', normal_event_configurations_path, :method => :post %>
-    </div>
-  <% end %>
-    <nav>
+  <hr>
+  <nav>
     <ul>
-      <li>
       <% if EventConfiguration.configuration_exists? %>
         <% target_url = EventConfiguration.event_url %>
+        <li>
         <% if target_url.nil? %>
           <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), root_url, {:class => "logo_link"} %>
         <% else %>
           <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), target_url, {:class => "logo_link", :target => "_blank"} %>
         <% end %>
+        </li>
       <% end %>
-      </li>
       <% if current_user.nil? %>
         <li><%= link_to 'Log In', new_user_session_path %></li>
       <% else %>
-        <% if mixpanel? %>
-          <script type="text/javascript">
-            mixpanel.identify("<%= current_user %>");
-            mixpanel.name_tag("<%= current_user %>");
-          </script>
-        <% end %>
-        <li><%= link_to 'My Registrations', registrants_path %></li>
-        <li><%= link_to 'My Payments', payments_path %></li>
-        <li><%= link_to 'All Registrants', all_registrants_path %></li>
-      <% end %>
-      <!-- ADMIN VIEWS -->
-      <% if can? :manage, Registrant %>
-        <li><%= link_to 'Admin', "#" %>
-        <ul>
-          <% if can? :manage, EventConfiguration %>
-            <li><%= link_to 'Configuration', event_configurations_path %></li>
+          <% if mixpanel? %>
+            <script type="text/javascript">
+              mixpanel.identify("<%= current_user %>");
+              mixpanel.name_tag("<%= current_user %>");
+            </script>
           <% end %>
-          <% if can? :manage, Category %>
-            <li><%= link_to 'Event Configuration', categories_path %></li>
+          <%
+            @printed = {}
+            @stored = {}
+            def set_menu_header(header_name, header_contents)
+              @stored[header_name] = header_contents
+              @printed[header_name] = false
+            end
+            def menu_header_if_necessary(header_name)
+              necessary = true unless @printed[header_name]
+              @printed[header_name] = true if necessary
+              return raw(@stored[header_name]) if necessary
+            end
+            def menu_footer_if_necessary(header_name)
+              return raw("</ul></li>") if @printed[header_name]
+            end
+          %>
+
+          <% set_menu_header("data","<li>" + link_to( 'Data', '#') + "<ul>") %>
+            <% if can? :manage, :all %>
+              <%= menu_header_if_necessary("data") %>
+              <li><%= link_to 'UCP Export/Import', admin_export_index_path %></li>
+            <% end %>
+            <% if can? :access, :rails_admin %>
+              <%= menu_header_if_necessary("data") %>
+              <li><%= link_to 'Modification History', rails_admin_path %></li>
+            <% end %>
+            <% if can? :manage, StandardSkillRoutine %>
+              <%= menu_header_if_necessary("data") %>
+              <li><%= link_to 'Standard Skill Routines (view)', standard_skill_routines_path %></li>
+              <li><%= link_to 'Standard Skill Routines (export)', download_file_admin_standard_skill_routines_path %></li>
+            <% end %>
+            <% if can? :read, :usa_memberships %>
+              <%= menu_header_if_necessary("data") %>
+              <li><%= link_to 'USA Memberships', usa_memberships_registrants_path %></li>
+            <% end %>
+          <%= menu_footer_if_necessary("data") %>
+
+          <% set_menu_header("siteconfig","<li>" + link_to( 'Site Config', '#') + "<ul>") %>
+            <% if can? :manage, EventConfiguration %>
+              <%= menu_header_if_necessary("siteconfig") %>
+              <li><%= link_to 'Base Configuration', event_configurations_path %></li>
+            <% end %>
+            <% if can? :manage, RegistrationPeriod %>
+              <%= menu_header_if_necessary("siteconfig") %>
+              <li><%= link_to 'Registration Periods', registration_periods_path %></li>
+            <% end %>
+            <% if can? :manage, Category %>
+              <%= menu_header_if_necessary("siteconfig") %>
+              <li><%= link_to 'Event Offerings', categories_path %></li>
+            <% end %>
+            <% if can? :manage, AgeGroupType %>
+              <%= menu_header_if_necessary("siteconfig") %>
+              <li><%= link_to 'Age Group Type', admin_age_group_types_path %></li>
+            <% end %>
+            <% if can? :manage, StandardSkillEntry %>
+              <%= menu_header_if_necessary("siteconfig") %>
+              <li><%= link_to 'Standard Skill Entries', admin_standard_skill_entries_path %></li>
+            <% end %>
+            <% if can? :manage, User %>
+              <%= menu_header_if_necessary("siteconfig") %>
+              <li><%= link_to 'Admins', admin_users_path %></li>
+            <% end %>
+            <% if can? :manage, ExpenseGroup %>
+              <%= menu_header_if_necessary("siteconfig") %>
+              <li><%= link_to 'Expense Groups', expense_groups_path %></li>
+            <% end %>
+            <% if can? :manage, ExpenseItem %>
+              <%= menu_header_if_necessary("siteconfig") %>
+              <li><%= link_to 'Expense Items', expense_items_path %></li>
+            <% end %>
+          <%= menu_footer_if_necessary("siteconfig") %>
+
+          <% set_menu_header("manage","<li>" + link_to( 'Manage', '#') + "<ul>") %>
+            <% if can? :manage, Registrant %>
+              <%= menu_header_if_necessary("manage") %>
+              <li><%= link_to 'Registrants (edit)', admin_registrants_path %></li>
+              <li><%= link_to 'Registrants (print)', admin_registrants_path %></li>
+              <li><%= link_to 'Registrants (bag labels)', bag_labels_admin_registrants_path %></li>
+            <% end %>
+            <% if can? :manage, Registrant %>
+              <%= menu_header_if_necessary("manage") %>
+              <li><%= link_to 'Payments', admin_payments_path %></li>
+            <% end %>
+            <% if can? :manage, Registrant %>
+              <%= menu_header_if_necessary("manage") %>
+              <li><%= link_to 'Events Report', admin_events_path %></li>
+            <% end %>
+            <% if can? :manage, Judge %>
+              <%= menu_header_if_necessary("manage") %>
+              <li><%= link_to 'Judges', judges_path %></li>
+            <% end %>
+          <%= menu_footer_if_necessary("manage") %>
+
+          <% if can? :create, Score %>
+            <% set_menu_header("scores","<li>" + link_to( 'Judging', '#') + "<ul>") %>
+              <%= menu_header_if_necessary("scores") %>
+              <li><%= link_to 'Freestyle', freestyle_events_path %></li>
+              <li><%= link_to 'Flatland', flatland_events_path %></li>
+              <li><%= link_to 'Street', street_events_path %></li>
+              <li><%= link_to 'Track', track_events_path %></li>
+          <%= menu_footer_if_necessary("scores") %>
           <% end %>
-          <% if can? :manage, AgeGroupType %>
-            <li><%= link_to 'Age Group Type', admin_age_group_types_path %></li>
+
+          <li>
+          <%= link_to 'My Data', '#' %>
+          <ul>
+            <li><%= link_to 'My Registrations', registrants_path %></li>
+            <li><%= link_to 'My Payments', payments_path %></li>
+            <li><%= link_to 'My Standard Skill Routines', standard_skill_routines_path %></li>
+            <li><%= link_to 'All Registrants', all_registrants_path %></li>
+          </ul>
+          </li>
+
+          <% unless current_user.nil? %>
+            <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
           <% end %>
-          <% if can? :manage, ExpenseGroup %>
-            <li><%= link_to 'Expense Groups', expense_groups_path %></li>
-          <% end %>
-          <% if can? :manage, ExpenseItem %>
-            <li><%= link_to 'Expense Items', expense_items_path %></li>
-          <% end %>
-          <% if can? :manage, RegistrationPeriod %>
-            <li><%= link_to 'Registration Periods', registration_periods_path %></li>
-          <% end %>
-          <% if can? :manage, :all %>
-            <li><%= link_to 'Export/Import', admin_export_index_path %></li>
-          <% end %>
-          <% if can? :manage, User %>
-            <li><%= link_to 'Set User as admin', admin_users_path %></li>
-          <% end %>
-          <% if can? :manage, Registrant %>
-            <li><%= link_to 'Registrants (edit)', admin_registrants_path %></li>
-          <% end %>
-          <% if can? :manage, Registrant %>
-            <li><%= link_to 'Payments', admin_payments_path %></li>
-          <% end %>
-          <% if can? :manage, Registrant %>
-            <li><%= link_to 'Events Report', admin_events_path %></li>
-          <% end %>
-          <% if can? :access, :rails_admin %>
-            <li><%= link_to 'Modification History', rails_admin_path %></li>
-          <% end %>
-        </ul>
-        </li>
-      <% end %>
-      <li><%= link_to 'Help', welcome_help_path %></li>
-      <% unless current_user.nil? %>
-        <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
       <% end %>
     </ul>
     </nav>
+    <% if !current_user.nil? and  @config.test_mode %>
+      <div class="test_mode">
+        <a id="test_mode_remover" href="#" class="banner_remover" data-banner-class="test_mode" title="Remove test banner">[x]</a>
+        <h2>Test Mode Enabled</h2>
+        <span>Current User is <%= current_user.has_role?(:admin) ? "Admin" : current_user.has_role?(:super_admin) ? "Super Admin" : "Normal User" %></span>
+        <%= link_to 'Make Me ADMIN', admin_event_configurations_path, :method => :post %>
+        <%= link_to 'Make Me SUPER ADMIN', super_admin_event_configurations_path, :method => :post %>
+        <%= link_to 'Make Me NORMAL', normal_event_configurations_path, :method => :post %>
+      </div>
+    <% end %>
     <% if current_user.nil? %>
       <div class="base_details">
         <ul>
@@ -127,6 +194,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
 
   <div class="bottom_nav">
     <p>Developed by Robin Dunlop</p>
+    <li><%= link_to 'Help', welcome_help_path %></li>
   </div>
 </body>
 </html>
