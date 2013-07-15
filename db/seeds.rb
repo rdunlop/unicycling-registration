@@ -16,7 +16,7 @@ if JudgeType.count == 0
                    :val_2_max => 10,
                    :val_3_max => 10,
                    :val_4_max => 10,
-                   :event_class_id => EventClass.find_by_name("Freestyle").id
+                   :event_class => "Freestyle"
                   )
   JudgeType.create(:name => "Technical",
                    :val_1_description => "Variety & Originality of Skills",
@@ -27,7 +27,7 @@ if JudgeType.count == 0
                    :val_2_max => 10,
                    :val_3_max => 10,
                    :val_4_max => 10,
-                   :event_class_id => EventClass.find_by_name("Freestyle").id
+                   :event_class => "Freestyle"
                   )
 
   JudgeType.create(:name => "Flatland Judge Type",
@@ -39,7 +39,7 @@ if JudgeType.count == 0
                    :val_2_max => 10,
                    :val_3_max => 10,
                    :val_4_max => 10,
-                   :event_class_id => EventClass.find_by_name("Flatland").id
+                   :event_class => "Flatland"
                   )
 
   JudgeType.create(:name => "Distance Judge Type",
@@ -51,7 +51,7 @@ if JudgeType.count == 0
                    :val_2_max => 10,
                    :val_3_max => 10,
                    :val_4_max => 10,
-                   :event_class_id => EventClass.find_by_name("Two Attempt Distance").id
+                   :event_class => "Two Attempt Distance"
                   )
 
   JudgeType.create(:name => "Street Judge Type",
@@ -63,7 +63,7 @@ if JudgeType.count == 0
                    :val_2_max => 10,
                    :val_3_max => 10,
                    :val_4_max => 10,
-                   :event_class_id => EventClass.find_by_name("Street").id
+                   :event_class => "Street"
                   )
 end
 

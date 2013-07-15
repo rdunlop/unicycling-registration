@@ -1,7 +1,7 @@
 class JudgesController < ApplicationController
   load_and_authorize_resource
 
-  before_filter :load_event_category, :only => [:new, :create, :destroy, :copy_judges]
+  before_filter :load_event_category, :only => [:index, :new, :create, :destroy, :copy_judges]
 
   def load_event_category
     @event_category = EventCategory.find(params[:event_category_id])
@@ -12,8 +12,8 @@ class JudgesController < ApplicationController
     @all_judges = User.with_role(:judge).order(:email)
   end
 
-  # POST /judges
-  # POST /judges.json
+  # POST /event_categories/#/judges
+  # POST /event_categories/#/judges.json
   def create
     @judge.event_category = @event_category
 
@@ -69,15 +69,33 @@ class JudgesController < ApplicationController
   end
 
   def index
+    @all_judges = User.with_role(:judge)
+    @judges = @event_category.judges
+    @events = Event.all
+    @judge = Judge.new
+  end
+
+  def create_normal
+    @user = User.find(params[:judge][:user_id])
+    respond_to do |format|
+      if @user.add_role(:judge)
+        format.html { redirect_to root_path, notice: 'Judge successfully created.' }
+      else
+        format.html { redirect_to root_path, notice: 'Unable to create Judge successfully created.' }
+      end
+    end
+  end
+
+  def chiefs
     @events = Event.all
   end
 
-  def chief
+  def create_chief
     ev = Event.find(params[:event_id])
     user = User.find(params[:user_id])
     user.add_role(:chief_judge, ev)
 
-    redirect_to judges_path, notice: 'Created Chief Judge'
+    redirect_to chiefs_judges_path, notice: 'Created Chief Judge'
   end
     
 end

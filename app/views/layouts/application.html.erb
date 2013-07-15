@@ -131,7 +131,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
             <% end %>
             <% if can? :manage, Judge %>
               <%= menu_header_if_necessary("manage") %>
-              <li><%= link_to 'Judges', judges_path %></li>
+              <li><%= link_to 'Chief Judges', chiefs_judges_path %></li>
             <% end %>
           <%= menu_footer_if_necessary("manage") %>
 

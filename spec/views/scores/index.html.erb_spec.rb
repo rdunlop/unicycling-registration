@@ -70,7 +70,7 @@ describe "scores/index" do
     end
   end
   it "shows the update button" do
-    @ability.can :create_scores, @ev
+    @ability.can :create_scores, @ec
     render
       assert_select "a", :text => "Update".to_s, :count => 2
   end

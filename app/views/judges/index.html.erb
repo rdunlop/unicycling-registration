@@ -1,29 +1,47 @@
-<h1>Manage Judges</h1>
+<h1>Manage <%= @event_category %> Judges</h1>
 
 <table>
-    <caption>Chief Judges</caption>
-    <thead>
-        <tr>
-            <th>Event</th>
-            <th>Chief Judge</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @events.each do |event| %>
-            <tr>
-                <td><%= event %></td>
-                <td>
-                  <% User.with_role(:chief_judge, event).each do |user| %>
-                    <%= user %>
-                  <% end %>
-                </td>
-            </tr>
-        <% end %>
-    </tbody>
+  <caption>All enabled Judge Accounts</caption>
+  <thead>
+    <th>Email</th>
+  </thead>
+  <tbody>
+    <% @all_judges.each do |judge| %>
+      <tr>
+        <td><%= judge %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<%= form_tag(chief_judges_path, :method => "post") do |f| %>
-  <%= select_tag :event_id, options_from_collection_for_select(Event.all, "id", "name") %>
-  <%= select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s") %>
-  <%= submit_tag "Add Chief", :class => "focus_button" %>
+<table>
+  <caption>THIS EVENT Judges</caption>
+  <thead>
+    <th>Judge</th>
+    <th>Type</th>
+  </thead>
+  <tbody>
+    <% @judges.each do |judge| %>
+      <tr>
+        <td><%= judge %></td>
+        <td><%= judge.judge_type %></td>
+        <td>Delete?</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Set User as 'Judge'</h2>
+Allows users to see the judging menu
+<%= form_for [@event_category, @judge], :url => create_normal_judges_path do |f| %>
+  <%= f.select :user_id, User.all.map { |user| [user, user.id] } %>
+  <%= f.submit %>
+<% end %>
+
+<h2>Set User as Judge for <%= @event_category %></h2>
+Allows user to judge THIS event.
+<%= form_for [@event_category, @judge] do |f| %>
+  <%= f.select :user_id, @all_judges.map { |user| [user, user.id] } %>
+  <%= f.select :judge_type_id, JudgeType.all.map { |jt| [jt, jt.id] } %>
+  <%= f.submit %>
 <% end %>

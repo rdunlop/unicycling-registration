@@ -11,6 +11,7 @@
     </thead>
     <tbody>
         <% @registrants.each do |reg| %>
+          <% next if reg.nil? %>
             <tr>
                 <td><%= reg.id %></td>
                 <td><%= reg %></td>

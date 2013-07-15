@@ -30,6 +30,7 @@ class JudgeType < ActiveRecord::Base
         self.val_2_max ||= 10
         self.val_3_max ||= 10
         self.val_4_max ||= 10
+        self.boundary_calculation_enabled = false if self.boundary_calculation_enabled.nil?
     end
 
 

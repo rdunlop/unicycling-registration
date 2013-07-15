@@ -108,12 +108,47 @@ describe JudgesController do
     end
   end
 
-  describe "POST chief" do
+  describe "POST create_chief" do
     it "creates a new chief judge" do
         user = FactoryGirl.create(:user)
         event = FactoryGirl.create(:event)
-        post :chief, {:user_id => user.id, :event_id => event.id}
+        post :create_chief, {:user_id => user.id, :event_id => event.id}
         User.with_role(:chief_judge, event).should == [user]
+    end
+  end
+  describe "GET chiefs" do
+    it "displays the chiefs" do
+      get :chiefs
+      assigns(:events).should == [@ev]
+    end
+  end
+
+  describe "GET index" do
+    it "displays all of the judges for all" do
+      get :index, {:event_category_id => @ec}
+      assigns(:all_judges).should == [@judge_user]
+    end
+
+    it "lists this events' judges" do
+      other_judge_user = FactoryGirl.create(:user)
+      other_judge_user.add_role(:judge)
+      @judge = FactoryGirl.create(:judge, :user => @judge_user, :event_category => @ec)
+      get :index, {:event_category_id  => @ec}
+      assigns(:judges).should == [@judge]
+    end
+    
+    it "has a blank judge" do
+      get :index, {:event_category_id  => @ec}
+      assigns(:judge).should be_a_new(Judge)
+    end
+  end
+
+  describe "POST create_normal" do
+    it "creates a new judge" do
+      user = FactoryGirl.create(:user)
+      post :create_normal, {:judge => {:user_id => user.id}}
+      user.reload
+      user.has_role?(:judge).should == true
     end
   end
 end

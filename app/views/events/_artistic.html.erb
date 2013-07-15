@@ -8,6 +8,7 @@
       <th>Am I Judging?</th>
       <th>Locked?</th>
       <th>All Results</th>
+      <th>Judges</th>
     </tr>
 
     <% @events.each do |event| %>
@@ -23,7 +24,10 @@
         end %>
           <th><%= event.name %></th>
           <td><%= ec %></td>
-          <td><%= link_to 'Enter Results', 'new_judge_competitor_score_path(@judge, ec.id)' %></td>
+          <td><% if @i_am_judge %>
+              <%= link_to 'Enter Results', judge_scores_path(@judge) %>
+            <% end %>
+          </td>
           <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %></td>
           <td><%= link_to 'Competitors', event_category_competitors_path(ec) %></td>
           <td><%= @i_am_judge ? "Yes" : "No" %></td>
@@ -37,6 +41,7 @@
           <% end %>
           </td>
           <td><%= link_to 'View', freestyle_scores_event_category_path(ec) %></td>
+          <td><%= link_to 'View/Add', event_category_judges_path(ec) %></td>
         </tr>
       <% end %>
     <% end %>

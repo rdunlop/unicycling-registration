@@ -158,8 +158,6 @@ Workspace::Application.routes.draw do
   ### For event-data-gathering/reporting purposes
   ###############################################
 
-  resources :judges, :only => [:update, :index]
-
   resources :competitors, :only => [:edit, :update, :destroy]
   resources :event_categories, :except => [:index, :create, :new] do
     member do
@@ -186,7 +184,7 @@ Workspace::Application.routes.draw do
         get :final_candidates
       end
     end
-    resources :judges,      :only => [:new, :create, :destroy] do
+    resources :judges,      :only => [:index, :new, :create, :destroy] do
       collection do
         post :copy_judges
       end
@@ -194,9 +192,11 @@ Workspace::Application.routes.draw do
   end
   resources :time_results, :except => [:index, :new, :show, :create]
 
-  resources :judges, :only => [] do
+  resources :judges, :only => [:update] do
     collection do
-        post :chief
+      post :create_normal
+      get :chiefs
+      post :create_chief
     end
     resources :competitors, :only => [] do
       resources :scores, :only => [:new, :edit, :create, :update]

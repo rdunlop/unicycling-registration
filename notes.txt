@@ -1,3 +1,7 @@
+July Questions:
+- Do I need to have event_classes: Track, Standard Skill? (I'm currently not setting the Standard Skill one, and I am using "Two Attempt distance for the other one").
+
+
 TO DO (MUST be done BEFORE LIVE):
 #- Create Judge Type From Unicycling (Pre-populate in Migration?)
 - Create Judge between EventCategory, AgeGroupEntry, JudgeType, User, Position
