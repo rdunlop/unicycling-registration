@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710142728) do
+ActiveRecord::Schema.define(:version => 20130716023448) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(:version => 20130710142728) do
     t.boolean  "locked"
   end
 
+  add_index "event_categories", ["event_id", "position"], :name => "index_event_categories_event_id"
+
   create_table "event_choices", :force => true do |t|
     t.integer  "event_id"
     t.string   "export_name"
@@ -100,6 +102,8 @@ ActiveRecord::Schema.define(:version => 20130710142728) do
     t.datetime "updated_at",      :null => false
     t.boolean  "autocomplete"
   end
+
+  add_index "event_choices", ["event_id", "position"], :name => "index_event_choices_event_id"
 
   create_table "event_configurations", :force => true do |t|
     t.string   "short_name"
@@ -229,6 +233,8 @@ ActiveRecord::Schema.define(:version => 20130710142728) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "registrant_choices", ["registrant_id"], :name => "index_registrant_choices_registrant_id"
+
   create_table "registrant_event_sign_ups", :force => true do |t|
     t.integer  "registrant_id"
     t.boolean  "signed_up"
@@ -237,6 +243,8 @@ ActiveRecord::Schema.define(:version => 20130710142728) do
     t.datetime "updated_at",        :null => false
     t.integer  "event_id"
   end
+
+  add_index "registrant_event_sign_ups", ["registrant_id"], :name => "index_registrant_event_sign_ups_registrant_id"
 
   create_table "registrant_expense_items", :force => true do |t|
     t.integer  "registrant_id"
@@ -279,6 +287,8 @@ ActiveRecord::Schema.define(:version => 20130710142728) do
     t.integer  "wheel_size_id"
     t.integer  "age"
   end
+
+  add_index "registrants", ["deleted"], :name => "index_registrants_deleted"
 
   create_table "registration_periods", :force => true do |t|
     t.date     "start_date"

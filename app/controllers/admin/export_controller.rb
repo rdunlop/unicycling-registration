@@ -236,19 +236,27 @@ class Admin::ExportController < Admin::BaseController
 
   def download_events
 
-    event_categories = Event.all.flat_map{ |ev| ev.event_categories }
+    event_categories = Event.includes(:event_categories => :event).all.flat_map{ |ev| ev.event_categories }
     event_categories_titles = event_categories.map{|ec| ec.to_s}
 
-    event_choices = Event.all.flat_map{ |ev| ev.event_choices }
+    event_choices = Event.includes(:event_choices => :event).all.flat_map{ |ev| ev.event_choices }
     event_titles = event_choices.map{|ec| ec.to_s}
 
     titles = ["Registrant Name", "Age", "Gender"] + event_categories_titles + event_titles
     competitor_data = []
-    Registrant.all.each do |reg|
+    Registrant.includes(:registrant_event_sign_ups => {}, :registrant_choices => :event_choice).all.each do |reg|
       comp_base = [reg.name, reg.age, reg.gender]
       reg_sign_up_data = []
       event_categories.each do |ec|
-        rc = reg.registrant_event_sign_ups.where({:event_category_id => ec.id}).first
+        # for performance reasons, loop it
+        rc = nil
+        reg.registrant_event_sign_ups.each do |r|
+          if r.event_category_id == ec.id
+            rc = r
+            break
+          end
+        end
+        #rc = reg.registrant_event_sign_ups.where({:event_category_id => ec.id}).first
         if rc.nil?
           reg_sign_up_data += [nil]
         else
@@ -258,7 +266,15 @@ class Admin::ExportController < Admin::BaseController
 
       reg_event_data = []
       event_choices.each do |ec|
-        rc = reg.registrant_choices.where({:event_choice_id => ec.id}).first
+        # for performance reasons, loop it
+        rc = nil
+        reg.registrant_choices.each do |r|
+          if r.event_choice_id == ec.id
+            rc = r
+            break
+          end
+        end
+        #rc = reg.registrant_choices.where({:event_choice_id => ec.id}).first
         if rc.nil?
           reg_event_data += [nil]
         else
