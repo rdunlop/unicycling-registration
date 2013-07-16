@@ -32,6 +32,7 @@ Workspace::Application.routes.draw do
       post :upload_registrants
       get :download_time_results
       post :upload_time_results
+      get :download_ucp_sql
 
       # OLD routes
       get :download_data

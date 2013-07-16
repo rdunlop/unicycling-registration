@@ -1,3 +1,4 @@
+require 'csv'
 class Admin::ExportController < Admin::BaseController
   before_filter :authenticate_user!
   authorize_resource :class => false
@@ -300,5 +301,74 @@ class Admin::ExportController < Admin::BaseController
     respond_to do |format|
       format.xls { send_data report.string, :filename => "download_events#{Date.today}.xls" }
     end
+  end
+
+  # defines the SQL file necessary to run in order to sync UCP with the UDA
+  # Includes Registrants, and their events.
+  # NOTE: requires that UCP be configured properly in the tOnlineMatch_tbl
+  def download_ucp_sql
+    all_strings = ""
+    all_strings = "DELETE from tUtlOnlineRegistrations_tbl;\n"
+    Registrant.all.each do |reg|
+      fields = []
+      fields << ["recordid", reg.bib_number]
+      fields << ["userid", reg.user_id]
+      fields << ["fname", reg.first_name]
+      fields << ["mname", reg.middle_initial]
+      fields << ["lname", reg.last_name]
+      fields << ["birthmonth", reg.birthday.month]
+      fields << ["birthday", reg.birthday.day]
+      fields << ["birthyear", reg.birthday.year]
+      fields << ["gender" , reg.gender]
+      fields << ["address1", reg.address]
+      fields << ["city", reg.city]
+      fields << ["state", reg.state]
+      fields << ["zipcode", reg.zip]
+      fields << ["country", reg.country]
+      fields << ["phone", reg.phone]
+      fields << ["mobile", reg.mobile]
+      fields << ["email", reg.email]
+      fields << ["club", reg.club]
+      fields << ["clubcontact", reg.club_contact]
+      fields << ["usamembernumber", reg.usa_member_number]
+      fields << ["emergencyname", reg.emergency_name]
+      fields << ["emergencyrelationship", reg.emergency_relationship]
+      fields << ["emergencyatconvention", reg.emergency_attending]
+      fields << ["emergencyPhone", reg.emergency_primary_phone]
+      fields << ["emergencyOtherPhone", reg.emergency_other_phone]
+      fields << ["parentname", reg.responsible_adult_name]
+      fields << ["parentphone" ,reg.responsible_adult_phone]
+
+      # Event Sign up fields
+      reg.registrant_event_sign_ups.each do |sign_up|
+        next unless sign_up.signed_up?
+        fields << [sign_up.event.description, sign_up.event_category.name]
+      end
+
+      #Event Choice fields
+      reg.registrant_choices.each do |reg_choice|
+        next unless reg_choice.has_value?
+        fields << [reg_choice.event_choice.export_name, reg_choice.value]
+      end
+
+      result_string = "INSERT into tUtlOnlineRegistrations_tbl ("
+      value_string = ") VALUES ("
+
+      fields.each do |field, value|
+        result_string += "#{field},"
+        value_string += value.inspect + "," #"\"#{value}\","
+      end
+      # last field needs to be something without a trailing ','
+      result_string += "fee"
+      value_string += reg.competitor? ? "1": "2"
+
+      final_string = result_string + value_string + ");\n"
+
+      all_strings += final_string
+    end
+    filename = "registrant_export.txt"
+    send_data(all_strings,
+              :type => 'text/csv; charset=utf-8; header=present',
+              :filename => filename)
   end
 end
