@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716023448) do
+ActiveRecord::Schema.define(:version => 20130716150620) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
+
+  add_index "additional_registrant_accesses", ["registrant_id"], :name => "index_additional_registrant_accesses_registrant_id"
+  add_index "additional_registrant_accesses", ["user_id"], :name => "index_additional_registrant_accesses_user_id"
 
   create_table "age_group_entries", :force => true do |t|
     t.integer  "age_group_type_id"
@@ -33,6 +36,9 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "updated_at",        :null => false
     t.integer  "wheel_size_id"
   end
+
+  add_index "age_group_entries", ["age_group_type_id"], :name => "index_age_group_entries_age_group_type_id"
+  add_index "age_group_entries", ["wheel_size_id"], :name => "index_age_group_entries_wheel_size_id"
 
   create_table "age_group_types", :force => true do |t|
     t.string   "name"
@@ -53,6 +59,9 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "updated_at",       :null => false
   end
 
+  add_index "boundary_scores", ["competitor_id"], :name => "index_boundary_scores_competitor_id"
+  add_index "boundary_scores", ["judge_id"], :name => "index_boundary_scores_judge_id"
+
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "position"
@@ -70,6 +79,8 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "updated_at",         :null => false
   end
 
+  add_index "competitors", ["event_category_id"], :name => "index_competitors_event_category_id"
+
   create_table "distance_attempts", :force => true do |t|
     t.integer  "competitor_id"
     t.decimal  "distance",      :precision => 4, :scale => 0
@@ -78,6 +89,9 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
   end
+
+  add_index "distance_attempts", ["competitor_id"], :name => "index_distance_attempts_competitor_id"
+  add_index "distance_attempts", ["judge_id"], :name => "index_distance_attempts_judge_id"
 
   create_table "event_categories", :force => true do |t|
     t.integer  "event_id"
@@ -89,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.boolean  "locked"
   end
 
+  add_index "event_categories", ["age_group_type_id"], :name => "index_event_categories_age_group_type_id"
   add_index "event_categories", ["event_id", "position"], :name => "index_event_categories_event_id"
 
   create_table "event_choices", :force => true do |t|
@@ -137,6 +152,8 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.string   "event_class"
   end
 
+  add_index "events", ["category_id"], :name => "index_events_category_id"
+
   create_table "expense_groups", :force => true do |t|
     t.string   "group_name"
     t.boolean  "visible"
@@ -158,6 +175,8 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.boolean  "has_details"
     t.string   "details_label"
   end
+
+  add_index "expense_items", ["expense_group_id"], :name => "index_expense_items_expense_group_id"
 
   create_table "judge_types", :force => true do |t|
     t.string   "name"
@@ -183,12 +202,19 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "updated_at",        :null => false
   end
 
+  add_index "judges", ["event_category_id"], :name => "index_judges_event_category_id"
+  add_index "judges", ["judge_type_id"], :name => "index_judges_judge_type_id"
+  add_index "judges", ["user_id"], :name => "index_judges_user_id"
+
   create_table "members", :force => true do |t|
     t.integer  "competitor_id"
     t.integer  "registrant_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  add_index "members", ["competitor_id"], :name => "index_members_competitor_id"
+  add_index "members", ["registrant_id"], :name => "index_members_registrant_id"
 
   create_table "payment_details", :force => true do |t|
     t.integer  "payment_id"
@@ -199,6 +225,10 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.integer  "expense_item_id"
     t.string   "details"
   end
+
+  add_index "payment_details", ["expense_item_id"], :name => "index_payment_details_expense_item_id"
+  add_index "payment_details", ["payment_id"], :name => "index_payment_details_payment_id"
+  add_index "payment_details", ["registrant_id"], :name => "index_payment_details_registrant_id"
 
   create_table "payments", :force => true do |t|
     t.integer  "user_id"
@@ -211,6 +241,8 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.string   "payment_date"
     t.string   "note"
   end
+
+  add_index "payments", ["user_id"], :name => "index_payments_user_id"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -233,6 +265,7 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "registrant_choices", ["event_choice_id"], :name => "index_registrant_choices_event_choice_id"
   add_index "registrant_choices", ["registrant_id"], :name => "index_registrant_choices_registrant_id"
 
   create_table "registrant_event_sign_ups", :force => true do |t|
@@ -244,6 +277,8 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.integer  "event_id"
   end
 
+  add_index "registrant_event_sign_ups", ["event_category_id"], :name => "index_registrant_event_sign_ups_event_category_id"
+  add_index "registrant_event_sign_ups", ["event_id"], :name => "index_registrant_event_sign_ups_event_id"
   add_index "registrant_event_sign_ups", ["registrant_id"], :name => "index_registrant_event_sign_ups_registrant_id"
 
   create_table "registrant_expense_items", :force => true do |t|
@@ -253,6 +288,9 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "updated_at",      :null => false
     t.string   "details"
   end
+
+  add_index "registrant_expense_items", ["expense_item_id"], :name => "index_registrant_expense_items_expense_item_id"
+  add_index "registrant_expense_items", ["registrant_id"], :name => "index_registrant_expense_items_registrant_id"
 
   create_table "registrants", :force => true do |t|
     t.string   "first_name"
@@ -324,6 +362,9 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "updated_at",                                  :null => false
   end
 
+  add_index "scores", ["competitor_id"], :name => "index_scores_competitor_id"
+  add_index "scores", ["judge_id"], :name => "index_scores_judge_id"
+
   create_table "standard_difficulty_scores", :force => true do |t|
     t.integer  "competitor_id"
     t.integer  "standard_skill_routine_entry_id"
@@ -375,6 +416,9 @@ ActiveRecord::Schema.define(:version => 20130716023448) do
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
   end
+
+  add_index "street_scores", ["competitor_id"], :name => "index_street_scores_competitor_id"
+  add_index "street_scores", ["judge_id"], :name => "index_street_scores_judge_id"
 
   create_table "time_results", :force => true do |t|
     t.integer  "event_category_id"
