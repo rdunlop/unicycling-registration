@@ -14,6 +14,8 @@ Workspace::Application.routes.draw do
     resources :registrants, :only => [:index, :show] do
       collection do
         get :bag_labels
+        get :email
+        post :send_email
       end
       member do
         post :undelete

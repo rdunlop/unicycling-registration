@@ -40,4 +40,21 @@ class Admin::RegistrantsController < Admin::BaseController
 
     send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
   end
+
+  def email
+    @email_form = Email.new
+  end
+
+  def send_email
+    @email_form = Email.new(params[:email])
+
+    if @email_form.valid?
+      Notifications.send_mass_email(@email_form).deliver
+      respond_to do |format|
+        format.html { redirect_to email_admin_registrants_path, notice: 'Email sent successfully.' }
+      end
+    else
+      render "email"
+    end
+  end
 end

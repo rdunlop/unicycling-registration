@@ -14,7 +14,7 @@ ActionMailer::Base.default_url_options[:host] = ENV['DOMAIN']
 if Rails.env.development?
   class OverrideMailRecipient
     def self.delivering_email(mail)
-      mail.body = "DEVELOPMENT-OVERRIDE. Was being sent to " + mail.to.first + "\n" + mail.body.to_s
+      mail.body = "DEVELOPMENT-OVERRIDE. Was being sent to #{mail.to} bcc: #{mail.bcc}\n" + mail.body.to_s
       mail.to = ENV['ERROR_EMAIL']
     end
   end

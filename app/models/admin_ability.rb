@@ -8,6 +8,7 @@ class AdminAbility
         can :manage, Event
         can :manage, Payment
         can :manage, Registrant
+        can :email, Registrant
       end
 
       if user.has_role? :super_admin

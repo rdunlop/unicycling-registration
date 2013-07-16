@@ -1,0 +1,18 @@
+<h1>Email multiple people</h1>
+
+<h2>Send the registrants an e-mail</h2>
+
+Note: It may take many seconds to send the e-mail to everyone (it's a large number of e-mail addresses)
+
+<h4>E-mail</h4>
+<%= render :partial => "/shared/error_messages", :object => @email_form %>
+<%= form_for @email_form, url: send_email_admin_registrants_path do |f| %>
+  <%= f.label :email_addresses %>
+  <%= f.select :email_addresses, User.all.map{|user| user.email }, {}, {:multiple => true, :size => 10} %>
+  <%= f.label :subject %>
+  <%= f.text_field :subject %><br />
+  <%= f.label :body %>
+  <%= f.text_area :body, {:cols => 100, :rows => 6 } %><br />
+  <%= f.submit "Send Email", :class => "focus_button" %>
+<% end %>
+ 
