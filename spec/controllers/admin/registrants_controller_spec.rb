@@ -44,4 +44,31 @@ describe Admin::RegistrantsController do
     end
   end
 
+  describe "POST send_email" do
+    it "can send an e-mail" do
+      ActionMailer::Base.deliveries.clear
+      post :send_email, { :email => {:subject => "Hello werld", :body => "This is the body", :email_addresses => ["robin@dunlopweb.com", "robin+1@dunlopweb.com"] }}
+      num_deliveries = ActionMailer::Base.deliveries.size
+      num_deliveries.should == 1
+      message = ActionMailer::Base.deliveries.first
+      message.bcc.count.should == 2
+    end
+
+    it "breaks apart large requests into multiple smaller requests" do
+      ActionMailer::Base.deliveries.clear
+      addresses = []
+      50.times do |n|
+        addresses << "robin+#{n}@dunlopweb.com"
+      end
+      post :send_email, { :email => {:subject => "Hello werld", :body => "This is the body", :email_addresses => addresses }}
+      num_deliveries = ActionMailer::Base.deliveries.size
+      num_deliveries.should == 2
+
+      first_message = ActionMailer::Base.deliveries.first
+      first_message.bcc.count.should == 30
+
+      second_message = ActionMailer::Base.deliveries.second
+      second_message.bcc.count.should == 20
+    end
+  end
 end

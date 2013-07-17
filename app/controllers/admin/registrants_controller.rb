@@ -49,7 +49,14 @@ class Admin::RegistrantsController < Admin::BaseController
     @email_form = Email.new(params[:email])
 
     if @email_form.valid?
-      Notifications.send_mass_email(@email_form).deliver
+      set_of_addresses = @email_form.email_addresses
+      first_index = 0
+      current_set = set_of_addresses.slice(first_index, 30)
+      until current_set == [] or current_set.nil?
+        Notifications.send_mass_email(@email_form, current_set).deliver
+        first_index += 30
+        current_set = set_of_addresses.slice(first_index, 30)
+      end
       respond_to do |format|
         format.html { redirect_to email_admin_registrants_path, notice: 'Email sent successfully.' }
       end

@@ -35,9 +35,9 @@ class Notifications < ActionMailer::Base
     mail to: requesting_user.email, subject: 'Registrantion Access Granted'
   end
 
-  def send_mass_email(email)
+  def send_mass_email(email, addresses)
     @body = email.body
 
-    mail bcc: email.email_addresses, subject: email.subject
+    mail bcc: addresses, subject: email.subject
   end
 end
