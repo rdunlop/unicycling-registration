@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :category_id, :description, :position, :event_choices_attributes, :name, :event_class
+  attr_accessible :category_id, :export_name, :position, :event_choices_attributes, :name, :event_class
 
   has_many :event_choices, :order => "event_choices.position", :dependent => :destroy
   accepts_nested_attributes_for :event_choices

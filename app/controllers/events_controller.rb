@@ -37,6 +37,7 @@ class EventsController < ApplicationController
         format.json { render json: @event, status: :created, location: category_events_path(@event.category) }
       else
         load_category
+        @events = @category.events
         format.html { render action: "index" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716150620) do
+ActiveRecord::Schema.define(:version => 20130717043434) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(:version => 20130716150620) do
 
   create_table "events", :force => true do |t|
     t.integer  "category_id"
-    t.string   "description"
+    t.string   "export_name"
     t.integer  "position"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false

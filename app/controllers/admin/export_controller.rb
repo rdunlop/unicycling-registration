@@ -342,7 +342,7 @@ class Admin::ExportController < Admin::BaseController
       # Event Sign up fields
       reg.registrant_event_sign_ups.each do |sign_up|
         next unless sign_up.signed_up?
-        fields << [sign_up.event.description, sign_up.event_category.name]
+        fields << [sign_up.event.export_name, sign_up.event_category.name]
       end
 
       #Event Choice fields
@@ -360,7 +360,7 @@ class Admin::ExportController < Admin::BaseController
       end
       # last field needs to be something without a trailing ','
       result_string += "fee"
-      value_string += reg.competitor? ? "1": "2"
+      value_string += reg.competitor? ? "2": "1"
 
       final_string = result_string + value_string + ");\n"
 

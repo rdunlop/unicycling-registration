@@ -30,7 +30,7 @@
                 <%= f.fields_for :registrant_event_sign_ups, found_resu do |resu| %>
                   <%= resu.hidden_field :event_id %>
                   <%= resu.check_box :signed_up, :class => "primary_checkbox" %>
-                  <%= resu.label :signed_up, event.to_s, :title => event.description %>
+                  <%= resu.label :signed_up, event.to_s %>
                   <% if event.event_categories.count == 1 %>
                     <%= resu.hidden_field :event_category_id, :value => event.event_categories.first.id %>
                   <% else %>

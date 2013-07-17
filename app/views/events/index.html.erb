@@ -6,7 +6,7 @@
   <table class="event_listing">
     <tr>
       <th>Name</th>
-      <th>Description</th>
+      <th>Export Name</th>
       <th>Type</th>
       <th>Position</th>
       <th></th>
@@ -18,7 +18,7 @@
     <% @events.each do |event| %>
       <tr>
         <th><%= event.name %></th>
-        <td colspan="2"><%= event.description %></td>
+        <td colspan="2"><%= event.export_name %></td>
         <td><%= event.position %></td>
         <td><%= link_to 'Event Categories', event_event_categories_path(event) %></td>
         <td><%= link_to 'Event Choices', event_event_choices_path(event) %></td>
