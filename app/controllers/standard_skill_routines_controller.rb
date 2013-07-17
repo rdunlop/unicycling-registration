@@ -29,4 +29,9 @@ class StandardSkillRoutinesController < ApplicationController
       format.json { render json: @entries }
     end
   end
+
+  # GET /standard_skill_routines
+  def index
+    @registrants = current_user.registrants
+  end
 end

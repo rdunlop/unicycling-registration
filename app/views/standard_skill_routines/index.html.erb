@@ -1,0 +1,27 @@
+<h1>My Standard Skill Routines</h1>
+
+<table>
+  <caption>My Registrations</caption>
+  <thead>
+    <tr>
+      <th>Registant</th>
+      <th>Signed-up for Standard skill?</th>
+      <th>Standard Skill Routine created?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registrants.each do |reg| %>
+      <tr>
+        <td><%= reg %></td>
+        <td><%= reg.has_standard_skill? %></td>
+        <td>
+          <% if reg.standard_skill_routine.nil? %>
+            No
+          <% else %>
+            <%= link_to "Yes", standard_skill_routine_path(reg.standard_skill_routine) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
