@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :event do
     category # FactoryGirl
     sequence(:name) {|n| "Teh event number #{n}" }
-    description "Some Description"
+    export_name "SomeName"
     position 1
     event_class "Freestyle"
 
