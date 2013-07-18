@@ -1,0 +1,21 @@
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @registrants.each do |reg| %>
+          <% next if reg.nil? %>
+            <tr>
+                <td><%= reg.id %></td>
+                <td><%= reg %></td>
+                <td><%= reg.age %></td>
+                <td><%= reg.gender %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

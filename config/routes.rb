@@ -178,6 +178,7 @@ Workspace::Application.routes.draw do
         post :upload
         post :add_all
         delete :destroy_all
+        post :create_from_sign_ups
       end
     end
 

@@ -262,4 +262,17 @@ describe CompetitorsController do
         c1.name.should == "CIRK-oN-CyCle"
     end
   end
+
+  describe "creates competitors from sign_ups" do
+    before(:each) do
+      @reg = FactoryGirl.create(:registrant)
+      FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec, :signed_up => true, :registrant => @reg)
+    end
+    it "creates a competitor for the given registrant" do
+      post :create_from_sign_ups, {:event_category_id => @ec.id}
+      @ec.reload
+      @ec.competitors.count.should == 1
+      @ec.competitors.first.members.first.registrant.should == @reg
+    end
+  end
 end

@@ -3,7 +3,7 @@ class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_event_category, :only => [:index, :new, :create, :upload, :add_all, :destroy_all]
+  before_filter :load_event_category, :only => [:index, :new, :create, :upload, :add_all, :destroy_all, :create_from_sign_ups]
 
   def load_event_category
     @event_category = EventCategory.find(params[:event_category_id])
@@ -11,11 +11,28 @@ class CompetitorsController < ApplicationController
 
   # GET /event_categories/:event_category_id/1/new
   def new
+    @registrants = @event_category.signed_up_registrants
     @competitor = @event_category.competitors.new
+  end
+
+  def create_from_sign_ups
+    @registrants = @event_category.signed_up_registrants
+
+    new_competitors = @registrants.shuffle
+    n = add_registrants(new_competitors)
+
+    respond_to do |format|
+      if n > 0
+        format.html { redirect_to new_event_category_competitor_path(@event_category), notice: "#{n} Competition registrants successfully created." }
+      else
+        format.html { render "new", alert: 'Error adding Registrants (0 added)' }
+      end
+    end
   end
 
   # GET /judges/1/competitors
   def index
+    @competitors = @event_category.competitors
   end
 
   # GET /competitors/1/edit
@@ -24,9 +41,22 @@ class CompetitorsController < ApplicationController
 
   def add_all
     @competitor = @event_category.competitors.new # so that the form renders ok
+
+    n = add_registrants(Registrant.all)
+
+    respond_to do |format|
+      if n > 0
+        format.html { redirect_to new_event_category_competitor_path(@event_category), notice: "#{n} Competition registrants successfully created." }
+      else
+        format.html { render "new", alert: 'Error adding Registrants (0 added)' }
+      end
+    end
+  end
+
+  def add_registrants(registrants = [])
     n = 0
     current_registrant_external_ids = @event_category.registrants.map {|r| r.external_id}
-    Registrant.all.each do |reg|
+    registrants.each do |reg|
         if !reg.competitor
             next
         end
@@ -54,14 +84,7 @@ class CompetitorsController < ApplicationController
             end
         end
     end
-
-    respond_to do |format|
-      if n > 0
-        format.html { redirect_to new_event_category_competitor_path(@event_category), notice: "#{n} Competition registrants successfully created." }
-      else
-        format.html { render "new", alert: 'Error adding Registrants (0 added)' }
-      end
-    end
+    n
   end
 
   # POST /competitors

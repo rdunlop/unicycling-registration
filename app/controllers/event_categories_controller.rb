@@ -93,7 +93,7 @@ class EventCategoriesController < ApplicationController
   end
 
   def sign_ups
-    @registrants = @event_category.registrant_event_sign_ups.map{|resu| resu.registrant }.keep_if {|reg| !reg.nil?}
+    @registrants = @event_category.signed_up_registrants
   end
 
   def freestyle_scores
