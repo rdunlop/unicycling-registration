@@ -100,16 +100,18 @@ class EventCategoriesController < ApplicationController
   end
 
   def lock
-    if @event_category.locked?
-      @event_category.locked = false
-    else
+    if request.post?
       @event_category.locked = true
+    elsif request.delete?
+      @event_category.locked = false
     end
 
-    if @event_category.save
-      format.html { redirect_to @event_category, notice: 'Updated lock status' }
-    else
-      format.html { redirect_to @event_category, notice: 'Unable to update lock status' }
+    respond_to do |format|
+      if @event_category.save
+        format.html { redirect_to @event_category, notice: 'Updated lock status' }
+      else
+        format.html { redirect_to @event_category, notice: 'Unable to update lock status' }
+      end
     end
   end
 end

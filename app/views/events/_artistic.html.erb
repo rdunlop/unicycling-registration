@@ -34,7 +34,7 @@
           <td><%= ec.locked? %>
           <% if can? :lock, event %>
             <% if ec.locked? %>
-                <%= link_to 'Unock', lock_event_category_path(ec), :method => :delete %>
+                <%= link_to 'Unlock', lock_event_category_path(ec), :method => :delete %>
             <% else %>
                 <%= link_to 'Lock', lock_event_category_path(ec), :method => :post %>
             <% end %>
