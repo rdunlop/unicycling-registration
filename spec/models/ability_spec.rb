@@ -41,6 +41,7 @@ describe "Ability" do
       it { should be_able_to(:read_contact_info, registration) }
       it { should be_able_to(:all, registration) }
       it { should be_able_to(:waiver, registration) }
+      it { should be_able_to(:empty_waiver, Registrant) }
       describe "with a StandardSkillRoutine" do
         before(:each) do
           @routine = FactoryGirl.create(:standard_skill_routine, :registrant => registration)

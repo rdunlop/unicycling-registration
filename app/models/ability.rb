@@ -63,6 +63,7 @@ class Ability
       end
 
       # Registrant
+      can :empty_waiver, Registrant
       can :manage, Registrant if user.has_role? :admin or user.has_role? :super_admin
       can [:all, :waiver], Registrant, :user_id => user.id
 

@@ -53,6 +53,9 @@
   </div>
 <% end %>
 <%= render :partial => "registrants_list", :locals => {:shared_list => @shared_registrants, :my_registrants_list => @my_registrants} %>
+Everyone must have a signed <%= link_to 'Legal Waiver', empty_waiver_registrants_path(:format => 'pdf'), {:class => "waiver_link", :target => "_blank" } %>
+
+
 
 <hr />
 

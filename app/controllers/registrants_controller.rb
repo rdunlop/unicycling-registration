@@ -38,6 +38,19 @@ class RegistrantsController < ApplicationController
     @registrants = Registrant.all
   end
 
+  # GET /registrants/empty_waiver
+  def empty_waiver
+    config = EventConfiguration.first
+    unless config.nil?
+      @event_name = config.long_name
+      @event_start_date = config.start_date.strftime("%b %-d, %Y")
+    end
+
+    respond_to do |format|
+      format.html { render action: "waiver", :layout => nil }
+      format.pdf { render :pdf => "waiver", :formats => [:html] }
+    end
+  end
   # GET /registrants/1/waiver
   def waiver
     @registrant = Registrant.find(params[:id])

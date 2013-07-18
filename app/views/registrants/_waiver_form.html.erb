@@ -1,0 +1,186 @@
+<div class="container" style="font-size:11px; font-family: 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif;">
+  <div style="text-align:center;"><strong style="font-size:18px;"><%= @event_name %>
+      <br /> Competitive and Non-Competitive Event Release Form</strong>
+  </div>
+  <br />
+
+  <div style="width:48%; float:left;">
+    <div class="fields" style="font-size:13px;">
+      <p><span style="font-weight:bold;">Complete the following:</span>
+      <br />
+      <br />
+      Today's date: &nbsp; 
+      <span style="text-decoration:underline;"><%= @today_date %></span>
+      <br />
+      Club/team name: &nbsp; 
+      <span style="text-decoration:underline;"><%= @club %></span>
+      <br />
+      Racing age, as of July 21, 2013: &nbsp; 
+      <span style="text-decoration:underline;"><%= @age %></span>
+      <% if @age.nil? or @age < 18 %>
+        <br />
+        (If under 18, parent/guardian must sign Release as indicated below.)
+      <% end %>
+      </p>
+
+      <p>
+      Name: &nbsp; 
+      <span style="text-decoration:underline;"><%= @name %></span>
+      <br />
+      Address: &nbsp; 
+      <span style="text-decoration:underline;"><%= @address %></span>
+      <br />
+      City: &nbsp;
+      <span style="text-decoration:underline;"><%= @city %></span>
+      <br />
+      State, Zip and Country: &nbsp; 
+      <span style="text-decoration:underline;"><%= @state %> <%= @zip %>, 
+        <%= @country %></span>
+      <br />
+      Phone: &nbsp; 
+      <span style="text-decoration:underline;">
+        <% unless @phone.blank? %> 
+          <%= @phone %>
+        <% end %>
+        <% unless @mobile.blank? %>
+          , <%= @mobile %> 
+        <% end %>
+      </span>
+      <br />
+      Email: &nbsp;
+      <span style="text-decoration:underline;">
+        <% unless @email.blank? %>
+          <%= @email %> 
+        <% else %> <%= @user_email %> 
+        <% end %>
+      </span>
+      <br />
+      Emergency contact: &nbsp;
+      <span style="text-decoration:underline;"><%= @emergency_name %></span>
+      <br />
+      Emergency contact phone: &nbsp;
+      <span style="text-decoration:underline;"><%= @emergency_primary_phone %>
+        <% unless @emergency_other_phone.blank? %>
+          , <%= @emergency_other_phone %>
+        <% end %>
+      </span>
+      </p>
+
+
+    </div>
+    <p style="text-indent: 1.5em; margin: 0">
+    I acknowledge that by signing this document, I am assuming risks, and agreeing to 
+    indemnify, not to sue, and release from liability the organizer of this event and 
+    their respective agents, employees, volunteers, members, clubs, sponsors, promoters, 
+    and affiliates (collectively "Releasees"), and that I am giving up substantial legal 
+    rights.  This release is a contract with legal and binding consequences and it 
+    applies to all races and activities entered at the event, regardless whether or not 
+    listed above.  I have read it carefully before signing, and I understand what it 
+    means and what I am agreeing to by signing.
+    </p>
+    <p style="text-indent: 1.5em; margin: 0">
+    In consideration of the issuance of a license to me by one or more Releasees or the 
+    acceptance of my application for entry in the above event, I hereby freely agree to 
+    and make the following contractual representations and agreements.  I ACKNOWLEDGE 
+    THAT CYCLING IS AN INHERENTLY DANGEROUS SPORT AND FULLY REALIZE THE DANGERS OF 
+    PARTICIPATING IN THIS EVENT, whether as a rider, official, coach, mechanic, 
+    volunteer, or otherwise, and FULLY ASSUME THE RISKS ASSOCIATED WITH SUCH 
+    PARTICIPATION  INCLUDING, by way of example, and not limitation: dangers associated 
+    with manmade and natural jumps; the dangers of collision with pedestrians, vehicles, 
+    other riders, and fixed or moving objects; the dangers arising from surface hazards, 
+    including pot holes, equipment failure, inadequate safety equipment, use of equipment 
+    or materials provided by the event organizer and others, THE RELEASEES' OWN 
+    NEGLIGENCE, the negligence of others and weather conditions; and the possibility of 
+    serious physical and/or mental trauma or injury, or death associated with the event.  
+    For myself, my heirs, executors, administrators, legal representatives, assignees, 
+    and successors in interest (collectively "Successors") I HEREBY WAIVE, RELEASE, 
+    DISCHARGE, HOLD HARMLESS, AND PROMISE TO INDEMNIFY AND NOT TO SUE the Releasees and 
+    all sponsors, organizers and promoting organizations, property owners, law 
+    enforcement agencies, public entities, special districts and properties that are in 
+    any manner connected with this event, and their respective agents, officials, and 
+    employees through or by which the event will be held, (the foregoing are also 
+    collectively deemed to be Releasees), FROM ANY AND ALL RIGHTS AND CLAIMS INCLUDING 
+    CLAIMS ARISING FROM THE RELEASEES' OWN NEGLIGENCE TO THE MAXIMUM EXTENT PERMITTED BY 
+    LAW, which I have or which may hereafter accrue to me and from any and all damages 
+    which may be sustained by me directly or indirectly in connection with, or arising 
+    out of, my participation in or association with the event, or travel to or return 
+    from the event.
+    </p>
+
+  </div>
+  <div style="width:48%; float:right;">
+  	<br />
+    <p style="text-indent: 1.5em; margin: 0">
+    I agree it is my sole responsibility to be familiar with the event course and agenda, 
+    the Releasees' rules, and any special regulation for the event and agree to comply 
+    with all such rules and regulations.  I understand and agree that situations may 
+    arise during the event which may be beyond the control of the Releasees, and I must 
+    continually ride and otherwise participate so as to neither endanger myself nor 
+    others.  I accept responsibility for the condition and adequacy of my equipment and 
+    any equipment provide for my use, and my conduct in connection with this event.  I 
+    will wear a helmet and protective gear which satisfies the requirements of the 
+    Releasees' Racing Rules and Regulations and that can protect against serious head 
+    injury, and assume all responsibility and liability for the selection of such a 
+    helmet.  
+    </p>
+    <p style="text-indent: 1.5em; margin: 0">
+    I have no physical or medical condition which would endanger myself or others if I 
+    participate in this event, or would interfere with my ability to safely participate 
+    in this event. 
+    </p>
+    <p style="text-indent: 1.5em; margin: 0">
+    I agree, for myself and my Successors, that the above representations are 
+    contractually binding, and are not mere recitals, and that should I or my Successors 
+    assert a claim contrary to what I have agreed to in this contract, the claiming party 
+    shall be liable for the expenses (including legal fees) incurred by the Releasees in 
+    defending the claims.  This contract may not be modified orally, and a waiver or 
+    modification of any provision shall not be construed as a waiver or modification of 
+    any other provision heron or as consent to any subsequent waiver or modification.  
+    </p>
+    <p style="text-indent: 1.5em; margin-top: 0">
+    I consent to release by any third party to Releasees and their insurance carriers of 
+    my name and medical information that may relate solely to any injury or death I may 
+    suffer arising from the event.  Every term and provision of this contract is intended 
+    to be severable.  If any one or more of them is found to be unenforceable or invalid, 
+    that shall not affect the other terms and provisions, which shall remain binding and 
+    enforceable.
+    </p>
+    <br />
+	<hr style="height:1px;color:#444;background-color:#444;border:none;" />
+    <div class="signature" style="font-size:14px;">
+    	<span style="float:left">Signature</span>
+    	<span style="float:right;">Date</span>
+    </div>
+
+    <br />
+    <br />
+    <% if @age.nil? or @age < 18 %>
+		<p style="font-weight:bold;">
+		Consent and release of parent or guardian, if above entrant is under 18 years of age 
+		on <%= @event_start_date %>.
+		</p>
+		<p style="text-indent: 1.5em; margin-top: 0">
+		I am the parent or guardian of 
+		<span style="text-decoration:underline;"><%= @name %></span> 
+		(child).  My Child is fit 
+		for the event, and I consent to my Child's participation.  I HAVE READ AND I 
+		UNDERSTAND THE ABOVE CONTRACT.  In consideration of allowing my Child to participate, 
+		I consent to the contract and agree that ITS TERMS SHALL LIKEWISE BIND ME, MY CHILD, 
+		and our heirs, legal representatives, and assignees.  I HEREBY RELEASE AND SHALL 
+		DEFEND, INDEMNIFY AND HOLD HARMLESS THE RELEASEES FROM EVERY CLAIM AND LIABILITY that 
+		I or my Child may allege against the Releasees (including reasonable legal fees and 
+		costs) as a direct or indirect result of injury or death to me or my Child because of 
+		my Child's participation in the event, WHETHER CAUSE BY THE NEGLIGENCE OF THE 
+		RELEASEES OR OTHERS TO THE MAXIMUM EXTENT PERMITED BY LAW.  I PROMISE NOT TOE SUE 
+		RELEASEES on my behalf or on behalf of my Child regarding any claim arising 
+		from my Child's participation in the event.
+		</p>
+		 <br />
+		 <hr style="height:1px;color:#444;background-color:#444;border:none;" />
+		<div class="signature" style="font-size:14px;">
+		  <span style="float:left">Parent/Guardian Signature</span>
+		  <span style="float:right;">Date</span>
+		</div>
+    <% end %>
+  </div>
+</div>
