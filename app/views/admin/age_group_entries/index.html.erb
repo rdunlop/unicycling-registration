@@ -14,6 +14,7 @@
   </tr>
 
 <% @age_group_entries.each do |age_group_entry| %>
+  <% next if age_group_entry.new_record? %>
   <tr>
     <td><%= age_group_entry.short_description %></td>
     <td><%= age_group_entry.long_description %></td>
