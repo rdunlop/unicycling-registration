@@ -2,7 +2,10 @@
 <html>
 <head>
   <title>Unicycling Registration</title>
-  <%= wicked_pdf_stylesheet_link_tag    "pdf", :media => "all" %>
+  <!-- include all of the normal Style -->
+  <%= wicked_pdf_stylesheet_link_tag    "application", :media => "print" %>
+  <!-- Include the pdf style, to override some of the existing style -->
+  <%= wicked_pdf_stylesheet_link_tag    "pdf", :media => "print" %>
 </head>
 <body onload='number_pages'>
   <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
