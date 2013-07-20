@@ -110,7 +110,6 @@ class Admin::ExportController < Admin::BaseController
   def upload_time_results
     json = JSON.parse(params[:convert][:data])
     competition = Competition.find(params[:convert][:competition_id])
-    judge = competition.judges.first
 
     created_records = 0
     json["time_results"].each do |tr|
@@ -123,15 +122,15 @@ class Admin::ExportController < Admin::BaseController
         end
       end
       if competitor.nil?
-          competitor = competition.competitor.build
+          competitor = competition.competitors.build
+          competitor.position = competition.competitors.count + 1
           competitor.save!
           mem = competitor.members.build
           mem.registrant = reg
           mem.save!
       end
         
-      new_tr = TimeResult.new({:judge_id => judge.id,
-                              :minutes => tr["minutes"],
+      new_tr = TimeResult.new({:minutes => tr["minutes"],
                               :seconds => tr["seconds"],
                               :thousands => tr["thousands"],
                               :competitor_id => competitor.id,

@@ -10,6 +10,7 @@ class Competitor < ActiveRecord::Base
     has_many :standard_execution_scores, :dependent => :destroy
     has_many :standard_difficulty_scores, :dependent => :destroy
     has_many :distance_attempts, :dependent => :destroy, :order => "distance DESC, id DESC"
+    has_many :time_results, :dependent => :destroy
 
     attr_accessible :competition_id, :position, :registrant_ids, :custom_external_id, :custom_name
     accepts_nested_attributes_for :registrants

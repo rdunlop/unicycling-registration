@@ -41,6 +41,7 @@ describe "registrants/show" do
     end
 
     it "displays the Events" do
+      FactoryGirl.create(:registrant_event_sign_up, :registrant => @registrant)
       render
       rendered.should match(/Events/)
     end

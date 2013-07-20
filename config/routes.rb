@@ -169,6 +169,13 @@ Workspace::Application.routes.draw do
 
   resources :events, :only => [] do
     resources :competitions, :only => [:index, :create, :new]
+    resources :time_results, :only => [:index, :create] do
+      collection do
+        put :set_places
+        get :results
+        get :final_candidates
+      end
+    end
   end
   resources :competitors, :only => [:edit, :update, :destroy]
   resources :competitions, :except => [:index, :create, :new] do
@@ -221,13 +228,6 @@ Workspace::Application.routes.draw do
       end
     end
     resources :street_scores, :only => [:index, :create, :destroy]
-    resources :time_results, :only => [:index, :create] do
-      collection do
-        put :set_places
-        get :results
-        get :final_candidates
-      end
-    end
   end
   resources :distance_attempts, :only => [:update, :destroy]
 

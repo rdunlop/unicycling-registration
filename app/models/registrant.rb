@@ -347,10 +347,9 @@ class Registrant < ActiveRecord::Base
 
     resu = signed_up_events.where({:event_id => event.id}).first
     # only add the Category if there are more than 1
+    results[:category] = nil
     if event.event_categories.count > 1
       results[:category] = resu.event_category.name.to_s unless resu.nil?
-    else
-      results[:category] = nil
     end
 
     results[:additional] = nil
@@ -364,8 +363,10 @@ class Registrant < ActiveRecord::Base
     end
 
     results[:age_group] = nil
-    agt = resu.event_category.age_group_type
-    results[:age_group] = agt.age_group_entry_description(age, gender, default_wheel_size.id) unless agt.nil?
+    unless resu.nil?
+      agt = resu.event_category.age_group_type
+      results[:age_group] = agt.age_group_entry_description(age, gender, default_wheel_size.id) unless agt.nil?
+    end
 
     results
   end

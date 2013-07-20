@@ -1,14 +1,14 @@
 class TimeResultsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :judge, :except => [:edit, :destroy, :update]
-  load_and_authorize_resource :time_result, :through => :judge, :except => [:edit, :destroy, :update]
+  load_and_authorize_resource :event, :except => [:edit, :destroy, :update]
+  load_and_authorize_resource :time_result, :except => [:edit, :destroy, :update]
   load_and_authorize_resource :time_result, :only => [:edit, :destroy, :update]
 
-  # GET event_categories/1/time_results
-  # GET event_categories/1/time_results.json
+  # GET event/1/time_results
+  # GET event/1/time_results.json
   def index
-    @time_results = @judge.time_results
-    @time_result = @judge.time_results.build
+    @time_results = @event.time_results # XXX
+    @time_result = TimeResult.new # @event.time_results.build
 
     respond_to do |format|
       format.html # index.html.erb
@@ -39,9 +39,11 @@ class TimeResultsController < ApplicationController
   end
 
   def set_places
-    @calc = RaceCalculator.new(@judge.competition)
-    @calc.update_all_places
-    redirect_to judge_time_results_path(@judge), :notice => "All Places updated"
+    @event.competitions.each do |competition|
+      @calc = RaceCalculator.new(competition)
+      @calc.update_all_places
+    end
+    redirect_to event_time_results_path(@event), :notice => "All Places updated"
   end
 
   # GET /time_results/1/edit
@@ -49,16 +51,16 @@ class TimeResultsController < ApplicationController
     @time_result = TimeResult.find(params[:id])
   end
 
-  # POST judges/1/time_results
-  # POST judges/1/time_results.json
+  # POST event/1/time_results
+  # POST event/1/time_results.json
   def create
 
     respond_to do |format|
       if @time_result.save
-        format.html { redirect_to(judge_time_results_path(@time_result.judge), :notice => 'Time result was successfully created.') }
-        format.json { render :json => @time_result, :status => :created, :location => @time_result.judge }
+        format.html { redirect_to(event_time_results_path(@time_result.event), :notice => 'Time result was successfully created.') }
+        format.json { render :json => @time_result, :status => :created, :location => @time_result.event }
       else
-        @time_results = @judge.time_results
+        @time_results = @event.time_results
         format.html { render :action => "index" }
         format.json { render :json => @time_result.errors, :status => :unprocessable_entity }
       end
@@ -70,7 +72,7 @@ class TimeResultsController < ApplicationController
   def update
     respond_to do |format|
       if @time_result.update_attributes(params[:time_result])
-        format.html { redirect_to(judge_time_results_path(@time_result.judge), :notice => 'Time result was successfully updated.') }
+        format.html { redirect_to(event_time_results_path(@time_result.event), :notice => 'Time result was successfully updated.') }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -82,11 +84,11 @@ class TimeResultsController < ApplicationController
   # DELETE time_results/1
   # DELETE time_results/1.json
   def destroy
-    judge = @time_result.judge
+    event = @time_result.event
     @time_result.destroy
 
     respond_to do |format|
-      format.html { redirect_to judeg_time_results_path(judge) }
+      format.html { redirect_to event_time_results_path(event) }
       format.json { head :ok }
     end
   end

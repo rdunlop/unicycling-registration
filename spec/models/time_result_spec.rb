@@ -3,8 +3,7 @@ require 'spec_helper'
 describe TimeResult do
   before(:each) do
     @competitor = FactoryGirl.create(:event_competitor)
-    @judge = FactoryGirl.create(:judge)
-    @tr = FactoryGirl.create(:time_result, :competitor => @competitor, :judge => @judge)
+    @tr = FactoryGirl.create(:time_result, :competitor => @competitor)
   end
   it "is valid from FactoryGirl" do
     @tr.valid?.should == true
@@ -12,11 +11,6 @@ describe TimeResult do
 
   it "requires a competitor" do
     @tr.competitor = nil
-    @tr.valid?.should == false
-  end
-
-  it "requires a judge" do
-    @tr.judeg = nil
     @tr.valid?.should == false
   end
 
@@ -57,16 +51,12 @@ describe TimeResult do
     end
   end
 
-  it "refers to a judge" do
-    @tr.judge.should == @judge
-  end
-
   it "refers to a competitor" do
     @tr.competitor.should == @competitor
   end
 
-  it "Cannot have the same registrant have 2 results for the same judge (ie: same competitior)" do
-    @tr = FactoryGirl.build(:time_result, :competitor => @competitor, :judge => @judge)
+  it "Cannot have the same registrant have 2 results for the same competitor" do
+    @tr = FactoryGirl.build(:time_result, :competitor => @competitor)
     @tr.valid?.should == false
   end
 

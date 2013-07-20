@@ -1,11 +1,9 @@
 class TimeResult < ActiveRecord::Base
   belongs_to :competitor, :touch => true
-  belongs_to :judge
-  attr_accessible :disqualified, :minutes, :judge_id, :seconds, :thousands, :competitor_id
+  attr_accessible :disqualified, :minutes, :seconds, :thousands, :competitor_id
 
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
-  validates :judge_id, :presence => true, :uniqueness => {:scope => [:competitor_id]}
-  validates :competitor, :presence => true
+  validates :competitor_id, {:presence => true, :uniqueness => false }
   validates :disqualified, :inclusion => { :in => [true, false] } # because it's a boolean
 
   scope :fastest_first, order("disqualified, minutes, seconds, thousands")
@@ -21,10 +19,14 @@ class TimeResult < ActiveRecord::Base
 
   def as_json(options={})
     options = {
-      :except => [:id, :created_at, :updated_at, :judge_id, :competitor_id],
+      :except => [:id, :created_at, :updated_at, :competitor_id],
       :methods => [:bib_number]
     }
     super(options)
+  end
+
+  def event
+    competitor.event
   end
 
   def competition
@@ -69,6 +71,6 @@ class TimeResult < ActiveRecord::Base
 
   private
   def place_key
-    "/age_group_entry/#{age_group_entry_description}/event_category/#{event_category.id}-#{event_category.updated_at}/time_results/#{id}-#{updated_at}/place"
+    "/competition/#{competition.id}/time_results/#{id}-#{updated_at}/place"
   end
 end

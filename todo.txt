@@ -1,3 +1,4 @@
+- Get rid of XXX
 - Prevent multiple judges from entering results for the same registrant in TimeResults
 
 - Synchronize data between UCP and UDA.

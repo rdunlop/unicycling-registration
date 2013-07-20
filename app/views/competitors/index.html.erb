@@ -18,12 +18,12 @@
         <% event_category = nil
            competition = nil
         %>
-        <% if @registrants.contains(registrant)
-            event_category = registrant.registrant_event_sign_ups.where({:event_id => @event.id})
+        <% if @registrants.include?(registrant)
+            event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category)
            end
         %>
-        <% if @competitors.contains(registrant.competitors.where({:event_id => @event.id}))
-                competition = registrant.competitors.where({:event_id => @event.id})
+        <% if @competitors.include?(registrant.competitors.where({:competition_id => @competition.id}).try(:first))
+                competition = registrant.competitors.where({:competition_id => @competition.id}).try(:first).try(:competition)
            end
         %>
       <tr>
@@ -32,7 +32,8 @@
         <td><%= registrant.name %></td>
         <td><%= registrant.age %></td>
         <td><%= registrant.gender %></td>
-        <td><%= competiton %></td>
+        <td><%= nil %></td>
+        <td><%= competition %></td>
       </tr>
     <% end %>
   </tbody>

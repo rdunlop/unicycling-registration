@@ -11,6 +11,8 @@ class Event < ActiveRecord::Base
   has_many :registrant_event_sign_ups, :dependent => :destroy, :inverse_of => :event
 
   has_many :competitions, :dependent => :destroy, :inverse_of => :event
+  has_many :competitors, :through => :competitions
+  has_many :time_results, :through => :competitors
 
   belongs_to :category, :inverse_of => :events
 
