@@ -328,20 +328,45 @@ class Registrant < ActiveRecord::Base
   end
 
   def describe_event(event)
-    description = event.name
+    details = describe_event_hash(event)
+    description = details[:description]
+
+    unless details[:category].nil?
+      description += " - Category: " + details[:category]
+    end
+
+    unless details[:additional].nil?
+      description += " - " + details[:additional]
+    end
+    description
+  end
+
+  def describe_event_hash(event)
+    results = {}
+    results[:description] = event.name
 
     resu = signed_up_events.where({:event_id => event.id}).first
     # only add the Category if there are more than 1
     if event.event_categories.count > 1
-      description += " - Category: " + resu.event_category.to_s unless resu.nil?
+      results[:category] = resu.event_category.name.to_s unless resu.nil?
+    else
+      results[:category] = nil
     end
 
+    results[:additional] = nil
     event.event_choices.each do |ec|
       my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
       unless my_val.nil?
-        description += " - " + ec.label + ": " + my_val.describe_value
+        results[:additional] += " - " unless results[:additional].nil?
+        results[:additional] = "" if results[:additional].nil?
+        results[:additional] += ec.label + ": " + my_val.describe_value
       end
     end
-    description
+
+    results[:age_group] = nil
+    agt = resu.event_category.age_group_type
+    results[:age_group] = agt.age_group_entry_description(age, gender, default_wheel_size.id) unless agt.nil?
+
+    results
   end
 end

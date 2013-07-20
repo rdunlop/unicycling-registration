@@ -213,7 +213,16 @@ div.required {
 }
 
 .event_summary fieldset.data_block {
-  width: 400px;
+  .event_heading {
+    background: lightgray;
+    text-align: center;
+    font-weight: bold;
+  }
+  table {
+    td {
+      padding: 1px;
+    }
+  }
 }
 .data_block {
   h2 {

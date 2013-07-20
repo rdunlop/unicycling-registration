@@ -1,19 +1,44 @@
 <div class="event_summary">
-  <h3>Events</h3>
   <div class="data_block">
+    <% printed_events_header = false %>
     <% Category.includes(:events).all.each do |cat| %>
       <% if @registrant.has_event_in_category?(cat) %>
-        <fieldset class="data_block">
-          <legend><%= cat %></legend>
-          <ul>
-            <% cat.events.each do |event| %>
-              <% if @registrant.has_event?(event) %>
-                <li><%= @registrant.describe_event(event) %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        </fieldset>
+
+        <% unless printed_events_header %>
+          <fieldset class="data_block">
+            <legend>Events</legend>
+            <% printed_events_header = true %>
+            <table>
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Category</th>
+                  <th></th>
+                  <th>Age Group</th>
+                </tr>
+              </thead>
+              <tbody>
+        <% end %>
+        <tr>
+          <td class="event_heading" colspan="5"><%= cat %></td>
+        </tr>
+        <% cat.events.each do |event| %>
+          <% if @registrant.has_event?(event) %>
+            <% details = @registrant.describe_event_hash(event) %>
+            <tr>
+              <td><%= details[:description] %></td>
+              <td><%= details[:category] %></td>
+              <td><%= details[:additional] %></td>
+              <td><%= details[:age_group] %></td>
+            </tr>
+          <% end %>
+        <% end %>
       <% end %>
+    <% end %>
+    <% if printed_events_header %>
+        </tbody>
+      </table>
+      </fieldset>
     <% end %>
   </div>
 </div>

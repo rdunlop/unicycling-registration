@@ -10,9 +10,11 @@
  *
  *= require_self
  */
-
 @media print
 {
+  .edit_link_block {
+    display: none;
+  }
   .non_printable {
     display: none;
   }

@@ -16,7 +16,9 @@
   <% @registrants.each do |registrant| %>
     <tr>
       <td><%= registrant %></td>
-      <td><%= link_to "Summary", registrant_path(registrant) %></td>
+      <td><%= link_to "Summary", registrant_path(registrant) %>
+          <%= link_to "(pdf)", registrant_path(registrant, :format => :pdf) %>
+      </td>
       <td><%= link_to "Edit", edit_registrant_path(registrant) %></td>
       <td>
         <% if registrant.deleted %>
