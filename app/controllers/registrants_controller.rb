@@ -97,7 +97,7 @@ class RegistrantsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @registrant }
-      format.pdf { render :pdf => "show", :formats => [:html], :layout => "pdf.html" }
+      format.pdf { render :pdf => "show", :formats => [:html], :orientation => 'Landscape', :layout => "pdf.html" }
     end
   end
 
