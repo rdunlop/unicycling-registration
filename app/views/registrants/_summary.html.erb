@@ -11,11 +11,13 @@
     <%= @registrant.gender %>
     <b>Birthday:</b>
     <%= @registrant.birthday.strftime("%d-%b-%Y") %>
+    <b>Age:</b>
+    <%= @registrant.age %>
   </div>
   <% if can? :read_contact_info, @registrant  %>
     <div>
       <b>Address:</b>
-      <%= @registrant.address %>
+      <%= @registrant.address %> <br />
       <%= @registrant.city %>
       <%= @registrant.state %>
       <%= @registrant.country %>

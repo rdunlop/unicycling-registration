@@ -12,6 +12,10 @@
  */
 @media print
 {
+  .dev_banner {
+    display: none;
+  }
+
   .edit_link_block {
     display: none;
   }
