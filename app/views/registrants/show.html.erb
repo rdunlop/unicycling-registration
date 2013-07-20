@@ -3,42 +3,12 @@
 <div>
   <div class="data_block">
     <%= render :partial => "summary" %>
-    <% if can? :update, @registrant %>
-      <div class="edit_link_block">
-        <%= link_to 'Edit Registration', edit_registrant_path(@registrant) %>
-      </div>
-    <% end %>
-  </div>
-  <div class="data_block">
+  </div><div class="data_block">
     <%= render :partial => "registrant_expenses" %>
-    <% if can? :update_items, @registrant %>
-      <div class="edit_link_block">
-        <%= link_to 'Edit Items', items_registrant_path(@registrant) %>
-      </div>
-    <% end %>
   </div>
 </div>
-<%= render :partial => "/registrants/waiver" %>
-<%= link_to 'Print Legal Waiver', waiver_registrant_path(@registrant, :format => 'pdf'), {:class => "waiver_link", :target => "_blank" } %>
 <div>
   <% if @registrant.competitor %>
     <%= render :partial => "registrant_events" %>
-
-    <% if can? :update, @registrant %>
-      <%= link_to 'Edit Events', edit_registrant_path(@registrant) %>
-    <% end %>
-  <% end %>
-</div>
-<% if @registrant.has_standard_skill? %>
-  <hr />
-  <%= render :partial => "/standard_skill_routines/routine_links", :locals => {:registrant => @registrant} %>
-<% end %>
-<hr />
-
-<div>
-  <% if @registrant.competitor %>
-    <%= link_to 'Done', registrants_path, {:class => "competitor registration_button"} %>
-  <% else %>
-    <%= link_to 'Done', registrants_path, {:class => "noncompetitor registration_button"} %>
   <% end %>
 </div>
