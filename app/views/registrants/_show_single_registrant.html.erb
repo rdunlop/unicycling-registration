@@ -1,0 +1,19 @@
+<h1>Registration Summary:
+<%= @registrant.first_name %>
+<%= @registrant.middle_initial %>
+<%= @registrant.last_name %>
+ #<%= @registrant.bib_number %>
+</h1>
+
+<div style="display:inline-block;">
+  <div class="data_block" style="display:block; max-width:450px;">
+    <%= render :partial => "/registrants/summary" %>
+  </div>
+  <div class="data_block" style="max-width:450px;">
+    <%= render :partial => "/registrants/registrant_expenses" %>
+  </div>
+</div><div class="data_block" style="max-width:550px;">
+  <% if @registrant.competitor %>
+    <%= render :partial => "/registrants/registrant_events" %>
+  <% end %>
+</div>

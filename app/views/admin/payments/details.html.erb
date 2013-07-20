@@ -1,0 +1,38 @@
+<h1>Listing PAID Payment Details</h1>
+
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>
+        Item
+      </th>
+      <th>
+        Details
+      </th>
+      <th>
+        Registrant ID
+      </th>
+      <th>
+        Registrant
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @details.each do |detail| %>
+      <tr>
+        <td>
+          <%= detail.expense_item %>
+        </td>
+        <td>
+          <%= detail.details %>
+        </td>
+        <td>
+          <%= detail.registrant.bib_number %>
+        </td>
+        <td>
+          <%= detail.registrant %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

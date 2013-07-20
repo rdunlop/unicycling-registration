@@ -16,6 +16,10 @@ class Admin::PaymentsController < Admin::BaseController
     @all_expense_items = Registrant.all_expense_items
   end
 
+  def details
+    @details = PaymentDetail.includes(:payment).where("payments.completed = true")
+  end
+
   def new
     load_payment_details
     @payment.payment_date = DateTime.now
