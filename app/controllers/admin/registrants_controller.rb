@@ -41,6 +41,15 @@ class Admin::RegistrantsController < Admin::BaseController
     send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
   end
 
+  def all_summary
+    @registrants = Registrant.order(:last_name, :first_name).all
+
+    respond_to do |format|
+      format.html # all_summary.html.erb
+      format.pdf { render :pdf => "all_summary", :formats => [:html], :orientation => 'Landscape', :layout => "pdf.html" }
+    end
+  end
+
   def email
     @email_form = Email.new
   end

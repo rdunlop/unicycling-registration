@@ -14,6 +14,7 @@ Workspace::Application.routes.draw do
     resources :registrants, :only => [:index, :show] do
       collection do
         get :bag_labels
+        get :all_summary
         get :email
         post :send_email
       end
