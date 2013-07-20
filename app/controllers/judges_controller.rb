@@ -1,25 +1,25 @@
 class JudgesController < ApplicationController
   load_and_authorize_resource
 
-  before_filter :load_event_category, :only => [:index, :new, :create, :destroy, :copy_judges]
+  before_filter :load_competition, :only => [:index, :new, :create, :destroy, :copy_judges]
 
-  def load_event_category
-    @event_category = EventCategory.find(params[:event_category_id])
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
   end
 
   def new # are there tests for this?
-    @judge_types = JudgeType.where(:event_class => @event_category.event.event_class)
+    @judge_types = JudgeType.where(:event_class => @competition.event.event_class)
     @all_judges = User.with_role(:judge).order(:email)
   end
 
-  # POST /event_categories/#/judges
-  # POST /event_categories/#/judges.json
+  # POST /competitions/#/judges
+  # POST /competitions/#/judges.json
   def create
-    @judge.event_category = @event_category
+    @judge.competition = @competition
 
     respond_to do |format|
       if @judge.save
-        format.html { redirect_to new_event_category_judge_path(@event_category), notice: 'Association was successfully created.' }
+        format.html { redirect_to new_competition_judge_path(@competition), notice: 'Association was successfully created.' }
         format.json { render json: @judge, status: :created, location: @judge }
       else
         new # call new function (above), to load the correct variables
@@ -31,15 +31,15 @@ class JudgesController < ApplicationController
 
   # POST /event/#/judges/copy_judges
   def copy_judges
-    @from_event = EventCategory.find(params[:copy_judges][:event_category_id])
+    @from_event = Competition.find(params[:copy_judges][:competition_id])
     @from_event.judges.each do |source_judge|
-        new_judge = @event_category.judges.build
+        new_judge = @competition.judges.build
         new_judge.judge_type = source_judge.judge_type
         new_judge.user = source_judge.user
         new_judge.save!
     end
 
-    redirect_to new_event_category_judge_path(@event_category), notice: "Copied Judges"
+    redirect_to new_competition_judge_path(@competition), notice: "Copied Judges"
   end
 
   # this is used to update standard_execution_scores
@@ -59,18 +59,18 @@ class JudgesController < ApplicationController
   # DELETE /judges/1
   # DELETE /judges/1.json
   def destroy
-    ec = @judge.event_category
+    ec = @judge.competition
     @judge.destroy
 
     respond_to do |format|
-      format.html { redirect_to new_event_category_judge_path(ec) }
+      format.html { redirect_to new_competition_judge_path(ec) }
       format.json { head :no_content }
     end
   end
 
   def index
     @all_judges = User.with_role(:judge)
-    @judges = @event_category.judges
+    @judges = @competition.judges
     @events = Event.all
     @judge = Judge.new
   end

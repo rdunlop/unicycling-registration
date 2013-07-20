@@ -1,5 +1,21 @@
 <h1>Editing competitor</h1>
 
-<%= render :partial => 'form', :object => @competitor %>
+<% # variable 'form' is being passed in %>
+<%= semantic_form_for @competitor do |f| %>
+  <%= f.semantic_errors %>
+  <%= f.inputs do %>
+    <%= f.input :position %>
+    <%= f.input :registrants, :collection => Registrant.where(:competitor => true).order(:bib_number) %>
+    <%= f.input :custom_external_id %>
+    <%= f.input :custom_name %>
+  <% end %>
+  <%= f.actions %>
+<% end %>
+<hr />
+ <%= link_to 'Add All', add_all_competition_competitors_path(@competitor.competition), confirm: 'Are you sure you want to add ALL registrants?', method: :post %>
+ <br />
+ <%= link_to 'Destroy All', destroy_all_competition_competitors_path(@competitor.competition), confirm: 'Are you sure you want to Destroy ALL competitors?', method: :delete %>
+ <br />
+ <%= link_to 'Create From Sign-Ups', create_from_sign_ups_competition_competitors_path(@competitor.competition), method: :post %>
 
 <%= link_to 'Back', judge_scores_path(@judge) %>

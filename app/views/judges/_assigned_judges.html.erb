@@ -11,7 +11,7 @@
         <tr>
           <td><%= judge %></td>
           <td><%= scoring_link(judge) %></td>
-          <td><%= link_to t('Destroy'), event_category_judge_path(judge.event_category, judge), confirm: 'Are you sure?', method: :delete %></td>
+          <td><%= link_to t('Destroy'), competition_judge_path(judge.competition, judge), confirm: 'Are you sure?', method: :delete %></td>
         </tr><%
       end
     %>

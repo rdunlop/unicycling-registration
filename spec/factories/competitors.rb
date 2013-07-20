@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :event_competitor, :class => Competitor do
-    event_category  {FactoryGirl.create(:event).event_categories.first}
+    competition  # FactoryGirl
     sequence(:position)
     after(:create) { |comp| FactoryGirl.create(:member, :competitor => comp)}
   end

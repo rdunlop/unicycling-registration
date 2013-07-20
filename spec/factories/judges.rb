@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :judge do
-    event_category { FactoryGirl.create(:event).event_categories.first }
+    competition
     judge_type # Use FactoryGirl to create
     user       # Use FactoryGirl to create
   end

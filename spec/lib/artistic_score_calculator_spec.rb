@@ -3,17 +3,16 @@ require 'spec_helper'
 describe ArtisticScoreCalculator do
   describe "when calculating the placement points of an event" do
     before(:each) do
-      @event = FactoryGirl.create(:event)
-      @event_category = @event.event_categories.first
-      comp1 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      comp2 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      comp3 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      @judge1 = FactoryGirl.create(:judge, :event_category => @event_category)
+      @competition = FactoryGirl.create(:competition)
+      comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @judge1 = FactoryGirl.create(:judge, :competition => @competition)
       @jt = @judge1.judge_type
       @score1 = FactoryGirl.create(:score, :judge => @judge1, :competitor => comp1, :val_1 => 10)
       @score2 = FactoryGirl.create(:score, :judge => @judge1, :competitor => comp2, :val_1 => 5)
       @score3 = FactoryGirl.create(:score, :judge => @judge1, :competitor => comp3, :val_1 => 0)
-      @calc = ArtisticScoreCalculator.new(@event)
+      @calc = ArtisticScoreCalculator.new(@competition)
       @comp1 = comp1
     end
     it "should be able to calculate on an invalid score" do
@@ -57,7 +56,7 @@ describe ArtisticScoreCalculator do
     end
     describe "and there are 2 judges" do
       before(:each) do 
-        @judge2 = FactoryGirl.create(:judge, :event_category => @event_category, :judge_type => @jt)
+        @judge2 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
         @score2_1 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score1.competitor, :val_1 => 9)
         @score2_2 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score2.competitor, :val_1 => 0)
         @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 3)
@@ -95,7 +94,7 @@ describe ArtisticScoreCalculator do
 
       describe "with a 3rd judge's scores" do
         before(:each) do
-          @judge3 = FactoryGirl.create(:judge, :event_category => @event_category, :judge_type => @jt)
+          @judge3 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
           @score3_1 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score1.competitor, :val_1 => 9)
           @score3_2 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score2.competitor, :val_1 => 4)
           @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 4)
@@ -118,7 +117,7 @@ describe ArtisticScoreCalculator do
         describe "if I have scores for the other judge_type, but not for this judge_type" do
             before(:each) do
                 @jt = FactoryGirl.create(:judge_type, :name => "Technical")
-                @judge = FactoryGirl.create(:judge, :event_category => @event_category, :judge_type => @jt)
+                @judge = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
             end
             it "should be able to get the place" do
                 @calc.place(@comp1).should == 1
@@ -128,18 +127,18 @@ describe ArtisticScoreCalculator do
 
         describe "with 3 technical judges too" do
           before(:each) do
-            @judge4 = FactoryGirl.create(:judge, :event_category => @event_category)
+            @judge4 = FactoryGirl.create(:judge, :competition => @competition)
             @jt2 = @judge4.judge_type
             @score4_1 = FactoryGirl.create(:score, :judge => @judge4, :competitor => @score1.competitor, :val_1 => 1)
             @score4_2 = FactoryGirl.create(:score, :judge => @judge4, :competitor => @score2.competitor, :val_1 => 2)
             @score4_3 = FactoryGirl.create(:score, :judge => @judge4, :competitor => @score3.competitor, :val_1 => 3)
 
-            @judge5 = FactoryGirl.create(:judge, :event_category => @event_category, :judge_type => @jt2)
+            @judge5 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt2)
             @score5_1 = FactoryGirl.create(:score, :judge => @judge5, :competitor => @score1.competitor, :val_1 => 1)
             @score5_2 = FactoryGirl.create(:score, :judge => @judge5, :competitor => @score2.competitor, :val_1 => 2)
             @score5_3 = FactoryGirl.create(:score, :judge => @judge5, :competitor => @score3.competitor, :val_1 => 3)
 
-            @judge6 = FactoryGirl.create(:judge, :event_category => @event_category, :judge_type => @jt2)
+            @judge6 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt2)
             @score6_1 = FactoryGirl.create(:score, :judge => @judge6, :competitor => @score1.competitor, :val_1 => 1)
             @score6_2 = FactoryGirl.create(:score, :judge => @judge6, :competitor => @score2.competitor, :val_1 => 2)
             @score6_3 = FactoryGirl.create(:score, :judge => @judge6, :competitor => @score3.competitor, :val_1 => 3)
@@ -164,7 +163,7 @@ describe ArtisticScoreCalculator do
 
           describe "when using NAUCC-style rules" do
             before(:each) do
-                @calc = ArtisticScoreCalculator.new(@event_category, false)
+                @calc = ArtisticScoreCalculator.new(@competition, false)
             end
 
               #10,5,0 -> 1,  2,  3 
@@ -224,16 +223,16 @@ describe ArtisticScoreCalculator do
   describe "STREET Score when calculating the placement points of an event" do
     before(:each) do
       @event = FactoryGirl.create(:street_event)
-      @event_category = @event.event_categories.first
-      comp1 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      comp2 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      comp3 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      @judge1 = FactoryGirl.create(:judge, :event_category => @event_category)
+      @competition = FactoryGirl.create(:competition, :event => @event)
+      comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @judge1 = FactoryGirl.create(:judge, :competition => @competition)
       @jt = @judge1.judge_type
       @score1 = FactoryGirl.create(:street_score, :judge => @judge1, :competitor => comp1, :val_1 => 10)
       @score2 = FactoryGirl.create(:street_score, :judge => @judge1, :competitor => comp2, :val_1 => 5)
       @score3 = FactoryGirl.create(:street_score, :judge => @judge1, :competitor => comp3, :val_1 => 0)
-      @calc = ArtisticScoreCalculator.new(@event_category)
+      @calc = ArtisticScoreCalculator.new(@competition)
       @comp1 = comp1
     end
     it "should be able to calculate on an invalid score" do

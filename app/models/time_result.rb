@@ -1,16 +1,14 @@
 class TimeResult < ActiveRecord::Base
-  belongs_to :event_category, :touch => true
-  belongs_to :registrant
-  attr_accessible :disqualified, :minutes, :registrant_id, :seconds, :thousands, :event_category_id
+  belongs_to :competitor, :touch => true
+  belongs_to :judge
+  attr_accessible :disqualified, :minutes, :judge_id, :seconds, :thousands, :competitor_id
 
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
-  validates :registrant_id, :presence => true, :uniqueness => {:scope => [:event_category_id]}
-  validates :event_category, :presence => true
+  validates :judge_id, :presence => true, :uniqueness => {:scope => [:competitor_id]}
+  validates :competitor, :presence => true
   validates :disqualified, :inclusion => { :in => [true, false] } # because it's a boolean
 
   scope :fastest_first, order("disqualified, minutes, seconds, thousands")
-
-  delegate :bib_number, to: :registrant
 
   after_initialize :init
 
@@ -23,10 +21,14 @@ class TimeResult < ActiveRecord::Base
 
   def as_json(options={})
     options = {
-      :except => [:id, :created_at, :updated_at, :registrant_id, :event_category_id],
+      :except => [:id, :created_at, :updated_at, :judge_id, :competitor_id],
       :methods => [:bib_number]
     }
     super(options)
+  end
+
+  def competition
+    competitor.competition
   end
 
   def full_time

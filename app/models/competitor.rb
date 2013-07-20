@@ -1,8 +1,8 @@
 class Competitor < ActiveRecord::Base
     has_many :members
-    has_many :registrants, :through => :members
-    belongs_to :event_category
-    acts_as_list :scope => :event_category
+    has_many :registrants, :through => :members, :order => "bib_number"
+    belongs_to :competition
+    acts_as_list :scope => :competition
 
     has_many :scores, :dependent => :destroy
     has_many :boundary_scores, :dependent => :destroy
@@ -11,10 +11,10 @@ class Competitor < ActiveRecord::Base
     has_many :standard_difficulty_scores, :dependent => :destroy
     has_many :distance_attempts, :dependent => :destroy, :order => "distance DESC, id DESC"
 
-    attr_accessible :event_category_id, :position, :registrant_ids, :custom_external_id, :custom_name
+    attr_accessible :competition_id, :position, :registrant_ids, :custom_external_id, :custom_name
     accepts_nested_attributes_for :registrants
 
-    validates :event_category_id, :presence => true
+    validates :competition_id, :presence => true
     validates_associated :members
     validates :position, :presence => true,
                          :numericality => {:only_integer => true, :greater_than => 0}
@@ -24,7 +24,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def event
-      event_category.event
+      competition.event
     end
 
     def name

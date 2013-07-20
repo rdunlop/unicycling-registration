@@ -45,7 +45,7 @@ class Score < ActiveRecord::Base
 
     # determining the place points for this score (by-judge)
     def tied
-        if judge.event_category.score_calculator.ties(self) > 1
+        if judge.competition.score_calculator.ties(self) > 1
             true
         else
             false

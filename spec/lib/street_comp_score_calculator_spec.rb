@@ -3,17 +3,16 @@ require 'spec_helper'
 describe StreetCompScoreCalculator do
   describe "when calculating the placement points of an event" do
     before(:each) do
-      @event = FactoryGirl.create(:event) # XXX BUG needs to be street_event
-      @event_category = @event.event_categories.first
-      @comp1 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      @comp2 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      @comp3 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      @judge = FactoryGirl.create(:judge, :event_category => @event_category)
+      @competition = FactoryGirl.create(:competition)
+      @comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @judge = FactoryGirl.create(:judge, :competition => @competition)
       @jt = @judge.judge_type
       @score1 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp1, :val_1 => 1, :val_2 => 0, :val_3 => 0, :val_4 => 0)
       @score2 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2, :val_1 => 5, :val_2 => 0, :val_3 => 0, :val_4 => 0)
       @score3 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp3, :val_1 => 10, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-      @calc = StreetCompScoreCalculator.new(@event_category)
+      @calc = StreetCompScoreCalculator.new(@competition)
     end
     it "should be able to calculate on an invalid score" do
         @calc.calc_place(@comp1.scores.new).should == 0
@@ -41,10 +40,10 @@ describe StreetCompScoreCalculator do
     end
     describe "when there are more than 6 competitors" do
       before(:each) do
-        @comp4 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-        @comp5 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-        @comp6 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-        @comp7 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
+        @comp4 = FactoryGirl.create(:event_competitor, :competition => @competition)
+        @comp5 = FactoryGirl.create(:event_competitor, :competition => @competition)
+        @comp6 = FactoryGirl.create(:event_competitor, :competition => @competition)
+        @comp7 = FactoryGirl.create(:event_competitor, :competition => @competition)
 
         @score4 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp4, :val_1 => 7, :val_2 => 0, :val_3 => 0, :val_4 => 0)
         @score5 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp5, :val_1 => 6, :val_2 => 0, :val_3 => 0, :val_4 => 0)
@@ -87,7 +86,7 @@ describe StreetCompScoreCalculator do
     end
     describe "and there are 2 judges" do
       before(:each) do 
-        @judge2 = FactoryGirl.create(:judge, :event_category => @event_category, :judge_type => @jt)
+        @judge2 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
         @score2_1 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score1.competitor, :val_1 => 1, :val_2 => 0, :val_3 => 0, :val_4 => 0)
         @score2_2 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score2.competitor, :val_1 => 10, :val_2 => 0, :val_3 => 0, :val_4 => 0)
         @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 7, :val_2 => 0, :val_3 => 0, :val_4 => 0)
@@ -117,7 +116,7 @@ describe StreetCompScoreCalculator do
 
       describe "with a 3rd judge's scores" do
         before(:each) do
-          @judge3 = FactoryGirl.create(:judge, :event_category => @event_category, :judge_type => @jt)
+          @judge3 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
           @score3_1 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score1.competitor, :val_1 => 1, :val_2 => 0, :val_3 => 0, :val_4 => 0)
           @score3_2 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score2.competitor, :val_1 => 5, :val_2 => 0, :val_3 => 0, :val_4 => 0)
           @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 6, :val_2 => 0, :val_3 => 0, :val_4 => 0)

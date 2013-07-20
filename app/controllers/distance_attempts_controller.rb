@@ -6,22 +6,22 @@ class DistanceAttemptsController < ApplicationController
     unless params[:competitor_id].nil?
       @competitor = Competitor.find(params[:competitor_id])
       @judge = Judge.find(params[:judge_id])
-      @event_category = @judge.event_category
+      @competition = @judge.competition
       @distance_attempts = @competitor.distance_attempts
     else
       @judge = Judge.find(params[:judge_id])
-      @event_category = @judge.event_category
-      @distance_attempts = @event_category.distance_attempts
+      @competition = @judge.competition
+      @distance_attempts = @competition.distance_attempts
     end
   end
 
   def index
-    @max_distance_attempts = @event_category.top_distance_attempts(10)
+    @max_distance_attempts = @competition.top_distance_attempts(10)
     # if the event_id is specified, I'm looking at /event/#event_id#/competitor/#id#/distance_attempts
     unless params[:external_id].nil?
         @reg = Registrant.where(:bib_number => params[:external_id]).first
         unless @reg.nil?
-            @competitor = @reg.competitors.where(:event_category_id => @event_category.id).first
+            @competitor = @reg.competitors.where(:competition_id => @competition.id).first
             unless @competitor.nil?
                 respond_to do |format|
                     format.html { redirect_to new_judge_competitor_distance_attempt_path(@judge, @competitor) }

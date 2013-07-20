@@ -12,10 +12,10 @@ describe ScoresController do
     @judge_with_pres = FactoryGirl.create(:judge, :judge_type => @jt, :user_id => @other_user.id)
     @other_judge = FactoryGirl.create(:judge, :user_id => @other_user.id)
 
-    @comp = FactoryGirl.create(:event_competitor, :event_category => @judge.event_category)
-    @comp2 = FactoryGirl.create(:event_competitor, :event_category => @judge.event_category)
-    @judge.event_category.competitors << @comp2
-    @judge.event_category.competitors << @comp
+    @comp = FactoryGirl.create(:event_competitor, :competition => @judge.competition)
+    @comp2 = FactoryGirl.create(:event_competitor, :competition => @judge.competition)
+    @judge.competition.competitors << @comp2
+    @judge.competition.competitors << @comp
     @judge.save!
 
     @signed_in_scores = [
@@ -84,8 +84,8 @@ describe ScoresController do
 
   describe "when the event is locked" do
     before(:each) do
-      @comp.event_category.locked = true
-      @comp.event_category.save!
+      @comp.competition.locked = true
+      @comp.competition.save!
     end
     it "should not be allowed to create scores" do
       expect {
@@ -94,7 +94,7 @@ describe ScoresController do
     end
     it "should be unable to update when the scores" do
       score = @signed_in_scores[0]
-      score.competitor.event_category.locked.should == true
+      score.competitor.competition.locked.should == true
 
       put :update, {:id => score.to_param, :score => valid_attributes, :judge_id => @other_judge.id, :competitor_id => @comp.id}
       response.should redirect_to root_path

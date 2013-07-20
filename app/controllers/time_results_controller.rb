@@ -1,14 +1,14 @@
 class TimeResultsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :event_category, :except => [:edit, :destroy, :update]
-  load_and_authorize_resource :time_result, :through => :event_category, :except => [:edit, :destroy, :update]
+  load_and_authorize_resource :judge, :except => [:edit, :destroy, :update]
+  load_and_authorize_resource :time_result, :through => :judge, :except => [:edit, :destroy, :update]
   load_and_authorize_resource :time_result, :only => [:edit, :destroy, :update]
 
   # GET event_categories/1/time_results
   # GET event_categories/1/time_results.json
   def index
-    @time_results = @time_results.includes(:registrant)
-    @time_result = @event_category.time_results.build
+    @time_results = @judge.time_results
+    @time_result = @judge.time_results.build
 
     respond_to do |format|
       format.html # index.html.erb
@@ -31,35 +31,34 @@ class TimeResultsController < ApplicationController
   end
 
   def final_candidates
-    @male_time_results = @time_results.includes(:registrant, :event_category).where(:registrants => {:gender => "Male"}).fastest_first
-    @female_time_results = @time_results.includes(:registrant, :event_category).where(:registrants => {:gender => "Female"}).fastest_first
+    @male_time_results = @time_results.fastest_first
+    @female_time_results = @time_results.fastest_first
     respond_to do |format|
       format.html # final_candidates.html.erb
     end
   end
 
   def set_places
-    @calc = RaceCalculator.new(@event_category)
+    @calc = RaceCalculator.new(@judge.competition)
     @calc.update_all_places
-    redirect_to event_category_time_results_path(@event_category), :notice => "All Places updated"
+    redirect_to judge_time_results_path(@judge), :notice => "All Places updated"
   end
 
-  # GET event_categories/1/time_results/1/edit
+  # GET /time_results/1/edit
   def edit
     @time_result = TimeResult.find(params[:id])
   end
 
-  # POST event_categories/1/time_results
-  # POST event_categories/1/time_results.json
+  # POST judges/1/time_results
+  # POST judges/1/time_results.json
   def create
 
     respond_to do |format|
       if @time_result.save
-        format.html { redirect_to(event_category_time_results_path(@time_result.event_category), :notice => 'Time result was successfully created.') }
-        format.json { render :json => @time_result, :status => :created, :location => @time_result.event_category }
+        format.html { redirect_to(judge_time_results_path(@time_result.judge), :notice => 'Time result was successfully created.') }
+        format.json { render :json => @time_result, :status => :created, :location => @time_result.judge }
       else
-        @event_category = EventCategory.find(params[:event_category_id])
-        @time_results = @event_category.time_results
+        @time_results = @judge.time_results
         format.html { render :action => "index" }
         format.json { render :json => @time_result.errors, :status => :unprocessable_entity }
       end
@@ -71,7 +70,7 @@ class TimeResultsController < ApplicationController
   def update
     respond_to do |format|
       if @time_result.update_attributes(params[:time_result])
-        format.html { redirect_to(event_category_time_results_path(@time_result.event_category), :notice => 'Time result was successfully updated.') }
+        format.html { redirect_to(judge_time_results_path(@time_result.judge), :notice => 'Time result was successfully updated.') }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -83,11 +82,11 @@ class TimeResultsController < ApplicationController
   # DELETE time_results/1
   # DELETE time_results/1.json
   def destroy
-    event_category = @time_result.event_category
+    judge = @time_result.judge
     @time_result.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_category_time_results_path(event_category) }
+      format.html { redirect_to judeg_time_results_path(judge) }
       format.json { head :ok }
     end
   end

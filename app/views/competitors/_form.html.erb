@@ -1,5 +1,5 @@
 <% # variable 'form' is being passed in %>
-<%= semantic_form_for [form.event_category, form] do |f| %>
+<%= semantic_form_for [form.competition, form] do |f| %>
   <%= f.semantic_errors %>
   <%= f.inputs do %>
     <%= f.input :position %>
@@ -10,8 +10,8 @@
   <%= f.actions %>
 <% end %>
 <hr />
- <%= link_to 'Add All', add_all_event_category_competitors_path(form.event_category), confirm: 'Are you sure you want to add ALL registrants?', method: :post %>
+ <%= link_to 'Add All', add_all_competition_competitors_path(form.competition), confirm: 'Are you sure you want to add ALL registrants?', method: :post %>
  <br />
- <%= link_to 'Destroy All', destroy_all_event_category_competitors_path(form.event_category), confirm: 'Are you sure you want to Destroy ALL competitors?', method: :delete %>
+ <%= link_to 'Destroy All', destroy_all_competition_competitors_path(form.competition), confirm: 'Are you sure you want to Destroy ALL competitors?', method: :delete %>
  <br />
- <%= link_to 'Create From Sign-Ups', create_from_sign_ups_event_category_competitors_path(form.event_category), method: :post %>
+ <%= link_to 'Create From Sign-Ups', create_from_sign_ups_competition_competitors_path(form.competition), method: :post %>

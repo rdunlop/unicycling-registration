@@ -1,3 +1,5 @@
+- Prevent multiple judges from entering results for the same registrant in TimeResults
+
 - Synchronize data between UCP and UDA.
  - Export Registration-configuration data from UDA to UCP
  - Export Registration data from UDA to UCP

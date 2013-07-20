@@ -6,7 +6,7 @@
 
 <p>
 
-<%= form_for :import, :url=>{:controller=>"competitors", :event_category_id => @event_category.id, :action=>"upload"}, :html => {:multipart=>true} do |f| -%>
+<%= form_for :import, :url=>{:controller=>"competitors", :competition_id => @competition.id, :action=>"upload"}, :html => {:multipart=>true} do |f| -%>
 <%= f.file_field :file -%>
 <%= f.submit 'Submit' %>
 

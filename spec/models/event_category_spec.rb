@@ -14,27 +14,6 @@ describe EventCategory do
     @ec.valid?.should == false
   end
 
-  describe "with a user" do
-    before(:each) do
-      @user = FactoryGirl.create(:user)
-    end
-    it "says there are no judges" do
-      @ec.has_judge(@user).should == false
-      @ec.get_judge(@user).should == nil
-    end
-
-    describe "as a judge" do
-      before(:each) do
-        @judge = FactoryGirl.create(:judge, :event_category => @ec, :user => @user)
-      end
-
-      it "has judge" do
-        @ec.has_judge(@user).should == true
-        @ec.get_judge(@user).should == @judge
-      end
-    end
-  end
-
   it "has an event" do
     @ec.event.should == @ev
   end
@@ -59,16 +38,6 @@ describe EventCategory do
 
     it "can count the number of signed_up competitors" do
       @ec.num_competitors.should == 1
-    end
-  end
-
-  describe "with some time_results" do
-    before(:each) do
-      @tr = FactoryGirl.create(:time_result, :event_category => @ec)
-    end
-
-    it "has associated time_results" do
-      @ec.time_results.should == [@tr]
     end
   end
 end

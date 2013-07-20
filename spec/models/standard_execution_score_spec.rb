@@ -3,7 +3,7 @@ require 'spec_helper'
 describe StandardExecutionScore do
   before (:each) do
     @judge = FactoryGirl.create(:judge)
-    @competitor = FactoryGirl.create(:event_competitor, :event_category => @judge.event_category)
+    @competitor = FactoryGirl.create(:event_competitor, :competition => @judge.competition)
     @ssre = FactoryGirl.create(:standard_skill_routine_entry)
   end
 

@@ -4,32 +4,32 @@ describe Competitor do
     it "should join a registrant and a event" do
         reg = FactoryGirl.create(:registrant)
 
-        event_category = FactoryGirl.create(:event).event_categories.first
+        competition = FactoryGirl.create(:competition)
 
         comp = Competitor.new
         comp.registrants << reg
-        comp.event_category = event_category
+        comp.competition = competition
         comp.position = 1
         comp.save.should == true
     end
     it "should modify the other competitor's position" do
-        event_category = FactoryGirl.create(:event).event_categories.first
+        competition = FactoryGirl.create(:competition)
         reg1 = FactoryGirl.create(:registrant)
         reg2 = FactoryGirl.create(:registrant)
 
         comp = Competitor.new
         comp.registrants << reg1
-        comp.event_category = event_category
+        comp.competition = competition
         comp.position = 1
         comp.save.should == true
 
         comp = Competitor.new
         comp.registrants << reg2
-        comp.event_category = event_category
+        comp.competition = competition
         comp.position = 1
         comp.save.should == true
 
-        comps = event_category.competitors
+        comps = competition.competitors
         comps.count.should == 2
         comps[0].position.should == 1
         comps[1].position.should == 2
@@ -75,7 +75,7 @@ describe Competitor do
     it "setting the same position for another competitor should modify the original competitor" do
         comp = FactoryGirl.create(:event_competitor)
         
-        c2 = FactoryGirl.build(:event_competitor, :event_category => comp.event_category, :position => comp.position)
+        c2 = FactoryGirl.build(:event_competitor, :competition => comp.competition, :position => comp.position)
 
         c2.valid?.should == true
         c2.save.should == true
@@ -151,11 +151,11 @@ describe Competitor do
         before(:each) do
             @reg = FactoryGirl.create(:registrant)
 
-            @event_category = FactoryGirl.create(:event).event_categories.first
+            @competition = FactoryGirl.create(:competition)
 
             @cr = Competitor.new
             @cr.registrants << @reg
-            @cr.event_category = @event_category
+            @cr.competition = @competition
             @cr.position = 1
             @cr.save
 
@@ -172,13 +172,13 @@ describe Competitor do
         end
 
         it "should be able to access the reg via event" do
-            @event_category.registrants.should == [@reg]
+            @competition.registrants.should == [@reg]
         end
         it "should be able to access the event via reg" do
-            @reg.event_categories.should == [@event_category]
+            @reg.competitions.should == [@competition]
         end
-        it "should be able to access the competitors via event" do
-            @event_category.competitors.should == [@cr]
+        it "should be able to access the competitors via competition" do
+            @competition.competitors.should == [@cr]
         end
         it "should be able to access the competitors via registrant" do
             @reg.competitors.should == [@cr]

@@ -18,12 +18,12 @@ Upload: <%= form_for :convert, :url=>admin_export_upload_registrants_path do |f|
 <h2>Time Data</h2>
 Download:
 <ul>
-  <% EventCategory.all.each do |ec| %>
-    <li><%= link_to "#{ec.event} - #{ec}", admin_export_download_time_results_path(:format => :json, :event_category_id => ec.id) %></li>
+  <% Competition.all.each do |comp| %>
+    <li><%= link_to "#{ec.event} - #{ec}", admin_export_download_time_results_path(:format => :json, :competition => comp.id) %></li>
   <% end %>
 </ul>
 Upload: <%= form_for :convert, :url=>admin_export_upload_time_results_path do |f| -%>
-  Event Category: <%= f.select :event_category_id, EventCategory.all.map { |ec| ["#{ec.event} - #{ec}", ec.id] } %><br />
+  Competition: <%= f.select :competition_id, Competition.all.map { |comp| ["#{comp}", comp.id] } %><br />
   Time Results (JSON): <%= f.text_area :data, {:cols => 100, :rows => 6 } -%><br />
   <%= f.submit 'Submit' %>
 <% end %>

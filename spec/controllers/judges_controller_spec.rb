@@ -6,7 +6,7 @@ describe JudgesController do
     @super_admin = FactoryGirl.create(:super_admin_user)
     sign_in @super_admin
     @ev = FactoryGirl.create(:event)
-    @ec = @ev.event_categories.first
+    @ec = FactoryGirl.create(:competition, :event => @ev)
     @judge_user = FactoryGirl.create(:judge_user)
     @judge_type = FactoryGirl.create(:judge_type, :event_class => @ev.event_class)
     @other_judge_type = FactoryGirl.create(:judge_type, :event_class => "Flatland")
@@ -22,7 +22,7 @@ describe JudgesController do
   
   describe "GET new" do
     it "assigns the judge types" do
-        get :new, {:event_category_id => @ec.id }
+        get :new, {:competition_id => @ec.id }
 
         assigns(:judge_types).should == [@judge_type]
         assigns(:all_judges).should == [@judge_user]
@@ -33,19 +33,19 @@ describe JudgesController do
     describe "with valid params" do
       it "creates a new EventJudgeType" do
         expect {
-          post :create, {:judge => valid_attributes, :event_category_id => @ec.id}
+          post :create, {:judge => valid_attributes, :competition_id => @ec.id}
         }.to change(Judge, :count).by(1)
       end
 
       it "assigns a newly created judge as @judge" do
-        post :create, {:judge => valid_attributes, :event_category_id => @ec.id}
+        post :create, {:judge => valid_attributes, :competition_id => @ec.id}
         assigns(:judge).should be_a(Judge)
         assigns(:judge).should be_persisted
       end
 
       it "redirects to the events show page" do
-        post :create, {:judge => valid_attributes, :event_category_id => @ec.id}
-        response.should redirect_to(new_event_category_judge_path(@ec))
+        post :create, {:judge => valid_attributes, :competition_id => @ec.id}
+        response.should redirect_to(new_competition_judge_path(@ec))
       end
     end
 
@@ -53,7 +53,7 @@ describe JudgesController do
       it "assigns a newly created but unsaved judge as @judge" do
         # Trigger the behavior that occurs when invalid params are submitted
         Judge.any_instance.stub(:save).and_return(false)
-        post :create, {:judge => {}, :event_category_id => @ec.id}
+        post :create, {:judge => {}, :competition_id => @ec.id}
         assigns(:judge).should be_a_new(Judge)
         assigns(:judge_types).should == [@judge_type]
         assigns(:all_judges).should == [@judge_user]
@@ -62,7 +62,7 @@ describe JudgesController do
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Judge.any_instance.stub(:save).and_return(false)
-        post :create, {:judge => {}, :event_category_id => @ec.id}
+        post :create, {:judge => {}, :competition_id => @ec.id}
         response.should render_template("new")
       end
     end
@@ -70,12 +70,12 @@ describe JudgesController do
 
   describe "POST copy_judges" do
     it "copies judges from event to event" do
-        @new_event = FactoryGirl.create(:event)
-        judge = FactoryGirl.create(:judge, :event_category => @new_event.event_categories.first)
+        @new_competition = FactoryGirl.create(:competition)
+        judge = FactoryGirl.create(:judge, :competition => @new_competition)
 
         @ec.judges.count.should == 0
 
-        post :copy_judges, {:event_category_id => @ec.id, :copy_judges => {:event_category_id => @new_event.event_categories.first.id}}
+        post :copy_judges, {:competition_id => @ec.id, :copy_judges => {:competition_id => @new_competition.id}}
 
         @ec.judges.count.should == 1
     end
@@ -83,28 +83,28 @@ describe JudgesController do
       sign_out @super_admin
       sign_in @user
 
-      @new_event = FactoryGirl.create(:event)
-      judge = FactoryGirl.create(:judge, :event_category => @new_event.event_categories.first)
+      @new_competition = FactoryGirl.create(:competition)
+      judge = FactoryGirl.create(:judge, :competition => @new_competition)
 
       @ec.judges.count.should == 0
 
-      post :copy_judges, {:event_category_id => @ec.id, :copy_judges => {:event_category_id => @new_event.event_categories.first.id}}
+      post :copy_judges, {:competition_id => @ec.id, :copy_judges => {:competition_id => @new_competition }}
       response.should redirect_to(root_path)
     end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested judge" do
-      judge = FactoryGirl.create(:judge, :event_category => @ec)
+      judge = FactoryGirl.create(:judge, :competition => @ec)
       expect {
-        delete :destroy, {:id => judge.to_param, :event_category_id => @ec.id}
+        delete :destroy, {:id => judge.to_param, :competition_id => @ec.id}
       }.to change(Judge, :count).by(-1)
     end
 
     it "redirects to the judges list" do
-      judge = FactoryGirl.create(:judge, :event_category => @ec)
-      delete :destroy, {:id => judge.to_param, :event_category_id => @ec.id}
-      response.should redirect_to(new_event_category_judge_path(@ec))
+      judge = FactoryGirl.create(:judge, :competition => @ec)
+      delete :destroy, {:id => judge.to_param, :competition_id => @ec.id}
+      response.should redirect_to(new_competition_judge_path(@ec))
     end
   end
 
@@ -125,20 +125,20 @@ describe JudgesController do
 
   describe "GET index" do
     it "displays all of the judges for all" do
-      get :index, {:event_category_id => @ec}
+      get :index, {:competition_id => @ec}
       assigns(:all_judges).should == [@judge_user]
     end
 
     it "lists this events' judges" do
       other_judge_user = FactoryGirl.create(:user)
       other_judge_user.add_role(:judge)
-      @judge = FactoryGirl.create(:judge, :user => @judge_user, :event_category => @ec)
-      get :index, {:event_category_id  => @ec}
+      @judge = FactoryGirl.create(:judge, :user => @judge_user, :competition => @ec)
+      get :index, {:competition_id  => @ec}
       assigns(:judges).should == [@judge]
     end
     
     it "has a blank judge" do
-      get :index, {:event_category_id  => @ec}
+      get :index, {:competition_id  => @ec}
       assigns(:judge).should be_a_new(Judge)
     end
   end

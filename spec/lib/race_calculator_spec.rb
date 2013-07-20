@@ -4,52 +4,15 @@ describe RaceCalculator do
   describe "when calculating the placing of timed races" do
     before(:each) do
       @event_configuration = FactoryGirl.create(:event_configuration, :start_date => Date.today)
-      @event = FactoryGirl.create(:event)
-      @event_category = @event.event_categories.first
-      @age_group_entry = FactoryGirl.create(:age_group_entry) # 0-100 age group
-      @event_category.age_group_type = @age_group_entry.age_group_type
-      @event_category.save!
+      @competition = FactoryGirl.create(:competition)
       FactoryGirl.create(:event_configuration, :start_date => Date.new(2013,01,01))
       # Note: Registrants are born in 1990, thus are 22 years old
-      @tr1 = FactoryGirl.create(:time_result, :event_category => @event_category)
-      @tr2 = FactoryGirl.create(:time_result, :event_category => @event_category)
-      @tr3 = FactoryGirl.create(:time_result, :event_category => @event_category)
-      @tr4 = FactoryGirl.create(:time_result, :event_category => @event_category)
+      @tr1 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
+      @tr2 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
+      @tr3 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
+      @tr4 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
 
-      @calc = RaceCalculator.new(@event_category)
-    end
-    describe "with 2 age_groups" do
-      before(:each) do
-        @age_group_type = @age_group_entry.age_group_type
-        @age_group_entry2 = FactoryGirl.create(:age_group_entry, :age_group_type => @age_group_type, :start_age => 50, :end_age => 100, :short_description => "50-100")
-        @age_group_entry.start_age = 0
-        @age_group_entry.end_age = 49
-        @age_group_entry.save!
-      end
-
-      it "doesn't place people in the 2nd age group when called by the first" do
-        @tr1.thousands = 1
-        @tr1.save!
-        @tr2.thousands = 2
-        @tr2.save!
-
-        @reg = @tr1.registrant
-        @reg.birthday= Date.today - 1.year
-        @reg.responsible_adult_name = "Bob Smith"
-        @reg.responsible_adult_phone = "911"
-        @reg.save!
-        @reg.age.should == 1
-
-        @reg = @tr2.registrant
-        @reg.birthday = Date.today - 60.years
-        @reg.save!
-        @reg.age.should == 60
-
-        @calc.update_all_places
-
-        @tr1.place.should == 1 # not a tie, different groups
-        @tr2.place.should == 1 # not a tie, different groups
-      end
+      @calc = RaceCalculator.new(@competition)
     end
 
     it "places everyone as 0 if they have no time" do

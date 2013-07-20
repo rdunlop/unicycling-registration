@@ -1,10 +1,10 @@
-<h3><%= @event_category.event %> - <%= @event_category %></h3>
+<h3><%= @competition.event %> - <%= @competition %></h3>
 
 <div>
   <%= render :partial => "/event_categories/sign_ups" %>
 </div>
 <div>
-      <%= render :partial => "/competitors/competitors", :object => @event_category.competitors %>
+      <%= render :partial => "/competitors/competitors", :object => @competition.competitors %>
       <hr />
       <%= render :partial => "/competitors/form", :object => @competitor %>
 </div>
@@ -13,5 +13,5 @@
 </div>
 
 <div class="bottom-nav">
-<%= link_to 'Back', event_category_path(@event_category) %>
+<%= link_to 'Back', competition_path(@competition) %>
 </div>

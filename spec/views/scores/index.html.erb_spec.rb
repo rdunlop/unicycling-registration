@@ -6,13 +6,12 @@ describe "scores/index" do
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }
 
-    @ev = FactoryGirl.create(:event)
-    @ec = @ev.event_categories.first
-    @judge = FactoryGirl.create(:judge, :event_category_id => @ec.id)
+    @ec = FactoryGirl.create(:competition)
+    @judge = FactoryGirl.create(:judge, :competition => @ec)
     assign(:judge, @judge)
     assign(:judges, [])
-    @comp1 = FactoryGirl.create(:event_competitor, :event_category_id => @ec.id)
-    @comp2 = FactoryGirl.create(:event_competitor, :event_category_id => @ec.id)
+    @comp1 = FactoryGirl.create(:event_competitor, :competition => @ec)
+    @comp2 = FactoryGirl.create(:event_competitor, :competition => @ec)
 
     # differentiate the external_id from the other data.
     r = Competitor.find(@comp1.id).members.first.registrant

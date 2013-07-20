@@ -1,17 +1,17 @@
 class StreetScoresController < ApplicationController
   before_filter :authenticate_user!
   skip_authorization_check
-  before_filter :load_event_category, :except => [:destroy]
+  before_filter :load_competition, :except => [:destroy]
 
-  def load_event_category
+  def load_competition
     @judge = Judge.find(params[:judge_id])
-    @event_category = @judge.event_category
+    @competition = @judge.competition
     @street_scores = @judge.street_scores.sort {|a, b| b.val_1 <=> a.val_1 }
   end
 
   def index
     @score = @judge.street_scores.new
-    @competitors = @event_category.competitors
+    @competitors = @competition.competitors
     authorize! :create, @score
   end
 
@@ -25,14 +25,14 @@ class StreetScoresController < ApplicationController
         flash[:alert] = "unable to specify both ID and by competitor"
     else
       unless cid.empty?
-        @event_category.competitors.each do |c|
+        @competition.competitors.each do |c|
           if c.id == cid.to_i
             @score.competitor = c
           end
         end
       end
       unless eid.empty?
-        @event_category.competitors.each do |c|
+        @competition.competitors.each do |c|
           if c.external_id == eid
             @score.competitor = c
           end
@@ -47,7 +47,7 @@ class StreetScoresController < ApplicationController
         format.html { redirect_to judge_street_scores_path(@judge), notice: 'Score was successfully created.' }
         format.json { render json: @score, status: :created, location: @score }
       else
-        @competitors = @event_category.competitors
+        @competitors = @competition.competitors
         format.html { render action: "index" }
         format.json { render json: @score.errors, status: :unprocessable_entity }
       end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717043434) do
+ActiveRecord::Schema.define(:version => 20130719042101) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -70,8 +70,18 @@ ActiveRecord::Schema.define(:version => 20130717043434) do
     t.string   "info_url"
   end
 
+  create_table "competitions", :force => true do |t|
+    t.integer  "event_id"
+    t.string   "name"
+    t.boolean  "locked"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "competitions", ["event_id"], :name => "index_competitions_event_id"
+
   create_table "competitors", :force => true do |t|
-    t.integer  "event_category_id"
+    t.integer  "competition_id"
     t.integer  "position"
     t.integer  "custom_external_id"
     t.string   "custom_name"
@@ -79,7 +89,7 @@ ActiveRecord::Schema.define(:version => 20130717043434) do
     t.datetime "updated_at",         :null => false
   end
 
-  add_index "competitors", ["event_category_id"], :name => "index_competitors_event_category_id"
+  add_index "competitors", ["competition_id"], :name => "index_competitors_event_category_id"
 
   create_table "distance_attempts", :force => true do |t|
     t.integer  "competitor_id"
@@ -100,7 +110,6 @@ ActiveRecord::Schema.define(:version => 20130717043434) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "age_group_type_id"
-    t.boolean  "locked"
   end
 
   add_index "event_categories", ["age_group_type_id"], :name => "index_event_categories_age_group_type_id"
@@ -195,14 +204,14 @@ ActiveRecord::Schema.define(:version => 20130717043434) do
   end
 
   create_table "judges", :force => true do |t|
-    t.integer  "event_category_id"
+    t.integer  "competition_id"
     t.integer  "judge_type_id"
     t.integer  "user_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
-  add_index "judges", ["event_category_id"], :name => "index_judges_event_category_id"
+  add_index "judges", ["competition_id"], :name => "index_judges_event_category_id"
   add_index "judges", ["judge_type_id"], :name => "index_judges_judge_type_id"
   add_index "judges", ["user_id"], :name => "index_judges_user_id"
 
@@ -421,17 +430,17 @@ ActiveRecord::Schema.define(:version => 20130717043434) do
   add_index "street_scores", ["judge_id"], :name => "index_street_scores_judge_id"
 
   create_table "time_results", :force => true do |t|
-    t.integer  "event_category_id"
+    t.integer  "competitor_id"
     t.integer  "minutes"
     t.integer  "seconds"
     t.integer  "thousands"
     t.boolean  "disqualified"
-    t.integer  "registrant_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "judge_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
-  add_index "time_results", ["event_category_id"], :name => "index_time_results_on_event_category_id"
+  add_index "time_results", ["competitor_id"], :name => "index_time_results_on_event_category_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

@@ -9,8 +9,9 @@ describe DistanceAttemptsController do
   describe "GET 'index'" do
     describe "when a Competitor is assigned to the distance event" do
       let(:ev) { FactoryGirl.create(:distance_event) }
-      let(:comp)  { FactoryGirl.create(:event_competitor, :event_category => ev.event_categories.first) }
-      let(:judge) { FactoryGirl.create(:judge, :event_category => ev.event_categories.first) }
+      let(:competition) { FactoryGirl.create(:competition, :event => ev) }
+      let(:comp)  { FactoryGirl.create(:event_competitor, :competition => competition) }
+      let(:judge) { FactoryGirl.create(:judge, :competition => competition) }
       it "returns http success" do
         da = FactoryGirl.create(:distance_attempt, :judge => judge, :competitor => comp)
 
@@ -18,7 +19,7 @@ describe DistanceAttemptsController do
 
         response.should be_success
         assigns(:max_distance_attempts).should eq([da])
-        assigns(:event_category).should eq(comp.event_category)
+        assigns(:competition).should eq(competition)
       end
       it "returns the competitor when an external_id is specified" do
 
@@ -34,7 +35,8 @@ describe DistanceAttemptsController do
       end
       it "returns an error message if the registrant isn't registered for this event" do
         ev2 = FactoryGirl.create(:distance_event)
-        judge = FactoryGirl.create(:judge, :event_category => ev2.event_categories.first)
+        competition2 =FactoryGirl.create(:competition, :event => ev2)
+        judge = FactoryGirl.create(:judge, :competition => competition2)
 
         get 'index', :judge_id => judge.id, :external_id => comp.external_id
 
@@ -47,7 +49,7 @@ describe DistanceAttemptsController do
 
           response.should be_success
           assigns(:judge).should eq(judge)
-          assigns(:event_category).should eq(ev.event_categories.first)
+          assigns(:competition).should eq(competition)
           assigns(:competitor).should eq(comp)
           assigns(:distance_attempt).should be_a_new(DistanceAttempt)
         end
@@ -63,10 +65,12 @@ describe DistanceAttemptsController do
         it "only returns distance_attempts for this event" do
           ev  = FactoryGirl.create(:distance_event)
           ev2 = FactoryGirl.create(:distance_event)
+          competition = FactoryGirl.create(:competition, :event => ev)
+          competition2 = FactoryGirl.create(:competition, :event => ev2)
 
-          comp  = FactoryGirl.create(:event_competitor, :event_category => ev.event_categories.first)
-          comp2 = FactoryGirl.create(:event_competitor, :event_category => ev2.event_categories.first)
-          judge = FactoryGirl.create(:judge, :event_category => ev.event_categories.first)
+          comp  = FactoryGirl.create(:event_competitor, :competition => competition)
+          comp2 = FactoryGirl.create(:event_competitor, :competition => competition2)
+          judge = FactoryGirl.create(:judge, :competition => competition)
 
           da  = FactoryGirl.create(:distance_attempt, :competitor => comp)
           da2 = FactoryGirl.create(:distance_attempt, :competitor => comp2) # for a different event/competitor
@@ -81,8 +85,9 @@ describe DistanceAttemptsController do
   describe "POST create" do
     before (:each) do
         @ev = FactoryGirl.create(:distance_event)
-        @comp = FactoryGirl.create(:event_competitor, :event_category => @ev.event_categories.first)
-        @judge = FactoryGirl.create(:judge, :event_category => @ev.event_categories.first)
+        @competition = FactoryGirl.create(:competition, :event => @ev)
+        @comp = FactoryGirl.create(:event_competitor, :competition => @competition)
+        @judge = FactoryGirl.create(:judge, :competition => @competition)
     end
     def valid_attributes
       {
@@ -109,9 +114,10 @@ describe DistanceAttemptsController do
 
   describe "GET list" do
     before(:each) do
-        @ev = FactoryGirl.create(:distance_event).event_categories.first
-        @comp = FactoryGirl.create(:event_competitor, :event_category => @ev)
-        @judge = FactoryGirl.create(:judge, :event_category => @ev)
+        @ev = FactoryGirl.create(:distance_event)
+        @competition = FactoryGirl.create(:competition, :event => @ev)
+        @comp = FactoryGirl.create(:event_competitor, :competition => @competition)
+        @judge = FactoryGirl.create(:judge, :competition => @competition)
     end
     it "should return a list of all distance_attempts" do
         get :list, {:judge_id => @judge.id}

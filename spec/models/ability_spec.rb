@@ -122,15 +122,14 @@ describe "Ability" do
     it { should be_able_to(:create, Score) }
     it { should be_able_to(:read, StreetScore) }
 
-    describe "with an event category" do
+    describe "with a Competition" do
       before(:each) do
-        @ev = FactoryGirl.create(:event)
-        @ec = @ev.event_categories.first
+        @ec = FactoryGirl.create(:competition)
       end
       it { should be_able_to(:create_scores, @ec) }
       it { should be_able_to(:read, Competitor) }
 
-      describe "when the event Category is locked" do
+      describe "when the Competition is locked" do
         before(:each) do
           @ec.locked = true
           @ec.save!
@@ -153,8 +152,7 @@ describe "Ability" do
 
   describe "as a chief_judge" do
     before(:each) do
-      @ev = FactoryGirl.create(:event)
-      @ec = @ev.event_categories.first
+      @ec = FactoryGirl.create(:competition)
       @user = FactoryGirl.create(:user)
       @user.add_role :chief_judge, @ec
       @user.add_role :judge

@@ -21,9 +21,9 @@ class Ability
 
       # Scoring abilities
       if user.has_role? :judge
-        can :read, EventCategory
-        can :create_scores, EventCategory do |event_category|
-          !event_category.locked
+        can :read, Competition
+        can :create_scores, Competition do |competition|
+          !competition.locked
         end
 
         # Freestyle
@@ -41,17 +41,17 @@ class Ability
           score.try(:user) == user
         end
       end
-      EventCategory.all.each do |ev|
+      Competition.all.each do |ev|
         if user.has_role?(:chief_judge, ev)
-          can :administer, EventCategory
+          can :administer, Competition
         end
       end
 
       # score Summaries
-      can :freestyle_scores, EventCategory do |ev|
+      can :freestyle_scores, Competition do |ev|
         user.has_role?(:chief_judge, ev)
       end
-      can :distance_attempts, EventCategory do |ev|
+      can :distance_attempts, Competition do |ev|
         user.has_role?(:chief_judge, ev)
       end
 

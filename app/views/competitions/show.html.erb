@@ -1,0 +1,12 @@
+<p>
+  <b>Event:</b>
+  <%= @competition.event_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @competition.name %>
+</p>
+
+<%= link_to 'Edit', edit_competition_path(@competition) %> |
+<%= link_to 'Back', event_competitions_path(@competition.event) %>

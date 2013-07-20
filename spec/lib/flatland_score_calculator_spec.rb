@@ -3,17 +3,16 @@ require 'spec_helper'
 describe FlatlandScoreCalculator do
   describe "when calculating the placement points of an event" do
     before(:each) do
-      @event = FactoryGirl.create(:flatland_event)
-      @event_category = @event.event_categories.first
-      @comp1 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      @comp2 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      @comp3 = FactoryGirl.create(:event_competitor, :event_category => @event_category)
-      @judge = FactoryGirl.create(:judge, :event_category => @event_category)
+      @competition = FactoryGirl.create(:competition)
+      @comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @judge = FactoryGirl.create(:judge, :competition => @competition)
       @jt = @judge.judge_type
       @score1 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp1, :val_1 => 10, :val_2 => 0, :val_3 => 0, :val_4 => 1)
       @score2 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2, :val_1 => 5, :val_2 => 0, :val_3 => 0, :val_4 => 1)
       @score3 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp3, :val_1 => 0, :val_2 => 0, :val_3 => 0, :val_4 => 1)
-      @calc = FlatlandScoreCalculator.new(@event_category)
+      @calc = FlatlandScoreCalculator.new(@competition)
     end
     it "should be able to calculate on an invalid score" do
         @calc.calc_place(@comp1.scores.new).should == 0
@@ -56,7 +55,7 @@ describe FlatlandScoreCalculator do
     end
     describe "and there are 2 judges" do
       before(:each) do 
-        @judge2 = FactoryGirl.create(:judge, :event_category => @event_category, :judge_type => @jt)
+        @judge2 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
         @score2_1 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score1.competitor, :val_1 => 9, :val_2 => 0, :val_3 => 0, :val_4 => 1)
         @score2_2 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score2.competitor, :val_1 => 0, :val_2 => 0, :val_3 => 0, :val_4 => 1)
         @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 3, :val_2 => 0, :val_3 => 0, :val_4 => 1)
@@ -86,7 +85,7 @@ describe FlatlandScoreCalculator do
 
       describe "with a 3rd judge's scores" do
         before(:each) do
-          @judge3 = FactoryGirl.create(:judge, :event_category => @event_category, :judge_type => @jt)
+          @judge3 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
           @score3_1 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score1.competitor, :val_1 => 9, :val_2 => 0, :val_3 => 0, :val_4 => 1)
           @score3_2 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score2.competitor, :val_1 => 4, :val_2 => 0, :val_3 => 0, :val_4 => 1)
           @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 4, :val_2 => 0, :val_3 => 0, :val_4 => 1)

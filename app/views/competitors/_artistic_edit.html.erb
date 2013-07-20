@@ -1,7 +1,7 @@
-<h1>Freestyle - <%=@judge.event_category %> Judging Form</h1>
+<h1>Freestyle - <%=@judge.competition %> Judging Form</h1>
 <h2><%= @judge.judge_type.name %> Judge</h2>
 
-<% if cannot? :create_scores, @judge.event_category %>
+<% if cannot? :create_scores, @judge.competition %>
     <p class="event_locked">Scores for this event are now locked (closed)</p>
 <% end %>
 

@@ -33,7 +33,7 @@ class ScoresController < ApplicationController
 
   # POST /judges/1/competitors/2/scores
   def create
-    authorize! :create_scores, @competitor.event_category
+    authorize! :create_scores, @competitor.competition
 
     @score.judge = @judge
     @score.competitor = @competitor
@@ -82,7 +82,7 @@ class ScoresController < ApplicationController
   # PUT /judges/1/competitors/2/scores/1
   # PUT /judges/1/competitors/2/scores/1.json
   def update
-    authorize! :create_scores, @competitor.event_category
+    authorize! :create_scores, @competitor.competition
 
     if @judge.judge_type.boundary_calculation_enabled
         @boundary_score = BoundaryScore.find_by_competitor_id_and_judge_id(params[:competitor_id], params[:judge_id])

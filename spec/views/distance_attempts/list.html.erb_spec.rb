@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe "distance_attempts/list" do
   before(:each) do
-    @ev = FactoryGirl.create(:event)
-    @ec = @ev.event_categories.first
+    @ec = FactoryGirl.create(:competition)
+    @ev = @ec.event
     assign(:event, @ev)
 
-    @comp1 = FactoryGirl.create(:event_competitor, :event_category => @ec)
-    @comp2 = FactoryGirl.create(:event_competitor, :event_category => @ec)
+    @comp1 = FactoryGirl.create(:event_competitor, :competition => @ec)
+    @comp2 = FactoryGirl.create(:event_competitor, :competition => @ec)
     @judge = FactoryGirl.create(:judge)
 
     @da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp1, :judge => @judge)

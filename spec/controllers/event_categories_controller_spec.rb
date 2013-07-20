@@ -187,21 +187,4 @@ describe EventCategoriesController do
       assigns(:registrants).should == []
     end
   end
-
-  describe "POST lock" do
-    it "locks the event_category" do
-      event_category = FactoryGirl.create(:event_category, :event => @event, :position => 2)
-      post :lock, {:id => event_category.to_param}
-      event_category.reload
-      event_category.locked?.should == true
-    end
-  end
-  describe "DELETE lock" do
-    it "unlocks the event_category" do
-      event_category = FactoryGirl.create(:event_category, :event => @event, :position => 2, :locked => true)
-      delete :lock, {:id => event_category.to_param}
-      event_category.reload
-      event_category.locked?.should == false
-    end
-  end
 end

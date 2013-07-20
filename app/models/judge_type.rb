@@ -1,7 +1,7 @@
 class JudgeType < ActiveRecord::Base
 
     has_many :judges, :dependent => :destroy
-    has_many :event_categories, :through => :judges
+    has_many :competitions, :through => :judges
     has_many :scores, :through => :judges
 
     attr_accessible :name, :event_class

@@ -2,22 +2,21 @@ require 'spec_helper'
 
 describe TimeResult do
   before(:each) do
-    @ev = FactoryGirl.create(:event)
-    @ec = @ev.event_categories.first
-    @reg = FactoryGirl.create(:competitor)
-    @tr = FactoryGirl.create(:time_result, :event_category => @ec, :registrant => @reg)
+    @competitor = FactoryGirl.create(:event_competitor)
+    @judge = FactoryGirl.create(:judge)
+    @tr = FactoryGirl.create(:time_result, :competitor => @competitor, :judge => @judge)
   end
   it "is valid from FactoryGirl" do
     @tr.valid?.should == true
   end
 
-  it "requires an event_categroy" do
-    @tr.event_category = nil
+  it "requires a competitor" do
+    @tr.competitor = nil
     @tr.valid?.should == false
   end
 
-  it "requires a registrant" do
-    @tr.registrant = nil
+  it "requires a judge" do
+    @tr.judeg = nil
     @tr.valid?.should == false
   end
 
@@ -58,16 +57,16 @@ describe TimeResult do
     end
   end
 
-  it "refers to a registrant" do
-    @tr.registrant.should == @reg
+  it "refers to a judge" do
+    @tr.judge.should == @judge
   end
 
-  it "refers to an event_category" do
-    @tr.event_category.should == @ec
+  it "refers to a competitor" do
+    @tr.competitor.should == @competitor
   end
 
-  it "Cannot have the same registrant have 2 results for the same event_category" do
-    @tr = FactoryGirl.build(:time_result, :event_category => @ec, :registrant => @reg)
+  it "Cannot have the same registrant have 2 results for the same judge (ie: same competitior)" do
+    @tr = FactoryGirl.build(:time_result, :competitor => @competitor, :judge => @judge)
     @tr.valid?.should == false
   end
 

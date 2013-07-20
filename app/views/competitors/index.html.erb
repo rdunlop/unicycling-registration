@@ -1,26 +1,42 @@
-<h1><%= @event_category %> - Competitors</h1>
+<h1><%= @competition %> - Competitors</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Position</th>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Gender</th>
+      <th class="sign_up">Event Category</th>
+      <th class="sign_up">ID</th>
+      <th class="sign_up">Name</th>
+      <th class="sign_up">Age</th>
+      <th class="sign_up">Gender</th>
+      <th class="sign_up">Age Group</th>
+      <th class="competitor_member">Competition</th>
+      <th class="competitor_member"></th>
     </tr>
   </thead>
   <tbody>
-    <% @competitors.each do |competitor| %>
+    <% @all_registrants.each do |registrant| %>
+        <% event_category = nil
+           competition = nil
+        %>
+        <% if @registrants.contains(registrant)
+            event_category = registrant.registrant_event_sign_ups.where({:event_id => @event.id})
+           end
+        %>
+        <% if @competitors.contains(registrant.competitors.where({:event_id => @event.id}))
+                competition = registrant.competitors.where({:event_id => @event.id})
+           end
+        %>
       <tr>
-        <td><%= competitor.position %></td>
-        <td><%= competitor.external_id %></td>
-        <td><%= competitor.name %></td>
-        <td><%= competitor.age %></td>
-        <td><%= competitor.gender %></td>
+        <td><%= event_category %></td>
+        <td><%= registrant.external_id %></td>
+        <td><%= registrant.name %></td>
+        <td><%= registrant.age %></td>
+        <td><%= registrant.gender %></td>
+        <td><%= competiton %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Upload or Create Competitor', new_event_category_competitor_path(@event_category) %>
+<%= link_to "new Competition", new_event_competition_path(@competition.event) %>
+<%= link_to 'Upload or Create Competitor', new_competition_competitor_path(@competition) %>

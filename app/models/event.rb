@@ -10,6 +10,8 @@ class Event < ActiveRecord::Base
 
   has_many :registrant_event_sign_ups, :dependent => :destroy, :inverse_of => :event
 
+  has_many :competitions, :dependent => :destroy, :inverse_of => :event
+
   belongs_to :category, :inverse_of => :events
 
   validates :name, :presence => true
@@ -45,5 +47,17 @@ class Event < ActiveRecord::Base
   # determine the number of people who have signed up for this event
   def num_competitors
     registrant_event_sign_ups.where({:signed_up => true}).count
+  end
+
+  def signed_up_registrants
+    registrant_event_sign_ups.where({:signed_up => true}).map{|resu| resu.registrant}
+  end
+
+  def competitor_registrants
+    competitors.map {|comp| comp.member.map{|mem| mem.registrant}}
+  end
+
+  def all_registrants
+    signed_up_registrants.intersect competitor_registrants
   end
 end

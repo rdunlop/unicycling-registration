@@ -20,10 +20,10 @@ class Member < ActiveRecord::Base
             if competitor.nil? or registrant.nil?
                 return
             end
-            event_category = competitor.event_category
-            event_category.registrants.each do |reg|
+            competition = competitor.competition
+            competition.registrants.each do |reg|
                 if reg == registrant
-                    errors[:base] = "Cannot have the same registrant (#{registrant}) in the same event-category twice"
+                    errors[:base] = "Cannot have the same registrant (#{registrant}) in the same competition twice"
                 end
             end
         end

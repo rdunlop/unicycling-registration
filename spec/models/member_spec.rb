@@ -6,7 +6,7 @@ describe Member do
 
     member.valid?.should == false
 
-    member.competitor = FactoryGirl.create(:event_competitor, :event_category => FactoryGirl.create(:event).event_categories.first)
+    member.competitor = FactoryGirl.create(:event_competitor)
 
     member.valid?.should == false
 

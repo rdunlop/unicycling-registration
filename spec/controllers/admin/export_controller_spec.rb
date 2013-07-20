@@ -190,23 +190,22 @@ describe Admin::ExportController do
 
   describe "GET download_time_results" do
     before(:each) do
-      @ev = FactoryGirl.create(:event)
-      @ec = @ev.event_categories.first
+      @competition = FactoryGirl.create(:competition)
     end
     describe "with no data" do
       it "returns no entries for event" do
-        get :download_time_results, {:event_category_id => @ec.id, :format => 'json' }
+        get :download_time_results, {:competition_id => @competition.id, :format => 'json' }
         parsed_body = JSON.parse(response.body)
         parsed_body.should == { "time_results" => [] }
       end
     end
     describe "with a single time_result" do
       before(:each) do
-        @reg = FactoryGirl.create(:competitor)
-        @tr = FactoryGirl.create(:time_result, :event_category => @ec, :registrant => @reg, :minutes => 45, :seconds => 22, :thousands => 123, :disqualified => false)
+        @comp = FactoryGirl.create(:event_competitor, :competition => @competition)
+        @tr = FactoryGirl.create(:time_result, :competitor => @comp, :minutes => 45, :seconds => 22, :thousands => 123, :disqualified => false)
       end
       it "returns the single time_result" do
-        get :download_time_results, {:event_category_id => @ec.id, :format => 'json' }
+        get :download_time_results, {:competition_id => @competition.id, :format => 'json' }
         parsed_body = JSON.parse(response.body)
         parsed_body.should == {
           "time_results" => [
@@ -224,12 +223,11 @@ describe Admin::ExportController do
   describe "POST upload_time_results" do
     before(:each) do
       @data = {"time_results" => []}
-      @ev = FactoryGirl.create(:event)
-      @ec = @ev.event_categories.first
+      @ec = FactoryGirl.create(:competition)
       @reg = FactoryGirl.create(:competitor)
     end
     # set the included data as json
-    let(:submit) { {:convert => {:event_category_id => @ec.id, :data => @data.to_json} } }
+    let(:submit) { {:convert => {:competition_id => @ec.id, :data => @data.to_json} } }
 
     describe "with no data" do
       it "creates no models" do
@@ -246,7 +244,7 @@ describe Admin::ExportController do
         }.to change(TimeResult, :count).by(1)
         flash[:notice].should == "Created 1 records"
         r = TimeResult.last
-        r.registrant.bib_number.should == 1
+        r.competitor.members.first.registrant.bib_number.should == @reg.bib_number
         r.minutes.should == 45
         r.seconds.should == 22
         r.thousands.should == 123

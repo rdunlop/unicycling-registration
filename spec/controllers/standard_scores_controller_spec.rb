@@ -9,10 +9,10 @@ describe StandardScoresController do
 
     @judge = FactoryGirl.create(:judge, :user_id => @user.id)
 
-    @comp = FactoryGirl.create(:event_competitor, :event_category => @judge.event_category)
-    @comp2 = FactoryGirl.create(:event_competitor, :event_category => @judge.event_category)
-    @judge.event_category.competitors << @comp2
-    @judge.event_category.competitors << @comp
+    @comp = FactoryGirl.create(:event_competitor, :competition => @judge.competition)
+    @comp2 = FactoryGirl.create(:event_competitor, :competition => @judge.competition)
+    @judge.competition.competitors << @comp2
+    @judge.competition.competitors << @comp
     @judge.save!
   end
 

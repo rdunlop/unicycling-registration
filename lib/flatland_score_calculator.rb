@@ -1,7 +1,7 @@
 class FlatlandScoreCalculator < ArtisticScoreCalculator
 
-    def initialize(event_category)
-        @calc = ArtisticScoreCalculator.new(event_category) # should use this some where in the calculations?
+    def initialize(competition)
+        @calc = ArtisticScoreCalculator.new(competition) # should use this some where in the calculations?
     end
 
     # ####################################################################
@@ -28,7 +28,7 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
 
       my_place = 1
       my_points = total_points(competitor)
-      competitor.event_category.competitors.each do |comp|
+      competitor.competition.competitors.each do |comp|
         comp_points = total_points(comp)
         if comp_points > my_points # XXX replace with helper function?
             my_place = my_place + 1

@@ -98,8 +98,8 @@ class Admin::ExportController < Admin::BaseController
 
   def download_time_results
     obj = {}
-    event_category = EventCategory.find(params[:event_category_id])
-    obj["time_results"] = event_category.time_results
+    competition = Competition.find(params[:competition_id])
+    obj["time_results"] = competition.time_results
     respond_to do |format|
       format.json { render :json => obj }
     end
@@ -109,16 +109,32 @@ class Admin::ExportController < Admin::BaseController
   # Receives JSON data in the 'data' field
   def upload_time_results
     json = JSON.parse(params[:convert][:data])
-    event_category = EventCategory.find(params[:convert][:event_category_id])
+    competition = Competition.find(params[:convert][:competition_id])
+    judge = competition.judges.first
 
     created_records = 0
     json["time_results"].each do |tr|
       reg = Registrant.find_by_bib_number(tr["bib_number"])
-      new_tr = TimeResult.new({:registrant_id => reg.id,
+      competitor = nil
+      competition.competitors.each do |comp|
+        if comp.members.first.registrant == reg
+            competitor = comp
+            break
+        end
+      end
+      if competitor.nil?
+          competitor = competition.competitor.build
+          competitor.save!
+          mem = competitor.members.build
+          mem.registrant = reg
+          mem.save!
+      end
+        
+      new_tr = TimeResult.new({:judge_id => judge.id,
                               :minutes => tr["minutes"],
                               :seconds => tr["seconds"],
                               :thousands => tr["thousands"],
-                              :event_category_id => event_category.id,
+                              :competitor_id => competitor.id,
                               :disqualified => tr["disqualified"]})
       new_tr.save
       created_records += 1

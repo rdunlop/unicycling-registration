@@ -3,27 +3,27 @@ class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_event_category, :only => [:index, :new, :create, :upload, :add_all, :destroy_all, :create_from_sign_ups]
+  before_filter :load_competition, :only => [:index, :new, :create, :upload, :add_all, :destroy_all, :create_from_sign_ups]
 
-  def load_event_category
-    @event_category = EventCategory.find(params[:event_category_id])
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
   end
 
-  # GET /event_categories/:event_category_id/1/new
+  # GET /competitions/:competition_id/1/new
   def new
-    @registrants = @event_category.signed_up_registrants
-    @competitor = @event_category.competitors.new
+    @registrants = @competition.event.signed_up_registrants
+    @competitor = @competition.competitors.new
   end
 
   def create_from_sign_ups
-    @registrants = @event_category.signed_up_registrants
+    @registrants = @competition.signed_up_registrants
 
     new_competitors = @registrants.shuffle
     n = add_registrants(new_competitors)
 
     respond_to do |format|
       if n > 0
-        format.html { redirect_to new_event_category_competitor_path(@event_category), notice: "#{n} Competition registrants successfully created." }
+        format.html { redirect_to new_competition_competitor_path(@competition), notice: "#{n} Competition registrants successfully created." }
       else
         format.html { render "new", alert: 'Error adding Registrants (0 added)' }
       end
@@ -32,7 +32,8 @@ class CompetitorsController < ApplicationController
 
   # GET /judges/1/competitors
   def index
-    @competitors = @event_category.competitors
+    @competitors = @competition.competitors
+    @registrants = @competition.event.signed_up_registrants
   end
 
   # GET /competitors/1/edit
@@ -40,13 +41,13 @@ class CompetitorsController < ApplicationController
   end
 
   def add_all
-    @competitor = @event_category.competitors.new # so that the form renders ok
+    @competitor = @competition.competitors.new # so that the form renders ok
 
     n = add_registrants(Registrant.all)
 
     respond_to do |format|
       if n > 0
-        format.html { redirect_to new_event_category_competitor_path(@event_category), notice: "#{n} Competition registrants successfully created." }
+        format.html { redirect_to new_competition_competitor_path(@competition), notice: "#{n} Competition registrants successfully created." }
       else
         format.html { render "new", alert: 'Error adding Registrants (0 added)' }
       end
@@ -55,7 +56,7 @@ class CompetitorsController < ApplicationController
 
   def add_registrants(registrants = [])
     n = 0
-    current_registrant_external_ids = @event_category.registrants.map {|r| r.external_id}
+    current_registrant_external_ids = @competition.registrants.map {|r| r.external_id}
     registrants.each do |reg|
         if !reg.competitor
             next
@@ -63,9 +64,9 @@ class CompetitorsController < ApplicationController
         if current_registrant_external_ids.include? reg.external_id
             #puts "found existing"
         else
-            comp = @event_category.competitors.new
+            comp = @competition.competitors.new
             # set the position to be 1 more than current positions
-            comp.position = @event_category.competitors.count + 1
+            comp.position = @competition.competitors.count + 1
             if comp.save
                 #puts "successfully saved competitor"
                 member = comp.members.new
@@ -90,11 +91,11 @@ class CompetitorsController < ApplicationController
   # POST /competitors
   # POST /competitors.json
   def create
-    @competitor.event_category = @event_category
+    @competitor.competition = @competition
 
     respond_to do |format|
       if @competitor.save
-        format.html { redirect_to new_event_category_competitor_path(@event_category), notice: 'Competition registrant was successfully created.' }
+        format.html { redirect_to competition_competitors_path(@competition), notice: 'Competition registrant was successfully created.' }
         format.json { render json: @competitor, status: :created, location: @competitor }
       else
         format.html { render "new", alert: 'Error adding Registrant' }
@@ -108,7 +109,7 @@ class CompetitorsController < ApplicationController
   def update
     respond_to do |format|
       if @competitor.update_attributes(params[:competitor])
-        format.html { redirect_to @competitor.event_category, notice: 'Competition registrant was successfully updated.' }
+        format.html { redirect_to @competitor.competition, notice: 'Competition registrant was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -120,21 +121,21 @@ class CompetitorsController < ApplicationController
   # DELETE /competitors/1
   # DELETE /competitors/1.json
   def destroy
-    @ev_cat = @competitor.event_category
+    @ev_cat = @competitor.competition
     @competitor.destroy
 
     respond_to do |format|
-      format.html { redirect_to new_event_category_competitor_path(@ev_cat) }
+      format.html { redirect_to new_competition_competitor_path(@ev_cat) }
       format.json { head :no_content }
     end
   end
 
   # DELETE /events/10/competitors/destroy_all
   def destroy_all
-    @event_category.competitors.destroy_all
+    @competition.competitors.destroy_all
 
     respond_to do |format|
-      format.html { redirect_to new_event_category_competitor_path(@event_category) }
+      format.html { redirect_to new_competition_competitor_path(@competition) }
       format.json { head :no_content }
     end
   end
@@ -158,8 +159,8 @@ class CompetitorsController < ApplicationController
         # 329
         reg = get_registrant(row[0].to_i)
         if (!reg.nil?)
-            position = @event_category.competitors.count + 1
-            comp = @event_category.competitors.create(:position => position)
+            position = @competition.competitors.count + 1
+            comp = @competition.competitors.create(:position => position)
             comp.members.build(:registrant_id => reg.id)
         else
             return
@@ -172,7 +173,7 @@ class CompetitorsController < ApplicationController
         #2,329
         reg = get_registrant(row[1].to_i)
         if (!reg.nil?)
-           comp = @event_category.competitors.create(:position => row[0].to_i)
+           comp = @competition.competitors.create(:position => row[0].to_i)
            comp.members.build(:registrant_id => reg.id)
         else
            return
@@ -187,7 +188,7 @@ class CompetitorsController < ApplicationController
             reg  = get_registrant(row[1].to_i)
             reg2 = get_registrant(row[2].to_i)
             if (!reg.nil? && !reg2.nil?)
-                comp = @event_category.competitors.create(:position => row[0].to_i)
+                comp = @competition.competitors.create(:position => row[0].to_i)
                 comp.members.build(:registrant_id => reg.id)
                 comp.members.build(:registrant_id => reg2.id)
             else
@@ -200,7 +201,7 @@ class CompetitorsController < ApplicationController
             #2,3019,undesided
             #3,3020,Hino
             #4,3017,israel unicycle org
-            comp = @event_category.competitors.create(:position => row[0].to_i)
+            comp = @competition.competitors.create(:position => row[0].to_i)
             comp.custom_external_id = row[1]
             comp.custom_name = row[2]
         end
@@ -210,13 +211,13 @@ class CompetitorsController < ApplicationController
         n=n+1
       else
          flash[:alert]="Unable to import line #{row}. #{comp.errors.full_messages}"
-         redirect_to event_category_path(@event_category)
+         redirect_to competition_path(@competition)
          return
       end
      end
     end
     flash[:notice]="CSV Import Successful,  #{n} new records added to data base"
-    redirect_to event_category_path(@event_category)
+    redirect_to competition_path(@competition)
   end
 
   private
@@ -224,7 +225,7 @@ class CompetitorsController < ApplicationController
     reg2 = Registrant.find_by_bib_number(id)
     if (reg2.nil?)
         flash[:alert]="Unable to import line with id #{id}, Unable to find matching registrant in database"
-        redirect_to event_category_path(@event_category)
+        redirect_to competition_path(@competition)
     end
     reg2
   end

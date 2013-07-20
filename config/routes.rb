@@ -94,6 +94,11 @@ Workspace::Application.routes.draw do
       get 'track'
     end
   end
+  resources :event_categories, :except => [:index, :create, :new] do
+    member do
+      get :sign_ups
+    end
+  end
 
   resources :categories, :except => [:new, :show] do
     resources :events, :only => [:index, :create]
@@ -162,18 +167,20 @@ Workspace::Application.routes.draw do
   ### For event-data-gathering/reporting purposes
   ###############################################
 
+  resources :events, :only => [] do
+    resources :competitions, :only => [:index, :create, :new]
+  end
   resources :competitors, :only => [:edit, :update, :destroy]
-  resources :event_categories, :except => [:index, :create, :new] do
+  resources :competitions, :except => [:index, :create, :new] do
     member do
       get :export_scores
       # view scores
       get :freestyle_scores
       get :distance_attempts
-      get :sign_ups
       post :lock
       delete :lock
     end
-    resources :competitors, :only => [:index, :new, :create, :destroy] do
+    resources :competitors, :only => [:index, :new, :create] do
       collection do
         post :upload
         post :add_all
@@ -182,13 +189,6 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :time_results, :only => [:index, :create] do
-      collection do
-        put :set_places
-        get :results
-        get :final_candidates
-      end
-    end
     resources :judges,      :only => [:index, :new, :create, :destroy] do
       collection do
         post :copy_judges
@@ -221,6 +221,13 @@ Workspace::Application.routes.draw do
       end
     end
     resources :street_scores, :only => [:index, :create, :destroy]
+    resources :time_results, :only => [:index, :create] do
+      collection do
+        put :set_places
+        get :results
+        get :final_candidates
+      end
+    end
   end
   resources :distance_attempts, :only => [:update, :destroy]
 
