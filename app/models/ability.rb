@@ -67,7 +67,7 @@ class Ability
       can :manage, Registrant if user.has_role? :admin or user.has_role? :super_admin
       can [:all, :waiver], Registrant, :user_id => user.id
 
-      unless EventConfiguration.closed?
+      unless EventConfiguration.closed? and ENV['ONSITE_REGISTRATION'] != "true"
         can [:update, :items, :update_items, :destroy], Registrant, :user_id => user.id
         can :create, Registrant # necessary because we set the user in the controller?
         can :new_noncompetitor, Registrant # necessary because we set the user in the controller?

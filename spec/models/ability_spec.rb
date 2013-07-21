@@ -5,6 +5,7 @@ describe "Ability" do
   describe "as a normal user" do
     before(:each) do
       @user = FactoryGirl.create(:user)
+      ENV["ONSITE_REGISTRATION"] = nil
     end
     subject { @ability = Ability.new(@user) }
 
@@ -63,6 +64,14 @@ describe "Ability" do
       end
 
       it { should_not be_able_to(:create, Registrant) }
+
+      describe "when the ONSITE flag is set" do
+        before(:each) do
+          ENV['ONSITE_REGISTRATION'] = "true"
+        end
+
+        it { should be_able_to(:create, Registrant) }
+      end
     end
     describe "when standard_skill is closed" do
       before(:each) do

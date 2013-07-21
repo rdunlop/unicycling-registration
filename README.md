@@ -150,6 +150,11 @@ If you want to host your system from a different URL (search heroku
 documentation for details), you should set the DOMAIN to the URL that you will be using.
 
 
+If you want to allow user accounts to be created WITHOUT requiring e-mail
+confirmation, set the following variable:
+
+    MAIL_SKIP_CONFIRMATION=true
+
 Paypal Account
 --------------
 
@@ -223,6 +228,10 @@ as the expense details for registration.
  * Create some Registration Periods
  * Create some Categories, and Events within those categories.
 
+If you want to enable normal users to create registrations (For Example: On-Site
+Registration), set the following environment variable:
+
+    ONSITE_REGISTRATION=true
 
 ========================================================================
 
@@ -420,8 +429,10 @@ The Competition Results Data (for judging)
 * AgeGroupEntries: Each age entry has a start-age and end-age.
 * WheelSize: The wheel size that the age enty must use, and the competitor must
   use.
-* EventClass: The style of competition (Artistic, Street, Two-Attempt-Distance,
-  etc)
+* Competitor: A grouping concept which associates registrants and
+  EventCategories
+* Competition: A list of competitors who are set for competing in a particular
+  race/etc.
 * JudgeType: describes the various types of judges that we have (Presentation,
   Technical, Street, etc) and their scoring behaviors.
 
