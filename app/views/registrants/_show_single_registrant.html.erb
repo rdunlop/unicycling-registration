@@ -4,6 +4,9 @@
 <%= @registrant.last_name %>
  #<%= @registrant.bib_number %>
 </h1>
+<div class="non_printable">
+  <%= link_to "Printable (Pdf)", registrant_path(@registrant, :format => "pdf"), {:target => "_blank"} %>
+</div>
 
 <div style="display:inline-block;">
   <div class="data_block" style="display:block; max-width:450px;">
