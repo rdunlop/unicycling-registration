@@ -22,6 +22,6 @@ FactoryGirl.define do
       after(:create) {|user| user.add_role :chief_judge, EventCategory }
     end
 
-    after(:create) { |user| user.confirm! }
+    after(:create) { |user| user.confirm! if ENV["MAIL_SKIP_CONFIRMATION"].nil? }
   end
 end
