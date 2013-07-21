@@ -25,6 +25,10 @@ class TimeResult < ActiveRecord::Base
     super(options)
   end
 
+  def bib_number
+    competitor.members.first.registrant.bib_number
+  end
+
   def event
     competitor.event
   end
