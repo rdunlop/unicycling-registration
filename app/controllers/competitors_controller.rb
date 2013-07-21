@@ -59,6 +59,7 @@ class CompetitorsController < ApplicationController
     n = 0
     current_registrant_external_ids = @competition.registrants.map {|r| r.external_id}
     registrants.each do |reg|
+      next if reg.nil?
         if !reg.competitor
             next
         end

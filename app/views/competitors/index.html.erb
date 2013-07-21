@@ -15,6 +15,7 @@
   </thead>
   <tbody>
     <% @all_registrants.each do |registrant| %>
+      <% next if registrant.nil? %>
         <% event_category = nil
            competition = nil
         %>
