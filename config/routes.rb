@@ -25,6 +25,8 @@ Workspace::Application.routes.draw do
     resources :payments, :only => [:index, :new, :create]  do
       collection do
         get :details
+        get :onsite_pay_new
+        post :onsite_pay_create
       end
     end
     resources :events, :only => [:index, :show]

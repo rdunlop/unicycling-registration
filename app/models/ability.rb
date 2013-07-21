@@ -56,7 +56,8 @@ class Ability
       end
 
       # Payment
-      can :manage, Payment if user.has_role? :admin or user.has_role? :super_admin
+      can :read, Payment if user.has_role? :admin
+      can :manage, Payment if user.has_role? :super_admin
       can :read, Payment, :user_id => user.id
       unless EventConfiguration.closed?
         can [:new, :create], Payment

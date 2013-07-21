@@ -70,6 +70,19 @@ class Registrant < ActiveRecord::Base
 
   after_initialize :init
 
+  # Creates the registrant owing
+  def build_owing_payment(payment)
+    items = owing_expense_items_with_details
+    items.each do |item_pair|
+      item = item_pair[0]
+      details = item_pair[1]
+      pd = payment.payment_details.build()
+      pd.registrant = self
+      pd.amount = item.cost
+      pd.expense_item = item
+      pd.details = details
+    end
+  end
 
   def set_bib_number
     if self.bib_number.nil?
@@ -214,6 +227,11 @@ class Registrant < ActiveRecord::Base
   def to_s
     name
   end
+
+  def with_id_to_s
+    bib_number.to_s + "-" + to_s
+  end
+
 
   ###### Expenses ##########
 

@@ -7,6 +7,8 @@ class AdminAbility
       if user.has_role? :admin or user.has_role? :super_admin
         can :manage, Event
         can :manage, Payment
+        can :onsite_pay_new, Payment
+        can :onsite_pay_create, Payment
         can :manage, Registrant
         can :email, Registrant
       end
