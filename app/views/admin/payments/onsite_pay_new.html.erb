@@ -1,0 +1,21 @@
+<h1>New payment</h1>
+
+<div>
+  Select the Registrants to pay for:
+</div>
+<br />
+
+<div class="payment_details">
+  <%= render :partial => "/shared/error_messages", :object => @payment %>
+  <%= form_tag(onsite_pay_create_admin_payments_path, :method => :post) do %>
+    <%= label_tag(:note, "Payment Note") %>
+    <%= text_field_tag(:note, nil, {:autofocus => true, :required => true, :autocomplete => 'off'}) %>
+    <br />
+    <%= label_tag(:registrant_id, "Registrants") %>
+    <%= select_tag(:registrant_id, options_from_collection_for_select(@registrants, "id", "with_id_to_s"), :multiple => true) %>
+    <br />
+    <%= submit_tag('Create Onsite Payment') %>
+  <% end %>
+<div>
+  <%= link_to 'Back', admin_payments_path %>
+</div>
