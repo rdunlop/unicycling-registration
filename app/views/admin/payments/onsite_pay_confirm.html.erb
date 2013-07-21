@@ -1,0 +1,65 @@
+<h1>Onsite payment confirmation</h1>
+<% if mixpanel? %>
+  <script type="text/javascript">
+    mixpanel.track("New Payment Page Loaded")
+  </script>
+<% end %>
+
+<div>
+  Confirm the items to be paid for:
+</div>
+
+<div class="payment_details">
+  <%= form_for(@payment, :url => onsite_pay_create_admin_payments_path) do |f| %>
+  <% if @payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+      <% @payment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :note %><%= f.text_field :note %>
+
+  <table class="sortable">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= f.fields_for :payment_details do |pf| %>
+        <tr>
+          <td><%= pf.hidden_field :registrant_id %><%= pf.object.registrant %></td>
+          <td><%= pf.hidden_field :expense_item_id %><%= pf.object.expense_item %></td>
+          <td><%= pf.hidden_field :details %>
+            <% unless pf.object.details.blank? %>
+              <%= "(" + pf.object.details + ")"%>
+            <% end %>
+          </td>
+          <td><%= pf.hidden_field :amount %><%= number_to_currency(pf.object.amount) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="3">Total</th>
+        <th><%= @total %></th>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="actions">
+    <%= f.submit 'Make Payment', :class => "payment_link registration_button" %>
+  </div>
+</div>
+<% end %>
+<div>
+  <%= link_to 'Back', onsite_pay_new_admin_payments_path %>
+</div>

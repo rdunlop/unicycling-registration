@@ -46,10 +46,22 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def onsite_pay_create
-    @payment = Payment.new
+    @payment = Payment.new(params[:payment])
     @payment.completed = true
     @payment.completed_date = DateTime.now
     @payment.user = current_user
+
+    @registrants = Registrant.order(:id).all
+
+    if @payment.save
+      redirect_to payment_path(@payment), notice: "Successfully created payment"
+    else
+      render "onsite_pay_new"
+    end
+  end
+
+  def onsite_pay_confirm
+    @payment = Payment.new
     @payment.note = params[:note]
 
     @registrants = []
@@ -58,12 +70,7 @@ class Admin::PaymentsController < Admin::BaseController
       @registrants << reg
       reg.build_owing_payment(@payment)
     end
-
-    if @payment.save
-      redirect_to admin_payments_url, notice: "Successfully created payment"
-    else
-      render "onsite_pay_new"
-    end
+    @total = @payment.total_amount
   end
 
 end

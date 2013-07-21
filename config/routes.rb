@@ -26,6 +26,7 @@ Workspace::Application.routes.draw do
       collection do
         get :details
         get :onsite_pay_new
+        post :onsite_pay_confirm
         post :onsite_pay_create
       end
     end

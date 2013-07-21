@@ -7,7 +7,7 @@
 
 <div class="payment_details">
   <%= render :partial => "/shared/error_messages", :object => @payment %>
-  <%= form_tag(onsite_pay_create_admin_payments_path, :method => :post) do %>
+  <%= form_tag(onsite_pay_confirm_admin_payments_path, :method => :post) do %>
     <%= label_tag(:note, "Payment Note") %>
     <%= text_field_tag(:note, nil, {:autofocus => true, :required => true, :autocomplete => 'off'}) %>
     <br />
