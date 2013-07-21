@@ -88,4 +88,8 @@ class EventsController < ApplicationController
   def track
     @events = Event.where({:event_class => "Two Attempt Distance"})
   end
+
+  def distance
+    @events = Event.where({:event_class => "Distance"})
+  end
 end

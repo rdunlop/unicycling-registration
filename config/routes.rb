@@ -1,6 +1,12 @@
 Workspace::Application.routes.draw do
 
 
+  namespace :printing do
+    namespace :race_recording do
+      get :multi_lap
+      get :list
+    end
+  end
 
   # ADMIN (for use in Setting up the system)
   #
@@ -100,6 +106,7 @@ Workspace::Application.routes.draw do
       get 'flatland'
       get 'street'
       get 'track'
+      get 'distance'
     end
   end
   resources :event_categories, :except => [:index, :create, :new] do

@@ -1,0 +1,42 @@
+<h1>Race Recording</h1>
+<div class="heading_left">
+  <ul>
+    <li>Event:</li>
+    <li>Category:</li>
+  </ul>
+</div>
+<div class="heading_right">
+  <ul>
+    <li>Recorder's Name:</li>
+    <li>Phone Number:</li>
+    <li>Date/Time:</li>
+    <li>Page #:</li>
+  </ul>
+</div>
+
+<span class="non_printable">
+  <%= link_to "pdf", printing_race_recording_multi_lap_path(:format => :pdf) %>
+</span>
+
+<table class="recording_form">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Time</th>
+      <th class="separator"></th>
+      <th>ID</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% 30.times do %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="separator"></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,39 @@
+table.recording_form {
+  border-collapse: collapse;
+  width: 100%;
+  tr {
+    td {
+      border: solid 1px black;
+
+      .separator {
+        background-color: lightgrey;
+      }
+    }
+  }
+  height: 100%;
+}
+
+body.pdf_body {
+  height: 800px;
+  div.body {
+    height: 100%;
+  }
+}
+
+.heading_left {
+  float: left;
+  ul {
+    list-style: none;
+    font-size: 20px;
+  }
+  width: 50%;
+}
+
+.heading_right {
+  float: left;
+  ul {
+    list-style: none;
+    font-size: 20px;
+  }
+  width: 50%;
+}
