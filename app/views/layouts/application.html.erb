@@ -73,10 +73,6 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
               <li><%= link_to 'Standard Skill Routines (view)', standard_skill_routines_path %></li>
               <li><%= link_to 'Standard Skill Routines (export)', download_file_admin_standard_skill_routines_path %></li>
             <% end %>
-            <% if can? :read, :usa_memberships %>
-              <%= menu_header_if_necessary("data") %>
-              <li><%= link_to 'USA Memberships', usa_memberships_registrants_path %></li>
-            <% end %>
           <%= menu_footer_if_necessary("data") %>
 
           <% set_menu_header("siteconfig","<li>" + link_to( 'Site Config', '#') + "<ul>") %>

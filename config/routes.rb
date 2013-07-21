@@ -113,7 +113,6 @@ Workspace::Application.routes.draw do
     collection do
       get :new_noncompetitor
       get :all
-      get :usa_memberships
       get :empty_waiver
     end
     member do

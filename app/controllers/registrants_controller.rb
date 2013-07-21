@@ -34,10 +34,6 @@ class RegistrantsController < ApplicationController
     @registrants = Registrant.order(:id)
   end
 
-  def usa_memberships
-    @registrants = Registrant.all
-  end
-
   # GET /registrants/empty_waiver
   def empty_waiver
     config = EventConfiguration.first
