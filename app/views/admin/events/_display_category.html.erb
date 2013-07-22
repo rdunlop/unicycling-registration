@@ -10,6 +10,7 @@
       <th>Gender</th>
       <th>Age</th>
       <th>Country</th>
+      <th>Details</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +27,7 @@
         <td><%= resu.registrant.gender %></td>
         <td><%= resu.registrant.age %></td>
         <td><%= resu.registrant.country %></td>
-      </tr>
+        <td><%= resu.registrant.describe_event_hash(@event_category.event)[:additional] %></td>
     <% end %>
   </tbody>
 </table>
