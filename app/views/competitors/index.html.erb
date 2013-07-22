@@ -36,7 +36,10 @@
         <td><%= registrant.name %></td>
         <td><%= registrant.age %></td>
         <td><%= registrant.gender %></td>
-        <td><%= @competition.age_group_type.age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) %></td>
+        <td><% unless @competition.age_group_type.nil? %>
+            <%= @competition.age_group_type.age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) %>
+          <% end %>
+        </td>
         <td><%= competition %></td>
         <td><% unless competition.nil? %>
             <%= link_to 'Edit', edit_competitor_path(competitor) %>

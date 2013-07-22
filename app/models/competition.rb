@@ -46,7 +46,11 @@ class Competition < ActiveRecord::Base
 
   # all event_categories should have the same age_group_type
   def age_group_type
-    event_categories.first.age_group_type
+    if event_categories.count > 0
+      event_categories.first.age_group_type
+    else
+      nil
+    end
   end
 
   def get_judge(user)
