@@ -1,21 +1,14 @@
 <h1>Editing competitor</h1>
 
 <% # variable 'form' is being passed in %>
-<%= semantic_form_for @competitor do |f| %>
-  <%= f.semantic_errors %>
-  <%= f.inputs do %>
-    <%= f.input :position %>
-    <%= f.input :registrants, :collection => Registrant.where(:competitor => true).order(:bib_number) %>
-    <%= f.input :custom_external_id %>
-    <%= f.input :custom_name %>
-  <% end %>
-  <%= f.actions %>
-<% end %>
-<hr />
- <%= link_to 'Add All', add_all_competition_competitors_path(@competitor.competition), confirm: 'Are you sure you want to add ALL registrants?', method: :post %>
- <br />
- <%= link_to 'Destroy All', destroy_all_competition_competitors_path(@competitor.competition), confirm: 'Are you sure you want to Destroy ALL competitors?', method: :delete %>
- <br />
- <%= link_to 'Create From Sign-Ups', create_from_sign_ups_competition_competitors_path(@competitor.competition), method: :post %>
+<%= form_for @competitor do |f| %>
+  <%= f.label :position %><%= f.text_field :position %><br />
+  <%= f.label :registrant_ids %><%= f.select :registrant_ids, Registrant.all.map { |reg| [reg.with_id_to_s, reg.id] }, {}, {:multiple => true, :include_blank => true } %><br />
+  <%= f.label :custom_external_id %><%= f.text_field :custom_external_id %><br />
+  <%= f.label :custom_name %><%= f.text_field :custom_name %><br />
 
-<%= link_to 'Back', judge_scores_path(@judge) %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to "Back", competition_competitors_path(@competitor.competition) %>
+

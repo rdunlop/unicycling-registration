@@ -68,7 +68,7 @@ class CompetitionsController < ApplicationController
         @event_category.save
         message = "Competition was successfully created."
 
-        message += @competition.create_competitors_from_registrants(@event_category.signed_up_registrants)
+        message += @competition.create_competitors_from_registrants(@event_category.signed_up_registrants.shuffle)
 
         format.html { redirect_to competition_competitors_path(@competition), notice:  message }
         format.json { render json: @competition, status: :created, location: competition_competitors_path(@event) }

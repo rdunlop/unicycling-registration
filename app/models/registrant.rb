@@ -47,7 +47,7 @@ class Registrant < ActiveRecord::Base
   has_many :expense_items, :through => :registrant_expense_items
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
 
-  default_scope where(:deleted => false)
+  default_scope where(:deleted => false).order(:bib_number)
 
   has_many :payment_details, :include => :payment
 

@@ -1,8 +1,9 @@
 <h1><%= @competition %> - Competitors</h1>
 
-<table>
+<table class="sortable">
   <thead>
     <tr>
+      <th class="competitor_member">Position</th>
       <th class="sign_up">Event Category</th>
       <th class="sign_up">ID</th>
       <th class="sign_up">Name</th>
@@ -24,10 +25,12 @@
            end
         %>
         <% if @competitors.include?(registrant.competitors.where({:competition_id => @competition.id}).try(:first))
-                competition = registrant.competitors.where({:competition_id => @competition.id}).try(:first).try(:competition)
+                competitor = registrant.competitors.where({:competition_id => @competition.id}).try(:first)
+                competition = competitor.try(:competition)
            end
         %>
       <tr>
+        <td><%= competitor.try(:position) %></td>
         <td><%= event_category %></td>
         <td><%= registrant.external_id %></td>
         <td><%= registrant.name %></td>
@@ -35,6 +38,11 @@
         <td><%= registrant.gender %></td>
         <td><%= @competition.age_group_type.age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) %></td>
         <td><%= competition %></td>
+        <td><% unless competition.nil? %>
+            <%= link_to 'Edit', edit_competitor_path(competitor) %>
+            <%= link_to 'Destroy', competitor, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

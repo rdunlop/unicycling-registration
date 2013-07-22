@@ -35,6 +35,7 @@ class CompetitorsController < ApplicationController
     @competitors = @competition.competitors
     @registrants = @competition.signed_up_registrants
     @all_registrants = @competition.competitors.map{|comp| comp.members.map{|mem| mem.registrant}}.flatten + @registrants
+    @all_registrants = @all_registrants.uniq
   end
 
   # GET /competitors/1/edit
@@ -111,7 +112,7 @@ class CompetitorsController < ApplicationController
   def update
     respond_to do |format|
       if @competitor.update_attributes(params[:competitor])
-        format.html { redirect_to @competitor.competition, notice: 'Competition registrant was successfully updated.' }
+        format.html { redirect_to competition_competitors_path(@competitor.competition), notice: 'Competition registrant was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -127,7 +128,7 @@ class CompetitorsController < ApplicationController
     @competitor.destroy
 
     respond_to do |format|
-      format.html { redirect_to new_competition_competitor_path(@ev_cat) }
+      format.html { redirect_to competition_competitors_path(@ev_cat) }
       format.json { head :no_content }
     end
   end
