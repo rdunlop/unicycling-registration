@@ -1,19 +1,19 @@
 module EventsHelper
     def scoring_link(judge)
-        class_name = judge.event_category.event.event_class
+        class_name = judge.competition.event.event_class
 
         if class_name == 'Two Attempt Distance'
-            link_to judge.judge_type.name, judge_distance_attempts_path(judge) 
+            link_to judge.judge_type.name, competition_distance_attempts_path(judge.competition) 
         elsif class_name == 'Freestyle'
-            link_to judge.judge_type.name, judge_competitors_path(judge)
+            link_to judge.judge_type.name, competition_competitors_path(judge.competition)
         elsif class_name == 'Flatland'
-            link_to judge.judge_type.name, judge_competitors_path(judge)
+            link_to judge.judge_type.name, competition_competitors_path(judge.competition)
         elsif class_name == 'Street'
-            link_to judge.judge_type.name, judge_street_scores_path(judge)
+            link_to judge.judge_type.name, competition_street_scores_path(judge.competition)
         elsif class_name == 'Standard'
-            link_to judge.judge_type.name, judge_standard_scores_path(judge)
+            link_to judge.judge_type.name, competition_standard_scores_path(judge.competition)
         else
-            "please update the scoring_link function (#{judge.event_category.event.event_class})"
+            "please update the scoring_link function (#{judge.competition.event.event_class})"
         end
     end
 

@@ -45,3 +45,10 @@ Allows user to judge THIS event.
   <%= f.select :judge_type_id, @judge_types.map { |jt| [jt, jt.id] } %>
   <%= f.submit %>
 <% end %>
+
+<div class="judges">
+    <h4>Copy Judges from another Competition</h4>
+    <%= render :partial => "copy_judges" %>
+</div>
+
+<%= link_to 'Back', competition_path(@competition) %>
