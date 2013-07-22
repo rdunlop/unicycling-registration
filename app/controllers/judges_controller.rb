@@ -1,7 +1,7 @@
 class JudgesController < ApplicationController
   load_and_authorize_resource
 
-  before_filter :load_competition, :only => [:index, :new, :create, :destroy, :copy_judges]
+  before_filter :load_competition, :only => [:index, :new, :create, :destroy, :copy_judges, :create_normal]
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
@@ -19,11 +19,11 @@ class JudgesController < ApplicationController
 
     respond_to do |format|
       if @judge.save
-        format.html { redirect_to new_competition_judge_path(@competition), notice: 'Association was successfully created.' }
+        format.html { redirect_to competition_judges_path(@competition), notice: 'Association was successfully created.' }
         format.json { render json: @judge, status: :created, location: @judge }
       else
-        new # call new function (above), to load the correct variables
-        format.html { render action: "new" }
+        index # call new function (above), to load the correct variables
+        format.html { render action: "index" }
         format.json { render json: @judge.errors, status: :unprocessable_entity }
       end
     end
@@ -72,16 +72,17 @@ class JudgesController < ApplicationController
     @all_judges = User.with_role(:judge)
     @judges = @competition.judges
     @events = Event.all
-    @judge = Judge.new
+    @judge ||= Judge.new
+    @judge_types = JudgeType.all
   end
 
   def create_normal
     @user = User.find(params[:judge][:user_id])
     respond_to do |format|
       if @user.add_role(:judge)
-        format.html { redirect_to root_path, notice: 'Judge successfully created.' }
+        format.html { redirect_to competition_judges_path(@competition), notice: 'Judge successfully created.' }
       else
-        format.html { redirect_to root_path, notice: 'Unable to create Judge successfully created.' }
+        format.html { redirect_to competition_judges_path(@competiton), notice: 'Unable to add judge role to user.' }
       end
     end
   end

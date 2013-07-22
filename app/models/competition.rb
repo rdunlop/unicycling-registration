@@ -35,6 +35,15 @@ class Competition < ActiveRecord::Base
     "Created #{num_created} competitors"
   end
 
+  # collapse all event_categories' signed_up_registrants
+  def signed_up_registrants
+    regs = []
+    event_categories.each do |ec|
+      regs += ec.signed_up_registrants
+    end
+    regs
+  end
+
   # all event_categories should have the same age_group_type
   def age_group_type
     event_categories.first.age_group_type
