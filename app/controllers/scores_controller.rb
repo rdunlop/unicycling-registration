@@ -1,5 +1,6 @@
 class ScoresController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource :judge # requires that the current user is able to access the judge, thus hiding scores
   load_and_authorize_resource
 
   before_filter :find_judge

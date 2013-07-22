@@ -26,6 +26,7 @@ class Ability
           !competition.locked
         end
 
+        can :read, Judge, :user_id => user.id
         # Freestyle
         can :create, Score
         can [:read, :update], Score do |score|
