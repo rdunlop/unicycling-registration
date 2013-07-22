@@ -382,6 +382,38 @@ system (if so desired):
     $ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_development latest.dump
 
 
+To Run the Production setup locally
+===================================
+
+* Take a database snapshot
+* Create a production database
+
+    $ PGPASSWORD=password createdb -U postgres -h localhost app_production
+
+* Import the data
+
+    $ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_production latest.dump
+
+* Set the .env file:
+
+    PORT=9292
+    RACK_ENV=production
+    SECRET=< run `rake secret` >
+    DEVELOPMENT_BANNER=false
+
+* Precompile the assets
+
+    $ rake assets:precompile
+
+* Start the server
+
+    $  foreman start web
+
+
+..... Backing up the local postgres database:
+
+    $ PGPASSWORD=password pg_dump -h localhost -U postgres -f test.dump -F t app_production
+
 Comments on the database schema
 ===============================
 
