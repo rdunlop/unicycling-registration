@@ -39,7 +39,7 @@ class JudgesController < ApplicationController
         new_judge.save!
     end
 
-    redirect_to new_competition_judge_path(@competition), notice: "Copied Judges"
+    redirect_to competition_judges_path(@competition), notice: "Copied Judges"
   end
 
   # this is used to update standard_execution_scores
