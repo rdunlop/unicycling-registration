@@ -19,13 +19,15 @@
   <thead>
     <th>Judge</th>
     <th>Type</th>
+    <th>Scores?</th>
   </thead>
   <tbody>
     <% @judges.each do |judge| %>
       <tr>
         <td><%= judge %></td>
         <td><%= judge.judge_type %></td>
-        <td>Delete?</td>
+        <td><%= judge.scores.count %></td>
+        <td><%= link_to t('Destroy'), competition_judge_path(judge.competition, judge), confirm: 'Are you sure?', method: :delete %></td>
       </tr>
     <% end %>
   </tbody>

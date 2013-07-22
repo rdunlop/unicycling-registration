@@ -60,11 +60,16 @@ class JudgesController < ApplicationController
   # DELETE /judges/1.json
   def destroy
     ec = @judge.competition
-    @judge.destroy
 
     respond_to do |format|
-      format.html { redirect_to new_competition_judge_path(ec) }
-      format.json { head :no_content }
+      if @judge.destroy
+        format.html { redirect_to competition_judges_path(ec), notice: "Judge Destroyed" }
+        format.json { head :no_content }
+      else
+        flash[:alert] = "Unable to destroy judge"
+        format.html { redirect_to competition_judges_path(ec) }
+        format.json { head :no_content }
+      end
     end
   end
 

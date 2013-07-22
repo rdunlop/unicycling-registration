@@ -2,6 +2,9 @@ class Judge < ActiveRecord::Base
     belongs_to :competition
     belongs_to :judge_type
     belongs_to :user
+
+    before_destroy :check_for_scores # must occur before the dependent->destroy
+
     has_many :scores, :dependent => :destroy, :include => :competitor, :order => "competitors.position"
     has_many :boundary_scores, :dependent => :destroy, :include => :competitor, :order => "competitors.position"
     has_many :street_scores, :dependent => :destroy, :include => :competitor, :order => "competitors.position"
@@ -17,6 +20,14 @@ class Judge < ActiveRecord::Base
     validates :competition_id, :presence => true
     validates :judge_type_id, :presence => true, :uniqueness => {:scope => [:competition_id, :user_id] }
     validates :user_id, :presence => true
+
+
+    def check_for_scores
+      if scores.count > 0
+        errors[:base] << "cannot delete judge containing a score"
+        return false
+      end
+    end
 
     def external_id
         user.registrant_id

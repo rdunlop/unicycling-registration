@@ -104,7 +104,7 @@ describe JudgesController do
     it "redirects to the judges list" do
       judge = FactoryGirl.create(:judge, :competition => @ec)
       delete :destroy, {:id => judge.to_param, :competition_id => @ec.id}
-      response.should redirect_to(new_competition_judge_path(@ec))
+      response.should redirect_to(competition_judges_path(@ec))
     end
   end
 
