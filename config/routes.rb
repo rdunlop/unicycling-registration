@@ -113,6 +113,7 @@ Workspace::Application.routes.draw do
     member do
       get :sign_ups
     end
+    resources :competitions, :only => [:new, :create]
   end
 
   resources :categories, :except => [:new, :show] do
@@ -182,7 +183,7 @@ Workspace::Application.routes.draw do
   ###############################################
 
   resources :events, :only => [] do
-    resources :competitions, :only => [:index, :create, :new]
+    resources :competitions, :only => [:index]
     resources :time_results, :only => [:index, :create] do
       collection do
         put :set_places

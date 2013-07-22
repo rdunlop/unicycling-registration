@@ -1,4 +1,4 @@
-<%= form_for([@event, @competition]) do |f| %>
+<%= form_for([@event_category, @competition]) do |f| %>
   <% if @competition.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>

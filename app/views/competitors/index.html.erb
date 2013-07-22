@@ -33,12 +33,11 @@
         <td><%= registrant.name %></td>
         <td><%= registrant.age %></td>
         <td><%= registrant.gender %></td>
-        <td><%= nil %></td>
+        <td><%= @competition.age_group_type.age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) %></td>
         <td><%= competition %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "new Competition", new_event_competition_path(@competition.event) %>
 <%= link_to 'Upload or Create Competitor', new_competition_competitor_path(@competition) %>

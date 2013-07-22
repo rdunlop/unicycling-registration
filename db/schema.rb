@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130720064141) do
+ActiveRecord::Schema.define(:version => 20130721231947) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20130720064141) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "age_group_type_id"
+    t.integer  "competition_id"
   end
 
   add_index "event_categories", ["age_group_type_id"], :name => "index_event_categories_age_group_type_id"

@@ -3,7 +3,7 @@
       <th>Event</th>
       <th>Event-Category</th>
       <th>Sign-Ups</th>
-      <th>Competitions</th>
+      <th>Associated Competition</th>
     </tr>
 
     <% @events.each do |event| %>
@@ -12,11 +12,18 @@
           <th><%= event.name %></th>
           <td><%= ec %></td>
           <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %></td>
-          <td><%= link_to 'View Competitions', event_competitions_path(event) %></td>
+          <td><% if ec.competition.nil? %>
+              <%= link_to "Create", new_event_category_competition_path(ec) %>
+            <% else %>
+              <%= link_to ec.competition, competition_path(ec) %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     <% end %>
   </table>
+
+
   <table>
     <tr>
       <th>Event</th>

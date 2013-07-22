@@ -30,7 +30,7 @@ class CompetitorsController < ApplicationController
     end
   end
 
-  # GET /judges/1/competitors
+  # GET /competitions/1/competitors
   def index
     @competitors = @competition.competitors
     @registrants = @competition.event.signed_up_registrants

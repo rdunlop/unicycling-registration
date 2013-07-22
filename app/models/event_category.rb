@@ -1,9 +1,11 @@
 class EventCategory < ActiveRecord::Base
-  attr_accessible :name, :event_id, :position, :age_group_type_id
+  attr_accessible :name, :event_id, :position, :age_group_type_id, :competition_id
 
   belongs_to :event, :inverse_of => :event_categories
   belongs_to :age_group_type
   has_many :registrant_event_sign_ups, :dependent => :destroy
+
+  belongs_to :competition
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
   validates :position, :uniqueness => {:scope => [:event_id]}

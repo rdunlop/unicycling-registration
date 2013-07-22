@@ -2,7 +2,8 @@ class CompetitionsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_event, :only => [:index, :create, :new]
+  before_filter :load_event, :only => [:index]
+  before_filter :load_event_category, :only => [:create, :new]
   before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :lock]
 
   def load_event
@@ -13,11 +14,15 @@ class CompetitionsController < ApplicationController
     @competitions = @event.competitions
   end
 
+  def load_event_category
+    @event_category = EventCategory.find(params[:event_category_id])
+  end
+
   def load_competition
     @competition = Competition.find(params[:id])
   end
 
-  # /events/#/competitions/new
+  # /event_categories/#/competitions/new
   def new
   end
 
@@ -49,19 +54,26 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
   end
 
-  # POST /competitions
-  # POST /competitions.json
+  # POST /event_categories/#/competitions
+  # POST /event_categories/#/competitions.json
   def create
     @competition = Competition.new(params[:competition])
-    @competition.event = @event
+    @competition.event = @event_category.event
+
+    @event_category.competition = @competition
 
     respond_to do |format|
-      if @competition.save
-        format.html { redirect_to event_competitions_path(@event), notice: 'Competition was successfully created.' }
-        format.json { render json: @competition, status: :created, location: event_competitions_path(@event) }
+      if @event_category.valid? and @competition.save
+        @event_category.save
+        message = "Competition was successfully created."
+
+        message += @competition.create_competitors_from_registrants(@event_category.signed_up_registrants)
+
+        format.html { redirect_to competition_competitors_path(@competition), notice:  message }
+        format.json { render json: @competition, status: :created, location: competition_competitors_path(@event) }
       else
-        load_competitions
-        format.html { render action: "index" }
+        load_event_category
+        format.html { render action: "new" }
         format.json { render json: @competition.errors, status: :unprocessable_entity }
       end
     end

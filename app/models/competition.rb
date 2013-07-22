@@ -2,6 +2,7 @@ class Competition < ActiveRecord::Base
   attr_accessible :name, :event_id, :locked
 
   belongs_to :event, :inverse_of => :competitions
+  has_many :event_categories, :dependent => :nullify
 
   has_many :competitors, :dependent => :destroy, :order => "position"
   has_many :registrants, :through => :competitors
@@ -17,6 +18,26 @@ class Competition < ActiveRecord::Base
 
   def to_s
     event.to_s + " - " + self.name
+  end
+
+  def create_competitors_from_registrants(registrants)
+    num_created = 0
+    registrants.each do |reg|
+      competitor = competitors.build
+      competitor.position = competitors.count + 1
+      competitor.save
+      member = competitor.members.build
+      member.registrant = reg
+      if member.save
+        num_created += 1
+      end
+    end
+    "Created #{num_created} competitors"
+  end
+
+  # all event_categories should have the same age_group_type
+  def age_group_type
+    event_categories.first.age_group_type
   end
 
   def get_judge(user)
