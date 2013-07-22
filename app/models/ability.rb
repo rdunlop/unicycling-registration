@@ -30,7 +30,7 @@ class Ability
         # Freestyle
         can :create, Score
         can [:read, :update], Score do |score|
-          false # score.try(:user) == user
+          score.try(:user) == user
         end
 
         # Distance

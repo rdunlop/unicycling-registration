@@ -61,6 +61,10 @@ describe ScoresController do
   end
 
   describe "POST create" do
+    before(:each) do
+      sign_out @user
+      sign_in @other_user
+    end
     describe "with valid params" do
       it "creates a new Score" do
         expect {

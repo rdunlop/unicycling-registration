@@ -45,7 +45,7 @@ describe JudgesController do
 
       it "redirects to the events show page" do
         post :create, {:judge => valid_attributes, :competition_id => @ec.id}
-        response.should redirect_to(new_competition_judge_path(@ec))
+        response.should redirect_to(competition_judges_path(@ec))
       end
     end
 
@@ -63,7 +63,7 @@ describe JudgesController do
         # Trigger the behavior that occurs when invalid params are submitted
         Judge.any_instance.stub(:save).and_return(false)
         post :create, {:judge => {}, :competition_id => @ec.id}
-        response.should render_template("new")
+        response.should render_template("index")
       end
     end
   end
@@ -146,7 +146,7 @@ describe JudgesController do
   describe "POST create_normal" do
     it "creates a new judge" do
       user = FactoryGirl.create(:user)
-      post :create_normal, {:judge => {:user_id => user.id}}
+      post :create_normal, {:competition_id => @ec.id, :judge => {:user_id => user.id}}
       user.reload
       user.has_role?(:judge).should == true
     end

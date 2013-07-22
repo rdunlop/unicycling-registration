@@ -22,6 +22,9 @@ describe CompetitorsController do
   before(:each) do
     @ev = FactoryGirl.create(:event)
     @ec = FactoryGirl.create(:competition, :event => @ev)
+    @event_category = @ev.event_categories.first
+    @event_category.competition = @ec
+    @ec.save!
     sign_in FactoryGirl.create(:admin_user)
   end
 
@@ -41,7 +44,7 @@ describe CompetitorsController do
     end
     it "assigns all signed-up entries as @registrants" do
       @reg = FactoryGirl.create(:competitor)
-      FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ev.event_categories.first, :signed_up => true, :registrant => @reg)
+      FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @event_category, :signed_up => true, :registrant => @reg)
       get :index, {:competition_id => @ec.id}
       assigns(:registrants).should == [@reg]
     end

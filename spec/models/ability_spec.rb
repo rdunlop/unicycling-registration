@@ -148,7 +148,7 @@ describe "Ability" do
       end
       describe "with a score" do
         before(:each) do
-          @judge = FactoryGirl.create(:judge, :user => @user)
+          @judge = FactoryGirl.create(:judge, :user => @user, :competition => @ec)
           @score = FactoryGirl.create(:score, :judge => @judge)
           @other_score = FactoryGirl.create(:score, :competitor => @score.competitor) # different judge user
         end

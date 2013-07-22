@@ -69,11 +69,10 @@ class JudgesController < ApplicationController
   end
 
   def index
-    @all_judges = User.with_role(:judge)
+    new # load judge_types and all_judges
     @judges = @competition.judges
     @events = Event.all
     @judge ||= Judge.new
-    @judge_types = JudgeType.all
   end
 
   def create_normal
