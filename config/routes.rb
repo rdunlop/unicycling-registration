@@ -6,6 +6,11 @@ Workspace::Application.routes.draw do
       get :multi_lap
       get :list
     end
+    resources :competitions, :only => [:show] do
+      member do
+        get :announcer
+      end
+    end
   end
 
   # ADMIN (for use in Setting up the system)

@@ -1,3 +1,11 @@
 <h1>Printing Forms</h1>
 
 <%= link_to "Race Recording Forms (pdf)", printing_race_recording_multi_lap_path(:format => :pdf) %>
+
+<h2>Artistic Printing Forms</h2>
+
+<ul>
+  <% Competition.all.each do |comp| %>
+    <li><%= link_to "#{comp} Forms", printing_competition_path(comp) %></li>
+  <% end %>
+</ul>
