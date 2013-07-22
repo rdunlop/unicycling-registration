@@ -107,6 +107,7 @@ Workspace::Application.routes.draw do
     resources :event_choices, :only => [:index, :create]
     resources :event_categories, :only => [:index, :create]
     collection do
+      get 'judging'
       get 'freestyle'
       get 'flatland'
       get 'street'

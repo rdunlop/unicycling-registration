@@ -136,6 +136,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% if can? :create, Score %>
             <% set_menu_header("scores","<li>" + link_to( 'Judging', '#') + "<ul>") %>
               <%= menu_header_if_necessary("scores") %>
+              <li><%= link_to 'My Events', judging_events_path %></li>
               <li><%= link_to 'Freestyle', freestyle_events_path %></li>
               <li><%= link_to 'Flatland', flatland_events_path %></li>
               <li><%= link_to 'Street', street_events_path %></li>

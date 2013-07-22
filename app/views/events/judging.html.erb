@@ -1,0 +1,7 @@
+<h1>My Judging Events</h1> 
+
+<ul>
+<% @judges.each do |judge| %>
+    <li><%= link_to "#{judge.competition}", judge_scores_path(judge) %></li>
+<% end %>
+</ul>

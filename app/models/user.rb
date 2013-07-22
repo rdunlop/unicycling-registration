@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   has_many :additional_registrant_accesses, :dependent => :destroy
   has_many :invitations, :through => :registrants, :class_name => "AdditionalRegistrantAccess", :source => :additional_registrant_accesses
 
+  has_many :judges
+
   has_many :payments
 
   def to_s
