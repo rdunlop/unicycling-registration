@@ -15,7 +15,7 @@
           <td><% if ec.competition.nil? %>
               <%= link_to "Create", new_event_category_competition_path(ec) %>
             <% else %>
-              <%= link_to ec.competition, competition_path(ec) %>
+              <%= link_to ec.competition, competition_competitors_path(ec.competition) %>
             <% end %>
           </td>
         </tr>
