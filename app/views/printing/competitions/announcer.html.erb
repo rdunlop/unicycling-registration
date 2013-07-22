@@ -1,0 +1,24 @@
+<h2><%= @competition %> Competition Order</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Age</th>
+      <th>Club</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @competition.competitors.each do |comp| %>
+      <tr>
+        <td><%= comp.position %></td>
+        <td><%= comp %></td>
+        <td><%= comp.external_id %></td>
+        <td><%= comp.age %></td>
+        <td><%= "?" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

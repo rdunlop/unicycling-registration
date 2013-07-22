@@ -1,0 +1,6 @@
+<h1>Competition Forms</h1>
+
+<h2><%= @competition %></h2>
+
+<%= link_to "Announcer Form", announcer_printing_competition_path(@competition) %>
+<%= link_to "(pdf)", announcer_printing_competition_path(@competition, :format => :pdf) %>
