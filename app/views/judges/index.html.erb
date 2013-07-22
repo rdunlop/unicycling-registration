@@ -33,7 +33,7 @@
 
 <h2>Set User as 'Judge'</h2>
 Allows users to see the judging menu
-<%= form_for [@competition, @judge], :url => create_normal_judges_path do |f| %>
+<%= form_for [@competition, @judge], :url => create_normal_competition_judges_path(@competition) do |f| %>
   <%= f.select :user_id, User.all.map { |user| [user, user.id] } %>
   <%= f.submit %>
 <% end %>

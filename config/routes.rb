@@ -213,6 +213,7 @@ Workspace::Application.routes.draw do
 
     resources :judges,      :only => [:index, :new, :create, :destroy] do
       collection do
+        post :create_normal
         post :copy_judges
       end
     end
@@ -221,7 +222,6 @@ Workspace::Application.routes.draw do
 
   resources :judges, :only => [:update] do
     collection do
-      post :create_normal
       get :chiefs
       post :create_chief
     end

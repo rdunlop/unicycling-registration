@@ -1,3 +1,4 @@
+require 'csv'
 class CompetitionsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
@@ -109,6 +110,38 @@ class CompetitionsController < ApplicationController
   end
 
   def freestyle_scores
+  end
+
+  def export_scores
+    if @competition.event.event_class == 'Two Attempt Distance'
+      csv_string = CSV.generate do |csv|
+        csv << ['registrant_external_id', 'distance']
+        @competition.competitors.each do |comp|
+          da = comp.max_successful_distance
+          if da != 0
+            csv << [comp.external_id,
+              da]
+          end
+        end
+      end
+    else
+      csv_string = CSV.generate do |csv|
+        csv << ['judge_id', 'judge_type_id', 'registrant_external_id', 'val1', 'val2', 'val3', 'val4']
+        @competition.scores.each do |score|
+          csv << [score.judge.external_id,
+            score.judge.judge_type.name,
+            score.competitor.export_id, # use a single value even in groups
+            score.val_1,
+            score.val_2,
+            score.val_3,
+            score.val_4]
+        end
+      end
+    end
+    filename = @competition.name.downcase.gsub(/[^0-9a-z]/, "_") + ".csv"
+    send_data(csv_string,
+              :type => 'text/csv; charset=utf-8; header=present',
+              :filename => filename)
   end
 
   def lock

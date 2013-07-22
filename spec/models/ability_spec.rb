@@ -150,11 +150,12 @@ describe "Ability" do
         before(:each) do
           @judge = FactoryGirl.create(:judge, :user => @user)
           @score = FactoryGirl.create(:score, :judge => @judge)
-          @other_score = FactoryGirl.create(:score) # different user
+          @other_score = FactoryGirl.create(:score, :competitor => @score.competitor) # different judge user
         end
 
         it { should be_able_to(:update, @score) }
         it { should_not be_able_to(:update, @other_score) }
+        it { should_not be_able_to(:read, @other_score) }
       end
     end
   end
