@@ -24,7 +24,7 @@ describe CompetitorsController do
     @ec = FactoryGirl.create(:competition, :event => @ev)
     @event_category = @ev.event_categories.first
     @event_category.competition = @ec
-    @ec.save!
+    @event_category.save!
     sign_in FactoryGirl.create(:admin_user)
   end
 
