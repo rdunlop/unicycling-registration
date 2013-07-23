@@ -208,4 +208,32 @@ describe CompetitionsController do
       competition.locked?.should == false
     end
   end
+
+  describe "when importing data" do
+    it "creates a competitor" do
+      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      test_image = fixture_path + '/sample_time_results_bib_101.txt'
+      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
+
+      post :import_time_results, {:id => @competition.id, :file => sample_input}
+
+      TimeResult.count.should == 1
+      tr = TimeResult.first
+      tr.competitor.external_id.should == "101"
+      tr.minutes.should == 1
+      tr.seconds.should == 2
+      tr.thousands.should == 300
+      tr.disqualified.should == false
+    end
+    it "creates a dq competitor" do
+      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      test_image = fixture_path + '/sample_time_results_bib_101_dq.txt'
+      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
+
+      post :import_time_results, {:id => @competition.id, :file => sample_input}
+
+      TimeResult.count.should == 1
+      TimeResult.first.disqualified.should == true
+    end
+  end
 end

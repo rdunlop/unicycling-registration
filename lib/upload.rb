@@ -9,8 +9,10 @@ class Upload
     end
 
     results = []
-    File.open(upload_file, 'r:ISO-8859-1') do |f|
+    #File.open(upload_file, 'r:ISO-8859-1') do |f|
+    File.open(upload_file) do |f|
       f.each do |line|
+        puts "ROW: #{line}"
         row = CSV.parse_line (line)
         results << row
       end

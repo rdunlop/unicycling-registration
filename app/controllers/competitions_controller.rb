@@ -200,7 +200,7 @@ class CompetitionsController < ApplicationController
       tr.minutes = row[1]
       tr.seconds = row[2]
       tr.thousands = row[3]
-      tr.disqualified = row[4] == "DQ"
+      tr.disqualified = (row[4] == "DQ")
       tr.competitor = comp
       if tr.save
         n += 1
@@ -211,7 +211,7 @@ class CompetitionsController < ApplicationController
       end
     end
     respond_to do |format|
-      format.html { redirect_to @competition, notice: "Added #{n} rows to #{@competition}" }
+      format.html { redirect_to competition_time_results_path(@competition), notice: "Added #{n} rows to #{@competition}" }
     end
   end
 end

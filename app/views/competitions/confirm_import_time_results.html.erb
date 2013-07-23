@@ -23,8 +23,8 @@
       <td><%= row[1] %></td>
       <td><%= row[2] %></td>
       <td><%= row[3] %></td>
+      <td><%= row[4] %></td>
       <td><%= Registrant.find_by_bib_number(row[0]) %></td>
-      <td></td>
       <% if @competition.find_competitor_with_bib_number(row[0]) %>
         <td class="competitor_exists">Yes</td>
       <% else %>
