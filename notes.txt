@@ -1,3 +1,19 @@
+- Allow "Create Competition" to take a Gender filter (For use in ARTISTIC competition creation)
+ - Fail the import if any rows are not-parsable?
+ - Fail the import if any of the resulting data is invalid?
+- IMPORT the data into a temporary table (by user_id?), and then do analysis from there, before committing it to real data.
+
+- Why can't I import the 10kStandard.csv (file format issues?)
+- Link to the Time Results (view) page (/time_results/index?)
+- Link To the Time Results Import Page
+- Link to the "Set Places" page
+
+
+Connie Wants:
+- Registration system which tracks when someone has picked up their registration package?
+- Mark people who have not paid as special (perhaps by adjusting their name?)
+- Clarify the fact that the Competition people are RANDOMIZED
+
 July Questions:
 - Do I need to have event_classes: Track, Standard Skill? (I'm currently not setting the Standard Skill one, and I am using "Two Attempt distance for the other one").
 

@@ -1,10 +1,6 @@
-<h1>Listing Time Results for <%= @event_category.event %> - <%= @event_category %></h1>
+<h1>Listing Time Results for <%= @event %></h1>
 
-<div class="non_printable">
-  <%= render 'form' %>
-</div>
-
-<%= link_to "Set Racing Places", set_places_event_category_time_results_path(@event_category), method: :put %>
+<%= link_to "Set Racing Places", set_places_event_time_results_path(@event), method: :put %>
 
 <table class="sortable">
   <thead>
@@ -29,8 +25,8 @@
   <tbody>
     <% @time_results.each do |time_result| %>
       <tr>
-        <td><%= time_result.registrant_id %></td>
-        <td><%= time_result.registrant %></td>
+        <td><%= time_result.bib_number %></td>
+        <td><%= time_result.competitor %></td>
         <td><%= time_result.minutes %></td>
         <td><%= time_result.seconds %></td>
         <td><%= time_result.thousands %></td>

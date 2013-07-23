@@ -1,4 +1,4 @@
-<%= form_for(@time_result.new_record? ? [@time_result.event_category, @time_result] : [@time_result]) do |f| %>
+<%= form_for(@time_result.new_record? ? [@time_result.competition, @time_result] : [@time_result]) do |f| %>
   <% if @time_result.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@time_result.errors.count, "error") %> prohibited this time_result from being saved:</h2>
