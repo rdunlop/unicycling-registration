@@ -12,7 +12,12 @@
           <th><%= event.name %></th>
           <td><%= ec %></td>
           <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %></td>
-          <td><%= link_to "Create New", new_event_category_competition_path(ec) %></td>
+          <td><% if ec.competition.nil? %>
+              <%= link_to "Create", new_event_category_competition_path(ec) %>
+            <% else %>
+              <%= link_to ec.competition, competition_competitors_path(ec.competition) %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     <% end %>
