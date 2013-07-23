@@ -28,32 +28,18 @@
     <tr>
       <th>Event</th>
       <th>Competition</th>
-      <th>Scores</th>
       <th>Competitor List</th>
-      <th>Am I Judging?</th>
       <th>Locked?</th>
+      <th>Enter Results</th>
       <th>All Results</th>
       <th>Judges</th>
     </tr>
     <% @events.each do |event| %>
       <% event.competitions.each do |ec| %>
-        <% if ec.has_judge(current_user)
-            @i_am_judge = true
-            @judge = ec.get_judge(current_user)
-            %><tr><% 
-        else 
-            @i_am_judge = false
-            @judge = nil
-            %><tr class="no_judge"><%
-        end %>
+        <tr>
           <th><%= event.name %></th>
           <td><%= ec %></td>
-          <td><% if @i_am_judge %>
-              <%= link_to 'Enter Results', judge_scores_path(@judge) %>
-            <% end %>
-          </td>
           <td><%= link_to 'Competitors', competition_competitors_path(ec) %></td>
-          <td><%= @i_am_judge ? "Yes" : "No" %></td>
           <td><%= ec.locked? %>
           <% if can? :lock, event %>
             <% if ec.locked? %>
@@ -63,6 +49,7 @@
             <% end %>
           <% end %>
           </td>
+          <td><%= link_to 'Enter Results', get_import_time_results_competition_path(ec) %></td>
           <td><%= link_to 'View', freestyle_scores_competition_path(ec) %></td>
           <td><%= link_to 'View/Add', competition_judges_path(ec) %></td>
         </tr>

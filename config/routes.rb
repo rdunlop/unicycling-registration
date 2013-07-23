@@ -228,6 +228,13 @@ Workspace::Application.routes.draw do
         post :copy_judges
       end
     end
+    resources :time_results, :only => [:index, :create] do
+      collection do
+        put :set_places
+        get :results
+        get :final_candidates
+      end
+    end
   end
   resources :time_results, :except => [:index, :new, :show, :create]
 
