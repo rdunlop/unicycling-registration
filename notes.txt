@@ -1,3 +1,4 @@
+- Add ability to add competitors from multiple event_categories to a single competition (or allow adding them later, one at a time)
 - Allow "Create Competition" to take a Gender filter (For use in ARTISTIC competition creation)
 
 - Move the time_trials Results to be shown by Competition, and the "set_places"
