@@ -1,11 +1,6 @@
 class JudgesController < ApplicationController
+  load_and_authorize_resource :competition, :only => [:index, :new, :create, :destroy, :copy_judges, :create_normal]
   load_and_authorize_resource
-
-  before_filter :load_competition, :only => [:index, :new, :create, :destroy, :copy_judges, :create_normal]
-
-  def load_competition
-    @competition = Competition.find(params[:competition_id])
-  end
 
   def new # are there tests for this?
     @judge_types = JudgeType.where(:event_class => @competition.event.event_class)

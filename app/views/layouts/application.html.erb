@@ -133,22 +133,21 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
             <% end %>
           <%= menu_footer_if_necessary("manage") %>
 
-          <% if can? :create, Score %>
-            <% set_menu_header("scores","<li>" + link_to( 'Judging', '#') + "<ul>") %>
-              <% if can? :judging, Event %>
-                <%= menu_header_if_necessary("scores") %>
-                <li><%= link_to 'My Events', judging_events_path %></li>
-              <% end %>
-              <% if can? :freestyle, Event %>
-                <li><%= link_to 'Freestyle', freestyle_events_path %></li>
-                <li><%= link_to 'Flatland', flatland_events_path %></li>
-                <li><%= link_to 'Street', street_events_path %></li>
-                <li><%= link_to 'Track', track_events_path %></li>
-                <li><%= link_to 'Distance', distance_events_path %></li>
-                <li><%= link_to 'Printing', printing_race_recording_list_path %></li>
-              <% end %>
+          <% set_menu_header("scores","<li>" + link_to( 'Judging', '#') + "<ul>") %>
+            <% if can? :judging, Event %>
+              <%= menu_header_if_necessary("scores") %>
+              <li><%= link_to 'My Events', judging_events_path %></li>
+            <% end %>
+            <% if can? :freestyle, Event %>
+              <%= menu_header_if_necessary("scores") %>
+              <li><%= link_to 'Freestyle', freestyle_events_path %></li>
+              <li><%= link_to 'Flatland', flatland_events_path %></li>
+              <li><%= link_to 'Street', street_events_path %></li>
+              <li><%= link_to 'Track', track_events_path %></li>
+              <li><%= link_to 'Distance', distance_events_path %></li>
+              <li><%= link_to 'Printing', printing_race_recording_list_path %></li>
+            <% end %>
           <%= menu_footer_if_necessary("scores") %>
-          <% end %>
 
           <li>
           <%= link_to 'My Data', '#' %>

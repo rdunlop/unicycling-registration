@@ -133,22 +133,22 @@ describe "Ability" do
 
     describe "with a Competition" do
       before(:each) do
-        @ec = FactoryGirl.create(:competition)
+        @competition = FactoryGirl.create(:competition)
       end
-      it { should be_able_to(:create_scores, @ec) }
+      it { should be_able_to(:create_scores, @competition) }
       it { should be_able_to(:read, Competitor) }
 
       describe "when the Competition is locked" do
         before(:each) do
-          @ec.locked = true
-          @ec.save!
+          @competition.locked = true
+          @competition.save!
         end
 
-        it { should_not be_able_to(:create_scores, @ec) }
+        it { should_not be_able_to(:create_scores, @competition) }
       end
       describe "with a score" do
         before(:each) do
-          @judge = FactoryGirl.create(:judge, :user => @user, :competition => @ec)
+          @judge = FactoryGirl.create(:judge, :user => @user, :competition => @competition)
           @score = FactoryGirl.create(:score, :judge => @judge)
           @other_score = FactoryGirl.create(:score, :competitor => @score.competitor) # different judge user
         end
@@ -162,17 +162,32 @@ describe "Ability" do
 
   describe "as a chief_judge" do
     before(:each) do
-      @ec = FactoryGirl.create(:competition)
+      @competition = FactoryGirl.create(:competition)
+      @event_category = @competition.event.event_categories.first
+      @event_category.competition = @competition
+      @event_category.save!
       @user = FactoryGirl.create(:user)
-      @user.add_role :chief_judge, @ec
+      @user.add_role :chief_judge, @competition
       @user.add_role :judge
     end
     subject { @ability = Ability.new(@user) }
 
-    it { should be_able_to(:distance_attempts, @ec) }
-    it { should be_able_to(:freestyle_scores, @ec) }
-    it { should be_able_to(:administer, @ec) }
+    it { should be_able_to(:freestyle, Event) }
+    it { should be_able_to(:distance_attempts, @competition) }
+    it { should be_able_to(:freestyle_scores, @competition) }
+    it { should be_able_to(:manage, @competition) }
     it { should be_able_to(:manage, DistanceAttempt) }
+
+    it { should be_able_to(:sign_ups, @event_category) }
+    it { should be_able_to(:create, Judge) }
+
+    describe "with an associated judge to my event" do
+      before(:each) do
+        @judge = FactoryGirl.create(:judge, :competition => @competition)
+      end
+      it { should be_able_to(:destroy, @judge) }
+      it { should be_able_to(:create, Judge) }
+    end
   end
 
 end
