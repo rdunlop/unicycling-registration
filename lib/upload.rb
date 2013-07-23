@@ -1,6 +1,23 @@
 require 'csv'
 class Upload
 
+  def extract_csv(file)
+    if file.respond_to?(:tempfile)
+      upload_file = file.tempfile
+    else
+      upload_file = file
+    end
+
+    results = []
+    File.open(upload_file, 'r:ISO-8859-1') do |f|
+      f.each do |line|
+        row = CSV.parse_line (line)
+        results << row
+      end
+    end
+    results
+  end
+
   # CSV File exported from UCP
   def process_csv_upload(params)
     n=0

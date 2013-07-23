@@ -17,8 +17,9 @@ class Competitor < ActiveRecord::Base
 
     validates :competition_id, :presence => true
     validates_associated :members
-    validates :position, :presence => true,
-                         :numericality => {:only_integer => true, :greater_than => 0}
+    # not all competitor types require a position
+    #validates :position, :presence => true,
+                         #:numericality => {:only_integer => true, :greater_than => 0}
 
     def to_s
         name
@@ -26,6 +27,10 @@ class Competitor < ActiveRecord::Base
 
     def event
       competition.event
+    end
+
+    def member_has_bib_number?(bib_number)
+      return members.includes(:registrant).where({:registrants => {:bib_number => bib_number}}).count > 0
     end
 
     def name

@@ -1,4 +1,4 @@
-<h1>Time Results for <%= @event_category.event %> - <%= @event_category %></h1>
+<h1>Time Results for <%= @event %></h1>
 
 <table>
   <thead>
@@ -16,9 +16,9 @@
     <% @time_results.each do |time_result| %>
       <tr>
         <td><%= time_result.full_time %></td>
-        <td><%= time_result.registrant.external_id %></td>
-        <td><%= time_result.registrant %></td>
-        <td><%= time_result.registrant.gender %></td>
+        <td><%= time_result.competitor.external_id %></td>
+        <td><%= time_result.competitor %></td>
+        <td><%= time_result.competitor.gender %></td>
         <td><%= time_result.age_group_entry_description %></td>
         <td><%= time_result.place %></td>
       </tr>

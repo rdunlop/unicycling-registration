@@ -145,6 +145,12 @@ describe Competitor do
 
             @comp.gender.should == "(mixed)"
         end
+
+        it "should respond to member_has_bib_number?" do
+          @comp.member_has_bib_number?(@reg1.bib_number).should == true
+          @comp.member_has_bib_number?(@reg2.bib_number).should == true
+          @comp.member_has_bib_number?(-1).should == false
+        end
     end
 
     describe "when a join pair exists" do

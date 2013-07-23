@@ -1,11 +1,12 @@
 require 'csv'
+require 'upload'
 class CompetitionsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
   before_filter :load_event, :only => [:index]
   before_filter :load_event_category, :only => [:create, :new]
-  before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :lock]
+  before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :lock, :get_import_time_results_competition, :confirm_import_time_results_competition, :import_time_results_competition]
 
   def load_event
     @event = Event.find(params[:event_id])
@@ -157,6 +158,52 @@ class CompetitionsController < ApplicationController
       else
         format.html { redirect_to @competition, notice: 'Unable to update lock status' }
       end
+    end
+  end
+
+  # GET /competitions/#/get_import_time_results
+  def get_import_time_results
+  end
+
+  # GET /competitions/#/confirm_import_time_results
+  def confirm_import_time_results
+    upload = Upload.new
+    @data = upload.extract_csv(params[:file])
+  end
+
+  # POST /competitions/#/import_time_results
+  def import_time_results
+    upload = Upload.new
+    @data = upload.extract_csv(params[:file])
+    n = 0
+    @data.each do |row|
+      tr = TimeResult.new
+      comp = @competition.find_competitor_with_bib_number(row[0])
+      if comp.nil?
+        comp = @competition.competitors.build
+        member = comp.members.build
+        member.registrant = Registrant.find_by_bib_number(row[0])
+        if !comp.save
+          comp.errors.each do |err|
+            puts "error creating competitor because: #{err}"
+          end
+        end
+      end
+      tr.minutes = row[1]
+      tr.seconds = row[2]
+      tr.thousands = row[3]
+      tr.disqualified = row[4] == "DQ"
+      tr.competitor = comp
+      if tr.save
+        n += 1
+      else
+        tr.errors.each do |err|
+          puts "ERRO: #{err}"
+        end
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to @competition, notice: "Added #{n} rows to #{@competition}" }
     end
   end
 end

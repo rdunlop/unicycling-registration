@@ -1,0 +1,41 @@
+<%= @competition %>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="4">INPUT DATA</th>
+      <th colspan="3">Lookup Data</th>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <th>Minutes</th>
+      <th>Seconds</th>
+      <th>Thousands</th>
+      <th>DQ</th>
+      <th>Name</th>
+      <th>Competitor Exists?</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @data.each do |row| %>
+    <tr>
+      <td><%= row[0] %></td>
+      <td><%= row[1] %></td>
+      <td><%= row[2] %></td>
+      <td><%= row[3] %></td>
+      <td><%= Registrant.find_by_bib_number(row[0]) %></td>
+      <td></td>
+      <% if @competition.find_competitor_with_bib_number(row[0]) %>
+        <td class="competitor_exists">Yes</td>
+      <% else %>
+        <td class="competitor_not_exists">No</td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= form_tag(import_time_results_competition_path(@competition), {:method => :post, :multipart=>true}) do %>
+  <%= file_field_tag "file" %>
+  <%= submit_tag "Add these Results" %>
+<% end %>

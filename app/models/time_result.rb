@@ -55,7 +55,8 @@ class TimeResult < ActiveRecord::Base
 
 
   def age_group_entry_description
-    ag_entry_description = event_category.age_group_type.try(:age_group_entry_description, registrant.age, registrant.gender, registrant.default_wheel_size.id)
+    registrant = competitor.members.first.registrant
+    ag_entry_description = competitor.competition.age_group_type.try(:age_group_entry_description, registrant.age, registrant.gender, registrant.default_wheel_size.id)
     if ag_entry_description.nil?
       "No Age Group for #{registrant.age}-#{registrant.gender}"
     else

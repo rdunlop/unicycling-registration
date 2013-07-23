@@ -4,7 +4,8 @@
 <table class="sortable">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Last Name</th>
+      <th>First Name</th>
       <th>Id</th>
       <th>Age Group</th>
       <th>Gender</th>
@@ -17,7 +18,8 @@
     <% @registrant_event_sign_ups.each do |resu| %>
       <% next if resu.registrant.nil? %>
       <tr>
-        <td><%= resu.registrant %></td>
+        <td><%= resu.registrant.last_name %></td>
+        <td><%= resu.registrant.first_name %></td>
         <td><%= resu.registrant.external_id %></td>
         <td>
           <% unless @age_group_type.nil? %>
