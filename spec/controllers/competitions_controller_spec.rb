@@ -118,6 +118,12 @@ describe CompetitionsController do
           post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
         }.to change(Competitor, :count).by(1)
       end
+      it "does create the competitor if the gender_filter is set to the gender" do
+        expect {
+          post :create, {:event_category_id => @event_category.id, :competition => valid_attributes, :gender_filter => "Male"}
+        }.to change(Competitor, :count).by(1)
+      end
+
       it "doesn't create the competitor if the gender_filter is set to the other gender" do
         expect {
           post :create, {:event_category_id => @event_category.id, :competition => valid_attributes, :gender_filter => "Female"}
