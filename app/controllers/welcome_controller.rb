@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  before_filter :authenticate_user!, :only => [:index]
   skip_authorization_check
 
   def help
@@ -21,6 +22,21 @@ class WelcomeController < ApplicationController
     else
       @user = current_user
       render "help"
+    end
+  end
+
+  # chooses the page to display
+  def index
+    respond_to do |format|
+      if signed_in?
+        if current_user.has_role? :judge
+          format.html { redirect_to judging_events_path }
+        else
+          format.html { redirect_to registrants_path }
+        end
+      else
+        format.html { redirect_to registrants_path }
+      end
     end
   end
 end

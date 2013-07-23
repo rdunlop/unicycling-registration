@@ -1,4 +1,6 @@
 - Allow "Create Competition" to take a Gender filter (For use in ARTISTIC competition creation)
+
+- Move the time_trials Results to be shown by Competition, and the "set_places"
  - Fail the import if any rows are not-parsable?
  - Fail the import if any of the resulting data is invalid?
 - IMPORT the data into a temporary table (by user_id?), and then do analysis from there, before committing it to real data.
