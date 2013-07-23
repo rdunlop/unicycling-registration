@@ -64,12 +64,20 @@ class CompetitionsController < ApplicationController
 
     @event_category.competition = @competition
 
+    @gender_filter = params[:gender_filter]
+    registrants = @event_category.signed_up_registrants
+    unless @gender_filter.nil? or @gender_filter == "Both"
+      registrants = registrants.select {|reg| reg.gender == @gender_filter}
+    end
+
+    registrants = registrants.shuffle
+
     respond_to do |format|
       if @event_category.valid? and @competition.save
         @event_category.save
         message = "Competition was successfully created."
 
-        message += @competition.create_competitors_from_registrants(@event_category.signed_up_registrants.shuffle)
+        message += @competition.create_competitors_from_registrants(registrants)
 
         format.html { redirect_to competition_competitors_path(@competition), notice:  message }
         format.json { render json: @competition, status: :created, location: competition_competitors_path(@event) }

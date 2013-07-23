@@ -109,7 +109,7 @@ describe CompetitionsController do
 
     describe "When the event_category has a registrant signed up" do
       before(:each) do
-        @reg = FactoryGirl.create(:competitor)
+        @reg = FactoryGirl.create(:competitor, :gender => "Male")
         FactoryGirl.create(:registrant_event_sign_up, :event => @event, :event_category => @event_category, :signed_up => true, :registrant => @reg)
       end
 
@@ -117,6 +117,11 @@ describe CompetitionsController do
         expect {
           post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
         }.to change(Competitor, :count).by(1)
+      end
+      it "doesn't create the competitor if the gender_filter is set to the other gender" do
+        expect {
+          post :create, {:event_category_id => @event_category.id, :competition => valid_attributes, :gender_filter => "Female"}
+        }.to change(Competitor, :count).by(0)
       end
     end
   end

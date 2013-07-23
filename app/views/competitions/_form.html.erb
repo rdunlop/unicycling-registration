@@ -15,6 +15,10 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= label_tag :gender_filter %>
+    <%= select_tag :gender_filter, options_for_select(["Both", "Male-Only", "Female-Only"], "Both") %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

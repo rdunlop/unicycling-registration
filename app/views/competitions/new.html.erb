@@ -1,13 +1,14 @@
 <h1>New Competition</h1>
 
-Event Category: <%= @event_category %>
+<h2>Event Category: <%= @event_category %></h2>
 
-<h2>Signed Up Competitors</h2>
+<h3>Signed Up Competitors</h3>
 (These will be added to the Compettion)
 <% @registrants = @event_category.signed_up_registrants %>
 <%= render :partial => "/event_categories/sign_ups" %> 
 
 <br />
-<b>NOTE: This will create the competition AND populate it with competitors from the sign-up list </b>
+<b>NOTE:</b> This will create the competition AND populate it with competitors from the sign-up list <br />
+It will also <b>RANDOMIZE</b> the competitor order<br /><br />
 
 <%= render 'form' %>

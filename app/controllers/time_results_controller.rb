@@ -4,6 +4,8 @@ class TimeResultsController < ApplicationController
   load_and_authorize_resource :time_result, :except => [:edit, :destroy, :update]
   load_and_authorize_resource :time_result, :only => [:edit, :destroy, :update]
 
+  # XXX look into https://github.com/railscasts/396-importing-csv-and-excel/blob/master/store-with-validations/app/models/product_import.rb ??
+  
   # GET event/1/time_results
   # GET event/1/time_results.json
   def index
