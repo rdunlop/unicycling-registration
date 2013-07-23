@@ -20,10 +20,7 @@
         <% event_category = nil
            competition = nil
         %>
-        <% if @registrants.include?(registrant)
-            event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category)
-           end
-        %>
+        <% event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category) %>
         <% if @competitors.include?(registrant.competitors.where({:competition_id => @competition.id}).try(:first))
                 competitor = registrant.competitors.where({:competition_id => @competition.id}).try(:first)
                 competition = competitor.try(:competition)
