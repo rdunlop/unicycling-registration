@@ -25,7 +25,7 @@
       <tr>
         <td>
           <div class="ui-widget">
-            <%= f.select :registrant_id, Registrant.where({:competitor => true}).all.map {|reg| ["#{reg.external_id}: #{reg.name}", reg.id]}, :include_blank => true %>
+            <%= f.select :competitor_id, @time_result.competition.competitors.all.map { |comp| ["#{comp}", comp.id] }, :include_blank => true %>
           </div>
         </td>
         <td>

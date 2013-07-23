@@ -86,10 +86,10 @@ class TimeResult < ActiveRecord::Base
 
   private
   def place_key
-    "/competition/#{competition.id}/time_results/#{id}-#{updated_at}/place"
+    "/competition/#{competition.id}-#{competition.updated_at}/time_results/#{id}-#{updated_at}/place"
   end
 
   def overall_place_key
-    "/competition/#{competition.id}/time_results/#{id}-#{updated_at}/overall_place"
+    "/competition/#{competition.id}-#{competition.updated_at}/time_results/#{id}-#{updated_at}/overall_place"
   end
 end

@@ -1,4 +1,4 @@
-<h1>Final Heat Candidate List for <%= @event_category.event %> - <%= @event_category %></h1>
+<h1>Final Heat Candidate List for <%= @competition %></h1>
 
 <table>
   <thead>
@@ -18,9 +18,9 @@
       <tr>
         <td><%= index + 1 %></td>
         <td><%= time_result.full_time %></td>
-        <td><%= time_result.registrant.external_id %></td>
-        <td><%= time_result.registrant %></td>
-        <td><%= time_result.registrant.gender %></td>
+        <td><%= time_result.competitor.external_id %></td>
+        <td><%= time_result.competitor %></td>
+        <td><%= time_result.competitor.gender %></td>
         <td><%= time_result.age_group_entry_description %></td>
         <td><%= time_result.place %></td>
       </tr>
@@ -29,9 +29,9 @@
       <tr>
         <td><%= index + 1 %></td>
         <td><%= time_result.full_time %></td>
-        <td><%= time_result.registrant.external_id %></td>
-        <td><%= time_result.registrant %></td>
-        <td><%= time_result.registrant.gender %></td>
+        <td><%= time_result.competitor.external_id %></td>
+        <td><%= time_result.competitor %></td>
+        <td><%= time_result.competitor.gender %></td>
         <td><%= time_result.age_group_entry_description %></td>
         <td><%= time_result.place %></td>
       </tr>

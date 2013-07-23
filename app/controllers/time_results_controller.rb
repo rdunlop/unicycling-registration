@@ -20,7 +20,7 @@ class TimeResultsController < ApplicationController
   end
 
   def results
-    @time_results = @event.time_results.fastest_first
+    @time_results = @competition.time_results.fastest_first
     respond_to do |format|
       format.html # results.html.erb
       format.pdf { render :pdf => "results",
@@ -33,8 +33,8 @@ class TimeResultsController < ApplicationController
   end
 
   def final_candidates
-    @male_time_results = @time_results.fastest_first
-    @female_time_results = @time_results.fastest_first
+    @male_time_results = @competition.time_results.fastest_first
+    @female_time_results = @competition.time_results.fastest_first
     respond_to do |format|
       format.html # final_candidates.html.erb
     end
@@ -76,7 +76,7 @@ class TimeResultsController < ApplicationController
   def update
     respond_to do |format|
       if @time_result.update_attributes(params[:time_result])
-        format.html { redirect_to(event_time_results_path(@time_result.event), :notice => 'Time result was successfully updated.') }
+        format.html { redirect_to(competition_time_results_path(@time_result.competition), :notice => 'Time result was successfully updated.') }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
