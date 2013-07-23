@@ -1,12 +1,11 @@
 <h2><%= @competition %> Competition Order</h2>
 
-<table>
+<table class="full_grid">
   <thead>
     <tr>
       <th>Order</th>
-      <th>Name</th>
       <th>ID</th>
-      <th>Age</th>
+      <th>Name</th>
       <th>Club</th>
     </tr>
   </thead>
@@ -14,10 +13,9 @@
     <% @competition.competitors.each do |comp| %>
       <tr>
         <td><%= comp.position %></td>
-        <td><%= comp %></td>
         <td><%= comp.external_id %></td>
-        <td><%= comp.age %></td>
-        <td><%= "?" %></td>
+        <td><%= comp %></td>
+        <td><%= comp.club %></td>
       </tr>
     <% end %>
   </tbody>

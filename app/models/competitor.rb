@@ -106,6 +106,14 @@ class Competitor < ActiveRecord::Base
         end
     end
 
+    def club
+      if registrants.empty?
+        "(No registrants)"
+      else
+        club = registrants.first.club
+      end
+    end
+
     # for distance_attempt logic, there are certain 'states' that a competitor can get into
     def double_fault?
         if distance_attempts.count > 1
