@@ -11,7 +11,7 @@
         <% @registrants.each do |reg| %>
           <% next if reg.nil? %>
             <tr>
-                <td><%= reg.id %></td>
+                <td><%= reg.bib_number %></td>
                 <td><%= reg %></td>
                 <td><%= reg.age %></td>
                 <td><%= reg.gender %></td>
