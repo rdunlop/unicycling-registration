@@ -7,8 +7,10 @@ Workspace::Application.routes.draw do
       get :list
     end
     resources :competitions, :only => [:show] do
-      get :announcer
-      get :heat_recording
+      member do
+        get :announcer
+        get :heat_recording
+      end
     end
   end
 

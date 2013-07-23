@@ -5,7 +5,7 @@ class Printing::CompetitionsController < ApplicationController
   before_filter :load_competition
 
   def load_competition
-    @competition = Competition.find(params[:competition_id])
+    @competition = Competition.find(params[:id])
   end
 
   def show
