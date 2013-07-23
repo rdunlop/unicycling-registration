@@ -4,44 +4,37 @@
   <thead>
     <tr>
       <th class="competitor_member">Order</th>
-      <th class="sign_up">Event Category</th>
       <th class="sign_up">ID</th>
       <th class="sign_up">Name</th>
       <th class="sign_up">Age</th>
       <th class="sign_up">Gender</th>
       <th class="sign_up">Age Group</th>
+      <th class="sign_up">Original Event Selection</th>
       <th class="competitor_member">Competition</th>
       <th class="competitor_member"></th>
     </tr>
   </thead>
   <tbody>
-    <% @all_registrants.each do |registrant| %>
-      <% next if registrant.nil? %>
+    <% @competitors.each do |competitor| %>
         <% event_category = nil
-           competition = nil
+           registrant = competitor.members.first.registrant
         %>
         <% event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category) %>
-        <% if @competitors.include?(registrant.competitors.where({:competition_id => @competition.id}).try(:first))
-                competitor = registrant.competitors.where({:competition_id => @competition.id}).try(:first)
-                competition = competitor.try(:competition)
-           end
-        %>
       <tr>
-        <td><%= competitor.try(:position) %></td>
-        <td><%= event_category %></td>
-        <td><%= registrant.external_id %></td>
-        <td><%= registrant.name %></td>
+        <td><%= competitor.position %></td>
+        <td><%= competitor.external_id %></td>
+        <td><%= competitor.detailed_name %></td>
         <td><%= registrant.age %></td>
         <td><%= registrant.gender %></td>
         <td><% unless @competition.age_group_type.nil? %>
             <%= @competition.age_group_type.age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) %>
           <% end %>
         </td>
-        <td><%= competition %></td>
-        <td><% unless competition.nil? %>
+        <td><%= event_category %></td>
+        <td><%= @competition %></td>
+        <td>
             <%= link_to 'Edit', edit_competitor_path(competitor) %>
             <%= link_to 'Destroy', competitor, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
         </td>
       </tr>
     <% end %>

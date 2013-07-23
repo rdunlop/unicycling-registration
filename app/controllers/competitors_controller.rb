@@ -33,8 +33,6 @@ class CompetitorsController < ApplicationController
   # GET /competitions/1/competitors
   def index
     @competitors = @competition.competitors
-    @all_registrants = @competition.competitors.map{|comp| comp.members.map{|mem| mem.registrant}}.flatten
-    @all_registrants = @all_registrants.uniq
   end
 
   # GET /competitors/1/edit

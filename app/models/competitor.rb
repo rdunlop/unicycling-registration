@@ -45,8 +45,17 @@ class Competitor < ActiveRecord::Base
         end
     end
 
+    def detailed_name
+      registrants_names = registrants.map(&:name).join(" - ")
+      name = registrants_names
+      unless custom_name.nil? or custom_name.empty?
+        name = custom_name + "(#{registrants_names})"
+      end
+      name
+    end
+
     def external_id
-        unless custom_external_id.nil?
+        unless custom_external_id.nil? or custom_external_id == 0
             custom_external_id.to_s
         else
             if registrants.empty?
