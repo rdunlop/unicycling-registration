@@ -12,7 +12,8 @@ class RaceCalculator
         update_places(age.to_s)
       end
     end
-    update_overall_places
+    update_overall_places("Male")
+    update_overall_places("Female")
   end
 
 
@@ -52,12 +53,13 @@ class RaceCalculator
     end
   end
 
-  def update_overall_places
+  def update_overall_places(gender)
     count = 1
     previous_time = 0
     tied_place = 0
 
     @competition.time_results.order("minutes, seconds, thousands").each do |tr|
+      next if tr.competitor.gender != gender
 
       current_time = tr.full_time_in_thousands
 
