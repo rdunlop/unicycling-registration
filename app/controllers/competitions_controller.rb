@@ -79,7 +79,11 @@ class CompetitionsController < ApplicationController
 
         message += @competition.create_competitors_from_registrants(registrants)
 
-        format.html { redirect_to competition_competitors_path(@competition), notice:  message }
+        if @event_category.event_class == "Distance"
+          format.html { redirect_to distance_events_path, notice:  message }
+        else
+          format.html { redirect_to competition_competitors_path(@competition), notice:  message }
+        end
         format.json { render json: @competition, status: :created, location: competition_competitors_path(@event) }
       else
         load_event_category
