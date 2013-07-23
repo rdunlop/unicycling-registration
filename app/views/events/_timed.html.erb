@@ -31,8 +31,7 @@
       <th>Competitor List</th>
       <th>Locked?</th>
       <th>Enter Results</th>
-      <th>All Results</th>
-      <th>Judges</th>
+      <th>Results</th>
     </tr>
     <% @events.each do |event| %>
       <% event.competitions.each do |ec| %>
@@ -50,8 +49,7 @@
           <% end %>
           </td>
           <td><%= link_to 'Enter Results', get_import_time_results_competition_path(ec) %></td>
-          <td><%= link_to 'View', freestyle_scores_competition_path(ec) %></td>
-          <td><%= link_to 'View/Add', competition_judges_path(ec) %></td>
+          <td><%= link_to 'View', competition_time_results_path(ec) %></td>
         </tr>
       <% end %>
     <% end %>

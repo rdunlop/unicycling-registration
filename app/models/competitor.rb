@@ -106,6 +106,19 @@ class Competitor < ActiveRecord::Base
         end
     end
 
+    def wheel_size
+      nil
+    end
+
+    def age_group_description
+      agt = competition.age_group_type
+      if agt.nil?
+        "(none)"
+      else
+        agt.age_group_entry_description(age, gender, wheel_size)
+      end
+    end
+
     def club
       if registrants.empty?
         "(No registrants)"

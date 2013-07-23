@@ -74,8 +74,22 @@ class TimeResult < ActiveRecord::Base
     Rails.cache.fetch(place_key) || "Unknown"
   end
 
+  def overall_place=(place)
+    Rails.cache.write(overall_place_key, place)
+  end
+
+  def overall_place
+    return "DQ" if disqualified
+
+    Rails.cache.fetch(overall_place_key) || "Unknown"
+  end
+
   private
   def place_key
     "/competition/#{competition.id}/time_results/#{id}-#{updated_at}/place"
+  end
+
+  def overall_place_key
+    "/competition/#{competition.id}/time_results/#{id}-#{updated_at}/overall_place"
   end
 end

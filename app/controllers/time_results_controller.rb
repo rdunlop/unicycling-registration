@@ -1,6 +1,6 @@
 class TimeResultsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :event, :except => [:edit, :destroy, :update]
+  load_and_authorize_resource :competition, :except => [:edit, :destroy, :update]
   load_and_authorize_resource :time_result, :except => [:edit, :destroy, :update]
   load_and_authorize_resource :time_result, :only => [:edit, :destroy, :update]
 
@@ -9,7 +9,7 @@ class TimeResultsController < ApplicationController
   # GET event/1/time_results
   # GET event/1/time_results.json
   def index
-    @time_results = @event.time_results # XXX
+    @time_results = @competition.time_results # XXX
     @time_result = TimeResult.new # @event.time_results.build
 
     respond_to do |format|
@@ -41,11 +41,13 @@ class TimeResultsController < ApplicationController
   end
 
   def set_places
-    @event.competitions.each do |competition|
-      @calc = RaceCalculator.new(competition)
-      @calc.update_all_places
-    end
-    redirect_to event_time_results_path(@event), :notice => "All Places updated"
+    @calc = RaceCalculator.new(@competition)
+    @calc.update_all_places
+    #@event.competitions.each do |competition|
+      #@calc = RaceCalculator.new(competition)
+      #@calc.update_all_places
+    #end
+    redirect_to competition_time_results_path(@competition), :notice => "All Places updated"
   end
 
   # GET /time_results/1/edit

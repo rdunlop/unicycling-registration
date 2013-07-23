@@ -1,6 +1,6 @@
-<h1>Listing Time Results for <%= @event %></h1>
+<h1>Listing Time Results for <%= @competition %></h1>
 
-<%= link_to "Set Racing Places", set_places_event_time_results_path(@event), method: :put %>
+<%= link_to "Set Racing Places", set_places_competition_time_results_path(@competition), method: :put %>
 
 <table class="sortable">
   <thead>
@@ -17,6 +17,10 @@
       <th>Seconds</th>
       <th>Thousands</th>
       <th>Disqualified</th>
+      <th>Age Group</th>
+      <th>Place</th>
+      <th>Overall Place</th>
+      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -31,6 +35,9 @@
         <td><%= time_result.seconds %></td>
         <td><%= time_result.thousands %></td>
         <td><%= time_result.disqualified %></td>
+        <td><%= time_result.competitor.age_group_description %></td>
+        <td><%= time_result.place %></td>
+        <td><%= time_result.overall_place %></td>
         <td class="non_printable"><%= link_to 'Edit', edit_time_result_path(time_result) %></td>
         <td class="non_printable"><%= link_to 'Destroy', time_result, :confirm => 'Are you sure?', :method => :delete %></td>
       </tr>
