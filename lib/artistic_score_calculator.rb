@@ -1,6 +1,6 @@
 class ArtisticScoreCalculator
 
-    def initialize(competition, unicon_scoring = true)
+    def initialize(competition, unicon_scoring = false)
         @competition = competition # should use this some where in the calculations?
         @unicon_scoring = unicon_scoring # should do 'elimination' for each judge_type
     end
@@ -67,6 +67,7 @@ class ArtisticScoreCalculator
       my_points = total_points(competitor)
       competitor.competition.competitors.each do |comp|
         comp_points = total_points(comp)
+        next if comp_points == 0
         if comp_points < my_points
             my_place = my_place + 1
         elsif comp_points == my_points
@@ -77,6 +78,9 @@ class ArtisticScoreCalculator
                end
            end
         end
+      end
+      if my_points == 0
+        my_place = 0
       end
       @place[competitor.id] = my_place
     end

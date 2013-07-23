@@ -9,10 +9,8 @@ class Upload
     end
 
     results = []
-    #File.open(upload_file, 'r:ISO-8859-1') do |f|
-    File.open(upload_file) do |f|
+    File.open(upload_file, 'r:ISO-8859-1') do |f|
       f.each do |line|
-        puts "ROW: #{line}"
         row = CSV.parse_line (line)
         results << row
       end
@@ -44,117 +42,6 @@ class Upload
      end
     end
     n
-  end
-
-###########################################
-# NAUCC 2012 Exported fileset
-###########################################
-  def get_combined_data(address_file, person_file, events_file)
-    addresses = get_file(address_file)
-    persons = get_file(person_file)
-    events = get_file(events_file)
-
-    results = combine_arrays(addresses, persons, events)
-    results
-  end
-
-  def process_naucc_upload(params)
-    if params[:naucc][:address_file].respond_to?(:tempfile)
-        address_file = params[:naucc][:address_file].tempfile
-        person_file = params[:naucc][:person_file].tempfile
-        events_file = params[:naucc][:events_file].tempfile
-    else
-        address_file = params[:naucc][:address_file]
-        person_file = params[:naucc][:person_file]
-        events_file = params[:naucc][:events_file]
-    end
-    results = get_combined_data(address_file, person_file, events_file)
-    n = 0
-    results.each do |reg|
-        c = Registrant.new
-        c.external_id = (reg["Person_ID"].to_i - 10000)
-        c.first_name  = reg["First Name"]
-        c.last_name   = reg["Last Name"]
-        c.competitor  = reg["Registration Type"] == "Rider"
-        #puts         (Time.local(2012,07,10) - Time.local(reg["Byear"].to_i, reg["Bmonth"].to_i, reg["Bday"].to_i)) / 1.year
-        c.age         = ((Time.local(2012,07,10) - Time.local(reg["Byear"].to_i, reg["Bmonth"].to_i, reg["Bday"].to_i)) / 1.year).to_i
-        c.gender      = reg["Sex"]
-        if c.save
-            n = n + 1
-        else
-            #puts "error: #{reg}"
-        end
-    end
-    n
-  end
-
-  def combine_arrays(addresses, persons, events)
-    results = []
-    persons.each do |person|
-        new_entry = person
-        addresses.each do |addr|
-            if addr["Address_ID"] == person["Address_ID"]
-                addr.each do |key, val|
-                    if key != "Address_ID"
-                        new_entry[key] = val
-                    end
-                end
-                addr["Registration Fee"] = "0"
-                addr["T-Shirt Fee"] = "0"
-                addr["USA Fee"] = "0"
-                addr["Dinner Fee"] = "0"
-                addr["Dinner Fee"] = "0"
-                addr["T Youth Medium"] = "0"
-                addr["T Youth Large"] = "0"
-                addr["T Adault Small"] = "0"
-                addr["T Adault Medium"] = "0"
-                addr["T Adault Large"] = "0"
-                addr["T Adault X Large"] = "0"
-                addr["T Adault XX Large"] = "0"
-                addr["T Adault XX Large2"] = "0"
-            end
-        end
-        events.each do |addr|
-            if addr["Person_ID"] == person["Person_ID"]
-                addr.each do |key, val|
-                    if key != "Person_ID"
-                        new_entry[key] = val
-                    end
-                end
-            end
-        end
-        results << new_entry
-    end
-
-    results
-  end
-
-  def get_file(upload_file)
-      titles = nil
-      results = []
-      File.open(upload_file, 'r:ISO-8859-1') do |f|
-        f.each do |line|
-          row = CSV.parse_line (line)
-          if titles.nil?
-              titles = []
-              row.each do |col|
-                # if the column already exists, create a new column with '2' appended to it
-                if titles.include?(col)
-                    titles << col.to_s + "2"
-                else
-                    titles << col.to_s
-                end
-              end
-          else
-              new_row = Hash.new
-              row.each_with_index do |col, i|
-                new_row[titles[i]] = col
-              end
-              results << new_row
-          end
-        end
-      end
-      results
   end
 
 #########################################################
@@ -406,25 +293,4 @@ class Upload
     end
   end
 
-  ##############################################
-  # THE MAIN FUNCTION Entrypoint into this code 
-  ##############################################
-  def convert(params)
-    if params[:convert][:address_file].respond_to?(:tempfile)
-        address_file = params[:convert][:address_file].tempfile
-        person_file = params[:convert][:person_file].tempfile
-        events_file = params[:convert][:events_file].tempfile
-    else
-        address_file = params[:convert][:address_file]
-        person_file = params[:convert][:person_file]
-        events_file = params[:convert][:events_file]
-    end
-    results = get_combined_data(address_file, person_file, events_file)
-
-    result = ""
-    results.each do |row|
-        result += convert_hash_to_string(row)
-    end
-    result
-  end
 end

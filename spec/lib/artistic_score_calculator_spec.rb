@@ -1,19 +1,20 @@
 require 'spec_helper'
 
 describe ArtisticScoreCalculator do
+  before(:each) do
+    @competition = FactoryGirl.create(:competition)
+    @judge1 = FactoryGirl.create(:judge, :competition => @competition)
+    @jt = @judge1.judge_type
+    @calc = ArtisticScoreCalculator.new(@competition)
+    @comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
+    @comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
+    @comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
+  end
   describe "when calculating the placement points of an event" do
     before(:each) do
-      @competition = FactoryGirl.create(:competition)
-      comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
-      comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
-      comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
-      @judge1 = FactoryGirl.create(:judge, :competition => @competition)
-      @jt = @judge1.judge_type
-      @score1 = FactoryGirl.create(:score, :judge => @judge1, :competitor => comp1, :val_1 => 10)
-      @score2 = FactoryGirl.create(:score, :judge => @judge1, :competitor => comp2, :val_1 => 5)
-      @score3 = FactoryGirl.create(:score, :judge => @judge1, :competitor => comp3, :val_1 => 0)
-      @calc = ArtisticScoreCalculator.new(@competition)
-      @comp1 = comp1
+      @score1 = FactoryGirl.create(:score, :judge => @judge1, :competitor => @comp1, :val_1 => 10)
+      @score2 = FactoryGirl.create(:score, :judge => @judge1, :competitor => @comp2, :val_1 => 5)
+      @score3 = FactoryGirl.create(:score, :judge => @judge1, :competitor => @comp3, :val_1 => 0)
     end
     it "should be able to calculate on an invalid score" do
         @calc.calc_place(@comp1.scores.new).should == 0
@@ -114,6 +115,20 @@ describe ArtisticScoreCalculator do
             @calc.place(@score2.competitor).should == 2
             @calc.place(@score3.competitor).should == 2
         end
+        describe "when there are more competitors than scores, it marks the extras as 0" do
+          before(:each) do
+            @comp4 = FactoryGirl.create(:event_competitor, :competition => @competition)
+          end
+
+          it "puts that competitor as first" do
+            @calc.place(@comp1).should == 1
+          end
+
+          it "puts the other competitor as NA" do
+            @calc.place(@comp4).should == 0
+          end
+        end
+
         describe "if I have scores for the other judge_type, but not for this judge_type" do
             before(:each) do
                 @jt = FactoryGirl.create(:judge_type, :name => "Technical")
