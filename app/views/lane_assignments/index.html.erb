@@ -1,7 +1,9 @@
-<h1>Listing lane_assignments</h1>
 
-<%= link_to 'New Lane assignment', new_lane_assignment_path %>
+<h1><%= @competition %></h1>
+<h2>New lane_assignment</h2>`
+<%= render 'form' %>
 
+<h2>Lane Assignments </h2>
 <table class="sortable">
   <thead>
     <tr>
@@ -9,7 +11,6 @@
       <th>Registrant</th>
       <th>Heat</th>
       <th>Lane</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -22,7 +23,6 @@
         <td><%= lane_assignment.registrant.with_id_to_s %></td>
         <td><%= lane_assignment.heat %></td>
         <td><%= lane_assignment.lane %></td>
-        <td><%= link_to 'Show', lane_assignment %></td>
         <td><%= link_to 'Edit', edit_lane_assignment_path(lane_assignment) %></td>
         <td><%= link_to 'Destroy', lane_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -32,3 +32,4 @@
 
 <br />
 
+<%= link_to 'Back', root_url %>

@@ -2,36 +2,21 @@ class LaneAssignmentsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  # GET /lane_assignments
-  # GET /lane_assignments.json
+  before_filter :load_competition, :only => [:index, :create]
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  # GET /competitions/#/lane_assignments
+  # GET /competitions/#/lane_assignments.json
   def index
-    @lane_assignments = LaneAssignment.all
+    @lane_assignment = LaneAssignment.new
+    @lane_assignments = @competition.lane_assignments
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @lane_assignments }
-    end
-  end
-
-  # GET /lane_assignments/1
-  # GET /lane_assignments/1.json
-  def show
-    @lane_assignment = LaneAssignment.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @lane_assignment }
-    end
-  end
-
-  # GET /lane_assignments/new
-  # GET /lane_assignments/new.json
-  def new
-    @lane_assignment = LaneAssignment.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @lane_assignment }
     end
   end
 
@@ -44,14 +29,14 @@ class LaneAssignmentsController < ApplicationController
   # POST /lane_assignments.json
   def create
     @lane_assignment = LaneAssignment.new(params[:lane_assignment])
+    @lane_assignment.competition = @competition
 
     respond_to do |format|
       if @lane_assignment.save
-        format.html { redirect_to @lane_assignment, notice: 'Lane assignment was successfully created.' }
-        format.json { render json: @lane_assignment, status: :created, location: @lane_assignment }
+        format.html { redirect_to competition_lane_assignments_path(@competition), notice: 'Lane assignment was successfully created.' }
       else
-        format.html { render action: "new" }
-        format.json { render json: @lane_assignment.errors, status: :unprocessable_entity }
+        @lane_assignments = @competition.lane_assignments
+        format.html { render action: "index" }
       end
     end
   end
@@ -63,11 +48,9 @@ class LaneAssignmentsController < ApplicationController
 
     respond_to do |format|
       if @lane_assignment.update_attributes(params[:lane_assignment])
-        format.html { redirect_to @lane_assignment, notice: 'Lane assignment was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to competition_lane_assignments_path(@lane_assignment.competition), notice: 'Lane assignment was successfully updated.' }
       else
         format.html { render action: "edit" }
-        format.json { render json: @lane_assignment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,10 +59,11 @@ class LaneAssignmentsController < ApplicationController
   # DELETE /lane_assignments/1.json
   def destroy
     @lane_assignment = LaneAssignment.find(params[:id])
+    @competition = @lane_assignment.competition
     @lane_assignment.destroy
 
     respond_to do |format|
-      format.html { redirect_to lane_assignments_url }
+      format.html { redirect_to competition_lane_assignments_path(@competition) }
       format.json { head :no_content }
     end
   end

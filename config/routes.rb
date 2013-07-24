@@ -1,7 +1,6 @@
 Workspace::Application.routes.draw do
 
 
-  resources :lane_assignments
 
 
   namespace :printing do
@@ -232,7 +231,10 @@ Workspace::Application.routes.draw do
         get :final_candidates
       end
     end
+    resources :lane_assignments, :only => [:index, :create]
   end
+  resources :lane_assignments, :except => [:new, :index, :create, :show]
+
   resources :time_results, :except => [:index, :new, :show, :create]
 
   resources :judges, :only => [:update] do

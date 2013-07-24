@@ -12,6 +12,8 @@ class Competition < ActiveRecord::Base
   has_many :scores, :through => :judges
   has_many :distance_attempts, :through => :competitors
   has_many :time_results, :through => :competitors
+
+  has_many :lane_assignments, :dependent => :destroy
   #has_many :chief_judges, :dependent => :destroy
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }

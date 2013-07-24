@@ -21,6 +21,7 @@ class Ability
 
       # Scoring abilities
       if user.has_role? :judge
+        can :manage, LaneAssignment
         can :judging, Event
         can :read, Competition
         can :create_scores, Competition do |competition|
