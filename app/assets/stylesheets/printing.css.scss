@@ -76,3 +76,29 @@ table.race {
     font-size: 20px;
   }
 }
+
+table.results {
+  border-collapse: collapse;
+  .id {
+    width: 10%;
+  }
+  .name {
+    width: 40%;
+  }
+  .time {
+    width: 40%;
+    font-weight: bold;
+  }
+  .place {
+    width: 10%;
+  }
+  td {
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+  }
+
+  td {
+    height: 24px;
+    font-size: 20px;
+  }
+}

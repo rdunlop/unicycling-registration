@@ -23,7 +23,7 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def heat_recording
-    @all_registrants = Registrant.where(:competitor => true).all
+    @all_registrants = Registrant.where(:competitor => true).order(:bib_number).all
     @signed_up_registrants = @competition.signed_up_registrants
     @agt = @competition.age_group_type
     @age_group_entries = @agt.age_group_entries
@@ -46,6 +46,26 @@ class Printing::CompetitionsController < ApplicationController
     respond_to do |format|
       format.html 
       format.pdf { render :pdf => "heat_recording", :margin => {:top => 2, :left => 2, :right => 2}, :footer => default_footer, :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html" }
+    end
+  end
+
+  def race_results
+    @agt = @competition.age_group_type
+    @age_group_entries = @agt.age_group_entries
+    @results_list = {}
+    @age_group_entries.each do |ag_entry|
+      @results_list[ag_entry] = []
+    end
+
+    @competition.time_results.each do |tr|
+      calculated_ag = @agt.age_group_entry_for(tr.competitor.age, tr.competitor.gender, tr.competitor.wheel_size)
+      @results_list[calculated_ag] << tr
+    end
+
+    respond_to do |format|
+      format.html 
+      format.pdf { render :pdf => "race_results", :print_media_type => true, :margin => {:top => 2, :left => 2, :right => 2}, :footer => default_footer, :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html" }
+
     end
   end
 end

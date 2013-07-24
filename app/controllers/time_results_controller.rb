@@ -19,19 +19,6 @@ class TimeResultsController < ApplicationController
 
   end
 
-  def results
-    @time_results = @competition.time_results.fastest_first
-    respond_to do |format|
-      format.html # results.html.erb
-      format.pdf { render :pdf => "results",
-                          :layout => "pdf.html",
-                          :print_media_type => true,
-                          :footer => {:left => '[date] [time]', :center => @config.short_name, :right => '[page] of [topage]'},
-                          :page_size => 'Letter',
-                          :formats => [:html] }
-    end
-  end
-
   def final_candidates
     @male_time_results = @competition.time_results.select{ |time_result| time_result.is_top?("Male") }
     @female_time_results = @competition.time_results.select{ |time_result| time_result.is_top?("Female") }
