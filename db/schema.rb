@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724024012) do
+ActiveRecord::Schema.define(:version => 20130724061827) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -215,6 +215,15 @@ ActiveRecord::Schema.define(:version => 20130724024012) do
   add_index "judges", ["competition_id"], :name => "index_judges_event_category_id"
   add_index "judges", ["judge_type_id"], :name => "index_judges_judge_type_id"
   add_index "judges", ["user_id"], :name => "index_judges_user_id"
+
+  create_table "lane_assignments", :force => true do |t|
+    t.integer  "competition_id"
+    t.integer  "registrant_id"
+    t.integer  "heat"
+    t.integer  "lane"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "members", :force => true do |t|
     t.integer  "competitor_id"

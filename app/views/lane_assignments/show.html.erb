@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Competition:</b>
+  <%= @lane_assignment.competition %>
+</p>
+
+<p>
+  <b>Registrant:</b>
+  <%= @lane_assignment.registrant %>
+</p>
+
+<p>
+  <b>Heat:</b>
+  <%= @lane_assignment.heat %>
+</p>
+
+<p>
+  <b>Lane:</b>
+  <%= @lane_assignment.lane %>
+</p>
+
+
+<%= link_to 'Edit', edit_lane_assignment_path(@lane_assignment) %> |
+<%= link_to 'Back', lane_assignments_path %>

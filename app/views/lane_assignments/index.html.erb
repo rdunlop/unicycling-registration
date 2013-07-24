@@ -1,0 +1,33 @@
+<h1>Listing lane_assignments</h1>
+
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Competition</th>
+      <th>Registrant</th>
+      <th>Heat</th>
+      <th>Lane</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lane_assignments.each do |lane_assignment| %>
+      <tr>
+        <td><%= lane_assignment.competition %></td>
+        <td><%= lane_assignment.registrant.with_id_to_s %></td>
+        <td><%= lane_assignment.heat %></td>
+        <td><%= lane_assignment.lane %></td>
+        <td><%= link_to 'Show', lane_assignment %></td>
+        <td><%= link_to 'Edit', edit_lane_assignment_path(lane_assignment) %></td>
+        <td><%= link_to 'Destroy', lane_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Lane assignment', new_lane_assignment_path %>

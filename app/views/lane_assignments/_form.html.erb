@@ -1,0 +1,33 @@
+<%= form_for(@lane_assignment) do |f| %>
+  <% if @lane_assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lane_assignment.errors.count, "error") %> prohibited this lane_assignment from being saved:</h2>
+
+      <ul>
+      <% @lane_assignment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :competition_id %><br />
+    <%= f.select :competition_id, Competition.all.map{ |comp| [comp, comp.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :registrant_id %><br />
+    <%= f.select :registrant_id, Registrant.all.map{ |reg| [reg, reg.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :heat %><br />
+    <%= f.number_field :heat %>
+  </div>
+  <div class="field">
+    <%= f.label :lane %><br />
+    <%= f.number_field :lane %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

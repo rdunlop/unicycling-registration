@@ -1,6 +1,9 @@
 Workspace::Application.routes.draw do
 
 
+  resources :lane_assignments
+
+
   namespace :printing do
     namespace :race_recording do
       get :multi_lap
