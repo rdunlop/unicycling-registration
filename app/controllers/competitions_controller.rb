@@ -4,7 +4,7 @@ class CompetitionsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_event, :only => [:index]
+  before_filter :load_event, :only => [:index, :create_empty]
   before_filter :load_event_category, :only => [:create, :new]
   before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :lock, :get_import_time_results_competition, :confirm_import_time_results_competition, :import_time_results_competition]
 
@@ -56,6 +56,20 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
   end
 
+  # POST /events/#/create_empty
+  def create
+    @competition = Competition.new(params[:competition])
+    @competition.event = @event
+    
+    respond_to do |format|
+      if @competition.save
+        format.html { redirect_to root_url, notice: "Competition created successfully" }
+      else
+        # XXX???
+        format.html { redirect_to root_url, notice: "ERROR creating competition" }
+      end
+    end
+  end
   # POST /event_categories/#/competitions
   # POST /event_categories/#/competitions.json
   def create
