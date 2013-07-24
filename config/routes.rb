@@ -5,11 +5,13 @@ Workspace::Application.routes.draw do
     namespace :race_recording do
       get :multi_lap
       get :list
+      get :instructions
     end
     resources :competitions, :only => [:show] do
       member do
         get :announcer
         get :heat_recording
+        get :results
       end
     end
   end
@@ -194,7 +196,6 @@ Workspace::Application.routes.draw do
     resources :time_results, :only => [:index, :create] do
       collection do
         put :set_places
-        get :results
         get :final_candidates
       end
     end

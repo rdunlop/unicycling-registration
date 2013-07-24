@@ -37,3 +37,42 @@ body.pdf_body {
   }
   width: 50%;
 }
+
+.race_recording {
+  h1, h2 {
+    margin: 0px
+  }
+}
+.age_group_description {
+  float: left;
+}
+.age_group_gender {
+  float: right;
+}
+
+table.race {
+  .heat_entry, .lane_entry {
+    width: 12.5%;
+  }
+  .id {
+    width: 12.5%;
+    text-align: center;
+  }
+  .name {
+    min-width: 25%;
+  }
+  .dq {
+    width: 7%;
+  }
+  .notes {
+    width: 30%;
+  }
+
+  .not_signed_up {
+    font-style: italic;
+  }
+  td {
+    height: 24px;
+    font-size: 20px;
+  }
+}

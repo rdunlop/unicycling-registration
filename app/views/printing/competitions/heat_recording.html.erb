@@ -1,32 +1,48 @@
-<h1>INCOMPLETE (NOT YET READY </h1>
-<% @age_group_entries.each do |ag_entry| %>
+<div class="race_recording">
+  <% @age_group_entries.each do |ag_entry| %>
   <h1>Race Recording Form</h1>
   <hr />
   <h2><%= @competition %></h2>
-  <h2><%= ag_entry %></h2>
+  <hr />
+  <h2 class="age_group_description"><%= ag_entry %></h2>
+  <h2 class="age_group_gender"><%= ag_entry.gender %></h2>
+  <div style="clear: both"></div>
+  <hr />
 
-  <table class="full_grid">
+  <table class="full_grid race">
     <thead>
       <tr>
-        <th>Heat</th>
-        <th>Lane</th>
-        <th>ID</th>
-        <th>Age Group</th>
-        <th>Time</th>
+        <th class="heat_entry">Heat</th>
+        <th class="lane_entry">Lane</th>
+        <th class="id">ID</th>
+        <th class="name">Name</th>
+        <th class="dq">DQ?</th>
+        <th class="notes">Notes</th>
       </tr>
     </thead>
     <tbody>
-      <% @competition.competitors.each do |comp| %>
+      <% @signed_up_list[ag_entry].each do |reg| %>
         <tr>
           <td></td>
           <td></td>
-          <td><%= comp %></td>
-          <td><%= comp.external_id %></td>
+          <td><%= reg.external_id %></td>
+          <td><%= reg %></td>
           <td></td>
+          <td></td>
+        </tr>
+      <% end %>
+      <% @not_signed_up_list[ag_entry].each do |reg| %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td class="not_signed_up"><%= reg.external_id %></td>
+          <td class="not_signed_up"><%= reg %></td>
           <td></td>
           <td></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <div class="page-break"></div>
 <% end %>
+</div>

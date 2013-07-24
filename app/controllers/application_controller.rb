@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
       @config = EventConfiguration.first
     end
   end
+
+  def default_footer
+    {:left => '[date] [time]', :center => @config.short_name, :right => '[page] of [topage]'}
+  end
 end
