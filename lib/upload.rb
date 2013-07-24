@@ -18,6 +18,46 @@ class Upload
     results
   end
 
+  def extract_lif(file)
+    data = extract_csv(file)
+
+    results = []
+    data.shift # drop the header
+    data.each do |row|
+      conv = convert_to_hash(data)
+
+      results << [conv[:lane], conv[:minutes], conv[:seconds], conv[:thousands], conv[:disqualified] ? "DQ" : 0]
+    end
+
+  end
+
+  def convert_to_hash(arr)
+    results = {}
+    results[:lane] = arr[2]
+
+    full_time = arr[6].to_s
+    if full_time == "DQ"
+      results[:disqualified] = true
+      results[:minutes] = 0
+      results[:seconds] = 0
+      results[:thousands] = 0
+    else
+      results[:disqualified] = false
+      if full_time.index(":").nil?
+        # no minutes
+        results[:minutes] = 0
+        seconds_and_hundreds = full_time
+      else
+        results[:minutes] = full_time[0..(full_time.index(":")-1)].to_i
+        seconds_and_hundreds = full_time[full_time.index(":")+1..-1]
+      end
+
+      results[:seconds] = seconds_and_hundreds[0..seconds_and_hundreds.index(".")-1].to_i
+      results[:thousands] = seconds_and_hundreds[seconds_and_hundreds.index(".")+1..-1].to_i * 10
+    end
+    results
+  end
+
   # CSV File exported from UCP
   def process_csv_upload(params)
     n=0
