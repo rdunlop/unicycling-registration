@@ -107,7 +107,11 @@ class Competitor < ActiveRecord::Base
     end
 
     def wheel_size
-      nil
+      if registrants.empty?
+        nil
+      else
+        registrants.first.default_wheel_size.id
+      end
     end
 
     def ineligible
