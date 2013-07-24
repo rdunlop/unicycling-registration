@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JudgeSpec do
+describe Judge do
   describe "when the judge has scores" do
     before(:each) do
       @judge = FactoryGirl.create(:judge)

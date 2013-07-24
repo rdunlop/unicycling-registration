@@ -191,15 +191,6 @@ Workspace::Application.routes.draw do
   ### For event-data-gathering/reporting purposes
   ###############################################
 
-  resources :events, :only => [] do
-    resources :competitions, :only => [:index]
-    resources :time_results, :only => [:index, :create] do
-      collection do
-        put :set_places
-        get :final_candidates
-      end
-    end
-  end
   resources :competitors, :only => [:edit, :update, :destroy]
   resources :competitions, :except => [:index, :create, :new] do
     member do
