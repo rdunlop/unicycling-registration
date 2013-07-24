@@ -6,7 +6,7 @@ class RaceCalculator
 
   # update the places for all age groups
   def update_all_places
-    age_group_type = @competition.age_group_type
+    age_group_type = @competition.determine_age_group_type
     unless age_group_type.nil?
       age_group_type.age_group_entries.each do |age|
         update_places(age.to_s)

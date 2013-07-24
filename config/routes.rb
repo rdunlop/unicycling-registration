@@ -121,6 +121,11 @@ Workspace::Application.routes.draw do
       get 'track'
       get 'distance'
     end
+    resources :competitions, :only => [] do
+      collection do
+        post :create_empty
+      end
+    end
   end
   resources :event_categories, :except => [:index, :create, :new] do
     member do

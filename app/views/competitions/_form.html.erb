@@ -16,6 +16,10 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :age_group_type_id %>
+    <%= f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, :include_blank => true  %>
+  </div>
+  <div class="field">
     <%= label_tag :gender_filter %>
     <%= select_tag :gender_filter, options_for_select(["Both", "Male", "Female"], "Both") %>
   </div>

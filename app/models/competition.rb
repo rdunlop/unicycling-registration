@@ -1,6 +1,7 @@
 class Competition < ActiveRecord::Base
-  attr_accessible :name, :event_id, :locked
+  attr_accessible :name, :event_id, :locked, :age_group_type_id
 
+  belongs_to :age_group_type
   belongs_to :event, :inverse_of => :competitions
   has_many :event_categories, :dependent => :nullify
 
@@ -56,11 +57,15 @@ class Competition < ActiveRecord::Base
   end
 
   # all event_categories should have the same age_group_type
-  def age_group_type
-    if event_categories.count > 0
-      event_categories.first.age_group_type
+  def determine_age_group_type
+    if age_group_type.nil?
+      if event_categories.count > 0
+        return event_categories.first.age_group_type
+      else
+        nil
+      end
     else
-      nil
+      age_group_type
     end
   end
 

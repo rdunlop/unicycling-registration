@@ -84,7 +84,7 @@ class Printing::CompetitionsController < ApplicationController
       @results_list[ag_entry] = []
     end
 
-    @competition.time_results.each do |tr|
+    @competition.time_results.fastest_first.each do |tr|
       calculated_ag = @agt.age_group_entry_for(tr.competitor.age, tr.competitor.gender, tr.competitor.wheel_size)
       @results_list[calculated_ag] << tr
     end

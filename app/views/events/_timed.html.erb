@@ -28,6 +28,7 @@
     <tr>
       <th>Event</th>
       <th>Competition</th>
+      <th></th>
       <th>Competitor List</th>
       <th>Locked?</th>
       <th>Enter Results</th>
@@ -38,6 +39,8 @@
         <tr>
           <th><%= event.name %></th>
           <td><%= ec %></td>
+          <td><%= link_to 'Edit', edit_competition_path(ec) %></td>
+
           <td><%= link_to 'Competitors', competition_competitors_path(ec) %></td>
           <td><%= ec.locked? %>
           <% if can? :lock, event %>
