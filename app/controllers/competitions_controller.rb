@@ -184,24 +184,66 @@ class CompetitionsController < ApplicationController
   def get_import_time_results
   end
 
+  def get_id_from_lane_assignment(comp, heat, lane)
+    la = LaneAssignment.find_by_competition_id_and_heat_and_lane(@competition.id, heat, lane)
+    if la.nil?
+      id = nil
+    else
+      id = la.registrant.bib_number
+    end
+    id
+  end
+
   # GET /competitions/#/confirm_import_time_results
   def confirm_import_time_results
     upload = Upload.new
-    @data = upload.extract_csv(params[:file])
+    # FOR EXCEL DATA:j
+    #@data = upload.extract_csv(params[:file])
+    #
+    # FOR LIF (track racing) data:
+    raw_data = upload.extract_lif(params[:file])
+    heat = params[:heat]
+    @data = []
+    raw_data.each do |raw|
+      lane = raw[0]
+      id = get_id_from_lane_assignment(@competition.id, heat, lane)
+
+      raw.shift # drop the lane
+      @data << ([id] + raw)
+    end
+    @data
   end
 
   # POST /competitions/#/import_time_results
   def import_time_results
     upload = Upload.new
-    @data = upload.extract_csv(params[:file])
+
+    #EXCEL:
+    # @data = upload.extract_csv(params[:file])
+
+    #LIF:
+    @data = upload.extract_lif(params[:file])
+    heat = params[:heat]
+
     n = 0
     @data.each do |row|
       tr = TimeResult.new
-      comp = @competition.find_competitor_with_bib_number(row[0])
+      # EXCEL
+      #id = row[0]
+      # LIF
+      lane = row[0]
+      id = get_id_from_lane_assignment(@competition.id, heat, lane)
+
+      comp = @competition.find_competitor_with_bib_number(id)
       if comp.nil?
         comp = @competition.competitors.build
         member = comp.members.build
-        member.registrant = Registrant.find_by_bib_number(row[0])
+        member.registrant = Registrant.find_by_bib_number(id)
+        if !member.valid?
+          member.errors.each do |err|
+            puts "mem erro: #{err}"
+          end
+        end
         if !comp.save
           comp.errors.each do |err|
             puts "error creating competitor because: #{err}"

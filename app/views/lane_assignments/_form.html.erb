@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :registrant_id %><br />
-    <%= f.select :registrant_id, Registrant.all.map{ |reg| [reg, reg.id]} %>
+    <%= f.select :registrant_id, Registrant.all.map{ |reg| [reg.with_id_to_s, reg.id]} %>
   </div>
   <div class="field">
     <%= f.label :heat %><br />

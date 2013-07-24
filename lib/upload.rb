@@ -9,7 +9,7 @@ class Upload
     end
 
     results = []
-    File.open(upload_file, 'rb') do |f|
+    File.open(upload_file, 'r:ISO-8859-1') do |f|
       f.each do |line|
         row = CSV.parse_line (line)
         results << row
@@ -29,6 +29,7 @@ class Upload
       results << [conv[:lane], conv[:minutes], conv[:seconds], conv[:thousands], conv[:disqualified] ? "DQ" : 0]
     end
 
+    results
   end
 
   def convert_to_hash(arr)

@@ -11,6 +11,7 @@ Please import a Comma-Separated-File file with the following format:
 </ul>
 
 <%= form_tag(confirm_import_time_results_competition_path(@competition), {:method => :post, :multipart=>true}) do %>
+  HEAT NUMBER: <%= text_field_tag "heat" %><br />
   <%= file_field_tag "file" %>
   <%= submit_tag "Validate this data" %>
 <% end %>

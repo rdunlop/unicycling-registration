@@ -36,6 +36,7 @@
 </table>
 
 <%= form_tag(import_time_results_competition_path(@competition), {:method => :post, :multipart=>true}) do %>
+   HEAT NUMBER: <%= text_field_tag "heat" %><br />
   <%= file_field_tag "file" %>
   <%= submit_tag "Add these Results" %>
 <% end %>
