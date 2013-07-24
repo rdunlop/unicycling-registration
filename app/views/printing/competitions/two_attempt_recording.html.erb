@@ -1,6 +1,6 @@
 <div class="race_recording">
   <% @age_group_entries.each do |ag_entry| %>
-  <h1>Race Recording Form</h1>
+  <h1>Two-Attempt Recording Form</h1>
   <hr />
   <h2><%= @competition %></h2>
   <hr />
@@ -12,24 +12,21 @@
   <table class="full grid race">
     <thead>
       <tr>
-        <th class="heat_entry">Heat</th>
-        <th class="lane_entry">Lane</th>
         <th class="id">ID</th>
         <th class="name">Name</th>
-        <th class="dq">DQ?</th>
-        <th class="notes">Notes</th>
-        <th class="heat_entry">Heat Place</th>
+        <th class="attempt">Attempt 1</th>
+        <th class="attempt">Attempt 2</th>
       </tr>
     </thead>
     <tbody>
       <% @signed_up_list[ag_entry].each do |reg| %>
-        <%= render :partial => "heat_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => false } %>
+        <%= render :partial => "attempt_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => false } %>
       <% end %>
       <% @not_signed_up_list[ag_entry].each do |reg| %>
-        <%= render :partial => "heat_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => true } %>
+        <%= render :partial => "attempt_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => true } %>
       <% end %>
       <% 5.times do %>
-        <%= render :partial => "heat_entry", :locals => {:id => nil, :name => nil, :not_signed_up => false} %>
+        <%= render :partial => "attempt_entry", :locals => {:id => nil, :name => nil, :not_signed_up => false} %>
       <% end %>
 
     </tbody>

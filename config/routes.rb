@@ -14,6 +14,7 @@ Workspace::Application.routes.draw do
       member do
         get :announcer
         get :heat_recording
+        get :two_attempt_recording
         get :race_results
         get :results
       end
