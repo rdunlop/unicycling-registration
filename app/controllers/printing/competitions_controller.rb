@@ -25,7 +25,7 @@ class Printing::CompetitionsController < ApplicationController
   def heat_recording
     @all_registrants = Registrant.where(:competitor => true).order(:bib_number).all
     @signed_up_registrants = @competition.signed_up_registrants
-    @agt = @competition.age_group_type
+    @agt = @competition.determine_age_group_type
     @age_group_entries = @agt.age_group_entries
     @signed_up_list = {}
     @not_signed_up_list = {}
@@ -52,7 +52,7 @@ class Printing::CompetitionsController < ApplicationController
   def two_attempt_recording
     @all_registrants = Registrant.where(:competitor => true).order(:bib_number).all
     @signed_up_registrants = @competition.signed_up_registrants
-    @agt = @competition.age_group_type
+    @agt = @competition.determine_age_group_type
     @age_group_entries = @agt.age_group_entries
     @signed_up_list = {}
     @not_signed_up_list = {}
@@ -77,7 +77,7 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def race_results
-    @agt = @competition.age_group_type
+    @agt = @competition.determine_age_group_type
     @age_group_entries = @agt.age_group_entries
     @results_list = {}
     @age_group_entries.each do |ag_entry|
