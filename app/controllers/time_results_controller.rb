@@ -40,6 +40,7 @@ class TimeResultsController < ApplicationController
   # GET /time_results/1/edit
   def edit
     @time_result = TimeResult.find(params[:id])
+    @competition = @time_result.competition
   end
 
   # POST event/1/time_results
@@ -48,10 +49,10 @@ class TimeResultsController < ApplicationController
 
     respond_to do |format|
       if @time_result.save
-        format.html { redirect_to(event_time_results_path(@time_result.event), :notice => 'Time result was successfully created.') }
+        format.html { redirect_to(competition_time_results_path(@time_result.competition), :notice => 'Time result was successfully created.') }
         format.json { render :json => @time_result, :status => :created, :location => @time_result.event }
       else
-        @time_results = @event.time_results
+        @time_results = @competition.time_results
         format.html { render :action => "index" }
         format.json { render :json => @time_result.errors, :status => :unprocessable_entity }
       end
