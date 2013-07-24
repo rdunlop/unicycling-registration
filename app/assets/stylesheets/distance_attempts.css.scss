@@ -1,0 +1,63 @@
+// Place all the styles related to the Attempts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.can_attempt {
+    color: green;
+}
+.single_fault {
+    color: yellow;
+}
+.double_fault {
+    color: red;
+}
+
+.distance_attempts {
+    .fault {
+        color: red;
+    }
+    caption {
+        font: 150% bold;
+        
+    }
+}
+.competitor_details {
+    span {
+        margin: 10px;
+        display: block;
+        font-size: 25px;
+        font-weight: bold;
+    }
+    span.status {
+        font-size: 30px;
+        margin-top: 30px;
+    }
+}
+
+.top_distance_attempts {
+    th,td,table {
+        border: 1px solid;
+    }
+    border-collapse: collapse;
+}
+
+.add_distance_attempt_button {
+    height: 50px;
+    width: 200px;
+}
+.competitor_separator {
+    height: 5px;
+    background-color: gray;
+}
+
+.distance_fault_label {
+  font-size: 40px;
+}
+.distance_label {
+  font-size: 90px;
+}
+.distance_input {
+  font-size: 40px;
+  width: 150px;
+}
+

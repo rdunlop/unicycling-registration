@@ -10,16 +10,16 @@
     </div>
     <br />
 
-    <div>
-        <%= semantic_form_for(@distance_attempt, :url => judge_competitor_distance_attempts_path(@judge, @competitor)) do |f| %>
-          <%= f.semantic_errors %>
-          <%= f.inputs do %>
-            <%= f.input :distance, :input_html => {:autofocus => true, :autocomplete => 'off'}, :required => false %>
-            <%= f.input :fault %>
-          <% end %>
-          <%= f.actions do
-            f.action :submit, :button_html => {:class => 'add_distance_attempt_button'}, :label => 'Add Attempt'
-          end %>
+    <div class="distance_attempt_inputs>
+      <%= form_for(@distance_attempt, :url => judge_competitor_distance_attempts_path(@judge, @competitor)) do |f| %>
+        <%= render :partial => "/shared/error_messages", :object => @distance_atempt %>
+        <%= f.label :distance, :class => "distance_label" %>
+          <%= f.number_field :distance, :class => "distance_input", :autofocus => true, :autocomplete => 'off', :required => true %>
+          <br />
+          <%= f.label :fault, :class => "distance_fault_label" %>
+          <%= f.check_box :fault, :class => "distance_input" %>
+          <br />
+          <%= f.submit "Add Attempt", {:class => 'add_distance_attempt_button'} %>
         <% end %>
     </div>
 <% end %>
