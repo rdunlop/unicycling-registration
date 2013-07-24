@@ -2,6 +2,6 @@
 
 <ul>
 <% @judges.each do |judge| %>
-    <li><%= link_to "#{judge.competition}", judge_scores_path(judge) %></li>
+  <li><%= scoring_link(judge) %></li>
 <% end %>
 </ul>

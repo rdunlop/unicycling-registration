@@ -122,6 +122,13 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  def distance_attempts
+    @distance_attempts = @competition.best_distance_attempts
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
+
   def freestyle_scores
   end
 

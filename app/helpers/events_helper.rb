@@ -3,9 +3,9 @@ module EventsHelper
         class_name = judge.competition.event.event_class
 
         if class_name == 'Two Attempt Distance'
-            link_to judge.judge_type.name, competition_distance_attempts_path(judge.competition) 
+          link_to "#{judge.competition} - #{judge.judge_type.name}", judge_distance_attempts_path(judge) 
         elsif class_name == 'Freestyle'
-            link_to judge.judge_type.name, competition_competitors_path(judge.competition)
+          link_to "#{judge.competition} - #{judge.judge_type.name}", judge_scores_path(judge) 
         elsif class_name == 'Flatland'
             link_to judge.judge_type.name, competition_competitors_path(judge.competition)
         elsif class_name == 'Street'

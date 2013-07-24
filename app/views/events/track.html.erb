@@ -4,11 +4,8 @@
     <tr>
       <th>Event</th>
       <th>Event-Category</th>
-      <th># Results</th>
-      <th>Competitors</th>
-      <th>Enter Results</th>
-      <th>View Results</th>
-      <th>Expert Candidates</th>
+      <th>Sign-Ups</th>
+      <th>Associated Competition</th>
     </tr>
 
     <% @events.each do |event| %>
@@ -16,16 +13,44 @@
         <tr>
           <th><%= event.name %></th>
           <td><%= ec %></td>
-          <td><%= link_to 'Competitors', event_category_competitors_path(ec) %></td>
-          <td><%= ec.time_results.count %></td>
-          <td><%= link_to 'Enter Results', event_category_time_results_path(ec) %></td>
-          <td>
-            <%= link_to "View (HTML)", results_event_category_time_results_path(ec) %>
-            <%= link_to "View (PDF)", results_event_category_time_results_path(ec, :format => "pdf") %>
+          <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %></td>
+          <td><% if ec.competition.nil? %>
+              <%= link_to "Create", new_event_category_competition_path(ec) %>
+            <% else %>
+              <%= link_to ec.competition, competition_competitors_path(ec.competition) %>
+            <% end %>
           </td>
-          <td>
-            <%= link_to "Candidates", final_candidates_event_category_time_results_path(ec) %>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+
+  <table>
+    <tr>
+      <th>Event</th>
+      <th>Competition</th>
+      <th>Competitor List</th>
+      <th>Locked?</th>
+      <th>Enter Results</th>
+      <th>Results</th>
+    </tr>
+    <% @events.each do |event| %>
+      <% event.competitions.each do |ec| %>
+        <tr>
+          <th><%= event.name %></th>
+          <td><%= ec %></td>
+          <td><%= link_to 'Competitors', competition_competitors_path(ec) %></td>
+          <td><%= ec.locked? %>
+          <% if can? :lock, event %>
+            <% if ec.locked? %>
+                <%= link_to 'Unlock', lock_competition_path(ec), :method => :delete %>
+            <% else %>
+                <%= link_to 'Lock', lock_competition_path(ec), :method => :post %>
+            <% end %>
+          <% end %>
           </td>
+          <td><%= link_to 'View', distance_attempts_competition_path(ec) %></td>
+          <td><%= link_to 'View/Add', competition_judges_path(ec) %></td>
         </tr>
       <% end %>
     <% end %>
