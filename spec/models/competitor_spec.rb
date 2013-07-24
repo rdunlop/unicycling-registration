@@ -41,6 +41,10 @@ describe Competitor do
       comp.name.should == reg.name
       comp.external_id.should == reg.external_id.to_s
     end
+    it "should be elgiible" do
+      comp = FactoryGirl.create(:event_competitor)
+      comp.ineligible.should == true
+    end
     it "should allow setting the custom_external_id to nil" do
       comp = FactoryGirl.build(:event_competitor)
       comp.custom_external_id = nil
@@ -361,6 +365,19 @@ describe Competitor do
             @comp.status.should == "Success. Next Distance 21+"
         end
       end
+    end
+  end
+
+  describe "with an ineligible registrant" do
+    before(:each) do
+      @competitor = FactoryGirl.create(:event_competitor)
+      @reg = @competitor.registrants(true).first
+      @reg.ineligible = true
+      @reg.save!
+    end
+
+    it "should be ineligible itself" do
+      @competitor.ineligible.should == true
     end
   end
 end

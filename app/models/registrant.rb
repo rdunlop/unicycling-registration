@@ -1,6 +1,6 @@
 class Registrant < ActiveRecord::Base
   attr_accessible :address, :birthday, :city, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip
-  attr_accessible :user_id, :competitor
+  attr_accessible :user_id, :competitor, :ineligible
   attr_accessible :club, :club_contact, :usa_member_number
   attr_accessible :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone
   attr_accessible :responsible_adult_name, :responsible_adult_phone
@@ -14,6 +14,7 @@ class Registrant < ActiveRecord::Base
 
   validates :competitor, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
+  validates :ineligible, :inclusion => {:in => [true, false] } # because it's a boolean
   validates :deleted, :inclusion => {:in => [true, false] } # because it's a boolean
   validate  :gender_present
 
@@ -120,6 +121,7 @@ class Registrant < ActiveRecord::Base
 
   def init
     self.deleted = false if self.deleted.nil?
+    self.ineligible = false if self.ineligible.nil?
   end
 
   def gender_present
@@ -209,7 +211,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def name
-    self.first_name + " " + self.last_name
+    if ineligible
+      self.first_name + " " + self.last_name + "*"
+    else
+      self.first_name + " " + self.last_name
+    end
   end
 
   def user_email

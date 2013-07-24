@@ -27,6 +27,7 @@ FactoryGirl.define do
     emergency_other_phone nil
     responsible_adult_name nil
     responsible_adult_phone nil
+    ineligible false
 
     factory :competitor do
       competitor true

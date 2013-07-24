@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130721231947) do
+ActiveRecord::Schema.define(:version => 20130724024012) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -313,8 +313,8 @@ ActiveRecord::Schema.define(:version => 20130721231947) do
     t.string   "phone"
     t.string   "mobile"
     t.string   "email"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.integer  "user_id"
     t.boolean  "competitor"
     t.string   "club"
@@ -334,6 +334,7 @@ ActiveRecord::Schema.define(:version => 20130721231947) do
     t.integer  "bib_number"
     t.integer  "wheel_size_id"
     t.integer  "age"
+    t.boolean  "ineligible",              :default => false
   end
 
   add_index "registrants", ["deleted"], :name => "index_registrants_deleted"

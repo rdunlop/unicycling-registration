@@ -24,6 +24,16 @@ describe Registrant do
     @reg.valid?.should == false
   end
 
+  it "should be eligible by default" do
+    r = Registrant.new
+    r.ineligible.should == false
+  end
+
+  it "must have a value for ineligible" do
+    @reg.ineligible = nil
+    @reg.valid?.should == false
+  end
+
   it "requires an bib_number" do
     @reg.bib_number = nil
     @reg.valid?.should == false

@@ -82,41 +82,22 @@ describe RaceCalculator do
       @tr1.place.should == "DQ"
     end
 
-    describe "when tr1 is slower than tr2" do
-      before(:each) do
-        @tr1.thousands = 0
-        @tr1.seconds = 30
-        @tr1.minutes = 3
-        @tr1.save!
+    it "places fast times first" do
+      @tr1.thousands = 0
+      @tr1.seconds = 30
+      @tr1.minutes = 3
+      @tr1.save!
 
-        # faster:
-        @tr2.thousands = 120
-        @tr2.seconds = 40
-        @tr2.minutes = 2
-        @tr2.save!
-      end
-      it "places fast times first" do
+      # faster:
+      @tr2.thousands = 120
+      @tr2.seconds = 40
+      @tr2.minutes = 2
+      @tr2.save!
 
-        @calc.update_all_places
+      @calc.update_all_places
 
-        @tr1.place.should == 2
-        @tr2.place.should == 1
-      end
-      describe "when the first competitor is ineligible" do
-        before(:each) do
-          @reg = @tr2.competitor.registrants.first
-          @reg.ineligible = true
-          @reg.save!
-          @calc.update_all_places
-        end
-
-        it "places the faster competitor first" do
-          @tr2.place.should == 1
-        end
-        it "places the slower competitor (eligible) as 1st also" do
-          @tr1.place.should == 1
-        end
-      end
+      @tr1.place.should == 2
+      @tr2.place.should == 1
     end
 
     describe "if 2 times are identical" do

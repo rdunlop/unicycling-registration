@@ -110,6 +110,19 @@ class Competitor < ActiveRecord::Base
       nil
     end
 
+    def ineligible
+      if registrants.empty?
+        false
+      else
+        eligibles = registrants.map(&:ineligible)
+        if eligibles.uniq.count > 1
+          true
+        else
+          eligibles.first
+        end
+      end
+    end
+
     def age_group_description
       agt = competition.age_group_type
       if agt.nil?
