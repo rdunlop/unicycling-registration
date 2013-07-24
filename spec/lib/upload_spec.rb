@@ -27,6 +27,17 @@ describe Upload do
     data.count.should == 8
   end
 
+  it "can extract csv for lif race results (exact)" do
+    sample_file = fixture_path + '/test2.lif'
+    sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
+
+    up = Upload.new
+
+    data = up.extract_lif(sample_input)
+
+    data.count.should == 4
+  end
+
   it "can convert an disqualification into data" do
     up = Upload.new
 
@@ -42,7 +53,7 @@ describe Upload do
   it "can convert an array of data into minutes, seconds, thousands, dq" do
     up = Upload.new
 
-    arr = [3,'',7,'','','',32.49,'',12.142,'','','','','','']
+    arr = [3,'',7,'','','',"32.490",'',12.142,'','','','','','']
 
     hash = up.convert_to_hash(arr)
     hash[:lane].should == 7
@@ -54,7 +65,7 @@ describe Upload do
   it "can convert an array of data into minutes, seconds, thousands, dq" do
     up = Upload.new
 
-    arr = [3,'',7,'','','',"1:32.49",'',12.142,'','','','','','']
+    arr = [3,'',7,'','','',"1:32.490",'',12.142,'','','','','','']
 
     hash = up.convert_to_hash(arr)
     hash[:lane].should == 7

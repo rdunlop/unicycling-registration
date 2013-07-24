@@ -9,7 +9,7 @@ class Upload
     end
 
     results = []
-    File.open(upload_file, 'r:ISO-8859-1') do |f|
+    File.open(upload_file, 'rb') do |f|
       f.each do |line|
         row = CSV.parse_line (line)
         results << row
@@ -24,7 +24,7 @@ class Upload
     results = []
     data.shift # drop the header
     data.each do |row|
-      conv = convert_to_hash(data)
+      conv = convert_to_hash(row)
 
       results << [conv[:lane], conv[:minutes], conv[:seconds], conv[:thousands], conv[:disqualified] ? "DQ" : 0]
     end
@@ -33,6 +33,7 @@ class Upload
 
   def convert_to_hash(arr)
     results = {}
+
     results[:lane] = arr[2]
 
     full_time = arr[6].to_s
@@ -52,8 +53,9 @@ class Upload
         seconds_and_hundreds = full_time[full_time.index(":")+1..-1]
       end
 
-      results[:seconds] = seconds_and_hundreds[0..seconds_and_hundreds.index(".")-1].to_i
-      results[:thousands] = seconds_and_hundreds[seconds_and_hundreds.index(".")+1..-1].to_i * 10
+      index = seconds_and_hundreds.index(".")
+      results[:seconds] = seconds_and_hundreds[0..(index-1)].to_i
+      results[:thousands] = seconds_and_hundreds[(index+1)..-1].to_i
     end
     results
   end
