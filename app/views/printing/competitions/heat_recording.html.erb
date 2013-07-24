@@ -22,25 +22,15 @@
     </thead>
     <tbody>
       <% @signed_up_list[ag_entry].each do |reg| %>
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= reg.external_id %></td>
-          <td><%= reg %></td>
-          <td></td>
-          <td></td>
-        </tr>
+        <%= render :partial => "heat_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => false } %>
       <% end %>
       <% @not_signed_up_list[ag_entry].each do |reg| %>
-        <tr>
-          <td></td>
-          <td></td>
-          <td class="not_signed_up"><%= reg.external_id %></td>
-          <td class="not_signed_up"><%= reg %></td>
-          <td></td>
-          <td></td>
-        </tr>
+        <%= render :partial => "heat_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => true } %>
       <% end %>
+      <% 5.times do %>
+        <%= render :partial => "heat_entry", :locals => {:id => nil, :name => nil, :not_signed_up => false} %>
+      <% end %>
+
     </tbody>
   </table>
   <div class="page-break"></div>

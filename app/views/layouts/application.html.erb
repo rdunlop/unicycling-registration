@@ -20,8 +20,8 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
       <a id="dev_banner_remover" href="#" class="banner_remover" data-banner-class="dev_banner" title="Remove dev banner">[x]</a>
     </div>
   <% end %>
-  <hr>
-  <nav>
+  <hr class="non_printable">
+  <nav class="non_printable">
     <ul>
       <% if EventConfiguration.configuration_exists? %>
         <% target_url = EventConfiguration.event_url %>
@@ -196,7 +196,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <%= yield %>
   </div>
 
-  <div class="bottom_nav">
+  <div class="bottom_nav non_printable">
     <p>Developed by Robin Dunlop</p>
     <li><%= link_to 'Help', welcome_help_path %></li>
   </div>

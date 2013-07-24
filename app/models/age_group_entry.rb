@@ -23,6 +23,9 @@ class AgeGroupEntry < ActiveRecord::Base
   end
 
   def to_s
+    unless wheel_size_name.nil?
+      return short_description + ", #{wheel_size_name}"
+    end
     short_description
   end
 end

@@ -16,7 +16,7 @@
   <tbody>
     <% @male_time_results.each_with_index do |time_result, index| %>
       <tr>
-        <td><%= index + 1 %></td>
+        <td><%= time_result.overall_place %></td>
         <td><%= time_result.full_time %></td>
         <td><%= time_result.competitor.external_id %></td>
         <td><%= time_result.competitor %></td>
@@ -27,7 +27,7 @@
     <% end %>
     <% @female_time_results.each_with_index do |time_result, index| %>
       <tr>
-        <td><%= index + 1 %></td>
+        <td><%= time_result.overall_place %></td>
         <td><%= time_result.full_time %></td>
         <td><%= time_result.competitor.external_id %></td>
         <td><%= time_result.competitor %></td>

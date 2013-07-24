@@ -1,6 +1,7 @@
 <h1>Listing Time Results for <%= @competition %></h1>
 
-<%= link_to "Set Racing Places", set_places_competition_time_results_path(@competition), method: :put %>
+<%= link_to "Set Racing Places", set_places_competition_time_results_path(@competition), method: :put, :confirm => "This may take a few seconds" %>
+<%= link_to "View Top Results", final_candidates_competition_time_results_path(@competition) %>
 
 <table class="sortable">
   <thead>

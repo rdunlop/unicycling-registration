@@ -53,6 +53,11 @@ class TimeResult < ActiveRecord::Base
     (minutes * 60000) + (seconds * 1000) + thousands
   end
 
+  def is_top?(search_gender)
+    return false if disqualified
+    return false if search_gender != competitor.gender
+    return overall_place.to_i <= 10
+  end
 
   def age_group_entry_description
     registrant = competitor.members.first.registrant
