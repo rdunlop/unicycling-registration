@@ -37,11 +37,4 @@ $(document).ready(function() {
       "bPaginate": false
     });
   });
-  $("#all_registrants").dataTable({
-    "aoColumnDefs": [
-      {"bVisible": false, "aTargets": [0] }
-    ],
-    "bInfo": false,
-    "bPaginate": false
-  });
 });

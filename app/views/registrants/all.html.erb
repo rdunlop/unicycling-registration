@@ -1,17 +1,17 @@
 <h1>All Registrants</h1>
 
-<table id="all_registrants">
+<table class="sortable">
   <thead>
     <tr>
-      <th></th>
+      <th>ID</th>
       <th>Name</th>
       <th>Country</th>
     </tr>
   </thead>
   <tbody>
-    <% @registrants.each_with_index do |registrant, index| %>
+    <% @registrants.each do |registrant| %>
       <tr>
-        <td><%= index + 1 %></td>
+        <td><%= registrant.bib_number %></td>
         <td><%= registrant %></td>
         <td><%= registrant.country %></td>
       </tr>
