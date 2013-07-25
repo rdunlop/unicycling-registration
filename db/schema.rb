@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725140304) do
+ActiveRecord::Schema.define(:version => 20130725165750) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -197,8 +197,9 @@ ActiveRecord::Schema.define(:version => 20130725140304) do
     t.integer  "seconds"
     t.integer  "thousands"
     t.boolean  "disqualified"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "competition_id"
   end
 
   add_index "import_results", ["user_id"], :name => "index_imported_results_user_id"

@@ -22,9 +22,9 @@ describe Upload do
 
     up = Upload.new
 
-    data = up.extract_lif(sample_input)
+    data = up.extract_csv(sample_input)
 
-    data.count.should == 8
+    data.count.should == 9 #includes header row
   end
 
   it "can extract csv for lif race results (exact)" do
@@ -33,9 +33,26 @@ describe Upload do
 
     up = Upload.new
 
-    data = up.extract_lif(sample_input)
+    data = up.extract_csv(sample_input)
 
     data.count.should == 4
+  end
+
+  it "can convert a lif hash to data" do
+    up = Upload.new
+
+    arr = [7,nil,4,nil,nil,nil,"DQ",nil,nil,nil,nil,nil,nil,nil,nil]
+
+    hash = up.convert_lif_to_hash(arr)
+    hash.size.should == 5
+  end
+
+  it "can print a lif array" do
+    up = Upload.new
+
+    arr = [7,nil,4,nil,nil,nil,"DQ",nil,nil,nil,nil,nil,nil,nil,nil]
+
+    up.convert_array_to_string(arr).should == "[7,,4,,,,DQ,,,,,,,,]"
   end
 
   it "can convert an disqualification into data" do
@@ -43,7 +60,7 @@ describe Upload do
 
     arr = [7,'',4,'','','',"DQ",'','','','','','','','']
 
-    hash = up.convert_to_hash(arr)
+    hash = up.convert_lif_to_hash(arr)
     hash[:minutes].should == 0
     hash[:seconds].should == 0
     hash[:thousands].should == 0

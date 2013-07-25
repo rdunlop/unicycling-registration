@@ -215,10 +215,6 @@ Workspace::Application.routes.draw do
       get :distance_attempts
       post :lock
       delete :lock
-      # Import data
-      get :get_import_time_results
-      post :confirm_import_time_results
-      post :import_time_results
     end
     resources :competitors, :only => [:index, :new, :create] do
       collection do

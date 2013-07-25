@@ -14,6 +14,7 @@
   <table>
     <thead>
       <tr>
+        <th>Competition</th>
         <th>Raw Data</th>
         <th>Bib Number</th>
         <th>Minutes</th>
@@ -25,6 +26,7 @@
     </thead>
     <tbody>
       <tr>
+        <td><%= f.select :competition_id, Competition.all.map {|comp| [comp.name, comp.id] }  %></td>
         <td><%= f.text_field :raw_data %></td>
         <td><%= f.number_field :bib_number %></td>
         <td><%= f.number_field :minutes %></td>

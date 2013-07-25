@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :import_result do
     user # FactoryGirl
+    competition # FactoryGirl
     raw_data "MyString"
     bib_number 1
     minutes 1

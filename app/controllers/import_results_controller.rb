@@ -86,6 +86,7 @@ class ImportResultsController < ApplicationController
   # POST /users/#/import_results/import_csv
   def import_csv
     upload = Upload.new
+    comp = Competition.find(params[:competition_id])
     # FOR EXCEL DATA:
     raw_data = upload.extract_csv(params[:file])
     n = 0
@@ -93,6 +94,7 @@ class ImportResultsController < ApplicationController
     raw_data.each do |raw|
       result = @user.import_results.build
       result.raw_data = upload.convert_array_to_string(raw)
+      result.comp = comp
       result.bib_number = raw[0]
       result.minutes = raw[1]
       result.seconds = raw[2]
@@ -112,16 +114,19 @@ class ImportResultsController < ApplicationController
   def import_lif
     upload = Upload.new
     raw_data = upload.extract_csv(params[:file])
+    comp = Competition.find(params[:competition_id])
     heat = params[:heat]
     n = 0
     err = 0
+    raw_data.shift #drop header row
     raw_data.each do |raw|
       lif_hash = upload.convert_lif_to_hash(raw)
       lane = lif_hash[:lane]
-      id = get_id_from_lane_assignment(@competition.id, heat, lane)
+      id = get_id_from_lane_assignment(comp, heat, lane)
 
       result = @user.import_results.build
       result.raw_data = upload.convert_array_to_string(raw)
+      result.competition = comp
       result.bib_number = id
       result.minutes = lif_hash[:minutes]
       result.seconds = lif_hash[:seconds]
@@ -133,7 +138,7 @@ class ImportResultsController < ApplicationController
         err = err + 1
       end
     end
-    redirect_to user_import_results(@user), notice: "#{n} rows added, and #{err} errors"
+    redirect_to user_import_results_path(@user), notice: "#{n} rows added, and #{err} errors"
   end
 
   def destroy_all
@@ -141,54 +146,42 @@ class ImportResultsController < ApplicationController
     redirect_to user_import_results_path(@user)
   end
 
-  private 
-  def get_id_from_lane_assignment(comp, heat, lane)
-    la = LaneAssignment.find_by_competition_id_and_heat_and_lane(@competition.id, heat, lane)
-    if la.nil?
-      id = nil
-    else
-      id = la.registrant.bib_number
-    end
-    id
-  end
-
   # POST /competitions/#/publish_to_competition
   def publish_to_competition
-    upload = Upload.new
+    import_results = @user.import_results
 
-    #LIF:
-    @data = upload.extract_lif(params[:file])
-    heat = params[:heat]
-
+    @competition = nil
     n = 0
-    @data.each do |row|
+    err = 0
+    import_results.each do |ir|
       tr = TimeResult.new
-      # EXCEL
-      #id = row[0]
-      # LIF
-      lane = row[0]
-      id = get_id_from_lane_assignment(@competition.id, heat, lane)
+      competition = ir.competition
+      @competition = competition
 
-      comp = @competition.find_competitor_with_bib_number(id)
+      id = ir.bib_number
+
+      comp = competition.find_competitor_with_bib_number(id)
       if comp.nil?
-        comp = @competition.competitors.build
+        comp = competition.competitors.build
         member = comp.members.build
         member.registrant = Registrant.find_by_bib_number(id)
         if !member.valid?
           member.errors.each do |err|
             puts "mem erro: #{err}"
+            err += 1
           end
         end
         if !comp.save
           comp.errors.each do |err|
             puts "error creating competitor because: #{err}"
+            err += 1
           end
         end
       end
-      tr.minutes = row[1]
-      tr.seconds = row[2]
-      tr.thousands = row[3]
-      tr.disqualified = (row[4] == "DQ")
+      tr.minutes = ir.minutes
+      tr.seconds = ir.seconds
+      tr.thousands = ir.thousands
+      tr.disqualified = ir.disqualified
       tr.competitor = comp
       if tr.save
         n += 1
@@ -199,8 +192,19 @@ class ImportResultsController < ApplicationController
       end
     end
     respond_to do |format|
-      format.html { redirect_to competition_time_results_path(@competition), notice: "Added #{n} rows to #{@competition}" }
+      format.html { redirect_to competition_time_results_path(@competition), notice: "Added #{n} rows to #{@competition}. #{err} errors" }
     end
+  end
+
+  private 
+  def get_id_from_lane_assignment(comp, heat, lane)
+    la = LaneAssignment.find_by_competition_id_and_heat_and_lane(comp.id, heat, lane)
+    if la.nil?
+      id = nil
+    else
+      id = la.registrant.bib_number
+    end
+    id
   end
 end
 

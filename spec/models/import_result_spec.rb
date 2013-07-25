@@ -17,6 +17,10 @@ describe ImportResult do
     @ir.user_id = nil
     @ir.valid?.should == false
   end
-  
+
+  it "requires a competition" do
+    @ir.competition_id = nil
+    @ir.valid?.should == false
+  end
 
 end
