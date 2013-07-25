@@ -62,6 +62,7 @@ FUTURE THINGS (LATER):
  - Keyboard Shortcuts for most common functions
 - Add Blank Expert Heat Lane Assignment Forms (for both 6-lane and 8-lane tracks?)
 - Improve the formatting of the Lane Assignment role instructions-
+- "Are you leaving at the end of competition"? (question for registrants at check-in time).
 
 
 

@@ -1,8 +1,9 @@
+require 'upload'
 class ImportResultsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_user, :only => [:index, :create]
+  before_filter :load_user, :only => [:index, :create, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
 
   def load_user
     @user = User.find(params[:user_id])
@@ -80,4 +81,126 @@ class ImportResultsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  # POST /users/#/import_results/import_csv
+  def import_csv
+    upload = Upload.new
+    # FOR EXCEL DATA:
+    raw_data = upload.extract_csv(params[:file])
+    n = 0
+    err = 0
+    raw_data.each do |raw|
+      result = @user.import_results.build
+      result.raw_data = upload.convert_array_to_string(raw)
+      result.bib_number = raw[0]
+      result.minutes = raw[1]
+      result.seconds = raw[2]
+      result.thousands = raw[3]
+      result.disqualified = (raw[4] == "DQ")
+      if result.save
+        n = n + 1
+      else
+        err = err + 1
+      end
+    end
+    redirect_to user_import_results_path(@user), notice: "#{n} rows added, and #{err} errors"
+  end
+
+  # FOR LIF (track racing) data:
+  # GET /users/#/import_results/import_lif
+  def import_lif
+    upload = Upload.new
+    raw_data = upload.extract_csv(params[:file])
+    heat = params[:heat]
+    n = 0
+    err = 0
+    raw_data.each do |raw|
+      lif_hash = upload.convert_lif_to_hash(raw)
+      lane = lif_hash[:lane]
+      id = get_id_from_lane_assignment(@competition.id, heat, lane)
+
+      result = @user.import_results.build
+      result.raw_data = upload.convert_array_to_string(raw)
+      result.bib_number = id
+      result.minutes = lif_hash[:minutes]
+      result.seconds = lif_hash[:seconds]
+      result.thousands = lif_hash[:thousands]
+      result.disqualified = (lif_hash[:disqualified] == "DQ")
+      if result.save
+        n = n + 1
+      else
+        err = err + 1
+      end
+    end
+    redirect_to user_import_results(@user), notice: "#{n} rows added, and #{err} errors"
+  end
+
+  def destroy_all
+    @user.import_results.destroy_all
+    redirect_to user_import_results_path(@user)
+  end
+
+  private 
+  def get_id_from_lane_assignment(comp, heat, lane)
+    la = LaneAssignment.find_by_competition_id_and_heat_and_lane(@competition.id, heat, lane)
+    if la.nil?
+      id = nil
+    else
+      id = la.registrant.bib_number
+    end
+    id
+  end
+
+  # POST /competitions/#/publish_to_competition
+  def publish_to_competition
+    upload = Upload.new
+
+    #LIF:
+    @data = upload.extract_lif(params[:file])
+    heat = params[:heat]
+
+    n = 0
+    @data.each do |row|
+      tr = TimeResult.new
+      # EXCEL
+      #id = row[0]
+      # LIF
+      lane = row[0]
+      id = get_id_from_lane_assignment(@competition.id, heat, lane)
+
+      comp = @competition.find_competitor_with_bib_number(id)
+      if comp.nil?
+        comp = @competition.competitors.build
+        member = comp.members.build
+        member.registrant = Registrant.find_by_bib_number(id)
+        if !member.valid?
+          member.errors.each do |err|
+            puts "mem erro: #{err}"
+          end
+        end
+        if !comp.save
+          comp.errors.each do |err|
+            puts "error creating competitor because: #{err}"
+          end
+        end
+      end
+      tr.minutes = row[1]
+      tr.seconds = row[2]
+      tr.thousands = row[3]
+      tr.disqualified = (row[4] == "DQ")
+      tr.competitor = comp
+      if tr.save
+        n += 1
+      else
+        tr.errors.each do |err|
+          puts "ERRO: #{err}"
+        end
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to competition_time_results_path(@competition), notice: "Added #{n} rows to #{@competition}" }
+    end
+  end
 end
+

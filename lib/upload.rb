@@ -18,21 +18,16 @@ class Upload
     results
   end
 
-  def extract_lif(file)
-    data = extract_csv(file)
-
-    results = []
-    data.shift # drop the header
-    data.each do |row|
-      conv = convert_to_hash(row)
-
-      results << [conv[:lane], conv[:minutes], conv[:seconds], conv[:thousands], conv[:disqualified] ? "DQ" : 0]
+  def convert_array_to_string(arr)
+    str = "["
+    arr.each do |el|
+      str += "#{el},"
     end
-
-    results
+    str += "]"
+    str
   end
 
-  def convert_to_hash(arr)
+  def convert_lif_to_hash(arr)
     results = {}
 
     results[:lane] = arr[2]
