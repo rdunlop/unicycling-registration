@@ -17,16 +17,17 @@ module EventsHelper
         end
     end
 
-    def scores_link(event)
-        if event.event_class == 'Two Attempt Distance'
+    def scores_link(competition)
+      class_name = competition.event.event_class
+        if class_name == 'Two Attempt Distance'
             link_to 'View Scores', distance_attempts_event_path(event) 
-        elsif event.event_class == 'Freestyle'
+        elsif class_name == 'Freestyle'
+            link_to 'View Scores', freestyle_scores_competition_path(competition)
+        elsif class_name == 'Flatland'
             link_to 'View Scores', freestyle_scores_event_path(event)
-        elsif event.event_class == 'Flatland'
-            link_to 'View Scores', freestyle_scores_event_path(event)
-        elsif event.event_class == 'Street'
-            #link_to 'View Scores', judge_street_scores_path(judge)
-        elsif event.event_class == 'Standard'
+        elsif class_name == 'Street'
+            link_to 'View Scores', street_scores_competition_path(competition)
+        elsif class_name == 'Standard'
             #link_to 'View Scores', judge_standard_scores_path(judge)
         else
             "please update the scores_link function (#{event.event_class})"

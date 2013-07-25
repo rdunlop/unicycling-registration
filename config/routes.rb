@@ -220,6 +220,7 @@ Workspace::Application.routes.draw do
       # view scores
       get :freestyle_scores
       get :distance_attempts
+      get :street_scores
       post :lock
       delete :lock
     end

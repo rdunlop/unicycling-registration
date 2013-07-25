@@ -6,7 +6,7 @@ class CompetitionsController < ApplicationController
 
   before_filter :load_event, :only => [:index, :create_empty]
   before_filter :load_event_category, :only => [:create, :new]
-  before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :lock]
+  before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :street_scores, :lock]
 
   def load_event
     @event = Event.find(params[:event_id])
@@ -144,6 +144,9 @@ class CompetitionsController < ApplicationController
   end
 
   def freestyle_scores
+  end
+
+  def street_scores
   end
 
   def export_scores

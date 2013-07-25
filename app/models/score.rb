@@ -13,8 +13,6 @@ class Score < ActiveRecord::Base
     validates :val_4, :presence => true, :numericality => {:greater_than_or_equal_to => 0} 
     validate :values_within_judge_type_bounds
 
-    default_scope order(:competitor)
-
     def user
         judge.user
     end

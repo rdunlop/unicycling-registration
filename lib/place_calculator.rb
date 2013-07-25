@@ -8,7 +8,6 @@ class PlaceCalculator
     @count = 1
     @previous_time = 0
     @tied_place = 0
-    @was_ineligible = false
   end
 
   def place_next(current_time, dq, ineligible = false)
@@ -19,7 +18,7 @@ class PlaceCalculator
 
 
     # same time as previous time
-    if @previous_time == current_time or @was_ineligible
+    if @previous_time == current_time
       # set the tied place, if this is a new tie
       # return the tied place, which doesn't increase
       @tied_place = @count - 1 if @tied_place == 0

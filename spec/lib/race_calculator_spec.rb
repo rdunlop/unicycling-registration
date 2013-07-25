@@ -162,4 +162,27 @@ describe RaceCalculator do
       end
     end
   end
+  describe "when calculating multiple scores (bug)" do
+    it "has increasing thousands" do
+      @all_together = FactoryGirl.create(:age_group_type)
+      entr = FactoryGirl.create(:age_group_entry, :age_group_type => @all_together, :start_age => 0, :end_age => 100, :gender => "Male")
+      @comp = FactoryGirl.create(:competition, :age_group_type => @all_together)
+      tr1 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 15, :thousands => 935, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
+      tr2 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 23, :thousands => 97, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
+      tr4 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 26, :thousands => 745, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
+      tr5 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 28, :thousands => 498, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
+      tr3 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 25, :thousands => 206, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
+      tr6 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 32, :thousands => 508, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
+      tr7 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 32, :thousands => 815, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
+
+      rc = RaceCalculator.new(@comp)
+      rc.update_all_places
+      tr1.place.should == 1
+      tr2.place.should == 2
+      tr3.place.should == 3
+      tr4.place.should == 4
+      tr5.place.should == 5
+      tr6.place.should == 6
+    end
+  end
 end
