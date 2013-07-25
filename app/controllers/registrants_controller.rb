@@ -31,7 +31,7 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/all
   def all
-    @registrants = Registrant.order(:id)
+    @registrants = Registrant.order(:bib_number)
   end
 
   # GET /registrants/empty_waiver
@@ -93,7 +93,7 @@ class RegistrantsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @registrant }
-      format.pdf { render :pdf => "show", :formats => [:html], :orientation => 'Landscape', :layout => "pdf.html" }
+      format.pdf { render_common_pdf("show", "Landscape") }
     end
   end
 

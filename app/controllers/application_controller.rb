@@ -24,4 +24,14 @@ class ApplicationController < ActionController::Base
   def default_footer
     {:left => '[date] [time]', :center => @config.short_name, :right => '[page] of [topage]'}
   end
+
+  def render_common_pdf(view_name, orientation = "Portrait")
+    render :pdf => view_name, 
+      :print_media_type => true, 
+      :margin => {:top => 2, :left => 2, :right => 2}, 
+      :footer => default_footer, 
+      :formats => [:html], 
+      :orientation => orientation, 
+      :layout => "pdf.html"
+  end
 end

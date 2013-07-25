@@ -11,14 +11,14 @@ class Printing::CompetitionsController < ApplicationController
   def show
     respond_to do |format|
       format.html # multi_lap.html.erb
-      format.pdf { render :pdf => "show", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html" }
+      format.pdf { render_common_pdf("show") }
     end
   end
 
   def announcer
     respond_to do |format|
       format.html # multi_lap.html.erb
-      format.pdf { render :pdf => "announcer", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html" }
+      format.pdf { render_common_pdf("announcer") }
     end
   end
 
@@ -45,7 +45,7 @@ class Printing::CompetitionsController < ApplicationController
 
     respond_to do |format|
       format.html 
-      format.pdf { render :pdf => "heat_recording", :margin => {:top => 2, :left => 2, :right => 2}, :footer => default_footer, :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html" }
+      format.pdf { render_common_pdf("heat_recording") }
     end
   end
 
@@ -72,7 +72,7 @@ class Printing::CompetitionsController < ApplicationController
 
     respond_to do |format|
       format.html 
-      format.pdf { render :pdf => "two_attempt_recording", :margin => {:top => 2, :left => 2, :right => 2}, :footer => default_footer, :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html" }
+      format.pdf { render_common_pdf("two_attempt_recording") }
     end
   end
 
@@ -91,8 +91,7 @@ class Printing::CompetitionsController < ApplicationController
 
     respond_to do |format|
       format.html 
-      format.pdf { render :pdf => "race_results", :print_media_type => true, :margin => {:top => 2, :left => 2, :right => 2}, :footer => default_footer, :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html" }
-
+      format.pdf { render_common_pdf("race_results", "Portrait") }
     end
   end
 end

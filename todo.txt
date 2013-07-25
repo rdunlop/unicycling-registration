@@ -1,3 +1,81 @@
+NAUCC 2013 TODO LIST and Stuff. (SOME of this may get done).
+
+EASY wins:
+- Add default sort orders to all objects
+
+- Add default pdf options, including a page footer
+ - @media print
+
+- Fix TimeResults Destroy action
+
+- Lane Assignments Heat/Lane/Comptetion should be unique
+ - And should show nice error message if you get it wrong
+
+- Improve the formatting of the Lane Assignment role instructions-
+
+- Improve the UI of the "My Events" page, so that the "Heat assignment" people have:
+ - The ability to search for a competitor
+ - A short list of the available competitions
+ - The speed/lane-assignment information
+ - Instructions
+
+- Add a "all registrants" report which includes their bib number
+
+IMPORTANT things:
+- Ability to enter results for Hockey (ie: results without supporting scores)
+- Should be able to enter obstacle course data (multiple data points, fastest wins)
+- Create Awards menu which allows choosing an event, the places (1-3), and creating the awards
+ - For artistic, it will create labels for each
+ - Once the awards have been chosen, printing those data onto either Circle or Rectangular labels.
+- Import should NOT require 2 import steps
+- Import should include the raw data, for ease of referenc
+- Import Data without a Heat/Lane should show a nice error message
+ - With a link to the Heat/lane data for lookup
+- Allow the user to specify the format of the import data, so that it doesn't have to be hard-coded (or perhaps provide a base set of formats?)
+- Don't eliminate places which are not affected by new time_results
+- Fix association between Competitions and events (separate from event-categories?)
+ - So that the Expert Competition can be properly associated.
+- Add ability to create new competitinos (Expert competition?)
+- UI for using the "International (Ineligible)" selection for registrants.
+- UI for configuring a racer's "Default Wheel Size"
+- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
+
+LESS IMPORTANT THINGS:
+- Improve the "Manage Judges" menu for each competition
+
+FUTURE THINGS (AFTER NATIONALS)
+- Create a Expenses-Paid function which will suffice for USA data (see e-mail to hans)
+- Get the unit tests running again
+- Should be able to capture the "DQ" and "DQ reason" fields in a form easily ,for use by the finish judge.
+
+FUTURE THINGS (LATER):
+- Make the "Lane Assignment" a role that can be added to a user, separate from the normal "judge" role.
+- Improve the "My Events" view for judges by "ordering" the competitions?
+- Be able to print the Race Results by Age Group more easily.
+- Improve the formatting of the Score data entry
+- Improve the formatting of the Chief JUdge view-all-scores report
+- Fix problem when typing in value for "position" and getting it wrong (and it breaks the system)
+- SUMMARY:
+ - Improve the time spent to generate the Summary page (so that the all-summary works in <15 seonds)
+ - Mark Atkinson's Sumarry is 2 pages, why?
+ - no-wrap the age-group cell contents
+ - Keyboard Shortcuts for most common functions
+- Add Blank Expert Heat Lane Assignment Forms (for both 6-lane and 8-lane tracks?)
+
+
+
+UNCATEGORIZED:
+
+- Be able to choose "Age Group", or "Overall" (necessary for the 10k, but not so for the 100m)
+- Should be able to more easily enter Time Results data by hand (dq,s etc) (not required that the racer be a competitor?)
+- Fix TimeResult dropdown,order, to be sorted, and show ? non-signed-up-people?
+- Ability to specify a "name" for user accounts, so that I can refer to "judge" accounts properly.
+?- Ability to show the Events, Judges, so that the Chief Judge can determine the next events' judges in advance
+- Select that an Event-Category "has Expert Awards (calculates the top 10's, and displays the menus for this)"
+ - and "has finals? (displays the top-10, and the ability to create an 'expert' competition from those top 10)"
+
+- Document the flows
+- Automate the testing of the flows 
 - Get rid of XXX
 - Prevent multiple judges from entering results for the same registrant in TimeResults
 

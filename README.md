@@ -414,6 +414,18 @@ To Run the Production setup locally
 
     $ PGPASSWORD=password pg_dump -h localhost -U postgres -f test.dump -F t app_production
 
+Setting the correct timezone
+----------------------------
+
+In order to have all printed reports have the correct timestamp on them, you
+should set the timezone of the server.
+
+* Run 'tzselect'
+* After choosing the options, put the resulting line into ~/.profile
+* Example:
+
+    $ cat "TZ='America/New_York'; export TZ" >> ~/.profile
+
 Comments on the database schema
 ===============================
 

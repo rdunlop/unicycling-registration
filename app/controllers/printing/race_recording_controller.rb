@@ -8,14 +8,14 @@ class Printing::RaceRecordingController < ApplicationController
   def instructions
     respond_to do |format|
       format.html # multi_lap.html.erb
-      format.pdf { render :pdf => "instructions", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html" }
+      format.pdf { render_common_pdf("instructions") }
     end
   end
 
   def multi_lap
     respond_to do |format|
       format.html # multi_lap.html.erb
-      format.pdf { render :pdf => "multi_lap", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html" }
+      format.pdf { render_common_pdf("multi_lap") }
     end
   end
 end
