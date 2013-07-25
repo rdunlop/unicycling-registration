@@ -16,6 +16,7 @@ class Ability
       if user.has_role? :admin
         can :manage, Competitor
         can :manage, ImportResult
+        can :manage, AwardLabel
       elsif user.has_role? :judge
         can :read, Competitor
       end
