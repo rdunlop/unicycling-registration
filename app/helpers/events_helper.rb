@@ -9,7 +9,7 @@ module EventsHelper
         elsif class_name == 'Flatland'
             link_to judge.judge_type.name, competition_competitors_path(judge.competition)
         elsif class_name == 'Street'
-            link_to judge.judge_type.name, competition_street_scores_path(judge.competition)
+            link_to judge.judge_type.name, judge_street_scores_path(judge)
         elsif class_name == 'Standard'
             link_to judge.judge_type.name, competition_standard_scores_path(judge.competition)
         else
