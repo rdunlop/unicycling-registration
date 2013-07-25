@@ -15,6 +15,7 @@ class Ability
       # Competitor Assignment
       if user.has_role? :admin
         can :manage, Competitor
+        can :manage, ImportResult
       elsif user.has_role? :judge
         can :read, Competitor
       end

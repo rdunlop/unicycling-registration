@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
 
   has_many :payments
 
+  has_many :import_results
+
   def to_s
     email
   end

@@ -8,44 +8,45 @@ DONE- Add default pdf options, including a page footer
 
 DONE - Fix TimeResults Destroy action
 
-- Lane Assignments Heat/Lane/Comptetion should be unique
- - And should show nice error message if you get it wrong
-
-
-- Improve the UI of the "My Events" page, so that the "Heat assignment" people have:
- - The ability to search for a competitor
- - A short list of the available competitions
- - The speed/lane-assignment information
- - Instructions
-
-- Add a "all registrants" report which includes their bib number
+DONE - Add a "all registrants" report which includes their bib number
 
 IMPORTANT things:
-- Ability to enter results for Hockey (ie: results without supporting scores)
-- Should be able to enter obstacle course data (multiple data points, fastest wins)
+- Import should NOT require 2 import steps
+- Import should include the raw data, for ease of referenc
+- Allow the user to specify the format of the import data, so that it doesn't have to be hard-coded (or perhaps provide a base set of formats?)
+
 - Create Awards menu which allows choosing an event, the places (1-3), and creating the awards
  - For artistic, it will create labels for each
  - Once the awards have been chosen, printing those data onto either Circle or Rectangular labels.
-- Import should NOT require 2 import steps
-- Import should include the raw data, for ease of referenc
+
+- UI for using the "International (Ineligible)" selection for registrants.
+
+- Should be able to enter obstacle course data (multiple data points, fastest wins)
+- Ability to enter results for Hockey (ie: results without supporting scores)
+
 - Import Data without a Heat/Lane should show a nice error message
  - With a link to the Heat/lane data for lookup
-- Allow the user to specify the format of the import data, so that it doesn't have to be hard-coded (or perhaps provide a base set of formats?)
 - Don't eliminate places which are not affected by new time_results
 - Fix association between Competitions and events (separate from event-categories?)
  - So that the Expert Competition can be properly associated.
 - Add ability to create new competitinos (Expert competition?)
-- UI for using the "International (Ineligible)" selection for registrants.
-- UI for configuring a racer's "Default Wheel Size"
-- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
 
 LESS IMPORTANT THINGS:
 - Improve the "Manage Judges" menu for each competition
+- UI for configuring a racer's "Default Wheel Size"
+- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
 
 FUTURE THINGS (AFTER NATIONALS)
 - Create a Expenses-Paid function which will suffice for USA data (see e-mail to hans)
 - Get the unit tests running again
 - Should be able to capture the "DQ" and "DQ reason" fields in a form easily ,for use by the finish judge.
+- Improve the UI of the "My Events" page, so that the "Heat assignment" people have:
+ DONE- The ability to search for a competitor
+ - A short list of the available competitions
+ - The speed/lane-assignment information
+ - Instructions
+- Lane Assignments Heat/Lane/Comptetion should be unique
+ - And should show nice error message if you get it wrong
 
 FUTURE THINGS (LATER):
 - Make the "Lane Assignment" a role that can be added to a user, separate from the normal "judge" role.

@@ -1,8 +1,6 @@
 Workspace::Application.routes.draw do
 
 
-
-
   namespace :printing do
     namespace :race_recording do
       get :multi_lap
@@ -188,6 +186,7 @@ Workspace::Application.routes.draw do
         get :invitations
       end
     end
+    resources :import_results, :shallow => true, :except => [:new, :show]
   end
   resources :additional_registrant_accesses, :only => [] do
     member do

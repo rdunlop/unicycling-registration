@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724191546) do
+ActiveRecord::Schema.define(:version => 20130725140304) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -188,6 +188,20 @@ ActiveRecord::Schema.define(:version => 20130724191546) do
   end
 
   add_index "expense_items", ["expense_group_id"], :name => "index_expense_items_expense_group_id"
+
+  create_table "import_results", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "raw_data"
+    t.integer  "bib_number"
+    t.integer  "minutes"
+    t.integer  "seconds"
+    t.integer  "thousands"
+    t.boolean  "disqualified"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "import_results", ["user_id"], :name => "index_imported_results_user_id"
 
   create_table "judge_types", :force => true do |t|
     t.string   "name"

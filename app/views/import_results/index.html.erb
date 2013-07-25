@@ -1,0 +1,33 @@
+<h1>New Importing Data</h1>
+
+<%= render 'form' %>
+
+<h1>Listing Import Results</h1>
+<table>
+  <tr>
+    <th>Raw data</th>
+    <th>Bib number</th>
+    <th>Minutes</th>
+    <th>Seconds</th>
+    <th>Thousands</th>
+    <th>Disqualified</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @import_results.each do |import_result| %>
+  <tr>
+    <td><%= import_result.raw_data %></td>
+    <td><%= import_result.bib_number %></td>
+    <td><%= import_result.minutes %></td>
+    <td><%= import_result.seconds %></td>
+    <td><%= import_result.thousands %></td>
+    <td><%= import_result.disqualified %></td>
+    <td><%= link_to 'Edit', edit_import_result_path(import_result) %></td>
+    <td><%= link_to 'Destroy', import_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
