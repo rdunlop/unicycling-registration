@@ -102,3 +102,11 @@ table.results {
     font-size: 20px;
   }
 }
+.nobreak {
+  page-break-inside: avoid;
+}
+.age_group_separator {
+  margin-top: 70px;
+  background-color: black;
+  height: 5px;
+}

@@ -83,6 +83,7 @@ class Printing::CompetitionsController < ApplicationController
     @age_group_entries.each do |ag_entry|
       @results_list[ag_entry] = []
     end
+    @no_page_breaks = true unless params[:no_page_breaks].nil?
 
     @competition.time_results.fastest_first.each do |tr|
       calculated_ag = @agt.age_group_entry_for(tr.competitor.age, tr.competitor.gender, tr.competitor.wheel_size)

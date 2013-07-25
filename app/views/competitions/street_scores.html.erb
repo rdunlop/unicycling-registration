@@ -1,0 +1,138 @@
+<h1>Freestyle - <%=@competition %> Judging Form</h1>
+
+<div class="scores">
+<h3><%= @competition %> Raw Scores</h3>
+
+<% @competition.judge_types.uniq.each do |jt| %>
+<table class="scores_outer">
+  <tr>
+  <td>
+  <!-- left-header -->
+  <table class="scores_header">
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+    <tr>
+      <th>Order</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th class="derived">Place</th>
+    </tr>
+<% @competition.competitors.each do |competitor| %>
+    <tr>
+      <td><%= competitor.position %></td>
+      <td><%= competitor.external_id %></td>
+      <td><%= competitor.name %></td>
+      <td class="derived"><%= @competition.competitor_place(competitor) %></td>
+    </tr>
+<% end %>
+  </table>
+  </td>
+<% @competition.judges.each_with_index do |judge, index| %>
+<%   # only display for this judge_type
+     if judge.judge_type != jt
+        next
+     end
+     %>
+  <td>
+  <table class="scores_inner">
+    <thead>
+      <tr>
+        <th colspan="6">Judge: <%= judge.name %><br /><%= judge.judge_type %></th>
+      </tr>
+      <tr>
+        <th>Rank</th>
+        <th class="derived">Total</th>
+        <th class="derived">Points</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% judge.competitors.each do |competitor| %>
+    <tr>
+      <% score = judge.get_score(competitor) %>
+      <% if !score.nil? %>
+        <td><%= score.val_1 %><br /></td>
+        <td class="derived"><%= score.Total %><br /></td>
+        <td class="derived"><%= @competition.score_judged_points(score) %></td>
+      <% else %>
+        <td colspan="6" class="empty">-</td>
+      <% end %>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </td>
+<% end %>
+  <td>
+    <table class="scores_inner">
+    <thead>
+      <tr>
+        <th class="derived">TOTAL</th>
+      </tr>
+      <tr>
+        <th class="derived"><%= jt.name %><br />Pts</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @competition.competitors.each do |competitor| %>
+      <tr>
+          <td class="derived"><%= @competition.competitor_placing_points(competitor, jt) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  </td>
+</tr>
+</table>
+<% end %>
+
+<table class="scores_outer">
+  <tr>
+  <td>
+  <!-- left-header -->
+  <table class="scores_header">
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+    <tr>
+      <th>Order</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th class="derived">Place</th>
+    </tr>
+<% @competition.competitors.each do |competitor| %>
+    <tr>
+      <td><%= competitor.position %></td>
+      <td><%= competitor.external_id %></td>
+      <td><%= competitor.name %></td>
+      <td class="derived"><%= @competition.competitor_place(competitor) %></td>
+    </tr>
+<% end %>
+  </table>
+  </td>
+  <td>
+    <table class="scores_inner">
+    <thead>
+      <tr>
+        <th colspan="2">TOTAL</th>
+      </tr>
+      <tr>
+        <th class="derived" colspan="1">Total Placing<br />Points</th>
+        <th class="derived" colspan="1">Place</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @competition.competitors.each do |competitor| %>
+      <tr>
+        <td class="derived"><%= @competition.competitor_total_placing_points(competitor) %></td>
+        <td class="derived"><%= @competition.competitor_place(competitor) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  </td>
+</tr>
+</table>
+<hr />
+<%= link_to 'Download Scores CSV', export_scores_competition_path(@competition) %>
+</div>
