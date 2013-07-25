@@ -1,17 +1,16 @@
 NAUCC 2013 TODO LIST and Stuff. (SOME of this may get done).
 
 EASY wins:
-- Add default sort orders to all objects
+DONE - Add default sort orders to all objects
 
-- Add default pdf options, including a page footer
+DONE- Add default pdf options, including a page footer
  - @media print
 
-- Fix TimeResults Destroy action
+DONE - Fix TimeResults Destroy action
 
 - Lane Assignments Heat/Lane/Comptetion should be unique
  - And should show nice error message if you get it wrong
 
-- Improve the formatting of the Lane Assignment role instructions-
 
 - Improve the UI of the "My Events" page, so that the "Heat assignment" people have:
  - The ability to search for a competitor
@@ -61,6 +60,7 @@ FUTURE THINGS (LATER):
  - no-wrap the age-group cell contents
  - Keyboard Shortcuts for most common functions
 - Add Blank Expert Heat Lane Assignment Forms (for both 6-lane and 8-lane tracks?)
+- Improve the formatting of the Lane Assignment role instructions-
 
 
 

@@ -76,11 +76,11 @@ class TimeResultsController < ApplicationController
   # DELETE time_results/1
   # DELETE time_results/1.json
   def destroy
-    event = @time_result.event
+    competition = @time_result.competition
     @time_result.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_time_results_path(event) }
+      format.html { redirect_to competition_time_results_path(competition) }
       format.json { head :ok }
     end
   end

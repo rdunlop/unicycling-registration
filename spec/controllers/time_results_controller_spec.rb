@@ -5,7 +5,7 @@ describe TimeResultsController do
     sign_in FactoryGirl.create(:super_admin_user)
     @competition = FactoryGirl.create(:competition)
     @competitor = FactoryGirl.create(:event_competitor, :competition => @competition)
-    @event = @competitor.event
+    @competition = @competitor.competition
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -28,7 +28,7 @@ describe TimeResultsController do
     end
 
     it "Cannot read time_results" do
-      get :index, {:event_id => @event.id}
+      get :index, {:competition_id => @competition.id}
       response.should redirect_to(root_path)
     end
   end
@@ -37,11 +37,11 @@ describe TimeResultsController do
   describe "GET index" do
     it "assigns all time_results as @time_results" do
       time_result = TimeResult.create! valid_attributes
-      get :index, {:event_id => @event.id}
+      get :index, {:competition_id => @competition.id}
       assigns(:time_results).should eq([time_result])
     end
     it "assigns a new time_result" do
-      get :index, {:event_id => @event.id}
+      get :index, {:competition_id => @competition.id}
       assigns(:time_result).should be_a_new(TimeResult)
     end
   end
@@ -58,19 +58,19 @@ describe TimeResultsController do
     describe "with valid params" do
       it "creates a new TimeResult" do
         expect {
-          post :create, {:event_id => @event.id, :time_result => valid_attributes}
+          post :create, {:competition_id => @competition.id, :time_result => valid_attributes}
         }.to change(TimeResult, :count).by(1)
       end
 
       it "assigns a newly created time_result as @time_result" do
-        post :create, {:event_id => @event.id, :time_result => valid_attributes}
+        post :create, {:competition_id => @competition.id, :time_result => valid_attributes}
         assigns(:time_result).should be_a(TimeResult)
         assigns(:time_result).should be_persisted
       end
 
       it "redirects to the created time_result" do
-        post :create, {:event_id => @event.id, :time_result => valid_attributes}
-        response.should redirect_to(event_time_results_path(@event))
+        post :create, {:competition_id => @competition.id, :time_result => valid_attributes}
+        response.should redirect_to(competition_time_results_path(@competition))
       end
     end
 
@@ -78,25 +78,25 @@ describe TimeResultsController do
       it "assigns a newly created but unsaved event_category as @event_category" do
         # Trigger the behavior that occurs when invalid params are submitted
         TimeResult.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :time_result => {}}
+        post :create, {:competition_id => @competition.id, :time_result => {}}
         assigns(:time_result).should be_a_new(TimeResult)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         TimeResult.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :time_result => {}}
+        post :create, {:competition_id => @competition.id, :time_result => {}}
         response.should render_template("index")
       end
       it "loads the time_results" do
         TimeResult.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :time_result => {}}
+        post :create, {:competition_id => @competition.id, :time_result => {}}
         assigns(:time_results).should == []
       end
       it "loads the event" do
         TimeResult.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :time_result => {}}
-        assigns(:event).should == @event
+        post :create, {:competition_id => @competition.id, :time_result => {}}
+        assigns(:competition).should == @competition
       end
     end
   end
@@ -116,7 +116,7 @@ describe TimeResultsController do
       it "redirects to the event time results" do
         time_result = TimeResult.create! valid_attributes
         put :update, {:id => time_result.to_param, :time_result => valid_attributes}
-        response.should redirect_to(event_time_results_path(@event))
+        response.should redirect_to(competition_time_results_path(@competition))
       end
     end
 
@@ -149,9 +149,9 @@ describe TimeResultsController do
 
     it "redirects to the event's time_results list" do
       time_result = FactoryGirl.create(:time_result)
-      event = time_result.event
+      competition = time_result.competition
       delete :destroy, {:id => time_result.to_param}
-      response.should redirect_to(event_time_results_path(event))
+      response.should redirect_to(competition_time_results_path(competition))
     end
   end
 
