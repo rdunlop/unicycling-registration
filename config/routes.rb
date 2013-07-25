@@ -1,6 +1,5 @@
 Workspace::Application.routes.draw do
 
-
   namespace :printing do
     namespace :race_recording do
       get :multi_lap
@@ -191,6 +190,14 @@ Workspace::Application.routes.draw do
         post :import_csv
         post :import_lif
         post :publish_to_competition
+        delete :destroy_all
+      end
+    end
+    resources :award_labels, :shallow => true, :except => [:new, :show] do
+      collection do
+        post :create_labels
+        get :expert_labels
+        get :normal_labels
         delete :destroy_all
       end
     end

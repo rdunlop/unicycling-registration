@@ -1,0 +1,46 @@
+<h1>Listing award_labels</h1>
+
+<table>
+  <tr>
+    <th>Bib number</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Partner first name</th>
+    <th>Partner last name</th>
+    <th>Competition name</th>
+    <th>Team name</th>
+    <th>Age group</th>
+    <th>Gender</th>
+    <th>Details</th>
+    <th>Place</th>
+    <th>Registrant</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @award_labels.each do |award_label| %>
+  <tr>
+    <td><%= award_label.bib_number %></td>
+    <td><%= award_label.first_name %></td>
+    <td><%= award_label.last_name %></td>
+    <td><%= award_label.partner_first_name %></td>
+    <td><%= award_label.partner_last_name %></td>
+    <td><%= award_label.competition_name %></td>
+    <td><%= award_label.team_name %></td>
+    <td><%= award_label.age_group %></td>
+    <td><%= award_label.gender %></td>
+    <td><%= award_label.details %></td>
+    <td><%= award_label.place %></td>
+    <td><%= award_label.registrant %></td>
+    <td><%= link_to 'Edit', edit_award_label_path(award_label) %></td>
+    <td><%= link_to 'Destroy', award_label, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<h1>New award_label</h1>
+
+<%= render 'form' %>
+

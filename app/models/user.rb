@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :payments
 
   has_many :import_results
+  has_many :award_labels
 
   def to_s
     email

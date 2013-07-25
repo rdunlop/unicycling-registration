@@ -1,0 +1,65 @@
+<%= form_for(@award_label.new_record? ? [@user, @award_label] : [@award_label]) do |f| %>
+  <% if @award_label.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@award_label.errors.count, "error") %> prohibited this award_label from being saved:</h2>
+
+      <ul>
+      <% @award_label.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bib_number %><br />
+    <%= f.number_field :bib_number %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :partner_first_name %><br />
+    <%= f.text_field :partner_first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :partner_last_name %><br />
+    <%= f.text_field :partner_last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :competition_name %><br />
+    <%= f.text_field :competition_name %>
+  </div>
+  <div class="field">
+    <%= f.label :team_name %><br />
+    <%= f.text_field :team_name %>
+  </div>
+  <div class="field">
+    <%= f.label :age_group %><br />
+    <%= f.text_field :age_group %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.text_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :details %><br />
+    <%= f.text_field :details %>
+  </div>
+  <div class="field">
+    <%= f.label :place %><br />
+    <%= f.number_field :place %>
+  </div>
+  <div class="field">
+    <%= f.label :registrant_id %><br />
+    <%= f.select :registrant_id, Registrant.all.map {|reg| [reg, reg.id] } %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

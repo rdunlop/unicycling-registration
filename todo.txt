@@ -11,8 +11,8 @@ DONE - Fix TimeResults Destroy action
 DONE - Add a "all registrants" report which includes their bib number
 
 IMPORTANT things:
-- Import should NOT require 2 import steps
-- Import should include the raw data, for ease of referenc
+DONE- Import should NOT require 2 import steps
+DONE - Import should include the raw data, for ease of referenc
 - Allow the user to specify the format of the import data, so that it doesn't have to be hard-coded (or perhaps provide a base set of formats?)
 
 - Create Awards menu which allows choosing an event, the places (1-3), and creating the awards
