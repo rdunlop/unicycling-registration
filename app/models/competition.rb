@@ -19,6 +19,8 @@ class Competition < ActiveRecord::Base
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
 
+  default_scope order(:name)
+
   def to_s
     event.to_s + " - " + self.name
   end

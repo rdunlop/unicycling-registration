@@ -8,4 +8,6 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   validates :expense_item, :registrant, :presence => true
 
+  default_scope order(:expense_item_id)
+
 end

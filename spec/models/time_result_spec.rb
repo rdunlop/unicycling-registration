@@ -67,7 +67,7 @@ describe TimeResult do
       @tr.thousands = 701
     end
     it "can print the full time when all values exist" do
-      @tr.full_time.should == "19:16:701"
+      @tr.full_time.should == "19:16.701"
     end
     it "doesn't print the values if it is disqualified" do
       @tr.disqualified = true
@@ -79,7 +79,7 @@ describe TimeResult do
     @tr.minutes = 9
     @tr.seconds = 6
     @tr.thousands = 05
-    @tr.full_time.should == "9:06:005"
+    @tr.full_time.should == "9:06.005"
   end
 
   it "can print the full time when the minutes are more than an hour" do
@@ -87,7 +87,7 @@ describe TimeResult do
     @tr.seconds = 10
     @tr.thousands = 123
 
-    @tr.full_time.should == "1:01:10:123"
+    @tr.full_time.should == "1:01:10.123"
   end
 
   it "can return the full time in thousands" do

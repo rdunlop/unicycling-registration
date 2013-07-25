@@ -8,6 +8,8 @@ class TimeResult < ActiveRecord::Base
 
   scope :fastest_first, order("disqualified, minutes, seconds, thousands")
 
+  default_scope order(:id)
+
   after_initialize :init
 
   def init

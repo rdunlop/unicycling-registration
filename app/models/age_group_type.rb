@@ -5,6 +5,8 @@ class AgeGroupType < ActiveRecord::Base
 
   has_many :age_group_entries, :dependent => :destroy
 
+  default_scope order(:name)
+
   # Return the age group entry that meets the given age requirements
   def age_group_entry_for(age, gender, default_wheel_size_id = nil)
     entries = age_group_entries.where("(start_age <= :age AND :age <= end_age) AND " +
