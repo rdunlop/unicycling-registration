@@ -1,0 +1,32 @@
+<h1>New Competition</h1>
+
+<h2>Event Category: <%= @event %></h2>
+
+<br />
+<b>NOTE:</b> This will create the competition ONLY<br />
+
+<%= form_tag(create_empty_event_competitions_path(@event)) do %>
+  <% if @competition.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
+
+      <ul>
+        <% competition.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= label_tag :name %><br />
+    <%= text_field_tag :name %>
+  </div>
+  <div class="field">
+    <%= label_tag :age_group_type_id %>
+    <%= select_tag :age_group_type_id, options_from_collection_for_select(AgeGroupType.all, "id", "to_s"), :include_blank => true  %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Create Competition" %>
+  </div>
+<% end %>
