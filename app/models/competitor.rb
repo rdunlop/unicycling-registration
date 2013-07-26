@@ -24,6 +24,51 @@ class Competitor < ActiveRecord::Base
         name
     end
 
+    def place=(place)
+      Rails.cache.write(place_key, place)
+    end
+
+    def place
+      Rails.cache.fetch(place_key) || "Unknown"
+    end
+
+    def overall_place=(place)
+      Rails.cache.write(overall_place_key, place)
+    end
+
+    def overall_place
+      Rails.cache.fetch(overall_place_key) || "Unknown"
+    end
+
+    def age_group_entry_description
+      registrant = members.first.registrant
+      ag_entry_description = competition.determine_age_group_type.try(:age_group_entry_description, registrant.age, registrant.gender, registrant.default_wheel_size.id)
+      if ag_entry_description.nil?
+        "No Age Group for #{registrant.age}-#{registrant.gender}"
+      else
+        ag_entry_description
+      end
+    end
+
+    private
+    def place_key
+      "/competition/#{competition.id}-#{competition.updated_at}/competitor/#{id}-#{updated_at}/place"
+    end
+
+    def overall_place_key
+      "/competition/#{competition.id}-#{competition.updated_at}competitor/#{id}-#{updated_at}/overall_place"
+    end
+
+    public
+    def result
+      case competition.event.event_class
+      when "Two Attempt Distance"
+        max_successful_distance
+      when "Distance"
+        time_results.first.full_time
+      end
+    end
+
     def event
       competition.event
     end

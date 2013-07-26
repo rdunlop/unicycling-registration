@@ -13,7 +13,7 @@ class PlaceCalculator
   def place_next(current_time, dq, ineligible = false)
 
     if dq or current_time == 0
-      return 0
+      return "DQ"
     end
 
 

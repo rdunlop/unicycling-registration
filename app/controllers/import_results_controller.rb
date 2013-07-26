@@ -94,7 +94,7 @@ class ImportResultsController < ApplicationController
     raw_data.each do |raw|
       result = @user.import_results.build
       result.raw_data = upload.convert_array_to_string(raw)
-      result.comp = comp
+      result.competition = comp
       result.bib_number = raw[0]
       result.minutes = raw[1]
       result.seconds = raw[2]
@@ -152,7 +152,7 @@ class ImportResultsController < ApplicationController
 
     @competition = nil
     n = 0
-    err = 0
+    err_count = 0
     import_results.each do |ir|
       tr = TimeResult.new
       competition = ir.competition
@@ -168,14 +168,14 @@ class ImportResultsController < ApplicationController
         if !member.valid?
           member.errors.each do |err|
             puts "mem erro: #{err}"
-            err += 1
           end
+          err_count += 1
         end
         if !comp.save
           comp.errors.each do |err|
             puts "error creating competitor because: #{err}"
-            err += 1
           end
+          err_count += 1
         end
       end
       tr.minutes = ir.minutes
@@ -189,10 +189,11 @@ class ImportResultsController < ApplicationController
         tr.errors.each do |err|
           puts "ERRO: #{err}"
         end
+        err_count += 1
       end
     end
     respond_to do |format|
-      format.html { redirect_to competition_time_results_path(@competition), notice: "Added #{n} rows to #{@competition}. #{err} errors" }
+      format.html { redirect_to competition_time_results_path(@competition), notice: "Added #{n} rows to #{@competition}. #{err_count} errors" }
     end
   end
 

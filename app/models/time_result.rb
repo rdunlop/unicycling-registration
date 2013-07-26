@@ -58,43 +58,4 @@ class TimeResult < ActiveRecord::Base
     return false if search_gender != competitor.gender
     return overall_place.to_i <= 10
   end
-
-  def age_group_entry_description
-    registrant = competitor.members.first.registrant
-    ag_entry_description = competitor.competition.determine_age_group_type.try(:age_group_entry_description, registrant.age, registrant.gender, registrant.default_wheel_size.id)
-    if ag_entry_description.nil?
-      "No Age Group for #{registrant.age}-#{registrant.gender}"
-    else
-      ag_entry_description
-    end
-  end
-
-  def place=(place)
-    Rails.cache.write(place_key, place)
-  end
-
-  def place
-    return "DQ" if disqualified
-
-    Rails.cache.fetch(place_key) || "Unknown"
-  end
-
-  def overall_place=(place)
-    Rails.cache.write(overall_place_key, place)
-  end
-
-  def overall_place
-    return "DQ" if disqualified
-
-    Rails.cache.fetch(overall_place_key) || "Unknown"
-  end
-
-  private
-  def place_key
-    "/competition/#{competition.id}-#{competition.updated_at}/time_results/#{id}-#{updated_at}/place"
-  end
-
-  def overall_place_key
-    "/competition/#{competition.id}-#{competition.updated_at}/time_results/#{id}-#{updated_at}/overall_place"
-  end
 end

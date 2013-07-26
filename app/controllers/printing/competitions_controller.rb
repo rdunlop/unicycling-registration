@@ -87,12 +87,32 @@ class Printing::CompetitionsController < ApplicationController
 
     @competition.time_results.fastest_first.each do |tr|
       calculated_ag = @agt.age_group_entry_for(tr.competitor.age, tr.competitor.gender, tr.competitor.wheel_size)
-      @results_list[calculated_ag] << tr
+      @results_list[calculated_ag] << tr.competitor
     end
 
     respond_to do |format|
       format.html 
       format.pdf { render_common_pdf("race_results", "Portrait") }
+    end
+  end
+
+  def distance_results
+    @agt = @competition.determine_age_group_type
+    @age_group_entries = @agt.age_group_entries
+    @results_list = {}
+    @age_group_entries.each do |ag_entry|
+      @results_list[ag_entry] = []
+    end
+    @no_page_breaks = true unless params[:no_page_breaks].nil?
+
+    @competition.best_distance_attempts.each do |da|
+      calculated_ag = @agt.age_group_entry_for(da.competitor.age, da.competitor.gender, da.competitor.wheel_size)
+      @results_list[calculated_ag] << da.competitor
+    end
+
+    respond_to do |format|
+      format.html 
+      format.pdf { render_common_pdf("distance_results", "Portrait") }
     end
   end
 end

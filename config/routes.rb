@@ -12,6 +12,7 @@ Workspace::Application.routes.draw do
         get :heat_recording
         get :two_attempt_recording
         get :race_results
+        get :distance_results
         get :results
       end
     end
@@ -216,6 +217,7 @@ Workspace::Application.routes.draw do
   resources :competitors, :only => [:edit, :update, :destroy]
   resources :competitions, :except => [:index, :create, :new] do
     member do
+      post :set_places
       get :export_scores
       # view scores
       get :freestyle_scores
@@ -241,7 +243,6 @@ Workspace::Application.routes.draw do
     end
     resources :time_results, :only => [:index, :create] do
       collection do
-        put :set_places
         get :results
         get :final_candidates
       end

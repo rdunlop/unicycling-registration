@@ -72,4 +72,10 @@ class DistanceAttemptsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def set_places
+    @calc = @competition.score_calculator(@competition)
+    @calc.update_all_places
+    redirect_to competition_distance_attempts_path(@competition), :notice => "All Places updated"
+  end
 end

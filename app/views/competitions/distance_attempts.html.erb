@@ -1,27 +1,34 @@
 <h1>Distance Attempts - <%=@competition %></h1>
 
-<div class="scores">
-<h3><%= @competition %> Best Successful Attempts</h3>
+<%= link_to "Set High Jump Places", set_places_competition_path(@competition), :method => :post, data: { confirm: 'This will take a while' }  %>
 
-<table class="distance_attempts">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Distance</th>
-    </tr>
-  </thead>
-  <tbody>
-<% @distance_attempts.each do |da| %>
-  <tr>
-    <td><%= da.competitor.external_id %></td>
-    <td><%= da.competitor.name %></td>
-    <td><%= da.distance %></td>
-  </tr>
-<% end %>
-</table>
-<hr />
-<% if can? :export_scores, @competition %>
+<div class="scores">
+  <h3><%= @competition %> Best Successful Attempts</h3>
+
+  <table class="distance_attempts sortable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Distance</th>
+        <th>Age Group</th>
+        <th>Place</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @distance_attempts.each do |da| %>
+        <tr>
+          <td><%= da.competitor.external_id %></td>
+          <td><%= da.competitor.name %></td>
+          <td><%= da.distance %></td>
+          <td><%= da.competitor.age_group_entry_description %></td>
+          <td><%= da.competitor.place %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <hr />
+  <% if can? :export_scores, @competition %>
     <%= link_to 'Download Scores CSV', export_scores_competition_path(@competition) %>
-<% end %>
+  <% end %>
 </div>

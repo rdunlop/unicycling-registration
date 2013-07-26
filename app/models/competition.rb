@@ -99,6 +99,10 @@ class Competition < ActiveRecord::Base
       @score_calculator = FlatlandScoreCalculator.new(self)
     elsif event_class == 'Street'
       @score_calculator = StreetCompScoreCalculator.new(self)
+    elsif event_class == "Two Attempt Distance"
+      @score_calculator = DistanceCalculator.new(self)
+    elsif  event_class == "Distance"
+      @score_calculator = RaceCalculator.new(self)
     end
   end
 
@@ -176,6 +180,7 @@ class Competition < ActiveRecord::Base
   def best_distance_attempts
     best_attempts_for_each_competitor = competitors.map(&:max_successful_distance_attempt)
     best_attempts_for_each_competitor.delete(nil)
-    best_attempts_for_each_competitor
+
+    best_attempts_for_each_competitor.sort{ |a,b| b.distance <=> a.distance }
   end
 end

@@ -6,7 +6,7 @@ class CompetitionsController < ApplicationController
 
   before_filter :load_event, :only => [:index, :create_empty]
   before_filter :load_event_category, :only => [:create, :new]
-  before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :street_scores, :lock]
+  before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :street_scores, :lock, :set_places]
 
   def load_event
     @event = Event.find(params[:event_id])
@@ -140,6 +140,18 @@ class CompetitionsController < ApplicationController
     @distance_attempts = @competition.best_distance_attempts
     respond_to do |format|
       format.html # index.html.erb
+    end
+  end
+
+  def set_places
+    if @competition.event.event_class == "Distance"
+      @calc = @competition.score_calculator
+      @calc.update_all_places
+      redirect_to competition_time_results_path(@competition), :notice => "All Places updated"
+    elsif @competition.event.event_class == "Two Attempt Distance"
+      @calc = @competition.score_calculator
+      @calc.update_all_places
+      redirect_to distance_attempts_competition_path(@competition), :notice => "All Places Updated"
     end
   end
 

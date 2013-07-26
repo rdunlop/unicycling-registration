@@ -21,8 +21,8 @@
         <td><%= time_result.competitor.external_id %></td>
         <td><%= time_result.competitor %></td>
         <td><%= time_result.competitor.gender %></td>
-        <td><%= time_result.age_group_entry_description %></td>
-        <td><%= time_result.place %></td>
+        <td><%= time_result.competitor.age_group_entry_description %></td>
+        <td><%= time_result.competitor.place %></td>
       </tr>
     <% end %>
     <% @female_time_results.each_with_index do |time_result, index| %>
@@ -32,8 +32,8 @@
         <td><%= time_result.competitor.external_id %></td>
         <td><%= time_result.competitor %></td>
         <td><%= time_result.competitor.gender %></td>
-        <td><%= time_result.age_group_entry_description %></td>
-        <td><%= time_result.place %></td>
+        <td><%= time_result.competitor.age_group_entry_description %></td>
+        <td><%= time_result.competitor.place %></td>
       </tr>
     <% end %>
   </tbody>

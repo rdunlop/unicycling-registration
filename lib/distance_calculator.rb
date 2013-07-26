@@ -1,4 +1,5 @@
-class RaceCalculator
+class DistanceCalculator
+  # FOR TWO-ATTEMPT-DISTANCE (like High/Long jump)
 
   def initialize(competition)
     @competition = competition
@@ -26,12 +27,12 @@ class RaceCalculator
 
     place_calc = PlaceCalculator.new
 
-    @competition.time_results.includes(:competitor).order("minutes, seconds, thousands").each do |tr|
-
+    distance_attempts = @competition.best_distance_attempts
+    distance_attempts.each do |da|
       # only perform updates on the specified age group entry set
-      next if tr.competitor.age_group_entry_description != age_group_entry_description
+      next if da.competitor.age_group_entry_description != age_group_entry_description
 
-      tr.competitor.place = place_calc.place_next(tr.full_time_in_thousands, tr.disqualified, tr.competitor.ineligible)
+      da.competitor.place = place_calc.place_next(da.distance, da.fault, da.competitor.ineligible)
     end
   end
 
@@ -39,10 +40,11 @@ class RaceCalculator
 
     place_calc = PlaceCalculator.new
 
-    @competition.time_results.order("minutes, seconds, thousands").each do |tr|
-      next if tr.competitor.gender != gender
+    distance_attempts = @competition.best_distance_attempts
+    distance_attempts.each do |da|
+      next if da.competitor.gender != gender
 
-      tr.competitor.overall_place = place_calc.place_next(tr.full_time_in_thousands, tr.disqualified, tr.competitor.ineligible)
+      da.competitor.overall_place = place_calc.place_next(da.distance, da.fault, da.competitor.ineligible)
     end
   end
 end

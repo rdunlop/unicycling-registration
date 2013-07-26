@@ -2,7 +2,7 @@
   <% @age_group_entries.each do |ag_entry| %>
     <% next if @results_list[ag_entry].size == 0 %>
     <div class="nobreak">
-      <h1>Race Results</h1>
+      <h1>Results</h1>
       <hr />
       <h2><%= @competition %></h2>
       <hr />
@@ -16,13 +16,13 @@
           <tr>
             <th class="id">ID</th>
             <th class="name">Name</th>
-            <th class="time">Time</th>
+            <th class="time">Distance</th>
             <th class="place">Place</th>
           </tr>
         </thead>
         <tbody>
           <% @results_list[ag_entry].each do |competitor| %>
-            <%= render :partial => "result_entry", :locals => {:id => competitor.external_id, :name => competitor.to_s, :time => competitor.result, :place => competitor.place } %>
+            <%= render :partial => "distance_result_entry", :locals => {:id => competitor.external_id, :name => competitor.to_s, :result => competitor.result, :place => competitor.place } %>
           <% end %>
         </tbody>
       </table>
