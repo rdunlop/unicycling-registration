@@ -13,7 +13,12 @@
 <%= link_to "(pdf)", two_attempt_recording_printing_competition_path(@competition, :format => :pdf) %>
 
 <br /><br />
-<%= link_to "Race Results", race_results_printing_competition_path(@competition) %>
-<%= link_to "(pdf)", race_results_printing_competition_path(@competition, :format => :pdf) %>
+<% if @competition.event_class == "Distance" %>
+  <%= link_to "Race Results", race_results_printing_competition_path(@competition) %>
+  <%= link_to "(pdf)", race_results_printing_competition_path(@competition, :format => :pdf) %>
+<% elsif @competition.event_class == "Two Attempt Distance" %>
+  <%= link_to "Distance Results", distance_results_printing_competition_path(@competition) %>
+  <%= link_to "(pdf)", distance_results_printing_competition_path(@competition, :format => :pdf) %>
+<% end %>
 
 <br /><br />
