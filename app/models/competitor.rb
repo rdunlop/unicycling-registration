@@ -173,7 +173,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def age_group_description
-      agt = competition.age_group_type
+      agt = competition.determine_age_group_type
       if agt.nil?
         "(none)"
       else
