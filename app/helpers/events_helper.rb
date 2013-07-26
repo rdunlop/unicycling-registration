@@ -33,4 +33,21 @@ module EventsHelper
             "please update the scores_link function (#{event.event_class})"
         end
     end
+
+    def judging_menu_url(competition)
+      class_name = competition.event.event_class
+      if class_name == 'Two Attempt Distance'
+        track_events_path
+      elsif class_name == 'Freestyle'
+        freestyle_events_path
+      elsif class_name == 'Flatland'
+        flatland_events_path
+      elsif class_name == 'Street'
+        street_events_path
+      elsif class_name == "Distance"
+        distance_events_path
+      else
+        root_path
+      end
+    end
 end

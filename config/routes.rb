@@ -121,6 +121,7 @@ Workspace::Application.routes.draw do
     end
     resources :competitions, :only => [] do
       collection do
+        get :new_empty
         post :create_empty
       end
     end

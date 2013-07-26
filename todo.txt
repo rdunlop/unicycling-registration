@@ -37,6 +37,7 @@ LESS IMPORTANT THINGS:
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
 
 FUTURE THINGS (AFTER NATIONALS)
+- Ability to create Artistic Group/Pairs competitions based on the fields filled out (?)
 - Create a Expenses-Paid function which will suffice for USA data (see e-mail to hans)
 - Get the unit tests running again
 - Should be able to capture the "DQ" and "DQ reason" fields in a form easily ,for use by the finish judge.

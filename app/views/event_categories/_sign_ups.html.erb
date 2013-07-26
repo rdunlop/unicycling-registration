@@ -1,10 +1,11 @@
-<table>
+<table class="sortable">
     <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Age</th>
             <th>Gender</th>
+            <th>Details</th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
                 <td><%= reg %></td>
                 <td><%= reg.age %></td>
                 <td><%= reg.gender %></td>
+                <td><%= reg.describe_event_hash(@event)[:additional] %></td>
             </tr>
         <% end %>
     </tbody>

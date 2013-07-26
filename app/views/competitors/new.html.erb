@@ -1,6 +1,7 @@
 <h3><%= @competition.event %> - <%= @competition %></h3>
 
 <div>
+  <% @event = @competition.event %>
   <%= render :partial => "/event_categories/sign_ups" %>
 </div>
 <div>

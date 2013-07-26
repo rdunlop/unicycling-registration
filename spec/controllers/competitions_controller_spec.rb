@@ -18,20 +18,7 @@ describe CompetitionsController do
     }
   end
 
-  describe "as a normal user" do
-    before(:each) do
-      @user = FactoryGirl.create(:user)
-      sign_in @user
-    end
-
-    it "Cannot read competitions" do
-      get :index, {:event_id => @event.id}
-      response.should redirect_to(root_path)
-    end
-  end
-
-
-  # /events/#/competitions
+: # /events/#/competitions
   describe "GET index" do
     it "assigns all event's competitions as @competitions" do
       competition = Competition.create! valid_attributes.merge({:event_id => @event.id})

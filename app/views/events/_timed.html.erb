@@ -4,6 +4,7 @@
       <th>Event-Category</th>
       <th>Sign-Ups</th>
       <th>Associated Competition</th>
+      <th></th>
     </tr>
 
     <% @events.each do |event| %>
@@ -17,6 +18,9 @@
             <% else %>
               <%= link_to ec.competition, competition_competitors_path(ec.competition) %>
             <% end %>
+          </td>
+          <td>
+            <%= link_to "Create New (blank)",  new_empty_event_competitions_path(event) %>
           </td>
         </tr>
       <% end %>

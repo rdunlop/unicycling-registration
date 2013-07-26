@@ -1,10 +1,11 @@
 require 'csv'
 require 'upload'
 class CompetitionsController < ApplicationController
+  include EventsHelper
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_event, :only => [:index, :create_empty]
+  before_filter :load_event, :only => [:index, :create_empty, :new_empty]
   before_filter :load_event_category, :only => [:create, :new]
   before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :street_scores, :lock, :set_places]
 
@@ -56,20 +57,27 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
   end
 
+  def new_empty
+    @competition = Competition.new
+  end
+
   # POST /events/#/create_empty
-  def create
-    @competition = Competition.new(params[:competition])
+  def create_empty
+    @competition = Competition.new
+    @competition.name = params[:name]
+    @competition.age_group_type_id = params[:age_group_type_id]
     @competition.event = @event
-    
+
     respond_to do |format|
       if @competition.save
-        format.html { redirect_to root_url, notice: "Competition created successfully" }
+        format.html { redirect_to judging_menu_url(@competition), notice: "Competition created successfully" }
       else
         # XXX???
-        format.html { redirect_to root_url, notice: "ERROR creating competition" }
+        format.html { redirect_to judging_menu_url(@competition), notice: "ERROR creating competition" }
       end
     end
   end
+
   # POST /event_categories/#/competitions
   # POST /event_categories/#/competitions.json
   def create
