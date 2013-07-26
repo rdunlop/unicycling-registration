@@ -43,7 +43,7 @@ describe Competitor do
     end
     it "should be elgiible" do
       comp = FactoryGirl.create(:event_competitor)
-      comp.ineligible.should == true
+      comp.ineligible.should == false
     end
     it "should allow setting the custom_external_id to nil" do
       comp = FactoryGirl.build(:event_competitor)

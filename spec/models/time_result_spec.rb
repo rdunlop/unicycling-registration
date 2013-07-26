@@ -96,18 +96,4 @@ describe TimeResult do
     @tr.thousands = 3
     @tr.full_time_in_thousands.should == 62003
   end
-
-  it "returns DQ if disqualified" do
-    @tr.disqualified = true
-    @tr.place.should == "DQ"
-  end
-
-  it "by default has nil place" do
-    @tr.place.should == "Unknown"
-  end
-
-  it "can store the place" do
-    @tr.place = 1
-    @tr.place.should == 1
-  end
 end
