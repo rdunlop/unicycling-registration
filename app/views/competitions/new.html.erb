@@ -5,6 +5,7 @@
 <h3>Signed Up Competitors</h3>
 (These will be added to the Compettion)
 <% @registrants = @event_category.signed_up_registrants %>
+<% @event = @event_category.event %>
 <%= render :partial => "/event_categories/sign_ups" %> 
 
 <br />
