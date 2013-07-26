@@ -49,18 +49,18 @@ describe RaceCalculator do
 
         @calc.update_all_places
 
-        @tr1.place.should == 1 # not a tie, different groups
-        @tr2.place.should == 1 # not a tie, different groups
+        @tr1.competitor.place.should == 1 # not a tie, different groups
+        @tr2.competitor.place.should == 1 # not a tie, different groups
       end
     end
 
     it "places everyone as 0 if they have no time" do
       @calc.update_all_places
 
-      @tr1.place.should == 0
-      @tr2.place.should == 0
-      @tr3.place.should == 0
-      @tr4.place.should == 0
+      @tr1.competitor.place.should == "DQ"
+      @tr2.competitor.place.should == "DQ"
+      @tr3.competitor.place.should == "DQ"
+      @tr4.competitor.place.should == "DQ"
     end
 
     it "places the first place as first" do
@@ -69,7 +69,7 @@ describe RaceCalculator do
 
       @calc.update_all_places
 
-      @tr1.place.should == 1
+      @tr1.competitor.place.should == 1
     end
 
     it "places DQ's as 'DQ'" do
@@ -79,7 +79,7 @@ describe RaceCalculator do
 
       @calc.update_all_places
 
-      @tr1.place.should == "DQ"
+      @tr1.competitor.place.should == "DQ"
     end
 
     describe "when tr1 is slower than tr2" do
@@ -99,8 +99,8 @@ describe RaceCalculator do
 
         @calc.update_all_places
 
-        @tr1.place.should == 2
-        @tr2.place.should == 1
+        @tr1.competitor.place.should == 2
+        @tr2.competitor.place.should == 1
       end
       describe "when the first competitor is ineligible" do
         before(:each) do
@@ -111,10 +111,10 @@ describe RaceCalculator do
         end
 
         it "places the faster competitor first" do
-          @tr2.place.should == 1
+          @tr2.competitor.place.should == 1
         end
         it "places the slower competitor (eligible) as 1st also" do
-          @tr1.place.should == 1
+          @tr1.competitor.place.should == 1
         end
       end
     end
@@ -129,8 +129,8 @@ describe RaceCalculator do
       it "ties for first" do
         @calc.update_all_places
 
-        @tr1.place.should == 1
-        @tr2.place.should == 1
+        @tr1.competitor.place.should == 1
+        @tr2.competitor.place.should == 1
       end
 
       it "places slower score as 3rd place" do
@@ -139,7 +139,7 @@ describe RaceCalculator do
 
         @calc.update_all_places
 
-        @tr3.place.should == 3
+        @tr3.competitor.place.should == 3
       end
 
       describe "if 3-way tie" do
@@ -154,10 +154,10 @@ describe RaceCalculator do
         it "ties 3 for first, and one for 4th" do
           @calc.update_all_places
 
-          @tr1.place.should == 1
-          @tr2.place.should == 1
-          @tr3.place.should == 1
-          @tr4.place.should == 4
+          @tr1.competitor.place.should == 1
+          @tr2.competitor.place.should == 1
+          @tr3.competitor.place.should == 1
+          @tr4.competitor.place.should == 4
         end
       end
     end
@@ -177,12 +177,12 @@ describe RaceCalculator do
 
       rc = RaceCalculator.new(@comp)
       rc.update_all_places
-      tr1.place.should == 1
-      tr2.place.should == 2
-      tr3.place.should == 3
-      tr4.place.should == 4
-      tr5.place.should == 5
-      tr6.place.should == 6
+      tr1.competitor.place.should == 1
+      tr2.competitor.place.should == 2
+      tr3.competitor.place.should == 3
+      tr4.competitor.place.should == 4
+      tr5.competitor.place.should == 5
+      tr6.competitor.place.should == 6
     end
   end
 end

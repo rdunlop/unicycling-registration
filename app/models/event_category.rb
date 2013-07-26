@@ -10,8 +10,6 @@ class EventCategory < ActiveRecord::Base
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
   validates :position, :uniqueness => {:scope => [:event_id]}
 
-  default_scope order(:position)
-
   def to_s
     event.to_s + " - " + self.name
   end

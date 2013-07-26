@@ -22,7 +22,6 @@ class Event < ActiveRecord::Base
 
   before_validation :build_event_category
 
-  default_scope order(:name)
 
   def build_event_category
     if self.event_categories.empty?

@@ -12,8 +12,6 @@ class RegistrantEventSignUp < ActiveRecord::Base
   belongs_to :event_category
   belongs_to :event
 
-  default_scope order(:event_category_id)
-
   def category_chosen_when_signed_up
     if self.signed_up and self.event_category.nil?
       errors[:base] << "Cannot sign up for #{self.event.name} without choosing a category"

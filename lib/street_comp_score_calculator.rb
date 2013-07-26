@@ -59,7 +59,6 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
     def place(competitor)
 
       my_place = 1
-        puts "Checking competitor #{competitor}"
       my_points = total_points(competitor)
       competitor.competition.competitors.each do |comp|
         comp_points = total_points(comp)

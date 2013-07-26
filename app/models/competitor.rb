@@ -20,6 +20,7 @@ class Competitor < ActiveRecord::Base
     # not all competitor types require a position
     #validates :position, :presence => true,
                          #:numericality => {:only_integer => true, :greater_than => 0}
+
     def to_s
         name
     end

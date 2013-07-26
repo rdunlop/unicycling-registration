@@ -7,7 +7,7 @@ describe PlaceCalculator do
     end
 
     it "should return DQ as place 0" do
-      @calc.place_next(1,true).should == 0
+      @calc.place_next(1,true).should == "DQ"
     end
 
     it "should place ascending times as ascending places" do

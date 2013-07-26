@@ -25,8 +25,6 @@ class JudgeType < ActiveRecord::Base
 
     after_initialize :init
 
-    default_scope order(:name)
-
     def init
         self.val_1_max ||= 10
         self.val_2_max ||= 10

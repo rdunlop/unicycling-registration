@@ -35,7 +35,7 @@ describe Upload do
 
     data = up.extract_csv(sample_input)
 
-    data.count.should == 4
+    data.count.should == 5 # 5 lnes, including header
   end
 
   it "can convert a lif hash to data" do
@@ -52,7 +52,7 @@ describe Upload do
 
     arr = [7,nil,4,nil,nil,nil,"DQ",nil,nil,nil,nil,nil,nil,nil,nil]
 
-    up.convert_array_to_string(arr).should == "[7,,4,,,,DQ,,,,,,,,]"
+    up.convert_array_to_string(arr).should == "[7,,4,,,,DQ,,,,,,,,,]"
   end
 
   it "can convert an disqualification into data" do
@@ -72,7 +72,7 @@ describe Upload do
 
     arr = [3,'',7,'','','',"32.490",'',12.142,'','','','','','']
 
-    hash = up.convert_to_hash(arr)
+    hash = up.convert_lif_to_hash(arr)
     hash[:lane].should == 7
     hash[:minutes].should == 0
     hash[:seconds].should == 32
@@ -84,7 +84,7 @@ describe Upload do
 
     arr = [3,'',7,'','','',"1:32.490",'',12.142,'','','','','','']
 
-    hash = up.convert_to_hash(arr)
+    hash = up.convert_lif_to_hash(arr)
     hash[:lane].should == 7
     hash[:minutes].should == 1
     hash[:seconds].should == 32
