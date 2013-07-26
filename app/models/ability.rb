@@ -21,9 +21,12 @@ class Ability
         can :read, Competitor
       end
 
+      if user.has_role? :race_official or user.has_role? :admin #XXX (add race_official)
+        can :manage, LaneAssignment
+      end
+
       # Scoring abilities
       if user.has_role? :judge
-        can :manage, LaneAssignment
         can :judging, Event
         can :read, Competition
         can :create_scores, Competition do |competition|

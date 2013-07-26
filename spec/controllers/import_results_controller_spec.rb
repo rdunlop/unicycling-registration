@@ -4,6 +4,7 @@ describe ImportResultsController do
   before(:each) do
     @admin_user = FactoryGirl.create(:admin_user)
     sign_in @admin_user
+    @competition = FactoryGirl.create(:competition)
   end
   let (:import_result) { FactoryGirl.create(:import_result, :user => @admin_user) }
 
@@ -11,7 +12,8 @@ describe ImportResultsController do
   # ImportResult. As you add validations to ImportResult, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "raw_data" => "MyString" }
+    { "raw_data" => "MyString",
+     "competition_id" => @competition.id}
   end
 
   describe "GET index" do
