@@ -30,9 +30,10 @@
       <th>Event</th>
       <th>Competition</th>
       <th>Competitor List</th>
+      <th></th><th></th>
       <th>Locked?</th>
-      <th>Enter Results</th>
       <th>Results</th>
+      <th>Judges</th>
     </tr>
     <% @events.each do |event| %>
       <% event.competitions.each do |ec| %>
@@ -40,6 +41,8 @@
           <th><%= event.name %></th>
           <td><%= ec %></td>
           <td><%= link_to 'Competitors', competition_competitors_path(ec) %></td>
+          <td><%= link_to 'Edit', edit_competition_path(ec) %></td>
+          <td><%= link_to 'Destroy',  destroy_competition_path(ec), :method => :delete %></td>
           <td><%= ec.locked? %>
           <% if can? :lock, event %>
             <% if ec.locked? %>

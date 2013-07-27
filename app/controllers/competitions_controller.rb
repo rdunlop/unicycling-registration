@@ -135,11 +135,10 @@ class CompetitionsController < ApplicationController
   # DELETE /competitions/1.json
   def destroy
     @competition = Competition.find(params[:id])
-    event = @competition.event
     @competition.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_competitions_path(event) }
+      format.html { redirect_to root_url }
       format.json { head :no_content }
     end
   end
