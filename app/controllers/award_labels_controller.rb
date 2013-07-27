@@ -117,8 +117,20 @@ class AwardLabelsController < ApplicationController
     aw_label.first_name = registrant.first_name
     aw_label.last_name = registrant.last_name
     aw_label.gender = competitor.gender
-    aw_label.partner_first_name = nil
-    aw_label.partner_last_name = nil
+    if competitor.members.count == 2
+      reg1 = competitor.members.first
+      reg2 = competitor.members.last
+      if reg1 ==registrant
+        reg = reg2
+      else
+        reg = reg1
+      end
+      aw_label.partner_first_name = reg.first_name
+      aw_label.partner_last_name = reg.last_name
+    else
+      aw_label.partner_first_name = nil
+      aw_label.partner_last_name = nil
+    end
     aw_label.place = place
     aw_label.registrant_id = registrant.id
     aw_label.team_name = competitor.team_name

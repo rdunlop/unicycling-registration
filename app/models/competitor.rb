@@ -190,7 +190,7 @@ class Competitor < ActiveRecord::Base
       if agt.nil?
         "(none)"
       else
-        agt.age_group_entry_description(age, gender, wheel_size)
+        agt.age_group_entry_description(members.first.registrant.age, gender, wheel_size)
       end
     end
 
