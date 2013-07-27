@@ -1,36 +1,41 @@
 <div class="race_recording">
   <% @age_group_entries.each do |ag_entry| %>
-  <h1>Two-Attempt Recording Form</h1>
-  <hr />
-  <h2><%= @competition %></h2>
-  <hr />
-  <h2 class="age_group_description"><%= ag_entry %></h2>
-  <h2 class="age_group_gender"><%= ag_entry.gender %></h2>
-  <div style="clear: both"></div>
-  <hr />
+    <div class="nobreak">
+      <h1>Two-Attempt Recording Form</h1>
+      <hr />
+      <h2><%= @competition %></h2>
+      <hr />
+      <h2 class="age_group_description"><%= ag_entry %></h2>
+      <h2 class="age_group_gender"><%= ag_entry.gender %></h2>
+      <div style="clear: both"></div>
+      <hr />
 
-  <table class="full grid race">
-    <thead>
-      <tr>
-        <th class="id">ID</th>
-        <th class="name">Name</th>
-        <th class="attempt">Attempt 1</th>
-        <th class="attempt">Attempt 2</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @signed_up_list[ag_entry].each do |reg| %>
-        <%= render :partial => "attempt_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => false } %>
+      <table class="full grid race">
+        <thead>
+          <tr>
+            <th class="id">ID</th>
+            <th class="name">Name</th>
+            <th class="attempt">Attempt 1</th>
+            <th class="attempt">Attempt 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @signed_up_list[ag_entry].each do |reg| %>
+            <%= render :partial => "attempt_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => false } %>
+          <% end %>
+          <% @not_signed_up_list[ag_entry].each do |reg| %>
+            <%= render :partial => "attempt_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => true } %>
+          <% end %>
+          <% 5.times do %>
+            <%= render :partial => "attempt_entry", :locals => {:id => nil, :name => nil, :not_signed_up => false} %>
+          <% end %>
+        </tbody>
+      </table>
+      <% if @no_page_breaks %>
+        <hr class="age_group_separator" />
+      <% else %>
+        <div class="page-break"></div>
       <% end %>
-      <% @not_signed_up_list[ag_entry].each do |reg| %>
-        <%= render :partial => "attempt_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => true } %>
-      <% end %>
-      <% 5.times do %>
-        <%= render :partial => "attempt_entry", :locals => {:id => nil, :name => nil, :not_signed_up => false} %>
-      <% end %>
-
-    </tbody>
-  </table>
-  <div class="page-break"></div>
-<% end %>
+    </div>
+  <% end %>
 </div>

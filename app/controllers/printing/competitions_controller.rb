@@ -61,12 +61,14 @@ class Printing::CompetitionsController < ApplicationController
       @not_signed_up_list[ag_entry] = []
     end
 
+    @no_page_breaks = true unless params[:no_page_breaks].nil?
+
     @all_registrants.each do |reg|
       calculated_ag = @agt.age_group_entry_for(reg.age, reg.gender, reg.default_wheel_size.id)
       if @signed_up_registrants.include?(reg)
         @signed_up_list[calculated_ag] << reg
       else
-        @not_signed_up_list[calculated_ag] << reg
+        @not_signed_up_list[calculated_ag] << reg if params[:only_registered].nil?
       end
     end
 
