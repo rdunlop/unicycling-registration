@@ -1,4 +1,4 @@
-<h1>Track Events</h1>
+<h1>Two-Attempt Events</h1>
 
   <table class="event_listing">
     <tr>
@@ -25,36 +25,5 @@
     <% end %>
   </table>
 
-  <table>
-    <tr>
-      <th>Event</th>
-      <th>Competition</th>
-      <th>Competitor List</th>
-      <th></th><th></th>
-      <th>Locked?</th>
-      <th>Results</th>
-      <th>Judges</th>
-    </tr>
-    <% @events.each do |event| %>
-      <% event.competitions.each do |ec| %>
-        <tr>
-          <th><%= event.name %></th>
-          <td><%= ec %></td>
-          <td><%= link_to 'Competitors', competition_competitors_path(ec) %></td>
-          <td><%= link_to 'Edit', edit_competition_path(ec) %></td>
-          <td><%= link_to 'Destroy',  competition_path(ec), :method => :delete, :confirm => "Are you sure?" %></td>
-          <td><%= ec.locked? %>
-          <% if can? :lock, event %>
-            <% if ec.locked? %>
-                <%= link_to 'Unlock', lock_competition_path(ec), :method => :delete %>
-            <% else %>
-                <%= link_to 'Lock', lock_competition_path(ec), :method => :post %>
-            <% end %>
-          <% end %>
-          </td>
-          <td><%= link_to 'View', distance_attempts_competition_path(ec) %></td>
-          <td><%= link_to 'View/Add', competition_judges_path(ec) %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </table>
+    
+  <%= render :partial => "/events/competitions", :locals => {:import => true, :judges => true, :competitions => @events.map{|ev| ev.competitions}.flatten } %>

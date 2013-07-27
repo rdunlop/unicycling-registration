@@ -20,11 +20,9 @@ module EventsHelper
     def scores_link(competition)
       class_name = competition.event.event_class
         if class_name == 'Two Attempt Distance'
-            link_to 'View Scores', distance_attempts_event_path(event) 
         elsif class_name == 'Freestyle'
             link_to 'View Scores', freestyle_scores_competition_path(competition)
         elsif class_name == 'Flatland'
-            link_to 'View Scores', freestyle_scores_event_path(event)
         elsif class_name == 'Street'
             link_to 'View Scores', street_scores_competition_path(competition)
         elsif class_name == 'Standard'
@@ -40,6 +38,10 @@ module EventsHelper
         competition_time_results_path(competition)
       when "Ranked"
         competition_external_results_path(competition)
+      when "Freestyle"
+        freestyle_scores_competition_path(competition)
+      when "Two Attempt Distance"
+        distance_attempts_competition_path(competition) 
       end
     end
 

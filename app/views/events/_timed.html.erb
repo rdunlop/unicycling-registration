@@ -28,6 +28,8 @@
   </table>
 
 
+    
+  <%= render :partial => "/events/competitions", :locals => {:import => true, :judges => false, :competitions => @events.map{|ev| ev.competitions}.flatten } %>
   <table>
     <tr>
       <th>Event</th>

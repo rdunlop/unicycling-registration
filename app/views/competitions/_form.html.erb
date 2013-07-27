@@ -16,6 +16,14 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :has_experts %><br />
+    <%= f.check_box :has_experts  %>
+  </div>
+  <div class="field">
+    <%= f.label :has_age_groups %><br />
+    <%= f.check_box :has_age_groups %>
+  </div>
+  <div class="field">
     <%= f.label :age_group_type_id %>
     <%= f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, :include_blank => true  %>
   </div>

@@ -65,6 +65,8 @@ class CompetitionsController < ApplicationController
   def create_empty
     @competition = Competition.new
     @competition.name = params[:name]
+    @competition.has_experts = params[:has_experts]
+    @competition.has_age_groups = params[:has_age_groups]
     @competition.age_group_type_id = params[:age_group_type_id]
     @competition.event = @event
 

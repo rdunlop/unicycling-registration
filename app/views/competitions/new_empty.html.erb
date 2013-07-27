@@ -23,6 +23,15 @@
     <%= text_field_tag :name %>
   </div>
   <div class="field">
+    <%= label_tag :has_experts %><br />
+    <%= check_box_tag :has_experts %>
+  </div>
+  <div class="field">
+    <%= label_tag :has_age_groups %><br />
+    <%= check_box_tag :has_age_groups %>
+  </div>
+
+  <div class="field">
     <%= label_tag :age_group_type_id %>
     <%= select_tag :age_group_type_id, options_from_collection_for_select(AgeGroupType.all, "id", "to_s"), :include_blank => true  %>
   </div>

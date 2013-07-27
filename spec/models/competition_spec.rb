@@ -14,6 +14,15 @@ describe Competition do
     @ec.valid?.should == false
   end
 
+  it "is not_expert by default" do
+    comp = Competition.new
+    comp.has_experts.should == false
+  end
+  it "is not age_group by default" do
+    comp = Competition.new
+    comp.has_age_groups.should == false
+  end
+
   describe "with a user" do
     before(:each) do
       @user = FactoryGirl.create(:user)

@@ -3,7 +3,7 @@
 # - Enter Obstacle, and print for verification.
 #- Enter Speed Trials, and print
 #DONE BY CONNIE - Print Marathon Results.
-- Fix the protest forms for Track Racing.
+#- Fix the protest forms for Track Racing.
 
 #- PRINT: Starting Lists for:
 # - MUNI Up Ad
@@ -13,13 +13,13 @@
 # - MUNI XC Adv
 # - MUNI XC Exp
 
+- Finish the Artistic Group/Club for Falls.
 - Rank Events (Hock, BB, Street, Flat)
- -Ineligibles should be tied?
+# -Ineligibles should be tied?
 - Num Laps for time results (Coker MUni cross)
 - Points events (trials, Standard Skill)
-- "Units" for the various things
+- "Units" for the various things? (other than cm for distance?)
 - "Decimal Places" For the various events
-- Finish the Artistic Group/Club for Falls.
 
 
 AWARDS:
@@ -91,6 +91,7 @@ FUTURE THINGS (AFTER NATIONALS)
  - And should show nice error message if you get it wrong
 
 FUTURE THINGS (LATER):
+- Booleans in models should be "?" like? ("has_experts?")
 - Make the "Lane Assignment" a role that can be added to a user, separate from the normal "judge" role.
 - Improve the "My Events" view for judges by "ordering" the competitions?
 - Be able to print the Race Results by Age Group more easily.
