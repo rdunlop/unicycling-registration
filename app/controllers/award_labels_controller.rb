@@ -217,11 +217,11 @@ class AwardLabelsController < ApplicationController
         "paper_size" => "LETTER",
         "top_margin" => 38.23, # 0.531"
         "bottom_margin" => 38.23, # 0.531"
-        "left_margin" =>  29.23, # 0.406 "
+        "left_margin" =>  38.23, # 0.406 "
         "right_margin" =>  29.23, # 0.406"
         "columns" =>  4,
         "rows" =>  6,
-        "column_gutter" =>  30.152, # 0.391 "
+        "column_gutter" =>  20.152, # 0.391 "
         "row_gutter" =>  6.152 # 0.391"
 
         #"top_margin" => 13.49, # 0.531"
