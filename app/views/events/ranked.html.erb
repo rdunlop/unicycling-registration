@@ -33,6 +33,7 @@
       <th>Competitor List</th>
       <th></th><th></th>
       <th>Locked?</th>
+      <th>Import Results</th>
       <th>Results</th>
     </tr>
     <% @events.each do |event| %>
@@ -52,6 +53,7 @@
             <% end %>
           <% end %>
           </td>
+          <td><%= link_to 'Import Results', user_import_results_path(current_user) %></td>
           <td><%= link_to 'View', competition_external_results_path(ec) %></td>
         </tr>
       <% end %>

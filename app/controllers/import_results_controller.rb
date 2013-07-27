@@ -96,10 +96,15 @@ class ImportResultsController < ApplicationController
       result.raw_data = upload.convert_array_to_string(raw)
       result.competition = comp
       result.bib_number = raw[0]
-      result.minutes = raw[1]
-      result.seconds = raw[2]
-      result.thousands = raw[3]
-      result.disqualified = (raw[4] == "DQ")
+      if comp.event.event_class == "Distance"
+        result.minutes = raw[1]
+        result.seconds = raw[2]
+        result.thousands = raw[3]
+        result.disqualified = (raw[4] == "DQ")
+      elsif comp.event.event_class == "Ranked"
+        result.rank = raw[1]
+        result.details = raw[2]
+      end
       if result.save
         n = n + 1
       else
@@ -154,7 +159,6 @@ class ImportResultsController < ApplicationController
     n = 0
     err_count = 0
     import_results.each do |ir|
-      tr = TimeResult.new
       competition = ir.competition
       @competition = competition
 
@@ -178,11 +182,20 @@ class ImportResultsController < ApplicationController
           err_count += 1
         end
       end
-      tr.minutes = ir.minutes
-      tr.seconds = ir.seconds
-      tr.thousands = ir.thousands
-      tr.disqualified = ir.disqualified
-      tr.competitor = comp
+
+      if @competition.event_class == "Distance"
+        tr = TimeResult.new
+        tr.minutes = ir.minutes
+        tr.seconds = ir.seconds
+        tr.thousands = ir.thousands
+        tr.disqualified = ir.disqualified
+        tr.competitor = comp
+      elsif @competition.event_class == "Ranked"
+        tr = ExternalResult.new
+        tr.rank = ir.rank
+        tr.details = ir.details
+        tr.competitor = comp
+      end
       if tr.save
         n += 1
       else

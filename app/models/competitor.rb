@@ -46,7 +46,7 @@ class Competitor < ActiveRecord::Base
       Rails.cache.fetch(overall_place_key) || "Unknown"
     end
 
-    def age_group_entry_description
+    def age_group_entry_description # XXX combine with the other age_group function
       registrant = members.first.registrant
       ag_entry_description = competition.determine_age_group_type.try(:age_group_entry_description, registrant.age, registrant.gender, registrant.default_wheel_size.id)
       if ag_entry_description.nil?

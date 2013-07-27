@@ -34,7 +34,6 @@ Foreigners:
 - Christian Huorwai
 - Sam LaHood
 - George Cara
-- David Lance
 - Richard Lees
 
 

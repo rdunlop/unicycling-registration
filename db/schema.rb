@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130726202154) do
+ActiveRecord::Schema.define(:version => 20130727141850) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -226,6 +226,8 @@ ActiveRecord::Schema.define(:version => 20130726202154) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "competition_id"
+    t.integer  "rank"
+    t.string   "details"
   end
 
   add_index "import_results", ["user_id"], :name => "index_imported_results_user_id"

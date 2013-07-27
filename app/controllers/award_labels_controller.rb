@@ -93,15 +93,18 @@ class AwardLabelsController < ApplicationController
         place = competitor.place
         age_group = competitor.age_group_description
       end
+      if @competition.event.event_class == "Freestyle" ### XXX Somewhere else?
+        age_group = @competition.name # the "Category"
+      end
       next if place == "DQ"
       next if place.to_i == 0
       next if place.to_i > max_place
 
       competitor.members.each do |member|
         aw_label = AwardLabel.new
+        aw_label.competition_name = @competition.event.name
         aw_label.age_group = age_group
         aw_label.bib_number = member.registrant.bib_number
-        aw_label.competition_name = @competition.name
         aw_label.details = competitor.result
         aw_label.first_name = member.registrant.first_name
         aw_label.last_name = member.registrant.last_name
