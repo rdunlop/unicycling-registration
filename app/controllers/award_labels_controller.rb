@@ -245,7 +245,7 @@ class AwardLabelsController < ApplicationController
   private
   def line_one(award)
     res = award.first_name + " " + award.last_name
-    unless award.partner_first_name.nil?
+    unless award.partner_first_name.nil? or award.partner_first_name.blank?
       res += " & " + award.partner_first_name + " " + award.partner_last_name
     end
     res
