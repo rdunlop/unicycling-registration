@@ -1,0 +1,27 @@
+<%= form_for(@external_result.new_record? ? [@competition, @external_result] : @external_result) do |f| %>
+  <% if @external_result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@external_result.errors.count, "error") %> prohibited this external_result from being saved:</h2>
+
+      <ul>
+      <% @external_result.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table>
+    <tr>
+      <th><%= f.label :competitor_id %></th>
+      <th><%= f.label :details %></th>
+      <th><%= f.label :rank %></th>
+    </tr>
+    <tr>
+      <th><%= f.select :competitor_id, @competition.competitors.all.map { |comp| ["#{comp.external_id}-#{comp}", comp.id] }, :include_blank => true %>
+      <td><%= f.text_field :details %></td>
+      <td><%= f.number_field :rank %></td>
+      <td><%= f.submit %></td>
+    </tr>
+  </table>
+<% end %>

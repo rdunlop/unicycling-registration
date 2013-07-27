@@ -19,6 +19,9 @@
 <% elsif @competition.event_class == "Two Attempt Distance" %>
   <%= link_to "Distance Results", distance_results_printing_competition_path(@competition) %>
   <%= link_to "(pdf)", distance_results_printing_competition_path(@competition, :format => :pdf) %>
+<% elsif @competition.event_class == "Ranked" %>
+  <%= link_to "Externally Ranked Results", external_results_printing_competition_path(@competition) %>
+  <%= link_to "(pdf)", external_results_printing_competition_path(@competition, :format => :pdf) %>
 <% end %>
 
 <br /><br />

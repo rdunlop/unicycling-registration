@@ -1,3 +1,44 @@
+- Print+Post High/Long
+
+# - Enter Obstacle, and print for verification.
+#- Enter Speed Trials, and print
+#DONE BY CONNIE - Print Marathon Results.
+- Fix the protest forms for Track Racing.
+
+#- PRINT: Starting Lists for:
+# - MUNI Up Ad
+# - MUNI Up Exp
+# - MUNI Down Ad
+# - MUNI Down Exp
+# - MUNI XC Adv
+# - MUNI XC Exp
+
+- Rank Events (Hock, BB, Street, Flat)
+- Num Laps for time results (Coker MUni cross)
+- Points events (trials, Standard Skill)
+- "Units" for the various things
+- "Decimal Places" For the various events
+- Finish the Artistic Group/Club for Falls.
+
+
+AWARDS:
+- Expert for Obstacle over all age groups
+- Expert for Distance (all) over all age groups
+- Expert for MUNI (
+- Be able to print AGE GROUP Medals for a single competitor at a time 
+ - Expert Labels should be done separately
+
+
+Foreigners:
+- Christian Huorwai
+- Sam LaHood
+- George Cara
+- David Lance
+- Richard Lees
+
+
+\=========================================
+
 NAUCC 2013 TODO LIST and Stuff. (SOME of this may get done).
 
 EASY wins:

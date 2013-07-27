@@ -11,6 +11,7 @@ class Competitor < ActiveRecord::Base
     has_many :standard_difficulty_scores, :dependent => :destroy
     has_many :distance_attempts, :dependent => :destroy, :order => "distance DESC, id DESC"
     has_many :time_results, :dependent => :destroy
+    has_many :external_results, :dependent => :destroy
 
     attr_accessible :competition_id, :position, :registrant_ids, :custom_external_id, :custom_name
     accepts_nested_attributes_for :registrants
@@ -23,6 +24,10 @@ class Competitor < ActiveRecord::Base
 
     def to_s
         name
+    end
+
+    def bib_number
+      members.first.registrant.bib_number
     end
 
     def place=(place)
@@ -67,6 +72,8 @@ class Competitor < ActiveRecord::Base
         max_successful_distance
       when "Distance"
         time_results.first.full_time
+      when "External"
+        external_results.first.details
       end
     end
 

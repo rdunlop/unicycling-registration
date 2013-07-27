@@ -93,6 +93,10 @@ class EventsController < ApplicationController
     @events = Event.where({:event_class => "Distance"})
   end
 
+  def ranked
+    @events = Event.where({:event_class => "Ranked"})
+  end
+
   def judging
     @judges = current_user.judges
   end

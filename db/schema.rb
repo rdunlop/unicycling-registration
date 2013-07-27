@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725181816) do
+ActiveRecord::Schema.define(:version => 20130726202154) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -206,6 +206,14 @@ ActiveRecord::Schema.define(:version => 20130725181816) do
   end
 
   add_index "expense_items", ["expense_group_id"], :name => "index_expense_items_expense_group_id"
+
+  create_table "external_results", :force => true do |t|
+    t.integer  "competitor_id"
+    t.string   "details"
+    t.integer  "rank"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "import_results", :force => true do |t|
     t.integer  "user_id"

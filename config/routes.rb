@@ -1,5 +1,7 @@
 Workspace::Application.routes.draw do
 
+
+
   namespace :printing do
     namespace :race_recording do
       get :multi_lap
@@ -118,6 +120,7 @@ Workspace::Application.routes.draw do
       get 'street'
       get 'track'
       get 'distance'
+      get 'ranked'
     end
     resources :competitions, :only => [] do
       collection do
@@ -249,6 +252,7 @@ Workspace::Application.routes.draw do
       end
     end
     resources :lane_assignments, :only => [:index, :create]
+    resources :external_results, :shallow => true, :except => [:new, :show]
   end
   resources :lane_assignments, :except => [:new, :index, :create, :show]
 

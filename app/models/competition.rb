@@ -13,6 +13,7 @@ class Competition < ActiveRecord::Base
   has_many :scores, :through => :judges
   has_many :distance_attempts, :through => :competitors
   has_many :time_results, :through => :competitors
+  has_many :external_results, :through => :competitors
 
   has_many :lane_assignments, :dependent => :destroy
   #has_many :chief_judges, :dependent => :destroy
@@ -101,6 +102,8 @@ class Competition < ActiveRecord::Base
       @score_calculator = DistanceCalculator.new(self)
     elsif  event_class == "Distance"
       @score_calculator = RaceCalculator.new(self)
+    elsif event_class == "Ranked"
+      @score_calculator = ExternallyRankedCalculator.new(self)
     end
   end
 

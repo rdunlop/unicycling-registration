@@ -16,9 +16,14 @@ class Event < ActiveRecord::Base
 
   belongs_to :category, :inverse_of => :events
 
+
+  def self.event_classes
+    ["Freestyle", "Distance", "Two Attempt Distance", "Flatland", "Street", "Ranked"]
+  end
+
   validates :name, :presence => true
   validates :category_id, :presence => true
-  validates :event_class, :inclusion => { :in => ["Freestyle", "Distance", "Two Attempt Distance", "Flatland", "Street"], :allow_nil => true }
+  validates :event_class, :inclusion => { :in => self.event_classes, :allow_nil => true }
 
   before_validation :build_event_category
 
