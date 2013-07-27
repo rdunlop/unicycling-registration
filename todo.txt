@@ -14,6 +14,7 @@
 # - MUNI XC Exp
 
 - Rank Events (Hock, BB, Street, Flat)
+ -Ineligibles should be tied?
 - Num Laps for time results (Coker MUni cross)
 - Points events (trials, Standard Skill)
 - "Units" for the various things

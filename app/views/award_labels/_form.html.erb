@@ -11,55 +11,39 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :bib_number %><br />
-    <%= f.number_field :bib_number %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :partner_first_name %><br />
-    <%= f.text_field :partner_first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :partner_last_name %><br />
-    <%= f.text_field :partner_last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :competition_name %><br />
-    <%= f.text_field :competition_name %>
-  </div>
-  <div class="field">
-    <%= f.label :team_name %><br />
-    <%= f.text_field :team_name %>
-  </div>
-  <div class="field">
-    <%= f.label :age_group %><br />
-    <%= f.text_field :age_group %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :details %><br />
-    <%= f.text_field :details %>
-  </div>
-  <div class="field">
-    <%= f.label :place %><br />
-    <%= f.number_field :place %>
-  </div>
-  <div class="field">
-    <%= f.label :registrant_id %><br />
-    <%= f.select :registrant_id, Registrant.all.map {|reg| [reg, reg.id] } %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= f.label :bib_number %></th>
+        <th><%= f.label :first_name %></th>
+        <th><%= f.label :last_name %></th>
+        <th><%= f.label :partner_first_name %></th>
+        <th><%= f.label :partner_last_name %></th>
+        <th><%= f.label :competition_name %></th>
+        <th><%= f.label :team_name %></th>
+        <th><%= f.label :age_group %></th>
+        <th><%= f.label :gender %></th>
+        <th><%= f.label :details %></th>
+        <th><%= f.label :place %></th>
+        <th><%= f.label :registrant_id %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <td><%= f.number_field :bib_number %></td>
+      <td><%= f.text_field :first_name %></td>
+      <td><%= f.text_field :last_name %></td>
+      <td><%= f.text_field :partner_first_name %></td>
+      <td><%= f.text_field :partner_last_name %></td>
+      <td><%= f.text_field :competition_name %></td>
+      <td><%= f.text_field :team_name %></td>
+      <td><%= f.text_field :age_group %></td>
+      <td><%= f.text_field :gender %></td>
+      <td><%= f.text_field :details %></td>
+      <td><%= f.number_field :place %></td>
+      <td><%= f.select :registrant_id, Registrant.all.map {|reg| [reg, reg.id] } %></td>
+      <td><%= f.submit %></td>
+    </tbody>
+  </table>
   </div>
 <% end %>

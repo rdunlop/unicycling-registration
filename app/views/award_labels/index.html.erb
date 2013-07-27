@@ -2,6 +2,15 @@
 
 <%= link_to "Expert Labels", expert_labels_user_award_labels_path(@user) %>
 
+ <%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post, :multipart=>true}) do %>
+   <%= select_tag :competition_id, options_from_collection_for_select(Competition.all, "id", "to_s") %><br />
+   <%= submit_tag "Create labels" %>
+ <% end %>
+
+ <%= form_tag(destroy_all_user_award_labels_path(@user), {:method => :delete, :multipart=>true}) do %>
+   <%= submit_tag "Clear Table", :confirm => "DELETE. Are you sure?"  %>
+ <% end %>
+
 <table>
   <tr>
     <th>Bib number</th>

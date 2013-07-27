@@ -71,6 +71,50 @@ class AwardLabelsController < ApplicationController
     end
   end
 
+  # creates the award labels, as per the specified option(s)
+  def create_labels
+    @competition = Competition.find(params[:competition_id])
+
+    n = 0
+    err = 0
+    @competition.competitors.each do |competitor|
+      puts "competitor: #{competitor} : #{competitor.place}"
+      next if competitor.place == "DQ"
+      next if competitor.place.to_i == 0
+      next if competitor.place.to_i > 5
+
+      competitor.members.each do |member|
+        aw_label = AwardLabel.new
+        aw_label.age_group = competitor.age_group_description
+        aw_label.bib_number = member.registrant.bib_number
+        aw_label.competition_name = @competition.to_s
+        aw_label.details = competitor.result
+        aw_label.first_name = member.registrant.first_name
+        aw_label.last_name = member.registrant.last_name
+        aw_label.gender = competitor.gender
+        aw_label.partner_first_name = nil
+        aw_label.partner_last_name = nil
+        aw_label.place = competitor.place
+        aw_label.registrant_id = member.registrant.id
+        aw_label.team_name = competitor.to_s
+        aw_label.user = @user
+        if aw_label.save
+          n += 1
+        else
+          err += 1
+        end
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to user_award_labels_path(@user), notice: "Created #{n} labels. #{err} errors." }
+    end
+  end
+
+  def destroy_all
+    @user.award_labels.destroy_all
+    redirect_to user_award_labels_path(@user)
+  end
+
   def expert_labels
 
     names = []

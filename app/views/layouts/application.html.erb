@@ -133,6 +133,12 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
             <% end %>
           <%= menu_footer_if_necessary("manage") %>
 
+          <% set_menu_header("awards","<li>" + link_to( 'Awards', '#') + "<ul>") %>
+            <% if can? :manage, AwardLabel %>
+              <%= menu_header_if_necessary("awards") %>
+              <li><%= link_to 'Print/Create Awards ', user_award_labels_path(current_user) %></li>
+            <% end %>
+          <%= menu_footer_if_necessary("awards") %>
           <% set_menu_header("scores","<li>" + link_to( 'Judging', '#') + "<ul>") %>
             <% if can? :judging, Event %>
               <%= menu_header_if_necessary("scores") %>
