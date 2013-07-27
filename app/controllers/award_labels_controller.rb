@@ -103,6 +103,8 @@ class AwardLabelsController < ApplicationController
     end
     if competition.event.event_class == "Freestyle" ### XXX Somewhere else?
       age_group = competition.name # the "Category"
+    elsif competition.event.event_class == "Distance"
+      age_group = competition.name # the "Category"
     end
     return false if place == "DQ"
     return false if place.to_i == 0
