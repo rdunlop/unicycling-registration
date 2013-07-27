@@ -2,7 +2,7 @@ class AwardLabelsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_user, :only => [:index, :create, :create_labels, :expert_labels, :normal_labels, :destroy_all]
+  before_filter :load_user, :only => [:index, :create, :create_labels, :expert_labels, :normal_labels, :destroy_all, :create_labels_by_registrant]
 
   def load_user
     @user = User.find(params[:user_id])
@@ -71,6 +71,60 @@ class AwardLabelsController < ApplicationController
     end
   end
 
+  def create_labels_by_registrant
+    @registrant = Registrant.find(params[:registrant_id])
+
+    n = 0
+    @registrant.competitors.each do |competitor|
+      competition = competitor.competition
+      if competition.has_age_groups and competitor.place.to_i <= 5
+        if create_label(competitor, @registrant, false, 1, 5, @user)
+          n += 1
+        end
+      end
+      if competition.has_experts
+        if create_label(competitor, @registrant, true, 4, 5, @user)
+          n += 1
+        end
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to user_award_labels_path(@user), notice: "Created #{n} labels." }
+    end
+  end
+  def create_label(competitor, registrant, experts, min_place, max_place, my_user)
+    competition = competitor.competition
+    if experts
+      place = competitor.overall_place
+      age_group = "Expert " + competitor.gender # because the only age gorup is the normal age group
+    else
+      place = competitor.place
+      age_group = competitor.age_group_description
+    end
+    if competition.event.event_class == "Freestyle" ### XXX Somewhere else?
+      age_group = competition.name # the "Category"
+    end
+    return false if place == "DQ"
+    return false if place.to_i == 0
+    return false if place.to_i < min_place
+    return false if place.to_i > max_place
+
+    aw_label = AwardLabel.new
+    aw_label.competition_name = competitor.competition.event.name
+    aw_label.age_group = age_group
+    aw_label.bib_number = registrant.bib_number
+    aw_label.details = competitor.result
+    aw_label.first_name = registrant.first_name
+    aw_label.last_name = registrant.last_name
+    aw_label.gender = competitor.gender
+    aw_label.partner_first_name = nil
+    aw_label.partner_last_name = nil
+    aw_label.place = place
+    aw_label.registrant_id = registrant.id
+    aw_label.team_name = competitor.team_name
+    aw_label.user = my_user
+    return aw_label.save
+  end
   # creates the award labels, as per the specified option(s)
   def create_labels
     @competition = Competition.find(params[:competition_id])
@@ -82,48 +136,16 @@ class AwardLabelsController < ApplicationController
     end
 
     experts = !params[:experts].nil?
-
     n = 0
-    err = 0
     @competition.competitors.each do |competitor|
-      if experts
-        place = competitor.overall_place
-        age_group = "Expert " + competitor.gender # because the only age gorup is the normal age group
-      else
-        place = competitor.place
-        age_group = competitor.age_group_description
-      end
-      if @competition.event.event_class == "Freestyle" ### XXX Somewhere else?
-        age_group = @competition.name # the "Category"
-      end
-      next if place == "DQ"
-      next if place.to_i == 0
-      next if place.to_i > max_place
-
       competitor.members.each do |member|
-        aw_label = AwardLabel.new
-        aw_label.competition_name = @competition.event.name
-        aw_label.age_group = age_group
-        aw_label.bib_number = member.registrant.bib_number
-        aw_label.details = competitor.result
-        aw_label.first_name = member.registrant.first_name
-        aw_label.last_name = member.registrant.last_name
-        aw_label.gender = competitor.gender
-        aw_label.partner_first_name = nil
-        aw_label.partner_last_name = nil
-        aw_label.place = place
-        aw_label.registrant_id = member.registrant.id
-        aw_label.team_name = competitor.team_name
-        aw_label.user = @user
-        if aw_label.save
+        if create_label(competitor, member.registrant, experts, 1, max_place, @user)
           n += 1
-        else
-          err += 1
         end
       end
     end
     respond_to do |format|
-      format.html { redirect_to user_award_labels_path(@user), notice: "Created #{n} labels. #{err} errors." }
+      format.html { redirect_to user_award_labels_path(@user), notice: "Created #{n} labels." }
     end
   end
 
@@ -175,24 +197,34 @@ class AwardLabelsController < ApplicationController
       lines += line + "\n" unless line.nil? or line.empty?
       line = line_six(label)
       lines += "<b>" + line + "</b>" unless line.nil? or line.empty?
+#      lines = "<div><div style=\"display: inline-block; vertical-align: middle; height: 100%; width: 0;\"></div><div style=\"vertical-align: middle; display: inline-block;\">" + lines + "</div>"
       names << lines
     end
     Prawn::Labels.types = {
       "Avery5293" => {
-        "paper_size" => "A4",
-        "top_margin" => 13.49, # 0.531"
-        "bottom_margin" => 13.49, # 0.531"
-        "left_margin" =>  10.31, # 0.406 "
-        "right_margin" =>  10.31, # 0.406"
+        "paper_size" => "LETTER",
+        "top_margin" => 38.23, # 0.531"
+        "bottom_margin" => 38.23, # 0.531"
+        "left_margin" =>  29.23, # 0.406 "
+        "right_margin" =>  29.23, # 0.406"
         "columns" =>  4,
         "rows" =>  6,
-        "column_gutter" =>  9.93, # 0.391 "
-        "row_gutter" =>  9.93 # 0.391"
+        "column_gutter" =>  30.152, # 0.391 "
+        "row_gutter" =>  6.152 # 0.391"
+
+        #"top_margin" => 13.49, # 0.531"
+        #"bottom_margin" => 13.49, # 0.531"
+        #"left_margin" =>  10.31, # 0.406 "
+        #"right_margin" =>  10.31, # 0.406"
+        #"columns" =>  4,
+        #"rows" =>  6,
+        #"column_gutter" =>  9.93, # 0.391 "
+        #"row_gutter" =>  9.93 # 0.391"
     }
     }
 
     labels = Prawn::Labels.render(names, :type => "Avery5293") do |pdf, name|
-      pdf.text name, :align => :center, :size => 10, :inline_format => true, :shrink_to_fit => true
+      pdf.text name, :align => :center, :size => 10, :inline_format => true, :shrink_to_fit => true, :valign => :center
     end
 
     send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"

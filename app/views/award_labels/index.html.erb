@@ -15,9 +15,19 @@
 
    <%= submit_tag "Create labels" %>
  <% end %>
+ <hr />
+
+ <%= form_tag(create_labels_by_registrant_user_award_labels_path(@user), {:method => :post}) do %>
+   <%= select_tag :registrant_id, options_from_collection_for_select(Registrant.order(:bib_number).all, "id", "with_id_to_s") %><br />
+
+   <%= submit_tag "Create Labels for Single Registrant" %>
+ <% end %>
+
+ <hr />
+
 
  <%= form_tag(destroy_all_user_award_labels_path(@user), {:method => :delete, :multipart=>true}) do %>
-   <%= submit_tag "Clear Table", :confirm => "DELETE. Are you sure?"  %>
+   <%= submit_tag "Clear Table", :confirm => "DELETE. Are you sure?", :class => "awards_delete"  %>
  <% end %>
 
 <table class="sortable">
