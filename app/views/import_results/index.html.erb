@@ -4,48 +4,60 @@
 
 <h1>Listing Import Results</h1>
 <table class="sortable">
-  <tr>
-    <th>Competition</th>
-    <th>Raw data</th>
-    <th>Bib number</th>
-    <th>Minutes</th>
-    <th>Seconds</th>
-    <th>Thousands</th>
-    <th>Disqualified</th>
-    <th>Name</th>
-    <th>Competitor Exists?</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Competition</th>
+      <th>Raw data</th>
+      <th>Bib number</th>
+      <th>Minutes</th>
+      <th>Seconds</th>
+      <th>Thousands</th>
+      <th>Disqualified</th>
+      <th>Rank (external)</th>
+      <th>Details (external)</th>
+      <th>Name</th>
+      <th>Competitor Exists?</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% @import_results.each do |import_result| %>
-  <tr>
-    <td><%= import_result.competition %></td>
-    <td><%= import_result.raw_data %></td>
-    <td><%= import_result.bib_number %></td>
-    <td><%= import_result.minutes %></td>
-    <td><%= import_result.seconds %></td>
-    <td><%= import_result.thousands %></td>
-    <td><%= import_result.disqualified %></td>
-    <td><%= Registrant.find_by_bib_number(import_result.bib_number) %></td>
-    <% if import_result.competition.find_competitor_with_bib_number(import_result.bib_number) %>
-      <td class="competitor_exists">Yes</td>
-    <% else %>
-      <td class="competitor_not_exists">No</td>
+  <tbody>
+    <% @import_results.each do |import_result| %>
+      <tr>
+        <td><%= import_result.competition %></td>
+        <td><%= import_result.raw_data %></td>
+        <td><%= import_result.bib_number %></td>
+        <td><%= import_result.minutes %></td>
+        <td><%= import_result.seconds %></td>
+        <td><%= import_result.thousands %></td>
+        <td><%= import_result.disqualified %></td>
+        <td><%= import_result.rank %></td>
+        <td><%= import_result.details %></td>
+        <td><%= Registrant.find_by_bib_number(import_result.bib_number) %></td>
+        <% if import_result.competition.find_competitor_with_bib_number(import_result.bib_number) %>
+          <td class="competitor_exists">Yes</td>
+        <% else %>
+          <td class="competitor_not_exists">No</td>
+        <% end %>
+        <td><%= link_to 'Edit', edit_import_result_path(import_result) %></td>
+        <td><%= link_to 'Destroy', import_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
     <% end %>
-    <td><%= link_to 'Edit', edit_import_result_path(import_result) %></td>
-    <td><%= link_to 'Destroy', import_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  </tbody>
 </table>
+<%= form_tag(destroy_all_user_import_results_path(@user), {:method => :delete, :multipart=>true}) do %>
+  <%= submit_tag "Delete all in Temp Table", :class => "data_import_delete", :confirm => "DELETE, Are you sure?" %>
+<% end %>
 <%= form_tag(publish_to_competition_user_import_results_path(@user), {:method => :post}) do %>
-  <%= submit_tag "Import all in Temp Table into Competition", :confirm => "IMPORT, Are you sure?" %>
+  <%= submit_tag "Import all in Temp Table into Competition", :class=> "data_import_submit", :confirm => "IMPORT, Are you sure?" %>
 <% end %>
 <hr />
 
 <h2>CSV Import Instructions</h2>
-Please import a Comma-Separated-File file with the following format:
+Please import a Comma-Separated-File file with the following format (for 'Distance' competitions):
+
 <ul>
   <li>Column 1: ID
   <li>Column 2: Minutes
@@ -53,25 +65,22 @@ Please import a Comma-Separated-File file with the following format:
   <li>Column 4: Thousands
   <li>Column 5: "DQ" or empty
 </ul>
- or 
+ or  (for 'Ranked' Competitions)
 <ul>
   <li>Column 1: ID
   <li>Column 2: Absolute Rank (to be used when calculating age-group places)
   <li>Column 3: Details (to be printed on awards)
 </ul>
 <%= form_tag(import_csv_user_import_results_path(@user), {:method => :post, :multipart=>true}) do %>
-  <%= select_tag :competition_id, options_from_collection_for_select(Competition.all, "id", "to_s") %><br />
+  <%= select_tag :competition_id, options_from_collection_for_select(Competition.all, "id", "to_s_with_event_class") %><br />
   <%= file_field_tag "file" %>
   <%= submit_tag "Load CSV to Temp Table" %>
 <% end %>
 <hr />
 <%= form_tag(import_lif_user_import_results_path(@user), {:method => :post, :multipart=>true}) do %>
-  <%= select_tag :competition_id, options_from_collection_for_select(Competition.all, "id", "to_s") %><br />
+  <%= select_tag :competition_id, options_from_collection_for_select(Competition.all, "id", "to_s_with_event_class") %><br />
   <%= label_tag :heat, "Heat" %><%= text_field_tag "heat" %><br />
   <%= file_field_tag "file" %>
   <%= submit_tag "Load LIF to Temp Table" %>
 <% end %>
 <hr />
-<%= form_tag(destroy_all_user_import_results_path(@user), {:method => :delete, :multipart=>true}) do %>
-  <%= submit_tag "Delete all in Temp Table", :confirm => "DELETE, Are you sure?" %>
-<% end %>

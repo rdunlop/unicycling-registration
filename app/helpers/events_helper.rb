@@ -34,6 +34,15 @@ module EventsHelper
         end
     end
 
+    def results_url(competition)
+      case competition.event.event_class
+      when "Distance"
+        competition_time_results_path(competition)
+      when "Ranked"
+        competition_external_results_path(competition)
+      end
+    end
+
     def judging_menu_url(competition)
       class_name = competition.event.event_class
       if class_name == 'Two Attempt Distance'

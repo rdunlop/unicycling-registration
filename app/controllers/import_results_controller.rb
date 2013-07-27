@@ -206,7 +206,7 @@ class ImportResultsController < ApplicationController
       end
     end
     respond_to do |format|
-      format.html { redirect_to competition_time_results_path(@competition), notice: "Added #{n} rows to #{@competition}. #{err_count} errors" }
+      format.html { redirect_to results_path(@competition), notice: "Added #{n} rows to #{@competition}. #{err_count} errors" }
     end
   end
 

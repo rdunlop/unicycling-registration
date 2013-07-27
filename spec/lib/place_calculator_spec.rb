@@ -28,5 +28,25 @@ describe PlaceCalculator do
       @calc.place_next(1000,false).should == 3 #like-a-tie
       @calc.place_next(10000,false).should == 4 #not 5, because not really a tie
     end
+
+    it "places an ineligible tie as a normal non-place-taking-tie (ineligible second)" do
+      @calc.place_next(1, false).should == 1
+      @calc.place_next(1, false, true).should == 1
+      @calc.place_next(2, false).should == 2
+    end
+    it "places an ineligible tie as a normal non-place-taking-tie (ineligible first)" do
+      @calc.place_next(1, false, true).should == 1
+      @calc.place_next(1, false).should == 1
+      @calc.place_next(2, false).should == 2
+    end
+    it "places 2 ineligibles who come in near each other a separate ranks" do
+      @calc.place_next(1, false, true).should == 1
+      @calc.place_next(2, false, true).should == 2
+      @calc.place_next(3, false).should == 1
+      @calc.place_next(4, false).should == 2
+      @calc.place_next(5, false, true).should == 3
+      @calc.place_next(6, false).should == 3
+    end
+
   end
 end

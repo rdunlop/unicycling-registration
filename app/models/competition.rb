@@ -24,6 +24,10 @@ class Competition < ActiveRecord::Base
     event.to_s + " - " + self.name
   end
 
+  def to_s_with_event_class
+    to_s + " (#{event_class})"
+  end
+
   def find_competitor_with_bib_number(bib_number)
     competitors.each do |competitor|
       if competitor.member_has_bib_number?(bib_number)

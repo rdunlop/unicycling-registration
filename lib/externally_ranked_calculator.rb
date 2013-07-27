@@ -24,25 +24,24 @@ class ExternallyRankedCalculator
   def update_places(age_group_entry_description)
     return 0 if age_group_entry_description.nil?
 
-    rank = 1
+    place_calc = PlaceCalculator.new
+
     @competition.external_results.order("rank").each do |er|
 
       # only perform updates on the specified age group entry set
       next if er.competitor.age_group_entry_description != age_group_entry_description
 
-      er.competitor.place = rank
-      rank += 1
+      er.competitor.place = place_calc.place_next(er.rank, false, er.competitor.ineligible)
     end
   end
 
   def update_overall_places(gender)
 
-    rank = 1
+    place_calc = PlaceCalculator.new
     @competition.external_results.order("rank").each do |er|
       next if er.competitor.gender != gender
 
-      er.competitor.overall_place = rank
-      rank += 1
+      er.competitor.overall_place = place_calc.place_next(er.rank, false, er.competitor.ineligible)
     end
   end
 end

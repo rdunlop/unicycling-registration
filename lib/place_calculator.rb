@@ -34,8 +34,8 @@ class PlaceCalculator
     unless ineligible
       # only increase the number of scores if the time is eligible
       @count += 1
+      @previous_time = current_time
     end
-    @previous_time = current_time
 
     return place
   end
