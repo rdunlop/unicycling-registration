@@ -118,9 +118,9 @@ class AwardLabelsController < ApplicationController
     aw_label.last_name = registrant.last_name
     aw_label.gender = competitor.gender
     if competitor.members.count == 2
-      reg1 = competitor.members.first
-      reg2 = competitor.members.last
-      if reg1 ==registrant
+      reg1 = competitor.members.first.registrant
+      reg2 = competitor.members.last.registrant
+      if reg1 == registrant
         reg = reg2
       else
         reg = reg1
