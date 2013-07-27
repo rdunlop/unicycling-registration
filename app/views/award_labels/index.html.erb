@@ -1,9 +1,18 @@
 <h1>Listing award_labels</h1>
 
+
+<%= link_to "Normal Labels", normal_labels_user_award_labels_path(@user) %>
 <%= link_to "Expert Labels", expert_labels_user_award_labels_path(@user) %>
 
  <%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post, :multipart=>true}) do %>
    <%= select_tag :competition_id, options_from_collection_for_select(Competition.all, "id", "to_s") %><br />
+
+   <%= label_tag :maximum_place, "Maximum Award Place" %>
+   <%= text_field_tag :maximum_place %></br>
+
+   <%= label_tag :experts, "Experts from within Age-group data" %>
+   <%= check_box_tag :experts %></br>
+
    <%= submit_tag "Create labels" %>
  <% end %>
 
@@ -11,42 +20,46 @@
    <%= submit_tag "Clear Table", :confirm => "DELETE. Are you sure?"  %>
  <% end %>
 
-<table>
-  <tr>
-    <th>Bib number</th>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Partner first name</th>
-    <th>Partner last name</th>
-    <th>Competition name</th>
-    <th>Team name</th>
-    <th>Age group</th>
-    <th>Gender</th>
-    <th>Details</th>
-    <th>Place</th>
-    <th>Registrant</th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Bib number</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Partner first name</th>
+      <th>Partner last name</th>
+      <th>Competition name</th>
+      <th>Team name</th>
+      <th>Age group</th>
+      <th>Gender</th>
+      <th>Details</th>
+      <th>Place</th>
+      <th>Registrant</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% @award_labels.each do |award_label| %>
-  <tr>
-    <td><%= award_label.bib_number %></td>
-    <td><%= award_label.first_name %></td>
-    <td><%= award_label.last_name %></td>
-    <td><%= award_label.partner_first_name %></td>
-    <td><%= award_label.partner_last_name %></td>
-    <td><%= award_label.competition_name %></td>
-    <td><%= award_label.team_name %></td>
-    <td><%= award_label.age_group %></td>
-    <td><%= award_label.gender %></td>
-    <td><%= award_label.details %></td>
-    <td><%= award_label.place %></td>
-    <td><%= award_label.registrant %></td>
-    <td><%= link_to 'Edit', edit_award_label_path(award_label) %></td>
-    <td><%= link_to 'Destroy', award_label, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <tbody>
+    <% @award_labels.each do |award_label| %>
+      <tr>
+        <td><%= award_label.bib_number %></td>
+        <td><%= award_label.first_name %></td>
+        <td><%= award_label.last_name %></td>
+        <td><%= award_label.partner_first_name %></td>
+        <td><%= award_label.partner_last_name %></td>
+        <td><%= award_label.competition_name %></td>
+        <td><%= award_label.team_name %></td>
+        <td><%= award_label.age_group %></td>
+        <td><%= award_label.gender %></td>
+        <td><%= award_label.details %></td>
+        <td><%= award_label.place %></td>
+        <td><%= award_label.registrant %></td>
+        <td><%= link_to 'Edit', edit_award_label_path(award_label) %></td>
+        <td><%= link_to 'Destroy', award_label, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

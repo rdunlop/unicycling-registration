@@ -82,6 +82,7 @@ class ArtisticScoreCalculator
       if my_points == 0
         my_place = 0
       end
+      competitor.place = my_place
       @place[competitor.id] = my_place
     end
 

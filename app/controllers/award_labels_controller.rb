@@ -75,28 +75,42 @@ class AwardLabelsController < ApplicationController
   def create_labels
     @competition = Competition.find(params[:competition_id])
 
+    if params[:maximum_place].nil? or params[:maximum_place].empty?
+      max_place = 5 
+    else
+      max_place = params[:maximum_place].to_i
+    end
+
+    experts = !params[:experts].nil?
+
     n = 0
     err = 0
     @competition.competitors.each do |competitor|
-      puts "competitor: #{competitor} : #{competitor.place}"
-      next if competitor.place == "DQ"
-      next if competitor.place.to_i == 0
-      next if competitor.place.to_i > 5
+      if experts
+        place = competitor.overall_place
+        age_group = "Expert " + competitor.gender # because the only age gorup is the normal age group
+      else
+        place = competitor.place
+        age_group = competitor.age_group_description
+      end
+      next if place == "DQ"
+      next if place.to_i == 0
+      next if place.to_i > max_place
 
       competitor.members.each do |member|
         aw_label = AwardLabel.new
-        aw_label.age_group = competitor.age_group_description
+        aw_label.age_group = age_group
         aw_label.bib_number = member.registrant.bib_number
-        aw_label.competition_name = @competition.to_s
+        aw_label.competition_name = @competition.name
         aw_label.details = competitor.result
         aw_label.first_name = member.registrant.first_name
         aw_label.last_name = member.registrant.last_name
         aw_label.gender = competitor.gender
         aw_label.partner_first_name = nil
         aw_label.partner_last_name = nil
-        aw_label.place = competitor.place
+        aw_label.place = place
         aw_label.registrant_id = member.registrant.id
-        aw_label.team_name = competitor.to_s
+        aw_label.team_name = competitor.team_name
         aw_label.user = @user
         if aw_label.save
           n += 1
@@ -113,6 +127,32 @@ class AwardLabelsController < ApplicationController
   def destroy_all
     @user.award_labels.destroy_all
     redirect_to user_award_labels_path(@user)
+  end
+
+  def normal_labels
+    names = []
+    @user.award_labels.each do |label|
+      lines = ""
+      line = line_one(label)
+      lines += line + "\n" unless line.nil? or line.empty?
+      line = line_two(label)
+      lines += line + "\n" unless line.nil? or line.empty?
+      line = line_three(label)
+      lines += line + "\n" unless line.nil? or line.empty?
+      line = line_four(label)
+      lines += line + "\n" unless line.nil? or line.empty?
+      line = line_five(label)
+      lines += line + "\n" unless line.nil? or line.empty?
+      line = line_six(label)
+      lines += "<b>" + line + "</b>" unless line.nil? or line.empty?
+      names << lines
+    end
+
+    labels = Prawn::Labels.render(names, :type => "Avery5160") do |pdf, name|
+      pdf.text name, :align =>:center, :size => 10, :inline_format => true, :shrink_to_fit => true
+    end
+
+    send_data labels, :filename => "normal-labels-#{Date.today}.pdf"
   end
 
   def expert_labels
@@ -176,12 +216,11 @@ class AwardLabelsController < ApplicationController
     res = ""
     unless award.age_group.nil? or award.age_group.empty?
       res += award.age_group
-    end
-    unless award.gender.nil? or award.gender.empty?
-      if res != ""
-        res += " "
+    else
+      # No Age Group?
+      unless award.gender.nil? or award.gender.empty?
+        res += award.gender
       end
-      res += award.gender
     end
     res
   end

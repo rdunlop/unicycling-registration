@@ -69,7 +69,7 @@ class Competitor < ActiveRecord::Base
     def result
       case competition.event.event_class
       when "Two Attempt Distance"
-        max_successful_distance
+        "#{max_successful_distance} cm"
       when "Distance"
         time_results.first.full_time
       when "External"
@@ -83,6 +83,12 @@ class Competitor < ActiveRecord::Base
 
     def member_has_bib_number?(bib_number)
       return members.includes(:registrant).where({:registrants => {:bib_number => bib_number}}).count > 0
+    end
+
+    def team_name
+      unless custom_name.nil? or custom_name.empty?
+        custom_name
+      end
     end
 
     def name
