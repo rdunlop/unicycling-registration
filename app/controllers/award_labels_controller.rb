@@ -11,7 +11,7 @@ class AwardLabelsController < ApplicationController
   # GET /users/#/award_labels
   # GET /users/#/award_labels.json
   def index
-    @award_labels = AwardLabel.all
+    @award_labels = @user.award_labels.all
     @award_label = AwardLabel.new
 
     respond_to do |format|
