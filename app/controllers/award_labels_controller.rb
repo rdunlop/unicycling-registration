@@ -120,6 +120,9 @@ class AwardLabelsController < ApplicationController
     aw_label.first_name = registrant.first_name
     aw_label.last_name = registrant.last_name
     aw_label.gender = competitor.gender
+    if competitor.members.count > 1
+      aw_label.gender = nil
+    end
     if competitor.members.count == 2
       reg1 = competitor.members.first.registrant
       reg2 = competitor.members.last.registrant
