@@ -101,10 +101,11 @@ class AwardLabelsController < ApplicationController
       place = competitor.place
       age_group = competitor.age_group_description
     end
+    competition_name = competition.event.name
     if competition.event.event_class == "Freestyle" ### XXX Somewhere else?
       age_group = competition.name # the "Category"
     elsif competition.event.event_class == "Distance"
-      age_group = competition.name # the "Category"
+      competition_name = competition.name # the "Category"
     end
     return false if place == "DQ"
     return false if place.to_i == 0
@@ -112,7 +113,7 @@ class AwardLabelsController < ApplicationController
     return false if place.to_i > max_place
 
     aw_label = AwardLabel.new
-    aw_label.competition_name = competitor.competition.event.name
+    aw_label.competition_name = competition_name
     aw_label.age_group = age_group
     aw_label.bib_number = registrant.bib_number
     aw_label.details = competitor.result
