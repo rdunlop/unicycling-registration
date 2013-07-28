@@ -39,7 +39,6 @@ class ExternallyRankedCalculator
 
     place_calc = PlaceCalculator.new
     @competition.external_results.order("rank").each do |er|
-      next if er.competitor.gender != gender
 
       er.competitor.overall_place = place_calc.place_next(er.rank, false, er.competitor.ineligible)
     end
