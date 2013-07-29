@@ -167,7 +167,7 @@ describe "Ability" do
       @event_category.competition = @competition
       @event_category.save!
       @user = FactoryGirl.create(:user)
-      @user.add_role :chief_judge, @competition
+      @user.add_role :chief_judge, @competition.event
       @user.add_role :judge
     end
     subject { @ability = Ability.new(@user) }

@@ -36,8 +36,9 @@ describe User do
       @reg1.first_name = "holly"
       @reg1.save
     end
-    it "orders the registrants by id" do
-      @user.registrants.should == [@reg1, @reg2, @reg3]
+    it "orders the registrants by bib_number" do
+      # @reg2, being a non-competitor, is a higher bib_number than the other two compeittors
+      @user.registrants.should == [@reg1, @reg3, @reg2]
     end
 
     it "determines if the user has a related minor" do

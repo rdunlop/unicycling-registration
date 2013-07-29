@@ -19,48 +19,32 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ExternalResultsController do
+  before(:each) do
+    @admin_user = FactoryGirl.create(:admin_user)
+    sign_in @admin_user
+    @competition = FactoryGirl.create(:competition)
+    @competitor = FactoryGirl.create(:competitor, :competition => @competition)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # ExternalResult. As you add validations to ExternalResult, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "competitor_id" => "1" }
-  end
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ExternalResultsController. Be sure to keep this updated too.
-  def valid_session
-    {}
+    { "competitor_id" =>  @competitor.id }
   end
 
   describe "GET index" do
     it "assigns all external_results as @external_results" do
       external_result = ExternalResult.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {:competition_id => @competition.id}
       assigns(:external_results).should eq([external_result])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested external_result as @external_result" do
-      external_result = ExternalResult.create! valid_attributes
-      get :show, {:id => external_result.to_param}, valid_session
-      assigns(:external_result).should eq(external_result)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new external_result as @external_result" do
-      get :new, {}, valid_session
-      assigns(:external_result).should be_a_new(ExternalResult)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested external_result as @external_result" do
       external_result = ExternalResult.create! valid_attributes
-      get :edit, {:id => external_result.to_param}, valid_session
+      get :edit, {:id => external_result.to_param}
       assigns(:external_result).should eq(external_result)
     end
   end
@@ -69,19 +53,19 @@ describe ExternalResultsController do
     describe "with valid params" do
       it "creates a new ExternalResult" do
         expect {
-          post :create, {:external_result => valid_attributes}, valid_session
+          post :create, {:external_result => valid_attributes, :competition_id => @competition.id}
         }.to change(ExternalResult, :count).by(1)
       end
 
       it "assigns a newly created external_result as @external_result" do
-        post :create, {:external_result => valid_attributes}, valid_session
+        post :create, {:external_result => valid_attributes, :competition_id => @competition.id}
         assigns(:external_result).should be_a(ExternalResult)
         assigns(:external_result).should be_persisted
       end
 
       it "redirects to the created external_result" do
-        post :create, {:external_result => valid_attributes}, valid_session
-        response.should redirect_to(ExternalResult.last)
+        post :create, {:external_result => valid_attributes, :competition_id => @competition.id}
+        response.should redirect_to(competition_external_results_path(@competition))
       end
     end
 
@@ -89,15 +73,15 @@ describe ExternalResultsController do
       it "assigns a newly created but unsaved external_result as @external_result" do
         # Trigger the behavior that occurs when invalid params are submitted
         ExternalResult.any_instance.stub(:save).and_return(false)
-        post :create, {:external_result => { "competitor_id" => "invalid value" }}, valid_session
+        post :create, {:external_result => { "competitor_id" => "invalid value" }, :competition_id => @competition.id}
         assigns(:external_result).should be_a_new(ExternalResult)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         ExternalResult.any_instance.stub(:save).and_return(false)
-        post :create, {:external_result => { "competitor_id" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        post :create, {:external_result => { "competitor_id" => "invalid value" }, :competition_id => @competition.id}
+        response.should render_template("index")
       end
     end
   end
@@ -111,19 +95,19 @@ describe ExternalResultsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         ExternalResult.any_instance.should_receive(:update_attributes).with({ "competitor_id" => "1" })
-        put :update, {:id => external_result.to_param, :external_result => { "competitor_id" => "1" }}, valid_session
+        put :update, {:id => external_result.to_param, :external_result => { "competitor_id" => "1" }}
       end
 
       it "assigns the requested external_result as @external_result" do
         external_result = ExternalResult.create! valid_attributes
-        put :update, {:id => external_result.to_param, :external_result => valid_attributes}, valid_session
+        put :update, {:id => external_result.to_param, :external_result => valid_attributes}
         assigns(:external_result).should eq(external_result)
       end
 
-      it "redirects to the external_result" do
+      it "redirects to the external_result index" do
         external_result = ExternalResult.create! valid_attributes
-        put :update, {:id => external_result.to_param, :external_result => valid_attributes}, valid_session
-        response.should redirect_to(external_result)
+        put :update, {:id => external_result.to_param, :external_result => valid_attributes}
+        response.should redirect_to(competition_external_results_path(@competition))
       end
     end
 
@@ -132,7 +116,7 @@ describe ExternalResultsController do
         external_result = ExternalResult.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ExternalResult.any_instance.stub(:save).and_return(false)
-        put :update, {:id => external_result.to_param, :external_result => { "competitor_id" => "invalid value" }}, valid_session
+        put :update, {:id => external_result.to_param, :external_result => { "competitor_id" => "invalid value" }}
         assigns(:external_result).should eq(external_result)
       end
 
@@ -140,7 +124,7 @@ describe ExternalResultsController do
         external_result = ExternalResult.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ExternalResult.any_instance.stub(:save).and_return(false)
-        put :update, {:id => external_result.to_param, :external_result => { "competitor_id" => "invalid value" }}, valid_session
+        put :update, {:id => external_result.to_param, :external_result => { "competitor_id" => "invalid value" }}
         response.should render_template("edit")
       end
     end
@@ -150,14 +134,14 @@ describe ExternalResultsController do
     it "destroys the requested external_result" do
       external_result = ExternalResult.create! valid_attributes
       expect {
-        delete :destroy, {:id => external_result.to_param}, valid_session
+        delete :destroy, {:id => external_result.to_param}
       }.to change(ExternalResult, :count).by(-1)
     end
 
     it "redirects to the external_results list" do
       external_result = ExternalResult.create! valid_attributes
-      delete :destroy, {:id => external_result.to_param}, valid_session
-      response.should redirect_to(external_results_url)
+      delete :destroy, {:id => external_result.to_param}
+      response.should redirect_to(compettion_external_results_path(@competition))
     end
   end
 

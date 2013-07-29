@@ -31,16 +31,16 @@ describe ExternallyRankedCalculator do
 
     describe "with an ineligible registrant in first place" do
       before(:each) do
-        r = @tr1.competitor.members.first.registrant
+        r = @tr1.competitor.members(true).first.registrant
         r.ineligible = true
         r.save!
       end
       it "places the first 2 competitors as first" do
         @calc.update_all_places
 
-        tr1.competitor.place.should == 1
-        tr2.competitor.place.should == 1
-        tr2.competitor.place.should == 2
+        @tr1.competitor.place.should == 1
+        @tr2.competitor.place.should == 1
+        @tr3.competitor.place.should == 2
       end
     end
   end
