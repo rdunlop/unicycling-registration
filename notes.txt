@@ -1,3 +1,92 @@
+- Adjust the Advanced XC data by 2 minutes (they started later.
+
+- Who gets expert T-Shirts?
+ - Pick the events that qualify for an expert t-shirt
+  - Determine who came in top-3, and then combine all of these people into a list.
+  - List the shirt-size for each of these competitors.
+  - Allow adding another competition if there are still shirts/etc.
+
+- Print the competitor/results labels, and information about shipping, for Lisa.
+ - For TCUC, RTUC, MAD, SVUC, send the list of competitors to the team leader (Connie, Wendy, Ann O'Brien, Nina)
+
+WHAT WENT POORLY:
+- Printing of reports
+- Aeed an Excel Import that is Connie Friendly
+- Printing Medals and Labels should be much easier to determine what options to select.
+- We could have had more data entered in advance.
+
+
+POST-NAUCC2013 Report/Requests:
+
+- Personalized Schedule, Page 2 of the registration package
+ - Awesome feature: include the full convention schedule, highlighting the events that the registrant is signed up for.
+ - Includes all competition events, and ONLY competition events.
+ 
+ - I want to have a "Publish to Website" button for each competition results.
+  - To be used/synchronized on a nightly basis.
+   - Connie: automagically? Make it simple to publish the results to the website.
+ - Make PDFs of the results available for PUBLIC consumption.
+  - Make personalized results pages available for each competitor.
+ 
+ - Make the Race Recording form have another small column to the right of the right-data-column
+
+ - Make the Overall Champion calculation part of UDA.
+  - Track: ties are resolved by the number of 1sts, then by place of 100m. Points: 8,6,4,2,1
+  - MUni: (at nationals, only) 3 events, and ties are resolved by number of 1sts, then number of 2nds, then 3rd places, 4th places, 5th, and then by Cross-country.
+  - Distance: Each event has X points for 1st through 10th. Ties are resolved by number of 1sts, 2nds, thirds, fourths, fifths, then by Marthon.
+  - Be able to publish the resuts of the calculation during the week (before all the events have been competed).
+
+ - Have a page which lists the events, according to the schedule, and whether the data has been entered, posted, published, awarded.
+  - Should be at the EventCategory Level.
+  - Show the events that have been competed, but not completed should be highlighted.
+
+- Allow the Event Director to upload their own data (Trials, Street, Flat, etc)
+
+- Allow Concurrent-Heat data entry (enter the heat number and start time, and then the competitor numbers for that start time).
+ - Allows entering the finish data directly.
+
+- Be able to enter the 2 results for the MUni Uphill, which will be able to show the better attempt 
+ - Should be able to enter the start time separately from the end time (for MUNi Uphill), or via heats (Crit Standard)
+ - May be able to configure this to be a special case for Obstacle, MUNi Up/down, Long/High, etc.
+
+- Make Startlist generation less manual
+ - Some way of creating next heats based on previously-raced events.
+
+- 100m Expert Race should be populated by the 100m Top finishers
+ - Include a Report which shows the way that experts are positioned on the track
+
+- Have a tablet at the start time which shows the HEAT number, Age Group, Event, Competitors (Large ID, Large First, (small Last))
+ - Be able to enter DQ entries (for 1ft, for example).
+- Have the person sitting with The Electronic Timer (at track) be communicating with the Photo-timer person to ensure that Finish times, Lanes, and DQ's are recorded properly).
+
+- Specify that an event is a "Multi-registrant Event" which means that administrators can pre-associate multiple registrants together into a single "group"
+ - Useful for Pairs, Group, Club, Hockey, BBall, Relay.
+ -- Have the ability to pre-associate people to the groups, so that when createing the competitors list, it has data to pull from.
+
+
+ ** Calculation of the Experts cannot use results which are in the 20"or 16" category.
+
+ * User must choose their wheel size for ALL track events (points races) (100m, 400m, 800m, Obstacle, 1ft, WW)
+
+
+- Improve the flow of the High/Long recordincg, to better match the way that they run the event.
+- Multi-lap calculations should possible.
+- DNF should be possible.
+
+- Have the data entry for separetly-timed events by done in UDA. (MUNI Uphill for example).
+ - START TIME:  Enter ID, hour, minutes, seconds, hour (2), Minute(2), second(2). (Don't want to have to enter the ID twice).
+ - FINISH TIME: Enter ID, hour, minutes, seconds.
+- Entering data directly into UDA needs to be less cumbersome.
+ - Right now, it's not at all like Excel.
+
+ THINGS to fix:
+ - Give people 4 safety pins.
+ UPS Backups for the Router.
+ - Major and Minor faults are counted by 2 people and averaged, and then those scores are used by all of the judegs.
+
+- Need a better system to deal with incoming data, processed data.
+=================================
+
 - Add ability to add competitors from multiple event_categories to a single competition (or allow adding them later, one at a time)
 - Allow "Create Competition" to take a Gender filter (For use in ARTISTIC competition creation)
 
@@ -14,7 +103,12 @@
 
 Connie Wants:
 - Registration system which tracks when someone has picked up their registration package?
+ - Flag people who have not picked up their registration package.
+ - Be able to search for a registrant, and mark that they are picked up.
+ - Indicate any registrants who have not picked up their registration packet (on their name?)
 - Mark people who have not paid as special (perhaps by adjusting their name?)
+ - On the Race Sign up forms, indicate that these people are not likely to show up.....maybe don't put them on the list until they are paid too.
+ - Not even on the "eligible" list for race sign-ups.
 - Clarify the fact that the Competition people are RANDOMIZED
 
 July Questions:
@@ -27,12 +121,12 @@ TO DO (MUST be done BEFORE LIVE):
 - Create Competitor for EventCategory, Position, CustomExternalId, CustomExternalName
 - Add ability to show the registrants "Signed up" for an Event (eg: Individual Ferestyl, Male, 15+)
  - Add ability to "Reorder Competitors" (which will create a Competitor object and set the Position.
- - Create Member object which associates registrant(s) with Competitor.
+# - Create Member object which associates registrant(s) with Competitor.
 
 - Make the "shared registrant" banner disappear (or de-highlight) when accepted
 - Prevent users from saving a payment in progress over the boundary?
 
- - Add foreign key indices on all *_id columns
+# - Add foreign key indices on all *_id columns
  - Should I titlize the names of the registrants?
  - add unique constraints on database level?
   - when using unicorn to serve multiple people at once, what do I need to consider?
@@ -56,7 +150,7 @@ TO DO (MUST be done BEFORE LIVE):
  - Cache the age of the registrant
  - Add in-place eding of tables (like the Registration Periods entries?)
  - Add a scope for signed_up registrant_event_sign_ups (to get rid of the "if category is nil"
- - Remove club_admin column (using rolify now)
+# - Remove club_admin column (using rolify now)
  - Create ability to invite people for clubs admin
  - Restrict permsissions of "admin" user to ????
  - Add tests for the club-admin (or whatever it becomes) flows
