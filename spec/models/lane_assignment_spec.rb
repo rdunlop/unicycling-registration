@@ -13,5 +13,10 @@ describe LaneAssignment do
     @la.valid?.should == false
   end
 
+  it "cannot have the same heat/lane twice for a single competition" do
+    la2 = FactoryGirl.build(:lane_assignemnt, :heat => @la.heat, :lane => @la.lane, :competition => @la.competition)
+    la2.valid?.should == false
+  end
+
   pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -20,5 +20,8 @@ FactoryGirl.define do
       event_class "Flatland"
     end
 
+    factory :timed_event do
+      event_class "Distance"
+    end
   end
 end

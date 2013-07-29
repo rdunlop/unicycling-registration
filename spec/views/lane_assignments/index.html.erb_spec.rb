@@ -30,7 +30,7 @@ describe "lane_assignments/index" do
 
       # Run the generator again with the --webrat flag if you want to use webrat matchers
       assert_select "form", :action => competition_lane_assignments_path(@competition), :method => "post" do
-        assert_select "input#lane_assignment_registrant_id", :name => "lane_assignment[registrant_id]"
+        assert_select "select#lane_assignment_registrant_id", :name => "lane_assignment[registrant_id]"
         assert_select "input#lane_assignment_heat", :name => "lane_assignment[heat]"
         assert_select "input#lane_assignment_lane", :name => "lane_assignment[lane]"
       end

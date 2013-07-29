@@ -4,7 +4,7 @@ describe ImportResultsController do
   before(:each) do
     @admin_user = FactoryGirl.create(:admin_user)
     sign_in @admin_user
-    @competition = FactoryGirl.create(:competition)
+    @competition = FactoryGirl.create(:competition, :event => FactoryGirl.create(:timed_event))
   end
   let (:import_result) { FactoryGirl.create(:import_result, :user => @admin_user) }
 
@@ -121,4 +121,42 @@ describe ImportResultsController do
     end
   end
 
+ describe "when importing data" do
+    it "creates a competitor" do
+      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      test_image = fixture_path + '/sample_time_results_bib_101.txt'
+      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
+
+      post :import_csv, {:competition_id => @competition.id, :file => sample_input, :user_id => @admin_user.id}
+
+      ImportResult.count.should == 1
+      ir = ImportResult.first
+      ir.bib_number.should == 101
+      ir.minutes.should == 1
+      ir.seconds.should == 2
+      ir.thousands.should == 300
+      ir.disqualified.should == false
+      ir.competition.should == @competition
+    end
+    it "creates a dq competitor" do
+      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      test_image = fixture_path + '/sample_time_results_bib_101_dq.txt'
+      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
+
+      post :import_csv, {:competition_id => @competition.id, :file => sample_input, :user_id => @admin_user.id}
+
+      ImportResult.count.should == 1
+      ImportResult.first.disqualified.should == true
+    end
+  end
+
+  describe "POST publish_to_competition" do
+    it "redirects to the competitions' results page" do
+      event = FactoryGirl.create(:event, :event_class => "Distance")
+      competition = FactoryGirl.create(:competition, :event => event)
+      import = FactoryGirl.create(:import_result, :competition => competition)
+      post :publish_to_competition, {:user_id => import.user}
+      response.should redirect_to(competition_time_results_path(competition))
+    end
+  end
 end

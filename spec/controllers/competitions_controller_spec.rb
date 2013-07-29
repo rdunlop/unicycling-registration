@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe CompetitionsController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
+    @admin_user =FactoryGirl.create(:super_admin_user)
+    sign_in @admin_user
     @event = FactoryGirl.create(:event)
     @event_category = @event.event_categories.first
     @competition = FactoryGirl.create(:competition)
+    
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -18,7 +20,7 @@ describe CompetitionsController do
     }
   end
 
-: # /events/#/competitions
+  # /events/#/competitions
   describe "GET index" do
     it "assigns all event's competitions as @competitions" do
       competition = Competition.create! valid_attributes.merge({:event_id => @event.id})
@@ -175,7 +177,7 @@ describe CompetitionsController do
       competition = FactoryGirl.create(:competition, :event => @event)
       event = competition.event
       delete :destroy, {:id => competition.to_param}
-      response.should redirect_to(event_competitions_path(event))
+      response.should redirect_to(freestyle_events_path)
     end
   end
 
@@ -193,34 +195,6 @@ describe CompetitionsController do
       delete :lock, {:id => competition.to_param}
       competition.reload
       competition.locked?.should == false
-    end
-  end
-
-  describe "when importing data" do
-    it "creates a competitor" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
-      test_image = fixture_path + '/sample_time_results_bib_101.txt'
-      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
-
-      post :import_time_results, {:id => @competition.id, :file => sample_input}
-
-      TimeResult.count.should == 1
-      tr = TimeResult.first
-      tr.competitor.external_id.should == "101"
-      tr.minutes.should == 1
-      tr.seconds.should == 2
-      tr.thousands.should == 300
-      tr.disqualified.should == false
-    end
-    it "creates a dq competitor" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
-      test_image = fixture_path + '/sample_time_results_bib_101_dq.txt'
-      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
-
-      post :import_time_results, {:id => @competition.id, :file => sample_input}
-
-      TimeResult.count.should == 1
-      TimeResult.first.disqualified.should == true
     end
   end
 end

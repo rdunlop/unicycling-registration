@@ -122,7 +122,7 @@ Workspace::Application.routes.draw do
       get 'distance'
       get 'ranked'
     end
-    resources :competitions, :only => [] do
+    resources :competitions, :only => [:index] do
       collection do
         get :new_empty
         post :create_empty
