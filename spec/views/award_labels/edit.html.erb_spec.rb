@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "award_labels/edit" do
   before(:each) do
+    @user = FactoryGirl.create(:admin_user)
     @award_label = FactoryGirl.create(:award_label,
       :bib_number => 1,
       :first_name => "MyString",
@@ -34,7 +35,7 @@ describe "award_labels/edit" do
       assert_select "input#award_label_gender", :name => "award_label[gender]"
       assert_select "input#award_label_details", :name => "award_label[details]"
       assert_select "input#award_label_place", :name => "award_label[place]"
-      assert_select "input#award_label_registrant_id", :name => "award_label[registrant_id]"
+      assert_select "select#award_label_registrant_id", :name => "award_label[registrant_id]"
     end
   end
 end
