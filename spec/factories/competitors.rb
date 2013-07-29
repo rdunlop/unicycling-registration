@@ -4,7 +4,10 @@ FactoryGirl.define do
   factory :event_competitor, :class => Competitor do
     competition  # FactoryGirl
     sequence(:position)
-    after(:create) { |comp| FactoryGirl.create(:member, :competitor => comp)}
+    after(:create) { |comp| 
+        FactoryGirl.create(:member, :competitor => comp)
+        comp.reload
+    }
   end
 
   factory :member, :class => Member do

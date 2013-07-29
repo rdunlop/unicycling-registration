@@ -1,4 +1,5 @@
-- Print+Post High/Long
+-- Print+Post High/Long
+- What happens if a competitor has no members? (do the pages display? do the calculations die?)
 
 # - Enter Obstacle, and print for verification.
 #- Enter Speed Trials, and print

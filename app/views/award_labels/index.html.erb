@@ -8,10 +8,10 @@
    <%= select_tag :competition_id, options_from_collection_for_select(Competition.order(:event_id, :name).all, "id", "to_s") %><br />
 
    <%= label_tag :maximum_place, "Maximum Award Place" %>
-   <%= text_field_tag :maximum_place %></br>
+   <%= text_field_tag :maximum_place %><br />
 
    <%= label_tag :experts, "Experts from within Age-group data" %>
-   <%= check_box_tag :experts %></br>
+   <%= check_box_tag :experts %><br />
 
    <%= submit_tag "Create labels" %>
  <% end %>
