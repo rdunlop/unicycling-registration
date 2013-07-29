@@ -13,7 +13,7 @@ describe "import_results/edit" do
       assert_select "input#import_result_raw_data", :name => "import_result[raw_data]"
       assert_select "input#import_result_bib_number", :name => "import_result[bib_number]"
       assert_select "input#import_result_minutes", :name => "import_result[minutes]"
-      assert_select "input#import_result_second", :name => "import_result[second]"
+      assert_select "input#import_result_seconds", :name => "import_result[seconds]"
       assert_select "input#import_result_thousands", :name => "import_result[thousands]"
       assert_select "input#import_result_disqualified", :name => "import_result[disqualified]"
     end
