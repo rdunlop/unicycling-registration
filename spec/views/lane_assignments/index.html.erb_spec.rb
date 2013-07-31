@@ -12,8 +12,6 @@ describe "lane_assignments/index" do
   it "renders a list of lane_assignments" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "tr>td", :text => 123.to_s, :count => 1
-    assert_select "tr>td", :text => 234.to_s, :count => 1
     assert_select "tr>td", :text => 3.to_s, :count => 1
     assert_select "tr>td", :text => 30.to_s, :count => 1
     assert_select "tr>td", :text => 4.to_s, :count => 1
