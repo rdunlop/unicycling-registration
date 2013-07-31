@@ -58,6 +58,7 @@ class Competitor < ActiveRecord::Base
 
     private
     def place_key
+      competition.reload
       "/competition/#{competition.id}-#{competition.updated_at}/competitor/#{id}-#{updated_at}/place"
     end
 
