@@ -39,8 +39,8 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
 
         my_place = 1
         score.judge.get_scores.each do |each_score|
-            # Higher is better
-            if each_score.Total > score.Total
+            # Lower is better
+            if each_score.Total < score.Total
                 my_place = my_place + 1
             end
         end
@@ -62,7 +62,7 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
       my_points = total_points(competitor)
       competitor.competition.competitors.each do |comp|
         comp_points = total_points(comp)
-        if comp_points < my_points # XXX replace with helper function?
+        if comp_points > my_points # XXX replace with helper function?
             my_place = my_place + 1
         end
       end
