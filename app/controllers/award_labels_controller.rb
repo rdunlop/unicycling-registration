@@ -192,7 +192,7 @@ class AwardLabelsController < ApplicationController
     end
 
     labels = Prawn::Labels.render(names, :type => "Avery5160") do |pdf, name|
-      pdf.text name, :align =>:center, :size => 10, :inline_format => true, :shrink_to_fit => true
+      pdf.text name, :align =>:center, :valign => :center, :size => 10, :inline_format => true, :shrink_to_fit => true
     end
 
     send_data labels, :filename => "normal-labels-#{Date.today}.pdf"
