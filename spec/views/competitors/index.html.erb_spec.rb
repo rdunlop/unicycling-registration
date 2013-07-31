@@ -12,6 +12,6 @@ describe "competitors/index" do
     it "doesn't render new competitor form" do
       render
 
-      assert_select "tr>td", :text => @comp.name.to_s, :count => 0
+      assert_select "form", :count => 0
     end
 end
