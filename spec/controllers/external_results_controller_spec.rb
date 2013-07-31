@@ -23,14 +23,17 @@ describe ExternalResultsController do
     @admin_user = FactoryGirl.create(:admin_user)
     sign_in @admin_user
     @competition = FactoryGirl.create(:competition)
-    @competitor = FactoryGirl.create(:competitor, :competition => @competition)
+    @competitor = FactoryGirl.create(:event_competitor, :competition => @competition)
   end
 
   # This should return the minimal set of attributes required to create a valid
   # ExternalResult. As you add validations to ExternalResult, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "competitor_id" =>  @competitor.id }
+    { "competitor_id" =>  @competitor.id,
+      "details" => "soomething",
+      "rank" => 1
+    }
   end
 
   describe "GET index" do
@@ -141,7 +144,7 @@ describe ExternalResultsController do
     it "redirects to the external_results list" do
       external_result = ExternalResult.create! valid_attributes
       delete :destroy, {:id => external_result.to_param}
-      response.should redirect_to(compettion_external_results_path(@competition))
+      response.should redirect_to(competition_external_results_path(@competition))
     end
   end
 

@@ -42,12 +42,6 @@ describe CompetitorsController do
       get :index, {:competition_id => @ec.id}
       assigns(:competitors).should == [competitor]
     end
-    it "assigns all signed-up entries as @registrants" do
-      @reg = FactoryGirl.create(:competitor)
-      FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @event_category, :signed_up => true, :registrant => @reg)
-      get :index, {:competition_id => @ec.id}
-      assigns(:registrants).should == [@reg]
-    end
   end
 
   describe "GET edit" do
@@ -177,7 +171,7 @@ describe CompetitorsController do
       it "redirects to the competition" do
         competitor = Competitor.create! valid_attributes
         put :update, {:id => competitor.to_param, :competitor => valid_attributes}
-        response.should redirect_to(competitor.competition)
+        response.should redirect_to(competition_competitors_path(competitor.competition))
       end
     end
 
@@ -211,7 +205,7 @@ describe CompetitorsController do
     it "redirects to the competitor#new page" do
       competitor = Competitor.create! valid_attributes
       delete :destroy, {:id => competitor.to_param}
-      response.should redirect_to(new_competition_competitor_path(@ec))
+      response.should redirect_to(competition_competitors_path(@ec))
     end
   end
 

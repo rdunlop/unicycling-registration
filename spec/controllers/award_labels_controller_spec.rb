@@ -4,6 +4,7 @@ describe AwardLabelsController do
   before(:each) do
     @admin_user = FactoryGirl.create(:admin_user)
     sign_in @admin_user
+    @registrant = FactoryGirl.create(:competitor)
   end
   let (:award_label) { FactoryGirl.create(:award_label, :user => @admin_user) }
 
@@ -11,13 +12,15 @@ describe AwardLabelsController do
   # AwardLabel. As you add validations to AwardLabel, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "bib_number" => "1" }
+    { "registrant_id" => @registrant.id,
+      "place" => 1
+    }
   end
 
   describe "GET index" do
     it "assigns all award_labels as @award_labels" do
       aw_label = FactoryGirl.create(:award_label, :user => @admin_user)
-      get :index, {}
+      get :index, {:user_id => @admin_user}
       assigns(:award_labels).should eq([aw_label])
     end
   end
@@ -45,7 +48,7 @@ describe AwardLabelsController do
 
       it "redirects to the created award_label" do
         post :create, {:award_label => valid_attributes, :user_id => @admin_user.id}
-        response.should redirect_to(AwardLabel.last)
+        response.should redirect_to(user_award_labels_path(@admin_user))
       end
     end
 
@@ -57,11 +60,11 @@ describe AwardLabelsController do
         assigns(:award_label).should be_a_new(AwardLabel)
       end
 
-      it "re-renders the 'new' template" do
+      it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         AwardLabel.any_instance.stub(:save).and_return(false)
         post :create, {:award_label => { "bib_number" => "invalid value" }, :user_id => @admin_user.id}
-        response.should render_template("new")
+        response.should render_template("index")
       end
     end
   end
@@ -84,7 +87,7 @@ describe AwardLabelsController do
 
       it "redirects to the award_label" do
         put :update, {:id => award_label.to_param, :award_label => valid_attributes}
-        response.should redirect_to(award_label)
+        response.should redirect_to(user_award_labels_path(@admin_user))
       end
     end
 
