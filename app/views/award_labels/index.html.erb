@@ -1,6 +1,12 @@
 <h1>Listing award_labels</h1>
 
 
+<%= form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do %>
+  <%= label_tag :separate_registrants, "Separate each registrant with a row of blank labels" %>
+  <%= check_box_tag :separate_registrants %><br />
+  <%= submit_tag "Normal Labels", :class => "multiclick" %>
+<% end %>
+
 <%= link_to "Normal Labels", normal_labels_user_award_labels_path(@user) %>
 <%= link_to "Expert Labels", expert_labels_user_award_labels_path(@user) %>
 

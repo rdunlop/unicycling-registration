@@ -173,8 +173,22 @@ class AwardLabelsController < ApplicationController
   end
 
   def normal_labels
+    separate_registrants = false
+    unless params[:separate_registrants].nil?
+      separate_registrants = true
+    end
+    previous_bib_number = 0
+
     names = []
-    @user.award_labels.each do |label|
+    @user.award_labels.order(:bib_number).each do |label|
+      if separate_registrants and (previous_bib_number != 0 and label.bib_number != previous_bib_number)
+        # add 3 blanks
+        names << ""
+        names << ""
+        names << ""
+      end
+      previous_bib_number = label.bib_number
+
       lines = ""
       line = line_one(label)
       lines += line + "\n" unless line.nil? or line.empty?
@@ -190,6 +204,7 @@ class AwardLabelsController < ApplicationController
       lines += "<b>" + line + "</b>" unless line.nil? or line.empty?
       names << lines
     end
+
 
     labels = Prawn::Labels.render(names, :type => "Avery5160") do |pdf, name|
       pdf.text name, :align =>:center, :valign => :center, :size => 10, :inline_format => true, :shrink_to_fit => true
