@@ -4,10 +4,8 @@ describe CompetitionsController do
   before(:each) do
     @admin_user =FactoryGirl.create(:super_admin_user)
     sign_in @admin_user
-    @event = FactoryGirl.create(:event)
+    @event = FactoryGirl.create(:timed_event)
     @event_category = @event.event_categories.first
-    @competition = FactoryGirl.create(:competition)
-    
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -71,7 +69,7 @@ describe CompetitionsController do
 
       it "redirects to the created competition" do
         post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
-        response.should redirect_to(competition_competitors_path(Competition.last))
+        response.should redirect_to(distance_events_path)
       end
     end
 
@@ -177,7 +175,7 @@ describe CompetitionsController do
       competition = FactoryGirl.create(:competition, :event => @event)
       event = competition.event
       delete :destroy, {:id => competition.to_param}
-      response.should redirect_to(freestyle_events_path)
+      response.should redirect_to(distance_events_path)
     end
   end
 
@@ -195,6 +193,20 @@ describe CompetitionsController do
       delete :lock, {:id => competition.to_param}
       competition.reload
       competition.locked?.should == false
+    end
+  end
+
+  describe "when the competition is a distance competition, with time-results" do
+    before(:each) do
+      @competition = FactoryGirl.create(:competition, :event => @event)
+      @competition.event.event_class.should == "Distance"
+      @competitor = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @tr = FactoryGirl.create(:time_result, :competitor => @competitor)
+    end
+    it "destroys the time_result on destroy_results" do
+      expect {
+        delete :destroy_results, {:id => @competition.id}
+      }.to change(TimeResult, :count).by(-1)
     end
   end
 end

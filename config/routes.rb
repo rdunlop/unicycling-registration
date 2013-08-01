@@ -230,6 +230,7 @@ Workspace::Application.routes.draw do
       get :street_scores
       post :lock
       delete :lock
+      delete :destroy_results
     end
     resources :competitors, :only => [:index, :new, :create] do
       collection do

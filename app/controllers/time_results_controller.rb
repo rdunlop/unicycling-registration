@@ -6,17 +6,14 @@ class TimeResultsController < ApplicationController
 
   # XXX look into https://github.com/railscasts/396-importing-csv-and-excel/blob/master/store-with-validations/app/models/product_import.rb ??
   
-  # GET event/1/time_results
-  # GET event/1/time_results.json
+  # GET competitions/1/time_results
   def index
     @time_results = @competition.time_results.includes(:competitor) # XXX
     @time_result = TimeResult.new # @event.time_results.build
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @time_results }
     end
-
   end
 
   def final_candidates

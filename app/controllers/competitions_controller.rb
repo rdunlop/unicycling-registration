@@ -7,7 +7,7 @@ class CompetitionsController < ApplicationController
 
   before_filter :load_event, :only => [:index, :create_empty, :new_empty]
   before_filter :load_event_category, :only => [:create, :new]
-  before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :street_scores, :lock, :set_places]
+  before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :street_scores, :lock, :set_places, :destroy_results]
 
   def load_event
     @event = Event.find(params[:event_id])
@@ -103,11 +103,7 @@ class CompetitionsController < ApplicationController
 
         message += @competition.create_competitors_from_registrants(registrants)
 
-        if @event_category.event_class == "Distance"
-          format.html { redirect_to distance_events_path, notice:  message }
-        else
-          format.html { redirect_to competition_competitors_path(@competition), notice:  message }
-        end
+        format.html { redirect_to judging_menu_url(@competition), notice:  message }
         format.json { render json: @competition, status: :created, location: competition_competitors_path(@event) }
       else
         load_event_category
@@ -130,6 +126,30 @@ class CompetitionsController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @competition.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # DELETE /competitions/1/destroy_results
+  def destroy_results
+    @results = nil
+    case @competition.event.event_class
+    when "Distance"
+      @results = @competition.time_results
+    when "Ranked"
+      @results = @competition.external_results
+    end
+
+    n = 0
+    err = 0
+    @results.each do |res|
+      if res.destroy
+        n += 1
+      else
+        err += 1
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to results_url(@competition), notice: "#{n} records deleted. #{err} errors" }
     end
   end
 
