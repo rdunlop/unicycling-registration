@@ -14,6 +14,13 @@ class RegistrantGroupsController < ApplicationController
     end
   end
 
+  def list
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf("list") }
+    end
+  end
+
   # GET /registrant_groups/1
   # GET /registrant_groups/1.json
   def show

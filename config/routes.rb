@@ -1,6 +1,10 @@
 Workspace::Application.routes.draw do
 
-  resources :registrant_groups, :except => [:new]
+  resources :registrant_groups, :except => [:new] do
+    collection do
+      get :list
+    end
+  end
 
   namespace :printing do
     namespace :race_recording do
