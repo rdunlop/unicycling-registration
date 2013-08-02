@@ -18,6 +18,7 @@ describe RegistrantGroupsController do
       registrant_group = RegistrantGroup.create! valid_attributes
       get :index, {}
       assigns(:registrant_groups).should eq([registrant_group])
+      assigns(:registrant_group).should be_a_new(RegistrantGroup)
     end
   end
 
@@ -26,13 +27,6 @@ describe RegistrantGroupsController do
       registrant_group = RegistrantGroup.create! valid_attributes
       get :show, {:id => registrant_group.to_param}
       assigns(:registrant_group).should eq(registrant_group)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new registrant_group as @registrant_group" do
-      get :new, {}
-      assigns(:registrant_group).should be_a_new(RegistrantGroup)
     end
   end
 
@@ -50,6 +44,13 @@ describe RegistrantGroupsController do
         expect {
           post :create, {:registrant_group => valid_attributes}
         }.to change(RegistrantGroup, :count).by(1)
+      end
+
+      it "creates a new RegistrantGroup and nested member" do
+        reg = FactoryGirl.create(:registrant)
+        expect {
+          post :create, {:registrant_group => { :name => "Fun1", :registrant_group_members_attributes => [{:registrant_id => reg.id } ] }}
+        }.to change(RegistrantGroupMember, :count).by(1)
       end
 
       it "assigns a newly created registrant_group as @registrant_group" do
@@ -76,7 +77,7 @@ describe RegistrantGroupsController do
         # Trigger the behavior that occurs when invalid params are submitted
         RegistrantGroup.any_instance.stub(:save).and_return(false)
         post :create, {:registrant_group => { "name" => "invalid value" }}
-        response.should render_template("new")
+        response.should render_template("index")
       end
     end
   end

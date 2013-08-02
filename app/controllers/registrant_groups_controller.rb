@@ -6,6 +6,7 @@ class RegistrantGroupsController < ApplicationController
   # GET /registrant_groups.json
   def index
     @registrant_groups = RegistrantGroup.all
+    @registrant_group = RegistrantGroup.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -20,17 +21,6 @@ class RegistrantGroupsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @registrant_group }
-    end
-  end
-
-  # GET /registrant_groups/new
-  # GET /registrant_groups/new.json
-  def new
-    @registrant_group = RegistrantGroup.new
-
-    respond_to do |format|
-      format.html # new.html.erb
       format.json { render json: @registrant_group }
     end
   end
@@ -50,7 +40,7 @@ class RegistrantGroupsController < ApplicationController
         format.html { redirect_to @registrant_group, notice: 'Registrant group was successfully created.' }
         format.json { render json: @registrant_group, status: :created, location: @registrant_group }
       else
-        format.html { render action: "new" }
+        format.html { render action: "index" }
         format.json { render json: @registrant_group.errors, status: :unprocessable_entity }
       end
     end

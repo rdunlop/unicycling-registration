@@ -1,4 +1,5 @@
 -- Print+Post High/Long
+- Use more Form Helpers (like the RegistrantGroup form helper)
 - Update roles,to allow certain admin users to be able to create results (external results, import results)
 - What happens if a competitor has no members? (do the pages display? do the calculations die?)
 - When the server is running locally, log all errors to a database table (and allow viewing of this).

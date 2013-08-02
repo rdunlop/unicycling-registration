@@ -24,33 +24,5 @@
   </tbody>
 </table>
 
-<h2>All Registrants</h2>
-<table class="sortable">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Club</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>Registrant Group(s)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% Registrant.all.each do |registrant| %>
-      <tr>
-        <td><%= registrant.bib_number %></td>
-        <td><%= registrant.first_name %></td>
-        <td><%= registrant.last_name %></td>
-        <td><%= registrant.club %></td>
-        <td><%= registrant.address %></td>
-        <td><%= registrant.city %></td>
-        <td><%= registrant.registrant_groups.join(" ") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br />
-
-<%= link_to 'New Registrant group', new_registrant_group_path %>
+<h1>New Registrant Group</h1>
+<%= render :partial => "form" %>

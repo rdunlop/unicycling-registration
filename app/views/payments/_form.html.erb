@@ -35,6 +35,8 @@
           </td>
           <td><%= pf.hidden_field :amount %><%= number_to_currency(pf.object.amount) %></td>
           <td>
+            <% # XXX http://rubysource.com/complex-rails-forms-with-nested-attributes/  to not need to invert things anymore 
+          %>
             <%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %>
             <%= check_box_tag :anon, nil, true, :class => "anon", :id => nil, "data-cents" => pf.object.amount * 100 %>
           </td>
