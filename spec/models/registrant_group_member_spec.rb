@@ -23,4 +23,9 @@ describe RegistrantGroupMember do
   it "describes itself as the group" do
     @rgm.to_s.should == @rg.name
   end
+
+  it "cannot have the same member twice in the same group" do
+    @rgm2 = FactoryGirl.build(:registrant_group_member, :registrant => @rgm.registrant, :registrant_group => @rg)
+    @rgm2.valid?.should == false
+  end
 end

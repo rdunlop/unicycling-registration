@@ -15,7 +15,7 @@
       <% rg.registrant_group_members.each do |registrant_group_member| %>
         <tr>
           <td><%= registrant_group_member.registrant.bib_number %></td>
-          <td><%= registrant_group_member %></td>
+          <td><%= registrant_group_member.registrant %></td>
         </tr>
       <% end %>
     </tbody>

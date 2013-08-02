@@ -40,7 +40,8 @@
       <%= f.fields_for :registrant_group_members do |ff| %>
         <tr>
           <td><%= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0','1' %>
-              <%= ff.hidden_field :registrant_id %></td>
+              <%= ff.hidden_field :registrant_id %>
+              <%= ff.hidden_field :id %></td>
           <td><%= ff.object.registrant.bib_number %></td>
           <td><%= ff.object.registrant.first_name %></td>
           <td><%= ff.object.registrant.last_name %></td>

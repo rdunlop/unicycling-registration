@@ -5,6 +5,7 @@ class RegistrantGroupMember < ActiveRecord::Base
   belongs_to :registrant
 
   validates :registrant, :presence => true
+  validates :registrant_id, :uniqueness => {:scope => [:registrant_group_id]}
   validates :registrant_group, :presence => true
 
 
