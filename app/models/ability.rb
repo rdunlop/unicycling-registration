@@ -18,6 +18,7 @@ class Ability
         can :manage, ImportResult
         can :manage, AwardLabel
         can :manage, ExternalResult
+        can :manage, RegistrantGroup
       elsif user.has_role? :judge
         can :read, Competitor
       end

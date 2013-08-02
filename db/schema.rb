@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727191826) do
+ActiveRecord::Schema.define(:version => 20130802155644) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -356,6 +356,25 @@ ActiveRecord::Schema.define(:version => 20130727191826) do
 
   add_index "registrant_expense_items", ["expense_item_id"], :name => "index_registrant_expense_items_expense_item_id"
   add_index "registrant_expense_items", ["registrant_id"], :name => "index_registrant_expense_items_registrant_id"
+
+  create_table "registrant_group_members", :force => true do |t|
+    t.integer  "registrant_id"
+    t.integer  "registrant_group_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "registrant_group_members", ["registrant_group_id"], :name => "index_registrant_group_mumbers_registrant_group_id"
+  add_index "registrant_group_members", ["registrant_id"], :name => "index_registrant_group_mumbers_registrant_id"
+
+  create_table "registrant_groups", :force => true do |t|
+    t.string   "name"
+    t.integer  "registrant_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "registrant_groups", ["registrant_id"], :name => "index_registrant_groups_registrant_id"
 
   create_table "registrants", :force => true do |t|
     t.string   "first_name"

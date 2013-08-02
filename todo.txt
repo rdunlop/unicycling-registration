@@ -1,6 +1,13 @@
 -- Print+Post High/Long
 - Update roles,to allow certain admin users to be able to create results (external results, import results)
 - What happens if a competitor has no members? (do the pages display? do the calculations die?)
+- When the server is running locally, log all errors to a database table (and allow viewing of this).
+ - Perhaps _always_ log errors to this table, and e-mail if possible?
+- Allow "Pickup Teams" to not require a team name
+- Allow for people to pay via Paypal while "onsite registrant"???
+- Opensource the Rulebook software
+ - address some of the rulebook software issues (See Jan23 E-mail)
+- Create a new builder for the controller/scaffold function, without a 'new' page, and without a 'show' page
 
 # - Enter Obstacle, and print for verification.
 #- Enter Speed Trials, and print

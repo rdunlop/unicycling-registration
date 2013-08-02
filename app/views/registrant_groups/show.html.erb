@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @registrant_group.name %>
+</p>
+
+<p>
+  <b>Registrant:</b>
+  <%= @registrant_group.registrant_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_registrant_group_path(@registrant_group) %> |
+<%= link_to 'Back', registrant_groups_path %>
