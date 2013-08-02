@@ -4,4 +4,8 @@ class RegistrantGroup < ActiveRecord::Base
   belongs_to :contact_person, :class_name => "Registrant", :foreign_key => "registrant_id"
 
   has_many :registrant_group_members, :dependent => :destroy
+
+  def to_s
+    name
+  end
 end

@@ -52,6 +52,9 @@ class Registrant < ActiveRecord::Base
 
   has_many :payment_details, :include => :payment
 
+  has_many :registrant_group_members, :dependent => :destroy
+  has_many :registrant_groups, :through => :registrant_group_members
+
   # For event competitions/results
   has_many :members, :dependent => :destroy
   has_many :competitors, :through => :members

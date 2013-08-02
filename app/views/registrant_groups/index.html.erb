@@ -1,25 +1,56 @@
-<h1>Listing registrant_groups</h1>
+<h1>Listing Registrant Groups</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Registrant</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Group Name</th>
+      <th>Contact Person</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% @registrant_groups.each do |registrant_group| %>
-  <tr>
-    <td><%= registrant_group.name %></td>
-    <td><%= registrant_group.registrant_id %></td>
-    <td><%= link_to 'Show', registrant_group %></td>
-    <td><%= link_to 'Edit', edit_registrant_group_path(registrant_group) %></td>
-    <td><%= link_to 'Destroy', registrant_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <tbody>
+    <% @registrant_groups.each do |registrant_group| %>
+      <tr>
+        <td><%= registrant_group.name %></td>
+        <td><%= registrant_group.contact_person %></td>
+        <td><%= link_to 'Show', registrant_group %></td>
+        <td><%= link_to 'Edit', edit_registrant_group_path(registrant_group) %></td>
+        <td><%= link_to 'Destroy', registrant_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
+<h2>All Registrants</h2>
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Club</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>Registrant Group(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Registrant.all.each do |registrant| %>
+      <tr>
+        <td><%= registrant.bib_number %></td>
+        <td><%= registrant.first_name %></td>
+        <td><%= registrant.last_name %></td>
+        <td><%= registrant.club %></td>
+        <td><%= registrant.address %></td>
+        <td><%= registrant.city %></td>
+        <td><%= registrant.registrant_groups.join(" ") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <br />
 
 <%= link_to 'New Registrant group', new_registrant_group_path %>

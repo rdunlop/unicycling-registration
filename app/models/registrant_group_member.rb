@@ -6,4 +6,9 @@ class RegistrantGroupMember < ActiveRecord::Base
 
   validates :registrant_id, :presence => true
   validates :registrant_group_id, :presence => true
+
+
+  def to_s
+    registrant_group.to_s
+  end
 end

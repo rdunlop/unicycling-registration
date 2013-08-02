@@ -19,4 +19,8 @@ describe RegistrantGroupMember do
     @rgm.registrant_group = nil
     @rgm.valid?.should == false
   end
+
+  it "describes itself as the group" do
+    @rgm.to_s.should == @rg.name
+  end
 end

@@ -30,4 +30,10 @@ describe RegistrantGroup do
     @rg.contact_person = @reg
     @rg.contact_person.should == @reg
   end
+
+  it "can be found via the registrant" do
+    @rgm = FactoryGirl.create(:registrant_group_member, :registrant_group => @rg)
+    @reg = @rgm.registrant
+    @reg.registrant_groups.should == [@rg]
+  end
 end
