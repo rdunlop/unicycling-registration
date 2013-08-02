@@ -11,7 +11,7 @@ class AwardLabelsController < ApplicationController
   # GET /users/#/award_labels
   # GET /users/#/award_labels.json
   def index
-    @award_labels = @user.award_labels.all
+    @award_labels = @user.award_labels.includes(:registrant).all
     @award_label = AwardLabel.new
 
     respond_to do |format|
@@ -85,8 +85,8 @@ class AwardLabelsController < ApplicationController
       @registrant_group = RegistrantGroup.find(params[:registrant_group_id])
 
       n = 0
-      @registrant_group.registrant_group_members.each do |member|
-        member.registrant.competitors.each do |competitor|
+      @registrant_group.registrant_group_members.includes(:registrant).each do |member|
+        member.registrant.competitors.includes(:competition).each do |competitor|
           n += create_labels_for_competitor(competitor, member.registrant, @user)
         end
       end
@@ -117,21 +117,27 @@ class AwardLabelsController < ApplicationController
     competition = competitor.competition
     if experts
       place = competitor.overall_place
-      age_group = "Expert " + competitor.gender # because the only age gorup is the normal age group
     else
       place = competitor.place
+    end
+    return false if place == "DQ"
+    return false if place.to_i == 0
+    return false if place.to_i < min_place
+    return false if place.to_i > max_place
+
+    # do this later, so that we can exit more cheaply
+    if experts
+      age_group = "Expert " + competitor.gender # because the only age gorup is the normal age group
+    else
       age_group = competitor.age_group_description
     end
+
     competition_name = competition.event.name
     if competition.event.event_class == "Freestyle" ### XXX Somewhere else?
       age_group = competition.name # the "Category"
     elsif competition.event.event_class == "Distance"
       competition_name = competition.name # the "Category"
     end
-    return false if place == "DQ"
-    return false if place.to_i == 0
-    return false if place.to_i < min_place
-    return false if place.to_i > max_place
 
     aw_label = AwardLabel.new
     aw_label.competition_name = competition_name

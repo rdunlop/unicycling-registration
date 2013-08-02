@@ -24,7 +24,7 @@
 
  <%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post, :multipart=>true}) do %>
    <%= label_tag :competition_id, "Competition" %>
-   <%= select_tag :competition_id, options_from_collection_for_select(Competition.order(:event_id, :name).all, "id", "to_s") %><br />
+   <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name).all, "id", "to_s") %><br />
 
    <%= label_tag :maximum_place, "Maximum Award Place" %>
    <%= text_field_tag :maximum_place %><br />

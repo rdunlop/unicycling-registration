@@ -11,7 +11,7 @@
 
 WHAT WENT POORLY:
 - Printing of reports
-- Aeed an Excel Import that is Connie Friendly
+- Need an Excel Import that is Connie Friendly
 - Printing Medals and Labels should be much easier to determine what options to select.
 - We could have had more data entered in advance.
 
