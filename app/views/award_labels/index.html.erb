@@ -23,10 +23,15 @@
  <% end %>
  <hr />
 
+ <h2>Create Labels For a specific Registrant/Registrant-Group</h2>
  <%= form_tag(create_labels_by_registrant_user_award_labels_path(@user), {:method => :post}) do %>
-   <%= select_tag :registrant_id, options_from_collection_for_select(Registrant.order(:bib_number).all, "id", "with_id_to_s") %><br />
+   <%= label_tag :registrant_id, "Single Registrant" %>
+   <%= select_tag :registrant_id, options_from_collection_for_select(Registrant.order(:bib_number).all, "id", "with_id_to_s"), :include_blank => true %><br />
 
-   <%= submit_tag "Create Labels for Single Registrant" %>
+   <%= label_tag :registrant_group_id, "Registrant Group" %>
+   <%= select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name).all, "id", "to_s"), :include_blank => true %><br />
+
+   <%= submit_tag "Create Labels for Selected Registrant(s)" %>
  <% end %>
 
  <hr />

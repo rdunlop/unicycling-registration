@@ -72,26 +72,47 @@ class AwardLabelsController < ApplicationController
   end
 
   def create_labels_by_registrant
-    @registrant = Registrant.find(params[:registrant_id])
+    unless params[:registrant_id].nil? or params[:registrant_id].empty?
+      @registrant = Registrant.find(params[:registrant_id])
 
-    n = 0
-    @registrant.competitors.each do |competitor|
-      competition = competitor.competition
-      if competition.has_age_groups and competitor.place.to_i <= 5
-        if create_label(competitor, @registrant, false, 1, 5, @user)
-          n += 1
-        end
+      n = 0
+      @registrant.competitors.each do |competitor|
+        n += create_labels_for_competitor(competitor, @registrant, @user)
       end
-      if competition.has_experts
-        if create_label(competitor, @registrant, true, 4, 5, @user)
-          n += 1
+    end
+
+    unless params[:registrant_group_id].nil? or params[:registrant_group_id].empty?
+      @registrant_group = RegistrantGroup.find(params[:registrant_group_id])
+
+      n = 0
+      @registrant_group.registrant_group_members.each do |member|
+        member.registrant.competitors.each do |competitor|
+          n += create_labels_for_competitor(competitor, member.registrant, @user)
         end
       end
     end
+
     respond_to do |format|
       format.html { redirect_to user_award_labels_path(@user), notice: "Created #{n} labels." }
     end
   end
+
+  def create_labels_for_competitor(competitor, registrant, user)
+    n = 0
+    competition = competitor.competition
+    if competition.has_age_groups and competitor.place.to_i <= 5
+      if create_label(competitor, registrant, false, 1, 5, user)
+        n += 1
+      end
+    end
+    if competition.has_experts
+      if create_label(competitor, registrant, true, 4, 5, user)
+        n += 1
+      end
+    end
+    n
+  end
+
   def create_label(competitor, registrant, experts, min_place, max_place, my_user)
     competition = competitor.competition
     if experts
