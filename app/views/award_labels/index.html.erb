@@ -1,16 +1,29 @@
-<h1>Listing award_labels</h1>
+<h1>Award Labels</h1>
 
-
+<h2>Create Labels Sheet</h2>
 <%= form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do %>
-  <%= label_tag :separate_registrants, "Separate each registrant with a row of blank labels" %>
-  <%= check_box_tag :separate_registrants %><br />
+  <%= check_box_tag :separate_registrants %>
+  <%= label_tag :separate_registrants, "Separate each registrant with a row of blank labels" %><br />
+
+  <%= number_field_tag :minimum_place, {}, :disabled => true %>
+  <%= label_tag :minimum_place, "Minimum Place" %><br />
+
+  <%= number_field_tag :maximum_place, {}, :disabled => true %>
+  <%= label_tag :maximum_place, "Maximum Place" %><br />
+
+  <%= number_field_tag :skip_positions, {}, :disabled => true %>
+  <%= label_tag :skip_positions, "Skip Positions" %><br />
+
   <%= submit_tag "Normal Labels", :class => "multiclick" %>
 <% end %>
 
-<%= link_to "Normal Labels", normal_labels_user_award_labels_path(@user) %>
 <%= link_to "Expert Labels", expert_labels_user_award_labels_path(@user) %>
 
+<hr />
+<h2>Create Labels Data from specific Compititon</h2>
+
  <%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post, :multipart=>true}) do %>
+   <%= label_tag :competition_id, "Competition" %>
    <%= select_tag :competition_id, options_from_collection_for_select(Competition.order(:event_id, :name).all, "id", "to_s") %><br />
 
    <%= label_tag :maximum_place, "Maximum Award Place" %>
