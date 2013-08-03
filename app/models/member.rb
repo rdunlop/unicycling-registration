@@ -1,5 +1,5 @@
 class Member < ActiveRecord::Base
-    belongs_to :competitor
+    belongs_to :competitor, :touch => true
     belongs_to :registrant
     after_destroy :destroy_orphaned_competitors
 
