@@ -27,8 +27,14 @@ class Competitor < ActiveRecord::Base
 
     def touch_places
       # update the last time for the overall gender
+      if overall_cache_value.nil?
+        Rails.cache.write(overall_key, 0)
+      end
       Rails.cache.increment(overall_key, 1)
       # invalidate the cache for age-group-entry entries
+      if age_group_cache_value.nil?
+        Rails.cache.write(age_group_key, 0)
+      end
       Rails.cache.increment(age_group_key, 1)
     end
 
@@ -63,22 +69,29 @@ class Competitor < ActiveRecord::Base
       end
     end
 
-    private
+    #private
     def age_group_key
       "/competition/#{competition.id}-#{competition.updated_at}/age_group/#{age_group_entry_description}/version"
     end
-
     def overall_key
       "/competition/#{competition.id}-#{competition.updated_at}/gender/#{gender}/overall_version"
     end
 
+    def age_group_cache_value
+      Rails.cache.fetch(age_group_key)
+    end
+
+    def overall_cache_value
+      Rails.cache.fetch(overall_key)
+    end
+
     def place_key
       competition.reload
-      "/competition/#{competition.id}-#{competition.updated_at}/competitor/#{id}-#{updated_at}/age_group_count/#{age_group_key}/place"
+      "/competition/#{competition.id}-#{competition.updated_at}/competitor/#{id}-#{updated_at}/age_group_count/#{age_group_cache_value}/place"
     end
 
     def overall_place_key
-      "/competition/#{competition.id}-#{competition.updated_at}competitor/#{id}-#{updated_at}/overall_count/#{overall_key}/overall_place"
+      "/competition/#{competition.id}-#{competition.updated_at}competitor/#{id}-#{updated_at}/overall_count/#{overall_cache_value}/overall_place"
     end
 
     public
@@ -154,49 +167,56 @@ class Competitor < ActiveRecord::Base
     end
 
     def age
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/age") do
         if registrants.empty?
-            "(No registrants)"
+          "(No registrants)"
         else
-            ages = registrants.map(&:age)
-            if ages.min != ages.max
-                ages.min.to_s + "-" + ages.max.to_s
-            else
-                ages.min.to_s
-            end
+          ages = registrants.map(&:age)
+          if ages.min != ages.max
+            ages.min.to_s + "-" + ages.max.to_s
+          else
+            ages.min.to_s
+          end
         end
+      end
     end
 
     def gender
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/gender") do
         if registrants.empty?
-            "(No registrants)"
+          "(No registrants)"
         else
-            genders = registrants.map(&:gender)
-            if genders.uniq.count > 1
-                "(mixed)"
-            else
-                genders.first
-            end
-            #genders.reduce(genders.first){|value_so_far, current_value| value_so_far == current_value ? value_so_far : "(mixed)"}
+          genders = registrants.map(&:gender)
+          if genders.uniq.count > 1
+            "(mixed)"
+          else
+            genders.first
+          end
         end
+      end
     end
 
     def wheel_size
-      if registrants.empty?
-        nil
-      else
-        registrants.first.default_wheel_size.id
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/wheel_size_id") do
+        if registrants.empty?
+          nil
+        else
+          registrants.first.default_wheel_size.id
+        end
       end
     end
 
     def ineligible
-      if registrants.empty?
-        false
-      else
-        eligibles = registrants.map(&:ineligible)
-        if eligibles.uniq.count > 1
-          true
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
+        if registrants.empty?
+          false
         else
-          eligibles.first
+          eligibles = registrants.map(&:ineligible)
+          if eligibles.uniq.count > 1
+            true
+          else
+            eligibles.first
+          end
         end
       end
     end

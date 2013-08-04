@@ -71,6 +71,14 @@ class Registrant < ActiveRecord::Base
   belongs_to :default_wheel_size, :class_name => "WheelSize", :foreign_key => :wheel_size_id
   validates :default_wheel_size, :presence => true
 
+  after_save(:touch_members)
+
+  # updates the members, which update the competitors, if this competitor has changed (like their age, for example)
+  def touch_members
+    members.each do |mem|
+      mem.touch
+    end
+  end
 
   after_initialize :init
 
