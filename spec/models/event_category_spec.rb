@@ -40,4 +40,32 @@ describe EventCategory do
       @ec.num_competitors.should == 1
     end
   end
+
+  describe "when it has an ag_group_type" do
+    before(:each) do
+      @ec.age_group_type = FactoryGirl.create(:age_group_type)
+      @ec.save!
+      @ec.reload
+    end
+
+    it "is updated when the age_group_type is updated" do
+      @agt = @ec.age_group_type
+      old_update_time = @ec.updated_at
+
+      Delorean.jump 2
+
+      @agt.save
+      @ec.reload.updated_at.to_s.should_not == old_update_time.to_s
+    end
+  end
+
+  it "touching an event_category touches an event" do
+    @event = @ec.event
+    old_update_time = @event.updated_at
+
+    Delorean.jump 2
+
+    @ec.touch
+    @event.reload.updated_at.to_s.should_not == old_update_time.to_s
+  end
 end

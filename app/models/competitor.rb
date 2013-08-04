@@ -1,7 +1,7 @@
 class Competitor < ActiveRecord::Base
     has_many :members
     has_many :registrants, :through => :members, :order => "bib_number"
-    belongs_to :competition, :touch => true
+    belongs_to :competition
     acts_as_list :scope => :competition
 
     has_many :scores, :dependent => :destroy
@@ -21,6 +21,16 @@ class Competitor < ActiveRecord::Base
     # not all competitor types require a position
     #validates :position, :presence => true,
                          #:numericality => {:only_integer => true, :greater_than => 0}
+
+    after_touch(:touch_places)
+    after_save(:touch_places)
+
+    def touch_places
+      # update the last time for the overall gender
+      Rails.cache.increment(overall_key, 1)
+      # invalidate the cache for age-group-entry entries
+      Rails.cache.increment(age_group_key, 1)
+    end
 
     def to_s
         name
@@ -47,23 +57,28 @@ class Competitor < ActiveRecord::Base
     end
 
     def age_group_entry_description # XXX combine with the other age_group function
-      registrant = members.first.registrant
-      ag_entry_description = competition.determine_age_group_type.try(:age_group_entry_description, registrant.age, registrant.gender, registrant.default_wheel_size.id)
-      if ag_entry_description.nil?
-        "No Age Group for #{registrant.age}-#{registrant.gender}"
-      else
-        ag_entry_description
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/competition/#{competition.id}-#{competition.updated_at}/age_group_entry_description") do
+        registrant = members.first.try(:registrant)
+        ag_entry_description = competition.get_age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) unless registrant.nil?
       end
     end
 
     private
+    def age_group_key
+      "/competition/#{competition.id}-#{competition.updated_at}/age_group/#{age_group_entry_description}/version"
+    end
+
+    def overall_key
+      "/competition/#{competition.id}-#{competition.updated_at}/gender/#{gender}/overall_version"
+    end
+
     def place_key
       competition.reload
-      "/competition/#{competition.id}-#{competition.updated_at}/competitor/#{id}-#{updated_at}/place"
+      "/competition/#{competition.id}-#{competition.updated_at}/competitor/#{id}-#{updated_at}/age_group_count/#{age_group_key}/place"
     end
 
     def overall_place_key
-      "/competition/#{competition.id}-#{competition.updated_at}competitor/#{id}-#{updated_at}/overall_place"
+      "/competition/#{competition.id}-#{competition.updated_at}competitor/#{id}-#{updated_at}/overall_count/#{overall_key}/overall_place"
     end
 
     public
@@ -183,15 +198,6 @@ class Competitor < ActiveRecord::Base
         else
           eligibles.first
         end
-      end
-    end
-
-    def age_group_description
-      agt = competition.determine_age_group_type
-      if agt.nil?
-        "(none)"
-      else
-        agt.age_group_entry_description(members.first.registrant.age, gender, wheel_size)
       end
     end
 

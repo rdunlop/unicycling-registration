@@ -1,8 +1,9 @@
 class EventCategory < ActiveRecord::Base
   attr_accessible :name, :event_id, :position, :age_group_type_id, :competition_id
 
-  belongs_to :event, :inverse_of => :event_categories
-  belongs_to :age_group_type
+  belongs_to :event, :inverse_of => :event_categories, :touch => true
+  belongs_to :age_group_type, :inverse_of => :event_categories
+
   has_many :registrant_event_sign_ups, :dependent => :destroy
 
   belongs_to :competition

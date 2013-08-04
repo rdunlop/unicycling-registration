@@ -16,6 +16,14 @@ class Event < ActiveRecord::Base
 
   belongs_to :category, :inverse_of => :events
 
+  after_save(:touch_competitions)
+  after_touch(:touch_competitions)
+
+  def touch_competitions
+    competitions.each do |comp|
+      comp.touch
+    end
+  end
 
   def self.event_classes
     ["Freestyle", "Distance", "Two Attempt Distance", "Flatland", "Street", "Ranked"]

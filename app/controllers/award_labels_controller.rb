@@ -129,7 +129,7 @@ class AwardLabelsController < ApplicationController
     if experts
       age_group = "Expert " + competitor.gender # because the only age gorup is the normal age group
     else
-      age_group = competitor.age_group_description
+      age_group = competitor.age_group_entry_description
     end
 
     competition_name = competition.event.name

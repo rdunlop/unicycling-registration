@@ -1,9 +1,9 @@
 class Competition < ActiveRecord::Base
   attr_accessible :name, :event_id, :locked, :age_group_type_id, :has_experts, :has_age_groups
 
-  belongs_to :age_group_type
+  belongs_to :age_group_type, :inverse_of => :competitions
   belongs_to :event, :inverse_of => :competitions
-  has_many :event_categories, :dependent => :nullify
+  has_one :event_category, :dependent => :nullify
 
   has_many :competitors, :dependent => :destroy, :order => "position"
   has_many :registrants, :through => :competitors
@@ -52,20 +52,24 @@ class Competition < ActiveRecord::Base
     "Created #{num_created} competitors"
   end
 
-  # collapse all event_categories' signed_up_registrants
   def signed_up_registrants
-    regs = []
-    event_categories.each do |ec|
-      regs += ec.signed_up_registrants
-    end
-    regs
+    event_category.signed_up_registrants
   end
 
-  # all event_categories should have the same age_group_type
+  def get_age_group_entry_description(age, gender, wheel_size_id)
+    ag_entry_description = determine_age_group_type.try(:age_group_entry_description, age, gender, wheel_size_id)
+    if ag_entry_description.nil?
+      "No Age Group for #{age}-#{gender}"
+    else
+      ag_entry_description
+    end
+  end
+
+  # remains public so that we can easily iterate over the group-entries
   def determine_age_group_type
     if age_group_type.nil?
-      if event_categories.count > 0
-        return event_categories.first.age_group_type
+      unless event_category.nil?
+        return event_category.age_group_type
       else
         nil
       end

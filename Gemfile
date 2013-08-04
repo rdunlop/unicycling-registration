@@ -34,6 +34,7 @@ group :development, :test, :cucumber do
   gem 'syntax'
   gem 'watchr'
   gem 'foreman'
+  gem 'delorean'
 end
 
 # Gems used only for assets and not required

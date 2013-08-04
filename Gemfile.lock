@@ -61,6 +61,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
+    chronic (0.9.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -69,6 +70,8 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     dalli (2.6.2)
+    delorean (2.1.0)
+      chronic
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -273,6 +276,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 3.2.1)
   dalli
+  delorean
   devise
   exception_notification
   factory_girl_rails
