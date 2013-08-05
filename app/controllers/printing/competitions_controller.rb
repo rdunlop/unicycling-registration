@@ -117,5 +117,12 @@ class Printing::CompetitionsController < ApplicationController
       format.pdf { render_common_pdf("distance_results", "Portrait") }
     end
   end
+
+  def artistic_results
+    respond_to do |format|
+      format.html 
+      format.pdf { render_common_pdf("artistic_results", "Portrait") }
+    end
+  end
 end
 

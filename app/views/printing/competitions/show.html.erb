@@ -1,6 +1,7 @@
 <h1>Competition Forms</h1>
 <h2><%= @competition %></h2>
 
+<h3>Data Gathering</h3>
 <%= link_to "Announcer Form", announcer_printing_competition_path(@competition) %>
 <%= link_to "(pdf)", announcer_printing_competition_path(@competition, :format => :pdf) %>
 
@@ -13,6 +14,7 @@
 <%= link_to "(pdf)", two_attempt_recording_printing_competition_path(@competition, :format => :pdf) %>
 
 <br /><br />
+<h3>Results</h3>
 <% if @competition.event_class == "Distance" %>
   <%= link_to "Race Results", race_results_printing_competition_path(@competition) %>
   <%= link_to "(pdf)", race_results_printing_competition_path(@competition, :format => :pdf) %>
@@ -22,6 +24,9 @@
 <% elsif @competition.event_class == "Ranked" %>
   <%= link_to "Externally Ranked Results", external_results_printing_competition_path(@competition) %>
   <%= link_to "(pdf)", external_results_printing_competition_path(@competition, :format => :pdf) %>
+<% elsif @competition.event_class == "Freestyle" %>
+  <%= link_to "Artistic Results", artistic_results_printing_competition_path(@competition) %>
+  <%= link_to "(pdf)", artistic_results_printing_competition_path(@competition, :format => :pdf) %>
 <% end %>
 
 <br /><br />
