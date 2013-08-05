@@ -51,7 +51,14 @@ class Competitor < ActiveRecord::Base
     end
 
     def place
-      Rails.cache.fetch(place_key) || "Unknown"
+      my_place = Rails.cache.fetch(place_key)
+
+      if my_place.nil?
+        sc = competition.score_calculator
+        sc.try(:update_all_places)
+        my_place = Rails.cache.fetch(place_key)
+      end
+      my_place || "Unknown"
     end
 
     def overall_place=(place)
@@ -59,7 +66,14 @@ class Competitor < ActiveRecord::Base
     end
 
     def overall_place
-      Rails.cache.fetch(overall_place_key) || "Unknown"
+      my_overall_place = Rails.cache.fetch(overall_place_key)
+
+      if my_overall_place.nil?
+        sc = competition.score_calculator
+        sc.try(:update_all_places)
+        my_overall_place = Rails.cache.fetch(overall_place_key)
+      end
+      my_overall_place || "Unknown"
     end
 
     def age_group_entry_description # XXX combine with the other age_group function

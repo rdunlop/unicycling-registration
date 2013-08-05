@@ -124,6 +124,7 @@ describe Competitor do
             member = @comp.members(true).first
             @reg1 = member.registrant
 
+            Delorean.jump 2
             member2 = FactoryGirl.create(:member, :competitor => @comp)
             @reg2 = member2.registrant
         end
@@ -134,8 +135,10 @@ describe Competitor do
             @comp.age.should == (@reg1.age.to_s)
         end
         it "should display the ages for all members (when they are different)" do
+            Delorean.jump 2
             @reg3 = FactoryGirl.create(:registrant, :birthday => Date.new(1980, 02, 10))
             member3 = FactoryGirl.create(:member, :competitor => @comp, :registrant => @reg3)
+            @comp.reload
 
             @comp.age.should == (@reg1.age.to_s + "-" + @reg3.age.to_s)
         end
@@ -144,6 +147,7 @@ describe Competitor do
         end
 
         it "should display (mixed) if both genders exist" do
+            Delorean.jump 2
             @reg3 = FactoryGirl.create(:registrant, :gender => "Female")
             member3 = FactoryGirl.create(:member, :competitor => @comp, :registrant => @reg3)
 

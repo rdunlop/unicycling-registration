@@ -47,6 +47,7 @@ describe RaceCalculator do
         @reg.save!
         @reg.age.should == 60
 
+        Rails.cache.clear
         @calc.update_all_places
 
         @tr1.competitor.place.should == 1 # not a tie, different groups
@@ -55,6 +56,7 @@ describe RaceCalculator do
     end
 
     it "places everyone as 0 if they have no time" do
+      Rails.cache.clear
       @calc.update_all_places
 
       @tr1.competitor.place.should == "DQ"
@@ -67,6 +69,7 @@ describe RaceCalculator do
       @tr1.thousands = 1
       @tr1.save!
 
+      Rails.cache.clear
       @calc.update_all_places
 
       @tr1.competitor.place.should == 1
@@ -77,6 +80,7 @@ describe RaceCalculator do
       @tr1.disqualified = true
       @tr1.save!
 
+      Rails.cache.clear
       @calc.update_all_places
 
       @tr1.competitor.place.should == "DQ"
@@ -97,6 +101,7 @@ describe RaceCalculator do
       end
       it "places fast times first" do
 
+        Rails.cache.clear
         @calc.update_all_places
 
         @tr1.competitor.place.should == 2
@@ -107,6 +112,7 @@ describe RaceCalculator do
           @reg = @tr2.competitor.registrants.first
           @reg.ineligible = true
           @reg.save!
+          Rails.cache.clear
           @calc.update_all_places
         end
 
@@ -127,6 +133,7 @@ describe RaceCalculator do
         @tr2.save!
       end
       it "ties for first" do
+        Rails.cache.clear
         @calc.update_all_places
 
         @tr1.competitor.place.should == 1
@@ -137,6 +144,7 @@ describe RaceCalculator do
         @tr3.minutes = 2
         @tr3.save!
 
+        Rails.cache.clear
         @calc.update_all_places
 
         @tr3.competitor.place.should == 3
@@ -152,6 +160,7 @@ describe RaceCalculator do
         end
 
         it "ties 3 for first, and one for 4th" do
+          Rails.cache.clear
           @calc.update_all_places
 
           @tr1.competitor.place.should == 1
@@ -176,6 +185,7 @@ describe RaceCalculator do
       tr7 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 32, :thousands => 815, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
 
       rc = RaceCalculator.new(@comp)
+      Rails.cache.clear
       rc.update_all_places
       tr1.competitor.place.should == 1
       tr2.competitor.place.should == 2

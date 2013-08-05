@@ -8,7 +8,7 @@ class TimeResultsController < ApplicationController
   
   # GET competitions/1/time_results
   def index
-    @time_results = @competition.time_results.includes(:competitor) # XXX
+    @time_results = @competition.time_results.includes(:competitor => [:competition]) # XXX
     @time_result = TimeResult.new # @event.time_results.build
 
     respond_to do |format|
