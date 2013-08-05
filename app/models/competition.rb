@@ -133,16 +133,6 @@ class Competition < ActiveRecord::Base
     competitor_placing_points(competitor, nil)
   end
 
-  def competitor_place(competitor)
-    sc = score_calculator
-    if sc.nil?
-      0
-    else
-      sc.place(competitor)
-    end
-  end
-
-
   # SCORE
   # determining the place points for this score (by-judge)
   def score_judged_points(score)
