@@ -5,6 +5,12 @@ class ArtisticScoreCalculator
         @unicon_scoring = unicon_scoring # should do 'elimination' for each judge_type
     end
 
+    def update_all_places
+      @competition.competitors.each do |competitor|
+        place(competitor)
+      end
+    end
+
     # ####################################################################
     #   BY SCORE (JUDGE)
     # ####################################################################

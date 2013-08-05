@@ -1,6 +1,13 @@
 require 'spec_helper'
 
+
 describe RaceCalculator do
+
+  def recalc(calc = @calc)
+    Rails.cache.clear
+    calc.update_all_places
+  end
+
   describe "when calculating the placing of timed races" do
     before(:each) do
       @event_configuration = FactoryGirl.create(:event_configuration, :start_date => Date.today)
@@ -47,8 +54,7 @@ describe RaceCalculator do
         @reg.save!
         @reg.age.should == 60
 
-        Rails.cache.clear
-        @calc.update_all_places
+        recalc
 
         @tr1.competitor.place.should == 1 # not a tie, different groups
         @tr2.competitor.place.should == 1 # not a tie, different groups
@@ -56,8 +62,7 @@ describe RaceCalculator do
     end
 
     it "places everyone as 0 if they have no time" do
-      Rails.cache.clear
-      @calc.update_all_places
+      recalc
 
       @tr1.competitor.place.should == "DQ"
       @tr2.competitor.place.should == "DQ"
@@ -69,8 +74,7 @@ describe RaceCalculator do
       @tr1.thousands = 1
       @tr1.save!
 
-      Rails.cache.clear
-      @calc.update_all_places
+      recalc
 
       @tr1.competitor.place.should == 1
     end
@@ -80,8 +84,7 @@ describe RaceCalculator do
       @tr1.disqualified = true
       @tr1.save!
 
-      Rails.cache.clear
-      @calc.update_all_places
+      recalc
 
       @tr1.competitor.place.should == "DQ"
     end
@@ -101,8 +104,7 @@ describe RaceCalculator do
       end
       it "places fast times first" do
 
-        Rails.cache.clear
-        @calc.update_all_places
+        recalc
 
         @tr1.competitor.place.should == 2
         @tr2.competitor.place.should == 1
@@ -112,8 +114,7 @@ describe RaceCalculator do
           @reg = @tr2.competitor.registrants.first
           @reg.ineligible = true
           @reg.save!
-          Rails.cache.clear
-          @calc.update_all_places
+          recalc
         end
 
         it "places the faster competitor first" do
@@ -133,8 +134,7 @@ describe RaceCalculator do
         @tr2.save!
       end
       it "ties for first" do
-        Rails.cache.clear
-        @calc.update_all_places
+        recalc
 
         @tr1.competitor.place.should == 1
         @tr2.competitor.place.should == 1
@@ -144,8 +144,7 @@ describe RaceCalculator do
         @tr3.minutes = 2
         @tr3.save!
 
-        Rails.cache.clear
-        @calc.update_all_places
+        recalc
 
         @tr3.competitor.place.should == 3
       end
@@ -160,8 +159,7 @@ describe RaceCalculator do
         end
 
         it "ties 3 for first, and one for 4th" do
-          Rails.cache.clear
-          @calc.update_all_places
+          recalc
 
           @tr1.competitor.place.should == 1
           @tr2.competitor.place.should == 1
@@ -185,8 +183,8 @@ describe RaceCalculator do
       tr7 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 32, :thousands => 815, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
 
       rc = RaceCalculator.new(@comp)
-      Rails.cache.clear
-      rc.update_all_places
+      recalc(rc)
+
       tr1.competitor.place.should == 1
       tr2.competitor.place.should == 2
       tr3.competitor.place.should == 3

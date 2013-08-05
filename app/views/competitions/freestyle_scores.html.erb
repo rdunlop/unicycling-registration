@@ -3,6 +3,9 @@
 <div class="scores">
 <h3><%= @competition %> Raw Scores</h3>
 
+<% # Recalculate places (XXX should be replaced by always-updated scoring) 
+@competition.score_calculator.update_all_places %>
+
 <% @competition.judge_types.uniq.each do |jt| %>
 <table class="scores_outer">
   <tr>
@@ -23,7 +26,7 @@
       <td><%= competitor.position %></td>
       <td><%= competitor.external_id %></td>
       <td><%= competitor.name %></td>
-      <td class="derived"><%= @competition.competitor_place(competitor) %></td>
+      <td class="derived"><%= competitor.place %></td>
     </tr>
 <% end %>
   </table>
@@ -111,7 +114,7 @@
       <td><%= competitor.position %></td>
       <td><%= competitor.external_id %></td>
       <td><%= competitor.name %></td>
-      <td class="derived"><%= @competition.competitor_place(competitor) %></td>
+      <td class="derived"><%= competitor.place %></td>
     </tr>
 <% end %>
   </table>
@@ -131,7 +134,7 @@
     <% @competition.competitors.each do |competitor| %>
       <tr>
         <td class="derived"><%= @competition.competitor_total_placing_points(competitor) %></td>
-        <td class="derived"><%= @competition.competitor_place(competitor) %></td>
+        <td class="derived"><%= competitor.place %></td>
       </tr>
     <% end %>
     </tbody>

@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe ExternallyRankedCalculator do
+  def recalc
+    Rails.cache.clear
+    @calc.update_all_places
+  end
+
   describe "when calculating the placing of externally-ranked races" do
     before(:each) do
       @event_configuration = FactoryGirl.create(:event_configuration, :start_date => Date.today)
@@ -21,7 +26,7 @@ describe ExternallyRankedCalculator do
       @calc = ExternallyRankedCalculator.new(@competition)
     end
     it "sets the competitor places to the ranks" do
-      @calc.update_all_places
+      recalc
 
       @tr1.competitor.place.should == 1
       @tr2.competitor.place.should == 2
@@ -36,7 +41,7 @@ describe ExternallyRankedCalculator do
         r.save!
       end
       it "places the first 2 competitors as first" do
-        @calc.update_all_places
+        recalc
 
         @tr1.competitor.place.should == 1
         @tr2.competitor.place.should == 1
