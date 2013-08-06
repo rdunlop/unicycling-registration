@@ -1,4 +1,4 @@
--- Print+Post High/Long
+- Check that Basketball and Hockey are being ranked properly
 - Use more Form Helpers (like the RegistrantGroup form helper)
 - Update roles,to allow certain admin users to be able to create results (external results, import results)
 - What happens if a competitor has no members? (do the pages display? do the calculations die?)
