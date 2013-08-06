@@ -98,6 +98,32 @@ class Printing::CompetitionsController < ApplicationController
     end
   end
 
+  def results
+    @agt = @competition.determine_age_group_type
+    @age_group_entries = @agt.age_group_entries
+    @results_list = {}
+    @age_group_entries.each do |ag_entry|
+      @results_list[ag_entry] = []
+    end
+    @no_page_breaks = true unless params[:no_page_breaks].nil?
+
+    @competition.competitors.each do |competitor|
+      next if competitor.result.nil?
+      calculated_ag = @agt.age_group_entry_for(competitor.age, competitor.gender, competitor.wheel_size)
+      @results_list[calculated_ag] << competitor unless calculated_ag.nil?
+    end
+
+    # sort the results by place
+    @results_list.keys.each do |key|
+      @results_list[key].sort!{|a,b| a.place.to_i <=> b.place.to_i}
+    end
+
+    respond_to do |format|
+      format.html 
+      format.pdf { render_common_pdf("results", "Portrait") }
+    end
+  end
+
   def distance_results
     @agt = @competition.determine_age_group_type
     @age_group_entries = @agt.age_group_entries

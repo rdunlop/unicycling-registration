@@ -115,6 +115,17 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def result_description
+    case event.event_class
+    when "Two Attempt Distance"
+      "Distance"
+    when "Distance"
+      "Time"
+    when "Ranked"
+      "Score"
+    end
+  end
+
   # ###########################
   # SCORE CALC-using functions
   # ###########################

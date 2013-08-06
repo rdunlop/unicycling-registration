@@ -22,8 +22,8 @@
   <%= link_to "Distance Results", distance_results_printing_competition_path(@competition) %>
   <%= link_to "(pdf)", distance_results_printing_competition_path(@competition, :format => :pdf) %>
 <% elsif @competition.event_class == "Ranked" %>
-  <%= link_to "Externally Ranked Results", external_results_printing_competition_path(@competition) %>
-  <%= link_to "(pdf)", external_results_printing_competition_path(@competition, :format => :pdf) %>
+  <%= link_to "Externally Ranked Results", results_printing_competition_path(@competition) %>
+  <%= link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf) %>
 <% elsif @competition.event_class == "Freestyle" %>
   <%= link_to "Artistic Results", artistic_results_printing_competition_path(@competition) %>
   <%= link_to "(pdf)", artistic_results_printing_competition_path(@competition, :format => :pdf) %>

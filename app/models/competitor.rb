@@ -114,9 +114,9 @@ class Competitor < ActiveRecord::Base
       when "Two Attempt Distance"
         "#{max_successful_distance} cm"
       when "Distance"
-        time_results.first.full_time
-      when "External"
-        external_results.first.details
+        time_results.first.try(:full_time)
+      when "Ranked"
+        external_results.first.try(:details)
       end
     end
 
