@@ -145,6 +145,7 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def artistic_results
+    @competitors = @competition.competitors.sort {|a,b| a.place.to_i <=> b.place.to_i}
     respond_to do |format|
       format.html 
       format.pdf { render_common_pdf("artistic_results", "Portrait") }

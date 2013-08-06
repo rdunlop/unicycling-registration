@@ -201,7 +201,7 @@ class Competitor < ActiveRecord::Base
           "(No registrants)"
         else
           genders = registrants.map(&:gender)
-          if genders.uniq.count > 1
+          if genders.count > 1
             "(mixed)"
           else
             genders.first
@@ -227,7 +227,7 @@ class Competitor < ActiveRecord::Base
         else
           eligibles = registrants.map(&:ineligible)
           if eligibles.uniq.count > 1
-            true
+            true # includes both eligible status AND ineligible status
           else
             eligibles.first
           end
