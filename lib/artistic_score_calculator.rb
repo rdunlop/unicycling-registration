@@ -89,6 +89,7 @@ class ArtisticScoreCalculator
         my_place = 0
       end
       competitor.place = my_place
+      competitor.overall_place = my_place
       @place[competitor.id] = my_place
     end
 
