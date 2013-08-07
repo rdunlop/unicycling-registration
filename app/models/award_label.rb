@@ -8,6 +8,4 @@ class AwardLabel < ActiveRecord::Base
   belongs_to :user
   belongs_to :registrant
 
-  default_scope order(:competition_name, :place, :last_name)
-
 end

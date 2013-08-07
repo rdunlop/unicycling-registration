@@ -207,7 +207,7 @@ class AwardLabelsController < ApplicationController
     previous_bib_number = 0
 
     names = []
-    @user.award_labels.unscoped.order(:bib_number).each do |label|
+    @user.award_labels.order(:bib_number).each do |label|
       if separate_registrants and (previous_bib_number != 0 and label.bib_number != previous_bib_number)
         # add 3 blanks
         names << ""
