@@ -142,8 +142,9 @@ describe Competitor do
 
             @comp.age.should == (@reg1.age.to_s + "-" + @reg3.age.to_s)
         end
-        it "should display the gender, if all members are the same gender" do
-            @comp.gender.should == "Male"
+        it "should display '(mixed)', if there are multiple members (even if they are the same gender)" do
+          # this is so that the overall placing calculation works properly with mixed-gender groups
+            @comp.gender.should == "(mixed)"
         end
 
         it "should display (mixed) if both genders exist" do

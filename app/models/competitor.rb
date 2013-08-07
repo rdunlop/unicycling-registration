@@ -112,7 +112,8 @@ class Competitor < ActiveRecord::Base
     def result
       case competition.event.event_class
       when "Two Attempt Distance"
-        "#{max_successful_distance} cm"
+        max_distance = max_successful_distance
+        "#{max_distance} cm" unless max_distance == 0
       when "Distance"
         time_results.first.try(:full_time)
       when "Ranked"
