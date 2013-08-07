@@ -1,4 +1,7 @@
 - Unable to print Basketball Results
+- Add indicator to the Import Results page which shows whether the given competitor already has a result record stored (this would be a BAD thing)
+- Fix the sort order of the Import Results choose competition dropdown
+- Add link from Results page to "import results" page for Timed Competitions (and others?)
 - Check that Basketball and Hockey are being ranked properly
 - fix problems when the age groups are not large enough, or when a person's age is >100 (and out of range of the age groups) (problems printing PDFs, etc)
 - Use more Form Helpers (like the RegistrantGroup form helper)

@@ -1,6 +1,6 @@
 class DistanceAttempt < ActiveRecord::Base
 
-    belongs_to :competitor
+    belongs_to :competitor, :touch => true
     belongs_to :judge
 
     attr_accessible :distance, :fault
