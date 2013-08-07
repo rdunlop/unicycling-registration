@@ -68,7 +68,7 @@ class Competitor < ActiveRecord::Base
     def overall_place
       my_overall_place = Rails.cache.fetch(overall_place_key)
 
-      if my_overall_place.nil?
+      if my_overall_place.nil? and (not result.nil?)
         sc = competition.score_calculator
         sc.try(:update_all_places)
         my_overall_place = Rails.cache.fetch(overall_place_key)
