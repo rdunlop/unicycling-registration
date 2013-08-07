@@ -1,4 +1,4 @@
-- ExternalResults#show?
+- Unable to print Basketball Results
 - Check that Basketball and Hockey are being ranked properly
 - fix problems when the age groups are not large enough, or when a person's age is >100 (and out of range of the age groups) (problems printing PDFs, etc)
 - Use more Form Helpers (like the RegistrantGroup form helper)

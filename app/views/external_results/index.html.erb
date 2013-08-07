@@ -15,7 +15,6 @@
       <th>Overall Place</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -30,7 +29,6 @@
         <td><%= external_result.competitor.age_group_entry_description %></td>
         <td><%= external_result.competitor.place %></td>
         <td><%= external_result.competitor.overall_place %></td>
-        <td><%= link_to 'Show', external_result %></td>
         <td><%= link_to 'Edit', edit_external_result_path(external_result) %></td>
         <td><%= link_to 'Destroy', external_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
