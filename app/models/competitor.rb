@@ -53,7 +53,7 @@ class Competitor < ActiveRecord::Base
     def place
       my_place = Rails.cache.fetch(place_key)
 
-      if my_place.nil?
+      if my_place.nil? and (not result.nil?)
         sc = competition.score_calculator
         sc.try(:update_all_places)
         my_place = Rails.cache.fetch(place_key)
@@ -117,6 +117,8 @@ class Competitor < ActiveRecord::Base
         time_results.first.try(:full_time)
       when "Ranked"
         external_results.first.try(:details)
+      when "Freestyle"
+        true #something, so that it's not nil
       end
     end
 
