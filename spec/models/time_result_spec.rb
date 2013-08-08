@@ -73,6 +73,15 @@ describe TimeResult do
       @tr.disqualified = true
       @tr.full_time.should == ""
     end
+    it "shouldn't print the thousands if they are 0" do
+      @tr.thousands = 0
+      @tr.full_time.should == "19:16"
+    end
+    it "shouldn't print the thousands if they are 0, even for multi-hour events" do
+      @tr.minutes = 200
+      @tr.thousands = 0
+      @tr.full_time.should == "3:20:16"
+    end
   end
 
   it "can print the full time when the numbers start with 0" do

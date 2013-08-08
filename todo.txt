@@ -1,4 +1,5 @@
 - Remove "details" from Flatland External Results (and Street)
+- Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
 - Unable to print Basketball Results
 - Re-write the artistic calculation code to use the new caching strategy, and also to optimize so that the same calculations are not done multiple times (for each place(competitor) call)
 - Add indicator to the Import Results page which shows whether the given competitor already has a result record stored (this would be a BAD thing)
