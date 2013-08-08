@@ -13,9 +13,9 @@ describe ExternalResult do
     @er.valid?.should == false
   end
 
-  it "must have details" do
+  it "optional to have details" do
     @er.details = nil
-    @er.valid?.should == false
+    @er.valid?.should == true
   end
 
   it "must have a rank" do
