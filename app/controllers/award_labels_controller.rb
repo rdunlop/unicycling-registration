@@ -100,7 +100,7 @@ class AwardLabelsController < ApplicationController
   def create_labels_for_competitor(competitor, registrant, user)
     n = 0
     competition = competitor.competition
-    if competition.has_age_groups and competitor.place.to_i <= 5
+    if competition.has_non_expert_results and competitor.place.to_i <= 5
       if create_label(competitor, registrant, false, 1, 5, user)
         n += 1
       end
@@ -129,13 +129,16 @@ class AwardLabelsController < ApplicationController
     if experts
       age_group = "Expert " + competitor.gender # because the only age gorup is the normal age group
     else
-      age_group = competitor.age_group_entry_description
+      if competition.has_age_groups
+        # only set the age_group if the event is marked as having them
+        age_group = competitor.age_group_entry_description
+      end
     end
 
     competition_name = competition.event.name
     if competition.event.event_class == "Freestyle" ### XXX Somewhere else?
       age_group = competition.name # the "Category"
-    elsif competition.event.event_class == "Distance"
+    elsif competition.event.event_class == "Distance" or competition.event.event_class == "Ranked"
       competition_name = competition.name # the "Category"
     end
 
@@ -233,8 +236,8 @@ class AwardLabelsController < ApplicationController
     end
 
 
-    labels = Prawn::Labels.render(names, :type => "Avery5160") do |pdf, name|
-      pdf.text name, :align =>:center, :valign => :center, :size => 10, :inline_format => true, :shrink_to_fit => true
+    labels = Prawn::Labels.render(names, :type => "Avery5160", :shrink_to_fit => true) do |pdf, name|
+      pdf.text name, :align =>:center, :valign => :center, :inline_format => true
     end
 
     send_data labels, :filename => "normal-labels-#{Date.today}.pdf"
@@ -283,8 +286,8 @@ class AwardLabelsController < ApplicationController
     }
     }
 
-    labels = Prawn::Labels.render(names, :type => "Avery5293") do |pdf, name|
-      pdf.text name, :align => :center, :size => 10, :inline_format => true, :shrink_to_fit => true, :valign => :center
+    labels = Prawn::Labels.render(names, :type => "Avery5293", :shrink_to_fit => true) do |pdf, name|
+      pdf.text name, :align => :center, :inline_format => true, :valign => :center
     end
 
     send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"

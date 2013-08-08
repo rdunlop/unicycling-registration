@@ -28,6 +28,10 @@ class Competition < ActiveRecord::Base
     to_s + " (#{event_class})"
   end
 
+  def has_non_expert_results
+    has_age_groups or ((not has_age_groups) and (not has_experts))
+  end
+
   def find_competitor_with_bib_number(bib_number)
     competitors.each do |competitor|
       if competitor.member_has_bib_number?(bib_number)

@@ -53,7 +53,7 @@ class Competitor < ActiveRecord::Base
     def place
       my_place = Rails.cache.fetch(place_key)
 
-      if my_place.nil? and (not result.nil?)
+      if my_place.nil? and (has_result?)
         sc = competition.score_calculator
         sc.try(:update_all_places)
         my_place = Rails.cache.fetch(place_key)
@@ -68,7 +68,7 @@ class Competitor < ActiveRecord::Base
     def overall_place
       my_overall_place = Rails.cache.fetch(overall_place_key)
 
-      if my_overall_place.nil? and (not result.nil?)
+      if my_overall_place.nil? and (has_result?)
         sc = competition.score_calculator
         sc.try(:update_all_places)
         my_overall_place = Rails.cache.fetch(overall_place_key)
@@ -109,6 +109,21 @@ class Competitor < ActiveRecord::Base
     end
 
     public
+    def has_result?
+      case competition.event.event_class
+      when "Two Attempt Distance"
+        max_successful_distance != 0
+      when "Distance"
+        time_results.count > 0
+      when "Ranked"
+        external_results.count > 0
+      when "Freestyle"
+        scores.count > 0
+      else
+        false
+      end
+    end
+
     def result
       case competition.event.event_class
       when "Two Attempt Distance"
@@ -118,8 +133,6 @@ class Competitor < ActiveRecord::Base
         time_results.first.try(:full_time)
       when "Ranked"
         external_results.first.try(:details)
-      when "Freestyle"
-        true #something, so that it's not nil
       end
     end
 
