@@ -1,4 +1,13 @@
+- Add a results link which does "per-event" instead of per-competition.( for Pairs, Individual, etc)
+- Figure out whether memcachier will work poorly with local production vagrantbox
+- Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
+- Awards labels . "Clear whole column"
+- Autocomplete for Club Name, Group Name, etc.
+- Add option to include page breaks for each printing event.
+- Add a "print" button next to the Import Results/View area for Timed Results (for example).
+
 - Remove "details" from Flatland External Results (and Street)
+- Fix the SuperAdmin banner going all wonky
 - Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
 - Unable to print Basketball Results
 - Re-write the artistic calculation code to use the new caching strategy, and also to optimize so that the same calculations are not done multiple times (for each place(competitor) call)

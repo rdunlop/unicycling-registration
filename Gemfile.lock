@@ -122,6 +122,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     mime-types (1.22)
     multi_json (1.7.2)
     nested_form (0.3.1)
@@ -283,6 +284,7 @@ DEPENDENCIES
   foreman
   formtastic
   jquery-rails
+  memcachier
   paper_trail (~> 2)
   pg
   prawn-labels
