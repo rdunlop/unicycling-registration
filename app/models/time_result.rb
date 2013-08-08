@@ -40,7 +40,16 @@ class TimeResult < ActiveRecord::Base
   def full_time
     return "" if disqualified
 
-    thousands_string = ".#{thousands.to_s.rjust(3,"0")}" unless thousands == 0
+    if thousands == 0
+      # print no thousands
+    else
+      if thousands % 100 == 0
+        thousands_string = ".#{(thousands / 100).to_s}"
+      else
+        thousands_string = ".#{thousands.to_s.rjust(3,"0")}"
+      end
+    end
+
     hours = minutes / 60
     if hours > 0
       remaining_minutes = minutes % 60

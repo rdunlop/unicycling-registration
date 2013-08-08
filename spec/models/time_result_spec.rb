@@ -77,6 +77,10 @@ describe TimeResult do
       @tr.thousands = 0
       @tr.full_time.should == "19:16"
     end
+    it "should only print tens, if the result is tens" do
+      @tr.thousands = 100
+      @tr.full_time.should == "19:16.1"
+    end
     it "shouldn't print the thousands if they are 0, even for multi-hour events" do
       @tr.minutes = 200
       @tr.thousands = 0
