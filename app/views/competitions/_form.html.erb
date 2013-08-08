@@ -25,6 +25,7 @@
     (Select this if the results should be split by multiple age groups, and awarded en-masse)<br />
     <%= f.check_box :has_age_groups %>
   </div>
+  Note: check NEITHER the has_experts or has_age_groups if neither apply (for example: Individual Artistic Intermediate)
   <div class="field">
     <%= f.label :age_group_type_id %>
     <%= f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, :include_blank => true  %>
