@@ -100,18 +100,26 @@ class Printing::CompetitionsController < ApplicationController
 
   def results
     @agt = @competition.determine_age_group_type
-    @age_group_entries = @agt.age_group_entries
-    @results_list = {}
-    @age_group_entries.each do |ag_entry|
-      @results_list[ag_entry] = []
-    end
-    @no_page_breaks = true unless params[:no_page_breaks].nil?
 
-    @competition.competitors.each do |competitor|
-      next if competitor.result.nil?
-      calculated_ag = @agt.age_group_entry_for(competitor.age, competitor.gender, competitor.wheel_size)
-      @results_list[calculated_ag] << competitor unless calculated_ag.nil?
+    @results_list = {}
+    if @agt.nil?
+      # no age groups, put all into a single age group
+      @results_list["all"] = @competition.competitors
+    else
+      @age_group_entries = @agt.age_group_entries
+      @age_group_entries.each do |ag_entry|
+        @results_list[ag_entry] = []
+      end
+
+      # sort the competitors by age group
+      @competition.competitors.each do |competitor|
+        next unless competitor.has_result?
+        calculated_ag = @agt.age_group_entry_for(competitor.age, competitor.gender, competitor.wheel_size)
+        @results_list[calculated_ag] << competitor unless calculated_ag.nil?
+      end
     end
+
+    @no_page_breaks = true unless params[:no_page_breaks].nil?
 
     # sort the results by place
     @results_list.keys.each do |key|

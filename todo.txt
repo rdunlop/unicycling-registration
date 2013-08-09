@@ -1,17 +1,19 @@
+FLIGHT HOME TODO LIST:
 - Add a results link which does "per-event" instead of per-competition.( for Pairs, Individual, etc)
-- Figure out whether memcachier will work poorly with local production vagrantbox
+- Adjust the printing selection to have the option of "no page breaks"
+- Make the footer nicer (like UCP)
+- Add printing system which allows for Event level printing (Individual, Pairs, etc)
+
+- Add a "print" button next to the Import Results/View area for Timed Results (for example).
+- Add indicator to the Import Results page which shows whether the given competitor already has a result record stored (this would be a BAD thing)
+
+??- Results should include overall place.
 - Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
 - Awards labels . "Clear whole column"
 - Autocomplete for Club Name, Group Name, etc.
-- Add option to include page breaks for each printing event.
-- Add a "print" button next to the Import Results/View area for Timed Results (for example).
-
-- Remove "details" from Flatland External Results (and Street)
-- Fix the SuperAdmin banner going all wonky
+- Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
 - Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
-- Unable to print Basketball Results
 - Re-write the artistic calculation code to use the new caching strategy, and also to optimize so that the same calculations are not done multiple times (for each place(competitor) call)
-- Add indicator to the Import Results page which shows whether the given competitor already has a result record stored (this would be a BAD thing)
 - Fix the sort order of the Import Results choose competition dropdown
 - Add link from Results page to "import results" page for Timed Competitions (and others?)
 - Check that Basketball and Hockey are being ranked properly
@@ -27,60 +29,16 @@
  - address some of the rulebook software issues (See Jan23 E-mail)
 - Create a new builder for the controller/scaffold function, without a 'new' page, and without a 'show' page
 
-# - Enter Obstacle, and print for verification.
-#- Enter Speed Trials, and print
-#DONE BY CONNIE - Print Marathon Results.
-#- Fix the protest forms for Track Racing.
-
-#- PRINT: Starting Lists for:
-# - MUNI Up Ad
-# - MUNI Up Exp
-# - MUNI Down Ad
-# - MUNI Down Exp
-# - MUNI XC Adv
-# - MUNI XC Exp
-
 - Finish the Artistic Group/Club for Falls.
-- Rank Events (Hock, BB, Street, Flat)
-# -Ineligibles should be tied?
 - Num Laps for time results (Coker MUni cross)
-- Points events (trials, Standard Skill)
-- "Units" for the various things? (other than cm for distance?)
-- "Decimal Places" For the various events
-
-
-AWARDS:
-- Expert for Obstacle over all age groups
-- Expert for Distance (all) over all age groups
-- Expert for MUNI (
-- Be able to print AGE GROUP Medals for a single competitor at a time 
- - Expert Labels should be done separately
-
-
-Foreigners:
-- Christian Huorwai
-- Sam LaHood
-- George Cara
-- Richard Lees
-
 
 \=========================================
 
 NAUCC 2013 TODO LIST and Stuff. (SOME of this may get done).
 
 EASY wins:
-DONE - Add default sort orders to all objects
-
-DONE- Add default pdf options, including a page footer
- - @media print
-
-DONE - Fix TimeResults Destroy action
-
-DONE - Add a "all registrants" report which includes their bib number
 
 IMPORTANT things:
-DONE- Import should NOT require 2 import steps
-DONE - Import should include the raw data, for ease of referenc
 - Allow the user to specify the format of the import data, so that it doesn't have to be hard-coded (or perhaps provide a base set of formats?)
 
 - Create Awards menu which allows choosing an event, the places (1-3), and creating the awards

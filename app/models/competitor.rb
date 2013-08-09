@@ -116,6 +116,7 @@ class Competitor < ActiveRecord::Base
       when "Distance"
         time_results.count > 0
       when "Ranked"
+        puts "checking ranked #{external_results}"
         external_results.count > 0
       when "Freestyle"
         scores.count > 0
@@ -202,11 +203,7 @@ class Competitor < ActiveRecord::Base
           "(No registrants)"
         else
           ages = registrants.map(&:age)
-          if ages.min != ages.max
-            ages.min.to_s + "-" + ages.max.to_s
-          else
-            ages.min.to_s
-          end
+          ages.max
         end
       end
     end

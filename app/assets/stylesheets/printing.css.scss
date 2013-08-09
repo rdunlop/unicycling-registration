@@ -56,7 +56,6 @@ table.race {
   }
   .id {
     width: 12.5%;
-    text-align: center;
   }
   .name {
     min-width: 25%;
@@ -100,6 +99,9 @@ table.results {
   td {
     height: 24px;
     font-size: 20px;
+  }
+  th {
+    text-align: left;
   }
 }
 .nobreak {

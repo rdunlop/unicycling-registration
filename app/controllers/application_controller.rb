@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def default_footer
-    {:left => '[date] [time]', :center => @config.short_name, :right => '[page] of [topage]'}
+    {:left => '[date] [time]', :center => @config.short_name, :right => 'Page [page] of [topage]'}
   end
 
   def render_common_pdf(view_name, orientation = "Portrait")

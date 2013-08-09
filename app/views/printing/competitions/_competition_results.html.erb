@@ -1,0 +1,55 @@
+<% # description
+# result_description
+# competitors 
+# no_page_breaks
+%>
+<div class="nobreak">
+  <h2 class="age_group_description"><%= description %></h2>
+  <div style="clear: both"></div>
+  <hr />
+
+  <% competitor = competitors.first %>
+  <% if competitor.members.count > 1 %>
+    <% competitors.each do |competitor| %>
+      <h3>Place: <%= competitor.place %> -  <%= competitor %></h3>
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <tH>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% competitor.members.each do |member| %>
+            <tr>
+              <td><%= member.registrant.bib_number %></td>
+              <td><%= member.registrant %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% else %>
+    <table class="full results race">
+      <thead>
+        <tr>
+          <th class="id">ID</th>
+          <th class="name">Name</th>
+          <th class="time"><%= result_description %></th>
+          <th class="place">Place</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% competitors.each do |competitor| %>
+          <%= render :partial => "result_entry", :locals => {:id => competitor.external_id, :name => competitor.to_s, :time => competitor.result, :place => competitor.place } %>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <% if no_page_breaks %>
+    <hr class="age_group_separator" />
+  <% else %>
+    <div class="page-break"></div>
+  <% end %>
+</div>
