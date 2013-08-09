@@ -71,13 +71,13 @@ Please import a Comma-Separated-File file with the following format (for 'Distan
   <li>Column 3: Details (to be printed on awards)</li>
 </ul>
 <%= form_tag(import_csv_user_import_results_path(@user), {:method => :post, :multipart=>true}) do %>
-  <%= select_tag :competition_id, options_from_collection_for_select(Competition.all, "id", "to_s_with_event_class") %><br />
+  <%= select_tag :competition_id, options_from_collection_for_select(Competition.event_order.all, "id", "to_s_with_event_class") %><br />
   <%= file_field_tag "file" %>
   <%= submit_tag "Load CSV to Temp Table" %>
 <% end %>
 <hr />
 <%= form_tag(import_lif_user_import_results_path(@user), {:method => :post, :multipart=>true}) do %>
-  <%= select_tag :competition_id, options_from_collection_for_select(Competition.all, "id", "to_s_with_event_class") %><br />
+  <%= select_tag :competition_id, options_from_collection_for_select(Competition.event_order.all, "id", "to_s_with_event_class") %><br />
   <%= label_tag :heat, "Heat" %><%= text_field_tag "heat" %><br />
   <%= file_field_tag "file" %>
   <%= submit_tag "Load LIF to Temp Table" %>

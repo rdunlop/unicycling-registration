@@ -18,7 +18,7 @@ Upload: <%= form_for :convert, :url=>admin_export_upload_registrants_path do |f|
 <h2>Time Data</h2>
 Download:
 <ul>
-  <% Competition.all.each do |comp| %>
+  <% Competition.event_order.all.each do |comp| %>
     <li><%= link_to "#{comp}", admin_export_download_time_results_path(:format => :json, :competition => comp.id) %></li>
   <% end %>
 </ul>
