@@ -1,9 +1,6 @@
 FLIGHT HOME TODO LIST:
-- Add a results link which does "per-event" instead of per-competition.( for Pairs, Individual, etc)
 - Make the footer nicer (like UCP)
-- Add printing system which allows for Event level printing (Individual, Pairs, etc)
 
-- Add a "print" button next to the Import Results/View area for Timed Results (for example).
 - Add indicator to the Import Results page which shows whether the given competitor already has a result record stored (this would be a BAD thing)
 
 ??- Results should include overall place.

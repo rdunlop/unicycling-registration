@@ -1,6 +1,7 @@
 <h1>Listing Externally Ranked Results for <%=  @competition %></h1>
 
 <%= link_to "Set Places", set_places_competition_path(@competition), method: :post, :confirm => "This may take a few seconds" %>
+<%= link_to "Results", results_printing_competition_path(@competition, :format => :pdf) %>
 
 <table class="sortable">
   <thead>

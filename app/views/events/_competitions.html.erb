@@ -15,6 +15,7 @@
         <th>Import Results</th>
       <% end %>
       <th>Results</th>
+      <th>Print</th>
       <% if judges %>
         <th>Judges</th>
       <% end %>
@@ -41,6 +42,7 @@
           <td><%= link_to 'Import Results', user_import_results_path(current_user) %></td>
         <% end %>
         <td><%= link_to 'View', results_url(ec) %></td>
+        <td><%= link_to "Results", results_printing_competition_path(ec, :format => :pdf) %></td>
         <% if judges %>
           <td><%= link_to 'View/Add', competition_judges_path(ec) %></td>
         <% end %>
