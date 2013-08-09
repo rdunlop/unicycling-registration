@@ -3,7 +3,7 @@
 <%= link_to "Set Racing Places", set_places_competition_path(@competition), method: :post, :confirm => "This may take a few seconds" %>
 <%= link_to "View Top Results", final_candidates_competition_time_results_path(@competition) %>
 <%= link_to "Delete All", destroy_results_competition_path(@competition), method: :delete, :class => "results_delete", :confirm => "This will DELETE all results. Are you sure?" %>
-Results: <%= link_to "View", results_printing_competition_path(@competition, :format => :pdf) %> <%= link_to "Save", save_printing_event_path(event, :format => :pdf) %>
+Results: <%= link_to "View", results_printing_competition_path(@competition, :format => :pdf) %> <%= link_to "Save", save_printing_competition_path(@competition, :format => :pdf) %>
 
 <table class="sortable">
   <thead>

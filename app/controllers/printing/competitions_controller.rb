@@ -97,13 +97,19 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def save
-    @competitions = @event.competitions
+    @age_group_entries = @competition.age_group_entries
+    @results_list = @competition.results_list
 
     @no_page_breaks = true #unless params[:no_page_breaks].nil?
 
+    # sort the results by place
+    @results_list.keys.each do |key|
+      @results_list[key].sort!{|a,b| a.place.to_i <=> b.place.to_i}
+    end
+
     respond_to do |format|
       format.html 
-      format.pdf { render :pdf => "#{EventConfiguration.short_name}_#{@event.name}_results", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html", :disposition => "attachment" }
+      format.pdf { render :pdf => "#{EventConfiguration.short_name}_#{@competition.name}_results", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html", :disposition => "attachment" }
     end
   end
 end

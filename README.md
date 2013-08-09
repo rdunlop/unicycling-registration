@@ -104,7 +104,7 @@ Memcache
 
 When deploying, please install a memcache client on your heroku instance:
 
-    $ heroku addons:add memcache
+    $ heroku addons:add memcachier
 
 Database
 --------

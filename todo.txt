@@ -1,4 +1,5 @@
 FLIGHT HOME TODO LIST:
+- Why does "Club" appear twice?
 - Make the footer nicer (like UCP)
 
 - Add indicator to the Import Results page which shows whether the given competitor already has a result record stored (this would be a BAD thing)
