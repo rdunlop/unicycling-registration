@@ -13,7 +13,6 @@ FLIGHT HOME TODO LIST:
 - Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
 - Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
 - Re-write the artistic calculation code to use the new caching strategy, and also to optimize so that the same calculations are not done multiple times (for each place(competitor) call)
-- Fix the sort order of the Import Results choose competition dropdown
 - Add link from Results page to "import results" page for Timed Competitions (and others?)
 - fix problems when the age groups are not large enough, or when a person's age is >100 (and out of range of the age groups) (problems printing PDFs, etc)
 - Use more Form Helpers (like the RegistrantGroup form helper)

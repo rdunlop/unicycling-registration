@@ -84,6 +84,33 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def age_group_entries
+    determine_age_group_type.try(:age_group_entries)
+  end
+
+  def results_list
+    @agt = determine_age_group_type
+    @results_list = {}
+    if @agt.nil?
+      # no age groups, put all into a single age group
+      @results_list["all"] = competitors
+    else
+      @age_group_entries = age_group_entries
+      @age_group_entries.each do |ag_entry|
+        @results_list[ag_entry] = []
+      end
+
+      # sort the competitors by age group
+      competitors.each do |competitor|
+        next unless competitor.has_result?
+        calculated_ag = @agt.age_group_entry_for(competitor.age, competitor.gender, competitor.wheel_size)
+        @results_list[calculated_ag] << competitor unless calculated_ag.nil?
+      end
+    end
+
+    @results_list
+  end
+
   def get_judge(user)
     return judges.where({:user_id => user.id}).first
   end

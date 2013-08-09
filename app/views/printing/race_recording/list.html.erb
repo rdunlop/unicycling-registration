@@ -10,3 +10,11 @@
     <li><%= link_to "#{comp} Forms", printing_competition_path(comp) %></li>
   <% end %>
 </ul>
+
+<h2>Event Results Printing</h2>
+<ul>
+  <% Event.order(:name).all.each do |event| %>
+    <li><%= link_to "#{event} Results", results_printing_event_path(event, :format => :pdf) %></li>
+  <% end %>
+</ul>
+

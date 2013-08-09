@@ -20,6 +20,11 @@ Workspace::Application.routes.draw do
         get :results
       end
     end
+    resources :events, :only => [] do
+      member do
+        get :results
+      end
+    end
   end
 
   # ADMIN (for use in Setting up the system)
