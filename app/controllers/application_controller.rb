@@ -27,13 +27,14 @@ class ApplicationController < ActionController::Base
     {:left => '[date] [time]', :center => @config.short_name, :right => 'Page [page] of [topage]'}
   end
 
-  def render_common_pdf(view_name, orientation = "Portrait")
+  def render_common_pdf(view_name, orientation = "Portrait", disposition = "inline")
     render :pdf => view_name, 
       :print_media_type => true, 
       :margin => {:top => 2, :left => 2, :right => 2}, 
       :footer => default_footer, 
       :formats => [:html], 
       :orientation => orientation, 
+      :disposition => disposition,
       :layout => "pdf.html"
   end
 end
