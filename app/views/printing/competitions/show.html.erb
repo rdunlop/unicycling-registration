@@ -14,19 +14,12 @@
 <%= link_to "(pdf)", two_attempt_recording_printing_competition_path(@competition, :format => :pdf) %>
 
 <br /><br />
-<h3>Results</h3>
-<% if @competition.event_class == "Distance" %>
-  <%= link_to "Race Results", race_results_printing_competition_path(@competition) %>
-  <%= link_to "(pdf)", race_results_printing_competition_path(@competition, :format => :pdf) %>
-<% elsif @competition.event_class == "Two Attempt Distance" %>
-  <%= link_to "Distance Results", distance_results_printing_competition_path(@competition) %>
-  <%= link_to "(pdf)", distance_results_printing_competition_path(@competition, :format => :pdf) %>
-<% elsif @competition.event_class == "Ranked" %>
-  <%= link_to "Externally Ranked Results", results_printing_competition_path(@competition) %>
-  <%= link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf) %>
-<% elsif @competition.event_class == "Freestyle" %>
-  <%= link_to "Artistic Results", artistic_results_printing_competition_path(@competition) %>
-  <%= link_to "(pdf)", artistic_results_printing_competition_path(@competition, :format => :pdf) %>
+<h2>Competition Results Printing</h2>
+<%= form_tag(results_printing_competition_path(@competition, :format => :pdf), :method => :get) do %>
+  <%= label_tag :no_page_breaks %>
+  <%= check_box_tag :no_page_breaks %><br />
+
+  <%= submit_tag "Print Results" %>
 <% end %>
 
 <br /><br />

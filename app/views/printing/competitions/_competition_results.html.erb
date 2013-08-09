@@ -9,7 +9,8 @@
   <hr />
 
   <% competitor = competitors.first %>
-  <% if competitor.members.count > 1 %>
+  <% if competitor.members.count > 2 %>
+    <% # Group event, list the members %>
     <% competitors.each do |competitor| %>
       <h3>Place: <%= competitor.place %> -  <%= competitor %></h3>
       <hr />
@@ -36,7 +37,9 @@
         <tr>
           <th class="id">ID</th>
           <th class="name">Name</th>
-          <th class="time"><%= result_description %></th>
+          <% unless result_description.nil? %>
+            <th class="time"><%= result_description %></th>
+          <% end %>
           <th class="place">Place</th>
         </tr>
       </thead>

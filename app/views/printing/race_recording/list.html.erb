@@ -6,7 +6,7 @@
 <h2>Artistic Printing Forms</h2>
 
 <ul>
-  <% Competition.all.each do |comp| %>
+  <% Competition.event_order.all.each do |comp| %>
     <li><%= link_to "#{comp} Forms", printing_competition_path(comp) %></li>
   <% end %>
 </ul>

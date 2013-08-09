@@ -18,6 +18,8 @@ class Competition < ActiveRecord::Base
   has_many :lane_assignments, :dependent => :destroy
   #has_many :chief_judges, :dependent => :destroy
 
+  scope :event_order, includes(:event).order("events.name")
+
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
 
   def to_s

@@ -1,6 +1,8 @@
 <tr>
   <td><%= id %></td>
   <td><%= name %></td>
-  <td class="time"><%= time %></td>
+  <% unless time.nil? %>
+    <td class="time"><%= time %></td>
+  <% end %>
   <td><%= place %></td>
 </tr>
