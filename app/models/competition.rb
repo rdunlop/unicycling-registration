@@ -108,6 +108,11 @@ class Competition < ActiveRecord::Base
       end
     end
 
+    #sort the results by place
+    @results_list.keys.each do |key|
+      @results_list[key].sort!{|a,b| a.place.to_i <=> b.place.to_i}
+    end
+
     @results_list
   end
 
