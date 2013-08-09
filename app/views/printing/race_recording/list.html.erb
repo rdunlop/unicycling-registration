@@ -12,9 +12,23 @@
 </ul>
 
 <h2>Event Results Printing</h2>
-<ul>
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
   <% Event.order(:name).all.each do |event| %>
-    <li><%= link_to "#{event} Results", results_printing_event_path(event, :format => :pdf) %></li>
+
+    <tr>
+      <td><%= event %></td>
+      <td><%= link_to "View", results_printing_event_path(event, :format => :pdf) %></td>
+      <td><%= link_to "Save", save_printing_event_path(event, :format => :pdf) %></td>
+    </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>
 
