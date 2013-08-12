@@ -26,7 +26,7 @@ class Printing::EventsController < ApplicationController
 
     respond_to do |format|
       format.html 
-      format.pdf { render :pdf => "#{EventConfiguration.short_name}_#{@event.name}_results", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html", :disposition => "attachment" }
+      format.pdf { render :pdf => "#{EventConfiguration.short_name.tr(" ", "_")}_#{@event.name.tr(" ", "_")}_results", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html", :disposition => "attachment" }
     end
   end
 end
