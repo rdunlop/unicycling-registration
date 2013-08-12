@@ -85,11 +85,6 @@ class Printing::CompetitionsController < ApplicationController
 
     @no_page_breaks = true unless params[:no_page_breaks].nil?
 
-    # sort the results by place
-    @results_list.keys.each do |key|
-      @results_list[key].sort!{|a,b| a.place.to_i <=> b.place.to_i}
-    end
-
     respond_to do |format|
       format.html 
       format.pdf { render_common_pdf("results", "Portrait") }
@@ -101,11 +96,6 @@ class Printing::CompetitionsController < ApplicationController
     @results_list = @competition.results_list
 
     @no_page_breaks = true #unless params[:no_page_breaks].nil?
-
-    # sort the results by place
-    @results_list.keys.each do |key|
-      @results_list[key].sort!{|a,b| a.place.to_i <=> b.place.to_i}
-    end
 
     respond_to do |format|
       format.html 
