@@ -114,7 +114,6 @@ class AwardLabelsController < ApplicationController
   end
 
   def create_label(competitor, registrant, experts, min_place, max_place, my_user)
-    competition = competitor.competition
     if experts
       place = competitor.overall_place
     else
@@ -125,52 +124,10 @@ class AwardLabelsController < ApplicationController
     return false if place.to_i < min_place
     return false if place.to_i > max_place
 
-    # do this later, so that we can exit more cheaply
-    if experts
-      age_group = "Expert " + competitor.gender # because the only age gorup is the normal age group
-    else
-      if competition.has_age_groups
-        # only set the age_group if the event is marked as having them
-        age_group = competitor.age_group_entry_description
-      end
-    end
-
-    competition_name = competition.event.name
-    if competition.event.event_class == "Freestyle" ### XXX Somewhere else?
-      age_group = competition.name # the "Category"
-    elsif competition.event.event_class == "Distance" or competition.event.event_class == "Ranked"
-      competition_name = competition.name # the "Category"
-    end
-
     aw_label = AwardLabel.new
-    aw_label.competition_name = competition_name
-    aw_label.age_group = age_group
-    aw_label.bib_number = registrant.bib_number
-    aw_label.details = competitor.result
-    aw_label.first_name = registrant.first_name
-    aw_label.last_name = registrant.last_name
-    aw_label.gender = competitor.gender
-    if competitor.members.count > 1
-      aw_label.gender = nil
-    end
-    if competitor.members.count == 2
-      reg1 = competitor.members.first.registrant
-      reg2 = competitor.members.last.registrant
-      if reg1 == registrant
-        reg = reg2
-      else
-        reg = reg1
-      end
-      aw_label.partner_first_name = reg.first_name
-      aw_label.partner_last_name = reg.last_name
-    else
-      aw_label.partner_first_name = nil
-      aw_label.partner_last_name = nil
-    end
-    aw_label.place = place
-    aw_label.registrant_id = registrant.id
-    aw_label.team_name = competitor.team_name
     aw_label.user = my_user
+    aw_label.populate_from_competitor(competitor, registrant, experts)
+
     return aw_label.save
   end
   # creates the award labels, as per the specified option(s)
@@ -235,8 +192,21 @@ class AwardLabelsController < ApplicationController
       names << lines
     end
 
+    Prawn::Labels.types = {
+      "Avery5160padded" => {
+      "paper_size" => "LETTER",
+      "top_margin" => 36,
+      "bottom_margin" => 36,
+      "left_margin" => 15.822,
+      "right_margin" => 15.822,
+      "columns" => 3,
+      "rows" => 10,
+      "column_gutter" => 15,
+      "row_gutter" => 2.5 # added padding
+    }
+    }
 
-    labels = Prawn::Labels.render(names, :type => "Avery5160", :shrink_to_fit => true) do |pdf, name|
+    labels = Prawn::Labels.render(names, :type => "Avery5160padded", :shrink_to_fit => true) do |pdf, name|
       pdf.text name, :align =>:center, :valign => :center, :inline_format => true
     end
 
@@ -260,7 +230,6 @@ class AwardLabelsController < ApplicationController
       lines += line + "\n" unless line.nil? or line.empty?
       line = line_six(label)
       lines += "<b>" + line + "</b>" unless line.nil? or line.empty?
-#      lines = "<div><div style=\"display: inline-block; vertical-align: middle; height: 100%; width: 0;\"></div><div style=\"vertical-align: middle; display: inline-block;\">" + lines + "</div>"
       names << lines
     end
     Prawn::Labels.types = {

@@ -116,7 +116,6 @@ class Competitor < ActiveRecord::Base
       when "Distance"
         time_results.count > 0
       when "Ranked"
-        puts "checking ranked #{external_results}"
         external_results.count > 0
       when "Freestyle"
         scores.count > 0
