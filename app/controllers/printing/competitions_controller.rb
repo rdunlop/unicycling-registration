@@ -99,7 +99,7 @@ class Printing::CompetitionsController < ApplicationController
 
     respond_to do |format|
       format.html 
-      format.pdf { render :pdf => "#{EventConfiguration.short_name}_#{@competition.name}_results", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html", :disposition => "attachment" }
+      format.pdf { render :pdf => "#{EventConfiguration.short_name.tr(" ", "_")}_#{@competition.name.tr(" ", "_")}_results", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html", :disposition => "attachment" }
     end
   end
 end
