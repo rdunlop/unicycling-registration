@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :category_id, :export_name, :position, :event_choices_attributes, :name, :event_class
+  attr_accessible :category_id, :export_name, :position, :event_choices_attributes, :name, :event_class, :visible
 
   has_many :event_choices, :order => "event_choices.position", :dependent => :destroy
   accepts_nested_attributes_for :event_choices
@@ -18,6 +18,12 @@ class Event < ActiveRecord::Base
 
   after_save(:touch_competitions)
   after_touch(:touch_competitions)
+
+  after_initialize :init
+
+  def init
+    self.visible = true if self.visible.nil?
+  end
 
   def touch_competitions
     competitions.each do |comp|

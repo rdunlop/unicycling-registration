@@ -1,4 +1,7 @@
 FLIGHT HOME TODO LIST:
+- Fix Hockey/BBall to not print "Expert (mixed)"
+- Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
+- Fix the import/export to include event_category (seems to have been missed for unicon2014 import)
 - Why does "Club" appear twice?
 - Make the footer nicer (like UCP)
 

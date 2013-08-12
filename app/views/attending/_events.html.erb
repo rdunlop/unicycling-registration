@@ -16,6 +16,7 @@
           </div>
         <% end %>
         <% category.events.each do |event| %>
+          <% next unless event.visible %>
           <div class="event">
             <div class="event_choices">
               <span class="event_sign_up event_choice">

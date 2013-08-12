@@ -27,6 +27,10 @@
     <%= f.label :event_class %><br />
     <%= f.select :event_class, Event.event_classes, :include_blank => true %>
   </div>
+  <div class="field">
+    <%= f.label :visible %><br />
+    <%= f.check_box :visible  %>
+  </div>
   <h2>Event Categories</h2>
   <%= f.fields_for :event_categories do |ec| %>
     <div>

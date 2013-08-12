@@ -36,6 +36,10 @@
       <td><%= f.label :event_class %></td>
       <td><%= f.select :event_class, Event.event_classes, :include_blank => true %></td>
     </tr>
+    <tr>
+      <td><%= f.label :visible %></td>
+      <td><%= f.check_box :visible %></td>
+    </tr>
 
     <tr>
       <th class="center" colspan="2">Event Choices</th>

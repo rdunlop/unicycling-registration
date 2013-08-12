@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802155644) do
+ActiveRecord::Schema.define(:version => 20130812145917) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20130802155644) do
     t.datetime "updated_at",  :null => false
     t.string   "name"
     t.string   "event_class"
+    t.boolean  "visible"
   end
 
   add_index "events", ["category_id"], :name => "index_events_category_id"
