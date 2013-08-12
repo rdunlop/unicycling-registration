@@ -64,6 +64,7 @@ class AwardLabel < ActiveRecord::Base
 
     # misc housekeeping
     self.registrant = registrant
+    self.bib_number = registrant.bib_number
   end
 
   def line_1

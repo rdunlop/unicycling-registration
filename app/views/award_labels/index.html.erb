@@ -1,15 +1,37 @@
 <h1>Award Labels</h1>
 
-<h2>Create Labels Sheet</h2>
+<h2>Create Labels For a specific Registrant/Registrant-Group/Competition</h2>
+<%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post}) do %>
+  <%= label_tag :registrant_id, "Single Registrant" %>
+  <%= select_tag :registrant_id, options_from_collection_for_select(Registrant.order(:bib_number).all, "id", "with_id_to_s"), :include_blank => true %><br />
+
+  <%= label_tag :registrant_group_id, "Registrant Group" %>
+  <%= select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name).all, "id", "to_s"), :include_blank => true %><br />
+
+  <%= label_tag :competition_id, "Competition" %>
+  <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name).all, "id", "to_s"), :include_blank => true %><br />
+  <br />
+
+  <%= label_tag :minimum_place, "Minimum Award Place" %>
+  <%= number_field_tag :minimum_place %><br />
+
+  <%= label_tag :maximum_place, "Maximum Award Place" %>
+  <%= number_field_tag :maximum_place %><br />
+
+  <%= label_tag :age_groups, "Age Groups Labels" %>
+  <%= check_box_tag :age_groups, {}, :checked => true %><br />
+
+  <%= label_tag :experts, "Experts Labels" %>
+  <%= check_box_tag :experts, {}, :checked => true %><br />
+
+  <%= submit_tag "Create Labels for Selected Registrant(s) or Competition" %>
+<% end %>
+
+<hr />
+<h2>Print Labels Sheet</h2>
 <%= form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do %>
   <%= check_box_tag :separate_registrants %>
   <%= label_tag :separate_registrants, "Separate each registrant with a row of blank labels" %><br />
-
-  <%= number_field_tag :minimum_place, {}, :disabled => true %>
-  <%= label_tag :minimum_place, "Minimum Place" %><br />
-
-  <%= number_field_tag :maximum_place, {}, :disabled => true %>
-  <%= label_tag :maximum_place, "Maximum Place" %><br />
 
   <%= number_field_tag :skip_positions, {}, :disabled => true %>
   <%= label_tag :skip_positions, "Skip Positions" %><br />
@@ -20,34 +42,6 @@
 <%= link_to "Expert Labels", expert_labels_user_award_labels_path(@user) %>
 
 <hr />
-<h2>Create Labels Data from specific Compititon</h2>
-
- <%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post, :multipart=>true}) do %>
-   <%= label_tag :competition_id, "Competition" %>
-   <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name).all, "id", "to_s") %><br />
-
-   <%= label_tag :maximum_place, "Maximum Award Place" %>
-   <%= text_field_tag :maximum_place %><br />
-
-   <%= label_tag :experts, "Experts from within Age-group data" %>
-   <%= check_box_tag :experts %><br />
-
-   <%= submit_tag "Create labels" %>
- <% end %>
- <hr />
-
- <h2>Create Labels For a specific Registrant/Registrant-Group</h2>
- <%= form_tag(create_labels_by_registrant_user_award_labels_path(@user), {:method => :post}) do %>
-   <%= label_tag :registrant_id, "Single Registrant" %>
-   <%= select_tag :registrant_id, options_from_collection_for_select(Registrant.order(:bib_number).all, "id", "with_id_to_s"), :include_blank => true %><br />
-
-   <%= label_tag :registrant_group_id, "Registrant Group" %>
-   <%= select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name).all, "id", "to_s"), :include_blank => true %><br />
-
-   <%= submit_tag "Create Labels for Selected Registrant(s)" %>
- <% end %>
-
- <hr />
 
 
  <%= form_tag(destroy_all_user_award_labels_path(@user), {:method => :delete, :multipart=>true}) do %>
@@ -58,15 +52,12 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Partner first name</th>
-      <th>Partner last name</th>
-      <th>Competition name</th>
-      <th>Team name</th>
-      <th>Age group</th>
-      <th>Gender</th>
-      <th>Details</th>
+      <th>Line 1</th>
+      <th>Line 2</th>
+      <th>Line 3</th>
+      <th>Line 4</th>
+      <th>Line 5</th>
+      <th>Line 6</th>
       <th>Place</th>
       <th>Registrant</th>
       <th></th>
@@ -78,15 +69,12 @@
     <% @award_labels.each do |award_label| %>
       <tr>
         <td><%= award_label.bib_number %></td>
-        <td><%= award_label.first_name %></td>
-        <td><%= award_label.last_name %></td>
-        <td><%= award_label.partner_first_name %></td>
-        <td><%= award_label.partner_last_name %></td>
-        <td><%= award_label.competition_name %></td>
-        <td><%= award_label.team_name %></td>
-        <td><%= award_label.age_group %></td>
-        <td><%= award_label.gender %></td>
-        <td><%= award_label.details %></td>
+        <td><%= award_label.line_1 %></td>
+        <td><%= award_label.line_2 %></td>
+        <td><%= award_label.line_3 %></td>
+        <td><%= award_label.line_4 %></td>
+        <td><%= award_label.line_5 %></td>
+        <td><%= award_label.line_6 %></td>
         <td><%= award_label.place %></td>
         <td><%= award_label.registrant %></td>
         <td><%= link_to 'Edit', edit_award_label_path(award_label) %></td>

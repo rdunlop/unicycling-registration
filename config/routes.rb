@@ -210,7 +210,6 @@ Workspace::Application.routes.draw do
     resources :award_labels, :shallow => true, :except => [:new, :show] do
       collection do
         post :create_labels
-        post :create_labels_by_registrant
         get :expert_labels
         get :normal_labels
         delete :destroy_all
