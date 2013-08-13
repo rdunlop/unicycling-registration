@@ -1,4 +1,5 @@
 FLIGHT HOME TODO LIST:
+- Replace "Distance" with "Timed"
 - Put "DQ" after all of the places on the results printouts
 - Allow setting of a sort order on the age groups (for printing, I suspect).
 - Fix Hockey/BBall to not print "Expert (mixed)"

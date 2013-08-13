@@ -152,7 +152,11 @@ class Competitor < ActiveRecord::Base
 
     def name
         unless custom_name.nil? or custom_name.empty?
-            custom_name
+            if self.ineligible
+              custom_name + "*"
+            else
+              custom_name
+            end
         else
             if registrants.empty?
                 "(No registrants)"
