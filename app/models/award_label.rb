@@ -47,6 +47,9 @@ class AwardLabel < ActiveRecord::Base
     if competitor.competition.event.event_class == "Freestyle" ### XXX Somewhere else?
       self.age_group = competitor.competition.name # the "Category"
     end
+    if self.age_group == "All" # Don't display if age_group result is 'All'
+      self.age_group = nil
+    end
     if competitor.members.count > 1
       self.gender = nil
     else
