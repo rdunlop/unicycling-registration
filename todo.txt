@@ -1,31 +1,48 @@
-FLIGHT HOME TODO LIST:
+Last Re-Arranged August 13, 2013.
+
+To Do (in support of printing/shipping the awards medals for NAUCC 2013):
+- Be able to select a group of competitors, and print mailing labels for them.
+
+In support of USA Memberships:
+- Create a Expenses-Paid function which will suffice for USA data (see e-mail to hans)
+
+- Create "Participation Cerificate" which lists each Competitor's all results
+
+
+To Do (in support of UNICON 2014):
+- Update all dependencies to latest versions
+- Get the unit tests running again
+- Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
+- Copy unicon2014 to uniregtest
+- Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
+- Only allow "Jr Expert" if certain age.
+- Allow "Pickup Teams" to not require a team name
+- Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
+- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
+
+To Do (other requests):
+- Create "Overall Champion" calculation system
+- Create "Expert T-Shirt" calculation system
+- Create "Personalized Schedule" for each competitor
 - Replace "Distance" with "Timed"
 - Put "DQ" after all of the places on the results printouts
 - Allow setting of a sort order on the age groups (for printing, I suspect).
-- Fix Hockey/BBall to not print "Expert (mixed)"
-- Only allow "Jr Expert" if certain age.
-- Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
 - Fix the import/export to include event_category (seems to have been missed for unicon2014 import)
-- Why does "Club" appear twice?
 - Make the footer nicer (like UCP)
-
 - Add indicator to the Import Results page which shows whether the given competitor already has a result record stored (this would be a BAD thing)
+- UI for configuring a racer's "Default Wheel Size"
 
 ??- Results should include overall place.
-- Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
 - Awards labels . "Clear whole column"
 - Autocomplete for Club Name, Group Name, etc.
 - Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
-- Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
 - Re-write the artistic calculation code to use the new caching strategy, and also to optimize so that the same calculations are not done multiple times (for each place(competitor) call)
-- Add link from Results page to "import results" page for Timed Competitions (and others?)
 - fix problems when the age groups are not large enough, or when a person's age is >100 (and out of range of the age groups) (problems printing PDFs, etc)
 - Use more Form Helpers (like the RegistrantGroup form helper)
 - Update roles,to allow certain admin users to be able to create results (external results, import results)
 - What happens if a competitor has no members? (do the pages display? do the calculations die?)
 - When the server is running locally, log all errors to a database table (and allow viewing of this).
  - Perhaps _always_ log errors to this table, and e-mail if possible?
-- Allow "Pickup Teams" to not require a team name
 - Allow for people to pay via Paypal while "onsite registrant"???
 - Opensource the Rulebook software
  - address some of the rulebook software issues (See Jan23 E-mail)
@@ -33,44 +50,20 @@ FLIGHT HOME TODO LIST:
 
 - Finish the Artistic Group/Club for Falls.
 - Num Laps for time results (Coker MUni cross)
-
-\=========================================
-
-NAUCC 2013 TODO LIST and Stuff. (SOME of this may get done).
-
-EASY wins:
-
-IMPORTANT things:
-- Allow the user to specify the format of the import data, so that it doesn't have to be hard-coded (or perhaps provide a base set of formats?)
-
-- Create Awards menu which allows choosing an event, the places (1-3), and creating the awards
- - For artistic, it will create labels for each
- - Once the awards have been chosen, printing those data onto either Circle or Rectangular labels.
-
 - UI for using the "International (Ineligible)" selection for registrants.
-
 - Should be able to enter obstacle course data (multiple data points, fastest wins)
-- Ability to enter results for Hockey (ie: results without supporting scores)
 
 - Import Data without a Heat/Lane should show a nice error message
  - With a link to the Heat/lane data for lookup
 - Don't eliminate places which are not affected by new time_results
 - Fix association between Competitions and events (separate from event-categories?)
  - So that the Expert Competition can be properly associated.
-- Add ability to create new competitinos (Expert competition?)
 
 LESS IMPORTANT THINGS:
 - Improve the "Manage Judges" menu for each competition
-- UI for configuring a racer's "Default Wheel Size"
-- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
-
-FUTURE THINGS (AFTER NATIONALS)
 - Ability to create Artistic Group/Pairs competitions based on the fields filled out (?)
-- Create a Expenses-Paid function which will suffice for USA data (see e-mail to hans)
-- Get the unit tests running again
 - Should be able to capture the "DQ" and "DQ reason" fields in a form easily ,for use by the finish judge.
 - Improve the UI of the "My Events" page, so that the "Heat assignment" people have:
- DONE- The ability to search for a competitor
  - A short list of the available competitions
  - The speed/lane-assignment information
  - Instructions
@@ -97,14 +90,10 @@ FUTURE THINGS (LATER):
 
 
 UNCATEGORIZED:
-
-- Be able to choose "Age Group", or "Overall" (necessary for the 10k, but not so for the 100m)
 - Should be able to more easily enter Time Results data by hand (dq,s etc) (not required that the racer be a competitor?)
 - Fix TimeResult dropdown,order, to be sorted, and show ? non-signed-up-people?
 - Ability to specify a "name" for user accounts, so that I can refer to "judge" accounts properly.
 ?- Ability to show the Events, Judges, so that the Chief Judge can determine the next events' judges in advance
-- Select that an Event-Category "has Expert Awards (calculates the top 10's, and displays the menus for this)"
- - and "has finals? (displays the top-10, and the ability to create an 'expert' competition from those top 10)"
 
 - Document the flows
 - Automate the testing of the flows 
