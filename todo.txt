@@ -1,5 +1,8 @@
 FLIGHT HOME TODO LIST:
+- Put "DQ" after all of the places on the results printouts
+- Allow setting of a sort order on the age groups (for printing, I suspect).
 - Fix Hockey/BBall to not print "Expert (mixed)"
+- Only allow "Jr Expert" if certain age.
 - Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
 - Fix the import/export to include event_category (seems to have been missed for unicon2014 import)
 - Why does "Club" appear twice?

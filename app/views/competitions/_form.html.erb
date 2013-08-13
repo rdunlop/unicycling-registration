@@ -4,7 +4,7 @@
       <h2><%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
 
       <ul>
-      <% competition.errors.full_messages.each do |msg| %>
+      <% @competition.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
