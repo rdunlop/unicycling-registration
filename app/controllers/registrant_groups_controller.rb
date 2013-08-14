@@ -22,7 +22,7 @@ class RegistrantGroupsController < ApplicationController
   end
 
   def address_labels
-    registrants = @registrant_group.registrant_group_members.map{|rgm| rgm.registrant}
+    registrants = @registrant_group.sorted_registrants
     label_text = []
     registrants.each do |registrant|
       text = "#{registrant.name}\n"
