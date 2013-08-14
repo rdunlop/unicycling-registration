@@ -35,6 +35,11 @@
       Links from the Menubar logo to this URL.
     </div>
     <div class="field">
+      <%= f.label :waiver %>
+      <%= f.check_box :waiver %><br />
+      Enabling this allows all the waiver features and text to display.<br />
+    </div>
+    <div class="field">
       <%= f.label :waiver_url %>
       <%= f.url_field :waiver_url %><br />
       Currently unused

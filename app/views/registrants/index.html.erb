@@ -53,8 +53,9 @@
   </div>
 <% end %>
 <%= render :partial => "registrants_list", :locals => {:shared_list => @shared_registrants, :my_registrants_list => @my_registrants} %>
-Everyone must have a signed <%= link_to 'Legal Waiver', empty_waiver_registrants_path(:format => 'pdf'), {:class => "waiver_link", :target => "_blank" } %>
-
+<% if @waiver %>
+  Everyone must have a signed <%= link_to 'Legal Waiver', empty_waiver_registrants_path(:format => 'pdf'), {:class => "waiver_link", :target => "_blank" } %>
+<% end %>
 
 
 <hr />
@@ -63,8 +64,9 @@ Everyone must have a signed <%= link_to 'Legal Waiver', empty_waiver_registrants
   Once you have created your registrations, be sure to submit payment.
 </p>
 <p>NOTE! - It is the <b>date of your payment that defines the registration fee</b>, NOT the registration date.</p>
-<%= render :partial => "/registrants/waiver" %>
-
+<% if @waiver %>
+  <%= render :partial => "/registrants/waiver" %>
+<% end %>
 <p>
 Registering takes about 15 minutes.<br />
 After you have finished your registration, you are still able to change your data.<br />
