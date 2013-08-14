@@ -179,7 +179,15 @@ class AwardLabelsController < ApplicationController
     end
     previous_bib_number = 0
 
+    skip_positions = 0
+    unless params[:skip_positions].nil? or params[:skip_positions].empty?
+      skip_positions = params[:skip_positions].to_i
+    end
+
     names = []
+    skip_positions.times do
+      names << ""
+    end
     @user.award_labels.order(:bib_number).each do |label|
       if separate_registrants and (previous_bib_number != 0 and label.bib_number != previous_bib_number)
         # add 3 blanks
