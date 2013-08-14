@@ -4,6 +4,9 @@ Workspace::Application.routes.draw do
     collection do
       get :list
     end
+    member do
+      get :address_labels
+    end
   end
 
   namespace :printing do

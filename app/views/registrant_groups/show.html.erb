@@ -8,6 +8,13 @@
   <%= @registrant_group.contact_person %>
 </p>
 
+<p>
+  <b>Members:</b><br />
+  <% @registrant_group.registrant_group_members.each do |member| %>
+    <%= member.registrant %><br />
+  <% end %>
+</p>
+
 
 <%= link_to 'Edit', edit_registrant_group_path(@registrant_group) %> |
 <%= link_to 'Back', registrant_groups_path %>

@@ -21,6 +21,25 @@ class RegistrantGroupsController < ApplicationController
     end
   end
 
+  def address_labels
+    registrants = @registrant_group.registrant_group_members.map{|rgm| rgm.registrant}
+    label_text = []
+    registrants.each do |registrant|
+      text = "#{registrant.name}\n"
+      text += "#{registrant.address}\n"
+      text += "#{registrant.city}, #{registrant.state}\n"
+      text += "#{registrant.country}\n"
+      text += "#{registrant.zip}\n"
+      label_text << text
+    end
+
+    labels = Prawn::Labels.render(label_text, :type => "Avery5160", :shrink_to_fit => true) do |pdf, name|
+      pdf.text name, :align =>:center, :valign => :center, :inline_format => true
+    end
+
+    send_data labels, :filename => "address-labels-#{Date.today}.pdf"
+  end
+
   # GET /registrant_groups/1
   # GET /registrant_groups/1.json
   def show

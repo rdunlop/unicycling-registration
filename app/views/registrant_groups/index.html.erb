@@ -10,6 +10,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -19,6 +20,7 @@
         <td><%= registrant_group.name %></td>
         <td><%= registrant_group.contact_person %></td>
         <td><%= link_to 'Show', registrant_group %></td>
+        <td><%= link_to 'Address Labels', address_labels_registrant_group_path(registrant_group) %></td>
         <td><%= link_to 'Edit', edit_registrant_group_path(registrant_group) %></td>
         <td><%= link_to 'Destroy', registrant_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
