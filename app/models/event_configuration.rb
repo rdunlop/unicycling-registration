@@ -101,6 +101,15 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
+  def self.waiver
+    ec = EventConfiguration.first
+    if ec.nil? or ec.waiver.nil?
+      nil
+    else
+      ec.waiver
+    end
+  end
+
   def self.comp_noncomp_url
     ec = EventConfiguration.first
     if ec.nil? or ec.comp_noncomp_url.nil? or  ec.comp_noncomp_url.empty?

@@ -22,7 +22,7 @@ class RegistrantsController < ApplicationController
     @display_invitation_request = current_user.invitations.need_reply.count > 0
     @display_invitation_manage_banner = current_user.invitations.permitted.count > 0
     @user = current_user
-    @waiver = EventConfiguration.first.waiver
+    @waiver = EventConfiguration.waiver
 
     respond_to do |format|
       format.html # index.html.erb
@@ -90,7 +90,7 @@ class RegistrantsController < ApplicationController
   def show
     @registrant = Registrant.find(params[:id])
     @has_minor = current_user.has_minor?
-    @waiver = EventConfiguration.first.waiver
+    @waiver = EventConfiguration.waiver
 
     respond_to do |format|
       format.html # show.html.erb
