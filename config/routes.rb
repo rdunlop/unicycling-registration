@@ -73,6 +73,7 @@ Workspace::Application.routes.draw do
       get :download_time_results
       post :upload_time_results
       get :download_ucp_sql
+      get :download_payment_details
 
       # OLD routes
       get :download_data

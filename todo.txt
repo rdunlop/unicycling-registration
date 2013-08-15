@@ -31,6 +31,7 @@ To Do (other requests):
 - Make the footer nicer (like UCP)
 - Add indicator to the Import Results page which shows whether the given competitor already has a result record stored (this would be a BAD thing)
 - UI for configuring a racer's "Default Wheel Size"
+- Make the site more robust when creating/deleting expense items/registration periods (scott broke it easily by deleting an expense item, I think)
 
 ??- Results should include overall place.
 - Awards labels . "Clear whole column"

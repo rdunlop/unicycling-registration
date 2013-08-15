@@ -318,6 +318,56 @@ class Admin::ExportController < Admin::BaseController
     end
   end
 
+  def download_payment_details
+
+    ei = ExpenseItem.find(params[:data][:expense_item_id])
+
+    s = Spreadsheet::Workbook.new
+    sheet = s.create_worksheet
+
+    row = 0
+    sheet[0,0] = "Expense Item"
+    sheet[0,1] = "Details: #{ei.details_label}"
+    sheet[0,2] = "First Name"
+    sheet[0,3] = "Last Name"
+    sheet[0,4] = "Birthday"
+    sheet[0,5] = "Address Line1"
+    sheet[0,6] = "City"
+    sheet[0,7] = "State"
+    sheet[0,8] = "Zip"
+    sheet[0,9] = "Country"
+    sheet[0,10] = "Phone"
+    sheet[0,11] = "Email"
+    sheet[0,12] = "Club"
+    row = 1
+
+    ei.payment_details.includes(:payment).each do |payment_detail|
+      next unless payment_detail.payment.completed
+      reg = payment_detail.registrant
+      sheet[row,0] = payment_detail.expense_item.to_s
+      sheet[row,1] = payment_detail.details
+      sheet[row,2] = reg.first_name
+      sheet[row,3] = reg.last_name
+      sheet[row,4] = reg.birthday
+      sheet[row,5] = reg.address
+      sheet[row,6] = reg.city
+      sheet[row,7] = reg.state
+      sheet[row,8] = reg.zip
+      sheet[row,9] = reg.country
+      sheet[row,10] = reg.phone
+      sheet[row,11] = reg.email
+      sheet[row,12] = reg.club
+      row += 1
+    end
+
+    report = StringIO.new
+    s.write report
+
+    respond_to do |format|
+      format.xls { send_data report.string, :filename => "#{ei.description}.xls" }
+    end
+  end
+
   # defines the SQL file necessary to run in order to sync UCP with the UDA
   # Includes Registrants, and their events.
   # NOTE: requires that UCP be configured properly in the tOnlineMatch_tbl
