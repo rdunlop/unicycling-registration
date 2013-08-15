@@ -1,9 +1,12 @@
 
-$background: rgb(18, 172, 80);
-$backgroundgrad: rgb(76, 214, 115);
-$backgroundhover: rgb(85, 209, 105);
-$backgroundhovergrad: rgb(34, 233, 66);
+$background: rgb(40, 40, 40);
+$backgroundgrad: rgb(40, 40, 40);
+$backgroundhover: rgb(80, 80, 80);
+$backgroundhovergrad: rgb(80, 80, 80);
+$submenudivider: rgb(100, 100, 100);
 $height: 50px;
+$text: rgb(36, 130, 181);
+$texthover: rgb(255, 255, 255);
 
 nav {
   text-align: center;
@@ -20,7 +23,7 @@ nav ul ul {
 
 
 nav ul {
-  background: #efefef; 
+  background: $background; 
   background: linear-gradient(top, $background 0%, $backgroundgrad 100%);  
   background: -moz-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
   background: -webkit-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
@@ -41,17 +44,17 @@ nav ul {
     float: left;
   }
     nav ul li:hover {
-      background: #4b545f;
+      background: $backgroundhover;
       background: linear-gradient(top, $backgroundhover 0%, $backgroundhovergrad 40%);
       background: -moz-linear-gradient(top, $backgroundhover 0%, $backgroundhovergrad 40%);
       background: -webkit-linear-gradient(top, $backgroundhover 0%, $backgroundhovergrad 40%);
     }
       nav ul li:hover a {
         background: $backgroundhover;
-        color: #fff;
+        color: $texthover;
       }
   nav ul li:hover a.logo_link {
-    background: #efefef; 
+    background: $background; 
     background: linear-gradient(top, $background 0%, $backgroundgrad 100%);  
     background: -moz-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
     background: -webkit-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
@@ -66,27 +69,31 @@ nav ul {
     nav ul li a,
     nav ul li a:visited {
       display: block; padding: ($height/3) 40px;
-      color: #333; text-decoration: none;
+      color: $text; text-decoration: none;
     }
       
     
   nav ul ul {
-    background: #5f6975; border-radius: 0px; padding: 0;
+    background: $background; border-radius: 0px; padding: 0;
     position: absolute; top: 100%;
   }
     nav ul ul li {
+      background: $background;
       float: none; 
-      border-top: 1px solid rgb(18, 172, 80);
+      border-top: 1px solid $submenudivider;
       position: relative;
     }
       nav ul ul li a,
-      nav ul ul li a:visited {
+      nav ul ul li a:visited,
+      nav ul li:hover ul li a {
+        background: $background;
         padding: ($height/4) 40px;
-        color: #fff;
+        color: $text;
       } 
-        nav ul ul li a:hover {
-          background: #4b545f;
-          color: #fff;
+        nav ul ul li a:hover,
+        nav ul li:hover ul li a:hover {
+          background: $backgroundhover;
+          color: $texthover;
         }
     
   nav ul ul ul {
