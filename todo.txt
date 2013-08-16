@@ -1,11 +1,8 @@
 Last Re-Arranged August 13, 2013.
 
 To Do (in support of printing/shipping the awards medals for NAUCC 2013):
-- Be able to select a group of competitors, and print mailing labels for them.
 
 In support of USA Memberships:
-- Create a Expenses-Paid function which will suffice for USA data (see e-mail to hans)
-
 - Create "Participation Cerificate" which lists each Competitor's all results
 
 

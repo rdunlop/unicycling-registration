@@ -6,14 +6,9 @@
   - List the shirt-size for each of these competitors.
   - Allow adding another competition if there are still shirts/etc.
 
-- Print the competitor/results labels, and information about shipping, for Lisa.
- - For TCUC, RTUC, MAD, SVUC, send the list of competitors to the team leader (Connie, Wendy, Ann O'Brien, Nina)
-
 WHAT WENT POORLY:
 - Printing of reports
 - Need an Excel Import that is Connie Friendly
-- Printing Medals and Labels should be much easier to determine what options to select.
-- We could have had more data entered in advance.
 
 
 POST-NAUCC2013 Report/Requests:
@@ -28,8 +23,6 @@ POST-NAUCC2013 Report/Requests:
  - Make PDFs of the results available for PUBLIC consumption.
   - Make personalized results pages available for each competitor.
  
- - Make the Race Recording form have another small column to the right of the right-data-column
-
  - Make the Overall Champion calculation part of UDA.
   - Track: ties are resolved by the number of 1sts, then by place of 100m. Points: 8,6,4,2,1
   - MUni: (at nationals, only) 3 events, and ties are resolved by number of 1sts, then number of 2nds, then 3rd places, 4th places, 5th, and then by Cross-country.
@@ -88,12 +81,10 @@ POST-NAUCC2013 Report/Requests:
 =================================
 
 - Add ability to add competitors from multiple event_categories to a single competition (or allow adding them later, one at a time)
-- Allow "Create Competition" to take a Gender filter (For use in ARTISTIC competition creation)
 
 - Move the time_trials Results to be shown by Competition, and the "set_places"
  - Fail the import if any rows are not-parsable?
  - Fail the import if any of the resulting data is invalid?
-- IMPORT the data into a temporary table (by user_id?), and then do analysis from there, before committing it to real data.
 
 - Why can't I import the 10kStandard.csv (file format issues?)
 - Link to the Time Results (view) page (/time_results/index?)
@@ -116,17 +107,12 @@ July Questions:
 
 
 TO DO (MUST be done BEFORE LIVE):
-#- Create Judge Type From Unicycling (Pre-populate in Migration?)
-- Create Judge between EventCategory, AgeGroupEntry, JudgeType, User, Position
-- Create Competitor for EventCategory, Position, CustomExternalId, CustomExternalName
 - Add ability to show the registrants "Signed up" for an Event (eg: Individual Ferestyl, Male, 15+)
  - Add ability to "Reorder Competitors" (which will create a Competitor object and set the Position.
-# - Create Member object which associates registrant(s) with Competitor.
 
 - Make the "shared registrant" banner disappear (or de-highlight) when accepted
 - Prevent users from saving a payment in progress over the boundary?
 
-# - Add foreign key indices on all *_id columns
  - Should I titlize the names of the registrants?
  - add unique constraints on database level?
   - when using unicorn to serve multiple people at once, what do I need to consider?
@@ -150,7 +136,6 @@ TO DO (MUST be done BEFORE LIVE):
  - Cache the age of the registrant
  - Add in-place eding of tables (like the Registration Periods entries?)
  - Add a scope for signed_up registrant_event_sign_ups (to get rid of the "if category is nil"
-# - Remove club_admin column (using rolify now)
  - Create ability to invite people for clubs admin
  - Restrict permsissions of "admin" user to ????
  - Add tests for the club-admin (or whatever it becomes) flows
@@ -174,7 +159,6 @@ TO DO (MUST be done SOON after LIVE (if not before)):
  - Payments page which lists all Unpaid Registrations (and e-mail contact info?)
  - Multi-Edit (allows updating the selection of multiple people's choices)
  - Multi-record delete (allows removing multiple people from an event sign-up)
- - Enter a "Wire Payment" (also, mark a registration/etc as paid, for some reason)
  - Log all logs to an external (persistent) store
  - :dependent => :restrict
 
@@ -198,15 +182,12 @@ TO DO (SHOULD be done):
 TO DO (NICE to be done):
  - Admin page for the events page....should show num people signed up vs num people signed-up-and-paid.
  - Add something that helps describe What "Category" to sign up for when choosing "Individual Freestyle" (Categories are: "Age Group", "Jr. Expert", "Expert").
- - default sort orders (all models?)
  - Improve the "Summary" page to be prettier, and better at printing.
  - Test the site on multiple browsers
  - User Test the site to see about usability improvements
  - Integrate with USA Membership site
- - Add notice to entice Non-Competitors to become Competitors
  - Add ability to mark a Registration as paid, to deal with "Dave said that I could go for free" scenario(s).
  - Serve the logo from a better (cached) fashion
- - Allow sortnig of the "all registrants" page according to the columns (use jquery?)
  - expense items be destroyed when an expenseGroup is destroyed
  - Prevent events from having no position-1-event-choice-boolean
 
@@ -217,7 +198,6 @@ Scott's suggestions:
  - Immediate errors display when typing in.
  - How do we get BEST TIMES?
  - Automatically start the rails server when vagrant starts
- - All registrants page, able to sort.
  - All registrants page, add 'state' column?
 
 Caitlin's Notes:
@@ -256,9 +236,6 @@ Connie:
 - Are we doing Standard skill?
 - Validate the age of competitors for Individual freestyle categores?
 - R: I don't like the fact that I need to scroll on the "Items" page.
-
-Robin:
-- do we want to describe why register as a non-competitor.
 
 -------------
 
