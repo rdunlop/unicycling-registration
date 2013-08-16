@@ -138,23 +138,24 @@ class Competition < ActiveRecord::Base
     unicon_scoring = false
 
     # Fancy Trick: "#{event_class}ScoreCalculator".classify.new(self)
-    if event_class == "Freestyle"
+    case event_class
+    when "Freestyle" 
       @score_calculator = ArtisticScoreCalculator.new(self, unicon_scoring)
-    elsif event_class == 'Flatland'
+    when 'Flatland'
       @score_calculator = FlatlandScoreCalculator.new(self)
-    elsif event_class == 'Street'
+    when 'Street'
       @score_calculator = StreetCompScoreCalculator.new(self)
-    elsif event_class == "Two Attempt Distance"
+    when "Two Attempt Distance"
       @score_calculator = DistanceCalculator.new(self)
-    elsif  event_class == "Distance"
+    when "Distance"
       @score_calculator = RaceCalculator.new(self)
-    elsif event_class == "Ranked"
+    when "Ranked"
       @score_calculator = ExternallyRankedCalculator.new(self)
     end
   end
 
   def result_description
-    case event.event_class
+    case event_class
     when "Two Attempt Distance"
       "Distance"
     when "Distance"

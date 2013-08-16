@@ -110,7 +110,7 @@ class Competitor < ActiveRecord::Base
 
     public
     def has_result?
-      case competition.event.event_class
+      case competition.event_class
       when "Two Attempt Distance"
         max_successful_distance != 0
       when "Distance"
@@ -125,7 +125,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def result
-      case competition.event.event_class
+      case competition.event_class
       when "Two Attempt Distance"
         max_distance = max_successful_distance
         "#{max_distance} cm" unless max_distance == 0
