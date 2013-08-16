@@ -69,6 +69,9 @@ describe "Ability" do
         before(:each) do
           ENV['ONSITE_REGISTRATION'] = "true"
         end
+        after(:each) do
+          ENV['ONSITE_REGISTRATION'] = nil
+        end
 
         it { should be_able_to(:create, Registrant) }
       end
