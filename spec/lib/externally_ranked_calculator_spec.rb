@@ -39,6 +39,7 @@ describe ExternallyRankedCalculator do
         r = @tr1.competitor.members(true).first.registrant
         r.ineligible = true
         r.save!
+        @tr1.reload
       end
       it "places the first 2 competitors as first" do
         recalc

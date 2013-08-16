@@ -7,6 +7,26 @@ Purpose:
  * Reference each of the software pieces, so that you can choose which one(s) you need for your event.
 
 
+EventClass
+==========
+
+An EventClass has the following effects:
+- Competition: how do "places" get calculated?
+- Competition: what is the printed description of the results ("Time", "Score", etc)
+- AWardLabel: do we print the name of the competition along with the Event name, or just the competition name ***** do some other way?
+- Competitor: does a competitor have any results, based on the way that the competition is being calculated
+- Compteitor: what is the current score/result for the competitor 
+- JudgeType: Display this judge-type as an option when
+- CompetitionController: what are all of the results for a competiton (be able to destroy them all)
+- CompetitonController: when setting all places, where do I redirect to (XXX can be eliminated with helpers?)
+- CompetiionController: export_function chooses the results (should be combined with the competitor.result probably)
+- EventsController: chooses which events to show on each of the pages o
+- ImportController: determine the type of data being importetd for a competition (Time, or External)
+- ImportController :determine how to convert from an ImportResult into a true result (Time, or External)
+
+- EventsHelper: Where are scores entered
+- EventsHelper: Where are scores summarized
+- EventsHelper: some others (not needed?)
 
 
 Registration (Ruby on Rails)

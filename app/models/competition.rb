@@ -139,7 +139,7 @@ class Competition < ActiveRecord::Base
 
     # Fancy Trick: "#{event_class}ScoreCalculator".classify.new(self)
     case event_class
-    when "Freestyle" 
+    when "Freestyle"
       @score_calculator = ArtisticScoreCalculator.new(self, unicon_scoring)
     when 'Flatland'
       @score_calculator = FlatlandScoreCalculator.new(self)

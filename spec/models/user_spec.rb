@@ -64,6 +64,9 @@ describe User do
   end
 
   describe "confirmation e-mail" do
+    after(:each) do
+      ENV['MAIL_SKIP_CONFIRMATION'] = nil
+    end
     it "sends an e-mail" do
       ActionMailer::Base.deliveries.clear
       user = FactoryGirl.create(:user)

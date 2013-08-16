@@ -132,15 +132,15 @@ describe Competitor do
             @comp.external_id.should == (@reg1.external_id.to_s + "," + @reg2.external_id.to_s)
         end
         it "should display the ages for all members (when they are the same)" do
-            @comp.age.should == (@reg1.age.to_s)
+            @comp.age.should == (@reg1.age)
         end
-        it "should display the ages for all members (when they are different)" do
+        it "should display the maximum ages for all members (when they are different)" do
             Delorean.jump 2
             @reg3 = FactoryGirl.create(:registrant, :birthday => Date.new(1980, 02, 10))
             member3 = FactoryGirl.create(:member, :competitor => @comp, :registrant => @reg3)
             @comp.reload
 
-            @comp.age.should == (@reg1.age.to_s + "-" + @reg3.age.to_s)
+            @comp.age.should == @reg3.age
         end
         it "should display '(mixed)', if there are multiple members (even if they are the same gender)" do
           # this is so that the overall placing calculation works properly with mixed-gender groups
