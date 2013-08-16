@@ -5,13 +5,13 @@
 <br />
 <b>NOTE:</b> This will create the competition ONLY<br />
 
-<%= form_tag(create_empty_event_competitions_path(@event)) do %>
+<%= form_for(@competition, :url => create_empty_event_competitions_path(@event)) do |f| %>
   <% if @competition.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
 
       <ul>
-        <% competition.errors.full_messages.each do |msg| %>
+        <% @competition.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
@@ -19,23 +19,23 @@
   <% end %>
 
   <div class="field">
-    <%= label_tag :name %><br />
-    <%= text_field_tag :name, {}, :title => "'All' is a special name which will not be printed on medals" %>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :title => "'All' is a special name which will not be printed on medals" %>
   </div>
   <div class="field">
-    <%= label_tag :has_experts %><br />
-    <%= check_box_tag :has_experts %>
+    <%= f.label :has_experts %><br />
+    <%= f.check_box :has_experts %>
   </div>
   <div class="field">
-    <%= label_tag :has_age_groups %><br />
-    <%= check_box_tag :has_age_groups %>
+    <%= f.label :has_age_groups %><br />
+    <%= f.check_box :has_age_groups %>
   </div>
 
   <div class="field">
-    <%= label_tag :age_group_type_id %>
-    <%= select_tag :age_group_type_id, options_from_collection_for_select(AgeGroupType.all, "id", "to_s"), :include_blank => true  %>
+    <%= f.label :age_group_type_id %>
+    <%= f.select :age_group_type_id, AgeGroupType.all.map{ |agt| [agt, agt.id]}, :include_blank => true  %>
   </div>
   <div class="actions">
-    <%= submit_tag "Create Competition" %>
+    <%= f.submit "Create Competition" %>
   </div>
 <% end %>

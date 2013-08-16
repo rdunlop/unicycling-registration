@@ -63,19 +63,14 @@ class CompetitionsController < ApplicationController
 
   # POST /events/#/create_empty
   def create_empty
-    @competition = Competition.new
-    @competition.name = params[:name]
-    @competition.has_experts = params[:has_experts]
-    @competition.has_age_groups = params[:has_age_groups]
-    @competition.age_group_type_id = params[:age_group_type_id]
+    @competition = Competition.new(params[:competition])
     @competition.event = @event
 
     respond_to do |format|
       if @competition.save
         format.html { redirect_to judging_menu_url(@competition), notice: "Competition created successfully" }
       else
-        # XXX???
-        format.html { redirect_to judging_menu_url(@competition), notice: "ERROR creating competition" }
+        format.html { render action: "new_empty" }
       end
     end
   end
