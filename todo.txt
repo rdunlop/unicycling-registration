@@ -6,7 +6,6 @@ In support of making NAUCC competitors happier:
 
 To Do (in support of UNICON 2014):
 - Update all dependencies to latest versions
-- Get the unit tests running again
 - Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
 - Copy unicon2014 to uniregtest
 - Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
