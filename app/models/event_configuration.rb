@@ -7,10 +7,10 @@ class EventConfiguration < ActiveRecord::Base
   
 
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :waiwer, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
   
-  if EventConfiguration.first.standard_skilsel
+  if EventConfiguration.first.standard_skill
     validates :standard_skill_closed_date, :presence => true
   end
 
