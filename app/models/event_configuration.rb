@@ -1,5 +1,5 @@
 class EventConfiguration < ActiveRecord::Base
-  attr_accessible :artistic_closed_date, :contact_email, :currency, :dates_description, :event_url, :location, :logo_image, :long_name, :short_name, :standard_skill, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :waiver, :waiver_url, :comp_noncomp_url
+  attr_accessible :artistic_closed_date, :contact_email, :currency, :dates_description, :event_url, :iuf, :location, :logo_image, :long_name, :short_name, :standard_skill, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url
 
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
@@ -8,6 +8,8 @@ class EventConfiguration < ActiveRecord::Base
 
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :waiver, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :usa, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :iuf, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
   
   if EventConfiguration.first.standard_skill
@@ -122,6 +124,24 @@ class EventConfiguration < ActiveRecord::Base
       nil
     else
       ec.waiver
+    end
+  end
+
+  def self.usa
+    ec = EventConfiguration.first
+    if ec.nil? or ec.usa.nil?
+      nil
+    else
+      ec.usa
+    end
+  end
+
+  def self.iuf
+    ec = EventConfiguration.first
+    if ec.nil? or ec.iuf.nil?
+      nil
+    else
+      ec.iuf
     end
   end
 

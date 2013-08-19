@@ -85,6 +85,16 @@
       This date defines when the users are no longer able to create/update standard skill routines
     </div>
     <div class="field">
+      <%= f.label :usa %>
+      <%= f.check_box :usa %><br />
+      Enabling this allows USA membership questions.<br />
+    </div>
+    <div class="field">
+      <%= f.label :iuf %>
+      <%= f.check_box :iuf %><br />
+      Enabling this allows IUF membership questions.<br />
+    </div>
+    <div class="field">
       <%= f.label :tshirt_closed_date %>
       <%= f.date_select :tshirt_closed_date %><br />
       Not currently used

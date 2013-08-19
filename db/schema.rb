@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130819114624) do
+ActiveRecord::Schema.define(:version => 20130819122424) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -164,8 +164,8 @@ ActiveRecord::Schema.define(:version => 20130819114624) do
     t.date     "artistic_closed_date"
     t.date     "standard_skill_closed_date"
     t.date     "tshirt_closed_date"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.string   "logo_filename"
     t.string   "logo_type"
     t.boolean  "test_mode"
@@ -173,6 +173,8 @@ ActiveRecord::Schema.define(:version => 20130819114624) do
     t.string   "comp_noncomp_url"
     t.boolean  "waiver"
     t.boolean  "standard_skill",             :default => false
+    t.boolean  "usa",                        :default => false
+    t.boolean  "iuf",                        :default => false
   end
 
   create_table "events", :force => true do |t|

@@ -54,10 +54,12 @@
         <%= f.label :club_contact, "Primary Team or Club Contact" %>
         <%= f.text_field :club_contact, :size => 25  %>
       </span>
-      <span>
-        <%= f.label :usa_member_number, "USA Membership Number" %>
-        <%= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{EventConfiguration.short_name}" %><br />
-      </span>
+      <% if EventConfiguration.usa %>
+        <span>
+          <%= f.label :usa_member_number, "USA Membership Number" %>
+          <%= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{EventConfiguration.short_name}" %><br />
+        </span>
+      <% end %>
     </fieldset>
     <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
 
