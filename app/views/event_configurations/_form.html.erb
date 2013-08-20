@@ -62,7 +62,12 @@
     <div class="field">
       <%= f.label :currency %>
       <%= f.text_field :currency %><br />
-      Not currently used
+      Must be in the form of <%= link_to "Rails options{}", "http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#method-i-number_to_currency" %>. 
+    </div>
+    <div class="field">
+      <%= f.label :currency_code %>
+      <%= f.text_field :currency_code %><br />
+      For Paypal. Three capital letter code for currency.
     </div>
     <div class="field">
       <%= f.label :contact_email %>
@@ -74,10 +79,25 @@
       <%= f.date_select :artistic_closed_date %><br />
       Not currently used
     </div>
+     <div class="field">
+      <%= f.label :standard_skill %>
+      <%= f.check_box :standard_skill %><br />
+      Enabling this allows standard skill.<br />
+    </div>
     <div class="field">
       <%= f.label :standard_skill_closed_date %>
       <%= f.date_select :standard_skill_closed_date %><br />
       This date defines when the users are no longer able to create/update standard skill routines
+    </div>
+    <div class="field">
+      <%= f.label :usa %>
+      <%= f.check_box :usa %><br />
+      Enabling this allows USA membership questions.<br />
+    </div>
+    <div class="field">
+      <%= f.label :iuf %>
+      <%= f.check_box :iuf %><br />
+      Enabling this allows IUF membership questions.<br />
     </div>
     <div class="field">
       <%= f.label :tshirt_closed_date %>

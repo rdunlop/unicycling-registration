@@ -23,6 +23,8 @@ class RegistrantsController < ApplicationController
     @display_invitation_manage_banner = current_user.invitations.permitted.count > 0
     @user = current_user
     @waiver = EventConfiguration.waiver
+    @usa_event = EventConfiguration.usa
+    @iuf_event = EventConfiguration.iuf
 
     respond_to do |format|
       format.html # index.html.erb
@@ -91,6 +93,8 @@ class RegistrantsController < ApplicationController
     @registrant = Registrant.find(params[:id])
     @has_minor = current_user.has_minor?
     @waiver = EventConfiguration.waiver
+    @usa_event = EventConfiguration.usa
+    @iuf_event = EventConfiguration.iuf
 
     respond_to do |format|
       format.html # show.html.erb

@@ -68,3 +68,26 @@ nav ul {
           background: $backgroundhover;
           color: $texthover;
         }
+
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+min-width: 70px;
+}
+
+.competitor,
+.noncompetitor {
+background-color: rgb(36, 130, 181);
+border-color: rgb(26, 120, 171);
+}
+
+.competitor:hover,
+.noncompetitor:hover {
+background-color: rgb(220, 69, 128);
+border-color: rgb(210, 59, 118);
+}
+
+.competitor:active,
+.noncompetitor:active {
+background-color: rgb(230, 79, 138);
+border-color: rrgb(220, 69, 128);
+}

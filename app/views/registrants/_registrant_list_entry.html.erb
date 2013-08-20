@@ -4,7 +4,7 @@
     <%= link_to registrant.name, registrant, :class =>  (registrant.competitor ? "competitor_link" : "noncompetitor_link") %>
   </td>
   <td>
-    <%= number_to_currency(registrant.expenses_total) %>
+    <%= print_formatted_currency(registrant.expenses_total) %>
   </td>
   <td>
     <% if can? :update, registrant %>
@@ -22,7 +22,7 @@
   <td>
     <% amount_owing = registrant.amount_owing %>
     <% if amount_owing > 0 %>
-      <span class="unpaid"><%= number_to_currency(amount_owing) %> Unpaid</span>
+      <span class="unpaid"><%= print_formatted_currency(amount_owing) %> Unpaid</span>
     <% else %>
       <span class="paid">Paid</span>
     <% end %>
