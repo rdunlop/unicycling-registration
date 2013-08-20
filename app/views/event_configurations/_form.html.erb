@@ -62,7 +62,12 @@
     <div class="field">
       <%= f.label :currency %>
       <%= f.text_field :currency %><br />
-      Not currently used
+      Must be in the form of <%= link_to "Rails options{}", "http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#method-i-number_to_currency" %>. 
+    </div>
+    <div class="field">
+      <%= f.label :currency_code %>
+      <%= f.text_field :currency_code %><br />
+      For Paypal. Three capital letter code for currency.
     </div>
     <div class="field">
       <%= f.label :contact_email %>

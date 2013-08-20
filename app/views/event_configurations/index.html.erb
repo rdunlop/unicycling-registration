@@ -12,7 +12,8 @@
     <th>Comp/Non-Comp url</th>
     <th>Start date</th>
     <th>Logo</th>
-    <th>Currency</th>
+    <th>Currency (example)</th>
+    <th>Currency Code</th>
     <th>Contact email</th>
     <th>Artistic closed date</th>
     <th>Standard skill</th>
@@ -39,6 +40,7 @@
     <td><%= event_configuration.start_date %></td>
     <td><%= image_tag(logo_event_configuration_path(event_configuration), :width => "100px") %></td>
     <td><%= event_configuration.currency %></td>
+    <td><%= event_configuration.currency_code %></td>
     <td><%= event_configuration.contact_email %></td>
     <td><%= event_configuration.artistic_closed_date %></td>
     <td><%= event_configuration.standard_skill %></td>
