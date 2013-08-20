@@ -2,19 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.events {
+  width: 100%;
+  border: 1px #A0A0A0 solid;
+  border-collapse: collapse;
+}
+.events tr {
+  border: 1px #A0A0A0 solid;
+}
+
 .event {
   text-align: left;
 }
 .event input[type='text'] {
   width: 140px;
 }
-.event_choices {
-  border: 1px #A0A0A0 solid;
-  margin-top: -1px; // merge with previous line
-}
 .event_choice {
-  display: inline-block;
-  min-width: 275px;
+  padding-left: 20px;
 }
 
 .event_link {
@@ -24,12 +28,12 @@
 
 .tabs {
   text-align:center;
-  }
-  
+}
+
 .ui-tabs {
   margin: 20px 0;
-}  
-  
+}
+
 .ui-tabs-nav a:hover{
   color:#fff;
   background-color:#999;

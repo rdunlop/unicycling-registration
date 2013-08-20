@@ -6,7 +6,12 @@ class EventChoice < ActiveRecord::Base
 
   validates :label, {:presence => true}
   validates :export_name, {:presence => true, :uniqueness => true}
-  validates :cell_type, :inclusion => {:in => %w(boolean text multiple), :message => "%{value} must be either 'boolean' or 'text' or 'multiple'"}
+
+  def self.cell_types
+    ["boolean", "text", "multiple", "best_time"]
+  end
+
+  validates :cell_type, :inclusion => {:in => self.cell_types }
   validates :position, :uniqueness => {:scope => [:event_id]}
   validates :autocomplete, :inclusion => {:in => [true, false] } # because it's a boolean
 

@@ -15,35 +15,35 @@
             <%= link_to "More Info [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link"} %>
           </div>
         <% end %>
-        <% category.events.each do |event| %>
-          <% next unless event.visible %>
-          <div class="event">
-            <div class="event_choices">
-              <span class="event_sign_up event_choice">
-                <%
-                  found_resu = nil
-                  @registrant.registrant_event_sign_ups.each do |resu|
-                    if resu.event_id == event.id
-                      found_resu = resu
-                    end
+        <table class="events">
+          <% category.events.each do |event| %>
+            <% next unless event.visible %>
+            <tr class="event">
+              <%
+                found_resu = nil
+                @registrant.registrant_event_sign_ups.each do |resu|
+                  if resu.event_id == event.id
+                    found_resu = resu
                   end
-                %>
+                end
+              %>
                 <%= f.fields_for :registrant_event_sign_ups, found_resu do |resu| %>
-                  <%= resu.hidden_field :event_id %>
-                  <%= resu.check_box :signed_up, :class => "primary_checkbox" %>
-                  <%= resu.label :signed_up, event.to_s %>
-                  <% if event.event_categories.count == 1 %>
-                    <%= resu.hidden_field :event_category_id, :value => event.event_categories.first.id %>
-                  <% else %>
-                    </span>
-                    <span class="event_choice">
-                    <%= resu.label :event_category_id, 'Category' %>
-                    <%= resu.select :event_category_id, event.event_categories.map{ |ec| [ec.name, ec.id] }, :include_blank => true %>
-                  <% end %>
+                  <td class="event_choice">
+                    <%= resu.hidden_field :event_id %>
+                    <%= resu.check_box :signed_up, :class => "primary_checkbox" %>
+                    <%= resu.label :signed_up, event.to_s %>
+                    <% if event.event_categories.count == 1 %>
+                      <%= resu.hidden_field :event_category_id, :value => event.event_categories.first.id %>
+                    <% else %>
+                      </td>
+                      <td class="event_choice">
+                      <%= resu.label :event_category_id, 'Category' %>
+                      <%= resu.select :event_category_id, event.event_categories.map{ |ec| [ec.name, ec.id] }, :include_blank => true %>
+                    <% end %>
+                  </td>
                 <% end %>
-              </span>
               <% event.event_choices.each do |choice| %>
-                <span class="event_choice">
+                <td class="event_choice">
                   <% 
                     found_rc = nil
 
@@ -55,10 +55,11 @@
                   end %>
                   <%= f.fields_for :registrant_choices, found_rc do |ec| %>
                     <%= ec.hidden_field :event_choice_id %>
-                    <% if ec.object.event_choice.cell_type == "boolean" %>
+                    <% case ec.object.event_choice.cell_type %>
+                    <% when "boolean" %>
                       <%= ec.check_box :value %>
                       <%= ec.label :value, choice.label %>
-                    <% elsif ec.object.event_choice.cell_type == "text" %>
+                    <% when "text" %>
                       <%= ec.label :value, choice.label %>
                       <% if ec.object.event_choice.autocomplete %>
                         <% ac_class = "autocomplete#{choice.id}" %>
@@ -75,16 +76,18 @@
                       <% else %>
                         <%= ec.text_field :value, :placeholder => ec.object.event_choice.label  %>
                       <% end %>
-                    <% elsif ec.object.event_choice.cell_type == "multiple" %>
+                    <% when "multiple" %>
                       <%= ec.label :value, choice.label %>
                       <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true} %>
+                    <% when "best_time" %>
+                        <%= ec.text_field :value, :placeholder => ec.object.event_choice.label  %>
                     <% end %>
                   <% end %>
-                </span>
+                </td>
               <% end %>
-            </div>
-          </div>
+            </tr>
         <% end %>
-      </div>
+      </table>
+    </div>
     <% end %>
   </div>

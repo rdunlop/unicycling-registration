@@ -51,7 +51,7 @@
       </tr>
       <tr>
         <td><%= ec.label :cell_type %></td>
-        <td><%= ec.select :cell_type, ['boolean', 'text', 'multiple', 'category'] %></td>
+        <td><%= ec.select :cell_type, EventChoice.cell_types %></td>
       </tr>
       <tr>
         <td><%= ec.label :multiple_values %></td>

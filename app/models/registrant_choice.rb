@@ -9,14 +9,19 @@ class RegistrantChoice < ActiveRecord::Base
   belongs_to :event_choice
   belongs_to :registrant, :inverse_of => :registrant_choices
 
+  validates_format_of :value, :with => /^([0-9]{1,2}:)+[0-9]{2}$/, :if => "event_choice.try(:cell_type) == 'best_time'", :message => "Must be of the form hh:mm:ss or mm:ss", :allow_blank => true
+
   def has_value?
-    if event_choice.cell_type == "boolean"
+    case event_choice.cell_type
+    when "boolean"
       return self.value != "0"
-    elsif event_choice.cell_type == "multiple"
+    when "multiple"
       return self.value != ""
-    elsif event_choice.cell_type == "category"
+    when "category"
       return !self.event_category.nil?
-    elsif event_choice.cell_type == "text"
+    when "text"
+      return self.value != ""
+    when "best_time"
       return self.value != ""
     else
       return false
@@ -24,7 +29,8 @@ class RegistrantChoice < ActiveRecord::Base
   end
 
   def describe_value
-    if event_choice.cell_type == "boolean"
+    case event_choice.cell_type
+    when "boolean"
       self.value != "0" ? "yes" : "no"
     else
       self.value

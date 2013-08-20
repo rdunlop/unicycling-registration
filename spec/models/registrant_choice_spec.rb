@@ -69,4 +69,31 @@ describe RegistrantChoice do
       @rc.has_value?.should == false
     end
   end
+
+  describe "When a best_time input has a value" do
+    before(:each) do
+      @ec = @rc.event_choice
+      @ec.cell_type = "best_time"
+      @ec.save!
+    end
+    it "has_value with anything" do
+      @rc.value = "3:00"
+      @rc.has_value?.should == true
+      @rc.valid?.should == true
+    end
+    it "has no value with blank" do
+      @rc.value = ""
+      @rc.has_value?.should == false
+      @rc.valid?.should == true
+    end
+    it "accepts numbers with :'s" do
+      @rc.value = "1:23:45"
+      @rc.has_value?.should == true
+      @rc.valid?.should == true
+    end
+    it "doesn't accept numbers without signs" do
+      @rc.value = "12345"
+      @rc.valid?.should == false
+    end
+  end
 end
