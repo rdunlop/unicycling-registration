@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "event_configurations/index" do
   before(:each) do
-    @ec = FactoryGirl.create(:event_configuration)
+    @ec = FactoryGirl.create(:event_configuration, :iuf => false, :waiver => false, :standard_skill => false, :usa => false)
     assign(:event_configurations, [
            @ec
     ])
@@ -19,5 +19,6 @@ describe "event_configurations/index" do
     assert_select "tr>td", :text => "$".to_s, :count => 1
     assert_select "tr>td", :text => @ec.contact_email.to_s, :count => 1
     assert_select "tr>td", :text => true.to_s, :count => 1
+    assert_select "tr>td", :text => false.to_s, :count => 4
   end
 end

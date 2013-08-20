@@ -4,22 +4,23 @@ class EventConfiguration < ActiveRecord::Base
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI::regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
-  
 
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :usa, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :iuf, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
-  
-  if EventConfiguration.first.standard_skill
-    validates :standard_skill_closed_date, :presence => true
-  end
+
+  validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
 
   after_initialize :init
 
   def init
     self.test_mode = true if self.test_mode.nil?
+    self.waiver = true if self.waiver.nil?
+    self.usa = true if self.usa.nil?
+    self.iuf = false if self.iuf.nil?
+    self.standard_skill = true if self.standard_skill.nil?
   end
 
   def logo_image=(input_data)
@@ -93,9 +94,9 @@ class EventConfiguration < ActiveRecord::Base
   def self.standard_skill
     ec = EventConfiguration.first
     if ec.nil? or ec.standard_skill.nil?
-      nil
+      true
     else
-      ec.waiver
+      ec.standard_skill
     end
   end
 
@@ -121,7 +122,7 @@ class EventConfiguration < ActiveRecord::Base
   def self.waiver
     ec = EventConfiguration.first
     if ec.nil? or ec.waiver.nil?
-      nil
+      false
     else
       ec.waiver
     end
@@ -130,7 +131,7 @@ class EventConfiguration < ActiveRecord::Base
   def self.usa
     ec = EventConfiguration.first
     if ec.nil? or ec.usa.nil?
-      nil
+      true
     else
       ec.usa
     end
@@ -139,7 +140,7 @@ class EventConfiguration < ActiveRecord::Base
   def self.iuf
     ec = EventConfiguration.first
     if ec.nil? or ec.iuf.nil?
-      nil
+      false
     else
       ec.iuf
     end
