@@ -1,7 +1,7 @@
 class EventChoice < ActiveRecord::Base
   attr_accessible :cell_type, :event_id, :export_name, :label, :multiple_values, :position, :autocomplete
 
-  belongs_to :event
+  belongs_to :event, :touch => true
   has_many :registrant_choices, :dependent => :destroy
 
   validates :label, {:presence => true}

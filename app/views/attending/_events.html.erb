@@ -85,6 +85,9 @@
                   <% end %>
                 </td>
               <% end %>
+              <% if category.max_number_of_event_choices != event.num_choices %>
+                <td colspan="<%= category.max_number_of_event_choices - event.num_choices %>"></td>
+              <% end %>
             </tr>
         <% end %>
       </table>

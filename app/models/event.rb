@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
   has_many :competitors, :through => :competitions
   has_many :time_results, :through => :competitors
 
-  belongs_to :category, :inverse_of => :events
+  belongs_to :category, :inverse_of => :events, :touch => true
 
   after_save(:touch_competitions)
   after_touch(:touch_competitions)
@@ -81,4 +81,13 @@ class Event < ActiveRecord::Base
   def all_registrants
     signed_up_registrants.intersect competitor_registrants
   end
+
+  def num_choices
+    total = 1
+    if event_categories.count > 1
+      total += 1
+    end
+    total += event_choices.count
+  end
+
 end
