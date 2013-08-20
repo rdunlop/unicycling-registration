@@ -13,7 +13,7 @@
     <% @payments.each do |payment| %>
       <tr>
         <td><%= payment.id %></td>
-        <td><%= number_to_currency(payment.total_amount, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %></td>
+        <td><%= print_formatted_currency(payment.total_amount) %></td>
         <td><%= payment.transaction_id %></td>
         <td><%= payment.completed_date %></td>
         <td><%= link_to 'Show Details', payment %></td>

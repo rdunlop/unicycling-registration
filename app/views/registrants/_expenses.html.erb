@@ -6,7 +6,7 @@
       <% registrant.paid_expense_items.each do |pei| %>
         <tr>
           <td><%= pei %></td>
-          <td><%= number_to_currency(pei.cost, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %></td>
+          <td><%= print_formatted_currency(pei.cost) %></td>
           <td>(Paid)</td>
         </tr>
       <% end %>
@@ -18,7 +18,7 @@
         <% unless reg_item.nil? %>
           <tr>
             <td>Registration Fee</td>
-            <td><%= number_to_currency(reg_item.cost, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %></td>
+            <td><%= print_formatted_currency(reg_item.cost) %></td>
           </tr>
         <% end %>
       <% end %>

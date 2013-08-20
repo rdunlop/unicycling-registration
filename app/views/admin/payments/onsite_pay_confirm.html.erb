@@ -44,7 +44,7 @@
               <%= "(" + pf.object.details + ")"%>
             <% end %>
           </td>
-          <td><%= pf.hidden_field :amount %><%= number_to_currency(pf.object.amount, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %></td>
+          <td><%= pf.hidden_field :amount %><%= print_formatted_currency(pf.object.amount) %></td>
         </tr>
       <% end %>
     </tbody>
