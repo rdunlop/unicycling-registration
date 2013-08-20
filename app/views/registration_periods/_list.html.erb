@@ -17,9 +17,9 @@
                 <td><%=period.end_date.strftime("%b %d, %Y") %></td>
                 <td><b>
                 <% if competitor %>
-                  <%= number_to_currency(period.competitor_expense_item.cost) %>
+                  <%= print_formatted_currency(period.competitor_expense_item.cost) %>
                 <% else %>
-                  <%= number_to_currency(period.noncompetitor_expense_item.cost) %>
+                  <%= print_formatted_currency(period.noncompetitor_expense_item.cost) %>
                 <% end %>
                 </b></td>
             </tr>

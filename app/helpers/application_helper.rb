@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include ActionView::Helpers::NumberHelper
   def setup_registrant_choices(registrant)
     EventChoice.all.each do |ec|
       if registrant.registrant_choices.where({:event_choice_id => ec.id}).empty?
@@ -21,5 +22,9 @@ module ApplicationHelper
 
   def numeric?(val)
     Float(val) != nil rescue false
+  end
+
+  def print_formatted_currency(cost)
+    number_to_currency(cost)
   end
 end

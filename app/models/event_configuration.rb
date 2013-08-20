@@ -1,12 +1,20 @@
 class EventConfiguration < ActiveRecord::Base
-  attr_accessible :artistic_closed_date, :contact_email, :currency, :dates_description, :event_url, :location, :logo_image, :long_name, :short_name, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :waiver, :waiver_url, :comp_noncomp_url
+  attr_accessible :artistic_closed_date, :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location, :logo_image, :long_name, :short_name, :standard_skill, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url
 
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI::regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
-  validates :standard_skill_closed_date, :presence => true
+  
 
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :waiver, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :usa, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :iuf, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
+  
+  if EventConfiguration.first.standard_skill
+    validates :standard_skill_closed_date, :presence => true
+  end
 
   after_initialize :init
 
@@ -82,6 +90,15 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
+  def self.standard_skill
+    ec = EventConfiguration.first
+    if ec.nil? or ec.standard_skill.nil?
+      nil
+    else
+      ec.waiver
+    end
+  end
+
   def self.standard_skill_closed?(today = Date.today)
     ec = EventConfiguration.first
     if ec.nil?
@@ -107,6 +124,42 @@ class EventConfiguration < ActiveRecord::Base
       nil
     else
       ec.waiver
+    end
+  end
+
+  def self.usa
+    ec = EventConfiguration.first
+    if ec.nil? or ec.usa.nil?
+      nil
+    else
+      ec.usa
+    end
+  end
+
+  def self.iuf
+    ec = EventConfiguration.first
+    if ec.nil? or ec.iuf.nil?
+      nil
+    else
+      ec.iuf
+    end
+  end
+
+  def self.currency
+    ec = EventConfiguration.first
+    if ec.nil? or ec.currency.blank?
+      "$"
+    else
+      ec.currency
+    end
+  end
+
+  def self.currency_code
+    ec = EventConfiguration.first
+    if ec.nil? or ec.currency_code.blank?
+      "USD"
+    else
+      ec.currency_code
     end
   end
 
