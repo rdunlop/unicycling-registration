@@ -33,7 +33,7 @@
               <%= "(" + pf.object.details + ")"%>
             <% end %>
           </td>
-          <td><%= pf.hidden_field :amount %><%= number_to_currency(pf.object.amount) %></td>
+          <td><%= pf.hidden_field :amount %><%= number_to_currency(pf.object.amount, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %></td>
           <td>
             <% # XXX http://rubysource.com/complex-rails-forms-with-nested-attributes/  to not need to invert things anymore 
           %>

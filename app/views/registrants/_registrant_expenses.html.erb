@@ -13,14 +13,14 @@
       <% @registrant.paid_expense_items.each do |pei| %>
         <tr>
           <td><%= pei %></td>
-          <td><%= number_to_currency(pei.cost) %></td>
+          <td><%= number_to_currency(pei.cost, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %></td>
           <td>&#x2713;</td>
         </tr>
       <% end %>
       <% @registrant.owing_expense_items.each do |ce| %>
         <tr>
           <td><%= ce %></td>
-          <td><%= number_to_currency(ce.cost) %></td>
+          <td><%= number_to_currency(ce.cost, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %></td>
           <td>&#x2717;</td>
         </tr>
       <% end %>

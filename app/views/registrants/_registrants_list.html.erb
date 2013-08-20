@@ -17,7 +17,7 @@
         <% end %>
         <tr>
           <td colspan="4">Total Amount Owing:</td>
-          <td><%= number_to_currency(total_owing) %></td>
+          <td><%= number_to_currency(total_owing, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %></td>
         </tr>
       </table>
     </fieldset>

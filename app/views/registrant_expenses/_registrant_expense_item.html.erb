@@ -5,7 +5,7 @@
       <%= rfei.object.expense_item %>
     </td>
     <td>
-      <%= number_to_currency(rfei.object.expense_item.cost) %>
+      <%= number_to_currency(rfei.object.expense_item.cost, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %>
       <%= rfei.hidden_field :expense_item_id, :index => index %>
       <%= rfei.hidden_field :id, :index => index %>
     </td>

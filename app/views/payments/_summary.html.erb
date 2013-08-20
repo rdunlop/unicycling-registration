@@ -43,7 +43,7 @@
           <% end %>
         </td>
         <td>
-          <%= number_to_currency(pd.amount) %>
+          <%= number_to_currency(pd.amount, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %>
         </td>
       </tr>
     <% end %>
@@ -51,7 +51,7 @@
   <tfoot>
     <tr>
       <th colspan="2">Total</th>
-      <th><%= number_to_currency(payment.total_amount) %></th>
+      <th><%= number_to_currency(payment.total_amount, unit: "$CAD", separator: ".", delimiter: ",", format: "%n %u") %> <%# replace with currency variable %></th>
     </tr>
   </tfoot>
 </table>
