@@ -1,5 +1,8 @@
 Last Re-Arranged August 13, 2013.
 - Fix validation of expense_items which is allowing people to buy more than the limit (all at once)
+- Fix Best Time to not be a required field
+ - Allow Pickup Teams not to be a required field
+ - Add age validation to the Jr Expert (and Wheel Walk)
 
 
 To Do (in support of UNICON 2014):
