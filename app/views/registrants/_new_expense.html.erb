@@ -10,7 +10,11 @@
     <%= form_for RegistrantExpenseItem.new(:expense_item_id => item.id), :url => single_registrant_expenses_url, :remote => true do |ff| %>
       <%#= ff.error_messages %>
       <%= ff.hidden_field :expense_item_id %>
-      <%= ff.submit 'Add Item', :class => "multiclick" %>
+      <% if item.maximum_reached? %>
+        <%= ff.submit "Sold Out", :disabled => true, :class => "Sold Out" %>
+      <% else %>
+        <%= ff.submit 'Add Item', :class => "multiclick" %>
+      <% end %>
     <% end %>
   </td>
 </tr>

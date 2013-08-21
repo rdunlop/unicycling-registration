@@ -21,11 +21,13 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
     <br />
+    <br />
     <%= f.label :has_details %>
     <%= f.check_box :has_details %>
     <br />
-    <%= f.label :details_label %>
+    <%= f.label :details_label, "Details (What details do we want to ask the user for)" %>
     <%= f.text_field :details_label %>
+    <br />
     <br />
     <%= f.label :cost %>
     <%= f.text_field :cost %>
@@ -35,6 +37,9 @@
     <br />
     <%= f.label :position %>
     <%= f.number_field :position %>
+    <br />
+    <%= f.label :maximum_available %> (How many are available for sale) 
+    <%= f.number_field :maximum_available %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -8,4 +8,6 @@ class PaymentDetail < ActiveRecord::Base
   belongs_to :registrant
   belongs_to :payment, :inverse_of => :payment_details
   belongs_to :expense_item
+
+  scope :completed, includes(:payment).where(:payments => {:completed => true})
 end

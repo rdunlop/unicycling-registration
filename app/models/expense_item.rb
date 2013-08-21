@@ -1,5 +1,5 @@
 class ExpenseItem < ActiveRecord::Base
-  attr_accessible :cost, :description, :export_name, :name, :position, :expense_group_id, :has_details, :details_label
+  attr_accessible :cost, :description, :export_name, :name, :position, :expense_group_id, :has_details, :details_label, :maximum_available
 
   default_scope order('expense_group_id ASC, position ASC')
 
@@ -7,6 +7,7 @@ class ExpenseItem < ActiveRecord::Base
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
 
   has_many :payment_details
+  has_many :registrant_expense_items
 
   belongs_to :expense_group
 
@@ -27,5 +28,17 @@ class ExpenseItem < ActiveRecord::Base
 
   def to_s
     self.expense_group.to_s + " - " + name
+  end
+
+  def num_selected_items
+    registrant_expense_items.count + payment_details.completed.count
+  end
+
+  def maximum_reached?
+    if maximum_available.nil?
+      false
+    else
+      num_selected_items >= maximum_available
+    end
   end
 end

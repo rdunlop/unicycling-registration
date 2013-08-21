@@ -19,7 +19,8 @@ describe ExpenseItemsController do
       :has_details => false,
       :details_label => nil,
       :expense_group_id => @expense_group.id,
-      :position => 1
+      :position => 1,
+      :maximum_available => nil
     }
   end
 

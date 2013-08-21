@@ -1,4 +1,5 @@
 Last Re-Arranged August 13, 2013.
+- Fix validation of expense_items which is allowing people to buy more than the limit (all at once)
 
 
 To Do (in support of UNICON 2014):
@@ -15,7 +16,6 @@ Maximum of 25pp for each classroom.
 
 - Update all dependencies to latest versions
 - Competitors automatically include a T-Shirt
-- Allow registrant to specify their "Best Time" in various Track Races
 - Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
  - Due to the "import" feature I think
 - Copy unicon2014 to uniregtest
@@ -132,3 +132,4 @@ Remove Version table and paper_trail...replace with something else?
 TODO:
 Add ability to download payment and address details?
 Make page views more responsive
+Ask Hugo how to fix the registrant_expense_item <-> Payment_Detail conversion, I don't think I should need to do this...but I don't know a better way.

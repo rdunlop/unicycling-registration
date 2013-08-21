@@ -46,12 +46,35 @@ describe ExpenseItem do
   describe "when an associated payment has been created" do
     before(:each) do
       @payment = FactoryGirl.create(:payment_detail, :expense_item => @item)
+      @item.reload
     end
 
     it "should not be able to destroy this item" do
       ExpenseItem.all.count.should == 1
       @item.destroy
       ExpenseItem.all.count.should == 1
+    end
+
+    it "does not count this entry as a selected_item when the payment is incomplete" do
+      @payment.payment.completed.should == false
+      @item.num_selected_items.should == 0
+    end
+
+    it "counts this entry as a selected_item when the payment is complete" do
+      pay = @payment.payment
+      pay.completed = true
+      pay.save!
+      @item.num_selected_items.should == 1
+    end
+  end
+
+  describe "with associated registrant_expense_items" do
+    before(:each) do
+      @rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @item)
+    end
+    
+    it "should count the entry as a selected_item" do
+      @item.num_selected_items.should == 1
     end
   end
 end

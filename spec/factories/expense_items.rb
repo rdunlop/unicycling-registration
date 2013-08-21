@@ -10,5 +10,6 @@ FactoryGirl.define do
     expense_group # FactoryGirl
     has_details false
     details_label nil
+    maximum_available nil
   end
 end

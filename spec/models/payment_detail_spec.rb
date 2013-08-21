@@ -27,4 +27,15 @@ describe PaymentDetail do
     @pd.expense_item = nil
     @pd.valid?.should == false
   end
+
+  it "is not scoped as completed if not completed" do
+    @pd.payment.completed.should == false
+    PaymentDetail.completed.should == []
+  end
+  it "is scoped as completed when payment is completed" do
+    pay = @pd.payment
+    pay.completed = true
+    pay.save!
+    PaymentDetail.completed.should == [@pd]
+  end
 end

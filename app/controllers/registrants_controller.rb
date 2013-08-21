@@ -140,7 +140,7 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to @registrant, notice: 'Registrant was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "items" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end
     end
