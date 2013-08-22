@@ -172,9 +172,9 @@ class Registrant < ActiveRecord::Base
       event.event_choices.each do |event_choice|
         # using .select instead of .where, because we need to validate not-yet-saved data
         reg_choice = self.registrant_choices.select{|rc| rc.event_choice_id == event_choice.id}.first
+        next if event_choice.optional
         if reg_choice.nil? or not reg_choice.has_value?
           next if event_choice.cell_type == "boolean"
-          next if event_choice.optional
           count_not_selected += 1
         else
           count_selected += 1
