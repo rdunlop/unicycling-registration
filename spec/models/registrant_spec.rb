@@ -489,6 +489,19 @@ describe Registrant do
         @reg.reload
         @reg.valid?.should == false
       end
+      describe "if the second choices is optional" do
+        before(:each) do
+          @ec2.optional = true
+          @ec2.save!
+          @reg.reload
+        end
+        it "should allow empty registarnt_choice" do
+          FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
+          FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "", :registrant => @reg)
+          @reg.reload
+          @reg.valid?.should == true
+        end
+      end
     end
   end
   describe "with an event configuration (and starting date)" do

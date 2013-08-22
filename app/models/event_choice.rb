@@ -1,5 +1,5 @@
 class EventChoice < ActiveRecord::Base
-  attr_accessible :cell_type, :event_id, :export_name, :label, :multiple_values, :position, :autocomplete
+  attr_accessible :cell_type, :event_id, :export_name, :label, :multiple_values, :position, :autocomplete, :optional
 
   belongs_to :event, :touch => true
   has_many :registrant_choices, :dependent => :destroy
@@ -14,11 +14,13 @@ class EventChoice < ActiveRecord::Base
   validates :cell_type, :inclusion => {:in => self.cell_types }
   validates :position, :uniqueness => {:scope => [:event_id]}
   validates :autocomplete, :inclusion => {:in => [true, false] } # because it's a boolean
+  validates :optional, :inclusion => {:in => [true, false] } # because it's a boolean
 
   after_initialize :init
 
   def init
     self.autocomplete = false if self.autocomplete.nil?
+    self.optional = false if self.optional.nil?
   end
 
   def choicename

@@ -31,7 +31,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_selected_items
-    registrant_expense_items.size + payment_details.completed.count
+    registrant_expense_items.count + payment_details.completed.count
   end
 
   def can_i_add?(num_to_add)

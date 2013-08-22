@@ -32,6 +32,11 @@
     <%= f.number_field :position %>
   </div>
   <div class="field">
+    <%= f.label :optional %><br />
+    <%= f.check_box :optional %><br />
+    Enabling this allows the user to not enter data in this field
+  </div>
+  <div class="field">
     <%= f.label :autocomplete %><br />
     <%= f.check_box :autocomplete %><br />
     Enabling this option will cause Auto-complete suggestions to be presented to each registrant.<br />
