@@ -392,7 +392,7 @@ class Registrant < ActiveRecord::Base
     results[:additional] = nil
     event.event_choices.each do |ec|
       my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
-      unless my_val.nil?
+      unless my_val.nil? or !my_val.has_value?
         results[:additional] += " - " unless results[:additional].nil?
         results[:additional] = "" if results[:additional].nil?
         results[:additional] += ec.label + ": " + my_val.describe_value

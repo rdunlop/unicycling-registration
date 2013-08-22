@@ -17,8 +17,6 @@ class RegistrantChoice < ActiveRecord::Base
       return self.value != "0"
     when "multiple"
       return self.value != ""
-    when "category"
-      return !self.event_category.nil?
     when "text"
       return self.value != ""
     when "best_time"

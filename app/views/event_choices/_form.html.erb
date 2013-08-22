@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :cell_type %><br />
-    <%= f.select :cell_type, EventChoice.cell_types, {},{:title => "'Category' uses the event_categories defined on the associated Event for the possible values."} %>
+    <%= f.select :cell_type, EventChoice.cell_types %>
   </div>
   <div class="field">
     <%= f.label :multiple_values %><br />
