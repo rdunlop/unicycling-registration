@@ -185,7 +185,9 @@ describe Registrant do
   describe "with an expense_item" do
     before(:each) do
       @item = FactoryGirl.create(:expense_item)
-      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
+      @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
+      @reg.registrant_expense_items << @rei
+      @rei.save
     end
     it "has expense_items" do
       @reg.registrant_expense_items.should == [@rei]
@@ -205,6 +207,7 @@ describe Registrant do
       before(:each) do
         @rei.details = "These are some details"
         @rei.save!
+        @reg.reload
       end
 
       it "should transfer the text along" do
@@ -536,6 +539,16 @@ describe Registrant do
         @reg.valid?.should == true
         @reg.default_wheel_size.should == WheelSize.find_by_description("20\" Wheel")
       end
+    end
+  end
+  describe "when saving a registrant with multiple (invalid) registrant_choice" do
+    before(:each) do
+      @ei = FactoryGirl.create(:expense_item, :maximum_available => 1)
+    end
+    it "cannot save with 2 registrante_expense_items when only 1 should be possible" do
+      @ei1 = @reg.registrant_expense_items.build({:expense_item_id => @ei.id})
+      @ei2 = @reg.registrant_expense_items.build({:expense_item_id => @ei.id})
+      @reg.valid?.should == false
     end
   end
 end

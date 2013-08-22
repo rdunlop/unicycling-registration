@@ -7,7 +7,7 @@ class ExpenseItem < ActiveRecord::Base
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
 
   has_many :payment_details
-  has_many :registrant_expense_items
+  has_many :registrant_expense_items, :inverse_of => :expense_item
 
   belongs_to :expense_group
 
@@ -31,7 +31,15 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_selected_items
-    registrant_expense_items.count + payment_details.completed.count
+    registrant_expense_items.size + payment_details.completed.count
+  end
+
+  def can_i_add?(num_to_add)
+    if maximum_available.nil?
+      true
+    else
+      num_selected_items + num_to_add <= maximum_available
+    end
   end
 
   def maximum_reached?

@@ -47,6 +47,7 @@ class Registrant < ActiveRecord::Base
   has_many :registrant_expense_items, :include => :expense_item
   has_many :expense_items, :through => :registrant_expense_items
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
+  validate :not_exceeding_expense_item_limits
 
   default_scope where(:deleted => false).order(:bib_number)
 
@@ -404,5 +405,15 @@ class Registrant < ActiveRecord::Base
     end
 
     results
+  end
+
+  def not_exceeding_expense_item_limits
+    expense_items = registrant_expense_items.map{|rei| rei.new_record? ? rei.expense_item : nil}.reject { |ei| ei.nil? }
+    expense_items.uniq.each do |ei|
+      num_ei = expense_items.count(ei)
+      if !ei.can_i_add?(num_ei)
+        errors[:base] << "There are not that many #{ei.to_s} available"
+      end
+    end
   end
 end
