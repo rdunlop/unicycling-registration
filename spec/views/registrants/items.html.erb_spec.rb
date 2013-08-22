@@ -27,6 +27,7 @@ describe "registrants/items" do
   describe "with existing expense_items" do
     before(:each) do
       @item = FactoryGirl.create(:registrant_expense_item, :registrant => @registrant)
+      @registrant.reload
     end
 
     it "should render the list of expense items" do

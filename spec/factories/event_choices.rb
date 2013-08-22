@@ -9,5 +9,6 @@ FactoryGirl.define do
     label "Event_choice chosen"
     position 1
     autocomplete false
+    optional false
   end
 end

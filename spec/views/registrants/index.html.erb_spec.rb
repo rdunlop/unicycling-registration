@@ -29,6 +29,9 @@ describe "registrants/index" do
         FactoryGirl.create(:registrant, :first_name => "Caitlin", :last_name => "Goeres")]
       @shared_registrants = []
       @exp = FactoryGirl.create(:registrant_expense_item, :registrant => @my_registrants[0])
+      @my_registrants.each do |ei|
+        ei.reload
+      end
     end
     it "should render the registrants list" do
       render
