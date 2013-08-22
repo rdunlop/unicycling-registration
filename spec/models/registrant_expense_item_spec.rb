@@ -49,9 +49,12 @@ describe RegistrantExpenseItem do
     it "doesn't allow creating more than the maxiumum" do
       @rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @ei)
       @rei2 = FactoryGirl.create(:registrant_expense_item, :expense_item => @ei)
+      @ei.reload
 
-      @rei3 = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
-      @rei3.valid?.should == false
+      reg = @rei2.registrant
+      reg.reload
+      @rei3 = reg.registrant_expense_items.build({:expense_item_id => @ei.id})
+      reg.valid?.should == false
     end
   end
 end

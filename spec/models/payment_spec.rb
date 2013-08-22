@@ -86,6 +86,7 @@ describe Payment do
       @pd = FactoryGirl.create(:payment_detail, :payment => @pay)
       @reg = @pd.registrant
       @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item)
+      @reg.reload
     end
 
     it "registrant owes for this item" do
@@ -107,6 +108,7 @@ describe Payment do
         before(:each) do
           @rei2 = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item)
           @pay.save
+          @reg.reload
         end
         it "doesn't remove more items from the registrant_expenses" do
           @reg.owing_expense_items.should == [@rei2.expense_item]
