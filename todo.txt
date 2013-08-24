@@ -3,7 +3,6 @@ Last Re-Arranged August 13, 2013.
 
  - Add "# remaining" to the Items page when the items are limited in number
  - Add text describing that we will "expire" lodging reservations if not paid when the next registration period occurs.
-- Allow currency code and code format to be speified by the user in the EventConfiguration
 
 
 To Do (in support of UNICON 2014):

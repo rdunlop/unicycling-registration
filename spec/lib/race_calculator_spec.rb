@@ -6,6 +6,10 @@ describe RaceCalculator do
   def recalc(calc = @calc)
     Rails.cache.clear
     calc.update_all_places
+    @tr1.try(:reload)
+    @tr2.try(:reload)
+    @tr3.try(:reload)
+    @tr4.try(:reload)
   end
 
   describe "when calculating the placing of timed races" do

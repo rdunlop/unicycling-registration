@@ -154,7 +154,7 @@ class EventConfiguration < ActiveRecord::Base
   def self.currency
     ec = EventConfiguration.first
     if ec.nil? or ec.currency.blank?
-      "$"
+      "%u%n USD"
     else
       ec.currency
     end

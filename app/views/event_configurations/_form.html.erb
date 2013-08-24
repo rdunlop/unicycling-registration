@@ -62,7 +62,8 @@
     <div class="field">
       <%= f.label :currency %>
       <%= f.text_field :currency %><br />
-      Must be in the form of <%= link_to "Rails options{}", "http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#method-i-number_to_currency" %>. 
+      For use when printing/displaying currency on the webpage. Defaults to "%u%n USD".
+      Must be in the form of 'format' from: <%= link_to "Rails options{}", "http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#method-i-number_to_currency" %>
     </div>
     <div class="field">
       <%= f.label :currency_code %>

@@ -25,6 +25,6 @@ module ApplicationHelper
   end
 
   def print_formatted_currency(cost)
-    number_to_currency(cost)
+    number_to_currency(cost, format: EventConfiguration.currency)
   end
 end
