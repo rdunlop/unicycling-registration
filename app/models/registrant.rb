@@ -28,6 +28,7 @@ class Registrant < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :free_expense_item, :class_name => "ExpenseItem", :foreign_key => "free_expense_item_id"
+  validates :free_expense_item_id, :presence => true, :if => :free_item_group_is_present?
 
   # may move into another object
   attr_accessible :registrant_choices_attributes
@@ -200,6 +201,14 @@ class Registrant < ActiveRecord::Base
 
   def minor?
     self.age < 18
+  end
+
+  def free_item_group_is_present?
+    if competitor
+      !EventConfiguration.competitor_free_item_expense_group.nil?
+    else
+      !EventConfiguration.noncompetitor_free_item_expense_group.nil?
+    end
   end
 
   def set_age

@@ -109,6 +109,21 @@ describe Registrant do
       @reg.valid?.should == true
     end
   end
+  describe "with an EventConfiguration specifying the free_expense_group" do
+    before(:each) do
+      @eg = FactoryGirl.create(:expense_group)
+      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+      @ec = FactoryGirl.create(:event_configuration, :competitor_free_item_expense_group => @eg)
+    end
+    it "should require a free_expense_item" do
+      @reg.free_expense_item = nil
+      @reg.valid?.should == false
+    end
+    it "should be valid with an expense_item" do
+      @reg.free_expense_item = @ei
+      @reg.valid?.should == true
+    end
+  end
 
   it "requires emergency_contact name" do
     @reg.emergency_name = nil
