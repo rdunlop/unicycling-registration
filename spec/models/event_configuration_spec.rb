@@ -47,6 +47,16 @@ describe EventConfiguration do
     ev.test_mode.should == true
   end
 
+  it "defaults the competitor_free_item_expense_group to nil" do
+    ev = EventConfiguration.new
+    ev.competitor_free_item_expense_group.should be_nil
+  end
+
+  it "defaults the noncompetitor_free_item_expense_group to nil" do
+    ev = EventConfiguration.new
+    ev.noncompetitor_free_item_expense_group.should be_nil
+  end
+
   it "should be open if no periods are defined" do
     EventConfiguration.closed?.should == false
   end

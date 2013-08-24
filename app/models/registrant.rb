@@ -4,6 +4,7 @@ class Registrant < ActiveRecord::Base
   attr_accessible :club, :club_contact, :usa_member_number
   attr_accessible :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone
   attr_accessible :responsible_adult_name, :responsible_adult_phone
+  attr_accessible :free_expense_item_id
 
   validates :first_name, :last_name, :birthday, :gender, :presence => true
   validates :address, :city, :state, :country, :zip, :presence => true
@@ -26,6 +27,7 @@ class Registrant < ActiveRecord::Base
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
   belongs_to :user
+  belongs_to :free_expense_item, :class_name => "ExpenseItem", :foreign_key => "free_expense_item_id"
 
   # may move into another object
   attr_accessible :registrant_choices_attributes

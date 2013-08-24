@@ -1,5 +1,7 @@
 class EventConfiguration < ActiveRecord::Base
-  attr_accessible :artistic_closed_date, :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location, :logo_image, :long_name, :short_name, :standard_skill, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url
+  attr_accessible :artistic_closed_date, :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location, :logo_image
+  attr_accessible :long_name, :short_name, :standard_skill, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url
+  attr_accessible :competitor_free_item_expense_group_id, :noncompetitor_free_item_expense_group_id
 
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
@@ -12,6 +14,9 @@ class EventConfiguration < ActiveRecord::Base
   validates :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
 
   validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
+
+  belongs_to :competitor_free_item_expense_group, :class_name => "ExpenseGroup", :foreign_key => "competitor_free_item_expense_group_id"
+  belongs_to :noncompetitor_free_item_expense_group, :class_name => "ExpenseGroup", :foreign_key => "noncompetitor_free_item_expense_group_id"
 
   after_initialize :init
 
@@ -183,6 +188,24 @@ class EventConfiguration < ActiveRecord::Base
       nil
     else
       ec.event_url
+    end
+  end
+
+  def self.competitor_free_item_expense_group
+    ec = EventConfiguration.first
+    if ec.nil?
+      nil
+    else
+      ec.competitor_free_item_expense_group
+    end
+  end
+
+  def self.noncompetitor_free_item_expense_group
+    ec = EventConfiguration.first
+    if ec.nil?
+      nil
+    else
+      ec.noncompetitor_free_item_expense_group
     end
   end
 

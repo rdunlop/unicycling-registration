@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822030805) do
+ActiveRecord::Schema.define(:version => 20130824152118) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -164,19 +164,21 @@ ActiveRecord::Schema.define(:version => 20130822030805) do
     t.date     "artistic_closed_date"
     t.date     "standard_skill_closed_date"
     t.date     "tshirt_closed_date"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
     t.string   "logo_filename"
     t.string   "logo_type"
     t.boolean  "test_mode"
     t.string   "waiver_url"
     t.string   "comp_noncomp_url"
     t.boolean  "waiver"
-    t.boolean  "standard_skill",             :default => false
-    t.boolean  "usa",                        :default => false
-    t.boolean  "iuf",                        :default => false
+    t.boolean  "standard_skill",                           :default => false
+    t.boolean  "usa",                                      :default => false
+    t.boolean  "iuf",                                      :default => false
     t.string   "currency_code"
     t.text     "currency"
+    t.integer  "competitor_free_item_expense_group_id"
+    t.integer  "noncompetitor_free_item_expense_group_id"
   end
 
   create_table "events", :force => true do |t|
@@ -417,6 +419,7 @@ ActiveRecord::Schema.define(:version => 20130822030805) do
     t.integer  "wheel_size_id"
     t.integer  "age"
     t.boolean  "ineligible",              :default => false
+    t.integer  "free_expense_item_id"
   end
 
   add_index "registrants", ["deleted"], :name => "index_registrants_deleted"

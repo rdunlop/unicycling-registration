@@ -20,6 +20,8 @@ describe "event_configurations/new" do
       assert_select "input#event_configuration_currency", :name => "event_configuration[currency]"
       assert_select "input#event_configuration_contact_email", :name => "event_configuration[contact_email]"
       assert_select "input#event_configuration_test_mode", :name => "event_configuration[test_mode]"
+      assert_select "select#event_configuration_competitor_free_item_expense_group_id", :name => "event_configuration[competitor_free_item_expense_group_id]"
+      assert_select "select#event_configuration_noncompetitor_free_item_expense_group_id", :name => "event_configuration[noncompetitor_free_item_expense_group_id]"
     end
   end
 end
