@@ -33,7 +33,7 @@ describe Notifications do
     end
 
     it "assigns the total_amount" do
-      mail.body.should match(/A payment for \$10.00 has been received/)
+      mail.body.should match(/A payment for \$10.00 USD has been received/)
     end
     it "assigns the full-event-name to @event_name" do
       mail.body.should match(/NAUCC 2140 - Payment Received/)
