@@ -1,7 +1,5 @@
 Last Re-Arranged August 13, 2013.
 - add "representative country"
-- Ne-enable the Payment stuff (was disabled by Scott at NAUCC?)
-- show the free t-shirt on the items page (where I choose items)
  - Add age validation to the Jr Expert (and Wheel Walk)
 
  - Add "# remaining" to the Items page when the items are limited in number
@@ -139,3 +137,4 @@ TODO:
 Add ability to download payment and address details?
 Make page views more responsive
 Ask Hugo how to fix the registrant_expense_item <-> Payment_Detail conversion, I don't think I should need to do this...but I don't know a better way.
+Fix all the separate loops which print the expense items (owed, paid, free), as they appear redundant, and should probably be combined somewhere?....what about the "can delete" actions?

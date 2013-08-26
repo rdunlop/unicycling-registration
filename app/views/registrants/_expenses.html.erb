@@ -3,6 +3,21 @@
   <fieldset>
     <legend><%= registrant.to_s %>'s Expenses</legend>
     <table id="expense_lines">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Cost</th>
+          <th>Paid?</th>
+          <th></th>
+        </tr>
+      </thead>
+      <% unless registrant.free_expense_item.nil? %>
+        <tr>
+          <td><%= registrant.free_expense_item %></td>
+          <td>Free</td>
+          <td>n/a</td>
+         </tr>
+      <% end %>
       <% registrant.paid_expense_items.each do |pei| %>
         <tr>
           <td><%= pei %></td>
