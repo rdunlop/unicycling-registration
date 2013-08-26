@@ -1,4 +1,7 @@
 Last Re-Arranged August 13, 2013.
+- add "representative country"
+- Ne-enable the Payment stuff (was disabled by Scott at NAUCC?)
+- show the free t-shirt on the items page (where I choose items)
  - Add age validation to the Jr Expert (and Wheel Walk)
 
  - Add "# remaining" to the Items page when the items are limited in number
