@@ -46,14 +46,6 @@ describe EventConfigurationsController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested event_configuration as @event_configuration" do
-      event_configuration = EventConfiguration.create! valid_attributes
-      get :show, {:id => event_configuration.to_param}
-      assigns(:event_configuration).should eq(event_configuration)
-    end
-  end
-
   describe "GET new" do
     it "assigns a new event_configuration as @event_configuration" do
       get :new, {}
@@ -85,7 +77,7 @@ describe EventConfigurationsController do
 
       it "redirects to the created event_configuration" do
         post :create, {:event_configuration => valid_attributes}
-        response.should redirect_to(EventConfiguration.last)
+        response.should redirect_to(event_configurations_path)
       end
     end
 
@@ -127,7 +119,7 @@ describe EventConfigurationsController do
       it "redirects to the event_configuration" do
         event_configuration = EventConfiguration.create! valid_attributes
         put :update, {:id => event_configuration.to_param, :event_configuration => valid_attributes}
-        response.should redirect_to(event_configuration)
+        response.should redirect_to(event_configurations_path)
       end
     end
 

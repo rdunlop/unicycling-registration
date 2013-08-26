@@ -180,7 +180,7 @@ Workspace::Application.routes.draw do
     end
   end
 
-  resources :event_configurations do
+  resources :event_configurations, :except => [:show] do
     collection do
       post 'admin'
       post 'super_admin'
