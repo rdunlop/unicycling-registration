@@ -11,12 +11,42 @@
 <div style="display:inline-block;">
   <div class="data_block" style="display:block; max-width:450px;">
     <%= render :partial => "/registrants/summary" %>
+    <% if can? :update, @registrant %>
+        <div class="edit_link_block">
+            <%= link_to 'Edit Registration', edit_registrant_path(@registrant) %>
+        </div>
+    <% end %>
   </div>
   <div class="data_block" style="max-width:450px;">
     <%= render :partial => "/registrants/registrant_expenses" %>
+    <% if can? :update_items, @registrant %>
+        <div class="edit_link_block">
+            <%= link_to 'Edit Items', items_registrant_path(@registrant) %>
+        </div>
+    <% end %>
   </div>
 </div><div class="data_block" style="max-width:550px;">
   <% if @registrant.competitor %>
     <%= render :partial => "/registrants/registrant_events" %>
+    <% if can? :update, @registrant %>
+        <div class="edit_link_block">
+            <%= link_to 'Edit Events', edit_registrant_path(@registrant) %>
+        </div>
+    <% end %>
   <% end %>
 </div>
+<% if @registrant.has_standard_skill? %>
+  <hr class="non_printable" />
+  <div class="edit_link_block">
+    <%= render :partial => "/standard_skill_routines/routine_links", :locals => {:registrant => @registrant} %>
+  </div>
+<% end %>
+<hr class="non_printable" />
+<div class="non_printable">
+  <% if @registrant.competitor %>
+    <%= link_to 'Done', registrants_path, {:class => "competitor registration_button"} %>
+  <% else %>
+    <%= link_to 'Done', registrants_path, {:class => "noncompetitor registration_button"} %>
+  <% end %>
+</div>
+<% if @waiver %><%= render :partial => "/registrants/waiver" %><% end %>
