@@ -19,10 +19,8 @@ Maximum of 25pp for each classroom.
 
 
 - Update all dependencies to latest versions
-- Competitors automatically include a T-Shirt
 - Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
  - Due to the "import" feature I think
-- Copy unicon2014 to uniregtest
 - Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
 - Only allow "Jr Expert" if certain age.
 - Allow "Pickup Teams" to not require a team name
