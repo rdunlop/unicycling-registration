@@ -23,6 +23,7 @@ describe RegistrantsController do
       club: "TCUC",
       club_contact: "Connie",
       usa_member_number: "12345",
+      volunteer: false,
       emergency_name: "Caitlin",
       emergency_relationship: "Sig. Oth.",
       emergency_attending: true,

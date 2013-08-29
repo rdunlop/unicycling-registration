@@ -29,6 +29,11 @@ describe Registrant do
     r.ineligible.should == false
   end
 
+  it "should not be a volunteer by default" do
+    r = Registrant.new
+    r.volunteer.should == false
+  end
+
   it "must have a value for ineligible" do
     @reg.ineligible = nil
     @reg.valid?.should == false

@@ -45,9 +45,15 @@
       <b>Team/Club Contact:</b>
       <%= @registrant.club_contact %>
     </div>
+    <% if EventConfiguration.usa %>
+      <div>
+        <b>USA Member Number:</b>
+        <%= @registrant.usa_member_number %>
+      </div>
+    <% end %>
     <div>
-      <b>USA Member Number:</b>
-      <%= @registrant.usa_member_number %>
+      <b>Volunteer:</b>
+      <%= @registrant.volunteer %>
     </div>
     <div>
       <b>Emergency Contact Name:</b>

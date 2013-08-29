@@ -60,6 +60,10 @@
           <%= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{EventConfiguration.short_name}" %><br />
         </span>
       <% end %>
+      <span>
+        <%= f.label :volunteer, "I am interested in volunteering" %>
+        <%= f.check_box :volunteer, :title => "I accept to be contacted by email by the Organization team" %>
+      </span>
       <% if @registrant.competitor and !EventConfiguration.competitor_free_item_expense_group.nil? %>
         <span>
           <%= f.label :free_expense_item_id, "Free #{EventConfiguration.competitor_free_item_expense_group.to_s}", :class => "required" %>
