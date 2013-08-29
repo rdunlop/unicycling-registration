@@ -32,8 +32,16 @@ class ExpenseItem < ActiveRecord::Base
     self.expense_group.to_s + " - " + name
   end
 
+  # round the taxes to the next highest penny
   def tax
-    cost * (tax_percentage/100.0)
+    raw_tax_cents = (cost * (tax_percentage/100.0)) * 100
+    fractions_of_penny = ((raw_tax_cents).to_i - (raw_tax_cents) != 0)
+
+    tax_cents = raw_tax_cents.to_i
+    if fractions_of_penny
+      tax_cents += 1
+    end
+    tax_cents / 100.0
   end
 
   def total_cost

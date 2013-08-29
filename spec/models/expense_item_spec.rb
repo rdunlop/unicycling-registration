@@ -37,6 +37,19 @@ describe ExpenseItem do
     it "has a total_cost of 5+100" do
       @item.total_cost.should == 105
     end
+
+    describe "with a fractional tax_percentage" do
+      before(:each) do
+        @item.tax_percentage = 14.975
+      end
+      it "rounds up the taxes to the next penny" do
+        @item.tax.should == 14.98
+      end
+      it "rounds up to the next penny even for small fractions" do
+        @item.tax_percentage = 14.001
+        @item.tax.should == 14.01
+      end
+    end
   end
 
   it "must have a name" do
