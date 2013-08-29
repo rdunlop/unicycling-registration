@@ -1,4 +1,6 @@
 Last Re-Arranged August 13, 2013.
+- Add InternetExplorer "placeholder" handler code, so that I can ensure that all browsers support it.
+- IUF Registration cost (15) is required for each Competitor.
 - add "representative country"
  - Add age validation to the Jr Expert (and Wheel Walk)
 
