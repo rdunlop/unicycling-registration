@@ -33,7 +33,7 @@
     <%= f.text_field :cost %>
     <br />
     <%= f.label :tax_percentage %>
-    <%= f.number_field :tax_percentage %>
+    <%= f.number_field :tax_percentage, :step => 0.001 %>
     <br />
     <%= f.label :export_name %>
     <%= f.text_field :export_name %>
