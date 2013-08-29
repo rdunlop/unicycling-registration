@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130824152118) do
+ActiveRecord::Schema.define(:version => 20130829015622) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -209,12 +209,13 @@ ActiveRecord::Schema.define(:version => 20130824152118) do
     t.decimal  "cost"
     t.string   "export_name"
     t.integer  "position"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "expense_group_id"
     t.boolean  "has_details"
     t.string   "details_label"
     t.integer  "maximum_available"
+    t.integer  "tax_percentage",    :default => 0
   end
 
   add_index "expense_items", ["expense_group_id"], :name => "index_expense_items_expense_group_id"

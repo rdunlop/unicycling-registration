@@ -94,7 +94,7 @@ class Registrant < ActiveRecord::Base
       details = item_pair[1]
       pd = payment.payment_details.build()
       pd.registrant = self
-      pd.amount = item.cost
+      pd.amount = item.total_cost
       pd.expense_item = item
       pd.details = details
     end

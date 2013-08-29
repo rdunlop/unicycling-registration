@@ -7,6 +7,9 @@
       <th>Name</th>
       <th>Description</th>
       <th>Cost</th>
+      <th>Tax Percentage</th>
+      <th>Tax (calculated)</th>
+      <th>Total (calculated)</th>
       <th>Export name</th>
       <th>Position</th>
       <th>Max Avail.</th>
@@ -20,6 +23,9 @@
         <td><%= expense_item.name %></td>
         <td><%= expense_item.description %></td>
         <td><%= expense_item.cost %></td>
+        <td><%= expense_item.tax_percentage %></td>
+        <td><%= expense_item.tax %></td>
+        <td><%= expense_item.total_cost %></td>
         <td><%= expense_item.export_name %></td>
         <td><%= expense_item.position %></td>
         <td><%= expense_item.maximum_available %></td>

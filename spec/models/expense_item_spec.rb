@@ -5,8 +5,38 @@ describe ExpenseItem do
     @item = FactoryGirl.create(:expense_item)
   end
 
+  it "must have a tax_percentage" do
+    @item.tax_percentage = nil
+    @item.valid?.should == false
+  end
+
   it "can create from factory" do
     @item.valid?.should == true
+  end
+
+  describe "With a tax percent of 0" do
+    it "has a tax of 0" do
+      @item.tax.should == 0
+    end
+
+    it "has a total_cost equal to the cost" do
+      @item.total_cost.should == @item.cost
+    end
+  end
+
+  describe "With a tax percentage of 5%" do
+    before(:each) do
+      @item.cost = 100
+      @item.tax_percentage = 5
+    end
+
+    it "has a tax of 5$" do
+      @item.tax.should == 5
+    end
+
+    it "has a total_cost of 5+100" do
+      @item.total_cost.should == 105
+    end
   end
 
   it "must have a name" do
@@ -32,6 +62,16 @@ describe ExpenseItem do
   it "should have a default of no details" do
     item = ExpenseItem.new
     item.has_details.should == false
+  end
+
+  it "should default to a tax_percentage of 0" do
+    item = ExpenseItem.new
+    item.tax_percentage.should == 0
+  end
+
+  it "must have a tax percentage >= 0" do
+    @item.tax_percentage = -1
+    @item.valid?.should == false
   end
 
   it "must have an expense group" do
