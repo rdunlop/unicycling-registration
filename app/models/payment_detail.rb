@@ -1,5 +1,5 @@
 class PaymentDetail < ActiveRecord::Base
-  attr_accessible :amount, :payment_id, :registrant_id, :expense_item_id, :details
+  attr_accessible :amount, :payment_id, :registrant_id, :expense_item_id, :details, :free
 
   validates :payment, :registrant_id, :amount, :expense_item, :presence => true
 

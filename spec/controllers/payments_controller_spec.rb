@@ -190,6 +190,7 @@ describe PaymentsController do
                 :registrant_id => 1,
                 :expense_item_id => @ei.id,
                 :details => "Additional Details",
+                :free => true,
                 :amount => 100
              }]
           }}

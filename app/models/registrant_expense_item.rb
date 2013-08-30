@@ -1,5 +1,5 @@
 class RegistrantExpenseItem < ActiveRecord::Base
-  attr_accessible :expense_item_id, :registrant_id, :details
+  attr_accessible :expense_item_id, :registrant_id, :details, :free
 
   belongs_to :registrant
   belongs_to :expense_item, :inverse_of => :registrant_expense_items
