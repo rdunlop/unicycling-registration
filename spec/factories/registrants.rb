@@ -28,7 +28,6 @@ FactoryGirl.define do
     responsible_adult_name nil
     responsible_adult_phone nil
     ineligible false
-    free_expense_item nil
 
     factory :competitor do
       competitor true

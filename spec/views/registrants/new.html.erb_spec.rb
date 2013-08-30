@@ -35,22 +35,6 @@ describe "registrants/new" do
       render
       assert_select "input[value='Continue (Expenses...)']", 1
     end
-    it "doesn't show the free_expense_item" do
-      render
-      assert_select "select#registrant_free_expense_item_id", :name => "registrant[free_expense_item_id]", :count => 0
-    end
-
-    describe "when the eventConfiguration has a free_item_expense_group specified" do
-      before(:each) do
-        @eg = FactoryGirl.create(:expense_group)
-        @eg2 = FactoryGirl.create(:expense_group)
-        @ec = FactoryGirl.create(:event_configuration, :competitor_free_item_expense_group => @eg, :noncompetitor_free_item_expense_group => @eg2)
-      end
-      it "displays the free_item box" do
-        render
-        assert_select "select#registrant_free_expense_item_id", :name => "registrant[free_expense_item_id]", :count => 1
-      end
-    end
   end
 
   describe "as non-competitor" do
@@ -64,23 +48,6 @@ describe "registrants/new" do
     it "displays the 'Save Registration' button" do
       render
       assert_select "input[value='Continue (Expenses...)']", 1
-    end
-    it "doesn't show the free_expense_item" do
-      render
-      assert_select "select#registrant_free_expense_item_id", :name => "registrant[free_expense_item_id]", :count => 0
-    end
-
-    describe "when the eventConfiguration has a free_item_expense_group specified" do
-      before(:each) do
-        @eg = FactoryGirl.create(:expense_group)
-        @eg2 = FactoryGirl.create(:expense_group)
-        @ec = FactoryGirl.create(:event_configuration, :competitor_free_item_expense_group => @eg, :noncompetitor_free_item_expense_group => @eg2)
-      end
-      it "displays the free_item box" do
-        render
-        assert_select "select#registrant_free_expense_item_id", :name => "registrant[free_expense_item_id]"
-        assert_select "select#registrant_free_expense_item_id", :name => "registrant[free_expense_item_id]", :count => 1
-      end
     end
   end
 

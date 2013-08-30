@@ -13,6 +13,7 @@ describe ExpenseGroupsController do
     {
       group_name: "T-Shirts",
       info_url: "http://google.com",
+      free: false,
       visible: true
     }
   end

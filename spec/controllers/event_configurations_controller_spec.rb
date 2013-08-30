@@ -32,8 +32,6 @@ describe EventConfigurationsController do
     {
       standard_skill_closed_date: Date.tomorrow,
       short_name: "something short",
-      competitor_free_item_expense_group_id: nil,
-      noncompetitor_free_item_expense_group_id: nil,
       long_name: "Something Long"
     }
   end

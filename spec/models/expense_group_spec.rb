@@ -27,6 +27,15 @@ describe ExpenseGroup do
     ExpenseGroup.visible.all == [@group]
   end
 
+  it "can have an expense_group without a free_option value" do
+    @group.competitor_free_options = nil
+    @group.valid?.should == true
+  end
+  it "can have an expense_group without a free_option value" do
+    @group.noncompetitor_free_options = nil
+    @group.valid?.should == true
+  end
+
   describe "with expense_items" do
     before(:each) do
       @item2 = FactoryGirl.create(:expense_item, :expense_group => @group, :position => 2)

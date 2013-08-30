@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130829043018) do
+ActiveRecord::Schema.define(:version => 20130830204848) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -165,21 +165,19 @@ ActiveRecord::Schema.define(:version => 20130829043018) do
     t.date     "artistic_closed_date"
     t.date     "standard_skill_closed_date"
     t.date     "tshirt_closed_date"
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at",                                                  :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.string   "logo_filename"
     t.string   "logo_type"
     t.boolean  "test_mode"
     t.string   "waiver_url"
     t.string   "comp_noncomp_url"
     t.boolean  "waiver"
-    t.boolean  "standard_skill",                           :default => false
-    t.boolean  "usa",                                      :default => false
-    t.boolean  "iuf",                                      :default => false
+    t.boolean  "standard_skill",             :default => false
+    t.boolean  "usa",                        :default => false
+    t.boolean  "iuf",                        :default => false
     t.string   "currency_code"
     t.text     "currency"
-    t.integer  "competitor_free_item_expense_group_id"
-    t.integer  "noncompetitor_free_item_expense_group_id"
   end
 
   create_table "events", :force => true do |t|
@@ -199,9 +197,11 @@ ActiveRecord::Schema.define(:version => 20130829043018) do
     t.string   "group_name"
     t.boolean  "visible"
     t.integer  "position"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "info_url"
+    t.string   "competitor_free_options"
+    t.string   "noncompetitor_free_options"
   end
 
   create_table "expense_items", :force => true do |t|
@@ -297,10 +297,11 @@ ActiveRecord::Schema.define(:version => 20130829043018) do
     t.integer  "payment_id"
     t.integer  "registrant_id"
     t.decimal  "amount"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "expense_item_id"
     t.string   "details"
+    t.boolean  "free",            :default => false
   end
 
   add_index "payment_details", ["expense_item_id"], :name => "index_payment_details_expense_item_id"
@@ -361,9 +362,10 @@ ActiveRecord::Schema.define(:version => 20130829043018) do
   create_table "registrant_expense_items", :force => true do |t|
     t.integer  "registrant_id"
     t.integer  "expense_item_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "details"
+    t.boolean  "free",            :default => false
   end
 
   add_index "registrant_expense_items", ["expense_item_id"], :name => "index_registrant_expense_items_expense_item_id"
@@ -421,7 +423,6 @@ ActiveRecord::Schema.define(:version => 20130829043018) do
     t.integer  "wheel_size_id"
     t.integer  "age"
     t.boolean  "ineligible",              :default => false
-    t.integer  "free_expense_item_id"
     t.boolean  "volunteer"
   end
 

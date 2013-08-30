@@ -7,6 +7,8 @@ Last Re-Arranged August 13, 2013.
  - Add "# remaining" to the Items page when the items are limited in number
  - Add text describing that we will "expire" lodging reservations if not paid when the next registration period occurs.
 
+ - Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
+
 
 To Do (in support of UNICON 2014):
 Changing the size of the T-shirt....allow it, but through an e-mail.

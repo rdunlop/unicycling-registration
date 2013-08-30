@@ -108,16 +108,6 @@
       <td>Enabling this allows IUF membership questions.</td>
   </tr>
   <tr>
-      <th><%= f.label :competitor_free_item_expense_group_id %></th>
-      <td><%= f.select :competitor_free_item_expense_group_id, ExpenseGroup.all.map{|eg| [eg.to_s, eg.id] }, :include_blank => true %></td>
-      <td>Setting this causes the competitor to be required to select an item from this expense group (for Free)</td>
-  </tr>
-  <tr>
-      <th><%= f.label :noncompetitor_free_item_expense_group_id %></th>
-      <td><%= f.select :noncompetitor_free_item_expense_group_id, ExpenseGroup.all.map{|eg| [eg.to_s, eg.id] }, :include_blank => true %></td>
-      <td>Setting this causes the NON-competitor to be required to select an item from this expense group (for Free)</td>
-  </tr>
-  <tr>
       <th><%= f.label :tshirt_closed_date %></th>
       <td><%= f.date_select :tshirt_closed_date %></td>
       <td>Not currently used</td>
