@@ -14,7 +14,7 @@
       <% registrant.paid_expense_items.each do |pei| %>
         <tr>
           <td><%= pei %></td>
-          <td><%= print_formatted_currency(pei.cost) %></td>
+          <td>XXX (must be updated with 'free' option) <%= print_formatted_currency(pei.cost) %></td>
           <td>(Paid)</td>
         </tr>
       <% end %>
