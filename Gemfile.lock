@@ -59,6 +59,11 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    carmen (1.0.0)
+      unicode_utils (~> 1.4.0)
+    carmen-rails (1.0.0)
+      carmen (~> 1.0.0.beta2)
+      rails
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     chronic (0.9.1)
@@ -251,6 +256,7 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    unicode_utils (1.4.0)
     unicorn (4.6.3)
       kgio (~> 2.6)
       rack
@@ -274,6 +280,7 @@ DEPENDENCIES
   bullet
   cancan
   capybara
+  carmen-rails
   coffee-rails (~> 3.2.1)
   dalli
   delorean

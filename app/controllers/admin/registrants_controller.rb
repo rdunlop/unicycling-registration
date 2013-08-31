@@ -31,7 +31,7 @@ class Admin::RegistrantsController < Admin::BaseController
 
     names = []
     @registrants.each do |reg|
-      names << "<b>##{reg.bib_number}</b> #{reg.name} \n #{reg.country}"
+      names << "<b>##{reg.bib_number}</b> #{reg.name} \n #{reg.country_residence}"
     end
 
     labels = Prawn::Labels.render(names, :type => "Avery5160") do |pdf, name|

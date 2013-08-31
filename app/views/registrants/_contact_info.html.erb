@@ -10,7 +10,7 @@
               data-address="<%= other_registrant.address %>"
               data-city="<%= other_registrant.city %>"
               data-state="<%= other_registrant.state %>"
-              data-country="<%= other_registrant.country %>"
+              data-country="<%= other_registrant.country_residence %>"
               data-zip="<%= other_registrant.zip %>"
               data-phone="<%= other_registrant.phone %>">Copy Address from <%= other_registrant.name %></a>
           </td>
@@ -42,10 +42,14 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :country, :class => "required" %>
+          <%= f.label :country_residence, :class => "required" %>
         </td>
         <td>
-          <%= f.text_field :country %>
+          <% if EventConfiguration.usa %>
+            <%= f.country_select :country_residence, {priority: %w(US CA)}, prompt: 'ASDF' %>
+          <% else %> 
+            <%= f.country_select :country_residence, prompt: 'ASDF' %>
+          <% end %>
         </td>
       </tr>
       <script>

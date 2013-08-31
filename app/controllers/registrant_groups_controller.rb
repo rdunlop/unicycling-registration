@@ -28,7 +28,7 @@ class RegistrantGroupsController < ApplicationController
       text = "#{registrant.name}\n"
       text += "#{registrant.address}\n"
       text += "#{registrant.city}, #{registrant.state}\n"
-      text += "#{registrant.country}\n"
+      text += "#{registrant.country_residence}\n"
       text += "#{registrant.zip}\n"
       label_text << text
     end
