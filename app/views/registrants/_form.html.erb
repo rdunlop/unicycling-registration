@@ -60,18 +60,10 @@
           <%= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{EventConfiguration.short_name}" %><br />
         </span>
       <% end %>
-      <% if @registrant.competitor and !EventConfiguration.competitor_free_item_expense_group.nil? %>
-        <span>
-          <%= f.label :free_expense_item_id, "Free #{EventConfiguration.competitor_free_item_expense_group.to_s}" %>
-          <%= f.select :free_expense_item_id, EventConfiguration.competitor_free_item_expense_group.expense_items.map{|ei| [ei, ei.id]}, :include_blank => true %><br />
-        </span>
-      <% end %>
-      <% if !@registrant.competitor  and !EventConfiguration.noncompetitor_free_item_expense_group.nil? %>
-        <span>
-          <%= f.label :free_expense_item_id, "Free #{EventConfiguration.noncompetitor_free_item_expense_group.to_s}" %>
-          <%= f.select :free_expense_item_id, EventConfiguration.noncompetitor_free_item_expense_group.expense_items.map{|ei| [ei, ei.id]}, :include_blank => true %><br />
-        </span>
-      <% end %>
+      <span>
+        <%= f.label :volunteer, "I am interested in volunteering" %>
+        <%= f.check_box :volunteer, :title => "I accept to be contacted by email by the Organization team" %>
+      </span>
     </fieldset>
     <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
 

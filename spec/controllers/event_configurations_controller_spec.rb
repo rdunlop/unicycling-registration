@@ -32,8 +32,6 @@ describe EventConfigurationsController do
     {
       standard_skill_closed_date: Date.tomorrow,
       short_name: "something short",
-      competitor_free_item_expense_group_id: nil,
-      noncompetitor_free_item_expense_group_id: nil,
       long_name: "Something Long"
     }
   end
@@ -43,14 +41,6 @@ describe EventConfigurationsController do
       event_configuration = EventConfiguration.create! valid_attributes
       get :index, {}
       assigns(:event_configurations).should eq([event_configuration])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested event_configuration as @event_configuration" do
-      event_configuration = EventConfiguration.create! valid_attributes
-      get :show, {:id => event_configuration.to_param}
-      assigns(:event_configuration).should eq(event_configuration)
     end
   end
 
@@ -85,7 +75,7 @@ describe EventConfigurationsController do
 
       it "redirects to the created event_configuration" do
         post :create, {:event_configuration => valid_attributes}
-        response.should redirect_to(EventConfiguration.last)
+        response.should redirect_to(event_configurations_path)
       end
     end
 
@@ -127,7 +117,7 @@ describe EventConfigurationsController do
       it "redirects to the event_configuration" do
         event_configuration = EventConfiguration.create! valid_attributes
         put :update, {:id => event_configuration.to_param, :event_configuration => valid_attributes}
-        response.should redirect_to(event_configuration)
+        response.should redirect_to(event_configurations_path)
       end
     end
 

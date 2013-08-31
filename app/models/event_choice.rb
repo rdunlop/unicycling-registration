@@ -1,5 +1,5 @@
 class EventChoice < ActiveRecord::Base
-  attr_accessible :cell_type, :event_id, :export_name, :label, :multiple_values, :position, :autocomplete, :optional
+  attr_accessible :cell_type, :event_id, :export_name, :label, :multiple_values, :position, :autocomplete, :optional, :tooltip
 
   belongs_to :event, :touch => true
   has_many :registrant_choices, :dependent => :destroy

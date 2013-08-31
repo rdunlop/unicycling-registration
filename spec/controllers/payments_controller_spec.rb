@@ -38,7 +38,7 @@ describe PaymentsController do
 
   describe "POST fake_complete" do
     it "sets the payment as completed" do
-      payment = FactoryGirl.create(:payment, :user => @user)
+      payment = FactoryGirl.create(:payment, :user => @user, :transaction_id => nil)
       post :fake_complete, {:id => payment.to_param}
       payment.reload
       payment.completed.should == true
@@ -190,6 +190,7 @@ describe PaymentsController do
                 :registrant_id => 1,
                 :expense_item_id => @ei.id,
                 :details => "Additional Details",
+                :free => true,
                 :amount => 100
              }]
           }}

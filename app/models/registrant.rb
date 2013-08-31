@@ -1,10 +1,9 @@
 class Registrant < ActiveRecord::Base
   attr_accessible :address, :birthday, :city, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip
   attr_accessible :user_id, :competitor, :ineligible
-  attr_accessible :club, :club_contact, :usa_member_number
+  attr_accessible :club, :club_contact, :usa_member_number, :volunteer
   attr_accessible :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone
   attr_accessible :responsible_adult_name, :responsible_adult_phone
-  attr_accessible :free_expense_item_id
 
   validates :first_name, :last_name, :birthday, :gender, :presence => true
   validates :address, :city, :state, :country, :zip, :presence => true
@@ -27,8 +26,6 @@ class Registrant < ActiveRecord::Base
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
   belongs_to :user
-  belongs_to :free_expense_item, :class_name => "ExpenseItem", :foreign_key => "free_expense_item_id"
-  validates :free_expense_item_id, :presence => true, :if => :free_item_group_is_present?
 
   # may move into another object
   attr_accessible :registrant_choices_attributes
@@ -94,7 +91,7 @@ class Registrant < ActiveRecord::Base
       details = item_pair[1]
       pd = payment.payment_details.build()
       pd.registrant = self
-      pd.amount = item.cost
+      pd.amount = item.total_cost
       pd.expense_item = item
       pd.details = details
     end
@@ -137,6 +134,7 @@ class Registrant < ActiveRecord::Base
   def init
     self.deleted = false if self.deleted.nil?
     self.ineligible = false if self.ineligible.nil?
+    self.volunteer = false if self.volunteer.nil?
   end
 
   def gender_present
@@ -201,14 +199,6 @@ class Registrant < ActiveRecord::Base
 
   def minor?
     self.age < 18
-  end
-
-  def free_item_group_is_present?
-    if competitor
-      !EventConfiguration.competitor_free_item_expense_group.nil?
-    else
-      !EventConfiguration.noncompetitor_free_item_expense_group.nil?
-    end
   end
 
   def set_age

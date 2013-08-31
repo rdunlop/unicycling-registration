@@ -29,6 +29,11 @@ describe Registrant do
     r.ineligible.should == false
   end
 
+  it "should not be a volunteer by default" do
+    r = Registrant.new
+    r.volunteer.should == false
+  end
+
   it "must have a value for ineligible" do
     @reg.ineligible = nil
     @reg.valid?.should == false
@@ -98,31 +103,6 @@ describe Registrant do
   it "requires country" do
     @reg.country = nil
     @reg.valid?.should == false
-  end
-
-  describe "with an EventConfiguration not specifying the free_expense_group" do
-    before(:each) do
-      @ec = FactoryGirl.create(:event_configuration, :competitor_free_item_expense_group => nil, :noncompetitor_free_item_expense_group => nil)
-    end
-    it "should not require a free_expense_item" do
-      @reg.free_expense_item = nil
-      @reg.valid?.should == true
-    end
-  end
-  describe "with an EventConfiguration specifying the free_expense_group" do
-    before(:each) do
-      @eg = FactoryGirl.create(:expense_group)
-      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
-      @ec = FactoryGirl.create(:event_configuration, :competitor_free_item_expense_group => @eg)
-    end
-    it "should require a free_expense_item" do
-      @reg.free_expense_item = nil
-      @reg.valid?.should == false
-    end
-    it "should be valid with an expense_item" do
-      @reg.free_expense_item = @ei
-      @reg.valid?.should == true
-    end
   end
 
   it "requires emergency_contact name" do

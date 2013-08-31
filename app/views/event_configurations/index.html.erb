@@ -1,61 +1,96 @@
-<h1>Event Configurations</h1>
+<h1>Base Configuration</h1>
 
-<table>
+<table class="alternate">
+  <legend>Effective Configuration</legend>
   <tr>
     <th>Short name</th>
-    <th>Long name</th>
-    <th>Location</th>
-    <th>Dates description</th>
-    <th>Event url</th>
-    <th>Waiver</th>
-    <th>Waiver url</th>
-    <th>Comp/Non-Comp url</th>
-    <th>Start date</th>
-    <th>Logo</th>
-    <th>Currency (example)</th>
-    <th>Currency Code</th>
-    <th>Contact email</th>
-    <th>Artistic closed date</th>
-    <th>Standard skill</th>
-    <th>Standard skill closed date</th>
-    <th>USA</th>
-    <th>IUF</th>
-    <th>Tshirt closed date</th>
-    <th>Test Mode</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <td><%= EventConfiguration.short_name %></td>
   </tr>
-
-<% @event_configurations.each do |event_configuration| %>
   <tr>
-    <td><%= event_configuration.short_name %></td>
-    <td><%= event_configuration.long_name %></td>
-    <td><%= event_configuration.location %></td>
-    <td><%= event_configuration.dates_description %></td>
-    <td><%= event_configuration.event_url %></td>
-    <td><%= event_configuration.waiver %></td>
-    <td><%= event_configuration.waiver_url %></td>
-    <td><%= event_configuration.comp_noncomp_url %></td>
-    <td><%= event_configuration.start_date %></td>
-    <td><%= image_tag(logo_event_configuration_path(event_configuration), :width => "100px") %></td>
-    <td><%= event_configuration.currency %></td>
-    <td><%= event_configuration.currency_code %></td>
-    <td><%= event_configuration.contact_email %></td>
-    <td><%= event_configuration.artistic_closed_date %></td>
-    <td><%= event_configuration.standard_skill %></td>
-    <td><%= event_configuration.standard_skill_closed_date %></td>
-    <td><%= event_configuration.usa %></td>
-    <td><%= event_configuration.iuf %></td>
-    <td><%= event_configuration.tshirt_closed_date %></td>
-    <td><%= event_configuration.test_mode %></td>
-    <td><%= link_to 'Show', event_configuration %></td>
-    <td><%= link_to 'Edit', edit_event_configuration_path(event_configuration) %></td>
-    <td><%= link_to 'Destroy', event_configuration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <th>Long name</th>
+    <td><%= EventConfiguration.long_name %></td>
   </tr>
-<% end %>
+  <tr>
+    <th>Location</th>
+    <td><%= EventConfiguration.first.try(:location) %></td>
+  </tr>
+  <tr>
+    <th>Dates description</th>
+    <td><%= EventConfiguration.first.try(:dates_description) %></td>
+  </tr>
+  <tr>
+    <th>Event url</th>
+    <td><%= EventConfiguration.event_url %></td>
+  </tr>
+  <tr>
+    <th>Waiver</th>
+    <td><%= EventConfiguration.waiver %></td>
+  </tr>
+  <tr>
+    <th>Waiver url</th>
+    <td><%= EventConfiguration.waiver_url %></td>
+  </tr>
+  <tr>
+    <th>Comp/Non-Comp url</th>
+    <td><%= EventConfiguration.comp_noncomp_url %></td>
+  </tr>
+  <tr>
+    <th>Start date</th>
+    <td><%= EventConfiguration.start_date %></td>
+  </tr>
+  <tr>
+    <th>Logo</th>
+    <td><% unless EventConfiguration.first.nil? %>
+            <%= image_tag(logo_event_configuration_path(EventConfiguration.first), :width => "100px") %>
+        <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>Currency (example)</th>
+    <td><%= EventConfiguration.currency %></td>
+  </tr>
+  <tr>
+    <th>Currency Code</th>
+    <td><%= EventConfiguration.currency_code %></td>
+  </tr>
+  <tr>
+    <th>Contact email</th>
+    <td><%= EventConfiguration.contact_email %></td>
+  </tr>
+  <tr>
+    <th>Artistic closed date</th>
+    <td><%= EventConfiguration.first.try(:artistic_closed_date) %></td>
+  </tr>
+  <tr>
+    <th>Standard skill</th>
+    <td><%= EventConfiguration.standard_skill %></td>
+  </tr>
+  <tr>
+    <th>Standard skill closed date</th>
+    <td><%= EventConfiguration.first.try(:standard_skill_closed_date) %></td>
+  </tr>
+  <tr>
+    <th>USA</th>
+    <td><%= EventConfiguration.usa %></td>
+  </tr>
+  <tr>
+    <th>IUF</th>
+    <td><%= EventConfiguration.iuf %></td>
+  </tr>
+  <tr>
+    <th>Tshirt closed date</th>
+    <td><%= EventConfiguration.first.try(:tshirt_closed_date) %></td>
+  </tr>
+  <tr>
+    <th>Test Mode</th>
+    <td><%= EventConfiguration.first.try(:test_mode) %></td>
+  </tr>
 </table>
 
-<br />
-
-<%= link_to 'New Event configuration', new_event_configuration_path %>
+<% if @event_configurations.count == 0 %>
+    <%= link_to 'New Event configuration', new_event_configuration_path %>
+<% else %>
+    <% event_configuration = @event_configurations.first %>
+    <%= link_to 'Edit', edit_event_configuration_path(event_configuration) %>
+    <%= link_to 'Destroy', event_configuration, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

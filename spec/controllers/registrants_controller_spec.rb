@@ -23,6 +23,7 @@ describe RegistrantsController do
       club: "TCUC",
       club_contact: "Connie",
       usa_member_number: "12345",
+      volunteer: false,
       emergency_name: "Caitlin",
       emergency_relationship: "Sig. Oth.",
       emergency_attending: true,
@@ -262,7 +263,7 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       put :update_items, {:id => registrant.to_param, :registrant => {
         :registrant_expense_items_attributes => {
-        "1234" => { :expense_item_id => ei.id.to_s, :id => "", :details => "Hello Werld", :_destroy => "0" }
+        "1234" => { :expense_item_id => ei.id.to_s, :id => "", :details => "Hello Werld", :_destroy => "0", :free => false }
       } }}
       registrant.reload
       registrant.registrant_expense_items.count.should == 1

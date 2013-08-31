@@ -11,116 +11,113 @@
     </div>
   <% end %>
 
-  <div class="config_fields">
-    <div>
-      <%= f.label :short_name %>
-      <%= f.text_field :short_name %><br />
-      Used on the Registration page.
-    </div>
-    <div>
-      <%= f.label :long_name %>
-      <%= f.text_field :long_name %><br />
-    </div>
-    <div class="field">
-      <%= f.label :location %>
-      <%= f.text_field :location %><br />
-    </div>
-    <div class="field">
-      <%= f.label :dates_description %>
-      <%= f.text_field :dates_description %><br />
-    </div>
-    <div class="field">
-      <%= f.label :event_url %>
-      <%= f.url_field :event_url %><br />
-      Links from the Menubar logo to this URL.
-    </div>
-    <div class="field">
-      <%= f.label :waiver %>
-      <%= f.check_box :waiver %><br />
-      Enabling this allows all the waiver features and text to display.<br />
-    </div>
-    <div class="field">
-      <%= f.label :waiver_url %>
-      <%= f.url_field :waiver_url %><br />
-      Currently unused
-    </div>
-    <div class="field">
-      <%= f.label :comp_noncomp_url %>
-      <%= f.url_field :comp_noncomp_url %><br />
-      A link to text that describes the difference between Comptitors and Non-comptitors.
-    </div>
-    <div class="field">
-      <%= f.label :start_date %>
-      <%= f.date_select :start_date %><br />
-      This date is used to calculate the "age" of each registrant.
-    </div>
-    <div class="field">
-      <%= f.label :logo_image %>
-      <%= f.file_field :logo_image %><br />
-      This logo is displayed at the top of the site.
-    </div>
-    <div class="field">
-      <%= f.label :currency %>
-      <%= f.text_field :currency %><br />
-      For use when printing/displaying currency on the webpage. Defaults to "%u%n USD".
-      Must be in the form of 'format' from: <%= link_to "Rails options{}", "http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#method-i-number_to_currency" %>
-    </div>
-    <div class="field">
-      <%= f.label :currency_code %>
-      <%= f.text_field :currency_code %><br />
-      For Paypal. Three capital letter code for currency.
-    </div>
-    <div class="field">
-      <%= f.label :contact_email %>
-      <%= f.email_field :contact_email %><br />
-      This e-mail address will be listed on the "Help" page<br />
-    </div>
-    <div class="field">
-      <%= f.label :artistic_closed_date %>
-      <%= f.date_select :artistic_closed_date %><br />
-      Not currently used
-    </div>
-     <div class="field">
-      <%= f.label :standard_skill %>
-      <%= f.check_box :standard_skill %><br />
-      Enabling this allows standard skill.<br />
-    </div>
-    <div class="field">
-      <%= f.label :standard_skill_closed_date %>
-      <%= f.date_select :standard_skill_closed_date %><br />
-      This date defines when the users are no longer able to create/update standard skill routines
-    </div>
-    <div class="field">
-      <%= f.label :usa %>
-      <%= f.check_box :usa %><br />
-      Enabling this allows USA membership questions.<br />
-    </div>
-    <div class="field">
-      <%= f.label :iuf %>
-      <%= f.check_box :iuf %><br />
-      Enabling this allows IUF membership questions.<br />
-    </div>
-    <div class="field">
-      <%= f.label :competitor_free_item_expense_group_id %>
-      <%= f.select :competitor_free_item_expense_group_id, ExpenseGroup.all.map{|eg| [eg.to_s, eg.id] }, :include_blank => true %>
-      Setting this causes the competitor to be required to select an item from this expense group (for Free)<br />
-    </div>
-    <div class="field">
-      <%= f.label :noncompetitor_free_item_expense_group_id %>
-      <%= f.select :noncompetitor_free_item_expense_group_id, ExpenseGroup.all.map{|eg| [eg.to_s, eg.id] }, :include_blank => true %>
-      Setting this causes the NON-competitor to be required to select an item from this expense group (for Free)<br />
-    </div>
-    <div class="field">
-      <%= f.label :tshirt_closed_date %>
-      <%= f.date_select :tshirt_closed_date %><br />
-      Not currently used
-    </div>
-    <div class="field">
-      <%= f.label :test_mode %>
-      <%= f.check_box :test_mode %><br />
-      Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.<br />
-    </div>
-  </div>
+<table class="alternate">
+  <thead>
+    <tr>
+        <th>Field</th>
+        <th>Value</th>
+        <th>Description</th>
+     </tr>
+  </thead>
+  <tr>
+    <th><%= f.label :short_name %></th>
+    <td><%= f.text_field :short_name %></td>
+    <td>Used on the Registration page.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :long_name %></th>
+      <td><%= f.text_field :long_name %></td>
+  </tr>
+  <tr>
+      <th><%= f.label :location %></th>
+      <td><%= f.text_field :location %></td>
+  </tr>
+  <tr>
+      <th><%= f.label :dates_description %></th>
+      <td><%= f.text_field :dates_description %></td>
+  </tr>
+  <tr>
+      <th><%= f.label :event_url %></th>
+      <td><%= f.url_field :event_url %></td>
+      <td>Links from the Menubar logo to this URL.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :waiver %></th>
+      <td><%= f.check_box :waiver %></td>
+      <td>Enabling this allows all the waiver features and text to display.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :waiver_url %></th>
+      <td><%= f.url_field :waiver_url %></td>
+      <td>Currently unused</td>
+  </tr>
+  <tr>
+      <th><%= f.label :comp_noncomp_url %></th>
+      <td><%= f.url_field :comp_noncomp_url %></td>
+      <td>A link to text that describes the difference between Comptitors and Non-comptitors.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :start_date %></th>
+      <td><%= f.date_select :start_date %></td>
+      <td>This date is used to calculate the "age" of each registrant.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :logo_image %></th>
+      <td><%= f.file_field :logo_image %></td>
+      <td>This logo is displayed at the top of the site.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :currency %></th>
+      <td><%= f.text_field :currency %></td>
+      <td>For use when printing/displaying currency on the webpage. Defaults to "%u%n USD".<br />
+      Must be in the form of 'format' from: <%= link_to "Rails options{}", "http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#method-i-number_to_currency" %></td>
+  </tr>
+  <tr>
+      <th><%= f.label :currency_code %></th>
+      <td><%= f.text_field :currency_code %></td>
+      <td>For Paypal. Three capital letter code for currency.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :contact_email %></th>
+      <td><%= f.email_field :contact_email %></td>
+      <td>This e-mail address will be listed on the "Help" page</td>
+  </tr>
+  <tr>
+      <th><%= f.label :artistic_closed_date %></th>
+      <td><%= f.date_select :artistic_closed_date %></td>
+      <td>Not currently used</td>
+  </tr>
+  <tr>
+      <th><%= f.label :standard_skill %></th>
+      <td><%= f.check_box :standard_skill %></td>
+      <td>Enabling this allows standard skill.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :standard_skill_closed_date %></th>
+      <td><%= f.date_select :standard_skill_closed_date %></td>
+      <td>This date defines when the users are no longer able to create/update standard skill routines</td>
+  </tr>
+  <tr>
+      <th><%= f.label :usa %></th>
+      <td><%= f.check_box :usa %></td>
+      <td>Enabling this allows USA membership questions.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :iuf %></th>
+      <td><%= f.check_box :iuf %></td>
+      <td>Enabling this allows IUF membership questions.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :tshirt_closed_date %></th>
+      <td><%= f.date_select :tshirt_closed_date %></td>
+      <td>Not currently used</td>
+  </tr>
+  <tr>
+      <th><%= f.label :test_mode %></th>
+      <td><%= f.check_box :test_mode %></td>
+      <td>Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.</td>
+  </tr>
+</table>
   <div class="actions">
     <%= f.submit %>
   </div>

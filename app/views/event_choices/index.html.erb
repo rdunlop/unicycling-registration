@@ -16,6 +16,7 @@
     </tr>
 
     <% @event_choices.each do |event_choice| %>
+      <% next if event_choice.new_record? %>
       <tr>
         <td><%= event_choice.export_name %></td>
         <td><%= event_choice.cell_type %></td>

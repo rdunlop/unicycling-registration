@@ -32,6 +32,7 @@ describe EventChoicesController do
     export_name: "100m",
     cell_type: "boolean",
     autocomplete: false,
+    tooltip: "The tooltip",
     label: "My event choice",
     optional: false
     }

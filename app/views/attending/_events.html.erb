@@ -58,9 +58,9 @@
                     <% case ec.object.event_choice.cell_type %>
                     <% when "boolean" %>
                       <%= ec.check_box :value %>
-                      <%= ec.label :value, choice.label %>
+                      <%= ec.label :value, choice.label, :title => choice.tooltip %>
                     <% when "text" %>
-                      <%= ec.label :value, choice.label %>
+                      <%= ec.label :value, choice.label, :title => choice.tooltip %>
                       <% if ec.object.event_choice.autocomplete %>
                         <% ac_class = "autocomplete#{choice.id}" %>
                         <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :class => ac_class %>
@@ -77,10 +77,10 @@
                         <%= ec.text_field :value, :placeholder => ec.object.event_choice.label  %>
                       <% end %>
                     <% when "multiple" %>
-                      <%= ec.label :value, choice.label %>
+                      <%= ec.label :value, choice.label, :title => choice.tooltip %>
                       <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true} %>
                     <% when "best_time" %>
-                        <%= ec.text_field :value, :placeholder => ec.object.event_choice.label  %>
+                      <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip  %>
                     <% end %>
                   <% end %>
                 </td>

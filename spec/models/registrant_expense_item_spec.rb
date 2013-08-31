@@ -3,6 +3,9 @@ require 'spec_helper'
 describe RegistrantExpenseItem do
   before(:each) do
     @rei = FactoryGirl.create(:registrant_expense_item)
+    @ei = @rei.expense_item
+    @ei.cost = 20
+    @ei.save
   end
   it "can be created by factory" do
     @rei.valid?.should == true
@@ -14,6 +17,28 @@ describe RegistrantExpenseItem do
   it "must have expense_item" do
     @rei.expense_item_id = nil
     @rei.valid?.should == false
+  end
+
+  it "displays a cost_string" do
+    @rei.cost_s.should == "$20.00 USD"
+  end
+  describe "when the item is free" do
+    before(:each) do
+      @rei.free = true
+      @rei.save
+    end
+
+    it "displays the cost string as free" do
+      @rei.cost_s.should == "Free"
+    end
+
+    it "has a cost of 0" do
+      @rei.cost.should == 0
+    end
+
+    it "has 0 taxes" do
+      @rei.tax.should == 0
+    end
   end
   it "must associate with the registrant" do
     @reg = FactoryGirl.create(:registrant)

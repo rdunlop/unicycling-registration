@@ -1,8 +1,13 @@
 Last Re-Arranged August 13, 2013.
+- Add InternetExplorer "placeholder" handler code, so that I can ensure that all browsers support it.
+- IUF Registration cost (15) is required for each Competitor.
+- add "representative country"
  - Add age validation to the Jr Expert (and Wheel Walk)
 
  - Add "# remaining" to the Items page when the items are limited in number
  - Add text describing that we will "expire" lodging reservations if not paid when the next registration period occurs.
+
+ - Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
 
 
 To Do (in support of UNICON 2014):
@@ -20,6 +25,7 @@ Maximum of 25pp for each classroom.
 - Update all dependencies to latest versions
 - Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
  - Due to the "import" feature I think
+- Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
 - Only allow "Jr Expert" if certain age.
 - Don't allow registering in "A" for both Basketball and Hockey
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
@@ -132,3 +138,4 @@ TODO:
 Add ability to download payment and address details?
 Make page views more responsive
 Ask Hugo how to fix the registrant_expense_item <-> Payment_Detail conversion, I don't think I should need to do this...but I don't know a better way.
+Fix all the separate loops which print the expense items (owed, paid, free), as they appear redundant, and should probably be combined somewhere?....what about the "can delete" actions?

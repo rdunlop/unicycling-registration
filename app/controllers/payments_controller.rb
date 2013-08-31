@@ -66,7 +66,8 @@ class PaymentsController < ApplicationController
 
   def fake_complete
     @payment.completed = true
-    @payment.save
+    @payment.note = "Fake_Complete"
+    @payment.save!
 
     respond_to do |format|
       format.html { redirect_to registrants_path }

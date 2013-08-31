@@ -23,17 +23,6 @@ class EventConfigurationsController < ApplicationController
     end
   end
 
-  # GET /event_configurations/1
-  # GET /event_configurations/1.json
-  def show
-    @event_configuration = EventConfiguration.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @event_configuration }
-    end
-  end
-
   # GET /event_configurations/new
   # GET /event_configurations/new.json
   def new
@@ -57,7 +46,7 @@ class EventConfigurationsController < ApplicationController
 
     respond_to do |format|
       if @event_configuration.save
-        format.html { redirect_to @event_configuration, notice: 'Event configuration was successfully created.' }
+        format.html { redirect_to event_configurations_path, notice: 'Event configuration was successfully created.' }
         format.json { render json: @event_configuration, status: :created, location: @event_configuration }
       else
         format.html { render action: "new" }
@@ -73,7 +62,7 @@ class EventConfigurationsController < ApplicationController
 
     respond_to do |format|
       if @event_configuration.update_attributes(params[:event_configuration])
-        format.html { redirect_to @event_configuration, notice: 'Event configuration was successfully updated.' }
+        format.html { redirect_to event_configurations_path, notice: 'Event configuration was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

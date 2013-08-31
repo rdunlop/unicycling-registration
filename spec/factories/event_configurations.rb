@@ -20,7 +20,5 @@ FactoryGirl.define do
     tshirt_closed_date "2013-5-10"
     comp_noncomp_url nil
     test_mode true
-    competitor_free_item_expense_group nil
-    noncompetitor_free_item_expense_group nil
   end
 end
