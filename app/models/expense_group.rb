@@ -1,5 +1,6 @@
 class ExpenseGroup < ActiveRecord::Base
   attr_accessible :group_name, :position, :visible, :info_url
+  attr_accessible :competitor_free_options, :noncompetitor_free_options
 
   validates :group_name, :presence => true
   validates :visible, :inclusion => { :in => [true, false] } # because it's a boolean

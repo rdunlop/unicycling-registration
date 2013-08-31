@@ -19,17 +19,10 @@ describe RegistrantExpenseItem do
     @rei.valid?.should == false
   end
 
-  it "displays a cost_string" do
-    @rei.cost_s.should == "$20.00 USD"
-  end
   describe "when the item is free" do
     before(:each) do
       @rei.free = true
       @rei.save
-    end
-
-    it "displays the cost string as free" do
-      @rei.cost_s.should == "Free"
     end
 
     it "has a cost of 0" do

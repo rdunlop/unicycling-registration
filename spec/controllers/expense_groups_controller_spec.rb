@@ -13,7 +13,8 @@ describe ExpenseGroupsController do
     {
       group_name: "T-Shirts",
       info_url: "http://google.com",
-      free: false,
+      competitor_free_options: nil,
+      noncompetitor_free_options: nil,
       visible: true
     }
   end

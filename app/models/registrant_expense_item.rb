@@ -11,13 +11,6 @@ class RegistrantExpenseItem < ActiveRecord::Base
   validates :expense_item, :registrant, :presence => true
   validates_associated :registrant
 
-
-  def cost_s
-    return "Free" if free
-
-    print_formatted_currency(expense_item.cost)
-  end
-
   def cost
     return 0 if free
 

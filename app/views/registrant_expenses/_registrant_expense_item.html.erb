@@ -5,7 +5,7 @@
       <%= rfei.object.expense_item %>
     </td>
     <td>
-      <%= rfei.object.cost_s %>
+      <%= print_formatted_currency(rfei.object.cost) %>
       <%= rfei.hidden_field :expense_item_id, :index => index %>
       <%= rfei.hidden_field :free, :index => index %>
       <%= rfei.hidden_field :id, :index => index %>
