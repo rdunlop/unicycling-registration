@@ -47,26 +47,24 @@
         </td>
         <td>
           <% if EventConfiguration.usa %>
-            <%= f.country_select :country_residence, {priority: %w(US CA)}, prompt: 'ASDF' %>
+            <%= f.country_select :country_residence, priority: %w(US CA), prompt: 'XXX' %>
           <% else %> 
-            <%= f.country_select :country_residence, prompt: 'ASDF' %>
-          <% end %>
-        </td>
-        <td>
-          <% if EventConfiguration.usa %>
-            <%= f.country_select :country_representing, {priority: %w(US CA)}, prompt: 'ASDF' %>
-          <% else %> 
-            <%= f.country_select :country_representing, prompt: 'ASDF' %>
+            <%= f.country_select :country_residence, prompt: 'XXX' %>
           <% end %>
         </td>
       </tr>
-      <script>
-        $(function() {
-          $("#registrant_country").autocomplete({
-            source: ["Canada", "United States"]
-          });
-        });
-      </script>
+      <tr>
+        <td>
+          <%= f.label :country_representing %>
+        </td>
+        <td>
+          <% if EventConfiguration.usa %>
+            <%= f.country_select :country_representing, priority: %w(US CA), prompt: 'XXX' %>
+          <% else %> 
+            <%= f.country_select :country_representing, prompt: 'XXX' %>
+          <% end %>
+        </td>
+      </tr>
       <tr>
         <td>
           <%= f.label :zip, :class => "required" %>
