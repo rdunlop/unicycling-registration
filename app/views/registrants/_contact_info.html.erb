@@ -10,7 +10,8 @@
               data-address="<%= other_registrant.address %>"
               data-city="<%= other_registrant.city %>"
               data-state="<%= other_registrant.state %>"
-              data-country="<%= other_registrant.country_residence %>"
+              data-country-residence="<%= other_registrant.country_residence %>"
+              data-country-representing="<%= other_registrant.country_representing %>"
               data-zip="<%= other_registrant.zip %>"
               data-phone="<%= other_registrant.phone %>">Copy Address from <%= other_registrant.name %></a>
           </td>
@@ -49,6 +50,13 @@
             <%= f.country_select :country_residence, {priority: %w(US CA)}, prompt: 'ASDF' %>
           <% else %> 
             <%= f.country_select :country_residence, prompt: 'ASDF' %>
+          <% end %>
+        </td>
+        <td>
+          <% if EventConfiguration.usa %>
+            <%= f.country_select :country_representing, {priority: %w(US CA)}, prompt: 'ASDF' %>
+          <% else %> 
+            <%= f.country_select :country_representing, prompt: 'ASDF' %>
           <% end %>
         </td>
       </tr>
