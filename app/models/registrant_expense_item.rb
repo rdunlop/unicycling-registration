@@ -1,6 +1,4 @@
 class RegistrantExpenseItem < ActiveRecord::Base
-  include ApplicationHelper # for print_formatted_currency
-
   attr_accessible :expense_item_id, :registrant_id, :details, :free
 
   belongs_to :registrant
@@ -23,4 +21,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
     expense_item.tax
   end
 
+  def total_cost
+    cost + tax
+  end
 end

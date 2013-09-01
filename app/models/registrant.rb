@@ -85,13 +85,13 @@ class Registrant < ActiveRecord::Base
 
   # Creates the registrant owing
   def build_owing_payment(payment)
-    items = owing_expense_items_with_details
-    items.each do |item_pair|
-      item = item_pair[0]
-      details = item_pair[1]
+    reg_items = owing_registrant_expense_items_with_details
+    reg_items.each do |reg_item|
+      item = reg_item.expense_item
+      details = reg_item.details
       pd = payment.payment_details.build()
       pd.registrant = self
-      pd.amount = item.total_cost
+      pd.amount = reg_item.total_cost
       pd.expense_item = item
       pd.details = details
     end
@@ -300,18 +300,19 @@ class Registrant < ActiveRecord::Base
   # returns a list of expense_items that this registrant hasn't paid for
   # INCLUDING the registration cost
   def owing_expense_items
-    items = self.owing_expense_items_with_details.map{|eid| eid.first}
+    items = self.owing_registrant_expense_items.map{|eid| eid.expense_item}
   end
 
   # pass back the details too, so that we don't mis-associate them when building the payment
   def owing_expense_items_with_details
-    items = self.registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
+    items = self.owing_registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
+  end
 
-    unless reg_paid?
-      reg_item = registration_item
-      unless reg_item.nil?
-        items << [registration_item, nil]
-      end
+  def owing_registrant_expense_items
+    items = self.registrant_expense_items
+
+    if not reg_paid? and not registration_item.nil?
+      items << RegistrantExpenseItem.new({:registrant_id => self.id, :expense_item_id => registration_item.id})
     end
     items
   end

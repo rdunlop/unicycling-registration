@@ -193,6 +193,7 @@ describe Registrant do
       @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
       @reg.registrant_expense_items << @rei
       @rei.save
+      @reg.reload
     end
     it "has expense_items" do
       @reg.registrant_expense_items.should == [@rei]
@@ -203,6 +204,7 @@ describe Registrant do
     end
     it "lists the item as an owing_expense_item" do
       @reg.owing_expense_items.should == [@item]
+      @reg.owing_registrant_expense_items.first.should == @rei
     end
     it "lists no details for its items" do
       @reg.owing_expense_items_with_details.should == [[@item, nil]]
@@ -319,7 +321,7 @@ describe Registrant do
         @comp.registration_item.should == @comp_exp
       end
       it "lists the item as an owing_expense_item" do
-        @comp.owing_expense_items.should == [@comp_exp]
+        @comp.owing_registrant_expense_items.first.expense_item.should == @comp_exp
       end
     end
 
