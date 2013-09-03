@@ -186,7 +186,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% end %>
 
           <% unless current_user.nil? %>
-            <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+            <li id="sign-out"><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
           <% end %>
       <% end %>
     </ul>

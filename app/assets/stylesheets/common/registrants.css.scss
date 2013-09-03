@@ -10,15 +10,12 @@ $noncompetitor_hover: #3487C9;
 
 .competitor {
   background-color: $competitor;
-  border-color: #208d74;
 }
 .competitor:hover {
   background-color: $competitor_hover;
-  border-color: #0d7733;
 }
 .competitor:active {
   background-color: #55ff55;
-  border-color: #205f3c;
 }
 
 .competitor_link {
@@ -38,15 +35,12 @@ $noncompetitor_hover: #3487C9;
 
 .noncompetitor {
   background-color: $noncompetitor;
-  border-color: #2F7BB6;
 }
 .noncompetitor:hover {
   background-color: $noncompetitor_hover;
-  border-color: #3C607C;
 }
 .noncompetitor:active {
   background-color: #5555ff;
-  border-color: #17466B;
 }
 
 .payment_link {
@@ -130,32 +124,14 @@ div.required {
 // http://www.usabilitypost.com/2012/01/10/pressed-button-state-with-css3/
 @mixin button($width) {
   text-decoration: none;
+  border: none;
   display: inline-block;
   min-width:$width;
   padding: 10px 15px;
+  margin: 5px 10px;
   font-size: 18px;
   cursor: pointer;
 
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-
-  border: solid 1px;
-
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-
-  //text-align: center;
-  //border-bottom-left-radius: 11px;
-  //border-bottom-right-radius: 11px;
-  //border-top-left-radius: 11px;
-  //border-top-right-radius: 11px;
 }
 .registration_button {
   @include button(220px);
@@ -163,14 +139,7 @@ div.required {
   text-align:center;
 }
 .registration_button:hover, .registration_button:focus {
-  border: solid 1px;
   text-decoration: none;
-}
-.registration_button:active {
-  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-  border: solid 1px;
 }
 
 .registrations_box {

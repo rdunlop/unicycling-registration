@@ -1,12 +1,14 @@
 body {
+  margin: 0px;
   background-color: #fff;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   #font-size: 13px;
+  position:relative
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 13px;
 }
 
@@ -22,8 +24,7 @@ a {
     color: #666;
   }
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: rgb(219, 71, 128);
   }
 }
 

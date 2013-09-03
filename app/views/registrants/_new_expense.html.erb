@@ -4,7 +4,7 @@
     <%= item.name %>
   </td>
   <td>
-    <%= print_formatted_currency(item.cost) %>
+    <%= print_item_cost_currency(item.cost) %>
   </td>
   <td>
     <%= form_for [@registrant, @registrant_expense_item] do |ff| %>
