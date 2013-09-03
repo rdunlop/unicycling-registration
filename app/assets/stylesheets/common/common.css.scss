@@ -67,10 +67,18 @@
 .bottom_nav {
   text-align: center;
   clear:both;
+  vertical-align: bottom;
 }
 
 .main_nav {
   text-align: center;
+  vertical-align: center;
+  padding: 0 20px;
+}
+
+h1.title {
+  font-size: 40px;
+  padding: 20px;
 }
 
 .notice {

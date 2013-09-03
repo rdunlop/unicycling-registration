@@ -22,6 +22,7 @@ gem 'acts_as_list'
 gem 'rolify'
 gem 'rails_admin'
 gem 'carmen-rails'
+gem 'font-kit-rails'
 
 #gem 'sqlite3'
 gem 'pg'
