@@ -25,6 +25,10 @@ module ApplicationHelper
   end
 
   def print_formatted_currency(cost)
+    number_to_currency(cost, format: EventConfiguration.currency)
+  end
+
+  def print_item_cost_currency(cost)
     return "Free" if cost == 0
     number_to_currency(cost, format: EventConfiguration.currency)
   end
