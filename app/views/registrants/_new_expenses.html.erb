@@ -12,7 +12,8 @@
         </tr>
       <% end %>
       <% expense_group.expense_items.each do |ei| %>
-        <%= render :partial => "/registrants/new_expense", :locals => { :item => ei } %>
+        <% @registrant_expense_item = RegistrantExpenseItem.new(:expense_item_id => ei.id, :registrant_id => @registrant.id) %>
+        <%= render :partial => "/registrants/new_expense", :locals => { :item => ei, :show_as_free => @registrant.expense_item_is_free(ei) } %>
       <% end %>
     </table>
   </fieldset>

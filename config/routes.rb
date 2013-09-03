@@ -161,10 +161,12 @@ Workspace::Application.routes.draw do
     end
     member do
       get :items
-      put :update_items
+      get :items
+      #put :update_items
       get :waiver
     end
     resources :registrant_expenses, :only => [:new, :destroy]
+    resources :registrant_expense_items, :only => [:create, :destroy]
     resources :standard_skill_routines, :only => [:index, :create]
   end
 

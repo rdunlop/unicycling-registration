@@ -48,6 +48,7 @@ class Registrant < ActiveRecord::Base
   has_many :expense_items, :through => :registrant_expense_items
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
   validate :not_exceeding_expense_item_limits
+  validates_associated :registrant_expense_items
 
   default_scope where(:deleted => false).order(:bib_number)
 
@@ -85,7 +86,7 @@ class Registrant < ActiveRecord::Base
 
   # Creates the registrant owing
   def build_owing_payment(payment)
-    reg_items = owing_registrant_expense_items_with_details
+    reg_items = owing_registrant_expense_items
     reg_items.each do |reg_item|
       item = reg_item.expense_item
       details = reg_item.details
@@ -94,6 +95,7 @@ class Registrant < ActiveRecord::Base
       pd.amount = reg_item.total_cost
       pd.expense_item = item
       pd.details = details
+      pd.free = reg_item.free
     end
   end
 
@@ -287,7 +289,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def expenses_total
-    items = self.all_expense_items
+    items = self.owing_registrant_expense_items
+    items += self.paid_details
 
     if items.size > 0
       total = items.map {|item| item.cost} .reduce(:+)
@@ -309,7 +312,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def owing_registrant_expense_items
-    items = self.registrant_expense_items
+    # prevents this from creating new items when we return a 'new'd element
+    items = self.registrant_expense_items.clone
 
     if not reg_paid? and not registration_item.nil?
       items << RegistrantExpenseItem.new({:registrant_id => self.id, :expense_item_id => registration_item.id})
@@ -319,11 +323,15 @@ class Registrant < ActiveRecord::Base
 
   # returns a list of paid-for expense_items
   def paid_expense_items
-    details = self.payment_details.select {|pd| pd.payment.completed == true } .map{|pd| pd.expense_item }
+    details = paid_details.map{|pd| pd.expense_item }
+  end
+
+  def paid_details
+    details = self.payment_details.select {|pd| pd.payment.completed == true }
   end
 
   def amount_paid
-    items = self.paid_expense_items
+    items = self.paid_details
     if items.size > 0
       total = items.map {|item| item.cost} .reduce(:+)
     else
@@ -408,6 +416,38 @@ class Registrant < ActiveRecord::Base
     end
 
     results
+  end
+
+  # return true/false to show whether an expense_group has been chosen by this registrant
+  def has_chosen_free_item_from_expense_group(expense_group)
+    registrant_expense_items.each do |rei|
+      next unless rei.free
+      if rei.expense_item.expense_group == expense_group
+        return true
+      end
+    end
+    paid_details.each do |pei|
+      next unless pei.free
+      if pei.expense_item.expense_group == expense_group
+        return true
+      end
+    end
+
+    return false
+  end
+
+  def expense_item_is_free(expense_item)
+    if competitor
+      if expense_item.expense_group.competitor_free_options == "One Free In Group"
+        return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
+      end
+    else
+      if expense_item.expense_group.noncompetitor_free_options == "One Free In Group"
+        return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
+      end
+    end
+
+    return false
   end
 
   def not_exceeding_expense_item_limits

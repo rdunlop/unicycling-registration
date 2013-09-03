@@ -10,7 +10,7 @@
     </thead>
 
     <tbody>
-      <% @registrant.paid_expense_items.each do |pei| %>
+      <% @registrant.paid_details.each do |pei| %>
         <tr>
           <td><%= pei %></td>
           <td><%= print_formatted_currency(pei.cost) %></td>

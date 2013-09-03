@@ -199,7 +199,7 @@ class RegistrantsController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { rendor json: @registrant }
+        format.json { render json: @registrant }
       end
     end
   end

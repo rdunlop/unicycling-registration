@@ -195,6 +195,7 @@ describe Registrant do
       @rei.save
       @reg.reload
     end
+
     it "has expense_items" do
       @reg.registrant_expense_items.should == [@rei]
       @reg.expense_items.should == [@item]
@@ -569,6 +570,56 @@ describe Registrant do
       @ei1 = @reg.registrant_expense_items.build({:expense_item_id => @ei.id})
       @ei2 = @reg.registrant_expense_items.build({:expense_item_id => @ei.id})
       @reg.valid?.should == false
+    end
+  end
+
+  describe "with an expense_group which allows free items" do
+    before(:each) do
+      @eg = FactoryGirl.create(:expense_group, :competitor_free_options => "One Free In Group")
+      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+    end
+
+    it "marks the registrant as expense_item_is_free for thi sexpense_item" do
+      @reg.expense_item_is_free(@ei).should == true
+    end
+    describe "when it has a non-free item of the same expense_group (not free though)" do
+      before(:each) do
+        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+        @reg.reload
+      end
+
+      it "shows that a free item is available" do
+        @reg.expense_item_is_free(@ei).should == true
+      end
+    end
+
+    describe "when it has a free expense_item" do
+      before(:each) do
+        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
+        @reg.reload
+      end
+
+      it "doesn't allow registrant to have 2 free of this group" do
+        @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
+        @rei.valid?.should == false
+      end
+
+      it "shows that it has the given expense_group" do
+        @reg.has_chosen_free_item_from_expense_group(@eg).should == true
+      end
+    end
+
+    describe "when it has a paid expense_item" do
+      before(:each) do
+        @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+        @pay = FactoryGirl.create(:payment, :completed => true)
+        @pei = FactoryGirl.create(:payment_detail, :registrant => @reg, :payment => @pay, :expense_item => @ei, :free => true)
+        @reg.reload
+      end
+
+      it "shows that it has the given expense_group" do
+        @reg.has_chosen_free_item_from_expense_group(@eg).should == true
+      end
     end
   end
 end

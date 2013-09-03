@@ -7,7 +7,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   has_paper_trail :meta => { :registrant_id => :registrant_id }
 
   validates :expense_item, :registrant, :presence => true
-  validates_associated :registrant
+  validate :only_one_free_per_expense_group
 
   def cost
     return 0 if free
@@ -23,5 +23,23 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   def total_cost
     cost + tax
+  end
+
+  def only_one_free_per_expense_group
+    return true if expense_item_id.nil? or registrant.nil? or (free == false)
+
+    eg = expense_item.expense_group
+    if registrant.competitor
+      free_options = eg.competitor_free_options
+    else
+      free_options = eg.noncompetitor_free_options
+    end
+
+    return true unless free_options == "One Free In Group"
+
+    if registrant.has_chosen_free_item_from_expense_group(eg)
+      errors[:base] = "Only 1 free item is permitted in this expense_group"
+    end
+    return true
   end
 end

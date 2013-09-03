@@ -10,4 +10,15 @@ class PaymentDetail < ActiveRecord::Base
   belongs_to :expense_item
 
   scope :completed, includes(:payment).where(:payments => {:completed => true})
+
+  def cost
+    return 0 if free
+
+    amount
+  end
+
+  def to_s
+    expense_item.to_s
+  end
+
 end

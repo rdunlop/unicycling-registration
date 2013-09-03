@@ -1,4 +1,4 @@
-<%# locals: item %>
+<%# locals: item, show_as_free %>
 <tr>
   <td>
     <%= item.name %>
@@ -7,14 +7,24 @@
     <%= print_formatted_currency(item.cost) %>
   </td>
   <td>
-    <%= form_for RegistrantExpenseItem.new(:expense_item_id => item.id), :url => single_registrant_expenses_url, :remote => true do |ff| %>
+    <%= form_for [@registrant, @registrant_expense_item] do |ff| %>
+      <%= render :partial => "/shared/error_messages", :object => @registrant_expense_item %>
       <%#= ff.error_messages %>
+      <%= ff.hidden_field :registrant_id %>
       <%= ff.hidden_field :expense_item_id %>
-      <%= ff.check_box :free %>
-      <% if item.maximum_reached? %>
+      <% if show_as_free %>
+        <%= ff.hidden_field :free, {:value => 1} %>
+      <% end %>
+      <% if @registrant_expense_item.expense_item.has_details %>
+        <%= ff.label :details, @registrant_expense_item.expense_item.details_label %>:
+        <%= ff.text_field :details %>
+      <% end %>
+      <% if show_as_free %>
+        <%= ff.submit 'Add FREE Item', {:title => "One is free with your registration", :class => "free_item"} %>
+      <% elsif item.maximum_reached? %>
         <%= ff.submit "Sold Out", :disabled => true, :class => "Sold Out" %>
       <% else %>
-        <%= ff.submit 'Add Item', :class => "multiclick" %>
+        <%= ff.submit 'Add Item' %>
       <% end %>
     <% end %>
   </td>

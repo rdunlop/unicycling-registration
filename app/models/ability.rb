@@ -94,6 +94,10 @@ class Ability
 
       unless EventConfiguration.closed? and ENV['ONSITE_REGISTRATION'] != "true"
         can [:update, :items, :update_items, :destroy], Registrant, :user_id => user.id
+        #can [:create], RegistrantExpenseItem, :user_id => user.id
+        can [:create, :destroy], RegistrantExpenseItem do |rei|
+          user.registrants.include?(rei.registrant)
+        end
         can :create, Registrant # necessary because we set the user in the controller?
         can :new_noncompetitor, Registrant # necessary because we set the user in the controller?
       end

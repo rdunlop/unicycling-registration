@@ -11,24 +11,37 @@
           <th></th>
         </tr>
       </thead>
-      <% registrant.paid_expense_items.each do |pei| %>
+      <% registrant.paid_details.each do |pei| %>
         <tr>
           <td><%= pei %></td>
-          <td>XXX (must be updated with 'free' option) <%= print_formatted_currency(pei.cost) %></td>
+          <td><%= print_formatted_currency(pei.cost) %></td>
+          <td></td>
           <td>(Paid)</td>
+          <td>
         </tr>
       <% end %>
-      <% registrant.registrant_expense_items.each do |ce| %>
-        <%= render :partial => "/registrant_expenses/registrant_expense_item", :locals => { :registrant_expense_item => ce} %>
-      <% end %>
-      <% unless registrant.reg_paid? %>
-        <% reg_item = registrant.registration_item %>
-        <% unless reg_item.nil? %>
-          <tr>
-            <td>Registration Fee</td>
-            <td><%= print_formatted_currency(reg_item.cost) %></td>
-          </tr>
-        <% end %>
+      <% registrant.owing_registrant_expense_items.each do |ce| %>
+        <tr>
+          <td>
+            <%= ce.expense_item %>
+          </td>
+          <td>
+            <%= print_formatted_currency(ce.cost) %>
+          </td>
+          <td>
+            <% if ce.expense_item.has_details %>
+              <%= ce.expense_item.details_label %>: <%= ce.details %>
+            <% end %>
+          </td>
+          <td></td>
+          <td>
+            <% if ce.persisted? %>
+              <%= form_for([registrant, ce], :url => registrant_registrant_expense_item_path(registrant, ce), :html => { :method => :delete }) do |ff| %>
+                <%= ff.submit "Delete" %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
     </table>
   </fieldset>
