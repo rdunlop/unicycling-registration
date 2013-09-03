@@ -35,7 +35,6 @@ Maximum of 25pp for each classroom.
  - Due to the "import" feature I think
 - Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
 - Only allow "Jr Expert" if certain age.
-- Allow "Pickup Teams" to not require a team name
 - Don't allow registering in "A" for both Basketball and Hockey
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
 

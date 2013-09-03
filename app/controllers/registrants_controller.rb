@@ -71,7 +71,8 @@ class RegistrantsController < ApplicationController
     @city = @registrant.city
     @state = @registrant.state
     @zip = @registrant.zip
-    @country = @registrant.country
+    @country_residence= @registrant.country_residence
+    @country_representing= @registrant.country_representing
     @phone = @registrant.phone
     @mobile = @registrant.mobile
     @email = @registrant.email

@@ -71,7 +71,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
     user = @additional_registrant_access.registrant.user
 
     respond_to do |format|
-      if @additional_registrant_access.update_attributes({:declined => true})
+      if @additional_registrant_access.update_attributes({:declined => true, :accepted_readonly => false })
         format.html { redirect_to invitations_user_additional_registrant_accesses_path(user), notice: 'Request declined' }
         format.json { head :no_content }
       else
