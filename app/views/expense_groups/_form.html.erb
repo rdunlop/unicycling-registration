@@ -25,10 +25,10 @@
     <%= f.number_field :position %>
     <br />
     <%= f.label :competitor_free_options %>
-    <%= f.number_field :competitor_free_options %>
+    <%= f.select :competitor_free_options, ExpenseGroup.free_options, :include_blank => true %>
     <br />
     <%= f.label :noncompetitor_free_options %>
-    <%= f.number_field :noncompetitor_free_options %>
+    <%= f.select :noncompetitor_free_options, ExpenseGroup.free_options, :include_blank => true %>
   </div>
   <div class="actions">
     <%= f.submit %>
