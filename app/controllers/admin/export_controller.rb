@@ -353,10 +353,11 @@ class Admin::ExportController < Admin::BaseController
       sheet[row,6] = reg.city
       sheet[row,7] = reg.state
       sheet[row,8] = reg.zip
-      sheet[row,9] = reg.country
-      sheet[row,10] = reg.phone
-      sheet[row,11] = reg.email
-      sheet[row,12] = reg.club
+      sheet[row,9] = reg.country_residence
+      sheet[row,10] = reg.country_representing
+      sheet[row,11] = reg.phone
+      sheet[row,12] = reg.email
+      sheet[row,13] = reg.club
       row += 1
     end
 
@@ -389,7 +390,8 @@ class Admin::ExportController < Admin::BaseController
       fields << ["city", reg.city]
       fields << ["state", reg.state]
       fields << ["zipcode", reg.zip]
-      fields << ["country", reg.country]
+      fields << ["country", reg.country_residence]
+      fields << ["country", reg.country_representing]
       fields << ["phone", reg.phone]
       fields << ["mobile", reg.mobile]
       fields << ["email", reg.email]

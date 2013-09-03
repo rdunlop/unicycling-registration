@@ -10,7 +10,8 @@
               data-address="<%= other_registrant.address %>"
               data-city="<%= other_registrant.city %>"
               data-state="<%= other_registrant.state %>"
-              data-country="<%= other_registrant.country %>"
+              data-country-residence="<%= other_registrant.country_residence %>"
+              data-country-representing="<%= other_registrant.country_representing %>"
               data-zip="<%= other_registrant.zip %>"
               data-phone="<%= other_registrant.phone %>">Copy Address from <%= other_registrant.name %></a>
           </td>
@@ -42,19 +43,28 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :country, :class => "required" %>
+          <%= f.label :country_residence, :class => "required" %>
         </td>
         <td>
-          <%= f.text_field :country %>
+          <% if EventConfiguration.usa %>
+            <%= f.country_select :country_residence, priority: %w(US CA), prompt: 'XXX' %>
+          <% else %> 
+            <%= f.country_select :country_residence, prompt: 'XXX' %>
+          <% end %>
         </td>
       </tr>
-      <script>
-        $(function() {
-          $("#registrant_country").autocomplete({
-            source: ["Canada", "United States"]
-          });
-        });
-      </script>
+      <tr>
+        <td>
+          <%= f.label :country_representing %>
+        </td>
+        <td>
+          <% if EventConfiguration.usa %>
+            <%= f.country_select :country_representing, priority: %w(US CA), prompt: 'XXX' %>
+          <% else %> 
+            <%= f.country_select :country_representing, prompt: 'XXX' %>
+          <% end %>
+        </td>
+      </tr>
       <tr>
         <td>
           <%= f.label :zip, :class => "required" %>

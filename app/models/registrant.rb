@@ -1,12 +1,12 @@
 class Registrant < ActiveRecord::Base
-  attr_accessible :address, :birthday, :city, :country, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip
+  attr_accessible :address, :birthday, :city, :country_residence, :country_representing, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip
   attr_accessible :user_id, :competitor, :ineligible
   attr_accessible :club, :club_contact, :usa_member_number, :volunteer
   attr_accessible :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone
   attr_accessible :responsible_adult_name, :responsible_adult_phone
 
   validates :first_name, :last_name, :birthday, :gender, :presence => true
-  validates :address, :city, :state, :country, :zip, :presence => true
+  validates :address, :city, :state, :country_residence, :zip, :presence => true
 
   validates :user_id, :presence => true
   before_validation :set_bib_number, :on => :create
@@ -236,6 +236,14 @@ class Registrant < ActiveRecord::Base
 
   def user_email
     user.email
+  end
+
+  def country
+    if :country_representing
+      self.country_representing
+    else
+      self.country_residence
+    end
   end
 
   def as_json(options={})

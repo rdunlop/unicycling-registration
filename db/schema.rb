@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830204848) do
+ActiveRecord::Schema.define(:version => 20130901051428) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -397,7 +397,7 @@ ActiveRecord::Schema.define(:version => 20130830204848) do
     t.date     "birthday"
     t.string   "gender"
     t.string   "state"
-    t.string   "country"
+    t.string   "country_residence"
     t.string   "phone"
     t.string   "mobile"
     t.string   "email"
@@ -424,6 +424,7 @@ ActiveRecord::Schema.define(:version => 20130830204848) do
     t.integer  "age"
     t.boolean  "ineligible",              :default => false
     t.boolean  "volunteer"
+    t.string   "country_representing"
   end
 
   add_index "registrants", ["deleted"], :name => "index_registrants_deleted"
