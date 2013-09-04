@@ -11,6 +11,18 @@ class PaymentDetail < ActiveRecord::Base
 
   scope :completed, includes(:payment).where(:payments => {:completed => true})
 
+  def base_cost
+    return 0 if free
+
+    expense_item.cost
+  end
+
+  def tax
+    return 0 if free
+
+    expense_item.tax
+  end
+
   def cost
     return 0 if free
 

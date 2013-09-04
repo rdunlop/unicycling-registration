@@ -35,10 +35,10 @@
               <%= "(" + pf.object.details + ")"%>
             <% end %>
           </td>
-          <td><%= print_item_cost_currency(pf.object.cost) %>
+          <td><%= print_item_cost_currency(pf.object.base_cost) %>
             <%= pf.hidden_field :free %>
           </td>
-          <td><%= print_item_cost_currency(pf.object.expense_item.tax) %></td>
+          <td><%= print_item_cost_currency(pf.object.tax) %></td>
           <td><%= pf.hidden_field :amount %><%= print_item_cost_currency(pf.object.amount) %></td>
           <td>
             <% # XXX http://rubysource.com/complex-rails-forms-with-nested-attributes/  to not need to invert things anymore 
