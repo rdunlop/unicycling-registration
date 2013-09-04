@@ -22,6 +22,7 @@ $ ->
     return false;
 
 $(document).ready ->
+  $('input, textarea').placeholder()
   $(".fancybox").fancybox
     type: "iframe"
     maxWidth: 800

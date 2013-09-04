@@ -60,13 +60,12 @@
                     <%= ec.hidden_field :event_choice_id %>
                     <% case ec.object.event_choice.cell_type %>
                     <% when "boolean" %>
-                      <%= ec.check_box :value %>
+                      <%= ec.check_box :value, :title => choice.tooltip %>
                       <%= ec.label :value, choice.label, :title => choice.tooltip %>
                     <% when "text" %>
-                      <%= ec.label :value, choice.label, :title => choice.tooltip %>
                       <% if ec.object.event_choice.autocomplete %>
                         <% ac_class = "autocomplete#{choice.id}" %>
-                        <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :class => ac_class %>
+                        <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip, :class => ac_class %>
                         <script>
                           $(".<%= ac_class %>").autocomplete({ 
                             source: [
@@ -77,13 +76,13 @@
                           });
                         </script>
                       <% else %>
-                        <%= ec.text_field :value, :placeholder => ec.object.event_choice.label  %>
+                        <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip  %>
                       <% end %>
                     <% when "multiple" %>
                       <%= ec.label :value, choice.label, :title => choice.tooltip %>
-                      <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true} %>
+                      <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true}, :title => choice.tooltip %>
                     <% when "best_time" %>
-                      <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip  %>
+                      <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip ? choice.tooltip : "hh:mm:ss or mm:ss" %>
                     <% end %>
                   <% end %>
                 </td>
