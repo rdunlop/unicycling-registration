@@ -7,7 +7,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   has_paper_trail :meta => { :registrant_id => :registrant_id }
 
   validates :expense_item, :registrant, :presence => true
-  validate :only_one_free_per_expense_group
+  validate :only_one_free_per_expense_group, :on => :create
 
   def cost
     return 0 if free
