@@ -43,17 +43,29 @@ $noncompetitor_hover: #3487C9;
   background-color: #5555ff;
 }
 
-.payment_link {
+.payment_link,
+input.delete,
+input.sold_out {
   background-color: #AC2B2B;
 }
-.payment_link:hover {
+.payment_link:hover,
+input.delete:hover,
+input.sold_out:hover {
   background-color: #D61414;
 }
-.payment_link:active {
+.payment_link:active,,
+input.delete:active,
+input.sold_out:active {
   background-color: #A01A1A;
 }
 
-.competitor, .noncompetitor, .payment_link {
+input.delete,
+input.sold_out {
+  border: none;
+}
+
+.competitor, .noncompetitor, .payment_link,
+input.delete, input.sold_out {
   color: white;
   text-decoration: none;
 }

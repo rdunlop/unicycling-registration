@@ -37,7 +37,7 @@
           <td>
             <% if ce.persisted? %>
               <%= form_for([registrant, ce], :url => registrant_registrant_expense_item_path(registrant, ce), :html => { :method => :delete }) do |ff| %>
-                <%= ff.submit "Delete" %>
+                <%= ff.submit "Delete", :class => "delete"%>
               <% end %>
             <% end %>
           </td>

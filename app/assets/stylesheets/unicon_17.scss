@@ -152,3 +152,25 @@ background-color: $unicon-pink-active;
   font-size: 40px;
   padding: 20px;
 }
+
+input.free_item {
+  border: none;
+  color: white;
+  background-color: $unicon-pink;
+}
+
+input.cost_item {
+  border: none;
+  color: white;
+  background-color: $unicon-blue;
+}
+
+input.cost_item:hover {
+  background-color: $unicon-pink;
+}
+
+input.free_item:active,
+input.cost_item:active,
+input.free_item:hover {
+  background-color: $unicon-pink-active;
+}
