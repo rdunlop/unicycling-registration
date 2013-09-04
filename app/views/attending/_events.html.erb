@@ -10,7 +10,7 @@
 
     <% @categories.each do |category| %>
       <div id="tabs-<%= category.id %>">
-        <% unless category.info_url.nil? %>
+        <% unless category.info_url.nil? or category.info_url.blank? %>
           <div class="event_link">
             <%= link_to "More Info [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"} %>
           </div>
