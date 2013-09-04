@@ -444,14 +444,37 @@ class Registrant < ActiveRecord::Base
     return false
   end
 
+  def has_chosen_free_item_of_expense_item(expense_item)
+    registrant_expense_items.each do |rei|
+      next unless rei.free
+      if rei.expense_item == expense_item
+        return true
+      end
+    end
+    paid_details.each do |pei|
+      next unless pei.free
+      if pei.expense_item == expense_item
+        return true
+      end
+    end
+
+    return false
+  end
+
   def expense_item_is_free(expense_item)
     if competitor
-      if expense_item.expense_group.competitor_free_options == "One Free In Group"
+      case expense_item.expense_group.competitor_free_options
+      when "One Free In Group"
         return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
+      when "One Free of Each In Group"
+        return !has_chosen_free_item_of_expense_item(expense_item)
       end
     else
-      if expense_item.expense_group.noncompetitor_free_options == "One Free In Group"
+      case expense_item.expense_group.noncompetitor_free_options
+      when "One Free In Group"
         return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
+      when "One Free of Each In Group"
+        return !has_chosen_free_item_of_expense_item(expense_item)
       end
     end
 

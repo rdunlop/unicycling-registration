@@ -1,4 +1,5 @@
 Last Re-Arranged August 13, 2013.
+- Replace magic strings with class constants
 - Give Online registration statistics to Hugo from previous UNICON (how many in each phase)
 -delegate expenseGroup to the paymentDetail and registrantExpenseItem, so that we don't have to explicitly go through the expense_item?
 

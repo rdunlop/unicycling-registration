@@ -100,8 +100,8 @@ describe Registrant do
     @reg.valid?.should == false
   end
 
-  it "requires country" do
-    @reg.country = nil
+  it "requires country_residence" do
+    @reg.country_residence = nil
     @reg.valid?.should == false
   end
 
@@ -573,13 +573,13 @@ describe Registrant do
     end
   end
 
-  describe "with an expense_group which allows free items" do
+  describe "with an expense_group which allows one free item per group" do
     before(:each) do
       @eg = FactoryGirl.create(:expense_group, :competitor_free_options => "One Free In Group")
       @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
     end
 
-    it "marks the registrant as expense_item_is_free for thi sexpense_item" do
+    it "marks the registrant as expense_item_is_free for this expense_item" do
       @reg.expense_item_is_free(@ei).should == true
     end
     describe "when it has a non-free item of the same expense_group (not free though)" do
@@ -619,6 +619,46 @@ describe Registrant do
 
       it "shows that it has the given expense_group" do
         @reg.has_chosen_free_item_from_expense_group(@eg).should == true
+      end
+    end
+  end
+
+  describe "with an expense_group which allows one free item per item in group" do
+    before(:each) do
+      @eg = FactoryGirl.create(:expense_group, :competitor_free_options => "One Free of Each In Group")
+      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+    end
+
+    it "marks the registrant as expense_item_is_free for this expense_item" do
+      @reg.expense_item_is_free(@ei).should == true
+    end
+
+    describe "when it has a non-free item of the same expense_group (not free though)" do
+      before(:each) do
+        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+        @reg.reload
+      end
+
+      it "shows that a free item is available" do
+        @reg.expense_item_is_free(@ei).should == true
+      end
+    end
+
+    describe "when it has a free expense_item" do
+      before(:each) do
+        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
+        @reg.reload
+      end
+
+      it "doesn't allow registrant to have 2 free of this expense_item" do
+        @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
+        @rei.valid?.should == false
+      end
+
+      it "allows different free expense_items in the same group" do
+        @ei2 = FactoryGirl.create(:expense_item, :expense_group => @eg)
+        @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei2, :free => true)
+        @rei.valid?.should == true
       end
     end
   end

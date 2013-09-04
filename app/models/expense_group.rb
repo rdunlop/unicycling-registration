@@ -8,7 +8,7 @@ class ExpenseGroup < ActiveRecord::Base
   has_many :expense_items,:order => "expense_items.position"
 
   def self.free_options
-    ["None Free", "One Free In Group", "One Free of each In Group"]
+    ["None Free", "One Free In Group", "One Free of Each In Group"]
   end
 
   validates :competitor_free_options, :inclusion => { :in => self.free_options, :allow_blank => true }

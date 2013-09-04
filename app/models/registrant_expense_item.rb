@@ -35,10 +35,15 @@ class RegistrantExpenseItem < ActiveRecord::Base
       free_options = eg.noncompetitor_free_options
     end
 
-    return true unless free_options == "One Free In Group"
-
-    if registrant.has_chosen_free_item_from_expense_group(eg)
-      errors[:base] = "Only 1 free item is permitted in this expense_group"
+    case free_options
+    when "One Free In Group"
+      if registrant.has_chosen_free_item_from_expense_group(eg)
+        errors[:base] = "Only 1 free item is permitted in this expense_group"
+      end
+    when "One Free of Each In Group"
+      if registrant.has_chosen_free_item_of_expense_item(expense_item)
+        errors[:base] = "Only 1 free item of this item is permitted"
+      end
     end
     return true
   end
