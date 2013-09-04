@@ -93,6 +93,8 @@ GEM
     factory_girl_rails (4.1.0)
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
+    fancybox-rails (0.2.1)
+      railties (>= 3.1.0)
     fastercsv (1.5.5)
     ffi (1.1.5)
     font-awesome-sass-rails (3.0.2.2)
@@ -289,6 +291,7 @@ DEPENDENCIES
   devise (~> 2)
   exception_notification
   factory_girl_rails
+  fancybox-rails
   font-kit-rails
   foreman
   formtastic
