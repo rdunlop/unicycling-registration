@@ -9,6 +9,7 @@ describe "registrants/_new_expenses" do
     @group2 = FactoryGirl.create(:expense_group, :position => 2, :visible => false)
     @item3 = FactoryGirl.create(:expense_item, :expense_group => @group2)
     @item4 = FactoryGirl.create(:expense_item, :expense_group => @group2)
+    @registrant = FactoryGirl.create(:competitor)
   end
 
   it "renders group header" do

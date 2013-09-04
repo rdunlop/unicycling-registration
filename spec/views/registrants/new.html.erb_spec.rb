@@ -204,7 +204,7 @@ describe "registrants/new" do
       assert_select "form", :action => registrant_path(@registrant), :method => "put" do
         assert_select "input#registrant_state", :name => "registrant[state]"
         assert_select "input#registrant_address", :name => "registrant[address]"
-        assert_select "input#registrant_country", :name => "registrant[country]"
+        assert_select "input#registrant_country_residence", :name => "registrant[country_residence]"
         assert_select "input#registrant_state", :name => "registrant[state]"
         assert_select "input#registrant_city", :name => "registrant[city]"
         assert_select "input#registrant_zip", :name => "registrant[zip]"

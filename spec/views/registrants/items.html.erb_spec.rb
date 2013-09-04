@@ -18,11 +18,6 @@ describe "registrants/items" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => single_registrant_expenses_url, :method => "put"
   end
-  it "displays the 'Save Registration' button" do
-    render
-    assert_select "input[value='Continue']", 1
-  end
-
 
   describe "with existing expense_items" do
     before(:each) do
@@ -30,13 +25,6 @@ describe "registrants/items" do
       @registrant.reload
     end
 
-    it "should render the list of expense items" do
-      render
-
-      assert_select "form", :action => update_items_registrant_url(@registrant), :method => "put" do
-        assert_select "td", :text => @item.expense_item
-      end
-    end
     it "should render the details field, if enabled" do
       ei = @item.expense_item
       ei.has_details = true
@@ -45,7 +33,7 @@ describe "registrants/items" do
 
       render
       assert_select "label", :text => "What is your family?"
-      assert_select "input#registrant_registrant_expense_items_attributes_" + @item.id.to_s + "_details"
+      assert_select "input#registrant_expense_item_details", :name => "registrant_expense_item[details]"
     end
   end
 end
