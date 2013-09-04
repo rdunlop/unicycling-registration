@@ -12,7 +12,7 @@
       <div id="tabs-<%= category.id %>">
         <% unless category.info_url.nil? %>
           <div class="event_link">
-            <%= link_to "More Info [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link"} %>
+            <%= link_to "More Info [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"} %>
           </div>
         <% end %>
         <table class="events">
