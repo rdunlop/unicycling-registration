@@ -204,7 +204,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <% if current_user.nil? %>
       <div class="base_details">
         <ul>
-          <li><%= @config.short_name %></li>
+          <li class="title"><%= @config.short_name %></li>
           <li><%= @config.long_name %></li>
           <li><%= @config.location %></li>
           <li><%= @config.dates_description %></li>

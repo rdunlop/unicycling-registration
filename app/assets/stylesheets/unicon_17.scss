@@ -18,6 +18,7 @@ $submenudivider: rgb(120, 120, 120);
 $text: rgb(255, 255, 255);
 $texthover: rgb(255, 255, 255);
 $unicon-pink: rgb(219, 71, 128);
+$unicon-pink-active: rgb(240, 80, 128);
 $unicon-blue: rgb(36, 130, 181);
 
 nav ul {
@@ -74,11 +75,12 @@ background-color: $unicon-blue;
 .competitor:hover,
 .noncompetitor:hover {
 background-color: $unicon-pink;
+color: white;
 }
 
 .competitor:active,
 .noncompetitor:active {
-background-color: rgb(200, 79, 138);
+background-color: $unicon-pink-active;
 }
 
 .competitor_link,
@@ -91,6 +93,25 @@ background-color: rgb(200, 79, 138);
 .competitor_link:hover,
 .noncompetitor_link:hover {
   color: $unicon-pink;
+}
+
+.focus_button,
+.nonfocus_button,
+.focus_button:visited,
+.nonfocus_button:visited {
+  background-color: $unicon-blue;
+  color: black;
+}
+
+.focus_button:hover,
+.nonfocus_button:hover {
+  color: white;
+  background-color: $unicon-pink;
+}
+.focus_button:active,
+.nonfocus_button:active {
+  background-color: $unicon-pink-active;
+
 }
 
 .current_reg_period {
@@ -125,4 +146,9 @@ background-color: rgb(200, 79, 138);
 }
 .external_link:hover {
   color: $unicon-pink;
+}
+
+.base_details .title {
+  font-size: 40px;
+  padding: 20px;
 }
