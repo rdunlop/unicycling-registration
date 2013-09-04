@@ -18,7 +18,7 @@ describe RegistrantsController do
       address: "123 Fake Street",
       city: "Madison",
       state: "WI",
-      country: "USA",
+      country_residence: "USA",
       zip: "12345",
       club: "TCUC",
       club_contact: "Connie",
@@ -137,7 +137,7 @@ describe RegistrantsController do
       assigns(:city).should == registrant.city
       assigns(:state).should == registrant.state
       assigns(:zip).should == registrant.zip
-      assigns(:country).should == registrant.country
+      assigns(:country).should == registrant.country_residence
       assigns(:phone).should == registrant.phone
       assigns(:mobile).should == registrant.mobile
       assigns(:email).should == registrant.email
@@ -252,24 +252,6 @@ describe RegistrantsController do
     end
   end
 
-  describe "PUT update_items" do
-    it "redirects to the registrant show page" do
-      registrant = FactoryGirl.create(:competitor, :user => @user)
-      put :update_items, {:id => registrant.to_param}
-      response.should redirect_to(registrant)
-    end
-    it "accepts a new registrant_expense_item" do
-      ei = FactoryGirl.create(:expense_item)
-      registrant = FactoryGirl.create(:competitor, :user => @user)
-      put :update_items, {:id => registrant.to_param, :registrant => {
-        :registrant_expense_items_attributes => {
-        "1234" => { :expense_item_id => ei.id.to_s, :id => "", :details => "Hello Werld", :_destroy => "0", :free => false }
-      } }}
-      registrant.reload
-      registrant.registrant_expense_items.count.should == 1
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       before(:each) do
@@ -292,7 +274,7 @@ describe RegistrantsController do
           address: "123 Somewhere",
           city: "Springfield",
           state: "IL",
-          country: "USA",
+          country_residence: "USA",
           zip: "60601",
           competitor: true,
           birthday: Date.new(1982, 01, 19),
