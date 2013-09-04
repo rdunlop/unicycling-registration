@@ -17,6 +17,8 @@ $backgroundhover: rgb(102, 102, 102);
 $submenudivider: rgb(120, 120, 120);
 $text: rgb(255, 255, 255);
 $texthover: rgb(255, 255, 255);
+$unicon-pink: rgb(219, 71, 128);
+$unicon-blue: rgb(36, 130, 181);
 
 nav ul {
   background: $background; 
@@ -66,17 +68,17 @@ min-width: 70px;
 
 .competitor,
 .noncompetitor {
-background-color: rgb(36, 130, 181);
+background-color: $unicon-blue;
 }
 
 .competitor:hover,
 .noncompetitor:hover {
-background-color: rgb(219, 71, 128);
+background-color: $unicon-pink;
 }
 
 .competitor:active,
 .noncompetitor:active {
-background-color: rgb(230, 79, 138);
+background-color: rgb(200, 79, 138);
 }
 
 .competitor_link,
@@ -88,12 +90,12 @@ background-color: rgb(230, 79, 138);
 }
 .competitor_link:hover,
 .noncompetitor_link:hover {
-  color: rgb(219, 71, 128);
+  color: $unicon-pink;
 }
 
 .current_reg_period {
   background-color: #fff;
-  color: rgb(219, 71, 128);
+  color: $unicon-pink;
   font-weight: bolder;
 }
 
@@ -115,4 +117,12 @@ background-color: rgb(230, 79, 138);
 .paid {
   color: black;
   font-weight: bolder;
+}
+
+.external_link,
+.external_link:visited {
+  color: blue;
+}
+.external_link:hover {
+  color: $unicon-pink;
 }
