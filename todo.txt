@@ -1,21 +1,23 @@
 Last Re-Arranged August 13, 2013.
-- Replace magic strings with class constants
-- Give Online registration statistics to Hugo from previous UNICON (how many in each phase)
--delegate expenseGroup to the paymentDetail and registrantExpenseItem, so that we don't have to explicitly go through the expense_item?
 
 - Test that we can pay the Paypal account (info@monotreal.ca)
 - Associate the paypal account with the unicon2014 instance.
-- Add Text saying that for scheduling reasons, it is not recommended that you sign up for 'A' in both basketball and Hockey.
 - Add InternetExplorer "placeholder" handler code, so that I can ensure that all browsers support it.
 - IUF Registration cost (15) is required for each Competitor.
-- add "representative country"
  - Add age validation to the Jr Expert (and Wheel Walk)
 
- - Add "# remaining" to the Items page when the items are limited in number
  - Add text describing that we will "expire" lodging reservations if not paid when the next registration period occurs.
+ - Do we want this, or to have different room numbers?
+- Add Text saying that for scheduling reasons, it is not recommended that you sign up for 'A' in both basketball and Hockey.
 
+Nice-to-have:
+- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
  - "Connie also wants the ability to print all results for a whole event type (i.e. distance) so use some sort of combine pdf function."
+- Replace magic strings with class constants
+- Give Online registration statistics to Hugo from previous UNICON (how many in each phase)
+-delegate expenseGroup to the paymentDetail and registrantExpenseItem, so that we don't have to explicitly go through the expense_item?
+ - Add "# remaining" to the Items page when the items are limited in number
 
 
 
@@ -37,7 +39,6 @@ Maximum of 25pp for each classroom.
 - Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
 - Only allow "Jr Expert" if certain age.
 - Don't allow registering in "A" for both Basketball and Hockey
-- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
 
 In support of making NAUCC competitors happier:
 - Create "Participation Cerificate" which lists each Competitor's all results
