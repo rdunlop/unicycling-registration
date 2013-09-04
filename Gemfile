@@ -23,6 +23,7 @@ gem 'rolify'
 gem 'rails_admin'
 gem 'carmen-rails'
 gem 'font-kit-rails'
+gem 'fancybox-rails'
 
 #gem 'sqlite3'
 gem 'pg'
