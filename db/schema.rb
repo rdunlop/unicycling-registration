@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130901051428) do
+ActiveRecord::Schema.define(:version => 20130904145612) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -197,11 +197,13 @@ ActiveRecord::Schema.define(:version => 20130901051428) do
     t.string   "group_name"
     t.boolean  "visible"
     t.integer  "position"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.string   "info_url"
     t.string   "competitor_free_options"
     t.string   "noncompetitor_free_options"
+    t.boolean  "competitor_required",        :default => false
+    t.boolean  "noncompetitor_required",     :default => false
   end
 
   create_table "expense_items", :force => true do |t|

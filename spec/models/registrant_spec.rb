@@ -673,4 +673,31 @@ describe Registrant do
       end
     end
   end
+
+  describe "with an expense_group marked as 'required'" do
+    before(:each) do
+      @eg = FactoryGirl.create(:expense_group, :competitor_required => true)
+      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+    end
+
+    it "should include this expense_item in the list of owing_registrant_expense_items" do
+      @reg.owing_registrant_expense_items.last.expense_item.should == @ei
+    end
+
+    it "marks the registrant as has_required_expense_group as false" do
+      @reg.has_required_expense_group(@eg).should == false
+    end
+
+    describe "when it has paid for the expense_item" do
+      before(:each) do
+        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @ei.cost, :expense_item => @ei)
+        @reg.reload
+      end
+
+      it "marks the registrant as has_required_expense_group as true" do
+        @reg.has_required_expense_group(@eg).should == true
+      end
+    end
+  end
 end

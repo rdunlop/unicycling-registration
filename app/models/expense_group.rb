@@ -1,9 +1,10 @@
 class ExpenseGroup < ActiveRecord::Base
   attr_accessible :group_name, :position, :visible, :info_url
   attr_accessible :competitor_free_options, :noncompetitor_free_options
+  attr_accessible :competitor_required, :noncompetitor_required
 
   validates :group_name, :presence => true
-  validates :visible, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :visible, :competitor_required, :noncompetitor_required, :inclusion => { :in => [true, false] } # because it's a boolean
 
   has_many :expense_items,:order => "expense_items.position"
 
@@ -16,6 +17,13 @@ class ExpenseGroup < ActiveRecord::Base
 
   default_scope order('position ASC')
   scope :visible, where(:visible => true)
+
+  after_initialize :init
+
+  def init
+    self.competitor_required = false if self.competitor_required.nil?
+    self.noncompetitor_required = false if self.competitor_required.nil?
+  end
 
 
   def to_s

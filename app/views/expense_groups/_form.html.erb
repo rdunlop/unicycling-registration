@@ -29,6 +29,14 @@
     <br />
     <%= f.label :noncompetitor_free_options %>
     <%= f.select :noncompetitor_free_options, ExpenseGroup.free_options, :include_blank => true %>
+    <br />
+    <%= f.label :competitor_required %>
+    <%= f.check_box :competitor_required %>
+    An element of this expense group MUST be selected by the registrant (if there is only 1 item in the group, it will automatically be chosen)
+    <br />
+    <%= f.label :noncompetitor_required %>
+    <%= f.check_box :noncompetitor_required %>
+    An element of this expense group MUST be selected by the registrant (if there is only 1 item in the group, it will automatically be chosen)
   </div>
   <div class="actions">
     <%= f.submit %>

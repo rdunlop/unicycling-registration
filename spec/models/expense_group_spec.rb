@@ -36,6 +36,20 @@ describe ExpenseGroup do
     @group.valid?.should == true
   end
 
+  it "defaults to not required" do
+    @group = ExpenseGroup.new
+    @group.competitor_required.should == false
+    @group.noncompetitor_required.should == false
+  end
+
+  it "requires that the 'required' fields be set" do
+    @group.competitor_required = nil
+    @group.valid?.should == false
+    @group.competitor_required = false
+    @group.noncompetitor_required = nil
+    @group.valid?.should == false
+  end
+
   describe "with expense_items" do
     before(:each) do
       @item2 = FactoryGirl.create(:expense_item, :expense_group => @group, :position => 2)

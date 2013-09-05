@@ -326,7 +326,23 @@ class Registrant < ActiveRecord::Base
     if not reg_paid? and not registration_item.nil?
       items << RegistrantExpenseItem.new({:registrant_id => self.id, :expense_item_id => registration_item.id})
     end
+
+    if competitor
+      egs = ExpenseGroup.where({:competitor_required => true}).all
+    else
+      egs = ExpenseGroup.where({:noncompetitor_required => true}).all
+    end
+    egs.each do |eg|
+      if eg.expense_items.count == 1 and not self.has_required_expense_group(eg)
+        items << RegistrantExpenseItem.new({:registrant_id => self.id, :expense_item_id => eg.expense_items.first.id})
+      end
+    end
+
     items
+  end
+
+  def has_required_expense_group(expense_group)
+    paid_details.select { |pd| pd.expense_item.expense_group == expense_group }.count > 0
   end
 
   # returns a list of paid-for expense_items

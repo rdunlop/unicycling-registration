@@ -20,7 +20,7 @@
         <th>Cost</th>
         <th>Taxes</th>
         <th>Total Cost</th>
-        <th>
+        <th class="choose_payments">
           <a href="#" id="unselect_all">Unselect All</a>/<a href="#" id="select_all">Select All</a>
         </th>
       </tr>
@@ -40,7 +40,7 @@
           </td>
           <td><%= print_item_cost_currency(pf.object.tax) %></td>
           <td><%= pf.hidden_field :amount %><%= print_item_cost_currency(pf.object.amount) %></td>
-          <td>
+          <td class="choose_payments">
             <% # XXX http://rubysource.com/complex-rails-forms-with-nested-attributes/  to not need to invert things anymore 
           %>
             <%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %>
@@ -54,7 +54,7 @@
         <th colspan="4"></th>
         <th>Total</th>
         <th id="total_field"></th>
-        <th></th>
+        <th class="choose_payments"></th>
       </tr>
     </tfoot>
   </table>
