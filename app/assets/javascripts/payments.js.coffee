@@ -45,3 +45,6 @@ $(document).ready ->
   #/ calculate initially
   $("#total_field").html(calculateTotal());
 
+$(document).keydown (e) =>
+  if (e.shiftKey && e.altKey && e.keyCode == 68)
+    $(".choose_payments").show()
