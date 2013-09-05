@@ -132,3 +132,7 @@ table.alternate,
 .non-competitor_sign_up table { 
   border-collapse: collapse;
 }
+
+input[type="submit"] {
+  cursor: pointer;
+}
