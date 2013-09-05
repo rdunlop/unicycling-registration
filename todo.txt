@@ -1,6 +1,7 @@
 Last Re-Arranged August 13, 2013.
 
 - Prevent filling out "category" without choosing the competition too.
+ - Not (easily) possible because we always silently choose "all" category.
 
 - Test that we can pay the Paypal account (info@monotreal.ca)
 - Associate the paypal account with the unicon2014 instance.
@@ -19,6 +20,7 @@ Nice-to-have:
 - Give Online registration statistics to Hugo from previous UNICON (how many in each phase)
 -delegate expenseGroup to the paymentDetail and registrantExpenseItem, so that we don't have to explicitly go through the expense_item?
  - Add "# remaining" to the Items page when the items are limited in number
+- Fix the stylesheet/images issue which is preventing serving any of the up-arrow/down-arrow images in PRODUCTION
 
 
 
