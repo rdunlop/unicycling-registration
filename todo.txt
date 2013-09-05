@@ -2,8 +2,6 @@ Last Re-Arranged August 13, 2013.
 
 - Test that we can pay the Paypal account (info@monotreal.ca)
 - Associate the paypal account with the unicon2014 instance.
-- Add InternetExplorer "placeholder" handler code, so that I can ensure that all browsers support it.
-- IUF Registration cost (15) is required for each Competitor.
  - Add age validation to the Jr Expert (and Wheel Walk)
 
  - Add text describing that we will "expire" lodging reservations if not paid when the next registration period occurs.
