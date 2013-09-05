@@ -22,9 +22,9 @@
       <% if show_as_free %>
         <%= ff.submit 'Add FREE Item', {:title => "One is free with your registration", :class => "free_item"} %>
       <% elsif item.maximum_reached? %>
-        <%= ff.submit "Sold Out", :disabled => true, :class => "Sold Out" %>
+        <%= ff.submit "Sold Out", :disabled => true, :class => "sold_out" %>
       <% else %>
-        <%= ff.submit 'Add Item' %>
+        <%= ff.submit 'Add Item', :class => "cost_item" %>
       <% end %>
     <% end %>
   </td>
