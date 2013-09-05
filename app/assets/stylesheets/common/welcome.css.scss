@@ -34,7 +34,7 @@ a.focus_button, a.nonfocus_button {
   padding: 10px 0px;
 }
 
-.focus_button:hover, .registration_button:focus {
+.focus_button:hover {
   color: white;
   text-decoration: none;
   background-color: $focus_hover;
