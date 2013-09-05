@@ -129,7 +129,10 @@ The "Full E-mail" will be the e-mail address in the "From" line.
     MAIL_DOMAIN=dunlopweb.com
     MAIL_USERNAME=robin@dunlopweb.com
     MAIL_PASSWORD=something
+
     MAIL_FULL_EMAIL=robin@dunlopweb.com
+    or, if you want it to have a name as well as an e-mail:
+    MAIL_FULL_EMAIL="NAUCC 2013 <unicycling@dunlopweb.com>"
 
 On Non-GMail systems, you may need to set the MAIL_TLS=false variable too (see initializers/mailer.rb)
 
