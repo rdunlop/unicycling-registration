@@ -22,7 +22,6 @@ nav ul ul {
 
 nav ul {
   background: $background;
-  overflow: hidden;
   width: 100%;
   padding: 0;
   margin: 0px;
@@ -52,11 +51,13 @@ nav ul {
 
 nav ul li#sign-out {
     float: right;
-    position: relative;
-    right: -20px;
+    a {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
 }   
  nav .logo_link {
-  padding: 7px 7px 0 30px;
+  padding: 7px 7px 0 20px;
 }
    
     
@@ -68,6 +69,7 @@ nav ul li#sign-out {
       
     
   nav ul ul {
+    overflow: visible;
     width: auto;
     background: $background; border-radius: 0px; padding: 0;
     position: absolute; top: 100%;
