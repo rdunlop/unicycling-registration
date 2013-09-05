@@ -1,5 +1,7 @@
 Last Re-Arranged August 13, 2013.
 
+- Prevent filling out "category" without choosing the competition too.
+
 - Test that we can pay the Paypal account (info@monotreal.ca)
 - Associate the paypal account with the unicon2014 instance.
  - Add age validation to the Jr Expert (and Wheel Walk)
