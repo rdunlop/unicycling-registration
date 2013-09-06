@@ -108,6 +108,11 @@
       <td>Enabling this allows IUF membership questions.</td>
   </tr>
   <tr>
+      <th><%= f.label :rulebook_url %></th>
+      <td><%= f.url_field :rulebook_url %></td>
+      <td>If left blank, no rulebook links are displayed. Otherwise provides external link to rulebook pdf.</td>
+  </tr>
+  <tr>
       <th><%= f.label :tshirt_closed_date %></th>
       <td><%= f.date_select :tshirt_closed_date %></td>
       <td>Not currently used</td>

@@ -1,6 +1,11 @@
 <% @categories = categories
    @registrant = registrant
  %>
+  <% unless EventConfiguration.rulebook_url.nil? %>
+    <div class="rulebook_link">
+      <%= link_to "Competition Rulebook", EventConfiguration.rulebook_url, :class => "fancybox", :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
+    </div>
+  <% end %>
   <div id="tabs">
     <ul>
       <% @categories.each do |category| %>
