@@ -1,5 +1,10 @@
 Last Re-Arranged August 13, 2013.
 
+- Update the Admin functions for when users are "Admin"....mostly read-only.
+- Allow changing the Bib Numbers for people.
+- Combine multiple expenses onto one line for ease of seeing.
+- Allow "Country Representing" to be nil, and still show up in the All Registrants page. (allow nothing , anytime)
+- Confirm that my address shouldn't be shown to "addititonal addresses".
 - Prevent filling out "category" without choosing the competition too.
  - Not (easily) possible because we always silently choose "all" category.
 

@@ -152,6 +152,9 @@ The DOMAIN setting is used to build the links in the e-mails, set it to the host
 If you want to host your system from a different URL (search heroku
 documentation for details), you should set the DOMAIN to the URL that you will be using.
 
+    Example custom domain:
+    $ heroku domains:add reg.unicon17.ca
+
 
 If you want to allow user accounts to be created WITHOUT requiring e-mail
 confirmation, set the following variable:

@@ -44,7 +44,7 @@ class Registrant < ActiveRecord::Base
   has_many :categories, :through => :events
 
   attr_accessible :registrant_expense_items_attributes
-  has_many :registrant_expense_items, :include => :expense_item
+  has_many :registrant_expense_items, :include => :expense_item, :dependent => :destroy
   has_many :expense_items, :through => :registrant_expense_items
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
   validate :not_exceeding_expense_item_limits
