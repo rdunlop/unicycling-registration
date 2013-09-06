@@ -239,10 +239,10 @@ class Registrant < ActiveRecord::Base
   end
 
   def country
-    unless self.country_representing.nil?
-      self.country_representing
-    else
+    if self.country_representing.nil? or self.country_representing.empty?
       self.country_residence
+    else
+      self.country_representing
     end
   end
 

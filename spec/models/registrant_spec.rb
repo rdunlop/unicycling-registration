@@ -116,6 +116,12 @@ describe Registrant do
     @reg.country.should == "Canada"
   end
 
+  it "returns the country of residence even when country representing is blank" do
+    @reg.country_residence = "Canada"
+    @reg.country_representing = ""
+    @reg.country.should == "Canada"
+  end
+
   it "requires emergency_contact name" do
     @reg.emergency_name = nil
     @reg.valid?.should == false
