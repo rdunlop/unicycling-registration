@@ -1,45 +1,56 @@
-Last Re-Arranged August 13, 2013.
+Last Re-Arranged September 6, 2013.
 
+Registration-Related ToDo
+
+----ROBIN's CURRENT LIST:
+- Get rid of XXX
+- Provide a way to mark certain expense items as "paid for" without having paid money (for volunteers)
+- Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
+- Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
 - Update the Admin functions for when users are "Admin"....mostly read-only.
+---- END ROBIN's CURRENT LIST:
+
+- Add age validation to the Jr Expert (and Wheel Walk)
+- Only allow "Jr Expert" if certain age.
+- Limit the rooms to 1000 by all types (not per type of room)
+- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
+- Give Online registration statistics to Hugo from previous UNICON (how many in each phase)
+- delegate expenseGroup to the paymentDetail and registrantExpenseItem, so that we don't have to explicitly go through the expense_item?
+- Fix the stylesheet/images issue which is preventing serving any of the up-arrow/down-arrow images in PRODUCTION
+
+
+
+
+
+To Do sometime soon:
+- Update all dependencies to latest versions
+- Replace magic strings with class constants
+- "Connie also wants the ability to print all results for a whole event type (i.e. distance) so use some sort of combine pdf function."
+
+Possible (but not required):
 - Allow changing the Bib Numbers for people.
 - Combine multiple expenses onto one line for ease of seeing.
+- Add "# remaining" to the Items page when the items are limited in number
 
- - Add age validation to the Jr Expert (and Wheel Walk)
+- write documentation that describes the major features of the system
+- Write tutorials:
+ - that show how to set up the system for registration
+ - that show how to set up the events
+ - that show how to enter judging results for races
+ - that show how to do artistic judging
 
  - Add text describing that we will "expire" lodging reservations if not paid when the next registration period occurs.
  - Do we want this, or to have different room numbers?
 
 Nice-to-have:
-- Limit the rooms to 1000 by all types (not per type of room)
-- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
- - Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
- - "Connie also wants the ability to print all results for a whole event type (i.e. distance) so use some sort of combine pdf function."
-- Replace magic strings with class constants
-- Give Online registration statistics to Hugo from previous UNICON (how many in each phase)
--delegate expenseGroup to the paymentDetail and registrantExpenseItem, so that we don't have to explicitly go through the expense_item?
- - Add "# remaining" to the Items page when the items are limited in number
-- Fix the stylesheet/images issue which is preventing serving any of the up-arrow/down-arrow images in PRODUCTION
-
-
-
-To Do (in support of UNICON 2014):
-Changing the size of the T-shirt....allow it, but through an e-mail.
-Maximum of 25pp for each classroom.
-3 floors: 40 rooms, 
-
 1) Whatever is simpler, and cancelling the room bookings of un-paid registrants after each period is ok, with an e-mail, and .....
 2) Definately allow people to have multiple slots in a room. (probably)...depends on gyms
 - Maximum per registrant should be 5
 3) Should stay in the same day for the whole stay.
 4) Should be buying a "package deal"(all rooms at once)
 
-
-- Update all dependencies to latest versions
 - Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
  - Due to the "import" feature I think
-- Add ability to select one of a set of "Base CSS" sets in the BaseConfiguration, so that we can have a UNICON, and a NATIONALS, and a "DEV" version.
-- Only allow "Jr Expert" if certain age.
-- Don't allow registering in "A" for both Basketball and Hockey
 
 In support of making NAUCC competitors happier:
 - Create "Participation Cerificate" which lists each Competitor's all results
@@ -62,7 +73,6 @@ To Do (other requests):
 ??- Results should include overall place.
 - Awards labels . "Clear whole column"
 - Autocomplete for Club Name, Group Name, etc.
-- Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
 - Re-write the artistic calculation code to use the new caching strategy, and also to optimize so that the same calculations are not done multiple times (for each place(competitor) call)
 - fix problems when the age groups are not large enough, or when a person's age is >100 (and out of range of the age groups) (problems printing PDFs, etc)
 - Use more Form Helpers (like the RegistrantGroup form helper)
@@ -124,7 +134,6 @@ UNCATEGORIZED:
 
 - Document the flows
 - Automate the testing of the flows 
-- Get rid of XXX
 - Prevent multiple judges from entering results for the same registrant in TimeResults
 
 - Synchronize data between UCP and UDA.
@@ -141,8 +150,6 @@ Standard Skill:
 - Add "Print list" option for standard skill report.
 - Add administrative option which shows signed-up vs filled-out.
 
-#21 Running total of expense items on the "Items" page enhancement
-#7  Registration Period should increase automatically b
 Remove Version table and paper_trail...replace with something else?
 
 TODO:
