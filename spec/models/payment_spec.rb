@@ -92,6 +92,25 @@ describe Payment do
     it "registrant owes for this item" do
       @reg.owing_expense_items.should == [@rei.expense_item]
     end
+    describe "when the user has a free t-shirt and a paid t-shirt" do
+      before(:each) do
+        @rei_free = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item, :free => true)
+        @reg.reload
+      end
+
+      it "markes the correct one as paid when we pay for the non-free one" do
+        @pay.completed = true
+        @pay.save
+        @reg.owing_registrant_expense_items.should == [@rei_free]
+      end
+      it "markes the correct one as paid when we pay for the free one" do
+        @pd.free = true
+        @pd.save
+        @pay.completed = true
+        @pay.save
+        @reg.owing_registrant_expense_items.should == [@rei]
+      end
+    end
     describe "when the payment is paid" do
       before(:each) do
         @pay.completed = true
