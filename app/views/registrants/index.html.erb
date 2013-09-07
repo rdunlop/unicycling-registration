@@ -47,7 +47,11 @@
   <%= render :partial => "registration_periods/list", :locals => {:competitor => false } %><br /><br />
   </div>
 </div>
-
+<% unless EventConfiguration.rulebook_url.nil? %>
+  <div class="rulebook_link">
+    <%= link_to "Competition Rulebook", EventConfiguration.rulebook_url, :class => "fancybox", :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
+  </div>
+<% end %>
 <% if @shared_registrants.count > 0 %>
   <div>The Registrants list includes Registrants shared with you. See the <%= link_to "Registrant Access", user_additional_registrant_accesses_path(@user) %> page for details.
   </div>

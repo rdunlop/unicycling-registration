@@ -246,6 +246,14 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def country_name
+    if self.country_representing.nil? or self.country_representing.empty?
+      Carmen::Country.coded(self.country_residence).name
+    else
+      Carmen::Country.coded(self.country_representing).name
+    end
+  end
+
   def as_json(options={})
     options = {
       :only => [:first_name, :last_name, :gender, :birthday, :bib_number],

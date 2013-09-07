@@ -82,10 +82,9 @@ h1.title {
 }
 
 .notice {
-  display:inline;
+  display:inline-block;
   clear:none;
   padding: 8px 14px;
-  margin-bottom: 20px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   color: #468847;
   background-color: #dff0d8;
@@ -104,10 +103,9 @@ h1.title {
 }
 
 .alert {
-  display:inline;
+  display:inline-block;
   clear:none;
   padding: 8px 14px;
-  margin-bottom: 20px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   color: #b94a48;
   background-color: #f2dede;
