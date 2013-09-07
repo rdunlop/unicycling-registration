@@ -223,6 +223,11 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
   </div>
 
   <div class="bottom_nav non_printable">
+    <% unless EventConfiguration.rulebook_url.nil? %>
+    <div class="rulebook_link">
+      <%= link_to "Competition Rulebook", EventConfiguration.rulebook_url, :class => "fancybox", :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
+    </div>
+  <% end %>
     <p>Developed by Robin Dunlop</p>
     <li><%= link_to 'Help', welcome_help_path %></li>
   </div>
