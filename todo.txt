@@ -10,15 +10,18 @@ Registration-Related ToDo
 
 ----ROBIN's CURRENT LIST:
 - Consider a free item "paid for" always? well...once the registrant's registration has been paid for.
+ - Don't want to require that a user go through paypal to "pay" for "free" items?
 - Add a column to the admin/payments/ page which shows the number of "free" items that have been "paid for".
 - Imrprove the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
 - Add ability to specify "Refunds", which keep things accounted for properly, while also tracking money properly.
+- Provide a way to mark certain expense items as "paid for" without having paid money (for volunteers)
+---- END ROBIN's CURRENT LIST:
+
+
 - Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
 - Update the Admin functions for when users are "Admin"....mostly read-only.
-- Provide a way to mark certain expense items as "paid for" without having paid money (for volunteers)
 - Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
 - Get rid of XXX
----- END ROBIN's CURRENT LIST:
 
 - Add age validation to the Jr Expert (and Wheel Walk)
 - Only allow "Jr Expert" if certain age.
@@ -33,6 +36,7 @@ Registration-Related ToDo
 
 
 To Do sometime soon:
+- Update the Events Report to list the sign-ups on a per-country breakdown
 - Update all dependencies to latest versions
 - Replace magic strings with class constants
 - "Connie also wants the ability to print all results for a whole event type (i.e. distance) so use some sort of combine pdf function."
