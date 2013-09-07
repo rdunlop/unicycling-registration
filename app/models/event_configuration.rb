@@ -1,6 +1,7 @@
 class EventConfiguration < ActiveRecord::Base
   attr_accessible :artistic_closed_date, :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location, :logo_image
-  attr_accessible :long_name, :short_name, :standard_skill, :standard_skill_closed_date, :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url
+  attr_accessible :long_name, :rulebook_url, :short_name, :standard_skill, :standard_skill_closed_date
+  attr_accessible :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url
 
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
@@ -147,6 +148,15 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
+  def self.rulebook_url
+    ec = EventConfiguration.first
+    if ec.nil? or ec.rulebook_url.nil? or  ec.rulebook_url.empty?
+      nil
+    else
+      ec.rulebook_url
+    end
+  end
+
   def self.currency
     ec = EventConfiguration.first
     if ec.nil? or ec.currency.blank?
@@ -164,6 +174,7 @@ class EventConfiguration < ActiveRecord::Base
       ec.currency_code
     end
   end
+
 
   def self.comp_noncomp_url
     ec = EventConfiguration.first
