@@ -27,7 +27,7 @@ class Admin::PaymentsController < Admin::BaseController
 
   def create
     @payment.payment_details.each do |pd|
-      pd.amount = pd.expense_item.cost
+      pd.amount = pd.expense_item.total_cost
     end
     @payment.completed = true
     @payment.completed_date = DateTime.now
@@ -45,32 +45,27 @@ class Admin::PaymentsController < Admin::BaseController
     @registrants = Registrant.order(:id).all
   end
 
+  def onsite_pay_confirm
+    @payment = Payment.new
+    @payment.note = params[:note]
+
+    params[:registrant_id].each do |reg_id|
+      reg = Registrant.find(reg_id)
+      reg.build_owing_payment(@payment)
+    end
+  end
+
   def onsite_pay_create
     @payment = Payment.new(params[:payment])
     @payment.completed = true
     @payment.completed_date = DateTime.now
     @payment.user = current_user
 
-    @registrants = Registrant.order(:id).all
-
     if @payment.save
       redirect_to payment_path(@payment), notice: "Successfully created payment"
     else
       render "onsite_pay_new"
     end
-  end
-
-  def onsite_pay_confirm
-    @payment = Payment.new
-    @payment.note = params[:note]
-
-    @registrants = []
-    params[:registrant_id].each do |reg_id|
-      reg = Registrant.find(reg_id)
-      @registrants << reg
-      reg.build_owing_payment(@payment)
-    end
-    @total = @payment.total_amount
   end
 
 end
