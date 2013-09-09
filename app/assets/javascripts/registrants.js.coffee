@@ -33,3 +33,15 @@ $(document).ready ->
     closeClick: false
     openEffect: "none"
     closeEffect: "none"
+
+$ ->
+  $("select#registrant_country_residence").change (event) ->
+    select_wrapper = $("#registrant_state_wrapper")
+    
+    $("select", select_wrapper).attr "disabled", true
+    
+    country_residence = $(this).val()
+    
+    url = "/subregion_options?parent_region=#{country_residence}"
+    select_wrapper.load(url)
+

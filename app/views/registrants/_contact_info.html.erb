@@ -35,22 +35,22 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :state, :class => "required" %>
-        </td>
-        <td>
-          <%= f.text_field :state %>
-        </td>
-      </tr>
-      <tr>
-        <td>
           <%= f.label :country_residence, "Country of residence", :class => "required" %>
         </td>
         <td>
           <% if EventConfiguration.usa %>
-            <%= f.country_select :country_residence, priority: %w(US CA), prompt: ' ' %>
+            <%= f.country_select :country_residence, {priority: %w(US CA), prompt: ' '}, :id => "registrant_country_residence" %>
           <% else %> 
-            <%= f.country_select :country_residence, prompt: ' ' %>
+            <%= f.country_select :country_residence, {prompt: ' '}, :id => "registrant_country_residence" %>
           <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :state %>
+        </td>
+        <td>
+          <%= render partial: "subregion_select", locals: {parent_region: f.object.country_residence} %>
         </td>
       </tr>
       <tr>

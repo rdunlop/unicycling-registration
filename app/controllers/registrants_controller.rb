@@ -203,4 +203,8 @@ class RegistrantsController < ApplicationController
       end
     end
   end
+
+  def subregion_options
+    render partial: 'subregion_select'
+  end
 end

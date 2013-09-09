@@ -6,7 +6,7 @@ class Registrant < ActiveRecord::Base
   attr_accessible :responsible_adult_name, :responsible_adult_phone
 
   validates :first_name, :last_name, :birthday, :gender, :presence => true
-  validates :address, :city, :state, :country_residence, :zip, :presence => true
+  validates :address, :city, :country_residence, :zip, :presence => true
 
   validates :user_id, :presence => true
   before_validation :set_bib_number, :on => :create
