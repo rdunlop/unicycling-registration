@@ -40,9 +40,9 @@ Workspace::Application.routes.draw do
       resources :age_group_entries, :only => [:index, :create]
     end
     resources :age_group_entries, :except => [:index, :create]
+
     resources :registrants, :only => [:index, :show] do
       collection do
-        get '/subregion_options'
         get :bag_labels
         get :all_summary
         get :email
