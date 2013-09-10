@@ -23,6 +23,21 @@ describe EventChoice do
     @ec2.valid?.should == false
   end
 
+  it "must have a value for optional" do
+    @ec.optional = nil
+    @ec.valid?.should == false
+  end
+
+  it "allows nil for optional_if_event_choice" do
+    @ec.optional_if_event_choice = nil
+    @ec.valid?.should == true
+  end
+
+  it "defaults optional_if_event_choice to nil" do
+    ec = EventChoice.new
+    ec.optional_if_event_choice.should == nil
+  end
+
   it "has an event" do
     @ec.event.should == @event
   end
@@ -62,7 +77,7 @@ describe EventChoice do
   end
 
   it "has a to_s" do
-    @ec.to_s.should == @ec.event.to_s + " - " + @ec.export_name
+    @ec.to_s.should == @ec.event.to_s + " - " + @ec.label
   end
 
   describe "when parsing the multiple_values" do

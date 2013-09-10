@@ -1,8 +1,9 @@
 class EventChoice < ActiveRecord::Base
-  attr_accessible :cell_type, :event_id, :export_name, :label, :multiple_values, :position, :autocomplete, :optional, :tooltip
+  attr_accessible :cell_type, :event_id, :export_name, :label, :multiple_values, :position, :autocomplete, :optional, :tooltip, :optional_if_event_choice_id
 
   belongs_to :event, :touch => true
   has_many :registrant_choices, :dependent => :destroy
+  belongs_to :optional_if_event_choice, :class_name => "EventChoice"
 
   validates :label, {:presence => true}
   validates :export_name, {:presence => true, :uniqueness => true}
@@ -36,6 +37,6 @@ class EventChoice < ActiveRecord::Base
   end
 
   def to_s
-    self.event.to_s + " - " + self.export_name
+    self.event.to_s + " - " + self.label
   end
 end

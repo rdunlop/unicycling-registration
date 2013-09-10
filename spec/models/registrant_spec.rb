@@ -492,6 +492,28 @@ describe Registrant do
         FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "1", :registrant => @reg)
         @reg.describe_event(@ev).should == "#{@ev.name} - #{@ec2.label}: yes"
       end
+
+      describe "with a text_field optional_if_event_choice to the boolean" do
+        before(:each) do
+          FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
+          @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :cell_type => "text", :optional_if_event_choice => @ec2, :position => 2)
+          @reg.reload
+        end
+
+        it "allows the registrant to NOT specify a value for the text field if the checkbox is selected" do
+          FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "1", :registrant => @reg)
+          FactoryGirl.create(:registrant_choice, :event_choice => @ec3, :value => "", :registrant => @reg)
+          @reg.reload
+          @reg.valid?.should == true
+        end
+
+        it "REQUIRES the registrant specify a value for the text field if the checkbox is NOT selected" do
+          FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "0", :registrant => @reg)
+          FactoryGirl.create(:registrant_choice, :event_choice => @ec3, :value => "", :registrant => @reg)
+          @reg.reload
+          @reg.valid?.should == false
+        end
+      end
     end
     describe "with a second event_choice (text-style) for an event" do
       before(:each) do

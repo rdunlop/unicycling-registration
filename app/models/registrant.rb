@@ -164,8 +164,6 @@ class Registrant < ActiveRecord::Base
     events_to_validate = sign_up_events + choice_events
 
     events_to_validate.uniq.each do |event|
-      count_not_selected = 0
-      count_selected = 0
 
       primary_choice_selected = self.registrant_event_sign_ups.select {|resu| resu.event_id == event.id}.first
       if primary_choice_selected.nil? or not primary_choice_selected.signed_up
@@ -178,24 +176,47 @@ class Registrant < ActiveRecord::Base
         # using .select instead of .where, because we need to validate not-yet-saved data
         reg_choice = self.registrant_choices.select{|rc| rc.event_choice_id == event_choice.id}.first
         next if event_choice.optional
+        optional_if_event_choice = event_choice.optional_if_event_choice
+
+        # check to see if this is optional by way of another choice
+        unless optional_if_event_choice.nil?
+          optional_reg_choice = self.registrant_choices.select{|rc| rc.event_choice_id == optional_if_event_choice.id}.first
+          if optional_reg_choice.nil? or not optional_reg_choice.has_value?
+            # the optional choice isn't selected
+            if reg_choice.nil? or not reg_choice.has_value?
+              # this option is NOT selected, but the optional ISN'T either
+              errors[:base] << "#{event_choice.to_s } must be specified unless #{optional_if_event_choice.to_s} is chosen"
+              primary_choice_selected.errors[:signed_up] = "" unless primary_choice_selected.nil? # the primary checkbox
+              next
+            end
+          else
+            if reg_choice.nil? or not reg_choice.has_value?
+              # this option IS NOT selected, and the optional choice IS selected
+              #  DO NOTHING
+              next
+            else
+              # this option IS selected, and the optional Choice IS selected
+               # ensure that we haven't chosen-without-event by falling through
+            end
+          end
+        end
+
         if reg_choice.nil? or not reg_choice.has_value?
           next if event_choice.cell_type == "boolean"
-          count_not_selected += 1
+          if event_selected
+            errors[:base] << "#{event_choice.to_s} must be specified"
+            reg_choice.errors[:value] = "" unless reg_choice.nil?
+            reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
+            primary_choice_selected.errors[:signed_up] = "" unless primary_choice_selected.nil? # the primary checkbox
+          end
         else
-          count_selected += 1
+          if not event_selected
+            errors[:base] << "#{event_choice.to_s} cannot be specified if the event isn't chosen"
+            reg_choice.errors[:value] = "" unless reg_choice.nil?
+            reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
+            primary_choice_selected.errors[:signed_up] = "" unless primary_choice_selected.nil? # the primary checkbox
+          end
         end
-      end
-      if (event_selected and count_not_selected != 0) or (!event_selected and count_selected != 0)
-        # set the error message for each of the registrant_choices that we have
-        event_reg_choices = self.registrant_choices.select{|rc| event.event_choices.include?(rc.event_choice)}
-        event_reg_choices.each do |erc|
-          erc.errors[:value] = "" # causes the field to be highlighted
-          erc.errors[:event_category_id] = "" # causes the field to be highlighted
-        end
-        unless primary_choice_selected.nil?
-          primary_choice_selected.errors[:signed_up] = "" # the primary checkbox
-        end
-        errors[:base] << event.to_s + " choice combination invalid (please fill them all or clear them all)"
       end
     end
     true

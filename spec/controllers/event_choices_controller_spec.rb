@@ -34,7 +34,8 @@ describe EventChoicesController do
     autocomplete: false,
     tooltip: "The tooltip",
     label: "My event choice",
-    optional: false
+    optional: false,
+    optional_if_event_choice_id: nil
     }
   end
 

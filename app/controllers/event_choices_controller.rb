@@ -38,6 +38,7 @@ class EventChoicesController < ApplicationController
   # GET /event_choices/1/edit
   def edit
     @event_choice = EventChoice.find(params[:id])
+    @event_choices = @event_choice.event.event_choices - [@event_choice]
   end
 
   # POST /event/1/event_choices
