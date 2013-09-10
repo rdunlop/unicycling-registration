@@ -18,7 +18,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
+    if params[:locale].blank?
+      I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
+    else
+      I18n.locale = params[:locale]
+    end
   end
 
   rescue_from CanCan::AccessDenied do |exception|
