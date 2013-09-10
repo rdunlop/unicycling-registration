@@ -185,14 +185,16 @@ class Registrant < ActiveRecord::Base
             # the optional choice isn't selected
             if reg_choice.nil? or not reg_choice.has_value?
               # this option is NOT selected, but the optional ISN'T either
+              next if not event_selected
               errors[:base] << "#{event_choice.to_s } must be specified unless #{optional_if_event_choice.to_s} is chosen"
               primary_choice_selected.errors[:signed_up] = "" unless primary_choice_selected.nil? # the primary checkbox
               next
             end
           else
+            # the optional choice IS selected
             if reg_choice.nil? or not reg_choice.has_value?
               # this option IS NOT selected, and the optional choice IS selected
-              #  DO NOTHING
+              #  DO NOTHING, as this is allowed by 'optional_if'
               next
             else
               # this option IS selected, and the optional Choice IS selected
