@@ -2,12 +2,23 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
 
+  before_filter :set_locale
+
   protect_from_forgery
   check_authorization :unless => :devise_controller?
   skip_authorization_check :if => :rails_admin_controller?
 
   def rails_admin_controller?
     false
+  end
+
+  def default_url_options(options={})
+    logger.debug "default_url_options is passed options: #{options.inspect}\n"
+    { locale: I18n.locale }
+  end
+
+  def set_locale
+    I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
   end
 
   rescue_from CanCan::AccessDenied do |exception|

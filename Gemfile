@@ -24,6 +24,7 @@ gem 'rails_admin'
 gem 'carmen-rails'
 gem 'font-kit-rails'
 gem 'fancybox-rails'
+gem 'http_accept_language'
 
 #gem 'sqlite3'
 gem 'pg'
