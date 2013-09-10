@@ -35,7 +35,11 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :state, :class => "required" %>
+          <% if EventConfiguration.usa == true %>
+            <%= f.label :state, :class => "required" %>
+          <% else %>
+            <%= f.label :state, "State/Province" %>
+          <% end %>
         </td>
         <td>
           <%= f.text_field :state %>
