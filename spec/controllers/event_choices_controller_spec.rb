@@ -82,7 +82,7 @@ describe EventChoicesController do
 
   describe "GET edit" do
     it "assigns the requested event_choice as @event_choice" do
-      event_choice = EventChoice.create! valid_attributes
+      event_choice = FactoryGirl.create(:event_choice)
       get :edit, {:id => event_choice.to_param}
       assigns(:event_choice).should eq(event_choice)
     end
