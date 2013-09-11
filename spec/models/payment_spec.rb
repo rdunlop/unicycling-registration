@@ -111,6 +111,20 @@ describe Payment do
         @reg.owing_registrant_expense_items.should == [@rei]
       end
     end
+    describe "when the registrant has two t-shirts, who only differ by details" do
+      before(:each) do
+        @rei2 = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item, :details => "for My Kid")
+        @reg.reload
+      end
+
+      it "marks the correct shirt as paid" do
+        @pd.save
+        @pay.completed = true
+        @pay.save
+        @reg.owing_registrant_expense_items.should == [@rei2]
+      end
+    end
+
     describe "when the payment is paid" do
       before(:each) do
         @pay.completed = true

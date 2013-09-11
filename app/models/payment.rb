@@ -34,7 +34,7 @@ class Payment < ActiveRecord::Base
     return true unless self.completed_changed?
 
     payment_details.each do |pd|
-      rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free}).first
+      rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => pd.details}).first
       unless rei.nil?
         rei.destroy
       end
