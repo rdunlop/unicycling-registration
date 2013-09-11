@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "event_choices/edit" do
   before(:each) do
+    @event_choices = []
     @event_choice = FactoryGirl.create(:event_choice)
   end
 

@@ -47,3 +47,12 @@ Workspace::Application.configure do
   ENV['SECRET'] = "somesecretstringisreallylongenoughtobesecurecheckpassing"
   ENV['ERROR_EMAIL'] = "robin+e@dunlopweb.com"
 end
+
+# Necessary to allow the tests to execute when they don't have a locale defined.
+class ActionDispatch::Routing::RouteSet
+  def url_for_with_locale_fix(options)
+    url_for_without_locale_fix(options.merge(:locale => I18n.locale))
+  end
+
+  alias_method_chain :url_for, :locale_fix
+end
