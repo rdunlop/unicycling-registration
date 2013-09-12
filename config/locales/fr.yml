@@ -2,7 +2,38 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 fr:
-  hello: "Bonjour"
+  registrants:
+    index:
+      create_new_competitor: "Inscrire un nouveau compétiteur"
+      create_new_noncompetitor: "Inscrire un nouveau non-compétiteur"
+      whats_the_difference: "Quelle est la différence ?"
+      comp_registration_cost: "Prix d’inscription – Compétiteur"
+      noncomp_registration_cost: "Prix d’inscription – Non-compétiteur"
+      be_sure_to_submit_payment: "Une fois vos inscriptions créées, assurez-vous de soumettre un paiement."
+      note_date_of_payment_html: "NOTE ! – Votre <b>date de paiement définie le prix de votre inscription</b>, et NON votre date d’inscription."
+      registration_time: "L’inscription prend environ 15 minutes."
+      can_change_events: "Une fois votre inscription terminée, vous pourrez toujours modifier les informations reliées à vos compétitions."
+      onsite_restricted_events: "Afin de planifier les événements de manière appropriée, l’inscription sur place ne pourra offrir tous les événements/items que la pré-inscription permet."
+    registrants_list:
+      registrations: "Inscriptions"
+      total_amount_owing: "Montant total dû :"
+    registrant_list_entry:
+      edit: "Réviser"
+      see_summary: "Voir le résumé"
+      unpaid: "impayé"
+      paid: "Payé"
+    pay_now:
+      pay_now: "Payer maintenant"
+
+  # Common:
+  my_registrations: "Mes inscriptions"
+  my_payments: "Mes paiements"
+  all_registrants: "Tous les participants"
+  sign_out: "Déconnexion"
+  competition_rulebook: "Livre de règlements"
+  developed_by: "Developée par Robin Dunlop"
+  help: "Help" # XXX Change?
+
   first_name: "Prénom"
   last_name: "Nom"
   name: "Nom"

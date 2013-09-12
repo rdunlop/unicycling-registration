@@ -29,16 +29,16 @@
 <div>
   <div class="competitor_sign_up">
     <% if can? :create, Registrant %>
-      <%= link_to 'Create New Competitor', new_registrant_path, :class => "competitor registration_button" %>
+      <%= link_to t(".create_new_competitor"), new_registrant_path, :class => "competitor registration_button" %>
     <% end %>
   </div><div class="non-competitor_sign_up">
     <% if can? :new_noncompetitor, Registrant %>
-      <%= link_to 'Create New Non-Competitor', new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
+      <%= link_to t(".create_new_noncompetitor"), new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
     <% end %>
   </div>
   <% unless EventConfiguration.comp_noncomp_url.nil? %>
     <div class="sign_up_difference">
-      <%= link_to "What's the difference?", EventConfiguration.comp_noncomp_url, :class => "fancybox", :title =>"Click here for more information!" %>
+      <%= link_to t(".whats_the_difference"), EventConfiguration.comp_noncomp_url, :class => "fancybox", :title =>"Click here for more information!" %>
     </div>
   <% end %>
   <div class="competitor_sign_up">
@@ -49,7 +49,7 @@
 </div>
 <% unless EventConfiguration.rulebook_url.nil? %>
   <div class="rulebook_link">
-    <%= link_to "Competition Rulebook", EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
+    <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
   </div>
 <% end %>
 <% if @shared_registrants.count > 0 %>
@@ -65,14 +65,14 @@
 <hr />
 
 <p>
-  Once you have created your registrations, be sure to submit payment.
+<%= t(".be_sure_to_submit_payment") %>
 </p>
-<p>NOTE! - It is the <b>date of your payment that defines the registration fee</b>, NOT the registration date.</p>
+<p><%= t(".note_date_of_payment_html") %></p>
 <% if @waiver %>
   <%= render :partial => "/registrants/waiver" %>
 <% end %>
 <p>
-Registering takes about 15 minutes.<br />
-After you have finished your registration, you are still able to change your event data.<br />
-In order to schedule events properly, On-Site registration will not offer all of the events/items that pre-registration allows.<br />
+<%= t(".registration_time") %><br />
+<%= t(".can_change_events") %><br />
+<%= t(".onsite_restricted_events") %><br />
 </p>

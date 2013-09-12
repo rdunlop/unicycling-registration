@@ -165,12 +165,12 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <%= menu_footer_if_necessary("scores") %>
 
           <% if cannot? :manage, Registrant %>
-            <li><%= link_to 'My Registrations', registrants_path %></li>
-            <li><%= link_to 'My Payments', payments_path %></li>
+            <li><%= link_to t('my_registrations'), registrants_path %></li>
+            <li><%= link_to t('my_payments'), payments_path %></li>
             <% if @config.standard_skill %>
               <li><%= link_to 'My Standard Skill Routines', standard_skill_routines_path %></li>
             <% end %>
-            <li><%= link_to 'All Registrants', all_registrants_path %></li>
+            <li><%= link_to t('all_registrants'), all_registrants_path %></li>
           <% else %>
             <li>
             <%= link_to 'My Data', '#' %>
@@ -186,7 +186,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% end %>
 
           <% unless current_user.nil? %>
-            <li id="sign-out"><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+            <li id="sign-out"><%= link_to t('sign_out'), destroy_user_session_path, :method => :delete %></li>
           <% end %>
       <% end %>
     </ul>
@@ -225,11 +225,11 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
   <div class="bottom_nav non_printable">
     <% unless EventConfiguration.rulebook_url.nil? %>
     <div class="rulebook_link">
-      <%= link_to "Competition Rulebook", EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
+      <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
     </div>
   <% end %>
-    <p>Developed by Robin Dunlop</p>
-    <li><%= link_to 'Help', welcome_help_path %></li>
+    <p><%= t("developed_by") %></p>
+    <li><%= link_to t('help'), welcome_help_path %></li>
   </div>
 </body>
 </html>

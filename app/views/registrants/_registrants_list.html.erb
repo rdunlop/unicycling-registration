@@ -3,7 +3,7 @@
 <% unless my_registrants_list.empty? and shared_list.empty? %>
   <div>
     <fieldset class="registrations_box">
-      <legend>Registrations</legend>
+      <legend><%= t(".registrations") %></legend>
       <table class="registrant_summary">
         <% my_registrants_list.each do |registrant| %>
           <%= render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => false } %>
@@ -16,7 +16,7 @@
           <% total_owing += amount_owing %>
         <% end %>
         <tr>
-          <td colspan="4">Total Amount Owing:</td>
+          <td colspan="4"><%= t(".total_amount_owing") %></td>
           <td><%= print_formatted_currency(total_owing) %></td>
         </tr>
       </table>

@@ -8,11 +8,11 @@
   </td>
   <td>
     <% if can? :update, registrant %>
-      <%= link_to 'Edit', edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+      <%= link_to t('.edit'), edit_registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
     <% end %>
   </td>
   <td>
-    <%= link_to 'See Summary', registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
+    <%= link_to t('.see_summary'), registrant_path(registrant), :class => "registrant_edit_button " + (registrant.competitor ? "competitor" : "noncompetitor" ) %>
   </td>
   <% if @waiver %>
   <td>
@@ -22,9 +22,9 @@
   <td>
     <% amount_owing = registrant.amount_owing %>
     <% if amount_owing > 0 %>
-      <span class="unpaid"><%= print_formatted_currency(amount_owing) %> Unpaid</span>
+      <span class="unpaid"><%= print_formatted_currency(amount_owing) %> <%= t(".unpaid") %></span>
     <% else %>
-      <span class="paid">Paid</span>
+      <span class="paid"><%= t(".paid") %></span>
     <% end %>
   </td>
 </tr>

@@ -1,7 +1,7 @@
 <div class="registrations_box">
   <% if can? :create, Payment %>
     <div class="payment_process">
-      <%= link_to "Pay Now", new_payment_path, :class => "payment_link" %>
+      <%= link_to t(".pay_now"), new_payment_path, :class => "payment_link" %>
     </div>
     <div class="prices_increase">
       Prices Increase
