@@ -47,7 +47,7 @@ class Payment < ActiveRecord::Base
   end
 
   def total_amount
-    payment_details.reduce(0) { |memo, pd| memo + pd.amount }
+    payment_details.reduce(0) { |memo, pd| memo + pd.cost }
   end
 
   def self.total_received
@@ -62,10 +62,8 @@ class Payment < ActiveRecord::Base
 
   def self.paid_expense_items
     all = []
-    Payment.all.each do |payment|
-      next unless payment.completed
-
-      all += payment.payment_details.map{ |ei| ei.expense_item }
+    Registrant.all.each do |reg|
+      all += reg.paid_expense_items
     end
     all
   end

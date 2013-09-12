@@ -27,13 +27,17 @@ describe Payment do
 
   describe "with payment details" do
     before(:each) do
-      @pd = FactoryGirl.create(:payment_detail, :payment => @pay)
+      @pd = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => 10)
     end
     it "has payment_details" do
       @pay.payment_details.should == [@pd]
     end
     it "can calcalate the payment total-amount" do
       @pay.total_amount.should == @pd.amount
+    end
+    it "can calculate the total including refunds" do
+      @pd2 = FactoryGirl.create(:payment_detail, :payment => @pay, :refund => true, :amount => 5)
+      @pay.total_amount.should == 5
     end
   end
 
@@ -76,6 +80,17 @@ describe Payment do
     it "returns the set of paid expense_items" do
       pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
       Payment.paid_expense_items.should == [pd.expense_item]
+    end
+
+    describe "with a refund" do
+      before(:each) do
+      end
+
+      it "doesn't list the item in the paid_expense_items" do
+        pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
+        pd2= FactoryGirl.create(:payment_detail, :payment => payment, :registrant => pd.registrant, :expense_item => pd.expense_item, :amount => 15.33, :refund => true)
+        Payment.paid_expense_items.should == []
+      end
     end
   end
 

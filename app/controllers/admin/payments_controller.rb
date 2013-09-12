@@ -60,6 +60,7 @@ class Admin::PaymentsController < Admin::BaseController
       reg.build_owing_payment(@payment)
       @registrants << reg
     end
+    load_payment_details
   end
 
   def onsite_pay_create
@@ -77,7 +78,7 @@ class Admin::PaymentsController < Admin::BaseController
   private
 
   def payment_params
-    params.require(:payment).permit(:cancelled, :completed, :completed_date, :payment_date, :transaction_id, :user_id, :note,
+    params.require(:payment).permit(:cancelled, :completed, :completed_date, :payment_date, :transaction_id, :note,
                                     :payment_details_attributes => [:amount, :payment_id, :registrant_id, :expense_item_id, :details, :free, :refund])
   end
 end

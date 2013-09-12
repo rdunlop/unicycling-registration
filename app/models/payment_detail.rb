@@ -3,7 +3,8 @@ class PaymentDetail < ActiveRecord::Base
   attr_accessible :amount, :payment_id, :registrant_id, :expense_item_id, :details, :free
   attr_accessible :refund
 
-  validates :payment, :registrant_id, :amount, :expense_item, :presence => true
+  validates :payment, :registrant_id, :expense_item, :presence => true
+  validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
 
   has_paper_trail
 
@@ -28,11 +29,19 @@ class PaymentDetail < ActiveRecord::Base
   def cost
     return 0 if free
 
-    amount
+    if refund
+      -amount
+    else
+      amount
+    end
   end
 
   def to_s
-    expense_item.to_s
+    res = ""
+    if refund
+      res += "Refund: "
+    end
+    res += expense_item.to_s
   end
 
 end

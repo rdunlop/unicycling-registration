@@ -5,14 +5,48 @@
   </script>
 <% end %>
 
-<div>
-  Confirm the items to be paid for:
-</div>
+<h1>New payment</h1>
+
+<h1>
+  Select the items to pay for:
+</h1>
 
 <div class="payment_details">
   <%= form_for(@payment, :url => onsite_pay_create_admin_payments_path) do |f| %>
-    <%= f.label :note %><%= f.text_field :note %><br />
-    <%= render :partial => "/payments/form_contents", :locals => {:f => f } %>
+    <%= render :partial => "/shared/error_messages", :object => @payment %>
+
+    <%= f.label :note, "Payment Note" %>: <%= f.text_field :note %><br />
+    <%= f.label :payment_date %>: <%= f.text_field :payment_date %><br />
+
+    <table class="sortable">
+      <thead>
+        <tr>
+          <th>Registrant</th>
+          <th>Item</th>
+          <th>Details (only required for some items)</th>
+          <th>Free</th>
+          <th>Refund</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.fields_for :payment_details do |pf| %>
+          <tr>
+            <td><%= pf.select :registrant_id, Registrant.order("first_name, last_name").all.map {|reg| [reg, reg.id] }, :include_blank => true %></td>
+            <td><%= pf.select :expense_item_id, ExpenseItem.all.map {|ei| [ei.to_s + " - " + ei.cost.to_s, ei.id] }, :include_blank => true  %></td>
+            <td><%= pf.text_field :details %></td>
+            <td><%= pf.check_box :free %></td>
+            <td><%= pf.check_box :refund %></td>
+            <td><%= pf.text_field :amount %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="actions">
+      <%= f.submit 'Create Payment', :class => "payment_link registration_button" %>
+    </div>
   <% end %>
+</div>
 <div>
-<%= link_to 'Back', onsite_pay_new_admin_payments_path %>
+  <%= link_to 'Back', registrants_path %>
+</div>

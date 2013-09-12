@@ -265,6 +265,16 @@ describe Registrant do
         it "has expenses from both registrants" do
           Registrant.all_expense_items.should =~ [@item, @item, @ei]
         end
+
+        describe "when one is refunded" do
+          before(:each) do
+            @payment = FactoryGirl.create(:payment, :completed => true)
+            @payment_detail_refund = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @item.cost, :expense_item => @item, :refund => true)
+          end
+          it "does not count the refunded expense item" do
+            Registrant.all_expense_items.should =~ [@item, @ei]
+          end
+        end
       end
     end
   end
@@ -381,6 +391,22 @@ describe Registrant do
       end
       it "knows that the registration_fee has been paid" do
         @comp.reg_paid?.should == true
+      end
+
+      it "lists the payment_detail as a paid_detail" do
+        @comp.paid_details.should == [@payment_detail]
+      end
+
+      describe "with a refund of everything it has completed" do
+        before(:each) do
+          @payment = FactoryGirl.create(:payment, :completed => true)
+          @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100, :expense_item => @comp_exp, :refund => true)
+        end
+
+        it "lists nothing as paid" do
+          @comp.paid_details.should == []
+          @comp.payment_details.count.should == 2
+        end
       end
     end
 
