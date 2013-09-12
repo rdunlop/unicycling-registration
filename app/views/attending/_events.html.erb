@@ -20,7 +20,7 @@
             <%= link_to "More Info [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"} %>
           </div>
         <% end %>
-        <table class="events">
+        <table class="events alternate">
           <% category.events.each do |event| %>
             <% next unless event.visible %>
             <tr class="event">
