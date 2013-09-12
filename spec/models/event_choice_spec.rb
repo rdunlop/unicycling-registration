@@ -14,6 +14,12 @@ describe EventChoice do
     @ec.valid?.should == false
   end
 
+  it "can have an empty tooltip" do
+    @ec.tooltip = ""
+    @ec.valid?.should == true
+    (@ec.tooltip.blank? ? true : false ).should == true
+  end
+
   it "requires a export_name" do
     @ec.export_name = nil
     @ec.valid?.should == false
