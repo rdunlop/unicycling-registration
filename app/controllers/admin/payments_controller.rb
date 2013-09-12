@@ -1,6 +1,11 @@
 class Admin::PaymentsController < Admin::BaseController
   before_filter :authenticate_user!
+  before_filter :create_payment, :only => [:create, :onsite_pay_create]
   load_and_authorize_resource
+
+  def create_payment
+    @payment = Payment.new(payment_params)
+  end
 
   def load_payment_details
     10.times do
@@ -48,15 +53,16 @@ class Admin::PaymentsController < Admin::BaseController
   def onsite_pay_confirm
     @payment = Payment.new
     @payment.note = params[:note]
+    @registrants = []
 
     params[:registrant_id].each do |reg_id|
       reg = Registrant.find(reg_id)
       reg.build_owing_payment(@payment)
+      @registrants << reg
     end
   end
 
   def onsite_pay_create
-    @payment = Payment.new(params[:payment])
     @payment.completed = true
     @payment.completed_date = DateTime.now
     @payment.user = current_user
@@ -68,4 +74,10 @@ class Admin::PaymentsController < Admin::BaseController
     end
   end
 
+  private
+
+  def payment_params
+    params.require(:payment).permit(:cancelled, :completed, :completed_date, :payment_date, :transaction_id, :user_id, :note,
+                                    :payment_details_attributes => [:amount, :payment_id, :registrant_id, :expense_item_id, :details, :free, :refund])
+  end
 end

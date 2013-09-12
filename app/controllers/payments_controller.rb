@@ -1,8 +1,13 @@
 class PaymentsController < ApplicationController
   before_filter :authenticate_user!, :except => [:notification, :success]
+  before_filter :create_payment, :only => [:create]
   load_and_authorize_resource :except => [:notification, :success]
   skip_authorization_check :only => [:notification, :success]
   skip_before_filter :verify_authenticity_token, :only => [:notification, :success]
+
+  def create_payment
+    @payment = Payment.new(payment_params)
+  end
 
   # GET /payments
   # GET /payments.json
@@ -101,5 +106,11 @@ class PaymentsController < ApplicationController
 
   # PayPal return endpoint
   def success
+  end
+
+  private
+  def payment_params
+    params.require(:payment).permit(:cancelled, :completed, :completed_date, :payment_date, :transaction_id, :user_id, :note,
+                                    :payment_details_attributes => [:amount, :payment_id, :registrant_id, :expense_item_id, :details, :free, :_destroy])
   end
 end

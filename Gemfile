@@ -25,6 +25,7 @@ gem 'carmen-rails'
 gem 'font-kit-rails'
 gem 'fancybox-rails'
 gem 'http_accept_language'
+gem 'strong_parameters'
 
 #gem 'sqlite3'
 gem 'pg'

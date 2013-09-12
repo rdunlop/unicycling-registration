@@ -191,10 +191,12 @@ describe PaymentsController do
                 :expense_item_id => @ei.id,
                 :details => "Additional Details",
                 :free => true,
+                :refund => true,
                 :amount => 100
              }]
           }}
           PaymentDetail.count.should == 1
+          PaymentDetail.last.refund.should == false
         end
       end
     end
@@ -203,14 +205,14 @@ describe PaymentsController do
       it "assigns a newly created but unsaved payment as @payment" do
         # Trigger the behavior that occurs when invalid params are submitted
         Payment.any_instance.stub(:save).and_return(false)
-        post :create, {:payment => {}}
+        post :create, {:payment => {:other => true}}
         assigns(:payment).should be_a_new(Payment)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Payment.any_instance.stub(:save).and_return(false)
-        post :create, {:payment => {}}
+        post :create, {:payment => {:other => true}}
         response.should render_template("new")
       end
     end

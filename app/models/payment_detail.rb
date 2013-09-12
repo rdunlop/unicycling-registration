@@ -1,5 +1,7 @@
 class PaymentDetail < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :amount, :payment_id, :registrant_id, :expense_item_id, :details, :free
+  attr_accessible :refund
 
   validates :payment, :registrant_id, :amount, :expense_item, :presence => true
 

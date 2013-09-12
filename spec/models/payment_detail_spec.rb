@@ -28,6 +28,11 @@ describe PaymentDetail do
     @pd.valid?.should == false
   end
 
+  it "is not a refund by default" do
+    pay = PaymentDetail.new
+    pay.refund.should == false
+  end
+
   it "is not scoped as completed if not completed" do
     @pd.payment.completed.should == false
     PaymentDetail.completed.should == []

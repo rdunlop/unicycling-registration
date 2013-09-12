@@ -9,6 +9,7 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
+- Determine if "unoauthorized" message is now being lost due to locale?
 - Consider a free item "paid for" always? well...once the registrant's registration has been paid for.
  - Don't want to require that a user go through paypal to "pay" for "free" items?
 - Add a column to the admin/payments/ page which shows the number of "free" items that have been "paid for".
