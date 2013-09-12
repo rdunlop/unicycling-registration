@@ -110,7 +110,6 @@ class PaymentsController < ApplicationController
 
   private
   def payment_params
-    params.require(:payment).permit(:cancelled, :completed, :completed_date, :payment_date, :transaction_id, :user_id, :note,
-                                    :payment_details_attributes => [:amount, :payment_id, :registrant_id, :expense_item_id, :details, :free, :_destroy])
+    params.require(:payment).permit(:payment_details_attributes => [:amount, :registrant_id, :expense_item_id, :details, :free, :_destroy])
   end
 end
