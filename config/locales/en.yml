@@ -25,6 +25,45 @@ en:
     pay_now:
       pay_now: "Pay Now"
 
+    new:
+      new_registrant: "New Registrant"
+    edit:
+      editing_registrant: "Editing Registrant"
+    form:
+      required_fields: "Required fields"
+      delete: "Delete"
+      base_details: "Base Details"
+      birthday: "Birthday"
+      male: "Male"
+      female: "Female"
+      primary_team_or_club_name: "Primary Team or Club Name"
+      primary_team_or_club_contact: "Primary Team or Club Contact"
+      i_am_interested_in_volunteering: "I am interested in volunteering"
+      i_accept_to_be_contacted: "I accept to be contacted by email by the Organization team"
+      continue: "Continue (Expenses…)"
+    name:
+      name: "Name"
+      first_name: "First"
+      last_name: "Last"
+    contact_info:
+      contact_information: "Contact Information"
+      address: "Address"
+      city: "City"
+      state: "State"
+      state_province: "State/Province"
+      country_of_residence: "Country of residence"
+      country_representing: "Country representing"
+      country_representing_description: "If you are representing a different country than where you reside, enter it here"
+      zip: "Zip"
+      phone: "Phone"
+      email: "Email"
+
+  attending:
+    events:
+      more_info: "More Info"
+      category: "Category"
+
+
   # Common, used on many pages
   my_registrations: "My Registrations"
   my_payments: "My Payments"
@@ -33,7 +72,5 @@ en:
   competition_rulebook: "Competition Rulebook"
   developed_by: "Developed by Robin Dunlop"
   help: "Help"
+  back: "Back"
 
-  first_name: "First"
-  last_name: "Last"
-  name: "Name"

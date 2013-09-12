@@ -1,7 +1,7 @@
 <fieldset>
-  <legend>Contact Information</legend>
+  <legend><%= t(".contact_information") %></legend>
   <fieldset class="data_block">
-    <legend>Address</legend>
+    <legend><%= t(".address") %></legend>
     <table>
       <% unless other_registrant.nil? %>
         <tr>
@@ -19,7 +19,7 @@
       <% end %>
       <tr>
         <td>
-          <%= f.label :address, :class => "required" %>
+          <%= f.label :address, t(".address"), :class => "required" %>
         </td>
         <td>
           <%= f.text_field :address %>
@@ -27,7 +27,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :city, :class => "required" %>
+          <%= f.label :city, t(".city"), :class => "required" %>
         </td>
         <td>
           <%= f.text_field :city %>
@@ -36,9 +36,9 @@
       <tr>
         <td>
           <% if EventConfiguration.usa == true %>
-            <%= f.label :state, :class => "required" %>
+            <%= f.label :state, t(".state"), :class => "required" %>
           <% else %>
-            <%= f.label :state, "State/Province" %>
+            <%= f.label :state, t(".state_province") %>
           <% end %>
         </td>
         <td>
@@ -47,7 +47,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :country_residence, "Country of residence", :class => "required" %>
+          <%= f.label :country_residence, t(".country_of_residence"), :class => "required" %>
         </td>
         <td>
           <% if EventConfiguration.usa %>
@@ -59,19 +59,19 @@
       </tr>
       <tr>
         <td> 
-          <%= f.label :country_representing, :title => "If you are representing a different country than where you reside, enter it here" %>
+          <%= f.label :country_representing, t(".country_representing"), :title => t(".country_representing_description") %>
         </td>
         <td>
           <% if EventConfiguration.usa %>
-             <%= f.country_select(:country_representing, {priority: %w(US CA), prompt: ' '}, {:title => "If you are representing a different country than where you reside, enter it here"}) %>
+            <%= f.country_select(:country_representing, {priority: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description") }) %>
           <% else %> 
-            <%= f.country_select(:country_representing, {prompt: ' '}, {:title => "If you are representing a different country than where you reside, enter it here"}) %>
+            <%= f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description") }) %>
           <% end %>
         </td>
       </tr>
       <tr>
         <td>
-          <%= f.label :zip, :class => "required" %>
+          <%= f.label :zip, t(".zip"), :class => "required" %>
         </td>
         <td>
           <%= f.text_field :zip %>
@@ -79,7 +79,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :phone %>
+          <%= f.label :phone, t(".phone") %>
         </td>
         <td>
           <%= f.telephone_field :phone %>
@@ -87,7 +87,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :mobile %>
+          <%= f.label :mobile, t(".mobile") %>
         </td>
         <td>
           <%= f.telephone_field :mobile %>
@@ -95,7 +95,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :email %>
+          <%= f.label :email, t(".email") %>
         </td>
         <td>
           <%= f.email_field :email, :class => "ui-tooltip", :title => "Provide your email address to receive updates to registration, schedule, and new events." %>

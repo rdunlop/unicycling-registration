@@ -25,6 +25,45 @@ fr:
     pay_now:
       pay_now: "Payer maintenant"
 
+    new:
+      new_registrant: "Nouvelle entrée de compétiteur"
+    edit:
+      editing_registrant: "Modifier une entrée de compétiteur"
+    form:
+      required_fields: "Champs obligatoires"
+      delete: "Supprimer"
+      base_details: "Informations de base"
+      birthday: "Date de naissance"
+      male: "Homme"
+      female: "Femme"
+      primary_team_or_club_name: "Nom de l’équipe principale ou de l’association"
+      primary_team_or_club_contact: "Nom du contact de l’équipe principale ou de l’association"
+      i_am_interested_in_volunteering: "Je suis intéressé à faire du bénévolat"
+      i_accept_to_be_contacted: "J’accepte d’être contacté par courriel par le Comité organisateur"
+      continue: "Continuer (Frais…)"
+    name:
+      name: "Nom"
+      first_name: "Prénom"
+      last_name: "Nom"
+    contact_info:
+      contact_information: "Coordonnées"
+      address: "Adresse"
+      city: "Ville"
+      state: "État"
+      state_province: "État/Province"
+      country_of_residence: "Pays de residence"
+      country_representing: "Pays représenté"
+      country_representing_description: "Si vous représentez un pays différent de celui où vous résidez, entrez-le ici"
+      zip: "Code postal"
+      phone: "Numéro de téléphone"
+      mobile: "Numéro de portable"
+      email: "Courriel"
+
+  attending:
+    events:
+      more_info: "Plus d’infos"
+      category: "Catégorie"
+
   # Common:
   my_registrations: "Mes inscriptions"
   my_payments: "Mes paiements"
@@ -33,7 +72,5 @@ fr:
   competition_rulebook: "Livre de règlements"
   developed_by: "Developée par Robin Dunlop"
   help: "Help" # XXX Change?
+  back: "Retour"
 
-  first_name: "Prénom"
-  last_name: "Nom"
-  name: "Nom"

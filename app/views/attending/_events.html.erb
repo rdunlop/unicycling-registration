@@ -3,7 +3,7 @@
  %>
   <% unless EventConfiguration.rulebook_url.nil? %>
     <div class="rulebook_link">
-      <%= link_to "Competition Rulebook", EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
+      <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
     </div>
   <% end %>
   <div id="tabs">
@@ -17,7 +17,7 @@
       <div id="tabs-<%= category.id %>">
         <% unless category.info_url.nil? or category.info_url.blank? %>
           <div class="event_link">
-            <%= link_to "More Info [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"} %>
+            <%= link_to "#{t('.more_info')} [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"} %>
           </div>
         <% end %>
         <table class="events alternate">
@@ -42,7 +42,7 @@
                     <% else %>
                       </td>
                       <td class="event_choice">
-                      <%= resu.label :event_category_id, 'Category' %>
+                      <%= resu.label :event_category_id, t('.category') %>
                       <%= resu.select :event_category_id, event.event_categories.map{ |ec| [ec.name, ec.id] }, :include_blank => true %>
                     <% end %>
                   </td>

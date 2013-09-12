@@ -25,30 +25,30 @@
     <% unless @registrant.new_record? %>
       <div class="delete_link">
         <% if can? :destroy, @registrant %>
-          <%= link_to 'Delete', registrant_path(@registrant), :confirm => "Are you sure you want to delete this registration", :method => :delete %>
+          <%= link_to t('.delete'), registrant_path(@registrant), :confirm => "Are you sure you want to delete this registration", :method => :delete %>
         <% end %>
       </div>
     <% end %>
-    <div class="required">Required fields</div>
+    <div class="required"><%= t(".required_fields") %></div>
     <fieldset class="data_block">
-      <legend>Base Details</legend>
+      <legend><%= t(".base_details") %></legend>
       <span>
         <%= render :partial => "/registrants/name", :locals => {:f => f } %>
       </span>
       <span>
-        <%= f.label :birthday, :class => "required" %>
+        <%= f.label :birthday, t(".birthday"), :class => "required" %>
         <%= f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true, :order => [:month, :day, :year]} %>
       </span>
       <span>
-        <%= f.label :gender_male, 'Male', :class => "required" %>
+        <%= f.label :gender_male, t('.male'), :class => "required" %>
         <%= f.radio_button :gender, 'Male' %>
-        <%= f.label :gender_female, 'Female', :class => "required" %>
+        <%= f.label :gender_female, t('.female'), :class => "required" %>
         <%= f.radio_button :gender, 'Female' %>
       </span>
       <span>
-        <%= f.label :club, "Primary Team or Club Name" %>
+        <%= f.label :club, t(".primary_team_or_club_name") %>
         <%= f.text_field :club %><br />
-        <%= f.label :club_contact, "Primary Team or Club Contact" %>
+        <%= f.label :club_contact, t(".primary_team_or_club_contact") %>
         <%= f.text_field :club_contact, :size => 25  %>
       </span>
       <% if EventConfiguration.usa %>
@@ -58,8 +58,8 @@
         </span>
       <% end %>
       <span>
-        <%= f.label :volunteer, "I am interested in volunteering" %>
-        <%= f.check_box :volunteer, :title => "I accept to be contacted by email by the Organization team" %>
+        <%= f.label :volunteer, t(".i_am_interested_in_volunteering") %>
+        <%= f.check_box :volunteer, :title => t(".i_accept_to_be_contacted") %>
       </span>
     </fieldset>
     <%= render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor } %>
@@ -75,9 +75,9 @@
   </div>
   <div class="actions">
     <% if @registrant.competitor %>
-      <%= f.submit 'Continue (Expenses...)', :class => "competitor registration_button" %>
+      <%= f.submit t('.continue'), :class => "competitor registration_button" %>
     <% else %>
-      <%= f.submit 'Continue (Expenses...)', :class => "noncompetitor registration_button" %>
+      <%= f.submit t('.continue'), :class => "noncompetitor registration_button" %>
     <% end %>
   </div>
 <% end %>

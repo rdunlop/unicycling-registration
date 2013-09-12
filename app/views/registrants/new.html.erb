@@ -1,4 +1,4 @@
-<h1>New Registration</h1>
+<h1><%= t(".new_registration") %></h1>
 <% if mixpanel? %>
   <script type="text/javascript">
     mixpanel.track("New Registrant Page Loaded", {'competitor': <%= @registrant.competitor %>})
@@ -7,4 +7,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', registrants_path %>
+<%= link_to t("Back"), registrants_path %>
