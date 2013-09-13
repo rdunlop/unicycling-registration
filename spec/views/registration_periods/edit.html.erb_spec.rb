@@ -12,7 +12,6 @@ describe "registration_periods/edit" do
     assert_select "form", :action => registration_periods_path(@registration_period), :method => "post" do
       assert_select "select#registration_period_competitor_expense_item_id", :name => "registration_period[competitor_expense_item_id]"
       assert_select "select#registration_period_noncompetitor_expense_item_id", :name => "registration_period[noncompetitor_expense_item_id]"
-      assert_select "input#registration_period_name", :name => "registration_period[name]"
       assert_select "input#registration_period_onsite", :name => "registration_period[onsite]"
     end
   end
