@@ -64,6 +64,14 @@ en:
       more_info: "More Info"
       category: "Category"
 
+  registration_periods:
+    list:
+      competitor_registration_cost: "Competitor Registration Cost"
+      noncompetitor_registration_cost: "Non-Competitor Registration Cost"
+      from: "From"
+      to: "to"
+      online_Registration_closes: "Online Registration Closes"
+
 
   # Common, used on many pages
   my_registrations: "My Registrations"

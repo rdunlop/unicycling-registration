@@ -64,6 +64,14 @@ fr:
       more_info: "Plus d’infos"
       category: "Catégorie"
 
+  registration_periods:
+    list:
+      competitor_registration_cost: "Prix d’inscription – Compétiteur"
+      noncompetitor_registration_cost: "Prix d’inscription – Non-compétiteur"
+      from: "Du"
+      to: "au"
+      online_registration_closes: "Fermeture des inscriptions en ligne le"
+
   # Common:
   my_registrations: "Mes inscriptions"
   my_payments: "Mes paiements"

@@ -1,5 +1,5 @@
 <fieldset class="registration_period_block">
-  <legend><%= competitor ? "Competitor" : "Non-Competitor" %> Registration Cost</legend>
+  <legend><%= competitor ? t(".competitor_registration_cost") : t(".noncompetitor_registration_cost") %></legend>
     <table>
       <% closed_date = EventConfiguration.closed_date %>
         <% RegistrationPeriod.includes(:competitor_expense_item).includes(:noncompetitor_expense_item).all.each do |period| %>
@@ -11,9 +11,9 @@
             <tr>
           <% end %>
                 <td><%= period.name %></td>
-                <td>From</td>
+                <td><%= t(".from") %></td>
                 <td><%=period.start_date.strftime("%b %d, %Y") %></td>
-                <td> to </td>
+                <td><%= t(".to") %></td>
                 <td><%=period.end_date.strftime("%b %d, %Y") %></td>
                 <td><b>
                 <% if competitor %>
@@ -25,7 +25,7 @@
             </tr>
             <% if period.end_date == closed_date %>
               <tr>
-                <td colspan="6" class="registration_closes_notice">Online Registration Closes <%= closed_date.strftime("%b %d, %Y") %></td>
+                <td colspan="6" class="registration_closes_notice"><%= t(".online_registration_closes") %> <%= closed_date.strftime("%b %d, %Y") %></td>
               </tr>
             <% end %>
         <% end %>
