@@ -19,9 +19,11 @@ Registration-Related ToDo
 - Imrprove the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
 - Add ability to specify "Refunds", which keep things accounted for properly, while also tracking money properly.
 - Provide a way to mark certain expense items as "paid for" without having paid money (for volunteers)
+- create a better footer, which floats, and also contains links to Language-selection
 ---- END ROBIN's CURRENT LIST:
 
 
+- Provide Rolf with a view which shows him the Teams/Team captains, etc
 - Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
 - Update the Admin functions for when users are "Admin"....mostly read-only.
 - Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
