@@ -10,6 +10,7 @@ Registration-Related ToDo
 
 ----ROBIN's CURRENT LIST:
 - add "Registration" to the end of RegistrationPeriods in prod
+- Translate "Please Wait" from buttons
 
 - Determine if "unoauthorized" message is now being lost due to locale?
 - Consider a free item "paid for" always? well...once the registrant's registration has been paid for.

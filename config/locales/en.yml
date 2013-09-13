@@ -117,9 +117,6 @@ en:
       cost: "Cost"
       paid: "Paid"
 
-
-
-
   attending:
     events:
       more_info: "More Info"
@@ -133,6 +130,29 @@ en:
       to: "to"
       online_Registration_closes: "Online Registration Closes"
 
+  payments:
+    index:
+      my_payments: "My Payments"
+    new:
+      select_the_items_to_pay_for: "Select the items to pay for"
+    form_contents:
+      registrant: "Registrant"
+      details: "Details"
+      cost: "Cost"
+      total_cost: "Total Cost"
+      unselect_all: "Unselect All"
+      select_all: "Select All"
+      start_payment: "Start Payment"
+    show:
+      payment_summary: "Payment Summary"
+      please_proceed_with_payment: "Please proceed with your payment"
+      pay_with_paypal: "Pay with Paypal"
+    summary:
+      payment_details: "Payment Details"
+      registrant: "Registrant"
+      cost: "Cost"
+      tax: "Tax"
+      total_cost: "Total Cost"
 
   # Common, used on many pages
   my_registrations: "My Registrations"

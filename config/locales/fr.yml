@@ -130,6 +130,30 @@ fr:
       to: "au"
       online_registration_closes: "Fermeture des inscriptions en ligne le"
 
+  payments:
+    index:
+      my_payments: "Mes paiements"
+    new:
+      select_the_items_to_pay_for: "Sélectionner les items pour lesquels vous souhaitez payer"
+    form_contents:
+      registrant: "Participant"
+      details: "Détails"
+      cost: "Prix"
+      total_cost: "Prix total"
+      unselect_all: "Désélectionner tous"
+      select_all: "Sélectionner tous"
+      start_payment: "Débuter le paiement"
+    show:
+      payment_summary: "Résumé du paiement"
+      please_proceed_with_payment: "Veuillez procéder à votre paiement"
+      pay_with_paypal: "Payer avec Paypal"
+    summary:
+      payment_details: "Détails du paiement"
+      registrant: "Participant"
+      cost: "Prix"
+      tax: "taxes"
+      total_cost: "Prix total"
+
   # Common:
   my_registrations: "Mes inscriptions"
   my_payments: "Mes paiements"

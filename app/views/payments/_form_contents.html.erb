@@ -13,14 +13,14 @@
   <table class="sortable">
     <thead>
       <tr>
-        <th>Registrant</th>
+        <th><%= t(".registrant") %></th>
         <th>Item</th>
-        <th>Details</th>
-        <th>Cost</th>
+        <th><%= t(".details") %></th>
+        <th><%= t(".cost") %></th>
         <th>Taxes</th>
-        <th>Total Cost</th>
+        <th><%= t(".total_cost") %></th>
         <th class="choose_payments">
-          <a href="#" id="unselect_all">Unselect All</a>/<a href="#" id="select_all">Select All</a>
+          <a href="#" id="unselect_all"><%= t(".unselect_all") %></a>/<a href="#" id="select_all"><%= t(".select_all") %></a>
         </th>
       </tr>
     </thead>
@@ -58,5 +58,5 @@
     </tfoot>
   </table>
   <div class="actions">
-    <%= f.submit 'Start Payment', :class => "payment_link registration_button" %>
+    <%= f.submit t(".start_payment"), :class => "payment_link registration_button" %>
   </div>

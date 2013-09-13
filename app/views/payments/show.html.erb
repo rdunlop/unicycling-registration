@@ -4,12 +4,12 @@
   </script>
 <% end %>
 
-<h1>Payment Summary</h1>
+<h1><%= t(".payment_summary") %></h1>
 <%= render :partial => "summary", :locals => {:payment => @payment } %>
 
 
 <% unless @payment.completed %>
-  Please proceed with your payment:
+  <%= t(".please_proceed_with_payment") %>:
   <div>
     <%= form_tag @payment.paypal_post_url do %>
       <%= hidden_field_tag :business, ENV["PAYPAL_ACCOUNT"] %>
@@ -26,7 +26,7 @@
         <%= hidden_field_tag "item_name_#{index + 1}", pd.expense_item.to_s %>
         <%= hidden_field_tag "quantity_#{index + 1}", "1" %>
       <% end %>
-      <%= submit_tag "Pay with Paypal", :class => "payment_link registration_button" %>
+      <%= submit_tag t(".pay_with_paypal"), :class => "payment_link registration_button" %>
     <% end %>
   </div>
 
@@ -38,4 +38,4 @@
 <% end %>
 
 
-<%= link_to 'Back', payments_path %>
+<%= link_to t('back'), payments_path %>

@@ -6,12 +6,12 @@
 <% end %>
 
 <div>
-  Select the items to pay for:
+  <%= t(".select_the_items_to_pay_for") %>:
 </div>
 
 <div class="payment_details">
   <%= render '/payments/form' %>
 </div>
 <div>
-  <%= link_to 'Back', registrants_path %>
+  <%= link_to t('back'), registrants_path %>
 </div>
