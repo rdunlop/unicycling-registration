@@ -8,6 +8,10 @@ class EventChoice < ActiveRecord::Base
   validates :label, {:presence => true}
   validates :export_name, {:presence => true, :uniqueness => true}
 
+  translates :label, :tooltip
+  accepts_nested_attributes_for :translations
+  attr_accessible :translations_attributes
+
   def self.cell_types
     ["boolean", "text", "multiple", "best_time"]
   end

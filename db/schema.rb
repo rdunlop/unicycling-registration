@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913031152) do
+ActiveRecord::Schema.define(:version => 20130913034118) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -88,6 +88,17 @@ ActiveRecord::Schema.define(:version => 20130913031152) do
     t.string   "info_url"
   end
 
+  create_table "category_translations", :force => true do |t|
+    t.integer  "category_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
+  add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
+
   create_table "competitions", :force => true do |t|
     t.integer  "event_id"
     t.string   "name"
@@ -136,6 +147,18 @@ ActiveRecord::Schema.define(:version => 20130913031152) do
 
   add_index "event_categories", ["age_group_type_id"], :name => "index_event_categories_age_group_type_id"
   add_index "event_categories", ["event_id", "position"], :name => "index_event_categories_event_id"
+
+  create_table "event_choice_translations", :force => true do |t|
+    t.integer  "event_choice_id"
+    t.string   "locale"
+    t.string   "label"
+    t.string   "tooltip"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "event_choice_translations", ["event_choice_id"], :name => "index_event_choice_translations_on_event_choice_id"
+  add_index "event_choice_translations", ["locale"], :name => "index_event_choice_translations_on_locale"
 
   create_table "event_choices", :force => true do |t|
     t.integer  "event_id"

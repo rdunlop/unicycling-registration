@@ -13,10 +13,14 @@
 
   <div>
     <table class="category_form">
-      <tr>
-        <td><%= f.label :name %></td>
-        <td><%= f.text_field :name %></td>
-      </tr>
+      <% languages.each do |lang| %>
+        <%= f.globalize_fields_for lang do |g| %>
+          <tr>
+            <td><%= g.label :name %> (<%= long_language_name(lang) %>)</td>
+            <td><%= g.text_field :name %></td>
+          </tr>
+        <% end %>
+      <% end %>
       <tr>
         <td><%= f.label :position %></td>
         <td><%= f.number_field :position %></td>

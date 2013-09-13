@@ -23,15 +23,19 @@
     <%= f.label :multiple_values %><br />
     <%= f.text_field :multiple_values, :title => "Only used with the 'multiple' option" %><br />
   </div>
-  <div class="field">
-    <%= f.label :label %><br />
-    <%= f.text_field :label %>
-  </div>
-  <div class="field">
-    <%= f.label :tooltip %><br />
-    <%= f.text_field :tooltip %><br />
-    This will be presented when the user hovers over the label
-  </div>
+  <% languages.each do |lang| %>
+    <%= f.globalize_fields_for lang do |g| %>
+      <div class="field">
+        <%= g.label :label %> (<%= long_language_name(lang) %>)
+        <%= g.text_field :label %>
+      </div>
+      <div class="field">
+        <%= g.label :tooltip %> (<%= long_language_name(lang) %>)
+        <%= g.text_field :tooltip %><br />
+        This will be presented when the user hovers over the label
+      </div>
+    <% end %>
+  <% end %>
   <div class="field">
     <%= f.label :position %><br />
     <%= f.number_field :position %>

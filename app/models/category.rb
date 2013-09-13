@@ -7,6 +7,10 @@ class Category < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  translates :name
+  accepts_nested_attributes_for :translations
+  attr_accessible :translations_attributes
+
   def to_s
     name
   end
