@@ -116,6 +116,11 @@ fr:
       expenses: "Frais"
       cost: "Prix"
       paid: "Payé"
+    all:
+      all_registrants: "Tous les participants"
+      ID: "Numéro "
+      name: "Nom"
+      country: "Pays"
 
   attending:
     events:

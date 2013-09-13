@@ -116,6 +116,11 @@ en:
       expenses: "Expenses"
       cost: "Cost"
       paid: "Paid"
+    all:
+      all_registrants: "All Registrants"
+      id: "ID"
+      name: "Name"
+      country: "Country"
 
   attending:
     events:
