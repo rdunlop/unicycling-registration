@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911034005) do
+ActiveRecord::Schema.define(:version => 20130913003253) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -433,6 +433,17 @@ ActiveRecord::Schema.define(:version => 20130911034005) do
   end
 
   add_index "registrants", ["deleted"], :name => "index_registrants_deleted"
+
+  create_table "registration_period_translations", :force => true do |t|
+    t.integer  "registration_period_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  add_index "registration_period_translations", ["locale"], :name => "index_registration_period_translations_on_locale"
+  add_index "registration_period_translations", ["registration_period_id"], :name => "index_43f042772e959a61bb6b1fedb770048039229050"
 
   create_table "registration_periods", :force => true do |t|
     t.date     "start_date"

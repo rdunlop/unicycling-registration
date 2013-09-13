@@ -1,5 +1,7 @@
 module ApplicationHelper
   include ActionView::Helpers::NumberHelper
+  include LanguageHelper
+
   def setup_registrant_choices(registrant)
     EventChoice.all.each do |ec|
       if registrant.registrant_choices.where({:event_choice_id => ec.id}).empty?

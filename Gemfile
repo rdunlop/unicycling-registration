@@ -26,6 +26,7 @@ gem 'font-kit-rails'
 gem 'fancybox-rails'
 gem 'http_accept_language'
 gem 'strong_parameters'
+gem 'globalize3'
 
 #gem 'sqlite3'
 gem 'pg'

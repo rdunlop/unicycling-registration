@@ -5,6 +5,10 @@ class RegistrationPeriod < ActiveRecord::Base
 
   validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
 
+  translates :name
+  accepts_nested_attributes_for :translations
+  attr_accessible :translations_attributes
+
   belongs_to :competitor_expense_item, :class_name => "ExpenseItem"
   belongs_to :noncompetitor_expense_item, :class_name => "ExpenseItem"
 
