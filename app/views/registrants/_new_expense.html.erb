@@ -20,11 +20,11 @@
         <%= ff.text_field :details %>
       <% end %>
       <% if show_as_free %>
-        <%= ff.submit 'Add FREE Item', {:title => "One is free with your registration", :class => "free_item"} %>
+        <%= ff.submit t(".add_free_item"), {:title => t(".one_is_free"), :class => "free_item"} %>
       <% elsif item.maximum_reached? %>
-        <%= ff.submit "Sold Out", :disabled => true, :class => "sold_out" %>
+        <%= ff.submit t(".sold_out"), :disabled => true, :class => "sold_out" %>
       <% else %>
-        <%= ff.submit 'Add Item', :class => "cost_item" %>
+        <%= ff.submit t(".add_item"), :class => "cost_item" %>
       <% end %>
     <% end %>
   </td>

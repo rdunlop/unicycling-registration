@@ -18,8 +18,8 @@
 
 <div class="actions">
   <% if @registrant.competitor %>
-    <%= link_to 'Continue', registrant_path(@registrant), :class => "competitor registration_button" %>
+    <%= link_to t(".continue"), registrant_path(@registrant), :class => "competitor registration_button" %>
   <% else %>
-    <%= link_to 'Continue', registrant_path(@registrant), :class => "noncompetitor registration_button" %>
+    <%= link_to t(".continue"), registrant_path(@registrant), :class => "noncompetitor registration_button" %>
   <% end %>
 </div>

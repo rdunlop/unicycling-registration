@@ -1,14 +1,14 @@
 <%# locals: registrant %>
 <div class="expenses data_block">
   <fieldset>
-    <legend><%= registrant.to_s %>'s Expenses</legend>
+    <legend><%= t(".registrants_expenses", :registrant => registrant.to_s) %></legend>
     <table id="expense_lines">
       <thead>
         <tr>
           <th>Item</th>
-          <th>Cost</th>
+          <th><%= t(".cost") %></th>
           <th></th>
-          <th>Paid?</th>
+          <th><%= t(".paid") %>?</th>
           <th></th>
         </tr>
       </thead>
@@ -17,7 +17,7 @@
           <td><%= pei %></td>
           <td><%= print_item_cost_currency(pei.base_cost) %></td>
           <td></td>
-          <td>(Paid)</td>
+          <td>(<%= t(".paid")%>)</td>
           <td></td>
         </tr>
       <% end %>

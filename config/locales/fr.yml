@@ -68,6 +68,17 @@ fr:
       other_phone: "Autre numéro de téléphone"
       responsible_adult: "Adulte responsable"
       responsible_adult_detail: "(pour les participants de moins de 18 ans)"
+    new_expense:
+      add_free_item: "Ajouter gratuitement cet item"
+      one_is_free: "One is free with your registration" # XXX Change
+      add_item: "Ajouter l’item"
+      sold_out: "Sold Out" # XXX
+    expenses:
+      registrants_expenses: "Frais de %{registrant}"
+      cost: "Prix"
+      paid: "Payé"
+    items:
+      continue: "Continuer"
 
   attending:
     events:
