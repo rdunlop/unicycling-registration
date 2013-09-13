@@ -2,7 +2,7 @@
   <legend><%= competitor ? t(".competitor_registration_cost") : t(".noncompetitor_registration_cost") %></legend>
     <table>
       <% closed_date = EventConfiguration.closed_date %>
-        <% RegistrationPeriod.includes(:competitor_expense_item).includes(:noncompetitor_expense_item).all.each do |period| %>
+        <% RegistrationPeriod.includes(:competitor_expense_item).includes(:noncompetitor_expense_item).includes(:translations).all.each do |period| %>
           <% if period.past_period? %>
             <tr class="past_reg_period">
           <% elsif period.current_period? %>

@@ -71,6 +71,7 @@ class Admin::PaymentsController < Admin::BaseController
     if @payment.save
       redirect_to payment_path(@payment), notice: "Successfully created payment"
     else
+      @registrants = Registrant.order(:id).all
       render "onsite_pay_new"
     end
   end
