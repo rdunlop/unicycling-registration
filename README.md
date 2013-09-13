@@ -253,6 +253,16 @@ If you would like to contribute any work to the project, please:
 * For any changes, include updated/added unit tests, and ensure that the whole suite runs
 * Create a pull request
 
+Translations
+------------
+If you would like to contribute language translations, please see:
+
+* config/locale/en.yml - The english translation of the static text strings used
+  in the site
+* app/helpers/language_helper.rb - A place where each of the used languages is
+  defined, so that the admin pages show form elements to set these language
+  fields.
+
 Idea Contributions
 ------------------
 

@@ -9,6 +9,8 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
+- add "Registration" to the end of RegistrationPeriods in prod
+
 - Determine if "unoauthorized" message is now being lost due to locale?
 - Consider a free item "paid for" always? well...once the registrant's registration has been paid for.
  - Don't want to require that a user go through paypal to "pay" for "free" items?
