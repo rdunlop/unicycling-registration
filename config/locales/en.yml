@@ -59,6 +59,16 @@ en:
       phone: "Phone"
       mobile: "Mobile"
       email: "Email"
+      emergency_contact: "Emergency Contact"
+      in_case_of_emergency: "In case of emergency"
+      name: "Name"
+      relationship: "Relationship"
+      attending: "Attending"
+      primary_phone: "Primary Phone"
+      other_phone: "Other phone"
+      responsible_adult: "Responsible Adult"
+      responsible_adult_detail: "(for Registrants Under the age of 18)"
+
 
   attending:
     events:

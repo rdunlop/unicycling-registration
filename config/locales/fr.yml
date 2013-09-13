@@ -59,6 +59,15 @@ fr:
       phone: "Numéro de téléphone"
       mobile: "Numéro de portable"
       email: "Courriel"
+      emergency_contact: "Coordonnées d’urgence"
+      in_case_of_emergency: "En cas d’urgence"
+      name: "Nom"
+      relationship: "Lien"
+      attending: "Présent"
+      primary_phone: "Numéro de téléphone principal"
+      other_phone: "Autre numéro de téléphone"
+      responsible_adult: "Adulte responsable"
+      responsible_adult_detail: "(pour les participants de moins de 18 ans)"
 
   attending:
     events:

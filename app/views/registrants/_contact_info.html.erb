@@ -104,16 +104,16 @@
     </table>
   </fieldset>
   <fieldset class="data_block">
-    <legend>Emergency Contact</legend>
+    <legend><%= t(".emergency_contact") %></legend>
     <table>
       <tr>
         <th colspan="2">
-          <b>In case of emergency</b>
+          <b><%= t(".in_case_of_emergency") %></b>
         </th>
       </tr>
       <tr>
         <td>
-          <%= f.label :emergency_name, "Name", :class => "required" %>
+          <%= f.label :emergency_name, t(".name"), :class => "required" %>
         </td>
         <td>
           <%= f.text_field :emergency_name %>
@@ -121,7 +121,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :emergency_relationship, "Relationship", :class => "required" %>
+          <%= f.label :emergency_relationship, t(".relationship"), :class => "required" %>
         </td>
         <td>
           <%= f.text_field :emergency_relationship %>
@@ -129,7 +129,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :emergency_attending, "Attending?" %>
+          <%= f.label :emergency_attending, "#{t(".attending")}?" %>
         </td>
         <td>
           <%= f.check_box :emergency_attending %>
@@ -137,7 +137,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :emergency_primary_phone, "Primary Phone", :class => "required" %>
+          <%= f.label :emergency_primary_phone, t(".primary_phone"), :class => "required" %>
         </td>
         <td>
           <%= f.telephone_field :emergency_primary_phone %>
@@ -145,7 +145,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :emergency_other_phone, "Other Phone" %>
+          <%= f.label :emergency_other_phone, t(".other_phone") %>
         </td>
         <td>
           <%= f.telephone_field :emergency_other_phone %>
@@ -154,12 +154,12 @@
     </table>
   </fieldset>
   <fieldset class="data_block">
-    <legend>Responsible Adult</legend>
-    <span class="extra_info">(for Registrants Under the age of 18)</span>
+    <legend><%= t(".responsible_adult") %></legend>
+    <span class="extra_info"><%= t(".responsible_adult_detail") %></span>
     <table>
       <tr>
         <td>
-          <%= f.label :responsible_adult_name, "Name" %>
+          <%= f.label :responsible_adult_name, t(".name") %>
         </td>
         <td>
           <%= f.text_field :responsible_adult_name, :class => "ui-tooltip", :title => "The 'Responsible Adult' will be responsible for the registered minor." %>
@@ -167,7 +167,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :responsible_adult_phone, "Phone" %>
+          <%= f.label :responsible_adult_phone, t(".phone") %>
         </td>
         <td>
           <%= f.telephone_field :responsible_adult_phone %>
