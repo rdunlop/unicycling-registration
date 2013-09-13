@@ -1,11 +1,11 @@
-<h1>Registration Summary:
+<h1><%= t(".registration_summary") %>:
 <%= @registrant.first_name %>
 <%= @registrant.middle_initial %>
 <%= @registrant.last_name %>
  #<%= @registrant.bib_number %>
 </h1>
 <div class="non_printable">
-  <%= link_to "Printable (Pdf)", registrant_path(@registrant, :format => "pdf"), {:target => "_blank"} %>
+  <%= link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"} %>
 </div>
 
 <div style="display:inline-block;">
@@ -13,7 +13,7 @@
     <%= render :partial => "/registrants/summary" %>
     <% if can? :update, @registrant %>
         <div class="edit_link_block">
-            <%= link_to 'Edit Registration', edit_registrant_path(@registrant) %>
+            <%= link_to t(".edit_registration"), edit_registrant_path(@registrant) %>
         </div>
     <% end %>
   </div>
@@ -21,7 +21,7 @@
     <%= render :partial => "/registrants/registrant_expenses" %>
     <% if can? :update_items, @registrant %>
         <div class="edit_link_block">
-            <%= link_to 'Edit Items', items_registrant_path(@registrant) %>
+            <%= link_to t(".edit_items"), items_registrant_path(@registrant) %>
         </div>
     <% end %>
   </div>
@@ -30,7 +30,7 @@
     <%= render :partial => "/registrants/registrant_events" %>
     <% if can? :update, @registrant %>
         <div class="edit_link_block">
-            <%= link_to 'Edit Events', edit_registrant_path(@registrant) %>
+          <%= link_to t(".edit_events"), edit_registrant_path(@registrant) %>
         </div>
     <% end %>
   <% end %>
@@ -44,9 +44,9 @@
 <hr class="non_printable" />
 <div class="non_printable">
   <% if @registrant.competitor %>
-    <%= link_to 'Done', registrants_path, {:class => "competitor registration_button"} %>
+    <%= link_to t(".done"), registrants_path, {:class => "competitor registration_button"} %>
   <% else %>
-    <%= link_to 'Done', registrants_path, {:class => "noncompetitor registration_button"} %>
+    <%= link_to t('.done'), registrants_path, {:class => "noncompetitor registration_button"} %>
   <% end %>
 </div>
 <% if @waiver %><%= render :partial => "/registrants/waiver" %><% end %>

@@ -77,7 +77,46 @@ en:
       registrants_expenses: "%{registrant}'s Expenses"
       cost: "Cost"
       paid: "Paid"
+    items:
       continue: "Continue"
+    show_single_registrant:
+      registration_summary: "Registration Summary"
+      printable_pdf: "Printable (Pdf)"
+      edit_registration: "Edit Registration"
+      edit_items: "Edit Items"
+      edit_events: "Edit Events"
+      done: "Done"
+    summary:
+      registration_summary: "Registration Summary"
+      name: "Name"
+      gender: "Gender"
+      birthday: "Birthday"
+      age: "Age"
+      address: "Address"
+      representing_country: "Representing country"
+      phone: "Phone"
+      mobile: "Mobile"
+      email: "Email"
+      team_club: "Team/Club"
+      team_club_contact: "Team/Club Contact"
+      volunteer: "Volunteer"
+      true: "true"
+      false: "false"
+      emergency_contact_name: "Emergency Contact Name"
+      emergency_contact_relationship: "Emergency Contact Relationship"
+      emergency_contact_attending: "Emergency Contact Attending"
+      emergency_contact_phone: "Emergency Contact Phone"
+      responsible_adult: "Responsible Adult"
+    registrant_events:
+      events: "Events"
+      event: "Event"
+      category: "Category"
+      age_group: "Age Group"
+    registrant_expenses:
+      expenses: "Expenses"
+      cost: "Cost"
+      paid: "Paid"
+
 
 
 

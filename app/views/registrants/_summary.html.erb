@@ -1,50 +1,50 @@
 <fieldset class="data_block">
-  <legend>Registration Summary</legend>
+  <legend><%= t(".registration_summary") %></legend>
   <div>
-    <b>Name:</b>
+    <b><%= t(".name") %>:</b>
     <%= @registrant.first_name %>
     <%= @registrant.middle_initial %>
     <%= @registrant.last_name %>
   </div>
   <div>
-    <b>Gender:</b>
+    <b><%= t(".gender") %>:</b>
     <%= @registrant.gender %>
-    <b>Birthday:</b>
+    <b><%= t(".birthday") %>:</b>
     <%= @registrant.birthday.strftime("%d-%b-%Y") %>
-    <b>Age:</b>
+    <b><%= t(".age") %>:</b>
     <%= @registrant.age %>
   </div>
   <% if can? :read_contact_info, @registrant  %>
     <div>
-      <b>Address:</b>
+      <b><%= t(".address") %>:</b>
       <%= @registrant.address %> <br />
       <%= @registrant.city %>
       <%= @registrant.state %>
       <%= @registrant.country_residence %>
       <%= @registrant.zip %> <br />
-      <b>Representing country:</b>
+      <b><%= t(".representing_country") %>:</b>
       <%= @registrant.country %>
     </div>
     <div>
-      <b>Phone:</b>
+      <b><%= t(".phone") %>:</b>
       <%= @registrant.phone %>
     </div>
 
     <div>
-      <b>Mobile:</b>
+      <b><%= t(".mobile") %>:</b>
       <%= @registrant.mobile %>
     </div>
 
     <div>
-      <b>Email:</b>
+      <b><%= t(".email") %>:</b>
       <%= @registrant.email %>
     </div>
     <div>
-      <b>Team/Club:</b>
+      <b><%= t(".team_club") %>:</b>
       <%= @registrant.club %>
     </div>
     <div>
-      <b>Team/Club Contact:</b>
+      <b><%= t(".team_club_contact") %>:</b>
       <%= @registrant.club_contact %>
     </div>
     <% if EventConfiguration.usa %>
@@ -54,28 +54,28 @@
       </div>
     <% end %>
     <div>
-      <b>Volunteer:</b>
+      <b><%= t(".volunteer") %>:</b>
       <%= @registrant.volunteer %>
     </div>
     <div>
-      <b>Emergency Contact Name:</b>
+      <b><%= t(".emergency_contact_name") %>:</b>
       <%= @registrant.emergency_name %>
     </div>
     <div>
-      <b>Emergency Contact Relationship:</b>
+      <b><%= t(".emergency_contact_relationship") %>:</b>
       <%= @registrant.emergency_relationship %>
     </div>
     <div>
-      <b>Emergency Contact Attending:</b>
+      <b><%= t(".emergency_contact_attending") %>:</b>
       <%= @registrant.emergency_attending ? "yes":"no" %>
     </div>
     <div>
-      <b>Emergency Contact Phone:</b>
+      <b><%= t(".emergency_contact_phone") %>:</b>
       <%= @registrant.emergency_primary_phone %>
       <%= @registrant.emergency_other_phone %>
     </div>
     <div>
-      <b>Responsible Adult:</b>
+      <b><%= t(".responsible_adult") %>:</b>
       <%= @registrant.responsible_adult_name %>
       <%= @registrant.responsible_adult_phone %>
     </div>

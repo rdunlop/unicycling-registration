@@ -6,15 +6,15 @@
 
         <% unless printed_events_header %>
           <fieldset class="data_block">
-            <legend>Events</legend>
+            <legend><%= t(".events") %></legend>
             <% printed_events_header = true %>
             <table>
               <thead>
                 <tr>
-                  <th>Event</th>
-                  <th>Category</th>
+                  <th><%= t(".event") %></th>
+                  <th><%= t(".category") %></th>
                   <th></th>
-                  <th>Age Group</th>
+                  <th><%= t(".age_group") %></th>
                 </tr>
               </thead>
               <tbody>

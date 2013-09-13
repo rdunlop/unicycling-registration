@@ -79,6 +79,43 @@ fr:
       paid: "Payé"
     items:
       continue: "Continuer"
+    show_single_registrant:
+      registration_summary: "Résumé de l’inscription"
+      printable_pdf: "Imprimable (pdf)"
+      edit_registration: "Modifier l’inscription"
+      edit_items: "Modifier les items"
+      edit_events: "Modifier les compétitions"
+      done: "Terminé"
+    summary:
+      registration_summary: "Résumé de l’inscription"
+      name: "Nom"
+      gender: "Sexe"
+      birthday: "Date de naissance"
+      age: "Âge"
+      address: "Adresse"
+      representing_country: "Pays représenté"
+      phone: "Numéro de téléphone"
+      mobile: "Numéro de portable"
+      email: "Courriel"
+      team_club: "Équipe/Association"
+      team_club_contact: "Nom du contact du club/association"
+      volunteer: "Bénévole"
+      true: "vrai"
+      false: "faux"
+      emergency_contact_name: "Nom de la personne à contacter en cas d’urgence"
+      emergency_contact_relationship: "Lien avec la personne à contacter en cas d’urgence"
+      emergency_contact_attending: "Personne à contacter en cas d’urgence présente"
+      emergency_contact_phone: "Numéro de téléphone de la personne à contacter en cas d’urgence"
+      responsible_adult: "Adulte responsable"
+    registrant_events:
+      events: "Compétitions"
+      event: "Compétition"
+      category: "Catégorie"
+      age_group: "Groupe d’âge"
+    registrant_expenses:
+      expenses: "Frais"
+      cost: "Prix"
+      paid: "Payé"
 
   attending:
     events:
