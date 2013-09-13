@@ -19,23 +19,27 @@
         <th>Description</th>
      </tr>
   </thead>
-  <tr>
-    <th><%= f.label :short_name %></th>
-    <td><%= f.text_field :short_name %></td>
-    <td>Used on the Registration page.</td>
-  </tr>
-  <tr>
-      <th><%= f.label :long_name %></th>
-      <td><%= f.text_field :long_name %></td>
-  </tr>
-  <tr>
-      <th><%= f.label :location %></th>
-      <td><%= f.text_field :location %></td>
-  </tr>
-  <tr>
-      <th><%= f.label :dates_description %></th>
-      <td><%= f.text_field :dates_description %></td>
-  </tr>
+  <% languages.each do |lang| %>
+    <%= f.globalize_fields_for lang do |g| %>
+      <tr>
+        <th><%= g.label :short_name %> (<%= long_language_name(lang) %>)</th>
+        <td><%= g.text_field :short_name %></td>
+        <td>Used on the Registration page.</td>
+      </tr>
+      <tr>
+        <th><%= g.label :long_name %> (<%= long_language_name(lang) %>)</th>
+        <td><%= g.text_field :long_name %></td>
+      </tr>
+      <tr>
+        <th><%= g.label :location %> (<%= long_language_name(lang) %>)</th>
+        <td><%= g.text_field :location %></td>
+      </tr>
+      <tr>
+        <th><%= g.label :dates_description %> (<%= long_language_name(lang) %>)</th>
+        <td><%= g.text_field :dates_description %></td>
+      </tr>
+    <% end %>
+  <% end %>
   <tr>
       <th><%= f.label :event_url %></th>
       <td><%= f.url_field :event_url %></td>

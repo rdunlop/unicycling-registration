@@ -3,6 +3,10 @@ class EventConfiguration < ActiveRecord::Base
   attr_accessible :long_name, :rulebook_url, :short_name, :standard_skill, :standard_skill_closed_date
   attr_accessible :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url
 
+  translates :short_name, :long_name, :location, :dates_description
+  accepts_nested_attributes_for :translations
+  attr_accessible :translations_attributes
+
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI::regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"

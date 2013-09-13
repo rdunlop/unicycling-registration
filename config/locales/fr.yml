@@ -4,6 +4,7 @@
 fr:
   registrants:
     index:
+      registration: "Inscriptions"
       create_new_competitor: "Inscrire un nouveau compétiteur"
       create_new_noncompetitor: "Inscrire un nouveau non-compétiteur"
       whats_the_difference: "Quelle est la différence ?"

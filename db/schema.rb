@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913003253) do
+ActiveRecord::Schema.define(:version => 20130913031152) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -153,6 +153,20 @@ ActiveRecord::Schema.define(:version => 20130913003253) do
   end
 
   add_index "event_choices", ["event_id", "position"], :name => "index_event_choices_event_id"
+
+  create_table "event_configuration_translations", :force => true do |t|
+    t.integer  "event_configuration_id"
+    t.string   "locale"
+    t.string   "short_name"
+    t.string   "long_name"
+    t.string   "dates_description"
+    t.string   "location"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  add_index "event_configuration_translations", ["event_configuration_id"], :name => "index_8da8125feacb8971b8fc26e0e628b77608288047"
+  add_index "event_configuration_translations", ["locale"], :name => "index_event_configuration_translations_on_locale"
 
   create_table "event_configurations", :force => true do |t|
     t.string   "short_name"
