@@ -21,7 +21,7 @@
 
   <div class="data_block">
     <%= f.hidden_field :competitor %>
-    <h2><%= @registrant.competitor ? "Competitor" : "Non-Competitor" %></h2>
+    <h2><%= @registrant.competitor ? t(".competitor") : t(".noncompetitor") %></h2>
     <% unless @registrant.new_record? %>
       <div class="delete_link">
         <% if can? :destroy, @registrant %>

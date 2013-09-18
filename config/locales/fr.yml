@@ -26,10 +26,12 @@ fr:
       unpaid: "impayé"
       paid: "Payé"
     new:
-      new_registrant: "Nouvelle entrée de compétiteur"
+      new_registration: "Nouvelle entrée de compétiteur"
     edit:
       editing_registrant: "Modifier une entrée de compétiteur"
     form:
+      competitor: "Compétiteur"
+      noncompetitor: "Non-compétiteur"
       required_fields: "Champs obligatoires"
       delete: "Supprimer"
       base_details: "Informations de base"

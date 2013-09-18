@@ -31,10 +31,12 @@ en:
       unpaid: "Unpaid"
       paid: "Paid"
     new:
-      new_registrant: "New Registrant"
+      new_registration: "New Registration"
     edit:
       editing_registrant: "Editing Registrant"
     form:
+      competitor: "Competitor"
+      noncompetitor: "Non-Competitor"
       required_fields: "Required fields"
       delete: "Delete"
       base_details: "Base Details"
