@@ -12,9 +12,9 @@
           <% end %>
                 <td><%= period.name %></td>
                 <td><%= t(".from") %></td>
-                <td><%=period.start_date.strftime("%b %d, %Y") %></td>
+                <td><%= l period.start_date, format: :registration_date_format %></td>
                 <td><%= t(".to") %></td>
-                <td><%=period.end_date.strftime("%b %d, %Y") %></td>
+                <td><%= l period.end_date, format: :registration_date_format %></td>
                 <td><b>
                 <% if competitor %>
                   <%= print_formatted_currency(period.competitor_expense_item.cost) %>
@@ -25,7 +25,7 @@
             </tr>
             <% if period.end_date == closed_date %>
               <tr>
-                <td colspan="6" class="registration_closes_notice"><%= t(".online_registration_closes") %> <%= closed_date.strftime("%b %d, %Y") %></td>
+                <td colspan="6" class="registration_closes_notice"><%= t(".online_registration_closes") %> <%= l closed_date, format: :registration_date_format %></td>
               </tr>
             <% end %>
         <% end %>

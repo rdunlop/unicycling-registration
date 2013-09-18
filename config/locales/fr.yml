@@ -1,7 +1,9 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for other language starting points.
 
 fr:
+  date:
+    formats:
+      registration_date_format: "%d %b, %Y"
   registrants:
     index:
       registration: "Inscriptions"
@@ -77,6 +79,11 @@ fr:
       registrants_expenses: "Frais de %{registrant}"
       cost: "Prix"
       paid: "Payé"
+    pay_now:
+      prices_increase: "Les prix augmentent"
+      very_soon: "très bientôt"
+      unknown: "quand?"
+      in: "dans"
     items:
       continue: "Continuer"
     show_single_registrant:

@@ -37,7 +37,7 @@
       </span>
       <span>
         <%= f.label :birthday, t(".birthday"), :class => "required" %>
-        <%= f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true, :order => [:month, :day, :year]} %>
+        <%= f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true } %>
       </span>
       <span>
         <%= f.label :gender_male, t('.male'), :class => "required" %>

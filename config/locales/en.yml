@@ -2,6 +2,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  date:
+    formats:
+      registration_date_format: "%b %d, %Y"
+    order:
+      - :month
+      - :day
+      - :year
   registrants:
     index:
       registration: "Registration"
@@ -77,6 +84,11 @@ en:
       registrants_expenses: "%{registrant}'s Expenses"
       cost: "Cost"
       paid: "Paid"
+    pay_now:
+      prices_increase: "Prices Increase"
+      very_soon: "Very Soon"
+      unknown: "Unknown"
+      in: "in"
     items:
       continue: "Continue"
     show_single_registrant:
@@ -133,7 +145,7 @@ en:
       noncompetitor_registration_cost: "Non-Competitor Registration Cost"
       from: "From"
       to: "to"
-      online_Registration_closes: "Online Registration Closes"
+      online_registration_closes: "Online Registration Closes"
 
   payments:
     index:
