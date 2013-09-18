@@ -25,9 +25,6 @@ fr:
       see_summary: "Voir le résumé"
       unpaid: "impayé"
       paid: "Payé"
-    pay_now:
-      pay_now: "Payer maintenant"
-
     new:
       new_registrant: "Nouvelle entrée de compétiteur"
     edit:
@@ -80,6 +77,7 @@ fr:
       cost: "Prix"
       paid: "Payé"
     pay_now:
+      pay_now: "Payer maintenant"
       prices_increase: "Les prix augmentent"
       very_soon: "très bientôt"
       unknown: "quand?"

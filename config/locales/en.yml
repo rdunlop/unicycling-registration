@@ -30,9 +30,6 @@ en:
       see_summary: "See Summary"
       unpaid: "Unpaid"
       paid: "Paid"
-    pay_now:
-      pay_now: "Pay Now"
-
     new:
       new_registrant: "New Registrant"
     edit:
@@ -85,6 +82,7 @@ en:
       cost: "Cost"
       paid: "Paid"
     pay_now:
+      pay_now: "Pay Now"
       prices_increase: "Prices Increase"
       very_soon: "Very Soon"
       unknown: "Unknown"
