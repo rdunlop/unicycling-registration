@@ -11,6 +11,7 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 - add "Registration" to the end of RegistrationPeriods in prod
 - Translate "Please Wait" from buttons
+- upgrade to ruby 2.0
 
 - Determine if "unoauthorized" message is now being lost due to locale?
 - Consider a free item "paid for" always? well...once the registrant's registration has been paid for.
@@ -23,6 +24,7 @@ Registration-Related ToDo
 ---- END ROBIN's CURRENT LIST:
 
 
+- Only send e-mails to confired users (not those with invalid e-mail addresses).
 - Provide Rolf with a view which shows him the Teams/Team captains, etc
 - Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
 - Update the Admin functions for when users are "Admin"....mostly read-only.
