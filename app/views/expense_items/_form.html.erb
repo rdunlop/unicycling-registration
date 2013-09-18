@@ -15,18 +15,23 @@
     <%= f.label :expense_group_id %>
     <%= f.select :expense_group_id, ExpenseGroup.all.map {|eg| [eg.group_name, eg.id] }  %>
     <br />
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <br />
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-    <br />
-    <br />
+    <% languages.each do |lang| %>
+      <%= f.globalize_fields_for lang do |g| %>
+        <b><%= long_language_name(lang) %></b><br />
+        <%= g.label :name %>
+        <%= g.text_field :name %>
+        <br />
+        <%= g.label :description %>
+        <%= g.text_field :description %>
+        <br />
+        <%= g.label :details_label, "Details (What details do we want to ask the user for)" %>
+        <%= g.text_field :details_label %>
+        <br />
+        <br />
+      <% end %>
+    <% end %>
     <%= f.label :has_details %>
     <%= f.check_box :has_details %>
-    <br />
-    <%= f.label :details_label, "Details (What details do we want to ask the user for)" %>
-    <%= f.text_field :details_label %>
     <br />
     <br />
     <%= f.label :cost %>

@@ -12,9 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :group_name %>
-    <%= f.text_field :group_name %>
-    <br />
+    <% languages.each do |lang| %>
+      <%= f.globalize_fields_for lang do |g| %>
+        <%= g.label :group_name %> (<b><%= long_language_name(lang) %></b>)<br />
+        <%= g.text_field :group_name %>
+        <br />
+      <% end %>
+    <% end %>
+
     <%= f.label :info_url %>
     <%= f.url_field :info_url %>
     <br />

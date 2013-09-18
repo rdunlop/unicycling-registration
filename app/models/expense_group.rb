@@ -8,6 +8,10 @@ class ExpenseGroup < ActiveRecord::Base
 
   has_many :expense_items,:order => "expense_items.position"
 
+  translates :group_name
+  accepts_nested_attributes_for :translations
+  attr_accessible :translations_attributes
+
   def self.free_options
     ["None Free", "One Free In Group", "One Free of Each In Group"]
   end

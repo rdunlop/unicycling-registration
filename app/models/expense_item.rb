@@ -10,6 +10,11 @@ class ExpenseItem < ActiveRecord::Base
   has_many :payment_details
   has_many :registrant_expense_items, :inverse_of => :expense_item
 
+
+  translates :name, :description, :details_label
+  accepts_nested_attributes_for :translations
+  attr_accessible :translations_attributes
+
   belongs_to :expense_group
 
   before_destroy :check_for_payment_details

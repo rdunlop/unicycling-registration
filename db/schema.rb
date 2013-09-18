@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913034118) do
+ActiveRecord::Schema.define(:version => 20130918060341) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -232,6 +232,17 @@ ActiveRecord::Schema.define(:version => 20130913034118) do
 
   add_index "events", ["category_id"], :name => "index_events_category_id"
 
+  create_table "expense_group_translations", :force => true do |t|
+    t.integer  "expense_group_id"
+    t.string   "locale"
+    t.string   "group_name"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "expense_group_translations", ["expense_group_id"], :name => "index_expense_group_translations_on_expense_group_id"
+  add_index "expense_group_translations", ["locale"], :name => "index_expense_group_translations_on_locale"
+
   create_table "expense_groups", :force => true do |t|
     t.string   "group_name"
     t.boolean  "visible"
@@ -244,6 +255,19 @@ ActiveRecord::Schema.define(:version => 20130913034118) do
     t.boolean  "competitor_required",        :default => false
     t.boolean  "noncompetitor_required",     :default => false
   end
+
+  create_table "expense_item_translations", :force => true do |t|
+    t.integer  "expense_item_id"
+    t.string   "locale"
+    t.string   "name"
+    t.string   "description"
+    t.string   "details_label"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "expense_item_translations", ["expense_item_id"], :name => "index_expense_item_translations_on_expense_item_id"
+  add_index "expense_item_translations", ["locale"], :name => "index_expense_item_translations_on_locale"
 
   create_table "expense_items", :force => true do |t|
     t.string   "name"
