@@ -8,11 +8,6 @@ $(document).ready ->
   $("table.alternate th").css "background-color", "#fff"
 
 
-findDeleteCheck = (el) ->
-  row = el.parent().parent();
-  del = row.find("input[type='checkbox']").first();
-  return del;
-
 calculateTotal = ->
   all_values = $("input[data-cents]");
   total_cents = 0;
@@ -22,10 +17,8 @@ calculateTotal = ->
       total_cents += parseInt(el.data("cents"));
   return "$" + (total_cents / 100).toFixed(2);
 
-$(document).on "change", ".anon", ->
-  el = $(this);
-  del = findDeleteCheck(el);
-  del.prop('checked', !el.prop('checked'));
+$(document).on "change", ".delete_payment_item", ->
+  del = $(this);
   $("#total_field").html(calculateTotal());
 
 $(document).on "click", "#unselect_all", ->
@@ -35,7 +28,7 @@ $(document).on "click", "#select_all", ->
     select_all(true);
 
 select_all = (check_on) ->
-  $(".anon").each ->
+  $(".delete_payment_item").each ->
     el = $(this);
     if (el.prop('checked') != check_on)
       el.trigger("click");

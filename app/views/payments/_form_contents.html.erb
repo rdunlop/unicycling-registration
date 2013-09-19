@@ -40,10 +40,7 @@
           <td><%= print_item_cost_currency(pf.object.tax) %></td>
           <td><%= pf.hidden_field :amount %><%= print_item_cost_currency(pf.object.amount) %></td>
           <td class="choose_payments">
-            <% # XXX http://rubysource.com/complex-rails-forms-with-nested-attributes/  to not need to invert things anymore 
-          %>
-            <%= pf.check_box :_destroy, :class => "delete_payment_item", :style => "display: none" %>
-            <%= check_box_tag :anon, nil, true, :class => "anon", :id => nil, "data-cents" => pf.object.amount * 100 %>
+          <%= pf.check_box :_destroy, {checked: true, :class => "delete_payment_item", "data-cents" => pf.object.amount * 100}, '0', '1' %>
           </td>
         </tr>
       <% end %>
