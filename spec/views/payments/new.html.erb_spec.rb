@@ -4,6 +4,7 @@ describe "payments/new" do
   before(:each) do
     @payment = FactoryGirl.create(:payment)
     @pd = FactoryGirl.create(:payment_detail, :payment => @payment, :amount => 10.11, :details => "Hello Werld")
+    @payment.reload
   end
 
   it "renders new payment form" do

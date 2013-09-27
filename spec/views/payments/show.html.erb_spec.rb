@@ -5,6 +5,7 @@ describe "payments/show" do
     @config = FactoryGirl.create(:event_configuration)
     @payment = FactoryGirl.create(:payment)
     @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment)
+    @payment.reload
   end
 
   it "renders attributes in <p>" do
