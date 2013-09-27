@@ -41,7 +41,7 @@
       <td><%= f.text_field :gender %></td>
       <td><%= f.text_field :details %></td>
       <td><%= f.number_field :place %></td>
-      <td><%= f.select :registrant_id, Registrant.all.map {|reg| [reg, reg.id] } %></td>
+      <td><%= f.select :registrant_id, Registrant.all.map {|reg| [reg.with_id_to_s, reg.id] } %></td>
       <td><%= f.submit %></td>
     </tbody>
   </table>

@@ -1,4 +1,4 @@
-<h1>Onsite payment confirmation</h1>
+<h1>Payment Adjstments</h1>
 <% if mixpanel? %>
   <script type="text/javascript">
     mixpanel.track("New Payment Page Loaded")
@@ -11,42 +11,89 @@
   Select the items to pay for:
 </h1>
 
-<div class="payment_details">
-  <%= form_for(@payment, :url => onsite_pay_create_admin_payments_path) do |f| %>
-    <%= render :partial => "/shared/error_messages", :object => @payment %>
 
-    <%= f.label :note, "Payment Note" %>: <%= f.text_field :note %><br />
-    <%= f.label :payment_date %>: <%= f.text_field :payment_date %><br />
+<% @registrants = @p.registrants %>
+<%= form_for(@p, :url => onsite_pay_create_admin_payments_path) do |pf| %>
+  <%= render :partial => "/shared/error_messages", :object => @p %>
 
-    <table class="sortable">
-      <thead>
+  <%= pf.label :note %><%= pf.text_field :note %>
+
+  <h1>Paid Details</h1>
+  <table class="sortable">
+    <thead>
+      <tr>
+        <th>Registrant</th>
+        <th>Item</th>
+        <th>Paid Amount</th>
+        <th>Details (only required for some items)</th>
+        <th>Refund This Item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= pf.fields_for :paid_details do |paid_detail| %>
         <tr>
-          <th>Registrant</th>
-          <th>Item</th>
-          <th>Details (only required for some items)</th>
-          <th>Free</th>
-          <th>Refund</th>
-          <th>Amount</th>
+          <td><%= paid_detail.object.registrant %><%= paid_detail.hidden_field :registrant_id %></td>
+          <td><%= paid_detail.object.expense_item %><%= paid_detail.hidden_field :expense_item_id %></td>
+          <td><%= paid_detail.object.amount %><%= paid_detail.hidden_field :amount %><%= paid_detail.hidden_field :free %></td>
+          <td><%= paid_detail.object.details %><%= paid_detail.hidden_field :details %></td>
+          <td><%= paid_detail.check_box :refund %></td>
         </tr>
-      </thead>
-      <tbody>
-        <%= f.fields_for :payment_details do |pf| %>
-          <tr>
-            <td><%= pf.select :registrant_id, Registrant.order("first_name, last_name").all.map {|reg| [reg, reg.id] }, :include_blank => true %></td>
-            <td><%= pf.select :expense_item_id, ExpenseItem.all.map {|ei| [ei.to_s + " - " + ei.cost.to_s, ei.id] }, :include_blank => true  %></td>
-            <td><%= pf.text_field :details %></td>
-            <td><%= pf.check_box :free %></td>
-            <td><%= pf.check_box :refund %></td>
-            <td><%= pf.text_field :amount %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div class="actions">
-      <%= f.submit 'Create Payment', :class => "payment_link registration_button" %>
-    </div>
-  <% end %>
-</div>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h1>UnPaid Details</h1>
+  <table class="sortable">
+    <thead>
+      <tr>
+        <th>Registrant</th>
+        <th>Item</th>
+        <th>Cost</th>
+        <th>Details (only required for some items)</th>
+        <th>Pay for this item</th>
+        <th>Mark this item as free</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= pf.fields_for :unpaid_details do |unpaid_detail| %>
+        <tr>
+          <td><%= unpaid_detail.object.registrant %><%= unpaid_detail.hidden_field :registrant_id %></td>
+          <td><%= unpaid_detail.object.expense_item %><%= unpaid_detail.hidden_field :expense_item_id %></td>
+          <td><%= unpaid_detail.object.amount %></td>
+          <td><%= unpaid_detail.object.details %><%= unpaid_detail.hidden_field :details %></td>
+          <td><%= unpaid_detail.check_box :pay_for %></td>
+          <td><%= unpaid_detail.check_box :free %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h1>New Items</h1>
+  <table class="sortable">
+    <thead>
+      <tr>
+        <th>Registrant</th>
+        <th>Item</th>
+        <th>Details (only required for some items)</th>
+        <th>Pay for this item</th>
+        <th>Mark this item as free</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= pf.fields_for :new_details do |new_detail| %>
+        <tr>
+          <td><%= new_detail.select :registrant_id, @registrants.map {|reg| [reg, reg.id] }, :include_blank => true %></td>
+          <td><%= new_detail.select :expense_item_id, ExpenseItem.all.map {|ei| [ei.to_s + " - " + ei.cost.to_s, ei.id] }, :include_blank => true  %></td>
+          <td><%= new_detail.text_field :details %></td>
+          <td><%= new_detail.check_box :pay_for %></td>
+          <td><%= new_detail.check_box :free %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= pf.submit "Create and Save Payment", :class => "payment_link registration_button" %>
+<% end %>
+
 <div>
   <%= link_to 'Back', registrants_path %>
 </div>

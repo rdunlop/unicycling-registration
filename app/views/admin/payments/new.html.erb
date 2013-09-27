@@ -26,13 +26,13 @@
         <tr>
           <th>Registrant</th>
           <th>Item</th>
-          <th>Details (only required for USA memberships)</th>
+          <th>Details (only required for some expense items)</th>
         </tr>
       </thead>
       <tbody>
         <%= f.fields_for :payment_details do |pf| %>
           <tr>
-            <td><%= pf.select :registrant_id, Registrant.order("first_name, last_name").all.map {|reg| [reg, reg.id] }, :include_blank => true %></td>
+            <td><%= pf.select :registrant_id, Registrant.all.map {|reg| [reg.with_id_to_s, reg.id] }, :include_blank => true %></td>
             <td><%= pf.select :expense_item_id, ExpenseItem.all.map {|ei| [ei.to_s + " - " + ei.cost.to_s, ei.id] }  %></td>
             <td><%= pf.text_field :details %></td>
           </tr>

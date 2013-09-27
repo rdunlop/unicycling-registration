@@ -7,6 +7,7 @@ class Payment < ActiveRecord::Base
 
   validates :user_id, :presence => true
   validate :transaction_id_or_note
+  validates_associated :payment_details
 
   has_paper_trail
 

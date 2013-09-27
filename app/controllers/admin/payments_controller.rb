@@ -1,6 +1,6 @@
 class Admin::PaymentsController < Admin::BaseController
   before_filter :authenticate_user!
-  before_filter :create_payment, :only => [:create, :onsite_pay_create]
+  before_filter :create_payment, :only => [:create]
   load_and_authorize_resource
 
   def create_payment
@@ -47,32 +47,26 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def onsite_pay_new
-    @registrants = Registrant.order(:id).all
+    @registrants = Registrant.order(:bib_number).all
   end
 
   def onsite_pay_confirm
-    @payment = Payment.new
-    @payment.note = params[:note]
-    @registrants = []
+    @p = PaymentPresenter.new
 
     params[:registrant_id].each do |reg_id|
       reg = Registrant.find(reg_id)
-      reg.build_owing_payment(@payment)
-      @registrants << reg
+      @p.add_registrant(reg)
     end
-    load_payment_details
   end
 
   def onsite_pay_create
-    @payment.completed = true
-    @payment.completed_date = DateTime.now
-    @payment.user = current_user
+    @p = PaymentPresenter.new(params[:payment_presenter])
+    @p.user = current_user
 
-    if @payment.save
-      redirect_to payment_path(@payment), notice: "Successfully created payment"
+    if @p.save
+      redirect_to payment_path(@p.saved_payment), notice: "Successfully created payment"
     else
-      @registrants = Registrant.order(:id).all
-      render "onsite_pay_new"
+      render "onsite_pay_confirm"
     end
   end
 

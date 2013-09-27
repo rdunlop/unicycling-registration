@@ -27,6 +27,7 @@ gem 'fancybox-rails'
 gem 'http_accept_language'
 gem 'strong_parameters'
 gem 'globalize3'
+gem 'virtus'
 
 #gem 'sqlite3'
 gem 'pg'

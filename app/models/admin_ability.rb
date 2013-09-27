@@ -7,6 +7,9 @@ class AdminAbility
       if user.has_role? :admin or user.has_role? :super_admin
         can :manage, Event
         can :manage, Payment
+        if user.has_role? :admin
+          cannot :create, Payment
+        end
         can :onsite_pay_new, Payment
         can :onsite_pay_confirm, Payment
         can :onsite_pay_create, Payment
@@ -15,6 +18,7 @@ class AdminAbility
       end
 
       if user.has_role? :super_admin
+        can :manage, Payment
         can :manage, :export
         can :manage, User
         can :manage, StandardSkillEntry
