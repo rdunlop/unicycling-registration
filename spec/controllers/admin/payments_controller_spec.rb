@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::PaymentsController do
   before(:each) do
-    @user = FactoryGirl.create(:admin_user)
+    @user = FactoryGirl.create(:super_admin_user)
     sign_in @user
   end
   let!(:payment) { FactoryGirl.create(:payment, :completed => true) }
@@ -93,16 +93,16 @@ describe Admin::PaymentsController do
 
     it "can create a payment with refund elements" do
       expect {
-        post :onsite_pay_create, {:payment => {
+        post :onsite_pay_create, {:payment_presenter => {
         :note => "Volunteered",
-        :payment_details_attributes => [
-          {
+        :paid_details_attributes => {
+          "0" => {
           :registrant_id => @reg.id,
           :expense_item_id => @ei.id,
           :amount => @ei.cost,
-          :refund => false,
+          :refund => true,
           :details => "Additional Details"
-          }]
+          }}
         }}
       }.to change(Payment, :count).by(1)
       p = Payment.last
@@ -110,7 +110,7 @@ describe Admin::PaymentsController do
       p.completed.should == true
       pd = PaymentDetail.last
       pd.amount.should == @ei.cost
-      pd.refund.should == false
+      pd.refund.should == true
     end
   end
 end

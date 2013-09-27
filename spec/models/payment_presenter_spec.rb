@@ -21,7 +21,7 @@ describe PaymentPresenter do
     before(:each) do
       @reg = FactoryGirl.create(:competitor)
       @payment = FactoryGirl.create(:payment, :completed => true)
-      @pd = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg)
+      @pd = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :details => "Some details")
     end
 
     it "has paid_items for the registrant" do
@@ -39,12 +39,18 @@ describe PaymentPresenter do
       @pay.add_registrant(@reg)
       @pay.registrants.should == [@reg]
     end
+
+    it "includes the details in the payment_detail_presenter" do
+      @pay.add_registrant(@reg)
+      pdp = @pay.paid_details.first
+      pdp.details.should == "Some details"
+    end
   end
 
   describe "when a registrant has selected something, but not paid for" do
     before(:each) do
       @reg = FactoryGirl.create(:competitor)
-      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg)
+      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :details => "Some other details")
       @reg.reload
     end
     it "has unpaid_details" do
@@ -59,6 +65,11 @@ describe PaymentPresenter do
     it "lists all registrants as @registrants" do
       @pay.add_registrant(@reg)
       @pay.registrants.should == [@reg]
+    end
+    it "includes the details in the payment_detail_presenter" do
+      @pay.add_registrant(@reg)
+      pdp = @pay.unpaid_details.first
+      pdp.details.should == "Some other details"
     end
   end
 end
