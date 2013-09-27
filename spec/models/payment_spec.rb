@@ -28,7 +28,9 @@ describe Payment do
   describe "with payment details" do
     before(:each) do
       @pd = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => 10)
+      @pay.reload
     end
+    
     it "has payment_details" do
       @pay.payment_details.should == [@pd]
     end
@@ -37,6 +39,7 @@ describe Payment do
     end
     it "can calculate the total including refunds" do
       @pd2 = FactoryGirl.create(:payment_detail, :payment => @pay, :refund => true, :amount => 5)
+      @pay.reload
       @pay.total_amount.should == 5
     end
   end
@@ -64,6 +67,7 @@ describe Payment do
   it "destroys related payment_details upon destroy" do
     pay = FactoryGirl.create(:payment)
     pd = FactoryGirl.create(:payment_detail, :payment => pay)
+    pay.reload
     PaymentDetail.all.count.should == 1
     pay.destroy
     PaymentDetail.all.count.should == 0
@@ -74,11 +78,13 @@ describe Payment do
 
     it "can determien the toatl received" do
       pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
+      payment.reload
       Payment.total_received.should == 15.33
     end
 
     it "returns the set of paid expense_items" do
       pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
+      payment.reload
       Payment.paid_expense_items.should == [pd.expense_item]
     end
 
@@ -89,6 +95,7 @@ describe Payment do
       it "doesn't list the item in the paid_expense_items" do
         pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
         pd2= FactoryGirl.create(:payment_detail, :payment => payment, :registrant => pd.registrant, :expense_item => pd.expense_item, :amount => 15.33, :refund => true)
+        payment.reload
         Payment.paid_expense_items.should == []
       end
     end
@@ -99,8 +106,9 @@ describe Payment do
   describe "a payment for a tshirt" do
     before(:each) do
       @pd = FactoryGirl.create(:payment_detail, :payment => @pay)
+      @pay.reload
       @reg = @pd.registrant
-      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item)
+      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item, :free => @pd.free, :details => @pd.details)
       @reg.reload
     end
 
