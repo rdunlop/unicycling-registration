@@ -2,6 +2,8 @@
 <tr class="<%= shared ? "shared" : "my" %>_registrant">
   <td>
     <%= link_to registrant.name, registrant, :class =>  (registrant.competitor ? "competitor_link" : "noncompetitor_link") %>
+    <br />
+    <%= (registrant.competitor ? t(".competitor") : t(".noncompetitor") ) %>
   </td>
   <td>
     <%= print_formatted_currency(registrant.expenses_total) %>

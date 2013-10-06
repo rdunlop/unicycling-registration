@@ -21,6 +21,8 @@ fr:
       registrations: "Inscriptions"
       total_amount_owing: "Montant total dû :"
     registrant_list_entry:
+      competitor: "(Compétiteur)"
+      noncompetitor: "(Non-compétiteur)"
       edit: "Réviser"
       see_summary: "Voir le résumé"
       unpaid: "impayé"
