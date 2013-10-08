@@ -26,6 +26,8 @@ en:
       registrations: "Registrations"
       total_amount_owing: "Total Amount Owing:"
     registrant_list_entry:
+      competitor: "(Competitor)"
+      noncompetitor: "(Non-Competitor)"
       edit: "Edit"
       see_summary: "See Summary"
       unpaid: "Unpaid"
@@ -69,7 +71,7 @@ en:
       in_case_of_emergency: "In case of emergency"
       name: "Name"
       relationship: "Relationship"
-      attending: "Attending"
+      attending: "Attending "
       primary_phone: "Primary Phone"
       other_phone: "Other phone"
       responsible_adult: "Responsible Adult"
