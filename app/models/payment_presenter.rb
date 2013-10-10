@@ -188,7 +188,9 @@ class PaymentPresenter
   end
 
   def save
+    # XXX any way to have this automatically call valid? (instead of me having to do so?)
     payment = self.build_payment
+    self.valid?
     return false unless payment.valid?
     self.saved_payment = payment
     payment.save

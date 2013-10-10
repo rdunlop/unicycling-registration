@@ -22,7 +22,7 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def details
-    @details = PaymentDetail.includes(:payment).where("payments.completed = true")
+    @details = Payment.paid_details
   end
 
   def new

@@ -61,6 +61,14 @@ class Payment < ActiveRecord::Base
     total
   end
 
+  def self.paid_details
+    all = []
+    Registrant.all.each do |reg|
+      all += reg.paid_details
+    end
+    all
+  end
+
   def self.paid_expense_items
     all = []
     Registrant.all.each do |reg|
