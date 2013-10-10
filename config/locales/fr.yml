@@ -66,7 +66,7 @@ fr:
       in_case_of_emergency: "En cas d’urgence"
       name: "Nom"
       relationship: "Lien"
-      attending: "Présent à "
+      attending: "Présent à"
       primary_phone: "Numéro de téléphone principal"
       other_phone: "Autre numéro de téléphone"
       responsible_adult: "Adulte responsable"
@@ -174,7 +174,7 @@ fr:
   all_registrants: "Tous les participants"
   sign_out: "Déconnexion"
   competition_rulebook: "Livre de règlements"
-  developed_by: "Developée par Robin Dunlop"
+  developed_by: "Developée par Robin Dunlop et Scott Wilton"
   help: "Help" # XXX Change?
   back: "Retour"
 

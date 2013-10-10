@@ -71,7 +71,7 @@ en:
       in_case_of_emergency: "In case of emergency"
       name: "Name"
       relationship: "Relationship"
-      attending: "Attending "
+      attending: "Attending"
       primary_phone: "Primary Phone"
       other_phone: "Other phone"
       responsible_adult: "Responsible Adult"
@@ -179,7 +179,7 @@ en:
   all_registrants: "All Registrants"
   sign_out: "Sign out"
   competition_rulebook: "Competition Rulebook"
-  developed_by: "Developed by Robin Dunlop"
+  developed_by: "Developed by Robin Dunlop and Scott Wilton"
   help: "Help"
   back: "Back"
 
