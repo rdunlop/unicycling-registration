@@ -21,6 +21,8 @@ fr:
       registrations: "Inscriptions"
       total_amount_owing: "Montant total dû :"
     registrant_list_entry:
+      competitor: "(Compétiteur)"
+      noncompetitor: "(Non-compétiteur)"
       edit: "Réviser"
       see_summary: "Voir le résumé"
       unpaid: "impayé"
@@ -64,7 +66,7 @@ fr:
       in_case_of_emergency: "En cas d’urgence"
       name: "Nom"
       relationship: "Lien"
-      attending: "Présent"
+      attending: "Présent à "
       primary_phone: "Numéro de téléphone principal"
       other_phone: "Autre numéro de téléphone"
       responsible_adult: "Adulte responsable"
