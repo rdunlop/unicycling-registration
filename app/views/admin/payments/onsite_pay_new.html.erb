@@ -7,7 +7,7 @@
 
 <div class="payment_details">
   <%= render :partial => "/shared/error_messages", :object => @payment %>
-  <%= form_tag(onsite_pay_confirm_admin_payments_path, :method => :post) do %>
+  <%= form_tag(adjust_payment_choose_admin_payments_path, :method => :post) do %>
     <%= label_tag(:registrant_id, "Registrants") %>
     <%= select_tag(:registrant_id, options_from_collection_for_select(@registrants, "id", "with_id_to_s"), :multiple => true) %>
     <br />

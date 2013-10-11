@@ -50,6 +50,44 @@ class Admin::PaymentsController < Admin::BaseController
     @registrants = Registrant.order(:bib_number).all
   end
 
+  def adjust_payment_choose
+    @p = PaymentPresenter.new
+
+    params[:registrant_id].each do |reg_id|
+      reg = Registrant.find(reg_id)
+      @p.add_registrant(reg)
+    end
+  end
+
+  def onsite_pay_choose
+    @p = PaymentPresenter.new
+
+    params[:registrant_id].each do |reg_id|
+      reg = Registrant.find(reg_id)
+      @p.add_registrant(reg)
+    end
+  end
+
+  def refund_choose
+    @p = RefundPresenter.new
+
+    params[:registrant_id].each do |reg_id|
+      reg = Registrant.find(reg_id)
+      @p.add_registrant(reg)
+    end
+  end
+
+  def refund_create
+    @p = RefundPresenter.new(params[:refund_presenter])
+    @p.user = current_user
+
+    if @p.save
+      redirect_to admin_payments_path, notice: "Successfully created refund"
+    else
+      render "refund_choose"
+    end
+  end
+
   def onsite_pay_confirm
     @p = PaymentPresenter.new
 

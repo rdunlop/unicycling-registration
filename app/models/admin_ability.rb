@@ -13,6 +13,9 @@ class AdminAbility
         can :onsite_pay_new, Payment
         can :onsite_pay_confirm, Payment
         can :onsite_pay_create, Payment
+        can :adjust_payment_choose, Payment
+        can :refund_choose, Payment
+        can :refund_create, Payment
         can :manage, Registrant
         can :email, Registrant
       end

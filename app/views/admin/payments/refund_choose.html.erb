@@ -1,0 +1,48 @@
+<h1>Payment Adjstments</h1>
+<% if mixpanel? %>
+  <script type="text/javascript">
+    mixpanel.track("New Payment Page Loaded")
+  </script>
+<% end %>
+
+<h1>
+  Select the items to refund:
+</h1>
+
+
+<% @registrants = @p.registrants %>
+<%= form_for(@p, :url => refund_create_admin_payments_path) do |pf| %>
+  <%= render :partial => "/shared/error_messages", :object => @p %>
+
+  <%= pf.label :note %><%= pf.text_field :note %>
+
+  <h1>Paid Details</h1>
+  <table class="sortable">
+    <thead>
+      <tr>
+        <th>Registrant</th>
+        <th>Item</th>
+        <th>Paid Amount</th>
+        <th>Details (only required for some items)</th>
+        <th>Refund This Item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= pf.fields_for :paid_details do |paid_detail| %>
+        <tr>
+          <% pd = paid_detail.object.payment_detail %>
+          <td><%= pd.registrant %><%= paid_detail.hidden_field :payment_detail_id %></td>
+          <td><%= pd.expense_item %></td>
+          <td><%= pd.amount %></td>
+          <td><%= pd.details %></td>
+          <td><%= paid_detail.check_box :refund %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= pf.submit "Create Refund", :class => "payment_link registration_button" %>
+<% end %>
+
+<div>
+  <%= link_to 'Back', admin_payments_path %>
+</div>

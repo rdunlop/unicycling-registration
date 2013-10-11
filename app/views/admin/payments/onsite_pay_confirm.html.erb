@@ -26,7 +26,6 @@
         <th>Item</th>
         <th>Paid Amount</th>
         <th>Details (only required for some items)</th>
-        <th>Refund This Item</th>
       </tr>
     </thead>
     <tbody>
@@ -36,13 +35,12 @@
           <td><%= paid_detail.object.expense_item %><%= paid_detail.hidden_field :expense_item_id %></td>
           <td><%= paid_detail.object.amount %><%= paid_detail.hidden_field :amount %><%= paid_detail.hidden_field :free %></td>
           <td><%= paid_detail.object.details %><%= paid_detail.hidden_field :details %></td>
-          <td><%= paid_detail.check_box :refund %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <h1>UnPaid Details</h1>
+  <h1>Chosen (but unpaid) Items</h1>
   <table class="sortable">
     <thead>
       <tr>
@@ -50,8 +48,8 @@
         <th>Item</th>
         <th>Cost</th>
         <th>Details (only required for some items)</th>
-        <th>Pay for this item</th>
-        <th>Mark this item as free</th>
+        <th>Mark this item as having Money-Received</th>
+        <th>Give this item to the Registrant for free</th>
       </tr>
     </thead>
     <tbody>
@@ -68,8 +66,8 @@
     </tbody>
   </table>
 
-  <h1>New Items</h1>
-  <table class="sortable">
+  <a id="show_hide_admin_payments_other_new" href="#">select other item</a>
+  <table class="sortable" id="admin_payments_other_new">
     <thead>
       <tr>
         <th>Registrant</th>
@@ -91,9 +89,10 @@
       <% end %>
     </tbody>
   </table>
+
   <%= pf.submit "Create and Save Payment", :class => "payment_link registration_button" %>
 <% end %>
 
 <div>
-  <%= link_to 'Back', registrants_path %>
+  <%= link_to 'Back', admin_payments_path %>
 </div>

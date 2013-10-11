@@ -5,5 +5,8 @@ class Refund < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :note, :presence => true
 
+  validates_associated :refund_details
+
   belongs_to :user
+  has_many :refund_details
 end

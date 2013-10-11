@@ -43,7 +43,6 @@ class PaymentPresenter
     attribute :expense_item_id, Integer
     attribute :details, String
 
-    attribute :refund, Boolean
     attribute :pay_for, Boolean
 
     attribute :amount, Decimal
@@ -135,22 +134,6 @@ class PaymentPresenter
     payment = Payment.new
     payment.note = self.note
 
-    self.paid_details.each do |pd|
-      if pd.refund
-        detail = payment.payment_details.build()
-        detail.refund = true
-        detail.registrant_id = pd.registrant_id
-        detail.expense_item_id = pd.expense_item_id
-        detail.details = pd.details
-        if pd.free
-          detail.amount = 0
-          detail.free = true
-        else
-          detail.amount = pd.amount
-          detail.free = false
-        end
-      end
-    end
     self.unpaid_details.each do |ud|
       if ud.pay_for or ud.free
         detail = payment.payment_details.build()
@@ -163,7 +146,7 @@ class PaymentPresenter
         end
         detail.registrant_id = ud.registrant_id
         detail.expense_item_id = ud.expense_item_id
-        detail.details = ud.details
+        detail.details = ud.details unless ud.details.blank?
       end
     end
     self.new_details.each do |nd|
@@ -178,7 +161,7 @@ class PaymentPresenter
         end
         detail.registrant_id = nd.registrant_id
         detail.expense_item_id = nd.expense_item_id
-        detail.details = nd.details
+        detail.details = nd.details unless nd.details.blank?
       end
     end
     payment.completed = true
