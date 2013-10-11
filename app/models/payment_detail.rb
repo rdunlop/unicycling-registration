@@ -11,8 +11,13 @@ class PaymentDetail < ActiveRecord::Base
   belongs_to :registrant
   belongs_to :payment, :inverse_of => :payment_details
   belongs_to :expense_item
+  has_many :refund_details
 
   scope :completed, includes(:payment).where(:payments => {:completed => true})
+
+  def refunded?
+    refund_details.count > 0
+  end
 
   def base_cost
     return 0 if free

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130918060341) do
+ActiveRecord::Schema.define(:version => 20131011132950) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -400,6 +400,21 @@ ActiveRecord::Schema.define(:version => 20130918060341) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "refund_details", :force => true do |t|
+    t.integer  "refund_id"
+    t.integer  "payment_detail_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "refunds", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "refund_date"
+    t.string   "note"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "registrant_choices", :force => true do |t|
     t.integer  "registrant_id"

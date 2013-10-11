@@ -33,6 +33,11 @@ describe PaymentDetail do
     @pd.valid?.should == false
   end
 
+  it "indicates that it is a refund if it has an associated refund_detail" do
+    @pd.refunded?.should == false
+    @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
+    @pd.refunded?.should == true
+  end
   it "marks the amount as negative if it is a refund" do
     @pd.refund = true
     @pd.amount = 10
@@ -41,6 +46,7 @@ describe PaymentDetail do
 
   it "is not a refund by default" do
     pay = PaymentDetail.new
+    pay.refunded?.should == false
     pay.refund.should == false
   end
 

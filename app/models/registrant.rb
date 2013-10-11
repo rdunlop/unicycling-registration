@@ -380,23 +380,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def paid_details
-    details = self.payment_details.select {|pd| pd.payment.completed and not pd.refund }.clone
-    refund_details = self.payment_details.select {|pd| pd.payment.completed and pd.refund }
-
-    # remove any matching refunds
-    refund_details.each do |refund|
-
-      matching_detail = details.select {|det|
-        det.registrant_id == refund.registrant_id and
-        det.free == refund.free and
-        det.details == refund.details and
-        det.expense_item_id == refund.expense_item_id }.first
-
-      unless matching_detail.nil?
-        details.delete matching_detail
-      end
-    end
-    details
+    self.payment_details.select {|pd| pd.payment.completed and not pd.refunded? }.clone
   end
 
   def amount_paid

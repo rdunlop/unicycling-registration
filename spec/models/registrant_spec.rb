@@ -268,8 +268,7 @@ describe Registrant do
 
         describe "when one is refunded" do
           before(:each) do
-            @payment = FactoryGirl.create(:payment, :completed => true)
-            @payment_detail_refund = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @item.cost, :expense_item => @item, :refund => true)
+            @refund_detail = FactoryGirl.create(:refund_detail, :payment_detail => @payment_detail)
           end
           it "does not count the refunded expense item" do
             Registrant.all_expense_items.should =~ [@item, @ei]
@@ -399,13 +398,12 @@ describe Registrant do
 
       describe "with a refund of everything it has completed" do
         before(:each) do
-          @payment = FactoryGirl.create(:payment, :completed => true)
-          @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100, :expense_item => @comp_exp, :refund => true)
+          @ref_det = FactoryGirl.create(:refund_detail, :payment_detail => @payment_detail)
         end
 
         it "lists nothing as paid" do
           @comp.paid_details.should == []
-          @comp.payment_details.count.should == 2
+          @comp.payment_details.count.should == 1
         end
       end
     end
