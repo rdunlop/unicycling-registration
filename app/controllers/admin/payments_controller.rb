@@ -84,6 +84,9 @@ class Admin::PaymentsController < Admin::BaseController
     if @p.save
       redirect_to admin_payments_path, notice: "Successfully created refund"
     else
+      @p.errors.each do |err|
+        puts "err: #{err}"
+      end
       render "refund_choose"
     end
   end

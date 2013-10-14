@@ -13,9 +13,4 @@ describe RefundDetail do
     @rd.payment_detail = nil
     @rd.valid?.should == false
   end
-
-  it "requires an associated refund" do
-    @rd.refund = nil
-    @rd.valid?.should == false
-  end
 end
