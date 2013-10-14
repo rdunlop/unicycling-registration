@@ -88,7 +88,7 @@ Workspace::Application.routes.draw do
 
       resources :users, :only => [:index] do
         member do
-          put :admin
+          put :role
         end
       end
 

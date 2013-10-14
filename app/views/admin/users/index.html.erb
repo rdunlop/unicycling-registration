@@ -1,25 +1,37 @@
 <h1>Users</h1>
+<% roles = User.roles %>
 
+<h2>Role Descriptions</h2>
+
+<% User.roles.each do |role| %>
+  <h3><%= role %></h3>
+  <p><pre><%= User.role_description(role) %></pre></p>
+<% end %>
+
+<br />
 <table class="sortable">
   <thead>
     <tr>
       <th>Email</th>
-      <th>Admin?</th>
-      <th> </th>
-      <th>SuperAdmin?</th>
+      <% roles.each do |role| %>
+        <th><%= role %>?</th>
+        <th>Toggle <%= role %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
   <% @users.each do |user| %>
     <tr>
       <td><%= user %></td>
-      <td><%= user.has_role? :admin %></td>
-      <td>
-        <%= form_for([:admin, user], :url => admin_admin_user_path(user), :html => { :method => :put }) do |f| %>
-          <%= f.submit "Toggle Admin" %>
-        <% end %>
-      </td>
-      <td><%= user.has_role? :super_admin %></td>
+      <% roles.each do |role| %>
+        <td><%= user.has_role? role %></td>
+        <td>
+          <%= form_for([:admin, user], :url => role_admin_user_path(user), :html => { :method => :put }) do |f| %>
+            <%= hidden_field_tag :role_name, role %>
+            <%= f.submit "Toggle #{role}" %>
+          <% end %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>

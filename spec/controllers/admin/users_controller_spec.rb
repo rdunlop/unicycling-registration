@@ -15,20 +15,20 @@ describe Admin::UsersController do
     end
   end
 
-  describe "PUT admin" do
+  describe "PUT role" do
     describe "with a normal user" do
       before(:each) do
         @user = FactoryGirl.create(:user)
       end
       it "can change a user to an admin" do
-        put :admin, {:id => @user.to_param}
+        put :role, {:id => @user.to_param, :role_name => :admin}
         response.should redirect_to(admin_users_path)
         @user.reload
         @user.has_role?(:admin).should == true
       end
       it "can change an admin back to a user" do
         admin = FactoryGirl.create(:admin_user)
-        put :admin, {:id => admin.to_param}
+        put :role, {:id => admin.to_param, :role_name => :admin}
         response.should redirect_to(admin_users_path)
         admin.reload
         admin.has_role?(:admin).should == false
@@ -39,7 +39,7 @@ describe Admin::UsersController do
         sign_out @super_user
         sign_in admin_user
 
-        put :admin, {:id => @user.to_param}
+        put :role, {:id => @user.to_param, :role_name => :admin}
         response.should redirect_to(root_path)
         @user.reload
         @user.has_role?(:admin).should == false

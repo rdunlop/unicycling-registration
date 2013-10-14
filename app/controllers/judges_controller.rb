@@ -81,7 +81,7 @@ class JudgesController < ApplicationController
       if @user.add_role(:judge)
         format.html { redirect_to competition_judges_path(@competition), notice: 'Judge successfully created.' }
       else
-        format.html { redirect_to competition_judges_path(@competiton), notice: 'Unable to add judge role to user.' }
+        format.html { redirect_to competition_judges_path(@competiton), alert: 'Unable to add judge role to user.' }
       end
     end
   end

@@ -105,7 +105,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
             <% end %>
             <% if can? :manage, User %>
               <%= menu_header_if_necessary("siteconfig") %>
-              <li><%= link_to 'Admins', admin_users_path %></li>
+              <li><%= link_to 'User Permissions', admin_users_path %></li>
             <% end %>
             <% if can? :manage, ExpenseGroup %>
               <%= menu_header_if_necessary("siteconfig") %>

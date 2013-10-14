@@ -6,12 +6,17 @@ class Admin::UsersController < Admin::BaseController
     @users = User.all
   end
 
-  def admin
+  def role
     @user = User.find(params[:id])
-    if @user.has_role? :admin
-      @user.remove_role :admin
+    role = params[:role_name]
+    if User.roles.include?(role.to_sym)
+      if @user.has_role? role
+        @user.remove_role role
+      else
+        @user.add_role role
+      end
     else
-      @user.add_role :admin
+      flash[:alert] = "Role not found (#{role})"
     end
 
     respond_to do |format|

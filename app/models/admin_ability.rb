@@ -23,7 +23,10 @@ class AdminAbility
       if user.has_role? :super_admin
         can :manage, Payment
         can :manage, :export
+
+        # the only role that can assign other roles:
         can :manage, User
+
         can :manage, StandardSkillEntry
         can :manage, StandardSkillRoutine
         can :manage, AgeGroupType

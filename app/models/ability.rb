@@ -68,6 +68,9 @@ class Ability
         can :manage, Competition do |comp|
           user.has_role? :chief_judge, comp.event
         end
+      end
+
+      if user.has_role? :chief_judge, :any or user.has_role? :admin
         can :manage, Judge
       end
 

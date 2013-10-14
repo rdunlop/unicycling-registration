@@ -114,6 +114,9 @@ describe "Ability" do
 
       it { should be_able_to(:read, payment) }
     end
+    it { should be_able_to(:create_chief, Judge) }
+    it { should be_able_to(:create, Judge) }
+    it { should be_able_to(:create_normal, Judge) }
   end
 
   describe "as a super_admin" do
