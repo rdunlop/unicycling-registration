@@ -85,32 +85,26 @@ describe Admin::PaymentsController do
     end
   end
 
-  describe "POST onsite_pay_create" do
+  describe "POST refund_create" do
     before(:each) do
-      @ei = FactoryGirl.create(:expense_item)
-      @reg = FactoryGirl.create(:registrant)
+      @pd = FactoryGirl.create(:payment_detail)
     end
 
     it "can create a payment with refund elements" do
       expect {
-        post :onsite_pay_create, {:payment_presenter => {
-        :note => "Volunteered",
+        post :refund_create, {:refund_presenter => {
+        :note => "Cancelled",
         :paid_details_attributes => {
           "0" => {
-          :registrant_id => @reg.id,
-          :expense_item_id => @ei.id,
-          :amount => @ei.cost,
-          :refund => true,
-          :details => "Additional Details"
+          :payment_detail_id => @pd.id,
+          :refund => true
           }}
         }}
-      }.to change(Payment, :count).by(1)
-      p = Payment.last
-      p.note.should == "Volunteered"
-      p.completed.should == true
-      pd = PaymentDetail.last
-      pd.amount.should == @ei.cost
-      pd.refund.should == true
+      }.to change(RefundDetail, :count).by(1)
+      r = Refund.last
+      r.note.should == "Cancelled"
+      rd = RefundDetail.last
+      rd.payment_detail.should == @pd
     end
   end
 end
