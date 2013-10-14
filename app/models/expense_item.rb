@@ -15,7 +15,7 @@ class ExpenseItem < ActiveRecord::Base
   accepts_nested_attributes_for :translations
   attr_accessible :translations_attributes
 
-  belongs_to :expense_group
+  belongs_to :expense_group, :inverse_of => :expense_items
 
   before_destroy :check_for_payment_details
 

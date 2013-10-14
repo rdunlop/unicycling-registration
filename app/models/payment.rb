@@ -71,7 +71,7 @@ class Payment < ActiveRecord::Base
 
   def self.paid_expense_items
     all = []
-    Registrant.all.each do |reg|
+    Registrant.includes(:payment_details => [:expense_item]).all.each do |reg|
       all += reg.paid_expense_items
     end
     all

@@ -14,9 +14,9 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def index
-    @payments = Payment.all
+    @payments = Payment.includes(:user).all
     @total_received = Payment.total_received
-    @expense_groups = ExpenseGroup.all
+    @expense_groups = ExpenseGroup.includes(:expense_items => [:translations, :expense_group]).all
     @paid_expense_items = Payment.paid_expense_items
     @all_expense_items = Registrant.all_expense_items
   end
