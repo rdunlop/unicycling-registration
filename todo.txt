@@ -9,6 +9,9 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
+- remove "edit payment" links
+- prevent scrolling when "add other item" is clicked"
+- add documentation to methods as per: http://globaldev.co.uk/2013/10/ruby-tips-part-4/
 - Rename onsite to adjustment
 - prevent PaymentExpense from being created without details (for those which have details)
 - include "translations" in the loads of data (N+1 record thing)
@@ -26,6 +29,8 @@ Registration-Related ToDo
 ---- END ROBIN's CURRENT LIST:
 
 
+- Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
+- Remove all of the "sortable" "search" boxes, as they are clutter.
 - Don't use "short_name" for the styling, instead create some sort of drop-down, so that people can't choose something that doesn't yet exist.
 - Only display the "Gender Filter" when creating a competition (not on edit)
 - Ensure that the Paid Payment Details page doesn't list refunded items unnecessarily.

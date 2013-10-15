@@ -1,0 +1,23 @@
+<h1><%= t(".refund") %></h1>
+
+<p>
+  <b>Note:</b>
+  <%= @refund.note %>
+</p>
+
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Item</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @refund.refund_details.each do |detail| %>
+      <tr>
+        <td><%= detail %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> 
+
+<%= link_to t('back'), payments_path %>

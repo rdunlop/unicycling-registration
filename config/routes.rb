@@ -55,6 +55,7 @@ Workspace::Application.routes.draw do
       end
       resources :payments, :only => [:index, :new, :create]  do
         collection do
+          get :summary
           get :details
           get :onsite_pay_new
           post :adjust_payment_choose
@@ -111,6 +112,8 @@ Workspace::Application.routes.draw do
     resources :expense_groups
 
     resources :expense_items, :except => [:new, :show]
+
+    resources :refunds, :only => [:show]
 
     resources :payments do
       collection do

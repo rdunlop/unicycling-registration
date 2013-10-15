@@ -1,73 +1,10 @@
 <h1>Listing payments</h1>
 
+<%= link_to "Summary", summary_admin_payments_path %><br />
 <%= link_to "Create Adjustment Payment", onsite_pay_new_admin_payments_path %><br />
 <%= link_to "Create New Payment (of anything)", new_admin_payment_path %>
 <br /><br />
 
-
-<table>
-  <caption>Payments Summary</caption>
-  <thead>
-    <tr>
-      <th>Total Amount Received</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @total_received %></td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-<h2>Expenses by Group</h2>
-
-<table class="sortable">
-  <thead>
-    <tr>
-      <th>
-        Group
-      </th>
-      <th>
-        Entry
-      </th>
-      <th>
-        Num paid
-      </th>
-      <th>
-        Num unpaid
-      </th>
-      <th>
-        Num total
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @expense_groups.each do |group| %>
-      <% group.expense_items.each do |item| %>
-        <tr>
-          <td>
-            <%= group %>
-          </td>
-          <td>
-            <%= item %>
-          </td>
-          <td>
-            <%= @paid_expense_items.count(item) %>
-          </td>
-          <td>
-            <%= (@all_expense_items.count(item) - @paid_expense_items.count(item)) %>
-          </td>
-          <td>
-            <%= @all_expense_items.count(item) %>
-          </td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<hr />
 <table class="sortable">
   <thead>
     <tr>
@@ -79,7 +16,6 @@
       <th>Note</th>
       <th>Completed date</th>
       <th>Payment date</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -96,7 +32,6 @@
         <td><%= payment.completed_date %></td>
         <td><%= payment.payment_date %></td>
         <td><%= link_to 'Show', payment %></td>
-        <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
         <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -105,4 +40,28 @@
 
 <br />
 
-<%= link_to 'New Payment', new_payment_path %>
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Refund ID</th>
+      <th>User</th>
+      <th>Note</th>
+      <th>Refund Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @refunds.each do |refund| %>
+      <tr>
+        <td><%= refund.id %></td>
+        <td><%= refund.user %></td>
+        <td><%= refund.note %></td>
+        <td><%= refund.refund_date %></td>
+        <td><%= link_to 'Show', refund %></td>
+        <td><%= "destroy is n/a" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

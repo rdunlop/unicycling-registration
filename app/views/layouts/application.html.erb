@@ -128,7 +128,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
             <% end %>
             <% if can? :manage, Registrant %>
               <%= menu_header_if_necessary("manage") %>
-              <li><%= link_to 'Payments', admin_payments_path %></li>
+              <li><%= link_to 'Payments', summary_admin_payments_path %></li>
               <li><%= link_to 'Paid Payment Detail', details_admin_payments_path %></li>
             <% end %>
             <% if can? :manage, Registrant %>
