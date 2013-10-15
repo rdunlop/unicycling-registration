@@ -34,6 +34,7 @@ $(document).ready(function () {
 $(document).ready(function() {
   $(".sortable").each(function() {
     $(this).dataTable({
+      "bFilter": false,
       "bInfo": false,
       "bPaginate": false
     });
