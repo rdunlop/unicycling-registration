@@ -9,6 +9,7 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
+-limit rooms to 1000 (total), with a warning function at 80%?
 - remove "edit payment" links
 - prevent scrolling when "add other item" is clicked"
 - add documentation to methods as per: http://globaldev.co.uk/2013/10/ruby-tips-part-4/
@@ -30,7 +31,7 @@ Registration-Related ToDo
 
 
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
-- Remove all of the "sortable" "search" boxes, as they are clutter.
+- Remove all of the "sortable" "search" boxes, as they are clutter.....but have them on the really-long-list tables (like 'edit registrant').
 - Don't use "short_name" for the styling, instead create some sort of drop-down, so that people can't choose something that doesn't yet exist.
 - Only display the "Gender Filter" when creating a competition (not on edit)
 - Ensure that the Paid Payment Details page doesn't list refunded items unnecessarily.

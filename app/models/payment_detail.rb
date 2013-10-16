@@ -15,6 +15,11 @@ class PaymentDetail < ActiveRecord::Base
 
   scope :completed, includes(:payment).where(:payments => {:completed => true})
 
+  # all of the PaymentDetails which do not have a refund applied
+  def self.all_paid
+    PaymentDetail.completed.includes(:refund_details).where({:refund_details => {:payment_detail_id => nil}})
+  end
+
   def refunded?
     refund_details.count > 0
   end
