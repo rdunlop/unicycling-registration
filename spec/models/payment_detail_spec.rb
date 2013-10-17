@@ -32,22 +32,25 @@ describe PaymentDetail do
     @pd.expense_item = nil
     @pd.valid?.should == false
   end
+  it "has additional description if it is refunded" do
+    @pd.refunded?.should == false
+    @pd.to_s.should == @pd.expense_item.to_s
+    @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
+    @pd.reload
+    @pd.refunded?.should == true
+    @pd.to_s.should == "#{@pd.expense_item.to_s} (Refunded)"
+  end
 
   it "indicates that it is a refund if it has an associated refund_detail" do
     @pd.refunded?.should == false
     @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
+    @pd.reload
     @pd.refunded?.should == true
   end
-  it "marks the amount as negative if it is a refund" do
-    @pd.refund = true
-    @pd.amount = 10
-    @pd.cost.should == -10
-  end
 
-  it "is not a refund by default" do
+  it "is not refunded by default" do
     pay = PaymentDetail.new
     pay.refunded?.should == false
-    pay.refund.should == false
   end
 
   it "is not scoped as completed if not completed" do
