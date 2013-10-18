@@ -29,15 +29,6 @@ describe Admin::PaymentsController do
       get :summary, {}
       assigns(:expense_groups).should == [group]
     end
-    it "assigns a set of expense_items as paid_expense_items" do
-      get :summary, {}
-      assigns(:paid_expense_items).should == [payment_detail.expense_item]
-    end
-    it "doesn't assign unpaid expense_items" do
-      FactoryGirl.create(:expense_item)
-      get :summary, {}
-      assigns(:paid_expense_items).should == [payment_detail.expense_item]
-    end
     it "assigns a set of expense_items as all_expense_items" do
       get :summary, {}
       assigns(:all_expense_items).should == [payment_detail.expense_item]

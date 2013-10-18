@@ -68,13 +68,9 @@ describe PaymentDetail do
       PaymentDetail.completed.should == [@pd]
     end
 
-    it "is in the list of all_paid" do
-      PaymentDetail.all_paid.should == [@pd]
-    end
-
     it "doesn't list refunded payments" do
       @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
-      PaymentDetail.all_paid.should == []
+      PaymentDetail.completed.should == []
     end
   end
 end

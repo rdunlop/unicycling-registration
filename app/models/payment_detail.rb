@@ -12,12 +12,8 @@ class PaymentDetail < ActiveRecord::Base
   belongs_to :expense_item
   has_one :refund_detail
 
-  scope :completed, includes(:payment).where(:payments => {:completed => true})
-
-  # all of the PaymentDetails which do not have a refund applied
-  def self.all_paid
-    PaymentDetail.completed.includes(:refund_detail).where({:refund_details => {:payment_detail_id => nil}})
-  end
+  # excludes refunded items
+  scope :completed, includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}})
 
   def refunded?
     !refund_detail.nil?

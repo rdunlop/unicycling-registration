@@ -21,7 +21,6 @@ class Admin::PaymentsController < Admin::BaseController
   def summary
     @total_received = Payment.total_received
     @expense_groups = ExpenseGroup.includes(:expense_items => [:translations, :expense_group]).all
-    @paid_expense_items = PaymentDetail.all_paid.includes(:expense_item).map{|pd| pd.expense_item}
     @all_expense_items = Registrant.all_expense_items
   end
 
