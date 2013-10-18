@@ -53,9 +53,7 @@ class Payment < ActiveRecord::Base
 
   def self.total_received
     total = 0
-    Payment.includes(:payment_details).each do |payment|
-      next unless payment.completed
-
+    Payment.includes(:payment_details).where({:completed => true}).each do |payment|
       total += payment.total_amount
     end
     total

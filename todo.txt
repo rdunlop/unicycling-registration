@@ -9,9 +9,7 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
-- remove 'refund' from payment_deatil
--limit rooms to 1000 (total), with a warning function at 80%?
-- remove "edit payment" links
+- limit rooms to 1000 (total), with a warning function at 80%?
 - prevent scrolling when "add other item" is clicked"
 - add documentation to methods as per: http://globaldev.co.uk/2013/10/ruby-tips-part-4/
 - Rename onsite to adjustment
