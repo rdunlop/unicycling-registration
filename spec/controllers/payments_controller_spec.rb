@@ -191,12 +191,11 @@ describe PaymentsController do
                 :expense_item_id => @ei.id,
                 :details => "Additional Details",
                 :free => true,
-                :refund => true,
                 :amount => 100
              }]
           }}
           PaymentDetail.count.should == 1
-          PaymentDetail.last.refund.should == false
+          PaymentDetail.last.refunded?.should == false
         end
       end
     end

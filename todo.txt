@@ -9,6 +9,7 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
+- remove 'refund' from payment_deatil
 -limit rooms to 1000 (total), with a warning function at 80%?
 - remove "edit payment" links
 - prevent scrolling when "add other item" is clicked"
