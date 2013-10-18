@@ -380,7 +380,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def paid_details
-    self.payment_details.select {|pd| pd.payment.completed and not pd.refunded? }.clone
+    self.payment_details.completed.clone
   end
 
   def amount_paid
