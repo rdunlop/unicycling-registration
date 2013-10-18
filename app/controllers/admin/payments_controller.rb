@@ -25,7 +25,7 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def details
-    @details = PaymentDetail.all_paid
+    @details = PaymentDetail.completed
   end
 
   def new

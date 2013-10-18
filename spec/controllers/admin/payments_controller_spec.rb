@@ -17,6 +17,13 @@ describe Admin::PaymentsController do
     end
   end
 
+  describe "GET details" do
+    it "returns list of PaymentDetails" do
+      get :details, {}
+      assigns(:details).should eq([payment_detail])
+    end
+  end
+
   describe "GET summary" do
 
     it "has the total_received" do
