@@ -4,3 +4,4 @@
 
 $(document).on "click", "#show_hide_admin_payments_other_new", ->
   $('#admin_payments_other_new').toggle();
+  return false;
