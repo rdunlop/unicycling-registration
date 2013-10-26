@@ -15,7 +15,7 @@ class EventConfiguration < ActiveRecord::Base
     ["unicon_17", "naucc_2013"]
   end
 
-  validates :style_name, :inclusion => {:in => self.style_names }
+  validates :style_name, :inclusion => {:in => self.style_names, :allow_blank => true }
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :usa, :inclusion => { :in => [true, false] } # because it's a boolean
@@ -80,7 +80,7 @@ class EventConfiguration < ActiveRecord::Base
 
   def self.style_name
     ec = EventConfiguration.first
-    if ec.nil?
+    if ec.nil? or ec.style_name.blank?
       "naucc_2013"
     else
       ec.style_name

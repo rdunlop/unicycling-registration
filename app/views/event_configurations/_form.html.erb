@@ -42,7 +42,7 @@
   <% end %>
   <tr>
       <th><%= f.label :style_name %></th>
-      <td><%= f.select :style_name, EventConfiguration.style_names %></td>
+      <td><%= f.select :style_name, EventConfiguration.style_names, :include_blank => true %></td>
       <td>Select the style to be applied to the site</td>
   </tr>
   <tr>
