@@ -77,19 +77,19 @@ describe CompetitionsController do
       it "assigns a newly created but unsaved event_category as @event_category" do
         # Trigger the behavior that occurs when invalid params are submitted
         Competition.any_instance.stub(:save).and_return(false)
-        post :create, {:event_category_id => @event_category.id, :competition => {}}
+        post :create, {:event_category_id => @event_category.id, :competition => {:name => "comp"}}
         assigns(:competition).should be_a_new(Competition)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Competition.any_instance.stub(:save).and_return(false)
-        post :create, {:event_category_id => @event_category.id, :competition => {}}
+        post :create, {:event_category_id => @event_category.id, :competition => {:name => "comp"}}
         response.should render_template("new")
       end
       it "loads the event" do
         EventCategory.any_instance.stub(:save).and_return(false)
-        post :create, {:event_category_id => @event_category.id, :competition => {}}
+        post :create, {:event_category_id => @event_category.id, :competition => {:name => "comp"}}
         assigns(:event_category).should == @event_category
       end
     end
@@ -127,8 +127,8 @@ describe CompetitionsController do
         # specifies that the Competition created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Competition.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => competition.to_param, :competition => {'these' => 'params'}}
+        Competition.any_instance.should_receive(:update_attributes).with({})
+        put :update, {:id => competition.to_param, :competition => {'there' => 'params'}}
       end
 
       it "assigns the requested event_category as @event_category" do
@@ -157,7 +157,7 @@ describe CompetitionsController do
         competition = Competition.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Competition.any_instance.stub(:save).and_return(false)
-        put :update, {:id => competition.to_param, :competition => {}}
+        put :update, {:id => competition.to_param, :competition => {:name => "comp"}}
         response.should render_template("edit")
       end
     end

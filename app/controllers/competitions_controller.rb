@@ -4,6 +4,7 @@ class CompetitionsController < ApplicationController
   include EventsHelper
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   before_filter :load_event, :only => [:index, :create_empty, :new_empty]
   before_filter :load_event_category, :only => [:create, :new]
@@ -63,7 +64,7 @@ class CompetitionsController < ApplicationController
 
   # POST /events/#/create_empty
   def create_empty
-    @competition = Competition.new(params[:competition])
+    @competition = Competition.new(competition_params)
     @competition.event = @event
 
     respond_to do |format|
@@ -78,7 +79,7 @@ class CompetitionsController < ApplicationController
   # POST /event_categories/#/competitions
   # POST /event_categories/#/competitions.json
   def create
-    @competition = Competition.new(params[:competition])
+    @competition = Competition.new(competition_params)
     @competition.event = @event_category.event
 
     @event_category.competition = @competition
@@ -114,7 +115,7 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
 
     respond_to do |format|
-      if @competition.update_attributes(params[:competition])
+      if @competition.update_attributes(competition_params)
         format.html { redirect_to @competition, notice: 'Competition was successfully updated.' }
         format.json { head :no_content }
       else
@@ -236,6 +237,11 @@ class CompetitionsController < ApplicationController
         format.html { redirect_to @competition, notice: 'Unable to update lock status' }
       end
     end
+  end
+
+  private
+  def competition_params
+    params.require(:competition).permit(:name, :locked, :age_group_type_id, :has_experts, :has_age_groups)
   end
 end
 

@@ -1,4 +1,5 @@
 class Competition < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :name, :event_id, :locked, :age_group_type_id, :has_experts, :has_age_groups
 
   belongs_to :age_group_type, :inverse_of => :competitions
