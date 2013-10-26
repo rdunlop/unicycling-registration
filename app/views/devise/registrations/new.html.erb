@@ -11,7 +11,7 @@
   <%= devise_error_messages! %>
 
   <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+    <%= f.email_field :email, :auto_focus => true %></div>
 
 <div><%= f.label :password %><br /><span class="extra_info">(minimum 6 characters)</span><br />
   <%= f.password_field :password %></div>

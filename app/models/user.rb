@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   rolify
   # Include default devise modules. Others available are:
   # :token_authenticatable
