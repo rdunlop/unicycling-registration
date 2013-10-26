@@ -49,7 +49,7 @@ class AwardLabelsController < ApplicationController
     @award_label = AwardLabel.find(params[:id])
 
     respond_to do |format|
-      if @award_label.update_attributes(params[:award_label])
+      if @award_label.update_attributes(award_label_params)
         format.html { redirect_to user_award_labels_path(@award_label.user), notice: 'Award label was successfully updated.' }
         format.json { head :no_content }
       else
