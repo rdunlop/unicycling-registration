@@ -14,9 +14,11 @@ describe EventConfiguration do
     @ev.valid?.should == false
   end
 
-  it "has a style_name" do
+  it "allows a blank style_name" do
     @ev.style_name = nil
-    @ev.valid?.should == false
+    @ev.valid?.should == true
+
+    EventConfiguration.style_name.should == "naucc_2013"
   end
 
   it "has a list of style_names" do
