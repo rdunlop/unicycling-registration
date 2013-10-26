@@ -91,19 +91,19 @@ describe EventCategoriesController do
       it "assigns a newly created but unsaved event_category as @event_category" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventCategory.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :event_category => {}}
+        post :create, {:event_id => @event.id, :event_category => {:name => "cat name"}}
         assigns(:event_category).should be_a_new(EventCategory)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventCategory.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :event_category => {}}
+        post :create, {:event_id => @event.id, :event_category => {:name => "cat name"}}
         response.should render_template("index")
       end
       it "loads the event" do
         EventCategory.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :event_category => {}}
+        post :create, {:event_id => @event.id, :event_category => {:name => "cat name"}}
         assigns(:event).should == @event
       end
     end
@@ -117,7 +117,7 @@ describe EventCategoriesController do
         # specifies that the EventCategory created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        EventCategory.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        EventCategory.any_instance.should_receive(:update_attributes).with({})
         put :update, {:id => event_category.to_param, :event_category => {'these' => 'params'}}
       end
 
@@ -139,7 +139,7 @@ describe EventCategoriesController do
         event_category = EventCategory.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         EventCategory.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event_category.to_param, :event_category => {}}
+        put :update, {:id => event_category.to_param, :event_category => {:name => "cat name"}}
         assigns(:event_category).should eq(event_category)
       end
 
@@ -147,7 +147,7 @@ describe EventCategoriesController do
         event_category = EventCategory.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         EventCategory.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event_category.to_param, :event_category => {}}
+        put :update, {:id => event_category.to_param, :event_category => {:name => "cat name"}}
         response.should render_template("edit")
       end
     end

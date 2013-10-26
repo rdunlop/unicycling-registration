@@ -1,4 +1,5 @@
 class EventCategory < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :name, :event_id, :position, :age_group_type_id, :competition_id
 
   belongs_to :event, :inverse_of => :event_categories, :touch => true

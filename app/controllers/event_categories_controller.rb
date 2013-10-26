@@ -1,6 +1,7 @@
 class EventCategoriesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   before_filter :load_event, :only => [:index, :create]
   before_filter :load_event_category, :only => [:sign_ups]
@@ -48,7 +49,7 @@ class EventCategoriesController < ApplicationController
   # POST /event_categories
   # POST /event_categories.json
   def create
-    @event_category = EventCategory.new(params[:event_category])
+    @event_category = EventCategory.new(event_category_params)
     @event_category.event = @event
 
     respond_to do |format|
@@ -69,7 +70,7 @@ class EventCategoriesController < ApplicationController
     @event_category = EventCategory.find(params[:id])
 
     respond_to do |format|
-      if @event_category.update_attributes(params[:event_category])
+      if @event_category.update_attributes(event_category_params)
         format.html { redirect_to @event_category, notice: 'Event Category was successfully updated.' }
         format.json { head :no_content }
       else
@@ -94,6 +95,11 @@ class EventCategoriesController < ApplicationController
 
   def sign_ups
     @registrants = @event_category.signed_up_registrants
+  end
+
+  private
+  def event_category_params
+    params.require(:event_category).permit(:name, :position, :age_group_type_id)
   end
 end
 
