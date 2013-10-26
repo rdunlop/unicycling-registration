@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :name, :position, :info_url
 
   default_scope order('position ASC')
