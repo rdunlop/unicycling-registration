@@ -32,7 +32,8 @@ describe EventConfigurationsController do
     {
       standard_skill_closed_date: Date.tomorrow,
       short_name: "something short",
-      long_name: "Something Long"
+      long_name: "Something Long",
+      style_name: "unicon_17"
     }
   end
 

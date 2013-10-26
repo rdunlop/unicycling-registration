@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131018045728) do
+ActiveRecord::Schema.define(:version => 20131026152340) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -217,6 +217,7 @@ ActiveRecord::Schema.define(:version => 20131018045728) do
     t.string   "currency_code"
     t.text     "currency"
     t.string   "rulebook_url"
+    t.string   "style_name"
   end
 
   create_table "events", :force => true do |t|

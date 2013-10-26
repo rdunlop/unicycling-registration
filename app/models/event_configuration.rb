@@ -1,6 +1,6 @@
 class EventConfiguration < ActiveRecord::Base
   attr_accessible :artistic_closed_date, :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location, :logo_image
-  attr_accessible :long_name, :rulebook_url, :short_name, :standard_skill, :standard_skill_closed_date
+  attr_accessible :long_name, :rulebook_url, :short_name, :standard_skill, :standard_skill_closed_date, :style_name
   attr_accessible :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url
 
   translates :short_name, :long_name, :location, :dates_description
@@ -11,6 +11,11 @@ class EventConfiguration < ActiveRecord::Base
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI::regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
 
+  def self.style_names
+    ["unicon_17", "naucc_2013"]
+  end
+
+  validates :style_name, :inclusion => {:in => self.style_names }
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :usa, :inclusion => { :in => [true, false] } # because it's a boolean
@@ -70,6 +75,15 @@ class EventConfiguration < ActiveRecord::Base
       ""
     else
       ec.long_name
+    end
+  end
+
+  def self.style_name
+    ec = EventConfiguration.first
+    if ec.nil?
+      "naucc_2013"
+    else
+      ec.style_name
     end
   end
 

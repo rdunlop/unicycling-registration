@@ -41,6 +41,11 @@
     <% end %>
   <% end %>
   <tr>
+      <th><%= f.label :style_name %></th>
+      <td><%= f.select :style_name, EventConfiguration.style_names %></td>
+      <td>Select the style to be applied to the site</td>
+  </tr>
+  <tr>
       <th><%= f.label :event_url %></th>
       <td><%= f.url_field :event_url %></td>
       <td>Links from the Menubar logo to this URL.</td>

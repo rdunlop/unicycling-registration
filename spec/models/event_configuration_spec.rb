@@ -14,6 +14,27 @@ describe EventConfiguration do
     @ev.valid?.should == false
   end
 
+  it "has a style_name" do
+    @ev.style_name = nil
+    @ev.valid?.should == false
+  end
+
+  it "has a list of style_names" do
+    EventConfiguration.style_names.count.should > 0
+  end
+
+  it "style_name must be a valid_style_name" do
+    @ev.style_name = "fake"
+    @ev.valid?.should == false
+
+    @ev.style_name = EventConfiguration.style_names.first
+    @ev.valid?.should == true
+  end
+
+  it "has a style_name even without having any entries" do
+    EventConfiguration.style_name.should == "naucc_2013"
+  end
+
   it "has a long name" do
     @ev.long_name = nil
     @ev.valid?.should == false

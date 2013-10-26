@@ -20,5 +20,6 @@ FactoryGirl.define do
     tshirt_closed_date "2013-5-10"
     comp_noncomp_url nil
     test_mode true
+    style_name "naucc_2013"
   end
 end
