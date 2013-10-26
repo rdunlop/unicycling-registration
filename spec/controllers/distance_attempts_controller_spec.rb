@@ -106,7 +106,7 @@ describe DistanceAttemptsController do
     end
     describe "with invalid params" do
         it "renders the 'new' form" do
-           post :create, {:distance_attempt => {}, :judge_id => @judge.id, :competitor_id => @comp.id}
+           post :create, {:distance_attempt => {:fault => false}, :judge_id => @judge.id, :competitor_id => @comp.id}
            response.should render_template("new")
         end
     end

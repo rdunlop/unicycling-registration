@@ -1,5 +1,6 @@
 class DistanceAttemptsController < ApplicationController
   load_and_authorize_resource
+  skip_load_resource only: [:create]
   before_filter :load_event_category, :except => [:destroy]
 
   def load_event_category
@@ -40,6 +41,7 @@ class DistanceAttemptsController < ApplicationController
   end
 
   def create
+    @distance_attempt = DistanceAttempt.new(distance_attempt_params)
     @distance_attempt.competitor = @competitor
     @distance_attempt.judge = @judge
 
@@ -77,5 +79,10 @@ class DistanceAttemptsController < ApplicationController
     @calc = @competition.score_calculator(@competition)
     @calc.update_all_places
     redirect_to competition_distance_attempts_path(@competition), :notice => "All Places updated"
+  end
+
+  private
+  def distance_attempt_params
+    params.require(:distance_attempt).permit(:distance, :fault)
   end
 end
