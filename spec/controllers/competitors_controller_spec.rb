@@ -32,13 +32,12 @@ describe CompetitorsController do
   # Competitor. As you add validations to Competitor, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { competition_id: @ec.id,
-      position: 1}
+    { position: 1}
   end
   
   describe "GET index" do
     it "assigns all competitors as @competitors" do
-      competitor = Competitor.create! valid_attributes
+      competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
       get :index, {:competition_id => @ec.id}
       assigns(:competitors).should == [competitor]
     end
@@ -46,7 +45,7 @@ describe CompetitorsController do
 
   describe "GET edit" do
     it "assigns the requested competitor as @competitor" do
-      competitor = Competitor.create! valid_attributes
+      competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
       get :edit, {:id => competitor.to_param}
       assigns(:competitor).should eq(competitor)
     end
@@ -70,6 +69,14 @@ describe CompetitorsController do
         post :create, {:competitor => valid_attributes, :competition_id => @ec.id}
         assigns(:competitor).should be_a(Competitor)
         assigns(:competitor).should be_persisted
+      end
+
+      it "creates associated members also" do
+        @reg2 = FactoryGirl.create(:competitor) #registrant
+        @reg3 = FactoryGirl.create(:competitor) #registrant
+        expect {
+          post :create, {:competitor => valid_attributes.merge({:registrant_ids => [@reg2.id, @reg3.id]}), :competition_id => @ec.id}
+        }.to change(Member, :count).by(2)
       end
 
       it "redirects back to index" do
@@ -137,14 +144,14 @@ describe CompetitorsController do
       it "assigns a newly created but unsaved competitor as @competitor" do
         # Trigger the behavior that occurs when invalid params are submitted
         Competitor.any_instance.stub(:save).and_return(false)
-        post :create, {:competitor => {}, :competition_id => @ec.id}
+        post :create, {:competitor => {:custom_name => "name"}, :competition_id => @ec.id}
         assigns(:competitor).should be_a_new(Competitor)
       end
 
       it "re-renders the 'competitors#new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Competitor.any_instance.stub(:save).and_return(false)
-        post :create, {:competitor => {}, :competition_id => @ec.id}
+        post :create, {:competitor => {:custom_name => "name"}, :competition_id => @ec.id}
         response.should render_template("new")
       end
     end
@@ -153,23 +160,23 @@ describe CompetitorsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested competitor" do
-        competitor = Competitor.create! valid_attributes
+        competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         # Assuming there are no other competitor in the database, this
         # specifies that the Competitor created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Competitor.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        Competitor.any_instance.should_receive(:update_attributes).with({})
         put :update, {:id => competitor.to_param, :competitor => {'these' => 'params'}}
       end
 
       it "assigns the requested competitor as @competitor" do
-        competitor = Competitor.create! valid_attributes
+        competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         put :update, {:id => competitor.to_param, :competitor => valid_attributes}
         assigns(:competitor).should eq(competitor)
       end
 
       it "redirects to the competition" do
-        competitor = Competitor.create! valid_attributes
+        competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         put :update, {:id => competitor.to_param, :competitor => valid_attributes}
         response.should redirect_to(competition_competitors_path(competitor.competition))
       end
@@ -177,18 +184,18 @@ describe CompetitorsController do
 
     describe "with invalid params" do
       it "assigns the competitor as @competitor" do
-        competitor = Competitor.create! valid_attributes
+        competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         # Trigger the behavior that occurs when invalid params are submitted
         Competitor.any_instance.stub(:save).and_return(false)
-        put :update, {:id => competitor.to_param, :competitor => {}}
+        put :update, {:id => competitor.to_param, :competitor => {:custom_name => "name"}}
         assigns(:competitor).should eq(competitor)
       end
 
       it "re-renders the 'events#edit' template" do
-        competitor = Competitor.create! valid_attributes
+        competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         # Trigger the behavior that occurs when invalid params are submitted
         Competitor.any_instance.stub(:save).and_return(false)
-        put :update, {:id => competitor.to_param, :competitor => {}}
+        put :update, {:id => competitor.to_param, :competitor => {:custom_name => "name"}}
         response.should render_template("edit")
       end
     end
@@ -196,14 +203,14 @@ describe CompetitorsController do
 
   describe "DELETE destroy" do
     it "destroys the requested competitor" do
-      competitor = Competitor.create! valid_attributes
+      competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
       expect {
         delete :destroy, {:id => competitor.to_param}
       }.to change(Competitor, :count).by(-1)
     end
 
     it "redirects to the competitor#new page" do
-      competitor = Competitor.create! valid_attributes
+      competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
       delete :destroy, {:id => competitor.to_param}
       response.should redirect_to(competition_competitors_path(@ec))
     end

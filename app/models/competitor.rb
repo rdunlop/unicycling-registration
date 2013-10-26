@@ -1,4 +1,5 @@
 class Competitor < ActiveRecord::Base
+    include ActiveModel::ForbiddenAttributesProtection
     has_many :members
     has_many :registrants, :through => :members, :order => "bib_number"
     belongs_to :competition

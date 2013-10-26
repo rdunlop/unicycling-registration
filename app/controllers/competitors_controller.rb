@@ -2,6 +2,7 @@ require 'csv'
 class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   before_filter :load_competition, :only => [:index, :new, :create, :upload, :add_all, :destroy_all, :create_from_sign_ups]
 
@@ -91,6 +92,7 @@ class CompetitorsController < ApplicationController
   # POST /competitors
   # POST /competitors.json
   def create
+    @competitor = Competitor.new(competitor_params)
     @competitor.competition = @competition
 
     respond_to do |format|
@@ -108,7 +110,7 @@ class CompetitorsController < ApplicationController
   # PUT /competitors/1.json
   def update
     respond_to do |format|
-      if @competitor.update_attributes(params[:competitor])
+      if @competitor.update_attributes(competitor_params)
         format.html { redirect_to competition_competitors_path(@competitor.competition), notice: 'Competition registrant was successfully updated.' }
         format.json { head :no_content }
       else
@@ -228,5 +230,9 @@ class CompetitorsController < ApplicationController
         redirect_to competition_path(@competition)
     end
     reg2
+  end
+
+  def competitor_params
+    params.require(:competitor).permit(:position, {:registrant_ids => []}, :custom_external_id, :custom_name)
   end
 end
