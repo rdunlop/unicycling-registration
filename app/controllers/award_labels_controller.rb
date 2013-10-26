@@ -1,6 +1,7 @@
 class AwardLabelsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   before_filter :load_user, :only => [:index, :create, :create_labels, :expert_labels, :normal_labels, :destroy_all, :create_labels_by_registrant]
 
@@ -29,7 +30,7 @@ class AwardLabelsController < ApplicationController
   # POST /users/#/award_labels
   # POST /users/#/award_labels.json
   def create
-    @award_label = AwardLabel.new(params[:award_label])
+    @award_label = AwardLabel.new(award_label_params)
     @award_label.user = @user
 
     respond_to do |format|
@@ -281,5 +282,11 @@ class AwardLabelsController < ApplicationController
     end
 
     send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
+  end
+
+  private
+  def award_label_params
+    params.require(:award_label).permit(:age_group, :bib_number, :competition_name, :details, :first_name, :gender, :last_name, 
+                                        :partner_first_name, :partner_last_name, :place, :registrant_id, :team_name, :user_id)
   end
 end

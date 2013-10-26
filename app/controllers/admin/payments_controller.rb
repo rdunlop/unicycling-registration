@@ -1,11 +1,7 @@
 class Admin::PaymentsController < Admin::BaseController
   before_filter :authenticate_user!
-  before_filter :create_payment, :only => [:create]
   load_and_authorize_resource
-
-  def create_payment
-    @payment = Payment.new(payment_params)
-  end
+  skip_load_resource only: [:create]
 
   def load_payment_details
     10.times do
@@ -34,6 +30,7 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def create
+    @payment = Payment.new(payment_params)
     @payment.payment_details.each do |pd|
       pd.amount = pd.expense_item.total_cost
     end

@@ -1,4 +1,5 @@
 class AwardLabel < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :age_group, :bib_number, :competition_name, :details, :first_name, :gender, :last_name, :partner_first_name, :partner_last_name, :place, :registrant_id, :team_name, :user_id
 
   validates :registrant_id, :presence => true
