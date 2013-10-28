@@ -1,4 +1,5 @@
 class EventChoice < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :cell_type, :event_id, :export_name, :label, :multiple_values, :position, :autocomplete, :optional, :tooltip, :optional_if_event_choice_id
 
   belongs_to :event, :touch => true

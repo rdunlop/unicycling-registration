@@ -1,6 +1,7 @@
 class EventChoicesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   before_filter :load_event, :only => [:index, :create]
 
@@ -44,7 +45,7 @@ class EventChoicesController < ApplicationController
   # POST /event/1/event_choices
   # POST /event/1/event_choices.json
   def create
-    @event_choice = @event.event_choices.new(params[:event_choice])
+    @event_choice = @event.event_choices.new(event_choice_params)
 
     respond_to do |format|
       if @event_choice.save
@@ -64,7 +65,7 @@ class EventChoicesController < ApplicationController
     @event_choice = EventChoice.find(params[:id])
 
     respond_to do |format|
-      if @event_choice.update_attributes(params[:event_choice])
+      if @event_choice.update_attributes(event_choice_params)
         format.html { redirect_to @event_choice, notice: 'Event choice was successfully updated.' }
         format.json { head :no_content }
       else
@@ -85,5 +86,11 @@ class EventChoicesController < ApplicationController
       format.html { redirect_to event_event_choices_path(event) }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def event_choice_params
+    params.require(:event_choice).permit(:cell_type, :export_name, :label, :multiple_values, :position, :autocomplete, :optional, :tooltip, :optional_if_event_choice_id,
+                                         :translations_attributes => [:id, :label, :tooltip, :locale])
   end
 end

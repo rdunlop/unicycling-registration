@@ -112,20 +112,60 @@ describe EventChoicesController do
       it "assigns a newly created but unsaved event_choice as @event_choice" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventChoice.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :event_choice => {}}
+        post :create, {:event_id => @event.id, :event_choice => {:optional => false}}
         assigns(:event_choice).should be_a_new(EventChoice)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventChoice.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :event_choice => {}}
+        post :create, {:event_id => @event.id, :event_choice => {:optional => false}}
         response.should render_template("index")
       end
       it "loads the event" do
         EventChoice.any_instance.stub(:save).and_return(false)
-        post :create, {:event_id => @event.id, :event_choice => {}}
+        post :create, {:event_id => @event.id, :event_choice => {:optional => false}}
         assigns(:event).should == @event
+      end
+    end
+
+    describe "with translations specified for label/tooltip" do
+      before(:each) do
+        @ec_params = {
+          :export_name => "new_ec", 
+          "cell_type"=>"boolean", 
+          "multiple_values"=>"", 
+          "translations_attributes"=>{
+          "1"=>{
+          "id"=>"", 
+          "locale"=>"en", 
+          "label"=>"label_en", 
+          "tooltip"=>"tool_en"
+        }, "2"=>{
+          "id"=>"", 
+          "locale"=>"fr", 
+          "label"=>"label_fr", 
+          "tooltip"=>"tool_fr"}
+        }, 
+          "position"=>"6", 
+          "optional"=>"0", 
+          "optional_if_event_choice_id"=>"", 
+          "autocomplete"=>"0"
+        }
+      end
+
+      it "can create the event_choice" do
+        expect {
+          post :create, :event_id => @event.id, :event_choice => @ec_params, :locale => "en"
+        }.to change(EventChoice, :count).by(1)
+        ec = EventChoice.last
+        I18n.locale = "en"
+        ec.label.should == "label_en"
+        ec.tooltip.should == "tool_en"
+        I18n.locale = "fr"
+        ec.label.should == "label_fr"
+        ec.tooltip.should == "tool_fr"
+        I18n.locale = "en"
       end
     end
   end
@@ -138,7 +178,7 @@ describe EventChoicesController do
         # specifies that the EventChoice created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        EventChoice.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        EventChoice.any_instance.should_receive(:update_attributes).with({})
         put :update, {:id => event_choice.to_param, :event_choice => {'these' => 'params'}}
       end
 
@@ -160,7 +200,7 @@ describe EventChoicesController do
         event_choice = EventChoice.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         EventChoice.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event_choice.to_param, :event_choice => {}}
+        put :update, {:id => event_choice.to_param, :event_choice => {:optional => false}}
         assigns(:event_choice).should eq(event_choice)
       end
 
@@ -168,7 +208,7 @@ describe EventChoicesController do
         event_choice = EventChoice.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         EventChoice.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event_choice.to_param, :event_choice => {}}
+        put :update, {:id => event_choice.to_param, :event_choice => {:optional => false}}
         response.should render_template("edit")
       end
     end
