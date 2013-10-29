@@ -1,6 +1,7 @@
 class EventConfigurationsController < ApplicationController
   before_filter :authenticate_user!, :except => [:logo]
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
 
   # GET /event_configurations/1/logo
@@ -42,7 +43,7 @@ class EventConfigurationsController < ApplicationController
   # POST /event_configurations
   # POST /event_configurations.json
   def create
-    @event_configuration = EventConfiguration.new(params[:event_configuration])
+    @event_configuration = EventConfiguration.new(event_configuration_params)
 
     respond_to do |format|
       if @event_configuration.save
@@ -61,7 +62,7 @@ class EventConfigurationsController < ApplicationController
     @event_configuration = EventConfiguration.find(params[:id])
 
     respond_to do |format|
-      if @event_configuration.update_attributes(params[:event_configuration])
+      if @event_configuration.update_attributes(event_configuration_params)
         format.html { redirect_to event_configurations_path, notice: 'Event configuration was successfully updated.' }
         format.json { head :no_content }
       else
@@ -109,5 +110,13 @@ class EventConfigurationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
     end
+  end
+
+  private
+  def event_configuration_params
+    params.require(:event_configuration).permit(:artistic_closed_date, :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location, :logo_image,
+                                                :long_name, :rulebook_url, :short_name, :standard_skill, :standard_skill_closed_date, :style_name,
+                                                :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url,
+                                                :translations_attributes => [:id, :locale, :short_name, :long_name, :location, :dates_description])
   end
 end

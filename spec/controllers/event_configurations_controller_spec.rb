@@ -84,14 +84,14 @@ describe EventConfigurationsController do
       it "assigns a newly created but unsaved event_configuration as @event_configuration" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
-        post :create, {:event_configuration => {}}
+        post :create, {:event_configuration => {:long_name => "long name"}}
         assigns(:event_configuration).should be_a_new(EventConfiguration)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
-        post :create, {:event_configuration => {}}
+        post :create, {:event_configuration => {:long_name => "long name"}}
         response.should render_template("new")
       end
     end
@@ -105,7 +105,7 @@ describe EventConfigurationsController do
         # specifies that the EventConfiguration created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        EventConfiguration.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        EventConfiguration.any_instance.should_receive(:update_attributes).with({})
         put :update, {:id => event_configuration.to_param, :event_configuration => {'these' => 'params'}}
       end
 
@@ -127,7 +127,7 @@ describe EventConfigurationsController do
         event_configuration = EventConfiguration.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event_configuration.to_param, :event_configuration => {}}
+        put :update, {:id => event_configuration.to_param, :event_configuration => {:long_name => "long name"}}
         assigns(:event_configuration).should eq(event_configuration)
       end
 
@@ -135,7 +135,7 @@ describe EventConfigurationsController do
         event_configuration = EventConfiguration.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event_configuration.to_param, :event_configuration => {}}
+        put :update, {:id => event_configuration.to_param, :event_configuration => {:long_name => "long name"}}
         response.should render_template("edit")
       end
     end

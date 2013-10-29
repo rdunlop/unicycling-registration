@@ -1,4 +1,5 @@
 class EventConfiguration < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :artistic_closed_date, :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location, :logo_image
   attr_accessible :long_name, :rulebook_url, :short_name, :standard_skill, :standard_skill_closed_date, :style_name
   attr_accessible :start_date, :tshirt_closed_date, :test_mode, :usa, :waiver, :waiver_url, :comp_noncomp_url
