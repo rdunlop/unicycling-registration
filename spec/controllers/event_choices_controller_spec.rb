@@ -32,10 +32,20 @@ describe EventChoicesController do
     export_name: "100m",
     cell_type: "boolean",
     autocomplete: false,
-    tooltip: "The tooltip",
-    label: "My event choice",
     optional: false,
-    optional_if_event_choice_id: nil
+    optional_if_event_choice_id: nil,
+    "translations_attributes"=>{
+      "1"=>{
+      "id"=>"", 
+      "locale"=>"en", 
+      "label"=>"label_en", 
+      "tooltip"=>"tool_en"
+    }, "2"=>{
+      "id"=>"", 
+      "locale"=>"fr", 
+      "label"=>"label_fr", 
+      "tooltip"=>"tool_fr"}
+    }
     }
   end
 

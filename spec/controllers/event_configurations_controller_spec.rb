@@ -31,8 +31,13 @@ describe EventConfigurationsController do
   def valid_attributes
     {
       standard_skill_closed_date: Date.tomorrow,
+      :translations_attributes => {
+       "1" => {
+      locale: "en",
       short_name: "something short",
-      long_name: "Something Long",
+      long_name: "Something Long"
+    }
+    },
       style_name: "unicon_17"
     }
   end

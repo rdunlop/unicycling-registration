@@ -11,13 +11,17 @@ describe ExpenseGroupsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      group_name: "T-Shirts",
       info_url: "http://google.com",
       competitor_free_options: nil,
       noncompetitor_free_options: nil,
       competitor_required: false,
       noncompetitor_required: false,
-      visible: true
+      visible: true,
+      "translations_attributes"=>{
+      "1"=>{
+      "locale"=>"en",
+      "group_name"=>"group_en"
+    }}
     }
   end
 
@@ -58,6 +62,7 @@ describe ExpenseGroupsController do
         post :create, {:expense_group => valid_attributes}
         assigns(:expense_group).should be_a(ExpenseGroup)
         assigns(:expense_group).should be_persisted
+        assigns(:expense_group).group_name.should == "group_en"
       end
 
       it "redirects to the created expense_group" do
@@ -70,14 +75,14 @@ describe ExpenseGroupsController do
       it "assigns a newly created but unsaved expense_group as @expense_group" do
         # Trigger the behavior that occurs when invalid params are submitted
         ExpenseGroup.any_instance.stub(:save).and_return(false)
-        post :create, {:expense_group => {}}
+        post :create, {:expense_group => {:info_url => "hi"}}
         assigns(:expense_group).should be_a_new(ExpenseGroup)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         ExpenseGroup.any_instance.stub(:save).and_return(false)
-        post :create, {:expense_group => {}}
+        post :create, {:expense_group => {:info_url => "hi"}}
         response.should render_template("index")
       end
     end
@@ -91,7 +96,7 @@ describe ExpenseGroupsController do
         # specifies that the ExpenseGroup created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        ExpenseGroup.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        ExpenseGroup.any_instance.should_receive(:update_attributes).with({})
         put :update, {:id => expense_group.to_param, :expense_group => {'these' => 'params'}}
       end
 
@@ -121,7 +126,7 @@ describe ExpenseGroupsController do
         expense_group = ExpenseGroup.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ExpenseGroup.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expense_group.to_param, :expense_group => {}}
+        put :update, {:id => expense_group.to_param, :expense_group => {:info_url => "hi"}}
         response.should render_template("edit")
       end
     end

@@ -1,4 +1,5 @@
 class ExpenseGroup < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :group_name, :position, :visible, :info_url
   attr_accessible :competitor_free_options, :noncompetitor_free_options
   attr_accessible :competitor_required, :noncompetitor_required

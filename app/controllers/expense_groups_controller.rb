@@ -1,6 +1,7 @@
 class ExpenseGroupsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   # GET /expense_groups
   # GET /expense_groups.json
@@ -33,7 +34,7 @@ class ExpenseGroupsController < ApplicationController
   # POST /expense_groups
   # POST /expense_groups.json
   def create
-    @expense_group = ExpenseGroup.new(params[:expense_group])
+    @expense_group = ExpenseGroup.new(expense_group_params)
 
     respond_to do |format|
       if @expense_group.save
@@ -52,7 +53,7 @@ class ExpenseGroupsController < ApplicationController
     @expense_group = ExpenseGroup.find(params[:id])
 
     respond_to do |format|
-      if @expense_group.update_attributes(params[:expense_group])
+      if @expense_group.update_attributes(expense_group_params)
         format.html { redirect_to @expense_group, notice: 'Expense group was successfully updated.' }
         format.json { head :no_content }
       else
@@ -72,5 +73,12 @@ class ExpenseGroupsController < ApplicationController
       format.html { redirect_to expense_groups_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def expense_group_params
+    params.require(:expense_group).permit(:group_name, :position, :visible, :info_url,
+                                          :competitor_free_options, :noncompetitor_free_options,
+                                          :competitor_required, :noncompetitor_required, :translations_attributes => [:id, :locale, :group_name])
   end
 end

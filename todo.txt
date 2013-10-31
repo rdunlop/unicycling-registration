@@ -16,6 +16,7 @@ Registration-Related ToDo
 - include "translations" in the loads of data (N+1 record thing)
 - Translate "Please Wait" from buttons
 - upgrade to ruby 2.0
+- drop the base columns for the translated attributes?
 
 - Determine if "unoauthorized" message is now being lost due to locale?
 - Consider a free item "paid for" always? well...once the registrant's registration has been paid for.
