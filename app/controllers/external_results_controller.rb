@@ -1,6 +1,7 @@
 class ExternalResultsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   before_filter :load_competition, :only => [:index, :create]
 
@@ -27,7 +28,7 @@ class ExternalResultsController < ApplicationController
   # POST /external_results
   # POST /external_results.json
   def create
-    @external_result = ExternalResult.new(params[:external_result])
+    @external_result = ExternalResult.new(external_result_params)
 
     respond_to do |format|
       if @external_result.save
@@ -48,7 +49,7 @@ class ExternalResultsController < ApplicationController
     @competition = @external_result.competition
 
     respond_to do |format|
-      if @external_result.update_attributes(params[:external_result])
+      if @external_result.update_attributes(external_result_params)
         format.html { redirect_to competition_external_results_path(@competition), notice: 'External result was successfully updated.' }
         format.json { head :no_content }
       else
@@ -69,5 +70,10 @@ class ExternalResultsController < ApplicationController
       format.html { redirect_to competition_external_results_path(@competition) }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def external_result_params
+    params.require(:external_result).permit(:competitor_id, :details, :rank)
   end
 end

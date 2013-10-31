@@ -1,4 +1,5 @@
 class ExternalResult < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :competitor_id, :details, :rank
 
   validates :competitor_id, :rank, :presence => true
