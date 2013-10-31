@@ -77,8 +77,8 @@ describe LaneAssignmentsController do
         # specifies that the LaneAssignment created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        LaneAssignment.any_instance.should_receive(:update_attributes).with({ "competition_id" => "1" })
-        put :update, {:id => lane_assignment.to_param, :lane_assignment => { "competition_id" => "1" }}
+        LaneAssignment.any_instance.should_receive(:update_attributes).with({})
+        put :update, {:id => lane_assignment.to_param, :lane_assignment => { "something" => "1" }}
       end
 
       it "assigns the requested lane_assignment as @lane_assignment" do

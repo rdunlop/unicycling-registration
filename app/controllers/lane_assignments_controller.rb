@@ -1,6 +1,7 @@
 class LaneAssignmentsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   before_filter :load_competition, :only => [:index, :create]
 
@@ -28,7 +29,7 @@ class LaneAssignmentsController < ApplicationController
   # POST /lane_assignments
   # POST /lane_assignments.json
   def create
-    @lane_assignment = LaneAssignment.new(params[:lane_assignment])
+    @lane_assignment = LaneAssignment.new(lane_assignment_params)
     @lane_assignment.competition = @competition
 
     respond_to do |format|
@@ -47,7 +48,7 @@ class LaneAssignmentsController < ApplicationController
     @lane_assignment = LaneAssignment.find(params[:id])
 
     respond_to do |format|
-      if @lane_assignment.update_attributes(params[:lane_assignment])
+      if @lane_assignment.update_attributes(lane_assignment_params)
         format.html { redirect_to competition_lane_assignments_path(@lane_assignment.competition), notice: 'Lane assignment was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -66,5 +67,10 @@ class LaneAssignmentsController < ApplicationController
       format.html { redirect_to competition_lane_assignments_path(@competition) }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def lane_assignment_params
+    params.require(:lane_assignment).permit(:registrant_id, :heat, :lane)
   end
 end
