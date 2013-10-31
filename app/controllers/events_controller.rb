@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   def load_category
     @category = Category.find(params[:category_id])
@@ -29,7 +30,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     load_category
-    @event = @category.events.build(params[:event])
+    @event = @category.events.build(event_params)
 
     respond_to do |format|
       if @event.save
@@ -50,7 +51,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(event_params)
         format.html { redirect_to category_events_path(@event.category), notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
@@ -99,5 +100,11 @@ class EventsController < ApplicationController
 
   def judging
     @judges = current_user.judges
+  end
+
+  private
+  def event_params
+    params.require(:event).permit(:category_id, :export_name, :position, :name, :event_class, :visible,
+                                  :event_choices_attributes => [:export_name, :cell_type, :label, :multiple_values, :position, :id], :event_categories_attributes => [:name, :position, :id])
   end
 end

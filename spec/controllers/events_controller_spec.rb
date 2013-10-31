@@ -104,14 +104,14 @@ describe EventsController do
       it "assigns a newly created but unsaved event as @event" do
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
-        post :create, {:event => {}, :category_id => @category.id}
+        post :create, {:event => {:name => "event"}, :category_id => @category.id}
         assigns(:event).should be_a_new(Event)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
-        post :create, {:event => {}, :category_id => @category.id}
+        post :create, {:event => {:name => "event"}, :category_id => @category.id}
         response.should render_template("index")
       end
     end
@@ -125,7 +125,7 @@ describe EventsController do
         # specifies that the Event created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Event.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        Event.any_instance.should_receive(:update_attributes).with({})
         put :update, {:id => event.to_param, :event => {'these' => 'params'}}
       end
 
@@ -147,7 +147,7 @@ describe EventsController do
         event = FactoryGirl.create(:event)
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event.to_param, :event => {}}
+        put :update, {:id => event.to_param, :event => {:name => "event"}}
         assigns(:event).should eq(event)
       end
 
@@ -155,22 +155,89 @@ describe EventsController do
         event = FactoryGirl.create(:event)
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
-        put :update, {:id => event.to_param, :event => {}}
+        put :update, {:id => event.to_param, :event => {:name => "event"}}
         response.should render_template("edit")
       end
     end
     describe "with nested event_choices" do
+      before(:each) do
+        @event = FactoryGirl.create(:event)
+      end
       it "accepts nested attributes" do
-        event = FactoryGirl.create(:event)
         expect {
-          put :update, {:id => event.to_param, :event => { 
-          :event_choices_attributes => [ 
-            { 
-          :export_name => "100m", 
+          put :update, {:id => @event.to_param, :event => {
+          :event_choices_attributes => [
+            {
+          :export_name => "100m",
           :cell_type => "boolean",
-          :label => "My event Choice"
+          :label => "My event Choice",
+          :multiple_values => "m2",
+          :position => 1
         }] }}
         }.to change(EventChoice, :count).by(1)
+        ec = EventChoice.last
+        ec.export_name.should == "100m"
+        ec.cell_type.should == "boolean"
+        ec.label.should == "My event Choice"
+        ec.multiple_values.should == "m2"
+        ec.position.should == 1
+      end
+
+      it "accepts nested attributes" do
+        put :update, {:id => @event.to_param, :event => {
+          :event_choices_attributes => [
+            {
+          :export_name => "100m",
+          :cell_type => "boolean",
+          :label => "My event Choice",
+          :multiple_values => "m2",
+          :position => 1
+        }] }}
+        ec = EventChoice.last
+
+        expect {
+          put :update, {:id => @event.to_param, :event => {
+          :event_choices_attributes => [
+            {
+          :export_name => ec.export_name,
+          :cell_type => ec.cell_type,
+          :label => "new Label",
+          :multiple_values => ec.multiple_values,
+          :position => ec.position,
+          :id => ec.id
+        }] }}
+        }.to change(EventChoice, :count).by(0)
+        ec.reload
+        ec.label.should == "new Label"
+      end
+    end
+
+    describe "with nested event_categories" do
+      before(:each) do
+        @event = FactoryGirl.create(:event)
+      end
+      it "can update event_categories" do
+        put :update, {:id => @event.to_param, :event => {
+          :name => "Sample Event",
+          :event_categories_attributes => [ 
+              {
+          :name => "The Categorie",
+          :position => 1
+        }] }}
+        ecat = EventCategory.last
+
+        expect {
+          put :update, {:id => @event.to_param, :event => {
+          :name => "Sample Event",
+          :event_categories_attributes => [
+            {
+          :name => "New Name",
+          :position => ecat.position,
+          :id => ecat.id
+        }] }}
+        }.to change(EventCategory, :count).by(0)
+        ecat.reload
+        ecat.name.should == "New Name"
       end
     end
   end

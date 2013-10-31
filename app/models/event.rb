@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :category_id, :export_name, :position, :event_choices_attributes, :name, :event_class, :visible
 
   has_many :event_choices, :order => "event_choices.position", :dependent => :destroy
