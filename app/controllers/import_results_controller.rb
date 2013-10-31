@@ -2,6 +2,7 @@ require 'upload'
 class ImportResultsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   before_filter :load_user, :only => [:index, :create, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
 
@@ -40,7 +41,7 @@ class ImportResultsController < ApplicationController
   # POST /import_results
   # POST /import_results.json
   def create
-    @import_result = ImportResult.new(params[:import_result])
+    @import_result = ImportResult.new(import_result_params)
     @import_result.user = @user
 
     respond_to do |format|
@@ -59,7 +60,7 @@ class ImportResultsController < ApplicationController
     @import_result = ImportResult.find(params[:id])
 
     respond_to do |format|
-      if @import_result.update_attributes(params[:import_result])
+      if @import_result.update_attributes(import_result_params)
         format.html { redirect_to user_import_results_path(@import_result.user), notice: 'Import result was successfully updated.' }
         format.json { head :no_content }
       else
@@ -219,6 +220,10 @@ class ImportResultsController < ApplicationController
       id = la.registrant.bib_number
     end
     id
+  end
+
+  def import_result_params
+    params.require(:import_result).permit(:bib_number, :disqualified, :minutes, :raw_data, :seconds, :thousands, :competition_id, :rank, :details)
   end
 end
 

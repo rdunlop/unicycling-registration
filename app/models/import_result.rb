@@ -1,4 +1,5 @@
 class ImportResult < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :bib_number, :disqualified, :minutes, :raw_data, :seconds, :thousands, :competition_id, :rank, :details
 
   validates :competition_id, :presence => true
