@@ -1,6 +1,7 @@
 class JudgesController < ApplicationController
   load_and_authorize_resource :competition, :only => [:index, :new, :create, :destroy, :copy_judges, :create_normal]
   load_and_authorize_resource
+  skip_load_resource only: [:create]
 
   def new # are there tests for this?
     @judge_types = JudgeType.where(:event_class => @competition.event.event_class)
@@ -10,6 +11,7 @@ class JudgesController < ApplicationController
   # POST /competitions/#/judges
   # POST /competitions/#/judges.json
   def create
+    @judge = Judge.new(judge_params)
     @judge.competition = @competition
 
     respond_to do |format|
@@ -42,7 +44,7 @@ class JudgesController < ApplicationController
   def update
 
     respond_to do |format|
-      if @judge.update_attributes(params[:judge])
+      if @judge.update_attributes(judge_params)
         format.html { redirect_to judge_standard_scores_path(@judge), notice: 'Judge Scores successfully created.' }
       else
         new # call new function (above), to load the correct variables
@@ -97,5 +99,9 @@ class JudgesController < ApplicationController
 
     redirect_to chiefs_judges_path, notice: 'Created Chief Judge'
   end
-    
+
+  private
+  def judge_params
+    params.require(:judge).permit( :competition_id, :judge_type_id, :user_id, :standard_execution_scores_attributes, :standard_difficulty_scores_attributes)
+  end
 end

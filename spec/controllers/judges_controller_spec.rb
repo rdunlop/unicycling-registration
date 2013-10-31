@@ -19,7 +19,7 @@ describe JudgesController do
     { judge_type_id: 1,
       user_id: @user.id }
   end
-  
+
   describe "GET new" do
     it "assigns the judge types" do
         get :new, {:competition_id => @ec.id }
@@ -53,7 +53,7 @@ describe JudgesController do
       it "assigns a newly created but unsaved judge as @judge" do
         # Trigger the behavior that occurs when invalid params are submitted
         Judge.any_instance.stub(:save).and_return(false)
-        post :create, {:judge => {}, :competition_id => @ec.id}
+        post :create, {:judge => {:user_id => 1}, :competition_id => @ec.id}
         assigns(:judge).should be_a_new(Judge)
         assigns(:judge_types).should == [@judge_type]
         assigns(:all_judges).should == [@judge_user]
@@ -62,7 +62,7 @@ describe JudgesController do
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Judge.any_instance.stub(:save).and_return(false)
-        post :create, {:judge => {}, :competition_id => @ec.id}
+        post :create, {:judge => {:user_id => 1}, :competition_id => @ec.id}
         response.should render_template("index")
       end
     end

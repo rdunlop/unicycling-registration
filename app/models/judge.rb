@@ -1,4 +1,5 @@
 class Judge < ActiveRecord::Base
+    include ActiveModel::ForbiddenAttributesProtection
     belongs_to :competition
     belongs_to :judge_type
     belongs_to :user
