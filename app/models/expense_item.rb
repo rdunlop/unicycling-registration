@@ -1,4 +1,5 @@
 class ExpenseItem < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :cost, :description, :export_name, :name, :position, :expense_group_id, :has_details, :details_label, :maximum_available , :tax_percentage
 
   default_scope order('expense_group_id ASC, position ASC')

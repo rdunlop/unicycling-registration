@@ -13,11 +13,16 @@ describe ExpenseItemsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
+      :translations_attributes => {
+      "1" => {
+      :locale => "en",
       :name => "Small T-Shirt",
       :description => "Small NAUCC T-Shirt",
+      :details_label => nil,
+    }
+    },
       :cost => 15.00,
       :has_details => false,
-      :details_label => nil,
       :expense_group_id => @expense_group.id,
       :position => 1,
       :tax_percentage => 0,
@@ -66,14 +71,14 @@ describe ExpenseItemsController do
       it "assigns a newly created but unsaved expense_item as @expense_item" do
         # Trigger the behavior that occurs when invalid params are submitted
         ExpenseItem.any_instance.stub(:save).and_return(false)
-        post :create, {:expense_item => {}}
+        post :create, {:expense_item => {:position => 1}}
         assigns(:expense_item).should be_a_new(ExpenseItem)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         ExpenseItem.any_instance.stub(:save).and_return(false)
-        post :create, {:expense_item => {}}
+        post :create, {:expense_item => {:position => 1}}
         response.should render_template("index")
       end
     end
@@ -87,7 +92,7 @@ describe ExpenseItemsController do
         # specifies that the ExpenseItem created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        ExpenseItem.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        ExpenseItem.any_instance.should_receive(:update_attributes).with({})
         put :update, {:id => expense_item.to_param, :expense_item => {'these' => 'params'}}
       end
 
@@ -109,7 +114,7 @@ describe ExpenseItemsController do
         expense_item = ExpenseItem.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ExpenseItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expense_item.to_param, :expense_item => {}}
+        put :update, {:id => expense_item.to_param, :expense_item => {:position => 1}}
         assigns(:expense_item).should eq(expense_item)
       end
 
@@ -117,7 +122,7 @@ describe ExpenseItemsController do
         expense_item = ExpenseItem.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ExpenseItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expense_item.to_param, :expense_item => {}}
+        put :update, {:id => expense_item.to_param, :expense_item => {:position => 1}}
         response.should render_template("edit")
       end
     end
