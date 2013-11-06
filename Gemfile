@@ -42,6 +42,7 @@ group :development, :test, :cucumber do
   gem 'watchr'
   gem 'foreman'
   gem 'delorean'
+  gem 'pry'
 end
 
 # Gems used only for assets and not required

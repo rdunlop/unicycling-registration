@@ -1,38 +1,46 @@
 class RegistrantExpenseItemsController < ApplicationController
-  load_and_authorize_resource
   before_filter :load_registrant
+  before_filter :load_new_registrant_expense_item, only: [:create]
+  load_and_authorize_resource
   before_filter :authenticate_user!
 
   def load_registrant
     @registrant = Registrant.find(params[:registrant_id])
   end
 
-  def create
-    @registrant_expense_item = RegistrantExpenseItem.new(params[:registrant_expense_item])
+  def load_new_registrant_expense_item
+    @registrant_expense_item = RegistrantExpenseItem.new(registrant_expense_item_params)
     @registrant_expense_item.registrant = @registrant
+  end
 
+  def create
     respond_to do |format|
       format.html {
         if @registrant_expense_item.save
           redirect_to items_registrant_path(@registrant)
         else
-          render "/registrants/items", notice: "Error"
+          render "registrants/items", notice: "Error"
         end
       }
     end
   end
 
   def destroy
-    @registrant_expense_item = RegistrantExpenseItem.find(params[:id])
+    @registrant_expense_item = @registrant.registrant_expense_items.find(params[:id])
 
     respond_to do |format|
       format.html {
         if @registrant_expense_item.destroy
           redirect_to items_registrant_path(@registrant)
         else
-          render "/registrants/items", notice: "ERR"
+          render "registrants/items", notice: "ERR"
         end
       }
     end
+  end
+
+  private
+  def registrant_expense_item_params
+    params.require(:registrant_expense_item).permit(:expense_item_id, :details, :free)
   end
 end

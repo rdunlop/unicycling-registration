@@ -1,4 +1,5 @@
 class RegistrantExpenseItem < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :expense_item_id, :registrant_id, :details, :free
 
   belongs_to :registrant
