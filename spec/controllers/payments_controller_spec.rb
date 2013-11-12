@@ -253,7 +253,7 @@ describe PaymentsController do
     describe "with a valid IPN for a valid payment" do
       before(:each) do
         @payment = FactoryGirl.create(:payment, :transaction_id => nil, :completed_date => nil)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :amount => 19.99)
+        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :amount => 20.00)
         @payment.reload
       end
       it "is OK even when incomplete" do
@@ -324,10 +324,17 @@ describe PaymentsController do
       end
       it "should send an e-mail to notify of payment receipt" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {:mc_gross => @payment.total_amount, :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        post :notification, {:mc_gross => "20.00", :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 1 # one for success
+      end
+      it "should send an e-mail to notify of payment error when mc_gross is empty" do
+        ActionMailer::Base.deliveries.clear
+        post :notification, {:mc_gross => "", :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        response.should be_success
+        num_deliveries = ActionMailer::Base.deliveries.size
+        num_deliveries.should == 2 # one for success, one for the error
       end
 
       it "should send an IPN notification message if the total amount doesn't match the payment total" do
