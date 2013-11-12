@@ -268,7 +268,7 @@ describe PaymentsController do
             :txn_id => "12345",
             :payment_date => "Some Paypal payment date",
             :invoice => @payment.id.to_s,
-            :payment_gross => @payment.total_amount
+            :mc_gross => @payment.total_amount
           }
         end
         it "sets the payment as completed" do
@@ -305,7 +305,7 @@ describe PaymentsController do
             :payment_status => "Completed",
             :txn_id => "12345",
             :invoice => (@payment.id + 100).to_s,
-            :payment_gross => @payment.total_amount
+            :mc_gross => @payment.total_amount
           }
         end
         it "sends an IPN message" do
@@ -324,7 +324,7 @@ describe PaymentsController do
       end
       it "should send an e-mail to notify of payment receipt" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {:payment_gross => @payment.total_amount, :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        post :notification, {:mc_gross => @payment.total_amount, :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 1 # one for success
@@ -332,7 +332,7 @@ describe PaymentsController do
 
       it "should send an IPN notification message if the total amount doesn't match the payment total" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {:payment_gross => @payment.total_amount - 1, :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        post :notification, {:mc_gross => @payment.total_amount - 1, :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 2 # one for success, one for the error (payment different)

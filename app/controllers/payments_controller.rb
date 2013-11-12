@@ -94,7 +94,7 @@ class PaymentsController < ApplicationController
             Notifications.payment_completed(payment).deliver
             Notifications.ipn_received("Payment Received #{params}")
             if payment.total_amount.to_s != paypal.payment_amount
-              Notifications.ipn_received("Payment total (#{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}").deliver
+              Notifications.ipn_received("Payment total #{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}").deliver
             end
           end
         else
