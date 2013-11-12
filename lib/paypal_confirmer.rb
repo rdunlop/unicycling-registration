@@ -45,8 +45,8 @@ class PaypalConfirmer
   end
 
   def payment_amount
-    # Replace with mc_gross? (for non-USD currency payments?)
-    @params["payment_gross"]
+    # (for non-USD currency payments)
+    @params["mc_gross"]
   end
 
   def order_number
