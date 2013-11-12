@@ -37,7 +37,7 @@ describe PaypalConfirmer do
 
   it "has a payment_amount" do
     params = {
-      "payment_gross" => "21.93"
+      "mc_gross" => "21.93"
     }
     confirmer = PaypalConfirmer.new(params, {})
     confirmer.payment_amount.should == "21.93"
