@@ -13,8 +13,7 @@ describe CompetitionsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-    name: "Unlimited",
-    event_id: @event.id
+    name: "Unlimited"
     }
   end
 
@@ -55,6 +54,25 @@ describe CompetitionsController do
 
   describe "POST create" do
     describe "with valid params" do
+      describe "as a chief judge" do
+        before(:each) do
+          sign_out @admin_user
+          user = FactoryGirl.create(:user)
+          user.add_role :chief_judge, @event
+          sign_in user
+        end
+
+        it "can create a competition" do
+          expect {
+            post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
+          }.to change(Competition, :count).by(1)
+        end
+        it "can create_empty a competition" do
+          expect {
+            post :create_empty, {:event_id => @event.id, :competition => valid_attributes}
+          }.to change(Competition, :count).by(1)
+        end
+      end
       it "creates a new Competition" do
         expect {
           post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}

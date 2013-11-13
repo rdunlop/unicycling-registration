@@ -9,6 +9,7 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
+- test to see that details="" is properly propogated through paypal/payments-save
 - limit rooms to 1000 (total), with a warning function at 80%?
 - add documentation to methods as per: http://globaldev.co.uk/2013/10/ruby-tips-part-4/
 - Rename onsite to adjustment
@@ -41,6 +42,7 @@ Registration-Related ToDo
 - Update the Admin functions for when users are "Admin"....mostly read-only.
 - Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
 - Get rid of XXX
+- Ensure that all roles can perform all the actions that they want/expect to be able to do
 
 - Add age validation to the Jr Expert (and Wheel Walk)
 - Only allow "Jr Expert" if certain age.

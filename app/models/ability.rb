@@ -51,11 +51,6 @@ class Ability
           score.try(:user) == user
         end
       end
-      Competition.all.each do |competition|
-        if user.has_role?(:chief_judge, competition.event)
-          can [:manage, :lock], Competition
-        end
-      end
 
       if user.has_role? :chief_judge, :any
         can :freestyle, Event

@@ -3,15 +3,23 @@ require 'upload'
 class CompetitionsController < ApplicationController
   include EventsHelper
   before_filter :authenticate_user!
-  load_and_authorize_resource
-  skip_load_resource only: [:create]
+  before_filter :load_new_competition, :only => [:create, :create_empty]
 
   before_filter :load_event, :only => [:index, :create_empty, :new_empty]
+  before_filter :load_competitions, :only => [:index]
   before_filter :load_event_category, :only => [:create, :new]
-  before_filter :load_competition, :only => [:sign_ups, :freestyle_scores, :street_scores, :lock, :set_places, :destroy_results]
+
+  load_and_authorize_resource
+
+  def load_new_competition
+    @competition = Competition.new(competition_params)
+    params[:id] = 1 if params[:id].nil? #necessary due to bug in the way that cancan does authorization check
+  end
 
   def load_event
     @event = Event.find(params[:event_id])
+    # required in order to set up the 'new' element
+    @competition.event = @event unless @competition.nil?
   end
 
   def load_competitions
@@ -20,10 +28,7 @@ class CompetitionsController < ApplicationController
 
   def load_event_category
     @event_category = EventCategory.find(params[:event_category_id])
-  end
-
-  def load_competition
-    @competition = Competition.find(params[:id])
+    @competition.event = @event_category.event unless @competition.nil?
   end
 
   # /event_categories/#/competitions/new
@@ -33,7 +38,6 @@ class CompetitionsController < ApplicationController
   # GET /competitions
   # GET /competitions.json
   def index
-    load_competitions
     @competition = Competition.new
 
     respond_to do |format|
@@ -45,7 +49,6 @@ class CompetitionsController < ApplicationController
   # GET /competitions/1
   # GET /competitions/1.json
   def show
-    @competition = Competition.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -55,7 +58,6 @@ class CompetitionsController < ApplicationController
 
   # GET /competitions/1/edit
   def edit
-    @competition = Competition.find(params[:id])
   end
 
   def new_empty
@@ -64,9 +66,6 @@ class CompetitionsController < ApplicationController
 
   # POST /events/#/create_empty
   def create_empty
-    @competition = Competition.new(competition_params)
-    @competition.event = @event
-
     respond_to do |format|
       if @competition.save
         format.html { redirect_to judging_menu_url(@competition), notice: "Competition created successfully" }
@@ -79,10 +78,6 @@ class CompetitionsController < ApplicationController
   # POST /event_categories/#/competitions
   # POST /event_categories/#/competitions.json
   def create
-    @competition = Competition.new(competition_params)
-    @competition.event = @event_category.event
-
-    @event_category.competition = @competition
 
     @gender_filter = params[:gender_filter]
     registrants = @event_category.signed_up_registrants
@@ -112,8 +107,6 @@ class CompetitionsController < ApplicationController
   # PUT /competitions/1
   # PUT /competitions/1.json
   def update
-    @competition = Competition.find(params[:id])
-
     respond_to do |format|
       if @competition.update_attributes(competition_params)
         format.html { redirect_to @competition, notice: 'Competition was successfully updated.' }
@@ -152,7 +145,6 @@ class CompetitionsController < ApplicationController
   # DELETE /competitions/1
   # DELETE /competitions/1.json
   def destroy
-    @competition = Competition.find(params[:id])
     target_url = judging_menu_url(@competition)
     @competition.destroy
 
