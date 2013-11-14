@@ -182,6 +182,24 @@ describe Payment do
       end
     end
 
+    describe "when the payment has empty details, vs nil details" do
+      before(:each) do
+        @rei.details = nil
+        @rei.save
+        @pd.details = ""
+        @pd.save
+        @pay.completed = true
+        @pay.save
+      end
+
+      it "registrant no longer owes" do
+        @reg.owing_expense_items.should == []
+      end
+      it "registrant has paid item" do
+        @reg.paid_expense_items.should == [@pd.expense_item]
+      end
+
+    end
     describe "when the payment is paid" do
       before(:each) do
         @pay.completed = true
