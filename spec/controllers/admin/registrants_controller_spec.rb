@@ -12,7 +12,7 @@ describe Admin::RegistrantsController do
       registrant = FactoryGirl.create(:competitor)
       other_reg = FactoryGirl.create(:registrant)
       get :index, {}
-      assigns(:registrants).should eq([registrant, other_reg])
+      assigns(:registrants).should =~[registrant, other_reg]
     end
   end
 
