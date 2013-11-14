@@ -43,6 +43,27 @@ class Payment < ActiveRecord::Base
     end
   end
 
+  # return a set of payment_details which are unique With-respect-to {amount, expense_item }
+  def unique_payment_details
+    results = []
+    payment_details.each do |pd|
+      res = nil
+      results.each do |r|
+        if r.expense_item_id == pd.expense_item_id and r.amount == pd.amount
+          res = r
+          break
+        end
+      end
+
+      if res.nil?
+        results << PaymentDetailSummary.new({:expense_item_id => pd.expense_item_id, :count => 1, :amount => pd.amount})
+      else
+        res.count += 1
+      end
+    end
+    results
+  end
+
   def paypal_post_url
     EventConfiguration.paypal_base_url + "/cgi-bin/webscr"
   end

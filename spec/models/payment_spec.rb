@@ -37,6 +37,44 @@ describe Payment do
     it "can calcalate the payment total-amount" do
       @pay.total_amount.should == @pd.amount
     end
+
+    it "has a list of unique_payment_deatils" do
+      @pay.unique_payment_details.should == [PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 1, :amount => @pd.amount })]
+    end
+
+    describe "with mulitple payment_details of the same expense_item" do
+      before(:each) do
+        @pd2 = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => @pd.amount, :details => @pd.details, :expense_item => @pd.expense_item)
+        @pd3 = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => @pd.amount, :details => @pd.details, :expense_item => @pd.expense_item)
+      end
+
+      it "only lists the element once" do
+        @pay.unique_payment_details.count.should == 1
+        @pay.unique_payment_details.should == [PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd.amount})]
+      end
+
+      describe "with payment_details of different expense_items" do
+        before(:each) do
+          @pdb = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => @pd.amount, :details => @pd.details)
+        end
+
+        it "lists the entries separately" do
+          @pay.unique_payment_details.count.should == 2
+        end
+      end
+
+      describe "with different amounts" do
+        before(:each) do
+          @pdc = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => @pd.amount + 10, :details => @pd.details, :expense_item => @pd.expense_item)
+        end
+
+        it "does not group them together" do
+          @pay.unique_payment_details.count.should == 2
+          @pay.unique_payment_details.should =~ [PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 1, :amount => @pdc.amount}),
+                                                 PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd2.amount})]
+        end
+      end
+    end
   end
 
   describe "With an environment config with test mode disabled" do
