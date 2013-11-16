@@ -16,6 +16,7 @@ class PaymentPresenter
 
   def add_registrant(registrant)
     registrant.owing_registrant_expense_items.each do |rei|
+      next if rei.free
       @new_expense_items << PaymentDetailPresenter.new(:registrant_id => rei.registrant.id, :expense_item_id => rei.expense_item.id, :free => rei.free, :amount => rei.total_cost, :details => rei.details)
     end
     registrant.paid_details.each do |pd|

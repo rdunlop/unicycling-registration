@@ -90,6 +90,7 @@ class Registrant < ActiveRecord::Base
   def build_owing_payment(payment)
     reg_items = owing_registrant_expense_items
     reg_items.each do |reg_item|
+      next if reg_item.free
       item = reg_item.expense_item
       details = reg_item.details
       pd = payment.payment_details.build()
