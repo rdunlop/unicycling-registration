@@ -683,6 +683,18 @@ describe Registrant do
       it "shows that it has the given expense_group" do
         @reg.has_chosen_free_item_from_expense_group(@eg).should == true
       end
+      describe "having paid for a free item, but still having that free item as a registrant_expense_item" do
+        before(:each) do
+          rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @ei, :free => true)
+          rei.registrant = @reg
+          rei.save
+          @reg.reload
+        end
+
+        it "lists has_double_free" do
+          @reg.has_double_free.should == true
+        end
+      end
     end
   end
 

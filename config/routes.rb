@@ -44,6 +44,7 @@ Workspace::Application.routes.draw do
 
       resources :registrants, :only => [:index, :show] do
         collection do
+          get :fixing_free
           get :bag_labels
           get :all_summary
           get :email

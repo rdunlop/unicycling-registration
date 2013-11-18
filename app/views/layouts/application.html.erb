@@ -120,6 +120,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
           <% set_menu_header("manage","<li>" + link_to( 'Manage', '#') + "<ul>") %>
             <% if can? :manage, Registrant %>
               <%= menu_header_if_necessary("manage") %>
+              <li><%= link_to 'Registrants (fixing_free)', fixing_free_admin_registrants_path %></li>
               <li><%= link_to 'Registrants (edit)', admin_registrants_path %></li>
               <li><%= link_to 'Registrants (print)', admin_registrants_path %></li>
               <li><%= link_to 'Registrants (bag labels)', bag_labels_admin_registrants_path %></li>

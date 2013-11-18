@@ -7,6 +7,10 @@ class Admin::RegistrantsController < Admin::BaseController
     @registrants = Registrant.unscoped.all
   end
 
+  def fixing_free
+    @registrants = Registrant.unscoped.all
+  end
+
   def find_registrant
     @registrant = Registrant.unscoped.find(params[:id])
   end

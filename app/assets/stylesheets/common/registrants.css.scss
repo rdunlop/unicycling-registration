@@ -64,6 +64,14 @@ input.sold_out {
   border: none;
 }
 
+.free_good {
+  background-color: green;
+}
+
+.needs_free_fix {
+  background-color: red;
+}
+
 .competitor, .noncompetitor, .payment_link,
 input.delete, input.sold_out {
   color: white;

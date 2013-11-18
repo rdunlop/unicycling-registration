@@ -102,6 +102,16 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def has_double_free
+    owing = registrant_expense_items.map {|rei| rei.expense_item}
+    paid_expense_items.each do |pei|
+      if owing.include?(pei)
+        return true
+      end
+    end
+    false
+  end
+
   def set_bib_number
     if self.bib_number.nil?
       if self.competitor
