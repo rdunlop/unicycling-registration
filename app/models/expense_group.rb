@@ -30,7 +30,6 @@ class ExpenseGroup < ActiveRecord::Base
     self.noncompetitor_required = false if self.competitor_required.nil?
   end
 
-
   def to_s
     group_name
   end

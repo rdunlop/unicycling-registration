@@ -49,6 +49,7 @@ class Registrant < ActiveRecord::Base
   has_many :registrant_expense_items, :include => :expense_item, :dependent => :destroy
   has_many :expense_items, :through => :registrant_expense_items
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
+  before_create :create_associated_required_expense_items
   validate :not_exceeding_expense_item_limits
   validates_associated :registrant_expense_items
 
@@ -81,6 +82,24 @@ class Registrant < ActiveRecord::Base
   def touch_members
     members.each do |mem|
       mem.touch
+    end
+  end
+
+  def create_associated_required_expense_items
+    # add the registration_period expense_item
+
+
+    # create any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
+    if competitor
+      egs = ExpenseGroup.where({:competitor_required => true}).all
+    else
+      egs = ExpenseGroup.where({:noncompetitor_required => true}).all
+    end
+
+    egs.each do |eg|
+      if eg.expense_items.count == 1
+        registrant_expense_items.build({:expense_item_id => eg.expense_items.first.id, :system_managed => true})
+      end
     end
   end
 
@@ -367,16 +386,6 @@ class Registrant < ActiveRecord::Base
       items << RegistrantExpenseItem.new({:registrant_id => self.id, :expense_item_id => registration_item.id})
     end
 
-    if competitor
-      egs = ExpenseGroup.where({:competitor_required => true}).all
-    else
-      egs = ExpenseGroup.where({:noncompetitor_required => true}).all
-    end
-    egs.each do |eg|
-      if eg.expense_items.count == 1 and not self.has_required_expense_group(eg)
-        items << RegistrantExpenseItem.new({:registrant_id => self.id, :expense_item_id => eg.expense_items.first.id})
-      end
-    end
 
     items
   end

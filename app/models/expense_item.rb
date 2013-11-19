@@ -8,6 +8,7 @@ class ExpenseItem < ActiveRecord::Base
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :tax_percentage, :numericality => {:greater_than_or_equal_to => 0} 
 
+
   has_many :payment_details
   has_many :registrant_expense_items, :inverse_of => :expense_item
 
@@ -17,14 +18,32 @@ class ExpenseItem < ActiveRecord::Base
   attr_accessible :translations_attributes
 
   belongs_to :expense_group, :inverse_of => :expense_items
+  validates :expense_group_id, :uniqueness => true, :if => "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
 
   before_destroy :check_for_payment_details
+
+  after_create :create_reg_items
 
   after_initialize :init
 
   def init
     self.has_details = false if self.has_details.nil?
     self.tax_percentage = 0 if self.tax_percentage.nil?
+  end
+
+  def create_reg_items
+    if self.expense_group.competitor_required
+      Registrant.where({:competitor => true}).each do |reg|
+        reg.registrant_expense_items.build({:expense_item_id => self.id, :system_managed => true})
+        reg.save
+      end
+    end
+    if self.expense_group.noncompetitor_required
+      Registrant.where({:competitor => false}).each do |reg|
+        reg.registrant_expense_items.build({:expense_item_id => self.id, :system_managed => true})
+        reg.save
+      end
+    end
   end
 
   def check_for_payment_details

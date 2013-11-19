@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131026152340) do
+ActiveRecord::Schema.define(:version => 20131118100712) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -447,6 +447,7 @@ ActiveRecord::Schema.define(:version => 20131026152340) do
     t.datetime "updated_at",                         :null => false
     t.string   "details"
     t.boolean  "free",            :default => false
+    t.boolean  "system_managed",  :default => false
   end
 
   add_index "registrant_expense_items", ["expense_item_id"], :name => "index_registrant_expense_items_expense_item_id"

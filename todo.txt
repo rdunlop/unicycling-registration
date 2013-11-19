@@ -27,6 +27,7 @@ Registration-Related ToDo
 - create a better footer, which floats, and also contains links to Language-selection
 ---- END ROBIN's CURRENT LIST:
 
+- combine the _expense_list.html.erb and the other (similar) partials
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
 - Remove all of the "sortable" "search" boxes, as they are clutter.....but have them on the really-long-list tables (like 'edit registrant').
 - Only display the "Gender Filter" when creating a competition (not on edit)

@@ -121,11 +121,68 @@ describe ExpenseItem do
     end
   end
 
+  describe "with an expense_group set for 'noncompetitor_required'" do
+    before(:each) do
+      @rg = FactoryGirl.create(:expense_group, :noncompetitor_required => true)
+    end
+
+    it "can have a first item" do
+      @re = FactoryGirl.build(:expense_item, :expense_group => @rg)
+      @re.valid?.should == true
+    end 
+
+    it "cannot have a second item" do
+      @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+      @rg.reload
+      @re2 = FactoryGirl.build(:expense_item, :expense_group => @rg)
+      @re2.valid?.should == false
+    end
+  end
+
+  describe "with an expense_group set for 'competitor_required'" do
+    before(:each) do
+      @rg = FactoryGirl.create(:expense_group, :competitor_required => true)
+    end
+
+    it "can have a first item" do
+      @re = FactoryGirl.build(:expense_item, :expense_group => @rg)
+      @re.valid?.should == true
+    end 
+
+    it "cannot have a second item" do
+      @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+      @rg.reload
+      @re2 = FactoryGirl.build(:expense_item, :expense_group => @rg)
+      @re2.valid?.should == false
+    end 
+    describe "with a pre-existing registrant" do
+      before(:each) do
+        @reg = FactoryGirl.create(:competitor)
+      end
+
+      it "creates a registrant_expense_item" do
+        @reg.registrant_expense_items.count.should == 0
+        @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+        @reg.reload
+        @reg.registrant_expense_items.count.should == 1
+        @reg.registrant_expense_items.first.expense_item.should == @re
+      end
+      it "does not create extra entries if the expense_item is updated" do
+        @reg.registrant_expense_items.count.should == 0
+        @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+        @re.save
+        @reg.reload
+        @reg.registrant_expense_items.count.should == 1
+        @reg.registrant_expense_items.first.expense_item.should == @re
+      end
+    end
+  end
+
   describe "with associated registrant_expense_items" do
     before(:each) do
       @rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @item)
     end
-    
+
     it "should count the entry as a selected_item" do
       @item.num_selected_items.should == 1
     end

@@ -50,6 +50,15 @@ describe "Ability" do
 
         it { should be_able_to(:destroy, @routine) }
       end
+
+      describe "with a required expense_item" do
+        before(:each) do
+          eg = FactoryGirl.create(:expense_group, :competitor_required => true)
+          @ei = FactoryGirl.create(:expense_item, :expense_group => eg)
+        end
+
+        it { should_not be_able_to(:destroy, registration.registrant_expense_items.first) }
+      end
     end
 
     describe "With a payment" do
