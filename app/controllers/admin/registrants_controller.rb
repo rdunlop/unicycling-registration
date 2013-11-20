@@ -8,7 +8,18 @@ class Admin::RegistrantsController < Admin::BaseController
   end
 
   def fixing_free
-    @registrants = Registrant.unscoped.all
+    @registrants = Registrant.all
+  end
+
+  def create_free_email
+    @email_form = Email.new(params[:email])
+    respond_to do |format|
+      if Notifications.send_mass_email(@email_form, [@registrant.user.email]).deliver
+        format.html { redirect_to registrant_path(@registrant), notice: 'Email sent successfully' }
+      else
+        format.html { redirect_to registrant_path(@registrant), error: 'Error sending e-mail' }
+      end
+    end
   end
 
   def create_free_items
@@ -27,7 +38,7 @@ class Admin::RegistrantsController < Admin::BaseController
     end
 
     respond_to do |format|
-      if refund.save and @registrant.save
+      if refund.valid? and @registrant.valid? and refund.save and @registrant.save
         format.html { redirect_to registrant_path(@registrant), notice: 'Refund successfully created' }
       else
         format.html { redirect_to registrant_path(@registrant), error: 'Refund FAILED' }

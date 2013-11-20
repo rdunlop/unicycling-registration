@@ -51,5 +51,46 @@
 </div>
 <% if can? :manage, AwardLabel %>
   <%= link_to "Create Free Item Refund", create_free_items_admin_registrant_path(@registrant), :method => :post %>
+<% @email = Email.new %>
+<% @email.subject = "Unicon Registration Incorrect double-listing of items" %>
+<% 
+  items = []
+  @registrant.paid_details.each do |pei|
+   items << "#{pei} - #{print_item_cost_currency(pei.cost)}"
+  end
+  @registrant.owing_registrant_expense_items.each do |ce|
+    items << "#{ce.expense_item} - #{print_item_cost_currency(ce.cost)}"
+  end
+  list_of_items = ""
+  items.each do |item|
+    list_of_items += "- #{item}\n"
+  end
+@email.body =  "Dear #{@registrant.name}
+
+We have recently learned about an error in the Unicon Registration system which caused it to incorrectly list your Items as:
+#{list_of_items}
+
+We have now corrected the issue, the duplicated entries have been removed, and your items are now:
+
+#{list_of_items}
+
+Please ensure that the items that you desired are still listed.
+
+We apologize for any inconvenience, and welcome any questions or concerns.
+
+
+Thank you,
+
+Unicon Staff"
+%>
+
+  <%= form_for @email, url: create_free_email_admin_registrant_path(@registrant) do |f| %>
+    <%= f.label :subject %>
+    <%= f.text_field :subject %><br />
+    <%= f.label :body %>
+    <%= f.text_area :body, {:cols => 100, :rows => 20 } %><br />
+    <%= f.submit "Send Email", :class => "focus_button" %>
+  <% end %>
+
 <% end %>
 <% if @waiver %><%= render :partial => "/registrants/waiver" %><% end %>
