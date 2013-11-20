@@ -16,7 +16,7 @@
         <% registrant.paid_details.each do |pei| %>
           <tr>
             <td><%= pei %></td>
-            <td><%= print_item_cost_currency(pei.base_cost) %></td>
+            <td><%= print_item_cost_currency(pei.cost) %></td>
             <td></td>
             <td>(<%= t(".paid")%>)</td>
             <td></td>
