@@ -694,6 +694,25 @@ describe Registrant do
         it "lists has_double_free" do
           @reg.has_double_free.should == true
         end
+
+        it "lists no complex" do
+          @reg.has_complex_double_free.should == false
+        end
+
+        describe "when it has a mis-match of paid-free and unpaid-free" do
+          before(:each) do
+            rei2 = FactoryGirl.create(:registrant_expense_item, :free => true, :registrant => @reg)
+            @reg.reload
+          end
+
+          it "does NOT have double_free" do
+            @reg.has_double_free.should == false
+          end
+
+          it "Has complex_double_free" do
+            @reg.has_complex_double_free.should == true
+          end
+        end
       end
     end
   end
