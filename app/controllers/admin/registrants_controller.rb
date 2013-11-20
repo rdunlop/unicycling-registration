@@ -27,6 +27,7 @@ class Admin::RegistrantsController < Admin::BaseController
     refund.user = current_user
     refund.refund_date = Date.today
     refund.note = "Free Item fix"
+    registrant_was_valid = @registrant.valid?
     @registrant.paid_details.where({:free => true}).each do |pd|
       rd = refund.refund_details.build
       rd.payment_detail = pd
@@ -38,7 +39,7 @@ class Admin::RegistrantsController < Admin::BaseController
     end
 
     respond_to do |format|
-      if refund.valid? and @registrant.valid? and refund.save and @registrant.save
+      if refund.valid? and registrant_was_valid and refund.save and @registrant.save
         format.html { redirect_to registrant_path(@registrant), notice: 'Refund successfully created' }
       else
         format.html { redirect_to registrant_path(@registrant), error: 'Refund FAILED' }

@@ -61,6 +61,7 @@
   @registrant.owing_registrant_expense_items.each do |ce|
     items << "#{ce.expense_item} - #{print_item_cost_currency(ce.cost)}"
   end
+  items.sort!
   list_of_items = ""
   items.each do |item|
     list_of_items += "- #{item}\n"
@@ -68,6 +69,7 @@
 @email.body =  "Dear #{@registrant.name}
 
 We have recently learned about an error in the Unicon Registration system which caused it to incorrectly list your Items as:
+
 #{list_of_items}
 
 We have now corrected the issue, the duplicated entries have been removed, and your items are now:
