@@ -22,7 +22,9 @@
   <% @registrants.each do |registrant| %>
     <tr>
       <% if registrant.has_double_free %>
-        <td class="needs_free_fix">Bad</td>
+        <td class="needs_free_fix">Bad (Simple)</td>
+      <% elsif registrant.has_complex_double_free %>
+        <td class="needs_free_fix">Bad (complex)</td>
       <% else %>
         <td class="free_good">Good</td>
       <% end %>

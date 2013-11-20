@@ -11,6 +11,30 @@ class Admin::RegistrantsController < Admin::BaseController
     @registrants = Registrant.unscoped.all
   end
 
+  def create_free_items
+    refund = Refund.new
+    refund.user = current_user
+    refund.refund_date = Date.today
+    refund.note = "Free Item fix"
+    @registrant.paid_details.where({:free => true}).each do |pd|
+      rd = refund.refund_details.build
+      rd.payment_detail = pd
+      rei = @registrant.registrant_expense_items.build
+      rei.free = true
+      rei.system_managed = false
+      rei.details = nil
+      rei.expense_item = pd.expense_item
+    end
+
+    respond_to do |format|
+      if refund.save and @registrant.save
+        format.html { redirect_to registrant_path(@registrant), notice: 'Refund successfully created' }
+      else
+        format.html { redirect_to registrant_path(@registrant), error: 'Refund FAILED' }
+      end
+    end
+  end
+
   def find_registrant
     @registrant = Registrant.unscoped.find(params[:id])
   end

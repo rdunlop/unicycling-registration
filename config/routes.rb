@@ -52,6 +52,7 @@ Workspace::Application.routes.draw do
         end
         member do
           post :undelete
+          post :create_free_items
         end
       end
       resources :payments, :only => [:index, :new, :create]  do

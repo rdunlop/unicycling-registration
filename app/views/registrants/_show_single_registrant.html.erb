@@ -49,4 +49,7 @@
     <%= link_to t('.done'), registrants_path, {:class => "noncompetitor registration_button"} %>
   <% end %>
 </div>
+<% if can? :manage, AwardLabel %>
+  <%= link_to "Create Free Item Refund", create_free_items_admin_registrant_path(@registrant), :method => :post %>
+<% end %>
 <% if @waiver %><%= render :partial => "/registrants/waiver" %><% end %>
