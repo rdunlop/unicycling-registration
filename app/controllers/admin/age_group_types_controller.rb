@@ -1,6 +1,11 @@
 class Admin::AgeGroupTypesController < Admin::BaseController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:create]
+  before_filter :load_new_age_group_type, :only => [:create]
+
+  def load_new_age_group_type
+    @age_group_type = AgeGroupType.new(age_group_type_params)
+  end
 
   def index
     @age_group_types = AgeGroupType.all
@@ -8,7 +13,7 @@ class Admin::AgeGroupTypesController < Admin::BaseController
   end
 
   def create
-    @age_group_type = AgeGroupType.new(params[:age_group_type])
+    authorize! :create, @age_group_type
 
     respond_to do |format|
       if @age_group_type.save
@@ -38,7 +43,7 @@ class Admin::AgeGroupTypesController < Admin::BaseController
     @age_group_type = AgeGroupType.find(params[:id])
 
     respond_to do |format|
-      if @age_group_type.update_attributes(params[:age_group_type])
+      if @age_group_type.update_attributes(age_group_type_params)
         format.html { redirect_to admin_age_group_types_path, notice: 'Age Group Type was successfully updated.' }
         format.json { head :no_content }
       else
@@ -46,5 +51,10 @@ class Admin::AgeGroupTypesController < Admin::BaseController
         format.json { render json: @age_group_type.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  private
+  def age_group_type_params
+    params.require(:age_group_type).permit(:name, :description)
   end
 end

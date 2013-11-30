@@ -1,4 +1,5 @@
 class AgeGroupType < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :name, :description
 
   validates :name, :presence => true, :uniqueness => true
