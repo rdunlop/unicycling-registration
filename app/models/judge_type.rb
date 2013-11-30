@@ -1,4 +1,5 @@
 class JudgeType < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
 
     has_many :judges, :dependent => :destroy
     has_many :competitions, :through => :judges
