@@ -1,4 +1,5 @@
 class RegistrationPeriod < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :competitor_expense_item_id, :end_date, :name, :noncompetitor_expense_item_id, :start_date, :onsite
 
   default_scope order('start_date ASC')

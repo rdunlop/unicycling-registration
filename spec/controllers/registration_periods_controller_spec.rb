@@ -108,14 +108,14 @@ describe RegistrationPeriodsController do
       it "assigns a newly created but unsaved registration_period as @registration_period" do
         # Trigger the behavior that occurs when invalid params are submitted
         RegistrationPeriod.any_instance.stub(:save).and_return(false)
-        post :create, {:registration_period => {}}
+        post :create, {:registration_period => {:onsite => true}}
         assigns(:registration_period).should be_a_new(RegistrationPeriod)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         RegistrationPeriod.any_instance.stub(:save).and_return(false)
-        post :create, {:registration_period => {}}
+        post :create, {:registration_period => {:onsite => true}}
         response.should render_template("new")
       end
     end
@@ -129,7 +129,7 @@ describe RegistrationPeriodsController do
         # specifies that the RegistrationPeriod created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        RegistrationPeriod.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        RegistrationPeriod.any_instance.should_receive(:update_attributes).with({})
         put :update, {:id => registration_period.to_param, :registration_period => {'these' => 'params'}}
       end
 
@@ -159,7 +159,7 @@ describe RegistrationPeriodsController do
         registration_period = RegistrationPeriod.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         RegistrationPeriod.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registration_period.to_param, :registration_period => {}}
+        put :update, {:id => registration_period.to_param, :registration_period => {:onsite => true}}
         response.should render_template("edit")
       end
     end
