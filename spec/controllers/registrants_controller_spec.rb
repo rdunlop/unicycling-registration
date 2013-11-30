@@ -310,14 +310,14 @@ describe RegistrantsController do
       it "assigns a newly created but unsaved registrant as @registrant" do
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        post :create, {:registrant => {}}
+        post :create, {:registrant => {:competitor => true}}
         assigns(:registrant).should be_a_new(Registrant)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        post :create, {:registrant => {}}
+        post :create, {:registrant => {:competitor => true}}
         response.should render_template("new")
       end
       it "has categories" do
@@ -408,7 +408,7 @@ describe RegistrantsController do
         # specifies that the Registrant created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Registrant.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        Registrant.any_instance.should_receive(:update_attributes).with({})
         put :update, {:id => registrant.to_param, :registrant => {'these' => 'params'}}
       end
 
@@ -417,6 +417,14 @@ describe RegistrantsController do
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
         assigns(:registrant).should eq(registrant)
       end
+
+      it "cannot change the competitor to a non-competitor" do
+        registrant = FactoryGirl.create(:competitor, :user => @user)
+        put :update, {:id => registrant.to_param, :registrant => valid_attributes.merge({:competitor => false})}
+        assigns(:registrant).should eq(registrant)
+        assigns(:registrant).competitor.should == true
+      end
+
 
       it "redirects competitors to the items" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
@@ -435,14 +443,14 @@ describe RegistrantsController do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registrant.to_param, :registrant => {}}
+        put :update, {:id => registrant.to_param, :registrant => {:competitor => true}}
         assigns(:registrant).should eq(registrant)
       end
       it "loads the categories" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         category1 = FactoryGirl.create(:category, :position => 1)
         Registrant.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registrant.to_param, :registrant => {}}
+        put :update, {:id => registrant.to_param, :registrant => {:competitor => true}}
         assigns(:categories).should == [category1]
       end
 
@@ -450,7 +458,7 @@ describe RegistrantsController do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registrant.to_param, :registrant => {}}
+        put :update, {:id => registrant.to_param, :registrant => {:competitor => true}}
         response.should render_template("edit")
       end
     end

@@ -1,4 +1,5 @@
 class RegistrantEventSignUp < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :event_category_id, :registrant_id, :signed_up, :event_id
 
   validates :event, :registrant, :presence => true

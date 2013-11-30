@@ -1,4 +1,5 @@
 class Registrant < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :address, :birthday, :city, :country_residence, :country_representing, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip
   attr_accessible :user_id, :competitor, :ineligible
   attr_accessible :club, :club_contact, :usa_member_number, :volunteer

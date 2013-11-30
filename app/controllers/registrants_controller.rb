@@ -1,6 +1,11 @@
 class RegistrantsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_new_registrant, :only => [:create]
   load_and_authorize_resource
+
+  def load_new_registrant
+    @registrant = Registrant.new(registrant_params)
+  end
 
   def load_categories
     if @registrant.competitor
@@ -90,7 +95,6 @@ class RegistrantsController < ApplicationController
   # GET /registrants/1
   # GET /registrants/1.json
   def show
-    @registrant = Registrant.find(params[:id])
     @has_minor = current_user.has_minor?
     @waiver = EventConfiguration.waiver
     @usa_event = EventConfiguration.usa
@@ -148,14 +152,12 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/1/edit
   def edit
-    @registrant = Registrant.find(params[:id])
     load_categories
   end
 
   # POST /registrants
   # POST /registrants.json
   def create
-    @registrant = Registrant.new(params[:registrant])
     @registrant.user = current_user
 
     respond_to do |format|
@@ -173,10 +175,9 @@ class RegistrantsController < ApplicationController
   # PUT /registrants/1
   # PUT /registrants/1.json
   def update
-    @registrant = Registrant.find(params[:id])
 
     respond_to do |format|
-      if @registrant.update_attributes(params[:registrant])
+      if @registrant.update_attributes(registrant_update_params)
         format.html { redirect_to items_registrant_path(@registrant), notice: 'Registrant was successfully updated.' }
         format.json { head :no_content }
       else
@@ -190,7 +191,6 @@ class RegistrantsController < ApplicationController
   # DELETE /registrants/1
   # DELETE /registrants/1.json
   def destroy
-    @registrant = Registrant.find(params[:id])
     @registrant.deleted = true
 
     respond_to do |format|
@@ -202,5 +202,29 @@ class RegistrantsController < ApplicationController
         format.json { render json: @registrant }
       end
     end
+  end
+
+  private
+  def attributes
+    [:address, :birthday, :city, :country_residence, :country_representing, :competitor,
+                                       :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip,
+                                       :club, :club_contact, :usa_member_number, :volunteer,
+                                       :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
+                                       :responsible_adult_name, :responsible_adult_phone,
+                                       :registrant_choices_attributes => [:event_choice_id, :value],
+                                       :registrant_event_sign_ups_attributes => [:event_category_id, :signed_up, :event_id],
+                                       :registrant_expense_items_attributes => [:expense_item_id, :details]
+    ]
+  end
+
+  # don't allow a registrant to be changed from competitor to non-competitor (or vise-versa)
+  def registrant_update_params
+    attrs = attributes
+    attrs.delete(:competitor)
+    params.require(:registrant).permit(attrs)
+  end
+
+  def registrant_params
+    params.require(:registrant).permit(attributes)
   end
 end
