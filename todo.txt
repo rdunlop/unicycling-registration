@@ -20,13 +20,13 @@ Registration-Related ToDo
 - drop the base columns for the translated attributes?
 
 - Determine if "unoauthorized" message is now being lost due to locale?
-- Consider a free item "paid for" always? well...once the registrant's registration has been paid for.
- - Don't want to require that a user go through paypal to "pay" for "free" items?
 - Add a column to the admin/payments/ page which shows the number of "free" items that have been "paid for".
 - Imrprove the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
 - create a better footer, which floats, and also contains links to Language-selection
 ---- END ROBIN's CURRENT LIST:
 
+- Display the "details" for payment entries of paid entries on various places where it is displayed
+- When marking an item as free for someone, eliminate their registrant_expense_item somehow?
 - combine the _expense_list.html.erb and the other (similar) partials
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
 - Remove all of the "sortable" "search" boxes, as they are clutter.....but have them on the really-long-list tables (like 'edit registrant').

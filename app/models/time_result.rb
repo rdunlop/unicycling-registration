@@ -1,4 +1,5 @@
 class TimeResult < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   belongs_to :competitor, :touch => true
   attr_accessible :disqualified, :minutes, :seconds, :thousands, :competitor_id
 

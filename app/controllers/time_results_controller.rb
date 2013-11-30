@@ -1,8 +1,13 @@
 class TimeResultsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :competition, :except => [:edit, :destroy, :update]
-  load_and_authorize_resource :time_result, :except => [:edit, :destroy, :update]
+  load_and_authorize_resource :time_result, :except => [:create, :edit, :destroy, :update]
   load_and_authorize_resource :time_result, :only => [:edit, :destroy, :update]
+  before_filter :load_new_time_result, :only => [:create]
+
+  def load_new_time_result
+    @time_result = TimeResult.new(time_result_params)
+  end
 
   # XXX look into https://github.com/railscasts/396-importing-csv-and-excel/blob/master/store-with-validations/app/models/product_import.rb ??
   
@@ -33,7 +38,6 @@ class TimeResultsController < ApplicationController
   # POST event/1/time_results
   # POST event/1/time_results.json
   def create
-
     respond_to do |format|
       if @time_result.save
         format.html { redirect_to(competition_time_results_path(@time_result.competition), :notice => 'Time result was successfully created.') }
@@ -50,7 +54,7 @@ class TimeResultsController < ApplicationController
   # PUT time_results/1.json
   def update
     respond_to do |format|
-      if @time_result.update_attributes(params[:time_result])
+      if @time_result.update_attributes(time_result_params)
         format.html { redirect_to(competition_time_results_path(@time_result.competition), :notice => 'Time result was successfully updated.') }
         format.json { head :ok }
       else
@@ -70,5 +74,10 @@ class TimeResultsController < ApplicationController
       format.html { redirect_to competition_time_results_path(competition) }
       format.json { head :ok }
     end
+  end
+
+  private
+  def time_result_params
+    params.require(:time_result).permit(:disqualified, :minutes, :seconds, :thousands, :competitor_id)
   end
 end
