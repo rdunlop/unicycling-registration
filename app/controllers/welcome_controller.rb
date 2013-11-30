@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
   end
 
   def feedback
-    @contact_form = ContactForm.new(params[:contact_form])
+    @contact_form = ContactForm.new(contact_form_params)
 
     if signed_in?
       @contact_form.update_from_user(current_user)
@@ -38,5 +38,10 @@ class WelcomeController < ApplicationController
         format.html { redirect_to registrants_path }
       end
     end
+  end
+
+  private
+  def contact_form_params
+    params.require(:contact_form).permit(:feedback)
   end
 end

@@ -15,7 +15,7 @@ describe WelcomeController do
       response.should redirect_to(welcome_help_path)
     end
     it "returns an error when no feedback" do
-      post "feedback", {:contact_form => {} }
+      post "feedback", {:contact_form => {:feedback => nil} }
       response.should render_template("help")
     end
     it "sends a message" do
@@ -39,7 +39,7 @@ describe WelcomeController do
         @registrant = FactoryGirl.create(:competitor, :user => @user)
       end
       it "assigns the user object when feedback error" do
-        post "feedback", {:contact_form => {} }
+        post "feedback", {:contact_form => {:feedback => nil} }
         assigns(:user).should == @user
       end
 
