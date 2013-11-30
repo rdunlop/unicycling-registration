@@ -19,6 +19,8 @@ $ ->
     $('#registrant_country').val($(this).data("country"));
     $('#registrant_zip').val($(this).data("zip"));
     $('#registrant_phone').val($(this).data("phone"));
+    $('#registrant_country_residence').val($(this).data("country-residence"));
+    $('#registrant_country_representing').val($(this).data("country-representing"));
     return false;
 
 $(document).ready ->
