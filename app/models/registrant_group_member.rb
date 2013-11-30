@@ -1,4 +1,5 @@
 class RegistrantGroupMember < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   attr_accessible :registrant_id, :registrant_group_id
 
   belongs_to :registrant_group, :inverse_of => :registrant_group_members

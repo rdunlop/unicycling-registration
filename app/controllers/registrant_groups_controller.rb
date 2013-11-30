@@ -1,6 +1,11 @@
 class RegistrantGroupsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_new_registrant_group, :only => [:create]
   load_and_authorize_resource
+
+  def load_new_registrant_group
+    @registrant_group = RegistrantGroup.new(registrant_group_params)
+  end
 
   # GET /registrant_groups
   # GET /registrant_groups.json
@@ -43,7 +48,6 @@ class RegistrantGroupsController < ApplicationController
   # GET /registrant_groups/1
   # GET /registrant_groups/1.json
   def show
-    @registrant_group = RegistrantGroup.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -53,13 +57,11 @@ class RegistrantGroupsController < ApplicationController
 
   # GET /registrant_groups/1/edit
   def edit
-    @registrant_group = RegistrantGroup.find(params[:id])
   end
 
   # POST /registrant_groups
   # POST /registrant_groups.json
   def create
-    @registrant_group = RegistrantGroup.new(params[:registrant_group])
 
     respond_to do |format|
       if @registrant_group.save
@@ -75,10 +77,9 @@ class RegistrantGroupsController < ApplicationController
   # PUT /registrant_groups/1
   # PUT /registrant_groups/1.json
   def update
-    @registrant_group = RegistrantGroup.find(params[:id])
 
     respond_to do |format|
-      if @registrant_group.update_attributes(params[:registrant_group])
+      if @registrant_group.update_attributes(registrant_group_params)
         format.html { redirect_to @registrant_group, notice: 'Registrant group was successfully updated.' }
         format.json { head :no_content }
       else
@@ -91,12 +92,17 @@ class RegistrantGroupsController < ApplicationController
   # DELETE /registrant_groups/1
   # DELETE /registrant_groups/1.json
   def destroy
-    @registrant_group = RegistrantGroup.find(params[:id])
     @registrant_group.destroy
 
     respond_to do |format|
       format.html { redirect_to registrant_groups_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def registrant_group_params
+    params.require(:registrant_group).permit(:name, :registrant_id, 
+                                             :registrant_group_members_attributes => [:registrant_id])
   end
 end
