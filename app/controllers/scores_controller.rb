@@ -1,10 +1,15 @@
 class ScoresController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :judge # requires that the current user is able to access the judge, thus hiding scores
+  before_filter :load_new_score, :only => [:create]
   load_and_authorize_resource
 
   before_filter :find_judge
   before_filter :find_competitor, :except => [:index]
+
+  def load_new_score
+    @score = Score.new(score_params)
+  end
 
   def find_judge
     @judge = Judge.find_by_id(params[:judge_id])
@@ -40,7 +45,7 @@ class ScoresController < ApplicationController
     @score.competitor = @competitor
 
     if @judge.judge_type.boundary_calculation_enabled
-        @boundary_score = BoundaryScore.new(params[:boundary_score])
+        @boundary_score = BoundaryScore.new(boundary_score_params)
         @boundary_score.competitor = @competitor
         @boundary_score.judge = @judge
         if @boundary_score.valid?
@@ -87,7 +92,7 @@ class ScoresController < ApplicationController
 
     if @judge.judge_type.boundary_calculation_enabled
         @boundary_score = BoundaryScore.find_by_competitor_id_and_judge_id(params[:competitor_id], params[:judge_id])
-        if @boundary_score.update_attributes(params[:boundary_score])
+        if @boundary_score.update_attributes(boundary_score_params)
             # boundary score is valid
             @score.val_1 = @boundary_score.Total
         else
@@ -101,7 +106,7 @@ class ScoresController < ApplicationController
     end
 
     respond_to do |format|
-      if @score.update_attributes(params[:score])
+      if @score.update_attributes(score_params)
         format.html { redirect_to judge_scores_url(@judge), notice: 'Score was successfully updated.' }
         format.json { head :no_content }
         format.js
@@ -111,5 +116,14 @@ class ScoresController < ApplicationController
         format.js
       end
     end
+  end
+
+  private
+  def score_params
+    params.require(:score).permit(:val_1, :val_2, :val_3, :val_4, :notes)
+  end
+
+  def boundary_score_params
+    params.require(:boundary_score).permit(:number_of_people, :major_dismount, :medium_dismount, :minor_dismount, :major_boundary, :minor_boundary)
   end
 end

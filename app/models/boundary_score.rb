@@ -1,4 +1,5 @@
 class BoundaryScore < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
     belongs_to :judge
     belongs_to :competitor
 

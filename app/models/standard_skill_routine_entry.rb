@@ -1,4 +1,5 @@
 class StandardSkillRoutineEntry < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
     belongs_to :standard_skill_entry
     belongs_to :standard_skill_routine
     acts_as_list :scope => :standard_skill_routine

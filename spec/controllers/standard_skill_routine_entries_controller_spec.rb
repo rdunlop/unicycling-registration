@@ -70,14 +70,14 @@ describe StandardSkillRoutineEntriesController do
       it "assigns a newly created but unsaved entry as @entry" do
         # Trigger the behavior that occurs when invalid params are submitted
         StandardSkillRoutine.any_instance.stub(:save).and_return(false)
-        post :create, {:standard_skill_routine_id => @routine.id, :standard_skill_routine_entry => {}}
+        post :create, {:standard_skill_routine_id => @routine.id, :standard_skill_routine_entry => {:position => 1}}
         assigns(:standard_skill_routine_entry).should be_a_new(StandardSkillRoutineEntry)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         StandardSkillRoutine.any_instance.stub(:save).and_return(false)
-        post :create, {:standard_skill_routine_id => @routine.id, :standard_skill_routine_entry => {}}
+        post :create, {:standard_skill_routine_id => @routine.id, :standard_skill_routine_entry => {:position => 1}}
         response.should render_template("show")
       end
     end

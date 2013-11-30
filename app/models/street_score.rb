@@ -1,4 +1,5 @@
 class StreetScore < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
     belongs_to :competitor
     belongs_to :judge
 

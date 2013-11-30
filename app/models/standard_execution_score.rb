@@ -1,4 +1,5 @@
 class StandardExecutionScore < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
     belongs_to :competitor
     belongs_to :judge
     belongs_to :standard_skill_routine_entry

@@ -1,4 +1,5 @@
 class StandardSkillEntry < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
 
   has_many :standard_skill_routine_entries, :dependent => :destroy
 

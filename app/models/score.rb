@@ -1,4 +1,5 @@
 class Score < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
     belongs_to :competitor
     belongs_to :judge
 
