@@ -1,7 +1,4 @@
 class RegistrantGroup < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :name, :registrant_id, :registrant_group_members_attributes
-
   belongs_to :contact_person, :class_name => "Registrant", :foreign_key => "registrant_id"
 
   has_many :registrant_group_members, :dependent => :destroy, :inverse_of => :registrant_group

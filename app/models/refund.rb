@@ -1,7 +1,4 @@
 class Refund < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :note, :refund_date, :user_id
-
   validates :refund_date, :presence => true
   validates :user_id, :presence => true
   validates :note, :presence => true

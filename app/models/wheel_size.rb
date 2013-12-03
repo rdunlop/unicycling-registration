@@ -1,7 +1,4 @@
 class WheelSize < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :description, :position
-
   validates :position, :description, :presence => true
 
   default_scope order("position ASC")

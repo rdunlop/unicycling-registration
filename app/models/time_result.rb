@@ -1,7 +1,5 @@
 class TimeResult < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   belongs_to :competitor, :touch => true
-  attr_accessible :disqualified, :minutes, :seconds, :thousands, :competitor_id
 
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
   validates :competitor_id, {:presence => true, :uniqueness => false }

@@ -1,14 +1,10 @@
 class RegistrationPeriod < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :competitor_expense_item_id, :end_date, :name, :noncompetitor_expense_item_id, :start_date, :onsite
-
   default_scope order('start_date ASC')
 
   validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
 
   translates :name
   accepts_nested_attributes_for :translations
-  attr_accessible :translations_attributes
 
   belongs_to :competitor_expense_item, :class_name => "ExpenseItem"
   belongs_to :noncompetitor_expense_item, :class_name => "ExpenseItem"

@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   rolify
   # Include default devise modules. Others available are:
   # :token_authenticatable
@@ -10,9 +9,6 @@ class User < ActiveRecord::Base
   devise :confirmable unless (!ENV['MAIL_SKIP_CONFIRMATION'].nil? and ENV['MAIL_SKIP_CONFIRMATION'] == "true")
 
   default_scope order('email ASC')
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_paper_trail :meta => {:user_id => :id }
 

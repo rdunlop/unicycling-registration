@@ -1,7 +1,4 @@
 class Category < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :name, :position, :info_url
-
   default_scope order('position ASC')
 
   has_many :events, :order => "events.position", :dependent => :destroy, :include => :event_choices, :inverse_of => :category
@@ -10,7 +7,6 @@ class Category < ActiveRecord::Base
 
   translates :name
   accepts_nested_attributes_for :translations
-  attr_accessible :translations_attributes
 
   def to_s
     name

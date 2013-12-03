@@ -1,7 +1,4 @@
 class RegistrantEventSignUp < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :event_category_id, :registrant_id, :signed_up, :event_id
-
   validates :event, :registrant, :presence => true
   #validates :event_category, :presence => true, :if  => "signed_up"
   validates :signed_up, :inclusion => {:in => [true, false] } # because it's a boolean

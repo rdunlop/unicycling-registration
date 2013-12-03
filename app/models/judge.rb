@@ -1,5 +1,4 @@
 class Judge < ActiveRecord::Base
-    include ActiveModel::ForbiddenAttributesProtection
     belongs_to :competition
     belongs_to :judge_type
     belongs_to :user
@@ -16,8 +15,6 @@ class Judge < ActiveRecord::Base
     accepts_nested_attributes_for :standard_execution_scores
     accepts_nested_attributes_for :standard_difficulty_scores
 
-    attr_accessible :competition_id, :judge_type_id, :user_id, :standard_execution_scores_attributes, :standard_difficulty_scores_attributes
-    
     validates :competition_id, :presence => true
     validates :judge_type_id, :presence => true, :uniqueness => {:scope => [:competition_id, :user_id] }
     validates :user_id, :presence => true

@@ -1,8 +1,4 @@
 class Payment < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :cancelled, :completed, :completed_date, :payment_date, :transaction_id, :user_id, :note
-  attr_accessible :payment_details_attributes
-
   scope :completed, where(:completed => true)
 
   validates :user_id, :presence => true

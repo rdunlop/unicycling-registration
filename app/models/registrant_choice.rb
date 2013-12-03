@@ -1,7 +1,4 @@
 class RegistrantChoice < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :event_choice_id, :registrant_id, :value
-
   validates :event_choice_id, :presence => true, :uniqueness => {:scope => [:registrant_id]}
   validates :registrant, :presence => true
 

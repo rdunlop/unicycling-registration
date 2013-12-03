@@ -1,7 +1,4 @@
 class LaneAssignment < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :registrant_id, :competition_id, :heat, :lane
-
   belongs_to :competition
   belongs_to :registrant
 

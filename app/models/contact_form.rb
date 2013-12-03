@@ -1,5 +1,4 @@
 class ContactForm
-  include ActiveModel::ForbiddenAttributesProtection
   include ActiveModel::Validations
   include ActiveModel::Conversion
 

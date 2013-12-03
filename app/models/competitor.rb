@@ -1,5 +1,4 @@
 class Competitor < ActiveRecord::Base
-    include ActiveModel::ForbiddenAttributesProtection
     has_many :members
     has_many :registrants, :through => :members, :order => "bib_number"
     belongs_to :competition
@@ -14,7 +13,6 @@ class Competitor < ActiveRecord::Base
     has_many :time_results, :dependent => :destroy
     has_many :external_results, :dependent => :destroy
 
-    attr_accessible :competition_id, :position, :registrant_ids, :custom_external_id, :custom_name
     accepts_nested_attributes_for :registrants
 
     validates :competition_id, :presence => true

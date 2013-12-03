@@ -1,10 +1,7 @@
 class Member < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
     belongs_to :competitor, :touch => true
     belongs_to :registrant
     after_destroy :destroy_orphaned_competitors
-
-    attr_accessible :competitor_id, :registrant_id
 
     #validates :competitor, :presence => true # removed for spec tests
     validates :registrant_id, :presence => true

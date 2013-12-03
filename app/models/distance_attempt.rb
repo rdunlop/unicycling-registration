@@ -1,10 +1,7 @@
 class DistanceAttempt < ActiveRecord::Base
-    include ActiveModel::ForbiddenAttributesProtection
 
     belongs_to :competitor, :touch => true
     belongs_to :judge
-
-    attr_accessible :distance, :fault
 
     validates :judge_id,      :presence => true
     validates :competitor_id, :presence => true

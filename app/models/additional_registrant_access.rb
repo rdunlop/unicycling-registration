@@ -1,7 +1,4 @@
 class AdditionalRegistrantAccess < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :accepted_readonly, :declined, :registrant_id, :user_id
-
   belongs_to :registrant
   belongs_to :user
   validates :user, :registrant, :presence => true

@@ -1,7 +1,4 @@
 class PaymentDetail < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :amount, :payment_id, :registrant_id, :expense_item_id, :details, :free
-
   validates :payment, :registrant_id, :expense_item, :presence => true
   validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
 

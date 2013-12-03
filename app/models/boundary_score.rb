@@ -1,9 +1,6 @@
 class BoundaryScore < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
     belongs_to :judge
     belongs_to :competitor
-
-    attr_accessible :number_of_people, :major_dismount, :medium_dismount, :minor_dismount, :major_boundary, :minor_boundary
 
     validates :judge_id, :presence => true, :uniqueness => {:scope => [:competitor_id]}
     validates :competitor_id, :presence => true

@@ -1,11 +1,4 @@
 class Registrant < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :address, :birthday, :city, :country_residence, :country_representing, :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip
-  attr_accessible :user_id, :competitor, :ineligible
-  attr_accessible :club, :club_contact, :usa_member_number, :volunteer
-  attr_accessible :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone
-  attr_accessible :responsible_adult_name, :responsible_adult_phone
-
   validates :first_name, :last_name, :birthday, :gender, :presence => true
   validates :address, :city, :country_residence, :zip, :presence => true
 
@@ -31,11 +24,9 @@ class Registrant < ActiveRecord::Base
   belongs_to :user
 
   # may move into another object
-  attr_accessible :registrant_choices_attributes
   has_many :registrant_choices, :dependent => :destroy, :inverse_of => :registrant
   accepts_nested_attributes_for :registrant_choices
 
-  attr_accessible :registrant_event_sign_ups_attributes
   has_many :registrant_event_sign_ups, :dependent => :destroy , :inverse_of => :registrant
   accepts_nested_attributes_for :registrant_event_sign_ups
   has_many :signed_up_events, :class_name => 'RegistrantEventSignUp', :conditions => ['signed_up = ?', true]
@@ -46,7 +37,6 @@ class Registrant < ActiveRecord::Base
   has_many :events, :through => :event_choices
   has_many :categories, :through => :events
 
-  attr_accessible :registrant_expense_items_attributes
   has_many :registrant_expense_items, :include => :expense_item, :dependent => :destroy
   has_many :expense_items, :through => :registrant_expense_items
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?

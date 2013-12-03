@@ -1,6 +1,4 @@
 class StandardSkillRoutine < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-
   validates :registrant_id, { :presence => true, :uniqueness => true }
 
   belongs_to :registrant

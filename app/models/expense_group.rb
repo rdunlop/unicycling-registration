@@ -1,9 +1,4 @@
 class ExpenseGroup < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :group_name, :position, :visible, :info_url
-  attr_accessible :competitor_free_options, :noncompetitor_free_options
-  attr_accessible :competitor_required, :noncompetitor_required
-
   validates :group_name, :presence => true
   validates :visible, :competitor_required, :noncompetitor_required, :inclusion => { :in => [true, false] } # because it's a boolean
 
@@ -11,7 +6,6 @@ class ExpenseGroup < ActiveRecord::Base
 
   translates :group_name
   accepts_nested_attributes_for :translations
-  attr_accessible :translations_attributes
 
   def self.free_options
     ["None Free", "One Free In Group", "One Free of Each In Group"]

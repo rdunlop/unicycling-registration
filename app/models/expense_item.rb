@@ -1,7 +1,4 @@
 class ExpenseItem < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :cost, :description, :export_name, :name, :position, :expense_group_id, :has_details, :details_label, :maximum_available , :tax_percentage
-
   default_scope order('expense_group_id ASC, position ASC')
 
   validates :name, :description, :position, :cost, :expense_group, :tax_percentage, :presence => true
@@ -15,7 +12,6 @@ class ExpenseItem < ActiveRecord::Base
 
   translates :name, :description, :details_label
   accepts_nested_attributes_for :translations
-  attr_accessible :translations_attributes
 
   belongs_to :expense_group, :inverse_of => :expense_items
   validates :expense_group_id, :uniqueness => true, :if => "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"

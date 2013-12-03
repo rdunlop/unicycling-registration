@@ -1,12 +1,8 @@
 class StandardSkillEntry < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
-
   has_many :standard_skill_routine_entries, :dependent => :destroy
 
   validates :number, :points, :description, :presence => true
   validates :letter, :presence => true, :uniqueness => {:scope => :number } # not allowed to have the same number/letter pair twice
-
-  attr_accessible :number, :letter, :points, :description
 
   default_scope order('number, letter')
 
