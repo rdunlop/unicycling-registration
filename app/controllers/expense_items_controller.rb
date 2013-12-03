@@ -1,7 +1,11 @@
 class ExpenseItemsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_new_expense_item, :only => [:create]
   load_and_authorize_resource
-  skip_load_resource only: [:create]
+
+  def load_new_expense_item
+    @expense_item = ExpenseItem.new(expense_item_params)
+  end
 
   # GET /expense_items
   # GET /expense_items.json
@@ -18,7 +22,6 @@ class ExpenseItemsController < ApplicationController
   # GET /expense_items/1
   # GET /expense_items/1.json
   def show
-    @expense_item = ExpenseItem.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,13 +31,11 @@ class ExpenseItemsController < ApplicationController
 
   # GET /expense_items/1/edit
   def edit
-    @expense_item = ExpenseItem.find(params[:id])
   end
 
   # POST /expense_items
   # POST /expense_items.json
   def create
-    @expense_item = ExpenseItem.new(expense_item_params)
 
     respond_to do |format|
       if @expense_item.save
@@ -51,7 +52,6 @@ class ExpenseItemsController < ApplicationController
   # PUT /expense_items/1
   # PUT /expense_items/1.json
   def update
-    @expense_item = ExpenseItem.find(params[:id])
 
     respond_to do |format|
       if @expense_item.update_attributes(expense_item_params)
@@ -67,7 +67,6 @@ class ExpenseItemsController < ApplicationController
   # DELETE /expense_items/1
   # DELETE /expense_items/1.json
   def destroy
-    @expense_item = ExpenseItem.find(params[:id])
     unless @expense_item.destroy
       flash[:alert] = @expense_item.errors.full_messages
     end

@@ -1,7 +1,11 @@
 class DistanceAttemptsController < ApplicationController
+  before_filter :load_new_distance_attempt, :only => [:create]
   load_and_authorize_resource
-  skip_load_resource only: [:create]
   before_filter :load_event_category, :except => [:destroy]
+
+  def load_new_distance_attempt
+    @distance_attempt = DistanceAttempt.new(distance_attempt_params)
+  end
 
   def load_event_category
     unless params[:competitor_id].nil?
@@ -37,11 +41,9 @@ class DistanceAttemptsController < ApplicationController
   end
 
   def new
-    @distance_attempt = DistanceAttempt.new
   end
 
   def create
-    @distance_attempt = DistanceAttempt.new(distance_attempt_params)
     @distance_attempt.competitor = @competitor
     @distance_attempt.judge = @judge
 

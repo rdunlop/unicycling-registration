@@ -1,10 +1,14 @@
 class EventCategoriesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_new_event_category, :only => [:create]
   load_and_authorize_resource
-  skip_load_resource only: [:create]
 
   before_filter :load_event, :only => [:index, :create]
   before_filter :load_event_category, :only => [:sign_ups]
+
+  def load_new_event_category
+    @event_category = EventCategory.new(event_category_params)
+  end
 
   def load_event
     @event = Event.find(params[:event_id])
@@ -33,7 +37,6 @@ class EventCategoriesController < ApplicationController
   # GET /event_categories/1
   # GET /event_categories/1.json
   def show
-    @event_category = EventCategory.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,13 +46,11 @@ class EventCategoriesController < ApplicationController
 
   # GET /event_categories/1/edit
   def edit
-    @event_category = EventCategory.find(params[:id])
   end
 
   # POST /event_categories
   # POST /event_categories.json
   def create
-    @event_category = EventCategory.new(event_category_params)
     @event_category.event = @event
 
     respond_to do |format|
@@ -67,7 +68,6 @@ class EventCategoriesController < ApplicationController
   # PUT /event_categories/1
   # PUT /event_categories/1.json
   def update
-    @event_category = EventCategory.find(params[:id])
 
     respond_to do |format|
       if @event_category.update_attributes(event_category_params)
@@ -83,7 +83,6 @@ class EventCategoriesController < ApplicationController
   # DELETE /event_categories/1
   # DELETE /event_categories/1.json
   def destroy
-    @event_category = EventCategory.find(params[:id])
     event = @event_category.event
     @event_category.destroy
 

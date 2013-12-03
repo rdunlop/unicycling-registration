@@ -59,7 +59,7 @@ read the instructions for github and heroku.
 * Download the heroku tool
 * Create a new heroku instance
 
-    $ heroku create cedar uniregtest
+    $ heroku apps:create uniregtest
 
 * Upload the code
 

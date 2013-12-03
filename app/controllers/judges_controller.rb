@@ -1,7 +1,11 @@
 class JudgesController < ApplicationController
   load_and_authorize_resource :competition, :only => [:index, :new, :create, :destroy, :copy_judges, :create_normal]
+  before_filter :load_new_judge, :only => [:create]
   load_and_authorize_resource
-  skip_load_resource only: [:create]
+
+  def load_new_judge
+    @judge = @competition.judges.new(judge_params)
+  end
 
   def new # are there tests for this?
     @judge_types = JudgeType.where(:event_class => @competition.event.event_class)
@@ -11,9 +15,6 @@ class JudgesController < ApplicationController
   # POST /competitions/#/judges
   # POST /competitions/#/judges.json
   def create
-    @judge = Judge.new(judge_params)
-    @judge.competition = @competition
-
     respond_to do |format|
       if @judge.save
         format.html { redirect_to competition_judges_path(@competition), notice: 'Association was successfully created.' }
@@ -102,6 +103,6 @@ class JudgesController < ApplicationController
 
   private
   def judge_params
-    params.require(:judge).permit( :competition_id, :judge_type_id, :user_id, :standard_execution_scores_attributes, :standard_difficulty_scores_attributes)
+    params.require(:judge).permit(:judge_type_id, :user_id, :standard_execution_scores_attributes, :standard_difficulty_scores_attributes)
   end
 end

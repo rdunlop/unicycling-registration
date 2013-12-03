@@ -1,13 +1,16 @@
 require 'csv'
 class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
-  skip_load_resource only: [:create]
-
   before_filter :load_competition, :only => [:index, :new, :create, :upload, :add_all, :destroy_all, :create_from_sign_ups]
+  before_filter :load_new_competitor, :only => [:create]
+  load_and_authorize_resource
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_new_competitor
+    @competitor = @competition.competitors.new(competitor_params)
   end
 
   # GET /competitions/:competition_id/1/new
@@ -92,8 +95,6 @@ class CompetitorsController < ApplicationController
   # POST /competitors
   # POST /competitors.json
   def create
-    @competitor = Competitor.new(competitor_params)
-    @competitor.competition = @competition
 
     respond_to do |format|
       if @competitor.save

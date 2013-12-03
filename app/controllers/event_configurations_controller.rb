@@ -1,8 +1,12 @@
 class EventConfigurationsController < ApplicationController
   before_filter :authenticate_user!, :except => [:logo]
+  before_filter :load_event_configuration, :only => [:create]
   load_and_authorize_resource
-  skip_load_resource only: [:create]
 
+
+  def load_event_configuration
+    @event_configuration = EventConfiguration.new(event_configuration_params)
+  end
 
   # GET /event_configurations/1/logo
   def logo
@@ -27,7 +31,6 @@ class EventConfigurationsController < ApplicationController
   # GET /event_configurations/new
   # GET /event_configurations/new.json
   def new
-    @event_configuration = EventConfiguration.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,13 +40,11 @@ class EventConfigurationsController < ApplicationController
 
   # GET /event_configurations/1/edit
   def edit
-    @event_configuration = EventConfiguration.find(params[:id])
   end
 
   # POST /event_configurations
   # POST /event_configurations.json
   def create
-    @event_configuration = EventConfiguration.new(event_configuration_params)
 
     respond_to do |format|
       if @event_configuration.save
@@ -59,7 +60,6 @@ class EventConfigurationsController < ApplicationController
   # PUT /event_configurations/1
   # PUT /event_configurations/1.json
   def update
-    @event_configuration = EventConfiguration.find(params[:id])
 
     respond_to do |format|
       if @event_configuration.update_attributes(event_configuration_params)
@@ -75,7 +75,6 @@ class EventConfigurationsController < ApplicationController
   # DELETE /event_configurations/1
   # DELETE /event_configurations/1.json
   def destroy
-    @event_configuration = EventConfiguration.find(params[:id])
     @event_configuration.destroy
 
     respond_to do |format|

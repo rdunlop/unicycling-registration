@@ -1,16 +1,20 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_category, :only => [:index, :create]
+  before_filter :load_new_event, :only => [:create]
   load_and_authorize_resource
-  skip_load_resource only: [:create]
 
   def load_category
     @category = Category.find(params[:category_id])
   end
 
+  def load_new_event
+    @event = @category.events.build(event_params)
+  end
+
   # GET /events
   # GET /events.json
   def index
-    load_category
     @events = @category.events
     @event = Event.new
     @event.event_categories.build
@@ -29,8 +33,6 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    load_category
-    @event = @category.events.build(event_params)
 
     respond_to do |format|
       if @event.save
@@ -48,7 +50,6 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.json
   def update
-    @event = Event.find(params[:id])
 
     respond_to do |format|
       if @event.update_attributes(event_params)
@@ -64,7 +65,6 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    @event = Event.find(params[:id])
     @category = @event.category
     @event.destroy
 
@@ -105,6 +105,7 @@ class EventsController < ApplicationController
   private
   def event_params
     params.require(:event).permit(:category_id, :export_name, :position, :name, :event_class, :visible,
-                                  :event_choices_attributes => [:export_name, :cell_type, :label, :multiple_values, :position, :id], :event_categories_attributes => [:name, :position, :id])
+                                  :event_choices_attributes => [:export_name, :cell_type, :label, :multiple_values, :position, :id], 
+                                  :event_categories_attributes => [:name, :position, :id])
   end
 end

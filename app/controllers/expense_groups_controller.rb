@@ -1,7 +1,11 @@
 class ExpenseGroupsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_new_expense_group, :only => [:create]
   load_and_authorize_resource
-  skip_load_resource only: [:create]
+
+  def load_new_expense_group
+    @expense_group = ExpenseGroup.new(expense_group_params)
+  end
 
   # GET /expense_groups
   # GET /expense_groups.json
@@ -18,7 +22,6 @@ class ExpenseGroupsController < ApplicationController
   # GET /expense_groups/1
   # GET /expense_groups/1.json
   def show
-    @expense_group = ExpenseGroup.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,13 +31,11 @@ class ExpenseGroupsController < ApplicationController
 
   # GET /expense_groups/1/edit
   def edit
-    @expense_group = ExpenseGroup.find(params[:id])
   end
 
   # POST /expense_groups
   # POST /expense_groups.json
   def create
-    @expense_group = ExpenseGroup.new(expense_group_params)
 
     respond_to do |format|
       if @expense_group.save
@@ -50,7 +51,6 @@ class ExpenseGroupsController < ApplicationController
   # PUT /expense_groups/1
   # PUT /expense_groups/1.json
   def update
-    @expense_group = ExpenseGroup.find(params[:id])
 
     respond_to do |format|
       if @expense_group.update_attributes(expense_group_params)
@@ -66,7 +66,6 @@ class ExpenseGroupsController < ApplicationController
   # DELETE /expense_groups/1
   # DELETE /expense_groups/1.json
   def destroy
-    @expense_group = ExpenseGroup.find(params[:id])
     @expense_group.destroy
 
     respond_to do |format|

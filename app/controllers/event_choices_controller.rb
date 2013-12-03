@@ -1,12 +1,15 @@
 class EventChoicesController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
-  skip_load_resource only: [:create]
-
   before_filter :load_event, :only => [:index, :create]
+  before_filter :load_new_event_choice, :only => [:create]
+  load_and_authorize_resource
 
   def load_event
     @event = Event.find(params[:event_id])
+  end
+
+  def load_new_event_choice
+    @event_choice = @event.event_choices.new(event_choice_params)
   end
 
   def load_choices
@@ -28,7 +31,6 @@ class EventChoicesController < ApplicationController
   # GET /event_choices/1
   # GET /event_choices/1.json
   def show
-    @event_choice = EventChoice.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,14 +40,12 @@ class EventChoicesController < ApplicationController
 
   # GET /event_choices/1/edit
   def edit
-    @event_choice = EventChoice.find(params[:id])
     @event_choices = @event_choice.event.event_choices - [@event_choice]
   end
 
   # POST /event/1/event_choices
   # POST /event/1/event_choices.json
   def create
-    @event_choice = @event.event_choices.new(event_choice_params)
 
     respond_to do |format|
       if @event_choice.save
@@ -62,7 +62,6 @@ class EventChoicesController < ApplicationController
   # PUT /event_choices/1
   # PUT /event_choices/1.json
   def update
-    @event_choice = EventChoice.find(params[:id])
 
     respond_to do |format|
       if @event_choice.update_attributes(event_choice_params)
@@ -78,7 +77,6 @@ class EventChoicesController < ApplicationController
   # DELETE /event_choices/1
   # DELETE /event_choices/1.json
   def destroy
-    @event_choice = EventChoice.find(params[:id])
     event = @event_choice.event
     @event_choice.destroy
 

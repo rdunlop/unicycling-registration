@@ -1,8 +1,11 @@
 class CategoriesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_new_category, :only => [:create]
   load_and_authorize_resource
-  skip_load_resource only: [:create]
 
+  def load_new_category
+    @category = Category.new(category_params)
+  end
 
   def load_categories
     @categories = Category.all
@@ -22,13 +25,11 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
-    @category = Category.find(params[:id])
   end
 
   # POST /categories
   # POST /categories.json
   def create
-    @category = Category.new(category_params)
 
     respond_to do |format|
       if @category.save
@@ -45,7 +46,6 @@ class CategoriesController < ApplicationController
   # PUT /categories/1
   # PUT /categories/1.json
   def update
-    @category = Category.find(params[:id])
 
     respond_to do |format|
       if @category.update_attributes(category_params)
@@ -61,7 +61,6 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    @category = Category.find(params[:id])
     @category.destroy
 
     respond_to do |format|

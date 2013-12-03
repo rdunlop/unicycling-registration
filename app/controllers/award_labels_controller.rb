@@ -1,9 +1,13 @@
 class AwardLabelsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_new_award_label, :only => [:create]
   load_and_authorize_resource
-  skip_load_resource only: [:create]
 
   before_filter :load_user, :only => [:index, :create, :create_labels, :expert_labels, :normal_labels, :destroy_all, :create_labels_by_registrant]
+
+  def load_new_award_label
+    @award_label = AwardLabel.new(award_label_params)
+  end
 
   def load_user
     @user = User.find(params[:user_id])
@@ -23,14 +27,12 @@ class AwardLabelsController < ApplicationController
 
   # GET /award_labels/1/edit
   def edit
-    @award_label = AwardLabel.find(params[:id])
     @user = @award_label.user
   end
 
   # POST /users/#/award_labels
   # POST /users/#/award_labels.json
   def create
-    @award_label = AwardLabel.new(award_label_params)
     @award_label.user = @user
 
     respond_to do |format|
@@ -46,7 +48,6 @@ class AwardLabelsController < ApplicationController
   # PUT /award_labels/1
   # PUT /award_labels/1.json
   def update
-    @award_label = AwardLabel.find(params[:id])
 
     respond_to do |format|
       if @award_label.update_attributes(award_label_params)
@@ -62,7 +63,6 @@ class AwardLabelsController < ApplicationController
   # DELETE /award_labels/1
   # DELETE /award_labels/1.json
   def destroy
-    @award_label = AwardLabel.find(params[:id])
     @user = @award_label.user
     @award_label.destroy
 

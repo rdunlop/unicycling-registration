@@ -1,13 +1,16 @@
 require 'upload'
 class ImportResultsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
-  skip_load_resource only: [:create]
-
   before_filter :load_user, :only => [:index, :create, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
+  before_filter :load_new_import_result, :only => [:create]
+  load_and_authorize_resource
 
   def load_user
     @user = User.find(params[:user_id])
+  end
+
+  def load_new_import_result
+    @import_result = @user.import_results.new(import_result_params)
   end
 
   # GET /import_results
@@ -25,7 +28,6 @@ class ImportResultsController < ApplicationController
   # GET /import_results/1
   # GET /import_results/1.json
   def show
-    @import_result = ImportResult.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,14 +37,11 @@ class ImportResultsController < ApplicationController
 
   # GET /import_results/1/edit
   def edit
-    @import_result = ImportResult.find(params[:id])
   end
 
   # POST /import_results
   # POST /import_results.json
   def create
-    @import_result = ImportResult.new(import_result_params)
-    @import_result.user = @user
 
     respond_to do |format|
       if @import_result.save
@@ -57,7 +56,6 @@ class ImportResultsController < ApplicationController
   # PUT /import_results/1
   # PUT /import_results/1.json
   def update
-    @import_result = ImportResult.find(params[:id])
 
     respond_to do |format|
       if @import_result.update_attributes(import_result_params)
@@ -73,7 +71,6 @@ class ImportResultsController < ApplicationController
   # DELETE /import_results/1
   # DELETE /import_results/1.json
   def destroy
-    @import_result = ImportResult.find(params[:id])
     user = @import_result.user
     @import_result.destroy
 

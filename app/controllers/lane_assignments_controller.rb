@@ -1,12 +1,15 @@
 class LaneAssignmentsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
-  skip_load_resource only: [:create]
-
   before_filter :load_competition, :only => [:index, :create]
+  before_filter :load_new_lane_assignment, :only => [:create]
+  load_and_authorize_resource
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_new_lane_assignment
+    @lane_assignment = @competition.lane_assignments.new(lane_assignment_params)
   end
 
   # GET /competitions/#/lane_assignments
@@ -23,15 +26,11 @@ class LaneAssignmentsController < ApplicationController
 
   # GET /lane_assignments/1/edit
   def edit
-    @lane_assignment = LaneAssignment.find(params[:id])
   end
 
   # POST /lane_assignments
   # POST /lane_assignments.json
   def create
-    @lane_assignment = LaneAssignment.new(lane_assignment_params)
-    @lane_assignment.competition = @competition
-
     respond_to do |format|
       if @lane_assignment.save
         format.html { redirect_to competition_lane_assignments_path(@competition), notice: 'Lane assignment was successfully created.' }
@@ -45,7 +44,6 @@ class LaneAssignmentsController < ApplicationController
   # PUT /lane_assignments/1
   # PUT /lane_assignments/1.json
   def update
-    @lane_assignment = LaneAssignment.find(params[:id])
 
     respond_to do |format|
       if @lane_assignment.update_attributes(lane_assignment_params)
@@ -59,7 +57,6 @@ class LaneAssignmentsController < ApplicationController
   # DELETE /lane_assignments/1
   # DELETE /lane_assignments/1.json
   def destroy
-    @lane_assignment = LaneAssignment.find(params[:id])
     @competition = @lane_assignment.competition
     @lane_assignment.destroy
 

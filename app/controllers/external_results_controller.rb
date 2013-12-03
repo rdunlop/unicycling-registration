@@ -1,12 +1,16 @@
 class ExternalResultsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
-  skip_load_resource only: [:create]
-
   before_filter :load_competition, :only => [:index, :create]
+  before_filter :load_new_external_result, :only => [:create]
+  load_and_authorize_resource
+
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_new_external_result
+    @external_result = @competition.external_results.new(external_result_params)
   end
 
   # GET /competitions/#/external_results
@@ -21,14 +25,12 @@ class ExternalResultsController < ApplicationController
 
   # GET /external_results/1/edit
   def edit
-    @external_result = ExternalResult.find(params[:id])
     @competition = @external_result.competition
   end
 
   # POST /external_results
   # POST /external_results.json
   def create
-    @external_result = ExternalResult.new(external_result_params)
 
     respond_to do |format|
       if @external_result.save
@@ -45,12 +47,10 @@ class ExternalResultsController < ApplicationController
   # PUT /external_results/1
   # PUT /external_results/1.json
   def update
-    @external_result = ExternalResult.find(params[:id])
-    @competition = @external_result.competition
 
     respond_to do |format|
       if @external_result.update_attributes(external_result_params)
-        format.html { redirect_to competition_external_results_path(@competition), notice: 'External result was successfully updated.' }
+        format.html { redirect_to competition_external_results_path(@external_result.competition), notice: 'External result was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -62,7 +62,6 @@ class ExternalResultsController < ApplicationController
   # DELETE /external_results/1
   # DELETE /external_results/1.json
   def destroy
-    @external_result = ExternalResult.find(params[:id])
     @competition = @external_result.competitor.competition
     @external_result.destroy
 

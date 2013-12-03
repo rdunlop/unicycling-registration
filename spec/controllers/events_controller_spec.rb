@@ -217,14 +217,7 @@ describe EventsController do
         @event = FactoryGirl.create(:event)
       end
       it "can update event_categories" do
-        put :update, {:id => @event.to_param, :event => {
-          :name => "Sample Event",
-          :event_categories_attributes => [ 
-              {
-          :name => "The Categorie",
-          :position => 1
-        }] }}
-        ecat = EventCategory.last
+        ecat = @event.event_categories.last
 
         expect {
           put :update, {:id => @event.to_param, :event => {
