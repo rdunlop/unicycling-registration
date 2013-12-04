@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118100712) do
+ActiveRecord::Schema.define(:version => 20131204050249) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(:version => 20131118100712) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  add_index "award_labels", ["user_id"], :name => "index_award_labels_on_user_id"
 
   create_table "boundary_scores", :force => true do |t|
     t.integer  "competitor_id"
@@ -295,6 +297,8 @@ ActiveRecord::Schema.define(:version => 20131118100712) do
     t.datetime "updated_at",    :null => false
   end
 
+  add_index "external_results", ["competitor_id"], :name => "index_external_results_on_competitor_id"
+
   create_table "import_results", :force => true do |t|
     t.integer  "user_id"
     t.string   "raw_data"
@@ -310,6 +314,7 @@ ActiveRecord::Schema.define(:version => 20131118100712) do
     t.string   "details"
   end
 
+  add_index "import_results", ["user_id"], :name => "index_import_results_on_user_id"
   add_index "import_results", ["user_id"], :name => "index_imported_results_user_id"
 
   create_table "judge_types", :force => true do |t|
@@ -348,6 +353,8 @@ ActiveRecord::Schema.define(:version => 20131118100712) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "lane_assignments", ["competition_id"], :name => "index_lane_assignments_on_competition_id"
 
   create_table "members", :force => true do |t|
     t.integer  "competitor_id"
@@ -408,6 +415,9 @@ ActiveRecord::Schema.define(:version => 20131118100712) do
     t.datetime "updated_at",        :null => false
   end
 
+  add_index "refund_details", ["payment_detail_id"], :name => "index_refund_details_on_payment_detail_id"
+  add_index "refund_details", ["refund_id"], :name => "index_refund_details_on_refund_id"
+
   create_table "refunds", :force => true do |t|
     t.integer  "user_id"
     t.datetime "refund_date"
@@ -415,6 +425,8 @@ ActiveRecord::Schema.define(:version => 20131118100712) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "refunds", ["user_id"], :name => "index_refunds_on_user_id"
 
   create_table "registrant_choices", :force => true do |t|
     t.integer  "registrant_id"
@@ -510,6 +522,7 @@ ActiveRecord::Schema.define(:version => 20131118100712) do
   end
 
   add_index "registrants", ["deleted"], :name => "index_registrants_deleted"
+  add_index "registrants", ["user_id"], :name => "index_registrants_on_user_id"
 
   create_table "registration_period_translations", :force => true do |t|
     t.integer  "registration_period_id"
