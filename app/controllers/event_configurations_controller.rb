@@ -12,9 +12,14 @@ class EventConfigurationsController < ApplicationController
   def logo
     @event_configuration = EventConfiguration.find(params[:id])
     @image = @event_configuration.logo_binary
-    send_data @image, :type => @event_configuration.logo_type,
-               :filename => @event_configuration.logo_filename,
-               :disposition => 'inline'
+
+    if @event_configuration.logo_type.nil?
+      render nothing: true
+    else
+      send_data @image, :type => @event_configuration.logo_type,
+        :filename => @event_configuration.logo_filename,
+        :disposition => 'inline'
+    end
   end
 
   # GET /event_configurations
