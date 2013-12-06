@@ -71,12 +71,12 @@ class Payment < ActiveRecord::Base
   end
 
   def total_amount
-    payment_details.reduce(0) { |memo, pd| memo + pd.cost }
+    payment_details.reduce(0) { |memo, pd| memo + pd.cost }.to_f
   end
 
   def self.total_received
     total = 0
-    Payment.includes(:payment_details).where({:completed => true}).each do |payment|
+    Payment.includes(:payment_details).completed.each do |payment|
       total += payment.total_amount
     end
     total

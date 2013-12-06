@@ -27,7 +27,7 @@ describe Payment do
 
   describe "with payment details" do
     before(:each) do
-      @pd = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => 10)
+      @pd = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => 57.49)
       @pay.reload
     end
 
@@ -35,7 +35,8 @@ describe Payment do
       @pay.payment_details.should == [@pd]
     end
     it "can calcalate the payment total-amount" do
-      @pay.total_amount.should == @pd.amount
+      @pd2 = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => 23.0)
+      (@pay.total_amount == "80.49".to_f).should == true
     end
 
     it "has a list of unique_payment_deatils" do
