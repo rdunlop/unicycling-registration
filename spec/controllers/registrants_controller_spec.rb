@@ -366,11 +366,17 @@ describe RegistrantsController do
         put :update, {:id => @reg.id, :registrant => @attributes}
         RegistrantChoice.count.should == 1
       end
+      it "can update an existing registrant_choice" do
+        put :update, {:id => @reg.id, :registrant => @attributes}
+        @attributes[:registrant_choices_attributes][0][:id] = RegistrantChoice.first.id
+        put :update, {:id => @reg.id, :registrant => @attributes}
+        response.should redirect_to(items_registrant_path(@reg))
+      end
     end
 
     describe "when creating registrant_event_sign_ups" do
       before(:each) do
-        @reg = FactoryGirl.create(:registrant)
+        @reg = FactoryGirl.create(:registrant, :user => @user)
         @ecat = FactoryGirl.create(:event).event_categories.first
         @attributes = valid_attributes.merge({
           :competitor => true,
@@ -396,6 +402,16 @@ describe RegistrantsController do
         expect {
           post 'create', {:id => @reg, :registrant => @attributes}
         }.to change(RegistrantEventSignUp, :count).by(1)
+      end
+
+      it "can update the registrant_event_sign_up" do
+        put :update, {:id => @reg.id, :registrant => @attributes}
+        response.should redirect_to(items_registrant_path(@reg))
+        @new_attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
+        expect {
+          put :update, {:id => @reg.id, :registrant => @new_attributes}
+        }.to change(RegistrantEventSignUp, :count).by(0)
+        response.should redirect_to(items_registrant_path(@reg))
       end
     end
   end
