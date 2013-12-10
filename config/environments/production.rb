@@ -74,12 +74,12 @@ Workspace::Application.configure do
 end
 
 # backwards-compatible
-if ENV['ERROR_EMAILS'].nil?
-  ENV['ERROR_EMAILS'] = [ENV['ERROR_EMAIL']]
-end
+error_emails = []
+error_emails << ENV['ERROR_EMAIL'] unless ENV['ERROR_EMAIL'].nil?
+error_emails << ENV['ERROR_EMAIL2'] unless ENV['ERROR_EMAIL2'].nil?
 
 Workspace::Application.config.middleware.use ExceptionNotification::Rack,
   :email => {
   :email_prefix => "[Registration Exception] ",
-  :exception_recipients => ENV['ERROR_EMAILS']
+  :exception_recipients => error_emails
 }

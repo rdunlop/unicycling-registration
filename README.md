@@ -142,7 +142,8 @@ The following e-mail will receive a CC of every payment confirmation sent
 
 The following e-mail(s) will receive all error messages, "feedback", and other low-level messages
 
-    ERROR_EMAILS=['robin+nauccerrors@dunlopweb.com']
+    ERROR_EMAIL=robin+nauccerrors@dunlopweb.com
+    ERROR_EMAIL2=bob+nauccerrors@dunlopweb.com
 
 
 The DOMAIN setting is used to build the links in the e-mails, set it to the hostname of the deployed application
