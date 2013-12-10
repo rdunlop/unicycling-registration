@@ -184,10 +184,11 @@ describe PaymentsController do
       describe "with nested attributes for payment_details" do
         it "creates the payment_detail" do
           @ei = FactoryGirl.create(:expense_item)
+          @reg = FactoryGirl.create(:competitor)
           post :create, {:payment => {
             :payment_details_attributes => [
               {
-                :registrant_id => 1,
+                :registrant_id => @reg.id,
                 :expense_item_id => @ei.id,
                 :details => "Additional Details",
                 :free => true,

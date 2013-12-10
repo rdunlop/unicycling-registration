@@ -54,14 +54,13 @@
             <%= item %>
           </td>
           <td>
-            <%= paid_count = item.payment_details.completed.count %>
+            <%= paid_count = item.num_paid %>
           </td>
           <td>
-            <% total_count = @all_expense_items.count(item) %>
-            <%= (total_count - paid_count) %>
+          <%= unpaid_count = item.num_unpaid %>
           </td>
           <td>
-            <%= total_count %>
+            <%= paid_count + unpaid_count %>
           </td>
         </tr>
       <% end %>

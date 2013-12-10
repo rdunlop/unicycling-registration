@@ -362,8 +362,8 @@ describe Registrant do
         @payment = FactoryGirl.create(:payment, :completed => true)
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 90, :expense_item => @oldcomp_exp)
       end
-      it "should return the older registration expense_item as the registration_item" do
-        @comp.registration_item.should == @oldcomp_exp
+      it "should return nil as the registration_item" do
+        @comp.registration_item.should be_nil
       end
     end
 
@@ -404,6 +404,10 @@ describe Registrant do
         it "lists nothing as paid" do
           @comp.paid_details.should == []
           @comp.payment_details.count.should == 1
+        end
+
+        it "no longer lists the registration as paid" do
+          @comp.reg_paid?.should == false
         end
       end
     end

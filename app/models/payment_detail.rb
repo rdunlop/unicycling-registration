@@ -9,8 +9,15 @@ class PaymentDetail < ActiveRecord::Base
   belongs_to :expense_item
   has_one :refund_detail
 
+  after_touch :touch_registrant
+
   # excludes refunded items
   scope :completed, includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}})
+
+
+  def touch_registrant
+    registrant.touch
+  end
 
   def refunded?
     !refund_detail.nil?

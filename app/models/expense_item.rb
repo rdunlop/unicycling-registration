@@ -27,6 +27,25 @@ class ExpenseItem < ActiveRecord::Base
     self.tax_percentage = 0 if self.tax_percentage.nil?
   end
 
+  def num_paid
+    payment_details.completed.count
+  end
+
+  def num_unpaid
+    rp = RegistrationPeriod.relevant_period(Date.today)
+    unless rp.nil?
+      if self == rp.competitor_expense_item
+        count = Registrant.where({:competitor => true}).all.count {|reg| !reg.reg_paid? }
+        return count
+      elsif self == rp.noncompetitor_expense_item
+        count = Registrant.where({:competitor => false}).all.count {|reg| !reg.reg_paid? }
+        return count
+      end
+    end
+
+    registrant_expense_items.count
+  end
+
   def create_reg_items
     if self.expense_group.competitor_required
       Registrant.where({:competitor => true}).each do |reg|
@@ -70,7 +89,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_selected_items
-    registrant_expense_items.count + payment_details.completed.count
+    registrant_expense_items.count + num_paid
   end
 
   def can_i_add?(num_to_add)

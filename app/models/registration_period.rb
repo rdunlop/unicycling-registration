@@ -13,8 +13,15 @@ class RegistrationPeriod < ActiveRecord::Base
 
   after_initialize :init
 
+  after_save :clear_cache
+  after_destroy :clear_cache
+
   def init
     self.onsite = false if self.onsite.nil?
+  end
+
+  def clear_cache
+    Rails.cache.delete("/registration_period/by_date/#{Date.today}")
   end
 
 
@@ -42,8 +49,13 @@ class RegistrationPeriod < ActiveRecord::Base
   end
 
   def self.relevant_period(date)
-    RegistrationPeriod.all.each do |rp|
+    rp_id = Rails.cache.fetch("/registration_period/by_date/#{date}")
+    rp = RegistrationPeriod.find_by_id(rp_id)
+    return rp unless rp.nil?
+
+    RegistrationPeriod.includes(:competitor_expense_item, :noncompetitor_expense_item).all.each do |rp|
       if rp.current_period?(date)
+        Rails.cache.write("/registration_period/by_date/#{date}", rp.id, :expires_in => 5.minutes)
         return rp
       end
     end

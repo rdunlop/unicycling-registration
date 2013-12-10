@@ -111,6 +111,7 @@ describe ExpenseItem do
     it "does not count this entry as a selected_item when the payment is incomplete" do
       @payment.payment.completed.should == false
       @item.num_selected_items.should == 0
+      @item.num_paid.should == 0
     end
 
     it "counts this entry as a selected_item when the payment is complete" do
@@ -118,6 +119,7 @@ describe ExpenseItem do
       pay.completed = true
       pay.save!
       @item.num_selected_items.should == 1
+      @item.num_paid.should == 1
     end
   end
 
@@ -185,6 +187,33 @@ describe ExpenseItem do
 
     it "should count the entry as a selected_item" do
       @item.num_selected_items.should == 1
+      @item.num_unpaid.should == 1
+    end
+  end
+
+  describe "when a registration has a registration_period" do
+    before(:each) do
+      @rp = FactoryGirl.create(:registration_period, :competitor_expense_item => @item)
+      @nc_item = @rp.noncompetitor_expense_item
+    end
+    describe "with a single competitor" do
+      before(:each) do
+        @reg = FactoryGirl.create(:competitor)
+      end
+      it "should list the item as un_paid" do
+        @item.num_unpaid.should == 1
+        @nc_item.num_unpaid.should == 0
+      end
+    end
+    describe "with a single non_competitor" do
+      before(:each) do
+        @nc_reg = FactoryGirl.create(:noncompetitor)
+      end
+
+      it "counts the nc item only" do
+        @nc_item.num_unpaid.should == 1
+        @item.num_unpaid.should == 0
+      end
     end
   end
 end

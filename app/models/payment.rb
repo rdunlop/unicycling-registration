@@ -12,11 +12,19 @@ class Payment < ActiveRecord::Base
   accepts_nested_attributes_for :payment_details, :reject_if => proc { |attributes| attributes['registrant_id'].blank? }
 
   after_save :update_registrant_items
+  after_save :touch_payment_details
+
   after_initialize :init
 
   def init
     self.cancelled = false if self.cancelled.nil?
     self.completed = false if self.completed.nil?
+  end
+
+  def touch_payment_details
+    payment_details.each do |pd|
+      pd.touch
+    end
   end
 
   def transaction_id_or_note

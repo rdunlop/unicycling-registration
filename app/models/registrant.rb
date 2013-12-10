@@ -342,17 +342,19 @@ class Registrant < ActiveRecord::Base
 
   # Indicates that this registrant has paid their registration_fee
   def reg_paid?
-    reg_item = registration_item
-    unless reg_item.nil?
-      return paid_expense_items.include?(reg_item)
+    Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
+      if RegistrationPeriod.paid_for_period(self.competitor, self.paid_expense_items).nil?
+        false
+      else
+        true
+      end
     end
-    false
   end
 
   # ALL registrants
   def self.all_expense_items
     total = []
-    Registrant.includes(:registrant_expense_items).includes(:payment_details).each do |reg|
+    Registrant.includes(registrant_expense_items: [:expense_item]).includes(payment_details: [:payment, :expense_item]).each do |reg|
       total += reg.all_expense_items
     end
     total
@@ -398,8 +400,11 @@ class Registrant < ActiveRecord::Base
     # prevents this from creating new items when we return a 'new'd element
     items = self.registrant_expense_items.clone
 
-    if not reg_paid? and not registration_item.nil?
-      items << RegistrantExpenseItem.new({:registrant_id => self.id, :expense_item_id => registration_item.id})
+    if not reg_paid?
+      ri = registration_item
+      if not ri.nil?
+        items << RegistrantExpenseItem.new({:registrant_id => self.id, :expense_item_id => ri.id})
+      end
     end
 
 
@@ -428,12 +433,8 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-
   def registration_item
-    paid_reg_period = RegistrationPeriod.paid_for_period(self.competitor, self.paid_expense_items)
-    unless paid_reg_period.nil?
-      rp = paid_reg_period
-    else
+    unless reg_paid?
       rp = RegistrationPeriod.relevant_period(Date.today)
     end
 

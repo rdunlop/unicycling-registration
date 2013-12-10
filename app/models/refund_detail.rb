@@ -4,6 +4,13 @@ class RefundDetail < ActiveRecord::Base
   belongs_to :refund
   belongs_to :payment_detail
 
+  after_save :touch_payment_detail
+
+  def touch_payment_detail
+    payment_detail.touch
+  end
+
+
   def to_s
     payment_detail
   end
