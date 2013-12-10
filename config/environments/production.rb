@@ -73,8 +73,13 @@ Workspace::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
 
+# backwards-compatible
+if ENV['ERROR_EMAILS'].nil?
+  ENV['ERROR_EMAILS'] = [ENV['ERROR_EMAIL']]
+end
+
 Workspace::Application.config.middleware.use ExceptionNotification::Rack,
   :email => {
   :email_prefix => "[Registration Exception] ",
-  :exception_recipients => [ENV['ERROR_EMAIL']]
+  :exception_recipients => ENV['ERROR_EMAILS']
 }
