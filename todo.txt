@@ -26,8 +26,11 @@ Registration-Related ToDo
 - create a better footer, which floats, and also contains links to Language-selection
 ---- END ROBIN's CURRENT LIST:
 
+- functional test which shows that registrant_group can be created
+- functional test which shows that creating a competitor registrant can work, and updating a registrant can work
+- functional test which shows that creating a non-competitor can work, and updating a registrant can work
+
 - clear the cache of reg_paid when a refund is created
-- clear the cache when a registration_period is created/updated
 
 - find a way to clear the rails cache before each test 'describe' step?
 - Display the "details" for payment entries of paid entries on various places where it is displayed

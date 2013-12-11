@@ -103,6 +103,6 @@ class RegistrantGroupsController < ApplicationController
   private
   def registrant_group_params
     params.require(:registrant_group).permit(:name, :registrant_id, 
-                                             :registrant_group_members_attributes => [:registrant_id])
+                                             :registrant_group_members_attributes => [:registrant_id, :_destroy, :id])
   end
 end
