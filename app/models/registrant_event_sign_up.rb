@@ -3,6 +3,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
   #validates :event_category, :presence => true, :if  => "signed_up"
   validates :signed_up, :inclusion => {:in => [true, false] } # because it's a boolean
   validate :category_chosen_when_signed_up
+  validates :event_id, :presence => true, :uniqueness => {:scope => [:registrant_id]}
 
   has_paper_trail :meta => { :registrant_id => :registrant_id }
 
