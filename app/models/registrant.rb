@@ -112,41 +112,6 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def has_complex_double_free
-    has_double_free(false)
-  end
-
-  def has_double_free(simple = true)
-    owing = registrant_expense_items.select {|rei| rei.free }.map {|rei| rei.expense_item}
-
-    has_paid_free_item = false
-    all_matching = true
-
-    details = paid_details.where({:free =>true})
-    return false if details.count == 0
-    if details.count != owing.count
-      return false if simple
-      return true if !simple
-    end
-    details.each do |pd|
-
-      has_paid_free_item = true
-      if owing.include?(pd.expense_item)
-        # has a paid item which IS in the owing set
-      else
-        # has a paid item which IS NOT in the owing set
-        all_matching = false
-      end
-    end
-    return false unless has_paid_free_item
-
-    if simple
-      return all_matching
-    else
-      return !all_matching
-    end
-  end
-
   def set_bib_number
     if self.bib_number.nil?
       if self.competitor

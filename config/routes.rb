@@ -44,7 +44,6 @@ Workspace::Application.routes.draw do
 
       resources :registrants, :only => [:index, :show] do
         collection do
-          get :fixing_free
           get :bag_labels
           get :all_summary
           get :email
@@ -52,8 +51,6 @@ Workspace::Application.routes.draw do
         end
         member do
           post :undelete
-          post :create_free_items
-          post :create_free_email
         end
       end
       resources :payments, :only => [:index, :new, :create]  do

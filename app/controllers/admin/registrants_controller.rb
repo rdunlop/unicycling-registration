@@ -7,46 +7,6 @@ class Admin::RegistrantsController < Admin::BaseController
     @registrants = Registrant.unscoped.all
   end
 
-  def fixing_free
-    @registrants = Registrant.all
-  end
-
-  def create_free_email
-    @email_form = Email.new(params[:email])
-    respond_to do |format|
-      if Notifications.send_mass_email(@email_form, [@registrant.user.email]).deliver
-        format.html { redirect_to registrant_path(@registrant), notice: 'Email sent successfully' }
-      else
-        format.html { redirect_to registrant_path(@registrant), error: 'Error sending e-mail' }
-      end
-    end
-  end
-
-  def create_free_items
-    refund = Refund.new
-    refund.user = current_user
-    refund.refund_date = Date.today
-    refund.note = "Free Item fix"
-    registrant_was_valid = @registrant.valid?
-    @registrant.paid_details.where({:free => true}).each do |pd|
-      rd = refund.refund_details.build
-      rd.payment_detail = pd
-      rei = @registrant.registrant_expense_items.build
-      rei.free = true
-      rei.system_managed = false
-      rei.details = nil
-      rei.expense_item = pd.expense_item
-    end
-
-    respond_to do |format|
-      if refund.valid? and registrant_was_valid and refund.save and @registrant.save
-        format.html { redirect_to registrant_path(@registrant), notice: 'Refund successfully created' }
-      else
-        format.html { redirect_to registrant_path(@registrant), error: 'Refund FAILED' }
-      end
-    end
-  end
-
   def find_registrant
     @registrant = Registrant.unscoped.find(params[:id])
   end
