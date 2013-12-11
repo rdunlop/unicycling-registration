@@ -368,6 +368,7 @@ describe RegistrantsController do
       end
       it "can update an existing registrant_choice" do
         put :update, {:id => @reg.id, :registrant => @attributes}
+        @attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
         @attributes[:registrant_choices_attributes][0][:id] = RegistrantChoice.first.id
         put :update, {:id => @reg.id, :registrant => @attributes}
         response.should redirect_to(items_registrant_path(@reg))
