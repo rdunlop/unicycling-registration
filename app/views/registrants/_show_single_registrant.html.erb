@@ -19,7 +19,7 @@
   </div>
   <div class="data_block" style="max-width:450px;">
     <%= render :partial => "/registrants/registrant_expenses" %>
-    <% if can? :update_items, @registrant %>
+    <% if can? :create, RegistrantExpenseItem %>
         <div class="edit_link_block">
             <%= link_to t(".edit_items"), items_registrant_path(@registrant) %>
         </div>

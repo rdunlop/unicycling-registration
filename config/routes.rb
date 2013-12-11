@@ -171,8 +171,6 @@ Workspace::Application.routes.draw do
       end
       member do
         get :items
-        get :items
-        #put :update_items
         get :waiver
       end
       resources :registrant_expenses, :only => [:new, :destroy]

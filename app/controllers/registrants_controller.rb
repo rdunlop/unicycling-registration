@@ -136,20 +136,6 @@ class RegistrantsController < ApplicationController
     @registrant = Registrant.find(params[:id])
   end
 
-  def update_items
-    @registrant = Registrant.find(params[:id])
-
-    respond_to do |format|
-      if @registrant.update_attributes(params[:registrant])
-        format.html { redirect_to @registrant, notice: 'Registrant was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "items" }
-        format.json { render json: @registrant.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # GET /registrants/1/edit
   def edit
     load_categories

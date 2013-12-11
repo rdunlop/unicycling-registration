@@ -91,7 +91,7 @@ class Ability
       can [:all, :waiver], Registrant, :user_id => user.id
 
       unless EventConfiguration.closed? and ENV['ONSITE_REGISTRATION'] != "true"
-        can [:update, :items, :update_items, :destroy], Registrant, :user_id => user.id
+        can [:update, :items, :destroy], Registrant, :user_id => user.id
         #can [:create], RegistrantExpenseItem, :user_id => user.id
         can [:create, :destroy], RegistrantExpenseItem do |rei|
           (not rei.system_managed) and user.registrants.include?(rei.registrant)
