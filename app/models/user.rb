@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   has_many :import_results
   has_many :award_labels
 
+  scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
+  scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
+
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
     [:judge, :admin, :super_admin]
@@ -51,6 +54,7 @@ class User < ActiveRecord::Base
       "No Description Available"
     end
   end
+
   def to_s
     email
   end

@@ -26,7 +26,6 @@ describe User do
       @user.total_owing.should == 50
     end
   end
-
   describe "with related registrants" do
     before(:each) do
       @reg1 = FactoryGirl.create(:competitor, :user => @user)
@@ -36,6 +35,26 @@ describe User do
       @reg1.first_name = "holly"
       @reg1.save
     end
+    describe "only users with registrants" do
+      before(:each) do
+        @other_user = FactoryGirl.create(:user)
+      end
+
+      it "lists only users who have registranst" do
+        User.all_with_registrants.all.should == [@user]
+      end
+    end
+    describe "with a user who is not confirmed" do
+      before(:each) do
+        u = FactoryGirl.create(:user)
+        u.confirmed_at = nil
+        u.save!
+      end
+      it "should not list the non-confirmed user" do
+        User.confirmed.should == [@user]
+      end
+    end
+
     it "orders the registrants by bib_number" do
       # @reg2, being a non-competitor, is a higher bib_number than the other two compeittors
       @user.registrants.should == [@reg1, @reg3, @reg2]
