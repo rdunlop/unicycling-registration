@@ -79,6 +79,7 @@ class CompetitionsController < ApplicationController
   # POST /event_categories/#/competitions.json
   def create
 
+    @event_category.competition = @competition
     @gender_filter = params[:gender_filter]
     registrants = @event_category.signed_up_registrants
     unless @gender_filter.nil? or @gender_filter == "Both"
