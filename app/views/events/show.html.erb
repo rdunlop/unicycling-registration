@@ -1,23 +1,86 @@
 <h1><%= @event %></h1>
+<hr />
 
 <h2>Management</h2>
 <ul>
   <li>Create Competition from Sign-Ups</li>
-  <li>Disable Judging</li>
+  <li>Disable Judging<br />
+  <ul>
+    <% @event.competitions.each do |competition| %>
+      <li>
+      <% if competition.locked? %>
+        <%= link_to "Unlock #{competition}", lock_competition_path(competition), :method => :delete %>
+      <% else %>
+        <%= link_to "Lock #{competition}", lock_competition_path(competition), :method => :post %>
+      <% end %>
+      </li>
+    <% end %>
+  </ul>
+  </li>
+  <li>Manage Judges<br />
+  <ul>
+    <% @event.competitions.each do |competition| %>
+      <li>
+      <%= link_to 'View/Add', competition_judges_path(competition) %>
+      </li>
+    <% end %>
+  </ul>
+  </li>
+  <li>Manage Competition <br />
+  <ul>
+    <% @event.competitions.each do |competition| %>
+      <li><%= link_to "Edit #{competition}", edit_competition_path(competition) %></li>
+      <li><%= link_to "Destroy #{competition}",  competition_path(competition), :method => :delete, :confirm => "Are you sure?" %></li>
+    <% end %>
+  </ul>
+  </li>
+
   <li>Publish Results</li>
 </ul>
 <hr />
 
 <h2>Sign Ups</h2>
-<ul>
-  <li>Print Sign-Ups list</li>
-</ul>
+
+<table class="event_listing">
+  <tr>
+    <th>Event-Category</th>
+    <th>Sign-Ups</th>
+    <th>Associated Competition</th>
+    <th></th>
+  </tr>
+  <% @event.event_categories.each do |ec| %>
+    <tr>
+      <td><%= ec %></td>
+      <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %></td>
+      <td><%= link_to "Create New", new_event_category_competition_path(ec) %></td>
+      <td><%= link_to "Create New (blank)", new_empty_event_competitions_path(@event) %></td>
+    </tr>
+  <% end %>
+</table>
+
 
 <hr />
 <h2>Data Entry</h2>
 <ul>
-  <li>Print Paper Copies</li>
-  <li>Enter Heat Information</li>
+  <% @event.competitions.each do |competition| %>
+    <li>Print Paper Copies for <%= competition %><br />
+    <ul>
+      <li><%= link_to "Announcer Form", announcer_printing_competition_path(competition) %>
+      <%= link_to "(pdf)", announcer_printing_competition_path(competition, :format => :pdf) %></li>
+      <li><%= link_to "Heat Recording", heat_recording_printing_competition_path(competition) %>
+      <%= link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf) %></li>
+      <li><%= link_to "Two Attempt Recording", two_attempt_recording_printing_competition_path(competition) %>
+      <%= link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, :format => :pdf) %></li>
+    </ul>
+    </li>
+  <% end %>
+  <li>Enter Heat Information
+    <ul>
+    <% @event.competitions.each do |competition| %>
+      <li><%= link_to "#{competition} Lane Assignments", competition_lane_assignments_path(competition) %></li>
+    <% end %>
+    </ul>
+  </li>
   <li>Enter Results</li>
   <li>Print Data Checking</li>
 </ul>
@@ -26,6 +89,21 @@
 <h2>Results printing</h2>
 <ul>
   <li>Display/Edit Results</li>
+  <% @event.competitions.each do |competition| %>
+    <li><%= competition %>
+    <ul>
+      <li><%= link_to 'View', results_url(competition) %></li>
+      <li>
+      <%= form_tag(results_printing_competition_path(competition, :format => :pdf), :method => :get) do %>
+        <%= label_tag :no_page_breaks %>
+        <%= check_box_tag :no_page_breaks %><br />
+
+        <%= submit_tag "Print Results" %>
+      <% end %>
+      </li>
+    </ul>
+    </li>
+  <% end %>
 </ul>
 
 <hr />
