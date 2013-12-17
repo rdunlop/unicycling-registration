@@ -130,7 +130,7 @@ Workspace::Application.routes.draw do
 
     resources :event_choices, :except => [:index, :create, :new]
 
-    resources :events, :except => [:index, :new, :show, :create] do
+    resources :events, :except => [:index, :new, :create] do
       resources :event_choices, :only => [:index, :create]
       resources :event_categories, :only => [:index, :create]
       collection do

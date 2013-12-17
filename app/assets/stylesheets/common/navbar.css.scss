@@ -6,6 +6,7 @@ $height: 50px;
 $text: rgb(36, 130, 181);
 $texthover: rgb(255, 255, 255);
 
+
 nav {
  width: 100%;
 }
@@ -97,5 +98,82 @@ nav ul li#sign-out {
   nav ul ul ul {
     position: absolute; left: 100%; top:0;
   }
-    
+
+// NOV 
+nov {
+  .logo {
+    vertical-align: middle;
+  }
+  li#sign-out {
+    float: right;
+    a {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  ul {
+    li:hover {
+      background: $backgroundhover;
+      > a {
+        color: $texthover;
+      }
+    }
+    ul {
+      display: none;
+      z-index: 100;
+      position: absolute;
+      left: 0;
+    }
+    li:hover > ul, ul.current_page {
+      display: block;
+      background-color: white;
+      color: $text;
+      font-size: 10px;
+      a {
+        padding: ($height/4) 10px;
+      }
+    }
+    ul.current_page {
+      z-index: 50;
+    }
+    li {
+      display: inline-block;
+      a, a:visited {
+        display: block;
+        padding: ($height/3) 20px;
+        color: $text;
+        text-decoration: none;
+      }
+      a.current_page {
+        color: red;
+      }
+    }
+    background: $background;
+    width: 100%;
+    padding: 0;
+    margin: 0px;
+    list-style: none;
+    position: relative;
+    display: inline-table;
+    font-size: 14px;
+    max-height: $height;
+  }
+  ul:after {
+    content: ""; 
+    clear: both; 
+    display: block;
+  }
+  display: block;
+  height: $height * 2;
+}
+nav ul ul {
+  overflow: visible;
+  width: auto;
+  background: $background; border-radius: 0px; padding: 0;
+  position: absolute; top: 100%;
+}
+
+nov ul.category_details > li > a.current_page {
+  background-color: red;
+}
 

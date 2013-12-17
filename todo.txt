@@ -61,6 +61,46 @@ Registration-Related ToDo
 - Fix the stylesheet/images issue which is preventing serving any of the up-arrow/down-arrow images in PRODUCTION
 
 
+Categories:
+Data Generating
+Data Gathering
+Data Entry
+
+Team Sports - Freestyle - Muni - Road Racing - Track & Field - Urban
+|
++-> Basketball
++-> Hockey
+
+
+
++->                     +->                 +->                     +->
++->                     +->                 +->                     +->
++->                     +->                 +->                     +->
+
+
+Need:
+- Landing page for each Event, which shows options:
+ *** Sign-up ***
+ - List of competitors who have chosen on registration
+  - by age group, etc
+ - List of heats
+ 
+ *** Data Entry ***
+ - Import (link to page)
+ - See existing results (in imported order, in ?other? order)
+  - abliity to change data
+ - Place competitors
+ - Print options for confirmation (and for posting, and more)
+
+ 
+Feature:
+- Datacheck field
+- Create heats based on inputted data (best -time, etc)
+- Should I change user's sign-ups to reflect changes to the competitor-sign-ups. (so that people see confirmation of changes)
+- Be able to give other users the permissions that THEY have themselves. (Kathleen gives Scott permissions...)
+- Need a way to choose the options for an event (in advance), so that the forms are specific to the event and the data-gathering mechanism.
+
+
 
 
 

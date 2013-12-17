@@ -24,7 +24,20 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
       <a id="dev_banner_remover" href="#" class="banner_remover" data-banner-class="dev_banner" title="Remove dev banner">[x]</a>
     </div>
   <% end %>
-  <nav class="non_printable">
+  <% unless current_user.nil? %>
+    <% if mixpanel? %>
+      <script type="text/javascript">
+        mixpanel.identify("<%= current_user %>");
+        mixpanel.name_tag("<%= current_user %>");
+      </script>
+    <% end %>
+  <% end %>
+
+  <%
+    m = Menu.new
+  %>
+
+  <nov class="non_printable">
     <ul>
       <% if EventConfiguration.configuration_exists? %>
         <% target_url = EventConfiguration.event_url %>
@@ -37,160 +50,128 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
         </li>
       <% end %>
       <% if current_user.nil? %>
-        <li><%= link_to 'Log In', new_user_session_path %></li>
+        <%
+          m.headings << Menu::MenuHeading.new(:title => "Log In", :is_link => true, :url => new_user_session_path)
+        %>
       <% else %>
-          <% if mixpanel? %>
-            <script type="text/javascript">
-              mixpanel.identify("<%= current_user %>");
-              mixpanel.name_tag("<%= current_user %>");
-            </script>
-          <% end %>
-          <%
-            @printed = {}
-            @stored = {}
-            def set_menu_header(header_name, header_contents)
-              @stored[header_name] = header_contents
-              @printed[header_name] = false
+        <%
+          if cannot? :manage, Registrant
+            m.headings << Menu::MenuHeading.new(:title => t('my_registrations'), :is_link => true, :url => registrants_path)
+            m.headings << Menu::MenuHeading.new(:title => t('my_payments'), :is_link => true, :url => payments_path)
+            if @config.standard_skill
+              m.headings << Menu::MenuHeading.new(:title => 'My Standard Skill Routines', :is_link => true, :url => standard_skill_routines_path)
             end
-            def menu_header_if_necessary(header_name)
-              necessary = true unless @printed[header_name]
-              @printed[header_name] = true if necessary
-              return raw(@stored[header_name]) if necessary
+            m.headings << Menu::MenuHeading.new(:title => t('all_registrants'), :is_link => true, :url => all_registrants_path)
+          else
+            heading = Menu::MenuHeading.new(:title => 'My Data')
+            m.headings << heading
+            heading.entries << Menu::MenuEntry.new(:title => 'My Registrations', :url => registrants_path, :active => current_page?(registrants_path))
+            heading.entries << Menu::MenuEntry.new(:title => 'My Payments', :url => payments_path, :active => current_page?(payments_path))
+            if @config.standard_skill
+              heading.entries << Menu::MenuEntry.new(:title => 'My Standard Skill Routines', :url => standard_skill_routines_path, :active => current_page?(standard_skill_routines_path))
             end
-            def menu_footer_if_necessary(header_name)
-              return raw("</ul></li>") if @printed[header_name]
+            heading.entries << Menu::MenuEntry.new(:title => 'All Registrants', :url => all_registrants_path, :active => current_page?(all_registrants_path))
+          end 
+        %>
+
+        <%
+          heading = Menu::MenuHeading.new(:title => 'Site Config')
+          m.headings << heading
+          heading.entries << Menu::MenuEntry.new(:title => 'Base Configuration', :url => event_configurations_path, :active => current_page?(event_configurations_path), :permitted => can?(:manage, EventConfiguration))
+          heading.entries << Menu::MenuEntry.new(:title => 'Registration Periods', :url => registration_periods_path, :active => current_page?(registration_periods_path), :permitted => can?(:manage, RegistrationPeriod))
+          heading.entries << Menu::MenuEntry.new(:title => 'Event Offerings', :url => categories_path, :active => current_page?(categories_path), :permitted => can?(:manage, Category))
+          heading.entries << Menu::MenuEntry.new(:title => 'Age Group Type', :url => admin_age_group_types_path, :active => current_page?(admin_age_group_types_path), :permitted => can?(:manage, AgeGroupType))
+          if @config.standard_skill
+            heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Entries', :url => admin_standard_skill_entries_path, :active => current_page?(admin_standard_skill_entries_path), :permitted => can?(:manage, StandardSkillEntry))
+          end
+          heading.entries << Menu::MenuEntry.new(:title => 'User Permissions', :url => admin_users_path, :active => current_page?(admin_users_path), :permitted => can?(:manage, User))
+          heading.entries << Menu::MenuEntry.new(:title => 'Expense Groups', :url => expense_groups_path, :active => current_page?(expense_groups_path), :permitted => can?(:manage, ExpenseGroup))
+          heading.entries << Menu::MenuEntry.new(:title => 'Expense Items', :url => expense_items_path, :active => current_page?(expense_items_path), :permitted => can?(:manage, ExpenseItem))
+        %>
+        <%
+          heading = Menu::MenuHeading.new(:title => 'Manage')
+          m.headings << heading
+          heading.entries << Menu::MenuEntry.new(:title => 'Registrants (edit/print)', :url => admin_registrants_path, :active => current_page?(admin_registrants_path), :permitted => can?(:manage, Registrant))
+          heading.entries << Menu::MenuEntry.new(:title => 'Registrants (bag labels)', :url => bag_labels_admin_registrants_path, :active => current_page?(bag_labels_admin_registrants_path), :permitted => can?(:manage, Registrant))
+          heading.entries << Menu::MenuEntry.new(:title => 'Registrants (email)', :url => email_admin_registrants_path, :active => current_page?(email_admin_registrants_path), :permitted => can?(:manage, Registrant))
+          heading.entries << Menu::MenuEntry.new(:title => 'Registrant Groups', :url => registrant_groups_path, :active => current_page?(registrant_groups_path), :permitted => can?(:manage, Registrant))
+          heading.entries << Menu::MenuEntry.new(:title => 'Payments', :url => summary_admin_payments_path, :active => current_page?(summary_admin_payments_path), :permitted => can?(:manage, Registrant))
+          heading.entries << Menu::MenuEntry.new(:title => 'Paid Payment Detail', :url => details_admin_payments_path, :active => current_page?(details_admin_payments_path), :permitted => can?(:manage, Registrant))
+          heading.entries << Menu::MenuEntry.new(:title => 'Events Report', :url => admin_events_path, :active => current_page?(admin_events_path), :permitted => can?(:manage, Registrant))
+          heading.entries << Menu::MenuEntry.new(:title => 'Chief Judges', :url => chiefs_judges_path, :active => current_page?(chiefs_judges_path), :permitted => can?(:manage, Judge))
+          heading.entries << Menu::MenuEntry.new(:title => 'UCP Export/Import', :url => admin_export_index_path, :active => current_page?(admin_export_index_path), :permitted => can?(:manage, :all))
+          heading.entries << Menu::MenuEntry.new(:title => 'Modification History', :url => rails_admin_path, :active => current_page?(rails_admin_path), :permitted => can?(:access, :rails_admin))
+          if @config.standard_skill
+            heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (view)', :url => standard_skill_routines_path, :active => current_page?(standard_skill_routines_path), :permitted => can?(:manage, StandardSkillRoutine))
+            heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (export)', :url => download_file_admin_standard_skill_routines_path, :active => current_page?(download_file_admin_standard_skill_routines_path), :permitted => can?(:manage, StandardSkillRoutine))
+          end
+        %>
+        <%
+          heading = Menu::MenuHeading.new(:title => 'Awards (old)')
+          m.headings << heading
+          heading.entries << Menu::MenuEntry.new(:title => 'Print/Create Awards', :url => user_award_labels_path(current_user), :active => current_page?(user_award_labels_path(current_user)), :permitted => can?(:manage, AwardLabel))
+        %>
+        <%
+          heading = Menu::MenuHeading.new(:title => 'Judging (old)')
+          m.headings << heading
+          heading.entries << Menu::MenuEntry.new(:title => 'My Events', :url => judging_events_path, :active => current_page?(judging_events_path), :permitted => can?(:judging, Event))
+          heading.entries << Menu::MenuEntry.new(:title => 'Freestyle', :url => freestyle_events_path, :active => current_page?(freestyle_events_path), :permitted => can?(:freestyle, Event))
+          heading.entries << Menu::MenuEntry.new(:title => 'Flatland', :url => flatland_events_path, :active => current_page?(flatland_events_path), :permitted => can?(:freestyle, Event))
+          heading.entries << Menu::MenuEntry.new(:title => 'Street', :url => street_events_path, :active => current_page?(street_events_path), :permitted => can?(:freestyle, Event))
+          heading.entries << Menu::MenuEntry.new(:title => 'Timed', :url => distance_events_path, :active => current_page?(distance_events_path), :permitted => can?(:freestyle, Event))
+          heading.entries << Menu::MenuEntry.new(:title => 'Externally Ranked', :url => ranked_events_path, :active => current_page?(ranked_events_path), :permitted => can?(:freestyle, Event))
+          heading.entries << Menu::MenuEntry.new(:title => 'High/Long', :url => track_events_path, :active => current_page?(track_events_path), :permitted => can?(:freestyle, Event))
+          heading.entries << Menu::MenuEntry.new(:title => 'Printing', :url => printing_race_recording_list_path, :active => current_page?(printing_race_recording_list_path), :permitted => can?(:freestyle, Event))
+        %>
+        <%
+          Category.all.each do |category|
+            current_heading = Menu::MenuHeading.new(:title => category)
+            m.headings << current_heading
+            category.events.each do |event|
+              current_heading.entries << Menu::MenuEntry.new(:title => event, :url => event_path(event), :active => current_page?(event_path(event)), :permitted => can?(:manage, event))
             end
-          %>
-
-          <% set_menu_header("data","<li>" + link_to( 'Data', '#') + "<ul>") %>
-            <% if can? :manage, :all %>
-              <%= menu_header_if_necessary("data") %>
-              <li><%= link_to 'UCP Export/Import', admin_export_index_path %></li>
-            <% end %>
-            <% if can? :access, :rails_admin %>
-              <%= menu_header_if_necessary("data") %>
-              <li><%= link_to 'Modification History', rails_admin_path %></li>
-            <% end %>
-            <% if @config.standard_skill %>
-              <% if can? :manage, StandardSkillRoutine %>
-                <%= menu_header_if_necessary("data") %>
-                <li><%= link_to 'Standard Skill Routines (view)', standard_skill_routines_path %></li>
-                <li><%= link_to 'Standard Skill Routines (export)', download_file_admin_standard_skill_routines_path %></li>
-              <% end %>
-            <% end %>
-          <%= menu_footer_if_necessary("data") %>
-
-          <% set_menu_header("siteconfig","<li>" + link_to( 'Site Config', '#') + "<ul>") %>
-            <% if can? :manage, EventConfiguration %>
-              <%= menu_header_if_necessary("siteconfig") %>
-              <li><%= link_to 'Base Configuration', event_configurations_path %></li>
-            <% end %>
-            <% if can? :manage, RegistrationPeriod %>
-              <%= menu_header_if_necessary("siteconfig") %>
-              <li><%= link_to 'Registration Periods', registration_periods_path %></li>
-            <% end %>
-            <% if can? :manage, Category %>
-              <%= menu_header_if_necessary("siteconfig") %>
-              <li><%= link_to 'Event Offerings', categories_path %></li>
-            <% end %>
-            <% if can? :manage, AgeGroupType %>
-              <%= menu_header_if_necessary("siteconfig") %>
-              <li><%= link_to 'Age Group Type', admin_age_group_types_path %></li>
-            <% end %>
-            <% if @config.standard_skill %>
-              <% if can? :manage, StandardSkillEntry %>
-                <%= menu_header_if_necessary("siteconfig") %>
-                <li><%= link_to 'Standard Skill Entries', admin_standard_skill_entries_path %></li>
-              <% end %>
-            <% end %>
-            <% if can? :manage, User %>
-              <%= menu_header_if_necessary("siteconfig") %>
-              <li><%= link_to 'User Permissions', admin_users_path %></li>
-            <% end %>
-            <% if can? :manage, ExpenseGroup %>
-              <%= menu_header_if_necessary("siteconfig") %>
-              <li><%= link_to 'Expense Groups', expense_groups_path %></li>
-            <% end %>
-            <% if can? :manage, ExpenseItem %>
-              <%= menu_header_if_necessary("siteconfig") %>
-              <li><%= link_to 'Expense Items', expense_items_path %></li>
-            <% end %>
-          <%= menu_footer_if_necessary("siteconfig") %>
-
-          <% set_menu_header("manage","<li>" + link_to( 'Manage', '#') + "<ul>") %>
-            <% if can? :manage, Registrant %>
-              <%= menu_header_if_necessary("manage") %>
-              <li><%= link_to 'Registrants (edit)', admin_registrants_path %></li>
-              <li><%= link_to 'Registrants (print)', admin_registrants_path %></li>
-              <li><%= link_to 'Registrants (bag labels)', bag_labels_admin_registrants_path %></li>
-              <li><%= link_to 'Registrants (email)', email_admin_registrants_path %></li>
-              <li><%= link_to 'Registrant Groups', registrant_groups_path %></li>
-            <% end %>
-            <% if can? :manage, Registrant %>
-              <%= menu_header_if_necessary("manage") %>
-              <li><%= link_to 'Payments', summary_admin_payments_path %></li>
-              <li><%= link_to 'Paid Payment Detail', details_admin_payments_path %></li>
-            <% end %>
-            <% if can? :manage, Registrant %>
-              <%= menu_header_if_necessary("manage") %>
-              <li><%= link_to 'Events Report', admin_events_path %></li>
-            <% end %>
-            <% if can? :manage, Judge %>
-              <%= menu_header_if_necessary("manage") %>
-              <li><%= link_to 'Chief Judges', chiefs_judges_path %></li>
-            <% end %>
-          <%= menu_footer_if_necessary("manage") %>
-
-          <% set_menu_header("awards","<li>" + link_to( 'Awards', '#') + "<ul>") %>
-            <% if can? :manage, AwardLabel %>
-              <%= menu_header_if_necessary("awards") %>
-              <li><%= link_to 'Print/Create Awards ', user_award_labels_path(current_user) %></li>
-            <% end %>
-          <%= menu_footer_if_necessary("awards") %>
-          <% set_menu_header("scores","<li>" + link_to( 'Judging', '#') + "<ul>") %>
-            <% if can? :judging, Event %>
-              <%= menu_header_if_necessary("scores") %>
-              <li><%= link_to 'My Events', judging_events_path %></li>
-            <% end %>
-            <% if can? :freestyle, Event %>
-              <%= menu_header_if_necessary("scores") %>
-              <li><%= link_to 'Freestyle', freestyle_events_path %></li>
-              <li><%= link_to 'Flatland', flatland_events_path %></li>
-              <li><%= link_to 'Street', street_events_path %></li>
-              <li><%= link_to 'Timed', distance_events_path %></li>
-              <li><%= link_to 'Externally Ranked', ranked_events_path %></li>
-              <li><%= link_to 'High/Long', track_events_path %></li>
-              <li><%= link_to 'Printing', printing_race_recording_list_path %></li>
-            <% end %>
-          <%= menu_footer_if_necessary("scores") %>
-
-          <% if cannot? :manage, Registrant %>
-            <li><%= link_to t('my_registrations'), registrants_path %></li>
-            <li><%= link_to t('my_payments'), payments_path %></li>
-            <% if @config.standard_skill %>
-              <li><%= link_to 'My Standard Skill Routines', standard_skill_routines_path %></li>
-            <% end %>
-            <li><%= link_to t('all_registrants'), all_registrants_path %></li>
-          <% else %>
-            <li>
-            <%= link_to 'My Data', '#' %>
-            <ul>
-              <li><%= link_to 'My Registrations', registrants_path %></li>
-              <li><%= link_to 'My Payments', payments_path %></li>
-              <% if @config.standard_skill %>
-                <li><%= link_to 'My Standard Skill Routines', standard_skill_routines_path %></li>
-              <% end %>
-              <li><%= link_to 'All Registrants', all_registrants_path %></li>
-            </ul>
-            </li>
-          <% end %>
-
-          <% unless current_user.nil? %>
-            <li id="sign-out"><%= link_to t('sign_out'), destroy_user_session_path, :method => :delete %></li>
-          <% end %>
+          end
+        %>
       <% end %>
+      <% m.headings.each do |heading| %>
+        <% next unless heading.has_permitted_entry %>
+        <% if heading.is_link %>
+          <% if current_page?(heading.url) %>
+            <li><%= link_to heading.title, heading.url, {:class => "current_page"} %></li>
+          <% else %>
+            <li><%= link_to heading.title, heading.url %></li>
+          <% end %>
+        <% else %>
+          <% if heading.active %>
+            <li class="current_page"><a href="#" class="current_page"><%= heading.title %></a>
+            <ul class="current_page">
+         <% else %>
+           <li><a href="#"><%= heading.title %></a>
+           <ul>
+         <% end %>
+         <% 
+           heading.entries.each do |entry|
+             attrs = {}
+             if entry.active
+               attrs[:class] = "current_page"
+             end
+             unless entry.permitted
+               attrs[:disabled] = true
+             end
+           %>
+           <li><%= link_to entry.title, entry.url, attrs %></li>
+         <% end %>
+          </ul>
+         </li>
+       <% end %>
+     <% end %>
+
+     <% unless current_user.nil? %>
+       <li id="sign-out"><%= link_to t('sign_out'), destroy_user_session_path, :method => :delete %></li>
+     <% end %>
     </ul>
-    </nav>
+    </nov>
+
     <% if !current_user.nil? and  @config.test_mode %>
       <div class="test_mode">
         <a id="test_mode_remover" href="#" class="banner_remover" data-banner-class="test_mode" title="Remove test banner">[x]</a>

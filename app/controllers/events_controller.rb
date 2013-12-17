@@ -25,9 +25,11 @@ class EventsController < ApplicationController
     end
   end
 
+  # GET /events/1
+  def show
+  end
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
   end
 
   # POST /events
