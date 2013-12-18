@@ -37,7 +37,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     m = Menu.new
   %>
 
-  <nov class="non_printable">
+  <nav class="non_printable">
     <ul>
       <% if EventConfiguration.configuration_exists? %>
         <% target_url = EventConfiguration.event_url %>
@@ -170,7 +170,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
        <li id="sign-out"><%= link_to t('sign_out'), destroy_user_session_path, :method => :delete %></li>
      <% end %>
     </ul>
-    </nov>
+    </nav>
 
     <% if !current_user.nil? and  @config.test_mode %>
       <div class="test_mode">

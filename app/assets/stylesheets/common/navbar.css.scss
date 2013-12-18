@@ -8,99 +8,6 @@ $texthover: rgb(255, 255, 255);
 
 
 nav {
- width: 100%;
-}
-
-nav ul ul {
-  display: none;
-  z-index: 100;
-}
-
-  nav ul li:hover > ul {
-    display: block;
-  }
-
-
-nav ul {
-  background: $background;
-  width: 100%;
-  padding: 0;
-  margin: 0px;
-  list-style: none;
-  position: relative;
-  display: inline-table;
-  font-size: 14px;
-  max-height: $height;
-}
-  nav ul:after {
-    content: ""; clear: both; display: block;
-  }
-
-  nav ul li {
-    float: left;
-  }
-    nav ul li:hover {
-      background: $backgroundhover;
-    }
-      nav ul li:hover a {
-        background: $backgroundhover;
-        color: $texthover;
-      }
-  nav ul li:hover a.logo_link {
-    background: $background; 
-    }
-
-nav ul li#sign-out {
-    float: right;
-    a {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-}   
- nav .logo_link {
-  padding: 7px 7px 0 20px;
-}
-   
-    
-    nav ul li a,
-    nav ul li a:visited {
-      display: block; padding: ($height/3) 40px;
-      color: $text; text-decoration: none;
-    }
-      
-    
-  nav ul ul {
-    overflow: visible;
-    width: auto;
-    background: $background; border-radius: 0px; padding: 0;
-    position: absolute; top: 100%;
-  }
-    nav ul ul li {
-      background: $background;
-      float: none; 
-      border-top: 1px solid $submenudivider;
-      position: relative;
-    }
-      nav ul ul li a,
-      nav ul ul li a:visited,
-      nav ul li:hover ul li a {
-        text-align:center;
-        background: $background;
-        padding: ($height/4) 40px;
-        color: $text;
-      } 
-        nav ul ul li a:hover,
-        nav ul li:hover ul li a:hover {
-          background: $backgroundhover;
-          color: $texthover;
-        }
-    
-  nav ul ul ul {
-    position: absolute; left: 100%; top:0;
-  }
-
-// NOV 
-nov {
   .logo {
     vertical-align: middle;
   }
@@ -121,6 +28,7 @@ nov {
     ul {
       display: none;
       z-index: 100;
+      overflow: visible;
       position: absolute;
       left: 0;
     }
@@ -146,6 +54,8 @@ nov {
       }
       a.current_page {
         color: red;
+        background: $backgroundhover;
+        color: $texthover;
       }
     }
     background: $background;
@@ -165,15 +75,5 @@ nov {
   }
   display: block;
   height: $height * 2;
-}
-nav ul ul {
-  overflow: visible;
-  width: auto;
-  background: $background; border-radius: 0px; padding: 0;
-  position: absolute; top: 100%;
-}
-
-nov ul.category_details > li > a.current_page {
-  background-color: red;
 }
 

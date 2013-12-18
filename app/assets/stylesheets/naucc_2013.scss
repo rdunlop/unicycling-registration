@@ -59,7 +59,7 @@ nav ul {
       border-top: 1px solid $submenudivider;
     }
       nav ul ul li a,
-      nav ul ul li a:visited,
+      nav ul ul li a:not(.current_page):visited,
       nav ul li:hover ul li a {
         background: $backgroundgrad;
         color: $text;
