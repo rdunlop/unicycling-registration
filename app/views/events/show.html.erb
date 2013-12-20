@@ -1,6 +1,108 @@
 <h1><%= @event %></h1>
 <hr />
 
+
+<table class="event_listing">
+  <thead>
+    <tr>
+      <th>Event-Category</th>
+      <th>Sign-Ups</th>
+      <th># Signed Up</th>
+      <th colspan="2">Create Competition</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event.event_categories.each do |ec| %>
+      <tr>
+        <td><%= ec %></td>
+        <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %></td>
+        <td><%= ec.signed_up_registrants.count %></td>
+        <td><%= link_to "Create New", new_event_category_competition_path(ec) %></td>
+        <td><%= link_to "Create New (blank)", new_empty_event_competitions_path(@event) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr />
+
+<h2>Competitions</h2>
+
+<%
+  case @event.event_class
+  when "Freestyle"
+    import = false
+    judges = true
+  when "Flatland"
+    import = false
+    judges = true
+  when "Street"
+    import = false
+    judges = true
+  when "Two Attempt Distance"
+    import = true
+    judges = true
+  when "Distance"
+    import = true
+    judges = false
+  when "Ranked"
+    import = true
+    judges = false
+  end
+%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Competition</th>
+      <th></th>
+      <th></th>
+      <th>Competitor List</th>
+      <th>Locked?</th>
+      <% if import %>
+        <th>Import Results</th>
+      <% end %>
+      <th>Results</th>
+      <th>Print</th>
+      <% if judges %>
+        <th>Judges</th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event.competitions.each do |ec| %>
+      <tr>
+        <td><%= ec %></td>
+        <td><%= link_to 'Edit', edit_competition_path(ec) %></td>
+        <td><%= link_to 'Destroy',  competition_path(ec), :method => :delete, :confirm => "Are you sure?" %></td>
+
+        <td><%= link_to 'Competitors', competition_competitors_path(ec) %></td>
+        <td><%= ec.locked? %>
+          <% if can? :lock, @event %>
+            <% if ec.locked? %>
+              <%= link_to 'Unlock', lock_competition_path(ec), :method => :delete %>
+            <% else %>
+              <%= link_to 'Lock', lock_competition_path(ec), :method => :post %>
+            <% end %>
+          <% end %>
+        </td>
+        <% if import %>
+          <td><%= link_to 'Import Results', user_import_results_path(current_user) %></td>
+        <% end %>
+        <td><%= link_to 'View', results_url(ec) %></td>
+        <td><%= link_to "Results", results_printing_competition_path(ec, :format => :pdf) %></td>
+        <% if judges %>
+          <td><%= link_to 'View/Add', competition_judges_path(ec) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr />
+
 <h2>Management</h2>
 <ul>
   <li>Create Competition from Sign-Ups</li>
@@ -41,22 +143,7 @@
 
 <h2>Sign Ups</h2>
 
-<table class="event_listing">
-  <tr>
-    <th>Event-Category</th>
-    <th>Sign-Ups</th>
-    <th>Associated Competition</th>
-    <th></th>
-  </tr>
-  <% @event.event_categories.each do |ec| %>
-    <tr>
-      <td><%= ec %></td>
-      <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %></td>
-      <td><%= link_to "Create New", new_event_category_competition_path(ec) %></td>
-      <td><%= link_to "Create New (blank)", new_empty_event_competitions_path(@event) %></td>
-    </tr>
-  <% end %>
-</table>
+see above
 
 
 <hr />

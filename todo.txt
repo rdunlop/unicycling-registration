@@ -44,7 +44,6 @@ Registration-Related ToDo
 - Check to see that all of the Controllers are using Registrant.order(...) correctly (it's overridden by the default_scope). 
 - Replace the current AwardLabel model with the new one (so that we can clean up the AwardLabel generation logic)
 - Identify all remaining non-translated texts, and put them into the locale files for english and french (and send them to Hugo)
-- Only send e-mails to confired users (not those with invalid e-mail addresses).
 - Provide Rolf with a view which shows him the Teams/Team captains, etc
 - Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
 - Update the Admin functions for when users are "Admin"....mostly read-only.

@@ -18,22 +18,3 @@
 padding: 2px 5px
 }
 
-.event_listing td:first-child { 
-  text-align: right; 
-}
-
-.event_listing th:first-child { 
-  text-align: right; 
-}
-
-.event_listing td:first-child + td { 
-  text-align: left; 
-}
-
-.event_listing tr:first-child td {  
-  padding-bottom: 10px;
-}
-
-.event_listing tr:first-child th:first-child { 
-  text-align: center; 
-}
