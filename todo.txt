@@ -9,6 +9,7 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
+- .env template?
 - ensure translations work with strong_parameters
 - limit rooms to 1000 (total), with a warning function at 80%?
 - add documentation to methods as per: http://globaldev.co.uk/2013/10/ruby-tips-part-4/
