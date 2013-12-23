@@ -1,0 +1,191 @@
+
+/*
+ * This is a manifest file that'll be compiled into unicon_17.css, which will include all the files
+ * listed below incluing all common styles.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * Add Unicon 17 specific styles here. They will override common styles.
+ *
+ *= require_self
+ *= require font-kit-rails
+ */
+
+ $yellow: rgb(150, 255, 0);
+ $blue: rgb(0, 255, 255);
+
+$background: rgb(40, 40, 40);
+$backgroundsub: rgb(40, 40, 40);
+$backgroundhover: rgb(102, 102, 102);
+$submenudivider: rgb(120, 120, 120);
+$text: rgb(255, 255, 255);
+$texthover: rgb(255, 255, 255);
+$unicon-pink: rgb(102, 255, 255);
+$unicon-pink-active: rgb(0, 255, 255);
+$unicon-blue: rgb(0, 0, 0);
+$red: rgb(255, 0, 0);
+$red-hover: rgb(255, 0, 0);
+$red-active: rgb(220, 0, 0);
+
+nav ul {
+  background: $background; 
+}
+    nav ul li:hover {
+      background: $backgroundhover;
+    }
+      nav ul li:hover a {
+        background: $backgroundhover;
+        color: $texthover;
+      }
+
+  nav ul li:hover a.logo_link {
+    background: $background;     
+    }
+
+    nav ul li a,
+    nav ul li a:visited {
+      color: $text;
+    }
+      
+    
+  nav ul ul {
+    background: $backgroundsub;
+  }
+    nav ul ul li {
+      background: $background;
+      border-top: 1px solid $submenudivider;
+    }
+      nav ul ul li a,
+      nav ul ul li a:not(.current_page):visited,
+      nav ul li:hover ul li a {
+        background: $background;
+        color: $text;
+      } 
+        nav ul ul li a:hover,
+        nav ul li:hover ul li a:hover {
+          background: $backgroundhover;
+          color: $texthover;
+        }
+
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+min-width: 70px;
+}
+
+.competitor,
+.noncompetitor {
+background-color: $unicon-blue;
+}
+
+.competitor:hover,
+.noncompetitor:hover {
+background-color: $unicon-pink;
+color: black;
+}
+
+.competitor:active,
+.noncompetitor:active {
+background-color: $unicon-pink-active;
+}
+
+.competitor_link,
+.competitor_link:visited,
+.noncompetitor_link,
+.noncompetitor_link:visited {
+  color: black;
+  text-decoration: underline;
+}
+.competitor_link:hover,
+.noncompetitor_link:hover {
+  color: $unicon-pink;
+}
+
+.focus_button,
+.nonfocus_button,
+.focus_button:visited,
+.nonfocus_button:visited {
+  background-color: $unicon-blue;
+  color: black;
+}
+
+.focus_button:hover,
+.nonfocus_button:hover {
+  color: black;
+  background-color: $unicon-pink;
+}
+.focus_button:active,
+.nonfocus_button:active {
+  background-color: $unicon-pink-active;
+
+}
+
+.current_reg_period {
+  background-color: #fff;
+  color: $red;
+  font-weight: bolder;
+}
+
+.registration_closes_notice {
+  height: 40px;
+  vertical-align: bottom;
+  color: black;
+}
+
+.unpaid,
+.paid {
+  color: black;
+  font-weight: bolder;
+}
+
+.external_link,
+.external_link:visited {
+  color: blue;
+}
+.external_link:hover {
+  color: $red;
+}
+
+.base_details .title {
+  font-size: 40px;
+  padding: 20px;
+}
+
+input.free_item {
+  border: none;
+  color: white;
+  background-color: $unicon-pink;
+}
+
+input.cost_item {
+  border: none;
+  color: white;
+  background-color: $unicon-blue;
+}
+
+input.cost_item:hover {
+  background-color: $unicon-pink;
+}
+
+input.free_item:active,
+input.cost_item:active,
+input.free_item:hover {
+  background-color: $unicon-pink-active;
+}
+
+.payment_link,
+input.delete,
+input.sold_out {
+  background-color: $red;
+}
+.payment_link:hover,
+input.delete:hover,
+input.sold_out:hover {
+  background-color:$red-hover;
+  color:black;
+}
+.payment_link:active,,
+input.delete:active,
+input.sold_out:active {
+  background-color: $red-active;
+}
