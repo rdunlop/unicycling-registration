@@ -29,13 +29,23 @@
 </p>
 
 <p>
+  <b>Print Waiver:</b>
+  <%= @event_configuration.has_print_waiver %>
+</p>
+
+<p>
   <b>Waiver url:</b>
   <%= @event_configuration.waiver_url %>
 </p>
 
 <p>
-  <b>Waiver:</b>
-  <%= @event_configuration.waiver %>
+  <b>Online Waiver:</b>
+  <%= @event_configuration.has_online_waiver %>
+</p>
+
+<p>
+  <b>Online Waiver Text:</b>
+  <%= @event_configuration.online_waiver_text %>
 </p>
 
 <p>

@@ -12,7 +12,8 @@ class EventConfiguration < ActiveRecord::Base
 
   validates :style_name, :inclusion => {:in => self.style_names, :allow_blank => true }
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :waiver, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :has_print_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :usa, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :iuf, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
@@ -23,7 +24,8 @@ class EventConfiguration < ActiveRecord::Base
 
   def init
     self.test_mode = true if self.test_mode.nil?
-    self.waiver = true if self.waiver.nil?
+    self.has_print_waiver = false if self.has_print_waiver.nil?
+    self.has_online_waiver = false if self.has_online_waiver.nil?
     self.usa = true if self.usa.nil?
     self.iuf = false if self.iuf.nil?
     self.standard_skill = true if self.standard_skill.nil?
@@ -134,12 +136,30 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
-  def self.waiver
+  def self.has_print_waiver
     ec = EventConfiguration.first
-    if ec.nil? or ec.waiver.nil?
+    if ec.nil? or ec.has_print_waiver.nil?
       false
     else
-      ec.waiver
+      ec.has_print_waiver
+    end
+  end
+
+  def self.has_online_waiver
+    ec = EventConfiguration.first
+    if ec.nil? or ec.has_online_waiver.nil?
+      false
+    else
+      ec.has_online_waiver
+    end
+  end
+
+  def self.online_waiver_text
+    ec = EventConfiguration.first
+    if ec.nil? or ec.online_waiver_text.nil? or ec.online_waiver_text.empty?
+      "This is where your online waiver text would go."
+    else
+      ec.online_waiver_text
     end
   end
 

@@ -76,6 +76,8 @@ en:
       other_phone: "Other phone"
       responsible_adult: "Responsible Adult"
       responsible_adult_detail: "(for Registrants Under the age of 18)"
+    online_waiver:
+      online_waiver_signature: "Signature: "
     new_expense:
       add_free_item: "Add FREE Item"
       one_is_free: "One is free with your registration"

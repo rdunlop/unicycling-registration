@@ -19,6 +19,8 @@ class Registrant < ActiveRecord::Base
   validates :responsible_adult_name, :responsible_adult_phone, :presence => true, :if => :minor?
   validate :no_payments_when_deleted
 
+  validates :online_waiver_signature, :presence => true
+
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
   belongs_to :user
