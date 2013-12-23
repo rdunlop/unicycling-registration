@@ -7,7 +7,7 @@ class EventConfiguration < ActiveRecord::Base
   validates :comp_noncomp_url, :format => URI::regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
 
   def self.style_names
-    ["unicon_17", "naucc_2013"]
+    ["unicon_17", "naucc_2013", "naucc_2014"]
   end
 
   validates :style_name, :inclusion => {:in => self.style_names, :allow_blank => true }
