@@ -27,6 +27,12 @@ class User < ActiveRecord::Base
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
 
+  # get all users who have registrants with unpaid fees
+  def self.unpaid_reg_fees
+    registrants = Registrant.all.select { |reg| !reg.reg_paid? }
+    users = registrants.map { |reg| reg.user }.flatten.uniq
+  end
+
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
     [:judge, :admin, :super_admin]

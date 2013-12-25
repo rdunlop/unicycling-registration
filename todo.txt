@@ -9,6 +9,8 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
+- Fix the Import bug which breaks the id generator (scott did this, again)
+- Add new "num free" column to the Payments#summary page
 - .env template?
 - ensure translations work with strong_parameters
 - limit rooms to 1000 (total), with a warning function at 80%?

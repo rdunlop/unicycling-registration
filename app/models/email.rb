@@ -2,7 +2,7 @@ class Email
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  attr_accessor :subject, :body, :email_addresses
+  attr_accessor :subject, :body, :confirmed_accounts, :unpaid_reg_accounts
   validates_presence_of :subject, :body
 
   def initialize(attributes = {})
@@ -11,28 +11,13 @@ class Email
     end
   end
 
-  def email_addresses=(value)
-    @email_addresses = value
-  end
-
   def email_addresses
-    @email_addresses
-  end
-
-  def subject=(value)
-    @subject = value
-  end
-
-  def subject
-    @subject
-  end
-
-  def body=(value)
-    @body = value
-  end
-
-  def body
-    @body
+    if self.confirmed_accounts
+      return User.confirmed.map{|user| user.email }
+    end
+    if self.unpaid_reg_accounts
+      return User.unpaid_reg_fees.map{|user| user.email }
+    end
   end
 
   def persisted?
