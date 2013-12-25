@@ -19,6 +19,11 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  def load_online_waiver
+    @has_online_waiver = EventConfiguration.has_online_waiver
+    @online_waiver_text = EventConfiguration.online_waiver_text
+  end
+
   # GET /registrants
   # GET /registrants.json
   def index
@@ -28,10 +33,9 @@ class RegistrantsController < ApplicationController
     @display_invitation_manage_banner = current_user.invitations.permitted.count > 0
     @user = current_user
     @has_print_waiver = EventConfiguration.has_print_waiver
-    @has_online_waiver = EventConfiguration.has_online_waiver
-    @online_waiver_text = EventConfiguration.online_waiver_text
     @usa_event = EventConfiguration.usa
     @iuf_event = EventConfiguration.iuf
+    load_online_waiver
 
     respond_to do |format|
       format.html # index.html.erb
@@ -99,8 +103,7 @@ class RegistrantsController < ApplicationController
   def show
     @has_minor = current_user.has_minor?
     @has_print_waiver = EventConfiguration.has_print_waiver
-    @has_online_waiver = EventConfiguration.has_online_waiver
-    @online_waiver_text = EventConfiguration.online_waiver_text
+    load_online_waiver
     @usa_event = EventConfiguration.usa
     @iuf_event = EventConfiguration.iuf
 
@@ -116,8 +119,7 @@ class RegistrantsController < ApplicationController
   def new
     @registrant = Registrant.new
     @registrant.competitor = true
-    @has_online_waiver = EventConfiguration.has_online_waiver
-    @online_waiver_text = EventConfiguration.online_waiver_text
+    load_online_waiver
     load_categories
     load_other_reg
 
@@ -145,16 +147,13 @@ class RegistrantsController < ApplicationController
   # GET /registrants/1/edit
   def edit
     load_categories
-    @has_online_waiver = EventConfiguration.has_online_waiver
-    @online_waiver_text = EventConfiguration.online_waiver_text
+    load_online_waiver
   end
 
   # POST /registrants
   # POST /registrants.json
   def create
     @registrant.user = current_user
-    @has_online_waiver = EventConfiguration.has_online_waiver
-    @online_waiver_text = EventConfiguration.online_waiver_text
 
     respond_to do |format|
       if @registrant.save
@@ -162,6 +161,7 @@ class RegistrantsController < ApplicationController
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
         load_categories
+        load_online_waiver
         format.html { render action: "new" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end
@@ -171,8 +171,6 @@ class RegistrantsController < ApplicationController
   # PUT /registrants/1
   # PUT /registrants/1.json
   def update
-    @has_online_waiver = EventConfiguration.has_online_waiver
-    @online_waiver_text = EventConfiguration.online_waiver_text
 
     respond_to do |format|
       if @registrant.update_attributes(registrant_update_params)
@@ -180,6 +178,7 @@ class RegistrantsController < ApplicationController
         format.json { head :no_content }
       else
         load_categories
+        load_online_waiver
         format.html { render action: "edit" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end
