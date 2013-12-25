@@ -16,6 +16,8 @@ if Rails.env.development?
     def self.delivering_email(mail)
       mail.body = "DEVELOPMENT-OVERRIDE. Was being sent to #{mail.to} bcc: #{mail.bcc}\n" + mail.body.to_s
       mail.to = ENV['ERROR_EMAIL']
+      mail.cc = nil
+      mail.bcc = nil
     end
   end
   ActionMailer::Base.register_interceptor(OverrideMailRecipient)
