@@ -49,4 +49,4 @@
     <%= link_to t('.done'), registrants_path, {:class => "noncompetitor registration_button"} %>
   <% end %>
 </div>
-<% if @waiver %><%= render :partial => "/registrants/waiver" %><% end %>
+<% if @has_print_waiver %><%= render :partial => "/registrants/waiver" %><% end %>
