@@ -132,6 +132,7 @@ class RegistrantsController < ApplicationController
   def new_noncompetitor
     @registrant = Registrant.new
     @registrant.competitor = false
+    load_online_waiver
     load_other_reg
 
     respond_to do |format|

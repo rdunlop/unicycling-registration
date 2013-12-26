@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby "1.9.3"
-gem 'rails', '3.2.15'
+gem 'rails', '3.2.16'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -34,7 +34,7 @@ gem 'pg'
 
 group :development, :test, :cucumber do
   gem 'bullet'
-  gem 'brakeman'
+  #gem 'brakeman'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'spork-rails'

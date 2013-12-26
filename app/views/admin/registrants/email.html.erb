@@ -1,18 +1,49 @@
 <h1>Email multiple people</h1>
 
-<h2>Send the registrants an e-mail</h2>
+<h2>Send some users an e-mail</h2>
 
-Note: It may take many seconds to send the e-mail to everyone (it's a large number of e-mail addresses)
+Note: It may take many seconds to send the e-mail to everyone (if it's a large number of e-mail addresses)
+
+<p>You can use the options to choose a subset of user accounts to send e-mail to</p>
 
 <h4>E-mail</h4>
 <%= render :partial => "/shared/error_messages", :object => @email_form %>
 <%= form_for @email_form, url: send_email_admin_registrants_path do |f| %>
-  <%= f.label :email_addresses %>
-  <%= f.select :email_addresses, User.confirmed.map{|user| user.email }, {}, {:multiple => true, :size => 10} %>
+  <%= f.label :confirmed_accounts, "All User Accounts" %>
+  <%= f.check_box :confirmed_accounts %><br />
+  <%= f.label :unpaid_reg_accounts, "With Not Yet Paid Registration Fees" %>
+  <%= f.check_box :unpaid_reg_accounts %><br />
   <%= f.label :subject %>
   <%= f.text_field :subject %><br />
   <%= f.label :body %>
   <%= f.text_area :body, {:cols => 100, :rows => 6 } %><br />
   <%= f.submit "Send Email", :class => "focus_button" %>
 <% end %>
+
+<hr />
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Confirmed User Accounts</th>
+      <th>User Accounts with Registrants who have not Paid Reg Fees</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <% 
+          User.confirmed.each do |user| %>
+            <%= user.email %><br />
+        <% end %>
+      </td>
+
+      <td>
+        <% 
+          User.unpaid_reg_fees.each do |user| %>
+            <%= user.email %><br />
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
  
