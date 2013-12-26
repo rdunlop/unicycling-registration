@@ -1,8 +1,11 @@
 class Email
+  include Virtus
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  attr_accessor :subject, :body, :confirmed_accounts, :unpaid_reg_accounts
+  attribute :confirmed_accounts, Boolean
+  attribute :unpaid_reg_accounts, Boolean
+  attr_accessor :subject, :body
   validates_presence_of :subject, :body
 
   def initialize(attributes = {})
