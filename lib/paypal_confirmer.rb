@@ -50,6 +50,7 @@ class PaypalConfirmer
   end
 
   def order_number
+    return "No Invoice number" if @params["invoice"].nil?
     @params["invoice"]
   end
 
