@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131204050249) do
+ActiveRecord::Schema.define(:version => 20131223184631) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(:version => 20131204050249) do
     t.boolean  "test_mode"
     t.string   "waiver_url"
     t.string   "comp_noncomp_url"
-    t.boolean  "waiver"
+    t.boolean  "has_print_waiver"
     t.boolean  "standard_skill",             :default => false
     t.boolean  "usa",                        :default => false
     t.boolean  "iuf",                        :default => false
@@ -220,6 +220,8 @@ ActiveRecord::Schema.define(:version => 20131204050249) do
     t.text     "currency"
     t.string   "rulebook_url"
     t.string   "style_name"
+    t.boolean  "has_online_waiver"
+    t.text     "online_waiver_text"
   end
 
   create_table "events", :force => true do |t|
@@ -519,6 +521,7 @@ ActiveRecord::Schema.define(:version => 20131204050249) do
     t.boolean  "ineligible",              :default => false
     t.boolean  "volunteer"
     t.string   "country_representing"
+    t.string   "online_waiver_signature"
   end
 
   add_index "registrants", ["deleted"], :name => "index_registrants_deleted"

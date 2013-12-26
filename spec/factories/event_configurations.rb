@@ -14,7 +14,9 @@ FactoryGirl.define do
     artistic_closed_date "2013-1-10"
     standard_skill_closed_date "2013-3-10"
     standard_skill true
-    waiver true
+    has_print_waiver true
+    has_online_waiver false
+    online_waiver_text "Online Waiver."
     usa true
     iuf false
     tshirt_closed_date "2013-5-10"

@@ -51,14 +51,24 @@
       <td>Links from the Menubar logo to this URL.</td>
   </tr>
   <tr>
-      <th><%= f.label :waiver %></th>
-      <td><%= f.check_box :waiver %></td>
-      <td>Enabling this allows all the waiver features and text to display.</td>
+      <th><%= f.label :has_print_waiver %></th>
+      <td><%= f.check_box :has_print_waiver %></td>
+      <td>Enabling this allows all the print (pdf) waiver features and text to display.</td>
   </tr>
   <tr>
       <th><%= f.label :waiver_url %></th>
       <td><%= f.url_field :waiver_url %></td>
       <td>Currently unused</td>
+  </tr>
+  <tr>
+      <th><%= f.label :has_online_waiver %></th>
+      <td><%= f.check_box :has_online_waiver %></td>
+      <td>Enabling this allows all the online (text box) waiver features and text to display.</td>
+  </tr>
+  <tr>
+      <th><%= f.label :online_waiver_text %></th>
+      <td><%= f.text_area :online_waiver_text, size: "60x12" %></td>
+      <td>Actual text for the online waiver.</td>
   </tr>
   <tr>
       <th><%= f.label :comp_noncomp_url %></th>

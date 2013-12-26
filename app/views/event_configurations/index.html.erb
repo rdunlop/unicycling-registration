@@ -27,13 +27,21 @@
     <td><%= EventConfiguration.event_url %></td>
   </tr>
   <tr>
-    <th>Waiver</th>
-    <td><%= EventConfiguration.waiver %></td>
+    <th>Print Waiver</th>
+    <td><%= EventConfiguration.has_print_waiver %></td>
   </tr>
   <tr>
     <th>Waiver url</th>
     <td><%= EventConfiguration.waiver_url %></td>
   </tr>
+  <tr>
+    <th>Online Waiver</th>
+    <td><%= EventConfiguration.has_online_waiver %></td>
+  </tr>
+  <tr>
+    <th>Online Waiver Text</th>
+    <td><%= truncate(EventConfiguration.online_waiver_text, length: 50) %></td>
+  </tr>  
   <tr>
     <th>Comp/Non-Comp url</th>
     <td><%= EventConfiguration.comp_noncomp_url %></td>

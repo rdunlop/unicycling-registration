@@ -72,6 +72,13 @@
       <%= render :partial => "contact_info", :locals => { :f => f, :other_registrant => @other_registrant } %>
     </div>
 
+    <% if @has_online_waiver %>
+      <br \>
+      <div class="data_block" style="margin-top:20px;">
+        <%= render :partial => "online_waiver", :locals => {:f => f, :registrant => @registrant } %>
+      </div>
+    <% end %>
+
   </div>
   <div class="actions">
     <% if @registrant.competitor %>
