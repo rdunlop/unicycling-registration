@@ -42,8 +42,10 @@ class Payment < ActiveRecord::Base
     payment_details.each do |pd|
 
       rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => pd.details}).first
-      if rei.nil? and pd.details.empty?
-        rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => nil}).first
+      unless pd.details.nil?
+        if rei.nil? and pd.details.empty?
+          rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => nil}).first
+        end
       end
 
       unless rei.nil?
