@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     users = registrants.map { |reg| reg.user }.flatten.uniq
   end
 
+  def self.paid_reg_fees
+    User.confirmed.all_with_registrants - User.unpaid_reg_fees
+  end
+
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
     [:judge, :admin, :super_admin]

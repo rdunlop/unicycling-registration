@@ -10,6 +10,7 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
 <% all_accounts = Email.addresses_for_confirmed_accounts
    paid_reg = Email.addresses_for_paid_reg_accounts
    unpaid_reg = Email.addresses_for_unpaid_reg_accounts
+   no_reg = Email.addresses_for_no_reg_accounts
  %>
 
 <%= render :partial => "/shared/error_messages", :object => @email_form %>
@@ -21,6 +22,8 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
   <%= f.check_box :unpaid_reg_accounts %><br />
   <%= f.label :paid_reg_accounts, "Users With ALL Paid Registration Fees (#{paid_reg.count})" %>
   <%= f.check_box :paid_reg_accounts %><br />
+  <%= f.label :no_reg_accounts, "Users without any registrants (#{no_reg.count})" %>
+  <%= f.check_box :no_reg_accounts %><br />
   <br />
   <%= f.label :subject %>
   <%= f.text_field :subject %><br />
@@ -36,6 +39,7 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
       <th>Confirmed User Accounts</th>
       <th>User Accounts with ANY Registrants who have <b>not</b> Paid Reg Fees</th>
       <th>User Accounts with ALL Registrants who <b>HAVE</b> Paid Reg Fees</th>
+      <th>User Accounts with No Registrants</th>
     </tr>
   </thead>
   <tbody>
@@ -57,6 +61,13 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
       <td>
         <%
           paid_reg.each do |email| %>
+            <%= email %><br />
+        <% end %>
+      </td>
+
+      <td>
+        <%
+          no_reg.each do |email| %>
             <%= email %><br />
         <% end %>
       </td>
