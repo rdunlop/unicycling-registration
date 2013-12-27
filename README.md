@@ -376,6 +376,13 @@ To Run the test suite
     cd workspace
     rspec spec
 
+or to run each type of test separately
+
+    cd workspace
+    bundle exec rake spec:unit
+    bundle exec rake spec:integration
+    bundle exec rake spec:api
+
 
 
 In order to create a database backup from heroku for use on your development

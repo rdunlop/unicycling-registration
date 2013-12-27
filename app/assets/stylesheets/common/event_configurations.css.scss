@@ -5,3 +5,10 @@
 .config_fields {
   text-align: left;
 }
+
+.overflow_hidden {
+  overflow:hidden;
+  height:1.3em;
+  max-width:500px;
+  display:inline-block;
+}
