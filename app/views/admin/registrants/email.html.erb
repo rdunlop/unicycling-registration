@@ -7,12 +7,21 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
 <p>You can use the options to choose a subset of user accounts to send e-mail to</p>
 
 <h4>E-mail</h4>
+<% all_accounts = Email.addresses_for_confirmed_accounts
+   paid_reg = Email.addresses_for_paid_reg_accounts
+   unpaid_reg = Email.addresses_for_unpaid_reg_accounts
+ %>
+
 <%= render :partial => "/shared/error_messages", :object => @email_form %>
 <%= form_for @email_form, url: send_email_admin_registrants_path do |f| %>
-  <%= f.label :confirmed_accounts, "All User Accounts" %>
+  <%= f.label :confirmed_accounts, "All Confirmed User Accounts (#{all_accounts.count}) " %>
   <%= f.check_box :confirmed_accounts %><br />
-  <%= f.label :unpaid_reg_accounts, "With Not Yet Paid Registration Fees" %>
+  <br />
+  <%= f.label :unpaid_reg_accounts, "Users With Not Yet Paid Registration Fees (#{unpaid_reg.count})" %>
   <%= f.check_box :unpaid_reg_accounts %><br />
+  <%= f.label :paid_reg_accounts, "Users With ALL Paid Registration Fees (#{paid_reg.count})" %>
+  <%= f.check_box :paid_reg_accounts %><br />
+  <br />
   <%= f.label :subject %>
   <%= f.text_field :subject %><br />
   <%= f.label :body %>
@@ -25,22 +34,30 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
   <thead>
     <tr>
       <th>Confirmed User Accounts</th>
-      <th>User Accounts with Registrants who have not Paid Reg Fees</th>
+      <th>User Accounts with ANY Registrants who have <b>not</b> Paid Reg Fees</th>
+      <th>User Accounts with ALL Registrants who <b>HAVE</b> Paid Reg Fees</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
         <% 
-          User.confirmed.each do |user| %>
-            <%= user.email %><br />
+          all_accounts.each do |email| %>
+            <%= email %><br />
         <% end %>
       </td>
 
       <td>
         <% 
-          User.unpaid_reg_fees.each do |user| %>
-            <%= user.email %><br />
+          unpaid_reg.each do |email| %>
+            <%= email %><br />
+        <% end %>
+      </td>
+
+      <td>
+        <%
+          paid_reg.each do |email| %>
+            <%= email %><br />
         <% end %>
       </td>
     </tr>
