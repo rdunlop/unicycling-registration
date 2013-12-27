@@ -35,4 +35,14 @@ module ApplicationHelper
     return "Free" if cost == 0
     number_to_currency(cost, format: EventConfiguration.currency, locale: :en)
   end
+
+   def text_to_html_linebreaks(text)
+    start_tag = '<p>'
+    text = text.to_s.dup
+    text.gsub!(/\r?\n/, "\n")                     # \r\n and \r => \n
+    text.gsub!(/\n\n+/, "</p>\n\n#{start_tag}")   # 2+ newline  => paragraph
+    text.gsub!(/([^\n]\n)(?=[^\n])/, '\1<br />')  # 1 newline   => br
+    text.insert 0, start_tag
+    text << "</p>"
+  end
 end
