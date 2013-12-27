@@ -1,7 +1,7 @@
 <fieldset class="data_block">
 <legend>Waiver</legend>
  <div id="waiver_text_box">
-    <%= @online_waiver_text.html_safe %>
+    <%= text_to_html_linebreaks(@online_waiver_text).html_safe %>
  </div>
  <p>
   <% if @registrant.age.nil? %>
