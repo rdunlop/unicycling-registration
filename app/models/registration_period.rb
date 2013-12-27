@@ -48,6 +48,10 @@ class RegistrationPeriod < ActiveRecord::Base
     last_period
   end
 
+  def self.all_registration_expense_items
+    RegistrationPeriod.all.collect{|rp| rp.competitor_expense_item} + RegistrationPeriod.all.collect{|rp| rp.noncompetitor_expense_item}
+  end
+
   def self.relevant_period(date)
     rp_id = Rails.cache.fetch("/registration_period/by_date/#{date}")
     rp = RegistrationPeriod.find_by_id(rp_id)

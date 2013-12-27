@@ -9,6 +9,8 @@ Registration-Related ToDo
 
 
 ----ROBIN's CURRENT LIST:
+- Allow html in the mass-mailer (and plaintext too?)
+- look at using 'https://github.com/croaky/parity'
 - Fix the Import bug which breaks the id generator (scott did this, again)
 - Add new "num free" column to the Payments#summary page
 - .env template?

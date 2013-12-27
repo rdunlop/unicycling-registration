@@ -51,7 +51,9 @@ class Payment < ActiveRecord::Base
       unless rei.nil?
         rei.destroy
       else
-        Notifications.missing_matching_expense_item(self).deliver
+        unless RegistrationPeriod.all_registration_expense_items.include?(pd.expense_item)
+          Notifications.missing_matching_expense_item(self).deliver
+        end
       end
     end
   end

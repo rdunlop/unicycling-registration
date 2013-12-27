@@ -245,7 +245,24 @@ describe Payment do
       it "registrant has paid item" do
         @reg.paid_expense_items.should == [@pd.expense_item]
       end
+    end
 
+    describe "when paying for registration item" do
+      before(:each) do
+        ActionMailer::Base.deliveries.clear
+        @reg_period = FactoryGirl.create(:registration_period)
+        @pd.expense_item  = @reg_period.competitor_expense_item
+        @rei.save
+        @pd.save
+        @pay.completed = true
+        @pay.save
+      end
+
+      it "only sends one e-mail" do
+        num_deliveries = ActionMailer::Base.deliveries.size
+        num_deliveries.should == 0
+        mail = ActionMailer::Base.deliveries.first
+      end
     end
     describe "when the payment is paid" do
       before(:each) do
