@@ -183,6 +183,52 @@ describe Payment do
       end
     end
 
+    describe "when the payment has empty details, and the registrant_expense_item has empty details" do
+      before(:each) do
+        @rei.details = ""
+        @rei.save
+        @pd.details = ""
+        @pd.save
+        @pay.completed = true
+        @pay.save
+      end
+
+      it "registrant no longer owes" do
+        @reg.owing_expense_items.should == []
+      end
+      it "registrant has paid item" do
+        @reg.paid_expense_items.should == [@pd.expense_item]
+      end
+    end
+
+    describe "when the payment has different details that the reg expense item details" do
+      before(:each) do
+        ActionMailer::Base.deliveries.clear
+        @rei.details = "original"
+        @rei.save
+        @pd.details = "reported"
+        @pd.save
+        @pay.completed = true
+        @pay.save
+      end
+
+      it "registrant still owes" do
+        @reg.owing_expense_items.should == [@rei.expense_item]
+      end
+
+      it "registrant has paid item" do
+        @reg.paid_expense_items.should == [@pd.expense_item]
+      end
+
+      it "should email the admin" do
+        num_deliveries = ActionMailer::Base.deliveries.size
+        num_deliveries.should == 1
+        mail = ActionMailer::Base.deliveries.first
+        mail.subject.should == "Missing reg-item match"
+      end
+    end
+
+
     describe "when the payment has empty details, vs nil details" do
       before(:each) do
         @rei.details = nil

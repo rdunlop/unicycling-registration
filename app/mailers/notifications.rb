@@ -40,4 +40,11 @@ class Notifications < ActionMailer::Base
 
     mail bcc: addresses, subject: email.subject
   end
+
+  ######### ADMIN
+  def missing_matching_expense_item(payment)
+    @payment = payment
+
+    mail to: ENV['ERROR_EMAIL'], subject: "Missing reg-item match"
+  end
 end

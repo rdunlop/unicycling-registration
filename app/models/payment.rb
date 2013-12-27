@@ -40,15 +40,16 @@ class Payment < ActiveRecord::Base
     return true unless self.completed_changed?
 
     payment_details.each do |pd|
-      if pd.details.nil? or pd.details.empty?
-        target_details = nil
-      else
-        target_details = pd.details
+
+      rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => pd.details}).first
+      if rei.nil? and pd.details.empty?
+        rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => nil}).first
       end
 
-      rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => target_details}).first
       unless rei.nil?
         rei.destroy
+      else
+        Notifications.missing_matching_expense_item(self).deliver
       end
     end
   end
