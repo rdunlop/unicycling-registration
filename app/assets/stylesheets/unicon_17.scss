@@ -21,6 +21,10 @@ $unicon-pink: rgb(219, 71, 128);
 $unicon-pink-active: rgb(240, 80, 128);
 $unicon-blue: rgb(36, 130, 181);
 
+a:hover {
+  color: rgb(219, 71, 128);
+}
+
 nav ul {
   background: $background; 
 }
