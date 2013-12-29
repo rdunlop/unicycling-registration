@@ -418,12 +418,13 @@ To Run the Production setup locally
 
     $ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_production latest.dump
 
-* Set the .env file:
+* Set the .env file (only include the last option if you want dev like errors):
 
     PORT=9292
     RACK_ENV=production
     SECRET=< run `rake secret` >
     DEVELOPMENT_BANNER=false
+    DISPLAY_PRODUCTION_ERRORS=true
 
 * Precompile the assets
 
