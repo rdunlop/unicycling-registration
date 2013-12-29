@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131223184631) do
+ActiveRecord::Schema.define(:version => 20131228172217) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -141,10 +141,12 @@ ActiveRecord::Schema.define(:version => 20131223184631) do
     t.integer  "event_id"
     t.integer  "position"
     t.string   "name"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "age_group_type_id"
     t.integer  "competition_id"
+    t.integer  "age_range_start",   :default => 0
+    t.integer  "age_range_end",     :default => 100
   end
 
   add_index "event_categories", ["age_group_type_id"], :name => "index_event_categories_age_group_type_id"
