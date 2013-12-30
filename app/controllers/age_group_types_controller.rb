@@ -1,4 +1,4 @@
-class Admin::AgeGroupTypesController < Admin::BaseController
+class AgeGroupTypesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :except => [:create]
   before_filter :load_new_age_group_type, :only => [:create]
@@ -17,8 +17,8 @@ class Admin::AgeGroupTypesController < Admin::BaseController
 
     respond_to do |format|
       if @age_group_type.save
-        format.html { redirect_to admin_age_group_types_path, notice: 'Age Group Type was successfully created.' }
-        format.json { render json: @age_group_type, status: :created, location: admin_age_group_types_path }
+        format.html { redirect_to age_group_types_path, notice: 'Age Group Type was successfully created.' }
+        format.json { render json: @age_group_type, status: :created, location: age_group_types_path }
       else
         @age_group_types = AgeGroupType.all
         format.html { render action: "index" }
@@ -31,7 +31,7 @@ class Admin::AgeGroupTypesController < Admin::BaseController
     @age_group_type = AgeGroupType.find(params[:id])
     @age_group_type.destroy
     respond_to do |format|
-      format.html { redirect_to admin_age_group_types_path }
+      format.html { redirect_to age_group_types_path }
       format.json { head :no_content }
     end
   end
@@ -44,7 +44,7 @@ class Admin::AgeGroupTypesController < Admin::BaseController
 
     respond_to do |format|
       if @age_group_type.update_attributes(age_group_type_params)
-        format.html { redirect_to admin_age_group_types_path, notice: 'Age Group Type was successfully updated.' }
+        format.html { redirect_to age_group_types_path, notice: 'Age Group Type was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

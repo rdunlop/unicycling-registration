@@ -22,9 +22,9 @@
     <td><%= age_group_entry.end_age %></td>
     <td><%= age_group_entry.wheel_size %></td>
     <td><%= age_group_entry.gender %></td>
-    <td><%= link_to 'Show', [:admin, age_group_entry] %></td>
-    <td><%= link_to 'Edit', edit_admin_age_group_entry_path(age_group_entry) %></td>
-    <td><%= link_to 'Destroy', [:admin, age_group_entry], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', age_group_entry %></td>
+    <td><%= link_to 'Edit', edit_age_group_entry_path(age_group_entry) %></td>
+    <td><%= link_to 'Destroy', age_group_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::AgeGroupTypesController do
+describe AgeGroupTypesController do
   before(:each) do
     sign_in FactoryGirl.create(:super_admin_user)
   end
@@ -25,7 +25,7 @@ describe Admin::AgeGroupTypesController do
       expect {
         post :create, {:age_group_type => valid_attributes}
       }.to change(AgeGroupType, :count).by(1)
-      response.should redirect_to(admin_age_group_types_path)
+      response.should redirect_to(age_group_types_path)
     end
   end
 
@@ -35,7 +35,7 @@ describe Admin::AgeGroupTypesController do
       expect {
         delete 'destroy', {:id => agt.id}
       }.to change(AgeGroupType, :count).by(-1)
-      response.should redirect_to(admin_age_group_types_path)
+      response.should redirect_to(age_group_types_path)
     end
   end
 
@@ -43,7 +43,7 @@ describe Admin::AgeGroupTypesController do
     it "returns http success" do
       agt = FactoryGirl.create(:age_group_type)
       put 'update', {:id => agt.id, :age_group_type => valid_attributes}
-      response.should redirect_to(admin_age_group_types_path)
+      response.should redirect_to(age_group_types_path)
     end
   end
 

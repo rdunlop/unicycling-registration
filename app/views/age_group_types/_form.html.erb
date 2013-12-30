@@ -1,4 +1,4 @@
-<%= form_for([:admin, @age_group_type]) do |f| %>
+<%= form_for(@age_group_type) do |f| %>
   <% if @age_group_type.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@age_group_type.errors.count, "error") %> prohibited this age group type from being saved:</h2>

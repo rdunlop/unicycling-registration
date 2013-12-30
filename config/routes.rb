@@ -36,12 +36,12 @@ Workspace::Application.routes.draw do
     # ADMIN (for use in Setting up the system)
     #
     #
-    namespace :admin do
-      resources :age_group_types, :except => [:show] do
-        resources :age_group_entries, :only => [:index, :create]
-      end
-      resources :age_group_entries, :except => [:index, :create]
+    resources :age_group_types, :except => [:show] do
+      resources :age_group_entries, :only => [:index, :create]
+    end
+    resources :age_group_entries, :except => [:index, :create]
 
+    namespace :admin do
       resources :registrants, :only => [:index, :show] do
         collection do
           get :bag_labels

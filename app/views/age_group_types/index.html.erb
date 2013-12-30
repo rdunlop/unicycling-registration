@@ -15,15 +15,15 @@
     <% @age_group_types.each do |age_group_type| %>
       <tr>
         <td><%= age_group_type.name %></td>
-        <td><%= link_to 'Entries', admin_age_group_type_age_group_entries_path(age_group_type) %></td>
-        <td><%= link_to 'Edit', edit_admin_age_group_type_path(age_group_type) %></td>
-        <td><%= link_to 'Destroy', admin_age_group_type_path(age_group_type), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Entries', age_group_type_age_group_entries_path(age_group_type) %></td>
+        <td><%= link_to 'Edit', edit_age_group_type_path(age_group_type) %></td>
+        <td><%= link_to 'Destroy', age_group_type_path(age_group_type), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </table>
 
   <br />
 
-  <h3>New Category</h3>
+  <h3>New Age Group Type</h3>
   <%= render 'form' %>
 </div>

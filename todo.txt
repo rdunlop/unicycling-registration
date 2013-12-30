@@ -17,7 +17,7 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
-- Fix the Import bug which breaks the id generator (scott did this, again)
+- Menu submenu onclick, and always have a 2nd level.
 - Send Hugo/Benoit a list of #'s of registrants from UNICON 16.
 
 - Allow deleting of a registration which has payments, as long as they are fully refunded. (refund:
@@ -36,7 +36,6 @@ Most Useful:
 - Improve the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.
-- Menu submenu onclick, and always have a 2nd level.
 
 ---- END ROBIN's CURRENT LIST:
 
@@ -63,6 +62,7 @@ Minor:
 
 Other:
 
+- Fix the Import bug which breaks the id generator (scott did this, again)
 - functional test which shows that registrant_group can be created
 - functional test which shows that creating a competitor registrant can work, and updating a registrant can work
 - functional test which shows that creating a non-competitor can work, and updating a registrant can work
