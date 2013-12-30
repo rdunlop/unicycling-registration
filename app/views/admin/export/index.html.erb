@@ -36,6 +36,7 @@ Upload: <%= form_for :convert, :url=>admin_export_upload_time_results_path do |f
   <%= link_to 'Download Data', admin_export_download_data_path(:format => :json) %>
 
 <%= form_for :convert, :url=>admin_export_upload_path, :html => {:multipart=>true} do |f| -%>
+  <b>DISABLED:</b><b r/>
   File: <%= f.file_field :events_file -%><br />
   <%= f.submit 'Submit' %>
 <% end %>

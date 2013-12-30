@@ -224,6 +224,10 @@ class Admin::ExportController < Admin::BaseController
 
   # POST /admin/events/upload
   def upload
+    flash[:alert] = "Upload is disabled"
+    redirect_to admin_export_index_path
+    return # disabled due to "id bug"
+
     if params[:convert][:events_file].respond_to?(:tempfile)
       upload_file = params[:convert][:events_file].tempfile
     else
