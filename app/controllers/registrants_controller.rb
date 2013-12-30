@@ -1,7 +1,14 @@
 class RegistrantsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_new_registrant, :only => [:create]
+  before_filter :find_registrant, :only => [:undelete]
   load_and_authorize_resource
+
+  private
+
+  def find_registrant
+    @registrant = Registrant.unscoped.find(params[:id])
+  end
 
   def load_new_registrant
     @registrant = Registrant.new(registrant_params)
@@ -24,22 +31,34 @@ class RegistrantsController < ApplicationController
     @online_waiver_text = EventConfiguration.online_waiver_text
   end
 
+  public
+
+  def all_index
+    @registrants = Registrant.unscoped.all
+  end
+
   # GET /registrants
   # GET /registrants.json
   def index
-    @my_registrants = current_user.registrants
-    @shared_registrants = current_user.accessible_registrants - @my_registrants
-    @display_invitation_request = current_user.invitations.need_reply.count > 0
-    @display_invitation_manage_banner = current_user.invitations.permitted.count > 0
-    @user = current_user
-    @has_print_waiver = EventConfiguration.has_print_waiver
-    @usa_event = EventConfiguration.usa
-    @iuf_event = EventConfiguration.iuf
-    load_online_waiver
+    if params[:user_id].nil?
+      authorize! :manage_all, Registrant
+      @registrants = Registrant.unscoped.all
+      render "index_all"
+    else
+      @my_registrants = current_user.registrants
+      @shared_registrants = current_user.accessible_registrants - @my_registrants
+      @display_invitation_request = current_user.invitations.need_reply.count > 0
+      @display_invitation_manage_banner = current_user.invitations.permitted.count > 0
+      @user = current_user
+      @has_print_waiver = EventConfiguration.has_print_waiver
+      @usa_event = EventConfiguration.usa
+      @iuf_event = EventConfiguration.iuf
+      load_online_waiver
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @registrants }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @registrants }
+      end
     end
   end
 
@@ -225,5 +244,70 @@ class RegistrantsController < ApplicationController
 
   def registrant_params
     params.require(:registrant).permit(attributes)
+  end
+
+  public
+
+  def undelete
+    @registrant.deleted = false
+
+    respond_to do |format|
+      if @registrant.save
+        format.html { redirect_to registrants_path, notice: 'Registrant was successfully undeleted.' }
+        format.json { render json: @registrant, status: :created, location: @registrant }
+      else
+        @registrants = Registrant.unscoped
+        format.html { render action: "index" }
+        format.json { render json: @registrant.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def bag_labels
+    @registrants = Registrant.all
+
+    names = []
+    @registrants.each do |reg|
+      names << "<b>##{reg.bib_number}</b> #{reg.name} \n #{reg.country}"
+    end
+
+    labels = Prawn::Labels.render(names, :type => "Avery5160") do |pdf, name|
+      pdf.text name, :align => :center, :size => 10, :inline_format => true
+    end
+
+    send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
+  end
+
+  def show_all
+    @registrants = Registrant.order(:last_name, :first_name).all
+
+    respond_to do |format|
+      format.html # show_all.html.erb
+      format.pdf { render :pdf => "show_all", :formats => [:html], :orientation => 'Landscape', :layout => "pdf.html" }
+    end
+  end
+
+  def email
+    @email_form = Email.new
+  end
+
+  def send_email
+    @email_form = Email.new(params[:email])
+
+    if @email_form.valid?
+      set_of_addresses = @email_form.email_addresses
+      first_index = 0
+      current_set = set_of_addresses.slice(first_index, 30)
+      until current_set == [] or current_set.nil?
+        Notifications.send_mass_email(@email_form, current_set).deliver
+        first_index += 30
+        current_set = set_of_addresses.slice(first_index, 30)
+      end
+      respond_to do |format|
+        format.html { redirect_to email_registrants_path, notice: 'Email sent successfully.' }
+      end
+    else
+      render "email"
+    end
   end
 end

@@ -24,6 +24,11 @@ class Ability
         can :manage, AwardLabel
         can :manage, ExternalResult
         can :manage, RegistrantGroup
+        can :manage_all, Registrant
+        can :email, Registrant
+        can :send_email, Registrant
+        can :bag_labels, Registrant
+        can :undelete, Registrant
       elsif user.has_role? :judge
         can :read, Competitor
       end
@@ -92,7 +97,7 @@ class Ability
 
       # Registrant
       can :empty_waiver, Registrant
-      can :manage, Registrant if user.has_role? :admin or user.has_role? :super_admin
+      can :read, Registrant if user.has_role? :admin or user.has_role? :super_admin
       can [:all, :waiver], Registrant, :user_id => user.id
 
       unless EventConfiguration.closed? and ENV['ONSITE_REGISTRATION'] != "true"

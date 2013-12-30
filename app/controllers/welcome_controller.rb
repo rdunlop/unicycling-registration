@@ -32,7 +32,7 @@ class WelcomeController < ApplicationController
         if current_user.has_role? :judge
           format.html { redirect_to judging_events_path }
         else
-          format.html { redirect_to registrants_path }
+          format.html { redirect_to user_registrants_path(current_user) }
         end
       else
         format.html { redirect_to registrants_path }

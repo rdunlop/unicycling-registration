@@ -47,18 +47,8 @@ Workspace::Application.routes.draw do
       end
     end
 
+
     namespace :admin do
-      resources :registrants, :only => [:index, :show] do
-        collection do
-          get :bag_labels
-          get :all_summary
-          get :email
-          post :send_email
-        end
-        member do
-          post :undelete
-        end
-      end
       resources :payments, :only => [:index, :new, :create]  do
         collection do
           get :summary
@@ -162,6 +152,18 @@ Workspace::Application.routes.draw do
     end
 
     resources :registrants do
+      #admin
+      collection do
+        get :bag_labels
+        get :show_all
+        get :email
+        post :send_email
+      end
+      member do
+        post :undelete
+      end
+
+      #normal user
       collection do
         get :new_noncompetitor
         get :all
@@ -206,6 +208,7 @@ Workspace::Application.routes.draw do
     devise_for :users, :controllers => { :registrations => "registrations" }
 
     resources :users, :only => [] do
+      resources :registrants, :only => [:index]
       resources :additional_registrant_accesses, :only => [:index, :new, :create] do
         collection do
           get :invitations

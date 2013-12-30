@@ -1,6 +1,6 @@
 <div class="non_printable">
-  <%= link_to 'Bag Labels PDF', bag_labels_admin_registrants_path %>
-  <%= link_to 'All Registrants (pdf)', all_summary_admin_registrants_path(:format => :pdf) %>
+  <%= link_to 'Bag Labels PDF', bag_labels_registrants_path %>
+  <%= link_to 'All Registrants (pdf)', registrants_path(:format => :pdf) %>
 </div>
 
 <h1>Edit Registrants</h1>
@@ -32,7 +32,7 @@
       </td>
       <td class="non_printable">
         <% if registrant.deleted %>
-          <%= link_to 'Undelete', undelete_admin_registrant_path(registrant), :method => :post %>
+          <%= link_to 'Undelete', undelete_registrant_path(registrant), :method => :post %>
         <% end %>
       </td>
       <td class="non_printable"><%= registrant.user %></td>

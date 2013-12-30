@@ -15,8 +15,6 @@ class AdminAbility
         can :adjust_payment_choose, Payment
         can :refund_choose, Payment
         can :refund_create, Payment
-        can :manage, Registrant
-        can :email, Registrant
       end
 
       if user.has_role? :super_admin
