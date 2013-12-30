@@ -104,10 +104,12 @@ describe "Ability" do
     it { should be_able_to(:read, Registrant) }
     it { should be_able_to(:manage, Competitor) }
 
+    it { should be_able_to(:manage_all, Registrant) }
+
     describe "with another user having a registrant" do
       let (:registration) { FactoryGirl.create(:registrant) }
       it { should be_able_to(:read, registration) }
-      it { should be_able_to(:manage, registration) }
+      it { should be_able_to(:crud, registration) }
     end
     describe "when registration is closed" do
       before(:each) do

@@ -4,6 +4,8 @@ class Ability
   def initialize(user)
     if user.nil?
     else
+      alias_action :create, :read, :update, :destroy, :to => :crud
+
       if user.has_role? :super_admin
         can :access, :rails_admin
         can :dashboard
@@ -97,7 +99,7 @@ class Ability
 
       # Registrant
       can :empty_waiver, Registrant
-      can :read, Registrant if user.has_role? :admin or user.has_role? :super_admin
+      can :crud, Registrant if user.has_role? :admin or user.has_role? :super_admin
       can [:all, :waiver], Registrant, :user_id => user.id
 
       unless EventConfiguration.closed? and ENV['ONSITE_REGISTRATION'] != "true"
