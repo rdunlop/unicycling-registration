@@ -10,6 +10,7 @@ Registration-Related ToDo
 - Add age validation to the Jr Expert (and Wheel Walk)
  - Only allow "Jr Expert" if certain age.
 - Fix the stylesheet/images issue which is preventing serving any of the up-arrow/down-arrow images in PRODUCTION
+- enable travis
 -- END SCOTT's CURRENT LIST:
 
 
@@ -67,6 +68,7 @@ Other:
 
 - clear the cache of reg_paid when a refund is created
 
+- fix the shared_error messages count only include entries which have a non-empty text field.
 - find a way to clear the rails cache before each test 'describe' step?
 - When marking an item as free for someone, eliminate their registrant_expense_item somehow?
 - combine the _expense_list.html.erb and the other (similar) partials

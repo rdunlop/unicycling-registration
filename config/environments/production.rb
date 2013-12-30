@@ -5,7 +5,7 @@ Workspace::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local       = !ENV[DISPLAY_PRODUCTION_ERRORS].nil?
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -46,7 +46,7 @@ Workspace::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( pdf.css dev.css naucc_2013.css unicon_17.css )
+  config.assets.precompile += %w( pdf.css dev.css naucc_2013.css naucc_2014.css unicon_17.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

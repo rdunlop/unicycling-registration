@@ -98,7 +98,7 @@ class EventCategoriesController < ApplicationController
 
   private
   def event_category_params
-    params.require(:event_category).permit(:name, :position, :age_group_type_id)
+    params.require(:event_category).permit(:name, :position, :age_group_type_id, :age_range_start, :age_range_end)
   end
 end
 
