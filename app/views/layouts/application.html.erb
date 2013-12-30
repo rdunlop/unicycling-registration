@@ -76,12 +76,12 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
 
   <div id="bottom_nav" class="non_printable">
     <% unless EventConfiguration.rulebook_url.nil? %>
-    <div class="rulebook_link">
-      <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
-    </div>
-  <% end %>
+      <div class="rulebook_link">
+        <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
+      </div>
+    <% end %>
+    <%= link_to t('help'), welcome_help_path %>
     <p><%= t("developed_by") %></p>
-    <li><%= link_to t('help'), welcome_help_path %></li>
   </div>
 </div>
 </body>
