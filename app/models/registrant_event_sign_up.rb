@@ -3,6 +3,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
   #validates :event_category, :presence => true, :if  => "signed_up"
   validates :signed_up, :inclusion => {:in => [true, false] } # because it's a boolean
   validate :category_chosen_when_signed_up
+  validate :category_in_age_range
   validates :event_id, :presence => true, :uniqueness => {:scope => [:registrant_id]}
 
   has_paper_trail :meta => { :registrant_id => :registrant_id }
@@ -14,8 +15,15 @@ class RegistrantEventSignUp < ActiveRecord::Base
   def category_chosen_when_signed_up
     if self.signed_up and self.event_category.nil?
       errors[:base] << "Cannot sign up for #{self.event.name} without choosing a category"
-      errors[:signed_up] = ""
-      errors[:event_category_id] = ""
+    end
+  end
+
+  def category_in_age_range
+    unless self.event_category.nil?
+      if self.signed_up and !(self.event_category.age_range_start..self.event_category.age_range_end).include?(registrant.age)
+        errors[:base] << "You must be between #{self.event_category.age_range_start} and #{self.event_category.age_range_end} 
+        years old to select #{self.event_category.name} for #{self.event.name} in #{self.event.event_class}"
+      end
     end
   end
 
