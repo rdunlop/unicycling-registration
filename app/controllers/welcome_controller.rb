@@ -30,9 +30,11 @@ class WelcomeController < ApplicationController
     respond_to do |format|
       if signed_in?
         if current_user.has_role? :judge
-          format.html { redirect_to judging_events_path, :alert => alert }
+          flash.keep
+          format.html { redirect_to judging_events_path }
         else
-          format.html { redirect_to user_registrants_path(current_user), :alert => alert }
+          flash.keep
+          format.html { redirect_to user_registrants_path(current_user) }
         end
       else
         format.html { redirect_to registrants_path }
