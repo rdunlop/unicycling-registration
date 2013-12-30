@@ -13,4 +13,19 @@ describe StandardSkillEntriesController do
     end
   end
 
+  describe "GET 'upload_file'" do
+    it "returns error" do
+      get 'upload_file'
+      response.should redirect_to(root_path)
+    end
+
+    it "succeeds as super_admin" do
+      sign_out @user
+      @super_user = FactoryGirl.create(:super_admin_user)
+      sign_in @super_user
+
+      get 'upload_file'
+      response.should be_success
+    end
+  end
 end

@@ -25,9 +25,6 @@ class AdminAbility
 
         # the only role that can assign other roles:
         can :manage, User
-
-        can :manage, StandardSkillEntry
-        can :manage, StandardSkillRoutine
       end
     end
   end

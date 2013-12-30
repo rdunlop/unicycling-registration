@@ -9,6 +9,8 @@ class Ability
         can :dashboard
         can :manage, AgeGroupType # written for clarity, though :all includes this
         can :manage, AgeGroupEntry # written for clarity, though :all includes this
+        can :manage, StandardSkillEntry # written for clarity, though :all includes this
+        can :manage, StandardSkillRoutine # written for clarity, though :all includes this
         can :manage, :all
         can :all, StandardSkillRoutine
         return # required in order to allow rails_admin to function

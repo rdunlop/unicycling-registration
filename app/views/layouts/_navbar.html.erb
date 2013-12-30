@@ -46,7 +46,7 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Event Offerings', :url => categories_path, :active => current_page?(categories_path), :permitted => can?(:manage, Category))
       heading.entries << Menu::MenuEntry.new(:title => 'Age Group Type', :url => age_group_types_path, :active => current_page?(age_group_types_path), :permitted => can?(:manage, AgeGroupType))
       if @config.standard_skill
-        heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Entries', :url => admin_standard_skill_entries_path, :active => current_page?(admin_standard_skill_entries_path), :permitted => can?(:manage, StandardSkillEntry))
+        heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Entries', :url => standard_skill_entries_path, :active => current_page?(standard_skill_entries_path), :permitted => can?(:manage, StandardSkillEntry))
       end
       heading.entries << Menu::MenuEntry.new(:title => 'User Permissions', :url => permissions_path, :active => current_page?(permissions_path), :permitted => can?(:manage, User))
       heading.entries << Menu::MenuEntry.new(:title => 'Expense Groups', :url => expense_groups_path, :active => current_page?(expense_groups_path), :permitted => can?(:manage, ExpenseGroup))
@@ -67,7 +67,7 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Modification History', :url => rails_admin_path, :active => current_page?(rails_admin_path), :permitted => can?(:access, :rails_admin))
       if @config.standard_skill
         heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (view)', :url => standard_skill_routines_path, :active => current_page?(standard_skill_routines_path), :permitted => can?(:manage, StandardSkillRoutine))
-        heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (export)', :url => download_file_admin_standard_skill_routines_path, :active => current_page?(download_file_admin_standard_skill_routines_path), :permitted => can?(:manage, StandardSkillRoutine))
+        heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (export)', :url => download_file_standard_skill_routines_path, :active => current_page?(download_file_standard_skill_routines_path), :permitted => can?(:manage, StandardSkillRoutine))
       end
     %>
     <%

@@ -91,18 +91,17 @@ Workspace::Application.routes.draw do
         post :upload
         get :download_events
       end
+    end
 
-
-      resources :standard_skill_entries, :only => [:index] do
-        collection do
-          get :upload_file
-          post :upload
-        end
+    resources :standard_skill_entries, :only => [:index] do
+      collection do
+        get :upload_file
+        post :upload
       end
-      resources :standard_skill_routines, :only => [] do
-        collection do
-          get :download_file
-        end
+    end
+    resources :standard_skill_routines, :only => [] do
+      collection do
+        get :download_file
       end
     end
 
