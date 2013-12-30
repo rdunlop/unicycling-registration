@@ -5,6 +5,7 @@ Registration-Related ToDo
 -- SCOTT's CURRENT LIST:
 - Update the Events tabs to be coloured as per their desire (use jqueryui website to choose the color scheme?)
 - Update the Events tabs' internal table to alternate row colours, as per Hugo's desire.
+- enable travis
 -- END SCOTT's CURRENT LIST:
 
 
