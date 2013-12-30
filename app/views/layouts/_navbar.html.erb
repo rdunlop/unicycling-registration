@@ -48,7 +48,7 @@
       if @config.standard_skill
         heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Entries', :url => admin_standard_skill_entries_path, :active => current_page?(admin_standard_skill_entries_path), :permitted => can?(:manage, StandardSkillEntry))
       end
-      heading.entries << Menu::MenuEntry.new(:title => 'User Permissions', :url => admin_users_path, :active => current_page?(admin_users_path), :permitted => can?(:manage, User))
+      heading.entries << Menu::MenuEntry.new(:title => 'User Permissions', :url => permissions_path, :active => current_page?(permissions_path), :permitted => can?(:manage, User))
       heading.entries << Menu::MenuEntry.new(:title => 'Expense Groups', :url => expense_groups_path, :active => current_page?(expense_groups_path), :permitted => can?(:manage, ExpenseGroup))
       heading.entries << Menu::MenuEntry.new(:title => 'Expense Items', :url => expense_items_path, :active => current_page?(expense_items_path), :permitted => can?(:manage, ExpenseItem))
     %>

@@ -1,6 +1,6 @@
-class Admin::UsersController < Admin::BaseController
+class PermissionsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  load_and_authorize_resource :user, :parent => false
 
   def index
     @users = User.all
@@ -20,7 +20,7 @@ class Admin::UsersController < Admin::BaseController
     end
 
     respond_to do |format|
-      format.html { redirect_to admin_users_path }
+      format.html { redirect_to permissions_path }
     end
   end
 end

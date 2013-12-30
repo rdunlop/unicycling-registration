@@ -41,6 +41,12 @@ Workspace::Application.routes.draw do
     end
     resources :age_group_entries, :except => [:index, :create]
 
+    resources :permissions, :only => [:index] do
+      member do
+        put :role
+      end
+    end
+
     namespace :admin do
       resources :registrants, :only => [:index, :show] do
         collection do
@@ -86,11 +92,6 @@ Workspace::Application.routes.draw do
         get :download_events
       end
 
-      resources :users, :only => [:index] do
-        member do
-          put :role
-        end
-      end
 
       resources :standard_skill_entries, :only => [:index] do
         collection do

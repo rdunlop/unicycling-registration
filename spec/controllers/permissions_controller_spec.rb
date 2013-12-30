@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::UsersController do
+describe PermissionsController do
   before(:each) do
     @super_user = FactoryGirl.create(:super_admin_user)
     sign_in @super_user
@@ -22,14 +22,14 @@ describe Admin::UsersController do
       end
       it "can change a user to an admin" do
         put :role, {:id => @user.to_param, :role_name => :admin}
-        response.should redirect_to(admin_users_path)
+        response.should redirect_to(permissions_path)
         @user.reload
         @user.has_role?(:admin).should == true
       end
       it "can change an admin back to a user" do
         admin = FactoryGirl.create(:admin_user)
         put :role, {:id => admin.to_param, :role_name => :admin}
-        response.should redirect_to(admin_users_path)
+        response.should redirect_to(permissions_path)
         admin.reload
         admin.has_role?(:admin).should == false
       end
