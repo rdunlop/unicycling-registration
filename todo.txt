@@ -1,18 +1,51 @@
-Last Re-Arranged September 6, 2013.
+Last Re-Arranged December 30, 2013.
 
+=============================
 Registration-Related ToDo
+=============================
 
 -- SCOTT's CURRENT LIST:
 - Update the Events tabs to be coloured as per their desire (use jqueryui website to choose the color scheme?)
 - Update the Events tabs' internal table to alternate row colours, as per Hugo's desire.
+- Add age validation to the Jr Expert (and Wheel Walk)
+ - Only allow "Jr Expert" if certain age.
+- Fix the stylesheet/images issue which is preventing serving any of the up-arrow/down-arrow images in PRODUCTION
 -- END SCOTT's CURRENT LIST:
 
 
 ----ROBIN's CURRENT LIST:
+
+Most Useful:
+- Fix the Import bug which breaks the id generator (scott did this, again)
+- Send Hugo/Benoit a list of #'s of registrants from UNICON 16.
+
+- Allow deleting of a registration which has payments, as long as they are fully refunded. (refund:
+  345 - Markus Kurz
+  2009 - Yannic Dick
+  2017 - Frederik Tubes
+- Confirm that David Ramos' reg is paid (early reg, via e-cheque)
+- Change the reg fee calculation to actually assign an entry to the registrant (not just an ephemeral one)
+ - Add a timer/function which updates these items
+ - Add a warning banner for administrators if the timer isn't ticking
+ - Allow Olaf to pay for Darja Schlote's (#5), Eli Brill's (#6) and Jakub Rulf's (#7) EARLY registration fees
+
+- On the payments#summary page, display items which are for "paid-for" registrants, vs not-paid-for registrants (?)
+ - Add a column to the admin/payments/ page which shows the number of "free" items that have been "paid for".
+ - Add new "num free" column to the Payments#summary page
+- Improve the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
+- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
+
+---- END ROBIN's CURRENT LIST:
+
+===========================================================
+===========================================================
+
+Minor:
+- Show the price rates/dates even on non-signed-in page?
+- replace has_details/print_details with common helper function?
+ - Display the "details" for payment entries of paid entries on various places where it is displayed
 - Allow html in the mass-mailer (and plaintext too?)
 - look at using 'https://github.com/croaky/parity'
-- Fix the Import bug which breaks the id generator (scott did this, again)
-- Add new "num free" column to the Payments#summary page
 - .env template?
 - ensure translations work with strong_parameters
 - limit rooms to 1000 (total), with a warning function at 80%?
@@ -23,12 +56,9 @@ Registration-Related ToDo
 - Translate "Please Wait" from buttons
 - upgrade to ruby 2.0
 - drop the base columns for the translated attributes?
-
 - Determine if "unoauthorized" message is now being lost due to locale?
-- Add a column to the admin/payments/ page which shows the number of "free" items that have been "paid for".
-- Imrprove the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
-- create a better footer, which floats, and also contains links to Language-selection
----- END ROBIN's CURRENT LIST:
+
+Other:
 
 - functional test which shows that registrant_group can be created
 - functional test which shows that creating a competitor registrant can work, and updating a registrant can work
@@ -37,7 +67,6 @@ Registration-Related ToDo
 - clear the cache of reg_paid when a refund is created
 
 - find a way to clear the rails cache before each test 'describe' step?
-- Display the "details" for payment entries of paid entries on various places where it is displayed
 - When marking an item as free for someone, eliminate their registrant_expense_item somehow?
 - combine the _expense_list.html.erb and the other (similar) partials
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
@@ -56,13 +85,8 @@ Registration-Related ToDo
 - Get rid of XXX
 - Ensure that all roles can perform all the actions that they want/expect to be able to do
 
-- Add age validation to the Jr Expert (and Wheel Walk)
-- Only allow "Jr Expert" if certain age.
 - Limit the rooms to 1000 by all types (not per type of room)
-- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
 - Give Online registration statistics to Hugo from previous UNICON (how many in each phase)
-- delegate expenseGroup to the paymentDetail and registrantExpenseItem, so that we don't have to explicitly go through the expense_item?
-- Fix the stylesheet/images issue which is preventing serving any of the up-arrow/down-arrow images in PRODUCTION
 
 
 Categories:
@@ -130,12 +154,6 @@ Possible (but not required):
  - Do we want this, or to have different room numbers?
 
 Nice-to-have:
-1) Whatever is simpler, and cancelling the room bookings of un-paid registrants after each period is ok, with an e-mail, and .....
-2) Definately allow people to have multiple slots in a room. (probably)...depends on gyms
-- Maximum per registrant should be 5
-3) Should stay in the same day for the whole stay.
-4) Should be buying a "package deal"(all rooms at once)
-
 - Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
  - Due to the "import" feature I think
 

@@ -15,8 +15,8 @@
       <% if show_as_free %>
         <%= ff.hidden_field :free, {:value => 1} %>
       <% end %>
-      <% if @registrant_expense_item.expense_item.has_details %>
-        <%= ff.label :details, @registrant_expense_item.expense_item.details_label %>:
+      <% if @registrant_expense_item.has_details %>
+        <%= ff.label :details, @registrant_expense_item.details_label %>:
         <%= ff.text_field :details %>
       <% end %>
       <% if show_as_free %>

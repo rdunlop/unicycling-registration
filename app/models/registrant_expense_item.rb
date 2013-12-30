@@ -7,6 +7,9 @@ class RegistrantExpenseItem < ActiveRecord::Base
   validates :expense_item, :registrant, :presence => true
   validate :only_one_free_per_expense_group, :on => :create
 
+  delegate :has_details, to: :expense_item
+  delegate :details_label, to: :expense_item
+
   def cost
     return 0 if free
 

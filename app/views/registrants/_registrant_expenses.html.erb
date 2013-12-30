@@ -4,6 +4,7 @@
     <thead>
       <tr>
         <th>Item</th>
+        <td></td>
         <th><%= t(".cost") %></th>
         <th><%= t(".paid") %>?</th>
       </tr>
@@ -13,6 +14,11 @@
       <% @registrant.paid_details.each do |pei| %>
         <tr>
           <td><%= pei %></td>
+          <td>
+            <% if pei.has_details %>
+              <%= pei.details_label %>: <%= pei.details %>
+            <% end %>
+          </td>
           <td><%= print_item_cost_currency(pei.cost) %></td>
           <td>&#x2713;</td>
         </tr>
@@ -20,6 +26,11 @@
       <% @registrant.owing_registrant_expense_items.each do |ce| %>
         <tr>
           <td><%= ce.expense_item %></td>
+          <td>
+            <% if ce.has_details %>
+              <%= ce.details_label %>: <%= ce.details %>
+            <% end %>
+          </td>
           <td><%= print_item_cost_currency(ce.cost) %></td>
           <% if ce.free %>
             <td>n/a</td>

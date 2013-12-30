@@ -9,6 +9,9 @@ class PaymentDetail < ActiveRecord::Base
   belongs_to :expense_item
   has_one :refund_detail
 
+  delegate :has_details, to: :expense_item
+  delegate :details_label, to: :expense_item
+
   after_touch :touch_registrant
 
   # excludes refunded items

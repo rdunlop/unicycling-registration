@@ -11,8 +11,8 @@
       <%= rfei.hidden_field :id, :index => index %>
     </td>
     <td>
-      <% if rfei.object.expense_item.has_details %>
-        <%= rfei.label :details, rfei.object.expense_item.details_label %>
+      <% if rfei.object.has_details %>
+        <%= rfei.label :details, rfei.object.details_label %>
         <%= rfei.text_field :details, :index => index %>
       <% end %>
     </td>
