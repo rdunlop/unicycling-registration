@@ -277,4 +277,32 @@ describe EventsController do
         assigns(:events).should eq([event2])
     end
   end
+
+  describe "GET summary" do
+    it "assigns all events as @events" do
+      event = FactoryGirl.create(:event)
+      get :summary, {}
+      response.should be_success
+      assigns(:events).should eq([event])
+    end
+    describe "With competitors and non-competitors" do
+      before(:each) do
+        @comp1 = FactoryGirl.create(:competitor)
+        @comp2 = FactoryGirl.create(:competitor)
+        @non_comp1 = FactoryGirl.create(:noncompetitor)
+      end
+      it "sets the number of registrants as @num_registrants" do
+        get :summary, {}
+        assigns(:num_registrants).should == 3
+      end
+      it "sets the number of competitors as @num_competitors" do
+        get :summary, {}
+        assigns(:num_competitors).should == 2
+      end
+      it "sets the number of non_competitors as @num_non_competitors" do
+        get :summary, {}
+        assigns(:num_non_competitors).should == 1
+      end
+    end
+  end
 end
