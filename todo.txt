@@ -36,6 +36,7 @@ Registration-Related ToDo
 
 - clear the cache of reg_paid when a refund is created
 
+- fix the shared_error messages count only include entries which have a non-empty text field.
 - find a way to clear the rails cache before each test 'describe' step?
 - Display the "details" for payment entries of paid entries on various places where it is displayed
 - When marking an item as free for someone, eliminate their registrant_expense_item somehow?

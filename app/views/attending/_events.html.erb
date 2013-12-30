@@ -43,17 +43,19 @@
                       </td>
                       <td class="event_choice">
                       <%= resu.label :event_category_id, t('.category') %>
-                      <%= resu.select :event_category_id,
-                        event.event_categories do |cat| 
-                          unless registrat.age.nil?
-                            if (cat.age_range_start..cat.age_range_end).include?(registrant.age)
-                              cat.map{ |ec| [ec.name, ec.id] }
-                            end
+                      <% 
+                        list = []
+                        event.event_categories.each do |cat|
+                          if registrant.age.nil?
+                            list << [cat.name, cat.id]
                           else
-                            cat.map{ |ec| [ec.name, ec.id] }
+                            if (cat.age_range_start..cat.age_range_end).include?(registrant.age)
+                              list << [cat.name, cat.id]
+                            end
                           end
-                        end, :include_blank => true
-                          %>
+                        end
+                        %>
+                        <%= resu.select :event_category_id, list, :include_blank => true %>
                     <% end %>
                   </td>
                 <% end %>
