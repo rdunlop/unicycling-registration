@@ -19,7 +19,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
   end
 
   def category_in_age_range
-    unless self.event_category.nil?
+    unless self.event_category.nil? or registrant.nil?
       if self.signed_up and !(self.event_category.age_range_start..self.event_category.age_range_end).include?(registrant.age)
         errors[:base] << "You must be between #{self.event_category.age_range_start} and #{self.event_category.age_range_end} 
         years old to select #{self.event_category.name} for #{self.event.name} in #{self.event.event_class}"
