@@ -1,6 +1,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for other language starting points.
 
 fr:
+  layouts:
+    application:
+      registration: "Inscriptions"
   date:
     formats:
       registration_date_format: "%d %b, %Y"

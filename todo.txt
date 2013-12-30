@@ -5,6 +5,7 @@ Registration-Related ToDo
 -- SCOTT's CURRENT LIST:
 - Update the Events tabs to be coloured as per their desire (use jqueryui website to choose the color scheme?)
 - Update the Events tabs' internal table to alternate row colours, as per Hugo's desire.
+- enable travis
 -- END SCOTT's CURRENT LIST:
 
 
@@ -36,6 +37,7 @@ Registration-Related ToDo
 
 - clear the cache of reg_paid when a refund is created
 
+- fix the shared_error messages count only include entries which have a non-empty text field.
 - find a way to clear the rails cache before each test 'describe' step?
 - Display the "details" for payment entries of paid entries on various places where it is displayed
 - When marking an item as free for someone, eliminate their registrant_expense_item somehow?
