@@ -65,7 +65,6 @@ Workspace::Application.routes.draw do
           post :refund_create
         end
       end
-      resources :events, :only => [:index, :show]
 
       namespace :export do
         get :index
@@ -141,6 +140,8 @@ Workspace::Application.routes.draw do
         get 'track'
         get 'distance'
         get 'ranked'
+
+        get 'summary'
       end
       resources :competitions, :only => [:index] do
         collection do

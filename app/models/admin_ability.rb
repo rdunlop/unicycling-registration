@@ -5,7 +5,6 @@ class AdminAbility
     if user.nil?
     else
       if user.has_role? :admin or user.has_role? :super_admin
-        can :manage, Event
         can :manage, Payment
         if user.has_role? :admin
           cannot :create, Payment

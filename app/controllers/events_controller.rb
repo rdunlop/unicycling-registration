@@ -25,6 +25,13 @@ class EventsController < ApplicationController
     end
   end
 
+  # GET /events/summary
+  def summary
+    @num_competitors = Registrant.where({:competitor => true}).count
+    @num_non_competitors = Registrant.where({:competitor => false}).count
+    @num_registrants = @num_competitors + @num_non_competitors
+  end
+
   # GET /events/1
   def show
   end

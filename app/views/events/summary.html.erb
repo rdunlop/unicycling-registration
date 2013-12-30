@@ -21,32 +21,26 @@
 
 <hr />
 
-<table class="alternate">
+<table class="sortable">
   <caption>Event-Competitor-Breakdown</caption>
   <thead>
     <th>Category</th>
     <th>Event Name</th>
-    <th>Sign Up List</th>
     <th>Event Category</th>
+    <th>Sign Up List</th>
     <th># Signed Up</th>
   </thead>
   <tbody>
     <% @events.each do |event| %>
-      <% new_event = true %>
       <% event.event_categories.each do |ecat| %>
         <tr>
-          <% if new_event %>
-            <td><%= event.category %></td>
-            <td><%= event %></td>
-            <% new_event = false %>
-            <td>
-              <%= link_to "HTML", admin_event_path(event) %>
-              <%= link_to "PDF", admin_event_path(event, :format => "pdf") %>
-            </td>
-          <% else %>
-            <td colspan="3"></td>
-          <% end %>
+          <td><%= event.category %></td>
+          <td><%= event %></td>
           <td><%= ecat %></td>
+          <td>
+            <%= link_to "HTML", sign_ups_event_category_path(ecat) %>
+            <%= link_to "PDF", sign_ups_event_category_path(ecat, :format => "pdf") %>
+          </td>
           <td><%= ecat.num_competitors %></td>
         </tr>
       <% end %>

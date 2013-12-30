@@ -16,7 +16,8 @@
     <% @event.event_categories.each do |ec| %>
       <tr>
         <td><%= ec %></td>
-        <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %></td>
+        <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %>
+          <%= link_to '(pdf)', sign_ups_event_category_path(ec, :format => :pdf) %></td>
         <td><%= ec.signed_up_registrants.count %></td>
         <td><%= link_to "Create New", new_event_category_competition_path(ec) %></td>
         <td><%= link_to "Create New (blank)", new_empty_event_competitions_path(@event) %></td>

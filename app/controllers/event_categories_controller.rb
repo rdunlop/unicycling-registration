@@ -94,6 +94,10 @@ class EventCategoriesController < ApplicationController
 
   def sign_ups
     @registrants = @event_category.signed_up_registrants
+    respond_to do |format|
+      format.html
+      format.pdf { render :pdf => "show", :formats => [:html] }
+    end
   end
 
   private
