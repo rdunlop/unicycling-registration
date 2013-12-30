@@ -34,6 +34,7 @@ Most Useful:
  - Add new "num free" column to the Payments#summary page
 - Improve the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
+ - Allow choosing the 20" wheel size for 0-10 for 10k.
 
 ---- END ROBIN's CURRENT LIST:
 
