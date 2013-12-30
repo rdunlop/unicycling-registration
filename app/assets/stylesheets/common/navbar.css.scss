@@ -7,6 +7,31 @@ $text: rgb(36, 130, 181);
 $texthover: rgb(255, 255, 255);
 
 
+// http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+#container {
+   min-height:100%;
+   position:relative;
+}
+#main {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+   text-align: center;
+   vertical-align: center;
+}
+#bottom_nav {
+   text-align: center;
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+}
+
 nav {
   .logo {
     vertical-align: middle;

@@ -16,6 +16,13 @@
         e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
 mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
   <% end %>
+<!--[if lt IE 7]>
+  <style media="screen" type="text/css">
+  #container {
+    height:100%;
+  }
+  </style>
+  <![endif]-->
 </head>
 <body>
   <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
@@ -33,144 +40,8 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <% end %>
   <% end %>
 
-  <%
-    m = Menu.new
-  %>
-
-  <nav class="non_printable">
-    <ul>
-      <% if EventConfiguration.configuration_exists? %>
-        <% target_url = EventConfiguration.event_url %>
-        <li>
-        <% if target_url.nil? %>
-          <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), root_url, {:class => "logo_link"} %>
-        <% else %>
-          <%= link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), target_url, {:class => "logo_link", :target => "_blank"} %>
-        <% end %>
-        </li>
-      <% end %>
-      <% if current_user.nil? %>
-        <%
-          m.headings << Menu::MenuHeading.new(:title => "Log In", :is_link => true, :url => new_user_session_path)
-        %>
-      <% else %>
-        <%
-          if cannot? :manage, Registrant
-            m.headings << Menu::MenuHeading.new(:title => t('my_registrations'), :is_link => true, :url => registrants_path)
-            m.headings << Menu::MenuHeading.new(:title => t('my_payments'), :is_link => true, :url => payments_path)
-            if @config.standard_skill
-              m.headings << Menu::MenuHeading.new(:title => 'My Standard Skill Routines', :is_link => true, :url => standard_skill_routines_path)
-            end
-            m.headings << Menu::MenuHeading.new(:title => t('all_registrants'), :is_link => true, :url => all_registrants_path)
-          else
-            heading = Menu::MenuHeading.new(:title => 'My Data')
-            m.headings << heading
-            heading.entries << Menu::MenuEntry.new(:title => 'My Registrations', :url => registrants_path, :active => current_page?(registrants_path))
-            heading.entries << Menu::MenuEntry.new(:title => 'My Payments', :url => payments_path, :active => current_page?(payments_path))
-            if @config.standard_skill
-              heading.entries << Menu::MenuEntry.new(:title => 'My Standard Skill Routines', :url => standard_skill_routines_path, :active => current_page?(standard_skill_routines_path))
-            end
-            heading.entries << Menu::MenuEntry.new(:title => 'All Registrants', :url => all_registrants_path, :active => current_page?(all_registrants_path))
-          end 
-        %>
-
-        <%
-          heading = Menu::MenuHeading.new(:title => 'Site Config')
-          m.headings << heading
-          heading.entries << Menu::MenuEntry.new(:title => 'Base Configuration', :url => event_configurations_path, :active => current_page?(event_configurations_path), :permitted => can?(:manage, EventConfiguration))
-          heading.entries << Menu::MenuEntry.new(:title => 'Registration Periods', :url => registration_periods_path, :active => current_page?(registration_periods_path), :permitted => can?(:manage, RegistrationPeriod))
-          heading.entries << Menu::MenuEntry.new(:title => 'Event Offerings', :url => categories_path, :active => current_page?(categories_path), :permitted => can?(:manage, Category))
-          heading.entries << Menu::MenuEntry.new(:title => 'Age Group Type', :url => admin_age_group_types_path, :active => current_page?(admin_age_group_types_path), :permitted => can?(:manage, AgeGroupType))
-          if @config.standard_skill
-            heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Entries', :url => admin_standard_skill_entries_path, :active => current_page?(admin_standard_skill_entries_path), :permitted => can?(:manage, StandardSkillEntry))
-          end
-          heading.entries << Menu::MenuEntry.new(:title => 'User Permissions', :url => admin_users_path, :active => current_page?(admin_users_path), :permitted => can?(:manage, User))
-          heading.entries << Menu::MenuEntry.new(:title => 'Expense Groups', :url => expense_groups_path, :active => current_page?(expense_groups_path), :permitted => can?(:manage, ExpenseGroup))
-          heading.entries << Menu::MenuEntry.new(:title => 'Expense Items', :url => expense_items_path, :active => current_page?(expense_items_path), :permitted => can?(:manage, ExpenseItem))
-        %>
-        <%
-          heading = Menu::MenuHeading.new(:title => 'Manage')
-          m.headings << heading
-          heading.entries << Menu::MenuEntry.new(:title => 'Registrants (edit/print)', :url => admin_registrants_path, :active => current_page?(admin_registrants_path), :permitted => can?(:manage, Registrant))
-          heading.entries << Menu::MenuEntry.new(:title => 'Registrants (bag labels)', :url => bag_labels_admin_registrants_path, :active => current_page?(bag_labels_admin_registrants_path), :permitted => can?(:manage, Registrant))
-          heading.entries << Menu::MenuEntry.new(:title => 'Registrants (email)', :url => email_admin_registrants_path, :active => current_page?(email_admin_registrants_path), :permitted => can?(:manage, Registrant))
-          heading.entries << Menu::MenuEntry.new(:title => 'Registrant Groups', :url => registrant_groups_path, :active => current_page?(registrant_groups_path), :permitted => can?(:manage, Registrant))
-          heading.entries << Menu::MenuEntry.new(:title => 'Payments', :url => summary_admin_payments_path, :active => current_page?(summary_admin_payments_path), :permitted => can?(:manage, Registrant))
-          heading.entries << Menu::MenuEntry.new(:title => 'Paid Payment Detail', :url => details_admin_payments_path, :active => current_page?(details_admin_payments_path), :permitted => can?(:manage, Registrant))
-          heading.entries << Menu::MenuEntry.new(:title => 'Events Report', :url => admin_events_path, :active => current_page?(admin_events_path), :permitted => can?(:manage, Registrant))
-          heading.entries << Menu::MenuEntry.new(:title => 'Chief Judges', :url => chiefs_judges_path, :active => current_page?(chiefs_judges_path), :permitted => can?(:manage, Judge))
-          heading.entries << Menu::MenuEntry.new(:title => 'UCP Export/Import', :url => admin_export_index_path, :active => current_page?(admin_export_index_path), :permitted => can?(:manage, :all))
-          heading.entries << Menu::MenuEntry.new(:title => 'Modification History', :url => rails_admin_path, :active => current_page?(rails_admin_path), :permitted => can?(:access, :rails_admin))
-          if @config.standard_skill
-            heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (view)', :url => standard_skill_routines_path, :active => current_page?(standard_skill_routines_path), :permitted => can?(:manage, StandardSkillRoutine))
-            heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (export)', :url => download_file_admin_standard_skill_routines_path, :active => current_page?(download_file_admin_standard_skill_routines_path), :permitted => can?(:manage, StandardSkillRoutine))
-          end
-        %>
-        <%
-          heading = Menu::MenuHeading.new(:title => 'Awards (old)')
-          m.headings << heading
-          heading.entries << Menu::MenuEntry.new(:title => 'Print/Create Awards', :url => user_award_labels_path(current_user), :active => current_page?(user_award_labels_path(current_user)), :permitted => can?(:manage, AwardLabel))
-        %>
-        <%
-          heading = Menu::MenuHeading.new(:title => 'Judging (old)')
-          m.headings << heading
-          heading.entries << Menu::MenuEntry.new(:title => 'My Events', :url => judging_events_path, :active => current_page?(judging_events_path), :permitted => can?(:judging, Event))
-          heading.entries << Menu::MenuEntry.new(:title => 'Freestyle', :url => freestyle_events_path, :active => current_page?(freestyle_events_path), :permitted => can?(:freestyle, Event))
-          heading.entries << Menu::MenuEntry.new(:title => 'Flatland', :url => flatland_events_path, :active => current_page?(flatland_events_path), :permitted => can?(:freestyle, Event))
-          heading.entries << Menu::MenuEntry.new(:title => 'Street', :url => street_events_path, :active => current_page?(street_events_path), :permitted => can?(:freestyle, Event))
-          heading.entries << Menu::MenuEntry.new(:title => 'Timed', :url => distance_events_path, :active => current_page?(distance_events_path), :permitted => can?(:freestyle, Event))
-          heading.entries << Menu::MenuEntry.new(:title => 'Externally Ranked', :url => ranked_events_path, :active => current_page?(ranked_events_path), :permitted => can?(:freestyle, Event))
-          heading.entries << Menu::MenuEntry.new(:title => 'High/Long', :url => track_events_path, :active => current_page?(track_events_path), :permitted => can?(:freestyle, Event))
-          heading.entries << Menu::MenuEntry.new(:title => 'Printing', :url => printing_race_recording_list_path, :active => current_page?(printing_race_recording_list_path), :permitted => can?(:freestyle, Event))
-        %>
-        <%
-          Category.all.each do |category|
-            current_heading = Menu::MenuHeading.new(:title => category)
-            m.headings << current_heading
-            category.events.each do |event|
-              current_heading.entries << Menu::MenuEntry.new(:title => event, :url => event_path(event), :active => current_page?(event_path(event)), :permitted => can?(:manage, event))
-            end
-          end
-        %>
-      <% end %>
-      <% m.headings.each do |heading| %>
-        <% next unless heading.has_permitted_entry %>
-        <% if heading.is_link %>
-          <% if current_page?(heading.url) %>
-            <li><%= link_to heading.title, heading.url, {:class => "current_page"} %></li>
-          <% else %>
-            <li><%= link_to heading.title, heading.url %></li>
-          <% end %>
-        <% else %>
-          <% if heading.active %>
-            <li class="current_page"><a href="#" class="current_page"><%= heading.title %></a>
-            <ul class="current_page">
-         <% else %>
-           <li><a href="#"><%= heading.title %></a>
-           <ul>
-         <% end %>
-         <% 
-           heading.entries.each do |entry|
-             attrs = {}
-             if entry.active
-               attrs[:class] = "current_page"
-             end
-             unless entry.permitted
-               attrs[:disabled] = true
-             end
-           %>
-           <li><%= link_to entry.title, entry.url, attrs %></li>
-         <% end %>
-          </ul>
-         </li>
-       <% end %>
-     <% end %>
-
-     <% unless current_user.nil? %>
-       <li id="sign-out"><%= link_to t('sign_out'), destroy_user_session_path, :method => :delete %></li>
-     <% end %>
-    </ul>
-    </nav>
+  <div id="container">
+    <%= render :partial => "layouts/navbar" %>
 
     <% if !current_user.nil? and  @config.test_mode %>
       <div class="test_mode">
@@ -193,7 +64,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
       </div>
     <% end %>
 
-  <div class="main_nav">
+  <div id="main">
     <% unless notice.blank? %>
       <p class="notice"><%= notice %></p>
     <% end %>
@@ -203,7 +74,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <%= yield %>
   </div>
 
-  <div class="bottom_nav non_printable">
+  <div id="bottom_nav" class="non_printable">
     <% unless EventConfiguration.rulebook_url.nil? %>
     <div class="rulebook_link">
       <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the IUF 2013 Competition Rulebook!" %>
@@ -212,5 +83,6 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <p><%= t("developed_by") %></p>
     <li><%= link_to t('help'), welcome_help_path %></li>
   </div>
+</div>
 </body>
 </html>
