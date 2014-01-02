@@ -33,7 +33,6 @@ $(document).ready(function () {
 /* Generic sorting dataTable */
 $(document).ready(function() {
   $(".sortable").each(function() {
-    var search;
     if ($(this).hasClass('searchable')) {
        search = true;
     } else {
