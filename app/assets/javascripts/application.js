@@ -32,22 +32,17 @@ $(document).ready(function () {
 
 /* Generic sorting dataTable */
 $(document).ready(function() {
-  if ($('.sortable').hasClass('searchable')) {
-    $(".sortable").each(function() {
-      $(this).dataTable({
-        "bFilter": true,
-        "bInfo": false,
-        "bPaginate": false
-      });
-    });
-  }
-  else {
-    $(".sortable").each(function() {
-      $(this).dataTable({
-        "bFilter": false,
-        "bInfo": false,
-        "bPaginate": false
-      });
-    });
-  };
+  $(".sortable").each(function() {
+    var search;
+    if ($(this).hasClass('searchable')) {
+       search = true;
+    } else {
+       search = false;
+    }
+   $(this).dataTable({
+     "bFilter": search,
+     "bInfo": false,
+     "bPaginate": false
+   });
+  });
 });
