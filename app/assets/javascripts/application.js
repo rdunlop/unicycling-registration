@@ -32,11 +32,22 @@ $(document).ready(function () {
 
 /* Generic sorting dataTable */
 $(document).ready(function() {
-  $(".sortable").each(function() {
-    $(this).dataTable({
-      "bFilter": false,
-      "bInfo": false,
-      "bPaginate": false
+  if ($('.sortable').hasClass('searchable')) {
+    $(".sortable").each(function() {
+      $(this).dataTable({
+        "bFilter": true,
+        "bInfo": false,
+        "bPaginate": false
+      });
     });
-  });
+  }
+  else {
+    $(".sortable").each(function() {
+      $(this).dataTable({
+        "bFilter": false,
+        "bInfo": false,
+        "bPaginate": false
+      });
+    });
+  };
 });
