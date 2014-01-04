@@ -17,13 +17,25 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
+**** 
+ - Remove existing reg_item when a payment is received which includes one
+ - Allow marking a reg_item as "locked"
+ - Add banner for when timer hasn't run
+ - Add scheduler every hour for updating
+  - Add cache for checking
+****
+- Marking Wire Payments received for Lodging doesn't eliminate the previous lodging entry.
+- IPN with no invoice number should include whole post information.
+ - determine if there is a way to prevent all things from getting sent to me?
 - Menu submenu onclick, and always have a 2nd level.
-- Send Hugo/Benoit a list of #'s of registrants from UNICON 16.
+- Make a single expense_group for registration_fees, and prevent using it elsewhere.
 
 - Allow deleting of a registration which has payments, as long as they are fully refunded. (refund:
   345 - Markus Kurz
   2009 - Yannic Dick
   2017 - Frederik Tubes
+  Email: "Reg. Deletion"
+  - and "764 - fgf"
 - Confirm that David Ramos' reg is paid (early reg, via e-cheque)
 - Change the reg fee calculation to actually assign an entry to the registrant (not just an ephemeral one)
  - Add a timer/function which updates these items
@@ -36,6 +48,7 @@ Most Useful:
 - Improve the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.
+- Donation Line for payments for USA Scholarship?
 
 ---- END ROBIN's CURRENT LIST:
 
@@ -43,6 +56,7 @@ Most Useful:
 ===========================================================
 
 Minor:
+- UTF8 encoding of the list elements sent to Paypal (to allow for french characters) Search "Notification of payment received" in e-mail
 - Show the price rates/dates even on non-signed-in page?
 - replace has_details/print_details with common helper function?
  - Display the "details" for payment entries of paid entries on various places where it is displayed

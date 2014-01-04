@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131228172217) do
+ActiveRecord::Schema.define(:version => 20131231171144) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"

@@ -130,8 +130,11 @@ describe PaymentsController do
       end
       it "only assigns registrants that owe money" do
         @other_reg = FactoryGirl.create(:competitor, :user => @user)
-        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment = FactoryGirl.create(:payment)
         @pd = FactoryGirl.create(:payment_detail, :registrant => @other_reg, :payment => @payment, :amount => 100, :expense_item => @reg_period.competitor_expense_item)
+        @payment.reload
+        @payment.completed = true
+        @payment.save
         get :new, {}
         pd = assigns(:payment).payment_details.first
         pd.registrant.should == @reg
@@ -140,8 +143,11 @@ describe PaymentsController do
       describe "has paid, but owes for more items" do
         before(:each) do
           @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :details => "Additional Details")
-          @payment = FactoryGirl.create(:payment, :completed => true)
+          @payment = FactoryGirl.create(:payment)
           @pd = FactoryGirl.create(:payment_detail, :registrant => @reg, :payment => @payment, :amount => 100, :expense_item => @reg_period.competitor_expense_item)
+          @payment.reload
+          @payment.completed = true
+          @payment.save
         end
         it "handles registrants who have paid, but owe more" do
           get :new, {}

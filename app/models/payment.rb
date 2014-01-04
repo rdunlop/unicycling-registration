@@ -48,12 +48,21 @@ class Payment < ActiveRecord::Base
         end
       end
 
+      if rei.nil?
+        all_reg_items = RegistrationPeriod.all_registration_expense_items
+        if all_reg_items.include?(pd.expense_item)
+          # the pd is a reg_item, see if there is another reg_item in the registrant's list
+          reg_items = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => all_reg_items})
+          if reg_items.count > 0
+            rei = reg_items.first
+          end
+        end
+      end
+
       unless rei.nil?
         rei.destroy
       else
-        unless RegistrationPeriod.all_registration_expense_items.include?(pd.expense_item)
-          Notifications.missing_matching_expense_item(self).deliver
-        end
+        Notifications.missing_matching_expense_item(self).deliver
       end
     end
   end

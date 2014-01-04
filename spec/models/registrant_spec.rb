@@ -333,7 +333,7 @@ describe Registrant do
         @noncomp.amount_owing.should == 50
       end
       it "retrieves the non-comp registration_item" do
-        @noncomp.registration_item.should == @noncomp_exp
+        @noncomp.registrant_expense_items.first.expense_item.should == @noncomp_exp
       end
       it "lists the item as an owing_expense_item" do
         @noncomp.owing_expense_items.should == [@noncomp_exp]
@@ -345,7 +345,7 @@ describe Registrant do
         @comp = FactoryGirl.create(:competitor)
       end
       it "retrieves the comp registration_item" do
-        @comp.registration_item.should == @comp_exp
+        @comp.registrant_expense_items.first.expense_item.should == @comp_exp
       end
       it "lists the item as an owing_expense_item" do
         @comp.owing_registrant_expense_items.first.expense_item.should == @comp_exp
@@ -359,19 +359,27 @@ describe Registrant do
         @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2009,01,01), :end_date => Date.new(2010, 01, 01), 
                                  :competitor_expense_item => @oldcomp_exp, :noncompetitor_expense_item => @oldnoncomp_exp)
         @comp = FactoryGirl.create(:competitor)
-        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment = FactoryGirl.create(:payment)
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 90, :expense_item => @oldcomp_exp)
+        @payment.reload
+        @payment.completed = true
+        @payment.save
+        @comp.reload
       end
       it "should return nil as the registration_item" do
-        @comp.registration_item.should be_nil
+        @comp.registrant_expense_items.count.should == 0
       end
     end
 
     describe "with a completed payment" do
       before(:each) do
         @comp = FactoryGirl.create(:competitor)
-        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment = FactoryGirl.create(:payment)
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100, :expense_item => @comp_exp)
+        @payment.reload
+        @payment.completed = true
+        @payment.save
+        @comp.reload
       end
       it "should have associated payment_details" do
         @comp.payment_details.should == [@payment_detail]

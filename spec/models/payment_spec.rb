@@ -228,7 +228,6 @@ describe Payment do
       end
     end
 
-
     describe "when the payment has empty details, vs nil details" do
       before(:each) do
         @rei.details = nil
@@ -247,23 +246,6 @@ describe Payment do
       end
     end
 
-    describe "when paying for registration item" do
-      before(:each) do
-        ActionMailer::Base.deliveries.clear
-        @reg_period = FactoryGirl.create(:registration_period)
-        @pd.expense_item  = @reg_period.competitor_expense_item
-        @rei.save
-        @pd.save
-        @pay.completed = true
-        @pay.save
-      end
-
-      it "only sends one e-mail" do
-        num_deliveries = ActionMailer::Base.deliveries.size
-        num_deliveries.should == 0
-        mail = ActionMailer::Base.deliveries.first
-      end
-    end
     describe "when the payment is paid" do
       before(:each) do
         @pay.completed = true
@@ -286,6 +268,33 @@ describe Payment do
           @reg.owing_expense_items.should == [@rei2.expense_item]
         end
       end
+    end
+  end
+  describe "when paying for registration item" do
+    before(:each) do
+      @reg_period = FactoryGirl.create(:registration_period)
+      @pay = FactoryGirl.create(:payment)
+      @pd = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => @reg_period.competitor_expense_item.cost)
+
+      @reg_with_reg_item = FactoryGirl.create(:competitor)
+      @pd.registrant = @reg_with_reg_item
+      @pd.expense_item  = @reg_period.competitor_expense_item
+      @pd.save
+    end
+
+    it "initially has the reg_item" do
+      @reg_with_reg_item.registrant_expense_items.count.should == 1
+      @reg_with_reg_item.registrant_expense_items.first.expense_item.should == @reg_period.competitor_expense_item
+    end
+
+    it "sends no e-mail" do
+      ActionMailer::Base.deliveries.clear
+      @pay.reload
+      @pay.completed = true
+      @pay.save
+      num_deliveries = ActionMailer::Base.deliveries.size
+      num_deliveries.should == 0
+      mail = ActionMailer::Base.deliveries.first
     end
   end
 end

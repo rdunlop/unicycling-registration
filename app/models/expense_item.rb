@@ -32,17 +32,6 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_unpaid
-    rp = RegistrationPeriod.relevant_period(Date.today)
-    unless rp.nil?
-      if self == rp.competitor_expense_item
-        count = Registrant.where({:competitor => true}).all.count {|reg| !reg.reg_paid? }
-        return count
-      elsif self == rp.noncompetitor_expense_item
-        count = Registrant.where({:competitor => false}).all.count {|reg| !reg.reg_paid? }
-        return count
-      end
-    end
-
     registrant_expense_items.count
   end
 

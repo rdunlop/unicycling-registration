@@ -48,7 +48,7 @@ class Registrant < ActiveRecord::Base
 
   default_scope where(:deleted => false).order(:bib_number)
 
-  has_many :payment_details, :include => :payment
+  has_many :payment_details, :include => :payment, :dependent => :destroy
 
   has_many :registrant_group_members, :dependent => :destroy
   has_many :registrant_groups, :through => :registrant_group_members
@@ -79,8 +79,19 @@ class Registrant < ActiveRecord::Base
   end
 
   def create_associated_required_expense_items
-    # add the registration_period expense_item
 
+    # add the registration_period expense_item
+    rp = RegistrationPeriod.relevant_period(Date.today)
+    unless rp.nil?
+      if competitor
+        reg_item = rp.competitor_expense_item
+      else
+        reg_item = rp.noncompetitor_expense_item
+      end
+      unless reg_item.nil?
+        registrant_expense_items.build({:expense_item_id => reg_item.id, :system_managed => true})
+      end
+    end
 
     # create any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
     if competitor
@@ -366,16 +377,6 @@ class Registrant < ActiveRecord::Base
   def owing_registrant_expense_items
     # prevents this from creating new items when we return a 'new'd element
     items = self.registrant_expense_items.clone
-
-    if not reg_paid?
-      ri = registration_item
-      if not ri.nil?
-        items << RegistrantExpenseItem.new({:registrant_id => self.id, :expense_item_id => ri.id})
-      end
-    end
-
-
-    items
   end
 
   def has_required_expense_group(expense_group)
@@ -399,22 +400,6 @@ class Registrant < ActiveRecord::Base
       total = 0
     end
   end
-
-  def registration_item
-    unless reg_paid?
-      rp = RegistrationPeriod.relevant_period(Date.today)
-    end
-
-    unless rp.nil?
-      if self.competitor
-        registration_expense_item = rp.competitor_expense_item
-      else
-        registration_expense_item = rp.noncompetitor_expense_item
-      end
-    end
-    registration_expense_item
-  end
-
 
   ############# Events Selection ########
   def has_event_in_category?(category)
