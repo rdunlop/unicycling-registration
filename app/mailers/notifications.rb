@@ -47,4 +47,20 @@ class Notifications < ActionMailer::Base
 
     mail to: ENV['ERROR_EMAIL'], subject: "Missing reg-item match"
   end
+
+  def updated_current_reg_period(old_period, new_period)
+    @old_period_description = "Unspecified"
+    @old_period_description = old_period.name unless old_period.nil?
+
+    @new_period_description = "Unspecified"
+    @new_period_description = new_period.name unless new_period.nil?
+
+    mail to: ENV['ERROR_EMAIL'], subject: "Updated Registration Period"
+  end
+
+  def missing_old_reg_items(bib_numbers)
+    @bib_numbers = bib_numbers
+
+    mail to: ENV['ERROR_EMAIL'], subject: "Registration Items Missing!"
+  end
 end

@@ -103,3 +103,126 @@ describe RegistrationPeriod do
     end
   end
 end
+describe "when testing the update function for registration periods", :caching => true do
+  before(:each) do
+    # create a rp which encompasses "today"
+    @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 12, 21), :end_date => Date.new(2020,11, 7))
+    @reg = FactoryGirl.create(:competitor) # will have rp1
+    @nc_reg = FactoryGirl.create(:noncompetitor) # will have rp1
+  end
+  it "initially doesn't have a current_period" do
+    RegistrationPeriod.current_period.should == nil
+  end
+  it "initially, the registrant has an expense_item from the current period" do
+    @reg.registrant_expense_items.count.should == 1
+    @reg.registrant_expense_items.first.expense_item.should == @rp1.competitor_expense_item
+    @nc_reg.registrant_expense_items.count.should == 1
+    @nc_reg.registrant_expense_items.first.expense_item.should == @rp1.noncompetitor_expense_item
+  end
+
+  describe "after the update has been called" do
+    before(:each) do
+      ActionMailer::Base.deliveries.clear
+      RegistrationPeriod.update_current_period(Date.new(2012, 12, 22))
+    end
+    it "sets the current period when invoked" do
+      RegistrationPeriod.current_period.should == @rp1
+    end
+
+    it "sends an e-mail when it changes the reg period" do
+      num_deliveries = ActionMailer::Base.deliveries.size
+      num_deliveries.should == 1
+    end
+
+    describe "when updating to the next period" do
+      before(:each) do
+        ActionMailer::Base.deliveries.clear
+        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020,11, 8), :end_date => Date.new(2021, 1, 1))
+        @ret = RegistrationPeriod.update_current_period(Date.new(2020,12,1))
+      end
+
+      it "indicates that it updated" do
+        @ret.should == true
+      end
+      it "updates the current_period" do
+        RegistrationPeriod.current_period.should == @rp2
+      end
+      it "sends an e-mail when it changes the reg period" do
+        num_deliveries = ActionMailer::Base.deliveries.size
+        num_deliveries.should == 1
+        email = ActionMailer::Base.deliveries.first
+        email.subject.should == "Updated Registration Period"
+      end
+      it "changes the registrant's item to the new period" do
+        @reg.reload
+        @reg.registrant_expense_items.count.should == 1
+        @reg.registrant_expense_items.first.expense_item.should == @rp2.competitor_expense_item
+
+        @nc_reg.reload
+        @nc_reg.registrant_expense_items.count.should == 1
+        @nc_reg.registrant_expense_items.first.expense_item.should == @rp2.noncompetitor_expense_item
+      end
+    end
+    describe "when updating to a non-existent period" do
+      before(:each) do
+        ActionMailer::Base.deliveries.clear
+        @ret = RegistrationPeriod.update_current_period(Date.new(2020,12,1))
+      end
+
+      it "indicates that it updated" do
+        @ret.should == true
+      end
+      it "updates the current_period (which is nil)" do
+        RegistrationPeriod.current_period.should == nil
+      end
+      it "sends an e-mail when it changes the reg period" do
+        num_deliveries = ActionMailer::Base.deliveries.size
+        num_deliveries.should == 1
+        email = ActionMailer::Base.deliveries.first
+        email.subject.should == "Updated Registration Period"
+      end
+      it "changes the registrant's item to the new period" do
+        @reg.reload
+        @reg.registrant_expense_items.count.should == 0
+
+        @nc_reg.reload
+        @nc_reg.registrant_expense_items.count.should == 0
+      end
+      describe "when updating to a now-existent period" do
+        before(:each) do
+          ActionMailer::Base.deliveries.clear
+          @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020,11, 8), :end_date => Date.new(2021, 1, 1))
+          @ret = RegistrationPeriod.update_current_period(Date.new(2020,12,1))
+        end
+
+        it "indicates that it updated" do
+          @ret.should == true
+        end
+        it "updates the current_period" do
+          RegistrationPeriod.current_period.should == @rp2
+        end
+        it "sends an e-mail when it changes the reg period" do
+          num_deliveries = ActionMailer::Base.deliveries.size
+          num_deliveries.should == 2
+          email = ActionMailer::Base.deliveries.first
+          email.subject.should == "Updated Registration Period"
+        end
+        it "sends an e-mail for the registrant which didn't have a previous period entry" do
+          email = ActionMailer::Base.deliveries.last
+          email.subject.should == "Registration Items Missing!"
+          binding.pry
+          puts email.inspect
+        end
+        it "changes the registrant's item to the new period" do
+          @reg.reload
+          @reg.registrant_expense_items.count.should == 1
+          @reg.registrant_expense_items.first.expense_item.should == @rp2.competitor_expense_item
+
+          @nc_reg.reload
+          @nc_reg.registrant_expense_items.count.should == 1
+          @nc_reg.registrant_expense_items.first.expense_item.should == @rp2.noncompetitor_expense_item
+        end
+      end
+    end
+  end
+end

@@ -80,4 +80,68 @@ class RegistrationPeriod < ActiveRecord::Base
     end
     nil
   end
+
+
+  def self.current_period
+    Rails.cache.fetch("/registration_period/current")
+  end
+
+  # run by the scheduler in order to update the current Registration_period,
+  # Removes all unpaid reg-items for the old period, and creating ones for the new period
+  def self.update_current_period(date = Date.today)
+    now_period = relevant_period(date)
+
+    old_period = current_period
+    if (now_period == old_period)
+      return false
+    end
+
+    Notifications.updated_current_reg_period(old_period, now_period).deliver
+    Rails.cache.write("/registration_period/current", now_period)
+
+    old_comp_item = old_period.competitor_expense_item unless old_period.nil?
+    old_noncomp_item = old_period.noncompetitor_expense_item unless old_period.nil?
+
+    new_comp_item = now_period.competitor_expense_item unless now_period.nil?
+    new_noncomp_item = now_period.noncompetitor_expense_item unless now_period.nil?
+
+    all_reg_items = all_registration_expense_items
+    missing_regs = []
+
+    Registrant.all.each do |reg|
+      next if  reg.reg_paid?
+
+      if reg.competitor
+        old_item = old_comp_item
+        new_item = new_comp_item
+      else
+        old_item = old_noncomp_item
+        new_item = new_noncomp_item
+      end
+
+      if old_item.nil?
+        # search for _ANY_ reg item
+        old_rei = reg.registrant_expense_items.where({:expense_item_id => all_reg_items}).first
+      else
+        old_rei = reg.registrant_expense_items.where({:expense_item_id => old_item.id}).first
+      end
+      if old_rei.nil?
+        missing_regs << reg.bib_number
+      else
+        next if old_rei.expense_item == new_item
+        old_rei.destroy
+      end
+
+      #create the new reg item
+      unless new_item.nil?
+        reg.registrant_expense_items.create({:expense_item_id => new_item.id, :system_managed => true})
+      end
+    end
+
+    if missing_regs.count > 0
+      Notifications.missing_old_reg_items(missing_regs).deliver
+    end
+
+    true
+  end
 end

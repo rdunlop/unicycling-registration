@@ -71,6 +71,15 @@ RSpec.configure do |config|
     config.filter_run_excluding :pdf_generation => true
   end
 
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.around(:each, :caching) do |example|
+    caching = ActionController::Base.perform_caching
+    ActionController::Base.perform_caching = example.metadata[:caching]
+    example.run
+    Rails.cache.clear
+    ActionController::Base.perform_caching = caching
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
