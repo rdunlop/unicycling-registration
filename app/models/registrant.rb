@@ -91,6 +91,9 @@ class Registrant < ActiveRecord::Base
       unless reg_item.nil?
         registrant_expense_items.build({:expense_item_id => reg_item.id, :system_managed => true})
       end
+    else
+      errors[:base] << "A Registration Period must exist to create new Registrants"
+      return false
     end
 
     # create any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
