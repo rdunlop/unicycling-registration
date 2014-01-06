@@ -83,6 +83,21 @@ Eventually, these may be replaced using thor:
 http://blog.leshill.org/blog/2010/11/02/heroku-environment-variables.html
 
 
+Registration-Update Scheduler
+------------------------------
+
+In order to automatically update the registration period when the current period
+ends, a scheduled task must be executed daily.
+
+* Install the scheduling addon:
+
+    $  heroku addons:add scheduler:standard
+
+* Configure the scheduler via the webpage interface:
+
+    $ heroku addons:open scheduler
+    Add Job: "rake update_registration_period" - Daily - 05:00 UTC
+
 Secret Hash
 -----------
 

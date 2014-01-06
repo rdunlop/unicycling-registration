@@ -19,9 +19,6 @@ Registration-Related ToDo
 Most Useful:
 **** 
  - Allow marking a reg_item as "locked"
- - Add banner for when timer hasn't run
- - Add scheduler every hour for updating
-  - Add cache for checking
 ****
 - Marking Wire Payments received for Lodging doesn't eliminate the previous lodging entry.
 - IPN with no invoice number should include whole post information.
