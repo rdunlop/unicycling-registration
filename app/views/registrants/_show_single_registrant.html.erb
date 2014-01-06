@@ -44,9 +44,9 @@
 <hr class="non_printable" />
 <div class="non_printable">
   <% if @registrant.competitor %>
-    <%= link_to t(".done"), registrants_path, {:class => "competitor registration_button"} %>
+    <%= link_to t(".done"), user_registrants_path(current_user), {:class => "competitor registration_button"} %>
   <% else %>
-    <%= link_to t('.done'), registrants_path, {:class => "noncompetitor registration_button"} %>
+    <%= link_to t('.done'), user_registrants_path(current_user), {:class => "noncompetitor registration_button"} %>
   <% end %>
 </div>
 <% if @has_print_waiver %><%= render :partial => "/registrants/waiver" %><% end %>

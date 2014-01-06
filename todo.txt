@@ -17,9 +17,6 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
-**** 
- - Allow marking a reg_item as "locked"
-****
 - Marking Wire Payments received for Lodging doesn't eliminate the previous lodging entry.
 - IPN with no invoice number should include whole post information.
  - determine if there is a way to prevent all things from getting sent to me?
@@ -32,7 +29,6 @@ Most Useful:
   2017 - Frederik Tubes
   Email: "Reg. Deletion"
   - and "764 - fgf"
-- Change the reg fee calculation to actually assign an entry to the registrant (not just an ephemeral one)
  - Allow Olaf to pay for Darja Schlote's (#5), Eli Brill's (#6) and Jakub Rulf's (#7) EARLY registration fees
 
 - On the payments#summary page, display items which are for "paid-for" registrants, vs not-paid-for registrants (?)
