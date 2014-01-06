@@ -21,6 +21,7 @@ describe "registrants/edit" do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }
+    controller.stub(:current_user) { FactoryGirl.create(:user) }
   end
 
   it "renders the edit registrant form" do

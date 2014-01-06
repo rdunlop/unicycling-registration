@@ -12,6 +12,7 @@ describe "registrants/new" do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }
+    controller.stub(:current_user) { FactoryGirl.create(:user) }
   end
   describe "Competitor" do
     before(:each) do
