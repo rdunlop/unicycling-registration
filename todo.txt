@@ -32,10 +32,7 @@ Most Useful:
   2017 - Frederik Tubes
   Email: "Reg. Deletion"
   - and "764 - fgf"
-- Confirm that David Ramos' reg is paid (early reg, via e-cheque)
 - Change the reg fee calculation to actually assign an entry to the registrant (not just an ephemeral one)
- - Add a timer/function which updates these items
- - Add a warning banner for administrators if the timer isn't ticking
  - Allow Olaf to pay for Darja Schlote's (#5), Eli Brill's (#6) and Jakub Rulf's (#7) EARLY registration fees
 
 - On the payments#summary page, display items which are for "paid-for" registrants, vs not-paid-for registrants (?)

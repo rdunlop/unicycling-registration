@@ -2,19 +2,7 @@ require 'spec_helper'
 
 describe Registrant do
   before(:each) do
-    @rp = FactoryGirl.create(:registration_period)
     @reg = FactoryGirl.create(:competitor)
-  end
-
-  it "is not able to create a registrant if there is no current registration_period" do
-    @rp.destroy
-    comp = FactoryGirl.build(:competitor)
-    comp.valid?.should == true
-    comp.save.should == false
-  end
-  it "can modify a registrant even if there is no registration_period" do
-    @rp.destroy
-    @reg.save.should == true
   end
 
   it "has a valid reg from FactoryGirl" do
@@ -209,11 +197,11 @@ describe Registrant do
   it "has a name field" do
     @reg.name.should == @reg.first_name + " " + @reg.last_name
   end
-  it "has an owing cost of reg item by default" do
-    @reg.amount_owing.should == @rp.competitor_expense_item.cost
+  it "has an owing cost of 0 by default" do
+    @reg.amount_owing.should == 0
   end
   it "always displays the expenses_total" do
-    @reg.expenses_total.should == @rp.competitor_expense_item.cost
+    @reg.expenses_total.should == 0
   end
 
   describe "with an expense_item" do
@@ -226,18 +214,18 @@ describe Registrant do
     end
 
     it "has expense_items" do
-      @reg.registrant_expense_items.include?(@rei).should == true
-      @reg.expense_items.should =~ [@rp.competitor_expense_item, @item]
+      @reg.registrant_expense_items.should == [@rei]
+      @reg.expense_items.should == [@item]
     end
     it "describes the expense_total as the sum" do
-      @reg.expenses_total.should == @rp.competitor_expense_item.cost + @item.cost
+      @reg.expenses_total.should == @item.cost
     end
     it "lists the item as an owing_expense_item" do
-      @reg.owing_expense_items.should =~ [@rp.competitor_expense_item, @item]
-      @reg.owing_registrant_expense_items.include?(@rei).should == true
+      @reg.owing_expense_items.should == [@item]
+      @reg.owing_registrant_expense_items.first.should == @rei
     end
     it "lists no details for its items" do
-      @reg.owing_expense_items_with_details.should =~ [[@item, nil], [@rp.competitor_expense_item, nil]]
+      @reg.owing_expense_items_with_details.should == [[@item, nil]]
     end
 
     describe "With an expense_item having text details" do
@@ -248,7 +236,7 @@ describe Registrant do
       end
 
       it "should transfer the text along" do
-        @reg.owing_expense_items_with_details.should =~ [[@item, "These are some details"], [@rp.competitor_expense_item, nil]]
+        @reg.owing_expense_items_with_details.should == [[@item, "These are some details"]]
       end
     end
 
@@ -258,16 +246,16 @@ describe Registrant do
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @item.cost, :expense_item => @item)
       end
       it "lists one remaining item as owing" do
-        @reg.owing_expense_items.should =~ [@rp.competitor_expense_item, @item]
+        @reg.owing_expense_items.should == [@item]
       end
       it "lists the item as paid for" do
         @reg.paid_expense_items.should == [@item]
       end
       it "should list the item twice in the all_expense_items" do
-        @reg.all_expense_items.should =~ [@rp.competitor_expense_item, @item, @item]
+        @reg.all_expense_items.should == [@item, @item]
       end
       it "should list this for ALL registrants" do
-        Registrant.all_expense_items.should =~ [@rp.competitor_expense_item, @item, @item]
+        Registrant.all_expense_items.should == [@item, @item]
       end
       describe "with expenses from another registrant" do
         before(:each) do
@@ -275,7 +263,7 @@ describe Registrant do
           @rei2 = FactoryGirl.create(:registrant_expense_item, :expense_item => @ei)
         end
         it "has expenses from both registrants" do
-          Registrant.all_expense_items.should =~ [@rp.competitor_expense_item, @rp.competitor_expense_item, @item, @item, @ei]
+          Registrant.all_expense_items.should =~ [@item, @item, @ei]
         end
 
         describe "when one is refunded" do
@@ -283,7 +271,7 @@ describe Registrant do
             @refund_detail = FactoryGirl.create(:refund_detail, :payment_detail => @payment_detail)
           end
           it "does not count the refunded expense item" do
-            Registrant.all_expense_items.should =~ [@rp.competitor_expense_item, @rp.competitor_expense_item, @item, @ei]
+            Registrant.all_expense_items.should =~ [@item, @ei]
           end
         end
       end
@@ -332,7 +320,6 @@ describe Registrant do
 
   describe "with a registration_period" do
     before(:each) do
-      @rp.destroy
       @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
       @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
       @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2022, 01, 01), :competitor_expense_item => @comp_exp, :noncompetitor_expense_item => @noncomp_exp)
@@ -382,6 +369,10 @@ describe Registrant do
       it "should return nil as the registration_item" do
         @comp.registrant_expense_items.count.should == 0
       end
+      it "should not allow deleting the registrant" do
+        @comp.deleted = true
+        @comp.valid?.should == false
+      end
     end
 
     describe "with a completed payment" do
@@ -429,6 +420,11 @@ describe Registrant do
 
         it "no longer lists the registration as paid" do
           @comp.reg_paid?.should == false
+        end
+
+        it "can delete the registrant" do
+          @comp.deleted = true
+          @comp.valid?.should == true
         end
       end
     end
@@ -760,9 +756,9 @@ describe Registrant do
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
       @reg.reload
-      @reg.owing_registrant_expense_items.count.should == 1 # just the reg_item
+      @reg.owing_registrant_expense_items.count.should == 0
       @nc_reg.reload
-      @nc_reg.owing_registrant_expense_items.count.should == 2
+      @nc_reg.owing_registrant_expense_items.count.should == 1
       @nc_reg.owing_registrant_expense_items.last.system_managed.should == true
     end
 
@@ -791,7 +787,7 @@ describe Registrant do
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
       @reg.reload
-      @reg.owing_registrant_expense_items.map{|rei| rei.expense_item}.include?(@ei).should == true
+      @reg.owing_registrant_expense_items.last.expense_item.should == @ei
       @reg.owing_registrant_expense_items.last.system_managed.should == true
     end
 
@@ -839,7 +835,7 @@ describe Registrant do
         @reg2.has_required_expense_group(@eg).should == true
       end
       it "no longer has the item as owing" do
-        @reg.owing_registrant_expense_items.count.should == 1 # only the reg_item
+        @reg.owing_registrant_expense_items.count.should == 0
       end
     end
   end

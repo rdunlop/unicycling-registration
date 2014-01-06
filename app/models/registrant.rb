@@ -91,9 +91,6 @@ class Registrant < ActiveRecord::Base
       unless reg_item.nil?
         registrant_expense_items.build({:expense_item_id => reg_item.id, :system_managed => true})
       end
-    else
-      errors[:base] << "A Registration Period must exist to create new Registrants"
-      return false
     end
 
     # create any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
@@ -176,8 +173,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def no_payments_when_deleted
-    if self.payment_details.count > 0 and self.deleted
-      errors[:base] << "Cannot delete a registration which has payments (started or completed)"
+    if self.payment_details.completed.count > 0 and self.deleted
+      errors[:base] << "Cannot delete a registration which has completed payments (refund them before deleting the registrant)"
     end
   end
 
