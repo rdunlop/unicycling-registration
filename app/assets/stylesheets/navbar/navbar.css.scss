@@ -37,6 +37,9 @@ nav {
   .logo {
     vertical-align: middle;
   }
+  a {
+    background-color: $background;
+  }
   li#sign-out {
     float: right;
     a {
@@ -46,9 +49,12 @@ nav {
   }
   ul {
     li.hovered {
-      background: $backgroundhover;
       > a {
         color: $texthover;
+        background-color: $backgroundhover;
+      }
+      a:hover {
+        background-color: $backgroundhover;
       }
     }
     ul {
