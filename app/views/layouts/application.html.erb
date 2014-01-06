@@ -25,6 +25,11 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
   <![endif]-->
 </head>
 <body>
+  <% if !current_user.nil? and current_user.has_role?(:super_admin) and !RegistrationPeriod.update_checked_recently %>
+    <div class="reg_period_update_warning">
+      No Registration-Period update has occurred in the past 3 days. Please check your scheduler.
+    </div>
+  <% end %>
   <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
     <div class="dev_banner">
       Non-Live System.

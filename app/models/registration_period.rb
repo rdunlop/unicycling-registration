@@ -98,6 +98,7 @@ class RegistrationPeriod < ActiveRecord::Base
 
     Notifications.updated_current_reg_period(old_period, now_period).deliver
     Rails.cache.write("/registration_period/current", now_period)
+    Rails.cache.write("/registration_period/last_update_run_date", date)
 
     old_comp_item = old_period.competitor_expense_item unless old_period.nil?
     old_noncomp_item = old_period.noncompetitor_expense_item unless old_period.nil?
@@ -143,5 +144,12 @@ class RegistrationPeriod < ActiveRecord::Base
     end
 
     true
+  end
+
+  def self.update_checked_recently(date = Date.today)
+    last_update_date = Rails.cache.fetch("/registration_period/last_update_run_date")
+    return false if last_update_date.nil?
+
+    last_update_date + 2.days >= date
   end
 end

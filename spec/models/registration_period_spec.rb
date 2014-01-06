@@ -113,6 +113,10 @@ describe "when testing the update function for registration periods", :caching =
   it "initially doesn't have a current_period" do
     RegistrationPeriod.current_period.should == nil
   end
+  it "initially says that no update has been (yet) performed" do
+    RegistrationPeriod.update_checked_recently.should == false
+  end
+
   it "initially, the registrant has an expense_item from the current period" do
     @reg.registrant_expense_items.count.should == 1
     @reg.registrant_expense_items.first.expense_item.should == @rp1.competitor_expense_item
@@ -129,6 +133,14 @@ describe "when testing the update function for registration periods", :caching =
       RegistrationPeriod.current_period.should == @rp1
     end
 
+    it "says that an update has been performed recently" do
+      RegistrationPeriod.update_checked_recently(Date.new(2012,12,22)).should == true
+    end
+
+    it "(when looking 3 days in the future) says that an update has not yet been done" do
+      RegistrationPeriod.update_checked_recently(Date.new(2012,12,25)).should == false
+    end
+
     it "sends an e-mail when it changes the reg period" do
       num_deliveries = ActionMailer::Base.deliveries.size
       num_deliveries.should == 1
@@ -141,6 +153,9 @@ describe "when testing the update function for registration periods", :caching =
         @ret = RegistrationPeriod.update_current_period(Date.new(2020,12,1))
       end
 
+      it "it indicates that the new period has been recently updated" do
+        RegistrationPeriod.update_checked_recently(Date.new(2020,12,2)).should == true
+      end
       it "indicates that it updated" do
         @ret.should == true
       end
@@ -210,8 +225,6 @@ describe "when testing the update function for registration periods", :caching =
         it "sends an e-mail for the registrant which didn't have a previous period entry" do
           email = ActionMailer::Base.deliveries.last
           email.subject.should == "Registration Items Missing!"
-          binding.pry
-          puts email.inspect
         end
         it "changes the registrant's item to the new period" do
           @reg.reload

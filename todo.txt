@@ -18,7 +18,6 @@ Registration-Related ToDo
 
 Most Useful:
 **** 
- - Remove existing reg_item when a payment is received which includes one
  - Allow marking a reg_item as "locked"
  - Add banner for when timer hasn't run
  - Add scheduler every hour for updating
