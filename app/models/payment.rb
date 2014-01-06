@@ -52,10 +52,7 @@ class Payment < ActiveRecord::Base
         all_reg_items = RegistrationPeriod.all_registration_expense_items
         if all_reg_items.include?(pd.expense_item)
           # the pd is a reg_item, see if there is another reg_item in the registrant's list
-          reg_items = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => all_reg_items})
-          if reg_items.count > 0
-            rei = reg_items.first
-          end
+          rei = pd.registrant.registration_item
         end
       end
 

@@ -146,6 +146,20 @@ describe "when testing the update function for registration periods", :caching =
       num_deliveries.should == 1
     end
 
+    describe "when a registrant has a LOCKED registration_item" do
+      before(:each) do
+        @original_item = rei = @reg.registration_item
+        rei.locked = true
+        rei.save
+      end
+
+      it "doesnt't update this registrants' items when moving to the next period" do
+        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020,11, 8), :end_date => Date.new(2021, 1, 1))
+        @ret = RegistrationPeriod.update_current_period(Date.new(2020,12,1))
+        @reg.reload
+        @reg.registration_item.should == @original_item
+      end
+    end
     describe "when updating to the next period" do
       before(:each) do
         ActionMailer::Base.deliveries.clear

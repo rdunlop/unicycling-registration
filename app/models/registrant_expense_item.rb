@@ -10,6 +10,12 @@ class RegistrantExpenseItem < ActiveRecord::Base
   delegate :has_details, to: :expense_item
   delegate :details_label, to: :expense_item
 
+  def to_s
+    ret = expense_item.to_s
+    ret += " (locked)" if self.locked
+    ret
+  end
+
   def cost
     return 0 if free
 

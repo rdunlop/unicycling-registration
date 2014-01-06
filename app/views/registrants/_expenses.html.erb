@@ -29,7 +29,7 @@
         <% registrant.owing_registrant_expense_items.each do |ce| %>
           <tr>
             <td>
-              <%= ce.expense_item %>
+              <%= ce %>
             </td>
             <td>
               <%= print_item_cost_currency(ce.cost) %>

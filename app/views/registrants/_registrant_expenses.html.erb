@@ -25,7 +25,7 @@
       <% end %>
       <% @registrant.owing_registrant_expense_items.each do |ce| %>
         <tr>
-          <td><%= ce.expense_item %></td>
+          <td><%= ce %></td>
           <td>
             <% if ce.has_details %>
               <%= ce.details_label %>: <%= ce.details %>

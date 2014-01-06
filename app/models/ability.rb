@@ -26,6 +26,8 @@ class Ability
         can :manage, AwardLabel
         can :manage, ExternalResult
         can :manage, RegistrantGroup
+        can :reg_fee, Registrant
+        can :update_reg_fee, Registrant
         can :manage_all, Registrant
         can :email, Registrant
         can :send_email, Registrant

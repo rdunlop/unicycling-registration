@@ -310,4 +310,41 @@ class RegistrantsController < ApplicationController
       render "email"
     end
   end
+
+  def reg_fee
+  end
+
+  def update_reg_fee
+    new_rp = RegistrationPeriod.find(params[:registration_period_id])
+
+    if @registrant.competitor
+      new_reg_item = new_rp.competitor_expense_item
+    else
+      new_reg_item = new_rp.noncompetitor_expense_item
+    end
+
+    error = false
+    # only possible if the registrant is unpaid
+    if @registrant.reg_paid?
+      error = true
+      error_message = "This registrant is already paid"
+    else
+      curr_rei = @registrant.registration_item
+      if curr_rei.nil?
+        error = true
+        error_message = "Unable to find existing Registration Item"
+      else
+        curr_rei.expense_item = new_reg_item
+        curr_rei.locked = true
+      end
+    end
+
+    respond_to do |format|
+      if error or !curr_rei.save
+        format.html { render "reg_fee", alert: error_message  }
+      else
+        format.html { redirect_to reg_fee_registrant_path(@registrant), notice: 'Reg Fee Updated successfully.' }
+      end
+    end
+  end
 end

@@ -125,6 +125,11 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def registration_item
+    all_reg_items = RegistrationPeriod.all_registration_expense_items
+    registrant_expense_items.where({:system_managed => true, :expense_item_id => all_reg_items}).first
+  end
+
   def set_bib_number
     if self.bib_number.nil?
       if self.competitor

@@ -110,7 +110,7 @@ class RegistrationPeriod < ActiveRecord::Base
     missing_regs = []
 
     Registrant.all.each do |reg|
-      next if  reg.reg_paid?
+      next if reg.reg_paid?
 
       if reg.competitor
         old_item = old_comp_item
@@ -130,6 +130,7 @@ class RegistrationPeriod < ActiveRecord::Base
         missing_regs << reg.bib_number
       else
         next if old_rei.expense_item == new_item
+        next if old_rei.locked # don't update "locked" items
         old_rei.destroy
       end
 

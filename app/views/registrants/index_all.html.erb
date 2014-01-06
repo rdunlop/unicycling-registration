@@ -29,6 +29,9 @@
       <td class="non_printable">
         <%= link_to "Events", edit_registrant_path(registrant) %>
         <%= link_to "Items", items_registrant_path(registrant) %>
+        <% if can? :reg_fee, registrant %>
+          <%= link_to "Reg Fee", reg_fee_registrant_path(registrant) %>
+        <% end %>
       </td>
       <td class="non_printable">
         <% if registrant.deleted %>
