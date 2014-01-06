@@ -6,10 +6,10 @@
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
  * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
  *
- * Add Unicon 17 specific styles here. They will override common styles.
+ * Add NAUCC 2014 specific styles here. They will override common styles.
  *
+ *= require application
  *= require_self
- *= require font-kit-rails
  */
 
  $yellow: rgb(150, 255, 0);
@@ -21,53 +21,16 @@ $backgroundhover: rgb(102, 102, 102);
 $submenudivider: rgb(120, 120, 120);
 $text: rgb(255, 255, 255);
 $texthover: rgb(255, 255, 255);
+
+@import "navbar/navbar";
+
 $unicon-pink: rgb(102, 255, 255);
 $unicon-pink-active: rgb(0, 255, 255);
 $unicon-blue: rgb(0, 0, 0);
+
 $red: rgb(255, 0, 0);
 $red-hover: rgb(255, 0, 0);
 $red-active: rgb(220, 0, 0);
-
-nav ul {
-  background: $background; 
-}
-    nav ul li:hover {
-      background: $backgroundhover;
-    }
-      nav ul li:hover a {
-        background: $backgroundhover;
-        color: $texthover;
-      }
-
-  nav ul li:hover a.logo_link {
-    background: $background;     
-    }
-
-    nav ul li a,
-    nav ul li a:visited {
-      color: $text;
-    }
-      
-    
-  nav ul ul {
-    background: $backgroundsub;
-  }
-    nav ul ul li {
-      background: $background;
-      border-top: 1px solid $submenudivider;
-    }
-      nav ul ul li a,
-      nav ul ul li a:not(.current_page):visited,
-      nav ul li:hover ul li a {
-        background: $background;
-        color: $text;
-      } 
-        nav ul ul li a:hover,
-        nav ul li:hover ul li a:hover {
-          background: $backgroundhover;
-          color: $texthover;
-        }
-
 
 .ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
 min-width: 70px;

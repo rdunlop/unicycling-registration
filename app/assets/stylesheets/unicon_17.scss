@@ -7,8 +7,9 @@
  *
  * Add Unicon 17 specific styles here. They will override common styles.
  *
- *= require_self
  *= require font-kit-rails
+ *= require application
+ *= require_self
  */
 
 $background: rgb(40, 40, 40);
@@ -17,6 +18,9 @@ $backgroundhover: rgb(102, 102, 102);
 $submenudivider: rgb(120, 120, 120);
 $text: rgb(255, 255, 255);
 $texthover: rgb(255, 255, 255);
+@import "navbar/navbar";
+
+
 $unicon-pink: rgb(219, 71, 128);
 $unicon-pink-active: rgb(240, 80, 128);
 $unicon-blue: rgb(36, 130, 181);
@@ -24,46 +28,6 @@ $unicon-blue: rgb(36, 130, 181);
 a:hover {
   color: rgb(219, 71, 128);
 }
-
-nav ul {
-  background: $background; 
-}
-    nav ul li:hover {
-      background: $backgroundhover;
-    }
-      nav ul li:hover a {
-        background: $backgroundhover;
-        color: $texthover;
-      }
-
-  nav ul li:hover a.logo_link {
-    background: $background;     
-    }
-
-    nav ul li a,
-    nav ul li a:visited {
-      color: $text;
-    }
-      
-    
-  nav ul ul {
-    background: $backgroundsub;
-  }
-    nav ul ul li {
-      background: $background;
-      border-top: 1px solid $submenudivider;
-    }
-      nav ul ul li a,
-      nav ul ul li a:not(.current_page):visited,
-      nav ul li:hover ul li a {
-        background: $background;
-        color: $text;
-      } 
-        nav ul ul li a:hover,
-        nav ul li:hover ul li a:hover {
-          background: $backgroundhover;
-          color: $texthover;
-        }
 
 
 .ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {

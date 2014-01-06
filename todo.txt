@@ -34,6 +34,7 @@ Most Useful:
 - On the payments#summary page, display items which are for "paid-for" registrants, vs not-paid-for registrants (?)
  - Add a column to the admin/payments/ page which shows the number of "free" items that have been "paid for".
  - Add new "num free" column to the Payments#summary page
+ - Eliminate "deleted" registrants from the total unpaid count?
 - Improve the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.

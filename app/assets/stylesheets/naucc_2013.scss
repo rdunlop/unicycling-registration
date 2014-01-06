@@ -7,6 +7,7 @@
  *
  * Add NAUCC 2013 specific styles here. They will override common styles.
  *
+ *= require application
  *= require_self
  */
 
@@ -19,53 +20,4 @@ $submenudivider: rgb(18, 172, 80);
 $text: rgb(0, 0, 0);
 $texthover: rgb(255, 255, 255);
 
-nav ul {
-  background: $background; 
-  background: linear-gradient(top, $background 0%, $backgroundgrad 100%);  
-  background: -moz-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
-  background: -webkit-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
-  box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
-}
-    nav ul li:hover {
-      background: $backgroundhover;
-      background: linear-gradient(top, $backgroundhover 0%, $backgroundhovergrad 40%);
-      background: -moz-linear-gradient(top, $backgroundhover 0%, $backgroundhovergrad 40%);
-      background: -webkit-linear-gradient(top, $backgroundhover 0%, $backgroundhovergrad 40%);
-    }
-      nav ul li:hover a {
-        background: $backgroundhover;
-        color: $texthover;
-      }
-
-  nav ul li:hover a.logo_link {
-    background: $background; 
-    background: linear-gradient(top, $background 0%, $backgroundgrad 100%);  
-    background: -moz-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
-    background: -webkit-linear-gradient(top, $background 0%, $backgroundgrad 100%); 
-    
-    }
-
-    nav ul li a,
-    nav ul li a:visited {
-      color: $text;
-    }
-      
-    
-  nav ul ul {
-    background: $backgroundgrad;
-  }
-    nav ul ul li {
-      background: $backgroundgrad;
-      border-top: 1px solid $submenudivider;
-    }
-      nav ul ul li a,
-      nav ul ul li a:not(.current_page):visited,
-      nav ul li:hover ul li a {
-        background: $backgroundgrad;
-        color: $text;
-      } 
-        nav ul ul li a:hover,
-        nav ul li:hover ul li a:hover {
-          background: $backgroundhover;
-          color: $texthover;
-        }
+@import "navbar/navbar";
