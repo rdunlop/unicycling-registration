@@ -33,10 +33,15 @@ $(document).ready(function () {
 /* Generic sorting dataTable */
 $(document).ready(function() {
   $(".sortable").each(function() {
-    $(this).dataTable({
-      "bFilter": false,
-      "bInfo": false,
-      "bPaginate": false
-    });
+    if ($(this).hasClass('searchable')) {
+       search = true;
+    } else {
+       search = false;
+    }
+   $(this).dataTable({
+     "bFilter": search,
+     "bInfo": false,
+     "bPaginate": false
+   });
   });
 });

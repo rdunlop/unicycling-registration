@@ -165,12 +165,14 @@ input.cost_item {
 
 input.cost_item:hover {
   background-color: $unicon-pink;
+  color:black;
 }
 
 input.free_item:active,
 input.cost_item:active,
 input.free_item:hover {
   background-color: $unicon-pink-active;
+  color:black;
 }
 
 .payment_link,
