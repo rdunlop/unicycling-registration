@@ -10,7 +10,7 @@ class RefundDetail < ActiveRecord::Base
   def create_required_registrant_item
     reg = payment_detail.registrant
     reg.create_associated_required_expense_items
-    reg.save!
+    reg.save(validate: false)
   end
 
   def touch_payment_detail

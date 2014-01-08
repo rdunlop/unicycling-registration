@@ -6,5 +6,5 @@ class Refund < ActiveRecord::Base
   validates_associated :refund_details
 
   belongs_to :user
-  has_many :refund_details
+  has_many :refund_details, :dependent => :destroy
 end

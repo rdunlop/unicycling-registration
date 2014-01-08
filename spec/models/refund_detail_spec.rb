@@ -14,7 +14,7 @@ describe RefundDetail do
     @rd.valid?.should == false
   end
 
-  describe "when there is an active registration_period" do
+  describe "when there is an active registration_period", :caching => true do
     before(:each) do
       @rp = FactoryGirl.create(:registration_period)
     end
@@ -28,7 +28,9 @@ describe RefundDetail do
       payment.save
       @reg.reload
       @reg.registrant_expense_items.count.should == 0
+      @pd.registrant = @reg
 
+      @pd.reload
       @rd1 = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
       @reg.reload
       @reg.registrant_expense_items.count.should == 1

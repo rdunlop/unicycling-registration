@@ -94,7 +94,7 @@ class Registrant < ActiveRecord::Base
     end
 
     required_expense_items.each do |ei|
-      unless has_expense_item?(reg_item)
+      unless has_expense_item?(ei)
         registrant_expense_items.build({:expense_item_id => ei.id, :system_managed => true})
       end
     end
