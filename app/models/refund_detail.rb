@@ -4,12 +4,18 @@ class RefundDetail < ActiveRecord::Base
   belongs_to :refund
   belongs_to :payment_detail
 
+  after_save :create_required_registrant_item
   after_save :touch_payment_detail
+
+  def create_required_registrant_item
+    reg = payment_detail.registrant
+    reg.create_associated_required_expense_items
+    reg.save!
+  end
 
   def touch_payment_detail
     payment_detail.touch
   end
-
 
   def to_s
     payment_detail

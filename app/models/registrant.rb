@@ -88,24 +88,40 @@ class Registrant < ActiveRecord::Base
       else
         reg_item = rp.noncompetitor_expense_item
       end
-      unless reg_item.nil?
+      unless reg_item.nil? or has_expense_item?(reg_item)
         registrant_expense_items.build({:expense_item_id => reg_item.id, :system_managed => true})
       end
     end
 
-    # create any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
+    required_expense_items.each do |ei|
+      unless has_expense_item?(reg_item)
+        registrant_expense_items.build({:expense_item_id => ei.id, :system_managed => true})
+      end
+    end
+  end
+
+  # determine if this registrant has an unpaid (or paid) version of this expense item
+  def has_expense_item?(expense_item)
+    all_expense_items.include?(expense_item)
+  end
+
+  # any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
+  def required_expense_items
     if competitor
       egs = ExpenseGroup.where({:competitor_required => true}).all
     else
       egs = ExpenseGroup.where({:noncompetitor_required => true}).all
     end
 
+    req_eis = []
     egs.each do |eg|
       if eg.expense_items.count == 1
-        registrant_expense_items.build({:expense_item_id => eg.expense_items.first.id, :system_managed => true})
+        req_eis << eg.expense_items.first
       end
     end
+    req_eis
   end
+
 
   after_initialize :init
 

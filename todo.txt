@@ -23,6 +23,7 @@ Most Useful:
 - Menu submenu onclick, and always have a 2nd level.
 - Make a single expense_group for registration_fees, and prevent using it elsewhere.
 
+- * Refund should re-create registrant_expense_item of the item being refunded.
 - Allow deleting of a registration which has payments, as long as they are fully refunded. (refund:
   345 - Markus Kurz
   2009 - Yannic Dick
