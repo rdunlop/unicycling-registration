@@ -23,14 +23,6 @@ Most Useful:
 - Menu submenu onclick, and always have a 2nd level.
 - Make a single expense_group for registration_fees, and prevent using it elsewhere.
 
-- Allow deleting of a registration which has payments, as long as they are fully refunded. (refund:
-  345 - Markus Kurz
-  2009 - Yannic Dick
-  2017 - Frederik Tubes
-  Email: "Reg. Deletion"
-  - and "764 - fgf"
- - Allow Olaf to pay for Darja Schlote's (#5), Eli Brill's (#6) and Jakub Rulf's (#7) EARLY registration fees
-
 - On the payments#summary page, display items which are for "paid-for" registrants, vs not-paid-for registrants (?)
  - Add a column to the admin/payments/ page which shows the number of "free" items that have been "paid for".
  - Add new "num free" column to the Payments#summary page

@@ -8,12 +8,14 @@
 <table class="sortable">
   <thead>
     <tr>
+      <th>Registrant</th>
       <th>Item</th>
     </tr>
   </thead>
   <tbody>
     <% @refund.refund_details.each do |detail| %>
       <tr>
+        <td><%= detail.registrant %></td>
         <td><%= detail %></td>
       </tr>
     <% end %>

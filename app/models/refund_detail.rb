@@ -7,6 +7,8 @@ class RefundDetail < ActiveRecord::Base
   after_save :create_required_registrant_item
   after_save :touch_payment_detail
 
+  delegate :registrant, to: :payment_detail
+
   def create_required_registrant_item
     reg = payment_detail.registrant
     reg.create_associated_required_expense_items
