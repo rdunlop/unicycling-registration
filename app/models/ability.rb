@@ -21,6 +21,7 @@ class Ability
       # Competitor Assignment
       if user.has_role? :admin
         can :summary, Event
+        can :sign_ups, EventCategory
         can :manage, Competitor
         can :manage, ImportResult
         can :manage, AwardLabel
