@@ -299,9 +299,9 @@ describe EventsController do
         get :summary, {}
         assigns(:num_competitors).should == 2
       end
-      it "sets the number of non_competitors as @num_non_competitors" do
+      it "sets the number of non_competitors as @num_noncompetitors" do
         get :summary, {}
-        assigns(:num_non_competitors).should == 1
+        assigns(:num_noncompetitors).should == 1
       end
     end
   end
