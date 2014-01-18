@@ -27,9 +27,16 @@ class EventsController < ApplicationController
 
   # GET /events/summary
   def summary
-    @num_competitors = Registrant.where({:competitor => true}).count
-    @num_non_competitors = Registrant.where({:competitor => false}).count
-    @num_registrants = @num_competitors + @num_non_competitors
+    @num_male_competitors = Registrant.where({:competitor => true, :gender => "Male"}).count
+    @num_female_competitors = Registrant.where({:competitor => true, :gender => "Female"}).count
+    @num_competitors = @num_male_competitors + @num_female_competitors
+    @num_male_noncompetitors = Registrant.where({:competitor => false, :gender => "Male"}).count
+    @num_female_noncompetitors = Registrant.where({:competitor => false, :gender => "Female"}).count
+    @num_noncompetitors = @num_male_noncompetitors + @num_female_noncompetitors
+
+    @num_male_registrants = @num_male_competitors + @num_male_noncompetitors
+    @num_female_registrants = @num_female_competitors + @num_female_noncompetitors
+    @num_registrants = @num_competitors + @num_noncompetitors
   end
 
   # GET /events/1
