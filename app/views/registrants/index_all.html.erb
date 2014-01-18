@@ -11,6 +11,7 @@
       <th>ID</th>
       <th>Last Name</th>
       <th>First Name</th>
+      <th>Age</th>
       <th>Gender</th>
       <th>Country</th>
       <th class="non_printable">Summary</th>
@@ -25,6 +26,7 @@
       <td><%= registrant.bib_number %></td>
       <td><%= registrant.last_name %></td>
       <td><%= registrant.first_name %></td>
+      <td><%= registrant.age %></td>
       <td><%= registrant.gender %></td>
       <td><%= registrant.country_name %></td>
       <td class="non_printable"><%= link_to "Summary", registrant_path(registrant) %>
