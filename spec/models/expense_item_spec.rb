@@ -189,6 +189,18 @@ describe ExpenseItem do
       @item.num_selected_items.should == 1
       @item.num_unpaid.should == 1
     end
+
+    describe "when the registrant is deleted" do
+      before(:each) do
+        reg = @rei.registrant
+        reg.deleted = true
+        reg.save
+      end
+
+      it "should not count the expense_item as num_unpaid" do
+        @item.num_unpaid.should == 0
+      end
+    end
   end
 
   describe "when a registration has a registration_period" do

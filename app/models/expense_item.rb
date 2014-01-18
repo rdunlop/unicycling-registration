@@ -32,7 +32,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_unpaid
-    registrant_expense_items.count
+    registrant_expense_items.all.count {|rei| !rei.registrant.nil?}
   end
 
   def create_reg_items
