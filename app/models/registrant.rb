@@ -82,7 +82,7 @@ class Registrant < ActiveRecord::Base
 
     # add the registration_period expense_item
     rp = RegistrationPeriod.relevant_period(Date.today)
-    unless rp.nil?
+    unless rp.nil? or reg_paid?
       if competitor
         reg_item = rp.competitor_expense_item
       else
