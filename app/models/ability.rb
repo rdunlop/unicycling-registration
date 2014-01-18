@@ -103,6 +103,7 @@ class Ability
       # Registrant
       can :empty_waiver, Registrant
       can :crud, Registrant if user.has_role? :admin or user.has_role? :super_admin
+      can :items, Registrant if user.has_role? :admin or user.has_role? :super_admin
       can [:all, :waiver], Registrant, :user_id => user.id
 
       unless EventConfiguration.closed? and ENV['ONSITE_REGISTRATION'] != "true"
@@ -114,6 +115,7 @@ class Ability
         can :create, Registrant # necessary because we set the user in the controller?
         can :new_noncompetitor, Registrant # necessary because we set the user in the controller?
       end
+      can [:create, :destroy], RegistrantExpenseItem if user.has_role? :admin or user.has_role? :super_admin
 
       # Standard Skill Routines
       if user.has_role? :admin
