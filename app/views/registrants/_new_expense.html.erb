@@ -19,6 +19,10 @@
         <%= ff.label :details, @registrant_expense_item.details_label %>:
         <%= ff.text_field :details %>
       <% end %>
+      <% if item.has_custom_cost %>
+        <%= ff.label :custom_cost %>
+        <%= ff.number_field :custom_cost %>
+      <% end %>
       <% if show_as_free %>
         <%= ff.submit t(".add_free_item"), {:title => t(".one_is_free"), :class => "free_item"} %>
       <% elsif item.maximum_reached? %>
