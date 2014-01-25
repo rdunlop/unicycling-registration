@@ -28,12 +28,34 @@ describe RefundDetail do
       payment.save
       @reg.reload
       @reg.registrant_expense_items.count.should == 0
-      @pd.registrant = @reg
 
       @pd.reload
       @rd1 = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
       @reg.reload
       @reg.registrant_expense_items.count.should == 1
+    end
+
+    describe "when there is a previous active registration_period", :caching => true do
+      before(:each) do
+        @rp_prev = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,1,1), :end_date => Date.new(2011,1,1))
+      end
+
+      it "Doesn't re-add any items if the refund is a non-system-managed item (not the competition item)" do
+        @reg = FactoryGirl.create(:competitor)
+        @pd = FactoryGirl.create(:payment_detail, :registrant => @reg, :expense_item => @rp_prev.competitor_expense_item)
+        @pd2 = FactoryGirl.create(:payment_detail, :registrant => @reg)
+        payment = @pd.payment
+        payment.reload
+        payment.completed = true
+        payment.save
+        @reg.reload
+        @reg.registrant_expense_items.count.should == 0
+
+        @pd2.reload
+        @rd1 = FactoryGirl.create(:refund_detail, :payment_detail => @pd2)
+        @reg.reload
+        @reg.registrant_expense_items.count.should == 0
+      end
     end
   end
 end

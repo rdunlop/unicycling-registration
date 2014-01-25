@@ -3,6 +3,7 @@ class ExpenseItem < ActiveRecord::Base
 
   validates :name, :description, :position, :cost, :expense_group, :tax_percentage, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :tax_percentage, :numericality => {:greater_than_or_equal_to => 0} 
 
 
@@ -25,6 +26,7 @@ class ExpenseItem < ActiveRecord::Base
   def init
     self.has_details = false if self.has_details.nil?
     self.tax_percentage = 0 if self.tax_percentage.nil?
+    self.has_custom_cost = false if self.has_custom_cost.nil?
   end
 
   def num_paid
@@ -32,7 +34,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_unpaid
-    registrant_expense_items.count
+    registrant_expense_items.all.count {|rei| !rei.registrant.nil?}
   end
 
   def create_reg_items

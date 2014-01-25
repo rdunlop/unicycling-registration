@@ -17,6 +17,9 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
+- Add tests for the new has_custom_cost feature
+- When paying for something, remove it from the paid-elements, even if it's free. (free IUF should eliminate to-be-paid IUF)
+- Show the payments/refunds associated with each registrant in an easy fashion.
 - Marking Wire Payments received for Lodging doesn't eliminate the previous lodging entry.
 - IPN with no invoice number should include whole post information.
  - determine if there is a way to prevent all things from getting sent to me?

@@ -110,6 +110,13 @@ describe "Ability" do
       let (:registration) { FactoryGirl.create(:registrant) }
       it { should be_able_to(:read, registration) }
       it { should be_able_to(:crud, registration) }
+      it { should be_able_to(:items, registration) }
+    end
+
+    describe "with an rei" do
+      let (:rei) { FactoryGirl.create(:registrant_expense_item) }
+      it { should be_able_to(:create, rei) }
+      it { should be_able_to(:destroy, rei) }
     end
     describe "when registration is closed" do
       before(:each) do

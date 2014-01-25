@@ -6,6 +6,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   validates :expense_item, :registrant, :presence => true
   validate :only_one_free_per_expense_group, :on => :create
+  validate :custom_cost_present
 
   delegate :has_details, to: :expense_item
   delegate :details_label, to: :expense_item
@@ -16,8 +17,17 @@ class RegistrantExpenseItem < ActiveRecord::Base
     ret
   end
 
+  def custom_cost_present
+    if !expense_item.nil? and expense_item.has_custom_cost
+      if self.custom_cost.nil? or self.custom_cost <= 0
+        errors[:base] << "Must specify a custom cost for this item"
+      end
+    end
+  end
+
   def cost
     return 0 if free
+    return custom_cost if expense_item.has_custom_cost
 
     expense_item.cost
   end

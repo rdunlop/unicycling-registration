@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140106135910) do
+ActiveRecord::Schema.define(:version => 20140123232352) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -282,13 +282,14 @@ ActiveRecord::Schema.define(:version => 20140106135910) do
     t.decimal  "cost"
     t.string   "export_name"
     t.integer  "position"
-    t.datetime "created_at",                                                       :null => false
-    t.datetime "updated_at",                                                       :null => false
+    t.datetime "created_at",                                                         :null => false
+    t.datetime "updated_at",                                                         :null => false
     t.integer  "expense_group_id"
     t.boolean  "has_details"
     t.string   "details_label"
     t.integer  "maximum_available"
     t.decimal  "tax_percentage",    :precision => 5, :scale => 3, :default => 0.0
+    t.boolean  "has_custom_cost",                                 :default => false
   end
 
   add_index "expense_items", ["expense_group_id"], :name => "index_expense_items_expense_group_id"
@@ -465,6 +466,7 @@ ActiveRecord::Schema.define(:version => 20140106135910) do
     t.boolean  "free",            :default => false
     t.boolean  "system_managed",  :default => false
     t.boolean  "locked",          :default => false
+    t.decimal  "custom_cost"
   end
 
   add_index "registrant_expense_items", ["expense_item_id"], :name => "index_registrant_expense_items_expense_item_id"

@@ -91,14 +91,19 @@ class RegistrationPeriod < ActiveRecord::Base
   def self.update_current_period(date = Date.today)
     now_period = relevant_period(date)
 
+
     old_period = current_period
+
+    # update the last-run date, even if we aren't going to change periods
+    Rails.cache.write("/registration_period/last_update_run_date", date)
+    # write the current period again, to keep it in the cache
+    Rails.cache.write("/registration_period/current", now_period)
+
     if (now_period == old_period)
       return false
     end
 
     Notifications.updated_current_reg_period(old_period, now_period).deliver
-    Rails.cache.write("/registration_period/current", now_period)
-    Rails.cache.write("/registration_period/last_update_run_date", date)
 
     old_comp_item = old_period.competitor_expense_item unless old_period.nil?
     old_noncomp_item = old_period.noncompetitor_expense_item unless old_period.nil?

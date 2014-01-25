@@ -2,19 +2,32 @@
 
 <table>
   <caption>Overview</caption>
-  <tr>
-    <th>Competitors</th>
-    <td><%= @num_competitors %></td>
-  </tr>
-  <tr>
-    <th>Non-Competitors</th>
-    <td><%= @num_non_competitors %></td>
-  </tr>
-  <tr>
-    <th>Total Registrations</th>
-    <td><b><%= @num_registrants %></b></td>
-  </tr>
+  <thead>
     <tr>
+      <th></th>
+      <th>Male</th>
+      <th>Female</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Competitors</th>
+      <td><%= @num_male_competitors %></td>
+      <td><%= @num_female_competitors %></td>
+      <td><%= @num_competitors %></td>
+    </tr>
+    <tr>
+      <th>Non-Competitors</th>
+      <td><%= @num_male_noncompetitors %></td>
+      <td><%= @num_female_noncompetitors %></td>
+      <td><%= @num_noncompetitors %></td>
+    </tr>
+    <tr>
+      <th>Total Registrations</th>
+      <td><b><%= @num_male_registrants %></b></td>
+      <td><b><%= @num_female_registrants %></b></td>
+      <td><b><%= @num_registrants %></b></td>
     </tr>
   </tbody>
 </table>

@@ -9,6 +9,7 @@ FactoryGirl.define do
     position 1
     expense_group # FactoryGirl
     has_details false
+    has_custom_cost false
     details_label nil
     maximum_available nil
   end
