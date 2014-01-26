@@ -19,6 +19,27 @@ describe RegistrantExpenseItem do
     @rei.valid?.should == false
   end
 
+  describe "when the expense_item is custom_cost=true" do
+    before(:each) do
+      @ei = @rei.expense_item
+      @ei.has_custom_cost = true
+      @ei.save
+    end
+    it "should require a custom_cost" do
+      @rei.custom_cost = nil
+      @rei.valid?.should == false
+    end
+    it "should be acceptable if the custom_cost is set" do
+      @rei.custom_cost = 1
+      @rei.valid?.should == true
+    end
+
+    it "should not allow a negative custom_cost" do
+      @rei.custom_cost = -10
+      @rei.valid?.should == false
+    end
+  end
+
   describe "when the item is free" do
     before(:each) do
       @rei.free = true

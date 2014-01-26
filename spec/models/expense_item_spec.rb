@@ -56,6 +56,9 @@ describe ExpenseItem do
     @item.name = nil
     @item.valid?.should == false
   end
+  it "by default has a normal cost" do
+    @item.has_custom_cost.should == false
+  end
   it "must have a description" do
     @item.description = nil
     @item.valid?.should == false
