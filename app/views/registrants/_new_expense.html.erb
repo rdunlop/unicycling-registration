@@ -22,6 +22,7 @@
         <%= ff.text_field :details %>
       <% end %>
       <% if item.has_custom_cost %>
+        (<%= EventConfiguration.currency_code %>)
         <%= ff.number_field :custom_cost %>
       <% end %>
       <% if show_as_free %>
