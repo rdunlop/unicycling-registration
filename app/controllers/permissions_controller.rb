@@ -7,7 +7,7 @@ class PermissionsController < ApplicationController
     @users = User.all
   end
 
-  def role
+  def set_role
     @user = User.find(params[:user_id])
     role = params[:role_name]
     if User.roles.include?(role.to_sym)
