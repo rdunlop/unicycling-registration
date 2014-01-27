@@ -15,20 +15,20 @@ describe PermissionsController do
     end
   end
 
-  describe "PUT role" do
+  describe "PUT set_role" do
     describe "with a normal user" do
       before(:each) do
         @user = FactoryGirl.create(:user)
       end
       it "can change a user to an admin" do
-        put :role, {:id => @user.to_param, :role_name => :admin}
+        put :set_role, {:user_id => @user.to_param, :role_name => :admin}
         response.should redirect_to(permissions_path)
         @user.reload
         @user.has_role?(:admin).should == true
       end
       it "can change an admin back to a user" do
         admin = FactoryGirl.create(:admin_user)
-        put :role, {:id => admin.to_param, :role_name => :admin}
+        put :set_role, {:user_id => admin.to_param, :role_name => :admin}
         response.should redirect_to(permissions_path)
         admin.reload
         admin.has_role?(:admin).should == false
@@ -39,7 +39,7 @@ describe PermissionsController do
         sign_out @super_user
         sign_in admin_user
 
-        put :role, {:id => @user.to_param, :role_name => :admin}
+        put :set_role, {:user_id => @user.to_param, :role_name => :admin}
         response.should redirect_to(root_path)
         @user.reload
         @user.has_role?(:admin).should == false

@@ -3,11 +3,12 @@ class PermissionsController < ApplicationController
   load_and_authorize_resource :user, :parent => false
 
   def index
+    #authorize! :permissions, User
     @users = User.all
   end
 
   def role
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     role = params[:role_name]
     if User.roles.include?(role.to_sym)
       if @user.has_role? role

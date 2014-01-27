@@ -42,8 +42,8 @@ Workspace::Application.routes.draw do
     resources :age_group_entries, :except => [:index, :create]
 
     resources :permissions, :only => [:index] do
-      member do
-        put :role
+      collection do
+        put :set_role
       end
     end
 

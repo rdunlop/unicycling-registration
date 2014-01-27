@@ -17,7 +17,7 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
-- Add tests for the new has_custom_cost feature
+- Wrap Permissions (on User) properly, so that cancan sees/manages it (currently it's can?(:manage, User))
 - When paying for something, remove it from the paid-elements, even if it's free. (free IUF should eliminate to-be-paid IUF)
 - Show the payments/refunds associated with each registrant in an easy fashion.
 - Marking Wire Payments received for Lodging doesn't eliminate the previous lodging entry.
@@ -39,7 +39,6 @@ Most Useful:
 ===========================================================
 
 Minor:
-- Make the user permissions page only display users who have certain permissions (it takes too long to load everyone)
 - Fix "Admin" to be unable to see menu options which are not permitted to them.
 - Move remaining "Payments" items out of the "admin" scope.
 - UTF8 encoding of the list elements sent to Paypal (to allow for french characters) Search "Notification of payment received" in e-mail

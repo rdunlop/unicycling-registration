@@ -6,32 +6,33 @@
 <% User.roles.each do |role| %>
   <h3><%= role %></h3>
   <p><pre><%= User.role_description(role) %></pre></p>
-<% end %>
 
-<br />
-<table class="sortable">
-  <thead>
-    <tr>
-      <th>Email</th>
-      <% roles.each do |role| %>
-        <th><%= role %>?</th>
-        <th>Toggle <%= role %></th>
+  <br />
+  <table class="sortable">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Remove <%= role %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% User.with_role(role).each do |user| %>
+        <tr>
+          <td><%= user %></td>
+          <td>
+            <%= form_tag(set_role_permissions_path, { :method => :put }) do %>
+              <%= hidden_field_tag :role_name, role %>
+              <%= hidden_field_tag :user_id, user.id %>
+              <%= submit_tag "Remove #{role}" %>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
-    </tr>
-  </thead>
-  <tbody>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user %></td>
-      <% roles.each do |role| %>
-        <td><%= user.has_role? role %></td>
-        <td>
-          <%= form_for(user, :url => role_permission_path(user), :html => { :method => :put }) do |f| %>
-            <%= hidden_field_tag :role_name, role %>
-            <%= f.submit "Toggle #{role}" %>
-          <% end %>
-        </td>
-      <% end %>
-    </tr>
+    </tbody>
+  </table>
+  <%= form_tag(set_role_permissions_path, { :method => :put}) do %>
+    <%= select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s", {:include_blank => true}) %>
+    <%= hidden_field_tag :role_name, role %>
+    <%= submit_tag "Add #{role}" %>
   <% end %>
-</table>
+<% end %>
