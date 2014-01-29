@@ -1,4 +1,4 @@
-Last Re-Arranged December 30, 2013.
+Last Re-Arranged January 30, 2014.
 
 =============================
 Registration-Related ToDo
@@ -7,31 +7,35 @@ Registration-Related ToDo
 -- SCOTT's CURRENT LIST:
 - Update the Events tabs to be coloured as per their desire (use jqueryui website to choose the color scheme?)
 - Update the Events tabs' internal table to alternate row colours, as per Hugo's desire.
-- Add age validation to the Jr Expert (and Wheel Walk)
- - Only allow "Jr Expert" if certain age.
-- Fix the stylesheet/images issue which is preventing serving any of the up-arrow/down-arrow images in PRODUCTION
-- enable travis
 -- END SCOTT's CURRENT LIST:
 
 
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
-- Wrap Permissions (on User) properly, so that cancan sees/manages it (currently it's can?(:manage, User))
-- When paying for something, remove it from the paid-elements, even if it's free. (free IUF should eliminate to-be-paid IUF)
 - Show the payments/refunds associated with each registrant in an easy fashion.
+- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
+ - Allow choosing the 20" wheel size for 0-10 for 10k.
+
+Less useful:
+- Make the Competition COPY the age_group_type from the event_category, instead of inheriting it.
+- Change the Judging menu to be "by Category" instead of "by Event Class",
+ - and also move the Event Class to the Competition? Perhaps call it "scoring class"
+- Wrap Permissions (on User) properly, so that cancan sees/manages it (currently it's can?(:manage, User))
+
+Payment-related:
+- When paying for something, remove it from the paid-elements, even if it's free. (free IUF should eliminate to-be-paid IUF)
 - Marking Wire Payments received for Lodging doesn't eliminate the previous lodging entry.
 - IPN with no invoice number should include whole post information.
  - determine if there is a way to prevent all things from getting sent to me?
 - Menu submenu onclick, and always have a 2nd level.
-- Make a single expense_group for registration_fees, and prevent using it elsewhere.
 
+Minor:
+- Make a single expense_group for registration_fees, and prevent using it elsewhere.
 - On the payments#summary page, display items which are for "paid-for" registrants, vs not-paid-for registrants (?)
  - Add a column to the admin/payments/ page which shows the number of "free" items that have been "paid for".
  - Add new "num free" column to the Payments#summary page
 - Improve the way that admin's can view/add payments to a user. Both "Onsite Payments" and "Free Item for special person".
-- Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
- - Allow choosing the 20" wheel size for 0-10 for 10k.
 
 ---- END ROBIN's CURRENT LIST:
 
@@ -57,7 +61,6 @@ Minor:
 - Translate "Please Wait" from buttons
 - upgrade to ruby 2.0
 - drop the base columns for the translated attributes?
-- Determine if "unoauthorized" message is now being lost due to locale?
 
 Other:
 
@@ -66,30 +69,22 @@ Other:
 - functional test which shows that creating a competitor registrant can work, and updating a registrant can work
 - functional test which shows that creating a non-competitor can work, and updating a registrant can work
 
-- clear the cache of reg_paid when a refund is created
-
 - fix the shared_error messages count only include entries which have a non-empty text field.
-- find a way to clear the rails cache before each test 'describe' step?
 - When marking an item as free for someone, eliminate their registrant_expense_item somehow?
 - combine the _expense_list.html.erb and the other (similar) partials
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
-- Remove all of the "sortable" "search" boxes, as they are clutter.....but have them on the really-long-list tables (like 'edit registrant').
 - Only display the "Gender Filter" when creating a competition (not on edit)
-- Ensure that the Paid Payment Details page doesn't list refunded items unnecessarily.
 - Clarify how to assign a user as a "Lane Assignment User", and where to enter that information
-- Change the Judging menu to be "by Category" instead of "by Event Class", and also move the Event Class to the Competition? (or leave it there?)
 - Check to see that all of the Controllers are using Registrant.order(...) correctly (it's overridden by the default_scope). 
 - Replace the current AwardLabel model with the new one (so that we can clean up the AwardLabel generation logic)
 - Identify all remaining non-translated texts, and put them into the locale files for english and french (and send them to Hugo)
 - Provide Rolf with a view which shows him the Teams/Team captains, etc
-- Fix the SuperAdmin banner going all wonky (permissions, only shows admin links)
 - Update the Admin functions for when users are "Admin"....mostly read-only.
 - Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
 - Get rid of XXX
 - Ensure that all roles can perform all the actions that they want/expect to be able to do
 
 - Limit the rooms to 1000 by all types (not per type of room)
-- Give Online registration statistics to Hugo from previous UNICON (how many in each phase)
 
 
 Categories:
@@ -152,9 +147,6 @@ Possible (but not required):
  - that show how to set up the events
  - that show how to enter judging results for races
  - that show how to do artistic judging
-
- - Add text describing that we will "expire" lodging reservations if not paid when the next registration period occurs.
- - Do we want this, or to have different room numbers?
 
 Nice-to-have:
 - Figure out how to restore the pg-sequences, so that we don't get key collisions in the future
