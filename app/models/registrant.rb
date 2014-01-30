@@ -68,6 +68,7 @@ class Registrant < ActiveRecord::Base
   before_validation :set_default_wheel_size
   belongs_to :default_wheel_size, :class_name => "WheelSize", :foreign_key => :wheel_size_id
   validates :default_wheel_size, :presence => true
+  validate :default_wheel_size_for_age
 
   after_save(:touch_members)
 
@@ -172,6 +173,14 @@ class Registrant < ActiveRecord::Base
         self.default_wheel_size = WheelSize.find_by_description("24\" Wheel")
       else
         self.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
+      end
+    end
+  end
+
+  def default_wheel_size_for_age
+    if self.age > 10
+      if self.default_wheel_size != WheelSize.find_by_description("24\" Wheel")
+        errors[:base] << "You must choose a wheel size of 24\" if you are > 10 years old"
       end
     end
   end

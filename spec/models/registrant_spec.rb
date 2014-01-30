@@ -621,6 +621,11 @@ describe Registrant do
       it "should have an age of 29" do
         @reg.age.should == 29
       end
+
+      it "cannot choose a 20\" wheel" do
+        @reg.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
+        @reg.valid?.should == false
+      end
     end
     describe "with a 10 year old registrant" do
       before(:each) do
