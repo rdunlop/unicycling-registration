@@ -6,6 +6,11 @@ describe "payments/show" do
     @payment = FactoryGirl.create(:payment)
     @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment)
     @payment.reload
+
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    controller.stub(:current_ability) { @ability }
+    controller.stub(:current_user) { FactoryGirl.create(:user) }
   end
 
   it "renders attributes in <p>" do

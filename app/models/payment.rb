@@ -27,9 +27,21 @@ class Payment < ActiveRecord::Base
     end
   end
 
+  def details
+    unless transaction_id.blank?
+      return transaction_id
+    end
+
+    unless note.blank?
+      return note
+    end
+
+    nil
+  end
+
   def transaction_id_or_note
     if completed
-      if transaction_id.blank? and note.blank?
+      if details.nil?
         errors[:base] << "Transaction ID or Note must be filled in"
       end
     end

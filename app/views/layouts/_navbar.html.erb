@@ -21,7 +21,7 @@
     <%
       if cannot? :manage, Registrant
         m.headings << Menu::MenuHeading.new(:title => t('my_registrations'), :is_link => true, :url => user_registrants_path(current_user))
-        m.headings << Menu::MenuHeading.new(:title => t('my_payments'), :is_link => true, :url => payments_path)
+        m.headings << Menu::MenuHeading.new(:title => t('my_payments'), :is_link => true, :url => user_payments_path(current_user))
         if @config.standard_skill
           m.headings << Menu::MenuHeading.new(:title => 'My Standard Skill Routines', :is_link => true, :url => standard_skill_routines_path)
         end
@@ -30,7 +30,7 @@
         heading = Menu::MenuHeading.new(:title => 'My Data')
         m.headings << heading
         heading.entries << Menu::MenuEntry.new(:title => 'My Registrations', :url => user_registrants_path(current_user), :active => current_page?(user_registrants_path(current_user)))
-        heading.entries << Menu::MenuEntry.new(:title => 'My Payments', :url => payments_path, :active => current_page?(payments_path))
+        heading.entries << Menu::MenuEntry.new(:title => 'My Payments', :url => user_payments_path(current_user), :active => current_page?(user_payments_path(current_user)))
         if @config.standard_skill
           heading.entries << Menu::MenuEntry.new(:title => 'My Standard Skill Routines', :url => standard_skill_routines_path, :active => current_page?(standard_skill_routines_path))
         end

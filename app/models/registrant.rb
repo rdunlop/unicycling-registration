@@ -49,6 +49,9 @@ class Registrant < ActiveRecord::Base
   default_scope where(:deleted => false).order(:bib_number)
 
   has_many :payment_details, :include => :payment, :dependent => :destroy
+  has_many :payments, :through => :payment_details
+  has_many :refund_details, :through => :payment_details
+  has_many :refunds, :through => :refund_details
 
   has_many :registrant_group_members, :dependent => :destroy
   has_many :registrant_groups, :through => :registrant_group_members

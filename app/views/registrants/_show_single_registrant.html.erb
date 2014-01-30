@@ -24,6 +24,11 @@
             <%= link_to t(".edit_items"), items_registrant_path(@registrant) %>
         </div>
     <% end %>
+    <% if can? :manage, @registrant %>
+      <div class="non_printable">
+        <%= link_to "List Payments", registrant_payments_path(@registrant) %>
+      </div>
+    <% end %>
   </div>
 </div><div class="data_block" style="max-width:550px;">
   <% if @registrant.competitor %>

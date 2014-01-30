@@ -9,10 +9,26 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
   end
 
-  # GET /payments
-  # GET /payments.json
+  # GET /users/12/payments
+  # GET /users/12/payments.json
+  # or
+  # GET /registrants/1/payments
   def index
-    @payments = current_user.payments.completed
+    unless params[:registrant_id].nil?
+      registrant = Registrant.find(params[:registrant_id])
+      authorize! :manage, registrant
+      @payments = registrant.payments.completed.uniq
+      @refunds = registrant.refunds.uniq
+      @title_name = registrant.to_s
+    end
+
+    unless params[:user_id].nil?
+      user = User.find(params[:user_id])
+      authorize! :read, user
+      @payments = user.payments.completed
+      @refunds = user.refunds
+      @title_name = user.to_s
+    end
 
     respond_to do |format|
       format.html # index.html.erb

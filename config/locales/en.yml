@@ -157,6 +157,7 @@ en:
   payments:
     index:
       my_payments: "My Payments"
+      persons_payments: "%{registrant}'s Payments"
     new:
       select_the_items_to_pay_for: "Select the items to pay for"
     form_contents:

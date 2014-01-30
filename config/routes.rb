@@ -104,7 +104,7 @@ Workspace::Application.routes.draw do
 
     resources :refunds, :only => [:show]
 
-    resources :payments do
+    resources :payments, :except => [:index] do
       collection do
         post 'notification'
         get 'success'
@@ -178,6 +178,7 @@ Workspace::Application.routes.draw do
       resources :registrant_expenses, :only => [:new, :destroy]
       resources :registrant_expense_items, :only => [:create, :destroy]
       resources :standard_skill_routines, :only => [:index, :create]
+      resources :payments, :only => [:index]
     end
 
     resources :standard_skill_routines, :only => [:show, :index] do
@@ -211,6 +212,7 @@ Workspace::Application.routes.draw do
 
     resources :users, :only => [] do
       resources :registrants, :only => [:index]
+      resources :payments, :only => [:index]
       resources :additional_registrant_accesses, :only => [:index, :new, :create] do
         collection do
           get :invitations

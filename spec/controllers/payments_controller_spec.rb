@@ -63,7 +63,7 @@ describe PaymentsController do
       @payment = FactoryGirl.create(:payment, :user => @user, :completed => true)
     end
     it "doesn't assign other people's payments as @payments" do
-      get :index, {}
+      get :index, {:user_id => @super_admin.id}
       assigns(:payments).should eq([])
     end
     describe "as normal user" do
@@ -71,22 +71,47 @@ describe PaymentsController do
         sign_in @user
       end
       it "can read index" do
-        get :index, {}
+        get :index, {:user_id => @user.id}
         response.should be_success
       end
       it "receives a list of payments" do
-        get :index, {}
+        get :index, {:user_id => @user.id}
         assigns(:payments).should eq([@payment])
       end
       it "does not include other people's payments" do
         p2 = FactoryGirl.create(:payment, :user => @super_admin)
-        get :index, {}
+        get :index, {:user_id => @user.id}
         assigns(:payments).should eq([@payment])
       end
       it "doesn't list my payments which are not completed" do
         incomplete_payment = FactoryGirl.create(:payment, :completed => false, :user => @user)
-        get :index, {}
+        get :index, {:user_id => @user.id}
         assigns(:payments).should eq([@payment])
+      end
+    end
+  end
+
+  describe "GET index (registrants)" do
+    before(:each) do
+      @super_admin = FactoryGirl.create(:super_admin_user)
+      sign_in @super_admin
+      @reg = FactoryGirl.create(:competitor, :user => @super_admin)
+    end
+
+    it "can get the registrants payments" do
+      get :index, {:registrant_id => @reg.id}
+      response.should be_success
+    end
+
+    describe "as a normal user" do
+      before(:each) do
+        sign_out @super_admin
+        sign_in @user
+      end
+
+      it "cannot get the registrants payments" do
+        get :index, {:registrant_id => @reg.id}
+        response.should redirect_to(root_path)
       end
     end
   end

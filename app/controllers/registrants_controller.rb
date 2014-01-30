@@ -39,6 +39,8 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants
   # GET /registrants.json
+  # or
+  # GET /users/12/registrants
   def index
     if params[:user_id].nil?
       authorize! :manage_all, Registrant

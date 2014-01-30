@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :judges
 
   has_many :payments
+  has_many :refunds
 
   has_many :import_results
   has_many :award_labels
