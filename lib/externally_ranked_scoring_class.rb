@@ -1,4 +1,4 @@
-class DistanceScoringClass
+class ExternallyRankedScoringClass
   include Rails.application.routes.url_helpers
 
   def initialize(competition)
@@ -8,23 +8,23 @@ class DistanceScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    RaceCalculator.new(@competition)
+    ExternallyRankedCalculator.new(@competition)
   end
 
   # describes how to label the results of this competition
   def result_description
-    "Time"
+    "Score"
   end
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.time_results.count > 0
+    competitor.external_results.count > 0
   end
 
   # returns the result for this competitor
   def competitor_result(competitor)
     if self.competitor_has_result?(competitor)
-      competitor.time_results.first.try(:full_time)
+      competitor.external_results.first.try(:details)
     else
       nil
     end
@@ -38,12 +38,12 @@ class DistanceScoringClass
 
   # Used when trying to destroy all results for a competition
   def all_competitor_results
-    @competition.time_results
+    @competition.external_results
   end
 
   # the page where all of the results for this competition are listed
   def results_path
-    competition_time_results_path(@competition)
+    competition_external_results_path(@competition)
   end
 
   ########### Below this line, the entries are not (YET) used

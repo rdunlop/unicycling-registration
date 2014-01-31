@@ -126,7 +126,7 @@ class CompetitionsController < ApplicationController
     when "Distance"
       @results = @competition.scoring_helper.all_competitor_results
     when "Ranked"
-      @results = @competition.external_results
+      @results = @competition.scoring_helper.all_competitor_results
     end
 
     n = 0
@@ -171,9 +171,8 @@ class CompetitionsController < ApplicationController
       @calc.update_all_places
       redirect_to distance_attempts_competition_path(@competition), :notice => "All Places Updated"
     elsif @competition.event.event_class == "Ranked"
-      @calc = @competition.score_calculator
-      @calc.update_all_places
-      redirect_to competition_external_results_path(@competition), :notice => "All Places Updated"
+      @competition.scoring_helper.place_all
+      redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
     end
   end
 

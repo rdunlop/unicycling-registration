@@ -130,6 +130,8 @@ class Competition < ActiveRecord::Base
     case event_class
     when "Distance"
       DistanceScoringClass.new(self)
+    when "Ranked"
+      ExternallyRankedScoringClass.new(self)
     else
       nil
     end
@@ -157,7 +159,7 @@ class Competition < ActiveRecord::Base
     when "Distance"
       @score_calculator = scoring_helper.score_calculator
     when "Ranked"
-      @score_calculator = ExternallyRankedCalculator.new(self)
+      @score_calculator = scoring_helper.score_calculator
     end
   end
 
@@ -168,7 +170,7 @@ class Competition < ActiveRecord::Base
     when "Distance"
       scoring_helper.result_description
     when "Ranked"
-      "Score"
+      scoring_helper.result_description
     end
   end
 

@@ -115,7 +115,7 @@ class Competitor < ActiveRecord::Base
       when "Distance"
         competition.scoring_helper.competitor_has_result?(self)
       when "Ranked"
-        external_results.count > 0
+        competition.scoring_helper.competitor_has_result?(self)
       when "Freestyle"
         scores.count > 0
       else
@@ -131,7 +131,7 @@ class Competitor < ActiveRecord::Base
       when "Distance"
         competition.scoring_helper.competitor_result(self)
       when "Ranked"
-        external_results.first.try(:details)
+        competition.scoring_helper.competitor_result(self)
       end
     end
 
