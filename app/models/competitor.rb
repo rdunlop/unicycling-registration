@@ -117,7 +117,7 @@ class Competitor < ActiveRecord::Base
       when "Ranked"
         competition.scoring_helper.competitor_has_result?(self)
       when "Freestyle"
-        scores.count > 0
+        competition.scoring_helper.competitor_has_result?(self)
       else
         false
       end

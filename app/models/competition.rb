@@ -142,14 +142,10 @@ class Competition < ActiveRecord::Base
       return @score_calculator
     end
 
-    # XXX repetative code...should be able to eliminate/refactor?
-    @config = { unicon_scoring: false }
-    unicon_scoring = false
-
     # Fancy Trick: "#{event_class}ScoreCalculator".classify.new(self)
     case event_class
     when "Freestyle"
-      @score_calculator = ArtisticScoreCalculator.new(self, unicon_scoring)
+      @score_calculator = scoring_helper.score_calculator
     when 'Flatland'
       @score_calculator = FlatlandScoreCalculator.new(self)
     when 'Street'
