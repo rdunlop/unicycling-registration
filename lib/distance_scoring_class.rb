@@ -7,7 +7,7 @@ class DistanceScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    RaceCalculator.now(@competition)
+    RaceCalculator.new(@competition)
   end
 
   # describes how to label the results of this competition
