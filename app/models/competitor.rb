@@ -111,7 +111,7 @@ class Competitor < ActiveRecord::Base
     def has_result?
       case competition.event_class
       when "Two Attempt Distance"
-        max_successful_distance != 0
+        competition.scoring_helper.competitor_has_result?(self)
       when "Distance"
         competition.scoring_helper.competitor_has_result?(self)
       when "Ranked"
@@ -126,8 +126,7 @@ class Competitor < ActiveRecord::Base
     def result
       case competition.event_class
       when "Two Attempt Distance"
-        max_distance = max_successful_distance
-        "#{max_distance} cm" unless max_distance == 0
+        competition.scoring_helper.competitor_result(self)
       when "Distance"
         competition.scoring_helper.competitor_result(self)
       when "Ranked"

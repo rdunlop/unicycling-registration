@@ -1,4 +1,4 @@
-class DistanceScoringClass
+class RaceScoringClass
   include Rails.application.routes.url_helpers
 
   def initialize(competition)
@@ -8,24 +8,23 @@ class DistanceScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    DistanceCalculator.new(@competition)
+    RaceCalculator.new(@competition)
   end
 
   # describes how to label the results of this competition
   def result_description
-    "Distance"
+    "Time"
   end
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.max_successful_distance != 0
+    competitor.time_results.count > 0
   end
 
   # returns the result for this competitor
   def competitor_result(competitor)
     if self.competitor_has_result?(competitor)
-      max_distance = competitor.max_successful_distance
-      "#{max_distance} cm" unless max_distance == 0
+      competitor.time_results.first.try(:full_time)
     else
       nil
     end
@@ -39,12 +38,12 @@ class DistanceScoringClass
 
   # Used when trying to destroy all results for a competition
   def all_competitor_results
-    nil
+    @competition.time_results
   end
 
   # the page where all of the results for this competition are listed
   def results_path
-    distance_attempts_competition_path(@competition)
+    competition_time_results_path(@competition)
   end
 
   ########### Below this line, the entries are not (YET) used

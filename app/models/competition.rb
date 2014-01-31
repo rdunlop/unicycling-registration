@@ -129,7 +129,7 @@ class Competition < ActiveRecord::Base
   def scoring_helper
     case event_class
     when "Distance"
-      DistanceScoringClass.new(self)
+      RaceScoringClass.new(self)
     when "Ranked"
       ExternallyRankedScoringClass.new(self)
     when "Freestyle"
@@ -138,6 +138,8 @@ class Competition < ActiveRecord::Base
       FlatlandScoringClass.new(self)
     when "Street"
       StreetScoringClass.new(self)
+    when "Two Attempt Distance"
+      DistanceScoringClass.new(self)
     else
       nil
     end
@@ -157,7 +159,7 @@ class Competition < ActiveRecord::Base
     when 'Street'
       @score_calculator = scoring_helper.score_calculator
     when "Two Attempt Distance"
-      @score_calculator = DistanceCalculator.new(self)
+      @score_calculator = scoring_helper.score_calculator
     when "Distance"
       @score_calculator = scoring_helper.score_calculator
     when "Ranked"
@@ -168,7 +170,7 @@ class Competition < ActiveRecord::Base
   def result_description
     case event_class
     when "Two Attempt Distance"
-      "Distance"
+      scoring_helper.result_description
     when "Distance"
       scoring_helper.result_description
     when "Ranked"

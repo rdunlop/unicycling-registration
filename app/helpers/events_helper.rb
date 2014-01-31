@@ -44,7 +44,7 @@ module EventsHelper
       when "Freestyle"
         competition.scoring_helper.results_path
       when "Two Attempt Distance"
-        distance_attempts_competition_path(competition) 
+        competition.scoring_helper.results_path
       end
     end
 

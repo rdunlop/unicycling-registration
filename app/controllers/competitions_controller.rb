@@ -167,9 +167,8 @@ class CompetitionsController < ApplicationController
       @competition.scoring_helper.place_all
       redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
     elsif @competition.event.event_class == "Two Attempt Distance"
-      @calc = @competition.score_calculator
-      @calc.update_all_places
-      redirect_to distance_attempts_competition_path(@competition), :notice => "All Places Updated"
+      @competition.scoring_helper.place_all
+      redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
     elsif @competition.event.event_class == "Ranked"
       @competition.scoring_helper.place_all
       redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
