@@ -85,6 +85,10 @@ Other:
 
 - Limit the rooms to 1000 by all types (not per type of room)
 
+Technical:
+- Re-work the printing/competitions controller, so that it shares more logic with the non-pdf versions of results-displaying??
+- Replace the "Save" link with an argument for controller (since we don't need 2 paths which do the same PDF thing)
+
 
 Categories:
 Data Generating

@@ -149,6 +149,9 @@ see above
 
 <hr />
 <h2>Data Entry</h2>
+<%= link_to "Race Recording Forms (pdf)", printing_race_recording_multi_lap_path(:format => :pdf) %><br />
+<%= link_to "Track Race Instructions (pdf)", printing_race_recording_instructions_path(:format => :pdf) %>
+
 <ul>
   <% @event.competitions.each do |competition| %>
     <li>Print Paper Copies for <%= competition %><br />
@@ -192,6 +195,15 @@ see above
     </ul>
     </li>
   <% end %>
+</ul>
+<h3>Event Results</h3>
+<ul>
+  <li>Event Results Summary pdf
+  <ul>
+    <li><%= link_to "View", results_printing_event_path(@event, :format => :pdf) %></li>
+    <li><%= link_to "Save", save_printing_event_path(@event, :format => :pdf) %></li>
+  </ul>
+  </li>
 </ul>
 
 <hr />

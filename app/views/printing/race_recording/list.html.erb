@@ -3,14 +3,6 @@
 <%= link_to "Race Recording Forms (pdf)", printing_race_recording_multi_lap_path(:format => :pdf) %><br />
 <%= link_to "Track Race Instructions (pdf)", printing_race_recording_instructions_path(:format => :pdf) %>
 
-<h2>Artistic Printing Forms</h2>
-
-<ul>
-  <% Competition.event_order.all.each do |comp| %>
-    <li><%= link_to "#{comp} Forms", printing_competition_path(comp) %></li>
-  <% end %>
-</ul>
-
 <h2>Event Results Printing</h2>
 <table class="sortable">
   <thead>

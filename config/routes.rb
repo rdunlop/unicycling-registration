@@ -16,7 +16,7 @@ Workspace::Application.routes.draw do
         get :list
         get :instructions
       end
-      resources :competitions, :only => [:show] do
+      resources :competitions, :only => [] do
         member do
           get :announcer
           get :heat_recording

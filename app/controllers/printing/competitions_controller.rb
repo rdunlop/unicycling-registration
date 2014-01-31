@@ -8,13 +8,6 @@ class Printing::CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
   end
 
-  def show
-    respond_to do |format|
-      format.html # multi_lap.html.erb
-      format.pdf { render_common_pdf("show") }
-    end
-  end
-
   def announcer
     respond_to do |format|
       format.html # multi_lap.html.erb
