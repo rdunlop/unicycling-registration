@@ -250,34 +250,6 @@ describe EventsController do
     end
   end
 
-  describe "GET freestyle" do
-    it "retrieves the Freestyle events only" do
-        event = FactoryGirl.create(:event)
-        event2 = FactoryGirl.create(:street_event)
-        event3 = FactoryGirl.create(:flatland_event)
-        get :freestyle
-        assigns(:events).should eq([event])
-    end
-  end
-  describe "GET flatland" do
-    it "retrieves the flatland events only" do
-        event = FactoryGirl.create(:event)
-        event2 = FactoryGirl.create(:street_event)
-        event3 = FactoryGirl.create(:flatland_event)
-        get :flatland
-        assigns(:events).should eq([event3])
-    end
-  end
-  describe "GET street" do
-    it "retrieves the street events only" do
-        event = FactoryGirl.create(:event)
-        event2 = FactoryGirl.create(:street_event)
-        event3 = FactoryGirl.create(:flatland_event)
-        get :street
-        assigns(:events).should eq([event2])
-    end
-  end
-
   describe "GET summary" do
     it "assigns all events as @events" do
       event = FactoryGirl.create(:event)

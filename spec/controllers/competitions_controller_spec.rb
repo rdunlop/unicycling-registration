@@ -87,7 +87,7 @@ describe CompetitionsController do
 
       it "redirects to the created competition" do
         post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
-        response.should redirect_to(distance_events_path)
+        response.should redirect_to(event_path(@event))
       end
     end
 
@@ -193,7 +193,7 @@ describe CompetitionsController do
       competition = FactoryGirl.create(:competition, :event => @event)
       event = competition.event
       delete :destroy, {:id => competition.to_param}
-      response.should redirect_to(distance_events_path)
+      response.should redirect_to(event_path(@event))
     end
   end
 
