@@ -36,16 +36,7 @@ module EventsHelper
     end
 
     def results_url(competition)
-      case competition.event.event_class
-      when "Distance"
-        competition.scoring_helper.results_path
-      when "Ranked"
-        competition.scoring_helper.results_path
-      when "Freestyle"
-        competition.scoring_helper.results_path
-      when "Two Attempt Distance"
-        competition.scoring_helper.results_path
-      end
+      competition.scoring_helper.results_path
     end
 
     def judging_menu_url(competition)

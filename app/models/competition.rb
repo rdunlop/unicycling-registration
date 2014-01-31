@@ -150,32 +150,11 @@ class Competition < ActiveRecord::Base
       return @score_calculator
     end
 
-    # Fancy Trick: "#{event_class}ScoreCalculator".classify.new(self)
-    case event_class
-    when "Freestyle"
-      @score_calculator = scoring_helper.score_calculator
-    when 'Flatland'
-      @score_calculator = scoring_helper.score_calculator
-    when 'Street'
-      @score_calculator = scoring_helper.score_calculator
-    when "Two Attempt Distance"
-      @score_calculator = scoring_helper.score_calculator
-    when "Distance"
-      @score_calculator = scoring_helper.score_calculator
-    when "Ranked"
-      @score_calculator = scoring_helper.score_calculator
-    end
+    @score_calculator = scoring_helper.score_calculator
   end
 
   def result_description
-    case event_class
-    when "Two Attempt Distance"
-      scoring_helper.result_description
-    when "Distance"
-      scoring_helper.result_description
-    when "Ranked"
-      scoring_helper.result_description
-    end
+    scoring_helper.result_description
   end
 
   # ###########################

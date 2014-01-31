@@ -109,29 +109,11 @@ class Competitor < ActiveRecord::Base
 
     public
     def has_result?
-      case competition.event_class
-      when "Two Attempt Distance"
-        competition.scoring_helper.competitor_has_result?(self)
-      when "Distance"
-        competition.scoring_helper.competitor_has_result?(self)
-      when "Ranked"
-        competition.scoring_helper.competitor_has_result?(self)
-      when "Freestyle"
-        competition.scoring_helper.competitor_has_result?(self)
-      else
-        false
-      end
+      competition.scoring_helper.competitor_has_result?(self)
     end
 
     def result
-      case competition.event_class
-      when "Two Attempt Distance"
-        competition.scoring_helper.competitor_result(self)
-      when "Distance"
-        competition.scoring_helper.competitor_result(self)
-      when "Ranked"
-        competition.scoring_helper.competitor_result(self)
-      end
+      competition.scoring_helper.competitor_result(self)
     end
 
     def event

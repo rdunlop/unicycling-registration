@@ -122,12 +122,7 @@ class CompetitionsController < ApplicationController
   # DELETE /competitions/1/destroy_results
   def destroy_results
     @results = nil
-    case @competition.event.event_class
-    when "Distance"
-      @results = @competition.scoring_helper.all_competitor_results
-    when "Ranked"
-      @results = @competition.scoring_helper.all_competitor_results
-    end
+    @results = @competition.scoring_helper.all_competitor_results
 
     n = 0
     err = 0
