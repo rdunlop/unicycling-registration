@@ -68,7 +68,7 @@ class CompetitionsController < ApplicationController
   def create_empty
     respond_to do |format|
       if @competition.save
-        format.html { redirect_to judging_menu_url(@competition), notice: "Competition created successfully" }
+        format.html { redirect_to event_path(@competition.event), notice: "Competition created successfully" }
       else
         format.html { render action: "new_empty" }
       end
@@ -95,7 +95,7 @@ class CompetitionsController < ApplicationController
 
         message += @competition.create_competitors_from_registrants(registrants)
 
-        format.html { redirect_to judging_menu_url(@competition), notice:  message }
+        format.html { redirect_to event_path(@competition.event), notice:  message }
         format.json { render json: @competition, status: :created, location: competition_competitors_path(@event) }
       else
         load_event_category
@@ -141,7 +141,7 @@ class CompetitionsController < ApplicationController
   # DELETE /competitions/1
   # DELETE /competitions/1.json
   def destroy
-    target_url = judging_menu_url(@competition)
+    target_url = event_path(@competition.event)
     @competition.destroy
 
     respond_to do |format|

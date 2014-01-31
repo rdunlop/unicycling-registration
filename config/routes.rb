@@ -124,12 +124,6 @@ Workspace::Application.routes.draw do
       resources :event_categories, :only => [:index, :create]
       collection do
         get 'judging'
-        get 'freestyle'
-        get 'flatland'
-        get 'street'
-        get 'track'
-        get 'distance'
-        get 'ranked'
 
         get 'summary'
       end

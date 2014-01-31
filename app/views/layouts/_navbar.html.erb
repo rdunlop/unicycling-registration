@@ -78,13 +78,6 @@
     <%
       heading = Menu::MenuHeading.new(:title => 'Judging (old)')
       m.headings << heading
-      heading.entries << Menu::MenuEntry.new(:title => 'My Events', :url => judging_events_path, :active => current_page?(judging_events_path), :permitted => can?(:judging, Event))
-      heading.entries << Menu::MenuEntry.new(:title => 'Freestyle', :url => freestyle_events_path, :active => current_page?(freestyle_events_path), :permitted => can?(:freestyle, Event))
-      heading.entries << Menu::MenuEntry.new(:title => 'Flatland', :url => flatland_events_path, :active => current_page?(flatland_events_path), :permitted => can?(:freestyle, Event))
-      heading.entries << Menu::MenuEntry.new(:title => 'Street', :url => street_events_path, :active => current_page?(street_events_path), :permitted => can?(:freestyle, Event))
-      heading.entries << Menu::MenuEntry.new(:title => 'Timed', :url => distance_events_path, :active => current_page?(distance_events_path), :permitted => can?(:freestyle, Event))
-      heading.entries << Menu::MenuEntry.new(:title => 'Externally Ranked', :url => ranked_events_path, :active => current_page?(ranked_events_path), :permitted => can?(:freestyle, Event))
-      heading.entries << Menu::MenuEntry.new(:title => 'High/Long', :url => track_events_path, :active => current_page?(track_events_path), :permitted => can?(:freestyle, Event))
       heading.entries << Menu::MenuEntry.new(:title => 'Printing', :url => printing_race_recording_list_path, :active => current_page?(printing_race_recording_list_path), :permitted => can?(:freestyle, Event))
     %>
     <%

@@ -90,30 +90,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def freestyle
-    @events = Event.where({:event_class => "Freestyle"})
-  end
-
-  def flatland
-    @events = Event.where({:event_class => "Flatland"})
-  end
-
-  def street
-    @events = Event.where({:event_class => "Street"})
-  end
-
-  def track
-    @events = Event.where({:event_class => "Two Attempt Distance"})
-  end
-
-  def distance
-    @events = Event.where({:event_class => "Distance"})
-  end
-
-  def ranked
-    @events = Event.where({:event_class => "Ranked"})
-  end
-
   def judging
     @judges = current_user.judges
   end
