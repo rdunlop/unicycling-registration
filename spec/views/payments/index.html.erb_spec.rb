@@ -11,6 +11,8 @@ describe "payments/index" do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }
+
+    assign(:refunds, [])
   end
 
   it "renders a list of payments" do
