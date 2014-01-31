@@ -38,7 +38,7 @@ module EventsHelper
     def results_url(competition)
       case competition.event.event_class
       when "Distance"
-        competition_time_results_path(competition)
+        competition.scoring_helper.results_path
       when "Ranked"
         competition_external_results_path(competition)
       when "Freestyle"

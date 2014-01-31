@@ -124,7 +124,7 @@ class CompetitionsController < ApplicationController
     @results = nil
     case @competition.event.event_class
     when "Distance"
-      @results = @competition.time_results
+      @results = @competition.scoring_helper.all_competitor_results
     when "Ranked"
       @results = @competition.external_results
     end
@@ -164,9 +164,8 @@ class CompetitionsController < ApplicationController
 
   def set_places
     if @competition.event.event_class == "Distance"
-      @calc = @competition.score_calculator
-      @calc.update_all_places
-      redirect_to competition_time_results_path(@competition), :notice => "All Places updated"
+      @competition.scoring_helper.place_all
+      redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
     elsif @competition.event.event_class == "Two Attempt Distance"
       @calc = @competition.score_calculator
       @calc.update_all_places

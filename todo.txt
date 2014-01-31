@@ -13,7 +13,6 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
-- Show the payments/refunds associated with each registrant in an easy fashion.
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.
 

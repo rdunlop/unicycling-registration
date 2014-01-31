@@ -113,7 +113,7 @@ class Competitor < ActiveRecord::Base
       when "Two Attempt Distance"
         max_successful_distance != 0
       when "Distance"
-        time_results.count > 0
+        competition.scoring_helper.competitor_has_result?(self)
       when "Ranked"
         external_results.count > 0
       when "Freestyle"
@@ -129,7 +129,7 @@ class Competitor < ActiveRecord::Base
         max_distance = max_successful_distance
         "#{max_distance} cm" unless max_distance == 0
       when "Distance"
-        time_results.first.try(:full_time)
+        competition.scoring_helper.competitor_result(self)
       when "Ranked"
         external_results.first.try(:details)
       end
