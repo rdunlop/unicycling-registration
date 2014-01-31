@@ -18,7 +18,7 @@ class EventCategory < ActiveRecord::Base
   end
 
   def num_competitors
-    registrant_event_sign_ups.where({:signed_up => true}).count
+    signed_up_registrants.count
   end
 
   def event_class
