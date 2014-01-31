@@ -43,7 +43,7 @@ class RaceScoringClass
 
   # the page where all of the results for this competition are listed
   def results_path
-    competition_time_results_path(@competition)
+    competition_time_results_path(I18n.locale, @competition)
   end
 
   ########### Below this line, the entries are not (YET) used

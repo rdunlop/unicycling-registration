@@ -45,7 +45,7 @@ class ArtisticScoringClass
 
   # the page where all of the results for this competition are listed
   def results_path
-    freestyle_scores_competition_path(@competition)
+    freestyle_scores_competition_path(I18n.locale, @competition)
   end
 
   ########### Below this line, the entries are not (YET) used

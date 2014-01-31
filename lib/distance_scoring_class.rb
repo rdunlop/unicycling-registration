@@ -44,7 +44,7 @@ class DistanceScoringClass
 
   # the page where all of the results for this competition are listed
   def results_path
-    distance_attempts_competition_path(@competition)
+    distance_attempts_competition_path(I18n.locale, @competition)
   end
 
   ########### Below this line, the entries are not (YET) used
