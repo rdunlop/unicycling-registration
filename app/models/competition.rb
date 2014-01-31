@@ -132,6 +132,12 @@ class Competition < ActiveRecord::Base
       DistanceScoringClass.new(self)
     when "Ranked"
       ExternallyRankedScoringClass.new(self)
+    when "Freestyle"
+      ArtisticScoringClass.new(self)
+    when "Flatland"
+      FlatlandScoringClass.new(self)
+    when "Street"
+      StreetScoringClass.new(self)
     else
       nil
     end
@@ -147,9 +153,9 @@ class Competition < ActiveRecord::Base
     when "Freestyle"
       @score_calculator = scoring_helper.score_calculator
     when 'Flatland'
-      @score_calculator = FlatlandScoreCalculator.new(self)
+      @score_calculator = scoring_helper.score_calculator
     when 'Street'
-      @score_calculator = StreetCompScoreCalculator.new(self)
+      @score_calculator = scoring_helper.score_calculator
     when "Two Attempt Distance"
       @score_calculator = DistanceCalculator.new(self)
     when "Distance"

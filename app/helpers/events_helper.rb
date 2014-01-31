@@ -42,7 +42,7 @@ module EventsHelper
       when "Ranked"
         competition.scoring_helper.results_path
       when "Freestyle"
-        freestyle_scores_competition_path(competition)
+        competition.scoring_helper.results_path
       when "Two Attempt Distance"
         distance_attempts_competition_path(competition) 
       end
