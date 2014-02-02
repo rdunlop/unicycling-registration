@@ -46,6 +46,13 @@ class RaceScoringClass
     competition_time_results_path(I18n.locale, @competition)
   end
 
+  def results_importable
+    true
+  end
+
+  def uses_judges
+    false
+  end
   ########### Below this line, the entries are not (YET) used
 
   # for award_label

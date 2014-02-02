@@ -46,6 +46,13 @@ class FlatlandScoringClass
     nil
   end
 
+  def results_importable
+    false
+  end
+
+  def uses_judges
+    true
+  end
   ########### Below this line, the entries are not (YET) used
 
   # for award_label

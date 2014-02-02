@@ -62,6 +62,10 @@ class Event < ActiveRecord::Base
     name
   end
 
+  def chief_judges
+    User.with_role(:chief_judge, self)
+  end
+
   # determine the number of people who have signed up for this event
   def num_competitors
     registrant_event_sign_ups.where({:signed_up => true}).count

@@ -48,6 +48,14 @@ class ArtisticScoringClass
     freestyle_scores_competition_path(I18n.locale, @competition)
   end
 
+
+  def results_importable
+    false
+  end
+
+  def uses_judges
+    true
+  end
   ########### Below this line, the entries are not (YET) used
 
   # for award_label
