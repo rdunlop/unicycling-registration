@@ -18,7 +18,7 @@
                 <td><%= reg %></td>
                 <td><%= reg.age %></td>
                 <td><%= reg.gender %></td>
-                <td><%= reg.country %></td>
+                <td><%= reg.country_name %></td>
                 <td>
                   <% unless @age_group_type.nil? %>
                     <%= @age_group_type.age_group_entry_for(reg.age, reg.gender) %>

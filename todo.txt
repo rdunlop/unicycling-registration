@@ -15,6 +15,7 @@ Registration-Related ToDo
 Most Useful:
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.
+- Fix printing of PDFs with special characters (ie: french characters)
 
 Less useful:
 - Make the Competition COPY the age_group_type from the event_category, instead of inheriting it.

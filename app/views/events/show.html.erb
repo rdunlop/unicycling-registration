@@ -104,51 +104,19 @@
       <th>Judge</th>
       <th># Competitors</th>
       <th># Results Entered</th>
-      <th>Locked?</th>
-      <th>Import Results</th>
       <th>Results</th>
-      <th>Print</th>
-      <th>Publish</th>
     </tr>
   </thead>
-  <% # XXX This probably needs to be split up to deal with multi-judging events more clearly
-  # XXX And deal with results-who-don't-have-judges 
-%>
-
   <tbody>
     <% @event.competitions.each do |competition| %>
       <% competition.judges.each do |judge| %>
         <tr>
           <td><%= competition %></td>
           <td><%= judge %></td>
-          <td>
-            <% if competition.uses_judges %>
-              <%= link_to 'View/Add', competition_judges_path(competition) %>
-            <% else %>
-              N/A
-            <% end %>
-          </td>
+          <td><%= link_to 'View/Add', competition_judges_path(competition) %></td>
           <td><%= competition.competitors.count %></td>
           <td><%= judge.get_scores.count %></td>
-          <td><%= competition.locked? %>
-            <% if can? :lock, @event %>
-              <% if competition.locked? %>
-                <%= link_to 'Unlock', lock_competition_path(competition), :method => :delete %>
-              <% else %>
-                <%= link_to 'Lock', lock_competition_path(competition), :method => :post %>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
-            <% if competition.results_importable %>
-              <%= link_to 'Import Results', user_import_results_path(current_user) %>
-            <% else %>
-              N/A
-            <% end %>
-          </td>
-          <td><%= link_to 'View', results_url(competition) %></td>
-          <td><%= link_to "(pdf)", results_printing_competition_path(competition, :format => :pdf) %></td>
-          <td>Not yet implemented</td>
+          <td>Not yet imelmented</td>
         </tr>
       <% end %>
     <% end %>
@@ -159,6 +127,46 @@
 <% @event.competitions.each do |competition| %>
   <%= link_to "Manage Judges for #{competition}", competition_judges_path(competition) %><br />
 <% end %>
+
+<table>
+  <caption>Competition Summary</caption>
+  <thead>
+    <tr>
+      <th>Competition</td>
+      <th>Locked?</th>
+      <th>Import Results</th>
+      <th>Results</th>
+      <th>Print</th>
+      <th>Publish</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @event.competitions.each do |competition| %>
+      <tr>
+        <td><%= competition %></td>
+        <td><%= competition.locked? %>
+          <% if can? :lock, @event %>
+            <% if competition.locked? %>
+              <%= link_to 'Unlock', lock_competition_path(competition), :method => :delete %>
+            <% else %>
+              <%= link_to 'Lock', lock_competition_path(competition), :method => :post %>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if competition.scoring_helper.results_importable %>
+            <%= link_to 'Import Results', user_import_results_path(current_user) %>
+          <% else %>
+            N/A
+          <% end %>
+        </td>
+        <td><%= link_to 'View', results_url(competition) %></td>
+        <td><%= link_to "(pdf)", results_printing_competition_path(competition, :format => :pdf) %></td>
+        <td>Not yet implemented</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 
 <hr />
