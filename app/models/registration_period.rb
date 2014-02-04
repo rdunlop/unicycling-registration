@@ -21,7 +21,6 @@ class RegistrationPeriod < ActiveRecord::Base
   end
 
   def clear_cache
-    puts "clearing cache"
     Rails.cache.delete("/registration_period/by_date/#{Date.today}")
   end
 
@@ -55,7 +54,6 @@ class RegistrationPeriod < ActiveRecord::Base
 
   def self.relevant_period(date)
     rp_id = Rails.cache.fetch("/registration_period/by_date/#{date}")
-    puts "fetched by_date#{date}: #{rp_id}"
     rp = RegistrationPeriod.find_by_id(rp_id)
     return rp unless rp.nil?
 
@@ -85,32 +83,30 @@ class RegistrationPeriod < ActiveRecord::Base
 
 
   def self.current_period
-    x = Rails.cache.fetch("/registration_period/current")
-    puts "fetched current as: #{x}"
-    x
+    id = Rails.cache.fetch("/registration_period/current")
+    RegistrationPeriod.find_by_id(id)
+  end
+
+  def self.current_period=(new_period)
+    Rails.cache.write("/registration_period/current", new_period.id)
   end
 
   # run by the scheduler in order to update the current Registration_period,
   # Removes all unpaid reg-items for the old period, and creating ones for the new period
   def self.update_current_period(date = Date.today)
-    puts "calling update_current_period(#{date})"
     now_period = relevant_period(date)
-
 
     old_period = current_period
 
     # update the last-run date, even if we aren't going to change periods
-    puts "writing last_update_run_date: #{date}"
     Rails.cache.write("/registration_period/last_update_run_date", date)
     # write the current period again, to keep it in the cache
-    Rails.cache.write("/registration_period/current", now_period)
-    puts "wrote to current #{now_period}"
+    self.current_period = now_period
 
     if (now_period == old_period)
       return false
     end
 
-    puts "calling mailer"
     Notifications.updated_current_reg_period(old_period, now_period).deliver
 
     old_comp_item = old_period.competitor_expense_item unless old_period.nil?
