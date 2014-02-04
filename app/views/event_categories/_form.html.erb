@@ -28,10 +28,6 @@
     <%= f.label :age_range_end %><br />
     <%= f.number_field :age_range_end, :in => 0..100 %>
   </div>
-  <div class="field">
-    <%= f.label :age_group_type_id %><br />
-    <%= f.select :age_group_type_id, AgeGroupType.all.map { |agt| [agt.name, agt.id] }, :include_blank => true %>
-  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

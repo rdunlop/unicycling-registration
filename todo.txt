@@ -19,6 +19,7 @@ Most Useful:
 DESIGN:
  - Associate competitions with event_categories (instead of the other way around)
  - Associate competitions with filters (intsead of ephemerally)
+ - Add display to registrants-printing page which shows all competitors that they have associated? (to show the age groups, etc?)
 
 Less useful:
 - Make the Competition COPY the age_group_type from the event_category, instead of inheriting it.

@@ -71,15 +71,7 @@ class Competition < ActiveRecord::Base
 
   # remains public so that we can easily iterate over the group-entries
   def determine_age_group_type
-    if age_group_type.nil?
-      unless event_category.nil?
-        return event_category.age_group_type
-      else
-        nil
-      end
-    else
-      age_group_type
-    end
+    age_group_type
   end
 
   def age_group_entries

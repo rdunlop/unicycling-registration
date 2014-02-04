@@ -6,7 +6,6 @@
             <th>Age</th>
             <th>Gender</th>
             <th>Country</th>
-            <th>Age Group</th>
             <th>Details</th>
         </tr>
     </thead>
@@ -19,11 +18,6 @@
                 <td><%= reg.age %></td>
                 <td><%= reg.gender %></td>
                 <td><%= reg.country_name %></td>
-                <td>
-                  <% unless @age_group_type.nil? %>
-                    <%= @age_group_type.age_group_entry_for(reg.age, reg.gender) %>
-                  <% end %>
-                </td>
                 <td><%= reg.describe_event_hash(@event)[:additional] %></td>
             </tr>
         <% end %>

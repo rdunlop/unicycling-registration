@@ -6,7 +6,6 @@
     <tr>
       <th>Name</th>
       <th>Position</th>
-      <th>Age Group Type</th>      
       <th>Allowed Age Range</th>      
       <th></th>
       <th></th>
@@ -17,7 +16,6 @@
       <tr>
         <td><%= event_category.name %></td>
         <td><%= event_category.position %></td>
-        <td><%= event_category.age_group_type %></td>
         <td><%= event_category.age_range_start %>-<%= event_category.age_range_end %></td>        
         <td><%= link_to 'Show', event_category %></td>
         <td><%= link_to 'Edit', edit_event_category_path(event_category) %></td>

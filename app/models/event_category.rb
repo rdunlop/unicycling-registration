@@ -1,6 +1,5 @@
 class EventCategory < ActiveRecord::Base
   belongs_to :event, :inverse_of => :event_categories, :touch => true
-  belongs_to :age_group_type, :inverse_of => :event_categories
 
   has_many :registrant_event_sign_ups, :dependent => :destroy
 

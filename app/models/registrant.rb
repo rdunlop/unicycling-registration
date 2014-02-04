@@ -484,12 +484,6 @@ class Registrant < ActiveRecord::Base
       end
     end
 
-    results[:age_group] = nil
-    unless resu.nil?
-      agt = resu.event_category.age_group_type
-      results[:age_group] = agt.age_group_entry_description(age, gender, default_wheel_size.id) unless agt.nil?
-    end
-
     results
   end
 
