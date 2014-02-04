@@ -88,7 +88,8 @@ class RegistrationPeriod < ActiveRecord::Base
   end
 
   def self.current_period=(new_period)
-    Rails.cache.write("/registration_period/current", new_period.id)
+    new_value = new_period.id unless new_period.nil?
+    Rails.cache.write("/registration_period/current", new_value)
   end
 
   # run by the scheduler in order to update the current Registration_period,
