@@ -22,11 +22,6 @@ describe EventCategory do
     @ec.to_s.should == @ev.to_s + " - " + @ec.name
   end
 
-  it "can have an age_group_type" do
-    @ec.age_group_type = FactoryGirl.create(:age_group_type)
-    @ec.valid?.should == true
-  end
-
   describe "with some registrant_choices" do
     before(:each) do
       @rc = FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec)
@@ -38,24 +33,6 @@ describe EventCategory do
 
     it "can count the number of signed_up competitors" do
       @ec.num_competitors.should == 1
-    end
-  end
-
-  describe "when it has an ag_group_type" do
-    before(:each) do
-      @ec.age_group_type = FactoryGirl.create(:age_group_type)
-      @ec.save!
-      @ec.reload
-    end
-
-    it "is updated when the age_group_type is updated" do
-      @agt = @ec.age_group_type
-      old_update_time = @ec.updated_at
-
-      Delorean.jump 2
-
-      @agt.save
-      @ec.reload.updated_at.to_s.should_not == old_update_time.to_s
     end
   end
 

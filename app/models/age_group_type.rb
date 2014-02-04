@@ -2,22 +2,12 @@ class AgeGroupType < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
 
   has_many :age_group_entries, :dependent => :destroy
-  has_many :event_categories, :dependent => :nullify
   has_many :competitions, :dependent => :nullify
-
-  after_save(:touch_event_categories)
-  after_touch(:touch_event_categories)
 
   after_save(:touch_competitions)
   after_touch(:touch_competitions)
 
   default_scope order(:name)
-
-  def touch_event_categories
-    event_categories.each do |ec|
-      ec.touch
-    end
-  end
 
   def touch_competitions
     competitions.each do |comp|

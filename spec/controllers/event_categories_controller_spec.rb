@@ -4,7 +4,6 @@ describe EventCategoriesController do
   before(:each) do
     sign_in FactoryGirl.create(:super_admin_user)
     @event = FactoryGirl.create(:event)
-    @act = FactoryGirl.create(:age_group_type)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -13,8 +12,7 @@ describe EventCategoriesController do
   def valid_attributes
     {
     name: "Unlimited",
-    position: 2,
-    age_group_type_id: @act.id
+    position: 2
     }
   end
 
