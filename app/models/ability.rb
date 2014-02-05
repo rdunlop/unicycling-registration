@@ -9,8 +9,6 @@ class Ability
       if user.has_role? :super_admin
         can :access, :rails_admin
         can :dashboard
-        can :manage, AgeGroupType # written for clarity, though :all includes this
-        can :manage, AgeGroupEntry # written for clarity, though :all includes this
         can :manage, StandardSkillEntry # written for clarity, though :all includes this
         can :manage, StandardSkillRoutine # written for clarity, though :all includes this
         can :manage, :all
@@ -22,6 +20,8 @@ class Ability
       if user.has_role? :admin
         can :summary, Event
         can :sign_ups, EventCategory
+        can :manage, AgeGroupType
+        can :manage, AgeGroupEntry
         can :manage, Competitor
         can :manage, ImportResult
         can :manage, AwardLabel

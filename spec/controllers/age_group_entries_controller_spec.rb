@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AgeGroupEntriesController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
+    sign_in FactoryGirl.create(:admin_user)
     @age_group_type = FactoryGirl.create(:age_group_type)
     @ws = FactoryGirl.create(:wheel_size)
   end
