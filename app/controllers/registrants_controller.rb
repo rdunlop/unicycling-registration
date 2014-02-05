@@ -259,7 +259,7 @@ class RegistrantsController < ApplicationController
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
         @registrants = Registrant.unscoped
-        format.html { render action: "index" }
+        format.html { render action: "index_all" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end
     end
