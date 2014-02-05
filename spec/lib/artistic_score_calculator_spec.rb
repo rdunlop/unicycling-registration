@@ -237,8 +237,7 @@ describe ArtisticScoreCalculator do
 
   describe "STREET Score when calculating the placement points of an event" do
     before(:each) do
-      @event = FactoryGirl.create(:street_event)
-      @competition = FactoryGirl.create(:competition, :event => @event)
+      @competition = FactoryGirl.create(:street_competition)
       comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
       comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
       comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)

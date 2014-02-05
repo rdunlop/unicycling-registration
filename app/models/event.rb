@@ -28,13 +28,8 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.event_classes
-    ["Freestyle", "Distance", "Two Attempt Distance", "Flatland", "Street", "Ranked"]
-  end
-
   validates :name, :presence => true
   validates :category_id, :presence => true
-  validates :event_class, :inclusion => { :in => self.event_classes, :allow_nil => true }
 
   before_validation :build_event_category
 

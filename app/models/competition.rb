@@ -16,6 +16,14 @@ class Competition < ActiveRecord::Base
   has_many :lane_assignments, :dependent => :destroy
   #has_many :chief_judges, :dependent => :destroy
 
+
+  def self.scoring_classes
+    ["Freestyle", "Distance", "Two Attempt Distance", "Flatland", "Street", "Ranked"]
+  end
+
+  validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }
+  validates :event_id, :presence => true
+
   scope :event_order, includes(:event).order("events.name")
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
@@ -115,7 +123,7 @@ class Competition < ActiveRecord::Base
   end
 
   def event_class
-    event.event_class
+    scoring_class
   end
 
   def scoring_helper

@@ -8,7 +8,7 @@ class JudgesController < ApplicationController
   end
 
   def new # are there tests for this?
-    @judge_types = JudgeType.where(:event_class => @competition.event.event_class)
+    @judge_types = JudgeType.where(:event_class => @competition.event_class)
     @all_judges = User.with_role(:judge).order(:email)
   end
 

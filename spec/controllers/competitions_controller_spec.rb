@@ -4,7 +4,7 @@ describe CompetitionsController do
   before(:each) do
     @admin_user =FactoryGirl.create(:super_admin_user)
     sign_in @admin_user
-    @event = FactoryGirl.create(:timed_event)
+    @event = FactoryGirl.create(:event)
     @event_category = @event.event_categories.first
   end
 
@@ -13,7 +13,8 @@ describe CompetitionsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-    name: "Unlimited"
+      name: "Unlimited",
+      scoring_class: "Distance"
     }
   end
 
@@ -38,7 +39,7 @@ describe CompetitionsController do
 
   describe "GET show" do
     it "assigns the requested event_category as @event_category" do
-      competition = Competition.create! valid_attributes
+      competition = FactoryGirl.create(:competition)
       get :show, {:id => competition.to_param}
       assigns(:competition).should eq(competition)
     end
@@ -46,7 +47,7 @@ describe CompetitionsController do
 
   describe "GET edit" do
     it "assigns the requested event_category as @event_category" do
-      competition = Competition.create! valid_attributes
+      competition = FactoryGirl.create(:competition)
       get :edit, {:id => competition.to_param}
       assigns(:competition).should eq(competition)
     end
@@ -140,7 +141,7 @@ describe CompetitionsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested event_category" do
-        competition = Competition.create! valid_attributes
+        competition = FactoryGirl.create(:competition)
         # Assuming there are no other competitions in the database, this
         # specifies that the Competition created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -150,13 +151,13 @@ describe CompetitionsController do
       end
 
       it "assigns the requested event_category as @event_category" do
-        competition = Competition.create! valid_attributes
+        competition = FactoryGirl.create(:competition)
         put :update, {:id => competition.to_param, :competition => valid_attributes}
         assigns(:competition).should eq(competition)
       end
 
       it "redirects to the event_category" do
-        competition = Competition.create! valid_attributes
+        competition = FactoryGirl.create(:competition)
         put :update, {:id => competition.to_param, :competition => valid_attributes}
         response.should redirect_to(competition)
       end
@@ -164,7 +165,7 @@ describe CompetitionsController do
 
     describe "with invalid params" do
       it "assigns the event_category as @event_category" do
-        competition = Competition.create! valid_attributes
+        competition = FactoryGirl.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
         Competition.any_instance.stub(:save).and_return(false)
         put :update, {:id => competition.to_param, :competition => {}}
@@ -172,7 +173,7 @@ describe CompetitionsController do
       end
 
       it "re-renders the 'edit' template" do
-        competition = Competition.create! valid_attributes
+        competition = FactoryGirl.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
         Competition.any_instance.stub(:save).and_return(false)
         put :update, {:id => competition.to_param, :competition => {:name => "comp"}}
@@ -216,8 +217,8 @@ describe CompetitionsController do
 
   describe "when the competition is a distance competition, with time-results" do
     before(:each) do
-      @competition = FactoryGirl.create(:competition, :event => @event)
-      @competition.event.event_class.should == "Distance"
+      @competition = FactoryGirl.create(:timed_competition)
+      @competition.event_class.should == "Distance"
       @competitor = FactoryGirl.create(:event_competitor, :competition => @competition)
       @tr = FactoryGirl.create(:time_result, :competitor => @competitor)
     end

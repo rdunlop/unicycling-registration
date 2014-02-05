@@ -4,7 +4,7 @@ describe ImportResultsController do
   before(:each) do
     @admin_user = FactoryGirl.create(:admin_user)
     sign_in @admin_user
-    @competition = FactoryGirl.create(:competition, :event => FactoryGirl.create(:timed_event))
+    @competition = FactoryGirl.create(:timed_competition)
   end
   let (:import_result) { FactoryGirl.create(:import_result, :user => @admin_user) }
 
@@ -152,8 +152,7 @@ describe ImportResultsController do
 
   describe "POST publish_to_competition" do
     it "redirects to the competitions' results page" do
-      event = FactoryGirl.create(:event, :event_class => "Distance")
-      competition = FactoryGirl.create(:competition, :event => event)
+      competition = FactoryGirl.create(:competition, :scoring_class => "Distance")
       import = FactoryGirl.create(:import_result, :competition => competition)
       post :publish_to_competition, {:user_id => import.user}
       response.should redirect_to(competition_time_results_path(competition))

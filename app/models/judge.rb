@@ -43,7 +43,7 @@ class Judge < ActiveRecord::Base
         name
     end
     def get_scores
-        if competition.event.event_class == "Street"
+        if competition.event_class == "Street"
             self.street_scores
         else
             self.scores

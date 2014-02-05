@@ -158,16 +158,8 @@ class CompetitionsController < ApplicationController
   end
 
   def set_places
-    if @competition.event.event_class == "Distance"
-      @competition.scoring_helper.place_all
-      redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
-    elsif @competition.event.event_class == "Two Attempt Distance"
-      @competition.scoring_helper.place_all
-      redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
-    elsif @competition.event.event_class == "Ranked"
-      @competition.scoring_helper.place_all
-      redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
-    end
+    @competition.scoring_helper.place_all
+    redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
   end
 
   def freestyle_scores
@@ -177,7 +169,7 @@ class CompetitionsController < ApplicationController
   end
 
   def export_scores
-    if @competition.event.event_class == 'Two Attempt Distance'
+    if @competition.event_class == 'Two Attempt Distance'
       csv_string = CSV.generate do |csv|
         csv << ['registrant_external_id', 'distance']
         @competition.competitors.each do |comp|
@@ -226,7 +218,7 @@ class CompetitionsController < ApplicationController
 
   private
   def competition_params
-    params.require(:competition).permit(:name, :locked, :age_group_type_id, :has_experts, :has_age_groups)
+    params.require(:competition).permit(:name, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups)
   end
 end
 

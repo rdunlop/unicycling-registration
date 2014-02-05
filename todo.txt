@@ -22,7 +22,6 @@ DESIGN:
  - Add display to registrants-printing page which shows all competitors that they have associated? (to show the age groups, etc?)
 
 Less useful:
-- Make the Competition COPY the age_group_type from the event_category, instead of inheriting it.
 - Change the Judging menu to be "by Category" instead of "by Event Class",
  - and also move the Event Class to the Competition? Perhaps call it "scoring class"
 - Wrap Permissions (on User) properly, so that cancan sees/manages it (currently it's can?(:manage, User))

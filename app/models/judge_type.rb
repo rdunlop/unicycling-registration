@@ -4,7 +4,7 @@ class JudgeType < ActiveRecord::Base
     has_many :scores, :through => :judges
 
     validates :name, :presence => true, :uniqueness => true
-    validates :event_class, :inclusion => { :in => Event.event_classes }
+    validates :event_class, :inclusion => { :in => Competition.scoring_classes }
 
     validates :val_1_description, :presence => true
     validates :val_2_description, :presence => true

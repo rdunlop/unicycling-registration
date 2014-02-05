@@ -8,7 +8,7 @@ describe JudgesController do
     @ev = FactoryGirl.create(:event)
     @ec = FactoryGirl.create(:competition, :event => @ev)
     @judge_user = FactoryGirl.create(:judge_user)
-    @judge_type = FactoryGirl.create(:judge_type, :event_class => @ev.event_class)
+    @judge_type = FactoryGirl.create(:judge_type, :event_class => @ec.event_class)
     @other_judge_type = FactoryGirl.create(:judge_type, :event_class => "Flatland")
   end
 

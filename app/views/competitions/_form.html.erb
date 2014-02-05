@@ -16,6 +16,10 @@
     <%= f.text_field :name, :title => "'All' is a special name, which will not be printed on medals" %>
   </div>
   <div class="field">
+    <%= f.label :scoring_class %><br />
+    <%= f.select :scoring_class, Competition.scoring_classes, :include_blank => true %>
+  </div>
+  <div class="field">
     <%= f.label :has_experts %><br />
     (Select this if the results should be calculated together, and overall rankings (by Male and Female) should be calculated. These will be awarded separately from the age-group results)<br />
     <%= f.check_box :has_experts  %>

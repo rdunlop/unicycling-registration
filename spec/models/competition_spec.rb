@@ -9,9 +9,36 @@ describe Competition do
     @ec.valid?.should == true
   end
 
+  it "requires an event" do
+    @ec.event = nil
+    @ec.valid?.should == false
+  end
+
   it "requires a name" do
     @ec.name = nil
     @ec.valid?.should == false
+  end
+  describe "the scoring_class" do
+    it "cannot be blank" do
+      @ec.scoring_class = nil
+      @ec.valid?.should == false
+    end
+    it "can be Freestyle" do
+      @ec.scoring_class = "Freestyle"
+      @ec.valid?.should == true
+    end
+    it "can be Flatland" do
+      @ec.scoring_class = "Flatland"
+      @ec.valid?.should == true
+    end
+    it "can be Street" do
+      @ec.scoring_class = "Street"
+      @ec.valid?.should == true
+    end
+    it "can be Two Attempt Distance" do
+      @ec.scoring_class = "Two Attempt Distance"
+      @ec.valid?.should == true
+    end
   end
 
   it "is not_expert by default" do

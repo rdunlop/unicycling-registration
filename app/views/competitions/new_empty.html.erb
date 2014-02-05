@@ -23,6 +23,11 @@
     <%= f.text_field :name, :title => "'All' is a special name which will not be printed on medals" %>
   </div>
   <div class="field">
+    <%= f.label :scoring_class %><br />
+    <%= f.select :scoring_class, Competition.scoring_classes, :include_blank => true %>
+  </div>
+
+  <div class="field">
     <%= f.label :has_experts %><br />
     <%= f.check_box :has_experts %>
   </div>

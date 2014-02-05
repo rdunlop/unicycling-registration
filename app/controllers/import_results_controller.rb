@@ -94,12 +94,12 @@ class ImportResultsController < ApplicationController
       result.raw_data = upload.convert_array_to_string(raw)
       result.competition = comp
       result.bib_number = raw[0]
-      if comp.event.event_class == "Distance"
+      if comp.event_class == "Distance"
         result.minutes = raw[1]
         result.seconds = raw[2]
         result.thousands = raw[3]
         result.disqualified = (raw[4] == "DQ")
-      elsif comp.event.event_class == "Ranked"
+      elsif comp.event_class == "Ranked"
         result.rank = raw[1]
         result.details = raw[2]
       end

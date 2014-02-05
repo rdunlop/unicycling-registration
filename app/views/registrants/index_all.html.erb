@@ -4,6 +4,9 @@
 </div>
 
 <h1>Edit Registrants</h1>
+<% unless @registrant.nil? %>
+  <%= render :partial => "/shared/error_messages", :object => @registrant %>
+<% end %>
 
 <table class="sortable searchable">
   <thead>

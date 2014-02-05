@@ -96,7 +96,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:category_id, :export_name, :position, :name, :event_class, :visible,
+    params.require(:event).permit(:category_id, :export_name, :position, :name, :visible,
                                   :event_choices_attributes => [:export_name, :cell_type, :label, :multiple_values, :position, :id], 
                                   :event_categories_attributes => [:name, :position, :id])
   end

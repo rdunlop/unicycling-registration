@@ -20,7 +20,4 @@ class EventCategory < ActiveRecord::Base
     signed_up_registrants.count
   end
 
-  def event_class
-    event.event_class
-  end
 end

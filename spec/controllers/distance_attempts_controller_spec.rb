@@ -8,8 +8,7 @@ describe DistanceAttemptsController do
 
   describe "GET 'index'" do
     describe "when a Competitor is assigned to the distance event" do
-      let(:ev) { FactoryGirl.create(:distance_event) }
-      let(:competition) { FactoryGirl.create(:competition, :event => ev) }
+      let(:competition) { FactoryGirl.create(:distance_competition) }
       let(:comp)  { FactoryGirl.create(:event_competitor, :competition => competition) }
       let(:judge) { FactoryGirl.create(:judge, :competition => competition) }
       it "returns http success" do
@@ -34,8 +33,7 @@ describe DistanceAttemptsController do
         flash[:alert].should == "Unable to find a Registrant with that ID (100)"
       end
       it "returns an error message if the registrant isn't registered for this event" do
-        ev2 = FactoryGirl.create(:distance_event)
-        competition2 =FactoryGirl.create(:competition, :event => ev2)
+        competition2 =FactoryGirl.create(:distance_competition)
         judge = FactoryGirl.create(:judge, :competition => competition2)
 
         get 'index', :judge_id => judge.id, :external_id => comp.external_id
@@ -63,10 +61,8 @@ describe DistanceAttemptsController do
         end
 
         it "only returns distance_attempts for this event" do
-          ev  = FactoryGirl.create(:distance_event)
-          ev2 = FactoryGirl.create(:distance_event)
-          competition = FactoryGirl.create(:competition, :event => ev)
-          competition2 = FactoryGirl.create(:competition, :event => ev2)
+          competition = FactoryGirl.create(:distance_competition)
+          competition2 = FactoryGirl.create(:distance_competition)
 
           comp  = FactoryGirl.create(:event_competitor, :competition => competition)
           comp2 = FactoryGirl.create(:event_competitor, :competition => competition2)
@@ -84,8 +80,7 @@ describe DistanceAttemptsController do
   end
   describe "POST create" do
     before (:each) do
-        @ev = FactoryGirl.create(:distance_event)
-        @competition = FactoryGirl.create(:competition, :event => @ev)
+        @competition = FactoryGirl.create(:distance_competition)
         @comp = FactoryGirl.create(:event_competitor, :competition => @competition)
         @judge = FactoryGirl.create(:judge, :competition => @competition)
     end
@@ -114,8 +109,7 @@ describe DistanceAttemptsController do
 
   describe "GET list" do
     before(:each) do
-        @ev = FactoryGirl.create(:distance_event)
-        @competition = FactoryGirl.create(:competition, :event => @ev)
+        @competition = FactoryGirl.create(:distance_competition)
         @comp = FactoryGirl.create(:event_competitor, :competition => @competition)
         @judge = FactoryGirl.create(:judge, :competition => @competition)
     end

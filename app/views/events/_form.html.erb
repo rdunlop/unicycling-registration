@@ -24,10 +24,6 @@
     <%= f.number_field :position %>
   </div>
   <div class="field">
-    <%= f.label :event_class %><br />
-    <%= f.select :event_class, Event.event_classes, :include_blank => true %>
-  </div>
-  <div class="field">
     <%= f.label :visible %><br />
     <%= f.check_box :visible  %>
   </div>

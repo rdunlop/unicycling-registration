@@ -56,7 +56,7 @@ describe AwardLabel do
 
     it "displays the event name as line 2 for freestyle events" do
       competition = @comp.competition
-      competition.event.event_class = "Freestyle"
+      competition.scoring_class = "Freestyle"
       competition.name = "Hello"
       ev = competition.event
       ev.name = "Individual"
@@ -69,7 +69,7 @@ describe AwardLabel do
 
     it "displays the competition name as line 2 for distance events" do
       competition = @comp.competition
-      competition.event.event_class = "Distance"
+      competition.scoring_class = "Distance"
       competition.name = "10k Standard"
       ev = competition.event
       ev.name = "10k"
@@ -88,10 +88,9 @@ describe AwardLabel do
 
     describe "when the competitor has expert results" do
       before(:each) do
-        @comp.competition.event.event_class = "Distance"
+        @comp.competition.scoring_class = "Distance"
         @comp.competition.has_age_groups = true
         @comp.competition.save!
-        @comp.competition.event.save!
         @comp.overall_place = 3
       end
 
@@ -107,8 +106,8 @@ describe AwardLabel do
     end
 
     it "stores the competitor.result as details, and line 5" do
-      @comp.event.event_class = "Ranked"
-      @comp.event.save!
+      @comp.competition.scoring_class = "Ranked"
+      @comp.competition.save!
       FactoryGirl.create(:external_result, :competitor => @comp, :rank => 2, :details => "Some")
 
       @comp.reload
