@@ -21,6 +21,10 @@
     <%= f.label :gender_filter %>
     <%= f.select :gender_filter, Competition.gender_filters %>
   </div>
+  <div class="field">
+    <%= f.label :event_category_id %>
+    <%= f.select :event_category_id, @competition.event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true  %>
+  </div>
 
   <h2>Settings For gathering/ranking the results</h2>
   <div class="field">

@@ -68,11 +68,7 @@ class CompetitionsController < ApplicationController
 
   # PUT /competitions/#/populate
   def populate
-    gender_filter = @competition.gender_filter
-    registrants = @competition.event.signed_up_registrants
-    unless gender_filter.nil? or gender_filter == "Both"
-      registrants = registrants.select {|reg| reg.gender == gender_filter}
-    end
+    registrants = @competition.signed_up_registrants
 
     registrants = registrants.shuffle
 
@@ -197,7 +193,7 @@ class CompetitionsController < ApplicationController
 
   private
   def competition_params
-    params.require(:competition).permit(:name, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups, :gender_filter)
+    params.require(:competition).permit(:name, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups, :gender_filter, :event_category_id)
   end
 end
 

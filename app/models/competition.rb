@@ -1,7 +1,7 @@
 class Competition < ActiveRecord::Base
   belongs_to :age_group_type, :inverse_of => :competitions
   belongs_to :event, :inverse_of => :competitions
-  has_one :event_category, :dependent => :nullify
+  belongs_to :event_category, :inverse_of => :competitions
 
   has_many :competitors, :dependent => :destroy, :order => "position"
   has_many :registrants, :through => :competitors
@@ -76,7 +76,13 @@ class Competition < ActiveRecord::Base
   end
 
   def signed_up_registrants
-    event_category.signed_up_registrants
+    registrants = event_category.signed_up_registrants unless event_category.nil?
+    registrants = event.signed_up_registrants if event_category.nil? # XXX test for this?
+
+    unless gender_filter.nil? or gender_filter == "Both"
+      registrants = registrants.select {|reg| reg.gender == gender_filter}
+    end
+    registrants
   end
 
   def get_age_group_entry_description(age, gender, wheel_size_id)
