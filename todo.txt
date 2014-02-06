@@ -1,14 +1,8 @@
-Last Re-Arranged January 30, 2014.
+Last Re-Arranged February 6, 2014.
 
 =============================
 Registration-Related ToDo
 =============================
-
--- SCOTT's CURRENT LIST:
-- Update the Events tabs to be coloured as per their desire (use jqueryui website to choose the color scheme?)
-- Update the Events tabs' internal table to alternate row colours, as per Hugo's desire.
--- END SCOTT's CURRENT LIST:
-
 
 ----ROBIN's CURRENT LIST:
 
@@ -22,8 +16,6 @@ DESIGN:
  - Add display to registrants-printing page which shows all competitors that they have associated? (to show the age groups, etc?)
 
 Less useful:
-- Change the Judging menu to be "by Category" instead of "by Event Class",
- - and also move the Event Class to the Competition? Perhaps call it "scoring class"
 - Wrap Permissions (on User) properly, so that cancan sees/manages it (currently it's can?(:manage, User))
 
 Payment-related:
@@ -86,6 +78,7 @@ Other:
 - Auto-fill the "Name of Guest" in the Lodging with the current registrant's name.
 - Get rid of XXX
 - Ensure that all roles can perform all the actions that they want/expect to be able to do
+- Update/create Standard Skill Scoring system, replacing the UCP
 
 - Limit the rooms to 1000 by all types (not per type of room)
 

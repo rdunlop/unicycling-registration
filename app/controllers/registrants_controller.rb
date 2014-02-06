@@ -254,7 +254,7 @@ class RegistrantsController < ApplicationController
     @registrant.deleted = false
 
     respond_to do |format|
-      if @registrant.save
+      if @registrant.save(:validate => false) # otherwise the circular validation check for registrant_expense_items fails
         format.html { redirect_to registrants_path, notice: 'Registrant was successfully undeleted.' }
         format.json { render json: @registrant, status: :created, location: @registrant }
       else

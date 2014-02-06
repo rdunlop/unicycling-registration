@@ -534,6 +534,9 @@ describe RegistrantsController do
     end
 
     describe "POST undelete" do
+      before(:each) do
+        FactoryGirl.create(:registration_period)
+      end
       it "un-deletes a deleted registration" do
         registrant = FactoryGirl.create(:competitor, :deleted => true)
         post :undelete, {:id => registrant.id }
