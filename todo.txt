@@ -15,7 +15,7 @@ Most Useful:
  - Only display import of the desired type
 
 - Associate competitions with filters (intsead of ephemerally)
-- Add "gender_filter" field to Competition
+#- Add "gender_filter" field to Competition
 - Add "heat/lane assignment" boolean to scoring_helpers (only applicable to time_scoring_helper)
 - Prevent "final_candidates" from being selected from non-24" wheel-sizes
 - Add "source filter" for a competition to be based on the "final candidates" of another competition

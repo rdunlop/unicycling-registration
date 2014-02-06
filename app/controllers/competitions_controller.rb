@@ -218,7 +218,7 @@ class CompetitionsController < ApplicationController
 
   private
   def competition_params
-    params.require(:competition).permit(:name, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups)
+    params.require(:competition).permit(:name, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups, :gender_filter)
   end
 end
 

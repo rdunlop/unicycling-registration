@@ -69,6 +69,12 @@ describe CompetitionsController do
             post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
           }.to change(Competition, :count).by(1)
         end
+        it "can create a Female gender_filter competition" do
+          expect {
+            post :create, {:event_category_id => @event_category.id, :competition => valid_attributes.merge({:gender_filter => "Female"})}
+          }.to change(Competition, :count).by(1)
+          Competition.last.gender_filter.should == "Female"
+        end
         it "can create_empty a competition" do
           expect {
             post :create_empty, {:event_id => @event.id, :competition => valid_attributes}
