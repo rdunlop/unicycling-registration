@@ -15,13 +15,28 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, :title => "'All' is a special name, which will not be printed on medals" %>
   </div>
+
+  <h2>Settings for selecting the competitors from sign-ups</h2>
+  <div class="field">
+    <%= f.label :gender_filter %>
+    <%= f.select :gender_filter, options_for_select(Competition.gender_filters, "Both") %>
+  </div>
+
+  <h2>Settings For gathering/ranking the results</h2>
+  <div class="field">
+    <%= f.label :age_group_type_id %>
+    <%= f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, :include_blank => true  %>
+    This is NOT applicable to EXPERT-ONLY competitions
+  </div>
   <div class="field">
     <%= f.label :scoring_class %><br />
     <%= f.select :scoring_class, Competition.scoring_classes, :include_blank => true %>
   </div>
+
+  <h2>Settings for printing the awards</h2>
   <div class="field">
     <%= f.label :has_experts %><br />
-    (Select this if the results should be calculated together, and overall rankings (by Male and Female) should be calculated. These will be awarded separately from the age-group results)<br />
+    (Select this if the results entered here include (or can be considered) EXPERT results. Selecting this checkbox will cause Expert Awards to be created, separately from age-group results) <br />
     <%= f.check_box :has_experts  %>
   </div>
   <div class="field">
@@ -30,14 +45,7 @@
     <%= f.check_box :has_age_groups %>
   </div>
   Note: check NEITHER the has_experts or has_age_groups if neither apply (for example: Individual Artistic Intermediate)
-  <div class="field">
-    <%= f.label :age_group_type_id %>
-    <%= f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, :include_blank => true  %>
-  </div>
-  <div class="field">
-    <%= label_tag :gender_filter %>
-    <%= select_tag :gender_filter, options_for_select(["Both", "Male", "Female"], "Both") %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

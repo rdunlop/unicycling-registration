@@ -28,6 +28,17 @@ class Competition < ActiveRecord::Base
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
 
+  def self.gender_filters
+    ["Both", "Male", "Female"]
+  end
+  validates :gender_filter, :inclusion => { :in => self.gender_filters, :allow_nil => false }
+
+  after_initialize :init
+
+  def init
+    self.gender_filter = "Both" if self.gender_filter.nil?
+  end
+
   def to_s
     event.to_s + " - " + self.name
   end

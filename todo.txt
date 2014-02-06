@@ -9,10 +9,35 @@ Registration-Related ToDo
 Most Useful:
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.
+
+- move "import" to be under "competition"
+ - Only display import for scoring_helpers which have it configured (race (lif), ranked (excel), start_time_race (excel))
+ - Only display import of the desired type
+
+- Associate competitions with filters (intsead of ephemerally)
+- Add "gender_filter" field to Competition
+- Add "heat/lane assignment" boolean to scoring_helpers (only applicable to time_scoring_helper)
+- Prevent "final_candidates" from being selected from non-24" wheel-sizes
+- Add "source filter" for a competition to be based on the "final candidates" of another competition
+
+- Set "unicon scoring" boolean at EventConfiguration level
+- Prevent setting "AgeGroupType" and "Export"-ONLY boolean at Competition-level
+- add "event_category" source field to competitions, for use when creating competitors.
+ - Eliminate "create_empty", have this by default
+ - Add ability to display/update registrants->competitors for a competition.
+
+- Add ability to enter start times and end times for races (start_time_race)
+- Create new scoring_helper type (start_time_race)
+ - Add ability to enter start times for competitors, check the results, calculate the total time.
+ - Add instruction sheets for judges on how to enter these results
+
+- Move ALL results to be associated with a judge? (this way we can easily allow multiple judges to enter results, even for 10k)??
+
+- Add DNF, DNS, and DQ-Reason to data-entry (where? reason should be separate from the LIF results, I think)
 - Fix printing of PDFs with special characters (ie: french characters)
+
 DESIGN:
  - Associate competitions with event_categories (instead of the other way around)
- - Associate competitions with filters (intsead of ephemerally)
  - Add display to registrants-printing page which shows all competitors that they have associated? (to show the age groups, etc?)
 
 Less useful:
@@ -47,7 +72,6 @@ Minor:
 - Allow html in the mass-mailer (and plaintext too?)
 - look at using 'https://github.com/croaky/parity'
 - .env template?
-- ensure translations work with strong_parameters
 - limit rooms to 1000 (total), with a warning function at 80%?
 - add documentation to methods as per: http://globaldev.co.uk/2013/10/ruby-tips-part-4/
 - Rename onsite to adjustment
@@ -98,12 +122,6 @@ Team Sports - Freestyle - Muni - Road Racing - Track & Field - Urban
 +-> Hockey
 
 
-
-+->                     +->                 +->                     +->
-+->                     +->                 +->                     +->
-+->                     +->                 +->                     +->
-
-
 Need:
 - Landing page for each Event, which shows options:
  *** Sign-up ***
@@ -113,6 +131,7 @@ Need:
  
  *** Data Entry ***
  - Import (link to page)
+ - List of heats
  - See existing results (in imported order, in ?other? order)
   - abliity to change data
  - Place competitors

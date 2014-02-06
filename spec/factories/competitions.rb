@@ -5,6 +5,7 @@ FactoryGirl.define do
     event # FactoryGirl
     sequence(:name) {|n| "Competition #{n}"}
     locked false
+    gender_filter "Both"
     scoring_class "Freestyle"
 
     factory :distance_competition do

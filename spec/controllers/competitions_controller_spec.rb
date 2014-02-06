@@ -13,6 +13,7 @@ describe CompetitionsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
+      gender_filter: "Both",
       name: "Unlimited",
       scoring_class: "Distance"
     }
