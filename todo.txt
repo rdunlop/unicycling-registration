@@ -19,11 +19,12 @@ Most Useful:
 - Add "heat/lane assignment" boolean to scoring_helpers (only applicable to time_scoring_helper)
 - Prevent "final_candidates" from being selected from non-24" wheel-sizes
 - Add "source filter" for a competition to be based on the "final candidates" of another competition
+- remove unnecessary competitions#show
 
 - Set "unicon scoring" boolean at EventConfiguration level
 - Prevent setting "AgeGroupType" and "Export"-ONLY boolean at Competition-level
 - add "event_category" source field to competitions, for use when creating competitors.
- - Eliminate "create_empty", have this by default
+# - Eliminate "create_empty", have this by default
  - Add ability to display/update registrants->competitors for a competition.
 
 - Add ability to enter start times and end times for races (start_time_race)

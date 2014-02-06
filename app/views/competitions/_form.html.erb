@@ -1,4 +1,4 @@
-<%= form_for([@event_category, @competition]) do |f| %>
+<%= form_for([@event, @competition]) do |f| %>
   <% if @competition.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
@@ -19,7 +19,7 @@
   <h2>Settings for selecting the competitors from sign-ups</h2>
   <div class="field">
     <%= f.label :gender_filter %>
-    <%= f.select :gender_filter, options_for_select(Competition.gender_filters, "Both") %>
+    <%= f.select :gender_filter, Competition.gender_filters %>
   </div>
 
   <h2>Settings For gathering/ranking the results</h2>

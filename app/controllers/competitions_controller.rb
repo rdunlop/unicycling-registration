@@ -3,11 +3,10 @@ require 'upload'
 class CompetitionsController < ApplicationController
   include EventsHelper
   before_filter :authenticate_user!
-  before_filter :load_new_competition, :only => [:create, :create_empty]
+  before_filter :load_new_competition, :only => [:create]
 
-  before_filter :load_event, :only => [:index, :create_empty, :new_empty]
+  before_filter :load_event, :only => [:index, :create, :new]
   before_filter :load_competitions, :only => [:index]
-  before_filter :load_event_category, :only => [:create, :new]
 
   load_and_authorize_resource
 
@@ -26,12 +25,7 @@ class CompetitionsController < ApplicationController
     @competitions = @event.competitions
   end
 
-  def load_event_category
-    @event_category = EventCategory.find(params[:event_category_id])
-    @competition.event = @event_category.event unless @competition.nil?
-  end
-
-  # /event_categories/#/competitions/new
+  # /events/#/competitions/new
   def new
   end
 
@@ -58,50 +52,35 @@ class CompetitionsController < ApplicationController
 
   # GET /competitions/1/edit
   def edit
+    @event = @competition.event
   end
 
-  def new_empty
-    @competition = Competition.new
-  end
-
-  # POST /events/#/create_empty
-  def create_empty
+  # POST /events/#/create
+  def create
     respond_to do |format|
       if @competition.save
         format.html { redirect_to event_path(@competition.event), notice: "Competition created successfully" }
       else
-        format.html { render action: "new_empty" }
+        format.html { render action: "new" }
       end
     end
   end
 
-  # POST /event_categories/#/competitions
-  # POST /event_categories/#/competitions.json
-  def create
-
-    @event_category.competition = @competition
-    @gender_filter = params[:gender_filter]
-    registrants = @event_category.signed_up_registrants
-    unless @gender_filter.nil? or @gender_filter == "Both"
-      registrants = registrants.select {|reg| reg.gender == @gender_filter}
+  # PUT /competitions/#/populate
+  def populate
+    gender_filter = @competition.gender_filter
+    registrants = @competition.event.signed_up_registrants
+    unless gender_filter.nil? or gender_filter == "Both"
+      registrants = registrants.select {|reg| reg.gender == gender_filter}
     end
 
     registrants = registrants.shuffle
 
     respond_to do |format|
-      if @event_category.valid? and @competition.save
-        @event_category.save
-        message = "Competition was successfully created."
+      message = @competition.create_competitors_from_registrants(registrants)
 
-        message += @competition.create_competitors_from_registrants(registrants)
-
-        format.html { redirect_to event_path(@competition.event), notice:  message }
-        format.json { render json: @competition, status: :created, location: competition_competitors_path(@event) }
-      else
-        load_event_category
-        format.html { render action: "new" }
-        format.json { render json: @competition.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to event_path(@competition.event), notice:  message }
+      format.json { render json: @competition, status: :created, location: competition_competitors_path(@event) }
     end
   end
 

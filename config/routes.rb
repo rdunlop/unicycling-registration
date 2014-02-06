@@ -127,18 +127,12 @@ Workspace::Application.routes.draw do
 
         get 'summary'
       end
-      resources :competitions, :only => [:index] do
-        collection do
-          get :new_empty
-          post :create_empty
-        end
-      end
+      resources :competitions, :only => [:index, :new, :create]
     end
     resources :event_categories, :except => [:index, :create, :new] do
       member do
         get :sign_ups
       end
-      resources :competitions, :only => [:new, :create]
     end
 
     resources :categories, :except => [:new, :show] do
@@ -243,6 +237,7 @@ Workspace::Application.routes.draw do
     resources :competitors, :only => [:edit, :update, :destroy]
     resources :competitions, :except => [:index, :create, :new] do
       member do
+        put :populate
         post :set_places
         get :export_scores
         # view scores

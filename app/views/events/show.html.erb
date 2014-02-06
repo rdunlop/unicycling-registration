@@ -70,6 +70,7 @@
       <th># Competitors</th>
       <th>Manage</th>
       <th>Competitor List</th>
+      <th>Update Competitor List</th>
     </tr>
   </thead>
 
@@ -83,6 +84,7 @@
           <%= link_to 'Destroy',  competition_path(competition), :method => :delete, :confirm => "Are you sure you want to destroy the COMPETITION?" %>
         </td>
         <td><%= link_to 'Competitors', competition_competitors_path(competition) %></td>
+        <td><%= link_to 'Populate', populate_competition_path(competition), :method => :put, :confirm => "Work in progress. Proceed?" %></td>
 
       </tr>
     <% end %>
@@ -90,10 +92,7 @@
 </table>
 
 <h2>Create Competition</h2>
-<% # XXX update this function to allow creating competitions more easily ? 
-%>
-<%= link_to "Create New", new_event_category_competition_path(@event.event_categories.first) %><br />
-<%= link_to "Create New (blank)", new_empty_event_competitions_path(@event) %>
+<%= link_to "Create New", new_event_competition_path(@event) %><br />
 
 <hr />
 <h2>Judging Results</h2>

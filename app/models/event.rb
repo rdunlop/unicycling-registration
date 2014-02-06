@@ -67,7 +67,7 @@ class Event < ActiveRecord::Base
   end
 
   def signed_up_registrants
-    registrant_event_sign_ups.where({:signed_up => true}).map{|resu| resu.registrant}
+    registrant_event_sign_ups.where({:signed_up => true}).map{|resu| resu.registrant}.keep_if {|reg| !reg.nil?}
   end
 
   def competitor_registrants

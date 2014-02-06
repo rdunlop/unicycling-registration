@@ -1,11 +1,10 @@
 <h1>New Competition</h1>
 
-<h2>Event Category: <%= @event_category %></h2>
+<h2>Event: <%= @event %></h2>
 
 <h3>Signed Up Competitors</h3>
-(These will be added to the Compettion)
-<% @registrants = @event_category.signed_up_registrants %>
-<% @event = @event_category.event %>
+(These will be added to the Compettion <b>Upon POPULATE directive</b>)
+<% @registrants = @event.signed_up_registrants %>
 <%= render :partial => "/event_categories/sign_ups" %> 
 
 <br />

@@ -38,6 +38,13 @@ describe CompetitionsController do
     end
   end
 
+  describe "GET new" do
+    it "assigns the event as @event" do
+      get :new, {:event_id => @event.id}
+      assigns(:event).should eq(@event)
+    end
+  end
+
   describe "GET show" do
     it "assigns the requested event_category as @event_category" do
       competition = FactoryGirl.create(:competition)
@@ -66,61 +73,60 @@ describe CompetitionsController do
 
         it "can create a competition" do
           expect {
-            post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
+            post :create, {:event_id => @event.id, :competition => valid_attributes}
           }.to change(Competition, :count).by(1)
         end
         it "can create a Female gender_filter competition" do
           expect {
-            post :create, {:event_category_id => @event_category.id, :competition => valid_attributes.merge({:gender_filter => "Female"})}
+            post :create, {:event_id => @event.id, :competition => valid_attributes.merge({:gender_filter => "Female"})}
           }.to change(Competition, :count).by(1)
           Competition.last.gender_filter.should == "Female"
-        end
-        it "can create_empty a competition" do
-          expect {
-            post :create_empty, {:event_id => @event.id, :competition => valid_attributes}
-          }.to change(Competition, :count).by(1)
         end
       end
       it "creates a new Competition" do
         expect {
-          post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
+          post :create, {:event_id => @event.id, :competition => valid_attributes}
         }.to change(Competition, :count).by(1)
       end
 
       it "assigns a newly created competition as @competition" do
-        post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
+        post :create, {:event_id => @event.id, :competition => valid_attributes}
         assigns(:competition).should be_a(Competition)
         assigns(:competition).should be_persisted
       end
 
       it "redirects to the created competition" do
-        post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
+        post :create, {:event_id => @event.id, :competition => valid_attributes}
         response.should redirect_to(event_path(@event))
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved event_category as @event_category" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Competition.any_instance.stub(:save).and_return(false)
-        post :create, {:event_category_id => @event_category.id, :competition => {:name => "comp"}}
-        assigns(:competition).should be_a_new(Competition)
-      end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Competition.any_instance.stub(:save).and_return(false)
-        post :create, {:event_category_id => @event_category.id, :competition => {:name => "comp"}}
+        post :create, {:event_id => @event.id, :competition => {:name => "comp"}}
         response.should render_template("new")
       end
       it "loads the event" do
         EventCategory.any_instance.stub(:save).and_return(false)
-        post :create, {:event_category_id => @event_category.id, :competition => {:name => "comp"}}
-        assigns(:event_category).should == @event_category
+        post :create, {:event_id => @event.id, :competition => {:name => "comp"}}
+        assigns(:event).should == @event
       end
     end
 
-    describe "When the event_category has a registrant signed up" do
+  end
+
+  describe "PUT poulate" do
+    before(:each) do
+      @competition = FactoryGirl.create(:competition, :event => @event)
+    end
+    it "can populate a competition" do
+      put :populate, {:id => @competition.id}
+      response.should redirect_to(event_path(@event))
+    end
+    describe "When the event has a registrant signed up" do
       before(:each) do
         @reg = FactoryGirl.create(:competitor, :gender => "Male")
         FactoryGirl.create(:registrant_event_sign_up, :event => @event, :event_category => @event_category, :signed_up => true, :registrant => @reg)
@@ -128,18 +134,22 @@ describe CompetitionsController do
 
       it "creates a new competitor" do
         expect {
-          post :create, {:event_category_id => @event_category.id, :competition => valid_attributes}
+          put :populate, {:id => @competition.id }
         }.to change(Competitor, :count).by(1)
       end
       it "does create the competitor if the gender_filter is set to the gender" do
         expect {
-          post :create, {:event_category_id => @event_category.id, :competition => valid_attributes, :gender_filter => "Male"}
+          @competition.gender_filter = "Male"
+          @competition.save
+          put :populate, {:id => @competition.id }
         }.to change(Competitor, :count).by(1)
       end
 
       it "doesn't create the competitor if the gender_filter is set to the other gender" do
         expect {
-          post :create, {:event_category_id => @event_category.id, :competition => valid_attributes, :gender_filter => "Female"}
+          @competition.gender_filter = "Female"
+          @competition.save
+          put :populate, {:id => @competition.id }
         }.to change(Competitor, :count).by(0)
       end
     end
@@ -171,7 +181,7 @@ describe CompetitionsController do
     end
 
     describe "with invalid params" do
-      it "assigns the event_category as @event_category" do
+      it "assigns the competition as @competition" do
         competition = FactoryGirl.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
         Competition.any_instance.stub(:save).and_return(false)
