@@ -188,8 +188,8 @@ describe "Ability" do
     before(:each) do
       @competition = FactoryGirl.create(:competition)
       @event_category = @competition.event.event_categories.first
-      @event_category.competition = @competition
-      @event_category.save!
+      @competition.event_category = @event_category
+      @competition.save!
       @user = FactoryGirl.create(:user)
       @user.add_role :chief_judge, @competition.event
       @user.add_role :judge
