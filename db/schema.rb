@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140206085600) do
+ActiveRecord::Schema.define(:version => 20140207053004) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -49,20 +49,16 @@ ActiveRecord::Schema.define(:version => 20140206085600) do
 
   create_table "award_labels", :force => true do |t|
     t.integer  "bib_number"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "partner_first_name"
-    t.string   "partner_last_name"
     t.string   "competition_name"
-    t.string   "team_name"
-    t.string   "age_group"
-    t.string   "gender"
     t.string   "details"
     t.integer  "place"
     t.integer  "user_id"
     t.integer  "registrant_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "team_name"
+    t.string   "competitor_name"
+    t.string   "category"
   end
 
   add_index "award_labels", ["user_id"], :name => "index_award_labels_on_user_id"

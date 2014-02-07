@@ -10,8 +10,7 @@ class AwardLabel < ActiveRecord::Base
   def populate_from_competitor(competitor, registrant, expert = false)
 
     # line 1
-    self.first_name = registrant.first_name
-    self.last_name = registrant.last_name
+    res = "#{registrant.first_name} #{registrant.last_name}"
     if competitor.members.count == 2
       reg1 = competitor.members.first.registrant
       reg2 = competitor.members.last.registrant
@@ -20,9 +19,13 @@ class AwardLabel < ActiveRecord::Base
       else
         reg = reg1
       end
-      self.partner_first_name = reg.first_name
-      self.partner_last_name = reg.last_name
+      partner_first_name = reg.first_name
+      partner_last_name = reg.last_name
+      unless partner_first_name.nil? or partner_first_name.blank?
+        res += " & " + partner_first_name + " " + partner_last_name
+      end
     end
+    self.competitor_name =res
 
     # line 2
     if competitor.competition.event_class == "Distance" or competitor.competition.event_class == "Ranked"
@@ -34,28 +37,41 @@ class AwardLabel < ActiveRecord::Base
 
     # line 3
     self.team_name = competitor.team_name
+
     # line 4
     if expert
-      self.age_group = "Expert #{competitor.gender}"
+      age_group = "Expert #{competitor.gender}"
     else
       if competitor.competition.has_age_groups
-        self.age_group = competitor.age_group_entry_description
+        age_group = competitor.age_group_entry_description
       end
     end
     if competitor.competition.event_class == "Freestyle" ### XXX Somewhere else?
-      self.age_group = competitor.competition.name # the "Category"
+      age_group = competitor.competition.name # the "Category"
     end
-    if self.age_group == "All" # Don't display if age_group result is 'All'
-      self.age_group = nil
+    if age_group == "All" # Don't display if age_group result is 'All'
+      age_group = nil
     end
     if competitor.members.count > 1
-      self.gender = nil
+      gender = nil
     else
-      self.gender = competitor.gender
+      gender = competitor.gender
     end
+
+    res = ""
+    unless age_group.nil? or age_group.empty?
+      res += age_group
+    else
+      # No Age Group?
+      unless gender.nil? or gender.empty?
+        res += gender
+      end
+    end
+    self.category = res
 
     # line 5
     self.details = competitor.result
+
     # line 6
     if expert
       self.place = competitor.overall_place.to_i
@@ -69,11 +85,7 @@ class AwardLabel < ActiveRecord::Base
   end
 
   def line_1
-    res = "#{self.first_name} #{self.last_name}"
-    unless self.partner_first_name.nil? or self.partner_first_name.blank?
-      res += " & " + self.partner_first_name + " " + self.partner_last_name
-    end
-    res
+    self.competitor_name
   end
 
   def line_2
@@ -85,16 +97,7 @@ class AwardLabel < ActiveRecord::Base
   end
 
   def line_4
-    res = ""
-    unless self.age_group.nil? or self.age_group.empty?
-      res += self.age_group
-    else
-      # No Age Group?
-      unless self.gender.nil? or self.gender.empty?
-        res += self.gender
-      end
-    end
-    res
+    self.category
   end
 
   def line_5

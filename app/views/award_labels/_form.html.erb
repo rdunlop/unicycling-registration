@@ -15,14 +15,10 @@
     <thead>
       <tr>
         <th><%= f.label :bib_number %></th>
-        <th><%= f.label :first_name %></th>
-        <th><%= f.label :last_name %></th>
-        <th><%= f.label :partner_first_name %></th>
-        <th><%= f.label :partner_last_name %></th>
+        <th><%= f.label :competitor_name %></th>
         <th><%= f.label :competition_name %></th>
         <th><%= f.label :team_name %></th>
-        <th><%= f.label :age_group %></th>
-        <th><%= f.label :gender %></th>
+        <th><%= f.label :category %></th>
         <th><%= f.label :details %></th>
         <th><%= f.label :place %></th>
         <th><%= f.label :registrant_id %></th>
@@ -31,14 +27,10 @@
     </thead>
     <tbody>
       <td><%= f.number_field :bib_number %></td>
-      <td><%= f.text_field :first_name %></td>
-      <td><%= f.text_field :last_name %></td>
-      <td><%= f.text_field :partner_first_name %></td>
-      <td><%= f.text_field :partner_last_name %></td>
+      <td><%= f.text_field :competitor_name %></td>
       <td><%= f.text_field :competition_name %></td>
       <td><%= f.text_field :team_name %></td>
-      <td><%= f.text_field :age_group %></td>
-      <td><%= f.text_field :gender %></td>
+      <td><%= f.text_field :category %></td>
       <td><%= f.text_field :details %></td>
       <td><%= f.number_field :place %></td>
       <td><%= f.select :registrant_id, Registrant.all.map {|reg| [reg.with_id_to_s, reg.id] } %></td>
