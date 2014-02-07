@@ -20,6 +20,7 @@ Most Useful:
 - remove unnecessary competitions#show
 - Update the wiki to better describe the scoring_helper, and other filters
 
+- Add form tags or other ways to make the "only_registered" (and other) 'printing' options obvious/accessible.
 - Add "No Competitions Exists, Create one now" buttons (and other places too).
 - Add ability to print all sign-up-lists at once
 - Put a "Back" button on every page in a consistent location.

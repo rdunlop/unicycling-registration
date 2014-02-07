@@ -1,11 +1,11 @@
 <div class="race_recording">
-  <% @age_group_entries.each do |ag_entry| %>
+  <% @competition_sign_up.age_group_entries.each do |description, gender| %>
   <h1>Race Recording Form</h1>
   <hr />
   <h2><%= @competition %></h2>
   <hr />
-  <h2 class="age_group_description"><%= ag_entry %></h2>
-  <h2 class="age_group_gender"><%= ag_entry.gender %></h2>
+  <h2 class="age_group_description"><%= description %></h2>
+  <h2 class="age_group_gender"><%= gender %></h2>
   <div style="clear: both"></div>
   <hr />
 
@@ -21,10 +21,10 @@
       </tr>
     </thead>
     <tbody>
-      <% @signed_up_list[ag_entry].each do |reg| %>
+      <% @competition_sign_up.signed_up_list(description).each do |reg| %>
         <%= render :partial => "heat_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => false } %>
       <% end %>
-      <% @not_signed_up_list[ag_entry].each do |reg| %>
+      <% @competition_sign_up.not_signed_up_list(description).each do |reg| %>
         <%= render :partial => "heat_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => true } %>
       <% end %>
       <% 5.times do %>

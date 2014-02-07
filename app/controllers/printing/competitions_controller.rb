@@ -16,25 +16,7 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def heat_recording
-    @all_registrants = Registrant.where(:competitor => true).order(:bib_number).all
-    @signed_up_registrants = @competition.signed_up_registrants
-    @agt = @competition.determine_age_group_type
-    @age_group_entries = @agt.age_group_entries
-    @signed_up_list = {}
-    @not_signed_up_list = {}
-    @age_group_entries.each do |ag_entry|
-      @signed_up_list[ag_entry] = []
-      @not_signed_up_list[ag_entry] = []
-    end
-
-    @all_registrants.each do |reg|
-      calculated_ag = @agt.age_group_entry_for(reg.age, reg.gender, reg.default_wheel_size.id)
-      if @signed_up_registrants.include?(reg)
-        @signed_up_list[calculated_ag] << reg
-      else
-        @not_signed_up_list[calculated_ag] << reg
-      end
-    end
+    @competition_sign_up = CompetitionSignUp.new(@competition)
 
     respond_to do |format|
       format.html 
@@ -43,27 +25,11 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def two_attempt_recording
-    @all_registrants = Registrant.where(:competitor => true).order(:bib_number).all
-    @signed_up_registrants = @competition.signed_up_registrants
-    @agt = @competition.determine_age_group_type
-    @age_group_entries = @agt.age_group_entries
-    @signed_up_list = {}
-    @not_signed_up_list = {}
-    @age_group_entries.each do |ag_entry|
-      @signed_up_list[ag_entry] = []
-      @not_signed_up_list[ag_entry] = []
-    end
-
+    @competition_sign_up = CompetitionSignUp.new(@competition)
     @no_page_breaks = true unless params[:no_page_breaks].nil?
 
-    @all_registrants.each do |reg|
-      calculated_ag = @agt.age_group_entry_for(reg.age, reg.gender, reg.default_wheel_size.id)
-      if @signed_up_registrants.include?(reg)
-        @signed_up_list[calculated_ag] << reg
-      else
-        @not_signed_up_list[calculated_ag] << reg if params[:only_registered].nil?
-      end
-    end
+    @only_registered = true
+    @only_registered = false if params[:only_registered].nil?
 
     respond_to do |format|
       format.html 
