@@ -15,13 +15,13 @@ Most Useful:
  - Only display import of the desired type
 
 - Associate competitions with filters (intsead of ephemerally)
-#- Add "gender_filter" field to Competition
 - Add "heat/lane assignment" boolean to scoring_helpers (only applicable to time_scoring_helper)
 - Add "source filter" for a competition to be based on the "final candidates" of another competition
 - remove unnecessary competitions#show
 - Update the wiki to better describe the scoring_helper, and other filters
 
 - Add "No Competitions Exists, Create one now" buttons (and other places too).
+- Add ability to print all sign-up-lists at once
 - Put a "Back" button on every page in a consistent location.
 - Make the navigation bar always the same styling unless we have selected something.
 - Prevent "final_candidates" from being selected from non-24" wheel-sizes

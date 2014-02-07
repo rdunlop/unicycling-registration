@@ -26,13 +26,14 @@
 
 <hr />
 
+<h2>Sign Up Lists</h2>
+
 <table class="event_listing">
-  <caption>Event Categories</caption>
   <thead>
     <tr>
       <th>Event-Category</th>
       <th># Signed Up</th>
-      <th>Sign-Ups</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -52,7 +53,7 @@
     <tr>
       <th></th>
       <th>Total: <%= total_competitors %></th>
-      <th><%= link_to 'View All Sign Up list (NOT YET COMPLETED)', root_path %>
+      <th><%= link_to 'View All Sign Up lists (NOT YET COMPLETED)', root_path %>
         <%= link_to '(pdf)', root_path %></th>
     </tr>
   </tfoot>
@@ -63,7 +64,6 @@
 <h2>Competitions</h2>
 
 <table>
-  <caption>Competitions</caption>
   <thead>
     <tr>
       <th>Competition</th>
@@ -91,8 +91,7 @@
   </tbody>
 </table>
 
-<h2>Create Competition</h2>
-<%= link_to "Create New", new_event_competition_path(@event) %><br />
+<%= link_to "Create New Competition", new_event_competition_path(@event) %><br />
 
 <hr />
 <h2>Judging Results</h2>
@@ -126,6 +125,7 @@
 <% @event.competitions.each do |competition| %>
   <%= link_to "Manage Judges for #{competition}", competition_judges_path(competition) %><br />
 <% end %>
+<br />
 
 <table>
   <caption>Competition Summary</caption>
@@ -173,29 +173,31 @@
 <%= link_to "Race Recording Forms (pdf)", printing_race_recording_multi_lap_path(:format => :pdf) %><br />
 <%= link_to "Track Race Instructions (pdf)", printing_race_recording_instructions_path(:format => :pdf) %>
 
-<ul>
-  <% @event.competitions.each do |competition| %>
-    <li>Print Paper Copies for <%= competition %><br />
-    <ul>
-      <li><%= link_to "Announcer Form", announcer_printing_competition_path(competition) %>
-      <%= link_to "(pdf)", announcer_printing_competition_path(competition, :format => :pdf) %></li>
-      <li><%= link_to "Heat Recording", heat_recording_printing_competition_path(competition) %>
-      <%= link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf) %></li>
-      <li><%= link_to "Two Attempt Recording", two_attempt_recording_printing_competition_path(competition) %>
-      <%= link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, :format => :pdf) %></li>
-    </ul>
-    </li>
-  <% end %>
-  <li>Enter Heat Information
-    <ul>
+<table>
+  <thead>
+    <tr>
+      <th>Competition</th>
+      <th>Announcer Form</th>
+      <th>Heat Recording</th>
+      <th>Race Recording Form</th>
+      <th>Enter Heat Information</th>
+    </tr>
+  </thead>
+  <tbody>
     <% @event.competitions.each do |competition| %>
-      <li><%= link_to "#{competition} Lane Assignments", competition_lane_assignments_path(competition) %></li>
+      <tr>
+        <td><%= competition %></td>
+        <td><%= link_to "Announcer Form", announcer_printing_competition_path(competition) %>
+          <%= link_to "(pdf)", announcer_printing_competition_path(competition, :format => :pdf) %></td>
+        <td><%= link_to "Heat Recording", heat_recording_printing_competition_path(competition) %>
+          <%= link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf) %></td>
+        <td><%= link_to "Two Attempt Recording", two_attempt_recording_printing_competition_path(competition) %>
+          <%= link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, :format => :pdf) %></td>
+        <td><%= link_to "#{competition} Lane Assignments", competition_lane_assignments_path(competition) %></td>
+      </tr>
     <% end %>
-    </ul>
-  </li>
-  <li>Enter Results</li>
-  <li>Print Data Checking</li>
-</ul>
+  </tbody>
+</table>
 
 <hr />
 <h2>Results printing</h2>
