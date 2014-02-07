@@ -45,17 +45,15 @@
                       <%= resu.label :event_category_id, t('.category') %>
                       <% 
                         list = []
+                        disabled_list = []
                         event.event_categories.each do |cat|
-                          if registrant.age.nil?
-                            list << [cat.name, cat.id]
-                          else
-                            if (cat.age_range_start..cat.age_range_end).include?(registrant.age)
-                              list << [cat.name, cat.id]
-                            end
+                          list << [cat.name, cat.id]
+                          if !cat.age_is_in_range(registrant.age)
+                            disabled_list << cat.id
                           end
                         end
                         %>
-                        <%= resu.select :event_category_id, list, :include_blank => true %>
+                        <%= resu.select :event_category_id, list, :disabled => disabled_list, :include_blank => true %>
                     <% end %>
                   </td>
                 <% end %>

@@ -22,6 +22,16 @@ describe EventCategory do
     @ec.to_s.should == @ev.to_s + " - " + @ec.name
   end
 
+  it "can determine if an age is in range" do
+    @ec.age_range_start = 1
+    @ec.age_range_end = 10
+    @ec.age_is_in_range(1).should == true
+    @ec.age_is_in_range(10).should == true
+    @ec.age_is_in_range(4).should == true
+    @ec.age_is_in_range(40).should == false
+  end
+
+
   describe "with some registrant_choices" do
     before(:each) do
       @rc = FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec)

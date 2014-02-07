@@ -20,4 +20,9 @@ class EventCategory < ActiveRecord::Base
     signed_up_registrants.count
   end
 
+  def age_is_in_range(age)
+    return true if age.nil?
+
+    (age_range_start..age_range_end).include?(age)
+  end
 end
