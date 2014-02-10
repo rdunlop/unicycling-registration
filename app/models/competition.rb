@@ -162,6 +162,10 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def include_event_name
+    scoring_helper.include_event_name
+  end
+
   def score_calculator
     unless @score_calculator.nil?
       return @score_calculator

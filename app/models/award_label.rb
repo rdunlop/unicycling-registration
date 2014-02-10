@@ -28,10 +28,10 @@ class AwardLabel < ActiveRecord::Base
     self.competitor_name =res
 
     # line 2
-    if competitor.competition.event_class == "Distance" or competitor.competition.event_class == "Ranked"
-      competition_name = competitor.competition.name # These events have been 'fully named' (don't need the 'event' name)
-    else
+    if competitor.competition.include_event_name
       competition_name = competitor.competition.event.name
+    else
+      competition_name = competitor.competition.name # These events have been 'fully named' (don't need the 'event' name)
     end
     self.competition_name = competition_name
 
@@ -46,8 +46,8 @@ class AwardLabel < ActiveRecord::Base
         age_group = competitor.age_group_entry_description
       end
     end
-    if competitor.competition.event_class == "Freestyle" ### XXX Somewhere else?
-      age_group = competitor.competition.name # the "Category"
+    if competitor.competition.include_event_name
+      age_group = competitor.competition.name
     end
     if age_group == "All" # Don't display if age_group result is 'All'
       age_group = nil

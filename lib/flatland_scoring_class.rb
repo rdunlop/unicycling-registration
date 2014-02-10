@@ -62,4 +62,8 @@ class FlatlandScoringClass
   # for award_label
   def create_result_from_import_result(import_result)
   end
+
+  def include_event_name
+    true
+  end
 end
