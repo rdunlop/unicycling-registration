@@ -1,27 +1,28 @@
-class StreetScoringClass
+class BaseScoringClass
+  include Rails.application.routes.url_helpers
+
+  def initialize(competition)
+    @competition = competition
+  end
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    StreetScoreCalculator.new(@competition)
+    raise StandardError.new("No Score Calculator Defined")
   end
 
   # describes how to label the results of this competition
   def result_description
-    nil
+    raise StandardError.new("No Result Description Defined")
   end
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    false
+    raise StandardError.new("No Has Result Defined")
   end
 
   # returns the result for this competitor
   def competitor_result(competitor)
-    if self.competitor_has_result?(competitor)
-      nil# not applicable in Freestyle
-    else
-      nil
-    end
+    raise StandardError.new("No Competitor Result Defined")
   end
 
   # Function which places all of the competitors in the competition
@@ -37,7 +38,7 @@ class StreetScoringClass
 
   # the page where all of the results for this competition are listed
   def results_path
-    nil
+    root_path
   end
 
   def results_importable
@@ -45,7 +46,7 @@ class StreetScoringClass
   end
 
   def uses_judges
-    true
+    false
   end
   ########### Below this line, the entries are not (YET) used
 
@@ -58,6 +59,10 @@ class StreetScoringClass
   end
 
   def include_event_name
-    true
+    false
+  end
+
+  def uses_lane_assignments
+    false
   end
 end

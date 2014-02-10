@@ -166,6 +166,10 @@ class Competition < ActiveRecord::Base
     scoring_helper.include_event_name
   end
 
+  def uses_lane_assignments
+    scoring_helper.uses_lane_assignments
+  end
+
   def score_calculator
     unless @score_calculator.nil?
       return @score_calculator

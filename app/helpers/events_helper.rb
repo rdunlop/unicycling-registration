@@ -18,23 +18,6 @@ module EventsHelper
         end
     end
 
-    def scores_link(competition)
-      class_name = competition.event_class
-
-      case class_name
-      when'Two Attempt Distance'
-      when 'Freestyle'
-        link_to 'View Scores', freestyle_scores_competition_path(competition)
-      when 'Flatland'
-      when 'Street'
-        link_to 'View Scores', street_scores_competition_path(competition)
-      when 'Standard'
-        #link_to 'View Scores', judge_standard_scores_path(judge)
-      else
-        "please update the scores_link function (#{competition.event_class})"
-      end
-    end
-
     def results_url(competition)
       competition.scoring_helper.results_path
     end

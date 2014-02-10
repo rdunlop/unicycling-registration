@@ -10,7 +10,9 @@
   <h1>Lane Assignments</h1>
   <ul>
     <% Competition.event_order.all.each do |comp| %>
-      <li><%= link_to "#{comp} Lane Assignments", competition_lane_assignments_path(comp) %></li>
+      <% next unless comp.uses_lane_assignments %>
+        <li><%= link_to "#{comp} Lane Assignments", competition_lane_assignments_path(comp) %></li>
+      <% end %>
     <% end %>
   </ul>
 <% end %>

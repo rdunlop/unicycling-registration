@@ -6,6 +6,7 @@ class LaneAssignmentsController < ApplicationController
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
+    raise StandardException.new("Competition is not set to use lane assignments") unless @competition.uses_lane_assignments
   end
 
   def load_new_lane_assignment

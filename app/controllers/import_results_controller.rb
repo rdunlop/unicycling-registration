@@ -118,6 +118,7 @@ class ImportResultsController < ApplicationController
     upload = Upload.new
     raw_data = upload.extract_csv(params[:file])
     comp = Competition.find(params[:competition_id])
+    raise StandardError.new("Competition not set for lane assignments") unless comp.uses_lane_assignments
     heat = params[:heat]
     n = 0
     err = 0

@@ -1,10 +1,4 @@
 class ExternallyRankedScoringClass
-  include Rails.application.routes.url_helpers
-
-  def initialize(competition)
-    @competition = competition
-  end
-
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
@@ -61,9 +55,5 @@ class ExternallyRankedScoringClass
 
   # for award_label
   def create_result_from_import_result(import_result)
-  end
-
-  def include_event_name
-    false
   end
 end

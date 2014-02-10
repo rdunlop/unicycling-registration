@@ -193,7 +193,11 @@
           <%= link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf) %></td>
         <td><%= link_to "Two Attempt Recording", two_attempt_recording_printing_competition_path(competition) %>
           <%= link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, :format => :pdf) %></td>
-        <td><%= link_to "#{competition} Lane Assignments", competition_lane_assignments_path(competition) %></td>
+        <td>
+          <% if competition.uses_lane_assignments %>
+            <%= link_to "#{competition} Lane Assignments", competition_lane_assignments_path(competition) %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

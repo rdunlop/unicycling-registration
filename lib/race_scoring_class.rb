@@ -1,10 +1,4 @@
 class RaceScoringClass
-  include Rails.application.routes.url_helpers
-
-  def initialize(competition)
-    @competition = competition
-  end
-
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
@@ -65,5 +59,9 @@ class RaceScoringClass
 
   def include_event_name
     false
+  end
+
+  def uses_lane_assignments
+    true
   end
 end

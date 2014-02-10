@@ -1,10 +1,4 @@
 class FlatlandScoringClass
-  include Rails.application.routes.url_helpers
-
-  def initialize(competition)
-    @competition = competition
-  end
-
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
