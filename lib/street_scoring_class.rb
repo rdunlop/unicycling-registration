@@ -1,4 +1,4 @@
-class StreetScoringClass
+class StreetScoringClass < BaseScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
