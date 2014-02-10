@@ -3,7 +3,7 @@ require 'spec_helper'
 describe LaneAssignmentsController do
   before(:each) do
     sign_in FactoryGirl.create(:admin_user)
-    @competition = FactoryGirl.create(:competition)
+    @competition = FactoryGirl.create(:competition, :scoring_class => "Distance")
     @reg = FactoryGirl.create(:registrant)
   end
 
