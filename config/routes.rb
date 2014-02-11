@@ -51,7 +51,6 @@ Workspace::Application.routes.draw do
     namespace :admin do
       resources :payments, :only => [:index, :new, :create]  do
         collection do
-          get :summary
           get :details
           get :onsite_pay_new
           post :adjust_payment_choose
@@ -106,6 +105,7 @@ Workspace::Application.routes.draw do
 
     resources :payments, :except => [:index] do
       collection do
+        get 'summary'
         post 'notification'
         get 'success'
       end

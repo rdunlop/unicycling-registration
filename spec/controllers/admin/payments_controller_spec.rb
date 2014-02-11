@@ -24,20 +24,6 @@ describe Admin::PaymentsController do
     end
   end
 
-  describe "GET summary" do
-
-    it "has the total_received" do
-      get :summary, {}
-      assigns(:total_received).should  == 5.22
-    end
-
-    it "assigns the known expense groups as expense_groups" do
-      group = payment_detail.expense_item.expense_group
-      get :summary, {}
-      assigns(:expense_groups).should == [group]
-    end
-  end
-
   describe "POST create" do
     before(:each) do
       @ei = FactoryGirl.create(:expense_item)

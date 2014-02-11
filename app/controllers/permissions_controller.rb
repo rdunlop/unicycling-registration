@@ -16,6 +16,7 @@ class PermissionsController < ApplicationController
       else
         @user.add_role role
       end
+      flash[:notice] = "Role updated"
     else
       flash[:alert] = "Role not found (#{role})"
     end

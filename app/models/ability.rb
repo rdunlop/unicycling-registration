@@ -34,6 +34,7 @@ class Ability
         can :send_email, Registrant
         can :bag_labels, Registrant
         can :undelete, Registrant
+        can :summary, Payment
       elsif user.has_role? :judge
         can :read, Competitor
       end
@@ -93,6 +94,7 @@ class Ability
       end
 
       # Payment
+      can :summary, Payment if (user.has_role? :payment_admin)
       can :read, Payment if user.has_role? :admin
       can :manage, Payment if user.has_role? :super_admin
       can :read, Payment, :user_id => user.id

@@ -14,11 +14,6 @@ class Admin::PaymentsController < Admin::BaseController
     @refunds = Refund.includes(:user).all
   end
 
-  def summary
-    @total_received = Payment.total_received
-    @expense_groups = ExpenseGroup.includes(:expense_items => [:translations, :expense_group]).all
-  end
-
   def details
     @details = PaymentDetail.completed
   end

@@ -385,4 +385,24 @@ describe PaymentsController do
       end
     end
   end
+
+
+  describe "GET summary" do
+    before(:each) do
+      @user.add_role :payment_admin
+    end
+    let!(:payment) { FactoryGirl.create(:payment, :completed => true) }
+    let!(:payment_detail) { FactoryGirl.create(:payment_detail, :payment => payment, :amount => 5.22) }
+
+    it "has the total_received" do
+      get :summary, {}
+      assigns(:total_received).should  == 5.22
+    end
+
+    it "assigns the known expense groups as expense_groups" do
+      group = payment_detail.expense_item.expense_group
+      get :summary, {}
+      assigns(:expense_groups).should == [group]
+    end
+  end
 end

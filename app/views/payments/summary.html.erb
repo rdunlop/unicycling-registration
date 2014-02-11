@@ -1,8 +1,14 @@
 <h1>Payments Summary</h1>
 
-<%= link_to "Create Adjustment Payment", onsite_pay_new_admin_payments_path %><br />
-<%= link_to "Create New Payment (of anything)", new_admin_payment_path %><br />
-<%= link_to "View list of Payments/Refunds", admin_payments_path %>
+<% if can? [:admin, :onsite_pay_new], Payment %>
+  <%= link_to "Create Adjustment Payment", onsite_pay_new_admin_payments_path %><br />
+<% end %>
+<% if can? [:admin, :new], Payment %>
+  <%= link_to "Create New Payment (of anything)", new_admin_payment_path %><br />
+<% end %>
+<% if can? [:admin, :show], Payment %>
+  <%= link_to "View list of Payments/Refunds", admin_payments_path %>
+<% end %>
 <br /><br />
 
 

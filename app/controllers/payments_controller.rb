@@ -36,6 +36,12 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def summary
+    @total_received = Payment.total_received
+    @expense_groups = ExpenseGroup.includes(:expense_items => [:translations, :expense_group]).all
+  end
+
+
   # GET /payments/1
   # GET /payments/1.json
   def show

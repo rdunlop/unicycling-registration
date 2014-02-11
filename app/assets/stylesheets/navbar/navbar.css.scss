@@ -94,6 +94,9 @@ nav {
         background: $backgroundhover;
         color: $texthover;
       }
+      a.disabled {
+        display: none;
+      }
     }
     background: $background;
     width: 100%;
