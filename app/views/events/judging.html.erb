@@ -11,8 +11,7 @@
   <ul>
     <% Competition.event_order.all.each do |comp| %>
       <% next unless comp.uses_lane_assignments %>
-        <li><%= link_to "#{comp} Lane Assignments", competition_lane_assignments_path(comp) %></li>
-      <% end %>
+      <li><%= link_to "#{comp} Lane Assignments", competition_lane_assignments_path(comp) %></li>
     <% end %>
   </ul>
 <% end %>
