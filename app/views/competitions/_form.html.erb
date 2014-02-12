@@ -1,4 +1,4 @@
-<%= form_for([@event, @competition]) do |f| %>
+<%= form_for(@competition.new_record? ? [@event, @competition] : [@competition]) do |f| %>
   <% if @competition.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
@@ -23,7 +23,7 @@
   </div>
   <div class="field">
     <%= f.label :event_category_id %>
-    <%= f.select :event_category_id, @competition.event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true  %>
+    <%= f.select :event_category_id, @event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true  %>
   </div>
 
   <h2>Settings For gathering/ranking the results</h2>
