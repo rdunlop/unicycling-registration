@@ -1,4 +1,4 @@
-<%= form_for(@import_result.new_record? ? [@user, @import_result] : [@import_result]) do |f| %>
+<%= form_for(@import_result.new_record? ? [@user, @competition, @import_result] : [@import_result]) do |f| %>
   <% if @import_result.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@import_result.errors.count, "error") %> prohibited this import_result from being saved:</h2>
@@ -26,7 +26,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= f.select :competition_id, Competition.event_order.all.map {|comp| [comp.name, comp.id] }  %></td>
+        <td><%= @competition %></td>
         <td><%= f.text_field :raw_data %></td>
         <td><%= f.number_field :bib_number %></td>
         <td><%= f.number_field :minutes %></td>

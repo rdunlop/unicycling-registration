@@ -39,7 +39,7 @@
           <% end %>
         </td>
         <% if import %>
-          <td><%= link_to 'Import Results', user_import_results_path(current_user) %></td>
+          <td><%= link_to 'Import Results', user_competition_import_results_path(current_user, ec) %></td>
         <% end %>
         <td><%= link_to 'View', results_url(ec) %></td>
         <td><%= link_to "Results", results_printing_competition_path(ec, :format => :pdf) %></td>

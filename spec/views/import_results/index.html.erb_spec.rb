@@ -4,9 +4,11 @@ describe "import_results/index" do
   before(:each) do
     @user = FactoryGirl.create(:admin_user)
     assign(:user, @user)
+    @competition = FactoryGirl.create(:competition)
+    assign(:competition, @competition)
     assign(:import_results, 
-    [FactoryGirl.create(:import_result, :raw_data => "Raw 1"),
-    FactoryGirl.create(:import_result, :raw_data => "Raw 2")])
+    [FactoryGirl.create(:import_result, :raw_data => "Raw 1", :competition => @competition),
+    FactoryGirl.create(:import_result, :raw_data => "Raw 2", :competition => @competition)])
     @import_result = FactoryGirl.build(:import_result)
   end
 
@@ -28,7 +30,7 @@ describe "import_results/index" do
       render
 
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      assert_select "form", :action => user_import_results_path(@user), :method => "post" do
+      assert_select "form", :action => user_competition_import_results_path(@user, @competition), :method => "post" do
         assert_select "input#import_result_raw_data", :name => "import_result[raw_data]"
         assert_select "input#import_result_bib_number", :name => "import_result[bib_number]"
         assert_select "input#import_result_minutes", :name => "import_result[minutes]"

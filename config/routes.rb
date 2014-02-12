@@ -206,12 +206,14 @@ Workspace::Application.routes.draw do
           get :invitations
         end
       end
-      resources :import_results, :shallow => true, :except => [:new, :show] do
-        collection do
-          post :import_csv
-          post :import_lif
-          post :publish_to_competition
-          delete :destroy_all
+      resources :competition, :only => [] do
+        resources :import_results, :shallow => true, :except => [:new, :show] do
+          collection do
+            post :import_csv
+            post :import_lif
+            post :publish_to_competition
+            delete :destroy_all
+          end
         end
       end
       resources :award_labels, :shallow => true, :except => [:new, :show] do

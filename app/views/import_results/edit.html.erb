@@ -1,6 +1,7 @@
 <h1>Editing import_result</h1>
 
 <% @user = @import_result.user %>
+<% @competition = @import_result.competition %>
 <%= render 'form' %>
 
-<%= link_to 'Back', user_import_results_path(@user) %>
+<%= link_to 'Back', user_competition_import_results_path(@user, @import_result.competition) %>

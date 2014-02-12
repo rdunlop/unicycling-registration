@@ -46,10 +46,10 @@
     <% end %>
   </tbody>
 </table>
-<%= form_tag(destroy_all_user_import_results_path(@user), {:method => :delete, :multipart=>true}) do %>
+<%= form_tag(destroy_all_user_competition_import_results_path(@user, @competition), {:method => :delete, :multipart=>true}) do %>
   <%= submit_tag "Delete all in Temp Table", :class => "data_import_delete", :confirm => "DELETE, Are you sure?" %>
 <% end %>
-<%= form_tag(publish_to_competition_user_import_results_path(@user), {:method => :post}) do %>
+<%= form_tag(publish_to_competition_user_competition_import_results_path(@user, @competition), {:method => :post}) do %>
   <%= submit_tag "Import all in Temp Table into Competition", :class=> "data_import_submit", :confirm => "IMPORT, Are you sure?" %>
 <% end %>
 <hr />
@@ -70,14 +70,12 @@ Please import a Comma-Separated-File file with the following format (for 'Distan
   <li>Column 2: Absolute Rank (to be used when calculating age-group places)</li>
   <li>Column 3: Details (to be printed on awards)</li>
 </ul>
-<%= form_tag(import_csv_user_import_results_path(@user), {:method => :post, :multipart=>true}) do %>
-  <%= select_tag :competition_id, options_from_collection_for_select(Competition.event_order.all, "id", "to_s_with_event_class") %><br />
+<%= form_tag(import_csv_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do %>
   <%= file_field_tag "file" %>
   <%= submit_tag "Load CSV to Temp Table" %>
 <% end %>
 <hr />
-<%= form_tag(import_lif_user_import_results_path(@user), {:method => :post, :multipart=>true}) do %>
-  <%= select_tag :competition_id, options_from_collection_for_select(Competition.event_order.all, "id", "to_s_with_event_class") %><br />
+<%= form_tag(import_lif_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do %>
   <%= label_tag :heat, "Heat" %><%= text_field_tag "heat" %><br />
   <%= file_field_tag "file" %>
   <%= submit_tag "Load LIF to Temp Table" %>
