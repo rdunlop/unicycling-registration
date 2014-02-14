@@ -47,15 +47,6 @@ class RaceScoringClass < BaseScoringClass
   def uses_judges
     false
   end
-  ########### Below this line, the entries are not (YET) used
-
-  # for award_label
-  def create_import_result_from_csv(line)
-  end
-
-  # for award_label
-  def create_result_from_import_result(import_result)
-  end
 
   def include_event_name
     false

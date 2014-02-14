@@ -10,9 +10,6 @@ Most Useful:
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.
 
-- move "import" to be under "competition"
- - Only display import for scoring_helpers which have it configured (race (lif), ranked (excel), start_time_race (excel))
- - Only display import of the desired type
 
 - Associate competitions with filters (intsead of ephemerally)
 - Add "heat/lane assignment" boolean to scoring_helpers (only applicable to time_scoring_helper)
