@@ -20,15 +20,20 @@
   <%= f.fields_for :competition_sources do |cs| %>
     <div class="field">
       <%= cs.label :gender_filter %>
-      <%= cs.select :gender_filter, CompetitionSource.gender_filters %>
+      <%= cs.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true %>
     </div>
     <div class="field">
       <%= cs.label :event_category_id %>
       <%= cs.select :event_category_id, @event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true  %>
     </div>
     <div class="field">
-      <%= cs.label :competition_id %>
+      <%= cs.label :competition_id, "Source Competition" %>
       <%= cs.select :competition_id, Competition.all.map{|c| [c, c.id]}, :include_blank => true  %>
+    </div>
+    <div class="field">
+      <%= cs.label :max_place %>
+      (specify the overall_place which the competitors must achieve in the Source Competition to be included as registrants)
+      <%= cs.number_field :max_place %>
     </div>
   <% end %>
 

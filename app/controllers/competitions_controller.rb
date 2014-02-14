@@ -54,6 +54,9 @@ class CompetitionsController < ApplicationController
   # GET /competitions/1/edit
   def edit
     @event = @competition.event
+    3.times do
+      @competition.competition_sources.build
+    end
   end
 
   # POST /events/#/create

@@ -24,7 +24,37 @@ describe CompetitionSource do
     @cs.valid?.should == false
   end
 
+  it "cannot select max_place without choosing competition" do
+    @cs.competition = nil
+    @cs.max_place = 1
+    @cs.valid?.should == false
+
+    @cs.competition = FactoryGirl.create(:competition)
+    @cs.valid?.should == true
+  end
+
   it "can be found from the competition" do
     @competition.competition_sources.should == [@cs]
+  end
+
+  describe "with a competition_source targetting another competition" do
+    before(:each) do
+      @competition2 = FactoryGirl.create(:competition)
+      @source_competition = FactoryGirl.create(:ranked_competition)
+      @cs2 = FactoryGirl.create(:competition_source, :target_competition => @source_competition, :max_place => 2)
+
+      it "chooses competitors from the source_competition with a good enough overall_place", :caching => true do
+        @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
+        @competitor.overall_place = 1
+
+        @cs2.signed_up_registrants.count.should == 1
+      end
+      it "doesn't choose a competitor with an overall_place worse than the required" do
+        @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
+        @competitor.overall_place = 3
+
+        @cs2.signed_up_registrants.count.should == 0
+      end
+    end
   end
 end

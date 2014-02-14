@@ -22,5 +22,9 @@ FactoryGirl.define do
     factory :timed_competition do
       scoring_class "Distance"
     end
+
+    factory :ranked_competition do
+      scoring_class "Ranked"
+    end
   end
 end
