@@ -1,7 +1,6 @@
 class Competition < ActiveRecord::Base
   belongs_to :age_group_type, :inverse_of => :competitions
   belongs_to :event, :inverse_of => :competitions
-  belongs_to :event_category, :inverse_of => :competitions
 
   has_many :competitors, :dependent => :destroy, :order => "position"
   has_many :registrants, :through => :competitors
@@ -12,6 +11,8 @@ class Competition < ActiveRecord::Base
   has_many :distance_attempts, :through => :competitors
   has_many :time_results, :through => :competitors
   has_many :external_results, :through => :competitors
+  has_many :competition_sources, :foreign_key => "target_competition_id", :inverse_of => :target_competition, :dependent => :destroy
+  accepts_nested_attributes_for :competition_sources
 
   has_many :lane_assignments, :dependent => :destroy
   #has_many :chief_judges, :dependent => :destroy
@@ -27,17 +28,6 @@ class Competition < ActiveRecord::Base
   scope :event_order, includes(:event).order("events.name")
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
-
-  def self.gender_filters
-    ["Both", "Male", "Female"]
-  end
-  validates :gender_filter, :inclusion => { :in => self.gender_filters, :allow_nil => false }
-
-  after_initialize :init
-
-  def init
-    self.gender_filter = "Both" if self.gender_filter.nil?
-  end
 
   def to_s
     event.to_s + " - " + self.name
@@ -76,13 +66,11 @@ class Competition < ActiveRecord::Base
   end
 
   def signed_up_registrants
-    registrants = event_category.signed_up_registrants unless event_category.nil?
-    registrants = event.signed_up_registrants if event_category.nil? # XXX test for this?
-
-    unless gender_filter.nil? or gender_filter == "Both"
-      registrants = registrants.select {|reg| reg.gender == gender_filter}
+    res = []
+    competition_sources.each do |cs|
+      res += cs.signed_up_registrants
     end
-    registrants
+    res
   end
 
   def get_age_group_entry_description(age, gender, wheel_size_id)

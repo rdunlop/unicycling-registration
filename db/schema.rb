@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140207053004) do
+ActiveRecord::Schema.define(:version => 20140214030213) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -97,6 +97,20 @@ ActiveRecord::Schema.define(:version => 20140207053004) do
   add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
   add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
 
+  create_table "competition_sources", :force => true do |t|
+    t.integer  "target_competition_id"
+    t.integer  "event_category_id"
+    t.integer  "competition_id"
+    t.string   "gender_filter"
+    t.integer  "max_place"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "competition_sources", ["competition_id"], :name => "index_competition_sources_competition_id"
+  add_index "competition_sources", ["event_category_id"], :name => "index_competition_sources_event_category_id"
+  add_index "competition_sources", ["target_competition_id"], :name => "index_competition_sources_target_competition_id"
+
   create_table "competitions", :force => true do |t|
     t.integer  "event_id"
     t.string   "name"
@@ -107,8 +121,6 @@ ActiveRecord::Schema.define(:version => 20140207053004) do
     t.boolean  "has_experts",       :default => false
     t.boolean  "has_age_groups",    :default => false
     t.string   "scoring_class"
-    t.string   "gender_filter"
-    t.integer  "event_category_id"
   end
 
   add_index "competitions", ["event_id"], :name => "index_competitions_event_id"

@@ -9,10 +9,6 @@ describe Competition do
     @ec.valid?.should == true
   end
 
-  it "requires a gender_filter" do
-    @ec.gender_filter = nil
-    @ec.valid?.should == false
-  end
   it "requires an event" do
     @ec.event = nil
     @ec.valid?.should == false

@@ -27,6 +27,7 @@ class CompetitionsController < ApplicationController
 
   # /events/#/competitions/new
   def new
+    @competition.competition_sources.build
   end
 
   # GET /competitions
@@ -193,7 +194,8 @@ class CompetitionsController < ApplicationController
 
   private
   def competition_params
-    params.require(:competition).permit(:name, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups, :gender_filter, :event_category_id)
+    params.require(:competition).permit(:name, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups,
+                                        :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :competition_id, :max_place])
   end
 end
 

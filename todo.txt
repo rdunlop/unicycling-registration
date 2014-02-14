@@ -12,7 +12,6 @@ Most Useful:
 
 
 - Associate competitions with filters (intsead of ephemerally)
-- Add "heat/lane assignment" boolean to scoring_helpers (only applicable to time_scoring_helper)
 - Add "source filter" for a competition to be based on the "final candidates" of another competition
 - remove unnecessary competitions#show
 - Update the wiki to better describe the scoring_helper, and other filters

@@ -13,7 +13,6 @@ describe CompetitionsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      gender_filter: "Both",
       name: "Unlimited",
       scoring_class: "Distance"
     }
@@ -46,7 +45,7 @@ describe CompetitionsController do
   end
 
   describe "GET show" do
-    it "assigns the requested event_category as @event_category" do
+    it "assigns the requested competition as @competition" do
       competition = FactoryGirl.create(:competition)
       get :show, {:id => competition.to_param}
       assigns(:competition).should eq(competition)
@@ -54,7 +53,7 @@ describe CompetitionsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested event_category as @event_category" do
+    it "assigns the requested competition as @competition" do
       competition = FactoryGirl.create(:competition)
       get :edit, {:id => competition.to_param}
       assigns(:competition).should eq(competition)
@@ -77,10 +76,11 @@ describe CompetitionsController do
           }.to change(Competition, :count).by(1)
         end
         it "can create a Female gender_filter competition" do
+          @comp = FactoryGirl.create(:competition)
           expect {
-            post :create, {:event_id => @event.id, :competition => valid_attributes.merge({:gender_filter => "Female"})}
+            post :create, {:event_id => @event.id, :competition => valid_attributes.merge({:competition_sources_attributes => [{:competition_id => @comp.id, :gender_filter => "Female"}]}) }
           }.to change(Competition, :count).by(1)
-          Competition.last.gender_filter.should == "Female"
+          CompetitionSource.last.gender_filter.should == "Female"
         end
       end
       it "creates a new Competition" do
@@ -130,6 +130,7 @@ describe CompetitionsController do
       before(:each) do
         @reg = FactoryGirl.create(:competitor, :gender => "Male")
         FactoryGirl.create(:registrant_event_sign_up, :event => @event, :event_category => @event_category, :signed_up => true, :registrant => @reg)
+        @source = FactoryGirl.create(:competition_source, :gender_filter => "Both", :target_competition => @competition, :event_category => @event_category)
       end
 
       it "creates a new competitor" do
@@ -139,16 +140,16 @@ describe CompetitionsController do
       end
       it "does create the competitor if the gender_filter is set to the gender" do
         expect {
-          @competition.gender_filter = "Male"
-          @competition.save
+          @source.gender_filter = "Male"
+          @source.save!
           put :populate, {:id => @competition.id }
         }.to change(Competitor, :count).by(1)
       end
 
       it "doesn't create the competitor if the gender_filter is set to the other gender" do
         expect {
-          @competition.gender_filter = "Female"
-          @competition.save
+          @source.gender_filter = "Female"
+          @source.save!
           put :populate, {:id => @competition.id }
         }.to change(Competitor, :count).by(0)
       end
@@ -157,7 +158,7 @@ describe CompetitionsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested event_category" do
+      it "updates the requested competition" do
         competition = FactoryGirl.create(:competition)
         # Assuming there are no other competitions in the database, this
         # specifies that the Competition created on the previous line
@@ -167,13 +168,13 @@ describe CompetitionsController do
         put :update, {:id => competition.to_param, :competition => {'there' => 'params'}}
       end
 
-      it "assigns the requested event_category as @event_category" do
+      it "assigns the requested competition as @competition" do
         competition = FactoryGirl.create(:competition)
         put :update, {:id => competition.to_param, :competition => valid_attributes}
         assigns(:competition).should eq(competition)
       end
 
-      it "redirects to the event_category" do
+      it "redirects to the competition" do
         competition = FactoryGirl.create(:competition)
         put :update, {:id => competition.to_param, :competition => valid_attributes}
         response.should redirect_to(competition)
@@ -200,7 +201,7 @@ describe CompetitionsController do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested event_category" do
+    it "destroys the requested competition" do
       competition = FactoryGirl.create(:competition, :event => @event)
       expect {
         delete :destroy, {:id => competition.to_param}

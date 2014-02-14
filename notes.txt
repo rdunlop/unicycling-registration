@@ -30,7 +30,7 @@ POST-NAUCC2013 Report/Requests:
   - Be able to publish the resuts of the calculation during the week (before all the events have been competed).
 
  - Have a page which lists the events, according to the schedule, and whether the data has been entered, posted, published, awarded.
-  - Should be at the EventCategory Level.
+  - Should be at the Competition Level.
   - Show the events that have been competed, but not completed should be highlighted.
 
 - Allow the Event Director to upload their own data (Trials, Street, Flat, etc)
