@@ -16,7 +16,8 @@ class ImportResultsController < ApplicationController
   end
 
   def load_new_import_result
-    @import_result = @user.import_results.new(import_result_params)
+    @import_result = ImportResult.new(import_result_params)
+    @import_result.user = @user
     @import_result.competition = @competition
   end
 

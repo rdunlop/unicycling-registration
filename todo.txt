@@ -7,6 +7,8 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
+- why can't I create a new import result for 100m on uniregtest? (error of create causes route-not-found also) (cannot display when raW_data is empty?)
+- Flesh out the registrant-group-creation structure for Patricia to use for Pairs and Group routine creation.
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.
 
