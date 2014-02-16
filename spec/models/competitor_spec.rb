@@ -168,11 +168,8 @@ describe Competitor do
 
             @competition = FactoryGirl.create(:competition)
 
-            @cr = Competitor.new
-            @cr.registrants << @reg
-            @cr.competition = @competition
-            @cr.position = 1
-            @cr.save
+            @competition.create_competitors_from_registrants([@reg])
+            @cr = @competition.competitors.first
 
             @score = Score.new
             @score.val_1 = 1.0
@@ -184,6 +181,7 @@ describe Competitor do
                                                           :judge_type => FactoryGirl.create(:judge_type))
             @score.competitor = @cr
             @score.save
+            @reg.reload
         end
 
         it "should be able to access the reg via event" do

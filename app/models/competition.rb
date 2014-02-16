@@ -41,6 +41,10 @@ class Competition < ActiveRecord::Base
     has_age_groups or ((not has_age_groups) and (not has_experts))
   end
 
+  def has_participant(registrant)
+    find_competitor_with_bib_number(registrant.bib_number)
+  end
+
   def find_competitor_with_bib_number(bib_number)
     competitors.each do |competitor|
       if competitor.member_has_bib_number?(bib_number)
@@ -50,16 +54,31 @@ class Competition < ActiveRecord::Base
     return nil
   end
 
+  def create_competitor_from_registrants(registrants, name)
+    competitor = competitors.build
+    competitor.position = competitors.count + 1
+    registrants.each do |reg|
+      member = competitor.members.build
+      member.registrant = reg
+    end
+    if competitor.save
+      "Created Group Competitor"
+    else
+      raise "Unable to create group competitor"
+    end
+  end
+
   def create_competitors_from_registrants(registrants)
     num_created = 0
     registrants.each do |reg|
       competitor = competitors.build
       competitor.position = competitors.count + 1
-      competitor.save
       member = competitor.members.build
       member.registrant = reg
-      if member.save
+      if competitor.save
         num_created += 1
+      else
+        raise "Unable to create competitor member for #{reg}"
       end
     end
     "Created #{num_created} competitors"

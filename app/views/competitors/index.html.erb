@@ -1,5 +1,42 @@
 <h1><%= @competition %> - Competitors</h1>
 
+<%= form_tag(add_competition_competitors_path(@competition), {:method => :post}) do %>
+  <table class="sortable">
+    <thead>
+      <tr>
+        <th>All/None</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Sign Up Details</th>
+        <th>Competitor?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @registrants.each do |reg| %>
+        <tr>
+          <td><%= check_box_tag "registrants[]", reg.id %></td>
+          <td><%= reg.bib_number %></td>
+          <td><%= reg %></td>
+          <td><%= reg.describe_event(@competition.event) %></td>
+          <td>
+            <%
+              competitor = @competition.has_participant(reg)
+              if competitor.nil? %>
+              <b>NO</b>
+            <% else %>
+              Yes (<%= competitor %>)
+            <% end %>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= submit_tag "Create from EACH selected Registrant", :class => "multiclick", :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" %><br />
+  <%= label_tag :group_name, "Group Name" %>
+  <%= text_field_tag :group_name %>
+  <%= submit_tag "Create Group from selected Registrants", :class => "multiclick", :confirm => "This will create a Single competitor for all chosen registrants. Continue?" %>
+<% end %>
+
 <table class="sortable">
   <thead>
     <tr>
@@ -16,6 +53,7 @@
   </thead>
   <tbody>
     <% @competitors.each do |competitor| %>
+      <% next if competitor.new_record? %>
         <% event_category = nil
            registrant = competitor.members.first.registrant
         %>

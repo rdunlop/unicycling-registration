@@ -1,5 +1,5 @@
 class Competitor < ActiveRecord::Base
-    has_many :members
+    has_many :members, :inverse_of => :competitor
     has_many :registrants, :through => :members, :order => "bib_number"
     belongs_to :competition
     acts_as_list :scope => :competition
@@ -17,12 +17,13 @@ class Competitor < ActiveRecord::Base
 
     validates :competition_id, :presence => true
     validates_associated :members
+
     # not all competitor types require a position
     #validates :position, :presence => true,
                          #:numericality => {:only_integer => true, :greater_than => 0}
 
-    after_touch(:touch_places)
-    after_save(:touch_places)
+    #after_touch(:touch_places)
+    #after_save(:touch_places)
 
     def touch_places
       # update the last time for the overall gender

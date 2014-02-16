@@ -6,12 +6,12 @@ describe "competitors/index" do
       @ec = @comp.competition
       assign(:competition, @ec)
       assign(:competitors, [@comp])
-      assign(:all_registrants, [])
+      assign(:registrants, [FactoryGirl.create(:registrant)])
     end
 
-    it "doesn't render new competitor form" do
+    it "renders add competitor form" do
       render
 
-      assert_select "form", :count => 0
+      assert_select "form", :count => 1
     end
 end

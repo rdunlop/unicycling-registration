@@ -1,11 +1,12 @@
 class Member < ActiveRecord::Base
-    belongs_to :competitor, :touch => true
+    belongs_to :competitor, :touch => true, :inverse_of => :members
     belongs_to :registrant
     after_destroy :destroy_orphaned_competitors
 
-    #validates :competitor, :presence => true # removed for spec tests
     validates :registrant_id, :presence => true
     validate :registrant_once_per_event
+
+    #validates :competitor, :presence => true # removed for spec tests
 
     def destroy_orphaned_competitors
         if competitor and competitor.registrants.empty?

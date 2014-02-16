@@ -1,10 +1,11 @@
 require 'csv'
 class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_competition, :only => [:index, :new, :create, :upload, :add_all, :destroy_all, :create_from_sign_ups]
+  before_filter :load_competition, :only => [:index, :new, :create, :add, :upload, :add_all, :destroy_all, :create_from_sign_ups]
   before_filter :load_new_competitor, :only => [:create]
   load_and_authorize_resource
 
+  private
   def load_competition
     @competition = Competition.find(params[:competition_id])
   end
@@ -13,30 +14,54 @@ class CompetitorsController < ApplicationController
     @competitor = @competition.competitors.new(competitor_params)
   end
 
+  public
   # GET /competitions/:competition_id/1/new
   def new
-    @registrants = @competition.event.signed_up_registrants
+    @registrants = @competition.signed_up_registrants
     @competitor = @competition.competitors.new
   end
 
   def create_from_sign_ups
-    @registrants = @competition.event.signed_up_registrants
+    @registrants = @competition.signed_up_registrants
 
-    new_competitors = @registrants.shuffle
-    n = add_registrants(new_competitors)
+    new_registrants = @registrants.shuffle
 
     respond_to do |format|
-      if n > 0
-        format.html { redirect_to new_competition_competitor_path(@competition), notice: "#{n} Competition registrants successfully created." }
-      else
-        format.html { render "new", alert: 'Error adding Registrants (0 added)' }
+      begin
+        msg = @competition.create_competitors_from_registrants(new_registrants)
+        format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
+      rescue Exception => ex
+        format.html { render "new", alert: "Error adding Registrants. #{ex}" }
       end
     end
   end
 
   # GET /competitions/1/competitors
   def index
+    @registrants = @competition.signed_up_registrants
     @competitors = @competition.competitors
+  end
+
+  def add
+    regs = []
+    params[:registrants].each do |reg_id|
+      regs << Registrant.find(reg_id)
+    end
+
+    respond_to do |format|
+      begin
+        if params[:commit] == "Create Group from selected Registrants"
+          msg = @competition.create_competitor_from_registrants(regs, params[:group_name])
+        else
+          msg = @competition.create_competitors_from_registrants(regs)
+        end
+        format.html { redirect_to competition_competitors_path(@competition), notice: msg }
+      rescue Exception => ex
+        index
+        binding.pry
+        format.html { render "index", alert: 'Error adding Registrants (0 added)' }
+      end
+    end
   end
 
   # GET /competitors/1/edit
@@ -46,50 +71,14 @@ class CompetitorsController < ApplicationController
   def add_all
     @competitor = @competition.competitors.new # so that the form renders ok
 
-    n = add_registrants(Registrant.all)
-
     respond_to do |format|
-      if n > 0
-        format.html { redirect_to new_competition_competitor_path(@competition), notice: "#{n} Competition registrants successfully created." }
-      else
-        format.html { render "new", alert: 'Error adding Registrants (0 added)' }
+      begin
+        msg = @competition.create_competitors_from_registrants(Registrant.where(:competitor => true).all)
+        format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
+      rescue Exception => ex
+        format.html { render "new", alert: "Error adding Registrants. #{ex}" }
       end
     end
-  end
-
-  def add_registrants(registrants = [])
-    n = 0
-    current_registrant_external_ids = @competition.registrants.map {|r| r.external_id}
-    registrants.each do |reg|
-      next if reg.nil?
-        if !reg.competitor
-            next
-        end
-        if current_registrant_external_ids.include? reg.external_id
-            #puts "found existing"
-        else
-            comp = @competition.competitors.new
-            # set the position to be 1 more than current positions
-            comp.position = @competition.competitors.count + 1
-            if comp.save
-                #puts "successfully saved competitor"
-                member = comp.members.new
-                member.registrant = reg
-                if member.save
-                    n = n+1
-                else
-                    member.errors.each do |err|
-                        puts "merr: #{err}"
-                    end
-                end
-            else
-                comp.errors.each do |err|
-                    puts "error #{err}"
-                end
-            end
-        end
-    end
-    n
   end
 
   # POST /competitors
@@ -101,6 +90,7 @@ class CompetitorsController < ApplicationController
         format.html { redirect_to competition_competitors_path(@competition), notice: 'Competition registrant was successfully created.' }
         format.json { render json: @competitor, status: :created, location: @competitor }
       else
+        @registrants = @competition.signed_up_registrants
         format.html { render "new", alert: 'Error adding Registrant' }
         format.json { render json: @competitor.errors, status: :unprocessable_entity }
       end
