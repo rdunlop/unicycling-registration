@@ -126,6 +126,7 @@ describe Competitor do
 
             Delorean.jump 2
             member2 = FactoryGirl.create(:member, :competitor => @comp)
+            @comp.reload
             @reg2 = member2.registrant
         end
         it "should display the external id's for all members" do
@@ -151,6 +152,7 @@ describe Competitor do
             Delorean.jump 2
             @reg3 = FactoryGirl.create(:registrant, :gender => "Female")
             member3 = FactoryGirl.create(:member, :competitor => @comp, :registrant => @reg3)
+            @comp.reload
 
             @comp.gender.should == "(mixed)"
         end

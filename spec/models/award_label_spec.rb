@@ -49,6 +49,7 @@ describe AwardLabel do
     it "displays both names if in a pair" do
       @reg2 = FactoryGirl.create(:competitor, :first_name => "Bob", :last_name => "Smith")
       FactoryGirl.create(:member, :competitor => @comp, :registrant => @reg2)
+      @comp.reload
 
       @al.populate_from_competitor(@comp, @reg)
       @al.line_1.should == "#{@reg.first_name} #{@reg.last_name} & #{@reg2.first_name} #{@reg2.last_name}"

@@ -22,8 +22,8 @@ class Competitor < ActiveRecord::Base
     #validates :position, :presence => true,
                          #:numericality => {:only_integer => true, :greater_than => 0}
 
-    #after_touch(:touch_places)
-    #after_save(:touch_places)
+    after_touch(:touch_places)
+    after_save(:touch_places)
 
     def touch_places
       # update the last time for the overall gender
@@ -182,22 +182,29 @@ class Competitor < ActiveRecord::Base
     end
 
     def age
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/age") do
-        if registrants.empty?
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/age") do
+        if members.empty?
           "(No registrants)"
         else
-          ages = registrants.map(&:age)
+          ages = []
+          members.each do |m|
+            ages << m.registrant.age
+          end
           ages.max
         end
       end
     end
 
     def gender
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/gender") do
-        if registrants.empty?
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/gender") do
+        if members.empty?
           "(No registrants)"
         else
-          genders = registrants.map(&:gender)
+          genders = []
+          members.each do |m|
+            genders << m.registrant.gender
+          end
+          # display mixed if there are more than 1 registrants
           if genders.count > 1
             "(mixed)"
           else
@@ -208,7 +215,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def wheel_size
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/wheel_size_id") do
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/wheel_size_id") do
         if registrants.empty?
           nil
         else
@@ -218,7 +225,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def ineligible
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/ineligible") do
         if registrants.empty?
           false
         else
