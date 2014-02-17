@@ -32,7 +32,7 @@ class Judge < ActiveRecord::Base
     end
 
     def name
-        user.email
+        user
     end
 
     def event
@@ -40,8 +40,9 @@ class Judge < ActiveRecord::Base
     end
 
     def to_s
-        name
+        name + "(" + judge_type + ")"
     end
+
     def get_scores
         if competition.event_class == "Street"
             self.street_scores
