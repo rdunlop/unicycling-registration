@@ -32,7 +32,7 @@ class Judge < ActiveRecord::Base
     end
 
     def name
-        user
+        user.to_s
     end
 
     def event
