@@ -40,7 +40,7 @@ class Judge < ActiveRecord::Base
     end
 
     def to_s
-        name + "(" + judge_type + ")"
+        name + "(" + judge_type.to_s + ")"
     end
 
     def get_scores
