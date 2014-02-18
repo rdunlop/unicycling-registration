@@ -9,6 +9,18 @@
 
   <%= f.submit %>
 <% end %>
+Members:
+<ul>
+  <% @competitor.members.each do |member| %>
+    <li><%= member.registrant %> <%= link_to 'Destroy', member_path(member), :method => :delete %></li>
+  <% end %>
+</ul>
+
+<%= form_tag(competitor_members_path(@competitor), :method => :post) do %>
+  <%= select_tag :registrant_id, options_from_collection_for_select(Registrant.where(:competitor => true).order(:bib_number).all, "id", "with_id_to_s"), :include_blank => true %>
+
+  <%= submit_tag "Create new Member" %>
+<% end %>
 
 <%= link_to "Back", competition_competitors_path(@competitor.competition) %>
 

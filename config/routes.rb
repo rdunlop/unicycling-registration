@@ -236,7 +236,10 @@ Workspace::Application.routes.draw do
     ### For event-data-gathering/reporting purposes
     ###############################################
 
-    resources :competitors, :only => [:edit, :update, :destroy]
+    resources :competitors, :only => [:edit, :update, :destroy] do
+      resources :members, :shallow => true, :only => [:create, :destroy]
+    end
+
     resources :competitions, :except => [:index, :create, :new] do
       member do
         put :populate
