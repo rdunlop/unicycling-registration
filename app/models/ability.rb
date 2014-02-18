@@ -69,7 +69,9 @@ class Ability
       end
 
       if user.has_role? :chief_judge, :any
-        can :freestyle, Event
+        can :read, Event do |ev|
+          user.has_role? :chief_judge, ev
+        end
         can :sign_ups, EventCategory do |ec|
           user.has_role? :chief_judge, ec.event
         end
@@ -79,19 +81,24 @@ class Ability
         can :manage, Competition do |comp|
           user.has_role? :chief_judge, comp.event
         end
+
+        can :manage, Member do |member|
+          user.has_role? :chief_judge, member.competitor.event
+        end
+        can :manage, ImportResult do |import_result|
+          user.has_role? :chief_judge, import_result.competition.event
+        end
+        can :manage, TimeResult do |time_result|
+          user.has_role? :chief_judge, time_result.competition.event
+        end
       end
 
       if user.has_role? :chief_judge, :any or user.has_role? :admin
-        can :manage, Judge
+        can :manage, Judge do |judge|
+          (user.has_role? :chief_judge, judge.competition.event or user.has_role? :admin)
+        end
       end
 
-      # score Summaries
-      can :freestyle_scores, Competition do |ev|
-        user.has_role?(:chief_judge, ev)
-      end
-      can :distance_attempts, Competition do |ev|
-        user.has_role?(:chief_judge, ev)
-      end
 
       # Payment
       can :summary, Payment if (user.has_role? :payment_admin)

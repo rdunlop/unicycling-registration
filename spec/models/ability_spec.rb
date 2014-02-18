@@ -195,7 +195,6 @@ describe "Ability" do
     end
     subject { @ability = Ability.new(@user) }
 
-    it { should be_able_to(:freestyle, Event) }
     it { should be_able_to(:distance_attempts, @competition) }
     it { should be_able_to(:freestyle_scores, @competition) }
     it { should be_able_to(:manage, @competition) }

@@ -78,14 +78,14 @@
     <%
       heading = Menu::MenuHeading.new(:title => 'Judging (old)')
       m.headings << heading
-      heading.entries << Menu::MenuEntry.new(:title => 'Printing', :url => printing_race_recording_list_path, :active => current_page?(printing_race_recording_list_path), :permitted => can?(:freestyle, Event))
+      heading.entries << Menu::MenuEntry.new(:title => 'Printing', :url => printing_race_recording_list_path, :active => current_page?(printing_race_recording_list_path), :permitted => (current_user.has_role? :super_admin))
     %>
     <%
       Category.all.each do |category|
         current_heading = Menu::MenuHeading.new(:title => category)
         m.headings << current_heading
         category.events.each do |event|
-          current_heading.entries << Menu::MenuEntry.new(:title => event, :url => event_path(event), :active => current_page?(event_path(event)), :permitted => can?(:manage, event))
+          current_heading.entries << Menu::MenuEntry.new(:title => event, :url => event_path(event), :active => current_page?(event_path(event)), :permitted => can?(:read, event))
         end
       end
     %>
