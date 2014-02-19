@@ -11,10 +11,10 @@
  *= require_self
  */
 .page-break { display:block; clear:both; page-break-after:always; }
-@media print
+@media all
 {
   /* this allows the pdf to render the font, since 'Open Sans' doesn't seem to work */
-  body,p, ol, ul, td {
+  body, p, ol, ul, td {
     font-family: sans-serif;
   }
   .dev_banner {

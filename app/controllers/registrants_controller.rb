@@ -44,8 +44,11 @@ class RegistrantsController < ApplicationController
   def index
     if params[:user_id].nil?
       authorize! :manage_all, Registrant
-      @registrants = Registrant.unscoped.all
-      render "index_all"
+      all_index
+      respond_to do |format|
+        format.html { render "index_all" }
+        format.pdf { render :pdf => "index_all", :template => "registrants/index_all.html.erb", :formats => [:html], :layout => "pdf.html" }
+      end
     else
       @my_registrants = current_user.registrants
       @shared_registrants = current_user.accessible_registrants - @my_registrants
@@ -67,6 +70,11 @@ class RegistrantsController < ApplicationController
   # GET /registrants/all
   def all
     @registrants = Registrant.order(:bib_number)
+
+    respond_to do |format|
+      format.html # all.html.erb
+      format.pdf { render :pdf => "all", :formats => [:html], :orientation => 'Landscape', :layout => "pdf.html" }
+    end
   end
 
   # GET /registrants/empty_waiver

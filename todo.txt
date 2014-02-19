@@ -7,6 +7,9 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
+- permissions#index performance issues, due to lack of index of role_id?
+ - add other new missing indexes?
+- add warning on the "Registrants (edit)" page for any registrant which is "Not Valid"
 - remove all "skip_authorization_check" calls, so that we don't leak information inadventently
 - scoring freestyle "Back" button brings me nowhere
 - figure out why error message (unable to add registrant 2x) isn't being displayed.
