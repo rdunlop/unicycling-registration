@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Competitor do
+  before(:each) do
+    @comp = FactoryGirl.create(:event_competitor)
+  end
+
     it "should join a registrant and a event" do
         reg = FactoryGirl.create(:registrant)
 
@@ -35,63 +39,58 @@ describe Competitor do
         comps[1].position.should == 2
     end
     it "should have name/id from the registrant" do
-      comp = FactoryGirl.create(:event_competitor)
-      reg  = comp.registrants.first
+      reg  = @comp.registrants.first
 
-      comp.name.should == reg.name
-      comp.external_id.should == reg.external_id.to_s
+      @comp.name.should == reg.name
+      @comp.external_id.should == reg.external_id.to_s
     end
     it "should be elgiible" do
-      comp = FactoryGirl.create(:event_competitor)
-      comp.ineligible.should == false
+      @comp.ineligible.should == false
     end
     it "should allow setting the custom_external_id to nil" do
-      comp = FactoryGirl.build(:event_competitor)
-      comp.custom_external_id = nil
-      comp.save.should == true
+      @comp.custom_external_id = nil
+      @comp.valid?.should == true
     end
     it "should not set the external id or external name if they are blank-string" do
-      comp = FactoryGirl.create(:event_competitor, :custom_external_id => "", :custom_name => "")
-      reg = comp.registrants.first
+      @comp.custom_external_id = ""
+      @comp.custom_name = ""
+      reg = @comp.registrants.first
 
-      comp.external_id.should == reg.external_id.to_s
-      comp.name.should == reg.name
+      @comp.external_id.should == reg.external_id.to_s
+      @comp.name.should == reg.name
     end
     it "should allow setting the custom_name to nil" do
-      comp = FactoryGirl.build(:event_competitor)
-      comp.custom_name = nil
-      comp.save.should == true
+      @comp.custom_name = nil
+      @comp.valid?.should == true
     end
     it "when the custom_external_id is set, return it instead of registrants'" do
-      comp = FactoryGirl.create(:event_competitor)
-      comp.external_id.should == comp.registrants.first.external_id.to_s
+      @comp.external_id.should == @comp.registrants.first.external_id.to_s
 
-      comp.custom_external_id = 12345
-      comp.external_id.should == "12345"
+      @comp.custom_external_id = 12345
+      @comp.external_id.should == "12345"
     end
-    it "when the custom_name is set, return it instead of registrants'" do
-      comp = FactoryGirl.create(:event_competitor)
-      comp.name.should == comp.registrants.first.name
-
-      comp.custom_name = "Sargent Pepper"
-      comp.name.should == "Sargent Pepper"
+    it "must have 3 competitors to allow a custom name" do
+      @comp.custom_name = "Sargent Pepper"
+      @comp.valid?.should == false
+      member2 = @comp.members.build
+      member3 = @comp.members.build
+      member2.registrant = FactoryGirl.create(:registrant)
+      member3.registrant = FactoryGirl.create(:registrant)
+      @comp.valid?.should == true
+      @comp.valid?.should == true
+      @comp.name.should == "Sargent Pepper"
     end
     it "setting the same position for another competitor should modify the original competitor" do
-        comp = FactoryGirl.create(:event_competitor)
-        
-        c2 = FactoryGirl.build(:event_competitor, :competition => comp.competition, :position => comp.position)
+        c2 = FactoryGirl.build(:event_competitor, :competition => @comp.competition, :position => @comp.position)
 
         c2.valid?.should == true
         c2.save.should == true
 
 
-        comp_again = Competitor.find(comp.id)
+        comp_again = Competitor.find(@comp.id)
         comp_again.position.should_not == c2.position
     end
     describe "when checking the export_id field" do
-        before(:each) do
-            @comp = FactoryGirl.create(:event_competitor)
-        end
         it "should return the registrant when only one" do
             @comp.export_id.should == @comp.registrants.first.external_id
         end
@@ -108,19 +107,17 @@ describe Competitor do
     end
 
     it "should have a name, even without any registrants" do
-        comp = FactoryGirl.create(:event_competitor)
-        member = comp.members(true).first
+        member = @comp.members(true).first
 
         member.destroy
 
-        comp.name.should == "(No registrants)"
-        comp.external_id.should == "(No registrants)"
+        @comp.name.should == "(No registrants)"
+        @comp.external_id.should == "(No registrants)"
     end
 
     describe "when it has multiple members" do
         before(:each) do
             FactoryGirl.create(:event_configuration, :start_date => Date.new(2010,01,01))
-            @comp = FactoryGirl.create(:event_competitor)
             member = @comp.members(true).first
             @reg1 = member.registrant
 
@@ -138,10 +135,11 @@ describe Competitor do
         it "should display the maximum ages for all members (when they are different)" do
             Delorean.jump 2
             @reg3 = FactoryGirl.create(:registrant, :birthday => Date.new(1980, 02, 10))
-            member3 = FactoryGirl.create(:member, :competitor => @comp, :registrant => @reg3)
-            @comp.reload
+            @comp2 = FactoryGirl.create(:event_competitor)
+            member3 = FactoryGirl.create(:member, :competitor => @comp2, :registrant => @reg3)
+            @comp2.reload
 
-            @comp.age.should == @reg3.age
+            @comp2.age.should == @reg3.age
         end
         it "should display '(mixed)', if there are multiple members (even if they are the same gender)" do
           # this is so that the overall placing calculation works properly with mixed-gender groups
@@ -234,10 +232,6 @@ describe Competitor do
     end
   end
   describe "with a street_score" do
-    before(:each) do
-      @comp = FactoryGirl.create(:event_competitor)
-    end
-
     it "should be createable from the competitor" do
         @comp.street_scores.create.should be_a_new(StreetScore)
     end
@@ -249,7 +243,6 @@ describe Competitor do
   end
   describe "with a distance attempt" do
     before(:each) do
-      @comp = FactoryGirl.create(:event_competitor)
       @da = DistanceAttempt.new
     end
     it "should be accessible from the competitor" do
@@ -313,7 +306,6 @@ describe Competitor do
 
     describe "when attempts have already been made" do
       before (:each) do
-        @comp = FactoryGirl.create(:event_competitor)
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 10, :fault => false)
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
       end
@@ -375,14 +367,13 @@ describe Competitor do
 
   describe "with an ineligible registrant" do
     before(:each) do
-      @competitor = FactoryGirl.create(:event_competitor)
-      @reg = @competitor.registrants(true).first
+      @reg = @comp.registrants(true).first
       @reg.ineligible = true
       @reg.save!
     end
 
     it "should be ineligible itself" do
-      @competitor.ineligible.should == true
+      @comp.ineligible.should == true
     end
   end
 end

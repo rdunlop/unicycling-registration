@@ -8,9 +8,8 @@ Registration-Related ToDo
 
 Most Useful:
 - permissions#index performance issues, due to lack of index of role_id?
- - add other new missing indexes?
-- add warning on the "Registrants (edit)" page for any registrant which is "Not Valid"
 - remove all "skip_authorization_check" calls, so that we don't leak information inadventently
+- add warning on the "Registrants (edit)" page for any registrant which is "Not Valid"
 - scoring freestyle "Back" button brings me nowhere
 - figure out why error message (unable to add registrant 2x) isn't being displayed.
 - make JS for the competitors#index page for "select all/none"
@@ -19,7 +18,6 @@ Most Useful:
  - Allow choosing the 20" wheel size for 0-10 for 10k.
 
 
-- Associate competitions with filters (intsead of ephemerally)
 - Add "source filter" for a competition to be based on the "final candidates" of another competition
 - remove unnecessary competitions#show
 - Update the wiki to better describe the scoring_helper, and other filters

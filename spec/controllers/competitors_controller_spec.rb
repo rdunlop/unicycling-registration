@@ -82,8 +82,11 @@ describe CompetitorsController do
         response.should redirect_to(competition_competitors_path(@ec))
       end
       it "can create with custom external id and name" do
+        reg1 = FactoryGirl.create(:competitor)
+        reg2 = FactoryGirl.create(:competitor)
+        reg3 = FactoryGirl.create(:competitor)
         expect {
-          post :create, {:competitor => valid_attributes.merge({custom_external_id: 101, custom_name: 'Robin Rocks!'}), :competition_id => @ec.id}
+          post :create, {:competitor => valid_attributes.merge({registrant_ids: [reg1.id, reg2.id, reg3.id], custom_external_id: 101, custom_name: 'Robin Rocks!'}), :competition_id => @ec.id}
         }.to change(Competitor, :count).by(1)
       end
     end
@@ -265,17 +268,6 @@ describe CompetitorsController do
         @reg6.competitors.count.should == 1
         @reg7.competitors.count.should == 1
         @reg8.competitors.count.should == 1
-    end
-    it "sets the registrants for Group" do
-        test_image = fixture_path + '/sample_group_freestyle.txt'
-        sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
-
-        post :upload, {:competition_id => @ec.id, :import => {:file => sample_input}}
-
-        Competitor.count.should == 5
-        c1 = Competitor.where({:custom_name => "CIRK-oN-CyCle"}).first
-        c1.export_id.should == 3023
-        c1.name.should == "CIRK-oN-CyCle"
     end
   end
 

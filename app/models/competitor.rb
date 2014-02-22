@@ -17,6 +17,7 @@ class Competitor < ActiveRecord::Base
 
     validates :competition_id, :presence => true
     validates_associated :members
+    validate :must_have_3_members_for_custom_name
 
     # not all competitor types require a position
     #validates :position, :presence => true,
@@ -36,6 +37,12 @@ class Competitor < ActiveRecord::Base
         Rails.cache.write(age_group_key, 0)
       end
       Rails.cache.increment(age_group_key, 1)
+    end
+
+    def must_have_3_members_for_custom_name
+      if registrants.size < 3 and !custom_name.blank?
+        errors[:base] << "Must have at least 3 members to specify a custom name"
+      end
     end
 
     def to_s

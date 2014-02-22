@@ -58,7 +58,6 @@ class CompetitorsController < ApplicationController
         format.html { redirect_to competition_competitors_path(@competition), notice: msg }
       rescue Exception => ex
         index
-        binding.pry
         format.html { render "index", alert: 'Error adding Registrants (0 added)' }
       end
     end
@@ -187,16 +186,6 @@ class CompetitorsController < ApplicationController
             else
                 return
             end
-        else
-            # Group freestyle-format
-            # format: order,group_id,group_name
-            # sample rows:
-            #2,3019,undesided
-            #3,3020,Hino
-            #4,3017,israel unicycle org
-            comp = @competition.competitors.create(:position => row[0].to_i)
-            comp.custom_external_id = row[1]
-            comp.custom_name = row[2]
         end
       end
 
