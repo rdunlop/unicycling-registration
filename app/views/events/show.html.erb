@@ -1,4 +1,4 @@
-<h1><%= @event %></h1>
+<h1>Manage <%= @event %> Competitions</h1>
 <hr />
 
 <h2>Chief Judges</h2>
@@ -70,7 +70,6 @@
       <th># Competitors</th>
       <th>Manage</th>
       <th>Competitor List</th>
-      <th>Update Competitor List</th>
     </tr>
   </thead>
 
@@ -83,8 +82,7 @@
           <%= link_to 'Edit', edit_competition_path(competition) %>
           <%= link_to 'Destroy',  competition_path(competition), :method => :delete, :confirm => "Are you sure you want to destroy the COMPETITION?" %>
         </td>
-        <td><%= link_to 'Competitors', competition_competitors_path(competition) %></td>
-        <td><%= link_to 'Populate', populate_competition_path(competition), :method => :put, :confirm => "Work in progress. Proceed?" %></td>
+        <td><%= link_to 'Manage Competitors', competition_competitors_path(competition) %></td>
 
       </tr>
     <% end %>

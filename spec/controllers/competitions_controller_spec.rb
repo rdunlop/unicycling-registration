@@ -118,44 +118,6 @@ describe CompetitionsController do
 
   end
 
-  describe "PUT poulate" do
-    before(:each) do
-      @competition = FactoryGirl.create(:competition, :event => @event)
-    end
-    it "can populate a competition" do
-      put :populate, {:id => @competition.id}
-      response.should redirect_to(event_path(@event))
-    end
-    describe "When the event has a registrant signed up" do
-      before(:each) do
-        @reg = FactoryGirl.create(:competitor, :gender => "Male")
-        FactoryGirl.create(:registrant_event_sign_up, :event => @event, :event_category => @event_category, :signed_up => true, :registrant => @reg)
-        @source = FactoryGirl.create(:competition_source, :gender_filter => "Both", :target_competition => @competition, :event_category => @event_category)
-      end
-
-      it "creates a new competitor" do
-        expect {
-          put :populate, {:id => @competition.id }
-        }.to change(Competitor, :count).by(1)
-      end
-      it "does create the competitor if the gender_filter is set to the gender" do
-        expect {
-          @source.gender_filter = "Male"
-          @source.save!
-          put :populate, {:id => @competition.id }
-        }.to change(Competitor, :count).by(1)
-      end
-
-      it "doesn't create the competitor if the gender_filter is set to the other gender" do
-        expect {
-          @source.gender_filter = "Female"
-          @source.save!
-          put :populate, {:id => @competition.id }
-        }.to change(Competitor, :count).by(0)
-      end
-    end
-  end
-
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested competition" do

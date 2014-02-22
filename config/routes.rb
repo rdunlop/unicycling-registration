@@ -242,7 +242,6 @@ Workspace::Application.routes.draw do
 
     resources :competitions, :except => [:index, :create, :new] do
       member do
-        put :populate
         post :set_places
         get :export_scores
         # view scores
@@ -259,7 +258,6 @@ Workspace::Application.routes.draw do
           post :upload
           post :add_all
           delete :destroy_all
-          post :create_from_sign_ups
         end
       end
 

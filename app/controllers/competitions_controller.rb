@@ -70,20 +70,6 @@ class CompetitionsController < ApplicationController
     end
   end
 
-  # PUT /competitions/#/populate
-  def populate
-    registrants = @competition.signed_up_registrants
-
-    registrants = registrants.shuffle
-
-    respond_to do |format|
-      message = @competition.create_competitors_from_registrants(registrants)
-
-      format.html { redirect_to event_path(@competition.event), notice:  message }
-      format.json { render json: @competition, status: :created, location: competition_competitors_path(@event) }
-    end
-  end
-
   # PUT /competitions/1
   # PUT /competitions/1.json
   def update

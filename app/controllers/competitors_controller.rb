@@ -21,21 +21,6 @@ class CompetitorsController < ApplicationController
     @competitor = @competition.competitors.new
   end
 
-  def create_from_sign_ups
-    @registrants = @competition.signed_up_registrants
-
-    new_registrants = @registrants.shuffle
-
-    respond_to do |format|
-      begin
-        msg = @competition.create_competitors_from_registrants(new_registrants)
-        format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
-      rescue Exception => ex
-        format.html { render "new", alert: "Error adding Registrants. #{ex}" }
-      end
-    end
-  end
-
   # GET /competitions/1/competitors
   def index
     @registrants = @competition.signed_up_registrants
