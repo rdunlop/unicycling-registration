@@ -7,7 +7,7 @@
   <table class="sortable">
     <thead>
       <tr>
-        <th>All/None</th>
+        <th><a href="#" id="competitor_select_all">All</a>/<a href="#" id="competitor_unselect_all">None</a></th>
         <th>ID</th>
         <th>Name</th>
         <th>Sign Up Details</th>
@@ -17,7 +17,7 @@
     <tbody>
       <% @registrants.each do |reg| %>
         <tr>
-          <td><%= check_box_tag "registrants[]", reg.id %></td>
+          <td><%= check_box_tag "registrants[]", reg.id, true, :class => "registrant_checkbox" %></td>
           <td><%= reg.bib_number %></td>
           <td><%= reg %></td>
           <td><%= reg.describe_event(@competition.event) %></td>
