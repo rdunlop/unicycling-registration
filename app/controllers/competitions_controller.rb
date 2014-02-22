@@ -10,6 +10,7 @@ class CompetitionsController < ApplicationController
 
   load_and_authorize_resource
 
+  private
   def load_new_competition
     @competition = Competition.new(competition_params)
     params[:id] = 1 if params[:id].nil? #necessary due to bug in the way that cancan does authorization check
@@ -18,12 +19,14 @@ class CompetitionsController < ApplicationController
   def load_event
     @event = Event.find(params[:event_id])
     # required in order to set up the 'new' element
+    @competition = Competition.new if @competition.nil?
     @competition.event = @event unless @competition.nil?
   end
 
   def load_competitions
     @competitions = @event.competitions
   end
+  public
 
   # /events/#/competitions/new
   def new

@@ -7,6 +7,7 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
+- prevent chief_judges from creating/editing competitions?
 - learn more about acts_as_list for position usage (for competitor#position)
 - prevent sorting when clicking all/none on competitors#index page
 - create ability to "randomize current competitors" and "specify competitor positions"
