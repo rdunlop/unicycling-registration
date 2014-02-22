@@ -71,6 +71,16 @@ describe Competition do
     end
   end
 
+  it "can create a competitor from registrants" do
+    regs = [FactoryGirl.create(:competitor),
+      FactoryGirl.create(:competitor),
+      FactoryGirl.create(:competitor)]
+    @ec.create_competitor_from_registrants(regs, "Robin's Team")
+    comp = Competitor.last
+    comp.members.count.should == 3
+    comp.name.should == "Robin's Team"
+  end
+
   it "has an event" do
     @ec.event.should == @ev
   end

@@ -57,6 +57,7 @@ class Competition < ActiveRecord::Base
   def create_competitor_from_registrants(registrants, name)
     competitor = competitors.build
     competitor.position = competitors.count + 1
+    competitor.custom_name = name
     registrants.each do |reg|
       member = competitor.members.build
       member.registrant = reg

@@ -40,7 +40,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def must_have_3_members_for_custom_name
-      if registrants.size < 3 and !custom_name.blank?
+      if (registrants.size < 3 and members.size < 3) and !custom_name.blank?
         errors[:base] << "Must have at least 3 members to specify a custom name"
       end
     end
