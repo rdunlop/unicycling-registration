@@ -1,6 +1,9 @@
-<h1><%= @competition %> - Competitors</h1>
+<h1><%= @competition %> - Manage Competitors</h1>
+
+<p>Please choose the registrants that you would like from the following list, and create competitors from those registrants. All registrants should be associated with competitors</p>
 
 <%= form_tag(add_competition_competitors_path(@competition), {:method => :post}) do %>
+  <caption>Signed-up registrants</caption>
   <table class="sortable">
     <thead>
       <tr>
@@ -32,12 +35,14 @@
     </tbody>
   </table>
   <%= submit_tag "Create from EACH selected Registrant", :class => "multiclick", :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" %><br />
-  <%= label_tag :group_name, "Group Name" %>
-  <%= text_field_tag :group_name %>
   <%= submit_tag "Create Group from selected Registrants", :class => "multiclick", :confirm => "This will create a Single competitor for all chosen registrants. Continue?" %>
+  <%= text_field_tag :group_name, nil, :placeholder => "Group Name" %>
 <% end %>
 
+<hr />
+
 <table class="sortable">
+  <caption>Competitors</caption>
   <thead>
     <tr>
       <th class="competitor_member">Order</th>
@@ -79,5 +84,8 @@
   </tbody>
 </table>
 
-<%= link_to 'Upload or Create Competitor', new_competition_competitor_path(@competition) %><br />
+<hr />
+
+Advanced Options: <%= link_to 'Upload or Create Competitor', new_competition_competitor_path(@competition) %><br />
+
 <%= link_to "Back", event_path(@competition.event) %>
