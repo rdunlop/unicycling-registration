@@ -226,7 +226,7 @@
   <li>Event Results Summary pdf
   <ul>
     <li><%= link_to "View", results_printing_event_path(@event, :format => :pdf) %></li>
-    <li><%= link_to "Save", save_printing_event_path(@event, :format => :pdf) %></li>
+    <li><%= link_to "Save", results_printing_event_path(@event, :format => :pdf, :attachment => true) %></li>
   </ul>
   </li>
 </ul>

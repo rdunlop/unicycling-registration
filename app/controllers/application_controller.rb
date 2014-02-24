@@ -42,7 +42,13 @@ class ApplicationController < ActionController::Base
     {:left => '[date] [time]', :center => @config.short_name, :right => 'Page [page] of [topage]'}
   end
 
-  def render_common_pdf(view_name, orientation = "Portrait", disposition = "inline")
+  def render_common_pdf(view_name, orientation = "Portrait", attachment = false)
+    if attachment
+      disposition = "attachment"
+    else
+      disposition = "inline"
+    end
+
     render :pdf => view_name, 
       :print_media_type => true, 
       :margin => {:top => 2, :left => 2, :right => 2}, 

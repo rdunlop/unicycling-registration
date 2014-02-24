@@ -22,13 +22,11 @@ Workspace::Application.routes.draw do
           get :heat_recording
           get :two_attempt_recording
           get :results
-          get :save
         end
       end
       resources :events, :only => [] do
         member do
           get :results
-          get :save
         end
       end
     end

@@ -18,7 +18,7 @@
     <tr>
       <td><%= event %></td>
       <td><%= link_to "View", results_printing_event_path(event, :format => :pdf) %></td>
-      <td><%= link_to "Save", save_printing_event_path(event, :format => :pdf) %></td>
+      <td><%= link_to "Save", results_printing_event_path(event, :format => :pdf, :attachment => true) %></td>
     </tr>
   <% end %>
   </tbody>

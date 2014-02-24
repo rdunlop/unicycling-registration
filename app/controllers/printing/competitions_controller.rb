@@ -43,22 +43,12 @@ class Printing::CompetitionsController < ApplicationController
     @results_list = @competition.results_list
 
     @no_page_breaks = true unless params[:no_page_breaks].nil?
+    name = "#{EventConfiguration.short_name.tr(" ", "_")}_#{@competition.name.tr(" ", "_")}_results"
+    attachment = true unless params[:attachment].nil?
 
     respond_to do |format|
       format.html 
-      format.pdf { render_common_pdf("results", "Portrait") }
-    end
-  end
-
-  def save
-    @age_group_entries = @competition.age_group_entries
-    @results_list = @competition.results_list
-
-    @no_page_breaks = true #unless params[:no_page_breaks].nil?
-
-    respond_to do |format|
-      format.html 
-      format.pdf { render :pdf => "#{EventConfiguration.short_name.tr(" ", "_")}_#{@competition.name.tr(" ", "_")}_results", :formats => [:html], :orientation => 'Portrait', :layout => "pdf.html", :disposition => "attachment" }
+      format.pdf { render_common_pdf("results", "Portrait", attachment) }
     end
   end
 end
