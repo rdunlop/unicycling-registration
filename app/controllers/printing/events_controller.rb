@@ -1,6 +1,6 @@
 class Printing::EventsController < ApplicationController
   before_filter :authenticate_user!
-  skip_authorization_check
+  authorize_resource :event, :parent => false
 
   before_filter :load_event
 

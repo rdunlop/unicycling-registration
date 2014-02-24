@@ -69,7 +69,7 @@ class Ability
       end
 
       if user.has_role? :chief_judge, :any
-        can :read, Event do |ev|
+        can [:read, :results, :save], Event do |ev|
           user.has_role? :chief_judge, ev
         end
         can :sign_ups, EventCategory do |ec|

@@ -1,6 +1,5 @@
 class StreetScoresController < ApplicationController
   before_filter :authenticate_user!
-  skip_authorization_check
   before_filter :load_competition, :except => [:destroy]
 
   def load_competition

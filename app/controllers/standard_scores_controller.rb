@@ -1,6 +1,5 @@
 class StandardScoresController < ApplicationController
   before_filter :authenticate_user!
-  skip_authorization_check
 
   before_filter :find_judge
   before_filter :find_competitor, :except => [:index]
