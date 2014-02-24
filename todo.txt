@@ -13,7 +13,6 @@ Most Useful:
 - prevent sorting when clicking all/none on competitors#index page
 - create ability to "randomize current competitors" and "specify competitor positions"
 - permissions#index performance issues, due to lack of index of role_id?
-- remove all "skip_authorization_check" calls, so that we don't leak information inadventently
 - add warning on the "Registrants (edit)" page for any registrant which is "Not Valid"
 - scoring freestyle "Back" button brings me nowhere
 - figure out why error message (unable to add registrant 2x) isn't being displayed.
