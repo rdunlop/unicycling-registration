@@ -63,6 +63,22 @@ class EventsController < ApplicationController
     end
   end
 
+  # POST /events/1/create_chief
+  def create_chief
+    user = User.find(params[:user_id])
+    user.add_role(:chief_judge, @event)
+
+    redirect_to event_path(@event), notice: 'Created Chief Judge'
+  end
+
+  # DELETE /events/1/destroy_chief
+  def destroy_chief
+    user = User.find(params[:user_id])
+    user.remove_role(:chief_judge, @event)
+
+    redirect_to event_path(@event), notice: 'Removed Chief Judge'
+  end
+
   # PUT /events/1
   # PUT /events/1.json
   def update

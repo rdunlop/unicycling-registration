@@ -11,7 +11,7 @@
     <tbody>
         <% @events.each do |event| %>
             <tr>
-                <td><%= event %></td>
+                <td><%= link_to event, event_path(event) %></td>
                 <td>
                   <% User.with_role(:chief_judge, event).each do |user| %>
                     <%= user %>
@@ -21,9 +21,3 @@
         <% end %>
     </tbody>
 </table>
-
-<%= form_tag(create_chief_judges_path, :method => "post") do |f| %>
-  <%= select_tag :event_id, options_from_collection_for_select(Event.all, "id", "name") %>
-  <%= select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s") %>
-  <%= submit_tag "Add Chief", :class => "focus_button" %>
-<% end %>

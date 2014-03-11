@@ -36,10 +36,10 @@ describe EventsController do
   end
 
   describe "as a normal user" do
-    before(:each) do 
+    before(:each) do
       @user = FactoryGirl.create(:user)
-      sign_in @user 
-    end   
+      sign_in @user
+    end
 
     it "Cannot read events" do
       get :index, {:category_id => @category.id}
@@ -89,9 +89,9 @@ describe EventsController do
         post :create, {
           :category_id => @category.id,
           :event => {:name => "Sample Event",
-          :event_categories_attributes => [ 
-            { 
-            :name => "The Categorie", 
+          :event_categories_attributes => [
+            {
+            :name => "The Categorie",
             :position => 1
         }] }}
         ev = Event.last
@@ -114,6 +114,25 @@ describe EventsController do
         post :create, {:event => {:name => "event"}, :category_id => @category.id}
         response.should render_template("index")
       end
+    end
+  end
+
+  describe "POST create_chief" do
+    it "creates a new chief judge" do
+      user = FactoryGirl.create(:user)
+      event = FactoryGirl.create(:event)
+      post :create_chief, {:user_id => user.id, :id => event.id}
+      User.with_role(:chief_judge, event).should == [user]
+    end
+  end
+
+  describe "DELETE chief" do
+    it "can delete a chief_judge" do
+      user = FactoryGirl.create(:user)
+      event = FactoryGirl.create(:event)
+      user.add_role :chief_judge, event
+      delete :destroy_chief, {:user_id => user.id, :id => event.id}
+      User.with_role(:chief_judge, event).should == []
     end
   end
 

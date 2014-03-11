@@ -108,14 +108,6 @@ describe JudgesController do
     end
   end
 
-  describe "POST create_chief" do
-    it "creates a new chief judge" do
-        user = FactoryGirl.create(:user)
-        event = FactoryGirl.create(:event)
-        post :create_chief, {:user_id => user.id, :event_id => event.id}
-        User.with_role(:chief_judge, event).should == [user]
-    end
-  end
   describe "GET chiefs" do
     it "displays the chiefs" do
       get :chiefs
@@ -136,7 +128,7 @@ describe JudgesController do
       get :index, {:competition_id  => @ec}
       assigns(:judges).should == [@judge]
     end
-    
+
     it "has a blank judge" do
       get :index, {:competition_id  => @ec}
       assigns(:judge).should be_a_new(Judge)

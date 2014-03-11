@@ -93,14 +93,6 @@ class JudgesController < ApplicationController
     @events = Event.all
   end
 
-  def create_chief
-    ev = Event.find(params[:event_id])
-    user = User.find(params[:user_id])
-    user.add_role(:chief_judge, ev)
-
-    redirect_to chiefs_judges_path, notice: 'Created Chief Judge'
-  end
-
   private
   def judge_params
     params.require(:judge).permit(:judge_type_id, :user_id, :standard_execution_scores_attributes, :standard_difficulty_scores_attributes)
