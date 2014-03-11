@@ -71,6 +71,7 @@ class CategoriesController < ApplicationController
 
   private
   def category_params
-    params.require(:category).permit(:name, :position, :info_url)
+    params.require(:category).permit(:name, :position, :info_url,
+                                     :translations_attributes => [:id, :locale, :name])
   end
 end

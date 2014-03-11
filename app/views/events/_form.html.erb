@@ -28,10 +28,11 @@
     <%= f.check_box :visible  %>
   </div>
   <h2>Event Categories</h2>
+  Specify any choices that the user may make.
   <%= f.fields_for :event_categories do |ec| %>
     <div>
       <%= ec.label :name %><br />
-      <%= ec.text_field :name %>
+      <%= ec.text_field :name %><br /> (specify 'All' if there is only 1 category)
     </div>
     <div>
       <%= ec.label :position %><br />

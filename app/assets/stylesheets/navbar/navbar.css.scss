@@ -23,6 +23,7 @@ body {
    padding-bottom:$footer_height;   /* Height of the footer */
    text-align: center;
    vertical-align: center;
+   overflow: auto;
 }
 #bottom_nav {
    text-align: center;
