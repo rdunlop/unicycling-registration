@@ -50,8 +50,11 @@
     <%= f.label :position %>
     <%= f.number_field :position %>
     <br />
-    <%= f.label :maximum_available %> (How many are available for sale) 
+    <%= f.label :maximum_available %> (How many are available for sale)
     <%= f.number_field :maximum_available %>
+    <br />
+    <%= f.label :maximum_per_registrant %> (How many are permitted for each registrant)
+    <%= f.number_field :maximum_per_registrant %>
   </div>
   <div class="actions">
     <%= f.submit %>

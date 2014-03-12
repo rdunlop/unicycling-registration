@@ -6,6 +6,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   validates :expense_item, :registrant, :presence => true
   validate :only_one_free_per_expense_group, :on => :create
+  validate :no_more_than_max_per_registrant, :on => :create
   validate :custom_cost_present
 
   delegate :has_details, to: :expense_item
@@ -63,5 +64,15 @@ class RegistrantExpenseItem < ActiveRecord::Base
       end
     end
     return true
+  end
+
+  def no_more_than_max_per_registrant
+    return true if expense_item_id.nil? or registrant.nil?
+    max = expense_item.maximum_per_registrant
+    return true if max == 0
+
+    if registrant.all_expense_items.count(expense_item) == max
+      errors[:base] = "Each Registrant is only allow #{max} of #{expense_item}"
+    end
   end
 end

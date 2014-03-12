@@ -96,4 +96,47 @@ describe RegistrantExpenseItem do
       reg.valid?.should == false
     end
   end
+
+  describe "with an expense_item with a limited number available PER REGISTRANT" do
+    before(:each) do
+      @ei = FactoryGirl.create(:expense_item, :maximum_per_registrant => 1)
+      @reg = FactoryGirl.create(:registrant)
+    end
+
+    it "allows creating a registrant expense_item" do
+      @rei = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
+      @rei.valid?.should == true
+    end
+
+    it "doesn't allow creating more than the max amount" do
+      @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+      @rei.valid?.should == true
+      @rei.save!
+      @reg.reload
+
+      @rei2 = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+      @rei2.valid?.should == false
+    end
+
+    it "allows creating max PER registrant" do
+      @reg2 = FactoryGirl.create(:registrant)
+      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+      @rei2 = FactoryGirl.build(:registrant_expense_item, :registrant => @reg2, :expense_item => @ei)
+
+      @rei2.valid?.should == true
+    end
+
+    describe "when the limit is 2 per registrant" do
+      before(:each) do
+        @ei.maximum_per_registrant = 2
+        @ei.save
+      end
+
+      it "can create 2 expense_items for the registrant" do
+        @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+        @rei2 = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+        @rei2.valid?.should == true
+      end
+    end
+  end
 end

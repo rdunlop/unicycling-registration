@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140214030213) do
+ActiveRecord::Schema.define(:version => 20140312021251) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -50,13 +50,13 @@ ActiveRecord::Schema.define(:version => 20140214030213) do
   create_table "award_labels", :force => true do |t|
     t.integer  "bib_number"
     t.string   "competition_name"
+    t.string   "team_name"
     t.string   "details"
     t.integer  "place"
     t.integer  "user_id"
     t.integer  "registrant_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.string   "team_name"
     t.string   "competitor_name"
     t.string   "category"
   end
@@ -289,14 +289,15 @@ ActiveRecord::Schema.define(:version => 20140214030213) do
     t.decimal  "cost"
     t.string   "export_name"
     t.integer  "position"
-    t.datetime "created_at",                                                         :null => false
-    t.datetime "updated_at",                                                         :null => false
+    t.datetime "created_at",                                                              :null => false
+    t.datetime "updated_at",                                                              :null => false
     t.integer  "expense_group_id"
     t.boolean  "has_details"
     t.string   "details_label"
     t.integer  "maximum_available"
-    t.decimal  "tax_percentage",    :precision => 5, :scale => 3, :default => 0.0
-    t.boolean  "has_custom_cost",                                 :default => false
+    t.decimal  "tax_percentage",         :precision => 5, :scale => 3, :default => 0.0
+    t.boolean  "has_custom_cost",                                      :default => false
+    t.integer  "maximum_per_registrant",                               :default => 0
   end
 
   add_index "expense_items", ["expense_group_id"], :name => "index_expense_items_expense_group_id"

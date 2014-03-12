@@ -12,5 +12,6 @@ FactoryGirl.define do
     has_custom_cost false
     details_label nil
     maximum_available nil
+    maximum_per_registrant 0
   end
 end
