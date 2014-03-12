@@ -65,6 +65,10 @@ describe ExpenseItemsController do
         post :create, {:expense_item => valid_attributes}
         response.should redirect_to(expense_items_path)
       end
+      it "sets the maximum_per_registrant" do
+        post :create, {:expense_item => valid_attributes.merge({:maximum_per_registrant => 1})}
+        assigns(:expense_item).maximum_per_registrant.should == 1
+      end
     end
 
     describe "with invalid params" do
