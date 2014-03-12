@@ -3,8 +3,8 @@
 <p>Please choose the registrants that you would like from the following list, and create competitors from those registrants. All registrants should be associated with competitors</p>
 
 <%= form_tag(add_competition_competitors_path(@competition), {:method => :post}) do %>
-  <caption>Signed-up registrants</caption>
   <table class="sortable">
+    <caption>Signed-up registrants</caption>
     <thead>
       <tr>
         <th><a href="#" id="competitor_select_all">All</a>/<a href="#" id="competitor_unselect_all">None</a></th>
