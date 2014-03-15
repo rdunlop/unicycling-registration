@@ -8,7 +8,6 @@ Registration-Related ToDo
 
 Most Useful:
 - determine how to deal with performance issues when sorting on cached field.
-- prevent chief_judges from creating/editing competitions?
 - learn more about acts_as_list for position usage (for competitor#position)
 - prevent sorting when clicking all/none on competitors#index page
 - create ability to "randomize current competitors" and "specify competitor positions"
@@ -21,9 +20,7 @@ Most Useful:
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.
 
-
 - Add "source filter" for a competition to be based on the "final candidates" of another competition
-- remove unnecessary competitions#show
 - Update the wiki to better describe the scoring_helper, and other filters
 
 - Add form tags or other ways to make the "only_registered" (and other) 'printing' options obvious/accessible.

@@ -202,6 +202,25 @@ class Competitor < ActiveRecord::Base
       end
     end
 
+    def country
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/country") do
+        if members.empty?
+          "(No registrants)"
+        else
+          countries = []
+          members.each do |m|
+            countries << m.registrant.country_name
+          end
+          # display mixed if there are more than 1 registrants
+          if countries.uniq.count > 1
+            countries.join(",")
+          else
+            countries.uniq.first
+          end
+        end
+      end
+    end
+
     def gender
       Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/gender") do
         if members.empty?

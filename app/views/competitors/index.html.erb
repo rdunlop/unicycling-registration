@@ -35,8 +35,8 @@
     </tbody>
   </table>
   <%= submit_tag "Create from EACH selected Registrant", :class => "multiclick", :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" %><br />
-  <%= submit_tag "Create Group from selected Registrants", :class => "multiclick", :confirm => "This will create a Single competitor for all chosen registrants. Continue?" %>
-  <%= text_field_tag :group_name, nil, :placeholder => "Group Name" %>
+  <%= submit_tag "Create Pair/Group from selected Registrants", :class => "multiclick", :confirm => "This will create a Single competitor for all chosen registrants. Continue?" %>
+  <%= text_field_tag :group_name, nil, :placeholder => "Group Name (optional)" %>
 <% end %>
 
 <hr />
@@ -50,6 +50,7 @@
       <th class="sign_up">Name</th>
       <th class="sign_up">Age</th>
       <th class="sign_up">Gender</th>
+      <th class="sign_up">Country</th>
       <th class="sign_up">Age Group</th>
       <th class="sign_up">Original Event Selection</th>
       <th class="competitor_member"></th>
@@ -70,6 +71,7 @@
         <td><%= competitor.detailed_name %></td>
         <td><%= competitor.age %></td>
         <td><%= competitor.gender %></td>
+        <td><%= competitor.country %></td>
         <td><% unless @competition.age_group_type.nil? %>
             <%= @competition.age_group_type.age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) %>
           <% end %>

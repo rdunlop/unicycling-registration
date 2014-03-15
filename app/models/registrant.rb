@@ -393,7 +393,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def country_name
-    Carmen::Country.coded(self.country_residence).try(:name)
+    Carmen::Country.coded(self.country).try(:name)
   end
 
   def as_json(options={})
