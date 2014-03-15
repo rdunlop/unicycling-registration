@@ -52,19 +52,19 @@
         <td>
           <% if EventConfiguration.usa %>
             <%= f.country_select :country_residence, priority: %w(US CA), prompt: ' ' %>
-          <% else %> 
+          <% else %>
             <%= f.country_select :country_residence, prompt: ' ' %>
           <% end %>
         </td>
       </tr>
       <tr>
-        <td> 
+        <td>
           <%= f.label :country_representing, t(".country_representing"), :title => t(".country_representing_description") %>
         </td>
         <td>
           <% if EventConfiguration.usa %>
             <%= f.country_select(:country_representing, {priority: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description") }) %>
-          <% else %> 
+          <% else %>
             <%= f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description") }) %>
           <% end %>
         </td>

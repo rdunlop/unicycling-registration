@@ -147,7 +147,7 @@ describe Competitor do
         end
 
         it "should display the source country" do
-          @comp.country.should == @reg1.country_name
+          @comp.country.should == @reg1.country
         end
 
         it "should display (mixed) if both genders exist" do

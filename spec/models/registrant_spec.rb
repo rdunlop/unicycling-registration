@@ -106,20 +106,20 @@ describe Registrant do
   end
 
   it "returns the country of residence as the country" do
-    @reg.country_residence = "Canada"
-    @reg.country.should == "Canada"
+    @reg.country_residence = "CA"
+    @reg.country_code.should == "CA"
   end
 
   it "returns the country_representing, when specified" do
-    @reg.country_residence = "USA"
-    @reg.country_representing = "Canada"
-    @reg.country.should == "Canada"
+    @reg.country_residence = "US"
+    @reg.country_representing = "CA"
+    @reg.country_code.should == "CA"
   end
 
   it "returns the country of residence even when country representing is blank" do
-    @reg.country_residence = "Canada"
+    @reg.country_residence = "CA"
     @reg.country_representing = ""
-    @reg.country.should == "Canada"
+    @reg.country_code.should == "CA"
   end
 
   it "requires emergency_contact name" do

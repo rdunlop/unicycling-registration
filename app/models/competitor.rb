@@ -203,13 +203,14 @@ class Competitor < ActiveRecord::Base
     end
 
     def country
+      binding.pry
       Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/country") do
         if members.empty?
           "(No registrants)"
         else
           countries = []
           members.each do |m|
-            countries << m.registrant.country_name
+            countries << m.registrant.country
           end
           # display mixed if there are more than 1 registrants
           if countries.uniq.count > 1

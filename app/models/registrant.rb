@@ -384,7 +384,7 @@ class Registrant < ActiveRecord::Base
     user.email
   end
 
-  def country
+  def country_code
     if self.country_representing.nil? or self.country_representing.empty?
       self.country_residence
     else
@@ -392,8 +392,8 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def country_name
-    Carmen::Country.coded(self.country).try(:name)
+  def country
+    Carmen::Country.coded(self.country_code).try(:name)
   end
 
   def as_json(options={})

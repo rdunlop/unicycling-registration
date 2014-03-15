@@ -18,7 +18,7 @@ describe RegistrantsController do
       address: "123 Fake Street",
       city: "Madison",
       state: "WI",
-      country_residence: "USA",
+      country_residence: "US",
       zip: "12345",
       club: "TCUC",
       club_contact: "Connie",
@@ -137,7 +137,8 @@ describe RegistrantsController do
       assigns(:city).should == registrant.city
       assigns(:state).should == registrant.state
       assigns(:zip).should == registrant.zip
-      assigns(:country).should == registrant.country_residence
+      assigns(:country_code).should == registrant.country_residence
+      assigns(:country).should == "United States"
       assigns(:phone).should == registrant.phone
       assigns(:mobile).should == registrant.mobile
       assigns(:email).should == registrant.email
@@ -275,7 +276,7 @@ describe RegistrantsController do
           address: "123 Somewhere",
           city: "Springfield",
           state: "IL",
-          country_residence: "USA",
+          country_residence: "US",
           zip: "60601",
           competitor: true,
           birthday: Date.new(1982, 01, 19),
