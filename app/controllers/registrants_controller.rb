@@ -1,6 +1,5 @@
 class RegistrantsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_new_registrant, :only => [:create]
   before_filter :find_registrant, :only => [:undelete]
   load_and_authorize_resource
 
@@ -8,10 +7,6 @@ class RegistrantsController < ApplicationController
 
   def find_registrant
     @registrant = Registrant.unscoped.find(params[:id])
-  end
-
-  def load_new_registrant
-    @registrant = Registrant.new(registrant_params)
   end
 
   def load_categories

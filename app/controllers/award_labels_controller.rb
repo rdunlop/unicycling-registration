@@ -1,13 +1,8 @@
 class AwardLabelsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_new_award_label, :only => [:create]
   load_and_authorize_resource
 
   before_filter :load_user, :only => [:index, :create, :create_labels, :expert_labels, :normal_labels, :destroy_all, :create_labels_by_registrant]
-
-  def load_new_award_label
-    @award_label = AwardLabel.new(award_label_params)
-  end
 
   def load_user
     @user = User.find(params[:user_id])

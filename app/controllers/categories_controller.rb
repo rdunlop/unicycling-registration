@@ -1,20 +1,10 @@
 class CategoriesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_new_category, :only => [:create]
   load_and_authorize_resource
-
-  def load_new_category
-    @category = Category.new(category_params)
-  end
-
-  def load_categories
-    @categories = Category.all
-  end
 
   # GET /categories
   # GET /categories.json
   def index
-    load_categories
     @category = Category.new
 
     respond_to do |format|
@@ -36,7 +26,7 @@ class CategoriesController < ApplicationController
         format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
         format.json { render json: @category, status: :created, location: categories_path }
       else
-        load_categories
+        @categories = Category.all
         format.html { render action: "index" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end

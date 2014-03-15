@@ -1,17 +1,12 @@
 class MembersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_competitor, :only => [:create]
-  before_filter :load_member, :only => [:destroy]
   before_filter :load_new_member, :only => [:create]
   load_and_authorize_resource
 
   private
   def load_competitor
     @competitor = Competitor.find(params[:competitor_id])
-  end
-
-  def load_member
-    @member = Member.find(params[:id])
   end
 
   def load_new_member

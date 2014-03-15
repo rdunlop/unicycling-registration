@@ -1,11 +1,6 @@
 class RegistrationPeriodsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_new_registration_period, :only => [:create]
   load_and_authorize_resource
-
-  def load_new_registration_period
-    @registration_period = RegistrationPeriod.new(registration_period_params)
-  end
 
   # GET /registration_periods
   # GET /registration_periods.json

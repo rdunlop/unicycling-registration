@@ -1,16 +1,10 @@
 class ExpenseGroupsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_new_expense_group, :only => [:create]
   load_and_authorize_resource
-
-  def load_new_expense_group
-    @expense_group = ExpenseGroup.new(expense_group_params)
-  end
 
   # GET /expense_groups
   # GET /expense_groups.json
   def index
-    @expense_groups = ExpenseGroup.all
     @expense_group = ExpenseGroup.new
 
     respond_to do |format|

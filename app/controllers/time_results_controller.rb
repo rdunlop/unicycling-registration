@@ -1,16 +1,10 @@
 class TimeResultsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :competition, :except => [:edit, :destroy, :update]
-  load_and_authorize_resource :time_result, :except => [:create, :edit, :destroy, :update]
-  load_and_authorize_resource :time_result, :only => [:edit, :destroy, :update]
-  before_filter :load_new_time_result, :only => [:create]
-
-  def load_new_time_result
-    @time_result = TimeResult.new(time_result_params)
-  end
+  load_and_authorize_resource :time_result
 
   # XXX look into https://github.com/railscasts/396-importing-csv-and-excel/blob/master/store-with-validations/app/models/product_import.rb ??
-  
+
   # GET competitions/1/time_results
   def index
     @time_results = @competition.time_results.includes(:competitor => [:competition]) # XXX
@@ -31,7 +25,6 @@ class TimeResultsController < ApplicationController
 
   # GET /time_results/1/edit
   def edit
-    @time_result = TimeResult.find(params[:id])
     @competition = @time_result.competition
   end
 

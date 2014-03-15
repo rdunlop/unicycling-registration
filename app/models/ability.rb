@@ -53,7 +53,7 @@ class Ability
       can :read, Competitor
     end
 
-    if user.has_role? :race_official or user.has_role? :admin #XXX (add race_official)
+    if user.has_role? :race_official or user.has_role? :admin
       can :manage, LaneAssignment
     end
 

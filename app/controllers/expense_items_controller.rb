@@ -1,16 +1,10 @@
 class ExpenseItemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_new_expense_item, :only => [:create]
   load_and_authorize_resource
-
-  def load_new_expense_item
-    @expense_item = ExpenseItem.new(expense_item_params)
-  end
 
   # GET /expense_items
   # GET /expense_items.json
   def index
-    @expense_items = ExpenseItem.all
     @expense_item = ExpenseItem.new
 
     respond_to do |format|

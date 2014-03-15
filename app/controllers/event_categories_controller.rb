@@ -1,14 +1,9 @@
 class EventCategoriesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_new_event_category, :only => [:create]
   load_and_authorize_resource
 
   before_filter :load_event, :only => [:index, :create]
   before_filter :load_event_category, :only => [:sign_ups]
-
-  def load_new_event_category
-    @event_category = EventCategory.new(event_category_params)
-  end
 
   def load_event
     @event = Event.find(params[:event_id])

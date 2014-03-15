@@ -1,15 +1,10 @@
 class ScoresController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :judge # requires that the current user is able to access the judge, thus hiding scores
-  before_filter :load_new_score, :only => [:create]
   load_and_authorize_resource
 
   before_filter :find_judge
   before_filter :find_competitor, :except => [:index]
-
-  def load_new_score
-    @score = Score.new(score_params)
-  end
 
   def find_judge
     @judge = Judge.find_by_id(params[:judge_id])

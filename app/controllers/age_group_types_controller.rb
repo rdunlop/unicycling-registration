@@ -1,20 +1,12 @@
 class AgeGroupTypesController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :except => [:create]
-  before_filter :load_new_age_group_type, :only => [:create]
-
-  def load_new_age_group_type
-    @age_group_type = AgeGroupType.new(age_group_type_params)
-  end
+  load_and_authorize_resource
 
   def index
-    @age_group_types = AgeGroupType.all
     @age_group_type = AgeGroupType.new
   end
 
   def create
-    authorize! :create, @age_group_type
-
     respond_to do |format|
       if @age_group_type.save
         format.html { redirect_to age_group_types_path, notice: 'Age Group Type was successfully created.' }
@@ -28,7 +20,6 @@ class AgeGroupTypesController < ApplicationController
   end
 
   def destroy
-    @age_group_type = AgeGroupType.find(params[:id])
     @age_group_type.destroy
     respond_to do |format|
       format.html { redirect_to age_group_types_path }
@@ -40,7 +31,6 @@ class AgeGroupTypesController < ApplicationController
   end
 
   def update
-    @age_group_type = AgeGroupType.find(params[:id])
 
     respond_to do |format|
       if @age_group_type.update_attributes(age_group_type_params)

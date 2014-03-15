@@ -1,13 +1,8 @@
 class PaymentsController < ApplicationController
   before_filter :authenticate_user!, :except => [:notification, :success]
-  before_filter :load_new_payment, :only => [:create]
   load_and_authorize_resource :except => [:notification, :success]
   skip_authorization_check :only => [:notification, :success]
   skip_before_filter :verify_authenticity_token, :only => [:notification, :success]
-
-  def load_new_payment
-    @payment = Payment.new(payment_params)
-  end
 
   # GET /users/12/payments
   # GET /users/12/payments.json
