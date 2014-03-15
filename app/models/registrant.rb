@@ -289,7 +289,7 @@ class Registrant < ActiveRecord::Base
         return false
       end
     else
-      if reg_choice.present? or reg_choice.has_value?
+      if reg_choice.present? and reg_choice.has_value?
         errors[:base] << "#{event_choice.to_s} cannot be specified if the event isn't chosen"
         reg_choice.errors[:value] = "" unless reg_choice.nil?
         reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?

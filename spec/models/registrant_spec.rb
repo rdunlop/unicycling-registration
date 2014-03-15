@@ -600,6 +600,12 @@ describe Registrant do
         @reg.reload
         @reg.valid?.should == true
       end
+      it "should be valid if we don't choose the event, and we don't fill in the event_choice" do
+        FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => false, :registrant => @reg)
+        FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "", :registrant => @reg)
+        @reg.reload
+        @reg.valid?.should == true
+      end
       it "should be invalid if we fill in only the second_choice" do
         FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "goodbye", :registrant => @reg)
         FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => false, :registrant => @reg)
