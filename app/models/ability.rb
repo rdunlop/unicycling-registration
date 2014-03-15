@@ -102,6 +102,9 @@ class Ability
         user.has_role? :chief_judge, comp.event
       end
 
+      can [:announcer, :heat_recording, :two_attempt_recording, :results], Competition do |comp|
+        user.has_role? :chief_judge, comp.event
+      end
       can [:freestyle_scores, :street_scores, :distance_attempts,
         :export_scores, :set_places, :lock], Competition do |comp|
         user.has_role? :chief_judge, comp.event

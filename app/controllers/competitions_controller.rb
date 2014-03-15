@@ -167,9 +167,9 @@ class CompetitionsController < ApplicationController
 
     respond_to do |format|
       if @competition.save
-        format.html { redirect_to event_path(@competition), notice: 'Updated lock status' }
+        format.html { redirect_to event_path(@competition.event), notice: 'Updated lock status' }
       else
-        format.html { redirect_to event_path(@competition), notice: 'Unable to update lock status' }
+        format.html { redirect_to event_path(@competition.event), notice: 'Unable to update lock status' }
       end
     end
   end
