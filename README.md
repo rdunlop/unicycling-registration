@@ -46,10 +46,6 @@ The following instructions use "uniregtest.herokuapp.com" as the URL for all
 "hosted site" instructions. You should replace this with
 <yoursite>.herokuapp.com
 
-
-
-"production"
-
 How to contribute time/effort to the Registration Site
 ------------------------------------------------------
 
@@ -308,6 +304,12 @@ Install the required software
 
 * Sun Virtualbox (www.virtualbox.org)
 * Vagrantbox (vagrantup.com)
+
+
+Setup the database
+==================
+    Copy `config/database_template.yml` to `config/database.yml`  and make
+      any necessary adjustments for your local environment.
 
 Start the Development Environment
 =================================
