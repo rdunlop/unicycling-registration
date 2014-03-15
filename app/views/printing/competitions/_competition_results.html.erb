@@ -1,6 +1,6 @@
 <% # description
 # result_description
-# competitors 
+# competitors
 # no_page_breaks
 %>
 <div class="nobreak">
@@ -8,8 +8,9 @@
   <div style="clear: both"></div>
   <hr />
 
-  <% competitor = competitors.first %>
-  <% if competitor.members.count > 2 %>
+  <% if competitors.count == 0 %>
+    <h3>No Competitors yet</h3>
+  <% elsif competitors.first.members.count > 2 %>
     <% # Group event, list the members %>
     <% competitors.each do |competitor| %>
       <h3>Place: <%= competitor.place %> -  <%= competitor %></h3>
@@ -18,7 +19,7 @@
         <thead>
           <tr>
             <th>ID</th>
-            <tH>Name</th>
+            <th>Name</th>
           </tr>
         </thead>
         <tbody>

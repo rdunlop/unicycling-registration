@@ -60,10 +60,6 @@ class Ability
     # Scoring abilities
     if user.has_role? :judge
       can :judging, Event
-      can :read, Competition
-      can :create_scores, Competition do |competition|
-        !competition.locked
-      end
 
       can :read, Judge, :user_id => user.id
       # Freestyle
@@ -82,8 +78,16 @@ class Ability
       end
     end
 
+    if user.has_role? :judge
+      can :read, Competition
+      can :create_scores, Competition do |competition|
+        !competition.locked
+      end
+    end
     if user.has_role? :chief_judge, :any
-      can [:read, :results, :save], Event do |ev|
+      # :read is main chief_judge menu-page
+      # :results is for printing
+      can [:read, :results], Event do |ev|
         user.has_role? :chief_judge, ev
       end
       can :sign_ups, EventCategory do |ec|
@@ -92,7 +96,14 @@ class Ability
       can :manage, Competitor do |comp|
         user.has_role? :chief_judge, comp.competition.try(:event)
       end
-      can :manage, Competition do |comp|
+
+      # so that they can create/view judges
+      can [:read], Competition do |comp|
+        user.has_role? :chief_judge, comp.event
+      end
+
+      can [:freestyle_scores, :street_scores, :distance_attempts,
+        :export_scores, :set_places, :lock], Competition do |comp|
         user.has_role? :chief_judge, comp.event
       end
 

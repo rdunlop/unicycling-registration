@@ -19,7 +19,7 @@ class Printing::CompetitionsController < ApplicationController
     @competition_sign_up = CompetitionSignUp.new(@competition)
 
     respond_to do |format|
-      format.html 
+      format.html
       format.pdf { render_common_pdf("heat_recording") }
     end
   end
@@ -32,7 +32,7 @@ class Printing::CompetitionsController < ApplicationController
     @only_registered = false if params[:only_registered].nil?
 
     respond_to do |format|
-      format.html 
+      format.html
       format.pdf { render_common_pdf("two_attempt_recording") }
     end
   end
@@ -47,8 +47,8 @@ class Printing::CompetitionsController < ApplicationController
     attachment = true unless params[:attachment].nil?
 
     respond_to do |format|
-      format.html 
-      format.pdf { render_common_pdf("results", "Portrait", attachment) }
+      format.html
+      format.pdf { render_common_pdf(name, "Portrait", attachment) }
     end
   end
 end

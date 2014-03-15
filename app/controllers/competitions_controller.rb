@@ -44,16 +44,6 @@ class CompetitionsController < ApplicationController
     end
   end
 
-  # GET /competitions/1
-  # GET /competitions/1.json
-  def show
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @competition }
-    end
-  end
-
   # GET /competitions/1/edit
   def edit
     @event = @competition.event
@@ -78,7 +68,7 @@ class CompetitionsController < ApplicationController
   def update
     respond_to do |format|
       if @competition.update_attributes(competition_params)
-        format.html { redirect_to @competition, notice: 'Competition was successfully updated.' }
+        format.html { redirect_to event_path(@competition.event), notice: 'Competition was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -177,9 +167,9 @@ class CompetitionsController < ApplicationController
 
     respond_to do |format|
       if @competition.save
-        format.html { redirect_to @competition, notice: 'Updated lock status' }
+        format.html { redirect_to event_path(@competition), notice: 'Updated lock status' }
       else
-        format.html { redirect_to @competition, notice: 'Unable to update lock status' }
+        format.html { redirect_to event_path(@competition), notice: 'Unable to update lock status' }
       end
     end
   end

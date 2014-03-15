@@ -49,12 +49,12 @@ class ApplicationController < ActionController::Base
       disposition = "inline"
     end
 
-    render :pdf => view_name, 
-      :print_media_type => true, 
-      :margin => {:top => 2, :left => 2, :right => 2}, 
-      :footer => default_footer, 
-      :formats => [:html], 
-      :orientation => orientation, 
+    render :pdf => view_name,
+      :print_media_type => true,
+      :margin => {:top => 2, :left => 2, :right => 2},
+      :footer => default_footer,
+      :formats => [:html],
+      :orientation => orientation,
       :disposition => disposition,
       :layout => "pdf.html"
   end
