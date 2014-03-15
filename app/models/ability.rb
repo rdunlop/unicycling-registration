@@ -177,7 +177,6 @@ class Ability
         (not rei.system_managed) and user.registrants.include?(rei.registrant)
       end
       can :create, Registrant # necessary because we set the user in the controller?
-      can :new_noncompetitor, Registrant # necessary because we set the user in the controller?
     end
     can [:create, :destroy], RegistrantExpenseItem if user.has_role? :admin or user.has_role? :super_admin
 

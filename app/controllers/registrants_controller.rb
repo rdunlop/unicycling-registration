@@ -143,29 +143,26 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  # determine whether to show the competitor or non-competitor page
+  def get_competitor_value
+    if params[:non_competitor].nil?
+      true
+    else
+      ! (params[:non_competitor] == "true")
+    end
+  end
+
   # GET /registrants/new
   # GET /registrants/new.json
   def new
     @registrant = Registrant.new
-    @registrant.competitor = true
+    @registrant.competitor = get_competitor_value
     load_online_waiver
     load_categories
     load_other_reg
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @registrant }
-    end
-  end
-
-  def new_noncompetitor
-    @registrant = Registrant.new
-    @registrant.competitor = false
-    load_online_waiver
-    load_other_reg
-
-    respond_to do |format|
-      format.html { render action: "new" } # new.html.erb
       format.json { render json: @registrant }
     end
   end

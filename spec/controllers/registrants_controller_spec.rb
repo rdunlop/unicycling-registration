@@ -220,9 +220,9 @@ describe RegistrantsController do
     end
   end
 
-  describe "GET new_noncompetitor" do
+  describe "GET new (noncompetitor)" do
     it "assigns a new noncompetitor as @registrant" do
-      get :new_noncompetitor, {}
+      get :new, {:non_competitor => "true"}
       assigns(:registrant).should be_a_new(Registrant)
       assigns(:registrant).competitor.should == false
       assigns(:categories).should == nil

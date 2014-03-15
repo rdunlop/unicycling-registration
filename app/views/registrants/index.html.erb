@@ -10,13 +10,13 @@
   <div class="invitation_access_banner">
     You have been asked to share a registration with another user.
     <%= link_to "See the Registration Access", invitations_user_additional_registrant_accesses_path(@user) %> page for details.
-  </div> 
+  </div>
 <% end %>
 <% if @display_invitation_manage_banner %>
   <div class="invitation_manage_banner">
     You have shared your registration with another user.
     <%= link_to "See the Registration Access", invitations_user_additional_registrant_accesses_path(@user) %> to adjust settings.
-  </div> 
+  </div>
 <% end %>
 
 <% if EventConfiguration.closed? %>
@@ -27,15 +27,13 @@
   </div>
 <% end %>
 <div>
-  <div class="competitor_sign_up">
-    <% if can? :create, Registrant %>
+  <% if can? :create, Registrant %>
+    <div class="competitor_sign_up">
       <%= link_to t(".create_new_competitor"), new_registrant_path, :class => "competitor registration_button" %>
-    <% end %>
-  </div><div class="non-competitor_sign_up">
-    <% if can? :new_noncompetitor, Registrant %>
-      <%= link_to t(".create_new_noncompetitor"), new_noncompetitor_registrants_path, :class => "noncompetitor registration_button" %>
-    <% end %>
-  </div>
+    </div><div class="non-competitor_sign_up">
+      <%= link_to t(".create_new_noncompetitor"), new_registrant_path(:non_competitor => true), :class => "noncompetitor registration_button" %>
+    </div>
+  <% end %>
   <% unless EventConfiguration.comp_noncomp_url.nil? %>
     <div class="sign_up_difference">
       <%= link_to t(".whats_the_difference"), EventConfiguration.comp_noncomp_url, :class => "fancybox", :title =>"Click here for more information!" %>
