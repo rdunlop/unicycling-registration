@@ -13,7 +13,6 @@ Workspace::Application.routes.draw do
     namespace :printing do
       namespace :race_recording do
         get :multi_lap
-        get :list
         get :instructions
       end
       resources :competitions, :only => [] do
