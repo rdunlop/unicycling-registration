@@ -203,7 +203,6 @@ class Competitor < ActiveRecord::Base
     end
 
     def country
-      binding.pry
       Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/country") do
         if members.empty?
           "(No registrants)"
