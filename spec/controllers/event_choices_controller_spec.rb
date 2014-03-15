@@ -34,16 +34,17 @@ describe EventChoicesController do
     autocomplete: false,
     optional: false,
     optional_if_event_choice_id: nil,
+    required_if_event_choice_id: nil,
     "translations_attributes"=>{
       "1"=>{
-      "id"=>"", 
-      "locale"=>"en", 
-      "label"=>"label_en", 
+      "id"=>"",
+      "locale"=>"en",
+      "label"=>"label_en",
       "tooltip"=>"tool_en"
     }, "2"=>{
-      "id"=>"", 
-      "locale"=>"fr", 
-      "label"=>"label_fr", 
+      "id"=>"",
+      "locale"=>"fr",
+      "label"=>"label_fr",
       "tooltip"=>"tool_fr"}
     }
     }
@@ -142,24 +143,24 @@ describe EventChoicesController do
     describe "with translations specified for label/tooltip" do
       before(:each) do
         @ec_params = {
-          :export_name => "new_ec", 
-          "cell_type"=>"boolean", 
-          "multiple_values"=>"", 
+          :export_name => "new_ec",
+          "cell_type"=>"boolean",
+          "multiple_values"=>"",
           "translations_attributes"=>{
           "1"=>{
-          "id"=>"", 
-          "locale"=>"en", 
-          "label"=>"label_en", 
+          "id"=>"",
+          "locale"=>"en",
+          "label"=>"label_en",
           "tooltip"=>"tool_en"
         }, "2"=>{
-          "id"=>"", 
-          "locale"=>"fr", 
-          "label"=>"label_fr", 
+          "id"=>"",
+          "locale"=>"fr",
+          "label"=>"label_fr",
           "tooltip"=>"tool_fr"}
-        }, 
-          "position"=>"6", 
-          "optional"=>"0", 
-          "optional_if_event_choice_id"=>"", 
+        },
+          "position"=>"6",
+          "optional"=>"0",
+          "optional_if_event_choice_id"=>"",
           "autocomplete"=>"0"
         }
       end
