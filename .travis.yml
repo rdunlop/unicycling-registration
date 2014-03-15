@@ -4,5 +4,6 @@ rvm:
   - 1.9.3
 script: bundle exec rspec spec
 before_script:
+  - cp config/database.yml.template config/database.yml
   - psql -c 'create database app_test;' -U postgres
   - RAILS_ENV=test bundle exec rake db:schema:load
