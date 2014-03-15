@@ -559,6 +559,31 @@ describe Registrant do
           @reg.valid?.should == false
         end
       end
+      describe "with a text_field required_if_event_choice" do
+        before(:each) do
+          FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
+          @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :cell_type => "text", :required_if_event_choice => @ec2, :position => 2)
+          @reg.reload
+        end
+
+        it "requires the registrant to specify a value for the text field if the checkbox is selected" do
+          FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "1", :registrant => @reg)
+          rc = FactoryGirl.create(:registrant_choice, :event_choice => @ec3, :value => "", :registrant => @reg)
+          @reg.reload
+          @reg.valid?.should == false
+          rc.value = "hello"
+          rc.save
+          @reg.reload
+          @reg.valid?.should == true
+        end
+
+        it "allows the registrant to NOT specify a value for the text field if the checkbox is NOT selected" do
+          FactoryGirl.create(:registrant_choice, :event_choice => @ec2, :value => "0", :registrant => @reg)
+          FactoryGirl.create(:registrant_choice, :event_choice => @ec3, :value => "", :registrant => @reg)
+          @reg.reload
+          @reg.valid?.should == true
+        end
+      end
     end
     describe "with a second event_choice (text-style) for an event" do
       before(:each) do

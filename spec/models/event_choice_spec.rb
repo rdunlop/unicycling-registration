@@ -39,9 +39,19 @@ describe EventChoice do
     @ec.valid?.should == true
   end
 
+  it "allows nil for required_if_event_choice" do
+    @ec.required_if_event_choice = nil
+    @ec.valid?.should == true
+  end
+
   it "defaults optional_if_event_choice to nil" do
     ec = EventChoice.new
     ec.optional_if_event_choice.should == nil
+  end
+
+  it "defaults required_if_event_choice to nil" do
+    ec = EventChoice.new
+    ec.required_if_event_choice.should == nil
   end
 
   it "has an event" do

@@ -2,6 +2,7 @@ class EventChoice < ActiveRecord::Base
   belongs_to :event, :touch => true
   has_many :registrant_choices, :dependent => :destroy
   belongs_to :optional_if_event_choice, :class_name => "EventChoice"
+  belongs_to :required_if_event_choice, :class_name => "EventChoice"
 
   validates :label, {:presence => true}
   validates :export_name, {:presence => true, :uniqueness => true}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140312021251) do
+ActiveRecord::Schema.define(:version => 20140315025811) do
 
   create_table "additional_registrant_accesses", :force => true do |t|
     t.integer  "user_id"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(:version => 20140312021251) do
     t.boolean  "optional",                    :default => false
     t.string   "tooltip"
     t.integer  "optional_if_event_choice_id"
+    t.integer  "required_if_event_choice_id"
   end
 
   add_index "event_choices", ["event_id", "position"], :name => "index_event_choices_event_id"

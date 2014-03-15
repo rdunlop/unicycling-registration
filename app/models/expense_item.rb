@@ -4,7 +4,7 @@ class ExpenseItem < ActiveRecord::Base
   validates :name, :description, :position, :cost, :expense_group, :tax_percentage, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :tax_percentage, :numericality => {:greater_than_or_equal_to => 0} 
+  validates :tax_percentage, :numericality => {:greater_than_or_equal_to => 0}
 
 
   has_many :payment_details

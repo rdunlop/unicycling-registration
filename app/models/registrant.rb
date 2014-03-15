@@ -33,7 +33,7 @@ class Registrant < ActiveRecord::Base
   accepts_nested_attributes_for :registrant_event_sign_ups
   has_many :signed_up_events, :class_name => 'RegistrantEventSignUp', :conditions => ['signed_up = ?', true]
 
-  validate :choices_are_all_set_or_none_set
+  validate :choices_combination_valid
 
   has_many :event_choices, :through => :registrant_choices
   has_many :events, :through => :event_choices
@@ -211,9 +211,13 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def choices_are_all_set_or_none_set
+
+  # ####################################
+  # Event Choices Validation
+  # ####################################
+  def choices_combination_valid
     # for each event that we have choices made
-     # determine if we have values for ALL or NONE of the choices for that event
+    # determine if we have values for ALL or NONE of the choices for that event
     # loop
     sign_up_events = self.registrant_event_sign_ups.map{|resu| resu.event}
     choice_events = self.registrant_choices.map{|rc| rc.event_choice}.map{|ec| ec.event}
@@ -221,61 +225,121 @@ class Registrant < ActiveRecord::Base
     events_to_validate = sign_up_events + choice_events
 
     events_to_validate.uniq.each do |event|
+      validate_event event
+    end
 
-      primary_choice_selected = self.registrant_event_sign_ups.select {|resu| resu.event_id == event.id}.first
-      if primary_choice_selected.nil? or not primary_choice_selected.signed_up
-        event_selected = false
-      else
-        event_selected = true
+    true
+  end
+
+  def signed_up_for(event)
+    primary_choice_selected = self.registrant_event_sign_ups.select {|resu| resu.event_id == event.id}.first
+    if primary_choice_selected.nil? or not primary_choice_selected.signed_up
+      event_selected = false
+    else
+      event_selected = true
+    end
+    event_selected
+  end
+
+  def mark_event_sign_up_as_error(event)
+    primary_choice_selected = self.registrant_event_sign_ups.select {|resu| resu.event_id == event.id}.first
+    primary_choice_selected.errors[:signed_up] = "" unless primary_choice_selected.nil? # the primary checkbox
+  end
+
+  def get_choice_for_event_choice(event_choice)
+    self.registrant_choices.select{|rc| rc.event_choice_id == event_choice.id}.first
+  end
+
+  def validate_event(event)
+    event_selected = signed_up_for(event)
+    event.event_choices.each do |event_choice|
+      # using .select instead of .where, because we need to validate not-yet-saved data
+      reg_choice = get_choice_for_event_choice(event_choice)
+
+      if !valid_event_choice_registrant_choice(event_selected, event_choice, reg_choice)
+        mark_event_sign_up_as_error(event)
       end
+    end
+  end
 
-      event.event_choices.each do |event_choice|
-        # using .select instead of .where, because we need to validate not-yet-saved data
-        reg_choice = self.registrant_choices.select{|rc| rc.event_choice_id == event_choice.id}.first
-        next if event_choice.optional
-        optional_if_event_choice = event_choice.optional_if_event_choice
+  def valid_event_choice_registrant_choice(event_selected, event_choice, reg_choice)
+    optional_if_event_choice = event_choice.optional_if_event_choice
+    required_if_event_choice = event_choice.required_if_event_choice
 
-        # check to see if this is optional by way of another choice
-        unless optional_if_event_choice.nil?
-          optional_reg_choice = self.registrant_choices.select{|rc| rc.event_choice_id == optional_if_event_choice.id}.first
-          if optional_reg_choice.nil? or not optional_reg_choice.has_value?
-            # the optional choice isn't selected
-            if reg_choice.nil? or not reg_choice.has_value?
-              # this option is NOT selected, but the optional ISN'T either
-              next if not event_selected
-              errors[:base] << "#{event_choice.to_s } must be specified unless #{optional_if_event_choice.to_s} is chosen"
-              primary_choice_selected.errors[:signed_up] = "" unless primary_choice_selected.nil? # the primary checkbox
-              next
-            end
-          else
-            # the optional choice IS selected
-            if reg_choice.nil? or not reg_choice.has_value?
-              # this option IS NOT selected, and the optional choice IS selected
-              #  DO NOTHING, as this is allowed by 'optional_if'
-              next
-            else
-              # this option IS selected, and the optional Choice IS selected
-               # ensure that we haven't chosen-without-event by falling through
-            end
-          end
+    if event_selected && !valid_with_required_selection(event_choice, reg_choice)
+      errors[:base] << "#{event_choice.to_s } must be specified unless #{optional_if_event_choice.to_s} is chosen"
+      return false
+    end
+
+    if event_selected && !valid_with_optional_selection(event_choice, reg_choice)
+      errors[:base] << "#{event_choice.to_s } must be specified unless #{optional_if_event_choice.to_s} is chosen"
+      return false
+    end
+
+    return true if event_choice.optional
+    return true if optional_if_event_choice.present? # we passed the optional check, so we shouldn't complain
+    return true if required_if_event_choice.present? # we passed the required check, so we shouldn't complain
+
+    if event_selected
+      if reg_choice.nil? or not reg_choice.has_value?
+        return true if event_choice.cell_type == "boolean"
+        errors[:base] << "#{event_choice.to_s} must be specified"
+        reg_choice.errors[:value] = "" unless reg_choice.nil?
+        reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
+        return false
+      end
+    else
+      if reg_choice.present? or reg_choice.has_value?
+        errors[:base] << "#{event_choice.to_s} cannot be specified if the event isn't chosen"
+        reg_choice.errors[:value] = "" unless reg_choice.nil?
+        reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
+        return false
+      end
+    end
+    true
+  end
+
+  def valid_with_required_selection(event_choice, reg_choice)
+    required_if_event_choice = event_choice.required_if_event_choice
+
+    unless required_if_event_choice.nil?
+      reg_choice_has_value = reg_choice.present? && reg_choice.has_value?
+
+      required_reg_choice = get_choice_for_event_choice(required_if_event_choice)
+      required_has_value = required_reg_choice.present? && required_reg_choice.has_value?
+
+      if required_has_value
+        # the required choice IS selected
+        if !reg_choice_has_value
+          # the choice isn't selected, and the -required- element is chosen
+          return false
         end
+      end
+    end
+    true
+  end
 
-        if reg_choice.nil? or not reg_choice.has_value?
-          next if event_choice.cell_type == "boolean"
-          if event_selected
-            errors[:base] << "#{event_choice.to_s} must be specified"
-            reg_choice.errors[:value] = "" unless reg_choice.nil?
-            reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
-            primary_choice_selected.errors[:signed_up] = "" unless primary_choice_selected.nil? # the primary checkbox
-          end
-        else
-          if not event_selected
-            errors[:base] << "#{event_choice.to_s} cannot be specified if the event isn't chosen"
-            reg_choice.errors[:value] = "" unless reg_choice.nil?
-            reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
-            primary_choice_selected.errors[:signed_up] = "" unless primary_choice_selected.nil? # the primary checkbox
-          end
+  def valid_with_optional_selection(event_choice, reg_choice)
+    return true if event_choice.optional
+    optional_if_event_choice = event_choice.optional_if_event_choice
+
+    # check to see if this is optional by way of another choice
+    unless optional_if_event_choice.nil?
+      reg_choice_has_value = reg_choice.present? && reg_choice.has_value?
+
+      optional_reg_choice = get_choice_for_event_choice(optional_if_event_choice)
+      optional_has_value = optional_reg_choice.present? && optional_reg_choice.has_value?
+
+      if not optional_has_value
+        # the optional choice isn't selected
+        if not reg_choice_has_value
+          # this option is NOT selected, but the optional ISN'T either
+          return false
         end
+      else
+        # the optional choice IS selected
+        # it doesn't matter whether we have a chosen value or not
+        return true
       end
     end
     true
