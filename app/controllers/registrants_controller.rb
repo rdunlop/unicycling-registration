@@ -90,10 +90,10 @@ class RegistrantsController < ApplicationController
       format.pdf { render :pdf => "waiver", :formats => [:html] }
     end
   end
+
   # GET /registrants/1/waiver
   def waiver
     @registrant = Registrant.find(params[:id])
-
 
     @today_date = Date.today.to_time_in_current_zone.strftime("%B %-d, %Y")
 

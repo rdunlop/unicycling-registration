@@ -41,7 +41,7 @@ GEM
     builder (3.0.4)
     bullet (4.4.0)
       uniform_notifier
-    cancan (1.6.10)
+    cancancan (1.7.0)
     carmen (1.0.0)
       unicode_utils (~> 1.4.0)
     carmen-rails (1.0.0)
@@ -262,7 +262,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   bullet
-  cancan
+  cancancan (~> 1.7)
   carmen-rails
   coffee-rails (~> 3.2.1)
   dalli

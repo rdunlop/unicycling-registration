@@ -48,6 +48,15 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
+  def self.test_mode
+    ec = EventConfiguration.first
+    if ec.nil?
+      true
+    else
+      ec.test_mode
+    end
+  end
+
   def self.contact_email
     ec = EventConfiguration.first
     if ec.nil?

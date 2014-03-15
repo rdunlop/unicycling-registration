@@ -36,7 +36,7 @@ describe "Ability" do
     end
 
     describe "with a registration" do
-      let (:registration) { FactoryGirl.create(:registrant, :user => @user) }
+      let(:registration) { FactoryGirl.create(:registrant, :user => @user) }
 
       it { should be_able_to(:read, registration) }
       it { should be_able_to(:read_contact_info, registration) }
@@ -62,7 +62,7 @@ describe "Ability" do
     end
 
     describe "With a payment" do
-      let (:payment) { FactoryGirl.create(:payment, :user => @user) }
+      let(:payment) { FactoryGirl.create(:payment, :user => @user) }
 
       it { should be_able_to(:read, payment) }
     end
@@ -107,14 +107,14 @@ describe "Ability" do
     it { should be_able_to(:manage_all, Registrant) }
 
     describe "with another user having a registrant" do
-      let (:registration) { FactoryGirl.create(:registrant) }
+      let(:registration) { FactoryGirl.create(:registrant) }
       it { should be_able_to(:read, registration) }
       it { should be_able_to(:crud, registration) }
       it { should be_able_to(:items, registration) }
     end
 
     describe "with an rei" do
-      let (:rei) { FactoryGirl.create(:registrant_expense_item) }
+      let(:rei) { FactoryGirl.create(:registrant_expense_item) }
       it { should be_able_to(:create, rei) }
       it { should be_able_to(:destroy, rei) }
     end
@@ -128,7 +128,7 @@ describe "Ability" do
       it { should be_able_to(:manage, StandardSkillRoutineEntry) }
     end
     describe "With a payment for another user" do
-      let (:payment) { FactoryGirl.create(:payment) }
+      let(:payment) { FactoryGirl.create(:payment) }
 
       it { should be_able_to(:read, payment) }
     end
