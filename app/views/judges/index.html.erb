@@ -1,7 +1,7 @@
-<h1>Manage <%= @competition %> Judges</h1>
+<h1>Manage <%= @competition %> Judges/Officials</h1>
 
-<table>
-  <caption>All enabled Judge Accounts</caption>
+<table class="sortable">
+  <caption>All globally-enabled Judge Accounts</caption>
   <thead>
     <th>Email</th>
   </thead>
@@ -14,24 +14,52 @@
   </tbody>
 </table>
 
-<table>
-  <caption>THIS EVENT Judges</caption>
+<hr />
+<table class="sortable">
+  <caption>All globally-enabled Race Official Accounts</caption>
   <thead>
-    <th>Judge</th>
-    <th>Type</th>
-    <th>Scores?</th>
+    <th>Email</th>
   </thead>
   <tbody>
-    <% @judges.each do |judge| %>
+    <% @race_officials.each do |official| %>
       <tr>
-        <td><%= judge %></td>
-        <td><%= judge.judge_type %></td>
-        <td><%= judge.scores.count %></td>
-        <td><%= link_to t('Destroy'), competition_judge_path(judge.competition, judge), confirm: 'Are you sure?', method: :delete %></td>
+        <td><%= official %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<hr />
+<% if @judges.count > 0 %>
+  <table>
+    <caption>THIS EVENT Judges</caption>
+    <thead>
+      <th>Judge</th>
+      <th>Type</th>
+    </thead>
+    <tbody>
+      <% @judges.each do |judge| %>
+        <tr>
+          <td><%= judge %></td>
+          <td><%= judge.judge_type %></td>
+          <td><%= link_to t('Destroy'), competition_judge_path(judge.competition, judge), confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div>
+    <b>There are no judges set for this event</b>
+  </div>
+<% end %>
+<hr />
+
+<h2>Set User as 'Race Official'</h2>
+Allows users to see the judging menu
+<%= form_for [@competition, @judge], :url => create_race_official_competition_judges_path(@competition) do |f| %>
+  <%= f.select :user_id, User.all.map { |user| [user, user.id] } %>
+  <%= f.submit %>
+<% end %>
 
 <h2>Set User as 'Judge'</h2>
 Allows users to see the judging menu

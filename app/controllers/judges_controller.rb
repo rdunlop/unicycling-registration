@@ -1,5 +1,5 @@
 class JudgesController < ApplicationController
-  load_and_authorize_resource :competition, :only => [:index, :new, :create, :destroy, :copy_judges, :create_normal]
+  load_and_authorize_resource :competition, :only => [:index, :new, :create, :destroy, :copy_judges, :create_normal, :create_race_official]
   before_filter :load_new_judge, :only => [:create]
   load_and_authorize_resource
 
@@ -10,6 +10,7 @@ class JudgesController < ApplicationController
   def new # are there tests for this?
     @judge_types = JudgeType.where(:event_class => @competition.event_class)
     @all_judges = User.with_role(:judge).order(:email)
+    @race_officials = User.with_role(:race_official).order(:email)
   end
 
   # POST /competitions/#/judges
@@ -76,6 +77,17 @@ class JudgesController < ApplicationController
     @judges = @competition.judges
     @events = Event.all
     @judge ||= Judge.new
+  end
+
+  def create_race_official
+    @user = User.find(params[:judge][:user_id])
+    respond_to do |format|
+      if @user.add_role(:race_official)
+        format.html { redirect_to competition_judges_path(@competition), notice: 'Race Official successfully created.' }
+      else
+        format.html { redirect_to competition_judges_path(@competiton), alert: 'Unable to add Race Official role to user.' }
+      end
+    end
   end
 
   def create_normal

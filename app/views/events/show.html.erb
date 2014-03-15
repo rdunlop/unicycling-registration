@@ -13,7 +13,11 @@
     <% @event.chief_judges.each do |admin| %>
       <tr>
         <td><%= admin %></td>
-        <td><%= link_to "Destroy", destroy_chief_event_path(@event, :user_id => admin), method: :delete %></td>
+        <td>
+          <% if can? :destroy_chief, @event %>
+            <%= link_to "Destroy", destroy_chief_event_path(@event, :user_id => admin), method: :delete %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -106,7 +110,7 @@
 <h2>Judging Results</h2>
 
 <% @event.competitions.each do |competition| %>
-  <%= link_to "Manage Judges for #{competition}", competition_judges_path(competition) %><br />
+  <%= link_to "Manage Judges/Officials for #{competition}", competition_judges_path(competition) %><br />
 <% end %>
 <br />
 

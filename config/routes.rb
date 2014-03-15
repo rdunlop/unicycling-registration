@@ -266,6 +266,7 @@ Workspace::Application.routes.draw do
       resources :judges,      :only => [:index, :new, :create, :destroy] do
         collection do
           post :create_normal
+          post :create_race_official
           post :copy_judges
         end
       end
