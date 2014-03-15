@@ -43,7 +43,7 @@ class CompetitorsController < ApplicationController
         format.html { redirect_to competition_competitors_path(@competition), notice: msg }
       rescue Exception => ex
         index
-        format.html { render "index", alert: 'Error adding Registrants (0 added)' }
+        format.html { render "index", alert: "Error adding Registrants (0 added) #{ex}" }
       end
     end
   end
@@ -60,6 +60,7 @@ class CompetitorsController < ApplicationController
         msg = @competition.create_competitors_from_registrants(Registrant.where(:competitor => true).all)
         format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
       rescue Exception => ex
+        new
         format.html { render "new", alert: "Error adding Registrants. #{ex}" }
       end
     end
@@ -126,7 +127,7 @@ class CompetitorsController < ApplicationController
     end
     File.open(upload_file, 'r:ISO-8859-1') do |f|
      f.each do |line|
-      row = CSV.parse_line (line)
+      row = CSV.parse_line(line)
 
       if row.count == 1
         # High/Long forme
