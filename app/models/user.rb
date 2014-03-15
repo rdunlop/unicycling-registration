@@ -51,8 +51,8 @@ class User < ActiveRecord::Base
     when :judge
       "[e.g. Judge Volunteers] Able to view the judging menu, and enter scores for any event"
     when :admin
-      "[e.g. Scott/Connie] 
-      Able to create onsite payments, 
+      "[e.g. Scott/Connie]
+      Able to create onsite payments,
       adjust many details of the system.
       can create/assign judges
       Can assign Chief Judges

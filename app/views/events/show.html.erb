@@ -110,36 +110,38 @@
 <% end %>
 <br />
 
-<table>
-  <caption>Judge-specific results</caption>
-  <thead>
-    <tr>
-      <th>Competition</th>
-      <th>Judge</th>
-      <th># Competitors</th>
-      <th># Results Entered</th>
-      <th>Results</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @event.competitions.each do |competition| %>
-      <% competition.judges.each do |judge| %>
-        <tr>
-          <td><%= competition %></td>
-          <td><%= judge %></td>
-          <td><%= competition.competitors.count %></td>
-          <td><%= judge.get_scores.count %></td>
-          <td>Not yet imelmented</td>
-        </tr>
+<% if @event.competitions.any?{|comp| comp.judges.count > 0 } %>
+  <table>
+    <caption>Judge-specific results</caption>
+    <thead>
+      <tr>
+        <th>Competition</th>
+        <th>Judge</th>
+        <th># Competitors</th>
+        <th># Results Entered</th>
+        <th>Results</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @event.competitions.each do |competition| %>
+        <% competition.judges.each do |judge| %>
+          <tr>
+            <td><%= competition %></td>
+            <td><%= judge %></td>
+            <td><%= competition.competitors.count %></td>
+            <td><%= judge.get_scores.count %></td>
+            <td>Not yet imelmented</td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<% end %>
 
-<table>
-  <caption>Competition Results Summaries</caption>
-  <thead>
-    <tr>
+  <table>
+    <caption>Competition Results Summaries</caption>
+    <thead>
+      <tr>
       <th>Competition</th>
       <th>Locked?</th>
       <th>Import Results</th>
