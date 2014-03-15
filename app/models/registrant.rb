@@ -267,7 +267,7 @@ class Registrant < ActiveRecord::Base
     required_if_event_choice = event_choice.required_if_event_choice
 
     if event_selected && !valid_with_required_selection(event_choice, reg_choice)
-      errors[:base] << "#{event_choice.to_s } must be specified unless #{optional_if_event_choice.to_s} is chosen"
+      errors[:base] << "#{event_choice.to_s } must be specified if #{required_if_event_choice.to_s} is chosen"
       return false
     end
 

@@ -51,6 +51,11 @@
     Choosing an Event Choice here allows this field to be optional.
   </div>
   <div class="field">
+    <%= f.label :required_if_event_choice_id, "Required if this event_choice is chosen" %><br />
+    <%= f.select :required_if_event_choice_id, @event_choices.map{|ec| [ec.label, ec.id]}, :include_blank => true %><br />
+    Choosing an Event Choice here requires this field to be present.
+  </div>
+  <div class="field">
     <%= f.label :autocomplete %><br />
     <%= f.check_box :autocomplete %><br />
     Enabling this option will cause Auto-complete suggestions to be presented to each registrant.<br />
