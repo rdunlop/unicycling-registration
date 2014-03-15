@@ -3,7 +3,8 @@ class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_competition, :only => [:index, :new, :create, :add, :upload, :add_all, :destroy_all, :create_from_sign_ups]
   before_filter :load_new_competitor, :only => [:create]
-  load_and_authorize_resource
+  load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy]
+  load_and_authorize_resource :only => [:edit, :update, :destroy]
 
   private
   def load_competition
