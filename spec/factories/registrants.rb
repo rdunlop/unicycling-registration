@@ -42,8 +42,10 @@ FactoryGirl.define do
       responsible_adult_phone "911"
     end
     before(:create) {
-      @ws20 = FactoryGirl.create(:wheel_size_20)
-      @ws24 = FactoryGirl.create(:wheel_size_24)
+      if WheelSize.count == 0
+        @ws20 = FactoryGirl.create(:wheel_size_20)
+        @ws24 = FactoryGirl.create(:wheel_size_24)
+      end
     }
   end
 end
