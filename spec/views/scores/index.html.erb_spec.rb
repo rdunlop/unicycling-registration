@@ -71,7 +71,7 @@ describe "scores/index" do
   it "shows the update button" do
     @ability.can :create_scores, @ec
     render
-      assert_select "a", :text => "Update".to_s, :count => 2
+    assert_select "a", :text => "Update".to_s, :count => 2
   end
   it "doesn't show the update button if event is locked" do
     render

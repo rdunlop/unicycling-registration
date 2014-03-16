@@ -11,8 +11,12 @@
 
     <% # Display the scores, but allow one for editing %>
     <%= conditional_form_for([@judge, @score.try(:competitor), @score], !@score.nil?) do |f| %>
-    <%= render :partial => "/shared/error_messages", :object => @score %>
-    <%= render :partial => "/shared/error_messages", :object => @boundary_score %>
+      <% unless @score.nil? %>
+        <%= render :partial => "/shared/error_messages", :object => @score %>
+      <% end %>
+      <% unless @boundary_score.nil? %>
+        <%= render :partial => "/shared/error_messages", :object => @boundary_score %>
+      <% end %>
 
     <table class="judging">
         <%= render :partial => "/scores/judge_header", :object => @judge %>
