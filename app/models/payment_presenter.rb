@@ -4,7 +4,7 @@ class PaymentPresenter
   # references
   # http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/
   # http://stackoverflow.com/questions/972857/multiple-objects-in-a-rails-form
-  include Virtus
+  include Virtus.model
 
   extend ActiveModel::Naming
   include ActiveModel::Conversion
@@ -34,7 +34,7 @@ class PaymentPresenter
   end
 
   class PaymentDetailPresenter
-    include Virtus
+    include Virtus.model
 
     extend ActiveModel::Naming
     include ActiveModel::Conversion

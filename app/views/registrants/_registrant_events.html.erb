@@ -1,7 +1,7 @@
 <div class="event_summary">
   <div class="data_block">
     <% printed_events_header = false %>
-    <% Category.includes(:events).all.each do |cat| %>
+    <% Category.includes(:events).each do |cat| %>
       <% if @registrant.has_event_in_category?(cat) %>
 
         <% unless printed_events_header %>

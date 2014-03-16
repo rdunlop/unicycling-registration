@@ -5,7 +5,7 @@
   <%= stylesheet_link_tag  EventConfiguration.style_name, :media => "all" %>
   <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
     <%= stylesheet_link_tag    "dev", :media => "all" %>
-  <% end %>  
+  <% end %>
   <%= javascript_include_tag "application" %>
   <%= favicon_link_tag %>
   <%= csrf_meta_tags %>

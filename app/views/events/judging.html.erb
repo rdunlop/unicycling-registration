@@ -1,4 +1,4 @@
-<h1>My Judging Events</h1> 
+<h1>My Judging Events</h1>
 
 <ul>
 <% @judges.each do |judge| %>
@@ -9,7 +9,7 @@
 <%if can? :create, LaneAssignment %>
   <h1>Lane Assignments</h1>
   <ul>
-    <% Competition.event_order.all.each do |comp| %>
+    <% Competition.event_order.each do |comp| %>
       <% next unless comp.uses_lane_assignments %>
       <li><%= link_to "#{comp} Lane Assignments", competition_lane_assignments_path(comp) %></li>
     <% end %>

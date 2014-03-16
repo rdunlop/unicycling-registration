@@ -39,7 +39,7 @@ class Registrant < ActiveRecord::Base
   has_many :events, :through => :event_choices
   has_many :categories, :through => :events
 
-  has_many :registrant_expense_items, :include => :expense_item, :dependent => :destroy
+  has_many :registrant_expense_items, -> { includes :expense_item}, :dependent => :destroy
   has_many :expense_items, :through => :registrant_expense_items
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
   before_create :create_associated_required_expense_items
@@ -48,7 +48,7 @@ class Registrant < ActiveRecord::Base
 
   default_scope  { where(:deleted => false).order(:bib_number) }
 
-  has_many :payment_details, :include => :payment, :dependent => :destroy
+  has_many :payment_details, -> {includes :payment}, :dependent => :destroy
   has_many :payments, :through => :payment_details
   has_many :refund_details, :through => :payment_details
   has_many :refunds, :through => :refund_details

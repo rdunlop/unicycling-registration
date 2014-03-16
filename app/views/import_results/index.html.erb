@@ -47,10 +47,10 @@
   </tbody>
 </table>
 <%= form_tag(destroy_all_user_competition_import_results_path(@user, @competition), {:method => :delete, :multipart=>true}) do %>
-  <%= submit_tag "Delete all in Temp Table", :class => "data_import_delete", :confirm => "DELETE, Are you sure?" %>
+  <%= submit_tag "Delete all in Temp Table", :class => "data_import_delete", data: {:confirm => "DELETE, Are you sure?" } %>
 <% end %>
 <%= form_tag(publish_to_competition_user_competition_import_results_path(@user, @competition), {:method => :post}) do %>
-  <%= submit_tag "Import all in Temp Table into Competition", :class=> "data_import_submit", :confirm => "IMPORT, Are you sure?" %>
+  <%= submit_tag "Import all in Temp Table into Competition", :class=> "data_import_submit", data: {:confirm => "IMPORT, Are you sure?" } %>
 <% end %>
 <hr />
 

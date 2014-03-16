@@ -36,7 +36,7 @@ class Admin::ExportController < Admin::BaseController
           wheel_size_name = age["wheel_size_name"]
           age.delete("wheel_size_name")
           unless wheel_size_name.nil?
-            wheel_size = WheelSize.find_or_create_by_description(wheel_size_name)
+            wheel_size = WheelSize.find_or_create_by(description: wheel_size_name)
             if wheel_size.new_record?
               wheel_size.position = 1
               wheel_size.save!
@@ -256,10 +256,10 @@ class Admin::ExportController < Admin::BaseController
 
   def download_events
 
-    event_categories = Event.includes(:event_categories => :event).all.flat_map{ |ev| ev.event_categories }
+    event_categories = Event.includes(:event_categories => :event).flat_map{ |ev| ev.event_categories }
     event_categories_titles = event_categories.map{|ec| ec.to_s}
 
-    event_choices = Event.includes(:event_choices => :event).all.flat_map{ |ev| ev.event_choices }
+    event_choices = Event.includes(:event_choices => :event).flat_map{ |ev| ev.event_choices }
     event_titles = event_choices.map{|ec| ec.to_s}
 
     titles = ["Registrant Name", "Age", "Gender"] + event_categories_titles + event_titles

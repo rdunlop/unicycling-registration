@@ -10,8 +10,8 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def index
-    @payments = Payment.includes(:user).all
-    @refunds = Refund.includes(:user).all
+    @payments = Payment.includes(:user)
+    @refunds = Refund.includes(:user)
   end
 
   def details
@@ -41,7 +41,7 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def onsite_pay_new
-    @registrants = Registrant.order(:bib_number).all
+    @registrants = Registrant.order(:bib_number)
   end
 
   def adjust_payment_choose

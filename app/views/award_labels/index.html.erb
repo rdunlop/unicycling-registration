@@ -3,13 +3,13 @@
 <h2>Create Labels For a specific Registrant/Registrant-Group/Competition</h2>
 <%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post}) do %>
   <%= label_tag :registrant_id, "Single Registrant" %>
-  <%= select_tag :registrant_id, options_from_collection_for_select(Registrant.order(:bib_number).all, "id", "with_id_to_s"), :include_blank => true %><br />
+  <%= select_tag :registrant_id, options_from_collection_for_select(Registrant.order(:bib_number), "id", "with_id_to_s"), :include_blank => true %><br />
 
   <%= label_tag :registrant_group_id, "Registrant Group" %>
-  <%= select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name).all, "id", "to_s"), :include_blank => true %><br />
+  <%= select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name), "id", "to_s"), :include_blank => true %><br />
 
   <%= label_tag :competition_id, "Competition" %>
-  <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name).all, "id", "to_s"), :include_blank => true %><br />
+  <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name), "id", "to_s"), :include_blank => true %><br />
   <br />
 
   <%= label_tag :minimum_place, "Minimum Award Place" %>
@@ -45,7 +45,7 @@
 
 
  <%= form_tag(destroy_all_user_award_labels_path(@user), {:method => :delete, :multipart=>true}) do %>
-   <%= submit_tag "Clear Table", :confirm => "DELETE. Are you sure?", :class => "awards_delete"  %>
+   <%= submit_tag "Clear Table", data: { :confirm => "DELETE. Are you sure?"}, :class => "awards_delete"  %>
  <% end %>
 
 <table class="sortable">

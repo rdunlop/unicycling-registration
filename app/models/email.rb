@@ -1,5 +1,5 @@
 class Email
-  include Virtus
+  include Virtus.model
   include ActiveModel::Validations
   include ActiveModel::Conversion
 

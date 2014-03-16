@@ -30,7 +30,7 @@
             <td><%= ss.val_1 %></td>
             <td class="derived"><%= @competition.score_judged_place(ss) %></td>
             <td class="derived"><%= @competition.score_judged_points(ss) %></td>
-            <td><%= link_to t('Destroy'), judge_street_score_path(@judge, ss), confirm: 'Are you sure?', method: :delete %></td>
+            <td><%= link_to t('Destroy'), judge_street_score_path(@judge, ss), data: { confirm: 'Are you sure?' }, method: :delete %></td>
         </tr>
     <% end %>
         </tbody>

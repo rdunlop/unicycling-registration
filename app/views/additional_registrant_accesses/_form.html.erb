@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :registrant_id %><br />
-    <%= f.select :registrant_id, Registrant.order("first_name, last_name").all.map{ |reg| [reg, reg.id] }, :include_blank => true %>
+    <%= f.select :registrant_id, Registrant.order("first_name, last_name").map{ |reg| [reg, reg.id] }, :include_blank => true %>
   </div>
 
   <div class="actions">

@@ -7,7 +7,7 @@
   <td><%= skill_entry.standard_skill_entry.description %></td>
   <td>
     <% if can? :destroy, skill_entry %>
-      <%= link_to 'destroy', [@standard_skill_routine, skill_entry], remote: true, confirm: 'Are you sure?', method: :delete %>
+      <%= link_to 'destroy', [@standard_skill_routine, skill_entry], remote: true, data: { confirm: 'Are you sure?' }, method: :delete %>
     <% end %>
   </td>
 </tr>

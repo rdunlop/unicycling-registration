@@ -18,7 +18,7 @@
       <th><%= f.label :rank %></th>
     </tr>
     <tr>
-      <td><%= f.select :competitor_id, @competition.competitors.all.map { |comp| ["#{comp.external_id}-#{comp}", comp.id] }, :include_blank => true %></td>
+      <td><%= f.select :competitor_id, @competition.competitors.map { |comp| ["#{comp.external_id}-#{comp}", comp.id] }, :include_blank => true %></td>
       <td><%= f.text_field :details %></td>
       <td><%= f.number_field :rank %></td>
       <td><%= f.submit %></td>
