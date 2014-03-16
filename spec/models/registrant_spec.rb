@@ -242,8 +242,16 @@ describe Registrant do
 
     describe "having paid for the item once, but still having it as a registrant_expense_item" do
       before(:each) do
-        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment = FactoryGirl.create(:payment)
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @item.cost, :expense_item => @item)
+        @payment.reload
+        @payment.completed = true
+        @payment.save!
+
+        rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
+        @reg.registrant_expense_items << rei
+        rei.save
+        @reg.reload
       end
       it "lists one remaining item as owing" do
         @reg.owing_expense_items.should == [@item]
@@ -432,7 +440,7 @@ describe Registrant do
     describe "with an incomplete payment" do
       before(:each) do
         @comp = FactoryGirl.create(:competitor)
-        @payment = FactoryGirl.create(:payment, :completed => false)
+        @payment = FactoryGirl.create(:payment)
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100, :expense_item => @comp_exp)
       end
       it "should have associated payment_details" do
@@ -732,8 +740,11 @@ describe Registrant do
     describe "when it has a paid expense_item" do
       before(:each) do
         @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
-        @pay = FactoryGirl.create(:payment, :completed => true)
+        @pay = FactoryGirl.create(:payment)
         @pei = FactoryGirl.create(:payment_detail, :registrant => @reg, :payment => @pay, :expense_item => @ei, :free => true)
+        @pay.reload
+        @pay.completed = true
+        @pay.save!
         @reg.reload
       end
 
@@ -804,8 +815,11 @@ describe Registrant do
 
     describe "when it has paid for the expense_item" do
       before(:each) do
-        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment = FactoryGirl.create(:payment)
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @nc_reg, :amount => @ei.cost, :expense_item => @ei)
+        @payment.reload
+        @payment.completed = true
+        @payment.save!
         @nc_reg.reload
       end
 
@@ -833,8 +847,11 @@ describe Registrant do
 
     describe "when it has paid for the expense_item" do
       before(:each) do
-        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment = FactoryGirl.create(:payment)
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @ei.cost, :expense_item => @ei)
+        @payment.reload
+        @payment.completed = true
+        @payment.save!
         @reg.reload
       end
 
@@ -862,8 +879,11 @@ describe Registrant do
 
     describe "when it has paid for the expense_item" do
       before(:each) do
-        @payment = FactoryGirl.create(:payment, :completed => true)
+        @payment = FactoryGirl.create(:payment)
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg2, :amount => @ei.cost, :expense_item => @ei)
+        @payment.reload
+        @payment.completed = true
+        @payment.save!
         @reg2.reload
       end
 
@@ -871,7 +891,7 @@ describe Registrant do
         @reg2.has_required_expense_group(@eg).should == true
       end
       it "no longer has the item as owing" do
-        @reg.owing_registrant_expense_items.count.should == 0
+        @reg2.owing_registrant_expense_items.count.should == 0
       end
     end
   end
