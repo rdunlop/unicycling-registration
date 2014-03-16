@@ -126,7 +126,7 @@ describe CompetitionsController do
         competition = FactoryGirl.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
         Competition.any_instance.stub(:save).and_return(false)
-        put :update, {:id => competition.to_param, :competition => {}}
+        put :update, {:id => competition.to_param, :competition => {:name => "fake"}}
         assigns(:competition).should eq(competition)
       end
 

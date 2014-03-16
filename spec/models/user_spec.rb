@@ -41,7 +41,7 @@ describe User do
       end
 
       it "lists only users who have registranst" do
-        User.all_with_registrants.all.should == [@user]
+        User.all_with_registrants.should == [@user]
       end
     end
     describe "with a user who is not confirmed" do

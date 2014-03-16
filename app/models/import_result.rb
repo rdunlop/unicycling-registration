@@ -6,5 +6,5 @@ class ImportResult < ActiveRecord::Base
   belongs_to :user
   belongs_to :competition
 
-  default_scope order(:bib_number)
+  default_scope { order(:bib_number) }
 end

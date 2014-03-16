@@ -5,7 +5,7 @@ class TimeResult < ActiveRecord::Base
   validates :competitor_id, :presence => true, :uniqueness => true
   validates :disqualified, :inclusion => { :in => [true, false] } # because it's a boolean
 
-  scope :fastest_first, order("disqualified, minutes, seconds, thousands")
+  scope :fastest_first, -> { order("disqualified, minutes, seconds, thousands") }
 
   after_initialize :init
 

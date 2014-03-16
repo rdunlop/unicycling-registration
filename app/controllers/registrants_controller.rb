@@ -11,7 +11,7 @@ class RegistrantsController < ApplicationController
 
   def load_categories
     if @registrant.competitor
-      @categories = Category.includes(:events).all
+      @categories = Category.includes(:events)
     end
   end
 
@@ -29,7 +29,7 @@ class RegistrantsController < ApplicationController
   public
 
   def all_index
-    @registrants = Registrant.unscoped.all
+    @registrants = Registrant.unscoped
   end
 
   # GET /registrants
@@ -281,7 +281,7 @@ class RegistrantsController < ApplicationController
   end
 
   def show_all
-    @registrants = Registrant.order(:last_name, :first_name).all
+    @registrants = Registrant.order(:last_name, :first_name)
 
     respond_to do |format|
       format.html # show_all.html.erb

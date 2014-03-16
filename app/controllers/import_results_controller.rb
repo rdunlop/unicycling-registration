@@ -25,7 +25,7 @@ class ImportResultsController < ApplicationController
   # GET /users/#/import_results
   # GET /users/#/import_results.json
   def index
-    @import_results = @user.import_results.where(:competition_id => @competition).all
+    @import_results = @user.import_results.where(:competition_id => @competition)
     @import_result = ImportResult.new
 
     respond_to do |format|

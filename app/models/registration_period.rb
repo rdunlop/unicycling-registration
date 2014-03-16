@@ -1,5 +1,5 @@
 class RegistrationPeriod < ActiveRecord::Base
-  default_scope order('start_date ASC')
+  default_scope { order('start_date ASC') }
 
   validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
 
@@ -57,7 +57,7 @@ class RegistrationPeriod < ActiveRecord::Base
     rp = RegistrationPeriod.find_by_id(rp_id)
     return rp unless rp.nil?
 
-    RegistrationPeriod.includes(:competitor_expense_item, :noncompetitor_expense_item).all.each do |rp|
+    RegistrationPeriod.includes(:competitor_expense_item, :noncompetitor_expense_item).each do |rp|
       if rp.current_period?(date)
         Rails.cache.write("/registration_period/by_date/#{date}", rp.id, :expires_in => 5.minutes)
         return rp

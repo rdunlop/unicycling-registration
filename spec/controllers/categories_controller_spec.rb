@@ -131,7 +131,7 @@ describe CategoriesController do
         category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
-        put :update, {:id => category.to_param, :category => {}}
+        put :update, {:id => category.to_param, :category => {:name => 'fake'}}
         assigns(:category).should eq(category)
       end
 

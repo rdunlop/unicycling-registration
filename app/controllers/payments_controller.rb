@@ -33,7 +33,7 @@ class PaymentsController < ApplicationController
 
   def summary
     @total_received = Payment.total_received
-    @expense_groups = ExpenseGroup.includes(:expense_items => [:translations, :expense_group]).all
+    @expense_groups = ExpenseGroup.includes(:expense_items => [:translations, :expense_group])
   end
 
 

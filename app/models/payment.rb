@@ -1,5 +1,5 @@
 class Payment < ActiveRecord::Base
-  scope :completed, where(:completed => true)
+  scope :completed, -> { where(:completed => true) }
 
   validates :user_id, :presence => true
   validate :transaction_id_or_note
@@ -123,7 +123,7 @@ class Payment < ActiveRecord::Base
 
   def self.paid_expense_items
     all = []
-    Registrant.includes(:payment_details => [:expense_item]).all.each do |reg|
+    Registrant.includes(:payment_details => [:expense_item]).each do |reg|
       all += reg.paid_expense_items
     end
     all

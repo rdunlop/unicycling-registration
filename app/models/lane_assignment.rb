@@ -6,5 +6,5 @@ class LaneAssignment < ActiveRecord::Base
   validates :heat, :uniqueness => {:scope => [:competition_id, :lane] }
 
 
-  default_scope order(:heat, :lane)
+  default_scope { order(:heat, :lane) }
 end

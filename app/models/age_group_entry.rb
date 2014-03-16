@@ -6,7 +6,7 @@ class AgeGroupEntry < ActiveRecord::Base
   belongs_to :age_group_type, :touch => true
   belongs_to :wheel_size
 
-  default_scope order(:short_description)
+  default_scope { order(:short_description) }
 
   # possibly replace this with override serializable hash (https://github.com/rails/rails/pull/2200)
   def as_json(options={})

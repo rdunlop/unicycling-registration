@@ -151,7 +151,7 @@ describe RegistrationPeriodsController do
         registration_period = RegistrationPeriod.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         RegistrationPeriod.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registration_period.to_param, :registration_period => {}}
+        put :update, {:id => registration_period.to_param, :registration_period => {:name => 'fake'}}
         assigns(:registration_period).should eq(registration_period)
       end
 

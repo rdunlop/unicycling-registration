@@ -1,5 +1,5 @@
 class ExpenseItem < ActiveRecord::Base
-  default_scope order('expense_group_id ASC, position ASC')
+  default_scope { order('expense_group_id ASC, position ASC') }
 
   validates :name, :description, :position, :cost, :expense_group, :tax_percentage, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
@@ -34,7 +34,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_unpaid
-    registrant_expense_items.all.count {|rei| !rei.registrant.nil?}
+    registrant_expense_items.joins(:registrant).where(:registrants => {:deleted => false}).count
   end
 
   def create_reg_items

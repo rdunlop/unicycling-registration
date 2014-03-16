@@ -4,8 +4,8 @@ class AdditionalRegistrantAccess < ActiveRecord::Base
   validates :user, :registrant, :presence => true
   validates :registrant_id, :uniqueness => {:scope => [:user_id]}
 
-  scope :permitted, where(:accepted_readonly => true)
-  scope :need_reply, where(:accepted_readonly => false, :declined => false)
+  scope :permitted, -> { where(:accepted_readonly => true) }
+  scope :need_reply, -> { where(:accepted_readonly => false, :declined => false) }
 
   after_initialize :init
 

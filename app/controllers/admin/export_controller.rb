@@ -264,7 +264,7 @@ class Admin::ExportController < Admin::BaseController
 
     titles = ["Registrant Name", "Age", "Gender"] + event_categories_titles + event_titles
     competitor_data = []
-    Registrant.includes(:registrant_event_sign_ups => {}, :registrant_choices => :event_choice).all.each do |reg|
+    Registrant.includes(:registrant_event_sign_ups => {}, :registrant_choices => :event_choice).each do |reg|
       comp_base = [reg.name, reg.age, reg.gender]
       reg_sign_up_data = []
       event_categories.each do |ec|

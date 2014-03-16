@@ -4,7 +4,7 @@ class StandardSkillEntry < ActiveRecord::Base
   validates :number, :points, :description, :presence => true
   validates :letter, :presence => true, :uniqueness => {:scope => :number } # not allowed to have the same number/letter pair twice
 
-  default_scope order('number, letter')
+  default_scope { order('number, letter') }
 
   def initialize_from_array(arr)
     self.number      = arr[0].to_i

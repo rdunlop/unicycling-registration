@@ -80,7 +80,7 @@ describe ScoresController do
         end
         it "works when the score is invalid" do
             expect {
-                post :create, {:score => {}, :boundary_score => valid_boundary_attributes, :judge_id => @judge_with_pres.id, :competitor_id => @comp.id}
+                post :create, {:score => {:number_of_people => 1}, :boundary_score => valid_boundary_attributes, :judge_id => @judge_with_pres.id, :competitor_id => @comp.id}
             }.to change(BoundaryScore, :count).by(0)
         end
     end
@@ -146,7 +146,7 @@ describe ScoresController do
         score = @signed_in_scores[0]
         # Trigger the behavior that occurs when invalid params are submitted
         Score.any_instance.stub(:save).and_return(false)
-        put :update, {:id => score.to_param, :score => {}, :judge_id => @judge, :competitor_id => @comp.id}
+        put :update, {:id => score.to_param, :score => {:number_of_people => 1}, :judge_id => @judge, :competitor_id => @comp.id}
         assigns(:score).should eq(score)
       end
 

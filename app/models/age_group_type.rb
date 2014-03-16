@@ -7,7 +7,7 @@ class AgeGroupType < ActiveRecord::Base
   after_save(:touch_competitions)
   after_touch(:touch_competitions)
 
-  default_scope order(:name)
+  default_scope { order(:name) }
 
   def touch_competitions
     competitions.each do |comp|

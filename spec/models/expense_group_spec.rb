@@ -24,7 +24,7 @@ describe ExpenseGroup do
 
   it "should only list the visible groups" do
     @group2 = FactoryGirl.create(:expense_group, :visible => true)
-    ExpenseGroup.visible.all == [@group]
+    ExpenseGroup.visible == [@group]
   end
 
   it "can have an expense_group without a free_option value" do
