@@ -1,7 +1,7 @@
 language: ruby
 bundler_args: --without development
 rvm:
-  - 2.1.1
+  - 2.1.0
 script: bundle exec rspec spec
 before_script:
   - cp config/database.yml.template config/database.yml
