@@ -3,6 +3,7 @@ class AddTranslationToEventConfiguration < ActiveRecord::Migration
      EventConfiguration.create_translation_table!({
        :short_name => :string,
        :long_name => :string,
+       :location => :string,
        :dates_description => :string
      }, {
        :migrate_data => true
