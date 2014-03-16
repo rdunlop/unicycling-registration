@@ -20,7 +20,7 @@ gem 'acts_as_list'
 gem 'rolify'
 gem 'rails_admin'
 gem 'carmen-rails'
-gem 'font-kit-rails'
+gem 'font-kit-rails', :git => "git://github.com/sandelius/font-kit-rails.git", :ref => "480c979b84aa4d32652772822dee2366c37eed2e" # to get a change which includes font-url
 gem 'fancybox-rails'
 gem 'http_accept_language'
 gem 'globalize', '~> 4.0.0'
