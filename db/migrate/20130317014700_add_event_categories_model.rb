@@ -2,7 +2,6 @@ class AddEventCategoriesModel < ActiveRecord::Migration
   class EventChoice < ActiveRecord::Base
   end
   class EventCategory < ActiveRecord::Base
-    attr_accessible :name, :position, :event_id
   end
 
   def change

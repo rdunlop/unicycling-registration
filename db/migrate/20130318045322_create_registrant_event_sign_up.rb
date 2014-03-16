@@ -2,7 +2,6 @@ class CreateRegistrantEventSignUp < ActiveRecord::Migration
 
   # for creating the necessary Event info
   class EventCategory < ActiveRecord::Base
-    attr_accessible :event_id, :position, :name
   end
 
   class Event < ActiveRecord::Base

@@ -10,7 +10,6 @@ class PopulateRegistrantEventSignUp < ActiveRecord::Migration
   end
 
   class RegistrantEventSignUp < ActiveRecord::Base
-    attr_accessible :registrant_id, :signed_up, :event_category_id
   end
 
   def up
