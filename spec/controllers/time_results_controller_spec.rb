@@ -125,7 +125,7 @@ describe TimeResultsController do
         time_result = TimeResult.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         TimeResult.any_instance.stub(:save).and_return(false)
-        put :update, {:id => time_result.to_param, :time_result => {}}
+        put :update, {:id => time_result.to_param, :time_result => {:disqualified => true}}
         assigns(:time_result).should eq(time_result)
       end
 

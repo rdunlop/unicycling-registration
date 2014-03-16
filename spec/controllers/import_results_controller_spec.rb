@@ -6,7 +6,7 @@ describe ImportResultsController do
     sign_in @admin_user
     @competition = FactoryGirl.create(:timed_competition)
   end
-  let (:import_result) { FactoryGirl.create(:import_result, :user => @admin_user, :competition => @competition) }
+  let(:import_result) { FactoryGirl.create(:import_result, :user => @admin_user, :competition => @competition) }
 
   # This should return the minimal set of attributes required to create a valid
   # ImportResult. As you add validations to ImportResult, be sure to

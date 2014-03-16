@@ -208,7 +208,7 @@ Workspace::Application.routes.draw do
         end
       end
       resources :competition, :only => [] do
-        resources :import_results, :shallow => true, :except => [:new, :show] do
+        resources :import_results, :only => [:index, :create] do
           collection do
             post :import_csv
             post :import_lif
@@ -232,6 +232,7 @@ Workspace::Application.routes.draw do
         delete :decline
       end
     end
+    resources :import_results, :only => [:edit, :update, :destroy]
 
     ###############################################
     ### For event-data-gathering/reporting purposes

@@ -118,7 +118,7 @@ describe ExpenseGroupsController do
         expense_group = ExpenseGroup.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ExpenseGroup.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expense_group.to_param, :expense_group => {}}
+        put :update, {:id => expense_group.to_param, :expense_group => {:info_url => "fake"}}
         assigns(:expense_group).should eq(expense_group)
       end
 
