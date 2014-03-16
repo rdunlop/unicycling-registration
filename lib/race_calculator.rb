@@ -11,7 +11,7 @@ class RaceCalculator
 
   # update the places for all age groups
   def update_all_places
-    @competition.time_results.includes(:competitor).order("minutes, seconds, thousands").each do |tr|
+    @competition.time_results.includes(:competitor).reorder("minutes, seconds, thousands").each do |tr|
       age_place_calc = get_place_calculator(tr.competitor.age_group_entry_description)
       gender_place_calc = get_place_calculator(tr.competitor.gender)
 
