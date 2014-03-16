@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   devise :confirmable unless (!ENV['MAIL_SKIP_CONFIRMATION'].nil? and ENV['MAIL_SKIP_CONFIRMATION'] == "true")
 
-  default_scope order('email ASC')
+  default_scope { order('email ASC') }
 
   has_paper_trail :meta => {:user_id => :id }
 

@@ -46,7 +46,7 @@ class Registrant < ActiveRecord::Base
   validate :not_exceeding_expense_item_limits
   validates_associated :registrant_expense_items
 
-  default_scope where(:deleted => false).order(:bib_number)
+  default_scope  { where(:deleted => false).order(:bib_number) }
 
   has_many :payment_details, :include => :payment, :dependent => :destroy
   has_many :payments, :through => :payment_details

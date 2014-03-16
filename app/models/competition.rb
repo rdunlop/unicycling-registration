@@ -25,7 +25,7 @@ class Competition < ActiveRecord::Base
   validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }
   validates :event_id, :presence => true
 
-  scope :event_order, includes(:event).order("events.name")
+  scope :event_order, -> { includes(:event).order("events.name") }
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
 

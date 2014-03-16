@@ -14,8 +14,8 @@ class ExpenseGroup < ActiveRecord::Base
   validates :competitor_free_options, :inclusion => { :in => self.free_options, :allow_blank => true }
   validates :noncompetitor_free_options, :inclusion => { :in => self.free_options, :allow_blank => true }
 
-  default_scope order('position ASC')
-  scope :visible, where(:visible => true)
+  default_scope { order('position ASC') }
+  scope :visible, -> { where(:visible => true) }
 
   after_initialize :init
 
