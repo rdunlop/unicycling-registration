@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= EventConfiguration.short_name %> <%= t(".registration") %></title>
-  <%= stylesheet_link_tag    EventConfiguration.style_name, :media => "all" %>
+  <%= stylesheet_link_tag  EventConfiguration.style_name, :media => "all" %>
   <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
     <%= stylesheet_link_tag    "dev", :media => "all" %>
   <% end %>  

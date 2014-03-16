@@ -2,7 +2,7 @@ class ExpenseGroup < ActiveRecord::Base
   validates :group_name, :presence => true
   validates :visible, :competitor_required, :noncompetitor_required, :inclusion => { :in => [true, false] } # because it's a boolean
 
-  has_many :expense_items,:order => "expense_items.position", :inverse_of => :expense_group
+  has_many :expense_items, -> {order "expense_items.position"}, :inverse_of => :expense_group
 
   translates :group_name
   accepts_nested_attributes_for :translations

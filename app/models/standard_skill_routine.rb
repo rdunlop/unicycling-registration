@@ -3,7 +3,7 @@ class StandardSkillRoutine < ActiveRecord::Base
 
   belongs_to :registrant
 
-  has_many :standard_skill_routine_entries, :dependent => :destroy, :order => "position"
+  has_many :standard_skill_routine_entries, -> {order "position"}, :dependent => :destroy
 
   def total_skill_points
     total = 0

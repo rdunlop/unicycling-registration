@@ -1,6 +1,6 @@
 class Competitor < ActiveRecord::Base
     has_many :members, :inverse_of => :competitor
-    has_many :registrants, :through => :members, :order => "bib_number"
+    has_many :registrants, -> { order "bib_number" }, :through => :members
     belongs_to :competition
     acts_as_list :scope => :competition
 
@@ -9,7 +9,7 @@ class Competitor < ActiveRecord::Base
     has_many :street_scores, :dependent => :destroy
     has_many :standard_execution_scores, :dependent => :destroy
     has_many :standard_difficulty_scores, :dependent => :destroy
-    has_many :distance_attempts, :dependent => :destroy, :order => "distance DESC, id DESC"
+    has_many :distance_attempts, -> { order "distance DESC, id DESC" }, :dependent => :destroy
     has_many :time_results, :dependent => :destroy
     has_many :external_results, :dependent => :destroy
 

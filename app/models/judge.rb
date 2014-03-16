@@ -5,12 +5,12 @@ class Judge < ActiveRecord::Base
 
     before_destroy :check_for_scores # must occur before the dependent->destroy
 
-    has_many :scores, :dependent => :destroy, :include => :competitor, :order => "competitors.position"
-    has_many :boundary_scores, :dependent => :destroy, :include => :competitor, :order => "competitors.position"
-    has_many :street_scores, :dependent => :destroy, :include => :competitor, :order => "competitors.position"
-    has_many :standard_execution_scores, :dependent => :destroy, :include => :standard_skill_routine_entry, :order => "standard_skill_routine_entries.position"
-    has_many :standard_difficulty_scores, :dependent => :destroy, :include => :standard_skill_routine_entry, :order => "standard_skill_routine_entries.position"
-    has_many :competitors, :through => :competition, :order => "position"
+    has_many :scores, -> {order("competitors.position").includes(:competitor) }, :dependent => :destroy
+    has_many :boundary_scores, -> {order("competitors.position").includes(:competitor) }, :dependent => :destroy
+    has_many :street_scores, -> {order("competitors.position").includes(:competitor)}, :dependent => :destroy
+    has_many :standard_execution_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, :dependent => :destroy
+    has_many :standard_difficulty_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, :dependent => :destroy
+    has_many :competitors, -> {order "position"}, :through => :competition
 
     accepts_nested_attributes_for :standard_execution_scores
     accepts_nested_attributes_for :standard_difficulty_scores

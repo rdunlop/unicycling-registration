@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   has_paper_trail :meta => {:user_id => :id }
 
-  has_many :registrants, :order => "registrants.id", :include => [:registrant_expense_items, :payment_details]
+  has_many :registrants, -> { order("registrants.id").includes [:registrant_expense_items, :payment_details] }
 
   has_many :additional_registrant_accesses, :dependent => :destroy
   has_many :invitations, :through => :registrants, :class_name => "AdditionalRegistrantAccess", :source => :additional_registrant_accesses

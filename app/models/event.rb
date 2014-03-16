@@ -1,8 +1,8 @@
 class Event < ActiveRecord::Base
-  has_many :event_choices, :order => "event_choices.position", :dependent => :destroy, :inverse_of => :event
+  has_many :event_choices, -> {order "event_choices.position"}, :dependent => :destroy, :inverse_of => :event
   accepts_nested_attributes_for :event_choices
 
-  has_many :event_categories, :dependent => :destroy, :order => "event_categories.position", :inverse_of => :event
+  has_many :event_categories, -> { order "event_categories.position"}, :dependent => :destroy, :inverse_of => :event
   accepts_nested_attributes_for :event_categories
 
   has_many :registrant_event_sign_ups, :dependent => :destroy, :inverse_of => :event

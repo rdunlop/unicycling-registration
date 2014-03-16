@@ -31,7 +31,7 @@ class Registrant < ActiveRecord::Base
 
   has_many :registrant_event_sign_ups, :dependent => :destroy , :inverse_of => :registrant
   accepts_nested_attributes_for :registrant_event_sign_ups
-  has_many :signed_up_events, :class_name => 'RegistrantEventSignUp', :conditions => ['signed_up = ?', true]
+  has_many :signed_up_events, -> { where ["signed_up = ?", true ] }, :class_name => 'RegistrantEventSignUp'
 
   validate :choices_combination_valid
 
@@ -112,9 +112,9 @@ class Registrant < ActiveRecord::Base
   # any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
   def required_expense_items
     if competitor
-      egs = ExpenseGroup.where({:competitor_required => true}).all
+      egs = ExpenseGroup.where({:competitor_required => true})
     else
-      egs = ExpenseGroup.where({:noncompetitor_required => true}).all
+      egs = ExpenseGroup.where({:noncompetitor_required => true})
     end
 
     req_eis = []

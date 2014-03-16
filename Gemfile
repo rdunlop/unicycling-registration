@@ -1,16 +1,14 @@
 source 'https://rubygems.org'
 
 ruby "1.9.3"
-gem 'rails', '3.2.16'
+gem 'rails', '4.0.4'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'therubyracer'
 gem 'rake'
 gem 'devise'
 gem 'cancancan', '~> 1.7'
 gem 'formtastic'
-gem 'paper_trail', '~> 2'
+gem 'paper_trail', '~> 3.0.1'
 gem 'exception_notification'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-heroku'
@@ -25,8 +23,7 @@ gem 'carmen-rails'
 gem 'font-kit-rails'
 gem 'fancybox-rails'
 gem 'http_accept_language'
-gem 'strong_parameters'
-gem 'globalize3'
+gem 'globalize', '~> 4.0.0'
 gem 'virtus'
 
 #gem 'sqlite3'
@@ -47,15 +44,13 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+gem 'sass-rails'
+gem 'coffee-rails'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer'
 
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'uglifier', '>= 1.0.3'
 
 gem 'jquery-rails'
 
