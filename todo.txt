@@ -1,5 +1,9 @@
 Last Re-Arranged February 6, 2014.
 
+- Add ability to upload music for competitions
+- Deal with partial refunds, and mark those properly (per Hugo's emails)
+- add a limit of 500 places between all 3 lodging types.
+
 =============================
 Registration-Related ToDo
 =============================

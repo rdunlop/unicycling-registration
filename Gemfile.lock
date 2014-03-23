@@ -48,7 +48,7 @@ GEM
       activesupport
       uniform_notifier (>= 1.4.0)
     cancancan (1.7.0)
-    carmen (1.0.1)
+    carmen (1.0.0)
       unicode_utils (~> 1.4.0)
     carmen-rails (1.0.1)
       carmen (~> 1.0.0)
@@ -259,6 +259,7 @@ DEPENDENCIES
   acts_as_list
   bullet
   cancancan (~> 1.7)
+  carmen (= 1.0.0)
   carmen-rails
   coffee-rails
   dalli
