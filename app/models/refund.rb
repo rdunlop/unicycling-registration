@@ -1,7 +1,6 @@
 class Refund < ActiveRecord::Base
-  validates :refund_date, :presence => true
-  validates :user_id, :presence => true
-  validates :note, :presence => true
+  validates :refund_date, :user_id, :note, :percentage, :presence => true
+  validates :percentage, inclusion: { in: 0..100 }
 
   validates_associated :refund_details
 

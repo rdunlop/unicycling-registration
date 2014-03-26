@@ -63,19 +63,19 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def refund_choose
-    @p = RefundPresenter.new
+    @refund_presenter = RefundPresenter.new
 
     params[:registrant_id].each do |reg_id|
       reg = Registrant.find(reg_id)
-      @p.add_registrant(reg)
+      @refund_presenter.add_registrant(reg)
     end
   end
 
   def refund_create
-    @p = RefundPresenter.new(params[:refund_presenter])
-    @p.user = current_user
+    @refund_presenter= RefundPresenter.new(params[:refund_presenter])
+    @refund_presenter.user = current_user
 
-    if @p.save
+    if @refund_presenter.save
       redirect_to admin_payments_path, notice: "Successfully created refund"
     else
       render "refund_choose"

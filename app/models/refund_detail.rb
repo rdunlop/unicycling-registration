@@ -7,6 +7,7 @@ class RefundDetail < ActiveRecord::Base
   after_save :create_required_registrant_item
   after_save :touch_payment_detail
 
+  delegate :percentage, to: :refund
   delegate :registrant, to: :payment_detail
 
   def create_required_registrant_item
