@@ -452,6 +452,7 @@ ActiveRecord::Schema.define(version: 20140329154306) do
     t.string   "value"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "music"
   end
 
   add_index "registrant_choices", ["event_choice_id"], name: "index_registrant_choices_event_choice_id", using: :btree
