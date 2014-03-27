@@ -3,6 +3,9 @@
 <p>
   <b>Note:</b>
   <%= @refund.note %>
+  <br />
+  <b>Refund Percentage:</b>
+  <%= @refund.percentage %>
 </p>
 
 <table class="sortable">
@@ -20,6 +23,6 @@
       </tr>
     <% end %>
   </tbody>
-</table> 
+</table>
 
 <%= link_to t('back'), user_payments_path(current_user) %>

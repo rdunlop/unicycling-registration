@@ -11,11 +11,12 @@
 <b>Note: Refunds don't cause the item to be added back to the Registrant's choices (except for 'required' items)</b>
 
 
-<% @registrants = @p.registrants %>
-<%= form_for(@p, :url => refund_create_admin_payments_path) do |pf| %>
-  <%= render :partial => "/shared/error_messages", :object => @p %>
+<% @registrants = @refund_presenter.registrants %>
+<%= form_for(@refund_presenter, :url => refund_create_admin_payments_path) do |pf| %>
+  <%= render :partial => "/shared/error_messages", :object => @refund_presenter %>
 
   <%= pf.label :note %><%= pf.text_field :note %>
+  <%= pf.label :percentage %><%= pf.number_field :percentage %>
 
   <h1>Paid Details</h1>
   <table class="sortable">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140315025811) do
+ActiveRecord::Schema.define(version: 20140326004144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -441,6 +441,7 @@ ActiveRecord::Schema.define(version: 20140315025811) do
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "percentage",  default: 100
   end
 
   add_index "refunds", ["user_id"], name: "index_refunds_on_user_id", using: :btree

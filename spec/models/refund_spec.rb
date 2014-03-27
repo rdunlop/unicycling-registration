@@ -5,6 +5,10 @@ describe Refund do
     @refund = FactoryGirl.create(:refund)
   end
 
+  it "should have 100% refund" do
+    @refund.percentage.should == 100
+  end
+
   it "creates a valid from factoryGirl" do
     @refund.valid?.should == true
   end

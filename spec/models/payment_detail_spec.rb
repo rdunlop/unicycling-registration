@@ -46,6 +46,19 @@ describe PaymentDetail do
     @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
     @pd.reload
     @pd.refunded?.should == true
+    @ref.percentage.should == 100
+    @pd.cost.should == 0
+  end
+
+  it "it marks the cost as partial if the refund is not 100%" do
+    @pd.refunded?.should == false
+    @refund_detail = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
+    @refund = @refund_detail.refund
+    @refund.percentage = 50
+    @refund.save!
+    @pd.reload
+    @pd.refunded?.should == true
+    @pd.cost.should == @pd.amount / 2.0
   end
 
   it "is not refunded by default" do

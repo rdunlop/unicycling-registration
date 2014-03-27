@@ -40,6 +40,7 @@ class PaymentDetail < ActiveRecord::Base
 
   def cost
     return 0 if free
+    return ((100 - refund_detail.percentage.to_f) / 100) * amount if refunded?
 
     amount
   end
