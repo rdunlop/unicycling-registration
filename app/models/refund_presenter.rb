@@ -8,6 +8,7 @@ class RefundPresenter
 
   extend ActiveModel::Naming
   include ActiveModel::Conversion
+  include ActiveModel::Validations
 
   attribute :note, String
   attribute :percentage, Integer
@@ -75,19 +76,14 @@ class RefundPresenter
     false
   end
 
-  # delegate to the underlying payment
   def errors
-    @errors || []
+    r = self.build_refund
+    r.valid?
+    r.errors
   end
-
-  def errors=(err)
-    @errors = err
-  end
-
   # validate based on the undelying payment validation
   def valid?
     r = self.build_refund
-    self.errors = r.errors.clone
     r.valid?
   end
 
