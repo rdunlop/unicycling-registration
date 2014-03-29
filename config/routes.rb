@@ -156,7 +156,6 @@ Workspace::Application.routes.draw do
 
       #normal user
       collection do
-        get :new_noncompetitor
         get :all
         get :empty_waiver
       end
