@@ -1,4 +1,6 @@
 class Registrant < ActiveRecord::Base
+  include Eligibility
+
   validates :first_name, :last_name, :birthday, :gender, :presence => true
   validates :address, :city, :country_residence, :zip, :presence => true
 
@@ -23,8 +25,6 @@ class Registrant < ActiveRecord::Base
 
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
-  belongs_to :user
-
   # may move into another object
   has_many :registrant_choices, :dependent => :destroy, :inverse_of => :registrant
   accepts_nested_attributes_for :registrant_choices
@@ -45,8 +45,6 @@ class Registrant < ActiveRecord::Base
   before_create :create_associated_required_expense_items
   validate :not_exceeding_expense_item_limits
   validates_associated :registrant_expense_items
-
-  default_scope  { where(:deleted => false).order(:bib_number) }
 
   has_many :payment_details, -> {includes :payment}, :dependent => :destroy
   has_many :payments, :through => :payment_details
@@ -74,6 +72,10 @@ class Registrant < ActiveRecord::Base
   validate :default_wheel_size_for_age
 
   after_save(:touch_members)
+
+  belongs_to :user
+
+  default_scope  { where(:deleted => false).order(:bib_number) }
 
   # updates the members, which update the competitors, if this competitor has changed (like their age, for example)
   def touch_members
@@ -373,11 +375,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def name
-    if ineligible
-      self.first_name + " " + self.last_name + "*"
-    else
-      self.first_name + " " + self.last_name
-    end
+    full_name = self.first_name + " " + self.last_name
+    display_eligibility(full_name, ineligible)
   end
 
   def user_email

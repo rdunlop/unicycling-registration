@@ -1,4 +1,5 @@
 class Competitor < ActiveRecord::Base
+  include Eligibility
     has_many :members, :inverse_of => :competitor
     has_many :registrants, -> { order "bib_number" }, :through => :members
     belongs_to :competition
@@ -46,7 +47,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def to_s
-        name
+      name
     end
 
     def bib_number
@@ -139,19 +140,16 @@ class Competitor < ActiveRecord::Base
     end
 
     def name
-        unless custom_name.nil? or custom_name.empty?
-            if self.ineligible
-              custom_name + "*"
-            else
-              custom_name
-            end
+      if custom_name.present?
+        comp_name = custom_name
+      else
+        if registrants.empty?
+          comp_name = "(No registrants)"
         else
-            if registrants.empty?
-                "(No registrants)"
-            else
-                registrants.map(&:name).join(" - ")
-            end
+          comp_name = registrants.map(&:name).join(" - ")
         end
+      end
+      display_eligibility(comp_name, ineligible)
     end
 
     def detailed_name
