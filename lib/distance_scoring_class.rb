@@ -2,7 +2,7 @@ class DistanceScoringClass < BaseScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    DistanceCalculator.new(@competition)
+    OrderedResultCalculator.new(@competition)
   end
 
   # describes how to label the results of this competition
@@ -34,6 +34,9 @@ class DistanceScoringClass < BaseScoringClass
     score_calculator.update_all_places
   end
 
+  def ordered_results
+    @competition.best_distance_attempts
+  end
 
   # Used when trying to destroy all results for a competition
   def all_competitor_results

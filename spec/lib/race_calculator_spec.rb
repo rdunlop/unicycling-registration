@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 
-describe RaceCalculator do
+describe OrderedResultCalculator do
 
   def recalc(calc = @calc)
     Rails.cache.clear
@@ -17,7 +17,7 @@ describe RaceCalculator do
       @event_configuration = FactoryGirl.create(:event_configuration, :start_date => Date.today)
       @event = FactoryGirl.create(:event)
       @age_group_entry = FactoryGirl.create(:age_group_entry) # 0-100 age group
-      @competition = FactoryGirl.create(:competition, :age_group_type => @age_group_entry.age_group_type, :event => @event)
+      @competition = FactoryGirl.create(:timed_competition, :age_group_type => @age_group_entry.age_group_type, :event => @event)
       FactoryGirl.create(:event_configuration, :start_date => Date.new(2013,01,01))
       # Note: Registrants are born in 1990, thus are 22 years old
       @tr1 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
@@ -25,7 +25,7 @@ describe RaceCalculator do
       @tr3 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
       @tr4 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
 
-      @calc = RaceCalculator.new(@competition)
+      @calc = OrderedResultCalculator.new(@competition)
     end
     describe "with 2 age_groups" do
       before(:each) do
@@ -173,7 +173,7 @@ describe RaceCalculator do
     it "has increasing thousands" do
       @all_together = FactoryGirl.create(:age_group_type)
       entr = FactoryGirl.create(:age_group_entry, :age_group_type => @all_together, :start_age => 0, :end_age => 100, :gender => "Male")
-      @comp = FactoryGirl.create(:competition, :age_group_type => @all_together)
+      @comp = FactoryGirl.create(:timed_competition, :age_group_type => @all_together)
       tr1 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 15, :thousands => 935, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
       tr2 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 23, :thousands => 97, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
       tr4 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 26, :thousands => 745, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
@@ -182,7 +182,7 @@ describe RaceCalculator do
       tr6 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 32, :thousands => 508, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
       tr7 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 32, :thousands => 815, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
 
-      rc = RaceCalculator.new(@comp)
+      rc = OrderedResultCalculator.new(@comp)
       recalc(rc)
 
       tr1.competitor.place.should == 1

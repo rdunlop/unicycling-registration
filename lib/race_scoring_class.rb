@@ -2,7 +2,7 @@ class RaceScoringClass < BaseScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    RaceCalculator.new(@competition)
+    OrderedResultCalculator.new(@competition)
   end
 
   # describes how to label the results of this competition
@@ -33,6 +33,9 @@ class RaceScoringClass < BaseScoringClass
     score_calculator.update_all_places
   end
 
+  def ordered_results
+    @competition.time_results.includes(:competitor).reorder("minutes, seconds, thousands")
+  end
 
   # Used when trying to destroy all results for a competition
   def all_competitor_results
