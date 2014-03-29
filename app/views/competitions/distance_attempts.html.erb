@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @distance_attempts.each do |da| %>
+      <% @competition.best_distance_attempts.each do |da| %>
         <tr>
           <td><%= da.competitor.external_id %></td>
           <td><%= da.competitor.name %></td>

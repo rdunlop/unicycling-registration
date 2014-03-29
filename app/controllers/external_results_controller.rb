@@ -15,7 +15,6 @@ class ExternalResultsController < ApplicationController
 
   # GET /competitions/#/external_results
   def index
-    @external_results = @competition.external_results
     @external_result = ExternalResult.new
 
     respond_to do |format|

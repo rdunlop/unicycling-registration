@@ -1,0 +1,38 @@
+<h1>Listing Externally Ranked Results for <%=  @competition %></h1>
+
+<%= link_to "Set Places", set_places_competition_path(@competition), method: :post, data: { :confirm => "This may take a few seconds" } %>
+Results: <%= link_to "View", results_printing_competition_path(@competition, :format => :pdf) %> <%= link_to "Save", results_printing_competition_path(@competition, :format => :pdf, :attachment => true) %>
+
+<table class="sortable">
+  <thead>
+    <tr>
+      <th>Competitor</th>
+      <th>Details</th>
+      <th>Rank</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age Group</th>
+      <th>Place</th>
+      <th>Overall Place</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @competition.external_results.each do |external_result| %>
+      <tr>
+        <td><%= external_result.competitor %></td>
+        <td><%= external_result.details %></td>
+        <td><%= external_result.rank %></td>
+        <td><%= external_result.competitor.bib_number %></td>
+        <td><%= external_result.competitor %></td>
+        <td><%= external_result.competitor.age_group_entry_description %></td>
+        <td><%= external_result.competitor.place %></td>
+        <td><%= external_result.competitor.overall_place %></td>
+        <td><%= link_to 'Edit', edit_external_result_path(external_result) %></td>
+        <td><%= link_to 'Destroy', external_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

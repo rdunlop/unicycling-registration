@@ -246,9 +246,8 @@ Workspace::Application.routes.draw do
         post :set_places
         get :export_scores
         # view scores
-        get :freestyle_scores
-        get :distance_attempts
-        get :street_scores
+        get :scores
+
         post :lock
         delete :lock
         delete :destroy_results
@@ -271,7 +270,6 @@ Workspace::Application.routes.draw do
       end
       resources :time_results, :only => [:index, :create] do
         collection do
-          get :results
           get :final_candidates
         end
       end

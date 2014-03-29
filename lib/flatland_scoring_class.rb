@@ -10,6 +10,10 @@ class FlatlandScoringClass < BaseScoringClass
     nil
   end
 
+  def render_path
+    "freestyle_scores"
+  end
+
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     false

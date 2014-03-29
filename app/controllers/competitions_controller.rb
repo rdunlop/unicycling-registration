@@ -108,22 +108,13 @@ class CompetitionsController < ApplicationController
     end
   end
 
-  def distance_attempts
-    @distance_attempts = @competition.best_distance_attempts
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-  end
-
   def set_places
     @competition.scoring_helper.place_all
     redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
   end
 
-  def freestyle_scores
-  end
-
-  def street_scores
+  def scores
+    render @competition.render_path
   end
 
   def export_scores

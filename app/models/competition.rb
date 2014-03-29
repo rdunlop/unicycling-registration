@@ -151,6 +151,10 @@ class Competition < ActiveRecord::Base
     scoring_class
   end
 
+  def render_path
+    scoring_helper.render_path
+  end
+
   def scoring_helper
     case event_class
     when "Distance"

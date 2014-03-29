@@ -10,6 +10,10 @@ class ExternallyRankedScoringClass < BaseScoringClass
     "Score"
   end
 
+  def render_path
+    "external_results"
+  end
+
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.external_results.count > 0
@@ -37,7 +41,7 @@ class ExternallyRankedScoringClass < BaseScoringClass
 
   # the page where all of the results for this competition are listed
   def results_path
-    competition_external_results_path(I18n.locale, @competition)
+    scores_competition_path(I18n.locale, @competition)
   end
 
   def results_importable

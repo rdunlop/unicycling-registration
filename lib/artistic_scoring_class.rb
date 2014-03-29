@@ -12,6 +12,10 @@ class ArtisticScoringClass < BaseScoringClass
     nil
   end
 
+  def render_path
+    "freestyle_scores"
+  end
+
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.scores.count > 0
@@ -39,7 +43,7 @@ class ArtisticScoringClass < BaseScoringClass
 
   # the page where all of the results for this competition are listed
   def results_path
-    freestyle_scores_competition_path(I18n.locale, @competition)
+    scores_competition_path(I18n.locale, @competition)
   end
 
 

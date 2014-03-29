@@ -1,5 +1,6 @@
 Last Re-Arranged February 6, 2014.
 
+- Replace the lib/helpers with concerns or PORO
 - for feedback of not-logged-in to supply an e-mail address
 - Add ability to upload music for competitions
 - add a limit of 500 places between all 3 lodging types.

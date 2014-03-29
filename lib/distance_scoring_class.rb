@@ -10,6 +10,10 @@ class DistanceScoringClass < BaseScoringClass
     "Distance"
   end
 
+  def render_path
+    "distance_attempts"
+  end
+
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.max_successful_distance != 0
@@ -38,7 +42,7 @@ class DistanceScoringClass < BaseScoringClass
 
   # the page where all of the results for this competition are listed
   def results_path
-    distance_attempts_competition_path(I18n.locale, @competition)
+    scores_competition_path(I18n.locale, @competition)
   end
 
   def results_importable

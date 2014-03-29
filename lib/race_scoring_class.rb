@@ -10,6 +10,10 @@ class RaceScoringClass < BaseScoringClass
     "Time"
   end
 
+  def render_path
+    "time_results"
+  end
+
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.time_results.count > 0
@@ -37,7 +41,7 @@ class RaceScoringClass < BaseScoringClass
 
   # the page where all of the results for this competition are listed
   def results_path
-    competition_time_results_path(I18n.locale, @competition)
+    scores_competition_path(I18n.locale, @competition)
   end
 
   def results_importable

@@ -10,6 +10,10 @@ class StreetScoringClass < BaseScoringClass
     nil
   end
 
+  def render_path
+    "street_scores"
+  end
+
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     false
