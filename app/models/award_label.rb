@@ -1,31 +1,63 @@
 class AwardLabel < ActiveRecord::Base
   validates :registrant_id, :presence => true
   validates :user_id, :presence => true
-  validates :place, :presence => true, :numericality => {:greater_than => 0} 
+  validates :place, :presence => true, :numericality => {:greater_than => 0}
 
   belongs_to :user
   belongs_to :registrant
 
 
+  def build_name_from_competitor_and_registrant(competitor, registrant)
+    res = "#{registrant.first_name} #{registrant.last_name}"
+    if competitor.members.count == 2
+      partner = (competitor.registrants - [registrant]).first
+
+      res += " & " + partner.first_name + " " + partner.last_name
+    end
+    res
+  end
+
+  def build_category_name(competitor, expert)
+
+    if expert
+      age_group = "Expert #{competitor.gender}"
+    else
+      if competitor.competition.has_age_groups
+        age_group = competitor.age_group_entry_description
+      end
+    end
+
+    if competitor.competition.include_event_name
+      age_group = competitor.competition.name
+    end
+
+    if age_group == "All" # Don't display if age_group result is 'All'
+      age_group = nil
+    end
+
+    if competitor.members.count > 1
+      gender = nil
+    else
+      gender = competitor.gender
+    end
+
+    res = ""
+    if age_group.present?
+      res += age_group
+    else
+      # No Age Group?
+      if gender.present?
+        res += gender
+      end
+    end
+
+    res
+  end
+
   def populate_from_competitor(competitor, registrant, expert = false)
 
     # line 1
-    res = "#{registrant.first_name} #{registrant.last_name}"
-    if competitor.members.count == 2
-      reg1 = competitor.members.first.registrant
-      reg2 = competitor.members.last.registrant
-      if reg1 == registrant
-        reg = reg2
-      else
-        reg = reg1
-      end
-      partner_first_name = reg.first_name
-      partner_last_name = reg.last_name
-      unless partner_first_name.nil? or partner_first_name.blank?
-        res += " & " + partner_first_name + " " + partner_last_name
-      end
-    end
-    self.competitor_name =res
+    self.competitor_name = build_name_from_competitor_and_registrant(competitor, registrant)
 
     # line 2
     if competitor.competition.include_event_name
@@ -39,35 +71,7 @@ class AwardLabel < ActiveRecord::Base
     self.team_name = competitor.team_name
 
     # line 4
-    if expert
-      age_group = "Expert #{competitor.gender}"
-    else
-      if competitor.competition.has_age_groups
-        age_group = competitor.age_group_entry_description
-      end
-    end
-    if competitor.competition.include_event_name
-      age_group = competitor.competition.name
-    end
-    if age_group == "All" # Don't display if age_group result is 'All'
-      age_group = nil
-    end
-    if competitor.members.count > 1
-      gender = nil
-    else
-      gender = competitor.gender
-    end
-
-    res = ""
-    unless age_group.nil? or age_group.empty?
-      res += age_group
-    else
-      # No Age Group?
-      unless gender.nil? or gender.empty?
-        res += gender
-      end
-    end
-    self.category = res
+    self.category = build_category_name(competitor, expert)
 
     # line 5
     self.details = competitor.result
