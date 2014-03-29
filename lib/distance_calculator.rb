@@ -17,8 +17,8 @@ class DistanceCalculator
       age_place_calc = get_place_calculator(da.competitor.age_group_entry_description)
       gender_place_calc = get_place_calculator(da.competitor.gender)
 
-      da.competitor.place = age_place_calc.place_next(da.distance, da.fault, da.competitor.ineligible)
-      da.competitor.overall_place = gender_place_calc.place_next(da.distance, da.fault, da.competitor.ineligible)
+      da.competitor.place = age_place_calc.place_next(da.result, da.disqualified, da.competitor.ineligible)
+      da.competitor.overall_place = gender_place_calc.place_next(da.result, da.disqualified, da.competitor.ineligible)
     end
   end
 end

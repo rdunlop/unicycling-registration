@@ -31,6 +31,7 @@ gem 'virtus'
 gem 'pg'
 
 group :development, :test, :cucumber do
+  gem 'annotate'
   gem 'bullet'
   #gem 'brakeman'
   gem 'factory_girl_rails'

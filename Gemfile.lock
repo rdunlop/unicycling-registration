@@ -35,6 +35,9 @@ GEM
       tzinfo (~> 0.3.37)
     acts_as_list (0.4.0)
       activerecord (>= 3.0)
+    annotate (2.6.2)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (4.0.2)
     atomic (1.1.16)
     axiom-types (0.0.5)
@@ -255,6 +258,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  annotate
   bullet
   cancancan (~> 1.7)
   carmen (= 1.0.0)

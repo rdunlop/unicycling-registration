@@ -54,6 +54,10 @@ class TimeResult < ActiveRecord::Base
     end
   end
 
+  def result
+    full_time_in_thousands
+  end
+
   def full_time_in_thousands
     (minutes * 60000) + (seconds * 1000) + thousands
   end

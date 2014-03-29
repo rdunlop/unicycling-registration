@@ -28,4 +28,12 @@ class DistanceAttempt < ActiveRecord::Base
         end
       end
     end
+
+    def result
+      distance
+    end
+
+    def disqualified
+      fault
+    end
 end
