@@ -1,8 +1,8 @@
 class TimeResult < ActiveRecord::Base
-  belongs_to :competitor, :touch => true
+  include Competeable
 
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
-  validates :competitor_id, :presence => true, :uniqueness => true
+  validates :competitor_id, :uniqueness => true
   validates :disqualified, :inclusion => { :in => [true, false] } # because it's a boolean
 
   scope :fastest_first, -> { order("disqualified, minutes, seconds, thousands") }
@@ -30,10 +30,6 @@ class TimeResult < ActiveRecord::Base
 
   def event
     competitor.event
-  end
-
-  def competition
-    competitor.competition
   end
 
   def full_time

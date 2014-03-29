@@ -1,5 +1,6 @@
 class Competitor < ActiveRecord::Base
   include Eligibility
+
     has_many :members, :inverse_of => :competitor
     has_many :registrants, -> { order "bib_number" }, :through => :members
     belongs_to :competition
