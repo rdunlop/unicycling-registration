@@ -330,19 +330,10 @@ class RegistrantsController < ApplicationController
     if @registrant.reg_paid?
       error = true
       error_message = "This registrant is already paid"
-    else
-      curr_rei = @registrant.registration_item
-      if curr_rei.nil?
-        error = true
-        error_message = "Unable to find existing Registration Item"
-      else
-        curr_rei.expense_item = new_reg_item
-        curr_rei.locked = true
-      end
     end
 
     respond_to do |format|
-      if error or !curr_rei.save
+      if error || !@registrant.set_registration_item_expense(new_reg_item)
         format.html { render "reg_fee", alert: error_message  }
       else
         format.html { redirect_to reg_fee_registrant_path(@registrant), notice: 'Reg Fee Updated successfully.' }

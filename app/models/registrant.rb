@@ -152,6 +152,16 @@ class Registrant < ActiveRecord::Base
     registrant_expense_items.where({:system_managed => true, :expense_item_id => all_reg_items}).first
   end
 
+  # for use when overriding the default system-managed reg_item
+  def set_registration_item_expense(expense_item)
+    return false if registration_item.nil?
+
+    curr_rei = registration_item
+    curr_rei.expense_item = expense_item
+    curr_rei.locked = true
+    curr_rei.save
+  end
+
   def set_bib_number
     if self.bib_number.nil?
       if self.competitor

@@ -143,38 +143,45 @@ class Competitor < ActiveRecord::Base
       if custom_name.present?
         comp_name = custom_name
       else
-        if registrants.empty?
-          comp_name = "(No registrants)"
-        else
-          comp_name = registrants.map(&:name).join(" - ")
-        end
+        comp_name = registrants_names
       end
       display_eligibility(comp_name, ineligible)
     end
 
-    def detailed_name
-      registrants_names = registrants.map(&:name).join(" - ")
-      name = registrants_names
-      unless custom_name.nil? or custom_name.empty?
-        name = custom_name + "(#{registrants_names})"
+    def registrants_names
+      if registrants.empty?
+        "(No registrants)"
+      else
+        registrants.map(&:name).join(" - ")
       end
-      name
+    end
+
+    def registrants_ids
+      if registrants.empty?
+        "(No registrants)"
+      else
+        registrants.map(&:external_id).join(",")
+      end
+    end
+
+    def detailed_name
+      if custom_name.present?
+        "#{custom_name} (#{registrants_names})"
+      else
+        registrants_names
+      end
     end
 
     def external_id
-        unless custom_external_id.nil? or custom_external_id == 0
-            custom_external_id.to_s
-        else
-            if registrants.empty?
-                "(No registrants)"
-            else
-                registrants.map(&:external_id).join(",")
-            end
-        end
+      if custom_external_id.present? && custom_external_id != 0
+        custom_external_id.to_s
+      else
+        registrants_ids
+      end
     end
 
     # this field is used for data export
-    def export_id 
+    def export_id
         unless custom_external_id.nil?
             custom_external_id
         else
@@ -191,10 +198,7 @@ class Competitor < ActiveRecord::Base
         if members.empty?
           "(No registrants)"
         else
-          ages = []
-          members.each do |m|
-            ages << m.registrant.age
-          end
+          ages = registrants.map(&:age)
           ages.max
         end
       end
@@ -205,13 +209,10 @@ class Competitor < ActiveRecord::Base
         if members.empty?
           "(No registrants)"
         else
-          countries = []
-          members.each do |m|
-            countries << m.registrant.country
-          end
-          # display mixed if there are more than 1 registrants
+          countries = registrants.map(&:country)
+          # display all countries if there are more than 1 registrants
           if countries.uniq.count > 1
-            countries.join(",")
+            countries.unique.join(",")
           else
             countries.uniq.first
           end
@@ -224,10 +225,7 @@ class Competitor < ActiveRecord::Base
         if members.empty?
           "(No registrants)"
         else
-          genders = []
-          members.each do |m|
-            genders << m.registrant.gender
-          end
+          genders = registrants.map(&:gender)
           # display mixed if there are more than 1 registrants
           if genders.count > 1
             "(mixed)"
@@ -267,7 +265,7 @@ class Competitor < ActiveRecord::Base
       if registrants.empty?
         "(No registrants)"
       else
-        club = registrants.first.club
+        registrants.first.club
       end
     end
 
