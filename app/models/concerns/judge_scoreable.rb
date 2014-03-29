@@ -1,16 +1,17 @@
 module JudgeScoreable
   extend ActiveSupport::Concern
 
+  included do
+    self.score_fields.each do |sym|
+      validates sym, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+    end
+    validate :values_within_judge_type_bounds
+  end
 
   module ClassMethods
     def score_fields
       []
     end
-  end
-
-  included do
-    validates *self.score_fields, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
-    validate :values_within_judge_type_bounds
   end
 
   def validate_judge_score(value_sym, max_score)
