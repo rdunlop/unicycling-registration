@@ -169,7 +169,7 @@ class Registrant < ActiveRecord::Base
     return true  if curr_rei.locked
 
     curr_rei.expense_item = expense_item
-    curr_rei.locked = true
+    curr_rei.locked = lock
     curr_rei.save
   end
 
