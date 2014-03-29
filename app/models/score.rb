@@ -16,9 +16,9 @@
 
 class Score < ActiveRecord::Base
   include Judgeable
-  include JudgeScoreable
 
   def self.score_fields
     [:val_1, :val_2, :val_3, :val_4]
   end
+  include JudgeScoreable
 end

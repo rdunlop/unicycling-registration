@@ -3,7 +3,7 @@ module JudgeScoreable
 
 
   module ClassMethods
-    def self.score_fields
+    def score_fields
       []
     end
   end
@@ -12,8 +12,6 @@ module JudgeScoreable
     validates *self.score_fields, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
     validate :values_within_judge_type_bounds
   end
-
-
 
   def validate_judge_score(value_sym, max_score)
     if self.send(value_sym) > max_score
