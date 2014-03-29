@@ -14,11 +14,11 @@ class DistanceCalculator
   def update_all_places
     # returns distance_attempts in descending (longest-first) order
     @competition.best_distance_attempts.each do |da|
-      age_place_calc = get_place_calculator(da.competitor.age_group_entry_description)
-      gender_place_calc = get_place_calculator(da.competitor.gender)
+      age_place_calc = get_place_calculator(da.age_group_entry_description)
+      gender_place_calc = get_place_calculator("Overall: #{da.gender}") # differentiate between Overall and an age group named "Male"
 
-      da.competitor.place = age_place_calc.place_next(da.result, da.disqualified, da.competitor.ineligible)
-      da.competitor.overall_place = gender_place_calc.place_next(da.result, da.disqualified, da.competitor.ineligible)
+      da.competitor.place = age_place_calc.place_next(da.result, da.disqualified, da.ineligible)
+      da.competitor.overall_place = gender_place_calc.place_next(da.result, da.disqualified, da.ineligible)
     end
   end
 end

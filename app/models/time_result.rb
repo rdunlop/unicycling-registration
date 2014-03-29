@@ -14,6 +14,7 @@
 
 class TimeResult < ActiveRecord::Base
   include Competeable
+  include Placeable
 
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
   validates :competitor_id, :uniqueness => true

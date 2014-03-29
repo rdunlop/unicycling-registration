@@ -14,11 +14,11 @@ class RaceCalculator
   def update_all_places
 
     @competition.time_results.includes(:competitor).reorder("minutes, seconds, thousands").each do |tr|
-      age_place_calc = get_place_calculator(tr.competitor.age_group_entry_description)
-      gender_place_calc = get_place_calculator(tr.competitor.gender)
+      age_place_calc = get_place_calculator(tr.age_group_entry_description)
+      gender_place_calc = get_place_calculator("Overall: #{tr.gender}") # differentiate between Overall and an age group named "Male"
 
-      tr.competitor.place = age_place_calc.place_next(tr.result, tr.disqualified, tr.competitor.ineligible)
-      tr.competitor.overall_place = gender_place_calc.place_next(tr.result, tr.disqualified, tr.competitor.ineligible)
+      tr.competitor.place = age_place_calc.place_next(tr.result, tr.disqualified, tr.ineligible)
+      tr.competitor.overall_place = gender_place_calc.place_next(tr.result, tr.disqualified, tr.ineligible)
     end
   end
 end

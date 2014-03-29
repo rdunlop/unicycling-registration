@@ -12,5 +12,15 @@
 
 class ExternalResult < ActiveRecord::Base
   include Competeable
+  include Placeable
+
   validates :rank, :presence => true
+
+  def disqualified
+    false
+  end
+
+  def result
+    rank
+  end
 end
