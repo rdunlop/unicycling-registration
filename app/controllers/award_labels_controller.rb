@@ -67,34 +67,32 @@ class AwardLabelsController < ApplicationController
     end
   end
 
+  def set_int_if_present(value, default)
+    if value.present?
+      value.to_i
+    else
+      default
+    end
+  end
+
+  def set_string_if_present(value, default)
+    if value.present?
+      value
+    else
+      default
+    end
+  end
+
   def create_labels
-    if params[:minimum_place].nil? or params[:minimum_place].empty?
-      min_place = 1
-    else
-      min_place = params[:minimum_place].to_i
-    end
+    min_place = set_int_if_present(params[:minimum_place], 1)
+    max_place = set_int_if_present(params[:maximum_place], 5)
+    age_groups = set_string_if_present(params[:age_groups], false)
+    experts    = set_string_if_present(params[:experts], false)
 
-    if params[:maximum_place].nil? or params[:maximum_place].empty?
-      max_place = 5
-    else
-      max_place = params[:maximum_place].to_i
-    end
-
-    if params[:age_groups].nil? or params[:age_groups].empty?
-      age_groups = false
-    else
-      age_groups = params[:age_groups]
-    end
-
-    if params[:experts].nil? or params[:experts].empty?
-      experts = false
-    else
-      experts = params[:experts]
-    end
     puts "min: #{min_place}, max: #{max_place} age: #{age_groups} exp: #{experts}"
 
     n = 0
-    unless params[:registrant_id].nil? or params[:registrant_id].empty?
+    if params[:registrant_id].present?
       @registrant = Registrant.find(params[:registrant_id])
 
       @registrant.competitors.each do |competitor|
@@ -102,7 +100,7 @@ class AwardLabelsController < ApplicationController
       end
     end
 
-    unless params[:registrant_group_id].nil? or params[:registrant_group_id].empty?
+    if params[:registrant_group_id].present?
       @registrant_group = RegistrantGroup.find(params[:registrant_group_id])
 
       @registrant_group.registrant_group_members.includes(:registrant).each do |member|
@@ -111,7 +109,8 @@ class AwardLabelsController < ApplicationController
         end
       end
     end
-    unless params[:competition_id].nil? or params[:competition_id].empty?
+
+    if params[:competition_id].present?
       @competition = Competition.find(params[:competition_id])
       @competition.competitors.each do |competitor|
         competitor.members.each do |member|
@@ -129,12 +128,13 @@ class AwardLabelsController < ApplicationController
     n = 0
     competition = competitor.competition
     if age_groups
-      if competition.has_non_expert_results and competitor.place.to_i <= max_place
+      if competition.has_non_expert_results && competitor.place.to_i <= max_place
         if create_label(competitor, registrant, false, min_place, max_place, user)
           n += 1
         end
       end
     end
+
     if experts
       if competition.has_experts
         if create_label(competitor, registrant, true, min_place, max_place, user)
@@ -142,6 +142,7 @@ class AwardLabelsController < ApplicationController
         end
       end
     end
+
     n
   end
 
@@ -168,6 +169,16 @@ class AwardLabelsController < ApplicationController
     redirect_to user_award_labels_path(@user)
   end
 
+  def lines_from_award_label(label)
+    lines = ""
+    lines += label.line_1 + "\n" if label.line_1.present?
+    lines += label.line_2 + "\n" if label.line_2.present?
+    lines += label.line_3 + "\n" if label.line_3.present?
+    lines += label.line_4 + "\n" if label.line_4.present?
+    lines += label.line_5 + "\n" if label.line_5.present?
+    lines += "<b>" + label.line_6 + "</b>" + "\n" if label.line_6.present?
+  end
+
   def normal_labels
     separate_registrants = false
     unless params[:separate_registrants].nil?
@@ -176,7 +187,7 @@ class AwardLabelsController < ApplicationController
     previous_bib_number = 0
 
     skip_positions = 0
-    unless params[:skip_positions].nil? or params[:skip_positions].empty?
+    if params[:skip_positions].present?
       skip_positions = params[:skip_positions].to_i
     end
 
@@ -184,8 +195,9 @@ class AwardLabelsController < ApplicationController
     skip_positions.times do
       names << ""
     end
+
     @user.award_labels.order(:bib_number).each do |label|
-      if separate_registrants and (previous_bib_number != 0 and label.bib_number != previous_bib_number)
+      if separate_registrants && (previous_bib_number != 0 && label.bib_number != previous_bib_number)
         # add 3 blanks
         names << ""
         names << ""
@@ -193,20 +205,7 @@ class AwardLabelsController < ApplicationController
       end
       previous_bib_number = label.bib_number
 
-      lines = ""
-      line = label.line_1
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_2
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_3
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_4
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_5
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_6
-      lines += "<b>" + line + "</b>" unless line.nil? or line.empty?
-      names << lines
+      names << lines_from_award_label(label)
     end
 
     Prawn::Labels.types = {
@@ -234,20 +233,7 @@ class AwardLabelsController < ApplicationController
 
     names = []
     @user.award_labels.each do |label|
-      lines = ""
-      line = label.line_1
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_2
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_3
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_4
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_5
-      lines += line + "\n" unless line.nil? or line.empty?
-      line = label.line_6
-      lines += "<b>" + line + "</b>" unless line.nil? or line.empty?
-      names << lines
+      names << lines_from_award_label(label)
     end
     Prawn::Labels.types = {
       "Avery5293" => {
