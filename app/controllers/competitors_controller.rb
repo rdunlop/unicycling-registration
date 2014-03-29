@@ -1,7 +1,7 @@
 require 'csv'
 class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_competition, :only => [:index, :new, :create, :add, :upload, :add_all, :destroy_all, :create_from_sign_ups]
+  before_filter :load_competition, :only => [:index, :new, :create, :add, :add_all, :destroy_all, :create_from_sign_ups]
   before_filter :load_new_competitor, :only => [:create]
   load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy]
   load_and_authorize_resource :only => [:edit, :update, :destroy]
@@ -116,85 +116,7 @@ class CompetitorsController < ApplicationController
     end
   end
 
-  def upload
-    n=0
-    if params[:import][:file].respond_to?(:tempfile)
-        upload_file = params[:import][:file].tempfile
-    else
-        upload_file = params[:import][:file]
-    end
-    File.open(upload_file, 'r:ISO-8859-1') do |f|
-     f.each do |line|
-      row = CSV.parse_line(line)
-
-      if row.count == 1
-        # High/Long forme
-        #format: registrant_id
-        # sample rows:
-        # 328
-        # 329
-        reg = get_registrant(row[0].to_i)
-        if (!reg.nil?)
-            position = @competition.competitors.count + 1
-            comp = @competition.competitors.create(:position => position)
-            comp.members.build(:registrant_id => reg.id)
-        else
-            return
-        end
-      elsif row.count == 2
-        # Individual freestyle-format
-        #format: order,registrant_id
-        # sample rows:
-        #1,328
-        #2,329
-        reg = get_registrant(row[1].to_i)
-        if (!reg.nil?)
-           comp = @competition.competitors.create(:position => row[0].to_i)
-           comp.members.build(:registrant_id => reg.id)
-        else
-           return
-        end
-      elsif row.count == 3
-        if (numeric?(row[2]))
-            # Pairs freestyle-format
-            #format: order,registrant_id,registrant_id
-            # sample rows:
-            #1,328,330
-            #2,329,331
-            reg  = get_registrant(row[1].to_i)
-            reg2 = get_registrant(row[2].to_i)
-            if (!reg.nil? && !reg2.nil?)
-                comp = @competition.competitors.create(:position => row[0].to_i)
-                comp.members.build(:registrant_id => reg.id)
-                comp.members.build(:registrant_id => reg2.id)
-            else
-                return
-            end
-        end
-      end
-
-      if comp.save
-        n=n+1
-      else
-         flash[:alert]="Unable to import line #{row}. #{comp.errors.full_messages}"
-         redirect_to competition_path(@competition)
-         return
-      end
-     end
-    end
-    flash[:notice]="CSV Import Successful,  #{n} new records added to data base"
-    redirect_to competition_path(@competition)
-  end
-
   private
-  def get_registrant(id)
-    reg2 = Registrant.find_by_bib_number(id)
-    if (reg2.nil?)
-        flash[:alert]="Unable to import line with id #{id}, Unable to find matching registrant in database"
-        redirect_to competition_path(@competition)
-    end
-    reg2
-  end
 
   def competitor_params
     params.require(:competitor).permit(:position, {:registrant_ids => []}, :custom_external_id, :custom_name)

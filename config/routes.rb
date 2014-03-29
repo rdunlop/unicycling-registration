@@ -255,7 +255,6 @@ Workspace::Application.routes.draw do
       resources :competitors, :only => [:index, :new, :create] do
         collection do
           post :add
-          post :upload
           post :add_all
           delete :destroy_all
         end
