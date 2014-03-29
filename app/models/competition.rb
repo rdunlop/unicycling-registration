@@ -190,6 +190,14 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def build_result_from_imported(import_result)
+    scoring_helper.build_result_from_imported(import_result)
+  end
+
+  def build_import_result_from_raw(raw)
+    scoring_helper.build_import_result_from_raw(raw)
+  end
+
   def include_event_name
     scoring_helper.include_event_name
   end

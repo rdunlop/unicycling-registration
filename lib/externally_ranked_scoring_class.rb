@@ -54,4 +54,19 @@ class ExternallyRankedScoringClass < BaseScoringClass
   def uses_judges
     false
   end
+
+  # from import_result to external_result
+  def build_result_from_imported(import_result)
+    ExternalResult.new(
+      rank: import_result.rank,
+      details: import_result.details)
+  end
+
+  # from CSV to import_result
+  def build_import_result_from_raw(raw)
+    ImportResult.new(
+      bib_number: raw[0],
+      rank: raw[1],
+      details: raw[2])
+   end
 end

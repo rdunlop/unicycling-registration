@@ -99,19 +99,11 @@ class ImportResultsController < ApplicationController
     n = 0
     err = 0
     raw_data.each do |raw|
-      result = @user.import_results.build
-      result.raw_data = upload.convert_array_to_string(raw)
+      raw_data = upload.convert_array_to_string(raw)
+      result = @competition.build_import_result_from_raw(raw)
+      result.raw_data = raw_data
+      result.user = @user
       result.competition = @competition
-      result.bib_number = raw[0]
-      if @competition.event_class == "Distance"
-        result.minutes = raw[1]
-        result.seconds = raw[2]
-        result.thousands = raw[3]
-        result.disqualified = (raw[4] == "DQ")
-      elsif @competition.event_class == "Ranked"
-        result.rank = raw[1]
-        result.details = raw[2]
-      end
       if result.save
         n = n + 1
       else
@@ -170,37 +162,19 @@ class ImportResultsController < ApplicationController
       id = ir.bib_number
 
       competitor = @competition.find_competitor_with_bib_number(id)
+      registrant = Registrant.find_by_bib_number(id)
       if competitor.nil?
-        competitor = @competition.competitors.build
-        member = competitor.members.build
-        member.registrant = Registrant.find_by_bib_number(id)
-        if !member.valid?
-          member.errors.each do |err|
-            puts "mem erro: #{err}"
-          end
-          err_count += 1
-        end
-        if !competitor.save
-          competitor.errors.each do |err|
-            puts "error creating competitor because: #{err}"
-          end
+        begin
+          @competition.create_competitor_from_registrants([registrant], nil)
+          competitor = @competition.find_competitor_with_bib_number(id)
+        rescue Exception => ex
+          puts "error creating competitor because: #{ex}"
           err_count += 1
         end
       end
 
-      if @competition.event_class == "Distance"
-        tr = TimeResult.new
-        tr.minutes = ir.minutes
-        tr.seconds = ir.seconds
-        tr.thousands = ir.thousands
-        tr.disqualified = ir.disqualified
-        tr.competitor = competitor
-      elsif @competition.event_class == "Ranked"
-        tr = ExternalResult.new
-        tr.rank = ir.rank
-        tr.details = ir.details
-        tr.competitor = competitor
-      end
+      tr = @competition.build_result_from_imported(ir)
+      tr.competitor = competitor
       if tr.save
         n += 1
       else
@@ -215,7 +189,7 @@ class ImportResultsController < ApplicationController
     end
   end
 
-  private 
+  private
   def get_id_from_lane_assignment(comp, heat, lane)
     la = LaneAssignment.find_by_competition_id_and_heat_and_lane(comp.id, heat, lane)
     if la.nil?

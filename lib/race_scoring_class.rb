@@ -62,4 +62,21 @@ class RaceScoringClass < BaseScoringClass
   def uses_lane_assignments
     true
   end
+
+  def build_result_from_imported(import_result)
+    TimeResult.new(
+      minutes: import_result.minutes,
+      seconds: import_result.seconds,
+      thousands: import_result.thousands,
+      disqualified: import_result.disqualified)
+  end
+
+  def build_import_result_from_raw(raw)
+    ImportResult.new(
+      bib_number: raw[0],
+      minutes: raw[1],
+      seconds: raw[2],
+      thousands: raw[3],
+      disqualified: (raw[4] == "DQ"))
+  end
 end
