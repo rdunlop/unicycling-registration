@@ -20,6 +20,13 @@ describe Score do
   before (:each) do
     @judge = FactoryGirl.create(:judge)
   end
+  it "Must have a value above 0" do
+    score = FactoryGirl.build(:score)
+    score.val_1 = -1
+    score.val_2 = -1
+    score.valid?.should == false
+  end
+
   it "should total the values to create the Total" do
     score = FactoryGirl.build(:score)
     score.val_1 = 1.0
