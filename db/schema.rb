@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326004144) do
+ActiveRecord::Schema.define(version: 20140329154306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -565,6 +565,7 @@ ActiveRecord::Schema.define(version: 20140326004144) do
     t.integer  "competitor_expense_item_id"
     t.integer  "noncompetitor_expense_item_id"
     t.boolean  "onsite"
+    t.boolean  "current_period",                default: false
   end
 
   create_table "roles", force: true do |t|

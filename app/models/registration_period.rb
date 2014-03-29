@@ -54,8 +54,8 @@ class RegistrationPeriod < ActiveRecord::Base
 
   def self.relevant_period(date)
     rp_id = Rails.cache.fetch("/registration_period/by_date/#{date}")
-    rp = RegistrationPeriod.find_by_id(rp_id)
-    return rp unless rp.nil?
+    cached_rp = RegistrationPeriod.find_by_id(rp_id)
+    return cached_rp unless cached_rp.nil?
 
     RegistrationPeriod.includes(:competitor_expense_item, :noncompetitor_expense_item).each do |rp|
       if rp.current_period?(date)
@@ -83,13 +83,7 @@ class RegistrationPeriod < ActiveRecord::Base
 
 
   def self.current_period
-    id = Rails.cache.fetch("/registration_period/current")
-    RegistrationPeriod.find_by_id(id)
-  end
-
-  def self.current_period=(new_period)
-    new_value = new_period.id unless new_period.nil?
-    Rails.cache.write("/registration_period/current", new_value)
+    where(:current_period => true).first
   end
 
   # run by the scheduler in order to update the current Registration_period,
@@ -101,8 +95,6 @@ class RegistrationPeriod < ActiveRecord::Base
 
     # update the last-run date, even if we aren't going to change periods
     Rails.cache.write("/registration_period/last_update_run_date", date)
-    # write the current period again, to keep it in the cache
-    self.current_period = now_period
 
     if (now_period == old_period)
       return false
@@ -153,6 +145,9 @@ class RegistrationPeriod < ActiveRecord::Base
     if missing_regs.count > 0
       Notifications.missing_old_reg_items(missing_regs).deliver
     end
+
+    old_period.update_attribute(:current_period, false) unless old_period.nil?
+    now_period.update_attribute(:current_period,  true) unless now_period.nil?
 
     true
   end
