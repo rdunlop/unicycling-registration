@@ -2,11 +2,6 @@ Last Re-Arranged February 6, 2014.
 
 - for feedback of not-logged-in to supply an e-mail address
 - Add ability to upload music for competitions
-- Deal with partial refunds, and mark those properly (per Hugo's emails)
- - Jozef Hanulik (#207) 50%
- - Ingrid Hanulik (#208) 50%
- - Gaétan Jeandel (#112) 50%
- - #182 Stefan Brunner, 50%
 - add a limit of 500 places between all 3 lodging types.
 
 =============================
