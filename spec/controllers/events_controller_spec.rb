@@ -19,7 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe EventsController do
-   before(:each) do
+   before do
      user = FactoryGirl.create(:super_admin_user)
      sign_in user
      @category = FactoryGirl.create(:category)
@@ -36,7 +36,7 @@ describe EventsController do
   end
 
   describe "as a normal user" do
-    before(:each) do
+    before do
       @user = FactoryGirl.create(:user)
       sign_in @user
     end
