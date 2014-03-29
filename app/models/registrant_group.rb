@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: registrant_groups
+#
+#  id            :integer          not null, primary key
+#  name          :string(255)
+#  registrant_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class RegistrantGroup < ActiveRecord::Base
   belongs_to :contact_person, :class_name => "Registrant", :foreign_key => "registrant_id"
 

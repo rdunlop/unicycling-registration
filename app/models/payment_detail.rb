@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: payment_details
+#
+#  id              :integer          not null, primary key
+#  payment_id      :integer
+#  registrant_id   :integer
+#  amount          :decimal(, )
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  expense_item_id :integer
+#  details         :string(255)
+#  free            :boolean          default(FALSE)
+#
+
 class PaymentDetail < ActiveRecord::Base
   validates :payment, :registrant_id, :expense_item, :presence => true
   validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}

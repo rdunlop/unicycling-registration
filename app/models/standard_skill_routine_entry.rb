@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: standard_skill_routine_entries
+#
+#  id                        :integer          not null, primary key
+#  standard_skill_routine_id :integer
+#  standard_skill_entry_id   :integer
+#  position                  :integer
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#
+
 class StandardSkillRoutineEntry < ActiveRecord::Base
     belongs_to :standard_skill_entry
     belongs_to :standard_skill_routine

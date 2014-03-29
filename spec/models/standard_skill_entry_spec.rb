@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: standard_skill_entries
+#
+#  id          :integer          not null, primary key
+#  number      :integer
+#  letter      :string(255)
+#  points      :decimal(6, 2)
+#  description :string(255)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 require 'spec_helper'
 
 describe StandardSkillEntry do

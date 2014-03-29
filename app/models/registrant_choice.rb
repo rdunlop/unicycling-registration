@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: registrant_choices
+#
+#  id              :integer          not null, primary key
+#  registrant_id   :integer
+#  event_choice_id :integer
+#  value           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class RegistrantChoice < ActiveRecord::Base
   validates :event_choice_id, :presence => true, :uniqueness => {:scope => [:registrant_id]}
   validates :registrant, :presence => true

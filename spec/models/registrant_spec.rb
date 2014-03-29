@@ -1,3 +1,45 @@
+# == Schema Information
+#
+# Table name: registrants
+#
+#  id                      :integer          not null, primary key
+#  first_name              :string(255)
+#  middle_initial          :string(255)
+#  last_name               :string(255)
+#  birthday                :date
+#  gender                  :string(255)
+#  state                   :string(255)
+#  country_residence       :string(255)
+#  phone                   :string(255)
+#  mobile                  :string(255)
+#  email                   :string(255)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  user_id                 :integer
+#  competitor              :boolean
+#  club                    :string(255)
+#  club_contact            :string(255)
+#  usa_member_number       :string(255)
+#  emergency_name          :string(255)
+#  emergency_relationship  :string(255)
+#  emergency_attending     :boolean
+#  emergency_primary_phone :string(255)
+#  emergency_other_phone   :string(255)
+#  responsible_adult_name  :string(255)
+#  responsible_adult_phone :string(255)
+#  address                 :string(255)
+#  city                    :string(255)
+#  zip                     :string(255)
+#  deleted                 :boolean
+#  bib_number              :integer
+#  wheel_size_id           :integer
+#  age                     :integer
+#  ineligible              :boolean          default(FALSE)
+#  volunteer               :boolean
+#  country_representing    :string(255)
+#  online_waiver_signature :string(255)
+#
+
 require 'spec_helper'
 
 describe Registrant do

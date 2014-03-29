@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: additional_registrant_accesses
+#
+#  id                :integer          not null, primary key
+#  user_id           :integer
+#  registrant_id     :integer
+#  declined          :boolean
+#  accepted_readonly :boolean
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
 require 'spec_helper'
 
 describe AdditionalRegistrantAccess do

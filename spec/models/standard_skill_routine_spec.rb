@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: standard_skill_routines
+#
+#  id            :integer          not null, primary key
+#  registrant_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 require 'spec_helper'
 
 describe StandardSkillRoutine do

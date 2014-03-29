@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: competition_sources
+#
+#  id                    :integer          not null, primary key
+#  target_competition_id :integer
+#  event_category_id     :integer
+#  competition_id        :integer
+#  gender_filter         :string(255)
+#  max_place             :integer
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

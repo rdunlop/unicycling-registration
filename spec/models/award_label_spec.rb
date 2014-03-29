@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: award_labels
+#
+#  id               :integer          not null, primary key
+#  bib_number       :integer
+#  competition_name :string(255)
+#  team_name        :string(255)
+#  details          :string(255)
+#  place            :integer
+#  user_id          :integer
+#  registrant_id    :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  competitor_name  :string(255)
+#  category         :string(255)
+#
+
 require 'spec_helper'
 
 describe AwardLabel do

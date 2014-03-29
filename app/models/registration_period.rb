@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: registration_periods
+#
+#  id                            :integer          not null, primary key
+#  start_date                    :date
+#  end_date                      :date
+#  name                          :string(255)
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#  competitor_expense_item_id    :integer
+#  noncompetitor_expense_item_id :integer
+#  onsite                        :boolean
+#  current_period                :boolean          default(FALSE)
+#
+
 class RegistrationPeriod < ActiveRecord::Base
   default_scope { order('start_date ASC') }
 

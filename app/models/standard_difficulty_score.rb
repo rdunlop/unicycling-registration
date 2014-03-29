@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: standard_difficulty_scores
+#
+#  id                              :integer          not null, primary key
+#  competitor_id                   :integer
+#  standard_skill_routine_entry_id :integer
+#  judge_id                        :integer
+#  devaluation                     :integer
+#  created_at                      :datetime         not null
+#  updated_at                      :datetime         not null
+#
+
 class StandardDifficultyScore < ActiveRecord::Base
   include Competeable
     belongs_to :judge

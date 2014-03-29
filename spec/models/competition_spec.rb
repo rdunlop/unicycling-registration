@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: competitions
+#
+#  id                :integer          not null, primary key
+#  event_id          :integer
+#  name              :string(255)
+#  locked            :boolean
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  age_group_type_id :integer
+#  has_experts       :boolean          default(FALSE)
+#  has_age_groups    :boolean          default(FALSE)
+#  scoring_class     :string(255)
+#
+
 require 'spec_helper'
 
 describe Competition do

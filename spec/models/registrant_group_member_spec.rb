@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: registrant_group_members
+#
+#  id                  :integer          not null, primary key
+#  registrant_id       :integer
+#  registrant_group_id :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
 require 'spec_helper'
 
 describe RegistrantGroupMember do

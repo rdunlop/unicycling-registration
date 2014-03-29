@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: distance_attempts
+#
+#  id            :integer          not null, primary key
+#  competitor_id :integer
+#  distance      :integer
+#  fault         :boolean
+#  judge_id      :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class DistanceAttempt < ActiveRecord::Base
   include Competeable
 

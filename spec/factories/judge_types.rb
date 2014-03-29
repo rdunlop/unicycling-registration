@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: judge_types
+#
+#  id                           :integer          not null, primary key
+#  name                         :string(255)
+#  val_1_description            :string(255)
+#  val_2_description            :string(255)
+#  val_3_description            :string(255)
+#  val_4_description            :string(255)
+#  val_1_max                    :integer
+#  val_2_max                    :integer
+#  val_3_max                    :integer
+#  val_4_max                    :integer
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  event_class                  :string(255)
+#  boundary_calculation_enabled :boolean
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

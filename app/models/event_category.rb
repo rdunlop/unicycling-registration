@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: event_categories
+#
+#  id              :integer          not null, primary key
+#  event_id        :integer
+#  position        :integer
+#  name            :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  age_range_start :integer          default(0)
+#  age_range_end   :integer          default(100)
+#
+
 class EventCategory < ActiveRecord::Base
   belongs_to :event, :inverse_of => :event_categories, :touch => true
 

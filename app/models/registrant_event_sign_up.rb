@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: registrant_event_sign_ups
+#
+#  id                :integer          not null, primary key
+#  registrant_id     :integer
+#  signed_up         :boolean
+#  event_category_id :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  event_id          :integer
+#
+
 class RegistrantEventSignUp < ActiveRecord::Base
   validates :event, :registrant, :presence => true
   #validates :event_category, :presence => true, :if  => "signed_up"

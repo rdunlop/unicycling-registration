@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: payments
+#
+#  id             :integer          not null, primary key
+#  user_id        :integer
+#  completed      :boolean
+#  cancelled      :boolean
+#  transaction_id :string(255)
+#  completed_date :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  payment_date   :string(255)
+#  note           :string(255)
+#
+
 class Payment < ActiveRecord::Base
   scope :completed, -> { where(:completed => true) }
 

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: lane_assignments
+#
+#  id             :integer          not null, primary key
+#  competition_id :integer
+#  registrant_id  :integer
+#  heat           :integer
+#  lane           :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class LaneAssignment < ActiveRecord::Base
   belongs_to :competition
   belongs_to :registrant

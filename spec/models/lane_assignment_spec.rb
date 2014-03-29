@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: lane_assignments
+#
+#  id             :integer          not null, primary key
+#  competition_id :integer
+#  registrant_id  :integer
+#  heat           :integer
+#  lane           :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 require 'spec_helper'
 
 describe LaneAssignment do

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: judges
+#
+#  id             :integer          not null, primary key
+#  competition_id :integer
+#  judge_type_id  :integer
+#  user_id        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class Judge < ActiveRecord::Base
     belongs_to :competition
     belongs_to :judge_type

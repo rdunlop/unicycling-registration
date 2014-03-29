@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: event_choices
+#
+#  id                          :integer          not null, primary key
+#  event_id                    :integer
+#  export_name                 :string(255)
+#  cell_type                   :string(255)
+#  multiple_values             :string(255)
+#  label                       :string(255)
+#  position                    :integer
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  autocomplete                :boolean
+#  optional                    :boolean          default(FALSE)
+#  tooltip                     :string(255)
+#  optional_if_event_choice_id :integer
+#  required_if_event_choice_id :integer
+#
+
 class EventChoice < ActiveRecord::Base
   belongs_to :event, :touch => true
   has_many :registrant_choices, :dependent => :destroy

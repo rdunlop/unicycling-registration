@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: registrant_expense_items
+#
+#  id              :integer          not null, primary key
+#  registrant_id   :integer
+#  expense_item_id :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  details         :string(255)
+#  free            :boolean          default(FALSE)
+#  system_managed  :boolean          default(FALSE)
+#  locked          :boolean          default(FALSE)
+#  custom_cost     :decimal(, )
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

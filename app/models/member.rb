@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: members
+#
+#  id            :integer          not null, primary key
+#  competitor_id :integer
+#  registrant_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class Member < ActiveRecord::Base
     belongs_to :competitor, :touch => true, :inverse_of => :members
     belongs_to :registrant

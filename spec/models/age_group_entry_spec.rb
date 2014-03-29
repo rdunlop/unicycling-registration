@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: age_group_entries
+#
+#  id                :integer          not null, primary key
+#  age_group_type_id :integer
+#  short_description :string(255)
+#  long_description  :string(255)
+#  start_age         :integer
+#  end_age           :integer
+#  gender            :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  wheel_size_id     :integer
+#
+
 require 'spec_helper'
 
 describe AgeGroupEntry do

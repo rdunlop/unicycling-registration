@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id          :integer          not null, primary key
+#  category_id :integer
+#  export_name :string(255)
+#  position    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  name        :string(255)
+#  visible     :boolean
+#
+
 class Event < ActiveRecord::Base
   has_many :event_choices, -> {order "event_choices.position"}, :dependent => :destroy, :inverse_of => :event
   accepts_nested_attributes_for :event_choices

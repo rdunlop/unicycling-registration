@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: refund_details
+#
+#  id                :integer          not null, primary key
+#  refund_id         :integer
+#  payment_detail_id :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
 class RefundDetail < ActiveRecord::Base
   validates :payment_detail_id, :presence => true
 
