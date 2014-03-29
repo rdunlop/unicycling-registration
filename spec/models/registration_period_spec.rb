@@ -210,12 +210,12 @@ describe "when testing the update function for registration periods", :caching =
         email = ActionMailer::Base.deliveries.first
         email.subject.should == "Updated Registration Period"
       end
-      it "changes the registrant's item to the new period" do
+      it "does not delete the registrant's reg_item" do
         @reg.reload
-        @reg.registrant_expense_items.count.should == 0
+        @reg.registrant_expense_items.count.should == 1
 
         @nc_reg.reload
-        @nc_reg.registrant_expense_items.count.should == 0
+        @nc_reg.registrant_expense_items.count.should == 1
       end
       describe "when updating to a now-existent period" do
         before(:each) do
@@ -232,13 +232,9 @@ describe "when testing the update function for registration periods", :caching =
         end
         it "sends an e-mail when it changes the reg period" do
           num_deliveries = ActionMailer::Base.deliveries.size
-          num_deliveries.should == 2
+          num_deliveries.should == 1
           email = ActionMailer::Base.deliveries.first
           email.subject.should == "Updated Registration Period"
-        end
-        it "sends an e-mail for the registrant which didn't have a previous period entry" do
-          email = ActionMailer::Base.deliveries.last
-          email.subject.should == "Registration Items Missing!"
         end
         it "changes the registrant's item to the new period" do
           @reg.reload

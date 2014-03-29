@@ -84,6 +84,12 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def build_registration_item(reg_item)
+    unless reg_item.nil? or has_expense_item?(reg_item)
+      registrant_expense_items.build({:expense_item_id => reg_item.id, :system_managed => true})
+    end
+  end
+
   def create_associated_required_expense_items
 
     # add the registration_period expense_item
@@ -94,9 +100,7 @@ class Registrant < ActiveRecord::Base
       else
         reg_item = rp.noncompetitor_expense_item
       end
-      unless reg_item.nil? or has_expense_item?(reg_item)
-        registrant_expense_items.build({:expense_item_id => reg_item.id, :system_managed => true})
-      end
+      build_registration_item(reg_item)
     end
 
     required_expense_items.each do |ei|
@@ -153,31 +157,40 @@ class Registrant < ActiveRecord::Base
   end
 
   # for use when overriding the default system-managed reg_item
-  def set_registration_item_expense(expense_item)
-    return false if registration_item.nil?
-
+  def set_registration_item_expense(expense_item, lock = true)
+    return true if reg_paid?
     curr_rei = registration_item
+
+    if curr_rei.nil?
+      curr_rei = build_registration_item(expense_item)
+    end
+    return false if curr_rei.nil?
+    return true  if curr_rei.expense_item == expense_item
+    return true  if curr_rei.locked
+
     curr_rei.expense_item = expense_item
     curr_rei.locked = true
     curr_rei.save
   end
 
+  def self.maximum_bib_number(is_competitor)
+    unscoped.where({:competitor => is_competitor}).maximum("bib_number")
+  end
+
   def set_bib_number
     if self.bib_number.nil?
+      prev_value = Registrant.maximum_bib_number(self.competitor)
+
       if self.competitor
-        prev_value = Registrant.unscoped.where({:competitor => true}).maximum("bib_number")
-        if prev_value.nil?
-          self.bib_number = 1
-        else
-          self.bib_number = prev_value + 1
-        end
+        initial_value = 1
       else
-        prev_value = Registrant.unscoped.where({:competitor => false}).maximum("bib_number")
-        if prev_value.nil?
-          self.bib_number = 2001
-        else
-          self.bib_number = prev_value + 1
-        end
+        initial_value = 2001
+      end
+
+      if prev_value.nil?
+        self.bib_number = initial_value
+      else
+        self.bib_number = prev_value + 1
       end
     end
   end
@@ -472,17 +485,17 @@ class Registrant < ActiveRecord::Base
   # returns a list of expense_items that this registrant hasn't paid for
   # INCLUDING the registration cost
   def owing_expense_items
-    items = self.owing_registrant_expense_items.map{|eid| eid.expense_item}
+    self.owing_registrant_expense_items.map{|eid| eid.expense_item}
   end
 
   # pass back the details too, so that we don't mis-associate them when building the payment
   def owing_expense_items_with_details
-    items = self.owing_registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
+    self.owing_registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
   end
 
   def owing_registrant_expense_items
     # prevents this from creating new items when we return a 'new'd element
-    items = self.registrant_expense_items.clone
+    self.registrant_expense_items.clone
   end
 
   def has_required_expense_group(expense_group)
@@ -491,7 +504,7 @@ class Registrant < ActiveRecord::Base
 
   # returns a list of paid-for expense_items
   def paid_expense_items
-    details = paid_details.map{|pd| pd.expense_item }
+    paid_details.map{|pd| pd.expense_item }
   end
 
   def paid_details
