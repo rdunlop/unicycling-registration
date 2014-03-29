@@ -2,12 +2,14 @@ require 'spec_helper'
 
 describe "external_results/index" do
   before(:each) do
-    @competition = FactoryGirl.create(:competition)
+    @competition = FactoryGirl.build_stubbed(:competition)
     assign(:competition, @competition)
-    assign(:external_results, [
-        FactoryGirl.create(:external_result, :details => "Hello", :rank => 10),
-        FactoryGirl.create(:external_result, :details => "Goodbye", :rank => 20)])
+    @external_results = [
+        FactoryGirl.build_stubbed(:external_result, :details => "Hello", :rank => 10),
+        FactoryGirl.build_stubbed(:external_result, :details => "Goodbye", :rank => 20)]
+    assign(:external_results, @external_results)
     @external_result = FactoryGirl.build(:external_result)
+    allow(@competition).to receive(:external_results).and_return(@external_results)
   end
 
   it "renders a list of external_results" do
