@@ -35,7 +35,7 @@
     </tbody>
   </table>
   <%= submit_tag "Create from EACH selected Registrant", :class => "multiclick", :data => { :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" } %><br />
-  <%= submit_tag "Create Pair/Group from selected Registrants", :class => "multiclick", :data => { :confirm => "This will create a Single competitor for all chosen registrants. Continue?" } %>
+  <%= submit_tag Competitor.group_selection_text, :class => "multiclick", :data => { :confirm => "This will create a Single competitor for all chosen registrants. Continue?" } %>
   <%= text_field_tag :group_name, nil, :placeholder => "Group Name (optional)" %>
 <% end %>
 

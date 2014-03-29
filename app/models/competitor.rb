@@ -330,4 +330,8 @@ class Competitor < ActiveRecord::Base
             end
         end
     end
+
+    def self.group_selection_text
+      "Create Pair/Group from selected Registrants"
+    end
 end
