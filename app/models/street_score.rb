@@ -1,11 +1,7 @@
 class StreetScore < ActiveRecord::Base
-    belongs_to :competitor
-    belongs_to :judge
+  include Judgeable
 
-    validates :judge_id, :presence => true, :uniqueness => {:scope => [:competitor_id]}
-    validates :competitor_id, :presence => true
-
-    validates :val_1, :presence => true, :numericality => {:greater_than_or_equal_to => 0} 
+    validates :val_1, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
     validate :values_within_judge_type_bounds
 
     def user

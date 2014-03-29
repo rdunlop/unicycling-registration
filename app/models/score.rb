@@ -1,9 +1,5 @@
 class Score < ActiveRecord::Base
-    belongs_to :competitor
-    belongs_to :judge
-
-    validates :judge_id, :presence => true, :uniqueness => {:scope => [:competitor_id]}
-    validates :competitor_id, :presence => true
+  include Judgeable
 
     validates :val_1, :presence => true, :numericality => {:greater_than_or_equal_to => 0} 
     validates :val_2, :presence => true, :numericality => {:greater_than_or_equal_to => 0} 

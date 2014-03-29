@@ -1,16 +1,12 @@
 class BoundaryScore < ActiveRecord::Base
-    belongs_to :judge
-    belongs_to :competitor
+  include Judgeable
 
-    validates :judge_id, :presence => true, :uniqueness => {:scope => [:competitor_id]}
-    validates :competitor_id, :presence => true
+    validates :number_of_people, :presence => true, :numericality => {:greater_than => 0}
 
-    validates :number_of_people, :presence => true, :numericality => {:greater_than => 0} 
-
-    validates :major_dismount, :presence => true, :numericality => {:greater_than_or_equal_to => 0} 
-    validates :minor_dismount, :presence => true, :numericality => {:greater_than_or_equal_to => 0} 
-    validates :major_boundary, :presence => true, :numericality => {:greater_than_or_equal_to => 0} 
-    validates :minor_boundary, :presence => true, :numericality => {:greater_than_or_equal_to => 0} 
+    validates :major_dismount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+    validates :minor_dismount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+    validates :major_boundary, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+    validates :minor_boundary, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
 
 
     def Total
