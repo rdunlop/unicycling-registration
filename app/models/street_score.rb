@@ -4,10 +4,6 @@ class StreetScore < ActiveRecord::Base
     validates :val_1, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
     validate :values_within_judge_type_bounds
 
-    def user
-        judge.user
-    end
-
     def values_within_judge_type_bounds
         if judge and judge.judge_type and self.val_1
             jt = judge.judge_type
@@ -23,14 +19,5 @@ class StreetScore < ActiveRecord::Base
       else
         (self.val_1)
       end
-    end
-
-    # determining the place points for this score (by-judge)
-    def tied
-        if judge.event.score_calculator.ties(self) > 1
-            true
-        else
-            false
-        end
     end
 end

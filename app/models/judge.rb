@@ -19,6 +19,7 @@ class Judge < ActiveRecord::Base
     validates :judge_type_id, :presence => true, :uniqueness => {:scope => [:competition_id, :user_id] }
     validates :user_id, :presence => true
 
+    delegate :event, to: :competition
 
     def check_for_scores
       if scores.count > 0
@@ -33,10 +34,6 @@ class Judge < ActiveRecord::Base
 
     def name
         user.to_s
-    end
-
-    def event
-      competition.event
     end
 
     def to_s
