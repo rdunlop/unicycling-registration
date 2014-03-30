@@ -1,6 +1,7 @@
 class AgeGroupTypesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  respond_to :html
 
   def index
     @age_group_type = AgeGroupType.new
@@ -21,10 +22,7 @@ class AgeGroupTypesController < ApplicationController
 
   def destroy
     @age_group_type.destroy
-    respond_to do |format|
-      format.html { redirect_to age_group_types_path }
-      format.json { head :no_content }
-    end
+    respond_with(@age_group_type)
   end
 
   def edit
@@ -32,15 +30,10 @@ class AgeGroupTypesController < ApplicationController
 
   def update
 
-    respond_to do |format|
-      if @age_group_type.update_attributes(age_group_type_params)
-        format.html { redirect_to age_group_types_path, notice: 'Age Group Type was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @age_group_type.errors, status: :unprocessable_entity }
-      end
+    if @age_group_type.update_attributes(age_group_type_params)
+      flash[:notice] = 'Age Group Type was successfully updated.'
     end
+    respond_with(@age_group_type, location: age_group_types_path)
   end
 
   private

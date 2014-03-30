@@ -5,6 +5,8 @@ class EventCategoriesController < ApplicationController
   before_filter :load_event, :only => [:index, :create]
   before_filter :load_event_category, :only => [:sign_ups]
 
+  respond_to :html
+
   def load_event
     @event = Event.find(params[:event_id])
   end
@@ -23,20 +25,13 @@ class EventCategoriesController < ApplicationController
     load_categories
     @event_category = EventCategory.new
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @event_categories }
-    end
+    respond_with(@event_category)
   end
 
   # GET /event_categories/1
   # GET /event_categories/1.json
   def show
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @event_category }
-    end
   end
 
   # GET /event_categories/1/edit
@@ -64,15 +59,10 @@ class EventCategoriesController < ApplicationController
   # PUT /event_categories/1.json
   def update
 
-    respond_to do |format|
-      if @event_category.update_attributes(event_category_params)
-        format.html { redirect_to @event_category, notice: 'Event Category was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @event_category.errors, status: :unprocessable_entity }
-      end
+    if @event_category.update_attributes(event_category_params)
+      flash[:notice] = 'Event Category was successfully updated.'
     end
+    respond_with(@event_category)
   end
 
   # DELETE /event_categories/1
@@ -81,10 +71,7 @@ class EventCategoriesController < ApplicationController
     event = @event_category.event
     @event_category.destroy
 
-    respond_to do |format|
-      format.html { redirect_to event_event_categories_path(event) }
-      format.json { head :no_content }
-    end
+    respond_with(@event_category, location: event_event_categories_path(event))
   end
 
   def sign_ups
