@@ -36,6 +36,8 @@ class WelcomeController < ApplicationController
           flash.keep
           format.html { redirect_to user_registrants_path(current_user) }
         end
+        # This tries to get around the apple-touch-icon.png requests
+        format.png { return render :nothing => true, :status => 200, :content_type => 'text/html' }
       else
         format.html { redirect_to registrants_path }
       end
