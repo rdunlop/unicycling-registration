@@ -17,17 +17,13 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
-        format.json { render json: @category, status: :created, location: categories_path }
-      else
-        @categories = Category.all
-        format.html { render action: "index" }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    if @category.save
+      flash[:notice] = 'Category was successfully created.'
+    else
+      @categories = Category.all
     end
+
+    respond_with(@category, location: categories_path, action: "index")
   end
 
   # PUT /categories/1

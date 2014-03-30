@@ -8,16 +8,13 @@ class AgeGroupTypesController < ApplicationController
   end
 
   def create
-    respond_to do |format|
-      if @age_group_type.save
-        format.html { redirect_to age_group_types_path, notice: 'Age Group Type was successfully created.' }
-        format.json { render json: @age_group_type, status: :created, location: age_group_types_path }
-      else
-        @age_group_types = AgeGroupType.all
-        format.html { render action: "index" }
-        format.json { render json: @age_group_type.errors, status: :unprocessable_entity }
-      end
+    if @age_group_type.save
+      flash[:notice] = 'Age Group Type was successfully created.'
+    else
+      @age_group_types = AgeGroupType.all
     end
+
+    respond_with(@age_group_type, location: age_group_types_path)
   end
 
   def destroy

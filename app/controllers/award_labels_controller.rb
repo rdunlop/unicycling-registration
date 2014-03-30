@@ -28,14 +28,12 @@ class AwardLabelsController < ApplicationController
   def create
     @award_label.user = @user
 
-    respond_to do |format|
-      if @award_label.save
-        format.html { redirect_to user_award_labels_path(@user), notice: 'Award label was successfully created.' }
-      else
-        @award_labels = @user.award_labels
-        format.html { render action: "index" }
-      end
+    if @award_label.save
+      flash[:notice] = 'Award label was successfully created.'
+    else
+      @award_labels = @user.award_labels
     end
+    respond_with(@award_label, location: user_award_labels_path(@user), action: "index")
   end
 
   # PUT /award_labels/1

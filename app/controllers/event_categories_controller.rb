@@ -43,16 +43,12 @@ class EventCategoriesController < ApplicationController
   def create
     @event_category.event = @event
 
-    respond_to do |format|
-      if @event_category.save
-        format.html { redirect_to event_event_categories_path(@event), notice: 'Event Category was successfully created.' }
-        format.json { render json: @event_category, status: :created, location: event_event_categories_path(@event) }
-      else
-        load_categories
-        format.html { render action: "index" }
-        format.json { render json: @event_category.errors, status: :unprocessable_entity }
-      end
+    if @event_category.save
+      flash[:notice] = 'Event Category was successfully created.'
+    else
+      load_categories
     end
+    respond_with(@event_category, location: event_event_categories_path(@event), action: "index")
   end
 
   # PUT /event_categories/1
