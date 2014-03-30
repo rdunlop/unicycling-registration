@@ -28,22 +28,29 @@ class AwardLabelsController < ApplicationController
   def create
     @award_label.user = @user
 
-    if @award_label.save
-      flash[:notice] = 'Award label was successfully created.'
-    else
-      @award_labels = @user.award_labels
+    respond_to do |format|
+      if @award_label.save
+        format.html { redirect_to user_award_labels_path(@user), notice: 'Award label was successfully created.' }
+      else
+        @award_labels = @user.award_labels
+        format.html { render action: "index" }
+      end
     end
-    respond_with(@award_label, location: user_award_labels_path(@user), action: "index")
   end
 
   # PUT /award_labels/1
   # PUT /award_labels/1.json
   def update
 
-    if @award_label.update_attributes(award_label_params)
-      flash[:notice] = 'Award label was successfully updated.'
+    respond_to do |format|
+      if @award_label.update_attributes(award_label_params)
+        format.html { redirect_to user_award_labels_path(@award_label.user), notice: 'Award label was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @award_label.errors, status: :unprocessable_entity }
+      end
     end
-    respond_with(@award_label, location: user_award_labels_path(@award_label.user) )
   end
 
   # DELETE /award_labels/1

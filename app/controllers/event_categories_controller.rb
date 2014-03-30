@@ -43,22 +43,31 @@ class EventCategoriesController < ApplicationController
   def create
     @event_category.event = @event
 
-    if @event_category.save
-      flash[:notice] = 'Event Category was successfully created.'
-    else
-      load_categories
+    respond_to do |format|
+      if @event_category.save
+        format.html { redirect_to event_event_categories_path(@event), notice: 'Event Category was successfully created.' }
+        format.json { render json: @event_category, status: :created, location: event_event_categories_path(@event) }
+      else
+        load_categories
+        format.html { render action: "index" }
+        format.json { render json: @event_category.errors, status: :unprocessable_entity }
+      end
     end
-    respond_with(@event_category, location: event_event_categories_path(@event), action: "index")
   end
 
   # PUT /event_categories/1
   # PUT /event_categories/1.json
   def update
 
-    if @event_category.update_attributes(event_category_params)
-      flash[:notice] = 'Event Category was successfully updated.'
+    respond_to do |format|
+      if @event_category.update_attributes(event_category_params)
+        format.html { redirect_to @event_category, notice: 'Event Category was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @event_category.errors, status: :unprocessable_entity }
+      end
     end
-    respond_with(@event_category)
   end
 
   # DELETE /event_categories/1

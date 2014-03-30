@@ -17,23 +17,32 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    if @category.save
-      flash[:notice] = 'Category was successfully created.'
-    else
-      @categories = Category.all
-    end
 
-    respond_with(@category, location: categories_path, action: "index")
+    respond_to do |format|
+      if @category.save
+        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
+        format.json { render json: @category, status: :created, location: categories_path }
+      else
+        @categories = Category.all
+        format.html { render action: "index" }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PUT /categories/1
   # PUT /categories/1.json
   def update
 
-    if @category.update_attributes(category_params)
-      flash[:notice] = 'Category was successfully updated.'
+    respond_to do |format|
+      if @category.update_attributes(category_params)
+        format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
     end
-    respond_with(@category, location: categories_path)
   end
 
   # DELETE /categories/1
