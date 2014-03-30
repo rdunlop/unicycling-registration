@@ -101,7 +101,7 @@ class Competitor < ActiveRecord::Base
     def age_group_entry_description # XXX combine with the other age_group function
       Rails.cache.fetch("/competitor/#{id}-#{updated_at}/competition/#{competition.id}-#{competition.updated_at}/age_group_entry_description") do
         registrant = members.first.try(:registrant)
-        ag_entry_description = competition.get_age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) unless registrant.nil?
+        competition.get_age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) unless registrant.nil?
       end
     end
 
@@ -343,6 +343,13 @@ class Competitor < ActiveRecord::Base
                 end
             end
         end
+    end
+
+    def is_top?(search_gender)
+      return false if !has_result?
+      return false if search_gender != gender
+
+      overall_place.to_i <= 10
     end
 
     def self.group_selection_text

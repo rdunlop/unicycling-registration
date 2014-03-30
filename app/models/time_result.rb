@@ -87,10 +87,4 @@ class TimeResult < ActiveRecord::Base
   def full_time_in_thousands
     (minutes * 60000) + (seconds * 1000) + thousands
   end
-
-  def is_top?(search_gender)
-    return false if disqualified
-    return false if search_gender != competitor.gender
-    return competitor.overall_place.to_i <= 10
-  end
 end

@@ -14,26 +14,26 @@
   </thead>
 
   <tbody>
-    <% @male_time_results.each_with_index do |time_result, index| %>
+    <% @male_candidates.each do |competitor| %>
       <tr>
-        <td><%= time_result.competitor.overall_place %></td>
-        <td><%= time_result.full_time %></td>
-        <td><%= time_result.competitor.external_id %></td>
-        <td><%= time_result.competitor %></td>
-        <td><%= time_result.competitor.gender %></td>
-        <td><%= time_result.competitor.age_group_entry_description %></td>
-        <td><%= time_result.competitor.place %></td>
+        <td><%= competitor.overall_place %></td>
+        <td><%= competitor.result %></td>
+        <td><%= competitor.external_id %></td>
+        <td><%= competitor %></td>
+        <td><%= competitor.gender %></td>
+        <td><%= competitor.age_group_entry_description %></td>
+        <td><%= competitor.place %></td>
       </tr>
     <% end %>
-    <% @female_time_results.each_with_index do |time_result, index| %>
+    <% @female_candidates.each do |competitor| %>
       <tr>
-        <td><%= time_result.competitor.overall_place %></td>
-        <td><%= time_result.full_time %></td>
-        <td><%= time_result.competitor.external_id %></td>
-        <td><%= time_result.competitor %></td>
-        <td><%= time_result.competitor.gender %></td>
-        <td><%= time_result.competitor.age_group_entry_description %></td>
-        <td><%= time_result.competitor.place %></td>
+        <td><%= competitor.overall_place %></td>
+        <td><%= competitor.result %></td>
+        <td><%= competitor.external_id %></td>
+        <td><%= competitor %></td>
+        <td><%= competitor.gender %></td>
+        <td><%= competitor.age_group_entry_description %></td>
+        <td><%= competitor.place %></td>
       </tr>
     <% end %>
   </tbody>
