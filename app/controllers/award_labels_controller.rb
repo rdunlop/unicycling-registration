@@ -3,6 +3,7 @@ class AwardLabelsController < ApplicationController
   load_and_authorize_resource
 
   before_filter :load_user, :only => [:index, :create, :create_labels, :expert_labels, :normal_labels, :destroy_all, :create_labels_by_registrant]
+  respond_to :html
 
   def load_user
     @user = User.find(params[:user_id])
@@ -14,10 +15,7 @@ class AwardLabelsController < ApplicationController
     @award_labels = @user.award_labels.includes(:registrant)
     @award_label = AwardLabel.new
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @award_labels }
-    end
+    respond_with @award_labels
   end
 
   # GET /award_labels/1/edit
@@ -44,15 +42,10 @@ class AwardLabelsController < ApplicationController
   # PUT /award_labels/1.json
   def update
 
-    respond_to do |format|
-      if @award_label.update_attributes(award_label_params)
-        format.html { redirect_to user_award_labels_path(@award_label.user), notice: 'Award label was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @award_label.errors, status: :unprocessable_entity }
-      end
+    if @award_label.update_attributes(award_label_params)
+      flash[:notice] = 'Award label was successfully updated.'
     end
+    respond_with(@award_label, location: user_award_labels_path(@award_label.user) )
   end
 
   # DELETE /award_labels/1
@@ -61,10 +54,7 @@ class AwardLabelsController < ApplicationController
     @user = @award_label.user
     @award_label.destroy
 
-    respond_to do |format|
-      format.html { redirect_to user_award_labels_path(@user) }
-      format.json { head :no_content }
-    end
+    respond_with(@award_label, location: user_award_labels_path(@user) )
   end
 
   def set_int_if_present(value, default)
