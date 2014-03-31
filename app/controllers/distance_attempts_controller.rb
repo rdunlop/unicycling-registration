@@ -2,6 +2,8 @@ class DistanceAttemptsController < ApplicationController
   load_and_authorize_resource
   before_filter :load_event_category, :except => [:destroy]
 
+  respond_to :html
+
   def load_event_category
     unless params[:competitor_id].nil?
       @competitor = Competitor.find(params[:competitor_id])
@@ -42,26 +44,16 @@ class DistanceAttemptsController < ApplicationController
     @distance_attempt.competitor = @competitor
     @distance_attempt.judge = @judge
 
-    respond_to do |format|
-      if @distance_attempt.save
-        format.html { redirect_to new_judge_competitor_distance_attempt_path(@judge, @competitor), notice: 'Distance Attempt was successfully created.' }
-        format.json { render json: @score, status: :created, location: @score }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @score.errors, status: :unprocessable_entity }
-      end
+    if @distance_attempt.save
+      flash[:notice] = 'Distance Attempt was successfully created.'
     end
+    respond_with(@distance_attempt, location: new_judge_competitor_distance_attempt_path(@judge, @competitor), action: "new")
   end
 
   def destroy
-    judge = @distance_attempt.judge
-    comp = @distance_attempt.competitor
     @distance_attempt.destroy
 
-    respond_to do |format|
-      format.html { redirect_to new_judge_competitor_distance_attempt_path(judge, comp) }
-      format.json { head :no_content }
-    end
+    respond_with(@distance_attempt)
   end
 
   def list
