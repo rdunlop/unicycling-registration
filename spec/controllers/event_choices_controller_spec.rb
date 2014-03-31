@@ -122,19 +122,22 @@ describe EventChoicesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved event_choice as @event_choice" do
         # Trigger the behavior that occurs when invalid params are submitted
-        EventChoice.any_instance.stub(:save).and_return(false)
+        EventChoice.any_instance.stub(:valid?).and_return(false)
+        EventChoice.any_instance.stub(:errors).and_return("something")
         post :create, {:event_id => @event.id, :event_choice => {:optional => false}}
         assigns(:event_choice).should be_a_new(EventChoice)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        EventChoice.any_instance.stub(:save).and_return(false)
+        EventChoice.any_instance.stub(:valid?).and_return(false)
+        EventChoice.any_instance.stub(:errors).and_return("something")
         post :create, {:event_id => @event.id, :event_choice => {:optional => false}}
         response.should render_template("index")
       end
       it "loads the event" do
-        EventChoice.any_instance.stub(:save).and_return(false)
+        EventChoice.any_instance.stub(:valid?).and_return(false)
+        EventChoice.any_instance.stub(:errors).and_return("something")
         post :create, {:event_id => @event.id, :event_choice => {:optional => false}}
         assigns(:event).should == @event
       end
@@ -210,7 +213,8 @@ describe EventChoicesController do
       it "assigns the event_choice as @event_choice" do
         event_choice = EventChoice.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        EventChoice.any_instance.stub(:save).and_return(false)
+        EventChoice.any_instance.stub(:valid?).and_return(false)
+        EventChoice.any_instance.stub(:errors).and_return("something")
         put :update, {:id => event_choice.to_param, :event_choice => {:optional => false}}
         assigns(:event_choice).should eq(event_choice)
       end
@@ -218,7 +222,8 @@ describe EventChoicesController do
       it "re-renders the 'edit' template" do
         event_choice = EventChoice.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        EventChoice.any_instance.stub(:save).and_return(false)
+        EventChoice.any_instance.stub(:valid?).and_return(false)
+        EventChoice.any_instance.stub(:errors).and_return("something")
         put :update, {:id => event_choice.to_param, :event_choice => {:optional => false}}
         response.should render_template("edit")
       end
