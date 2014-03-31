@@ -3,6 +3,8 @@ class JudgesController < ApplicationController
   before_filter :load_new_judge, :only => [:create]
   load_and_authorize_resource
 
+  respond_to :html
+
   def load_new_judge
     @judge = @competition.judges.new(judge_params)
   end
@@ -16,16 +18,12 @@ class JudgesController < ApplicationController
   # POST /competitions/#/judges
   # POST /competitions/#/judges.json
   def create
-    respond_to do |format|
-      if @judge.save
-        format.html { redirect_to competition_judges_path(@competition), notice: 'Association was successfully created.' }
-        format.json { render json: @judge, status: :created, location: @judge }
-      else
-        index # call new function (above), to load the correct variables
-        format.html { render action: "index" }
-        format.json { render json: @judge.errors, status: :unprocessable_entity }
-      end
+    if @judge.save
+      flash[:notice] = 'Association was successfully created.'
+    else
+      index # call new function (above), to load the correct variables
     end
+    respond_with(@judge, location: competition_judges_path(@competition), action: "index")
   end
 
   # POST /event/#/judges/copy_judges
