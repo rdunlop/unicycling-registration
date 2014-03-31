@@ -4,6 +4,8 @@ class EventsController < ApplicationController
   before_filter :load_new_event, :only => [:create]
   load_and_authorize_resource
 
+  respond_to :html
+
   def load_category
     @category = Category.find(params[:category_id])
   end
@@ -19,10 +21,7 @@ class EventsController < ApplicationController
     @event = Event.new
     @event.event_categories.build
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @events }
-    end
+    respond_with(@events)
   end
 
   # GET /events/summary
@@ -100,10 +99,7 @@ class EventsController < ApplicationController
     @category = @event.category
     @event.destroy
 
-    respond_to do |format|
-      format.html { redirect_to category_events_path(@category) }
-      format.json { head :no_content }
-    end
+    respond_with(@event, location: category_events_path(@category))
   end
 
   def judging

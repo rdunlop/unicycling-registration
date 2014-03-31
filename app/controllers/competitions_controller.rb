@@ -10,6 +10,9 @@ class CompetitionsController < ApplicationController
 
   load_and_authorize_resource
 
+  respond_to :html
+
+
   private
   def load_new_competition
     @competition = Competition.new(competition_params)
@@ -37,11 +40,6 @@ class CompetitionsController < ApplicationController
   # GET /competitions.json
   def index
     @competition = Competition.new
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @competitions }
-    end
   end
 
   # GET /competitions/1/edit
@@ -54,27 +52,21 @@ class CompetitionsController < ApplicationController
 
   # POST /events/#/create
   def create
-    respond_to do |format|
-      if @competition.save
-        format.html { redirect_to event_path(@competition.event), notice: "Competition created successfully" }
-      else
-        format.html { render action: "new" }
-      end
+
+    if @competition.save
+      flash[:notice] = "Competition created successfully"
     end
+
+    respond_with(@competition, location: event_path(@competition.event))
   end
 
   # PUT /competitions/1
   # PUT /competitions/1.json
   def update
-    respond_to do |format|
-      if @competition.update_attributes(competition_params)
-        format.html { redirect_to event_path(@competition.event), notice: 'Competition was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @competition.errors, status: :unprocessable_entity }
-      end
+    if @competition.update_attributes(competition_params)
+      flash[:notice] = 'Competition was successfully updated.'
     end
+    respond_with(@competition, location: event_path(@competition.event))
   end
 
   # DELETE /competitions/1/destroy_results
@@ -102,10 +94,7 @@ class CompetitionsController < ApplicationController
     target_url = event_path(@competition.event)
     @competition.destroy
 
-    respond_to do |format|
-      format.html { redirect_to target_url }
-      format.json { head :no_content }
-    end
+    respond_with(@competition, location: target_url)
   end
 
   def set_places

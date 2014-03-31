@@ -6,6 +6,8 @@ class CompetitorsController < ApplicationController
   load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy]
   load_and_authorize_resource :only => [:edit, :update, :destroy]
 
+  respond_to :html
+
   private
   def load_competition
     @competition = Competition.find(params[:competition_id])
@@ -68,30 +70,23 @@ class CompetitorsController < ApplicationController
   # POST /competitors.json
   def create
 
-    respond_to do |format|
-      if @competitor.save
-        format.html { redirect_to competition_competitors_path(@competition), notice: 'Competition registrant was successfully created.' }
-        format.json { render json: @competitor, status: :created, location: @competitor }
-      else
-        @registrants = @competition.signed_up_registrants
-        format.html { render "new", alert: 'Error adding Registrant' }
-        format.json { render json: @competitor.errors, status: :unprocessable_entity }
-      end
+    if @competitor.save
+      flash[:notice] = 'Competition registrant was successfully created.'
+    else
+      @registrants = @competition.signed_up_registrants
+      flash[:alert] = 'Error adding Registrant'
     end
+
+    respond_with(@competitor, location: competition_competitors_path(@competition))
   end
 
   # PUT /competitors/1
   # PUT /competitors/1.json
   def update
-    respond_to do |format|
-      if @competitor.update_attributes(competitor_params)
-        format.html { redirect_to competition_competitors_path(@competitor.competition), notice: 'Competition registrant was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @competitor.errors, status: :unprocessable_entity }
-      end
+    if @competitor.update_attributes(competitor_params)
+      flash[:notice] = 'Competition registrant was successfully updated.'
     end
+    respond_with(@competitor, location: competition_competitors_path(@competitor.competition), action: "edit")
   end
 
   # DELETE /competitors/1
@@ -100,20 +95,14 @@ class CompetitorsController < ApplicationController
     @ev_cat = @competitor.competition
     @competitor.destroy
 
-    respond_to do |format|
-      format.html { redirect_to competition_competitors_path(@ev_cat) }
-      format.json { head :no_content }
-    end
+    respond_with(@competition, location: competition_competitors_path(@ev_cat))
   end
 
   # DELETE /events/10/competitors/destroy_all
   def destroy_all
     @competition.competitors.destroy_all
 
-    respond_to do |format|
-      format.html { redirect_to new_competition_competitor_path(@competition) }
-      format.json { head :no_content }
-    end
+    respond_with(@competition, location: new_competition_competitor_path(@competition))
   end
 
   private

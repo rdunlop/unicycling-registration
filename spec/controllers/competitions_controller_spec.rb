@@ -26,12 +26,12 @@ describe CompetitionsController do
       assigns(:competitions).should eq([competition])
     end
     it "does not show competitions from other events" do
-      competition = FactoryGirl.create(:competition)
+      FactoryGirl.create(:competition)
       get :index, {:event_id => @event.id}
       assigns(:competitions).should eq(@event.competitions)
     end
     it "assigns a new competition" do
-      competition = Competition.create! valid_attributes.merge({:event_id => @event.id})
+      Competition.create! valid_attributes.merge({:event_id => @event.id})
       get :index, {:event_id => @event.id}
       assigns(:competition).should be_a_new(Competition)
     end
@@ -83,7 +83,8 @@ describe CompetitionsController do
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Competition.any_instance.stub(:save).and_return(false)
+        Competition.any_instance.stub(:valid?).and_return(false)
+        Competition.any_instance.stub(:errors).and_return("anything")
         post :create, {:event_id => @event.id, :competition => {:name => "comp"}}
         response.should render_template("new")
       end
@@ -125,7 +126,8 @@ describe CompetitionsController do
       it "assigns the competition as @competition" do
         competition = FactoryGirl.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
-        Competition.any_instance.stub(:save).and_return(false)
+        Competition.any_instance.stub(:valid?).and_return(false)
+        Competition.any_instance.stub(:errors).and_return("anything")
         put :update, {:id => competition.to_param, :competition => {:name => "fake"}}
         assigns(:competition).should eq(competition)
       end
@@ -133,7 +135,8 @@ describe CompetitionsController do
       it "re-renders the 'edit' template" do
         competition = FactoryGirl.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
-        Competition.any_instance.stub(:save).and_return(false)
+        Competition.any_instance.stub(:valid?).and_return(false)
+        Competition.any_instance.stub(:errors).and_return("anything")
         put :update, {:id => competition.to_param, :competition => {:name => "comp"}}
         response.should render_template("edit")
       end
@@ -150,7 +153,6 @@ describe CompetitionsController do
 
     it "redirects to the event_categories list" do
       competition = FactoryGirl.create(:competition, :event => @event)
-      event = competition.event
       delete :destroy, {:id => competition.to_param}
       response.should redirect_to(event_path(@event))
     end

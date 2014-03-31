@@ -151,7 +151,8 @@ describe CompetitorsController do
 
       it "re-renders the 'competitors#new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Competitor.any_instance.stub(:save).and_return(false)
+        Competitor.any_instance.stub(:valid?).and_return(false)
+        Competitor.any_instance.stub(:errors).and_return("anything")
         post :create, {:competitor => {:custom_name => "name"}, :competition_id => @ec.id}
         response.should render_template("new")
       end
@@ -187,7 +188,8 @@ describe CompetitorsController do
       it "assigns the competitor as @competitor" do
         competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         # Trigger the behavior that occurs when invalid params are submitted
-        Competitor.any_instance.stub(:save).and_return(false)
+        Competitor.any_instance.stub(:valid?).and_return(false)
+        Competitor.any_instance.stub(:errors).and_return("anything")
         put :update, {:id => competitor.to_param, :competitor => {:custom_name => "name"}}
         assigns(:competitor).should eq(competitor)
       end
@@ -195,7 +197,8 @@ describe CompetitorsController do
       it "re-renders the 'events#edit' template" do
         competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         # Trigger the behavior that occurs when invalid params are submitted
-        Competitor.any_instance.stub(:save).and_return(false)
+        Competitor.any_instance.stub(:valid?).and_return(false)
+        Competitor.any_instance.stub(:errors).and_return("anything")
         put :update, {:id => competitor.to_param, :competitor => {:custom_name => "name"}}
         response.should render_template("edit")
       end

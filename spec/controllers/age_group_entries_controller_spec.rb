@@ -64,14 +64,16 @@ describe AgeGroupEntriesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved age_group_entry as @age_group_entry" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AgeGroupEntry.any_instance.stub(:save).and_return(false)
+        AgeGroupEntry.any_instance.stub(:valid?).and_return(false)
+        AgeGroupEntry.any_instance.stub(:errors).and_return("something")
         post :create, {:age_group_entry => { "short_description" => "invalid value" }, :age_group_type_id => @age_group_type.id}
         assigns(:age_group_entry).should be_a_new(AgeGroupEntry)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AgeGroupEntry.any_instance.stub(:save).and_return(false)
+        AgeGroupEntry.any_instance.stub(:valid?).and_return(false)
+        AgeGroupEntry.any_instance.stub(:errors).and_return("something")
         post :create, {:age_group_entry => { "short_description" => "invalid value" }, :age_group_type_id => @age_group_type.id}
         response.should render_template("index")
       end
@@ -107,7 +109,8 @@ describe AgeGroupEntriesController do
       it "assigns the age_group_entry as @age_group_entry" do
         age_group_entry = FactoryGirl.create(:age_group_entry)
         # Trigger the behavior that occurs when invalid params are submitted
-        AgeGroupEntry.any_instance.stub(:save).and_return(false)
+        AgeGroupEntry.any_instance.stub(:valid?).and_return(false)
+        AgeGroupEntry.any_instance.stub(:errors).and_return("something")
         put :update, {:id => age_group_entry.to_param, :age_group_entry => { "short_description" => "invalid value" }}
         assigns(:age_group_entry).should eq(age_group_entry)
       end
@@ -115,7 +118,8 @@ describe AgeGroupEntriesController do
       it "re-renders the 'edit' template" do
         age_group_entry = FactoryGirl.create(:age_group_entry)
         # Trigger the behavior that occurs when invalid params are submitted
-        AgeGroupEntry.any_instance.stub(:save).and_return(false)
+        AgeGroupEntry.any_instance.stub(:valid?).and_return(false)
+        AgeGroupEntry.any_instance.stub(:errors).and_return("something")
         put :update, {:id => age_group_entry.to_param, :age_group_entry => { "short_description" => "invalid value" }}
         response.should render_template("edit")
       end
