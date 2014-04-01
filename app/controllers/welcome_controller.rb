@@ -46,6 +46,6 @@ class WelcomeController < ApplicationController
 
   private
   def contact_form_params
-    params.require(:contact_form).permit(:feedback)
+    params.require(:contact_form).permit(:feedback, :email)
   end
 end

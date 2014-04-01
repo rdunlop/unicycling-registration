@@ -2,8 +2,9 @@ class ContactForm
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  attr_accessor :feedback
+  attr_accessor :feedback, :email, :signed_in
   validates_presence_of :feedback
+  validates_presence_of :email, message: "can't be empty when not signed in"  unless @signed_in.present?
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -30,6 +31,7 @@ class ContactForm
   def update_from_user(user)
     self.username = user.email
     self.registrants = user.registrants.first.name if user.registrants.count > 0
+    @signed_in = true
   end
 
   def persisted?
