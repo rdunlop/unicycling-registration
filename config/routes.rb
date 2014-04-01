@@ -140,6 +140,9 @@ Workspace::Application.routes.draw do
       resources :events, :only => [:index, :create]
     end
 
+    # backwards-compatible URL
+    get '/registrants/:id/items', to: redirect('/registrants/%{id}/registrant_expense_items')
+
     resources :registrants do
       #admin
       collection do
