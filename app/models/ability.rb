@@ -183,16 +183,15 @@ class Ability
     can :all, Registrant
 
     can :crud, Registrant if user.has_role? :admin or user.has_role? :super_admin
-    can :items, Registrant if user.has_role? :admin or user.has_role? :super_admin
     unless EventConfiguration.closed? and ENV['ONSITE_REGISTRATION'] != "true"
-      can [:update, :items, :destroy], Registrant, :user_id => user.id
+      can [:update, :destroy], Registrant, :user_id => user.id
       #can [:create], RegistrantExpenseItem, :user_id => user.id
-      can [:create, :destroy], RegistrantExpenseItem do |rei|
+      can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
         (not rei.system_managed) and user.registrants.include?(rei.registrant)
       end
       can :create, Registrant # necessary because we set the user in the controller?
     end
-    can [:create, :destroy], RegistrantExpenseItem if user.has_role? :admin or user.has_role? :super_admin
+    can [:index, :create, :destroy], RegistrantExpenseItem if user.has_role? :admin or user.has_role? :super_admin
 
     can :read, Registrant do |reg|
       user.accessible_registrants.include?(reg)

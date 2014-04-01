@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe "registrants/items" do
+describe "registrant_expense_items/index" do
   before(:each) do
     @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
     @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
-    @registration_period = FactoryGirl.create(:registration_period, 
+    @registration_period = FactoryGirl.create(:registration_period,
                                               :start_date => Date.new(2012, 01, 10),
                                               :end_date => Date.new(2012, 02, 11),
                                               :competitor_expense_item => @comp_exp,

@@ -18,6 +18,15 @@ describe RegistrantExpenseItemsController do
     }
   end
 
+  describe "GET index" do
+    it "assigns the requested registrant as @registrant" do
+      registrant = FactoryGirl.create(:competitor, :user => @user)
+      get :index, {:registrant_id => registrant.to_param}
+      assigns(:registrant).should eq(registrant)
+      response.should be_success
+    end
+  end
+
   describe "POST create" do
     describe "with valid params" do
       it "creates a new RegistrantExpenseItem" do
@@ -34,7 +43,7 @@ describe RegistrantExpenseItemsController do
 
       it "redirects to the created item_registrants_path" do
         post :create, {:registrant_expense_item => valid_attributes, :registrant_id => @reg.id}
-        response.should redirect_to(items_registrant_path(Registrant.last))
+        response.should redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
     end
 
@@ -50,7 +59,7 @@ describe RegistrantExpenseItemsController do
         # Trigger the behavior that occurs when invalid params are submitted
         RegistrantExpenseItem.any_instance.stub(:save).and_return(false)
         post :create, {:registrant_expense_item => { "details" => "invalid value" }, :registrant_id => @reg.id}
-        response.should render_template("items")
+        response.should render_template("index")
       end
     end
   end
@@ -67,7 +76,7 @@ describe RegistrantExpenseItemsController do
       registrant_expense_item = FactoryGirl.create(:registrant_expense_item, :registrant => @reg)
       reg = registrant_expense_item.registrant
       delete :destroy, {:id => registrant_expense_item.to_param, :registrant_id => @reg.id}
-      response.should redirect_to(items_registrant_path(reg))
+      response.should redirect_to(registrant_registrant_expense_items_path(reg))
     end
   end
 

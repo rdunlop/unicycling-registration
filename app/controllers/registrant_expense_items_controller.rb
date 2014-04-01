@@ -13,14 +13,17 @@ class RegistrantExpenseItemsController < ApplicationController
     @registrant_expense_item.registrant = @registrant
   end
 
+  def index
+  end
+
   def create
     respond_to do |format|
       format.html {
         if @registrant_expense_item.save
           flash[:notice] = "Successfully created Expense Item"
-          redirect_to items_registrant_path(@registrant)
+          redirect_to registrant_registrant_expense_items_path(@registrant)
         else
-          render "registrants/items", notice: "Error"
+          render "index", notice: "Error"
         end
       }
     end
@@ -33,9 +36,9 @@ class RegistrantExpenseItemsController < ApplicationController
       format.html {
         if @registrant_expense_item.destroy
           flash[:notice] = "Successfully removed Expense Item"
-          redirect_to items_registrant_path(@registrant)
+          redirect_to registrant_registrant_expense_items_path(@registrant)
         else
-          render "registrants/items", notice: "ERR"
+          render "index", notice: "ERR"
         end
       }
     end

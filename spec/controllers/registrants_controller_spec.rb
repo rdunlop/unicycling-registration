@@ -245,15 +245,6 @@ describe RegistrantsController do
     end
   end
 
-  describe "GET items" do
-    it "assigns the requested registrant as @registrant" do
-      registrant = FactoryGirl.create(:competitor, :user => @user)
-      get :items, {:id => registrant.to_param}
-      assigns(:registrant).should eq(registrant)
-      response.should be_success
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       before(:each) do
@@ -303,7 +294,7 @@ describe RegistrantsController do
 
       it "redirects to the created registrant" do
         post :create, {:registrant => @comp_attributes}
-        response.should redirect_to(items_registrant_path(Registrant.last))
+        response.should redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
     end
 
@@ -372,7 +363,7 @@ describe RegistrantsController do
         @attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
         @attributes[:registrant_choices_attributes][0][:id] = RegistrantChoice.first.id
         put :update, {:id => @reg.id, :registrant => @attributes}
-        response.should redirect_to(items_registrant_path(@reg))
+        response.should redirect_to(registrant_registrant_expense_items_path(@reg))
       end
     end
 
@@ -408,12 +399,12 @@ describe RegistrantsController do
 
       it "can update the registrant_event_sign_up" do
         put :update, {:id => @reg.id, :registrant => @attributes}
-        response.should redirect_to(items_registrant_path(@reg))
+        response.should redirect_to(registrant_registrant_expense_items_path(@reg))
         @new_attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
         expect {
           put :update, {:id => @reg.id, :registrant => @new_attributes}
         }.to change(RegistrantEventSignUp, :count).by(0)
-        response.should redirect_to(items_registrant_path(@reg))
+        response.should redirect_to(registrant_registrant_expense_items_path(@reg))
       end
     end
   end
@@ -447,12 +438,12 @@ describe RegistrantsController do
       it "redirects competitors to the items" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
-        response.should redirect_to(items_registrant_path(Registrant.last))
+        response.should redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
       it "redirects noncompetitors to the items" do
         registrant = FactoryGirl.create(:noncompetitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
-        response.should redirect_to(items_registrant_path(Registrant.last))
+        response.should redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
     end
 

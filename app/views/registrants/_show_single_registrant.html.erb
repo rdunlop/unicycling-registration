@@ -21,7 +21,7 @@
     <%= render :partial => "/registrants/registrant_expenses" %>
     <% if can? :create, RegistrantExpenseItem %>
         <div class="edit_link_block">
-            <%= link_to t(".edit_items"), items_registrant_path(@registrant) %>
+            <%= link_to t(".edit_items"), registrant_registrant_expense_items(@registrant) %>
         </div>
     <% end %>
     <% if can? :manage, @registrant %>

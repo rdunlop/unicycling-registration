@@ -10,10 +10,10 @@
   <%= render :partial => "/shared/error_messages", :object => @registrant_expense_item %>
 <% end %>
 
-<%= render :partial => "/registrants/new_expenses" %>
+<%= render :partial => "new_expenses" %>
 
 <div>
-  <%= render :partial => "/registrants/expenses", :locals => {:registrant => @registrant} %>
+  <%= render :partial => "expenses", :locals => {:registrant => @registrant} %>
 </div>
 
 <div class="actions">

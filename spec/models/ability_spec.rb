@@ -43,6 +43,7 @@ describe "Ability" do
       it { should be_able_to(:all, registration) }
       it { should be_able_to(:waiver, registration) }
       it { should be_able_to(:empty_waiver, Registrant) }
+      it { should be_able_to(:index, RegistrantExpenseItem) }
       describe "with a StandardSkillRoutine" do
         before(:each) do
           @routine = FactoryGirl.create(:standard_skill_routine, :registrant => registration)
@@ -110,11 +111,11 @@ describe "Ability" do
       let(:registration) { FactoryGirl.create(:registrant) }
       it { should be_able_to(:read, registration) }
       it { should be_able_to(:crud, registration) }
-      it { should be_able_to(:items, registration) }
     end
 
     describe "with an rei" do
       let(:rei) { FactoryGirl.create(:registrant_expense_item) }
+      it { should be_able_to(:index, RegistrantExpenseItem) }
       it { should be_able_to(:create, rei) }
       it { should be_able_to(:destroy, rei) }
     end

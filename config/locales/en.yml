@@ -81,23 +81,12 @@ en:
       responsible_adult_detail: "(for Registrants Under the age of 18)"
     online_waiver:
       online_waiver_signature: "Signature: "
-    new_expense:
-      add_free_item: "Add FREE Item"
-      one_is_free: "One is free with your registration"
-      add_item: "Add Item"
-      sold_out: "Sold Out"
-    expenses:
-      registrants_expenses: "%{registrant}'s Expenses"
-      cost: "Cost"
-      paid: "Paid"
     pay_now:
       pay_now: "Pay Now"
       prices_increase: "Prices Increase"
       very_soon: "Very Soon"
       unknown: "Unknown"
       in: "in"
-    items:
-      continue: "Continue"
     show_single_registrant:
       registration_summary: "Registration Summary"
       printable_pdf: "Printable (Pdf)"
@@ -140,6 +129,19 @@ en:
       id: "ID"
       name: "Name"
       country: "Country"
+
+  registrant_expense_items:
+    index:
+      continue: "Continue"
+    new_expense:
+      add_free_item: "Add FREE Item"
+      one_is_free: "One is free with your registration"
+      add_item: "Add Item"
+      sold_out: "Sold Out"
+    expenses:
+      registrants_expenses: "%{registrant}'s Expenses"
+      cost: "Cost"
+      paid: "Paid"
 
   attending:
     events:
