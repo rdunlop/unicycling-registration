@@ -5,8 +5,16 @@ describe Event do
     @cf = ContactForm.new
   end
   it "is not valid without feedback" do
+    @cf.email = "robin@dunlopweb.com"
     @cf.valid?.should == false
     @cf.feedback = "hi"
+    @cf.valid?.should == true
+  end
+
+  it "is not valid without mail" do
+    @cf.feedback = "hi"
+    @cf.valid?.should == false
+    @cf.email = "robin@dunlopweb.com"
     @cf.valid?.should == true
   end
 
@@ -22,7 +30,7 @@ describe Event do
   it "has default registrants" do
     @cf.registrants.should == "unknown"
   end
-  
+
   it "can overwrite registrants" do
     @cf.registrants= "my registrants"
     @cf.registrants.should == "my registrants"
