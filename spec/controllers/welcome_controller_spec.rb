@@ -11,7 +11,7 @@ describe WelcomeController do
 
   describe "POST feedback" do
     it "returns http success" do
-      post 'feedback', {:contact_form => { :feedback => "Hello WorlD"}}
+      post 'feedback', {:contact_form => { :feedback => "Hello WorlD", :email => "robin@dunlopweb.com"}}
       response.should redirect_to(welcome_help_path)
     end
     it "returns an error when no feedback" do
@@ -20,7 +20,7 @@ describe WelcomeController do
     end
     it "sends a message" do
       ActionMailer::Base.deliveries.clear
-      post :feedback, { :contact_form => {:feedback => "Hello werld" }}
+      post :feedback, { :contact_form => {:feedback => "Hello werld", :email => "robin@dunlopweb.com" }}
       num_deliveries = ActionMailer::Base.deliveries.size
       num_deliveries.should == 1
     end
