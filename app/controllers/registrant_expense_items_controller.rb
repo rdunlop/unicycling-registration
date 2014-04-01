@@ -17,6 +17,7 @@ class RegistrantExpenseItemsController < ApplicationController
     respond_to do |format|
       format.html {
         if @registrant_expense_item.save
+          flash[:notice] = "Successfully created Expense Item"
           redirect_to items_registrant_path(@registrant)
         else
           render "registrants/items", notice: "Error"
@@ -31,6 +32,7 @@ class RegistrantExpenseItemsController < ApplicationController
     respond_to do |format|
       format.html {
         if @registrant_expense_item.destroy
+          flash[:notice] = "Successfully removed Expense Item"
           redirect_to items_registrant_path(@registrant)
         else
           render "registrants/items", notice: "ERR"
