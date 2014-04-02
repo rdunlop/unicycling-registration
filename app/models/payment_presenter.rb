@@ -117,17 +117,14 @@ class PaymentPresenter
 
   # delegate to the underlying payment
   def errors
-    @errors || []
-  end
-
-  def errors=(err)
-    @errors = err
+    p = self.build_payment
+    p.valid?
+    p.errors
   end
 
   # validate based on the undelying payment validation
   def valid?
     p = self.build_payment
-    self.errors = p.errors.clone
     p.valid?
   end
 
