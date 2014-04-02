@@ -29,7 +29,7 @@ class RegistrantsController < ApplicationController
   public
 
   def all_index
-    @registrants = Registrant.unscoped
+    @registrants = Registrant.unscoped.includes(:user)
   end
 
   # GET /registrants
