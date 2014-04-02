@@ -6,6 +6,7 @@ describe "registrants/show" do
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }
     @ability.can :read_contact_info, Registrant
+    @ability.can :create, RegistrantExpenseItem
     controller.stub(:current_user) { FactoryGirl.create(:user) }
   end
 
