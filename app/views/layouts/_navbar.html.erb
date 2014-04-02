@@ -76,7 +76,7 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Print/Create Awards', :url => user_award_labels_path(current_user), :active => current_page?(user_award_labels_path(current_user)), :permitted => can?(:manage, AwardLabel))
     %>
     <%
-      Category.all.each do |category|
+      Category.includes(:translations).includes(:events).all.each do |category|
         current_heading = Menu::MenuHeading.new(:title => category)
         m.headings << current_heading
         category.events.each do |event|
