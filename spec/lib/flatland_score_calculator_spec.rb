@@ -18,10 +18,10 @@ describe FlatlandScoreCalculator do
         @calc.calc_place(@comp1.scores.new).should == 0
     end
 
-    it "should set the calc_points according to scores Total" do
-      @calc.calc_points(@score1).should == 11
-      @calc.calc_points(@score2).should == 6
-      @calc.calc_points(@score3).should == 1
+    it "should set the calc_placing_points according to scores Total" do
+      @calc.calc_placing_points(@score1).should == 11
+      @calc.calc_placing_points(@score2).should == 6
+      @calc.calc_placing_points(@score3).should == 1
     end
     it "should have total_points of 0 (with 1 judge)" do
       @calc.total_points(@score1.competitor).should == 0.0
@@ -54,16 +54,16 @@ describe FlatlandScoreCalculator do
       end
     end
     describe "and there are 2 judges" do
-      before(:each) do 
+      before(:each) do
         @judge2 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
         @score2_1 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score1.competitor, :val_1 => 9, :val_2 => 0, :val_3 => 0, :val_4 => 1)
         @score2_2 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score2.competitor, :val_1 => 0, :val_2 => 0, :val_3 => 0, :val_4 => 1)
         @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 3, :val_2 => 0, :val_3 => 0, :val_4 => 1)
       end
       it "calculates the 2nd judges points correctly" do
-        @calc.calc_points(@score2_1).should == 10
-        @calc.calc_points(@score2_2).should == 1
-        @calc.calc_points(@score2_3).should == 4
+        @calc.calc_placing_points(@score2_1).should == 10
+        @calc.calc_placing_points(@score2_2).should == 1
+        @calc.calc_placing_points(@score2_3).should == 4
       end
 
       it "determines the highest place ranked" do

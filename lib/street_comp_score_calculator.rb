@@ -9,7 +9,7 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
     # ####################################################################
     # determining the place points for this score (by-judge)
     
-    def calc_points(score)
+    def calc_placing_points(score)
         @calc_points ||= {}
         unless @calc_points[score.id].nil?
             return @calc_points[score.id]
@@ -69,7 +69,7 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
       my_place
     end
    def total_points_for_judge_type(competitor, judge_type)
-      scores = get_relevant_scores(competitor, judge_type)
+      scores = get_placing_points_for_judge_type(competitor, judge_type)
 
       total_points = scores.reduce(:+) # sum the values
     end

@@ -9,7 +9,7 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
     # ####################################################################
     # determining the place points for this score (by-judge)
     
-    def calc_points(score)
+    def calc_placing_points(score)
         @calc_points ||= {}
         unless @calc_points[score.id].nil?
             return @calc_points[score.id]

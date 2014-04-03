@@ -18,10 +18,10 @@ describe StreetCompScoreCalculator do
         @calc.calc_place(@comp1.scores.new).should == 0
     end
 
-    it "should set the calc_points according to scores Total" do
-      @calc.calc_points(@score1).should == 10
-      @calc.calc_points(@score2).should == 7
-      @calc.calc_points(@score3).should == 5
+    it "should set the calc_placing_points according to scores Total" do
+      @calc.calc_placing_points(@score1).should == 10
+      @calc.calc_placing_points(@score2).should == 7
+      @calc.calc_placing_points(@score3).should == 5
     end
     it "should have real total_points (with 1 judge)" do
       @calc.total_points(@score1.competitor).should == 10
@@ -51,13 +51,13 @@ describe StreetCompScoreCalculator do
         @score7 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp7, :val_1 => 3, :val_2 => 0, :val_3 => 0, :val_4 => 0)
       end
       it "can calculate the place for each score" do
-        @calc.calc_points(@score1).should == 10 # 10
-        @calc.calc_points(@score2).should == 5 # 5
-        @calc.calc_points(@score3).should == 0 # 1
-        @calc.calc_points(@score4).should == 2 # 3
-        @calc.calc_points(@score5).should == 3 # 4
-        @calc.calc_points(@score6).should == 1 # 2
-        @calc.calc_points(@score7).should == 7 # 7
+        @calc.calc_placing_points(@score1).should == 10 # 10
+        @calc.calc_placing_points(@score2).should == 5 # 5
+        @calc.calc_placing_points(@score3).should == 0 # 1
+        @calc.calc_placing_points(@score4).should == 2 # 3
+        @calc.calc_placing_points(@score5).should == 3 # 4
+        @calc.calc_placing_points(@score6).should == 1 # 2
+        @calc.calc_placing_points(@score7).should == 7 # 7
       end
       it "can place the competitors" do
         @calc.place(@comp1).should == 1
@@ -92,9 +92,9 @@ describe StreetCompScoreCalculator do
         @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 7, :val_2 => 0, :val_3 => 0, :val_4 => 0)
       end
       it "calculates the 2nd judges points correctly" do
-        @calc.calc_points(@score2_1).should == 10
-        @calc.calc_points(@score2_2).should == 5
-        @calc.calc_points(@score2_3).should == 7
+        @calc.calc_placing_points(@score2_1).should == 10
+        @calc.calc_placing_points(@score2_2).should == 5
+        @calc.calc_placing_points(@score2_3).should == 7
       end
 
       it "determines the highest place ranked" do

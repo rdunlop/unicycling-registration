@@ -243,7 +243,7 @@ class Competition < ActiveRecord::Base
   # SCORE
   # determining the place points for this score (by-judge)
   def score_judged_points(score)
-    score_calculator.calc_points(score)
+    score_calculator.calc_placing_points(score)
   end
 
   def score_judged_place(score)
