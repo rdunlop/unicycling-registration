@@ -33,7 +33,7 @@ module JudgeScoreable
     end
   end
 
-  def Total
+  def total
     if self.invalid?
       0
     else

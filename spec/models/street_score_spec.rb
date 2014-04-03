@@ -20,7 +20,7 @@ describe StreetScore do
     score = FactoryGirl.build(:street_score)
     score.val_1 = 9.0
 
-    score.Total.should == 9.0
+    score.total.should == 9.0
   end
   it "should not be able to have the same score/judge created twice" do
     score = FactoryGirl.create(:street_score)
@@ -34,7 +34,7 @@ describe StreetScore do
     score = StreetScore.new
     score.val_1 = 1.0
     score.valid?.should == false
-    score.Total.should == 0
+    score.total.should == 0
     score.competitor_id = 4
     score.valid?.should == false
     score.judge = @judge

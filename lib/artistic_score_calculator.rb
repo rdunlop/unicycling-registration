@@ -46,8 +46,8 @@ class ArtisticScoreCalculator
 
     def ties(score) # always has '1' tie...with itself
       # XXX refactor this redundant code:
-      scores_for_judge = score.judge.get_scores.map { |s| s.Total }
-      new_ties(score.Total, scores_for_judge)
+      scores_for_judge = score.judge.get_scores.map { |s| s.total }
+      new_ties(score.total, scores_for_judge)
     end
 
     def new_calc_place(score, scores)
@@ -69,8 +69,8 @@ class ArtisticScoreCalculator
             return 0
         end
 
-        scores_for_judge = score.judge.get_scores.map { |s| s.Total }
-        @calc_place[score.id] = new_calc_place(score.Total, scores_for_judge)
+        scores_for_judge = score.judge.get_scores.map { |s| s.total }
+        @calc_place[score.id] = new_calc_place(score.total, scores_for_judge)
     end
 
     # ####################################################################
@@ -103,7 +103,6 @@ class ArtisticScoreCalculator
       unless @place[competitor.id].nil?
         return @place[competitor.id]
       end
-
 
       my_points = total_points(competitor)
       total_points_per_competitor     = competitor.competition.competitors.map { |comp| total_points(comp) }
@@ -168,6 +167,24 @@ class ArtisticScoreCalculator
 
       (total_points - min - max)
     end
+
+=begin
+5.10.1 Removing The High And Low
+After determining placing points as above, discard the highest and lowest placing score
+for each rider. If Rider A has scores of 1,2,1,3,2, take out one of the ones, and the three.
+Then Rider A has 1,2,2, for a total of 5. If Rider B has scores of 2,2,2,2,2, he will end
+up with 2,2,2, a total of 6. The winner is the competitor with the lowest total placing
+points score after the high and low have been removed.
+
+5.10.2 Ties
+If more than one competitor has the same placing score after the above process, those
+riders will be ranked based on their placing scores for Technical. The scoring process
+must be repeated using only the Technical scores for the tied riders to determine this
+rank. High and low placing scores are again removed in the process. If competitors’
+Technical ranking comes out equal, all competitors with the same score are awarded the
+same place.
+=end
+
 
     def highest_score(competitor, judge_type = nil)
       if @unicon_scoring

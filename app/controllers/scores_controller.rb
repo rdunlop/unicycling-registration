@@ -45,7 +45,7 @@ class ScoresController < ApplicationController
         @boundary_score.judge = @judge
         if @boundary_score.valid?
             # boundary score is valid, save the result to the @score
-            @score.val_1 = @boundary_score.Total
+            @score.val_1 = @boundary_score.total
         else
             respond_to do |format|
                 # on fail to save, re-render new
@@ -89,7 +89,7 @@ class ScoresController < ApplicationController
         @boundary_score = BoundaryScore.find_by_competitor_id_and_judge_id(params[:competitor_id], params[:judge_id])
         if @boundary_score.update_attributes(boundary_score_params)
             # boundary score is valid
-            @score.val_1 = @boundary_score.Total
+            @score.val_1 = @boundary_score.total
         else
             respond_to do |format|
                 # on fail to save, re-render new

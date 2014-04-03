@@ -55,7 +55,7 @@
       <% score = judge.get_score(competitor) %>
       <% if !score.nil? %>
         <td><%= score.val_1 %><br /></td>
-        <td class="derived"><%= score.Total %><br /></td>
+        <td class="derived"><%= score.total %><br /></td>
         <td class="derived"><%= @competition.score_judged_points(score) %></td>
       <% else %>
         <td colspan="6" class="empty">-</td>

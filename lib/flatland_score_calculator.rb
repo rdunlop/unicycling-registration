@@ -15,7 +15,7 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
             return @calc_points[score.id]
         end
 
-        @calc_points[score.id] = score.Total.to_i
+        @calc_points[score.id] = score.total.to_i
     end
 
     # ####################################################################
@@ -54,12 +54,12 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
             return 0
         end
 
-        totals = scores.map {|s| s.Total}
+        totals = scores.map {|s| s.total}
 
         # choose a 'score' object which is going to be removed
         #  because it's the 'max' and 'min' object(s)
-        max = scores.select {|s| s.Total == totals.max }.first.val_4
-        min = scores.select {|s| s.Total == totals.min }.first.val_4
+        max = scores.select {|s| s.total == totals.max }.first.val_4
+        min = scores.select {|s| s.total == totals.min }.first.val_4
 
         last_trick_scores = scores.map {|s| s.val_4.to_i}
         total = 0

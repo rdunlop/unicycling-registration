@@ -248,7 +248,7 @@ class Competition < ActiveRecord::Base
 
   def score_judged_place(score)
     place = score_calculator.calc_place(score)
-    if score.Total.nil?
+    if score.total.nil?
       ""
     else
       place.to_s

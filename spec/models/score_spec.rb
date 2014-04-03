@@ -34,7 +34,7 @@ describe Score do
     score.val_3 = 3.0
     score.val_4 = 4.0
 
-    score.Total.should == 10
+    score.total.should == 10
   end
   it "should not be able to have the same score/judge created twice" do
     score = FactoryGirl.create(:score)
@@ -51,7 +51,7 @@ describe Score do
     score.val_3 = 3.0
     score.val_4 = 4.0
     score.valid?.should == false
-    score.Total.should == 0
+    score.total.should == 0
     score.competitor_id = 4
     score.valid?.should == false
     score.judge = @judge
