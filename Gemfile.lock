@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/jnicklas/capybara.git
+  revision: a2ec9c1fd0d5ab2b39aff59ddf1a011b657899ee
+  specs:
+    capybara (2.2.0)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+
+GIT
   remote: git://github.com/sandelius/font-kit-rails.git
   revision: 480c979b84aa4d32652772822dee2366c37eed2e
   ref: 480c979b84aa4d32652772822dee2366c37eed2e
@@ -55,6 +66,7 @@ GEM
       carmen (~> 1.0.0)
       rails
     chronic (0.10.2)
+    cliver (0.3.2)
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -135,6 +147,11 @@ GEM
       activesupport (>= 3.0, < 5.0)
     pdf-core (0.1.6)
     pg (0.17.1)
+    poltergeist (1.5.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     polyglot (0.3.4)
     prawn (0.15.0)
       pdf-core (~> 0.1.3)
@@ -249,9 +266,12 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     watchr (0.7)
+    websocket-driver (0.3.2)
     wicked_pdf (0.9.10)
       rails
     wkhtmltopdf-heroku (1.0.0)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -261,6 +281,7 @@ DEPENDENCIES
   annotate
   bullet
   cancancan (~> 1.7)
+  capybara!
   carmen (= 1.0.0)
   carmen-rails
   coffee-rails
@@ -279,6 +300,7 @@ DEPENDENCIES
   memcachier
   paper_trail (~> 3.0.1)
   pg
+  poltergeist
   prawn-labels
   pry
   rails (= 4.0.4)

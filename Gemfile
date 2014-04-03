@@ -31,6 +31,8 @@ gem 'virtus'
 gem 'pg'
 
 group :development, :test, :cucumber do
+  gem 'capybara', github: 'jnicklas/capybara'
+  gem 'poltergeist'
   gem 'annotate'
   gem 'bullet'
   #gem 'brakeman'
