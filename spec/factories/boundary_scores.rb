@@ -18,7 +18,7 @@
 
 FactoryGirl.define do
   factory :boundary_score do
-    competitor { FactoryGirl.create(:event_competitor) }
+    association :competitor, :factory => :event_competitor
     judge # FactoryGirl
     number_of_people 3
     major_dismount 0
