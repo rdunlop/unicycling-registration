@@ -213,6 +213,8 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to registrants_url, notice: 'Registrant deleted' }
         format.json { head :no_content }
       else
+        load_categories
+        load_online_waiver
         format.html { render action: "edit" }
         format.json { render json: @registrant }
       end
