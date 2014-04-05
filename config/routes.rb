@@ -1,5 +1,7 @@
 Workspace::Application.routes.draw do
 
+  resources :songs
+
   scope "(:locale)" do
     resources :registrant_groups, :except => [:new] do
       collection do

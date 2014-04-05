@@ -11,7 +11,6 @@
 #
 
 class RegistrantChoice < ActiveRecord::Base
-  mount_uploader :music, MusicUploader
 
   validates :event_choice_id, :presence => true, :uniqueness => {:scope => [:registrant_id]}
   validates :registrant, :presence => true
@@ -33,8 +32,6 @@ class RegistrantChoice < ActiveRecord::Base
       return self.value != ""
     when "best_time"
       return self.value != ""
-    when "file"
-      return self.music.present?
     else
       return false
     end
