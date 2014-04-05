@@ -4,7 +4,7 @@ require "spec_helper"
 describe "Ability" do
   describe "as a normal user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryGirl.build_stubbed(:user)
       ENV["ONSITE_REGISTRATION"] = nil
     end
     subject { @ability = Ability.new(@user) }
@@ -36,7 +36,10 @@ describe "Ability" do
     end
 
     describe "with a registration" do
-      let(:registration) { FactoryGirl.create(:registrant, :user => @user) }
+      let(:registration) { FactoryGirl.build_stubbed(:registrant, :user => @user) }
+      before(:each) do
+        allow(@user).to receive(:registrants).and_return([registration])
+      end
 
       it { should be_able_to(:read, registration) }
       it { should be_able_to(:read_contact_info, registration) }
