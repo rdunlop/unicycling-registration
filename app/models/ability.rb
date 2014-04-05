@@ -147,6 +147,7 @@ class Ability
       end
     end
 
+    can :create, Song #necessary because we set the registrant in the controller
     can :manage, Song do |song|
       user.registrants.include?(song.registrant)
     end

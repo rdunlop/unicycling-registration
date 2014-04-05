@@ -8,7 +8,7 @@ CarrierWave.configure do |config|
         #region: "us-west-1",
         #endpoint: "http://robind.s3-us-west-2.amazonaws.com"
     }
-    config.fog_directory = 'robind' #ENV['AWS_BUCKET']
+    config.fog_directory = ENV['AWS_BUCKET']
     config.fog_attributes = {
         'Cache-Control' => 'max-age=315576000'
     }
