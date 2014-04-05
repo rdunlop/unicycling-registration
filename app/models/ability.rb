@@ -28,7 +28,6 @@ class Ability
   def define_ability_for_logged_in_user(user)
     alias_action :create, :read, :update, :destroy, :to => :crud
 
-    can :manage, Song
     if user.has_role? :super_admin
       can :access, :rails_admin
       can :dashboard
@@ -146,6 +145,10 @@ class Ability
       can :manage, StandardSkillRoutineEntry do |entry|
         can? :destroy, entry.standard_skill_routine
       end
+    end
+
+    can :manage, Song do |song|
+      user.registrants.include?(song.registrant)
     end
 
     # Sharing Registrants across Users

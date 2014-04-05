@@ -1,4 +1,4 @@
-<h1>Listing songs</h1>
+<h1>Listing <%= @registrant %>'s songs</h1>
 
 <table>
   <thead>
@@ -15,8 +15,8 @@
     <% @songs.each do |song| %>
       <tr>
         <td><%= song.description %></td>
-        <td><%= song.song_file_name %></td>
-        <td><%= link_to 'Show', song %></td>
+        <td><%= song.human_name %></td>
+        <td><%= link_to 'Download', song.song_file_name_url %></td>
         <td><%= link_to 'Edit', edit_song_path(song) %></td>
         <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -26,4 +26,6 @@
 
 <br>
 
-<%= link_to 'New Song', new_song_path %>
+<h1>New song</h1>
+
+<%= render 'form' %>

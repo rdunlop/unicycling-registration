@@ -1,17 +1,15 @@
 class SongsController < ApplicationController
+  before_filter :load_registrant, :only => [:index, :create]
+
   load_and_authorize_resource
 
-  # GET /songs
+  def load_registrant
+    @registrant = Registrant.find(params[:registrant_id])
+  end
+
+  # GET /registrants/1/songs
   def index
-    @songs = Song.all
-  end
-
-  # GET /songs/1
-  def show
-  end
-
-  # GET /songs/new
-  def new
+    @songs = @registrant.songs
     @song = Song.new
   end
 
@@ -19,22 +17,23 @@ class SongsController < ApplicationController
   def edit
   end
 
-  # POST /songs
+  # POST /registrants/1/songs
   def create
     @song = Song.new(song_params)
-    @song.registrant = Registrant.first
+    @song.registrant = @registrant
 
     if @song.save
-      redirect_to @song, notice: 'Song was successfully created.'
+      redirect_to registrant_songs_path(@registrant), notice: 'Song was successfully created.'
     else
-      render action: 'new'
+      render action: 'index'
     end
   end
 
   # PATCH/PUT /songs/1
   def update
+    registrant = @song.registrant
     if @song.update(song_params)
-      redirect_to @song, notice: 'Song was successfully updated.'
+      redirect_to registrant_songs_path(registrant), notice: 'Song was successfully updated.'
     else
       render action: 'edit'
     end
@@ -42,13 +41,14 @@ class SongsController < ApplicationController
 
   # DELETE /songs/1
   def destroy
+    reg = @song.registrant
     @song.destroy
-    redirect_to songs_url, notice: 'Song was successfully destroyed.'
+    redirect_to registrant_songs_path(reg), notice: 'Song was successfully destroyed.'
   end
 
   private
     # Only allow a trusted parameter "white list" through.
     def song_params
-      params.require(:song).permit(:description, :song_file_name, :remove_song_file_name)
+      params.require(:song).permit(:description, :song_file_name)
     end
 end

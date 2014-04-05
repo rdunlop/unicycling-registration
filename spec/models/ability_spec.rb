@@ -44,6 +44,27 @@ describe "Ability" do
       it { should be_able_to(:waiver, registration) }
       it { should be_able_to(:empty_waiver, Registrant) }
       it { should be_able_to(:index, RegistrantExpenseItem) }
+      it { should be_able_to(:index, Song) }
+
+      describe "with songs" do
+        let(:song1) { FactoryGirl.build_stubbed(:song, :registrant => registration) }
+        let(:song2) { FactoryGirl.build_stubbed(:song, :registrant => FactoryGirl.build_stubbed(:registrant)) }
+        before(:each) do
+          allow(registration).to receive(:songs).and_return([song1])
+        end
+
+        describe "can edit his own song" do
+          it { should be_able_to(:edit, song1) }
+          it { should be_able_to(:update, song1) }
+          it { should be_able_to(:destroy, song1) }
+        end
+
+        describe "cannot edit another user's song" do
+          it { should_not be_able_to(:edit, song2)  }
+          it { should_not be_able_to(:update, song2)  }
+          it { should_not be_able_to(:destroy, song2)  }
+        end
+      end
       describe "with a StandardSkillRoutine" do
         before(:each) do
           @routine = FactoryGirl.create(:standard_skill_routine, :registrant => registration)

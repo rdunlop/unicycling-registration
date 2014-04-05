@@ -1,7 +1,5 @@
 Workspace::Application.routes.draw do
 
-  resources :songs
-
   scope "(:locale)" do
     resources :registrant_groups, :except => [:new] do
       collection do
@@ -171,7 +169,10 @@ Workspace::Application.routes.draw do
       resources :registrant_expense_items, :only => [:index, :create, :destroy]
       resources :standard_skill_routines, :only => [:index, :create]
       resources :payments, :only => [:index]
+      resources :songs, :only => [:index, :create]
     end
+
+    resources :songs, :only => [:edit, :update, :destroy]
 
     resources :standard_skill_routines, :only => [:show, :index] do
       resources :standard_skill_routine_entries, :only => [:destroy, :create]

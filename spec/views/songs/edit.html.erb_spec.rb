@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe "songs/edit" do
   before(:each) do
-    @song = assign(:song, stub_model(Song,
+    @registrant = FactoryGirl.build_stubbed(:registrant)
+    @song = FactoryGirl.build_stubbed(:song,
       :description => "MyString",
-      :song_file_name => "MyString"
-    ))
+      :song_file_name => "MyString",
+      :registrant => @registrant
+    )
   end
 
   it "renders the edit song form" do

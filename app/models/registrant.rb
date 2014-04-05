@@ -105,6 +105,8 @@ class Registrant < ActiveRecord::Base
 
   has_many :additional_registrant_accesses, :dependent => :destroy
 
+  has_many :songs, :dependent => :destroy
+
   before_validation :set_age
   validates :age, :presence => true
 

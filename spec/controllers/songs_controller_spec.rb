@@ -36,31 +36,20 @@ describe SongsController do
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all songs as @songs" do
-      song = Song.create! valid_attributes
-      get :index, {}
+    it "assigns all songs for reg as @songs" do
+      song = FactoryGirl.create(:song, :registrant => @reg)
+      get :index, {:registrant_id => @reg.id}
       assigns(:songs).should eq([song])
     end
-  end
-
-  describe "GET show" do
-    it "assigns the requested song as @song" do
-      song = Song.create! valid_attributes
-      get :show, {:id => song.to_param}
-      assigns(:song).should eq(song)
-    end
-  end
-
-  describe "GET new" do
     it "assigns a new song as @song" do
-      get :new, {}
+      get :index, {:registrant_id => @reg.id}
       assigns(:song).should be_a_new(Song)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested song as @song" do
-      song = Song.create! valid_attributes
+      song = FactoryGirl.create(:song, :registrant => @reg)
       get :edit, {:id => song.to_param}
       assigns(:song).should eq(song)
     end
@@ -70,19 +59,13 @@ describe SongsController do
     describe "with valid params" do
       it "creates a new Song" do
         expect {
-          post :create, {:song => valid_attributes}
+          post :create, {:song => valid_attributes, :registrant_id => @reg.id}
         }.to change(Song, :count).by(1)
       end
 
-      it "assigns a newly created song as @song" do
-        post :create, {:song => valid_attributes}
-        assigns(:song).should be_a(Song)
-        assigns(:song).should be_persisted
-      end
-
-      it "redirects to the created song" do
-        post :create, {:song => valid_attributes}
-        response.should redirect_to(Song.last)
+      it "redirects to the registrant #index" do
+        post :create, {:song => valid_attributes, :registrant_id => @reg.id}
+        response.should redirect_to(registrant_songs_path(@reg))
       end
     end
 
@@ -90,15 +73,15 @@ describe SongsController do
       it "assigns a newly created but unsaved song as @song" do
         # Trigger the behavior that occurs when invalid params are submitted
         Song.any_instance.stub(:save).and_return(false)
-        post :create, {:song => { "description" => "invalid value" }}
+        post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.id}
         assigns(:song).should be_a_new(Song)
       end
 
-      it "re-renders the 'new' template" do
+      it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Song.any_instance.stub(:save).and_return(false)
-        post :create, {:song => { "description" => "invalid value" }}
-        response.should render_template("new")
+        post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.id}
+        response.should render_template("index")
       end
     end
   end
@@ -106,7 +89,7 @@ describe SongsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested song" do
-        song = Song.create! valid_attributes
+        song = FactoryGirl.create(:song, :registrant => @reg)
         # Assuming there are no other songs in the database, this
         # specifies that the Song created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,22 +98,16 @@ describe SongsController do
         put :update, {:id => song.to_param, :song => { "description" => "MyString" }}
       end
 
-      it "assigns the requested song as @song" do
-        song = Song.create! valid_attributes
+      it "redirects to the registrant_songs index" do
+        song = FactoryGirl.create(:song, :registrant => @reg)
         put :update, {:id => song.to_param, :song => valid_attributes}
-        assigns(:song).should eq(song)
-      end
-
-      it "redirects to the song" do
-        song = Song.create! valid_attributes
-        put :update, {:id => song.to_param, :song => valid_attributes}
-        response.should redirect_to(song)
+        response.should redirect_to(registrant_songs_path(@reg))
       end
     end
 
     describe "with invalid params" do
       it "assigns the song as @song" do
-        song = Song.create! valid_attributes
+        song = FactoryGirl.create(:song, :registrant => @reg)
         # Trigger the behavior that occurs when invalid params are submitted
         Song.any_instance.stub(:save).and_return(false)
         put :update, {:id => song.to_param, :song => { "description" => "invalid value" }}
@@ -138,7 +115,7 @@ describe SongsController do
       end
 
       it "re-renders the 'edit' template" do
-        song = Song.create! valid_attributes
+        song = FactoryGirl.create(:song, :registrant => @reg)
         # Trigger the behavior that occurs when invalid params are submitted
         Song.any_instance.stub(:save).and_return(false)
         put :update, {:id => song.to_param, :song => { "description" => "invalid value" }}
@@ -149,16 +126,16 @@ describe SongsController do
 
   describe "DELETE destroy" do
     it "destroys the requested song" do
-      song = Song.create! valid_attributes
+      song = FactoryGirl.create(:song, :registrant => @reg)
       expect {
         delete :destroy, {:id => song.to_param}
       }.to change(Song, :count).by(-1)
     end
 
     it "redirects to the songs list" do
-      song = Song.create! valid_attributes
+      song = FactoryGirl.create(:song, :registrant => @reg)
       delete :destroy, {:id => song.to_param}
-      response.should redirect_to(songs_url)
+      response.should redirect_to(registrant_songs_path(@reg))
     end
   end
 
