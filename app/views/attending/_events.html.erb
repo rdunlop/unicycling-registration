@@ -98,11 +98,6 @@
                       <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true}, :title => choice.tooltip %>
                     <% when "best_time" %>
                       <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip.blank? ? choice.tooltip : "hh:mm:ss or mm:ss" %>
-                    <% when "file" %>
-                      <% if ec.object.music.present? %>
-                        <%= link_to 'Download Music', ec.object.music_url %>
-                      <% end %>
-                      <%= ec.file_field :music %>
                     <% end %>
                   <% end %>
                 </td>

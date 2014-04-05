@@ -1,5 +1,6 @@
 Last Re-Arranged February 6, 2014.
 
+- Add a functional suite which ensures that a reg can create/sign/up/pay/summary
 - Replace the lib/helpers with concerns or PORO
 - for feedback of not-logged-in to supply an e-mail address
 - Add ability to upload music for competitions

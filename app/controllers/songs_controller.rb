@@ -1,11 +1,7 @@
 class SongsController < ApplicationController
-  before_filter :load_registrant, :only => [:index, :create]
 
+  load_and_authorize_resource :registrant, :only => [:index, :create]
   load_and_authorize_resource
-
-  def load_registrant
-    @registrant = Registrant.find(params[:registrant_id])
-  end
 
   # GET /registrants/1/songs
   def index
