@@ -36,6 +36,10 @@ class Event < ActiveRecord::Base
     self.visible = true if self.visible.nil?
   end
 
+  def self.visible
+    where(:visible => true)
+  end
+
   def touch_competitions
     competitions.each do |comp|
       comp.touch

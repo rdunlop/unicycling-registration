@@ -16,10 +16,6 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :event %><br>
-    <%= f.collection_select :event_id, Event.visible, :id, :name %>
-  </div>
-  <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>

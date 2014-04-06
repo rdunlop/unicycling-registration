@@ -7,6 +7,8 @@ class SongsController < ApplicationController
   def index
     @songs = @registrant.songs
     @song = Song.new
+    @uploader = Song.new.song_file_name
+    @uploader.success_action_redirect = registrant_songs_url(@registrant)
   end
 
   # GET /songs/1/edit
@@ -45,6 +47,6 @@ class SongsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def song_params
-      params.require(:song).permit(:description, :song_file_name)
+      params.require(:song).permit(:description, :event_id, :song_file_name)
     end
 end

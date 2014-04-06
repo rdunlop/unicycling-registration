@@ -70,6 +70,10 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    carrierwave_direct (0.0.13)
+      carrierwave
+      fog
+      uuidtools
     chronic (0.10.2)
     cliver (0.3.2)
     coderay (1.1.0)
@@ -285,6 +289,7 @@ GEM
       rack
       raindrops (~> 0.7)
     uniform_notifier (1.4.0)
+    uuidtools (2.1.4)
     virtus (1.0.1)
       axiom-types (~> 0.0.5)
       coercible (~> 1.0)
@@ -311,7 +316,7 @@ DEPENDENCIES
   capybara!
   carmen (= 1.0.0)
   carmen-rails
-  carrierwave
+  carrierwave_direct
   coffee-rails
   dalli
   delorean

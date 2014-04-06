@@ -15,6 +15,7 @@
     <% @songs.each do |song| %>
       <tr>
         <td><%= song.description %></td>
+        <td><%= song.event %></td>
         <td><%= song.human_name %></td>
         <td><%= link_to 'Download', song.song_file_name_url %></td>
         <td><%= link_to 'Edit', edit_song_path(song) %></td>
