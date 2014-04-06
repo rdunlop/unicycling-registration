@@ -28,7 +28,8 @@ describe SongsController do
   # This should return the minimal set of attributes required to create a valid
   # Song. As you add validations to Song, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "description" => "MyString" } }
+  let(:event) { FactoryGirl.create(:event) }
+  let(:valid_attributes) { { :description => "MyString", :event_id => event.id } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -63,9 +64,9 @@ describe SongsController do
         }.to change(Song, :count).by(1)
       end
 
-      it "redirects to the registrant #index" do
+      it "redirects to the song add_file page" do
         post :create, {:song => valid_attributes, :registrant_id => @reg.id}
-        response.should redirect_to(registrant_songs_path(@reg))
+        response.should redirect_to(add_file_song_path(Song.last))
       end
     end
 

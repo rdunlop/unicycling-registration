@@ -8,6 +8,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -19,6 +20,7 @@
         <td><%= song.human_name %></td>
         <td><%= link_to 'Download', song.song_file_name_url %></td>
         <td><%= link_to 'Edit', edit_song_path(song) %></td>
+        <td><%= link_to 'Add Song', add_file_song_path(song) %></td>
         <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

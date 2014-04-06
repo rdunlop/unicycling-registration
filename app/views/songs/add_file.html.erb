@@ -1,25 +1,7 @@
+<h2>Song Add File </h2>
+<h3>Event: <%= @song.event %> - <%= @song.description %></h3>
 <%= direct_upload_form_for @uploader do |f| %>
+  <%= hidden_field_tag 'Content-Type', 'audio/mpeg' %>
   <%= f.file_field :song_file_name %>
   <%= f.submit %>
-<% end %>
-
-<%= form_for(@song.new_record? ? [@registrant, @song] : [@song]) do |f| %>
-  <% if @song.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
-
-      <ul>
-      <% @song.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

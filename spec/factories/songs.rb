@@ -4,5 +4,7 @@ FactoryGirl.define do
   factory :song do
     description "MyString"
     song_file_name "MyString"
+    event
+    registrant
   end
 end

@@ -7,8 +7,22 @@ class SongsController < ApplicationController
   def index
     @songs = @registrant.songs
     @song = Song.new
-    @uploader = Song.new.song_file_name
-    @uploader.success_action_redirect = registrant_songs_url(@registrant)
+  end
+
+  # GET /songs/1/add_file
+  def add_file
+    @uploader = @song.song_file_name
+    @uploader.success_action_redirect = file_complete_song_url(@song)
+  end
+
+  # GET /songs/1/file_complete
+  def file_complete
+    @song.key = params[:key]
+    if @song.save
+      redirect_to registrant_songs_path(@song.registrant), notice: "File was uploaded"
+    else
+      redirect_to registrant_songs_path(@song.registrant), alert: "File was not uploaded"
+    end
   end
 
   # GET /songs/1/edit
@@ -21,7 +35,7 @@ class SongsController < ApplicationController
     @song.registrant = @registrant
 
     if @song.save
-      redirect_to registrant_songs_path(@registrant), notice: 'Song was successfully created.'
+      redirect_to add_file_song_path(@song), notice: 'Song was successfully created.'
     else
       render action: 'index'
     end
@@ -39,6 +53,8 @@ class SongsController < ApplicationController
 
   # DELETE /songs/1
   def destroy
+    # destroys the song file on S3
+    @song.remove_song_file_name!
     reg = @song.registrant
     @song.destroy
     redirect_to registrant_songs_path(reg), notice: 'Song was successfully destroyed.'

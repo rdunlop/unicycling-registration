@@ -12,6 +12,9 @@ CarrierWave.configure do |config|
     config.fog_attributes = {
         'Cache-Control' => 'max-age=315576000'
     }
+
+    config.max_file_size             = 30.megabytes
+    config.will_include_content_type = true
   else
     config.storage = :file
   end

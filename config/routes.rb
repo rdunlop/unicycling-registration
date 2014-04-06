@@ -172,7 +172,12 @@ Workspace::Application.routes.draw do
       resources :songs, :only => [:index, :create]
     end
 
-    resources :songs, :only => [:edit, :update, :destroy]
+    resources :songs, :only => [:edit, :update, :destroy] do
+      member do
+        get :add_file
+        get :file_complete
+      end
+    end
 
     resources :standard_skill_routines, :only => [:show, :index] do
       resources :standard_skill_routine_entries, :only => [:destroy, :create]
