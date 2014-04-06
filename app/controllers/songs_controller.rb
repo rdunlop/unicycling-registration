@@ -11,6 +11,9 @@ class SongsController < ApplicationController
 
   # GET /songs/1/add_file
   def add_file
+    if @song.key.present?
+      redirect_to registrant_songs_path(@song.registrant), alert: "Song already associated, please destroy and re-create if you need to change the music"
+    end
     @uploader = @song.song_file_name
     @uploader.success_action_redirect = file_complete_song_url(@song)
   end

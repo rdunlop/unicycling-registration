@@ -1,11 +1,12 @@
 <h1>Listing <%= @registrant %>'s songs</h1>
 
-<table>
+<table class="sortable">
   <thead>
     <tr>
       <th>Description</th>
+      <th>Event</th>
       <th>File name</th>
-      <th></th>
+      <th>Last Updated</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,8 +19,8 @@
         <td><%= song.description %></td>
         <td><%= song.event %></td>
         <td><%= song.human_name %></td>
-        <td><%= link_to 'Download', song.song_file_name_url %></td>
-        <td><%= link_to 'Edit', edit_song_path(song) %></td>
+        <td><%= song.updated_at %></td>
+        <td><%= link_to 'Download', song.song_file_name_url, target: '_blank' %></td>
         <td><%= link_to 'Add Song', add_file_song_path(song) %></td>
         <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
