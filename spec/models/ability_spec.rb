@@ -59,6 +59,8 @@ describe "Ability" do
         describe "can edit his own song" do
           it { should be_able_to(:edit, song1) }
           it { should be_able_to(:update, song1) }
+          it { should be_able_to(:add_file, song1) }
+          it { should be_able_to(:file_complete, song1) }
           it { should be_able_to(:destroy, song1) }
         end
 

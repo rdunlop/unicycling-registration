@@ -3,5 +3,5 @@
 <%= direct_upload_form_for @uploader do |f| %>
   <%= hidden_field_tag 'Content-Type', 'audio/mpeg' %>
   <%= f.file_field :song_file_name %>
-  <%= f.submit %>
+  <%= f.submit 'Upload Music' %>
 <% end %>
