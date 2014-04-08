@@ -16,12 +16,12 @@ class ArtisticScoreCalculator
     # ####################################################################
     # determining the place points for this score (by-judge)
     def new_calc_placing_points(my_place, num_ties)
-      total_points = 0
+      total_placing_points = 0
       num_ties.times do
-        total_points = total_points + my_place
+        total_placing_points = total_placing_points + my_place
         my_place = my_place + 1
       end
-      (total_points * 1.0) / num_ties
+      (total_placing_points * 1.0) / num_ties
     end
 
     def calc_placing_points(score)
@@ -127,6 +127,17 @@ class ArtisticScoreCalculator
       scores.map {|s| calc_placing_points(s)}
     end
 
+    def new_total_points(competitor)
+      placing_points_for_all_judges = get_placing_points_for_judge_type(competitor, nil)
+
+      total_points = placing_points_for_all_judges.reduce(:+) # sum the remaining values
+
+      min = new_lowest_score(placing_points_for_all_judges)
+      max = new_highest_score(placing_points_for_all_judges)
+
+      (total_points - min - max)
+    end
+
     def total_points(competitor, judge_type = nil)
       # only caching the most common query
       if judge_type.nil?
@@ -151,6 +162,15 @@ class ArtisticScoreCalculator
       else
         total
       end
+    end
+
+    def eliminate_high_and_low_score(scores)
+      max = scores.max
+      remaining = scores - [max]
+      min = scores.min
+      remaining = scores - [min]
+
+      remaining.reduce(:+) # sum the remaining values
     end
 
     def total_points_for_judge_type(competitor, judge_type)
@@ -185,6 +205,13 @@ Technical ranking comes out equal, all competitors with the same score are award
 same place.
 =end
 
+    def new_highest_score(placing_points)
+      placing_points.max
+    end
+
+    def new_lowest_score(placing_points)
+      placing_points.min
+    end
 
     def highest_score(competitor, judge_type = nil)
       if @unicon_scoring

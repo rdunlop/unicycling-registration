@@ -1,9 +1,5 @@
 class FlatlandScoreCalculator < ArtisticScoreCalculator
 
-    def initialize(competition)
-        @calc = ArtisticScoreCalculator.new(competition) # should use this some where in the calculations?
-    end
-
     # ####################################################################
     #   BY SCORE (JUDGE)
     # ####################################################################
