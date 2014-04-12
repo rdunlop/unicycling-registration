@@ -44,8 +44,8 @@ describe OrderedResultCalculator do
 
         @reg = @tr1.competitor.registrants.first
         @reg.birthday= Date.today - 1.year
-        @reg.responsible_adult_name = "Bob Smith"
-        @reg.responsible_adult_phone = "911"
+        @reg.contact_detail.responsible_adult_name = "Bob Smith"
+        @reg.contact_detail.responsible_adult_phone = "911"
         @reg.save!
         @reg.age.should == 1
 

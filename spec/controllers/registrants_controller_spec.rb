@@ -15,6 +15,9 @@ describe RegistrantsController do
       first_name: "Robin",
       last_name: "Dunlop",
       gender: "Male",
+      user_id: @user.id,
+      birthday: Date.new(1982, 01, 19),
+      contact_detail_attributes: {
       address: "123 Fake Street",
       city: "Madison",
       state: "WI",
@@ -30,9 +33,8 @@ describe RegistrantsController do
       emergency_primary_phone: "306-222-1212",
       emergency_other_phone: "911",
       responsible_adult_name: "Andy",
-      responsible_adult_phone: "312-555-5555",
-      user_id: @user.id,
-      birthday: Date.new(1982, 01, 19)
+      responsible_adult_phone: "312-555-5555"
+    }
     }
   end
 

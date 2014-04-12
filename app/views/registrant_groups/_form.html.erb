@@ -45,9 +45,9 @@
           <td><%= ff.object.registrant.bib_number %></td>
           <td><%= ff.object.registrant.first_name %></td>
           <td><%= ff.object.registrant.last_name %></td>
-          <td><%= ff.object.registrant.club %></td>
-          <td><%= ff.object.registrant.address %></td>
-          <td><%= ff.object.registrant.city %></td>
+          <td><%= ff.object.registrant.contact_detail.club %></td>
+          <td><%= ff.object.registrant.contact_detail.address %></td>
+          <td><%= ff.object.registrant.contact_detail.city %></td>
           <td><%= ff.object.registrant.registrant_groups.join(" ") %></td>
         </tr>
       <% end %>

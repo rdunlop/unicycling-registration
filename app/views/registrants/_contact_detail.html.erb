@@ -1,3 +1,4 @@
+<%= reg_f.fields_for :contact_detail do |f| %>
 <fieldset>
   <legend><%= t(".contact_information") %></legend>
   <fieldset class="data_block">
@@ -6,7 +7,7 @@
       <% unless other_registrant.nil? %>
         <tr>
           <td colspan="2">
-            <a href="#" id="copy_address" 
+            <a href="#" id="copy_address"
               data-address="<%= other_registrant.address %>"
               data-city="<%= other_registrant.city %>"
               data-state="<%= other_registrant.state %>"
@@ -132,7 +133,7 @@
           <%= f.label :emergency_attending, "#{t(".attending")} #{EventConfiguration.short_name}?" %>
         </td>
         <td>
-          <%= f.check_box :emergency_attending %> 
+          <%= f.check_box :emergency_attending %>
         </td>
       </tr>
       <tr>
@@ -176,3 +177,4 @@
     </table>
   </fieldset>
 </fieldset>
+<% end %>

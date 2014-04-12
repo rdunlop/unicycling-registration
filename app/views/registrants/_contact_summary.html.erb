@@ -1,0 +1,60 @@
+<div>
+  <b><%= t(".address") %>:</b>
+  <%= contact_detail.address %> <br />
+  <%= contact_detail.city %>
+  <%= contact_detail.state %>
+  <%= contact_detail.country_residence %>
+  <%= contact_detail.zip %> <br />
+  <b><%= t(".representing_country") %>:</b>
+  <%= contact_detail.country %>
+</div>
+<div>
+  <b><%= t(".phone") %>:</b>
+  <%= contact_detail.phone %>
+</div>
+
+<div>
+  <b><%= t(".mobile") %>:</b>
+  <%= contact_detail.mobile %>
+</div>
+
+<div>
+  <b><%= t(".email") %>:</b>
+  <%= contact_detail.email %>
+</div>
+<div>
+  <b><%= t(".team_club") %>:</b>
+  <%= contact_detail.club %>
+</div>
+<div>
+  <b><%= t(".team_club_contact") %>:</b>
+  <%= contact_detail.club_contact %>
+</div>
+<% if EventConfiguration.usa %>
+  <div>
+    <b>USA Member Number:</b>
+    <%= contact_detail.usa_member_number %>
+  </div>
+<% end %>
+<div>
+  <b><%= t(".emergency_contact_name") %>:</b>
+  <%= contact_detail.emergency_name %>
+</div>
+<div>
+  <b><%= t(".emergency_contact_relationship") %>:</b>
+  <%= contact_detail.emergency_relationship %>
+</div>
+<div>
+  <b><%= t(".emergency_contact_attending") %>:</b>
+  <%= contact_detail.emergency_attending ? "yes":"no" %>
+</div>
+<div>
+  <b><%= t(".emergency_contact_phone") %>:</b>
+  <%= contact_detail.emergency_primary_phone %>
+  <%= contact_detail.emergency_other_phone %>
+</div>
+<div>
+  <b><%= t(".responsible_adult") %>:</b>
+  <%= contact_detail.responsible_adult_name %>
+  <%= contact_detail.responsible_adult_phone %>
+</div>

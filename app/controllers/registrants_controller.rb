@@ -99,22 +99,24 @@ class RegistrantsController < ApplicationController
     end
 
     @name = @registrant.to_s
-    @club = @registrant.club
     @age = @registrant.age
 
-    @address = @registrant.address
-    @city = @registrant.city
-    @state = @registrant.state
-    @zip = @registrant.zip
-    @country= @registrant.country_residence
-    @phone = @registrant.phone
-    @mobile = @registrant.mobile
-    @email = @registrant.email
+    contact_detail = @registrant.contact_detail
+
+    @club = contact_detail.club
+    @address = contact_detail.address
+    @city = contact_detail.city
+    @state = contact_detail.state
+    @zip = contact_detail.zip
+    @country= contact_detail.country_residence
+    @phone = contact_detail.phone
+    @mobile = contact_detail.mobile
+    @email = contact_detail.email
      # if no e-mail specified, use the user email?
     @user_email = current_user.email
-    @emergency_name = @registrant.emergency_name
-    @emergency_primary_phone = @registrant.emergency_primary_phone
-    @emergency_other_phone = @registrant.emergency_other_phone
+    @emergency_name = contact_detail.emergency_name
+    @emergency_primary_phone = contact_detail.emergency_primary_phone
+    @emergency_other_phone = contact_detail.emergency_other_phone
 
     respond_to do |format|
       format.html { render action: "waiver", :layout => nil }
@@ -152,6 +154,7 @@ class RegistrantsController < ApplicationController
   def new
     @registrant = Registrant.new
     @registrant.competitor = get_competitor_value
+    @registrant.build_contact_detail
     load_online_waiver
     load_categories
     load_other_reg
@@ -223,15 +226,16 @@ class RegistrantsController < ApplicationController
 
   private
   def attributes
-    [:address, :birthday, :city, :country_residence, :country_representing, :competitor,
-                                       :email, :first_name, :gender, :last_name, :middle_initial, :mobile, :phone, :state, :zip,
-                                       :club, :club_contact, :usa_member_number, :volunteer,
-                                       :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
-                                       :responsible_adult_name, :responsible_adult_phone,
-                                       :online_waiver_signature,
-                                       :registrant_choices_attributes => [:event_choice_id, :value, :id],
-                                       :registrant_event_sign_ups_attributes => [:event_category_id, :signed_up, :event_id, :id],
-                                       :registrant_expense_items_attributes => [:expense_item_id, :details]
+    [ :first_name, :gender, :last_name, :middle_initial, :birthday, :competitor, :volunteer,
+      :online_waiver_signature,
+      :registrant_choices_attributes => [:event_choice_id, :value, :id],
+      :registrant_event_sign_ups_attributes => [:event_category_id, :signed_up, :event_id, :id],
+      :registrant_expense_items_attributes => [:expense_item_id, :details],
+      :contact_detail => [:email,
+        :address, :city, :country_residence, :country_representing,
+        :mobile, :phone, :state, :zip, :club, :club_contact, :usa_member_number,
+        :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
+        :responsible_adult_name, :responsible_adult_phone]
     ]
   end
 

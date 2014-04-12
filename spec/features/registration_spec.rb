@@ -46,7 +46,7 @@ describe 'Logging in to the system' do
     end
   end
 
-  describe "when a registrant exists" do
+  describe "when a competitor registrant exists" do
     before :each do
       registrant = FactoryGirl.create(:competitor, :user => user)
       visit registrant_path(registrant)
@@ -54,6 +54,18 @@ describe 'Logging in to the system' do
 
     it "displays the summary page" do
       expect(page).to have_content 'Registration Summary'
+    end
+  end
+
+  describe "when a noncompetitor registrant exists" do
+    before :each do
+      registrant = FactoryGirl.create(:noncompetitor, :user => user)
+      visit registrant_path(registrant)
+    end
+
+    it "displays the summary page" do
+      expect(page).to have_content 'Registration Summary'
+      expect(page).to_not have_content 'Events'
     end
   end
 end

@@ -8,39 +8,74 @@
 #  last_name               :string(255)
 #  birthday                :date
 #  gender                  :string(255)
-#  state                   :string(255)
-#  country_residence       :string(255)
-#  phone                   :string(255)
-#  mobile                  :string(255)
-#  email                   :string(255)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  user_id                 :integer
 #  competitor              :boolean
-#  club                    :string(255)
-#  club_contact            :string(255)
-#  usa_member_number       :string(255)
-#  emergency_name          :string(255)
-#  emergency_relationship  :string(255)
-#  emergency_attending     :boolean
-#  emergency_primary_phone :string(255)
-#  emergency_other_phone   :string(255)
-#  responsible_adult_name  :string(255)
-#  responsible_adult_phone :string(255)
-#  address                 :string(255)
-#  city                    :string(255)
-#  zip                     :string(255)
 #  deleted                 :boolean
 #  bib_number              :integer
 #  wheel_size_id           :integer
 #  age                     :integer
 #  ineligible              :boolean          default(FALSE)
 #  volunteer               :boolean
-#  country_representing    :string(255)
 #  online_waiver_signature :string(255)
 #
 
 require 'spec_helper'
+
+describe Registrant do
+  before(:each) do
+    @reg = FactoryGirl.build_stubbed(:registrant)
+  end
+
+  describe "with a 10 year old registrant" do
+    before(:each) do
+      allow(@reg).to receive(:age).and_return(10)
+    end
+
+    it "should have a 20\" wheel" do
+      @reg.default_wheel_size = nil
+      @reg.set_default_wheel_size
+      @reg.default_wheel_size.should == WheelSize.find_by_description("20\" Wheel")
+    end
+  end
+
+  describe "with an event configuration starting date" do
+    before(:each) do
+      allow(EventConfiguration).to receive(:start_date).and_return(Date.new(2012,05,20))
+    end
+
+    describe "and a registrant born on the starting day in 1982" do
+      before(:each) do
+        @reg.birthday = Date.new(1982, 05, 20)
+      end
+      it "should have an age of 30" do
+        @reg.set_age
+        @reg.age.should == 30
+      end
+
+      it "should have a wheel_size of 24\"" do
+        @reg.set_default_wheel_size
+        @reg.default_wheel_size.should == WheelSize.find_by_description("24\" Wheel")
+      end
+    end
+
+    describe "and a registrant born the day after the starting date in 1982" do
+      before(:each) do
+        @reg.birthday = Date.new(1982, 05, 21)
+      end
+      it "should have an age of 29" do
+        @reg.set_age
+        @reg.age.should == 29
+      end
+
+      it "cannot choose a 20\" wheel" do
+        @reg.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
+        @reg.valid?.should == false
+      end
+    end
+  end
+end
 
 describe Registrant do
   before(:each) do
@@ -122,59 +157,6 @@ describe Registrant do
     @reg.valid?.should == true
 
     @reg.gender = "Other"
-    @reg.valid?.should == false
-  end
-
-  it "requires address" do
-    @reg.address = nil
-    @reg.valid?.should == false
-  end
-  it "requires city" do
-    @reg.city = nil
-    @reg.valid?.should == false
-  end
-  it "requires state" do
-    @reg.state = nil
-    @reg.valid?.should == false
-  end
-  it "requires zip" do
-    @reg.zip = nil
-    @reg.valid?.should == false
-  end
-
-  it "requires country_residence" do
-    @reg.country_residence = nil
-    @reg.valid?.should == false
-  end
-
-  it "returns the country of residence as the country" do
-    @reg.country_residence = "CA"
-    @reg.country_code.should == "CA"
-  end
-
-  it "returns the country_representing, when specified" do
-    @reg.country_residence = "US"
-    @reg.country_representing = "CA"
-    @reg.country_code.should == "CA"
-  end
-
-  it "returns the country of residence even when country representing is blank" do
-    @reg.country_residence = "CA"
-    @reg.country_representing = ""
-    @reg.country_code.should == "CA"
-  end
-
-  it "requires emergency_contact name" do
-    @reg.emergency_name = nil
-    @reg.valid?.should == false
-  end
-
-  it "requires emergency_contact relationship" do
-    @reg.emergency_relationship = nil
-    @reg.valid?.should == false
-  end
-  it "requires emergency_contact primary_phone" do
-    @reg.emergency_primary_phone = nil
     @reg.valid?.should == false
   end
 
@@ -674,61 +656,6 @@ describe Registrant do
           @reg.reload
           @reg.valid?.should == true
         end
-      end
-    end
-  end
-  describe "with an event configuration (and starting date)" do
-    before(:each) do
-      FactoryGirl.create(:event_configuration, :start_date => Date.new(2012,05,20))
-    end
-    describe "and a registrant born on the starting day in 1982" do
-      before(:each) do
-        @reg.birthday = Date.new(1982, 05, 20)
-        @reg.save
-      end
-      it "should have an age of 30" do
-        @reg.age.should == 30
-      end
-
-      it "should have a wheel_size of 24\"" do
-        @reg.default_wheel_size.should == WheelSize.find_by_description("24\" Wheel")
-      end
-    end
-    describe "and a registrant born the day after the starting date in 1982" do
-      before(:each) do
-        @reg.birthday = Date.new(1982, 05, 21)
-        @reg.save
-      end
-      it "should have an age of 29" do
-        @reg.age.should == 29
-      end
-
-      it "cannot choose a 20\" wheel" do
-        @reg.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
-        @reg.valid?.should == false
-      end
-    end
-    describe "with a 10 year old registrant" do
-      before(:each) do
-        @reg.birthday = Date.new(2002, 01, 22)
-        @reg.responsible_adult_name = "Something"
-        @reg.responsible_adult_phone = "Something"
-      end
-      it "requires the responsible_adult_name" do
-        @reg.responsible_adult_name = nil
-        @reg.valid?.should == false
-      end
-      it "requires the responsible_adult_phone" do
-        @reg.responsible_adult_phone = nil
-        @reg.valid?.should == false
-      end
-      it "is valid if name and phone are present" do
-        @reg.valid?.should == true
-      end
-      it "should have a 20\" wheel" do
-        @reg.default_wheel_size = nil
-        @reg.valid?.should == true
-        @reg.default_wheel_size.should == WheelSize.find_by_description("20\" Wheel")
       end
     end
   end

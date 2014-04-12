@@ -52,7 +52,7 @@ fr:
       name: "Nom"
       first_name: "Prénom"
       last_name: "Nom"
-    contact_info:
+    contact_detail:
       contact_information: "Coordonnées"
       address: "Adresse"
       city: "Ville"
@@ -104,6 +104,8 @@ fr:
       gender: "Sexe"
       birthday: "Date de naissance"
       age: "Âge"
+      volunteer: "Bénévole"
+    contact_summary:
       address: "Adresse"
       representing_country: "Pays représenté"
       phone: "Numéro de téléphone"
@@ -111,7 +113,6 @@ fr:
       email: "Courriel"
       team_club: "Équipe/Association"
       team_club_contact: "Nom du contact du club/association"
-      volunteer: "Bénévole"
       true: "vrai"
       false: "faux"
       emergency_contact_name: "Nom de la personne à contacter en cas d’urgence"

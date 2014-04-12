@@ -36,11 +36,11 @@ shared_context 'basic registrant data' do
     choose 'Male'
     fill_in 'Address', with: "123 Fake street"
     fill_in "City", with: "Springfield"
-    find(:select, 'registrant_country_residence').first(:option, 'United States').select_option
+    find(:select, 'registrant_contact_detail_attributes_country_residence').first(:option, 'United States').select_option
     #select "United States", :from => "Country of residence"
     fill_in 'Zip', with: '123456'
-    fill_in 'registrant_emergency_name', with: 'John Smith'
-    fill_in 'registrant_emergency_relationship', with: 'friend'
-    fill_in 'registrant_emergency_primary_phone', with: '123-123-1234'
+    fill_in 'registrant_contact_detail_attributes_emergency_name', with: 'John Smith'
+    fill_in 'registrant_contact_detail_attributes_emergency_relationship', with: 'friend'
+    fill_in 'registrant_contact_detail_attributes_emergency_primary_phone', with: '123-123-1234'
   end
 end

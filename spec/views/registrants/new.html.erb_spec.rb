@@ -55,7 +55,7 @@ describe "registrants/new" do
   describe "the events lists" do
     before(:each) do
       @registrant = FactoryGirl.build(:competitor)
-      @registration_period = FactoryGirl.create(:registration_period, 
+      @registration_period = FactoryGirl.create(:registration_period,
                                                 :start_date => Date.new(2012, 01, 10),
                                                 :end_date => Date.new(2012, 02, 11))
       @ev1 = FactoryGirl.create(:event)
@@ -189,39 +189,6 @@ describe "registrants/new" do
             assert_select "option[value='three']"
           end
         end
-      end
-    end
-  end
-
-  describe "Non competitor" do
-    before(:each) do
-      @registrant = FactoryGirl.create(:noncompetitor)
-      @categories = []
-    end
-    it "renders new contact_info form" do
-      render
-
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      assert_select "form", :action => registrant_path(@registrant), :method => "put" do
-        assert_select "input#registrant_state", :name => "registrant[state]"
-        assert_select "input#registrant_address", :name => "registrant[address]"
-        assert_select "select#registrant_country_residence", :name => "registrant[country_residence]"
-        assert_select "input#registrant_state", :name => "registrant[state]"
-        assert_select "input#registrant_city", :name => "registrant[city]"
-        assert_select "input#registrant_zip", :name => "registrant[zip]"
-        assert_select "input#registrant_phone", :name => "registrant[phone]"
-        assert_select "input#registrant_mobile", :name => "registrant[mobile]"
-        assert_select "input#registrant_email", :name => "registrant[email]"
-        assert_select "input#registrant_club", :name => "registrant[club]"
-        assert_select "input#registrant_club_contact", :name => "registrant[club_contact]"
-        assert_select "input#registrant_usa_member_number", :name => "registrant[usa_member_number]"
-        assert_select "input#registrant_emergency_name", :name => "registrant[emergency_name]"
-        assert_select "input#registrant_emergency_relationship", :name => "registrant[emergency_relationship]"
-        assert_select "input#registrant_emergency_attending", :name => "registrant[emergency_attending]"
-        assert_select "input#registrant_emergency_primary_phone", :name => "registrant[emergency_primary_phone]"
-        assert_select "input#registrant_emergency_other_phone", :name => "registrant[emergency_other_phone]"
-        assert_select "input#registrant_responsible_adult_name", :name => "registrant[responsible_adult_name]"
-        assert_select "input#registrant_responsible_adult_phone", :name => "registrant[responsible_adult_phone]"
       end
     end
   end

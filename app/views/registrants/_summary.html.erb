@@ -13,71 +13,10 @@
     <%= @registrant.birthday.strftime("%d-%b-%Y") %>
     <b><%= t(".age") %>:</b>
     <%= @registrant.age %>
+    <b><%= t(".volunteer") %>:</b>
+    <%= @registrant.volunteer %>
   </div>
   <% if can? :read_contact_info, @registrant  %>
-    <div>
-      <b><%= t(".address") %>:</b>
-      <%= @registrant.address %> <br />
-      <%= @registrant.city %>
-      <%= @registrant.state %>
-      <%= @registrant.country_residence %>
-      <%= @registrant.zip %> <br />
-      <b><%= t(".representing_country") %>:</b>
-      <%= @registrant.country %>
-    </div>
-    <div>
-      <b><%= t(".phone") %>:</b>
-      <%= @registrant.phone %>
-    </div>
-
-    <div>
-      <b><%= t(".mobile") %>:</b>
-      <%= @registrant.mobile %>
-    </div>
-
-    <div>
-      <b><%= t(".email") %>:</b>
-      <%= @registrant.email %>
-    </div>
-    <div>
-      <b><%= t(".team_club") %>:</b>
-      <%= @registrant.club %>
-    </div>
-    <div>
-      <b><%= t(".team_club_contact") %>:</b>
-      <%= @registrant.club_contact %>
-    </div>
-    <% if EventConfiguration.usa %>
-      <div>
-        <b>USA Member Number:</b>
-        <%= @registrant.usa_member_number %>
-      </div>
-    <% end %>
-    <div>
-      <b><%= t(".volunteer") %>:</b>
-      <%= @registrant.volunteer %>
-    </div>
-    <div>
-      <b><%= t(".emergency_contact_name") %>:</b>
-      <%= @registrant.emergency_name %>
-    </div>
-    <div>
-      <b><%= t(".emergency_contact_relationship") %>:</b>
-      <%= @registrant.emergency_relationship %>
-    </div>
-    <div>
-      <b><%= t(".emergency_contact_attending") %>:</b>
-      <%= @registrant.emergency_attending ? "yes":"no" %>
-    </div>
-    <div>
-      <b><%= t(".emergency_contact_phone") %>:</b>
-      <%= @registrant.emergency_primary_phone %>
-      <%= @registrant.emergency_other_phone %>
-    </div>
-    <div>
-      <b><%= t(".responsible_adult") %>:</b>
-      <%= @registrant.responsible_adult_name %>
-      <%= @registrant.responsible_adult_phone %>
-    </div>
+    <%= render :partial => "contact_summary", locals: { :contact_detail => @registrant.contact_detail } %>
   <% end %>
 </fieldset>

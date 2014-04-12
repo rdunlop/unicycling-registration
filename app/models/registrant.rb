@@ -8,45 +8,26 @@
 #  last_name               :string(255)
 #  birthday                :date
 #  gender                  :string(255)
-#  state                   :string(255)
-#  country_residence       :string(255)
-#  phone                   :string(255)
-#  mobile                  :string(255)
-#  email                   :string(255)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  user_id                 :integer
 #  competitor              :boolean
-#  club                    :string(255)
-#  club_contact            :string(255)
-#  usa_member_number       :string(255)
-#  emergency_name          :string(255)
-#  emergency_relationship  :string(255)
-#  emergency_attending     :boolean
-#  emergency_primary_phone :string(255)
-#  emergency_other_phone   :string(255)
-#  responsible_adult_name  :string(255)
-#  responsible_adult_phone :string(255)
-#  address                 :string(255)
-#  city                    :string(255)
-#  zip                     :string(255)
 #  deleted                 :boolean
 #  bib_number              :integer
 #  wheel_size_id           :integer
 #  age                     :integer
 #  ineligible              :boolean          default(FALSE)
 #  volunteer               :boolean
-#  country_representing    :string(255)
 #  online_waiver_signature :string(255)
 #
 
 class Registrant < ActiveRecord::Base
   include Eligibility
 
-  validates :first_name, :last_name, :birthday, :gender, :presence => true
-  validates :address, :city, :country_residence, :zip, :presence => true
+  has_one :contact_detail, dependent: :destroy, autosave: true
+  accepts_nested_attributes_for :contact_detail
 
-  validates :state, :presence => true, :unless => "EventConfiguration.usa == false"
+  validates :first_name, :last_name, :birthday, :gender, :presence => true
 
   validates :user_id, :presence => true
   before_validation :set_bib_number, :on => :create
@@ -59,8 +40,6 @@ class Registrant < ActiveRecord::Base
   validate  :gender_present
 
   # contact-info block
-  validates :emergency_name, :emergency_relationship, :emergency_primary_phone, :presence => true
-  validates :responsible_adult_name, :responsible_adult_phone, :presence => true, :if => :minor?
   validate :no_payments_when_deleted
 
   validates :online_waiver_signature, :presence => true, :unless => "EventConfiguration.has_online_waiver == false"
@@ -450,17 +429,7 @@ class Registrant < ActiveRecord::Base
     user.email
   end
 
-  def country_code
-    if self.country_representing.nil? or self.country_representing.empty?
-      self.country_residence
-    else
-      self.country_representing
-    end
-  end
-
-  def country
-    Carmen::Country.coded(self.country_code).try(:name)
-  end
+  delegate :country_code, :country, to: :contact_detail
 
   def as_json(options={})
     options = {

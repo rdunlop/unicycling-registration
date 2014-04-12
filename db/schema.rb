@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140406143652) do
+ActiveRecord::Schema.define(version: 20140411223501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,31 @@ ActiveRecord::Schema.define(version: 20140406143652) do
   end
 
   add_index "competitors", ["competition_id"], name: "index_competitors_event_category_id", using: :btree
+
+  create_table "contact_details", force: true do |t|
+    t.integer  "registrant_id"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country_residence"
+    t.string   "country_representing"
+    t.string   "phone"
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "club"
+    t.string   "club_contact"
+    t.string   "usa_member_number"
+    t.string   "emergency_name"
+    t.string   "emergency_relationship"
+    t.boolean  "emergency_attending"
+    t.string   "emergency_primary_phone"
+    t.string   "emergency_other_phone"
+    t.string   "responsible_adult_name"
+    t.string   "responsible_adult_phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "distance_attempts", force: true do |t|
     t.integer  "competitor_id"
@@ -510,35 +535,16 @@ ActiveRecord::Schema.define(version: 20140406143652) do
     t.string   "last_name"
     t.date     "birthday"
     t.string   "gender"
-    t.string   "state"
-    t.string   "country_residence"
-    t.string   "phone"
-    t.string   "mobile"
-    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "competitor"
-    t.string   "club"
-    t.string   "club_contact"
-    t.string   "usa_member_number"
-    t.string   "emergency_name"
-    t.string   "emergency_relationship"
-    t.boolean  "emergency_attending"
-    t.string   "emergency_primary_phone"
-    t.string   "emergency_other_phone"
-    t.string   "responsible_adult_name"
-    t.string   "responsible_adult_phone"
-    t.string   "address"
-    t.string   "city"
-    t.string   "zip"
     t.boolean  "deleted"
     t.integer  "bib_number"
     t.integer  "wheel_size_id"
     t.integer  "age"
     t.boolean  "ineligible",              default: false
     t.boolean  "volunteer"
-    t.string   "country_representing"
     t.string   "online_waiver_signature"
   end
 

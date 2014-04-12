@@ -57,7 +57,7 @@ en:
       name: "Name"
       first_name: "First"
       last_name: "Last"
-    contact_info:
+    contact_detail:
       contact_information: "Contact Information"
       address: "Address"
       city: "City"
@@ -100,6 +100,8 @@ en:
       gender: "Gender"
       birthday: "Birthday"
       age: "Age"
+      volunteer: "Volunteer"
+    contact_summary:
       address: "Address"
       representing_country: "Representing country"
       phone: "Phone"
@@ -107,7 +109,6 @@ en:
       email: "Email"
       team_club: "Team/Club"
       team_club_contact: "Team/Club Contact"
-      volunteer: "Volunteer"
       true: "true"
       false: "false"
       emergency_contact_name: "Emergency Contact Name"
