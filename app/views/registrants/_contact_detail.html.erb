@@ -8,13 +8,13 @@
         <tr>
           <td colspan="2">
             <a href="#" id="copy_address"
-              data-address="<%= other_registrant.address %>"
-              data-city="<%= other_registrant.city %>"
-              data-state="<%= other_registrant.state %>"
-              data-country-residence="<%= other_registrant.country_residence %>"
-              data-country-representing="<%= other_registrant.country_representing %>"
-              data-zip="<%= other_registrant.zip %>"
-              data-phone="<%= other_registrant.phone %>">Copy Address from <%= other_registrant.name %></a>
+              data-address="<%= other_registrant.contact_detail.address %>"
+              data-city="<%= other_registrant.contact_detail.city %>"
+              data-state="<%= other_registrant.contact_detail.state %>"
+              data-country-residence="<%= other_registrant.contact_detail.country_residence %>"
+              data-country-representing="<%= other_registrant.contact_detail.country_representing %>"
+              data-zip="<%= other_registrant.contact_detail.zip %>"
+              data-phone="<%= other_registrant.contact_detail.phone %>">Copy Address from <%= other_registrant.name %></a>
           </td>
         </tr>
       <% end %>
