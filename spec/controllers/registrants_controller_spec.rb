@@ -262,25 +262,12 @@ describe RegistrantsController do
 
       it "assigns the registrant to the current user" do
         expect {
-          post :create, {:registrant => {
-          first_name: "Robin",
-          last_name: "Dunlop",
-          gender: "Male",
-          address: "123 Somewhere",
-          city: "Springfield",
-          state: "IL",
-          country_residence: "US",
-          zip: "60601",
-          competitor: true,
-          birthday: Date.new(1982, 01, 19),
-          emergency_name: "Caitlin",
-          emergency_relationship: "Sig. Oth.",
-          emergency_primary_phone: "306-222-1212",
-          user_id: @user.id,
-          birthday: Date.new(1982, 01, 19)
-          }}
+          post :create, {:registrant => valid_attributes.merge(
+            competitor: true)
+          }
         }.to change(Registrant, :count).by(1)
         Registrant.last.user.should == @user
+        Registrant.last.contact_detail.should_not be_nil
       end
 
       it "sets the registrant as a competitor" do

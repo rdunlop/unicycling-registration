@@ -13,14 +13,14 @@ $ ->
 
 $ ->
   $(document).on "click", "#copy_address", ->
-    $('#registrant_address').val($(this).data("address"));
-    $('#registrant_city').val($(this).data("city"));
-    $('#registrant_state').val($(this).data("state"));
-    $('#registrant_country').val($(this).data("country"));
-    $('#registrant_zip').val($(this).data("zip"));
-    $('#registrant_phone').val($(this).data("phone"));
-    $('#registrant_country_residence').val($(this).data("country-residence"));
-    $('#registrant_country_representing').val($(this).data("country-representing"));
+    $('#registrant_contact_detail_attributes_address').val($(this).data("address"));
+    $('#registrant_contact_detail_attributes_city').val($(this).data("city"));
+    $('#registrant_contact_detail_attributes_state').val($(this).data("state"));
+    $('#registrant_contact_detail_attributes_country').val($(this).data("country"));
+    $('#registrant_contact_detail_attributes_zip').val($(this).data("zip"));
+    $('#registrant_contact_detail_attributes_phone').val($(this).data("phone"));
+    $('#registrant_contact_detail_attributes_country_residence').val($(this).data("country-residence"));
+    $('#registrant_contact_detail_attributes_country_representing').val($(this).data("country-representing"));
     return false;
 
 $(document).ready ->

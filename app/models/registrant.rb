@@ -26,6 +26,7 @@ class Registrant < ActiveRecord::Base
 
   has_one :contact_detail, dependent: :destroy, autosave: true
   accepts_nested_attributes_for :contact_detail
+  validates_associated :contact_detail
 
   validates :first_name, :last_name, :birthday, :gender, :presence => true
 
