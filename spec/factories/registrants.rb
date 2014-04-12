@@ -44,7 +44,7 @@ FactoryGirl.define do
 
     factory :minor_competitor do
       competitor true
-      after(:create) do |reg|
+      before(:create) do |reg|
         reg.contact_detail.responsible_adult_name = "Bob Smith"
         reg.contact_detail.responsible_adult_phone = "911"
       end
