@@ -25,16 +25,80 @@ class Ability
     end
   end
 
+  def set_judge_abilities(user)
+    can :read, Competitor
+    can :judging, Event
+
+    can :read, Judge, :user_id => user.id
+    # Freestyle
+    can :create, Score
+    can [:read, :update], Score do |score|
+      score.try(:user) == user
+    end
+
+    # Distance
+    can :manage, DistanceAttempt
+
+    # Street
+    can :create, StreetScore
+    can [:read, :update, :destroy], StreetScore do |score|
+      score.try(:user) == user
+    end
+
+    can :read, Competition
+    can :create_scores, Competition do |competition|
+      !competition.locked
+    end
+  end
+
+  def set_chief_judge_abilities(user)
+    # :read is main chief_judge menu-page
+    # :results is for printing
+    can [:read, :results], Event do |ev|
+      user.has_role? :chief_judge, ev
+    end
+    can :sign_ups, EventCategory do |ec|
+      user.has_role? :chief_judge, ec.event
+    end
+    can :manage, Competitor do |comp|
+      user.has_role? :chief_judge, comp.competition.try(:event)
+    end
+
+    # so that they can create/view judges
+    can [:read], Competition do |comp|
+      user.has_role? :chief_judge, comp.event
+    end
+
+    can [:announcer, :heat_recording, :two_attempt_recording, :results], Competition do |comp|
+      user.has_role? :chief_judge, comp.event
+    end
+    can [:freestyle_scores, :street_scores, :distance_attempts,
+      :export_scores, :set_places, :lock], Competition do |comp|
+      user.has_role? :chief_judge, comp.event
+      end
+
+    can :manage, Member do |member|
+      user.has_role? :chief_judge, member.competitor.event
+    end
+    can :manage, ImportResult do |import_result|
+      user.has_role? :chief_judge, import_result.competition.event
+    end
+    can :manage, TimeResult do |time_result|
+      user.has_role? :chief_judge, time_result.competition.event
+    end
+
+    can :manage, Judge do |judge|
+      user.has_role? :chief_judge, judge.competition.event
+    end
+  end
+
   def define_ability_for_logged_in_user(user)
     alias_action :create, :read, :update, :destroy, :to => :crud
 
     if user.has_role? :super_admin
       can :access, :rails_admin
       can :dashboard
-      can :manage, StandardSkillEntry # written for clarity, though :all includes this
-      can :manage, StandardSkillRoutine # written for clarity, though :all includes this
       can :manage, :all
-      can :all, StandardSkillRoutine
       return # required in order to allow rails_admin to function
     end
 
@@ -49,8 +113,7 @@ class Ability
       can :manage, AwardLabel
       can :manage, ExternalResult
       can :manage, RegistrantGroup
-    elsif user.has_role? :judge
-      can :read, Competitor
+      can :manage, Judge
     end
 
     if user.has_role? :race_official or user.has_role? :admin
@@ -59,74 +122,12 @@ class Ability
 
     # Scoring abilities
     if user.has_role? :judge
-      can :judging, Event
-
-      can :read, Judge, :user_id => user.id
-      # Freestyle
-      can :create, Score
-      can [:read, :update], Score do |score|
-        score.try(:user) == user
-      end
-
-      # Distance
-      can :manage, DistanceAttempt
-
-      # Street
-      can :create, StreetScore
-      can [:read, :update, :destroy], StreetScore do |score|
-        score.try(:user) == user
-      end
+      set_judge_abilities(user)
     end
 
-    if user.has_role? :judge
-      can :read, Competition
-      can :create_scores, Competition do |competition|
-        !competition.locked
-      end
-    end
     if user.has_role? :chief_judge, :any
-      # :read is main chief_judge menu-page
-      # :results is for printing
-      can [:read, :results], Event do |ev|
-        user.has_role? :chief_judge, ev
-      end
-      can :sign_ups, EventCategory do |ec|
-        user.has_role? :chief_judge, ec.event
-      end
-      can :manage, Competitor do |comp|
-        user.has_role? :chief_judge, comp.competition.try(:event)
-      end
-
-      # so that they can create/view judges
-      can [:read], Competition do |comp|
-        user.has_role? :chief_judge, comp.event
-      end
-
-      can [:announcer, :heat_recording, :two_attempt_recording, :results], Competition do |comp|
-        user.has_role? :chief_judge, comp.event
-      end
-      can [:freestyle_scores, :street_scores, :distance_attempts,
-        :export_scores, :set_places, :lock], Competition do |comp|
-        user.has_role? :chief_judge, comp.event
-      end
-
-      can :manage, Member do |member|
-        user.has_role? :chief_judge, member.competitor.event
-      end
-      can :manage, ImportResult do |import_result|
-        user.has_role? :chief_judge, import_result.competition.event
-      end
-      can :manage, TimeResult do |time_result|
-        user.has_role? :chief_judge, time_result.competition.event
-      end
+      set_chief_judge_abilities(user)
     end
-
-    if user.has_role? :chief_judge, :any or user.has_role? :admin
-      can :manage, Judge do |judge|
-        (user.has_role? :chief_judge, judge.competition.event or user.has_role? :admin)
-      end
-    end
-
 
     define_payment_ability(user)
 
@@ -182,12 +183,13 @@ class Ability
       can :send_email, Registrant
       can :bag_labels, Registrant
       can :undelete, Registrant
+      can :crud, Registrant
+      can [:index, :create, :destroy], RegistrantExpenseItem
     end
     # not-object-specific
     can :empty_waiver, Registrant
     can :all, Registrant
 
-    can :crud, Registrant if user.has_role? :admin or user.has_role? :super_admin
     unless EventConfiguration.closed? and ENV['ONSITE_REGISTRATION'] != "true"
       can [:update, :destroy], Registrant, :user_id => user.id
       #can [:create], RegistrantExpenseItem, :user_id => user.id
@@ -196,7 +198,6 @@ class Ability
       end
       can :create, Registrant # necessary because we set the user in the controller?
     end
-    can [:index, :create, :destroy], RegistrantExpenseItem if user.has_role? :admin or user.has_role? :super_admin
 
     can :read, Registrant do |reg|
       user.accessible_registrants.include?(reg)
@@ -205,27 +206,4 @@ class Ability
     # :read_contact_info allows viewing the contact_info block (additional_registrant_accesess don't allow this)
     can [:waiver, :read_contact_info], Registrant, :user_id => user.id
   end
-
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
-    #
-    # The first argument to `can` is the action you are giving the user permission to do.
-    # If you pass :manage it will apply to every action. Other common actions here are
-    # :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on. If you pass
-    # :all it will apply to every resource. Otherwise pass a Ruby class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
 end
