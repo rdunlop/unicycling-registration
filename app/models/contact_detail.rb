@@ -29,7 +29,7 @@
 
 class ContactDetail < ActiveRecord::Base
 
-  belongs_to :registrant
+  belongs_to :registrant, :inverse_of => :contact_detail
 
   validates :address, :city, :country_residence, :zip, :presence => true
   validates :state, :presence => true, :unless => "EventConfiguration.usa == false"

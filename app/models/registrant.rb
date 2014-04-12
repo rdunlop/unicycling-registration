@@ -24,7 +24,7 @@
 class Registrant < ActiveRecord::Base
   include Eligibility
 
-  has_one :contact_detail, dependent: :destroy, autosave: true
+  has_one :contact_detail, dependent: :destroy, autosave: true, :inverse_of => :registrant
   accepts_nested_attributes_for :contact_detail
   validates_associated :contact_detail
 
