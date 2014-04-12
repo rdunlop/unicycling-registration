@@ -174,13 +174,7 @@ class AwardLabelsController < ApplicationController
     lines += "<b>" + label.line_6 + "</b>" + "\n" if label.line_6.present?
   end
 
-  def normal_labels
-    separate_registrants = false
-    unless params[:separate_registrants].nil?
-      separate_registrants = true
-    end
-    previous_bib_number = 0
-
+  def initialize_by_skipped_positions
     skip_positions = 0
     if params[:skip_positions].present?
       skip_positions = params[:skip_positions].to_i
@@ -190,8 +184,13 @@ class AwardLabelsController < ApplicationController
     skip_positions.times do
       names << ""
     end
+    names
+  end
 
-    @user.award_labels.order(:bib_number).each do |label|
+  def build_names_from_labels(labels, separate_registrants)
+    previous_bib_number = 0
+    names = []
+    labels.each do |label|
       if separate_registrants && (previous_bib_number != 0 && label.bib_number != previous_bib_number)
         # add 3 blanks
         names << ""
@@ -202,6 +201,18 @@ class AwardLabelsController < ApplicationController
 
       names << lines_from_award_label(label)
     end
+    names
+  end
+
+  def normal_labels
+    separate_registrants = false
+    unless params[:separate_registrants].nil?
+      separate_registrants = true
+    end
+
+    names = initialize_by_skipped_positions
+
+    names << build_names_from_labels(@user.award_labels.order(:bib_number), separate_registrants)
 
     Prawn::Labels.types = {
       "Avery5160padded" => {
