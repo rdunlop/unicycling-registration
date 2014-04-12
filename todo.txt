@@ -1,8 +1,5 @@
 Last Re-Arranged February 6, 2014.
 
-- what if the contact_detail is invalid or the registrant is invalid (do they both validate before either saves?)
-- :
-
 - find a way to test/fix that we prevent registrants from seeing other-registrants' data (if they can create, they must be able to view?)
 - Add a functional suite which ensures that a reg can create/sign/up/pay/summary
 - Replace the lib/helpers with concerns or PORO
