@@ -48,9 +48,9 @@ describe Registrant do
     describe "and a registrant born on the starting day in 1982" do
       before(:each) do
         @reg.birthday = Date.new(1982, 05, 20)
+        @reg.set_age
       end
       it "should have an age of 30" do
-        @reg.set_age
         @reg.age.should == 30
       end
 
