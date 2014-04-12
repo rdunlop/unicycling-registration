@@ -93,7 +93,7 @@ class Registrant < ActiveRecord::Base
   before_validation :set_default_wheel_size
   belongs_to :default_wheel_size, :class_name => "WheelSize", :foreign_key => :wheel_size_id
   validates :default_wheel_size, :presence => true
-  validate :default_wheel_size_for_age
+  validate :check_default_wheel_size_for_age
 
   after_save(:touch_members)
 
@@ -110,7 +110,7 @@ class Registrant < ActiveRecord::Base
 
   def build_registration_item(reg_item)
     unless reg_item.nil? or has_expense_item?(reg_item)
-      registrant_expense_items.build({:expense_item_id => reg_item.id, :system_managed => true})
+      registrant_expense_items.build(:expense_item => reg_item, :system_managed => true)
     end
   end
 
@@ -129,7 +129,7 @@ class Registrant < ActiveRecord::Base
 
     required_expense_items.each do |ei|
       unless has_expense_item?(ei)
-        registrant_expense_items.build({:expense_item_id => ei.id, :system_managed => true})
+        registrant_expense_items.build(:expense_item => ei, :system_managed => true)
       end
     end
   end
@@ -229,7 +229,7 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def default_wheel_size_for_age
+  def check_default_wheel_size_for_age
     if self.age > 10
       if self.default_wheel_size != WheelSize.find_by_description("24\" Wheel")
         errors[:base] << "You must choose a wheel size of 24\" if you are > 10 years old"

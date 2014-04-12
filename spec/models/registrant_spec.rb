@@ -26,6 +26,11 @@ require 'spec_helper'
 describe Registrant do
   before(:each) do
     @reg = FactoryGirl.build_stubbed(:registrant)
+    @ws20 = FactoryGirl.build_stubbed(:wheel_size_20)
+    @ws24 = FactoryGirl.build_stubbed(:wheel_size_24)
+    allow(WheelSize).to receive(:find_by_description).with("20\" Wheel").and_return(@ws20)
+    allow(WheelSize).to receive(:find_by_description).with("24\" Wheel").and_return(@ws24)
+    allow(Registrant).to receive(:maximum_bib_number).and_return(nil)
   end
 
   describe "with a 10 year old registrant" do
@@ -36,7 +41,7 @@ describe Registrant do
     it "should have a 20\" wheel" do
       @reg.default_wheel_size = nil
       @reg.set_default_wheel_size
-      @reg.default_wheel_size.should == WheelSize.find_by_description("20\" Wheel")
+      @reg.default_wheel_size.should == @ws20
     end
   end
 
@@ -56,23 +61,163 @@ describe Registrant do
 
       it "should have a wheel_size of 24\"" do
         @reg.set_default_wheel_size
-        @reg.default_wheel_size.should == WheelSize.find_by_description("24\" Wheel")
+        @reg.default_wheel_size.should == @ws24
       end
     end
 
     describe "and a registrant born the day after the starting date in 1982" do
       before(:each) do
         @reg.birthday = Date.new(1982, 05, 21)
+        @reg.set_age
       end
       it "should have an age of 29" do
-        @reg.set_age
         @reg.age.should == 29
       end
 
       it "cannot choose a 20\" wheel" do
-        @reg.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
-        @reg.valid?.should == false
+        @reg.default_wheel_size = @ws20
+        @reg.check_default_wheel_size_for_age
+        @reg.errors.should_not be_empty
       end
+    end
+  end
+
+  context "checking required attributes" do
+    before :each do
+      @reg.set_bib_number
+    end
+    it "has a valid reg from FactoryGirl" do
+      @reg.valid?.should == true
+    end
+
+    it "requires a user" do
+      @reg.user = nil
+      @reg.valid?.should == false
+    end
+
+    it "requires a deleted status" do
+      @reg.deleted = nil
+      @reg.valid?.should == false
+    end
+
+    it "must have a valid competitor value" do
+      @reg.competitor = nil
+    end
+
+    it "should be eligible by default" do
+      r = Registrant.new
+      r.ineligible.should == false
+    end
+
+    it "should not be a volunteer by default" do
+      r = Registrant.new
+      r.volunteer.should == false
+    end
+
+    it "must have a value for ineligible" do
+      @reg.ineligible = nil
+      @reg.valid?.should == false
+    end
+
+    it "requires an bib_number" do
+      @reg.bib_number = nil
+      @reg.valid?.should == false
+    end
+
+    it "requires a birthday" do
+      @reg.birthday = nil
+      @reg.valid?.should == false
+    end
+
+    it "can not have a birthday, while having a configuration" do
+      allow(EventConfiguration).to receive(:start_date).and_return(Date.new(2012,05,20))
+      @reg.birthday = nil
+      @reg.valid?.should == false
+    end
+
+    it "requires first name" do
+      @reg.first_name = nil
+      @reg.valid?.should == false
+    end
+
+    it "requires last name" do
+      @reg.last_name = nil
+      @reg.valid?.should == false
+    end
+
+    it "requires gender" do
+      @reg.gender = nil
+      @reg.valid?.should == false
+    end
+
+    it "has no paid_expense_items" do
+      @reg.paid_expense_items.should == []
+    end
+
+    it "has either Male or Female gender" do
+      @reg.gender = "Male"
+      @reg.valid?.should == true
+
+      @reg.gender = "Female"
+      @reg.valid?.should == true
+
+      @reg.gender = "Other"
+      @reg.valid?.should == false
+    end
+
+    it "defaults the deleted flag to false" do
+      reg = Registrant.new
+      reg.deleted.should == false
+    end
+
+    it "has a to_s" do
+      @reg.to_s.should == @reg.first_name + " " + @reg.last_name
+    end
+
+    it "has a name field" do
+      @reg.name.should == @reg.first_name + " " + @reg.last_name
+    end
+
+    it "bib_number is set to 1 as a competitor" do
+      @reg.bib_number.should == 1
+    end
+    describe "with a second competitor" do
+      before(:each) do
+        allow(Registrant).to receive(:maximum_bib_number).and_return(1)
+      end
+      it "assigns the second competitor bib_number 2" do
+        @reg2 = FactoryGirl.build_stubbed(:competitor)
+        @reg2.set_bib_number
+        @reg2.bib_number.should == 2
+      end
+    end
+  end
+
+  context "checking non-competitor default" do
+    it "bib_number is set to 2001 as a non-competitor" do
+      @nreg = FactoryGirl.build_stubbed(:noncompetitor)
+      @nreg.set_bib_number
+      @nreg.bib_number.should == 2001
+    end
+
+    describe "with a second non-competitor" do
+      before :each do
+        allow(Registrant).to receive(:maximum_bib_number).and_return(2001)
+      end
+      it "assigns the second noncompetitor bib_number 2002" do
+        @reg2 = FactoryGirl.build_stubbed(:noncompetitor)
+        @reg2.set_bib_number
+        @reg2.bib_number.should == 2002
+      end
+    end
+  end
+
+  context "associations" do
+    it "has an owing cost of 0 by default" do
+      @reg.amount_owing.should == 0
+    end
+    it "always displays the expenses_total" do
+      @reg.expenses_total.should == 0
     end
   end
 end
@@ -86,105 +231,6 @@ describe Registrant do
     @reg.valid?.should == true
   end
 
-  it "requires a user" do
-    @reg.user = nil
-    @reg.valid?.should == false
-  end
-
-  it "requires a deleted status" do
-    @reg.deleted = nil
-    @reg.valid?.should == false
-  end
-
-  it "must have a valid competitor value" do
-    @reg.competitor = nil
-    @reg.valid?.should == false
-  end
-
-  it "should be eligible by default" do
-    r = Registrant.new
-    r.ineligible.should == false
-  end
-
-  it "should not be a volunteer by default" do
-    r = Registrant.new
-    r.volunteer.should == false
-  end
-
-  it "must have a value for ineligible" do
-    @reg.ineligible = nil
-    @reg.valid?.should == false
-  end
-
-  it "requires an bib_number" do
-    @reg.bib_number = nil
-    @reg.valid?.should == false
-  end
-
-  it "requires a birthday" do
-    @reg.birthday = nil
-    @reg.valid?.should == false
-  end
-  it "can not have a birthday, while having a configuration" do
-    FactoryGirl.create(:event_configuration)
-    @reg.birthday = nil
-    @reg.valid?.should == false
-  end
-
-  it "requires first name" do
-    @reg.first_name = nil
-    @reg.valid?.should == false
-  end
-
-  it "requires last name" do
-    @reg.last_name = nil
-    @reg.valid?.should == false
-  end
-
-  it "requires gender" do
-    @reg.gender = nil
-    @reg.valid?.should == false
-  end
-  it "has no paid_expense_items" do
-    @reg.paid_expense_items.should == []
-  end
-
-  it "has either Male or Female gender" do
-    @reg.gender = "Male"
-    @reg.valid?.should == true
-
-    @reg.gender = "Female"
-    @reg.valid?.should == true
-
-    @reg.gender = "Other"
-    @reg.valid?.should == false
-  end
-
-  it "defaults the deleted flag to false" do
-    reg = Registrant.new
-    reg.deleted.should == false
-  end
-
-  it "has a to_s" do
-    @reg.to_s.should == @reg.first_name + " " + @reg.last_name
-  end
-
-  it "bib_number is set to 1 as a competitor" do
-    @reg.bib_number.should == 1
-  end
-  it "bib_number is set to 2001 as a non-competitor" do
-    @nreg = FactoryGirl.create(:noncompetitor)
-    @nreg.bib_number.should == 2001
-  end
-
-  describe "with a second competitor" do
-    before(:each) do
-      @reg2 = FactoryGirl.create(:competitor)
-    end
-    it "assigns the second competitor bib_number 2" do
-      @reg2.bib_number.should == 2
-    end
-  end
   describe "with a deleted competitor" do
     before(:each) do
       @reg.deleted = true
@@ -194,38 +240,6 @@ describe Registrant do
       @reg2 = FactoryGirl.create(:competitor)
       @reg2.external_id.should == 2
     end
-  end
-
-  describe "with a second noncompetitor" do
-    before(:each) do
-      @nreg1 = FactoryGirl.create(:noncompetitor)
-      @nreg2 = FactoryGirl.create(:noncompetitor)
-    end
-    it "assigns the second noncompetitor bib_number 2002" do
-      @nreg2.bib_number.should == 2002
-    end
-  end
-
-  it "has event_choices" do
-    @ec = FactoryGirl.create(:registrant_choice, :registrant => @reg)
-    @reg.reload
-    @reg.registrant_choices.should == [@ec]
-  end
-
-  it "has registrant_event_sign_ups" do
-    @resu = FactoryGirl.create(:registrant_event_sign_up, :registrant => @reg)
-    @reg.reload
-    @reg.registrant_event_sign_ups.should == [@resu]
-  end
-
-  it "has a name field" do
-    @reg.name.should == @reg.first_name + " " + @reg.last_name
-  end
-  it "has an owing cost of 0 by default" do
-    @reg.amount_owing.should == 0
-  end
-  it "always displays the expenses_total" do
-    @reg.expenses_total.should == 0
   end
 
   describe "with an expense_item" do
@@ -359,7 +373,8 @@ describe Registrant do
 
     describe "as a non-Competitor" do
       before(:each) do
-        @noncomp = FactoryGirl.create(:noncompetitor)
+        @noncomp = FactoryGirl.build_stubbed(:noncompetitor)
+        @noncomp.create_associated_required_expense_items
       end
       it "should owe different cost" do
         @noncomp.amount_owing.should == 50
@@ -388,7 +403,7 @@ describe Registrant do
       before(:each) do
         @oldcomp_exp = FactoryGirl.create(:expense_item, :cost => 90)
         @oldnoncomp_exp = FactoryGirl.create(:expense_item, :cost => 40)
-        @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2009,01,01), :end_date => Date.new(2010, 01, 01), 
+        @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2009,01,01), :end_date => Date.new(2010, 01, 01),
                                  :competitor_expense_item => @oldcomp_exp, :noncompetitor_expense_item => @oldnoncomp_exp)
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)
