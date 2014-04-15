@@ -7,6 +7,7 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 config/database.yml
+config/secrets.yml
 # Ignore db dump file
 *.dump
 
