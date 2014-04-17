@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe AwardLabel do
   before(:each) do
-    @al = FactoryGirl.create(:award_label)
+    @al = FactoryGirl.build_stubbed(:award_label)
   end
 
   it "has a valid factory" do
@@ -46,17 +46,24 @@ describe AwardLabel do
     @al.place = 0
     @al.valid?.should == false
   end
+end
 
-
+describe AwardLabel do
+  before(:each) do
+    @al = FactoryGirl.build_stubbed(:award_label)
+  end
   describe "with a solo competitor" do
     before(:each) do
-      @comp = FactoryGirl.create(:event_competitor)
-      @reg = @comp.registrants.first
-      Delorean.jump 2
-      @comp.touch # to update the gender (by causing it to notice that a registrant member exists
-      @comp.place = 1
+      @comp = FactoryGirl.build_stubbed(:event_competitor)
+      allow(@comp).to receive_message_chain(:members, :count).and_return(1)
+      allow(@comp).to receive_message_chain(:members, :size).and_return(1)
+      allow(@comp).to receive_message_chain(:members, :empty?).and_return(false)
+      allow(@comp).to receive(:result).and_return("Some Result")
+      @reg = FactoryGirl.build_stubbed(:competitor)
+      allow(@comp).to receive(:registrants).and_return([@reg])
+      allow(@comp).to receive(:place).and_return(1)
       @al = AwardLabel.new
-      @al.user = FactoryGirl.create(:user)
+      @al.user = FactoryGirl.build_stubbed(:user)
       @al.populate_from_competitor(@comp, @reg)
     end
     it "Can create the awards label from a competitor" do
@@ -65,9 +72,9 @@ describe AwardLabel do
     end
 
     it "displays both names if in a pair" do
-      @reg2 = FactoryGirl.create(:competitor, :first_name => "Bob", :last_name => "Smith")
-      FactoryGirl.create(:member, :competitor => @comp, :registrant => @reg2)
-      @comp.reload
+      @reg2 = FactoryGirl.build_stubbed(:competitor, :first_name => "Bob", :last_name => "Smith")
+      allow(@comp).to receive_message_chain(:members, :count).and_return(2)
+      allow(@comp).to receive(:registrants).and_return([@reg, @reg2])
 
       @al.populate_from_competitor(@comp, @reg)
       @al.line_1.should == "#{@reg.first_name} #{@reg.last_name} & #{@reg2.first_name} #{@reg2.last_name}"
@@ -79,8 +86,6 @@ describe AwardLabel do
       competition.name = "Hello"
       ev = competition.event
       ev.name = "Individual"
-      ev.save!
-      competition.save!
 
       @al.populate_from_competitor(@comp, @reg)
       @al.line_2.should == "Individual"
@@ -92,8 +97,6 @@ describe AwardLabel do
       competition.name = "10k Standard"
       ev = competition.event
       ev.name = "10k"
-      ev.save!
-      competition.save!
 
       @al.populate_from_competitor(@comp, @reg)
       @al.line_2.should == "10k Standard"
@@ -109,13 +112,13 @@ describe AwardLabel do
       before(:each) do
         @comp.competition.scoring_class = "Distance"
         @comp.competition.has_age_groups = true
-        @comp.competition.save!
-        @comp.overall_place = 3
+        allow(@comp).to receive(:overall_place).and_return(3)
       end
 
       it "uses the age group and the gender as line 4" do
+        allow(@comp).to receive(:age_group_entry_description).and_return("This is the age group")
         @al.populate_from_competitor(@comp, @reg, false)
-        @al.line_4.should == "No Age Group for 99-Male"
+        @al.line_4.should == "This is the age group"
       end
 
       it "sets the age group to Expert Male when expert" do
@@ -125,17 +128,12 @@ describe AwardLabel do
     end
 
     it "stores the competitor.result as details, and line 5" do
-      @comp.competition.scoring_class = "Ranked"
-      @comp.competition.save!
-      FactoryGirl.create(:external_result, :competitor => @comp, :rank => 2, :details => "Some")
-
-      @comp.reload
       @al.populate_from_competitor(@comp, @reg)
-      @al.line_5.should == "Some"
+      @al.line_5.should == "Some Result"
     end
 
     it "sets the award place from the competitor" do
-      @comp.place = 2
+      allow(@comp).to receive(:place).and_return(2)
       @al.populate_from_competitor(@comp, @reg)
       @al.place.should == 2
     end

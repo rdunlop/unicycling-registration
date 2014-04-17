@@ -39,7 +39,7 @@ group :development, :test, :cucumber do
   gem 'bullet'
   #gem 'brakeman'
   gem 'factory_girl_rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'spork-rails'
   gem 'syntax'
   gem 'watchr'
