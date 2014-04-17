@@ -74,7 +74,13 @@ GEM
       carrierwave
       fog
       uuidtools
+    chosen-rails (1.1.0)
+      coffee-rails (>= 3.2)
+      compass-rails (>= 1.1.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     chronic (0.10.2)
+    chunky_png (1.3.0)
     cliver (0.3.2)
     coderay (1.1.0)
     coercible (1.0.0)
@@ -86,6 +92,13 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.1.7)
+      compass (>= 0.12.2)
+      sprockets (<= 2.11.0)
     dalli (2.7.0)
     delorean (2.1.0)
       chronic
@@ -137,6 +150,7 @@ GEM
     formatador (0.2.4)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    fssm (0.2.10)
     globalize (4.0.0)
       activemodel (>= 4.0.0, < 5)
       activerecord (>= 4.0.0, < 5)
@@ -317,6 +331,7 @@ DEPENDENCIES
   carmen (= 1.0.0)
   carmen-rails
   carrierwave_direct
+  chosen-rails
   coffee-rails
   dalli
   delorean

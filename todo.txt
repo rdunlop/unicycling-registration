@@ -1,5 +1,6 @@
 Last Re-Arranged February 6, 2014.
 
+- prevent selecting dates which are not possible (Scott problem).
 - split the awards_label_controller to have a helper which does the work of processing the params-requests
 - Payment summary for Hugo/Benoit
 - find a way to test/fix that we prevent registrants from seeing other-registrants' data (if they can create, they must be able to view?)

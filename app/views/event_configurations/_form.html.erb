@@ -107,6 +107,11 @@
       <td>Not currently used</td>
   </tr>
   <tr>
+      <th><%= f.label :music_submission_end_date %></th>
+      <td><%= f.date_select :music_submission_end_date, include_blank: true %></td>
+      <td>Specify the date at which music submissions will no longer be allowed</td>
+  </tr>
+  <tr>
       <th><%= f.label :standard_skill %></th>
       <td><%= f.check_box :standard_skill %></td>
       <td>Enabling this allows standard skill.</td>
