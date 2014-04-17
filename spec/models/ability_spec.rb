@@ -6,6 +6,7 @@ describe "Ability" do
     before(:each) do
       @user = FactoryGirl.build_stubbed(:user)
       ENV["ONSITE_REGISTRATION"] = nil
+      allow(EventConfiguration).to receive(:music_submission_ended?).and_return(false)
     end
     subject { @ability = Ability.new(@user) }
 

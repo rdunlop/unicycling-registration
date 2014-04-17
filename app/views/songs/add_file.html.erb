@@ -2,7 +2,7 @@
 <h3>Event: <%= @song.event %> - <%= @song.description %></h3>
 <%= direct_upload_form_for @uploader do |f| %>
   <%= hidden_field_tag 'Content-Type', 'audio/mpeg' %>
-  <b>NOTE:</b> Maximum file size is 40 MB<br> />
+  <b>NOTE:</b> Maximum file size is 40 MB<br />
   <%= f.file_field :song_file_name %>
   <%= f.submit 'Upload Music' %>
 <% end %>

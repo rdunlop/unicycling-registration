@@ -172,7 +172,7 @@ class EventConfiguration < ActiveRecord::Base
 
   def self.music_submission_ended?(today = Date.today)
     ec = EventConfiguration.first
-    if ec.nil?
+    if ec.nil? || ec.music_submission_end_date.nil?
       true
     else
       ec.music_submission_end_date <= today

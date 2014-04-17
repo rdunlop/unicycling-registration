@@ -1,110 +1,37 @@
 <% @categories = categories
    @registrant = registrant
  %>
-  <% unless EventConfiguration.rulebook_url.nil? %>
-    <div class="rulebook_link">
-      <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the rulebook that governs this competition!" %>
-    </div>
-  <% end %>
-  <div id="tabs">
-    <ul>
-      <% @categories.each do |category| %>
-        <li><a href="#tabs-<%= category.id %>"><%= category %></a></li>
-      <% end %>
-    </ul>
+ <% unless EventConfiguration.rulebook_url.nil? %>
+   <div class="rulebook_link">
+     <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the rulebook that governs this competition!" %>
+   </div>
+ <% end %>
+ <div id="tabs">
+   <ul>
+     <% @categories.each do |category| %>
+       <li><a href="#tabs-<%= category.id %>"><%= category %></a></li>
+     <% end %>
+   </ul>
 
-    <% @categories.each do |category| %>
-      <div id="tabs-<%= category.id %>">
-        <% unless category.info_url.nil? or category.info_url.blank? %>
-          <div class="event_link">
-            <%= link_to "#{t('.more_info')} [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"} %>
-          </div>
-        <% end %>
-        <table class="events alternate">
-          <% category.events.each do |event| %>
-            <% next unless event.visible %>
-            <tr class="event">
-              <%
-                found_resu = nil
-                @registrant.registrant_event_sign_ups.each do |resu|
-                  if resu.event_id == event.id
-                    found_resu = resu
-                  end
-                end
-              %>
-                <%= f.fields_for :registrant_event_sign_ups, found_resu do |resu| %>
-                  <td class="event_choice">
-                    <%= resu.hidden_field :event_id %>
-                    <%= resu.check_box :signed_up, :class => "primary_checkbox" %>
-                    <%= resu.label :signed_up, event.to_s %>
-                    <% if event.event_categories.count == 1 %>
-                      <%= resu.hidden_field :event_category_id, :value => event.event_categories.first.id %>
-                    <% else %>
-                      </td>
-                      <td class="event_choice">
-                      <%= resu.label :event_category_id, t('.category') %>
-                      <% 
-                        list = []
-                        disabled_list = []
-                        event.event_categories.each do |cat|
-                          list << [cat.name, cat.id]
-                          if !cat.age_is_in_range(registrant.age)
-                            disabled_list << cat.id
-                          end
-                        end
-                        %>
-                        <%= resu.select :event_category_id, list, :disabled => disabled_list, :include_blank => true %>
-                    <% end %>
-                  </td>
-                <% end %>
-              <% if category.max_number_of_event_choices != event.num_choices %>
-                <td colspan="<%= category.max_number_of_event_choices - event.num_choices %>"></td>
-              <% end %>
-              <% event.event_choices.each do |choice| %>
-                <td class="event_choice">
-                  <% 
-                    found_rc = nil
+   <% @categories.each do |category| %>
+     <div id="tabs-<%= category.id %>">
+       <% if category.info_url.present? %>
+         <div class="event_link">
+           <%= link_to "#{t('.more_info')} [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"} %>
+         </div>
+       <% end %>
+       <table class="events alternate">
+         <% category.events.each do |event| %>
+           <% next unless event.visible %>
+           <%= render :partial => "/attending/event", :locals => {:f => f, :registrant => @registrant}, :object => event %>
+         <% end %>
+       </table>
+       <% if can? :create, Song %>
+         <div class="music_info">
+           To upload music, please <%= link_to "Click Here", registrant_songs_path(@registrant) %>
 
-                    rc = @registrant.registrant_choices.each do |rc|
-                    if rc.event_choice_id == choice.id
-                      found_rc = rc
-                      break
-                    end
-                  end %>
-                  <%= f.fields_for :registrant_choices, found_rc do |ec| %>
-                    <%= ec.hidden_field :event_choice_id %>
-                    <% case ec.object.event_choice.cell_type %>
-                    <% when "boolean" %>
-                      <%= ec.check_box :value, :title => choice.tooltip %>
-                      <%= ec.label :value, choice.label, :title => choice.tooltip %>
-                    <% when "text" %>
-                      <% if ec.object.event_choice.autocomplete %>
-                        <% ac_class = "autocomplete#{choice.id}" %>
-                        <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip, :class => ac_class %>
-                        <script>
-                          $(".<%= ac_class %>").autocomplete({ 
-                            source: [
-                            <% choice.unique_values.each do |val| %>
-                              '<%= raw(escape_javascript(val)) %>',
-                            <% end %>
-                            '']
-                          });
-                        </script>
-                      <% else %>
-                        <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip  %>
-                      <% end %>
-                    <% when "multiple" %>
-                      <%= ec.label :value, choice.label, :title => choice.tooltip %>
-                      <%= ec.select :value, ec.object.event_choice.values, {:include_blank => true}, :title => choice.tooltip %>
-                    <% when "best_time" %>
-                      <%= ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip.blank? ? choice.tooltip : "hh:mm:ss or mm:ss" %>
-                    <% end %>
-                  <% end %>
-                </td>
-              <% end %>
-            </tr>
-        <% end %>
-      </table>
-    </div>
-    <% end %>
-  </div>
+         </div>
+       <% end %>
+     </div>
+   <% end %>
+ </div>

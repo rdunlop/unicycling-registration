@@ -5,14 +5,12 @@ module ApplicationHelper
   def setup_registrant_choices(registrant)
     EventChoice.all.each do |ec|
       if registrant.registrant_choices.where({:event_choice_id => ec.id}).empty?
-        new_cc = registrant.registrant_choices.build
-        new_cc.event_choice_id = ec.id
+        registrant.registrant_choices.build(event_choice_id: ec.id)
       end
     end
     Event.all.each do |ev|
       if registrant.registrant_event_sign_ups.select { |resu| resu.event_id == ev.id}.empty?
-        new_resu = registrant.registrant_event_sign_ups.build
-        new_resu.event = ev
+        registrant.registrant_event_sign_ups.build(event: ev)
       end
     end
     registrant
@@ -36,7 +34,7 @@ module ApplicationHelper
     number_to_currency(cost, format: EventConfiguration.currency, locale: :en)
   end
 
-   def text_to_html_linebreaks(text)
+  def text_to_html_linebreaks(text)
     start_tag = '<p>'
     text = text.to_s.dup
     text.gsub!(/\r?\n/, "\n")                     # \r\n and \r => \n

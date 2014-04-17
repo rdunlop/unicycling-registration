@@ -23,6 +23,10 @@ class Ability
       cannot :normal, EventConfiguration
       cannot :fake_complete, Payment
     end
+
+    if EventConfiguration.music_submission_ended?
+      cannot :crud, Song
+    end
   end
 
   def set_judge_abilities(user)
@@ -149,6 +153,9 @@ class Ability
     end
 
     can :create, Song #necessary because we set the registrant in the controller
+    #can :create, Song do
+    #  user.has_role? :admin
+    #end
     can :manage, Song do |song|
       user.registrants.include?(song.registrant)
     end
