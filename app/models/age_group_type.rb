@@ -30,7 +30,7 @@ class AgeGroupType < ActiveRecord::Base
   def age_group_entry_for(age, gender, default_wheel_size_id = nil)
     entries = age_group_entries.where("(start_age <= :age AND :age <= end_age) AND " +
                                       "(gender = 'Mixed' OR gender = :gender) AND " +
-                                      "(wheel_size_id IS NULL or wheel_size_id = :wheel_size_id)", 
+                                      "(wheel_size_id IS NULL or wheel_size_id = :wheel_size_id)",
                                         :age => age, :gender => gender, :wheel_size_id => default_wheel_size_id)
     entries.first
   end
