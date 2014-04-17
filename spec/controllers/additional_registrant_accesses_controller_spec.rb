@@ -96,7 +96,7 @@ describe AdditionalRegistrantAccessesController do
       it "cannot accept its own invitation" do
         expect {
           put :accept_readonly, {:id => @additional_registrant_access.to_param}
-        }.to_not change(@additional_registrant_access, :accepted_readonly).from(false).to(true)
+        }.to_not change(@additional_registrant_access, :accepted_readonly)
       end
       it "redirects to the root if unauthorized" do
         put :accept_readonly, {:id => @additional_registrant_access.to_param}
@@ -112,7 +112,7 @@ describe AdditionalRegistrantAccessesController do
         it "allows the registrant's user to accept the invitation" do
           expect {
             put :accept_readonly, {:id => @additional_registrant_access.to_param}
-          }.to_not change(@additional_registrant_access, :accepted_readonly).from(false).to(true)
+          }.to_not change(@additional_registrant_access, :accepted_readonly)
         end
         it "creates an e-mail to the requesting user" do
           ActionMailer::Base.deliveries.clear
