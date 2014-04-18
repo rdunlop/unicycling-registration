@@ -2,14 +2,15 @@
 #
 # Table name: events
 #
-#  id          :integer          not null, primary key
-#  category_id :integer
-#  export_name :string(255)
-#  position    :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  name        :string(255)
-#  visible     :boolean
+#  id                    :integer          not null, primary key
+#  category_id           :integer
+#  export_name           :string(255)
+#  position              :integer
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  name                  :string(255)
+#  visible               :boolean
+#  accepts_music_uploads :boolean          default(FALSE)
 #
 
 class Event < ActiveRecord::Base
@@ -34,6 +35,10 @@ class Event < ActiveRecord::Base
 
   def init
     self.visible = true if self.visible.nil?
+  end
+
+  def self.music_uploadable
+    visible.where(:accepts_music_uploads => true)
   end
 
   def self.visible

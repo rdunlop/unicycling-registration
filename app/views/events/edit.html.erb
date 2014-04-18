@@ -38,6 +38,11 @@
     </tr>
 
     <tr>
+      <td><%= f.label :accepts_music_uploads %></td>
+      <td><%= f.check_box :accepts_music_uploads %></td>
+    </tr>
+
+    <tr>
       <th class="center" colspan="2">Event Choices</th>
     </tr>
     <%= f.fields_for :event_choices do |ec| %>

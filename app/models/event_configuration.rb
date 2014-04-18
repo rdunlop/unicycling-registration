@@ -31,6 +31,7 @@
 #  style_name                 :string(255)
 #  has_online_waiver          :boolean
 #  online_waiver_text         :text
+#  music_submission_end_date  :date
 #
 
 class EventConfiguration < ActiveRecord::Base

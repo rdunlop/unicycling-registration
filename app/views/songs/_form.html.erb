@@ -12,7 +12,7 @@
   <% end %>
   <div class="field">
     <%= f.label :event %><br>
-    <%= f.collection_select :event_id, Event.visible, :id, :name %>
+    <%= f.collection_select :event_id, Event.music_uploadable, :id, :name %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
