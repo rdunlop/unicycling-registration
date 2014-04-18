@@ -27,10 +27,15 @@
          <% end %>
        </table>
        <% if can? :create, Song %>
-         <div class="music_info">
-           To upload music, please <%= link_to "Click Here", registrant_songs_path(@registrant) %>
-
-         </div>
+         <% if @registrant.new_record? %>
+           <div class="music_info">
+             Once you have created your registration, please return to this page to upload music.
+           </div>
+         <% else %>
+           <div class="music_info">
+             To upload music, please <%= link_to "Click Here", registrant_songs_path(@registrant) %>
+           </div>
+         <% end %>
        <% end %>
      </div>
    <% end %>

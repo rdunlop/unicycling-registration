@@ -20,7 +20,8 @@ shared_context 'basic event configuration' do
   before :each do
     FactoryGirl.create(:wheel_size_24)
     FactoryGirl.create(:wheel_size_20)
-    FactoryGirl.create(:event_configuration, :start_date => Date.today + 6.months, :iuf => true, :usa => false, :test_mode => false)
+    FactoryGirl.create(:event_configuration, :start_date => Date.today + 6.months,
+                       :iuf => true, :usa => false, :test_mode => false, :music_submission_end_date => Date.today + 2.months)
     FactoryGirl.create(:registration_period, :start_date => Date.today - 1.month, :end_date => Date.today + 1.month)
     FactoryGirl.create(:event, :name => "100m")
   end
