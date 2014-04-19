@@ -9,28 +9,6 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
   # ####################################################################
   # determining the place points for this score (by-judge)
 
-  def calc_place(score)
-    @calc_place ||= {}
-    unless @calc_place[score.id].nil?
-      return @calc_place[score.id]
-    end
-    unless score.valid?
-      return 0
-    end
-
-    my_place = 1
-    score.judge.get_scores.each do |each_score|
-      # Lower is better
-      if each_score.total < score.total
-        my_place = my_place + 1
-      end
-    end
-    @calc_place[score.id] = my_place
-  end
-
-
-
-
   # ####################################################################
   #   BY EVENT (all scores, all judges)
   # ####################################################################
@@ -46,9 +24,10 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
     my_points = total_points(competitor)
     total_points_per_competitor     = competitor.competition.competitors.map { |comp| total_points(comp) }
 
+    my_tie_break_points = 0
     tie_break_points_per_competitor = competitor.competition.competitors.map { |comp| 0 }
 
-    my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor)
+    my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor, false)
 
     @place[competitor.id] = my_place
   end

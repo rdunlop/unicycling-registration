@@ -43,10 +43,21 @@ module JudgeScoreable
     end
   end
 
+  def lower_is_better
+    case judge_type.event_class
+    when "Freestyle"
+      false
+    when "Street"
+      true
+    when "Flatland"
+      false
+    end
+  end
+
   def new_calc_place(score, scores)
     my_place = 1
     scores.each do |each_score|
-      if each_score > score
+      if (lower_is_better && each_score < score) || (!lower_is_better && score < each_score)
         my_place = my_place + 1
       end
     end

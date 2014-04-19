@@ -11,20 +11,17 @@ describe StreetCompScoreCalculator do
       @jt = @judge.judge_type
       @jt.event_class = "Street"
       @jt.save!
-      @score1 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp1, :val_1 => 1, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-      @score2 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2, :val_1 => 5, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-      @score3 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp3, :val_1 => 10, :val_2 => 0, :val_3 => 0, :val_4 => 0)
+      @score1 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp1, :val_1 => 1)
+      @score2 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2, :val_1 => 5)
+      @score3 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp3, :val_1 => 10)
       @calc = StreetCompScoreCalculator.new(@competition)
     end
-    it "should be able to calculate on an invalid score" do
-        @calc.calc_place(@comp1.scores.new).should == 0
+    it "should be able to calculate places" do
+        @calc.place(@comp1).should == 1
+        @calc.place(@comp2).should == 2
+        @calc.place(@comp3).should == 3
     end
 
-    it "should set the calc_placing_points according to scores Total" do
-      @calc.calc_placing_points(@score1).should == 10
-      @calc.calc_placing_points(@score2).should == 7
-      @calc.calc_placing_points(@score3).should == 5
-    end
     it "should have real total_points (with 1 judge)" do
       @calc.total_points(@score1.competitor).should == 10
       @calc.total_points(@score2.competitor).should == 7
@@ -37,19 +34,10 @@ describe StreetCompScoreCalculator do
         @comp6 = FactoryGirl.create(:event_competitor, :competition => @competition)
         @comp7 = FactoryGirl.create(:event_competitor, :competition => @competition)
 
-        @score4 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp4, :val_1 => 7, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-        @score5 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp5, :val_1 => 6, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-        @score6 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp6, :val_1 => 8, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-        @score7 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp7, :val_1 => 3, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-      end
-      it "can calculate the place for each score" do
-        @calc.calc_placing_points(@score1).should == 10 # 10
-        @calc.calc_placing_points(@score2).should == 5 # 5
-        @calc.calc_placing_points(@score3).should == 0 # 1
-        @calc.calc_placing_points(@score4).should == 2 # 3
-        @calc.calc_placing_points(@score5).should == 3 # 4
-        @calc.calc_placing_points(@score6).should == 1 # 2
-        @calc.calc_placing_points(@score7).should == 7 # 7
+        @score4 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp4, :val_1 => 7)
+        @score5 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp5, :val_1 => 6)
+        @score6 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp6, :val_1 => 8)
+        @score7 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp7, :val_1 => 3)
       end
       it "can place the competitors" do
         @calc.place(@comp1).should == 1
@@ -64,40 +52,22 @@ describe StreetCompScoreCalculator do
 
     describe "when calculating ties" do
       before(:each) do
-        @score4 = FactoryGirl.create(:score, :judge => @judge, :val_1 => 5, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-      end
-      it "gives both 2nd places 2.5 points" do
-        @calc.ties(@score2).should == 2
+        @comp4 = FactoryGirl.create(:event_competitor, :competition => @competition)
+        @score4 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp4, :val_1 => 5)
       end
       it "should calculate the places" do
-        @calc.calc_place(@score1).should == 1
-        @calc.calc_place(@score2).should == 2
-        @calc.calc_place(@score4).should == 2
-        @calc.calc_place(@score3).should == 4
+        @calc.place(@comp1).should == 1
+        @calc.place(@comp2).should == 2
+        @calc.place(@comp4).should == 2
+        @calc.place(@comp3).should == 4
       end
     end
     describe "and there are 2 judges" do
-      before(:each) do 
+      before(:each) do
         @judge2 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
-        @score2_1 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score1.competitor, :val_1 => 1, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-        @score2_2 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score2.competitor, :val_1 => 10, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-        @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 7, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-      end
-      it "calculates the 2nd judges points correctly" do
-        @calc.calc_placing_points(@score2_1).should == 10
-        @calc.calc_placing_points(@score2_2).should == 5
-        @calc.calc_placing_points(@score2_3).should == 7
-      end
-
-      it "determines the highest place ranked" do
-        @calc.highest_score(@score1.competitor).should == 10 # judge1
-        @calc.highest_score(@score2.competitor).should == 7 # by judge2
-        @calc.highest_score(@score3.competitor).should == 7 # by judge1
-      end
-      it "determines the lowest place ranked" do
-        @calc.lowest_score(@score1.competitor).should == 10 # by judge 2
-        @calc.lowest_score(@score2.competitor).should == 5 # by judge1
-        @calc.lowest_score(@score3.competitor).should == 5 # by judge2
+        @score2_1 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score1.competitor, :val_1 => 1)
+        @score2_2 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score2.competitor, :val_1 => 10)
+        @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 7)
       end
 
       it "has values for the total placing points, NOT subtracting high and low (only 2 judges)" do
@@ -109,9 +79,9 @@ describe StreetCompScoreCalculator do
       describe "with a 3rd judge's scores" do
         before(:each) do
           @judge3 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
-          @score3_1 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score1.competitor, :val_1 => 1, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-          @score3_2 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score2.competitor, :val_1 => 5, :val_2 => 0, :val_3 => 0, :val_4 => 0)
-          @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 6, :val_2 => 0, :val_3 => 0, :val_4 => 0)
+          @score3_1 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score1.competitor, :val_1 => 1)
+          @score3_2 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score2.competitor, :val_1 => 5)
+          @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 6)
         end
         it "has non-zero placing points" do
             @calc.total_points(@score1.competitor).should == 30  # 10,10,10 

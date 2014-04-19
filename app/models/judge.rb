@@ -52,16 +52,8 @@ class Judge < ActiveRecord::Base
         name + "(" + judge_type.to_s + ")"
     end
 
-    def scores_by_event_class
-        if competition.event_class == "Street"
-            self.street_scores
-        else
-            self.scores
-        end
-    end
-
     def score_totals
-      scores_by_event_class.map { |s| s.total }
+      scores.map { |s| s.total }
     end
 
     # retrieve my judged score for the given competitor

@@ -70,4 +70,26 @@ describe JudgeType do
     jt.boundary_calculation_enabled = true
     jt.valid?.should == true
   end
+
+  it "can convert places into points" do
+    jt = FactoryGirl.build_stubbed(:judge_type)
+    jt.event_class = "Street"
+    expect(jt.convert_place_to_points(1,0)).to be(10.0)
+    expect(jt.convert_place_to_points(2,0)).to be(7.0)
+    expect(jt.convert_place_to_points(4,2)).to be(2.0)
+    expect(jt.convert_place_to_points(7,0)).to be(0.0)
+    expect(jt.convert_place_to_points(7,1)).to be(0.0)
+  end
+  it "can convert places into points" do
+    jt = FactoryGirl.build_stubbed(:judge_type)
+    jt.event_class = "Flatland"
+    expect(jt.convert_place_to_points(1,0)).to be(1.0)
+  end
+  it "can convert places into points" do
+    jt = FactoryGirl.build_stubbed(:judge_type)
+    jt.event_class = "Freestyle"
+    expect(jt.convert_place_to_points(1,0)).to be(1.0)
+    expect(jt.convert_place_to_points(2,0)).to be(2.0)
+    expect(jt.convert_place_to_points(2,1)).to be(2.5)
+  end
 end

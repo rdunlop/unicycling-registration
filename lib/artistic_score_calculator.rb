@@ -39,9 +39,6 @@ class ArtisticScoreCalculator
           end
         end
       end
-      if my_points == 0
-        my_place = 0
-      end
       my_place
     end
 
@@ -59,6 +56,9 @@ class ArtisticScoreCalculator
       tie_break_points_per_competitor = competitor.competition.competitors.map { |comp| total_points(comp, jt) }
 
       my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor)
+      if my_points == 0
+        my_place = 0
+      end
 
       @place[competitor.id] = my_place
     end

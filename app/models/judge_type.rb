@@ -63,7 +63,7 @@ class JudgeType < ActiveRecord::Base
 
     total_points = 0
     (ties + 1).times do
-      total_points = total_points + (place < 7 ? points[place - 1] : 0)
+      total_points +=  points[place - 1] unless points[place - 1].nil?
       place = place + 1
     end
     (total_points * 1.0) / (ties + 1)

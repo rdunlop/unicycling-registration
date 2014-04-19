@@ -9,6 +9,8 @@ describe FlatlandScoreCalculator do
       @comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
       @judge = FactoryGirl.create(:judge, :competition => @competition)
       @jt = @judge.judge_type
+      @jt.event_class = "Flatland"
+      @jt.save!
       @score1 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp1, :val_1 => 10, :val_2 => 0, :val_3 => 0, :val_4 => 1)
       @score2 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2, :val_1 => 5, :val_2 => 0, :val_3 => 0, :val_4 => 1)
       @score3 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp3, :val_1 => 0, :val_2 => 0, :val_3 => 0, :val_4 => 1)

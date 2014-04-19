@@ -20,14 +20,6 @@ describe Score do
   let(:judge) { FactoryGirl.build_stubbed(:judge) }
   let(:subject) { FactoryGirl.build_stubbed(:score, :val_1 => 10, :judge => judge) }
 
-  describe "when calculating the placing points" do
-    it { subject.new_calc_placing_points(1, 0).should == 1 }
-    it { subject.new_calc_placing_points(1, 1).should == 1.5 }
-    it { subject.new_calc_placing_points(2, 0).should == 2 }
-    it { subject.new_calc_placing_points(2, 1).should == 2.5 }
-    it { subject.new_calc_placing_points(2, 2).should == 3 }
-  end
-
   describe "when the score is invalid" do
     before(:each) do
       allow(subject).to receive(:invalid?).and_return(true)
