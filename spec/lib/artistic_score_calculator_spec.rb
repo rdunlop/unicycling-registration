@@ -186,13 +186,13 @@ describe ArtisticScoreCalculator do
             end
 
             it "has non-zero placing points for correct judge_type" do
-              @calc.total_points(@score1.competitor, @judge1.judge_type).should == 2.0
+              @calc.total_points(@score1.competitor, @judge1.judge_type).should == 1.0
               @calc.total_points(@score2.competitor, @judge1.judge_type).should == 2.5
-              @calc.total_points(@score3.competitor, @judge1.judge_type).should == 4.5
+              @calc.total_points(@score3.competitor, @judge1.judge_type).should == 2.5
 
-              @calc.total_points(@score1.competitor, @judge4.judge_type).should == 6.0
-              @calc.total_points(@score2.competitor, @judge4.judge_type).should == 6.0
-              @calc.total_points(@score3.competitor, @judge4.judge_type).should == 2.0
+              @calc.total_points(@score1.competitor, @judge4.judge_type).should == 3.0
+              @calc.total_points(@score2.competitor, @judge4.judge_type).should == 2.0
+              @calc.total_points(@score3.competitor, @judge4.judge_type).should == 1.0
             end
             it "has total_points for both judge_types, after eliminating high-low from each type" do
               @calc.total_points(@score1.competitor).should == 8.0

@@ -96,7 +96,7 @@ class ArtisticScoreCalculator
           total = total_points_for_judge_type(competitor, judge_type)
         end
       else
-          total = total_points_for_judge_type(competitor, judge_type)
+        total = total_points_for_judge_type(competitor, judge_type)
       end
 
       if judge_type.nil?
@@ -156,59 +156,10 @@ same place.
     end
 
     def highest_score(competitor, judge_type = nil)
-      if @unicon_scoring
-        get_placing_points_for_judge_type(competitor, judge_type).max
-      else
-        # determine the score-to-be-eliminated
-        #  and then determine if the chosen judge_type has the first occurrence of that score
-        #  and if so, return it, otherwise, don't
-
-        scores = competitor.scores
-        placing_points = scores.map {|s| s.placing_points }
-        max = placing_points.max
-
-        if judge_type.nil?
-          max
-        else
-          scores = competitor.scores
-          scores.each do |s|
-            if s.placing_points == max
-                if judge_type == s.judge.judge_type
-                    return max
-                else
-                    return 0
-                end
-            end
-          end
-        end
-      end
+      get_placing_points_for_judge_type(competitor, judge_type).max
     end
 
     def lowest_score(competitor, judge_type = nil)
-      if @unicon_scoring
-        get_placing_points_for_judge_type(competitor, judge_type).min
-      else
-        # determine the score-to-be-eliminated
-        #  and then determine if the chosen judge_type has the first occurrence of that score
-        #  and if so, return it, otherwise, don't
-        scores = competitor.scores
-        scores = scores.map {|s| s.placing_points }
-        min = scores.min
-
-        if judge_type.nil?
-          min
-        else
-          scores = competitor.scores
-          scores.each do |s|
-            if s.placing_points == min
-                if judge_type == s.judge.judge_type
-                    return min
-                else
-                    return 0
-                end
-            end
-          end
-        end
-      end
+      get_placing_points_for_judge_type(competitor, judge_type).min
     end
 end

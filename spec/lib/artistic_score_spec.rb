@@ -27,7 +27,7 @@ def comp(competitor_name)
 end
 
 describe ArtisticScoreCalculator do
-  let(:subject) { ArtisticScoreCalculator.new(competition, true) }
+  let(:subject) { ArtisticScoreCalculator.new(competition, false) }
   let(:competitors) { {} }
   let(:competition) { FactoryGirl.build_stubbed(:competition) }
   let(:pres_type) { FactoryGirl.build_stubbed(:judge_type, :name => "Presentation") }
