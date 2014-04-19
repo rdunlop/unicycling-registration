@@ -7,25 +7,34 @@ class ArtisticScoreCalculator
 
     def update_all_places
       @competition.competitors.each do |competitor|
-        place(competitor)
+        res  = place(competitor)
+        competitor.place = res
+        competitor.overall_place = res
       end
     end
 
+    def compared_score_is_better(my_score, compared_score, lower_is_better)
+      if lower_is_better
+        compared_score < my_score
+      else
+        compared_score > my_score
+      end
+    end
     # ####################################################################
     #   BY EVENT (all scores, all judges)
     # ####################################################################
     #
     # this should be in "Competitor", but I'm putting here because
     # I don't want to clutter Competitor (which is not always Score-based)
-    def new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor)
+    def new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor, lower_numbers_are_better = true)
       my_place = 1
       total_points_per_competitor.each_with_index do |comp_points, index|
         next if comp_points == 0
 
-        if comp_points < my_points
+        if compared_score_is_better(my_points, comp_points, lower_numbers_are_better)
           my_place = my_place + 1
         elsif comp_points == my_points
-          if tie_break_points_per_competitor[index] < my_tie_break_points
+          if compared_score_is_better(my_tie_break_points, tie_break_points_per_competitor[index], lower_numbers_are_better)
             my_place = my_place + 1
           end
         end
@@ -51,9 +60,7 @@ class ArtisticScoreCalculator
 
       my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor)
 
-      #competitor.place = my_place
-      #competitor.overall_place = my_place
-      #@place[competitor.id] = my_place
+      @place[competitor.id] = my_place
     end
 
     def get_placing_points_for_judge_type(competitor, judge_type)
@@ -93,7 +100,7 @@ class ArtisticScoreCalculator
             total += total_points_for_judge_type(competitor, jt)
           end
         else
-          total = total_points_for_judge_type(competitor, judge_type)
+          total = total_points_for_judge_type(competitor, nil)
         end
       else
         total = total_points_for_judge_type(competitor, judge_type)

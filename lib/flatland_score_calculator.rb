@@ -4,15 +4,15 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
     #   BY SCORE (JUDGE)
     # ####################################################################
     # determining the place points for this score (by-judge)
-    
-    def calc_placing_points(score)
-        @calc_points ||= {}
-        unless @calc_points[score.id].nil?
-            return @calc_points[score.id]
-        end
 
-        @calc_points[score.id] = score.total.to_i
+  def get_placing_points_for_judge_type(competitor, judge_type)
+    if judge_type.nil?
+      scores = competitor.scores
+    else
+      scores = competitor.scores.select {|s| judge_type == s.judge_type }
     end
+    scores.map {|s| s.total.to_i }
+  end
 
     # ####################################################################
     #   BY EVENT (all scores, all judges)
@@ -20,23 +20,22 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
     #
     # this should be in "Competitor", but I'm putting here because
     # I don't want to clutter Competitor (which is not always Score-based)
+    #
     def place(competitor)
-
-      my_place = 1
-      my_points = total_points(competitor)
-      competitor.competition.competitors.each do |comp|
-        comp_points = total_points(comp)
-        if comp_points > my_points # XXX replace with helper function?
-            my_place = my_place + 1
-        elsif comp_points == my_points
-           if comp != competitor
-               if total_last_trick_points(comp, nil) > total_last_trick_points(competitor, nil)
-                   my_place = my_place + 1
-               end
-           end
-        end
+      @place ||= {}
+      unless @place[competitor.id].nil?
+        return @place[competitor.id]
       end
-      my_place
+
+      my_points = total_points(competitor)
+      total_points_per_competitor     = competitor.competition.competitors.map { |comp| total_points(comp) }
+
+      my_tie_break_points = total_last_trick_points(competitor, nil)
+      tie_break_points_per_competitor = competitor.competition.competitors.map { |comp|  total_last_trick_points(comp, nil) }
+
+      my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor, false)
+
+      @place[competitor.id] = my_place
     end
 
     # the last_trick points are based on the judges that remain. (the judges that remain are calculated on 'Total')
