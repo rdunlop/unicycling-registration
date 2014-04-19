@@ -3,30 +3,6 @@ require 'spec_helper'
 describe ArtisticScoreCalculator do
   let(:competition) { FactoryGirl.build_stubbed(:competition) }
   subject { ArtisticScoreCalculator.new(competition) }
-  describe "when calculating the placement from multiple scores" do
-    it { subject.new_calc_place(10, [10,5,0]).should == 1 }
-    it { subject.new_calc_place(5 , [10,5,0]).should == 2 }
-    it { subject.new_calc_place(0 , [10,5,0]).should == 3 }
-    describe "when there are ties" do
-      it { subject.new_calc_place(5 , [10,5,5,0]).should == 2 }
-      it { subject.new_calc_place(0 , [10,5,5,0]).should == 4 }
-    end
-  end
-
-  describe "when calculating the number of ties" do
-    it { subject.new_ties(1, [1]).should == 1 }
-    it { subject.new_ties(1, [1, 1]).should == 2 }
-    it { subject.new_ties(1, [1, 2]).should == 1 }
-    it { subject.new_ties(1, [2, 1, 2]).should == 1 }
-  end
-
-  describe "when calculating the placing points" do
-    it { subject.new_calc_placing_points(1, 1).should == 1 }
-    it { subject.new_calc_placing_points(1, 2).should == 1.5 }
-    it { subject.new_calc_placing_points(2, 1).should == 2 }
-    it { subject.new_calc_placing_points(2, 2).should == 2.5 }
-    it { subject.new_calc_placing_points(2, 3).should == 3 }
-  end
 
   describe "when determining place from points" do
     let(:first) { 1 }
@@ -41,12 +17,6 @@ describe ArtisticScoreCalculator do
     # if the overall scores are tied, fall back to the secondary scores for tie-breaker
     it { subject.new_place(1.5, [1.5, 1.5], 1, [1, 2]).should == 1 }
     it { subject.new_place(1.5, [1.5, 1.5], 2, [1, 2]).should == 2 }
-  end
-  describe "when calculating highest score" do
-    #it { subject. }
-  end
-  describe "when calculating lowest score" do
-    
   end
 end
 
@@ -66,56 +36,19 @@ describe ArtisticScoreCalculator do
       @score2 = FactoryGirl.create(:score, :judge => @judge1, :competitor => @comp2, :val_1 => 5)
       @score3 = FactoryGirl.create(:score, :judge => @judge1, :competitor => @comp3, :val_1 => 0)
     end
-    it "should be able to calculate on an invalid score" do
-        @calc.calc_place(@comp1.scores.new).should == 0
-    end
 
-    it "should set the calc_placing_points according to scores" do
-      @calc.calc_placing_points(@score1).should == 1
-      @calc.calc_placing_points(@score2).should == 2
-      @calc.calc_placing_points(@score3).should == 3
-    end
     it "should have total_points of 0 (with 1 judge)" do
       @calc.total_points(@score1.competitor).should == 0.0
       @calc.total_points(@score2.competitor).should == 0.0
       @calc.total_points(@score3.competitor).should == 0.0
     end
-    it "should calculate the place as empty" do
-      @calc.calc_place(@score1).should == 1
-      @calc.calc_place(@score2).should == 2
-      @calc.calc_place(@score3).should == 3
-    end
 
-    describe "when calculating ties" do
-      before(:each) do
-        @score4 = FactoryGirl.create(:score, :judge => @judge1, :val_1 => 5)
-      end
-      it "gives both 2nd places 2.5 points" do
-        @calc.ties(@score2).should == 2
-        @calc.calc_placing_points(@score2).should == 2.5
-        @calc.calc_placing_points(@score4).should == 2.5
-      end
-      it "should calculate the places" do
-        @calc.calc_place(@score1).should == 1
-        @calc.calc_place(@score2).should == 2
-        @calc.calc_place(@score4).should == 2
-        @calc.calc_place(@score3).should == 4
-      end
-      it "gives the 4th place 4 points" do
-        @calc.calc_placing_points(@score3).should == 4
-      end
-    end
     describe "and there are 2 judges" do
-      before(:each) do 
+      before(:each) do
         @judge2 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
         @score2_1 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score1.competitor, :val_1 => 9)
         @score2_2 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score2.competitor, :val_1 => 0)
         @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 3)
-      end
-      it "calculates the 2nd judges points correctly" do
-        @calc.calc_placing_points(@score2_1).should == 1
-        @calc.calc_placing_points(@score2_2).should == 3
-        @calc.calc_placing_points(@score2_3).should == 2
       end
 
       it "determines the highest place ranked" do
@@ -241,23 +174,15 @@ describe ArtisticScoreCalculator do
   
               #eliminate 1,3  2,3  3,1
             it "calculates the highest_score correctly by judge_type" do
-              @calc.highest_score(@score1.competitor, @judge1.judge_type).should == 0.0
-              @calc.highest_score(@score2.competitor, @judge1.judge_type).should == 3.0
-              @calc.highest_score(@score3.competitor, @judge1.judge_type).should == 3.0
-
-              @calc.highest_score(@score1.competitor, @judge4.judge_type).should == 3.0
-              @calc.highest_score(@score2.competitor, @judge4.judge_type).should == 0.0
-              @calc.highest_score(@score3.competitor, @judge4.judge_type).should == 0.0
+              @calc.highest_score(@score1.competitor, nil).should == 3.0
+              @calc.highest_score(@score2.competitor, nil).should == 3.0
+              @calc.highest_score(@score3.competitor, nil).should == 3.0
             end
 
             it "calculates the lowest_score correctly by judge_type" do
-              @calc.lowest_score(@score1.competitor, @judge1.judge_type).should == 1.0
-              @calc.lowest_score(@score2.competitor, @judge1.judge_type).should == 2.0
-              @calc.lowest_score(@score3.competitor, @judge1.judge_type).should == 0.0
-
-              @calc.lowest_score(@score1.competitor, @judge4.judge_type).should == 0.0
-              @calc.lowest_score(@score2.competitor, @judge4.judge_type).should == 0.0
-              @calc.lowest_score(@score3.competitor, @judge4.judge_type).should == 1.0
+              @calc.lowest_score(@score1.competitor, nil).should == 1.0
+              @calc.lowest_score(@score2.competitor, nil).should == 2.0
+              @calc.lowest_score(@score3.competitor, nil).should == 1.0
             end
 
             it "has non-zero placing points for correct judge_type" do
@@ -282,32 +207,6 @@ describe ArtisticScoreCalculator do
           end
         end
       end
-    end
-  end
-
-  describe "STREET Score when calculating the placement points of an event" do
-    before(:each) do
-      @competition = FactoryGirl.create(:street_competition)
-      comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
-      comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
-      comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
-      @judge1 = FactoryGirl.create(:judge, :competition => @competition)
-      @jt = @judge1.judge_type
-      @score1 = FactoryGirl.create(:street_score, :judge => @judge1, :competitor => comp1, :val_1 => 10)
-      @score2 = FactoryGirl.create(:street_score, :judge => @judge1, :competitor => comp2, :val_1 => 5)
-      @score3 = FactoryGirl.create(:street_score, :judge => @judge1, :competitor => comp3, :val_1 => 0)
-      @calc = ArtisticScoreCalculator.new(@competition)
-      @comp1 = comp1
-    end
-    it "should be able to calculate on an invalid score" do
-        @calc.calc_place(@comp1.street_scores.new).should == 0
-    end
-
-    it "should set the calc_placing_points according to scores" do
-      @calc.calc_placing_points(@score1).should == 1
-    end
-    it "should determine no ties" do
-      @calc.ties(@score1).should == 1
     end
   end
 end

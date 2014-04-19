@@ -17,31 +17,121 @@
 require 'spec_helper'
 
 describe Score do
+  let(:judge) { FactoryGirl.build_stubbed(:judge) }
+  let(:subject) { FactoryGirl.build_stubbed(:score, :val_1 => 10, :judge => judge) }
+
+  describe "when calculating the placing points" do
+    it { subject.new_calc_placing_points(1, 0).should == 1 }
+    it { subject.new_calc_placing_points(1, 1).should == 1.5 }
+    it { subject.new_calc_placing_points(2, 0).should == 2 }
+    it { subject.new_calc_placing_points(2, 1).should == 2.5 }
+    it { subject.new_calc_placing_points(2, 2).should == 3 }
+  end
+
+  describe "when the score is invalid" do
+    before(:each) do
+      allow(subject).to receive(:invalid?).and_return(true)
+    end
+
+    it "says that it has a judge_place of 0" do
+      expect(subject.judged_place).to eq(0)
+    end
+  end
+
+  describe "ties" do
+    before :each do
+      allow(subject).to receive(:ties).and_return(1)
+      allow(subject).to receive(:judged_place).and_return(2)
+    end
+    it "calculates the placing points for this tie score" do
+     expect(subject.placing_points).to eq(2.5)
+    end
+  end
+
+  describe "with multiple scores" do
+    before :each do
+      allow(judge).to receive(:score_totals).and_return([0, 5, 10, 5])
+    end
+
+    describe "the lowest scoring competitor" do
+      before :each do
+        allow(subject).to receive(:total).and_return(0)
+      end
+
+      it "calculates the proper placement of each score" do
+        expect(subject.judged_place).to eq(4)
+      end
+
+      it {
+      expect(subject.ties).to eq(0)
+      }
+
+      it "has the lowest (after ties) placing points" do
+        expect(subject.placing_points).to eq(4)
+      end
+    end
+
+    describe "the highest scoring competitor" do
+      before :each do
+        allow(subject).to receive(:total).and_return(10)
+      end
+
+      it {
+      expect(subject.judged_place).to eq(1)
+      }
+
+      it "has 1 placing point (highest)" do
+        expect(subject.placing_points).to eq(1)
+      end
+    end
+    describe "the tie in the middle" do
+      before :each do
+        allow(subject).to receive(:total).and_return(5)
+      end
+
+      it {
+      expect(subject.judged_place).to eq(2)
+      }
+
+      it "has a tie" do
+        expect(subject.ties).to eq(1)
+      end
+
+      it "splits the placing points" do
+        expect(subject.placing_points).to eq(2.5)
+      end
+    end
+  end
+
+  describe "when calculating totals" do
+    it "Must have a value above 0" do
+      subject.val_1 = -1
+      subject.val_2 = -1
+      subject.valid?.should == false
+    end
+
+    it "should total the values to create the Total" do
+      subject.val_1 = 1.0
+      subject.val_2 = 2.0
+      subject.val_3 = 3.0
+      subject.val_4 = 4.0
+
+      subject.total.should == 10
+    end
+  end
+end
+
+describe Score do
   before (:each) do
     @judge = FactoryGirl.create(:judge)
   end
-  it "Must have a value above 0" do
-    score = FactoryGirl.build(:score)
-    score.val_1 = -1
-    score.val_2 = -1
-    score.valid?.should == false
-  end
 
-  it "should total the values to create the Total" do
-    score = FactoryGirl.build(:score)
-    score.val_1 = 1.0
-    score.val_2 = 2.0
-    score.val_3 = 3.0
-    score.val_4 = 4.0
-
-    score.total.should == 10
-  end
   it "should not be able to have the same score/judge created twice" do
     score = FactoryGirl.create(:score)
 
     score2 = FactoryGirl.build(:score, :judge => score.judge, :competitor => score.competitor)
 
-    score2.save.should == false
+    score2.valid?.should == false
   end
 
   it "should store the judge" do

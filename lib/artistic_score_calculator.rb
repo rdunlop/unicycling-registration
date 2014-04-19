@@ -87,11 +87,14 @@ class ArtisticScoreCalculator
       end
 
       if judge_type.nil?
-          #total = 0
-          #competitor.competition.judge_types.uniq.each do |jt|
-          #  total += total_points_for_judge_type(competitor, jt)
-          #end
+        if @unicon_scoring
+          total = 0
+          competitor.competition.judge_types.uniq.each do |jt|
+            total += total_points_for_judge_type(competitor, jt)
+          end
+        else
           total = total_points_for_judge_type(competitor, judge_type)
+        end
       else
           total = total_points_for_judge_type(competitor, judge_type)
       end
@@ -163,7 +166,6 @@ same place.
         scores = competitor.scores
         placing_points = scores.map {|s| s.placing_points }
         max = placing_points.max
-        return max
 
         if judge_type.nil?
           max
@@ -192,7 +194,6 @@ same place.
         scores = competitor.scores
         scores = scores.map {|s| s.placing_points }
         min = scores.min
-        return min
 
         if judge_type.nil?
           min

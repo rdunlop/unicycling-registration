@@ -44,18 +44,6 @@ describe ArtisticScoreCalculator do
       allow(competition).to receive(:judge_types).and_return([pres_type, tech_type])
       allow(JudgeType).to receive(:find_by_name).with("Technical").and_return(tech_type)
     end
-=begin
-  given rider A has presentation scores 4 4 4 4 technical scores 4 4 4 4
-  given rider B has presentation scores 1 1 1 1 technical scores 1 1 1 1
-  given rider C has presentation scores 2 2 3 3 technical scores 2 3 2 3
-  given rider D has presentation scores 3 3 2 2 technical scores 3 2 3 2
-
-  rider A will have a total score of 24       # eliminated only 2 scores
-  rider A will have a presentation score of 8 # eliminated 2 presentation scores
-  rider A will have a technical score of 8    # eliminated 2 technical scores
-
-  rider A will be in place 4
-=end
 
     it "calculates the scores for A" do
       expect(subject.total_points(comp("A"))).to eq(24)

@@ -60,7 +60,7 @@ module JudgeScoreable
         ties = ties + 1
       end
     end
-    ties
+    ties - 1 # eliminate tie-with-self from scores
   end
 
   def ties # always has '1' tie...with itself
@@ -70,17 +70,20 @@ module JudgeScoreable
   end
 
   def judged_place
+    return 0 if invalid?
     scores_for_judge = judge.score_totals
     new_calc_place(total, scores_for_judge)
   end
 
   def new_calc_placing_points(my_place, num_ties)
-    total_placing_points = 0
+    # TODO Clean up this logic
+    total_placing_points = my_place
+    my_place += 1
     num_ties.times do
       total_placing_points = total_placing_points + my_place
       my_place = my_place + 1
     end
-    (total_placing_points * 1.0) / num_ties
+    (total_placing_points * 1.0) / (num_ties + 1)
   end
 
   def placing_points
