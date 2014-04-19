@@ -21,7 +21,6 @@ class Competitor < ActiveRecord::Base
 
     has_many :scores, :dependent => :destroy
     has_many :boundary_scores, :dependent => :destroy
-    has_many :street_scores, :dependent => :destroy
     has_many :standard_execution_scores, :dependent => :destroy
     has_many :standard_difficulty_scores, :dependent => :destroy
     has_many :distance_attempts, -> { order "distance DESC, id DESC" }, :dependent => :destroy

@@ -5,17 +5,17 @@ class StreetScoresController < ApplicationController
   def load_competition
     @judge = Judge.find(params[:judge_id])
     @competition = @judge.competition
-    @street_scores = @judge.street_scores.sort {|a, b| b.val_1 <=> a.val_1 }
+    @street_scores = @judge.scores.sort {|a, b| b.val_1 <=> a.val_1 }
   end
 
   def index
-    @score = @judge.street_scores.new
+    @score = @judge.scores.new
     @competitors = @competition.competitors
     authorize! :create, @score
   end
 
   def create
-    @score = StreetScore.new
+    @score = Score.new
     authorize! :create, @score
     cid = params[:competitor_id]
     eid = params[:external_id]
@@ -40,6 +40,9 @@ class StreetScoresController < ApplicationController
     end
     @score.judge = @judge
     @score.val_1 = params[:score]
+    @score.val_2 = 0
+    @score.val_3 = 0
+    @score.val_4 = 0
 
     respond_to do |format|
       if @score.save
@@ -54,7 +57,7 @@ class StreetScoresController < ApplicationController
   end
 
   def destroy
-    @score = StreetScore.find(params[:id])
+    @score = Score.find(params[:id])
     @judge = @score.judge
     authorize! :destroy, @score
 

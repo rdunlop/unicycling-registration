@@ -31,8 +31,8 @@ describe StreetScoresController do
     end
     describe "when returning a list of scores" do
         before(:each) do
-            @user_score1 = FactoryGirl.create(:street_score, :val_1 => 5, :judge => @judge, :competitor => @comp)
-            @user_score2 = FactoryGirl.create(:street_score, :val_1 => 6, :judge => @judge, :competitor => @comp2)
+            @user_score1 = FactoryGirl.create(:score, :val_1 => 5, :judge => @judge, :competitor => @comp)
+            @user_score2 = FactoryGirl.create(:score, :val_1 => 6, :judge => @judge, :competitor => @comp2)
         end
 
         it "should return them in descending order of val_1 points" do
@@ -47,34 +47,34 @@ describe StreetScoresController do
       it "creates a new Score" do
         expect {
           post :create, {:external_id => @comp.external_id, :competitor_id => "", :score => 5, :judge_id => @judge.id}
-        }.to change(StreetScore, :count).by(1)
+        }.to change(Score, :count).by(1)
       end
     end
     describe "with valid competitor_id" do
       it "creates a new Score" do
         expect {
           post :create, {:external_id => "", :competitor_id => @comp2.id, :score => 4, :judge_id => @judge.id}
-        }.to change(StreetScore, :count).by(1)
+        }.to change(Score, :count).by(1)
       end
     end
     describe "with both external_id and  competitor_id" do
       it "fails to create a new Score" do
         expect {
           post :create, {:external_id => @comp.external_id, :competitor_id => @comp2.external_id, :score => 4, :judge_id => @judge.id}
-        }.to change(StreetScore, :count).by(0)
+        }.to change(Score, :count).by(0)
         response.should render_template("index")
       end
     end
   end
   describe "DELETE destroy" do
     before(:each) do
-        @user_score1 = FactoryGirl.create(:street_score, :val_1 => 5, :judge => @judge, :competitor => @comp)
-        @user_score2 = FactoryGirl.create(:street_score, :val_1 => 6, :judge => @judge, :competitor => @comp2)
+        @user_score1 = FactoryGirl.create(:score, :val_1 => 5, :judge => @judge, :competitor => @comp)
+        @user_score2 = FactoryGirl.create(:score, :val_1 => 6, :judge => @judge, :competitor => @comp2)
     end
     it "should allow access to destroy" do
       expect {
         delete :destroy, {:id => @user_score1.to_param, :judge_id => @judge.id}
-      }.to change(StreetScore, :count).by(-1)
+      }.to change(Score, :count).by(-1)
     end
   end
 
@@ -83,7 +83,7 @@ describe StreetScoresController do
 
       before (:each) do
         # create score with existing current_user
-        @user_score = FactoryGirl.create(:street_score, :judge => @judge, :competitor => @comp)
+        @user_score = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp)
 
         # Change logged-in user
         sign_out @user

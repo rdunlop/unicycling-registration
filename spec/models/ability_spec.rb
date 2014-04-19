@@ -181,7 +181,6 @@ describe "Ability" do
     subject { @ability = Ability.new(@user) }
 
     it { should be_able_to(:create, Score) }
-    it { should be_able_to(:read, StreetScore) }
 
     describe "with a Competition" do
       before(:each) do
@@ -225,7 +224,6 @@ describe "Ability" do
 
     it { should be_able_to(:distance_attempts, @competition) }
     it { should be_able_to(:freestyle_scores, @competition) }
-    it { should be_able_to(:street_scores, @competition) }
     it { should be_able_to(:export_scores, @competition) }
     it { should be_able_to(:set_places, @competition) }
     it { should be_able_to(:lock, @competition) }

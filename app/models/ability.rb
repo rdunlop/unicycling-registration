@@ -36,18 +36,12 @@ class Ability
     can :read, Judge, :user_id => user.id
     # Freestyle
     can :create, Score
-    can [:read, :update], Score do |score|
+    can [:read, :update, :destroy], Score do |score|
       score.try(:user) == user
     end
 
     # Distance
     can :manage, DistanceAttempt
-
-    # Street
-    can :create, StreetScore
-    can [:read, :update, :destroy], StreetScore do |score|
-      score.try(:user) == user
-    end
 
     can :read, Competition
     can :create_scores, Competition do |competition|
@@ -76,7 +70,7 @@ class Ability
     can [:announcer, :heat_recording, :two_attempt_recording, :results], Competition do |comp|
       user.has_role? :chief_judge, comp.event
     end
-    can [:freestyle_scores, :street_scores, :distance_attempts,
+    can [:freestyle_scores, :distance_attempts,
       :export_scores, :set_places, :lock], Competition do |comp|
       user.has_role? :chief_judge, comp.event
       end

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "street_scores/index" do
   before(:each) do
-    @ss1 = FactoryGirl.create(:street_score)
-    @ss2 = FactoryGirl.create(:street_score)
+    @ss1 = FactoryGirl.create(:score)
+    @ss2 = FactoryGirl.create(:score)
     assign(:street_scores, [@ss1, @ss2])
     @ec = FactoryGirl.create(:competition)
     assign(:competition, @ec)
@@ -11,7 +11,7 @@ describe "street_scores/index" do
     @judge = FactoryGirl.create(:judge, :competition => @ec)
     assign(:judge, @judge)
     assign(:competitors, [])
-    assign(:score, FactoryGirl.build(:street_score))
+    assign(:score, FactoryGirl.build(:score))
   end
 
   it "renders a list of street_scores" do

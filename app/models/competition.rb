@@ -242,25 +242,8 @@ class Competition < ActiveRecord::Base
 
   # SCORE
   # determining the place points for this score (by-judge)
-  def score_judged_points(score)
-    score_calculator.calc_placing_points(score)
-  end
-
-  def score_judged_place(score)
-    place = score_calculator.calc_place(score)
-    if score.total.nil?
-      ""
-    else
-      place.to_s
-    end
-  end
-
   def tied(score)
-    if score_calculator.ties(score) > 1
-      true
-    else
-      false
-    end
+    score.ties != 0
   end
 
 

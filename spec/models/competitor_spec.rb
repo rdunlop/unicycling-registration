@@ -248,16 +248,6 @@ describe Competitor do
         BoundaryScore.count.should == 0
     end
   end
-  describe "with a street_score" do
-    it "should be createable from the competitor" do
-        @comp.street_scores.create.should be_a_new(StreetScore)
-    end
-    it "should be able to find associated street scores" do
-        ss = FactoryGirl.create(:street_score, :competitor => @comp)
-
-        @comp.street_scores.should == [ss]
-    end
-  end
   describe "with a distance attempt" do
     before(:each) do
       @da = DistanceAttempt.new

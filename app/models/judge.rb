@@ -19,7 +19,6 @@ class Judge < ActiveRecord::Base
 
     has_many :scores, -> {order("competitors.position").includes(:competitor) }, :dependent => :destroy
     has_many :boundary_scores, -> {order("competitors.position").includes(:competitor) }, :dependent => :destroy
-    has_many :street_scores, -> {order("competitors.position").includes(:competitor)}, :dependent => :destroy
     has_many :standard_execution_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, :dependent => :destroy
     has_many :standard_difficulty_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, :dependent => :destroy
     has_many :competitors, -> {order "position"}, :through => :competition
