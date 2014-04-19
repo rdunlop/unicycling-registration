@@ -14,7 +14,7 @@
 
 FactoryGirl.define do
   factory :street_score do
-    competitor { FactoryGirl.create(:event_competitor) }
+    association :competitor, :factory => :event_competitor
     judge # use FactoryGirl
     val_1 0.0
   end

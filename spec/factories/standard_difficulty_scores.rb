@@ -15,7 +15,7 @@
 
 FactoryGirl.define do
   factory :standard_difficulty_score do
-    competitor { FactoryGirl.create(:event_competitor) }
+    association :competitor, :factory => :event_competitor
     standard_skill_routine_entry # FactoryGirl
     judge # FactoryGirl
     devaluation 50

@@ -14,7 +14,7 @@
 
 FactoryGirl.define do
   factory :external_result do
-    competitor { FactoryGirl.create(:event_competitor) }
+    association :competitor, :factory => :event_competitor
     details "MyString"
     rank 1
   end

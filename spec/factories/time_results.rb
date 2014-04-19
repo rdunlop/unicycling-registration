@@ -16,7 +16,7 @@
 
 FactoryGirl.define do
   factory :time_result do
-    competitor { FactoryGirl.create(:event_competitor) }
+    association :competitor, :factory => :event_competitor
     disqualified false
     minutes 0
     seconds 0

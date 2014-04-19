@@ -25,7 +25,7 @@ FactoryGirl.define do
 
   factory :member, :class => Member do
     registrant
-    competitor {FactoryGirl.create(:event_competitor) }
+    association :competitor, :factory => :event_competitor
   end
 
 end

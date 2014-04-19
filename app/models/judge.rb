@@ -60,6 +60,10 @@ class Judge < ActiveRecord::Base
         end
     end
 
+    def score_totals
+      get_scores.map { |s| s.total }
+    end
+
     # retrieve my judged score for the given competitor
     def get_score(competitor)
         scores.where(:competitor_id => competitor.id).first

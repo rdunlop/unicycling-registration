@@ -1,76 +1,14 @@
 class ArtisticScoreCalculator
 
     def initialize(competition, unicon_scoring = true)
-        @competition = competition # should use this some where in the calculations?
-        @unicon_scoring = unicon_scoring # should do 'elimination' for each judge_type
+      @competition = competition # should use this some where in the calculations?
+      @unicon_scoring = unicon_scoring # should do 'elimination' for each judge_type
     end
 
     def update_all_places
       @competition.competitors.each do |competitor|
         place(competitor)
       end
-    end
-
-    # ####################################################################
-    #   BY SCORE (JUDGE)
-    # ####################################################################
-    # determining the place points for this score (by-judge)
-    def new_calc_placing_points(my_place, num_ties)
-      total_placing_points = 0
-      num_ties.times do
-        total_placing_points = total_placing_points + my_place
-        my_place = my_place + 1
-      end
-      (total_placing_points * 1.0) / num_ties
-    end
-
-    def calc_placing_points(score)
-      @calc_points ||= {}
-      unless @calc_points[score.id].nil?
-        return @calc_points[score.id]
-      end
-
-      my_place = calc_place(score)
-      @calc_points[score.id] = new_calc_placing_points(my_place, ties(score))
-    end
-
-    def new_ties(score, scores)
-      ties = 0
-      scores.each do |each_score|
-        if each_score == score
-          ties = ties + 1
-        end
-      end
-      ties
-    end
-
-    def ties(score) # always has '1' tie...with itself
-      # XXX refactor this redundant code:
-      scores_for_judge = score.judge.get_scores.map { |s| s.total }
-      new_ties(score.total, scores_for_judge)
-    end
-
-    def new_calc_place(score, scores)
-      my_place = 1
-      scores.each do |each_score|
-        if each_score > score
-          my_place = my_place + 1
-        end
-      end
-      my_place
-    end
-
-    def calc_place(score)
-        @calc_place ||= {}
-        unless @calc_place[score.id].nil?
-            return @calc_place[score.id]
-        end
-        unless score.valid?
-            return 0
-        end
-
-        scores_for_judge = score.judge.get_scores.map { |s| s.total }
-        @calc_place[score.id] = new_calc_place(score.total, scores_for_judge)
     end
 
     # ####################################################################
@@ -113,18 +51,18 @@ class ArtisticScoreCalculator
 
       my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor)
 
-      competitor.place = my_place
-      competitor.overall_place = my_place
-      @place[competitor.id] = my_place
+      #competitor.place = my_place
+      #competitor.overall_place = my_place
+      #@place[competitor.id] = my_place
     end
 
     def get_placing_points_for_judge_type(competitor, judge_type)
       if judge_type.nil?
         scores = competitor.scores
       else
-        scores = competitor.scores.select {|s| judge_type == s.judge.judge_type }
+        scores = competitor.scores.select {|s| judge_type == s.judge_type }
       end
-      scores.map {|s| calc_placing_points(s)}
+      scores.map {|s| s.placing_points }
     end
 
     def new_total_points(competitor)
@@ -149,10 +87,11 @@ class ArtisticScoreCalculator
       end
 
       if judge_type.nil?
-          total = 0
-          competitor.competition.judge_types.uniq.each do |jt|
-            total += total_points_for_judge_type(competitor, jt)
-          end
+          #total = 0
+          #competitor.competition.judge_types.uniq.each do |jt|
+          #  total += total_points_for_judge_type(competitor, jt)
+          #end
+          total = total_points_for_judge_type(competitor, judge_type)
       else
           total = total_points_for_judge_type(competitor, judge_type)
       end
@@ -222,15 +161,16 @@ same place.
         #  and if so, return it, otherwise, don't
 
         scores = competitor.scores
-        placing_points = scores.map {|s| calc_placing_points(s)}
+        placing_points = scores.map {|s| s.placing_points }
         max = placing_points.max
+        return max
 
         if judge_type.nil?
           max
         else
           scores = competitor.scores
           scores.each do |s|
-            if calc_placing_points(s) == max
+            if s.placing_points == max
                 if judge_type == s.judge.judge_type
                     return max
                 else
@@ -250,15 +190,16 @@ same place.
         #  and then determine if the chosen judge_type has the first occurrence of that score
         #  and if so, return it, otherwise, don't
         scores = competitor.scores
-        scores = scores.map {|s| calc_placing_points(s)}
+        scores = scores.map {|s| s.placing_points }
         min = scores.min
+        return min
 
         if judge_type.nil?
           min
         else
           scores = competitor.scores
           scores.each do |s|
-            if calc_placing_points(s) == min
+            if s.placing_points == min
                 if judge_type == s.judge.judge_type
                     return min
                 else
