@@ -9,6 +9,8 @@ describe StreetCompScoreCalculator do
       @comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
       @judge = FactoryGirl.create(:judge, :competition => @competition)
       @jt = @judge.judge_type
+      @jt.event_class = "Street"
+      @jt.save!
       @score1 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp1, :val_1 => 1, :val_2 => 0, :val_3 => 0, :val_4 => 0)
       @score2 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2, :val_1 => 5, :val_2 => 0, :val_3 => 0, :val_4 => 0)
       @score3 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp3, :val_1 => 10, :val_2 => 0, :val_3 => 0, :val_4 => 0)
@@ -27,16 +29,6 @@ describe StreetCompScoreCalculator do
       @calc.total_points(@score1.competitor).should == 10
       @calc.total_points(@score2.competitor).should == 7
       @calc.total_points(@score3.competitor).should == 5
-    end
-    it "should calculate the place as empty" do
-      @calc.calc_place(@score1).should == 1
-      @calc.calc_place(@score2).should == 2
-      @calc.calc_place(@score3).should == 3
-    end
-    it "should be able to 'place' even without enough judges" do
-      @calc.place(@score1.competitor).should == 1
-      @calc.place(@score2.competitor).should == 2
-      @calc.place(@score3.competitor).should == 3
     end
     describe "when there are more than 6 competitors" do
       before(:each) do

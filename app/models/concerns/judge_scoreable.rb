@@ -75,18 +75,7 @@ module JudgeScoreable
     new_calc_place(total, scores_for_judge)
   end
 
-  def new_calc_placing_points(my_place, num_ties)
-    # TODO Clean up this logic
-    total_placing_points = my_place
-    my_place += 1
-    num_ties.times do
-      total_placing_points = total_placing_points + my_place
-      my_place = my_place + 1
-    end
-    (total_placing_points * 1.0) / (num_ties + 1)
-  end
-
   def placing_points
-    new_calc_placing_points(judged_place, ties)
+    judge_type.convert_place_to_points(judged_place, ties)
   end
 end
