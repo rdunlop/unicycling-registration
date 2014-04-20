@@ -59,8 +59,6 @@ FactoryGirl.define do
       ws = WheelSize.find_by(:description => "24\" Wheel")
       if ws.present?
         reg.default_wheel_size = ws
-      else
-        allow(reg).to receive(:default_wheel_size).and_return(FactoryGirl.build_stubbed(:wheel_size_24))
       end
     end
   end

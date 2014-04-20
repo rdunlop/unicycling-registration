@@ -231,7 +231,7 @@ class Registrant < ActiveRecord::Base
 
   def check_default_wheel_size_for_age
     if self.age > 10
-      if self.default_wheel_size != WheelSize.find_by_description("24\" Wheel")
+      if default_wheel_size && self.default_wheel_size.description != "24\" Wheel"
         errors[:base] << "You must choose a wheel size of 24\" if you are > 10 years old"
       end
     end
