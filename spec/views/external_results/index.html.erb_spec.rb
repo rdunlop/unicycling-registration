@@ -10,6 +10,8 @@ describe "external_results/index" do
     assign(:external_results, @external_results)
     @external_result = FactoryGirl.build(:external_result)
     allow(@competition).to receive(:external_results).and_return(@external_results)
+    allow(@external_results[0].competitor).to receive(:place).and_return(1)
+    allow(@external_results[1].competitor).to receive(:place).and_return(2)
   end
 
   it "renders a list of external_results" do

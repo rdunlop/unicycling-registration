@@ -55,5 +55,8 @@ FactoryGirl.define do
         @ws24 = FactoryGirl.create(:wheel_size_24)
       end
     end
+    after :stub do |reg|
+      allow(reg).to receive(:default_wheel_size).and_return(FactoryGirl.build_stubbed(:wheel_size_24))
+    end
   end
 end
