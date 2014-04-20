@@ -3,6 +3,8 @@ require 'spec_helper'
 describe "events/show" do
   before(:each) do
     @event = FactoryGirl.create(:event, :name => "First name")
+    @comp = FactoryGirl.create(:competition, :event => @event)
+    @judge = FactoryGirl.create(:judge, :competition => @comp)
   end
 
   it "renders a list of categories" do
