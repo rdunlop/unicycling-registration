@@ -19,6 +19,7 @@ Registration-Related ToDo
 ----ROBIN's CURRENT LIST:
 
 Most Useful:
+- Add caching around scoring, judged_place, placing_points
 - Ensure that Boundary Score judging works (after the judgeable refactor, ties is probably broken)
 - determine how to deal with performance issues when sorting on cached field.
 - learn more about acts_as_list for position usage (for competitor#position)

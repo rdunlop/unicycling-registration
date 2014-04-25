@@ -40,7 +40,7 @@ class Judge < ActiveRecord::Base
     end
 
     def external_id
-        user.registrant_id
+        user.to_s
     end
 
     def name
@@ -52,11 +52,13 @@ class Judge < ActiveRecord::Base
     end
 
     def score_totals
-      scores.map { |s| s.total }
+      Rails.cache.fetch("/judge/#{id}-#{updated_at}/score_totals") do
+        scores.map { |s| s.total }
+      end
     end
 
     # retrieve my judged score for the given competitor
     def get_score(competitor)
-        scores.where(:competitor_id => competitor.id).first
+      scores.where(:competitor_id => competitor.id).first
     end
 end
