@@ -430,7 +430,7 @@ class Registrant < ActiveRecord::Base
     user.email
   end
 
-  delegate :country_code, :country, to: :contact_detail
+  delegate :country_code, :country, :club, to: :contact_detail, allow_nil: true
 
   def as_json(options={})
     options = {
