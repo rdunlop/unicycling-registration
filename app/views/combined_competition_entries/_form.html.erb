@@ -1,0 +1,31 @@
+<%= form_for([@combined_competition, @combined_competition_entry]) do |f| %>
+  <% if @combined_competition_entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@combined_competition_entry.errors.count, "error") %> prohibited this combined_competition_entry from being saved:</h2>
+
+      <ul>
+      <% @combined_competition_entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :abbreviation %><br>
+    <%= f.text_field :abbreviation %>
+  </div>
+  <div class="field">
+    <%= f.label :tie_breaker %><br>
+    <%= f.check_box :tie_breaker %>
+  </div>
+  <% for place in 1..10 %>
+    <div class="field">
+      <%= f.label "points_#{place}".to_sym %><br>
+      <%= f.number_field "points_#{place}".to_sym %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

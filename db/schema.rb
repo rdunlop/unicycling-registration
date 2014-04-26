@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140426161259) do
+ActiveRecord::Schema.define(version: 20140426162249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,24 @@ ActiveRecord::Schema.define(version: 20140426161259) do
 
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
   add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
+
+  create_table "combined_competition_entries", force: true do |t|
+    t.integer  "combined_competition_id"
+    t.string   "abbreviation"
+    t.boolean  "tie_breaker"
+    t.integer  "points_1"
+    t.integer  "points_2"
+    t.integer  "points_3"
+    t.integer  "points_4"
+    t.integer  "points_5"
+    t.integer  "points_6"
+    t.integer  "points_7"
+    t.integer  "points_8"
+    t.integer  "points_9"
+    t.integer  "points_10"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "combined_competitions", force: true do |t|
     t.string   "name"
