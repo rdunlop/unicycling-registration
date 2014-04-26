@@ -1,6 +1,7 @@
 class CombinedCompetitionEntry < ActiveRecord::Base
 
   belongs_to :combined_competition
+  belongs_to :competition
 
   validates :combined_competition_id, :abbreviation, presence: true
   validates :competition_id, presence: true
