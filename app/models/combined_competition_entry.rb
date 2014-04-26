@@ -7,4 +7,8 @@ class CombinedCompetitionEntry < ActiveRecord::Base
   validates :points_6, :points_7, :points_8, :points_9, :points_10, presence: true
 
   validates :tie_breaker, inclusion: { in: [true, false] }
+
+  def to_s
+    abbreviation + (tie_breaker ? "*" : "")
+  end
 end

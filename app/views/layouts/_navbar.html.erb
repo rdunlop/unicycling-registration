@@ -44,6 +44,7 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Base Configuration', :url => event_configurations_path, :active => current_page?(event_configurations_path), :permitted => can?(:manage, EventConfiguration))
       heading.entries << Menu::MenuEntry.new(:title => 'Registration Periods', :url => registration_periods_path, :active => current_page?(registration_periods_path), :permitted => can?(:manage, RegistrationPeriod))
       heading.entries << Menu::MenuEntry.new(:title => 'Event Offerings', :url => categories_path, :active => current_page?(categories_path), :permitted => can?(:manage, Category))
+      heading.entries << Menu::MenuEntry.new(:title => 'Combined Competitions', :url => combined_competitions_path, :active => current_page?(combined_competitions_path), :permitted => can?(:manage, CombinedCompetition))
       if @config.standard_skill
         heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Entries', :url => standard_skill_entries_path, :active => current_page?(standard_skill_entries_path), :permitted => can?(:manage, StandardSkillEntry))
       end

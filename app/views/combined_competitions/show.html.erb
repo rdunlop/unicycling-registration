@@ -5,5 +5,8 @@
   <%= @combined_competition.name %>
 </p>
 
+<%= link_to "entries", combined_competition_combined_competition_entries_path(@combined_competition) %>
+<br />
+
 <%= link_to 'Edit', edit_combined_competition_path(@combined_competition) %> |
 <%= link_to 'Back', combined_competitions_path %>

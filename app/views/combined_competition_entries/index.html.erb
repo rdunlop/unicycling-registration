@@ -4,8 +4,8 @@
   <thead>
     <tr>
       <th>Place</th>
-      <% @combined_competitions.each do |cc| %>
-        <th><%= cc.abbreviation %></th>
+      <% @combined_competition_entries.each do |cc| %>
+        <th><%= cc %></th>
       <% end %>
     </tr>
   </thead>
@@ -13,21 +13,21 @@
     <% for place in 1..10 %>
       <tr>
         <th><%= place %></th>
-        <% @combined_competitions.each do |cc| %>
+        <% @combined_competition_entries.each do |cc| %>
           <td><%= cc.send("points_#{place}") %></td>
         <% end %>
       </tr>
     <% end %>
     <tr>
       <th>Edit?</th>
-      <% @combined_competitions.each do |cc| %>
-        <td><%= link_to 'Edit', edit_combined_competition_entry_path(cc) %></td>
+      <% @combined_competition_entries.each do |cc| %>
+        <td><%= link_to 'Edit', edit_combined_competition_combined_competition_entry_path(@combined_competition, cc) %></td>
       <% end %>
     </tr>
     <tr>
       <th>Destroy</th>
-      <% @combined_competitions.each do |cc| %>
-        <td><%= link_to 'Destroy', cc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% @combined_competition_entries.each do |cc| %>
+        <td><%= link_to 'Destroy', [@combined_competition, cc], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tr>
   </tbody>
