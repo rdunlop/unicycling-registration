@@ -16,6 +16,10 @@
     <%= f.text_field :abbreviation %>
   </div>
   <div class="field">
+    <%= f.label :competition_id %><br>
+    <%= f.select :competition_id, Competition.event_order.map{|e| [e, e.id]} %>
+  </div>
+  <div class="field">
     <%= f.label :tie_breaker %><br>
     <%= f.check_box :tie_breaker %>
   </div>

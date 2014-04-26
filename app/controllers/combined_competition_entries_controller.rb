@@ -62,6 +62,7 @@ class CombinedCompetitionEntriesController < ApplicationController
     def combined_competition_entry_params
       params.require(:combined_competition_entry).permit(:abbreviation, :tie_breaker,
                                                          :points_1, :points_2, :points_3, :points_4, :points_5,
-                                                         :points_6, :points_7, :points_8, :points_9, :points_10)
+                                                         :points_6, :points_7, :points_8, :points_9, :points_10,
+                                                         :competition_id)
     end
 end

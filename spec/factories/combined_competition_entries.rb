@@ -15,5 +15,6 @@ FactoryGirl.define do
     points_8 6
     points_9 3
     points_10 1
+    competition # FactoryGirl
   end
 end
