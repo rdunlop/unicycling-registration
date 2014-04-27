@@ -67,8 +67,21 @@ class Competitor < ActiveRecord::Base
       members.first.registrant.bib_number
     end
 
-    def place=(place)
-      Rails.cache.write(place_key, place)
+    def disqualified=(dq)
+      Rails.cache.write("#{place_key}/dq", dq)
+    end
+
+    def disqualified
+      Rails.cache.fetch("#{place_key}/dq")
+    end
+
+    def place=(new_place)
+      unless new_place.is_a? Integer
+        raise "Unexpected place" unless new_place == "DQ"
+        self.disqualified = true
+        new_place = 0
+      end
+      Rails.cache.write(place_key, new_place)
     end
 
     def place
@@ -79,7 +92,16 @@ class Competitor < ActiveRecord::Base
         sc.try(:update_all_places)
         my_place = Rails.cache.fetch(place_key)
       end
-      my_place || "Unknown"
+      my_place
+    end
+
+    def place_formatted
+      if place == 0
+        return "DQ" if disqualified
+        return "Unknown"
+      else
+        place
+      end
     end
 
     def overall_place=(place)
@@ -94,7 +116,16 @@ class Competitor < ActiveRecord::Base
         sc.try(:update_all_places)
         my_overall_place = Rails.cache.fetch(overall_place_key)
       end
-      my_overall_place || "Unknown"
+      my_overall_place
+    end
+
+    def overall_place_formatted
+      if overall_place == 0
+        return "DQ" if disqualified
+        return "Unknown"
+      else
+        overall_place
+      end
     end
 
     def age_group_entry_description # XXX combine with the other age_group function
@@ -348,7 +379,7 @@ class Competitor < ActiveRecord::Base
       return false if !has_result?
       return false if search_gender != gender
 
-      overall_place.to_i <= 10
+      overall_place.to_i > 0 && overall_place.to_i <= 10
     end
 
     def self.group_selection_text

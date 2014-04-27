@@ -16,24 +16,24 @@
   <tbody>
     <% @male_candidates.each do |competitor| %>
       <tr>
-        <td><%= competitor.overall_place %></td>
+        <td><%= competitor.overall_place_formatted %></td>
         <td><%= competitor.result %></td>
         <td><%= competitor.external_id %></td>
         <td><%= competitor %></td>
         <td><%= competitor.gender %></td>
         <td><%= competitor.age_group_entry_description %></td>
-        <td><%= competitor.place %></td>
+        <td><%= competitor.place_formatted %></td>
       </tr>
     <% end %>
     <% @female_candidates.each do |competitor| %>
       <tr>
-        <td><%= competitor.overall_place %></td>
+        <td><%= competitor.overall_place_formatted %></td>
         <td><%= competitor.result %></td>
         <td><%= competitor.external_id %></td>
         <td><%= competitor %></td>
         <td><%= competitor.gender %></td>
         <td><%= competitor.age_group_entry_description %></td>
-        <td><%= competitor.place %></td>
+        <td><%= competitor.place_formatted %></td>
       </tr>
     <% end %>
   </tbody>

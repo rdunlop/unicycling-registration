@@ -38,8 +38,8 @@ Results: <%= link_to "View", results_printing_competition_path(@competition, :fo
         <td><%= time_result.thousands %></td>
         <td><%= time_result.disqualified %></td>
         <td><%= time_result.competitor.age_group_entry_description %></td>
-        <td><%= time_result.competitor.place %></td>
-        <td><%= time_result.competitor.overall_place %></td>
+        <td><%= time_result.competitor.place_formatted %></td>
+        <td><%= time_result.competitor.overall_place_formatted %></td>
         <td class="non_printable"><%= link_to 'Edit', edit_time_result_path(time_result) %></td>
         <td class="non_printable"><%= link_to 'Destroy', time_result, :confirm => 'Are you sure?', :method => :delete %></td>
       </tr>

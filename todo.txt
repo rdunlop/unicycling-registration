@@ -1,5 +1,7 @@
 Last Re-Arranged February 6, 2014.
 
+- make all "results" have a common interface, including "Disqualified" ? no, this doesn't make sense, as it's the competitor who is dq'd, not the score/result....or is it?
+
 - Update the instructions for setting up a development or server
 - update to use database.yml and secrets.yml the rails-4 way?
 
