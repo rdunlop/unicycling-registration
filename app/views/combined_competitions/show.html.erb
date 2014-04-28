@@ -5,14 +5,8 @@
   <%= @combined_competition.name %>
 </p>
 
-<p>
-  Competitors:
-  <% @combined_competition.combined_competition_entries.each do |entry| %>
-    <% entry.competitors.each do |comp| %>
-      <%= comp %>
-    <% end %>
-  <% end %>
-</p>
+<%= render :partial => "new_results", :locals => {results: CombinedCompetitionResult.new(@combined_competition, "Male") } %>
+<%= render :partial => "new_results", :locals => {results: CombinedCompetitionResult.new(@combined_competition, "Female") } %>
 
 <%= link_to "entries", combined_competition_combined_competition_entries_path(@combined_competition) %>
 <br />

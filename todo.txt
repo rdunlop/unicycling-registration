@@ -1,6 +1,8 @@
 Last Re-Arranged February 6, 2014.
 
+- Make "Unicon Scoring" a global configuration
 - make all "results" have a common interface, including "Disqualified" ? no, this doesn't make sense, as it's the competitor who is dq'd, not the score/result....or is it?
+- Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
 
 - Update the instructions for setting up a development or server
 - update to use database.yml and secrets.yml the rails-4 way?

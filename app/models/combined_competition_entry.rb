@@ -14,9 +14,16 @@ class CombinedCompetitionEntry < ActiveRecord::Base
     abbreviation + (tie_breaker ? "*" : "")
   end
 
-  def competitors
-    @males = competition.competitors.select{ |comp| comp.is_top?("Male") }
-    @females = competition.competitors.select{ |comp| comp.is_top?("Female") }
-    [@males, @females]
+  def competitors(gender)
+    @competitors ||= {}
+    @competitors[gender] ||= competition.competitors.select{ |comp| comp.is_top?(gender) }
+  end
+
+  def male_competitors
+    competitors("Male")
+  end
+
+  def female_competitors
+    competitors("Female")
   end
 end
