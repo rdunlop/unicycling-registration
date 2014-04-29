@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :registrant_id %><br />
-    <%= f.select :registrant_id, Registrant.where(:competitor => true).map{ |reg| [reg.with_id_to_s, reg.id]}, {}, {:autofocus => true } %>
+    <%= f.select :registrant_id, Registrant.select_box_options, {}, {:autofocus => true } %>
   </div>
   <div class="field">
     <%= f.label :heat %><br />

@@ -6,7 +6,7 @@ class RegistrantsController < ApplicationController
   private
 
   def find_registrant
-    @registrant = Registrant.unscoped.find(params[:id])
+    @registrant = Registrant.find(params[:id])
   end
 
   def load_categories
@@ -17,7 +17,7 @@ class RegistrantsController < ApplicationController
 
   def load_other_reg
     unless current_user.registrants.empty?
-      @other_registrant = current_user.registrants.first
+      @other_registrant = current_user.registrants.active.first
     end
   end
 
@@ -29,7 +29,7 @@ class RegistrantsController < ApplicationController
   public
 
   def all_index
-    @registrants = Registrant.unscoped.includes(:user)
+    @registrants = Registrant.includes(:user)
   end
 
   # GET /registrants
@@ -45,7 +45,7 @@ class RegistrantsController < ApplicationController
         format.pdf { render :pdf => "index_all", :template => "registrants/index_all.html.erb", :formats => [:html], :layout => "pdf.html" }
       end
     else
-      @my_registrants = current_user.registrants
+      @my_registrants = current_user.registrants.active
       @shared_registrants = current_user.accessible_registrants - @my_registrants
       @display_invitation_request = current_user.invitations.need_reply.count > 0
       @display_invitation_manage_banner = current_user.invitations.permitted.count > 0
@@ -64,7 +64,7 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/all
   def all
-    @registrants = Registrant.order(:bib_number)
+    @registrants = Registrant.active.order(:bib_number)
 
     respond_to do |format|
       format.html # all.html.erb
@@ -260,7 +260,7 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to registrants_path, notice: 'Registrant was successfully undeleted.' }
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
-        @registrants = Registrant.unscoped
+        @registrants = Registrant.all
         format.html { render action: "index_all" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end
@@ -268,7 +268,7 @@ class RegistrantsController < ApplicationController
   end
 
   def bag_labels
-    @registrants = Registrant.all
+    @registrants = Registrant.active.all
 
     names = []
     @registrants.each do |reg|
@@ -283,7 +283,7 @@ class RegistrantsController < ApplicationController
   end
 
   def show_all
-    @registrants = Registrant.order(:last_name, :first_name)
+    @registrants = Registrant.active.order(:last_name, :first_name)
 
     respond_to do |format|
       format.html # show_all.html.erb

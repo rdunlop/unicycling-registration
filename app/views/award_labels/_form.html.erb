@@ -33,7 +33,7 @@
       <td><%= f.text_field :category %></td>
       <td><%= f.text_field :details %></td>
       <td><%= f.number_field :place %></td>
-      <td><%= f.select :registrant_id, Registrant.where(:competitor => true).map{|reg| [reg.with_id_to_s, reg.id] } %></td>
+      <td><%= f.select :registrant_id, Registrant.select_box_options %></td>
       <td><%= f.submit %></td>
     </tbody>
   </table>

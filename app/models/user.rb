@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 
   has_paper_trail :meta => {:user_id => :id }
 
-  has_many :registrants, -> { order("registrants.id").includes [:registrant_expense_items, :payment_details] }
+  has_many :registrants, -> { includes [:registrant_expense_items, :payment_details] }
 
   has_many :additional_registrant_accesses, :dependent => :destroy
   has_many :invitations, :through => :registrants, :class_name => "AdditionalRegistrantAccess", :source => :additional_registrant_accesses
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 
   # get all users who have registrants with unpaid fees
   def self.unpaid_reg_fees
-    registrants = Registrant.all.select { |reg| !reg.reg_paid? }
+    registrants = Registrant.active.all.select { |reg| !reg.reg_paid? }
     users = registrants.map { |reg| reg.user }.flatten.uniq
   end
 
@@ -95,19 +95,19 @@ class User < ActiveRecord::Base
   end
 
   def accessible_registrants
-    additional_registrant_accesses.permitted.map{ |ada| ada.registrant} + registrants
+    additional_registrant_accesses.permitted.map{ |ada| ada.registrant}.select{ |reg| !reg.deleted} + registrants.select{ |reg| !reg.deleted}
   end
 
   def total_owing
     total = 0
-    self.registrants.each do |reg|
+    self.registrants.active.each do |reg|
       total += reg.amount_owing
     end
     total
   end
 
   def has_minor?
-    self.registrants.each do |reg|
+    self.registrants.active.each do |reg|
       if reg.minor?
         return true
       end

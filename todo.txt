@@ -1,5 +1,7 @@
 Last Re-Arranged February 6, 2014.
 
+- NAUCC 2013 registrants#show_all doesn't work (too slow)
+
 - Update the instructions for setting up a development or server
 - update to use database.yml and secrets.yml the rails-4 way?
 

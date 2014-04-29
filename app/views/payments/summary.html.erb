@@ -78,7 +78,7 @@
             <%= link_to refunded_count, details_expense_item_path(item, :filter => "refunded") %>
           </td>
           <td>
-            <%= unpaid_count = item.num_unpaid %>
+            <% unpaid_count = item.num_unpaid %>
             <%= link_to unpaid_count, details_expense_item_path(item, :filter => "unpaid") %>
           </td>
           <td>
