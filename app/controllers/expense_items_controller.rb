@@ -23,6 +23,14 @@ class ExpenseItemsController < ApplicationController
     end
   end
 
+  # GET /expense_items/1/details
+  def details
+    @filter = params[:filter]
+    filters = %(paid refunded free unpaid)
+    raise "unknown filter" unless filters.include?(@filter)
+    @details = @expense_item.send("#{@filter}_items")
+  end
+
   # GET /expense_items/1/edit
   def edit
   end

@@ -67,18 +67,19 @@
           </td>
           <td>
             <% paid_count = item.num_paid %>
-            <%= link_to paid_count, details_payment_path(item, :filter => "paid") %>
+            <%= link_to paid_count, details_expense_item_path(item, :filter => "paid") %>
           </td>
           <td>
             <% free_count = item.num_free %>
-            <%= link_to free_count, details_payment_path(item, :filter => "free") %>
+            <%= link_to free_count, details_expense_item_path(item, :filter => "free") %>
           </td>
           <td>
             <% refunded_count = item.num_refunded %>
-            <%= link_to refunded_count, details_payment_path(item, :filter => "refunded") %>
+            <%= link_to refunded_count, details_expense_item_path(item, :filter => "refunded") %>
           </td>
           <td>
             <%= unpaid_count = item.num_unpaid %>
+            <%= link_to unpaid_count, details_expense_item_path(item, :filter => "unpaid") %>
           </td>
           <td>
             <%= total_count = paid_count + free_count + unpaid_count - refunded_count %>

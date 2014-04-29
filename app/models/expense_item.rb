@@ -50,20 +50,36 @@ class ExpenseItem < ActiveRecord::Base
     self.has_custom_cost = false if self.has_custom_cost.nil?
   end
 
+  def paid_items
+    payment_details.paid
+  end
+
   def num_paid
-    payment_details.paid.count
+    paid_items.count
+  end
+
+  def refunded_items
+    payment_details.refunded
   end
 
   def num_refunded
-    payment_details.refunded.count
+    refunded_items.count
+  end
+
+  def free_items
+    payment_details.free
   end
 
   def num_free
-    payment_details.free.count
+    free_items.count
+  end
+
+  def unpaid_items
+    registrant_expense_items.joins(:registrant).where(:registrants => {:deleted => false})
   end
 
   def num_unpaid
-    registrant_expense_items.joins(:registrant).where(:registrants => {:deleted => false}).count
+    unpaid_items.count
   end
 
   def create_reg_items

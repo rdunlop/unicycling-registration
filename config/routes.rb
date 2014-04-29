@@ -95,7 +95,11 @@ Workspace::Application.routes.draw do
 
     resources :expense_groups
 
-    resources :expense_items, :except => [:new, :show]
+    resources :expense_items, :except => [:new, :show] do
+      member do
+        get :details
+      end
+    end
 
     resources :refunds, :only => [:show]
 
@@ -108,7 +112,6 @@ Workspace::Application.routes.draw do
 
       member do
         post :fake_complete
-        get :details
       end
     end
 
