@@ -82,7 +82,7 @@ class CombinedCompetitionResult
   end
 
   def place_of_tie_breaker(bib_number)
-    @registrant_bib_numbers[gender][bib_number].select{ |comp| comp.competition.combined_competition_entries.first.tie_breaker }.try(:overall_place)
+    @registrant_bib_numbers[gender][bib_number].select{ |comp| comp.competition.combined_competition_entries.first.tie_breaker }.first.try(:overall_place)
   end
 
   # returns
@@ -100,36 +100,18 @@ class CombinedCompetitionResult
       end
       calc_score = score
       firsts_counts.uniq.sort.reverse.each do |most_firsts|
-        if firsts_counts.count(most_firsts) == 1
-          bib_numbers.each do |bib_number|
-            if most_firsts == num_firsts(bib_number)
+        bib_numbers_with_this_number_of_firsts = bib_numbers.select{ |bib_number| num_firsts(bib_number) == most_firsts}
+
+        places_in_tie_breaker = bib_numbers_with_this_number_of_firsts.map{ |bib_number| place_of_tie_breaker(bib_number) }
+        places_in_tie_breaker.uniq.sort.each do |place|
+
+          bib_numbers_with_this_number_of_firsts.each do |bib_number|
+            if place  == place_of_tie_breaker(bib_number)
               results << [calc_score, bib_number]
-              bib_numbers -= [bib_number]
             end
           end
-        else
-          #tied_firsts_count_bib_numbers = bib_numbers.select{ |bib_number| num_firsts(bib_number) == most_firsts }
-          places_in_tie_breaker = bib_numbers.map{ |bib_number| place_of_tie_breaker(bib_number) }
-          places_in_tie_breaker.sort.each do |place|
-            if places_in_tie_breaker.count(place) == 1
-              bib_numbers.each do |bib_number|
-                if place  == place_of_tie_breaker(bib_number)
-                  results << [calc_score, bib_number]
-                  bib_numbers -= [bib_number]
-                end
-              end
-              calc_score += 0.1
-            else
-              bib_numbers.each do |bib_number|
-                if place  == place_of_tie_breaker(bib_number)
-                  results << [calc_score, bib_number]
-                  bib_numbers -= [bib_number]
-                end
-              end
-            end
-          end
+          calc_score -= 0.1
         end
-        calc_score += 0.1
       end
       results
     else
