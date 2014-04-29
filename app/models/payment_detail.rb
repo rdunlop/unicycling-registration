@@ -32,6 +32,10 @@ class PaymentDetail < ActiveRecord::Base
   # excludes refunded items
   scope :completed, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}}) }
 
+  scope :paid, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => false) }
+
+  scope :free, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => true) }
+  scope :refunded, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where.not({:refund_details => {:payment_detail_id => nil}}) }
 
   def touch_registrant
     registrant.touch

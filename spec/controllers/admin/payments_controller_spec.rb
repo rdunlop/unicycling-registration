@@ -17,13 +17,6 @@ describe Admin::PaymentsController do
     end
   end
 
-  describe "GET details" do
-    it "returns list of PaymentDetails" do
-      get :details, {}
-      assigns(:details).should eq([payment_detail])
-    end
-  end
-
   describe "POST create" do
     before(:each) do
       @ei = FactoryGirl.create(:expense_item)

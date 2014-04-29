@@ -51,7 +51,15 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_paid
-    payment_details.completed.count
+    payment_details.paid.count
+  end
+
+  def num_refunded
+    payment_details.refunded.count
+  end
+
+  def num_free
+    payment_details.free.count
   end
 
   def num_unpaid

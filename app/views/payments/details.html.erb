@@ -1,19 +1,19 @@
-<h1>Listing PAID Payment Details</h1>
+<h1>Listing <%= @filter %> Payment Details for <%= @expense_item %></h1>
 
 <table class="sortable">
   <thead>
     <tr>
       <th>
-        Item
+        ID
+      </th>
+      <th>
+        Registrant
       </th>
       <th>
         Details
       </th>
       <th>
-        Registrant ID
-      </th>
-      <th>
-        Registrant
+        Date
       </th>
     </tr>
   </thead>
@@ -21,16 +21,16 @@
     <% @details.each do |detail| %>
       <tr>
         <td>
-          <%= detail.expense_item %>
+          <%= detail.registrant.bib_number %>
+        </td>
+        <td>
+          <%= detail.registrant %>
         </td>
         <td>
           <%= detail.details %>
         </td>
         <td>
-          <%= detail.registrant.bib_number %>
-        </td>
-        <td>
-          <%= detail.registrant %>
+          <%= detail.created_at %>
         </td>
       </tr>
     <% end %>

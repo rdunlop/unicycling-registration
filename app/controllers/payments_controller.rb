@@ -36,6 +36,14 @@ class PaymentsController < ApplicationController
     @expense_groups = ExpenseGroup.includes(:expense_items => [:translations, :expense_group])
   end
 
+  def details
+    @expense_item = ExpenseItem.find(params[:id])
+    @filter = params[:filter]
+    filters = %(paid refunded free)
+    raise "unknown filter" unless filters.include?(@filter)
+    @details = @expense_item.payment_details.send("#{@filter}")
+  end
+
 
   # GET /payments/1
   # GET /payments/1.json

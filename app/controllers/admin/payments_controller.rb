@@ -14,10 +14,6 @@ class Admin::PaymentsController < Admin::BaseController
     @refunds = Refund.includes(:user)
   end
 
-  def details
-    @details = PaymentDetail.completed
-  end
-
   def new
     load_payment_details
     @payment.payment_date = DateTime.now
