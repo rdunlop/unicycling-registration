@@ -2,8 +2,7 @@ class ArtisticScoringClass < BaseScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    # XXX Should make this a configuration somewhere
-    unicon_scoring = false
+    unicon_scoring = !EventConfiguration.artistic_score_elimination_mode_naucc
     ArtisticScoreCalculator.new(@competition, unicon_scoring)
   end
 

@@ -4,6 +4,8 @@ class CombinedCompetitionResult
   def initialize(combined_competition, gender)
     @combined_competition = combined_competition
     @gender = gender
+    @scores ||= {}
+    @registrant_bib_numbers ||= {}
   end
 
   # bib_number of registrant
@@ -120,7 +122,6 @@ class CombinedCompetitionResult
   end
 
   def store_score(points, bib_number)
-    @scores ||= {}
     @scores[points] ||= []
     @scores[points] << bib_number
   end
@@ -143,7 +144,6 @@ class CombinedCompetitionResult
   end
 
   def registrants(gender)
-    @registrant_bib_numbers ||= {}
     @registrant_bib_numbers[gender] ||= store_registrants(gender)
   end
 

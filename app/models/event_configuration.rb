@@ -2,36 +2,37 @@
 #
 # Table name: event_configurations
 #
-#  id                         :integer          not null, primary key
-#  short_name                 :string(255)
-#  long_name                  :string(255)
-#  location                   :string(255)
-#  dates_description          :string(255)
-#  event_url                  :string(255)
-#  start_date                 :date
-#  logo_binary                :binary
-#  contact_email              :string(255)
-#  artistic_closed_date       :date
-#  standard_skill_closed_date :date
-#  tshirt_closed_date         :date
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  logo_filename              :string(255)
-#  logo_type                  :string(255)
-#  test_mode                  :boolean
-#  waiver_url                 :string(255)
-#  comp_noncomp_url           :string(255)
-#  has_print_waiver           :boolean
-#  standard_skill             :boolean          default(FALSE)
-#  usa                        :boolean          default(FALSE)
-#  iuf                        :boolean          default(FALSE)
-#  currency_code              :string(255)
-#  currency                   :text
-#  rulebook_url               :string(255)
-#  style_name                 :string(255)
-#  has_online_waiver          :boolean
-#  online_waiver_text         :text
-#  music_submission_end_date  :date
+#  id                                    :integer          not null, primary key
+#  short_name                            :string(255)
+#  long_name                             :string(255)
+#  location                              :string(255)
+#  dates_description                     :string(255)
+#  event_url                             :string(255)
+#  start_date                            :date
+#  logo_binary                           :binary
+#  contact_email                         :string(255)
+#  artistic_closed_date                  :date
+#  standard_skill_closed_date            :date
+#  tshirt_closed_date                    :date
+#  created_at                            :datetime         not null
+#  updated_at                            :datetime         not null
+#  logo_filename                         :string(255)
+#  logo_type                             :string(255)
+#  test_mode                             :boolean
+#  waiver_url                            :string(255)
+#  comp_noncomp_url                      :string(255)
+#  has_print_waiver                      :boolean
+#  standard_skill                        :boolean          default(FALSE)
+#  usa                                   :boolean          default(FALSE)
+#  iuf                                   :boolean          default(FALSE)
+#  currency_code                         :string(255)
+#  currency                              :text
+#  rulebook_url                          :string(255)
+#  style_name                            :string(255)
+#  has_online_waiver                     :boolean
+#  online_waiver_text                    :text
+#  music_submission_end_date             :date
+#  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -50,6 +51,7 @@ class EventConfiguration < ActiveRecord::Base
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :has_print_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :usa, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :iuf, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
@@ -65,6 +67,7 @@ class EventConfiguration < ActiveRecord::Base
     self.usa = true if self.usa.nil?
     self.iuf = false if self.iuf.nil?
     self.standard_skill = true if self.standard_skill.nil?
+    self.artistic_score_elimination_mode_naucc = true if self.artistic_score_elimination_mode_naucc.nil?
   end
 
   def logo_image=(input_data)
@@ -282,6 +285,15 @@ class EventConfiguration < ActiveRecord::Base
       nil
     else
       ec.event_url
+    end
+  end
+
+  def self.artistic_score_elimination_mode_naucc
+    ec = EventConfiguration.first
+    if ec.nil? or ec.artistic_score_elimination_mode_naucc.nil?
+      true
+    else
+      ec.artistic_score_elimination_mode_naucc
     end
   end
 

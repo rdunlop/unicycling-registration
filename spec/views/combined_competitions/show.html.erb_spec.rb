@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe "combined_competitions/show" do
   before(:each) do
-    @combined_competition = assign(:combined_competition, stub_model(CombinedCompetition,
-      :name => "Name"
-    ))
+    @combined_competition = FactoryGirl.build_stubbed(:combined_competition, :name => "Name")
   end
 
   it "renders attributes in <p>" do

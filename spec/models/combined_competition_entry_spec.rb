@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: combined_competition_entries
+#
+#  id                      :integer          not null, primary key
+#  combined_competition_id :integer
+#  abbreviation            :string(255)
+#  tie_breaker             :boolean
+#  points_1                :integer
+#  points_2                :integer
+#  points_3                :integer
+#  points_4                :integer
+#  points_5                :integer
+#  points_6                :integer
+#  points_7                :integer
+#  points_8                :integer
+#  points_9                :integer
+#  points_10               :integer
+#  created_at              :datetime
+#  updated_at              :datetime
+#  competition_id          :integer
+#
+
 require 'spec_helper'
 
 def build_competitor(overall_place)
@@ -29,7 +52,7 @@ describe CombinedCompetitionEntry do
     end
 
     it "lists the competitors who have ranked top 10" do
-      expect(combined_competition_entry.competitors).to eq([[@comp1, @comp2, @comp3], []])
+      expect(combined_competition_entry.competitors("Male")).to eq([@comp1, @comp2, @comp3])
     end
   end
 end

@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: combined_competition_entries
+#
+#  id                      :integer          not null, primary key
+#  combined_competition_id :integer
+#  abbreviation            :string(255)
+#  tie_breaker             :boolean
+#  points_1                :integer
+#  points_2                :integer
+#  points_3                :integer
+#  points_4                :integer
+#  points_5                :integer
+#  points_6                :integer
+#  points_7                :integer
+#  points_8                :integer
+#  points_9                :integer
+#  points_10               :integer
+#  created_at              :datetime
+#  updated_at              :datetime
+#  competition_id          :integer
+#
+
 class CombinedCompetitionEntry < ActiveRecord::Base
 
   belongs_to :combined_competition

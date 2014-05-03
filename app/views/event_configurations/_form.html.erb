@@ -142,6 +142,11 @@
       <td>Not currently used</td>
   </tr>
   <tr>
+      <th><%= f.label :artistic_score_elimination_mode_naucc %></th>
+      <td><%= f.check_box :artistic_score_elimination_mode_naucc %></td>
+      <td>This chooses whether to score artistic in "NAUCC" rules (1 high, 1 low elimination), or "UNICON" rules (1 high, 1 low elimination PER JUDGE TYPE)</td>
+  </tr>
+  <tr>
       <th><%= f.label :test_mode %></th>
       <td><%= f.check_box :test_mode %></td>
       <td>Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.</td>
