@@ -36,7 +36,6 @@ class PaymentsController < ApplicationController
     @expense_groups = ExpenseGroup.includes(:expense_items => [:translations, :expense_group])
   end
 
-
   # GET /payments/1
   # GET /payments/1.json
   def show

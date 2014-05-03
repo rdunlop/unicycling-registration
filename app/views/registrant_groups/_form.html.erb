@@ -20,7 +20,7 @@
 
   <div class="field">
     <%= f.label :registrant_id, "Contact Person" %><br />
-    <%= f.select :registrant_id, Registrant.all.map { |reg| [reg.with_id_to_s, reg.id] }, :include_blank => true %>
+    <%= f.select :registrant_id, Registrant.select_box_options, :include_blank => true %>
   </div>
 
   <table class="sortable">

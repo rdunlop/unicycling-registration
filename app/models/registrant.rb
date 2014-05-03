@@ -99,13 +99,17 @@ class Registrant < ActiveRecord::Base
 
   belongs_to :user
 
-  default_scope  { where(:deleted => false).order(:bib_number) }
+  scope :active, -> { where(:deleted => false).order(:bib_number) }
 
   # updates the members, which update the competitors, if this competitor has changed (like their age, for example)
   def touch_members
     members.each do |mem|
       mem.touch
     end
+  end
+
+  def self.select_box_options
+    self.active.where(:competitor => true).map{ |reg| [reg.with_id_to_s, reg.id] }
   end
 
   def build_registration_item(reg_item)
@@ -441,7 +445,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def to_s
-    name
+    name + (deleted ? " (deleted)" : "")
   end
 
   def with_id_to_s

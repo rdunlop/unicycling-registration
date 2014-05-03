@@ -23,7 +23,7 @@
        <table class="events alternate">
          <% category.events.each do |event| %>
            <% next unless event.visible %>
-           <%= render :partial => "/attending/event", :locals => {:f => f, :registrant => @registrant}, :object => event %>
+           <%= render :partial => "/attending/event", :locals => {:f => f, :registrant => @registrant, :category => category}, :object => event %>
          <% end %>
        </table>
        <% if can? :create, Song %>

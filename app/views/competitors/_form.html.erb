@@ -2,7 +2,7 @@
 <%= render :partial => "/shared/error_messages", :object => form %>
 <%= form_for [form.competition, form] do |f| %>
   <%= f.label :position %><%= f.text_field :position %><br />
-  <%= f.label :registrant_ids %><%= f.select :registrant_ids, Registrant.where(:competitor => true).map{ |reg| [reg.with_id_to_s, reg.id] }, {}, {:multiple => true, :size => 20, :include_blank => true } %><br />
+  <%= f.label :registrant_ids %><%= f.select :registrant_ids, Registrant.select_box_options, {}, {:multiple => true, :size => 20, :include_blank => true } %><br />
   <%= f.label :custom_external_id %><%= f.text_field :custom_external_id %><br />
   <%= f.label :custom_name %><%= f.text_field :custom_name %><br />
 

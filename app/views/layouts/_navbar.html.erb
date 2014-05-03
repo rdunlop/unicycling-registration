@@ -60,7 +60,6 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Registrants (email)', :url => email_registrants_path, :active => current_page?(email_registrants_path), :permitted => can?(:email, Registrant))
       heading.entries << Menu::MenuEntry.new(:title => 'Registrant Groups', :url => registrant_groups_path, :active => current_page?(registrant_groups_path), :permitted => can?(:manage, Registrant))
       heading.entries << Menu::MenuEntry.new(:title => 'Payments', :url => summary_payments_path, :active => current_page?(summary_payments_path), :permitted => can?(:summary, Payment))
-      heading.entries << Menu::MenuEntry.new(:title => 'Paid Payment Detail', :url => details_admin_payments_path, :active => current_page?(details_admin_payments_path), :permitted => can?(:manage, Registrant))
       heading.entries << Menu::MenuEntry.new(:title => 'Age Group Type', :url => age_group_types_path, :active => current_page?(age_group_types_path), :permitted => can?(:manage, AgeGroupType))
       heading.entries << Menu::MenuEntry.new(:title => 'Events Report', :url => summary_events_path, :active => current_page?(summary_events_path), :permitted => can?(:summary, Event))
       heading.entries << Menu::MenuEntry.new(:title => 'Chief Judges', :url => chiefs_judges_path, :active => current_page?(chiefs_judges_path), :permitted => can?(:manage, Judge))

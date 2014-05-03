@@ -3,6 +3,7 @@ Last Re-Arranged February 6, 2014.
 - Make "Unicon Scoring" a global configuration
 - make all "results" have a common interface, including "Disqualified" ? no, this doesn't make sense, as it's the competitor who is dq'd, not the score/result....or is it?
 - Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
+- NAUCC 2013 registrants#show_all doesn't work (too slow)
 
 - Update the instructions for setting up a development or server
 - update to use database.yml and secrets.yml the rails-4 way?
@@ -156,7 +157,7 @@ Need:
  - List of competitors who have chosen on registration
   - by age group, etc
  - List of heats
- 
+
  *** Data Entry ***
  - Import (link to page)
  - List of heats
@@ -165,7 +166,7 @@ Need:
  - Place competitors
  - Print options for confirmation (and for posting, and more)
 
- 
+
 Feature:
 - Datacheck field
 - Create heats based on inputted data (best -time, etc)

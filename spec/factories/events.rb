@@ -20,6 +20,7 @@ FactoryGirl.define do
     category # FactoryGirl
     sequence(:name) {|n| "Teh event number #{n}" }
     export_name "SomeName"
+    visible true
     position 1
   end
 end

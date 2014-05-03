@@ -166,6 +166,7 @@ class Ability
   def define_payment_ability(user)
     # Payment
     can :summary, Payment if (user.has_role? :payment_admin or user.has_role? :admin)
+    can :details, ExpenseItem if (user.has_role? :payment_admin or user.has_role? :admin)
     can :read, Payment if user.has_role? :admin
     can :manage, Payment if user.has_role? :super_admin
     can :read, Payment, :user_id => user.id
