@@ -23,15 +23,15 @@
 
 require 'spec_helper'
 
-def build_competitor(overall_place)
-  comp = FactoryGirl.build_stubbed(:event_competitor)
-  allow(comp).to receive(:overall_place).and_return(overall_place)
-  allow(comp).to receive(:has_result?).and_return(true)
-  allow(comp).to receive(:gender).and_return("Male")
-  comp
-end
-
 describe CombinedCompetitionEntry do
+  def build_competitor(overall_place)
+    comp = FactoryGirl.build_stubbed(:event_competitor)
+    allow(comp).to receive(:overall_place).and_return(overall_place)
+    allow(comp).to receive(:has_result?).and_return(true)
+    allow(comp).to receive(:gender).and_return("Male")
+    comp
+  end
+
   let(:combined_competition_entry) { FactoryGirl.build_stubbed(:combined_competition_entry) }
   it "is initially valid" do
     expect(combined_competition_entry).to be_valid

@@ -1,19 +1,19 @@
 require 'spec_helper'
 
-def build_competitor(options = {})
-  comp = FactoryGirl.build_stubbed(:event_competitor)
-  allow(comp).to receive(:overall_place).and_return(options[:place])
-  allow(comp).to receive(:has_result?).and_return(true)
-  allow(comp).to receive(:gender).and_return("Male")
-  reg = FactoryGirl.build_stubbed(:registrant)
-  allow(reg).to receive(:bib_number).and_return(options[:bib_number])
-  allow(comp).to receive_message_chain(:registrants, :first).and_return(reg)
-  allow(Registrant).to receive(:find_by).and_return(reg)
-  allow(reg).to receive(:ineligible).and_return(false)
-  comp
-end
-
 describe CombinedCompetitionResult do
+  def build_competitor(options = {})
+    comp = FactoryGirl.build_stubbed(:event_competitor)
+    allow(comp).to receive(:overall_place).and_return(options[:place])
+    allow(comp).to receive(:has_result?).and_return(true)
+    allow(comp).to receive(:gender).and_return("Male")
+    reg = FactoryGirl.build_stubbed(:registrant)
+    allow(reg).to receive(:bib_number).and_return(options[:bib_number])
+    allow(comp).to receive_message_chain(:registrants, :first).and_return(reg)
+    allow(Registrant).to receive(:find_by).and_return(reg)
+    allow(reg).to receive(:ineligible).and_return(false)
+    comp
+  end
+
   let(:combined_competition) { FactoryGirl.create(:combined_competition) }
   let(:combined_competition_result) { CombinedCompetitionResult.new(combined_competition, "Male").results }
   let(:combined_competition_entry) { FactoryGirl.build_stubbed(:combined_competition_entry, :abbreviation => "TT") }
