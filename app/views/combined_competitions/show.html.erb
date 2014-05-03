@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @combined_competition.name %>
+</p>
+
+<%= render :partial => "new_results", :locals => {results: CombinedCompetitionResult.new(@combined_competition, "Male") } %>
+<%= render :partial => "new_results", :locals => {results: CombinedCompetitionResult.new(@combined_competition, "Female") } %>
+
+<%= link_to "entries", combined_competition_combined_competition_entries_path(@combined_competition) %>
+<br />
+
+<%= link_to 'Edit', edit_combined_competition_path(@combined_competition) %> |
+<%= link_to 'Back', combined_competitions_path %>

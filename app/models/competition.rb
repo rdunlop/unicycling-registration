@@ -28,6 +28,7 @@ class Competition < ActiveRecord::Base
   has_many :time_results, :through => :competitors
   has_many :external_results, :through => :competitors
   has_many :competition_sources, :foreign_key => "target_competition_id", :inverse_of => :target_competition, :dependent => :destroy
+  has_many :combined_competition_entries
   accepts_nested_attributes_for :competition_sources, :reject_if => :all_blank
 
   has_many :lane_assignments, :dependent => :destroy

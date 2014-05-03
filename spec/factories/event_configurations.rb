@@ -2,36 +2,37 @@
 #
 # Table name: event_configurations
 #
-#  id                         :integer          not null, primary key
-#  short_name                 :string(255)
-#  long_name                  :string(255)
-#  location                   :string(255)
-#  dates_description          :string(255)
-#  event_url                  :string(255)
-#  start_date                 :date
-#  logo_binary                :binary
-#  contact_email              :string(255)
-#  artistic_closed_date       :date
-#  standard_skill_closed_date :date
-#  tshirt_closed_date         :date
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  logo_filename              :string(255)
-#  logo_type                  :string(255)
-#  test_mode                  :boolean
-#  waiver_url                 :string(255)
-#  comp_noncomp_url           :string(255)
-#  has_print_waiver           :boolean
-#  standard_skill             :boolean          default(FALSE)
-#  usa                        :boolean          default(FALSE)
-#  iuf                        :boolean          default(FALSE)
-#  currency_code              :string(255)
-#  currency                   :text
-#  rulebook_url               :string(255)
-#  style_name                 :string(255)
-#  has_online_waiver          :boolean
-#  online_waiver_text         :text
-#  music_submission_end_date  :date
+#  id                                    :integer          not null, primary key
+#  short_name                            :string(255)
+#  long_name                             :string(255)
+#  location                              :string(255)
+#  dates_description                     :string(255)
+#  event_url                             :string(255)
+#  start_date                            :date
+#  logo_binary                           :binary
+#  contact_email                         :string(255)
+#  artistic_closed_date                  :date
+#  standard_skill_closed_date            :date
+#  tshirt_closed_date                    :date
+#  created_at                            :datetime         not null
+#  updated_at                            :datetime         not null
+#  logo_filename                         :string(255)
+#  logo_type                             :string(255)
+#  test_mode                             :boolean
+#  waiver_url                            :string(255)
+#  comp_noncomp_url                      :string(255)
+#  has_print_waiver                      :boolean
+#  standard_skill                        :boolean          default(FALSE)
+#  usa                                   :boolean          default(FALSE)
+#  iuf                                   :boolean          default(FALSE)
+#  currency_code                         :string(255)
+#  currency                              :text
+#  rulebook_url                          :string(255)
+#  style_name                            :string(255)
+#  has_online_waiver                     :boolean
+#  online_waiver_text                    :text
+#  music_submission_end_date             :date
+#  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

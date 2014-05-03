@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140419221302) do
+ActiveRecord::Schema.define(version: 20140503231056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,31 @@ ActiveRecord::Schema.define(version: 20140419221302) do
 
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
   add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
+
+  create_table "combined_competition_entries", force: true do |t|
+    t.integer  "combined_competition_id"
+    t.string   "abbreviation"
+    t.boolean  "tie_breaker"
+    t.integer  "points_1"
+    t.integer  "points_2"
+    t.integer  "points_3"
+    t.integer  "points_4"
+    t.integer  "points_5"
+    t.integer  "points_6"
+    t.integer  "points_7"
+    t.integer  "points_8"
+    t.integer  "points_9"
+    t.integer  "points_10"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "competition_id"
+  end
+
+  create_table "combined_competitions", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "competition_sources", force: true do |t|
     t.integer  "target_competition_id"
@@ -252,9 +277,9 @@ ActiveRecord::Schema.define(version: 20140419221302) do
     t.string   "waiver_url"
     t.string   "comp_noncomp_url"
     t.boolean  "has_print_waiver"
-    t.boolean  "standard_skill",             default: false
-    t.boolean  "usa",                        default: false
-    t.boolean  "iuf",                        default: false
+    t.boolean  "standard_skill",                        default: false
+    t.boolean  "usa",                                   default: false
+    t.boolean  "iuf",                                   default: false
     t.string   "currency_code"
     t.text     "currency"
     t.string   "rulebook_url"
@@ -262,6 +287,7 @@ ActiveRecord::Schema.define(version: 20140419221302) do
     t.boolean  "has_online_waiver"
     t.text     "online_waiver_text"
     t.date     "music_submission_end_date"
+    t.boolean  "artistic_score_elimination_mode_naucc", default: true
   end
 
   create_table "events", force: true do |t|

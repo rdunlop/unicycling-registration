@@ -117,6 +117,10 @@ Workspace::Application.routes.draw do
 
     resources :registration_periods
 
+    resources :combined_competitions do
+      resources :combined_competition_entries, except: [:show]
+    end
+
     resources :event_choices, :except => [:index, :create, :new]
 
     resources :events, :except => [:index, :new, :create] do

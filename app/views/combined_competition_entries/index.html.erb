@@ -1,0 +1,38 @@
+<h1>Listing Entries for <%= @combined_competition %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Place</th>
+      <% @combined_competition_entries.each do |cc| %>
+        <th><%= cc %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% for place in 1..10 %>
+      <tr>
+        <th><%= place %></th>
+        <% @combined_competition_entries.each do |cc| %>
+          <td><%= cc.send("points_#{place}") %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <tr>
+      <th>Edit?</th>
+      <% @combined_competition_entries.each do |cc| %>
+        <td><%= link_to 'Edit', edit_combined_competition_combined_competition_entry_path(@combined_competition, cc) %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>Destroy</th>
+      <% @combined_competition_entries.each do |cc| %>
+        <td><%= link_to 'Destroy', [@combined_competition, cc], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Combined competition entry', new_combined_competition_combined_competition_entry_path(@combined_competition) %>
