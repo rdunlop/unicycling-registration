@@ -215,10 +215,6 @@ class Competition < ActiveRecord::Base
     @score_calculator = scoring_helper.score_calculator
   end
 
-  def ordered_results
-    scoring_helper.ordered_results
-  end
-
   def result_description
     scoring_helper.result_description
   end

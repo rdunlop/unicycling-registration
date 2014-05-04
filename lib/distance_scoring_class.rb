@@ -54,10 +54,6 @@ class DistanceScoringClass < BaseScoringClass
     score_calculator.update_all_places
   end
 
-  def ordered_results
-    @competition.best_distance_attempts
-  end
-
   # Used when trying to destroy all results for a competition
   def all_competitor_results
     nil

@@ -45,10 +45,6 @@ class ExternallyRankedScoringClass < BaseScoringClass
     score_calculator.update_all_places
   end
 
-  def ordered_results
-    @competition.external_results.includes(:competitor).order("rank")
-  end
-
   # Used when trying to destroy all results for a competition
   def all_competitor_results
     @competition.external_results

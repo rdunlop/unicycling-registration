@@ -50,10 +50,6 @@ class RaceScoringClass < BaseScoringClass
     score_calculator.update_all_places
   end
 
-  def ordered_results
-    @competition.time_results.includes(:competitor).reorder("minutes, seconds, thousands")
-  end
-
   # Used when trying to destroy all results for a competition
   def all_competitor_results
     @competition.time_results
