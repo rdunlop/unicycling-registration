@@ -39,13 +39,15 @@ class DistanceScoringClass < BaseScoringClass
 
   def competitor_comparable_result(competitor)
     if self.competitor_has_result?(competitor)
-      competitor.max_successful_distance || 0
+      # larger score is better, so invert this result so that the sorting is correct
+      -competitor.max_successful_distance || 0
     else
-      nil
+      0
     end
   end
 
   def competitor_dq?(competitor)
+    return false if competitor.best_distance_attempt.nil?
     competitor.best_distance_attempt.fault
   end
 

@@ -33,7 +33,7 @@ class RaceScoringClass < BaseScoringClass
     if self.competitor_has_result?(competitor)
       competitor.time_results.first.try(:full_time_in_thousands)
     else
-      nil
+      0
     end
   end
 
