@@ -10,6 +10,7 @@ Last Re-Arranged February 6, 2014.
 - Add a functional suite which ensures that a reg can create/sign/up/pay/summary
 - Add ability to upload music for competitions
 - add a limit of 500 places between all 3 lodging types.
+- Separate "Track" scoring vs other time-based scor tracking. (so that import only asks for LIF at appropriate times)
 
 =============================
 Registration-Related ToDo

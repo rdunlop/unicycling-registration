@@ -38,6 +38,11 @@ describe ImportResultsController do
         }.to change(ImportResult, :count).by(1)
       end
 
+      it "creates a new ImportResult with start_time" do
+        post :create, {:import_result => valid_attributes.merge(:is_start_time => true), :user_id => @admin_user.id, :competition_id => @competition.id}
+        expect(ImportResult.last.is_start_time).to be_truthy
+      end
+
       it "assigns a newly created import_result as @import_result" do
         post :create, {:import_result => valid_attributes, :user_id => @admin_user.id, :competition_id => @competition.id}
         assigns(:import_result).should be_a(ImportResult)
@@ -136,6 +141,22 @@ describe ImportResultsController do
       ir.thousands.should == 300
       ir.disqualified.should == false
       ir.competition.should == @competition
+    end
+
+    it "can import start times" do
+      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      test_image = fixture_path + '/sample_time_results_bib_101.txt'
+      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
+
+      post :import_csv, {:file => sample_input, :user_id => @admin_user.id, :competition_id => @competition.id, :start_times => true}
+
+      ImportResult.count.should == 1
+      ir = ImportResult.first
+      ir.is_start_time.should == true
+    end
+
+    it "creates a dq competitor" do
+      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
     end
     it "creates a dq competitor" do
       @reg = FactoryGirl.create(:registrant, :bib_number => 101)

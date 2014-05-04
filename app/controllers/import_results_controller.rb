@@ -94,6 +94,7 @@ class ImportResultsController < ApplicationController
   # POST /users/#/competitions/#/import_results/import_csv
   def import_csv
     upload = Upload.new
+    is_start_time = params[:start_times] || false
     # FOR EXCEL DATA:
     raw_data = upload.extract_csv(params[:file])
     n = 0
@@ -104,6 +105,7 @@ class ImportResultsController < ApplicationController
       result.raw_data = raw_data
       result.user = @user
       result.competition = @competition
+      result.is_start_time = is_start_time
       if result.save
         n = n + 1
       else
@@ -201,7 +203,7 @@ class ImportResultsController < ApplicationController
   end
 
   def import_result_params
-    params.require(:import_result).permit(:bib_number, :disqualified, :minutes, :raw_data, :seconds, :thousands, :rank, :details)
+    params.require(:import_result).permit(:bib_number, :disqualified, :minutes, :raw_data, :seconds, :thousands, :rank, :details, :is_start_time)
   end
 end
 

@@ -19,6 +19,7 @@ class TimeResult < ActiveRecord::Base
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
   validates :competitor_id, :uniqueness => true
   validates :disqualified, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :is_start_time, :inclusion => { :in => [true, false] } # because it's a boolean
 
   scope :fastest_first, -> { order("disqualified, minutes, seconds, thousands") }
 
@@ -26,6 +27,7 @@ class TimeResult < ActiveRecord::Base
 
   def init
     self.disqualified = false if self.disqualified.nil?
+    self.is_start_time = false if self.is_start_time.nil?
     self.minutes = 0 if self.minutes.nil?
     self.seconds = 0 if self.seconds.nil?
     self.thousands = 0 if self.thousands.nil?

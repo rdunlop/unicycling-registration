@@ -21,6 +21,7 @@
         <th>Seconds</th>
         <th>Thousands</th>
         <th>DQ</th>
+        <th>Is Start Time?</th>
         <th></th>
       </tr>
     </thead>
@@ -33,6 +34,7 @@
         <td><%= f.number_field :seconds %></td>
         <td><%= f.number_field :thousands %></td>
         <td><%= f.check_box :disqualified %></td>
+        <td><%= f.check_box :is_start_time %></td>
         <td><%= f.submit %></td>
       </tr>
     </tbody>

@@ -13,6 +13,7 @@
       <th>Seconds</th>
       <th>Thousands</th>
       <th>Disqualified</th>
+      <th>Is Start Time?</th>
       <th>Rank (external)</th>
       <th>Details (external)</th>
       <th>Name</th>
@@ -32,6 +33,7 @@
         <td><%= import_result.seconds %></td>
         <td><%= import_result.thousands %></td>
         <td><%= import_result.disqualified %></td>
+        <td><%= import_result.is_start_time %></td>
         <td><%= import_result.rank %></td>
         <td><%= import_result.details %></td>
         <td><%= Registrant.find_by_bib_number(import_result.bib_number) %></td>
@@ -56,12 +58,16 @@
 
 <h2>CSV Import Instructions</h2>
 <% if @competition.uses_lane_assignments %>
+  <b>For Heat-based time data</b><br />
   <%= form_tag(import_lif_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do %>
     <%= label_tag :heat, "Heat" %><%= text_field_tag "heat" %><br />
     <%= file_field_tag "file" %>
     <%= submit_tag "Load LIF to Temp Table" %>
   <% end %>
-<% elsif @competition.event_class == "Distance" %>
+
+  <hr />
+  <b>Option 2</b><br />
+
   Please import a Comma-Separated-File file with the following format (for 'Distance' competitions):
 
   <ul>
@@ -72,7 +78,10 @@
     <li>Column 5: "DQ" or empty</li>
   </ul>
   <%= form_tag(import_csv_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do %>
-    <%= file_field_tag "file" %>
+    <%= label_tag :file, "Source File" %>
+    <%= file_field_tag :file %><br />
+    <%= label_tag :start_times, "Start Times?" %>
+    <%= check_box_tag :start_times %><br />
     <%= submit_tag "Load CSV to Temp Table" %>
   <% end %>
 <% elsif @competition.event_class == "Ranked" %>

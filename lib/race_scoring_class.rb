@@ -68,7 +68,8 @@ class RaceScoringClass < BaseScoringClass
       minutes: import_result.minutes,
       seconds: import_result.seconds,
       thousands: import_result.thousands,
-      disqualified: import_result.disqualified)
+      disqualified: import_result.disqualified,
+      is_start_time: import_result.is_start_time)
   end
 
   def build_import_result_from_raw(raw)

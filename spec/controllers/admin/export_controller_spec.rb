@@ -213,7 +213,8 @@ describe Admin::ExportController do
               "minutes" => 45,
               "seconds" => 22,
               "thousands" => 123,
-              "disqualified" => false
+              "disqualified" => false,
+              "is_start_time" => false
             }
           ] }
       end
