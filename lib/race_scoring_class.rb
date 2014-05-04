@@ -19,10 +19,28 @@ class RaceScoringClass < BaseScoringClass
     competitor.time_results.count > 0
   end
 
+  def best_time_in_thousands(competitor)
+    starts = competitor.time_results.start_times
+    finishes = competitor.time_results.finish_times
+
+    if starts.any?
+      start_time = starts.first.full_time_in_thousands
+    else
+      start_time = 0
+    end
+    if finishes.any?
+      finish_time = finishes.first.full_time_in_thousands
+    else
+      finish_time = 0
+    end
+
+    finish_time - start_time
+  end
+
   # returns the result for this competitor
   def competitor_result(competitor)
     if self.competitor_has_result?(competitor)
-      competitor.time_results.first.try(:full_time)
+      TimeResultPresenter.new(best_time_in_thousands(competitor)).full_time
     else
       nil
     end
@@ -31,7 +49,7 @@ class RaceScoringClass < BaseScoringClass
   # returns the result for this competitor
   def competitor_comparable_result(competitor)
     if self.competitor_has_result?(competitor)
-      competitor.time_results.first.try(:full_time_in_thousands)
+      best_time_in_thousands(competitor)
     else
       0
     end

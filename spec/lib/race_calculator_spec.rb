@@ -12,6 +12,50 @@ describe OrderedResultCalculator do
     @tr4.try(:reload)
   end
 
+  describe "when calculating the result of a competitor with time_results" do
+    before :each do
+      @event_configuration = FactoryGirl.create(:event_configuration, :start_date => Date.today)
+      @competition = FactoryGirl.create(:timed_competition)
+      FactoryGirl.create(:event_configuration, :start_date => Date.new(2013,01,01))
+      # Note: Registrants are born in 1990, thus are 22 years old
+      @comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @tr1 = FactoryGirl.create(:time_result, :minutes => 1, :competitor => @comp1)
+      @tr2 = FactoryGirl.create(:time_result, :minutes => 2, :competitor => @comp2)
+      @tr3 = FactoryGirl.create(:time_result, :minutes => 3, :competitor => @comp3)
+    end
+
+    it "shows the correct result" do
+      expect(@comp1.result).to eq("1:00")
+      expect(@comp2.result).to eq("2:00")
+      expect(@comp3.result).to eq("3:00")
+    end
+
+    it "returns the correct comparable result" do
+      expect(@comp1.comparable_score).to eq(60000)
+      expect(@comp2.comparable_score).to eq(120000)
+    end
+
+    describe "when there is a start_time" do
+      before :each do
+        @tr1 = FactoryGirl.create(:time_result, :minutes => 0, :is_start_time => true, :competitor => @comp1)
+        @tr2 = FactoryGirl.create(:time_result, :seconds => 10, :is_start_time => true, :competitor => @comp2)
+        @tr3 = FactoryGirl.create(:time_result, :seconds => 20, :is_start_time => true, :competitor => @comp3)
+      end
+
+      it "shows the difference in time for the result" do
+        expect(@comp1.result).to eq("1:00")
+        expect(@comp2.result).to eq("1:50")
+        expect(@comp3.result).to eq("2:40")
+      end
+
+      it "returns the correct comparable result" do
+        expect(@comp1.comparable_score).to eq(60000)
+        expect(@comp2.comparable_score).to eq(110000)
+      end
+    end
+  end
   describe "when calculating the placing of timed races" do
     before(:each) do
       @event_configuration = FactoryGirl.create(:event_configuration, :start_date => Date.today)

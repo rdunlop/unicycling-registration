@@ -69,11 +69,6 @@ describe TimeResult do
     @tr.competitor.should == @competitor
   end
 
-  it "Cannot have the same registrant have 2 results for the same competitor" do
-    @tr = FactoryGirl.build(:time_result, :competitor => @competitor)
-    @tr.valid?.should == false
-  end
-
   describe "when it has a time" do
     before(:each) do
       @tr.minutes = 19

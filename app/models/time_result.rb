@@ -17,11 +17,13 @@ class TimeResult < ActiveRecord::Base
   include Placeable
 
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
-  validates :competitor_id, :uniqueness => true
+  validates :competitor_id, :presence => true
   validates :disqualified, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :is_start_time, :inclusion => { :in => [true, false] } # because it's a boolean
 
   scope :fastest_first, -> { order("disqualified, minutes, seconds, thousands") }
+  scope :start_times, -> { where(:is_start_time => true) }
+  scope :finish_times, -> { where(:is_start_time => false) }
 
   after_initialize :init
 
@@ -49,37 +51,10 @@ class TimeResult < ActiveRecord::Base
     competitor.event
   end
 
-  def thousands_string
-    if thousands == 0
-      # print no thousands
-      ""
-    else
-      if thousands % 100 == 0
-        thousands_string = ".#{(thousands / 100).to_s}"
-      else
-        thousands_string = ".#{thousands.to_s.rjust(3,"0")}"
-      end
-    end
-  end
-
-  def hours_minutes_string
-    hours = minutes / 60
-    if hours > 0
-      remaining_minutes = minutes % 60
-      "#{hours}:#{remaining_minutes.to_s.rjust(2,"0")}"
-    else
-      "#{minutes}"
-    end
-  end
-
-  def seconds_string
-    seconds.to_s.rjust(2, "0")
-  end
-
   def full_time
     return "" if disqualified
 
-    "#{hours_minutes_string}:#{seconds_string}#{thousands_string}"
+    TimeResultPresenter.new(full_time_in_thousands).full_time
   end
 
   def result
