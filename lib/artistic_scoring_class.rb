@@ -29,6 +29,10 @@ class ArtisticScoringClass < BaseScoringClass
     end
   end
 
+  def competitor_dq?(competitor)
+    false
+  end
+
   # Function which places all of the competitors in the competition
   def place_all
     nil
