@@ -1,5 +1,6 @@
 Last Re-Arranged February 6, 2014.
 
+- Add monthly reminders to people who haven't paid?
 - make all "results" have a common interface, including "Disqualified" ? no, this doesn't make sense, as it's the competitor who is dq'd, not the score/result....or is it?
 - Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
 - NAUCC 2013 registrants#show_all doesn't work (too slow)

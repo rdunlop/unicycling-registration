@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "registrant_id"
     t.boolean  "declined"
     t.boolean  "accepted_readonly"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   add_index "additional_registrant_accesses", ["registrant_id"], name: "index_additional_registrant_accesses_registrant_id", using: :btree
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "start_age"
     t.integer  "end_age"
     t.string   "gender"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "wheel_size_id"
   end
 
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
   create_table "age_group_types", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "award_labels", force: true do |t|
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "place"
     t.integer  "user_id"
     t.integer  "registrant_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "competitor_name"
     t.string   "category"
   end
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "minor_dismount"
     t.integer  "major_boundary"
     t.integer  "minor_boundary"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "boundary_scores", ["competitor_id"], name: "index_boundary_scores_competitor_id", using: :btree
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
   create_table "categories", force: true do |t|
     t.string   "name"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "info_url"
   end
 
@@ -143,8 +143,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "event_id"
     t.string   "name"
     t.boolean  "locked"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "age_group_type_id"
     t.boolean  "has_experts",       default: false
     t.boolean  "has_age_groups",    default: false
@@ -158,8 +158,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "position"
     t.integer  "custom_external_id"
     t.string   "custom_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "competitors", ["competition_id"], name: "index_competitors_event_category_id", using: :btree
@@ -194,8 +194,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.decimal  "distance",      precision: 4, scale: 0
     t.boolean  "fault"
     t.integer  "judge_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   add_index "distance_attempts", ["competitor_id"], name: "index_distance_attempts_competitor_id", using: :btree
@@ -205,8 +205,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "event_id"
     t.integer  "position"
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "age_range_start", default: 0
     t.integer  "age_range_end",   default: 100
   end
@@ -232,8 +232,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.string   "multiple_values"
     t.string   "label"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.boolean  "autocomplete"
     t.boolean  "optional",                    default: false
     t.string   "tooltip"
@@ -269,8 +269,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.date     "artistic_closed_date"
     t.date     "standard_skill_closed_date"
     t.date     "tshirt_closed_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.string   "logo_filename"
     t.string   "logo_type"
     t.boolean  "test_mode"
@@ -294,8 +294,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "category_id"
     t.string   "export_name"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "name"
     t.boolean  "visible"
     t.boolean  "accepts_music_uploads", default: false
@@ -318,8 +318,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.string   "group_name"
     t.boolean  "visible"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "info_url"
     t.string   "competitor_free_options"
     t.string   "noncompetitor_free_options"
@@ -346,8 +346,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.decimal  "cost"
     t.string   "export_name"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
     t.integer  "expense_group_id"
     t.boolean  "has_details"
     t.string   "details_label"
@@ -363,8 +363,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "competitor_id"
     t.string   "details"
     t.integer  "rank"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "external_results", ["competitor_id"], name: "index_external_results_on_competitor_id", using: :btree
@@ -377,8 +377,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "seconds"
     t.integer  "thousands"
     t.boolean  "disqualified"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "competition_id"
     t.integer  "rank"
     t.string   "details"
@@ -397,8 +397,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "val_2_max"
     t.integer  "val_3_max"
     t.integer  "val_4_max"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "event_class"
     t.boolean  "boundary_calculation_enabled"
   end
@@ -407,8 +407,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "competition_id"
     t.integer  "judge_type_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "judges", ["competition_id"], name: "index_judges_event_category_id", using: :btree
@@ -420,8 +420,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "registrant_id"
     t.integer  "heat"
     t.integer  "lane"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "lane_assignments", ["competition_id"], name: "index_lane_assignments_on_competition_id", using: :btree
@@ -429,8 +429,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
   create_table "members", force: true do |t|
     t.integer  "competitor_id"
     t.integer  "registrant_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "members", ["competitor_id"], name: "index_members_competitor_id", using: :btree
@@ -440,8 +440,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "payment_id"
     t.integer  "registrant_id"
     t.decimal  "amount"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "expense_item_id"
     t.string   "details"
     t.boolean  "free",            default: false
@@ -457,8 +457,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.boolean  "cancelled"
     t.string   "transaction_id"
     t.datetime "completed_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "payment_date"
     t.string   "note"
   end
@@ -472,8 +472,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.string   "table"
     t.integer  "month",      limit: 2
     t.integer  "year",       limit: 8
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories", using: :btree
@@ -503,8 +503,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "registrant_id"
     t.integer  "event_choice_id"
     t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "registrant_choices", ["event_choice_id"], name: "index_registrant_choices_event_choice_id", using: :btree
@@ -514,8 +514,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "registrant_id"
     t.boolean  "signed_up"
     t.integer  "event_category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "event_id"
   end
 
@@ -526,8 +526,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
   create_table "registrant_expense_items", force: true do |t|
     t.integer  "registrant_id"
     t.integer  "expense_item_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "details"
     t.boolean  "free",            default: false
     t.boolean  "system_managed",  default: false
@@ -541,8 +541,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
   create_table "registrant_group_members", force: true do |t|
     t.integer  "registrant_id"
     t.integer  "registrant_group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "registrant_group_members", ["registrant_group_id"], name: "index_registrant_group_mumbers_registrant_group_id", using: :btree
@@ -551,8 +551,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
   create_table "registrant_groups", force: true do |t|
     t.string   "name"
     t.integer  "registrant_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "registrant_groups", ["registrant_id"], name: "index_registrant_groups_registrant_id", using: :btree
@@ -563,8 +563,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.string   "last_name"
     t.date     "birthday"
     t.string   "gender"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.integer  "user_id"
     t.boolean  "competitor"
     t.boolean  "deleted"
@@ -594,8 +594,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.date     "start_date"
     t.date     "end_date"
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.integer  "competitor_expense_item_id"
     t.integer  "noncompetitor_expense_item_id"
     t.boolean  "onsite"
@@ -606,8 +606,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.string   "name"
     t.integer  "resource_id"
     t.string   "resource_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
@@ -621,8 +621,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.decimal  "val_4",         precision: 5, scale: 3
     t.text     "notes"
     t.integer  "judge_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   add_index "scores", ["competitor_id"], name: "index_scores_competitor_id", using: :btree
@@ -642,8 +642,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "standard_skill_routine_entry_id"
     t.integer  "judge_id"
     t.integer  "devaluation"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "standard_execution_scores", force: true do |t|
@@ -654,8 +654,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "line"
     t.integer  "cross"
     t.integer  "circle"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "standard_skill_entries", force: true do |t|
@@ -663,22 +663,22 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.string   "letter"
     t.decimal  "points",      precision: 6, scale: 2
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "standard_skill_routine_entries", force: true do |t|
     t.integer  "standard_skill_routine_id"
     t.integer  "standard_skill_entry_id"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "standard_skill_routines", force: true do |t|
     t.integer  "registrant_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "time_results", force: true do |t|
@@ -687,11 +687,11 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.integer  "seconds"
     t.integer  "thousands"
     t.boolean  "disqualified"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "time_results", ["competitor_id"], name: "index_time_results_on_competitor_id", using: :btree
+  add_index "time_results", ["competitor_id"], name: "index_time_results_on_event_category_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -707,8 +707,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -739,8 +739,8 @@ ActiveRecord::Schema.define(version: 20140503231056) do
   create_table "wheel_sizes", force: true do |t|
     t.integer  "position"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

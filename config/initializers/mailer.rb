@@ -11,7 +11,7 @@ ActionMailer::Base.default :from => ENV['MAIL_FULL_EMAIL']
 
 ActionMailer::Base.default_url_options[:host] = ENV['DOMAIN']
 
-if Rails.env.development?
+if Rails.env.development? or Rails.env.naucc?
   class OverrideMailRecipient
     def self.delivering_email(mail)
       mail.body = "DEVELOPMENT-OVERRIDE. Was being sent to #{mail.to} bcc: #{mail.bcc}\n" + mail.body.to_s

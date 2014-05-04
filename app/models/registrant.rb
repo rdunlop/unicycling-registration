@@ -550,7 +550,8 @@ class Registrant < ActiveRecord::Base
 
   # does this registrant have this event checked off?
   def has_event?(event)
-    self.signed_up_events.where({:event_id => event.id}).any?
+    @has_event ||= {}
+    @has_event[event] ||= self.signed_up_events.where({:event_id => event.id}).any?
   end
 
   def describe_event(event)
