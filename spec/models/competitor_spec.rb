@@ -14,6 +14,67 @@
 require 'spec_helper'
 
 describe Competitor do
+  before :each do
+    @comp = FactoryGirl.build_stubbed(:event_competitor)
+  end
+
+  it "has a time_result in thousands when no results" do
+    expect(@comp.best_time_in_thousands).to be(0)
+  end
+
+  describe "when there are time results" do
+    before :each do
+      @tr1 = FactoryGirl.build_stubbed(:time_result, :minutes => 1)
+      allow(@comp).to receive(:finish_time_results).and_return([@tr1])
+    end
+
+    it "has a best_time_in_thousands" do
+      expect(@comp.best_time_in_thousands).to be(60000)
+    end
+
+    describe "when there is also a start time" do
+      before :each do
+        @tr2 = FactoryGirl.build_stubbed(:time_result, :is_start_time => true, :seconds => 10)
+        allow(@comp).to receive(:start_time_results).and_return([@tr2])
+      end
+
+      it "has the correct best_time_in_thousands" do
+        expect(@comp.best_time_in_thousands).to be(50000)
+      end
+    end
+  end
+  describe "when there are multiple start and end times" do
+    before :each do
+      @start1 = FactoryGirl.build_stubbed(:time_result, :is_start_time => true, :minutes => 1)
+      @start2 = FactoryGirl.build_stubbed(:time_result, :is_start_time => true, :minutes => 10)
+
+      @end1 = FactoryGirl.build_stubbed(:time_result, :minutes => 2, :seconds => 30)
+      @end2 = FactoryGirl.build_stubbed(:time_result, :minutes => 10, :seconds => 45)
+
+      allow(@comp).to receive(:start_time_results).and_return([@start1, @start2])
+      allow(@comp).to receive(:finish_time_results).and_return([@end1, @end2])
+    end
+
+    it "has the correct best_time_in_thousands" do
+      expect(@comp.best_time_in_thousands).to be(45000)
+    end
+  end
+
+  describe "when there are end times without start times" do
+    before :each do
+      @end1 = FactoryGirl.build_stubbed(:time_result, :minutes => 2, :seconds => 30)
+      @end2 = FactoryGirl.build_stubbed(:time_result, :minutes => 10, :seconds => 45)
+
+      allow(@comp).to receive(:finish_time_results).and_return([@end1, @end2])
+    end
+
+    it "has the correct best_time_in_thousands" do
+      expect(@comp.best_time_in_thousands).to be(150000)
+    end
+  end
+end
+
+describe Competitor do
   before(:each) do
     @comp = FactoryGirl.create(:event_competitor)
   end

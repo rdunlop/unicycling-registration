@@ -398,4 +398,29 @@ class Competitor < ActiveRecord::Base
     def self.group_selection_text
       "Create Pair/Group from selected Registrants"
     end
+
+    # time result calculations
+    def start_time_results
+      time_results.start_times
+    end
+
+    def finish_time_results
+      time_results.finish_times
+    end
+
+    def best_time_in_thousands
+      start_times = start_time_results.map(&:full_time_in_thousands)
+      finish_times = finish_time_results.map(&:full_time_in_thousands)
+
+      best_finish_time = 0
+      finish_times.each do |ft|
+        matching_start_time = start_times.select{ |t| t < ft}.sort.max || 0
+        new_finish_time = ft - matching_start_time
+
+        if best_finish_time == 0 || best_finish_time > new_finish_time
+          best_finish_time = new_finish_time
+        end
+      end
+      best_finish_time
+    end
 end
