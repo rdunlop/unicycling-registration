@@ -46,23 +46,6 @@ Outputs:
 
 * Set of unique registration records, each of which is associated with multiple events, and multiple details for those events.
 
-UCP (Access database)
-===
-
-The Unicycling Convention Program (UCP) is a pair of Microsoft Access databases. It is able to:
- * Perform registration-handling functions (data input)
- * Perform Age Group configuration (for event organizers to know how many people in each event/category)
-  * Note: Age group calculation are not well defined
- * Perform Judging score input, calculation and reporting
- * Perform reporting of both event-sign-up
- * Perform reporting of event-results
-
-Inputs:
-
-* Can be configured using the output of the Registration system, or can be configured independently
-* Can import (soon) data from the Registration system
-
-
 Judging (Ruby on Rails)
 =======
 
@@ -89,14 +72,11 @@ Data Flow analysis/ideas:
  - Name/Contact
   - Event sign up choices
 
-Used for configuring/populating UCP
 
 2) Event Configuration Details:
  - Event names
   - Event choices
 
-Used for configuring UCP?
- 
 
 3) Event-Competitor Details:
  - Name/ID - Event configuration

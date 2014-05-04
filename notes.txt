@@ -16,13 +16,13 @@ POST-NAUCC2013 Report/Requests:
 - Personalized Schedule, Page 2 of the registration package
  - Awesome feature: include the full convention schedule, highlighting the events that the registrant is signed up for.
  - Includes all competition events, and ONLY competition events.
- 
+
  - I want to have a "Publish to Website" button for each competition results.
   - To be used/synchronized on a nightly basis.
    - Connie: automagically? Make it simple to publish the results to the website.
  - Make PDFs of the results available for PUBLIC consumption.
   - Make personalized results pages available for each competitor.
- 
+
  - Make the Overall Champion calculation part of UDA.
   - Track: ties are resolved by the number of 1sts, then by place of 100m. Points: 8,6,4,2,1
   - MUni: (at nationals, only) 3 events, and ties are resolved by number of 1sts, then number of 2nds, then 3rd places, 4th places, 5th, and then by Cross-country.
@@ -38,7 +38,7 @@ POST-NAUCC2013 Report/Requests:
 - Allow Concurrent-Heat data entry (enter the heat number and start time, and then the competitor numbers for that start time).
  - Allows entering the finish data directly.
 
-- Be able to enter the 2 results for the MUni Uphill, which will be able to show the better attempt 
+- Be able to enter the 2 results for the MUni Uphill, which will be able to show the better attempt
  - Should be able to enter the start time separately from the end time (for MUNi Uphill), or via heats (Crit Standard)
  - May be able to configure this to be a special case for Obstacle, MUNi Up/down, Long/High, etc.
 

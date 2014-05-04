@@ -274,15 +274,7 @@ UNCATEGORIZED:
 - Ability to specify a "name" for user accounts, so that I can refer to "judge" accounts properly.
 ?- Ability to show the Events, Judges, so that the Chief Judge can determine the next events' judges in advance
 
-- Document the flows
-- Automate the testing of the flows 
 - Prevent multiple judges from entering results for the same registrant in TimeResults
-
-- Synchronize data between UCP and UDA.
- - Export Registration-configuration data from UDA to UCP
- - Export Registration data from UDA to UCP
- - Export Payment data from UDA to UCP
- - Export Competitor-assignment from UCP to UDA
 - Improve ability to modify/manage registration data on UDA for on-site modifications.
 
 
