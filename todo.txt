@@ -1,19 +1,13 @@
 Last Re-Arranged February 6, 2014.
 
-- Add monthly reminders to people who haven't paid?
 - make all "results" have a common interface, including "Disqualified" ? no, this doesn't make sense, as it's the competitor who is dq'd, not the score/result....or is it?
 - Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
-- NAUCC 2013 registrants#show_all doesn't work (too slow)
 
 - Update the instructions for setting up a development or server
 - update to use database.yml and secrets.yml the rails-4 way?
 
-- prevent selecting dates which are not possible (Scott problem).
-- split the awards_label_controller to have a helper which does the work of processing the params-requests
-- Payment summary for Hugo/Benoit
 - find a way to test/fix that we prevent registrants from seeing other-registrants' data (if they can create, they must be able to view?)
 - Add a functional suite which ensures that a reg can create/sign/up/pay/summary
-- Replace the lib/helpers with concerns or PORO
 - Add ability to upload music for competitions
 - add a limit of 500 places between all 3 lodging types.
 
@@ -25,12 +19,12 @@ Registration-Related ToDo
 
 Most Useful:
 - Add caching around scoring, judged_place, placing_points
+- NAUCC 2013 registrants#show_all doesn't work (too slow)
 - Ensure that Boundary Score judging works (after the judgeable refactor, ties is probably broken)
 - determine how to deal with performance issues when sorting on cached field.
 - learn more about acts_as_list for position usage (for competitor#position)
 - prevent sorting when clicking all/none on competitors#index page
 - create ability to "randomize current competitors" and "specify competitor positions"
-- permissions#index performance issues, due to lack of index of role_id?
 - add warning on the "Registrants (edit)" page for any registrant which is "Not Valid"
 - scoring freestyle "Back" button brings me nowhere
 - figure out why error message (unable to add registrant 2x) isn't being displayed.
@@ -49,10 +43,8 @@ Most Useful:
 - Make the navigation bar always the same styling unless we have selected something.
 - Prevent "final_candidates" from being selected from non-24" wheel-sizes
 
-- Set "unicon scoring" boolean at EventConfiguration level
 - Prevent setting "AgeGroupType" and "Export"-ONLY boolean at Competition-level
 - add "event_category" source field to competitions, for use when creating competitors.
-# - Eliminate "create_empty", have this by default
  - Add ability to display/update registrants->competitors for a competition.
 
 - Add ability to enter start times and end times for races (start_time_race)
@@ -70,6 +62,8 @@ DESIGN:
  - Add display to registrants-printing page which shows all competitors that they have associated? (to show the age groups, etc?)
 
 Less useful:
+- prevent selecting dates which are not possible (Scott problem).
+- Add monthly reminders to people who haven't paid?
 - Wrap Permissions (on User) properly, so that cancan sees/manages it (currently it's can?(:manage, User))
 
 Payment-related:
