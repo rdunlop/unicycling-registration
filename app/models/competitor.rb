@@ -67,24 +67,29 @@ class Competitor < ActiveRecord::Base
       members.first.registrant.bib_number
     end
 
-    def disqualified=(dq)
-      Rails.cache.write("#{place_key}/dq", dq)
+    def disqualified
+      Rails.cache.fetch("#{place_key}/dq") do
+        sh = competition.scoring_helper
+        sh.competitor_dq?(self)
+      end
     end
 
-    def disqualified
-      Rails.cache.fetch("#{place_key}/dq")
+    def comparable_score
+      sh = competition.scoring_helper
+      sh.competitor_comparable_result(self)
     end
 
     def place=(new_place)
       unless new_place.is_a? Integer
-        raise "Unexpected place" unless new_place == "DQ"
-        self.disqualified = true
-        new_place = 0
+        raise "Unexpected place #{new_place}" unless new_place == "DQ"
+      else
+        Rails.cache.write(place_key, new_place)
       end
-      Rails.cache.write(place_key, new_place)
     end
 
     def place
+      return 0 if disqualified
+
       my_place = Rails.cache.fetch(place_key)
 
       if my_place.nil? and (has_result?)
@@ -96,8 +101,9 @@ class Competitor < ActiveRecord::Base
     end
 
     def place_formatted
-      if place == 0
-        return "DQ" if disqualified
+      return "DQ" if disqualified
+
+      if place == 0 || place.nil?
         return "Unknown"
       else
         place
@@ -152,7 +158,6 @@ class Competitor < ActiveRecord::Base
     end
 
     def place_key
-      competition.reload
       "/competition/#{competition.id}-#{competition.updated_at}/competitor/#{id}-#{updated_at}/age_group_count/#{age_group_cache_value}/place"
     end
 
@@ -333,14 +338,22 @@ class Competitor < ActiveRecord::Base
     end
 
     def max_attempted_distance
-        distance_attempts.first.try(:distance) || 0
+      return 0 unless distance_attempts.any?
+
+      distance_attempts.first.distance
     end
+
     def max_successful_distance
-        max_successful_distance_attempt.try(:distance) || 0
+      max_successful_distance_attempt.try(:distance) || 0
     end
 
     def max_successful_distance_attempt
-        distance_attempts.where(:fault => false).first || nil
+      distance_attempts.where(:fault => false).first
+    end
+
+    def best_distance_attempt
+      # best non-fault result, or, if there are none of those, best result (which will be a fault)
+      max_successful_distance_attempt || distance_attempts.first
     end
 
     def status_code

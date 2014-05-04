@@ -4,6 +4,7 @@
 module Placeable
   extend ActiveSupport::Concern
 
+  #XXX get rid of this concern?
   included do
     delegate :gender, :ineligible, :age_group_entry_description, to: :competitor
   end

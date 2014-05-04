@@ -268,8 +268,7 @@ class Competition < ActiveRecord::Base
     results.sort {|a, b| b.distance <=> a.distance }
   end
   def best_distance_attempts
-    best_attempts_for_each_competitor = competitors.map(&:max_successful_distance_attempt)
-    best_attempts_for_each_competitor.delete(nil)
+    best_attempts_for_each_competitor = competitors.map(&:max_successful_distance_attempt).compact
 
     best_attempts_for_each_competitor.sort{ |a,b| b.distance <=> a.distance }
   end

@@ -13,12 +13,13 @@ class OrderedResultCalculator
   # update the places for all age groups
   def update_all_places
 
-    competition.ordered_results.each do |result|
-      age_place_calc = get_place_calculator(result.age_group_entry_description)
-      gender_place_calc = get_place_calculator("Overall: #{result.gender}") # differentiate between Overall and an age group named "Male"
+    competition.competitors.sort{ |a, b| a.comparable_score <=> b.comparable_score}.each do |competitor|
 
-      result.competitor.place = age_place_calc.place_next(result.result, result.disqualified, result.ineligible)
-      result.competitor.overall_place = gender_place_calc.place_next(result.result, result.disqualified, result.ineligible)
+      age_place_calc = get_place_calculator(competitor.age_group_entry_description)
+      gender_place_calc = get_place_calculator("Overall: #{competitor.gender}") # differentiate between Overall and an age group named "Male"
+
+      competitor.place = age_place_calc.place_next(competitor.comparable_score, competitor.disqualified, competitor.ineligible)
+      competitor.overall_place = gender_place_calc.place_next(competitor.comparable_score, competitor.disqualified, competitor.ineligible)
     end
   end
 end

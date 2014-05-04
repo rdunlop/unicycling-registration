@@ -28,6 +28,23 @@ class RaceScoringClass < BaseScoringClass
     end
   end
 
+  # returns the result for this competitor
+  def competitor_comparable_result(competitor)
+    if self.competitor_has_result?(competitor)
+      competitor.time_results.first.try(:full_time_in_thousands)
+    else
+      nil
+    end
+  end
+
+  def competitor_dq?(competitor)
+    if self.competitor_has_result?(competitor)
+      competitor.time_results.first.disqualified
+    else
+      false
+    end
+  end
+
   # Function which places all of the competitors in the competition
   def place_all
     score_calculator.update_all_places

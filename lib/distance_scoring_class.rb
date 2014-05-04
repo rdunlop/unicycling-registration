@@ -16,7 +16,7 @@ class DistanceScoringClass < BaseScoringClass
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.max_successful_distance != 0
+    competitor.distance_attempts.any?
   end
 
   # returns the result for this competitor
@@ -27,6 +27,26 @@ class DistanceScoringClass < BaseScoringClass
     else
       nil
     end
+  end
+
+  def competitor_result(competitor)
+    if self.competitor_has_result?(competitor)
+      competitor.max_successful_distance
+    else
+      nil
+    end
+  end
+
+  def competitor_comparable_result(competitor)
+    if self.competitor_has_result?(competitor)
+      competitor.max_successful_distance || 0
+    else
+      nil
+    end
+  end
+
+  def competitor_dq?(competitor)
+    competitor.best_distance_attempt.fault
   end
 
   # Function which places all of the competitors in the competition

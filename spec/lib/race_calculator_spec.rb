@@ -64,10 +64,10 @@ describe OrderedResultCalculator do
     it "places everyone as 0 if they have no time" do
       recalc
 
-      @tr1.competitor.place_formatted.should == "DQ"
-      @tr2.competitor.place_formatted.should == "DQ"
-      @tr3.competitor.place_formatted.should == "DQ"
-      @tr4.competitor.place_formatted.should == "DQ"
+      @tr1.competitor.place_formatted.should == "Unknown"
+      @tr2.competitor.place_formatted.should == "Unknown"
+      @tr3.competitor.place_formatted.should == "Unknown"
+      @tr4.competitor.place_formatted.should == "Unknown"
     end
 
     it "places the first place as first" do

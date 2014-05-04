@@ -28,6 +28,18 @@ class ExternallyRankedScoringClass < BaseScoringClass
     end
   end
 
+  def competitor_comparable_result(competitor)
+    if self.competitor_has_result?(competitor)
+      competitor.external_results.first.rank
+    else
+      0
+    end
+  end
+
+  def competitor_dq?(competitor)
+    false
+  end
+
   # Function which places all of the competitors in the competition
   def place_all
     score_calculator.update_all_places
@@ -68,5 +80,5 @@ class ExternallyRankedScoringClass < BaseScoringClass
       bib_number: raw[0],
       rank: raw[1],
       details: raw[2])
-   end
+  end
 end

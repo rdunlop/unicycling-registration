@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "external_results/index" do
   before(:each) do
-    @competition = FactoryGirl.build_stubbed(:competition)
+    @competition = FactoryGirl.build_stubbed(:ranked_competition)
     assign(:competition, @competition)
     @external_results = [
         FactoryGirl.build_stubbed(:external_result, :details => "Hello", :rank => 10),
@@ -12,6 +12,8 @@ describe "external_results/index" do
     allow(@competition).to receive(:external_results).and_return(@external_results)
     allow(@external_results[0].competitor).to receive(:place).and_return(1)
     allow(@external_results[1].competitor).to receive(:place).and_return(2)
+    allow(@external_results[0].competitor).to receive(:competition).and_return(@competition)
+    allow(@external_results[1].competitor).to receive(:competition).and_return(@competition)
     allow(@external_results[0].competitor).to receive(:age_group_entry_description).and_return("A")
     allow(@external_results[1].competitor).to receive(:age_group_entry_description).and_return("B")
   end

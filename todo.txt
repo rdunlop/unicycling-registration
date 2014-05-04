@@ -11,6 +11,7 @@ Last Re-Arranged February 6, 2014.
 - Add ability to upload music for competitions
 - add a limit of 500 places between all 3 lodging types.
 - Separate "Track" scoring vs other time-based scor tracking. (so that import only asks for LIF at appropriate times)
+- Add tests for distance_attempt_score calculator ("Two Attempt Distance")
 
 =============================
 Registration-Related ToDo
