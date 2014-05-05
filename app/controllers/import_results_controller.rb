@@ -1,8 +1,8 @@
 require 'upload'
 class ImportResultsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_user, :only => [:index, :create, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
-  before_filter :load_competition, :only => [:index, :create, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
+  before_filter :load_user, :only => [:index, :create, :data_entry, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
+  before_filter :load_competition, :only => [:index, :create, :data_entry, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
   before_filter :load_new_import_result, :only => [:create]
   load_and_authorize_resource
 
@@ -55,9 +55,11 @@ class ImportResultsController < ApplicationController
     respond_to do |format|
       if @import_result.save
         format.html { redirect_to user_competition_import_results_path(@user, @competition), notice: 'Import result was successfully created.' }
+        format.js { }
       else
         @import_results = @user.import_results
         format.html { render action: "index" }
+        format.js { }
       end
     end
   end
@@ -90,6 +92,8 @@ class ImportResultsController < ApplicationController
     end
   end
 
+  def data_entry
+  end
 
   # POST /users/#/competitions/#/import_results/import_csv
   def import_csv

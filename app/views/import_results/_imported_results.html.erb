@@ -1,0 +1,26 @@
+<table class="sortable import_results">
+  <thead>
+    <tr>
+      <th>Competition</th>
+      <th>Raw data</th>
+      <th>Bib number</th>
+      <th>Minutes</th>
+      <th>Seconds</th>
+      <th>Thousands</th>
+      <th>Disqualified</th>
+      <th>Is Start Time?</th>
+      <th>Rank (external)</th>
+      <th>Details (external)</th>
+      <th>Name</th>
+      <th>Competitor Exists?</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @import_results.each do |import_result| %>
+      <%= render import_result %>
+    <% end %>
+  </tbody>
+</table>

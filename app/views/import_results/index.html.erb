@@ -3,51 +3,7 @@
 <%= render 'form' %>
 
 <h1>Listing Import Results</h1>
-<table class="sortable">
-  <thead>
-    <tr>
-      <th>Competition</th>
-      <th>Raw data</th>
-      <th>Bib number</th>
-      <th>Minutes</th>
-      <th>Seconds</th>
-      <th>Thousands</th>
-      <th>Disqualified</th>
-      <th>Is Start Time?</th>
-      <th>Rank (external)</th>
-      <th>Details (external)</th>
-      <th>Name</th>
-      <th>Competitor Exists?</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @import_results.each do |import_result| %>
-      <tr>
-        <td><%= import_result.competition %></td>
-        <td><%= import_result.raw_data %></td>
-        <td><%= import_result.bib_number %></td>
-        <td><%= import_result.minutes %></td>
-        <td><%= import_result.seconds %></td>
-        <td><%= import_result.thousands %></td>
-        <td><%= import_result.disqualified %></td>
-        <td><%= import_result.is_start_time %></td>
-        <td><%= import_result.rank %></td>
-        <td><%= import_result.details %></td>
-        <td><%= Registrant.find_by_bib_number(import_result.bib_number) %></td>
-        <% if import_result.competition.find_competitor_with_bib_number(import_result.bib_number) %>
-          <td class="competitor_exists">Yes</td>
-        <% else %>
-          <td class="competitor_not_exists">No</td>
-        <% end %>
-        <td><%= link_to 'Edit', edit_import_result_path(import_result) %></td>
-        <td><%= link_to 'Destroy', import_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render :partial => "imported_results" %>
 <%= form_tag(destroy_all_user_competition_import_results_path(@user, @competition), {:method => :delete, :multipart=>true}) do %>
   <%= submit_tag "Delete all in Temp Table", :class => "data_import_delete", data: {:confirm => "DELETE, Are you sure?" } %>
 <% end %>

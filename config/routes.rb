@@ -226,6 +226,7 @@ Workspace::Application.routes.draw do
       resources :competition, :only => [] do
         resources :import_results, :only => [:index, :create] do
           collection do
+            get  :data_entry
             post :import_csv
             post :import_lif
             post :publish_to_competition

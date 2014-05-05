@@ -148,8 +148,8 @@
       <tr>
       <th>Competition</th>
       <th>Locked?</th>
-      <th>Import Results</th>
       <th>Results</th>
+      <th>View Results</th>
       <th>Print</th>
       <th>Publish</th>
     </tr>
@@ -169,7 +169,8 @@
         </td>
         <td>
           <% if competition.scoring_helper.results_importable %>
-            <%= link_to 'Import Results', user_competition_import_results_path(current_user, competition) %>
+            <%= link_to 'Import', user_competition_import_results_path(current_user, competition) %>
+            <%= link_to 'Enter', data_entry_user_competition_import_results_path(current_user, competition) %>
           <% else %>
             N/A
           <% end %>
