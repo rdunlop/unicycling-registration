@@ -4,15 +4,15 @@ class Printing::RaceRecordingController < ApplicationController
 
   def instructions
     respond_to do |format|
-      format.html # multi_lap.html.erb
+      format.html
       format.pdf { render_common_pdf("instructions") }
     end
   end
 
-  def multi_lap
+  def blank
     respond_to do |format|
-      format.html # multi_lap.html.erb
-      format.pdf { render_common_pdf("multi_lap") }
+      format.html # blank.html.erb
+      format.pdf { render_common_pdf("blank") }
     end
   end
 end

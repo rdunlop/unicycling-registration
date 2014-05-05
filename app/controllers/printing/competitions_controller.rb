@@ -10,7 +10,7 @@ class Printing::CompetitionsController < ApplicationController
 
   def announcer
     respond_to do |format|
-      format.html # multi_lap.html.erb
+      format.html
       format.pdf { render_common_pdf("announcer") }
     end
   end
