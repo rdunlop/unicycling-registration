@@ -12,43 +12,4 @@
 
 <div id="notice"></div>
 <% @import_result ||= ImportResult.new %>
-<%= form_for(@import_result.new_record? ? [@user, @competition, @import_result] : [@import_result], {:remote => true, :html => {:class => "data_entry"}}) do |f| %>
-  <% if @import_result.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@import_result.errors.count, "error") %> prohibited this import_result from being saved:</h2>
-
-      <ul>
-      <% @import_result.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Competition</th>
-        <th>Bib Number</th>
-        <th>Minutes</th>
-        <th>Seconds</th>
-        <th>Thousands</th>
-        <th>DQ</th>
-        <th>Is Start Time?</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= @competition %></td>
-        <td><%= f.number_field :bib_number, {:autofocus => true } %></td>
-        <td><%= f.number_field :minutes %></td>
-        <td><%= f.number_field :seconds %></td>
-        <td><%= f.number_field :thousands %></td>
-        <td><%= f.check_box :disqualified %></td>
-        <td><%= f.check_box :is_start_time %></td>
-        <td><%= f.submit "Submit", :class => "multiclick" %></td>
-      </tr>
-    </tbody>
-  </table>
-<% end %>
+<%= render partial: "form" %>

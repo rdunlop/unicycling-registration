@@ -72,9 +72,11 @@ class ImportResultsController < ApplicationController
       if @import_result.update_attributes(import_result_params)
         format.html { redirect_to user_competition_import_results_path(@import_result.user, @import_result.competition), notice: 'Import result was successfully updated.' }
         format.json { head :no_content }
+        format.js { }
       else
         format.html { render action: "edit" }
         format.json { render json: @import_result.errors, status: :unprocessable_entity }
+        format.js { }
       end
     end
   end
