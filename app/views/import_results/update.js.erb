@@ -1,0 +1,14 @@
+
+<% if @import_result.errors.any? %>
+  var errors = $("<ul />");
+  <% @import_result.errors.full_messages.each do |error| %>
+    errors.append('<li><%= escape_javascript( error ) %></li>');
+  <% end %>
+
+  // Display errors on form
+  $('#notice').html($("<div id=\"error_explanation\" />").append(errors));
+
+
+<% else %>
+  window.location.replace("<%= user_competition_import_results_path(@import_result.user, @import_result.competition) %>")
+<% end %>
