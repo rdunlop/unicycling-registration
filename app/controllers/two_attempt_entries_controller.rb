@@ -55,8 +55,8 @@ class TwoAttemptEntriesController < ApplicationController
 
   def two_attempt_entry_params
     params.require(:two_attempt_entry).permit(:bib_number, :is_start_time,
-      :dq_1, :raw_data_1, :minutes_1, :seconds_1, :thousands_1,
-      :dq_2, :raw_data_2, :minutes_2, :seconds_2, :thousands_2)
+      :dq_1, :minutes_1, :seconds_1, :thousands_1,
+      :dq_2, :minutes_2, :seconds_2, :thousands_2)
   end
 end
 
