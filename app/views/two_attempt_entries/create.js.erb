@@ -10,7 +10,7 @@
 
 
 <% else %>
-  var new_row = $("<%= escape_javascript(render @two_attempt_entry) %>")
+  var new_row = $("<%= escape_javascript(render partial: 'two_attempt_entry', locals: {two_attempt_entry: @two_attempt_entry, two_attempt_entry_counter: nil }) %>")
   new_row.appendTo(".two_attempt_entries");
   new_row.effect("highlight", {}, 3000);
   $(".data_entry").trigger("reset");

@@ -224,6 +224,7 @@ Workspace::Application.routes.draw do
         end
       end
       resources :competition, :only => [] do
+        resources :two_attempt_entries, :only => [:index, :create]
         resources :import_results, :only => [:index, :create] do
           collection do
             get  :data_entry

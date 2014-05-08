@@ -1,5 +1,7 @@
 Last Re-Arranged February 6, 2014.
 
+- validatio on failure of two_attempt_entry
+
 - make all "results" have a common interface, including "Disqualified" ? no, this doesn't make sense, as it's the competitor who is dq'd, not the score/result....or is it?
 - Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
 
@@ -120,7 +122,7 @@ Other:
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
 - Only display the "Gender Filter" when creating a competition (not on edit)
 - Clarify how to assign a user as a "Lane Assignment User", and where to enter that information
-- Check to see that all of the Controllers are using Registrant.order(...) correctly (it's overridden by the default_scope). 
+- Check to see that all of the Controllers are using Registrant.order(...) correctly (it's overridden by the default_scope).
 - Replace the current AwardLabel model with the new one (so that we can clean up the AwardLabel generation logic)
 - Identify all remaining non-translated texts, and put them into the locale files for english and french (and send them to Hugo)
 - Provide Rolf with a view which shows him the Teams/Team captains, etc
