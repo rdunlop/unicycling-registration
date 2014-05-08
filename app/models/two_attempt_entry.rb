@@ -18,7 +18,7 @@ class TwoAttemptEntry
 
   def self.entries_for(user, competition, is_start_time)
     results = []
-    user.import_results.where(is_start_time: is_start_time, competition: competition).order(:created_at).each do |ir|
+    user.import_results.where(is_start_time: is_start_time, competition: competition).order(:created_at, :id).each do |ir|
       found = false
       results.each do |res|
         if res.bib_number == ir.bib_number
@@ -91,7 +91,7 @@ class TwoAttemptEntry
         thousands: thousands_2,
         disqualified: dq_2
         )
-   end
+  end
 
   def new_record?
     true

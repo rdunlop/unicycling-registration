@@ -4,6 +4,7 @@ class ImportResultsController < ApplicationController
   before_filter :load_user, :only => [:index, :create, :data_entry, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
   before_filter :load_competition, :only => [:index, :create, :data_entry, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
   before_filter :load_new_import_result, :only => [:create]
+  before_action :load_import_results, :only => [:data_entry, :index]
   load_and_authorize_resource
 
   private
@@ -13,6 +14,10 @@ class ImportResultsController < ApplicationController
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_import_results
+    @import_results = @user.import_results.where(:competition_id => @competition)
   end
 
   def load_new_import_result
@@ -25,7 +30,6 @@ class ImportResultsController < ApplicationController
   # GET /users/#/import_results
   # GET /users/#/import_results.json
   def index
-    @import_results = @user.import_results.where(:competition_id => @competition)
     @import_result = ImportResult.new
 
     respond_to do |format|

@@ -170,7 +170,10 @@
         <td>
           <% if competition.scoring_helper.results_importable %>
             <%= link_to 'Import', user_competition_import_results_path(current_user, competition) %>
-            <%= link_to 'Enter', data_entry_user_competition_import_results_path(current_user, competition) %>
+            <% if can? :create, TwoAttemptEntry %>
+              <%= link_to 'Enter Start Times', user_competition_two_attempt_entries_path(current_user, competition, :is_start_time => true) %>
+            <% end %>
+            <%= link_to 'Enter Finish Times', data_entry_user_competition_import_results_path(current_user, competition) %>
           <% else %>
             N/A
           <% end %>

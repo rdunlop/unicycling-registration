@@ -1,6 +1,7 @@
 <table class="sortable import_results">
   <thead>
     <tr>
+      <th></th>
       <th>Competition</th>
       <th>Raw data</th>
       <th>Bib number</th>
@@ -19,8 +20,6 @@
   </thead>
 
   <tbody>
-    <% @import_results.each do |import_result| %>
-      <%= render import_result %>
-    <% end %>
+    <%= render partial: 'import_result', collection: @import_results %>
   </tbody>
 </table>
