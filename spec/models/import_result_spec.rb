@@ -21,15 +21,10 @@ require 'spec_helper'
 
 describe ImportResult do
   before(:each) do
-    @ir = FactoryGirl.create(:import_result)
+    @ir = FactoryGirl.build_stubbed(:import_result)
   end
   it "has a valid factory" do
     @ir.valid?.should == true
-  end
-
-  it "requires a raw_data" do
-    @ir.raw_data = nil
-    @ir.valid?.should == false
   end
 
   it "requires a user" do
