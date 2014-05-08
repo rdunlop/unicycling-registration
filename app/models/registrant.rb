@@ -119,7 +119,6 @@ class Registrant < ActiveRecord::Base
   end
 
   def create_associated_required_expense_items
-
     # add the registration_period expense_item
     rp = RegistrationPeriod.relevant_period(Date.today)
     unless rp.nil? or reg_paid?
