@@ -1,0 +1,24 @@
+<tr>
+  <td><%= two_attempt_entry.bib_number %></td>
+  <td><%= two_attempt_entry.competition %></td>
+  <td><%= two_attempt_entry.is_start_time %></td>
+  <th></th>
+  <td><%= two_attempt_entry.raw_data_1 %></td>
+  <td><%= two_attempt_entry.minutes_1 %></td>
+  <td><%= two_attempt_entry.seconds_1 %></td>
+  <td><%= two_attempt_entry.thousands_1 %></td>
+  <td><%= two_attempt_entry.dq_1 %></td>
+  <td></td>
+  <td><%= two_attempt_entry.raw_data_2 %></td>
+  <td><%= two_attempt_entry.minutes_2 %></td>
+  <td><%= two_attempt_entry.seconds_2 %></td>
+  <td><%= two_attempt_entry.thousands_2 %></td>
+  <td><%= two_attempt_entry.dq_2 %></td>
+  <td></td>
+  <td><%= Registrant.find_by_bib_number(two_attempt_entry.bib_number) %></td>
+  <% if two_attempt_entry.competition.find_competitor_with_bib_number(two_attempt_entry.bib_number) %>
+    <td class="competitor_exists">Yes</td>
+  <% else %>
+    <td class="competitor_not_exists">No</td>
+  <% end %>
+</tr>
