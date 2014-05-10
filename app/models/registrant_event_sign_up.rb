@@ -25,6 +25,10 @@ class RegistrantEventSignUp < ActiveRecord::Base
   belongs_to :event_category
   belongs_to :event
 
+  def self.signed_up
+    where(signed_up: true)
+  end
+
   def category_chosen_when_signed_up
     if self.signed_up and self.event_category.nil?
       errors[:base] << "Cannot sign up for #{self.event.name} without choosing a category"

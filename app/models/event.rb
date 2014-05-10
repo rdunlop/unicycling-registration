@@ -86,11 +86,11 @@ class Event < ActiveRecord::Base
 
   # determine the number of people who have signed up for this event
   def num_competitors
-    registrant_event_sign_ups.where({:signed_up => true}).count
+    registrant_event_sign_ups.signed_up.count
   end
 
   def signed_up_registrants
-    registrant_event_sign_ups.where({:signed_up => true}).map{|resu| resu.registrant}.select{|reg| !reg.deleted}
+    registrant_event_sign_ups.signed_up.map{|resu| resu.registrant}.select{|reg| !reg.deleted}
   end
 
   def competitor_registrants
