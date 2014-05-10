@@ -85,13 +85,13 @@ class ExpenseItem < ActiveRecord::Base
   def create_reg_items
     if self.expense_group.competitor_required
       Registrant.where({:competitor => true}).each do |reg|
-        reg.registrant_expense_items.build({:expense_item_id => self.id, :system_managed => true})
+        reg.build_registration_item(self)
         reg.save
       end
     end
     if self.expense_group.noncompetitor_required
       Registrant.where({:competitor => false}).each do |reg|
-        reg.registrant_expense_items.build({:expense_item_id => self.id, :system_managed => true})
+        reg.build_registration_item(self)
         reg.save
       end
     end
@@ -125,7 +125,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_selected_items
-    registrant_expense_items.count + num_paid
+    num_unpaid + num_paid
   end
 
   def can_i_add?(num_to_add)
