@@ -41,6 +41,14 @@ class ExpenseGroup < ActiveRecord::Base
     self.noncompetitor_required = false if self.competitor_required.nil?
   end
 
+  def self.for_competitor_type(is_competitor)
+    if is_competitor
+      where({:competitor_required => true})
+    else
+      where({:noncompetitor_required => true})
+    end
+  end
+
   def to_s
     group_name
   end

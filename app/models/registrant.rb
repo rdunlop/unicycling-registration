@@ -53,6 +53,8 @@ class Registrant < ActiveRecord::Base
   after_save :touch_members
 
 
+  after_initialize :init
+
 
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
@@ -113,28 +115,13 @@ class Registrant < ActiveRecord::Base
   end
 
   def build_registration_item(reg_item)
-    unless reg_item.nil? or has_expense_item?(reg_item)
+    unless reg_item.nil? || has_expense_item?(reg_item)
       registrant_expense_items.build(:expense_item => reg_item, :system_managed => true)
     end
   end
 
   def create_associated_required_expense_items
-    # add the registration_period expense_item
-    rp = RegistrationPeriod.relevant_period(Date.today)
-    unless rp.nil? or reg_paid?
-      if competitor
-        reg_item = rp.competitor_expense_item
-      else
-        reg_item = rp.noncompetitor_expense_item
-      end
-      build_registration_item(reg_item)
-    end
-
-    required_expense_items.each do |ei|
-      unless has_expense_item?(ei)
-        registrant_expense_items.build(:expense_item => ei, :system_managed => true)
-      end
-    end
+    RequiredExpenseItemCreator.new(self).create
   end
 
   # determine if this registrant has an unpaid (or paid) version of this expense item
@@ -142,25 +129,7 @@ class Registrant < ActiveRecord::Base
     all_expense_items.include?(expense_item)
   end
 
-  # any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
-  def required_expense_items
-    if competitor
-      egs = ExpenseGroup.where({:competitor_required => true})
-    else
-      egs = ExpenseGroup.where({:noncompetitor_required => true})
-    end
 
-    req_eis = []
-    egs.each do |eg|
-      if eg.expense_items.count == 1
-        req_eis << eg.expense_items.first
-      end
-    end
-    req_eis
-  end
-
-
-  after_initialize :init
 
   # Creates the registrant owing
   def build_owing_payment(payment)
@@ -457,11 +426,7 @@ class Registrant < ActiveRecord::Base
   # Indicates that this registrant has paid their registration_fee
   def reg_paid?
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
-      if RegistrationPeriod.paid_for_period(self.competitor, self.paid_expense_items).nil?
-        false
-      else
-        true
-      end
+      RegistrationPeriod.paid_for_period(self.competitor, self.paid_expense_items).present?
     end
   end
 

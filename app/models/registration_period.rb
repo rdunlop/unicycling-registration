@@ -153,4 +153,12 @@ class RegistrationPeriod < ActiveRecord::Base
 
     last_update_date + 2.days >= date
   end
+
+  def expense_item_for(is_competitor)
+    if is_competitor
+      competitor_expense_item
+    else
+      noncompetitor_expense_item
+    end
+  end
 end

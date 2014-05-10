@@ -321,11 +321,7 @@ class RegistrantsController < ApplicationController
   def update_reg_fee
     new_rp = RegistrationPeriod.find(params[:registration_period_id])
 
-    if @registrant.competitor
-      new_reg_item = new_rp.competitor_expense_item
-    else
-      new_reg_item = new_rp.noncompetitor_expense_item
-    end
+    new_reg_item = new_rp.expense_item_for(@registrant.competitor)
 
     error = false
     # only possible if the registrant is unpaid
