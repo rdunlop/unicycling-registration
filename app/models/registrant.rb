@@ -129,8 +129,6 @@ class Registrant < ActiveRecord::Base
     all_expense_items.include?(expense_item)
   end
 
-
-
   # Creates the registrant owing
   def build_owing_payment(payment)
     reg_items = owing_registrant_expense_items
@@ -426,7 +424,7 @@ class Registrant < ActiveRecord::Base
   # Indicates that this registrant has paid their registration_fee
   def reg_paid?
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
-      RegistrationPeriod.paid_for_period(self.competitor, self.paid_expense_items).present?
+      RegistrationPeriod.paid_for_period(self.competitor, paid_expense_items).present?
     end
   end
 
@@ -467,21 +465,17 @@ class Registrant < ActiveRecord::Base
   # returns a list of expense_items that this registrant hasn't paid for
   # INCLUDING the registration cost
   def owing_expense_items
-    self.owing_registrant_expense_items.map{|eid| eid.expense_item}
+    owing_registrant_expense_items.map{|eid| eid.expense_item}
   end
 
   # pass back the details too, so that we don't mis-associate them when building the payment
   def owing_expense_items_with_details
-    self.owing_registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
+    owing_registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
   end
 
   def owing_registrant_expense_items
     # prevents this from creating new items when we return a 'new'd element
-    self.registrant_expense_items.clone
-  end
-
-  def has_required_expense_group(expense_group)
-    paid_details.select { |pd| pd.expense_item.expense_group == expense_group }.count > 0
+    registrant_expense_items.clone
   end
 
   # returns a list of paid-for expense_items
@@ -490,16 +484,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def paid_details
-    self.payment_details.completed.clone
+    payment_details.completed.clone
   end
 
   def amount_paid
-    items = self.paid_details
-    if items.size > 0
-      total = items.map {|item| item.cost} .reduce(:+)
-    else
-      total = 0
-    end
+    paid_details.inject(0){|total, item| total + item.cost}
   end
 
   ############# Events Selection ########

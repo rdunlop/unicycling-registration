@@ -792,25 +792,6 @@ describe Registrant do
       @nc_reg.owing_registrant_expense_items.count.should == 1
       @nc_reg.owing_registrant_expense_items.last.system_managed.should == true
     end
-
-    it "marks the registrant as has_required_expense_group as false" do
-      @nc_reg.has_required_expense_group(@eg).should == false
-    end
-
-    describe "when it has paid for the expense_item" do
-      before(:each) do
-        @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @nc_reg, :amount => @ei.cost, :expense_item => @ei)
-        @payment.reload
-        @payment.completed = true
-        @payment.save!
-        @nc_reg.reload
-      end
-
-      it "marks the registrant as has_required_expense_group as true" do
-        @nc_reg.has_required_expense_group(@eg).should == true
-      end
-    end
   end
 
   describe "with an expense_group marked as 'required' created AFTER the registrant" do
@@ -823,25 +804,6 @@ describe Registrant do
       @reg.reload
       @reg.owing_registrant_expense_items.last.expense_item.should == @ei
       @reg.owing_registrant_expense_items.last.system_managed.should == true
-    end
-
-    it "marks the registrant as has_required_expense_group as false" do
-      @reg.has_required_expense_group(@eg).should == false
-    end
-
-    describe "when it has paid for the expense_item" do
-      before(:each) do
-        @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @ei.cost, :expense_item => @ei)
-        @payment.reload
-        @payment.completed = true
-        @payment.save!
-        @reg.reload
-      end
-
-      it "marks the registrant as has_required_expense_group as true" do
-        @reg.has_required_expense_group(@eg).should == true
-      end
     end
   end
 
@@ -857,10 +819,6 @@ describe Registrant do
       @reg2.owing_registrant_expense_items.last.system_managed.should == true
     end
 
-    it "marks the registrant as has_required_expense_group as false" do
-      @reg2.has_required_expense_group(@eg).should == false
-    end
-
     describe "when it has paid for the expense_item" do
       before(:each) do
         @payment = FactoryGirl.create(:payment)
@@ -871,9 +829,6 @@ describe Registrant do
         @reg2.reload
       end
 
-      it "marks the registrant as has_required_expense_group as true" do
-        @reg2.has_required_expense_group(@eg).should == true
-      end
       it "no longer has the item as owing" do
         @reg2.owing_registrant_expense_items.count.should == 0
       end

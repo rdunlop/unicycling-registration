@@ -26,7 +26,7 @@ class RequiredExpenseItemCreator
   def required_expense_items
     egs = ExpenseGroup.for_competitor_type(@registrant.competitor)
 
-    req_eis = egs.select { |expense_group| expense_group.expense_items.count == 1 }
+    egs.select { |expense_group| expense_group.expense_items.count == 1 }
        .map{ |expense_group| expense_group.expense_items.first }
   end
 
