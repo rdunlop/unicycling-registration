@@ -24,30 +24,6 @@
 class Registrant < ActiveRecord::Base
   include Eligibility
 
-  before_create :create_associated_required_expense_items
-
-
-  before_validation :set_bib_number, :on => :create
-  before_validation :set_age
-  before_validation :set_default_wheel_size
-
-  validates_associated :contact_detail
-  validates_associated :registrant_expense_items
-
-  validates :first_name, :last_name, :birthday, :gender, :presence => true
-  validates :user_id, :bib_number, :age, :default_wheel_size, :presence => true
-
-  validates :competitor, :ineligible, :deleted, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
-  validate  :gender_present
-
-  validates :online_waiver_signature, :presence => true, :if => "EventConfiguration.has_online_waiver"
-  validate :no_payments_when_deleted
-
-  validate :choices_combination_valid
-  validate :not_exceeding_expense_item_limits
-  validate :check_default_wheel_size_for_age
-
 
 
   after_save :touch_members
@@ -98,6 +74,31 @@ class Registrant < ActiveRecord::Base
   accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
   accepts_nested_attributes_for :registrant_choices
   accepts_nested_attributes_for :registrant_event_sign_ups
+
+
+  before_create :create_associated_required_expense_items
+
+
+  before_validation :set_bib_number, :on => :create
+  before_validation :set_age
+  before_validation :set_default_wheel_size
+
+  validates_associated :contact_detail
+  validates_associated :registrant_expense_items
+
+  validates :first_name, :last_name, :birthday, :gender, :presence => true
+  validates :user_id, :bib_number, :age, :default_wheel_size, :presence => true
+
+  validates :competitor, :ineligible, :deleted, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
+  validate  :gender_present
+
+  validates :online_waiver_signature, :presence => true, :if => "EventConfiguration.has_online_waiver"
+  validate :no_payments_when_deleted
+
+  validate :choices_combination_valid
+  validate :not_exceeding_expense_item_limits
+  validate :check_default_wheel_size_for_age
 
 
 

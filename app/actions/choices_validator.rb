@@ -28,6 +28,7 @@ class ChoicesValidator
   def validate_event(event)
     event_selected = signed_up_for(event)
     event.event_choices.each do |event_choice|
+      # XXX problem when event has only Categories (no choices), this loop isn't run.
       # using .select instead of .where, because we need to validate not-yet-saved data
       reg_choice = get_choice_for_event_choice(event_choice)
 
@@ -74,7 +75,6 @@ class ChoicesValidator
       reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
       return false
     elsif !event_selected && reg_choice_chosen
-      binding.pry
       @registrant.errors[:base] << "#{event_choice.to_s} cannot be specified if the event isn't chosen"
       reg_choice.errors[:value] = "" unless reg_choice.nil?
       reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
