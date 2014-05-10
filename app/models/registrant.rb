@@ -24,56 +24,63 @@
 class Registrant < ActiveRecord::Base
   include Eligibility
 
-  has_one :contact_detail, dependent: :destroy, autosave: true, :inverse_of => :registrant
-  accepts_nested_attributes_for :contact_detail
+  before_create :create_associated_required_expense_items
+
+
+  before_validation :set_bib_number, :on => :create
+  before_validation :set_age
+  before_validation :set_default_wheel_size
+
   validates_associated :contact_detail
+  validates_associated :registrant_expense_items
 
   validates :first_name, :last_name, :birthday, :gender, :presence => true
+  validates :user_id, :bib_number, :age, :default_wheel_size, :presence => true
 
-  validates :user_id, :presence => true
-  before_validation :set_bib_number, :on => :create
-  validates :bib_number, :presence => true
-
-  validates :competitor, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :competitor, :ineligible, :deleted, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
-  validates :ineligible, :inclusion => {:in => [true, false] } # because it's a boolean
-  validates :deleted, :inclusion => {:in => [true, false] } # because it's a boolean
   validate  :gender_present
 
-  # contact-info block
+  validates :online_waiver_signature, :presence => true, :if => "EventConfiguration.has_online_waiver"
   validate :no_payments_when_deleted
 
-  validates :online_waiver_signature, :presence => true, :unless => "EventConfiguration.has_online_waiver == false"
+  validate :choices_combination_valid
+  validate :not_exceeding_expense_item_limits
+  validate :check_default_wheel_size_for_age
+
+
+
+  after_save :touch_members
+
+
 
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
+  has_one :contact_detail, dependent: :destroy, autosave: true, :inverse_of => :registrant
+  has_one :standard_skill_routine, :dependent => :destroy
+
   # may move into another object
   has_many :registrant_choices, :dependent => :destroy, :inverse_of => :registrant
-  accepts_nested_attributes_for :registrant_choices
-
   has_many :registrant_event_sign_ups, :dependent => :destroy , :inverse_of => :registrant
-  accepts_nested_attributes_for :registrant_event_sign_ups
   has_many :signed_up_events, -> { where ["signed_up = ?", true ] }, :class_name => 'RegistrantEventSignUp'
+  has_many :registrant_expense_items, -> { includes :expense_item}, :dependent => :destroy
 
-  validate :choices_combination_valid
+  has_many :payment_details, -> {includes :payment}, :dependent => :destroy
+  has_many :additional_registrant_accesses, :dependent => :destroy
+  has_many :registrant_group_members, :dependent => :destroy
+  has_many :songs, :dependent => :destroy
 
+  # THROUGH
   has_many :event_choices, :through => :registrant_choices
   has_many :events, :through => :event_choices
   has_many :categories, :through => :events
 
-  has_many :registrant_expense_items, -> { includes :expense_item}, :dependent => :destroy
   has_many :expense_items, :through => :registrant_expense_items
-  accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
-  before_create :create_associated_required_expense_items
-  validate :not_exceeding_expense_item_limits
-  validates_associated :registrant_expense_items
 
-  has_many :payment_details, -> {includes :payment}, :dependent => :destroy
   has_many :payments, :through => :payment_details
   has_many :refund_details, :through => :payment_details
   has_many :refunds, :through => :refund_details
 
-  has_many :registrant_group_members, :dependent => :destroy
   has_many :registrant_groups, :through => :registrant_group_members
 
   # For event competitions/results
@@ -81,23 +88,16 @@ class Registrant < ActiveRecord::Base
   has_many :competitors, :through => :members
   has_many :competitions, :through => :competitors
 
-  has_one :standard_skill_routine, :dependent => :destroy
 
-  has_many :additional_registrant_accesses, :dependent => :destroy
-
-  has_many :songs, :dependent => :destroy
-
-  before_validation :set_age
-  validates :age, :presence => true
-
-  before_validation :set_default_wheel_size
   belongs_to :default_wheel_size, :class_name => "WheelSize", :foreign_key => :wheel_size_id
-  validates :default_wheel_size, :presence => true
-  validate :check_default_wheel_size_for_age
-
-  after_save(:touch_members)
-
   belongs_to :user
+
+  accepts_nested_attributes_for :contact_detail
+  accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
+  accepts_nested_attributes_for :registrant_choices
+  accepts_nested_attributes_for :registrant_event_sign_ups
+
+
 
   scope :active, -> { where(:deleted => false).order(:bib_number) }
 
