@@ -65,6 +65,8 @@ class CompetitionsController < ApplicationController
   def update
     if @competition.update_attributes(competition_params)
       flash[:notice] = 'Competition was successfully updated.'
+    else
+      @event = @competition.event
     end
     respond_with(@competition, location: event_path(@competition.event))
   end
@@ -157,7 +159,7 @@ class CompetitionsController < ApplicationController
   private
   def competition_params
     params.require(:competition).permit(:name, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups,
-                                        :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :competition_id, :max_place])
+                                        :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :competition_id, :max_place, :_destroy])
   end
 end
 
