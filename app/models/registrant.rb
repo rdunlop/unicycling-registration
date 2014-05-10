@@ -227,16 +227,20 @@ class Registrant < ActiveRecord::Base
     age < 18
   end
 
+  def age_at_event_date(event_date)
+    if (birthday.month < event_date.month) || (birthday.month == event_date.month && birthday.day <= event_date.day)
+      event_date.year - birthday.year
+    else
+      (event_date.year - 1) - birthday.year
+    end
+  end
+
   def set_age
     start_date = EventConfiguration.start_date
     if start_date.nil? or self.birthday.nil?
       self.age = 99
     else
-      if (self.birthday.month < start_date.month) or (self.birthday.month == start_date.month and self.birthday.day <= start_date.day)
-        self.age = start_date.year - self.birthday.year
-      else
-        self.age = (start_date.year - 1) - self.birthday.year
-      end
+      self.age = age_at_event_date(start_date)
     end
   end
 
@@ -421,23 +425,20 @@ class Registrant < ActiveRecord::Base
   end
 
   def expense_item_is_free(expense_item)
+    free_options = nil
     if competitor
-      case expense_item.expense_group.competitor_free_options
-      when "One Free In Group"
-        return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
-      when "One Free of Each In Group"
-        return !has_chosen_free_item_of_expense_item(expense_item)
-      end
+      free_options = expense_item.expense_group.competitor_free_options
     else
-      case expense_item.expense_group.noncompetitor_free_options
-      when "One Free In Group"
-        return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
-      when "One Free of Each In Group"
-        return !has_chosen_free_item_of_expense_item(expense_item)
-      end
+      free_options = expense_item.expense_group.noncompetitor_free_options
     end
-
-    return false
+    case free_options
+    when "One Free In Group"
+      return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
+    when "One Free of Each In Group"
+      return !has_chosen_free_item_of_expense_item(expense_item)
+    else
+      return false
+    end
   end
 
   def not_exceeding_expense_item_limits

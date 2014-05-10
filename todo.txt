@@ -1,5 +1,6 @@
 Last Re-Arranged February 6, 2014.
 
+- Refactor tests to be associated with the new actions that have been extracted
 - validatio on failure of two_attempt_entry
 
 - make all "results" have a common interface, including "Disqualified" ? no, this doesn't make sense, as it's the competitor who is dq'd, not the score/result....or is it?
