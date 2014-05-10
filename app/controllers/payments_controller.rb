@@ -48,8 +48,9 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   # GET /payments/new.json
   def new
+    payment_creator = PaymentCreator.new(@payment)
     current_user.accessible_registrants.each do |reg|
-      reg.build_owing_payment(@payment)
+      payment_creator.add_registrant(reg)
     end
 
     respond_to do |format|

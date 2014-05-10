@@ -118,26 +118,21 @@ class RegistrationPeriod < ActiveRecord::Base
 
     Notifications.updated_current_reg_period(old_period, now_period).deliver
 
-    new_comp_item = now_period.competitor_expense_item unless now_period.nil?
-    new_noncomp_item = now_period.noncompetitor_expense_item unless now_period.nil?
-
     missing_regs = []
 
-    Registrant.all.each do |reg|
-      if reg.competitor
-        new_item = new_comp_item
-      else
-        new_item = new_noncomp_item
-      end
+    unless now_period.nil?
+      Registrant.all.each do |reg|
+        new_item = now_period.expense_item_for(reg.competitor)
 
-      next if new_item.nil?
+        next if new_item.nil?
 
-      if !reg.set_registration_item_expense(new_item, false)
-        missing_regs << reg.bib_number
+        if !reg.set_registration_item_expense(new_item, false)
+          missing_regs << reg.bib_number
+        end
       end
     end
 
-    if missing_regs.count > 0
+    if missing_regs.any?
       Notifications.missing_old_reg_items(missing_regs).deliver
     end
 

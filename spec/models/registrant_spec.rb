@@ -300,27 +300,6 @@ describe Registrant do
       it "should list the item twice in the all_expense_items" do
         @reg.all_expense_items.should == [@item, @item]
       end
-      it "should list this for ALL registrants" do
-        Registrant.all_expense_items.should == [@item, @item]
-      end
-      describe "with expenses from another registrant" do
-        before(:each) do
-          @ei = FactoryGirl.create(:expense_item)
-          @rei2 = FactoryGirl.create(:registrant_expense_item, :expense_item => @ei)
-        end
-        it "has expenses from both registrants" do
-          Registrant.all_expense_items.should =~ [@item, @item, @ei]
-        end
-
-        describe "when one is refunded" do
-          before(:each) do
-            @refund_detail = FactoryGirl.create(:refund_detail, :payment_detail => @payment_detail)
-          end
-          it "does not count the refunded expense item" do
-            Registrant.all_expense_items.should =~ [@item, @ei]
-          end
-        end
-      end
     end
   end
 

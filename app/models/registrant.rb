@@ -129,22 +129,6 @@ class Registrant < ActiveRecord::Base
     all_expense_items.include?(expense_item)
   end
 
-  # Creates the registrant owing
-  def build_owing_payment(payment)
-    reg_items = owing_registrant_expense_items
-    reg_items.each do |reg_item|
-      next if reg_item.free
-      item = reg_item.expense_item
-      details = reg_item.details
-      pd = payment.payment_details.build()
-      pd.registrant = self
-      pd.amount = reg_item.total_cost
-      pd.expense_item = item
-      pd.details = details
-      pd.free = reg_item.free
-    end
-  end
-
   def registration_item
     all_reg_items = RegistrationPeriod.all_registration_expense_items
     registrant_expense_items.where({:system_managed => true, :expense_item_id => all_reg_items}).first
@@ -168,11 +152,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.maximum_bib_number(is_competitor)
-    unscoped.where({:competitor => is_competitor}).maximum("bib_number")
+    where({:competitor => is_competitor}).maximum("bib_number")
   end
 
   def set_bib_number
-    if self.bib_number.nil?
+    if bib_number.nil?
       prev_value = Registrant.maximum_bib_number(self.competitor)
 
       if self.competitor
@@ -190,8 +174,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def set_default_wheel_size
-    if self.default_wheel_size.nil?
-      if self.age > 10
+    if default_wheel_size.nil?
+      if age > 10
         self.default_wheel_size = WheelSize.find_by_description("24\" Wheel")
       else
         self.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
@@ -200,8 +184,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def check_default_wheel_size_for_age
-    if self.age > 10
-      if default_wheel_size && self.default_wheel_size.description != "24\" Wheel"
+    if age > 10
+      if default_wheel_size && default_wheel_size.description != "24\" Wheel"
         errors[:base] << "You must choose a wheel size of 24\" if you are > 10 years old"
       end
     end
@@ -225,7 +209,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def no_payments_when_deleted
-    if self.payment_details.completed.count > 0 and self.deleted
+    if paid_details.count > 0 && self.deleted
       errors[:base] << "Cannot delete a registration which has completed payments (refund them before deleting the registrant)"
     end
   end
@@ -365,7 +349,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def minor?
-    self.age < 18
+    age < 18
   end
 
   def set_age
@@ -428,37 +412,18 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  # ALL registrants
-  def self.all_expense_items
-    total = []
-    Registrant.includes(registrant_expense_items: [:expense_item]).includes(payment_details: [:payment, :expense_item]).each do |reg|
-      total += reg.all_expense_items
-    end
-    total
-  end
-
   # return a list of _ALL_ of the expense_items for this registrant
   #  PAID FOR or NOT
   def all_expense_items
-    items  = owing_expense_items
-    items += paid_expense_items
-
-    items
+    owing_expense_items + paid_expense_items
   end
 
   def amount_owing
-    return self.expenses_total - self.amount_paid
+    registrant_expense_items.inject(0){|total, item| total + item.cost}
   end
 
   def expenses_total
-    items = self.owing_registrant_expense_items
-    items += self.paid_details
-
-    if items.size > 0
-      total = items.map {|item| item.cost} .reduce(:+)
-    else
-      total = 0
-    end
+    amount_owing + amount_paid
   end
 
 
