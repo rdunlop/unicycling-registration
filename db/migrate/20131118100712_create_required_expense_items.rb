@@ -9,7 +9,7 @@ class CreateRequiredExpenseItems < ActiveRecord::Migration
   end
 
   class Registrant < ActiveRecord::Base
-    has_many :payment_details, :include => :payment
+    has_many :payment_details, -> {includes :payment}
   end
 
   class ExpenseItem < ActiveRecord::Base

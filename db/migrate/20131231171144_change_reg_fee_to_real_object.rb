@@ -4,7 +4,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     belongs_to :expense_item
     has_one :refund_detail
 
-    scope :completed, includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}})
+    scope :completed, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}}) }
   end
 
   class Payment < ActiveRecord::Base
@@ -12,8 +12,8 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
   end
 
   class Registrant < ActiveRecord::Base
-    has_many :registrant_expense_items, :include => :expense_item, :dependent => :destroy
-    has_many :payment_details, :include => :payment
+    has_many :registrant_expense_items, -> { includes :expense_item}, :dependent => :destroy
+    has_many :payment_details, -> {includes :payment}, :dependent => :destroy
 
     def reg_paid?
       if RegistrationPeriod.paid_for_period(self.competitor, self.paid_expense_items).nil?
@@ -24,7 +24,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     end
 
     def paid_expense_items
-      details = paid_details.map{|pd| pd.expense_item }
+      paid_details.map{|pd| pd.expense_item }
     end
 
     def paid_details
