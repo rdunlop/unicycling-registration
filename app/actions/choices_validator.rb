@@ -67,21 +67,18 @@ class ChoicesValidator
     return true if optional_if_event_choice.present? # we passed the optional check, so we shouldn't complain
     return true if required_if_event_choice.present? # we passed the required check, so we shouldn't complain
 
-    if event_selected
-      if reg_choice.nil? or not reg_choice.has_value?
-        return true if event_choice.cell_type == "boolean"
-        @registrant.errors[:base] << "#{event_choice.to_s} must be specified"
-        reg_choice.errors[:value] = "" unless reg_choice.nil?
-        reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
-        return false
-      end
-    else
-      if reg_choice.present? and reg_choice.has_value?
-        @registrant.errors[:base] << "#{event_choice.to_s} cannot be specified if the event isn't chosen"
-        reg_choice.errors[:value] = "" unless reg_choice.nil?
-        reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
-        return false
-      end
+    if event_selected && !reg_choice_chosen
+      return true if event_choice.cell_type == "boolean"
+      @registrant.errors[:base] << "#{event_choice.to_s} must be specified"
+      reg_choice.errors[:value] = "" unless reg_choice.nil?
+      reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
+      return false
+    elsif !event_selected && reg_choice_chosen
+      binding.pry
+      @registrant.errors[:base] << "#{event_choice.to_s} cannot be specified if the event isn't chosen"
+      reg_choice.errors[:value] = "" unless reg_choice.nil?
+      reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
+      return false
     end
     true
   end
