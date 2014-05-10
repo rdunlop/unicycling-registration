@@ -305,17 +305,17 @@ class Registrant < ActiveRecord::Base
   # returns a list of expense_items that this registrant hasn't paid for
   # INCLUDING the registration cost
   def owing_expense_items
-    owing_registrant_expense_items.map{|eid| eid.expense_item}
+    registrant_expense_items.map{|eid| eid.expense_item}
   end
 
   # pass back the details too, so that we don't mis-associate them when building the payment
   def owing_expense_items_with_details
-    owing_registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
+    registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
   end
 
   def owing_registrant_expense_items
     # prevents this from creating new items when we return a 'new'd element
-    registrant_expense_items.clone
+    registrant_expense_items
   end
 
   # returns a list of paid-for expense_items

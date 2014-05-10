@@ -129,7 +129,7 @@ class Admin::ExportController < Admin::BaseController
           mem.registrant = reg
           mem.save!
       end
-        
+
       new_tr = TimeResult.new({:minutes => tr["minutes"],
                               :seconds => tr["seconds"],
                               :thousands => tr["thousands"],
@@ -187,26 +187,26 @@ class Admin::ExportController < Admin::BaseController
     end
   end
 
-  def create_if_needed(obj, model, also_delete = [], skip_callback = [])  
+  def create_if_needed(obj, model, also_delete = [], skip_callback = [])
     return if model.exists?(obj['id'])
-    #get the original object attributes  
+    #get the original object attributes
     old_id = obj['id']
 
-    # remove any that will cause problems  
-    obj.delete("id")  
-    obj.delete("created_at")  
-    obj.delete("updated_at")  
+    # remove any that will cause problems
+    obj.delete("id")
+    obj.delete("created_at")
+    obj.delete("updated_at")
     also_delete.each do |e|
       obj.delete(e)
     end
 
-    # create the new object  
-    new_o = model.new   
+    # create the new object
+    new_o = model.new
 
-    # use send yo bypass mass assignment issues  
+    # use send yo bypass mass assignment issues
     new_o.send :attributes=, obj
 
-    # set the id separately  
+    # set the id separately
     new_o.id =old_id
 
     puts "creating #{model} #{old_id}"
@@ -214,7 +214,7 @@ class Admin::ExportController < Admin::BaseController
       model.skip_callback(:create, :before, cb)
     end
 
-    # make sure to save without validations  
+    # make sure to save without validations
     new_o.save(:validate => false)
 
     skip_callback.each do |cb|
@@ -264,7 +264,7 @@ class Admin::ExportController < Admin::BaseController
 
     titles = ["Registrant Name", "Age", "Gender"] + event_categories_titles + event_titles
     competitor_data = []
-    Registrant.includes(:registrant_event_sign_ups => {}, :registrant_choices => :event_choice).each do |reg|
+    Registrant.includes(:registrant_event_sign_ups => [], :registrant_choices => :event_choice).each do |reg|
       comp_base = [reg.name, reg.age, reg.gender]
       reg_sign_up_data = []
       event_categories.each do |ec|

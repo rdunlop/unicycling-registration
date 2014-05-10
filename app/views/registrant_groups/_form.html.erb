@@ -48,7 +48,7 @@
           <td><%= ff.object.registrant.contact_detail.club %></td>
           <td><%= ff.object.registrant.contact_detail.address %></td>
           <td><%= ff.object.registrant.contact_detail.city %></td>
-          <td><%= ff.object.registrant.registrant_groups.join(" ") %></td>
+          <td><%= ff.object.registrant.registrant_groups.to_a.join(" ") %></td>
         </tr>
       <% end %>
     </tbody>
