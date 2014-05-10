@@ -111,7 +111,7 @@ class Competition < ActiveRecord::Base
   end
 
   def get_age_group_entry_description(age, gender, wheel_size_id)
-    ag_entry_description = determine_age_group_type.try(:age_group_entry_description, age, gender, wheel_size_id)
+    ag_entry_description = age_group_type.age_group_entry_description(age, gender, wheel_size_id) unless age_group_type.nil?
     if ag_entry_description.nil?
       "No Age Group for #{age}-#{gender}"
     else
@@ -119,49 +119,43 @@ class Competition < ActiveRecord::Base
     end
   end
 
-  # remains public so that we can easily iterate over the group-entries
-  def determine_age_group_type
-    age_group_type
-  end
-
   def age_group_entries
-    determine_age_group_type.try(:age_group_entries)
+    age_group_type.age_group_entries unless age_group_type.nil?
   end
 
   def results_list
-    @agt = determine_age_group_type
-    @results_list = {}
-    if @agt.nil?
+    results = {}
+
+    if age_group_type.nil?
       # no age groups, put all into a single age group
-      @results_list["all"] = competitors
+      results["all"] = competitors
     else
-      @age_group_entries = age_group_entries
-      @age_group_entries.each do |ag_entry|
-        @results_list[ag_entry] = []
+      age_group_entries.each do |ag_entry|
+        results[ag_entry] = []
       end
 
       # sort the competitors by age group
       competitors.each do |competitor|
         next unless competitor.has_result?
-        calculated_ag = @agt.age_group_entry_for(competitor.age, competitor.gender, competitor.wheel_size)
-        @results_list[calculated_ag] << competitor unless calculated_ag.nil?
+        calculated_ag = age_group_type.age_group_entry_for(competitor.age, competitor.gender, competitor.wheel_size)
+        results[calculated_ag] << competitor unless calculated_ag.nil?
       end
     end
 
     #sort the results by place
-    @results_list.keys.each do |key|
-      @results_list[key].sort!{|a,b| a.place.to_i <=> b.place.to_i}
+    results.keys.each do |key|
+      results[key].sort!{|a,b| a.place.to_i <=> b.place.to_i}
     end
 
-    @results_list
+    results
   end
 
   def get_judge(user)
-    return judges.where({:user_id => user.id}).first
+    judges.where({:user_id => user.id}).first
   end
 
   def has_judge(user)
-    return !get_judge(user).nil?
+    get_judge(user).present?
   end
 
   def event_class
@@ -208,11 +202,7 @@ class Competition < ActiveRecord::Base
   end
 
   def score_calculator
-    unless @score_calculator.nil?
-      return @score_calculator
-    end
-
-    @score_calculator = scoring_helper.score_calculator
+    @score_calculator ||= scoring_helper.score_calculator
   end
 
   def result_description
@@ -259,10 +249,10 @@ class Competition < ActiveRecord::Base
 
     # select the distance attempts which are in the top-N
     comp = competitors.select {|c| c.max_successful_distance >= min_distance}
-    results = comp.map {|c| c.max_successful_distance_attempt}
-    results.delete(nil)
+    results = comp.map {|c| c.max_successful_distance_attempt}.compact
     results.sort {|a, b| b.distance <=> a.distance }
   end
+
   def best_distance_attempts
     best_attempts_for_each_competitor = competitors.map(&:max_successful_distance_attempt).compact
 

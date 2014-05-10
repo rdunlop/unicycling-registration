@@ -4,7 +4,7 @@ class CompetitionSignUp
   def initialize(competition)
     @competition = competition
 
-    @agt = @competition.determine_age_group_type
+    @agt = @competition.age_group_type
 
     all_registrants = Registrant.active.where(:competitor => true).order(:bib_number)
     signed_up_registrants = @competition.signed_up_registrants
