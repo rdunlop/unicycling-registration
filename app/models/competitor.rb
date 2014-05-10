@@ -67,16 +67,18 @@ class Competitor < ActiveRecord::Base
       members.first.registrant.bib_number
     end
 
+    def scoring_helper
+      competition.scoring_helper
+    end
+
     def disqualified
       Rails.cache.fetch("#{place_key}/dq") do
-        sh = competition.scoring_helper
-        sh.competitor_dq?(self)
+        scoring_helper.competitor_dq?(self)
       end
     end
 
     def comparable_score
-      sh = competition.scoring_helper
-      sh.competitor_comparable_result(self)
+      scoring_helper.competitor_comparable_result(self)
     end
 
     def place=(new_place)
@@ -126,8 +128,9 @@ class Competitor < ActiveRecord::Base
     end
 
     def overall_place_formatted
+      return "DQ" if disqualified
+
       if overall_place == 0
-        return "DQ" if disqualified
         return "Unknown"
       else
         overall_place
@@ -167,11 +170,11 @@ class Competitor < ActiveRecord::Base
 
     public
     def has_result?
-      competition.scoring_helper.competitor_has_result?(self)
+      scoring_helper.competitor_has_result?(self)
     end
 
     def result
-      competition.scoring_helper.competitor_result(self)
+      scoring_helper.competitor_result(self)
     end
 
     def event
@@ -183,17 +186,11 @@ class Competitor < ActiveRecord::Base
     end
 
     def team_name
-      unless custom_name.nil? or custom_name.empty?
-        custom_name
-      end
+      custom_name if custom_name.present?
     end
 
     def name
-      if custom_name.present?
-        comp_name = custom_name
-      else
-        comp_name = registrants_names
-      end
+      comp_name = team_name || registrants_names
       display_eligibility(comp_name, ineligible)
     end
 
@@ -243,7 +240,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def age
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/age") do
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/age") do
         if members.empty?
           "(No registrants)"
         else
@@ -254,23 +251,19 @@ class Competitor < ActiveRecord::Base
     end
 
     def country
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/country") do
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/country") do
         if members.empty?
           "(No registrants)"
         else
-          countries = registrants.map(&:country)
+          countries = registrants.map(&:country).uniq.compact
           # display all countries if there are more than 1 registrants
-          if countries.uniq.count > 1
-            countries.unique.join(",")
-          else
-            countries.uniq.first
-          end
+          countries.join(",") unless countries.empty?
         end
       end
     end
 
     def gender
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/gender") do
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/gender") do
         if members.empty?
           "(No registrants)"
         else
@@ -286,7 +279,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def wheel_size
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/wheel_size_id") do
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/wheel_size_id") do
         if registrants.empty?
           nil
         else
@@ -296,7 +289,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def ineligible
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/member_count/#{members.size}/ineligible") do
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
         if registrants.empty?
           false
         else
