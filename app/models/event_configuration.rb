@@ -48,13 +48,9 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   validates :style_name, :inclusion => {:in => self.style_names, :allow_blank => true }
-  validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :has_print_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :test_mode, :has_print_waiver, :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :usa, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :iuf, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :usa, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
 
   validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
 
@@ -88,39 +84,19 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.test_mode
-    ec = EventConfiguration.first
-    if ec.nil?
-      true
-    else
-      ec.test_mode
-    end
+    get_attribute_or_return_value(:test_mode, true)
   end
 
   def self.contact_email
-    ec = EventConfiguration.first
-    if ec.nil?
-      ""
-    else
-      ec.contact_email
-    end
+    get_attribute_or_return_value(:contact_email, "")
   end
 
   def self.short_name
-    ec = EventConfiguration.first
-    if ec.nil?
-      ""
-    else
-      ec.short_name
-    end
+    get_attribute_or_return_value(:short_name, "")
   end
 
   def self.long_name
-    ec = EventConfiguration.first
-    if ec.nil?
-      ""
-    else
-      ec.long_name
-    end
+    get_attribute_or_return_value(:long_name, "")
   end
 
   def self.style_name
@@ -133,12 +109,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.start_date
-    ec = EventConfiguration.first
-    if ec.nil?
-      nil
-    else
-      ec.start_date
-    end
+    get_attribute_or_return_value(:start_date, nil)
   end
 
   def self.closed_date
@@ -185,12 +156,7 @@ class EventConfiguration < ActiveRecord::Base
 
 
   def self.waiver_url
-    ec = EventConfiguration.first
-    if ec.nil? or ec.waiver_url.nil? or  ec.waiver_url.empty?
-      nil
-    else
-      ec.waiver_url
-    end
+    get_url(:waiver_url, nil)
   end
 
   def self.has_print_waiver
@@ -239,12 +205,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.rulebook_url
-    ec = EventConfiguration.first
-    if ec.nil? or ec.rulebook_url.nil? or  ec.rulebook_url.empty?
-      nil
-    else
-      ec.rulebook_url
-    end
+    get_url(:rulebook_url, nil)
   end
 
   def self.currency
@@ -265,14 +226,8 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
-
   def self.comp_noncomp_url
-    ec = EventConfiguration.first
-    if ec.nil? or ec.comp_noncomp_url.nil? or  ec.comp_noncomp_url.empty?
-      nil
-    else
-      ec.comp_noncomp_url
-    end
+    get_url(:comp_noncomp_url, nil)
   end
 
   def self.configuration_exists?
@@ -280,12 +235,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.event_url
-    ec = EventConfiguration.first
-    if ec.nil? or ec.event_url.nil? or  ec.event_url.empty?
-      nil
-    else
-      ec.event_url
-    end
+    get_url(:event_url, nil)
   end
 
   def self.artistic_score_elimination_mode_naucc
@@ -299,6 +249,26 @@ class EventConfiguration < ActiveRecord::Base
 
   def as_json(options={})
     super(:except => [:logo_binary, :logo_type, :logo_filename])
+  end
+
+  private
+
+  def self.get_attribute_or_return_value(attribute, default_value)
+    ec = EventConfiguration.first
+    if ec.nil?
+      default_value
+    else
+      ec.send(attribute)
+    end
+  end
+
+  def self.get_url(attribute, default_value)
+    ec = EventConfiguration.first
+    if ec.nil? or ec.send(attribute).nil? or  ec.send(attribute).empty?
+      default_value
+    else
+      ec.send(attribute)
+    end
   end
 
 end
