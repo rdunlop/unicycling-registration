@@ -92,12 +92,6 @@ class RegistrantsController < ApplicationController
 
     @today_date = Date.today.in_time_zone.strftime("%B %-d, %Y")
 
-    config = EventConfiguration.first
-    unless config.nil?
-      @event_name = config.long_name
-      @event_start_date = config.start_date.strftime("%b %-d, %Y")
-    end
-
     @name = @registrant.to_s
     @age = @registrant.age
 
@@ -118,10 +112,7 @@ class RegistrantsController < ApplicationController
     @emergency_primary_phone = contact_detail.emergency_primary_phone
     @emergency_other_phone = contact_detail.emergency_other_phone
 
-    respond_to do |format|
-      format.html { render action: "waiver", :layout => nil }
-      format.pdf { render :pdf => "waiver", :formats => [:html] }
-    end
+    empty_waiver # load and display waiver
   end
 
   # GET /registrants/1
@@ -198,8 +189,7 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to registrant_registrant_expense_items_path(@registrant), notice: 'Registrant was successfully updated.' }
         format.json { head :no_content }
       else
-        load_categories
-        load_online_waiver
+        edit
         format.html { render action: "edit" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end
@@ -216,8 +206,7 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to registrants_url, notice: 'Registrant deleted' }
         format.json { head :no_content }
       else
-        load_categories
-        load_online_waiver
+        edit
         format.html { render action: "edit" }
         format.json { render json: @registrant }
       end
@@ -296,22 +285,15 @@ class RegistrantsController < ApplicationController
   end
 
   def send_email
-    @email_form = Email.new(params[:email])
+    mass_emailer = MassEmailer.new(params)
 
-    if @email_form.valid?
-      set_of_addresses = @email_form.email_addresses
-      first_index = 0
-      current_set = set_of_addresses.slice(first_index, 30)
-      until current_set == [] or current_set.nil?
-        Notifications.send_mass_email(@email_form, current_set).deliver
-        first_index += 30
-        current_set = set_of_addresses.slice(first_index, 30)
-      end
-      respond_to do |format|
+    respond_to do |format|
+      if mass_emailer.send_emails
         format.html { redirect_to email_registrants_path, notice: 'Email sent successfully.' }
+      else
+        @email_form = mass_emailer.email_form
+        render "email"
       end
-    else
-      render "email"
     end
   end
 
