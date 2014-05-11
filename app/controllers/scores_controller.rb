@@ -73,7 +73,7 @@ class ScoresController < ApplicationController
   # GET /judges/1/competitors/2/scores/1/edit
   def edit
     @judge = Judge.find(params[:judge_id])
-    @boundary_score = BoundaryScore.find_by_competitor_id_and_judge_id(params[:competitor_id], params[:judge_id])
+    @boundary_score = BoundaryScore.find_by(competitor_id: params[:competitor_id], judge_id: params[:judge_id])
     respond_to do |format|
         format.html
         format.js
@@ -86,7 +86,7 @@ class ScoresController < ApplicationController
     authorize! :create_scores, @competitor.competition
 
     if @judge.judge_type.boundary_calculation_enabled
-        @boundary_score = BoundaryScore.find_by_competitor_id_and_judge_id(params[:competitor_id], params[:judge_id])
+        @boundary_score = BoundaryScore.find_by(competitor_id: params[:competitor_id], judge_id: params[:judge_id])
         if @boundary_score.update_attributes(boundary_score_params)
             # boundary score is valid
             @score.val_1 = @boundary_score.total
