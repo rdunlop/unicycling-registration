@@ -128,39 +128,31 @@ class PaymentPresenter
     p.valid?
   end
 
+  def build_payment_detail(payment, new_detail)
+    if new_detail.pay_for || new_detail.free
+      detail = payment.payment_details.build()
+      if new_detail.free
+        detail.free = true
+        detail.amount = 0
+      else
+        detail.free = false
+        detail.amount = new_detail.expense_item.total_cost
+      end
+      detail.registrant_id = new_detail.registrant_id
+      detail.expense_item_id = new_detail.expense_item_id
+      detail.details = new_detail.details unless new_detail.details.blank?
+    end
+  end
+
   def build_payment
     payment = Payment.new
     payment.note = self.note
 
     self.unpaid_details.each do |ud|
-      if ud.pay_for or ud.free
-        detail = payment.payment_details.build()
-        if ud.free
-          detail.free = true
-          detail.amount = 0
-        else
-          detail.free = false
-          detail.amount = ud.expense_item.total_cost
-        end
-        detail.registrant_id = ud.registrant_id
-        detail.expense_item_id = ud.expense_item_id
-        detail.details = ud.details unless ud.details.blank?
-      end
+      build_payment_detail(payment, ud)
     end
     self.new_details.each do |nd|
-      if nd.pay_for or nd.free
-        detail = payment.payment_details.build()
-        if nd.free
-          detail.free = true
-          detail.amount = 0
-        else
-          detail.free = false
-          detail.amount = nd.expense_item.total_cost
-        end
-        detail.registrant_id = nd.registrant_id
-        detail.expense_item_id = nd.expense_item_id
-        detail.details = nd.details unless nd.details.blank?
-      end
+      build_payment_detail(payment, nd)
     end
     payment.completed = true
     payment.completed_date = DateTime.now

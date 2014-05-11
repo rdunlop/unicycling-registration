@@ -116,7 +116,6 @@ TO DO (MUST be done BEFORE LIVE):
  - Should I titlize the names of the registrants?
  - add unique constraints on database level?
   - when using unicorn to serve multiple people at once, what do I need to consider?
- - move assets/stylesheets assets/jaavscripts into vendor (or lib?)/assets/stylesheets and javascripts (jquery, etc) (images too)
   - require shared
   - require friend
  - Use nesting in scss to combine things that have common parents
@@ -225,7 +224,7 @@ NEED To make the registration deadlines clear.
 
 Mom:
 - "New Competitor" as a button isn't clear. it looks like a banner/description.
- - "Click here" 
+ - "Click here"
 - "Why is Legal Waiver" in red? I can ignore the Red, I guess.
 - "Legal Waiver" is still showing in red? why?
 - Need to tell the person that an e-mail will be sent to them with their payment details.
