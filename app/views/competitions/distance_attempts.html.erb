@@ -1,7 +1,6 @@
 <h1>Distance Attempts - <%=@competition %></h1>
 
-<%= link_to "Set Places", set_places_competition_path(@competition), :method => :post, data: { confirm: 'This will take a while' }  %>
-<%= link_to "Results", results_printing_competition_path(@competition, :format => :pdf) %>
+<%= render :partial => "/competitions/results" %>
 
 <div class="scores">
   <h3><%= @competition %> Best Successful Attempts</h3>

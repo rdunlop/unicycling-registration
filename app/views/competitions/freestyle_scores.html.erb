@@ -1,10 +1,9 @@
-<h1>Freestyle - <%=@competition %> Judging Form</h1>
+<h1>Freestyle - <%=@competition %> Results</h1>
+
+<%= render :partial => "/competitions/results" %>
 
 <div class="scores">
 <h3><%= @competition %> Raw Scores</h3>
-
-<% # Recalculate places (XXX should be replaced by always-updated scoring) 
-@competition.score_calculator.update_all_places %>
 
 <% @competition.judge_types.uniq.each do |jt| %>
 <table class="scores_outer">
