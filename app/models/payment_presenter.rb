@@ -65,6 +65,14 @@ class PaymentPresenter
       ExpenseItem.find(expense_item_id)
     end
 
+    def cost
+      if expense_item.free
+        0
+      else
+        expense_item.total_cost
+      end
+    end
+
     def persisted?
       false
     end
@@ -130,14 +138,9 @@ class PaymentPresenter
 
   def build_payment_detail(payment, new_detail)
     if new_detail.pay_for || new_detail.free
-      detail = payment.payment_details.build()
-      if new_detail.free
-        detail.free = true
-        detail.amount = 0
-      else
-        detail.free = false
-        detail.amount = new_detail.expense_item.total_cost
-      end
+      payment.payment_details.build
+      detail.free = new_detail.free
+      detail.amount = new_detail.cost
       detail.registrant_id = new_detail.registrant_id
       detail.expense_item_id = new_detail.expense_item_id
       detail.details = new_detail.details unless new_detail.details.blank?
@@ -148,16 +151,16 @@ class PaymentPresenter
     payment = Payment.new
     payment.note = self.note
 
-    self.unpaid_details.each do |ud|
+    unpaid_details.each do |ud|
       build_payment_detail(payment, ud)
     end
-    self.new_details.each do |nd|
+    new_details.each do |nd|
       build_payment_detail(payment, nd)
     end
     payment.completed = true
     payment.completed_date = DateTime.now
     payment.user = self.user
-    return payment
+    payment
   end
 
   def save
