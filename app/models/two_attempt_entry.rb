@@ -9,10 +9,20 @@ class TwoAttemptEntry
 
   validates :bib_number, presence: true
 
+  delegate :find_competitor_with_bib_number, to: :competition
+
   def initialize(attributes = {})
     attributes.each do |name, value|
       send("#{name}=", value)
     end
+  end
+
+  def registrant_name
+    Registrant.find_by_bib_number(bib_number)
+  end
+
+  def has_matching_competitor?
+    competition.find_competitor_with_bib_number(bib_number)
   end
 
   def self.entries_for(user, competition, is_start_time)
