@@ -5,6 +5,7 @@ describe "events/show" do
     @event = FactoryGirl.create(:event, :name => "First name")
     @comp = FactoryGirl.create(:competition, :event => @event)
     @judge = FactoryGirl.create(:judge, :competition => @comp)
+    controller.stub(:current_user) { FactoryGirl.create(:user) }
   end
 
   it "renders a list of categories" do
