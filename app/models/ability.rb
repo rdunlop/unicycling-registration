@@ -12,15 +12,11 @@ class Ability
 
     if EventConfiguration.test_mode
       # allow the user to upgrade their account in TEST MODE
-      can :admin, EventConfiguration
-      can :super_admin, EventConfiguration
-      can :normal, EventConfiguration
+      can :test_mode_role, EventConfiguration
       can :fake_complete, Payment
     else
       # disable for all
-      cannot :admin, EventConfiguration
-      cannot :super_admin, EventConfiguration
-      cannot :normal, EventConfiguration
+      cannot :test_mode_role, EventConfiguration
       cannot :fake_complete, Payment
     end
 
@@ -112,6 +108,11 @@ class Ability
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
+    end
+
+    if user.has_role? :event_planner
+      can :summary, Event
+      can :sign_ups, EventCategory
     end
 
     if user.has_role? :race_official or user.has_role? :admin

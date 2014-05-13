@@ -200,9 +200,7 @@ Workspace::Application.routes.draw do
 
     resources :event_configurations, :except => [:show] do
       collection do
-        post 'admin'
-        post 'super_admin'
-        post 'normal'
+        post :test_mode_role
       end
       member do
         get 'logo'

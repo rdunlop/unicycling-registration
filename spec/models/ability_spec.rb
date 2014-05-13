@@ -242,4 +242,17 @@ describe "Ability" do
     end
   end
 
+  describe "as event_planner"  do
+    before(:each) do
+      @competition = FactoryGirl.create(:competition)
+      @event_category = @competition.event.event_categories.first
+      @user = FactoryGirl.create(:user)
+      @user.add_role :event_planner
+    end
+    subject { @ability = Ability.new(@user) }
+
+    it { should be_able_to(:summary, Event) }
+    it { should be_able_to(:sign_ups, @event_category) }
+  end
+
 end

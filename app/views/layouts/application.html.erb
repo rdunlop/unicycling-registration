@@ -47,16 +47,8 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
   <div id="container">
     <%= render :partial => "layouts/navbar" %>
 
-    <% if !current_user.nil? and  @config.test_mode %>
-      <div class="test_mode">
-        <a id="test_mode_remover" href="#" class="banner_remover" data-banner-class="test_mode" title="Remove test banner">[x]</a>
-        <h2>Test Mode Enabled</h2>
-        <span>Current User is <%= current_user.has_role?(:admin) ? "Admin" : current_user.has_role?(:super_admin) ? "Super Admin" : "Normal User" %></span>
-        <%= link_to 'Make Me ADMIN', admin_event_configurations_path, :method => :post %>
-        <%= link_to 'Make Me SUPER ADMIN', super_admin_event_configurations_path, :method => :post %>
-        <%= link_to 'Make Me NORMAL', normal_event_configurations_path, :method => :post %>
-      </div>
-    <% end %>
+    <%= render :partial => "layouts/test_mode" %>
+
     <% if current_user.nil? %>
       <div class="base_details">
         <ul>

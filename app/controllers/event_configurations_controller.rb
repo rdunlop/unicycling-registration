@@ -89,28 +89,13 @@ class EventConfigurationsController < ApplicationController
   end
 
   # FOR THE TEST_MODE flags
-  def admin
-    current_user.add_role :admin
-    current_user.remove_role :super_admin
-
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
+  def test_mode_role
+    new_role = params[:role]
+    roles = current_user.roles
+    roles.each do |role|
+      current_user.remove_role role.name
     end
-  end
-
-  def super_admin
-    current_user.remove_role :admin
-    current_user.add_role :super_admin
-
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
-    end
-  end
-
-  def normal
-    current_user.remove_role :super_admin
-    current_user.remove_role :admin
-
+    current_user.add_role new_role
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
     end

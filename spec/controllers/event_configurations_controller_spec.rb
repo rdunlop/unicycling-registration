@@ -181,52 +181,21 @@ describe EventConfigurationsController do
       response.should redirect_to(root_path)
     end
 
-    describe "POST 'admin'" do
+    describe "POST 'test_mode_role'" do
       it "redirects to root" do
-        post 'admin'
+        post 'test_mode_role'
         response.should redirect_to(root_path)
       end
       it "changes my user to admin" do
-        post 'admin'
+        post 'test_mode_role', :role => "admin"
         @user.reload
         @user.has_role?(:admin).should == true
       end
       it "cannot change if config test_mode is disabled" do
         FactoryGirl.create(:event_configuration, :test_mode => false)
-        post 'admin'
+        post 'test_mode_role', role: "admin"
         @user.reload
         @user.has_role?(:admin).should == false
-      end
-    end
-
-    describe "POST 'super_admin'" do
-      it "redirects to root" do
-        post 'super_admin'
-        response.should redirect_to(root_path)
-      end
-      it "changes my user to super_admin" do
-        post 'super_admin'
-        @user.reload
-        @user.has_role?(:super_admin).should == true
-      end
-      it "cannot change if config test_mode is disabled" do
-        FactoryGirl.create(:event_configuration, :test_mode => false)
-        post 'super_admin'
-        @user.reload
-        @user.has_role?(:super_admin).should == false
-      end
-    end
-
-    describe "POST 'normal'" do
-      it "redirects to root" do
-        post 'normal'
-        response.should redirect_to(root_path)
-      end
-      it "changes my user to normal" do
-        post 'normal'
-        @user.reload
-        @user.has_role?(:admin).should == false
-        @user.has_role?(:super_admin).should == false
       end
     end
   end

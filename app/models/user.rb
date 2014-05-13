@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:judge, :admin, :super_admin, :payment_admin]
+    [:event_planner, :judge, :payment_admin, :admin, :super_admin]
   end
 
   def self.role_description(role)
@@ -85,6 +85,8 @@ class User < ActiveRecord::Base
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
     when :payment_admin
       "[e.g. Garrett Macey] Able to view the payments that have been received, the total number of items paid."
+    when :event_planner
+      "[e.g. Mary Koehler] Able to view/review the event sign_ups."
     else
       "No Description Available"
     end
