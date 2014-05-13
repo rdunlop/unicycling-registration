@@ -58,6 +58,14 @@ class Competition < ActiveRecord::Base
     attributes['event_category_id'].blank? && attributes['competition_id'].blank?
   end
 
+  def num_competitors
+    competitors.count
+  end
+
+  def num_results
+    "N/A"
+  end
+
   def has_non_expert_results
     has_age_groups or ((not has_age_groups) and (not has_experts))
   end

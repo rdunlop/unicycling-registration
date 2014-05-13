@@ -28,39 +28,7 @@
 <% end %>
 
 <hr />
-
-<h2>Sign Up Lists</h2>
-
-<table class="event_listing">
-  <thead>
-    <tr>
-      <th>Event-Category</th>
-      <th># Signed Up</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% total_competitors = 0 %>
-    <% @event.event_categories.each do |ec| %>
-      <tr>
-        <td><%= ec %></td>
-        <% total_competitors += ec.num_competitors %>
-        <td><%= ec.num_competitors %></td>
-        <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %>
-          <%= link_to '(pdf)', sign_ups_event_category_path(ec, :format => :pdf) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th>Total: <%= total_competitors %></th>
-      <th><%= link_to 'View All Sign Up lists (NOT YET COMPLETED)', root_path %>
-        <%= link_to '(pdf)', root_path %></th>
-    </tr>
-  </tfoot>
-</table>
+<%= render :partial => "sign_ups" %>
 
 <hr />
 
@@ -75,9 +43,7 @@
     <thead>
       <tr>
         <th>Competition</th>
-        <th># Competitors</th>
         <th>Manage</th>
-        <th>Competitor List</th>
       </tr>
     </thead>
 
@@ -85,7 +51,6 @@
       <% @event.competitions.each do |competition| %>
         <tr>
           <td><%= competition %></td>
-          <td><%= competition.competitors.count %></td>
           <td>
             <% if can? :update, competition %>
               <%= link_to 'Edit', edit_competition_path(competition) %>
@@ -94,7 +59,7 @@
               <%= link_to 'Destroy',  competition_path(competition), :method => :delete, :confirm => "Are you sure you want to destroy the COMPETITION?" %>
             <% end %>
           </td>
-          <td><%= link_to 'Manage Competitors', competition_competitors_path(competition) %></td>
+
 
         </tr>
       <% end %>
@@ -143,11 +108,13 @@
 <% end %>
 
   <table class="sortable">
-    <caption>Competition Results Summaries</caption>
     <thead>
       <tr>
         <th>Competition</th>
         <th>Locked?</th>
+        <th># Competitors</th>
+        <th># Results</th>
+        <th>Competitor List</th>
         <th>View Results Summary</th>
         <th>Print</th>
         <th>Publish</th>
@@ -166,6 +133,9 @@
             <% end %>
           <% end %>
         </td>
+        <td><%= competition.num_competitors %></td>
+        <td><%= competition.num_results %></td>
+        <td><%= link_to 'Manage Competitors', competition_competitors_path(competition) %></td>
         <td><%= link_to 'View', results_url(competition) %></td>
         <td><%= link_to "(pdf)", results_printing_competition_path(competition, :format => :pdf) %></td>
         <td>Not yet implemented</td>
