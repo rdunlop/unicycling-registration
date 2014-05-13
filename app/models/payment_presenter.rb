@@ -66,7 +66,7 @@ class PaymentPresenter
     end
 
     def cost
-      if expense_item.free
+      if free
         0
       else
         expense_item.total_cost
@@ -138,7 +138,7 @@ class PaymentPresenter
 
   def build_payment_detail(payment, new_detail)
     if new_detail.pay_for || new_detail.free
-      payment.payment_details.build
+      detail = payment.payment_details.build
       detail.free = new_detail.free
       detail.amount = new_detail.cost
       detail.registrant_id = new_detail.registrant_id
