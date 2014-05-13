@@ -1,0 +1,33 @@
+
+<h2>Sign Up Lists</h2>
+
+<table class="event_listing">
+  <thead>
+    <tr>
+      <th>Event-Category</th>
+      <th># Signed Up</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% total_competitors = 0 %>
+    <% @event.event_categories.each do |ec| %>
+      <tr>
+        <td><%= ec %></td>
+        <% total_competitors += ec.num_competitors %>
+        <td><%= ec.num_competitors %></td>
+        <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %>
+          <%= link_to '(pdf)', sign_ups_event_category_path(ec, :format => :pdf) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th>Total: <%= total_competitors %></th>
+      <th><%= link_to 'View All Sign Up lists (NOT YET COMPLETED)', root_path %>
+        <%= link_to '(pdf)', root_path %></th>
+    </tr>
+  </tfoot>
+</table>
