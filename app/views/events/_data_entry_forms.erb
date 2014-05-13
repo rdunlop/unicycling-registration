@@ -4,15 +4,45 @@
 <%= link_to "Track Race Instructions", printing_race_recording_instructions_path %>
 <%= link_to "(pdf)", printing_race_recording_instructions_path(:format => :pdf) %>
 
+
+
+
+
 <table class="sortable">
   <thead>
     <tr>
-      <th>Competition</th>
-      <th>Announcer Form</th>
-      <th colspan="2">Excel Results</th>
-      <th colspan="2">Two-Attempt-per-row Data Entry</th>
-      <th colspan="2">Single-Attempt-per-row Data Entry</th>
+      <th rowspan="2">Competition</th>
+      <th rowspan="2">Announcer Form</th>
+      <th colspan="2">Excel/Track-timer</th>
+      <th colspan="2">Start</th>
+      <th colspan="2">Finish</th>
       <th colspan="2">Heat Recording</th>
+    </tr>
+    <tr>
+      <th>
+        Sample Data
+      </th>
+      <th>
+        Importer
+      </th>
+      <th>
+        Recording Forms
+      </th>
+      <th>
+        Data Entry
+      </th>
+      <th>
+        Recording Forms
+      </th>
+      <th>
+        Data Entry
+      </th>
+      <th>
+        Recording Forms
+      </th>
+      <th>
+        Data Entry
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -23,7 +53,10 @@
           <%= link_to "Announcer Form", announcer_printing_competition_path(competition) %>
           <%= link_to "(pdf)", announcer_printing_competition_path(competition, :format => :pdf) %>
         </td>
-        <td colspan="2">
+        <td>
+          Not yet implemented.
+        </td>
+        <td>
           <% if competition.scoring_helper.results_importable %>
             <%= link_to 'Import', user_competition_import_results_path(current_user, competition) %>
           <% else %>
