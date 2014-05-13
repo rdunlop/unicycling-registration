@@ -63,7 +63,7 @@ class Competition < ActiveRecord::Base
   end
 
   def num_results
-    "N/A"
+    competitors.to_a.count{|comp| comp.has_result? }
   end
 
   def has_non_expert_results

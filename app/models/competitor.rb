@@ -169,6 +169,7 @@ class Competitor < ActiveRecord::Base
     end
 
     public
+
     def has_result?
       scoring_helper.competitor_has_result?(self)
     end
