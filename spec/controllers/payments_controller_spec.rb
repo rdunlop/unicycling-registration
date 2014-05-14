@@ -263,7 +263,7 @@ describe PaymentsController do
     it "redirects to the payments list" do
       payment = FactoryGirl.create(:payment, :user => @user)
       delete :destroy, {:id => payment.to_param}
-      response.should redirect_to(payments_url)
+      response.should redirect_to(admin_payments_url)
     end
     describe "as a normal user" do
       before(:each) do
@@ -295,7 +295,7 @@ describe PaymentsController do
       describe "with a valid post" do
         before(:each) do
           @attributes =  {
-            :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, 
+            :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase,
             :payment_status => "Completed",
             :txn_id => "12345",
             :payment_date => "Some Paypal payment date",
@@ -333,7 +333,7 @@ describe PaymentsController do
       describe "with an incorrect payment_id" do
         before(:each) do
           @attributes =  {
-            :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, 
+            :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase,
             :payment_status => "Completed",
             :txn_id => "12345",
             :invoice => (@payment.id + 100).to_s,

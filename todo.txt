@@ -1,5 +1,6 @@
 Last Re-Arranged February 6, 2014.
 
+- Add test path for payment-presenter"
 - Fix image path in scss references (compiled vs dev)
 - Refactor tests to be associated with the new actions that have been extracted
 - validatio on failure of two_attempt_entry
