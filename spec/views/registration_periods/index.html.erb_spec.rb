@@ -14,6 +14,6 @@ describe "registration_periods/index" do
     assert_select "tr>td", :text => "100.0", :count => 2
     assert_select "tr>td", :text => "50.0", :count => 2
     assert_select "tr>td", :text => "false", :count => 2
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
+    assert_select "tr>td", :text => "Early Registration".to_s, :count => 2
   end
 end

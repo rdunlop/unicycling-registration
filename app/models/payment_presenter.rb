@@ -143,7 +143,7 @@ class PaymentPresenter
       detail.amount = new_detail.cost
       detail.registrant_id = new_detail.registrant_id
       detail.expense_item_id = new_detail.expense_item_id
-      detail.details = new_detail.details unless new_detail.details.blank?
+      detail.details = new_detail.details
     end
   end
 

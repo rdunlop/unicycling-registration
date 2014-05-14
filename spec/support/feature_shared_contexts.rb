@@ -22,7 +22,9 @@ shared_context 'basic event configuration' do
     FactoryGirl.create(:wheel_size_20)
     FactoryGirl.create(:event_configuration, :start_date => Date.today + 6.months,
                        :iuf => true, :usa => false, :test_mode => false, :music_submission_end_date => Date.today + 2.months)
-    FactoryGirl.create(:registration_period, :start_date => Date.today - 1.month, :end_date => Date.today + 1.month)
+    exp_comp = FactoryGirl.create(:expense_item, name: "Early Registration - Competitor")
+    exp_noncomp = FactoryGirl.create(:expense_item, name: "Early Registration - NonCompetitor")
+    FactoryGirl.create(:registration_period, :start_date => Date.today - 1.month, :end_date => Date.today + 1.month, competitor_expense_item: exp_comp, noncompetitor_expense_item: exp_noncomp)
     FactoryGirl.create(:event, :name => "100m")
   end
 end

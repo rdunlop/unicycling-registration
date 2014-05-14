@@ -106,7 +106,7 @@ Workspace::Application.routes.draw do
         post :fake_complete
       end
     end
-    resources :payment_adjustments, :only => []  do
+    resources :payment_adjustments, :only => [:new]  do
         collection do
           get :list
           post :adjust_payment_choose

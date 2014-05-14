@@ -39,6 +39,10 @@ FactoryGirl.define do
       after(:create) {|user| user.add_role :judge }
     end
 
+    factory :payment_admin do
+      after(:create) { |user| user.add_role :payment_admin }
+    end
+
     factory :chief_judge do
       after(:create) {|user| user.add_role :judge }
       after(:create) {|user| user.add_role :chief_judge, EventCategory }
