@@ -189,7 +189,7 @@ Specify whether to use the LIVE or TEST PAYPAL Site (default: Test)
 Paypal Settings required for proper integration:
 
 Configure your paypal account to send out IPN notifications;
-  The <notification url> will be the hosted website URL, with /payments/notification at the end. 
+  The <notification url> will be the hosted website URL, with /payments/notification at the end.
   Example: http://uniregtest.herokuapp.com/payments/notification
 
 . Login to the PayPal merchant account -> Profile -> Instant Payment Notification Preferences -> Enter <notification url> and select radio button “Receive IPN messages” -> Save
@@ -221,7 +221,7 @@ StandardSkillEntry). In order to initially populate these, please run db:seed
 
     $ rake db:seed
 
-When running the system somewhere other than in vagrant, 
+When running the system somewhere other than in vagrant,
 you can use the db:setup command to create the database, tables, and seed:
 
     $ rake db:setup
@@ -346,7 +346,7 @@ instances:
 
 * On "production", all exceptions are e-mailed to the ERROR_EMAIL address.
   (Via the exception-logging gem)
-* NOTE: In development, ALL E-MAIL will be sent to the ERROR_EMAIL address, 
+* NOTE: In development, ALL E-MAIL will be sent to the ERROR_EMAIL address,
   but in production it will flow as expected.
 
 
@@ -422,6 +422,12 @@ system (if so desired):
     $ PGPASSWORD=password dropdb -U postgres -h localhost app_development
     $ PGPASSWORD=password createdb -U postgres -h localhost app_development
     $ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_development latest.dump
+
+PDF Generation
+==============
+
+PDFs are generated using wicked_pdf. Please install it from http://wkhtmltopdf.org/downloads.html
+Then set the WICKED_PDF_PATH variable to the bin/wkhtmltopdf path
 
 
 To Run the Production setup locally
