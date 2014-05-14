@@ -9,14 +9,6 @@ describe Admin::PaymentsController do
   let!(:other_payment) { FactoryGirl.create(:payment) }
   let!(:payment_detail) { FactoryGirl.create(:payment_detail, :payment => payment, :amount => 5.22) }
 
-
-  describe "GET index" do
-    it "assigns all payments as @payments" do
-      get :index, {}
-      assigns(:payments).should eq([payment, other_payment])
-    end
-  end
-
   describe "POST create" do
     before(:each) do
       @ei = FactoryGirl.create(:expense_item)
@@ -58,29 +50,6 @@ describe Admin::PaymentsController do
         }]
         }}
       }.to change(PaymentDetail, :count).by(1)
-    end
-  end
-
-  describe "POST refund_create" do
-    before(:each) do
-      @pd = FactoryGirl.create(:payment_detail)
-    end
-
-    it "can create a payment with refund elements" do
-      expect {
-        post :refund_create, {:refund_presenter => {
-        :note => "Cancelled",
-        :paid_details_attributes => {
-          "0" => {
-          :payment_detail_id => @pd.id,
-          :refund => true
-          }}
-        }}
-      }.to change(RefundDetail, :count).by(1)
-      r = Refund.last
-      r.note.should == "Cancelled"
-      rd = RefundDetail.last
-      rd.payment_detail.should == @pd
     end
   end
 end

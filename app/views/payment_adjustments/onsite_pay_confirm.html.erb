@@ -11,7 +11,7 @@
 
 
 <% @registrants = @p.registrants %>
-<%= form_for(@p, :url => onsite_pay_create_admin_payments_path) do |pf| %>
+<%= form_for(@p, :url => onsite_pay_create_payment_adjustments_path) do |pf| %>
   <%= render :partial => "/shared/error_messages", :object => @p %>
 
   <%= pf.label :note %><%= pf.text_field :note %>
@@ -92,5 +92,5 @@
 <% end %>
 
 <div>
-  <%= link_to 'Back', admin_payments_path %>
+  <%= link_to 'Back', payment_adjustments_path %>
 </div>

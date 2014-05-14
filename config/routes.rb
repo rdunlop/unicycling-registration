@@ -46,15 +46,7 @@ Workspace::Application.routes.draw do
 
 
     namespace :admin do
-      resources :payments, :only => [:index, :new, :create]  do
-        collection do
-          get :onsite_pay_new
-          post :adjust_payment_choose
-          post :onsite_pay_confirm
-          post :onsite_pay_create
-          post :refund_choose
-          post :refund_create
-        end
+      resources :payments, :only => [:new, :create]  do
       end
 
       namespace :export do
@@ -114,6 +106,17 @@ Workspace::Application.routes.draw do
         post :fake_complete
       end
     end
+    resources :payment_adjustments, :only => []  do
+        collection do
+          get :list
+          post :adjust_payment_choose
+          post :onsite_pay_confirm
+          post :onsite_pay_create
+          post :refund_choose
+          post :refund_create
+        end
+      end
+
 
     resources :registration_periods
 

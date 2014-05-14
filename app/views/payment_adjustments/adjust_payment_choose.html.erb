@@ -27,7 +27,7 @@
     <% end %>
   </tbody>
 </table>
-<%= form_tag(refund_choose_admin_payments_path, :method => :post) do %>
+<%= form_tag(refund_choose_payment_adjustments_path, :method => :post) do %>
   <% @p.registrants.each do |reg| %>
     <%= hidden_field_tag "registrant_id[]", reg.id %>
   <% end %>
@@ -58,7 +58,7 @@
   </tbody>
 </table>
 
-<%= form_tag(onsite_pay_confirm_admin_payments_path, :method => :post) do %>
+<%= form_tag(onsite_pay_confirm_payment_adjustments_path, :method => :post) do %>
   <% @p.registrants.each do |reg| %>
     <%= hidden_field_tag "registrant_id[]", reg.id %>
   <% end %>
@@ -66,5 +66,5 @@
 <% end %>
 
 <div>
-  <%= link_to 'Back', admin_payments_path %>
+  <%= link_to 'Back', new_payment_adjustment_path %>
 </div>

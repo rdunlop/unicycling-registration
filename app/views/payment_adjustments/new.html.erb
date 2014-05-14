@@ -9,12 +9,12 @@
   <% if @payment.present? %>
     <%= render :partial => "/shared/error_messages", :object => @payment %>
   <% end %>
-  <%= form_tag(adjust_payment_choose_admin_payments_path, :method => :post) do %>
+  <%= form_tag(adjust_payment_choose_payment_adjustments_path, :method => :post) do %>
     <%= label_tag(:registrant_id, "Registrants") %>
     <%= select_tag(:registrant_id, options_from_collection_for_select(@registrants, "id", "with_id_to_s"), :multiple => true) %>
     <br />
     <%= submit_tag('Start Payment Adjustment') %>
   <% end %>
 <div>
-  <%= link_to 'Back', admin_payments_path %>
+  <%= link_to 'Back', list_payment_adjustments_path %>
 </div>
