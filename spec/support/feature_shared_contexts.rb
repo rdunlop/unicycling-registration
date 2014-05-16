@@ -16,17 +16,32 @@ shared_context 'user is logged in' do
   end
 end
 
-shared_context 'basic event configuration' do
+shared_context 'basic event configuration' do |options = {}|
+  options.reverse_merge test_mode: false
   before :each do
     FactoryGirl.create(:wheel_size_24)
     FactoryGirl.create(:wheel_size_20)
     FactoryGirl.create(:event_configuration, :start_date => Date.today + 6.months,
-                       :iuf => true, :usa => false, :test_mode => false, :music_submission_end_date => Date.today + 2.months)
-    exp_comp = FactoryGirl.create(:expense_item, name: "Early Registration - Competitor")
-    exp_noncomp = FactoryGirl.create(:expense_item, name: "Early Registration - NonCompetitor")
+                       :iuf => true, :usa => false, :test_mode => options[:test_mode], :music_submission_end_date => Date.today + 2.months)
+    exp_comp = FactoryGirl.create(:expense_item, name: "Early Registration - Competitor", cost: 20.00)
+    exp_noncomp = FactoryGirl.create(:expense_item, name: "Early Registration - NonCompetitor", cost: 11.00)
     FactoryGirl.create(:registration_period, :start_date => Date.today - 1.month, :end_date => Date.today + 1.month, competitor_expense_item: exp_comp, noncompetitor_expense_item: exp_noncomp)
     FactoryGirl.create(:event, :name => "100m")
   end
+end
+
+shared_context 'optional expense_item' do |options = {}|
+  options.reverse_merge cost: 15, has_detalis: false, details: nil
+  before :each do
+    @ei = FactoryGirl.create(:expense_item, name: "USA Individual Membership", has_details: options[:has_details], cost: options[:cost])
+    options[:registrant].registrant_expense_items.create expense_item: @ei, system_managed: false, details: options[:details]
+    options[:registrant].reload
+  end
+end
+
+shared_context 'optional expense_item with details' do |options = {}|
+  options.reverse_merge has_details: true, details: ""
+  include_context 'optional expense_item', options
 end
 
 shared_context 'basic registrant data' do

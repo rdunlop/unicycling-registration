@@ -1,5 +1,17 @@
 Last Re-Arranged February 6, 2014.
 
+Questions:
+Section 2.1.4 (page 26)
+- If Scott and Robin compete in 100m, and 1st (32 seconds) and 2nd (33 seconds) respectively
+- And then they both compete in the finals, and have results of Scott: 31 seconds, Robin: 30 seconds.
+THEN: What is the time and place awarded to Scott and Robin for the Age Group? (is it 1st/2nd, or 2nd/1st)
+
+
+
+ - And the
+- Look for the rulebook and check the cMobined competition logic.
+- Show the "attempt number" which was faster.
+- Disqualified should be "no"/"" instead of "true/false"
 - Add test path for payment-presenter"
 - Fix image path in scss references (compiled vs dev)
 - Refactor tests to be associated with the new actions that have been extracted
