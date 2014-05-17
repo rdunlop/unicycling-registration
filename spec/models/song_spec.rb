@@ -28,4 +28,19 @@ describe Song do
     song.description = nil
     song.valid?.should == false
   end
+
+  describe "with a song created" do
+    let(:registrant) { FactoryGirl.create(:registrant) }
+    let!(:song1) { FactoryGirl.create(:song, :registrant => registrant)}
+
+    it "cannot create a second song for the same event for the same registrant"  do
+      song2 = FactoryGirl.build(:song, :registrant => registrant, :event => song1.event)
+      song2.should be_invalid
+    end
+
+    it "can create a second song for the same event, different registrant" do
+      song1a = FactoryGirl.build(:song, :event => song1.event)
+      song1a.should be_valid
+    end
+  end
 end

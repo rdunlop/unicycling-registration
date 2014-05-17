@@ -6,3 +6,5 @@
   <%= f.file_field :song_file_name %>
   <%= f.submit 'Upload Music' %>
 <% end %>
+
+<%= link_to "Back", registrant_songs_path(@song.registrant) %>

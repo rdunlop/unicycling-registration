@@ -40,6 +40,38 @@
     <% end %>
   <% end %>
 </div>
+<% @registrant.songs.count > 0 || !@config.music_submission_ended? %>
+<div class="data_block" style="max-width: 550px;">
+  <fieldset class="data_block">
+    <legend>Your Competition Music</legend>
+    <table>
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Song</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @registrant.songs.each do |song| %>
+          <tr>
+            <td><%= song.event %></td>
+            <td><%= song.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="2">
+            <% if can? :create, Song %>
+              To upload music, please <%= link_to "Click Here", registrant_songs_path(@registrant) %>
+            <% end %>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </fieldset>
+</div>
+
 <% if @registrant.has_standard_skill? %>
   <hr class="non_printable" />
   <div class="edit_link_block">

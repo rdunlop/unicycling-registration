@@ -3,8 +3,8 @@
 <table class="sortable">
   <thead>
     <tr>
-      <th>Description</th>
       <th>Event</th>
+      <th>Description</th>
       <th>File name</th>
       <th>Last Updated</th>
       <th></th>
@@ -16,13 +16,13 @@
   <tbody>
     <% @songs.each do |song| %>
       <tr>
-        <td><%= song.description %></td>
         <td><%= song.event %></td>
+        <td><%= song.description %></td>
         <td><%= song.human_name %></td>
         <td><%= song.updated_at %></td>
         <td><%= link_to 'Download', song.song_file_name_url, target: '_blank' %></td>
         <td><%= link_to 'Add Song', add_file_song_path(song) %></td>
-        <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Remove', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,3 +33,5 @@
 <h1>New song</h1>
 
 <%= render 'form' %>
+
+<%= link_to "Back", registrant_path(@registrant) %>

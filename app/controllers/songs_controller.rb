@@ -40,6 +40,7 @@ class SongsController < ApplicationController
     if @song.save
       redirect_to add_file_song_path(@song), notice: 'Song was successfully created.'
     else
+      @songs = @registrant.songs
       render action: 'index'
     end
   end
