@@ -1,7 +1,8 @@
 class SongsController < ApplicationController
 
   load_and_authorize_resource :registrant, :only => [:index, :create]
-  load_and_authorize_resource
+  load_and_authorize_resource :through => :registrant, :only => [:create]
+  load_and_authorize_resource :except => [:create]
   before_action :load_songs, :only => [:index, :create, :add_file]
 
   def load_songs
@@ -39,9 +40,6 @@ class SongsController < ApplicationController
 
   # POST /registrants/1/songs
   def create
-    @song = Song.new(song_params)
-    @song.registrant = @registrant
-
     if @song.save
       redirect_to add_file_song_path(@song), notice: 'Song was successfully created.'
     else

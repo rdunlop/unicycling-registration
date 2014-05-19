@@ -147,7 +147,6 @@ class Ability
       end
     end
 
-    can :create, Song #necessary because we set the registrant in the controller
     #can :create, Song do
     #  user.has_role? :admin
     #end

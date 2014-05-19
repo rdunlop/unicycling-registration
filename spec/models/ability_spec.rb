@@ -14,7 +14,6 @@ describe "Ability" do
     it { should_not be_able_to(:read, User.new) }
     it { should be_able_to(:create, StandardSkillRoutine) }
 
-
     describe "with Additional Registrant Accesses" do
       before(:each) do
         @ara = FactoryGirl.create(:additional_registrant_access, :user => @user, :accepted_readonly => true)
