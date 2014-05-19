@@ -40,7 +40,7 @@
     <% end %>
   <% end %>
 </div>
-<% @registrant.songs.count > 0 || !@config.music_submission_ended? %>
+<% @registrant.songs.count > 0 || !EventConfiguration.music_submission_ended? %>
 <div class="data_block" style="max-width: 550px;">
   <fieldset class="data_block">
     <legend>Your Competition Music</legend>

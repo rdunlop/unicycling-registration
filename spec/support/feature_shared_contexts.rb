@@ -16,6 +16,10 @@ shared_context 'user is logged in' do
   end
 end
 
+shared_context "unpaid registration" do
+  let(:competitor) { FactoryGirl.create(:competitor, user: user) }
+end
+
 shared_context 'basic event configuration' do |options = {}|
   options.reverse_merge! test_mode: false
   before :each do
@@ -31,11 +35,11 @@ shared_context 'basic event configuration' do |options = {}|
 end
 
 shared_context 'optional expense_item' do |options = {}|
-  options.reverse_merge! cost: 15, has_detalis: false, details: nil
+  options.reverse_merge! cost: 15, has_details: false, details: nil
   before :each do
     @ei = FactoryGirl.create(:expense_item, name: "USA Individual Membership", has_details: options[:has_details], cost: options[:cost])
-    options[:registrant].registrant_expense_items.create expense_item: @ei, system_managed: false, details: options[:details]
-    options[:registrant].reload
+    competitor.registrant_expense_items.create expense_item: @ei, system_managed: false, details: options[:details]
+    competitor.reload
   end
 end
 
