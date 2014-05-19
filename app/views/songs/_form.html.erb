@@ -11,14 +11,12 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :event %><br>
+    <%= f.label :event %>
     <%= f.collection_select :event_id, Event.music_uploadable, :id, :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
+
+    <%= f.label :description %>
     <%= f.text_field :description %>
-  </div>
-  <div class="actions">
+
     <%= f.submit %>
   </div>
 <% end %>

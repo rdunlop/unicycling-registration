@@ -1,10 +1,26 @@
 <h2>Song Add File </h2>
 <h3>Event: <%= @song.event %> - <%= @song.description %></h3>
-<%= direct_upload_form_for @uploader do |f| %>
-  <%= hidden_field_tag 'Content-Type', 'audio/mpeg' %>
-  <b>NOTE:</b> Maximum file size is 40 MB<br />
-  <%= f.file_field :song_file_name %>
-  <%= f.submit 'Upload Music' %>
-<% end %>
+
+
+<%= render "songs_list" %>
+
+
+
+<h1>Upload song (Step 2)</h1>
+
+<fieldset class="wizard wizard_other_step">
+  <legend>Step 1</legend>
+  Enter Event/Description
+</fieldset>
+<fieldset class="wizard">
+<legend>Step 2</legend>
+  <%= direct_upload_form_for @uploader do |f| %>
+    <%= hidden_field_tag 'Content-Type', 'audio/mpeg' %>
+    <b>NOTE:</b> Maximum file size is 40 MB<br />
+    <%= f.file_field :song_file_name %>
+    <%= f.submit 'Upload Music' %>
+  <% end %>
+</fieldset>
+<br />
 
 <%= link_to "Back", registrant_songs_path(@song.registrant) %>

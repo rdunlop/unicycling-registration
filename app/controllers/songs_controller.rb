@@ -2,10 +2,15 @@ class SongsController < ApplicationController
 
   load_and_authorize_resource :registrant, :only => [:index, :create]
   load_and_authorize_resource
+  before_action :load_songs, :only => [:index, :create, :add_file]
+
+  def load_songs
+    @registrant ||= @song.registrant
+    @songs = @registrant.songs
+  end
 
   # GET /registrants/1/songs
   def index
-    @songs = @registrant.songs
     @song = Song.new
   end
 
@@ -40,7 +45,6 @@ class SongsController < ApplicationController
     if @song.save
       redirect_to add_file_song_path(@song), notice: 'Song was successfully created.'
     else
-      @songs = @registrant.songs
       render action: 'index'
     end
   end
