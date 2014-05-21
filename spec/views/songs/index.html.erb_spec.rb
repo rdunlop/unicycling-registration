@@ -24,6 +24,7 @@ describe "songs/index" do
       :description => "MyString",
       :file_name => "MyString"
     ).as_new_record)
+    assign(:config, double(:music_submission_end_date => "now"))
   end
 
   it "renders a list of songs" do
