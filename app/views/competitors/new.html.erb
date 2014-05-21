@@ -1,8 +1,7 @@
 <h3><%= @competition.event %> - <%= @competition %></h3>
 
 <div>
-  <% @event = @competition.event %>
-  <%= render :partial => "/event_categories/sign_ups" %>
+  <%= render :partial => "/event_categories/sign_ups", locals: {:registrants => @registrants, :event => @competition.event} %>
 </div>
 <div>
       <%= render :partial => "/competitors/competitors", :object => @competition.competitors %>

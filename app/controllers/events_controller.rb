@@ -38,6 +38,13 @@ class EventsController < ApplicationController
     @num_registrants = @num_competitors + @num_noncompetitors
   end
 
+  def sign_ups
+    respond_to do |format|
+      format.html
+      format.pdf { render :pdf => "show", :formats => [:html] }
+    end
+  end
+
   # GET /events/1
   def show
   end

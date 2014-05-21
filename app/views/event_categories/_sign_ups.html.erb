@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <% @registrants.each do |reg| %>
+        <% registrants.each do |reg| %>
           <% next if reg.nil? %>
             <tr>
                 <td><%= reg.bib_number %></td>
@@ -18,7 +18,7 @@
                 <td><%= reg.age %></td>
                 <td><%= reg.gender %></td>
                 <td><%= reg.country %></td>
-                <td><%= reg.describe_event_hash(@event)[:additional] %></td>
+                <td><%= reg.describe_event_hash(event)[:additional] %></td>
             </tr>
         <% end %>
     </tbody>

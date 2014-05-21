@@ -69,4 +69,17 @@ describe EventCategory do
     @ec.touch
     @event.reload.updated_at.to_s.should_not == old_update_time.to_s
   end
+
+  describe "with a signed up, but deleted registrant" do
+    before :each do
+      reg = FactoryGirl.create(:registrant)
+      FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec, :signed_up => true, :registrant => reg)
+      reg.deleted = true
+      reg.save!
+    end
+
+    it "doesn't list the reg" do
+      expect(@ec.signed_up_registrants).to eq([])
+    end
+  end
 end

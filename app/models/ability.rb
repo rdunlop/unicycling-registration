@@ -48,7 +48,7 @@ class Ability
   def set_chief_judge_abilities(user)
     # :read is main chief_judge menu-page
     # :results is for printing
-    can [:read, :results], Event do |ev|
+    can [:read, :results, :sign_ups], Event do |ev|
       user.has_role? :chief_judge, ev
     end
     can :sign_ups, EventCategory do |ec|

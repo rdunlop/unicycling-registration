@@ -137,6 +137,7 @@ Workspace::Application.routes.draw do
       member do
         post :create_chief
         delete :destroy_chief
+        get :sign_ups
       end
       resources :competitions, :only => [:index, :new, :create]
     end

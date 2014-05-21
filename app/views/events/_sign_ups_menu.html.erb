@@ -26,8 +26,8 @@
     <tr>
       <th></th>
       <th>Total: <%= total_competitors %></th>
-      <th><%= link_to 'View All Sign Up lists (NOT YET COMPLETED)', root_path %>
-        <%= link_to '(pdf)', root_path %></th>
+      <th><%= link_to 'View All Sign Up lists', sign_ups_event_path(@event) %>
+        <%= link_to '(pdf)', sign_ups_event_path(@event, :format => :pdf) %></th>
     </tr>
   </tfoot>
 </table>

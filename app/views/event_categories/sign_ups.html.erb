@@ -1,6 +1,3 @@
 <h1><%= @event_category %> - Sign Ups - (Count: <%= @event_category.num_competitors %>)</h1>
 
-<% # XXX this should not use @event 
-%>
-<% @event = @event_category.event %>
-<%= render :partial => "sign_ups" %>
+<%= render :partial => "sign_ups", locals: {:registrants => @event_category.signed_up_registrants, :event => @event_category.event} %>
