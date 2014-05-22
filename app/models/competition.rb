@@ -59,11 +59,15 @@ class Competition < ActiveRecord::Base
   end
 
   def num_competitors
-    competitors.count
+    Rails.cache.fetch("/competition/#{id}-#{updated_at}/num_competitors") do
+      competitors.count
+    end
   end
 
   def num_results
-    competitors.to_a.count{|comp| comp.has_result? }
+    Rails.cache.fetch("/competition/#{id}-#{updated_at}/num_results") do
+      competitors.to_a.count{|comp| comp.has_result? }
+    end
   end
 
   def has_non_expert_results

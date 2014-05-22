@@ -16,7 +16,7 @@ class Competitor < ActiveRecord::Base
 
     has_many :members, :inverse_of => :competitor
     has_many :registrants, -> { order "bib_number" }, :through => :members
-    belongs_to :competition
+    belongs_to :competition, touch: true
     acts_as_list :scope => :competition
 
     has_many :scores, :dependent => :destroy

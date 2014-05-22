@@ -16,7 +16,7 @@ class ExternallyRankedScoringClass < BaseScoringClass
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.external_results.count > 0
+    competitor.external_results.any?
   end
 
   # returns the result for this competitor
