@@ -11,7 +11,7 @@ class RegistrantsController < ApplicationController
 
   def load_categories
     if @registrant.competitor
-      @categories = Category.includes(:events)
+      @categories = Category.includes(:translations, :events => :event_choices)
     end
   end
 

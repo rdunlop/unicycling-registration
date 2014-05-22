@@ -13,7 +13,7 @@
 class Category < ActiveRecord::Base
   default_scope { order('position ASC') }
 
-  has_many :events, -> {order("events.position").includes(:event_choices) }, :dependent => :destroy, :inverse_of => :category
+  has_many :events, -> {order("events.position") }, :dependent => :destroy, :inverse_of => :category
 
   validates :name, :presence => true
 
