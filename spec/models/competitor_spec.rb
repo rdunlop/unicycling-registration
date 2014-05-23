@@ -141,6 +141,9 @@ describe Competitor do
       @comp.external_id.should == @comp.registrants.first.external_id.to_s
 
       @comp.custom_external_id = 12345
+      Delorean.jump 2
+
+      @comp.save
       @comp.external_id.should == "12345"
     end
     it "must have 3 competitors to allow a custom name" do
@@ -358,7 +361,7 @@ describe Competitor do
       da1 = FactoryGirl.create(:distance_attempt, :distance => 1, :competitor => @comp, :fault => false)
       da2 = FactoryGirl.create(:distance_attempt, :distance => 2, :competitor => @comp, :fault => false)
       da3 = FactoryGirl.create(:distance_attempt, :distance => 3, :competitor => @comp, :fault => false)
-  
+
       @comp.distance_attempts.should == [da3, da2, da1]
     end
     it "should return the attempts in descending attempt order (if the same distance)" do
@@ -386,21 +389,21 @@ describe Competitor do
       it "should return the max successful distance" do
         @comp.max_successful_distance.should == 10
       end
-  
+
       it "should not allow another attempt when in double-fault" do
           FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
           da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 25, :fault => false)
-  
+
           @comp.double_fault?.should == true
           da.valid?.should == false
       end
-  
+
       describe "when there are 2 faults" do
         before(:each) do
           @da2 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
         end
         it "should allow the 2nd attempt to also be a fault" do
-    
+
             Competitor.find(@comp).double_fault?.should == true
             @da2.valid?.should == true
         end
@@ -408,13 +411,13 @@ describe Competitor do
             @comp.status.should == "Finished. Final Score 10"
         end
       end
-  
+
       it "should allow multiple faults, interspersed within the attempts" do
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 20, :fault => false)
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 25, :fault => true)
-  
+
         da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 25, :fault => false)
-  
+
         da.valid?.should == true
       end
 

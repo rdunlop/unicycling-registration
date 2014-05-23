@@ -39,7 +39,8 @@ describe OrderedResultCalculator do
       end
       it "places the first 2 competitors as first" do
         recalc
-        Delorean.jump 2
+        @tr2.reload
+        @tr3.reload
 
         @tr1.competitor.place.should == 1
         @tr2.competitor.place.should == 1

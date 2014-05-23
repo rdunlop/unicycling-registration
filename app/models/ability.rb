@@ -58,6 +58,10 @@ class Ability
       user.has_role? :chief_judge, comp.competition.try(:event)
     end
 
+    can [:read], Score do |score|
+      user.has_role? :chief_judge, score.competition.event
+    end
+
     # so that they can create/view judges
     can [:read], Competition do |comp|
       user.has_role? :chief_judge, comp.event

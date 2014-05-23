@@ -174,6 +174,7 @@ describe OrderedResultCalculator do
       @all_together = FactoryGirl.create(:age_group_type)
       entr = FactoryGirl.create(:age_group_entry, :age_group_type => @all_together, :start_age => 0, :end_age => 100, :gender => "Male")
       @comp = FactoryGirl.create(:timed_competition, :age_group_type => @all_together)
+      Delorean.jump 2
       tr1 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 15, :thousands => 935, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
       tr2 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 23, :thousands => 97, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
       tr4 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 26, :thousands => 745, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
@@ -185,12 +186,12 @@ describe OrderedResultCalculator do
       rc = OrderedResultCalculator.new(@comp)
       recalc(rc)
 
-      tr1.competitor.place.should == 1
-      tr2.competitor.place.should == 2
-      tr3.competitor.place.should == 3
-      tr4.competitor.place.should == 4
-      tr5.competitor.place.should == 5
-      tr6.competitor.place.should == 6
+      tr1.reload.competitor.place.should == 1
+      tr2.reload.competitor.place.should == 2
+      tr3.reload.competitor.place.should == 3
+      tr4.reload.competitor.place.should == 4
+      tr5.reload.competitor.place.should == 5
+      tr6.reload.competitor.place.should == 6
     end
   end
 end

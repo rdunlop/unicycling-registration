@@ -80,7 +80,7 @@
 <br />
 
 <% if @event.competitions.any?{|comp| comp.judges.count > 0 } %>
-  <table>
+  <table class="sortable">
     <caption>Judge-specific results</caption>
     <thead>
       <tr>
@@ -99,7 +99,7 @@
             <td><%= judge %></td>
             <td><%= competition.competitors.count %></td>
             <td><%= judge.scores.count %></td>
-            <td>Not yet imelmented</td>
+            <td><%= link_to "View Scores", judge_scores_path(judge) %></td>
           </tr>
         <% end %>
       <% end %>
@@ -107,6 +107,8 @@
   </table>
 <% end %>
 
+<hr />
+<h3>Competition Results</h3>
   <table class="sortable">
     <thead>
       <tr>
