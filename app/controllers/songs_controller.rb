@@ -15,6 +15,10 @@ class SongsController < ApplicationController
     @song = Song.new
   end
 
+  # GET /songs/list
+  def list
+  end
+
   # GET /songs/1/add_file
   def add_file
     if @song.song_file_name.present?

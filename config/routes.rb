@@ -184,6 +184,9 @@ Workspace::Application.routes.draw do
     end
 
     resources :songs, :only => [:edit, :update, :destroy] do
+      collection do
+        get :list
+      end
       member do
         get :add_file
         get :file_complete
