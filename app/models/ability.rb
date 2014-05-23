@@ -152,7 +152,7 @@ class Ability
     #  user.has_role? :admin
     #end
     unless EventConfiguration.music_submission_ended?
-      can :crud, Song do |song|
+      can [:crud, :file_complete, :add_file], Song do |song|
         user.registrants.include?(song.registrant)
       end
     end
