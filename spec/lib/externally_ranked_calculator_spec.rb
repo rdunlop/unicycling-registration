@@ -24,10 +24,10 @@ describe OrderedResultCalculator do
     it "sets the competitor places to the ranks" do
       recalc
 
-      @tr1.competitor.place.should == 1
-      @tr2.competitor.place.should == 2
-      @tr3.competitor.place.should == 3
-      @tr4.competitor.place.should == 4
+      @tr1.reload.competitor.place.should == 1
+      @tr2.reload.competitor.place.should == 2
+      @tr3.reload.competitor.place.should == 3
+      @tr4.reload.competitor.place.should == 4
     end
 
     describe "with an ineligible registrant in first place" do
