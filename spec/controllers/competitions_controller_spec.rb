@@ -18,25 +18,6 @@ describe CompetitionsController do
     }
   end
 
-  # /events/#/competitions
-  describe "GET index" do
-    it "assigns all event's competitions as @competitions" do
-      competition = Competition.create! valid_attributes.merge({:event_id => @event.id})
-      get :index, {:event_id => @event.id}
-      assigns(:competitions).should eq([competition])
-    end
-    it "does not show competitions from other events" do
-      FactoryGirl.create(:competition)
-      get :index, {:event_id => @event.id}
-      assigns(:competitions).should eq(@event.competitions)
-    end
-    it "assigns a new competition" do
-      Competition.create! valid_attributes.merge({:event_id => @event.id})
-      get :index, {:event_id => @event.id}
-      assigns(:competition).should be_a_new(Competition)
-    end
-  end
-
   describe "GET new" do
     it "assigns the event as @event" do
       get :new, {:event_id => @event.id}

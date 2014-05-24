@@ -5,13 +5,11 @@ class CompetitionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_new_competition, :only => [:create]
 
-  before_filter :load_event, :only => [:index, :create, :new]
-  before_filter :load_competitions, :only => [:index]
+  before_filter :load_event, :only => [:create, :new]
 
   load_and_authorize_resource
 
   respond_to :html
-
 
   private
   def load_new_competition
@@ -26,20 +24,11 @@ class CompetitionsController < ApplicationController
     @competition.event = @event unless @competition.nil?
   end
 
-  def load_competitions
-    @competitions = @event.competitions
-  end
   public
 
   # /events/#/competitions/new
   def new
     @competition.competition_sources.build
-  end
-
-  # GET /competitions
-  # GET /competitions.json
-  def index
-    @competition = Competition.new
   end
 
   # GET /competitions/1/edit
