@@ -112,8 +112,6 @@ Workspace::Application.routes.draw do
       resources :event_choices, :only => [:index, :create]
       resources :event_categories, :only => [:index, :create]
       collection do
-        get 'judging'
-
         get 'summary'
       end
       member do
@@ -198,6 +196,7 @@ Workspace::Application.routes.draw do
     get "welcome/help"
     post "welcome/feedback"
     get "welcome/confirm"
+    get 'welcome/judging_menu'
 
     devise_for :users, :controllers => { :registrations => "registrations" }
 

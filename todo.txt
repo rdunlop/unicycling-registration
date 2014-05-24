@@ -9,7 +9,6 @@ Last Re-Arranged February 6, 2014.
 - Improve the styling of the Competitor->Member form.
 - Combine the EventCategory and Event controllers so that all creation/updat/deletion of event_categories happens through an event.
 - Combine the EventChoice and Event controllers, so that all creation/update/deletion of event_choices happens through an event.
-- Combine the AgeGroupType and AgeGroupENtries controllers, so that all ceration/update/deletion is at the AgeGroupType.
 - Enhance the "mark items as paid for" to allow for arbitrary number of "other" elements....adding them by JS.
 - Allow CombinedCompetition + Entries to be a single controller.
 - Remove remnants of AdminAbility and Admin::BaseController (start with AdjustmentPayment controller?)

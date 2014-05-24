@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
   before_filter :authenticate_user!, :only => [:index]
-  skip_authorization_check
+  skip_authorization_check only: [:index, :help, :feedback]
+  authorize_resource class: false, only: :judging_menu
 
   def help
     @contact_form = ContactForm.new
@@ -29,9 +30,9 @@ class WelcomeController < ApplicationController
   def index
     respond_to do |format|
       if signed_in?
-        if current_user.has_role? :judge
+        if current_user.roles.any?
           flash.keep
-          format.html { redirect_to judging_events_path }
+          format.html { redirect_to welcome_judging_menu_path }
         else
           flash.keep
           format.html { redirect_to user_registrants_path(current_user) }
@@ -42,6 +43,10 @@ class WelcomeController < ApplicationController
         format.html { redirect_to registrants_path }
       end
     end
+  end
+
+  def judging_menu
+    @judges = current_user.judges
   end
 
   private

@@ -109,10 +109,6 @@ class EventsController < ApplicationController
     respond_with(@event, location: category_events_path(@category))
   end
 
-  def judging
-    @judges = current_user.judges
-  end
-
   private
   def event_params
     params.require(:event).permit(:category_id, :export_name, :position, :name, :visible, :accepts_music_uploads,

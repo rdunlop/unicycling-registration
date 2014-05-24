@@ -84,6 +84,10 @@ class Ability
   def define_ability_for_logged_in_user(user)
     alias_action :create, :read, :update, :destroy, :to => :crud
 
+    if user.roles.any?
+      can :judging_menu, :welcome
+    end
+
     if user.has_role? :super_admin
       can :access, :rails_admin
       can :dashboard
