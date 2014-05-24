@@ -15,14 +15,6 @@ class TimeResultsController < ApplicationController
     end
   end
 
-  def final_candidates
-    @male_candidates = @competition.competitors.select{ |competitor| competitor.is_top?("Male") }
-    @female_candidates = @competition.competitors.select{ |competitor| competitor.is_top?("Female") }
-    respond_to do |format|
-      format.html # final_candidates.html.erb
-    end
-  end
-
   # GET /time_results/1/edit
   def edit
     @competition = @time_result.competition

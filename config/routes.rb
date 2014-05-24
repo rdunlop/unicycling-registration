@@ -252,6 +252,7 @@ Workspace::Application.routes.draw do
         get :export_scores
         # view scores
         get :result
+        get :final_candidates
 
         post :lock
         delete :lock
@@ -272,11 +273,7 @@ Workspace::Application.routes.draw do
           post :copy_judges
         end
       end
-      resources :time_results, :only => [:index, :create] do
-        collection do
-          get :final_candidates
-        end
-      end
+      resources :time_results, :only => [:index, :create]
       resources :lane_assignments, :only => [:index, :create]
       resources :external_results, :shallow => true, :except => [:new, :show]
     end

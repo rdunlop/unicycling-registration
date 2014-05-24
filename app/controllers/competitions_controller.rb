@@ -88,7 +88,21 @@ class CompetitionsController < ApplicationController
   end
 
   def result
+    add_to_competition_breadcrumb(@competition)
+    add_breadcrumb "Result", result_competition_path(@competition)
     render @competition.render_path
+  end
+
+  def final_candidates
+    add_to_competition_breadcrumb(@competition)
+    add_breadcrumb "Result", result_competition_path(@competition)
+    add_breadcrumb "Final Candidates"
+
+    @male_candidates = @competition.competitors.select{ |competitor| competitor.is_top?("Male") }
+    @female_candidates = @competition.competitors.select{ |competitor| competitor.is_top?("Female") }
+    respond_to do |format|
+      format.html # final_candidates.html.erb
+    end
   end
 
   def export_scores
