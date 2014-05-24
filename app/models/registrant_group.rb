@@ -18,7 +18,7 @@ class RegistrantGroup < ActiveRecord::Base
 
 
   def sorted_registrants
-    registrants.sort{|a,b| a.address <=> b.address }
+    registrants.sort{|a,b| a.contact_detail.address <=> b.contact_detail.address }
   end
 
   def to_s

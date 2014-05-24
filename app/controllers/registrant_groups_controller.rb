@@ -31,10 +31,10 @@ class RegistrantGroupsController < ApplicationController
     label_text = []
     registrants.each do |registrant|
       text = "#{registrant.name}\n"
-      text += "#{registrant.address}\n"
-      text += "#{registrant.city}, #{registrant.state}\n"
-      text += "#{registrant.country_residence}\n"
-      text += "#{registrant.zip}\n"
+      text += "#{registrant.contact_detail.address}\n"
+      text += "#{registrant.contact_detail.city}, #{registrant.contact_detail.state}\n"
+      text += "#{registrant.contact_detail.country_residence}\n"
+      text += "#{registrant.contact_detail.zip}\n"
       label_text << text
     end
 
@@ -102,7 +102,7 @@ class RegistrantGroupsController < ApplicationController
 
   private
   def registrant_group_params
-    params.require(:registrant_group).permit(:name, :registrant_id, 
+    params.require(:registrant_group).permit(:name, :registrant_id,
                                              :registrant_group_members_attributes => [:registrant_id, :_destroy, :id])
   end
 end

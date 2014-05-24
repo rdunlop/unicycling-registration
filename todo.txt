@@ -1,6 +1,44 @@
 Last Re-Arranged February 6, 2014.
 
-- make s3 music urls anonymous
+- Fix Competition Creation (Pairs fails)
+- Remove events/:id/competitions (not needed)
+- Combine the EventCategory and Event controllers so that all creation/updat/deletion of event_categories happens through an event.
+- Combine the EventChoice and Event controllers, so that all creation/update/deletion of event_choices happens through an event.
+- Combine the AgeGroupType and AgeGroupENtries controllers, so that all ceration/update/deletion is at the AgeGroupType.
+- Remove ability to Delete a Payment.
+- Remove (partially done?) ability to Update/Edit a Payment. (and from Admin/Payments too)
+- Remove admin ability to "Create" a Payment.
+- Enhance the "mark items as paid for" to allow for arbitrary number of "other" elements....adding them by JS.
+- Remove extra "Blakn Race RecordinG Form" links from events#show
+- Remove unused Admin Export functions. Keep the DownloadDetailsOn Registrasnts woh Bought (fix it), and keep download_events.xls.
+- Remove remnants of AdminAbility and Admin::BaseController (start with AdjustmentPayment controller?)
+- New Navigation Structure (using Breadcrumbs?)
+- New Menu Bar (not custom-made?)
+- Improve the Adjustment Payment system, and add tests for it, so that it can be used by non-Robin
+- Allow CombinedCompetition + Entries to be a single controller.
+- Need a way to Display the results of a Combined competition
+- need a way to print awards for a Combined Competition
+- Move Chief Judge creation into the Permissions Controller (though it can still be from events#show TOO)
+- Create a Report which lists the competitions, including the scoring rules, experts medals rules, etc.
+- Add a link to the registrants#show_all (for printing the registration packet PDFs)
+- break apart the registrants#index controller (weird manage_all thing)
+- Merge the RegistrantExpenses controller into the registrant_expense_items controller?
+- Store the logo in a cache? (or someplace other than in the database)
+- Re-envision the way that Award Labels menu should work (since we have a lot of this data in advance now, in the Competition configuration)
+- Remove judges#new, as it's redundant as judges#index has that function.
+- Move the role-specific changes out of judgesController and into PermissionsController (some are redundant too?)
+- Remove Judge#update action (is currently unused)
+- Ensure that a locked Competition doesn't allow any more modifications to results/competitors/etc.
+- Redirect to the previous page upon change of role.
+- Remove dead competitions#show route
+- Re-work the Competitor-management function (members should be easier to add/remove)
+- Prevent Competitor Destroy_all action if there are results for the competitors
+ - Do this in a Transaction?
+
+
+- Create role of "Award Printer"
+- Create role of "Announcer"
+
 
 Questions:
 Section 2.1.4 (page 26)
