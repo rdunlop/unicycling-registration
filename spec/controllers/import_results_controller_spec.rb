@@ -189,7 +189,7 @@ describe ImportResultsController do
       competition = FactoryGirl.create(:competition, :scoring_class => "Distance")
       import = FactoryGirl.create(:import_result, :competition => competition)
       post :publish_to_competition, {:user_id => import.user, :competition_id => competition.id}
-      response.should redirect_to(scores_competition_path(competition))
+      response.should redirect_to(result_competition_path(competition))
     end
   end
 

@@ -13,7 +13,6 @@ class ScoresController < ApplicationController
 
   # GET /judges/1/scores
   def index
-
     respond_to do |format|
         format.html
     end

@@ -38,7 +38,7 @@ class BaseScoringClass
 
   # the page where all of the results for this competition are listed
   def results_path
-    root_path
+    result_competition_path(I18n.locale, @competition)
   end
 
   def results_importable

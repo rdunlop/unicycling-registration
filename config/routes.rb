@@ -251,7 +251,7 @@ Workspace::Application.routes.draw do
         post :set_places
         get :export_scores
         # view scores
-        get :scores
+        get :result
 
         post :lock
         delete :lock

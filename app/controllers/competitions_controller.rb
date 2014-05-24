@@ -87,7 +87,7 @@ class CompetitionsController < ApplicationController
     redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
   end
 
-  def scores
+  def result
     render @competition.render_path
   end
 

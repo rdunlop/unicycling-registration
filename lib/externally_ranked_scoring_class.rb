@@ -50,11 +50,6 @@ class ExternallyRankedScoringClass < BaseScoringClass
     @competition.external_results
   end
 
-  # the page where all of the results for this competition are listed
-  def results_path
-    scores_competition_path(I18n.locale, @competition)
-  end
-
   def results_importable
     true
   end
