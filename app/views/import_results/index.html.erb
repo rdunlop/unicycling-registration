@@ -1,54 +1,16 @@
 <h1>New Importing Data</h1>
 
-<%= render 'form' %>
+<h1>Listing <%= @user %>'s Imported Results</h1>
 
-<h1>Listing Import Results</h1>
+<h3>Menu of actions</h3>
+<ul>
+  <li><%= link_to "Enter Single-result", data_entry_user_competition_import_results_path(@user, @competition) %></li>
+  <li><%= link_to "Enter two-results at a time", user_competition_two_attempt_entries_path(@user, @competition) %></li>
+  <li><%= link_to "Import CSV", display_csv_user_competition_import_results_path(@user, @competition) %></li>
+  <li><%= link_to "Import LIF", display_lif_user_competition_import_results_path(@user, @competition) %></li>
+  <li></li>
+  <li><%= link_to "Accept these Results", publish_to_competition_user_competition_import_results_path(@user, @competition), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit" %></li>
+  <li><%= link_to "Remove all Data", destroy_all_user_competition_import_results_path(@user, @competition), method: :delete, data: {confirm: "DELETE, Are you sure?"}, class: "data_import_delete" %></li>
+</ul>
+
 <%= render :partial => "imported_results" %>
-<%= form_tag(destroy_all_user_competition_import_results_path(@user, @competition), {:method => :delete, :multipart=>true}) do %>
-  <%= submit_tag "Delete all in Temp Table", :class => "data_import_delete", data: {:confirm => "DELETE, Are you sure?" } %>
-<% end %>
-<%= form_tag(publish_to_competition_user_competition_import_results_path(@user, @competition), {:method => :post}) do %>
-  <%= submit_tag "Import all in Temp Table into Competition", :class=> "data_import_submit", data: {:confirm => "IMPORT, Are you sure?" } %>
-<% end %>
-<hr />
-
-<h2>CSV Import Instructions</h2>
-<% if @competition.uses_lane_assignments %>
-  <b>For Heat-based time data</b><br />
-  <%= form_tag(import_lif_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do %>
-    <%= label_tag :heat, "Heat" %><%= text_field_tag "heat" %><br />
-    <%= file_field_tag "file" %>
-    <%= submit_tag "Load LIF to Temp Table" %>
-  <% end %>
-
-  <hr />
-  <b>Option 2</b><br />
-
-  Please import a Comma-Separated-File file with the following format (for 'Distance' competitions):
-
-  <ul>
-    <li>Column 1: ID</li>
-    <li>Column 2: Minutes</li>
-    <li>Column 3: Seconds</li>
-    <li>Column 4: Thousands</li>
-    <li>Column 5: "DQ" or empty</li>
-  </ul>
-  <%= form_tag(import_csv_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do %>
-    <%= label_tag :file, "Source File" %>
-    <%= file_field_tag :file %><br />
-    <%= label_tag :start_times, "Start Times?" %>
-    <%= check_box_tag :start_times %><br />
-    <%= submit_tag "Load CSV to Temp Table" %>
-  <% end %>
-<% elsif @competition.event_class == "Ranked" %>
-  Please import a Comma-Separated-File file with the following format (for 'Ranked' Competitions):
-  <ul>
-    <li>Column 1: ID</li>
-    <li>Column 2: Absolute Rank (to be used when calculating age-group places)</li>
-    <li>Column 3: Details (to be printed on awards)</li>
-  </ul>
-  <%= form_tag(import_csv_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do %>
-    <%= file_field_tag "file" %>
-    <%= submit_tag "Load CSV to Temp Table" %>
-  <% end %>
-<% end %>

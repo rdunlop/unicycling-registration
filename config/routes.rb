@@ -214,7 +214,9 @@ Workspace::Application.routes.draw do
         resources :import_results, :only => [:index, :create] do
           collection do
             get  :data_entry
+            get :import_csv, as: "display_csv", to: :display_csv
             post :import_csv
+            get :import_lif, as: "display_lif", to: :display_lif
             post :import_lif
             post :publish_to_competition
             delete :destroy_all

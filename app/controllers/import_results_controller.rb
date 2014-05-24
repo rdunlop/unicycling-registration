@@ -1,36 +1,17 @@
 require 'upload'
 class ImportResultsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_user, :only => [:index, :create, :data_entry, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
-  before_filter :load_competition, :only => [:index, :create, :data_entry, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
+  before_action :load_user, except: [:show, :edit, :update, :destroy]
+  before_action :load_competition, except: [:show, :edit, :update, :destroy]
   before_filter :load_new_import_result, :only => [:create]
   before_action :load_import_results, :only => [:data_entry, :index]
   load_and_authorize_resource
 
-  private
-  def load_user
-    @user = User.find(params[:user_id])
-  end
+  before_action :set_breadcrumbs
 
-  def load_competition
-    @competition = Competition.find(params[:competition_id])
-  end
-
-  def load_import_results
-    @import_results = @user.import_results.where(:competition_id => @competition)
-  end
-
-  def load_new_import_result
-    @import_result = ImportResult.new(import_result_params)
-    @import_result.user = @user
-    @import_result.competition = @competition
-  end
-
-  public
   # GET /users/#/import_results
   # GET /users/#/import_results.json
   def index
-    @import_result = ImportResult.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -50,6 +31,7 @@ class ImportResultsController < ApplicationController
 
   # GET /import_results/1/edit
   def edit
+    add_breadcrumb "Edit Imported Result"
   end
 
   # POST /users/#/competitions/#/import_results
@@ -58,11 +40,11 @@ class ImportResultsController < ApplicationController
 
     respond_to do |format|
       if @import_result.save
-        format.html { redirect_to user_competition_import_results_path(@user, @competition), notice: 'Import result was successfully created.' }
+        format.html { redirect_to data_entry_user_competition_import_results_path(@user, @competition), notice: 'Import result was successfully created.' }
         format.js { }
       else
         @import_results = @user.import_results
-        format.html { render action: "index" }
+        format.html { render action: "data_entry" }
         format.js { }
       end
     end
@@ -99,6 +81,11 @@ class ImportResultsController < ApplicationController
   end
 
   def data_entry
+    add_breadcrumb "Enter Single Data"
+  end
+
+  def display_csv
+    add_breadcrumb "Import CSV"
   end
 
   # POST /users/#/competitions/#/import_results/import_csv
@@ -123,6 +110,10 @@ class ImportResultsController < ApplicationController
       end
     end
     redirect_to user_competition_import_results_path(@user, @competition), notice: "#{n} rows added, and #{err} errors"
+  end
+
+  def display_lif
+    add_breadcrumb "Import Lif (Heat Data)"
   end
 
   # FOR LIF (track racing) data:
@@ -202,6 +193,11 @@ class ImportResultsController < ApplicationController
   end
 
   private
+
+  def import_result_params
+    params.require(:import_result).permit(:bib_number, :disqualified, :minutes, :raw_data, :seconds, :thousands, :rank, :details, :is_start_time)
+  end
+
   def get_id_from_lane_assignment(comp, heat, lane)
     la = LaneAssignment.find_by_competition_id_and_heat_and_lane(comp.id, heat, lane)
     if la.nil?
@@ -212,8 +208,29 @@ class ImportResultsController < ApplicationController
     id
   end
 
-  def import_result_params
-    params.require(:import_result).permit(:bib_number, :disqualified, :minutes, :raw_data, :seconds, :thousands, :rank, :details, :is_start_time)
+  def load_user
+    @user = User.find(params[:user_id])
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_import_results
+    @import_results = @user.import_results.where(:competition_id => @competition)
+  end
+
+  def load_new_import_result
+    @import_result = ImportResult.new(import_result_params)
+    @import_result.user = @user
+    @import_result.competition = @competition
+  end
+
+  def set_breadcrumbs
+    @competition ||= @import_result.competition
+    @user ||= @import_result.user
+    add_to_competition_breadcrumb(@competition)
+    add_breadcrumb "Import Results", user_competition_import_results_path(@user, @competition)
   end
 end
 

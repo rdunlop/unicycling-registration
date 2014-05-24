@@ -5,25 +5,14 @@ class TwoAttemptEntriesController < ApplicationController
   before_filter :load_new_two_attempt_entry, :only => [:create]
   load_and_authorize_resource
 
-  private
-  def load_user
-    @user = User.find(params[:user_id])
-  end
-
-  def load_competition
-    @competition = Competition.find(params[:competition_id])
-  end
-
-  def load_new_two_attempt_entry
-    @two_attempt_entry = TwoAttemptEntry.new(two_attempt_entry_params)
-    @two_attempt_entry.user = @user
-    @two_attempt_entry.competition = @competition
-  end
+  before_action :set_breadcrumbs
 
   public
   # GET /users/#/two_attempt_entry
   # GET /users/#/two_attempt_entrys.json
   def index
+    add_breadcrumb "Add two-entry data"
+
     @is_start_time = !params[:is_start_time].blank?
 
     @two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
@@ -57,6 +46,27 @@ class TwoAttemptEntriesController < ApplicationController
     params.require(:two_attempt_entry).permit(:bib_number, :is_start_time,
       :dq_1, :minutes_1, :seconds_1, :thousands_1,
       :dq_2, :minutes_2, :seconds_2, :thousands_2)
+  end
+
+  def load_user
+    @user = User.find(params[:user_id])
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_new_two_attempt_entry
+    @two_attempt_entry = TwoAttemptEntry.new(two_attempt_entry_params)
+    @two_attempt_entry.user = @user
+    @two_attempt_entry.competition = @competition
+  end
+
+  def set_breadcrumbs
+    @competition ||= @two_attempt_entry.competition
+    @user ||= @two_attempt_entry.user
+    add_to_competition_breadcrumb(@competition)
+    add_breadcrumb "Import Results", user_competition_import_results_path(@user, @competition)
   end
 end
 
