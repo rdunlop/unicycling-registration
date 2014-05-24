@@ -14,19 +14,36 @@
   <div>
     <%= f.label :name %>
       <%= f.text_field :name, :autofocus => "true" %>
-      <div class="items">
-        <%= f.nested_fields_for :age_group_entries do |member_f| %>
-         <fieldset class="item">
-          <%= render partial: "age_group_entry", locals: {f: member_f} %>
+      <table class="items sortable">
+        <caption>Entries</caption>
+        <thead>
+          <tr>
+            <th>Short Description</th>
+            <th>Long Description</th>
+            <th>Start Age</th>
+            <th>End Age</th>
+            <th>Required Wheel Size (optional)</th>
+            <th>Gender</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
 
-          <a href="#" class="remove">remove</a>
+        <%= f.nested_fields_for :age_group_entries, render_template: false do |member_f| %>
+          <tr class="item">
+            <%= render partial: "age_group_entry", locals: {f: member_f} %>
 
-          <%= member_f.hidden_field :id %>
-          <%= member_f.hidden_field :_destroy %>
-        </fieldset>
-    <% end %>
-  </div>
-  <a href="#" class="add">add entry</a>
-        <%= f.submit %>
+            <td>
+              <a href="#" class="remove">remove</a>
+              <%= member_f.hidden_field :id %>
+              <%= member_f.hidden_field :_destroy %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <a href="#" class="add">add entry</a><br />
+      <%= nested_fields_templates %>
+      <%= f.submit %>
   </div>
 <% end %>

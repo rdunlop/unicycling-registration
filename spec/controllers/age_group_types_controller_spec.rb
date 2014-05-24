@@ -20,6 +20,15 @@ describe AgeGroupTypesController do
     end
   end
 
+  describe "GET show" do
+    it "assigns all age_group_entries as @age_group_entries" do
+      age_group_type = FactoryGirl.create(:age_group_type)
+      age_group_entry = FactoryGirl.create(:age_group_entry, :age_group_type => age_group_type)
+      get :show, {:id => age_group_type.id}
+      assigns(:age_group_type).should eq(age_group_type)
+    end
+  end
+
   describe "POST 'create'" do
     it "creates the new age group type" do
       expect {

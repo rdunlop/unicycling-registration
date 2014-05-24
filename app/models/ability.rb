@@ -100,7 +100,6 @@ class Ability
       can :summary, Event
       can :sign_ups, EventCategory
       can :manage, AgeGroupType
-      can :manage, AgeGroupEntry
       can :manage, Competitor
       can :manage, ImportResult
       can :manage, AwardLabel

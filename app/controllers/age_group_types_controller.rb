@@ -19,6 +19,10 @@ class AgeGroupTypesController < ApplicationController
     respond_with(@age_group_type, location: age_group_types_path, action: "index")
   end
 
+  def show
+    respond_with(@age_group_type)
+  end
+
   def destroy
     @age_group_type.destroy
     respond_with(@age_group_type)
