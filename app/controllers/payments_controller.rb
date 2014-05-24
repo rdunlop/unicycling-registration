@@ -1,11 +1,11 @@
 class PaymentsController < ApplicationController
   before_filter :authenticate_user!, :except => [:notification, :success]
   load_and_authorize_resource :user, only: :index
-  load_and_authorize_resource :except => [:notification, :success]
+  load_and_authorize_resource :except => [:registrant_payments, :notification, :success]
   skip_authorization_check :only => [:notification, :success]
   skip_before_filter :verify_authenticity_token, :only => [:notification, :success]
 
-  before_action :set_payments_breadcrumb
+  before_action :set_payments_breadcrumb, except: [:notification, :success]
 
   # GET /users/12/payments
   # GET /users/12/payments.json
