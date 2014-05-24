@@ -36,7 +36,6 @@ class Ability
     # Distance
     can :manage, DistanceAttempt
 
-    can :read, Competition
     can :create_scores, Competition do |competition|
       !competition.locked
     end
@@ -57,11 +56,6 @@ class Ability
 
     can [:read], Score do |score|
       user.has_role? :chief_judge, score.competition.event
-    end
-
-    # so that they can create/view judges
-    can [:read], Competition do |comp|
-      user.has_role? :chief_judge, comp.event
     end
 
     can [:announcer, :heat_recording, :two_attempt_recording, :results], Competition do |comp|
