@@ -27,7 +27,7 @@ class Competitor < ActiveRecord::Base
     has_many :time_results, :dependent => :destroy
     has_many :external_results, :dependent => :destroy
 
-    accepts_nested_attributes_for :registrants
+    accepts_nested_attributes_for :members, allow_destroy: true
 
     validates :competition_id, :presence => true
     validates_associated :members

@@ -52,6 +52,8 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (5.0.1.20140414130214)
+    awesome_nested_fields (0.6.4)
+      rails (>= 3.0.0)
     axiom-types (0.0.5)
       descendants_tracker (~> 0.0.1)
       ice_nine (~> 0.9)
@@ -328,6 +330,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   annotate
+  awesome_nested_fields
   bullet
   cancancan (~> 1.7)
   capybara!

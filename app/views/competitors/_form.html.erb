@@ -1,8 +1,22 @@
 <% # variable 'form' is being passed in %>
 <%= render :partial => "/shared/error_messages", :object => form %>
-<%= form_for [form.competition, form] do |f| %>
+<%= form_for form.persisted? ? form : [form.competition, form] do |f| %>
   <%= f.label :position %><%= f.text_field :position %><br />
-  <%= f.label :registrant_ids %><%= f.select :registrant_ids, Registrant.select_box_options, {}, {:multiple => true, :size => 20, :include_blank => true } %><br />
+  <div class="items">
+    <%= f.nested_fields_for :members do |member_f| %>
+       <fieldset class="item">
+          <%= member_f.label :registrant %>
+          <%= member_f.select :registrant_id, Registrant.select_box_options, {include_blank: true}  %>
+
+          <a href="#" class="remove">remove</a>
+
+          <%= member_f.hidden_field :id %>
+          <%= member_f.hidden_field :_destroy %>
+        </fieldset>
+    <% end %>
+  </div>
+  <a href="#" class="add">add member</a>
+
   <%= f.label :custom_external_id %><%= f.text_field :custom_external_id %><br />
   <%= f.label :custom_name %><%= f.text_field :custom_name %><br />
 

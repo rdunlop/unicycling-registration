@@ -22,6 +22,7 @@ class CompetitorsController < ApplicationController
   def new
     @registrants = @competition.signed_up_registrants
     @competitor = @competition.competitors.new
+    @competitor.members.build #add an initial member
   end
 
   # GET /competitions/1/competitors
@@ -108,6 +109,6 @@ class CompetitorsController < ApplicationController
   private
 
   def competitor_params
-    params.require(:competitor).permit(:position, {:registrant_ids => []}, :custom_external_id, :custom_name)
+    params.require(:competitor).permit(:position, {:members_attributes => [:registrant_id, :id, :_destroy] }, :custom_external_id, :custom_name)
   end
 end

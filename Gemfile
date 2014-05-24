@@ -28,6 +28,7 @@ gem 'fancybox-rails'
 gem 'http_accept_language'
 gem 'globalize', '~> 4.0.0'
 gem 'virtus'
+gem 'awesome_nested_fields'
 gem 'simplecov', :require => false, :group => :test
 
 #gem 'sqlite3'

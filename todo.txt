@@ -1,12 +1,12 @@
 Last Re-Arranged February 6, 2014.
 
-- Re-work the Competitor-management function (members should be easier to add/remove)
-  - Don't need both a New function, Edit, and Member management. Combine the Competitor and Member Edit into a single form/action?
 - New Navigation Structure (using Breadcrumbs?)
 - New Menu Bar (not custom-made?)
 
 - Increase test coverage based on simplecov report
 
+- Figure out what partial-refactoring https://github.com/lailsonbm/awesome_nested_fields meant
+- Improve the styling of the Competitor->Member form.
 - Combine the EventCategory and Event controllers so that all creation/updat/deletion of event_categories happens through an event.
 - Combine the EventChoice and Event controllers, so that all creation/update/deletion of event_choices happens through an event.
 - Combine the AgeGroupType and AgeGroupENtries controllers, so that all ceration/update/deletion is at the AgeGroupType.

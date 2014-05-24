@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require fancybox
+//= require jquery.nested-fields
 //= require_tree .
 
 $(document).ready(function() {
@@ -44,4 +45,8 @@ $(document).ready(function() {
      "bPaginate": false
    });
   });
+});
+
+$(document).ready(function(e) {
+  $('FORM').nestedFields();
 });

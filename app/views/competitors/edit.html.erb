@@ -1,26 +1,5 @@
 <h1>Editing competitor</h1>
 
-<% # variable 'form' is being passed in %>
-<%= form_for @competitor do |f| %>
-  <%= f.label :position %><%= f.text_field :position %><br />
-  <%= f.label :registrant_ids %><%= f.select :registrant_ids, Registrant.select_box_options, {}, {:multiple => true, :size => 20, :include_blank => true } %><br />
-  <%= f.label :custom_external_id %><%= f.text_field :custom_external_id %><br />
-  <%= f.label :custom_name %><%= f.text_field :custom_name %><br />
-
-  <%= f.submit %>
-<% end %>
-Members:
-<ul>
-  <% @competitor.members.each do |member| %>
-    <li><%= member.registrant %> <%= link_to 'Destroy', member_path(member), :method => :delete %></li>
-  <% end %>
-</ul>
-
-<%= form_tag(competitor_members_path(@competitor), :method => :post) do %>
-  <%= select_tag :registrant_id, options_for_select(Registrant.select_box_options), :include_blank => true %>
-
-  <%= submit_tag "Create new Member" %>
-<% end %>
+<%= render partial: "form", object: @competitor %>
 
 <%= link_to "Back", event_path(@competitor.competition.event) %>
-
