@@ -1,32 +1,39 @@
 class PaymentsController < ApplicationController
   before_filter :authenticate_user!, :except => [:notification, :success]
+  load_and_authorize_resource :user, only: :index
   load_and_authorize_resource :except => [:notification, :success]
   skip_authorization_check :only => [:notification, :success]
   skip_before_filter :verify_authenticity_token, :only => [:notification, :success]
+
+  before_action :set_payments_breadcrumb
 
   # GET /users/12/payments
   # GET /users/12/payments.json
   # or
   # GET /registrants/1/payments
   def index
-    unless params[:registrant_id].nil?
-      registrant = Registrant.find(params[:registrant_id])
-      authorize! :manage, registrant
-      @payments = registrant.payments.completed.uniq
-      @refunds = registrant.refunds.uniq
-      @title_name = registrant.to_s
-    end
-
-    unless params[:user_id].nil?
-      user = User.find(params[:user_id])
-      authorize! :read, user
-      @payments = user.payments.completed
-      @refunds = user.refunds
-      @title_name = user.to_s
-    end
+    @payments = @user.payments.completed
+    @refunds = @user.refunds
+    @title_name = @user.to_s
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render json: @payments }
+    end
+  end
+
+  def registrant_payments
+    registrant = Registrant.find(params[:id])
+    add_registrant_breadcrumb(registrant)
+    add_breadcrumb "Payments"
+
+    authorize! :manage, registrant
+    @payments = registrant.payments.completed.uniq
+    @refunds = registrant.refunds.uniq
+    @title_name = registrant.to_s
+
+    respond_to do |format|
+      format.html { render action: "index" }# index.html.erb
       format.json { render json: @payments }
     end
   end
@@ -118,7 +125,14 @@ class PaymentsController < ApplicationController
   end
 
   private
+
   def payment_params
     params.require(:payment).permit(:payment_details_attributes => [:amount, :registrant_id, :expense_item_id, :details, :free, :_destroy])
+  end
+
+  def set_payments_breadcrumb
+    if @user == current_user
+      add_breadcrumb "My Payments", user_payments_path(current_user)
+    end
   end
 end

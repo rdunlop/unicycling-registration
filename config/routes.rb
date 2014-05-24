@@ -156,6 +156,9 @@ Workspace::Application.routes.draw do
       end
       resources :registrant_expense_items, :only => [:index, :create, :destroy]
       resources :standard_skill_routines, :only => [:index, :create]
+      member do
+        get :payments, to: "payments#registrant_payments"
+      end
       resources :payments, :only => [:index]
       resources :songs, :only => [:index, :create]
     end

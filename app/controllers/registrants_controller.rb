@@ -272,7 +272,6 @@ class RegistrantsController < ApplicationController
   public
 
   def undelete
-    binding.pry
     @registrant.deleted = false
 
     respond_to do |format|
