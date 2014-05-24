@@ -4,8 +4,7 @@
 
 <h3>Signed Up Competitors</h3>
 (These will be added to the Compettion <b>Upon POPULATE directive</b>)
-<% @registrants = @event.signed_up_registrants %>
-<%= render :partial => "/event_categories/sign_ups" %> 
+<%= render :partial => "/event_categories/sign_ups", locals: { registrants: @event.signed_up_registrants, event: @event } %>
 
 <br />
 <b>NOTE:</b> This will create the competition AND populate it with competitors from the sign-up list <br />

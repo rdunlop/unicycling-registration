@@ -20,3 +20,6 @@ config/secrets.yml
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore simplecov report
+/coverage
