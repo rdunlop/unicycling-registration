@@ -134,6 +134,8 @@ class PaymentsController < ApplicationController
   def set_payments_breadcrumb
     if @user == current_user
       add_breadcrumb "My Payments", user_payments_path(current_user)
+    else
+      add_breadcrumb "New Payment"
     end
   end
 end

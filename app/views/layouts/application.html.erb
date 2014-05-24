@@ -48,9 +48,11 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
     <%= render :partial => "layouts/navbar" %>
 
     <%= render :partial => "layouts/test_mode" %>
-    <ul class="breadcrumbs">
-      <%= render_breadcrumbs tag: "li" %>
-    </ul>
+    <% if current_user.present? %>
+      <ul class="breadcrumbs">
+        <%= render_breadcrumbs tag: "li" %>
+      </ul>
+    <% end %>
     <% #  separator: "<svg class='icon icon--arrow breadcrumbs__separator' viewBox='0 0 500 500'><use xlink:href='#arrow' /></svg>",
     %>
 

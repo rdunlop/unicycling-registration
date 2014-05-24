@@ -163,7 +163,7 @@ Workspace::Application.routes.draw do
       resources :songs, :only => [:index, :create]
     end
 
-    resources :songs, :only => [:edit, :update, :destroy] do
+    resources :songs, :only => [:destroy] do
       collection do
         get :list
       end

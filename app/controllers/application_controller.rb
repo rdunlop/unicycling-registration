@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
   end
 
   def add_registrant_breadcrumb(registrant)
-    add_breadcrumb "#{registrant.bib_number} - #{registrant}", registrant_path(registrant)
+    add_breadcrumb "##{registrant.bib_number} - #{registrant}", registrant_path(registrant)
   end
 
   def add_payment_summary_breadcrumb

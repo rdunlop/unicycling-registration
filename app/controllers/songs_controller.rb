@@ -5,6 +5,14 @@ class SongsController < ApplicationController
   load_and_authorize_resource :except => [:create]
   before_action :load_songs, :only => [:index, :create, :add_file]
 
+  before_action :set_breadcrumbs
+
+  def set_breadcrumbs
+    @registrant ||= @song.registrant
+    add_registrant_breadcrumb(@registrant)
+    add_breadcrumb "Songs", registrant_songs_path(@registrant)
+  end
+
   def load_songs
     @registrant ||= @song.registrant
     @songs = @registrant.songs
@@ -12,6 +20,7 @@ class SongsController < ApplicationController
 
   # GET /registrants/1/songs
   def index
+    add_breadcrumb "Songs"
     @song = Song.new
   end
 
@@ -21,6 +30,7 @@ class SongsController < ApplicationController
 
   # GET /songs/1/add_file
   def add_file
+    add_breadcrumb "#{@song.event} - Add File"
     if @song.song_file_name.present?
       redirect_to registrant_songs_path(@song.registrant), alert: "Song already associated, please destroy and re-create if you need to change the music"
     end
@@ -38,26 +48,12 @@ class SongsController < ApplicationController
     end
   end
 
-  # GET /songs/1/edit
-  def edit
-  end
-
   # POST /registrants/1/songs
   def create
     if @song.save
-      redirect_to add_file_song_path(@song), notice: 'Song was successfully created.'
+      redirect_to add_file_song_path(@song), notice: 'Entry created. Please Add a Music File.'
     else
       render action: 'index'
-    end
-  end
-
-  # PATCH/PUT /songs/1
-  def update
-    registrant = @song.registrant
-    if @song.update(song_params)
-      redirect_to registrant_songs_path(registrant), notice: 'Song was successfully updated.'
-    else
-      render action: 'edit'
     end
   end
 
