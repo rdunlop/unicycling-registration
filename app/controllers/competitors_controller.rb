@@ -70,7 +70,6 @@ class CompetitorsController < ApplicationController
   # POST /competitors
   # POST /competitors.json
   def create
-
     if @competitor.save
       flash[:notice] = 'Competition registrant was successfully created.'
     else

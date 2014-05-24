@@ -16,7 +16,6 @@ describe "competitors/edit" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => competition_competitors_path(@c.competition, @c), :method => "post" do
-      assert_select "select#competitor_registrant_ids", :name => "competitor[registrant_ids][]"
       assert_select "input#competitor_position", :name => "competitor[position]"
       assert_select "input#competitor_custom_external_id", :name => "competitor[custom_external_id]"
       assert_select "input#competitor_custom_name", :name => "competitor[custom_name]"

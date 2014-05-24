@@ -32,7 +32,7 @@ describe CompetitorsController do
   def valid_attributes
     { position: 1}
   end
-  
+
   describe "GET index" do
     it "assigns all competitors as @competitors" do
       competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
@@ -73,7 +73,12 @@ describe CompetitorsController do
         @reg2 = FactoryGirl.create(:competitor) #registrant
         @reg3 = FactoryGirl.create(:competitor) #registrant
         expect {
-          post :create, {:competitor => valid_attributes.merge({:registrant_ids => [@reg2.id, @reg3.id]}), :competition_id => @ec.id}
+          post :create, {:competitor => valid_attributes.merge(
+            {:members_attributes =>
+              { "0" => {:registrant_id => @reg2.id},
+                "1" => {:registrant_id => @reg3.id}
+              }
+            }), :competition_id => @ec.id}
         }.to change(Member, :count).by(2)
       end
 
@@ -86,7 +91,12 @@ describe CompetitorsController do
         reg2 = FactoryGirl.create(:competitor)
         reg3 = FactoryGirl.create(:competitor)
         expect {
-          post :create, {:competitor => valid_attributes.merge({registrant_ids: [reg1.id, reg2.id, reg3.id], custom_external_id: 101, custom_name: 'Robin Rocks!'}), :competition_id => @ec.id}
+          post :create, {:competitor => valid_attributes.merge(
+            {members_attributes:
+              { "0" => {:registrant_id => reg1.id},
+                "1" => {:registrant_id => reg2.id},
+                "2" => {:registrant_id => reg3.id}
+              }, custom_external_id: 101, custom_name: 'Robin Rocks!'}), :competition_id => @ec.id}
         }.to change(Competitor, :count).by(1)
       end
     end
