@@ -3,12 +3,9 @@ class ScoresController < ApplicationController
   load_and_authorize_resource :judge # requires that the current user is able to access the judge, thus hiding scores
   load_and_authorize_resource
 
-  before_filter :find_judge
   before_filter :find_competitor, :except => [:index]
 
-  def find_judge
-    @judge = Judge.find_by_id(params[:judge_id])
-  end
+  before_action :set_judge_breadcrumb
 
   def find_competitor
     @competitor = Competitor.find_by_id(params[:competitor_id])
@@ -16,6 +13,7 @@ class ScoresController < ApplicationController
 
   # GET /judges/1/scores
   def index
+
     respond_to do |format|
         format.html
     end
@@ -23,6 +21,8 @@ class ScoresController < ApplicationController
 
   # GET /judges/1/competitors/2/scores/new
   def new
+    add_breadcrumb "New Score"
+
     @score = @competitor.scores.new
     if @judge.judge_type.boundary_calculation_enabled
         @boundary_score = @competitor.boundary_scores.new
@@ -48,6 +48,7 @@ class ScoresController < ApplicationController
             @score.val_1 = @boundary_score.total
         else
             respond_to do |format|
+                set_judge_breadcrumb
                 # on fail to save, re-render new
                 format.html { render action: "new" }
                 format.json { render json: @score.errors, status: :unprocessable_entity }
@@ -64,6 +65,7 @@ class ScoresController < ApplicationController
         format.html { redirect_to judge_scores_path(@judge), notice: 'Score was successfully created.' }
         format.json { render json: @score, status: :created, location: @score }
       else
+        set_judge_breadcrumb
         format.html { render action: "new" }
         format.json { render json: @score.errors, status: :unprocessable_entity }
       end
@@ -72,6 +74,8 @@ class ScoresController < ApplicationController
 
   # GET /judges/1/competitors/2/scores/1/edit
   def edit
+    add_breadcrumb "Edit Score"
+
     @judge = Judge.find(params[:judge_id])
     @boundary_score = BoundaryScore.find_by(competitor_id: params[:competitor_id], judge_id: params[:judge_id])
     respond_to do |format|
@@ -83,6 +87,8 @@ class ScoresController < ApplicationController
   # PUT /judges/1/competitors/2/scores/1
   # PUT /judges/1/competitors/2/scores/1.json
   def update
+    add_breadcrumb "Update Score"
+
     authorize! :create_scores, @competitor.competition
 
     if @judge.judge_type.boundary_calculation_enabled
@@ -114,11 +120,16 @@ class ScoresController < ApplicationController
   end
 
   private
+
   def score_params
     params.require(:score).permit(:val_1, :val_2, :val_3, :val_4, :notes)
   end
 
   def boundary_score_params
     params.require(:boundary_score).permit(:number_of_people, :major_dismount, :medium_dismount, :minor_dismount, :major_boundary, :minor_boundary)
+  end
+
+  def set_judge_breadcrumb
+    add_to_judge_breadcrumb(@judge)
   end
 end
