@@ -6,6 +6,7 @@ class AgeGroupTypesController < ApplicationController
 
   def index
     @age_group_type = AgeGroupType.new
+    @age_group_type.age_group_entries.build #initial one
   end
 
   def create
@@ -36,6 +37,7 @@ class AgeGroupTypesController < ApplicationController
 
   private
   def age_group_type_params
-    params.require(:age_group_type).permit(:name, :description)
+    params.require(:age_group_type).permit(:name, :description,
+      :age_group_entries_attributes =>[:id, :_destroy, :end_age, :gender, :long_description, :short_description, :start_age, :wheel_size_id])
   end
 end

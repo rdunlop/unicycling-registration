@@ -19,7 +19,7 @@ class AgeGroupEntry < ActiveRecord::Base
   validates :short_description, :uniqueness => {:scope => :age_group_type_id}
   validates :gender, :inclusion => {:in => %w(Male Female Mixed), :message => "%{value} must be either 'Male', 'Female' or 'Mixed'"}
 
-  belongs_to :age_group_type, :touch => true
+  belongs_to :age_group_type, :touch => true, inverse_of: :age_group_entries
   belongs_to :wheel_size
 
   default_scope { order(:short_description) }

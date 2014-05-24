@@ -33,10 +33,9 @@ Workspace::Application.routes.draw do
     # ADMIN (for use in Setting up the system)
     #
     #
-    resources :age_group_types, :except => [:show] do
-      resources :age_group_entries, :only => [:index, :create]
+    resources :age_group_types, :except => [:new, :show] do
+      resources :age_group_entries, :only => [:index]
     end
-    resources :age_group_entries, :except => [:index, :create]
 
     resources :permissions, :only => [:index] do
       collection do

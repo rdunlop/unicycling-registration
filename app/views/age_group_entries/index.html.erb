@@ -8,9 +8,6 @@
     <th>End age</th>
     <th>Wheel Size</th>
     <th>Gender</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @age_group_entries.each do |age_group_entry| %>
@@ -22,15 +19,7 @@
     <td><%= age_group_entry.end_age %></td>
     <td><%= age_group_entry.wheel_size %></td>
     <td><%= age_group_entry.gender %></td>
-    <td><%= link_to 'Show', age_group_entry %></td>
-    <td><%= link_to 'Edit', edit_age_group_entry_path(age_group_entry) %></td>
-    <td><%= link_to 'Destroy', age_group_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<h1>New <%= @age_group_type %> Age Group Entry</h1>
-
-<%= render 'form' %>

@@ -1,19 +1,6 @@
-  <%= form_for([@age_group_type, @age_group_entry]) do |f| %>
-  <% if @age_group_entry.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@age_group_entry.errors.count, "error") %> prohibited this age_group_entry from being saved:</h2>
-
-      <ul>
-      <% @age_group_entry.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
     <%= f.label :short_description %><br />
-    <%= f.text_field :short_description, :autofocus => "true" %>
+    <%= f.text_field :short_description %>
   </div>
   <div class="field">
     <%= f.label :long_description %><br />
@@ -36,7 +23,3 @@
     <%= f.label :gender %><br />
     <%= f.select :gender, ['Male', 'Female', 'Mixed'] %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>

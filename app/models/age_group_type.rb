@@ -12,8 +12,10 @@
 class AgeGroupType < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
 
-  has_many :age_group_entries, :dependent => :destroy
+  has_many :age_group_entries, :dependent => :destroy, inverse_of: :age_group_type
   has_many :competitions, :dependent => :nullify
+
+  accepts_nested_attributes_for :age_group_entries, allow_destroy: true
 
   after_save(:touch_competitions)
   after_touch(:touch_competitions)

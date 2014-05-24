@@ -12,14 +12,21 @@
   <% end %>
 
   <div>
-    <table>
-      <tr>
-        <td><%= f.label :name %></td>
-        <td><%= f.text_field :name %></td>
-      </tr>
-      <tr>
-        <td colspan="2" class="center"><%= f.submit %></td>
-      </tr>
-    </table>
+    <%= f.label :name %>
+      <%= f.text_field :name, :autofocus => "true" %>
+      <div class="items">
+        <%= f.nested_fields_for :age_group_entries do |member_f| %>
+         <fieldset class="item">
+          <%= render partial: "age_group_entry", locals: {f: member_f} %>
+
+          <a href="#" class="remove">remove</a>
+
+          <%= member_f.hidden_field :id %>
+          <%= member_f.hidden_field :_destroy %>
+        </fieldset>
+    <% end %>
+  </div>
+  <a href="#" class="add">add entry</a>
+        <%= f.submit %>
   </div>
 <% end %>
