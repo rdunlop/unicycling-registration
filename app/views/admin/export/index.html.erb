@@ -1,46 +1,5 @@
 <h1>Export Menu</h1>
 
-The download/upload system:
-<h2>Age Groups</h2>
-Download: <%= link_to 'Download AgeGroups', admin_export_download_event_configuration_path(:format => :json) %><br /><br />
-Upload: <%= form_for :convert, :url=>admin_export_upload_event_configuration_path do |f| -%>
-  AgeGroup descriptions (JSON): <%= f.text_area :data, {:cols => 100, :rows => 6 } -%><br />
-  <%= f.submit 'Submit' %>
-<% end %>
-
-<h2>Registrants</h2>
-Download: <%= link_to 'Download Registrants', admin_export_download_registrants_path(:format => :json) %><br /><br />
-Upload: <%= form_for :convert, :url=>admin_export_upload_registrants_path do |f| -%>
-  Registrants (JSON): <%= f.text_area :data, {:cols => 100, :rows => 6 } -%><br />
-  <%= f.submit 'Submit' %>
-<% end %>
-
-<h2>Time Data</h2>
-Download:
-<ul>
-  <% Competition.event_order.all.each do |comp| %>
-    <li><%= link_to "#{comp}", admin_export_download_time_results_path(:format => :json, :competition => comp.id) %></li>
-  <% end %>
-</ul>
-Upload: <%= form_for :convert, :url=>admin_export_upload_time_results_path do |f| -%>
-  Competition: <%= f.select :competition_id, Competition.all.map { |comp| ["#{comp}", comp.id] } %><br />
-  Time Results (JSON): <%= f.text_area :data, {:cols => 100, :rows => 6 } -%><br />
-  <%= f.submit 'Submit' %>
-<% end %>
-
-<hr />
-<b>BE <u>VERY</u> Careful with this system. it DELETES EVERYTHING</b>
-<ul>
-  <li>Doesn't include the logo</li>
-  <%= link_to 'Download Configuration', admin_export_download_configuration_path(:format => :json) %><br />
-  <%= link_to 'Download Data', admin_export_download_data_path(:format => :json) %>
-
-<%= form_for :convert, :url=>admin_export_upload_path, :html => {:multipart=>true} do |f| -%>
-  <b>DISABLED:</b><br />
-  File: <%= f.file_field :events_file -%><br />
-  <%= f.submit 'Submit' %>
-<% end %>
-
 <hr />
 <b>Download Details on registrants who bought:</b>
 <%= form_for :data, :url => admin_export_download_payment_details_path(:format => :xls), :method => :get do |f| -%>
@@ -50,4 +9,3 @@ Upload: <%= form_for :convert, :url=>admin_export_upload_time_results_path do |f
 
 <hr />
 <%= link_to 'Download Event Info', admin_export_download_events_path(:format => :xls) %>
-<%= link_to 'Download Event Info', admin_export_download_ucp_sql_path %>

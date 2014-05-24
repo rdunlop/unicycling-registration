@@ -51,21 +51,7 @@ Workspace::Application.routes.draw do
 
       namespace :export do
         get :index
-
-        # NEW routes
-        get :download_event_configuration
-        post :upload_event_configuration
-        get :download_registrants
-        post :upload_registrants
-        get :download_time_results
-        post :upload_time_results
-        get :download_ucp_sql
         get :download_payment_details
-
-        # OLD routes
-        get :download_data
-        get :download_configuration
-        post :upload
         get :download_events
       end
     end
