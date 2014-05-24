@@ -51,7 +51,7 @@ describe ImportResultsController do
 
       it "redirects to the user's import_results" do
         post :create, {:import_result => valid_attributes, :user_id => @admin_user.id, :competition_id => @competition.id}
-        response.should redirect_to(user_competition_import_results_path(@admin_user, @competition))
+        response.should redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition))
       end
     end
 
@@ -67,7 +67,7 @@ describe ImportResultsController do
         # Trigger the behavior that occurs when invalid params are submitted
         ImportResult.any_instance.stub(:save).and_return(false)
         post :create, {:import_result => { "raw_data" => "invalid value" }, :user_id => @admin_user.id, :competition_id => @competition.id}
-        response.should render_template("index")
+        response.should render_template("data_entry")
       end
     end
   end

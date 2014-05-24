@@ -1,7 +1,6 @@
 Last Re-Arranged February 6, 2014.
 
 - New Navigation Structure (using Breadcrumbs?)
- - Use the breadcrumbs gem instead of doing the require/lib solution.
  - create a Category#index page which shows the Evetns in the category (and update the breadcrumbs to point here)
 - New Menu Bar (not custom-made?)
 

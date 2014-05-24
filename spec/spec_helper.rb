@@ -70,7 +70,7 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
   if ENV["CI"]
-    config.filter_run_excluding :pdf_generation => true
+    #config.filter_run_excluding :pdf_generation => true
   end
 
   config.treat_symbols_as_metadata_keys_with_true_values = true

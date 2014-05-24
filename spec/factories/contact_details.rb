@@ -34,7 +34,7 @@ FactoryGirl.define do
     address "1234 fake street"
     city "madison"
     state "StateMyString"
-    country_residence "CountMyString"
+    country_residence "United States"
     zip "12345"
     phone "PhoMyString"
     mobile "IMobMyString"

@@ -49,14 +49,6 @@ describe SongsController do
     end
   end
 
-  describe "GET edit" do
-    it "assigns the requested song as @song" do
-      song = FactoryGirl.create(:song, :registrant => @reg)
-      get :edit, {:id => song.to_param}
-      assigns(:song).should eq(song)
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Song" do
@@ -84,44 +76,6 @@ describe SongsController do
         Song.any_instance.stub(:save).and_return(false)
         post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.id}
         response.should render_template("index")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested song" do
-        song = FactoryGirl.create(:song, :registrant => @reg)
-        # Assuming there are no other songs in the database, this
-        # specifies that the Song created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Song.any_instance.should_receive(:update).with({ "description" => "MyString" })
-        put :update, {:id => song.to_param, :song => { "description" => "MyString" }}
-      end
-
-      it "redirects to the registrant_songs index" do
-        song = FactoryGirl.create(:song, :registrant => @reg)
-        put :update, {:id => song.to_param, :song => valid_attributes}
-        response.should redirect_to(registrant_songs_path(@reg))
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the song as @song" do
-        song = FactoryGirl.create(:song, :registrant => @reg)
-        # Trigger the behavior that occurs when invalid params are submitted
-        Song.any_instance.stub(:save).and_return(false)
-        put :update, {:id => song.to_param, :song => { "description" => "invalid value" }}
-        assigns(:song).should eq(song)
-      end
-
-      it "re-renders the 'edit' template" do
-        song = FactoryGirl.create(:song, :registrant => @reg)
-        # Trigger the behavior that occurs when invalid params are submitted
-        Song.any_instance.stub(:save).and_return(false)
-        put :update, {:id => song.to_param, :song => { "description" => "invalid value" }}
-        response.should render_template("edit")
       end
     end
   end

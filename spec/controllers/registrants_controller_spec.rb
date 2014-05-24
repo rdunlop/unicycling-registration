@@ -107,10 +107,10 @@ describe RegistrantsController do
     end
   end
 
-  describe "GET waiver", :pdf_generation => true do
+  describe "GET waiver" do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
-      get :waiver, {:format => 'pdf', :id => registrant.to_param}
+      get :waiver, {:id => registrant.to_param}
       response.should be_success
       assigns(:registrant).should eq(registrant)
     end
@@ -119,7 +119,7 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
       Date.stub(:today).and_return(Date.new(2012,01,22))
-      get :waiver, {:format => 'pdf', :id => registrant.to_param}
+      get :waiver, {:id => registrant.to_param}
 
       assigns(:event_name).should == c.long_name
       assigns(:event_start_date).should == "Jul 21, 2013"
@@ -130,30 +130,21 @@ describe RegistrantsController do
     it "sets the contact details" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
-      get :waiver, {:format => 'pdf', :id => registrant.to_param}
+      get :waiver, {:id => registrant.to_param}
 
       assigns(:name).should == registrant.to_s
       assigns(:club).should == registrant.club
       assigns(:age).should == registrant.age
-      assigns(:address).should == registrant.address
-      assigns(:city).should == registrant.city
-      assigns(:state).should == registrant.state
-      assigns(:zip).should == registrant.zip
-      assigns(:country_code).should == registrant.country_residence
       assigns(:country).should == "United States"
-      assigns(:phone).should == registrant.phone
-      assigns(:mobile).should == registrant.mobile
-      assigns(:email).should == registrant.email
-      assigns(:user_email).should == @user.email
     end
     it "sets the emergency-variables" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
-      get :waiver, {:format => 'pdf', :id => registrant.to_param}
+      get :waiver, {:id => registrant.to_param}
 
-      assigns(:emergency_name).should == registrant.emergency_name
-      assigns(:emergency_primary_phone).should == registrant.emergency_primary_phone
-      assigns(:emergency_other_phone).should == registrant.emergency_other_phone
+      assigns(:emergency_name).should == registrant.contact_detail.emergency_name
+      assigns(:emergency_primary_phone).should == registrant.contact_detail.emergency_primary_phone
+      assigns(:emergency_other_phone).should == registrant.contact_detail.emergency_other_phone
     end
   end
 
