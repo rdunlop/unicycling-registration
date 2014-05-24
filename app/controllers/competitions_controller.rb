@@ -9,34 +9,28 @@ class CompetitionsController < ApplicationController
 
   load_and_authorize_resource
 
+  before_action :set_parent_breadcrumbs, only: [:new, :edit, :show]
+
   respond_to :html
-
-  private
-  def load_new_competition
-    @competition = Competition.new(competition_params)
-    params[:id] = 1 if params[:id].nil? #necessary due to bug in the way that cancan does authorization check
-  end
-
-  def load_event
-    @event = Event.find(params[:event_id])
-    # required in order to set up the 'new' element
-    @competition = Competition.new if @competition.nil?
-    @competition.event = @event unless @competition.nil?
-  end
-
-  public
 
   # /events/#/competitions/new
   def new
+    add_breadcrumb "New Competition"
+
     @competition.competition_sources.build
   end
 
   # GET /competitions/1/edit
   def edit
-    @event = @competition.event
+    add_breadcrumb "Edit Competition"
+
     3.times do
       @competition.competition_sources.build
     end
+  end
+
+  def show
+    add_breadcrumb "#{@competition}"
   end
 
   # POST /events/#/create
@@ -146,9 +140,28 @@ class CompetitionsController < ApplicationController
   end
 
   private
+
   def competition_params
     params.require(:competition).permit(:name, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups,
                                         :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :competition_id, :max_place, :_destroy])
   end
-end
 
+  def set_parent_breadcrumbs
+    @event ||= @competition.event
+    add_category_breadcrumb(@event.category)
+    add_event_breadcrumb(@event)
+  end
+
+  def load_new_competition
+    @competition = Competition.new(competition_params)
+    params[:id] = 1 if params[:id].nil? #necessary due to bug in the way that cancan does authorization check
+  end
+
+  def load_event
+    @event = Event.find(params[:event_id])
+    # required in order to set up the 'new' element
+    @competition = Competition.new if @competition.nil?
+    @competition.event = @event unless @competition.nil?
+  end
+
+end

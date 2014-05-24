@@ -65,6 +65,12 @@ class JudgesController < ApplicationController
   end
 
   def index
+    event = @competition.event
+    add_category_breadcrumb(event.category)
+    add_event_breadcrumb(event)
+    add_competition_breadcrumb(@competition)
+    add_breadcrumb "Manage Judges", competition_judges_path(@competition)
+
     @judge_types = JudgeType.where(:event_class => @competition.event_class)
     @all_judges = User.with_role(:judge).order(:email)
     @race_officials = User.with_role(:race_official).order(:email)

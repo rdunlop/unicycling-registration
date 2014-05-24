@@ -244,7 +244,7 @@ Workspace::Application.routes.draw do
 
     resources :competitors, :only => [:edit, :update, :destroy]
 
-    resources :competitions, :only => [:edit, :update, :destroy] do
+    resources :competitions, :only => [:show, :edit, :update, :destroy] do
       member do
         post :set_places
         get :export_scores

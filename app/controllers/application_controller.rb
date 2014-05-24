@@ -73,4 +73,16 @@ class ApplicationController < ActionController::Base
   def add_payment_summary_breadcrumb
     add_breadcrumb "Payments Summary", summary_payments_path
   end
+
+  def add_category_breadcrumb(category)
+    add_breadcrumb "#{category}"# XXX this should be category_path(category)
+  end
+
+  def add_event_breadcrumb(event)
+    add_breadcrumb "#{event}", event_path(event)
+  end
+
+  def add_competition_breadcrumb(competition)
+    add_breadcrumb "#{competition}", competition_path(competition)
+  end
 end

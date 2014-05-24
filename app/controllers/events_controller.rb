@@ -6,14 +6,6 @@ class EventsController < ApplicationController
 
   respond_to :html
 
-  def load_category
-    @category = Category.find(params[:category_id])
-  end
-
-  def load_new_event
-    @event = @category.events.build(event_params)
-  end
-
   # GET /events
   # GET /events.json
   def index
@@ -39,6 +31,9 @@ class EventsController < ApplicationController
   end
 
   def sign_ups
+    add_category_breadcrumb(@event.category)
+    add_event_breadcrumb(@event)
+    add_breadcrumb "Sign Ups"
     respond_to do |format|
       format.html
       format.pdf { render :pdf => "show", :formats => [:html] }
@@ -47,7 +42,10 @@ class EventsController < ApplicationController
 
   # GET /events/1
   def show
+    add_category_breadcrumb(@event.category)
+    add_event_breadcrumb(@event)
   end
+
   # GET /events/1/edit
   def edit
   end
@@ -115,4 +113,13 @@ class EventsController < ApplicationController
                                   :event_choices_attributes => [:export_name, :cell_type, :label, :multiple_values, :position, :id],
                                   :event_categories_attributes => [:name, :position, :id])
   end
+
+  def load_category
+    @category = Category.find(params[:category_id])
+  end
+
+  def load_new_event
+    @event = @category.events.build(event_params)
+  end
+
 end
