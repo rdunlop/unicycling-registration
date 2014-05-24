@@ -39,6 +39,7 @@ class PaymentsController < ApplicationController
   end
 
   def summary
+    add_payment_summary_breadcrumb
     @total_received = Payment.total_received
     @expense_groups = ExpenseGroup.includes(:expense_items => [:translations, :expense_group])
   end

@@ -2,6 +2,21 @@ class ExpenseItemsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
+  # GET /expense_items/1/details
+  def details
+    add_payment_summary_breadcrumb
+    @filter = params[:filter]
+    add_breadcrumb "#{@filter.humanize} Items"
+
+    filters = %(paid refunded free unpaid)
+    raise "unknown filter" unless filters.include?(@filter)
+    @details = @expense_item.send("#{@filter}_items")
+  end
+
+  # ############################
+  # NORMAL CRUD BELOW THIS LINE
+  # ############################
+
   # GET /expense_items
   # GET /expense_items.json
   def index
@@ -21,14 +36,6 @@ class ExpenseItemsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @expense_item }
     end
-  end
-
-  # GET /expense_items/1/details
-  def details
-    @filter = params[:filter]
-    filters = %(paid refunded free unpaid)
-    raise "unknown filter" unless filters.include?(@filter)
-    @details = @expense_item.send("#{@filter}_items")
   end
 
   # GET /expense_items/1/edit
