@@ -4,18 +4,13 @@ class LaneAssignmentsController < ApplicationController
   before_filter :load_new_lane_assignment, :only => [:create]
   load_and_authorize_resource
 
-  def load_competition
-    @competition = Competition.find(params[:competition_id])
-    raise StandardError.new("Competition is not set to use lane assignments") unless @competition.uses_lane_assignments
-  end
-
-  def load_new_lane_assignment
-    @lane_assignment = @competition.lane_assignments.new(lane_assignment_params)
-  end
+  before_action :set_parent_breadcrumbs, only: [:index, :create]
 
   # GET /competitions/#/lane_assignments
   # GET /competitions/#/lane_assignments.json
   def index
+    add_breadcrumb "Lane Assignments"
+
     @lane_assignment = LaneAssignment.new
     @lane_assignments = @competition.lane_assignments
 
@@ -27,6 +22,7 @@ class LaneAssignmentsController < ApplicationController
 
   # GET /lane_assignments/1/edit
   def edit
+    add_breadcrumb "Edit Lane Assignment"
   end
 
   # POST /lane_assignments
@@ -36,6 +32,7 @@ class LaneAssignmentsController < ApplicationController
       if @lane_assignment.save
         format.html { redirect_to competition_lane_assignments_path(@competition), notice: 'Lane assignment was successfully created.' }
       else
+        add_breadcrumb "Lane Assignments"
         @lane_assignments = @competition.lane_assignments
         format.html { render action: "index" }
       end
@@ -68,7 +65,23 @@ class LaneAssignmentsController < ApplicationController
   end
 
   private
+
   def lane_assignment_params
     params.require(:lane_assignment).permit(:registrant_id, :heat, :lane)
   end
+
+  def set_parent_breadcrumbs
+    add_to_competition_breadcrumb(@competition)
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+    raise StandardError.new("Competition is not set to use lane assignments") unless @competition.uses_lane_assignments
+  end
+
+  def load_new_lane_assignment
+    @lane_assignment = @competition.lane_assignments.new(lane_assignment_params)
+  end
+
+
 end

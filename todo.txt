@@ -7,6 +7,7 @@ Last Re-Arranged February 6, 2014.
 
 - Increase test coverage based on simplecov report
 
+- Make Lane Assignment JS, so that it doesn't have to reload the whole page every time.
 - Figure out what partial-refactoring https://github.com/lailsonbm/awesome_nested_fields meant
 - Improve the styling of the Competitor->Member form.
 - Combine the EventCategory and Event controllers so that all creation/updat/deletion of event_categories happens through an event.
