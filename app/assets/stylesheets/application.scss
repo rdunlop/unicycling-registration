@@ -11,7 +11,7 @@
  * You can add event-specific styles that override these common styles. For each event, you can
  * create a file with the name |EventConfiguration.style_name.scss.
  * (That is generally the  event short name, all lowercase, with underscores for spaces.)
- * For example naucc_2013.scss or unicon_17.scss. 
+ * For example naucc_2013.scss or unicon_17.scss.
  * Then add this option to the list of EventConfiguration.style_names
  *
  *= require_self
@@ -20,4 +20,5 @@
  *= require jquery.dataTables
  *= require jquery-ui-1.9.2.custom
  *= require font-kit-rails
+ %= require breadcrumbs
  */
