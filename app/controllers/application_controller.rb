@@ -1,10 +1,6 @@
-require 'breadcrumbs_on_rails/breadcrumbs'
-require 'breadcrumbs_on_rails/action_controller'
-
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
-  include BreadcrumbsOnRails::ActionController
 
   before_filter :set_locale
   before_filter :set_home_breadcrumb

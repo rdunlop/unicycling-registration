@@ -58,6 +58,7 @@ GEM
       descendants_tracker (~> 0.0.1)
       ice_nine (~> 0.9)
     bcrypt (3.1.7)
+    breadcrumbs_on_rails (2.3.0)
     builder (3.2.2)
     bullet (4.8.0)
       activesupport
@@ -331,6 +332,7 @@ DEPENDENCIES
   acts_as_list
   annotate
   awesome_nested_fields
+  breadcrumbs_on_rails
   bullet
   cancancan (~> 1.7)
   capybara!
