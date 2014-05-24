@@ -1,12 +1,15 @@
 require 'spec_helper'
 
-describe "judges/new" do
+describe "judges/index" do
   before(:each) do
     assign(:judge, FactoryGirl.build(:judge))
     @ec = FactoryGirl.create(:competition)
     assign(:competition, @ec)
-    assign(:judge_types, [])
+    assign(:events, [])
     assign(:all_judges, [])
+    assign(:race_officials, [])
+    assign(:judge_types, [])
+    assign(:judges, [])
     assign(:judge, Judge.new)
   end
   it "should show the 'new judge type'" do

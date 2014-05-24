@@ -20,15 +20,6 @@ describe JudgesController do
       user_id: @user.id }
   end
 
-  describe "GET new" do
-    it "assigns the judge types" do
-        get :new, {:competition_id => @ec.id }
-
-        assigns(:judge_types).should == [@judge_type]
-        assigns(:all_judges).should == [@judge_user]
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new EventJudgeType" do

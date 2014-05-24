@@ -1,5 +1,5 @@
 class JudgesController < ApplicationController
-  load_and_authorize_resource :competition, :only => [:index, :new, :create, :destroy, :copy_judges, :create_normal, :create_race_official]
+  load_and_authorize_resource :competition, :only => [:index, :create, :destroy, :copy_judges, :create_normal, :create_race_official]
   before_filter :load_new_judge, :only => [:create]
   load_and_authorize_resource
 
@@ -9,19 +9,13 @@ class JudgesController < ApplicationController
     @judge = @competition.judges.new(judge_params)
   end
 
-  def new # are there tests for this?
-    @judge_types = JudgeType.where(:event_class => @competition.event_class)
-    @all_judges = User.with_role(:judge).order(:email)
-    @race_officials = User.with_role(:race_official).order(:email)
-  end
-
   # POST /competitions/#/judges
   # POST /competitions/#/judges.json
   def create
     if @judge.save
       flash[:notice] = 'Association was successfully created.'
     else
-      index # call new function (above), to load the correct variables
+      index
     end
     respond_with(@judge, location: competition_judges_path(@competition), action: "index")
   end
@@ -71,7 +65,10 @@ class JudgesController < ApplicationController
   end
 
   def index
-    new # load judge_types and all_judges
+    @judge_types = JudgeType.where(:event_class => @competition.event_class)
+    @all_judges = User.with_role(:judge).order(:email)
+    @race_officials = User.with_role(:race_official).order(:email)
+
     @judges = @competition.judges
     @events = Event.all
     @judge ||= Judge.new
