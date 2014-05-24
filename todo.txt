@@ -5,7 +5,6 @@ Last Re-Arranged February 6, 2014.
 - Remove admin ability to "Create" a Payment.
 - Remove judges#new, as it's redundant as judges#index has that function.
 - Remove Judge#update action (is currently unused)
-- Remove dead competitions#show route
 
 - Re-work the Competitor-management function (members should be easier to add/remove)
   - Don't need both a New function, Edit, and Member management. Combine the Competitor and Member Edit into a single form/action?

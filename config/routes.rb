@@ -250,7 +250,7 @@ Workspace::Application.routes.draw do
       resources :members, :shallow => true, :only => [:create, :destroy]
     end
 
-    resources :competitions, :except => [:index, :create, :new] do
+    resources :competitions, :only => [:edit, :update, :destroy] do
       member do
         post :set_places
         get :export_scores
