@@ -1,43 +1,13 @@
 class RegistrantsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_registrant, :only => [:undelete]
-  load_and_authorize_resource
+  load_and_authorize_resource :user, only: [:index]
+  load_and_authorize_resource except: :new
+  load_and_authorize_resource through: :current_user, only: :new
+  # NOTE: This isn't working 100%, it fails when a create fails (the breadcrumb is incorrect)
 
   before_action :set_registrants_breadcrumb
-  before_action :set_single_registrant_breadcrumb, only: [:edit, :show]
-
-  private
-
-  def set_registrants_breadcrumb
-    add_breadcrumb "Registrants", registrants_path
-  end
-
-  def set_single_registrant_breadcrumb
-    add_registrant_breadcrumb(@registrant)
-  end
-
-  def find_registrant
-    @registrant = Registrant.find(params[:id])
-  end
-
-  def load_categories
-    if @registrant.competitor
-      @categories = Category.includes(:translations, :events => :event_choices)
-    end
-  end
-
-  def load_other_reg
-    unless current_user.registrants.empty?
-      @other_registrant = current_user.registrants.active.first
-    end
-  end
-
-  def load_online_waiver
-    @has_online_waiver = EventConfiguration.has_online_waiver
-    @online_waiver_text = EventConfiguration.online_waiver_text
-  end
-
-  public
+  before_action :set_single_registrant_breadcrumb, only: [:edit, :show, :reg_fee]
+  before_action :set_new_registrant_breadcrumb, only: [:new]
 
   def all_index
     @registrants = Registrant.includes(:user, :contact_detail)
@@ -48,7 +18,7 @@ class RegistrantsController < ApplicationController
   # or
   # GET /users/12/registrants
   def index
-    if params[:user_id].nil?
+    if @user.nil?
 
       authorize! :manage_all, Registrant
       all_index
@@ -57,11 +27,10 @@ class RegistrantsController < ApplicationController
         format.pdf { render :pdf => "index_all", :template => "registrants/index_all.html.erb", :formats => [:html], :layout => "pdf.html" }
       end
     else
-      @my_registrants = current_user.registrants.active
-      @shared_registrants = current_user.accessible_registrants - @my_registrants
-      @display_invitation_request = current_user.invitations.need_reply.count > 0
-      @display_invitation_manage_banner = current_user.invitations.permitted.count > 0
-      @user = current_user
+      @my_registrants = @user.registrants.active
+      @shared_registrants = @user.accessible_registrants - @my_registrants
+      @display_invitation_request = @user.invitations.need_reply.count > 0
+      @display_invitation_manage_banner = @user.invitations.permitted.count > 0
       @has_print_waiver = EventConfiguration.has_print_waiver
       @usa_event = EventConfiguration.usa
       @iuf_event = EventConfiguration.iuf
@@ -143,19 +112,11 @@ class RegistrantsController < ApplicationController
     end
   end
 
-  # determine whether to show the competitor or non-competitor page
-  def get_competitor_value
-    if params[:non_competitor].nil?
-      true
-    else
-      ! (params[:non_competitor] == "true")
-    end
-  end
+
 
   # GET /registrants/new
   # GET /registrants/new.json
   def new
-    @registrant = Registrant.new
     @registrant.competitor = get_competitor_value
     @registrant.build_contact_detail
     load_online_waiver
@@ -185,6 +146,8 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to registrant_registrant_expense_items_path(@registrant), notice: 'Registrant was successfully created.' }
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
+        @user = current_user
+        add_breadcrumb "New"
         load_categories
         load_online_waiver
         format.html { render action: "new" }
@@ -227,6 +190,60 @@ class RegistrantsController < ApplicationController
   end
 
   private
+
+  # determine whether to show the competitor or non-competitor page
+  def get_competitor_value
+    if params[:non_competitor].nil?
+      true
+    else
+      ! (params[:non_competitor] == "true")
+    end
+  end
+
+  def set_registrants_breadcrumb
+    if @registrant
+      @user = @registrant.user
+    end
+    if @user == current_user
+      add_breadcrumb "My Registrants", user_registrants_path(current_user)
+    else
+     add_breadcrumb "Registrants", registrants_path
+    end
+  end
+
+  def set_single_registrant_breadcrumb
+    add_registrant_breadcrumb(@registrant)
+  end
+
+  def set_new_registrant_breadcrumb
+    add_breadcrumb "New", new_registrant_path
+  end
+
+  def set_reg_fee_breadcrumb
+    add_breadcrumb "Set Reg Fee"
+  end
+
+  def set_email_breadcrumb
+    add_breadcrumb "Send Emails"
+  end
+
+  def load_categories
+    if @registrant.competitor
+      @categories = Category.includes(:translations, :events => :event_choices)
+    end
+  end
+
+  def load_other_reg
+    unless current_user.registrants.empty?
+      @other_registrant = current_user.registrants.active.first
+    end
+  end
+
+  def load_online_waiver
+    @has_online_waiver = EventConfiguration.has_online_waiver
+    @online_waiver_text = EventConfiguration.online_waiver_text
+  end
+
   def attributes
     [ :first_name, :gender, :last_name, :middle_initial, :birthday, :competitor, :volunteer,
       :online_waiver_signature,
@@ -255,6 +272,7 @@ class RegistrantsController < ApplicationController
   public
 
   def undelete
+    binding.pry
     @registrant.deleted = false
 
     respond_to do |format|
@@ -294,6 +312,7 @@ class RegistrantsController < ApplicationController
   end
 
   def email
+    set_email_breadcrumb
     @email_form = Email.new
   end
 
@@ -304,6 +323,7 @@ class RegistrantsController < ApplicationController
       if mass_emailer.send_emails
         format.html { redirect_to email_registrants_path, notice: 'Email sent successfully.' }
       else
+        set_email_breadcrumb
         @email_form = mass_emailer.email_form
         render "email"
       end
@@ -311,6 +331,7 @@ class RegistrantsController < ApplicationController
   end
 
   def reg_fee
+    set_reg_fee_breadcrumb
   end
 
   def update_reg_fee
@@ -327,10 +348,12 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       if error || !@registrant.set_registration_item_expense(new_reg_item)
+        set_reg_fee_breadcrumb
         format.html { render "reg_fee", alert: error_message  }
       else
         format.html { redirect_to reg_fee_registrant_path(@registrant), notice: 'Reg Fee Updated successfully.' }
       end
     end
   end
+
 end
