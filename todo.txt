@@ -1,6 +1,7 @@
 Last Re-Arranged February 6, 2014.
 
 - New Navigation Structure (using Breadcrumbs?)
+ - Use the breadcrumbs gem instead of doing the require/lib solution.
 - New Menu Bar (not custom-made?)
 
 - Increase test coverage based on simplecov report

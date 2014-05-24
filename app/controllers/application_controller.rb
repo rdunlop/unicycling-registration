@@ -1,8 +1,13 @@
+require 'breadcrumbs_on_rails/breadcrumbs'
+require 'breadcrumbs_on_rails/action_controller'
+
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
+  include BreadcrumbsOnRails::ActionController
 
   before_filter :set_locale
+  before_filter :set_home_breadcrumb
 
   protect_from_forgery
   check_authorization :unless => :devise_controller?
@@ -57,5 +62,15 @@ class ApplicationController < ActionController::Base
       :orientation => orientation,
       :disposition => disposition,
       :layout => "pdf.html"
+  end
+
+  private
+
+  def set_home_breadcrumb
+    add_breadcrumb "Home", root_path
+  end
+
+  def add_registrant_breadcrumb(registrant)
+    add_breadcrumb "#{registrant.bib_number} - #{registrant}", registrant_path(registrant)
   end
 end

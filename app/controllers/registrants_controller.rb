@@ -3,7 +3,18 @@ class RegistrantsController < ApplicationController
   before_filter :find_registrant, :only => [:undelete]
   load_and_authorize_resource
 
+  before_action :set_registrants_breadcrumb
+  before_action :set_single_registrant_breadcrumb, only: [:edit, :show]
+
   private
+
+  def set_registrants_breadcrumb
+    add_breadcrumb "Registrants", registrants_path
+  end
+
+  def set_single_registrant_breadcrumb
+    add_registrant_breadcrumb(@registrant)
+  end
 
   def find_registrant
     @registrant = Registrant.find(params[:id])
@@ -38,6 +49,7 @@ class RegistrantsController < ApplicationController
   # GET /users/12/registrants
   def index
     if params[:user_id].nil?
+
       authorize! :manage_all, Registrant
       all_index
       respond_to do |format|
@@ -158,6 +170,7 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/1/edit
   def edit
+    add_breadcrumb "Edit", edit_registrant_path(@registrant)
     load_categories
     load_online_waiver
   end
