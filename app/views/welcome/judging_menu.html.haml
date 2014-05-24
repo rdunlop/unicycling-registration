@@ -1,0 +1,52 @@
+%h1 My Judging Events
+
+%ul
+  - @judges.each do |judge|
+    %li= scoring_link(judge)
+
+%hr
+
+%h1 All Events/Competitions/Details
+
+%h2= link_to "Registrants", registrants_path
+
+%h2= link_to "Payments", summary_payments_path
+
+%h2= link_to "Categories/Events", summary_events_path
+- Category.all.each do |category|
+  %h3= category
+  - category.events.each do |event|
+    %h4= link_to event, event_path(event)
+    %p= link_to "Sign Ups", sign_ups_event_path(event)
+    - event.event_categories.each do |ecat|
+      %span.minor= link_to "#{ecat} Sign Ups", sign_ups_event_category_path(ecat)
+    %p= link_to "Results", results_printing_event_path(event)
+    %h5 Competitions
+    %table.sortable
+      %thead
+        %tr
+          %th Competition
+          %th Judges
+          %th Lane Assignments
+          %th Competitor Management
+          %th Announcer Sheet
+          %th Results Recording
+          %th Results Entry
+          %th Results Summary
+          %th Lock
+      %tbody
+        - event.competitions.each do |competition|
+          %tr
+            %td= competition
+            %td= link_to "Manage", competition_judges_path(competition)
+            %td= link_to "Enter", competition_lane_assignments_path(competition)
+            %td= link_to "Manage", competition_competitors_path(competition)
+            %td= link_to "(pdf)", announcer_printing_competition_path(competition)
+            %td= "No Link (yet)"
+            %td= link_to "Import", user_competition_import_results_path(current_user, competition)
+            %td= link_to "View", scores_competition_path(competition)
+            %td= link_to "Lock", lock_competition_path(competition)
+
+
+
+
