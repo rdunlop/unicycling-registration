@@ -249,34 +249,6 @@ describe PaymentsController do
     end
   end
 
-  describe "DELETE destroy" do
-    before(:each) do
-      sign_in FactoryGirl.create(:super_admin_user)
-    end
-    it "destroys the requested payment" do
-      payment = FactoryGirl.create(:payment, :user => @user)
-      expect {
-        delete :destroy, {:id => payment.to_param}
-      }.to change(Payment, :count).by(-1)
-    end
-
-    it "redirects to the payments list" do
-      payment = FactoryGirl.create(:payment, :user => @user)
-      delete :destroy, {:id => payment.to_param}
-      response.should redirect_to(admin_payments_url)
-    end
-    describe "as a normal user" do
-      before(:each) do
-        sign_in @user
-      end
-      it "cannot delete" do
-        payment = FactoryGirl.create(:payment, :user => @user)
-        delete :destroy, {:id => payment.to_param}
-        response.should redirect_to(root_path)
-      end
-    end
-  end
-
   describe "without a user signed in" do
     before(:each) do
       sign_out @user

@@ -3,9 +3,6 @@
 <% if can? [:admin, :onsite_pay_new], Payment %>
   <%= link_to "Create Adjustment Payment", new_payment_adjustment_path %><br />
 <% end %>
-<% if can? [:admin, :new], Payment %>
-  <%= link_to "Create New Payment (of anything)", new_admin_payment_path %><br />
-<% end %>
 <% if can? [:admin, :show], Payment %>
   <%= link_to "View list of Payments/Refunds", list_payment_adjustments_path %>
 <% end %>

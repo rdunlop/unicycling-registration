@@ -46,9 +46,6 @@ Workspace::Application.routes.draw do
 
 
     namespace :admin do
-      resources :payments, :only => [:new, :create]  do
-      end
-
       namespace :export do
         get :index
         get :download_payment_details
@@ -81,7 +78,7 @@ Workspace::Application.routes.draw do
 
     resources :refunds, :only => [:show]
 
-    resources :payments, :except => [:index] do
+    resources :payments, :except => [:index, :edit, :update,:destroy] do
       collection do
         get :summary
         post :notification
