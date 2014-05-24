@@ -24,7 +24,7 @@ class DistanceAttemptsController < ApplicationController
         @reg = Registrant.where(:bib_number => params[:external_id]).first
         unless @reg.nil?
             @competitor = @reg.competitors.where(:competition_id => @competition.id).first
-            unless @competitor.nil?
+            if @competitor.present?
                 respond_to do |format|
                     format.html { redirect_to new_judge_competitor_distance_attempt_path(@judge, @competitor) }
                 end

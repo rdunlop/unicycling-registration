@@ -32,9 +32,22 @@ Last Re-Arranged February 6, 2014.
 - Redirect to the previous page upon change of role.
 - Remove dead competitions#show route
 - Re-work the Competitor-management function (members should be easier to add/remove)
+  - Don't need both a New function, Edit, and Member management. Combine the Competitor and Member Edit into a single form/action?
 - Prevent Competitor Destroy_all action if there are results for the competitors
  - Do this in a Transaction?
-
+- Allow Chief Judge to import External Results for their competition.
+- ?Split apart import_results for ExternalResults and LIF-Heat results, and Raw-Time Results?
+- Need to create a way to Print the Imported Data, for use when doing Data Entry for a MUni Event?
+ - NEed to descide when we want to use ImportResult#data_entry vs TimeResults#Index for data entry
+- ADd ability for Chief Judge to enter Two-Attempt_entry Data. (or for a judge to do so?).
+ - Perhaps have any :judge be able to enter data into the import table, but only allow chief judge to import that data across (once verified)
+- Remove Judge from DistanceAttempt (as there is no need to keep different judge's distance Attempts separated, right?)
+- Need to be able to print the Artistic Judging Helper sheets (for paper recording, later transcribing into the UDA)
+- Clean up the ArtisticEdit view partial, and the boundary score thing.
+- Clean up StreetScore Controller, and adjust it to match the rulebook for scoring.
+- Add a printed page for paper-recording of Street Scores.
+- Should Chief Judges be allowed/able to Update/Delete Scores and StreetScores? (or should only the specific Judge be able to?) I think yes.
+- link chief-judge to competitions#export_scores, possibly also make it nicer?
 
 - Create role of "Award Printer"
 - Create role of "Announcer"

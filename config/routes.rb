@@ -312,7 +312,6 @@ Workspace::Application.routes.draw do
         # display chosen competitors current scores, and update them
         resources :standard_scores, :only => [:new, :create]
         resources :distance_attempts, :only => [:new, :create]
-        resources :boundary_scores
       end
 
       #choose the desired competitor to add scores to
