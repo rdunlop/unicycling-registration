@@ -54,7 +54,7 @@
             <%= link_to "HTML", sign_ups_event_category_path(ecat) %>
             <%= link_to "PDF", sign_ups_event_category_path(ecat, :format => "pdf") %>
           </td>
-          <td><%= ecat.num_competitors %></td>
+          <td><%= ecat.num_signed_up_registrants %></td>
         </tr>
       <% end %>
     <% end %>

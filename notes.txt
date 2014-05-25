@@ -1,3 +1,21 @@
+
+Notes from May 24,2014 with Connie:
+
+BBall - Competitior List, Asssign Reg-> Comp, print Comp List with members, Enter Ranked places, Approved Entered data, Lock event, Post Data, Print Awards, Print Labels, Mark Labels done.
+
+Individual - Show by Age Group, Age Group Management (needs love), randomize competitor order, manual competitor re-order, Add/Manage judges, list/print judges, mark comptitor as no-show, olck results, awards print, awards labels, awards done, post
+
+Pairs/Group, same as above, with 2-medals occurring
+
+MUni CC-Beginner - Manage Age Groups, Post Competitors by Age Group, Enter start times, with the same start time for many people, see competitors without data and data without competitors before "approving (importing)" the data. awards....
+
+10k - Print/export registrant data with Best Time (for use by chief judge when creating start-lists).
+
+100m - Show by age group, line up referee show lane assignments, ref can DNS/DQ/Reason/who-is-dq-er, import action should only allow if it matches the heat data. Import action without approval results in all heat entries having data (due to DNS/DNF/DQ), Print/display/results by age group, for showing to competitors (Include a flag/action which triggers notification/PDF?), lock (no more inputs), see data by heat (admin-only).
+
+
+
+=== below this line is PRE-may-24-2014.
 - Adjust the Advanced XC data by 2 minutes (they started later.
 
 - Who gets expert T-Shirts?

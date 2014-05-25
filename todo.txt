@@ -1,6 +1,28 @@
 Last Re-Arranged May 24, 2014.
 
+Questions:
+Section 2.1.4 (page 26)
+- If Scott and Robin compete in 100m, and 1st (32 seconds) and 2nd (33 seconds) respectively
+- And then they both compete in the finals, and have results of Scott: 31 seconds, Robin: 30 seconds.
+THEN: What is the time and place awarded to Scott and Robin for the Age Group? (is it 1st/2nd, or 2nd/1st)
+
+- Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
+
+
+TO DO:
+- Ensure that Boundary Score judging works (after the judgeable refactor, ties is probably broken)
+- create ability to "randomize current competitors" and "specify competitor positions"
+- Prevent "final_candidates" from being selected from non-24" wheel-sizes
+
+- Identify the flows for different data/users, and from that, identify missing pages.
+
+- Look for the rulebook and check the cMobined competition logic.
+- validatio on failure of two_attempt_entry
+
 - Improve Competitor Management page, to make it easier to add new people who have signed up for an event to the competitors list.
+ - Add ability to display/update registrants->competitors for a competition.
+ - Prevent setting "AgeGroupType" and "Export"-ONLY boolean at Competition-level
+
 - Create Competitions for all of the NAUCC 2014 events, so that I can learn how the flow works/doesn't work.
  - ADjust to make this easier/better...but keep it as a Super-Admin function for now.
 
@@ -20,9 +42,33 @@ Category Event Competition #Sign Up #Competitors #Results Entered
 - Add a link to the registrants#show_all (for printing the registration packet PDFs)
 - Re-envision the way that Award Labels menu should work (since we have a lot of this data in advance now, in the Competition configuration)
 
+- Allow DNS and DNF results
+- Ensure that a locked Competition doesn't allow any more modifications to results/competitors/etc.
+- Prevent Competitor Destroy_all action if there are results for the competitors
+  - Do this in a Transaction?
+
+- Allow Chief Judge to import External Results for their competition.
+- ?Split apart import_results for ExternalResults and LIF-Heat results, and Raw-Time Results?
+- Need to create a way to Print the Imported Data, for use when doing Data Entry for a MUni Event?
+ - NEed to descide when we want to use ImportResult#data_entry vs TimeResults#Index for data entry
+- ADd ability for Chief Judge to enter Two-Attempt_entry Data. (or for a judge to do so?).
+ - Perhaps have any :judge be able to enter data into the import table, but only allow chief judge to import that data across (once verified)
+
+
+- Create role of "Award Printer"
+- Create role of "Announcer"
 
 
 Nice to have:
+
+Low Priority:
+- BBall: Team Captain/Referee toggle
+-
+
+- Separate "Track" scoring vs other time-based scor tracking. (so that import only asks for LIF at appropriate times)
+- Add tests for distance_attempt_score calculator ("Two Attempt Distance")
+- Handle Multi-lap race recording/calculation/reporting
+
 - Add better debugger gem.
 - Make the breadcrumbs sticky.
 - New Navigation Structure (using Breadcrumbs?)
@@ -33,11 +79,24 @@ Nice to have:
 - break apart the registrants#index controller (weird manage_all thing)
 - Merge the RegistrantExpenses controller into the registrant_expense_items controller?
 
+- Remove Judge from DistanceAttempt (as there is no need to keep different judge's distance Attempts separated, right?)
 
 
 ADMIN Config-Watching View:
 - List all Event Categories, and show which competition they are associated with. (Each should be associated with at least 1)
 - Make Lane Assignment JS, so that it doesn't have to reload the whole page every time.
+
+- Need to be able to print the Artistic Judging Helper sheets (for paper recording, later transcribing into the UDA)
+- Clean up the ArtisticEdit view partial, and the boundary score thing.
+- Clean up StreetScore Controller, and adjust it to match the rulebook for scoring.
+- Add a printed page for paper-recording of Street Scores.
+- Should Chief Judges be allowed/able to Update/Delete Scores and StreetScores? (or should only the specific Judge be able to?) I think yes.
+- link chief-judge to competitions#export_scores, possibly also make it nicer?
+
+- Show the "attempt number" which was faster.
+- Disqualified should be "no"/"" instead of "true/false"
+- Add test path for payment-presenter"
+- Fix image path in scss references (compiled vs dev)
 
 
 ===== below this line (not likely to happen) =====
@@ -47,9 +106,7 @@ ADMIN Config-Watching View:
 - Check the Live NAUCC 2013 site to see if the competitions for BBall/Hockey are associated with any event_categories or not.
  - Change migration to select the "only" event_category if there is only one???
 
-
 - Increase test coverage based on simplecov report
-
 - Figure out what partial-refactoring https://github.com/lailsonbm/awesome_nested_fields meant
 - Improve the styling of the Competitor->Member form.
 - Combine the EventCategory and Event controllers so that all creation/updat/deletion of event_categories happens through an event.
@@ -60,78 +117,23 @@ ADMIN Config-Watching View:
 - Improve the Adjustment Payment system, and add tests for it, so that it can be used by non-Robin
 - Store the logo in a cache? (or someplace other than in the database)
 - Move Chief Judge creation into the Permissions Controller (though it can still be from events#show TOO)
-
-********* THIS IS THE POINT AT WHICH I've stopped prioritizing/sorting things *********
-
 - Move the role-specific changes out of judgesController and into PermissionsController (some are redundant too?)
-- Ensure that a locked Competition doesn't allow any more modifications to results/competitors/etc.
 - Redirect to the previous page upon change of role.
-- Prevent Competitor Destroy_all action if there are results for the competitors
- - Do this in a Transaction?
-- Allow Chief Judge to import External Results for their competition.
-- ?Split apart import_results for ExternalResults and LIF-Heat results, and Raw-Time Results?
-- Need to create a way to Print the Imported Data, for use when doing Data Entry for a MUni Event?
- - NEed to descide when we want to use ImportResult#data_entry vs TimeResults#Index for data entry
-- ADd ability for Chief Judge to enter Two-Attempt_entry Data. (or for a judge to do so?).
- - Perhaps have any :judge be able to enter data into the import table, but only allow chief judge to import that data across (once verified)
-- Remove Judge from DistanceAttempt (as there is no need to keep different judge's distance Attempts separated, right?)
-- Need to be able to print the Artistic Judging Helper sheets (for paper recording, later transcribing into the UDA)
-- Clean up the ArtisticEdit view partial, and the boundary score thing.
-- Clean up StreetScore Controller, and adjust it to match the rulebook for scoring.
-- Add a printed page for paper-recording of Street Scores.
-- Should Chief Judges be allowed/able to Update/Delete Scores and StreetScores? (or should only the specific Judge be able to?) I think yes.
-- link chief-judge to competitions#export_scores, possibly also make it nicer?
-- Split apart Payments#index into 2 functions, instead of sniffing the params
-
-- Create role of "Award Printer"
-- Create role of "Announcer"
-
-
-Questions:
-Section 2.1.4 (page 26)
-- If Scott and Robin compete in 100m, and 1st (32 seconds) and 2nd (33 seconds) respectively
-- And then they both compete in the finals, and have results of Scott: 31 seconds, Robin: 30 seconds.
-THEN: What is the time and place awarded to Scott and Robin for the Age Group? (is it 1st/2nd, or 2nd/1st)
-
-
-
- - And the
-- Look for the rulebook and check the cMobined competition logic.
-- Show the "attempt number" which was faster.
-- Disqualified should be "no"/"" instead of "true/false"
-- Add test path for payment-presenter"
-- Fix image path in scss references (compiled vs dev)
-- Refactor tests to be associated with the new actions that have been extracted
-- validatio on failure of two_attempt_entry
-
-- make all "results" have a common interface, including "Disqualified" ? no, this doesn't make sense, as it's the competitor who is dq'd, not the score/result....or is it?
-- Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
 
 - Update the instructions for setting up a development or server
 - update to use database.yml and secrets.yml the rails-4 way?
 
 - find a way to test/fix that we prevent registrants from seeing other-registrants' data (if they can create, they must be able to view?)
-- Add a functional suite which ensures that a reg can create/sign/up/pay/summary
+
+
 - Add ability to upload music for competitions
 - add a limit of 500 places between all 3 lodging types.
-- Separate "Track" scoring vs other time-based scor tracking. (so that import only asks for LIF at appropriate times)
-- Add tests for distance_attempt_score calculator ("Two Attempt Distance")
-- Handle Multi-lap race recording/calculation/reporting
 
-=============================
-Registration-Related ToDo
-=============================
-
-----ROBIN's CURRENT LIST:
-
-Most Useful:
 - Add caching around scoring, judged_place, placing_points
 - NAUCC 2013 registrants#show_all doesn't work (too slow)
-- Ensure that Boundary Score judging works (after the judgeable refactor, ties is probably broken)
 - determine how to deal with performance issues when sorting on cached field.
 - learn more about acts_as_list for position usage (for competitor#position)
 - prevent sorting when clicking all/none on competitors#index page
-- create ability to "randomize current competitors" and "specify competitor positions"
 - add warning on the "Registrants (edit)" page for any registrant which is "Not Valid"
 - scoring freestyle "Back" button brings me nowhere
 - figure out why error message (unable to add registrant 2x) isn't being displayed.
@@ -140,25 +142,23 @@ Most Useful:
 - Specify a racers "Default Wheel Size" or their registration, so that they might notice/correct it.
  - Allow choosing the 20" wheel size for 0-10 for 10k.
 
-- Add "source filter" for a competition to be based on the "final candidates" of another competition
 - Update the wiki to better describe the scoring_helper, and other filters
 
 - Add form tags or other ways to make the "only_registered" (and other) 'printing' options obvious/accessible.
 - Add "No Competitions Exists, Create one now" buttons (and other places too).
-- Add ability to print all sign-up-lists at once
 - Put a "Back" button on every page in a consistent location.
 - Make the navigation bar always the same styling unless we have selected something.
-- Prevent "final_candidates" from being selected from non-24" wheel-sizes
 
-- Prevent setting "AgeGroupType" and "Export"-ONLY boolean at Competition-level
-- add "event_category" source field to competitions, for use when creating competitors.
- - Add ability to display/update registrants->competitors for a competition.
+********* THIS IS THE POINT AT WHICH I've stopped prioritizing/sorting things *********
 
-- Add ability to enter start times and end times for races (start_time_race)
-- Create new scoring_helper type (start_time_race)
- - Add ability to enter start times for competitors, check the results, calculate the total time.
- - Add instruction sheets for judges on how to enter these results
+=============================
+Registration-Related ToDo
+=============================
 
+----ROBIN's CURRENT LIST:
+
+
+Most Useful:
 - Move ALL results to be associated with a judge? (this way we can easily allow multiple judges to enter results, even for 10k)??
 
 - Add DNF, DNS, and DQ-Reason to data-entry (where? reason should be separate from the LIF results, I think)
