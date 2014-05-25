@@ -61,6 +61,7 @@ Category Event Competition #Sign Up #Competitors #Results Entered
 
 Nice to have:
 
+- Change the internals of :chief_judge to match the external name of "Director"
 Low Priority:
 - BBall: Team Captain/Referee toggle
 -

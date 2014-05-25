@@ -72,7 +72,7 @@ class EventsController < ApplicationController
     user = User.find(params[:user_id])
     user.add_role(:chief_judge, @event)
 
-    redirect_to event_path(@event), notice: 'Created Chief Judge'
+    redirect_to event_path(@event), notice: 'Created Director'
   end
 
   # DELETE /events/1/destroy_chief
@@ -80,7 +80,7 @@ class EventsController < ApplicationController
     user = User.find(params[:user_id])
     user.remove_role(:chief_judge, @event)
 
-    redirect_to event_path(@event), notice: 'Removed Chief Judge'
+    redirect_to event_path(@event), notice: 'Removed Director'
   end
 
   # PUT /events/1

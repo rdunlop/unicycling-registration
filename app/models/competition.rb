@@ -32,7 +32,6 @@ class Competition < ActiveRecord::Base
   accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
 
   has_many :lane_assignments, :dependent => :destroy
-  #has_many :chief_judges, :dependent => :destroy
 
 
   def self.scoring_classes
