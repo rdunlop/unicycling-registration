@@ -37,7 +37,7 @@
             <%= cs.select :event_category_id, @event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true  %>
           </td>
           <td>
-            <%= cs.select :competition_id, Competition.all.map{|c| [c, c.id]}, :include_blank => true  %>
+            <%= cs.select :competition_id, Competition.event_order.all.map{|c| [c, c.id]}, :include_blank => true  %>
           </td>
           <td>
             <%= cs.number_field :max_place %>

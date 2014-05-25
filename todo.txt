@@ -1,8 +1,32 @@
 Last Re-Arranged February 6, 2014.
 
+- Fix/add caching of competition_source counts, so that it is updated when a new registrant signs up, or a new result occurs in a dependent competition....(how should this work?)
+- Ensure that when placing competitors, if they have no time/data they have a place of 0 with status DNF?
+- When using the "max_place" for CompetitionSource, ensure that the overall_place is > 0 too.
+- The NAV menu is overlaying/colliding with the breadcrumbs. fix this.
+- Check the Live NAUCC 2013 site to see if the competitions for BBall/Hockey are associated with any event_categories or not.
+ - Change migration to select the "only" event_category if there is only one.
+- Add better debugger gem.
+- Improve Competitor Management page, to make it easier to add new people who have signed up for an event to the competitors list.
+
+- Make the breadcrumbs sticky.
+
 - New Navigation Structure (using Breadcrumbs?)
  - create a Category#index page which shows the Evetns in the category (and update the breadcrumbs to point here)
 - New Menu Bar (not custom-made?)
+
+
+IDEAL HOMEPAGE:
+
+Category Event Competition #Sign Up #Competitors #Results Entered
+ - Link to the Event, which allows detailed management
+ - Link to the competition, Shows a summary of which event_categories were sourced, and how to manage the competitors, etc.
+ - Sign ups links to a page which shows the sign-ups for the
+
+
+ADMIN Config-Watching View:
+- List all Event Categories, and show which competition they are associated with. (Each should be associated with at least 1)
+
 
 - Increase test coverage based on simplecov report
 

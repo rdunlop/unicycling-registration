@@ -2,8 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.event_edit td:first-child { 
-  text-align: right; 
+.event_edit td:first-child {
+  text-align: right;
 }
 
 .event_edit td:first-child + td {
@@ -18,3 +18,6 @@
 padding: 2px 5px
 }
 
+.warning {
+  background-color: pink;
+}

@@ -6,6 +6,31 @@
 
 %hr
 
+%h1 Results Summary
+%table.sortable
+  %thead
+    %tr
+      %th Cat
+      %th Event
+      %th Competition
+      %th #Signed up
+      %th #Assigned Registrants
+      %th #Competitors
+      %th #Results
+  %tbody
+    - Competition.all.each do |competition|
+      %tr
+        %td= competition.event.category
+        %td= competition.event
+        %td= competition.name
+        - reg_style = "warning" unless competition.all_registrants_are_competitors?
+        %td{class: reg_style}= competition.signed_up_registrants.count
+        %td{class: reg_style}= competition.num_assigned_registrants
+        - style = "warning" unless competition.has_results_for_all_competitors?
+        %td{class: style}= competition.num_competitors
+        %td{class: style}= competition.num_results
+
+
 %h1 All Events/Competitions/Details
 
 %h2= link_to "Registrants", registrants_path

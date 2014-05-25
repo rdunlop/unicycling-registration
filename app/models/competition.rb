@@ -58,6 +58,12 @@ class Competition < ActiveRecord::Base
     attributes['event_category_id'].blank? && attributes['competition_id'].blank?
   end
 
+  def num_assigned_registrants
+    Rails.cache.fetch("/competition/#{id}-#{updated_at}/num_assigned_registrants") do
+      registrants.count
+    end
+  end
+
   def num_competitors
     Rails.cache.fetch("/competition/#{id}-#{updated_at}/num_competitors") do
       competitors.count
@@ -68,6 +74,14 @@ class Competition < ActiveRecord::Base
     Rails.cache.fetch("/competition/#{id}-#{updated_at}/num_results") do
       competitors.to_a.count{|comp| comp.has_result? }
     end
+  end
+
+  def has_results_for_all_competitors?
+    num_results > 0 && num_competitors == num_results
+  end
+
+  def all_registrants_are_competitors?
+    signed_up_registrants.count == num_assigned_registrants
   end
 
   def has_non_expert_results
