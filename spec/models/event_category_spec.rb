@@ -56,7 +56,7 @@ describe EventCategory do
     end
 
     it "can count the number of signed_up competitors" do
-      @ec.num_competitors.should == 1
+      @ec.num_signed_up_registrants.should == 1
     end
   end
 

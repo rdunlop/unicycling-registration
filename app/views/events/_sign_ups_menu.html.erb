@@ -15,8 +15,8 @@
     <% @event.event_categories.each do |ec| %>
       <tr>
         <td><%= ec %></td>
-        <% total_competitors += ec.num_competitors %>
-        <td><%= ec.num_competitors %></td>
+        <% total_competitors += ec.num_signed_up_registrants %>
+        <td><%= ec.num_signed_up_registrants %></td>
         <td><%= link_to 'View Sign Up list', sign_ups_event_category_path(ec) %>
           <%= link_to '(pdf)', sign_ups_event_category_path(ec, :format => :pdf) %></td>
       </tr>

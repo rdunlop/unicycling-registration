@@ -1,36 +1,55 @@
-Last Re-Arranged February 6, 2014.
+Last Re-Arranged May 24, 2014.
 
-- Fix/add caching of competition_source counts, so that it is updated when a new registrant signs up, or a new result occurs in a dependent competition....(how should this work?)
-- Ensure that when placing competitors, if they have no time/data they have a place of 0 with status DNF?
-- When using the "max_place" for CompetitionSource, ensure that the overall_place is > 0 too.
-- The NAV menu is overlaying/colliding with the breadcrumbs. fix this.
-- Check the Live NAUCC 2013 site to see if the competitions for BBall/Hockey are associated with any event_categories or not.
- - Change migration to select the "only" event_category if there is only one.
-- Add better debugger gem.
 - Improve Competitor Management page, to make it easier to add new people who have signed up for an event to the competitors list.
+- Create Competitions for all of the NAUCC 2014 events, so that I can learn how the flow works/doesn't work.
+ - ADjust to make this easier/better...but keep it as a Super-Admin function for now.
 
-- Make the breadcrumbs sticky.
-
-- New Navigation Structure (using Breadcrumbs?)
- - create a Category#index page which shows the Evetns in the category (and update the breadcrumbs to point here)
-- New Menu Bar (not custom-made?)
-
-
-IDEAL HOMEPAGE:
-
+IDEAL Admin HOMEPAGE shows the following data:
 Category Event Competition #Sign Up #Competitors #Results Entered
  - Link to the Event, which allows detailed management
  - Link to the competition, Shows a summary of which event_categories were sourced, and how to manage the competitors, etc.
  - Sign ups links to a page which shows the sign-ups for the
 
+- Fix/add caching of competition_source counts, so that it is updated when a new registrant signs up, or a new result occurs in a dependent competition....(how should this work? ...especially with the gender filter applied)
+ - Counter_caches?
+
+- Need a way to Display the results of a Combined competition
+- need a way to print awards for a Combined Competition
+
+- Create a Report which lists the competitions, including the scoring rules, experts medals rules, etc.
+- Add a link to the registrants#show_all (for printing the registration packet PDFs)
+- Re-envision the way that Award Labels menu should work (since we have a lot of this data in advance now, in the Competition configuration)
+
+
+
+Nice to have:
+- Add better debugger gem.
+- Make the breadcrumbs sticky.
+- New Navigation Structure (using Breadcrumbs?)
+ - create a Category#index page which shows the Evetns in the category (and update the breadcrumbs to point here)
+- New Menu Bar (not custom-made?)
+- The NAV menu is overlaying/colliding with the breadcrumbs. fix this.
+
+- break apart the registrants#index controller (weird manage_all thing)
+- Merge the RegistrantExpenses controller into the registrant_expense_items controller?
+
+
 
 ADMIN Config-Watching View:
 - List all Event Categories, and show which competition they are associated with. (Each should be associated with at least 1)
+- Make Lane Assignment JS, so that it doesn't have to reload the whole page every time.
+
+
+===== below this line (not likely to happen) =====
+
+
+- Ensure that when placing competitors, if they have no time/data they have a place of 0 with status DNF?
+- Check the Live NAUCC 2013 site to see if the competitions for BBall/Hockey are associated with any event_categories or not.
+ - Change migration to select the "only" event_category if there is only one???
 
 
 - Increase test coverage based on simplecov report
 
-- Make Lane Assignment JS, so that it doesn't have to reload the whole page every time.
 - Figure out what partial-refactoring https://github.com/lailsonbm/awesome_nested_fields meant
 - Improve the styling of the Competitor->Member form.
 - Combine the EventCategory and Event controllers so that all creation/updat/deletion of event_categories happens through an event.
@@ -39,16 +58,11 @@ ADMIN Config-Watching View:
 - Allow CombinedCompetition + Entries to be a single controller.
 - Remove remnants of AdminAbility and Admin::BaseController (start with AdjustmentPayment controller?)
 - Improve the Adjustment Payment system, and add tests for it, so that it can be used by non-Robin
-- break apart the registrants#index controller (weird manage_all thing)
-- Merge the RegistrantExpenses controller into the registrant_expense_items controller?
 - Store the logo in a cache? (or someplace other than in the database)
-
-- Need a way to Display the results of a Combined competition
-- need a way to print awards for a Combined Competition
 - Move Chief Judge creation into the Permissions Controller (though it can still be from events#show TOO)
-- Create a Report which lists the competitions, including the scoring rules, experts medals rules, etc.
-- Add a link to the registrants#show_all (for printing the registration packet PDFs)
-- Re-envision the way that Award Labels menu should work (since we have a lot of this data in advance now, in the Competition configuration)
+
+********* THIS IS THE POINT AT WHICH I've stopped prioritizing/sorting things *********
+
 - Move the role-specific changes out of judgesController and into PermissionsController (some are redundant too?)
 - Ensure that a locked Competition doesn't allow any more modifications to results/competitors/etc.
 - Redirect to the previous page upon change of role.

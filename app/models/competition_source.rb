@@ -50,21 +50,21 @@ class CompetitionSource < ActiveRecord::Base
   # XXX this needs cachnig somehow.
   def signed_up_registrants
     registrants = []
-    unless event_category.nil?
+    if event_category.present?
       registrants = event_category.signed_up_registrants
-
     end
-    unless competition.nil?
+
+    if competition.present?
       competitors = competition.competitors
       competitors = competitors.select {|comp| comp.overall_place.to_i > 0 && comp.overall_place.to_i <= max_place } unless max_place.nil?
 
       registrants = competitors.map{|comp| comp.registrants }.flatten
     end
-    unless gender_filter.nil? or gender_filter == "Both"
+
+    if gender_filter.present? && gender_filter != "Both"
       registrants = registrants.select {|reg| reg.gender == gender_filter}
     end
 
     registrants
   end
-
 end
