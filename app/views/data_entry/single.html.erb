@@ -2,15 +2,60 @@
 
 <h2>Competition: <%= @competition %></h2>
 <h3>Is Start Time: <%= @is_start_time %></h3>
-<%= render :partial => "results", locals: {start_times: @start_times} %>
-<%= form_tag(destroy_all_user_competition_import_results_path(@user, @competition), {:method => :delete, :multipart=>true}) do %>
-  <%= submit_tag "Delete all in Temp Table", :class => "data_import_delete", data: {:confirm => "DELETE, Are you sure?" } %>
+
+<%= form_for(@import_result, {url: (@import_result.new_record? ? user_competition_single_attempt_entries_path(@user, @competition) : [@import_result]),
+  :remote => true, :html => {:class => "data_entry"}}) do |f| %>
+  <% if @import_result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@import_result.errors.count, "error") %> prohibited this import_result from being saved:</h2>
+
+      <ul>
+      <% @import_result.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="sortable import_results">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Bib number</th>
+        <th>Raw data</th>
+        <th>Minutes</th>
+        <th>Seconds</th>
+        <th>Thousands</th>
+        <th>Disqualified</th>
+        <th>Is Start Time?</th>
+        <th>Rank (external)</th>
+        <th>Details (external)</th>
+        <th>Name</th>
+        <th>Competitor Exists?</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render partial: 'result', collection: @import_results %>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td></td>
+        <td><%= f.number_field :bib_number, {:autofocus => true } %></td>
+        <td><%= f.text_field :raw_data %></td>
+        <td><%= f.number_field :minutes %></td>
+        <td><%= f.number_field :seconds %></td>
+        <td><%= f.number_field :thousands %></td>
+        <td><%= f.check_box :disqualified %></td>
+        <td><%= f.check_box :is_start_time %></td>
+        <td colspan="6"><%= f.submit "Submit", :class => "multiclick" %></td>
+      </tr>
+    </tfoot>
+  </table>
 <% end %>
-<%= form_tag(publish_to_competition_user_competition_import_results_path(@user, @competition), {:method => :post}) do %>
-  <%= submit_tag "Import all in Temp Table into Competition", :class=> "data_import_submit", data: {:confirm => "IMPORT, Are you sure?" } %>
-<% end %>
-<hr />
 
 <div id="notice"></div>
 
-<%= render partial: "form" %>
