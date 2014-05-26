@@ -152,7 +152,7 @@ class ImportResultsController < ApplicationController
       result.minutes = lif_hash[:minutes]
       result.seconds = lif_hash[:seconds]
       result.thousands = lif_hash[:thousands]
-      result.disqualified = (lif_hash[:disqualified] == "DQ")
+      result.status = "DQ" if  (lif_hash[:disqualified] == "DQ")
       if result.save
         n = n + 1
       else
@@ -169,7 +169,7 @@ class ImportResultsController < ApplicationController
   end
 
   # POST /users/#/competitions/#/import_results/approve
-  def aprrove
+  def approve
     import_results = ImportResult.where(:competition_id => @competition)
 
     n = 0
@@ -209,7 +209,7 @@ class ImportResultsController < ApplicationController
   private
 
   def import_result_params
-    params.require(:import_result).permit(:bib_number, :disqualified, :minutes, :raw_data, :seconds, :thousands, :rank, :details, :is_start_time)
+    params.require(:import_result).permit(:bib_number, :status, :minutes, :raw_data, :seconds, :thousands, :rank, :details, :is_start_time)
   end
 
   def get_id_from_lane_assignment(comp, heat, lane)

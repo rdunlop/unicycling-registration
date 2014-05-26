@@ -1,5 +1,7 @@
 Last Re-Arranged May 24, 2014.
 
+- add ability to enter finish results by-event (auto-selecting the correct competition)
+
 - add feature tests for entering data through data-entry screens. (needs JS-runner?)
 
 - Add inline editing of data:

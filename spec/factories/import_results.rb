@@ -9,12 +9,15 @@
 #  minutes        :integer
 #  seconds        :integer
 #  thousands      :integer
-#  disqualified   :boolean
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  competition_id :integer
 #  rank           :integer
 #  details        :string(255)
+#  is_start_time  :boolean          default(FALSE)
+#  attempt_number :integer
+#  status         :string(255)
+#  comments       :text
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -28,6 +31,6 @@ FactoryGirl.define do
     minutes 1
     seconds 1
     thousands 1
-    disqualified false
+    status nil
   end
 end

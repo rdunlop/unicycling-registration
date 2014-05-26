@@ -10,6 +10,7 @@
 #  disqualified  :boolean
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  is_start_time :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

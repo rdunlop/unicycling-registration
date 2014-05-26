@@ -9,12 +9,15 @@
 #  minutes        :integer
 #  seconds        :integer
 #  thousands      :integer
-#  disqualified   :boolean
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  competition_id :integer
 #  rank           :integer
 #  details        :string(255)
+#  is_start_time  :boolean          default(FALSE)
+#  attempt_number :integer
+#  status         :string(255)
+#  comments       :text
 #
 
 class ImportResult < ActiveRecord::Base
@@ -33,6 +36,10 @@ class ImportResult < ActiveRecord::Base
 
   def competitor_exists?
     competition.find_competitor_with_bib_number(bib_number)
+  end
+
+  def disqualified
+    status == "DQ"
   end
 
   private

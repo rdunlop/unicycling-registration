@@ -86,6 +86,6 @@ class RaceScoringClass < BaseScoringClass
       minutes: raw[1],
       seconds: raw[2],
       thousands: raw[3],
-      disqualified: (raw[4] == "DQ"))
+      status: (raw[4] == "DQ") ? "DQ" : nil)
   end
 end

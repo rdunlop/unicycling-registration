@@ -10,6 +10,7 @@
 #  disqualified  :boolean
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  is_start_time :boolean          default(FALSE)
 #
 
 class TimeResult < ActiveRecord::Base
