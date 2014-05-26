@@ -22,9 +22,15 @@
   <table class="sortable two_attempt_entries">
     <thead>
       <tr>
-        <td></td>
-        <th>Bib Number</th>
-        <th></th>
+        <th rowspan="2"></th>
+        <th rowspan="2">Bib Number</th>
+        <th rowspan="2"></th>
+        <th colspan="5">Attempt #1</th>
+        <th colspan="5">Attempt #2</th>
+        <th rowspan="2">Competitor Name</th>
+        <th rowspan="2">Competitor Exists?</th>
+      </tr>
+      <tr>
         <th>Minutes</th>
         <th>Seconds</th>
         <th>Thousands</th>
@@ -35,13 +41,10 @@
         <th>Thousands</th>
         <th>DQ</th>
         <th></th>
-        <th>Competitor Name</th>
-        <th>Competitor Exists?</th>
       </tr>
     </thead>
     <body>
         <%= render partial: "two_attempt_entry", collection: @two_attempt_entries %>
-
     </body>
     <tfoot>
       <tr>
