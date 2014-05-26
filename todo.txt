@@ -1,5 +1,7 @@
 Last Re-Arranged May 24, 2014.
 
+- add feature tests for entering data through data-entry screens. (needs JS-runner?)
+
 - Add inline editing of data:
   - allow editing of two-attempt-entry data, and single-attempt-entry data
 

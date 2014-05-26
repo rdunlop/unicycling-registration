@@ -30,8 +30,9 @@ Please choose the event that you want to enter data for:
       %th Cat
       %th Event
       %th Competition
-      %th Enter Start Results
+      %th Enter Start Data
       %th Enter Finish Results
+      %th (Director-only) View/Approve data
   %tbody
     - Competition.all.each do |competition|
       - next unless competition.results_importable
@@ -39,7 +40,8 @@ Please choose the event that you want to enter data for:
         %td= competition.event.category
         %td= competition.event
         %td= competition.name
-        %td= link_to "Start ", data_entry_user_competition_import_results_path(current_user, competition, start_times: true)
+        %td= link_to "Start ", user_competition_single_attempt_entries_path(current_user, competition, is_start_times: true)
         %td= link_to "Finish ", user_competition_two_attempt_entries_path(current_user, competition)
+        %td= link_to "View", review_user_competition_import_results_path(current_user, competition)
 
 If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).

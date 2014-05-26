@@ -184,11 +184,11 @@ describe ImportResultsController do
   end
 
 
-  describe "POST publish_to_competition" do
+  describe "POST approve" do
     it "redirects to the competitions' results page" do
       competition = FactoryGirl.create(:competition, :scoring_class => "Distance")
       import = FactoryGirl.create(:import_result, :competition => competition)
-      post :publish_to_competition, {:user_id => import.user, :competition_id => competition.id}
+      post :approve, {:user_id => import.user, :competition_id => competition.id}
       response.should redirect_to(result_competition_path(competition))
     end
   end

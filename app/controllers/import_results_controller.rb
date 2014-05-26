@@ -9,13 +9,21 @@ class ImportResultsController < ApplicationController
 
   before_action :set_breadcrumbs
 
-  # GET /users/#/import_results
-  # GET /users/#/import_results.json
+  # GET /users/#/competitions/#/import_results
   def index
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @import_results }
+    end
+  end
+
+  # GET /users/#/competitions/#/import_results/review
+  def review
+    @import_results = ImportResult.where(:competition_id => @competition)
+
+    respond_to do |format|
+      format.html # index.html.erb
     end
   end
 
@@ -160,9 +168,9 @@ class ImportResultsController < ApplicationController
     redirect_to user_competition_import_results_path(@user, @competition)
   end
 
-  # POST /users/#/competitions/#/import_results/publish_to_competition
-  def publish_to_competition
-    import_results = @user.import_results.where(:competition_id => @competition)
+  # POST /users/#/competitions/#/import_results/approve
+  def aprrove
+    import_results = ImportResult.where(:competition_id => @competition)
 
     n = 0
     err_count = 0

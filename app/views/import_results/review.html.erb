@@ -1,0 +1,60 @@
+<h1>Listing <%= @competition %>'s Imported Results</h1>
+
+
+<table class="sortable import_results">
+  <thead>
+    <tr>
+      <th>Printed Order</th>
+      <th>Bib number</th>
+      <th>Competitor</th>
+      <th>Competitor Exists?</th>
+      <tH></tH>
+      <th>Raw data</th>
+      <th>Minutes</th>
+      <th>Seconds</th>
+      <th>Thousands</th>
+      <th>Disqualified</th>
+      <th>Is Start Time?</th>
+      <th>Rank (external)</th>
+      <th>Details (external)</th>
+      <th>Entered By</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @import_results.each do |import_result| %>
+      <tr>
+        <th><%= import_result.bib_number %></th>
+        <td><%= import_result.bib_number %></td>
+        <td><%= import_result.competitor_name %></td>
+        <% if import_result.competitor_exists? %>
+          <td class="competitor_exists">Yes</td>
+        <% else %>
+          <td class="competitor_not_exists">No</td>
+        <% end %>
+        <td></td>
+        <td><%= import_result.raw_data %></td>
+        <td><%= import_result.minutes %></td>
+        <td><%= import_result.seconds %></td>
+        <td><%= import_result.thousands %></td>
+        <td><%= import_result.disqualified %></td>
+        <td><%= import_result.is_start_time %></td>
+        <td><%= import_result.rank %></td>
+        <td><%= import_result.details %></td>
+        <td><%= import_result.user %></td>
+        <td><%= link_to 'Edit', edit_import_result_path(import_result) %></td>
+        <td><%= link_to 'Destroy', import_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<h3>Menu of actions</h3>
+<ul>
+  <li><%= link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit" %></li>
+</ul>
+
