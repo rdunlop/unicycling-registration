@@ -1,6 +1,7 @@
-<h1>Two Start Times - Data Entry</h1>
+<h1>Two Attempt Entries</h1>
 
 <h2>Competition: <%= @competition %></h2>
+<h3>Is Start Time: <%= @is_start_time %></h3>
 
 <p id="notice"></p>
 <%= form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry],
@@ -16,8 +17,8 @@
       </ul>
     </div>
   <% end %>
-  <h3>Is Start Time: <%= f.check_box :is_start_time %></h3>
 
+  <%= f.hidden_field :is_start_time %>
   <table class="sortable two_attempt_entries">
     <thead>
       <tr>

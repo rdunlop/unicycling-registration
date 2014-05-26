@@ -51,7 +51,7 @@
           Not yet implemented.
         </td>
         <td>
-          <% if competition.scoring_helper.results_importable %>
+          <% if competition.results_importable %>
             <%= link_to 'Import', user_competition_import_results_path(current_user, competition) %>
           <% else %>
             <%= "N/A" %>

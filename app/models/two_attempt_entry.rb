@@ -41,6 +41,7 @@ class TwoAttemptEntry
       end
       if not found
         results << TwoAttemptEntry.new(
+          is_start_time: is_start_time,
           bib_number: ir.bib_number,
           minutes_1: ir.minutes,
           seconds_1: ir.seconds,

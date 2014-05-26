@@ -82,6 +82,12 @@ class ImportResultsController < ApplicationController
 
   def data_entry
     add_breadcrumb "Enter Single Data"
+
+    @is_start_time = params[:is_start_times] || false
+    @import_result = ImportResult.new
+    @import_result.is_start_time = @is_start_time
+
+    @import_results = @import_results.where(is_start_time: @is_start_time)
   end
 
   def display_csv
@@ -217,7 +223,7 @@ class ImportResultsController < ApplicationController
   end
 
   def load_import_results
-    @import_results = @user.import_results.where(:competition_id => @competition)
+    @import_results = @user.import_results.where(competition_id: @competition)
   end
 
   def load_new_import_result
@@ -230,7 +236,7 @@ class ImportResultsController < ApplicationController
     @competition ||= @import_result.competition
     @user ||= @import_result.user
     add_to_competition_breadcrumb(@competition)
-    add_breadcrumb "Import Results", user_competition_import_results_path(@user, @competition)
+    add_breadcrumb "Import Results (#{@user})", user_competition_import_results_path(@user, @competition)
   end
 end
 

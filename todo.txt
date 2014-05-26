@@ -1,5 +1,8 @@
 Last Re-Arranged May 24, 2014.
 
+- allow editing of two-attempt-entry data, and single-attempt-entry data
+
+- color code the different types of data (start times, end times)
 Questions:
 Section 2.1.4 (page 26)
 - If Scott and Robin compete in 100m, and 1st (32 seconds) and 2nd (33 seconds) respectively

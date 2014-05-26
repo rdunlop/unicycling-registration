@@ -1,0 +1,45 @@
+- unless @judges.empty?
+  %h1 My Judging Events
+
+  %table
+    %thead
+      %tr
+        %th Event
+        %th Locked?
+    %tbody
+      - @judges.each do |judge|
+        %tr
+          %td= scoring_link(judge)
+          %Td= judge.competition.locked?
+  %hr
+
+%h1 Data Entry Menu
+
+%p
+  %a= link_to "(old link )", welcome_judging_menu_path
+
+
+From this page, you can enter data results.
+
+Please choose the event that you want to enter data for:
+
+%h1 Results Summary
+%table.sortable
+  %thead
+    %tr
+      %th Cat
+      %th Event
+      %th Competition
+      %th Enter Start Results
+      %th Enter Finish Results
+  %tbody
+    - Competition.all.each do |competition|
+      - next unless competition.results_importable
+      %tr
+        %td= competition.event.category
+        %td= competition.event
+        %td= competition.name
+        %td= link_to "Start ", data_entry_user_competition_import_results_path(current_user, competition, start_times: true)
+        %td= link_to "Finish ", user_competition_two_attempt_entries_path(current_user, competition)
+
+If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).

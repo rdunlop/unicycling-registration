@@ -23,8 +23,12 @@ class Ability
   end
 
   def set_data_entry_volunteer_abilities(user)
+    can :manage, :data_entry
+
+    can :manage, TwoAttemptEntry
+    can :manage, ImportResult
+
     can :read, Competitor
-    can :judging, Event
 
     can :read, Judge, :user_id => user.id
     # Freestyle
@@ -86,6 +90,7 @@ class Ability
 
     if user.roles.any?
       can :judging_menu, :welcome
+      can :data_entry_menu, :welcome
     end
 
     if user.has_role? :super_admin

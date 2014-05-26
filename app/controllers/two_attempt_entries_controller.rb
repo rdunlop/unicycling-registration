@@ -1,13 +1,12 @@
 class TwoAttemptEntriesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_user, :only => [:index, :create, :data_entry, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
-  before_filter :load_competition, :only => [:index, :create, :data_entry, :import_csv, :import_lif, :publish_to_competition, :destroy_all]
+  before_filter :load_competition, :only => [:index, :create]
   before_filter :load_new_two_attempt_entry, :only => [:create]
+  load_and_authorize_resource :user
   load_and_authorize_resource
 
   before_action :set_breadcrumbs
 
-  public
   # GET /users/#/two_attempt_entry
   # GET /users/#/two_attempt_entrys.json
   def index
@@ -46,10 +45,6 @@ class TwoAttemptEntriesController < ApplicationController
     params.require(:two_attempt_entry).permit(:bib_number, :is_start_time,
       :dq_1, :minutes_1, :seconds_1, :thousands_1,
       :dq_2, :minutes_2, :seconds_2, :thousands_2)
-  end
-
-  def load_user
-    @user = User.find(params[:user_id])
   end
 
   def load_competition

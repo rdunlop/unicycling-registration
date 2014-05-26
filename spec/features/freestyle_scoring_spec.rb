@@ -31,8 +31,8 @@ describe 'Judging an event' do
   include_context 'user is logged in'
 
   describe "user is presented with a judging menu" do
-    it "is on the judging menu" do
-      expect(page).to have_content("My Judging Events")
+    it "is on the data entry menu" do
+      expect(page).to have_content("Data Entry Menu")
     end
 
     describe "in event judging" do

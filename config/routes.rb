@@ -198,6 +198,7 @@ Workspace::Application.routes.draw do
     post "welcome/feedback"
     get "welcome/confirm"
     get 'welcome/judging_menu'
+    get 'welcome/data_entry_menu'
 
     devise_for :users, :controllers => { :registrations => "registrations" }
 
@@ -210,7 +211,10 @@ Workspace::Application.routes.draw do
         end
       end
       resources :competition, :only => [] do
-        resources :two_attempt_entries, :only => [:index, :create]
+        get 'single_attempt_entries', to: 'data_entry#single'
+        post 'single_attempt_entries', to: 'data_entry#create_single'
+        #resources :single_attempt_entries, only: [:index, :create]
+        resources :two_attempt_entries, only: [:index, :create]
         resources :import_results, :only => [:index, :create] do
           collection do
             get  :data_entry

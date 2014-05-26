@@ -62,7 +62,7 @@ class DistanceScoringClass < BaseScoringClass
   end
 
   def results_importable
-    true
+    false
   end
 
   def uses_judges

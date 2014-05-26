@@ -45,6 +45,8 @@ class Competition < ActiveRecord::Base
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
 
+  delegate :results_importable, to: :scoring_helper
+
   def to_s
     event.to_s + " - " + self.name
   end

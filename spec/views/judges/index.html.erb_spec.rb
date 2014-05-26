@@ -6,7 +6,7 @@ describe "judges/index" do
     @ec = FactoryGirl.create(:competition)
     assign(:competition, @ec)
     assign(:events, [])
-    assign(:all_judges, [])
+    assign(:all_data_entry_volunteers, [])
     assign(:race_officials, [])
     assign(:judge_types, [])
     assign(:judges, [])
