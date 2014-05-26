@@ -1,6 +1,7 @@
 Last Re-Arranged May 24, 2014.
 
-- allow editing of two-attempt-entry data, and single-attempt-entry data
+- Add inline editing of data:
+  - allow editing of two-attempt-entry data, and single-attempt-entry data
 
 - color code the different types of data (start times, end times)
 Questions:

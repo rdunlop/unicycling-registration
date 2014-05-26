@@ -1,8 +1,8 @@
 class TwoAttemptEntriesController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource :user
   before_filter :load_competition, :only => [:index, :create]
   before_filter :load_new_two_attempt_entry, :only => [:create]
-  load_and_authorize_resource :user
   load_and_authorize_resource
 
   before_action :set_breadcrumbs

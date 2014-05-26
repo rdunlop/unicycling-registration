@@ -6,17 +6,7 @@
 <p id="notice"></p>
 <%= form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry],
   {:remote => true, :html => {:class => "data_entry"}}) do |f| %>
-  <% if @two_attempt_entry.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@two_attempt_entry.errors.count, "error") %> prohibited this import_result from being saved:</h2>
-
-      <ul>
-      <% @two_attempt_entry.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: "/shared/error_messages", object: @two_attempt_entry %>
 
   <%= f.hidden_field :is_start_time %>
   <table class="sortable two_attempt_entries">
