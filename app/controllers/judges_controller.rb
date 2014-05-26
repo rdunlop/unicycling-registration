@@ -69,7 +69,7 @@ class JudgesController < ApplicationController
     add_breadcrumb "Manage Judges", competition_judges_path(@competition)
 
     @judge_types = JudgeType.where(:event_class => @competition.event_class)
-    @all_judges = User.with_role(:judge).order(:email)
+    @all_data_entry_volunteers = User.with_role(:data_entry_volunteer).order(:email)
     @race_officials = User.with_role(:race_official).order(:email)
 
     @judges = @competition.judges
@@ -91,15 +91,15 @@ class JudgesController < ApplicationController
   def create_normal
     @user = User.find(params[:judge][:user_id])
     respond_to do |format|
-      if @user.add_role(:judge)
-        format.html { redirect_to competition_judges_path(@competition), notice: 'Judge successfully created.' }
+      if @user.add_role(:data_entry_volunteer)
+        format.html { redirect_to competition_judges_path(@competition), notice: 'data_entry_volunteer successfully created.' }
       else
-        format.html { redirect_to competition_judges_path(@competiton), alert: 'Unable to add judge role to user.' }
+        format.html { redirect_to competition_judges_path(@competiton), alert: 'Unable to add data_entry_volunteer role to user.' }
       end
     end
   end
 
-  def chiefs
+  def directors
     @events = Event.all
   end
 

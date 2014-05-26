@@ -113,8 +113,8 @@ Workspace::Application.routes.draw do
         get 'summary'
       end
       member do
-        post :create_chief
-        delete :destroy_chief
+        post :create_director
+        delete :destroy_director
         get :sign_ups
       end
       resources :competitions, :only => [:new, :create]
@@ -283,7 +283,7 @@ Workspace::Application.routes.draw do
 
     resources :judges, :only => [:update] do
       collection do
-        get :chiefs
+        get :directors
       end
       resources :competitors, :only => [] do
         resources :scores, :only => [:new, :edit, :create, :update]

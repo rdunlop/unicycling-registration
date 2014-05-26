@@ -62,23 +62,23 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:normal_user, :event_planner, :judge, :payment_admin, :admin, :super_admin]
+    [:normal_user, :event_planner, :data_entry_volunteer, :payment_admin, :admin, :super_admin]
   end
 
   def self.role_description(role)
     case(role)
       #when :track_official
       #when :results_printer
-      #when :data_importer
-    when :judge
-      "[e.g. Judge Volunteers] Able to view the judging menu, and enter scores for any event"
+    when :data_entry_volunteer
+      "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
     when :admin
       "[e.g. Scott/Connie]
       Able to create onsite payments,
       adjust many details of the system.
-      can create/assign judges
-      Can assign Chief Judges
-      Can import Results
+      Can assign Directors, and do anything a director can do:
+      - can create/assign judges
+      Can assign data_entry_volunteers, and do anything they can do:
+      - Can enter recorded Results
       Can Create Award Labels
       "
     when :super_admin

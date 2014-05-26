@@ -159,7 +159,7 @@ describe "Ability" do
 
       it { should be_able_to(:read, payment) }
     end
-    it { should be_able_to(:create_chief, Judge) }
+    it { should be_able_to(:create_director, Judge) }
     it { should be_able_to(:create, Judge) }
     it { should be_able_to(:create_normal, Judge) }
   end
@@ -173,9 +173,9 @@ describe "Ability" do
     it { should be_able_to(:access, :rails_admin) }
   end
 
-  describe "as a judge" do
+  describe "as a data_entry_volunteer" do
     before(:each) do
-      @user = FactoryGirl.create(:judge_user)
+      @user = FactoryGirl.create(:data_entry_volunteer_user)
     end
     subject { @ability = Ability.new(@user) }
 
@@ -210,14 +210,14 @@ describe "Ability" do
     end
   end
 
-  describe "as a chief_judge" do
+  describe "as a director" do
     before(:each) do
       @competition = FactoryGirl.create(:competition)
       @event_category = @competition.event.event_categories.first
       @competition.save!
       @user = FactoryGirl.create(:user)
-      @user.add_role :chief_judge, @competition.event
-      @user.add_role :judge
+      @user.add_role :director, @competition.event
+      @user.add_role :data_entry_volunteer
     end
     subject { @ability = Ability.new(@user) }
 

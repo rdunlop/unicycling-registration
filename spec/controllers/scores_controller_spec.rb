@@ -3,8 +3,8 @@ require 'spec_helper'
 describe ScoresController do
   before (:each) do
     @admin = FactoryGirl.create(:admin_user)
-    @user = FactoryGirl.create(:judge_user)
-    @other_user = FactoryGirl.create(:judge_user)
+    @user = FactoryGirl.create(:data_entry_volunteer_user)
+    @other_user = FactoryGirl.create(:data_entry_volunteer_user)
     sign_in @admin
 
     @judge = FactoryGirl.create(:judge, :user_id => @user.id)
@@ -51,7 +51,7 @@ describe ScoresController do
       :minor_boundary => 1,
     }
   end
- 
+
   describe "GET edit" do
     it "assigns the requested score as @score" do
       score = @signed_in_scores[0]

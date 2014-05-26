@@ -10,19 +10,19 @@
     </tr>
   </thead>
   <tbody>
-    <% @event.chief_judges.each do |admin| %>
+    <% @event.directors.each do |admin| %>
       <tr>
         <td><%= admin %></td>
         <td>
-          <% if can? :destroy_chief, @event %>
-            <%= link_to "Destroy", destroy_chief_event_path(@event, :user_id => admin), method: :delete %>
+          <% if can? :destroy_director, @event %>
+            <%= link_to "Destroy", destroy_director_event_path(@event, :user_id => admin), method: :delete %>
           <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= form_tag(create_chief_event_path(@event), :method => "post") do |f| %>
+<%= form_tag(create_director_event_path(@event), :method => "post") do |f| %>
   <%= select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s") %>
   <%= submit_tag "Add Director", :class => "focus_button" %>
 <% end %>

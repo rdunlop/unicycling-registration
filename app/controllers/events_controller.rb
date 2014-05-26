@@ -67,18 +67,18 @@ class EventsController < ApplicationController
     end
   end
 
-  # POST /events/1/create_chief
-  def create_chief
+  # POST /events/1/create_director
+  def create_director
     user = User.find(params[:user_id])
-    user.add_role(:chief_judge, @event)
+    user.add_role(:director, @event)
 
     redirect_to event_path(@event), notice: 'Created Director'
   end
 
-  # DELETE /events/1/destroy_chief
-  def destroy_chief
+  # DELETE /events/1/destroy_director
+  def destroy_director
     user = User.find(params[:user_id])
-    user.remove_role(:chief_judge, @event)
+    user.remove_role(:director, @event)
 
     redirect_to event_path(@event), notice: 'Removed Director'
   end

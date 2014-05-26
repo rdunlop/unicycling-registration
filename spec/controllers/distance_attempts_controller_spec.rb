@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe DistanceAttemptsController do
   before(:each) do
-    @judge_user = FactoryGirl.create(:judge_user)
-    sign_in @judge_user
+    @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)
+    sign_in @data_entry_volunteer_user
   end
 
   describe "GET 'index'" do
@@ -124,8 +124,8 @@ describe DistanceAttemptsController do
 
         assigns(:distance_attempts).should eq([da])
     end
-    it "should not be accessible to non-judges" do
-        sign_out @judge_user
+    it "should not be accessible to non-data_entry_volunteers" do
+        sign_out @data_entry_volunteer_user
         @normal_user = FactoryGirl.create(:user)
         sign_in @normal_user
 

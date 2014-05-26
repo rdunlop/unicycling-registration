@@ -101,14 +101,14 @@ describe Event do
       event.num_competitors.should == 0
     end
   end
-  describe "when there is a chief_judge" do
+  describe "when there is a director" do
     before(:each) do
       @user = FactoryGirl.create(:user)
-      @user.add_role(:chief_judge, @ev)
+      @user.add_role(:director, @ev)
     end
 
-    it "has chief_judges" do
-      @ev.chief_judges.should == [@user]
+    it "has directors" do
+      @ev.directors.should == [@user]
     end
   end
 end

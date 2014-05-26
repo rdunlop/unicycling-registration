@@ -3,8 +3,8 @@ require 'spec_helper'
 describe StreetScoresController do
   before (:each) do
     @admin = FactoryGirl.create(:admin_user)
-    @user = FactoryGirl.create(:judge_user)
-    @other_user = FactoryGirl.create(:judge_user)
+    @user = FactoryGirl.create(:data_entry_volunteer_user)
+    @other_user = FactoryGirl.create(:data_entry_volunteer_user)
     sign_in @admin
 
     @judge = FactoryGirl.create(:judge, :user_id => @user.id)
@@ -19,7 +19,7 @@ describe StreetScoresController do
     sign_out @admin
 
     # create a chief_judge, so that this lowly judge-user can see the scores page
-    @user.add_role :chief_judge, @judge.event
+    @user.add_role :director, @judge.event
 
     sign_in @user
   end

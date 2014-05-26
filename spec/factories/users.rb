@@ -35,17 +35,17 @@ FactoryGirl.define do
       after(:create) {|user| user.add_role :super_admin }
     end
 
-    factory :judge_user do
-      after(:create) {|user| user.add_role :judge }
+    factory :data_entry_volunteer_user do
+      after(:create) {|user| user.add_role :data_entry_volunteer }
     end
 
     factory :payment_admin do
       after(:create) { |user| user.add_role :payment_admin }
     end
 
-    factory :chief_judge do
-      after(:create) {|user| user.add_role :judge }
-      after(:create) {|user| user.add_role :chief_judge, EventCategory }
+    factory :director do
+      after(:create) {|user| user.add_role :data_entry_volunteer }
+      after(:create) {|user| user.add_role :director, EventCategory }
     end
 
     after(:create) { |user| user.confirm! if ENV["MAIL_SKIP_CONFIRMATION"].nil? }

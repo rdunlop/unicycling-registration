@@ -7,7 +7,7 @@ describe JudgesController do
     sign_in @super_admin
     @ev = FactoryGirl.create(:event)
     @ec = FactoryGirl.create(:competition, :event => @ev)
-    @judge_user = FactoryGirl.create(:judge_user)
+    @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)
     @judge_type = FactoryGirl.create(:judge_type, :event_class => @ec.event_class)
     @other_judge_type = FactoryGirl.create(:judge_type, :event_class => "Flatland")
   end
@@ -48,7 +48,7 @@ describe JudgesController do
         post :create, {:judge => {:user_id => 1}, :competition_id => @ec.id}
         assigns(:judge).should be_a_new(Judge)
         assigns(:judge_types).should == [@judge_type]
-        assigns(:all_judges).should == [@judge_user]
+        assigns(:all_data_entry_volunteers).should == [@data_entry_volunteer_user]
       end
 
       it "re-renders the 'index' template" do
@@ -101,9 +101,9 @@ describe JudgesController do
     end
   end
 
-  describe "GET chiefs" do
-    it "displays the chiefs" do
-      get :chiefs
+  describe "GET directors" do
+    it "displays the directors" do
+      get :directors
       assigns(:events).should == [@ev]
     end
   end
@@ -111,13 +111,13 @@ describe JudgesController do
   describe "GET index" do
     it "displays all of the judges for all" do
       get :index, {:competition_id => @ec}
-      assigns(:all_judges).should == [@judge_user]
+      assigns(:all_data_entry_volunteers).should == [@data_entry_volunteer_user]
     end
 
     it "lists this events' judges" do
-      other_judge_user = FactoryGirl.create(:user)
-      other_judge_user.add_role(:judge)
-      @judge = FactoryGirl.create(:judge, :user => @judge_user, :competition => @ec)
+      other_data_entry_volunteer_user = FactoryGirl.create(:user)
+      other_data_entry_volunteer_user.add_role(:data_entry_volunteer)
+      @judge = FactoryGirl.create(:judge, :user => @data_entry_volunteer_user, :competition => @ec)
       get :index, {:competition_id  => @ec}
       assigns(:judges).should == [@judge]
     end
@@ -133,7 +133,7 @@ describe JudgesController do
       user = FactoryGirl.create(:user)
       post :create_normal, {:competition_id => @ec.id, :judge => {:user_id => user.id}}
       user.reload
-      user.has_role?(:judge).should == true
+      user.has_role?(:data_entry_volunteer).should == true
     end
   end
 end

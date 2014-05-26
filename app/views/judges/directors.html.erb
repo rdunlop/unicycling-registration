@@ -13,7 +13,7 @@
             <tr>
                 <td><%= link_to event, event_path(event) %></td>
                 <td>
-                  <% User.with_role(:chief_judge, event).each do |user| %>
+                  <% User.with_role(:director, event).each do |user| %>
                     <%= user %>
                   <% end %>
                 </td>

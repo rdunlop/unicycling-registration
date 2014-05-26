@@ -80,8 +80,8 @@ class Event < ActiveRecord::Base
     name
   end
 
-  def chief_judges
-    User.with_role(:chief_judge, self)
+  def directors
+    User.with_role(:director, self)
   end
 
   # determine the number of people who have signed up for this event

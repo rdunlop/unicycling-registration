@@ -24,7 +24,7 @@ shared_context "judge_is_assigned_to_competition" do |options = {}|
 end
 
 describe 'Judging an event' do
-  let!(:user) { FactoryGirl.create(:judge_user) }
+  let!(:user) { FactoryGirl.create(:data_entry_volunteer_user) }
   include_context 'basic event configuration'
   include_context 'freestyle_event', :name => "Individual"
   include_context "judge_is_assigned_to_competition"

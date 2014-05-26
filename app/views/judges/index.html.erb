@@ -1,12 +1,12 @@
 <h1>Manage <%= @competition %> Judges/Officials</h1>
 
 <table class="sortable">
-  <caption>All globally-enabled Judge Accounts</caption>
+  <caption>All globally-enabled Data Entry Volunteer Accounts</caption>
   <thead>
     <th>Email</th>
   </thead>
   <tbody>
-    <% @all_judges.each do |judge| %>
+    <% @all_data_entry_volunteers.each do |judge| %>
       <tr>
         <td><%= judge %></td>
       </tr>
@@ -61,8 +61,8 @@ Allows users to see the judging menu
   <%= f.submit %>
 <% end %>
 
-<h2>Set User as 'Judge'</h2>
-Allows users to see the judging menu
+<h2>Set User as 'data_entry_volunteer'</h2>
+Allows users to see the data_entry_volunteer menu
 <%= form_for [@competition, @judge], :url => create_normal_competition_judges_path(@competition) do |f| %>
   <%= f.select :user_id, User.all.map { |user| [user, user.id] } %>
   <%= f.submit %>

@@ -52,7 +52,7 @@ Category Event Competition #Sign Up #Competitors #Results Entered
 - Need to create a way to Print the Imported Data, for use when doing Data Entry for a MUni Event?
  - NEed to descide when we want to use ImportResult#data_entry vs TimeResults#Index for data entry
 - ADd ability for Chief Judge to enter Two-Attempt_entry Data. (or for a judge to do so?).
- - Perhaps have any :judge be able to enter data into the import table, but only allow chief judge to import that data across (once verified)
+ - Perhaps have any :judge be able to enter data into the import table, but only allow director to import that data across (once verified)
 
 
 - Create role of "Award Printer"
@@ -61,7 +61,6 @@ Category Event Competition #Sign Up #Competitors #Results Entered
 
 Nice to have:
 
-- Change the internals of :chief_judge to match the external name of "Director"
 Low Priority:
 - BBall: Team Captain/Referee toggle
 -
@@ -92,7 +91,7 @@ ADMIN Config-Watching View:
 - Clean up StreetScore Controller, and adjust it to match the rulebook for scoring.
 - Add a printed page for paper-recording of Street Scores.
 - Should Chief Judges be allowed/able to Update/Delete Scores and StreetScores? (or should only the specific Judge be able to?) I think yes.
-- link chief-judge to competitions#export_scores, possibly also make it nicer?
+- link director to competitions#export_scores, possibly also make it nicer?
 
 - Show the "attempt number" which was faster.
 - Disqualified should be "no"/"" instead of "true/false"

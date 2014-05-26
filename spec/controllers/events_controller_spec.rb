@@ -117,22 +117,22 @@ describe EventsController do
     end
   end
 
-  describe "POST create_chief" do
-    it "creates a new chief judge" do
+  describe "POST create_director" do
+    it "creates a new director" do
       user = FactoryGirl.create(:user)
       event = FactoryGirl.create(:event)
-      post :create_chief, {:user_id => user.id, :id => event.id}
-      User.with_role(:chief_judge, event).should == [user]
+      post :create_director, {:user_id => user.id, :id => event.id}
+      User.with_role(:director, event).should == [user]
     end
   end
 
-  describe "DELETE chief" do
-    it "can delete a chief_judge" do
+  describe "DELETE director" do
+    it "can delete a director" do
       user = FactoryGirl.create(:user)
       event = FactoryGirl.create(:event)
-      user.add_role :chief_judge, event
-      delete :destroy_chief, {:user_id => user.id, :id => event.id}
-      User.with_role(:chief_judge, event).should == []
+      user.add_role :director, event
+      delete :destroy_director, {:user_id => user.id, :id => event.id}
+      User.with_role(:director, event).should == []
     end
   end
 

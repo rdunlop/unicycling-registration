@@ -3,8 +3,8 @@ require 'spec_helper'
 describe StandardScoresController do
   before (:each) do
     @admin = FactoryGirl.create(:admin_user)
-    @user = FactoryGirl.create(:judge_user)
-    @other_user = FactoryGirl.create(:judge_user)
+    @user = FactoryGirl.create(:data_entry_volunteer_user)
+    @other_user = FactoryGirl.create(:data_entry_volunteer_user)
     sign_in @admin
 
     @judge = FactoryGirl.create(:judge, :user_id => @user.id)
@@ -22,7 +22,7 @@ describe StandardScoresController do
   def valid_attributes
     { }
   end
- 
+
   describe "GET index" do
     it "assigns all competitors as @competitors" do
       get :index, {:judge_id => @judge.id}

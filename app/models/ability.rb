@@ -22,7 +22,7 @@ class Ability
 
   end
 
-  def set_judge_abilities(user)
+  def set_data_entry_volunteer_abilities(user)
     can :read, Competitor
     can :judging, Event
 
@@ -41,43 +41,43 @@ class Ability
     end
   end
 
-  def set_chief_judge_abilities(user)
-    # :read is main chief_judge menu-page
+  def set_director_abilities(user)
+    # :read is main director menu-page
     # :results is for printing
     can [:read, :results, :sign_ups], Event do |ev|
-      user.has_role? :chief_judge, ev
+      user.has_role? :director, ev
     end
     can :sign_ups, EventCategory do |ec|
-      user.has_role? :chief_judge, ec.event
+      user.has_role? :director, ec.event
     end
     can :manage, Competitor do |comp|
-      user.has_role? :chief_judge, comp.competition.try(:event)
+      user.has_role? :director, comp.competition.try(:event)
     end
 
     can [:read], Score do |score|
-      user.has_role? :chief_judge, score.competition.event
+      user.has_role? :director, score.competition.event
     end
 
     can [:announcer, :heat_recording, :two_attempt_recording, :results], Competition do |comp|
-      user.has_role? :chief_judge, comp.event
+      user.has_role? :director, comp.event
     end
     can [:freestyle_scores, :distance_attempts,
       :export_scores, :set_places, :lock], Competition do |comp|
-      user.has_role? :chief_judge, comp.event
+      user.has_role? :director, comp.event
       end
 
     can :manage, Member do |member|
-      user.has_role? :chief_judge, member.competitor.event
+      user.has_role? :director, member.competitor.event
     end
     can :manage, ImportResult do |import_result|
-      user.has_role? :chief_judge, import_result.competition.event
+      user.has_role? :director, import_result.competition.event
     end
     can :manage, TimeResult do |time_result|
-      user.has_role? :chief_judge, time_result.competition.event
+      user.has_role? :director, time_result.competition.event
     end
 
     can :manage, Judge do |judge|
-      user.has_role? :chief_judge, judge.competition.event
+      user.has_role? :director, judge.competition.event
     end
   end
 
@@ -118,12 +118,12 @@ class Ability
     end
 
     # Scoring abilities
-    if user.has_role? :judge
-      set_judge_abilities(user)
+    if user.has_role? :data_entry_volunteer
+      set_data_entry_volunteer_abilities(user)
     end
 
-    if user.has_role? :chief_judge, :any
-      set_chief_judge_abilities(user)
+    if user.has_role? :director, :any
+      set_director_abilities(user)
     end
 
     define_payment_ability(user)
