@@ -63,7 +63,7 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Payments', :url => summary_payments_path, :active => current_page?(summary_payments_path), :permitted => can?(:summary, Payment))
       heading.entries << Menu::MenuEntry.new(:title => 'Age Group Type', :url => age_group_types_path, :active => current_page?(age_group_types_path), :permitted => can?(:manage, AgeGroupType))
       heading.entries << Menu::MenuEntry.new(:title => 'Events Report', :url => summary_events_path, :active => current_page?(summary_events_path), :permitted => can?(:summary, Event))
-      heading.entries << Menu::MenuEntry.new(:title => 'Directors', :url => directors_path, :active => current_page?(directors_path), :permitted => can?(:manage, Judge))
+      heading.entries << Menu::MenuEntry.new(:title => 'Directors', :url => directors_judges_path, :active => current_page?(directors_judges_path), :permitted => can?(:manage, Judge))
       heading.entries << Menu::MenuEntry.new(:title => 'UCP Export/Import', :url => admin_export_index_path, :active => current_page?(admin_export_index_path), :permitted => can?(:manage, :all))
       heading.entries << Menu::MenuEntry.new(:title => 'Modification History', :url => rails_admin_path, :active => current_page?(rails_admin_path), :permitted => can?(:access, :rails_admin))
       if @config.standard_skill
