@@ -26,7 +26,6 @@ class Ability
     can :manage, :data_entry
 
     can :manage, TwoAttemptEntry
-    can :manage, ImportResult
 
     can :read, Competitor
 
