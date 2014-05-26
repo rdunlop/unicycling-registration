@@ -25,6 +25,13 @@ class ImportResult < ActiveRecord::Base
   validates :user_id, :bib_number, :presence => true
   validate :results_for_competition
 
+
+  def self.status_values
+    ["DQ"]
+  end
+
+  validates :status, :inclusion => { :in => self.status_values, :allow_nil => true }
+
   belongs_to :user
   belongs_to :competition
 

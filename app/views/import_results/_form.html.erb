@@ -34,7 +34,7 @@
         <td><%= f.number_field :minutes %></td>
         <td><%= f.number_field :seconds %></td>
         <td><%= f.number_field :thousands %></td>
-        <td><%= f.check_box :disqualified %></td>
+        <td><%= f.select :status, ImportResult.status_values, include_blank: true %></td>
         <td><%= f.check_box :is_start_time %></td>
         <td><%= f.submit "Submit", :class => "multiclick" %></td>
       </tr>

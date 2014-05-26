@@ -81,7 +81,7 @@ class TwoAttemptEntry
         minutes: minutes_1,
         seconds: seconds_1,
         thousands: thousands_1,
-        disqualified: dq_1
+        status: dq_1 ? "DQ" : nil
         )
   end
 
@@ -95,7 +95,7 @@ class TwoAttemptEntry
         minutes: minutes_2,
         seconds: seconds_2,
         thousands: thousands_2,
-        disqualified: dq_2
+        status: dq_2 ? "DQ" : nil
         )
   end
 
