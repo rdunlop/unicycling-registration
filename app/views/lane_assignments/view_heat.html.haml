@@ -1,26 +1,26 @@
-%h1= "#{@competition} Heat # #{@heat}"
+%p.previous_heat= link_to "Previous Heat", view_heat_competition_lane_assignments_path(@competition, heat: @heat - 1) unless @heat <= 1
+
+%p.next_heat= link_to "Next Heat", view_heat_competition_lane_assignments_path(@competition, heat: @heat +1 ) unless @heat.nil?
+
+%h2= @competition
+
+%h1.heat_number= "Heat # #{@heat}"
 
 Lane Assignments
 
-%table
-  %thead
-    %tr
-      %th ID
-      %th Lane
-      %th Status
-      %th Comments
-  %tbody
-    - @lane_assignments.each do |lane|
-      %tr
-        %td= lane.registrant_id
-        %td= lane.lane
-        %td= lane.status
-        %td= lane.comments
-
-= form_for @dq_request, url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
-  = f.label :bib_number
-  = f.select :bib_number, @lane_assignments.map{|l_a| l_a.registrant_id}
-  = f.hidden_field :heat
-  = f.label :comments
-  = f.text_field :comments
-  = f.submit "DQ this competitor", data: { confirm: "Are you sure?" }
+%ul.lane_assignments_list
+  - @lane_assignments.each do |lane|
+    %li.occupied_lane
+      %p.lane= lane.lane
+      %p.bib_number= "##{lane.registrant_id}"
+      %p.registrant= "#{lane.registrant}"
+      %p{class: "status-#{lane.status}"}= lane.status
+      %p= lane.comments
+      %div.dq_option{class: "dq_option#{lane.lane}"}
+        = form_for DQRequest.new(bib_number: lane.registrant_id, heat: @heat), url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
+          = f.hidden_field :bib_number
+          = f.hidden_field :heat
+          = f.label :comments
+          = f.text_field :comments
+          = f.submit "DQ this competitor", data: { confirm: "Are you sure?" }
+      %span.unhide_dq.js--toggle{data: {toggle: "dq_option#{lane.lane}"}} Show DQ option

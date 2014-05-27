@@ -13,6 +13,23 @@
           %Td= judge.competition.locked?
   %hr
 
+- if can? :manage, LaneAssignment
+  Lane Assignment Management
+
+  %table
+    %thead
+      %tr
+        %th Competition
+        %th Lane Assignment Entry
+        %th View Heats
+    %tbody
+      - Competition.all.each do |competition|
+        - next unless competition.uses_lane_assignments
+        %tr
+          %td= competition
+          %td= link_to "Enter", competition_lane_assignments_path(competition)
+          %td= link_to "View", view_heat_competition_lane_assignments_path(competition)
+
 %h1 Data Entry Menu
 
 %p

@@ -7,9 +7,9 @@ class LaneAssignmentsController < ApplicationController
   before_action :set_parent_breadcrumbs, only: [:index, :create]
 
   def view_heat
-    @heat = params[:heat]
+    @heat = params[:heat].to_i if params[:heat]
+    @heat ||= 1
     @lane_assignments = @competition.lane_assignments.where(heat: @heat)
-    @dq_request = DQRequest.new(heat: @heat)
   end
 
   def dq_competitor

@@ -1,0 +1,44 @@
+.previous_heat {
+  float: left;
+}
+
+.next_heat {
+  float: right;
+}
+
+.heat_number {
+  color: blue;
+}
+
+.lane_assignments_list {
+  .occupied_lane {
+    display: inline-block;
+    border-style: solid;
+    vertical-align: top;
+    width: 10%;
+  }
+  .lane {
+    font-weight: bold;
+    font-size: 40pt;
+  }
+
+  .bib_number {
+    font-size: 30pt;
+  }
+  .registrant {
+    font-size: 30pt;
+  }
+  .status-DQ {
+    background-color: red;
+    font-size: 40px;
+  }
+  .dq_option {
+    display: none;
+  }
+
+  .unhide_dq {
+    cursor: pointer;
+    color: grey
+  }
+}
+
