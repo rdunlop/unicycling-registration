@@ -20,4 +20,16 @@ class LaneAssignment < ActiveRecord::Base
 
 
   default_scope { order(:heat, :lane) }
+
+  def status
+    matching_record.try(:status)
+  end
+
+  def comments
+    matching_record.try(:comments)
+  end
+
+  def matching_record
+    @matching_record ||= ImportResult.where(competition: competition, bib_number: registrant_id).first
+  end
 end

@@ -1,10 +1,41 @@
 class LaneAssignmentsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_competition, :only => [:index, :create]
+  before_filter :load_competition, :only => [:index, :create, :view_heat, :dq_competitor]
   before_filter :load_new_lane_assignment, :only => [:create]
   load_and_authorize_resource
 
   before_action :set_parent_breadcrumbs, only: [:index, :create]
+
+  def view_heat
+    @heat = params[:heat]
+    @lane_assignments = @competition.lane_assignments.where(heat: @heat)
+    @dq_request = DQRequest.new(heat: @heat)
+  end
+
+  def dq_competitor
+    @dq_request = DQRequest.new(params[:dq_request])
+
+    bib_number = @dq_request.bib_number
+    @heat = @dq_request.heat
+
+    @ir = ImportResult.new(
+      bib_number: bib_number,
+      status: "DQ",
+      comments: @dq_request.comments,
+      competition: @competition,
+      user: current_user
+      )
+
+    respond_to do |format|
+      if @ir.save
+        format.html { redirect_to view_heat_competition_lane_assignments_path(@competition, heat: @heat), notice: 'Competitor successfully dq.' }
+      else
+        add_breadcrumb "View Heat"
+        @lane_assignments = @competition.lane_assignments.where(heat: heat)
+        format.html { render action: "view_heat" }
+      end
+      end
+  end
 
   # GET /competitions/#/lane_assignments
   # GET /competitions/#/lane_assignments.json

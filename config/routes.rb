@@ -280,7 +280,12 @@ Workspace::Application.routes.draw do
         end
       end
       resources :time_results, :only => [:index, :create]
-      resources :lane_assignments, :only => [:index, :create]
+      resources :lane_assignments, :only => [:index, :create] do
+        collection do
+          get :view_heat
+          post :dq_competitor
+        end
+      end
       resources :external_results, :shallow => true, :except => [:new, :show]
     end
     resources :lane_assignments, :except => [:new, :index, :create, :show]

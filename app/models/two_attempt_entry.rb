@@ -27,7 +27,7 @@ class TwoAttemptEntry
 
   def self.entries_for(user, competition, is_start_time)
     results = []
-    user.import_results.where(is_start_time: is_start_time, competition: competition).order(:created_at, :id).each do |ir|
+    user.import_results.where(is_start_time: is_start_time, competition: competition).order(:attempt_number, :created_at, :id).each do |ir|
       found = false
       results.each do |res|
         if res.bib_number == ir.bib_number
@@ -73,6 +73,7 @@ class TwoAttemptEntry
 
   def i1
      @i1 ||= ImportResult.new(
+        attempt_number: 1,
         user_id: user.try(:id),
         competition_id: competition.try(:id),
         bib_number: bib_number,
@@ -87,6 +88,7 @@ class TwoAttemptEntry
 
   def i2
      @i2 ||= ImportResult.new(
+        attempt_number: 2,
         user_id: user.id,
         competition_id: competition.id,
         bib_number: bib_number,
