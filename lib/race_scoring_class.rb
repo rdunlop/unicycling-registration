@@ -76,7 +76,9 @@ class RaceScoringClass < BaseScoringClass
       minutes: import_result.minutes,
       seconds: import_result.seconds,
       thousands: import_result.thousands,
-      disqualified: import_result.disqualified,
+      status: import_result.status,
+      comments: import_result.comments,
+      attempt_number: import_result.attempt_number,
       is_start_time: import_result.is_start_time)
   end
 

@@ -81,7 +81,7 @@ describe OrderedResultCalculator do
 
     it "places DQ's as 'DQ'" do
       @tr1.thousands = 1
-      @tr1.disqualified = true
+      @tr1.status = "DQ"
       @tr1.save!
 
       recalc

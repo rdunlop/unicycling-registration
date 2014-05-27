@@ -1,0 +1,30 @@
+= form_for(@time_result.new_record? ? [@competition, @time_result] : [@time_result]) do |f|
+  = render partial: "/shared/error_messages", object: @time_result
+  %table
+    %thead
+      %tr
+        %th= f.label :registrant_id
+        %th= f.label :minutes
+        %th= f.label :seconds
+        %th= f.label :thousands
+        %th= f.label :status
+        %th= f.label :comments
+        %th= f.label :attempt_number
+        %th
+    %tbody
+      %tr
+        %td.ui-widget
+          = f.select :competitor_id, @competition.competitors.all.map { |comp| ["#{comp.external_id}-#{comp}", comp.id] }, {:include_blank => true}, autofocus: true
+        %td= f.number_field :minutes
+        %td= f.number_field :seconds
+        %td= f.number_field :thousands
+        %td= f.select :status, TimeResult.status_values, include_blank: true
+        %td= f.text_field :comments
+        %td= f.number_field :attempt_number
+        %td= f.submit
+
+:javascript
+  $(function() {
+    $( "#time_result_registrant_id" ).combobox();
+  });
+

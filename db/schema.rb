@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526232659) do
+ActiveRecord::Schema.define(version: 20140527013531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -689,10 +689,12 @@ ActiveRecord::Schema.define(version: 20140526232659) do
     t.integer  "minutes"
     t.integer  "seconds"
     t.integer  "thousands"
-    t.boolean  "disqualified"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "is_start_time", default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "is_start_time",  default: false
+    t.integer  "attempt_number"
+    t.string   "status"
+    t.text     "comments"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_event_category_id", using: :btree

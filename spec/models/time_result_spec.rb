@@ -2,15 +2,17 @@
 #
 # Table name: time_results
 #
-#  id            :integer          not null, primary key
-#  competitor_id :integer
-#  minutes       :integer
-#  seconds       :integer
-#  thousands     :integer
-#  disqualified  :boolean
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  is_start_time :boolean          default(FALSE)
+#  id             :integer          not null, primary key
+#  competitor_id  :integer
+#  minutes        :integer
+#  seconds        :integer
+#  thousands      :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  is_start_time  :boolean          default(FALSE)
+#  attempt_number :integer
+#  status         :string(255)
+#  comments       :text
 #
 
 require 'spec_helper'
@@ -26,11 +28,6 @@ describe TimeResult do
 
   it "requires a competitor" do
     @tr.competitor = nil
-    @tr.valid?.should == false
-  end
-
-  it "requires a DQ value" do
-    @tr.disqualified = nil
     @tr.valid?.should == false
   end
 
@@ -80,7 +77,7 @@ describe TimeResult do
       @tr.full_time.should == "19:16.701"
     end
     it "doesn't print the values if it is disqualified" do
-      @tr.disqualified = true
+      @tr.status = "DQ"
       @tr.full_time.should == ""
     end
     it "shouldn't print the thousands if they are 0" do

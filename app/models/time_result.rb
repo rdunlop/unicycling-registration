@@ -2,15 +2,17 @@
 #
 # Table name: time_results
 #
-#  id            :integer          not null, primary key
-#  competitor_id :integer
-#  minutes       :integer
-#  seconds       :integer
-#  thousands     :integer
-#  disqualified  :boolean
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  is_start_time :boolean          default(FALSE)
+#  id             :integer          not null, primary key
+#  competitor_id  :integer
+#  minutes        :integer
+#  seconds        :integer
+#  thousands      :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  is_start_time  :boolean          default(FALSE)
+#  attempt_number :integer
+#  status         :string(255)
+#  comments       :text
 #
 
 class TimeResult < ActiveRecord::Base
@@ -19,21 +21,30 @@ class TimeResult < ActiveRecord::Base
 
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
   validates :competitor_id, :presence => true
-  validates :disqualified, :inclusion => { :in => [true, false] } # because it's a boolean
+
+  def self.status_values
+    ["DQ"]
+  end
+
+  validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
+
   validates :is_start_time, :inclusion => { :in => [true, false] } # because it's a boolean
 
-  scope :fastest_first, -> { order("disqualified, minutes, seconds, thousands") }
+  scope :fastest_first, -> { order("status DESC, minutes, seconds, thousands") }
   scope :start_times, -> { where(:is_start_time => true) }
   scope :finish_times, -> { where(:is_start_time => false) }
 
   after_initialize :init
 
   def init
-    self.disqualified = false if self.disqualified.nil?
     self.is_start_time = false if self.is_start_time.nil?
     self.minutes = 0 if self.minutes.nil?
     self.seconds = 0 if self.seconds.nil?
     self.thousands = 0 if self.thousands.nil?
+  end
+
+  def disqualified
+    status == "DQ"
   end
 
   def as_json(options={})

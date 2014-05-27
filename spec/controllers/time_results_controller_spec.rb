@@ -13,7 +13,7 @@ describe TimeResultsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      disqualified: false,
+      status: nil,
       minutes: 0,
       seconds: 1,
       thousands: 2,
@@ -78,24 +78,24 @@ describe TimeResultsController do
       it "assigns a newly created but unsaved event_category as @event_category" do
         # Trigger the behavior that occurs when invalid params are submitted
         TimeResult.any_instance.stub(:save).and_return(false)
-        post :create, {:competition_id => @competition.id, :time_result => {:disqualified => true}}
+        post :create, {:competition_id => @competition.id, :time_result => {status: "DQ"}}
         assigns(:time_result).should be_a_new(TimeResult)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         TimeResult.any_instance.stub(:save).and_return(false)
-        post :create, {:competition_id => @competition.id, :time_result => {:disqualified => true}}
+        post :create, {:competition_id => @competition.id, :time_result => {status: "DQ"}}
         response.should render_template("index")
       end
       it "loads the time_results" do
         TimeResult.any_instance.stub(:save).and_return(false)
-        post :create, {:competition_id => @competition.id, :time_result => {:disqualified => true}}
+        post :create, {:competition_id => @competition.id, :time_result => {status: "DQ"}}
         assigns(:time_results).should == []
       end
       it "loads the event" do
         TimeResult.any_instance.stub(:save).and_return(false)
-        post :create, {:competition_id => @competition.id, :time_result => {:disqualified => true}}
+        post :create, {:competition_id => @competition.id, :time_result => {status: "DQ"}}
         assigns(:competition).should == @competition
       end
     end
@@ -125,7 +125,7 @@ describe TimeResultsController do
         time_result = TimeResult.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         TimeResult.any_instance.stub(:save).and_return(false)
-        put :update, {:id => time_result.to_param, :time_result => {:disqualified => true}}
+        put :update, {:id => time_result.to_param, :time_result => {status: "DQ"}}
         assigns(:time_result).should eq(time_result)
       end
 
@@ -133,7 +133,7 @@ describe TimeResultsController do
         time_result = TimeResult.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         TimeResult.any_instance.stub(:save).and_return(false)
-        put :update, {:id => time_result.to_param, :time_result => {:disqualified => true}}
+        put :update, {:id => time_result.to_param, :time_result => {status: "DQ"}}
         response.should render_template("edit")
       end
     end
