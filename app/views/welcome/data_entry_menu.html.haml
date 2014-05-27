@@ -57,8 +57,8 @@ Please choose the event that you want to enter data for:
         %td= competition.event.category
         %td= competition.event
         %td= competition.name
-        %td= link_to "Start ", user_competition_single_attempt_entries_path(current_user, competition, is_start_times: true)
-        %td= link_to "Finish ", user_competition_two_attempt_entries_path(current_user, competition)
+        %td= start_data_entry_link(current_user, competition)
+        %td= end_data_entry_link(current_user, competition)
         %td= link_to "View", review_user_competition_import_results_path(current_user, competition)
 
 If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).

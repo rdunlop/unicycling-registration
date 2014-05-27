@@ -55,7 +55,18 @@
     <li>If you need more sources, you can do so by Editing the Competition after creation.</li>
   </ul>
 
-  <h2>Settings For gathering/ranking the results</h2>
+  <h2>Settings For gathering the results</h2>
+
+  <div class="field">
+    <%= f.label :start_data_type %><br />
+    <%= f.select :start_data_type, Competition.data_recording_types, :include_blank => true %>
+  </div>
+  <div class="field">
+    <%= f.label :end_data_type %><br />
+    <%= f.select :end_data_type, Competition.data_recording_types, :include_blank => true %>
+  </div>
+
+  <h2>Settings for Scoring the results</h2>
   <div class="field">
     <%= f.label :age_group_type_id %>
     <%= f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, :include_blank => true  %>

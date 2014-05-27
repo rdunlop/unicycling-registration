@@ -12,6 +12,8 @@
 #  has_experts       :boolean          default(FALSE)
 #  has_age_groups    :boolean          default(FALSE)
 #  scoring_class     :string(255)
+#  start_data_type   :string(255)
+#  end_data_type     :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

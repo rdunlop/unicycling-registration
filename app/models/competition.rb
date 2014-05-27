@@ -12,6 +12,8 @@
 #  has_experts       :boolean          default(FALSE)
 #  has_age_groups    :boolean          default(FALSE)
 #  scoring_class     :string(255)
+#  start_data_type   :string(255)
+#  end_data_type     :string(255)
 #
 
 class Competition < ActiveRecord::Base
@@ -33,6 +35,11 @@ class Competition < ActiveRecord::Base
 
   has_many :lane_assignments, :dependent => :destroy
 
+  def self.data_recording_types
+    ["Two Attempt Distance", "Single Attempt", "Track E-Timer"]
+  end
+
+  validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true}
 
   def self.scoring_classes
     ["Freestyle", "Distance", "Two Attempt Distance", "Flatland", "Street", "Ranked"]
