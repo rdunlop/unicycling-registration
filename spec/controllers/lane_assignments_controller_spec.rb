@@ -5,6 +5,8 @@ describe LaneAssignmentsController do
     sign_in FactoryGirl.create(:admin_user)
     @competition = FactoryGirl.create(:competition, :scoring_class => "Distance")
     @reg = FactoryGirl.create(:registrant)
+    @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+    @competitor.members.first.update_attribute(:registrant_id, @reg.id)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -13,7 +15,7 @@ describe LaneAssignmentsController do
   def valid_attributes
     { "heat" => 1,
       "lane" => 2,
-      "registrant_id" => @reg.bib_number}
+      "competitor_id" => @reg.bib_number}
   end
 
   let(:lane_assignment) { FactoryGirl.create(:lane_assignment, :competition => @competition) }

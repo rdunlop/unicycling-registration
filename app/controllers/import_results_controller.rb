@@ -22,6 +22,11 @@ class ImportResultsController < ApplicationController
   def review
     @import_results = ImportResult.where(:competition_id => @competition)
 
+    @heat = params[:heat]
+    if @heat
+      #@import_results = @import_results.where
+    end
+
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -159,7 +164,7 @@ class ImportResultsController < ApplicationController
         err = err + 1
       end
     end
-    redirect_to user_competition_import_results_path(@user, @competition), notice: "#{n} rows added, and #{err} errors"
+    redirect_to review_user_competition_import_results_path(@user, @competition, heat: heat), notice: "#{n} rows added, and #{err} errors"
   end
 
   # DELETE /users/#/competitions/#/import_results/destroy_all

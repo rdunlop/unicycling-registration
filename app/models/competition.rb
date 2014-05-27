@@ -117,11 +117,8 @@ class Competition < ActiveRecord::Base
       member = competitor.members.build
       member.registrant = reg
     end
-    if competitor.save
-      "Created Group Competitor"
-    else
-      raise "Unable to create group competitor"
-    end
+    competitor.save!
+    competitor
   end
 
   def create_competitors_from_registrants(registrants)

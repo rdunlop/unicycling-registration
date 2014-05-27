@@ -1,5 +1,18 @@
 Last Re-Arranged May 24, 2014.
 
+- Should the new competitor be created when the Lane Assignment is created, or when the data is "approved" by the data-entry person. I think it should be when the Lane Assignment is created, because once that happens, we want to have a result for every Competitor.
+
+- Need to enable the Lane-Assigner to enter a registrant who doesn't exist (for NAUCC). (also for Relay)
+
+- Pages for Track Data Importing:
+ - 1 Choose the Heat, and the file
+ - 2. Import the data from the file, and see all the other data that has been entered for this heat. (by seeing the lane_assignment-data for this heat)
+ - 3. Allow adjustments to the imported data (8-rows)
+ - 4. Approve/import the data, (?thus removing it from the import_results?)
+ - 5. Proceed by loading the next heat file (auto-increment the heat#)
+
+ Make Lane-Assignment auto-increment the lane/heat as data is entered? (ask Kathleen?)
+
 - Add test for lane_assignment, and view_heat and dq_request paths.
 
 - add ability to enter finish results by-event (auto-selecting the correct competition)

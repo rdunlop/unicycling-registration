@@ -1,4 +1,4 @@
-<%= form_for([@competition, @lane_assignment]) do |f| %>
+<%= form_for(@lane_assignment.persisted? ? @lane_assignment : [@competition, @lane_assignment]) do |f| %>
   <% if @lane_assignment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lane_assignment.errors.count, "error") %> prohibited this lane_assignment from being saved:</h2>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :registrant_id %><br />
-    <%= f.select :registrant_id, Registrant.select_box_options, {}, {:autofocus => true } %>
+    <%= f.label :competitor_id %><br />
+    <%= f.select :competitor_id, @competition.competitors, {}, {:autofocus => true } %>
   </div>
   <div class="field">
     <%= f.label :heat %><br />

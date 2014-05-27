@@ -8,7 +8,8 @@
   <thead>
     <tr>
       <th>Competition</th>
-      <th>Registrant</th>
+      <th>ID</th>
+      <th>Competitor</th>
       <th>Heat</th>
       <th>Lane</th>
       <th></th>
@@ -20,7 +21,8 @@
     <% @lane_assignments.each do |lane_assignment| %>
       <tr>
         <td><%= lane_assignment.competition %></td>
-        <td><%= lane_assignment.registrant.with_id_to_s %></td>
+        <td><%= lane_assignment.competitor.bib_number %></td>
+        <td><%= lane_assignment.competitor %></td>
         <td><%= lane_assignment.heat %></td>
         <td><%= lane_assignment.lane %></td>
         <td><%= link_to 'Edit', edit_lane_assignment_path(lane_assignment) %></td>

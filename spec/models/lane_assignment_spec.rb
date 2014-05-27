@@ -4,11 +4,11 @@
 #
 #  id             :integer          not null, primary key
 #  competition_id :integer
-#  registrant_id  :integer
 #  heat           :integer
 #  lane           :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  competitor_id  :integer
 #
 
 require 'spec_helper'

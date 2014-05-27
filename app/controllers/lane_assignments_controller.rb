@@ -53,6 +53,7 @@ class LaneAssignmentsController < ApplicationController
 
   # GET /lane_assignments/1/edit
   def edit
+    @competition = @lane_assignment.competition
     add_breadcrumb "Edit Lane Assignment"
   end
 
@@ -98,7 +99,7 @@ class LaneAssignmentsController < ApplicationController
   private
 
   def lane_assignment_params
-    params.require(:lane_assignment).permit(:registrant_id, :heat, :lane)
+    params.require(:lane_assignment).permit(:competitor_id, :heat, :lane)
   end
 
   def set_parent_breadcrumbs

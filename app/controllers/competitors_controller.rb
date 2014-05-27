@@ -37,7 +37,8 @@ class CompetitorsController < ApplicationController
     respond_to do |format|
       begin
         if params[:commit] == Competitor.group_selection_text
-          msg = @competition.create_competitor_from_registrants(regs, params[:group_name])
+          @competition.create_competitor_from_registrants(regs, params[:group_name])
+          msg = "Created Group Competitor"
         else
           msg = @competition.create_competitors_from_registrants(regs)
         end

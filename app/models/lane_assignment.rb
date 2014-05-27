@@ -4,18 +4,18 @@
 #
 #  id             :integer          not null, primary key
 #  competition_id :integer
-#  registrant_id  :integer
 #  heat           :integer
 #  lane           :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  competitor_id  :integer
 #
 
 class LaneAssignment < ActiveRecord::Base
   belongs_to :competition
-  belongs_to :registrant
+  belongs_to :competitor
 
-  validates :competition_id, :registrant_id, :heat, :lane, :presence => true
+  validates :competition_id, :competitor_id, :heat, :lane, :presence => true
   validates :heat, :uniqueness => {:scope => [:competition_id, :lane] }
 
 
@@ -30,6 +30,6 @@ class LaneAssignment < ActiveRecord::Base
   end
 
   def matching_record
-    @matching_record ||= ImportResult.where(competition: competition, bib_number: registrant_id).first
+    @matching_record ||= ImportResult.where(competition: competition, bib_number: competitor.bib_number).first
   end
 end

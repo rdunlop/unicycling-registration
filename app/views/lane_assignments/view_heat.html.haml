@@ -12,12 +12,12 @@ Lane Assignments
   - @lane_assignments.each do |lane|
     %li.occupied_lane
       %p.lane= lane.lane
-      %p.bib_number= "##{lane.registrant_id}"
-      %p.registrant= "#{lane.registrant}"
+      %p.bib_number= "##{lane.competitor.bib_number}"
+      %p.registrant= "#{lane.competitor}"
       %p{class: "status-#{lane.status}"}= lane.status
       %p= lane.comments
       %div.dq_option{class: "dq_option#{lane.lane}"}
-        = form_for DQRequest.new(bib_number: lane.registrant_id, heat: @heat), url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
+        = form_for DQRequest.new(bib_number: lane.competitor.bib_number, heat: @heat), url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
           = f.hidden_field :bib_number
           = f.hidden_field :heat
           = f.label :comments

@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "lane_assignments/index" do
   before(:each) do
     @competition = FactoryGirl.create(:competition)
-    assign(:lane_assignments, 
-      [FactoryGirl.create(:lane_assignment, :competition => @competition, :registrant => FactoryGirl.create(:competitor, :bib_number => 123), :heat => 3, :lane => 4),
-      FactoryGirl.create(:lane_assignment, :competition => @competition, :registrant => FactoryGirl.create(:competitor, :bib_number => 234), :heat => 30, :lane => 40)])
+    assign(:lane_assignments,
+      [FactoryGirl.create(:lane_assignment, :competition => @competition, :competitor => FactoryGirl.create(:event_competitor, competition: @competition), :heat => 3, :lane => 4),
+      FactoryGirl.create(:lane_assignment, :competition => @competition, :competitor => FactoryGirl.create(:event_competitor, competition: @competition), :heat => 30, :lane => 40)])
     @lane_assignment = FactoryGirl.build(:lane_assignment)
   end
 
@@ -28,10 +28,10 @@ describe "lane_assignments/index" do
 
       # Run the generator again with the --webrat flag if you want to use webrat matchers
       assert_select "form", :action => competition_lane_assignments_path(@competition), :method => "post" do
-        assert_select "select#lane_assignment_registrant_id", :name => "lane_assignment[registrant_id]"
+        assert_select "select#lane_assignment_competitor_id", :name => "lane_assignment[competitor_id]"
         assert_select "input#lane_assignment_heat", :name => "lane_assignment[heat]"
         assert_select "input#lane_assignment_lane", :name => "lane_assignment[lane]"
       end
     end
-  end 
+  end
 end
