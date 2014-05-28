@@ -39,6 +39,7 @@ class Competition < ActiveRecord::Base
     ["Two Attempt Distance", "Single Attempt", "Track E-Timer"]
   end
 
+  before_validation :clear_data_types_of_strings
   validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true}
 
   def self.scoring_classes
@@ -56,6 +57,11 @@ class Competition < ActiveRecord::Base
 
   def to_s
     event.to_s + " - " + self.name
+  end
+
+  def clear_data_types_of_strings
+    self.start_data_type = nil if start_data_type == ""
+    self.end_data_type = nil if end_data_type = ""
   end
 
   def to_s_with_event_class

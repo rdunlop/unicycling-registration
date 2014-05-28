@@ -27,6 +27,18 @@ describe Competition do
     @ec.valid?.should == true
   end
 
+  it "allows a start_data_type" do
+    @ec.start_data_type = "Single Attempt"
+    @ec.valid?.should == true
+  end
+
+  it "allows blank start_data_type" do
+    @ec.start_data_type = nil
+    @ec.should be_valid
+    @ec.start_data_type = ""
+    @ec.should be_valid
+  end
+
   it "requires an event" do
     @ec.event = nil
     @ec.valid?.should == false

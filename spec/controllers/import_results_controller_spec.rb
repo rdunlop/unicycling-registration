@@ -173,13 +173,13 @@ describe ImportResultsController do
       @reg = FactoryGirl.create(:registrant, :bib_number => 101)
       @competitor = FactoryGirl.create(:event_competitor, :competition => @competition)
       member = FactoryGirl.create(:member, :competitor => @competitor, :registrant => @reg)
-      @lane_ass = FactoryGirl.create(:lane_assignment, :competition => @competition, :registrant => @reg, :heat => 1, :lane => 1)
+      @lane_ass = FactoryGirl.create(:lane_assignment, :competition => @competition, :competitor => @competitor, :heat => 1, :lane => 1)
       test_image = fixture_path + '/800m14.lif'
       sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
 
       post :import_lif, {:file => sample_input, :user_id => @admin_user.id, :competition_id => @competition.id}
 
-      response.should redirect_to(user_competition_import_results_path(@admin_user, @competition))
+      response.should redirect_to(review_user_competition_import_results_path(@admin_user, @competition))
     end
   end
 

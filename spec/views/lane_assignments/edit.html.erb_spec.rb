@@ -7,7 +7,6 @@ describe "lane_assignments/edit" do
   end
 
   it "renders the edit lane_assignment form" do
-    binding.pry
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
