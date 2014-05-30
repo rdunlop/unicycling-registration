@@ -15,7 +15,7 @@ describe LaneAssignmentsController do
   def valid_attributes
     { "heat" => 1,
       "lane" => 2,
-      "competitor_id" => @reg.bib_number}
+      "competitor_id" => @competitor.id}
   end
 
   let(:lane_assignment) { FactoryGirl.create(:lane_assignment, :competition => @competition) }
