@@ -15,7 +15,7 @@ class LaneAssignment < ActiveRecord::Base
   belongs_to :competition
   belongs_to :competitor
 
-  validates :competition_id, :competitor_id, :heat, :lane, :presence => true
+  validates :competition, :competitor, :heat, :lane, :presence => true
   validates :heat, :uniqueness => {:scope => [:competition_id, :lane] }
 
 

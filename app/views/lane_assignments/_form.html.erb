@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :competitor_id %><br />
-    <%= f.select :competitor_id, @competition.competitors, {}, {:autofocus => true } %>
+    <%= f.select :competitor_id, @competition.competitors.map{|comp| [comp.name, comp.id]}, {}, {:autofocus => true } %>
   </div>
   <div class="field">
     <%= f.label :heat %><br />

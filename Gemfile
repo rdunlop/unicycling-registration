@@ -30,10 +30,15 @@ gem 'globalize', '~> 4.0.0'
 gem 'virtus'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'
-gem 'simplecov', :require => false, :group => :test
 
 #gem 'sqlite3'
 gem 'pg'
+
+group :naucc, :development do
+  gem 'better_errors'
+  gem "binding_of_caller"
+  gem 'simplecov', :require => false, :group => :test
+end
 
 group :naucc, :development, :test, :cucumber do
   gem 'capybara', github: 'jnicklas/capybara'

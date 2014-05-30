@@ -58,6 +58,11 @@ GEM
       descendants_tracker (~> 0.0.1)
       ice_nine (~> 0.9)
     bcrypt (3.1.7)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     breadcrumbs_on_rails (2.3.0)
     builder (3.2.2)
     bullet (4.8.0)
@@ -91,6 +96,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     dalli (2.7.0)
+    debug_inspector (0.0.2)
     delorean (2.1.0)
       chronic
     descendants_tracker (0.0.3)
@@ -332,6 +338,8 @@ DEPENDENCIES
   acts_as_list
   annotate
   awesome_nested_fields
+  better_errors
+  binding_of_caller
   breadcrumbs_on_rails
   bullet
   cancancan (~> 1.7)
