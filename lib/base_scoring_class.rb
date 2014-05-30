@@ -53,10 +53,6 @@ class BaseScoringClass
     false
   end
 
-  def uses_lane_assignments
-    false
-  end
-
   def build_result_from_imported(import_result)
     raise NotImplementedError
   end

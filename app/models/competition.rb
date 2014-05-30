@@ -238,10 +238,6 @@ class Competition < ActiveRecord::Base
     scoring_helper.include_event_name
   end
 
-  def uses_lane_assignments
-    scoring_helper.uses_lane_assignments
-  end
-
   def score_calculator
     @score_calculator ||= scoring_helper.score_calculator
   end

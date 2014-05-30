@@ -67,10 +67,6 @@ class RaceScoringClass < BaseScoringClass
     false
   end
 
-  def uses_lane_assignments
-    true
-  end
-
   def build_result_from_imported(import_result)
     TimeResult.new(
       minutes: import_result.minutes,

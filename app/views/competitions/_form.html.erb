@@ -58,6 +58,10 @@
   <h2>Settings For gathering the results</h2>
 
   <div class="field">
+    <%= f.label :uses_lane_assignments %><br />
+    <%= f.check_box :uses_lane_assignments, title: "Selecting this checkbox enables the Heat/Lane assignment system" %>
+  </div>
+  <div class="field">
     <%= f.label :start_data_type %><br />
     <%= f.select :start_data_type, Competition.data_recording_types, :include_blank => true %>
   </div>
