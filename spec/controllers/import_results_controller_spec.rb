@@ -4,7 +4,7 @@ describe ImportResultsController do
   before(:each) do
     @admin_user = FactoryGirl.create(:admin_user)
     sign_in @admin_user
-    @competition = FactoryGirl.create(:timed_competition)
+    @competition = FactoryGirl.create(:timed_competition, uses_lane_assignments: true)
   end
   let(:import_result) { FactoryGirl.create(:import_result, :user => @admin_user, :competition => @competition) }
 

@@ -109,25 +109,7 @@ class ImportResultsController < ApplicationController
 
   # POST /users/#/competitions/#/import_results/import_csv
   def import_csv
-    upload = Upload.new
-    is_start_time = params[:start_times] || false
-    # FOR EXCEL DATA:
-    raw_data = upload.extract_csv(params[:file])
-    n = 0
-    err = 0
-    raw_data.each do |raw|
-      raw_data = upload.convert_array_to_string(raw)
-      result = @competition.build_import_result_from_raw(raw)
-      result.raw_data = raw_data
-      result.user = @user
-      result.competition = @competition
-      result.is_start_time = is_start_time
-      if result.save
-        n = n + 1
-      else
-        err = err + 1
-      end
-    end
+
     redirect_to user_competition_import_results_path(@user, @competition), notice: "#{n} rows added, and #{err} errors"
   end
 
@@ -138,33 +120,14 @@ class ImportResultsController < ApplicationController
   # FOR LIF (track racing) data:
   # GET /users/#/competitions/#/import_results/import_lif
   def import_lif
-    upload = Upload.new
-    raw_data = upload.extract_csv(params[:file])
-    raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments
-    heat = params[:heat]
-    n = 0
-    err = 0
-    raw_data.shift #drop header row
-    raw_data.each do |raw|
-      lif_hash = upload.convert_lif_to_hash(raw)
-      lane = lif_hash[:lane]
-      id = get_id_from_lane_assignment(@competition, heat, lane)
+    importer = RaceDataImporter.new(@competition)
 
-      result = @user.import_results.build
-      result.raw_data = upload.convert_array_to_string(raw)
-      result.competition = @competition
-      result.bib_number = id
-      result.minutes = lif_hash[:minutes]
-      result.seconds = lif_hash[:seconds]
-      result.thousands = lif_hash[:thousands]
-      result.status = "DQ" if  (lif_hash[:disqualified] == "DQ")
-      if result.save
-        n = n + 1
-      else
-        err = err + 1
-      end
+    if importer.process_lif(params[:file], params[:heat])
+      flash[:notice] = "Successfully imported #{importer.num_rows} rows"
+    else
+      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
     end
-    redirect_to review_user_competition_import_results_path(@user, @competition, heat: heat), notice: "#{n} rows added, and #{err} errors"
+    redirect_to review_user_competition_import_results_path(@user, @competition, heat: heat)
   end
 
   # DELETE /users/#/competitions/#/import_results/destroy_all
