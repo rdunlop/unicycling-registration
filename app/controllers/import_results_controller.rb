@@ -109,7 +109,13 @@ class ImportResultsController < ApplicationController
 
   # POST /users/#/competitions/#/import_results/import_csv
   def import_csv
+    importer = RaceDataImporter.new(@competition, @user)
 
+    if importer.process_csv(params[:file], params[:start_times])
+      flash[:notice] = "Successfully imported #{importer.num_rows} rows"
+    else
+      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+    end
     redirect_to user_competition_import_results_path(@user, @competition), notice: "#{n} rows added, and #{err} errors"
   end
 
@@ -120,14 +126,14 @@ class ImportResultsController < ApplicationController
   # FOR LIF (track racing) data:
   # GET /users/#/competitions/#/import_results/import_lif
   def import_lif
-    importer = RaceDataImporter.new(@competition)
+    importer = RaceDataImporter.new(@competition, @user)
 
     if importer.process_lif(params[:file], params[:heat])
       flash[:notice] = "Successfully imported #{importer.num_rows} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
     end
-    redirect_to review_user_competition_import_results_path(@user, @competition, heat: heat)
+    redirect_to review_user_competition_import_results_path(@user, @competition, heat: params[:heat])
   end
 
   # DELETE /users/#/competitions/#/import_results/destroy_all
