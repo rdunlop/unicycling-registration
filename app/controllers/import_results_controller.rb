@@ -180,16 +180,6 @@ class ImportResultsController < ApplicationController
     params.require(:import_result).permit(:bib_number, :status, :minutes, :raw_data, :seconds, :thousands, :rank, :details, :is_start_time)
   end
 
-  def get_id_from_lane_assignment(comp, heat, lane)
-    la = LaneAssignment.find_by_competition_id_and_heat_and_lane(comp.id, heat, lane)
-    if la.nil?
-      id = nil
-    else
-      id = la.registrant.bib_number
-    end
-    id
-  end
-
   def load_user
     @user = User.find(params[:user_id])
   end

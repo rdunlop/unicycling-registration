@@ -125,65 +125,6 @@ describe ImportResultsController do
     end
   end
 
- describe "when importing data" do
-    it "creates a competitor" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
-      test_image = fixture_path + '/sample_time_results_bib_101.txt'
-      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
-
-      post :import_csv, {:file => sample_input, :user_id => @admin_user.id, :competition_id => @competition.id}
-
-      ImportResult.count.should == 1
-      ir = ImportResult.first
-      ir.bib_number.should == 101
-      ir.minutes.should == 1
-      ir.seconds.should == 2
-      ir.thousands.should == 300
-      ir.disqualified.should == false
-      ir.competition.should == @competition
-    end
-
-    it "can import start times" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
-      test_image = fixture_path + '/sample_time_results_bib_101.txt'
-      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
-
-      post :import_csv, {:file => sample_input, :user_id => @admin_user.id, :competition_id => @competition.id, :start_times => true}
-
-      ImportResult.count.should == 1
-      ir = ImportResult.first
-      ir.is_start_time.should == true
-    end
-
-    it "creates a dq competitor" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
-    end
-    it "creates a dq competitor" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
-      test_image = fixture_path + '/sample_time_results_bib_101_dq.txt'
-      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
-
-      post :import_csv, {:file => sample_input, :user_id => @admin_user.id, :competition_id => @competition.id}
-
-      ImportResult.count.should == 1
-      ImportResult.first.disqualified.should == true
-    end
-
-    it "can process lif files" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
-      @competitor = FactoryGirl.create(:event_competitor, :competition => @competition)
-      member = FactoryGirl.create(:member, :competitor => @competitor, :registrant => @reg)
-      @lane_ass = FactoryGirl.create(:lane_assignment, :competition => @competition, :competitor => @competitor, :heat => 1, :lane => 1)
-      test_image = fixture_path + '/800m14.lif'
-      sample_input = Rack::Test::UploadedFile.new(test_image, "text/plain")
-
-      post :import_lif, {:file => sample_input, :user_id => @admin_user.id, :competition_id => @competition.id}
-
-      response.should redirect_to(review_user_competition_import_results_path(@admin_user, @competition))
-    end
-  end
-
-
   describe "POST approve" do
     it "redirects to the competitions' results page" do
       competition = FactoryGirl.create(:competition, :scoring_class => "Distance")
