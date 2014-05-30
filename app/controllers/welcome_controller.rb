@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   before_filter :authenticate_user!, :only => [:index]
-  skip_authorization_check only: [:index, :help, :feedback]
+  skip_authorization_check only: [:index, :help, :feedback, :confirm]
   authorize_resource class: false, only: [:judging_menu, :data_entry_menu]
 
   def help

@@ -61,7 +61,7 @@ class Competition < ActiveRecord::Base
 
   def clear_data_types_of_strings
     self.start_data_type = nil if start_data_type == ""
-    self.end_data_type = nil if end_data_type = ""
+    self.end_data_type = nil if end_data_type == ""
   end
 
   def to_s_with_event_class
