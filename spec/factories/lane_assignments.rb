@@ -16,7 +16,7 @@
 FactoryGirl.define do
   factory :lane_assignment do
     competition # FactoryGirl
-    competitor_id 1
+    association :competitor, factory: :event_competitor
     heat 1
     lane 1
   end
