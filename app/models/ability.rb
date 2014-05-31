@@ -28,6 +28,8 @@ class Ability
     can :manage, TwoAttemptEntry
 
     can :read, Competitor
+    # Distance
+    can :manage, DistanceAttempt
 
     can :read, Judge, :user_id => user.id
     # Freestyle
@@ -36,8 +38,6 @@ class Ability
       score.try(:user) == user
     end
 
-    # Distance
-    can :manage, DistanceAttempt
 
     can :create_scores, Competition do |competition|
       !competition.locked
@@ -79,6 +79,7 @@ class Ability
       user.has_role? :director, time_result.competition.event
     end
 
+    can :manage, DataEntryVolunteer
     can :manage, Judge do |judge|
       user.has_role? :director, judge.competition.event
     end

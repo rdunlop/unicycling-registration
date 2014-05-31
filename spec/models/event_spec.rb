@@ -94,11 +94,11 @@ describe Event do
     it "will not count entries which are not selected" do
       @ec.signed_up = false
       @ec.save
-      @ev.num_competitors.should == 0
+      @ev.num_signed_up_registrants.should == 0
     end
     it "will not count if no one has selected the choice" do
       event = FactoryGirl.create(:event)
-      event.num_competitors.should == 0
+      event.num_signed_up_registrants.should == 0
     end
   end
   describe "when there is a director" do

@@ -44,7 +44,7 @@ Please choose the event that you want to enter data for:
 %table.sortable
   %thead
     %tr
-      %th Cat
+      %th Category
       %th Event
       %th Competition
       %th Enter Start Data
@@ -52,13 +52,16 @@ Please choose the event that you want to enter data for:
       %th (Director-only) View/Approve data
   %tbody
     - Competition.all.each do |competition|
-      - next unless competition.results_importable
       %tr
         %td= competition.event.category
         %td= competition.event
         %td= competition.name
-        %td= start_data_entry_link(current_user, competition)
-        %td= end_data_entry_link(current_user, competition)
+        - if competition.results_importable
+          %td= start_data_entry_link(current_user, competition)
+          %td= end_data_entry_link(current_user, competition)
+        - else
+          %td.judgedCompetition Judged
+          %td.judgedCompetition Judged
         %td= link_to "View", review_user_competition_import_results_path(current_user, competition)
 
 If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).

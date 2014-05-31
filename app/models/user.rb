@@ -18,6 +18,7 @@
 #  confirmation_sent_at   :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  name                   :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -95,7 +96,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    email
+    name || email
   end
 
   def accessible_registrants

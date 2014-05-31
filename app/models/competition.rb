@@ -2,18 +2,19 @@
 #
 # Table name: competitions
 #
-#  id                :integer          not null, primary key
-#  event_id          :integer
-#  name              :string(255)
-#  locked            :boolean
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  age_group_type_id :integer
-#  has_experts       :boolean          default(FALSE)
-#  has_age_groups    :boolean          default(FALSE)
-#  scoring_class     :string(255)
-#  start_data_type   :string(255)
-#  end_data_type     :string(255)
+#  id                    :integer          not null, primary key
+#  event_id              :integer
+#  name                  :string(255)
+#  locked                :boolean
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  age_group_type_id     :integer
+#  has_experts           :boolean          default(FALSE)
+#  has_age_groups        :boolean          default(FALSE)
+#  scoring_class         :string(255)
+#  start_data_type       :string(255)
+#  end_data_type         :string(255)
+#  uses_lane_assignments :boolean          default(FALSE)
 #
 
 class Competition < ActiveRecord::Base
@@ -53,7 +54,9 @@ class Competition < ActiveRecord::Base
 
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
 
-  delegate :results_importable, to: :scoring_helper
+  delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
+            :build_import_result_from_raw, :include_event_name, :score_calculator,
+            :result_description, to: :scoring_helper
 
   def to_s
     event.to_s + " - " + self.name
@@ -203,48 +206,26 @@ class Competition < ActiveRecord::Base
     scoring_class
   end
 
-  def render_path
-    scoring_helper.render_path
-  end
-
   def scoring_helper
     case event_class
     when "Distance"
-      RaceScoringClass.new(self)
+      @rc ||= RaceScoringClass.new(self)
     when "Ranked"
-      ExternallyRankedScoringClass.new(self)
+      @ers ||= ExternallyRankedScoringClass.new(self)
     when "Freestyle"
-      ArtisticScoringClass.new(self)
+      @asc ||= ArtisticScoringClass.new(self)
     when "Flatland"
-      FlatlandScoringClass.new(self)
+      @fsc ||= FlatlandScoringClass.new(self)
     when "Street"
-      StreetScoringClass.new(self)
+      @ssc ||= StreetScoringClass.new(self)
     when "Two Attempt Distance"
-      DistanceScoringClass.new(self)
+      @dsc ||= DistanceScoringClass.new(self)
     else
       nil
     end
   end
 
-  def build_result_from_imported(import_result)
-    scoring_helper.build_result_from_imported(import_result)
-  end
 
-  def build_import_result_from_raw(raw)
-    scoring_helper.build_import_result_from_raw(raw)
-  end
-
-  def include_event_name
-    scoring_helper.include_event_name
-  end
-
-  def score_calculator
-    @score_calculator ||= scoring_helper.score_calculator
-  end
-
-  def result_description
-    scoring_helper.result_description
-  end
 
   # ###########################
   # SCORE CALC-using functions

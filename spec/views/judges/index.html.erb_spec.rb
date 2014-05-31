@@ -10,6 +10,7 @@ describe "judges/index" do
     assign(:race_officials, [])
     assign(:judge_types, [])
     assign(:judges, [])
+    assign(:competitions_with_judges, [])
     assign(:judge, Judge.new)
   end
   it "should show the 'new judge type'" do

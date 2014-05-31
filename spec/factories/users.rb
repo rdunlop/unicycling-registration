@@ -18,6 +18,7 @@
 #  confirmation_sent_at   :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  name                   :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

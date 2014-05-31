@@ -1,5 +1,5 @@
 class JudgesController < ApplicationController
-  load_and_authorize_resource :competition, :only => [:index, :create, :destroy, :copy_judges, :create_normal, :create_race_official]
+  load_and_authorize_resource :competition, :only => [:index, :create, :destroy, :copy_judges, :create_race_official]
   before_filter :load_new_judge, :only => [:create]
   load_and_authorize_resource
 
@@ -73,7 +73,7 @@ class JudgesController < ApplicationController
     @race_officials = User.with_role(:race_official).order(:email)
 
     @judges = @competition.judges
-    @events = Event.all
+    @competitions_with_judges = Competition.event_order.select{ |comp| comp.uses_judges } - [@competition]
     @judge ||= Judge.new
   end
 
@@ -84,17 +84,6 @@ class JudgesController < ApplicationController
         format.html { redirect_to competition_judges_path(@competition), notice: 'Race Official successfully created.' }
       else
         format.html { redirect_to competition_judges_path(@competiton), alert: 'Unable to add Race Official role to user.' }
-      end
-    end
-  end
-
-  def create_normal
-    @user = User.find(params[:judge][:user_id])
-    respond_to do |format|
-      if @user.add_role(:data_entry_volunteer)
-        format.html { redirect_to competition_judges_path(@competition), notice: 'data_entry_volunteer successfully created.' }
-      else
-        format.html { redirect_to competition_judges_path(@competiton), alert: 'Unable to add data_entry_volunteer role to user.' }
       end
     end
   end

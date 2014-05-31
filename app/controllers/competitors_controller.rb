@@ -20,7 +20,7 @@ class CompetitorsController < ApplicationController
   public
   # GET /competitions/:competition_id/1/new
   def new
-    @registrants = @competition.signed_up_registrants
+    @sign_ups = @competition.registrant_event_sign_ups.signed_up
     @competitor = @competition.competitors.new
     @competitor.members.build #add an initial member
   end

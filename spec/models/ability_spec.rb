@@ -161,7 +161,6 @@ describe "Ability" do
     end
     it { should be_able_to(:create_director, Judge) }
     it { should be_able_to(:create, Judge) }
-    it { should be_able_to(:create_normal, Judge) }
   end
 
   describe "as a super_admin" do
@@ -227,6 +226,7 @@ describe "Ability" do
     it { should be_able_to(:set_places, @competition) }
     it { should be_able_to(:lock, @competition) }
     it { should_not be_able_to(:edit, @competition) }
+    it { should be_able_to(:create, DataEntryVolunteer) }
     it { should be_able_to(:manage, DistanceAttempt) }
 
     it { should be_able_to(:sign_ups, @event_category) }

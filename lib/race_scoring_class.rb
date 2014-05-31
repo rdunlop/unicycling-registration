@@ -55,10 +55,6 @@ class RaceScoringClass < BaseScoringClass
     @competition.time_results
   end
 
-  def results_importable
-    true
-  end
-
   def uses_judges
     false
   end

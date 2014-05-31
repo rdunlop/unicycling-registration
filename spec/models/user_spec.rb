@@ -18,6 +18,7 @@
 #  confirmation_sent_at   :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  name                   :string(255)
 #
 
 require 'spec_helper'
@@ -29,6 +30,12 @@ describe User do
 
   it "can be created by factory girl" do
     @user.valid?.should == true
+  end
+
+  it "can specify a custom name" do
+    expect(@user.to_s).to eq(@user.email)
+    @user.name = "Robin"
+    expect(@user.to_s).to eq("Robin")
   end
 
   it "can sum the amount owing from all registrants" do

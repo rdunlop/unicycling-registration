@@ -50,10 +50,6 @@ class ExternallyRankedScoringClass < BaseScoringClass
     @competition.external_results
   end
 
-  def results_importable
-    true
-  end
-
   def uses_judges
     false
   end

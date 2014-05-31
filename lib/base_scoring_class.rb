@@ -42,7 +42,7 @@ class BaseScoringClass
   end
 
   def results_importable
-    false
+    !uses_judges
   end
 
   def uses_judges

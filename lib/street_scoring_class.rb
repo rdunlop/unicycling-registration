@@ -44,10 +44,6 @@ class StreetScoringClass < BaseScoringClass
     nil
   end
 
-  def results_importable
-    false
-  end
-
   def uses_judges
     true
   end

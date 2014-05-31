@@ -1,0 +1,54 @@
+<h1>Data Entry Volunteers</h1>
+
+<b>Step 1</b>: Ensure that your desired volunteer is enabled in the "Data Entry Volunteer Accounts":<br />
+ <table class="sortable">
+  <thead>
+    <th>User Account Email</th>
+    <th>Name</th>
+  </thead>
+  <tbody>
+    <% @all_data_entry_volunteers.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <th><%= user %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h3>Set User as 'Data Entry Volunteer'</h3>
+<%= form_for [@competition, @data_entry_volunteer] do |f| %>
+  <%= render partial: "/shared/error_messages", object: @data_entry_volunteer %>
+  <%= f.label :user_id, "User Account" %>
+  <%= f.select :user_id, User.all.map { |user| [user, user.id] } %><br />
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %><br />
+  <%= f.submit %>
+<% end %>
+Allows users to see the data_entry_volunteer menu
+
+  <h1>Manage <%= @competition %> Officials</h1>
+
+
+  <hr />
+  <table class="sortable">
+    <caption>All globally-enabled Race Official Accounts</caption>
+    <thead>
+      <th>Email</th>
+    </thead>
+    <tbody>
+      <% @race_officials.each do |official| %>
+        <tr>
+          <td><%= official %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+  <h2>Set User as 'Race Official'</h2>
+  Allows users to see the judging menu
+  <%= form_for [@competition, @data_entry_volunteer], :url => create_race_official_competition_judges_path(@competition) do |f| %>
+    <%= f.select :user, User.all.map { |user| [user, user.id] } %>
+    <%= f.submit %>
+  <% end %>
+

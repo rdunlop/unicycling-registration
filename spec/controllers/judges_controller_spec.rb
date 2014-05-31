@@ -127,13 +127,4 @@ describe JudgesController do
       assigns(:judge).should be_a_new(Judge)
     end
   end
-
-  describe "POST create_normal" do
-    it "creates a new judge" do
-      user = FactoryGirl.create(:user)
-      post :create_normal, {:competition_id => @ec.id, :judge => {:user_id => user.id}}
-      user.reload
-      user.has_role?(:data_entry_volunteer).should == true
-    end
-  end
 end

@@ -72,10 +72,10 @@
 <% end %>
 
 <hr />
-<h2>Judging Results</h2>
+<h2>Results</h2>
 
 <% @event.competitions.each do |competition| %>
-  <%= link_to "Manage Judges/Officials for #{competition}", competition_judges_path(competition) %><br />
+  <%= link_to "Manage Judges/Data-Entry for #{competition}", competition_judges_path(competition) %><br />
 <% end %>
 <br />
 

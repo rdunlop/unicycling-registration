@@ -272,9 +272,10 @@ Workspace::Application.routes.draw do
         end
       end
 
+      resources :data_entry_volunteers, :only => [:index, :create]
+
       resources :judges,      :only => [:index, :create, :destroy] do
         collection do
-          post :create_normal
           post :create_race_official
           post :copy_judges
         end
