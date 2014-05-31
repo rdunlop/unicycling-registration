@@ -186,6 +186,8 @@ describe "Ability" do
       end
       it { should be_able_to(:create_scores, @competition) }
       it { should be_able_to(:read, Competitor) }
+      it { should_not be_able_to(:sort, @competition) }
+      it { should_not be_able_to(:sort_random, @competition) }
 
       describe "when the Competition is locked" do
         before(:each) do
@@ -224,6 +226,8 @@ describe "Ability" do
     it { should be_able_to(:freestyle_scores, @competition) }
     it { should be_able_to(:export_scores, @competition) }
     it { should be_able_to(:set_places, @competition) }
+    it { should be_able_to(:sort, @competition) }
+    it { should be_able_to(:sort_random, @competition) }
     it { should be_able_to(:lock, @competition) }
     it { should_not be_able_to(:edit, @competition) }
     it { should be_able_to(:create, DataEntryVolunteer) }

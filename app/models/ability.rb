@@ -61,7 +61,7 @@ class Ability
       user.has_role? :director, score.competition.event
     end
 
-    can [:announcer, :heat_recording, :two_attempt_recording, :results], Competition do |comp|
+    can [:sort, :sort_random, :announcer, :heat_recording, :two_attempt_recording, :results], Competition do |comp|
       user.has_role? :director, comp.event
     end
     can [:freestyle_scores, :distance_attempts,

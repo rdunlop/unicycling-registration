@@ -62,10 +62,6 @@
 
 List of all competitors, including registrant info, with edit/destroy, marking those who have NOT signed up.
 
-List of all Registrants who are NOT competitors, allowing "add all", and "add group"
-
-
-
 <p>Please choose the registrants that you would like from the following list, and create competitors from those registrants. All registrants should be associated with competitors</p>
 
 <% @remaining_registrants = @registrants - (@competition.competitors.map{ |comp| comp.registrants }.flatten) %>
@@ -108,6 +104,10 @@ List of all Registrants who are NOT competitors, allowing "add all", and "add gr
 
 <hr />
 
-Advanced Options: <%= link_to 'Create Competitor', new_competition_competitor_path(@competition) %><br />
+<b>Once you have completed creating all of the competitors, you may want to use the "Sort" function to shuffle the order of competition.</b>
+
+<hr />
+
+Advanced Options: <%= link_to 'Create/Sort Competitors', new_competition_competitor_path(@competition) %><br />
 
 <%= link_to "Back", event_path(@competition.event) %>

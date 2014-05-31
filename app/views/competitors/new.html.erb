@@ -1,5 +1,34 @@
 <h3><%= @competition.event %> - <%= @competition %></h3>
 
+<h4>Sort Competitors (live-save) </h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Draggable</th>
+      <th>Original Position</th>
+      <th>Competitor</th>
+    </tr>
+  </thead>
+  <tbody id="competitor-list" data-target="<%= sort_competition_path(@competition) %>" class="drag_drop_sortable">
+    <% @competition.competitors.order(:position).each do |f| %>
+      <tr id="competitor_<%= f.id %>">
+        <td class="handle" style="cursor: move">[DRAG]</td>
+        <td><%= f.position %></td>
+        <td><%= f.to_s %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr />
+
+<h4>Sort Competitors Randomly </h4>
+
+<%= link_to "Sort", sort_random_competition_path(@competition), method: :post, data: { confirm: "Are you sure?" }  %>
+<hr />
+
+<h4> Add New Competitor </h4>
+
 <%= render :partial => "/competitors/form", :object => @competitor %>
 
 <div class="bottom-nav">

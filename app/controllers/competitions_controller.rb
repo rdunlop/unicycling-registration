@@ -78,6 +78,26 @@ class CompetitionsController < ApplicationController
     respond_with(@competition, location: target_url)
   end
 
+  def sort
+    @competitors = @competition.competitors
+    @competitors.each do |comp|
+      comp.position = params['competitor'].index(comp.id.to_s) + 1
+      comp.save
+    end
+    respond_with(@competition)
+  end
+
+  def sort_random
+    @competitors = @competition.competitors
+    @competitors.shuffle.each_with_index do |comp, index|
+      comp.position = index + 1
+      comp.save
+    end
+    flash[:notice] = "Shuffled Competitor sort order"
+
+    redirect_to new_competition_competitor_path(@competition)
+  end
+
   def set_places
     @competition.scoring_helper.place_all
     redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"

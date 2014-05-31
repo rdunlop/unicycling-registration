@@ -50,3 +50,28 @@ $(document).ready(function() {
 $(document).ready(function(e) {
   $('FORM').nestedFields();
 });
+
+
+// Sorting the list
+
+$(document).ready(function(){
+  $('.drag_drop_sortable').sortable({
+    axis: 'y',
+    dropOnEmpty: false,
+    //handle: '.handle',
+    cursor: 'crosshair',
+    items: 'tr',
+    opacity: 0.4,
+    scroll: true,
+    update: function(){
+      $.ajax({
+        type: 'post',
+        data: $('.drag_drop_sortable').sortable('serialize'),
+        dataType: 'script',
+        complete: function(request){
+          $('#drag_drop_sortable').effect('highlight');
+        },
+        url: $('.drag_drop_sortable').data('target')})
+    }
+  }).disableSelection();
+});
