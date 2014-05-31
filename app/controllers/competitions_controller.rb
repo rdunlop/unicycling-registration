@@ -23,10 +23,6 @@ class CompetitionsController < ApplicationController
   # GET /competitions/1/edit
   def edit
     add_breadcrumb "Edit Competition"
-
-    3.times do
-      @competition.competition_sources.build
-    end
   end
 
   def show

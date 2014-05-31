@@ -1,4 +1,4 @@
-<table>
+<table class="items">
   <thead>
     <tr>
       <th>Gender</th>
@@ -9,8 +9,8 @@
     </tr>
   </thead>
   <tbody>
-    <%= f.fields_for :competition_sources do |cs| %>
-      <tr>
+    <%= f.nested_fields_for :competition_sources, render_template: false do |cs| %>
+      <tr class="item">
         <td>
           <%= cs.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true %>
         </td>
@@ -24,12 +24,16 @@
           <%= cs.number_field :max_place %>
         </td>
         <td>
-          <%= cs.check_box :_destroy %>
+          <a href="#" class="remove">remove</a>
+          <%= cs.hidden_field :id %>
+          <%= cs.hidden_field :_destroy %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<a href="#" class="add">add entry</a><br />
+<%= nested_fields_templates %>
 
 <ul>
   <li>Select <b>Event Category</b> <b><u>OR</u></b> Source Competition</li>
