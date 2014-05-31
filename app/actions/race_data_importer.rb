@@ -21,9 +21,10 @@ class RaceDataImporter
           lif_hash = upload.convert_lif_to_hash(raw)
           lane = lif_hash[:lane]
           id = get_id_from_lane_assignment(@competition, heat, lane)
+
           if id.nil?
-            add_error(lane)
-            next
+            add_error "Unable to find Lane Assignment for heat #{heat} lane #{lane}"
+            id = 0
           end
 
           result = @user.import_results.build
@@ -38,15 +39,12 @@ class RaceDataImporter
             self.num_rows_processed += 1
           end
         end
-        if errors
-          raise ActiveRecord::Rollback
-        end
       end
     rescue ActiveRecord::RecordInvalid => invalid
       @errors = invalid
       return false
     end
-    errors.nil?
+    true
   end
 
   def process_csv(file, start_times)

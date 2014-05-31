@@ -95,9 +95,9 @@ describe RaceDataImporter do
 
 
     expect {
-      expect(importer.process_lif(sample_input, 10)).to be_falsy
-    }.to change(ImportResult, :count).by(0)
+      expect(importer.process_lif(sample_input, 10)).to be_truthy
+    }.to change(ImportResult, :count).by(8)
 
-    expect(importer.errors).to eq("Missing Lane Assignment for Lane 2")
+    expect(importer.errors).to_not be_nil
   end
 end
