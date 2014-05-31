@@ -6,8 +6,7 @@ describe "competitors/new" do
       comp = assign(:competitor, FactoryGirl.build(:event_competitor))
       @ec = comp.competition
       assign(:competition, @ec)
-      resu = FactoryGirl.create(:registrant_event_sign_up, registrant: registrant)
-      assign(:sign_ups, [resu])
+      assign(:filtered_registrants, [registrant])
     end
 
     it "renders new competitor form" do
