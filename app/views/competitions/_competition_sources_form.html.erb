@@ -1,0 +1,38 @@
+<table>
+  <thead>
+    <tr>
+      <th>Gender</th>
+      <th>Event Category</th>
+      <th>Source Competition</th>
+      <th>Max Place</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= f.fields_for :competition_sources do |cs| %>
+      <tr>
+        <td>
+          <%= cs.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true %>
+        </td>
+        <td>
+          <%= cs.select :event_category_id, event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true  %>
+        </td>
+        <td>
+          <%= cs.select :competition_id, Competition.event_order.all.map{|c| [c, c.id]}, :include_blank => true  %>
+        </td>
+        <td>
+          <%= cs.number_field :max_place %>
+        </td>
+        <td>
+          <%= cs.check_box :_destroy %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<ul>
+  <li>Select <b>Event Category</b> <b><u>OR</u></b> Source Competition</li>
+  <li><b>Max Place:</b> (Source-Competition <u>only</u>) specify the overall_place which the competitors must achieve in the Source Competition to be included as registrants</li>
+</ul>
+

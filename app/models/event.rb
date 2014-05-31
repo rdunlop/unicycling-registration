@@ -85,7 +85,7 @@ class Event < ActiveRecord::Base
   end
 
   # determine the number of people who have signed up for this event
-  def num_competitors
+  def num_signed_up_registrants
     registrant_event_sign_ups.signed_up.count
   end
 

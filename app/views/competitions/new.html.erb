@@ -2,12 +2,12 @@
 
 <h2>Event: <%= @event %></h2>
 
-<h3>Signed Up Competitors</h3>
-(These will be added to the Compettion <b>Upon POPULATE directive</b>)
-<%= render :partial => "/event_categories/sign_ups", locals: { registrants: @event.signed_up_registrants, event: @event } %>
+<h3>Signed Up Registrants (Count: <%= @event.num_signed_up_registrants %>)</h3>
+(These are only here listed for reference)
+<%= render :partial => "/event_categories/sign_ups", locals: { sign_ups: @event.registrant_event_sign_ups.signed_up, event: @event } %>
 
 <br />
-<b>NOTE:</b> This will create the competition AND populate it with competitors from the sign-up list <br />
-It will also <b>RANDOMIZE</b> the competitor order<br /><br />
+<b>NOTE:</b> This will only create the competition.<br />
+The Event Director will need to assign/randomize the competitor list.<br /><br />
 
 <%= render 'form' %>

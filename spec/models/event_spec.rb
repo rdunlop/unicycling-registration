@@ -89,7 +89,7 @@ describe Event do
     end
 
     it "will know that it is selected" do
-      @ev.num_competitors.should == 1
+      @ev.num_signed_up_registrants.should == 1
     end
     it "will not count entries which are not selected" do
       @ec.signed_up = false

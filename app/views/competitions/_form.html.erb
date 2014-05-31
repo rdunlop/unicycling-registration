@@ -1,15 +1,5 @@
 <%= form_for(@competition.new_record? ? [@event, @competition] : [@competition]) do |f| %>
-  <% if @competition.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
-
-      <ul>
-      <% @competition.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <% render partial: "/shared/error_messages", object: @competition %>
 
   <div class="field">
     <%= f.label :name %><br />
@@ -17,58 +7,26 @@
   </div>
 
   <h2>Settings for selecting the competitors from sign-ups</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Gender</th>
-        <th>Event Category</th>
-        <th>Source Competition</th>
-        <th>Max Place</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= f.fields_for :competition_sources do |cs| %>
-        <tr>
-          <td>
-            <%= cs.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true %>
-          </td>
-          <td>
-            <%= cs.select :event_category_id, @event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true  %>
-          </td>
-          <td>
-            <%= cs.select :competition_id, Competition.event_order.all.map{|c| [c, c.id]}, :include_blank => true  %>
-          </td>
-          <td>
-            <%= cs.number_field :max_place %>
-          </td>
-          <td>
-            <%= cs.check_box :_destroy %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <ul>
-    <li><b>Max Place:</b> specify the overall_place which the competitors must achieve in the Source Competition to be included as registrants</li>
-    <li>If you need more sources, you can do so by Editing the Competition after creation.</li>
-  </ul>
+  <%= render partial: "competition_sources_form", locals: {f: f, event: @event} %>
 
   <h2>Settings For gathering the results</h2>
 
-  <div class="field">
-    <%= f.label :uses_lane_assignments %><br />
-    <%= f.check_box :uses_lane_assignments, title: "Selecting this checkbox enables the Heat/Lane assignment system" %>
-  </div>
-  <div class="field">
-    <%= f.label :start_data_type %><br />
-    <%= f.select :start_data_type, Competition.data_recording_types, :include_blank => true %>
-  </div>
-  <div class="field">
-    <%= f.label :end_data_type %><br />
-    <%= f.select :end_data_type, Competition.data_recording_types, :include_blank => true %>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th><%= f.label :uses_lane_assignments %></th>
+        <th><%= f.label :start_data_type %></th>
+        <th><%= f.label :end_data_type %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.check_box :uses_lane_assignments, title: "Selecting this checkbox enables the Heat/Lane assignment system" %></td>
+        <td><%= f.select :start_data_type, Competition.data_recording_types, :include_blank => true %></td>
+        <td><%= f.select :end_data_type, Competition.data_recording_types, :include_blank => true %></td>
+      </tr>
+    </tbody>
+  </table>
 
   <h2>Settings for Scoring the results</h2>
   <div class="field">
