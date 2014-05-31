@@ -157,7 +157,7 @@ class Competition < ActiveRecord::Base
   def get_age_group_entry_description(age, gender, wheel_size_id)
     ag_entry_description = age_group_type.age_group_entry_description(age, gender, wheel_size_id) unless age_group_type.nil?
     if ag_entry_description.nil?
-      "No Age Group for #{age}-#{gender}"
+      "No Age Group for #{age}-#{gender}" unless age_group_type.nil?
     else
       ag_entry_description
     end

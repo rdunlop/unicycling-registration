@@ -2,9 +2,10 @@
 <%= render :partial => "/shared/error_messages", :object => form %>
 <%= form_for form.persisted? ? form : [form.competition, form] do |f| %>
   <%= f.label :position %><%= f.text_field :position %><br />
+
   <div class="items">
     <%= f.nested_fields_for :members do |member_f| %>
-       <fieldset class="item">
+       <div class="item">
           <%= member_f.label :registrant %>
           <%= member_f.select :registrant_id, Registrant.select_box_options, {include_blank: true}  %>
 
@@ -12,18 +13,14 @@
 
           <%= member_f.hidden_field :id %>
           <%= member_f.hidden_field :_destroy %>
-        </fieldset>
+        </div>
     <% end %>
   </div>
-  <a href="#" class="add">add member</a>
+  <a href="#" class="add">add registrant</a><br /><br />
 
   <%= f.label :custom_external_id %><%= f.text_field :custom_external_id %><br />
-  <%= f.label :custom_name %><%= f.text_field :custom_name %><br />
+  <%= f.label :custom_name, "Group/Team Name (optional)" %><%= f.text_field :custom_name %><br />
 
   <%= f.submit %>
 <% end %>
 
-<hr />
-<%= link_to 'Add All', add_all_competition_competitors_path(form.competition), data: {confirm: 'Are you sure you want to add ALL registrants?' }, method: :post %>
-<br />
-<%= link_to 'Destroy All', destroy_all_competition_competitors_path(form.competition), data: { confirm: 'Are you sure you want to Destroy ALL competitors?' }, method: :delete %>

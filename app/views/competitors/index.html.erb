@@ -1,10 +1,77 @@
 <h1><%= @competition %> - Manage Competitors</h1>
 
+<p>
+  These are all of the competitors configured for this competition
+</p>
+
+<table class="sortable">
+  <caption>Competitors</caption>
+  <thead>
+    <tr>
+      <th class="competitor_member">Order</th>
+      <th class="sign_up">ID</th>
+      <th class="sign_up">Name</th>
+      <th class="sign_up">Age</th>
+      <th class="sign_up">Gender</th>
+      <th class="sign_up">Country</th>
+      <th class="sign_up">Age Group</th>
+      <th class="sign_up">Original Event Selection</th>
+      <th>Errors?</th>
+      <th class="competitor_member"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @competitors.each do |competitor| %>
+      <% next if competitor.new_record? %>
+      <tr>
+        <% errors = nil %>
+        <%
+        competitor.registrants.each do |reg|
+          unless @registrants.include?(reg)
+            errors = "Registrant #{reg} is not signed up, but is a competitor"
+          end
+        end
+        %>
+        <td>
+          <%= competitor.position %>
+        </td>
+        <% event_category = nil
+           registrant = competitor.members.first.registrant
+        %>
+        <% event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category) %>
+        <td><%= competitor.external_id %></td>
+        <td><%= competitor.detailed_name %></td>
+        <td><%= competitor.age %></td>
+        <td><%= competitor.gender %></td>
+        <td><%= competitor.country %></td>
+        <td><%= competitor.age_group_entry_description %></td>
+        <td><%= event_category %></td>
+        <% if errors %>
+          <td class="error"><%= errors %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td>
+            <%= link_to 'Edit', edit_competitor_path(competitor) %>
+            <%= link_to 'Destroy', competitor, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+List of all competitors, including registrant info, with edit/destroy, marking those who have NOT signed up.
+
+List of all Registrants who are NOT competitors, allowing "add all", and "add group"
+
+
+
 <p>Please choose the registrants that you would like from the following list, and create competitors from those registrants. All registrants should be associated with competitors</p>
 
+<% @remaining_registrants = @registrants - (@competition.competitors.map{ |comp| comp.registrants }.flatten) %>
 <%= form_tag(add_competition_competitors_path(@competition), {:method => :post}) do %>
   <table class="sortable">
-    <caption>Signed-up registrants</caption>
+    <caption>Signed-up registrants who are not yet competitors</caption>
     <thead>
       <tr>
         <th><a href="#" id="competitor_select_all">All</a>/<a href="#" id="competitor_unselect_all">None</a></th>
@@ -15,7 +82,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @registrants.each do |reg| %>
+      <% @remaining_registrants.each do |reg| %>
         <tr>
           <td><%= check_box_tag "registrants[]", reg.id, true, :class => "registrant_checkbox" %></td>
           <td><%= reg.bib_number %></td>
@@ -41,53 +108,6 @@
 
 <hr />
 
-<table class="sortable">
-  <caption>Competitors</caption>
-  <thead>
-    <tr>
-      <th class="competitor_member">Order</th>
-      <th class="sign_up">ID</th>
-      <th class="sign_up">Name</th>
-      <th class="sign_up">Age</th>
-      <th class="sign_up">Gender</th>
-      <th class="sign_up">Country</th>
-      <th class="sign_up">Age Group</th>
-      <th class="sign_up">Original Event Selection</th>
-      <th class="competitor_member"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @competitors.each do |competitor| %>
-      <% next if competitor.new_record? %>
-      <tr>
-        <td>
-          <%= competitor.position %>
-        </td>
-        <% event_category = nil
-           registrant = competitor.members.first.registrant
-        %>
-        <% event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category) %>
-        <td><%= competitor.external_id %></td>
-        <td><%= competitor.detailed_name %></td>
-        <td><%= competitor.age %></td>
-        <td><%= competitor.gender %></td>
-        <td><%= competitor.country %></td>
-        <td><% unless @competition.age_group_type.nil? %>
-            <%= @competition.age_group_type.age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) %>
-          <% end %>
-        </td>
-        <td><%= event_category %></td>
-        <td>
-            <%= link_to 'Edit', edit_competitor_path(competitor) %>
-            <%= link_to 'Destroy', competitor, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<hr />
-
-Advanced Options: <%= link_to 'Upload or Create Competitor', new_competition_competitor_path(@competition) %><br />
+Advanced Options: <%= link_to 'Create Competitor', new_competition_competitor_path(@competition) %><br />
 
 <%= link_to "Back", event_path(@competition.event) %>
