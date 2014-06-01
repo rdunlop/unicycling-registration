@@ -22,6 +22,7 @@ body.pdf_body {
 
 .heading_left {
   float: left;
+  text-align: left;
   ul {
     list-style: none;
     font-size: 20px;
@@ -31,6 +32,7 @@ body.pdf_body {
 
 .heading_right {
   float: left;
+  text-align: left;
   ul {
     list-style: none;
     font-size: 20px;
@@ -56,9 +58,14 @@ table.race {
   }
   .id {
     width: 12.5%;
+    max-width: 12.5%;
   }
-  .name {
-    min-width: 25%;
+  .name, .time {
+    width: 25%;
+    max-width: 25%;
+  }
+  .separator {
+    width: 1%;
   }
   .dq {
     width: 7%;

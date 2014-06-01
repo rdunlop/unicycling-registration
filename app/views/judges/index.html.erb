@@ -81,7 +81,7 @@
 
 
   <h2>Set User as 'Race Official'</h2>
-  Allows users to see the judging menu
+  Allows users to enter lane assignments for track racing
   <%= form_for [@competition, @judge], :url => create_race_official_competition_judges_path(@competition) do |f| %>
     <%= f.select :user_id, User.all.map { |user| [user, user.id] } %>
     <%= f.submit %>

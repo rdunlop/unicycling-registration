@@ -1,10 +1,7 @@
+<%= render partial: "recording_form_header", locals: { competition: @competition, is_start_times: @is_start_times } %>
 <div class="race_recording">
   <% @competition_sign_up.age_group_entries.each do |description, gender| %>
     <div class="nobreak">
-      <h1>Two-Attempt Recording Form</h1>
-      <hr />
-      <h2><%= @competition_sign_up.competition %></h2>
-      <hr />
       <h2 class="age_group_description"><%= description %></h2>
       <h2 class="age_group_gender"><%= gender %></h2>
       <div style="clear: both"></div>
@@ -20,6 +17,7 @@
           </tr>
         </thead>
         <tbody>
+          <%= render partial: "attempt_entry_sample" %>
           <% @competition_sign_up.signed_up_list(description).each do |reg| %>
             <%= render :partial => "attempt_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => false } %>
           <% end %>

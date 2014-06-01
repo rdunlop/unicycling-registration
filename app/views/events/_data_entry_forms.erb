@@ -63,7 +63,7 @@
             <%= link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, :format => :pdf) %>
           </td>
           <td>
-            <%= link_to 'Enter Start Times', user_competition_two_attempt_entries_path(current_user, competition, :is_start_time => true) %>
+            <%= link_to 'Enter Start Times', user_competition_two_attempt_entries_path(current_user, competition, is_start_times: true) %>
           </td>
         <% else %>
           <td>N/A</td><td>N/A</td>

@@ -24,8 +24,23 @@ class Printing::CompetitionsController < ApplicationController
     end
   end
 
+  def single_attempt_recording
+    @competition_sign_up = CompetitionSignUp.new(@competition)
+    @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
+    @no_page_breaks = true unless params[:no_page_breaks].nil?
+
+    @only_registered = true
+    @only_registered = false if params[:only_registered].nil?
+
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf("single_attempt_recording") }
+    end
+  end
+
   def two_attempt_recording
     @competition_sign_up = CompetitionSignUp.new(@competition)
+    @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
     @no_page_breaks = true unless params[:no_page_breaks].nil?
 
     @only_registered = true

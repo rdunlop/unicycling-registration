@@ -57,8 +57,14 @@ Please choose the event that you want to enter data for:
         %td= competition.event
         %td= competition.name
         - if competition.results_importable
-          %td= start_data_entry_link(current_user, competition)
-          %td= end_data_entry_link(current_user, competition)
+          %td
+            = start_data_entry_link(current_user, competition)
+            = data_recording_link(competition, is_start_times: true)
+            = data_confirmation_link(competition, is_start_times: true)
+          %td
+            = end_data_entry_link(current_user, competition)
+            = data_recording_link(competition, is_start_times: false)
+            = data_confirmation_link(competition, is_start_times: false)
         - else
           %td.judgedCompetition Judged
           %td.judgedCompetition Judged

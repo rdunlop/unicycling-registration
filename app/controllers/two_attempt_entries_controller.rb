@@ -12,7 +12,7 @@ class TwoAttemptEntriesController < ApplicationController
   def index
     add_breadcrumb "Add two-entry data"
 
-    @is_start_time = !params[:is_start_time].blank?
+    @is_start_time = !params[:is_start_times].blank?
 
     @two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
     @two_attempt_entry = TwoAttemptEntry.new(is_start_time: @is_start_time)
