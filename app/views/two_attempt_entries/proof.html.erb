@@ -1,0 +1,39 @@
+<h1>Two Attempt Entries</h1>
+
+<h2>Competition: <%= @competition %></h2>
+<h3>Is Start Time: <%= @is_start_time %></h3>
+
+<table class="two_attempt_entries">
+  <thead>
+    <tr>
+      <th>Bib Number</th>
+      <th>Attempt #1</th>
+      <th>DQ</th>
+      <th class="separator"></th>
+      <th>Attempt #2</th>
+      <th>DQ</th>
+      <th class="separator"></th>
+      <th>Competitor Name</th>
+      <th>Competitor Exists?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @two_attempt_entries.each do |two_attempt_entry| %>
+      <tr>
+        <td><%= two_attempt_entry.bib_number %></td>
+        <td><%= two_attempt_entry.full_time_1 %></td>
+        <td><%= two_attempt_entry.dq_1 %></td>
+        <td></td>
+        <td><%= two_attempt_entry.full_time_2 %></td>
+        <td><%= two_attempt_entry.dq_2 %></td>
+        <td></td>
+        <td><%= two_attempt_entry.registrant_name %></td>
+        <% if two_attempt_entry.has_matching_competitor? %>
+          <td class="competitor_exists">Yes</td>
+        <% else %>
+          <td class="competitor_not_exists">No</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

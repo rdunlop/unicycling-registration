@@ -39,7 +39,7 @@ describe ImportResultsController do
       end
 
       it "creates a new ImportResult with start_time" do
-        post :create, {:import_result => valid_attributes.merge(is_start_times: true), :user_id => @admin_user.id, :competition_id => @competition.id}
+        post :create, {:import_result => valid_attributes.merge(is_start_time: true), :user_id => @admin_user.id, :competition_id => @competition.id}
         expect(ImportResult.last.is_start_time).to be_truthy
       end
 

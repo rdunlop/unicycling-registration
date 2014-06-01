@@ -29,6 +29,7 @@ module TimePrintable
   end
 
   def full_time
+    return unless minutes && seconds && thousands
     "#{hours_minutes_string}:#{seconds_string}#{thousands_string}"
   end
 end

@@ -1,5 +1,8 @@
 <h1>Two Attempt Entries</h1>
 
+<%= link_to "Proof", proof_user_competition_two_attempt_entries_path(@user, @competition) %>
+<%= link_to "(pdf)", proof_user_competition_two_attempt_entries_path(@user, @competition, format: :pdf) %>
+
 <h2>Competition: <%= @competition %></h2>
 <h3>Is Start Time: <%= @is_start_time %></h3>
 

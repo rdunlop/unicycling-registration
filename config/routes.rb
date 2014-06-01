@@ -217,7 +217,12 @@ Workspace::Application.routes.draw do
         get 'single_attempt_entries/proof', to: 'data_entry#proof_single'
 
         #resources :single_attempt_entries, only: [:index, :create]
-        resources :two_attempt_entries, only: [:index, :create]
+        resources :two_attempt_entries, only: [:index, :create] do
+          collection do
+            get 'proof'
+          end
+        end
+
         resources :import_results, :only => [:index, :create] do
           collection do
             get :review

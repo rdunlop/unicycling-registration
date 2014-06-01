@@ -69,6 +69,14 @@ class TwoAttemptEntry
     end
   end
 
+  def full_time_1
+    i1.full_time
+  end
+
+  def full_time_2
+    i2.full_time
+  end
+
   delegate :errors, to: :i1
 
   def i1

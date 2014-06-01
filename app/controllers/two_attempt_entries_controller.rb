@@ -1,7 +1,7 @@
 class TwoAttemptEntriesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :user
-  before_filter :load_competition, :only => [:index, :create]
+  before_filter :load_competition, :only => [:index, :proof, :create]
   before_filter :load_new_two_attempt_entry, :only => [:create]
   load_and_authorize_resource
 
@@ -36,6 +36,17 @@ class TwoAttemptEntriesController < ApplicationController
         #format.html { render action: "index" }
         format.js { }
       end
+    end
+  end
+
+  def proof
+    @is_start_time = !params[:is_start_times].blank?
+
+    @two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.pdf { render_common_pdf("proof") }
     end
   end
 
