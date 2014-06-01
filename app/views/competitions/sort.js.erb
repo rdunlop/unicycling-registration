@@ -1,0 +1,6 @@
+el = $($.trim('<%= escape_javascript render :partial => "/competitors/competitor_sort_list", :object => @competition %>'))
+
+p = $('table').parent()
+p.children().remove()
+p.append(el)
+set_sortable();

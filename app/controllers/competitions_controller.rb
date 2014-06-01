@@ -11,7 +11,7 @@ class CompetitionsController < ApplicationController
 
   before_action :set_parent_breadcrumbs, only: [:new, :edit, :show]
 
-  respond_to :html
+  respond_to :html, :js
 
   # /events/#/competitions/new
   def new

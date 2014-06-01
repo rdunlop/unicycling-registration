@@ -54,7 +54,7 @@ $(document).ready(function(e) {
 
 // Sorting the list
 
-$(document).ready(function(){
+var set_sortable = function() {
   $('.drag_drop_sortable').sortable({
     axis: 'y',
     dropOnEmpty: false,
@@ -69,9 +69,12 @@ $(document).ready(function(){
         data: $('.drag_drop_sortable').sortable('serialize'),
         dataType: 'script',
         complete: function(request){
-          $('#drag_drop_sortable').effect('highlight');
+          $('.drag_drop_sortable').effect('highlight');
         },
         url: $('.drag_drop_sortable').data('target')})
     }
   }).disableSelection();
+}
+$(document).ready(function(){
+  set_sortable();
 });

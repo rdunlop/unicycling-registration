@@ -2,25 +2,9 @@
 
 <h4>Sort Competitors (live-save) </h4>
 
-<table>
-  <thead>
-    <tr>
-      <th>Draggable</th>
-      <th>Original Position</th>
-      <th>Competitor</th>
-    </tr>
-  </thead>
-  <tbody id="competitor-list" data-target="<%= sort_competition_path(@competition) %>" class="drag_drop_sortable">
-    <% @competition.competitors.order(:position).each do |f| %>
-      <tr id="competitor_<%= f.id %>">
-        <td class="handle" style="cursor: move">[DRAG]</td>
-        <td><%= f.position %></td>
-        <td><%= f.to_s %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<hr />
+<div>
+  <%= render partial: "competitor_sort_list", object: @competition %>
+</div>
 
 <h4>Sort Competitors Randomly </h4>
 
