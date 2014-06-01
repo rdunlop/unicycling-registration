@@ -6,7 +6,7 @@ class DataEntryController < ApplicationController
   load_resource :import_result, except: [:single, :show]
   authorize_resource class: false
 
-  before_action :load_import_results, :only => :single
+  before_action :load_import_results, :only => [:single, :proof_single]
 
   before_action :set_breadcrumbs
 
@@ -19,6 +19,17 @@ class DataEntryController < ApplicationController
     @import_result.is_start_time = @is_start_time
 
     @import_results = @import_results.where(is_start_time: @is_start_time)
+  end
+
+  def proof_single
+    @is_start_time = params[:is_start_times] || false
+
+    @import_results = @import_results.where(is_start_time: @is_start_time)
+
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf("proof_single") }
+    end
   end
 
   # GET /import_results/1/edit

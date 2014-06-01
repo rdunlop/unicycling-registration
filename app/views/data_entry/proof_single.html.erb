@@ -1,0 +1,32 @@
+<h1>Data Entry Confirmation</h1>
+
+<h2>Competition: <%= @competition %></h2>
+<h3>Start Times: <%= @is_start_time %></h3>
+<table class="sortable import_results">
+  <thead>
+    <tr>
+      <th>Bib number</th>
+      <th>Time</th>
+      <th>Disqualified</th>
+      <th>Name</th>
+      <th>Competitor Exists?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @import_results.each do |result| %>
+      <tr>
+        <td><%= result.raw_data %></td>
+        <td><%= result.full_time %></td>
+        <td><%= result.disqualified %></td>
+        <td><%= Registrant.find_by_bib_number(result.bib_number) %></td>
+        <% if result.competition.find_competitor_with_bib_number(result.bib_number) %>
+          <td class="competitor_exists">Yes</td>
+        <% else %>
+          <td class="competitor_not_exists">No</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>

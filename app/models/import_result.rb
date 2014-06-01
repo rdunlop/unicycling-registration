@@ -21,6 +21,8 @@
 #
 
 class ImportResult < ActiveRecord::Base
+  include TimePrintable
+
   validates :competition_id, :presence => true
   validates :user_id, :bib_number, :presence => true
   validate :results_for_competition

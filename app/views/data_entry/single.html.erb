@@ -1,5 +1,7 @@
 <h1>Data Entry</h1>
 
+<%= link_to "Proof", user_competition_single_attempt_entries_proof_path(@user, @competition) %>
+<%= link_to "(pdf)", user_competition_single_attempt_entries_proof_path(@user, @competition, format: :pdf) %>
 <h2>Competition: <%= @competition %></h2>
 <h3>Start Times: <%= @is_start_time %></h3>
 
@@ -7,10 +9,9 @@
   :remote => true, :html => {:class => "data_entry"}}) do |f| %>
   <%= render partial: "/shared/error_messages", object: @import_result %>
 
-  <table class="sortable import_results">
+  <table class="import_results">
     <thead>
       <tr>
-        <th></th>
         <th>Bib number</th>
         <th>Raw data</th>
         <th>Minutes</th>
