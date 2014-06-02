@@ -30,6 +30,7 @@ gem 'globalize', '~> 4.0.0'
 gem 'virtus'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'
+gem 'newrelic_rpm'
 
 #gem 'sqlite3'
 gem 'pg'

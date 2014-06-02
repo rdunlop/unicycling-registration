@@ -212,6 +212,16 @@ optional.
 
     MIXPANEL_TOKEN=<token>
 
+NewRelic Account
+----------------
+
+NewRelic is a performance monitoring tool, install it via the addons page, or commmand line.
+
+Set the following settings
+
+    NEW_RELIC_LICENSE_KEY=<key>
+    NEW_RELIC_APP_NAME=<name you would like to appear in NewRelic panel>
+
 
 Seed Data
 ---------
