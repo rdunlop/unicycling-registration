@@ -183,7 +183,7 @@ describe EventConfigurationsController do
 
     describe "POST 'test_mode_role'" do
       it "redirects to root" do
-        post 'test_mode_role'
+        post 'test_mode_role', role: "normal_user"
         response.should redirect_to(root_path)
       end
       it "changes my user to admin" do
