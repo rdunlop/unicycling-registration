@@ -95,7 +95,7 @@ class EventConfigurationsController < ApplicationController
     roles.each do |role|
       current_user.remove_role role.name if User.roles.include?(role.name.to_sym)
     end
-    current_user.add_role new_role
+    current_user.add_role new_role unless new_role.to_sym == :normal_user
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
     end

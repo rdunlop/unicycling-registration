@@ -2,5 +2,5 @@
 <% @event.event_categories.each do |event_category| %>
   <% @event_category = event_category %>
   <h1><%= @event_category %> - Sign Ups - (Count: <%= @event_category.num_signed_up_registrants %>)</h1>
-  <%= render :partial => "/event_categories/sign_ups", locals: {:registrants => event_category.signed_up_registrants, :event => @event} %>
+  <%= render :partial => "/event_categories/sign_ups", locals: {:sign_ups => event_category.registrant_event_sign_ups.signed_up, :event => @event} %>
 <% end %>

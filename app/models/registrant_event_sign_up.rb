@@ -26,7 +26,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
   belongs_to :event
 
   def self.signed_up
-    where(signed_up: true)
+    includes(:registrant).where(registrants: {deleted: false}).where(signed_up: true)
   end
 
   def category_chosen_when_signed_up
