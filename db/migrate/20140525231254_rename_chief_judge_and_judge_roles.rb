@@ -4,8 +4,7 @@ class RenameChiefJudgeAndJudgeRoles < ActiveRecord::Migration
   def up
     Role.reset_column_information
 
-    chief = Role.find_by(name: "chief_judge")
-    if chief
+    Role.where(name: "chief_judge").each do |chief|
       chief.name = "director"
       chief.save!
     end
@@ -20,8 +19,7 @@ class RenameChiefJudgeAndJudgeRoles < ActiveRecord::Migration
   def down
     Role.reset_column_information
 
-    director = Role.find_by(name: "director")
-    if director
+    Role.where(name: "director").each do |director|
       director.name = "chief_judge"
       director.save!
     end
