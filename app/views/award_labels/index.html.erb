@@ -1,5 +1,16 @@
 <h1>Award Labels</h1>
 
+<h2>New Menu: Create by Competition</h2>
+<%= form_tag(create_by_competition_user_award_labels_path(@user), {method: :post}) do %>
+
+  <%= label_tag :competition_id, "Competition" %>
+  <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name), "id", "to_s"), :include_blank => true %><br />
+  <br />
+
+  <%= submit_tag "Create Labels for Selected Competition" %>
+<% end %>
+
+<hr />
 <h2>Create Labels For a specific Registrant/Registrant-Group/Competition</h2>
 <%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post}) do %>
   <%= label_tag :registrant_id, "Single Registrant" %>

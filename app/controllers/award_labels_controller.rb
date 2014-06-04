@@ -2,7 +2,7 @@ class AwardLabelsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_user, :only => [:index, :create, :create_labels, :expert_labels, :normal_labels, :destroy_all, :create_labels_by_registrant]
+  before_filter :load_user, :only => [:index, :create, :create_by_competition, :create_labels, :expert_labels, :normal_labels, :destroy_all, :create_labels_by_registrant]
   respond_to :html
 
   def load_user
@@ -75,6 +75,22 @@ class AwardLabelsController < ApplicationController
       value
     else
       default
+    end
+  end
+
+  # POST /user/:id/award_labels/create_by_competition
+  def create_by_competition
+    competition = Competition.find(params[:competition_id])
+    min_place = 1
+    max_place = 5
+    n = 0
+    competition.competitors.each do |competitor|
+      competitor.members.each do |member|
+        n += create_labels_for_competitor(competitor, member.registrant, @user, competition.has_age_groups, competition.has_experts, min_place, max_place)
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to user_award_labels_path(@user), notice: "Created #{n} labels." }
     end
   end
 

@@ -239,6 +239,7 @@ Workspace::Application.routes.draw do
       end
       resources :award_labels, :shallow => true, :except => [:new, :show] do
         collection do
+          post :create_by_competition
           post :create_labels
           get :expert_labels
           get :normal_labels
