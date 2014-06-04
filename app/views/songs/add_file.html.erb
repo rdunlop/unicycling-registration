@@ -9,9 +9,10 @@
 </fieldset>
 <fieldset class="wizard">
 <legend>Step 2</legend>
+  Upload Music File.
   <%= direct_upload_form_for @uploader do |f| %>
     <%= hidden_field_tag 'Content-Type', 'audio/mpeg' %>
-    <b>NOTE:</b> Maximum file size is 40 MB<br />
+    <small><b>NOTE:</b> Maximum file size is 40 MB<br /></small>
     <%= f.file_field :song_file_name %>
     <%= f.submit 'Upload Music' %>
   <% end %>
