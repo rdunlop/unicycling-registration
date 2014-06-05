@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605030337) do
+ActiveRecord::Schema.define(version: 20140605040254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,8 @@ ActiveRecord::Schema.define(version: 20140605030337) do
     t.integer  "max_place"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "min_age"
+    t.integer  "max_age"
   end
 
   add_index "competition_sources", ["competition_id"], name: "index_competition_sources_competition_id", using: :btree

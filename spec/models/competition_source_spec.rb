@@ -55,20 +55,32 @@ describe CompetitionSource do
     before(:each) do
       @competition2 = FactoryGirl.create(:competition)
       @source_competition = FactoryGirl.create(:ranked_competition)
-      @cs2 = FactoryGirl.create(:competition_source, :target_competition => @source_competition, :max_place => 2)
+      @cs2 = FactoryGirl.create(:competition_source, :competition => @source_competition, :target_competition => @competition2, :max_place => 2)
+    end
 
-      it "chooses competitors from the source_competition with a good enough overall_place", :caching => true do
-        @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
-        @competitor.overall_place = 1
+    it "chooses competitors from the source_competition with a good enough overall_place", :caching => true do
+      @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
+      @competitor.overall_place = 1
 
-        @cs2.signed_up_registrants.count.should == 1
-      end
-      it "doesn't choose a competitor with an overall_place worse than the required" do
-        @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
-        @competitor.overall_place = 3
+      @cs2.signed_up_registrants.count.should == 1
+    end
+    it "doesn't choose a competitor with an overall_place worse than the required" do
+      @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
+      @competitor.overall_place = 3
 
-        @cs2.signed_up_registrants.count.should == 0
-      end
+      @cs2.signed_up_registrants.count.should == 0
+    end
+  end
+
+  describe "when a competition_source is filtered by age" do
+    it "chooses competitors with the age filter" do
+      reg = FactoryGirl.create(:competitor)
+      ec = @cs.event_category
+      allow(ec).to receive(:signed_up_registrants).and_return([reg])
+      allow(reg).to receive(:age).and_return(11)
+      @cs.min_age = 10
+      @cs.max_age = 11
+      @cs.signed_up_registrants.count.should == 1
     end
   end
 end

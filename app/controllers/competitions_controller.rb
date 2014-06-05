@@ -173,7 +173,7 @@ class CompetitionsController < ApplicationController
 
   def competition_params
     params.require(:competition).permit(:name, :uses_lane_assignments, :start_data_type, :end_data_type, :locked, :age_group_type_id, :scoring_class, :has_experts, :has_age_groups,
-                                        :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :competition_id, :max_place, :_destroy])
+                                        :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy])
   end
 
   def set_parent_breadcrumbs

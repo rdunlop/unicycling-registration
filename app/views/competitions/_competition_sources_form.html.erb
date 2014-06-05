@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>Gender</th>
+      <th>Ages</th>
       <th>Event Category</th>
       <th>Source Competition</th>
       <th>Max Place</th>
@@ -14,6 +15,10 @@
         <td>
           <%= cs.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true %>
         </td>
+        <tr>
+          <%= cs.label :min_age %><%= cs.number_field :min_age %><br />
+          <%= cs.label :max_age %><%= cs.number_field :max_age %>
+        </tr>
         <td>
           <%= cs.select :event_category_id, event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true  %>
         </td>

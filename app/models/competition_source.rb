@@ -65,6 +65,12 @@ class CompetitionSource < ActiveRecord::Base
       registrants = registrants.select {|reg| reg.gender == gender_filter}
     end
 
+    if min_age || max_age
+      min = min_age || 0
+      max = max_age || 999
+      registrants = registrants.select {|reg| reg.age >= min && reg.age <= max }
+    end
+
     registrants
   end
 end
