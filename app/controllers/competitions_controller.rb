@@ -128,7 +128,7 @@ class CompetitionsController < ApplicationController
         @competition.competitors.each do |comp|
           da = comp.max_successful_distance
           if da != 0
-            csv << [comp.external_id,
+            csv << [comp.export_id,
               da]
           end
         end

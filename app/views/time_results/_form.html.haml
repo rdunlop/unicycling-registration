@@ -14,7 +14,7 @@
     %tbody
       %tr
         %td.ui-widget
-          = f.select :competitor_id, @competition.competitors.all.map { |comp| ["#{comp.external_id}-#{comp}", comp.id] }, {:include_blank => true}, autofocus: true
+          = f.select :competitor_id, @competition.competitors.all.map { |comp| ["#{comp.bib_number}-#{comp}", comp.id] }, {:include_blank => true}, autofocus: true
         %td= f.number_field :minutes
         %td= f.number_field :seconds
         %td= f.number_field :thousands

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605012554) do
+ActiveRecord::Schema.define(version: 20140605030337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,11 +159,10 @@ ActiveRecord::Schema.define(version: 20140605012554) do
   create_table "competitors", force: true do |t|
     t.integer  "competition_id"
     t.integer  "position"
-    t.integer  "custom_external_id"
     t.string   "custom_name"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "status",             default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "status",         default: 0
   end
 
   add_index "competitors", ["competition_id"], name: "index_competitors_event_category_id", using: :btree

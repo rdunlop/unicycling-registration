@@ -46,7 +46,7 @@
       </thead>
       <tbody>
         <% competitors.each do |competitor| %>
-          <%= render :partial => "/printing/competitions/result_entry", :locals => {:id => competitor.external_id, :name => competitor.to_s, :time => competitor.result, :place => competitor.place } %>
+          <%= render :partial => "/printing/competitions/result_entry", :locals => {:id => competitor.bib_number, :name => competitor.to_s, :time => competitor.result, :place => competitor.place } %>
         <% end %>
       </tbody>
     </table>

@@ -19,10 +19,10 @@
         <tbody>
           <%= render partial: "attempt_entry_sample" %>
           <% @competition_sign_up.signed_up_list(description).each do |reg| %>
-            <%= render :partial => "attempt_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => false } %>
+            <%= render :partial => "attempt_entry", :locals => {:id => reg.bib_number, :name => reg.to_s, :not_signed_up => false } %>
           <% end %>
           <% @competition_sign_up.not_signed_up_list(description).each do |reg| %>
-            <%= render :partial => "attempt_entry", :locals => {:id => reg.external_id, :name => reg.to_s, :not_signed_up => true } %>
+            <%= render :partial => "attempt_entry", :locals => {:id => reg.bib_number, :name => reg.to_s, :not_signed_up => true } %>
           <% end %>
           <% 5.times do %>
             <%= render :partial => "attempt_entry", :locals => {:id => nil, :name => nil, :not_signed_up => false} %>

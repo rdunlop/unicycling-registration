@@ -96,7 +96,7 @@ describe CompetitorsController do
               { "0" => {:registrant_id => reg1.id},
                 "1" => {:registrant_id => reg2.id},
                 "2" => {:registrant_id => reg3.id}
-              }, custom_external_id: 101, custom_name: 'Robin Rocks!'}), :competition_id => @ec.id}
+              }, custom_name: 'Robin Rocks!'}), :competition_id => @ec.id}
         }.to change(Competitor, :count).by(1)
       end
     end

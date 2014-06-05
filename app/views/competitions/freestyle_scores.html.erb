@@ -23,7 +23,7 @@
 <% @competition.competitors.each do |competitor| %>
     <tr>
       <td><%= competitor.position %></td>
-      <td><%= competitor.external_id %></td>
+      <td><%= competitor.bib_number %></td>
       <td><%= competitor.name %></td>
       <td class="derived"><%= competitor.place %></td>
     </tr>
@@ -111,7 +111,7 @@
 <% @competition.competitors.each do |competitor| %>
     <tr>
       <td><%= competitor.position %></td>
-      <td><%= competitor.external_id %></td>
+      <td><%= competitor.bib_number %></td>
       <td><%= competitor.name %></td>
       <td class="derived"><%= competitor.place %></td>
     </tr>

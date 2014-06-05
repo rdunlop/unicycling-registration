@@ -19,7 +19,7 @@
     <tbody>
       <% @competition.best_distance_attempts.each do |da| %>
         <tr>
-          <td><%= da.competitor.external_id %></td>
+          <td><%= da.competitor.bib_number %></td>
           <td><%= da.competitor.name %></td>
           <td><%= da.distance %></td>
           <td><%= da.competitor.age_group_entry_description %></td>

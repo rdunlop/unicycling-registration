@@ -46,7 +46,7 @@ describe StreetScoresController do
     describe "with valid external_id" do
       it "creates a new Score" do
         expect {
-          post :create, {:external_id => @comp.external_id, :competitor_id => "", :score => 5, :judge_id => @judge.id}
+          post :create, {:external_id => @comp.bib_number, :competitor_id => "", :score => 5, :judge_id => @judge.id}
         }.to change(Score, :count).by(1)
       end
     end
@@ -60,7 +60,7 @@ describe StreetScoresController do
     describe "with both external_id and  competitor_id" do
       it "fails to create a new Score" do
         expect {
-          post :create, {:external_id => @comp.external_id, :competitor_id => @comp2.external_id, :score => 4, :judge_id => @judge.id}
+          post :create, {:external_id => @comp.bib_number, :competitor_id => @comp2.id, :score => 4, :judge_id => @judge.id}
         }.to change(Score, :count).by(0)
         response.should render_template("index")
       end

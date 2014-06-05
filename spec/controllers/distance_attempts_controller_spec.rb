@@ -22,7 +22,7 @@ describe DistanceAttemptsController do
       end
       it "returns the competitor when an external_id is specified" do
 
-        get 'index', :judge_id => judge.id, :external_id => comp.external_id
+        get 'index', :judge_id => judge.id, :external_id => comp.bib_number
 
         response.should redirect_to(new_judge_competitor_distance_attempt_path(judge, comp))
       end
@@ -36,9 +36,9 @@ describe DistanceAttemptsController do
         competition2 =FactoryGirl.create(:distance_competition)
         judge = FactoryGirl.create(:judge, :competition => competition2)
 
-        get 'index', :judge_id => judge.id, :external_id => comp.external_id
+        get 'index', :judge_id => judge.id, :external_id => comp.bib_number
 
-        flash[:alert].should == "That Registrant (#{comp.external_id}) is not registered for this event"
+        flash[:alert].should == "That Registrant (#{comp.bib_number}) is not registered for this event"
       end
       describe "looking at the 'index' for a specific competitor" do
         it "returns the correct objects when looking at a competitor index" do

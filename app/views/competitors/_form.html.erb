@@ -3,7 +3,6 @@
 <%= form_for form.persisted? ? form : [form.competition, form] do |f| %>
   <%= f.label :position %><%= f.text_field :position %><br />
 
-  <%= f.label :custom_external_id %><%= f.text_field :custom_external_id %><br />
   <%= f.label :custom_name, "Group/Team Name (optional)" %><%= f.text_field :custom_name %><br />
 
   <%= f.label :status %><br />

@@ -109,6 +109,6 @@ class CompetitorsController < ApplicationController
   private
 
   def competitor_params
-    params.require(:competitor).permit(:status, :position, :custom_name, {:members_attributes => [:registrant_id, :id, :_destroy] }, :custom_external_id, )
+    params.require(:competitor).permit(:status, :position, :custom_name, {:members_attributes => [:registrant_id, :id, :_destroy] } )
   end
 end

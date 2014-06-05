@@ -73,10 +73,6 @@ class Competitor < ActiveRecord::Base
       members.first.registrant.bib_number
     end
 
-    def bib_number
-      members.first.registrant.bib_number
-    end
-
     def scoring_helper
       competition.scoring_helper
     end
@@ -215,6 +211,10 @@ class Competitor < ActiveRecord::Base
       end
     end
 
+    def bib_number
+      registrants_ids
+    end
+
     def registrants_ids
       if registrants.empty?
         "(No registrants)"
@@ -231,27 +231,13 @@ class Competitor < ActiveRecord::Base
       end
     end
 
-    def external_id
-      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/external_id") do
-        if custom_external_id.present? && custom_external_id != 0
-          custom_external_id.to_s
-        else
-          registrants_ids
-        end
-      end
-    end
-
     # this field is used for data export
     def export_id
-        unless custom_external_id.nil?
-            custom_external_id
-        else
-            if registrants.empty?
-                nil
-            else
-                registrants.first.external_id
-            end
-        end
+      if registrants.empty?
+          nil
+      else
+          registrants.first.external_id
+      end
     end
 
     def age

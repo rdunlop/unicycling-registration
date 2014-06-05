@@ -116,35 +116,21 @@ describe Competitor do
       reg  = @comp.registrants.first
 
       @comp.name.should == reg.name
-      @comp.external_id.should == reg.external_id.to_s
+      @comp.bib_number.should == reg.external_id.to_s
     end
     it "should be elgiible" do
       @comp.ineligible.should == false
     end
-    it "should allow setting the custom_external_id to nil" do
-      @comp.custom_external_id = nil
-      @comp.valid?.should == true
-    end
-    it "should not set the external id or external name if they are blank-string" do
-      @comp.custom_external_id = ""
+    it "should not set the external name if it is a blank-string" do
       @comp.custom_name = ""
       reg = @comp.registrants.first
 
-      @comp.external_id.should == reg.external_id.to_s
+      @comp.bib_number.should == reg.external_id.to_s
       @comp.name.should == reg.name
     end
     it "should allow setting the custom_name to nil" do
       @comp.custom_name = nil
       @comp.valid?.should == true
-    end
-    it "when the custom_external_id is set, return it instead of registrants'" do
-      @comp.external_id.should == @comp.registrants.first.external_id.to_s
-
-      @comp.custom_external_id = 12345
-      Delorean.jump 2
-
-      @comp.save
-      @comp.external_id.should == "12345"
     end
     it "must have 3 competitors to allow a custom name" do
       @comp.custom_name = "Sargent Pepper"
@@ -176,11 +162,6 @@ describe Competitor do
             @comp.save!
             @comp.export_id.should == @comp.registrants.first.external_id
         end
-
-        it "should return the custom_external_id, when set" do
-            @comp.custom_external_id = 12341
-            @comp.export_id.should == 12341
-        end
     end
 
     it "should have a name, even without any registrants" do
@@ -189,7 +170,7 @@ describe Competitor do
         member.destroy
 
         @comp.name.should == "(No registrants)"
-        @comp.external_id.should == "(No registrants)"
+        @comp.bib_number.should == "(No registrants)"
     end
 
     describe "when it has multiple members" do
@@ -204,7 +185,7 @@ describe Competitor do
             @reg2 = member2.registrant
         end
         it "should display the external id's for all members" do
-            @comp.external_id.should == (@reg1.external_id.to_s + "," + @reg2.external_id.to_s)
+            @comp.bib_number.should == (@reg1.external_id.to_s + "," + @reg2.external_id.to_s)
         end
         it "should display the ages for all members (when they are the same)" do
             @comp.age.should == (@reg1.age)

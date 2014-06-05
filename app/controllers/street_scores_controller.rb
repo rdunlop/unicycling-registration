@@ -32,7 +32,7 @@ class StreetScoresController < ApplicationController
       end
       unless eid.empty?
         @competition.competitors.each do |c|
-          if c.external_id == eid
+          if c.bib_number == eid
             @score.competitor = c
           end
         end
