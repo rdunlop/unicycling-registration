@@ -69,6 +69,10 @@ class Competitor < ActiveRecord::Base
       name
     end
 
+    def first_bib_number
+      members.first.registrant.bib_number
+    end
+
     def bib_number
       members.first.registrant.bib_number
     end

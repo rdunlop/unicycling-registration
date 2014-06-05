@@ -88,7 +88,7 @@ class RaceDataImporter
     if la.nil?
       id = nil
     else
-      id = la.competitor.bib_number
+      id = la.competitor.first_bib_number
     end
     id
   end

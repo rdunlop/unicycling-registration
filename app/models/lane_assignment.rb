@@ -30,6 +30,6 @@ class LaneAssignment < ActiveRecord::Base
   end
 
   def matching_record
-    @matching_record ||= ImportResult.where(competition: competition, bib_number: competitor.bib_number).first
+    @matching_record ||= ImportResult.where(competition: competition, bib_number: competitor.first_bib_number).first
   end
 end
