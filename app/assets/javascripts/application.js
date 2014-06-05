@@ -78,3 +78,10 @@ var set_sortable = function() {
 $(document).ready(function(){
   set_sortable();
 });
+
+
+$(function() {
+  $(".not_qualified").each(function() {
+    $(this).attr('title', 'Not Qualified');
+  });
+});

@@ -33,12 +33,18 @@ class Competitor < ActiveRecord::Base
     validates_associated :members
     validate :must_have_3_members_for_custom_name
 
+    enum status: [:active, :not_qualified]
+
     # not all competitor types require a position
     #validates :position, :presence => true,
                          #:numericality => {:only_integer => true, :greater_than => 0}
 
     after_touch(:touch_places)
     after_save(:touch_places)
+
+    def self.active
+      where(status: Competitor.statuses[:active])
+    end
 
     def touch_places
       # update the last time for the overall gender
@@ -354,7 +360,7 @@ class Competitor < ActiveRecord::Base
       max_successful_distance_attempt || distance_attempts.first
     end
 
-    def status_code
+    def distance_attempt_status_code
         if distance_attempts.count == 0
             "can_attempt"
         else
@@ -370,7 +376,7 @@ class Competitor < ActiveRecord::Base
         end
     end
 
-    def status
+    def distance_attempt_status
         if distance_attempts.count == 0
             "Not Attempted"
         else

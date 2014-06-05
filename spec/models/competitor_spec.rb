@@ -372,7 +372,7 @@ describe Competitor do
     end
 
     it "should describe the status clearly" do
-        @comp.status.should == "Not Attempted"
+        @comp.distance_attempt_status.should == "Not Attempted"
     end
 
     describe "when attempts have already been made" do
@@ -408,7 +408,7 @@ describe Competitor do
             @da2.valid?.should == true
         end
         it "should describe the status" do
-            @comp.status.should == "Finished. Final Score 10"
+            @comp.distance_attempt_status.should == "Finished. Final Score 10"
         end
       end
 
@@ -422,7 +422,7 @@ describe Competitor do
       end
 
       it "should describe its status clearly" do
-        @comp.status.should == "Fault. Next Distance 15+"
+        @comp.distance_attempt_status.should == "Fault. Next Distance 15+"
       end
 
       describe "the last attempt was a success" do
@@ -430,7 +430,7 @@ describe Competitor do
           FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 20, :fault => false)
         end
         it "should have a nice status" do
-            @comp.status.should == "Success. Next Distance 21+"
+            @comp.distance_attempt_status.should == "Success. Next Distance 21+"
         end
       end
     end

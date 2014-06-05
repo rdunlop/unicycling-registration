@@ -23,3 +23,4 @@ config/secrets.yml
 
 # Ignore simplecov report
 /coverage
+/config/initializers/wicked_pdf_osx.rb

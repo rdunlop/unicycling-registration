@@ -337,6 +337,7 @@ settings, as well as some others that need to be configured properly:
     cd workspace
     $ echo "PORT=9292" > .env
     $ echo "RACK_ENV=development" >> .env
+    $ echo "WEB_CONCURRENCY=1" >> .env
 
 Each of the settings in the "Base Settings" section above will need to be
 configured. Some of these settings should be configured differently:

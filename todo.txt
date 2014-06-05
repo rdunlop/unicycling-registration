@@ -1,5 +1,7 @@
 Last Re-Arranged May 24, 2014.
 
+- remove competitor custom external id
+
 - Should the new competitor be created when the Lane Assignment is created, or when the data is "approved" by the data-entry person. I think it should be when the Lane Assignment is created, because once that happens, we want to have a result for every Competitor.
 
 - Need to enable the Lane-Assigner to enter a registrant who doesn't exist (for NAUCC). (also for Relay)

@@ -1,10 +1,9 @@
 <h1><%= @competition %> - Manage Competitors</h1>
-
 <p>
   These are all of the competitors configured for this competition
 </p>
 
-<table class="sortable">
+<table class="sortable competitor_statuses">
   <caption>Competitors</caption>
   <thead>
     <tr>
@@ -23,7 +22,7 @@
   <tbody>
     <% @competitors.each do |competitor| %>
       <% next if competitor.new_record? %>
-      <tr>
+      <tr class="<%= competitor.status %>">
         <% errors = nil %>
         <%
         competitor.registrants.each do |reg|
