@@ -130,11 +130,12 @@ class Competition < ActiveRecord::Base
     competitor
   end
 
-  def create_competitors_from_registrants(registrants)
+  def create_competitors_from_registrants(registrants, status = "active")
     num_created = 0
     registrants.each do |reg|
       competitor = competitors.build
       competitor.position = competitors.count + 1
+      competitor.status = status
       member = competitor.members.build
       member.registrant = reg
       if competitor.save

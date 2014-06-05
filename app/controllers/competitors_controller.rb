@@ -39,6 +39,8 @@ class CompetitorsController < ApplicationController
         if params[:commit] == Competitor.group_selection_text
           @competition.create_competitor_from_registrants(regs, params[:group_name])
           msg = "Created Group Competitor"
+        elsif params[:commit] == Competitor.not_qualified_text
+          msg = @competition.create_competitors_from_registrants(regs, "not_qualified")
         else
           msg = @competition.create_competitors_from_registrants(regs)
         end

@@ -393,6 +393,10 @@ class Competitor < ActiveRecord::Base
       "Create Pair/Group from selected Registrants"
     end
 
+    def self.not_qualified_text
+      "Mark these competitors as Not Qualified"
+    end
+
     # time result calculations
     def start_time_results
       time_results.start_times
