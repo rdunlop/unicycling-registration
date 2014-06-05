@@ -6,20 +6,13 @@ class CompetitorsController < ApplicationController
   load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy]
   load_and_authorize_resource :only => [:edit, :update, :destroy]
 
+  before_action :set_parent_breadcrumbs, only: [:index, :new, :edit]
+
   respond_to :html
 
-  private
-  def load_competition
-    @competition = Competition.find(params[:competition_id])
-  end
-
-  def load_new_competitor
-    @competitor = @competition.competitors.new(competitor_params)
-  end
-
-  public
   # GET /competitions/:competition_id/1/competitors/new
   def new
+    add_breadcrumb "Add Competitor"
     @filtered_registrants = @competition.signed_up_registrants
     @competitor = @competition.competitors.new
     @competitor.members.build #add an initial member
@@ -27,6 +20,7 @@ class CompetitorsController < ApplicationController
 
   # GET /competitions/1/competitors
   def index
+    add_breadcrumb "Manage Competitors"
     @registrants = @competition.signed_up_registrants
     @competitors = @competition.competitors
   end
@@ -54,6 +48,7 @@ class CompetitorsController < ApplicationController
 
   # GET /competitors/1/edit
   def edit
+    add_breadcrumb "Edit Competitor"
   end
 
   def add_all
@@ -112,5 +107,19 @@ class CompetitorsController < ApplicationController
 
   def competitor_params
     params.require(:competitor).permit(:status, :position, :custom_name, {:members_attributes => [:registrant_id, :id, :_destroy] } )
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_new_competitor
+    @competitor = @competition.competitors.new(competitor_params)
+  end
+
+  def set_parent_breadcrumbs
+    @competition ||= @competitor.competition
+    add_breadcrumb "#{@competition}", competition_path(@competition)
+    add_breadcrumb "Manage Competitors", competition_competitors_path(@competition) if @competitor
   end
 end
