@@ -43,6 +43,16 @@ shared_context 'optional expense_item' do |options = {}|
   end
 end
 
+shared_context 'paid expense item' do
+  before :each do
+    pd = FactoryGirl.create(:payment_detail, registrant: competitor)
+    payment = pd.payment
+    payment.completed = true
+    payment.save
+    competitor.reload
+  end
+end
+
 shared_context 'optional expense_item with details' do |options = {}|
   options.reverse_merge! has_details: true, details: ""
   include_context 'optional expense_item', options

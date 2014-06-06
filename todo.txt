@@ -1,6 +1,9 @@
 Last Re-Arranged May 24, 2014.
 
-- remove competitor custom external id
+- Prevent not-qualified competitors from showing up on any competition sheets/judging/etc.
+- Add "Confirmed Competitions" to the registrant sheet.
+- Add "Not-confirmed competitions" to the registrant sheet.
+
 
 - Should the new competitor be created when the Lane Assignment is created, or when the data is "approved" by the data-entry person. I think it should be when the Lane Assignment is created, because once that happens, we want to have a result for every Competitor.
 
