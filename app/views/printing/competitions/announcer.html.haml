@@ -1,0 +1,18 @@
+%h2= "#{@competition} Competition Order"
+
+%table.full_grid
+  %thead
+    %tr
+      %th Order
+      %th ID
+      %th Name
+      %th Club
+      %th Country
+  %tbody
+    - @competition.competitors.each do |comp|
+      %tr
+        %td= comp.position
+        %td= comp.bib_number
+        %td= comp
+        %td= comp.club
+        %td= comp.country
