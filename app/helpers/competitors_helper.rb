@@ -11,13 +11,14 @@ module CompetitorsHelper
   def data_recording_link(competition, options = {})
     case options[:is_start_times] ? competition.start_data_type : competition.end_data_type
     when "Two Attempt Distance"
-      link_to "Two Attempt Recording", two_attempt_recording_printing_competition_path(competition, options)
-      link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
+      res = link_to "Two Attempt Recording", two_attempt_recording_printing_competition_path(competition, options)
+      res += link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
     when "Single Attempt"
-      link_to "Blank Race Recording Forms", single_attempt_recording_printing_competition_path(competition, options)
-      link_to "(pdf)", single_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
+      res = link_to "Blank Race Recording Forms", single_attempt_recording_printing_competition_path(competition, options)
+      res += link_to "(pdf)", single_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
     when "Track E-Timer"
-      "none"
+      res = link_to "Heats Recording Sheet", heat_recording_printing_competition_path(competition)
+      res += link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf)
     end
   end
 
@@ -31,7 +32,8 @@ module CompetitorsHelper
     when "Single Attempt"
       link_to "Single ", user_competition_single_attempt_entries_path(user, competition, is_start_times: true)
     when "Track E-Timer"
-      link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
+      res = link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
+      res += link_to "Set Lane Assignments", competition_lane_assignments_path(competition)
     end
 
   end

@@ -1,3 +1,11 @@
 %h1= @competition
 
 Information about the Competition will appear here, including results, judges, and scoring settings (read-only)
+
+%h2 Data Entry
+
+%table.sortable
+  %thead
+    = render partial: "data_entry_links_header"
+  %tbody
+    = render partial: "data_entry_links", locals: {competition: @competition }

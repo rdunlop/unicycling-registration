@@ -4,87 +4,11 @@
 
 <table class="sortable">
   <thead>
-    <tr>
-      <th rowspan="2">Competition</th>
-      <th rowspan="2">Announcer Form</th>
-      <th colspan="2">Excel/Track-timer</th>
-      <th colspan="2">Start</th>
-      <th colspan="2">Finish</th>
-      <th colspan="2">Heat Recording</th>
-    </tr>
-    <tr>
-      <th>
-        Sample Data
-      </th>
-      <th>
-        Importer
-      </th>
-      <th>
-        Recording Forms
-      </th>
-      <th>
-        Data Entry
-      </th>
-      <th>
-        Recording Forms
-      </th>
-      <th>
-        Data Entry
-      </th>
-      <th>
-        Recording Forms
-      </th>
-      <th>
-        Data Entry
-      </th>
-    </tr>
+    <%= render partial: "competitions/data_entry_links_header" %>
   </thead>
   <tbody>
     <% @event.competitions.each do |competition| %>
-      <tr>
-        <td><%= competition %></td>
-        <td>
-          <%= link_to "Announcer Form", announcer_printing_competition_path(competition) %>
-          <%= link_to "(pdf)", announcer_printing_competition_path(competition, :format => :pdf) %>
-        </td>
-        <td>
-          Not yet implemented.
-        </td>
-        <td>
-          <% if competition.results_importable %>
-            <%= link_to 'Import', user_competition_import_results_path(current_user, competition) %>
-          <% else %>
-            <%= "N/A" %>
-          <% end %>
-        </td>
-        <% if can? :create, TwoAttemptEntry %>
-          <td>
-            <%= link_to "Two Attempt Recording", two_attempt_recording_printing_competition_path(competition) %>
-            <%= link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, :format => :pdf) %>
-          </td>
-          <td>
-            <%= link_to 'Enter Start Times', user_competition_two_attempt_entries_path(current_user, competition, is_start_times: true) %>
-          </td>
-        <% else %>
-          <td>N/A</td><td>N/A</td>
-        <% end %>
-        <td>
-          <%= link_to "Blank Race Recording Forms", printing_race_recording_blank_path %>
-          <%= link_to "(pdf)", printing_race_recording_blank_path(:format => :pdf) %>
-        </td>
-        <td>
-          <%= link_to 'Enter Finish Times', data_entry_user_competition_import_results_path(current_user, competition) %>
-        </td>
-        <td>
-          <%= link_to "Heat Recording", heat_recording_printing_competition_path(competition) %>
-          <%= link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf) %>
-        </td>
-        <td>
-          <% if competition.uses_lane_assignments %>
-            <%= link_to "#{competition} Lane Assignments", competition_lane_assignments_path(competition) %>
-          <% end %>
-        </td>
-      </tr>
+      <%= render partial: "competitions/data_entry_links", locals: { competition: competition } %>
     <% end %>
   </tbody>
 </table>
