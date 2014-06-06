@@ -23,6 +23,7 @@ module CompetitorsHelper
   end
 
   def data_confirmation_link(competition, options = {})
+    link_to "View", review_user_competition_import_results_path(current_user, competition)
   end
 
   def start_data_entry_link(user, competition)

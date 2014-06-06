@@ -26,3 +26,21 @@
 .end_times {
   background-color: lightblue;
 }
+
+
+/* colors of various competition states */
+.no_competitors {
+  background-color: rgb(216, 226, 226);
+}
+
+.no_results {
+  background-color: rgb(124, 238, 229);
+}
+
+.unawarded {
+  background-color: rgb(101, 223, 155);
+}
+
+.awarded {
+  background-color: green;
+}

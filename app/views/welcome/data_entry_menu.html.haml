@@ -13,23 +13,6 @@
           %Td= judge.competition.locked?
   %hr
 
-- if can? :manage, LaneAssignment
-  %h2 Lane Assignment Management
-
-  %table
-    %thead
-      %tr
-        %th Competition
-        %th Lane Assignment
-        %th View Heats
-    %tbody
-      - Competition.all.each do |competition|
-        - next unless competition.uses_lane_assignments
-        %tr
-          %td= competition
-          %td= link_to "Enter/Review", competition_lane_assignments_path(competition)
-          %td= link_to "View", view_heat_competition_lane_assignments_path(competition)
-
 %h1 Data Entry Menu
 
 %p
@@ -47,27 +30,16 @@ Please choose the event that you want to enter data for:
       %th Category
       %th Event
       %th Competition
-      %th Enter Start Data
-      %th Enter Finish Results
+      %th Status
       %th (Director-only) View/Approve data
   %tbody
     - Competition.all.each do |competition|
       %tr
         %td= competition.event.category
         %td= competition.event
-        %td= competition.name
-        - if competition.results_importable
-          %td
-            = start_data_entry_link(current_user, competition)
-            = data_recording_link(competition, is_start_times: true)
-            = data_confirmation_link(competition, is_start_times: true)
-          %td
-            = end_data_entry_link(current_user, competition)
-            = data_recording_link(competition, is_start_times: false)
-            = data_confirmation_link(competition, is_start_times: false)
-        - else
-          %td.judgedCompetition Judged
-          %td.judgedCompetition Judged
+        %td= link_to competition.name, competition
+        - competition_presenter = CompetitionPresenter.new(competition)
+        %td{ class: competition_presenter.status_code}= competition_presenter.status
         %td= link_to "View", review_user_competition_import_results_path(current_user, competition)
 
 If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).
