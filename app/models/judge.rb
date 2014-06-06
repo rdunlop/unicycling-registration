@@ -32,6 +32,7 @@ class Judge < ActiveRecord::Base
 
     delegate :event, to: :competition
 
+    # Note, this appears to be duplicated in ability.rb
     def check_for_scores
       if scores.count > 0
         errors[:base] << "cannot delete judge containing a score"

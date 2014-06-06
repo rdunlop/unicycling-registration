@@ -242,6 +242,14 @@ describe "Ability" do
       end
       it { should be_able_to(:destroy, @judge) }
       it { should be_able_to(:create, Judge) }
+
+      describe "When the judge has a score" do
+        before :each do
+          @score = FactoryGirl.create(:score, :judge => @judge)
+        end
+
+        it { should_not be_able_to(:destroy, @judge) }
+      end
     end
   end
 

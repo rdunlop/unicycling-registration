@@ -81,7 +81,7 @@ class Ability
 
     can :manage, DataEntryVolunteer
     can :manage, Judge do |judge|
-      user.has_role? :director, judge.competition.event
+      (judge.scores.count == 0) && (user.has_role? :director, judge.competition.event)
     end
   end
 
