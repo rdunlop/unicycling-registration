@@ -125,7 +125,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @event.competitions.order(:name).each do |competition| %>
+    <% @event.competitions.each do |competition| %>
       <tr>
         <td><%= competition %></td>
         <td><%= competition.locked? %>
