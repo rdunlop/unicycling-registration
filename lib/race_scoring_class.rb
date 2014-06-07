@@ -76,11 +76,14 @@ class RaceScoringClass < BaseScoringClass
   end
 
   def build_import_result_from_raw(raw)
+    dq = (raw[4] == "DQ")
     ImportResult.new(
       bib_number: raw[0],
       minutes: raw[1],
       seconds: raw[2],
       thousands: raw[3],
-      status: (raw[4] == "DQ") ? "DQ" : nil)
+      status: dq ? "DQ" : nil,
+      comments: dq ? "from Import" : nil,
+      comments_by: dq ? "system" : nil)
   end
 end

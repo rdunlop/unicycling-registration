@@ -90,11 +90,11 @@ ActiveRecord::Schema.define(version: 20140606235115) do
   end
 
   create_table "category_translations", force: true do |t|
-    t.integer  "category_id"
-    t.string   "locale"
+    t.integer  "category_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
@@ -131,8 +131,8 @@ ActiveRecord::Schema.define(version: 20140606235115) do
     t.integer  "competition_id"
     t.string   "gender_filter"
     t.integer  "max_place"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "min_age"
     t.integer  "max_age"
   end
@@ -219,12 +219,12 @@ ActiveRecord::Schema.define(version: 20140606235115) do
   add_index "event_categories", ["event_id", "position"], name: "index_event_categories_event_id", using: :btree
 
   create_table "event_choice_translations", force: true do |t|
-    t.integer  "event_choice_id"
-    t.string   "locale"
+    t.integer  "event_choice_id", null: false
+    t.string   "locale",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "label"
     t.string   "tooltip"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
   end
 
   add_index "event_choice_translations", ["event_choice_id"], name: "index_event_choice_translations_on_event_choice_id", using: :btree
@@ -249,14 +249,14 @@ ActiveRecord::Schema.define(version: 20140606235115) do
   add_index "event_choices", ["event_id", "position"], name: "index_event_choices_event_id", using: :btree
 
   create_table "event_configuration_translations", force: true do |t|
-    t.integer  "event_configuration_id"
-    t.string   "locale"
+    t.integer  "event_configuration_id", null: false
+    t.string   "locale",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "short_name"
     t.string   "long_name"
-    t.string   "dates_description"
     t.string   "location"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "dates_description"
   end
 
   add_index "event_configuration_translations", ["event_configuration_id"], name: "index_8da8125feacb8971b8fc26e0e628b77608288047", using: :btree
@@ -309,11 +309,11 @@ ActiveRecord::Schema.define(version: 20140606235115) do
   add_index "events", ["category_id"], name: "index_events_category_id", using: :btree
 
   create_table "expense_group_translations", force: true do |t|
-    t.integer  "expense_group_id"
-    t.string   "locale"
+    t.integer  "expense_group_id", null: false
+    t.string   "locale",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "group_name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
   end
 
   add_index "expense_group_translations", ["expense_group_id"], name: "index_expense_group_translations_on_expense_group_id", using: :btree
@@ -333,13 +333,13 @@ ActiveRecord::Schema.define(version: 20140606235115) do
   end
 
   create_table "expense_item_translations", force: true do |t|
-    t.integer  "expense_item_id"
-    t.string   "locale"
+    t.integer  "expense_item_id", null: false
+    t.string   "locale",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name"
     t.string   "description"
     t.string   "details_label"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
   end
 
   add_index "expense_item_translations", ["expense_item_id"], name: "index_expense_item_translations_on_expense_item_id", using: :btree
@@ -490,8 +490,8 @@ ActiveRecord::Schema.define(version: 20140606235115) do
   create_table "refund_details", force: true do |t|
     t.integer  "refund_id"
     t.integer  "payment_detail_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "refund_details", ["payment_detail_id"], name: "index_refund_details_on_payment_detail_id", using: :btree
@@ -501,8 +501,8 @@ ActiveRecord::Schema.define(version: 20140606235115) do
     t.integer  "user_id"
     t.datetime "refund_date"
     t.string   "note"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "percentage",  default: 100
   end
 
@@ -589,11 +589,11 @@ ActiveRecord::Schema.define(version: 20140606235115) do
   add_index "registrants", ["user_id"], name: "index_registrants_on_user_id", using: :btree
 
   create_table "registration_period_translations", force: true do |t|
-    t.integer  "registration_period_id"
-    t.string   "locale"
+    t.integer  "registration_period_id", null: false
+    t.string   "locale",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
   end
 
   add_index "registration_period_translations", ["locale"], name: "index_registration_period_translations_on_locale", using: :btree

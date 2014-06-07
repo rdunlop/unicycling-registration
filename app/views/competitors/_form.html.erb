@@ -5,10 +5,11 @@
 
   <%= f.label :custom_name, "Group/Team Name (optional)" %><%= f.text_field :custom_name %><br />
 
-  <%= f.label :status %><br />
+  <%= f.label :status %>
   <%= f.select :status, Competitor.statuses.keys %><br />
 
-  <div class="items">
+  <fieldset class="items">
+    <legend>Registrants</legend>
     <%= f.nested_fields_for :members do |member_f| %>
        <div class="item">
           <%= member_f.label :registrant %>
@@ -20,9 +21,8 @@
           <%= member_f.hidden_field :_destroy %>
         </div>
     <% end %>
-  </div>
+  </fieldset>
   <a href="#" class="add">add registrant</a><br /><br />
-
 
   <%= f.submit %>
 <% end %>

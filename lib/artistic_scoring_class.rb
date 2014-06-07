@@ -51,4 +51,8 @@ class ArtisticScoringClass < BaseScoringClass
   def include_event_name
     true
   end
+
+  def compete_in_order
+    true
+  end
 end

@@ -1,9 +1,10 @@
-%h2= "#{@competition} Competition Order"
+%h2= "#{@competition} Competitors"
 
 %table.full_grid
   %thead
     %tr
-      %th Order
+      - if @competition.compete_in_order
+        %th Order
       %th ID
       %th Name
       %th Club
@@ -11,7 +12,8 @@
   %tbody
     - @competition.competitors.each do |comp|
       %tr
-        %td= comp.position
+        - if @competition.compete_in_order
+          %td= comp.position
         %td= comp.bib_number
         %td= comp
         %td= comp.club

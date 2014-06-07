@@ -53,6 +53,11 @@ class BaseScoringClass
     false
   end
 
+  # Do the competitors compete in a pre-defined order?
+  def compete_in_order
+    false
+  end
+
   def build_result_from_imported(import_result)
     raise NotImplementedError
   end

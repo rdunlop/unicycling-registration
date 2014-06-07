@@ -1,0 +1,19 @@
+%h3= "#{@competition.event} - #{@competition}"
+
+- if @competition.compete_in_order
+  %h4 Sort Competitors (live-save)
+
+  %div
+    = render partial: "competitor_sort_list", object: @competition
+
+  %h4 Sort Competitors Randomly
+
+  = link_to "Sort", sort_random_competition_path(@competition), method: :post, data: { confirm: "Are you sure?" }
+  %hr
+
+%h4 Add New Competitor
+
+= render :partial => "/competitors/form", :object => @competitor
+
+.bottom_nav
+  = link_to 'Back', event_path(@competition.event)

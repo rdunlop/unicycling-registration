@@ -395,7 +395,7 @@ class Registrant < ActiveRecord::Base
     end
 
     results[:additional] = nil
-    event.event_choices.includes(:event_choice).each do |ec|
+    event.event_choices.each do |ec|
       my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
       unless my_val.nil? or !my_val.has_value?
         results[:additional] += " - " unless results[:additional].nil?
