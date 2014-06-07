@@ -1,0 +1,38 @@
+%table.items
+  %thead
+    %tr
+      %th Gender
+      %th Ages
+      %th Event Category
+      %th Source Competition
+      %th Max Place
+      %th Delete
+  %tbody
+    = f.nested_fields_for :competition_sources, render_template: false do |cs|
+      %tr.item
+        %td= cs.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true
+        %td
+          = cs.label :min_age
+          = cs.number_field :min_age
+          %br
+          = cs.label :max_age
+          = cs.number_field :max_age
+        %td= cs.select :event_category_id, event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true
+        %td= cs.select :competition_id, Competition.event_order.all.map{|c| [c, c.id]}, :include_blank => true
+        %td= cs.number_field :max_place
+        %td
+          %a{href: '#', class: 'remove'} remove
+          = cs.hidden_field :id
+          = cs.hidden_field :_destroy
+%a{ href: "#", class: "add"} add entry
+%br
+= nested_fields_templates
+
+%ul
+  %li
+    Select <b>Event Category</b> <b><u>OR</u></b> Source Competition
+  %li
+    %b Max Place:
+    (Source-Competition <u>only</u>) specify the overall_place which the competitors must achieve in the Source Competition to be included as registrants
+
+

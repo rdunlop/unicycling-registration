@@ -33,8 +33,12 @@ module CompetitorsHelper
     when "Single Attempt"
       link_to "Single ", user_competition_single_attempt_entries_path(user, competition, is_start_times: true)
     when "Track E-Timer"
-      res = link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
-      res += link_to "Set Lane Assignments", competition_lane_assignments_path(competition)
+      if competition.uses_lane_assignments
+        res = link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
+        res += link_to "Set Lane Assignments", competition_lane_assignments_path(competition)
+      else
+        "None Enabled"
+      end
     end
 
   end
