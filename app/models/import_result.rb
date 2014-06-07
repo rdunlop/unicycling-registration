@@ -34,7 +34,6 @@ class ImportResult < ActiveRecord::Base
   validate :results_for_competition
 
   validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
-  validates :comments, :comments_by, presence: true, if: "disqualified"
 
   belongs_to :user
   belongs_to :competition

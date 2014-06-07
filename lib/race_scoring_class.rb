@@ -82,8 +82,6 @@ class RaceScoringClass < BaseScoringClass
       minutes: raw[1],
       seconds: raw[2],
       thousands: raw[3],
-      status: dq ? "DQ" : nil,
-      comments: dq ? "from Import" : nil,
-      comments_by: dq ? "system" : nil)
+      status: dq ? "DQ" : nil)
   end
 end
