@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605040254) do
+ActiveRecord::Schema.define(version: 20140606235115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -390,6 +390,7 @@ ActiveRecord::Schema.define(version: 20140605040254) do
     t.integer  "attempt_number"
     t.string   "status"
     t.text     "comments"
+    t.string   "comments_by"
   end
 
   add_index "import_results", ["user_id"], name: "index_import_results_on_user_id", using: :btree
@@ -700,6 +701,7 @@ ActiveRecord::Schema.define(version: 20140605040254) do
     t.integer  "attempt_number"
     t.string   "status"
     t.text     "comments"
+    t.string   "comments_by"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_event_category_id", using: :btree

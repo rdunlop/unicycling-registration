@@ -11,6 +11,10 @@
 #  age_range_start :integer          default(0)
 #  age_range_end   :integer          default(100)
 #
+# Indexes
+#
+#  index_event_categories_event_id  (event_id,position)
+#
 
 class EventCategory < ActiveRecord::Base
   belongs_to :event, :inverse_of => :event_categories, :touch => true

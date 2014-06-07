@@ -18,6 +18,12 @@
 #  attempt_number :integer
 #  status         :string(255)
 #  comments       :text
+#  comments_by    :string(255)
+#
+# Indexes
+#
+#  index_import_results_on_user_id  (user_id)
+#  index_imported_results_user_id   (user_id)
 #
 
 class ImportResult < ActiveRecord::Base
@@ -28,6 +34,7 @@ class ImportResult < ActiveRecord::Base
   validate :results_for_competition
 
   validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
+  validates :comments, :comments_by, presence: true, if: "disqualified"
 
   belongs_to :user
   belongs_to :competition

@@ -17,6 +17,10 @@
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer
 #
+# Indexes
+#
+#  index_event_choices_event_id  (event_id,position)
+#
 
 class EventChoice < ActiveRecord::Base
   belongs_to :event, :touch => true

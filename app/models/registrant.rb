@@ -20,6 +20,11 @@
 #  volunteer               :boolean
 #  online_waiver_signature :string(255)
 #
+# Indexes
+#
+#  index_registrants_deleted     (deleted)
+#  index_registrants_on_user_id  (user_id)
+#
 
 class Registrant < ActiveRecord::Base
   include Eligibility

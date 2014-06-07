@@ -13,6 +13,11 @@
 #  locked          :boolean          default(FALSE)
 #  custom_cost     :decimal(, )
 #
+# Indexes
+#
+#  index_registrant_expense_items_expense_item_id  (expense_item_id)
+#  index_registrant_expense_items_registrant_id    (registrant_id)
+#
 
 class RegistrantExpenseItem < ActiveRecord::Base
   belongs_to :registrant

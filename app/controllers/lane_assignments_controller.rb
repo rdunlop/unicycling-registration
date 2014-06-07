@@ -16,22 +16,23 @@ class LaneAssignmentsController < ApplicationController
     @dq_request = DQRequest.new(params[:dq_request])
 
     bib_number = @dq_request.bib_number
-    @heat = @dq_request.heat
+    @heat = @dq_request.heat.to_i
 
-    @ir = ImportResult.new(
+    ir = ImportResult.new(
       bib_number: bib_number,
       status: "DQ",
       comments: @dq_request.comments,
+      comments_by: @dq_request.comments_by,
       competition: @competition,
       user: current_user
       )
 
     respond_to do |format|
-      if @ir.save
+      if ir.save
         format.html { redirect_to view_heat_competition_lane_assignments_path(@competition, heat: @heat), notice: 'Competitor successfully dq.' }
       else
         add_breadcrumb "View Heat"
-        @lane_assignments = @competition.lane_assignments.where(heat: heat)
+        @lane_assignments = @competition.lane_assignments.where(heat: @heat)
         format.html { render action: "view_heat" }
       end
       end

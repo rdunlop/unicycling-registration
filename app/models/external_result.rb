@@ -9,6 +9,10 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
+# Indexes
+#
+#  index_external_results_on_competitor_id  (competitor_id)
+#
 
 class ExternalResult < ActiveRecord::Base
   include Competeable

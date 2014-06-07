@@ -10,6 +10,10 @@
 #  updated_at  :datetime         not null
 #  percentage  :integer          default(100)
 #
+# Indexes
+#
+#  index_refunds_on_user_id  (user_id)
+#
 
 class Refund < ActiveRecord::Base
   validates :refund_date, :user_id, :note, :percentage, :presence => true

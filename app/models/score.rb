@@ -13,6 +13,11 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
+# Indexes
+#
+#  index_scores_competitor_id  (competitor_id)
+#  index_scores_judge_id       (judge_id)
+#
 
 class Score < ActiveRecord::Base
   include Judgeable

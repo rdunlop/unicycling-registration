@@ -8,6 +8,10 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
+# Indexes
+#
+#  index_registrant_groups_registrant_id  (registrant_id)
+#
 
 class RegistrantGroup < ActiveRecord::Base
   belongs_to :contact_person, :class_name => "Registrant", :foreign_key => "registrant_id"

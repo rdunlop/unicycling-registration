@@ -18,6 +18,10 @@
 #  has_custom_cost        :boolean          default(FALSE)
 #  maximum_per_registrant :integer          default(0)
 #
+# Indexes
+#
+#  index_expense_items_expense_group_id  (expense_group_id)
+#
 
 class ExpenseItem < ActiveRecord::Base
   default_scope { order('expense_group_id ASC, position ASC') }

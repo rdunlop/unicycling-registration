@@ -16,6 +16,10 @@
 #  end_data_type         :string(255)
 #  uses_lane_assignments :boolean          default(FALSE)
 #
+# Indexes
+#
+#  index_competitions_event_id  (event_id)
+#
 
 class Competition < ActiveRecord::Base
   belongs_to :age_group_type, :inverse_of => :competitions

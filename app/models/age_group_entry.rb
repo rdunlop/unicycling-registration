@@ -13,6 +13,11 @@
 #  updated_at        :datetime         not null
 #  wheel_size_id     :integer
 #
+# Indexes
+#
+#  index_age_group_entries_age_group_type_id  (age_group_type_id)
+#  index_age_group_entries_wheel_size_id      (wheel_size_id)
+#
 
 class AgeGroupEntry < ActiveRecord::Base
   validates :age_group_type, :short_description, :presence => true

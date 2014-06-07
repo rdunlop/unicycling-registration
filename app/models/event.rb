@@ -12,6 +12,10 @@
 #  visible               :boolean
 #  accepts_music_uploads :boolean          default(FALSE)
 #
+# Indexes
+#
+#  index_events_category_id  (category_id)
+#
 
 class Event < ActiveRecord::Base
   has_many :event_choices, -> {order "event_choices.position"}, :dependent => :destroy, :inverse_of => :event

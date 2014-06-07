@@ -8,6 +8,11 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
+# Indexes
+#
+#  index_members_competitor_id  (competitor_id)
+#  index_members_registrant_id  (registrant_id)
+#
 
 class Member < ActiveRecord::Base
     belongs_to :competitor, :touch => true, :inverse_of => :members

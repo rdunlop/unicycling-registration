@@ -8,6 +8,11 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
+# Indexes
+#
+#  index_registrant_group_mumbers_registrant_group_id  (registrant_group_id)
+#  index_registrant_group_mumbers_registrant_id        (registrant_id)
+#
 
 class RegistrantGroupMember < ActiveRecord::Base
   belongs_to :registrant_group, :inverse_of => :registrant_group_members

@@ -13,6 +13,10 @@
 #  payment_date   :string(255)
 #  note           :string(255)
 #
+# Indexes
+#
+#  index_payments_user_id  (user_id)
+#
 
 class Payment < ActiveRecord::Base
   scope :completed, -> { where(:completed => true) }

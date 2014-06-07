@@ -63,6 +63,6 @@ class TimeResultsController < ApplicationController
 
   private
   def time_result_params
-    params.require(:time_result).permit(:attempt_number, :comments, :status, :minutes, :seconds, :thousands, :competitor_id)
+    params.require(:time_result).permit(:attempt_number, :comments, :comments_by, :status, :minutes, :seconds, :thousands, :competitor_id)
   end
 end

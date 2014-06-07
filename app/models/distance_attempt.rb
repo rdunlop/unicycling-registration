@@ -10,6 +10,11 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
+# Indexes
+#
+#  index_distance_attempts_competitor_id  (competitor_id)
+#  index_distance_attempts_judge_id       (judge_id)
+#
 
 class DistanceAttempt < ActiveRecord::Base
   include Competeable

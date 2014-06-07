@@ -13,6 +13,11 @@
 #  attempt_number :integer
 #  status         :string(255)
 #  comments       :text
+#  comments_by    :string(255)
+#
+# Indexes
+#
+#  index_time_results_on_event_category_id  (competitor_id)
 #
 
 class TimeResult < ActiveRecord::Base

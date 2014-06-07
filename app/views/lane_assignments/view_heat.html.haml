@@ -17,10 +17,12 @@ Lane Assignments
       %p{class: "status-#{lane.status}"}= lane.status
       %p= lane.comments
       %div.dq_option{class: "dq_option#{lane.lane}"}
-        = form_for DQRequest.new(bib_number: lane.competitor.bib_number, heat: @heat), url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
+        = form_for DQRequest.new(bib_number: lane.competitor.bib_number, heat: @heat, comments_by: current_user.name ), url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
           = f.hidden_field :bib_number
           = f.hidden_field :heat
           = f.label :comments
-          = f.text_field :comments
+          = f.text_field :comments, {required: true }
+          = f.label :comments_by
+          = f.text_field :comments_by, {required: true }
           = f.submit "DQ this competitor", data: { confirm: "Are you sure?" }
       %span.unhide_dq.js--toggle{data: {toggle: "dq_option#{lane.lane}"}} Show DQ option

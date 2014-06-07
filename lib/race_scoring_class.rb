@@ -70,6 +70,7 @@ class RaceScoringClass < BaseScoringClass
       thousands: import_result.thousands,
       status: import_result.status,
       comments: import_result.comments,
+      comments_by: import_result.comments_by,
       attempt_number: import_result.attempt_number,
       is_start_time: import_result.is_start_time)
   end

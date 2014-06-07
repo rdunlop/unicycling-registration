@@ -10,6 +10,10 @@
 #  updated_at     :datetime         not null
 #  competitor_id  :integer
 #
+# Indexes
+#
+#  index_lane_assignments_on_competition_id  (competition_id)
+#
 
 class LaneAssignment < ActiveRecord::Base
   belongs_to :competition

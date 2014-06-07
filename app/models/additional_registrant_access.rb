@@ -10,6 +10,11 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
+# Indexes
+#
+#  index_additional_registrant_accesses_registrant_id  (registrant_id)
+#  index_additional_registrant_accesses_user_id        (user_id)
+#
 
 class AdditionalRegistrantAccess < ActiveRecord::Base
   belongs_to :registrant

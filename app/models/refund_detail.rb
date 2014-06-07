@@ -8,6 +8,11 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
+# Indexes
+#
+#  index_refund_details_on_payment_detail_id  (payment_detail_id)
+#  index_refund_details_on_refund_id          (refund_id)
+#
 
 class RefundDetail < ActiveRecord::Base
   validates :payment_detail_id, :presence => true

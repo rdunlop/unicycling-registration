@@ -9,6 +9,12 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
+# Indexes
+#
+#  index_judges_event_category_id  (competition_id)
+#  index_judges_judge_type_id      (judge_type_id)
+#  index_judges_user_id            (user_id)
+#
 
 class Judge < ActiveRecord::Base
     belongs_to :competition

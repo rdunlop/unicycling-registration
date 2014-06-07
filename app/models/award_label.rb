@@ -15,6 +15,10 @@
 #  competitor_name  :string(255)
 #  category         :string(255)
 #
+# Indexes
+#
+#  index_award_labels_on_user_id  (user_id)
+#
 
 class AwardLabel < ActiveRecord::Base
   validates :registrant_id, :presence => true

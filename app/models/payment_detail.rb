@@ -12,6 +12,12 @@
 #  details         :string(255)
 #  free            :boolean          default(FALSE)
 #
+# Indexes
+#
+#  index_payment_details_expense_item_id  (expense_item_id)
+#  index_payment_details_payment_id       (payment_id)
+#  index_payment_details_registrant_id    (registrant_id)
+#
 
 class PaymentDetail < ActiveRecord::Base
   validates :payment, :registrant_id, :expense_item, :presence => true
