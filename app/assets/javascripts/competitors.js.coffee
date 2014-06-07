@@ -14,3 +14,11 @@ select_all_competitors = (check_on) ->
     if (el.prop('checked') != check_on)
       el.trigger("click");
   return false
+
+$ ->
+  # enable chosen js
+  $('.chosen-select').chosen
+    allow_single_deselect: true
+    search_contains: true
+    no_results_text: 'No results matched'
+    width: '200px'

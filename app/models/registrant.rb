@@ -283,7 +283,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def with_id_to_s
-    bib_number.to_s + "-" + to_s
+    "##{bib_number} - #{to_s}"
   end
 
 
