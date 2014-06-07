@@ -64,10 +64,12 @@ class LaneAssignmentsController < ApplicationController
     respond_to do |format|
       if @lane_assignment.save
         format.html { redirect_to competition_lane_assignments_path(@competition), notice: 'Lane assignment was successfully created.' }
+        format.js { }
       else
         add_breadcrumb "Lane Assignments"
         @lane_assignments = @competition.lane_assignments
         format.html { render action: "index" }
+        format.js { }
       end
     end
   end

@@ -1,10 +1,13 @@
 
 <h1><%= @competition %></h1>
-<h2>New lane_assignment</h2>
+
+<h2>New Lane Assignment</h2>
+<div id="notice"></div>
+
 <%= render 'form' %>
 
 <h2>Lane Assignments </h2>
-<table class="sortable">
+<table class="sortable lane_assignments">
   <thead>
     <tr>
       <th>Competition</th>
@@ -19,15 +22,7 @@
 
   <tbody>
     <% @lane_assignments.each do |lane_assignment| %>
-      <tr>
-        <td><%= lane_assignment.competition %></td>
-        <td><%= lane_assignment.competitor.bib_number %></td>
-        <td><%= lane_assignment.competitor %></td>
-        <td><%= lane_assignment.heat %></td>
-        <td><%= lane_assignment.lane %></td>
-        <td><%= link_to 'Edit', edit_lane_assignment_path(lane_assignment) %></td>
-        <td><%= link_to 'Destroy', lane_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%= render partial: "lane_assignment", object: lane_assignment %>
     <% end %>
   </tbody>
 </table>
