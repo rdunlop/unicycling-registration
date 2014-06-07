@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   end
 
   def accessible_registrants
-    additional_registrant_accesses.permitted.map{ |ada| ada.registrant}.select{ |reg| !reg.deleted}  + registrants.active
+    additional_registrant_accesses.permitted.map{ |ada| ada.registrant}.select{ |reg| !reg.deleted}  + registrants.select{|reg| !reg.deleted}
   end
 
   def total_owing
