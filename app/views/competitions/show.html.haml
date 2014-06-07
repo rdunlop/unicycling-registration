@@ -9,3 +9,11 @@ Information about the Competition will appear here, including results, judges, a
     = render partial: "data_entry_links_header"
   %tbody
     = render partial: "data_entry_links", locals: {competition: @competition }
+
+%hr
+
+%h2 Scoring Type/Rules
+
+%h3= @competition.scoring_class
+%p
+  = @competition.scoring_description

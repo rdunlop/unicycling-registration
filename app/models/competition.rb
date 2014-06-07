@@ -60,7 +60,7 @@ class Competition < ActiveRecord::Base
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
             :build_import_result_from_raw, :include_event_name, :score_calculator,
-            :result_description, :compete_in_order, to: :scoring_helper
+            :result_description, :compete_in_order, :scoring_description, to: :scoring_helper
 
   def to_s
     event.to_s + " - " + self.name

@@ -1,5 +1,11 @@
 class ExternallyRankedScoringClass < BaseScoringClass
 
+  def scoring_description
+    "Externally scored competition results are entered, in which the absolute rank
+    of competitors is entered, and a 'details' column, which is a description of the result
+    (for use on the awards/results sheets)."
+  end
+
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
     OrderedResultCalculator.new(@competition)

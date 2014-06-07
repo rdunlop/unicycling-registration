@@ -7,7 +7,9 @@
   <caption>Competitors</caption>
   <thead>
     <tr>
-      <th class="competitor_member">Order</th>
+      <% if @competition.compete_in_order %>
+        <th class="competitor_member">Order</th>
+      <% end %>
       <th class="sign_up">ID</th>
       <th class="sign_up">Name</th>
       <th class="sign_up">Age</th>
@@ -31,9 +33,11 @@
           end
         end
         %>
-        <td>
-          <%= competitor.position %>
-        </td>
+        <% if @competition.compete_in_order %>
+          <td>
+            <%= competitor.position %>
+          </td>
+        <% end %>
         <% event_category = nil
            registrant = competitor.members.first.registrant
         %>
@@ -104,9 +108,11 @@ List of all competitors, including registrant info, with edit/destroy, marking t
 
 <hr />
 
-<b>Once you have completed creating all of the competitors, you may want to use the "Sort" function to shuffle the order of competition.</b>
+<% if @competition.compete_in_order %>
+  <b>Once you have completed creating all of the competitors, you may want to use the "Sort" function to shuffle the order of competition.</b>
+  <hr />
+<% end %>
 
-<hr />
 
 Advanced Options: <%= link_to 'Create/Sort Competitors', new_competition_competitor_path(@competition) %><br />
 

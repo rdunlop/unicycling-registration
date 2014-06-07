@@ -1,5 +1,11 @@
 class DistanceScoringClass < BaseScoringClass
 
+  def scoring_description
+    "Å competitor can attempt repeatedly, scoring higher distances. Eventually the competitor
+    will double-fault, and their last successful distance will be their final score.
+    The competitor with the highest max distance will win."
+  end
+
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
     OrderedResultCalculator.new(@competition)

@@ -1,5 +1,9 @@
 class StreetScoringClass < BaseScoringClass
 
+  def scoring_description
+    "A varation of the artistic scoring, for use in street comp"
+  end
+
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
     StreetScoreCalculator.new(@competition)

@@ -1,5 +1,11 @@
 class RaceScoringClass < BaseScoringClass
 
+  def scoring_description
+    "Each competitor may have multiple time results. A time result is made up
+    of an optional 'start time' and a required 'end time'. The fastest time
+    is used to determine the placing of the competitor."
+  end
+
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
     OrderedResultCalculator.new(@competition)

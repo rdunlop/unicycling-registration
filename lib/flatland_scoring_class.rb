@@ -1,5 +1,10 @@
 class FlatlandScoringClass < BaseScoringClass
 
+  def scoring_description
+    "A variation of the Artistic Scoring Class, we calculate last-trick
+    scores and follow the rulebook (or do we?)"
+  end
+
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
     FlatlandScoreCalculator.new(@competition)
