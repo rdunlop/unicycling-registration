@@ -11,6 +11,7 @@ describe "registrants/index" do
     before(:each) do
       @my_registrants = []
       @shared_registrants = []
+      @total_owing = 0
     end
     it "should not render the registrants list" do
       render
@@ -28,6 +29,7 @@ describe "registrants/index" do
         FactoryGirl.create(:registrant, :first_name => "Robin", :last_name => "Dunlop"),
         FactoryGirl.create(:registrant, :first_name => "Caitlin", :last_name => "Goeres")]
       @shared_registrants = []
+      @total_owing = 5
       @exp = FactoryGirl.create(:registrant_expense_item, :registrant => @my_registrants[0])
       @my_registrants.each do |ei|
         ei.reload

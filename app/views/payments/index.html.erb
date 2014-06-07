@@ -3,8 +3,8 @@
 <% unless @payments.empty? %>
   <table class="payments alternate">
     <tr>
-      <th>Invoice Number</th> 
-      <th>Amount</th> 
+      <th>Invoice Number</th>
+      <th>Amount</th>
       <th>Details (txn/note)</th>
       <th>Completed date</th>
       <th></th>
@@ -32,7 +32,7 @@
     <tr>
       <th>Refund Id</th>
       <th>Refunded by</th>
-      <th>Refund Date</th> 
+      <th>Refund Date</th>
       <th>Details (note)</th>
       <th></th>
     </tr>
@@ -55,6 +55,4 @@
 
 <br />
 
-<% if can? :new, Payment %>
-  <%= link_to 'Start New Payment', new_payment_path %>
-<% end %>
+<%= render partial: "/registrants/pay_now", :locals => {:total_owing => current_user.total_owing } %>

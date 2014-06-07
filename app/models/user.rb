@@ -106,15 +106,11 @@ class User < ActiveRecord::Base
   end
 
   def accessible_registrants
-    additional_registrant_accesses.permitted.map{ |ada| ada.registrant}.select{ |reg| !reg.deleted} + registrants.select{ |reg| !reg.deleted}
+    additional_registrant_accesses.permitted.map{ |ada| ada.registrant}.select{ |reg| !reg.deleted}  + registrants.active
   end
 
   def total_owing
-    total = 0
-    self.registrants.active.each do |reg|
-      total += reg.amount_owing
-    end
-    total
+    accessible_registrants.inject(0){|memo, reg| memo + reg.amount_owing }
   end
 
   def has_minor?

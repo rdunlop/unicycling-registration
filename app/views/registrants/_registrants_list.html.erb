@@ -1,5 +1,4 @@
 
-<% total_owing = 0 %>
 <% unless my_registrants_list.empty? and shared_list.empty? %>
   <div>
     <fieldset class="registrations_box">
@@ -7,22 +6,16 @@
       <table class="registrant_summary">
         <% my_registrants_list.each do |registrant| %>
           <%= render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => false } %>
-          <% amount_owing = registrant.amount_owing %>
-          <% total_owing += amount_owing %>
         <% end %>
         <% shared_list.each do |registrant| %>
           <%= render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => true } %>
-          <% amount_owing = registrant.amount_owing %>
-          <% total_owing += amount_owing %>
         <% end %>
         <tr>
           <td colspan="4"><%= t(".total_amount_owing") %></td>
-          <td><%= print_formatted_currency(total_owing) %></td>
+          <td><%= print_formatted_currency(@total_owing) %></td>
         </tr>
       </table>
     </fieldset>
   </div>
 <% end %>
-<% if total_owing > 0 %>
-  <%= render :partial => "/registrants/pay_now", :locals => {:total_owing => total_owing } %>
-<% end %>
+<%= render :partial => "/registrants/pay_now", :locals => {:total_owing => @total_owing } %>

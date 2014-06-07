@@ -1,0 +1,15 @@
+- return if total_owing == 0
+.registrations_box
+  - if can? :create, Payment
+    .payment_process
+      = link_to t(".pay_now"), new_payment_path, :class => "payment_link"
+    .prices_increase
+      - rp = RegistrationPeriod.relevant_period(Date.today)
+      - if rp.nil?
+        = "[#{t(".unknown")}]"
+      - else
+        - if (DateTime.now > rp.end_date)
+          = t(".very_soon")
+        - else
+          = t(".in")
+          = distance_of_time_in_words(DateTime.now, rp.end_date) + " (" + (l ((rp.end_date) + 1), format: :short) + ")"
