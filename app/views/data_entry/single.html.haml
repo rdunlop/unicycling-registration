@@ -1,0 +1,45 @@
+%h1 Data Entry
+
+= link_to "Proof", user_competition_single_attempt_entries_proof_path(@user, @competition)
+= link_to "(pdf)", user_competition_single_attempt_entries_proof_path(@user, @competition, format: :pdf)
+%h2= "Competition: #{@competition}"
+%h3= "Start Times: #{@is_start_time}"
+
+= form_for(@import_result, {url: (@import_result.new_record? ? user_competition_single_attempt_entries_path(@user, @competition) : [@import_result]), :remote => true, :html => {:class => "data_entry"}}) do |f|
+  = render partial: "/shared/error_messages", object: @import_result
+
+  %table.import_results
+    %thead
+      %tr
+        %th ID
+        - if @competition.imports_times
+          %th Minutes
+          %th Seconds
+          %th Thousands
+        - else
+          %th Rank (External)
+          %th Details (external)
+        %th Disqualified
+        %th Is Start Time?
+        %th Name
+        %th Competitor Exists?
+        %th
+        %th
+    %tbody
+      = render partial: 'result', collection: @import_results
+
+    %tfoot
+      %tr
+        %td= f.number_field :bib_number, {:autofocus => true }
+        - if @competition.imports_times
+          %td= f.number_field :minutes
+          %td= f.number_field :seconds
+          %td= f.number_field :thousands
+        - else
+          %td= f.number_field :rank
+          %td= f.text_field :raw_data
+        %td= f.select :status, TimeResult.status_values, include_blank: true
+        %td= f.check_box :is_start_time
+        %td{ colspan: "4"}= f.submit "Submit", :class => "multiclick"
+
+#notice

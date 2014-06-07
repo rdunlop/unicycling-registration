@@ -51,6 +51,8 @@ module CompetitorsHelper
       link_to "Single", user_competition_single_attempt_entries_path(user, competition, is_start_times: false)
     when "Track E-Timer"
       link_to "Track Importing", display_lif_user_competition_import_results_path(user, competition)
+    when "Externally Ranked"
+      link_to "Import CSV", display_csv_user_competition_import_results_path(user, competition)
     end
   end
 end

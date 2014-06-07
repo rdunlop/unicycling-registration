@@ -33,12 +33,17 @@ class ImportResult < ActiveRecord::Base
   validates :user_id, :bib_number, :presence => true
   validate :results_for_competition
 
+  before_validation :clear_status_of_string
   validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
 
   belongs_to :user
   belongs_to :competition
 
   default_scope { order(:bib_number) }
+
+  def clear_status_of_string
+    self.status = nil if status == ""
+  end
 
   def competitor_name
     Registrant.find_by(bib_number: bib_number) if bib_number

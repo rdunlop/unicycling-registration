@@ -30,6 +30,9 @@ class BaseScoringClass
     nil
   end
 
+  def imports_times
+    false
+  end
 
   # Used when trying to destroy all results for a competition
   def all_competitor_results

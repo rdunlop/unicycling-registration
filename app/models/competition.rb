@@ -41,7 +41,7 @@ class Competition < ActiveRecord::Base
   has_many :lane_assignments, :dependent => :destroy
 
   def self.data_recording_types
-    ["Two Attempt Distance", "Single Attempt", "Track E-Timer"]
+    ["Two Attempt Distance", "Single Attempt", "Track E-Timer", "Externally Ranked"]
   end
 
   before_validation :clear_data_types_of_strings
@@ -60,7 +60,8 @@ class Competition < ActiveRecord::Base
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
             :build_import_result_from_raw, :include_event_name, :score_calculator,
-            :result_description, :compete_in_order, :scoring_description, to: :scoring_helper
+            :result_description, :compete_in_order, :scoring_description,
+            :imports_times, to: :scoring_helper
 
   def to_s
     event.to_s + " - " + self.name

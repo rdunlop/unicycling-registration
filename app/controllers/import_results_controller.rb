@@ -4,7 +4,7 @@ class ImportResultsController < ApplicationController
   before_action :load_user, except: [:show, :edit, :update, :destroy]
   before_action :load_competition, except: [:show, :edit, :update, :destroy]
   before_filter :load_new_import_result, :only => [:create]
-  before_action :load_import_results, :only => [:data_entry, :index]
+  before_action :load_import_results, :only => [:data_entry, :display_csv, :display_lif, :index]
   load_and_authorize_resource
 
   before_action :set_breadcrumbs
