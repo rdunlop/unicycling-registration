@@ -1,8 +1,0 @@
-<% if !competitor.new_record? %>
-<tr>
-    <td><%= competitor.position %></td>
-    <td><%= competitor.bib_number %></td>
-    <td><%= competitor.name %></td>
-    <td><%= link_to t('Destroy'), competitor_path(competitor), confirm: 'Are you sure?', method: :delete %></td>
-</tr>
-<% end %>
