@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :competitor_id %><br />
-    <%= f.select :competitor_id, @competition.competitors.map{|comp| [comp.name, comp.id]}, {}, {:include_blank => true, :autofocus => true, class: 'chosen-select' } %>
+    <%= f.select :competitor_id, @competition.competitors.map{|comp| [comp.name, comp.id]}, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select' } %>
   </div>
   <div class="field">
     <%= f.label :heat %><br />

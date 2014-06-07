@@ -20,5 +20,5 @@ $ ->
   $('.chosen-select').chosen
     allow_single_deselect: true
     search_contains: true
-    no_results_text: 'No results matched'
+    no_results_text: 'No matches'
     width: '200px'
