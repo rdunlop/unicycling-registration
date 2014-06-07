@@ -342,18 +342,31 @@ class Registrant < ActiveRecord::Base
 
   ############# Events Selection ########
   def has_event_in_category?(category)
-    category.events.each do |ev|
-      if self.has_event?(ev)
-        return true
-      end
-    end
-    false
+    category.events.any?{|event| has_event?(event) }
+  end
+
+  def has_confirmed_event_in_category?(category)
+    category.events.any?{|event| has_confirmed_event?(event) }
+  end
+
+  def has_unconfirmed_event_in_category?(category)
+    category.events.any?{|event| has_unconfirmed_event?(event) }
   end
 
   # does this registrant have this event checked off?
   def has_event?(event)
     @has_event ||= {}
-    @has_event[event] ||= self.signed_up_events.where({:event_id => event.id}).any?
+    @has_event[event] ||= signed_up_events.where({:event_id => event.id}).any?
+  end
+
+  def has_confirmed_event?(event)
+    @has_confirmed_event ||= {}
+    @has_confirmed_event[event] ||= competitors.includes(:competition => :event).active.any?{|competitor| competitor.event == event}
+  end
+
+  def has_unconfirmed_event?(event)
+    @has_unconfirmed_event ||= {}
+    @has_unconfirmed_event[event] ||= has_event?(event) && !has_confirmed_event?(event)
   end
 
   def describe_event(event)
@@ -382,7 +395,7 @@ class Registrant < ActiveRecord::Base
     end
 
     results[:additional] = nil
-    event.event_choices.each do |ec|
+    event.event_choices.includes(:event_choice).each do |ec|
       my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
       unless my_val.nil? or !my_val.has_value?
         results[:additional] += " - " unless results[:additional].nil?

@@ -119,6 +119,8 @@ en:
     registrant_events:
       events: "Events"
       event: "Event"
+      confirmed_events: "Confirmed Events"
+      unconfirmed_events: "Unconfirmed Events"
       category: "Category"
       age_group: "Age Group"
     registrant_expenses:

@@ -1,41 +1,60 @@
-<div class="event_summary">
-  <div class="data_block">
-    <% printed_events_header = false %>
-    <% Category.includes(:events, :translations).each do |cat| %>
-      <% if @registrant.has_event_in_category?(cat) %>
-        <% unless printed_events_header %>
-          <fieldset class="data_block">
-            <legend><%= t(".events") %></legend>
-            <% printed_events_header = true %>
-            <table>
-              <thead>
-                <tr>
-                  <th><%= t(".event") %></th>
-                  <th><%= t(".category") %></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-        <% end %>
-        <tr>
-          <td class="event_heading" colspan="5"><%= cat %></td>
-        </tr>
-        <% cat.events.each do |event| %>
-          <% if @registrant.has_event?(event) %>
-            <% details = @registrant.describe_event_hash(event) %>
-            <tr>
-              <td><%= details[:description] %></td>
-              <td><%= details[:category] %></td>
-              <td><%= details[:additional] %></td>
-            </tr>
+<fieldset class="data_block">
+  <legend><%= t('.confirmed_events') %></legend>
+  <table>
+    <thead>
+      <th><%= t(".event") %></th>
+      <th><%= t(".category") %></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% Category.includes(:events, :translations).each do |cat| %>
+        <% if @registrant.has_confirmed_event_in_category?(cat) %>
+          <tr>
+            <td class="event_heading" colspan="5"><%= cat %></td>
+          </tr>
+          <% cat.events.each do |event| %>
+            <% if @registrant.has_confirmed_event?(event) %>
+              <% details = @registrant.describe_event_hash(event) %>
+              <tr>
+                <td><%= details[:description] %></td>
+                <td><%= details[:category] %></td>
+                <td><%= details[:additional] %></td>
+              </tr>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
-    <% end %>
-    <% if printed_events_header %>
-        </tbody>
-      </table>
-      </fieldset>
-    <% end %>
-  </div>
-</div>
+    </tbody>
+  </table>
+</fieldset>
+<fieldset class="data_block">
+  <legend><%= t(".unconfirmed_events") %></legend>
+  <table>
+    <thead>
+      <tr>
+        <th><%= t(".event") %></th>
+        <th><%= t(".category") %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Category.includes(:events, :translations).each do |cat| %>
+        <% if @registrant.has_unconfirmed_event_in_category?(cat) %>
+          <tr>
+            <td class="event_heading" colspan="5"><%= cat %></td>
+          </tr>
+          <% cat.events.each do |event| %>
+            <% if @registrant.has_unconfirmed_event?(event) %>
+              <% details = @registrant.describe_event_hash(event) %>
+              <tr>
+                <td><%= details[:description] %></td>
+                <td><%= details[:category] %></td>
+                <td><%= details[:additional] %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</fieldset>

@@ -8,21 +8,21 @@
   <%= link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"} %>
 </div>
 
-<div style="display:inline-block;">
-  <div class="data_block" style="display:block; max-width:450px;">
+<div class="registrant_summary">
+  <div class="registrant_data_group">
     <%= render :partial => "/registrants/summary" %>
     <% if can? :update, @registrant %>
-        <div class="edit_link_block">
-            <%= link_to t(".edit_registration"), edit_registrant_path(@registrant) %>
-        </div>
+      <div class="edit_link_block">
+          <%= link_to t(".edit_registration"), edit_registrant_path(@registrant) %>
+      </div>
     <% end %>
   </div>
-  <div class="data_block" style="max-width:450px;">
+  <div class="registrant_data_group">
     <%= render :partial => "/registrants/registrant_expenses" %>
     <% if can? :create, RegistrantExpenseItem %>
-        <div class="edit_link_block">
-            <%= link_to t(".edit_items"), registrant_registrant_expense_items_path(@registrant) %>
-        </div>
+      <div class="edit_link_block">
+          <%= link_to t(".edit_items"), registrant_registrant_expense_items_path(@registrant) %>
+      </div>
     <% end %>
     <% if can? :manage, @registrant %>
       <div class="non_printable">
@@ -30,18 +30,19 @@
       </div>
     <% end %>
   </div>
-</div><div class="data_block" style="max-width:550px;">
-  <% if @registrant.competitor %>
-    <%= render :partial => "/registrants/registrant_events" %>
-    <% if can? :update, @registrant %>
+  <div class="registrant_data_group">
+    <% if @registrant.competitor %>
+      <%= render :partial => "/registrants/registrant_events" %>
+      <% if can? :update, @registrant %>
         <div class="edit_link_block">
           <%= link_to t(".edit_events"), edit_registrant_path(@registrant) %>
         </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
-<% if @registrant.competitor && (@registrant.songs.count > 0 || !EventConfiguration.music_submission_ended?) %>
-  <div class="data_block" style="max-width: 550px;">
+  </div>
+
+  <% if @registrant.competitor && (@registrant.songs.count > 0 || !EventConfiguration.music_submission_ended?) %>
+  <div class="registrant_data_group">
     <fieldset class="data_block">
       <legend>Your Competition Music</legend>
       <table>
@@ -52,7 +53,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @registrant.songs.each do |song| %>
+          <% @registrant.songs.includes(:event).each do |song| %>
             <tr>
               <td><%= song.event %></td>
               <td><%= song.description %></td>
@@ -71,7 +72,8 @@
       </table>
     </fieldset>
   </div>
-<% end %>
+  <% end %>
+</div>
 
 <% if @registrant.has_standard_skill? %>
   <hr class="non_printable" />

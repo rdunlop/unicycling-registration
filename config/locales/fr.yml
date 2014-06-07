@@ -123,6 +123,8 @@ fr:
     registrant_events:
       events: "Compétitions"
       event: "Compétition"
+      confirmed_events: "Compétitions Confirmé"
+      confirmed_events: "Compétitions Non-Confirmé"
       category: "Catégorie"
       age_group: "Groupe d’âge"
     registrant_expenses:
