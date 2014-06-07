@@ -12,7 +12,7 @@
   var new_row = $("<%= escape_javascript(render partial: 'lane_assignment', object: @lane_assignment) %>")
   new_row.appendTo(".lane_assignments");
   new_row.effect("highlight", {}, 3000);
-  $(".data_entry").trigger("reset");
+  $("form").trigger("reset");
   $("#lane_assignment_competitor_id").focus();
 
   $('#notice').empty();
