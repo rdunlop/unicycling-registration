@@ -22,6 +22,7 @@ For some competitions, music is played during the competitor's competition time.
 
   <tbody>
     <% @songs.each do |song| %>
+      <% next unless song.persisted? %>
       <tr>
         <td><%= song.event %></td>
         <td><%= song.description %></td>

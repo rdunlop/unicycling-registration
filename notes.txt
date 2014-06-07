@@ -1,6 +1,8 @@
 
 Notes from May 24,2014 with Connie:
 
+Have pre-filled options for the DQ Comment.
+
 BBall - Competitior List, Asssign Reg-> Comp, print Comp List with members, Enter Ranked places, Approved Entered data, Lock event, Post Data, Print Awards, Print Labels, Mark Labels done.
 
 Individual - Show by Age Group, Age Group Management (needs love), randomize competitor order, manual competitor re-order, Add/Manage judges, list/print judges, mark comptitor as no-show, olck results, awards print, awards labels, awards done, post

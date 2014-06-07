@@ -5,7 +5,7 @@ class SongsController < ApplicationController
   load_and_authorize_resource :except => [:create]
   before_action :load_songs, :only => [:index, :create, :add_file]
 
-  before_action :set_breadcrumbs
+  before_action :set_breadcrumbs, :except => [:list]
 
   def set_breadcrumbs
     @registrant ||= @song.registrant
