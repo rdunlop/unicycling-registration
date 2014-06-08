@@ -283,6 +283,6 @@ class EventConfiguration < ActiveRecord::Base
   private
 
   def self.ec
-    @ec ||= EventConfiguration.first
+    EventConfiguration.first
   end
 end

@@ -1,5 +1,6 @@
 Last Re-Arranged May 24, 2014.
 
+- Stop using EventConfiguration, use @config instead.
 - Add export functions for usa data which exports  the confirmed-data, and the individual-bought, and usa-bought elements.
  - Add Warning on Registration Summary if this user doesn't have a confirmed USA membership?
 
