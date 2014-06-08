@@ -55,6 +55,8 @@ FactoryGirl.define do
     has_online_waiver false
     online_waiver_text "Online Waiver."
     usa true
+    association :usa_family_expense_item, factory: :expense_item, cost: 100
+    association :usa_individual_expense_item, factory: :expense_item, cost: 50
     iuf false
     tshirt_closed_date "2013-5-10"
     comp_noncomp_url nil

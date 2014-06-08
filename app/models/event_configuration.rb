@@ -243,7 +243,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.configuration_exists?
-    !ec.nil?
+    !EventConfiguration.first.nil?
   end
 
   def self.event_url
