@@ -33,6 +33,8 @@
 #  online_waiver_text                    :text
 #  music_submission_end_date             :date
 #  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
+#  usa_individual_expense_item_id        :integer
+#  usa_family_expense_item_id            :integer
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -51,6 +53,11 @@ class EventConfiguration < ActiveRecord::Base
   validates :test_mode, :has_print_waiver, :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :usa, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
+
+  belongs_to :usa_individual_expense_item, :class_name => "ExpenseItem"
+  belongs_to :usa_family_expense_item, :class_name => "ExpenseItem"
+
+  validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa"
 
   validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
 
@@ -100,7 +107,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.style_name
-    ec = EventConfiguration.first
     if ec.nil? or ec.style_name.blank?
       "naucc_2013"
     else
@@ -128,7 +134,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.standard_skill
-    ec = EventConfiguration.first
     if ec.nil? or ec.standard_skill.nil?
       true
     else
@@ -137,7 +142,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.standard_skill_closed?(today = Date.today)
-    ec = EventConfiguration.first
     if ec.nil?
       false
     else
@@ -146,7 +150,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.music_submission_ended?(today = Date.today)
-    ec = EventConfiguration.first
     if ec.nil? || ec.music_submission_end_date.nil?
       true
     else
@@ -160,7 +163,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.has_print_waiver
-    ec = EventConfiguration.first
     if ec.nil? or ec.has_print_waiver.nil?
       false
     else
@@ -169,7 +171,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.has_online_waiver
-    ec = EventConfiguration.first
     if ec.nil? or ec.has_online_waiver.nil?
       false
     else
@@ -178,7 +179,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.online_waiver_text
-    ec = EventConfiguration.first
     if ec.nil? or ec.online_waiver_text.nil? or ec.online_waiver_text.empty?
       "This is where your online waiver text would go."
     else
@@ -187,7 +187,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.usa
-    ec = EventConfiguration.first
     if ec.nil? or ec.usa.nil?
       true
     else
@@ -195,8 +194,23 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
+  def self.usa_individual_expense_item
+    if ec.nil? or ec.usa_individual_expense_item.nil?
+      nil
+    else
+      ec.usa_individual_expense_item
+    end
+  end
+
+  def self.usa_family_expense_item
+    if ec.nil? or ec.usa_family_expense_item.nil?
+      nil
+    else
+      ec.usa_family_expense_item
+    end
+  end
+
   def self.iuf
-    ec = EventConfiguration.first
     if ec.nil? or ec.iuf.nil?
       false
     else
@@ -209,7 +223,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.currency
-    ec = EventConfiguration.first
     if ec.nil? or ec.currency.blank?
       "%u%n USD"
     else
@@ -218,7 +231,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.currency_code
-    ec = EventConfiguration.first
     if ec.nil? or ec.currency_code.blank?
       "USD"
     else
@@ -231,7 +243,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.configuration_exists?
-    !EventConfiguration.first.nil?
+    !ec.nil?
   end
 
   def self.event_url
@@ -239,7 +251,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.artistic_score_elimination_mode_naucc
-    ec = EventConfiguration.first
     if ec.nil? or ec.artistic_score_elimination_mode_naucc.nil?
       true
     else
@@ -254,7 +265,6 @@ class EventConfiguration < ActiveRecord::Base
   private
 
   def self.get_attribute_or_return_value(attribute, default_value)
-    ec = EventConfiguration.first
     if ec.nil?
       default_value
     else
@@ -263,7 +273,6 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.get_url(attribute, default_value)
-    ec = EventConfiguration.first
     if ec.nil? or ec.send(attribute).nil? or  ec.send(attribute).empty?
       default_value
     else
@@ -271,4 +280,9 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
+  private
+
+  def self.ec
+    @ec ||= EventConfiguration.first
+  end
 end

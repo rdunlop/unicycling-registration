@@ -1,0 +1,25 @@
+- reg = member_row
+%tr{ class: reg.usa_membership_paid ? "usa_confirmed" : "", id: "reg_#{reg.id}" }
+  %td= reg.bib_number
+  %td= reg.contact_detail.usa_member_number
+  %td= link_to reg.first_name, edit_registrant_path(reg)
+  %td= reg.last_name
+  %td= reg.age
+  %td= reg.birthday
+  %td= reg.contact_detail.city
+  %td= reg.contact_detail.state
+  %td= reg.contact_detail.country
+  %td= @individual_registrants.include?(reg) ? "yes" : ""
+  %td= @family_registrants.include?(reg) ? "yes" : ""
+  %td
+    - if reg.contact_detail.usa_confirmed_paid?
+      = "Confirmed"
+    - else
+      =link_to "Mark as confirmed", usa_memberships_path(registrant_id: reg.id, external_confirm: true), method: :put, remote: true
+  %td
+    - if reg.contact_detail.usa_family_membership_holder_id?
+      = reg.contact_detail.usa_family_membership_holder
+    - else
+      = form_tag usa_memberships_path(registrant_id: reg.id), method: :put, remote: true do
+        = select_tag :family_membership_registrant_id, options_from_collection_for_select(@family_registrants, "id", "to_s"), {include_blank: true, required: true, class: 'chosen-select' }
+        = submit_tag "Mark as family member"

@@ -127,6 +127,16 @@
       <td>Enabling this allows USA membership questions. It also prioritizes USA and Canada in the Country select-boxes</td>
   </tr>
   <tr>
+    <th><%= f.label :usa_individual_expense_item_id %></th>
+    <td><%= f.select :usa_individual_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true  %></td>
+    <td>This allows us to know who has paid for a USA individual membership </td>
+  </tr>
+  <tr>
+    <th><%= f.label :usa_family_expense_item_id %></th>
+    <td><%= f.select :usa_family_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true  %></td>
+    <td>This allows us to know who has paid for a USA individual membership </td>
+  </tr>
+  <tr>
       <th><%= f.label :iuf %></th>
       <td><%= f.check_box :iuf %></td>
       <td>Enabling this allows IUF membership questions.</td>

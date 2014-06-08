@@ -1,0 +1,95 @@
+%h1 Base Configuration
+
+%table.alternate
+  %legend Effective Configuration
+  %tr
+    %th Short name
+    %td= EventConfiguration.short_name
+  %tr
+    %th Long name
+    %td= EventConfiguration.long_name
+  %tr
+    %th Style name
+    %td= EventConfiguration.style_name
+  %tr
+    %th Location
+    %td= EventConfiguration.first.try(:location)
+  %tr
+    %th Dates description
+    %td= EventConfiguration.first.try(:dates_description)
+  %tr
+    %th Event url
+    %td= EventConfiguration.event_url
+  %tr
+    %th Print Waiver
+    %td= EventConfiguration.has_print_waiver
+  %tr
+    %th Waiver url
+    %td= EventConfiguration.waiver_url
+  %tr
+    %th Online Waiver
+    %td= EventConfiguration.has_online_waiver
+  %tr
+    %th Online Waiver Text
+    %td
+      %span.admin_show_waiver_truncate= EventConfiguration.online_waiver_text
+  %tr
+    %th Comp/Non-Comp url
+    %td= EventConfiguration.comp_noncomp_url
+  %tr
+    %th Start date
+    %td= EventConfiguration.start_date
+  %tr
+    %th Logo
+    %td
+      -unless EventConfiguration.first.nil?
+        = image_tag(logo_event_configuration_path(EventConfiguration.first), :width => "100px")
+  %tr
+    %th Currency (example)
+    %td= EventConfiguration.currency
+  %tr
+    %th Currency Code
+    %td= EventConfiguration.currency_code
+  %tr
+    %th Contact email
+    %td= EventConfiguration.contact_email
+  %tr
+    %th Artistic closed date
+    %td= EventConfiguration.first.try(:artistic_closed_date)
+  %tr
+    %th Standard skill
+    %td= EventConfiguration.standard_skill
+  %tr
+    %th Standard skill closed date
+    %td= EventConfiguration.first.try(:standard_skill_closed_date)
+  %tr
+    %th USA
+    %td= EventConfiguration.usa
+  %tr
+    %th USA Expense Items (for export/marking confirming)
+    %td
+      = EventConfiguration.usa_individual_expense_item
+      %br
+      = EventConfiguration.usa_family_expense_item
+  %tr
+    %th IUF
+    %td= EventConfiguration.iuf
+  %tr
+    %th Rulebook URL
+    %td= EventConfiguration.rulebook_url
+  %tr
+    %th Tshirt closed date
+    %td= EventConfiguration.first.try(:tshirt_closed_date)
+  %tr
+    %th Music Submission End date
+    %td= EventConfiguration.first.try(:music_submission_end_date)
+  %tr
+    %th Test Mode
+    %td= EventConfiguration.first.try(:test_mode)
+
+- if @event_configurations.count == 0
+  = link_to 'New Event configuration', new_event_configuration_path
+- else
+  - event_configuration = @event_configurations.first
+  = link_to 'Edit', edit_event_configuration_path(event_configuration)
+  = link_to 'Destroy', event_configuration, method: :delete, data: { confirm: 'Are you sure?' }

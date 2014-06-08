@@ -196,6 +196,9 @@ Workspace::Application.routes.draw do
       end
     end
 
+    get "usa_memberships", to: "usa_memberships#index"
+    put "usa_memberships", to: "usa_memberships#update"
+
     get "welcome/help"
     post "welcome/feedback"
     get "welcome/confirm"

@@ -111,6 +111,7 @@ class Ability
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
+      can :manage, 'usa_membership', if: EventConfiguration.usa
     end
 
     if user.has_role? :event_planner

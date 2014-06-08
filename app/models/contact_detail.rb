@@ -2,35 +2,37 @@
 #
 # Table name: contact_details
 #
-#  id                      :integer          not null, primary key
-#  registrant_id           :integer
-#  address                 :string(255)
-#  city                    :string(255)
-#  state                   :string(255)
-#  zip                     :string(255)
-#  country_residence       :string(255)
-#  country_representing    :string(255)
-#  phone                   :string(255)
-#  mobile                  :string(255)
-#  email                   :string(255)
-#  club                    :string(255)
-#  club_contact            :string(255)
-#  usa_member_number       :string(255)
-#  emergency_name          :string(255)
-#  emergency_relationship  :string(255)
-#  emergency_attending     :boolean
-#  emergency_primary_phone :string(255)
-#  emergency_other_phone   :string(255)
-#  responsible_adult_name  :string(255)
-#  responsible_adult_phone :string(255)
-#  created_at              :datetime
-#  updated_at              :datetime
+#  id                              :integer          not null, primary key
+#  registrant_id                   :integer
+#  address                         :string(255)
+#  city                            :string(255)
+#  state                           :string(255)
+#  zip                             :string(255)
+#  country_residence               :string(255)
+#  country_representing            :string(255)
+#  phone                           :string(255)
+#  mobile                          :string(255)
+#  email                           :string(255)
+#  club                            :string(255)
+#  club_contact                    :string(255)
+#  usa_member_number               :string(255)
+#  emergency_name                  :string(255)
+#  emergency_relationship          :string(255)
+#  emergency_attending             :boolean
+#  emergency_primary_phone         :string(255)
+#  emergency_other_phone           :string(255)
+#  responsible_adult_name          :string(255)
+#  responsible_adult_phone         :string(255)
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  usa_confirmed_paid              :boolean          default(FALSE)
+#  usa_family_membership_holder_id :integer
 #
 
 class ContactDetail < ActiveRecord::Base
 
   belongs_to :registrant, :inverse_of => :contact_detail
-
+  belongs_to :usa_family_membership_holder, :class_name => "Registrant"
   validates :address, :city, :country_residence, :zip, :presence => true
   validates :state, :presence => true, :unless => "EventConfiguration.usa == false"
 
