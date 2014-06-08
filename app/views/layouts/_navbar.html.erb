@@ -65,7 +65,7 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Events Report', :url => summary_events_path, :active => current_page?(summary_events_path), :permitted => can?(:summary, Event))
       heading.entries << Menu::MenuEntry.new(:title => 'Directors', :url => directors_judges_path, :active => current_page?(directors_judges_path), :permitted => can?(:manage, Judge))
       heading.entries << Menu::MenuEntry.new(:title => 'Export Data', :url => admin_export_index_path, :active => current_page?(admin_export_index_path), :permitted => can?(:manage, :all))
-      heading.entries << Menu::MenuEntry.new(:title => 'USA Membership Management', :url => usa_memberships_path, :active => current_page?(usa_memberships_path), :permitted => can?(:manage, :all))
+      heading.entries << Menu::MenuEntry.new(:title => 'USA Membership Management', :url => usa_memberships_path, :active => current_page?(usa_memberships_path), :permitted => can?(:manage, :usa_membership))
       heading.entries << Menu::MenuEntry.new(:title => 'Modification History', :url => rails_admin_path, :active => current_page?(rails_admin_path), :permitted => can?(:access, :rails_admin))
       if @config.standard_skill
         heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (view)', :url => standard_skill_routines_path, :active => current_page?(standard_skill_routines_path), :permitted => can?(:manage, StandardSkillRoutine))

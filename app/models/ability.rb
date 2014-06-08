@@ -112,7 +112,7 @@ class Ability
       can :manage, RegistrantGroup
       can :manage, Judge
       if EventConfiguration.usa
-        can :manage, 'usa_membership'
+        can :manage, :usa_membership
       end
     end
 
