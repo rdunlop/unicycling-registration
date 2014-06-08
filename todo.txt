@@ -1,5 +1,7 @@
 Last Re-Arranged May 24, 2014.
 
+- add functional test which simulates/uses the file upload flow, so that I can test that CSV upload works.
+
 - Prevent not-qualified competitors from showing up on any competition sheets/judging/etc.
 - Add "Confirmed Competitions" to the registrant sheet.
 - Add "Not-confirmed competitions" to the registrant sheet.

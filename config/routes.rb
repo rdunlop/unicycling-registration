@@ -47,6 +47,7 @@ Workspace::Application.routes.draw do
       namespace :export do
         get :index
         get :download_payment_details
+        get :download_all_payments
         get :download_events
       end
     end
