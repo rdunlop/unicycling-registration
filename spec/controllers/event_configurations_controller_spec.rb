@@ -182,6 +182,9 @@ describe EventConfigurationsController do
     end
 
     describe "POST 'test_mode_role'" do
+      before :each do
+        request.env["HTTP_REFERER"] = root_url
+      end
       it "redirects to root" do
         post 'test_mode_role', role: "normal_user"
         response.should redirect_to(root_path)
