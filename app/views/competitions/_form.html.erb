@@ -6,6 +6,11 @@
     <%= f.text_field :name, :title => "'All' is a special name, which will not be printed on medals" %>
   </div>
 
+  <div class="field">
+    <%= f.label :scheduled_completion_at %><br />
+    <%= f.datetime_select :scheduled_completion_at, include_blank: true %>
+  </div>
+
   <h2>Settings for selecting the competitors from sign-ups</h2>
   <%= render partial: "competition_sources_form", locals: {f: f, event: @event} %>
 
