@@ -98,7 +98,7 @@ class Registrant < ActiveRecord::Base
   validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
   validate  :gender_present
 
-  validates :online_waiver_signature, :presence => true, :if => "EventConfiguration.has_online_waiver"
+  validates :online_waiver_signature, :presence => true, :if => "EventConfiguration.singleton.has_online_waiver"
   validate :no_payments_when_deleted
 
   validate :choices_combination_valid
@@ -473,5 +473,9 @@ class Registrant < ActiveRecord::Base
     ind = EventConfiguration.usa_individual_expense_item
     fam = EventConfiguration.usa_family_expense_item
     contact_detail.usa_confirmed_paid || contact_detail.usa_family_membership_holder_id? || paid_expense_items.include?(ind) || paid_expense_items.include?(fam)
+  end
+
+  def usa_family_membership_details
+    paid_details.select{|pd| pd.expense_item == EventConfiguration.usa_family_expense_item}.try(:details)
   end
 end

@@ -33,11 +33,7 @@ class ApplicationController < ActionController::Base
   before_filter :load_config_object
 
   def load_config_object
-    if EventConfiguration.count == 0
-      @config = EventConfiguration.new
-    else
-      @config = EventConfiguration.first
-    end
+    @config = EventConfiguration.singleton
   end
 
   def default_footer

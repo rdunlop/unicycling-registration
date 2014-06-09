@@ -15,7 +15,7 @@ class Admin::ExportController < Admin::BaseController
 
     titles = ["Registrant Name", "Age", "Gender"] + event_categories_titles + event_titles
     competitor_data = []
-    Registrant.includes(:registrant_event_sign_ups => [], :registrant_choices => :event_choice).each do |reg|
+    Registrant.active.includes(:registrant_event_sign_ups => [], :registrant_choices => :event_choice).each do |reg|
       comp_base = [reg.name, reg.age, reg.gender]
       reg_sign_up_data = []
       event_categories.each do |ec|
@@ -146,7 +146,7 @@ class Admin::ExportController < Admin::BaseController
     sheet[0,12] = "Club"
 
     row = 1
-    Registrant.includes(:payment_details => [:payment]).each do |reg|
+    Registrant.active.includes(:payment_details => [:payment]).each do |reg|
       sheet[row,0] = reg.bib_number
       sheet[row,1] = reg.contact_detail.usa_member_number
       sheet[row,2] = reg.first_name

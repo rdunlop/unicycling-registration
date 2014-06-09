@@ -73,6 +73,10 @@ class EventConfiguration < ActiveRecord::Base
     self.artistic_score_elimination_mode_naucc = true if self.artistic_score_elimination_mode_naucc.nil?
   end
 
+  def self.singleton
+    EventConfiguration.first || EventConfiguration.new
+  end
+
   def logo_image=(input_data)
     self.logo_filename = input_data.original_filename
     self.logo_type = input_data.content_type.chomp
@@ -160,22 +164,6 @@ class EventConfiguration < ActiveRecord::Base
 
   def self.waiver_url
     get_url(:waiver_url, nil)
-  end
-
-  def self.has_print_waiver
-    if ec.nil? or ec.has_print_waiver.nil?
-      false
-    else
-      ec.has_print_waiver
-    end
-  end
-
-  def self.has_online_waiver
-    if ec.nil? or ec.has_online_waiver.nil?
-      false
-    else
-      ec.has_online_waiver
-    end
   end
 
   def self.online_waiver_text
