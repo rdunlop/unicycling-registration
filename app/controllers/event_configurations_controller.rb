@@ -97,7 +97,7 @@ class EventConfigurationsController < ApplicationController
     end
     current_user.add_role new_role unless new_role.to_sym == :normal_user
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'User Permissions successfully updated.' }
+      format.html { redirect_to :back, notice: 'User Permissions successfully updated.' }
     end
   end
 

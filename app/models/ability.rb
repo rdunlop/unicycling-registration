@@ -39,7 +39,7 @@ class Ability
     end
 
 
-    can :create_scores, Competition do |competition|
+    can [:create_scores, :show], Competition do |competition|
       !competition.locked
     end
   end

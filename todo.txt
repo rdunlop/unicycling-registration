@@ -1,15 +1,13 @@
 Last Re-Arranged May 24, 2014.
 
 - Stop using EventConfiguration, use @config instead.
-- Add export functions for usa data which exports  the confirmed-data, and the individual-bought, and usa-bought elements.
- - Add Warning on Registration Summary if this user doesn't have a confirmed USA membership?
+- Add Warning on Registration Summary if this user doesn't have a confirmed USA membership?
 
 - add functional test which simulates/uses the file upload flow, so that I can test that CSV upload works.
 
 - Prevent not-qualified competitors from showing up on any competition sheets/judging/etc.
 - Add "Confirmed Competitions" to the registrant sheet.
 - Add "Not-confirmed competitions" to the registrant sheet.
-
 
 - Should the new competitor be created when the Lane Assignment is created, or when the data is "approved" by the data-entry person. I think it should be when the Lane Assignment is created, because once that happens, we want to have a result for every Competitor.
 
@@ -45,7 +43,6 @@ THEN: What is the time and place awarded to Scott and Robin for the Age Group? (
 
 TO DO:
 - Ensure that Boundary Score judging works (after the judgeable refactor, ties is probably broken)
-- create ability to "randomize current competitors" and "specify competitor positions"
 - Prevent "final_candidates" from being selected from non-24" wheel-sizes
 
 - Identify the flows for different data/users, and from that, identify missing pages.

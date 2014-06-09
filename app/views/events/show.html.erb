@@ -108,45 +108,6 @@
 <% end %>
 
 <hr />
-<h3>Competition Results</h3>
-  <table class="sortable">
-    <thead>
-      <tr>
-        <th>Competition</th>
-        <th>Locked?</th>
-        <th># Competitors</th>
-        <th># Results</th>
-        <th>Competitor List</th>
-        <th>View Results Summary</th>
-        <th>Print</th>
-        <th>Publish</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @event.competitions.each do |competition| %>
-      <tr>
-        <td><%= competition %></td>
-        <td><%= competition.locked? %>
-          <% if can? :lock, competition %>
-            <% if competition.locked? %>
-              <%= link_to 'Unlock', lock_competition_path(competition), :method => :delete %>
-            <% else %>
-              <%= link_to 'Lock', lock_competition_path(competition), :method => :post %>
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= competition.num_competitors %></td>
-        <td><%= competition.num_results %></td>
-        <td><%= link_to 'Manage Competitors', competition_competitors_path(competition) %></td>
-        <td><%= link_to 'View', results_url(competition) %></td>
-        <td><%= link_to "(pdf)", results_printing_competition_path(competition, :format => :pdf) %></td>
-        <td>Not yet implemented</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<hr />
 <%= render :partial => "data_entry_forms" %>
 
 <hr />

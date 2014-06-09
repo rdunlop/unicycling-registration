@@ -2,6 +2,28 @@
 
 Information about the Competition will appear here, including results, judges, and scoring settings (read-only)
 
+- if can? :lock, @competition
+  %h2 Director Abilities
+
+  %h3 Competitor Management
+  - reg_style = "warning" unless @competition.all_registrants_are_competitors?
+
+  %table
+    %tr
+      %th #Signed up
+      %th #Assigned Registrants
+      %th Manage Competitor List
+    %tr
+      %td{class: reg_style}= @competition.signed_up_registrants.count
+      %td{class: reg_style}= @competition.num_assigned_registrants
+      %td= link_to 'Manage Competitors', competition_competitors_path(@competition)
+
+  %hr
+
+  %h2 Judges
+
+  = link_to "Manage Judges/Data-Entry for #{@competition}", competition_judges_path(@competition)
+
 %h2 Data Entry
 
 %table.sortable
@@ -9,6 +31,31 @@ Information about the Competition will appear here, including results, judges, a
     = render partial: "data_entry_links_header"
   %tbody
     = render partial: "data_entry_links", locals: {competition: @competition }
+
+
+- if can? :lock, @competition
+
+  %h3 Competition Management
+  %table
+    %tr
+      %th # Competitors
+      %th # Results
+      %th View Results Summary
+      %th Print
+      %th Lock/Unlock
+      %td
+        - if can? :lock, @competition
+          - if @competition.locked?
+            = link_to 'Unlock', lock_competition_path(@competition), :method => :delete
+          - else
+            = link_to 'Lock', lock_competition_path(@competition), :method => :post
+    %tr
+      %td= @competition.num_competitors
+      %td= @competition.num_results
+      %td
+        = link_to 'View', results_url(@competition)
+        = link_to "View2", result_competition_path(@competition)
+      %td= link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
 
 %hr
 
