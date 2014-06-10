@@ -114,6 +114,7 @@ class Ability
       if EventConfiguration.usa
         can :manage, :usa_membership
       end
+      can :read, :volunteer
     end
 
     if user.has_role? :event_planner
