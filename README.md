@@ -217,6 +217,9 @@ NewRelic Account
 
 NewRelic is a performance monitoring tool, install it via the addons page, or commmand line.
 
+    heroku addons:add newrelic:stark --app <app name>
+
+
 Set the following settings
 
     NEW_RELIC_LICENSE_KEY=<key>
