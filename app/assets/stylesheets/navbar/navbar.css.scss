@@ -65,7 +65,7 @@ nav {
       position: absolute;
       left: 0;
     }
-    ul.hovered, ul.current_page {
+    ul.hovered, li.parent_page > ul {
       width: auto;
       display: block;
       background-color: white;
@@ -90,14 +90,14 @@ nav {
         color: $text;
         text-decoration: none;
       }
-      a.current_page {
-        color: red;
-        background: $backgroundhover;
-        color: $texthover;
-      }
-      a.disabled {
-        display: none;
-      }
+    }
+    li.current_page > a, li.parent_page > a {
+      color: red;
+      background: $backgroundhover;
+      color: $texthover;
+    }
+    a.disabled {
+      display: none;
     }
     background: $background;
     width: 100%;
@@ -110,8 +110,8 @@ nav {
     max-height: $height;
   }
   ul:after {
-    content: ""; 
-    clear: both; 
+    content: "";
+    clear: both;
     display: block;
   }
   display: block;

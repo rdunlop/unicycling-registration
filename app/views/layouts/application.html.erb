@@ -53,8 +53,6 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
         <%= render_breadcrumbs tag: "li" %>
       </ul>
     <% end %>
-    <% #  separator: "<svg class='icon icon--arrow breadcrumbs__separator' viewBox='0 0 500 500'><use xlink:href='#arrow' /></svg>",
-    %>
 
     <% if current_user.nil? %>
       <div class="base_details">

@@ -1,0 +1,6 @@
+- target_url = @config.event_url
+%li
+  - if target_url.nil?
+    = link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), root_url, {:class => "logo_link"}
+  - else
+    = link_to image_tag(logo_event_configuration_path(@config), :class => "logo"), target_url, {:class => "logo_link", :target => "_blank"}

@@ -22,24 +22,22 @@ class Menu
       @entries ||= []
     end
 
-    def active
-      entries.any? {|entry| entry.active }
+    def permitted_entries
+      @permitted_entries ||= entries.select{ |entry| entry.permitted }
     end
 
     def has_permitted_entry
       return true if self.is_link
-      entries.any? {|entry| entry.permitted }
+      permitted_entries.count > 0
     end
   end
 
   class MenuEntry
     attr_accessor :title
     attr_accessor :url
-    attr_accessor :active
     attr_accessor :permitted
 
     def initialize(attributes = {})
-      self.active = false
       self.permitted = true
       attributes.each do |name, value|
         send("#{name}=", value)
