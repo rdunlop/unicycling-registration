@@ -1,3 +1,4 @@
+<% cache ['navbar', I18n.locale, current_user, @config, Category] do %>
 <nav class="non_printable">
 <ul>
   <% if EventConfiguration.configuration_exists? %>
@@ -100,3 +101,4 @@
   <% end %>
 </ul>
 </nav>
+<% end %>
