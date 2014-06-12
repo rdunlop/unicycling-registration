@@ -28,11 +28,9 @@
 
 class Registrant < ActiveRecord::Base
   include Eligibility
-
-
+  include CachedModel
 
   after_save :touch_members
-
 
   after_initialize :init
 
@@ -104,7 +102,6 @@ class Registrant < ActiveRecord::Base
   validate :choices_combination_valid
   validate :not_exceeding_expense_item_limits
   validate :check_default_wheel_size_for_age
-
 
 
   scope :active, -> { where(:deleted => false).order(:bib_number) }

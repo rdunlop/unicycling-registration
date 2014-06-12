@@ -76,7 +76,7 @@
     %td= EventConfiguration.iuf
   %tr
     %th Rulebook URL
-    %td= EventConfiguration.rulebook_url
+    %td= @config.rulebook_url
   %tr
     %th Tshirt closed date
     %td= EventConfiguration.first.try(:tshirt_closed_date)

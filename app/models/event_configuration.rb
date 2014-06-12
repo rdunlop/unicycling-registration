@@ -61,6 +61,8 @@ class EventConfiguration < ActiveRecord::Base
 
   validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
 
+  before_validation :clear_of_blank_strings
+
   after_initialize :init
 
   def init
@@ -73,6 +75,10 @@ class EventConfiguration < ActiveRecord::Base
     self.artistic_score_elimination_mode_naucc = true if self.artistic_score_elimination_mode_naucc.nil?
     self.style_name ||= "naucc_2013"
     self.short_name ||= ""
+  end
+
+  def clear_of_blank_strings
+    self.rulebook_url = nil if rulebook_url == ""
   end
 
   def self.singleton
@@ -189,10 +195,6 @@ class EventConfiguration < ActiveRecord::Base
     else
       ec.iuf
     end
-  end
-
-  def self.rulebook_url
-    get_url(:rulebook_url, nil)
   end
 
   def self.currency

@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= EventConfiguration.short_name %> <%= t(".registration") %></title>
-  <%= stylesheet_link_tag  EventConfiguration.style_name, :media => "all" %>
+  <% cache ['title', I18n.locale, @config] do %>
+    <title><%= @config.short_name %> <%= t(".registration") %></title>
+    <%= stylesheet_link_tag  @config.style_name, :media => "all" %>
+  <% end %>
+
   <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
     <%= stylesheet_link_tag    "dev", :media => "all" %>
   <% end %>
   <%= javascript_include_tag "application" %>
   <%= favicon_link_tag %>
   <%= csrf_meta_tags %>
-  <% if mixpanel? %>
-    <!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
-      typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,
-        e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
-mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
-  <% end %>
-<!--[if lt IE 7]>
+
+  <%= render partial: "layouts/mixpanel" %>
+  <!--[if lt IE 7]>
   <style media="screen" type="text/css">
   #container {
     height:100%;
@@ -24,37 +23,16 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
   <![endif]-->
 </head>
 <body>
-  <% if !current_user.nil? and current_user.has_role?(:super_admin) and !RegistrationPeriod.update_checked_recently %>
-    <div class="reg_period_update_warning">
-      No Registration-Period update has occurred in the past 3 days. Please check your scheduler.
-    </div>
-  <% end %>
-  <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
-    <div class="dev_banner">
-      Non-Live System.
-      <a id="dev_banner_remover" href="#" class="banner_remover" data-banner-class="dev_banner" title="Remove dev banner">[x]</a>
-    </div>
-  <% end %>
-  <% unless current_user.nil? %>
-    <% if mixpanel? %>
-      <script type="text/javascript">
-        mixpanel.identify("<%= current_user %>");
-        mixpanel.name_tag("<%= current_user %>");
-      </script>
-    <% end %>
-  <% end %>
-
+  <%= render partial: "layouts/admin_headers" %>
   <div id="container">
     <%= render :partial => "layouts/navbar" %>
-
     <%= render :partial => "layouts/test_mode" %>
+
     <% if current_user.present? %>
       <ul class="breadcrumbs">
         <%= render_breadcrumbs tag: "li" %>
       </ul>
-    <% end %>
-
-    <% if current_user.nil? %>
+    <% else %>
       <div class="base_details">
         <ul>
           <li class="title"><%= @config.short_name %></li>
@@ -65,25 +43,17 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
       </div>
     <% end %>
 
-  <div id="main">
-    <% unless notice.blank? %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% unless alert.blank? %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-    <%= yield %>
-  </div>
+    <div id="main">
+      <% unless notice.blank? %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% unless alert.blank? %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+    </div>
 
-  <div id="bottom_nav" class="non_printable">
-    <% unless EventConfiguration.rulebook_url.nil? %>
-      <div class="rulebook_link">
-        <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the rulebook that governs this competition!" %>
-      </div>
-    <% end %>
-    <%= link_to t('help'), welcome_help_path %>
-    <p><%= t("developed_by") %></p>
+    <%= render partial: "layouts/footer" %>
   </div>
-</div>
 </body>
 </html>

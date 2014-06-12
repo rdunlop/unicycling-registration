@@ -1,11 +1,7 @@
 <% @categories = categories
    @registrant = registrant
  %>
- <% unless EventConfiguration.rulebook_url.nil? %>
-   <div class="rulebook_link">
-     <%= link_to t("competition_rulebook"), EventConfiguration.rulebook_url, :target => '_blank', :title =>"Click here for the rulebook that governs this competition!" %>
-   </div>
- <% end %>
+ <%= render "/event_configurations/rulebook_link" %>
  <div id="tabs">
    <ul>
      <% @categories.each do |category| %>

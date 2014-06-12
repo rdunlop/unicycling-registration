@@ -1,0 +1,6 @@
+- cache ['footer', I18n.locale, @config] do
+  .non_printable#bottom_nav
+    = render "/event_configurations/rulebook_link"
+
+    = link_to t('help'), welcome_help_path
+    %p= t("developed_by")
