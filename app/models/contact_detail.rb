@@ -28,6 +28,10 @@
 #  usa_confirmed_paid              :boolean          default(FALSE)
 #  usa_family_membership_holder_id :integer
 #
+# Indexes
+#
+#  index_contact_details_registrant_id  (registrant_id)
+#
 
 class ContactDetail < ActiveRecord::Base
 

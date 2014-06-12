@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609020926) do
+ActiveRecord::Schema.define(version: 20140612051921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,6 +196,8 @@ ActiveRecord::Schema.define(version: 20140609020926) do
     t.boolean  "usa_confirmed_paid",              default: false
     t.integer  "usa_family_membership_holder_id"
   end
+
+  add_index "contact_details", ["registrant_id"], name: "index_contact_details_registrant_id", using: :btree
 
   create_table "distance_attempts", force: true do |t|
     t.integer  "competitor_id"
@@ -650,6 +652,8 @@ ActiveRecord::Schema.define(version: 20140609020926) do
     t.datetime "updated_at"
     t.integer  "event_id"
   end
+
+  add_index "songs", ["registrant_id"], name: "index_songs_registrant_id", using: :btree
 
   create_table "standard_difficulty_scores", force: true do |t|
     t.integer  "competitor_id"

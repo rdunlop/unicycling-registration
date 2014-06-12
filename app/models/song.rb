@@ -10,6 +10,10 @@
 #  updated_at     :datetime
 #  event_id       :integer
 #
+# Indexes
+#
+#  index_songs_registrant_id  (registrant_id)
+#
 
 class Song < ActiveRecord::Base
     mount_uploader :song_file_name, MusicUploader
