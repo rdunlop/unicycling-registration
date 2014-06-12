@@ -25,15 +25,13 @@ class PaymentDetail < ActiveRecord::Base
 
   has_paper_trail
 
-  belongs_to :registrant
+  belongs_to :registrant, touch: true
   belongs_to :payment, :inverse_of => :payment_details
   belongs_to :expense_item
   has_one :refund_detail
 
   delegate :has_details, to: :expense_item
   delegate :details_label, to: :expense_item
-
-  after_touch :touch_registrant
 
   # excludes refunded items
   scope :completed, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}}) }
@@ -42,10 +40,6 @@ class PaymentDetail < ActiveRecord::Base
 
   scope :free, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => true) }
   scope :refunded, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where.not({:refund_details => {:payment_detail_id => nil}}) }
-
-  def touch_registrant
-    registrant.touch
-  end
 
   def refunded?
     !refund_detail.nil?

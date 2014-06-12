@@ -18,6 +18,8 @@
 #
 
 class Event < ActiveRecord::Base
+  resourcify
+
   has_many :event_choices, -> {order "event_choices.position"}, :dependent => :destroy, :inverse_of => :event
   accepts_nested_attributes_for :event_choices
 

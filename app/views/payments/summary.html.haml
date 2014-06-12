@@ -1,0 +1,53 @@
+%h1 Payments Summary
+
+- if can? [:admin, :onsite_pay_new], Payment
+  = link_to "Create Adjustment Payment", new_payment_adjustment_path
+  %br
+- if can? [:admin, :show], Payment
+  = link_to "View list of Payments/Refunds", list_payment_adjustments_path
+%br
+%Br
+
+
+%table
+  %caption Payments Summary
+  %thead
+    %tr
+      %th Total Amount Received
+  %tbody
+    %tr
+      %td= print_formatted_currency(@total_received)
+
+%hr
+%h2 Expenses by Group
+
+%table.sortable
+  %thead
+    %tr
+      %th Group
+      %th Entry
+      %th Num truly paid
+      %th Num Marked Free
+      %th Num Refunded
+      %th Num unpaid
+      %th Num total (paid + free + unpaid - refunded)
+  %tbody
+    - @expense_groups.each do |group|
+      - group.expense_items.each do |item|
+        %tr
+          %td= group
+          %td= item
+          %td
+            - paid_count = item.num_paid
+            = link_to paid_count, details_expense_item_path(item, :filter => "paid")
+          %td
+            - free_count = item.num_free
+            = link_to free_count, details_expense_item_path(item, :filter => "free")
+          %td
+            - refunded_count = item.num_refunded
+            = link_to refunded_count, details_expense_item_path(item, :filter => "refunded")
+          %td
+            - unpaid_count = item.num_unpaid
+            = link_to unpaid_count, details_expense_item_path(item, :filter => "unpaid")
+          %td
+            = total_count = paid_count + free_count + unpaid_count - refunded_count

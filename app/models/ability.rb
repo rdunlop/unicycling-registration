@@ -50,6 +50,11 @@ class Ability
     can [:read, :results, :sign_ups], Event do |ev|
       user.has_role? :director, ev
     end
+=begin
+    #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
+    can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
+=end
+
     can :sign_ups, EventCategory do |ec|
       user.has_role? :director, ec.event
     end

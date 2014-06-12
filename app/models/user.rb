@@ -28,7 +28,8 @@
 #
 
 class User < ActiveRecord::Base
-  rolify
+  rolify after_add: :touch_for_role, after_remove: :touch_for_role
+
   # Include default devise modules. Others available are:
   # :token_authenticatable
   # :lockable, :timeoutable and :omniauthable
@@ -56,6 +57,11 @@ class User < ActiveRecord::Base
 
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
+
+
+  def touch_for_role(role)
+    touch
+  end
 
   # get all users who have registrants with unpaid fees
   def self.unpaid_reg_fees
