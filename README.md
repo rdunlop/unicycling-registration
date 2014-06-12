@@ -225,6 +225,9 @@ Set the following settings
     NEW_RELIC_LICENSE_KEY=<key>
     NEW_RELIC_APP_NAME=<name you would like to appear in NewRelic panel>
 
+To View the local NewRelic Inforamtion
+
+    `http://localhost:9292/newrelic` (when in development or caching modes)
 
 Seed Data
 ---------
