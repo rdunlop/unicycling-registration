@@ -4,13 +4,13 @@
   %legend Effective Configuration
   %tr
     %th Short name
-    %td= EventConfiguration.short_name
+    %td= @config.short_name
   %tr
     %th Long name
     %td= EventConfiguration.long_name
   %tr
     %th Style name
-    %td= EventConfiguration.style_name
+    %td= @config.style_name
   %tr
     %th Location
     %td= EventConfiguration.first.try(:location)

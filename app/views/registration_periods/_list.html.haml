@@ -1,0 +1,25 @@
+// Note: the associated competitor_expense_item/noncompetitor_expense_item
+// is also necessary, but doesn't cache-invalidete
+- cache [I18n.locale, competitor, RegistrationPeriod], expires_in: 30.minutes do
+  %fieldset.registration_period_block
+    %legend= competitor ? t(".competitor_registration_cost") : t(".noncompetitor_registration_cost")
+    %table
+      - RegistrationPeriod.includes(:competitor_expense_item).includes(:noncompetitor_expense_item).includes(:translations).each do |period|
+        %tr{ class: period.past_period? ? "past_reg_period" : period.current_period? ? "current_reg_period" : "" }
+          %td= period.name
+          %td= t(".from")
+          %td= l period.start_date, format: :registration_date_format
+          %td= t(".to")
+          %td= l period.end_date, format: :registration_date_format
+          %td
+            %b
+              - if competitor
+                = print_formatted_currency(period.competitor_expense_item.cost)
+              - else
+                = print_formatted_currency(period.noncompetitor_expense_item.cost)
+
+        - if period.last_online_period?
+          %tr
+            %td{ colspan: "6", class: "registration_closes_notice"}
+              = t(".online_registration_closes")
+              = l period.end_date, format: :registration_date_format

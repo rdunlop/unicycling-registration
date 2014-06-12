@@ -22,6 +22,10 @@ test:
   <<: *default
   database: app_test
 
+caching:
+  <<: *default
+  database: app_development
+
 production:
   <<: *default
   database: app_production

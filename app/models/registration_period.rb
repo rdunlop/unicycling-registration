@@ -15,6 +15,8 @@
 #
 
 class RegistrationPeriod < ActiveRecord::Base
+  include CachedModel
+
   default_scope { order('start_date ASC') }
 
   validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
@@ -62,6 +64,10 @@ class RegistrationPeriod < ActiveRecord::Base
       last_period = rp
     end
     last_period
+  end
+
+  def last_online_period?
+    self == RegistrationPeriod.last_online_period
   end
 
   def self.all_registration_expense_items

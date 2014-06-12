@@ -58,7 +58,7 @@ class Printing::CompetitionsController < ApplicationController
     @results_list = @competition.results_list
 
     @no_page_breaks = true unless params[:no_page_breaks].nil?
-    name = "#{EventConfiguration.short_name.tr(" ", "_")}_#{@competition.name.tr(" ", "_")}_results"
+    name = "#{@config.short_name.tr(" ", "_")}_#{@competition.name.tr(" ", "_")}_results"
     attachment = true unless params[:attachment].nil?
 
     respond_to do |format|

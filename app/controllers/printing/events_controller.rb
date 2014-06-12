@@ -14,7 +14,7 @@ class Printing::EventsController < ApplicationController
     @no_page_breaks = true #unless params[:no_page_breaks].nil?
     attachment = "attachment" unless params[:attachment].nil?
 
-    name = "#{EventConfiguration.short_name.tr(" ", "_")}_#{@event.name.tr(" ", "_")}_results"
+    name = "#{@config.short_name.tr(" ", "_")}_#{@event.name.tr(" ", "_")}_results"
 
     respond_to do |format|
       format.html

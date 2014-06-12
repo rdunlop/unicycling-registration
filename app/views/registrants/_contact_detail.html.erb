@@ -130,7 +130,7 @@
       </tr>
       <tr>
         <td>
-          <%= f.label :emergency_attending, "#{t(".attending")} #{EventConfiguration.short_name}?" %>
+          <%= f.label :emergency_attending, "#{t(".attending")} #{@config.short_name}?" %>
         </td>
         <td>
           <%= f.check_box :emergency_attending %>

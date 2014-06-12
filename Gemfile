@@ -36,13 +36,13 @@ gem 'newrelic_rpm'
 #gem 'sqlite3'
 gem 'pg'
 
-group :naucc, :development do
+group :naucc, :development, :caching do
   gem 'better_errors'
   gem "binding_of_caller"
   gem 'simplecov', :require => false, :group => :test
 end
 
-group :naucc, :development, :test, :cucumber do
+group :naucc, :development, :test, :cucumber, :caching do
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'poltergeist'
   gem 'annotate'

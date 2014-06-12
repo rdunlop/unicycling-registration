@@ -84,6 +84,10 @@ RSpec.configure do |config|
     ActionController::Base.perform_caching = caching
   end
 
+  config.before(:all, :type => :view) {
+      assign(:config, EventConfiguration.new)
+  }
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

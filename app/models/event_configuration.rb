@@ -49,7 +49,7 @@ class EventConfiguration < ActiveRecord::Base
     ["unicon_17", "naucc_2013", "naucc_2014"]
   end
 
-  validates :style_name, :inclusion => {:in => self.style_names, :allow_blank => true }
+  validates :style_name, :inclusion => {:in => self.style_names }
   validates :test_mode, :has_print_waiver, :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :usa, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
@@ -71,6 +71,8 @@ class EventConfiguration < ActiveRecord::Base
     self.iuf = false if self.iuf.nil?
     self.standard_skill = true if self.standard_skill.nil?
     self.artistic_score_elimination_mode_naucc = true if self.artistic_score_elimination_mode_naucc.nil?
+    self.style_name ||= "naucc_2013"
+    self.short_name ||= ""
   end
 
   def self.singleton
@@ -102,29 +104,12 @@ class EventConfiguration < ActiveRecord::Base
     get_attribute_or_return_value(:contact_email, "")
   end
 
-  def self.short_name
-    get_attribute_or_return_value(:short_name, "")
-  end
-
   def self.long_name
     get_attribute_or_return_value(:long_name, "")
   end
 
-  def self.style_name
-    if ec.nil? or ec.style_name.blank?
-      "naucc_2013"
-    else
-      ec.style_name
-    end
-  end
-
   def self.start_date
     get_attribute_or_return_value(:start_date, nil)
-  end
-
-  def self.closed_date
-    last_online_rp = RegistrationPeriod.last_online_period
-    last_online_rp.end_date unless last_online_rp.nil?
   end
 
   def self.closed?(today = Date.today)

@@ -46,7 +46,7 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/all
   def all
-    @registrants = Registrant.active.order(:bib_number)
+    @registrants = Registrant.includes(:contact_detail).active.order(:bib_number)
 
     respond_to do |format|
       format.html # all.html.erb
