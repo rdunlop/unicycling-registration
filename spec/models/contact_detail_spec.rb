@@ -31,6 +31,7 @@ require 'spec_helper'
 
 describe ContactDetail do
   before(:each) do
+    FactoryGirl.create(:event_configuration, :with_usa)
     @reg = FactoryGirl.build_stubbed(:registrant)
     @cd = FactoryGirl.build_stubbed(:contact_detail, :registrant => @reg)
     allow(@reg).to receive(:age).and_return(20)

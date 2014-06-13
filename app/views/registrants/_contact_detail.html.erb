@@ -36,7 +36,7 @@
       </tr>
       <tr>
         <td>
-          <% if EventConfiguration.usa == true %>
+          <% if @config.usa == true %>
             <%= f.label :state, t(".state"), :class => "required" %>
           <% else %>
             <%= f.label :state, t(".state_province") %>
@@ -51,7 +51,7 @@
           <%= f.label :country_residence, t(".country_of_residence"), :class => "required" %>
         </td>
         <td>
-          <% if EventConfiguration.usa %>
+          <% if @config.usa %>
             <%= f.country_select :country_residence, priority: %w(US CA), prompt: ' ' %>
           <% else %>
             <%= f.country_select :country_residence, prompt: ' ' %>
@@ -63,7 +63,7 @@
           <%= f.label :country_representing, t(".country_representing"), :title => t(".country_representing_description") %>
         </td>
         <td>
-          <% if EventConfiguration.usa %>
+          <% if @config.usa %>
             <%= f.country_select(:country_representing, {priority: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description") }) %>
           <% else %>
             <%= f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description") }) %>

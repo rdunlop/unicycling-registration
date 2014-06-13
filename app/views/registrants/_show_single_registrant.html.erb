@@ -41,7 +41,7 @@
     <% end %>
   </div>
 
-  <% if @registrant.competitor && (@registrant.songs.count > 0 || !EventConfiguration.music_submission_ended?) %>
+  <% if @registrant.competitor && (@registrant.songs.count > 0 || !@config.music_submission_ended?) %>
   <div class="registrant_data_group">
     <fieldset class="data_block">
       <legend>Your Competition Music</legend>

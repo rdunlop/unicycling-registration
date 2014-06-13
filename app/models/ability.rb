@@ -1,6 +1,10 @@
 class Ability
   include CanCan::Ability
 
+  def config
+    @config ||= EventConfiguration.singleton
+  end
+
   def initialize(user)
     if user.present?
       define_ability_for_logged_in_user(user)
@@ -10,7 +14,7 @@ class Ability
     can :read, StandardSkillEntry
     can :logo, EventConfiguration
 
-    if EventConfiguration.test_mode
+    if config.test_mode
       # allow the user to upgrade their account in TEST MODE
       can :test_mode_role, EventConfiguration
       can :fake_complete, Payment
@@ -116,7 +120,7 @@ class Ability
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
-      if EventConfiguration.usa
+      if config.usa
         can :manage, :usa_membership
       end
       can :read, :volunteer
@@ -149,7 +153,7 @@ class Ability
       can :manage, StandardSkillRoutineEntry
       can :manage, StandardSkillRoutine
     end
-    unless EventConfiguration.standard_skill_closed?
+    unless config.standard_skill_closed?
       can [:read, :create, :destroy], StandardSkillRoutine do |routine|
         user.registrants.include?(routine.registrant)
       end
@@ -162,7 +166,7 @@ class Ability
     #can :create, Song do
     #  user.has_role? :admin
     #end
-    unless EventConfiguration.music_submission_ended?
+    unless config.music_submission_ended?
       can [:crud, :file_complete, :add_file], Song do |song|
         user.registrants.include?(song.registrant)
       end

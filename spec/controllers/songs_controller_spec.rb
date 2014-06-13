@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe SongsController do
   before(:each) do
-    allow(EventConfiguration).to receive(:music_submission_ended?).and_return(false)
+    FactoryGirl.create(:event_configuration, music_submission_end_date: Date.today + 4.days)
     @user = FactoryGirl.create(:user)
     @reg = FactoryGirl.create(:competitor, :user => @user)
     sign_in @user

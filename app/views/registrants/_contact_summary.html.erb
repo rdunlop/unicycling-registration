@@ -30,7 +30,7 @@
   <b><%= t(".team_club_contact") %>:</b>
   <%= contact_detail.club_contact %>
 </div>
-<% if EventConfiguration.usa %>
+<% if @config.usa %>
   <div>
     <b>USA Member Number:</b>
     <%= contact_detail.usa_member_number %>

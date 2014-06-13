@@ -102,10 +102,6 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
-  def self.test_mode
-    get_attribute_or_return_value(:test_mode, true)
-  end
-
   def self.contact_email
     get_attribute_or_return_value(:contact_email, "")
   end
@@ -136,22 +132,15 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
-  def self.standard_skill_closed?(today = Date.today)
-    if ec.nil?
-      false
-    else
-      ec.standard_skill_closed_date <= today
-    end
+  def standard_skill_closed?(today = Date.today)
+    return false if standard_skill_closed_date.nil?
+    standard_skill_closed_date <= today
   end
 
-  def self.music_submission_ended?(today = Date.today)
-    if ec.nil? || ec.music_submission_end_date.nil?
-      true
-    else
-      ec.music_submission_end_date <= today
-    end
+  def music_submission_ended?(today = Date.today)
+    return true if music_submission_end_date.nil?
+    music_submission_end_date <= today
   end
-
 
   def self.waiver_url
     get_url(:waiver_url, nil)
@@ -162,14 +151,6 @@ class EventConfiguration < ActiveRecord::Base
       "This is where your online waiver text would go."
     else
       ec.online_waiver_text
-    end
-  end
-
-  def self.usa
-    if ec.nil? or ec.usa.nil?
-      true
-    else
-      ec.usa
     end
   end
 

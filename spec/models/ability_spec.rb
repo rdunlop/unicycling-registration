@@ -6,7 +6,7 @@ describe "Ability" do
     before(:each) do
       @user = FactoryGirl.build_stubbed(:user)
       ENV["ONSITE_REGISTRATION"] = nil
-      allow(EventConfiguration).to receive(:music_submission_ended?).and_return(false)
+      @config = FactoryGirl.create(:event_configuration, music_submission_end_date: Date.today + 3.days)
     end
     subject { @ability = Ability.new(@user) }
 
@@ -112,9 +112,10 @@ describe "Ability" do
         it { should be_able_to(:create, Registrant) }
       end
     end
+
     describe "when standard_skill is closed" do
       before(:each) do
-        FactoryGirl.create(:event_configuration, :standard_skill_closed_date => 10.days.ago)
+        @config.update_attribute(:standard_skill_closed_date, 10.days.ago)
       end
 
       it { should_not be_able_to(:manage, StandardSkillRoutine) }

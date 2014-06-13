@@ -52,7 +52,7 @@
           <%= cd.label :club_contact, t(".primary_team_or_club_contact") %>
           <%= cd.text_field :club_contact, :size => 25  %>
         </span>
-        <% if EventConfiguration.usa %>
+        <% if @config.usa %>
           <span>
             <%= cd.label :usa_member_number, "USA Membership Number" %>
             <%= cd.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{@config.short_name}" %><br />

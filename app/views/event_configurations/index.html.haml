@@ -61,10 +61,10 @@
     %td= EventConfiguration.standard_skill
   %tr
     %th Standard skill closed date
-    %td= EventConfiguration.first.try(:standard_skill_closed_date)
+    %td= @config.standard_skill_closed_date
   %tr
     %th USA
-    %td= EventConfiguration.usa
+    %td= @config.usa
   %tr
     %th USA Expense Items (for export/marking confirming)
     %td
