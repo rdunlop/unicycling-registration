@@ -82,7 +82,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.singleton
-    EventConfiguration.first || EventConfiguration.new
+    EventConfiguration.includes(:translations).first || EventConfiguration.new
   end
 
   def logo_image=(input_data)

@@ -111,10 +111,6 @@ class Competition < ActiveRecord::Base
     has_age_groups or ((not has_age_groups) and (not has_experts))
   end
 
-  def has_participant(registrant)
-    find_competitor_with_bib_number(registrant.bib_number)
-  end
-
   def find_competitor_with_bib_number(bib_number)
     competitors.each do |competitor|
       if competitor.member_has_bib_number?(bib_number)

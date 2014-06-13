@@ -88,6 +88,7 @@ class User < ActiveRecord::Base
       "[e.g. Scott/Connie]
       Able to create onsite payments,
       adjust many details of the system.
+      Able to send mass-email to various subsets of users.
       Can assign Directors, and do anything a director can do:
       - can create/assign judges
       Can assign data_entry_volunteers, and do anything they can do:

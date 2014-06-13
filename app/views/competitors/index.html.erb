@@ -77,7 +77,6 @@ List of all competitors, including registrant info, with edit/destroy, marking t
         <th>ID</th>
         <th>Name</th>
         <th>Sign Up Details</th>
-        <th>Competitor?</th>
       </tr>
     </thead>
     <tbody>
@@ -87,15 +86,6 @@ List of all competitors, including registrant info, with edit/destroy, marking t
           <td><%= reg.bib_number %></td>
           <td><%= reg %></td>
           <td><%= reg.describe_event(@competition.event) %></td>
-          <td>
-            <%
-              competitor = @competition.has_participant(reg)
-              if competitor.nil? %>
-              <b>NO</b>
-            <% else %>
-              Yes (<%= competitor %>)
-            <% end %>
-            </td>
         </tr>
       <% end %>
     </tbody>

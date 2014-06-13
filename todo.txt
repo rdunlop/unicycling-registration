@@ -1,5 +1,8 @@
 Last Re-Arranged May 24, 2014.
 
+- change to use pgbackups' weekly-retention policy?
+- store the logo on S3
+
 - Fix the printing/names of competitors (they don't need the ID# in the name)
 - Results for "includes finals" competitions should include the "overall place" (age-group-agnostic)
 - Freestyle Presentation scores are only 3 categories (not 4)
