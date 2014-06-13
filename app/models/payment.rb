@@ -19,6 +19,8 @@
 #
 
 class Payment < ActiveRecord::Base
+  include CachedModel
+
   scope :completed, -> { where(:completed => true) }
 
   validates :user_id, :presence => true

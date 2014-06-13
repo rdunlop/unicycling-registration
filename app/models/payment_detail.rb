@@ -20,6 +20,8 @@
 #
 
 class PaymentDetail < ActiveRecord::Base
+  include CachedSetModel
+
   validates :payment, :registrant_id, :expense_item, :presence => true
   validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
 
@@ -40,6 +42,10 @@ class PaymentDetail < ActiveRecord::Base
 
   scope :free, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => true) }
   scope :refunded, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where.not({:refund_details => {:payment_detail_id => nil}}) }
+
+  def self.cache_set_field
+    :expense_item_id
+  end
 
   def refunded?
     !refund_detail.nil?

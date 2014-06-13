@@ -35,7 +35,7 @@
 
 class ContactDetail < ActiveRecord::Base
 
-  belongs_to :registrant, :inverse_of => :contact_detail
+  belongs_to :registrant, :inverse_of => :contact_detail, touch: true
   belongs_to :usa_family_membership_holder, :class_name => "Registrant"
   validates :address, :city, :country_residence, :zip, :presence => true
   validates :state, :presence => true, :unless => "EventConfiguration.usa == false"

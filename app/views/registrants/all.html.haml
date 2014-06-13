@@ -1,0 +1,15 @@
+- cache [I18n.locale, Registrant] do
+  %h1= t(".all_registrants")
+
+  %table.sortable.searchable
+    %thead
+      %tr
+        %th= t(".ID")
+        %th= t(".name")
+        %th= t(".country")
+    %tbody
+      - @registrants.each do |registrant|
+        %tr
+          %td= registrant.bib_number
+          %td= registrant
+          %td= registrant.country

@@ -20,6 +20,8 @@
 #
 
 class RegistrantExpenseItem < ActiveRecord::Base
+  include CachedSetModel
+
   belongs_to :registrant
   belongs_to :expense_item, :inverse_of => :registrant_expense_items
 
@@ -32,6 +34,10 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   delegate :has_details, to: :expense_item
   delegate :details_label, to: :expense_item
+
+  def self.cache_set_field
+    :expense_item_id
+  end
 
   def to_s
     ret = expense_item.to_s

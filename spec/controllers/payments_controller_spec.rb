@@ -366,15 +366,10 @@ describe PaymentsController do
     let!(:payment) { FactoryGirl.create(:payment, :completed => true) }
     let!(:payment_detail) { FactoryGirl.create(:payment_detail, :payment => payment, :amount => 5.22) }
 
-    it "has the total_received" do
-      get :summary, {}
-      assigns(:total_received).should  == 5.22
-    end
-
     it "assigns the known expense groups as expense_groups" do
-      group = payment_detail.expense_item.expense_group
+      item = payment_detail.expense_item
       get :summary, {}
-      assigns(:expense_groups).should == [group]
+      assigns(:expense_items).should == [item]
     end
   end
 end
