@@ -300,7 +300,9 @@ class Registrant < ActiveRecord::Base
   end
 
   def amount_owing
-    registrant_expense_items.inject(0){|total, item| total + item.cost}
+    Rails.cache.fetch("/registrants/#{id}-#{updated_at}/amount_owing") do
+      registrant_expense_items.inject(0){|total, item| total + item.cost}
+    end
   end
 
   def expenses_total
@@ -334,7 +336,9 @@ class Registrant < ActiveRecord::Base
   end
 
   def amount_paid
-    paid_details.inject(0){|total, item| total + item.cost}
+    Rails.cache.fetch("/registrants/#{id}-#{updated_at}/amount_paid") do
+      paid_details.inject(0){|total, item| total + item.cost}
+    end
   end
 
   ############# Events Selection ########

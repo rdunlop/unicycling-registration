@@ -22,7 +22,7 @@
 class RegistrantExpenseItem < ActiveRecord::Base
   include CachedSetModel
 
-  belongs_to :registrant
+  belongs_to :registrant, touch: true
   belongs_to :expense_item, :inverse_of => :registrant_expense_items
 
   has_paper_trail :meta => { :registrant_id => :registrant_id }
