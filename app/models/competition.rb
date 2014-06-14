@@ -18,6 +18,7 @@
 #  scheduled_completion_at :datetime
 #  published               :boolean          default(FALSE)
 #  awarded                 :boolean          default(FALSE)
+#  published_results_file  :string(255)
 #
 # Indexes
 #
@@ -67,6 +68,8 @@ class Competition < ActiveRecord::Base
             :build_import_result_from_raw, :include_event_name, :score_calculator,
             :result_description, :compete_in_order, :scoring_description,
             :imports_times, to: :scoring_helper
+
+  mount_uploader :published_results_file, PdfUploader
 
   def published_only_when_locked
     if published && !locked

@@ -2,14 +2,15 @@
   <h1><%= @competition %> Results</h1>
   <hr />
   <% if @age_group_entries.nil? %>
+    <% @results_list ||= @competition.results_list %>
     <%= render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @results_list["all"], :no_page_breaks => @no_page_breaks } %>
   <% else %>
     <% @age_group_entries.each do |ag_entry| %>
       <% next if @results_list[ag_entry].size == 0 %>
       <%= render :partial => "/printing/competitions/competition_results", :locals => {
-        :description => "#{ag_entry} #{ag_entry.gender}", 
-        :result_description => @competition.result_description, 
-        :competitors => @results_list[ag_entry], 
+        :description => "#{ag_entry} #{ag_entry.gender}",
+        :result_description => @competition.result_description,
+        :competitors => @results_list[ag_entry],
         :no_page_breaks => @no_page_breaks } %>
       <% end %>
     <% end %>

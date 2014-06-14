@@ -61,6 +61,7 @@ Information about the Competition will appear here, including results, judges, a
 
 - if can? :publish, @competition
   %h2 Publish the competition Results
+  = link_to "published Data", @competition.published_results_file.url
   - if @competition.published?
     = link_to 'Un-Publish', publish_competition_path(@competition), :method => :delete, data: { confirm: "Remove data from online results?" }
   - else

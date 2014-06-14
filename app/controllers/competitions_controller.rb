@@ -170,7 +170,10 @@ class CompetitionsController < ApplicationController
   end
 
   def publish
+    creator = CreatesCompetitionResultsPdf.new(@competition)
+
     if request.post?
+      creator.publish!
       @competition.published = true
     elsif request.delete?
       @competition.published = false
