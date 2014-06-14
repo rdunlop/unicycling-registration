@@ -15,7 +15,7 @@ end
 shared_context "judge_is_assigned_to_competition" do |options = {}|
   before :each do
     competition = Competition.first
-    judge_user = User.first
+    judge_user = User.find_by(name: options[:user_name])
     judge = FactoryGirl.create(:judge, competition: competition, user: judge_user)
     jt = judge.judge_type
     jt.name = "Presentation"
@@ -24,10 +24,10 @@ shared_context "judge_is_assigned_to_competition" do |options = {}|
 end
 
 describe 'Judging an event' do
-  let!(:user) { FactoryGirl.create(:data_entry_volunteer_user) }
+  let!(:user) { FactoryGirl.create(:data_entry_volunteer_user, name: "Judge User") }
   include_context 'basic event configuration'
   include_context 'freestyle_event', :name => "Individual"
-  include_context "judge_is_assigned_to_competition"
+  include_context "judge_is_assigned_to_competition", user_name: "Judge User"
   include_context 'user is logged in'
 
   describe "user is presented with a judging menu" do
@@ -37,7 +37,6 @@ describe 'Judging an event' do
 
     describe "in event judging" do
       before :each do
-        puts "debugging page: #{page.html}"
         click_link "Individual - Individual - Presentation"
       end
 
