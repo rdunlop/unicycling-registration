@@ -256,6 +256,16 @@ fieldset legend {
   text-align: center;
 }
 
+.contact_detail_summary {
+  b:after {
+    content: ':';
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
 input.ui-tooltip {
 padding: 1px;
 

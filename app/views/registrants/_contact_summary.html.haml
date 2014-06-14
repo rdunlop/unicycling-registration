@@ -1,0 +1,49 @@
+- cache [I18n.locale, @config, contact_detail] do
+  %div.contact_detail_summary
+    %p
+      %b= t(".address")
+      = contact_detail.address
+    %p
+      = contact_detail.city
+      = contact_detail.state
+      = contact_detail.country_residence
+      = contact_detail.zip
+    %p
+      %b= t(".representing_country")
+      = contact_detail.country
+    %p
+      %b= t(".phone")
+      = contact_detail.phone
+    %p
+      %b= t(".mobile")
+      = contact_detail.mobile
+    %p
+      %b= t(".email")
+      = contact_detail.email
+    %p
+      %b= t(".team_club")
+      = contact_detail.club
+    %p
+      %b= t(".team_club_contact")
+      = contact_detail.club_contact
+    - if @config.usa
+      %p
+        %b USA Member Number
+        = contact_detail.usa_member_number
+    %p
+      %b= t(".emergency_contact_name")
+      = contact_detail.emergency_name
+    %p
+      %b= t(".emergency_contact_relationship")
+      = contact_detail.emergency_relationship
+    %p
+      %b= t(".emergency_contact_attending")
+      = contact_detail.emergency_attending ? "yes" : "no"
+    %p
+      %b= t(".emergency_contact_phone")
+      = contact_detail.emergency_primary_phone
+      = contact_detail.emergency_other_phone
+    %p
+      %b= t(".responsible_adult")
+      = contact_detail.responsible_adult_name
+      = contact_detail.responsible_adult_phone
