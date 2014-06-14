@@ -16,7 +16,7 @@ module CompetitorsHelper
 
   def data_confirmation_link(competition, options = {})
     if competition.uses_judges
-      link_to "XXX Summary", root_url
+      link_to "XXX unused Summary", root_url
     else
       link_to "View", review_user_competition_import_results_path(current_user, competition)
     end

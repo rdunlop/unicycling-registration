@@ -108,6 +108,13 @@ describe Competition do
     expect(@ec).to be_invalid
   end
 
+  it "Cannot be awarded until it is published" do
+    @ec.locked = true
+    @ec.published = false
+    @ec.awarded = true
+    expect(@ec).to be_invalid
+  end
+
   it "can create a competitor from registrants" do
     regs = [FactoryGirl.create(:competitor),
       FactoryGirl.create(:competitor),

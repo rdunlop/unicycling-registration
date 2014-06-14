@@ -185,6 +185,22 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  def award
+    if request.post?
+      @competition.awarded = true
+    elsif request.delete?
+      @competition.awarded = false
+    end
+
+    respond_to do |format|
+      if @competition.save
+        format.html { redirect_to @competition, notice: 'Updated awarded status' }
+      else
+        format.html { redirect_to @competition, alert: 'Unable to update awarded status' }
+      end
+    end
+  end
+
   private
 
   def competition_params

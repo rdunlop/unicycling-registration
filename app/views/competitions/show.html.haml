@@ -46,6 +46,11 @@ Information about the Competition will appear here, including results, judges, a
   %p
     = link_to "View", results_printing_competition_path(@competition)
     = link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
+  %p
+    = form_tag(results_printing_competition_path(@competition, :format => :pdf), :method => :get) do
+      = label_tag :no_page_breaks
+      = check_box_tag :no_page_breaks
+      = submit_tag "Print Results"
 
 - if can? :lock, @competition
   %h2 Lock (Complete) the competition Results
@@ -60,6 +65,13 @@ Information about the Competition will appear here, including results, judges, a
     = link_to 'Un-Publish', publish_competition_path(@competition), :method => :delete, data: { confirm: "Remove data from online results?" }
   - else
     = link_to 'Publish', publish_competition_path(@competition), :method => :post, data: { confirm: "This will make the data available online for all to see. Continue?" }, class: "action_button"
+
+- if can? :award, @competition
+  %h2 Mark this Competition as "Awarded"
+  - if @competition.awarded?
+    = link_to 'Un-award', award_competition_path(@competition), :method => :delete, data: { confirm: "Remove awarded flag from competition?" }
+  - else
+    = link_to 'Award', award_competition_path(@competition), :method => :post, data: { confirm: "This will mark the competition as awarded. Continue?" }, class: "action_button"
 %hr
 
 %h2 Scoring Type/Rules

@@ -72,25 +72,6 @@
 <% end %>
 
 <hr />
-<h2>Results printing</h2>
-<ul>
-  <li>Display/Edit Results</li>
-  <% @event.competitions.each do |competition| %>
-    <li><%= competition %>
-    <ul>
-      <li><%= link_to 'View', results_url(competition) %></li>
-      <li>
-      <%= form_tag(results_printing_competition_path(competition, :format => :pdf), :method => :get) do %>
-        <%= label_tag :no_page_breaks %>
-        <%= check_box_tag :no_page_breaks %><br />
-
-        <%= submit_tag "Print Results" %>
-      <% end %>
-      </li>
-    </ul>
-    </li>
-  <% end %>
-</ul>
 <h3>Event Results</h3>
 <ul>
   <li>Event Results Summary pdf
