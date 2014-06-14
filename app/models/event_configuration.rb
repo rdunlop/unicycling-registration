@@ -138,24 +138,6 @@ class EventConfiguration < ActiveRecord::Base
 
   private
 
-  def self.get_attribute_or_return_value(attribute, default_value)
-    if ec.nil?
-      default_value
-    else
-      ec.send(attribute)
-    end
-  end
-
-  def self.get_url(attribute, default_value)
-    if ec.nil? or ec.send(attribute).nil? or  ec.send(attribute).empty?
-      default_value
-    else
-      ec.send(attribute)
-    end
-  end
-
-  private
-
   def self.ec
     EventConfiguration.first
   end
