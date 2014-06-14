@@ -15,7 +15,11 @@ module CompetitorsHelper
   end
 
   def data_confirmation_link(competition, options = {})
-    link_to "View", review_user_competition_import_results_path(current_user, competition)
+    if competition.uses_judges
+      link_to "XXX Summary", root_url
+    else
+      link_to "View", review_user_competition_import_results_path(current_user, competition)
+    end
   end
 
   def start_data_entry_link(user, competition)

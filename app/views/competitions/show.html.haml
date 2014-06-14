@@ -19,44 +19,47 @@ Information about the Competition will appear here, including results, judges, a
   %hr
 
   %h2 Judges
-
+  = render partial: "judging_results_summary", locals: {competition: @competition }
+  %br
   = link_to "Manage Judges/Data-Entry for #{@competition}", competition_judges_path(@competition)
 
 %h2 Data Entry
 
-%table.sortable
-  %thead
-    = render partial: "data_entry_links_header"
-  %tbody
-    = render partial: "data_entry_links", locals: {competition: @competition }
+- if @competition.uses_judges
+  = link_to "Announcer Form", announcer_printing_competition_path(@competition)
+  = link_to "(pdf)", announcer_printing_competition_path(@competition, :format => :pdf)
+- else
+  %table.sortable
+    %thead
+      = render partial: "data_entry_links_header"
+    %tbody
+      = render partial: "data_entry_links", locals: {competition: @competition }
 
-%br
-= render partial: "judging_results_summary", locals: {competition: @competition }
+
+- if can? :result, @competition
+  %h2 Monitor Results
+  %p
+    = link_to 'View', results_url(@competition)
+    = link_to "View2", result_competition_path(@competition)
+
+  %h2 Preview Results to be posted
+  %p
+    = link_to "View", results_printing_competition_path(@competition)
+    = link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
 
 - if can? :lock, @competition
+  %h2 Lock (Complete) the competition Results
+  - if @competition.locked?
+    = link_to 'Unlock', lock_competition_path(@competition), :method => :delete, data: { confirm: "Are you sure?" }
+  - else
+    = link_to 'Lock', lock_competition_path(@competition), :method => :post, data: { confirm: "No more results can be changed. Continue?" }, class: "action_button"
 
-  %h3 Competition Management
-  %table
-    %tr
-      %th # Competitors
-      %th # Results
-      %th View Results Summary
-      %th Print
-      %th Lock/Unlock
-      %td
-        - if can? :lock, @competition
-          - if @competition.locked?
-            = link_to 'Unlock', lock_competition_path(@competition), :method => :delete
-          - else
-            = link_to 'Lock', lock_competition_path(@competition), :method => :post
-    %tr
-      %td= @competition.num_competitors
-      %td= @competition.num_results
-      %td
-        = link_to 'View', results_url(@competition)
-        = link_to "View2", result_competition_path(@competition)
-      %td= link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
-
+- if can? :publish, @competition
+  %h2 Publish the competition Results
+  - if @competition.results_published?
+    = link_to 'Un-Publish', publish_competition_path(@competition), :method => :delete, data: { confirm: "Remove data from online results?" }
+  - else
+    = link_to 'Publish', publish_competition_path(@competition), :method => :post, data: { confirm: "This will make the data available online for all to see. Continue?" }, class: "action_button"
 %hr
 
 %h2 Scoring Type/Rules

@@ -64,6 +64,10 @@ class Competition < ActiveRecord::Base
             :result_description, :compete_in_order, :scoring_description,
             :imports_times, to: :scoring_helper
 
+  def results_published?
+    false
+  end
+
   def to_s
     event.to_s + " - " + self.name
   end

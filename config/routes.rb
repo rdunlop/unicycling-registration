@@ -279,6 +279,8 @@ Workspace::Application.routes.draw do
 
         post :lock
         delete :lock
+        post :publish
+        delete :publish
         delete :destroy_results
       end
       resources :competitors, :only => [:index, :new, :create] do
