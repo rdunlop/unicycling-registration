@@ -21,6 +21,7 @@
 
 class PaymentDetail < ActiveRecord::Base
   include CachedSetModel
+  include HasDetailsDescription
 
   validates :payment, :registrant_id, :expense_item, :presence => true
   validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
@@ -32,7 +33,7 @@ class PaymentDetail < ActiveRecord::Base
   belongs_to :expense_item
   has_one :refund_detail
 
-  delegate :has_details, :details_label, :details_description, to: :expense_item
+  delegate :has_details, :details_label, to: :expense_item
 
   # excludes refunded items
   scope :completed, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}}) }

@@ -54,10 +54,6 @@ class ExpenseItem < ActiveRecord::Base
     self.has_custom_cost = false if self.has_custom_cost.nil?
   end
 
-  def details_description
-    "#{details_label}: #{details}" if has_details
-  end
-
   def paid_items
     payment_details.paid
   end

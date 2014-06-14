@@ -21,6 +21,7 @@
 
 class RegistrantExpenseItem < ActiveRecord::Base
   include CachedSetModel
+  include HasDetailsDescription
 
   belongs_to :registrant, touch: true
   belongs_to :expense_item, :inverse_of => :registrant_expense_items
@@ -32,7 +33,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   validate :no_more_than_max_per_registrant, :on => :create
   validate :custom_cost_present
 
-  delegate :has_details, :details_label, :details_description, to: :expense_item
+  delegate :has_details, :details_label, to: :expense_item
 
   def self.cache_set_field
     :expense_item_id
