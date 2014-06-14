@@ -9,6 +9,17 @@ describe WelcomeController do
     end
   end
 
+  # handle case where a machine queries for a non-locale
+  describe "GET 'humans.txt'" do
+    it "returns 404-not-found" do
+      @user = FactoryGirl.create(:user)
+      sign_in @user
+      expect {
+        get 'index', {locale: 'humans', format: 'txt' }
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
+
   describe "POST feedback" do
     it "returns http success" do
       post 'feedback', {:contact_form => { :feedback => "Hello WorlD", :email => "robin@dunlopweb.com"}}

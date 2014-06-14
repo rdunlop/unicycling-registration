@@ -3,6 +3,15 @@ class WelcomeController < ApplicationController
   skip_authorization_check only: [:index, :help, :feedback, :confirm]
   authorize_resource class: false, only: [:judging_menu, :data_entry_menu]
 
+  before_action :check_acceptable_format
+
+  # This tries to get around the apple-touch-icon.png requests
+  #  and the humans.txt requests
+  def check_acceptable_format
+    raise ActiveRecord::RecordNotFound if ["txt", "png"].include?(params[:format] )
+  end
+
+
   def help
     @contact_form = ContactForm.new
     @user = current_user
@@ -37,8 +46,6 @@ class WelcomeController < ApplicationController
           flash.keep
           format.html { redirect_to user_registrants_path(current_user) }
         end
-        # This tries to get around the apple-touch-icon.png requests
-        format.png { return render :nothing => true, :status => 200, :content_type => 'text/html' }
       else
         format.html { redirect_to registrants_path }
       end
