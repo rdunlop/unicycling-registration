@@ -32,8 +32,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   validate :no_more_than_max_per_registrant, :on => :create
   validate :custom_cost_present
 
-  delegate :has_details, to: :expense_item
-  delegate :details_label, to: :expense_item
+  delegate :has_details, :details_label, :details_description, to: :expense_item
 
   def self.cache_set_field
     :expense_item_id
