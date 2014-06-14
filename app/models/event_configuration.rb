@@ -75,6 +75,8 @@ class EventConfiguration < ActiveRecord::Base
     self.artistic_score_elimination_mode_naucc = true if self.artistic_score_elimination_mode_naucc.nil?
     self.style_name ||= "naucc_2013"
     self.short_name ||= ""
+    self.currency ||= "%u%n USD"
+    self.currency_code ||= "USD"
   end
 
   def clear_of_blank_strings
@@ -144,54 +146,6 @@ class EventConfiguration < ActiveRecord::Base
 
   def self.waiver_url
     get_url(:waiver_url, nil)
-  end
-
-  def self.online_waiver_text
-    if ec.nil? or ec.online_waiver_text.nil? or ec.online_waiver_text.empty?
-      "This is where your online waiver text would go."
-    else
-      ec.online_waiver_text
-    end
-  end
-
-  def self.usa_individual_expense_item
-    if ec.nil? or ec.usa_individual_expense_item.nil?
-      nil
-    else
-      ec.usa_individual_expense_item
-    end
-  end
-
-  def self.usa_family_expense_item
-    if ec.nil? or ec.usa_family_expense_item.nil?
-      nil
-    else
-      ec.usa_family_expense_item
-    end
-  end
-
-  def self.iuf
-    if ec.nil? or ec.iuf.nil?
-      false
-    else
-      ec.iuf
-    end
-  end
-
-  def self.currency
-    if ec.nil? or ec.currency.blank?
-      "%u%n USD"
-    else
-      ec.currency
-    end
-  end
-
-  def self.currency_code
-    if ec.nil? or ec.currency_code.blank?
-      "USD"
-    else
-      ec.currency_code
-    end
   end
 
   def self.comp_noncomp_url

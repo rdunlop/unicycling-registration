@@ -26,12 +26,12 @@ module ApplicationHelper
 
   def print_formatted_currency(cost)
     # print in :en locale so that it is '$'
-    number_to_currency(cost, format: EventConfiguration.currency, locale: :en)
+    number_to_currency(cost, format: @config.currency, locale: :en)
   end
 
   def print_item_cost_currency(cost)
     return "Free" if cost == 0
-    number_to_currency(cost, format: EventConfiguration.currency, locale: :en)
+    number_to_currency(cost, format: @config.currency, locale: :en)
   end
 
   def text_to_html_linebreaks(text)

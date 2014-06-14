@@ -13,10 +13,10 @@
     %td= @config.style_name
   %tr
     %th Location
-    %td= EventConfiguration.first.try(:location)
+    %td= @config.location
   %tr
     %th Dates description
-    %td= EventConfiguration.first.try(:dates_description)
+    %td= @config.dates_description
   %tr
     %th Event url
     %td= EventConfiguration.event_url
@@ -32,7 +32,7 @@
   %tr
     %th Online Waiver Text
     %td
-      %span.admin_show_waiver_truncate= EventConfiguration.online_waiver_text
+      %span.admin_show_waiver_truncate= @config.online_waiver_text
   %tr
     %th Comp/Non-Comp url
     %td= EventConfiguration.comp_noncomp_url
@@ -46,16 +46,16 @@
         = image_tag(logo_event_configuration_path(EventConfiguration.first), :width => "100px")
   %tr
     %th Currency (example)
-    %td= EventConfiguration.currency
+    %td= @config.currency
   %tr
     %th Currency Code
-    %td= EventConfiguration.currency_code
+    %td= @config.currency_code
   %tr
     %th Contact email
     %td= EventConfiguration.contact_email
   %tr
     %th Artistic closed date
-    %td= EventConfiguration.first.try(:artistic_closed_date)
+    %td= @config.artistic_closed_date
   %tr
     %th Standard skill
     %td= EventConfiguration.standard_skill
@@ -68,24 +68,24 @@
   %tr
     %th USA Expense Items (for export/marking confirming)
     %td
-      = EventConfiguration.usa_individual_expense_item
+      = @config.usa_individual_expense_item
       %br
-      = EventConfiguration.usa_family_expense_item
+      = @config.usa_family_expense_item
   %tr
     %th IUF
-    %td= EventConfiguration.iuf
+    %td= @config.iuf
   %tr
     %th Rulebook URL
     %td= @config.rulebook_url
   %tr
     %th Tshirt closed date
-    %td= EventConfiguration.first.try(:tshirt_closed_date)
+    %td= @config.tshirt_closed_date
   %tr
     %th Music Submission End date
-    %td= EventConfiguration.first.try(:music_submission_end_date)
+    %td= @config.music_submission_end_date
   %tr
     %th Test Mode
-    %td= EventConfiguration.first.try(:test_mode)
+    %td= @config.test_mode
 
 - if @event_configurations.count == 0
   = link_to 'New Event configuration', new_event_configuration_path

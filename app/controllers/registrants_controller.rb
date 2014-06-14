@@ -34,7 +34,7 @@ class RegistrantsController < ApplicationController
       @display_invitation_manage_banner = @user.invitations.permitted.count > 0
       @has_print_waiver = @config.has_print_waiver
       @usa_event = @config.usa
-      @iuf_event = EventConfiguration.iuf
+      @iuf_event = @config.iuf
       load_online_waiver
 
       respond_to do |format|
@@ -56,11 +56,8 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/empty_waiver
   def empty_waiver
-    config = EventConfiguration.first
-    unless config.nil?
-      @event_name = config.long_name
-      @event_start_date = config.start_date.strftime("%b %-d, %Y")
-    end
+    @event_name = @config.long_name
+    @event_start_date = @config.start_date.try(:strftime, "%b %-d, %Y")
 
     respond_to do |format|
       format.html { render action: "waiver", :layout => nil }
@@ -104,7 +101,7 @@ class RegistrantsController < ApplicationController
     @has_print_waiver = @config.has_print_waiver
     load_online_waiver
     @usa_event = @config.usa
-    @iuf_event = EventConfiguration.iuf
+    @iuf_event = @config.iuf
 
     respond_to do |format|
       format.html # show.html.erb
@@ -242,7 +239,7 @@ class RegistrantsController < ApplicationController
 
   def load_online_waiver
     @has_online_waiver = @config.has_online_waiver
-    @online_waiver_text = EventConfiguration.online_waiver_text
+    @online_waiver_text = @config.online_waiver_text
   end
 
   def attributes

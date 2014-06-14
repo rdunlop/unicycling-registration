@@ -84,8 +84,8 @@ class UsaMembershipsController < ApplicationController
   private
 
   def load_usa_paid_registrants
-    family_item = EventConfiguration.usa_family_expense_item
-    individual_item = EventConfiguration.usa_individual_expense_item
+    family_item = @config.usa_family_expense_item
+    individual_item = @config.usa_individual_expense_item
 
     @family_registrants = family_item.payment_details.includes(:registrant).paid.map{|pd| pd.registrant}
     @individual_registrants = individual_item.payment_details.includes(:registrant).paid.map{|pd| pd.registrant}
