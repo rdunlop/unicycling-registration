@@ -1,0 +1,21 @@
+%fieldset.data_block.registrant_summary
+  - cache [I18n.locale, @registrant] do
+    %legend= t(".registration_summary")
+    %p
+      %b= t(".name")
+      = @registrant.first_name
+      = @registrant.middle_initial
+      = @registrant.last_name
+    %p
+      %b= t(".gender")
+      = @registrant.gender
+
+      %b= t(".birthday")
+      = @registrant.birthday.strftime("%d-%b-%Y")
+      %b= t(".age")
+      = @registrant.age
+    %p
+      %b= t(".volunteer")
+      = @registrant.volunteer
+  - if can? :read_contact_info, @registrant
+    = render :partial => "contact_summary", locals: { :contact_detail => @registrant.contact_detail }

@@ -132,6 +132,8 @@ en:
       id: "ID"
       name: "Name"
       country: "Country"
+    registrant_paid_expenses:
+      paid: "Paid"
 
   registrant_expense_items:
     index:

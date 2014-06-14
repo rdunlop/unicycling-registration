@@ -33,8 +33,6 @@ class RegistrantsController < ApplicationController
       @display_invitation_request = @user.invitations.need_reply.count > 0
       @display_invitation_manage_banner = @user.invitations.permitted.count > 0
       @has_print_waiver = @config.has_print_waiver
-      @usa_event = @config.usa
-      @iuf_event = @config.iuf
       load_online_waiver
 
       respond_to do |format|
@@ -100,8 +98,6 @@ class RegistrantsController < ApplicationController
     @has_minor = current_user.has_minor?
     @has_print_waiver = @config.has_print_waiver
     load_online_waiver
-    @usa_event = @config.usa
-    @iuf_event = @config.iuf
 
     respond_to do |format|
       format.html # show.html.erb

@@ -6,26 +6,14 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th><%= t(".cost") %></th>
           <th></th>
+          <th><%= t(".cost") %></th>
           <th><%= t(".paid") %>?</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <% registrant.paid_details.each do |pei| %>
-          <tr>
-            <td><%= pei %></td>
-            <td><%= print_item_cost_currency(pei.cost) %></td>
-            <td>
-              <% if pei.has_details %>
-                <%= pei.details_label %>: <%= pei.details %>
-              <% end %>
-            </td>
-            <td>(<%= t(".paid")%>)</td>
-            <td></td>
-          </tr>
-        <% end %>
+        <%= render partial: "/registrants/registrant_paid_expenses" %>
         <% registrant.owing_registrant_expense_items.each do |ce| %>
           <tr>
             <td>

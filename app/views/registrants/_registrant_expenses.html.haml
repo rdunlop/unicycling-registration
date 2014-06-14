@@ -1,0 +1,25 @@
+// [I18n.locale, @config, @registrant]
+%fieldset.data_block
+  %legend= t(".expenses")
+  %table
+    %thead
+      %tr
+        %th Item
+        %td
+        %th= t(".cost")
+        %th
+          = t(".paid")
+          ?
+    %tbody
+      = render partial: "registrant_paid_expenses"
+      - @registrant.owing_registrant_expense_items.each do |ce|
+        %tr
+          %td= ce
+          %td
+            - if ce.has_details
+              = "#{ce.details_label}: #{ce.details}"
+          %td= print_item_cost_currency(ce.cost)
+          - if ce.free
+            %td n/a
+          - else
+            %td.unpaid ✗
