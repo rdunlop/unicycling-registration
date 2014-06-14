@@ -175,14 +175,6 @@ div.required {
   padding: 3px;
 }
 
-.registrant_summary {
-  padding: 0;
-  border-collapse: collapse;
-
-  .shared_registrant {
-    background-color: rgb(238, 236, 236);
-  }
-}
 .registrant_edit_button {
   @include button(auto);
 }
@@ -206,17 +198,51 @@ div.required {
 .payment_process {
 }
 
+
+
 .registrant_summary {
-  .registrant_data_group {
-    float: left;
+  padding: 0;
+  border-collapse: collapse;
+}
+
+.registrant_summary {
+  fieldset {
+    border: none;
   }
-  &:after {
-    clear: both
+  table {
+    width: 100%;
+    th {
+      text-decoration: underline;
+    }
+  }
+  legend {
+    width: 100%;
+    background-color: lightgrey;
+    font-weight: bold;
+    font-size: 22px;
+  }
+  .registrant_summary_block {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .registrant_expenses_block {
+    display: inline-block;
+    width: 25%;
+    vertical-align: top;
+  }
+  .registrant_events_block {
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
   }
 }
 .registrant_summary {
+  .events_summary_table {
+    text-align: left;
+  }
   .event_heading {
-    background: lightgray;
+    background: #f3f3f3;
     text-align: center;
     font-weight: bold;
   }
@@ -226,6 +252,19 @@ div.required {
     }
   }
 }
+
+
+.contact_detail_summary, .registrant_details_summary {
+  b:after {
+    content: ':';
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+
 .data_block {
   h2 {
     background: lightgray;
@@ -256,15 +295,6 @@ fieldset legend {
   text-align: center;
 }
 
-.contact_detail_summary, .registrant_summary {
-  b:after {
-    content: ':';
-  }
-
-  p {
-    margin: 0;
-  }
-}
 
 input.ui-tooltip {
 padding: 1px;

@@ -1,5 +1,8 @@
 Last Re-Arranged May 24, 2014.
 
+- Test all pages with waiver/18-year-old before pushing to NAUCC.
+- how to display the cache digests dependencies graph?
+
 - Add caching around _registrant_events (taking into account the relationship with competitors? (maybe just russian-doll the rest of it?))
 - add caching around _registrants_expense_items
 

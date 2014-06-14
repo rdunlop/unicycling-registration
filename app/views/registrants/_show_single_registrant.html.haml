@@ -3,12 +3,12 @@
 .non_printable
   = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
 .registrant_summary
-  .registrant_data_group
+  .registrant_summary_block
     = render :partial => "/registrants/summary"
     - if can? :update, @registrant
       .edit_link_block
         = link_to t(".edit_registration"), edit_registrant_path(@registrant)
-  .registrant_data_group
+  .registrant_expenses_block
     = render :partial => "/registrants/registrant_expenses"
     - if can? :create, RegistrantExpenseItem
       .edit_link_block
@@ -16,7 +16,7 @@
     - if can? :manage, @registrant
       .non_printable
         = link_to "List Payments", registrant_payments_path(@registrant)
-  .registrant_data_group
+  .registrant_events_block
     - if @registrant.competitor
       = render :partial => "/registrants/registrant_events"
       - if can? :update, @registrant

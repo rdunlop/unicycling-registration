@@ -2,19 +2,17 @@
   - if @registrant.competitor && (@registrant.songs.count > 0 || !@config.music_submission_ended?)
     .registrant_data_group
       %fieldset.data_block
-        %legend Your Competition Music
-        %table
-          %thead
-            %tr
-              %th Event
-              %th Song
-          %tbody
-            - @registrant.songs.includes(:event).each do |song|
+        - cache [I18n.locale, @config, @registrant] do
+          %legend Your Competition Music
+          %table
+            %thead
               %tr
-                %td= song.event
-                %td= song.description
-          %tfoot
-            %tr
-              %th{:colspan => "2"}
-                - if can? :create, Song
-                  To upload music, please #{link_to "Click Here", registrant_songs_path(@registrant)}
+                %th Event
+                %th Song
+            %tbody
+              - @registrant.songs.includes(:event).each do |song|
+                %tr
+                  %td= song.event
+                  %td= song.description
+        - if can? :create, Song
+          To upload music, please #{link_to "Click Here", registrant_songs_path(@registrant)}

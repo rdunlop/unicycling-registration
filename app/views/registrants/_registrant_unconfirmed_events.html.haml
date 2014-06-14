@@ -1,0 +1,19 @@
+%fieldset.data_block
+  %legend= t('.confirmed_events')
+  %table
+    %thead
+      %th= t(".event")
+      %th= t(".category")
+      %th
+    %tbody
+      - Category.includes(:events, :translations).each do |cat|
+        - if @registrant.has_confirmed_event_in_category?(cat)
+          %tr
+            %td.event_heading{:colspan => "5"}= cat
+          - cat.events.each do |event|
+            - if @registrant.has_confirmed_event?(event)
+              - details = @registrant.describe_event_hash(event)
+              %tr
+                %td= details[:description]
+                %td= details[:category]
+                %td= details[:additional]
