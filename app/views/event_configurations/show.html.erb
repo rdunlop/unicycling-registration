@@ -70,8 +70,8 @@
 
 <p>
   <b>Logo:</b>
-  <%= @event_configuration.logo_filename %>
-  <%= image_tag(logo_event_configuration_path(@event_configuration), :alt => "Image", :width => "300px") %>
+  <%= @event_configuration.logo_file.url %>
+  <%= image_tag(@event_configuration.logo_file.url), :alt => "Image", :width => "300px") %>
 </p>
 
 <p>

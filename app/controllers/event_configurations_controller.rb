@@ -1,25 +1,11 @@
 class EventConfigurationsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:logo]
+  before_filter :authenticate_user!
   before_filter :load_event_configuration, :only => [:create]
   load_and_authorize_resource
 
 
   def load_event_configuration
     @event_configuration = EventConfiguration.new(event_configuration_params)
-  end
-
-  # GET /event_configurations/1/logo
-  def logo
-    @event_configuration = EventConfiguration.find(params[:id])
-    @image = @event_configuration.logo_binary
-
-    if @event_configuration.logo_type.nil?
-      render nothing: true
-    else
-      send_data @image, :type => @event_configuration.logo_type,
-        :filename => @event_configuration.logo_filename,
-        :disposition => 'inline'
-    end
   end
 
   # GET /event_configurations
@@ -104,7 +90,8 @@ class EventConfigurationsController < ApplicationController
   private
   def event_configuration_params
     params.require(:event_configuration).permit(:artistic_closed_date, :music_submission_end_date, :artistic_score_elimination_mode_naucc,
-                                                :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location, :logo_image,
+                                                :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location,
+                                                :logo_file,
                                                 :long_name, :rulebook_url, :short_name, :standard_skill, :standard_skill_closed_date, :style_name,
                                                 :start_date, :tshirt_closed_date, :test_mode, :usa, :has_print_waiver, :waiver_url, :has_online_waiver,
                                                 :online_waiver_text, :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,

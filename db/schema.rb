@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612051921) do
+ActiveRecord::Schema.define(version: 20140614062031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -274,15 +274,12 @@ ActiveRecord::Schema.define(version: 20140612051921) do
     t.string   "dates_description"
     t.string   "event_url"
     t.date     "start_date"
-    t.binary   "logo_binary"
     t.string   "contact_email"
     t.date     "artistic_closed_date"
     t.date     "standard_skill_closed_date"
     t.date     "tshirt_closed_date"
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
-    t.string   "logo_filename"
-    t.string   "logo_type"
     t.boolean  "test_mode"
     t.string   "waiver_url"
     t.string   "comp_noncomp_url"
@@ -300,6 +297,7 @@ ActiveRecord::Schema.define(version: 20140612051921) do
     t.boolean  "artistic_score_elimination_mode_naucc", default: true
     t.integer  "usa_individual_expense_item_id"
     t.integer  "usa_family_expense_item_id"
+    t.string   "logo_file"
   end
 
   create_table "events", force: true do |t|

@@ -202,6 +202,24 @@ Enable Auto Return:
 Set the "PayPal Account Optional" setting on so that people don't have to have a paypal account to pay
   "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> PayPal Account Optional (On) -> save"
 
+
+AWS S3 Account
+--------------
+
+You should also create an Amazon S3 Account for storing files.
+These files include:
+
+ - The main app logo
+ - Any uploaded Songs (if that feature is enabled)
+ - [future feature] PDFs of results.
+
+Specify your connection settings in the secrets.yml file:
+
+    aws_bucket:
+    aws_access_key:
+    aws_secret_access_key:
+
+
 Mixpanel Account
 ----------------
 

@@ -81,8 +81,10 @@
       <td>This date is used to calculate the "age" of each registrant.</td>
   </tr>
   <tr>
-      <th><%= f.label :logo_image %></th>
-      <td><%= f.file_field :logo_image %></td>
+      <th><%= f.label :logo_file %></th>
+      <td><%= f.file_field :logo_file %>
+        <%= image_tag(@event_configuration.logo_file.url) if @event_configuration.logo_file? %>
+      </td>
       <td>This logo is displayed at the top of the site.</td>
   </tr>
   <tr>

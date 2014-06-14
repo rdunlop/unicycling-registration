@@ -41,9 +41,7 @@
     %td= @config.start_date
   %tr
     %th Logo
-    %td
-      -unless EventConfiguration.first.nil?
-        = image_tag(logo_event_configuration_path(EventConfiguration.first), :width => "100px")
+    %td= image_tag(@config.logo_file.url, :width => "100px")
   %tr
     %th Currency (example)
     %td= @config.currency

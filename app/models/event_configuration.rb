@@ -35,11 +35,14 @@
 #  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
 #  usa_individual_expense_item_id        :integer
 #  usa_family_expense_item_id            :integer
+#  logo_file                             :string(255)
 #
 
 class EventConfiguration < ActiveRecord::Base
   translates :short_name, :long_name, :location, :dates_description
   accepts_nested_attributes_for :translations
+
+  mount_uploader :logo_file, LogoUploader
 
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI::regexp(%w(http https)), :unless => "event_url.nil?"
@@ -89,12 +92,6 @@ class EventConfiguration < ActiveRecord::Base
     EventConfiguration.includes(:translations).first || EventConfiguration.new
   end
 
-  def logo_image=(input_data)
-    self.logo_filename = input_data.original_filename
-    self.logo_type = input_data.content_type.chomp
-    self.logo_binary = input_data.read
-  end
-
   def self.paypal_base_url
     paypal_test_url = "https://www.sandbox.paypal.com"
     paypal_live_url = "https://www.paypal.com"
@@ -128,9 +125,5 @@ class EventConfiguration < ActiveRecord::Base
 
   def self.configuration_exists?
     !EventConfiguration.first.nil?
-  end
-
-  def as_json(options={})
-    super(:except => [:logo_binary, :logo_type, :logo_filename])
   end
 end
