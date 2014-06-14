@@ -48,7 +48,6 @@ describe "scores/index" do
   it "renders a list of scores" do
     render
     assert_select "tr:nth-child(1)" do |row|
-      assert_select "td", :text => @comp1.position.to_s, :count => 1
       assert_select "td", :text => @comp1.bib_number.to_s, :count => 1
       assert_select "td", :text => @comp1.name.to_s, :count => 1
       assert_select "td", :text => "5.1".to_s, :count => 1
@@ -58,7 +57,6 @@ describe "scores/index" do
       assert_select "td", :text => "14.499".to_s, :count => 1
     end
     assert_select "tr:nth-child(2)" do |row|
-      assert_select "td", :text => @comp2.position.to_s, :count => 1
       assert_select "td", :text => @comp2.bib_number.to_s, :count => 1
       assert_select "td", :text => @comp2.name.to_s, :count => 1
       assert_select "td", :text => "1.1".to_s, :count => 1
