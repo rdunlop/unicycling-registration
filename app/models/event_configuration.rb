@@ -106,8 +106,6 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
-# long name, start_date, comp_non_comp_url, contact_email
-
   def self.closed?(today = Date.today)
     last_online_rp = RegistrationPeriod.last_online_period
 
@@ -134,11 +132,5 @@ class EventConfiguration < ActiveRecord::Base
 
   def as_json(options={})
     super(:except => [:logo_binary, :logo_type, :logo_filename])
-  end
-
-  private
-
-  def self.ec
-    EventConfiguration.first
   end
 end

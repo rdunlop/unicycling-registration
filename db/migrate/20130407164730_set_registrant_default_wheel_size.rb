@@ -6,7 +6,7 @@ class SetRegistrantDefaultWheelSize < ActiveRecord::Migration
 
   class Registrant < ActiveRecord::Base
     def age
-      start_date = EventConfiguration.first.try(:start_date)
+      start_date = EventConfiguration.singleton.start_date
       if start_date.nil? or self.birthday.nil?
         99
       else
