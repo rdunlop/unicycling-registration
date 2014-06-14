@@ -136,6 +136,8 @@ fr:
       ID: "Numéro "
       name: "Nom"
       country: "Pays"
+    registrant_paid_expenses:
+      paid: "Payé"
 
   attending:
     events:

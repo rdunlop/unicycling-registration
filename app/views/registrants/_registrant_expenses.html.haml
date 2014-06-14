@@ -12,14 +12,5 @@
           ?
     %tbody
       = render partial: "registrant_paid_expenses"
-      - @registrant.owing_registrant_expense_items.each do |ce|
-        %tr
-          %td= ce
-          %td
-            - if ce.has_details
-              = "#{ce.details_label}: #{ce.details}"
-          %td= print_item_cost_currency(ce.cost)
-          - if ce.free
-            %td n/a
-          - else
-            %td.unpaid ✗
+      = render partial: "registrant_unpaid_expenses", locals: { include_form: false }
+
