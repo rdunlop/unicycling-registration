@@ -72,37 +72,6 @@
 <% end %>
 
 <hr />
-<h2>Results</h2>
-
-<% if @event.competitions.any?{|comp| comp.judges.count > 0 } %>
-  <table class="sortable">
-    <caption>Judge-specific results</caption>
-    <thead>
-      <tr>
-        <th>Competition</th>
-        <th>Judge</th>
-        <th># Competitors</th>
-        <th># Results Entered</th>
-        <th>Results</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @event.competitions.each do |competition| %>
-        <% competition.judges.each do |judge| %>
-          <tr>
-            <td><%= competition %></td>
-            <td><%= judge %></td>
-            <td><%= competition.competitors.count %></td>
-            <td><%= judge.scores.count %></td>
-            <td><%= link_to "View Scores", judge_scores_path(judge) %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
-
-<hr />
 <%= render :partial => "data_entry_forms" %>
 
 <hr />

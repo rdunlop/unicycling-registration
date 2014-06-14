@@ -115,7 +115,7 @@ describe Competitor do
     it "should have name/id from the registrant" do
       reg  = @comp.registrants.first
 
-      @comp.name.should == "##{reg.bib_number} - #{reg.name}"
+      @comp.name.should == reg.name
       @comp.bib_number.should == reg.external_id.to_s
     end
     it "should be elgiible" do
@@ -126,7 +126,7 @@ describe Competitor do
       reg = @comp.registrants.first
 
       @comp.bib_number.should == reg.external_id.to_s
-      @comp.name.should == "##{reg.bib_number} - #{reg.name}"
+      @comp.name.should == reg.name
     end
     it "should allow setting the custom_name to nil" do
       @comp.custom_name = nil
