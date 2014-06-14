@@ -162,9 +162,25 @@ class CompetitionsController < ApplicationController
 
     respond_to do |format|
       if @competition.save
-        format.html { redirect_to event_path(@competition.event), notice: 'Updated lock status' }
+        format.html { redirect_to @competition, notice: 'Updated lock status' }
       else
-        format.html { redirect_to event_path(@competition.event), notice: 'Unable to update lock status' }
+        format.html { redirect_to @competition, alert: 'Unable to update lock status' }
+      end
+    end
+  end
+
+  def publish
+    if request.post?
+      @competition.published = true
+    elsif request.delete?
+      @competition.published = false
+    end
+
+    respond_to do |format|
+      if @competition.save
+        format.html { redirect_to @competition, notice: 'Updated publish status' }
+      else
+        format.html { redirect_to @competition, alert: 'Unable to update publish status' }
       end
     end
   end

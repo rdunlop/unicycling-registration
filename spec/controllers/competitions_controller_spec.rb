@@ -156,6 +156,23 @@ describe CompetitionsController do
     end
   end
 
+  describe "POST publish" do
+    it "publishes the competition results" do
+      competition = FactoryGirl.create(:competition, :event => @event)
+      post :publish, {:id => competition.to_param}
+      competition.reload
+      competition.published?.should == true
+    end
+  end
+  describe "DELETE publish" do
+    it "un-publishes the competition" do
+      competition = FactoryGirl.create(:competition, :event => @event, :locked => true)
+      delete :publish, {:id => competition.to_param}
+      competition.reload
+      competition.published?.should == false
+    end
+  end
+
   describe "when the competition is a distance competition, with time-results" do
     before(:each) do
       @competition = FactoryGirl.create(:timed_competition)

@@ -16,6 +16,7 @@
 #  end_data_type           :string(255)
 #  uses_lane_assignments   :boolean          default(FALSE)
 #  scheduled_completion_at :datetime
+#  published               :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -54,6 +55,7 @@ class Competition < ActiveRecord::Base
 
   validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }
   validates :event_id, :presence => true
+  validate :published_only_when_locked
 
   scope :event_order, -> { includes(:event).order("events.name") }
 
@@ -64,8 +66,10 @@ class Competition < ActiveRecord::Base
             :result_description, :compete_in_order, :scoring_description,
             :imports_times, to: :scoring_helper
 
-  def results_published?
-    false
+  def published_only_when_locked
+    if published && !locked
+      errors[:base] << "Cannot Publish an unlocked Competition"
+    end
   end
 
   def to_s

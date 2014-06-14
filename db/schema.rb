@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140614062031) do
+ActiveRecord::Schema.define(version: 20140614212248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20140614062031) do
     t.string   "end_data_type"
     t.boolean  "uses_lane_assignments",   default: false
     t.datetime "scheduled_completion_at"
+    t.boolean  "published",               default: false
   end
 
   add_index "competitions", ["event_id"], name: "index_competitions_event_id", using: :btree
