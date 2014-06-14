@@ -24,7 +24,7 @@ class DataEntryVolunteersController < ApplicationController
     else
       index
     end
-    respond_with(@judge, location: competition_data_entry_volunteers_path(@competition), action: "index")
+    respond_with(@data_entry_volunteer, location: competition_data_entry_volunteers_path(@competition), action: "index")
   end
 
 =begin

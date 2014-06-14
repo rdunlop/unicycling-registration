@@ -40,4 +40,12 @@ describe DataEntryVolunteersController do
       response.should redirect_to(root_path)
     end
   end
+
+  describe "missing a name" do
+    it "doesn't create the volunteer" do
+      expect {
+        post :create, { data_entry_volunteer: {user_id: @user.id, name: ""}, competition_id: @ec.id }
+      }.to_not change(@user.roles, :count)
+    end
+  end
 end

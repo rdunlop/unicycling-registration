@@ -1,5 +1,5 @@
 <%= form_for(@competition.new_record? ? [@event, @competition] : [@competition]) do |f| %>
-  <% render partial: "/shared/error_messages", object: @competition %>
+  <%= render partial: "/shared/error_messages", object: @competition %>
 
   <div class="field">
     <%= f.label :name %><br />

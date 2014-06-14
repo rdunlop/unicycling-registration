@@ -206,7 +206,7 @@ class Competitor < ActiveRecord::Base
         if registrants.empty?
           "(No registrants)"
         else
-          registrants.map(&:with_id_to_s).join(" - ")
+          registrants.map(&:to_s).join(" - ")
         end
       end
     end

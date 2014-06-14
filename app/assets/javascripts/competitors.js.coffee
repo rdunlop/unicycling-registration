@@ -22,3 +22,19 @@ $ ->
     search_contains: true
     no_results_text: 'No matches'
     width: '200px'
+
+
+# Highlights pairs/sets of data which are not all matching
+$ ->
+  $(".js--highlightMatching").each ->
+    all_children = $(this).find(".js--shouldMatch")
+    first_value = $(all_children[0]).text()
+    all_match = true;
+    all_children.each ->
+      if $(this).text() != first_value
+        all_match = false
+    all_children.each ->
+      if all_match
+        $(this).addClass('matching')
+      else
+        $(this).addClass('unmatching')

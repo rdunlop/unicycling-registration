@@ -34,7 +34,7 @@
         <tr>
           <td><%= judge %></td>
           <td><%= judge.judge_type %></td>
-          <td><%= link_to t('Destroy'), competition_judge_path(judge.competition, judge), confirm: 'Are you sure?', method: :delete %></td>
+          <td><%= link_to t('Destroy'), competition_judge_path(judge.competition, judge), data: {confirm: 'Are you sure?'}, method: :delete %></td>
         </tr>
       <% end %>
     </tbody>

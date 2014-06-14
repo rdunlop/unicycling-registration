@@ -5,6 +5,7 @@ class DataEntryVolunteer
   attr_accessor :user, :user_id, :competition, :name
 
   validates :user, presence: true
+  validates :name, presence: true
 
   delegate :email, to: :user
 
@@ -21,6 +22,7 @@ class DataEntryVolunteer
 
 
   def save
+    return false unless valid?
     begin
       user.update_attributes!(name: name)
       user.add_role(:data_entry_volunteer)
@@ -33,7 +35,7 @@ class DataEntryVolunteer
   delegate :errors, to: :user
 
   def new_record?
-    false
+    true
   end
 
   def to_param
@@ -45,6 +47,6 @@ class DataEntryVolunteer
   end
 
   def persisted?
-    user.persisted?
+    false
   end
 end

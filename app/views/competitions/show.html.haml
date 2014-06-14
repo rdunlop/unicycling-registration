@@ -6,19 +6,14 @@ Information about the Competition will appear here, including results, judges, a
   %h2 Director Abilities
 
   %h3 Competitor Management
-  - if @competition.all_registrants_are_competitors?
-    - reg_style = "all_assigned"
-  - else
-    - reg_style = "warning"
-
   %table
     %tr
       %th #Signed up
       %th #Assigned Registrants
       %th Manage Competitor List
-    %tr
-      %td{class: reg_style}= @competition.signed_up_registrants.count
-      %td{class: reg_style}= @competition.num_assigned_registrants
+    %tr.js--highlightMatching
+      %td.js--shouldMatch= @competition.signed_up_registrants.count
+      %td.js--shouldMatch= @competition.num_assigned_registrants
       %td= link_to 'Manage Competitors', competition_competitors_path(@competition)
 
   %hr
@@ -35,6 +30,8 @@ Information about the Competition will appear here, including results, judges, a
   %tbody
     = render partial: "data_entry_links", locals: {competition: @competition }
 
+%br
+= render partial: "judging_results_summary", locals: {competition: @competition }
 
 - if can? :lock, @competition
 

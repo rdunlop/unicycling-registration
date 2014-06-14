@@ -55,7 +55,7 @@ class Judge < ActiveRecord::Base
     end
 
     def to_s
-        name + "(" + judge_type.to_s + ")"
+        name + " (" + judge_type.to_s + ")"
     end
 
     def score_totals

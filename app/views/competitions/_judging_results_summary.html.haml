@@ -1,0 +1,16 @@
+// locals: competition
+%table.sortable
+  %caption Judge-specific results
+  %thead
+    %tr
+      %th Judge
+      %th # Competitors
+      %th # Results Entered
+      %th Results
+  %tbody
+    - competition.judges.each do |judge|
+      %tr.js--highlightMatching
+        %td= judge
+        %td.js--shouldMatch= competition.competitors.count
+        %td.js--shouldMatch= judge.scores.count
+        %td= link_to "View Scores", judge_scores_path(judge)

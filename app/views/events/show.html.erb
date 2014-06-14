@@ -52,7 +52,7 @@
     <tbody>
       <% @event.competitions.each do |competition| %>
         <tr>
-          <td><%= competition %></td>
+          <td><%= link_to competition, competition %></td>
           <td>
             <% if can? :update, competition %>
               <%= link_to 'Edit', edit_competition_path(competition) %>
@@ -73,11 +73,6 @@
 
 <hr />
 <h2>Results</h2>
-
-<% @event.competitions.each do |competition| %>
-  <%= link_to "Manage Judges/Data-Entry for #{competition}", competition_judges_path(competition) %><br />
-<% end %>
-<br />
 
 <% if @event.competitions.any?{|comp| comp.judges.count > 0 } %>
   <table class="sortable">
