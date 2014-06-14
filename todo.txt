@@ -1,5 +1,9 @@
 Last Re-Arranged May 24, 2014.
 
+- set up scss stylesheets to properly inherit variables/mixins.
+
+- caching of the judges/results pages
+
 - how to display the cache digests dependencies graph?
 
 - change to use pgbackups' weekly-retention policy?

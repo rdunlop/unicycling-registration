@@ -8,7 +8,7 @@ describe ScoresController do
     sign_in @admin
 
     @judge = FactoryGirl.create(:judge, :user_id => @user.id)
-    @jt = FactoryGirl.create(:judge_type, :boundary_calculation_enabled => true)
+    @jt = FactoryGirl.create(:judge_type)
     @judge_with_pres = FactoryGirl.create(:judge, :judge_type => @jt, :user_id => @other_user.id)
     @other_judge = FactoryGirl.create(:judge, :user_id => @other_user.id)
 
@@ -42,20 +42,11 @@ describe ScoresController do
       :notes => "hi"
     }
   end
-  def valid_boundary_attributes
-    {
-      :number_of_people => 3,
-      :major_dismount => 1,
-      :minor_dismount => 1,
-      :major_boundary => 1,
-      :minor_boundary => 1,
-    }
-  end
 
-  describe "GET edit" do
+  describe "GET new" do
     it "assigns the requested score as @score" do
       score = @signed_in_scores[0]
-      get :edit, {:id => score.to_param, :judge_id => @judge.id, :competitor_id => @comp.id}
+      get :new, {:judge_id => @judge.id, :competitor_id => @comp.id}
       assigns(:score).should eq(score)
     end
   end
@@ -72,18 +63,6 @@ describe ScoresController do
         }.to change(Score, :count).by(1)
       end
     end
-    describe "with valid params for a boundary_score" do
-        it "with a valid score it creates a new BoundaryScore" do
-            expect {
-                post :create, {:score => valid_attributes, :boundary_score => valid_boundary_attributes, :judge_id => @judge_with_pres.id, :competitor_id => @comp.id}
-            }.to change(BoundaryScore, :count).by(1)
-        end
-        it "works when the score is invalid" do
-            expect {
-                post :create, {:score => {:number_of_people => 1}, :boundary_score => valid_boundary_attributes, :judge_id => @judge_with_pres.id, :competitor_id => @comp.id}
-            }.to change(BoundaryScore, :count).by(0)
-        end
-    end
   end
 
   describe "when the event is locked" do
@@ -96,16 +75,9 @@ describe ScoresController do
         post :create, {:score => valid_attributes, :judge_id => @other_judge.id, :competitor_id => @comp.id}
       }.to change(Score, :count).by(0)
     end
-    it "should be unable to update when the scores" do
-      score = @signed_in_scores[0]
-      score.competitor.competition.locked.should == true
-
-      put :update, {:id => score.to_param, :score => valid_attributes, :judge_id => @other_judge.id, :competitor_id => @comp.id}
-      response.should redirect_to root_path
-    end
   end
 
-  describe "PUT update" do
+  describe "POST create On an existing score" do
     describe "with valid params" do
       it "updates the requested score" do
         score = @signed_in_scores[0]
@@ -113,31 +85,20 @@ describe ScoresController do
         # specifies that the Score created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Score.any_instance.should_receive(:update_attributes).with({'val_1' => '2.1'})
-        put :update, {:id => score.to_param, :score => {:val_1 => '2.1'}, :judge_id => @judge, :competitor_id => @comp.id}
+        Score.any_instance.should_receive(:assign_attributes).with({'val_1' => '2.1'})
+        post :create, {:score => {:val_1 => '2.1'}, :judge_id => @judge, :competitor_id => @comp.id}
       end
 
       it "assigns the requested score as @score" do
         score = @signed_in_scores[0]
-        put :update, {:id => score.to_param, :score => valid_attributes, :judge_id => @judge, :competitor_id => @comp.id}
+        post :create, {:score => valid_attributes, :judge_id => @judge, :competitor_id => @comp.id}
         assigns(:score).should eq(score)
       end
 
       it "redirects to the score" do
         score = @signed_in_scores[0]
-        put :update, {:id => score.to_param, :score => valid_attributes, :judge_id => @judge, :competitor_id => @comp.id}
+        post :create, {:score => valid_attributes, :judge_id => @judge, :competitor_id => @comp.id}
         response.should redirect_to(judge_scores_url(@judge))
-      end
-    end
-    describe "with a boundary_score" do
-      it "updates the requested score" do
-        sign_out @user
-        sign_in @other_user
-        score = FactoryGirl.create(:score, :judge => @judge_with_pres, :competitor => @comp)
-        boundary_score = FactoryGirl.create(:boundary_score, :judge => @judge_with_pres, :competitor => @comp)
-        put :update, {:id => score.to_param, :score => valid_attributes, :boundary_score => valid_boundary_attributes, :judge_id => @judge_with_pres.id, :competitor_id => @comp.id}
-        assigns(:score).should eq(score)
-        assigns(:boundary_score).should eq(boundary_score)
       end
     end
 
@@ -146,16 +107,16 @@ describe ScoresController do
         score = @signed_in_scores[0]
         # Trigger the behavior that occurs when invalid params are submitted
         Score.any_instance.stub(:save).and_return(false)
-        put :update, {:id => score.to_param, :score => {:number_of_people => 1}, :judge_id => @judge, :competitor_id => @comp.id}
+        post :create, {:score => {:number_of_people => 1}, :judge_id => @judge, :competitor_id => @comp.id}
         assigns(:score).should eq(score)
       end
 
-      it "re-renders the 'edit' template" do
+      it "re-renders the 'new' template" do
         score = @signed_in_scores[0]
         # Trigger the behavior that occurs when invalid params are submitted
         Score.any_instance.stub(:save).and_return(false)
-        put :update, {:id => score.to_param, :score => {:val_1 => 1}, :judge_id => @judge.id, :competitor_id => @comp.id}
-        response.should render_template("edit")
+        post :create, {:score => {:val_1 => 1}, :judge_id => @judge.id, :competitor_id => @comp.id}
+        response.should render_template("new")
       end
     end
 
@@ -172,11 +133,11 @@ describe ScoresController do
         sign_in @auth_user
       end
       it "should deny access to edit" do
-        get :edit, {:id => @user_score.to_param, :judge_id => @judge, :competitor_id => @comp.id}
+        get :new, {:judge_id => @judge, :competitor_id => @comp.id}
         response.should redirect_to(root_path)
       end
       it "should deny access to update" do
-        put :update, {:id => @user_score.to_param, :judge_id => @judge, :competitor_id => @comp.id}
+        post :create, {:judge_id => @judge, :competitor_id => @comp.id}
         response.should redirect_to(root_path)
       end
     end

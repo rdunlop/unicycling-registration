@@ -68,7 +68,7 @@ describe JudgeType do
   it "allows boundary_calculation_enabled" do
     jt = FactoryGirl.build(:judge_type)
     jt.boundary_calculation_enabled = true
-    jt.valid?.should == true
+    jt.valid?.should == false # XXX Boundary Scores are disabled
   end
 
   it "can convert places into points" do

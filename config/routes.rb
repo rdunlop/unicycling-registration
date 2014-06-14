@@ -315,7 +315,7 @@ Workspace::Application.routes.draw do
         get :directors
       end
       resources :competitors, :only => [] do
-        resources :scores, :only => [:new, :edit, :create, :update]
+        resources :scores, :only => [:new, :create]
 
         # display chosen competitors current scores, and update them
         resources :standard_scores, :only => [:new, :create]

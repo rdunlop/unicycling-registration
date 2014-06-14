@@ -35,7 +35,7 @@ class JudgeType < ActiveRecord::Base
   validates :val_2_max, :presence => true
   validates :val_3_max, :presence => true
   validates :val_4_max, :presence => true
-  validates :boundary_calculation_enabled, :inclusion => { :in => [true, false] }
+  validates :boundary_calculation_enabled, :inclusion => { :in => [false] }  # boundary calculations are disabled
 
   after_initialize :init
 

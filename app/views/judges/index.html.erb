@@ -31,6 +31,7 @@
     </thead>
     <tbody>
       <% @judges.each do |judge| %>
+        <% next unless judge.persisted? %>
         <tr>
           <td><%= judge %></td>
           <td><%= judge.judge_type %></td>
@@ -41,6 +42,7 @@
   </table>
 
   <h3>Add judges</h3>
+  <%= render partial: "/shared/error_messages", object: @judge %>
   <fieldset class="data_block">
     <legend><b>Option 1:</b> Add judges individually</legend>
 

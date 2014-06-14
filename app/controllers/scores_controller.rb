@@ -1,9 +1,10 @@
 class ScoresController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :judge # requires that the current user is able to access the judge, thus hiding scores
+  before_filter :find_competitor, :except => [:index]
+  before_filter :find_or_create_score, :only => [:create, :new] # must be performed before load_and_auth_resource
   load_and_authorize_resource
 
-  before_filter :find_competitor, :except => [:index]
 
   before_action :set_judge_breadcrumb
 
@@ -20,9 +21,8 @@ class ScoresController < ApplicationController
 
   # GET /judges/1/competitors/2/scores/new
   def new
-    add_breadcrumb "New Score"
+    add_breadcrumb "Set Score"
 
-    @score = @competitor.scores.new
     if @judge.judge_type.boundary_calculation_enabled
         @boundary_score = @competitor.boundary_scores.new
     end
@@ -30,90 +30,18 @@ class ScoresController < ApplicationController
         format.html
     end
   end
-
   # POST /judges/1/competitors/2/scores
   def create
     authorize! :create_scores, @competitor.competition
 
-    @score.judge = @judge
-    @score.competitor = @competitor
-
-    if @judge.judge_type.boundary_calculation_enabled
-        @boundary_score = BoundaryScore.new(boundary_score_params)
-        @boundary_score.competitor = @competitor
-        @boundary_score.judge = @judge
-        if @boundary_score.valid?
-            # boundary score is valid, save the result to the @score
-            @score.val_1 = @boundary_score.total
-        else
-            respond_to do |format|
-                set_judge_breadcrumb
-                # on fail to save, re-render new
-                format.html { render action: "new" }
-                format.json { render json: @score.errors, status: :unprocessable_entity }
-            end
-            return
-        end
-    end
-
     respond_to do |format|
       if @score.save
-        if @judge.judge_type.boundary_calculation_enabled
-            @boundary_score.save
-        end
         format.html { redirect_to judge_scores_path(@judge), notice: 'Score was successfully created.' }
         format.json { render json: @score, status: :created, location: @score }
       else
         set_judge_breadcrumb
         format.html { render action: "new" }
         format.json { render json: @score.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # GET /judges/1/competitors/2/scores/1/edit
-  def edit
-    add_breadcrumb "Edit Score"
-
-    @judge = Judge.find(params[:judge_id])
-    @boundary_score = BoundaryScore.find_by(competitor_id: params[:competitor_id], judge_id: params[:judge_id])
-    respond_to do |format|
-        format.html
-        format.js
-    end
-  end
-
-  # PUT /judges/1/competitors/2/scores/1
-  # PUT /judges/1/competitors/2/scores/1.json
-  def update
-    add_breadcrumb "Update Score"
-
-    authorize! :create_scores, @competitor.competition
-
-    if @judge.judge_type.boundary_calculation_enabled
-        @boundary_score = BoundaryScore.find_by(competitor_id: params[:competitor_id], judge_id: params[:judge_id])
-        if @boundary_score.update_attributes(boundary_score_params)
-            # boundary score is valid
-            @score.val_1 = @boundary_score.total
-        else
-            respond_to do |format|
-                # on fail to save, re-render new
-                format.html { render action: "edit" }
-                format.json { render json: @score.errors, status: :unprocessable_entity }
-            end
-            return
-        end
-    end
-
-    respond_to do |format|
-      if @score.update_attributes(score_params)
-        format.html { redirect_to judge_scores_url(@judge), notice: 'Score was successfully updated.' }
-        format.json { head :no_content }
-        format.js
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @score.errors, status: :unprocessable_entity }
-        format.js
       end
     end
   end
@@ -131,4 +59,15 @@ class ScoresController < ApplicationController
   def set_judge_breadcrumb
     add_to_judge_breadcrumb(@judge)
   end
+
+  def find_or_create_score
+    @score = @competitor.scores.where(judge: @judge).first
+
+    unless @score
+      @score = @competitor.scores.new
+      @score.judge = @judge
+    end
+    @score.assign_attributes(score_params) if params[:score]
+  end
+
 end
