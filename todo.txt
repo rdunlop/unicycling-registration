@@ -1,5 +1,7 @@
 Last Re-Arranged May 24, 2014.
 
+- allow admins/payment_admins to adjust the reg_fee of competitors
+
 - set up scss stylesheets to properly inherit variables/mixins.
 
 - caching of the judges/results pages

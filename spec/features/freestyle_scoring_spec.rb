@@ -37,6 +37,7 @@ describe 'Judging an event' do
 
     describe "in event judging" do
       before :each do
+        puts "debugging page: #{page.html}"
         click_link "Individual - Individual - Presentation"
       end
 
