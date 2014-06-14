@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% cache ['title', I18n.locale, @config] do %>
-    <title><%= @config.short_name %> <%= t(".registration") %></title>
-    <%= stylesheet_link_tag  @config.style_name, :media => "all" %>
-  <% end %>
+  <title><%= @config.short_name %> <%= t(".registration") %></title>
+  <%= stylesheet_link_tag  @config.style_name, :media => "all" %>
 
   <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
     <%= stylesheet_link_tag    "dev", :media => "all" %>

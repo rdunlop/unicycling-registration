@@ -1,13 +1,8 @@
 Last Re-Arranged May 24, 2014.
 
-- Test all pages with waiver/18-year-old before pushing to NAUCC.
 - how to display the cache digests dependencies graph?
 
-- Add caching around _registrant_events (taking into account the relationship with competitors? (maybe just russian-doll the rest of it?))
-- add caching around _registrants_expense_items
-
 - change to use pgbackups' weekly-retention policy?
-- store the logo on S3
 
 - Fix the printing/names of competitors (they don't need the ID# in the name)
 - Results for "includes finals" competitions should include the "overall place" (age-group-agnostic)
