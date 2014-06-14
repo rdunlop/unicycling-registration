@@ -27,19 +27,19 @@ Please choose the event that you want to enter data for:
 %table.sortable
   %thead
     %tr
+      %th Competition End
       %th Category
       %th Event
       %th Competition
       %th Status
-      %th (Director-only) View/Approve data
   %tbody
     - Competition.all.each do |competition|
       %tr
+        %td= competition.scheduled_completion_at
         %td= competition.event.category
         %td= competition.event
         %td= link_to competition.name, competition
         - competition_presenter = CompetitionPresenter.new(competition)
         %td{ class: competition_presenter.status_code}= competition_presenter.status
-        %td= link_to "View", review_user_competition_import_results_path(current_user, competition)
 
 If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).

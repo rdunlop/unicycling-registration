@@ -15,6 +15,8 @@ class CompetitionPresenter
   #  when "unconfirmed_results"
     when "incomplete"
       "Results Incomplete"
+    when "complete"
+      "Results Completed (unpublished)"
     when "published"
       "Results Published"
     when "awarded"
@@ -26,6 +28,7 @@ class CompetitionPresenter
     return "no_competitors" if competition.competitors.count == 0
     return "no_results" if competition.num_results == 0
     return "incomplete" if !competition.locked?
+    return "complete" if !competition.published?
     return "published" if competition.published? && !competition.awarded?
     return "awarded" if competition.awarded?
   end
