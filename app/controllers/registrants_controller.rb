@@ -33,7 +33,6 @@ class RegistrantsController < ApplicationController
       @display_invitation_request = @user.invitations.need_reply.count > 0
       @display_invitation_manage_banner = @user.invitations.permitted.count > 0
       @has_print_waiver = @config.has_print_waiver
-      load_online_waiver
 
       respond_to do |format|
         format.html # index.html.erb
@@ -95,10 +94,6 @@ class RegistrantsController < ApplicationController
   # GET /registrants/1
   # GET /registrants/1.json
   def show
-    @has_minor = current_user.has_minor?
-    @has_print_waiver = @config.has_print_waiver
-    load_online_waiver
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @registrant }
@@ -235,7 +230,6 @@ class RegistrantsController < ApplicationController
 
   def load_online_waiver
     @has_online_waiver = @config.has_online_waiver
-    @online_waiver_text = @config.online_waiver_text
   end
 
   def attributes

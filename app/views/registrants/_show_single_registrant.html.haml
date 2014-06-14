@@ -33,5 +33,4 @@
     = link_to t(".done"), user_registrants_path(current_user), {:class => "competitor registration_button"}
   - else
     = link_to t('.done'), user_registrants_path(current_user), {:class => "noncompetitor registration_button"}
-- if @has_print_waiver
-  = render :partial => "/registrants/waiver"
+= render :partial => "/registrants/waiver"

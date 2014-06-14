@@ -1,7 +1,9 @@
-.data_block.non_printable
-  %p
-    %b Every competitor must bring a filled out Legal Waiver to the Competition.
-    %br
-    Registrants under the age of 18 must have the waiver signed by a Parent/Guardian.
-  - unless @registrant.nil?
-    = link_to 'Print Legal Waiver', waiver_registrant_path(@registrant, :format => 'pdf'), {:class => "print_waiver_link", :target => "_blank" }
+- cache [@config, @registrant] do
+  - if @config.has_print_waiver
+    .data_block.non_printable
+      %p
+        %b Every competitor must bring a filled out Legal Waiver to the Competition.
+        %br
+        Registrants under the age of 18 must have the waiver signed by a Parent/Guardian.
+      - unless @registrant.nil?
+        = link_to 'Print Legal Waiver', waiver_registrant_path(@registrant, :format => 'pdf'), {:class => "print_waiver_link", :target => "_blank" }
