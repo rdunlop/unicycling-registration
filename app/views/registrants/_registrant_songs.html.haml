@@ -15,4 +15,5 @@
                   %td= song.event
                   %td= song.description
         - if can? :create, Song
-          To upload music, please #{link_to "Click Here", registrant_songs_path(@registrant)}
+          .non_printable
+            To upload music, please #{link_to "Click Here", registrant_songs_path(@registrant)}

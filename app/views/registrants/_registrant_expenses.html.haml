@@ -13,4 +13,6 @@
     %tbody
       = render partial: "registrant_paid_expenses"
       = render partial: "registrant_unpaid_expenses", locals: { include_form: false }
-
+    %tfoot
+      %th{colspan: 4}
+        = render partial: "/registrants/registrant_total_owing", locals: { registrant: @registrant }

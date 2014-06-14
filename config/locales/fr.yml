@@ -28,6 +28,7 @@ fr:
       noncompetitor: "(Non-compétiteur)"
       edit: "Réviser"
       see_summary: "Voir le résumé"
+    registrant_total_owing:
       unpaid: "impayé"
       paid: "Payé"
     new:

@@ -1,0 +1,7 @@
+- cache [I18n.locale, registrant] do
+  - if registrant.amount_owing > 0
+    %span.unpaid
+      = print_formatted_currency(registrant.amount_owing)
+      = t(".unpaid")
+  - else
+    %span.paid= t(".paid")

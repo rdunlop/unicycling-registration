@@ -33,6 +33,7 @@ en:
       noncompetitor: "(Non-Competitor)"
       edit: "Edit"
       see_summary: "See Summary"
+    registrant_total_owing:
       unpaid: "Unpaid"
       paid: "Paid"
     new:
