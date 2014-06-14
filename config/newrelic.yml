@@ -204,6 +204,8 @@ development: &development
   # Enable textmate links
   # textmate: true
 
+naucc:
+  <<: *development
 caching:
   <<: *development
 

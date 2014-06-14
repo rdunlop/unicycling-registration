@@ -1,6 +1,9 @@
 <div class="non_printable">
   <%= link_to 'Bag Labels PDF', bag_labels_registrants_path %>
   <%= link_to 'All Registrants (pdf)', registrants_path(:format => :pdf) %>
+  <% if can? :show_all, Registrant %>
+    <%= link_to "All Registrants Summaries (pdf)", show_all_registrants_path(:format => :pdf) %>
+  <% end %>
 </div>
 
 <h1>Edit Registrants</h1>

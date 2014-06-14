@@ -9,8 +9,6 @@ Last Re-Arranged May 24, 2014.
 - Freestyle Presentation scores are only 3 categories (not 4)
  - Add ability to manage this?
 
-
-- Stop using EventConfiguration, use @config instead.
 - Add Warning on Registration Summary if this user doesn't have a confirmed USA membership?
 
 - add functional test which simulates/uses the file upload flow, so that I can test that CSV upload works.

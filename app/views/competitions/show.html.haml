@@ -6,7 +6,10 @@ Information about the Competition will appear here, including results, judges, a
   %h2 Director Abilities
 
   %h3 Competitor Management
-  - reg_style = "warning" unless @competition.all_registrants_are_competitors?
+  - if @competition.all_registrants_are_competitors?
+    - reg_style = "all_assigned"
+  - else
+    - reg_style = "warning"
 
   %table
     %tr

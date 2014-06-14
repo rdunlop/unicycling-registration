@@ -10,7 +10,7 @@
       %th Club
       %th Country
   %tbody
-    - @competition.competitors.each do |comp|
+    - @competition.competitors.active.each do |comp|
       %tr
         - if @competition.compete_in_order
           %td= comp.position
