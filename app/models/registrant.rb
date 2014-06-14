@@ -238,7 +238,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def set_age
-    start_date = EventConfiguration.start_date
+    start_date = EventConfiguration.singleton.start_date
     if start_date.nil? or self.birthday.nil?
       self.age = 99
     else

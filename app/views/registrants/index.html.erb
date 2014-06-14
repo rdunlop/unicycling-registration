@@ -34,9 +34,9 @@
       <%= link_to t(".create_new_noncompetitor"), new_registrant_path(:non_competitor => true), :class => "noncompetitor registration_button" %>
     </div>
   <% end %>
-  <% unless EventConfiguration.comp_noncomp_url.nil? %>
+  <% unless @config.comp_noncomp_url.nil? %>
     <div class="sign_up_difference">
-      <%= link_to t(".whats_the_difference"), EventConfiguration.comp_noncomp_url, :class => "fancybox", :title =>"Click here for more information!" %>
+      <%= link_to t(".whats_the_difference"), @config.comp_noncomp_url, :class => "fancybox", :title =>"Click here for more information!" %>
     </div>
   <% end %>
   <div class="competitor_sign_up">

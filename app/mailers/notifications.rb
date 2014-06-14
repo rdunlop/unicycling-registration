@@ -10,7 +10,7 @@ class Notifications < ActionMailer::Base
   def payment_completed(payment)
     @payment_number = payment.id
     @total_amount = payment.total_amount
-    @event_name = EventConfiguration.long_name
+    @event_name = EventConfiguration.singleton.long_name
 
     mail to: payment.user.email, bcc: ENV['PAYMENT_NOTICE_EMAIL']
   end

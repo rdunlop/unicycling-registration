@@ -47,7 +47,7 @@ describe Registrant do
 
   describe "with an event configuration starting date" do
     before(:each) do
-      allow(EventConfiguration).to receive(:start_date).and_return(Date.new(2012,05,20))
+      FactoryGirl.create(:event_configuration, start_date: Date.new(2012,05,20))
     end
 
     describe "and a registrant born on the starting day in 1982" do
@@ -130,7 +130,7 @@ describe Registrant do
     end
 
     it "can not have a birthday, while having a configuration" do
-      allow(EventConfiguration).to receive(:start_date).and_return(Date.new(2012,05,20))
+      FactoryGirl.create(:event_configuration, start_date: Date.new(2012,05,20))
       @reg.birthday = nil
       @reg.valid?.should == false
     end

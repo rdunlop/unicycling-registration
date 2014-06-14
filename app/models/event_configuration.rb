@@ -74,9 +74,11 @@ class EventConfiguration < ActiveRecord::Base
     self.standard_skill = true if self.standard_skill.nil?
     self.artistic_score_elimination_mode_naucc = true if self.artistic_score_elimination_mode_naucc.nil?
     self.style_name ||= "naucc_2013"
+    self.long_name ||= ""
     self.short_name ||= ""
     self.currency ||= "%u%n USD"
     self.currency_code ||= "USD"
+    self.contact_email ||= ""
   end
 
   def clear_of_blank_strings
@@ -104,17 +106,7 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
-  def self.contact_email
-    get_attribute_or_return_value(:contact_email, "")
-  end
-
-  def self.long_name
-    get_attribute_or_return_value(:long_name, "")
-  end
-
-  def self.start_date
-    get_attribute_or_return_value(:start_date, nil)
-  end
+# long name, start_date, comp_non_comp_url, contact_email
 
   def self.closed?(today = Date.today)
     last_online_rp = RegistrationPeriod.last_online_period
@@ -123,14 +115,6 @@ class EventConfiguration < ActiveRecord::Base
       false
     else
       last_online_rp.last_day < today
-    end
-  end
-
-  def self.standard_skill
-    if ec.nil? or ec.standard_skill.nil?
-      true
-    else
-      ec.standard_skill
     end
   end
 
@@ -144,28 +128,8 @@ class EventConfiguration < ActiveRecord::Base
     music_submission_end_date <= today
   end
 
-  def self.waiver_url
-    get_url(:waiver_url, nil)
-  end
-
-  def self.comp_noncomp_url
-    get_url(:comp_noncomp_url, nil)
-  end
-
   def self.configuration_exists?
     !EventConfiguration.first.nil?
-  end
-
-  def self.event_url
-    get_url(:event_url, nil)
-  end
-
-  def self.artistic_score_elimination_mode_naucc
-    if ec.nil? or ec.artistic_score_elimination_mode_naucc.nil?
-      true
-    else
-      ec.artistic_score_elimination_mode_naucc
-    end
   end
 
   def as_json(options={})

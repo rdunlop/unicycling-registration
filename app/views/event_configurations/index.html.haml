@@ -7,7 +7,7 @@
     %td= @config.short_name
   %tr
     %th Long name
-    %td= EventConfiguration.long_name
+    %td= @config.long_name
   %tr
     %th Style name
     %td= @config.style_name
@@ -19,13 +19,13 @@
     %td= @config.dates_description
   %tr
     %th Event url
-    %td= EventConfiguration.event_url
+    %td= @config.event_url
   %tr
     %th Print Waiver
     %td= @config.has_print_waiver
   %tr
     %th Waiver url
-    %td= EventConfiguration.waiver_url
+    %td= @config.waiver_url
   %tr
     %th Online Waiver
     %td= @config.has_online_waiver
@@ -35,10 +35,10 @@
       %span.admin_show_waiver_truncate= @config.online_waiver_text
   %tr
     %th Comp/Non-Comp url
-    %td= EventConfiguration.comp_noncomp_url
+    %td= @config.comp_noncomp_url
   %tr
     %th Start date
-    %td= EventConfiguration.start_date
+    %td= @config.start_date
   %tr
     %th Logo
     %td
@@ -52,13 +52,13 @@
     %td= @config.currency_code
   %tr
     %th Contact email
-    %td= EventConfiguration.contact_email
+    %td= @config.contact_email
   %tr
     %th Artistic closed date
     %td= @config.artistic_closed_date
   %tr
     %th Standard skill
-    %td= EventConfiguration.standard_skill
+    %td= @config.standard_skill
   %tr
     %th Standard skill closed date
     %td= @config.standard_skill_closed_date
