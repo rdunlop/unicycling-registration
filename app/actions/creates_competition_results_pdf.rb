@@ -13,13 +13,16 @@ class CreatesCompetitionResultsPdf
   end
 
   def publish!
-    res = raw_pdf
     pdf = Tempfile.new(["#{competition}_results", '.pdf'], encoding: 'ascii-8bit')
-    pdf.write res
+    pdf.write raw_pdf
     competition.published_results_file = pdf
     competition.save!
     pdf.close
     pdf.unlink
     true
+  end
+
+  def unpublish!
+    competition.remove_published_results_file!
   end
 end

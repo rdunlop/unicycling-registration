@@ -461,8 +461,7 @@ system (if so desired):
 PDF Generation
 ==============
 
-PDFs are generated using wicked_pdf. Please install it from http://wkhtmltopdf.org/downloads.html
-Then set the WICKED_PDF_PATH variable to the bin/wkhtmltopdf path
+PDFs are generated using wicked_pdf. It is installed by a gem automatically.
 
 
 To Run the Production setup locally

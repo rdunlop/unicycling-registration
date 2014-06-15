@@ -158,7 +158,7 @@ describe CompetitionsController do
 
   describe "POST publish" do
     it "publishes the competition results" do
-      competition = FactoryGirl.create(:competition, :event => @event)
+      competition = FactoryGirl.create(:competition, :event => @event, locked: true)
       post :publish, {:id => competition.to_param}
       competition.reload
       competition.published?.should == true

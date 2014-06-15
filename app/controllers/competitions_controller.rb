@@ -176,6 +176,7 @@ class CompetitionsController < ApplicationController
       creator.publish!
       @competition.published = true
     elsif request.delete?
+      creator.unpublish!
       @competition.published = false
     end
 
