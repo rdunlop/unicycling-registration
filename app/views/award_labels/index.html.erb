@@ -11,32 +11,35 @@
 <% end %>
 
 <hr />
-<h2>Create Labels For a specific Registrant/Registrant-Group/Competition</h2>
-<%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post}) do %>
-  <%= label_tag :registrant_id, "Single Registrant" %>
-  <%= select_tag :registrant_id, options_for_select(Registrant.select_box_options), :include_blank => true %><br />
+<a class="js--hiddenToggleMenu">Show Advanced Options</a>
+<div class="js--hiddenToggle">
+  <h2>Create Labels For a specific Registrant/Registrant-Group/Competition</h2>
+  <%= form_tag(create_labels_user_award_labels_path(@user), {:method => :post}) do %>
+    <%= label_tag :registrant_id, "Single Registrant" %>
+    <%= select_tag :registrant_id, options_for_select(Registrant.select_box_options), :include_blank => true %><br />
 
-  <%= label_tag :registrant_group_id, "Registrant Group" %>
-  <%= select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name), "id", "to_s"), :include_blank => true %><br />
+    <%= label_tag :registrant_group_id, "Registrant Group" %>
+    <%= select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name), "id", "to_s"), :include_blank => true %><br />
 
-  <%= label_tag :competition_id, "Competition" %>
-  <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name), "id", "to_s"), :include_blank => true %><br />
-  <br />
+    <%= label_tag :competition_id, "Competition" %>
+    <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name), "id", "to_s"), :include_blank => true %><br />
+    <br />
 
-  <%= label_tag :minimum_place, "Minimum Award Place" %>
-  <%= number_field_tag :minimum_place %><br />
+    <%= label_tag :minimum_place, "Minimum Award Place" %>
+    <%= number_field_tag :minimum_place %><br />
 
-  <%= label_tag :maximum_place, "Maximum Award Place" %>
-  <%= number_field_tag :maximum_place %><br />
+    <%= label_tag :maximum_place, "Maximum Award Place" %>
+    <%= number_field_tag :maximum_place %><br />
 
-  <%= label_tag :age_groups, "Age Groups Labels" %>
-  <%= check_box_tag :age_groups, {}, :checked => true %><br />
+    <%= label_tag :age_groups, "Age Groups Labels" %>
+    <%= check_box_tag :age_groups, {}, :checked => true %><br />
 
-  <%= label_tag :experts, "Experts Labels" %>
-  <%= check_box_tag :experts, {}, :checked => true %><br />
+    <%= label_tag :experts, "Experts Labels" %>
+    <%= check_box_tag :experts, {}, :checked => true %><br />
 
-  <%= submit_tag "Create Labels for Selected Registrant(s) or Competition" %>
-<% end %>
+    <%= submit_tag "Create Labels for Selected Registrant(s) or Competition" %>
+  <% end %>
+</div>
 
 <hr />
 <h2>Print Labels Sheet</h2>

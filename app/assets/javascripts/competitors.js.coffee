@@ -38,3 +38,10 @@ $ ->
         $(this).addClass('matching')
       else
         $(this).addClass('unmatching')
+
+
+$ ->
+  $(".js--hiddenToggle").hide()
+  $(".js--hiddenToggleMenu").each ->
+    $(this).on "click", ->
+      $(".js--hiddenToggle").toggle()
