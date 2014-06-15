@@ -3,7 +3,7 @@
 
 = form_tag(import_lif_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
     = label_tag :heat, "Heat"
-    = text_field_tag "heat"
+    = text_field_tag "heat", @heat
     %br
     = file_field_tag "file"
     = submit_tag "Load LIF to Temp Table"

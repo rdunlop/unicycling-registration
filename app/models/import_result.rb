@@ -19,6 +19,8 @@
 #  status         :string(255)
 #  comments       :text
 #  comments_by    :string(255)
+#  heat           :integer
+#  lane           :integer
 #
 # Indexes
 #
@@ -46,7 +48,7 @@ class ImportResult < ActiveRecord::Base
   end
 
   def competitor_name
-    Registrant.find_by(bib_number: bib_number) if bib_number
+    matching_registrant
   end
 
   def competitor_exists?
@@ -55,6 +57,20 @@ class ImportResult < ActiveRecord::Base
 
   def disqualified
     status == "DQ"
+  end
+
+  # import the result in the results table, raise an exception on failure
+  def import!
+    competitor = competition.find_competitor_with_bib_number(bib_number)
+    registrant = matching_registrant
+    if competitor.nil?
+      competition.create_competitor_from_registrants([registrant], nil)
+      competitor = competition.find_competitor_with_bib_number(id)
+    end
+
+    tr = competition.build_result_from_imported(self)
+    tr.competitor = competitor
+    tr.save!
   end
 
   private
@@ -69,5 +85,9 @@ class ImportResult < ActiveRecord::Base
 
   def time_is_present?
     minutes && seconds && thousands
+  end
+
+  def matching_registrant
+    Registrant.find_by(bib_number: bib_number) if bib_number
   end
 end

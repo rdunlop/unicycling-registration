@@ -1,0 +1,54 @@
+%h1
+  Listing #{@competition}'s Imported Results
+%h2
+  Heat #{@heat}
+
+.heat_assignment_summary
+  = render partial: "/lane_assignments/view_heat_summary"
+
+%table.sortable.import_results.js--shouldNotMatchSet
+  %thead
+    %tr
+      %th Lane #
+      %th Bib number
+      %th Competitor
+      %th
+      %th Raw data
+      %th Time
+      %th Disqualified
+      %th Is Start Time?
+      %th Entered By
+      %th
+      %th
+  %tbody
+    - @import_results.each do |result|
+      %tr
+        %th.js--shouldNotMatch= result.lane
+        %td= result.bib_number
+        %td.js--highlightIfBlank= result.competitor_name
+        %td
+        %td= result.raw_data
+        %td= result.full_time
+        %td= result.disqualified
+        %td= result.is_start_time
+        %td= result.user
+        %td= link_to 'Edit', edit_import_result_path(result)
+        %td= link_to 'Destroy', result, method: :delete, data: { confirm: 'Are you sure?' }
+    - @lane_assignments.each do |assignment|
+      - if @import_results.where(lane: assignment.lane).empty?
+        %tr
+          %td.js--shouldNotMatch= assignment.lane
+          %td.missing_data Not Found
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+          %td
+
+%h3 Menu of actions
+%ul
+  %li= link_to "Accept these Results", approve_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit"

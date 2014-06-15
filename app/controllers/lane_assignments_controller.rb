@@ -20,8 +20,11 @@ class LaneAssignmentsController < ApplicationController
 
     bib_number = @dq_request.bib_number
     @heat = @dq_request.heat.to_i
+    @lane = @dq_request.lane.to_i
 
     ir = ImportResult.new(
+      heat: @heat,
+      lane: @lane,
       bib_number: bib_number,
       status: "DQ",
       comments: @dq_request.comments,
@@ -32,7 +35,7 @@ class LaneAssignmentsController < ApplicationController
 
     respond_to do |format|
       if ir.save
-        format.html { redirect_to view_heat_competition_lane_assignments_path(@competition, heat: @heat), notice: 'Competitor successfully dq.' }
+        format.html { redirect_to :back, notice: 'Competitor successfully dq.' }
       else
         add_breadcrumb "View Heat"
         @lane_assignments = @competition.lane_assignments.where(heat: @heat)

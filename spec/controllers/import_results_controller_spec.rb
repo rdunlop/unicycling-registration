@@ -112,6 +112,9 @@ describe ImportResultsController do
   end
 
   describe "DELETE destroy" do
+    before :each do
+      request.env["HTTP_REFERER"] = user_competition_import_results_path(@admin_user, @competition)
+    end
     it "destroys the requested import_result" do
       im_result = FactoryGirl.create(:import_result, :user => @admin_user, :competition => @competition)
       expect {

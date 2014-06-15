@@ -28,6 +28,8 @@ class RaceDataImporter
           end
 
           result = @user.import_results.build
+          result.heat = heat
+          result.lane = lane
           result.raw_data = upload.convert_array_to_string(raw)
           result.competition = @competition
           result.bib_number = id

@@ -233,6 +233,8 @@ Workspace::Application.routes.draw do
           collection do
             get :review
             post :approve
+            get :review_heat
+            post :approve_heat
 
             get  :data_entry
             get :import_csv, as: "display_csv", to: :display_csv

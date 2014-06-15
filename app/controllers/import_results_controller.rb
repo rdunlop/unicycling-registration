@@ -28,7 +28,20 @@ class ImportResultsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # review.html.erb
+    end
+  end
+
+  # GET /users/#/competitions/#/import_results/review_heat?heat=1
+  def review_heat
+    @heat = params[:heat]
+
+    @import_results = ImportResult.where(:competition_id => @competition, heat: @heat)
+
+    @lane_assignments = LaneAssignment.where(competition: @competition, heat: @heat)
+
+    respond_to do |format|
+      format.html # review_heat.html.erb
     end
   end
 
@@ -88,7 +101,7 @@ class ImportResultsController < ApplicationController
     @import_result.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_competition_import_results_path(user, competition) }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
@@ -121,6 +134,7 @@ class ImportResultsController < ApplicationController
 
   def display_lif
     add_breadcrumb "Import Lif (Heat Data)"
+    @heat = params[:heat]
   end
 
   # FOR LIF (track racing) data:
@@ -129,11 +143,11 @@ class ImportResultsController < ApplicationController
     importer = RaceDataImporter.new(@competition, @user)
 
     if importer.process_lif(params[:file], params[:heat])
-      flash[:notice] = "Successfully imported #{importer.num_rows} rows"
+      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
     end
-    redirect_to review_user_competition_import_results_path(@user, @competition, heat: params[:heat])
+    redirect_to review_heat_user_competition_import_results_path(@user, @competition, heat: params[:heat])
   end
 
   # DELETE /users/#/competitions/#/import_results/destroy_all
@@ -142,41 +156,51 @@ class ImportResultsController < ApplicationController
     redirect_to user_competition_import_results_path(@user, @competition)
   end
 
+  def approve_heat
+    @heat = params[:heat].to_i
+
+    import_results = ImportResult.where(:competition_id => @competition, heat: @heat)
+
+    begin
+      ImportResult.transaction do
+        import_results.each do |ir|
+          ir.import!
+        end
+        import_results.destroy_all
+      end
+    rescue Exception => ex
+      errors = ex
+    end
+    respond_to do |format|
+      if errors
+        format.html { redirect_to :back, alert: "Errors: #{errors}" }
+      else
+        format.html { redirect_to display_lif_user_competition_import_results_path(current_user, @competition, heat: @heat + 1), notice: "Added Heat # #{@heat} results" }
+      end
+    end
+  end
+
   # POST /users/#/competitions/#/import_results/approve
   def approve
     import_results = ImportResult.where(:competition_id => @competition)
 
-    n = 0
-    err_count = 0
-    import_results.each do |ir|
-
-      id = ir.bib_number
-
-      competitor = @competition.find_competitor_with_bib_number(id)
-      registrant = Registrant.find_by_bib_number(id)
-      if competitor.nil?
-        begin
-          @competition.create_competitor_from_registrants([registrant], nil)
-          competitor = @competition.find_competitor_with_bib_number(id)
-        rescue Exception => ex
-          puts "error creating competitor because: #{ex}"
-          err_count += 1
+    n = import_results.count
+    begin
+      ImportResult.transaction do
+        import_results.each do |ir|
+          ir.import!
         end
+        import_results.destroy_all
       end
-
-      tr = @competition.build_result_from_imported(ir)
-      tr.competitor = competitor
-      if tr.save
-        n += 1
-      else
-        tr.errors.each do |err|
-          puts "ERRO: #{err}"
-        end
-        err_count += 1
-      end
+    rescue Exception => ex
+      errors = ex
     end
     respond_to do |format|
-      format.html { redirect_to results_url(@competition), notice: "Added #{n} rows to #{@competition}. #{err_count} errors" }
+      if errors
+        format.html { redirect_to results_url(@competition), alert: "Errors: #{errors}" }
+      else
+        format.html { redirect_to results_url(@competition), notice: "Added #{n} rows to #{@competition}." }
+      end
     end
   end
 

@@ -45,3 +45,25 @@ $ ->
   $(".js--hiddenToggleMenu").each ->
     $(this).on "click", ->
       $(".js--hiddenToggle").toggle()
+
+
+$ ->
+  $(".js--shouldNotMatchSet").each ->
+    all_children = $(this).find(".js--shouldNotMatch")
+
+    all_children.each ->
+      match_count = 0
+      child_value = $(this).text()
+      all_children.each ->
+        if $(this).text() == child_value
+          match_count += 1
+      if match_count > 1
+        all_children.each ->
+          if $(this).text() == child_value
+            $(this).addClass('sameValue')
+
+
+$ ->
+  $(".js--highlightIfBlank").each ->
+    if $(this).text() == ""
+      $(this).addClass('unmatching')
