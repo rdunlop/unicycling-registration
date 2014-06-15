@@ -14,6 +14,7 @@ describe CompetitionsController do
   def valid_attributes
     {
       name: "Unlimited",
+      award_title_name: "10k Unlimited",
       scoring_class: "Distance"
     }
   end

@@ -76,10 +76,6 @@ describe Competition do
     comp = Competition.new
     comp.has_experts.should == false
   end
-  it "is not age_group by default" do
-    comp = Competition.new
-    comp.has_age_groups.should == false
-  end
 
   describe "with a user" do
     before(:each) do
@@ -130,6 +126,6 @@ describe Competition do
   end
 
   it "uses the event name in its name" do
-    @ec.to_s.should == @ev.to_s + " - " + @ec.name
+    @ec.to_s.should == @ec.name
   end
 end

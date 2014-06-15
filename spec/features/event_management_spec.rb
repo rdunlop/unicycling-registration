@@ -32,6 +32,7 @@ describe 'Creating a Competition from an Event' do
 
     it "can create a new competition" do
       fill_in :competition_name, with: "The only competition"
+      fill_in :competition_award_title_name, with: "The Best Competition"
       select "Distance", from: "Scoring class"
       expect {
         click_button "Create Competition"

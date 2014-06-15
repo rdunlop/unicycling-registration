@@ -37,7 +37,7 @@ describe 'Judging an event' do
 
     describe "in event judging" do
       before :each do
-        click_link "Individual - Individual - Presentation"
+        click_link "Individual - Presentation"
       end
 
       it "shows the competitor" do
