@@ -67,6 +67,11 @@ Information about the Competition will appear here, including results, judges, a
   - else
     = link_to 'Publish', publish_competition_path(@competition), :method => :post, data: { confirm: "This will make the data available online for all to see. Continue?" }, class: "action_button"
 
+- if can? :manage, AwardLabel
+  %h2 Display/print Awards
+  = link_to "Awards System", user_award_labels_path(current_user)
+  %hr
+
 - if can? :award, @competition
   %h2 Mark this Competition as "Awarded"
   - if @competition.awarded?

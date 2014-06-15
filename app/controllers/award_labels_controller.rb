@@ -228,7 +228,7 @@ class AwardLabelsController < ApplicationController
 
     names = initialize_by_skipped_positions
 
-    names << build_names_from_labels(@user.award_labels.order(:bib_number), separate_registrants)
+    names += build_names_from_labels(@user.award_labels.order(:bib_number), separate_registrants)
 
     Prawn::Labels.types = {
       "Avery5160padded" => {
@@ -243,7 +243,6 @@ class AwardLabelsController < ApplicationController
       "row_gutter" => 2.5 # added padding
     }
     }
-
     labels = Prawn::Labels.render(names, :type => "Avery5160padded", :shrink_to_fit => true) do |pdf, name|
       pdf.text name, :align =>:center, :valign => :center, :inline_format => true
     end

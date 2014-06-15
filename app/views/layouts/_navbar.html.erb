@@ -67,7 +67,7 @@
       end
     %>
     <%
-      heading = Menu::MenuHeading.new(:title => 'Awards (old)')
+      heading = Menu::MenuHeading.new(:title => 'Awards')
       m.headings << heading
       heading.entries << Menu::MenuEntry.new(:title => 'Print/Create Awards', :url => user_award_labels_path(current_user), :permitted => can?(:manage, AwardLabel))
     %>
