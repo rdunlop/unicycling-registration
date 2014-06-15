@@ -29,6 +29,7 @@ FactoryGirl.define do
 
     factory :distance_competition do
       scoring_class "Two Attempt Distance"
+      age_group_type # factory Girl
     end
 
     factory :street_competition do
@@ -41,10 +42,12 @@ FactoryGirl.define do
 
     factory :timed_competition do
       scoring_class "Distance"
+      age_group_type # factory Girl
     end
 
     factory :ranked_competition do
       scoring_class "Ranked"
+      age_group_type # factory Girl
     end
   end
 end

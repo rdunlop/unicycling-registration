@@ -3,7 +3,7 @@ require 'spec_helper'
 describe LaneAssignmentsController do
   before(:each) do
     sign_in FactoryGirl.create(:admin_user)
-    @competition = FactoryGirl.create(:competition, :scoring_class => "Distance", uses_lane_assignments: true)
+    @competition = FactoryGirl.create(:timed_competition, uses_lane_assignments: true)
     @reg = FactoryGirl.create(:registrant)
     @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
     @competitor.members.first.update_attribute(:registrant_id, @reg.id)

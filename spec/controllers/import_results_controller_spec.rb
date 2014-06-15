@@ -130,7 +130,7 @@ describe ImportResultsController do
 
   describe "POST approve" do
     it "redirects to the competitions' results page" do
-      competition = FactoryGirl.create(:competition, :scoring_class => "Distance")
+      competition = FactoryGirl.create(:timed_competition)
       import = FactoryGirl.create(:import_result, :competition => competition)
       post :approve, {:user_id => import.user, :competition_id => competition.id}
       response.should redirect_to(result_competition_path(competition))
@@ -139,7 +139,7 @@ describe ImportResultsController do
 
   describe "DELETE destroy_all" do
     it "redirects to the import competition page" do
-      competition = FactoryGirl.create(:competition, :scoring_class => "Distance")
+      competition = FactoryGirl.create(:timed_competition)
       import = FactoryGirl.create(:import_result, :competition => competition)
       delete :destroy_all, {:user_id => import.user, :competition_id => competition.id}
       response.should redirect_to(user_competition_import_results_path(import.user, competition))

@@ -68,6 +68,7 @@ describe Competition do
     end
     it "can be Two Attempt Distance" do
       @ec.scoring_class = "Two Attempt Distance"
+      @ec.age_group_type = FactoryGirl.build_stubbed(:age_group_type)
       @ec.valid?.should == true
     end
   end

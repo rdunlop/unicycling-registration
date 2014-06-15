@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "welcome/judging_menu" do
   before(:each) do
     @judges = [FactoryGirl.create(:judge)]
-    @comp = FactoryGirl.create(:competition, :name => "100m", :scoring_class => "Distance")
+    @comp = FactoryGirl.create(:timed_competition, :name => "100m")
 
     @ability = Object.new
     @ability.extend(CanCan::Ability)

@@ -15,7 +15,7 @@ describe CompetitionsController do
     {
       name: "Unlimited",
       award_title_name: "10k Unlimited",
-      scoring_class: "Distance"
+      scoring_class: "Freestyle"
     }
   end
 

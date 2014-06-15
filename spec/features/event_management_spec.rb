@@ -2,8 +2,8 @@ require 'spec_helper'
 
 shared_context "freestyle_event" do |options = {}|
   before :each do
-    event = FactoryGirl.create(:event, :name => options[:name])
-    competition = FactoryGirl.create(:competition, event: event, :name => options[:name])
+    event = FactoryGirl.create(:event, name: options[:name])
+    competition = FactoryGirl.create(:competition, event: event, name: options[:name], award_title_name: options[:name])
   end
 end
 
@@ -33,7 +33,7 @@ describe 'Creating a Competition from an Event' do
     it "can create a new competition" do
       fill_in :competition_name, with: "The only competition"
       fill_in :competition_award_title_name, with: "The Best Competition"
-      select "Distance", from: "Scoring class"
+      select "Freestyle", from: "Scoring class"
       expect {
         click_button "Create Competition"
       }.to change(Competition, :count).by(1)
