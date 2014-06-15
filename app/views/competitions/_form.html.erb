@@ -3,7 +3,7 @@
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, :title => "'All' is a special name, which will not be printed on medals" %>
+    <%= f.text_field :name %>
   </div>
 
   <div class="field">
@@ -46,16 +46,21 @@
 
   <h2>Settings for printing the awards</h2>
   <div class="field">
-    <%= f.label :has_experts %><br />
-    (Select this if the results entered here include (or can be considered) EXPERT results. Selecting this checkbox will cause Expert Awards to be created, separately from age-group results) <br />
-    <%= f.check_box :has_experts  %>
+    <%= f.label :award_title_name %><br />
+    (Enter the text for the Award)
+    <%= f.text_field :award_title_name %>
   </div>
   <div class="field">
-    <%= f.label :has_age_groups %><br />
-    (Select this if the results should be split by multiple age groups, and awarded en-masse)<br />
-    <%= f.check_box :has_age_groups %>
+    <%= f.label :award_subtitle_name %><br />
+    (Enter an optional additional Line of award text. NOTE: Only allowed <b>without</b> Age Group)
+    <%= f.text_field :award_subtitle_name %>
   </div>
-  Note: check NEITHER the has_experts or has_age_groups if neither apply (for example: Individual Artistic Intermediate)
+  <div class="field">
+    <%= f.label :has_experts %><br />
+    (Select this if the results entered here should ALSO be awarded ignoring age-groups results. Selecting this checkbox will cause Expert Awards to be created, separately from age-group results) <br />
+    You <b>Must</b> Also have an Age Group specified<br />
+    <%= f.check_box :has_experts  %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>

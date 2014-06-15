@@ -86,7 +86,7 @@ class AwardLabelsController < ApplicationController
     n = 0
     competition.competitors.each do |competitor|
       competitor.members.each do |member|
-        n += create_labels_for_competitor(competitor, member.registrant, @user, competition.has_age_groups, competition.has_experts, min_place, max_place)
+        n += create_labels_for_competitor(competitor, member.registrant, @user, true, competition.has_experts, min_place, max_place)
       end
     end
     respond_to do |format|
@@ -139,7 +139,7 @@ class AwardLabelsController < ApplicationController
     n = 0
     competition = competitor.competition
     if age_groups
-      if competition.has_non_expert_results && competitor.place.to_i <= max_place
+      if competitor.place.to_i <= max_place
         if create_label(competitor, registrant, false, min_place, max_place, user)
           n += 1
         end

@@ -80,26 +80,26 @@ describe AwardLabel do
       @al.line_1.should == "#{@reg.first_name} #{@reg.last_name} & #{@reg2.first_name} #{@reg2.last_name}"
     end
 
-    it "displays the event name as line 2 for freestyle events" do
+    it "displays the award_title_name as line 2 for freestyle events" do
       competition = @comp.competition
       competition.scoring_class = "Freestyle"
       competition.name = "Hello"
-      ev = competition.event
-      ev.name = "Individual"
+      competition.award_title_name = "Individual"
+      competition.save!
 
       @al.populate_from_competitor(@comp, @reg)
       @al.line_2.should == "Individual"
     end
 
-    it "displays the competition name as line 2 for distance events" do
+    it "displays the award subtitle as line 4" do
       competition = @comp.competition
-      competition.scoring_class = "Distance"
-      competition.name = "10k Standard"
-      ev = competition.event
-      ev.name = "10k"
+      competition.name = "Club Freestyle Int"
+      competition.award_title_name = "Club Freestyle"
+      competition.award_subtitle_name = "Intermediate Club"
+      competition.save!
 
       @al.populate_from_competitor(@comp, @reg)
-      @al.line_2.should == "10k Standard"
+      @al.line_4.should == "Intermediate Club"
     end
 
     it "displays the team name as line 3" do
@@ -111,7 +111,7 @@ describe AwardLabel do
     describe "when the competitor has expert results" do
       before(:each) do
         @comp.competition.scoring_class = "Distance"
-        @comp.competition.has_age_groups = true
+        @comp.competition.age_group_type = FactoryGirl.create(:age_group_type)
         allow(@comp).to receive(:overall_place).and_return(3)
       end
 

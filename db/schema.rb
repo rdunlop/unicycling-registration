@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140615153153) do
+ActiveRecord::Schema.define(version: 20140615194252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,7 +148,6 @@ ActiveRecord::Schema.define(version: 20140615153153) do
     t.datetime "updated_at",                              null: false
     t.integer  "age_group_type_id"
     t.boolean  "has_experts",             default: false
-    t.boolean  "has_age_groups",          default: false
     t.string   "scoring_class"
     t.string   "start_data_type"
     t.string   "end_data_type"
@@ -157,6 +156,8 @@ ActiveRecord::Schema.define(version: 20140615153153) do
     t.boolean  "published",               default: false
     t.boolean  "awarded",                 default: false
     t.string   "published_results_file"
+    t.string   "award_title_name"
+    t.string   "award_subtitle_name"
   end
 
   add_index "competitions", ["event_id"], name: "index_competitions_event_id", using: :btree

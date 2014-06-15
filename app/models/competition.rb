@@ -10,7 +10,6 @@
 #  updated_at              :datetime         not null
 #  age_group_type_id       :integer
 #  has_experts             :boolean          default(FALSE)
-#  has_age_groups          :boolean          default(FALSE)
 #  scoring_class           :string(255)
 #  start_data_type         :string(255)
 #  end_data_type           :string(255)
@@ -19,6 +18,8 @@
 #  published               :boolean          default(FALSE)
 #  awarded                 :boolean          default(FALSE)
 #  published_results_file  :string(255)
+#  award_title_name        :string(255)
+#  award_subtitle_name     :string(255)
 #
 # Indexes
 #
@@ -59,10 +60,11 @@ class Competition < ActiveRecord::Base
   validates :event_id, :presence => true
   validate :published_only_when_locked
   validate :awarded_only_when_published
+  validate :award_label_title_checks
 
   scope :event_order, -> { includes(:event).order("events.name") }
 
-  validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
+  validates :name, :award_title_name, :presence => true
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
             :build_import_result_from_raw, :include_event_name, :score_calculator,
@@ -70,6 +72,19 @@ class Competition < ActiveRecord::Base
             :imports_times, to: :scoring_helper
 
   mount_uploader :published_results_file, PdfUploader
+
+  def award_label_title_checks
+    # cannot specify subtitle when also specifying an age group
+    if age_group_type.present? && award_subtitle_name.present?
+      errors[:base] << "Cannot specify a subtitle AND an age group"
+    end
+
+    # has_expert is only allowed when there is also an age group type
+    if has_experts && age_group_type.nil?
+      errors[:base] << "Must specify an age group to also have Experts chosen"
+    end
+
+  end
 
   def published_only_when_locked
     if published && !locked
@@ -84,7 +99,7 @@ class Competition < ActiveRecord::Base
   end
 
   def to_s
-    event.to_s + " - " + self.name
+    self.name
   end
 
   def clear_data_types_of_strings
@@ -124,10 +139,6 @@ class Competition < ActiveRecord::Base
 
   def all_registrants_are_competitors?
     signed_up_registrants.count == num_assigned_registrants
-  end
-
-  def has_non_expert_results
-    has_age_groups or ((not has_age_groups) and (not has_experts))
   end
 
   def find_competitor_with_bib_number(bib_number)

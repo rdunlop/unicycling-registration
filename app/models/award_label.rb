@@ -41,39 +41,21 @@ class AwardLabel < ActiveRecord::Base
 
   def build_category_name(competitor, expert)
 
-    if expert
-      age_group = "Expert #{competitor.gender}"
-    else
-      if competitor.competition.has_age_groups
-        age_group = competitor.age_group_entry_description
-      end
-    end
-
-    if competitor.competition.include_event_name
-      age_group = competitor.competition.name
-    end
-
-    if age_group == "All" # Don't display if age_group result is 'All'
-      age_group = nil
-    end
-
     if competitor.members.count > 1
       gender = nil
     else
       gender = competitor.gender
     end
 
-    res = ""
-    if age_group.present?
-      res += age_group
+    if expert
+      "Expert #{gender}"
     else
-      # No Age Group?
-      if gender.present?
-        res += gender
+      if competitor.competition.age_group_type.present?
+        competitor.age_group_entry_description
+      else
+        competitor.competition.award_subtitle_name
       end
     end
-
-    res
   end
 
   def populate_from_competitor(competitor, registrant, expert = false)
@@ -82,12 +64,7 @@ class AwardLabel < ActiveRecord::Base
     self.competitor_name = build_name_from_competitor_and_registrant(competitor, registrant)
 
     # line 2
-    if competitor.competition.include_event_name
-      competition_name = competitor.competition.event.name
-    else
-      competition_name = competitor.competition.name # These events have been 'fully named' (don't need the 'event' name)
-    end
-    self.competition_name = competition_name
+    self.competition_name = competitor.competition.award_title_name
 
     # line 3
     self.team_name = competitor.team_name
