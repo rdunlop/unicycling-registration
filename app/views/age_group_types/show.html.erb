@@ -2,8 +2,7 @@
 
 <table>
   <tr>
-    <th>Short description</th>
-    <th>Long description</th>
+    <th>Description</th>
     <th>Start age</th>
     <th>End age</th>
     <th>Wheel Size</th>
@@ -13,7 +12,6 @@
 <% @age_group_type.age_group_entries.each do |age_group_entry| %>
   <tr>
     <td><%= age_group_entry.short_description %></td>
-    <td><%= age_group_entry.long_description %></td>
     <td><%= age_group_entry.start_age %></td>
     <td><%= age_group_entry.end_age %></td>
     <td><%= age_group_entry.wheel_size %></td>

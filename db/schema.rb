@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140614222413) do
+ActiveRecord::Schema.define(version: 20140615040340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20140614222413) do
   create_table "age_group_entries", force: true do |t|
     t.integer  "age_group_type_id"
     t.string   "short_description"
-    t.string   "long_description"
     t.integer  "start_age"
     t.integer  "end_age"
     t.string   "gender"
