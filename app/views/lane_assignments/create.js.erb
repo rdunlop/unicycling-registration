@@ -13,7 +13,7 @@
   new_row.appendTo(".lane_assignments");
   new_row.effect("highlight", {}, 3000);
   $("form").trigger("reset");
-  $("#lane_assignment_competitor_id").focus();
+  $(".js--autoFocus").trigger('chosen:activate');
 
   $('#notice').empty();
 <% end %>

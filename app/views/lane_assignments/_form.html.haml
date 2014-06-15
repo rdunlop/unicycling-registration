@@ -4,12 +4,12 @@
     .field
       = f.label :competitor_id
       %br
-      = f.select :competitor_id, @competition.competitors.map{|comp| [comp.name, comp.id]}, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select' }
+      = f.select :competitor_id, @competition.competitors.map{|comp| [comp.name, comp.id]}, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select js--autoFocus' }
   - else
     .field
       = f.label :registrant_id
       %br
-      = f.select :registrant_id, options_from_collection_for_select(Registrant.all, "id", "to_s"), {include_blank: true}, {autofocus: true, class: 'chosen-select' }
+      = f.select :registrant_id, options_from_collection_for_select(Registrant.active.where(competitor: true), "id", "with_id_to_s"), {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus' }
   .field
     = f.label :heat
     %br
