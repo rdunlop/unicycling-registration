@@ -8,8 +8,11 @@ class LaneAssignmentsController < ApplicationController
 
   def view_heat
     @heat = params[:heat].to_i if params[:heat]
-    @heat ||= 1
+    @heat ||= @competition.lane_assignments.minimum(:heat)
     @lane_assignments = @competition.lane_assignments.where(heat: @heat)
+    if @lane_assignments.empty?
+      @other_competition = LaneAssignment.where(heat: @heat).first.try(:competition)
+    end
   end
 
   def dq_competitor

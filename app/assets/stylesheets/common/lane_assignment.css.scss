@@ -2,8 +2,14 @@
   float: left;
 }
 
+
 .next_heat {
   float: right;
+}
+.next_action {
+  background-color: lightgreen;
+  display: block;
+  padding: 20px;
 }
 
 .heat_number {
@@ -17,9 +23,22 @@
     vertical-align: top;
     width: 10%;
   }
+  .unoccupied_lane {
+    display: inline-block;
+    border-style: solid;
+    background-color: lightgrey;
+    vertical-align: top;
+    width: 10%;
+  }
   .lane {
     font-weight: bold;
     font-size: 40pt;
+    margin: 0;
+  }
+  .lane:before {
+    content: 'lane';
+    font-weight: normal;
+    font-size: 10pt;
   }
 
   .bib_number {
