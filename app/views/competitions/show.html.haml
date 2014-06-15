@@ -19,7 +19,8 @@ Information about the Competition will appear here, including results, judges, a
   %hr
 
   %h2 Judges
-  = render partial: "judging_results_summary", locals: {competition: @competition }
+  - if @competition.uses_judges
+    = render partial: "judging_results_summary", locals: {competition: @competition }
   %br
   = link_to "Manage Judges/Data-Entry for #{@competition}", competition_judges_path(@competition)
 

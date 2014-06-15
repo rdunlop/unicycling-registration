@@ -177,7 +177,7 @@ class Competition < ActiveRecord::Base
   end
 
   def get_age_group_entry_description(age, gender, wheel_size_id)
-    return if age_gorup_type.nil?
+    return if age_group_type.nil?
 
     ag_entry_description = age_group_type.age_group_entry_description(age, gender, wheel_size_id)
     if ag_entry_description.nil?
