@@ -139,10 +139,11 @@ class Competition < ActiveRecord::Base
     return nil
   end
 
-  def create_competitor_from_registrants(registrants, name)
+  def create_competitor_from_registrants(registrants, name, status = "active")
     competitor = competitors.build
     competitor.position = competitors.count + 1
     competitor.custom_name = name
+    competitor.status = status
     registrants.each do |reg|
       member = competitor.members.build
       member.registrant = reg
@@ -152,20 +153,11 @@ class Competition < ActiveRecord::Base
   end
 
   def create_competitors_from_registrants(registrants, status = "active")
-    num_created = 0
-    registrants.each do |reg|
-      competitor = competitors.build
-      competitor.position = competitors.count + 1
-      competitor.status = status
-      member = competitor.members.build
-      member.registrant = reg
-      if competitor.save
-        num_created += 1
-      else
-        raise "Unable to create competitor member for #{reg}"
+    Competitor.transaction do
+      registrants.each do |reg|
+        create_competitor_from_registrants([reg], nil, status)
       end
     end
-    "Created #{num_created} competitors"
   end
 
   def signed_up_registrants

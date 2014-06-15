@@ -34,14 +34,17 @@ class CompetitorsController < ApplicationController
           @competition.create_competitor_from_registrants(regs, params[:group_name])
           msg = "Created Group Competitor"
         elsif params[:commit] == Competitor.not_qualified_text
-          msg = @competition.create_competitors_from_registrants(regs, "not_qualified")
+          @competition.create_competitors_from_registrants(regs, "not_qualified")
+          msg = "Non-Qualified Competitors created"
         else
-          msg = @competition.create_competitors_from_registrants(regs)
+          @competition.create_competitors_from_registrants(regs)
+          msg = "Created #{regs.count} Competitors"
         end
         format.html { redirect_to competition_competitors_path(@competition), notice: msg }
       rescue Exception => ex
         index
-        format.html { render "index", alert: "Error adding Registrants (0 added) #{ex}" }
+        flash.now[:alert] = "Error adding Registrants (0 added) #{ex}"
+        format.html { render "index"  }
       end
     end
   end
