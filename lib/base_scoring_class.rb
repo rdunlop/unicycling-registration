@@ -52,10 +52,6 @@ class BaseScoringClass
     false
   end
 
-  def include_event_name
-    false
-  end
-
   # Do the competitors compete in a pre-defined order?
   def compete_in_order
     false
@@ -67,5 +63,9 @@ class BaseScoringClass
 
   def build_import_result_from_raw(raw)
     raise NotImplementedError
+  end
+
+  def requires_age_groups
+    true
   end
 end

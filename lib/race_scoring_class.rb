@@ -65,11 +65,6 @@ class RaceScoringClass < BaseScoringClass
     false
   end
 
-  def include_event_name
-    false
-  end
-
-
   def build_result_from_imported(import_result)
     TimeResult.new(
       minutes: import_result.minutes,

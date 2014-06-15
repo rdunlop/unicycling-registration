@@ -67,7 +67,7 @@ class Competition < ActiveRecord::Base
   validates :name, :award_title_name, :presence => true
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
-            :build_import_result_from_raw, :include_event_name, :score_calculator,
+            :build_import_result_from_raw, :score_calculator,
             :result_description, :compete_in_order, :scoring_description,
             :imports_times, to: :scoring_helper
 
@@ -81,9 +81,12 @@ class Competition < ActiveRecord::Base
 
     # has_expert is only allowed when there is also an age group type
     if has_experts && age_group_type.nil?
-      errors[:base] << "Must specify an age group to also have Experts chosen"
+      errors[:age_group_type_id] << "Must specify an age group to also have Experts chosen"
     end
 
+    if scoring_helper && scoring_helper.requires_age_groups && age_group_type.nil?
+      errors[:age_group_type_id] << "Must specify an age group when using #{scoring_class} scoring class"
+    end
   end
 
   def published_only_when_locked

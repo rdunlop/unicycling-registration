@@ -56,4 +56,8 @@ class FlatlandScoringClass < BaseScoringClass
   def include_event_name
     true
   end
+
+  def requires_age_groups
+    false
+  end
 end

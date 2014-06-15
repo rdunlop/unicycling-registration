@@ -54,11 +54,11 @@ class ArtisticScoringClass < BaseScoringClass
     true
   end
 
-  def include_event_name
+  def compete_in_order
     true
   end
 
-  def compete_in_order
-    true
+  def requires_age_groups
+    false
   end
 end

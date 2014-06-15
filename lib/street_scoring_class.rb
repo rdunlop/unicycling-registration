@@ -52,7 +52,7 @@ class StreetScoringClass < BaseScoringClass
     true
   end
 
-  def include_event_name
-    true
+  def requires_age_groups
+    false
   end
 end
