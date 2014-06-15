@@ -1,0 +1,22 @@
+= form_for(@lane_assignment.persisted? ? @lane_assignment : [@competition, @lane_assignment], remote: true) do |f|
+  = render partial: "/shared/error_messages", object: @lane_assignment
+  - if @lane_assignment.persisted? || !@config.can_create_competitors_at_lane_assignment
+    .field
+      = f.label :competitor_id
+      %br
+      = f.select :competitor_id, @competition.competitors.map{|comp| [comp.name, comp.id]}, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select' }
+  - else
+    .field
+      = f.label :registrant_id
+      %br
+      = f.select :registrant_id, options_from_collection_for_select(Registrant.all, "id", "to_s"), {include_blank: true}, {autofocus: true, class: 'chosen-select' }
+  .field
+    = f.label :heat
+    %br
+    = f.number_field :heat
+  .field
+    = f.label :lane
+    %br
+    = f.number_field :lane
+  .actions
+    = f.submit class: "multiclick"

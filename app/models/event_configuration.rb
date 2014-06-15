@@ -81,6 +81,12 @@ class EventConfiguration < ActiveRecord::Base
     self.contact_email ||= ""
   end
 
+  # allows creating competitors during lane assignment
+  # (only at NAUCC)
+  def can_create_competitors_at_lane_assignment
+    usa
+  end
+
   def clear_of_blank_strings
     self.rulebook_url = nil if rulebook_url == ""
   end

@@ -43,4 +43,6 @@ class Member < ActiveRecord::Base
             end
         end
     end
+
+    delegate :to_s, :external_id, :age, to: :registrant
 end

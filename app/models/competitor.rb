@@ -203,10 +203,10 @@ class Competitor < ActiveRecord::Base
 
     def registrants_names
       Rails.cache.fetch("/competitors/#{id}-#{updated_at}/registrants_names") do
-        if registrants.empty?
-          "(No registrants)"
+        if members.any?
+          members.map(&:to_s).join(" - ")
         else
-          registrants.map(&:to_s).join(" - ")
+          "(No registrants)"
         end
       end
     end
@@ -216,10 +216,10 @@ class Competitor < ActiveRecord::Base
     end
 
     def registrants_ids
-      if registrants.empty?
-        "(No registrants)"
+      if members.any?
+        members.map(&:external_id).join(",")
       else
-        registrants.map(&:external_id).join(",")
+        "(No registrants)"
       end
     end
 

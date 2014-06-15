@@ -102,7 +102,7 @@ class LaneAssignmentsController < ApplicationController
   private
 
   def lane_assignment_params
-    params.require(:lane_assignment).permit(:competitor_id, :heat, :lane)
+    params.require(:lane_assignment).permit(:competitor_id, :heat, :lane, :registrant_id)
   end
 
   def set_parent_breadcrumbs

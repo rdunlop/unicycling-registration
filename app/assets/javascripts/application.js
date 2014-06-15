@@ -41,7 +41,7 @@ $(document).ready(function() {
     } else {
        search = false;
     }
-   $(this).dataTable({
+   $(this).DataTable({
      "bFilter": search,
      "bInfo": false,
      "bPaginate": false
