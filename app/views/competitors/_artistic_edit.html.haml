@@ -1,0 +1,32 @@
+%h1
+  Freestyle - #{@judge.competition} Judging Form
+%h2 #{@judge.judge_type.name} Judge
+
+- if cannot? :create_scores, @judge.competition
+  %p.event_locked Scores for this event are now locked (closed)
+
+%h3 Judge: #{@judge}
+- # this page displays each competitor, and, IF PRESENT, the score for that competitor
+- # Display the scores, but allow one for editing
+
+- unless @score.nil?
+  = render :partial => "/shared/error_messages", :object => @score
+
+%table.judging
+  = render :partial => "/scores/judge_header", :object => @judge
+  %tbody.js--shouldNotMatchSet
+    - @judge.competitors.each do |competitor|
+      %tr{:id => "competitor#{competitor.id}"}
+        - score = @judge.scores.where(:competitor_id => competitor.id).first
+        - if @score.nil? || @score.competitor_id != competitor.id
+          = render :partial => "/competitors/single_competitor", :locals => {competitor: competitor, score: score, show_update: @score.nil? }
+        - else
+          = form_for(@score, url: judge_competitor_scores_path(@judge, competitor), method: :post) do |f|
+            = render :partial => "/competitors/competitor_basic", :object => competitor
+            %td.judging_category= f.number_field :val_1, {:min => 0, :max => @judge.judge_type.val_1_max, :step => 0.001, :autofocus => true }
+            %td.judging_category= f.number_field :val_2, {:min => 0, :max => @judge.judge_type.val_2_max, :step => 0.001 }
+            %td.judging_category= f.number_field :val_3, {:min => 0, :max => @judge.judge_type.val_3_max, :step => 0.001 }
+            %td.judging_category= f.number_field :val_4, {:min => 0, :max => @judge.judge_type.val_4_max, :step => 0.001 }
+            %td
+            %td
+            %td= f.submit 'Save', class: 'action_button'

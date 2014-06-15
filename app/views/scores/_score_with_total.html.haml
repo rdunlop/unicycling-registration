@@ -1,0 +1,7 @@
+= render :partial => "/competitors/competitor_basic", :object => score_with_total.competitor
+%td= score_with_total.val_1
+%td= score_with_total.val_2
+%td= score_with_total.val_3
+%td= score_with_total.val_4
+%td.derived= score_with_total.total
+%td.derived.js--shouldNotMatch= score_with_total.judged_place
