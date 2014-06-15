@@ -15,10 +15,15 @@ module CompetitorsHelper
   end
 
   def data_confirmation_link(competition, options = {})
-    if competition.uses_judges
-      link_to "XXX unused Summary", root_url
+    case options[:is_start_times] ? competition.start_data_type : competition.end_data_type
+    when "Track E-Timer"
+      unless options[:is_start_times]
+        link_to "View", review_user_competition_import_results_path(current_user, competition)
+      end
     else
-      link_to "View", review_user_competition_import_results_path(current_user, competition)
+      if competition.uses_judges
+        link_to "XXX unused Summary", root_url
+      end
     end
   end
 
@@ -31,6 +36,7 @@ module CompetitorsHelper
     when "Track E-Timer"
       if competition.uses_lane_assignments
         res = link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
+        res += "<br>".html_safe
         res += link_to "Set Lane Assignments", competition_lane_assignments_path(competition)
       else
         "None Enabled"
