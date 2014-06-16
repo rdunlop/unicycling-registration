@@ -25,7 +25,8 @@ module CachedSetModel
   included do
     if self.respond_to?(:after_save)
       after_save :update_last_modified_set_collection_cache
-      after_destroy :update_last_modified_set_collection_cache
+      after_destroy :do_touch_set
+      after_touch :do_touch_set
     end
   end
 

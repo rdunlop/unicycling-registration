@@ -4,7 +4,8 @@ module CachedModel
   included do
     if self.respond_to?(:after_save)
       after_save :update_last_modified_collection_cache
-      after_destroy :update_last_modified_collection_cache
+      after_destroy :do_touch
+      after_touch :do_touch
     end
   end
 
