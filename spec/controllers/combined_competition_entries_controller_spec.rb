@@ -56,7 +56,7 @@ describe CombinedCompetitionEntriesController do
 
       it "redirects to the created combined_competition" do
         post :create, {:combined_competition_entry => valid_attributes, :combined_competition_id => combined_competition.id}
-        expect(response).to redirect_to(combined_competition)
+        expect(response).to redirect_to(combined_competition_combined_competition_entries_path(combined_competition))
       end
     end
 
@@ -88,7 +88,7 @@ describe CombinedCompetitionEntriesController do
       it "redirects to the combined_competition_entry" do
         combined_competition_entry = FactoryGirl.create(:combined_competition_entry, :combined_competition => combined_competition)
         put :update, {:id => combined_competition_entry.to_param, :combined_competition_entry => valid_attributes, :combined_competition_id => combined_competition.id}
-        expect(response).to redirect_to(combined_competition)
+        expect(response).to redirect_to(combined_competition_combined_competition_entries_path(combined_competition))
       end
     end
 

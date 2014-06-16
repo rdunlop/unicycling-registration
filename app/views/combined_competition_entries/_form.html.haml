@@ -1,0 +1,21 @@
+= form_for([@combined_competition, @combined_competition_entry]) do |f|
+  = render partial: "/shared/error_messages", object: @combined_competition_entry
+  .field
+    = f.label :abbreviation
+    %br
+    = f.text_field :abbreviation, {autofocus: true }
+  .field
+    = f.label :competition_id
+    %br
+    = f.select :competition_id, Competition.event_order.map{|e| [e, e.id]}
+  .field
+    = f.label :tie_breaker
+    %br
+    = f.check_box :tie_breaker
+  - for place in 1..10
+    .field
+      = f.label "points_#{place}".to_sym
+      %br
+      = f.number_field "points_#{place}".to_sym
+  .actions
+    = f.submit

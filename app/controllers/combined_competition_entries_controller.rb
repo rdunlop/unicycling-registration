@@ -27,7 +27,7 @@ class CombinedCompetitionEntriesController < ApplicationController
     @combined_competition_entry = @combined_competition.combined_competition_entries.build(combined_competition_entry_params)
 
     if @combined_competition_entry.save
-      redirect_to @combined_competition, notice: 'Combined competition entry was successfully created.'
+      redirect_to combined_competition_combined_competition_entries_path(@combined_competition), notice: 'Combined competition entry was successfully created.'
     else
       render action: 'new'
     end
@@ -36,7 +36,7 @@ class CombinedCompetitionEntriesController < ApplicationController
   # PATCH/PUT /combined_competition_entries/1
   def update
     if @combined_competition_entry.update(combined_competition_entry_params)
-      redirect_to @combined_competition, notice: 'Combined competition entry was successfully updated.'
+      redirect_to combined_competition_combined_competition_entries_path(@combined_competition), notice: 'Combined competition entry was successfully updated.'
     else
       render action: 'edit'
     end

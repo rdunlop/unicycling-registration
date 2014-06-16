@@ -1,5 +1,22 @@
 Last Re-Arranged May 24, 2014.
 
+
+NAUCC data issues:
+- Basketball/Hockey - Ranked competitions Without Age Groups? (should be able to calculate ranked without age group?)
+- Various Age Groups need to be created/configured (like 10k Standard)
+- How are Speed Trials being Judged/Data-entered?
+- Does Speed Trials Advanced have Experts?
+- Need ranking/scoring for Trials to be added.
+- Does Trials have a separate "Expert" expert-off?
+
+
+Patricia, Mary, do you have a summary of the awards that you are expecting to give out?
+-
+
+
+- Need to be able to enter data which may be a result for any copmetition in an event (like 10k's)
+
+
 - allow admins/payment_admins to adjust the reg_fee of competitors
 
 - set up scss stylesheets to properly inherit variables/mixins.
