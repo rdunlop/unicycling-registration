@@ -66,7 +66,7 @@ class ImportResultsController < ApplicationController
 
     respond_to do |format|
       if @import_result.save
-        format.html { redirect_to data_entry_user_competition_import_results_path(@user, @competition), notice: 'Import result was successfully created.' }
+        format.html { redirect_to data_entry_user_competition_import_results_path(@user, @competition), notice: 'Result was successfully created.' }
         format.js { }
       else
         @import_results = @user.import_results
@@ -114,6 +114,17 @@ class ImportResultsController < ApplicationController
     @import_result.is_start_time = @is_start_time
 
     @import_results = @import_results.where(is_start_time: @is_start_time)
+  end
+
+  def proof_single
+    @is_start_time = params[:is_start_times] || false
+
+    @import_results = @import_results.where(is_start_time: @is_start_time)
+
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf("proof_single") }
+    end
   end
 
   def display_csv

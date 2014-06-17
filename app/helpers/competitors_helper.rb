@@ -32,7 +32,7 @@ module CompetitorsHelper
     when "Two Attempt Distance"
       link_to "Two-Attempt Entry", user_competition_two_attempt_entries_path(user, competition, is_start_times: true)
     when "Single Attempt"
-      link_to "Single ", user_competition_single_attempt_entries_path(user, competition, is_start_times: true)
+      link_to "Single ", data_entry_user_competition_import_results_path(user, competition, is_start_times: true)
     when "Track E-Timer"
       if competition.uses_lane_assignments
         res = link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
@@ -50,7 +50,7 @@ module CompetitorsHelper
     when "Two Attempt Distance"
       link_to "Two-Attempt Entry", user_competition_two_attempt_entries_path(user, competition, is_start_times: false)
     when "Single Attempt"
-      link_to "Single", user_competition_single_attempt_entries_path(user, competition, is_start_times: false)
+      link_to "Single", data_entry_user_competition_import_results_path(user, competition, is_start_times: false)
     when "Track E-Timer"
       link_to "Track Importing", display_lif_user_competition_import_results_path(user, competition)
     when "Externally Ranked"

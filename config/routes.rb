@@ -218,10 +218,6 @@ Workspace::Application.routes.draw do
         end
       end
       resources :competition, :only => [] do
-        get 'single_attempt_entries', to: 'data_entry#single'
-        post 'single_attempt_entries', to: 'data_entry#create_single'
-        get 'single_attempt_entries/proof', to: 'data_entry#proof_single'
-
         #resources :single_attempt_entries, only: [:index, :create]
         resources :two_attempt_entries, only: [:index, :create] do
           collection do
@@ -231,6 +227,7 @@ Workspace::Application.routes.draw do
 
         resources :import_results, :only => [:index, :create] do
           collection do
+            get :proof_single
             get :review
             post :approve
             get :review_heat

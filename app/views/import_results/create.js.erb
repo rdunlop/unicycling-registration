@@ -10,11 +10,12 @@
 
 
 <% else %>
-  var new_row = $("<%= escape_javascript(render partial: 'import_result', locals: {import_result: @import_result, import_result_counter: nil }) %>")
+  var new_row = $("<%= escape_javascript(render partial: 'import_result', locals: {import_result: @import_result }) %>")
   new_row.appendTo(".import_results");
   new_row.effect("highlight", {}, 3000);
   $(".data_entry").trigger("reset");
-  $("#import_result_bib_number").focus();
+  $(".js--autoFocus").trigger("chosen:updated");
+  $(".js--autoFocus").trigger('chosen:activate');
 
   $('#notice').empty();
 <% end %>

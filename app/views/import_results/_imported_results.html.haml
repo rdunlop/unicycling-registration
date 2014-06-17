@@ -1,0 +1,18 @@
+%table.import_results
+  %thead
+    %tr
+      %th ID
+      %th Name
+      - if @competition.imports_times
+        %th Minutes
+        %th Seconds
+        %th Thousands
+      - else
+        %th Rank (External)
+        %th Details (external)
+      %th Disqualified
+      %th Details
+      %th Competitor Exists?
+      %th
+  %tbody
+    = render partial: 'import_result', collection: @import_results

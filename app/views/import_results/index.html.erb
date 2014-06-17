@@ -4,7 +4,7 @@
 
 <h3>Menu of actions</h3>
 <ul>
-  <li><%= link_to "Enter Single-result", user_competition_single_attempt_entries_path(@user, @competition) %></li>
+  <li><%= link_to "Enter Single-result", data_entry_user_competition_import_results_path(@user, @competition) %></li>
   <li><%= link_to "Enter two-results at a time", user_competition_two_attempt_entries_path(@user, @competition) %></li>
   <li><%= link_to "Import CSV", display_csv_user_competition_import_results_path(@user, @competition) %></li>
   <li><%= link_to "Import LIF", display_lif_user_competition_import_results_path(@user, @competition) %></li>

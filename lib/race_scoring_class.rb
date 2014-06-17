@@ -86,4 +86,8 @@ class RaceScoringClass < BaseScoringClass
       thousands: raw[3],
       status: dq ? "DQ" : nil)
   end
+
+  def imports_times
+    true
+  end
 end
