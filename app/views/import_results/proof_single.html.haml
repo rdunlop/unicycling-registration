@@ -1,0 +1,33 @@
+%h1 Data Entry Confirmation
+%h2 Competition: #{@competition}
+%h3 Start Times: #{@is_start_time}
+
+%table.import_results
+  %thead
+    %tr
+      %th Bib number
+      - if @competition.imports_times
+        %th Time
+      - else
+        %th Rank (External)
+      %th Disqualified
+      %th Name
+      %th Competitor Exists?
+  %tbody
+    - @import_results.each do |result|
+      %tr
+        %td= result.bib_number
+        - if @competition.imports_times
+          %td= result.full_time
+        - else
+          %td= result.rank
+        %td= result.disqualified
+        %td= Registrant.find_by_bib_number(result.bib_number)
+        - if result.competition.find_competitor_with_bib_number(result.bib_number)
+          %td.competitor_exists Yes
+        - else
+          %td.competitor_not_exists No
+
+%hr
+= form_tag(approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), {:method => :post}) do
+  = submit_tag "Import all in Temp Table into Competition", :class=> "data_import_submit", data: {:confirm => "IMPORT, Are you sure?" }

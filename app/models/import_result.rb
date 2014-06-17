@@ -65,7 +65,7 @@ class ImportResult < ActiveRecord::Base
     registrant = matching_registrant
     if competitor.nil?
       competition.create_competitor_from_registrants([registrant], nil)
-      competitor = competition.find_competitor_with_bib_number(id)
+      competitor = competition.find_competitor_with_bib_number(bib_number)
     end
 
     tr = competition.build_result_from_imported(self)

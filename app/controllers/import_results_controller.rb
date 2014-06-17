@@ -4,7 +4,7 @@ class ImportResultsController < ApplicationController
   before_action :load_user, except: [:show, :edit, :update, :destroy]
   before_action :load_competition, except: [:show, :edit, :update, :destroy]
   before_filter :load_new_import_result, :only => [:create]
-  before_action :load_import_results, :only => [:data_entry, :display_csv, :display_lif, :index]
+  before_action :load_import_results, :only => [:data_entry, :display_csv, :display_lif, :index, :approve, :proof_single]
   load_and_authorize_resource
 
   before_action :set_breadcrumbs
@@ -117,6 +117,8 @@ class ImportResultsController < ApplicationController
   end
 
   def proof_single
+    add_breadcrumb "Proof Data"
+
     @is_start_time = params[:is_start_times] || false
 
     @import_results = @import_results.where(is_start_time: @is_start_time)
@@ -193,7 +195,8 @@ class ImportResultsController < ApplicationController
 
   # POST /users/#/competitions/#/import_results/approve
   def approve
-    import_results = ImportResult.where(:competition_id => @competition)
+    @is_start_times = params[:is_start_times]
+    import_results = @import_results.where(is_start_time: @is_start_times)
 
     n = import_results.count
     begin
@@ -208,7 +211,7 @@ class ImportResultsController < ApplicationController
     end
     respond_to do |format|
       if errors
-        format.html { redirect_to results_url(@competition), alert: "Errors: #{errors}" }
+        format.html { redirect_to :back, alert: "Errors: #{errors}" }
       else
         format.html { redirect_to results_url(@competition), notice: "Added #{n} rows to #{@competition}." }
       end
