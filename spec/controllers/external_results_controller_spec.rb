@@ -32,7 +32,7 @@ describe ExternalResultsController do
   def valid_attributes
     { "competitor_id" =>  @competitor.id,
       "details" => "soomething",
-      "rank" => 1
+      "points" => 1
     }
   end
 

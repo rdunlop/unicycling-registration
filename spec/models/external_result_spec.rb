@@ -30,8 +30,8 @@ describe ExternalResult do
     @er.valid?.should == true
   end
 
-  it "must have a rank" do
-    @er.rank = nil
+  it "must have a value for points" do
+    @er.points = nil
     @er.valid?.should == false
   end
 end

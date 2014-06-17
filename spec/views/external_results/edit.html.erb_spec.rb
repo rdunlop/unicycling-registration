@@ -13,7 +13,7 @@ describe "external_results/edit" do
     assert_select "form", :action => external_result_path(@external_result), :method => "put" do
       assert_select "select#external_result_competitor_id", :name => "external_result[competitor_id]"
       assert_select "input#external_result_details", :name => "external_result[details]"
-      assert_select "input#external_result_rank", :name => "external_result[rank]"
+      assert_select "input#external_result_points", :name => "external_result[points]"
     end
   end
 end

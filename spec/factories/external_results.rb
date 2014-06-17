@@ -16,6 +16,6 @@ FactoryGirl.define do
   factory :external_result do
     association :competitor, :factory => :event_competitor
     details "MyString"
-    rank 1
+    points 1
   end
 end

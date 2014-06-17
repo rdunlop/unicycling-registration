@@ -14,10 +14,10 @@ describe OrderedResultCalculator do
       @competition = FactoryGirl.create(:ranked_competition, :age_group_type => @age_group_entry.age_group_type, :event => @event)
       FactoryGirl.create(:event_configuration, :start_date => Date.new(2013,01,01))
       # Note: Registrants are born in 1990, thus are 22 years old
-      @tr1 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :rank => 1)
-      @tr2 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :rank => 2)
-      @tr3 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :rank => 3)
-      @tr4 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :rank => 4)
+      @tr1 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :points => 1)
+      @tr2 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :points => 2)
+      @tr3 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :points => 3)
+      @tr4 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :points => 4)
 
       @calc = OrderedResultCalculator.new(@competition)
     end

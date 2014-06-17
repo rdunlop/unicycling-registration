@@ -72,6 +72,6 @@ class ExternalResultsController < ApplicationController
 
   private
   def external_result_params
-    params.require(:external_result).permit(:competitor_id, :details, :rank)
+    params.require(:external_result).permit(:competitor_id, :details, :points)
   end
 end

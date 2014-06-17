@@ -36,7 +36,7 @@ class ExternallyRankedScoringClass < BaseScoringClass
 
   def competitor_comparable_result(competitor)
     if self.competitor_has_result?(competitor)
-      competitor.external_results.first.rank
+      competitor.external_results.first.points
     else
       0
     end
@@ -63,7 +63,7 @@ class ExternallyRankedScoringClass < BaseScoringClass
   # from import_result to external_result
   def build_result_from_imported(import_result)
     ExternalResult.new(
-      rank: import_result.rank,
+      points: import_result.rank,
       details: import_result.details)
   end
 

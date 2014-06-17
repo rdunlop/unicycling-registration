@@ -5,7 +5,7 @@
 #  id            :integer          not null, primary key
 #  competitor_id :integer
 #  details       :string(255)
-#  rank          :integer
+#  points        :decimal(6, 3)    not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -18,13 +18,13 @@ class ExternalResult < ActiveRecord::Base
   include Competeable
   include Placeable
 
-  validates :rank, :presence => true
+  validates :points, :presence => true
 
   def disqualified
     false
   end
 
   def result
-    rank
+    points
   end
 end
