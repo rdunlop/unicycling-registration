@@ -1,14 +1,21 @@
-class ExternallyRankedScoringClass < BaseScoringClass
+class PointsScoringClass < BaseScoringClass
+
+  attr_accessor :lower_is_better
+
+  def initialize(competition, lower_is_better = true)
+    super(competition)
+    @lower_is_better = lower_is_better
+  end
 
   def scoring_description
-    "Externally scored competition results are entered, in which the absolute rank
+    "Externally scored competition results are entered, in which the points
     of competitors is entered, and a 'details' column, which is a description of the result
-    (for use on the awards/results sheets)."
+    (for use on the awards/results sheets). #{lower_is_better ? 'Lower' : 'Higher'} points are better"
   end
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    OrderedResultCalculator.new(@competition)
+    OrderedResultCalculator.new(@competition, lower_is_better)
   end
 
   # describes how to label the results of this competition

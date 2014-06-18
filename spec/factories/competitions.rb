@@ -46,7 +46,12 @@ FactoryGirl.define do
     end
 
     factory :ranked_competition do
-      scoring_class "Ranked"
+      scoring_class "Points Low to High"
+      age_group_type # factory Girl
+    end
+
+    factory :high_points_competition do
+      scoring_class "Points High to Low"
       age_group_type # factory Girl
     end
   end
