@@ -1,11 +1,11 @@
 <div class="race_recording">
-  <h1><%= @competition %> Results</h1>
+  <h1><%= @competition.award_title_name %> <%= @competition.award_subtitle_name %> Results</h1>
   <hr />
-  <% if @age_group_entries.nil? %>
-    <% @results_list ||= @competition.results_list %>
+  <% @results_list ||= @competition.results_list %>
+  <% if @competition.age_group_entries.nil? %>
     <%= render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @results_list["all"], :no_page_breaks => @no_page_breaks } %>
   <% else %>
-    <% @age_group_entries.each do |ag_entry| %>
+    <% @competition.age_group_entries.each do |ag_entry| %>
       <% next if @results_list[ag_entry].size == 0 %>
       <%= render :partial => "/printing/competitions/competition_results", :locals => {
         :description => "#{ag_entry} #{ag_entry.gender}",

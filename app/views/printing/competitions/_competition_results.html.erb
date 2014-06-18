@@ -13,7 +13,7 @@
   <% elsif competitors.first.members.count > 2 %>
     <% # Group event, list the members %>
     <% competitors.each do |competitor| %>
-      <h3>Place: <%= competitor.place %> -  <%= competitor %></h3>
+      <h3>Place: <%= competitor.place_formatted %> -  <%= competitor %></h3>
       <hr />
       <table>
         <thead>
@@ -46,7 +46,7 @@
       </thead>
       <tbody>
         <% competitors.each do |competitor| %>
-          <%= render :partial => "/printing/competitions/result_entry", :locals => {:id => competitor.bib_number, :name => competitor.to_s, :time => competitor.result, :place => competitor.place } %>
+          <%= render :partial => "/printing/competitions/result_entry", :locals => {:id => competitor.bib_number, :name => competitor.to_s, :time => competitor.result, :place => competitor.place_formatted } %>
         <% end %>
       </tbody>
     </table>
