@@ -274,7 +274,6 @@ Workspace::Application.routes.draw do
         get :export_scores
         # view scores
         get :result
-        get :final_candidates
 
         post :lock
         delete :lock
