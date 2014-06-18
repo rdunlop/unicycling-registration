@@ -15,7 +15,6 @@ class Competitor < ActiveRecord::Base
   include Eligibility
 
     has_many :members, :inverse_of => :competitor
-    has_many :registrants, -> { order "bib_number" }, :through => :members
     belongs_to :competition, touch: true
     acts_as_list :scope => :competition
 
@@ -60,7 +59,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def must_have_3_members_for_custom_name
-      if (registrants.size < 3 and members.size < 3) and !custom_name.blank?
+      if (members.size < 3) and !custom_name.blank?
         errors[:base] << "Must have at least 3 members to specify a custom name"
       end
     end
@@ -233,10 +232,10 @@ class Competitor < ActiveRecord::Base
 
     # this field is used for data export
     def export_id
-      if registrants.empty?
+      if members.empty?
           nil
       else
-          registrants.first.external_id
+          members.first.external_id
       end
     end
 
@@ -245,7 +244,7 @@ class Competitor < ActiveRecord::Base
         if members.empty?
           "(No registrants)"
         else
-          ages = registrants.map(&:age)
+          ages = members.map(&:age)
           ages.max
         end
       end
@@ -256,7 +255,7 @@ class Competitor < ActiveRecord::Base
         if members.empty?
           "(No registrants)"
         else
-          countries = registrants.map(&:country).uniq.compact
+          countries = members.map(&:country).uniq.compact
           # display all countries if there are more than 1 registrants
           countries.join(",") unless countries.empty?
         end
@@ -268,7 +267,7 @@ class Competitor < ActiveRecord::Base
         if members.empty?
           "(No registrants)"
         else
-          genders = registrants.map(&:gender)
+          genders = members.map(&:gender)
           # display mixed if there are more than 1 registrants
           if genders.count > 1
             "(mixed)"
@@ -281,20 +280,20 @@ class Competitor < ActiveRecord::Base
 
     def wheel_size
       Rails.cache.fetch("/competitor/#{id}-#{updated_at}/wheel_size_id") do
-        if registrants.empty?
+        if members.empty?
           nil
         else
-          registrants.first.default_wheel_size.id
+          members.first.registrant.default_wheel_size.id
         end
       end
     end
 
     def ineligible
       Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
-        if registrants.empty?
+        if members.empty?
           false
         else
-          eligibles = registrants.map(&:ineligible)
+          eligibles =members.map(&:ineligible)
           if eligibles.uniq.count > 1
             true # includes both eligible status AND ineligible status
           else
@@ -305,10 +304,10 @@ class Competitor < ActiveRecord::Base
     end
 
     def club
-      if registrants.empty?
+      if members.empty?
         "(No registrants)"
       else
-        registrants.first.club
+        members.first.club
       end
     end
 
