@@ -30,12 +30,12 @@
 
 class ImportResult < ActiveRecord::Base
   include TimePrintable
+  include StatusNilWhenEmpty
 
   validates :competition_id, :presence => true
   validates :user_id, :bib_number, :presence => true
   validate :results_for_competition
 
-  before_validation :clear_status_of_string
   validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
 
   belongs_to :user
@@ -45,9 +45,7 @@ class ImportResult < ActiveRecord::Base
 
   scope :entered_order, -> { reorder(:id) }
 
-  def clear_status_of_string
-    self.status = nil if status == ""
-  end
+
 
   def competitor_name
     matching_registrant
