@@ -52,3 +52,5 @@
 %h3 Menu of actions
 %ul
   %li= link_to "Accept these Results", approve_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit"
+
+= link_to "Back to Heat Import", import_lif_user_competition_import_results_path(@user, @competition)

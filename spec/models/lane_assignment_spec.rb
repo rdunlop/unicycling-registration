@@ -44,6 +44,20 @@ describe LaneAssignment do
     end
   end
 
+  describe "When updating an existing lane assignment" do
+    describe "when at NAUCC" do
+      before :each do
+        FactoryGirl.create(:event_configuration, :with_usa)
+      end
+
+      it "can save a new lane" do
+        la = FactoryGirl.create(:lane_assignment)
+        la.lane = 4
+        expect(la.save).to be_truthy
+      end
+    end
+  end
+
   describe "when creating a lane assignment from a registrant" do
     describe "when at NAUCC" do
       before :each do
