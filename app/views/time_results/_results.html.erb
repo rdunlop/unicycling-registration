@@ -40,7 +40,7 @@
         <td><%= time_result.competitor.place_formatted %></td>
         <td><%= time_result.competitor.overall_place_formatted %></td>
         <td class="non_printable"><%= link_to 'Edit', edit_time_result_path(time_result) %></td>
-        <td class="non_printable"><%= link_to 'Destroy', time_result, :confirm => 'Are you sure?', :method => :delete %></td>
+        <td class="non_printable"><%= link_to 'Destroy', time_result, data: { confirm: 'Are you sure?' }, :method => :delete %></td>
       </tr>
     <% end %>
   </tbody>

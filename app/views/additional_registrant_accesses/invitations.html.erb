@@ -43,7 +43,7 @@ Please accept or decline the requests<br /><br />
         <td><%= ara.registrant %></td>
         <td><%= ara.created_at %></td>
         <td><%= ara.status %></td>
-        <td><%= link_to 'Accept (readonly)', accept_readonly_additional_registrant_access_path(ara), method: :put, confirm: "Are you sure you want to provide access?" %></td>
+        <td><%= link_to 'Accept (readonly)', accept_readonly_additional_registrant_access_path(ara), method: :put, data: { confirm: "Are you sure you want to provide access?" } %></td>
         <td><%= link_to 'Decline', decline_additional_registrant_access_path(ara), method: :delete %></td>
       </tr>
     <% end %>
