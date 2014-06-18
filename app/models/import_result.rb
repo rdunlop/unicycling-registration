@@ -37,6 +37,7 @@ class ImportResult < ActiveRecord::Base
   validate :results_for_competition
 
   validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
+  validates :details, presence: true, if: "rank?"
 
   belongs_to :user
   belongs_to :competition
@@ -78,7 +79,7 @@ class ImportResult < ActiveRecord::Base
   # determines that the import_result has enough information
   def results_for_competition
     return if disqualified
-    unless time_is_present? || rank
+    unless time_is_present? || rank?
       errors.add(:base, "Must select either time or rank")
     end
   end

@@ -16,6 +16,10 @@ class DistanceScoringClass < BaseScoringClass
     "Distance"
   end
 
+  def example_result
+    "10 cm"
+  end
+
   def render_path
     "distance_attempts"
   end

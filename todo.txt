@@ -1,5 +1,15 @@
 Last Re-Arranged May 24, 2014.
 
+- Add a way to display the "eligible competitors" for 100m Expert (just use the "overall_place" results?)
+- Determine who will be doing the 100m Review/Publish datastep
+- When/how do we publish 100m results?
+- How should the Lane ASsignments screen behave?
+ - Should it only show "Competitors" in one box, and "non-signed up" in another?
+ - How should it behave for "Final Heat" events (100m Expert)?
+- Fix the ordering of import_results to always be :id (so that it odesn't shift around)
+- fix too-long formatting of pdf printing pages (recording forms)
+
+Connie: How does the "Overall Track" calculation work when there is a Tie? (ie: tie for 1st, do both get 8 points, or do they split 8+6=14, thus 7 points each)
 
 NAUCC data issues:
 - Basketball/Hockey - Ranked competitions Without Age Groups? (should be able to calculate ranked without age group?)

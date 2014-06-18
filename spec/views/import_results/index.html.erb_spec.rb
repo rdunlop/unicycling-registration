@@ -4,11 +4,11 @@ describe "import_results/index" do
   before(:each) do
     @user = FactoryGirl.create(:admin_user)
     assign(:user, @user)
-    @competition = FactoryGirl.create(:competition)
+    @competition = FactoryGirl.create(:ranked_competition)
     assign(:competition, @competition)
     assign(:import_results,
-           [ FactoryGirl.create(:import_result, :raw_data => "Raw 1", :competition => @competition),
-             FactoryGirl.create(:import_result, :raw_data => "Raw 2", :competition => @competition)])
+           [ FactoryGirl.create(:import_result, :details => "Raw 1", :competition => @competition),
+             FactoryGirl.create(:import_result, :details => "Raw 2", :competition => @competition)])
     @import_result = FactoryGirl.build(:import_result)
   end
 

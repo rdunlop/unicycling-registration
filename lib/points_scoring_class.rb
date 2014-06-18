@@ -23,6 +23,10 @@ class PointsScoringClass < BaseScoringClass
     "Score"
   end
 
+  def example_result
+    "13pts"
+  end
+
   def render_path
     "external_results"
   end

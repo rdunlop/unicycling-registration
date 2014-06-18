@@ -1,0 +1,18 @@
+= render partial: "recording_form_header", locals: { competition: @competition, is_start_times: @is_start_times }
+%table.full.grid.race
+  %thead
+    %tr
+      - 2.times do
+        %th.id ID
+        %th.time= @competition.result_description
+        %th.separator
+  %tbody
+    = render partial: "single_attempt_entry_sample"
+    - 30.times do
+      %tr
+        %td
+        %td
+        %td.separator
+        %td
+        %td
+        %td.separator

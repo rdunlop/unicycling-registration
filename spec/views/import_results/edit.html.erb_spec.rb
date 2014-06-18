@@ -33,7 +33,7 @@ describe "import_results/edit" do
       # Run the generator again with the --webrat flag if you want to use webrat matchers
       assert_select "form", :action => import_result_path(@import_result), :method => "post" do
         assert_select "select#import_result_bib_number", :name => "import_result[bib_number]"
-        assert_select "input#import_result_raw_data", :name => "import_result[raw_data]"
+        assert_select "input#import_result_details", :name => "import_result[details]"
       end
     end
   end

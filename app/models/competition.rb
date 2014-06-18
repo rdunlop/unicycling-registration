@@ -40,7 +40,7 @@ class Competition < ActiveRecord::Base
   has_many :time_results, :through => :competitors
   has_many :external_results, :through => :competitors
   has_many :competition_sources, :foreign_key => "target_competition_id", :inverse_of => :target_competition, :dependent => :destroy
-  has_many :combined_competition_entries
+  has_many :combined_competition_entries, dependent: :destroy
   accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
 
   has_many :lane_assignments, :dependent => :destroy
@@ -69,7 +69,7 @@ class Competition < ActiveRecord::Base
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
             :build_import_result_from_raw, :score_calculator,
             :result_description, :compete_in_order, :scoring_description,
-            :imports_times, to: :scoring_helper
+            :example_result, :imports_times, to: :scoring_helper
 
   mount_uploader :published_results_file, PdfUploader
 

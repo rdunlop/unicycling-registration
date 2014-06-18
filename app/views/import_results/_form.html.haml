@@ -32,7 +32,7 @@
           %td= f.number_field :thousands
         - else
           %td= f.number_field :rank
-          %td= f.text_field :raw_data
+          %td= f.text_field :details
         %td= f.select :status, TimeResult.status_values, include_blank: true
         %td{ colspan: "4"}= f.submit "Submit", :class => "multiclick"
 

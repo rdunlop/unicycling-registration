@@ -16,6 +16,10 @@ class RaceScoringClass < BaseScoringClass
     "Time"
   end
 
+  def example_result
+    "1:30:23"
+  end
+
   def render_path
     "time_results"
   end

@@ -15,6 +15,10 @@ class BaseScoringClass
     raise StandardError.new("No Result Description Defined")
   end
 
+  def example_result
+    nil
+  end
+
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     raise StandardError.new("No Has Result Defined")

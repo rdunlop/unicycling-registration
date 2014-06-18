@@ -7,9 +7,8 @@
     %td= import_result.thousands
   - else
     %td= import_result.rank
-    %td= import_result.raw_data
+    %td= import_result.details
   %td= import_result.disqualified
-  %td= import_result.details
   - if import_result.competition.find_competitor_with_bib_number(import_result.bib_number)
     %td.competitor_exists Yes
   - else
