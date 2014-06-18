@@ -5,6 +5,7 @@
 %table.import_results
   %thead
     %tr
+      %th Entry Number
       %th Bib number
       - if @competition.imports_times
         %th Time
@@ -14,8 +15,9 @@
       %th Name
       %th Competitor Exists?
   %tbody
-    - @import_results.each do |result|
+    - @import_results.each_with_index do |result, index|
       %tr
+        %td= index + 1
         %td= result.bib_number
         - if @competition.imports_times
           %td= result.full_time
@@ -30,4 +32,4 @@
 
 %hr
 = form_tag(approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), {:method => :post}) do
-  = submit_tag "Import all in Temp Table into Competition", :class=> "data_import_submit", data: {:confirm => "IMPORT, Are you sure?" }
+  = submit_tag "Approve these data entry values", :class=> "data_import_submit", data: {:confirm => "IMPORT, Are you sure?" }

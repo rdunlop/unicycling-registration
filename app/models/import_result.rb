@@ -43,6 +43,8 @@ class ImportResult < ActiveRecord::Base
 
   default_scope { order(:bib_number) }
 
+  scope :entered_order, -> { reorder(:id) }
+
   def clear_status_of_string
     self.status = nil if status == ""
   end

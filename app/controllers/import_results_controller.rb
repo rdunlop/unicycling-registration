@@ -5,6 +5,7 @@ class ImportResultsController < ApplicationController
   before_action :load_competition, except: [:show, :edit, :update, :destroy]
   before_filter :load_new_import_result, :only => [:create]
   before_action :load_import_results, :only => [:data_entry, :display_csv, :display_lif, :index, :approve, :proof_single]
+  before_action :filter_import_results_by_start_times, only: [:proof_single, :data_entry, :approve]
   load_and_authorize_resource
 
   before_action :set_breadcrumbs
@@ -109,19 +110,15 @@ class ImportResultsController < ApplicationController
   def data_entry
     add_breadcrumb "Enter Single Data"
 
-    @is_start_time = params[:is_start_times] || false
     @import_result = ImportResult.new
     @import_result.is_start_time = @is_start_time
-
-    @import_results = @import_results.where(is_start_time: @is_start_time)
   end
+
 
   def proof_single
     add_breadcrumb "Proof Data"
 
-    @is_start_time = params[:is_start_times] || false
-
-    @import_results = @import_results.where(is_start_time: @is_start_time)
+    @import_results = @import_results.entered_order
 
     respond_to do |format|
       format.html
@@ -195,16 +192,14 @@ class ImportResultsController < ApplicationController
 
   # POST /users/#/competitions/#/import_results/approve
   def approve
-    @is_start_times = params[:is_start_times]
-    import_results = @import_results.where(is_start_time: @is_start_times)
 
-    n = import_results.count
+    n = @import_results.count
     begin
       ImportResult.transaction do
-        import_results.each do |ir|
+        @import_results.each do |ir|
           ir.import!
         end
-        import_results.destroy_all
+        @import_results.destroy_all
       end
     rescue Exception => ex
       errors = ex
@@ -234,6 +229,11 @@ class ImportResultsController < ApplicationController
 
   def load_import_results
     @import_results = @user.import_results.where(competition_id: @competition)
+  end
+
+  def filter_import_results_by_start_times
+    @is_start_time = params[:is_start_times] || false
+    @import_results = @import_results.where(is_start_time: @is_start_time)
   end
 
   def load_new_import_result
