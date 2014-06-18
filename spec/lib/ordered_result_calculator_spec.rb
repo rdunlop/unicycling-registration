@@ -17,6 +17,22 @@ describe OrderedResultCalculator do
     @tr4 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :points => 4)
 
   end
+  describe "without an age group" do
+    before :each do
+      @competition.age_group_type = nil
+      @competition.save!
+    end
+
+    it "calculates the results the same" do
+      @calc = OrderedResultCalculator.new(@competition)
+      recalc
+      @tr1.reload.competitor.place.should == 1
+      @tr2.reload.competitor.place.should == 2
+      @tr3.reload.competitor.place.should == 3
+      @tr4.reload.competitor.place.should == 4
+    end
+
+  end
 
   describe "when calculating the placing of lower-points-is-better races" do
     before :each do
@@ -26,6 +42,15 @@ describe OrderedResultCalculator do
     it "sets the competitor places to same order as the points" do
       recalc
 
+      @tr1.reload.competitor.place.should == 1
+      @tr2.reload.competitor.place.should == 2
+      @tr3.reload.competitor.place.should == 3
+      @tr4.reload.competitor.place.should == 4
+    end
+
+    it "ignores competitors without scores" do
+      @comp5 = FactoryGirl.create(:event_competitor, competition: @competition)
+      recalc
       @tr1.reload.competitor.place.should == 1
       @tr2.reload.competitor.place.should == 2
       @tr3.reload.competitor.place.should == 3

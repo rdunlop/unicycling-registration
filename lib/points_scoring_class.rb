@@ -81,4 +81,8 @@ class PointsScoringClass < BaseScoringClass
       rank: raw[1],
       details: raw[2])
   end
+
+  def requires_age_groups
+    false
+  end
 end
