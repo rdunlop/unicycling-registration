@@ -180,6 +180,7 @@ describe Competitor do
             @reg1 = member.registrant
 
             Delorean.jump 2
+            @comp.reload
             member2 = FactoryGirl.create(:member, :competitor => @comp)
             @comp.reload
             @reg2 = member2.registrant

@@ -84,7 +84,7 @@ class AwardLabelsController < ApplicationController
     min_place = 1
     max_place = 5
     n = 0
-    competition.competitors.each do |competitor|
+    competition.competitors.active.each do |competitor|
       competitor.members.each do |member|
         n += create_labels_for_competitor(competitor, member.registrant, @user, true, competition.has_experts, min_place, max_place)
       end

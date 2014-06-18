@@ -202,14 +202,14 @@ class Competition < ActiveRecord::Base
 
     if age_group_type.nil?
       # no age groups, put all into a single age group
-      results["all"] = competitors.to_a
+      results["all"] = competitors.active.to_a
     else
       age_group_entries.each do |ag_entry|
         results[ag_entry] = []
       end
 
       # sort the competitors by age group
-      competitors.each do |competitor|
+      competitors.active.each do |competitor|
         next unless competitor.has_result?
         calculated_ag = age_group_type.age_group_entry_for(competitor.age, competitor.gender, competitor.wheel_size)
         results[calculated_ag] << competitor unless calculated_ag.nil?

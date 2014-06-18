@@ -131,7 +131,8 @@ describe ImportResultsController do
   describe "POST approve" do
     it "redirects to the competitions' results page" do
       competition = FactoryGirl.create(:timed_competition)
-      import = FactoryGirl.create(:import_result, :competition => competition)
+      reg = FactoryGirl.create(:competitor)
+      import = FactoryGirl.create(:import_result, :competition => competition, bib_number: reg.bib_number)
       post :approve, {:user_id => import.user, :competition_id => competition.id}
       response.should redirect_to(result_competition_path(competition))
     end

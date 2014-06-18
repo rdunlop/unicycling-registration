@@ -15,7 +15,7 @@
 %table.judging
   = render :partial => "/scores/judge_header", :object => @judge
   %tbody.js--shouldNotMatchSet
-    - @judge.competitors.each do |competitor|
+    - @judge.competitors.active.each do |competitor|
       %tr{:id => "competitor#{competitor.id}"}
         - score = @judge.scores.where(:competitor_id => competitor.id).first
         - if @score.nil? || @score.competitor_id != competitor.id

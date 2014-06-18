@@ -20,7 +20,7 @@
       <th>Name</th>
       <th class="derived">Place</th>
     </tr>
-<% @competition.competitors.each do |competitor| %>
+<% @competition.competitors.active.each do |competitor| %>
     <tr>
       <td><%= competitor.position %></td>
       <td><%= competitor.bib_number %></td>
@@ -52,7 +52,7 @@
       </tr>
     </thead>
     <tbody>
-    <% judge.competitors.each do |competitor| %>
+    <% judge.competitors.active.each do |competitor| %>
     <tr>
       <% score = judge.get_score(competitor) %>
       <% if !score.nil? %>
@@ -82,7 +82,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @competition.competitors.each do |competitor| %>
+    <% @competition.competitors.active.each do |competitor| %>
       <tr>
           <td class="derived"><%= @competition.competitor_placing_points(competitor, jt) %></td>
       </tr>
@@ -108,7 +108,7 @@
       <th>Name</th>
       <th class="derived">Place</th>
     </tr>
-<% @competition.competitors.each do |competitor| %>
+<% @competition.competitors.active.each do |competitor| %>
     <tr>
       <td><%= competitor.position %></td>
       <td><%= competitor.bib_number %></td>
@@ -130,7 +130,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @competition.competitors.each do |competitor| %>
+    <% @competition.competitors.active.each do |competitor| %>
       <tr>
         <td class="derived"><%= @competition.competitor_total_placing_points(competitor) %></td>
         <td class="derived"><%= competitor.place %></td>

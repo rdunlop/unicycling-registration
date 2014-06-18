@@ -11,6 +11,6 @@
     - competition.judges.each do |judge|
       %tr.js--highlightMatching
         %td= judge
-        %td.js--shouldMatch= competition.competitors.count
+        %td.js--shouldMatch= competition.competitors.active.count
         %td.js--shouldMatch= judge.scores.count
         %td= link_to "View Scores", judge_scores_path(judge)
