@@ -201,6 +201,7 @@ Workspace::Application.routes.draw do
     get "usa_memberships/export", to: "usa_memberships#export"
     get "volunteers", to: "volunteers#index"
 
+    get "results", to: "results#index"
     get "welcome/help"
     post "welcome/feedback"
     get "welcome/confirm"

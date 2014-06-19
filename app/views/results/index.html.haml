@@ -1,0 +1,30 @@
+%h1 Published Results
+%table.sortable
+  %thead
+    %tr
+      %th Competition End
+      %th Competition
+      %th
+      %th Status
+      %th Results
+  %tbody
+    - Competition.all.each do |competition|
+      %tr
+        %td= competition.scheduled_completion_at
+        %td= competition.award_title_name
+        %td= competition.award_subtitle_name
+        - competition_presenter = CompetitionPresenter.new(competition)
+        %td{ class: competition_presenter.status_code}= competition_presenter.status
+        %td= link_to_if(competition.published?, "Results", competition.published_results_file_url) { 'Not yet' }
+
+%h1 Overall Champions
+%table.sortable
+  %thead
+    %tr
+      %th Championship
+      %th Preliminary Results
+  %tbody
+    - CombinedCompetition.all.each do |combined_competition|
+      %tr
+        %td= combined_competition.name
+        %td= link_to "Results", combined_competition_path(combined_competition)
