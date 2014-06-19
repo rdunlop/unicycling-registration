@@ -20,6 +20,10 @@ module CompetitorsHelper
       unless options[:is_start_times]
         link_to "View", review_user_competition_import_results_path(current_user, competition)
       end
+    when "Single Attempt"
+      link_to "View", review_user_competition_import_results_path(current_user, competition, options)
+    when "Two Attempt Distance"
+      link_to "View", proof_user_competition_two_attempt_entries_path(current_user, competition, options)
     else
       if competition.uses_judges
         link_to "XXX unused Summary", root_url

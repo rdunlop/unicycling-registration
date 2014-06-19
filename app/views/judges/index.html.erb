@@ -63,12 +63,12 @@
     </div>
   </fieldset>
 <% elsif @competition.uses_lane_assignments %>
-  <h1>Manage <%= @competition %> Lane Assignment Officials</h1>
 
+  <h1>Manage RaceOfficials</h1>
 
-  <hr />
+  <p>These Users have the ability to assign Lane Assignments, as well as DQ competitors and see who is in each Heat/Lane.</p>
+
   <table class="sortable">
-    <caption>All globally-enabled Race Official Accounts</caption>
     <thead>
       <th>Email</th>
     </thead>
@@ -83,11 +83,10 @@
 
 
   <h2>Set User as 'Race Official'</h2>
-  Allows users to enter lane assignments for track racing
-  <%= form_for [@competition, @judge], :url => create_race_official_competition_judges_path(@competition) do |f| %>
-    <%= f.select :user_id, User.all.map { |user| [user, user.id] } %>
-    <%= f.submit %>
+  <%= form_tag :url => create_race_official_permissions_path, method: :post do |f| %>
+    <%= hidden_field_tag :competition_id, @competition %>
+    <%= select_tag :user_id, options_from_collection_for_select(User.with_role(:race_official), "id", "to_s") %>
+    <%= submit_tag %>
   <% end %>
-
 
 <% end %>

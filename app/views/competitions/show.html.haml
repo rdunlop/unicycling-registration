@@ -1,5 +1,8 @@
 %h1= @competition
 
+- if @competition.locked
+  .locked_banner LOCKED
+
 Information about the Competition will appear here, including results, judges, and scoring settings (read-only)
 
 - if can? :lock, @competition

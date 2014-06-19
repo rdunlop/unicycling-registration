@@ -1,5 +1,5 @@
 class JudgesController < ApplicationController
-  load_and_authorize_resource :competition, :only => [:index, :create, :destroy, :copy_judges, :create_race_official]
+  load_and_authorize_resource :competition, :only => [:index, :create, :destroy, :copy_judges]
   before_filter :load_new_judge, :only => [:create]
   load_and_authorize_resource
 
@@ -75,21 +75,6 @@ class JudgesController < ApplicationController
     @judges = @competition.judges
     @competitions_with_judges = Competition.event_order.select{ |comp| comp.uses_judges } - [@competition]
     @judge ||= Judge.new
-  end
-
-  def create_race_official
-    @user = User.find(params[:judge][:user_id])
-    respond_to do |format|
-      if @user.add_role(:race_official)
-        format.html { redirect_to competition_judges_path(@competition), notice: 'Race Official successfully created.' }
-      else
-        format.html { redirect_to competition_judges_path(@competiton), alert: 'Unable to add Race Official role to user.' }
-      end
-    end
-  end
-
-  def directors
-    @events = Event.all
   end
 
   private

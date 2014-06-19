@@ -27,28 +27,42 @@ class Ability
   end
 
   def set_data_entry_volunteer_abilities(user)
-    can :manage, :data_entry
-
-    can :manage, TwoAttemptEntry
 
     can :read, Competitor
-    # Distance
-    can :manage, DistanceAttempt
+    can :read, Competition
 
     can :read, Judge, :user_id => user.id
+
     # Freestyle
     can :create, Score
     can [:read, :update, :destroy], Score do |score|
-      score.try(:user) == user
+      score.try(:user) == user && !score.competitor.competition.locked
     end
 
-
-    can [:create_scores, :show], Competition do |competition|
+    can [:create_scores], Competition do |competition|
       !competition.locked
     end
+
+    # printing forms:
+    can [:announcer, :heat_recording, :single_attempt_recording, :two_attempt_recording], Competition
+
+    # data entry
+    can :manage, ImportResult do |import_result|
+      !import_result.competition.locked
+    end
+    cannot [:approve, :approve_heat], ImportResult
+
+    can :manage, TwoAttemptEntry
+
+  end
+
+  def director_of_competition(user, competition)
+    !competition.locked && user.has_role?(:director, competition.try(:event))
   end
 
   def set_director_abilities(user)
+    set_data_entry_volunteer_abilities(user)
+
     # :read is main director menu-page
     # :results is for printing
     can [:read, :results, :sign_ups], Event do |ev|
@@ -62,35 +76,50 @@ class Ability
     can :sign_ups, EventCategory do |ec|
       user.has_role? :director, ec.event
     end
+
     can :manage, Competitor do |comp|
-      user.has_role? :director, comp.competition.try(:event)
+      director_of_competition(user, comp.competition)
+    end
+
+    can :read, Competition do |competition|
+      user.has_role? :director, competition.event
+    end
+
+    can :manage, Member do |member|
+      director_of_competition(user, member.competitor.competition)
     end
 
     can [:read], Score do |score|
       user.has_role? :director, score.competition.event
     end
 
-    can [:sort, :sort_random, :announcer, :heat_recording, :two_attempt_recording, :results, :result], Competition do |comp|
+    can [:export_scores, :results, :result], Competition do |comp|
       user.has_role? :director, comp.event
     end
-    can [:freestyle_scores, :distance_attempts,
-      :export_scores, :set_places, :lock], Competition do |comp|
-      user.has_role? :director, comp.event
-      end
 
-    can :manage, Member do |member|
-      user.has_role? :director, member.competitor.event
+    can [:set_places, :sort, :sort_random, :lock], Competition do |comp|
+      director_of_competition(user, comp)
     end
+
+    # Distance
+    can :manage, DistanceAttempt do |distance_attempt|
+      director_of_competition(user, distance_attempt.competition)
+    end
+
     can :manage, ImportResult do |import_result|
-      user.has_role? :director, import_result.competition.event
+      director_of_competition(user, import_result.competition)
     end
+
     can :manage, TimeResult do |time_result|
-      user.has_role? :director, time_result.competition.event
+      director_of_competition(user, time_result.competition)
     end
 
     can :manage, DataEntryVolunteer
+
+    can :create_race_official, :permission
+
     can :manage, Judge do |judge|
-      (judge.scores.count == 0) && (user.has_role? :director, judge.competition.event)
+      (judge.scores.count == 0) && (director_of_competition(user, judge.competition))
     end
   end
 
@@ -98,11 +127,11 @@ class Ability
     alias_action :create, :read, :update, :destroy, :to => :crud
 
     if user.roles.any?
-      can :judging_menu, :welcome
       can :data_entry_menu, :welcome
     end
 
     if user.has_role? :super_admin
+      can :judging_menu, :welcome
       can :access, :rails_admin
       can :dashboard
       can :manage, :all
@@ -132,6 +161,7 @@ class Ability
     end
 
     if user.has_role? :race_official or user.has_role? :admin
+      # includes :view_heat, and :dq_competitor
       can :manage, LaneAssignment
     end
 

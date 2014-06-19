@@ -38,6 +38,8 @@ Workspace::Application.routes.draw do
 
     resources :permissions, :only => [:index] do
       collection do
+        post :create_race_official
+        get :directors
         put :set_role
       end
     end
@@ -229,8 +231,11 @@ Workspace::Application.routes.draw do
         resources :import_results, :only => [:index, :create] do
           collection do
             get :proof_single
+
+            # These 2 don't use @user, move them?
             get :review
             post :approve
+
             get :review_heat
             post :approve_heat
 
@@ -296,7 +301,6 @@ Workspace::Application.routes.draw do
 
       resources :judges,      :only => [:index, :create, :destroy] do
         collection do
-          post :create_race_official
           post :copy_judges
         end
       end
@@ -314,9 +318,6 @@ Workspace::Application.routes.draw do
     resources :time_results, :except => [:index, :new, :show, :create]
 
     resources :judges, :only => [:update] do
-      collection do
-        get :directors
-      end
       resources :competitors, :only => [] do
         resources :scores, :only => [:new, :create]
 

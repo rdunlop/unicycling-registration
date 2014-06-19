@@ -96,7 +96,7 @@ class Competitor < ActiveRecord::Base
     end
 
     def sorting_place
-      return 999 if disqualified
+      return 999 if disqualified || place.nil?
       place
     end
 

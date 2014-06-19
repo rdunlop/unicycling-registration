@@ -4,8 +4,9 @@ class ImportResultsController < ApplicationController
   before_action :load_user, except: [:show, :edit, :update, :destroy]
   before_action :load_competition, except: [:show, :edit, :update, :destroy]
   before_filter :load_new_import_result, :only => [:create]
-  before_action :load_import_results, :only => [:data_entry, :display_csv, :display_lif, :index, :approve, :proof_single]
-  before_action :filter_import_results_by_start_times, only: [:proof_single, :data_entry, :approve]
+  before_action :load_import_results, :only => [:data_entry, :display_csv, :display_lif, :index, :proof_single]
+  before_action :load_results_for_competition, only: [:review, :approve]
+  before_action :filter_import_results_by_start_times, only: [:proof_single, :data_entry, :review, :approve]
   load_and_authorize_resource
 
   before_action :set_breadcrumbs
@@ -19,15 +20,9 @@ class ImportResultsController < ApplicationController
     end
   end
 
+
   # GET /users/#/competitions/#/import_results/review
   def review
-    @import_results = ImportResult.where(:competition_id => @competition)
-
-    @heat = params[:heat]
-    if @heat
-      #@import_results = @import_results.where
-    end
-
     respond_to do |format|
       format.html # review.html.erb
     end
@@ -181,6 +176,7 @@ class ImportResultsController < ApplicationController
     rescue Exception => ex
       errors = ex
     end
+
     respond_to do |format|
       if errors
         format.html { redirect_to :back, alert: "Errors: #{errors}" }
@@ -204,6 +200,7 @@ class ImportResultsController < ApplicationController
     rescue Exception => ex
       errors = ex
     end
+
     respond_to do |format|
       if errors
         format.html { redirect_to :back, alert: "Errors: #{errors}" }
@@ -229,6 +226,10 @@ class ImportResultsController < ApplicationController
 
   def load_import_results
     @import_results = @user.import_results.where(competition_id: @competition)
+  end
+
+  def load_results_for_competition
+    @import_results = ImportResult.where(:competition_id => @competition)
   end
 
   def filter_import_results_by_start_times

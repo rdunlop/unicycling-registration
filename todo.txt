@@ -1,5 +1,19 @@
 Last Re-Arranged May 24, 2014.
 
+Connie: when should the Overall Champion calculation be updated? Whenever data is entered? approved? published? awarded?
+
+- Build a similar TwoAttemptEntry Review/Approve set (like the Single/ImportResult ones)
+- Ensure that a Judge cannot update their score after the event is Locked.
+- All Judges must also be data entry volunteers.
+
+ - "do you see too much data? "(overly permitted?)
+- can a sinlge user do import for mulitple competitions and not have them overlap in the database if they are both un-imported?
+- Who should be able to "proof" imported data? (director only?)
+- Use Carrierwave in a private bucket for PDFs (with expiring keys ?)
+
+- Fix TravisCI
+ - upgrade ruby.
+
 - Add a way to display the "eligible competitors" for 100m Expert (just use the "overall_place" results?)
 - Determine who will be doing the 100m Review/Publish datastep
 - When/how do we publish 100m results?

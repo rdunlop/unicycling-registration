@@ -201,13 +201,24 @@ describe "Ability" do
       describe "with a score" do
         before(:each) do
           @judge = FactoryGirl.create(:judge, :user => @user, :competition => @competition)
-          @score = FactoryGirl.create(:score, :judge => @judge)
+          competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+          @score = FactoryGirl.create(:score, :judge => @judge, competitor: competitor)
           @other_score = FactoryGirl.create(:score, :competitor => @score.competitor) # different judge user
         end
 
         it { should be_able_to(:update, @score) }
         it { should_not be_able_to(:update, @other_score) }
         it { should_not be_able_to(:read, @other_score) }
+
+        describe "when the competition is locked" do
+          before(:each) do
+            @competition.locked = true
+            @competition.save!
+            @score.reload
+          end
+
+          it { should_not be_able_to(:update, @score) }
+        end
       end
     end
   end
@@ -223,19 +234,34 @@ describe "Ability" do
     end
     subject { @ability = Ability.new(@user) }
 
-    it { should be_able_to(:distance_attempts, @competition) }
-    it { should be_able_to(:freestyle_scores, @competition) }
+    describe "when the event is unlocked" do
+      it { should be_able_to(:set_places, @competition) }
+      it { should be_able_to(:sort, @competition) }
+      it { should be_able_to(:sort_random, @competition) }
+      it { should be_able_to(:lock, @competition) }
+      it { should be_able_to(:manage, ImportResult) }
+      it { should be_able_to(:create, Judge) }
+    end
+
+    describe "when the event is locked" do
+      before :each do
+        @competition.update_attribute(:locked, true)
+      end
+      it { should_not be_able_to(:set_places, @competition) }
+      it { should_not be_able_to(:sort, @competition) }
+      it { should_not be_able_to(:sort_random, @competition) }
+      it { should_not be_able_to(:lock, @competition) }
+      it { should_not be_able_to(:create, Judge.new(competition: @competition)) }
+      it { should be_able_to(:read, @competition) }
+    end
+
+    it { should be_able_to(:read, @competition) }
     it { should be_able_to(:export_scores, @competition) }
-    it { should be_able_to(:set_places, @competition) }
-    it { should be_able_to(:sort, @competition) }
-    it { should be_able_to(:sort_random, @competition) }
-    it { should be_able_to(:lock, @competition) }
     it { should_not be_able_to(:edit, @competition) }
     it { should be_able_to(:create, DataEntryVolunteer) }
-    it { should be_able_to(:manage, DistanceAttempt) }
 
     it { should be_able_to(:sign_ups, @event_category) }
-    it { should be_able_to(:create, Judge) }
+    it { should be_able_to(:create_race_official, :permission) }
 
     describe "with an associated judge to my event" do
       before(:each) do

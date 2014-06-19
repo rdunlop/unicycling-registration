@@ -1,3 +1,19 @@
+- unless @director_events.empty?
+  %h1 My Event Director Events
+
+  %table
+    %thead
+      %tr
+        %th Event
+        %th Competition
+    %tbody
+      - @director_events.each do |event|
+        - event.competitions.each do |competition|
+          %tr
+            %td= event
+            %td= link_to competition, competition
+  %hr
+
 - unless @judges.empty?
   %h1 My Judging Events
 
@@ -15,8 +31,9 @@
 
 %h1 Data Entry Menu
 
-%p
-  %a= link_to "(old link )", welcome_judging_menu_path
+- if can? :judging_menu, :welcome
+  %p
+    %a= link_to "(old link )", welcome_judging_menu_path
 
 
 From this page, you can enter data results.

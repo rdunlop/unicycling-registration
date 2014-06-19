@@ -5,3 +5,12 @@
     background-color: lightgray !important;
   }
 }
+
+.locked_banner {
+  position: absolute;
+  opacity: 0.50;
+  font-size: 14em;
+  width: 100%;
+  text-align: center;
+  color: lightpink;
+}

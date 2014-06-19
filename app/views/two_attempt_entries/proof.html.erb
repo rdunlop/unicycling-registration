@@ -37,3 +37,9 @@
     <% end %>
   </tbody>
 </table>
+
+<% if can? :approve, ImportResult %>
+  <ul>
+    <li><%= link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit" %></li>
+  </ul>
+<% end %>

@@ -58,6 +58,7 @@ class WelcomeController < ApplicationController
 
   def data_entry_menu
     @judges = current_user.judges
+    @director_events = Event.with_role(:director, current_user)
   end
 
   private

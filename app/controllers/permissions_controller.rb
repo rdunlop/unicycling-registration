@@ -1,6 +1,6 @@
 class PermissionsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :user, :parent => false
+  authorize_resource class: false
 
   def index
     #authorize! :permissions, User
@@ -25,4 +25,21 @@ class PermissionsController < ApplicationController
       format.html { redirect_to permissions_path }
     end
   end
+
+  def create_race_official
+    @competition = Competition.find(params[:competition_id])
+    @user = User.find(params[:user_id])
+    respond_to do |format|
+      if @user.add_role(:race_official)
+        format.html { redirect_to competition_judges_path(@competition), notice: 'Race Official successfully created.' }
+      else
+        format.html { redirect_to competition_judges_path(@competiton), alert: 'Unable to add Race Official role to user.' }
+      end
+    end
+  end
+
+  def directors
+    @events = Event.all
+  end
+
 end
