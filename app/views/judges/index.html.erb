@@ -83,9 +83,9 @@
 
 
   <h2>Set User as 'Race Official'</h2>
-  <%= form_tag :url => create_race_official_permissions_path, method: :post do |f| %>
-    <%= hidden_field_tag :competition_id, @competition %>
-    <%= select_tag :user_id, options_from_collection_for_select(User.with_role(:race_official), "id", "to_s") %>
+  <%= form_tag  create_race_official_permissions_path, method: :post do |f| %>
+    <%= hidden_field_tag :competition_id, @competition.id %>
+    <%= select_tag :user_id, options_from_collection_for_select(User.with_role(:data_entry_volunteer), "id", "to_s") %>
     <%= submit_tag %>
   <% end %>
 
