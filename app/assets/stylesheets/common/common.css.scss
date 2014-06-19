@@ -4,14 +4,14 @@
 .dev_banner {
   font-weight: bold;
   color: white;
-  position: fixed;
-  top: 80px;
-  left: -70px;
+  position: absolute;
+  top: 216px;
+  left: -164px;
   width: 350px;
   text-align: center;
-  transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  transform: rotate(-90deg);
   background-color: red;
   z-index: 1000000;
 }
@@ -114,7 +114,7 @@ table.alternate {
 
 table.alternate,
 .competitor_sign_up table,
-.non-competitor_sign_up table { 
+.non-competitor_sign_up table {
   border-collapse: collapse;
 }
 
