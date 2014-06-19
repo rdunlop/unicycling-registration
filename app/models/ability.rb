@@ -13,6 +13,8 @@ class Ability
 
     can :read, StandardSkillEntry
     can :logo, EventConfiguration
+    can :index, :result
+    can :read, CombinedCompetition
 
     if config.test_mode
       # allow the user to upgrade their account in TEST MODE
