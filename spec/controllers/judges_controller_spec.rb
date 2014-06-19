@@ -101,13 +101,6 @@ describe JudgesController do
     end
   end
 
-  describe "GET directors" do
-    it "displays the directors" do
-      get :directors
-      assigns(:events).should == [@ev]
-    end
-  end
-
   describe "GET index" do
     it "displays all of the judges for all" do
       get :index, {:competition_id => @ec}
