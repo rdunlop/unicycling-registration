@@ -61,7 +61,7 @@ Information about the Competition will appear here, including results, judges, a
   - if @competition.locked?
     = link_to 'Unlock', lock_competition_path(@competition), :method => :delete, data: { confirm: "Are you sure?" }
   - else
-    = link_to 'Lock', lock_competition_path(@competition), :method => :post, data: { confirm: "No more results can be changed. Continue?" }, class: "action_button"
+    = link_to 'Lock', lock_competition_path(@competition), :method => :post, data: { confirm: "No more results can be changed. This cannot be undone by a Director. Continue?" }, class: "action_button"
 
 - if can? :publish, @competition
   %h2 Publish the competition Results

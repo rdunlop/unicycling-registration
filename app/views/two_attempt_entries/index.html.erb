@@ -1,5 +1,9 @@
 <h1>Two Attempt Entries</h1>
 
+<% if @competition.locked %>
+  <div class="locked_banner">LOCKED</div>
+<% end %>
+
 <%= link_to "Proof", proof_user_competition_two_attempt_entries_path(@user, @competition) %>
 <%= link_to "(pdf)", proof_user_competition_two_attempt_entries_path(@user, @competition, format: :pdf) %>
 

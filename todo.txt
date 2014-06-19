@@ -4,6 +4,8 @@ Connie: when should the Overall Champion calculation be updated? Whenever data i
 
 - Build a similar TwoAttemptEntry Review/Approve set (like the Single/ImportResult ones)
 - Ensure that a Judge cannot update their score after the event is Locked.
+- Create new role for high/long judging, and prevent them from adding scores after the event is "locked"
+
 - All Judges must also be data entry volunteers.
 
  - "do you see too much data? "(overly permitted?)

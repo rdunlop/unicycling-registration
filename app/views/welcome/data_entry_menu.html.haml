@@ -35,9 +35,6 @@
   %p
     %a= link_to "(old link )", welcome_judging_menu_path
 
-
-From this page, you can enter data results.
-
 Please choose the event that you want to enter data for:
 
 %h1 Results Summary
@@ -59,4 +56,5 @@ Please choose the event that you want to enter data for:
         - competition_presenter = CompetitionPresenter.new(competition)
         %td{ class: competition_presenter.status_code}= competition_presenter.status
 
-If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).
+%p
+  If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).

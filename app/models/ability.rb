@@ -52,8 +52,12 @@ class Ability
     end
     cannot [:approve, :approve_heat], ImportResult
 
-    can :manage, TwoAttemptEntry
+    can :manage, TwoAttemptEntry do |two_attempt_entry|
+      !two_attempt_entry.competition.locked
+    end
 
+    # High/Long Data Entry
+    can :manage, DistanceAttempt
   end
 
   def director_of_competition(user, competition)
@@ -99,11 +103,6 @@ class Ability
 
     can [:set_places, :sort, :sort_random, :lock], Competition do |comp|
       director_of_competition(user, comp)
-    end
-
-    # Distance
-    can :manage, DistanceAttempt do |distance_attempt|
-      director_of_competition(user, distance_attempt.competition)
     end
 
     can :manage, ImportResult do |import_result|
