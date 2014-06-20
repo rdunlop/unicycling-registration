@@ -1,0 +1,38 @@
+%h1 Two Attempt Entries
+
+.non_printable
+  = link_to "(pdf)", proof_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time, format: :pdf)
+
+%h2 Competition: #{@competition}
+%h3 Is Start Time: #{@is_start_time}
+
+%table.two_attempt_entries
+  %thead
+    %tr
+      %th Bib Number
+      %th Attempt #1
+      %th DQ
+      %th.separator
+      %th Attempt #2
+      %th DQ
+      %th.separator
+      %th Competitor Name
+      %th Competitor Exists?
+  %tbody
+    - @two_attempt_entries.each do |two_attempt_entry|
+      %tr
+        %td= two_attempt_entry.bib_number
+        %td= two_attempt_entry.full_time_1
+        %td= two_attempt_entry.dq_1
+        %td
+        %td= two_attempt_entry.full_time_2
+        %td= two_attempt_entry.dq_2
+        %td
+        %td= two_attempt_entry.registrant_name
+        - if two_attempt_entry.has_matching_competitor?
+          %td.competitor_exists Yes
+        - else
+          %td.competitor_not_exists No
+- if can? :approve, ImportResult
+  %ul
+    %li= link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit"

@@ -2,8 +2,8 @@
 - if @competition.locked
   .locked_banner LOCKED
 
-= link_to "Proof", proof_user_competition_two_attempt_entries_path(@user, @competition)
-= link_to "(pdf)", proof_user_competition_two_attempt_entries_path(@user, @competition, format: :pdf)
+= link_to "Proof", proof_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time)
+
 
 %h2 Competition: #{@competition}
 %h3 Is Start Time: #{@is_start_time}
