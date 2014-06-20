@@ -16,7 +16,6 @@
           %th Rank (External)
           %th Details (external)
         %th Disqualified
-        %th Details
         %th Competitor Exists?
         %th
         %th
@@ -25,7 +24,7 @@
 
     %tfoot
       %tr
-        %td{ colspan: 2}= f.select :bib_number, Registrant.active.map{|reg| [reg.with_id_to_s, reg.bib_number]}, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select js--autoFocus' }
+        %td{ colspan: 2}= f.select :bib_number, Registrant.select_box_options_to_bib_number, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select js--autoFocus' }
         - if @competition.imports_times
           %td= f.number_field :minutes
           %td= f.number_field :seconds

@@ -14,7 +14,8 @@
   new_row.appendTo(".two_attempt_entries");
   new_row.effect("highlight", {}, 3000);
   $(".data_entry").trigger("reset");
-  $("#two_attempt_entry_bib_number").focus();
+  $(".js--autoFocus").trigger("chosen:updated");
+  $(".js--autoFocus").trigger('chosen:activate');
 
   $('#notice').empty();
 <% end %>

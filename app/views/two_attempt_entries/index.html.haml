@@ -1,0 +1,51 @@
+%h1 Two Attempt Entries
+- if @competition.locked
+  .locked_banner LOCKED
+
+= link_to "Proof", proof_user_competition_two_attempt_entries_path(@user, @competition)
+= link_to "(pdf)", proof_user_competition_two_attempt_entries_path(@user, @competition, format: :pdf)
+
+%h2 Competition: #{@competition}
+%h3 Is Start Time: #{@is_start_time}
+
+%p#notice
+= form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry], {:remote => true, :html => {:class => "data_entry"}}) do |f|
+  = render partial: "/shared/error_messages", object: @two_attempt_entry
+  = f.hidden_field :is_start_time
+  %table.sortable.two_attempt_entries
+    %thead
+      %tr
+        %th{:rowspan => "2"}
+        %th{:rowspan => "2"} Bib Number
+        %th{:rowspan => "2"}
+        %th{:colspan => "5"} Attempt #1
+        %th{:colspan => "5"} Attempt #2
+        %th{:rowspan => "2"} Competitor Name
+        %th{:rowspan => "2"} Competitor Exists?
+      %tr
+        %th Minutes
+        %th Seconds
+        %th Thousands
+        %th DQ
+        %th
+        %th Minutes
+        %th Seconds
+        %th Thousands
+        %th DQ
+        %th
+    %tbody
+      = render partial: "two_attempt_entry", collection: @two_attempt_entries
+    %tfoot
+      %tr
+        %td
+        %td{ colspan: 2}= f.select :bib_number, Registrant.select_box_options_to_bib_number, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select js--autoFocus' }
+        %td= f.number_field :minutes_1
+        %td= f.number_field :seconds_1
+        %td= f.number_field :thousands_1
+        %td= f.check_box :dq_1
+        %td
+        %td= f.number_field :minutes_2
+        %td= f.number_field :seconds_2
+        %td= f.number_field :thousands_2
+        %td= f.check_box :dq_2
+        %td{:colspan => "2"}= f.submit "Submit", :class => "multiclick"

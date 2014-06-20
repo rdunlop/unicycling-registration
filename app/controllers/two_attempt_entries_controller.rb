@@ -72,7 +72,6 @@ class TwoAttemptEntriesController < ApplicationController
     @competition ||= @two_attempt_entry.competition
     @user ||= @two_attempt_entry.user
     add_to_competition_breadcrumb(@competition)
-    add_breadcrumb "Import Results", user_competition_import_results_path(@user, @competition)
   end
 end
 

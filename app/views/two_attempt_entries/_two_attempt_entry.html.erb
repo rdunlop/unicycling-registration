@@ -5,12 +5,12 @@
   <td><%= two_attempt_entry.minutes_1 %></td>
   <td><%= two_attempt_entry.seconds_1 %></td>
   <td><%= two_attempt_entry.thousands_1 %></td>
-  <td><%= two_attempt_entry.dq_1 %></td>
+  <td><%= two_attempt_entry.dq_1 ? 'Yes' : '' %></td>
   <td></td>
   <td><%= two_attempt_entry.minutes_2 %></td>
   <td><%= two_attempt_entry.seconds_2 %></td>
   <td><%= two_attempt_entry.thousands_2 %></td>
-  <td><%= two_attempt_entry.dq_2 %></td>
+  <td><%= two_attempt_entry.dq_2 ? 'Yes' : '' %></td>
   <td></td>
   <td><%= two_attempt_entry.registrant_name %></td>
   <% if two_attempt_entry.has_matching_competitor? %>

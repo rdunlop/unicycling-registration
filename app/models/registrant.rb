@@ -113,6 +113,10 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def self.select_box_options_to_bib_number
+    self.active.where(:competitor => true).map{ |reg| [reg.with_id_to_s, reg.bib_number] }
+  end
+
   def self.select_box_options
     self.active.where(:competitor => true).map{ |reg| [reg.with_id_to_s, reg.id] }
   end
