@@ -11,7 +11,7 @@
         - event.competitions.each do |competition|
           %tr
             %td= event
-            %td= link_to competition, competition
+            %td= link_to "Manage #{competition}", competition, class: 'action_button'
   %hr
 
 - unless @judges.empty?
@@ -20,41 +20,45 @@
   %table
     %thead
       %tr
-        %th Event
-        %th Locked?
+        %th Enter Judging Scores for
     %tbody
       - @judges.each do |judge|
         %tr
-          %td= scoring_link(judge)
-          %Td= judge.competition.locked?
+          - if judge.competition.locked?
+            %td= scoring_link(judge, class: 'locked_competition_action')
+          - else
+            %td= scoring_link(judge, class: 'action_button')
   %hr
 
 %h1 Data Entry Menu
+
+- if @judges.any?
+  // hide the data entry by default
+  .js--hiddenToggleMenu.action_button Show Data Entry Menu
 
 - if can? :judging_menu, :welcome
   %p
     %a= link_to "(old link )", welcome_judging_menu_path
 
-Please choose the event that you want to enter data for:
+.data_entry_choices{ class: @judges.any? ? 'js--hiddenToggle' : '' }
+  Please choose the event that you want to enter data for:
 
-%h1 Results Summary
-%table.sortable
-  %thead
-    %tr
-      %th Competition End
-      %th Category
-      %th Event
-      %th Competition
-      %th Status
-  %tbody
-    - Competition.all.each do |competition|
+  %table.sortable
+    %thead
       %tr
-        %td= competition.scheduled_completion_at
-        %td= competition.event.category
-        %td= competition.event
-        %td= link_to competition.name, competition
-        - competition_presenter = CompetitionPresenter.new(competition)
-        %td{ class: competition_presenter.status_code}= competition_presenter.status
-
-%p
-  If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).
+        %th Competition End
+        %th Category
+        %th Event
+        %th Competition
+        %th Status
+    %tbody
+      - Competition.all.each do |competition|
+        %tr
+          %td= competition.scheduled_completion_at
+          %td= competition.event.category
+          %td= competition.event
+          %td= link_to competition.name, competition
+          - competition_presenter = CompetitionPresenter.new(competition)
+          %td{ class: competition_presenter.status_code}= competition_presenter.status
+  %p
+    If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).
