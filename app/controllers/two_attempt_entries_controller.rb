@@ -42,6 +42,10 @@ class TwoAttemptEntriesController < ApplicationController
   def proof
     @is_start_time = !params[:is_start_times].blank?
 
+    add_breadcrumb "Add two-entry data", user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time)
+    add_breadcrumb "Proof"
+
+
     @two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
 
     respond_to do |format|
