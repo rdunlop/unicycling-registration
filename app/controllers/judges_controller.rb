@@ -54,10 +54,10 @@ class JudgesController < ApplicationController
 
     respond_to do |format|
       if @judge.destroy
-        format.html { redirect_to competition_judges_path(ec), notice: "Judge Destroyed" }
+        format.html { redirect_to competition_judges_path(ec), notice: "Judge Deleted" }
         format.json { head :no_content }
       else
-        flash[:alert] = "Unable to destroy judge"
+        flash[:alert] = "Unable to delete judge"
         format.html { redirect_to competition_judges_path(ec) }
         format.json { head :no_content }
       end

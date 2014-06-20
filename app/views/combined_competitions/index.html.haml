@@ -14,7 +14,7 @@
         %td= combined_competition.name
         %td= link_to 'Show', combined_competition
         %td= link_to 'Edit', edit_combined_competition_path(combined_competition)
-        %td= link_to 'Destroy', combined_competition, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Delete', combined_competition, method: :delete, data: { confirm: 'Are you sure?' }
         %td= link_to "Edit Entries", combined_competition_combined_competition_entries_path(combined_competition)
         %td= link_to "View Results", combined_competition_path(combined_competition)
 

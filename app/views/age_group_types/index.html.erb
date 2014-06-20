@@ -17,7 +17,7 @@
         <td><%= age_group_type.name %></td>
         <td><%= link_to 'Entries', age_group_type_path(age_group_type) %></td>
         <td><%= link_to 'Edit', edit_age_group_type_path(age_group_type) %></td>
-        <td><%= link_to 'Destroy', age_group_type_path(age_group_type), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', age_group_type_path(age_group_type), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </table>

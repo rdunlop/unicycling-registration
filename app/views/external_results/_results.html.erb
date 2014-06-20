@@ -28,7 +28,7 @@
         <td><%= external_result.competitor.place_formatted %></td>
         <td><%= external_result.competitor.overall_place_formatted %></td>
         <td><%= link_to 'Edit', edit_external_result_path(external_result) %></td>
-        <td><%= link_to 'Destroy', external_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', external_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

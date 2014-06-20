@@ -14,4 +14,4 @@
     %td= import_result.details
   %td= import_result.disqualified ? "Yes" : ""
   %td= link_to 'Edit', edit_import_result_path(import_result)
-  %td= link_to 'Destroy', import_result, method: :delete, data: { confirm: 'Are you sure?' }
+  %td= link_to 'Delete', import_result, method: :delete, data: { confirm: 'Are you sure?' }

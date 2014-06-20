@@ -26,7 +26,7 @@
         <th><%= event.name %></th>
         <td><%= ec %></td>
         <td><%= link_to 'Edit', edit_competition_path(ec) %></td>
-        <td><%= link_to 'Destroy',  competition_path(ec), :method => :delete, data: { confirm: "Are you sure?" } %></td>
+        <td><%= link_to 'Delete',  competition_path(ec), :method => :delete, data: { confirm: "Are you sure?" } %></td>
 
         <td><%= link_to 'Competitors', competition_competitors_path(ec) %></td>
         <td><%= ec.locked? %>

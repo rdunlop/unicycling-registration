@@ -7,5 +7,5 @@
 
     <td><%= attempt.distance %></td>
     <td><%= attempt.fault ? "yes" : "no" %></td>
-    <td><%= link_to t('Destroy'), distance_attempt_path(attempt.id), data: { confirm: 'Are you sure?' }, method: :delete %></td>
+    <td><%= link_to t('Delete'), distance_attempt_path(attempt.id), data: { confirm: 'Are you sure?' }, method: :delete %></td>
 </tr>

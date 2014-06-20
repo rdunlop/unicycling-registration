@@ -42,7 +42,7 @@
           <td><%= expense_item.maximum_available %></td>
           <td><%= expense_item.maximum_per_registrant %></td>
           <td><%= link_to 'Edit', edit_expense_item_path(expense_item) %></td>
-          <td><%= link_to 'Destroy', expense_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Delete', expense_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>

@@ -56,14 +56,14 @@
         <% end %>
         <td>
             <%= link_to 'Edit', edit_competitor_path(competitor) %>
-            <%= link_to 'Destroy', competitor, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Delete', competitor, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-List of all competitors, including registrant info, with edit/destroy, marking those who have NOT signed up.
+List of all competitors, including registrant info, with edit/delete, marking those who have NOT signed up.
 
 <p>Please choose the registrants that you would like from the following list, and create competitors from those registrants. All registrants should be associated with competitors</p>
 

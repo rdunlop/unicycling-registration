@@ -31,7 +31,7 @@
         %td= result.is_start_time
         %td= result.user
         %td= link_to 'Edit', edit_import_result_path(result)
-        %td= link_to 'Destroy', result, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Delete', result, method: :delete, data: { confirm: 'Are you sure?' }
     - @lane_assignments.each do |assignment|
       - if @import_results.where(lane: assignment.lane).empty?
         %tr

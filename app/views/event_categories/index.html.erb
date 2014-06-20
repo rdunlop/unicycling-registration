@@ -6,7 +6,7 @@
     <tr>
       <th>Name</th>
       <th>Position</th>
-      <th>Allowed Age Range</th>      
+      <th>Allowed Age Range</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,10 +16,10 @@
       <tr>
         <td><%= event_category.name %></td>
         <td><%= event_category.position %></td>
-        <td><%= event_category.age_range_start %>-<%= event_category.age_range_end %></td>        
+        <td><%= event_category.age_range_start %>-<%= event_category.age_range_end %></td>
         <td><%= link_to 'Show', event_category %></td>
         <td><%= link_to 'Edit', edit_event_category_path(event_category) %></td>
-        <td><%= link_to 'Destroy', event_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', event_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </table>
