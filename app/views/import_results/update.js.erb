@@ -10,5 +10,5 @@
 
 
 <% else %>
-  window.location.replace("<%= user_competition_import_results_path(@import_result.user, @import_result.competition) %>")
+  window.location.replace("<%= data_entry_user_competition_import_results_path(@import_result.user, @import_result.competition, is_start_times: @import_result.is_start_time) %>")
 <% end %>

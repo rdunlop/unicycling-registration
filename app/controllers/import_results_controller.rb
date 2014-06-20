@@ -78,7 +78,7 @@ class ImportResultsController < ApplicationController
 
     respond_to do |format|
       if @import_result.update_attributes(import_result_params)
-        format.html { redirect_to user_competition_import_results_path(@import_result.user, @import_result.competition), notice: 'Import result was successfully updated.' }
+        format.html { redirect_to data_entry_user_competition_import_results_path(@import_result.user, @import_result.competition, is_start_times: @import_result.is_start_time), notice: 'Import result was successfully updated.' }
         format.json { head :no_content }
         format.js { }
       else

@@ -1,6 +1,10 @@
 %tr
   %td= import_result.bib_number
   %td= Registrant.find_by_bib_number(import_result.bib_number)
+  - if import_result.competition.find_competitor_with_bib_number(import_result.bib_number)
+    %td.competitor_exists Yes
+  - else
+    %td.competitor_not_exists No
   - if import_result.competition.imports_times
     %td= import_result.minutes
     %td= import_result.seconds
@@ -8,10 +12,6 @@
   - else
     %td= import_result.rank
     %td= import_result.details
-  %td= import_result.disqualified
-  - if import_result.competition.find_competitor_with_bib_number(import_result.bib_number)
-    %td.competitor_exists Yes
-  - else
-    %td.competitor_not_exists No
+  %td= import_result.disqualified ? "Yes" : ""
   %td= link_to 'Edit', edit_import_result_path(import_result)
   %td= link_to 'Destroy', import_result, method: :delete, data: { confirm: 'Are you sure?' }
