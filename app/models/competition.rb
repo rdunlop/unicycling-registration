@@ -105,6 +105,10 @@ class Competition < ActiveRecord::Base
     self.name
   end
 
+  def end_time_to_s
+    scheduled_completion_at.to_formatted_s(:short) if scheduled_completion_at
+  end
+
   def clear_data_types_of_strings
     self.start_data_type = nil if start_data_type == ""
     self.end_data_type = nil if end_data_type == ""

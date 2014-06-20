@@ -1,5 +1,5 @@
 class CombinedCompetitionsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: :show
 
   before_action :set_combined_competition, only: [:show, :edit, :update, :destroy]
 

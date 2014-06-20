@@ -81,6 +81,8 @@
       end
     %>
   <% end %>
+  <%  m.headings << Menu::MenuHeading.new(:title => t('results'), :is_link => true, :url => results_path)
+  %>
   <% m.headings.each do |heading| %>
     <% next unless heading.has_permitted_entry %>
     <% if heading.is_link %>

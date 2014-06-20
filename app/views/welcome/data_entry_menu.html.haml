@@ -54,7 +54,7 @@
     %tbody
       - Competition.all.each do |competition|
         %tr
-          %td= competition.scheduled_completion_at
+          %td= competition.end_time_to_s
           %td= competition.event.category
           %td= competition.event
           %td= link_to competition.name, competition
