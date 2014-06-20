@@ -43,7 +43,9 @@ nav {
   }
   li#sign-out {
     float: right;
+    font-size: 0.8em;
     a {
+      display: inline-block;
       padding-left: 20px;
       padding-right: 20px;
     }

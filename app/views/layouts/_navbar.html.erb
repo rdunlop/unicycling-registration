@@ -97,7 +97,7 @@
   <% end %>
 
   <% unless current_user.nil? %>
-    <li id="sign-out"><%= link_to t('sign_out'), destroy_user_session_path, :method => :delete %></li>
+    <li id="sign-out"><%= link_to "#{current_user} #{t('sign_out')}", destroy_user_session_path, :method => :delete %></li>
   <% end %>
 </ul>
 </nav>
