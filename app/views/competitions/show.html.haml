@@ -8,6 +8,9 @@ Information about the Competition will appear here, including results, judges, a
 - if can? :lock, @competition
   %h2 Director Abilities
 
+  %h3 View Signed-Up Competitors
+  = link_to "Events Report", summary_events_path
+
   %h3 Competitor Management
   %table
     %tr
@@ -17,20 +20,14 @@ Information about the Competition will appear here, including results, judges, a
     %tr.js--highlightMatching
       %td.js--shouldMatch= @competition.signed_up_registrants.count
       %td.js--shouldMatch= @competition.num_assigned_registrants
-      %td= link_to 'Manage Competitors', competition_competitors_path(@competition)
+      %td= link_to 'Manage Competitors', competition_competitors_path(@competition), class: 'action_button'
 
   %hr
-
-  %h2 Judges
-  - if @competition.uses_judges
-    = render partial: "judging_results_summary", locals: {competition: @competition }
-  %br
-  = link_to "Manage Judges/Data-Entry for #{@competition}", competition_judges_path(@competition)
 
 %h2 Data Entry
 
 - if @competition.uses_judges
-  = link_to "Announcer Form", announcer_printing_competition_path(@competition)
+  = link_to "Competitor list", announcer_printing_competition_path(@competition)
   = link_to "(pdf)", announcer_printing_competition_path(@competition, :format => :pdf)
 - else
   %table.sortable
@@ -38,6 +35,13 @@ Information about the Competition will appear here, including results, judges, a
       = render partial: "data_entry_links_header"
     %tbody
       = render partial: "data_entry_links", locals: {competition: @competition }
+
+- if can? :lock, @competition
+  %h2 Judges
+  - if @competition.uses_judges
+    = render partial: "judging_results_summary", locals: {competition: @competition }
+  %br
+  = link_to "Manage Judges/Data-Entry for #{@competition}", competition_judges_path(@competition)
 
 
 - if can? :result, @competition

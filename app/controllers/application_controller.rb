@@ -86,13 +86,11 @@ class ApplicationController < ActionController::Base
   def add_to_competition_breadcrumb(competition)
     event = competition.event
     add_category_breadcrumb(event.category)
-    add_event_breadcrumb(event)
     add_competition_breadcrumb(competition)
   end
 
   def add_to_judge_breadcrumb(judge)
     add_to_competition_breadcrumb(judge.competition)
-    add_breadcrumb "Judges", competition_judges_path(judge.competition)
     add_breadcrumb judge, judge_scores_path(judge)
   end
 

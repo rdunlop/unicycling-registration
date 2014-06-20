@@ -1,14 +1,13 @@
 class Printing::CompetitionsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_competition
   authorize_resource :competition, :parent => false
 
-  before_filter :load_competition
-
-  def load_competition
-    @competition = Competition.find(params[:id])
-  end
+  before_action :set_breadcrumbs, only: [:announcer]
 
   def announcer
+    add_breadcrumb "Competitor List"
+
     respond_to do |format|
       format.html
       format.pdf { render_common_pdf("announcer") }
@@ -61,6 +60,16 @@ class Printing::CompetitionsController < ApplicationController
       format.html
       format.pdf { render_common_pdf(name, "Portrait", attachment) }
     end
+  end
+
+  private
+
+  def load_competition
+    @competition = Competition.find(params[:id])
+  end
+
+  def set_breadcrumbs
+    add_to_competition_breadcrumb(@competition)
   end
 end
 
