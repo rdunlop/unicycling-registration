@@ -1,6 +1,5 @@
 %h1
-  #{@judge.competition} Judging Form
-%h2 #{@judge.judge_type.name} Judge
+  #{@judge.competition}
 
 - if cannot? :create_scores, @judge.competition
   %p.event_locked Scores for this event are now locked (closed)
@@ -13,7 +12,7 @@
   = render :partial => "/shared/error_messages", :object => @score
 
 %table.judging
-  = render :partial => "/scores/judge_header", :object => @judge
+  = render :partial => "/scores/judge_header", :object => @judge.judge_type
   %tbody.js--shouldNotMatchSet
     - @judge.competitors.active.each do |competitor|
       %tr{:id => "competitor#{competitor.id}"}
