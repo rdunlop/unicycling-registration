@@ -189,6 +189,8 @@ describe "Ability" do
       it { should be_able_to(:read, Competitor) }
       it { should_not be_able_to(:sort, @competition) }
       it { should_not be_able_to(:sort_random, @competition) }
+      it { should_not be_able_to(:review_heat, @competition) }
+      it { should_not be_able_to(:approve_heat, @competition) }
 
       describe "when the Competition is locked" do
         before(:each) do

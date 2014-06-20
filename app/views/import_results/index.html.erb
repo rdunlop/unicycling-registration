@@ -9,8 +9,6 @@
   <li><%= link_to "Import CSV", display_csv_user_competition_import_results_path(@user, @competition) %></li>
   <li><%= link_to "Import LIF", display_lif_user_competition_import_results_path(@user, @competition) %></li>
   <li></li>
-  <li><%= link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit" %></li>
-  <li><%= link_to "Remove all Data", destroy_all_user_competition_import_results_path(@user, @competition), method: :delete, data: {confirm: "DELETE, Are you sure?"}, class: "data_import_delete" %></li>
 </ul>
 
 <%= render :partial => "imported_results" %>

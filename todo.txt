@@ -2,7 +2,6 @@ Last Re-Arranged May 24, 2014.
 
 Connie: when should the Overall Champion calculation be updated? Whenever data is entered? approved? published? awarded?
 
-- Display user who is signed in in the corner of the screen
 - Add ability to fix typo in user's name (when assigning data entry volunteers)
 - Build a similar TwoAttemptEntry Review/Approve set (like the Single/ImportResult ones)
 - Ensure that a Judge cannot update their score after the event is Locked.
