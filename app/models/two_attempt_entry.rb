@@ -8,6 +8,7 @@ class TwoAttemptEntry
   attr_accessor :dq_1, :dq_2
 
   validates :bib_number, presence: true
+  validates :minutes_1, :minutes_2, :seconds_1, :seconds_2, :thousands_1, :thousands_2, numericality: {greater_than_or_equal_to: 0}
 
   delegate :find_competitor_with_bib_number, to: :competition
 
@@ -15,6 +16,14 @@ class TwoAttemptEntry
     attributes.each do |name, value|
       send("#{name}=", value)
     end
+  end
+
+  def dq_1=(value)
+    @dq_1 = (value == "1")
+  end
+
+  def dq_2=(value)
+    @dq_2 = (value == "1")
   end
 
   def registrant_name

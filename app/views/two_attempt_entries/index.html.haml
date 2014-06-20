@@ -17,11 +17,11 @@
       %tr
         %th{:rowspan => "2"}
         %th{:rowspan => "2"} Bib Number
+        %th{:rowspan => "2"} Competitor Name
+        %th{:rowspan => "2"} Competitor Exists?
         %th{:rowspan => "2"}
         %th{:colspan => "5"} Attempt #1
         %th{:colspan => "5"} Attempt #2
-        %th{:rowspan => "2"} Competitor Name
-        %th{:rowspan => "2"} Competitor Exists?
       %tr
         %th Minutes
         %th Seconds
@@ -39,13 +39,15 @@
       %tr
         %td
         %td{ colspan: 2}= f.select :bib_number, Registrant.select_box_options_to_bib_number, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select js--autoFocus' }
-        %td= f.number_field :minutes_1
-        %td= f.number_field :seconds_1
-        %td= f.number_field :thousands_1
+        %td
+        %td
+        %td= f.number_field :minutes_1, {:min => 0}
+        %td= f.number_field :seconds_1, {:min => 0}
+        %td= f.number_field :thousands_1, {:min => 0}
         %td= f.check_box :dq_1
         %td
-        %td= f.number_field :minutes_2
-        %td= f.number_field :seconds_2
-        %td= f.number_field :thousands_2
+        %td= f.number_field :minutes_2, {:min => 0}
+        %td= f.number_field :seconds_2, {:min => 0}
+        %td= f.number_field :thousands_2, {:min => 0}
         %td= f.check_box :dq_2
-        %td{:colspan => "2"}= f.submit "Submit", :class => "multiclick"
+        %td= f.submit "Submit", :class => "multiclick"

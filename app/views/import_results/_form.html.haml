@@ -8,6 +8,7 @@
       %tr
         %th ID
         %th Name
+        %th Competitor Exists?
         - if @competition.imports_times
           %th Minutes
           %th Seconds
@@ -16,7 +17,6 @@
           %th Rank (External)
           %th Details (external)
         %th Disqualified
-        %th Competitor Exists?
         %th
         %th
     %tbody
@@ -25,14 +25,15 @@
     %tfoot
       %tr
         %td{ colspan: 2}= f.select :bib_number, Registrant.select_box_options_to_bib_number, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select js--autoFocus' }
+        %td
         - if @competition.imports_times
-          %td= f.number_field :minutes
-          %td= f.number_field :seconds
-          %td= f.number_field :thousands
+          %td= f.number_field :minutes, {:min => 0}
+          %td= f.number_field :seconds, {:min => 0}
+          %td= f.number_field :thousands, {:min => 0}
         - else
-          %td= f.number_field :rank
+          %td= f.number_field :rank, {:min => 0}
           %td= f.text_field :details
         %td= f.select :status, TimeResult.status_values, include_blank: true
-        %td{ colspan: "4"}= f.submit "Submit", :class => "multiclick"
+        %td{ colspan: "3"}= f.submit "Submit", :class => "multiclick"
 
 #notice

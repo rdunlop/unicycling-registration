@@ -26,6 +26,18 @@ describe TwoAttemptEntry do
     end
   end
 
+  describe "disqualified numerics" do
+    it "converts 1 to true" do
+      expect(TwoAttemptEntry.new(dq_1: "1").dq_1).to be_truthy
+      expect(TwoAttemptEntry.new(dq_2: "1").dq_2).to be_truthy
+    end
+
+    it "converts 0 to false" do
+      expect(TwoAttemptEntry.new(dq_1: "0").dq_1).to be_falsy
+      expect(TwoAttemptEntry.new(dq_2: "0").dq_2).to be_falsy
+    end
+  end
+
   describe "creating time_results from TwoAttemptEntry" do
     let(:two_attempt_entry) { TwoAttemptEntry.new(
       user: user,
