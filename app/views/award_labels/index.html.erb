@@ -26,7 +26,7 @@
     <br />
 
     <%= label_tag :minimum_place, "Minimum Award Place" %>
-    <%= number_field_tag :minimum_place %><br />
+    <%= number_field_tag :minimum_place, {min: 0} %><br />
 
     <%= label_tag :maximum_place, "Maximum Award Place" %>
     <%= number_field_tag :maximum_place %><br />

@@ -13,10 +13,10 @@
   .field
     = f.label :heat
     %br
-    = f.number_field :heat
+    = f.number_field :heat, {min: 1}
   .field
     = f.label :lane
     %br
-    = f.number_field :lane
+    = f.number_field :lane, {min: 1}
   .actions
     = f.submit class: "multiclick"

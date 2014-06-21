@@ -32,7 +32,7 @@
       <td><%= f.text_field :team_name %></td>
       <td><%= f.text_field :category %></td>
       <td><%= f.text_field :details %></td>
-      <td><%= f.number_field :place %></td>
+      <td><%= f.number_field :place, {min: 0} %></td>
       <td><%= f.select :registrant_id, Registrant.select_box_options %></td>
       <td><%= f.submit %></td>
     </tbody>

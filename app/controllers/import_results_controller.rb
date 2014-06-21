@@ -3,7 +3,7 @@ class ImportResultsController < ApplicationController
   before_filter :authenticate_user!
   before_action :load_user, except: [:show, :edit, :update, :destroy]
   before_action :load_competition, except: [:show, :edit, :update, :destroy]
-  before_filter :load_new_import_result, :only => [:create]
+  before_action :load_new_import_result, :only => [:create]
   before_action :load_import_results, :only => [:data_entry, :display_csv, :display_lif, :index, :proof_single]
   before_action :load_results_for_competition, only: [:review, :approve]
   before_action :filter_import_results_by_start_times, only: [:proof_single, :data_entry, :review, :approve]
@@ -62,10 +62,11 @@ class ImportResultsController < ApplicationController
 
     respond_to do |format|
       if @import_result.save
-        format.html { redirect_to data_entry_user_competition_import_results_path(@user, @competition), notice: 'Result was successfully created.' }
+        format.html { redirect_to data_entry_user_competition_import_results_path(@user, @competition, is_start_times: @import_result.is_start_time), notice: 'Result was successfully created.' }
         format.js { }
       else
-        @import_results = @user.import_results
+        load_import_results
+        filter_import_results_by_start_times
         format.html { render action: "data_entry" }
         format.js { }
       end

@@ -77,7 +77,6 @@ NAUCC data issues:
 ===== Development Items that MUST be done before we do another run-through/demo
 
 ===== Really Easy & High Imapact
-- Prevent negative numbers in Lane Assignments (through simpleForm?)
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
 - Make it possible/easy for a Director to access the raw data (time_results/external_results) after importing
  - Make this transition of data clearer/better.
