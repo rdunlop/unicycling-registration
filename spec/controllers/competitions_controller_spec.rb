@@ -150,8 +150,8 @@ describe CompetitionsController do
   end
   describe "DELETE lock" do
     it "unlocks the competition" do
-      competition = FactoryGirl.create(:competition, :event => @event, :locked => true)
-      delete :lock, {:id => competition.to_param}
+      competition = FactoryGirl.create(:competition, event: @event, locked: true)
+      delete :unlock, {:id => competition.to_param}
       competition.reload
       competition.locked?.should == false
     end
@@ -159,7 +159,7 @@ describe CompetitionsController do
 
   describe "POST publish" do
     it "publishes the competition results" do
-      competition = FactoryGirl.create(:competition, :event => @event, locked: true)
+      competition = FactoryGirl.create(:competition, event: @event, locked: true)
       post :publish, {:id => competition.to_param}
       competition.reload
       competition.published?.should == true
@@ -167,8 +167,8 @@ describe CompetitionsController do
   end
   describe "DELETE publish" do
     it "un-publishes the competition" do
-      competition = FactoryGirl.create(:competition, :event => @event, :locked => true)
-      delete :publish, {:id => competition.to_param}
+      competition = FactoryGirl.create(:competition, event: @event, locked: true, published: true)
+      delete :unpublish, {:id => competition.to_param}
       competition.reload
       competition.published?.should == false
     end
