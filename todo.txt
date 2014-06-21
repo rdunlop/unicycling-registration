@@ -1,36 +1,174 @@
-Last Re-Arranged May 24, 2014.
+Last Re-Arranged June 20th, 2014.
 
-Connie: when should the Overall Champion calculation be updated? Whenever data is entered? approved? published? awarded?
 
-- enable feature test for two-attempt-entry. (needs JS)
+===== Questions to be answered, by whom
+- Connie/Patricia/Hugo/Benoit - What are the age groups for the events at NAUCC, and at UNICON?
+ - Who should be able to modify the age group entries? (we usually share age groups among competitions...so I don't want to be able to change them once they are in use, right?)
+- Hugo/Benoit/Ptricia - What "Overall Champions" do you want at NAUCC/UNICON, and what calculation would you like used for this? (the rulebook only lists Track)
+- Connie: when should the Overall Champion calculation be updated? Whenever data is entered? approved? published? awarded?
+- Spencer Hotchberg - director of Flatland, please check with him for the scoring/needs of his event, for “Double elimination”.
+ - What e-scoring do you want/need?
+- Should we change the way that the data recording forms are written for NAUCC?
+ - On the Competitors List:
+  - Split it by ID only, then record their 2 times
+  - See the gender of the competition, or split the competitors by gender.
+- Scott, I have some comments/questions about the IUF Rulebook, can I send them your way?
+- Hugo/Benoit: What have you allocated for Awards? Can you send me a breakdown? Will it be medals? what size? for which places for which event? Are you giving out ribbons for Basketball/Hockey B-League? etc etc
+- Freestyle Artistic Director - Are we dealing with "Boundary Scores" anymore? Is this officially gone?
+- Hugo/Benoit (or the specific Director) - What is X-Style, judging-related.
+- Hugo/Benoit: how are you recording Slow Races? Do you have E-Timer for that?
+- Connie/Scott: Rulebook question: can a 0-10 20” racing-categroy competitor win the expert slow… If so, then any competitor (no matter what wheel) can win. Expert will be non-wheel-size.
+- ???? Relay, does 4x100 compete by wheel-size /age group, or against everyone?
+- Scott/Hugo/benoit - UNICON rule: Scott, can we add a rule to Trials for tie-breakers, so that we know that people need to be present for tie-breaking.
+- Patricia/NAUCC-director: Patricia: what is the NAUCC rules for Trials? Hand-vs-not-hands? (how are points calculated?)
+- Hugo/Benoit - Are they running Standard Skill without Data?
+- Huge/Benoit/Scott/Patricia/Mary - What is the value - Online system which allows the public to see the Competitor List for each event.
+- Patricia - Enable/Promote the "Submit your music" system?
 
-- insteall simple_form_for (for two-attempt-entry form, to help with error reporting?)
+- Kathleen (on monday):
+ - How should the Lane Assignments screen behave?
+  - Should it only show "Competitors" in one box, and "non-signed up" in another?
+  - How should it behave for "Final Heat" events (100m Expert)?
 
-- Add ability to fix typo in user's name (when assigning data entry volunteers)
-- Build a similar TwoAttemptEntry Review/Approve set (like the Single/ImportResult ones)
+Connie: How does the "Overall Track" calculation work when there is a Tie? (ie: tie for 1st, do both get 8 points, or do they split 8+6=14, thus 7 points each)
+
+
+===== Development Items that MUST be done before we do another run-through/demo
+- Able to enter results for multiple competitions at once (10k Standard and 10k Unlimited).
+- Able to Edit/Update Two-Attempt Entry
+- Have a way to publish results for a single Age group (for 100m, for example), while the competition itself continues to run.
+  - When publishing 100m results, have a different PDF for each age group, “50+ Female”
+  - So, only publish the “Per Event” PDF after the event is over, but have “50+ “ and “40+ “ separately while the event is running.
+  - Change the “Competition Status” to be less granular…perhaps “Unstarted, Started, and Completed”.
+  - When publishing the 100m results by age group, also have the ability to see the results overall (without age groups)
+ - Determine who will be doing the 100m Review/Publish datastep
+ - When/how do we publish 100m results?
+ - Able to assign "Track Data Importer" role
+
+- Able to Do High/Long with the design changes as per conversation with Mary
+- Able to assign "High/Long" data importer role (????already done via a judge?)
+  - and prevent them from adding scores after the event is "locked"
 - Ensure that a Judge cannot update their score after the event is Locked.
-- Create new role for high/long judging, and prevent them from adding scores after the event is "locked"
 
-- All Judges must also be data entry volunteers.
+- Make it impossible for more import results to be entered once an event has been locked also.
+- Make it possible/easy for a Director to access the raw data (time_results/external_results) after importing
+ - Make this transition of data clearer/better.
+- Excel export of Competitior lists, for Hugo/E-Timer People ((nom, prenom, sexe, categorie, dossard))
+ - Also have the "Event Report" be exported in Excel format
+- Migrate the Judging Types to include the new ranges as per the new rulebook.
 
- - "do you see too much data? "(overly permitted?)
-- can a sinlge user do import for mulitple competitions and not have them overlap in the database if they are both un-imported?
-- Who should be able to "proof" imported data? (director only?)
-- Use Carrierwave in a private bucket for PDFs (with expiring keys ?)
 
+===== Configuration items
+- Configure all competitinos for UNICON, including assigning directors to events, and sending them welcome e-mails asking them to begin assigning registrants to competitions.
+ - Ask them also for the breakdowns of their competitions (as applicable)
+
+===== Development Items that must be done for UNICON, but NOT NAUCC
+- Add a way to display the overall places for 100m on the Results page (to help people identify the "Finalists")
+- Test the use of HTML5 forms in other browsers
+  - When trying to type a long number in the seconds column, it would silently not allow me to submit.
+ - Install a set of fallbacks?
+ - Install something which does autoprefixing/etc?
+- Improve the Excel Data import functions
+- Improve the performance of the site:
+ - CompetitionsController#result
+ - WelcomeController#data_entry_menu
+ - CompetitionsController#show
+ - Printing::CompetitionsController#single_attempt_recording (CompetitionSignUp)
+- Improve the styling of the Single Data Entry PDF:
+ - Single Data entry PDF is 3 lines onto page #2.
+ - Should we make it a long PDF with multiple pages.
+ - Maybe make it number of competitors x2.
+ - And put the Header on every page.
+- Allow Pre-Assigning Heats for Competitions easily
+ - Perhaps a view of exported data for the signed-up competitors would be sufficient?
+- Add the "DNS" and "DNF" states to a competitor, and to import_results.
+- In Group Competitior, it would be nice to have “number of people in group” (when displaying)
+
+
+====== Nice to have
+- Ensure that competitors who are not coming (deleted) are not showing up anymore.
+- Online system which allows the public to see the Competitor List for each event.
+- Per Registrant Results pages.
+(email) Notify certain people whenever an event has been approved/locked.
+- Change the SCSS include layout so that I can start building common styling elements, like @work.
+- Add a "Refresh" button to every page (which just reloads the page)
+- Look at using Turbolinks?
+ - Use Carrierwave in a private bucket for PDFs (with expiring keys ?)
+- Build a similar TwoAttemptEntry Review/Approve set (like the Single/ImportResult ones)
+- enable feature test for two-attempt-entry. (needs JS)
+- insteall simple_form_for (for two-attempt-entry form, to help with error reporting?)
+- Improve the styling of the "Manage Competitors" page:
+ - The “Manage Competitors” page has too many words.
+ - In a group, the members of the group should be on separate lines each.
+ - Name of the group should be in bold.
+ - Same thing with country.
+ - “Create/Sort Competitors” should be more obvious.
+ - the "All"/"none" choices should not re-sort the list.
+- Would it be possible to sort in HTML and Then export to PDF.
+- Move the "PDF" link to be inside the HTML form on all pages, instead of next to the HTML pageview link.
+- When publishing results, warn if there is missing data (what constitutes missing data?, but allow Admins to publish the results anyways (though other roles need to fix the data).
+- Group Freestyle (and other non-age-group-having competitions): “Age Group" column is unnecessary
+
+====== Other (not necessary in any way)
+- Add ability to fix typo in user's name (when assigning data entry volunteers)
 - Fix TravisCI
  - upgrade ruby.
 
-- Add a way to display the "eligible competitors" for 100m Expert (just use the "overall_place" results?)
-- Determine who will be doing the 100m Review/Publish datastep
-- When/how do we publish 100m results?
-- How should the Lane ASsignments screen behave?
- - Should it only show "Competitors" in one box, and "non-signed up" in another?
- - How should it behave for "Final Heat" events (100m Expert)?
-- Fix the ordering of import_results to always be :id (so that it odesn't shift around)
-- fix too-long formatting of pdf printing pages (recording forms)
+======= Other Comments/thoughts
+- Why make the HTML version available, always make it PDF.
 
-Connie: How does the "Overall Track" calculation work when there is a Tie? (ie: tie for 1st, do both get 8 points, or do they split 8+6=14, thus 7 points each)
+
+
+==========================================================
+Rulebook Comments (after having read through it once)
+==========================================================
+What is the way in which the High/Long competition will be run?
+Connie has ideas about the “most efficient” way of running it. Who is the director, and how do they think it should be run?
+
+Scott: section 4.6 Age Groups (Muni)
+There are the age groups that must be used for Muni? (it seems to indicate this by saying "The following age groups are the maximum allowable for muni competitions:”
+
+
+Section 5.7 Announcing of Results (Freestyle)
+This seems to say that we are required to continuously announce the results of the judging. We have always restricted this information until after the awards. Is this still planned to be done?
+
+Scetion 5.23 Individual Freestyle - Technical Score
+Should "The Technical part of the judging is broken into four parts” be “three parts”?
+
+
+5.25.1 Pairs Freestyle: Quantity of Unicycling Skills and Transitions
+
+This section feels like it needs some grammatical correction.
+
+
+
+
+
+===========================================================
+Behaviour comments abotu Data Entry:
+===========================================================
+When doing data entry, adding data:
+Only seeing the first set of data when there is more than 2 data entries for the same person.
+The “search” box is being cut off because the footer is overlapping.
+Single data entry, can we put the error box near the submit instead of the top.
+When an error occurs, put the focus on the first box that is missing.
+The error shouldn’t “or rank” because it doesn’t exist here
+Don’t allow tab to the competition rulebook.
+When there is double-entry it should be highlighted.
+
+======================================================================================================================
+======================================================================================================================
+======================================================================================================================
+======================================================================================================================
+======================================================================================================================
+======================================================================================================================
+
+
+
+========================================
+- Fix the ordering of import_results to always be :id (so that it odesn't shift around)
+
+
 
 NAUCC data issues:
 - Basketball/Hockey - Ranked competitions Without Age Groups? (should be able to calculate ranked without age group?)
