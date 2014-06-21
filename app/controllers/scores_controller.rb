@@ -30,6 +30,7 @@ class ScoresController < ApplicationController
         format.html
     end
   end
+
   # POST /judges/1/competitors/2/scores
   def create
     authorize! :create_scores, @competitor.competition

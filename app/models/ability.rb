@@ -119,8 +119,11 @@ class Ability
 
     can :create_race_official, :permission
 
-    can :manage, Judge do |judge|
+    can [:crud, :copy_judges], Judge do |judge|
       (judge.scores.count == 0) && (director_of_competition(user, judge.competition))
+    end
+    can [:read], Judge do |judge|
+      (director_of_competition(user, judge.competition))
     end
   end
 

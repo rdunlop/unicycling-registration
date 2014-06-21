@@ -271,6 +271,8 @@ describe "Ability" do
       end
       it { should be_able_to(:destroy, @judge) }
       it { should be_able_to(:create, Judge) }
+      it { should be_able_to(:show, @judge) }
+      it { should be_able_to(:read, Score) }
 
       describe "When the judge has a score" do
         before :each do
@@ -278,6 +280,7 @@ describe "Ability" do
         end
 
         it { should_not be_able_to(:destroy, @judge) }
+        it { should be_able_to(:show, @judge) }
       end
     end
   end
