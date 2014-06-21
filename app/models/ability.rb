@@ -71,7 +71,7 @@ class Ability
 
     # :read is main director menu-page
     # :results is for printing
-    can [:read, :results, :sign_ups], Event do |ev|
+    can [:results, :sign_ups], Event do |ev|
       user.has_role? :director, ev
     end
 =begin

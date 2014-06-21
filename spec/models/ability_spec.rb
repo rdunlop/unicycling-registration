@@ -258,6 +258,7 @@ describe "Ability" do
     end
 
     it { should be_able_to(:read, @competition) }
+    it { should_not be_able_to(:read, @competition.event) }
     it { should be_able_to(:export_scores, @competition) }
     it { should_not be_able_to(:edit, @competition) }
     it { should be_able_to(:create, DataEntryVolunteer) }

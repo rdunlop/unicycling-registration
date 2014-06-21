@@ -81,7 +81,6 @@ class EventCategoriesController < ApplicationController
 
   def sign_ups
     add_category_breadcrumb(@event_category.event.category)
-    add_event_breadcrumb(@event_category.event)
     add_breadcrumb "#{@event_category} Sign-Ups"
 
     respond_to do |format|

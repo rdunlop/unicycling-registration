@@ -215,7 +215,6 @@ class CompetitionsController < ApplicationController
   def set_parent_breadcrumbs
     @event ||= @competition.event
     add_category_breadcrumb(@event.category)
-    add_event_breadcrumb(@event)
   end
 
   def load_competition
