@@ -1,5 +1,0 @@
-<%= form_for :copy_judges, :url=> copy_judges_competition_judges_path(@competition) do |f| -%>
-  <%= f.label :competition_id %>
-  <%= f.select :competition_id, @competitions_with_judges.map{|e| [e, e.id]} -%>
-  <%= f.submit 'Submit' %>
-<% end %>
