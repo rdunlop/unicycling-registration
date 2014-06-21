@@ -17,8 +17,4 @@ module EventsHelper
             "please update the scoring_link function (#{judge.competition.event_class})"
         end
     end
-
-    def results_url(competition)
-      competition.scoring_helper.results_path
-    end
 end

@@ -66,7 +66,7 @@ class CompetitionsController < ApplicationController
       end
     end
     respond_to do |format|
-      format.html { redirect_to results_url(@competition), notice: "#{n} records deleted. #{err} errors" }
+      format.html { redirect_to result_competition_path(@competition), notice: "#{n} records deleted. #{err} errors" }
     end
   end
 
@@ -101,7 +101,7 @@ class CompetitionsController < ApplicationController
 
   def set_places
     @competition.scoring_helper.place_all
-    redirect_to @competition.scoring_helper.results_path, :notice => "All Places updated"
+    redirect_to result_competition_path(@competition), :notice => "All Places updated"
   end
 
   def result

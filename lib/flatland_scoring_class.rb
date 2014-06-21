@@ -44,11 +44,6 @@ class FlatlandScoringClass < BaseScoringClass
     nil
   end
 
-  # the page where all of the results for this competition are listed
-  def results_path
-    nil
-  end
-
   def uses_judges
     true
   end
