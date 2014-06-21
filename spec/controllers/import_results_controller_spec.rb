@@ -90,7 +90,7 @@ describe ImportResultsController do
 
       it "redirects to the import_result" do
         put :update, {:id => import_result.to_param, :import_result => valid_attributes}
-        response.should redirect_to(user_competition_import_results_path(@admin_user, @competition))
+        response.should redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition, is_start_times: import_result.is_start_time))
       end
     end
 
