@@ -1,0 +1,33 @@
+%h1 Results for #{@competition}
+
+- if can? :set_places, @competition
+  = link_to "Set Places", set_places_competition_path(@competition), method: :post, data: { confirm: "This may take a few seconds" }
+- if can? :destroy_results, @competition
+  = link_to "Delete All", destroy_results_competition_path(@competition), method: :delete, :class => "results_delete", data: { :confirm => "This will DELETE all data supporting these results. Are you sure?" }
+
+%table.sortable
+  %thead
+    %tr
+      %th{:colspan => "2"} Registrant
+      %th{:colspan => "2"} Time
+      %td
+      %td{:colspan => "2"}
+    %tr
+      %th ID
+      %th Name
+      %th Result
+      %th Disqualified
+      %th Age Group
+      %th Place
+      %th Overall Place
+  %tbody
+    - @competition.competitors.each do |comp|
+      - next unless comp.has_result?
+      %tr
+        %td= comp.bib_number
+        %td= comp
+        %td= comp.result
+        %td= comp.disqualified
+        %td= comp.age_group_entry_description
+        %td= comp.place_formatted
+        %td= comp.overall_place_formatted

@@ -103,7 +103,7 @@ class Ability
       user.has_role? :director, comp.event
     end
 
-    can [:set_places, :sort, :sort_random, :lock], Competition do |comp|
+    can [:sort, :sort_random, :lock], Competition do |comp|
       director_of_competition(user, comp)
     end
 
