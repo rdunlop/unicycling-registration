@@ -3,7 +3,6 @@
   %hr
   - @judge_types.each do |judge_type|
     .judge_type_summary
-      %h2= judge_type
       = render partial: "judge_type_summary", locals: {judge_type: judge_type, judges: @judges.where(judge_type: judge_type) }
   %h3 Add judges
   = render partial: "/shared/error_messages", object: @judge
