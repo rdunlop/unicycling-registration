@@ -237,7 +237,6 @@ describe "Ability" do
     subject { @ability = Ability.new(@user) }
 
     describe "when the event is unlocked" do
-      it { should be_able_to(:set_places, @competition) }
       it { should be_able_to(:sort, @competition) }
       it { should be_able_to(:sort_random, @competition) }
       it { should be_able_to(:lock, @competition) }
@@ -249,7 +248,6 @@ describe "Ability" do
       before :each do
         @competition.update_attribute(:locked, true)
       end
-      it { should_not be_able_to(:set_places, @competition) }
       it { should_not be_able_to(:sort, @competition) }
       it { should_not be_able_to(:sort_random, @competition) }
       it { should_not be_able_to(:lock, @competition) }
@@ -262,8 +260,13 @@ describe "Ability" do
     it { should be_able_to(:export_scores, @competition) }
     it { should_not be_able_to(:edit, @competition) }
     it { should be_able_to(:create, DataEntryVolunteer) }
+    it { should be_able_to(:summary, Event) }
 
-    it { should be_able_to(:sign_ups, @event_category) }
+    describe "with an event not under my direct direction" do
+      let(:other_event_category) { FactoryGirl.create(:event).event_categories.first }
+      it { should be_able_to(:sign_ups, other_event_category) }
+    end
+
     it { should be_able_to(:create_race_official, :permission) }
 
     describe "with an associated judge to my event" do
