@@ -1,7 +1,12 @@
 %h1= @combined_competition.name
 
+.js--hiddenToggleMenu= "Show Calculation Details"
+.js--hiddenToggle
+  - @combined_competition_entries = @combined_competition.combined_competition_entries
+  = render partial: "points_breakdown"
+
 .combined_competition_results
   .combined_competition_results__male
-    = render :partial => "new_results", :locals => {results: CombinedCompetitionResult.new(@combined_competition, "Male") }
+    = render partial: "new_results", locals: {results: CombinedCompetitionResult.new(@combined_competition, "Male") }
   .combined_competition_results__female
-    = render :partial => "new_results", :locals => {results: CombinedCompetitionResult.new(@combined_competition, "Female") }
+    = render partial: "new_results", locals: {results: CombinedCompetitionResult.new(@combined_competition, "Female") }

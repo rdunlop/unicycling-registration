@@ -1,0 +1,12 @@
+%table
+  %thead
+    %tr
+      %th Place
+      - @combined_competition_entries.each do |cc|
+        %th= cc
+  %tbody
+    - for place in 1..10
+      %tr
+        %th= place
+        - @combined_competition_entries.each do |cc|
+          %td= cc.send("points_#{place}")

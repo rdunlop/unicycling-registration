@@ -1,35 +1,25 @@
 <h1>Listing Entries for <%= @combined_competition %></h1>
 
+<%= render partial: "/combined_competitions/points_breakdown" %>
+<hr>
+
+<h3>Manage Entries</h3>
 <table>
   <thead>
     <tr>
-      <th>Place</th>
-      <% @combined_competition_entries.each do |cc| %>
-        <th><%= cc %></th>
-      <% end %>
+      <th>Entry Set</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <% for place in 1..10 %>
+    <% @combined_competition_entries.each do |cc| %>
       <tr>
-        <th><%= place %></th>
-        <% @combined_competition_entries.each do |cc| %>
-          <td><%= cc.send("points_#{place}") %></td>
-        <% end %>
+        <th><%= cc %></th>
+        <td><%= link_to 'Edit', edit_combined_competition_combined_competition_entry_path(@combined_competition, cc) %></td>
+        <td><%= link_to 'Delete', [@combined_competition, cc], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-    <tr>
-      <th>Edit?</th>
-      <% @combined_competition_entries.each do |cc| %>
-        <td><%= link_to 'Edit', edit_combined_competition_combined_competition_entry_path(@combined_competition, cc) %></td>
-      <% end %>
-    </tr>
-    <tr>
-      <th>Delete</th>
-      <% @combined_competition_entries.each do |cc| %>
-        <td><%= link_to 'Delete', [@combined_competition, cc], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-    </tr>
   </tbody>
 </table>
 
