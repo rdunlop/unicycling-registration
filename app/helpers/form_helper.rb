@@ -10,4 +10,16 @@ module FormHelper
     #user/tmp/clean-controllers.md.html
     registrant_group
   end
+
+  def registrant_bib_number_select_box(form, competition)
+    form.select :bib_number, eligible_registrants(competition), {:include_blank => true}, {:autofocus => true, class: 'chosen-select js--autoFocus' }
+  end
+
+  def eligible_registrants(competition)
+    if @config.usa?
+      Registrant.select_box_options_to_bib_number
+    else
+      @competition.registrants.reorder(:bib_number).map{ |reg| [reg.with_id_to_s, reg.bib_number] }
+    end
+  end
 end
