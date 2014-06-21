@@ -5,6 +5,8 @@ class EventCategoriesController < ApplicationController
   before_filter :load_event, :only => [:index, :create]
   before_filter :load_event_category, :only => [:sign_ups]
 
+  before_action :set_breadcrumb, only: [:sign_ups]
+
   respond_to :html
 
   def load_event
@@ -80,7 +82,6 @@ class EventCategoriesController < ApplicationController
   end
 
   def sign_ups
-    add_category_breadcrumb(@event_category.event.category)
     add_breadcrumb "#{@event_category} Sign-Ups"
 
     respond_to do |format|
@@ -92,6 +93,10 @@ class EventCategoriesController < ApplicationController
   private
   def event_category_params
     params.require(:event_category).permit(:name, :position, :age_group_type_id, :age_range_start, :age_range_end)
+  end
+
+  def set_breadcrumb
+    add_breadcrumb "Events Report", summary_events_path
   end
 end
 

@@ -4,6 +4,8 @@ class EventsController < ApplicationController
   before_filter :load_new_event, :only => [:create]
   load_and_authorize_resource
 
+  before_action :set_breadcrumb, only: [:summary]
+
   respond_to :html
 
   # GET /events
@@ -122,4 +124,7 @@ class EventsController < ApplicationController
     @event = @category.events.build(event_params)
   end
 
+  def set_breadcrumb
+    add_breadcrumb "Events Report"
+  end
 end

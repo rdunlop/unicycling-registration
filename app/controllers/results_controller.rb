@@ -4,6 +4,8 @@ class ResultsController < ApplicationController
   #authorize_resource class: false
 
   def index
+    add_breadcrumb "Results"
+
     respond_to do |format|
       format.html
     end
