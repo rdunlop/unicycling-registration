@@ -20,6 +20,7 @@
 #  published_results_file  :string(255)
 #  award_title_name        :string(255)
 #  award_subtitle_name     :string(255)
+#  published_date          :datetime
 #
 # Indexes
 #
@@ -107,6 +108,10 @@ class Competition < ActiveRecord::Base
 
   def end_time_to_s
     scheduled_completion_at.to_formatted_s(:short) if scheduled_completion_at
+  end
+
+  def published_date_to_s
+    published_date.to_formatted_s(:short) if published_date
   end
 
   def clear_data_types_of_strings

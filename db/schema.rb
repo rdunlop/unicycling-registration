@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618005556) do
+ActiveRecord::Schema.define(version: 20140621001221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20140618005556) do
     t.string   "published_results_file"
     t.string   "award_title_name"
     t.string   "award_subtitle_name"
+    t.datetime "published_date"
   end
 
   add_index "competitions", ["event_id"], name: "index_competitions_event_id", using: :btree

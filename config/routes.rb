@@ -282,9 +282,9 @@ Workspace::Application.routes.draw do
         get :result
 
         post :lock
-        delete :lock
+        delete :lock, to: 'competitions#unlock'
         post :publish
-        delete :publish
+        delete :publish, to: 'competitions#unpublish'
         post :award
         delete :award
         delete :destroy_results

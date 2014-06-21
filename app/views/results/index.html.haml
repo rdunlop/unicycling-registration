@@ -7,6 +7,7 @@
       %th
       //%th Status
       %th Results
+      %th Date Published
   %tbody
     - Competition.all.each do |competition|
       %tr
@@ -16,6 +17,7 @@
         - competition_presenter = CompetitionPresenter.new(competition)
         //%td{ class: competition_presenter.status_code}= competition_presenter.status
         %td= link_to_if(competition.published?, "Results", competition.published_results_file_url) { 'Not yet' }
+        %td= competition.published_date_to_s
 
 %p
   Results are not guaranteed to be published quickly. We will publish them as soon as reasonable and with the permission/direction of the event organizers.

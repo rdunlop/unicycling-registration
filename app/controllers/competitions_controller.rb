@@ -4,6 +4,7 @@ class CompetitionsController < ApplicationController
   include EventsHelper
   before_filter :authenticate_user!
   before_filter :load_new_competition, :only => [:create]
+  before_filter :load_competition, except: [:create, :new]
 
   before_filter :load_event, :only => [:create, :new]
 
@@ -29,7 +30,7 @@ class CompetitionsController < ApplicationController
     add_breadcrumb "#{@competition}"
   end
 
-  # POST /events/#/create
+  # POST /competitions/#/create
   def create
 
     if @competition.save
@@ -142,40 +143,49 @@ class CompetitionsController < ApplicationController
   end
 
   def lock
-    if request.post?
-      @competition.locked = true
-    elsif request.delete?
-      @competition.locked = false
-    end
-
     respond_to do |format|
-      if @competition.save
-        format.html { redirect_to @competition, notice: 'Updated lock status' }
+      if CompetitionStateMachine.new(@competition).lock
+        format.html { redirect_to @competition, notice: 'Locked Competition' }
       else
-        format.html { redirect_to @competition, alert: 'Unable to update lock status' }
+        format.html { redirect_to @competition, alert: 'Unable to lock competition' }
+      end
+    end
+  end
+
+  def unlock
+    respond_to do |format|
+      if CompetitionStateMachine.new(@competition).unlock
+        format.html { redirect_to @competition, notice: 'UnLocked Competition' }
+      else
+        format.html { redirect_to @competition, alert: 'Unable to unlock competition' }
       end
     end
   end
 
   def publish
-    creator = CreatesCompetitionResultsPdf.new(@competition)
-
-    if request.post?
-      creator.publish!
-      @competition.published = true
-    elsif request.delete?
-      creator.unpublish!
-      @competition.published = false
-    end
+    publisher = CompetitionStateMachine.new(@competition)
 
     respond_to do |format|
-      if @competition.save
-        format.html { redirect_to @competition, notice: 'Updated publish status' }
+      if publisher.publish
+        format.html { redirect_to @competition, notice: 'Published Competition' }
       else
-        format.html { redirect_to @competition, alert: 'Unable to update publish status' }
+        format.html { redirect_to @competition, alert: 'Unable to publish competition' }
       end
     end
   end
+
+  def unpublish
+    publisher = CompetitionStateMachine.new(@competition)
+
+    respond_to do |format|
+      if publisher.unpublish
+        format.html { redirect_to @competition, notice: 'Unpublished Competition' }
+      else
+        format.html { redirect_to @competition, alert: 'Unable to unpublish Competition' }
+      end
+    end
+  end
+
 
   def award
     if request.post?
@@ -206,6 +216,10 @@ class CompetitionsController < ApplicationController
     @event ||= @competition.event
     add_category_breadcrumb(@event.category)
     add_event_breadcrumb(@event)
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:id])
   end
 
   def load_new_competition
