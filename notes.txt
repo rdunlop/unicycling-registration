@@ -1,11 +1,9 @@
 
 Notes from May 24,2014 with Connie:
 
-Have pre-filled options for the DQ Comment.
-
 BBall - Competitior List, Asssign Reg-> Comp, print Comp List with members, Enter Ranked places, Approved Entered data, Lock event, Post Data, Print Awards, Print Labels, Mark Labels done.
 
-Individual - Show by Age Group, Age Group Management (needs love), randomize competitor order, manual competitor re-order, Add/Manage judges, list/print judges, mark comptitor as no-show, olck results, awards print, awards labels, awards done, post
+Individual - Show by Age Group, Age Group Management (needs love), randomize competitor order, manual competitor re-order, Add/Manage judges, list/print judges,  olck results, awards print, awards labels, awards done, post
 
 Pairs/Group, same as above, with 2-medals occurring
 
@@ -20,26 +18,12 @@ MUni CC-Beginner - Manage Age Groups, Post Competitors by Age Group, Enter start
 === below this line is PRE-may-24-2014.
 - Adjust the Advanced XC data by 2 minutes (they started later.
 
-- Who gets expert T-Shirts?
- - Pick the events that qualify for an expert t-shirt
-  - Determine who came in top-3, and then combine all of these people into a list.
-  - List the shirt-size for each of these competitors.
-  - Allow adding another competition if there are still shirts/etc.
-
-WHAT WENT POORLY:
-- Printing of reports
-- Need an Excel Import that is Connie Friendly
-
-
 POST-NAUCC2013 Report/Requests:
 
 - Personalized Schedule, Page 2 of the registration package
  - Awesome feature: include the full convention schedule, highlighting the events that the registrant is signed up for.
  - Includes all competition events, and ONLY competition events.
 
- - I want to have a "Publish to Website" button for each competition results.
-  - To be used/synchronized on a nightly basis.
-   - Connie: automagically? Make it simple to publish the results to the website.
  - Make PDFs of the results available for PUBLIC consumption.
   - Make personalized results pages available for each competitor.
 
@@ -49,68 +33,14 @@ POST-NAUCC2013 Report/Requests:
   - Distance: Each event has X points for 1st through 10th. Ties are resolved by number of 1sts, 2nds, thirds, fourths, fifths, then by Marthon.
   - Be able to publish the resuts of the calculation during the week (before all the events have been competed).
 
- - Have a page which lists the events, according to the schedule, and whether the data has been entered, posted, published, awarded.
-  - Should be at the Competition Level.
-  - Show the events that have been competed, but not completed should be highlighted.
-
-- Allow the Event Director to upload their own data (Trials, Street, Flat, etc)
-
-- Allow Concurrent-Heat data entry (enter the heat number and start time, and then the competitor numbers for that start time).
- - Allows entering the finish data directly.
-
-- Be able to enter the 2 results for the MUni Uphill, which will be able to show the better attempt
- - Should be able to enter the start time separately from the end time (for MUNi Uphill), or via heats (Crit Standard)
- - May be able to configure this to be a special case for Obstacle, MUNi Up/down, Long/High, etc.
-
-- Make Startlist generation less manual
- - Some way of creating next heats based on previously-raced events.
-
-- 100m Expert Race should be populated by the 100m Top finishers
- - Include a Report which shows the way that experts are positioned on the track
-
-- Have a tablet at the start time which shows the HEAT number, Age Group, Event, Competitors (Large ID, Large First, (small Last))
- - Be able to enter DQ entries (for 1ft, for example).
-- Have the person sitting with The Electronic Timer (at track) be communicating with the Photo-timer person to ensure that Finish times, Lanes, and DQ's are recorded properly).
-
-- Specify that an event is a "Multi-registrant Event" which means that administrators can pre-associate multiple registrants together into a single "group"
- - Useful for Pairs, Group, Club, Hockey, BBall, Relay.
- -- Have the ability to pre-associate people to the groups, so that when createing the competitors list, it has data to pull from.
-
-
- ** Calculation of the Experts cannot use results which are in the 20"or 16" category.
-
- * User must choose their wheel size for ALL track events (points races) (100m, 400m, 800m, Obstacle, 1ft, WW)
-
-
 - Improve the flow of the High/Long recordincg, to better match the way that they run the event.
-- Multi-lap calculations should possible.
 - DNF should be possible.
-
-- Have the data entry for separetly-timed events by done in UDA. (MUNI Uphill for example).
- - START TIME:  Enter ID, hour, minutes, seconds, hour (2), Minute(2), second(2). (Don't want to have to enter the ID twice).
- - FINISH TIME: Enter ID, hour, minutes, seconds.
-- Entering data directly into UDA needs to be less cumbersome.
- - Right now, it's not at all like Excel.
 
  THINGS to fix:
  - Give people 4 safety pins.
  UPS Backups for the Router.
- - Major and Minor faults are counted by 2 people and averaged, and then those scores are used by all of the judegs.
 
-- Need a better system to deal with incoming data, processed data.
 =================================
-
-- Add ability to add competitors from multiple event_categories to a single competition (or allow adding them later, one at a time)
-
-- Move the time_trials Results to be shown by Competition, and the "set_places"
- - Fail the import if any rows are not-parsable?
- - Fail the import if any of the resulting data is invalid?
-
-- Why can't I import the 10kStandard.csv (file format issues?)
-- Link to the Time Results (view) page (/time_results/index?)
-- Link To the Time Results Import Page
-- Link to the "Set Places" page
-
 
 Connie Wants:
 - Registration system which tracks when someone has picked up their registration package?
@@ -120,141 +50,18 @@ Connie Wants:
 - Mark people who have not paid as special (perhaps by adjusting their name?)
  - On the Race Sign up forms, indicate that these people are not likely to show up.....maybe don't put them on the list until they are paid too.
  - Not even on the "eligible" list for race sign-ups.
-- Clarify the fact that the Competition people are RANDOMIZED
 
-July Questions:
-- Do I need to have event_classes: Track, Standard Skill? (I'm currently not setting the Standard Skill one, and I am using "Two Attempt distance for the other one").
-
-
-TO DO (MUST be done BEFORE LIVE):
-- Add ability to show the registrants "Signed up" for an Event (eg: Individual Ferestyl, Male, 15+)
- - Add ability to "Reorder Competitors" (which will create a Competitor object and set the Position.
-
-- Make the "shared registrant" banner disappear (or de-highlight) when accepted
-- Prevent users from saving a payment in progress over the boundary?
-
- - Should I titlize the names of the registrants?
- - add unique constraints on database level?
-  - when using unicorn to serve multiple people at once, what do I need to consider?
-  - require shared
-  - require friend
- - Use nesting in scss to combine things that have common parents
- - Remove all json responds to, except where I need it. (and remove all respond_to blocks).
- - Make more events AJAX instead of refresh the page.
- - Use "div_for" instead of writing div id's by hand.
-  - For Standard Skill?
-  - For Expenses?
-
- - use delegate to get rid of law-of-demeter violations (allow_nil?)
-
- - Restrict Final heat candidates to 24" wheel size. (via query?)
  - Default sort order for AgeGroupEntry.
- - Ability to copy one gender to another gender
-  - Ability to "Create both" at the same time ,instead?
-  - Prevent one gender's results from affecting another gender's?
- - Cache the age of the registrant
- - Add in-place eding of tables (like the Registration Periods entries?)
- - Add a scope for signed_up registrant_event_sign_ups (to get rid of the "if category is nil"
- - Create ability to invite people for clubs admin
- - Restrict permsissions of "admin" user to ????
- - Add tests for the club-admin (or whatever it becomes) flows
- - Add ability for admin user to see/create new payments (but not delete?)
- - Add tests which ensure that the layout/application is working correctly (was broken when not signed in)
-
-- mixpanel revenue?
- - Improve the "success" page (http://reg.uninationals2013.com/payments/success?tx=8PY73818JH738005M&st=Completed&amt=120.00&cc=USD&cm=&item_number=)
-- Add Administrative Options similar to what we had on the old registration site:
-
- - PayPal
-  - Prevent people from starting a payment, and then finishing it months later for cheap.
- - Prevent changing a payment's contents after it is _paid_
- - Make a note that the Name/Country is listed for all registrants to see.
- - Try it with different browsers
-
-TO DO (MUST be done SOON after LIVE (if not before)):
- - Follow hugo's example for configuration blocks.
- - Ensure that payments from the previous payment period are stored properly during movement
- - Export/Import functions for the WHOLE dataset?
- - Payments page which lists all Unpaid Registrations (and e-mail contact info?)
- - Multi-Edit (allows updating the selection of multiple people's choices)
- - Multi-record delete (allows removing multiple people from an event sign-up)
- - Log all logs to an external (persistent) store
- - :dependent => :restrict
-
-
-TO DO (SHOULD be done):
- - Fix some styling of the page, to make it easier to follow the flow of the system.
- - Admin should be able to "receive a cheque"
-  - This allows an admin to mark a record/item as paid without PayPal
-  - ReceivedCheque should have "notes"
- - Perhaps don't show the "name" of the registration Periods (it's confusing?)
-  - It's still showing during the payment-process steps
-  **
-  - CLEARER that kids must have a Parent/Guardian sign the waiver form. (page for waiver)
- - Add javascript tests for event_choice#autocomplete
- - Re-arrange StandardSkillRoutineEntry/StandardSkillRoutine validations (move into Routine)
- - JS/CSS for standardSkill should be moved into asset pipeline
- - Ability to read StandardSkill Routines even after Online Registration is closed.
- - Ability to print PDF of standard Skill Routine, for practicing by competitor?
-
-
-TO DO (NICE to be done):
- - Admin page for the events page....should show num people signed up vs num people signed-up-and-paid.
- - Add something that helps describe What "Category" to sign up for when choosing "Individual Freestyle" (Categories are: "Age Group", "Jr. Expert", "Expert").
- - Improve the "Summary" page to be prettier, and better at printing.
- - Test the site on multiple browsers
- - User Test the site to see about usability improvements
- - Integrate with USA Membership site
- - Add ability to mark a Registration as paid, to deal with "Dave said that I could go for free" scenario(s).
- - Serve the logo from a better (cached) fashion
- - expense items be destroyed when an expenseGroup is destroyed
- - Prevent events from having no position-1-event-choice-boolean
-
-Scott's suggestions:
- - Admin should be able to identify Who+WHAT has been received/paid for.
- - Pay now gets its own line
- - Payment page checkmarks with running total. When boxes are checked, highlight line.
- - Immediate errors display when typing in.
- - How do we get BEST TIMES?
- - Automatically start the rails server when vagrant starts
- - All registrants page, add 'state' column?
-
-Caitlin's Notes:
- - Don't need a phone number?
-  - Why need an emergency contact phone number, but not mine.
- - should be instructions for "print and sign" the waiver?
- - After adding a new thing, goes to the T-Shirt page again....want to go back to the registration summary page.
-  - Need to deal with how to get to the T-Shrit page....?
-  - "Save and return to Registrant List"
 
 Denis:
 - Treats the sign-in as a sign-up.
 - Where do I provide e-mail my e-mail address
 - "What am I doing on the t-shirt page"?
-- "Show my registrations" means "about robin's competitions?"
- - I can use "My registrations" to create new.
- - "Done" or "new registraiton"?
-- Is team required to be asked for a non-competitor?
-- Always go back to the Registration smumary page (on return from the payment success)
-- How do I finish?
- - Make the Waiver thing biggenr, bolder, etc. make it a apage in the flow.
-
-NEED To make the registration deadlines clear.
-- Exiting with a balance due, cause a popup?
-
-Mom:
-- "New Competitor" as a button isn't clear. it looks like a banner/description.
- - "Click here"
-- "Why is Legal Waiver" in red? I can ignore the Red, I guess.
-- "Legal Waiver" is still showing in red? why?
-- Need to tell the person that an e-mail will be sent to them with their payment details.
 
 Connie:
 - Why is the address below the events
 - Can we add "levels" to the Indiviudal/Pairs categores
-- Are we doing Standard skill?
 - Validate the age of competitors for Individual freestyle categores?
-- R: I don't like the fact that I need to scroll on the "Items" page.
 
 -------------
 
@@ -267,30 +74,13 @@ BestTimeType:
 
 To Be answered by the Event Organizers:
 
- Should not be able to change the type of a given field once created.
- Should warn about changing the name of an event, because it may change the value of the....
- Cascade delete....
-
-N+1 queries
-Validations from RecordValidator
-
 Check that the placeholder text works in other browsers, or add jquery fix for it?
  - add http://selectivizr.com/ ??
 CSS Reset?
 smidget?
-prevent form leaving modified form page
+
 Try different ways of displaying the Event Catgories.
-Use SASS to inherit css properties.
-
 Add Tests for when a configuration doesn't exist yet (ensure the site loads/etc)
-
-Possibly use "stripes" for the creditcard vendor.
-Competitor Information is Almost never Changed.
-
-Better way to navigate back to Registrants page.
-Make the Pay Now a button-like-thing.. For a Sinlge Registrant, Make the Pay Now part of the regsitration.
-add ability to restrict deletion of registrants and users, if there are related records in payments.
-
 
 UNICON 2012 data analysis:
 1477 User Accounts
@@ -404,12 +194,6 @@ Best Times:
 
 
 For Nan:
-- CSS Reset?
-- Style of the a hrefs, so that they are visible.
-- Help with the banner
-
 - Registration Periods should have unique expense items (so that we can directly match a payment) (ie. No two registration periods should have the same expense items)
 - Registration Preidos should also have unique items between comp and non-comp
-- Add more destroy-restrict codes (see payment_detail<->expense_item)
-
 

@@ -14,6 +14,7 @@ Last Re-Arranged June 20th, 2014.
   - Split it by ID only, then record their 2 times
   - See the gender of the competition, or split the competitors by gender.
 - Connie/Scott: Rulebook question: can a 0-10 20” racing-categroy competitor win the expert slow… If so, then any competitor (no matter what wheel) can win. Expert will be non-wheel-size.
+ -  "** Calculation of the Experts cannot use results which are in the 20"or 16" category."
 - ???? Relay, does 4x100 compete by wheel-size /age group, or against everyone?
 - Connie/Huge/Benoit/Scott/Patricia/Mary - do you see value in allowing UDA to show the Competitor List for each event.
 - Connie: How does the "Overall Track" calculation work when there is a Tie? (ie: tie for 1st, do both get 8 points, or do they split 8+6=14, thus 7 points each)
@@ -31,6 +32,8 @@ Last Re-Arranged June 20th, 2014.
 
 
 - Patricia - Will there be a judge of "Falls" for "Group/Club"?
+ -  "Major and Minor faults are counted by 2 people and averaged, and then those scores are used by all of the judegs.""
+
 - Hugo/Benoit/Ptricia - What "Overall Champions" do you want at NAUCC/UNICON, and what calculation would you like used for this? (the rulebook only lists Track)
 - Patricia/NAUCC-director: Patricia: what is the NAUCC rules for Trials? Hand-vs-not-hands? (how are points calculated?)
 - Patricia - Enable/Promote the "Submit your music" system?
@@ -82,9 +85,13 @@ NAUCC data issues:
  - Also have the "Event Report" be exported in Excel format
 - Migrate the Judging Types to include the new ranges as per the new rulebook.
  - Freestyle Presentation scores are only 3 categories (not 4)
+- Have a tablet at the start time which shows the HEAT number, Age Group, Event, Competitors (Large ID, Large First, (small Last))
+ - Formatting
+- All registrants page, add 'state' column?
 
 ==== Important
 - Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
+  - Why can't I import the 10kStandard.csv (file format issues?)
 - Add Warning on Registration Summary if this user doesn't have a confirmed USA membership?
 - Add Warning on Registration Summary if they are not fully paid?
 - Able to enter results for multiple competitions at once (10k Standard and 10k Unlimited).
@@ -94,6 +101,7 @@ NAUCC data issues:
   - So, only publish the “Per Event” PDF after the event is over, but have “50+ “ and “40+ “ separately while the event is running.
   - Change the “Competition Status” to be less granular…perhaps “Unstarted, Started, and Completed”.
   - When publishing the 100m results by age group, also have the ability to see the results overall (without age groups)
+  - Print/display/results by age group
  - Determine who will be doing the 100m Review/Publish datastep
  - When/how do we publish 100m results?
  - Able to assign "Track Data Importer" role
@@ -104,7 +112,6 @@ NAUCC data issues:
 - Make it impossible for more import results to be entered once an event has been locked also.
 - Handle Multi-lap race recording/calculation/reporting
   - Num Laps for time results (Coker MUni cross)
-
 
 ================================================================================================
 ===== Development Items which MUST be done before NAUCC (but colud be after the demo)
@@ -140,6 +147,7 @@ NAUCC data issues:
 - Improve the Excel Data import functions
 - Allow Pre-Assigning Heats for Competitions easily
  - Perhaps a view of exported data for the signed-up competitors would be sufficient?
+ - 10k - Print/export registrant data with Best Time (for use by chief judge when creating start-lists).
 - Add the "DNS" and "DNF" states to a competitor, and to import_results.
 
 ===== Low Importance
@@ -167,6 +175,9 @@ NAUCC data issues:
 ====== Nice to have =======================
 
 ====== High Impact & Low Effort
+- Relabel "Continue (Expenses)" to "Save and Continue (Expenses)""
+- Have pre-filled options for the DQ Comment.
+- Log all logs to an external (persistent) store
 - Run a report of all <=10 year olds, so that we can identify the wheel size that they will be competing on for their various events
  - Perhaps have this highlight their registration package sheet?
 - Online system which allows the public to see the Competitor List for each event.
@@ -180,8 +191,12 @@ NAUCC data issues:
  - Connie to help with this design.
  - fix problems when the age groups are not large enough, or when a person's age is >100 (and out of range of the age groups) (problems printing PDFs, etc)
 - Make the breadcrumbs sticky.
+- see competitors without data and data without competitors before "approving (importing)
+- see data by heat (admin-only).
 
 ====== Difficult
+- Enter start times, with the same start time for many people
+- mark comptitor as no-show
 - Fix problem when typing in value for "position" and getting it wrong (and it breaks the system)
 - Create "Expert T-Shirt" calculation system
 - Create "Personalized Schedule" for each competitor
@@ -192,6 +207,14 @@ NAUCC data issues:
 - enable feature test for two-attempt-entry. (needs JS)
 - insteall simple_form_for (for two-attempt-entry form, to help with error reporting?)
 - Show the "attempt number" which was faster.
+- 100m import action should only allow if it matches the heat data
+ - Import action without approval results in all heat entries having data (due to DNS/DNF/DQ)
+- Who gets expert T-Shirts?
+ - Pick the events that qualify for an expert t-shirt
+  - Determine who came in top-3, and then combine all of these people into a list.
+  - List the shirt-size for each of these competitors.
+  - Allow adding another competition if there are still shirts/etc.
+
 
 ==== other
 - Improve the formatting of the Chief JUdge view-all-scores report
@@ -202,7 +225,7 @@ NAUCC data issues:
 - Ensure that competitors who are not coming (deleted) are not showing up anymore.
 - Look at using Turbolinks?
  - Use Carrierwave in a private bucket for PDFs (with expiring keys ?)
-
+- prevent/warn from leaving modified form page
 - Improve the styling of the "Manage Competitors" page:
  - The “Manage Competitors” page has too many words.
  - In a group, the members of the group should be on separate lines each.
@@ -227,6 +250,11 @@ ADMIN Config-Watching View:
 - UI for using the "International (Ineligible)" selection for registrants.
 - Put "DQ" after all of the places on the results printouts
 - Show the price rates/dates even on non-signed-in page?
+- Include a Report which shows the way that experts are positioned on the track
+NEED To make the registration deadlines clear.
+- Exiting with a balance due, cause a popup?
+- Possibly use "stripe" for the creditcard vendor.
+- Make the Pay Now a button-like-thing.. For a Sinlge Registrant, Make the Pay Now part of the regsitration.
 
 ==== Other
 - Booleans in models should be "?" like? ("has_experts?")
@@ -283,6 +311,9 @@ ADMIN Config-Watching View:
 - drop the base columns for the translated attributes?
 - Replace the current AwardLabel model with the new one (so that we can clean up the AwardLabel generation logic)
 - Update/create Standard Skill Scoring system, replacing the UCP
+- Make the "shared registrant" banner disappear (or de-highlight) when accepted
+- Payment page checkmarks with running total. When boxes are checked, highlight line.
+- Immediate errors display when typing in.
 
 ======= Other Comments/thoughts
 - Why make the HTML version available, always make it PDF.
@@ -292,7 +323,13 @@ ADMIN Config-Watching View:
 - Use Transactions to ensure that we get all-or-nothing when doing import/destroy/etc.
  - Keyboard Shortcuts for most common functions
 - Remove Version table and paper_trail...replace with something else?
-
+- Remove all json responds to, except where I need it. (and remove all respond_to blocks).
+- Make more events AJAX instead of refresh the page.
+- Export/Import functions for the WHOLE dataset?
+- Admin page for the events page....should show num people signed up vs num people signed-up-and-paid.
+- Integrate with USA Membership site
+- expense items be destroyed when an expenseGroup is destroyed
+- Prevent events from having no position-1-event-choice-boolean
 ==========================================================
 Rulebook Comments (after having read through it once)
 ==========================================================
