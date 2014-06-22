@@ -110,7 +110,6 @@ NAUCC data issues:
 - Add ability for Mary to know when Results are posted.
  - Email.
 - Add ability to create new accounts on-site.
- - When a director assigns a data-entry volunteer, auto-confirm their User account
 - 100m breadcrumbs on "display heat"
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
 - Make it possible/easy for a Director to access the raw data (time_results/external_results) after importing
