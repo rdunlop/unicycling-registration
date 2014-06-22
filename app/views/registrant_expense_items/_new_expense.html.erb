@@ -23,7 +23,7 @@
       <% end %>
       <% if item.has_custom_cost %>
         (<%= @config.currency_code %>)
-        <%= ff.number_field :custom_cost %>
+        <%= ff.number_field :custom_cost, {min: 0} %>
       <% end %>
       <% if show_as_free %>
         <%= ff.submit t(".add_free_item"), {:title => t(".one_is_free"), :class => "free_item"} %>

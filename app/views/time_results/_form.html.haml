@@ -16,13 +16,13 @@
       %tr
         %td.ui-widget
           = f.select :competitor_id, @competition.competitors.all.map { |comp| ["#{comp.bib_number}-#{comp}", comp.id] }, {:include_blank => true}, autofocus: true
-        %td= f.number_field :minutes
-        %td= f.number_field :seconds
-        %td= f.number_field :thousands
+        %td= f.number_field :minutes, {min: 0}
+        %td= f.number_field :seconds, {min: 0}
+        %td= f.number_field :thousands, {min: 0}
         %td= f.select :status, TimeResult.status_values, include_blank: true
         %td= f.text_field :comments
         %td= f.text_field :comments_by
-        %td= f.number_field :attempt_number
+        %td= f.number_field :attempt_number, {min: 1}
         %td= f.submit
 
 :javascript

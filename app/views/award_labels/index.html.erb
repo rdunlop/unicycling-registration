@@ -26,10 +26,10 @@
     <br />
 
     <%= label_tag :minimum_place, "Minimum Award Place" %>
-    <%= number_field_tag :minimum_place, {min: 0} %><br />
+    <%= number_field_tag :minimum_place, nil, {min: 0} %><br />
 
     <%= label_tag :maximum_place, "Maximum Award Place" %>
-    <%= number_field_tag :maximum_place %><br />
+    <%= number_field_tag :maximum_place, nil, {min: 0} %><br />
 
     <%= label_tag :age_groups, "Age Groups Labels" %>
     <%= check_box_tag :age_groups, {}, :checked => true %><br />
@@ -47,7 +47,7 @@
   <%= check_box_tag :separate_registrants %>
   <%= label_tag :separate_registrants, "Separate each registrant with a row of blank labels" %><br />
 
-  <%= number_field_tag :skip_positions %>
+  <%= number_field_tag :skip_positions, nil, {min: 0} %>
   <%= label_tag :skip_positions, "Skip Positions" %><br />
 
   <%= submit_tag "Normal Labels", :class => "multiclick" %>

@@ -16,7 +16,7 @@
   <%= render :partial => "/shared/error_messages", :object => @refund_presenter %>
 
   <%= pf.label :note %><%= pf.text_field :note %>
-  <%= pf.label :percentage %><%= pf.number_field :percentage %>
+  <%= pf.label :percentage %><%= pf.number_field :percentage, {min: 0} %>
 
   <h1>Paid Details</h1>
   <table class="sortable">

@@ -2,38 +2,57 @@ Last Re-Arranged June 20th, 2014.
 
 
 ===== Questions to be answered, by whom
-- Connie - "Are you leaving at the end of competition"? (question for registrants at check-in time).
-- Connie, which role should be able to modify/manage registration data on UDA for on-site modifications.
-- Mary, Connie, Garrett - How shall we handle on-site registration?
 - Mary Connie How Do we want to allow people to un-sign-up for events easily without going through a paper-printout-confirmation step.
+ - Yes, use the "special laptop" (or access-code) to allow modifications.
+
 - Connie/Patricia/Hugo/Benoit - What are the age groups for the events at NAUCC, and at UNICON?
  - Who should be able to modify the age group entries? (we usually share age groups among competitions...so I don't want to be able to change them once they are in use, right?)
+  - Use the sign-up-lists should be enough.
+  - Directors should NOT be able to set age groups. Admin should be able to set age groups.
 - Connie: when should the Overall Champion calculation be updated? Whenever data is entered? approved? published? awarded?
+ - Only show this when ALL of the input competitions are "Published"
 - Should we change the way that the data recording forms are written for NAUCC?
  - On the Competitors List:
   - Split it by ID only, then record their 2 times
   - See the gender of the competition, or split the competitors by gender.
 - Connie/Scott: Rulebook question: can a 0-10 20” racing-categroy competitor win the expert slow… If so, then any competitor (no matter what wheel) can win. Expert will be non-wheel-size.
+ - Answer: no. it cannot.
  -  "** Calculation of the Experts cannot use results which are in the 20"or 16" category."
-- ???? Relay, does 4x100 compete by wheel-size /age group, or against everyone?
+  - ANSWER: to solve this, only peopleo on 24" wheels will have an "overall_place" for 100m.
 - Connie/Huge/Benoit/Scott/Patricia/Mary - do you see value in allowing UDA to show the Competitor List for each event.
+ - Yes, do expose this to the public. Id, name, age-group, country, state, team.
 - Connie: How does the "Overall Track" calculation work when there is a Tie? (ie: tie for 1st, do both get 8 points, or do they split 8+6=14, thus 7 points each)
+ - ANSWER Both get 8.
 - Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
+ - ANswer: no.
 - Connie, have you updated the USA-Owing people?
+ - Answer: no, but I will.
 - Connie, should I prioritize the ability to specify the Age Group Order, for printing at the Track? (I think it will be confusing/difficult to deal with...but actually may be useful to be able to communicate with Competitors, Race Officials, etc?)
+ - ANSWER: Yes, add an ability to order these for printing/display.
 - Scott/Connie:
   Section 2.1.4 (page 26)
  - If Scott and Robin compete in 100m, and 1st (32 seconds) and 2nd (33 seconds) respectively
  - And then they both compete in the finals, and have results of Scott: 31 seconds, Robin: 30 seconds.
  THEN: What is the time and place awarded to Scott and Robin for the Age Group? (is it 1st/2nd, or 2nd/1st)
+ - ANswer: Age group results are based on Age GRoup data.
+
 - Connie, how difficult will it be to do Expert T-Shirts?
+ - Answer: it would be nice to do this in advance.
 - Connie what data do we need to be able to expert nicely, in case there are issues with the system?
+ - Answer: I need the raw data.
+ -  Answer: I would like to expose a form of this for every director.
+- Connie: Talk about Hockey and sensitive data.
+ - Educate the admin people that they cannot give away information.
+  - Why/who was able to export the dataset.
 
 
 
+- Mary, are they doing overall-by-age-group.
+ - Answers: Yes, and it's in the awards list
 - Patricia - Will there be a judge of "Falls" for "Group/Club"?
  -  "Major and Minor faults are counted by 2 people and averaged, and then those scores are used by all of the judegs.""
 
+- Hugo/Benoit -  Relay, does 4x100 compete by wheel-size /age group, or against everyone?
 - Hugo/Benoit/Ptricia - What "Overall Champions" do you want at NAUCC/UNICON, and what calculation would you like used for this? (the rulebook only lists Track)
 - Patricia/NAUCC-director: Patricia: what is the NAUCC rules for Trials? Hand-vs-not-hands? (how are points calculated?)
 - Patricia - Enable/Promote the "Submit your music" system?
@@ -41,8 +60,11 @@ Last Re-Arranged June 20th, 2014.
 - Scott/Patricia - Are there Judging Helper Sheets/Judging Scratch Sheets which I can integrate into the system (as PDF?) for a single-point-of-all-printing?
 
 - Mary? Garrett - Allow for people to pay via Paypal while "onsite registrant"???
+ - Answer: not an important thing.
 - Mary, do we have confirmed way of having Internet Access at the events?
+ - Answer: we will know by Tuseday, or order some other options.
 - Mary, when are we printing the registartion sheets?
+ - We want this done by Thursday night. Robin will e-mail people.
 
 - Spencer Hotchberg - director of Flatland, please check with him for the scoring/needs of his event, for “Double elimination”.
  - What e-scoring do you want/need?
@@ -51,8 +73,6 @@ Last Re-Arranged June 20th, 2014.
 - Scott/Hugo/benoit - UNICON rule: Scott, can we add a rule to Trials for tie-breakers, so that we know that people need to be present for tie-breaking.
 
 - Hugo/Benoit: What have you allocated for Awards? Can you send me a breakdown? Will it be medals? what size? for which places for which event? Are you giving out ribbons for Basketball/Hockey B-League? etc etc
-
-- Freestyle Artistic Director - Are we dealing with "Boundary Scores" anymore? Is this officially gone?
 
 - Hugo/Benoit (or the specific Director) - What is X-Style, judging-related.
 - Hugo/Benoit: how are you recording Slow Races? Do you have E-Timer for that?
@@ -63,6 +83,10 @@ Last Re-Arranged June 20th, 2014.
   - Should it only show "Competitors" in one box, and "non-signed up" in another?
   - How should it behave for "Final Heat" events (100m Expert)?
   - Make Lane-Assignment auto-increment the lane/heat as data is entered? (ask Kathleen?)
+ - Can we borrow your ipad, or some more from Work?
+
+ Wenday
+  - If an expert heat compeitor doesn't show up, is the lane empty? or filled?
 
 ================================================================================================
 NAUCC data issues:
@@ -72,11 +96,22 @@ NAUCC data issues:
 - Does Speed Trials Advanced have Experts?
 - Need ranking/scoring for Trials to be added.
 - Does Trials have a separate "Expert" expert-off?
+ - Answer: No, it does not
 
 ================================================================================================
 ===== Development Items that MUST be done before we do another run-through/demo
 
 ===== Really Easy & High Imapact
+- Configure the competition to have "pairs" or "group" or "single" so that the manage competitors page only has 1 button.
+- Print the Registration packages, alphabetical by last name.
+- need a way to print Name&ID for all bags.
+- Send Mike a set of instructions for how to train Directors for using the system.
+- Add ability for Mary to see the "Event Directors" report
+- Add ability for Mary to know when Results are posted.
+ - Email.
+- Add ability to create new accounts on-site.
+ - When a director assigns a data-entry volunteer, auto-confirm their User account
+- 100m breadcrumbs on "display heat"
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
 - Make it possible/easy for a Director to access the raw data (time_results/external_results) after importing
  - Make this transition of data clearer/better.
@@ -114,6 +149,10 @@ NAUCC data issues:
 
 ================================================================================================
 ===== Development Items which MUST be done before NAUCC (but colud be after the demo)
+
+- Add ability for a registrant to sign-up on-site using a laptop (use a "modification access code")
+- Add abilty for modifications to be done on-site also, using a laptop + "Modification access code"
+- LOCK Artistic changes, so that they cannot be done after the artistic closed date.
 
 - Pages for Track Data Importing:
  - 1 Choose the Heat, and the file

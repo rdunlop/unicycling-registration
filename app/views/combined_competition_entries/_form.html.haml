@@ -16,6 +16,6 @@
     .field
       = f.label "points_#{place}".to_sym
       %br
-      = f.number_field "points_#{place}".to_sym
+      = f.number_field "points_#{place}".to_sym, {min: 0}
   .actions
     = f.submit

@@ -51,7 +51,7 @@ describe ImportResultsController do
 
       it "redirects to the user's import_results" do
         post :create, {:import_result => valid_attributes, :user_id => @admin_user.id, :competition_id => @competition.id}
-        response.should redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition))
+        response.should redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition, is_start_times: false))
       end
     end
 

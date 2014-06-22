@@ -14,7 +14,7 @@
       <%= render :partial => "/shared/error_messages", :object => @distance_attempt %>
       <%= form_for(@distance_attempt, :url => judge_competitor_distance_attempts_path(@judge, @competitor)) do |f| %>
         <%= f.label :distance, :class => "distance_label" %>
-          <%= f.number_field :distance, :class => "distance_input", :autofocus => true, :autocomplete => 'off', :required => true %>
+          <%= f.number_field :distance, :class => "distance_input", :autofocus => true, :autocomplete => 'off', :required => true, min: 0 %>
           <br />
           <%= f.label :fault, :class => "distance_fault_label" %>
           <%= f.check_box :fault, :class => "distance_input" %>

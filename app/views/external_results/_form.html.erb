@@ -20,7 +20,7 @@
     <tr>
       <td><%= f.select :competitor_id, @competition.competitors.map { |comp| ["#{comp.bib_number}-#{comp}", comp.id] }, :include_blank => true %></td>
       <td><%= f.text_field :details %></td>
-      <td><%= f.number_field :points %></td>
+      <td><%= f.number_field :points, {min: 0} %></td>
       <td><%= f.submit %></td>
     </tr>
   </table>
