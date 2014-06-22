@@ -2,25 +2,26 @@
 #
 # Table name: competitions
 #
-#  id                      :integer          not null, primary key
-#  event_id                :integer
-#  name                    :string(255)
-#  locked                  :boolean
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  age_group_type_id       :integer
-#  has_experts             :boolean          default(FALSE)
-#  scoring_class           :string(255)
-#  start_data_type         :string(255)
-#  end_data_type           :string(255)
-#  uses_lane_assignments   :boolean          default(FALSE)
-#  scheduled_completion_at :datetime
-#  published               :boolean          default(FALSE)
-#  awarded                 :boolean          default(FALSE)
-#  published_results_file  :string(255)
-#  award_title_name        :string(255)
-#  award_subtitle_name     :string(255)
-#  published_date          :datetime
+#  id                         :integer          not null, primary key
+#  event_id                   :integer
+#  name                       :string(255)
+#  locked                     :boolean
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  age_group_type_id          :integer
+#  has_experts                :boolean          default(FALSE)
+#  scoring_class              :string(255)
+#  start_data_type            :string(255)
+#  end_data_type              :string(255)
+#  uses_lane_assignments      :boolean          default(FALSE)
+#  scheduled_completion_at    :datetime
+#  published                  :boolean          default(FALSE)
+#  awarded                    :boolean          default(FALSE)
+#  published_results_file     :string(255)
+#  award_title_name           :string(255)
+#  award_subtitle_name        :string(255)
+#  published_date             :datetime
+#  num_members_per_competitor :string(255)
 #
 # Indexes
 #
@@ -51,13 +52,20 @@ class Competition < ActiveRecord::Base
   end
 
   before_validation :clear_data_types_of_strings
-  validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true}
+  validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true }
 
   def self.scoring_classes
     ["Freestyle", "Distance", "Two Attempt Distance", "Flatland", "Street", "Points Low to High", "Points High to Low"]
   end
 
   validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }
+
+  def self.num_member_options
+    ["One", "Two", "Three or more"]
+  end
+  before_validation :clear_num_members_per_compeititor_of_strings
+  validates :num_members_per_competitor, inclusion: { in: self.num_member_options, allow_nil: true }
+
   validates :event_id, :presence => true
   validate :published_only_when_locked
   validate :awarded_only_when_published
@@ -117,6 +125,10 @@ class Competition < ActiveRecord::Base
   def clear_data_types_of_strings
     self.start_data_type = nil if start_data_type == ""
     self.end_data_type = nil if end_data_type == ""
+  end
+
+  def clear_num_members_per_compeititor_of_strings
+    self.num_members_per_competitor = nil if num_members_per_competitor == ""
   end
 
   def to_s_with_event_class

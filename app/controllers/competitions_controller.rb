@@ -208,7 +208,7 @@ class CompetitionsController < ApplicationController
   def competition_params
     params.require(:competition).permit(:name, :uses_lane_assignments, :start_data_type, :end_data_type,
                                         :age_group_type_id, :scoring_class, :has_experts, :award_title_name,
-                                        :award_subtitle_name, :scheduled_completion_at,
+                                        :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,
                                         :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy])
   end
 

@@ -11,6 +11,8 @@
 
   %h2 Settings for selecting the competitors from sign-ups
   = render partial: "competition_sources_form", locals: {f: f, event: @event}
+  = f.label :num_members_per_competitor
+  = f.select :num_members_per_competitor, Competition.num_member_options, include_blank: true
 
   %h2 Settings For gathering the results
   %table
@@ -29,7 +31,7 @@
   .field
     %b= f.label :scoring_class
     %br
-    = f.select :scoring_class, Competition.scoring_classes, :include_blank => true
+    = f.select :scoring_class, Competition.scoring_classes, include_blank: true
   .field
     = f.label :age_group_type_id
     = f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, :include_blank => true
