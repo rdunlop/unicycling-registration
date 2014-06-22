@@ -6,6 +6,7 @@
       %th Competition
       %th
       //%th Status
+      %th Competitor List
       %th Results
       %th Date Published
   %tbody
@@ -16,7 +17,8 @@
         %td= competition.award_subtitle_name
         - competition_presenter = CompetitionPresenter.new(competition)
         //%td{ class: competition_presenter.status_code}= competition_presenter.status
-        %td= link_to_if(competition.published?, "Results", competition.published_results_file_url) { 'Not yet' }
+        %td= link_to "Competitor List", announcer_printing_competition_path(competition)
+        %td= link_to_if(competition.published?, "Results", competition.published_results_file_url) { }
         %td= competition.published_date_to_s
 
 %p

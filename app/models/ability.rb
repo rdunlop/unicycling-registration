@@ -15,6 +15,7 @@ class Ability
     can :logo, EventConfiguration
     can :index, :result
     can :read, CombinedCompetition
+    can :announcer, Competition
 
     if config.test_mode
       # allow the user to upgrade their account in TEST MODE

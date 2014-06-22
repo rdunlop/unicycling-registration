@@ -1,5 +1,5 @@
 class Printing::CompetitionsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:announcer]
   before_filter :load_competition
   authorize_resource :competition, :parent => false
 

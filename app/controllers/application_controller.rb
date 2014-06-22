@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
   end
 
   def add_category_breadcrumb(category)
-    add_breadcrumb "#{category}"# XXX this should be category_path(category)
+    add_breadcrumb "#{category}"
   end
 
   def add_event_breadcrumb(event)
@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
   end
 
   def add_competition_breadcrumb(competition)
-    add_breadcrumb "#{competition}", competition_path(competition)
+    add_breadcrumb "#{competition}", (competition_path(competition) if can? :show, competition)
   end
 
   def add_to_competition_breadcrumb(competition)

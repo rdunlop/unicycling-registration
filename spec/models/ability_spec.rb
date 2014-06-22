@@ -302,4 +302,14 @@ describe "Ability" do
     it { should be_able_to(:sign_ups, @event_category) }
   end
 
+  describe "When not logged in" do
+    before :each do
+      @competition = FactoryGirl.create(:competition)
+    end
+    subject { @ability = Ability.new(nil) }
+
+    it { should be_able_to(:index, :result) }
+    it { should be_able_to(:read, CombinedCompetition) }
+    it { should be_able_to(:announcer, @competition) }
+  end
 end
