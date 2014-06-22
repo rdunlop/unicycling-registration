@@ -274,6 +274,7 @@ Workspace::Application.routes.draw do
 
     resources :competitions, :only => [:show, :edit, :update, :destroy] do
       member do
+        get :set_sort
         post :sort
         post :sort_random
         post :set_places

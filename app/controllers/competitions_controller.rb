@@ -10,7 +10,7 @@ class CompetitionsController < ApplicationController
 
   load_and_authorize_resource
 
-  before_action :set_parent_breadcrumbs, only: [:new, :edit, :show]
+  before_action :set_parent_breadcrumbs, only: [:new, :edit, :show, :set_sort]
 
   respond_to :html, :js
 
@@ -77,6 +77,11 @@ class CompetitionsController < ApplicationController
     @competition.destroy
 
     respond_with(@competition, location: target_url)
+  end
+
+  def set_sort
+    add_breadcrumb "Manage Competitors", competition_competitors_path(@competition)
+    add_breadcrumb "Sort Competitors"
   end
 
   def sort

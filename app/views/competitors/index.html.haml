@@ -91,7 +91,8 @@ List of all competitors, including registrant info, with edit/delete, marking th
   %hr
 %p
   Advanced Options:
-  = link_to 'Create/Sort Competitors', new_competition_competitor_path(@competition)
+  = link_to 'Advanced Create Competitor', new_competition_competitor_path(@competition)
+  = link_to_if @competition.compete_in_order, "Sort Competitors", set_sort_competition_path(@competition)
 
 %br
 = link_to "Back", event_path(@competition.event)
