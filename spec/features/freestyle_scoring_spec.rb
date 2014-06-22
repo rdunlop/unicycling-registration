@@ -1,33 +1,10 @@
 require 'spec_helper'
 
-shared_context "freestyle_event" do |options = {}|
-  before :each do
-    event = FactoryGirl.create(:event, :name => options[:name])
-    competition = FactoryGirl.create(:competition, event: event, :name => options[:name])
-    FactoryGirl.create(:event_competitor, :competition => competition)
-    reg = Registrant.first
-    reg.first_name = "Robin"
-    reg.last_name = "Robin"
-    reg.save
-  end
-end
-
-shared_context "judge_is_assigned_to_competition" do |options = {}|
-  before :each do
-    competition = Competition.first
-    judge_user = User.find_by(name: options[:user_name])
-    judge = FactoryGirl.create(:judge, competition: competition, user: judge_user)
-    jt = judge.judge_type
-    jt.name = "Presentation"
-    jt.save
-  end
-end
-
 describe 'Judging an event' do
   let!(:user) { FactoryGirl.create(:data_entry_volunteer_user, name: "Judge User") }
   include_context 'basic event configuration'
   include_context 'freestyle_event', :name => "Individual"
-  include_context "judge_is_assigned_to_competition", user_name: "Judge User"
+  include_context "judge_is_assigned_to_competition", user_name: "Judge User", competition_name: "Individual"
   include_context 'user is logged in'
 
   describe "user is presented with a judging menu" do
@@ -46,6 +23,7 @@ describe 'Judging an event' do
 
       describe "when scoring competitor A" do
         it "can add and update scores" do
+          puts page.html
           click_link "Set Score"
           fill_in "score[val_1]", with: "1.0"
           fill_in "score[val_2]", with: "2.0"

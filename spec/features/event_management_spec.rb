@@ -1,11 +1,5 @@
 require 'spec_helper'
 
-shared_context "freestyle_event" do |options = {}|
-  before :each do
-    event = FactoryGirl.create(:event, name: options[:name])
-    competition = FactoryGirl.create(:competition, event: event, name: options[:name], award_title_name: options[:name])
-  end
-end
 
 describe 'Creating a Competition from an Event' do
   let!(:user) { FactoryGirl.create(:super_admin_user) }

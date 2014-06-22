@@ -34,6 +34,41 @@ shared_context 'basic event configuration' do |options = {}|
   end
 end
 
+shared_context "freestyle_event" do |options = {}|
+  before :each do
+    event = FactoryGirl.create(:event, :name => options[:name])
+    competition = FactoryGirl.create(:competition, event: event, :name => options[:name])
+    FactoryGirl.create(:event_competitor, :competition => competition)
+    reg = Registrant.first
+    reg.first_name = "Robin"
+    reg.last_name = "Robin"
+    reg.save
+  end
+end
+
+shared_context "points_event" do |options = {}|
+  before :each do
+    event = FactoryGirl.create(:event, :name => options[:name])
+    competition = FactoryGirl.create(:ranked_competition, event: event, :name => options[:name], start_data_type: 'Single Attempt')
+    FactoryGirl.create(:event_competitor, :competition => competition)
+    reg = Registrant.first
+    reg.first_name = "Robin"
+    reg.last_name = "Robin"
+    reg.save
+  end
+end
+
+shared_context "judge_is_assigned_to_competition" do |options = {}|
+  before :each do
+    competition = Competition.first
+    judge_user = User.find_by(name: options[:user_name])
+    judge = FactoryGirl.create(:judge, competition: competition, user: judge_user)
+    jt = judge.judge_type
+    jt.name = "Presentation"
+    jt.save
+  end
+end
+
 shared_context 'optional expense_item' do |options = {}|
   options.reverse_merge! cost: 15, has_details: false, details: nil
   before :each do
