@@ -23,7 +23,6 @@ describe 'Judging an event' do
 
       describe "when scoring competitor A" do
         it "can add and update scores" do
-          puts page.html
           click_link "Set Score"
           fill_in "score[val_1]", with: "1.0"
           fill_in "score[val_2]", with: "2.0"
