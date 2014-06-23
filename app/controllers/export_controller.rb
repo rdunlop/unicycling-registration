@@ -1,4 +1,4 @@
-class Admin::ExportController < Admin::BaseController
+class ExportController < ApplicationController
   before_filter :authenticate_user!
   authorize_resource :class => false
 

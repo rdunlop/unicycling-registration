@@ -1,6 +1,7 @@
-class PaymentAdjustmentsController < Admin::BaseController
+class PaymentAdjustmentsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :payment
+  load_resource :payment
+  authorize_resource class: false
 
   def list
     @payments = Payment.includes(:user)

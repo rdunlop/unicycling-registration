@@ -156,6 +156,8 @@ class Ability
         can :manage, :usa_membership
       end
       can :read, :volunteer
+
+      can :manage, :payment_adjustment
     end
 
     if user.has_role? :event_planner

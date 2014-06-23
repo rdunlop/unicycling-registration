@@ -10,7 +10,7 @@ class StandardSkillEntriesController < ApplicationController
 end
 require 'csv'
 
-class Admin::StandardSkillEntriesController < Admin::BaseController
+class StandardSkillEntriesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 

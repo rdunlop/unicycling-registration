@@ -43,4 +43,22 @@ module ApplicationHelper
     text.insert 0, start_tag
     text << "</p>"
   end
+
+  # Allow laptop to access Registration elements and update them (ignore the 'is closed')
+  # allow laptop to create user accounts without e-mail confirmation, and auto-login.
+  def allow_reg_modifications?
+    cookies.signed[:user_permissions] == "yes"
+  end
+
+  # Disallow laptop (remove cookies)
+  def set_reg_modifications_allowed(allow = true)
+    if allow
+      cookies.signed[:user_permissions] = {
+        value: "yes",
+        expires: 24.hours.from_now
+      }
+    else
+      cookies.delete :user_permissions
+    end
+  end
 end

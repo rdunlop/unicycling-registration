@@ -45,13 +45,11 @@ Workspace::Application.routes.draw do
     end
 
 
-    namespace :admin do
-      namespace :export do
-        get :index
-        get :download_payment_details
-        get :download_all_payments
-        get :download_events
-      end
+    namespace :export do
+      get :index
+      get :download_payment_details
+      get :download_all_payments
+      get :download_events
     end
 
     resources :standard_skill_entries, :only => [:index] do

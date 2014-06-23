@@ -57,7 +57,7 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Age Group Type', :url => age_group_types_path, :permitted => can?(:manage, AgeGroupType))
       heading.entries << Menu::MenuEntry.new(:title => 'Events Report', :url => summary_events_path, :permitted => can?(:summary, Event))
       heading.entries << Menu::MenuEntry.new(:title => 'Directors', :url => directors_permissions_path, :permitted => can?(:directors, :permissions))
-      heading.entries << Menu::MenuEntry.new(:title => 'Export Data', :url => admin_export_index_path, :permitted => can?(:manage, :all))
+      heading.entries << Menu::MenuEntry.new(:title => 'Export Data', :url => export_index_path, :permitted => can?(:manage, :all))
       heading.entries << Menu::MenuEntry.new(:title => "List Volunteers", :url => volunteers_path, :permitted => can?(:read, :volunteer))
       heading.entries << Menu::MenuEntry.new(:title => 'USA Membership Management', :url => usa_memberships_path, :permitted => can?(:manage, :usa_membership))
       heading.entries << Menu::MenuEntry.new(:title => 'Modification History', :url => rails_admin_path, :permitted => can?(:access, :rails_admin))

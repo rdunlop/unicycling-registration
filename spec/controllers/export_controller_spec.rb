@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::ExportController do
+describe ExportController do
   before(:each) do
     @user = FactoryGirl.create(:super_admin_user)
     sign_in @user

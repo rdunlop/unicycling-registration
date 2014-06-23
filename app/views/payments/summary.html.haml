@@ -1,9 +1,9 @@
 %h1 Payments Summary
 
-- if can? [:admin, :onsite_pay_new], Payment
+- if can? :onsite_pay_new, :payment_adjustment
   = link_to "Create Adjustment Payment", new_payment_adjustment_path
   %br
-- if can? [:admin, :show], Payment
+- if can? :list, :payment_adjustment
   = link_to "View list of Payments/Refunds", list_payment_adjustments_path
 %br
 %Br

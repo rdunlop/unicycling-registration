@@ -317,7 +317,6 @@ NEED To make the registration deadlines clear.
 - Merge the RegistrantExpenses controller into the registrant_expense_items controller?
 - Remove Judge from DistanceAttempt (as there is no need to keep different judge's distance Attempts separated, right?)
 - Enhance the "mark items as paid for" to allow for arbitrary number of "other" elements....adding them by JS.
-- Remove remnants of AdminAbility and Admin::BaseController (start with AdjustmentPayment controller?)
 - Improve the Adjustment Payment system, and add tests for it, so that it can be used by non-Robin
 - Update the instructions for setting up a development or server
 - update to use database.yml and secrets.yml the rails-4 way?
