@@ -28,6 +28,7 @@
 #
 
 class User < ActiveRecord::Base
+  include ApplicationHelper
   rolify after_add: :touch_for_role, after_remove: :touch_for_role
 
   # Include default devise modules. Others available are:
@@ -36,7 +37,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  devise :confirmable unless (!ENV['MAIL_SKIP_CONFIRMATION'].nil? and ENV['MAIL_SKIP_CONFIRMATION'] == "true")
+  devise :confirmable
 
   default_scope { order('email ASC') }
 

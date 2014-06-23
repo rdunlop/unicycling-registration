@@ -110,25 +110,4 @@ describe User do
       User.all.should == [@a, @b, @c, @user]
     end
   end
-
-  describe "confirmation e-mail" do
-    after(:each) do
-      ENV['MAIL_SKIP_CONFIRMATION'] = nil
-    end
-    it "sends an e-mail" do
-      ActionMailer::Base.deliveries.clear
-      user = FactoryGirl.create(:user)
-      num_deliveries = ActionMailer::Base.deliveries.size
-      num_deliveries.should == 1
-    end
-
-    it "doesn't send an e-mail when skip configured" do
-      ActionMailer::Base.deliveries.clear
-      ENV['MAIL_SKIP_CONFIRMATION'] = "true"
-      user = FactoryGirl.build(:user)
-      user.valid?.should == true
-      num_deliveries = ActionMailer::Base.deliveries.size
-      num_deliveries.should == 0
-    end
-  end
 end

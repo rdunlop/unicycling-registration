@@ -170,7 +170,7 @@ documentation for details), you should set the DOMAIN to the URL that you will b
 
 
 If you want to allow user accounts to be created WITHOUT requiring e-mail
-confirmation, set the following variable:
+confirmation, set the following variable, or "Authorize the laptop":
 
     MAIL_SKIP_CONFIRMATION=true
 
@@ -281,9 +281,15 @@ as the expense details for registration.
  * Create some Registration Periods
  * Create some Categories, and Events within those categories.
 
+Authorizing a laptop
+--------------------
 If you want to enable normal users to create registrations (For Example: On-Site
-Registration). Go to /permissions/acl and authorize the browser. Ask Robin for the
-authorization key needed on this page.
+Registration). Go to /permissions/acl and authorize the browser.
+
+This allows creation/modification of user-accounts/registrations for 24 hours from
+this laptop.
+
+Administrators will have access to the key necessary to enable this feature.
 
 ========================================================================
 

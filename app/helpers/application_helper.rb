@@ -70,4 +70,9 @@ module ApplicationHelper
     hash = Digest::SHA256.hexdigest(date.to_s + Rails.application.config.secret_token)
     hash.to_i(16) % 1000000
   end
+
+  def skip_user_creation_confirmation?
+    override_by_env = ENV['MAIL_SKIP_CONFIRMATION'] == "true"
+    override_by_env || allow_reg_modifications?
+  end
 end
