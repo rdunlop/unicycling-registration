@@ -282,9 +282,8 @@ as the expense details for registration.
  * Create some Categories, and Events within those categories.
 
 If you want to enable normal users to create registrations (For Example: On-Site
-Registration), set the following environment variable:
-
-    ONSITE_REGISTRATION=true
+Registration). Go to /permissions/acl and authorize the browser. Ask Robin for the
+authorization key needed on this page.
 
 ========================================================================
 

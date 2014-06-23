@@ -2,6 +2,10 @@ module ApplicationHelper
   include ActionView::Helpers::NumberHelper
   include LanguageHelper
 
+  def current_ability
+    @current_ability ||= Ability.new(current_user, allow_reg_modifications?)
+  end
+
   def setup_registrant_choices(registrant)
     EventChoice.all.each do |ec|
       if registrant.registrant_choices.where({:event_choice_id => ec.id}).empty?
@@ -60,5 +64,10 @@ module ApplicationHelper
     else
       cookies.delete :user_permissions
     end
+  end
+
+  def modification_access_key(date = Date.today)
+    hash = Digest::SHA256.hexdigest(date.to_s + Rails.application.config.secret_token)
+    hash.to_i(16) % 1000000
   end
 end

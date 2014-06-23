@@ -1,9 +1,22 @@
 class PermissionsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:acl, :set_acl]
   authorize_resource class: false
 
+  def acl
+  end
+
+  def set_acl
+    if params[:access_key] == modification_access_key
+      set_reg_modifications_allowed(true)
+      flash[:notice] = "Successfully Enabled Access"
+    else
+      set_reg_modifications_allowed(false)
+      flash[:alert] = "Access Revoked"
+    end
+    redirect_to acl_permissions_path
+  end
+
   def index
-    #authorize! :permissions, User
     @users = User.all
   end
 

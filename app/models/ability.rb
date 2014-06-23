@@ -1,11 +1,19 @@
 class Ability
   include CanCan::Ability
 
+  attr_accessor :allow_reg_modifications
+
   def config
     @config ||= EventConfiguration.singleton
   end
 
-  def initialize(user)
+  def reg_closed?
+    EventConfiguration.closed? && !allow_reg_modifications
+  end
+
+  def initialize(user, allow_reg_modifications = false)
+    @allow_reg_modifications = allow_reg_modifications
+
     if user.present?
       define_ability_for_logged_in_user(user)
     end
@@ -16,6 +24,7 @@ class Ability
     can :index, :result
     can :read, CombinedCompetition
     can :announcer, Competition
+    can [:acl, :set_acl], :permission
 
     if config.test_mode
       # allow the user to upgrade their account in TEST MODE
@@ -158,6 +167,7 @@ class Ability
       can :read, :volunteer
 
       can :manage, :payment_adjustment
+      can :display_acl, :permission
     end
 
     if user.has_role? :event_planner
@@ -223,7 +233,7 @@ class Ability
     can :read, Payment if user.has_role? :admin
     can :manage, Payment if user.has_role? :super_admin
     can :read, Payment, :user_id => user.id
-    unless EventConfiguration.closed?
+    unless reg_closed?
       can [:new, :create], Payment
     end
   end
@@ -246,7 +256,7 @@ class Ability
     can :empty_waiver, Registrant
     can :all, Registrant
 
-    unless EventConfiguration.closed? and ENV['ONSITE_REGISTRATION'] != "true"
+    unless reg_closed?
       can [:update, :destroy], Registrant, :user_id => user.id
       #can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|

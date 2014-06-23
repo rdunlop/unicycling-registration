@@ -5,3 +5,7 @@
   .dev_banner
     Non-Live System.
     %a#dev_banner_remover{ href: "#", class: "banner_remover", data: { banner_class: "dev_banner"},  title: "Remove dev banner" } [x]
+
+- if allow_reg_modifications?
+  .reg_access_banner.non_printing
+    This Browser has access to the Registration System.

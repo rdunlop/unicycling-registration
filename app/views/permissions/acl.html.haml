@@ -1,0 +1,17 @@
+%h1 Set Access Control
+
+%p Authorizing a laptop allows it to create/modify registrations. This should only be done on laptops in the registration area.
+
+%p Authorizations are valid for 24 hours unless revoked earlier.
+
+- if can? :display_acl, :permission
+  %b Administrator
+  To authorize A laptop, <u>on that laptop</u> go to #{acl_permissions_url} and type in the access key
+  %h2.current_access_key
+    Today's Access Key is
+    = modification_access_key
+- else
+  = form_tag set_acl_permissions_path do
+    = label_tag :access_key, "Access Key"
+    = text_field_tag :access_key
+    = submit_tag "Authorize"

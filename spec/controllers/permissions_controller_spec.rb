@@ -47,4 +47,20 @@ describe PermissionsController do
     end
   end
 
+  describe "when signed out" do
+    before :each do
+      sign_out @super_user
+    end
+
+    it "can access the acl page" do
+      get :acl
+      response.should be_success
+    end
+
+    it "can authorize acl" do
+      allow_any_instance_of(ApplicationController).to receive(:modification_access_key).and_return("the_key")
+      post :set_acl, {access_key: "the_key"}
+      flash[:notice].should == "Successfully Enabled Access"
+    end
+  end
 end

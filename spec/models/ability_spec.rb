@@ -5,7 +5,6 @@ describe "Ability" do
   describe "as a normal user" do
     before(:each) do
       @user = FactoryGirl.build_stubbed(:user)
-      ENV["ONSITE_REGISTRATION"] = nil
       @config = FactoryGirl.create(:event_configuration, music_submission_end_date: Date.today + 3.days)
     end
     subject { @ability = Ability.new(@user) }
@@ -101,13 +100,8 @@ describe "Ability" do
 
       it { should_not be_able_to(:create, Registrant) }
 
-      describe "when the ONSITE flag is set" do
-        before(:each) do
-          ENV['ONSITE_REGISTRATION'] = "true"
-        end
-        after(:each) do
-          ENV['ONSITE_REGISTRATION'] = nil
-        end
+      describe "when the computer is authorized to modify reg" do
+        subject { @ability = Ability.new(@user, true) }
 
         it { should be_able_to(:create, Registrant) }
       end

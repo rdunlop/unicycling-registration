@@ -65,6 +65,7 @@
         heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (view)', :url => standard_skill_routines_path, :permitted => can?(:manage, StandardSkillRoutine))
         heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (export)', :url => download_file_standard_skill_routines_path, :permitted => can?(:manage, StandardSkillRoutine))
       end
+      heading.entries << Menu::MenuEntry.new(:title => 'Authorized Laptop', url: acl_permissions_path, permitted: can?(:display_acl, :permission))
     %>
     <%
       heading = Menu::MenuHeading.new(:title => 'Awards')

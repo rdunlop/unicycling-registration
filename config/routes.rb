@@ -41,6 +41,8 @@ Workspace::Application.routes.draw do
         post :create_race_official
         get :directors
         put :set_role
+        get :acl
+        post :set_acl
       end
     end
 

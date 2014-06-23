@@ -207,7 +207,6 @@ describe RegistrantsController do
       end
       it "should not succeed" do
         EventConfiguration.closed?.should == true
-        ENV['ONSITE_REGISTRATION'].should_not == "true"
         get :new
         response.should_not be_success
       end
