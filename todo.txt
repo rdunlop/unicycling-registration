@@ -19,8 +19,6 @@ Last Re-Arranged June 20th, 2014.
  - Answer: no. it cannot.
  -  "** Calculation of the Experts cannot use results which are in the 20"or 16" category."
   - ANSWER: to solve this, only peopleo on 24" wheels will have an "overall_place" for 100m.
-- Connie/Huge/Benoit/Scott/Patricia/Mary - do you see value in allowing UDA to show the Competitor List for each event.
- - Yes, do expose this to the public. Id, name, age-group, country, state, team.
 - Connie: How does the "Overall Track" calculation work when there is a Tie? (ie: tie for 1st, do both get 8 points, or do they split 8+6=14, thus 7 points each)
  - ANSWER Both get 8.
 - Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
@@ -52,6 +50,8 @@ Last Re-Arranged June 20th, 2014.
 - Patricia - Will there be a judge of "Falls" for "Group/Club"?
  -  "Major and Minor faults are counted by 2 people and averaged, and then those scores are used by all of the judegs.""
 
+- Benoit/Scott/Patricia - do you see value in allowing UDA to show the Competitor List for each event.
+ - Yes, do expose this to the public. Id, name, age-group, country, state, team.
 - Hugo/Benoit -  Relay, does 4x100 compete by wheel-size /age group, or against everyone?
 - Hugo/Benoit/Ptricia - What "Overall Champions" do you want at NAUCC/UNICON, and what calculation would you like used for this? (the rulebook only lists Track)
 - Patricia/NAUCC-director: Patricia: what is the NAUCC rules for Trials? Hand-vs-not-hands? (how are points calculated?)

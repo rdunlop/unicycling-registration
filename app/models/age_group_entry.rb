@@ -11,6 +11,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  wheel_size_id     :integer
+#  position          :integer
 #
 # Indexes
 #
@@ -27,7 +28,9 @@ class AgeGroupEntry < ActiveRecord::Base
   belongs_to :age_group_type, :touch => true, inverse_of: :age_group_entries
   belongs_to :wheel_size
 
-  default_scope { order(:short_description) }
+  acts_as_list :scope => :age_group_type
+
+  default_scope { order(:position) }
 
   # possibly replace this with override serializable hash (https://github.com/rails/rails/pull/2200)
   def as_json(options={})
