@@ -101,6 +101,12 @@ NAUCC data issues:
 ===== Development Items that MUST be done before we do another run-through/demo
 
 ===== Really Easy & High Imapact
+- Write e-mails to various people:
+ - Kirsten (where are you staying/when?)
+ - Directors (all). Welcome, here's what I'm planning
+ - Track e-timer...using sample data.
+ - Wendy, sorry.
+ -
 - Configure the competition to have "pairs" or "group" or "single" so that the manage competitors page only has 1 button.
 - Print the Registration packages, alphabetical by last name.
 - need a way to print Name&ID for all bags.
@@ -122,6 +128,7 @@ NAUCC data issues:
 - All registrants page, add 'state' column?
 
 ==== Important
+- Prevent changes to Artistic Registration after Artistic_closed Date.
 - Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
   - Why can't I import the 10kStandard.csv (file format issues?)
 - Add Warning on Registration Summary if this user doesn't have a confirmed USA membership?
