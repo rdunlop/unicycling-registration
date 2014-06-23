@@ -90,7 +90,6 @@ Last Re-Arranged June 20th, 2014.
 
 ================================================================================================
 NAUCC data issues:
-- Basketball/Hockey - Ranked competitions Without Age Groups? (should be able to calculate ranked without age group?)
 - Various Age Groups need to be created/configured (like 10k Standard)
 - How are Speed Trials being Judged/Data-entered?
 - Does Speed Trials Advanced have Experts?

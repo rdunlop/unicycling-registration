@@ -290,7 +290,7 @@ class RegistrantsController < ApplicationController
   end
 
   def show_all
-    @registrants = Registrant.active.order(:last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
+    @registrants = Registrant.active.reorder(:last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
 
     respond_to do |format|
       format.html # show_all.html.erb
