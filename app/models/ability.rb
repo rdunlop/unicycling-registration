@@ -173,6 +173,7 @@ class Ability
     if user.has_role? :event_planner
       can :summary, Event
       can :sign_ups, EventCategory
+      can [:email, :send_email], Registrant
     end
 
     if user.has_role? :race_official or user.has_role? :admin
@@ -244,8 +245,7 @@ class Ability
       can :reg_fee, Registrant
       can :update_reg_fee, Registrant
       can :manage_all, Registrant
-      can :email, Registrant
-      can :send_email, Registrant
+      can [:email, :send_email], Registrant
       can :bag_labels, Registrant
       can :undelete, Registrant
       can :crud, Registrant

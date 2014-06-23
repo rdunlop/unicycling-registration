@@ -100,7 +100,9 @@ class User < ActiveRecord::Base
     when :payment_admin
       "[e.g. Garrett Macey] Able to view the payments that have been received, the total number of items paid."
     when :event_planner
-      "[e.g. Mary Koehler] Able to view/review the event sign_ups."
+      "[e.g. Mary Koehler]
+      Able to view/review the event sign_ups.
+      Able to view/send emails to all registrants"
     when :normal_user
       "[e.g. John Smith] (no special abilities)"
     else
