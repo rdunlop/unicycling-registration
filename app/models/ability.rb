@@ -160,6 +160,7 @@ class Ability
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
+      can [:directors], :permission
       if config.usa
         can :manage, :usa_membership
       end
@@ -173,6 +174,7 @@ class Ability
       can :summary, Event
       can :sign_ups, EventCategory
       can [:email, :send_email], Registrant
+      can [:directors], :permission
     end
 
     if user.has_role? :race_official or user.has_role? :admin

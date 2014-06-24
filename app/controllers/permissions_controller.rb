@@ -52,7 +52,7 @@ class PermissionsController < ApplicationController
   end
 
   def directors
-    @events = Event.all
+    @events = Event.order(:name).all
   end
 
 end

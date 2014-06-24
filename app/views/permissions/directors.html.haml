@@ -1,6 +1,5 @@
-%h1 Manage Directors
-%table
-  %caption Directors
+%h1 List Directors
+%table.sortable
   %thead
     %tr
       %th Event
@@ -8,7 +7,7 @@
   %tbody
     - @events.each do |event|
       %tr
-        %td= link_to event, event_path(event)
+        %td= link_to_if(can?(:show, event), event, event_path(event))
         %td
           - User.with_role(:director, event).each do |user|
             = user
