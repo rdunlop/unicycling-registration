@@ -66,6 +66,10 @@ Information about the Competition will appear here, including results, judges, a
   - else
     = link_to 'Lock', lock_competition_path(@competition), :method => :post, data: { confirm: "No more results can be changed. This cannot be undone by a Director. Continue?" }, class: "action_button"
 
+- if @competition.has_age_group_entry_results?
+  %h2 Publish Age Group Entries
+  = render partial: "publish_age_group_entries"
+
 - if can? :publish, @competition
   %h2 Publish the competition Results
   = link_to "published Data", @competition.published_results_file.url

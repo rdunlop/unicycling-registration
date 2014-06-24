@@ -22,6 +22,7 @@ Workspace::Application.routes.draw do
           get :single_attempt_recording
           get :two_attempt_recording
           get :results
+          get :age_group_entry_results
         end
       end
       resources :events, :only => [] do
@@ -286,6 +287,7 @@ Workspace::Application.routes.draw do
         delete :lock, to: 'competitions#unlock'
         post :publish
         delete :publish, to: 'competitions#unpublish'
+        post :publish_age_group_entry
         post :award
         delete :award
         delete :destroy_results

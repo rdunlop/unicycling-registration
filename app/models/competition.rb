@@ -43,6 +43,7 @@ class Competition < ActiveRecord::Base
   has_many :external_results, :through => :competitors
   has_many :competition_sources, :foreign_key => "target_competition_id", :inverse_of => :target_competition, :dependent => :destroy
   has_many :combined_competition_entries, dependent: :destroy
+  has_many :published_age_group_entries, dependent: :destroy
   accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
 
   has_many :lane_assignments, :dependent => :destroy
@@ -214,6 +215,10 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def has_age_group_entry_results?
+    age_group_type.present?
+  end
+
   def age_group_entries
     age_group_type.age_group_entries unless age_group_type.nil?
   end
@@ -224,25 +229,19 @@ class Competition < ActiveRecord::Base
     if age_group_type.nil?
       # no age groups, put all into a single age group
       results["all"] = competitors.active.to_a
+      results["all"].sort!{|a,b| a.sorting_place <=> b.sorting_place}
     else
       age_group_entries.each do |ag_entry|
-        results[ag_entry] = []
+        results[ag_entry] = results_list_for(ag_entry)
       end
-
-      # sort the competitors by age group
-      competitors.active.each do |competitor|
-        next unless competitor.has_result?
-        calculated_ag = age_group_type.age_group_entry_for(competitor.age, competitor.gender, competitor.wheel_size)
-        results[calculated_ag] << competitor unless calculated_ag.nil?
-      end
-    end
-
-    #sort the results by place
-    results.keys.each do |key|
-      results[key].sort!{|a,b| a.sorting_place <=> b.sorting_place}
     end
 
     results
+  end
+
+  def results_list_for(ag_entry)
+    results = competitors.active.select{ |competitor| competitor.has_result? && competitor.age_group_entry == ag_entry }
+    results.sort!{|a,b| a.sorting_place <=> b.sorting_place}
   end
 
   def get_judge(user)

@@ -18,7 +18,13 @@
         - competition_presenter = CompetitionPresenter.new(competition)
         //%td{ class: competition_presenter.status_code}= competition_presenter.status
         %td= link_to "Competitor List", announcer_printing_competition_path(competition)
-        %td= link_to_if(competition.published?, "Results", competition.published_results_file_url) { }
+        %td
+          - if !competition.published? && competition.has_age_group_entry_results?
+            - competition.published_age_group_entries.each do |entry|
+              = link_to entry, age_group_entry_results_printing_competition_path(competition, age_group_entry: entry.age_group_entry), title: "published at #{entry.published_formatted}"
+              %br
+          - else
+            = link_to_if(competition.published?, "Results", competition.published_results_file_url) { }
         %td= competition.published_date_to_s
 
 %p

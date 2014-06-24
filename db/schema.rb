@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622235615) do
+ActiveRecord::Schema.define(version: 20140624033638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -486,6 +486,14 @@ ActiveRecord::Schema.define(version: 20140622235615) do
   end
 
   add_index "payments", ["user_id"], name: "index_payments_user_id", using: :btree
+
+  create_table "published_age_group_entries", force: true do |t|
+    t.integer  "competition_id"
+    t.integer  "age_group_entry_id"
+    t.datetime "published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "rails_admin_histories", force: true do |t|
     t.text     "message"

@@ -1,0 +1,15 @@
+%table
+  %thead
+    %tr
+      %th Age Group
+      %th Preview
+      %th Publish
+      %th Published-At
+  %tbody
+    - @competition.age_group_type.age_group_entries.each do |entry|
+      - published_entry = @competition.published_age_group_entries.where(age_group_entry: entry).first
+      %tr
+        %td= entry
+        %td= link_to "Preview", age_group_entry_results_printing_competition_path(@competition, age_group_entry: entry.id)
+        %td= link_to "Publish", publish_age_group_entry_competition_path(@competition, age_group_entry: entry.id), method: :post, data: { confirm: "are you sure?" }
+        %Td= published_entry.try(:published_formatted)

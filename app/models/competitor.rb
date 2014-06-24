@@ -155,6 +155,12 @@ class Competitor < ActiveRecord::Base
       end
     end
 
+    def age_group_entry
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/competition/#{competition.id}-#{competition.updated_at}/age_group_entry") do
+        competition.age_group_type.age_group_entry_for(age, gender, wheel_size) if competition.age_group_type.present?
+      end
+    end
+
     #private
     def age_group_key
       "/competition/#{competition.id}-#{competition.updated_at}/age_group/#{age_group_entry_description}/version"

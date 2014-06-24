@@ -141,7 +141,7 @@ Done- Add ability to create new accounts on-site.
  - Freestyle Presentation scores are only 3 categories (not 4)
 - Have a tablet at the start time which shows the HEAT number, Age Group, Event, Competitors (Large ID, Large First, (small Last))
  - Formatting
-- All registrants page, add 'state' column?
+Done- All registrants page, add 'state' column?
 
 ==== Important
 - Prevent changes to Artistic Registration after Artistic_closed Date.

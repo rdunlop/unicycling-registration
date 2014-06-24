@@ -13,11 +13,21 @@ class CompetitionStateMachine
     competition.update_attribute(:locked, false)
   end
 
+  def publish_age_group_entry(entry_id)
+    existing = competition.published_age_group_entries.where(age_group_entry_id: entry_id).first
+    if existing
+      existing.destroy
+    else
+      entry = competition.published_age_group_entries.build(age_group_entry_id: entry_id)
+      entry.save
+    end
+  end
+
   def publish
     begin
       Competition.transaction do
         pdf_creator.publish!
-        competition.update_attributes({published: true, published_date: DateTime.now})
+        competition.update_attributes({published: true, published_date: DateTime.now}) || raise("Unable to save attributes")
       end
       true
     rescue Exception => e
@@ -29,7 +39,7 @@ class CompetitionStateMachine
     begin
       Competition.transaction do
         pdf_creator.unpublish!
-        competition.update_attributes({published: false, published_date: nil})
+        competition.update_attributes({published: false, published_date: nil}) || raise("Unable to save attributes")
       end
       true
     rescue Exception => e
