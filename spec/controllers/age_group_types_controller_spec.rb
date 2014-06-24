@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AgeGroupTypesController do
   before(:each) do
-    sign_in FactoryGirl.create(:admin_user)
+    sign_in FactoryGirl.create(:super_admin_user)
   end
 
   def valid_attributes
