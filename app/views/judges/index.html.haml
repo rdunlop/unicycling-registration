@@ -31,11 +31,11 @@
   %p These Users have the ability to assign Lane Assignments, as well as DQ competitors and see who is in each Heat/Lane.
   %table.sortable
     %thead
-  %th Email
-  %tbody
-    - @race_officials.each do |official|
-      %tr
-        %td= official
+      %th Email
+    %tbody
+      - @race_officials.each do |official|
+        %tr
+          %td= official
   %h2 Set User as 'Race Official'
   = form_tag  create_race_official_permissions_path, method: :post do |f|
     = hidden_field_tag :competition_id, @competition.id

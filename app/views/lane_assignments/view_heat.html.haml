@@ -2,9 +2,6 @@
 
 %p.next_heat= link_to "Next Heat", view_heat_competition_lane_assignments_path(@competition, heat: @heat +1 ), class: 'next_action' unless @heat.nil?
 
-%h2= @competition
+%h1.heat_number= "#{@competition} - Heat # #{@heat}"
 
-%h1.heat_number= "Heat # #{@heat}"
-
-Lane Assignments
 = render "view_heat_summary"

@@ -1,25 +1,23 @@
-%h1= @competition
-
-%h2 New Lane Assignment
+%h1= "#{@competition} New Lane Assignment"
 
 #notice
 
-= render 'form'
+.lane_assignment_entry_form
+  = render 'form'
 
-%h2 Lane Assignments
+.lane_assignment_entries
+  %table.sortable.lane_assignments
+    %thead
+      %tr
+        %th Heat
+        %th Lane
+        %th ID
+        %th Competitor
+        %th Age Group
+        %th Gender
+        %th
+        %th
 
-%table.sortable.lane_assignments
-  %thead
-    %tr
-      %th ID
-      %th Competitor
-      %th Heat
-      %th Lane
-      %th
-      %th
-
-  %tbody
-    - @lane_assignments.each do |lane_assignment|
-      = render partial: "lane_assignment", object: lane_assignment
-
-%br
+    %tbody
+      - @lane_assignments.each do |lane_assignment|
+        = render partial: "lane_assignment", object: lane_assignment

@@ -1,5 +1,21 @@
 Last Re-Arranged June 20th, 2014.
 
+Benoit: why can the 'directors" page not get me anywhere else.
+- Why doesn't the Director have access to the Copmetition page.
+-
+
+Kathleen notes:
+Done- need to see what age/age-group each person is assigned.
+ Done- Need to have Gender also.
+ - Filters for Heat/age-group (filter before-and-after Heat # X)
+ Done- Put the Heat/Lane/ID/Name/age/age-group/Gender, (because it doesn't need to be sorted by ID)
+ - When re-sorting, some of the data goes away.
+ - color-code filled-heats.
+  - Use a "show Heat X and above text-area"
+ Done- Condense the display, put the Forms on the Left, and the data on the right.
+ - "Is tehre a way to put a Line between each Heat?"
+  - Perhaps remove all of the sortability, and only make it prettier, using dark-lines between heats.
+
 
 ===== Questions to be answered, by whom
 - Mary Connie How Do we want to allow people to un-sign-up for events easily without going through a paper-printout-confirmation step.
