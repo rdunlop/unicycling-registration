@@ -10,6 +10,8 @@ Workspace::Application.routes.draw do
       end
     end
 
+
+
     namespace :printing do
       namespace :race_recording do
         get :blank
@@ -22,7 +24,6 @@ Workspace::Application.routes.draw do
           get :single_attempt_recording
           get :two_attempt_recording
           get :results
-          get :age_group_entry_results
         end
       end
       resources :events, :only => [] do
@@ -315,6 +316,7 @@ Workspace::Application.routes.draw do
         end
       end
       resources :external_results, :shallow => true, :except => [:new, :show]
+      resources :published_age_group_entries, only: [:show]
     end
     resources :lane_assignments, :except => [:new, :index, :create, :show]
 

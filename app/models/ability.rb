@@ -25,6 +25,9 @@ class Ability
     can :read, CombinedCompetition
     can :announcer, Competition
     can [:acl, :set_acl], :permission
+    can :show, PublishedAgeGroupEntry do |entry|
+      entry.published_at.present?
+    end
 
     if config.test_mode
       # allow the user to upgrade their account in TEST MODE

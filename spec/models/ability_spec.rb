@@ -305,5 +305,14 @@ describe "Ability" do
     it { should be_able_to(:index, :result) }
     it { should be_able_to(:read, CombinedCompetition) }
     it { should be_able_to(:announcer, @competition) }
+
+    describe "when a competition has published age_group_entry results" do
+      before :each do
+        @entry = FactoryGirl.create(:age_group_entry)
+        @published_entry = @competition.published_age_group_entries.create(age_group_entry: @entry)
+      end
+
+      it { should be_able_to :show, @published_entry}
+    end
   end
 end
