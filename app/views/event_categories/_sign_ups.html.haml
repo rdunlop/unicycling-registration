@@ -1,0 +1,26 @@
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Age
+      %th Gender
+      %th Event Category
+      - if @config.usa?
+        %th State
+      - else
+        %th Country
+      %th Details
+  %tbody
+    - sign_ups.each do |resu|
+      %tr
+        %td= resu.registrant.bib_number
+        %td= resu.registrant
+        %td= resu.registrant.age
+        %td= resu.registrant.gender
+        %td= resu.event_category
+        - if @config.usa?
+          %td= resu.registrant.state
+        - else
+          %td= resu.registrant.country
+        %td= resu.registrant.describe_event_hash(event)[:additional]

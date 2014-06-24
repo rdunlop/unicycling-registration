@@ -6,10 +6,16 @@
       %tr
         %th= t(".ID")
         %th= t(".name")
-        %th= t(".country")
+        - if @config.usa?
+          %th= t(".state")
+        - else
+          %th= t(".country")
     %tbody
       - @registrants.each do |registrant|
         %tr
           %td= registrant.bib_number
           %td= registrant
-          %td= registrant.country
+          - if @config.usa?
+            %td= registrant.state
+          - else
+            %td= registrant.country

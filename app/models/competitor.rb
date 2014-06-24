@@ -256,6 +256,18 @@ class Competitor < ActiveRecord::Base
       end
     end
 
+    def state
+      Rails.cache.fetch("/competitor/#{id}-#{updated_at}/state") do
+        if members.empty?
+          "(No registrants)"
+        else
+          states = members.map(&:state).uniq.compact
+          # display all states if there are more than 1 registrants
+          states.join(",") unless states.empty?
+        end
+      end
+    end
+
     def country
       Rails.cache.fetch("/competitor/#{id}-#{updated_at}/country") do
         if members.empty?

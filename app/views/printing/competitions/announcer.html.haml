@@ -8,7 +8,10 @@
       %th ID
       %th Name
       %th Club
-      %th Country
+      - if @config.usa?
+        %th State
+      - else
+        %th Country
   %tbody
     - @competition.competitors.active.each do |comp|
       %tr
@@ -17,4 +20,7 @@
         %td= comp.bib_number
         %td= comp
         %td= comp.club
-        %td= comp.country
+        - if @config.usa?
+          %td= comp.state
+        - else
+          %td= comp.country

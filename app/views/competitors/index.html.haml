@@ -11,7 +11,10 @@
       %th.sign_up Name
       %th.sign_up Age
       %th.sign_up Gender
-      %th.sign_up Country
+      - if @config.usa?
+        %th.sign_up State
+      - else
+        %th.sign_up Country
       %th.sign_up Age Group
       %th.sign_up Original Event Selection
       %th Errors?
@@ -34,7 +37,10 @@
         %td= competitor.detailed_name
         %td= competitor.age
         %td= competitor.gender
-        %td= competitor.country
+        - if @config.usa?
+          %td= competitor.state
+        - else
+          %td= competitor.country
         %td= competitor.age_group_entry_description
         %td= event_category
         - if errors

@@ -127,10 +127,10 @@ NAUCC data issues:
 - Print the Registration packages, alphabetical by last name.
 - need a way to print Name&ID for all bags.
 - Send Mike a set of instructions for how to train Directors for using the system.
-- Add ability for Mary to see the "Event Directors" report
+Done - Add ability for Mary to see the "Event Directors" report
 - Add ability for Mary to know when Results are posted.
  - Email.
-- Add ability to create new accounts on-site.
+Done- Add ability to create new accounts on-site.
 - 100m breadcrumbs on "display heat"
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
 - Make it possible/easy for a Director to access the raw data (time_results/external_results) after importing
