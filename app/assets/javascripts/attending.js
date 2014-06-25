@@ -24,3 +24,9 @@ $(document).on("click", ".primary_checkbox", function() {
     });
   }
 });
+
+$(document).ready(function() {
+  $(".disabled_event input, .disabled_event select").each(function() {
+    $(this)[0].disabled = "disabled"; // This is where I'm trying to disable the input buttons
+  });
+});

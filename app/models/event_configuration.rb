@@ -121,6 +121,11 @@ class EventConfiguration < ActiveRecord::Base
     standard_skill_closed_date <= today
   end
 
+  def artistic_closed?(today = Date.today)
+    return false if artistic_closed_date.nil?
+    artistic_closed_date < today
+  end
+
   def music_submission_ended?(today = Date.today)
     return true if music_submission_end_date.nil?
     music_submission_end_date <= today

@@ -11,6 +11,12 @@
   border: 1px #A0A0A0 solid;
 }
 
+.disabled_event {
+  .event_choice {
+    background-color: #A7A7A7;
+  }
+}
+
 .event {
   text-align: left;
 }

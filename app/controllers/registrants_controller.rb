@@ -145,10 +145,10 @@ class RegistrantsController < ApplicationController
     end
   end
 
+
   # PUT /registrants/1
   # PUT /registrants/1.json
   def update
-
     respond_to do |format|
       if @registrant.update_attributes(registrant_update_params)
         format.html { redirect_to registrant_registrant_expense_items_path(@registrant), notice: 'Registrant was successfully updated.' }
@@ -250,12 +250,26 @@ class RegistrantsController < ApplicationController
   def registrant_update_params
     attrs = attributes
     attrs.delete(:competitor)
-    params.require(:registrant).permit(attrs)
+    clear_artistic_data!(params.require(:registrant).permit(attrs))
   end
 
   def registrant_params
-    params.require(:registrant).permit(attributes)
+    clear_artistic_data!(params.require(:registrant).permit(attributes))
   end
+
+  def clear_artistic_data!(original_params)
+    # XXX Only do this if I'm not an admin-level person
+    return original_params if can? :create_artistic, Registrant
+    artistic_event_ids = Event.artistic.map(&:id)
+    original_params['registrant_event_sign_ups_attributes'].each do |key,value|
+      if artistic_event_ids.include? value['event_id'].to_i
+        flash[:alert] = "Modification of Artistic Events is disabled"
+        original_params['registrant_event_sign_ups_attributes'].delete(key)
+      end
+    end
+    original_params
+  end
+
 
   public
 

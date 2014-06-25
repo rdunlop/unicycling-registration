@@ -1,5 +1,5 @@
 <% @registrant = registrant %>
-<tr class="event">
+<tr class="event <%= cannot?(:create_artistic, Registrant) && event.artistic? ? 'disabled_event' : '' %>">
 
   <% found_resu = nil
   @registrant.registrant_event_sign_ups.each do |resu|

@@ -6,7 +6,7 @@ class PermissionsController < ApplicationController
   end
 
   def set_acl
-    if params[:access_key] == modification_access_key
+    if params[:access_key].to_i == modification_access_key
       set_reg_modifications_allowed(true)
       flash[:notice] = "Successfully Enabled Access"
     else

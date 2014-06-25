@@ -11,6 +11,7 @@
 #  name                  :string(255)
 #  visible               :boolean
 #  accepts_music_uploads :boolean          default(FALSE)
+#  artistic              :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -49,6 +50,10 @@ class Event < ActiveRecord::Base
 
   def self.visible
     where(:visible => true)
+  end
+
+  def self.artistic
+    where(artistic: true)
   end
 
   def touch_competitions
