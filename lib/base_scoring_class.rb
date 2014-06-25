@@ -1,6 +1,8 @@
 class BaseScoringClass
   include Rails.application.routes.url_helpers
 
+  attr_accessor :competition
+
   def initialize(competition)
     @competition = competition
   end
@@ -49,6 +51,10 @@ class BaseScoringClass
 
   def uses_judges
     false
+  end
+
+  def results_path
+    nil
   end
 
   # Do the competitors compete in a pre-defined order?

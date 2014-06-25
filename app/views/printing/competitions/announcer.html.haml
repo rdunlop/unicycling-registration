@@ -18,7 +18,13 @@
         - if @competition.compete_in_order
           %td= comp.position
         %td= comp.bib_number
-        %td= comp
+        %td
+          - if comp.team_name.present?
+            %b= comp.team_name
+            %br
+          - comp.members.each do |member|
+            = member
+            %br
         %td= comp.club
         - if @config.usa?
           %td= comp.state

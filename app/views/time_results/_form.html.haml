@@ -3,7 +3,7 @@
   %table
     %thead
       %tr
-        %th= f.label :registrant_id
+        %th= f.label :competitor_id
         %th= f.label :minutes
         %th= f.label :seconds
         %th= f.label :thousands
@@ -15,7 +15,7 @@
     %tbody
       %tr
         %td.ui-widget
-          = f.select :competitor_id, @competition.competitors.all.map { |comp| ["#{comp.bib_number}-#{comp}", comp.id] }, {:include_blank => true}, autofocus: true
+          = competitor_select_box(f, @competition)
         %td= f.number_field :minutes, {min: 0}
         %td= f.number_field :seconds, {min: 0}
         %td= f.number_field :thousands, {min: 0}
@@ -24,9 +24,3 @@
         %td= f.text_field :comments_by
         %td= f.number_field :attempt_number, {min: 1}
         %td= f.submit
-
-:javascript
-  $(function() {
-    $( "#time_result_registrant_id" ).combobox();
-  });
-

@@ -69,6 +69,10 @@ class RaceScoringClass < BaseScoringClass
     false
   end
 
+  def results_path
+    competition_time_results_path(competition)
+  end
+
   def build_result_from_imported(import_result)
     TimeResult.new(
       minutes: import_result.minutes,

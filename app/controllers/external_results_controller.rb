@@ -4,6 +4,11 @@ class ExternalResultsController < ApplicationController
   before_filter :load_new_external_result, :only => [:create]
   load_and_authorize_resource
 
+  before_action :set_breadcrumbs, only: :index
+
+  def set_breadcrumbs
+    add_to_competition_breadcrumb(@competition)
+  end
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
@@ -15,6 +20,8 @@ class ExternalResultsController < ApplicationController
 
   # GET /competitions/#/external_results
   def index
+    add_breadcrumb "Points Results"
+
     @external_result = ExternalResult.new
 
     respond_to do |format|
@@ -25,6 +32,9 @@ class ExternalResultsController < ApplicationController
   # GET /external_results/1/edit
   def edit
     @competition = @external_result.competition
+    add_to_competition_breadcrumb(@competition)
+    add_breadcrumb "Edit Result"
+
   end
 
   # POST /external_results

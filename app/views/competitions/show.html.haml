@@ -3,7 +3,7 @@
 - if @competition.locked
   .locked_banner LOCKED
 
-Information about the Competition will appear here, including results, judges, and scoring settings (read-only)
+Results, judges, and scoring settings.
 
 - if can? :lock, @competition
   %h2 Director Abilities
@@ -48,6 +48,10 @@ Information about the Competition will appear here, including results, judges, a
   %h2 Monitor Results
   %p
     = link_to 'View', result_competition_path(@competition)
+
+  %h2 Manage Results
+  %p
+    = link_to("Enter/Modify Results", @competition.results_path) unless @competition.results_path.nil?
 
   %h2 Preview Results to be posted
   %p

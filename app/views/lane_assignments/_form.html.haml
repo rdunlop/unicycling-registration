@@ -4,7 +4,7 @@
     .field
       = f.label :competitor_id
       %br
-      = f.select :competitor_id, @competition.competitors.map{|comp| [comp.name, comp.id]}, {:include_blank => true, }, {:autofocus => true, class: 'chosen-select js--autoFocus' }
+      = competitor_select_box(f, @competition)
   - else
     .field
       = f.label :registrant_id

@@ -71,6 +71,10 @@ class PointsScoringClass < BaseScoringClass
     false
   end
 
+  def results_path
+    competition_external_results_path(competition)
+  end
+
   # from import_result to external_result
   def build_result_from_imported(import_result)
     ExternalResult.new(

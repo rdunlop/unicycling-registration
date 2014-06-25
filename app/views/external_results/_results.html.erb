@@ -1,11 +1,11 @@
-<h1>Listing Externally Ranked Results for <%=  @competition %></h1>
+<h1>Listing Entered-Points Results for <%=  @competition %></h1>
 
 <table class="sortable">
   <thead>
     <tr>
       <th>Competitor</th>
+      <th>Points</th>
       <th>Details</th>
-      <th>Rank</th>
       <th>ID</th>
       <th>Name</th>
       <th>Age Group</th>
@@ -20,8 +20,8 @@
     <% @competition.external_results.each do |external_result| %>
       <tr>
         <td><%= external_result.competitor %></td>
-        <td><%= external_result.details %></td>
         <td><%= external_result.points %></td>
+        <td><%= external_result.details %></td>
         <td><%= external_result.competitor.bib_number %></td>
         <td><%= external_result.competitor %></td>
         <td><%= external_result.competitor.age_group_entry_description %></td>

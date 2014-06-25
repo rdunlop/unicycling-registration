@@ -79,7 +79,7 @@ class Competition < ActiveRecord::Base
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
             :build_import_result_from_raw, :score_calculator,
             :result_description, :compete_in_order, :scoring_description,
-            :example_result, :imports_times, to: :scoring_helper
+            :example_result, :imports_times, :results_path, to: :scoring_helper
 
   mount_uploader :published_results_file, PdfUploader
 

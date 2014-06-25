@@ -22,4 +22,8 @@ module FormHelper
       @competition.registrants.reorder(:bib_number).map{ |reg| [reg.with_id_to_s, reg.bib_number] }
     end
   end
+
+  def competitor_select_box(form, competition)
+    form.select :competitor_id, @competition.competitors.active.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {:include_blank => true}, autofocus: true, class: 'chosen-select js--autoFocus'
+  end
 end

@@ -3,10 +3,17 @@ class TimeResultsController < ApplicationController
   load_and_authorize_resource :competition, :except => [:edit, :destroy, :update]
   load_and_authorize_resource :time_result
 
+  before_action :set_breadcrumbs, only: :index
+
+  def set_breadcrumbs
+    add_to_competition_breadcrumb(@competition)
+  end
+
   # XXX look into https://github.com/railscasts/396-importing-csv-and-excel/blob/master/store-with-validations/app/models/product_import.rb ??
 
   # GET competitions/1/time_results
   def index
+    add_breadcrumb "Time Results"
     #@time_results = @competition.time_results.includes(:competitor => [:competition]) # XXX
     @time_result = TimeResult.new # @event.time_results.build
 
@@ -18,6 +25,8 @@ class TimeResultsController < ApplicationController
   # GET /time_results/1/edit
   def edit
     @competition = @time_result.competition
+    add_to_competition_breadcrumb(@competition)
+    add_breadcrumb "Edit Time Result"
   end
 
   # POST event/1/time_results
