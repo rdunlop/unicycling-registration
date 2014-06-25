@@ -184,6 +184,8 @@ class Ability
     if user.has_role? :event_planner
       can :summary, Event
       can :sign_ups, EventCategory
+      can :manage_all, Registrant
+      can :read, Registrant
       can [:email, :send_email], Registrant
       can [:directors], :permission
     end

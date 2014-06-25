@@ -24,7 +24,7 @@ class RegistrantsController < ApplicationController
       all_index
       respond_to do |format|
         format.html { render "index_all" }
-        format.pdf { render :pdf => "index_all", :template => "registrants/index_all.html.erb", :formats => [:html], :layout => "pdf.html" }
+        format.pdf { render :pdf => "index_all", :template => "registrants/index_all.html.haml", :formats => [:html], :layout => "pdf.html" }
       end
     else
       @my_registrants = @user.registrants.active
