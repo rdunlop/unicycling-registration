@@ -261,6 +261,7 @@ class RegistrantsController < ApplicationController
     # XXX Only do this if I'm not an admin-level person
     return original_params if can? :create_artistic, Registrant
     artistic_event_ids = Event.artistic.map(&:id)
+    return original_params unless original_params['registrant_event_sign_ups_attributes']
     original_params['registrant_event_sign_ups_attributes'].each do |key,value|
       if artistic_event_ids.include? value['event_id'].to_i
         flash[:alert] = "Modification of Artistic Events is disabled"

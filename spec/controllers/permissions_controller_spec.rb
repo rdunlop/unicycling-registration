@@ -58,8 +58,8 @@ describe PermissionsController do
     end
 
     it "can authorize acl" do
-      allow_any_instance_of(ApplicationController).to receive(:modification_access_key).and_return("the_key")
-      post :set_acl, {access_key: "the_key"}
+      allow_any_instance_of(ApplicationController).to receive(:modification_access_key).and_return(123456)
+      post :set_acl, {access_key: "123456"}
       flash[:notice].should == "Successfully Enabled Access"
     end
   end
