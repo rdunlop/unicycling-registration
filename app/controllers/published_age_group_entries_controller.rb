@@ -3,7 +3,7 @@ class PublishedAgeGroupEntriesController < ApplicationController
 
   before_action :load_competition
 
-  load_and_authorize_resource
+  load_and_authorize_resource only: :show
 
   respond_to :html
 
@@ -15,6 +15,13 @@ class PublishedAgeGroupEntriesController < ApplicationController
       format.html
       format.pdf { render_common_pdf(name, "Portrait", attachment) }
     end
+  end
+
+  def preview
+    authorize! :preview, AgeGroupEntry
+    @ag_entry = AgeGroupEntry.find(params[:id])
+    @results_list = @competition.results_list_for(@ag_entry)
+    render :show
   end
 
   private

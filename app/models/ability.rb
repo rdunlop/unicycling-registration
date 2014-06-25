@@ -162,7 +162,7 @@ class Ability
       set_data_entry_volunteer_abilities(user)
       can [:results, :summary], Event
       can :sign_ups, EventCategory
-      can :read, Competition
+      can [:read, :lock], Competition
       can :manage, Competitor
       can :manage, Member
       can :manage, ImportResult
