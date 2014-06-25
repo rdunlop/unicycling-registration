@@ -26,7 +26,6 @@ class TimeResult < ActiveRecord::Base
   include StatusNilWhenEmpty
 
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
-  validates :competitor_id, :presence => true
 
   def self.status_values
     ["DQ"]

@@ -296,6 +296,7 @@ describe Competitor do
   end
   describe "with a distance attempt" do
     before(:each) do
+      Delorean.jump 2
       @da = DistanceAttempt.new
     end
     it "should be accessible from the competitor" do
@@ -309,6 +310,7 @@ describe Competitor do
 
       comp = da.competitor
       DistanceAttempt.count.should == 1
+      Delorean.jump 2
 
       comp.destroy
       DistanceAttempt.count.should == 0
@@ -317,26 +319,28 @@ describe Competitor do
     it "should indicate double_fault if two attempts at the same distance are found" do
       @comp.double_fault?.should == false
       da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
-      @comp.double_fault?.should == false
+      @comp.reload.double_fault?.should == false
+      Delorean.jump 2
       da2 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
 
-      @comp.double_fault?.should == true
+      @comp.reload.double_fault?.should == true
     end
     it "should indicate double_fault if two consecutive attempts at different distances are found" do
       @comp.double_fault?.should == false
       da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
-      @comp.double_fault?.should == false
+      @comp.reload.double_fault?.should == false
+      Delorean.jump 2
       da2 = FactoryGirl.create(:distance_attempt, :distance => da1.distance + 1, :competitor => @comp, :fault => true)
 
-      @comp.double_fault?.should == true
+      @comp.reload.double_fault?.should == true
     end
 
     it "should return the max attempted distance" do
       @comp.max_attempted_distance.should == 0
       @comp.max_successful_distance.should == 0
       da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
-      @comp.max_attempted_distance.should == da1.distance
-      @comp.max_successful_distance.should == 0
+      @comp.reload.max_attempted_distance.should == da1.distance
+      @comp.reload.max_successful_distance.should == 0
     end
 
     it "should return the attempts is descending distance order" do
@@ -360,7 +364,9 @@ describe Competitor do
     describe "when attempts have already been made" do
       before (:each) do
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 10, :fault => false)
+        Delorean.jump 2
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
+        Delorean.jump 2
       end
 
       it "should not be allowed to attempt a smaller distance" do
@@ -376,7 +382,7 @@ describe Competitor do
           FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
           da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 25, :fault => false)
 
-          @comp.double_fault?.should == true
+          @comp.reload.double_fault?.should == true
           da.valid?.should == false
       end
 
@@ -390,12 +396,13 @@ describe Competitor do
             @da2.valid?.should == true
         end
         it "should describe the status" do
-            @comp.distance_attempt_status.should == "Finished. Final Score 10"
+            @comp.reload.distance_attempt_status.should == "Finished. Final Score 10"
         end
       end
 
       it "should allow multiple faults, interspersed within the attempts" do
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 20, :fault => false)
+        Delorean.jump 2
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 25, :fault => true)
 
         da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 25, :fault => false)
@@ -404,7 +411,7 @@ describe Competitor do
       end
 
       it "should describe its status clearly" do
-        @comp.distance_attempt_status.should == "Fault. Next Distance 15+"
+        @comp.reload.distance_attempt_status.should == "Fault. Next Distance 15+"
       end
 
       describe "the last attempt was a success" do
@@ -412,7 +419,7 @@ describe Competitor do
           FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 20, :fault => false)
         end
         it "should have a nice status" do
-            @comp.distance_attempt_status.should == "Success. Next Distance 21+"
+            @comp.reload.distance_attempt_status.should == "Success. Next Distance 21+"
         end
       end
     end
