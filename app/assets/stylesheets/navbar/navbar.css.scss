@@ -20,17 +20,25 @@ body {
 }
 #main {
    padding:10px;
-   padding-bottom:$footer_height;   /* Height of the footer */
+   margin-bottom:-$footer_height;   /* Height of the footer */
    text-align: center;
    vertical-align: center;
-   overflow: auto;
+   /* overflow: auto;*/
 }
+#main:after {
+  content: "";
+  display: block;
+}
+
+#bottom_nav, #main:after {
+  height:$footer_height;
+}
+
 #bottom_nav {
    text-align: center;
-   position:absolute;
+   /* position:absolute; */
    bottom:0;
    width:100%;
-   height:$footer_height;   /* Height of the footer */
    background: #eeeeee;
 }
 

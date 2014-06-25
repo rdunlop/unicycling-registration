@@ -2,4 +2,4 @@
 
 <%= render partial: "form", object: @competitor %>
 
-<%= link_to "Back", event_path(@competitor.competition.event) %>
+<%= link_to "Back", competition_competitors_path(@competitor.competition) %>
