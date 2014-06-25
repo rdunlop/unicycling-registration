@@ -63,7 +63,7 @@ class SongsController < ApplicationController
     @song.remove_song_file_name!
     reg = @song.registrant
     @song.destroy
-    redirect_to registrant_songs_path(reg), notice: 'Song was successfully destroyed.'
+    redirect_to registrant_songs_path(reg), notice: 'Song was successfully deleted.'
   end
 
   private

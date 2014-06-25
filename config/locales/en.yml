@@ -53,7 +53,7 @@ en:
       primary_team_or_club_contact: "Primary Team or Club Contact"
       i_am_interested_in_volunteering: "I am interested in volunteering"
       i_accept_to_be_contacted: "I accept to be contacted by email by the Organization team"
-      continue: "Continue (Expenses...)"
+      continue: "Save & Continue (Expenses...)"
     name:
       name: "Name"
       first_name: "First"

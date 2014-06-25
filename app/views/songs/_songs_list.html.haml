@@ -1,0 +1,34 @@
+%p
+  For some competitions, music is played during the competitor's competition time. Please upload an mp3 with the music you would like played. Please provide music of the appropriate length (see rulebook) for your competition/category.
+%b You are still required to have the music on a CD or MP3 player at the competition. This is so that if there are technical difficulties with the uploaded version, there is an alternate copy available.
+%p
+  %b
+    Music may be uploaded until
+    = @config.music_submission_end_date
+  After that time, if you need to change your music, please contact the director/organizers (or use "Help"->"Feedback").
+
+%table.sortable
+  %thead
+    %tr
+      %th Event
+      %th Description
+      %th File name
+      %th Last Updated
+      %th
+      %th
+      %th
+  %tbody
+    - @songs.each do |song|
+      - next unless song.persisted?
+      %tr
+        %td= song.event
+        %td= song.description
+        %td= song.human_name
+        %td= song.updated_at
+        %td
+          - if song.song_file_name.present?
+            = link_to 'Download', song.song_file_name_url, target: '_blank'
+        %td
+          - unless song.song_file_name.present?
+            = link_to 'Add Song', add_file_song_path(song)
+        %td= link_to 'Remove', song, method: :delete, data: { confirm: 'Are you sure?' }

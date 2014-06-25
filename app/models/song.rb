@@ -23,7 +23,7 @@ class Song < ActiveRecord::Base
 
     validates :registrant_id, :event_id, :description, presence: true
 
-    validates :event_id, uniqueness: { scope: [:registrant_id], message: "cannot have multiple songs associated" }
+    validates :event_id, uniqueness: { scope: [:registrant_id], message: "cannot have multiple songs associated. Remove and re-add." }
 
     def human_name
       return nil unless song_file_name.present?
