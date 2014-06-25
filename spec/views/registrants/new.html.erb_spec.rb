@@ -4,7 +4,7 @@ describe "registrants/new" do
   before(:each) do
     @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
     @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
-    @registration_period = FactoryGirl.create(:registration_period, 
+    @registration_period = FactoryGirl.create(:registration_period,
                                               :start_date => Date.new(2012, 01, 10),
                                               :end_date => Date.new(2012, 02, 11),
                                               :competitor_expense_item => @comp_exp,
@@ -34,7 +34,7 @@ describe "registrants/new" do
     end
     it "displays the 'Continue' button" do
       render
-      assert_select "input[value='Continue (Expenses...)']", 1
+      assert_select "input[value='Save &amp; Continue (Expenses...)']", 1
     end
   end
 
@@ -48,7 +48,7 @@ describe "registrants/new" do
     end
     it "displays the 'Save Registration' button" do
       render
-      assert_select "input[value='Continue (Expenses...)']", 1
+      assert_select "input[value='Save &amp; Continue (Expenses...)']", 1
     end
   end
 
