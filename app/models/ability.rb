@@ -159,11 +159,15 @@ class Ability
 
     # Competitor Assignment
     if user.has_role? :admin
-      can :summary, Event
+      set_data_entry_volunteer_abilities(user)
+      can [:results, :summary], Event
       can :sign_ups, EventCategory
+      can :read, Competition
       can :manage, Competitor
+      can :manage, Member
       can :manage, ImportResult
       can :manage, AwardLabel
+      can :manage, TimeResult
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
