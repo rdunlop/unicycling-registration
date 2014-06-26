@@ -474,7 +474,7 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def usa_membership_paid
+  def usa_membership_paid?
     ind = EventConfiguration.singleton.usa_individual_expense_item
     fam = EventConfiguration.singleton.usa_family_expense_item
     contact_detail.usa_confirmed_paid || contact_detail.usa_family_membership_holder_id? || paid_expense_items.include?(ind) || paid_expense_items.include?(fam)

@@ -175,6 +175,24 @@ div.required {
   padding: 3px;
 }
 
+.registrant_header {
+  h1 {
+    float: left;
+  }
+  .unpaid_warning {
+    float: right;
+    font-size: 20pt;
+    font-weight: bold;
+    padding: 5px;
+  }
+
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}
+
 .registrant_edit_button {
   @include button(auto);
 }

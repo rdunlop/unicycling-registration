@@ -1,0 +1,7 @@
+- cache [I18n.locale, @registrant, @config] do
+  - if @registrant.amount_owing > 0
+    .unpaid_warning
+      UNPAID?
+  - unless @config.usa && @registrant.usa_membership_paid?
+    .unpaid_warning
+      USA#

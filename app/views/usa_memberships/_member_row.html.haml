@@ -1,5 +1,5 @@
 - reg = member_row
-%tr{ class: reg.usa_membership_paid ? "usa_confirmed" : "", id: "reg_#{reg.id}" }
+%tr{ class: reg.usa_membership_paid? ? "usa_confirmed" : "", id: "reg_#{reg.id}" }
   %td= reg.bib_number
   %td= reg.contact_detail.usa_member_number
   %td= link_to reg.first_name, edit_registrant_path(reg)
