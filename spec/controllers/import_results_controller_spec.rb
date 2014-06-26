@@ -15,14 +15,6 @@ describe ImportResultsController do
     { "details" => "100pts", "rank" => "1", "bib_number" => "123",  }
   end
 
-  describe "GET index" do
-    it "assigns all import_results as @import_results" do
-      im_result = FactoryGirl.create(:import_result, :user => @admin_user, :competition => @competition)
-      get :index, {:user_id => @admin_user.id, :competition_id => @competition.id}
-      assigns(:import_results).should eq([im_result])
-    end
-  end
-
   describe "GET edit" do
     it "assigns the requested import_result as @import_result" do
       get :edit, {:id => import_result.to_param}
@@ -140,9 +132,9 @@ describe ImportResultsController do
 
   describe "DELETE destroy_all" do
     it "redirects to the import competition page" do
-      request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, @competition)
       competition = FactoryGirl.create(:timed_competition)
       import = FactoryGirl.create(:import_result, :competition => competition)
+      request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
       delete :destroy_all, {:user_id => import.user, :competition_id => competition.id}
       response.should redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
     end
