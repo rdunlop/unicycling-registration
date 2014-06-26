@@ -38,7 +38,7 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def two_attempt_recording
-    @competition_sign_up = CompetitionSignUp.new(@competition)
+    #@competition_sign_up = CompetitionSignUp.new(@competition)
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
     @no_page_breaks = true unless params[:no_page_breaks].nil?
 
