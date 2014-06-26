@@ -278,7 +278,7 @@ class Competition < ActiveRecord::Base
       @fsc ||= FlatlandScoringClass.new(self)
     when "Street"
       @ssc ||= StreetScoringClass.new(self)
-    when "Two Attempt Distance"
+    when "High/Long"
       @dsc ||= DistanceScoringClass.new(self)
     else
       nil
