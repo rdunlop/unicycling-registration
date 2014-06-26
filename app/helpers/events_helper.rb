@@ -3,7 +3,7 @@ module EventsHelper
     class_name = judge.competition.event_class
 
     case class_name
-    when 'Two Attempt Distance'
+    when 'High/Long'
       link_to "#{judge.competition} - #{judge.judge_type.name}", judge_distance_attempts_path(judge), options
     when 'Freestyle'
       link_to "#{judge.competition} - #{judge.judge_type.name}", judge_scores_path(judge), options

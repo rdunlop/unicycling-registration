@@ -28,7 +28,7 @@ FactoryGirl.define do
     scoring_class "Freestyle"
 
     factory :distance_competition do
-      scoring_class "Two Attempt Distance"
+      scoring_class "High/Long"
       age_group_type # factory Girl
     end
 

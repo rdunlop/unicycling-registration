@@ -56,7 +56,7 @@ class Competition < ActiveRecord::Base
   validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true }
 
   def self.scoring_classes
-    ["Freestyle", "Distance", "Two Attempt Distance", "Flatland", "Street", "Points Low to High", "Points High to Low"]
+    ["Freestyle", "Distance", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low"]
   end
 
   validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }

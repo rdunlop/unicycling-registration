@@ -66,8 +66,8 @@ describe Competition do
       @ec.scoring_class = "Street"
       @ec.valid?.should == true
     end
-    it "can be Two Attempt Distance" do
-      @ec.scoring_class = "Two Attempt Distance"
+    it "can be High/Long" do
+      @ec.scoring_class = "High/Long"
       @ec.age_group_type = FactoryGirl.build_stubbed(:age_group_type)
       @ec.valid?.should == true
     end

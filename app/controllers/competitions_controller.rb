@@ -116,7 +116,7 @@ class CompetitionsController < ApplicationController
   end
 
   def export_scores
-    if @competition.event_class == 'Two Attempt Distance'
+    if @competition.event_class == 'High/Long'
       csv_string = CSV.generate do |csv|
         csv << ['registrant_external_id', 'distance']
         @competition.competitors.each do |comp|

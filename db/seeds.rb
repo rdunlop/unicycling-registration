@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 if JudgeType.count == 0
-  JudgeType.create(:name => "Presentation", 
+  JudgeType.create(:name => "Presentation",
                    :val_1_description => "Mistakes",
                    :val_2_description => "Choreography & Style",
                    :val_3_description => "Originality of Performance & Showmanship",
@@ -42,7 +42,7 @@ if JudgeType.count == 0
                    :event_class => "Flatland"
                   )
 
-  JudgeType.create(:name => "Distance Judge Type",
+  JudgeType.create(:name => "High/Long Judge Type",
                    :val_1_description => "?",
                    :val_2_description => "?",
                    :val_3_description => "?",
@@ -51,7 +51,7 @@ if JudgeType.count == 0
                    :val_2_max => 10,
                    :val_3_max => 10,
                    :val_4_max => 10,
-                   :event_class => "Two Attempt Distance"
+                   :event_class => "High/Long"
                   )
 
   JudgeType.create(:name => "Street Judge Type",
