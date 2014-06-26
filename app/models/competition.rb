@@ -204,6 +204,14 @@ class Competition < ActiveRecord::Base
     res
   end
 
+  def sorted_competitors
+    competitors.sort{|a,b| a.bib_number.to_i <=> b.bib_number.to_i }
+  end
+
+  def other_eligible_registrants
+    Registrant.active.where(:competitor => true).order(:bib_number) - registrants
+  end
+
   def get_age_group_entry_description(age, gender, wheel_size_id)
     return if age_group_type.nil?
 

@@ -57,6 +57,20 @@ class ApplicationController < ActionController::Base
       :layout => "pdf.html"
   end
 
+  # a prototype, not working (currently cutting off lines)
+  def render_pdf_with_header(view_name, template, locals)
+
+    render :pdf => view_name,
+      :print_media_type => true,
+      :margin => {:top => 60, :left => 2, :right => 2},
+      :footer => default_footer,
+      :formats => [:html],
+      :header =>{ :html => {template: template, locals: locals}},
+      :orientation => "Portrait",
+      :disposition => "inline",
+      :layout => "pdf.html"
+  end
+
   private
 
   def set_home_breadcrumb

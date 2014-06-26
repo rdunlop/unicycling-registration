@@ -1,0 +1,19 @@
+= render partial: "recording_form_header", locals: { competition: @competition, is_start_times: @is_start_times }
+.race_recording.no_break
+  %table.full.grid.race
+    %thead
+      %tr
+        %th.id ID
+        %th.name Name
+        %th.gender Gender
+        %th.attempt Attempt 1
+        %th.attempt Attempt 2
+    %tbody
+      = render partial: "attempt_entry_sample"
+      - @competition.sorted_competitors.each do |reg|
+        = render :partial => "attempt_entry", :locals => {reg: reg, not_signed_up: false }
+      = render :partial => "attempt_entry", :locals => {reg: nil, not_signed_up: false}
+      - @competition.other_eligible_registrants.each do |reg|
+        = render :partial => "attempt_entry", :locals => {reg: reg, not_signed_up: true }
+      - 5.times do
+        = render :partial => "attempt_entry", :locals => {reg: nil, not_signed_up: false}

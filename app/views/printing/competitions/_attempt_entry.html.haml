@@ -1,0 +1,6 @@
+%tr
+  %td{ class: not_signed_up ? 'not_signed_up' : ''}= reg.try(:bib_number)
+  %td{ class: not_signed_up ? 'not_signed_up' : ''}= reg.try(:to_s)
+  %td{ class: not_signed_up ? 'not_signed_up' : ''}= reg.try(:gender)
+  %td
+  %td
