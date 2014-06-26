@@ -113,7 +113,7 @@ describe ImportResultsController do
 
   describe "DELETE destroy" do
     before :each do
-      request.env["HTTP_REFERER"] = user_competition_import_results_path(@admin_user, @competition)
+      request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(@admin_user, @competition)
     end
     it "destroys the requested import_result" do
       im_result = FactoryGirl.create(:import_result, :user => @admin_user, :competition => @competition)
@@ -124,7 +124,7 @@ describe ImportResultsController do
 
     it "redirects to the import_results list" do
       delete :destroy, {:id => import_result.to_param}
-      response.should redirect_to(user_competition_import_results_path(@admin_user, @competition))
+      response.should redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition))
     end
   end
 
@@ -140,10 +140,11 @@ describe ImportResultsController do
 
   describe "DELETE destroy_all" do
     it "redirects to the import competition page" do
+      request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, @competition)
       competition = FactoryGirl.create(:timed_competition)
       import = FactoryGirl.create(:import_result, :competition => competition)
       delete :destroy_all, {:user_id => import.user, :competition_id => competition.id}
-      response.should redirect_to(user_competition_import_results_path(import.user, competition))
+      response.should redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
     end
   end
 end

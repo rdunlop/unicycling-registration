@@ -230,7 +230,7 @@ Workspace::Application.routes.draw do
           end
         end
 
-        resources :import_results, :only => [:index, :create] do
+        resources :import_results, :only => [:create] do
           collection do
             get :proof_single
 

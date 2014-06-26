@@ -135,7 +135,7 @@ class ImportResultsController < ApplicationController
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
     end
-    redirect_to user_competition_import_results_path(@user, @competition), notice: "#{n} rows added, and #{err} errors"
+    redirect_to display_csv_user_competition_import_results_path(@user, @competition)
   end
 
   def display_lif
@@ -159,7 +159,7 @@ class ImportResultsController < ApplicationController
   # DELETE /users/#/competitions/#/import_results/destroy_all
   def destroy_all
     @user.import_results.where(:competition_id => @competition).destroy_all
-    redirect_to user_competition_import_results_path(@user, @competition)
+    redirect_to :back
   end
 
   def approve_heat
@@ -248,7 +248,6 @@ class ImportResultsController < ApplicationController
     @competition ||= @import_result.competition
     @user ||= @import_result.user
     add_to_competition_breadcrumb(@competition)
-    add_breadcrumb "Import Results (#{@user})", user_competition_import_results_path(@user, @competition)
   end
 end
 

@@ -1,5 +1,8 @@
 Last Re-Arranged June 20th, 2014.
 
+- Test importing CSV file.
+- Test DataEntry Import Results Destroy All action.
+
 Jim:
 - When registering, invalid Country says "2 errors" when there is only 1
 - No on-site registration period. Yikes.
