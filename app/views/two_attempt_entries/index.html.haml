@@ -6,7 +6,7 @@
 
 
 %h2 Competition: #{@competition}
-%h3 Is Start Time: #{@is_start_time}
+%h3= start_finish_description(@is_start_time)
 
 %p#notice
 = form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry], {:remote => true, :html => {:class => "data_entry"}}) do |f|

@@ -7,7 +7,7 @@
 = link_to "(pdf)", proof_single_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time, format: :pdf)
 
 %h2= "Competition: #{@competition}"
-%h3= "Start Times: #{@is_start_time}"
+%h3= start_finish_description(@is_start_time)
 
 %h1 Listing Imported Results
 
