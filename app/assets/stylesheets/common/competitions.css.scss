@@ -5,6 +5,18 @@
   border-collapse: collapse;
 }
 
+%instructions {
+  background-color: rgb(241, 248, 157);
+}
+.multiPersonCompetition {
+  @extend %instructions;
+  padding: 5px;
+}
+
+.detailsDescription {
+  @extend %instructions;
+}
+
 // This should be shared somehow
 @mixin button {
   text-decoration: none;

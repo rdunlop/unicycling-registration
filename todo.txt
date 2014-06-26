@@ -1,5 +1,9 @@
 Last Re-Arranged June 20th, 2014.
 
+Jim:
+- When registering, invalid Country says "2 errors" when there is only 1
+- No on-site registration period. Yikes.
+
 Benoit: why can the 'directors" page not get me anywhere else.
 - Why doesn't the Director have access to the Copmetition page.
 -

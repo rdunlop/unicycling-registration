@@ -25,6 +25,9 @@ Results, judges, and scoring settings.
   %hr
 
 %h2 Data Entry
+- if @competition.num_members_per_competitor != "One" && !@competition.uses_judges
+  %p.multiPersonCompetition
+    When entering results for a multi-person competition, please choose a single ID from each group. When you Approve the results, they will be properly associated with the group.
 
 - if @competition.uses_judges
   = link_to "Competitor list", announcer_printing_competition_path(@competition)

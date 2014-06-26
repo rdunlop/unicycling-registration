@@ -3,6 +3,15 @@
   = render partial: "/shared/error_messages", object: @import_result
   = f.hidden_field :is_start_time
 
+  - unless @competition.imports_times
+    %p.detailsDescription
+      The Points are used to calculate the result. The Details will be printed on the medals.
+      %br
+      %b Example:
+      %br
+      Points: 5
+      %br
+      Details: 5pts
   %table.import_results
     %thead
       %tr
@@ -14,8 +23,8 @@
           %th Seconds
           %th Thousands
         - else
-          %th Rank (External)
-          %th Details (external)
+          %th Points
+          %th Details
         %th Disqualified
         %th
         %th

@@ -6,7 +6,7 @@ module CompetitorsHelper
       res = link_to "Two Attempt Recording", two_attempt_recording_printing_competition_path(competition, options)
       res += link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
     when "Single Attempt"
-      res = link_to "Blank Race Recording Forms", single_attempt_recording_printing_competition_path(competition, options)
+      res = link_to "Blank Recording Forms", single_attempt_recording_printing_competition_path(competition, options)
       res += link_to "(pdf)", single_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
     when "Track E-Timer"
       res = link_to "Heats Recording Sheet", heat_recording_printing_competition_path(competition)
