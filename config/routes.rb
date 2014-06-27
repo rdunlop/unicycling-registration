@@ -10,8 +10,6 @@ Workspace::Application.routes.draw do
       end
     end
 
-
-
     namespace :printing do
       namespace :race_recording do
         get :blank
@@ -226,7 +224,8 @@ Workspace::Application.routes.draw do
         #resources :single_attempt_entries, only: [:index, :create]
         resources :two_attempt_entries, only: [:index, :create] do
           collection do
-            get 'proof'
+            get :proof
+            post :approve
           end
         end
 
@@ -267,6 +266,7 @@ Workspace::Application.routes.draw do
       end
     end
     resources :import_results, :only => [:edit, :update, :destroy]
+    resources :two_attempt_entries, :only => [:edit, :update, :destroy]
 
     ###############################################
     ### For event-data-gathering/reporting purposes

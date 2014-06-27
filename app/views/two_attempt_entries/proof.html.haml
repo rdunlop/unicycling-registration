@@ -23,10 +23,10 @@
       %tr
         %td= two_attempt_entry.bib_number
         %td= two_attempt_entry.full_time_1
-        %td= two_attempt_entry.dq_1
+        %td= two_attempt_entry.status_1
         %td
         %td= two_attempt_entry.full_time_2
-        %td= two_attempt_entry.dq_2
+        %td= two_attempt_entry.status_2
         %td
         %td= two_attempt_entry.registrant_name
         - if two_attempt_entry.has_matching_competitor?
@@ -35,4 +35,4 @@
           %td.competitor_not_exists No
 - if can? :approve, ImportResult
   %ul
-    %li= link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit"
+    %li= link_to "Accept these Results", approve_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit"

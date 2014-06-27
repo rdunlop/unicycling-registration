@@ -33,6 +33,8 @@
         %th Thousands
         %th DQ
         %th
+        %th
+        %th
     %tbody
       = render partial: "two_attempt_entry", collection: @two_attempt_entries
     %tfoot
@@ -44,10 +46,12 @@
         %td= f.number_field :minutes_1, {:min => 0}
         %td= f.number_field :seconds_1, {:min => 0}
         %td= f.number_field :thousands_1, {:min => 0}
-        %td= f.check_box :dq_1
+        %td= f.select :status_1, TimeResult.status_values, include_blank: true
         %td
         %td= f.number_field :minutes_2, {:min => 0}
         %td= f.number_field :seconds_2, {:min => 0}
         %td= f.number_field :thousands_2, {:min => 0}
-        %td= f.check_box :dq_2
+        %td= f.select :status_2, TimeResult.status_values, include_blank: true
         %td= f.submit "Submit", :class => "multiclick"
+        %th
+        %th

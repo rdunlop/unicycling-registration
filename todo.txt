@@ -4,13 +4,6 @@ Last Re-Arranged June 20th, 2014.
 - Test DataEntry Import Results Destroy All action.
 - figure out how to use responds_to with :js arguments.
 - Look into something nicer than jquery to do the async-updates (like Angular?) (multiple pages have this flow)
-LIST:
-DONE- Unpaid warnings on Reports
-DONE- Non-confirmed USA on reports
-DONE- Change to use new High/Long
-DONE- Test that on-site registrants get reg-fees (jim-sowers thing)
-- Change the nav menu to not show up the same way on small devices.
-- Make the /results view nicer on small devices
 
 Jim:
 - When registering, invalid Country says "2 errors" when there is only 1

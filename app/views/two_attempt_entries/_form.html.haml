@@ -1,0 +1,39 @@
+= form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry], |
+  {:remote => false, :html => {:class => "data_entry"}}) do |f|                                    |
+  = render partial: "/shared/error_messages", object: @two_attempt_entry
+  = f.hidden_field :is_start_time
+
+  %table.two_attempt_entries
+    %thead
+      %tr
+        %th ID
+        %th Name
+        %th Competitor Exists?
+        %th Minutes1
+        %th Seconds1
+        %th Thousands1
+        %th Disqualified1
+        %th Minutes2
+        %th Seconds2
+        %th Thousands2
+        %th Disqualified2
+        %th
+        %th
+    %tbody
+      = render partial: 'two_attempt_entry', collection: @two_attempt_entries
+
+    %tfoot
+      %tr
+        %td{ colspan: 2}= registrant_bib_number_select_box(f, @competition)
+        %td
+        %td= f.number_field :minutes_1, {:min => 0}
+        %td= f.number_field :seconds_1, {:min => 0}
+        %td= f.number_field :thousands_1, {:min => 0}
+        %td= f.select :status_1, TimeResult.status_values, include_blank: true
+        %td= f.number_field :minutes_2, {:min => 0}
+        %td= f.number_field :seconds_2, {:min => 0}
+        %td= f.number_field :thousands_2, {:min => 0}
+        %td= f.select :status_2, TimeResult.status_values, include_blank: true
+        %td{ colspan: "3"}= f.submit "Submit", :class => "multiclick"
+
+#notice

@@ -1,7 +1,7 @@
 class TwoAttemptEntriesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :user
-  before_filter :load_competition, :only => [:index, :proof, :create]
+  before_filter :load_competition, :only => [:index, :proof, :create, :approve]
   before_filter :load_new_two_attempt_entry, :only => [:create]
   load_and_authorize_resource
 
@@ -14,11 +14,39 @@ class TwoAttemptEntriesController < ApplicationController
 
     @is_start_time = !params[:is_start_times].blank?
 
-    @two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
+    @two_attempt_entries = TwoAttemptEntry.where(user: @user, competition: @competition, is_start_time: @is_start_time)
     @two_attempt_entry = TwoAttemptEntry.new(is_start_time: @is_start_time)
 
     respond_to do |format|
       format.html # index.html.erb
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @two_attempt_entry.update_attributes(two_attempt_entry_params)
+        format.html { redirect_to user_competition_two_attempt_entries_path(@two_attempt_entry.user, @two_attempt_entry.competition, is_start_times: @two_attempt_entry.is_start_time), notice: 'Two attemp entry was successfully updated.' }
+        format.json { head :no_content }
+        format.js { }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @two_attempt_entry.errors, status: :unprocessable_entity }
+        format.js { }
+      end
+    end
+  end
+
+  def destroy
+    user = @two_attempt_entry.user
+    competition = @two_attempt_entry.competition
+    @two_attempt_entry.destroy
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :no_content }
     end
   end
 
@@ -46,7 +74,7 @@ class TwoAttemptEntriesController < ApplicationController
     add_breadcrumb "Proof"
 
 
-    @two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
+    @two_attempt_entrys = TwoAttemptEntry.where(:competition_id => @competition)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -54,12 +82,36 @@ class TwoAttemptEntriesController < ApplicationController
     end
   end
 
+  def approve
+    two_attempt_entrys = TwoAttemptEntry.where(:competition_id => @competition)
+
+    n = two_attempt_entrys.count
+    begin
+      TwoAttemptEntry.transaction do
+        two_attempt_entrys.each do |ir|
+          ir.import!
+        end
+        two_attempt_entrys.destroy_all
+      end
+    rescue Exception => ex
+      errors = ex
+    end
+
+    respond_to do |format|
+      if errors
+        format.html { redirect_to :back, alert: "Errors: #{errors}" }
+      else
+        format.html { redirect_to result_competition_path(@competition), notice: "Added #{n} rows to #{@competition}." }
+      end
+    end
+  end
+
   private
 
   def two_attempt_entry_params
     params.require(:two_attempt_entry).permit(:bib_number, :is_start_time,
-      :dq_1, :minutes_1, :seconds_1, :thousands_1,
-      :dq_2, :minutes_2, :seconds_2, :thousands_2)
+      :status_1, :minutes_1, :seconds_1, :thousands_1,
+      :status_2, :minutes_2, :seconds_2, :thousands_2)
   end
 
   def load_competition
