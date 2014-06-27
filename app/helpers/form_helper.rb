@@ -12,15 +12,19 @@ module FormHelper
   end
 
   def registrant_bib_number_select_box(form, competition)
-    form.select :bib_number, eligible_registrants(competition), {:include_blank => true}, {:autofocus => true, class: 'chosen-select js--autoFocus' }
+    form.select :bib_number, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.bib_number] }, {:include_blank => true}, {:autofocus => true, class: 'chosen-select js--autoFocus' }
   end
 
   def eligible_registrants(competition)
     if @config.usa?
-      Registrant.select_box_options_to_bib_number
+      Registrant.active.where(:competitor => true)
     else
-      @competition.registrants.reorder(:bib_number).map{ |reg| [reg.with_id_to_s, reg.bib_number] }
+      competition.registrants.reorder(:bib_number)
     end
+  end
+
+  def registrant_id_select_box(form, competition)
+    form.select :registrant_id, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.id] }, {:include_blank => true}, {:autofocus => true, class: 'chosen-select js--autoFocus' }
   end
 
   def competitor_select_box(form, competition)

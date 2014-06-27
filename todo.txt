@@ -25,9 +25,6 @@ Done- need to see what age/age-group each person is assigned.
 
 
 ===== Questions to be answered, by whom
-- Mary Connie How Do we want to allow people to un-sign-up for events easily without going through a paper-printout-confirmation step.
- - Yes, use the "special laptop" (or access-code) to allow modifications.
-
 - Connie/Patricia/Hugo/Benoit - What are the age groups for the events at NAUCC, and at UNICON?
  - Who should be able to modify the age group entries? (we usually share age groups among competitions...so I don't want to be able to change them once they are in use, right?)
   - Use the sign-up-lists should be enough.
@@ -78,14 +75,8 @@ Done- need to see what age/age-group each person is assigned.
 - Hugo/Benoit -  Relay, does 4x100 compete by wheel-size /age group, or against everyone?
 - Hugo/Benoit/Ptricia - What "Overall Champions" do you want at NAUCC/UNICON, and what calculation would you like used for this? (the rulebook only lists Track)
 - Patricia/NAUCC-director: Patricia: what is the NAUCC rules for Trials? Hand-vs-not-hands? (how are points calculated?)
-- Patricia - Enable/Promote the "Submit your music" system?
 - Patricia, Mary, do you have a summary of the awards that you are expecting to give out?
-- Scott/Patricia - Are there Judging Helper Sheets/Judging Scratch Sheets which I can integrate into the system (as PDF?) for a single-point-of-all-printing?
 
-- Mary? Garrett - Allow for people to pay via Paypal while "onsite registrant"???
- - Answer: not an important thing.
-- Mary, do we have confirmed way of having Internet Access at the events?
- - Answer: we will know by Tuseday, or order some other options.
 - Mary, when are we printing the registartion sheets?
  - We want this done by Thursday night. Robin will e-mail people.
 
@@ -103,7 +94,6 @@ Done- need to see what age/age-group each person is assigned.
 
 - Kathleen (on monday):
  - How should the Lane Assignments screen behave?
-  - Should it only show "Competitors" in one box, and "non-signed up" in another?
   - How should it behave for "Final Heat" events (100m Expert)?
   - Make Lane-Assignment auto-increment the lane/heat as data is entered? (ask Kathleen?)
  - Can we borrow your ipad, or some more from Work?
@@ -128,15 +118,11 @@ NAUCC data issues:
  - Kirsten (where are you staying/when?)
  - Directors (all). Welcome, here's what I'm planning
  - Track e-timer...using sample data.
- - Wendy, sorry.
  -
 - Print the Registration packages, alphabetical by last name.
-- need a way to print Name&ID for all bags.
 - Send Mike a set of instructions for how to train Directors for using the system.
-Done - Add ability for Mary to see the "Event Directors" report
 - Add ability for Mary to know when Results are posted.
  - Email.
-Done- Add ability to create new accounts on-site.
 - 100m breadcrumbs on "display heat"
 - Add ability to search for registrants by name, instead of always by ID. (wherever we do registrant-choosing). perhaps via a javascript helper function or something.
 - Make it possible/easy for a Director to access the raw data (time_results/external_results) after importing
@@ -147,10 +133,8 @@ Done- Add ability to create new accounts on-site.
  - Freestyle Presentation scores are only 3 categories (not 4)
 - Have a tablet at the start time which shows the HEAT number, Age Group, Event, Competitors (Large ID, Large First, (small Last))
  - Formatting
-Done- All registrants page, add 'state' column?
 
 ==== Important
-- Prevent changes to Artistic Registration after Artistic_closed Date.
 - Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
   - Why can't I import the 10kStandard.csv (file format issues?)
 - Add Warning on Registration Summary if this user doesn't have a confirmed USA membership?
@@ -158,8 +142,8 @@ Done- All registrants page, add 'state' column?
 - Able to enter results for multiple competitions at once (10k Standard and 10k Unlimited).
 - Able to Edit/Update Two-Attempt Entry
 - Have a way to publish results for a single Age group (for 100m, for example), while the competition itself continues to run.
-  - When publishing 100m results, have a different PDF for each age group, “50+ Female”
-  - So, only publish the “Per Event” PDF after the event is over, but have “50+ “ and “40+ “ separately while the event is running.
+DONE - When publishing 100m results, have a different PDF for each age group, “50+ Female”
+DONE - So, only publish the “Per Event” PDF after the event is over, but have “50+ “ and “40+ “ separately while the event is running.
   - Change the “Competition Status” to be less granular…perhaps “Unstarted, Started, and Completed”.
   - When publishing the 100m results by age group, also have the ability to see the results overall (without age groups)
   - Print/display/results by age group
@@ -174,6 +158,13 @@ Done- All registrants page, add 'state' column?
 - Handle Multi-lap race recording/calculation/reporting
   - Num Laps for time results (Coker MUni cross)
 
+LIST:
+DONE- Unpaid warnings on Reports
+DONE- Non-confirmed USA on reports
+- Change to use new High/Long
+- Test that on-site registrants get reg-fees (jim-sowers thing)
+- Change the nav menu to not show up the same way on small devices.
+- Make the /results view nicer on small devices
 ================================================================================================
 ===== Development Items which MUST be done before NAUCC (but colud be after the demo)
 

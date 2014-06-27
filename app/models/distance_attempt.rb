@@ -19,6 +19,9 @@
 class DistanceAttempt < ActiveRecord::Base
   include Competeable
   include Placeable
+  delegate :competition, to: :judge # override to use judge path instead of competitor path
+  # because on object creation, competitor doesn't exist.
+  include CompetitorAutoCreation
 
   belongs_to :judge
 

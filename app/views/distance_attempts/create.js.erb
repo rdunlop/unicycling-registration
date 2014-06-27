@@ -1,0 +1,21 @@
+<% if @distance_attempt.errors.any? %>
+  var errors = $("<ul />");
+  <% @distance_attempt.errors.full_messages.each do |error| %>
+    errors.append('<li><%= escape_javascript( error ) %></li>');
+  <% end %>
+
+  // Display errors on form
+  $('#notice').html($("<div id=\"error_explanation\" />").append(errors));
+
+
+<% else %>
+  var hi;
+  var new_row = $("<%= escape_javascript(render partial: 'attempt', object: @distance_attempt, locals: {display_delete: true}) %>");
+  new_row.prependTo(".recent_attempt_list tbody");
+  new_row.effect("highlight", {}, 3000);
+  $("form").trigger("reset");
+  $(".js--autoFocus").trigger("chosen:updated");
+  $(".js--autoFocus").trigger('chosen:activate');
+
+  $('#notice').empty();
+<% end %>

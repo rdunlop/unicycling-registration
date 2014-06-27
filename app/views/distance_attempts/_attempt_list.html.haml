@@ -1,0 +1,13 @@
+%table.top_distance_attempts
+  %caption #{title}
+  %thead
+    %tr
+      %th Distance
+      %th ID
+      %th Competitor
+      %th Gender
+      %th Age
+      %th Finished
+  %tbody
+    - list.each do |da|
+      = render partial: "attempt", object: da, locals: {display_delete: display_delete }

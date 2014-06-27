@@ -12,13 +12,25 @@
     color: red;
 }
 
+.attempts_lists {
+    .recent_attempt_list, .best_attempts_list {
+        width: 40%;
+        display: inline-block;
+    }
+
+    &:after {
+        display: table;
+        content: '';
+        clear: both;
+    }
+}
 .distance_attempts {
     .fault {
         color: red;
     }
     caption {
         font: 150% bold;
-        
+
     }
 }
 .competitor_details {

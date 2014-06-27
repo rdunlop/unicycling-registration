@@ -1,8 +1,0 @@
-<h1>Event: <%= @competition.event %> - <%=@competition %> - Distance Attempts</h1>
-
-<hr />
-<h2><%= link_to 'Choose Another Competitor', judge_distance_attempts_path(@judge) %></h2>
-<hr class="competitor_separator" />
-<%= render :partial => 'form' %>
-<%= render :partial => 'competitor_attempts', :object => @distance_attempts %>
-<br />

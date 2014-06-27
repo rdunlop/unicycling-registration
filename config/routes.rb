@@ -332,13 +332,12 @@ Workspace::Application.routes.draw do
 
         # display chosen competitors current scores, and update them
         resources :standard_scores, :only => [:new, :create]
-        resources :distance_attempts, :only => [:new, :create]
       end
 
       #choose the desired competitor to add scores to
       resources :scores, :only => [:index]
       resources :standard_scores, :only => [:index]
-      resources :distance_attempts, :only => [:index] do
+      resources :distance_attempts, :only => [:index, :create] do
         collection do
           get :list
         end
