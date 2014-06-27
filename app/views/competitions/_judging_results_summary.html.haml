@@ -13,4 +13,4 @@
         %td= judge
         %td.js--shouldMatch= competition.competitors.active.count
         %td.js--shouldMatch= judge.scores.count
-        %td= link_to "View Scores", judge_scores_path(judge)
+        %td= link_to "View Scores", competition.scoring_path(judge)

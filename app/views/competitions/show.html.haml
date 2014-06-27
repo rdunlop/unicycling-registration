@@ -52,9 +52,10 @@ Results, judges, and scoring settings.
   %p
     = link_to 'View', result_competition_path(@competition)
 
-  %h2 Manage Results
-  %p
-    = link_to("Enter/Modify Results", @competition.results_path) unless @competition.results_path.nil?
+  - unless @competition.results_path.nil?
+    %h2 Manage Results
+    %p
+      = link_to("Enter/Modify Results", @competition.results_path)
 
   %h2 Preview Results to be posted
   %p

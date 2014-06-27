@@ -39,14 +39,6 @@ class DistanceScoringClass < BaseScoringClass
     end
   end
 
-  def competitor_result(competitor)
-    if self.competitor_has_result?(competitor)
-      competitor.max_successful_distance
-    else
-      nil
-    end
-  end
-
   def competitor_comparable_result(competitor)
     if self.competitor_has_result?(competitor)
       # larger score is better, so invert this result so that the sorting is correct
@@ -77,5 +69,9 @@ class DistanceScoringClass < BaseScoringClass
 
   def uses_judges
     true
+  end
+
+  def scoring_path(judge)
+    judge_distance_attempts_path(judge)
   end
 end
