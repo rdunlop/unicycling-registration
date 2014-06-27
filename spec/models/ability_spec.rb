@@ -296,6 +296,15 @@ describe "Ability" do
     it { should be_able_to(:sign_ups, @event_category) }
   end
 
+  describe "as music_dj" do
+    before :each do
+      @user = FactoryGirl.create(:music_dj)
+    end
+    subject { @ability = Ability.new(@user) }
+
+    it { should be_able_to :list, Song }
+  end
+
   describe "When not logged in" do
     before :each do
       @competition = FactoryGirl.create(:competition)

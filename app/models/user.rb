@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:normal_user, :event_planner, :data_entry_volunteer, :payment_admin, :admin, :super_admin]
+    [:normal_user, :music_dj, :event_planner, :data_entry_volunteer, :payment_admin, :admin, :super_admin]
   end
 
   def self.role_description(role)
@@ -104,6 +104,9 @@ class User < ActiveRecord::Base
       "[e.g. Mary Koehler]
       Able to view/review the event sign_ups.
       Able to view/send emails to all registrants"
+    when :music_dj
+      "[e.g. JoAnn]
+      Able to view/download any music from the Manage Music page"
     when :normal_user
       "[e.g. John Smith] (no special abilities)"
     else

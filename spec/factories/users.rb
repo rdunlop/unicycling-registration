@@ -49,6 +49,10 @@ FactoryGirl.define do
       after(:create) {|user| user.add_role :director, EventCategory }
     end
 
+    factory :music_dj do
+      after(:create) {|user| user.add_role :music_dj }
+    end
+
     after(:create) { |user| user.confirm! if ENV["MAIL_SKIP_CONFIRMATION"].nil? }
   end
 end

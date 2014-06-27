@@ -190,6 +190,10 @@ class Ability
       can [:directors], :permission
     end
 
+    if user.has_role? :music_dj
+      can :list, Song
+    end
+
     if user.has_role? :race_official or user.has_role? :admin
       # includes :view_heat, and :dq_competitor
       can :manage, LaneAssignment
