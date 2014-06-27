@@ -265,7 +265,7 @@ class Ability
       can :crud, Registrant
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
-      can [:crud, :list], Song
+      can [:crud, :file_complete, :add_file, :list], Song
     end
     # not-object-specific
     can :empty_waiver, Registrant
