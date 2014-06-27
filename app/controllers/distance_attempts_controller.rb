@@ -21,7 +21,6 @@ class DistanceAttemptsController < ApplicationController
 
   def create
     @distance_attempt.judge = @judge
-
     respond_to do |format|
       if @distance_attempt.save
         format.html {

@@ -2,6 +2,8 @@ Last Re-Arranged June 20th, 2014.
 
 - Test importing CSV file.
 - Test DataEntry Import Results Destroy All action.
+- figure out how to use responds_to with :js arguments.
+- Look into something nicer than jquery to do the async-updates (like Angular?) (multiple pages have this flow)
 
 Jim:
 - When registering, invalid Country says "2 errors" when there is only 1
