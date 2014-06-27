@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= render partial: "layouts/metatags" %>
+
   <title><%= @config.short_name %> <%= t(".registration") %></title>
   <%= stylesheet_link_tag  @config.style_name, :media => "all" %>
 
