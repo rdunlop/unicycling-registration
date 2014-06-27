@@ -2,6 +2,8 @@ class DistanceAttemptsController < ApplicationController
   load_and_authorize_resource
   before_filter :load_event_category, :except => [:destroy]
 
+  before_filter :set_judge_breadcrumb, except: :destroy
+
   respond_to :html
   # feature "check competitor status"
   # "attempt", which updates the table, including the competitor status (if single/double-fault)
@@ -62,4 +64,10 @@ class DistanceAttemptsController < ApplicationController
     @judge = Judge.find(params[:judge_id])
     @competition = @judge.competition
   end
+
+  def set_judge_breadcrumb
+    add_to_competition_breadcrumb(@judge.competition)
+    add_breadcrumb @judge
+  end
+
 end
