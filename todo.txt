@@ -4,14 +4,16 @@ Last Re-Arranged June 20th, 2014.
 - Test DataEntry Import Results Destroy All action.
 - figure out how to use responds_to with :js arguments.
 - Look into something nicer than jquery to do the async-updates (like Angular?) (multiple pages have this flow)
+LIST:
+DONE- Unpaid warnings on Reports
+DONE- Non-confirmed USA on reports
+DONE- Change to use new High/Long
+DONE- Test that on-site registrants get reg-fees (jim-sowers thing)
+- Change the nav menu to not show up the same way on small devices.
+- Make the /results view nicer on small devices
 
 Jim:
 - When registering, invalid Country says "2 errors" when there is only 1
-- No on-site registration period. Yikes.
-
-Benoit: why can the 'directors" page not get me anywhere else.
-- Why doesn't the Director have access to the Copmetition page.
--
 
 Kathleen notes:
 Done- need to see what age/age-group each person is assigned.
@@ -160,13 +162,6 @@ DONE - So, only publish the “Per Event” PDF after the event is over, but hav
 - Handle Multi-lap race recording/calculation/reporting
   - Num Laps for time results (Coker MUni cross)
 
-LIST:
-DONE- Unpaid warnings on Reports
-DONE- Non-confirmed USA on reports
-- Change to use new High/Long
-- Test that on-site registrants get reg-fees (jim-sowers thing)
-- Change the nav menu to not show up the same way on small devices.
-- Make the /results view nicer on small devices
 ================================================================================================
 ===== Development Items which MUST be done before NAUCC (but colud be after the demo)
 
