@@ -11,13 +11,15 @@ describe "distance_attempts/index" do
 
     @da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp1)
 
+    assign(:distance_attempt, DistanceAttempt.new)
+    assign(:recent_distance_attempts, [])
     assign(:max_distance_attempts, [@da1])
   end
 
   it "renders a form for searching for a competitor" do
     render
     assert_select "form", :action => judge_distance_attempts_path(@judge), :method => "get" do
-        assert_select "input#external_id", :name => "external_id"
+        assert_select "input#distance_attempt_distance", :name => "distance_attempt_distance"
     end
   end
 end
