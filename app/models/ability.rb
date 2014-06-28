@@ -255,8 +255,10 @@ class Ability
     unless reg_closed?
       can [:new, :create], Payment
     end
-    can [:new, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
-    can [:read], Registrant
+    if user.has_role?(:payment_admin) || user.has_role?(:admin)
+      can [:new, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
+      can [:read], Registrant
+    end
   end
 
   # Registrant

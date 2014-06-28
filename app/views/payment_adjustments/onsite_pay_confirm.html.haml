@@ -1,0 +1,93 @@
+%h1 Payment Adjustments
+- if mixpanel?
+  :javascript
+    mixpanel.track("New Payment Page Loaded")
+%h1
+  Select the items to pay for:
+- @registrants = @p.registrants
+= form_for(@p, :url => onsite_pay_create_payment_adjustments_path) do |pf|
+  = render :partial => "/shared/error_messages", :object => @p
+  %br
+  %br
+  %b.payment_instructions
+    Please describe the payment. Examples:
+    %br
+    Cash
+    %br
+    Cheque
+    %br
+  = pf.label :note
+  = pf.text_field :note
+  %h1 Paid Details
+  %table.sortable
+    %thead
+      %tr
+        %th Registrant
+        %th Item
+        %th Paid Amount
+        %th Details (only required for some items)
+    %tbody
+      = pf.fields_for :paid_details do |paid_detail|
+        %tr
+          %td
+            = paid_detail.object.registrant
+            = paid_detail.hidden_field :registrant_id
+          %td
+            = paid_detail.object.expense_item
+            = paid_detail.hidden_field :expense_item_id
+          %td
+            = paid_detail.object.amount
+            = paid_detail.hidden_field :amount
+            = paid_detail.hidden_field :free
+          %td
+            = paid_detail.object.details
+            = paid_detail.hidden_field :details
+
+
+  %h1 Chosen (but unpaid) Items
+  .payment_instructions
+    Check off the items to be marked as paid
+  %table.sortable
+    %thead
+      %tr
+        %th Registrant
+        %th Item
+        %th Cost
+        %th Details (only required for some items)
+        %th Mark this item as having Money-Received
+        %th Give this item to the Registrant for free
+    %tbody
+      = pf.fields_for :unpaid_details do |unpaid_detail|
+        %tr
+          %td
+            = unpaid_detail.object.registrant
+            = unpaid_detail.hidden_field :registrant_id
+          %td
+            = unpaid_detail.object.expense_item
+            = unpaid_detail.hidden_field :expense_item_id
+          %td= unpaid_detail.object.amount
+          %td
+            = unpaid_detail.object.details
+            = unpaid_detail.hidden_field :details
+          %td= unpaid_detail.check_box :pay_for
+          %td= unpaid_detail.check_box :free
+  %a#show_hide_admin_payments_other_new{:href => "#"} select other item
+  %table#admin_payments_other_new.sortable
+    %thead
+      %tr
+        %th Registrant
+        %th Item
+        %th Details (only required for some items)
+        %th Pay for this item
+        %th Mark this item as free
+    %tbody
+      = pf.fields_for :new_details do |new_detail|
+        %tr
+          %td= new_detail.select :registrant_id, @registrants.map {|reg| [reg, reg.id] }, :include_blank => true
+          %td= new_detail.select :expense_item_id, ExpenseItem.all.map {|ei| [ei.to_s + " - " + ei.cost.to_s, ei.id] }, :include_blank => true
+          %td= new_detail.text_field :details
+          %td= new_detail.check_box :pay_for
+          %td= new_detail.check_box :free
+  = pf.submit "Create and Save Payment", :class => "payment_link registration_button"
+%div
+  = link_to 'Back', list_payment_adjustments_path
