@@ -13,7 +13,13 @@
 <% @registrants = @p.registrants %>
 <%= form_for(@p, :url => onsite_pay_create_payment_adjustments_path) do |pf| %>
   <%= render :partial => "/shared/error_messages", :object => @p %>
+  <br>
 
+  <br>
+  <b>Please describe the payment. Examples:<br>
+  Cash<br>
+  Cheque<br>
+  </b>
   <%= pf.label :note %><%= pf.text_field :note %>
 
   <h1>Paid Details</h1>

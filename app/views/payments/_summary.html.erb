@@ -36,7 +36,7 @@
     <% @payment.payment_details.each do |pd| %>
       <tr>
         <td>
-          <%= pd.registrant %>
+          <%= link_to pd.registrant, pd.registrant %>
         </td>
         <td>
           <%= pd.to_s %>

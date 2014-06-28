@@ -13,6 +13,7 @@ class PaymentPresenter
 
   attribute :user, User
   attribute :saved_payment, Payment
+  attr_accessor :existing_payment_details
 
   def add_registrant(registrant)
     registrant.owing_registrant_expense_items.each do |rei|
