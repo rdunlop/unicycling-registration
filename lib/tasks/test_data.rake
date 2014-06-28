@@ -47,7 +47,7 @@ end
 
 def create_competition(event, competition_name, event_cat_names, source_competition = nil)
   comp = Competition.find_by(name: competition_name)
-  comp ||= FactoryGirl.create(:competition, event: event, name: competition_name, scoring_class: "Distance", start_data_type: "Track E-Timer", end_data_type: "Track E-Timer")
+  comp ||= FactoryGirl.create(:competition, event: event, name: competition_name, scoring_class: "Shortest Time", start_data_type: "Track E-Timer", end_data_type: "Track E-Timer")
 
   event_cat_names.each do |ecat_name|
     ecat = event.event_categories.find_by(name: ecat_name)

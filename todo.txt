@@ -332,7 +332,6 @@ NEED To make the registration deadlines clear.
 ==== Other
 - Booleans in models should be "?" like? ("has_experts?")
 - Make the site more robust when creating/deleting expense items/registration periods (scott broke it easily by deleting an expense item, I think)
-- Replace "Distance" with "Timed"
 - Add the "Heat/Lane" to the results listing page (and some reports too?)
 - Combine multiple expenses onto one line for ease of seeing.
 - Allow changing the Bib Numbers for people.

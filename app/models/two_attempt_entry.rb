@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: two_attempt_entries
+#
+#  id             :integer          not null, primary key
+#  user_id        :integer
+#  competition_id :integer
+#  bib_number     :integer
+#  minutes_1      :integer
+#  minutes_2      :integer
+#  seconds_1      :integer
+#  status_1       :string(255)
+#  seconds_2      :integer
+#  thousands_1    :integer
+#  thousands_2    :integer
+#  status_2       :string(255)
+#  is_start_time  :boolean          default(FALSE)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class TwoAttemptEntry < ActiveRecord::Base
   validates :competition_id, :presence => true
   validates :user_id, :bib_number, :presence => true

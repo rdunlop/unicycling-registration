@@ -110,7 +110,7 @@ describe AwardLabel do
 
     describe "when the competitor has expert results" do
       before(:each) do
-        @comp.competition.scoring_class = "Distance"
+        @comp.competition.scoring_class = "Shortest Time"
         @comp.competition.age_group_type = FactoryGirl.create(:age_group_type)
         allow(@comp).to receive(:overall_place).and_return(3)
       end

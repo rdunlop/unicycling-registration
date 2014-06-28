@@ -177,7 +177,7 @@ describe CompetitionsController do
   describe "when the competition is a distance competition, with time-results" do
     before(:each) do
       @competition = FactoryGirl.create(:timed_competition)
-      @competition.event_class.should == "Distance"
+      @competition.event_class.should == "Shortest Time"
       @competitor = FactoryGirl.create(:event_competitor, :competition => @competition)
       @tr = FactoryGirl.create(:time_result, :competitor => @competitor)
     end

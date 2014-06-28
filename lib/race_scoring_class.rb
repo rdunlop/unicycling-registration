@@ -1,14 +1,21 @@
 class RaceScoringClass < BaseScoringClass
 
+  attr_accessor :lower_is_better
+
+  def initialize(competition, lower_is_better = true)
+    super(competition)
+    @lower_is_better = lower_is_better
+  end
+
   def scoring_description
     "Each competitor may have multiple time results. A time result is made up
-    of an optional 'start time' and a required 'end time'. The fastest time
+    of an optional 'start time' and a required 'end time'. The #{lower_is_better ? 'Faster' : 'Slower'} time
     is used to determine the placing of the competitor."
   end
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    OrderedResultCalculator.new(@competition)
+    OrderedResultCalculator.new(@competition, lower_is_better)
   end
 
   # describes how to label the results of this competition

@@ -56,7 +56,8 @@ class Competition < ActiveRecord::Base
   validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true }
 
   def self.scoring_classes
-    ["Freestyle", "Distance", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low"]
+
+    ["Freestyle", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time"]
   end
 
   validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }
@@ -266,8 +267,12 @@ class Competition < ActiveRecord::Base
 
   def scoring_helper
     case event_class
-    when "Distance"
+    when "Shortest Time"
       @rc ||= RaceScoringClass.new(self)
+    when "Longest Time"
+      @rc ||= RaceScoringClass.new(self, false)
+    when "Timed Multi-Lap"
+      @rc ||= MultiLapScoringClass.new(self)
     when "Points Low to High"
       @ers ||= PointsScoringClass.new(self)
     when "Points High to Low"

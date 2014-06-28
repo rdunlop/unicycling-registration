@@ -41,7 +41,12 @@ FactoryGirl.define do
     end
 
     factory :timed_competition do
-      scoring_class "Distance"
+      scoring_class "Shortest Time"
+      age_group_type # factory Girl
+    end
+
+    factory :slow_competition do
+      scoring_class "Longest Time"
       age_group_type # factory Girl
     end
 
