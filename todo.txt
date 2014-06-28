@@ -1,5 +1,32 @@
 Last Re-Arranged June 20th, 2014.
 
+Connie/Robin:
+- Figure out age groups for each competition.
+ -
+- Does TimeTrial have Standard and Unlimited Classes?
+ -No, only unlimited.
+- Does every distance event have a Standard class?
+ -
+- Or does "Overall Distance Champion" only apply to the Unlimited class?
+ - yes, for now, only unlimited
+
+WIFI:
+- CHange all access points to be the same key/password/name?
+
+
+- Is a competitor required to race in all of the distance events on the same size of wheel?
+ - No, they can use any wheel size they want.
+- Is a competitor required to participate in Distance events on the same size of wheel as in the track? (for 0-10 age, for exxample)
+ - no
+- Need to re-sort the age groups for Track.
+
+- Josh(timer) needs certain lists.
+
+- Music upload should restrict file extensions to mp3/m4a,....
+ - should require at least 0.3 Mb?
+
+- USA membershp page, allow easy adding/editing of USA# to a reg.
+- Allow easy way to export the list of e-mails of those who remain.
 - Test importing CSV file.
 - Test DataEntry Import Results Destroy All action.
 - figure out how to use responds_to with :js arguments.
