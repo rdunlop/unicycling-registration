@@ -185,7 +185,7 @@ class Ability
       can :summary, Event
       can :sign_ups, EventCategory
       can :manage_all, Registrant
-      can :read, Registrant
+      can [:read, :show_all], Registrant
       can [:email, :send_email], Registrant
       can [:directors], :permission
     end

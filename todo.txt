@@ -1,6 +1,7 @@
 Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
+- Should I move the location of the ID# on the registration form?
 - Marathon data entry should be Hours, minutes, seconds? (instead of min/sec/thou)
 - Firefox sortable doesn't sort as well (see data-entry menu when dates are crossing a month boundary)
 - Add a one-time code for all registration forms, so that people can get into their registration form easily.
