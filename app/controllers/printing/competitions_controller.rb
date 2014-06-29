@@ -3,7 +3,7 @@ class Printing::CompetitionsController < ApplicationController
   before_filter :load_competition
   authorize_resource :competition, :parent => false
 
-  before_action :set_breadcrumbs, only: [:announcer]
+  before_action :set_breadcrumbs, only: [:announcer, :sign_in_sheet]
 
   def announcer
     add_breadcrumb "Competitor List"
@@ -24,6 +24,7 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def sign_in_sheet
+    add_breadcrumb "Sign-In Sheets"
     @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
 
     respond_to do |format|
