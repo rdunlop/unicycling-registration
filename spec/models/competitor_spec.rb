@@ -15,11 +15,14 @@ require 'spec_helper'
 
 describe Competitor do
   before :each do
-    @comp = FactoryGirl.build_stubbed(:event_competitor)
+    @competition = FactoryGirl.build_stubbed(:timed_competition)
+    @comp = FactoryGirl.build_stubbed(:event_competitor, competition: @competition)
+    allow(@comp).to receive(:lower_is_better).and_return(true)
+    Rails.cache.clear
   end
 
   it "has a time_result in thousands when no results" do
-    expect(@comp.best_time_in_thousands).to be(0)
+    expect(@comp.best_time_in_thousands).to eq(0)
   end
 
   describe "when there are time results" do
@@ -29,7 +32,7 @@ describe Competitor do
     end
 
     it "has a best_time_in_thousands" do
-      expect(@comp.best_time_in_thousands).to be(60000)
+      expect(@comp.best_time_in_thousands).to eq(60000)
     end
 
     describe "when there is also a start time" do
@@ -39,7 +42,7 @@ describe Competitor do
       end
 
       it "has the correct best_time_in_thousands" do
-        expect(@comp.best_time_in_thousands).to be(50000)
+        expect(@comp.best_time_in_thousands).to eq(50000)
       end
     end
   end
@@ -55,8 +58,24 @@ describe Competitor do
       allow(@comp).to receive(:finish_time_results).and_return([@end1, @end2])
     end
 
-    it "has the correct best_time_in_thousands" do
-      expect(@comp.best_time_in_thousands).to be(45000)
+    describe "with lower_is_better" do
+      before :each do
+        Rails.cache.clear
+        allow(@comp).to receive(:lower_is_better).and_return(true)
+      end
+      it "has the correct best_time_in_thousands" do
+        expect(@comp.best_time_in_thousands).to eq(45000)
+      end
+    end
+
+    describe "with higher_is_better" do
+      before :each do
+        Rails.cache.clear
+        allow(@comp).to receive(:lower_is_better).and_return(false)
+      end
+      it "has the correct best_time_in_thousands" do
+        expect(@comp.best_time_in_thousands).to eq(90000)
+      end
     end
   end
 
@@ -69,7 +88,7 @@ describe Competitor do
     end
 
     it "has the correct best_time_in_thousands" do
-      expect(@comp.best_time_in_thousands).to be(150000)
+      expect(@comp.best_time_in_thousands).to eq(150000)
     end
   end
 end
