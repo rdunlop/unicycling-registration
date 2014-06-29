@@ -74,7 +74,6 @@ class Registrant < ActiveRecord::Base
   belongs_to :user
 
   accepts_nested_attributes_for :contact_detail
-  accepts_nested_attributes_for :registrant_expense_items, :allow_destroy => true # XXX destroy?
   accepts_nested_attributes_for :registrant_choices
   accepts_nested_attributes_for :registrant_event_sign_ups
 

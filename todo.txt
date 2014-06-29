@@ -1,6 +1,7 @@
 Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
+- Add a one-time code for all registration forms, so that people can get into their registration form easily.
 - Figure out age groups for each competition.
  -
 - Does TimeTrial have Standard and Unlimited Classes?

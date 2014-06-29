@@ -237,7 +237,6 @@ class RegistrantsController < ApplicationController
       :online_waiver_signature,
       :registrant_choices_attributes => [:event_choice_id, :value, :id],
       :registrant_event_sign_ups_attributes => [:event_category_id, :signed_up, :event_id, :id],
-      :registrant_expense_items_attributes => [:expense_item_id, :details],
       :contact_detail_attributes => [:id, :email,
         :address, :city, :country_residence, :country_representing,
         :mobile, :phone, :state, :zip, :club, :club_contact, :usa_member_number,
