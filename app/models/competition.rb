@@ -2,26 +2,27 @@
 #
 # Table name: competitions
 #
-#  id                         :integer          not null, primary key
-#  event_id                   :integer
-#  name                       :string(255)
-#  locked                     :boolean
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  age_group_type_id          :integer
-#  has_experts                :boolean          default(FALSE)
-#  scoring_class              :string(255)
-#  start_data_type            :string(255)
-#  end_data_type              :string(255)
-#  uses_lane_assignments      :boolean          default(FALSE)
-#  scheduled_completion_at    :datetime
-#  published                  :boolean          default(FALSE)
-#  awarded                    :boolean          default(FALSE)
-#  published_results_file     :string(255)
-#  award_title_name           :string(255)
-#  award_subtitle_name        :string(255)
-#  published_date             :datetime
-#  num_members_per_competitor :string(255)
+#  id                            :integer          not null, primary key
+#  event_id                      :integer
+#  name                          :string(255)
+#  locked                        :boolean
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#  age_group_type_id             :integer
+#  has_experts                   :boolean          default(FALSE)
+#  scoring_class                 :string(255)
+#  start_data_type               :string(255)
+#  end_data_type                 :string(255)
+#  uses_lane_assignments         :boolean          default(FALSE)
+#  scheduled_completion_at       :datetime
+#  published                     :boolean          default(FALSE)
+#  awarded                       :boolean          default(FALSE)
+#  published_results_file        :string(255)
+#  award_title_name              :string(255)
+#  award_subtitle_name           :string(255)
+#  published_date                :datetime
+#  num_members_per_competitor    :string(255)
+#  automatic_competitor_creation :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -68,6 +69,8 @@ class Competition < ActiveRecord::Base
   before_validation :clear_num_members_per_compeititor_of_strings
   validates :num_members_per_competitor, inclusion: { in: self.num_member_options, allow_nil: true }
 
+  validate :automatic_competitor_creation_only_with_one
+
   validates :event_id, :presence => true
   validate :published_only_when_locked
   validate :awarded_only_when_published
@@ -83,6 +86,12 @@ class Competition < ActiveRecord::Base
             :example_result, :imports_times, :results_path, :scoring_path, to: :scoring_helper
 
   mount_uploader :published_results_file, PdfUploader
+
+  def automatic_competitor_creation_only_with_one
+    if num_members_per_competitor != "One" && automatic_competitor_creation
+      errors.add(:automatic_competitor_creation, "Only valid with one-member-competitor competitions")
+    end
+  end
 
   def award_label_title_checks
     # cannot specify subtitle when also specifying an age group

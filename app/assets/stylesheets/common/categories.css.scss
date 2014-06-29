@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.group {
+  &:after {
+    display: table;
+    content: '';
+    clear: both;
+  }
+}
 .configuration_settings_block {
   float: left;
 }
@@ -14,8 +21,8 @@
   clear: both;
 }
 
-.category_form td:first-child { 
-  text-align: right; 
+.category_form td:first-child {
+  text-align: right;
 }
 
 .category_form td:first-child + td {

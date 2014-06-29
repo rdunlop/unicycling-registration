@@ -31,8 +31,20 @@ class RegistrantEventSignUp < ActiveRecord::Base
   belongs_to :event_category, touch: true
   belongs_to :event
 
+  after_save :auto_create_competitor, if: :signed_up_changed?
+
   def self.signed_up
     includes(:registrant).where(registrants: {deleted: false}).where(signed_up: true)
+  end
+
+  def auto_create_competitor
+    if signed_up
+      event_category.competition_sources.map(&:target_competition).each do |competition|
+        next unless competition.automatic_competitor_creation
+        next if registrant.competitions.include?(competition)
+        competition.create_competitors_from_registrants([registrant], nil)
+      end
+    end
   end
 
   def category_chosen_when_signed_up

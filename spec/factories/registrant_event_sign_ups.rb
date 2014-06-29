@@ -20,11 +20,13 @@ FactoryGirl.define do
     event_category nil
     signed_up true
 
-    before(:create) do |resu| 
+    before(:create) do |resu|
       if resu.event.nil?
-        ev = FactoryGirl.create(:event)
-        resu.event = ev
-        resu.event_category = ev.event_categories.first
+        if resu.event_category.nil?
+          ev = FactoryGirl.create(:event)
+          resu.event_category = ev.event_categories.first
+        end
+        resu.event = resu.event_category.event
       end
     end
   end

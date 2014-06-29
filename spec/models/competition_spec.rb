@@ -129,4 +129,14 @@ describe Competition do
   it "uses the event name in its name" do
     @ec.to_s.should == @ec.name
   end
+
+  it "doesn't allow automatic competitor creation with multi-reg competitions" do
+    expect(@ec).to be_valid
+    @ec.num_members_per_competitor = "Two"
+    expect(@ec).to be_valid
+    @ec.automatic_competitor_creation = true
+    expect(@ec).to be_invalid
+    @ec.num_members_per_competitor = "One"
+    expect(@ec).to be_valid
+  end
 end

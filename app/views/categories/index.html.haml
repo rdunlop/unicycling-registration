@@ -1,0 +1,25 @@
+%h1 Listing Categories
+.group
+  .configuration_settings_block
+    %table
+      %tr
+        %th Name
+        %th Position
+        %th Link
+        %th
+        %th
+        %th
+      - @categories.each do |category|
+        %tr
+          %td= category.name
+          %td= category.position
+          %td
+            %a{:href => category.info_url, :target => "_blank"} Link
+          %td= link_to 'Events', category_events_path(category)
+          %td= link_to 'Edit', edit_category_path(category)
+          %td= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?' }
+    %br/
+    %h3 New Category
+    = render 'form'
+  .configuration_preview_block
+    = render :partial => "/attending/preview"

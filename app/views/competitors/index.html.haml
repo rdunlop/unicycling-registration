@@ -1,4 +1,11 @@
 %h1= "#{@competition} - Manage Competitors"
+
+- if @competition.automatic_competitor_creation?
+  .competition_instructions
+    This event is configured for <b>Automatic</b> Competitor creation.
+    %br
+    Any Registrant who is added to this event will automatically create a competitor.
+
 %p
   These are all of the competitors configured for this competition
 %table.sortable.competitor_statuses

@@ -17,6 +17,10 @@
   @extend %instructions;
 }
 
+.competition_instructions {
+  @extend %instructions;
+}
+
 // This should be shared somehow
 @mixin button {
   text-decoration: none;

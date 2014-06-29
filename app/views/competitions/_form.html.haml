@@ -14,6 +14,12 @@
   = f.label :num_members_per_competitor
   = f.select :num_members_per_competitor, Competition.num_member_options, include_blank: true
 
+  %br
+  = f.label :automatic_competitor_creation
+  = f.check_box :automatic_competitor_creation
+
+  %p Selecting this option will automatically create a competitor whenever a registrant signs up for any source-event.
+
   %h2 Settings For gathering the results
   %table
     %thead
