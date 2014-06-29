@@ -29,7 +29,7 @@ class CombinedCompetitionsController < ApplicationController
     @combined_competition = CombinedCompetition.new(combined_competition_params)
 
     if @combined_competition.save
-      redirect_to @combined_competition, notice: 'Combined competition was successfully created.'
+      redirect_to combined_competition_combined_competition_entries_path(@combined_competition), notice: 'Combined competition was successfully created.'
     else
       render action: 'new'
     end
@@ -58,6 +58,6 @@ class CombinedCompetitionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def combined_competition_params
-      params.require(:combined_competition).permit(:name)
+      params.require(:combined_competition).permit(:name, :use_age_group_places, :percentage_based_calculations)
     end
 end
