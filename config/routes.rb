@@ -22,6 +22,7 @@ Workspace::Application.routes.draw do
           get :single_attempt_recording
           get :two_attempt_recording
           get :results
+          get :sign_in_sheet
         end
       end
       resources :events, :only => [] do

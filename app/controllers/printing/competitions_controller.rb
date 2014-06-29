@@ -23,6 +23,15 @@ class Printing::CompetitionsController < ApplicationController
     end
   end
 
+  def sign_in_sheet
+    @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
+
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf("sign_in_sheet") }
+    end
+  end
+
   def single_attempt_recording
     @competition_sign_up = CompetitionSignUp.new(@competition)
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"

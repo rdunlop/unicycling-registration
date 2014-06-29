@@ -191,6 +191,12 @@ describe Competitor do
         it "should display the ages for all members (when they are the same)" do
             @comp.age.should == (@reg1.age)
         end
+
+        it "should store the mimimum bib_number" do
+          lowest = [@reg1.bib_number, @reg2.bib_number].min
+          expect(@comp.lowest_member_bib_number).to be(lowest)
+        end
+
         it "should display the maximum ages for all members (when they are different)" do
             Delorean.jump 2
             @reg3 = FactoryGirl.create(:registrant, :birthday => Date.new(1980, 02, 10))

@@ -22,6 +22,16 @@ class Member < ActiveRecord::Base
     validates :registrant_id, :presence => true
     validate :registrant_once_per_event
 
+    after_save :update_min_bib_number
+    after_destroy :update_min_bib_number
+
+    def update_min_bib_number
+      comp = competitor(true)
+      return if comp.nil?
+      lowest_bib_number = comp.members.map{ |member| member.registrant.bib_number }.min
+      competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number
+    end
+
     #validates :competitor, :presence => true # removed for spec tests
 
     def destroy_orphaned_competitors

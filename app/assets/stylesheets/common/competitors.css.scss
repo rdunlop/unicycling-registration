@@ -15,3 +15,18 @@
   color: lightpink;
   z-index: -100;
 }
+
+.sign_in_sheet {
+  .bib_number {
+    width: 10%;
+  }
+  .name {
+    width: 10%;
+  }
+  .age {
+    width: 5%;
+  }
+  .signed_in, .no_show {
+    width: 7%;
+  }
+}
