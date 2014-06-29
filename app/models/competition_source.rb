@@ -69,16 +69,19 @@ class CompetitionSource < ActiveRecord::Base
       registrants = competitors.map{|comp| comp.registrants }.flatten
     end
 
+    registrants.select{|reg| registrant_passes_filters(reg) }
+  end
+
+  def registrant_passes_filters(registrant)
     if gender_filter.present? && gender_filter != "Both"
-      registrants = registrants.select {|reg| reg.gender == gender_filter}
+      return false unless registrant.gender == gender_filter
     end
 
     if min_age || max_age
       min = min_age || 0
       max = max_age || 999
-      registrants = registrants.select {|reg| reg.age >= min && reg.age <= max }
+      return false unless (registrant.age >= min && registrant.age <= max)
     end
-
-    registrants
+    true
   end
 end

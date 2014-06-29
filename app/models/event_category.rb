@@ -30,6 +30,10 @@ class EventCategory < ActiveRecord::Base
     event.to_s + " - " + self.name
   end
 
+  def competitions_being_fed(registrant)
+    competition_sources.select{|cs| cs.registrant_passes_filters(registrant) }.map(&:target_competition)
+  end
+
   def signed_up_registrants
     registrant_event_sign_ups.signed_up.map{|resu| resu.registrant }.select{ |reg| !reg.deleted }
   end
