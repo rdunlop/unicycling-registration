@@ -47,7 +47,7 @@ class Ability
 
   def set_data_entry_volunteer_abilities(user)
 
-    can :read, Competitor
+    can [:read, :enter_sign_in, :update_competitors], Competitor
     can :read, Competition
 
     can :read, Judge, :user_id => user.id

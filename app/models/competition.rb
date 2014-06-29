@@ -46,11 +46,12 @@ class Competition < ActiveRecord::Base
   has_many :combined_competition_entries, dependent: :destroy
   has_many :published_age_group_entries, dependent: :destroy
   accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
+  accepts_nested_attributes_for :competitors
 
   has_many :lane_assignments, :dependent => :destroy
 
   def self.data_recording_types
-    ["Two Attempt Distance", "Single Attempt", "Track E-Timer", "Externally Ranked"]
+    ["Two Attempt Distance", "Single Attempt", "Track E-Timer", "Externally Ranked", "Mass Start"]
   end
 
   before_validation :clear_data_types_of_strings

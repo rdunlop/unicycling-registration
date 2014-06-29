@@ -1,6 +1,8 @@
 Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
+- Marathon data entry should be Hours, minutes, seconds? (instead of min/sec/thou)
+- Firefox sortable doesn't sort as well (see data-entry menu when dates are crossing a month boundary)
 - Add a one-time code for all registration forms, so that people can get into their registration form easily.
 - Figure out age groups for each competition.
  -

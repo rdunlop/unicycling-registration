@@ -1,12 +1,12 @@
 require 'csv'
 class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_competition, :only => [:index, :new, :create, :add, :add_all, :destroy_all, :create_from_sign_ups]
+  before_filter :load_competition, :only => [:index, :enter_sign_in, :update_competitors, :new, :create, :add, :add_all, :destroy_all, :create_from_sign_ups]
   before_filter :load_new_competitor, :only => [:create]
   load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy]
   load_and_authorize_resource :only => [:edit, :update, :destroy]
 
-  before_action :set_parent_breadcrumbs, only: [:index, :new, :edit]
+  before_action :set_parent_breadcrumbs, only: [:index, :enter_sign_in, :new, :edit]
 
   respond_to :html
 
@@ -23,6 +23,23 @@ class CompetitorsController < ApplicationController
     add_breadcrumb "Manage Competitors"
     @registrants = @competition.signed_up_registrants
     @competitors = @competition.competitors
+  end
+
+  def enter_sign_in
+    add_breadcrumb "Enter Sign-In"
+    @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
+  end
+
+  def update_competitors
+    respond_to do |format|
+      if @competition.update_attributes(update_competitors_params)
+        flash[:notice] = 'Competitors successfully updated.'
+        format.html { redirect_to :back }
+      else
+        enter_sign_in
+        format.html { render "enter_sign_in" }
+      end
+    end
   end
 
   def add
@@ -109,7 +126,11 @@ class CompetitorsController < ApplicationController
   private
 
   def competitor_params
-    params.require(:competitor).permit(:status, :position, :custom_name, {:members_attributes => [:registrant_id, :id, :_destroy] } )
+    params.require(:competitor).permit(:status, :position, :custom_name, :geared, :wheel_size, :notes, {:members_attributes => [:registrant_id, :id, :_destroy] } )
+  end
+
+  def update_competitors_params
+    params.require(:competition).permit(:competitors_attributes => [:id, :status, :geared, :wheel_size, :notes])
   end
 
   def load_competition

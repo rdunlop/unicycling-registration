@@ -9,7 +9,8 @@
       %th Name
       %th Age
       %th Signed-In
-      %th No-Show
+      %th Geared
+      %th Wheel Size
       %th Notes
   %tbody
     - @competitors.active.each do |comp|
@@ -26,5 +27,6 @@
             %br
         %td.age= comp.age
         %td.signed_in
-        %td.no_show
+        %td.geared
+        %td.wheel_size
         %td

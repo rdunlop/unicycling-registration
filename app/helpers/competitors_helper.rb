@@ -11,6 +11,9 @@ module CompetitorsHelper
     when "Track E-Timer"
       res = link_to "Heats Recording Sheet", heat_recording_printing_competition_path(competition)
       res += link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf)
+    when "Mass Start"
+      res = link_to "Start Lists", sign_in_sheet_printing_competition_path(competition)
+      res += link_to "(pdf)", sign_in_sheet_printing_competition_path(competition, :format => :pdf)
     end
   end
 
@@ -45,6 +48,8 @@ module CompetitorsHelper
       else
         "None Enabled"
       end
+    when "Mass Start"
+      link_to "Enter Sign-Ins", enter_sign_in_competition_competitors_path(competition)
     end
 
   end

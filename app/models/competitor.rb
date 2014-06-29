@@ -33,7 +33,7 @@ class Competitor < ActiveRecord::Base
   validates_associated :members
   validate :must_have_3_members_for_custom_name
 
-  enum status: [:active, :not_qualified]
+  enum status: [:active, :not_qualified, :dns]
 
   # not all competitor types require a position
   #validates :position, :presence => true,

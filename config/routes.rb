@@ -299,6 +299,8 @@ Workspace::Application.routes.draw do
           post :add
           post :add_all
           delete :destroy_all
+          get :enter_sign_in
+          put :update_competitors
         end
       end
 

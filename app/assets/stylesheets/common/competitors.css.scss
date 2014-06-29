@@ -26,7 +26,15 @@
   .age {
     width: 5%;
   }
-  .signed_in, .no_show {
-    width: 7%;
+  .signed_in, .geared, .wheel_size {
+    width: 5%;
   }
+}
+
+.sign_in_wheel_size {
+  width: 50px;
+}
+
+.sign_in_notes {
+  width: 200px;
 }
