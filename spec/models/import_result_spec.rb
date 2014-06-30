@@ -41,10 +41,10 @@ describe ImportResult do
   end
 
   it "automatically sets the details if none are specified" do
-    @ir.rank = 5
+    @ir.points = 5
     @ir.details = ""
     expect(@ir).to be_valid
-    expect(@ir.details).to eq("5pts")
+    expect(@ir.details).to eq("5.0pts")
   end
 
 end

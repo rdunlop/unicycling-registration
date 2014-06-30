@@ -12,7 +12,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  competition_id :integer
-#  rank           :integer
+#  points         :decimal(6, 3)
 #  details        :string(255)
 #  is_start_time  :boolean          default(FALSE)
 #  attempt_number :integer
@@ -39,7 +39,7 @@ class ImportResult < ActiveRecord::Base
 
   validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
   before_validation :set_details_if_blank
-  validates :details, presence: true, if: "rank?"
+  validates :details, presence: true, if: "points?"
 
   belongs_to :user
   belongs_to :competition
@@ -49,8 +49,8 @@ class ImportResult < ActiveRecord::Base
   scope :entered_order, -> { reorder(:id) }
 
   def set_details_if_blank
-    if details.blank? && rank?
-      self.details = "#{rank}pts"
+    if details.blank? && points?
+      self.details = "#{points}pts"
     end
   end
 
@@ -86,8 +86,8 @@ class ImportResult < ActiveRecord::Base
   # determines that the import_result has enough information
   def results_for_competition
     return if disqualified
-    unless time_is_present? || rank?
-      errors.add(:base, "Must select either time or rank")
+    unless time_is_present? || points?
+      errors.add(:base, "Must select either time or points")
     end
   end
 

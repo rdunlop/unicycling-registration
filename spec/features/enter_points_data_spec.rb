@@ -18,7 +18,7 @@ describe 'Entering Points data' do
 
       it "can add and update scores" do
         select "Robin Robin", from: 'import_result[bib_number]'
-        fill_in "import_result[rank]", with: "1.0"
+        fill_in "import_result[points]", with: "1.0"
         fill_in "import_result[details]", with: "1 pts"
 
         expect {

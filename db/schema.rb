@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629222037) do
+ActiveRecord::Schema.define(version: 20140630023241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -400,12 +400,12 @@ ActiveRecord::Schema.define(version: 20140629222037) do
     t.integer  "minutes"
     t.integer  "seconds"
     t.integer  "thousands"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.integer  "competition_id"
-    t.integer  "rank"
+    t.decimal  "points",         precision: 6, scale: 3
     t.string   "details"
-    t.boolean  "is_start_time",  default: false
+    t.boolean  "is_start_time",                          default: false
     t.integer  "attempt_number"
     t.string   "status"
     t.text     "comments"

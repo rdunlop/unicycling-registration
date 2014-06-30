@@ -23,7 +23,7 @@
         - if @competition.imports_times
           %td= result.full_time
         - else
-          %td= result.rank
+          %td= result.points
         %td= result.disqualified ? "yes" : ""
         - competitor = result.competition.find_competitor_with_bib_number(result.bib_number)
         - if competitor

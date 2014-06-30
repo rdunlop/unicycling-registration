@@ -78,7 +78,7 @@ class PointsScoringClass < BaseScoringClass
   # from import_result to external_result
   def build_result_from_imported(import_result)
     ExternalResult.new(
-      points: import_result.rank,
+      points: import_result.points,
       details: import_result.details)
   end
 
@@ -86,7 +86,7 @@ class PointsScoringClass < BaseScoringClass
   def build_import_result_from_raw(raw)
     ImportResult.new(
       bib_number: raw[0],
-      rank: raw[1],
+      points: raw[1],
       details: raw[2])
   end
 

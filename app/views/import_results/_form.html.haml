@@ -40,7 +40,7 @@
           %td= f.number_field :seconds, {:min => 0}
           %td= f.number_field :thousands, {:min => 0}
         - else
-          %td= f.number_field :rank, {:min => 0}
+          %td= f.number_field :points, {min: 0, step: 0.1}
           %td= f.text_field :details, placeholder: "blank => \"Xpts\""
         %td= f.select :status, TimeResult.status_values, include_blank: true
         %td{ colspan: "3"}= f.submit "Submit", :class => "multiclick"
