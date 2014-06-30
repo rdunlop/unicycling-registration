@@ -7,7 +7,7 @@
   %div{:style => "clear: both"}
   %hr
   - if competitors.count == 0
-    %h3 No Competitors yet
+    %h3 No Competitors
   - elsif competitors.first.members.count > 2
     - # Group event, list the members
     - competitors.each do |competitor|
