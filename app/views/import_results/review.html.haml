@@ -1,7 +1,11 @@
 %h1
   Listing #{@competition}'s Entered Results
 %h3= start_finish_description(@is_start_time)
+
+%p.competition_instructions
+  Please check that all results match with the expected competitors, and that anyone who should have a result, has a result.
 = render partial: "import_results/proof_single", locals: { display_username: true }
-%h3 Menu of actions
-%ul
-  %li= link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit"
+- if can? :approve, ImportResult
+  %h3 Menu of actions
+  %ul
+    %li= link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit"
