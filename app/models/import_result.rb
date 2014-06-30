@@ -77,7 +77,7 @@ class ImportResult < ActiveRecord::Base
       raise "error finding matching competitor" if competitor.nil?
       target_competition = matching_competition
     else
-      targed_competition = competition
+      target_competition = competition
       if competitor.nil?
         registrant = matching_registrant
         target_competition.create_competitor_from_registrants([registrant], nil)
