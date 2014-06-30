@@ -276,10 +276,21 @@ class AwardLabelsController < ApplicationController
         #"rows" =>  6,
         #"column_gutter" =>  9.93, # 0.391 "
         #"row_gutter" =>  9.93 # 0.391"
+    },
+    "Avery8293" => {
+      "paper_size" => "LETTER",
+      "top_margin" => 50.23, # 0.531"
+      "bottom_margin" => 50.23, # 0.531"
+      "left_margin" =>  16.23, # 0.406 "
+      "right_margin" =>  16.23, # 0.406"
+      "columns" =>  4,
+      "rows" =>  5,
+      "column_gutter" =>  0, # 0.391 "
+      "row_gutter" =>  26 # 0.391"
     }
     }
 
-    labels = Prawn::Labels.render(names, :type => "Avery5293", :shrink_to_fit => true) do |pdf, name|
+    labels = Prawn::Labels.render(names, :type => "Avery8293", :shrink_to_fit => true) do |pdf, name|
       pdf.text name, :align => :center, :inline_format => true, :valign => :center
     end
 

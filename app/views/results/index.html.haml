@@ -37,15 +37,15 @@
 
 
 
-
-%h1 Overall Champions
-%table.sortable
-  %thead
-    %tr
-      %th Championship
-      %th Preliminary Results
-  %tbody
-    - CombinedCompetition.all.each do |combined_competition|
+-#
+  %h1 Overall Champions
+  %table.sortable
+    %thead
       %tr
-        %td= combined_competition.name
-        %td= link_to "Results", combined_competition_path(combined_competition)
+        %th Championship
+        %th Preliminary Results
+    %tbody
+      - CombinedCompetition.all.each do |combined_competition|
+        %tr
+          %td= combined_competition.name
+          %td= link_to "Results", combined_competition_path(combined_competition)
