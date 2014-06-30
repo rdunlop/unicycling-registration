@@ -2,6 +2,8 @@ class UsaMembershipsController < ApplicationController
   authorize_resource class: false
 
   def index
+    family_item = @config.usa_family_expense_item
+    @family_registrants = family_item.payment_details.includes(:registrant).paid.map{|pd| pd.registrant}
   end
 
   def update
