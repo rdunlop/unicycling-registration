@@ -24,7 +24,7 @@
     = f.nested_fields_for :members do |member_f|
       .item
         = member_f.label :registrant
-        = member_f.select :registrant_id, Registrant.select_box_options, {include_blank: true}
+        = all_registrant_competitors(member_f)
         %a.remove{:href => "#"} remove
         = member_f.hidden_field :id
         = member_f.hidden_field :_destroy

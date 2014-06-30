@@ -8,7 +8,7 @@
     <% @competition.age_group_entries.each do |ag_entry| %>
       <% next if @results_list[ag_entry].size == 0 %>
       <%= render :partial => "/printing/competitions/competition_results", :locals => {
-        :description => "#{ag_entry} #{ag_entry.gender}",
+        :description => "#{ag_entry}",
         :result_description => @competition.result_description,
         :competitors => @results_list[ag_entry] } %>
       <% end %>

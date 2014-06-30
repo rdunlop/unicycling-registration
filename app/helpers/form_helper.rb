@@ -30,4 +30,8 @@ module FormHelper
   def competitor_select_box(form, competition)
     form.select :competitor_id, @competition.competitors.active.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {:include_blank => true}, autofocus: true, class: 'chosen-select js--autoFocus'
   end
+
+  def all_registrant_competitors(form)
+    form.select :registrant_id,  Registrant.select_box_options_to_bib_number, {:include_blank => true}, autofocus: true, class: 'chosen-select js--autoFocus'
+  end
 end
