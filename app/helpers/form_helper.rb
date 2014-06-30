@@ -32,6 +32,6 @@ module FormHelper
   end
 
   def all_registrant_competitors(form)
-    form.select :registrant_id,  Registrant.select_box_options_to_bib_number, {:include_blank => true}, autofocus: true, class: 'chosen-select js--autoFocus'
+    form.select :registrant_id,  Registrant.select_box_options, {:include_blank => true}, autofocus: true, class: 'chosen-select js--autoFocus'
   end
 end
