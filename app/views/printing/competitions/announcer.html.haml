@@ -1,7 +1,7 @@
 -cache [@competition, @config] do
   %h2= "#{@competition} Competitors"
 
-  %table.full_grid.sortable
+  %table.full.grid.competitor_list
     %thead
       %tr
         - if @competition.compete_in_order

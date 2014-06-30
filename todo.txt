@@ -3,6 +3,9 @@ Last Re-Arranged June 20th, 2014.
 Connie/Robin:
 - Feedback from Chris Hugo, The "Manage Competitors" button is not clearly the next action I need to do.
  - make it more obvious.
+
+- add blank lines at the end of the sign-in-sheets.
+- Add ability to enter 10k results, to the right categories.
 DONE- Add Expert to the Results PDF
 - Also have a way to do "Ungeared"
   - The medal will say "Ungeared Male" instead of "Expert Male"
