@@ -282,7 +282,7 @@ class AwardLabelsController < ApplicationController
       "top_margin" => 50.23, # 0.531"
       "bottom_margin" => 50.23, # 0.531"
       "left_margin" =>  52.23, # 0.406 "
-      "right_margin" =>  30.23, # 0.406"
+      "right_margin" =>  40.23, # 0.406"
       "columns" =>  4,
       "rows" =>  5,
       "column_gutter" =>  55, # 0.391 "
