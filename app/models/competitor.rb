@@ -432,7 +432,7 @@ class Competitor < ActiveRecord::Base
   def details
     res = ""
     res += "Geared, " if geared
-    res += "#{wheel_size}\"," if wheel_size
+    res += "#{riding_wheel_size}\"," if riding_wheel_size
     res += notes if notes
     res
   end

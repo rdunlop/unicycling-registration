@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630023241) do
+ActiveRecord::Schema.define(version: 20140630032919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 20140630023241) do
     t.integer  "status",                   default: 0
     t.integer  "lowest_member_bib_number"
     t.boolean  "geared",                   default: false
-    t.integer  "wheel_size"
+    t.integer  "riding_wheel_size"
     t.string   "notes"
   end
 

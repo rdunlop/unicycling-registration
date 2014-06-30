@@ -28,7 +28,7 @@
             %td= comp_f.object.gender
             %td= comp_f.select :status, Competitor.statuses.keys
             %td= comp_f.check_box :geared
-            %td= comp_f.number_field :wheel_size, class: "sign_in_wheel_size"
+            %td= comp_f.number_field :riding_wheel_size, class: "sign_in_wheel_size"
             %td= comp_f.text_field :notes, class: "sign_in_notes"
   = f.submit
 %br
