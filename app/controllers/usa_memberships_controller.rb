@@ -1,8 +1,6 @@
 class UsaMembershipsController < ApplicationController
   authorize_resource class: false
 
-  before_action :load_usa_paid_registrants
-
   def index
   end
 
@@ -65,9 +63,9 @@ class UsaMembershipsController < ApplicationController
       sheet[row,10] = reg.contact_detail.phone
       sheet[row,11] = reg.contact_detail.email
       sheet[row,12] = reg.club
-      sheet[row,13] = @individual_registrants.include?(reg)
-      sheet[row,14] = @family_registrants.include?(reg)
-      sheet[row,15] = @family_registrants.include?(reg) ? reg.usa_family_membership_details : ""
+      sheet[row,13] = reg.paid_individual_usa?
+      sheet[row,14] = reg.paid_family_usa?
+      sheet[row,15] = reg.paid_family_usa? ? reg.usa_family_membership_details : ""
       sheet[row,16] = reg.contact_detail.usa_family_membership_holder.try(:bib_number)
       sheet[row,17] = reg.contact_detail.usa_confirmed_paid
       row += 1
@@ -79,15 +77,5 @@ class UsaMembershipsController < ApplicationController
     respond_to do |format|
       format.xls { send_data report.string, :filename => "registrants_with_usa_membership_details.xls" }
     end
-  end
-
-  private
-
-  def load_usa_paid_registrants
-    family_item = @config.usa_family_expense_item
-    individual_item = @config.usa_individual_expense_item
-
-    @family_registrants = family_item.payment_details.includes(:registrant).paid.map{|pd| pd.registrant}
-    @individual_registrants = individual_item.payment_details.includes(:registrant).paid.map{|pd| pd.registrant}
   end
 end

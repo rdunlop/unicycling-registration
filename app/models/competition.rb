@@ -30,6 +30,8 @@
 #
 
 class Competition < ActiveRecord::Base
+  include CachedModel
+
   belongs_to :age_group_type, :inverse_of => :competitions
   belongs_to :event, :inverse_of => :competitions
 

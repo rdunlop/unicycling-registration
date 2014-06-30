@@ -473,10 +473,18 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def usa_membership_paid?
+  def paid_individual_usa?
     ind = EventConfiguration.singleton.usa_individual_expense_item
+    paid_expense_items.include?(ind)
+  end
+
+  def paid_family_usa?
     fam = EventConfiguration.singleton.usa_family_expense_item
-    contact_detail.usa_confirmed_paid || contact_detail.usa_family_membership_holder_id? || paid_expense_items.include?(ind) || paid_expense_items.include?(fam)
+    paid_expense_items.include?(fam)
+  end
+
+  def usa_membership_paid?
+    contact_detail.usa_confirmed_paid || contact_detail.usa_family_membership_holder_id? || paid_individual_usa?|| paid_family_usa?
   end
 
   def usa_family_membership_details

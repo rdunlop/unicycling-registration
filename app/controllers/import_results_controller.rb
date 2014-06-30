@@ -227,7 +227,7 @@ class ImportResultsController < ApplicationController
   end
 
   def load_import_results
-    @import_results = @user.import_results.where(competition_id: @competition)
+    @import_results = @user.import_results.where(competition_id: @competition).includes(:competition)
   end
 
   def load_results_for_competition

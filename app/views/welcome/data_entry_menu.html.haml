@@ -1,18 +1,19 @@
-- unless @director_events.empty?
-  %h1 My Event Director Events
+- cache ['director_events', I18n.locale, current_user, Competition] do
+  - unless @director_events.empty?
+    %h1 My Event Director Events
 
-  %table
-    %thead
-      %tr
-        %th Event
-        %th Competition
-    %tbody
-      - @director_events.each do |event|
-        - event.competitions.each do |competition|
-          %tr
-            %td= event
-            %td= link_to "Manage #{competition}", competition, class: 'action_button'
-  %hr
+    %table
+      %thead
+        %tr
+          %th Event
+          %th Competition
+      %tbody
+        - @director_events.each do |event|
+          - event.competitions.each do |competition|
+            %tr
+              %td= event
+              %td= link_to "Manage #{competition}", competition, class: 'action_button'
+    %hr
 
 - unless @judges.empty?
   %h1 My Judging Events
@@ -52,13 +53,15 @@
         %th Competition
         %th Status
     %tbody
-      - Competition.all.each do |competition|
-        %tr
-          %td= competition.end_time_to_s
-          %td= competition.event.category
-          %td= competition.event
-          %td= link_to competition.name, competition
-          - competition_presenter = CompetitionPresenter.new(competition)
-          %td{ class: competition_presenter.status_code}= competition_presenter.status
+      - cache [Competition] do
+        - Competition.all.each do |competition|
+          - cache [competition] do
+            %tr
+              %td= competition.end_time_to_s
+              %td= competition.event.category
+              %td= competition.event
+              %td= link_to competition.name, competition
+              - competition_presenter = CompetitionPresenter.new(competition)
+              %td{ class: competition_presenter.status_code}= competition_presenter.status
   %p
     If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).
