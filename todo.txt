@@ -1,13 +1,13 @@
 Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
-- Add Expert to the Results PDF
+DONE- Add Expert to the Results PDF
 - Also have a way to do "Ungeared"
   - The medal will say "Ungeared Male" instead of "Expert Male"
-- Rename "Expert Labels" to "Download Labels"
-- No 4th/5th places.
+Done - Rename "Expert Labels" to "Download Labels"
+Done - No 4th/5th places.
 - Make an account for Kirsten which
-- Make the Award Competition chooser alphabetical and chosen-rails
+Done- Make the Award Competition chooser alphabetical and chosen-rails
 - Make Judge-account-creation easier
 - When randomly-sorting, it should return to the same page
 - Upgrade the JudgeType descriptions for the new rules

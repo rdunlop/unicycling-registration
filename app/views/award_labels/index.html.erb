@@ -4,10 +4,26 @@
 <%= form_tag(create_by_competition_user_award_labels_path(@user), {method: :post}) do %>
 
   <%= label_tag :competition_id, "Competition" %>
-  <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name), "id", "to_s"), :include_blank => true %><br />
+  <%= select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:name), "id", "to_s"), :include_blank => true, class: 'chosen-select' %><br />
   <br />
 
   <%= submit_tag "Create Labels for Selected Competition" %>
+<% end %>
+
+<hr />
+<h2>Print Labels Sheet</h2>
+<%= link_to "Normal (Round) Labels", expert_labels_user_award_labels_path(@user) %>
+<br />
+<br />
+<hr />
+<%= form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do %>
+  <%= check_box_tag :separate_registrants %>
+  <%= label_tag :separate_registrants, "Separate each registrant with a row of blank labels" %><br />
+
+  <%= number_field_tag :skip_positions, nil, {min: 0} %>
+  <%= label_tag :skip_positions, "Skip Positions" %><br />
+
+  <%= submit_tag "Square Labels", :class => "multiclick" %>
 <% end %>
 
 <hr />
@@ -40,20 +56,6 @@
     <%= submit_tag "Create Labels for Selected Registrant(s) or Competition" %>
   <% end %>
 </div>
-
-<hr />
-<h2>Print Labels Sheet</h2>
-<%= form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do %>
-  <%= check_box_tag :separate_registrants %>
-  <%= label_tag :separate_registrants, "Separate each registrant with a row of blank labels" %><br />
-
-  <%= number_field_tag :skip_positions, nil, {min: 0} %>
-  <%= label_tag :skip_positions, "Skip Positions" %><br />
-
-  <%= submit_tag "Normal Labels", :class => "multiclick" %>
-<% end %>
-
-<%= link_to "Expert Labels", expert_labels_user_award_labels_path(@user) %>
 
 <hr />
 
