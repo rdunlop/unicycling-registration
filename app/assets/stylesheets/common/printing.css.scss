@@ -88,14 +88,19 @@ table.results {
     width: 10%;
   }
   .name {
-    width: 40%;
+    width: 30%;
   }
   .time {
-    width: 40%;
+    width: 25%;
     font-weight: bold;
+  }
+  .details {
+    width: 25%;
+    font-size: 9pt;
   }
   .place {
     width: 10%;
+    font-weight: bold;
   }
   td {
     border-top: 1px black solid;

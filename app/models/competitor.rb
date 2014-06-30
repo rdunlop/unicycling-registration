@@ -429,7 +429,13 @@ class Competitor < ActiveRecord::Base
     "Mark these competitors as Not Qualified"
   end
 
-
+  def details
+    res = ""
+    res += "Geared, " if geared
+    res += "#{wheel_size}\"," if wheel_size
+    res += notes if notes
+    res
+  end
 
   def best_time_in_thousands
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/competition/#{competition.id}-#{competition.updated_at}/best_time_in_thousands") do

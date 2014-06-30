@@ -63,7 +63,7 @@ class Ability
     end
 
     # printing forms:
-    can [:announcer, :heat_recording, :single_attempt_recording, :two_attempt_recording], Competition
+    can [:announcer, :heat_recording, :single_attempt_recording, :two_attempt_recording, :sign_in_sheet], Competition
 
     # data entry
     can :manage, ImportResult do |import_result|

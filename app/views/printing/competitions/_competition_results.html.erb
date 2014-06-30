@@ -36,17 +36,18 @@
     <table class="full results race">
       <thead>
         <tr>
+          <th class="place">Place</th>
           <th class="id">ID</th>
           <th class="name">Name</th>
           <% unless result_description.nil? %>
             <th class="time"><%= result_description %></th>
           <% end %>
-          <th class="place">Place</th>
+          <th class="details">Details</th>
         </tr>
       </thead>
       <tbody>
         <% competitors.each do |competitor| %>
-          <%= render :partial => "/printing/competitions/result_entry", :locals => {:id => competitor.bib_number, :name => competitor.to_s, :time => competitor.result, :place => competitor.place_formatted } %>
+          <%= render :partial => "/printing/competitions/result_entry", :locals => {:id => competitor.bib_number, :name => competitor.to_s, :time => competitor.result, :place => competitor.place_formatted, details: competitor.details } %>
         <% end %>
       </tbody>
     </table>
