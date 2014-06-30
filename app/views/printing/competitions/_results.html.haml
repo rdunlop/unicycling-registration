@@ -5,7 +5,7 @@
     Results
   - @results_list ||= @competition.results_list
   - if @competition.age_group_entries.nil?
-    = render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @results_list["all"] }
+    = render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @results_list["all"], place_function: :place_formatted }
   - else
     - if @competition.has_experts
       - ["Male", "Female"].each do |gender|
