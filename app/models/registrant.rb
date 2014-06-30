@@ -126,6 +126,10 @@ class Registrant < ActiveRecord::Base
     end
   end
 
+  def matching_competition_in_event(event)
+    competitors.select{ |competitor| competitor.event == event }.first.try(:competition)
+  end
+
   def create_associated_required_expense_items
     RequiredExpenseItemCreator.new(self).create
   end

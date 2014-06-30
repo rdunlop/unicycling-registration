@@ -69,14 +69,23 @@ class ImportResult < ActiveRecord::Base
 
   # import the result in the results table, raise an exception on failure
   def import!
-    competitor = competition.find_competitor_with_bib_number(bib_number)
-    registrant = matching_registrant
-    if competitor.nil?
-      competition.create_competitor_from_registrants([registrant], nil)
-      competitor = competition.find_competitor_with_bib_number(bib_number)
+    raise "Unable to find registrant" if matching_registrant.nil?
+
+    matching_competition = matching_registrant.matching_competition_in_event(competition.event)
+    if matching_competition
+      competitor = matching_registrant.competitors.where(competition: matching_competition).first
+      raise "error finding matching competitor" if competitor.nil?
+      target_competition = matching_competition
+    else
+      targed_competition = competition
+      if competitor.nil?
+        registrant = matching_registrant
+        target_competition.create_competitor_from_registrants([registrant], nil)
+        competitor = target_competition.find_competitor_with_bib_number(bib_number)
+      end
     end
 
-    tr = competition.build_result_from_imported(self)
+    tr = target_competition.build_result_from_imported(self)
     tr.competitor = competitor
     tr.save!
   end
@@ -96,6 +105,6 @@ class ImportResult < ActiveRecord::Base
   end
 
   def matching_registrant
-    Registrant.find_by(bib_number: bib_number) if bib_number
+    @maching_registrant ||= Registrant.find_by(bib_number: bib_number) if bib_number
   end
 end
