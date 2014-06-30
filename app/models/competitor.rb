@@ -46,6 +46,10 @@ class Competitor < ActiveRecord::Base
     where(status: Competitor.statuses[:active])
   end
 
+  def self.ungeared
+    where(geared: false)
+  end
+
   def touch_places
     # update the last time for the overall gender
     if overall_cache_value.nil?
@@ -123,11 +127,22 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def overall_place=(place)
-    Rails.cache.write(overall_place_key, place)
+  def overall_place=(new_place)
+    unless new_place.is_a? Integer
+      raise "Unexpected place #{new_place}" unless new_place == "DQ"
+    else
+      Rails.cache.write(overall_place_key, new_place)
+    end
+  end
+
+  def sorting_overall_place
+    return 999 if disqualified || overall_place.nil?
+    overall_place
   end
 
   def overall_place
+    return 0 if disqualified
+
     my_overall_place = Rails.cache.fetch(overall_place_key)
 
     if my_overall_place.nil? and (has_result?)

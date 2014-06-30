@@ -260,6 +260,18 @@ class Competition < ActiveRecord::Base
     results
   end
 
+  def competitors_with_results
+    competitors.active.select{ |competitor| competitor.has_result? }
+  end
+
+  def expert_results_list
+    competitors_with_results.sort{|a,b| a.sorting_overall_place <=> b.sorting_overall_place }
+  end
+
+  def ungeared_expert_results_list
+    competitors_with_results.select{|r| !r.geared? }.sort{|a,b| a.sorting_overall_place <=> b.sorting_overall_place }
+  end
+
   def results_list_for(ag_entry)
     results = competitors.active.select{ |competitor| competitor.has_result? && competitor.age_group_entry == ag_entry }
     results.sort!{|a,b| a.sorting_place <=> b.sorting_place}

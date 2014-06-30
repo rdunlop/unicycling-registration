@@ -1,4 +1,4 @@
 .race_recording
   %h1= "#{@competition.award_title_name} #{@competition.award_subtitle_name} Results"
   %hr
-  = render :partial => "/printing/competitions/competition_results", :locals => {:description => "#{@ag_entry} #{@ag_entry.gender}", :result_description => @competition.result_description, :competitors => @results_list, :no_page_breaks => @no_page_breaks }
+  = render :partial => "/printing/competitions/competition_results", :locals => {:description => "#{@ag_entry} #{@ag_entry.gender}", :result_description => @competition.result_description, :competitors => @results_list, :no_page_breaks => @no_page_breaks, place_function: :place_formatted }

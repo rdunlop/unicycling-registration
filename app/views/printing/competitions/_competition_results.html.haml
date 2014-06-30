@@ -1,0 +1,40 @@
+- # description
+- # result_description
+- # competitors
+- # place_function
+.nobreak
+  %h2.age_group_description= description
+  %div{:style => "clear: both"}
+  %hr
+  - if competitors.count == 0
+    %h3 No Competitors yet
+  - elsif competitors.first.members.count > 2
+    - # Group event, list the members
+    - competitors.each do |competitor|
+      %h3
+        Place: #{competitor.send(place_function)} -  #{competitor}
+      %hr
+      %table
+        %thead
+          %tr
+            %th ID
+            %th Name
+        %tbody
+          - competitor.members.each do |member|
+            %tr
+              %td= member.registrant.bib_number
+              %td= member.registrant
+  - else
+    %table.full.results.race
+      %thead
+        %tr
+          %th.place Place
+          %th.id ID
+          %th.name Name
+          - unless result_description.nil?
+            %th.time= result_description
+          %th.details Details
+      %tbody
+        - competitors.each do |competitor|
+          = render :partial => "/printing/competitions/result_entry", :locals => {:id => competitor.bib_number, :name => competitor.to_s, :time => competitor.result, :place => competitor.send(place_function), details: competitor.details }
+  %hr.age_group_separator
