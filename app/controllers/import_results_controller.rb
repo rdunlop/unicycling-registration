@@ -23,6 +23,7 @@ class ImportResultsController < ApplicationController
 
   # GET /users/#/competitions/#/import_results/review
   def review
+    @import_results = @import_results.entered_order
     respond_to do |format|
       format.html # review.html.erb
     end
