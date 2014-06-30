@@ -1,7 +1,6 @@
 <% # description
 # result_description
 # competitors
-# no_page_breaks
 %>
 <div class="nobreak">
   <h2 class="age_group_description"><%= description %></h2>
@@ -52,9 +51,5 @@
       </tbody>
     </table>
   <% end %>
-  <% if no_page_breaks %>
-    <hr class="age_group_separator" />
-  <% else %>
-    <div class="page-break"></div>
-  <% end %>
+  <hr class="age_group_separator" />
 </div>

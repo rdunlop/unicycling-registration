@@ -3,15 +3,14 @@
   <hr />
   <% @results_list ||= @competition.results_list %>
   <% if @competition.age_group_entries.nil? %>
-    <%= render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @results_list["all"], :no_page_breaks => @no_page_breaks } %>
+    <%= render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @results_list["all"] } %>
   <% else %>
     <% @competition.age_group_entries.each do |ag_entry| %>
       <% next if @results_list[ag_entry].size == 0 %>
       <%= render :partial => "/printing/competitions/competition_results", :locals => {
         :description => "#{ag_entry} #{ag_entry.gender}",
         :result_description => @competition.result_description,
-        :competitors => @results_list[ag_entry],
-        :no_page_breaks => @no_page_breaks } %>
+        :competitors => @results_list[ag_entry] } %>
       <% end %>
     <% end %>
   </div>

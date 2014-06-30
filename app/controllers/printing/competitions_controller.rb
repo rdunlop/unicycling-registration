@@ -36,7 +36,6 @@ class Printing::CompetitionsController < ApplicationController
   def single_attempt_recording
     @competition_sign_up = CompetitionSignUp.new(@competition)
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
-    @no_page_breaks = true unless params[:no_page_breaks].nil?
 
     @only_registered = true
     @only_registered = false if params[:only_registered].nil?
@@ -50,7 +49,6 @@ class Printing::CompetitionsController < ApplicationController
   def two_attempt_recording
     #@competition_sign_up = CompetitionSignUp.new(@competition)
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
-    @no_page_breaks = true unless params[:no_page_breaks].nil?
 
     @only_registered = true
     @only_registered = false if params[:only_registered].nil?
@@ -62,7 +60,6 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def results
-    @no_page_breaks = true unless params[:no_page_breaks].nil?
     name = "#{@config.short_name.tr(" ", "_")}_#{@competition.name.tr(" ", "_")}_results"
     attachment = true unless params[:attachment].nil?
 

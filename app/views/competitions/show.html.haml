@@ -61,11 +61,6 @@ Results, judges, and scoring settings.
   %p
     = link_to "View", results_printing_competition_path(@competition)
     = link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
-  %p
-    = form_tag(results_printing_competition_path(@competition, :format => :pdf), :method => :get) do
-      = label_tag :no_page_breaks
-      = check_box_tag :no_page_breaks
-      = submit_tag "Print Results"
 
 - if can? :lock, @competition
   %h2 Lock (Complete) the competition Results
