@@ -35,7 +35,12 @@ Workspace::Application.routes.draw do
     # ADMIN (for use in Setting up the system)
     #
     #
-    resources :age_group_types, :except => [:new]
+    resources :age_group_types, :except => [:new] do
+      member do
+        get :set_sort
+        post :sort
+      end
+    end
 
     resources :permissions, :only => [:index] do
       collection do
