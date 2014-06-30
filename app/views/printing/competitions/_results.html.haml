@@ -7,8 +7,9 @@
   - if @competition.age_group_entries.nil?
     = render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @results_list["all"] }
   - else
-    - ["Male", "Female"].each do |gender|
-      = render partial: "/printing/competitions/competition_results", locals: { description: "Expert #{gender}", result_description: @competition.result_description, competitors: @competition.expert_results_list(gender), place_function: :overall_place_formatted }
+    - if @competition.has_experts
+      - ["Male", "Female"].each do |gender|
+        = render partial: "/printing/competitions/competition_results", locals: { description: "Expert #{gender}", result_description: @competition.result_description, competitors: @competition.expert_results_list(gender), place_function: :overall_place_formatted }
     - @competition.age_group_entries.each do |ag_entry|
       - next if @results_list[ag_entry].size == 0
       = render :partial => "/printing/competitions/competition_results", :locals => {description: "#{ag_entry}",result_description: @competition.result_description, competitors: @results_list[ag_entry], place_function: :place_formatted }
