@@ -1,35 +1,37 @@
 %table.import_results.sortable
-  %thead
-    %tr
-      - if display_username
-        %th Username
-      %th Entry Number
-      %th ID
-      %th Name
-      - if @competition.imports_times
-        %th Time
-      - else
-        %th Points
-      %th Disqualified
-      %th Competitor Exists?
-  %tbody
-    - @import_results.each_with_index do |result, index|
+  - cache [@competition, display_username] do
+    %thead
       %tr
         - if display_username
-          %td= result.user
-        %td= index + 1
-        %td= result.bib_number
-        %td= Registrant.find_by_bib_number(result.bib_number)
+          %th Username
+        %th Entry Number
+        %th ID
+        %th Name
         - if @competition.imports_times
-          %td= result.full_time
+          %th Time
         - else
-          %td= result.points
-        %td= result.disqualified ? "yes" : ""
-        - competitor = result.competition.find_competitor_with_bib_number(result.bib_number)
-        - if competitor
-          %td.competitor_exists= competitor.to_s
-        - else
-          %td.competitor_not_exists No
+          %th Points
+        %th Disqualified
+        %th Competitor Exists?
+  %tbody
+    - @import_results.each_with_index do |result, index|
+      - cache [result, Registrant, @competition] do
+        %tr
+          - if display_username
+            %td= result.user
+          %td= index + 1
+          %td= result.bib_number
+          %td= Registrant.find_by_bib_number(result.bib_number)
+          - if @competition.imports_times
+            %td= result.full_time
+          - else
+            %td= result.points
+          %td= result.disqualified ? "yes" : ""
+          - competitor = result.competition.find_competitor_with_bib_number(result.bib_number)
+          - if competitor
+            %td.competitor_exists= competitor.to_s
+          - else
+            %td.competitor_not_exists No
 
 
 %hr

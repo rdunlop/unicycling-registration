@@ -11,7 +11,7 @@
 #
 
 class PublishedAgeGroupEntry < ActiveRecord::Base
-  belongs_to :competition
+  belongs_to :competition, touch: true
   belongs_to :age_group_entry
 
   before_create :set_published_at_date
