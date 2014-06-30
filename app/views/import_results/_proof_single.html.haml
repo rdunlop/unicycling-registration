@@ -1,4 +1,4 @@
-%table.import_results
+%table.import_results.sortable
   %thead
     %tr
       - if display_username
@@ -24,7 +24,7 @@
           %td= result.full_time
         - else
           %td= result.rank
-        %td= result.disqualified
+        %td= result.disqualified ? "yes" : ""
         - competitor = result.competition.find_competitor_with_bib_number(result.bib_number)
         - if competitor
           %td.competitor_exists= competitor.to_s
