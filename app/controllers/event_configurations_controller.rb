@@ -91,7 +91,7 @@ class EventConfigurationsController < ApplicationController
   def event_configuration_params
     params.require(:event_configuration).permit(:artistic_closed_date, :music_submission_end_date, :artistic_score_elimination_mode_naucc,
                                                 :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location,
-                                                :logo_file,
+                                                :logo_file, :max_award_place,
                                                 :long_name, :rulebook_url, :short_name, :standard_skill, :standard_skill_closed_date, :style_name,
                                                 :start_date, :tshirt_closed_date, :test_mode, :usa, :has_print_waiver, :waiver_url, :has_online_waiver,
                                                 :online_waiver_text, :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,

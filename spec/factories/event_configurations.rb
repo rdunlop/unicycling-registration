@@ -60,6 +60,7 @@ FactoryGirl.define do
     comp_noncomp_url nil
     test_mode true
     style_name "naucc_2013"
+    max_award_place 5
 
     trait :with_usa do
       usa true

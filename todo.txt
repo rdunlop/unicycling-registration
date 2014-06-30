@@ -1,6 +1,24 @@
 Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
+- Add Expert to the Results PDF
+- Also have a way to do "Ungeared"
+  - The medal will say "Ungeared Male" instead of "Expert Male"
+- Rename "Expert Labels" to "Download Labels"
+- No 4th/5th places.
+- Make an account for Kirsten which
+- Make the Award Competition chooser alphabetical and chosen-rails
+- Make Judge-account-creation easier
+- When randomly-sorting, it should return to the same page
+- Upgrade the JudgeType descriptions for the new rules
+ - Able to remove the 4th score category for Technical Judges
+ - Allow Admins to set judges.
+ - Require Electronic Music submission for UNICON?
+ - Make the announcer print-outs bigger.
+
+- On the Judge Management page, the Tech/Pres categories should be ordered (not swap sides randomly)
+- Make the Judges-chooser alphabetical, and Chosen.
+
 - fix competitor-advanced-add to work well with chosen-rails
 - better way to do in-place sorting than the current age-group-type sorting.
 - Should I move the location of the ID# on the registration form?

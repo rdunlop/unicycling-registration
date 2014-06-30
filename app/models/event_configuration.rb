@@ -33,6 +33,7 @@
 #  usa_individual_expense_item_id        :integer
 #  usa_family_expense_item_id            :integer
 #  logo_file                             :string(255)
+#  max_award_place                       :integer          default(5)
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -60,6 +61,7 @@ class EventConfiguration < ActiveRecord::Base
   validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa"
 
   validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
+  validates :max_award_place, presence: true
 
   before_validation :clear_of_blank_strings
 
@@ -79,6 +81,7 @@ class EventConfiguration < ActiveRecord::Base
     self.currency ||= "%u%n USD"
     self.currency_code ||= "USD"
     self.contact_email ||= ""
+    self.max_award_place ||= 5
   end
 
   # allows creating competitors during lane assignment

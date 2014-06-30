@@ -1,0 +1,138 @@
+= form_for(@event_configuration, :html => {:multipart=> true}) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+  %table.alternate
+    %thead
+      %tr
+        %th Field
+        %th Value
+        %th Description
+    - languages.each do |lang|
+      = f.globalize_fields_for lang do |g|
+        %tr
+          %th
+            = g.label :short_name
+            (#{long_language_name(lang)})
+          %td= g.text_field :short_name
+          %td Used on the Registration page.
+        %tr
+          %th
+            = g.label :long_name
+            (#{long_language_name(lang)})
+          %td= g.text_field :long_name
+        %tr
+          %th
+            = g.label :location
+            (#{long_language_name(lang)})
+          %td= g.text_field :location
+        %tr
+          %th
+            = g.label :dates_description
+            (#{long_language_name(lang)})
+          %td= g.text_field :dates_description
+    %tr
+      %th= f.label :style_name
+      %td= f.select :style_name, EventConfiguration.style_names, :include_blank => true
+      %td Select the style to be applied to the site
+    %tr
+      %th= f.label :event_url
+      %td= f.url_field :event_url
+      %td Links from the Menubar logo to this URL.
+    %tr
+      %th= f.label :has_print_waiver
+      %td= f.check_box :has_print_waiver
+      %td Enabling this allows all the print (pdf) waiver features and text to display.
+    %tr
+      %th= f.label :waiver_url
+      %td= f.url_field :waiver_url
+      %td Currently unused
+    %tr
+      %th= f.label :has_online_waiver
+      %td= f.check_box :has_online_waiver
+      %td Enabling this allows all the online (text box) waiver features and text to display.
+    %tr
+      %th= f.label :online_waiver_text
+      %td= f.text_area :online_waiver_text, size: "60x12", placeholder: "This is where your online waiver text would go."
+      %td Actual text for the online waiver.
+    %tr
+      %th= f.label :comp_noncomp_url
+      %td= f.url_field :comp_noncomp_url
+      %td A link to text that describes the difference between Comptitors and Non-comptitors.
+    %tr
+      %th= f.label :start_date
+      %td= f.date_select :start_date
+      %td This date is used to calculate the "age" of each registrant.
+    %tr
+      %th= f.label :logo_file
+      %td
+        = f.file_field :logo_file
+        = image_tag(@event_configuration.logo_file.url) if @event_configuration.logo_file?
+      %td This logo is displayed at the top of the site.
+    %tr
+      %th= f.label :currency
+      %td= f.text_field :currency
+      %td
+        For use when printing/displaying currency on the webpage. Defaults to "%u%n USD".
+        %br/
+        Must be in the form of 'format' from: #{link_to "Rails options{}", "http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#method-i-number_to_currency"}
+    %tr
+      %th= f.label :currency_code
+      %td= f.text_field :currency_code
+      %td For Paypal. Three capital letter code for currency.
+    %tr
+      %th= f.label :contact_email
+      %td= f.email_field :contact_email
+      %td This e-mail address will be listed on the "Help" page
+    %tr
+      %th= f.label :artistic_closed_date
+      %td= f.date_select :artistic_closed_date
+      %td Not currently used
+    %tr
+      %th= f.label :music_submission_end_date
+      %td= f.date_select :music_submission_end_date, include_blank: true
+      %td Specify the date at which music submissions will no longer be allowed
+    %tr
+      %th= f.label :standard_skill
+      %td= f.check_box :standard_skill
+      %td Enabling this allows standard skill.
+    %tr
+      %th= f.label :standard_skill_closed_date
+      %td= f.date_select :standard_skill_closed_date
+      %td This date defines when the users are no longer able to create/update standard skill routines
+    %tr
+      %th= f.label :usa
+      %td= f.check_box :usa
+      %td Enabling this allows USA membership questions. It also prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed
+    %tr
+      %th= f.label :usa_individual_expense_item_id
+      %td= f.select :usa_individual_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true
+      %td This allows us to know who has paid for a USA individual membership
+    %tr
+      %th= f.label :usa_family_expense_item_id
+      %td= f.select :usa_family_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true
+      %td This allows us to know who has paid for a USA individual membership
+    %tr
+      %th= f.label :iuf
+      %td= f.check_box :iuf
+      %td Enabling this allows IUF membership questions.
+    %tr
+      %th= f.label :rulebook_url
+      %td= f.url_field :rulebook_url
+      %td If left blank, no rulebook links are displayed. Otherwise provides external link to rulebook pdf.
+    %tr
+      %th= f.label :tshirt_closed_date
+      %td= f.date_select :tshirt_closed_date
+      %td Not currently used
+    %tr
+      %th= f.label :artistic_score_elimination_mode_naucc
+      %td= f.check_box :artistic_score_elimination_mode_naucc
+      %td This chooses whether to score artistic in "NAUCC" rules (1 high, 1 low elimination), or "UNICON" rules (1 high, 1 low elimination PER JUDGE TYPE)
+    %tr
+      %th= f.label :max_award_place
+      %td= f.number_field :max_award_place, {min: 0}
+      %td This sets the maximum place to print awards for. (applies to both age group and expert)
+    %tr
+      %th= f.label :test_mode
+      %td= f.check_box :test_mode
+      %td Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.
+  .actions
+    = f.submit

@@ -82,7 +82,7 @@ class AwardLabelsController < ApplicationController
   def create_by_competition
     competition = Competition.find(params[:competition_id])
     min_place = 1
-    max_place = 5
+    max_place = @config.max_award_place
     n = 0
     competition.competitors.active.each do |competitor|
       competitor.members.each do |member|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630032919) do
+ActiveRecord::Schema.define(version: 20140630154302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(version: 20140630032919) do
     t.integer  "usa_individual_expense_item_id"
     t.integer  "usa_family_expense_item_id"
     t.string   "logo_file"
+    t.integer  "max_award_place",                       default: 5
   end
 
   create_table "events", force: true do |t|
