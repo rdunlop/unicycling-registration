@@ -1,32 +1,34 @@
-%h2= "#{@competition} Competitors"
+-cache [@competition, @config] do
+  %h2= "#{@competition} Competitors"
 
-%table.full_grid.sortable
-  %thead
-    %tr
-      - if @competition.compete_in_order
-        %th Order
-      %th ID
-      %th Name
-      %th Club
-      - if @config.usa?
-        %th State
-      - else
-        %th Country
-  %tbody
-    - @competition.competitors.active.each do |comp|
+  %table.full_grid.sortable
+    %thead
       %tr
         - if @competition.compete_in_order
-          %td= comp.position
-        %td= comp.bib_number
-        %td
-          - if comp.team_name.present?
-            %b= comp.team_name
-            %br
-          - comp.members.each do |member|
-            = member
-            %br
-        %td= comp.club
+          %th Order
+        %th ID
+        %th Name
+        %th Club
         - if @config.usa?
-          %td= comp.state
+          %th State
         - else
-          %td= comp.country
+          %th Country
+    %tbody
+      - @competition.competitors.active.each do |comp|
+        - cache [@competition, comp, @config] do
+          %tr
+            - if @competition.compete_in_order
+              %td= comp.position
+            %td= comp.bib_number
+            %td
+              - if comp.team_name.present?
+                %b= comp.team_name
+                %br
+              - comp.members.each do |member|
+                = member
+                %br
+            %td= comp.club
+            - if @config.usa?
+              %td= comp.state
+            - else
+              %td= comp.country
