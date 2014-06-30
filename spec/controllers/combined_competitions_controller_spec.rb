@@ -54,7 +54,7 @@ describe CombinedCompetitionsController do
 
       it "redirects to the created combined_competition" do
         post :create, {:combined_competition => valid_attributes}
-        expect(response).to redirect_to(CombinedCompetition.last)
+        expect(response).to redirect_to(combined_competition_combined_competition_entries_path(CombinedCompetition.last))
       end
     end
 
