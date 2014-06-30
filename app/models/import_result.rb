@@ -38,6 +38,7 @@ class ImportResult < ActiveRecord::Base
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}, allow_nil: true
 
   validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
+  before_validation :set_details_if_blank
   validates :details, presence: true, if: "rank?"
 
   belongs_to :user
@@ -47,6 +48,11 @@ class ImportResult < ActiveRecord::Base
 
   scope :entered_order, -> { reorder(:id) }
 
+  def set_details_if_blank
+    if details.blank? && rank?
+      self.details = "#{rank}pts"
+    end
+  end
 
 
   def competitor_name
