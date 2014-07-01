@@ -113,6 +113,7 @@ Workspace::Application.routes.draw do
     resources :combined_competitions do
       resources :combined_competition_entries, except: [:show]
     end
+    resources :competition_wheel_sizes
 
     resources :event_choices, :except => [:index, :create, :new]
 

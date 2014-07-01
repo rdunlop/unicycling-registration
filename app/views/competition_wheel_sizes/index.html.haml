@@ -1,0 +1,20 @@
+%h1 Listing Wheel Size Overrides
+%table
+  %thead
+    %tr
+      %th Registrant
+      %th Event
+      %th Wheel Size
+      %th
+      %th
+  %tbody
+    - @competition_wheel_sizes.each do |competition_wheel_size|
+      %tr
+        %td= competition_wheel_size.registrant
+        %td= competition_wheel_size.event
+        %Td= competition_wheel_size.wheel_size
+        %td= link_to 'Edit', edit_competition_wheel_size_path(competition_wheel_size)
+        %td= link_to 'Delete', competition_wheel_size, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br/
+= link_to 'New Competition Wheel size', new_competition_wheel_size_path

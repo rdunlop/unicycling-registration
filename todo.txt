@@ -1,8 +1,14 @@
 Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
+- In the 50m WW, why doesn't a 20" able to compete? Is it the size of the cranks.
+
 - warn if data entered in a form when pressing "Back" button.
 - make the Katie page auto-updating?
+- Don't allow another import to overwrite an existing TimeResult.
+- Make an easier way for the "Ready to be published" to be known.
+- Wheel Walk results show doesn't Experts vs not, in order to be able to differenciate.
+  - Also decide whether Experts should be 1 or 2 (m/f) competitions.
 - BUG: if the competitor DQs and re-runs, both results are marked as DQ for some reason. (Lucas Clegg)
 - Result sshould should the best-times-qualifying for 800m Experts.
 - Edit COmptetitor didn't change the name of the competitor.

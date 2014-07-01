@@ -1,0 +1,16 @@
+= form_for(@competition_wheel_size) do |f|
+  = render partial: "/shared/error_messages", object: @competition_wheel_size
+  .field
+    = f.label :registrant_id
+    %br
+    = all_registrant_competitors(f)
+  .field
+    = f.label :event
+    %br
+    = f.collection_select :event_id, Event.all, :id, :name
+  .field
+    = f.label :wheel_size_id
+    %br
+    = f.collection_select :wheel_size_id, WheelSize.all, :id, :description
+  .actions
+    = f.submit

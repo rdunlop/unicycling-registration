@@ -68,7 +68,7 @@ class Registrant < ActiveRecord::Base
   has_many :members, :dependent => :destroy
   has_many :competitors, :through => :members
   has_many :competitions, :through => :competitors
-
+  has_many :competition_wheel_sizes, dependent: :destroy
 
   belongs_to :default_wheel_size, :class_name => "WheelSize", :foreign_key => :wheel_size_id
   belongs_to :user
@@ -181,6 +181,11 @@ class Registrant < ActiveRecord::Base
         self.bib_number = prev_value + 1
       end
     end
+  end
+
+  def wheel_size_for_event(event)
+    override = competition_wheel_sizes.where(event: event).first
+    override.try(:wheel_size) || default_wheel_size
   end
 
   def set_default_wheel_size

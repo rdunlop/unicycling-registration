@@ -166,7 +166,7 @@ class Competitor < ActiveRecord::Base
   def age_group_entry_description # XXX combine with the other age_group function
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/competition/#{competition.id}-#{competition.updated_at}/age_group_entry_description") do
       registrant = members.first.try(:registrant)
-      competition.get_age_group_entry_description(registrant.age, registrant.gender, registrant.default_wheel_size.id) unless registrant.nil?
+      competition.get_age_group_entry_description(registrant.age, registrant.gender, registrant.wheel_size_for_event(event).id) unless registrant.nil?
     end
   end
 
@@ -322,7 +322,7 @@ class Competitor < ActiveRecord::Base
       if members.empty?
         nil
       else
-        members.first.registrant.default_wheel_size.id
+        members.first.registrant.wheel_size_for_event(event).id
       end
     end
   end

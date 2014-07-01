@@ -16,7 +16,7 @@ class CompetitionSignUp
     end
 
     all_registrants.each do |reg|
-      calculated_ag = @agt.age_group_entry_for(reg.age, reg.gender, reg.default_wheel_size.id).to_s unless @agt.nil?
+      calculated_ag = @agt.age_group_entry_for(reg.age, reg.gender, reg.wheel_size_for_event(competiton.event).id).to_s unless @agt.nil?
       calculated_ag = reg.gender if @agt.nil?
 
       if signed_up_registrants.include?(reg)
