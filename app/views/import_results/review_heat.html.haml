@@ -24,7 +24,7 @@
         %th.js--shouldNotMatch= result.lane
         %td= result.bib_number
         %td.js--highlightIfBlank= result.competitor_name
-        %td
+        %td.js--highlightIfNotBlank= result.competitor_has_results? ? "WARN: Competitor has result" : ""
         %td= result.raw_data
         %td= result.full_time
         %td= result.disqualified ? "DQ" : ""

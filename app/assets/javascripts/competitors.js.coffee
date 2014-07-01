@@ -69,4 +69,9 @@ $ ->
       $(this).addClass('unmatching')
 
 $ ->
+  $(".js--highlightIfNotBlank").each ->
+    if $(this).text() != ""
+      $(this).addClass('unmatching')
+
+$ ->
   $(".js--autoFocus").trigger('chosen:activate');

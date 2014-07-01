@@ -54,13 +54,16 @@ class ImportResult < ActiveRecord::Base
     end
   end
 
-
   def competitor_name
     matching_registrant
   end
 
   def competitor_exists?
-    competition.find_competitor_with_bib_number(bib_number)
+    matching_competitor.present?
+  end
+
+  def competitor_has_results?
+    matching_competitor.has_result? if competitor_exists?
   end
 
   def disqualified
@@ -106,5 +109,9 @@ class ImportResult < ActiveRecord::Base
 
   def matching_registrant
     @maching_registrant ||= Registrant.find_by(bib_number: bib_number) if bib_number
+  end
+
+  def matching_competitor
+    @matching_competitor ||= matching_registrant.competitors.where(competition: competition).first if matching_registrant
   end
 end
