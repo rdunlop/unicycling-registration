@@ -4,9 +4,9 @@ Connie/Robin:
 - allow directors to set competitor heat/etc.
 - Make Changes for LaneAssignment
 - Natalie to do importing?
-- PDF button for AgeGroup
-- Order Age Group display by position order?
-- "Cancel and delete" button
+Done- PDF button for AgeGroup
+ConfirmedDone - Order Age Group display by position order?
+Done- "Cancel and delete" button
 - make the default download PDF filename more relevant, for awards-printer-person.
 
 - Feedback from Chris Hugo, The "Manage Competitors" button is not clearly the next action I need to do.

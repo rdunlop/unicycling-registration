@@ -188,6 +188,15 @@ class ImportResultsController < ApplicationController
     end
   end
 
+  def delete_heat
+    @heat = params[:heat].to_i
+
+    import_results = ImportResult.where(:competition_id => @competition, heat: @heat)
+    import_results.destroy_all
+
+    redirect_to display_lif_user_competition_import_results_path(current_user, @competition, heat: @heat), notice: "deleted Heat # #{@heat} results. Try Again?"
+  end
+
   # POST /users/#/competitions/#/import_results/approve
   def approve
 
