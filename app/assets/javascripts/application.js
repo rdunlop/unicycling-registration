@@ -50,7 +50,15 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(e) {
-  $('FORM').nestedFields();
+  $('FORM').each(function() {
+    if ($(this).hasClass('multiple_nested')) {
+      $('.nested_nested').nestedFields();
+    }
+    else
+    {
+      $(this).nestedFields();
+    }
+  });
 });
 
 

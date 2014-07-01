@@ -1,0 +1,21 @@
+.nested_nested
+  %table.items
+    %thead
+      %tr
+        %th Heat#
+        %th Minutes
+        %th Seconds
+    %tbody
+      = f.nested_fields_for :heat_times do |cs|
+        %tr.item
+          %td= cs.number_field :heat
+          %td= cs.number_field :minutes, {min: 0}
+          %Td= cs.number_field :seconds, {min: 0}
+          %td
+            %a{href: '#', class: 'remove'} remove
+            = cs.hidden_field :id
+            = cs.hidden_field :_destroy
+  %a{ href: "#", class: "add"} add heat time
+  %br
+  -#= nested_fields_templates
+

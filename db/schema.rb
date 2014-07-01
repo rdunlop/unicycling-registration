@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701010605) do
+ActiveRecord::Schema.define(version: 20140701012126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -394,6 +394,15 @@ ActiveRecord::Schema.define(version: 20140701010605) do
   end
 
   add_index "external_results", ["competitor_id"], name: "index_external_results_on_competitor_id", using: :btree
+
+  create_table "heat_times", force: true do |t|
+    t.integer  "competition_id"
+    t.integer  "heat"
+    t.integer  "minutes"
+    t.integer  "seconds"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "import_results", force: true do |t|
     t.integer  "user_id"
