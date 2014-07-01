@@ -21,7 +21,10 @@ class PublishedAgeGroupEntriesController < ApplicationController
     authorize! :preview, AgeGroupEntry
     @ag_entry = AgeGroupEntry.find(params[:id])
     @results_list = @competition.results_list_for(@ag_entry)
-    render :show
+    respond_to do |format|
+      format.html { render :show }
+      format.pdf { render_common_pdf("preview") }
+    end
   end
 
   private

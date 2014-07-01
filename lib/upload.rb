@@ -33,7 +33,7 @@ class Upload
     results[:lane] = arr[2]
 
     full_time = arr[6].to_s
-    if full_time == "DQ"
+    if full_time == "DQ" || arr[0] == "DQ" || arr[0] == "DNS"
       results[:disqualified] = true
       results[:minutes] = 0
       results[:seconds] = 0
@@ -236,7 +236,7 @@ class Upload
     r += add_fake_string(5)
     r += add_fake_string(1)
     r += add_fake_enum(1)
-   
+
     r += add_string(hash, 'Workshop') # XXX
     r += add_fake_string(3)
 
@@ -282,7 +282,7 @@ class Upload
     else
         r += "'0'," # same
     end
-    
+
     if (cost == "35.00")
         r += "'1'," # sunday22munitrailguard
     else
@@ -304,7 +304,7 @@ class Upload
     r += add_string(hash, 'All Club Name') # tuesday24tracklaneposition
 
     r += add_fake_enum(48)
-    
+
     r += add_fake_string(1) #mywish
 
     if (hash["Registration Type"] == "Rider")

@@ -67,6 +67,30 @@ describe Upload do
     hash[:disqualified].should == true
   end
 
+  it "can convert a 2014 disqualification into data" do
+    up = Upload.new
+
+    arr = ["DQ",0,1,'Miklowiski','Ty','Burnsville','','','','','','16:09:09.369','M','','','','']
+
+    hash = up.convert_lif_to_hash(arr)
+    hash[:minutes].should == 0
+    hash[:seconds].should == 0
+    hash[:thousands].should == 0
+    hash[:disqualified].should == true
+  end
+
+  it "can convert a 2014 DNS into data" do
+    up = Upload.new
+
+    arr = ['DNS',0,4,'Rosen','Matthew','Bloomington Jefferson','','','','','','18:47:30.471','M','','','','']
+
+    hash = up.convert_lif_to_hash(arr)
+    hash[:minutes].should == 0
+    hash[:seconds].should == 0
+    hash[:thousands].should == 0
+    hash[:disqualified].should == true
+  end
+
   it "can convert an array of data into minutes, seconds, thousands, dq" do
     up = Upload.new
 

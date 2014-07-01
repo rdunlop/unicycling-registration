@@ -1,22 +1,14 @@
 # == Schema Information
 #
-# Table name: age_group_entries
+# Table name: heat_times
 #
-#  id                :integer          not null, primary key
-#  age_group_type_id :integer
-#  short_description :string(255)
-#  start_age         :integer
-#  end_age           :integer
-#  gender            :string(255)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  wheel_size_id     :integer
-#  position          :integer
-#
-# Indexes
-#
-#  index_age_group_entries_age_group_type_id  (age_group_type_id)
-#  index_age_group_entries_wheel_size_id      (wheel_size_id)
+#  id             :integer          not null, primary key
+#  competition_id :integer
+#  heat           :integer
+#  minutes        :integer
+#  seconds        :integer
+#  created_at     :datetime
+#  updated_at     :datetime
 #
 
 class HeatTime < ActiveRecord::Base
