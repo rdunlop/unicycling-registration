@@ -74,18 +74,22 @@ class ImportResult < ActiveRecord::Base
   def import!
     raise "Unable to find registrant" if matching_registrant.nil?
 
-    matching_competition = matching_registrant.matching_competition_in_event(competition.event)
-    if matching_competition
-      competitor = matching_registrant.competitors.where(competition: matching_competition).first
-      raise "error finding matching competitor" if competitor.nil?
-      target_competition = matching_competition
-    else
-      target_competition = competition
-      if competitor.nil?
-        registrant = matching_registrant
-        target_competition.create_competitor_from_registrants([registrant], nil)
-        competitor = target_competition.find_competitor_with_bib_number(bib_number)
+    competitor = matching_competitor
+    target_competition = competition
+    if competitor.nil?
+      matching_competition = matching_registrant.matching_competition_in_event(competition.event)
+      if matching_competition
+        # another competition with a competitor in the same event exists, use a competitor there
+        competitor = matching_registrant.competitors.where(competition: matching_competition).first
+        raise "error finding matching competitor" if competitor.nil?
+        target_competition = matching_competition
       end
+    end
+    if competitor.nil?
+      # still no competitor, create one in the current event
+      registrant = matching_registrant
+      target_competition.create_competitor_from_registrants([registrant], nil)
+      competitor = target_competition.find_competitor_with_bib_number(bib_number)
     end
 
     tr = target_competition.build_result_from_imported(self)

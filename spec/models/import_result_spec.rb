@@ -46,5 +46,25 @@ describe ImportResult do
     expect(@ir).to be_valid
     expect(@ir.details).to eq("5.0pts")
   end
+end
 
+describe "when importing the result" do
+  describe "with a competition and competitor in multiple competitions" do
+    before :each do
+      @event = FactoryGirl.create(:event)
+      @competition1 = FactoryGirl.create(:timed_competition, event: @event)
+      @competition2 = FactoryGirl.create(:timed_competition, event: @event)
+      @competitor1 = FactoryGirl.create(:event_competitor, competition: @competition1)
+      @competitor2 = FactoryGirl.create(:event_competitor, competition: @competition2)
+      @comp = FactoryGirl.create(:competitor, bib_number: 100)
+      @competitor1.members.create(registrant: @comp)
+      @competitor2.members.create(registrant: @comp)
+    end
+
+    it "assigns the import_result to the correct competition" do
+      ir = FactoryGirl.create(:import_result, bib_number: 100, competition: @competition2)
+      ir.import!
+      expect(TimeResult.last.competition).to eq(@competition2)
+    end
+  end
 end

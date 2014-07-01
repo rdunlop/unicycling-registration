@@ -1,6 +1,12 @@
 Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
+- warn if data entered in a form when pressing "Back" button.
+- make the Katie page auto-updating?
+- BUG: if the competitor DQs and re-runs, both results are marked as DQ for some reason. (Lucas Clegg)
+- Result sshould should the best-times-qualifying for 800m Experts.
+- Edit COmptetitor didn't change the name of the competitor.
+- When doing an import Lif without choosing a file, it fails.
 - allow directors to set competitor heat/etc.
 - Make Changes for LaneAssignment
 - Natalie to do importing?
