@@ -45,6 +45,17 @@ describe Competitor do
         expect(@comp.best_time_in_thousands).to eq(50000)
       end
     end
+
+    describe "when there is a matching heat + heat_time" do
+      before :each do
+        allow(@competition).to receive(:heat_time_for).with(1).and_return(30)
+      end
+
+      it "uses the heat time for start times" do
+        @comp.heat = 1
+        expect(@comp.best_time_in_thousands).to eq(30000)
+      end
+    end
   end
   describe "when there are multiple start and end times" do
     before :each do

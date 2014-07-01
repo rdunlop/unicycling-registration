@@ -292,6 +292,11 @@ class Competition < ActiveRecord::Base
     scoring_class
   end
 
+  def heat_time_for(heat_number)
+    configured_heat_time = heat_times.where(heat: heat_number).first
+    configured_heat_time.total_seconds if configured_heat_time
+  end
+
   def scoring_helper
     case event_class
     when "Shortest Time"

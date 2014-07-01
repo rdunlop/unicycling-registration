@@ -459,7 +459,7 @@ class Competitor < ActiveRecord::Base
 
       best_finish_time = 0
       finish_times.each do |ft|
-        matching_start_time = start_times.select{ |t| t < ft}.sort.max || 0
+        matching_start_time = start_times.select{ |t| t < ft}.sort.max || (competition_start_time * 1000)
         new_finish_time = ft - matching_start_time
         if best_finish_time == 0 || (new_finish_time == better_time(best_finish_time, new_finish_time))
           best_finish_time = new_finish_time
@@ -467,6 +467,10 @@ class Competitor < ActiveRecord::Base
       end
       best_finish_time
     end
+  end
+
+  def competition_start_time
+    competition.heat_time_for(heat) || 0
   end
 
   def better_time(time_1, time_2)
