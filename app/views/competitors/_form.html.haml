@@ -10,6 +10,9 @@
   = f.label :status
   = f.select :status, Competitor.statuses.keys
   %br
+  = f.label :heat
+  = f.number_field :heat
+  %br
   = f.label :geared
   = f.check_box :geared
   %br
