@@ -2,13 +2,22 @@
 #
 # Table name: competitors
 #
-#  id                 :integer          not null, primary key
-#  competition_id     :integer
-#  position           :integer
-#  custom_external_id :integer
-#  custom_name        :string(255)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id                       :integer          not null, primary key
+#  competition_id           :integer
+#  position                 :integer
+#  custom_name              :string(255)
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  status                   :integer          default(0)
+#  lowest_member_bib_number :integer
+#  geared                   :boolean          default(FALSE)
+#  riding_wheel_size        :integer
+#  notes                    :string(255)
+#  heat                     :integer
+#
+# Indexes
+#
+#  index_competitors_event_category_id  (competition_id)
 #
 
 class Competitor < ActiveRecord::Base
@@ -164,14 +173,14 @@ class Competitor < ActiveRecord::Base
   end
 
   def age_group_entry_description # XXX combine with the other age_group function
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/competition/#{competition.id}-#{competition.updated_at}/age_group_entry_description") do
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/age_group_entry_description") do
       registrant = members.first.try(:registrant)
       competition.get_age_group_entry_description(registrant.age, registrant.gender, registrant.wheel_size_for_event(event).id) unless registrant.nil?
     end
   end
 
   def age_group_entry
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/competition/#{competition.id}-#{competition.updated_at}/age_group_entry") do
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/age_group_entry") do
       competition.age_group_type.age_group_entry_for(age, gender, wheel_size) if competition.age_group_type.present?
     end
   end
@@ -203,7 +212,9 @@ class Competitor < ActiveRecord::Base
   public
 
   def has_result?
-    scoring_helper.competitor_has_result?(self)
+    Rails.cache.fetch("/competitors/#{id}-#{updated_at}/has_results") do
+      scoring_helper.competitor_has_result?(self)
+    end
   end
 
   def result

@@ -24,7 +24,7 @@ class AgeGroupType < ActiveRecord::Base
 
   def touch_competitions
     competitions.each do |comp|
-      comp.touch
+      comp.touch_competitors
     end
   end
 

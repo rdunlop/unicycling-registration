@@ -127,6 +127,17 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  # Caching-related functions
+
+  # Call this when an update occurs to competition which may affect competitors
+  def touch_competitors
+    self.touch
+    competitors.map(&:touch)
+  end
+
+
+  # Other functions
+
   def to_s
     self.name
   end
@@ -247,20 +258,10 @@ class Competition < ActiveRecord::Base
     age_group_type.age_group_entries unless age_group_type.nil?
   end
 
+  # returns all of the results together, ignoring age-group data
   def results_list
-    results = {}
-
-    if age_group_type.nil?
-      # no age groups, put all into a single age group
-      results["all"] = competitors.active.to_a
-      results["all"].sort!{|a,b| a.sorting_place <=> b.sorting_place}
-    else
-      age_group_entries.each do |ag_entry|
-        results[ag_entry] = results_list_for(ag_entry)
-      end
-    end
-
-    results
+    res = competitors.active.to_a
+    res.sort!{|a,b| a.sorting_place <=> b.sorting_place}
   end
 
   def competitors_with_results
