@@ -3,6 +3,7 @@ class TwoAttemptEntriesController < ApplicationController
   load_and_authorize_resource :user
   before_filter :load_competition, :only => [:index, :proof, :create, :approve]
   before_filter :load_new_two_attempt_entry, :only => [:create]
+  before_action :set_is_start_time, only: [:index, :proof, :approve]
   load_and_authorize_resource
 
   before_action :set_breadcrumbs
@@ -11,8 +12,6 @@ class TwoAttemptEntriesController < ApplicationController
   # GET /users/#/two_attempt_entrys.json
   def index
     add_breadcrumb "Add two-entry data"
-
-    @is_start_time = !params[:is_start_times].blank?
 
     @two_attempt_entries = TwoAttemptEntry.where(user: @user, competition: @competition, is_start_time: @is_start_time)
     @two_attempt_entry = TwoAttemptEntry.new(is_start_time: @is_start_time)
@@ -68,13 +67,11 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   def proof
-    @is_start_time = !params[:is_start_times].blank?
-
     add_breadcrumb "Add two-entry data", user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time)
     add_breadcrumb "Proof"
 
 
-    @two_attempt_entries = TwoAttemptEntry.where(:competition_id => @competition)
+    @two_attempt_entries = TwoAttemptEntry.where(:competition_id => @competition, is_start_time: @is_start_time)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -83,7 +80,7 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   def approve
-    two_attempt_entries = TwoAttemptEntry.where(:competition_id => @competition)
+    two_attempt_entries = TwoAttemptEntry.where(:competition_id => @competition, is_start_time: @is_start_time)
 
     n = two_attempt_entries.count
     begin
@@ -128,6 +125,10 @@ class TwoAttemptEntriesController < ApplicationController
     @competition ||= @two_attempt_entry.competition
     @user ||= @two_attempt_entry.user
     add_to_competition_breadcrumb(@competition)
+  end
+
+  def set_is_start_time
+    @is_start_time = params[:is_start_times] && params[:is_start_times] == "true"
   end
 end
 
