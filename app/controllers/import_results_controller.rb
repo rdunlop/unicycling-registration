@@ -94,8 +94,6 @@ class ImportResultsController < ApplicationController
   # DELETE /import_results/1
   # DELETE /import_results/1.json
   def destroy
-    user = @import_result.user
-    competition = @import_result.competition
     @import_result.destroy
 
     respond_to do |format|
@@ -148,8 +146,14 @@ class ImportResultsController < ApplicationController
   # GET /users/#/competitions/#/import_results/import_lif
   def import_lif
     importer = RaceDataImporter.new(@competition, @user)
+    @heat = params[:heat].to_i
+    if params[:file].nil? || params[:heat].blank?
+      flash[:alert] = "Please specify a file and heat"
+      redirect_to display_lif_user_competition_import_results_path(@user, @competition, heat: @heat)
+      return
+    end
 
-    if importer.process_lif(params[:file], params[:heat])
+    if importer.process_lif(params[:file], @heat)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
