@@ -279,14 +279,14 @@ class AwardLabelsController < ApplicationController
     },
     "Avery8293" => {
       "paper_size" => "LETTER",
-      "top_margin" => 50.23, # 0.531"
-      "bottom_margin" => 50.23, # 0.531"
+      "top_margin" => 65.23, # 0.531"
+      "bottom_margin" => 54.23, # 0.531"
       "left_margin" =>  52.23, # 0.406 "
       "right_margin" =>  40.23, # 0.406"
       "columns" =>  4,
       "rows" =>  5,
       "column_gutter" =>  55, # 0.391 "
-      "row_gutter" =>  26 # 0.391"
+      "row_gutter" =>  50 # 0.391"
     }
     }
     # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
