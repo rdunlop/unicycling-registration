@@ -12,7 +12,7 @@ class DistanceAttemptsController < ApplicationController
   def index
     # show the current attempts, and a button which says "add new attempt"
     # display a summary of the most recent attempts, add to this list. (including competitor statuses)
-    @recent_distance_attempts = @judge.distance_attempts.limit(20)
+    @recent_distance_attempts = @judge.distance_attempts.includes(:competitor).limit(20)
     @max_distance_attempts = @competition.top_distance_attempts(5)
 
     @height = params[:height]
@@ -48,6 +48,7 @@ class DistanceAttemptsController < ApplicationController
   end
 
   def list
+    @distance_attempts = @distance_attempts.includes(:competitor)
     respond_to do |format|
       format.html { render action: "list" }
       format.json { head :no_content }

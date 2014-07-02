@@ -3,11 +3,13 @@
   %thead
     %tr
       %th Distance
+      %th Fault
       %th ID
       %th Competitor
       %th Gender
       %th Age
       %th Finished
+      %th
   %tbody
     - list.each do |da|
       = render partial: "attempt", object: da, locals: {display_delete: display_delete }

@@ -5,23 +5,24 @@
     %thead
       %tr
         %th Distance
+        %th Fault
         %th ID
         %th Competitor
         %th Gender
         %th Age
-        %th Finished
         %th Judge
         %th Date
     %tbody
       - @distance_attempts.each do |da|
-        %tr
-          %td= da.distance
-          %td= da.competitor.bib_number
-          %td= da.competitor
-          %td= da.competitor.gender
-          %td= da.competitor.age
-          %td= da.competitor.double_fault? ? "yes": "no"
-          %td= da.judge.name
-          %td= da.created_at
+        - cache [da, da.competitor] do
+          %tr
+            %td= da.distance
+            %td= da.fault ? "Fault" : ""
+            %td= da.competitor.bib_number
+            %td= da.competitor
+            %td= da.competitor.gender
+            %td= da.competitor.age
+            %td= da.judge.name
+            %td= da.created_at
 
 = link_to 'Back', judge_distance_attempts_path(@judge)
