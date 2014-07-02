@@ -29,6 +29,7 @@ class TwoAttemptEntry < ActiveRecord::Base
   before_validation :clear_status_of_string
   validates :status_1, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
   validates :status_2, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
+  validates :is_start_time, inclusion: { in: [true, false] }
 
   belongs_to :user
   belongs_to :competition

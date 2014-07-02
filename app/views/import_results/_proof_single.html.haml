@@ -15,7 +15,7 @@
         %th Disqualified
   %tbody
     - @import_results.each_with_index do |result, index|
-      - cache [result, Registrant, @competition] do
+      - cache [result, Registrant, @competition, display_username] do
         %tr
           - if display_username
             %td= result.user

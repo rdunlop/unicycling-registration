@@ -34,7 +34,6 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def single_attempt_recording
-    @competition_sign_up = CompetitionSignUp.new(@competition)
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
 
     @only_registered = true
@@ -47,7 +46,6 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def two_attempt_recording
-    #@competition_sign_up = CompetitionSignUp.new(@competition)
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
 
     @only_registered = true
