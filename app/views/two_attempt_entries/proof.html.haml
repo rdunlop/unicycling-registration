@@ -29,7 +29,7 @@
         %td= two_attempt_entry.status_2
         %td
         %td= two_attempt_entry.registrant_name
-        - if two_attempt_entry.has_matching_competitor?
+        - if two_attempt_entry.competitor_exists?
           %td.competitor_exists Yes
         - else
           %td.competitor_not_exists No

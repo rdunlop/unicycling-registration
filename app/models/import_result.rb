@@ -31,6 +31,7 @@
 class ImportResult < ActiveRecord::Base
   include TimePrintable
   include StatusNilWhenEmpty
+  include FindsMatchingCompetitor
 
   validates :competition_id, :presence => true
   validates :user_id, :bib_number, :presence => true
@@ -40,6 +41,7 @@ class ImportResult < ActiveRecord::Base
   validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
   before_validation :set_details_if_blank
   validates :details, presence: true, if: "points?"
+  validates :is_start_time, inclusion: { in: [true, false] }
 
   belongs_to :user
   belongs_to :competition
@@ -56,10 +58,6 @@ class ImportResult < ActiveRecord::Base
 
   def competitor_name
     matching_registrant
-  end
-
-  def competitor_exists?
-    matching_competitor.present?
   end
 
   def competitor_has_results?
@@ -109,13 +107,5 @@ class ImportResult < ActiveRecord::Base
 
   def time_is_present?
     minutes && seconds && thousands
-  end
-
-  def matching_registrant
-    @maching_registrant ||= Registrant.find_by(bib_number: bib_number) if bib_number
-  end
-
-  def matching_competitor
-    @matching_competitor ||= matching_registrant.competitors.where(competition: competition).first if matching_registrant
   end
 end

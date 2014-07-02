@@ -31,7 +31,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
   belongs_to :event_category, touch: true
   belongs_to :event
 
-  after_save :auto_create_competitor, if: :signed_up_changed?
+  after_save :auto_create_competitor
 
   def self.signed_up
     includes(:registrant).where(registrants: {deleted: false}).where(signed_up: true)

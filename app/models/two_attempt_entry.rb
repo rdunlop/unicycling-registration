@@ -20,6 +20,8 @@
 #
 
 class TwoAttemptEntry < ActiveRecord::Base
+  include FindsMatchingCompetitor
+
   validates :competition_id, :presence => true
   validates :user_id, :bib_number, :presence => true
   validate :results_for_competition
@@ -40,16 +42,12 @@ class TwoAttemptEntry < ActiveRecord::Base
     Registrant.find_by_bib_number(bib_number)
   end
 
-  def has_matching_competitor?
-    competition.find_competitor_with_bib_number(bib_number)
-  end
-
   # import the result in the results table, raise an exception on failure
   def import!
     # TODO: this should only create a competitor if in the correct "mode"
-    competitor = competition.find_competitor_with_bib_number(bib_number)
-    registrant = matching_registrant
+    competitor = matching_competitor
     if competitor.nil?
+      registrant = matching_registrant
       competition.create_competitor_from_registrants([registrant], nil)
       competitor = competition.find_competitor_with_bib_number(bib_number)
     end
@@ -104,9 +102,5 @@ class TwoAttemptEntry < ActiveRecord::Base
   def clear_status_of_string
     self.status_1 = nil if status_1 == ""
     self.status_2 = nil if status_2 == ""
-  end
-
-  def matching_registrant
-    Registrant.find_by(bib_number: bib_number) if bib_number
   end
 end
