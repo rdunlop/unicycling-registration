@@ -19,7 +19,6 @@ describe "distance_attempts/list" do
     render
 
     assert_select "tr>td", :text => @da1.distance, :count => 1
-    assert_select "tr>td", :text => @da1.fault ? "yes":"no", :count => 1
     assert_select "tr>td", :text => @comp1.name, :count => 1
     assert_select "tr>td", :text => @comp1.age, :count => 1
     assert_select "tr>td", :text => @judge.name, :count => 1
