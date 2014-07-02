@@ -74,7 +74,7 @@ class TwoAttemptEntriesController < ApplicationController
     add_breadcrumb "Proof"
 
 
-    @two_attempt_entrys = TwoAttemptEntry.where(:competition_id => @competition)
+    @two_attempt_entries = TwoAttemptEntry.where(:competition_id => @competition)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -83,15 +83,15 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   def approve
-    two_attempt_entrys = TwoAttemptEntry.where(:competition_id => @competition)
+    two_attempt_entries = TwoAttemptEntry.where(:competition_id => @competition)
 
-    n = two_attempt_entrys.count
+    n = two_attempt_entries.count
     begin
       TwoAttemptEntry.transaction do
-        two_attempt_entrys.each do |ir|
+        two_attempt_entries.each do |ir|
           ir.import!
         end
-        two_attempt_entrys.destroy_all
+        two_attempt_entries.destroy_all
       end
     rescue Exception => ex
       errors = ex

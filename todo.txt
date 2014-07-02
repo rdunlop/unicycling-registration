@@ -1,8 +1,12 @@
 Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
+- Print Candido Santiago 1st place Basketball medal, give to Jim Sowers.
+- BUG: TwoAttemptEntry Proof and Review are not competition-specific.
+- Proof function is broken for one of hhe competitions
+- The awards are still printing a little off the labels at times
 - In the 50m WW, why doesn't a 20" able to compete? Is it the size of the cranks.
-
+- When doing data entry, show results from other importers...without the ability to edit them?
 - warn if data entered in a form when pressing "Back" button.
 - make the Katie page auto-updating?
 - Don't allow another import to overwrite an existing TimeResult.

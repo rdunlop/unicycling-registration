@@ -1,6 +1,6 @@
 - reg = Registrant.find_by_bib_number(import_result.bib_number)
 %td= reg
-- matching_competition = reg.matching_competition_in_event(import_result.competition.event)
+- matching_competition = reg.matching_competition_in_event(import_result.competition.event) if reg
 - if matching_competition == import_result.competition
   %td.competitor_exists Yes
 - elsif matching_competition.present?
