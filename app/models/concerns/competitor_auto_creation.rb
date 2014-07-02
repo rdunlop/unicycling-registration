@@ -8,7 +8,7 @@ module CompetitorAutoCreation
 
   # allows saving a lane assignment by registrant_id, and auto-creating the competitor
   def create_competitor_on_demand
-    if registrant_id && !competitor
+    if registrant_id.present? && !competitor
       reg = Registrant.find(registrant_id)
 
       # does a competitor exist with this bib_number

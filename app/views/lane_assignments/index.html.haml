@@ -3,7 +3,7 @@
 #notice
 
 .lane_assignment_entry_form
-  = render 'form'
+  = render partial: 'form', locals: { remote: true }
 
 .lane_assignment_entries
   %table.sortable.lane_assignments

@@ -89,6 +89,7 @@ class LaneAssignmentsController < ApplicationController
         format.html { redirect_to competition_lane_assignments_path(@lane_assignment.competition), notice: 'Lane assignment was successfully updated.' }
         format.js { render :js => "window.location.replace('#{competition_lane_assignments_path(@lane_assignment.competition)}');" }
       else
+        @competition = @lane_assignment.competition
         format.html { render action: "edit" }
       end
     end
