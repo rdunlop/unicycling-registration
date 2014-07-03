@@ -9,6 +9,7 @@ BUG- how can I manage ALL distance attempts (to edit/delete) to fix problems wit
 - For High/Long, have a second data recorder, for helping? or another recording device for showing the competitors their results.
 - Mass Start Sign-in list should include blank lines for people who are not signed up.(10)
 
+- Ask Benoit/HUgo to rent hotspots for us also.
 - needa bility to select and delete multiple entries from the awards labels page.
 - Lauren Atkinson Long Jump label, didn't fit on the label.
 - Idea: make it not allowed to put a DQ for a higher attempt without first marking sccess at the present level.

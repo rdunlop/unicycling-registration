@@ -13,7 +13,7 @@ class CreatesCompetitionResultsPdf
   end
 
   def publish!
-    pdf = Tempfile.new(["#{competition}_results", '.pdf'], encoding: 'ascii-8bit')
+    pdf = Tempfile.new(["#{sanitize(competition.to_s)}_results", '.pdf'], encoding: 'ascii-8bit')
     pdf.write raw_pdf
     competition.published_results_file = pdf
     competition.save!
@@ -24,5 +24,9 @@ class CreatesCompetitionResultsPdf
 
   def unpublish!
     competition.remove_published_results_file!
+  end
+
+  def sanitize(name)
+    name.strip.gsub(/[^0-9A-Za-z.\-]/, '_')
   end
 end
