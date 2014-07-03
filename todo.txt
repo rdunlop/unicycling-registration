@@ -1,6 +1,18 @@
 Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
+- Can we Run High/Long by age group, so that we can keep the distance at a long thing, and
+- Feature: print a cover page for Artistic Results?
+BUG- Unable to enter external Result with a DQ (the "not qualifieD" of the Competitor doesn't seem to take effect over the external result
+BUG - why are both the high and long appearing in the "List" of distance attempts?
+BUG- how can I manage ALL distance attempts (to edit/delete) to fix problems with the data?
+- For High/Long, have a second data recorder, for helping? or another recording device for showing the competitors their results.
+- Mass Start Sign-in list should include blank lines for people who are not signed up.(10)
+BUG: - Why can't I print James Richardson's Cyclocross medal (it splits into 2 pages)
+BUG- why can't I publish Street Comp results?
+BUG- printing from connie's firefox doesn't work very well (Pdf)
+- Add a role for Kirsten role.
+- Competitor List for Artistic Group/Club should not list the competitors...it's way too long.
 - Print Candido Santiago 1st place Basketball medal, give to Jim Sowers.
 - The awards are still printing a little off the labels at times
 - In the 50m WW, why doesn't a 20" able to compete? Is it the size of the cranks.
