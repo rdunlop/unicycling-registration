@@ -157,6 +157,11 @@ class Ability
       return # required in order to allow rails_admin to function
     end
 
+    if user.has_role? :awards_admin
+      can [:read, :results, :publish, :unpublish, :award], Competition
+      can :manage, AwardLabel
+    end
+
     # Competitor Assignment
     if user.has_role? :admin
       set_data_entry_volunteer_abilities(user)

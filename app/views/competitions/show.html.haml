@@ -57,6 +57,7 @@ Results, judges, and scoring settings.
     %p
       = link_to("Enter/Modify Results", @competition.results_path)
 
+- if can? :results, @competition
   %h2 Preview Results to be posted
   %p
     = link_to "View", results_printing_competition_path(@competition)
