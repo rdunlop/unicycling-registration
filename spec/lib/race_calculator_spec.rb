@@ -27,6 +27,19 @@ describe OrderedResultCalculator do
 
       @calc = OrderedResultCalculator.new(@competition)
     end
+
+    describe "with a DQ and a non-DQ for the same competitor" do
+      before :each do
+        @tr1.update_attributes({status: "DQ", minutes: 0, seconds: 0, thousands: 0})
+        @tr1b = FactoryGirl.create(:time_result, competitor: @tr1.competitor, minutes: 2, seconds: 3, thousands: 300)
+      end
+
+      it "should not consider the DQ to be the best time" do
+        expect(@tr1.competitor.disqualified).to be_falsy
+        expect(@tr1.competitor.best_time_in_thousands).to eq(@tr1b.result)
+      end
+    end
+
     describe "with 2 age_groups" do
       before(:each) do
         @age_group_type = @age_group_entry.age_group_type

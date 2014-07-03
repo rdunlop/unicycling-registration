@@ -461,6 +461,20 @@ describe Competitor do
     end
   end
 
+  describe "when it has multiple time results" do
+    describe "when there are DQs and live results" do
+      before :each do
+        @comp.competition.scoring_class = "Shortest Time"
+        @end1 = FactoryGirl.create(:time_result, competitor: @comp, :minutes => 2, :seconds => 30)
+        @end2 = FactoryGirl.create(:time_result, competitor: @comp, :minutes => 0, :seconds => 45, status: "DQ")
+      end
+
+      it "doesn't choose DQ as the best time" do
+        expect(@comp.best_time_in_thousands).to eq(150000)
+      end
+    end
+  end
+
   describe "with an ineligible registrant" do
     before(:each) do
       @reg = @comp.registrants(true).first

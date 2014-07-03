@@ -56,7 +56,7 @@ class RaceScoringClass < BaseScoringClass
 
   def competitor_dq?(competitor)
     if self.competitor_has_result?(competitor)
-      competitor.time_results.first.disqualified
+      competitor.time_results.all?{|t| t.disqualified }
     else
       false
     end

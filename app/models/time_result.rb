@@ -48,6 +48,10 @@ class TimeResult < ActiveRecord::Base
     self.thousands = 0 if self.thousands.nil?
   end
 
+  def self.active
+    where(status: nil)
+  end
+
   def disqualified
     status == "DQ"
   end

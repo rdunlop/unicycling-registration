@@ -8,6 +8,11 @@ BUG - why are both the high and long appearing in the "List" of distance attempt
 BUG- how can I manage ALL distance attempts (to edit/delete) to fix problems with the data?
 - For High/Long, have a second data recorder, for helping? or another recording device for showing the competitors their results.
 - Mass Start Sign-in list should include blank lines for people who are not signed up.(10)
+
+- needa bility to select and delete multiple entries from the awards labels page.
+- Lauren Atkinson Long Jump label, didn't fit on the label.
+- Idea: make it not allowed to put a DQ for a higher attempt without first marking sccess at the present level.
+BUG- I can crash the system by trying to re-sort the age groups for Track (because it doesn't have a position?)
 BUG: - Why can't I print James Richardson's Cyclocross medal (it splits into 2 pages)
 BUG- why can't I publish Street Comp results?
 BUG- printing from connie's firefox doesn't work very well (Pdf)

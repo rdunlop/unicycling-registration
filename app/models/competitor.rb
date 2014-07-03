@@ -508,10 +508,10 @@ class Competitor < ActiveRecord::Base
 
    # time result calculations
   def start_time_results
-    time_results.start_times
+    time_results.start_times.active
   end
 
   def finish_time_results
-    time_results.finish_times
+    time_results.finish_times.active
   end
 end
