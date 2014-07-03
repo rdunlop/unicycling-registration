@@ -305,3 +305,24 @@ class AwardLabelsController < ApplicationController
                                         :place, :registrant_id, :team_name, :user_id)
   end
 end
+
+# Monkey-batch Prawn-labels so that I can adjust the expected line-length requirement.
+module Prawn
+  class Labels
+    def shrink_text(record)
+      linecount = (split_lines = record.split("\n")).length
+
+      # 15 is estimated max character length per line.
+      split_lines.each {|line| linecount += line.length / 15 }
+
+      # -10 accounts for the overflow margins
+      rowheight = @document.grid.row_height - 10
+
+      if linecount <= rowheight / 12.floor
+        @document.font_size = 12
+      else
+        @document.font_size = rowheight / (linecount + 1)
+      end
+    end
+  end
+end

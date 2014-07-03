@@ -18,7 +18,8 @@ BUG- why can't I publish Street Comp results?
 BUG- printing from connie's firefox doesn't work very well (Pdf)
 - Add a role for Kirsten role.
 - Competitor List for Artistic Group/Club should not list the competitors...it's way too long.
-- Print Candido Santiago 1st place Basketball medal, give to Jim Sowers.
+DONE- Print Candido Santiago 1st place Basketball medal, give to Jim Sowers.
+BUG: Previewing results to be posted is WAY too slow. (timeout 1/2 the time)
 - The awards are still printing a little off the labels at times
 - In the 50m WW, why doesn't a 20" able to compete? Is it the size of the cranks.
 - When doing data entry, show results from other importers...without the ability to edit them?
