@@ -8,6 +8,7 @@ BUG: able to crash the system (dos attack) by attempting to approve only the Sta
 Feature: - Allow mulitple "published results" to be printed, so that we can re-publish without having to un-publish first, and also see our copies of published results.
 - Remove all Boundary Score calculation logic, replace it with a new judge type, which affects "Presentation" Judge-type display.
 - Expose the "wheel_size" for registrants
+- Hugo: we need to e-mail all <10 age people to have them tell us what size of wheel they plan on riding in the track and muni and distance events.
 - Provide an admin-way of specifying wheel size overrides for each registrant on a per-event basis.
 - Q: How are "Notes" for a score entered? displayed?
 - Clean up "attempt_number" for time_results (not currently used)

@@ -17,5 +17,9 @@
     %p
       %b= t(".volunteer")
       = @registrant.volunteer
+    - if @registrant.age <= 10
+      %p
+        %b= t(".default_wheel_size")
+        = @registrant.default_wheel_size
   - if can? :read_contact_info, @registrant
     = render :partial => "contact_summary", locals: { :contact_detail => @registrant.contact_detail }

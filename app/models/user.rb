@@ -95,6 +95,7 @@ class User < ActiveRecord::Base
       Can assign data_entry_volunteers, and do anything they can do:
       - Can enter recorded Results
       Can Create Award Labels
+      Can adjust wheel-size settings for users.
       "
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
