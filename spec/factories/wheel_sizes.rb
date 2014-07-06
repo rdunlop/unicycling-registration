@@ -17,14 +17,17 @@ FactoryGirl.define do
     description "MyString"
 
     factory :wheel_size_24 do
+      position 3
       description "24\" Wheel"
     end
 
     factory :wheel_size_20 do
+      position 2
       description "20\" Wheel"
     end
 
     factory :wheel_size_16 do
+      position 1
       description "16\" Wheel"
     end
   end

@@ -20,7 +20,7 @@ describe 'Logging in to the system' do
         end
 
         it "creates a registrant" do
-          expect(user.reload.registrants.count).to be(1)
+          expect(user.reload.registrants.count).to eq(1)
         end
       end
     end
@@ -36,11 +36,11 @@ describe 'Logging in to the system' do
         end
 
         it "creates a registrant" do
-          expect(user.reload.registrants.count).to be(1)
+          expect(user.reload.registrants.count).to eq(1)
         end
 
         it "associates the registration period cost" do
-          expect(user.reload.registrants.first.registrant_expense_items.count).to be(1)
+          expect(user.reload.registrants.first.registrant_expense_items.count).to eq(1)
         end
       end
     end

@@ -32,7 +32,7 @@ describe WheelSize do
   it "returns the wheel sizes in position order" do
     @ws3 = FactoryGirl.create(:wheel_size, :position => 3)
     @ws2 = FactoryGirl.create(:wheel_size, :position => 2)
-    WheelSize.all.should == [@ws, @ws2, @ws3]
+    WheelSize.all.should == [@ws3, @ws2, @ws]
   end
 
   it "returns the description as the to_s" do
