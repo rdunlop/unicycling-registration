@@ -58,7 +58,7 @@ class AwardLabel < ActiveRecord::Base
     end
   end
 
-  def populate_from_competitor(competitor, registrant, expert = false)
+  def populate_from_competitor(competitor, registrant, place, expert = false)
 
     # line 1
     self.competitor_name = build_name_from_competitor_and_registrant(competitor, registrant)
@@ -76,11 +76,7 @@ class AwardLabel < ActiveRecord::Base
     self.details = competitor.result
 
     # line 6
-    if expert
-      self.place = competitor.overall_place.to_i
-    else
-      self.place = competitor.place.to_i
-    end
+    self.place = place
 
     # misc housekeeping
     self.registrant = registrant

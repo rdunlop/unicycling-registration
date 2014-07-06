@@ -19,6 +19,7 @@
 class DistanceAttempt < ActiveRecord::Base
   include Competeable
   include Placeable
+  include CachedSetModel
   delegate :competition, to: :judge # override to use judge path instead of competitor path
   # because on object creation, competitor doesn't exist.
   include CompetitorAutoCreation
@@ -30,6 +31,10 @@ class DistanceAttempt < ActiveRecord::Base
 
   validate :must_not_have_new_attempt_less_than_existing_attempt
   validate :cannot_have_new_attempts_after_double_fault
+
+  def self.cache_set_field
+    :competitor_id
+  end
 
   def must_not_have_new_attempt_less_than_existing_attempt
     if new_record?

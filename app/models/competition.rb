@@ -261,7 +261,7 @@ class Competition < ActiveRecord::Base
   # returns all of the results together, ignoring age-group data
   def results_list
     res = competitors.active.to_a
-    res.sort!{|a,b| a.sorting_place <=> b.sorting_place}
+    res.sort!{|a,b| a.sorting_overall_place <=> b.sorting_overall_place}
   end
 
   def competitors_with_results

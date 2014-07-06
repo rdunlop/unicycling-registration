@@ -1,5 +1,8 @@
 %h1 Results for #{@competition}
 
+- if Result.competition_calc_needed?(@competition)
+  .calc_needed Places should be re-calculated.
+
 - if can? :set_places, @competition
   = link_to "Set Places", set_places_competition_path(@competition), method: :post, data: { confirm: "This may take a few seconds" }
 - if can? :destroy_results, @competition
@@ -9,16 +12,18 @@
   %thead
     %tr
       %th{:colspan => "2"} Registrant
-      %th{:colspan => "2"} Time
+      %th{:colspan => "2"}
+      - if @competition.has_age_group_entry_results?
+        %td{:colspan => "2"} Age Group
       %td
-      %td{:colspan => "2"}
     %tr
       %th ID
       %th Name
       %th Result
       %th Disqualified
-      %th Age Group
-      %th Place
+      - if @competition.has_age_group_entry_results?
+        %th Age Group
+        %th Place
       %th Overall Place
   %tbody
     - @competition.competitors.each do |comp|
@@ -28,6 +33,7 @@
         %td= comp
         %td= comp.result
         %td= comp.disqualified
-        %td= comp.age_group_entry_description
-        %td= comp.place_formatted
+        - if @competition.has_age_group_entry_results?
+          %td= comp.age_group_entry_description
+          %td= comp.place_formatted
         %td= comp.overall_place_formatted

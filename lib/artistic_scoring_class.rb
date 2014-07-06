@@ -41,9 +41,9 @@ class ArtisticScoringClass < BaseScoringClass
 
   # Function which places all of the competitors in the competition
   def place_all
-    nil
+    score_calculator.update_all_places
+    Result.update_last_calc_places_time(@competition)
   end
-
 
   # Used when trying to destroy all results for a competition
   def all_competitor_results

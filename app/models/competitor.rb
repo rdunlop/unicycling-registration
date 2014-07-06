@@ -35,6 +35,7 @@ class Competitor < ActiveRecord::Base
   has_many :distance_attempts, -> { order "distance DESC, id DESC" }, :dependent => :destroy
   has_many :time_results, :dependent => :destroy
   has_many :external_results, :dependent => :destroy
+  has_many :results, dependent: :destroy
 
   accepts_nested_attributes_for :members, allow_destroy: true
 
@@ -100,30 +101,19 @@ class Competitor < ActiveRecord::Base
     scoring_helper.competitor_comparable_result(self)
   end
 
-  def place=(new_place)
-    unless new_place.is_a? Integer
-      raise "Unexpected place #{new_place}" unless new_place == "DQ"
-    else
-      Rails.cache.write(place_key, new_place)
-    end
+  def place
+    return 0 if disqualified
+    results.age_group.first.try(:place)
+  end
+
+  def overall_place
+    return 0 if disqualified
+    results.overall.first.try(:place)
   end
 
   def sorting_place
     return 999 if disqualified || place.nil?
     place
-  end
-
-  def place
-    return 0 if disqualified
-
-    my_place = Rails.cache.fetch(place_key)
-
-    if my_place.nil? and (has_result?)
-      sc = competition.score_calculator
-      sc.try(:update_all_places)
-      my_place = Rails.cache.fetch(place_key)
-    end
-    my_place
   end
 
   def place_formatted
@@ -136,30 +126,9 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def overall_place=(new_place)
-    unless new_place.is_a? Integer
-      raise "Unexpected place #{new_place}" unless new_place == "DQ"
-    else
-      Rails.cache.write(overall_place_key, new_place)
-    end
-  end
-
   def sorting_overall_place
     return 999 if disqualified || overall_place.nil?
     overall_place
-  end
-
-  def overall_place
-    return 0 if disqualified
-
-    my_overall_place = Rails.cache.fetch(overall_place_key)
-
-    if my_overall_place.nil? and (has_result?)
-      sc = competition.score_calculator
-      sc.try(:update_all_places)
-      my_overall_place = Rails.cache.fetch(overall_place_key)
-    end
-    my_overall_place
   end
 
   def overall_place_formatted
@@ -363,7 +332,7 @@ class Competitor < ActiveRecord::Base
 
   # for distance_attempt logic, there are certain 'states' that a competitor can get into
   def double_fault?
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/double_fault") do
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{DistanceAttempt.cache_key_for_set(id)}/double_fault") do
       df = false
       if distance_attempts.count > 1
         if distance_attempts[0].fault == true && distance_attempts[1].fault == true
@@ -375,8 +344,12 @@ class Competitor < ActiveRecord::Base
     end
   end
 
+  def distance_attempt_cache_key_base
+    "/competitor/#{id}-#{updated_at}/#{DistanceAttempt.cache_key_for_set(id)}/"
+  end
+
   def single_fault?
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/single_fault?") do
+    Rails.cache.fetch("#{distance_attempt_cache_key_base}/single_fault?") do
       if distance_attempts.count > 0
         distance_attempts.first.fault == true
       else
@@ -386,7 +359,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def max_attempted_distance
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/max_attempted_distance") do
+    Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_attempted_distance") do
       return 0 unless distance_attempts.any?
 
       distance_attempts.first.distance
@@ -394,19 +367,19 @@ class Competitor < ActiveRecord::Base
   end
 
   def max_successful_distance
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/max_successful_distance") do
+    Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance") do
       max_successful_distance_attempt.try(:distance) || 0
     end
   end
 
   def max_successful_distance_attempt
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/max_successful_distance_attempt") do
+    Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance_attempt") do
       distance_attempts.where(:fault => false).first
     end
   end
 
   def best_distance_attempt
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/best_distance_attempt") do
+    Rails.cache.fetch("#{distance_attempt_cache_key_base}/best_distance_attempt") do
       # best non-fault result, or, if there are none of those, best result (which will be a fault)
       max_successful_distance_attempt || distance_attempts.first
     end
@@ -464,7 +437,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def best_time_in_thousands
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/competition/#{competition.id}-#{competition.updated_at}/best_time_in_thousands") do
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/best_time_in_thousands") do
       start_times = start_time_results.map(&:full_time_in_thousands)
       finish_times = finish_time_results.map(&:full_time_in_thousands)
 

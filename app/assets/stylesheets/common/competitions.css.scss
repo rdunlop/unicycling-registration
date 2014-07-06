@@ -8,6 +8,11 @@
 %instructions {
   background-color: rgb(241, 248, 157);
 }
+
+.calc_needed {
+  background-color: yellow;
+}
+
 .multiPersonCompetition {
   @extend %instructions;
   padding: 5px;

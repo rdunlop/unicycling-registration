@@ -139,10 +139,8 @@ class AwardLabelsController < ApplicationController
     n = 0
     competition = competitor.competition
     if age_groups
-      if competitor.place.to_i <= max_place
-        if create_label(competitor, registrant, false, min_place, max_place, user)
-          n += 1
-        end
+      if create_label(competitor, registrant, false, min_place, max_place, user)
+        n += 1
       end
     end
 
@@ -158,19 +156,19 @@ class AwardLabelsController < ApplicationController
   end
 
   def create_label(competitor, registrant, experts, min_place, max_place, my_user)
-    if experts
+    if experts || !competitor.competition.has_age_group_entry_results?
       place = competitor.overall_place
     else
       place = competitor.place
     end
-    return false if place == "DQ"
-    return false if place.to_i == 0
-    return false if place.to_i < min_place
-    return false if place.to_i > max_place
+    return false if place.nil?
+    return false if place == 0
+    return false if place < min_place
+    return false if place > max_place
 
     aw_label = AwardLabel.new
     aw_label.user = my_user
-    aw_label.populate_from_competitor(competitor, registrant, experts)
+    aw_label.populate_from_competitor(competitor, registrant, place, experts)
 
     return aw_label.save
   end

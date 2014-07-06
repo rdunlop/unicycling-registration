@@ -24,8 +24,13 @@ class TimeResult < ActiveRecord::Base
   include Competeable
   include Placeable
   include StatusNilWhenEmpty
+  include CachedSetModel
 
   validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
+
+  def self.cache_set_field
+    :competitor_id
+  end
 
   def self.status_values
     ["DQ"]

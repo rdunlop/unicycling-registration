@@ -61,10 +61,9 @@ describe AwardLabel do
       allow(@comp).to receive(:result).and_return("Some Result")
       @reg = FactoryGirl.build_stubbed(:competitor)
       allow(@comp).to receive(:registrants).and_return([@reg])
-      allow(@comp).to receive(:place).and_return(1)
       @al = AwardLabel.new
       @al.user = FactoryGirl.build_stubbed(:user)
-      @al.populate_from_competitor(@comp, @reg)
+      @al.populate_from_competitor(@comp, @reg, 1)
     end
     it "Can create the awards label from a competitor" do
       @al.line_1.should == "#{@reg.first_name} #{@reg.last_name}"
@@ -76,7 +75,7 @@ describe AwardLabel do
       allow(@comp).to receive_message_chain(:members, :count).and_return(2)
       allow(@comp).to receive(:registrants).and_return([@reg, @reg2])
 
-      @al.populate_from_competitor(@comp, @reg)
+      @al.populate_from_competitor(@comp, @reg, 1)
       @al.line_1.should == "#{@reg.first_name} #{@reg.last_name} & #{@reg2.first_name} #{@reg2.last_name}"
     end
 
@@ -87,7 +86,7 @@ describe AwardLabel do
       competition.award_title_name = "Individual"
       competition.save!
 
-      @al.populate_from_competitor(@comp, @reg)
+      @al.populate_from_competitor(@comp, @reg, 1)
       @al.line_2.should == "Individual"
     end
 
@@ -98,13 +97,13 @@ describe AwardLabel do
       competition.award_subtitle_name = "Intermediate Club"
       competition.save!
 
-      @al.populate_from_competitor(@comp, @reg)
+      @al.populate_from_competitor(@comp, @reg, 1)
       @al.line_4.should == "Intermediate Club"
     end
 
     it "displays the team name as line 3" do
       @comp.custom_name = "Robin Team"
-      @al.populate_from_competitor(@comp, @reg)
+      @al.populate_from_competitor(@comp, @reg, 1)
       @al.line_3.should == "Robin Team"
     end
 
@@ -112,29 +111,27 @@ describe AwardLabel do
       before(:each) do
         @comp.competition.scoring_class = "Shortest Time"
         @comp.competition.age_group_type = FactoryGirl.create(:age_group_type)
-        allow(@comp).to receive(:overall_place).and_return(3)
       end
 
       it "uses the age group and the gender as line 4" do
         allow(@comp).to receive(:age_group_entry_description).and_return("This is the age group")
-        @al.populate_from_competitor(@comp, @reg, false)
+        @al.populate_from_competitor(@comp, @reg, 3, false)
         @al.line_4.should == "This is the age group"
       end
 
       it "sets the age group to Expert Male when expert" do
-        @al.populate_from_competitor(@comp, @reg, true)
+        @al.populate_from_competitor(@comp, @reg, 3, true)
         @al.line_4.should == "Expert Male"
       end
     end
 
     it "stores the competitor.result as details, and line 5" do
-      @al.populate_from_competitor(@comp, @reg)
+      @al.populate_from_competitor(@comp, @reg, 1)
       @al.line_5.should == "Some Result"
     end
 
     it "sets the award place from the competitor" do
-      allow(@comp).to receive(:place).and_return(2)
-      @al.populate_from_competitor(@comp, @reg)
+      @al.populate_from_competitor(@comp, @reg, 2)
       @al.place.should == 2
     end
 

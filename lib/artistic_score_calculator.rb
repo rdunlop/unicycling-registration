@@ -7,9 +7,8 @@ class ArtisticScoreCalculator
 
     def update_all_places
       @competition.competitors.each do |competitor|
-        res  = place(competitor)
-        competitor.place = res
-        competitor.overall_place = res
+        new_place  = place(competitor)
+        Result.create_new!(competitor, new_place, "Overall")
       end
     end
 

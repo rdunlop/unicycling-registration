@@ -3,9 +3,9 @@
     = @competition.award_title_name
     = @competition.award_subtitle_name
     Results
-  - if @competition.age_group_entries.nil?
+  - if !@competition.has_age_group_entry_results?
     - @all_competitors = @competition.results_list
-    = render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @all_competitors, place_function: :place_formatted }
+    = render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @all_competitors, place_function: :overall_place_formatted }
   - else
     - if @competition.has_experts
       - ["Male", "Female"].each do |gender|

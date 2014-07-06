@@ -53,10 +53,8 @@ module CachedSetModel
     end
 
     def touch_set(element_value)
-      if ApplicationController.perform_caching
-        timestamp = render_timestamp(Time.zone.now)
-        Rails.cache.write(cache_set_key_base(element_value), timestamp)
-      end
+      timestamp = render_timestamp(Time.zone.now)
+      Rails.cache.write(cache_set_key_base(element_value), timestamp)
     end
 
     def render_timestamp(time)

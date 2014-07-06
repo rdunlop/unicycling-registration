@@ -55,11 +55,7 @@ class RaceScoringClass < BaseScoringClass
   end
 
   def competitor_dq?(competitor)
-    if self.competitor_has_result?(competitor)
-      competitor.time_results.all?{|t| t.disqualified }
-    else
-      false
-    end
+    self.competitor_has_result?(competitor) && competitor.time_results.all?{|t| t.disqualified }
   end
 
   # Function which places all of the competitors in the competition

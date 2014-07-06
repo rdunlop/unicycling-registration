@@ -26,10 +26,10 @@ describe OrderedResultCalculator do
     it "calculates the results the same" do
       @calc = OrderedResultCalculator.new(@competition)
       recalc
-      @tr1.reload.competitor.place.should == 1
-      @tr2.reload.competitor.place.should == 2
-      @tr3.reload.competitor.place.should == 3
-      @tr4.reload.competitor.place.should == 4
+      @tr1.reload.competitor.overall_place.should == 1
+      @tr2.reload.competitor.overall_place.should == 2
+      @tr3.reload.competitor.overall_place.should == 3
+      @tr4.reload.competitor.overall_place.should == 4
     end
 
   end
