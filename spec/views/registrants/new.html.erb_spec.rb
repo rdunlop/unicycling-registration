@@ -9,6 +9,7 @@ describe "registrants/new" do
                                               :end_date => Date.new(2012, 02, 11),
                                               :competitor_expense_item => @comp_exp,
                                               :noncompetitor_expense_item => @noncomp_exp)
+    FactoryGirl.create(:wheel_size_24, id: 3)
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }

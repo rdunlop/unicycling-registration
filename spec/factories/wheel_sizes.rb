@@ -23,5 +23,9 @@ FactoryGirl.define do
     factory :wheel_size_20 do
       description "20\" Wheel"
     end
+
+    factory :wheel_size_16 do
+      description "16\" Wheel"
+    end
   end
 end

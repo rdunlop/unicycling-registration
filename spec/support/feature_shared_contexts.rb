@@ -23,8 +23,9 @@ end
 shared_context 'basic event configuration' do |options = {}|
   options.reverse_merge! test_mode: false
   before :each do
-    FactoryGirl.create(:wheel_size_24)
+    FactoryGirl.create(:wheel_size_16)
     FactoryGirl.create(:wheel_size_20)
+    FactoryGirl.create(:wheel_size_24)
     FactoryGirl.create(:event_configuration, :start_date => Date.today + 6.months,
                        :iuf => true, :usa => false, :test_mode => options[:test_mode], :music_submission_end_date => Date.today + 2.months)
     exp_comp = FactoryGirl.create(:expense_item, name: "Early Registration - Competitor", cost: 20.00)
