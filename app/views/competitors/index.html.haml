@@ -24,16 +24,16 @@
         %th.sign_up Country
       %th.sign_up Age Group
       %th.sign_up Original Event Selection
-      %th Errors?
+      %th Warnings?
       %th.competitor_member
   %tbody
     - @competitors.each do |competitor|
       - next if competitor.new_record?
       %tr{:class => competitor.status}
-        - errors = nil
+        - error = nil
         - competitor.registrants.each do |reg|
           - unless @registrants.include?(reg)
-            - errors = "Registrant #{reg} is not signed up, but is a competitor"
+            - error = "Registrant #{reg} is not in the default list for this competition"
         - if @competition.compete_in_order
           %td
             = competitor.position
@@ -50,10 +50,7 @@
           %td= competitor.country
         %td= competitor.age_group_entry_description
         %td= event_category
-        - if errors
-          %td.error= errors
-        - else
-          %td
+        %td{ class: error ? "error" : "" }= error
         %td
           = link_to 'Edit', edit_competitor_path(competitor)
           = link_to 'Delete', competitor, method: :delete, data: { confirm: 'Are you sure?' }
@@ -77,13 +74,16 @@ List of all competitors, including registrant info, with edit/delete, marking th
         %th ID
         %th Name
         %th Sign Up Details
+        %th Assigned to another competition?
     %tbody
       - @remaining_registrants.each do |reg|
         %tr
-          %td= check_box_tag "registrants[]", reg.id, true, :class => "registrant_checkbox"
+          - assigned_comp = reg.matching_competition_in_event(@competition.event)
+          %td= check_box_tag "registrants[]", reg.id, !assigned_comp, :class => "registrant_checkbox"
           %td= reg.bib_number
           %td= reg
           %td= reg.describe_event(@competition.event)
+          %td= assigned_comp
 
   - display_all = @competition.num_members_per_competitor.nil?
   - if display_all || @competition.num_members_per_competitor == "One"
