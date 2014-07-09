@@ -17,8 +17,13 @@
 class ExternalResult < ActiveRecord::Base
   include Competeable
   include Placeable
+  include CachedSetModel
 
   validates :points, :presence => true
+
+  def self.cache_set_field
+    :competitor_id
+  end
 
   def disqualified
     false

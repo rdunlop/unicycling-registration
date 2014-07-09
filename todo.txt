@@ -2,7 +2,8 @@ Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
 
-- Artisic sign ups, should indicate when someone is assigned to a different age group?
+- Can we have the onsite people approve the things that they can buy?
+ - Unicon: benoit/hugo want to be able to calc prices(incl tax) easily, but also control who can buy what.
 
 - Cache the age group entry in the competitor (and update it as necessary)
 BUG: able to crash the system (dos attack) by attempting to approve only the Start Times.

@@ -47,7 +47,7 @@ class Result < ActiveRecord::Base
   def self.competition_calc_needed?(competition)
     ldut = last_data_update_time(competition)
     lcpt = last_calc_places_time(competition)
-    ldut.nil? || lcpt.nil? || (ldut > lcpt)
+    lcpt.nil? || (ldut.present? && (ldut > lcpt))
   end
 
   def to_s
