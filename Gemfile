@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby "2.1.0"
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.4'
 
 gem 'therubyracer'
 gem 'rake'
@@ -27,7 +27,7 @@ gem 'carmen-rails'
 gem 'font-kit-rails', :git => "git://github.com/sandelius/font-kit-rails.git", :ref => "480c979b84aa4d32652772822dee2366c37eed2e" # to get a change which includes font-url
 gem 'fancybox-rails'
 gem 'http_accept_language'
-gem 'globalize', '~> 4.0.0'
+gem 'globalize', '~> 4.0.2'
 gem 'virtus'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'
