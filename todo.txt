@@ -2,14 +2,14 @@ Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
 
+- Artisic sign ups, should indicate when someone is assigned to a different age group?
+
 - Cache the age group entry in the competitor (and update it as necessary)
 BUG: able to crash the system (dos attack) by attempting to approve only the Start Times.
 
 Feature: - Allow mulitple "published results" to be printed, so that we can re-publish without having to un-publish first, and also see our copies of published results.
 - Remove all Boundary Score calculation logic, replace it with a new judge type, which affects "Presentation" Judge-type display.
-- Expose the "wheel_size" for registrants
 - Hugo: we need to e-mail all <10 age people to have them tell us what size of wheel they plan on riding in the track and muni and distance events.
-- Provide an admin-way of specifying wheel size overrides for each registrant on a per-event basis.
 - Q: How are "Notes" for a score entered? displayed?
 - Clean up "attempt_number" for time_results (not currently used)
 Feature - When doing MUNI data entry, it should easily allow changing the result to be "this competition" instead of auto-adding to another event. Perhaps make the auto-select-event a feature flag?

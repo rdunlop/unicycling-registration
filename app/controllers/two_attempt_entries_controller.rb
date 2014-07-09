@@ -4,16 +4,17 @@ class TwoAttemptEntriesController < ApplicationController
   before_filter :load_competition, :only => [:index, :proof, :create, :approve]
   before_filter :load_new_two_attempt_entry, :only => [:create]
   before_action :set_is_start_time, only: [:index, :proof, :approve]
+  before_action :load_two_attempt_entries, only: [:index, :proof, :approve]
   load_and_authorize_resource
 
   before_action :set_breadcrumbs
+
 
   # GET /users/#/two_attempt_entry
   # GET /users/#/two_attempt_entrys.json
   def index
     add_breadcrumb "Add two-entry data"
 
-    @two_attempt_entries = TwoAttemptEntry.where(user: @user, competition: @competition, is_start_time: @is_start_time)
     @two_attempt_entry = TwoAttemptEntry.new(is_start_time: @is_start_time)
 
     respond_to do |format|
@@ -70,9 +71,6 @@ class TwoAttemptEntriesController < ApplicationController
     add_breadcrumb "Add two-entry data", user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time)
     add_breadcrumb "Proof"
 
-
-    @two_attempt_entries = TwoAttemptEntry.where(:competition_id => @competition, is_start_time: @is_start_time)
-
     respond_to do |format|
       format.html # index.html.erb
       format.pdf { render_common_pdf("proof") }
@@ -80,8 +78,6 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   def approve
-    two_attempt_entries = TwoAttemptEntry.where(:competition_id => @competition, is_start_time: @is_start_time)
-
     n = two_attempt_entries.count
     begin
       TwoAttemptEntry.transaction do
@@ -125,6 +121,10 @@ class TwoAttemptEntriesController < ApplicationController
     @competition ||= @two_attempt_entry.competition
     @user ||= @two_attempt_entry.user
     add_to_competition_breadcrumb(@competition)
+  end
+
+  def load_two_attempt_entries
+    @two_attempt_entries = TwoAttemptEntry.where(competition: @competition, is_start_time: @is_start_time).order(:id)
   end
 
   def set_is_start_time
