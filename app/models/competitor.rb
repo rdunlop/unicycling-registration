@@ -281,15 +281,20 @@ class Competitor < ActiveRecord::Base
 
   def gender
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/gender") do
-      if members.empty?
-        "(No registrants)"
+      # all teams should compete against each other, regardless of gender
+      if competition.num_members_per_competitor != "One"
+        "(n/a)"
       else
-        genders = members.map(&:gender)
-        # display mixed if there are more than 1 registrants
-        if genders.count > 1
-          "(mixed)"
+        if members.empty?
+          "(No registrants)"
         else
-          genders.first
+          genders = members.map(&:gender)
+          # display mixed if there are more than 1 registrants
+          if genders.count > 1
+            "(mixed)"
+          else
+            genders.first
+          end
         end
       end
     end

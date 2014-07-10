@@ -2,6 +2,9 @@ Last Re-Arranged June 20th, 2014.
 
 Connie/Robin:
 
+- If a competitor is marked as "not qualiified" AFTEr having been scored for freestyle, they should NOT appear in the ranked results. (see Pairs Freestyle NAUCC)
+- Why isn't the 10k standard fixed?
+
 - Can we have the onsite people approve the things that they can buy?
  - Unicon: benoit/hugo want to be able to calc prices(incl tax) easily, but also control who can buy what.
 

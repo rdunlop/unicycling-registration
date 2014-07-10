@@ -38,22 +38,23 @@ class CombinedCompetitionResult
 
   def create_registrant_entry(bib_number)
     competitor_results = {}
-    competitor_points = 0
     combined_competition.combined_competition_entries.each do |entry|
-      matching_comp = entry.competitors(gender).select{ |comp| comp.registrants.first.bib_number == bib_number}.first
+      matching_comp = matching_competitor(bib_number, gender, entry.competition)
       if matching_comp
         points = entry.send("points_#{matching_comp.overall_place}")
         competitor_results[entry.abbreviation] = {
           :entry_place => matching_comp.overall_place,
           :entry_points => points
         }
-        competitor_points += points
       end
     end
+    total_points = 0
+    binding.pry
+    competitor_results.keys.map { |race| total_points += competitor_results[race][:entry_points] }
     {
       :bib_number => bib_number,
       :results => competitor_results,
-      :total_points => competitor_points
+      :total_points => total_points
     }
   end
 
@@ -141,6 +142,10 @@ class CombinedCompetitionResult
     end
 
     registrant_bib_numbers
+  end
+
+  def matching_competitor(bib_number, gender, competition)
+    @registrant_bib_numbers[gender][bib_number].select { |competitor| competitor.competition == competition }.first
   end
 
   def registrants(gender)
