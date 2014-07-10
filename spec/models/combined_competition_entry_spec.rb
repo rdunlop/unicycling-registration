@@ -55,4 +55,14 @@ describe CombinedCompetitionEntry do
       expect(combined_competition_entry.competitors("Male")).to eq([@comp1, @comp2, @comp3])
     end
   end
+
+  describe "requires base_points only when percentage based" do
+    let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, percentage_based_calculations: true }
+
+    it "requires base_ponints" do
+      entry = FactoryGirl.build :combined_competition_entry, combined_competition: combined_competition
+      entry.base_points = nil
+      expect(entry).to be_invalid
+    end
+  end
 end

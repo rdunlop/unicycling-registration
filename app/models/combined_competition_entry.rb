@@ -19,6 +19,7 @@
 #  created_at              :datetime
 #  updated_at              :datetime
 #  competition_id          :integer
+#  base_points             :integer
 #
 
 class CombinedCompetitionEntry < ActiveRecord::Base
@@ -31,6 +32,8 @@ class CombinedCompetitionEntry < ActiveRecord::Base
   validates :points_1, :points_2, :points_3, :points_4, :points_5, presence: true
   validates :points_6, :points_7, :points_8, :points_9, :points_10, presence: true
 
+  validates :base_points, presence: true, if: :is_percentage_based?
+
   validates :tie_breaker, inclusion: { in: [true, false] }
 
   def to_s
@@ -39,7 +42,11 @@ class CombinedCompetitionEntry < ActiveRecord::Base
 
   def competitors(gender)
     @competitors ||= {}
-    @competitors[gender] ||= competition.competitors.select{ |comp| comp.is_top?(gender) }
+    if is_percentage_based?
+      @competitors[gender] ||= competition.competitors.select{ |comp| comp.has_result? && comp.gender == gender }
+    else
+      @competitors[gender] ||= competition.competitors.select{ |comp| comp.is_top?(gender) }
+    end
   end
 
   def male_competitors
@@ -48,5 +55,23 @@ class CombinedCompetitionEntry < ActiveRecord::Base
 
   def female_competitors
     competitors("Female")
+  end
+
+  def bonus_for_place(place)
+    if place > 0 && place <= 10
+      send("points_#{place}")
+    else
+      0
+    end
+  end
+
+  def best_time_in_thousands(gender)
+    competitors(gender).find{ |competitor| competitor.overall_place == 1 }.try(:best_time_in_thousands)
+  end
+
+  private
+
+  def is_percentage_based?
+    combined_competition.percentage_based_calculations
   end
 end

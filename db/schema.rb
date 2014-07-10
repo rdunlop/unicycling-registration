@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705173100) do
+ActiveRecord::Schema.define(version: 20140710123331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20140705173100) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "competition_id"
+    t.integer  "base_points"
   end
 
   create_table "combined_competitions", force: true do |t|

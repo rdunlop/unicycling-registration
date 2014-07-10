@@ -12,6 +12,10 @@
     = f.label :tie_breaker
     %br
     = f.check_box :tie_breaker
+  .field
+    = f.label :base_points
+    %br
+    = f.number_field :base_points, {min: 0}
   - for place in 1..10
     .field
       - if@combined_competition.percentage_based_calculations

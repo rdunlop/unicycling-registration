@@ -1,6 +1,8 @@
 class CombinedCompetitionResult
   attr_accessor :combined_competition, :gender
 
+  delegate :percentage_based_calculations, to: :combined_competition
+
   def initialize(combined_competition, gender)
     @combined_competition = combined_competition
     @gender = gender
@@ -36,12 +38,30 @@ class CombinedCompetitionResult
     @results ||= gather_results
   end
 
+  def calc_points(entry, competitor)
+    if percentage_based_calculations
+      calc_perc_points(
+        best_time: entry.best_time_in_thousands(competitor.gender),
+        time: competitor.best_time_in_thousands,
+        base_points: entry.base_points,
+        bonus_percentage: entry.bonus_for_place(competitor.overall_place))
+    else
+      points = entry.send("points_#{competitor.overall_place}")
+    end
+  end
+
+  def calc_perc_points(best_time:, time:, base_points:, bonus_percentage:)
+    return 0 if time == 0
+    points = (best_time * 1.0 / time) * base_points
+    points + (points * bonus_percentage / 100.0)
+  end
+
   def create_registrant_entry(bib_number)
     competitor_results = {}
     combined_competition.combined_competition_entries.each do |entry|
       matching_comp = matching_competitor(bib_number, gender, entry.competition)
       if matching_comp
-        points = entry.send("points_#{matching_comp.overall_place}")
+        points = calc_points(entry, matching_comp)
         competitor_results[entry.abbreviation] = {
           :entry_place => matching_comp.overall_place,
           :entry_points => points

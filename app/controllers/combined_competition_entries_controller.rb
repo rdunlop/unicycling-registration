@@ -60,7 +60,7 @@ class CombinedCompetitionEntriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def combined_competition_entry_params
-      params.require(:combined_competition_entry).permit(:abbreviation, :tie_breaker,
+      params.require(:combined_competition_entry).permit(:abbreviation, :tie_breaker, :base_points,
                                                          :points_1, :points_2, :points_3, :points_4, :points_5,
                                                          :points_6, :points_7, :points_8, :points_9, :points_10,
                                                          :competition_id)
