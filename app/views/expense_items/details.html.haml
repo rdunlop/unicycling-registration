@@ -1,0 +1,17 @@
+%h1 Listing #{@filter.humanize} Payment Details for #{@expense_item}
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Registrant
+      %th Email
+      %th Details
+      %th Date
+  %tbody
+    - @details.each do |detail|
+      %tr
+        %td= detail.registrant.bib_number
+        %td= link_to detail.registrant, detail.registrant
+        %td= detail.registrant.user.email
+        %td= detail.details
+        %td= detail.created_at
