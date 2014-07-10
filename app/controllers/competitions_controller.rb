@@ -106,6 +106,7 @@ class CompetitionsController < ApplicationController
 
   def set_places
     @competition.scoring_helper.place_all
+    Result.update_last_calc_places_time(@competition)
     redirect_to result_competition_path(@competition), :notice => "All Places updated"
   end
 
