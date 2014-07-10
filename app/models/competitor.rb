@@ -282,7 +282,8 @@ class Competitor < ActiveRecord::Base
   def gender
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/gender") do
       # all teams should compete against each other, regardless of gender
-      if competition.num_members_per_competitor != "One"
+      num = competition.num_members_per_competitor
+      if num == "Two" || num == "Three or more"
         "(n/a)"
       else
         if members.empty?

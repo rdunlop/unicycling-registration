@@ -6,11 +6,11 @@ class CompetitionStateMachine
   end
 
   def lock
-    competition.update_attribute(:locked, true)
+    competition.update_attributes(locked: true)
   end
 
   def unlock
-    competition.update_attribute(:locked, false)
+    competition.update_attributes(locked: false)
   end
 
   def publish_age_group_entry(entry_id)

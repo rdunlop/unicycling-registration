@@ -49,7 +49,6 @@ class CombinedCompetitionResult
       end
     end
     total_points = 0
-    binding.pry
     competitor_results.keys.map { |race| total_points += competitor_results[race][:entry_points] }
     {
       :bib_number => bib_number,
