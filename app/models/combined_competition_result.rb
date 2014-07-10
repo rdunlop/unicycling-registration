@@ -83,8 +83,12 @@ class CombinedCompetitionResult
     @registrant_bib_numbers[gender][bib_number].count{ |comp| comp.overall_place == 1}
   end
 
+  def tie_breaker_competition
+    combined_competition.combined_competition_entries.find_by(tie_breaker: true)
+  end
+
   def place_of_tie_breaker(bib_number)
-    @registrant_bib_numbers[gender][bib_number].select{ |comp| comp.competition.combined_competition_entries.first.tie_breaker }.first.try(:overall_place)
+    @registrant_bib_numbers[gender][bib_number].select{ |comp| comp.competition == tie_breaker_competition }.first.try(:overall_place)
   end
 
   # returns
