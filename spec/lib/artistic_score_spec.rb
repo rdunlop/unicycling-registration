@@ -40,7 +40,7 @@ describe ArtisticScoreCalculator do
     include_context "given rider has scores", name: "D", presentation_scores: [3,3,2,2], technical_scores: [3,2,3,2]
 
     before :each do
-      allow(competition).to receive(:competitors).and_return(competitors.values)
+      allow(competition).to receive_message_chain(:competitors, :active).and_return(competitors.values)
       allow(competition).to receive(:judge_types).and_return([pres_type, tech_type])
       allow(JudgeType).to receive(:find_by_name).with("Technical").and_return(tech_type)
     end
@@ -71,7 +71,7 @@ describe ArtisticScoreCalculator do
     include_context "given rider has scores", name: "C", presentation_scores: [3,3,2], technical_scores: [2,3,1]
 
     before :each do
-      allow(competition).to receive(:competitors).and_return(competitors.values)
+      allow(competition).to receive_message_chain(:competitors, :active).and_return(competitors.values)
       allow(competition).to receive(:judge_types).and_return([pres_type, tech_type])
       allow(JudgeType).to receive(:find_by_name).with("Technical").and_return(tech_type)
     end
