@@ -1,0 +1,62 @@
+%h1.title
+  = @config.short_name
+  = t(".registration")
+- if mixpanel?
+  :javascript
+    mixpanel.track("Main Registration Landing Page Loaded")
+- if @display_invitation_request
+  .invitation_access_banner
+    You have been asked to share a registration with another user.
+    = link_to "See the Registration Access", invitations_user_additional_registrant_accesses_path(@user)
+    page for details.
+- if @display_invitation_manage_banner
+  .invitation_manage_banner
+    You have shared your registration with another user.
+    = link_to "See the Registration Access", invitations_user_additional_registrant_accesses_path(@user)
+    to adjust settings.
+- if EventConfiguration.closed?
+  .registration_closed
+    %h2 Online Registration is now closed
+    You cannot make any more changes to your registration details.
+    %br
+    If you have any outstanding payments, you may be able to continue this registration on-site (at the discretion of the event-organizers)
+%div
+  - if can? :create, Registrant
+    .competitor_sign_up
+      = link_to t(".create_new_competitor"), new_registrant_path, :class => "competitor registration_button"
+    .non-competitor_sign_up
+      = link_to t(".create_new_noncompetitor"), new_registrant_path(:non_competitor => true), :class => "noncompetitor registration_button"
+  - unless @config.comp_noncomp_url.nil?
+    .sign_up_difference
+      = link_to t(".whats_the_difference"), @config.comp_noncomp_url, :class => "fancybox", :title =>"Click here for more information!"
+  .competitor_sign_up
+    = render :partial => "registration_periods/list", :locals => {:competitor => true }
+    %br
+    %br
+  .non-competitor_sign_up
+    = render :partial => "registration_periods/list", :locals => {:competitor => false }
+    %br
+    %br
+= render "/event_configurations/rulebook_link"
+- if @shared_registrants.count > 0
+  %div
+    The Registrants list includes Registrants shared with you. See the
+    = link_to "Registrant Access", user_additional_registrant_accesses_path(@user)
+    page for details.
+= render :partial => "registrants_list", :locals => {:shared_list => @shared_registrants, :my_registrants_list => @my_registrants}
+- if @has_print_waiver
+  Everyone must have a signed
+  = link_to 'Legal Waiver', empty_waiver_registrants_path(:format => 'pdf'), {:class => "print_waiver_link", :target => "_blank" }
+%hr
+%p
+  = t(".be_sure_to_submit_payment")
+%p= t(".note_date_of_payment_html")
+- if @has_print_waiver
+  = render :partial => "/registrants/waiver"
+%p
+  = t(".registration_time")
+  %br
+  = t(".can_change_events")
+  %br
+  = t(".onsite_restricted_events")
+  %br
