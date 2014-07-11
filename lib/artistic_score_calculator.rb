@@ -47,15 +47,17 @@ class ArtisticScoreCalculator
         return @place[competitor.id]
       end
 
+      competitors = competitor.competition.competitors.active
+
       my_points = total_points(competitor)
-      total_points_per_competitor     = competitor.competition.competitors.map { |comp| total_points(comp) }
+      total_points_per_competitor = competitors.map { |comp| total_points(comp) }
 
       jt = JudgeType.find_by_name("Technical") # TODO this should be properly identified
       my_tie_break_points = total_points(competitor, jt)
-      tie_break_points_per_competitor = competitor.competition.competitors.map { |comp| total_points(comp, jt) }
+      tie_break_points_per_competitor = competitors.map { |comp| total_points(comp, jt) }
 
       my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor)
-      if my_points == 0
+      if my_points == 0 || !competitors.include?(competitor) # inactive competitor
         my_place = 0
       end
 

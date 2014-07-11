@@ -164,14 +164,14 @@ describe ArtisticScoreCalculator do
                 @calc = ArtisticScoreCalculator.new(@competition, false)
             end
 
-              #10,5,0 -> 1,  2,  3 
+              #10,5,0 -> 1,  2,  3
               #9,0,3  -> 1,  3,  2
               #9,4,4  -> 1,2.5,2.5
-  
+
               #1,2,3 -> 3,  2,  1
               #1,2,3 -> 3,  2,  1
               #1,2,3 -> 3,  2,  1
-  
+
               #eliminate 1,3  2,3  3,1
             it "calculates the highest_score correctly by judge_type" do
               @calc.highest_score(@score1.competitor, nil).should == 3.0
@@ -203,6 +203,17 @@ describe ArtisticScoreCalculator do
               @calc.place(@score1.competitor).should == 2
               @calc.place(@score2.competitor).should == 3
               @calc.place(@score3.competitor).should == 1
+            end
+            describe "When one of the competitors is invalidated" do
+              before do
+                @score1.competitor.update_attribute(:status, :not_qualified)
+              end
+
+              it "determines the places without this competitor" do
+                @calc.place(@score1.competitor).should == 0
+                @calc.place(@score2.competitor).should == 2
+                @calc.place(@score3.competitor).should == 1
+              end
             end
           end
         end
