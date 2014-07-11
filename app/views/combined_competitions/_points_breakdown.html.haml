@@ -1,12 +1,18 @@
-%table
-  %thead
-    %tr
-      %th Place
-      - @combined_competition_entries.each do |cc|
-        %th= cc
-  %tbody
-    - for place in 1..10
+- cache @combined_competition do
+  %table
+    %thead
       %tr
-        %th= place
+        %th Place
         - @combined_competition_entries.each do |cc|
-          %td= cc.send("points_#{place}")
+          %th= cc
+    %tbody
+      - if @combined_competition.percentage_based_calculations
+        %tr
+          %th Base Points
+          - @combined_competition_entries.each do |cc|
+            %td= cc.base_points
+      - for place in 1..10
+        %tr
+          %th= place
+          - @combined_competition_entries.each do |cc|
+            %td= cc.send("points_#{place}")

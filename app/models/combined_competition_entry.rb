@@ -24,7 +24,7 @@
 
 class CombinedCompetitionEntry < ActiveRecord::Base
 
-  belongs_to :combined_competition
+  belongs_to :combined_competition, touch: true
   belongs_to :competition
 
   validates :combined_competition_id, :abbreviation, presence: true
