@@ -37,25 +37,6 @@ describe CombinedCompetitionEntry do
     expect(combined_competition_entry).to be_valid
   end
 
-  describe "when displaying the relevant associated competitors" do
-    before :each do
-      competition = FactoryGirl.build_stubbed(:competition)
-      allow(combined_competition_entry).to receive(:competition).and_return(competition)
-
-      @comp1 = build_competitor(1)
-      @comp2 = build_competitor(2)
-      @comp3 = build_competitor(3)
-      @comp11 = build_competitor(11)
-      @comp_unk = build_competitor(0)
-
-      allow(competition).to receive_message_chain(:competitors, :includes).and_return([@comp1, @comp2, @comp3, @comp11, @comp_unk])
-    end
-
-    it "lists the competitors who have ranked top 10" do
-      expect(combined_competition_entry.competitors("Male")).to eq([@comp1, @comp2, @comp3])
-    end
-  end
-
   describe "requires base_points only when percentage based" do
     let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, percentage_based_calculations: true }
 
