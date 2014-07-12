@@ -132,7 +132,7 @@ class CombinedCompetitionResult
     if tie_breaker_competition
       new_results = []
       sorted_scores.each do |score|
-        tie_break_scores = tie_breaking_scores(score, @scores[score])
+        tie_break_scores = tie_breaking_scores(gender, score, @scores[score])
         tie_break_scores.each do |calculated_score, bib_number|
           results[bib_number][:total_points] = calculated_score
           new_results << results[bib_number]
@@ -151,7 +151,7 @@ class CombinedCompetitionResult
   end
 
 
-  def num_firsts(bib_number)
+  def num_firsts(gender, bib_number)
     @registrant_bib_numbers[gender][bib_number].count{ |comp| comp.overall_place == 1}
   end
 
@@ -159,7 +159,7 @@ class CombinedCompetitionResult
     @tie_breaker_competition ||= combined_competition.combined_competition_entries.find_by(tie_breaker: true)
   end
 
-  def place_of_tie_breaker(bib_number)
+  def place_of_tie_breaker(gender, bib_number)
     @registrant_bib_numbers[gender][bib_number].select{ |comp| comp.competition == tie_breaker_competition }.first.try(:overall_place)
   end
 
@@ -169,22 +169,22 @@ class CombinedCompetitionResult
   #   [score, bib_number],
   #   [score, bib_number]
   # ]
-  def tie_breaking_scores(score, bib_numbers)
+  def tie_breaking_scores(gender, score, bib_numbers)
     if bib_numbers.length > 1
       results = []
       firsts_counts = []
       bib_numbers.each do |bib_number|
-        firsts_counts << num_firsts(bib_number)
+        firsts_counts << num_firsts(gender, bib_number)
       end
       calc_score = score
       firsts_counts.uniq.sort.reverse.each do |most_firsts|
-        bib_numbers_with_this_number_of_firsts = bib_numbers.select{ |bib_number| num_firsts(bib_number) == most_firsts}
+        bib_numbers_with_this_number_of_firsts = bib_numbers.select{ |bib_number| num_firsts(gender, bib_number) == most_firsts}
 
-        places_in_tie_breaker = bib_numbers_with_this_number_of_firsts.map{ |bib_number| place_of_tie_breaker(bib_number) }
+        places_in_tie_breaker = bib_numbers_with_this_number_of_firsts.map{ |bib_number| place_of_tie_breaker(gender, bib_number) }
         places_in_tie_breaker.uniq.sort.each do |place|
 
           bib_numbers_with_this_number_of_firsts.each do |bib_number|
-            if place  == place_of_tie_breaker(bib_number)
+            if place  == place_of_tie_breaker(gender, bib_number)
               results << [calc_score, bib_number]
             end
           end

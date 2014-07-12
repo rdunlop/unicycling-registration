@@ -32,6 +32,18 @@ describe CombinedCompetitionResult do
     expect(result_1).to eq([{:bib_number => 10, :results => {"TT" => { :entry_place => 1, :entry_points => 50 } }, :total_points => 50 }])
   end
 
+  describe "with a tie-breaker" do
+    before { combined_competition_entry.update_attribute(:tie_breaker, true) }
+
+    before do
+      build_competitor(place: 1, bib_number: 20, competition: combined_competition_entry.competition)
+    end
+
+    it "calculates results" do
+      expect(combined_competition_result.length).to eq(2)
+    end
+  end
+
 =begin
   #10 - Robin - M - 2nd (35)   TT - 1st (39)   Crit - 10th (1) Total (75)   ( has more firsts)
   #20 - Scott - M - 2nd (35)   TT - 2nd (28)   Crit - 2nd (12) Total (75)
