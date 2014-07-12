@@ -23,7 +23,7 @@
 class Competitor < ActiveRecord::Base
   include Eligibility
 
-  has_many :members, :inverse_of => :competitor
+  has_many :members, dependent: :destroy, :inverse_of => :competitor
   has_many :registrants, through: :members
   belongs_to :competition, touch: true
   acts_as_list :scope => :competition

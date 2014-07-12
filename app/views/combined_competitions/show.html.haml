@@ -7,6 +7,6 @@
 
 .combined_competition_results
   .combined_competition_results__male
-    = render partial: "new_results", locals: {results: CombinedCompetitionResult.new(@combined_competition, "Male") }
+    = render partial: "new_results", locals: {results: CombinedCompetitionResult.new(@combined_competition), gender: "Male" }
   .combined_competition_results__female
-    = render partial: "new_results", locals: {results: CombinedCompetitionResult.new(@combined_competition, "Female") }
+    = render partial: "new_results", locals: {results: CombinedCompetitionResult.new(@combined_competition), gender: "Female" }

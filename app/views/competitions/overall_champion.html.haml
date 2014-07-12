@@ -1,0 +1,8 @@
+%h1
+  Overall Champion - #{@competition}
+= render :partial => "/competitions/results"
+.scores
+  %h3= @competition
+  - @combined_competition = @competition.combined_competition
+  - @combined_competition_entries = @combined_competition.combined_competition_entries
+  = render "combined_competitions/points_breakdown"

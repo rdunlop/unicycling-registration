@@ -1,13 +1,44 @@
 class CombinedCompetitionResult
-  attr_accessor :combined_competition, :gender
+  attr_accessor :combined_competition, :results_competition
 
   delegate :percentage_based_calculations, to: :combined_competition
 
-  def initialize(combined_competition, gender)
+  def initialize(combined_competition, results_competition = nil)
     @combined_competition = combined_competition
-    @gender = gender
+    @results_competition = results_competition
     @scores ||= {}
     @registrant_bib_numbers ||= {}
+  end
+
+  def update_all_places
+    if results_competition
+      clear_competitors
+      build_competitors
+      store_places
+    end
+  end
+
+  def clear_competitors
+    results_competition.competitors.destroy_all
+  end
+
+  def build_competitors
+    registrant_bib_numbers("Male").each do |bib_number|
+      results_competition.create_competitor_from_registrants([Registrant.find_by(bib_number: bib_number)], nil)
+    end
+    registrant_bib_numbers("Female").each do |bib_number|
+      results_competition.create_competitor_from_registrants([Registrant.find_by(bib_number: bib_number)], nil)
+    end
+    results_competition.reload
+  end
+
+  def store_places
+    OrderedResultCalculator.new(results_competition, false).update_all_places
+  end
+
+  def competitor_score(competitor)
+    calc_res = results(competitor.gender).find{ |res| res[:bib_number] == competitor.lowest_member_bib_number }
+    calc_res[:total_points]
   end
 
   # bib_number of registrant
@@ -33,9 +64,12 @@ class CombinedCompetitionResult
   #     }
   #   }
   # }
-  def results
-    #registrants = combined_competition.combined_competition_entries.map{ |entry| entry.competitors(gender) }.flatten.map{ |comp| comp.registrants.first }.uniq
-    @results ||= gather_results
+  def results(gender)
+    if gender == "Male"
+      @male_results ||= gather_results("Male")
+    else
+      @female_results ||= gather_results("Female")
+    end
   end
 
   def calc_points(entry, competitor)
@@ -46,7 +80,7 @@ class CombinedCompetitionResult
         base_points: entry.base_points,
         bonus_percentage: entry.bonus_for_place(competitor.overall_place))
     else
-      points = entry.send("points_#{competitor.overall_place}")
+      entry.send("points_#{competitor.overall_place}")
     end
   end
 
@@ -56,7 +90,7 @@ class CombinedCompetitionResult
     points + (points * bonus_percentage / 100.0)
   end
 
-  def create_registrant_entry(bib_number)
+  def create_registrant_entry(bib_number, gender)
     competitor_results = {}
     combined_competition.combined_competition_entries.each do |entry|
       matching_comp = matching_competitor(bib_number, gender, entry.competition)
@@ -77,25 +111,33 @@ class CombinedCompetitionResult
     }
   end
 
-  def gather_results
+  def gather_results(gender)
     results = {}
     registrant_bib_numbers(gender).each do |bib_number|
-      results[bib_number] = create_registrant_entry(bib_number)
+      results[bib_number] = create_registrant_entry(bib_number, gender)
       store_score(results[bib_number][:total_points], bib_number)
     end
 
-    place_calculator = PlaceCalculator.new
-    new_results = []
-    sorted_scores.each do |score|
-      tie_break_scores = tie_breaking_scores(score, @scores[score])
-      tie_break_scores.each do |calculated_score, bib_number|
-        reg = Registrant.find_by(:bib_number => bib_number)
-        place = place_calculator.place_next(calculated_score, false, reg.ineligible)
-        results[bib_number][:place] = place
-        new_results << results[bib_number]
+    # break ties
+    if tie_breaker_competition
+      new_results = []
+      sorted_scores.each do |score|
+        tie_break_scores = tie_breaking_scores(score, @scores[score])
+        tie_break_scores.each do |calculated_score, bib_number|
+          results[bib_number][:total_points] = calculated_score
+          new_results << results[bib_number]
+        end
       end
+      new_results
+    else
+      new_results = []
+      sorted_scores.each do |score|
+        @scores[score].each do |bib_number|
+          new_results << results[bib_number]
+        end
+      end
+      new_results
     end
-    new_results
   end
 
 

@@ -2,27 +2,25 @@ require 'spec_helper'
 
 describe CombinedCompetitionResult do
   def build_competitor(options = {})
-    competition = (options[:competition]) || FactoryGirl.build_stubbed(:competition)
-    comp = FactoryGirl.build_stubbed(:event_competitor, competition: competition)
-    allow(comp).to receive(:overall_place).and_return(options[:place])
-    allow(comp).to receive(:has_result?).and_return(true)
-    allow(comp).to receive(:gender).and_return("Male")
-    reg = FactoryGirl.build_stubbed(:registrant)
-    allow(reg).to receive(:bib_number).and_return(options[:bib_number])
-    allow(comp).to receive_message_chain(:registrants, :first).and_return(reg)
-    allow(Registrant).to receive(:find_by).and_return(reg)
-    allow(reg).to receive(:ineligible).and_return(false)
+    competition = (options[:competition]) || FactoryGirl.create(:competition)
+    reg = FactoryGirl.create(:registrant, bib_number: options[:bib_number], gender: "Male")
+    comp = FactoryGirl.create(:event_competitor, competition: competition)
+    FactoryGirl.create(:result, competitor: comp, place: options[:place], result_type: "Overall")
+    mem = comp.members.first
+    mem.registrant = reg
+    Delorean.jump 2
+    mem.save!
+    FactoryGirl.create(:time_result, competitor: comp)
     comp
   end
 
+  let(:race_100m) { FactoryGirl.create(:timed_competition) }
   let(:combined_competition) { FactoryGirl.create(:combined_competition) }
-  let(:combined_competition_result) { CombinedCompetitionResult.new(combined_competition, "Male").results }
-  let(:combined_competition_entry) { FactoryGirl.build_stubbed(:combined_competition_entry, :abbreviation => "TT") }
+  let(:combined_competition_result) { CombinedCompetitionResult.new(combined_competition).results("Male") }
+  let(:combined_competition_entry) { FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition, :abbreviation => "TT", competition: race_100m) }
 
   before(:each) do
-    competitor = build_competitor(:place => 1, :bib_number => 10, competition: combined_competition_entry.competition)
-    allow(combined_competition_entry).to receive(:competitors).and_return([competitor])
-    allow(combined_competition).to receive(:combined_competition_entries).and_return([combined_competition_entry])
+    build_competitor(:place => 1, :bib_number => 10, competition: combined_competition_entry.competition)
   end
 
   it "lists competitors" do
@@ -102,9 +100,8 @@ end
 end
 
 describe CombinedCompetitionResult do
-  let(:gender) { "Male" }
   let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, percentage_based_calculations: true }
-  let(:result) { described_class.new(combined_competition, gender) }
+  let(:result) { described_class.new(combined_competition) }
 
   context "calculate the number of points by percentage calculation" do
     context "when I am in first place" do

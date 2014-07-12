@@ -1,0 +1,36 @@
+%table.sortable
+  %caption
+    = gender
+    Competitors:
+  %thead
+    %tr
+      %th Place
+      %th ID
+      %th Name
+      - results.combined_competition.combined_competition_entries.each do |entry|
+        %th= entry.to_s
+        %th
+      %th Total Points
+      - if @combined_competition.use_age_group_places
+        %th Age group
+        %th Age Group Place
+  %tbody
+    - results.results(gender).each do |result|
+      %tr
+        %td
+          - comp = @combined_competition.competition.competitors.find{|comp| comp.lowest_member_bib_number == result[:bib_number] }
+          = comp.try(:overall_place)
+        %td= result[:bib_number]
+        %td= Registrant.find_by(:bib_number => result[:bib_number])
+        - results.combined_competition.combined_competition_entries.each do |entry|
+          - matching_comp = result[:results][entry.abbreviation]
+          - if matching_comp
+            %td= matching_comp[:entry_place]
+            %td= matching_comp[:entry_points].round(2)
+          - else
+            %td
+            %td
+        %th= result[:total_points].round(2)
+        - if @combined_competition.use_age_group_places
+          %td= comp.try(:age_group_entry_description)
+          %td= comp.try(:place)

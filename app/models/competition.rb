@@ -327,6 +327,8 @@ class Competition < ActiveRecord::Base
       @ssc ||= StreetScoringClass.new(self)
     when "High/Long"
       @dsc ||= DistanceScoringClass.new(self)
+    when "Overall Champion"
+      @oc ||= OverallChampionScoringClass.new(self)
     else
       nil
     end

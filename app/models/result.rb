@@ -15,7 +15,7 @@
 class Result < ActiveRecord::Base
   #include CachedModel
 
-  belongs_to :competitor, dependent: :destroy, inverse_of: :results
+  belongs_to :competitor, inverse_of: :results
 
   validates :competitor, :place, :result_type, presence: true
   validates :competitor, uniqueness: { scope: [:result_type] }

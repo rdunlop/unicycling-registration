@@ -15,7 +15,7 @@
 #
 
 class Member < ActiveRecord::Base
-    belongs_to :competitor, :touch => true, :inverse_of => :members
+    belongs_to :competitor, touch: true, :inverse_of => :members
     belongs_to :registrant
     after_destroy :destroy_orphaned_competitors
 
@@ -35,7 +35,7 @@ class Member < ActiveRecord::Base
     #validates :competitor, :presence => true # removed for spec tests
 
     def destroy_orphaned_competitors
-        if competitor and competitor.registrants.empty?
+        if competitor and competitor.members.none?
             competitor.destroy
         end
     end
