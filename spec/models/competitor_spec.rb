@@ -198,7 +198,7 @@ describe Competitor do
         member = @comp.members(true).first
 
         member.destroy
-
+        @comp.reload
         @comp.name.should == "(No registrants)"
         @comp.bib_number.should == "(No registrants)"
     end

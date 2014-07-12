@@ -29,7 +29,7 @@ describe CombinedCompetitionResult do
 
   it "lists the first place details" do
     result_1 = combined_competition_result
-    expect(result_1).to eq([{:place => 1, :bib_number => 10, :results => {"TT" => { :entry_place => 1, :entry_points => 50 } }, :total_points => 50 }])
+    expect(result_1).to eq([{:bib_number => 10, :results => {"TT" => { :entry_place => 1, :entry_points => 50 } }, :total_points => 50 }])
   end
 
 =begin

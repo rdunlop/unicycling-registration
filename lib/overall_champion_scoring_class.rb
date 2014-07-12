@@ -49,4 +49,8 @@ class OverallChampionScoringClass < BaseScoringClass
   def place_all
     score_calculator.update_all_places
   end
+
+  def requires_age_groups
+    false
+  end
 end
