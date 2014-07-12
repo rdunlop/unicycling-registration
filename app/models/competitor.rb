@@ -25,7 +25,7 @@ class Competitor < ActiveRecord::Base
 
   has_many :members, dependent: :destroy, :inverse_of => :competitor
   has_many :registrants, through: :members
-  belongs_to :competition, touch: true
+  belongs_to :competition, touch: true, inverse_of: :competitors
   acts_as_list :scope => :competition
 
   has_many :scores, :dependent => :destroy

@@ -111,8 +111,18 @@ class CombinedCompetitionResult
     }
   end
 
+  def store_score(points, bib_number)
+    @scores[points] ||= []
+    @scores[points] << bib_number
+  end
+
+  def sorted_scores
+    @scores.keys.sort.reverse
+  end
+
   def gather_results(gender)
     results = {}
+    @scores = {}
     registrant_bib_numbers(gender).each do |bib_number|
       results[bib_number] = create_registrant_entry(bib_number, gender)
       store_score(results[bib_number][:total_points], bib_number)
@@ -146,7 +156,7 @@ class CombinedCompetitionResult
   end
 
   def tie_breaker_competition
-    combined_competition.combined_competition_entries.find_by(tie_breaker: true)
+    @tie_breaker_competition ||= combined_competition.combined_competition_entries.find_by(tie_breaker: true)
   end
 
   def place_of_tie_breaker(bib_number)
@@ -187,14 +197,6 @@ class CombinedCompetitionResult
     end
   end
 
-  def store_score(points, bib_number)
-    @scores[points] ||= []
-    @scores[points] << bib_number
-  end
-
-  def sorted_scores
-    @scores.keys.sort.reverse
-  end
 
   def store_registrants(gender)
     competitors = combined_competition.combined_competition_entries.map{ |entry| entry.competitors(gender) }.flatten

@@ -36,8 +36,9 @@ class Competition < ActiveRecord::Base
   belongs_to :age_group_type, :inverse_of => :competitions
   belongs_to :event, :inverse_of => :competitions
 
-  has_many :competitors, -> { order "position" }, :dependent => :destroy
+  has_many :competitors, -> { order "position" }, :dependent => :destroy, inverse_of: :competition
   has_many :registrants, :through => :competitors
+  has_many :results, through: :competitors
 
   has_many :judges, -> { order "judge_type_id" }, :dependent => :destroy
   has_many :judge_types, :through => :judges

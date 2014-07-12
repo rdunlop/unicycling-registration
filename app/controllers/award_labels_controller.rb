@@ -100,8 +100,6 @@ class AwardLabelsController < ApplicationController
     age_groups = set_string_if_present(params[:age_groups], false)
     experts    = set_string_if_present(params[:experts], false)
 
-    puts "min: #{min_place}, max: #{max_place} age: #{age_groups} exp: #{experts}"
-
     n = 0
     if params[:registrant_id].present?
       @registrant = Registrant.find(params[:registrant_id])

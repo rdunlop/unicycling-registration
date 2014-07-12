@@ -7,7 +7,7 @@ class OverallChampionScoringClass < BaseScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    CombinedCompetitionResult.new(@competition.combined_competition, @competition)
+    @score_calculator ||= CombinedCompetitionResult.new(@competition.combined_competition, @competition)
   end
 
   # describes how to label the results of this competition
@@ -30,7 +30,7 @@ class OverallChampionScoringClass < BaseScoringClass
 
   # returns the overall points calculated for this competitor
   def competitor_result(competitor)
-    score_calculator.competitor_score(competitor)
+    nil
   end
 
   def competitor_comparable_result(competitor)

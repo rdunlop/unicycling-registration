@@ -18,7 +18,9 @@
     - results.results(gender).each do |result|
       %tr
         %td
-          - comp = @combined_competition.competition.competitors.find{|comp| comp.lowest_member_bib_number == result[:bib_number] }
+          - results_competition = @combined_competition.competition
+          - if results_competition
+            - comp = results_competition.competitors.find{|comp| comp.lowest_member_bib_number == result[:bib_number] }
           = comp.try(:overall_place)
         %td= result[:bib_number]
         %td= Registrant.find_by(:bib_number => result[:bib_number])

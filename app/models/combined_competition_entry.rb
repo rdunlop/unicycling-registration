@@ -43,9 +43,9 @@ class CombinedCompetitionEntry < ActiveRecord::Base
   def competitors(gender)
     @competitors ||= {}
     if is_percentage_based?
-      @competitors[gender] ||= competition.competitors.select{ |comp| comp.has_result? && comp.gender == gender }
+      @competitors[gender] ||= competition.results.overall.where("place > 0").map(&:competitor).select{|comp| comp.gender == gender} #competitors.includes(:results).select{ |comp| comp.has_result? && comp.gender == gender }
     else
-      @competitors[gender] ||= competition.competitors.select{ |comp| comp.is_top?(gender) }
+      @competitors[gender] ||= competition.competitors.includes(:results).select{ |comp| comp.is_top?(gender) }
     end
   end
 
@@ -66,7 +66,14 @@ class CombinedCompetitionEntry < ActiveRecord::Base
   end
 
   def best_time_in_thousands(gender)
-    competitors(gender).find{ |competitor| competitor.overall_place == 1 }.try(:best_time_in_thousands)
+    @best_time_in_thousands ||= {}
+    @best_time_in_thousands[gender] ||= determine_best_time_in_thousands(gender)
+  end
+
+  def determine_best_time_in_thousands(gender)
+    first_place_results = competition.results.includes(:competitor).overall.where(place: 1)
+    gender_comp = first_place_results.map(&:competitor).select{ |comp| comp.gender == gender}.first
+    gender_comp.try(:best_time_in_thousands)
   end
 
   private
