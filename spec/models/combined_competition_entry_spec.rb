@@ -48,7 +48,7 @@ describe CombinedCompetitionEntry do
       @comp11 = build_competitor(11)
       @comp_unk = build_competitor(0)
 
-      allow(competition).to receive(:competitors).and_return([@comp1, @comp2, @comp3, @comp11, @comp_unk])
+      allow(competition).to receive_message_chain(:competitors, :includes).and_return([@comp1, @comp2, @comp3, @comp11, @comp_unk])
     end
 
     it "lists the competitors who have ranked top 10" do

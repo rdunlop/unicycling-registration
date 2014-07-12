@@ -280,6 +280,7 @@ describe Competitor do
                                                           :judge_type => FactoryGirl.create(:judge_type))
             @score.competitor = @cr
             @score.save
+            @competition.reload
             @reg.reload
         end
 
