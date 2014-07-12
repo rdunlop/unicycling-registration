@@ -71,6 +71,13 @@ describe Competition do
       @ec.age_group_type = FactoryGirl.build_stubbed(:age_group_type)
       @ec.valid?.should == true
     end
+
+    it "can be overall Champion" do
+      @ec.scoring_class = "Overall Champion"
+      expect(@ec).to be_invalid
+      @ec.combined_competition = FactoryGirl.create(:combined_competition)
+      expect(@ec).to be_valid
+    end
   end
 
   it "is not_expert by default" do

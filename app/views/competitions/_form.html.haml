@@ -40,8 +40,11 @@
     %br
     = f.select :scoring_class, Competition.scoring_classes, include_blank: true
   .field
+    = f.label :combined_competition_id, "Associated Overall Champion"
+    = f.select :combined_competition_id, CombinedCompetition.all.map{|cc| [cc, cc.id]}, include_blank: true
+  .field
     = f.label :age_group_type_id
-    = f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, :include_blank => true
+    = f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, include_blank: true
 
 
   %h2 Settings for printing the awards

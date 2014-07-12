@@ -15,6 +15,7 @@ class CombinedCompetition < ActiveRecord::Base
   validates :name, {presence: true, uniqueness: true}
 
   has_many :combined_competition_entries, dependent: :destroy
+  has_one :competition
 
   def to_s
     name

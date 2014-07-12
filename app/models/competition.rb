@@ -23,6 +23,7 @@
 #  published_date                :datetime
 #  num_members_per_competitor    :string(255)
 #  automatic_competitor_creation :boolean          default(FALSE)
+#  combined_competition_id       :integer
 #
 # Indexes
 #
@@ -48,6 +49,7 @@ class Competition < ActiveRecord::Base
   has_many :combined_competition_entries, dependent: :destroy
   has_many :published_age_group_entries, dependent: :destroy
   has_many :heat_times, dependent: :destroy
+  belongs_to :combined_competition
 
   accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
   accepts_nested_attributes_for :competitors
@@ -63,8 +65,7 @@ class Competition < ActiveRecord::Base
   validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true }
 
   def self.scoring_classes
-
-    ["Freestyle", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time"]
+    ["Freestyle", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
   end
 
   validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }
@@ -81,6 +82,8 @@ class Competition < ActiveRecord::Base
   validate :published_only_when_locked
   validate :awarded_only_when_published
   validate :award_label_title_checks
+  validate :no_competition_sources_when_overall_calculation
+  validates :combined_competition, presence: true, if: Proc.new{ |f| f.scoring_class == "Overall Champion" }
 
   scope :event_order, -> { includes(:event).order("events.name") }
 
@@ -92,6 +95,12 @@ class Competition < ActiveRecord::Base
             :example_result, :imports_times, :results_path, :scoring_path, to: :scoring_helper
 
   mount_uploader :published_results_file, PdfUploader
+
+  def no_competition_sources_when_overall_calculation
+    if scoring_class == "Overall Champion" && competition_sources.size > 0
+      errors[:competiton_sources_attributes] << "unable to specify competition sources when using Overall Champion"
+    end
+  end
 
   def automatic_competitor_creation_only_with_one
     if num_members_per_competitor != "One" && automatic_competitor_creation
