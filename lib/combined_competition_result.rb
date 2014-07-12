@@ -78,9 +78,14 @@ class CombinedCompetitionResult
         best_time: entry.best_time_in_thousands(competitor.gender),
         time: competitor.best_time_in_thousands,
         base_points: entry.base_points,
-        bonus_percentage: entry.bonus_for_place(competitor.overall_place))
+        bonus_percentage: entry.bonus_for_place(get_place(competitor)))
     else
-      entry.send("points_#{competitor.overall_place}")
+      place = get_place(competitor)
+      if place > 0 && place <= 10
+        entry.send("points_#{get_place(competitor)}")
+      else
+        0
+      end
     end
   end
 
@@ -90,6 +95,15 @@ class CombinedCompetitionResult
     points + (points * bonus_percentage / 100.0)
   end
 
+  def get_place(competitor)
+    return nil if competitor.nil?
+    if combined_competition.use_age_group_places
+      competitor.place
+    else
+      competitor.overall_place
+    end
+  end
+
   def create_registrant_entry(bib_number, gender)
     competitor_results = {}
     combined_competition.combined_competition_entries.each do |entry|
@@ -97,7 +111,7 @@ class CombinedCompetitionResult
       if matching_comp
         points = calc_points(entry, matching_comp)
         competitor_results[entry.abbreviation] = {
-          :entry_place => matching_comp.overall_place,
+          :entry_place => get_place(matching_comp),
           :entry_points => points
         }
       end
@@ -152,15 +166,17 @@ class CombinedCompetitionResult
 
 
   def num_firsts(gender, bib_number)
-    @registrant_bib_numbers[gender][bib_number].count{ |comp| comp.overall_place == 1}
+    registrants(gender)[bib_number].count{ |comp| get_place(comp) == 1}
   end
 
   def tie_breaker_competition
-    @tie_breaker_competition ||= combined_competition.combined_competition_entries.find_by(tie_breaker: true)
+    @tie_breaker_competition ||= combined_competition.combined_competition_entries.find_by(tie_breaker: true).try(:competition)
   end
 
   def place_of_tie_breaker(gender, bib_number)
-    @registrant_bib_numbers[gender][bib_number].select{ |comp| comp.competition == tie_breaker_competition }.first.try(:overall_place)
+    @place_of_tie_breaker ||= {}
+    # if someone didn't place in  the tie breaker, give them a high place so that they are sorted out properly
+    @place_of_tie_breaker[bib_number] ||= get_place(registrants(gender)[bib_number].select{ |comp| comp.competition == tie_breaker_competition }.first) || 999
   end
 
   # returns

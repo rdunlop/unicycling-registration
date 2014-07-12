@@ -42,11 +42,7 @@ class CombinedCompetitionEntry < ActiveRecord::Base
 
   def competitors(gender)
     @competitors ||= {}
-    if is_percentage_based?
-      @competitors[gender] ||= competition.results.overall.where("place > 0").map(&:competitor).select{|comp| comp.gender == gender} #competitors.includes(:results).select{ |comp| comp.has_result? && comp.gender == gender }
-    else
-      @competitors[gender] ||= competition.competitors.includes(:results).select{ |comp| comp.is_top?(gender) }
-    end
+    @competitors[gender] ||= competition.results.overall.where("place > 0").map(&:competitor).select{|comp| comp.gender == gender}
   end
 
   def male_competitors

@@ -1,14 +1,11 @@
 Last Re-Arranged June 20th, 2014.
 
+- Display the AgeGroup OverallChampion calculations separately from the Overall
+- Don't display people who have 0 points.
+- Don't restrict the competitor list for Track Overall based on "top places" because we need them all for age-group placings.
+- Add position to the combinedo_competitoin_entries, so that they stop changing positions.
 
-- Should be able to "set places" which will re-create the competitors and store the "Age Group" and "Overall" places
-- Competition will be configured to have a "Combined Competition" Scoring class.
-- Specifying a "Combined Competition" scoring type prevents any "competition sources" and requires a "combined competition" association.
 - Display Scores should show the Combinedcompetition scores page (more details than just place)
-- CombinedCompetition #show page should show by age group, if it is configured to be by age group.
-- "Has one" combined competition.
-
-
 - Add ability to get list of e-mail addresses of people who belong to a set of competitions (or event sign_ups)
 
 
