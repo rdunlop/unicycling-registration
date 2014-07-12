@@ -134,8 +134,8 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
-    fancybox-rails (0.2.1)
-      railties (>= 3.1.0)
+    fancybox2-rails (0.2.8)
+      railties (>= 3.1.0, < 5.0)
     fog (1.22.1)
       fog-brightbox
       fog-core (~> 1.22)
@@ -371,7 +371,7 @@ DEPENDENCIES
   devise
   exception_notification
   factory_girl_rails
-  fancybox-rails
+  fancybox2-rails (~> 0.2.8)
   fog
   font-kit-rails!
   foreman
