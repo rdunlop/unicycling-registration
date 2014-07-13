@@ -105,11 +105,7 @@ class Event < ActiveRecord::Base
   end
 
   def competitor_registrants
-    competitors.map {|comp| comp.member.map{|mem| mem.registrant}}
-  end
-
-  def all_registrants
-    signed_up_registrants.intersect competitor_registrants
+    competitors.map {|comp| comp.members.map{|mem| mem.registrant}}
   end
 
   def num_choices

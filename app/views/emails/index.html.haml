@@ -24,6 +24,9 @@
   = f.label :competition_id, "Users who are assigned to a competition"
   = f.select :competition_id, Competition.all.map{ |comp| [comp, comp.id] }, include_blank: true
   %br
+  = f.label :category_id, "Users who are assigned to any competition in this category"
+  = f.select :category_id, Category.all.map{ |category| [category, category.id] }, include_blank: true
+  %br
 
   = f.submit "Get Email List", :class => "focus_button"
 %hr

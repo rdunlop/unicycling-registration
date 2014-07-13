@@ -9,6 +9,7 @@ class Email
   attribute :unpaid_reg_accounts, Boolean
   attribute :no_reg_accounts, Boolean
   attribute :competition_id, Integer
+  attribute :category_id, Integer
 
   attr_accessor :subject, :body
   validates_presence_of :subject, :body
@@ -23,6 +24,10 @@ class Email
     Competition.find(competition_id) if competition_id.present?
   end
 
+  def category
+    Category.find(category_id) if category_id.present?
+  end
+
   def filter_description
     if confirmed_accounts
       "Confirmed User Accounts"
@@ -32,8 +37,10 @@ class Email
       "User Accounts with ANY Registrants who have NOT Paid Reg Fees"
     elsif no_reg_accounts
       "User Accounts with No Registrants"
-    elsif competition_id
+    elsif competition_id.present?
       "Emails of users/registrants associated with #{competition}"
+    elsif category_id.present?
+      "Emails of users/registrants associated with any competition in #{category}"
     else
       "Unknown"
     end
@@ -50,6 +57,8 @@ class Email
       (User.confirmed - User.all_with_registrants).map{|user| user.email }
     elsif competition_id.present?
       competition.registrants.map(&:user).map(&:email).compact.uniq
+    elsif category_id.present?
+      category.events.map(&:competitor_registrants).flatten.map(&:user).map(&:email).compact.uniq
     else
       []
     end
@@ -58,6 +67,8 @@ class Email
   def filtered_registrant_emails
     if competition_id.present?
       competition.registrants.map(&:contact_detail).map(&:email).compact.uniq
+    elsif category_id.present?
+      category.events.map(&:competitor_registrants).flatten.map(&:contact_detail).map(&:email).compact.uniq
     else
       []
     end
