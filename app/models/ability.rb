@@ -191,7 +191,7 @@ class Ability
       can :sign_ups, EventCategory
       can :manage_all, Registrant
       can [:read, :show_all], Registrant
-      can [:email, :send_email], Registrant
+      can [:read, :create, :list], Email
       can [:directors], :permission
     end
 
@@ -272,7 +272,7 @@ class Ability
       can :reg_fee, Registrant
       can :update_reg_fee, Registrant
       can :manage_all, Registrant
-      can [:email, :send_email], Registrant
+      can [:read, :create, :list], Email
       can :bag_labels, Registrant
       can :undelete, Registrant
       can :crud, Registrant

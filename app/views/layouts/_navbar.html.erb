@@ -49,7 +49,7 @@
       m.headings << heading
       heading.entries << Menu::MenuEntry.new(:title => 'Registrants (edit/print)', :url => registrants_path, :permitted => can?(:manage_all, Registrant))
       heading.entries << Menu::MenuEntry.new(:title => 'Registrants (bag labels)', :url => bag_labels_registrants_path(:format => :pdf), :permitted => can?(:bag_labels, Registrant))
-      heading.entries << Menu::MenuEntry.new(:title => 'Registrants (email)', :url => email_registrants_path, :permitted => can?(:email, Registrant))
+      heading.entries << Menu::MenuEntry.new(:title => 'Registrants (email)', :url => emails_path, :permitted => can?(:read, Email))
       heading.entries << Menu::MenuEntry.new(:title => 'Registrant Groups', :url => registrant_groups_path, :permitted => can?(:manage, Registrant))
       heading.entries << Menu::MenuEntry.new(:title => 'Manage Music', :url => list_songs_path, :permitted => can?(:list, Song))
       heading.entries << Menu::MenuEntry.new(:title => 'Payments', :url => summary_payments_path, :permitted => can?(:summary, Payment))

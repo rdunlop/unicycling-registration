@@ -143,13 +143,17 @@ Workspace::Application.routes.draw do
     # backwards-compatible URL
     get '/registrants/:id/items', to: redirect('/registrants/%{id}/registrant_expense_items')
 
+    resources :emails, only: [:index, :create] do
+      collection do
+        get :list
+      end
+    end
+
     resources :registrants do
       #admin
       collection do
         get :bag_labels
         get :show_all
-        get :email
-        post :send_email
       end
       member do
         post :undelete

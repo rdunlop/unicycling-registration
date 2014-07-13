@@ -14,7 +14,7 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
  %>
 
 <%= render :partial => "/shared/error_messages", :object => @email_form %>
-<%= form_for @email_form, url: send_email_registrants_path do |f| %>
+<%= form_for @email_form, url: emails_path do |f| %>
   <%= f.label :confirmed_accounts, "All Confirmed User Accounts (#{all_accounts.count}) " %>
   <%= f.check_box :confirmed_accounts %><br />
   <br />
@@ -45,14 +45,14 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
   <tbody>
     <tr>
       <td>
-        <% 
+        <%
           all_accounts.each do |email| %>
             <%= email %><br />
         <% end %>
       </td>
 
       <td>
-        <% 
+        <%
           unpaid_reg.each do |email| %>
             <%= email %><br />
         <% end %>
@@ -74,4 +74,4 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
     </tr>
   </tbody>
 </table>
- 
+

@@ -212,10 +212,6 @@ class RegistrantsController < ApplicationController
     add_breadcrumb "Set Reg Fee"
   end
 
-  def set_email_breadcrumb
-    add_breadcrumb "Send Emails"
-  end
-
   def load_categories
     if @registrant.competitor
       @categories = Category.includes(:translations, :events => :event_choices)
@@ -309,25 +305,6 @@ class RegistrantsController < ApplicationController
     respond_to do |format|
       format.html # show_all.html.erb
       format.pdf { render :pdf => "show_all", :formats => [:html], :orientation => 'Landscape', :layout => "pdf.html" }
-    end
-  end
-
-  def email
-    set_email_breadcrumb
-    @email_form = Email.new
-  end
-
-  def send_email
-    mass_emailer = MassEmailer.new(params)
-
-    respond_to do |format|
-      if mass_emailer.send_emails
-        format.html { redirect_to email_registrants_path, notice: 'Email sent successfully.' }
-      else
-        set_email_breadcrumb
-        @email_form = mass_emailer.email_form
-        render "email"
-      end
     end
   end
 
