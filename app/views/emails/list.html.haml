@@ -1,0 +1,55 @@
+%h1 Email multiple people
+
+Scroll down to see the e-mail form
+
+
+%h3= @email_form.filter_description
+
+%table.sortable
+  %thead
+    %tr
+      %th Filtered User E-mail addresses (#{@email_form.filtered_user_emails.count})
+      %th Filtered Registration E-mail Addresses (#{@email_form.filtered_registrant_emails.count})
+  %tbody
+    %tr
+      %td
+        - @email_form.filtered_user_emails.each do |email|
+          = email
+          %br
+      %td
+        - @email_form.filtered_registrant_emails.each do |email|
+          = email
+          %br
+
+%hr
+
+Note: It may take many seconds to send the e-mail to everyone (if it's a large number of e-mail addresses)
+
+%h4 E-mail
+= render :partial => "/shared/error_messages", :object => @email_form
+= form_for @email_form, url: emails_path do |f|
+  = f.label :confirmed_accounts, "All Confirmed User Accounts"
+  = f.check_box :confirmed_accounts
+  %br
+  %br
+  = f.label :unpaid_reg_accounts, "Users With Not Yet Paid Registration Fees"
+  = f.check_box :unpaid_reg_accounts
+  %br
+  = f.label :paid_reg_accounts, "Users With ALL Paid Registration Fees"
+  = f.check_box :paid_reg_accounts
+  %br
+  = f.label :no_reg_accounts, "Users without any registrants"
+  = f.check_box :no_reg_accounts
+  %br
+  = f.label :competition_id, "Users who are assigned to a competition"
+  = f.select :competition_id, Competition.all.map{ |comp| [comp, comp.id] }, include_blank: true
+  %br
+
+  = f.label :subject
+  = f.text_field :subject
+  %br
+  = f.label :body
+  = f.text_area :body, {:cols => 100, :rows => 6 }
+  %br
+  = f.submit "Send Email", :class => "focus_button"
+%hr

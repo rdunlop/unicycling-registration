@@ -1,5 +1,6 @@
 class Email
   include Virtus.model
+  include ActiveModel::AttributeMethods
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
@@ -7,6 +8,8 @@ class Email
   attribute :paid_reg_accounts, Boolean
   attribute :unpaid_reg_accounts, Boolean
   attribute :no_reg_accounts, Boolean
+  attribute :competition_id, Integer
+
   attr_accessor :subject, :body
   validates_presence_of :subject, :body
 
@@ -16,38 +19,48 @@ class Email
     end
   end
 
-  def self.addresses_for_confirmed_accounts
-    User.confirmed.map{|user| user.email }
+  def competition
+    Competition.find(competition_id) if competition_id.present?
   end
 
-  def self.addresses_for_paid_reg_accounts
-    User.paid_reg_fees.map{|user| user.email }
+  def filter_description
+    if confirmed_accounts
+      "Confirmed User Accounts"
+    elsif paid_reg_accounts
+      "User Accounts with ANY Registrants who have Paid Reg Fees"
+    elsif unpaid_reg_accounts
+      "User Accounts with ANY Registrants who have NOT Paid Reg Fees"
+    elsif no_reg_accounts
+      "User Accounts with No Registrants"
+    elsif competition_id
+      "Emails of users/registrants associated with #{competition}"
+    else
+      "Unknown"
+    end
   end
 
-  def self.addresses_for_unpaid_reg_accounts
-    User.unpaid_reg_fees.map{|user| user.email }
+  def filtered_user_emails
+    if confirmed_accounts
+      User.confirmed.map{|user| user.email }
+    elsif paid_reg_accounts
+      User.paid_reg_fees.map{|user| user.email }
+    elsif unpaid_reg_accounts
+      User.unpaid_reg_fees.map{|user| user.email }
+    elsif no_reg_accounts
+      (User.confirmed - User.all_with_registrants).map{|user| user.email }
+    elsif competition_id.present?
+      competition.registrants.map(&:user).map(&:email).compact.uniq
+    else
+      []
+    end
   end
 
-  def self.addresses_for_no_reg_accounts
-    (User.confirmed - User.all_with_registrants).map{|user| user.email }
-  end
-
-  def email_addresses
-    res = []
-    if self.confirmed_accounts
-      res += Email.addresses_for_confirmed_accounts
+  def filtered_registrant_emails
+    if competition_id.present?
+      competition.registrants.map(&:contact_detail).map(&:email).compact.uniq
+    else
+      []
     end
-    if self.paid_reg_accounts
-      res += Email.addresses_for_paid_reg_accounts
-    end
-    if self.unpaid_reg_accounts
-      res += Email.addresses_for_unpaid_reg_accounts
-    end
-    if self.no_reg_accounts
-      res += Email.addresses_for_no_reg_accounts
-    end
-
-    res
   end
 
   def persisted?

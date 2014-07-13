@@ -10,6 +10,7 @@ class EmailsController < ApplicationController
   def list
     authorize! :list, Email
     set_email_breadcrumb
+    @email_form = Email.new(params[:email])
   end
 
   def create
@@ -22,7 +23,7 @@ class EmailsController < ApplicationController
       else
         set_email_breadcrumb
         @email_form = mass_emailer.email_form
-        render "index"
+        format.html { render "list" }
       end
     end
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EmailsController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:admin_user)
     sign_in @user
   end
 
@@ -14,7 +14,7 @@ describe EmailsController do
       num_deliveries = ActionMailer::Base.deliveries.size
       num_deliveries.should == 1
       message = ActionMailer::Base.deliveries.first
-      message.bcc.count.should == 3
+      message.bcc.count.should == 2
     end
 
     it "breaks apart large requests into multiple smaller requests" do
@@ -30,7 +30,7 @@ describe EmailsController do
       first_message.bcc.count.should == 30
 
       second_message = ActionMailer::Base.deliveries.second
-      second_message.bcc.count.should == 22
+      second_message.bcc.count.should == 21
     end
   end
 end
