@@ -38,7 +38,7 @@ class CombinedCompetitionResult
 
   def competitor_score(competitor)
     calc_res = results(competitor.gender).find{ |res| res[:bib_number] == competitor.lowest_member_bib_number }
-    calc_res[:total_points]
+    calc_res.try(:[], :total_points) || 0
   end
 
   # bib_number of registrant
