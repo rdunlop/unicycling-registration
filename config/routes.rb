@@ -308,6 +308,8 @@ Workspace::Application.routes.draw do
           delete :destroy_all
           get :enter_sign_in
           put :update_competitors
+          get :display_candidates
+          post :create_from_candidates
         end
       end
 

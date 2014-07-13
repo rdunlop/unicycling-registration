@@ -1,7 +1,7 @@
 require 'csv'
 class CompetitorsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_competition, :only => [:index, :enter_sign_in, :update_competitors, :new, :create, :add, :add_all, :destroy_all, :create_from_sign_ups]
+  load_and_authorize_resource :competition, except: [:edit, :update, :destroy]
   before_filter :load_new_competitor, :only => [:create]
   load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy]
   load_and_authorize_resource :only => [:edit, :update, :destroy]
@@ -23,6 +23,30 @@ class CompetitorsController < ApplicationController
     add_breadcrumb "Manage Competitors"
     @registrants = @competition.signed_up_registrants
     @competitors = @competition.competitors
+  end
+
+  # show the competitors, their overall places, and their times
+  def display_candidates
+    @competitors = @competition.signed_up_competitors
+  end
+
+  # process a form submission which includes HEAT&Lane for each candidate, creating the competitor as well as the lane assignment
+  def create_from_candidates
+    heat = params[:heat].to_i
+    competitors = params[:competitors]
+    begin
+      LaneAssignment.transaction do
+        competitors.each do |_, competitor|
+          reg = Registrant.find_by(bib_number: competitor[:bib_number])
+          lane_assignment = LaneAssignment.new(registrant_id: reg.id, lane: competitor[:lane].to_i, heat: heat, competition: @competition)
+          lane_assignment.save!
+        end
+      end
+      flash[:notice] = "Created Lane Assignments & Competitors"
+    rescue Exception => ex
+      flash[:error] = "Error creating lane assignments/competitors #{ex}"
+    end
+    redirect_to competition_competitors_path(@competition)
   end
 
   def enter_sign_in

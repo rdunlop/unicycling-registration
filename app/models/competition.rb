@@ -241,6 +241,14 @@ class Competition < ActiveRecord::Base
     res
   end
 
+  def signed_up_competitors
+    res = []
+    competition_sources.each do |cs|
+      res += cs.signed_up_competitors
+    end
+    res
+  end
+
   def sorted_competitors
     competitors.sort{|a,b| a.bib_number.to_i <=> b.bib_number.to_i }
   end

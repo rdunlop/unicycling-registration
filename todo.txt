@@ -1,9 +1,9 @@
 Last Re-Arranged June 20th, 2014.
 
-- Combine the Expert Male and Expert Female
 - Add ability to get list of e-mail addresses of people who belong to a set of competitions (or event sign_ups)
  - improve the e-mail system to be able to "choose" the list you want displayed, and then display it...and e-mail to it (optionally).
--
+- E-mail to the track timing guys.
+- Allow importing system to automatically change/choose the competition (based on lane-assignments)
 - Display Scores should show the Combinedcompetition scores page (more details than just place)
 
 

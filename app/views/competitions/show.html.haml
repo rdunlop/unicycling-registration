@@ -21,6 +21,7 @@ Results, judges, and scoring settings.
       %td.js--shouldMatch= @competition.signed_up_registrants.count
       %td.js--shouldMatch= @competition.num_assigned_registrants
       %td= link_to 'Manage Competitors', competition_competitors_path(@competition), class: 'action_button'
+      %td= link_to "Display Candidates", display_candidates_competition_competitors_path(@competition)
 
   %hr
 

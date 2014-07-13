@@ -63,13 +63,20 @@ class CompetitionSource < ActiveRecord::Base
     end
 
     if competition.present?
-      competitors = competition.competitors
-      competitors = competitors.select {|comp| comp.overall_place.to_i > 0 && comp.overall_place.to_i <= max_place } unless max_place.nil?
-
-      registrants = competitors.map{|comp| comp.registrants }.flatten
+      registrants = signed_up_competitors.map{|comp| comp.registrants }.flatten
     end
 
     registrants.select{|reg| registrant_passes_filters(reg) }
+  end
+
+  def signed_up_competitors
+    if competition.present?
+      competitors = competition.competitors
+      competitors = competitors.select {|comp| comp.overall_place.to_i > 0 && comp.overall_place.to_i <= max_place } unless max_place.nil?
+      competitors
+    else
+      []
+    end
   end
 
   def registrant_passes_filters(registrant)

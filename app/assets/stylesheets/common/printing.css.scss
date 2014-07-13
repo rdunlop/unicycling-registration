@@ -1,3 +1,9 @@
+@media print {
+  .non_printable {
+    display: none;
+  }
+}
+
 table.recording_form {
   border-collapse: collapse;
   width: 100%;
