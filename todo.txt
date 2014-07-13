@@ -1,7 +1,5 @@
 Last Re-Arranged June 20th, 2014.
 
-- Don't display people who have 0 points.
-- Add position to the combinedo_competitoin_entries, so that they stop changing positions.
 - Combine the Expert Male and Expert Female
 - Add ability to get list of e-mail addresses of people who belong to a set of competitions (or event sign_ups)
  - improve the e-mail system to be able to "choose" the list you want displayed, and then display it...and e-mail to it (optionally).
