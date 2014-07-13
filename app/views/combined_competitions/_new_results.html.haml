@@ -16,11 +16,12 @@
         %th
       %th Total Points
   %tbody
+    - results_competition = @combined_competition.competition
+    - results_competitors = results_competition.competitors.includes(:age_group_results, :overall_results) if results_competition
     - results.results(gender).each do |result|
       %tr
-        - results_competition = @combined_competition.competition
         - if results_competition
-          - comp = results_competition.competitors.find{|comp| comp.lowest_member_bib_number == result[:bib_number] }
+          - comp = results_competitors.find{|comp| comp.lowest_member_bib_number == result[:bib_number] }
         - if @combined_competition.use_age_group_places
           %td= comp.try(:age_group_entry_description)
           %td= comp.try(:place)

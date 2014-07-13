@@ -106,18 +106,17 @@ describe CompetitorsController do
             FactoryGirl.create(:registrant, :bib_number => 1)
             FactoryGirl.create(:registrant, :bib_number => 2)
             FactoryGirl.create(:registrant, :bib_number => 3, :competitor => false)
-            @attributes = { }
         end
         it "should create a competitor for every registrant" do
             expect {
-              post :add_all, {:competitor => @attributes, :competition_id => @ec.id}
+              post :add_all, {:competition_id => @ec.id}
             }.to change(Competitor, :count).by(2)
         end
         it "should not create any new competitors if we run it twice" do
-            post :add_all, {:competitor => @attributes, :competition_id => @ec.id}
+            post :add_all, {:competition_id => @ec.id}
 
             expect {
-              post :add_all, {:competitor => @attributes, :competition_id => @ec.id}
+              post :add_all, {:competition_id => @ec.id}
             }.to change(Competitor, :count).by(0)
         end
 
@@ -129,7 +128,7 @@ describe CompetitorsController do
             FactoryGirl.create(:registrant, :bib_number => 6)
             FactoryGirl.create(:registrant, :bib_number => 5)
             expect {
-              post :add_all, {:competitor => @attributes, :competition_id => @ec.id}
+              post :add_all, {:competition_id => @ec.id}
             }.to change(Competitor, :count).by(7)
 
             @ec.competitors.each_with_index do |c, i|

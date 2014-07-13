@@ -35,7 +35,11 @@ class Competitor < ActiveRecord::Base
   has_many :distance_attempts, -> { order "distance DESC, id DESC" }, :dependent => :destroy
   has_many :time_results, :dependent => :destroy
   has_many :external_results, :dependent => :destroy
-  has_many :results, dependent: :destroy
+  has_many :results, dependent: :destroy, inverse_of: :competitor
+
+  # these are here to allow eager loading/performance optimization
+  has_many :age_group_results, -> { where "results.result_type = 'AgeGroup'" }, class_name: "Result"
+  has_many :overall_results, -> { where "results.result_type = 'Overall'" }, class_name: "Result"
 
   accepts_nested_attributes_for :members, allow_destroy: true
 
@@ -103,12 +107,12 @@ class Competitor < ActiveRecord::Base
 
   def place
     return 0 if disqualified
-    results.age_group.first.try(:place)
+    age_group_results.first.try(:place)
   end
 
   def overall_place
     return 0 if disqualified
-    results.overall.first.try(:place)
+    overall_results.first.try(:place)
   end
 
   def sorting_place

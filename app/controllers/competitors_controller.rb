@@ -97,7 +97,6 @@ class CompetitorsController < ApplicationController
 
   def add_all
     @competitor = @competition.competitors.new # so that the form renders ok
-
     respond_to do |format|
       begin
         msg = @competition.create_competitors_from_registrants(Registrant.where(:competitor => true))

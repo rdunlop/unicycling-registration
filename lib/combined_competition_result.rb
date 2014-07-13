@@ -221,8 +221,8 @@ class CombinedCompetitionResult
     registrant_bib_numbers = {}
 
     competitors.each do |comp|
-      registrant_bib_numbers[comp.registrants.first.bib_number] ||= []
-      registrant_bib_numbers[comp.registrants.first.bib_number] << comp
+      registrant_bib_numbers[comp.lowest_member_bib_number] ||= []
+      registrant_bib_numbers[comp.lowest_member_bib_number] << comp
     end
 
     registrant_bib_numbers

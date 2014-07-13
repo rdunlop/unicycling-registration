@@ -46,7 +46,7 @@ class Member < ActiveRecord::Base
                 return
             end
             competition = competitor.competition
-            competition.registrants.each do |reg|
+            competition.reload.registrants.each do |reg|
                 if reg == registrant
                     errors[:base] = "Cannot have the same registrant (#{registrant}) in the same competition twice"
                 end
