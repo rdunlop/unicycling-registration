@@ -1,12 +1,13 @@
 Last Re-Arranged June 20th, 2014.
 
-- Display the AgeGroup OverallChampion calculations separately from the Overall
 - Don't display people who have 0 points.
-- Don't restrict the competitor list for Track Overall based on "top places" because we need them all for age-group placings.
 - Add position to the combinedo_competitoin_entries, so that they stop changing positions.
-
-- Display Scores should show the Combinedcompetition scores page (more details than just place)
+- Combine the Expert Male and Expert Female
 - Add ability to get list of e-mail addresses of people who belong to a set of competitions (or event sign_ups)
+ - improve the e-mail system to be able to "choose" the list you want displayed, and then display it...and e-mail to it (optionally).
+-
+- Display Scores should show the Combinedcompetition scores page (more details than just place)
+
 
 
 - If a competitor is marked as "not qualiified" AFTEr having been scored for freestyle, they should NOT appear in the ranked results. (see Pairs Freestyle NAUCC)

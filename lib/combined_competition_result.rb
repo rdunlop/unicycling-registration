@@ -139,6 +139,7 @@ class CombinedCompetitionResult
     @scores = {}
     registrant_bib_numbers(gender).each do |bib_number|
       results[bib_number] = create_registrant_entry(bib_number, gender)
+      next if results[bib_number][:total_points] == 0
       store_score(results[bib_number][:total_points], bib_number)
     end
 
