@@ -1,5 +1,7 @@
 Last Re-Arranged June 20th, 2014.
 
+- Disable the "auto-matching to another competition" feature. Make this ONLY available for 10k.
+
 - Add ability to get list of e-mail addresses of people who belong to a set of competitions (or event sign_ups)
  - improve the e-mail system to be able to "choose" the list you want displayed, and then display it...and e-mail to it (optionally).
 - E-mail to the track timing guys.
@@ -7,6 +9,8 @@ Last Re-Arranged June 20th, 2014.
 - Display Scores should show the Combinedcompetition scores page (more details than just place)
 
 
+
+- Patricia Feature: Competitior Management Page, there is still a red warning if their partner isn't signed up for that competition which makes it unclear whether the person isn't signed up at all or if they are just in another age group. Robin: Make it clearer when a registrant is in a different filter vs when they are in this pairs-age-group.
 
 - If a competitor is marked as "not qualiified" AFTEr having been scored for freestyle, they should NOT appear in the ranked results. (see Pairs Freestyle NAUCC)
 

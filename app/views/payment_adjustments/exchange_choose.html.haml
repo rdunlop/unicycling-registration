@@ -1,0 +1,36 @@
+%h1 Payment Adjstments
+
+
+%h1 Paid Details
+%table.sortable
+  %thead
+    %tr
+      %th Registrant
+      %th Item
+      %th Paid Amount
+      %th Details (only required for some items)
+  %tbody
+    - @registrants.map(&:paid_details).flatten.each do |payment_detail|
+      %tr
+        %td= payment_detail.registrant
+        %td= payment_detail.expense_item
+        %td= payment_detail.amount
+        %td= payment_detail.details
+%hr
+
+%h1 Select the items to exchange:
+
+= form_tag exchange_create_payment_adjustments_path do
+  = label_tag :note
+  = text_field_tag :note
+  %br
+  = label_tag :registrant_id
+  = select_tag :registrant_id, options_from_collection_for_select(@registrants, "id", "to_s")
+  %br
+  = label_tag :old_item_id
+  = select_tag :old_item_id, options_from_collection_for_select(ExpenseItem.order(:name), "id", "to_s")
+  = label_tag :new_item_id
+  = select_tag :new_item_id, options_from_collection_for_select(ExpenseItem.order(:name), "id", "to_s")
+  = submit_tag "Create Exchange", :class => "payment_link registration_button"
+%br
+  = link_to 'Back', new_payment_adjustment_path

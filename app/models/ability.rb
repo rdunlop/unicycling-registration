@@ -261,7 +261,7 @@ class Ability
       can [:new, :create], Payment
     end
     if user.has_role?(:payment_admin) || user.has_role?(:admin)
-      can [:new, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
+      can [:new, :exchange_choose, :exchange_create, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
       can [:read], Registrant
     end
   end

@@ -23,4 +23,17 @@ class Refund < ActiveRecord::Base
 
   belongs_to :user
   has_many :refund_details, :dependent => :destroy
+
+  def self.create_from_details(options)
+    pd = options[:registrant].paid_details.select{|payment_detail| payment_detail.expense_item == options[:item] }.first
+    refund = Refund.new(
+      refund_date: DateTime.now,
+      note: options[:note],
+      percentage: 100
+      )
+    refund.refund_details.build(
+      payment_detail: pd
+      )
+    refund
+  end
 end

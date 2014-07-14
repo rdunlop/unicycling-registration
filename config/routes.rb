@@ -104,6 +104,8 @@ Workspace::Application.routes.draw do
           post :onsite_pay_create
           post :refund_choose
           post :refund_create
+          post :exchange_choose
+          post :exchange_create
         end
       end
 

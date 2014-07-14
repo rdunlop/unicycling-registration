@@ -44,7 +44,7 @@ class CompetitorsController < ApplicationController
       end
       flash[:notice] = "Created Lane Assignments & Competitors"
     rescue Exception => ex
-      flash[:error] = "Error creating lane assignments/competitors #{ex}"
+      flash[:alert] = "Error creating lane assignments/competitors #{ex}"
     end
     redirect_to competition_competitors_path(@competition)
   end
