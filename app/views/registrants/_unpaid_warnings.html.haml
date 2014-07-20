@@ -2,6 +2,6 @@
   - if @registrant.amount_owing > 0
     .unpaid_warning
       UNPAID?
-  - unless @config.usa && @registrant.usa_membership_paid?
+  - if @config.usa && !@registrant.usa_membership_paid?
     .unpaid_warning
       USA#

@@ -236,9 +236,7 @@ class Ability
     #  user.has_role? :admin
     #end
     unless config.music_submission_ended?
-      can [:crud, :file_complete, :add_file], Song do |song|
-        user.registrants.include?(song.registrant)
-      end
+      can [:crud, :file_complete, :add_file, :my_songs, :create_guest_song], Song, :user_id => user.id
     end
 
     # Sharing Registrants across Users

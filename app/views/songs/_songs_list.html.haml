@@ -10,17 +10,22 @@
 %table.sortable
   %thead
     %tr
+      %th Reg ID
+      %th Reg Name
+      %th Guest?
       %th Event
       %th Description
       %th File name
       %th Last Updated
       %th
       %th
-      %th
   %tbody
     - @songs.each do |song|
       - next unless song.persisted?
       %tr
+        %td= song.registrant.bib_number
+        %td= song.registrant
+        %td= song.uploaded_by_guest? ? "Yes" : ""
         %td= song.event
         %td= song.description
         %td= song.human_name
@@ -28,7 +33,6 @@
         %td
           - if song.song_file_name.present?
             = link_to 'Download', song.song_file_name_url, target: '_blank'
-        %td
-          - unless song.song_file_name.present?
+          - else
             = link_to 'Add Song', add_file_song_path(song)
         %td= link_to 'Remove', song, method: :delete, data: { confirm: 'Are you sure?' }

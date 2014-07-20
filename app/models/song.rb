@@ -9,6 +9,7 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  event_id       :integer
+#  user_id        :integer
 #
 # Indexes
 #
@@ -16,17 +17,22 @@
 #
 
 class Song < ActiveRecord::Base
-    mount_uploader :song_file_name, MusicUploader
+  mount_uploader :song_file_name, MusicUploader
 
-    belongs_to :registrant, touch: true
-    belongs_to :event
+  belongs_to :registrant, touch: true
+  belongs_to :event
+  belongs_to :user
 
-    validates :registrant_id, :event_id, :description, presence: true
+  validates :registrant_id, :user_id, :event_id, :description, presence: true
 
-    validates :event_id, uniqueness: { scope: [:registrant_id], message: "cannot have multiple songs associated. Remove and re-add." }
+  validates :event_id, uniqueness: { scope: [:user_id, :registrant_id], message: "cannot have multiple songs associated. Remove and re-add." }
 
-    def human_name
-      return nil unless song_file_name.present?
-      File.basename(song_file_name.path)
-    end
+  def human_name
+    return nil unless song_file_name.present?
+    File.basename(song_file_name.path)
+  end
+
+  def uploaded_by_guest?
+    user != registrant.user
+  end
 end

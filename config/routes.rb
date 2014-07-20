@@ -274,6 +274,12 @@ Workspace::Application.routes.draw do
           delete :destroy_all
         end
       end
+      resources :songs, :only => [] do
+        collection do
+          get :my_songs
+          post :create_guest_song
+        end
+      end
     end
     resources :additional_registrant_accesses, :only => [] do
       member do

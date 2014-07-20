@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
 
   has_many :import_results
   has_many :award_labels
+  has_many :songs
 
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }

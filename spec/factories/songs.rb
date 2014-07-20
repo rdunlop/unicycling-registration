@@ -19,5 +19,6 @@ FactoryGirl.define do
     song_file_name "MyString"
     event
     registrant
+    user
   end
 end

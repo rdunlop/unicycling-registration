@@ -1,0 +1,18 @@
+%h1 Listing #{@registrant}'s songs
+= render "songs_list"
+%br
+
+%h1 New song (Step 1)
+%fieldset.wizard
+  %legend Step 1
+  = render 'form'
+
+%fieldset.wizard.wizard_other_step
+  %legend Step 2
+  Upload Music File
+
+%br
+
+= link_to "Back", registrant_path(@registrant)
+%br
+= link_to "Add songs for other registrants", my_songs_user_songs_path(current_user)

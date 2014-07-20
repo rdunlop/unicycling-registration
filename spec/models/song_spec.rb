@@ -34,12 +34,12 @@ describe Song do
     let!(:song1) { FactoryGirl.create(:song, :registrant => registrant)}
 
     it "cannot create a second song for the same event for the same registrant"  do
-      song2 = FactoryGirl.build(:song, :registrant => registrant, :event => song1.event)
+      song2 = FactoryGirl.build(:song, registrant: registrant, event: song1.event, user: song1.user)
       song2.should be_invalid
     end
 
     it "can create a second song for the same event, different registrant" do
-      song1a = FactoryGirl.build(:song, :event => song1.event)
+      song1a = FactoryGirl.build(:song, event: song1.event, user: song1.user)
       song1a.should be_valid
     end
   end

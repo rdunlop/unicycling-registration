@@ -5,6 +5,7 @@
     %tr
       %th Reg ID
       %th Reg Name
+      %th Guest?
       %th Event
       %th Description
       %th File name
@@ -15,6 +16,7 @@
       %tr
         %td= song.registrant.bib_number
         %td= song.registrant
+        %td.js--highlightIfNotBlank= song.uploaded_by_guest? ? "Yes (#{song.user})" : ""
         %td= song.event
         %td= song.description
         %td= song.human_name

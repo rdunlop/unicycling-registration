@@ -49,8 +49,9 @@ describe "Ability" do
       it { should be_able_to(:index, Song) }
 
       describe "with songs" do
-        let(:song1) { FactoryGirl.build_stubbed(:song, :registrant => registration) }
-        let(:song2) { FactoryGirl.build_stubbed(:song, :registrant => FactoryGirl.build_stubbed(:registrant)) }
+        let(:song1) { FactoryGirl.build_stubbed(:song, registrant: registration, user: registration.user) }
+        let(:registration_2) { FactoryGirl.build_stubbed(:registrant) }
+        let(:song2) { FactoryGirl.build_stubbed(:song, registrant: registration_2, user: registration_2.user) }
         before(:each) do
           allow(registration).to receive(:songs).and_return([song1])
         end

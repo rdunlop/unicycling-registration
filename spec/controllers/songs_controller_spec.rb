@@ -100,14 +100,14 @@ describe SongsController do
 
   describe "DELETE destroy" do
     it "destroys the requested song" do
-      song = FactoryGirl.create(:song, :registrant => @reg)
+      song = FactoryGirl.create(:song, registrant: @reg, user: @reg.user)
       expect {
         delete :destroy, {:id => song.to_param}
       }.to change(Song, :count).by(-1)
     end
 
     it "redirects to the songs list" do
-      song = FactoryGirl.create(:song, :registrant => @reg)
+      song = FactoryGirl.create(:song, registrant: @reg, user: @reg.user)
       delete :destroy, {:id => song.to_param}
       response.should redirect_to(registrant_songs_path(@reg))
     end

@@ -1,5 +1,8 @@
 Last Re-Arranged June 20th, 2014.
 
+- Import Heat#s (id,heat#)
+ - Matching Export function?
+
 - Guest Account Payments should be associated with a different useR?
 - add flag to Summary for Cyclocross, < 10 age, IUF unpaid, Unpaid.
 - Printer from Connie
