@@ -1,0 +1,9 @@
+%h1 Use Access Code
+
+%p Registration forms have access codes printed on them which can be used to access their registration information.
+
+= form_tag use_code_permissions_path do
+  = select_tag :registrant_id, options_for_select(Registrant.select_box_options), {include_blank: true, class: 'chosen-select'}
+  = label_tag :code, "Access Code"
+  = text_field_tag :code
+  = submit_tag "Log In"

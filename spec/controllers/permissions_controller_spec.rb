@@ -62,5 +62,29 @@ describe PermissionsController do
       post :set_acl, {access_key: "123456"}
       flash[:notice].should == "Successfully Enabled Access"
     end
+
+    describe "can use an access code" do
+      let!(:registrant) { FactoryGirl.create(:registrant) }
+      let(:access_code) { registrant.access_code }
+
+      it "can use the access code" do
+        expect {
+          post :use_code, { registrant_id: registrant.id, code: access_code }
+        }.to change(User, :count).by(1)
+      end
+
+      it "doesn't succeed if the access code is invalid" do
+        expect {
+          post :use_code, { registrant_id: registrant.id, code: "invalid_code" }
+        }.to_not change(User, :count)
+      end
+
+      it "doesn't create another guest if one already exists" do
+        post :use_code, { registrant_id: registrant.id, code: access_code }
+        expect {
+          post :use_code, { registrant_id: registrant.id, code: access_code }
+        }.to_not change(User, :count)
+      end
+    end
   end
 end

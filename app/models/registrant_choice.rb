@@ -23,7 +23,7 @@ class RegistrantChoice < ActiveRecord::Base
   has_paper_trail :meta => { :registrant_id => :registrant_id }
 
   belongs_to :event_choice
-  belongs_to :registrant, :inverse_of => :registrant_choices
+  belongs_to :registrant, :inverse_of => :registrant_choices, touch: true
 
   validates_format_of :value, :with => /\A([0-9]{1,2}:)+[0-9]{2}\z/, :if => "event_choice.try(:cell_type) == 'best_time'", :message => "must be of the form hh:mm:ss or mm:ss", :allow_blank => true
 

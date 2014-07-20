@@ -28,7 +28,7 @@ class Ability
     can :index, :result
     can :read, CombinedCompetition
     can :announcer, Competition
-    can [:acl, :set_acl], :permission
+    can [:acl, :set_acl, :code, :use_code], :permission
     can :show, PublishedAgeGroupEntry do |entry|
       entry.published_at.present?
     end
@@ -291,9 +291,13 @@ class Ability
 
     unless reg_closed?
       can [:update, :destroy], Registrant, :user_id => user.id
+      can [:update], Registrant do |reg|
+        user.editable_registrants.include?(reg)
+      end
+
       #can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
-        (not rei.system_managed) and user.registrants.include?(rei.registrant)
+        (not rei.system_managed) && (user.editable_registrants.include?(rei.registrant))
       end
       can :create, Registrant # necessary because we set the user in the controller?
     end
@@ -304,5 +308,8 @@ class Ability
 
     # :read_contact_info allows viewing the contact_info block (additional_registrant_accesess don't allow this)
     can [:waiver, :read_contact_info], Registrant, :user_id => user.id
+    can [:read_contact_info], Registrant do |reg|
+      user.editable_registrants.include?(reg)
+    end
   end
 end

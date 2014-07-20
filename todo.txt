@@ -1,12 +1,23 @@
 Last Re-Arranged June 20th, 2014.
 
-- Disable the "auto-matching to another competition" feature. Make this ONLY available for 10k.
+- Guest Account Payments should be associated with a different useR?
+- add flag to Summary for Cyclocross, < 10 age, IUF unpaid, Unpaid.
+- Printer from Connie
+- Report and Remove all the unpaid elements (shirts)
+- Onsite reg for marathon is allowed
+- Onsite reg for Muni is allowed, but you need to pay for MUni bus ticket yourself.
+- need a way to be able to add a payment item to a registrant (as a payment_admin, onsite).
 
-- Add ability to get list of e-mail addresses of people who belong to a set of competitions (or event sign_ups)
- - improve the e-mail system to be able to "choose" the list you want displayed, and then display it...and e-mail to it (optionally).
+
+- Add ability to list the people who have bought items (total list, after +/- refunds)
+- Configure Age Groups for UNICON (10k, Muni)
+ - Do I need to change the uniqueness check on Age Gorup ENtry to scope over the gender also? (compare age group descriptions against NAUCC, to see if gender should be in the description field)
+
+- Disable the "auto-matching to another competition" feature. Make this ONLY available for 10k.
 - E-mail to the track timing guys.
 - Allow importing system to automatically change/choose the competition (based on lane-assignments)
 - Display Scores should show the Combinedcompetition scores page (more details than just place)
+- Create a new Falls-
 
 
 

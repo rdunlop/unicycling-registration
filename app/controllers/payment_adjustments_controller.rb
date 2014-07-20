@@ -13,11 +13,15 @@ class PaymentAdjustmentsController < ApplicationController
   end
 
   def adjust_payment_choose
-    @p = PaymentPresenter.new
-
-    params[:registrant_id].each do |reg_id|
-      reg = Registrant.find(reg_id)
-      @p.add_registrant(reg)
+    if params[:registrant_id].nil?
+      flash[:alert] = "You must choose at least 1 registrant"
+      redirect_to action: "new"
+    else
+      @p = PaymentPresenter.new
+      params[:registrant_id].each do |reg_id|
+        reg = Registrant.find(reg_id)
+        @p.add_registrant(reg)
+      end
     end
   end
 

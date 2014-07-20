@@ -19,6 +19,7 @@
 #  ineligible              :boolean          default(FALSE)
 #  volunteer               :boolean
 #  online_waiver_signature :string(255)
+#  access_code             :string(255)
 #
 # Indexes
 #
@@ -102,8 +103,14 @@ class Registrant < ActiveRecord::Base
   validate :not_exceeding_expense_item_limits
   validate :check_default_wheel_size_for_age
 
+  before_validation :set_access_code, only: :create
+  validates :access_code, presence: true
 
   scope :active, -> { where(:deleted => false).order(:bib_number) }
+
+  def set_access_code
+    self.access_code = SecureRandom.hex(4)
+  end
 
   # updates the members, which update the competitors, if this competitor has changed (like their age, for example)
   def touch_members

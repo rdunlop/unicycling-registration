@@ -49,6 +49,8 @@ Workspace::Application.routes.draw do
         put :set_role
         get :acl
         post :set_acl
+        get :code
+        post :use_code
       end
     end
 

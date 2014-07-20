@@ -231,6 +231,10 @@ describe Registrant do
     @reg.valid?.should == true
   end
 
+  it "has an access_code" do
+    expect(@reg.access_code).to_not be_empty
+  end
+
   describe "with a deleted competitor" do
     before(:each) do
       @reg.deleted = true

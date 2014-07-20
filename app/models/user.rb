@@ -19,6 +19,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  name                   :string(255)
+#  guest                  :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -124,8 +125,12 @@ class User < ActiveRecord::Base
     name || email
   end
 
+  def editable_registrants
+    (additional_registrant_accesses.full_access.map(&:registrant) + registrants).select{|reg| !reg.deleted}
+  end
+
   def accessible_registrants
-    additional_registrant_accesses.permitted.map{ |ada| ada.registrant}.select{ |reg| !reg.deleted}  + registrants.select{|reg| !reg.deleted}
+    (additional_registrant_accesses.permitted.map(&:registrant) + registrants).select{|reg| !reg.deleted}
   end
 
   def total_owing

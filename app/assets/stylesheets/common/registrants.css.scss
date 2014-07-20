@@ -179,11 +179,14 @@ div.required {
   h1 {
     float: left;
   }
-  .unpaid_warning {
+  .info_block {
     float: right;
+    padding: 0 20px;
+    margin: 0 5px;
+  }
+  .unpaid_warning {
     font-size: 20pt;
     font-weight: bold;
-    padding: 5px;
   }
 
   &:after {

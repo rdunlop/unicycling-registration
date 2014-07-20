@@ -27,7 +27,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
 
   has_paper_trail :meta => { :registrant_id => :registrant_id }
 
-  belongs_to :registrant, :inverse_of => :registrant_event_sign_ups
+  belongs_to :registrant, :inverse_of => :registrant_event_sign_ups, touch: true
   belongs_to :event_category, touch: true
   belongs_to :event
 

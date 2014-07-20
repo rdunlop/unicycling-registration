@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712004830) do
+ActiveRecord::Schema.define(version: 20140720003531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(version: 20140712004830) do
     t.integer  "registrant_id"
     t.boolean  "declined"
     t.boolean  "accepted_readonly"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.boolean  "accepted_readwrite", default: false
   end
 
   add_index "additional_registrant_accesses", ["registrant_id"], name: "index_additional_registrant_accesses_registrant_id", using: :btree
@@ -633,6 +634,7 @@ ActiveRecord::Schema.define(version: 20140712004830) do
     t.boolean  "ineligible",              default: false
     t.boolean  "volunteer"
     t.string   "online_waiver_signature"
+    t.string   "access_code"
   end
 
   add_index "registrants", ["deleted"], name: "index_registrants_deleted", using: :btree
@@ -786,8 +788,8 @@ ActiveRecord::Schema.define(version: 20140712004830) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -799,9 +801,10 @@ ActiveRecord::Schema.define(version: 20140712004830) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "name"
+    t.boolean  "guest",                  default: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
