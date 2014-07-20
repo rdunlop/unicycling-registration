@@ -4,14 +4,16 @@ describe "songs/index" do
   before(:each) do
     @registrant = FactoryGirl.build_stubbed(:registrant)
     @song1 = FactoryGirl.build_stubbed(:song,
-        :description => "Description",
-        :song_file_name => "File Name",
-        :registrant => @registrant
+        description: "Description",
+        song_file_name: "File Name",
+        registrant: @registrant,
+        user: @registrant.user
     )
     @song2 = FactoryGirl.build_stubbed(:song,
-        :description => "Description",
-        :song_file_name => "File Name",
-        :registrant => @registrant
+        description: "Description",
+        song_file_name: "File Name",
+        registrant: @registrant,
+        user: @registrant.user
     )
     assign(:songs, [@song1, @song2])
     # carrierwasve overwrites these columns
@@ -25,6 +27,7 @@ describe "songs/index" do
       :file_name => "MyString"
     ).as_new_record)
     assign(:config, double(:music_submission_end_date => "now"))
+    controller.stub(:current_user) { @registrant.user }
   end
 
   it "renders a list of songs" do
