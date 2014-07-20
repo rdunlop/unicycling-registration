@@ -2,9 +2,7 @@
 
 <h2>Event: <%= @event %></h2>
 
-<h3>Signed Up Registrants (Count: <%= @event.num_signed_up_registrants %>)</h3>
-(These are only here listed for reference)
-<%= render :partial => "/event_categories/sign_ups", locals: { sign_ups: @event.registrant_event_sign_ups.signed_up, event: @event } %>
+<h3>Signed Up Registrants Count: <%= @event.num_signed_up_registrants %></h3>
 
 <br />
 <b>NOTE:</b> This will only create the competition.<br />
