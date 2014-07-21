@@ -91,6 +91,19 @@ class Competitor < ActiveRecord::Base
     members.first.registrant.bib_number
   end
 
+  def member_warnings
+    competition_registrants = competition.signed_up_registrants
+    error = ""
+    members.each do |member|
+      if member.dropped_from_registration
+        error += "Registrant has dropped this event from their registration"
+      elsif !competition_registrants.include?(member.registrant)
+        error += "Registrant #{member} is not in the default list for this competition"
+      end
+    end
+    error
+  end
+
   def scoring_helper
     competition.scoring_helper
   end

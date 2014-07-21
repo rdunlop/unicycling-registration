@@ -234,19 +234,15 @@ class Competition < ActiveRecord::Base
   end
 
   def signed_up_registrants
-    res = []
-    competition_sources.each do |cs|
-      res += cs.signed_up_registrants
+    @signed_up_registrants ||= competition_sources.inject([]) do |memo, cs|
+      memo += cs.signed_up_registrants
     end
-    res
   end
 
   def signed_up_competitors
-    res = []
-    competition_sources.each do |cs|
-      res += cs.signed_up_competitors
+    @signed_up_competitors ||= competition_sources.inject([]) do |memo, cs|
+      memo += cs.signed_up_competitors
     end
-    res
   end
 
   def sorted_competitors

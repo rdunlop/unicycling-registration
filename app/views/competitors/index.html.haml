@@ -30,10 +30,6 @@
     - @competitors.each do |competitor|
       - next if competitor.new_record?
       %tr{:class => competitor.status}
-        - error = nil
-        - competitor.registrants.each do |reg|
-          - unless @registrants.include?(reg)
-            - error = "Registrant #{reg} is not in the default list for this competition"
         - if @competition.compete_in_order
           %td
             = competitor.position
@@ -50,7 +46,7 @@
           %td= competitor.country
         %td= competitor.age_group_entry_description
         %td= event_category
-        %td{ class: error ? "error" : "" }= error
+        %td.js--highlightIfNotBlank= competitor.member_warnings
         %td
           = link_to 'Edit', edit_competitor_path(competitor)
           = link_to 'Delete', competitor, method: :delete, data: { confirm: 'Are you sure?' }

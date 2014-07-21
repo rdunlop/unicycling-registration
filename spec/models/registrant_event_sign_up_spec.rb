@@ -47,6 +47,23 @@ describe RegistrantEventSignUp do
       }.to change(Competitor, :count).by(0)
     end
   end
+
+  describe "when a competitor already exists and I un-sign up" do
+    before :each do
+      @competition = FactoryGirl.create(:competition)
+      @competition_source = FactoryGirl.create(:competition_source, target_competition: @competition, event_category: @re.event_category)
+      @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+      @member = @competitor.members.first
+      @member.update_attributes(registrant: @re.registrant)
+      @re.reload
+    end
+
+    it "marks the member as dropped when I un-sign up for the competition" do
+      @re.signed_up = false
+      @re.save
+      expect(@member.reload).to be_dropped_from_registration
+    end
+  end
 end
 
 describe "when a competition exists before a sign-up" do

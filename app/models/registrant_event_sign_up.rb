@@ -32,6 +32,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
   belongs_to :event
 
   after_save :auto_create_competitor
+  after_save :mark_member_as_dropped
 
   def self.signed_up
     includes(:registrant).where(registrants: {deleted: false}).where(signed_up: true)
@@ -43,6 +44,16 @@ class RegistrantEventSignUp < ActiveRecord::Base
         next unless competition.automatic_competitor_creation
         next if registrant.competitions.include?(competition)
         competition.create_competitors_from_registrants([registrant], nil)
+      end
+    end
+  end
+
+  def mark_member_as_dropped
+    # was signed up and now we are not
+    if signed_up_was && signed_up_changed? && !signed_up
+      event_category.competitions_being_fed(registrant).each do |competition|
+        member = registrant.members.select{|mem| mem.competitor.competition == competition}.first
+        member.update_attributes(dropped_from_registration: true) if member
       end
     end
   end
