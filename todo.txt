@@ -1,5 +1,7 @@
 Last Re-Arranged June 20th, 2014.
 
+- Display the configured Age Group for the Director to see/approve.
+
 - Import Heat#s (id,heat#)
  - Matching Export function?
 

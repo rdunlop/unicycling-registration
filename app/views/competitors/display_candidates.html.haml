@@ -1,6 +1,9 @@
 
 %h1 Candidates
 
+When a competition's competitor list is based on the results of other competitions, this page shows the results of those other competitions.
+
+
 %table.sortable
   %thead
     %tr
@@ -17,6 +20,7 @@
 %hr
 
 .non_printable
+  %h3 Assign Competitors to Heat/Lane
 
   - def get_lane(place)
     - heat_lane = [4, 5, 3, 6, 2, 7, 1, 8]
@@ -42,4 +46,4 @@
               %td
                 = comp_f.hidden_field :bib_number, value: comp.bib_number
                 = comp_f.text_field :lane, value: get_lane(comp.overall_place)
-    = submit_tag
+    = submit_tag "Assign Heat/Lanes"

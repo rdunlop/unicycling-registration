@@ -8,7 +8,12 @@ Results, judges, and scoring settings.
 - if can? :lock, @competition
   %h2 Director Abilities
 
-  %h3 View Signed-Up Competitors
+  - if @competition.age_group_type
+    %h3 Review Age Group Configuration
+    = link_to "View Age Group", age_group_type_path(@competition.age_group_type)
+    %small If these are incorrect, contact an Admin
+
+  %h3 View List of Competitors who want to participate
   = link_to "Events Report", summary_events_path
 
   %h3 Competitor Management

@@ -24,6 +24,7 @@ class Ability
     # Even Non-Logged-In Users can still:
 
     can :read, StandardSkillEntry
+    can :read, AgeGroupType
     can :logo, EventConfiguration
     can :index, :result
     can :read, CombinedCompetition

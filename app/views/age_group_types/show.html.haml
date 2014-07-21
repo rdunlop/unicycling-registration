@@ -1,0 +1,16 @@
+- cache [@age_group_type] do
+  %h1 Listing #{@age_group_type} Age Group Entries
+  %table
+    %tr
+      %th Description
+      %th Start age
+      %th End age
+      %th Wheel Size
+      %th Gender
+    - @age_group_type.age_group_entries.each do |age_group_entry|
+      %tr
+        %td= age_group_entry.short_description
+        %td= age_group_entry.start_age
+        %td= age_group_entry.end_age
+        %td= age_group_entry.wheel_size
+        %td= age_group_entry.gender

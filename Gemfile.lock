@@ -65,9 +65,9 @@ GEM
       debug_inspector (>= 0.0.1)
     breadcrumbs_on_rails (2.3.0)
     builder (3.2.2)
-    bullet (4.8.0)
-      activesupport
-      uniform_notifier (>= 1.4.0)
+    bullet (4.13.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (>= 1.6.0)
     cancancan (1.7.0)
     carmen (1.0.0)
       unicode_utils (~> 1.4.0)
@@ -170,7 +170,7 @@ GEM
       tilt
     hike (1.2.3)
     http_accept_language (2.0.1)
-    i18n (0.6.9)
+    i18n (0.6.11)
     ice_nine (0.11.0)
     ipaddress (0.8.0)
     jquery-rails (3.1.0)
@@ -331,7 +331,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    uniform_notifier (1.4.0)
+    uniform_notifier (1.6.2)
     uuidtools (2.1.4)
     virtus (1.0.1)
       axiom-types (~> 0.0.5)

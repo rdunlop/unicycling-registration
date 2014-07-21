@@ -20,7 +20,7 @@ class Member < ActiveRecord::Base
     after_destroy :destroy_orphaned_competitors
 
     validates :registrant_id, :presence => true
-    validate :registrant_once_per_event
+    validate :registrant_once_per_competition
 
     after_save :update_min_bib_number
     after_destroy :update_min_bib_number
@@ -40,7 +40,7 @@ class Member < ActiveRecord::Base
         end
     end
 
-    def registrant_once_per_event
+    def registrant_once_per_competition
         if new_record?
             if competitor.nil? or registrant.nil?
                 return

@@ -6,7 +6,7 @@ class CompetitorsController < ApplicationController
   load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy]
   load_and_authorize_resource :only => [:edit, :update, :destroy]
 
-  before_action :set_parent_breadcrumbs, only: [:index, :enter_sign_in, :new, :edit]
+  before_action :set_parent_breadcrumbs, only: [:index, :enter_sign_in, :new, :edit, :display_candidates]
 
   respond_to :html
 
@@ -27,6 +27,7 @@ class CompetitorsController < ApplicationController
 
   # show the competitors, their overall places, and their times
   def display_candidates
+    add_breadcrumb "Display Competition Candidates"
     @competitors = @competition.signed_up_competitors
   end
 
