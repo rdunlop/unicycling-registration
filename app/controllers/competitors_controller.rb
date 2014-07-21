@@ -68,10 +68,11 @@ class CompetitorsController < ApplicationController
   end
 
   def add
-    regs = params[:registrants].map{|reg_id| Registrant.find(reg_id) }
 
     respond_to do |format|
       begin
+        raise "No Registrants selected" if params[:registrants].nil?
+        regs = params[:registrants].map{|reg_id| Registrant.find(reg_id) }
         if params[:commit] == Competitor.group_selection_text
           @competition.create_competitor_from_registrants(regs, params[:group_name])
           msg = "Created Group Competitor"
