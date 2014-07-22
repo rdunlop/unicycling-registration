@@ -1,11 +1,27 @@
 Last Re-Arranged June 20th, 2014.
 
-- Display the configured Age Group for the Director to see/approve.
+Hello Directors,
+
+Before the end of the week, I would like the following accomplished:
+- All signed-up registrations should be assigned to competitions
+ - Just because someone signs up for an event doesn't cause them to be in the start-lists.
+ - Each Director is responsible for assigning the registration entries into their competitions.
+
+The Reason why this is done by the director, is that many competitions require additional information, e.g. Heat/Lane assignment, Starting-lists, order-of-competition, group/team matching, etc.
+- The director of each event should deal with these details.
+
+I am available to answer any questions/queries that you may have.
+
+By Wednesday evening, I would like each of you to have looked at your competitions and the "Manage Competitors" page.
+
+
+- Create "Emergency Contact Info" report PDF which we print for having on-site at each of the competitions.
+ - ID, Name, Gender, Age, Phone, Club, Country, Emergency Contact, Name, Phone, Attending?
+- Adjust marking of "dropped" to handle changing-the-chosen-event-category
 
 - Import Heat#s (id,heat#)
  - Matching Export function?
 
-- Guest Account Payments should be associated with a different useR?
 - add flag to Summary for Cyclocross, < 10 age, IUF unpaid, Unpaid.
 - Printer from Connie
 - Report and Remove all the unpaid elements (shirts)
@@ -185,8 +201,6 @@ Done- need to see what age/age-group each person is assigned.
  - ANSWER Both get 8.
 - Connie: Distance Champion: are 10k Standard placers eligible to qualify? (or do we just include the Unlimited?)
  - ANswer: no.
-- Connie, have you updated the USA-Owing people?
- - Answer: no, but I will.
 - Connie, should I prioritize the ability to specify the Age Group Order, for printing at the Track? (I think it will be confusing/difficult to deal with...but actually may be useful to be able to communicate with Competitors, Race Officials, etc?)
  - ANSWER: Yes, add an ability to order these for printing/display.
 - Scott/Connie:
@@ -206,9 +220,6 @@ Done- need to see what age/age-group each person is assigned.
   - Why/who was able to export the dataset.
 
 
-
-- Mary, are they doing overall-by-age-group.
- - Answers: Yes, and it's in the awards list
 - Patricia - Will there be a judge of "Falls" for "Group/Club"?
  -  "Major and Minor faults are counted by 2 people and averaged, and then those scores are used by all of the judegs.""
 
@@ -234,30 +245,11 @@ Done- need to see what age/age-group each person is assigned.
 - Hugo/Benoit: how are you recording Slow Races? Do you have E-Timer for that?
 - Hugo/Benoit - Are they running Standard Skill without Data?
 
-- Kathleen (on monday):
- - How should the Lane Assignments screen behave?
-  - How should it behave for "Final Heat" events (100m Expert)?
-  - Make Lane-Assignment auto-increment the lane/heat as data is entered? (ask Kathleen?)
- - Can we borrow your ipad, or some more from Work?
-
- Wenday
-  - If an expert heat compeitor doesn't show up, is the lane empty? or filled?
-
-================================================================================================
-NAUCC data issues:
-- Various Age Groups need to be created/configured (like 10k Standard)
-- How are Speed Trials being Judged/Data-entered?
-- Does Speed Trials Advanced have Experts?
-- Need ranking/scoring for Trials to be added.
-- Does Trials have a separate "Expert" expert-off?
- - Answer: No, it does not
-
 ================================================================================================
 ===== Development Items that MUST be done before we do another run-through/demo
 
 ===== Really Easy & High Imapact
 - Write e-mails to various people:
- - Kirsten (where are you staying/when?)
  - Directors (all). Welcome, here's what I'm planning
  - Track e-timer...using sample data.
  -
@@ -279,10 +271,6 @@ NAUCC data issues:
 ==== Important
 - Fix Import results CSV to allow for Mac-based CSV files (not windows-only)
   - Why can't I import the 10kStandard.csv (file format issues?)
-- Add Warning on Registration Summary if this user doesn't have a confirmed USA membership?
-- Add Warning on Registration Summary if they are not fully paid?
-- Able to enter results for multiple competitions at once (10k Standard and 10k Unlimited).
-- Able to Edit/Update Two-Attempt Entry
 - Have a way to publish results for a single Age group (for 100m, for example), while the competition itself continues to run.
 DONE - When publishing 100m results, have a different PDF for each age group, “50+ Female”
 DONE - So, only publish the “Per Event” PDF after the event is over, but have “50+ “ and “40+ “ separately while the event is running.
@@ -292,7 +280,6 @@ DONE - So, only publish the “Per Event” PDF after the event is over, but hav
  - Determine who will be doing the 100m Review/Publish datastep
  - When/how do we publish 100m results?
  - Able to assign "Track Data Importer" role
-- Able to Do High/Long with the design changes as per conversation with Mary
 - Able to assign "High/Long" data importer role (????already done via a judge?)
   - and prevent them from adding scores after the event is "locked"
 - Ensure that a Judge cannot update their score after the event is Locked.

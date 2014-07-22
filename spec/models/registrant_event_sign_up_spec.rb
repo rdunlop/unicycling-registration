@@ -63,6 +63,19 @@ describe RegistrantEventSignUp do
       @re.save
       expect(@member.reload).to be_dropped_from_registration
     end
+
+    describe "When the event has multiple categories" do
+      before :each do
+        @event = @re.event_category.event
+        @cat2 = FactoryGirl.create(:event_category, event: @event, position: 2)
+      end
+
+      it "marks the member as dropped when I change the category I signed up for" do
+        @re.event_category = @cat2
+        @re.save
+        expect(@member.reload).to be_dropped_from_registration
+      end
+    end
   end
 end
 
