@@ -1,5 +1,10 @@
 Last Re-Arranged June 20th, 2014.
 
+BUGS:
+- Deleting the last member of a competitor doesn't delete the competitor.
+- There is some scenario causing orphaned members to exist (no associated competitor)
+-
+
 Hello Directors,
 
 Before the end of the week, I would like the following accomplished:

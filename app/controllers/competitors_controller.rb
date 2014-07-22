@@ -117,7 +117,7 @@ class CompetitorsController < ApplicationController
       flash[:notice] = 'Competition registrant was successfully created.'
     else
       @registrants = @competition.signed_up_registrants
-      flash[:alert] = 'Error adding Registrant'
+      flash.now[:alert] = 'Error adding Registrant'
     end
 
     respond_with(@competitor, location: competition_competitors_path(@competition))

@@ -49,14 +49,31 @@ $(document).ready(function() {
   });
 });
 
+/* Blatantly stoles from competitor.js.coffee */
+var enable_chosen = function() {
+  $('.chosen-select').chosen({
+    allow_single_deselect: true,
+    search_contains: true,
+    no_results_text: 'No matches',
+    width: '200px'});
+};
+
 $(document).ready(function(e) {
   $('FORM').each(function() {
     if ($(this).hasClass('multiple_nested')) {
-      $('.nested_nested').nestedFields();
+      $('.nested_nested').nestedFields({
+        afterInsert: function(item) {
+          enable_chosen();
+        }
+      });
     }
     else
     {
-      $(this).nestedFields();
+      $(this).nestedFields({
+        afterInsert: function(item) {
+          enable_chosen();
+        }
+     });
     }
   });
 });
