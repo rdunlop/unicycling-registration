@@ -29,7 +29,7 @@
   %tbody
     - @competitors.each do |competitor|
       - next if competitor.new_record?
-      %tr{:class => competitor.status}
+      %tr{:class => competitor.status == "active" ? "active" : "not_active" }
         - if @competition.compete_in_order
           %td
             = competitor.position

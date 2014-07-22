@@ -96,6 +96,8 @@ describe "when a competition exists before a sign-up" do
     expect {
       expect(@re.save).to be_truthy
     }.to change(Competitor, :count).by(1)
+
+    expect(Competitor.last.status).to eq("active")
   end
 
   describe "but the gender filter is in effect" do

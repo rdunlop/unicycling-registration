@@ -47,14 +47,20 @@ class Competitor < ActiveRecord::Base
   validates_associated :members
   validate :must_have_3_members_for_custom_name
 
-  enum status: [:active, :not_qualified, :dns]
+  enum status: [:active, :not_qualified, :dns, :withdrawn]
 
   # not all competitor types require a position
   #validates :position, :presence => true,
                        #:numericality => {:only_integer => true, :greater_than => 0}
 
-  after_touch(:touch_places)
-  after_save(:touch_places)
+  after_touch :touch_places
+  after_save :touch_places
+
+  after_initialize :init
+
+  def init
+    self.status = :active if self.status.nil?
+  end
 
   def self.active
     where(status: Competitor.statuses[:active])
@@ -94,6 +100,10 @@ class Competitor < ActiveRecord::Base
   def member_warnings
     competition_registrants = competition.signed_up_registrants
     error = ""
+    if status != "active"
+      error += "Competitor is #{status}"
+    end
+
     members.each do |member|
       if member.dropped_from_registration
         error += "Registrant has dropped this event from their registration"
