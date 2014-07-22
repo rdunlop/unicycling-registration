@@ -61,7 +61,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
     if signed_up && event_category_id_changed? && !event_category_id_was.nil?
       old_category = EventCategory.find(event_category_id_was)
       old_category.competitions_being_fed(registrant).each do |competition|
-        member = registrant.members.select{|mem| mem.competitor.competition == competition}.first
+        member = registrant.members.select{|mem| mem.competitor.try(:competition) == competition}.first
         member.update_attributes(dropped_from_registration: true) if member
       end
     end
