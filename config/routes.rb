@@ -341,6 +341,7 @@ Workspace::Application.routes.draw do
           get :view_heat
           post :dq_competitor
           get :review
+          get :download_heat_evt
         end
       end
       resources :external_results, :shallow => true, :except => [:new, :show]

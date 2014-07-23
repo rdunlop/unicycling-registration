@@ -1,6 +1,6 @@
 class LaneAssignmentsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_competition, :only => [:index, :create, :view_heat, :dq_competitor, :review]
+  before_filter :load_competition, except: [:edit, :update, :destroy]
   before_filter :load_new_lane_assignment, :only => [:create]
   load_and_authorize_resource
 
@@ -8,6 +8,31 @@ class LaneAssignmentsController < ApplicationController
 
   def review
     @heat_numbers = @lane_assignments.map(&:heat).uniq.sort
+  end
+
+  def create_heat_evt(heat)
+    @lane_assignments = LaneAssignment.where(heat: @heat_number)
+    CSV.generate do |csv|
+      csv << [@competition.id, 1, @heat_number, @competition]
+      @lane_assignments.each do |lane_assignment|
+        member = lane_assignment.competitor.members.first.registrant
+        csv << [nil,
+          lane_assignment.competitor.lowest_member_bib_number,
+          lane_assignment.lane,
+          member.last_name,
+          member.first_name,
+          member.country]
+      end
+    end
+  end
+
+  def download_heat_evt
+    @heat_number = params[:heat]
+    csv_string = create_heat_evt(@heat_number)
+    filename = "heat_#{@heat_number}.evt"
+    send_data(csv_string,
+              :type => 'text/csv; charset=utf-8; header=present',
+              :filename => filename)
   end
 
   def view_heat
