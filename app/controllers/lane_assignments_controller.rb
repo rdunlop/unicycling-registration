@@ -1,10 +1,14 @@
 class LaneAssignmentsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_competition, :only => [:index, :create, :view_heat, :dq_competitor]
+  before_filter :load_competition, :only => [:index, :create, :view_heat, :dq_competitor, :review]
   before_filter :load_new_lane_assignment, :only => [:create]
   load_and_authorize_resource
 
   before_action :set_parent_breadcrumbs, only: [:index, :create]
+
+  def review
+    @heat_numbers = @lane_assignments.map(&:heat).uniq.sort
+  end
 
   def view_heat
     @heat = params[:heat].to_i if params[:heat]

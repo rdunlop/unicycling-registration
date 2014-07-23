@@ -60,6 +60,7 @@ Workspace::Application.routes.draw do
       get :download_payment_details
       get :download_all_payments
       get :download_events
+      get :download_competitors_for_timers
     end
 
     resources :standard_skill_entries, :only => [:index] do
@@ -339,6 +340,7 @@ Workspace::Application.routes.draw do
         collection do
           get :view_heat
           post :dq_competitor
+          get :review
         end
       end
       resources :external_results, :shallow => true, :except => [:new, :show]

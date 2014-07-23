@@ -5,6 +5,22 @@ class ExportController < ApplicationController
   def index
   end
 
+  def download_competitors_for_timers
+   csv_string = CSV.generate do |csv|
+      csv << ['bib_number', 'last_name', 'first_name', 'country']
+      Registrant.active.where(competitor: true).each do |registrant|
+        csv << [registrant.bib_number,
+          registrant.last_name,
+          registrant.first_name,
+          registrant.country]
+      end
+    end
+    filename = @config.short_name.downcase.gsub(/[^0-9a-z]/, "_") + "_registrants.csv"
+    send_data(csv_string,
+              :type => 'text/csv; charset=utf-8; header=present',
+              :filename => filename)
+  end
+
   def download_events
 
     event_categories = Event.includes(:event_categories => :event).flat_map{ |ev| ev.event_categories }

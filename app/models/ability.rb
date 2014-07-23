@@ -203,6 +203,7 @@ class Ability
     if user.has_role? :race_official or user.has_role? :admin
       # includes :view_heat, and :dq_competitor
       can :manage, LaneAssignment
+      can :download_competitors_for_timers, :export
     end
 
     # Scoring abilities

@@ -20,7 +20,9 @@ module CompetitorsHelper
   def data_confirmation_link(competition, options = {})
     case options[:is_start_times] ? competition.start_data_type : competition.end_data_type
     when "Track E-Timer"
-      unless options[:is_start_times]
+      if options[:is_start_times]
+        link_to "Review",review_competition_lane_assignments_path(competition)
+      else
         link_to "View", review_user_competition_import_results_path(current_user, competition)
       end
     when "Single Attempt"

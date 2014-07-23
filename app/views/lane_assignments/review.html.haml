@@ -1,0 +1,21 @@
+%h1 Review #{@competition} heats
+
+= link_to "download all competitors CSV", export_download_competitors_for_timers_path
+
+- @heat_numbers.each do |heat|
+  %h2 Heat #{heat}
+
+  %table
+    %thead
+      %tr
+        %th Lane
+        %th ID
+        %th Name
+        %th Country
+    %tbody
+      - @lane_assignments.where(heat: heat).each do |lane_assignment|
+        %tr
+          %td #{lane_assignment.lane}
+          %td #{lane_assignment.competitor.lowest_member_bib_number}
+          %td #{lane_assignment.competitor}
+          %td #{lane_assignment.competitor.country}
