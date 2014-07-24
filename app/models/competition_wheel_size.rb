@@ -9,6 +9,10 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #
+# Indexes
+#
+#  index_competition_wheel_sizes_registrant_id_event_id  (registrant_id,event_id)
+#
 
 class CompetitionWheelSize < ActiveRecord::Base
   belongs_to :registrant, touch: true
