@@ -250,7 +250,11 @@ class Competition < ActiveRecord::Base
   end
 
   def other_eligible_registrants
-    Registrant.active.where(:competitor => true).order(:bib_number) - registrants
+    if EventConfiguration.singleton.usa?
+      Registrant.active.where(:competitor => true).order(:bib_number) - registrants
+    else
+      []
+    end
   end
 
   def get_age_group_entry_description(age, gender, wheel_size_id)

@@ -31,11 +31,15 @@
   text-decoration: none;
   border: none;
   display: inline-block;
-  padding: 0px 15px;
-  margin: 0px 10px;
+  padding: 10px 15px;
+  margin: 5px 10px;
   font-size: 18px;
   cursor: pointer;
   color: black;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+  border-radius: 10px; /* future proofing */
 }
 
 .action_button {
@@ -47,6 +51,24 @@
 }
 .action_button:visited {
   color: black;
+}
+
+.counter_action_button {
+  @include button;
+  background-color: #F1D6D6;
+}
+.counter_action_button:hover {
+  background-color: #F16565;
+}
+.counter_action_button:visited {
+  color: black;
+}
+
+.minor_action {
+  color: blue;
+}
+.minor_action:visited {
+  color: blue;
 }
 
 .locked_competition_action {
