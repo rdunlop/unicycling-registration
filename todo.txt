@@ -3,22 +3,8 @@ Last Re-Arranged June 20th, 2014.
 BUGS:
 - Deleting the last member of a competitor doesn't delete the competitor.
 - There is some scenario causing orphaned members to exist (no associated competitor)
--
 
-Hello Directors,
-
-Before the end of the week, I would like the following accomplished:
-- All signed-up registrations should be assigned to competitions
- - Just because someone signs up for an event doesn't cause them to be in the start-lists.
- - Each Director is responsible for assigning the registration entries into their competitions.
-
-The Reason why this is done by the director, is that many competitions require additional information, e.g. Heat/Lane assignment, Starting-lists, order-of-competition, group/team matching, etc.
-- The director of each event should deal with these details.
-
-I am available to answer any questions/queries that you may have.
-
-By Wednesday evening, I would like each of you to have looked at your competitions and the "Manage Competitors" page.
-
+- Improve the performance of the competitors#index page, based on newrelic performance. (add caching?)
 
 - Create "Emergency Contact Info" report PDF which we print for having on-site at each of the competitions.
  - ID, Name, Gender, Age, Phone, Club, Country, Emergency Contact, Name, Phone, Attending?

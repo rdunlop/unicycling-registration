@@ -14,7 +14,7 @@
         - else
           %th Country
     %tbody
-      - @competition.competitors.active.each do |comp|
+      - @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active.each do |comp|
         - cache [@competition, comp, @config] do
           %tr
             - if @competition.compete_in_order

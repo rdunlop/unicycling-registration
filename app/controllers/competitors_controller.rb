@@ -22,7 +22,7 @@ class CompetitorsController < ApplicationController
   def index
     add_breadcrumb "Manage Competitors"
     @registrants = @competition.signed_up_registrants
-    @competitors = @competition.competitors
+    @competitors = @competition.competitors.includes(:members => [:registrant])
   end
 
   # show the competitors, their overall places, and their times
