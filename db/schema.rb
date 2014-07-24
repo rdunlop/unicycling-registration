@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721015154) do
+ActiveRecord::Schema.define(version: 20140724080851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 20140721015154) do
     t.integer  "riding_wheel_size"
     t.string   "notes"
     t.integer  "heat"
+    t.integer  "riding_crank_size"
   end
 
   add_index "competitors", ["competition_id"], name: "index_competitors_event_category_id", using: :btree
