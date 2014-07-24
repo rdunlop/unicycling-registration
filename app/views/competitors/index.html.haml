@@ -83,7 +83,7 @@ List of all competitors, including registrant info, with edit/delete, marking th
 
   - display_all = @competition.num_members_per_competitor.nil?
   - if display_all || @competition.num_members_per_competitor == "One"
-    = submit_tag "Create from EACH selected Registrant", :class => "multiclick action_button", :data => { :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" }
+    = submit_tag Competitor.single_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" }
     %br
   - if @competition.num_members_per_competitor == "Two"
     = submit_tag Competitor.group_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a Pair with the chosen registrants. Continue?" }

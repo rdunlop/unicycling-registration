@@ -451,6 +451,10 @@ class Competitor < ActiveRecord::Base
     overall_place.to_i > 0 && overall_place.to_i <= 10
   end
 
+  def self.single_selection_text
+    "Create Competitor from EACH selected Registrant"
+  end
+
   def self.group_selection_text
     "Create Pair/Group from selected Registrants"
   end
