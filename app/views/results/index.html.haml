@@ -10,7 +10,7 @@
       %th Results
       %th Date Published
   %tbody
-    - Competition.all.each do |competition|
+    - Competition.includes(:published_age_group_entries).all.each do |competition|
       - cache [competition] do
         %tr
           %td= competition.end_time_to_s
