@@ -5,6 +5,9 @@ BUGS:
 - There is some scenario causing orphaned members to exist (no associated competitor)
 - Direcotr is not authorized to Enter/Modify Results, even though they see the link (Gossi)
 - Announcer Form should have some sort of order, even on "un-ordered" competitions (like X-Style)
+- Registrant#summayr should list the event competitors (and/or the events that they signed up for?)
+
+- 10k has a rule which allows people to complete only 3 laps, and get a time, and place lower than those who have 4 laps. (how do we do this in data?)
 
 - Slopestyle Street:
 5 judges, each judge scores the competitor by:

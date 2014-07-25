@@ -97,11 +97,11 @@ class CompetitionsController < ApplicationController
     @competitors = @competition.competitors
     @competitors.shuffle.each_with_index do |comp, index|
       comp.position = index + 1
-      comp.save
+      comp.save!
     end
     flash[:notice] = "Shuffled Competitor sort order"
 
-    redirect_to new_competition_competitor_path(@competition)
+    redirect_to set_sort_competition_path(@competition)
   end
 
   def set_places
