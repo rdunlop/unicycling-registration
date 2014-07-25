@@ -54,9 +54,6 @@ class Competitor < ActiveRecord::Base
   #validates :position, :presence => true,
                        #:numericality => {:only_integer => true, :greater_than => 0}
 
-  after_touch :touch_places
-  after_save :touch_places
-
   after_initialize :init
 
   def init
@@ -69,19 +66,6 @@ class Competitor < ActiveRecord::Base
 
   def self.ungeared
     where(geared: false)
-  end
-
-  def touch_places
-    # update the last time for the overall gender
-    if overall_cache_value.nil?
-      Rails.cache.write(overall_key, 0)
-    end
-    Rails.cache.increment(overall_key, 1)
-    # invalidate the cache for age-group-entry entries
-    if age_group_cache_value.nil?
-      Rails.cache.write(age_group_key, 0)
-    end
-    Rails.cache.increment(age_group_key, 1)
   end
 
   def must_have_3_members_for_custom_name
@@ -120,7 +104,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def disqualified
-    Rails.cache.fetch("#{place_key}/dq") do
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/dq") do
       scoring_helper.competitor_dq?(self)
     end
   end
@@ -180,30 +164,6 @@ class Competitor < ActiveRecord::Base
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/age_group_entry") do
       competition.age_group_type.age_group_entry_for(age, gender, wheel_size) if competition.age_group_type.present?
     end
-  end
-
-  #private
-  def age_group_key
-    "/competition/#{competition.id}-#{competition.updated_at}/age_group/#{age_group_entry_description}/version"
-  end
-  def overall_key
-    "/competition/#{competition.id}-#{competition.updated_at}/gender/#{gender}/overall_version"
-  end
-
-  def age_group_cache_value
-    Rails.cache.fetch(age_group_key)
-  end
-
-  def overall_cache_value
-    Rails.cache.fetch(overall_key)
-  end
-
-  def place_key
-    "/competition/#{competition.id}-#{competition.updated_at}/competitor/#{id}-#{updated_at}/age_group_count/#{age_group_cache_value}/place"
-  end
-
-  def overall_place_key
-    "/competition/#{competition.id}-#{competition.updated_at}competitor/#{id}-#{updated_at}/overall_count/#{overall_cache_value}/overall_place"
   end
 
   public

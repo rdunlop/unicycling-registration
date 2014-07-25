@@ -6,6 +6,18 @@ BUGS:
 - Direcotr is not authorized to Enter/Modify Results, even though they see the link (Gossi)
 - Announcer Form should have some sort of order, even on "un-ordered" competitions (like X-Style)
 
+- Slopestyle Street:
+5 judges, each judge scores the competitor by:
+ - Variety (/10)
+ - Consistency (/10)
+ - Difficulty (/10)
+A super-judge by Time:
+ - Time (/5, fastest=5, slowest=0)
+
+
+- If Eli fails to jump 10, he should not be able to jump 15 or fail jump 15.
+-
+
 - Improve the performance of the competitors#index page, based on newrelic performance. (add caching?)
 
 - Create "Emergency Contact Info" report PDF which we print for having on-site at each of the competitions.
