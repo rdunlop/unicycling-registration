@@ -13,8 +13,15 @@
           %th State
         - else
           %th Country
+
     %tbody
-      - @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active.each do |comp|
+      - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
+      - if @competition.compete_in_order
+        - competitors = competitors.reorder("competitors.position")
+      - else
+        - competitors = competitors.reorder("competitors.lowest_member_bib_number")
+
+      - competitors.each do |comp|
         - cache [@competition, comp, @config, I18n.locale] do
           %tr
             - if @competition.compete_in_order
