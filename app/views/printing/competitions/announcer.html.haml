@@ -1,4 +1,4 @@
--cache [@competition, @config] do
+-cache [@competition, @config, I18n.locale] do
   %h2= "#{@competition} Competitors"
 
   %table.full.grid.competitor_list
@@ -15,7 +15,7 @@
           %th Country
     %tbody
       - @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active.each do |comp|
-        - cache [@competition, comp, @config] do
+        - cache [@competition, comp, @config, I18n.locale] do
           %tr
             - if @competition.compete_in_order
               %td= comp.position

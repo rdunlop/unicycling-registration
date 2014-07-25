@@ -3,6 +3,8 @@ Last Re-Arranged June 20th, 2014.
 BUGS:
 - Deleting the last member of a competitor doesn't delete the competitor.
 - There is some scenario causing orphaned members to exist (no associated competitor)
+- Direcotr is not authorized to Enter/Modify Results, even though they see the link (Gossi)
+- Announcer Form should have some sort of order, even on "un-ordered" competitions (like X-Style)
 
 - Improve the performance of the competitors#index page, based on newrelic performance. (add caching?)
 

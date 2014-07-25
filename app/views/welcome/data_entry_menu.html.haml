@@ -53,9 +53,9 @@
         %th Competition
         %th Status
     %tbody
-      - cache [Competition] do
+      - cache [Competition, I18n.locale] do
         - Competition.all.each do |competition|
-          - cache [competition] do
+          - cache [competition, I18n.locale] do
             %tr
               %td= competition.end_time_to_s
               %td= competition.event.category
