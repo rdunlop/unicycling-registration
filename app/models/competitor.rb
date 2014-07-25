@@ -463,12 +463,12 @@ class Competitor < ActiveRecord::Base
   end
 
   def details
-    res = ""
-    res += "Geared, " if geared
-    res += "#{riding_wheel_size}\", " if riding_wheel_size
-    res += "#{riding_crank_size}mm, " if riding_crank_size
-    res += notes if notes
-    res
+    res = []
+    res << "Geared" if geared
+    res << "#{riding_wheel_size}\"" if riding_wheel_size
+    res << "#{riding_crank_size}mm" if riding_crank_size
+    res << notes if notes
+    res.join(", ")
   end
 
   def best_time_in_thousands
