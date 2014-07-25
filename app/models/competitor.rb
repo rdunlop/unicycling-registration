@@ -14,6 +14,7 @@
 #  riding_wheel_size        :integer
 #  notes                    :string(255)
 #  heat                     :integer
+#  riding_crank_size        :integer
 #
 # Indexes
 #
@@ -464,7 +465,8 @@ class Competitor < ActiveRecord::Base
   def details
     res = ""
     res += "Geared, " if geared
-    res += "#{riding_wheel_size}\"," if riding_wheel_size
+    res += "#{riding_wheel_size}\", " if riding_wheel_size
+    res += "#{riding_crank_size}mm, " if riding_crank_size
     res += notes if notes
     res
   end

@@ -17,6 +17,7 @@
         %th Heat#
         %th Geared
         %th Wheel Size
+        %th Crank Size (mm)
         %th Notes
         %th
     %tbody
@@ -31,6 +32,7 @@
             %Th= comp_f.number_field :heat, class: "sign_in_heat"
             %td= comp_f.check_box :geared
             %td= comp_f.number_field :riding_wheel_size, class: "sign_in_wheel_size"
+            %td= comp_f.number_field :riding_crank_size, class: "sign_in_crank_size"
             %td= comp_f.text_field :notes, class: "sign_in_notes"
   = f.submit
 %br

@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 20140724123049) do
     t.integer  "riding_wheel_size"
     t.string   "notes"
     t.integer  "heat"
+    t.integer  "riding_crank_size"
   end
 
   add_index "competitors", ["competition_id"], name: "index_competitors_event_category_id", using: :btree
