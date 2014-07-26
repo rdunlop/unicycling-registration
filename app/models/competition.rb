@@ -59,7 +59,7 @@ class Competition < ActiveRecord::Base
   has_many :lane_assignments, :dependent => :destroy
 
   def self.data_recording_types
-    ["Two Attempt Distance", "Single Attempt", "Track E-Timer", "Externally Ranked", "Mass Start"]
+    ["Two Data Per Line", "One Data Per Line", "Track E-Timer", "Externally Ranked", "Mass Start"]
   end
 
   before_validation :clear_data_types_of_strings

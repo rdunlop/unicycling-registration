@@ -29,7 +29,7 @@ describe Competition do
   end
 
   it "allows a start_data_type" do
-    @ec.start_data_type = "Single Attempt"
+    @ec.start_data_type = "One Data Per Line"
     @ec.valid?.should == true
   end
 
