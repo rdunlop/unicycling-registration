@@ -24,6 +24,7 @@
 #  num_members_per_competitor    :string(255)
 #  automatic_competitor_creation :boolean          default(FALSE)
 #  combined_competition_id       :integer
+#  order_finalized               :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -148,8 +149,24 @@ class Competition < ActiveRecord::Base
 
   # Other functions
 
+  def award_title
+    res = award_title_name
+    res += " #{award_subtitle_name}" if award_subtitle_name.present?
+    res
+  end
+
   def to_s
     self.name
+  end
+
+  def start_list?
+    if uses_lane_assignments?
+      lane_assignments.any?
+    elsif compete_in_order
+      order_finalized?
+    else
+      false
+    end
   end
 
   def end_time_to_s

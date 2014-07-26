@@ -28,7 +28,7 @@ class Ability
     can :logo, EventConfiguration
     can :index, :result
     can :read, CombinedCompetition
-    can :announcer, Competition
+    can [:announcer, :start_list], Competition
     can [:acl, :set_acl, :code, :use_code], :permission
     can :show, PublishedAgeGroupEntry do |entry|
       entry.published_at.present?
@@ -119,7 +119,7 @@ class Ability
       user.has_role? :director, comp.event
     end
 
-    can [:set_sort, :sort, :sort_random, :lock], Competition do |comp|
+    can [:set_sort, :sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
       director_of_competition(user, comp)
     end
 

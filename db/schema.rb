@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724123049) do
+ActiveRecord::Schema.define(version: 20140726185918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,6 +177,7 @@ ActiveRecord::Schema.define(version: 20140724123049) do
     t.string   "num_members_per_competitor"
     t.boolean  "automatic_competitor_creation", default: false
     t.integer  "combined_competition_id"
+    t.boolean  "order_finalized",               default: false
   end
 
   add_index "competitions", ["event_id"], name: "index_competitions_event_id", using: :btree

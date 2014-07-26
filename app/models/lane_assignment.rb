@@ -17,7 +17,7 @@
 
 class LaneAssignment < ActiveRecord::Base
   belongs_to :competition
-  belongs_to :competitor
+  belongs_to :competitor, touch: true
   include CompetitorAutoCreation
 
   validates :competition, :competitor, :heat, :lane, :presence => true

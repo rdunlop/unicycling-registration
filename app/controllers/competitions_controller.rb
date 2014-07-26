@@ -93,6 +93,19 @@ class CompetitionsController < ApplicationController
     respond_with(@competition)
   end
 
+  def toggle_final_sort
+    new_value = !@competition.order_finalized
+
+    if new_value
+      flash[:notice] = "Sort Order finalized"
+    else
+      flash[:alert] = "Sort Order Marked non-final"
+    end
+
+    @competition.update_attribute(:order_finalized, new_value)
+    redirect_to set_sort_competition_path(@competition)
+  end
+
   def sort_random
     @competitors = @competition.competitors
     @competitors.shuffle.each_with_index do |comp, index|

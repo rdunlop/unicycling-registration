@@ -1,4 +1,4 @@
-%h1 Published Results
+%h1 Competitions Data
 %table.sortable
   %thead
     %tr
@@ -7,11 +7,12 @@
       %th
       //%th Status
       %th Competitor List
+      %th Start List
       %th Results
       %th Date Published
   %tbody
     - Competition.includes(:published_age_group_entries).all.each do |competition|
-      - cache [competition] do
+      - cache [competition, I18n.locale] do
         %tr
           %td= competition.end_time_to_s
           %td= competition.award_title_name
@@ -21,6 +22,9 @@
           %td
             - if competition.num_competitors > 0
               = link_to "Competitor List", announcer_printing_competition_path(competition)
+          %td
+            - if competition.start_list?
+              = link_to "Start List", start_list_printing_competition_path(competition)
           %td
             - if !competition.published? && competition.has_age_group_entry_results?
               - competition.published_age_group_entries.each do |entry|

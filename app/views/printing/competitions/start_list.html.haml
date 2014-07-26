@@ -1,9 +1,13 @@
 -cache [@competition, @config, I18n.locale] do
-  %h2= "#{@competition.award_title} Competitors"
+  %h2= "Order of #{@competition.award_title} Competitors"
 
-  %table.sortable
+  %table.full.grid.competitor_list
     %thead
       %tr
+        - if @competition.compete_in_order
+          %th Order
+        - if @competition.uses_lane_assignments?
+          %th Heat/Lane
         %th ID
         %th Name
         - if @competition.age_group_type
@@ -13,12 +17,22 @@
 
     %tbody
       - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
-      - competitors = competitors.reorder("competitors.lowest_member_bib_number")
+      - if @competition.compete_in_order
+        - competitors = competitors.reorder("competitors.position")
+      - if @competition.uses_lane_assignments?
+        - competitors = competitors.includes(:lane_assignments).reorder("lane_assignments.heat, lane_assignments.lane")
+
       - competitors.each do |comp|
         - cache [@competition, comp, @config, I18n.locale] do
           %tr
             - if @competition.compete_in_order
               %td= comp.position
+            - if @competition.uses_lane_assignments?
+              - la = comp.lane_assignments.first
+              - if la
+                %td #{la.heat} - #{la.lane}
+              - else
+                %td
             %td= comp.bib_number
             %td
               - if comp.team_name.present?
@@ -28,6 +42,6 @@
                 = member
                 %br
             - if @competition.age_group_type
-              %th= comp.age_group_entry_description
+              %td= comp.age_group_entry_description
             %td= comp.club
             %td= comp.state_or_country(@config.usa?)

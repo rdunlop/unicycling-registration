@@ -2,8 +2,6 @@ Last Re-Arranged June 20th, 2014.
 
 BUG:
 - The name of the competitoin for "800m Expert" is missing on Results page
-- why ar ethe competitor links in german on Results page
-- Don't show non-signed-up people in theheat_recording sheet. (usa/iuf)
 
 TO DO:
 - Create an Excel export for heat Number management by Directros (bib, heat, age, age group, event sign up details)

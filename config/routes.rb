@@ -18,6 +18,7 @@ Workspace::Application.routes.draw do
       resources :competitions, :only => [] do
         member do
           get :announcer
+          get :start_list
           get :heat_recording
           get :single_attempt_recording
           get :two_attempt_recording
@@ -301,6 +302,7 @@ Workspace::Application.routes.draw do
       member do
         get :set_sort
         post :sort
+        put :toggle_final_sort
         post :sort_random
         post :set_places
         get :export_scores

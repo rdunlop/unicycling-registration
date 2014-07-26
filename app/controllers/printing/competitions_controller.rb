@@ -14,6 +14,15 @@ class Printing::CompetitionsController < ApplicationController
     end
   end
 
+  def start_list
+    add_breadcrumb "Start List"
+
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf("start_list") }
+    end
+  end
+
   def heat_recording
     @competition_sign_up = CompetitionSignUp.new(@competition)
 

@@ -29,6 +29,7 @@ class Competitor < ActiveRecord::Base
   belongs_to :competition, touch: true, inverse_of: :competitors
   acts_as_list :scope => :competition
 
+  has_many :lane_assignments, dependent: :destroy
   has_many :scores, :dependent => :destroy
   has_many :boundary_scores, :dependent => :destroy
   has_many :standard_execution_scores, :dependent => :destroy
@@ -240,6 +241,22 @@ class Competitor < ActiveRecord::Base
         ages = members.map(&:age)
         ages.max
       end
+    end
+  end
+
+  def self.state_or_country_description(usa)
+    if usa
+      "State"
+    else
+      "Country"
+    end
+  end
+
+  def state_or_country(usa)
+    if usa
+      state
+    else
+      country
     end
   end
 
