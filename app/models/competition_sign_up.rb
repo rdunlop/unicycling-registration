@@ -42,7 +42,11 @@ class CompetitionSignUp
   end
 
   def not_signed_up_list(description)
-    @not_signed_up_list[description]
+    if EventConfiguration.singleton.usa?
+      @not_signed_up_list[description]
+    else
+      []
+    end
   end
 
 
