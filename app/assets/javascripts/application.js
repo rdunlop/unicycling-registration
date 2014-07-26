@@ -44,7 +44,9 @@ $(document).ready(function() {
    $(this).DataTable({
      "bFilter": search,
      "bInfo": false,
-     "bPaginate": false
+     "bPaginate": false,
+     "autoWidth": false,
+     "orderClasses": false
    });
   });
 });
