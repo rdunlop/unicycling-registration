@@ -53,6 +53,38 @@ class CompetitorsController < ApplicationController
   def enter_sign_in
     add_breadcrumb "Enter Sign-In"
     @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
+    respond_to do |format|
+      format.xls {
+        s = Spreadsheet::Workbook.new
+
+        sheet = s.create_worksheet
+        @competitors.each_with_index do |comp, row_number|
+          sheet[row_number, 0] = comp.lowest_member_bib_number
+          sheet[row_number, 1] = comp.detailed_name
+        end
+
+        report = StringIO.new
+        s.write report
+        send_data report.string, :filename => "download_events#{Date.today}.xls"
+      }
+      format.html {} #normal
+    end
+  end
+
+  def import_sign_in
+    if params[:file].respond_to?(:tempfile)
+      file = params[:file].tempfile
+    else
+      file = params[:file]
+    end
+
+    book = Spreadsheet.open file
+    sheet = book.worksheet 0
+    sheet.each do |row|
+      puts row
+    end
+
+    redirect_to enter_sign_in_competition_competitors_path(@competition)
   end
 
   def update_competitors

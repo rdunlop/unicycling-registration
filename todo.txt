@@ -1,5 +1,20 @@
 Last Re-Arranged June 20th, 2014.
 
+BUG:
+- The name of the competitoin for "800m Expert" is missing on Results page
+- why ar ethe competitor links in german on Results page
+- Don't show non-signed-up people in theheat_recording sheet. (usa/iuf)
+
+TO DO:
+- Create an Excel export for heat Number management by Directros (bib, heat, age, age group, event sign up details)
+- Create Excel import of the above file.
+
+
+Need to allow Hours minutes seconds, for Two Attempt Entry.
+
+- Allow Excel import of data for Timing. (like export the Two Attepmt entry document.) (same with bottom of the hill "Single attempt")
+
+
 BUGS:
 - Deleting the last member of a competitor doesn't delete the competitor.
 - There is some scenario causing orphaned members to exist (no associated competitor)
