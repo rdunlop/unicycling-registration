@@ -81,28 +81,34 @@ List of all competitors, including registrant info, with edit/delete, marking th
           %td= reg.describe_event(@competition.event)
           %td= assigned_comp
 
-  - display_all = @competition.num_members_per_competitor.nil?
-  - if display_all || @competition.num_members_per_competitor == "One"
-    = submit_tag Competitor.single_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" }
-    %br
-  - if @competition.num_members_per_competitor == "Two"
-    = submit_tag Competitor.group_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a Pair with the chosen registrants. Continue?" }
-    %br
-  - if display_all ||  @competition.num_members_per_competitor == "Three or more"
-    = submit_tag Competitor.group_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a Single competitor for all chosen registrants. Continue?" }
-    = text_field_tag :group_name, nil, :placeholder => "Group Name (optional)"
-    %br
+  - if @remaining_registrants.any?
+    - display_all = @competition.num_members_per_competitor.nil?
+    - if display_all || @competition.num_members_per_competitor == "One"
+      = submit_tag Competitor.single_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" }
+      %br
+    - if @competition.num_members_per_competitor == "Two"
+      = submit_tag Competitor.group_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a Pair with the chosen registrants. Continue?" }
+      %br
+    - if display_all ||  @competition.num_members_per_competitor == "Three or more"
+      = submit_tag Competitor.group_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a Single competitor for all chosen registrants. Continue?" }
+      = text_field_tag :group_name, nil, :placeholder => "Group Name (optional)"
+      %br
 
-  = submit_tag Competitor.not_qualified_text, :class => "multiclick counter_action_button", :data => { :confirm => "This will create a Single competitor for each registrants, and mark these as 'not qualified'. Continue?" }
+    = submit_tag Competitor.not_qualified_text, :class => "multiclick counter_action_button", :data => { :confirm => "This will create a Single competitor for each registrants, and mark these as 'not qualified'. Continue?" }
 %hr
 - if @competition.compete_in_order
-  %b Once you have completed creating all of the competitors, you may want to use the "Sort" function to shuffle the order of competition.
+  -if @competition.order_finalized?
+    %b Order Has been finalized
+    %br
+    = link_to "Sort Competitors", set_sort_competition_path(@competition), class: "minor_action"
+  - else
+    Once you have completed creating all of the competitors, you should use the "Sort" functions to shuffle or specify the order of competition.
+    %br
+    = link_to "Sort Competitors", set_sort_competition_path(@competition), class: "action_button"
   %hr
 %p
   Advanced Options:
   = link_to 'Advanced Create Competitor', new_competition_competitor_path(@competition), class: "minor_action"
-  - if @competition.compete_in_order
-    = link_to "Sort Competitors", set_sort_competition_path(@competition), class: "minor_action"
 
 %br
 = link_to "Back", @competition
