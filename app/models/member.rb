@@ -29,7 +29,7 @@ class Member < ActiveRecord::Base
     def update_min_bib_number
       comp = competitor(true)
       return if comp.nil?
-      lowest_bib_number = comp.members.map{ |member| member.registrant.bib_number }.min
+      lowest_bib_number = comp.members.includes(:registrant).minimum("registrants.bib_number")
       competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number
     end
 
@@ -46,11 +46,8 @@ class Member < ActiveRecord::Base
             if competitor.nil? or registrant.nil?
                 return
             end
-            competition = competitor.competition
-            competition.reload.registrants.each do |reg|
-                if reg == registrant
-                    errors[:base] = "Cannot have the same registrant (#{registrant}) in the same competition twice"
-                end
+            if registrant.competitors.where(competition: competitor.competition).any?
+                errors[:base] = "Cannot have the same registrant (#{registrant}) in the same competition twice"
             end
         end
     end
