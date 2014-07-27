@@ -164,6 +164,8 @@ class Competition < ActiveRecord::Base
       lane_assignments.any?
     elsif compete_in_order
       order_finalized?
+    elsif start_data_type == "Mass Start"
+      true
     else
       false
     end

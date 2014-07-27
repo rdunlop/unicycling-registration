@@ -1,13 +1,30 @@
 -cache [@competition, @config, I18n.locale] do
   %h2= "Order of #{@competition.award_title} Competitors"
 
+
+  - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
+  - if @competition.compete_in_order
+    - competitors = competitors.reorder("competitors.position")
+  - if @competition.uses_lane_assignments?
+    - competitors = competitors.includes(:lane_assignments).reorder("lane_assignments.heat, lane_assignments.lane")
+  -# has heats
+  - has_heats = competitors.where.not(heat: nil).any?
+  - if has_heats
+    - competitors = competitors.reorder(:heat)
+
+  - heat_times = @competition.heat_times
+
   %table.full.grid.competitor_list
     %thead
       %tr
+        - if heat_times.count > 0
+          %th Scheduled Time
         - if @competition.compete_in_order
           %th Order
         - if @competition.uses_lane_assignments?
           %th Heat/Lane
+        - if has_heats
+          %th Heat
         %th ID
         %th Name
         - if @competition.age_group_type
@@ -16,15 +33,11 @@
         %th= Competitor.state_or_country_description(@config.usa?)
 
     %tbody
-      - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
-      - if @competition.compete_in_order
-        - competitors = competitors.reorder("competitors.position")
-      - if @competition.uses_lane_assignments?
-        - competitors = competitors.includes(:lane_assignments).reorder("lane_assignments.heat, lane_assignments.lane")
-
       - competitors.each do |comp|
         - cache [@competition, comp, @config, I18n.locale] do
           %tr
+            - if heat_times.count > 0
+              %td= heat_times.where(heat: comp.heat).first.try(:scheduled_time)
             - if @competition.compete_in_order
               %td= comp.position
             - if @competition.uses_lane_assignments?
@@ -33,6 +46,8 @@
                 %td #{la.heat} - #{la.lane}
               - else
                 %td
+            - if has_heats
+              %Td= comp.heat
             %td= comp.bib_number
             %td
               - if comp.team_name.present?

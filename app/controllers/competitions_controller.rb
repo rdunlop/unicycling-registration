@@ -244,7 +244,7 @@ class CompetitionsController < ApplicationController
                                         :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,
                                         :automatic_competitor_creation, :combined_competition_id,
                                         :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy],
-                                        :heat_times_attributes => [:id, :heat, :minutes, :seconds, :_destroy] )
+                                        :heat_times_attributes => [:id, :scheduled_time, :heat, :minutes, :seconds, :_destroy] )
   end
 
   def set_parent_breadcrumbs

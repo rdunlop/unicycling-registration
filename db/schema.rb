@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726185918) do
+ActiveRecord::Schema.define(version: 20140727000751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -417,6 +417,7 @@ ActiveRecord::Schema.define(version: 20140726185918) do
     t.integer  "seconds"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "scheduled_time"
   end
 
   create_table "import_results", force: true do |t|

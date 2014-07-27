@@ -2,12 +2,14 @@
   %table.items
     %thead
       %tr
+        %th Scheduled Time Description
         %th Heat#
         %th Minutes
         %th Seconds
     %tbody
       = f.nested_fields_for :heat_times do |cs|
         %tr.item
+          %Td= cs.text_field :scheduled_time
           %td= cs.number_field :heat
           %td= cs.number_field :minutes, {min: 0}
           %Td= cs.number_field :seconds, {min: 0}
