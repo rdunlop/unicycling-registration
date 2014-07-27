@@ -1,5 +1,11 @@
 Last Re-Arranged June 20th, 2014.
 
+
+- Show all competitor events instead of registered events
+- Show any remaining sign ups as "(Not Confirmed)"
+- Show a message on the EDIT page if they are confirmed in a different competition within the event.
+
+
 - Remove Club from Group display.
 - Change Country to be the country wih the most # of members.
 

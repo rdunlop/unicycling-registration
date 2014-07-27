@@ -23,10 +23,15 @@
         = link_to "List Payments", registrant_payments_path(@registrant)
   .registrant_events_block
     - if @registrant.competitor
-      = render :partial => "/registrants/registrant_events"
+      - if @config.display_confirmed_events?
+        = render partial: "/registrants/registrant_confirmed_events"
+        = render partial: "/registrants/registrant_unconfirmed_events"
+      - else
+        = render :partial => "/registrants/registrant_events"
       - if can? :update, @registrant
         .edit_link_block
           = link_to t(".edit_events"), edit_registrant_path(@registrant)
+
   = render partial: "/registrants/registrant_songs"
   - if @registrant.has_standard_skill?
     %hr.non_printable

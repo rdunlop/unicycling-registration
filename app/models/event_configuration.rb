@@ -34,6 +34,7 @@
 #  usa_family_expense_item_id            :integer
 #  logo_file                             :string(255)
 #  max_award_place                       :integer          default(5)
+#  display_confirmed_events              :boolean          default(FALSE)
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -82,6 +83,7 @@ class EventConfiguration < ActiveRecord::Base
     self.currency_code ||= "USD"
     self.contact_email ||= ""
     self.max_award_place ||= 5
+    self.display_confirmed_events = false if self.display_confirmed_events.nil?
   end
 
   # allows creating competitors during lane assignment

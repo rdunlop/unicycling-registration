@@ -266,7 +266,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def has_standard_skill?
-    signed_up_events.each do |rc|
+    signed_up_events.includes(:event_category => [:event]).each do |rc|
       next if rc.event_category.nil?
       if rc.event_category.event.standard_skill?
         return true
@@ -379,9 +379,13 @@ class Registrant < ActiveRecord::Base
     @has_event[event] ||= signed_up_events.where({:event_id => event.id}).any?
   end
 
+  def active_competitors
+    @active_competitors ||= competitors.includes(:competition => :event).active
+  end
+
   def has_confirmed_event?(event)
     @has_confirmed_event ||= {}
-    @has_confirmed_event[event] ||= competitors.includes(:competition => :event).active.any?{|competitor| competitor.event == event}
+    @has_confirmed_event[event] ||= active_competitors.any?{|competitor| competitor.event == event}
   end
 
   def has_unconfirmed_event?(event)
