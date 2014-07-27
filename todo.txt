@@ -1,5 +1,8 @@
 Last Re-Arranged June 20th, 2014.
 
+- Remove Club from Group display.
+- Change Country to be the country wih the most # of members.
+
 BUG:
 - The name of the competitoin for "800m Expert" is missing on Results page
 
