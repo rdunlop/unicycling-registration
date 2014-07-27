@@ -15,3 +15,5 @@
                     = details[:description]
                     = "- #{details[:category]}" if details[:category].present?
                     = details[:additional]
+                    - unless @registrant.has_event?(event)
+                      %i (Competitor, but Not Signed up)
