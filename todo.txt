@@ -4,6 +4,9 @@ BUG:
 - The name of the competitoin for "800m Expert" is missing on Results page
 
 TO DO:
+- Allow Hugo's Rules for High/Long....use a warning if they choose to move on without completing.
+- Update Registration#summary to show the created competitors, and a warning if they do not exist (but are signed up)
+
 - Create an Excel export for heat Number management by Directros (bib, heat, age, age group, event sign up details)
 - Create Excel import of the above file.
 

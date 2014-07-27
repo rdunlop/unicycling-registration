@@ -17,8 +17,6 @@
       - competitors.each do |comp|
         - cache [@competition, comp, @config, I18n.locale] do
           %tr
-            - if @competition.compete_in_order
-              %td= comp.position
             %td= comp.bib_number
             %td
               - if comp.team_name.present?
@@ -28,6 +26,6 @@
                 = member
                 %br
             - if @competition.age_group_type
-              %th= comp.age_group_entry_description
+              %td= comp.age_group_entry_description
             %td= comp.club
             %td= comp.state_or_country(@config.usa?)

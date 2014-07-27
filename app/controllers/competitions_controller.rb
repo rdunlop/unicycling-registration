@@ -80,6 +80,7 @@ class CompetitionsController < ApplicationController
   end
 
   def set_sort
+    add_breadcrumb "#{@competition}", competition_path(@competition)
     add_breadcrumb "Manage Competitors", competition_competitors_path(@competition)
     add_breadcrumb "Sort Competitors"
   end

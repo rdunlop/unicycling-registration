@@ -45,6 +45,11 @@ Results, judges, and scoring settings.
     %tbody
       = render partial: "data_entry_links", locals: {competition: @competition }
 
+- if @competition.start_list?
+  %h2 Start List
+  = link_to "Start list", start_list_printing_competition_path(@competition)
+  = link_to "(pdf)", start_list_printing_competition_path(@competition, :format => :pdf)
+
 - if can? :lock, @competition
   %h2 Judges
   - if @competition.uses_judges
