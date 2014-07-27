@@ -272,13 +272,23 @@ class Competitor < ActiveRecord::Base
     end
   end
 
+  def majority_country(input_countries)
+    different_countries = input_countries.uniq.compact
+    count_of_countries = {}
+    different_countries.map{|c| count_of_countries[c] = input_countries.count(c) }
+
+    max_matches = different_countries.map{|c| count_of_countries[c] }.max
+
+    countries_at_max_matches = count_of_countries.select{|key, value| value == max_matches }.keys
+
+    countries_at_max_matches.sort.join(", ") unless countries_at_max_matches.empty?
+  end
+
   def country
     if members.empty?
       "(No registrants)"
     else
-      countries = members.map(&:country).uniq.compact
-      # display all countries if there are more than 1 registrants
-      countries.join(",") unless countries.empty?
+      majority_country(members.map(&:country))
     end
   end
 
@@ -333,7 +343,11 @@ class Competitor < ActiveRecord::Base
     if members.empty?
       "(No registrants)"
     else
-      members.first.club
+      if members.size > 1
+        ""
+      else
+        members.first.club
+      end
     end
   end
 

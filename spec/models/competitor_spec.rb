@@ -241,6 +241,13 @@ describe Competitor do
             @comp.gender.should == "(mixed)"
         end
 
+        it "can determine the majority country" do
+          expect(@comp.majority_country(["USA"])).to eq("USA")
+          expect(@comp.majority_country(["USA", nil])).to eq("USA")
+          expect(@comp.majority_country(["USA", "Canada"])).to eq("Canada, USA")
+          expect(@comp.majority_country(["USA", "Canada", "Canada"])).to eq("Canada")
+          expect(@comp.majority_country([nil, nil])).to eq(nil)
+        end
         it "should display the source country" do
           @comp.country.should == @reg1.country
         end
