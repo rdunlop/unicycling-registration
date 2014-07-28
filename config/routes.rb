@@ -136,7 +136,7 @@ Workspace::Application.routes.draw do
       end
       resources :competitions, :only => [:new, :create]
     end
-    resources :event_categories, :except => [:index, :create, :new] do
+    resources :event_categories, :except => [:index, :create, :new, :show] do
       member do
         get :sign_ups
       end

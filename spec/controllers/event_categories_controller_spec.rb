@@ -49,17 +49,9 @@ describe EventCategoriesController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested event_category as @event_category" do
-      event_category = EventCategory.create! valid_attributes
-      get :show, {:id => event_category.to_param}
-      assigns(:event_category).should eq(event_category)
-    end
-  end
-
   describe "GET edit" do
     it "assigns the requested event_category as @event_category" do
-      event_category = EventCategory.create! valid_attributes
+      event_category = @event.event_categories.first
       get :edit, {:id => event_category.to_param}
       assigns(:event_category).should eq(event_category)
     end
@@ -110,7 +102,7 @@ describe EventCategoriesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested event_category" do
-        event_category = EventCategory.create! valid_attributes
+        event_category = @event.event_categories.first
         # Assuming there are no other event_categories in the database, this
         # specifies that the EventCategory created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -120,21 +112,21 @@ describe EventCategoriesController do
       end
 
       it "assigns the requested event_category as @event_category" do
-        event_category = EventCategory.create! valid_attributes
+        event_category = @event.event_categories.first
         put :update, {:id => event_category.to_param, :event_category => valid_attributes}
         assigns(:event_category).should eq(event_category)
       end
 
-      it "redirects to the event_category" do
-        event_category = EventCategory.create! valid_attributes
+      it "redirects to the event" do
+        event_category = @event.event_categories.first
         put :update, {:id => event_category.to_param, :event_category => valid_attributes}
-        response.should redirect_to(event_category)
+        response.should redirect_to(event_event_categories_path(event_category.event))
       end
     end
 
     describe "with invalid params" do
       it "assigns the event_category as @event_category" do
-        event_category = EventCategory.create! valid_attributes
+        event_category = @event.event_categories.first
         # Trigger the behavior that occurs when invalid params are submitted
         EventCategory.any_instance.stub(:save).and_return(false)
         put :update, {:id => event_category.to_param, :event_category => {:name => "cat name"}}
@@ -142,7 +134,7 @@ describe EventCategoriesController do
       end
 
       it "re-renders the 'edit' template" do
-        event_category = EventCategory.create! valid_attributes
+        event_category = @event.event_categories.first
         # Trigger the behavior that occurs when invalid params are submitted
         EventCategory.any_instance.stub(:save).and_return(false)
         put :update, {:id => event_category.to_param, :event_category => {:name => "cat name"}}

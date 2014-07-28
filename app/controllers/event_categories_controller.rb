@@ -30,12 +30,6 @@ class EventCategoriesController < ApplicationController
     respond_with(@event_category)
   end
 
-  # GET /event_categories/1
-  # GET /event_categories/1.json
-  def show
-
-  end
-
   # GET /event_categories/1/edit
   def edit
   end
@@ -63,7 +57,7 @@ class EventCategoriesController < ApplicationController
 
     respond_to do |format|
       if @event_category.update_attributes(event_category_params)
-        format.html { redirect_to @event_category, notice: 'Event Category was successfully updated.' }
+        format.html { redirect_to event_event_categories_path(@event_category.event), notice: 'Event Category was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -92,7 +86,7 @@ class EventCategoriesController < ApplicationController
 
   private
   def event_category_params
-    params.require(:event_category).permit(:name, :position, :age_group_type_id, :age_range_start, :age_range_end)
+    params.require(:event_category).permit(:name, :warning_on_registration_summary, :position, :age_group_type_id, :age_range_start, :age_range_end)
   end
 
   def set_breadcrumb

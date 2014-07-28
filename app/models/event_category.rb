@@ -2,14 +2,15 @@
 #
 # Table name: event_categories
 #
-#  id              :integer          not null, primary key
-#  event_id        :integer
-#  position        :integer
-#  name            :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  age_range_start :integer          default(0)
-#  age_range_end   :integer          default(100)
+#  id                              :integer          not null, primary key
+#  event_id                        :integer
+#  position                        :integer
+#  name                            :string(255)
+#  created_at                      :datetime         not null
+#  updated_at                      :datetime         not null
+#  age_range_start                 :integer          default(0)
+#  age_range_end                   :integer          default(100)
+#  warning_on_registration_summary :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -23,6 +24,7 @@ class EventCategory < ActiveRecord::Base
 
   has_many :competition_sources, :dependent => :destroy
 
+  validates :event, presence: true
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
   validates :position, :uniqueness => {:scope => [:event_id]}
 

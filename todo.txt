@@ -1,20 +1,36 @@
 Last Re-Arranged June 20th, 2014.
 
+Questions
+=========
+- add flag to Summary for Cyclocross, < 10 age, IUF unpaid, Unpaid.
+- Awards Sheets (to be given with the medals)
+ - Business Cardstock? Cardstock+cutter?
+ - What order to run track heats ? (based on when the finals are)
+- MUni 30 males qualified...what if there are people who don't show up...we don't give 31st a place, do we?
+- 100m Experts, same question
 
+========
+- Should I create Cyclocross Categories for people to be able to choose one in the Registratio?
+
+BUG: able to crash the system (dos attack) by attempting to approve only the Start Times.
+
+- OnSite Registration/Payments.
+ - What can people buy? how do we manage that?
+ - How do I keep people from buying things we don't have for sale?
+- Report and Remove all the unpaid elements (shirts)
 - Show all competitor events instead of registered events
 - Show any remaining sign ups as "(Not Confirmed)"
+- Update Registration#summary to show the created competitors, and a warning if they do not exist (but are signed up)
+- Improve the Registrant#event_warnings function by using an sql join to find the necessary rows?
+
 - Show a message on the EDIT page if they are confirmed in a different competition within the event.
-
-
-- Remove Club from Group display.
-- Change Country to be the country wih the most # of members.
 
 BUG:
 - The name of the competitoin for "800m Expert" is missing on Results page
 
 TO DO:
 - Allow Hugo's Rules for High/Long....use a warning if they choose to move on without completing.
-- Update Registration#summary to show the created competitors, and a warning if they do not exist (but are signed up)
+
 
 - Create an Excel export for heat Number management by Directros (bib, heat, age, age group, event sign up details)
 - Create Excel import of the above file.
@@ -29,8 +45,6 @@ BUGS:
 - Deleting the last member of a competitor doesn't delete the competitor.
 - There is some scenario causing orphaned members to exist (no associated competitor)
 - Direcotr is not authorized to Enter/Modify Results, even though they see the link (Gossi)
-- Announcer Form should have some sort of order, even on "un-ordered" competitions (like X-Style)
-- Registrant#summayr should list the event competitors (and/or the events that they signed up for?)
 
 - 10k has a rule which allows people to complete only 3 laps, and get a time, and place lower than those who have 4 laps. (how do we do this in data?)
 
@@ -55,9 +69,7 @@ A super-judge by Time:
 - Import Heat#s (id,heat#)
  - Matching Export function?
 
-- add flag to Summary for Cyclocross, < 10 age, IUF unpaid, Unpaid.
-- Printer from Connie
-- Report and Remove all the unpaid elements (shirts)
+
 - Onsite reg for marathon is allowed
 - Onsite reg for Muni is allowed, but you need to pay for MUni bus ticket yourself.
 - need a way to be able to add a payment item to a registrant (as a payment_admin, onsite).

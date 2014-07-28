@@ -248,6 +248,13 @@ class Registrant < ActiveRecord::Base
     age < 18
   end
 
+  # for displaying on the Registrant#Summary page
+  # if this user is signed up for an event category which is now "warning" flagged
+  def event_warnings
+    warned_sign_ups = signed_up_events.includes(:event_category).select{|rei| rei.event_category.warning_on_registration_summary }
+    warned_sign_ups.map{|rei| "#{rei.event} - #{rei.event_category.name} Category" }
+  end
+
   def age_at_event_date(event_date)
     if (birthday.month < event_date.month) || (birthday.month == event_date.month && birthday.day <= event_date.day)
       event_date.year - birthday.year
