@@ -347,6 +347,11 @@ Workspace::Application.routes.draw do
           get :download_heat_evt
         end
       end
+      resources :distance_attempts, only: [] do
+        collection do
+          get :list
+        end
+      end
       resources :external_results, :shallow => true, :except => [:new, :show]
       resources :published_age_group_entries, only: [:show] do
         member do
@@ -369,11 +374,7 @@ Workspace::Application.routes.draw do
       #choose the desired competitor to add scores to
       resources :scores, :only => [:index]
       resources :standard_scores, :only => [:index]
-      resources :distance_attempts, :only => [:index, :create] do
-        collection do
-          get :list
-        end
-      end
+      resources :distance_attempts, :only => [:index, :create]
       resources :street_scores, :only => [:index, :create, :destroy]
     end
     resources :distance_attempts, :only => [:update, :destroy]

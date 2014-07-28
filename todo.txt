@@ -107,12 +107,10 @@ Feature - When doing MUNI data entry, it should easily allow changing the result
 - TwoAttempEntry, should require thousands in both T1 and T2, does it?
 - Eliminate the difference between Proof and Review. (these two pages are very similar)
 - If a Fininsh timei s DQ, and a start is not, it says "Unknown" (fix this).
-- Why isn't Jamey Mossengren in the MUni DH Expert results.
 - Can we Run High/Long by age group, so that we can keep the distance at a long thing, and
 - Feature: print a cover page for Artistic Results?
 - Allow Admin to be able to edit imported scores.
 - Have a way to enter "Hours" for start time/finish times.
-- When editing TwoAttempt Entry, it should not re-sort the data entry)
 BUG- Unable to enter external Result with a DQ (the "not qualifieD" of the Competitor doesn't seem to take effect over the external result
 BUG - why are both the high and long appearing in the "List" of distance attempts?
 BUG- how can I manage ALL distance attempts (to edit/delete) to fix problems with the data?

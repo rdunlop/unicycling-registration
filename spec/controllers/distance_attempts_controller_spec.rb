@@ -45,13 +45,13 @@ describe DistanceAttemptsController do
         @judge = FactoryGirl.create(:judge, :competition => @competition)
     end
     it "should return a list of all distance_attempts" do
-        get :list, {:judge_id => @judge.id}
+        get :list, {:competition_id => @competition.id}
 
         response.should render_template("list")
     end
     it "should return the distance attempts" do
         da = FactoryGirl.create(:distance_attempt, :judge => @judge, :competitor => @comp)
-        get :list, {:judge_id => @judge.id}
+        get :list, {:competition_id => @competition.id}
 
         assigns(:distance_attempts).should eq([da])
     end
@@ -60,7 +60,7 @@ describe DistanceAttemptsController do
         @normal_user = FactoryGirl.create(:user)
         sign_in @normal_user
 
-        get :list, {:judge_id => @judge.id}
+        get :list, {:competition_id => @competition.id}
 
         response.should redirect_to(root_path)
     end

@@ -1,8 +1,10 @@
 class DistanceAttemptsController < ApplicationController
-  load_and_authorize_resource
-  before_filter :load_event_category, :except => [:destroy]
+  load_resource :judge, except: [:list, :destroy]
+  load_and_authorize_resource through: :judge, except: [:list, :destroy]
+  load_and_authorize_resource only: [:destroy]
+  before_filter :load_competition, :except => [:list, :destroy]
 
-  before_filter :set_judge_breadcrumb, except: :destroy
+  before_filter :set_judge_breadcrumb, except: [:list, :destroy]
 
   respond_to :html
   # feature "check competitor status"
@@ -12,7 +14,7 @@ class DistanceAttemptsController < ApplicationController
   def index
     # show the current attempts, and a button which says "add new attempt"
     # display a summary of the most recent attempts, add to this list. (including competitor statuses)
-    @recent_distance_attempts = @judge.distance_attempts.includes(:competitor).limit(20)
+    @recent_distance_attempts = @distance_attempts.includes(:competitor).limit(20)
     @max_distance_attempts = @competition.top_distance_attempts(5)
 
     @height = params[:height]
@@ -32,6 +34,7 @@ class DistanceAttemptsController < ApplicationController
         format.js { }
       else
         format.html {
+          @distance_attempts = @judge.distance_attempts
           index
           render "index"
         }
@@ -47,8 +50,11 @@ class DistanceAttemptsController < ApplicationController
     redirect_to :back
   end
 
+  # /competitions/#/distance_attempts/list
   def list
-    @distance_attempts = @distance_attempts.includes(:competitor)
+    @competition = Competition.find(params[:competition_id])
+    authorize! :list, DistanceAttempt
+    @distance_attempts = @competition.distance_attempts.includes(:competitor)
     respond_to do |format|
       format.html { render action: "list" }
       format.json { head :no_content }
@@ -61,8 +67,7 @@ class DistanceAttemptsController < ApplicationController
     params.require(:distance_attempt).permit(:distance, :fault, :registrant_id)
   end
 
-  def load_event_category
-    @judge = Judge.find(params[:judge_id])
+  def load_competition
     @competition = @judge.competition
   end
 
