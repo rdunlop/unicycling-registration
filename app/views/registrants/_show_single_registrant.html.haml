@@ -1,46 +1,47 @@
-.registrant_header
-  %h1
-    = "#{t('.registration_summary')}: #{@registrant.first_name} #{@registrant.middle_initial} #{@registrant.last_name} ##{@registrant.bib_number}"
-  .info_block
-    = render partial: "/registrants/unpaid_warnings"
-    = render partial: "/registrants/access_code"
+- cache [I18n.locale, current_user, @registrant] do
+  .registrant_header
+    %h1
+      = "#{t('.registration_summary')}: #{@registrant.first_name} #{@registrant.middle_initial} #{@registrant.last_name} ##{@registrant.bib_number}"
+    .info_block
+      = render partial: "/registrants/unpaid_warnings"
+      = render partial: "/registrants/access_code"
 
-.non_printable
-  = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
-.registrant_summary
-  .registrant_summary_block
-    = render :partial => "/registrants/summary"
-    - if can? :update, @registrant
-      .edit_link_block
-        = link_to t(".edit_registration"), edit_registrant_path(@registrant)
-  .registrant_expenses_block
-    = render :partial => "/registrants/registrant_expenses"
-    - if can? :create, RegistrantExpenseItem
-      .edit_link_block
-        = link_to t(".edit_items"), registrant_registrant_expense_items_path(@registrant)
-    - if can? :manage, @registrant
-      .non_printable
-        = link_to "List Payments", registrant_payments_path(@registrant)
-  .registrant_events_block
-    - if @registrant.competitor
-      - if @config.display_confirmed_events?
-        = render partial: "/registrants/registrant_confirmed_events"
-        = render partial: "/registrants/registrant_unconfirmed_events"
-      - else
-        = render :partial => "/registrants/registrant_events"
+  .non_printable
+    = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
+  .registrant_summary
+    .registrant_summary_block
+      = render :partial => "/registrants/summary"
       - if can? :update, @registrant
         .edit_link_block
-          = link_to t(".edit_events"), edit_registrant_path(@registrant)
+          = link_to t(".edit_registration"), edit_registrant_path(@registrant)
+    .registrant_expenses_block
+      = render :partial => "/registrants/registrant_expenses"
+      - if can? :create, RegistrantExpenseItem
+        .edit_link_block
+          = link_to t(".edit_items"), registrant_registrant_expense_items_path(@registrant)
+      - if can? :manage, @registrant
+        .non_printable
+          = link_to "List Payments", registrant_payments_path(@registrant)
+    .registrant_events_block
+      - if @registrant.competitor
+        - if @config.display_confirmed_events?
+          = render partial: "/registrants/registrant_confirmed_events"
+          = render partial: "/registrants/registrant_unconfirmed_events"
+        - else
+          = render :partial => "/registrants/registrant_events"
+        - if can? :update, @registrant
+          .edit_link_block
+            = link_to t(".edit_events"), edit_registrant_path(@registrant)
 
-  = render partial: "/registrants/registrant_songs"
-  - if @registrant.has_standard_skill?
-    %hr.non_printable
-    .edit_link_block
-      = render :partial => "/standard_skill_routines/routine_links", :locals => {:registrant => @registrant}
-%hr.non_printable
-.non_printable
-  - if @registrant.competitor
-    = link_to t(".done"), user_registrants_path(current_user), {:class => "competitor registration_button"}
-  - else
-    = link_to t('.done'), user_registrants_path(current_user), {:class => "noncompetitor registration_button"}
-= render :partial => "/registrants/waiver"
+    = render partial: "/registrants/registrant_songs"
+    - if @registrant.has_standard_skill?
+      %hr.non_printable
+      .edit_link_block
+        = render :partial => "/standard_skill_routines/routine_links", :locals => {:registrant => @registrant}
+  %hr.non_printable
+  .non_printable
+    - if @registrant.competitor
+      = link_to t(".done"), user_registrants_path(current_user), {:class => "competitor registration_button"}
+    - else
+      = link_to t('.done'), user_registrants_path(current_user), {:class => "noncompetitor registration_button"}
+  = render :partial => "/registrants/waiver"

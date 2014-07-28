@@ -1,5 +1,12 @@
 Last Re-Arranged June 20th, 2014.
 
+
+
+BUGS:
+- Unable to use the export functions (doesn't like transferring that much data over the response?)
+-
+
+
 Questions
 =========
 - add flag to Summary for Cyclocross, < 10 age, IUF unpaid, Unpaid.
