@@ -32,6 +32,10 @@ class EventCategory < ActiveRecord::Base
     event.to_s + " - " + self.name
   end
 
+  def self.with_warnings
+    where(warning_on_registration_summary: true)
+  end
+
   def competitions_being_fed(registrant)
     competition_sources.select{|cs| cs.registrant_passes_filters(registrant) }.map(&:target_competition)
   end

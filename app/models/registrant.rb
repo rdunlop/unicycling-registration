@@ -256,7 +256,7 @@ class Registrant < ActiveRecord::Base
   # for displaying on the Registrant#Summary page
   # if this user is signed up for an event category which is now "warning" flagged
   def event_warnings
-    warned_sign_ups = signed_up_events.includes(:event_category).select{|rei| rei.event_category.warning_on_registration_summary }
+    warned_sign_ups = signed_up_events.joins(:event_category).includes(:event, :event_category).merge(EventCategory.with_warnings)
     warned_sign_ups.map{|rei| "#{rei.event} - #{rei.event_category.name} Category" }
   end
 
