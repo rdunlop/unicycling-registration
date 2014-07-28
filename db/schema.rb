@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728000912) do
+ActiveRecord::Schema.define(version: 20140728195211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -643,6 +643,7 @@ ActiveRecord::Schema.define(version: 20140728000912) do
     t.boolean  "volunteer"
     t.string   "online_waiver_signature"
     t.string   "access_code"
+    t.string   "sorted_last_name"
   end
 
   add_index "registrants", ["deleted"], name: "index_registrants_deleted", using: :btree

@@ -89,7 +89,8 @@ class Registrant < ActiveRecord::Base
   validates_associated :contact_detail
   validates_associated :registrant_expense_items
 
-  validates :first_name, :last_name, :birthday, :gender, :presence => true
+  before_validation :set_sorted_last_name
+  validates :first_name, :last_name, :sorted_last_name, :birthday, :gender, :presence => true
   validates :user_id, :bib_number, :age, :default_wheel_size, :presence => true
 
   validates :competitor, :ineligible, :deleted, :inclusion => { :in => [true, false] } # because it's a boolean
@@ -110,6 +111,10 @@ class Registrant < ActiveRecord::Base
 
   def set_access_code
     self.access_code = SecureRandom.hex(4)
+  end
+
+  def set_sorted_last_name
+    self.sorted_last_name = ActiveSupport::Inflector.transliterate(last_name).downcase if last_name
   end
 
   # updates the members, which update the competitors, if this competitor has changed (like their age, for example)

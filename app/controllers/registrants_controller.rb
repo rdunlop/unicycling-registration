@@ -285,22 +285,22 @@ class RegistrantsController < ApplicationController
   end
 
   def bag_labels
-    @registrants = Registrant.reorder(:last_name, :first_name).active.all
+    @registrants = Registrant.includes(:contact_detail).reorder(:sorted_last_name, :first_name).active.all
 
     names = []
     @registrants.each do |reg|
-      names << "<b>##{reg.bib_number}</b> #{reg.name} \n #{reg.country}"
+      names << "<b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name} \n #{reg.country}"
     end
 
     labels = Prawn::Labels.render(names, :type => "Avery5160") do |pdf, name|
-      pdf.text name, :align => :center, :size => 10, :inline_format => true
+      pdf.text name, :align => :center, :size => 12, :inline_format => true
     end
 
     send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
   end
 
   def show_all
-    @registrants = Registrant.active.reorder(:last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
+    @registrants = Registrant.active.reorder(:sorted_last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
 
     if params[:min]
       @registrants = @registrants.where("bib_number >= #{params[:min]} and bib_number <= #{params[:max]}")
