@@ -1,7 +1,7 @@
 - cache [I18n.locale, current_user, @registrant] do
   .registrant_header
     %h1
-      = "#{t('.registration_summary')}: #{@registrant.first_name} #{@registrant.middle_initial} #{@registrant.last_name} ##{@registrant.bib_number}"
+      = "#{@registrant.last_name}, #{@registrant.first_name} ##{@registrant.bib_number}"
     .info_block
       = render partial: "/registrants/unpaid_warnings"
       = render partial: "/registrants/access_code"

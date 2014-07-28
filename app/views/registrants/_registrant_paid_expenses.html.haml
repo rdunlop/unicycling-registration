@@ -1,10 +1,11 @@
-- cache [I18n.locale, @config, @registrant] do
+- cache [I18n.locale, @config, @registrant, details] do
   - @registrant.paid_details.each do |pei|
     %tr
       %td= pei
-      %td
-        - if pei.has_details
-          = "#{pei.details_label}: #{pei.details}"
+      - if details
+        %td
+          - if pei.has_details
+            = "#{pei.details_label}: #{pei.details}"
       %td= print_item_cost_currency(pei.cost)
       %td= "✓ (#{t(".paid")})"
       %td

@@ -12,8 +12,8 @@
             ?
           %th
       %tbody
-        = render partial: "/registrants/registrant_paid_expenses"
-        = render partial: "/registrants/registrant_unpaid_expenses", locals: { include_form: true }
+        = render partial: "/registrants/registrant_paid_expenses", locals: { details: true }
+        = render partial: "/registrants/registrant_unpaid_expenses", locals: { include_form: true, details: true }
       %tfoot
         %tr
           %th Total

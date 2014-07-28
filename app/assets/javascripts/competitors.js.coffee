@@ -76,4 +76,11 @@ $ ->
       $(this).addClass('unmatching')
 
 $ ->
+  $(".js--hideElementIfEmpty").each ->
+    $(".registrant_header h1").html("Ri")
+    if $(this).children().size() == 0
+      console.log "hiding"
+      $("." + $(this).data("hide-target")).hide()
+
+$ ->
   $(".js--autoFocus").trigger('chosen:activate');

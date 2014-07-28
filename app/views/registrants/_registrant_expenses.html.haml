@@ -5,14 +5,13 @@
     %thead
       %tr
         %th Item
-        %td
         %th= t(".cost")
         %th
           = t(".paid")
           ?
     %tbody
-      = render partial: "registrant_paid_expenses"
-      = render partial: "registrant_unpaid_expenses", locals: { include_form: false }
+      = render partial: "registrant_paid_expenses", locals: { details: false }
+      = render partial: "registrant_unpaid_expenses", locals: { include_form: false, details: false }
     %tfoot
       %th{colspan: 4}
         = render partial: "/registrants/registrant_total_owing", locals: { registrant: @registrant }
