@@ -44,9 +44,10 @@ $(document).ready ->
     show_hide_wheel_size()
 
 show_hide_wheel_size = ->
-  current_year = $("#registrant_birthday_1i option:last-child").val()
-  birthday_year = $("#registrant_birthday_1i").val()
-  if( birthday_year < current_year - 10)
+  current_year = parseInt($("#registrant_birthday_1i option:last-child").val(), 10)
+  birthday_year = parseInt($("#registrant_birthday_1i").val(), 10)
+  # To account for month-to-month differences, subtract 11 instead of 10
+  if( birthday_year < current_year - 10 - 1)
     # disable the option to select your wheel size
     $("#registrant_wheel_size_id").val(3) # 24" Wheel Size
     $("#registrant_wheel_size_id").hide()
