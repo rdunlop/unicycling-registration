@@ -37,10 +37,6 @@
   // hide the data entry by default
   .js--hiddenToggleMenu.action_button Show Data Entry Menu
 
-- if can? :judging_menu, :welcome
-  %p
-    %a= link_to "(old link )", welcome_judging_menu_path
-
 .data_entry_choices{ class: @judges.any? ? 'js--hiddenToggle' : '' }
   Please choose the event that you want to enter data for:
 

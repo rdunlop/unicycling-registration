@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   before_filter :authenticate_user!, :only => [:index]
   skip_authorization_check only: [:index, :help, :feedback, :confirm]
-  authorize_resource class: false, only: [:judging_menu, :data_entry_menu]
+  authorize_resource class: false, only: [:data_entry_menu]
 
   before_action :check_acceptable_format
 
@@ -50,10 +50,6 @@ class WelcomeController < ApplicationController
         format.html { redirect_to registrants_path }
       end
     end
-  end
-
-  def judging_menu
-    @judges = current_user.judges
   end
 
   def data_entry_menu

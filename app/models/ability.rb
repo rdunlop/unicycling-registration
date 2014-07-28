@@ -151,7 +151,6 @@ class Ability
     end
 
     if user.has_role? :super_admin
-      can :judging_menu, :welcome
       can :access, :rails_admin
       can :dashboard
       can :manage, :all

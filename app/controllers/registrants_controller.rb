@@ -285,7 +285,7 @@ class RegistrantsController < ApplicationController
   end
 
   def bag_labels
-    @registrants = Registrant.active.all
+    @registrants = Registrant.reorder(:last_name, :first_name).active.all
 
     names = []
     @registrants.each do |reg|
