@@ -391,13 +391,17 @@ class Registrant < ActiveRecord::Base
     @has_event[event] ||= signed_up_events.where({:event_id => event.id}).any?
   end
 
-  def active_competitors
-    @active_competitors ||= competitors.includes(:competition => :event).active
+  def active_competitors(event)
+    competitors.includes(:competition => :event).active.joins(:competition).where("competitions.event_id = ?", event)
+  end
+
+  def active_competitor(event)
+    active_competitors(event).first
   end
 
   def has_confirmed_event?(event)
     @has_confirmed_event ||= {}
-    @has_confirmed_event[event] ||= active_competitors.any?{|competitor| competitor.event == event}
+    @has_confirmed_event[event] ||= (active_competitors(event).count > 0)
   end
 
   def has_unconfirmed_event?(event)

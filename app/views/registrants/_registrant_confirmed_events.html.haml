@@ -9,11 +9,10 @@
               %td.event_heading{:colspan => "5"}= cat
             - cat.events.each do |event|
               - if @registrant.has_confirmed_event?(event)
-                - details = @registrant.describe_event_hash(event)
+                - competitor = @registrant.active_competitor(event)
                 %tr
                   %td
-                    = details[:description]
-                    = "- #{details[:category]}" if details[:category].present?
-                    = details[:additional]
+                    = event.name
+                    = " -  #{competitor.team_name}" if competitor.team_name
                     - unless @registrant.has_event?(event)
                       %i (Competitor, but Not Signed up)
