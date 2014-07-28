@@ -35,9 +35,6 @@ class Event < ActiveRecord::Base
 
   belongs_to :category, :inverse_of => :events, :touch => true
 
-  after_save(:touch_competitions)
-  after_touch(:touch_competitions)
-
   after_initialize :init
 
   def init
@@ -54,12 +51,6 @@ class Event < ActiveRecord::Base
 
   def self.artistic
     where(artistic: true)
-  end
-
-  def touch_competitions
-    competitions.each do |comp|
-      comp.touch
-    end
   end
 
   validates :name, :presence => true

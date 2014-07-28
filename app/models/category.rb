@@ -22,6 +22,13 @@ class Category < ActiveRecord::Base
   translates :name
   accepts_nested_attributes_for :translations
 
+  after_save(:touch_event_configuration)
+  after_touch(:touch_event_configuration)
+
+  def touch_event_configuration
+    EventConfiguration.first.try(:touch)
+  end
+
   def to_s
     name
   end
