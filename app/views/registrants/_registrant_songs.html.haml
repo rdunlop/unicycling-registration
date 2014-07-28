@@ -1,6 +1,6 @@
 - cache [I18n.locale, @config, @registrant], expires_in: 1.hour do
   - if @registrant.competitor && (@registrant.songs.count > 0 || !@config.music_submission_ended?)
-    .registrant_data_group
+    .registrant_data_group.non_printable
       %fieldset.data_block
         - cache [I18n.locale, @config, @registrant] do
           %legend Your Competition Music

@@ -302,6 +302,10 @@ class RegistrantsController < ApplicationController
   def show_all
     @registrants = Registrant.active.reorder(:last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
 
+    if params[:min]
+      @registrants = @registrants.where("bib_number >= #{params[:min]} and bib_number <= #{params[:max]}")
+    end
+
     respond_to do |format|
       format.html # show_all.html.erb
       format.pdf { render :pdf => "show_all", :formats => [:html], :orientation => 'Landscape', :layout => "pdf.html" }
