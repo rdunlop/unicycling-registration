@@ -12,6 +12,7 @@ describe "Ability" do
     it { should be_able_to(:read, @user) }
     it { should_not be_able_to(:read, User.new) }
     it { should be_able_to(:create, StandardSkillRoutine) }
+    it { should_not be_able_to(:edit, Registrant) }
 
     describe "with Additional Registrant Accesses" do
       before(:each) do
@@ -128,6 +129,7 @@ describe "Ability" do
     it { should be_able_to(:manage, Competitor) }
 
     it { should be_able_to(:manage_all, Registrant) }
+    it { should be_able_to(:edit, Registrant) }
 
     describe "with another user having a registrant" do
       let(:registration) { FactoryGirl.create(:registrant) }
