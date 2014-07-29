@@ -46,7 +46,7 @@ class Registrant < ActiveRecord::Base
   has_many :registrant_choices, :dependent => :destroy, :inverse_of => :registrant
   has_many :registrant_event_sign_ups, :dependent => :destroy , :inverse_of => :registrant
   has_many :signed_up_events, -> { where ["signed_up = ?", true ] }, :class_name => 'RegistrantEventSignUp'
-  has_many :registrant_expense_items, -> { includes :expense_item}, :dependent => :destroy
+  has_many :registrant_expense_items, -> { includes(:expense_item => [:expense_group => :translations, :translations => []]) }, :dependent => :destroy
 
   has_many :payment_details, -> {includes :payment}, :dependent => :destroy
   has_many :additional_registrant_accesses, :dependent => :destroy
@@ -354,7 +354,6 @@ class Registrant < ActiveRecord::Base
   end
 
   def owing_registrant_expense_items
-    # prevents this from creating new items when we return a 'new'd element
     registrant_expense_items
   end
 
