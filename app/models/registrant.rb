@@ -111,7 +111,7 @@ class Registrant < ActiveRecord::Base
   scope :active, -> { where(:deleted => false).order(:bib_number) }
 
   def set_access_code
-    self.access_code = SecureRandom.hex(4)
+    self.access_code ||= SecureRandom.hex(4)
   end
 
   def set_sorted_last_name
