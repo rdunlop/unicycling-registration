@@ -1,3 +1,9 @@
+<%- if allow_reg_modifications? %>
+  <%= link_to "Use an access code", code_permissions_path, class: "access_code_link" %>
+  <br />
+  <br />
+<% end %>
+
 <h2>Log In</h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>

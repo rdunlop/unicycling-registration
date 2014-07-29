@@ -33,12 +33,11 @@
       </ul>
     <% else %>
       <div class="base_details">
-        <ul>
-          <li class="title"><%= @config.short_name %></li>
-          <li><%= @config.long_name %></li>
-          <li><%= @config.location %></li>
-          <li><%= @config.dates_description %></li>
-        </ul>
+        <span class="title"><%= @config.short_name %></span>
+        <br>
+        <%= @config.long_name %><br>
+        <%= @config.location %><br>
+        <%= @config.dates_description %><br>
       </div>
     <% end %>
 

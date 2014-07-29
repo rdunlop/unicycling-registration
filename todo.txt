@@ -4,10 +4,11 @@ BUGS:
 - Unable to use the export functions (doesn't like transferring that much data over the response?)
 - auto-trim the first/last names (pre and post spaces)
 
+- Should force each competitor to choose their t-shirt size OR choose not to have a t-shirt.
+- Should force the format of the Best Times to be specific, per event (so that some events are minutes, or seconds, or hours)
 
 Questions
 =========
-- add flag to Summary for Cyclocross, < 10 age, IUF unpaid, Unpaid.
 - Awards Sheets (to be given with the medals)
  - Business Cardstock? Cardstock+cutter?
  - What order to run track heats ? (based on when the finals are)
@@ -15,7 +16,6 @@ Questions
 - 100m Experts, same question
 
 ========
-- Should I create Cyclocross Categories for people to be able to choose one in the Registratio?
 - Allow Competition Wheel Size Overrides to be set, even when first creating a competitor (it doesn't have a record to do this on, initially).
 - Rename CompetitonWheelSize to EventWheelSizeOverride?
 

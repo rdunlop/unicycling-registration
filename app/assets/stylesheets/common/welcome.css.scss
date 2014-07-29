@@ -22,6 +22,20 @@ $nonfocus_hover: #3487C9;
 
 }
 
+.access_code_link {
+  background-color: lightgreen;
+  padding: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.access_code_link:hover {
+  color: black;
+  background-color: rgb(55, 230, 55);
+  padding: 10px;
+  text-decoration: none;
+}
+
 .focus_button:visited, .nonfocus_button:visited {
   color: black;
 }

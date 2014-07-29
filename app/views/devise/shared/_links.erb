@@ -10,12 +10,6 @@
   <br />
 <% end -%>
 
-<%- if allow_reg_modifications? %>
-  <b><%= link_to "Use an access code", code_permissions_path %>
-  <br />
-  <br />
-<% end %>
-
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
   <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
 <% end -%>

@@ -20,7 +20,7 @@ class Member < ActiveRecord::Base
     belongs_to :registrant
     after_destroy :destroy_orphaned_competitors
 
-    validates :registrant_id, :presence => true
+    validates :registrant, :presence => true
     validate :registrant_once_per_competition
 
     after_save :update_min_bib_number
