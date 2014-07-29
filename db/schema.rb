@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728195211) do
+ActiveRecord::Schema.define(version: 20140729001927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -368,6 +368,7 @@ ActiveRecord::Schema.define(version: 20140728195211) do
     t.string   "noncompetitor_free_options"
     t.boolean  "competitor_required",        default: false
     t.boolean  "noncompetitor_required",     default: false
+    t.boolean  "admin_visible",              default: false
   end
 
   create_table "expense_item_translations", force: true do |t|

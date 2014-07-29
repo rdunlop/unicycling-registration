@@ -13,6 +13,7 @@
 #  noncompetitor_free_options :string(255)
 #  competitor_required        :boolean          default(FALSE)
 #  noncompetitor_required     :boolean          default(FALSE)
+#  admin_visible              :boolean          default(FALSE)
 #
 
 class ExpenseGroup < ActiveRecord::Base
@@ -33,6 +34,10 @@ class ExpenseGroup < ActiveRecord::Base
 
   default_scope { order('position ASC') }
   scope :visible, -> { where(:visible => true) }
+
+  def self.admin_visible
+    where("visible = true or admin_visible = true")
+  end
 
   after_initialize :init
 

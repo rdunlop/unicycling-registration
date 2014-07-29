@@ -302,8 +302,10 @@ class RegistrantsController < ApplicationController
   def show_all
     @registrants = Registrant.active.reorder(:sorted_last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
 
-    if params[:min]
-      @registrants = @registrants.where("bib_number >= #{params[:min]} and bib_number <= #{params[:max]}")
+    if params[:offset]
+      max = params[:max]
+      offset = params[:offset]
+      @registrants = @registrants.limit(max).offset(offset)
     end
 
     respond_to do |format|

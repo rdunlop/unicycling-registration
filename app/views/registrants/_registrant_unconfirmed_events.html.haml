@@ -2,20 +2,16 @@
 %fieldset.unconfirmed_group
   %legend= t('.unconfirmed_events')
   %table.events_summary_table
-    %thead
-      %th= t(".event")
-      %th= t(".category")
-      %th
-      %tbody.js--hideElementIfEmpty{ data: { hide_target: "unconfirmed_group" } }
-      - Category.includes(:events, :translations).each do |cat|
-        - if @registrant.has_unconfirmed_event_in_category?(cat)
-          %tr
-            %td.event_heading{:colspan => "5"}= cat
-          - cat.events.each do |event|
-            - if @registrant.has_unconfirmed_event?(event)
-              - details = @registrant.describe_event_hash(event)
-              %tr
-                %td
-                  = details[:description]
-                  = "- #{details[:category]}" if details[:category].present?
-                  = details[:additional]
+    %tbody.js--hideElementIfEmpty{ data: { hide_target: "unconfirmed_group" } }
+    - Category.includes(:events, :translations).each do |cat|
+      - if @registrant.has_unconfirmed_event_in_category?(cat)
+        %tr
+          %td.event_heading{:colspan => "5"}= cat
+        - cat.events.each do |event|
+          - if @registrant.has_unconfirmed_event?(event)
+            - details = @registrant.describe_event_hash(event)
+            %tr
+              %td
+                = details[:description]
+                = "- #{details[:category]}" if details[:category].present?
+                = details[:additional]
