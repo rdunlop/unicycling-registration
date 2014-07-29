@@ -26,18 +26,17 @@ class HeatsController < ApplicationController
         heat_number += 1
         lane_number = 1
       end
-      LaneAssignment.create(competitor: competitor, lane: lane_number, heat: current_heat, competition: competitor.competition)
+      LaneAssignment.create!(competitor: competitor, lane: lane_number, heat: heat_number, competition: competitor.competition)
       lane_number += 1
     end
-    heat_number
+    heat_number + 1
   end
 
   # process a form submission which includes HEAT&Lane for each candidate, creating the competitor as well as the lane assignment
   def create
-    num_lanes = params[:lanes].to_i
-    max_lane_number = params[:max_lane_number].to_i
+    max_lane_number = params[:lanes].to_i
     begin
-      raise "invalid settings" if num_lanes == 0 || max_lane_number == 0
+      raise "invalid settings" if max_lane_number == 0
       raise "Existing Lane Assignments" if @competition.lane_assignments.any?
       current_heat = 1
       LaneAssignment.transaction do
@@ -47,32 +46,10 @@ class HeatsController < ApplicationController
         end
       end
       flash[:notice] = "Created Heats/Lanes from Competitors"
-    rescue
+    rescue Exception => ex
       flash[:alert] = "Error creating lane assignments/competitors #{ex}"
     end
-
     redirect_to competition_heats_path(@competition)
-  end
-
-  def enter_sign_in
-    add_breadcrumb "Enter Sign-In"
-    @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
-    respond_to do |format|
-      format.xls {
-        s = Spreadsheet::Workbook.new
-
-        sheet = s.create_worksheet
-        @competitors.each_with_index do |comp, row_number|
-          sheet[row_number, 0] = comp.lowest_member_bib_number
-          sheet[row_number, 1] = comp.detailed_name
-        end
-
-        report = StringIO.new
-        s.write report
-        send_data report.string, :filename => "download_events#{Date.today}.xls"
-      }
-      format.html {} #normal
-    end
   end
 
   def upload_form

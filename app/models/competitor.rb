@@ -296,6 +296,18 @@ class Competitor < ActiveRecord::Base
     end
   end
 
+  def heat
+    if competition.uses_lane_assignments
+      lane_assignments.first.try(:heat)
+    else
+      read_attribute(:heat)
+    end
+  end
+
+  def lane
+    lane_assignments.first.try(:lane)
+  end
+
   def gender
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/gender") do
       # all teams should compete against each other, regardless of gender

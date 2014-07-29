@@ -1,0 +1,8 @@
+%h1= "#{@competition} - Heat/Lane Assignment"
+
+= form_tag competition_heats_path(@competition), method: :post do
+  = label_tag :lanes
+  = text_field_tag :lanes
+  = submit_tag "Create Heat/Lane assignments"
+
+= link_to "Back", @competition
