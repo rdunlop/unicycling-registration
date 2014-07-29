@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include EventsHelper
 
   before_filter :set_locale
-  before_filter :set_home_breadcrumb
+  before_filter :set_home_breadcrumb, unless: :rails_admin_controller?
 
   protect_from_forgery
   check_authorization :unless => :devise_controller?
