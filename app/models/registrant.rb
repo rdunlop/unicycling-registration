@@ -105,7 +105,7 @@ class Registrant < ActiveRecord::Base
   validate :not_exceeding_expense_item_limits
   validate :check_default_wheel_size_for_age
 
-  before_validation :set_access_code, only: :create
+  before_validation :set_access_code
   validates :access_code, presence: true
 
   scope :active, -> { where(:deleted => false).order(:bib_number) }
