@@ -4,7 +4,7 @@ Last Re-Arranged June 20th, 2014.
 
 BUGS:
 - Unable to use the export functions (doesn't like transferring that much data over the response?)
--
+- auto-trim the first/last names (pre and post spaces)
 
 
 Questions
@@ -29,7 +29,6 @@ BUG: able to crash the system (dos attack) by attempting to approve only the Sta
 - Show all competitor events instead of registered events
 - Show any remaining sign ups as "(Not Confirmed)"
 - Update Registration#summary to show the created competitors, and a warning if they do not exist (but are signed up)
-- Improve the Registrant#event_warnings function by using an sql join to find the necessary rows?
 
 - Show a message on the EDIT page if they are confirmed in a different competition within the event.
 

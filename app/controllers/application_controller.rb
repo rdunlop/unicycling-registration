@@ -48,6 +48,7 @@ class ApplicationController < ActionController::Base
     end
 
     render :pdf => view_name,
+      :page_size => "Letter",
       :print_media_type => true,
       :margin => {:top => 2, :left => 2, :right => 2},
       :footer => default_footer,
@@ -61,6 +62,7 @@ class ApplicationController < ActionController::Base
   def render_pdf_with_header(view_name, template, locals)
 
     render :pdf => view_name,
+      :page_size => "Letter",
       :print_media_type => true,
       :margin => {:top => 60, :left => 2, :right => 2},
       :footer => default_footer,

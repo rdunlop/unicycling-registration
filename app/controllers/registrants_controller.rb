@@ -47,7 +47,7 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       format.html # all.html.erb
-      format.pdf { render :pdf => "all", :formats => [:html], :orientation => 'Landscape', :layout => "pdf.html" }
+      format.pdf { render_common_pdf  "all",  'Landscape' }
     end
   end
 
@@ -289,7 +289,7 @@ class RegistrantsController < ApplicationController
 
     names = []
     @registrants.each do |reg|
-      names << "<b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name} \n #{reg.country}"
+      names << "\n <b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name} \n #{reg.country}"
     end
 
     labels = Prawn::Labels.render(names, :type => "Avery5160") do |pdf, name|
@@ -310,7 +310,7 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       format.html # show_all.html.erb
-      format.pdf { render :pdf => "show_all", :formats => [:html], :orientation => 'Landscape', :layout => "pdf.html" }
+      format.pdf { render_common_pdf  "show_all",  'Landscape' }
     end
   end
 
