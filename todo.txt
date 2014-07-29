@@ -7,6 +7,9 @@ BUGS:
 - Should force each competitor to choose their t-shirt size OR choose not to have a t-shirt.
 - Should force the format of the Best Times to be specific, per event (so that some events are minutes, or seconds, or hours)
 
+
+- Add a quick-access menu for Registrant/Edit
+
 Questions
 =========
 - Awards Sheets (to be given with the medals)

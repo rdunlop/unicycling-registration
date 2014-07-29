@@ -25,7 +25,9 @@ class PermissionsController < ApplicationController
       sign_in(:user, user)
       redirect_to root_url
     else
-      flash.now[:alert] = "invalid access code"
+      @registrant_id = params[:registrant_id]
+      @code = params[:code]
+      flash.now[:alert] = "invalid Registrant or Access Code"
       render :code
     end
   end
