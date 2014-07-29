@@ -54,7 +54,8 @@
         %span
           = f.label :wheel_size_id, t(".default_wheel_size")
           = f.collection_select :wheel_size_id, WheelSize.all, :id, :description, {}, title: t(".default_wheel_size_description"), class: "wheel_size_choices"
-          = link_to "Set Other Wheel Sizes", registrant_competition_wheel_sizes_path(@registrant), target: "_blank", class: "wheel_size_choices"
+          - if @registrant.persisted?
+            = link_to "Set Other Wheel Sizes", registrant_competition_wheel_sizes_path(@registrant), target: "_blank", class: "wheel_size_choices"
           %registrant_wheel_size_constant 24" Wheel
 
     = render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor }
