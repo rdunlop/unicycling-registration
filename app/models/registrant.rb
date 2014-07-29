@@ -133,6 +133,10 @@ class Registrant < ActiveRecord::Base
     self.active.where(:competitor => true).map{ |reg| [reg.with_id_to_s, reg.id] }
   end
 
+  def self.all_select_box_options
+    self.active.map{ |reg| [reg.with_id_to_s, reg.id] }
+  end
+
   def build_registration_item(reg_item)
     unless reg_item.nil? || has_expense_item?(reg_item)
       registrant_expense_items.build(:expense_item => reg_item, :system_managed => true)
