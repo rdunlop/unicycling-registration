@@ -20,5 +20,5 @@ class CompetitionWheelSize < ActiveRecord::Base
   belongs_to :wheel_size
 
   validates :event, :registrant, :wheel_size, presence: true
-
+  validates :event, uniqueness: { scope: [:registrant] }
 end

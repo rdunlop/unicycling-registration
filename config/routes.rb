@@ -182,7 +182,9 @@ Workspace::Application.routes.draw do
       end
       resources :payments, :only => [:index]
       resources :songs, :only => [:index, :create]
+      resources :competition_wheel_sizes, only: [:index, :create]
     end
+    resources :competition_wheel_sizes, only: :destroy
 
     resources :songs, :only => [:destroy] do
       collection do

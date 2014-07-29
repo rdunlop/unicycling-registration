@@ -50,8 +50,8 @@ show_hide_wheel_size = ->
   if( birthday_year < current_year - 10 - 1)
     # disable the option to select your wheel size
     $("#registrant_wheel_size_id").val(3) # 24" Wheel Size
-    $("#registrant_wheel_size_id").hide()
+    $(".wheel_size_choices").hide()
     $("registrant_wheel_size_constant").show()
   else
-    $("#registrant_wheel_size_id").show()
+    $(".wheel_size_choices").show()
     $("registrant_wheel_size_constant").hide()

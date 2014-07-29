@@ -275,6 +275,7 @@ class Ability
       can :bag_labels, Registrant
       can :undelete, Registrant
       can :crud, Registrant
+      can :crud, CompetitionWheelSize
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
       can [:crud, :file_complete, :add_file, :list], Song
@@ -293,6 +294,7 @@ class Ability
       can [:update], Registrant do |reg|
         user.editable_registrants.include?(reg)
       end
+      can :crud, CompetitionWheelSize # allowed, because we have authorize! calls in the controller
 
       #can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|

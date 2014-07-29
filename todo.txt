@@ -18,7 +18,8 @@ Questions
 
 ========
 - Should I create Cyclocross Categories for people to be able to choose one in the Registratio?
-
+- Allow Competition Wheel Size Overrides to be set, even when first creating a competitor (it doesn't have a record to do this on, initially).
+- Rename CompetitonWheelSize to EventWheelSizeOverride?
 
 BUG: able to crash the system (dos attack) by attempting to approve only the Start Times.
 
