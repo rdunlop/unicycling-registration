@@ -100,6 +100,10 @@ class Competitor < ActiveRecord::Base
     error
   end
 
+  def best_time
+    registrants.first.registrant_choices.joins(:event_choice).merge(EventChoice.where(cell_type: "best_time")).first
+  end
+
   def scoring_helper
     competition.scoring_helper
   end

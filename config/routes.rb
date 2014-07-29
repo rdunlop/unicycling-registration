@@ -332,6 +332,17 @@ Workspace::Application.routes.draw do
         end
       end
 
+      resources :heats, :only => [:index, :new, :create] do
+        collection do
+          # Track (LaneAssignments)
+          delete :destroy_all
+
+          # 10k (Competitor->Heat)
+          get :upload_form
+          post :upload
+        end
+      end
+
       resources :data_entry_volunteers, :only => [:index, :create]
 
       resources :judges,      :only => [:index, :create, :destroy] do
