@@ -1,7 +1,5 @@
 Last Re-Arranged June 20th, 2014.
 
-
-
 BUGS:
 - Unable to use the export functions (doesn't like transferring that much data over the response?)
 - auto-trim the first/last names (pre and post spaces)
