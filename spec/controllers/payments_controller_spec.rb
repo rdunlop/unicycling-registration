@@ -46,7 +46,7 @@ describe PaymentsController do
     it "redirects to registrants page" do
       payment = FactoryGirl.create(:payment, :user => @user)
       post :fake_complete, {:id => payment.to_param}
-      response.should redirect_to registrants_path
+      response.should redirect_to root_path
     end
     it "cannot change if config test_mode is disabled" do
       FactoryGirl.create(:event_configuration, :test_mode => false)
