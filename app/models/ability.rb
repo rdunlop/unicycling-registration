@@ -189,7 +189,7 @@ class Ability
     if user.has_role? :event_planner
       can :summary, Event
       can :sign_ups, EventCategory
-      can :manage_all, Registrant
+      can [:manage_one, :choose_one, :manage_all], Registrant
       can [:read, :show_all], Registrant
       can [:read, :create, :list], Email
       can [:directors], :permission
@@ -270,7 +270,7 @@ class Ability
     if user.has_role? :admin
       can :reg_fee, Registrant
       can :update_reg_fee, Registrant
-      can :manage_all, Registrant
+      can [:manage_one, :choose_one, :manage_all], Registrant
       can [:read, :create, :list], Email
       can :bag_labels, Registrant
       can :undelete, Registrant

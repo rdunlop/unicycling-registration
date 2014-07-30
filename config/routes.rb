@@ -160,6 +160,9 @@ Workspace::Application.routes.draw do
       collection do
         get :bag_labels
         get :show_all
+        get :manage_all
+        get :manage_one
+        post :choose_one
       end
       member do
         post :undelete

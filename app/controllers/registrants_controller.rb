@@ -9,35 +9,46 @@ class RegistrantsController < ApplicationController
   before_action :set_single_registrant_breadcrumb, only: [:edit, :show, :reg_fee]
   before_action :set_new_registrant_breadcrumb, only: [:new]
 
-  def all_index
+  # GET /registrants/manage_all
+  def manage_all
     @registrants = Registrant.includes(:user, :contact_detail)
+    respond_to do |format|
+      format.html { render "manage_all" }
+      format.pdf { render :pdf => "manage_all", :template => "registrants/manage_all.html.haml", :formats => [:html], :layout => "pdf.html" }
+    end
   end
 
-  # GET /registrants
-  # GET /registrants.json
-  # or
+  # post /registrants/manage_one
+  def manage_one
+  end
+
+  # post /registrant/choose_one
+  def choose_one
+    if params[:registrant_id].nil?
+      flash[:error] = "Choose a Registrant"
+      redirect_to manage_one_registrants_path
+    else
+      registrant = Registrant.find(params[:registrant_id])
+      if params[:summary] == "1"
+        redirect_to registrant_path(registrant)
+      else
+        redirect_to edit_registrant_path(registrant)
+      end
+    end
+  end
+
   # GET /users/12/registrants
   def index
-    if @user.nil?
+    @my_registrants = @user.registrants.active
+    @shared_registrants = @user.accessible_registrants - @my_registrants
+    @total_owing = @user.total_owing
+    @display_invitation_request = @user.invitations.need_reply.count > 0
+    @display_invitation_manage_banner = @user.invitations.permitted.count > 0
+    @has_print_waiver = @config.has_print_waiver
 
-      authorize! :manage_all, Registrant
-      all_index
-      respond_to do |format|
-        format.html { render "index_all" }
-        format.pdf { render :pdf => "index_all", :template => "registrants/index_all.html.haml", :formats => [:html], :layout => "pdf.html" }
-      end
-    else
-      @my_registrants = @user.registrants.active
-      @shared_registrants = @user.accessible_registrants - @my_registrants
-      @total_owing = @user.total_owing
-      @display_invitation_request = @user.invitations.need_reply.count > 0
-      @display_invitation_manage_banner = @user.invitations.permitted.count > 0
-      @has_print_waiver = @config.has_print_waiver
-
-      respond_to do |format|
-        format.html # index.html.erb
-        format.json { render json: @registrants }
-      end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @registrants }
     end
   end
 
@@ -278,7 +289,7 @@ class RegistrantsController < ApplicationController
         format.json { render json: @registrant, status: :created, location: @registrant }
       else
         @registrants = Registrant.all
-        format.html { render action: "index_all" }
+        format.html { render action: "manage_all" }
         format.json { render json: @registrant.errors, status: :unprocessable_entity }
       end
     end

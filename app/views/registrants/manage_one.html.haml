@@ -1,0 +1,11 @@
+
+= form_tag choose_one_registrants_path, method: :post do
+  = label_tag :registrant_id, "Registrant"
+  = select_tag :registrant_id, options_for_select(Registrant.all_select_box_options), :include_blank => true, class: 'chosen-select js--autoFocus'
+  %br
+
+  = label_tag :summary, "Summary"
+  = check_box_tag :summary
+  = submit_tag "Edit/Summary"
+
+= link_to "Full List", manage_all_registrants_path
