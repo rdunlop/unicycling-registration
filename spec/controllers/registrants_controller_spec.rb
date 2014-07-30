@@ -495,11 +495,11 @@ describe RegistrantsController do
       sign_in @admin_user
     end
 
-    describe "GET index" do
+    describe "GET manage_all" do
       it "assigns all registrants as @registrants" do
         registrant = FactoryGirl.create(:competitor)
         other_reg = FactoryGirl.create(:registrant)
-        get :index, {}
+        get :manage_all, {}
         assigns(:registrants).should =~[registrant, other_reg]
       end
     end
@@ -518,7 +518,7 @@ describe RegistrantsController do
       it "redirects to the index" do
         registrant = FactoryGirl.create(:competitor, :deleted => true)
         post :undelete, {:id => registrant.id }
-        response.should redirect_to(registrants_path)
+        response.should redirect_to(manage_all_registrants_path)
       end
 
       describe "as a normal user" do

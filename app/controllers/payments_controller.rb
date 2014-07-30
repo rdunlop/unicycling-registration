@@ -88,7 +88,7 @@ class PaymentsController < ApplicationController
     @payment.save!
 
     respond_to do |format|
-      format.html { redirect_to registrants_path }
+      format.html { redirect_to root_path }
     end
   end
 
