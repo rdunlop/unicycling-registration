@@ -65,6 +65,15 @@ $ ->
             $(this).addClass('sameValue')
 
 
+show_element = (target) ->
+  return $(".js--showElement[data-key='" + target + "']").length
+
+$ ->
+  $(".js--showElementTarget").each ->
+    target = $(this)
+    if (!show_element(target.data("key")))
+      target.hide()
+
 $ ->
   $(".js--highlightIfBlank").each ->
     if $(this).text() == ""

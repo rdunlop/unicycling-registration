@@ -9,6 +9,7 @@ BUGS:
 
 
 - Add a quick-access menu for Registrant/Edit
+- Eliminate the :expires_in from songs.
 
 Questions
 =========
