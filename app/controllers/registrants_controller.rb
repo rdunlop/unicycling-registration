@@ -24,7 +24,7 @@ class RegistrantsController < ApplicationController
 
   # post /registrant/choose_one
   def choose_one
-    if params[:registrant_id].nil?
+    if params[:registrant_id].blank?
       flash[:error] = "Choose a Registrant"
       redirect_to manage_one_registrants_path
     else
