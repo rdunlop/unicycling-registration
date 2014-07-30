@@ -473,7 +473,7 @@ describe RegistrantsController do
     it "redirects to the registrants list" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       delete :destroy, {:id => registrant.to_param}
-      response.should redirect_to(registrants_url)
+      response.should redirect_to(manage_all_registrants_path)
     end
 
     describe "as normal user" do

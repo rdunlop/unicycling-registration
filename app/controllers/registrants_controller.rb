@@ -179,7 +179,7 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       if @registrant.save
-        format.html { redirect_to registrants_url, notice: 'Registrant deleted' }
+        format.html { redirect_to manage_all_registrants_path, notice: 'Registrant deleted' }
         format.json { head :no_content }
       else
         edit
@@ -207,7 +207,7 @@ class RegistrantsController < ApplicationController
     if @user == current_user
       add_breadcrumb "My Registrants", user_registrants_path(current_user)
     else
-     add_breadcrumb "Registrants", registrants_path
+     add_breadcrumb "Manage Registrants", manage_one_registrants_path
     end
   end
 

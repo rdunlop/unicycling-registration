@@ -47,7 +47,7 @@ class WelcomeController < ApplicationController
           format.html { redirect_to user_registrants_path(current_user) }
         end
       else
-        format.html { redirect_to registrants_path }
+        format.html { redirect_to root_path }
       end
     end
   end

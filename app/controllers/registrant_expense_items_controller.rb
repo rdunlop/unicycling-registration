@@ -55,7 +55,6 @@ class RegistrantExpenseItemsController < ApplicationController
   end
 
   def set_registrant_breadcrumb
-    add_breadcrumb "Registrants", registrants_path
     add_registrant_breadcrumb(@registrant)
   end
 

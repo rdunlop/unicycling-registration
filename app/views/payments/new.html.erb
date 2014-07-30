@@ -13,5 +13,5 @@
   <%= render '/payments/form' %>
 </div>
 <div>
-  <%= link_to t('back'), registrants_path %>
+  <%= link_to t('back'), user_registrants_path(current_user) %>
 </div>

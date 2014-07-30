@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "payments/show" do
+  let(:user) { FactoryGirl.create :user }
   before(:each) do
     @config = FactoryGirl.create(:event_configuration)
     @payment = FactoryGirl.create(:payment)
@@ -10,7 +11,7 @@ describe "payments/show" do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }
-    controller.stub(:current_user) { FactoryGirl.create(:user) }
+    controller.stub(:current_user) { user }
   end
 
   it "renders attributes in <p>" do
@@ -24,7 +25,7 @@ describe "payments/show" do
 
     assert_select "form", :action => @payment.paypal_post_url, :method => "post" do
       assert_select "input[type=hidden][name=business][value=" + ENV["PAYPAL_ACCOUNT"] +"]"
-      assert_select "input[type=hidden][name=cancel_return][value=" + payments_url + "]"
+      assert_select "input[type=hidden][name=cancel_return][value=" + user_payments_url(user) + "]"
       assert_select "input[type=hidden][name=cmd][value='_cart']"
       assert_select "input[type=hidden][name=currency_code][value='USD']"
       assert_select "input[type=hidden][name=invoice][value=" + @payment.id.to_s + "]"
