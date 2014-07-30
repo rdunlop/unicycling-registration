@@ -343,6 +343,8 @@ Workspace::Application.routes.draw do
           # 10k (Competitor->Heat)
           get :upload_form
           post :upload
+          get "age_group_entries/:age_group_entry_id/set_sort", to: "heats#set_sort", as: "set_sort"
+          post "age_group_entries/:age_group_entry_id/set_sort", to: "heats#sort", as: "sort"
         end
       end
 

@@ -40,6 +40,12 @@
   = link_to "destroy all lane assignments", destroy_all_competition_heats_path(@competition), method: :delete, data: { confirm: "remove all heat/lane assignments?" }
   %br
 
+  %h3 Sort Age Groups
+  - @competition.age_group_entries.each do |age_group_entry|
+    = link_to "Sort #{age_group_entry}", set_sort_competition_heats_path(@competition, age_group_entry)
+    %br
+  %hr
+
 = link_to "upload CSV", upload_form_competition_heats_path(@competition)
 %br
 = link_to "Back", @competition

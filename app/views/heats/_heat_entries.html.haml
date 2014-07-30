@@ -1,0 +1,9 @@
+%tbody#age_group_entry-list.drag_drop_sortable{"data-target" => sort_competition_heats_path(@competition, @age_group_entry)}
+  - @lane_assignments.each do |lane_assignment|
+    %tr{:id => "age_group_entry_#{lane_assignment.id}"}
+      %td.handle{:style => "cursor: move"} [DRAG]
+      %td= lane_assignment.heat
+      %td= lane_assignment.lane
+      %td= lane_assignment.competitor
+      %td= lane_assignment.competitor.best_time
+      %td= link_to "Edit", edit_lane_assignment_path(lane_assignment), target: "_blank"

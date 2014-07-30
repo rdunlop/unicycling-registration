@@ -1,0 +1,7 @@
+el = $($.trim('<%= escape_javascript render :partial => "/heats/heat_entries" %>'))
+
+p = $('tbody')
+parent = p.parent()
+p.remove()
+parent.append(el)
+set_sortable();

@@ -4,6 +4,7 @@ class HeatsController < ApplicationController
   load_and_authorize_resource :competition, except: [:edit, :update, :destroy]
 
   before_action :set_parent_breadcrumbs
+  before_action :load_age_group_entry, only: [:sort, :set_sort]
 
   respond_to :html
 
@@ -29,6 +30,7 @@ class HeatsController < ApplicationController
       LaneAssignment.create!(competitor: competitor, lane: lane_number, heat: heat_number, competition: competitor.competition)
       lane_number += 1
     end
+    return heat_number if lane_number == 1
     heat_number + 1
   end
 
@@ -50,6 +52,30 @@ class HeatsController < ApplicationController
       flash[:alert] = "Error creating lane assignments/competitors #{ex}"
     end
     redirect_to competition_heats_path(@competition)
+  end
+
+  def sort
+    @lane_assignments = LaneAssignment.where(id: params[:age_group_entry]).order(:heat, :lane)
+
+    # holds the list of all heats/lanes
+    previous_heat_lanes = @lane_assignments.map{|la| [la.heat, la.lane] }
+
+    # XXX this is doing unsafe updates (validations disabled)
+    # sets these to the new order given
+    params[:age_group_entry].each_with_index do |lane_assignment_id, index|
+      la = LaneAssignment.find(lane_assignment_id)
+      la.update_attribute(:heat, previous_heat_lanes[index][0])
+      la.update_attribute(:lane, previous_heat_lanes[index][1])
+    end
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  # GET /competitions/#/heats/:age_group_entry_id:/set_sort
+  def set_sort
+    add_breadcrumb "Set Heat/Lane assignment order"
+    @lane_assignments = @competition.lane_assignments.includes(:competitor).select { |lane_assignment| lane_assignment.competitor.age_group_entry == @age_group_entry }
   end
 
   def upload_form
@@ -91,6 +117,9 @@ class HeatsController < ApplicationController
   end
 
   private
+  def load_age_group_entry
+    @age_group_entry = AgeGroupEntry.find(params[:age_group_entry_id])
+  end
 
   def set_parent_breadcrumbs
     add_breadcrumb "#{@competition}", competition_path(@competition)
