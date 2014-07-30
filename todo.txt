@@ -504,7 +504,6 @@ NEED To make the registration deadlines clear.
 - Add tests for distance_attempt_score calculator ("Two Attempt Distance")
 - New Menu Bar (not custom-made?)
 - The NAV menu is overlaying/colliding with the breadcrumbs. fix this.
-- break apart the registrants#index controller (weird manage_all thing)
 - Merge the RegistrantExpenses controller into the registrant_expense_items controller?
 - Remove Judge from DistanceAttempt (as there is no need to keep different judge's distance Attempts separated, right?)
 - Enhance the "mark items as paid for" to allow for arbitrary number of "other" elements....adding them by JS.

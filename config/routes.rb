@@ -155,7 +155,7 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :registrants do
+    resources :registrants, except: [:index] do
       #admin
       collection do
         get :bag_labels
