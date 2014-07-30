@@ -50,7 +50,7 @@
         %th Status
     %tbody
       - cache [Competition, I18n.locale] do
-        - Competition.all.each do |competition|
+        - Competition.all.find_each(batch_size: 10) do |competition|
           - cache [competition, I18n.locale] do
             %tr
               %td= competition.end_time_to_s

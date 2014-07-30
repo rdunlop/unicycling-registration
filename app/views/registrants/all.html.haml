@@ -11,7 +11,7 @@
         - else
           %th= t(".country")
     %tbody
-      - @registrants.each do |registrant|
+      - @registrants.find_each(batch_size: 100) do |registrant|
         %tr
           %td= registrant.bib_number
           %td= registrant

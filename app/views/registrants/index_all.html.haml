@@ -30,7 +30,7 @@
   %tbody
     // # includes 'current_user' because of the 'can? :reg_fee' Call
     - cache ['index_all.registrant', I18n.locale, Registrant, current_user, @config ] do
-      - @registrants.each do |registrant|
+      - @registrants.find_each(batch_size: 100) do |registrant|
         - cache [I18n.locale, registrant, current_user, @config] do
           %tr
             %td= registrant.bib_number
