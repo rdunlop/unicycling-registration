@@ -1,35 +1,4 @@
-%h1= "#{@competition} - Heat Assignment"
-
-%table.competitor_statuses.sortable
-  %caption Competitors
-  %thead
-    %tr
-      %th Heat
-      %th.sign_up ID
-      %th.sign_up Name
-      %th.sign_up Age
-      %th.sign_up Gender
-      %th Age Group
-      %th Best Time
-      %th Geared
-      %th Wheel Size
-      %th Crank Size (mm)
-      %th Notes
-  %tbody
-    - @competitors.each do |competitor|
-      %tr
-        %th= competitor.heat
-        %td= competitor.lowest_member_bib_number
-        %td= competitor.to_s
-        %td= competitor.age
-        %td= competitor.gender
-        %td= competitor.age_group_entry_description
-        %td= competitor.best_time
-        %td= competitor.geared
-        %td= competitor.riding_wheel_size
-        %td= competitor.riding_crank_size
-        %td= competitor.notes
-%br
+%h1= "#{@competition} - Upload Heat Assignment"
 
 Upload a Spreadsheet containing 2 columns. ID and Heat. (no header row).
 %br

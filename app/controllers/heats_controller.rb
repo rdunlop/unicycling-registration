@@ -98,6 +98,8 @@ class HeatsController < ApplicationController
             row = CSV.parse_line (line)
             bib_number = row[0]
             heat = row[1]
+            # skip blank lines
+            next if bib_number.nil? && heat.nil?
             competitor = @competition.competitors.where(lowest_member_bib_number: bib_number).first
             raise "Unable to find competitor #{bib_number}" if competitor.nil?
             competitor.update_attribute(:heat, heat)
