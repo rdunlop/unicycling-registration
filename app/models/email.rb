@@ -74,6 +74,10 @@ class Email
     end
   end
 
+  def filtered_combined_emails
+    (filtered_user_emails + filtered_registrant_emails).uniq.compact
+  end
+
   def persisted?
     false
   end

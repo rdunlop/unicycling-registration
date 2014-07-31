@@ -42,14 +42,14 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
   = f.check_box :no_reg_accounts
   %br
   = f.label :competition_id, "Users who are assigned to a competition"
-  = f.select :competition_id, Competition.all.map{ |comp| [comp, comp.id] }, include_blank: true
+  = f.select :competition_id, Competition.event_order.all.map{ |comp| [comp, comp.id] }, {include_blank: true}, class: 'chosen-select'
   %br
   = f.label :category_id, "Users who are assigned to any competition in this category"
   = f.select :category_id, Category.all.map{ |category| [category, category.id] }, include_blank: true
 
   %br
   %br
-  <b>Note</b> This form will send to all the e-mails in the "Filtered User Email Addresses" column.
+  <b>Note</b> This form will send to all the e-mails in BOTH of the columns above.
   %br
 
   = f.label :subject
