@@ -260,7 +260,7 @@ class RegistrantsController < ApplicationController
   end
 
   def registrant_params
-    cleare_events_data!(clear_artistic_data!(params.require(:registrant).permit(attributes)))
+    clear_events_data!(clear_artistic_data!(params.require(:registrant).permit(attributes)))
   end
 
   def clear_artistic_data!(original_params)
@@ -277,20 +277,24 @@ class RegistrantsController < ApplicationController
     original_params
   end
 
+  def registrant_is_already_signed_up(reg, event_id)
+    return true if reg.nil? || reg.new_record?
+    return reg.registrant_event_sign_ups.where(event_id: event_id).first.try(:signed_up?)
+  end
+
   def clear_events_data!(original_params)
     return original_params if can? :add_events, Registrant
     return original_params unless original_params['registrant_event_sign_ups_attributes']
     original_params['registrant_event_sign_ups_attributes'].each do |key,value|
       event_id = value['event_id'].to_i
       signed_up = value['signed_up'] == "1"
-      if (!@registrant.registrant_event_sign_ups.where(event_id: event_id).first.try(:signed_up?) && signed_up)
+      if registrant_is_already_signed_up(@registrant, event_id) && signed_up
         flash[:alert] = "Addition of Events is disabled. #{Event.find(event_id)}"
         original_params['registrant_event_sign_ups_attributes'].delete(key)
       end
     end
     original_params
   end
-
 
   public
 

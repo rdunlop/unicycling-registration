@@ -497,6 +497,9 @@ ActiveRecord::Schema.define(version: 20140731135244) do
   add_index "members", ["competitor_id"], name: "index_members_competitor_id", using: :btree
   add_index "members", ["registrant_id"], name: "index_members_registrant_id", using: :btree
 
+  create_table "order_finalized_boolean_for_competitions", force: true do |t|
+  end
+
   create_table "payment_details", force: true do |t|
     t.integer  "payment_id"
     t.integer  "registrant_id"

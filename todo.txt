@@ -5,6 +5,7 @@ Request:
 - Add Repeating Headers on all PDF pages.
 - Dynamic Deletion of Competitors (ie: on the "Dropped") so that the page doesn't refresh.
 BUGS:
+- When a registrant loads the /edit page, and they get an error on submit, frequently they get another "event choice has already been taken" error when the subsequently try saving.
 - Really Really slow Heat assignment
 - Slow Lane Assign updating (because of the re-display, not because of the update itself?)
 - Unable to use the export functions (doesn't like transferring that much data over the response?)
@@ -14,6 +15,7 @@ BUGS:
 - Should force the format of the Best Times to be specific, per event (so that some events are minutes, or seconds, or hours)
 
 
+- Prevent people from changing their name/address, so that people can't "Sell" their early registrations?s
 - Add a quick-access menu for Registrant/Edit
 - Eliminate the :expires_in from songs.
 
