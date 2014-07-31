@@ -101,7 +101,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def best_time
-    registrants.first.registrant_choices.joins(:event_choice).merge(EventChoice.where(cell_type: "best_time")).first
+    registrants.first.registrant_choices.joins(:event_choice).merge(EventChoice.where(cell_type: "best_time")).first.try(:describe_value)
   end
 
   def scoring_helper
