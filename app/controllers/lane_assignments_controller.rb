@@ -3,7 +3,7 @@ class LaneAssignmentsController < ApplicationController
   before_filter :load_competition, except: [:edit, :update, :destroy]
   before_filter :load_new_lane_assignment, :only => [:create]
   load_and_authorize_resource through: :competition, except: [:edit, :update, :destroy]
-  load_and_authorize_resource  only: :create
+  load_and_authorize_resource only: [:edit, :update, :destroy]
 
   before_action :set_parent_breadcrumbs, only: [:index, :create]
 
