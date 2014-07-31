@@ -29,7 +29,6 @@
         %th Name
         - if @competition.age_group_type
           %th Age Group
-        %th Club
         %th= Competitor.state_or_country_description(@config.usa?)
 
     %tbody
@@ -58,5 +57,4 @@
                 %br
             - if @competition.age_group_type
               %td= comp.age_group_entry_description
-            %td= comp.club
             %td= comp.state_or_country(@config.usa?)
