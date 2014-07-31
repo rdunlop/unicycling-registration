@@ -119,9 +119,9 @@
       %td= f.url_field :rulebook_url
       %td If left blank, no rulebook links are displayed. Otherwise provides external link to rulebook pdf.
     %tr
-      %th= f.label :tshirt_closed_date
-      %td= f.date_select :tshirt_closed_date
-      %td Not currently used
+      %th= f.label :event_sign_up_closed_date
+      %td= f.date_select :event_sign_up_closed_date
+      %td After this date, only administrators can add events to registrations. (though they can still remove them)
     %tr
       %th= f.label :artistic_score_elimination_mode_naucc
       %td= f.check_box :artistic_score_elimination_mode_naucc

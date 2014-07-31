@@ -256,11 +256,11 @@ class RegistrantsController < ApplicationController
   def registrant_update_params
     attrs = attributes
     attrs.delete(:competitor)
-    clear_artistic_data!(params.require(:registrant).permit(attrs))
+    clear_events_data!(clear_artistic_data!(params.require(:registrant).permit(attrs)))
   end
 
   def registrant_params
-    clear_artistic_data!(params.require(:registrant).permit(attributes))
+    cleare_events_data!(clear_artistic_data!(params.require(:registrant).permit(attributes)))
   end
 
   def clear_artistic_data!(original_params)
@@ -271,6 +271,20 @@ class RegistrantsController < ApplicationController
     original_params['registrant_event_sign_ups_attributes'].each do |key,value|
       if artistic_event_ids.include? value['event_id'].to_i
         flash[:alert] = "Modification of Artistic Events is disabled"
+        original_params['registrant_event_sign_ups_attributes'].delete(key)
+      end
+    end
+    original_params
+  end
+
+  def clear_events_data!(original_params)
+    return original_params if can? :add_events, Registrant
+    return original_params unless original_params['registrant_event_sign_ups_attributes']
+    original_params['registrant_event_sign_ups_attributes'].each do |key,value|
+      event_id = value['event_id'].to_i
+      signed_up = value['signed_up'] == "1"
+      if (!@registrant.registrant_event_sign_ups.where(event_id: event_id).first.try(:signed_up?) && signed_up)
+        flash[:alert] = "Addition of Events is disabled. #{Event.find(event_id)}"
         original_params['registrant_event_sign_ups_attributes'].delete(key)
       end
     end

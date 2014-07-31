@@ -15,6 +15,10 @@ class Ability
     reg_closed? || config.artistic_closed?
   end
 
+  def event_sign_up_closed?
+    reg_closed? || config.event_sign_up_closed?
+  end
+
   def initialize(user, allow_reg_modifications = false)
     @allow_reg_modifications = allow_reg_modifications
 
@@ -287,6 +291,10 @@ class Ability
 
     unless artistic_reg_closed?
       can [:create_artistic], Registrant
+    end
+
+    unless event_sign_up_closed?
+      can [:add_events], Registrant
     end
 
     unless reg_closed?

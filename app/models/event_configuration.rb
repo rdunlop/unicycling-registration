@@ -12,7 +12,7 @@
 #  contact_email                         :string(255)
 #  artistic_closed_date                  :date
 #  standard_skill_closed_date            :date
-#  tshirt_closed_date                    :date
+#  event_sign_up_closed_date             :date
 #  created_at                            :datetime         not null
 #  updated_at                            :datetime         not null
 #  test_mode                             :boolean
@@ -129,6 +129,11 @@ class EventConfiguration < ActiveRecord::Base
   def artistic_closed?(today = Date.today)
     return false if artistic_closed_date.nil?
     artistic_closed_date < today
+  end
+
+  def event_sign_up_closed?(today = Date.today)
+    return false if event_sign_up_closed_date.nil?
+    event_sign_up_closed_date < today
   end
 
   def music_submission_ended?(today = Date.today)
