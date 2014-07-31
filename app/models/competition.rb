@@ -171,6 +171,10 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def heat_numbers
+    lane_assignments.map(&:heat).uniq
+  end
+
   def end_time_to_s
     scheduled_completion_at.to_formatted_s(:short) if scheduled_completion_at
   end

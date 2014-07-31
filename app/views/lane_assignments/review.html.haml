@@ -2,10 +2,10 @@
 
 = link_to "download all competitors CSV", export_download_competitors_for_timers_path
 
+= link_to "download EVT", download_heats_evt_competition_lane_assignments_path(@competition)
 - @heat_numbers.each do |heat|
   %h2 Heat #{heat}
 
-  = link_to "download EVT", download_heat_evt_competition_lane_assignments_path(@competition, heat: heat)
   %table
     %thead
       %tr
