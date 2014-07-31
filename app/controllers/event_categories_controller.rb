@@ -80,7 +80,7 @@ class EventCategoriesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.pdf { render :pdf => "show", :formats => [:html] }
+      format.pdf { render_common_pdf "show" }
     end
   end
 

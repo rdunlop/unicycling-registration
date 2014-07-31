@@ -18,7 +18,7 @@
         %td= resu.registrant
         %td= resu.registrant.age
         %td= resu.registrant.gender
-        %td= resu.event_category
+        %td= resu.event_category.name
         - if @config.usa?
           %td= resu.registrant.state
         - else

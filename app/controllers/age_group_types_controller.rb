@@ -35,9 +35,13 @@ class AgeGroupTypesController < ApplicationController
 
   def sort
     @age_group_entries = @age_group_type.age_group_entries
-    @age_group_entries.each do |age_group_entry|
-      age_group_entry.position = params['age_group_entry'].index(age_group_entry.id.to_s) + 1
-      age_group_entry.save
+    AgeGroupType.transaction do
+      @age_group_entries.each do |age_group_entry|
+        # Prevent doing a cascade-update for each age group entry change
+        age_group_entry.update_column(:position, params['age_group_entry'].index(age_group_entry.id.to_s) + 1)
+      end
+      # update the parent, and cascaed
+      @age_group_type.touch
     end
     respond_with(@age_group_type)
   end
