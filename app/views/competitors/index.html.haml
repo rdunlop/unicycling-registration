@@ -29,7 +29,7 @@
   %tbody
     - @competitors.each do |competitor|
       - next if competitor.new_record?
-      %tr{:class => competitor.status == "active" ? "active" : "not_active" }
+      %tr{:class => competitor.status == "active" ? "active" : "not_active", id: "row#{competitor.id}" }
         - if @competition.compete_in_order
           %td
             = competitor.position
@@ -49,7 +49,7 @@
         %td.js--highlightIfNotBlank= competitor.member_warnings
         %td
           = link_to 'Edit', edit_competitor_path(competitor)
-          = link_to 'Delete', competitor, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'Delete', competitor, method: :delete, data: { confirm: 'Are you sure?' }, remote: true
 
 
 List of all competitors, including registrant info, with edit/delete, marking those who have NOT signed up.

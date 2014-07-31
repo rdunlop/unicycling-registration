@@ -169,8 +169,10 @@ class CompetitorsController < ApplicationController
   def destroy
     @ev_cat = @competitor.competition
     @competitor.destroy
-
-    respond_with(@competition, location: competition_competitors_path(@ev_cat))
+    respond_to do |format|
+      format.js {}
+      format.html { redirect_to competition_competitors_path(@ev_cat) }
+    end
   end
 
   # DELETE /events/10/competitors/destroy_all
