@@ -16,6 +16,8 @@ BUGS:
 - Should force each competitor to choose their t-shirt size OR choose not to have a t-shirt.
 - Should force the format of the Best Times to be specific, per event (so that some events are minutes, or seconds, or hours)
 
+- Prevent navigating away from a form after it has been changed (ie: adding/removing events without saving it).
+- Improve the ability to see the history of a registrant modification.
 
 - Prevent people from changing their name/address, so that people can't "Sell" their early registrations?s
 - Add a quick-access menu for Registrant/Edit
