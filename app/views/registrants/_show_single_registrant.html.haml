@@ -14,7 +14,7 @@
       = render partial: "/registrants/unpaid_warnings"
       = render partial: "/registrants/access_code"
 
-- cache ['printable_link', I18n.locale, @registrant] do
+- cache ['printable_link', I18n.locale, @registrant, @registrant.members_cache_key] do
   .non_printable
     = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
 .registrant_summary
@@ -24,7 +24,7 @@
     - cache ['edit_link', I18n.locale, @registrant] do
       .edit_link_block.js--showElementTarget{ data: { key: "update_registrant" } }
         = link_to t(".edit_registration"), edit_registrant_path(@registrant)
-  - cache ['expenses', I18n.locale, @registrant] do
+  - cache ['expenses', I18n.locale, @registrant, @registrant.members_cache_key] do
     .registrant_expenses_block
       = render :partial => "/registrants/registrant_expenses"
       .edit_link_block.js--showElementTarget{ data: { key: "create_rei" } }

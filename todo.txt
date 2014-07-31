@@ -8,6 +8,7 @@ Request:
 - Add Repeating Headers on all PDF pages.
 - Dynamic Deletion of Competitors (ie: on the "Dropped") so that the page doesn't refresh.
 BUGS:
+- Caching on the Registrant#summary is broken, it doesn't notice changes to the competitor (only changes to the member).
 - When a registrant loads the /edit page, and they get an error on submit, frequently they get another "event choice has already been taken" error when the subsequently try saving.
 - Really Really slow Heat assignment
 - Slow Lane Assign updating (because of the re-display, not because of the update itself?)

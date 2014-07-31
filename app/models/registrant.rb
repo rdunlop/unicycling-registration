@@ -114,6 +114,11 @@ class Registrant < ActiveRecord::Base
     self.access_code ||= SecureRandom.hex(4)
   end
 
+  # uses the CachedSetModel feature to give a key for this registrant's competitors
+  def members_cache_key
+    Member.cache_key_for_set(id)
+  end
+
   def set_sorted_last_name
     self.sorted_last_name = ActiveSupport::Inflector.transliterate(last_name).downcase if last_name
   end
