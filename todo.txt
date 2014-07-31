@@ -1,7 +1,6 @@
 Last Re-Arranged June 20th, 2014.
 
 - Allow directors to use the Heats menus
-- Fix the unprintable character in the sign-up list PDF
 
 Request:
 - Add Heat divisions between each Heat, and also add page-breaks between each Heat.

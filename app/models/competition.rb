@@ -165,7 +165,7 @@ class Competition < ActiveRecord::Base
     elsif compete_in_order
       order_finalized?
     elsif start_data_type == "Mass Start"
-      true
+      heat_numbers.any?
     else
       false
     end
