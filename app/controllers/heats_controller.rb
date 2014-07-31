@@ -62,11 +62,14 @@ class HeatsController < ApplicationController
 
     # XXX this is doing unsafe updates (validations disabled)
     # sets these to the new order given
+    new_lanes = []
     params[:age_group_entry].each_with_index do |lane_assignment_id, index|
       la = LaneAssignment.find(lane_assignment_id)
       la.update_attribute(:heat, previous_heat_lanes[index][0])
       la.update_attribute(:lane, previous_heat_lanes[index][1])
+      new_lanes << la
     end
+    @lane_assignments = new_lanes
     respond_to do |format|
       format.js {}
     end
