@@ -42,7 +42,7 @@
           %th.details Details
       %tbody
         - competitors.each do |competitor|
-          - cache [competitor] do
+          - cache [competitor, Result.cache_key_for_set(competitor.id)] do
             %tr
               %td.place= competitor.send(place_function)
               %td= competitor.bib_number

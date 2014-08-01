@@ -13,7 +13,11 @@
 #
 
 class Result < ActiveRecord::Base
-  #include CachedModel
+  include CachedModel
+
+  def self.cache_set_field
+    :competitor_id
+  end
 
   belongs_to :competitor, inverse_of: :results
 
