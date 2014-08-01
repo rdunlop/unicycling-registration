@@ -83,7 +83,7 @@ class ImportResult < ActiveRecord::Base
         target_competition = matching_competition
       end
     end
-    if competitor.nil?
+    if competitor.nil? && EventConfiguration.singleton.can_create_competitors_at_lane_assignment
       # still no competitor, create one in the current event
       registrant = matching_registrant
       target_competition.create_competitor_from_registrants([registrant], nil)

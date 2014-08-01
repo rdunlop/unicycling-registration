@@ -36,7 +36,7 @@ class RaceDataImporter
           result.minutes = lif_hash[:minutes]
           result.seconds = lif_hash[:seconds]
           result.thousands = lif_hash[:thousands]
-          result.status = "DQ" if  (lif_hash[:disqualified] == "DQ")
+          result.status = "DQ" if  (lif_hash[:disqualified])
           if result.save!
             self.num_rows_processed += 1
           end

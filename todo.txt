@@ -1,6 +1,22 @@
 Last Re-Arranged June 20th, 2014.
 
+Track day to-do:
+- Ensure that Multiple Heat#1 doesn't break the importer.
+- combine the DQ with the data-DQ, so that only a single row appears. (or allow multiple rows to exist?)
+- Disable the "next heat is in...<category>" function.
+- Ensure that the results-caching files work
+- Get a test file from the timers which has DNS/DNF/etc
+- create role for importing the data?
+- create role for teh ipads?
+
+
+BUG:
+- Trials Finals Candidates listed twice (see backup file july31Midnight.dump)
+- When entering one-attempt data, it doesn't keep it in "entered order" when refreshing the page. (Patricia)
 - Allow directors to use the Heats menus
+
+Request:
+- For Trials Finals, put the Expert Male and Expert Female separately, with a small heading in front of each.
 
 Request:
 - Add Heat divisions between each Heat, and also add page-breaks between each Heat.
