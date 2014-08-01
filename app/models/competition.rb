@@ -338,6 +338,17 @@ class Competition < ActiveRecord::Base
     configured_heat_time.total_seconds if configured_heat_time
   end
 
+  def can_calculated_age_group_results?
+    case event_class
+    when "Shortest Time"
+      true
+    when "Longest Time"
+      true
+    else
+      false
+    end
+  end
+
   def scoring_helper
     case event_class
     when "Shortest Time"

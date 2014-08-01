@@ -4,7 +4,12 @@
   .calc_needed Places should be re-calculated.
 
 - if can? :set_places, @competition
-  = link_to "Set Places", set_places_competition_path(@competition), method: :post, data: { confirm: "This may take a few seconds" }
+  = link_to "Set All Places", set_places_competition_path(@competition), method: :post, data: { confirm: "This may take a few seconds" }
+  - if @competition.can_calculated_age_group_results?
+    = form_tag set_age_group_places_competition_path(@competition), method: :post do
+      = select_tag :age_group_entry_id, options_from_collection_for_select(@competition.age_group_type.age_group_entries, "id", "to_s"), :include_blank => true
+      %br
+      = submit_tag "Set Single Age Group", data: { confirm: "Set single age group entry?" }
 - if can? :destroy_results, @competition
   = link_to "Delete All", destroy_results_competition_path(@competition), method: :delete, :class => "results_delete", data: { :confirm => "This will DELETE all data supporting these results. Are you sure?" }
 

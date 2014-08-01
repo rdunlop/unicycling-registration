@@ -308,6 +308,7 @@ Workspace::Application.routes.draw do
         post :sort
         put :toggle_final_sort
         post :sort_random
+        post :set_age_group_places
         post :set_places
         get :export_scores
         # view scores

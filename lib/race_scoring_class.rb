@@ -63,6 +63,10 @@ class RaceScoringClass < BaseScoringClass
     score_calculator.update_all_places
   end
 
+  def place_age_group_entry(entry)
+    score_calculator.update_age_group_entry_results(entry)
+  end
+
   # Used when trying to destroy all results for a competition
   def all_competitor_results
     @competition.time_results

@@ -8,9 +8,10 @@ Track day to-do:
 - Get a test file from the timers which has DNS/DNF/etc
 - create role for importing the data?
 - create role for teh ipads?
-
+- Recalculating the results is too long (difficult to take the system down that long)
 
 BUG:
+- Importing results without a lane, nor a DQ, crashes the system (see Heat 13 Race 48)
 - Trials Finals Candidates listed twice (see backup file july31Midnight.dump)
 - When entering one-attempt data, it doesn't keep it in "entered order" when refreshing the page. (Patricia)
 - Allow directors to use the Heats menus
