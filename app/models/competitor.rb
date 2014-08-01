@@ -109,7 +109,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def disqualified
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/dq") do
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{Result.cache_key_for_set(id)}dq") do
       scoring_helper.competitor_dq?(self)
     end
   end
