@@ -33,7 +33,7 @@ class Upload
     results[:lane] = arr[2]
 
     full_time = arr[6].to_s
-    if full_time == "DQ" || arr[0] == "DQ" || arr[0] == "DNS"
+    if full_time == "DQ" || arr[0] == "DQ" || arr[0] == "DNS" || arr[0] == "DNF"
       results[:disqualified] = true
       results[:minutes] = 0
       results[:seconds] = 0

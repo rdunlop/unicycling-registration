@@ -9,6 +9,11 @@ Track day to-do:
 - create role for importing the data?
 - create role for teh ipads?
 - Recalculating the results is too long (difficult to take the system down that long)
+- When the importer chooses to "restart", only THEIR results should be deleted. (we delete the line-judge's results too...oops).
+
+BUG:
+- If I change a TimeResult from DQ to not-DQ, it doesn't cause the competitor to be updated/touched.
+- Allow DNS, DNF
 
 BUG:
 - Importing results without a lane, nor a DQ, crashes the system (see Heat 13 Race 48)
