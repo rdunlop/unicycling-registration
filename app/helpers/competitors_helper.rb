@@ -29,6 +29,8 @@ module CompetitorsHelper
       link_to "View", review_user_competition_import_results_path(current_user, competition, options)
     when "Two Data Per Line"
       link_to "View", proof_user_competition_two_attempt_entries_path(current_user, competition, options)
+    when "Externally Ranked"
+      link_to "View", review_user_competition_import_results_path(current_user, competition, options)
     else
       if competition.uses_judges
         link_to "XXX unused Summary", root_url

@@ -130,7 +130,7 @@ class ImportResultsController < ApplicationController
     importer = RaceDataImporter.new(@competition, @user)
 
     if importer.process_csv(params[:file], params[:start_times])
-      flash[:notice] = "Successfully imported #{importer.num_rows} rows"
+      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
     end
