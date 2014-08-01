@@ -21,7 +21,7 @@ class OrderedResultCalculator
 
   def update_age_group_entry_results(entry)
     competitors = competition.competitors.select{ |c| c.age_group_entry == entry }
-    competitors.each do |competitor|
+    competitors_in_sorted_order(competitors).each do |competitor|
       age_place_calc = get_place_calculator(competitor.age_group_entry_description)
       new_place = age_place_calc.place_next(competitor.comparable_score, competitor.disqualified, competitor.ineligible)
       Result.create_new!(competitor, new_place, "AgeGroup", competitor.age_group_entry_description)
