@@ -13,7 +13,7 @@
 #
 
 class Result < ActiveRecord::Base
-  include CachedModel
+  include CachedSetModel
 
   def self.cache_set_field
     :competitor_id
