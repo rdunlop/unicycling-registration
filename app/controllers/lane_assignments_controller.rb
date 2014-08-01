@@ -19,9 +19,9 @@ class LaneAssignmentsController < ApplicationController
       csv << [nil,
         lane_assignment.competitor.lowest_member_bib_number,
         lane_assignment.lane,
-        member.last_name,
-        member.first_name,
-        member.country]
+        ActiveSupport::Inflector.transliterate(member.last_name),
+        ActiveSupport::Inflector.transliterate(member.first_name),
+        ActiveSupport::Inflector.transliterate(member.country)]
     end
   end
 
