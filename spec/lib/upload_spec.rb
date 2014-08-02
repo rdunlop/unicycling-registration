@@ -126,18 +126,25 @@ describe Upload do
   it "can convert an array of data from the timing guys" do
     up = Upload.new(';')
 
-    arr = up.convert_line_to_array("1;71;111648;Lacasse 2014;56:53.3;200;05:31.7;Le Plaisir;1;Le Plaisir-Ouvert;1")
-    expect(arr.count).to eq(11)
-    expect(arr[2]).to eq("111648")
+    arr = up.convert_line_to_array("22;557;10k-Unl-1 (10:00);02/08/2014 10:13:00;Bruce Lee;4;00:23:28.106;16;00:05:54.972;00:05:54.972;00:05:56.526;00:05:49.218;00:05:47.390;104295;1")
+    expect(arr.count).to eq(15)
+    expect(arr[1]).to eq("557")
 
     hash = up.convert_timing_csv_to_hash(arr)
-    expect(hash[:bib]).to eq(71)
-    expect(hash[:minutes]).to eq(56)
-    expect(hash[:seconds]).to eq(53)
-    expect(hash[:thousands]).to eq(300)
+    expect(hash[:bib]).to eq(557)
+    expect(hash[:minutes]).to eq(23)
+    expect(hash[:seconds]).to eq(28)
+    expect(hash[:thousands]).to eq(106)
   end
 
   it "handles times longer than an hour" do
+    up = Upload.new(';')
 
+    arr = up.convert_line_to_array("335;499;10k-Std-6 (8:44:30);02/08/2014 09:04:00;Donghwi Kim;4;01:01:11.773;36;00:16:21.237;00:16:21.237;00:14:10.450;00:15:50.003;00:14:50.083;103885;1")
+    hash = up.convert_timing_csv_to_hash(arr)
+    expect(hash[:bib]).to eq(499)
+    expect(hash[:minutes]).to eq(61)
+    expect(hash[:seconds]).to eq(11)
+    expect(hash[:thousands]).to eq(773)
   end
 end

@@ -76,6 +76,40 @@ class RaceDataImporter
     end
   end
 
+  def process_chip(file)
+    upload = Upload.new(';')
+    raw_data = upload.extract_csv(file)
+    self.num_rows_processed = 0
+    self.errors = nil
+    # drop the first (title) line
+    raw_data = raw_data.drop(1)
+    begin
+      ImportResult.transaction do
+        raw_data.each do |raw|
+          str = upload.convert_array_to_string(raw)
+          next if raw[6] == "-" || raw.count == 0
+          chip_hash = upload.convert_timing_csv_to_hash(raw)
+          result = ImportResult.new(
+            bib_number: chip_hash[:bib],
+            minutes: chip_hash[:minutes],
+            seconds: chip_hash[:seconds],
+            thousands: chip_hash[:thousands]
+          )
+          result.raw_data = str
+          result.user = @user
+          result.competition = @competition
+          result.is_start_time = false
+          if result.save!
+            self.num_rows_processed += 1
+          end
+        end
+      end
+    rescue ActiveRecord::RecordInvalid => invalid
+      @errors = invalid
+      return false
+    end
+  end
+
   def add_error(lane)
     error_message = "Missing Lane Assignment for Lane #{lane}"
     if self.errors.nil?

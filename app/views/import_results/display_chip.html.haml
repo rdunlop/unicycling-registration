@@ -1,0 +1,29 @@
+%h1 Import Chip CSV Data
+
+%h2 CSV Import Instructions
+
+This page is  for e-timer data import.
+
+%br
+
+The document should begin with a header line (which will be ignored).
+%br
+
+Please import a Semi-Colon-Separated-File file with the following format (for 'Distance' competitions).
+
+%br
+Example:
+%pre 22;557;10k-Unl-1 (10:00);02/08/2014 10:13:00;Bruce Lee;4;00:23:28.106;16;00:05:54.972;00:05:54.972;00:05:56.526;00:05:49.218;00:05:47.390;104295;1
+%ul
+  %li Column 2: ID
+  %li Column 6: Time (hours:minutes:seconds.thousands)
+
+= form_tag(import_chip_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
+  = label_tag :file, "Source File"
+  = file_field_tag :file
+  %br
+  = submit_tag "Load Chip File to Temp Table"
+
+= render :partial => "imported_results"
+
+= link_to "Review", review_user_competition_import_results_path(@user, @competition), class: "action_button"

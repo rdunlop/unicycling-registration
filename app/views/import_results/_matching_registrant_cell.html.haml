@@ -1,9 +1,11 @@
-- reg = Registrant.find_by_bib_number(import_result.bib_number)
+- reg = import_result.matching_registrant
 %td= reg
-- matching_competition = reg.matching_competition_in_event(import_result.competition.event) if reg
-- if matching_competition == import_result.competition
+- matching_competitor = import_result.matching_competitor
+- if matching_competitor.try(:competition) == import_result.competition
   %td.competitor_exists Yes
-- elsif matching_competition.present?
-  %td.competitor_other_comp_exists No (but #{matching_competition} does, so I'll import it there)
 - else
-  %td.competitor_not_exists No
+  - other_competition = reg.matching_competition_in_event(import_result.competition.event)
+  - if other_competition
+    %td.competitor_other_comp_exists No (but #{other_competition} does, so I'll import it there)
+  - else
+    %td.competitor_not_exists No

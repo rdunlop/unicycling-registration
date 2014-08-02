@@ -4,7 +4,7 @@ class ImportResultsController < ApplicationController
   before_action :load_user, except: [:show, :edit, :update, :destroy]
   before_action :load_competition, except: [:show, :edit, :update, :destroy]
   before_action :load_new_import_result, :only => [:create]
-  before_action :load_import_results, :only => [:data_entry, :display_csv, :display_lif, :index, :proof_single]
+  before_action :load_import_results, :only => [:data_entry, :display_csv, :display_chip, :display_lif, :index, :proof_single]
   before_action :load_results_for_competition, only: [:review, :approve]
   before_action :filter_import_results_by_start_times, only: [:proof_single, :data_entry, :review, :approve]
   load_and_authorize_resource
@@ -128,7 +128,7 @@ class ImportResultsController < ApplicationController
   def import_chip
     importer = RaceDataImporter.new(@competition, @user)
 
-    if importer.process_chip(params[:file], params[:start_times])
+    if importer.process_chip(params[:file])
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."

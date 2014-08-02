@@ -15,7 +15,7 @@ class Upload
     results = []
     File.open(upload_file, 'r:ISO-8859-1') do |f|
       f.each do |line|
-        row = CSV.parse_line (line)
+        row = convert_line_to_array(line)
         results << row
       end
     end
@@ -59,7 +59,7 @@ class Upload
 
     results[:bib] = arr[1].to_i
 
-    full_time = arr[4]
+    full_time = arr[6]
     convert_full_time_to_hash(results, full_time)
 
     results
@@ -68,13 +68,20 @@ class Upload
   private
 
   def convert_full_time_to_hash(results, full_time)
-   if full_time.index(":").nil?
+    if full_time.index(":").nil?
       # no minutes
       results[:minutes] = 0
       seconds_and_hundreds = full_time
     else
-      results[:minutes] = full_time[0..(full_time.index(":")-1)].to_i
-      seconds_and_hundreds = full_time[full_time.index(":")+1..-1]
+      split_by_minutes = full_time.split(':')
+      if split_by_minutes.length == 3
+        hours = split_by_minutes[0].to_i
+        minutes = split_by_minutes[1].to_i
+        results[:minutes] = minutes + (hours * 60)
+      else
+        results[:minutes] = split_by_minutes[0].to_i #full_time[0..(full_time.index(":")-1)].to_i
+      end
+      seconds_and_hundreds = split_by_minutes[-1] # full_time[full_time.index(":")+1..-1]
     end
 
     index = seconds_and_hundreds.index(".")

@@ -31,6 +31,7 @@ module CompetitorsHelper
       link_to "View", proof_user_competition_two_attempt_entries_path(current_user, competition, options)
     when "Externally Ranked"
       link_to "View", review_user_competition_import_results_path(current_user, competition, options)
+    when "Chip-Timing"
     else
       if competition.uses_judges
         link_to "XXX unused Summary", root_url
@@ -68,6 +69,8 @@ module CompetitorsHelper
       link_to "Track Importing", display_lif_user_competition_import_results_path(user, competition)
     when "Externally Ranked"
       link_to "Import CSV", display_csv_user_competition_import_results_path(user, competition)
+    when "Chip-Timing"
+      link_to "Import CSV", display_chip_user_competition_import_results_path(user, competition)
     end
   end
 end

@@ -265,6 +265,8 @@ Workspace::Application.routes.draw do
             get  :data_entry
             get :import_csv, as: "display_csv", to: :display_csv
             post :import_csv
+            get :import_chip, as: "display_chip", to: :display_chip
+            post :import_chip
             get :import_lif, as: "display_lif", to: :display_lif
             post :import_lif
             delete :destroy_all
