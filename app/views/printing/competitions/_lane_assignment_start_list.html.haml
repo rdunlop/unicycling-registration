@@ -1,0 +1,35 @@
+.nobreak
+  %table.full.grid
+    %thead
+      %tr
+        - if heat_times.count > 0
+          %th Scheduled Time
+        %th Heat/Lane
+        %th ID
+        %th Name
+        - if @competition.age_group_type
+          %th Age Group
+        %th= Competitor.state_or_country_description(@config.usa?)
+
+    %tbody
+      - competitors.each do |comp|
+        - cache [@competition, comp, @config, I18n.locale] do
+          %tr
+            - if heat_times.count > 0
+              %td= heat_times.where(heat: comp.heat).first.try(:scheduled_time)
+            - la = comp.lane_assignments.first
+            - if la
+              %td #{la.heat} - #{la.lane}
+            - else
+              %td
+            %td= comp.bib_number
+            %td
+              - if comp.team_name.present?
+                %b= comp.team_name
+                %br
+              - comp.members.each do |member|
+                = member
+                %br
+            - if @competition.age_group_type
+              %td= comp.age_group_entry_description
+            %td= comp.state_or_country(@config.usa?)

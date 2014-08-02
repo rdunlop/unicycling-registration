@@ -172,7 +172,12 @@ class Competition < ActiveRecord::Base
   end
 
   def heat_numbers
-    lane_assignments.map(&:heat).uniq
+    heats = competitors.map(&:heat).uniq.compact
+    if heats.any?
+      heats
+    else
+      lane_assignments.map(&:heat).uniq
+    end
   end
 
   def end_time_to_s

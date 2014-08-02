@@ -1,60 +1,24 @@
 -cache [@competition, @config, I18n.locale] do
   %h2= "Order of #{@competition.award_title} Competitors"
 
-
-  - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
-  - if @competition.compete_in_order
-    - competitors = competitors.reorder("competitors.position")
-  - if @competition.uses_lane_assignments?
-    - competitors = competitors.includes(:lane_assignments).reorder("lane_assignments.heat, lane_assignments.lane")
-  -# has heats
-  - has_heats = competitors.where.not(heat: nil).any?
-  - if has_heats
-    - competitors = competitors.reorder(:heat)
-
   - heat_times = @competition.heat_times
 
-  %table.full.grid
-    %thead
-      %tr
-        - if heat_times.count > 0
-          %th Scheduled Time
-        - if @competition.compete_in_order
-          %th Order
-        - if @competition.uses_lane_assignments?
-          %th Heat/Lane
-        - if has_heats
-          %th Heat
-        %th ID
-        %th Name
-        - if @competition.age_group_type
-          %th Age Group
-        %th= Competitor.state_or_country_description(@config.usa?)
+  - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
 
-    %tbody
-      - competitors.each do |comp|
-        - cache [@competition, comp, @config, I18n.locale] do
-          %tr
-            - if heat_times.count > 0
-              %td= heat_times.where(heat: comp.heat).first.try(:scheduled_time)
-            - if @competition.compete_in_order
-              %td= comp.position
-            - if @competition.uses_lane_assignments?
-              - la = comp.lane_assignments.first
-              - if la
-                %td #{la.heat} - #{la.lane}
-              - else
-                %td
-            - if has_heats
-              %Td= comp.heat
-            %td= comp.bib_number
-            %td
-              - if comp.team_name.present?
-                %b= comp.team_name
-                %br
-              - comp.members.each do |member|
-                = member
-                %br
-            - if @competition.age_group_type
-              %td= comp.age_group_entry_description
-            %td= comp.state_or_country(@config.usa?)
+  // Artistic
+  - if @competition.compete_in_order
+    - competitors = competitors.reorder("competitors.position")
+    = render partial: "artistic_start_list", locals: { competitors: competitors }
+
+  // Track
+  - if @competition.uses_lane_assignments?
+    - competitors = competitors.includes(:lane_assignments).reorder("lane_assignments.heat, lane_assignments.lane")
+    = render partial: "lane_assignment_start_list", locals: { competitors: competitors, heat_times: heat_times }
+
+  // Distance Mass Start
+  - has_heats = competitors.where.not(heat: nil).any?
+  - if has_heats
+    - heats = competitors.map(&:heat).uniq.compact.sort
+    - heats.each do |heat|
+      - filtered_competitors = competitors.where(heat: heat).reorder(:lowest_member_bib_number)
+      = render partial: "mass_start_list", locals: { heat: heat, competitors: filtered_competitors, heat_times: heat_times }

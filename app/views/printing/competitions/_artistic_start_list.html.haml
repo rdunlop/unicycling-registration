@@ -1,0 +1,27 @@
+.nobreak
+  %table.full.grid
+    %thead
+      %tr
+        %th Order
+        %th ID
+        %th Name
+        - if @competition.age_group_type
+          %th Age Group
+        %th= Competitor.state_or_country_description(@config.usa?)
+
+    %tbody
+      - competitors.each do |comp|
+        - cache [@competition, comp, @config, I18n.locale] do
+          %tr
+            %td= comp.position
+            %td= comp.bib_number
+            %td
+              - if comp.team_name.present?
+                %b= comp.team_name
+                %br
+              - comp.members.each do |member|
+                = member
+                %br
+            - if @competition.age_group_type
+              %td= comp.age_group_entry_description
+            %td= comp.state_or_country(@config.usa?)
