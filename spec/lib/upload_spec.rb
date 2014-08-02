@@ -115,4 +115,29 @@ describe Upload do
     hash[:thousands].should == 490
     hash[:disqualified].should == false
   end
+
+  it "can convert from lif line to array" do
+    up = Upload.new
+
+    arr = up.convert_line_to_array("2,,2,,,,2:43.85,,8.655,,,,,,")
+    expect(arr.count).to eq(15)
+  end
+
+  it "can convert an array of data from the timing guys" do
+    up = Upload.new(';')
+
+    arr = up.convert_line_to_array("1;71;111648;Lacasse 2014;56:53.3;200;05:31.7;Le Plaisir;1;Le Plaisir-Ouvert;1")
+    expect(arr.count).to eq(11)
+    expect(arr[2]).to eq("111648")
+
+    hash = up.convert_timing_csv_to_hash(arr)
+    expect(hash[:bib]).to eq(71)
+    expect(hash[:minutes]).to eq(56)
+    expect(hash[:seconds]).to eq(53)
+    expect(hash[:thousands]).to eq(300)
+  end
+
+  it "handles times longer than an hour" do
+
+  end
 end

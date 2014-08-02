@@ -1,6 +1,10 @@
 require 'csv'
 class Upload
 
+  def initialize(separator = ',')
+    @sep = separator
+  end
+
   def extract_csv(file)
     if file.respond_to?(:tempfile)
       upload_file = file.tempfile
@@ -16,6 +20,10 @@ class Upload
       end
     end
     results
+  end
+
+  def convert_line_to_array(line)
+    CSV.parse_line(line, col_sep: @sep)
   end
 
   def convert_array_to_string(arr)
@@ -40,45 +48,43 @@ class Upload
       results[:thousands] = 0
     else
       results[:disqualified] = false
-      if full_time.index(":").nil?
-        # no minutes
-        results[:minutes] = 0
-        seconds_and_hundreds = full_time
-      else
-        results[:minutes] = full_time[0..(full_time.index(":")-1)].to_i
-        seconds_and_hundreds = full_time[full_time.index(":")+1..-1]
-      end
 
-      index = seconds_and_hundreds.index(".")
-      results[:seconds] = seconds_and_hundreds[0..(index-1)].to_i
-      results[:thousands] = seconds_and_hundreds[(index+1)..-1].to_i
+      convert_full_time_to_hash(results, full_time)
     end
     results
   end
 
-  # CSV File exported from UCP
-  def process_csv_upload(params)
-    n=0
-    if params[:dump][:file].respond_to?(:tempfile)
-        upload_file = params[:dump][:file].tempfile
+  def convert_timing_csv_to_hash(arr)
+    results = {}
+
+    results[:bib] = arr[1].to_i
+
+    full_time = arr[4]
+    convert_full_time_to_hash(results, full_time)
+
+    results
+  end
+
+  private
+
+  def convert_full_time_to_hash(results, full_time)
+   if full_time.index(":").nil?
+      # no minutes
+      results[:minutes] = 0
+      seconds_and_hundreds = full_time
     else
-        upload_file = params[:dump][:file]
+      results[:minutes] = full_time[0..(full_time.index(":")-1)].to_i
+      seconds_and_hundreds = full_time[full_time.index(":")+1..-1]
     end
 
-    File.open(upload_file, 'r:ISO-8859-1') do |f|
-     f.each do |line|
-      row = CSV.parse_line (line)
-      # sample rows:
-      #1,"Robin","Dunlop",1,29,"Male"
-      #2,"Connie","Cotter",1,46,"Female"
-      #3,"Ann","O'Brien",0,53,"Female"
-      c=Registrant.new
-      c.initialize_from_array(row)
-      if c.save
-        n=n+1
-      end
-     end
+    index = seconds_and_hundreds.index(".")
+    results[:seconds] = seconds_and_hundreds[0..(index-1)].to_i
+
+    thous = seconds_and_hundreds[(index+1)..-1]
+    if thous.length == 1
+      results[:thousands] = thous.to_i * 100
+    else
+      results[:thousands] = thous.to_i
     end
-    n
   end
 end

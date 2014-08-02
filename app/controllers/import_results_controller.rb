@@ -121,6 +121,21 @@ class ImportResultsController < ApplicationController
     end
   end
 
+  def display_chip
+    add_breadcrumb "Import Chip Data"
+  end
+
+  def import_chip
+    importer = RaceDataImporter.new(@competition, @user)
+
+    if importer.process_chip(params[:file], params[:start_times])
+      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+    else
+      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+    end
+    redirect_to display_chip_user_competition_import_results_path(@user, @competition)
+  end
+
   def display_csv
     add_breadcrumb "Import CSV"
   end
