@@ -34,7 +34,11 @@ class Printing::CompetitionsController < ApplicationController
 
   def sign_in_sheet
     add_breadcrumb "Sign-In Sheets"
-    @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
+    if @competition.start_list?
+      @competitors = @competition.competitors.reorder(:heat, :lowest_member_bib_number)
+    else
+      @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
+    end
 
     respond_to do |format|
       format.html

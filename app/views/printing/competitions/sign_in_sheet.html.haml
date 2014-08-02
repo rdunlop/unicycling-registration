@@ -5,6 +5,8 @@
     %tr
       - if @competition.compete_in_order
         %th Order
+      - if @competition.start_list?
+        %th Heat
       %th ID
       %th Name
       %th Age
@@ -18,6 +20,8 @@
       %tr
         - if @competition.compete_in_order
           %td= comp.position
+        - if @competition.start_list?
+          %th= comp.heat
         %td.bib_number= comp.bib_number
         %td.name
           - if comp.team_name.present?
