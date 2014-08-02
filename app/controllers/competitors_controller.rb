@@ -71,22 +71,6 @@ class CompetitorsController < ApplicationController
     end
   end
 
-  def import_sign_in
-    if params[:file].respond_to?(:tempfile)
-      file = params[:file].tempfile
-    else
-      file = params[:file]
-    end
-
-    book = Spreadsheet.open file
-    sheet = book.worksheet 0
-    sheet.each do |row|
-      puts row
-    end
-
-    redirect_to enter_sign_in_competition_competitors_path(@competition)
-  end
-
   def update_competitors
     respond_to do |format|
       if @competition.update_attributes(update_competitors_params)

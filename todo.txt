@@ -11,9 +11,16 @@ Track day to-do:
 - Recalculating the results is too long (difficult to take the system down that long)
 - When the importer chooses to "restart", only THEIR results should be deleted. (we delete the line-judge's results too...oops).
 
+- Prevent the "set age groups results" from re-loading the page (it's slow)
+
 BUG:
+- The "Start_lists?" for Mass Start doesn't work correctly, never displays the start lists.
 - If I change a TimeResult from DQ to not-DQ, it doesn't cause the competitor to be updated/touched.
 - Allow DNS, DNF
+- Fix the "Display Candidates -> create heat" to allow un-selecting peoplo for the heat (male and female heat separately)
+
+- Add tests to increase coverage, for both functional, and unit tests.
+
 
 BUG:
 - Importing results without a lane, nor a DQ, crashes the system (see Heat 13 Race 48)

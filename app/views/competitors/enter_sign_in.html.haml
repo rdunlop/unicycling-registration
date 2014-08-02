@@ -37,8 +37,4 @@
   = f.submit
 %br
 
-- if can? :import_sign_in, Competitor
-  = form_tag import_sign_in_competition_competitors_path(@competition), method: :put, :multipart=>true do
-    = file_field_tag :file
-    = submit_tag
 = link_to "Back", @competition

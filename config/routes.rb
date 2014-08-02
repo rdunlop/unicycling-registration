@@ -329,7 +329,6 @@ Workspace::Application.routes.draw do
           post :add_all
           delete :destroy_all
           get :enter_sign_in
-          put :import_sign_in
           put :update_competitors
           get :display_candidates
           post :create_from_candidates
