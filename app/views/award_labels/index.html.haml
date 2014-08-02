@@ -11,7 +11,7 @@
   %h2 Print Labels Sheet
   = link_to "Normal (Round) Labels", expert_labels_user_award_labels_path(@user)
   %br
-  = link_to "Announcer Sheet", announcer_sheet_user_award_labels_path(@user)
+  = link_to "Announcer Sheet", announcer_sheet_user_award_labels_path(@user, format: :pdf)
   %br
   %br
   %hr
@@ -51,9 +51,9 @@
     = check_box_tag :experts, {}, :checked => true
     %br
     = submit_tag "Create Labels for Selected Registrant(s) or Competition"
-  %hr
-  = form_tag(destroy_all_user_award_labels_path(@user), {:method => :delete, :multipart=>true}) do
-    = submit_tag "Clear Table", data: { :confirm => "DELETE. Are you sure?"}, :class => "awards_delete"
+%hr
+= form_tag(destroy_all_user_award_labels_path(@user), {:method => :delete, :multipart=>true}) do
+  = submit_tag "Clear Table", data: { :confirm => "DELETE. Are you sure?"}, :class => "awards_delete"
 %table.sortable.award_labels
   %thead
     %tr
