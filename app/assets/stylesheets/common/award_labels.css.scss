@@ -13,3 +13,15 @@
 .js--hiddenToggleMenu {
   cursor: pointer;
 }
+
+.award_labels {
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+table {
+  .separator {
+    background-color: black;
+  }
+}

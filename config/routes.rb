@@ -280,6 +280,7 @@ Workspace::Application.routes.draw do
           get :expert_labels
           get :normal_labels
           delete :destroy_all
+          get :announcer_sheet
         end
       end
       resources :songs, :only => [] do

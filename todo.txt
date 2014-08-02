@@ -1,6 +1,7 @@
 Last Re-Arranged June 20th, 2014.
 
 Track day to-do:
+- make the results text smaller (fewer printed sheets)
 - Ensure that Multiple Heat#1 doesn't break the importer.
 - combine the DQ with the data-DQ, so that only a single row appears. (or allow multiple rows to exist?)
 - Disable the "next heat is in...<category>" function.

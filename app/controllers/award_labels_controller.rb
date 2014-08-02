@@ -2,7 +2,7 @@ class AwardLabelsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_user, :only => [:index, :create, :create_by_competition, :create_labels, :expert_labels, :normal_labels, :destroy_all, :create_labels_by_registrant]
+  before_action :load_user, :only => [:index, :create, :create_by_competition, :create_labels, :expert_labels, :announcer_sheet, :normal_labels, :destroy_all, :create_labels_by_registrant]
   respond_to :html
 
   def load_user
@@ -293,6 +293,15 @@ class AwardLabelsController < ApplicationController
     end
 
     send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
+  end
+
+  def announcer_sheet
+    @award_labels = @user.award_labels
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render_common_pdf "announcer_sheet" }
+    end
   end
 
   private

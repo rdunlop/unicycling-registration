@@ -1,0 +1,30 @@
+
+%h1 Announcer Sheet
+
+%table.award_labels
+  %thead
+    %tr
+      %th ID
+      %th Line 1
+      %th Line 2
+      %th Line 3
+      %th Line 4
+      %th Line 5
+      %th Line 6
+      %th Place
+  %tbody
+    - last_award = nil
+    - @award_labels.reorder(:category, :place).each do |award_label|
+      - if last_award.try(:category) != award_label.category
+        %tr
+          %td.separator{colspan: 8}
+      %tr
+        %td= award_label.bib_number
+        %td= award_label.line_1
+        %td= award_label.line_2
+        %td= award_label.line_3
+        %td= award_label.line_4
+        %td= award_label.line_5
+        %td= award_label.line_6
+        %td= award_label.place
+      - last_award = award_label
