@@ -36,7 +36,7 @@ class Score < ActiveRecord::Base
   delegate :judge_type, to: :judge
 
   def set_zero_for_non_applicable_scores
-    if judge_type
+    if judge && judge_type
       (1..4).each do |score_number|
         if judge_type.send("val_#{score_number}_max") == 0
           self.send("val_#{score_number}=", 0)
