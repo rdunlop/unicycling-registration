@@ -8,25 +8,25 @@
 
 if JudgeType.count == 0
   JudgeType.create(:name => "Presentation",
-                   :val_1_description => "Mistakes",
+                   :val_1_description => "Mistakes: Dismounts",
                    :val_2_description => "Choreography & Style",
-                   :val_3_description => "Originality of Performance & Showmanship",
+                   :val_3_description => "Showmanship and Originality",
                    :val_4_description => "Interpretation",
                    :val_1_max => 10,
-                   :val_2_max => 10,
-                   :val_3_max => 10,
+                   :val_2_max => 15,
+                   :val_3_max => 15,
                    :val_4_max => 10,
                    :event_class => "Freestyle"
                   )
   JudgeType.create(:name => "Technical",
-                   :val_1_description => "Variety & Originality of Skills",
-                   :val_2_description => "Transitions & Mastery",
-                   :val_3_description => "Level of Difficulty",
-                   :val_4_description => "Interpretation",
+                   :val_1_description => "Quantity of Unicycling Skills & Transitions",
+                   :val_2_description => "Mastery and Quality of Execution",
+                   :val_3_description => "Difficulty and Duration",
+                   :val_4_description => "N/A",
                    :val_1_max => 10,
-                   :val_2_max => 10,
-                   :val_3_max => 10,
-                   :val_4_max => 10,
+                   :val_2_max => 15,
+                   :val_3_max => 15,
+                   :val_4_max => 0,
                    :event_class => "Freestyle"
                   )
 
