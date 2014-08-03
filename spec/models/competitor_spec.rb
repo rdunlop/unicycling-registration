@@ -369,14 +369,14 @@ describe Competitor do
 
       @comp.reload.double_fault?.should == true
     end
-    it "should indicate double_fault if two consecutive attempts at different distances are found" do
+    it "should NOT indicate double_fault if two consecutive attempts at different distances are found" do
       @comp.double_fault?.should == false
       da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
       @comp.reload.double_fault?.should == false
       Delorean.jump 2
       da2 = FactoryGirl.create(:distance_attempt, :distance => da1.distance + 1, :competitor => @comp, :fault => true)
 
-      @comp.reload.double_fault?.should == true
+      @comp.reload.double_fault?.should == false
     end
 
     it "should return the max attempted distance" do

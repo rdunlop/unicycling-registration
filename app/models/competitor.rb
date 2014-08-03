@@ -372,7 +372,7 @@ class Competitor < ActiveRecord::Base
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{DistanceAttempt.cache_key_for_set(id)}/double_fault") do
       df = false
       if distance_attempts.count > 1
-        if distance_attempts[0].fault == true && distance_attempts[1].fault == true
+        if distance_attempts[0].fault == true && distance_attempts[1].fault == true && distance_attempts[0].distance == distance_attempts[1].distance
            df = true
         end
       end

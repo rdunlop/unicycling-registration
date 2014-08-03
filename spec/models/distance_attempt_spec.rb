@@ -34,7 +34,7 @@ describe DistanceAttempt do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
       @da.valid?.should == false
-  
+
       @da.distance = 1.0
       @da.valid?.should == true
     end
@@ -42,7 +42,7 @@ describe DistanceAttempt do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
       @da.valid?.should == false
-  
+
       @da.distance = -1.0
       @da.valid?.should == false
     end
