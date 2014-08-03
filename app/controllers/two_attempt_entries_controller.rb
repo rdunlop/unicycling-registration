@@ -78,13 +78,13 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   def approve
-    n = two_attempt_entries.count
+    n = @two_attempt_entries.count
     begin
       TwoAttemptEntry.transaction do
-        two_attempt_entries.each do |ir|
+        @two_attempt_entries.each do |ir|
           ir.import!
         end
-        two_attempt_entries.destroy_all
+        @two_attempt_entries.destroy_all
       end
     rescue Exception => ex
       errors = ex

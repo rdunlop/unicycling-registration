@@ -1,11 +1,22 @@
 Last Re-Arranged June 20th, 2014.
 
+- How did Mimi import results as Robin?
+- Have a "Data Checking" station, which allows looking at results for High/Long as they are being run?
+- Have a "View Results" button for each competitor's results?
+- Shade out a competitor who has results when they cannot have more results (like High/Long when double-faulted, or External Results?)
+-
+
+- Sort the labels to be printed in a stable order 9so that they match the announcer form?)
+- Allow administrators to reset passwords on user accounts.
 - If there are people without a 2nd muni event, get their chip returned.
 - Better scoring display, so that it displays/removes columns as necessary.
 - falls count judging,
  - number of competitors in each group.
 Feature:
 - Undo the changes to the Judge Type, so that we can migrate the NAUCC database?
+- # results for High/Long judges should show the number of unique competitors each judge has entered? (right now it's 0)
+- Make the UI of the High/Long data entry more usable.
+- Change "add Attempt" to "Enter Attempt"
 
 Track day to-do:
 - make the results text smaller (fewer printed sheets)
