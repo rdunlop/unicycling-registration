@@ -17,7 +17,7 @@ Ensure that your desired volunteer is enabled in the "Data Entry Volunteer Accou
 = form_for [@competition, @data_entry_volunteer] do |f|
   = render partial: "/shared/error_messages", object: @data_entry_volunteer
   = f.label :user_id, "User Account"
-  = f.select :user_id, User.all.map { |user| [user, user.id] }, {}, class: 'chosen-select'
+  = f.select :user_id, User.all.map { |user| [user, user.id] }, { include_blank: true }, class: 'chosen-select'
   %br
   = f.label :name, "Name"
   = f.text_field :name

@@ -12,7 +12,7 @@
       Add judges individually
     = form_for [@competition, @judge] do |f|
       = f.label :user_id, "Volunteer"
-      = f.select :user_id, @all_data_entry_volunteers.map { |user| [user, user.id] }
+      = f.select :user_id, @all_data_entry_volunteers.map { |user| [user, user.id] }, { include_blank: true }, class: "chosen-select"
       %br
       = f.label :judge_type_id
       = f.select :judge_type_id, @judge_types.map { |jt| [jt, jt.id] }
@@ -39,7 +39,7 @@
   %h2 Set User as 'Race Official'
   = form_tag  create_race_official_permissions_path, method: :post do |f|
     = hidden_field_tag :competition_id, @competition.id
-    = select_tag :user_id, options_from_collection_for_select(User.with_role(:data_entry_volunteer), "id", "to_s")
+    = select_tag :user_id, options_from_collection_for_select(User.with_role(:data_entry_volunteer), "id", "to_s"), {include_blank: true }, class: "chosen-select"
     = submit_tag
 %hr
 If the volunteer you need isn't listed, #{link_to "Manage Data Entry Volunteers", competition_data_entry_volunteers_path(@competition)}
