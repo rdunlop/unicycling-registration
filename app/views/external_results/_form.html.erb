@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <td><%= competitor_select_box(f, @competition) %></td>
-      <td><%= f.number_field :points, {min: 0} %></td>
+      <td><%= f.number_field :points, {min: 0, :step => 0.001 } %></td>
       <td><%= f.text_field :details %></td>
       <td><%= f.submit %></td>
     </tr>

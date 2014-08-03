@@ -15,6 +15,7 @@ Track day to-do:
 - Prevent the "set age groups results" from re-loading the page (it's slow)
 
 BUG:
+- Printing/entry of the Heat Data (gear/crank) is sorted incorrectly where there are heat times also).
 - The "Start_lists?" for Mass Start doesn't work correctly, never displays the start lists.
 - If I change a TimeResult from DQ to not-DQ, it doesn't cause the competitor to be updated/touched.
 - Allow DNS, DNF
