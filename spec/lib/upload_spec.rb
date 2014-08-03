@@ -147,4 +147,15 @@ describe Upload do
     expect(hash[:seconds]).to eq(11)
     expect(hash[:thousands]).to eq(773)
   end
+
+  it "handles very short times" do
+    up = Upload.new(';')
+
+    arr = up.convert_line_to_array("1;178;Felix Dietze;DH Glide;2;00:00:34.201;2;00:00:34.201;00:00:35.339;-;103879")
+    hash = up.convert_timing_csv_to_hash(arr)
+    expect(hash[:bib]).to eq(178)
+    expect(hash[:minutes]).to eq(0)
+    expect(hash[:seconds]).to eq(34)
+    expect(hash[:thousands]).to eq(201)
+  end
 end

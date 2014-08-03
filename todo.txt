@@ -1,5 +1,10 @@
 Last Re-Arranged June 20th, 2014.
 
+- If there are people without a 2nd muni event, get their chip returned.
+
+Feature:
+- add dynamic delete for, faster fade,
+
 Track day to-do:
 - make the results text smaller (fewer printed sheets)
 - Ensure that Multiple Heat#1 doesn't break the importer.

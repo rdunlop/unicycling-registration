@@ -59,21 +59,26 @@ class Upload
 
     results[:bib] = arr[1].to_i
 
-    full_time = arr[6]
+    full_time = find_full_time(arr)
+
     convert_full_time_to_hash(results, full_time)
 
     results
   end
 
+  def is_blank_line(arr)
+    find_full_time(arr) == "-"
+  end
+
   private
 
-  def convert_full_time_to_hash(results, full_time)
-    if full_time.index(":").nil?
+  def convert_full_time_to_hash(results, ft)
+    if ft.index(":").nil?
       # no minutes
       results[:minutes] = 0
-      seconds_and_hundreds = full_time
+      seconds_and_hundreds = ft
     else
-      split_by_minutes = full_time.split(':')
+      split_by_minutes = ft.split(':')
       if split_by_minutes.length == 3
         hours = split_by_minutes[0].to_i
         minutes = split_by_minutes[1].to_i
@@ -92,6 +97,14 @@ class Upload
       results[:thousands] = thous.to_i * 100
     else
       results[:thousands] = thous.to_i
+    end
+  end
+
+  def find_full_time(arr)
+    if arr.count == 11
+      full_time = arr[5]
+    else
+      full_time = arr[6]
     end
   end
 end

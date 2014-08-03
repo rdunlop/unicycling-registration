@@ -87,7 +87,7 @@ class RaceDataImporter
       ImportResult.transaction do
         raw_data.each do |raw|
           str = upload.convert_array_to_string(raw)
-          next if raw[6] == "-" || raw.count == 0
+          next if upload.is_blank_line(raw) || raw.count == 0
           chip_hash = upload.convert_timing_csv_to_hash(raw)
           result = ImportResult.new(
             bib_number: chip_hash[:bib],
