@@ -29,10 +29,25 @@ class Score < ActiveRecord::Base
   self.score_fields.each do |sym|
     validates sym, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
   end
+  before_validation :set_zero_for_non_applicable_scores
 
   validate :values_within_judge_type_bounds
 
   delegate :judge_type, to: :judge
+
+  def set_zero_for_non_applicable_scores
+    if judge_type
+      (1..4).each do |score_number|
+        if judge_type.send("val_#{score_number}_max") == 0
+          self.send("val_#{score_number}=", 0)
+        end
+      end
+    end
+  end
+
+  def display_score(score_number)
+    judge.judge_type.send("val_#{score_number}_max") > 0
+  end
 
   def validate_judge_score(value_sym, max_score)
     if self.send(value_sym) > max_score

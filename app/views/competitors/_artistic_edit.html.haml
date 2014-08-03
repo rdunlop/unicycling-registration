@@ -25,7 +25,8 @@
             %td.judging_category= f.number_field :val_1, {:min => 0, :max => @judge.judge_type.val_1_max, :step => 0.001, :autofocus => true }
             %td.judging_category= f.number_field :val_2, {:min => 0, :max => @judge.judge_type.val_2_max, :step => 0.001 }
             %td.judging_category= f.number_field :val_3, {:min => 0, :max => @judge.judge_type.val_3_max, :step => 0.001 }
-            %td.judging_category= f.number_field :val_4, {:min => 0, :max => @judge.judge_type.val_4_max, :step => 0.001 }
+            - if @judge.judge_type.val_4_max > 0
+              %td.judging_category= f.number_field :val_4, {:min => 0, :max => @judge.judge_type.val_4_max, :step => 0.001 }
             %td
             %td
             %td= f.submit 'Save', class: 'action_button'

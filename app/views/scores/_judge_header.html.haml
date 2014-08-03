@@ -15,10 +15,13 @@
       = judge_header.val_3_description
       %br
       = "(0-" + judge_header.val_3_max.to_s + ")"
-    %th.judging_category
-      = judge_header.val_4_description
-      %br
-      = "(0-" + judge_header.val_4_max.to_s + ")"
+    - if judge_header.val_4_max > 0
+      %th.judging_category
+        = judge_header.val_4_description
+        %br
+        = "(0-" + judge_header.val_4_max.to_s + ")"
+    - else
+      %th
     %th.derived Total
     %th.derived Place
     %th Actions

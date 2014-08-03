@@ -2,6 +2,9 @@
 %td= score_with_total.val_1
 %td= score_with_total.val_2
 %td= score_with_total.val_3
-%td= score_with_total.val_4
+- if score_with_total.display_score(4)
+  %td= score_with_total.val_4
+- else
+  %td
 %td.derived= score_with_total.total
 %td.derived.js--shouldNotMatch= score_with_total.judged_place
