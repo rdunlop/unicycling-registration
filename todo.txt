@@ -5,7 +5,7 @@ Last Re-Arranged June 20th, 2014.
 - falls count judging,
  - number of competitors in each group.
 Feature:
-- add dynamic delete for, faster fade,
+- Undo the changes to the Judge Type, so that we can migrate the NAUCC database?
 
 Track day to-do:
 - make the results text smaller (fewer printed sheets)
