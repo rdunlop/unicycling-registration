@@ -24,5 +24,6 @@ class TieBreakAdjustment < ActiveRecord::Base
   validates :tie_break_place,      :presence => true, :numericality => {:greater_than_or_equal_to => 0, :less_than => 1000}
 
   # validate uniqueness of this competitor having a tie break adjustment
+  validates :competitor_id, uniqueness: { scope: :judge_id }
 
 end
