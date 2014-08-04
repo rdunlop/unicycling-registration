@@ -22,7 +22,7 @@ class HeatsController < ApplicationController
   def create_heats_from(competitors, current_heat, max_lane_number)
     lane_number = 1
     heat_number = current_heat
-    competitors.sort{|a,b| a.best_time <=> b.best_time}.each do |competitor|
+    competitors.sort{|a,b| b.best_time <=> a.best_time}.each do |competitor|
       if lane_number > max_lane_number
         heat_number += 1
         lane_number = 1

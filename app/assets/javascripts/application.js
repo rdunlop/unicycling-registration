@@ -84,6 +84,7 @@ $(document).ready(function(e) {
 // Sorting the list
 
 var get_sortable_string = function() {
+  additional = ""
   if ($('.drag_drop_sortable').data('additional')) {
     additional = $("#" + $('.drag_drop_sortable').data('additional')).serialize()
     if (additional != "") {

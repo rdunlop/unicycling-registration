@@ -8,6 +8,7 @@ Robin's Todo List tomorrow:
 - Clean up the printing of the Artistic results-summary page.
 -
 
+- Heat/Lane auto-assignment takes >30 seconds with >300 competitors
 - Add a page which lists the High/Long result which require tie breaks (top 3 places which are tie, by age group results)
 - Add a rulebook rule for how to cut off the ends of High/Long competition (you are allowed to jump...forever?)
 - add recommendations for how to schedule an event, including awarding younger riders' awards earlier, and not performing awards the same evening as an event.
