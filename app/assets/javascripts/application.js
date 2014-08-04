@@ -83,6 +83,17 @@ $(document).ready(function(e) {
 
 // Sorting the list
 
+var get_sortable_string = function() {
+  if ($('.drag_drop_sortable').data('additional')) {
+    additional = $("#" + $('.drag_drop_sortable').data('additional')).serialize()
+    if (additional != "") {
+      additional = "&" + additional
+    }
+  }
+
+  return $('.drag_drop_sortable').sortable('serialize') + additional
+}
+
 var set_sortable = function() {
   $('.drag_drop_sortable').sortable({
     axis: 'y',
@@ -95,7 +106,7 @@ var set_sortable = function() {
     update: function(){
       $.ajax({
         type: 'post',
-        data: $('.drag_drop_sortable').sortable('serialize'),
+        data: get_sortable_string(),
         dataType: 'script',
         complete: function(request){
           $('.drag_drop_sortable').effect('highlight');
