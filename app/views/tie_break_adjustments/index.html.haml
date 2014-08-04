@@ -13,6 +13,7 @@
         %th
     %tbody
       - @tie_break_adjustments.each do |tba|
+        - next unless tba.persisted?
         - cache [tba] do
           %tr
             %td= tba.competitor.max_successful_distance

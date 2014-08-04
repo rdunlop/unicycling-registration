@@ -1,6 +1,9 @@
 %fieldset.data_block.registrant_details_summary
   - cache [I18n.locale, @registrant] do
     %legend= t(".registration_summary")
+    %p.non_printable
+      %b= "User Account Email:"
+      = @registrant.user.email
     %p
       %b= t(".name")
       = @registrant.first_name

@@ -7,7 +7,6 @@ Robin's Todo List tomorrow:
 - Set and post the competitor heats for Track Day(s)
 - Code Cyclocross (so that the # of heats is used for calculations)
 - Add ability to reset user's email password by admin-level people
-- Show the user Id email on the registrant summary page.
 - Clean up the printing of the Artistic results-summary page.
 -
 

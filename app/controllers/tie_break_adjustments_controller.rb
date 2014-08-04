@@ -10,6 +10,7 @@ class TieBreakAdjustmentsController < ApplicationController
     if @tie_break_adjustment.save
       flash[:notice] = 'Tie Break Adjustment was successfully created.'
     else
+      @tie_break_adjustments = @judge.tie_break_adjustments
       index
     end
     respond_with(@tie_break_adjustment, location: judge_tie_break_adjustments_path(@judge), action: "index")
@@ -36,7 +37,7 @@ class TieBreakAdjustmentsController < ApplicationController
     add_breadcrumb "Distance Attempt Entry" , judge_distance_attempts_path(@judge)
     add_breadcrumb "Add Tie Break Adjustments", judge_tie_break_adjustments_path(@judge)
 
-    @tie_break_adjustment = TieBreakAdjustment.new
+    @tie_break_adjustment ||= TieBreakAdjustment.new
   end
 
   private
