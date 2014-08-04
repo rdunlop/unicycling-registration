@@ -6,7 +6,7 @@ class StreetScoringClass < BaseScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    StreetScoreCalculator.new(@competition)
+    StreetCompScoreCalculator.new(@competition)
   end
 
   # describes how to label the results of this competition
@@ -45,6 +45,14 @@ class StreetScoringClass < BaseScoringClass
 
   def uses_judges
     true
+  end
+
+  def scoring_path(judge)
+    judge_scores_path(judge)
+  end
+
+  def competitor_dq?(competitor)
+    false
   end
 
   def requires_age_groups

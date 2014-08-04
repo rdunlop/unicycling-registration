@@ -80,6 +80,10 @@ class Competitor < ActiveRecord::Base
     name
   end
 
+  def to_s_with_id
+    "##{bib_number}-#{to_s}"
+  end
+
   def first_bib_number
     members.first.registrant.bib_number
   end

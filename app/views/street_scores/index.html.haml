@@ -1,0 +1,28 @@
+%h1 Event: #{@competition.name} - Street Scores
+%h2 Judge: #{@judge}
+
+= render :partial => 'form'
+
+%hr.competitor_separator
+
+- unless @street_scores.empty?
+  %table.top_distance_attempts
+    %caption Street Scores
+    %thead
+      %tr
+        %th ID
+        %th Competitor
+        %th Entered Place
+        %th.derived Judged Place
+        %th.derived Judged Points
+        %th
+    %tbody
+      - @street_scores.each do |ss|
+        - next if ss.new_record?
+        %tr
+          %td= ss.competitor.bib_number
+          %td= ss.competitor.name
+          %td= ss.val_1
+          %td.derived= ss.judged_place
+          %td.derived= ss.placing_points
+          %td= link_to 'Delete', judge_street_score_path(@judge, ss), data: { confirm: 'Are you sure?' }, method: :delete

@@ -17,29 +17,12 @@ class StreetScoresController < ApplicationController
   def create
     @score = Score.new
     authorize! :create, @score
-    cid = params[:competitor_id]
-    eid = params[:external_id]
-    if ((!cid.empty?) && (!eid.empty?))
-        # return an error if both comp and id are specified
-        flash[:alert] = "unable to specify both ID and by competitor"
-    else
-      unless cid.empty?
-        @competition.competitors.each do |c|
-          if c.id == cid.to_i
-            @score.competitor = c
-          end
-        end
-      end
-      unless eid.empty?
-        @competition.competitors.each do |c|
-          if c.bib_number == eid
-            @score.competitor = c
-          end
-        end
-      end
+    if params[:competitor_id].present?
+      c = @competition.competitors.find(params[:competitor_id])
+      @score.competitor = c
     end
     @score.judge = @judge
-    @score.val_1 = params[:score]
+    @score.val_1 = params[:place]
     @score.val_2 = 0
     @score.val_3 = 0
     @score.val_4 = 0
