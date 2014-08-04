@@ -22,7 +22,7 @@
   = f.check_box :no_reg_accounts
   %br
   = f.label :competition_id, "Users who are assigned to a competition"
-  = f.select :competition_id, Competition.event_order.all.map{ |comp| [comp, comp.id] }, {include_blank: true}, class: "chosen-select"
+  = f.select :competition_id, Competition.event_order.all.map{ |comp| [comp, comp.id] }, {include_blank: true}, class: "chosen-select", multiple: true
   %br
   = f.label :category_id, "Users who are assigned to any competition in this category"
   = f.select :category_id, Category.all.map{ |category| [category, category.id] }, include_blank: true
