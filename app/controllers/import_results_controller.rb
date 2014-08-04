@@ -128,7 +128,7 @@ class ImportResultsController < ApplicationController
   def import_chip
     importer = RaceDataImporter.new(@competition, @user)
 
-    if importer.process_chip(params[:file])
+    if importer.process_chip(params[:file], params[:time_column_number].to_i)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."

@@ -10,8 +10,8 @@ class ExportController < ApplicationController
       csv << ['bib_number', 'last_name', 'first_name', 'country']
       Registrant.active.where(competitor: true).each do |registrant|
         csv << [registrant.bib_number,
-          registrant.last_name,
-          registrant.first_name,
+          ActiveSupport::Inflector.transliterate(registrant.last_name),
+          ActiveSupport::Inflector.transliterate(registrant.first_name),
           registrant.country]
       end
     end

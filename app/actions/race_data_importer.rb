@@ -76,8 +76,8 @@ class RaceDataImporter
     end
   end
 
-  def process_chip(file)
-    upload = Upload.new(';')
+  def process_chip(file, time_column_number)
+    upload = Upload.new(';', time_column_number)
     raw_data = upload.extract_csv(file)
     self.num_rows_processed = 0
     self.errors = nil

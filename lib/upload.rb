@@ -1,8 +1,9 @@
 require 'csv'
 class Upload
 
-  def initialize(separator = ',')
+  def initialize(separator = ',', time_column_number = nil)
     @sep = separator
+    @time_column_number = time_column_number
   end
 
   def extract_csv(file)
@@ -54,7 +55,7 @@ class Upload
     results
   end
 
-  def convert_timing_csv_to_hash(arr)
+  def convert_timing_csv_to_hash(arr, time_column_number = nil)
     results = {}
 
     results[:bib] = arr[1].to_i
@@ -101,6 +102,8 @@ class Upload
   end
 
   def find_full_time(arr)
+    return arr[@time_column_number] unless @time_column_number.nil?
+
     if arr.count == 11
       full_time = arr[5]
     else
