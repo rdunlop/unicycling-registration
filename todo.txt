@@ -11,7 +11,7 @@ Robin's Todo List tomorrow:
 -
 
 - Add a page which lists the High/Long result which require tie breaks (top 3 places which are tie, by age group results)
-- Add a rule for how to cut off the ends of High/Long competition (you are allowed to jump...forever?)
+- Add a rulebook rule for how to cut off the ends of High/Long competition (you are allowed to jump...forever?)
 - add recommendations for how to schedule an event, including awarding younger riders' awards earlier, and not performing awards the same evening as an event.
 - add recommendation for scheduling event to include always having water stations, clearly labeled bathrooms, and announcing medical services are available, where.
 - Split t.integer  "lowest_member_bib_number"
