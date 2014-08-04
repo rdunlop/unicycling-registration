@@ -14,7 +14,7 @@
       %th Place
   %tbody
     - last_award = nil
-    - @award_labels.reorder(:category, :place).each do |award_label|
+    - @award_labels.each do |award_label|
       - if last_award.try(:category) != award_label.category
         %tr
           %td.separator{colspan: 8}

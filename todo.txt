@@ -2,8 +2,6 @@ Last Re-Arranged June 20th, 2014.
 
 
 Robin's Todo List tomorrow:
-- Enter and Post the High/Long results.
- - Labels, and instructions to Gael.
 - Set and post the competitor heats for Track Day(s)
 - Code Cyclocross (so that the # of heats is used for calculations)
 - Add ability to reset user's email password by admin-level people

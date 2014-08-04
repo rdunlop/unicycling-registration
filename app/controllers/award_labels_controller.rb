@@ -296,7 +296,7 @@ class AwardLabelsController < ApplicationController
   end
 
   def announcer_sheet
-    @award_labels = @user.award_labels
+    @award_labels = @user.award_labels.reorder(:category, :place)
 
     respond_to do |format|
       format.html {}
