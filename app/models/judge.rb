@@ -29,6 +29,7 @@ class Judge < ActiveRecord::Base
     has_many :standard_difficulty_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, :dependent => :destroy
     has_many :competitors, -> {order "position"}, :through => :competition
     has_many :distance_attempts, -> {order "id DESC"}, dependent: :destroy
+    has_many :tie_break_adjustments, dependent: :destroy
 
     accepts_nested_attributes_for :standard_execution_scores
     accepts_nested_attributes_for :standard_difficulty_scores
@@ -45,6 +46,18 @@ class Judge < ActiveRecord::Base
         errors[:base] << "cannot delete judge containing a score"
         return false
       end
+      if distance_attempts.count > 0
+        errors[:base] << "cannot delete judge containing distance attempts"
+        return false
+      end
+    end
+
+    def num_scored_competitors
+        if scores.count > 0
+            scores.count
+        else
+            distance_attempts.count("DISTINCT competitor_id")
+        end
     end
 
     def external_id

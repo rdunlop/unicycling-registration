@@ -12,5 +12,5 @@
       %tr.js--highlightMatching
         %td= judge
         %td.js--shouldMatch= competition.competitors.active.count
-        %td.js--shouldMatch= judge.scores.count
+        %td.js--shouldMatch= judge.num_scored_competitors
         %td= link_to "View Scores", competition.scoring_path(judge)

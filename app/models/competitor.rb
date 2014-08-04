@@ -35,6 +35,7 @@ class Competitor < ActiveRecord::Base
   has_many :standard_execution_scores, :dependent => :destroy
   has_many :standard_difficulty_scores, :dependent => :destroy
   has_many :distance_attempts, -> { order "distance DESC, id DESC" }, :dependent => :destroy
+  has_one :tie_break_adjustment, dependent: :destroy
   has_many :time_results, :dependent => :destroy
   has_many :external_results, :dependent => :destroy
   has_many :results, dependent: :destroy, inverse_of: :competitor
@@ -400,6 +401,14 @@ class Competitor < ActiveRecord::Base
       return 0 unless distance_attempts.any?
 
       distance_attempts.first.distance
+    end
+  end
+
+  def tie_breaker_adjustment_value
+    if tie_break_adjustment
+      1 - (tie_break_adjustment.tie_break_place * 0.1)
+    else
+      0
     end
   end
 

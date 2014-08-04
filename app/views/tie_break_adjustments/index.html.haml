@@ -1,0 +1,31 @@
+%h1 #{@judge.competition} - Tie Break Adjustments
+- unless @tie_break_adjustments.empty?
+  %table.sortable
+    %caption All Tie Break Adjustments
+    %thead
+      %tr
+        %th Initial Distance
+        %th Age Group
+        %th ID
+        %th Competitor
+        %th Tie Break Place
+        %th Judge
+        %th
+    %tbody
+      - @tie_break_adjustments.each do |tba|
+        - cache [tba] do
+          %tr
+            %td= tba.competitor.max_successful_distance
+            %td= tba.competitor.age_group_entry_description
+            %td= tba.competitor.bib_number
+            %td= tba.competitor.to_s
+            %td= tba.tie_break_place
+            %td= tba.judge.to_s
+            %td= link_to "Delete", tba, method: :delete, data: { confirm: "Are you sure?" }
+
+.non_printable
+  %br
+  %rb
+  = render partial: "form"
+
+  = link_to "Back", judge_distance_attempts_path(@judge)

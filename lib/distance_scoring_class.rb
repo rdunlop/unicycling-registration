@@ -8,7 +8,7 @@ class DistanceScoringClass < BaseScoringClass
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    OrderedResultCalculator.new(@competition)
+    OrderedResultCalculator.new(@competition, false)
   end
 
   # describes how to label the results of this competition
@@ -41,8 +41,7 @@ class DistanceScoringClass < BaseScoringClass
 
   def competitor_comparable_result(competitor)
     if self.competitor_has_result?(competitor)
-      # larger score is better, so invert this result so that the sorting is correct
-      -competitor.max_successful_distance || 0
+      competitor.max_successful_distance + competitor.tie_breaker_adjustment_value
     else
       0
     end

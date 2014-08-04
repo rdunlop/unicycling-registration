@@ -1,6 +1,35 @@
 Last Re-Arranged June 20th, 2014.
 
+
+Robin's Todo List tomorrow:
+- Enter and Post the High/Long results.
+ - Labels, and instructions to Gael.
+- Set and post the competitor heats for Track Day(s)
+- Code Cyclocross (so that the # of heats is used for calculations)
+- Add ability to reset user's email password by admin-level people
+- Show the user Id email on the registrant summary page.
+- Clean up the printing of the Artistic results-summary page.
+-
+
+- Add a page which lists the High/Long result which require tie breaks (top 3 places which are tie, by age group results)
+- Add a rule for how to cut off the ends of High/Long competition (you are allowed to jump...forever?)
+- add recommendations for how to schedule an event, including awarding younger riders' awards earlier, and not performing awards the same evening as an event.
+- add recommendation for scheduling event to include always having water stations, clearly labeled bathrooms, and announcing medical services are available, where.
+- Split t.integer  "lowest_member_bib_number"
+    t.boolean  "geared",                   default: false
+    t.integer  "riding_wheel_size"
+    t.string   "notes"
+    t.integer  "heat"
+    t.integer  "riding_crank_size" into a separate table, has_one relationship
 - How did Mimi import results as Robin?
+ - prevent additions/modifications after the event is locked, ?even by Robin?
+- Make the music file download as a zip file, or folder file thing.
+ - and rename the files so that they are in competitor order. (by file sorted order)
+- make hours and minutes and seconds line up properly. (so that 1 hour (without miliseconds) and minutes (with miliseconds) show up more clearly.
+- make the "Mark as inactive" clearer for admin users, when managing Freestyle competitors, so that we don't "delete" competitors after they have started judging (for clarity).
+- "Delete all registrants who have dropped this competition" button, or multi-delete?
+- Eliminate the ImportResults, replace it with a boolean "tentative" flag?
+- Add ability to upload arbitrary PDF results for a competition (for example: Flatland Results)
 - Have a "Data Checking" station, which allows looking at results for High/Long as they are being run?
 - Have a "View Results" button for each competitor's results?
 - Shade out a competitor who has results when they cannot have more results (like High/Long when double-faulted, or External Results?)

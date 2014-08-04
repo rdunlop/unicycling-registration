@@ -82,6 +82,7 @@ class Ability
 
     # High/Long Data Entry
     can :manage, DistanceAttempt
+    can :manage, TieBreakAdjustment
   end
 
   def director_of_competition(user, competition)
