@@ -22,7 +22,7 @@ class HeatsController < ApplicationController
   def create_heats_from(competitors, current_heat, max_lane_number)
     lane_number = 1
     heat_number = current_heat
-    competitors.each do |competitor|
+    competitors.sort{|a,b| a.best_time <=> b.best_time}.each do |competitor|
       if lane_number > max_lane_number
         heat_number += 1
         lane_number = 1
@@ -43,7 +43,7 @@ class HeatsController < ApplicationController
       current_heat = 1
       LaneAssignment.transaction do
         @competition.age_group_entries.each do |ag_entry|
-          age_group_entries = @competition.competitors.select {|competitor| competitor.age_group_entry == ag_entry }
+          age_group_entries = @competition.competitors.includes(members: [registrant: :registrant_choices]).select {|competitor| competitor.age_group_entry == ag_entry }
           current_heat = create_heats_from(age_group_entries, current_heat, max_lane_number)
         end
       end
