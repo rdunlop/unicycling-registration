@@ -1,5 +1,7 @@
 Last Re-Arranged June 20th, 2014.
 
+- Add HighlightIfDuplicate to the StreetScore judging page. (for ties)
+- Fix RailsAdmin by dealing with DqRequest circular dependency?
 - Remove leading 0 in stillstand results. was hundreds, not thousands.
 
 Robin's Todo List tomorrow:

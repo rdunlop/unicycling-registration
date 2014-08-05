@@ -76,8 +76,8 @@ class RaceDataImporter
     end
   end
 
-  def process_chip(file, time_column_number)
-    upload = Upload.new(';', time_column_number)
+  def process_chip(file, bib_number_column_number, time_column_number)
+    upload = Upload.new(';', bib_number_column_number, time_column_number)
     raw_data = upload.extract_csv(file)
     self.num_rows_processed = 0
     self.errors = nil
@@ -91,6 +91,7 @@ class RaceDataImporter
           chip_hash = upload.convert_timing_csv_to_hash(raw)
           result = ImportResult.new(
             bib_number: chip_hash[:bib],
+            status: chip_hash[:status],
             minutes: chip_hash[:minutes],
             seconds: chip_hash[:seconds],
             thousands: chip_hash[:thousands]

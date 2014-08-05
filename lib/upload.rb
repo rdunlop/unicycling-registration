@@ -1,9 +1,10 @@
 require 'csv'
 class Upload
 
-  def initialize(separator = ',', time_column_number = nil)
+  def initialize(separator = ',', bib_number_column_number = 1, time_column_number = nil)
     @sep = separator
     @time_column_number = time_column_number
+    @bib_number_column_number = bib_number_column_number
   end
 
   def extract_csv(file)
@@ -58,7 +59,7 @@ class Upload
   def convert_timing_csv_to_hash(arr, time_column_number = nil)
     results = {}
 
-    results[:bib] = arr[1].to_i
+    results[:bib] = arr[@bib_number_column_number].to_i
 
     full_time = find_full_time(arr)
 
@@ -74,6 +75,13 @@ class Upload
   private
 
   def convert_full_time_to_hash(results, ft)
+    if ft == "DQ" || ft == "DSQ"
+      results[:status] = "DQ"
+      return
+    else
+      results[:status] = nil
+    end
+
     if ft.index(":").nil?
       # no minutes
       results[:minutes] = 0

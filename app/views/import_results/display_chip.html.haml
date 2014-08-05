@@ -28,8 +28,16 @@ Another example, with different format:
   = label_tag :file, "Source File"
   = file_field_tag :file
   %br
+  = label_tag :bib_number_column_number
+  = number_field_tag :bib_number_column_number
+  %br
+  This column number starts counting at 1
+  %br
+  %br
   = label_tag :time_column_number
   = number_field_tag :time_column_number
+  %br
+  This column number starts counting at 1
   %br
   = submit_tag "Load Chip File to Temp Table"
 
