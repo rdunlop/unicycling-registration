@@ -28,25 +28,7 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
 %h4 E-mail
 = render :partial => "/shared/error_messages", :object => @email_form
 = form_for @email_form, url: emails_path do |f|
-  = f.label :confirmed_accounts, "All Confirmed User Accounts"
-  = f.check_box :confirmed_accounts
-  %br
-  %br
-  = f.label :unpaid_reg_accounts, "Users With Not Yet Paid Registration Fees"
-  = f.check_box :unpaid_reg_accounts
-  %br
-  = f.label :paid_reg_accounts, "Users With ALL Paid Registration Fees"
-  = f.check_box :paid_reg_accounts
-  %br
-  = f.label :no_reg_accounts, "Users without any registrants"
-  = f.check_box :no_reg_accounts
-  %br
-  = f.label :competition_id, "Users who are assigned to a competition"
-  = f.select :competition_id, Competition.event_order.all.map{ |comp| [comp, comp.id] }, {include_blank: true}, class: 'chosen-select'
-  %br
-  = f.label :category_id, "Users who are assigned to any competition in this category"
-  = f.select :category_id, Category.all.map{ |category| [category, category.id] }, include_blank: true
-
+  = render partial: "form", locals: { f: f }
   %br
   %br
   <b>Note</b> This form will send to all the e-mails in BOTH of the columns above.
