@@ -2,6 +2,6 @@
   = render :partial => "/shared/error_messages", :object => @score
   = form_tag(judge_street_scores_path(@judge), :method => "post") do
     = no_form_competitor_select_box(@competition)
-    = label_tag(:place, "Place")
-    = text_field_tag(:place, @score.val_1)
-    = submit_tag('Add Attempt')
+    = label_tag(:points, "Points")
+    = text_field_tag(:points, @score.val_1)
+    = submit_tag('Add Entry')

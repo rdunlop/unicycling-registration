@@ -22,7 +22,7 @@ class StreetScoresController < ApplicationController
       @score.competitor = c
     end
     @score.judge = @judge
-    @score.val_1 = params[:place]
+    @score.val_1 = params[:points]
     @score.val_2 = 0
     @score.val_3 = 0
     @score.val_4 = 0
