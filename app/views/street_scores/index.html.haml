@@ -11,9 +11,9 @@
       %th Competitor
       %th Score
       %th Place
-  %tbody
+  %tbody.competitor_statuses
     - @competitors.each do |competitor|
-      %tr{ id: "row_#{competitor.id}"}
+      %tr{ id: "row_#{competitor.id}", :class => competitor.status == "active" ? "active" : "not_active" }
         %th= competitor.position
         %td= competitor.bib_number
         %td= competitor.to_s

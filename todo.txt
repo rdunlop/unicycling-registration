@@ -1,5 +1,6 @@
 Last Re-Arranged June 20th, 2014.
 
+- Remove leading 0 in stillstand results. was hundreds, not thousands.
 
 Robin's Todo List tomorrow:
 - allow PDF upload of results.

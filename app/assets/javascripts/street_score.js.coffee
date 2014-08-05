@@ -29,6 +29,6 @@ $ ->
 all_scores = ->
   $(".street_score").map (index, element) ->
     if $(element).val() != ""
-      parseInt($(element).val(), 10)
+      parseFloat($(element).val(), 10)
     else
       0

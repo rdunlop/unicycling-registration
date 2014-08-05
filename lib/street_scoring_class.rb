@@ -48,7 +48,7 @@ class StreetScoringClass < BaseScoringClass
   end
 
   def scoring_path(judge)
-    judge_scores_path(judge)
+    judge_street_scores_path(judge)
   end
 
   def competitor_dq?(competitor)

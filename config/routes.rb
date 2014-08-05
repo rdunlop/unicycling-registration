@@ -396,7 +396,7 @@ Workspace::Application.routes.draw do
       resources :standard_scores, :only => [:index]
       resources :distance_attempts, :only => [:index, :create]
       resources :tie_break_adjustments, only: [:index, :create]
-      resources :street_scores, :only => [:index, :create, :destroy] do
+      resources :street_scores, :only => [:index, :destroy] do
         collection do
           post :update_score
         end
