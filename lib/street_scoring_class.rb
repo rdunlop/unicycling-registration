@@ -20,7 +20,7 @@ class StreetScoringClass < BaseScoringClass
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    false
+    competitor.scores.count > 0
   end
 
   # returns the result for this competitor

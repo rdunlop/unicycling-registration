@@ -27,7 +27,7 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
     my_tie_break_points = 0
     tie_break_points_per_competitor = competitor.competition.competitors.map { |comp| 0 }
 
-    my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor, false)
+    my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor, true)
 
     @place[competitor.id] = my_place
   end
@@ -35,7 +35,7 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
   def total_points_for_judge_type(competitor, judge_type)
     scores = get_placing_points_for_judge_type(competitor, judge_type)
 
-    scores.reduce(:+) || 9999 # sum the values (no high/low elimination)
+    scores.reduce(:+) || 0 # sum the values (no high/low elimination)
   end
 
   # don't eliminate any scores
