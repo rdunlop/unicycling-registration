@@ -23,9 +23,9 @@ describe StreetCompScoreCalculator do
     end
 
     it "should have real total_points (with 1 judge)" do
-      expect(@calc.total_points(@score1.competitor)).to eq()
-      expect(@calc.total_points(@score2.competitor)).to == 7
-      expect(@calc.total_points(@score3.competitor)).to == 5
+      expect(@calc.total_points(@score1.competitor)).to eq(1)
+      expect(@calc.total_points(@score2.competitor)).to eq(2)
+      expect(@calc.total_points(@score3.competitor)).to eq(3)
     end
     describe "when there are more than 6 competitors" do
       before(:each) do

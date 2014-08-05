@@ -10,7 +10,7 @@
       - judges = @competition.judges.where(judge_type: jt).order(:id)
       = render partial: "scores_judging_headers", locals: { judges: judges, judge_type: jt }
       - @competition.competitors.each do |competitor|
-        - cache [competitor, jt] do
+        - cache [competitor, jt, @competition] do
           = render partial: "scores_competitor_judge_results", locals: { competitor: competitor, judges: judges }
   = render partial: "scores_summary", locals: { competitors: @competition.competitors.active }
   %hr
