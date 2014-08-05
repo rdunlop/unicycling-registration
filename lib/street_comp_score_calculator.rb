@@ -1,7 +1,7 @@
 class StreetCompScoreCalculator < ArtisticScoreCalculator
 
   def initialize(competition)
-    @calc = ArtisticScoreCalculator.new(competition) # should use this some where in the calculations?
+    super(competition)
   end
 
   # ####################################################################
@@ -35,6 +35,11 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
   def total_points_for_judge_type(competitor, judge_type)
     scores = get_placing_points_for_judge_type(competitor, judge_type)
 
-    scores.reduce(:+) # sum the values (no high/low elimination)
+    scores.reduce(:+) || 9999 # sum the values (no high/low elimination)
+  end
+
+  # don't eliminate any scores
+  def eliminate_high_and_low_score(scores)
+      scores
   end
 end

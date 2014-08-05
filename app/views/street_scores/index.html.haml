@@ -1,9 +1,28 @@
 %h1 Event: #{@competition.name} - Street Scores
 %h2 Judge: #{@judge}
 
-= render :partial => 'form'
-
 %hr.competitor_separator
+
+%table.top_distance_attempts
+  %thead
+    %tr
+      %th Order
+      %th ID
+      %th Competitor
+      %th Score
+      %th Place
+  %tbody
+    - @competitors.each do |competitor|
+      %tr{ id: "row_#{competitor.id}"}
+        %th= competitor.position
+        %td= competitor.bib_number
+        %td= competitor.to_s
+        %td
+          = form_tag(update_score_judge_street_scores_path(@judge), class: "street_ranking", remote: true, data: { competitor: competitor.id }) do
+            = hidden_field_tag :competitor_id, competitor.id
+            = number_field_tag :score, @street_scores.select{ |s| s.competitor == competitor}.first.try(:val_1), id: "score_#{competitor.id}", class: "street_score", min: 0, max: @judge.judge_type.val_1_max
+        %td.place{ id: "comp_#{competitor.id}_place"}
+
 
 - unless @street_scores.empty?
   %table.top_distance_attempts

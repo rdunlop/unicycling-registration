@@ -1,6 +1,7 @@
 class StreetScoresController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_competition, :except => [:destroy]
+  load_and_authorize_resource :score
 
   def load_competition
     @judge = Judge.find(params[:judge_id])
@@ -10,8 +11,21 @@ class StreetScoresController < ApplicationController
 
   def index
     @score = @judge.scores.new
-    @competitors = @competition.competitors
+    @competitors = @competition.competitors.reorder(:position)
     authorize! :create, @score
+  end
+
+  def update_score
+    @score = @judge.scores.where(competitor_id: params[:competitor_id]).first
+    @score ||= @judge.scores.build(competitor_id: params[:competitor_id])
+    @score.val_1 = params[:score]
+    @score.val_2 = 0
+    @score.val_3 = 0
+    @score.val_4 = 9
+    @score.save!
+    respond_to do |format|
+      format.js {}
+    end
   end
 
   def create

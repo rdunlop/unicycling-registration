@@ -34,7 +34,7 @@ class StreetScoringClass < BaseScoringClass
 
   # Function which places all of the competitors in the competition
   def place_all
-    nil
+    score_calculator.update_all_places
   end
 
 
@@ -57,5 +57,9 @@ class StreetScoringClass < BaseScoringClass
 
   def requires_age_groups
     false
+  end
+
+  def compete_in_order
+    true
   end
 end

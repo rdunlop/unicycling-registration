@@ -81,7 +81,7 @@ class Score < ActiveRecord::Base
     when "Freestyle"
       false
     when "Street"
-      true
+      false
     when "Flatland"
       false
     end
