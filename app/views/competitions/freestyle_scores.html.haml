@@ -1,0 +1,16 @@
+%h1 Freestyle - #{@competition} Results
+= render :partial => "/competitions/results"
+.scores
+  %h3
+    = @competition
+    Raw Scores
+
+  - @competition.judge_types.uniq.each do |jt|
+    %table.scores_outer
+      - judges = @competition.judges.where(judge_type: jt)
+      = render partial: "scores_judging_headers", locals: { judges: judges, judge_type: jt }
+      - @competition.competitors.active.each do |competitor|
+        = render partial: "scores_competitor_judge_results", locals: { competitor: competitor, judges: judges }
+  = render partial: "scores_summary", locals: { competitors: @competition.competitors.active }
+  %hr
+  = link_to 'Download Scores CSV', export_scores_competition_path(@competition)

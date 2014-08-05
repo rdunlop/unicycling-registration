@@ -1,0 +1,22 @@
+// Locals: judges, judge_type
+- total_judge_columns = 4 + judges.inject(0){ |sum, judge| sum + judge_type.num_columns + 2 }
+%tr
+  %th.judge_type_header{ colspan: total_judge_columns }= judge_type
+%tr
+  %th{ rowspan: 2 } Order
+  %th{ rowspan: 2 } ID
+  %th{ rowspan: 2 } Name
+
+  - judges.each do |judge|
+    %th{ colspan: judge_type.num_columns + 2 }
+      = judge.name
+  %th{ rowspan: 2 }
+    Total
+    %br
+    Points
+%tr
+  - judges.each do |judge|
+    - judge_type.num_columns.times.each do |i|
+      %th= i + 1
+    %th Total
+    %th Points

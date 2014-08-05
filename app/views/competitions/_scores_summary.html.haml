@@ -1,0 +1,18 @@
+// locals: competitors
+%table.scores_outer
+  %tr
+    %th Order
+    %th ID
+    %th Name
+    %th.derived
+      Total Placing
+      %br
+      Points
+    %th.derived Place
+  - competitors.active.each do |competitor|
+    %tr
+      %td= competitor.position
+      %td= competitor.bib_number
+      %td= competitor.name
+      %td.derived= competitor.competition.competitor_total_placing_points(competitor)
+      %td.derived= competitor.overall_place

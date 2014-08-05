@@ -47,6 +47,15 @@ class JudgeType < ActiveRecord::Base
     self.boundary_calculation_enabled = false if self.boundary_calculation_enabled.nil?
   end
 
+  def num_columns
+    res = 0
+    res += 1 if val_1_max > 0
+    res += 1 if val_2_max > 0
+    res += 1 if val_3_max > 0
+    res += 1 if val_4_max > 0
+    res
+  end
+
   def to_s
     name
   end
