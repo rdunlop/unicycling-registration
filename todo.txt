@@ -2,10 +2,9 @@ Last Re-Arranged June 20th, 2014.
 
 
 Robin's Todo List tomorrow:
-- Set and post the competitor heats for Track Day(s)
+- allow PDF upload of results.
 - Code Cyclocross (so that the # of heats is used for calculations)
 - Add ability to reset user's email password by admin-level people
-- Clean up the printing of the Artistic results-summary page.
 -
 
 - Heat/Lane auto-assignment takes >30 seconds with >300 competitors
