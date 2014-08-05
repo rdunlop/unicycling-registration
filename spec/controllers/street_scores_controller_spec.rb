@@ -46,7 +46,7 @@ describe StreetScoresController do
     describe "with valid competitor_id" do
       it "creates a new Score" do
         expect {
-          post :create, {:competitor_id => @comp2.id, :points => 4, :judge_id => @judge.id}
+          post :update_score, {:competitor_id => @comp2.id, :score => 4, :judge_id => @judge.id, format: :js}
         }.to change(Score, :count).by(1)
       end
     end
