@@ -1,8 +1,10 @@
 %h1 Freestyle - #{@competition} Results
+= render :partial => "/competitions/results"
 .scores
   %h3
     = @competition
     Raw Scores
+
   - @competition.judge_types.uniq.each do |jt|
     %table.scores_outer
       - judges = @competition.judges.where(judge_type: jt)
