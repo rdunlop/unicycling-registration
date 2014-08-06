@@ -1,8 +1,9 @@
 Last Re-Arranged June 20th, 2014.
 
-
+- Add the times to the relay results printouts (age group specific)
+- Improve the Track day data recording so that NO data has to be deleted. Perhaps mark them as "Confirmed" in order to track the agreement between judges+timers.
 - Allow the "Track" importer the "ability" to Accept the results for the LIF import.
-
+- Better handle malformed LIF data from the track timer people. (without status, what should I do?)
 - allow marking a registrant as DNF (or some way of making that clearer when doing data entry of single-data results)
 - figure out how to let the IUF slalom results (555 results) be imported in < 30 seconds, and be scored in < 30 seconds. (really really long).
 - Disallow setting a val_1_max > 99, as it doesn't work in the database storage (exception when trying to store score of 100). Or expand the range of the score value fields.

@@ -10,7 +10,7 @@ class MultiLapScoringClass < RaceScoringClass
   # returns the result for this competitor
   def competitor_result(competitor)
     if self.competitor_has_result?(competitor)
-      TimeResultPresenter.new(competitor.best_time_in_thousands).full_time + " (" + competitor.num_laps + " laps)"
+      TimeResultPresenter.new(competitor.best_time_in_thousands).full_time.to_s + " (" + competitor.num_laps.to_s + " laps)"
     else
       nil
     end
@@ -19,9 +19,15 @@ class MultiLapScoringClass < RaceScoringClass
   # returns the result for this competitor
   def competitor_comparable_result(competitor)
     if self.competitor_has_result?(competitor)
-      (competitor.num_laps * 100000000) + competitor.best_time_in_thousands
+      lap_time(competitor.num_laps) + competitor.best_time_in_thousands
     else
       0
     end
+  end
+
+  # convert 1 lap int 9900000000, 2 laps into 980000000000....thus sorting by shortest time correctly.
+  def lap_time(num_laps)
+    raise "Unable to process >= 100 laps" if num_laps >= 100
+    ((100 - num_laps) * 100000000)
   end
 end

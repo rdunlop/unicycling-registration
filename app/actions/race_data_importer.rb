@@ -115,7 +115,7 @@ class RaceDataImporter
   def convert_to_thousands(imported_time, number_of_decimal_places)
     case number_of_decimal_places
     when 1
-      imported_time * 100
+      imported_time # don't convert because of Upload.rb convert_full_time_to_hash has special handling..
     when 2
       imported_time * 10
     when 3

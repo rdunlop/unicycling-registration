@@ -132,7 +132,7 @@ class ImportResultsController < ApplicationController
                              params[:bib_number_column_number].to_i - 1,
                              params[:time_column_number].to_i - 1,
                              params[:number_of_decimal_places].to_i,
-                             params[:lap_column_number])
+                             params[:lap_column_number].to_i - 1)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
