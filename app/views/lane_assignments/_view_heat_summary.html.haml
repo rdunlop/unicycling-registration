@@ -6,7 +6,7 @@
     - if assignment
       %li.occupied_lane
         %p.lane= assignment.lane
-        %p.bib_number= "##{assignment.competitor.bib_number}"
+        %p.registrant.js--shrinkToFit.bib_number= "##{assignment.competitor.bib_number}"
         %p.registrant.js--shrinkToFit= "#{assignment.competitor}"
         %p{class: "status-#{assignment.status}"}= assignment.status
         %p= assignment.comments
