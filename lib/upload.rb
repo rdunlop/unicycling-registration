@@ -1,10 +1,11 @@
 require 'csv'
 class Upload
 
-  def initialize(separator = ',', bib_number_column_number = 1, time_column_number = nil)
+  def initialize(separator = ',', bib_number_column_number = 1, time_column_number = nil, laps_column = nil)
     @sep = separator
     @time_column_number = time_column_number
     @bib_number_column_number = bib_number_column_number
+    @laps_column = laps_column
   end
 
   def extract_csv(file)
@@ -60,6 +61,7 @@ class Upload
     results = {}
 
     results[:bib] = arr[@bib_number_column_number].to_i
+    results[:laps] = get_laps_count(arr)
 
     full_time = find_full_time(arr)
 
@@ -73,6 +75,10 @@ class Upload
   end
 
   private
+
+  def get_laps_count(arr)
+    arr[@laps_column] unless @laps_column.nil?
+  end
 
   def convert_full_time_to_hash(results, ft)
     if ft == "DQ" || ft == "DSQ"
