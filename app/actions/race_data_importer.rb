@@ -76,7 +76,7 @@ class RaceDataImporter
     end
   end
 
-  def process_chip(file, bib_number_column_number, time_column_number)
+  def process_chip(file, bib_number_column_number, time_column_number, number_of_decimal_places)
     upload = Upload.new(';', bib_number_column_number, time_column_number)
     raw_data = upload.extract_csv(file)
     self.num_rows_processed = 0
@@ -94,7 +94,7 @@ class RaceDataImporter
             status: chip_hash[:status],
             minutes: chip_hash[:minutes],
             seconds: chip_hash[:seconds],
-            thousands: chip_hash[:thousands]
+            thousands: convert_to_thousands(chip_hash[:thousands].to_i, number_of_decimal_places)
           )
           result.raw_data = str
           result.user = @user
@@ -108,6 +108,21 @@ class RaceDataImporter
     rescue ActiveRecord::RecordInvalid => invalid
       @errors = invalid
       return false
+    end
+  end
+
+  def convert_to_thousands(imported_time, number_of_decimal_places)
+    case number_of_decimal_places
+    when 1
+      imported_time * 100
+    when 2
+      imported_time * 10
+    when 3
+      imported_time * 1
+    when 4
+      imported_time.round(-1) / 10
+    else
+      raise "What do you mean?"
     end
   end
 

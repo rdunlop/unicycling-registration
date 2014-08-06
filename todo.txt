@@ -1,5 +1,7 @@
 Last Re-Arranged June 20th, 2014.
 
+- Disallow setting a val_1_max > 99, as it doesn't work in the database storage (exception when trying to store score of 100). Or expand the range of the score value fields.
+- allow modification of the selected registrant when doing "Edit" of imported results...so that we can adjust it while doing "import somewhere else" imports. (like Muni XC)
 - Add HighlightIfDuplicate to the StreetScore judging page. (for ties)
 - Fix RailsAdmin by dealing with DqRequest circular dependency?
 - Remove leading 0 in stillstand results. was hundreds, not thousands.
