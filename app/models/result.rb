@@ -70,7 +70,12 @@ class Result < ActiveRecord::Base
     else
       status = nil
     end
-    existing_result = Result.where(competitor: competitor, result_type: result_type).first
+
+    if result_type == "AgeGroup"
+      existing_result = competitor.age_group_results.first
+    else
+      existing_result = competitor.overall_results.first
+    end
 
     if existing_result
       if existing_result.place == new_place

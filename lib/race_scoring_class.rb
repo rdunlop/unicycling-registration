@@ -33,7 +33,11 @@ class RaceScoringClass < BaseScoringClass
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.time_results.any?
+    @competitor_has_result ||= {}
+    if @competitor_has_result[competitor].nil?
+      @competitor_has_result[competitor] = competitor.time_results.any?
+    end
+    @competitor_has_result[competitor]
   end
 
   # returns the result for this competitor
