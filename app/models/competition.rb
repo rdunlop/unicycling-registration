@@ -172,11 +172,11 @@ class Competition < ActiveRecord::Base
   end
 
   def heat_numbers
-    heats = competitors.map(&:heat).uniq.sort.compact
+    heats = competitors.map(&:heat).uniq.compact.sort
     if heats.any?
       heats
     else
-      lane_assignments.map(&:heat).uniq.sort
+      lane_assignments.map(&:heat).uniq.compact.sort
     end
   end
 
