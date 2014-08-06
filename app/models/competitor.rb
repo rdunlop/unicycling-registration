@@ -507,6 +507,12 @@ class Competitor < ActiveRecord::Base
     end
   end
 
+  def num_laps
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/num_laps") do
+      finish_time_results.first.try(:number_of_laps)
+    end
+  end
+
   def competition_start_time
     competition.heat_time_for(heat) || 0
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805155444) do
+ActiveRecord::Schema.define(version: 20140806104020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -436,7 +436,7 @@ ActiveRecord::Schema.define(version: 20140805155444) do
     t.decimal  "points",         precision: 6, scale: 3
     t.string   "details"
     t.boolean  "is_start_time",                          default: false
-    t.integer  "attempt_number"
+    t.integer  "number_of_laps"
     t.string   "status"
     t.text     "comments"
     t.string   "comments_by"
@@ -784,7 +784,7 @@ ActiveRecord::Schema.define(version: 20140805155444) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.boolean  "is_start_time",  default: false
-    t.integer  "attempt_number"
+    t.integer  "number_of_laps"
     t.string   "status"
     t.text     "comments"
     t.string   "comments_by"

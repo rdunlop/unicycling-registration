@@ -10,7 +10,7 @@
         %th= f.label :status
         %th= f.label :comments
         %th= f.label :comments_by
-        %th= f.label :attempt_number
+        %th= f.label :number_of_laps
         %th
     %tbody
       %tr
@@ -22,5 +22,5 @@
         %td= f.select :status, TimeResult.status_values, include_blank: true
         %td= f.text_field :comments
         %td= f.text_field :comments_by
-        %td= f.number_field :attempt_number, {min: 1}
+        %td= f.number_field :number_of_laps, {min: 1}
         %td= f.submit

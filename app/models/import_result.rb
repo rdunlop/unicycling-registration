@@ -15,7 +15,7 @@
 #  points         :decimal(6, 3)
 #  details        :string(255)
 #  is_start_time  :boolean          default(FALSE)
-#  attempt_number :integer
+#  number_of_laps :integer
 #  status         :string(255)
 #  comments       :text
 #  comments_by    :string(255)

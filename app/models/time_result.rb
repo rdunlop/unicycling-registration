@@ -10,7 +10,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  is_start_time  :boolean          default(FALSE)
-#  attempt_number :integer
+#  number_of_laps :integer
 #  status         :string(255)
 #  comments       :text
 #  comments_by    :string(255)

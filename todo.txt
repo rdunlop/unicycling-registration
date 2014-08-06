@@ -205,7 +205,6 @@ Feature: - Allow mulitple "published results" to be printed, so that we can re-p
 - Remove all Boundary Score calculation logic, replace it with a new judge type, which affects "Presentation" Judge-type display.
 - Hugo: we need to e-mail all <10 age people to have them tell us what size of wheel they plan on riding in the track and muni and distance events.
 - Q: How are "Notes" for a score entered? displayed?
-- Clean up "attempt_number" for time_results (not currently used)
 Feature - When doing MUNI data entry, it should easily allow changing the result to be "this competition" instead of auto-adding to another event. Perhaps make the auto-select-event a feature flag?
 - Accept leading zeros for iD numbers field.
 - TwoAttempEntry, should require thousands in both T1 and T2, does it?
