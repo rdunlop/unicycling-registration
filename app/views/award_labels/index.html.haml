@@ -29,7 +29,7 @@
   %h2 Create Labels For a specific Registrant/Registrant-Group/Competition
   = form_tag(create_labels_user_award_labels_path(@user), {:method => :post}) do
     = label_tag :registrant_id, "Single Registrant"
-    = select_tag :registrant_id, options_for_select(Registrant.select_box_options), {:include_blank => true}, class: 'chosen-select'
+    = select_tag :registrant_id, options_for_select(Registrant.select_box_options), {:include_blank => true, class: 'chosen-select'}
     %br
     = label_tag :registrant_group_id, "Registrant Group"
     = select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name), "id", "to_s"), :include_blank => true
