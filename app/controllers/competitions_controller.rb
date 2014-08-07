@@ -212,7 +212,6 @@ class CompetitionsController < ApplicationController
     end
   end
 
-
   def award
     if request.post?
       @competition.awarded = true

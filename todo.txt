@@ -1,6 +1,6 @@
 Last Re-Arranged June 20th, 2014.
 
-- allow an Anonymized printing of the Judging results.
+- De-emphasize the green-"other data entry" button, and also de-emphasize the brue "already scored" judging opetiosn.
 - Allow multi-delete of award labels
 - Fix the header/grouping on the PDFs for headers.
 - Fix the "Source from Competition" when doing Group competitions...it doesn't allow creation of groups (only indiduals)

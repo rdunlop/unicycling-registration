@@ -27,7 +27,7 @@ class CompetitionStateMachine
     begin
       Competition.transaction do
         pdf_creator.publish!
-        competition.update_attributes({published: true, published_date: DateTime.now}) || raise("Unable to save attributes")
+        competition.update_attributes({published: true}) || raise("Unable to save attributes")
       end
       true
     rescue Exception => e
@@ -39,7 +39,7 @@ class CompetitionStateMachine
     begin
       Competition.transaction do
         pdf_creator.unpublish!
-        competition.update_attributes({published: false, published_date: nil}) || raise("Unable to save attributes")
+        competition.update_attributes({published: false}) || raise("Unable to save attributes")
       end
       true
     rescue Exception => e

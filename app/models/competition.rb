@@ -17,10 +17,8 @@
 #  scheduled_completion_at       :datetime
 #  published                     :boolean          default(FALSE)
 #  awarded                       :boolean          default(FALSE)
-#  published_results_file        :string(255)
 #  award_title_name              :string(255)
 #  award_subtitle_name           :string(255)
-#  published_date                :datetime
 #  num_members_per_competitor    :string(255)
 #  automatic_competitor_creation :boolean          default(FALSE)
 #  combined_competition_id       :integer
@@ -51,6 +49,7 @@ class Competition < ActiveRecord::Base
   has_many :combined_competition_entries, dependent: :destroy
   has_many :published_age_group_entries, dependent: :destroy
   has_many :heat_times, dependent: :destroy
+  has_many :competition_results, dependent: :destroy
   belongs_to :combined_competition
 
   accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
@@ -95,8 +94,6 @@ class Competition < ActiveRecord::Base
             :build_import_result_from_raw, :score_calculator,
             :result_description, :compete_in_order, :scoring_description,
             :example_result, :imports_times, :results_path, :scoring_path, to: :scoring_helper
-
-  mount_uploader :published_results_file, PdfUploader
 
   def no_competition_sources_when_overall_calculation
     if scoring_class == "Overall Champion" && competition_sources.size > 0
@@ -182,10 +179,6 @@ class Competition < ActiveRecord::Base
 
   def end_time_to_s
     scheduled_completion_at.to_formatted_s(:short) if scheduled_completion_at
-  end
-
-  def published_date_to_s
-    published_date.to_formatted_s(:short) if published_date
   end
 
   def clear_data_types_of_strings

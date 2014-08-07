@@ -34,8 +34,15 @@
                 = link_to entry, competition_published_age_group_entry_path(competition, entry), title: "published at #{entry.published_formatted}"
                 %br
             - else
-              = link_to_if(competition.published?, "Results", competition.published_results_file_url) { }
-          %td= competition.published_date_to_s
+              - if competition.published?
+                - competition.competition_results.active.each do |result|
+                  = link_to result.to_s, result.results_file_url
+                  %br
+          %td
+            - if competition.published?
+              - competition.competition_results.active.each do |result|
+                = result.published_date_to_s
+                %br
 
 %p
   Results are not guaranteed to be published quickly. We will publish them as soon as reasonable and with the permission/direction of the event organizers.

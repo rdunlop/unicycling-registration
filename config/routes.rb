@@ -298,6 +298,7 @@ Workspace::Application.routes.draw do
     end
     resources :import_results, :only => [:edit, :update, :destroy]
     resources :two_attempt_entries, :only => [:edit, :update, :destroy]
+    resources :competition_results, only: [:destroy]
 
     ###############################################
     ### For event-data-gathering/reporting purposes
@@ -325,6 +326,7 @@ Workspace::Application.routes.draw do
         post :award
         delete :award
       end
+      resources :competition_results, only: [:create]
       resources :competitors, :only => [:index, :new, :create] do
         collection do
           post :add

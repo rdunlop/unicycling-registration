@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806104020) do
+ActiveRecord::Schema.define(version: 20140807142743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,16 @@ ActiveRecord::Schema.define(version: 20140806104020) do
     t.boolean  "percentage_based_calculations", default: false
   end
 
+  create_table "competition_results", force: true do |t|
+    t.integer  "competition_id"
+    t.string   "results_file"
+    t.boolean  "system_managed"
+    t.boolean  "published"
+    t.datetime "published_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "competition_sources", force: true do |t|
     t.integer  "target_competition_id"
     t.integer  "event_category_id"
@@ -170,10 +180,8 @@ ActiveRecord::Schema.define(version: 20140806104020) do
     t.datetime "scheduled_completion_at"
     t.boolean  "published",                     default: false
     t.boolean  "awarded",                       default: false
-    t.string   "published_results_file"
     t.string   "award_title_name"
     t.string   "award_subtitle_name"
-    t.datetime "published_date"
     t.string   "num_members_per_competitor"
     t.boolean  "automatic_competitor_creation", default: false
     t.integer  "combined_competition_id"

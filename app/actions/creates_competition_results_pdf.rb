@@ -15,15 +15,21 @@ class CreatesCompetitionResultsPdf
   def publish!
     pdf = Tempfile.new(["#{sanitize(competition.to_s)}_results", '.pdf'], encoding: 'ascii-8bit')
     pdf.write raw_pdf
-    competition.published_results_file = pdf
-    competition.save!
+    new_result = competition.competition_results.build
+    new_result.results_file = pdf
+    new_result.published_date = DateTime.now
+    new_result.system_managed = true
+    new_result.published = true
+    new_result.save!
     pdf.close
     pdf.unlink
     true
   end
 
   def unpublish!
-    competition.remove_published_results_file!
+    result = competition.competition_results.where(system_managed: true).first
+    result.destroy if result
+    true
   end
 
   def sanitize(name)
