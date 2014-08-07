@@ -112,6 +112,7 @@ Results, judges, and scoring settings.
   - else
     = link_to 'Publish', publish_competition_path(@competition), :method => :post, data: { confirm: "This will make the data available online for all to see. Continue?" }, class: "action_button"
   %h5 Additional Results
+  Upload additional PDF files here.
   %br
   = form_tag competition_competition_results_path(@competition), multipart: true do
     = file_field_tag :results_file
