@@ -13,7 +13,7 @@ describe PaymentAdjustmentsController do
   describe "GET list" do
     it "assigns all payments as @payments" do
       get :list, {}
-      assigns(:payments).should eq([payment, other_payment])
+      expect(assigns(:payments)).to match_array([payment, other_payment])
     end
   end
 

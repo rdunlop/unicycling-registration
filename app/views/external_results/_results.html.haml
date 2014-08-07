@@ -1,0 +1,28 @@
+%h1 Listing Entered-Points Results for #{@competition}
+%table.sortable
+  %thead
+    %tr
+      %th Competitor
+      %th Points
+      %th Details
+      %th ID
+      %th Name
+      %th Age Group
+      %th Place
+      %th Overall Place
+      %th
+      %th
+  %tbody
+    - @competition.external_results.each do |external_result|
+      - next unless external_result.persisted?
+      %tr
+        %td= external_result.competitor
+        %td= external_result.points
+        %td= external_result.details
+        %td= external_result.competitor.bib_number
+        %td= external_result.competitor
+        %td= external_result.competitor.age_group_entry_description
+        %td= external_result.competitor.place_formatted
+        %td= external_result.competitor.overall_place_formatted
+        %td= link_to 'Edit', edit_external_result_path(external_result)
+        %td= link_to 'Delete', external_result, method: :delete, data: { confirm: 'Are you sure?' }
