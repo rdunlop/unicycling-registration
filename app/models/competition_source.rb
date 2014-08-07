@@ -73,6 +73,7 @@ class CompetitionSource < ActiveRecord::Base
     if competition.present?
       competitors = competition.competitors
       competitors = competitors.select {|comp| comp.overall_place.to_i > 0 && comp.overall_place.to_i <= max_place } unless max_place.nil?
+      competitors = competitors.select {|comp| registrant_passes_filters(comp) }
       competitors
     else
       []

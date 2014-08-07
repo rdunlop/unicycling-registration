@@ -1,6 +1,7 @@
 Last Re-Arranged June 20th, 2014.
 
-- Fix the printing of Relay Race results
+- Figure out why 2 results for DAvid when doing "Display Candidates" for an event in which he won first with 2 data.
+- allow an Anonymized printing of the Judging results.
 - Allow multi-delete of award labels
 - Fix the header/grouping on the PDFs for headers.
 - Fix the "Source from Competition" when doing Group competitions...it doesn't allow creation of groups (only indiduals)
