@@ -288,7 +288,7 @@ class RegistrantsController < ApplicationController
     original_params['registrant_event_sign_ups_attributes'].each do |key,value|
       event_id = value['event_id'].to_i
       signed_up = value['signed_up'] == "1"
-      if registrant_is_already_signed_up(@registrant, event_id) && signed_up
+      if !registrant_is_already_signed_up(@registrant, event_id) && signed_up
         flash[:alert] = "Addition of Events is disabled. #{Event.find(event_id)}"
         original_params['registrant_event_sign_ups_attributes'].delete(key)
       end
