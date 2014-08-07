@@ -18,6 +18,7 @@
 
   <tbody>
     <% @competition.external_results.each do |external_result| %>
+      <% next unless external_result.persisted? %>
       <tr>
         <td><%= external_result.competitor %></td>
         <td><%= external_result.points %></td>

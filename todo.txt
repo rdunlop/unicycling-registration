@@ -1,5 +1,7 @@
 Last Re-Arranged June 20th, 2014.
 
+- Add a "Deploy on Heroku" button?
+- Setting places for a 10 person Pairs routine takes too long (> 30 seconds)
 - Why doesn't the artistic summary show the places? (make it print ordered by place, and then remove the top summary?)
 - De-emphasize the green-"other data entry" button, and also de-emphasize the brue "already scored" judging opetiosn.
 - Allow multi-delete of award labels

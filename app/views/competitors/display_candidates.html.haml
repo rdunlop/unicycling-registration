@@ -7,13 +7,17 @@ When a competition's competitor list is based on the results of other competitio
 %table.sortable
   %thead
     %tr
+      %th Gender
       %th Place
+      %th ID
       %th Competitor
       %th Time
   %tbody
     - @competitors.each do |comp|
       %tr
+        %td= comp.gender
         %td= comp.overall_place
+        %td= comp.bib_number
         %td= comp
         %td= comp.result
 
