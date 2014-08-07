@@ -324,7 +324,6 @@ Workspace::Application.routes.draw do
         post :publish_age_group_entry
         post :award
         delete :award
-        delete :destroy_results
       end
       resources :competitors, :only => [:index, :new, :create] do
         collection do

@@ -51,25 +51,6 @@ class CompetitionsController < ApplicationController
     respond_with(@competition, location: event_path(@competition.event))
   end
 
-  # DELETE /competitions/1/destroy_results
-  def destroy_results
-    @results = nil
-    @results = @competition.scoring_helper.all_competitor_results
-
-    n = 0
-    err = 0
-    @results.each do |res|
-      if res.destroy
-        n += 1
-      else
-        err += 1
-      end
-    end
-    respond_to do |format|
-      format.html { redirect_to result_competition_path(@competition), notice: "#{n} records deleted. #{err} errors" }
-    end
-  end
-
   # DELETE /competitions/1
   # DELETE /competitions/1.json
   def destroy

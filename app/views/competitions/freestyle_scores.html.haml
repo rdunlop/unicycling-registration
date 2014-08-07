@@ -12,5 +12,6 @@
       - @competition.competitors.active.each do |competitor|
         = render partial: "scores_competitor_judge_results", locals: { competitor: competitor, judges: judges }
   = render partial: "scores_summary", locals: { competitors: @competition.competitors.active }
-  %hr
-  = link_to 'Download Scores CSV', export_scores_competition_path(@competition)
+  .non_printable
+    %hr
+    = link_to 'Download Scores CSV', export_scores_competition_path(@competition)

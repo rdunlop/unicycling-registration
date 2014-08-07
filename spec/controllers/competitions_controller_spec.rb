@@ -181,10 +181,5 @@ describe CompetitionsController do
       @competitor = FactoryGirl.create(:event_competitor, :competition => @competition)
       @tr = FactoryGirl.create(:time_result, :competitor => @competitor)
     end
-    it "destroys the time_result on destroy_results" do
-      expect {
-        delete :destroy_results, {:id => @competition.id}
-      }.to change(TimeResult, :count).by(-1)
-    end
   end
 end
