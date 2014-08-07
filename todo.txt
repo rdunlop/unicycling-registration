@@ -1,5 +1,9 @@
 Last Re-Arranged June 20th, 2014.
 
+- Fix the printing of Relay Race results
+- Allow multi-delete of award labels
+- Fix the header/grouping on the PDFs for headers.
+- Fix the "Source from Competition" when doing Group competitions...it doesn't allow creation of groups (only indiduals)
 - Add the times to the relay results printouts (age group specific)
 - Improve the Track day data recording so that NO data has to be deleted. Perhaps mark them as "Confirmed" in order to track the agreement between judges+timers.
 - Allow the "Track" importer the "ability" to Accept the results for the LIF import.

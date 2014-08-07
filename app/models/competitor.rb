@@ -486,7 +486,7 @@ class Competitor < ActiveRecord::Base
     res << "Geared" if geared
     res << "#{riding_wheel_size}\"" if riding_wheel_size
     res << "#{riding_crank_size}mm" if riding_crank_size
-    res << notes if notes
+    res << notes unless notes.blank?
     res.join(", ")
   end
 

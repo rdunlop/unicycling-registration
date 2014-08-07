@@ -14,22 +14,6 @@
   %hr
   - if competitors.count == 0
     %h3 No Competitors
-  - elsif competitors.first.members.count > 2
-    - # Group event, list the members
-    - competitors.each do |competitor|
-      %h3
-        Place: #{competitor.send(place_function)} -  #{competitor}
-      %hr
-      %table
-        %thead
-          %tr
-            %th ID
-            %th Name
-        %tbody
-          - competitor.members.each do |member|
-            %tr
-              %td= member.registrant.bib_number
-              %td= member.registrant
   - else
     %table.full.results.race
       %thead
@@ -46,7 +30,11 @@
             %tr
               %td.place= competitor.send(place_function)
               %td= competitor.bib_number
-              %td= competitor.to_s
+              %td
+                - if competitor.team_name.present?
+                  %b= competitor.team_name
+                  %br
+                = competitor.members.map(&:to_s).join(", ")
               - unless competitor.result.nil?
                 %td.time= competitor.result
               %td.details= competitor.details
