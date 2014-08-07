@@ -117,6 +117,7 @@ class CompetitionsController < ApplicationController
   end
 
   def result
+    @anonymous = params[:anonymous].present?
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Result", result_competition_path(@competition)
     render @competition.render_path

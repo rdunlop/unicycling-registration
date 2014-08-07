@@ -1,4 +1,4 @@
-// Locals: judges, judge_type
+// Locals: judges, judge_type, anonymous
 - total_judge_columns = 4 + judges.inject(0){ |sum, judge| sum + judge_type.num_columns + 2 }
 %tr
   %th.judge_type_header{ colspan: total_judge_columns }= judge_type
@@ -7,9 +7,12 @@
   %th{ rowspan: 2 } ID
   %th{ rowspan: 2 } Name
 
-  - judges.each do |judge|
+  - judges.each_with_index do |judge, index|
     %th{ colspan: judge_type.num_columns + 2 }
-      = judge.name
+      - if anonymous
+        = "Judge #{index + 1}"
+      - else
+        = judge.name
   %th{ rowspan: 2 }
     Total
     %br

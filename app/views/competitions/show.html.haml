@@ -64,6 +64,7 @@ Results, judges, and scoring settings.
   %h2 Monitor Results
   %p
     = link_to 'View', result_competition_path(@competition)
+    = link_to '(anonymous)', result_competition_path(@competition, anonymous: true)
 
   - unless @competition.results_path.nil?
     %h2 Manage Results
