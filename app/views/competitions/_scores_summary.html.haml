@@ -10,7 +10,7 @@
       Points
     %th.derived Place
   - competitors.active.each do |competitor|
-    - cache [competitor, competitor.competition] do
+    - cache [competitor, competitor.competition, Result.cache_key_for_set(competitor.id)] do
       %tr
         %td= competitor.position
         %td= competitor.bib_number

@@ -1,5 +1,9 @@
 Last Re-Arranged June 20th, 2014.
 
+- Change the URL format for various pages, so that it's nicer/more descriptive (like using the bib number, or the event name?)
+- Add a count of compettitors to the sign up lists (public display)
+- Allow entering a penalty for Slow Races, which then subtracts a second for each penalty.
+- Re-Work the slow-race data entry (as per Scott).
 - Add a "Deploy on Heroku" button?
 - Setting places for a 10 person Pairs routine takes too long (> 30 seconds)
 - Why doesn't the artistic summary show the places? (make it print ordered by place, and then remove the top summary?)
