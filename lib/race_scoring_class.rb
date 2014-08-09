@@ -94,7 +94,8 @@ class RaceScoringClass < BaseScoringClass
       comments: import_result.comments,
       comments_by: import_result.comments_by,
       number_of_laps: import_result.number_of_laps,
-      is_start_time: import_result.is_start_time)
+      is_start_time: import_result.is_start_time,
+      entered_at: import_result.created_at)
   end
 
   def build_import_result_from_raw(raw)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140809131317) do
+ActiveRecord::Schema.define(version: 20140809145206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -799,6 +799,7 @@ ActiveRecord::Schema.define(version: 20140809131317) do
     t.text     "comments"
     t.string   "comments_by"
     t.integer  "number_of_penalties"
+    t.datetime "entered_at"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_event_category_id", using: :btree

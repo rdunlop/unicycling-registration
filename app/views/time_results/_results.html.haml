@@ -17,6 +17,7 @@
       - if @competition.has_penalty?
         %th Penalties
       %th Disqualified
+      %th Entered At
       %th Age Group
       %th Place
       %th Overall Place
@@ -34,6 +35,7 @@
         - if @competition.has_penalty?
           %td= time_result.number_of_penalties
         %td= time_result.disqualified ? "yes" : ""
+        %td= time_result.entered_at_to_s
         %td= time_result.competitor.age_group_entry_description
         %td= time_result.competitor.place_formatted
         %td= time_result.competitor.overall_place_formatted

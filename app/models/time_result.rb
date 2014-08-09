@@ -74,6 +74,10 @@ class TimeResult < ActiveRecord::Base
     competitor.members.first.registrant.bib_number
   end
 
+  def entered_at_to_s
+    entered_at.to_formatted_s(:short) if entered_at
+  end
+
   def event
     competitor.event
   end

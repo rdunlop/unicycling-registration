@@ -13,6 +13,7 @@
         - else
           %th Points
         %th Disqualified
+        %th Entered At
   %tbody
     - @import_results.each_with_index do |result, index|
       - cache [result, Registrant, @competition, display_username] do
@@ -27,6 +28,7 @@
           - else
             %td= result.points
           %td= result.disqualified ? "yes" : ""
+          %td= result.created_at.to_formatted_s(:short)
 
 %hr
 - imported_bib_numbers = @import_results.map(&:bib_number)
