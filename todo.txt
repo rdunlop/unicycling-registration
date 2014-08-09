@@ -1,5 +1,6 @@
 Last Re-Arranged June 20th, 2014.
 
+- Look at the history of Reg ID 778, 779 for whether they ever registered for Muni Downhill Beginner.
 - Change the URL format for various pages, so that it's nicer/more descriptive (like using the bib number, or the event name?)
 - Add a count of compettitors to the sign up lists (public display)
 - Allow entering a penalty for Slow Races, which then subtracts a second for each penalty.

@@ -2,18 +2,19 @@
 #
 # Table name: time_results
 #
-#  id             :integer          not null, primary key
-#  competitor_id  :integer
-#  minutes        :integer
-#  seconds        :integer
-#  thousands      :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  is_start_time  :boolean          default(FALSE)
-#  number_of_laps :integer
-#  status         :string(255)
-#  comments       :text
-#  comments_by    :string(255)
+#  id                  :integer          not null, primary key
+#  competitor_id       :integer
+#  minutes             :integer
+#  seconds             :integer
+#  thousands           :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  is_start_time       :boolean          default(FALSE)
+#  number_of_laps      :integer
+#  status              :string(255)
+#  comments            :text
+#  comments_by         :string(255)
+#  number_of_penalties :integer
 #
 # Indexes
 #
@@ -88,6 +89,16 @@ class TimeResult < ActiveRecord::Base
   end
 
   def full_time_in_thousands
-    (minutes * 60000) + (seconds * 1000) + thousands
+    (minutes * 60000) + (seconds * 1000) + thousands + penalties_thousands
+  end
+
+  private
+
+  def penalties_thousands
+    if number_of_penalties && competition.has_penalty?
+      number_of_penalties * (competition.penalty_seconds * 1000)
+    else
+      0
+    end
   end
 end

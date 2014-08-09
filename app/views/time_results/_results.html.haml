@@ -1,0 +1,41 @@
+%h1
+  Listing Time Results for #{@competition}
+%table.sortable
+  %thead
+    %tr
+      %th{:colspan => "2"} Competitor
+      %th{:colspan => "3"} Time
+      %td
+      %td{:colspan => "2"}
+    %tr
+      %th ID
+      %th Name
+      %th Start Time?
+      %th Minutes
+      %th Seconds
+      %th Thousands
+      - if @competition.has_penalty?
+        %th Penalties
+      %th Disqualified
+      %th Age Group
+      %th Place
+      %th Overall Place
+      %th
+      %th
+  %tbody
+    - @competition.time_results.each do |time_result|
+      %tr
+        %td= time_result.bib_number
+        %td= time_result.competitor
+        %td= time_result.is_start_time
+        %td= time_result.minutes
+        %td= time_result.seconds
+        %td= time_result.thousands
+        - if @competition.has_penalty?
+          %td= time_result.number_of_penalties
+        %td= time_result.disqualified ? "yes" : ""
+        %td= time_result.competitor.age_group_entry_description
+        %td= time_result.competitor.place_formatted
+        %td= time_result.competitor.overall_place_formatted
+        %td.non_printable= link_to 'Edit', edit_time_result_path(time_result)
+        %td.non_printable= link_to 'Delete', time_result, data: { confirm: 'Are you sure?' }, :method => :delete

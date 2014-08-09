@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140807142743) do
+ActiveRecord::Schema.define(version: 20140809131317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,7 @@ ActiveRecord::Schema.define(version: 20140807142743) do
     t.boolean  "automatic_competitor_creation", default: false
     t.integer  "combined_competition_id"
     t.boolean  "order_finalized",               default: false
+    t.integer  "penalty_seconds"
   end
 
   add_index "competitions", ["event_id"], name: "index_competitions_event_id", using: :btree
@@ -438,18 +439,19 @@ ActiveRecord::Schema.define(version: 20140807142743) do
     t.integer  "minutes"
     t.integer  "seconds"
     t.integer  "thousands"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.integer  "competition_id"
-    t.decimal  "points",         precision: 6, scale: 3
+    t.decimal  "points",              precision: 6, scale: 3
     t.string   "details"
-    t.boolean  "is_start_time",                          default: false
+    t.boolean  "is_start_time",                               default: false
     t.integer  "number_of_laps"
     t.string   "status"
     t.text     "comments"
     t.string   "comments_by"
     t.integer  "heat"
     t.integer  "lane"
+    t.integer  "number_of_penalties"
   end
 
   add_index "import_results", ["user_id"], name: "index_import_results_on_user_id", using: :btree
@@ -789,13 +791,14 @@ ActiveRecord::Schema.define(version: 20140807142743) do
     t.integer  "minutes"
     t.integer  "seconds"
     t.integer  "thousands"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.boolean  "is_start_time",  default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "is_start_time",       default: false
     t.integer  "number_of_laps"
     t.string   "status"
     t.text     "comments"
     t.string   "comments_by"
+    t.integer  "number_of_penalties"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_event_category_id", using: :btree

@@ -89,6 +89,7 @@ class RaceScoringClass < BaseScoringClass
       minutes: import_result.minutes,
       seconds: import_result.seconds,
       thousands: import_result.thousands,
+      number_of_penalties: import_result.number_of_penalties,
       status: import_result.status,
       comments: import_result.comments,
       comments_by: import_result.comments_by,

@@ -23,6 +23,7 @@
 #  automatic_competitor_creation :boolean          default(FALSE)
 #  combined_competition_id       :integer
 #  order_finalized               :boolean          default(FALSE)
+#  penalty_seconds               :integer
 #
 # Indexes
 #
@@ -290,6 +291,10 @@ class Competition < ActiveRecord::Base
 
   def has_age_group_entry_results?
     age_group_type.present?
+  end
+
+  def has_penalty?
+    penalty_seconds && penalty_seconds != 0
   end
 
   def age_group_entries

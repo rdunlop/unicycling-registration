@@ -6,6 +6,8 @@
       %td= import_result.minutes
       %td= import_result.seconds
       %td= import_result.thousands
+      - if import_result.competition.has_penalty?
+        %td= import_result.number_of_penalties
     - else
       %td= import_result.points
       %td= import_result.details

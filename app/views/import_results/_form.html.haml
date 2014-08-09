@@ -24,6 +24,8 @@
             %th Minutes
             %th Seconds
             %th Thousands
+            - if @competition.has_penalty?
+              %th Penalties
           - else
             %th Points
             %th Details
@@ -41,6 +43,8 @@
           %td= f.number_field :minutes, {:min => 0}
           %td= f.number_field :seconds, {:min => 0}
           %td= f.number_field :thousands, {:min => 0}
+          - if @competition.has_penalty?
+            %td= f.number_field :number_of_penalties
         - else
           %td= f.number_field :points, {min: 0, step: 0.1}
           %td= f.text_field :details, placeholder: "blank => \"Xpts\""
