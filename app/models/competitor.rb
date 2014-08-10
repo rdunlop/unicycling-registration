@@ -509,7 +509,7 @@ class Competitor < ActiveRecord::Base
 
   def num_laps
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/num_laps") do
-      finish_time_results.first.try(:number_of_laps)
+      finish_time_results.first.try(:number_of_laps) || 0
     end
   end
 
