@@ -11,8 +11,9 @@
 #
 # Indexes
 #
-#  index_registrant_choices_event_choice_id  (event_choice_id)
-#  index_registrant_choices_registrant_id    (registrant_id)
+#  index_registrant_choices_event_choice_id                       (event_choice_id)
+#  index_registrant_choices_on_registrant_id_and_event_choice_id  (registrant_id,event_choice_id) UNIQUE
+#  index_registrant_choices_registrant_id                         (registrant_id)
 #
 
 class RegistrantChoice < ActiveRecord::Base

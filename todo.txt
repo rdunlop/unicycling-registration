@@ -1,5 +1,8 @@
 Last Re-Arranged June 20th, 2014.
 
+- Run/resolve consistency_fail errors
+- Add a per-competitor report
+- Allow DNF status, which shows the result, but marks them an DNF and doesn't take any places. (see Marathon results)
 - Only print the # of laps if it is fewer than the max # laps.
 - Time REsults Edit should have penalties (WTF robin)
 - Allow specifying the precision of expected data input (thousands, or hundreds, and REQUIRE that many digits)

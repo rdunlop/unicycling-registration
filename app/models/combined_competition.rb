@@ -9,6 +9,10 @@
 #  use_age_group_places          :boolean          default(FALSE)
 #  percentage_based_calculations :boolean          default(FALSE)
 #
+# Indexes
+#
+#  index_combined_competitions_on_name  (name) UNIQUE
+#
 
 class CombinedCompetition < ActiveRecord::Base
 

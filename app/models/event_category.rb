@@ -14,7 +14,9 @@
 #
 # Indexes
 #
-#  index_event_categories_event_id  (event_id,position)
+#  index_event_categories_event_id                  (event_id,position)
+#  index_event_categories_on_event_id_and_name      (event_id,name) UNIQUE
+#  index_event_categories_on_event_id_and_position  (event_id,position) UNIQUE
 #
 
 class EventCategory < ActiveRecord::Base

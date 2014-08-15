@@ -15,6 +15,7 @@
 #  comments            :text
 #  comments_by         :string(255)
 #  number_of_penalties :integer
+#  entered_at          :datetime
 #
 # Indexes
 #

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140809145206) do
+ActiveRecord::Schema.define(version: 20140815014219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.boolean  "accepted_readwrite", default: false
   end
 
+  add_index "additional_registrant_accesses", ["registrant_id", "user_id"], name: "ada_reg_user", unique: true, using: :btree
   add_index "additional_registrant_accesses", ["registrant_id"], name: "index_additional_registrant_accesses_registrant_id", using: :btree
   add_index "additional_registrant_accesses", ["user_id"], name: "index_additional_registrant_accesses_user_id", using: :btree
 
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.integer  "position"
   end
 
+  add_index "age_group_entries", ["age_group_type_id", "short_description"], name: "age_type_desc", unique: true, using: :btree
   add_index "age_group_entries", ["age_group_type_id"], name: "index_age_group_entries_age_group_type_id", using: :btree
   add_index "age_group_entries", ["wheel_size_id"], name: "index_age_group_entries_wheel_size_id", using: :btree
 
@@ -50,6 +52,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "age_group_types", ["name"], name: "index_age_group_types_on_name", unique: true, using: :btree
 
   create_table "award_labels", force: true do |t|
     t.integer  "bib_number"
@@ -80,6 +84,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
   end
 
   add_index "boundary_scores", ["competitor_id"], name: "index_boundary_scores_competitor_id", using: :btree
+  add_index "boundary_scores", ["judge_id", "competitor_id"], name: "index_boundary_scores_on_judge_id_and_competitor_id", unique: true, using: :btree
   add_index "boundary_scores", ["judge_id"], name: "index_boundary_scores_judge_id", using: :btree
 
   create_table "categories", force: true do |t|
@@ -129,6 +134,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.boolean  "percentage_based_calculations", default: false
   end
 
+  add_index "combined_competitions", ["name"], name: "index_combined_competitions_on_name", unique: true, using: :btree
+
   create_table "competition_results", force: true do |t|
     t.integer  "competition_id"
     t.string   "results_file"
@@ -163,6 +170,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "updated_at"
   end
 
+  add_index "competition_wheel_sizes", ["registrant_id", "event_id"], name: "index_competition_wheel_sizes_on_registrant_id_and_event_id", unique: true, using: :btree
   add_index "competition_wheel_sizes", ["registrant_id", "event_id"], name: "index_competition_wheel_sizes_registrant_id_event_id", using: :btree
 
   create_table "competitions", force: true do |t|
@@ -189,6 +197,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.integer  "penalty_seconds"
   end
 
+  add_index "competitions", ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true, using: :btree
   add_index "competitions", ["event_id"], name: "index_competitions_event_id", using: :btree
 
   create_table "competitors", force: true do |t|
@@ -235,6 +244,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.integer  "usa_family_membership_holder_id"
   end
 
+  add_index "contact_details", ["registrant_id"], name: "index_contact_details_on_registrant_id", unique: true, using: :btree
   add_index "contact_details", ["registrant_id"], name: "index_contact_details_registrant_id", using: :btree
 
   create_table "distance_attempts", force: true do |t|
@@ -260,7 +270,9 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.boolean  "warning_on_registration_summary", default: false
   end
 
+  add_index "event_categories", ["event_id", "name"], name: "index_event_categories_on_event_id_and_name", unique: true, using: :btree
   add_index "event_categories", ["event_id", "position"], name: "index_event_categories_event_id", using: :btree
+  add_index "event_categories", ["event_id", "position"], name: "index_event_categories_on_event_id_and_position", unique: true, using: :btree
 
   create_table "event_choice_translations", force: true do |t|
     t.integer  "event_choice_id"
@@ -290,7 +302,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.integer  "required_if_event_choice_id"
   end
 
-  add_index "event_choices", ["event_id", "position"], name: "index_event_choices_event_id", using: :btree
+  add_index "event_choices", ["event_id", "position"], name: "index_event_choices_on_event_id_and_position", unique: true, using: :btree
+  add_index "event_choices", ["export_name"], name: "index_event_choices_on_export_name", unique: true, using: :btree
 
   create_table "event_configuration_translations", force: true do |t|
     t.integer  "event_configuration_id"
@@ -432,6 +445,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.string   "scheduled_time"
   end
 
+  add_index "heat_times", ["competition_id", "heat"], name: "index_heat_times_on_competition_id_and_heat", unique: true, using: :btree
+
   create_table "import_results", force: true do |t|
     t.integer  "user_id"
     t.string   "raw_data"
@@ -473,6 +488,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.boolean  "boundary_calculation_enabled"
   end
 
+  add_index "judge_types", ["name"], name: "index_judge_types_on_name", unique: true, using: :btree
+
   create_table "judges", force: true do |t|
     t.integer  "competition_id"
     t.integer  "judge_type_id"
@@ -482,6 +499,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
   end
 
   add_index "judges", ["competition_id"], name: "index_judges_event_category_id", using: :btree
+  add_index "judges", ["judge_type_id", "competition_id", "user_id"], name: "index_judges_on_judge_type_id_and_competition_id_and_user_id", unique: true, using: :btree
   add_index "judges", ["judge_type_id"], name: "index_judges_judge_type_id", using: :btree
   add_index "judges", ["user_id"], name: "index_judges_user_id", using: :btree
 
@@ -494,6 +512,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.integer  "competitor_id"
   end
 
+  add_index "lane_assignments", ["competition_id", "heat", "lane"], name: "index_lane_assignments_on_competition_id_and_heat_and_lane", unique: true, using: :btree
   add_index "lane_assignments", ["competition_id"], name: "index_lane_assignments_on_competition_id", using: :btree
 
   create_table "members", force: true do |t|
@@ -564,7 +583,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "updated_at",        null: false
   end
 
-  add_index "refund_details", ["payment_detail_id"], name: "index_refund_details_on_payment_detail_id", using: :btree
+  add_index "refund_details", ["payment_detail_id"], name: "index_refund_details_on_payment_detail_id", unique: true, using: :btree
   add_index "refund_details", ["refund_id"], name: "index_refund_details_on_refund_id", using: :btree
 
   create_table "refunds", force: true do |t|
@@ -587,6 +606,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
   end
 
   add_index "registrant_choices", ["event_choice_id"], name: "index_registrant_choices_event_choice_id", using: :btree
+  add_index "registrant_choices", ["registrant_id", "event_choice_id"], name: "index_registrant_choices_on_registrant_id_and_event_choice_id", unique: true, using: :btree
   add_index "registrant_choices", ["registrant_id"], name: "index_registrant_choices_registrant_id", using: :btree
 
   create_table "registrant_event_sign_ups", force: true do |t|
@@ -600,6 +620,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
 
   add_index "registrant_event_sign_ups", ["event_category_id"], name: "index_registrant_event_sign_ups_event_category_id", using: :btree
   add_index "registrant_event_sign_ups", ["event_id"], name: "index_registrant_event_sign_ups_event_id", using: :btree
+  add_index "registrant_event_sign_ups", ["registrant_id", "event_id"], name: "index_registrant_event_sign_ups_on_registrant_id_and_event_id", unique: true, using: :btree
   add_index "registrant_event_sign_ups", ["registrant_id"], name: "index_registrant_event_sign_ups_registrant_id", using: :btree
 
   create_table "registrant_expense_items", force: true do |t|
@@ -625,6 +646,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
   end
 
   add_index "registrant_group_members", ["registrant_group_id"], name: "index_registrant_group_mumbers_registrant_group_id", using: :btree
+  add_index "registrant_group_members", ["registrant_id", "registrant_group_id"], name: "reg_group_reg_group", unique: true, using: :btree
   add_index "registrant_group_members", ["registrant_id"], name: "index_registrant_group_mumbers_registrant_id", using: :btree
 
   create_table "registrant_groups", force: true do |t|
@@ -693,6 +715,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "updated_at"
   end
 
+  add_index "results", ["competitor_id", "result_type"], name: "index_results_on_competitor_id_and_result_type", unique: true, using: :btree
+
   create_table "roles", force: true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -716,6 +740,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "updated_at",                            null: false
   end
 
+  add_index "scores", ["competitor_id", "judge_id"], name: "index_scores_on_competitor_id_and_judge_id", unique: true, using: :btree
   add_index "scores", ["competitor_id"], name: "index_scores_competitor_id", using: :btree
   add_index "scores", ["judge_id"], name: "index_scores_judge_id", using: :btree
 
@@ -730,6 +755,7 @@ ActiveRecord::Schema.define(version: 20140809145206) do
   end
 
   add_index "songs", ["registrant_id"], name: "index_songs_registrant_id", using: :btree
+  add_index "songs", ["user_id", "registrant_id", "event_id"], name: "index_songs_on_user_id_and_registrant_id_and_event_id", unique: true, using: :btree
 
   create_table "standard_difficulty_scores", force: true do |t|
     t.integer  "competitor_id"
@@ -739,6 +765,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
+
+  add_index "standard_difficulty_scores", ["judge_id", "standard_skill_routine_entry_id", "competitor_id"], name: "standard_diff_judge_routine_comp", unique: true, using: :btree
 
   create_table "standard_execution_scores", force: true do |t|
     t.integer  "competitor_id"
@@ -752,6 +780,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "updated_at",                      null: false
   end
 
+  add_index "standard_execution_scores", ["judge_id", "standard_skill_routine_entry_id", "competitor_id"], name: "standard_exec_judge_routine_comp", unique: true, using: :btree
+
   create_table "standard_skill_entries", force: true do |t|
     t.integer  "number"
     t.string   "letter"
@@ -760,6 +790,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
+
+  add_index "standard_skill_entries", ["letter", "number"], name: "index_standard_skill_entries_on_letter_and_number", unique: true, using: :btree
 
   create_table "standard_skill_routine_entries", force: true do |t|
     t.integer  "standard_skill_routine_id"
@@ -775,6 +807,8 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "updated_at",    null: false
   end
 
+  add_index "standard_skill_routines", ["registrant_id"], name: "index_standard_skill_routines_on_registrant_id", unique: true, using: :btree
+
   create_table "tie_break_adjustments", force: true do |t|
     t.integer  "tie_break_place"
     t.integer  "judge_id"
@@ -783,7 +817,9 @@ ActiveRecord::Schema.define(version: 20140809145206) do
     t.datetime "updated_at"
   end
 
+  add_index "tie_break_adjustments", ["competitor_id", "judge_id"], name: "index_tie_break_adjustments_on_competitor_id_and_judge_id", unique: true, using: :btree
   add_index "tie_break_adjustments", ["competitor_id"], name: "index_tie_break_adjustments_competitor_id", using: :btree
+  add_index "tie_break_adjustments", ["competitor_id"], name: "index_tie_break_adjustments_on_competitor_id", unique: true, using: :btree
   add_index "tie_break_adjustments", ["judge_id"], name: "index_tie_break_adjustments_judge_id", using: :btree
 
   create_table "time_results", force: true do |t|

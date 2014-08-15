@@ -8,6 +8,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_age_group_types_on_name  (name) UNIQUE
+#
 
 class AgeGroupType < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true

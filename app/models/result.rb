@@ -11,6 +11,10 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #
+# Indexes
+#
+#  index_results_on_competitor_id_and_result_type  (competitor_id,result_type) UNIQUE
+#
 
 class Result < ActiveRecord::Base
   include CachedSetModel
@@ -22,7 +26,7 @@ class Result < ActiveRecord::Base
   belongs_to :competitor, inverse_of: :results
 
   validates :competitor, :place, :result_type, presence: true
-  validates :competitor, uniqueness: { scope: [:result_type] }
+  validates :competitor_id, uniqueness: { scope: [:result_type] }
 
   def self.age_group
     where(result_type: "AgeGroup")

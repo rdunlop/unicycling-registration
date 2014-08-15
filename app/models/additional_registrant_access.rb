@@ -13,6 +13,7 @@
 #
 # Indexes
 #
+#  ada_reg_user                                        (registrant_id,user_id) UNIQUE
 #  index_additional_registrant_accesses_registrant_id  (registrant_id)
 #  index_additional_registrant_accesses_user_id        (user_id)
 #

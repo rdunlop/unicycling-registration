@@ -15,8 +15,9 @@
 #
 # Indexes
 #
-#  index_boundary_scores_competitor_id  (competitor_id)
-#  index_boundary_scores_judge_id       (judge_id)
+#  index_boundary_scores_competitor_id                  (competitor_id)
+#  index_boundary_scores_judge_id                       (judge_id)
+#  index_boundary_scores_on_judge_id_and_competitor_id  (judge_id,competitor_id) UNIQUE
 #
 
 class BoundaryScore < ActiveRecord::Base

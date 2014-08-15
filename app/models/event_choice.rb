@@ -19,7 +19,8 @@
 #
 # Indexes
 #
-#  index_event_choices_event_id  (event_id,position)
+#  index_event_choices_on_event_id_and_position  (event_id,position) UNIQUE
+#  index_event_choices_on_export_name            (export_name) UNIQUE
 #
 
 class EventChoice < ActiveRecord::Base

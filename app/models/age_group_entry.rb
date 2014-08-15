@@ -15,6 +15,7 @@
 #
 # Indexes
 #
+#  age_type_desc                              (age_group_type_id,short_description) UNIQUE
 #  index_age_group_entries_age_group_type_id  (age_group_type_id)
 #  index_age_group_entries_wheel_size_id      (wheel_size_id)
 #

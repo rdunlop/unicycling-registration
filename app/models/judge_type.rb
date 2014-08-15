@@ -17,6 +17,10 @@
 #  event_class                  :string(255)
 #  boundary_calculation_enabled :boolean
 #
+# Indexes
+#
+#  index_judge_types_on_name  (name) UNIQUE
+#
 
 class JudgeType < ActiveRecord::Base
   has_many :judges, :dependent => :destroy

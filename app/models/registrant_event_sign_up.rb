@@ -12,9 +12,10 @@
 #
 # Indexes
 #
-#  index_registrant_event_sign_ups_event_category_id  (event_category_id)
-#  index_registrant_event_sign_ups_event_id           (event_id)
-#  index_registrant_event_sign_ups_registrant_id      (registrant_id)
+#  index_registrant_event_sign_ups_event_category_id              (event_category_id)
+#  index_registrant_event_sign_ups_event_id                       (event_id)
+#  index_registrant_event_sign_ups_on_registrant_id_and_event_id  (registrant_id,event_id) UNIQUE
+#  index_registrant_event_sign_ups_registrant_id                  (registrant_id)
 #
 
 class RegistrantEventSignUp < ActiveRecord::Base

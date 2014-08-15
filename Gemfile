@@ -37,6 +37,7 @@ gem 'newrelic_rpm'
 gem 'pg'
 
 group :naucc, :development, :caching do
+  gem 'consistency_fail'
   gem 'better_errors'
   gem "binding_of_caller"
   gem 'simplecov', :require => false, :group => :test

@@ -13,6 +13,10 @@
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #
+# Indexes
+#
+#  standard_exec_judge_routine_comp  (judge_id,standard_skill_routine_entry_id,competitor_id) UNIQUE
+#
 
 class StandardExecutionScore < ActiveRecord::Base
   include Competeable

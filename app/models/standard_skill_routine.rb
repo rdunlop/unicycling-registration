@@ -7,6 +7,10 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
+# Indexes
+#
+#  index_standard_skill_routines_on_registrant_id  (registrant_id) UNIQUE
+#
 
 class StandardSkillRoutine < ActiveRecord::Base
   validates :registrant_id, { :presence => true, :uniqueness => true }

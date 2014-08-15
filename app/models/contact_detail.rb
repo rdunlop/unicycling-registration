@@ -30,7 +30,8 @@
 #
 # Indexes
 #
-#  index_contact_details_registrant_id  (registrant_id)
+#  index_contact_details_on_registrant_id  (registrant_id) UNIQUE
+#  index_contact_details_registrant_id     (registrant_id)
 #
 
 class ContactDetail < ActiveRecord::Base

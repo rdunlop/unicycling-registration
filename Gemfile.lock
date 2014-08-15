@@ -108,6 +108,7 @@ GEM
     compass-rails (1.1.7)
       compass (>= 0.12.2)
       sprockets (<= 2.11.0)
+    consistency_fail (0.3.2)
     dalli (2.7.0)
     debug_inspector (0.0.2)
     delorean (2.1.0)
@@ -366,6 +367,7 @@ DEPENDENCIES
   carrierwave_direct
   chosen-rails
   coffee-rails
+  consistency_fail
   dalli
   delorean
   devise

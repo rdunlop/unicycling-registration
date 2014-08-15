@@ -27,7 +27,8 @@
 #
 # Indexes
 #
-#  index_competitions_event_id  (event_id)
+#  index_competitions_event_id                    (event_id)
+#  index_competitions_on_combined_competition_id  (combined_competition_id) UNIQUE
 #
 
 class Competition < ActiveRecord::Base

@@ -15,8 +15,9 @@
 #
 # Indexes
 #
-#  index_scores_competitor_id  (competitor_id)
-#  index_scores_judge_id       (judge_id)
+#  index_scores_competitor_id                  (competitor_id)
+#  index_scores_judge_id                       (judge_id)
+#  index_scores_on_competitor_id_and_judge_id  (competitor_id,judge_id) UNIQUE
 #
 
 class Score < ActiveRecord::Base

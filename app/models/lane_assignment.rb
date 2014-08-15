@@ -12,7 +12,8 @@
 #
 # Indexes
 #
-#  index_lane_assignments_on_competition_id  (competition_id)
+#  index_lane_assignments_on_competition_id                    (competition_id)
+#  index_lane_assignments_on_competition_id_and_heat_and_lane  (competition_id,heat,lane) UNIQUE
 #
 
 class LaneAssignment < ActiveRecord::Base

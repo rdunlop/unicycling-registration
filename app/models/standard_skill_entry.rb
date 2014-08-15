@@ -10,6 +10,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_standard_skill_entries_on_letter_and_number  (letter,number) UNIQUE
+#
 
 class StandardSkillEntry < ActiveRecord::Base
   has_many :standard_skill_routine_entries, :dependent => :destroy

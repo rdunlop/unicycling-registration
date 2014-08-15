@@ -11,6 +11,10 @@
 #  updated_at     :datetime
 #  scheduled_time :string(255)
 #
+# Indexes
+#
+#  index_heat_times_on_competition_id_and_heat  (competition_id,heat) UNIQUE
+#
 
 class HeatTime < ActiveRecord::Base
   validates :heat, :competition, :minutes, :seconds, :presence => true
