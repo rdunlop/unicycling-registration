@@ -1,5 +1,6 @@
 Last Re-Arranged June 20th, 2014.
 
+-- Update all booleans to not include nil (http://www.bignerdranch.com/blog/coding-rails-with-data-integrity/)
 - Run/resolve consistency_fail errors
 - Add a per-competitor report
 - Allow DNF status, which shows the result, but marks them an DNF and doesn't take any places. (see Marathon results)
