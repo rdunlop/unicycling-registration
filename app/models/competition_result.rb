@@ -10,6 +10,7 @@
 #  published_date :datetime
 #  created_at     :datetime
 #  updated_at     :datetime
+#  name           :string(255)
 #
 
 class CompetitionResult < ActiveRecord::Base
@@ -40,7 +41,7 @@ class CompetitionResult < ActiveRecord::Base
     if system_managed
       "Results"
     else
-      "Additional Results"
+      name.presence || "Additional Results"
     end
   end
 end

@@ -116,6 +116,8 @@ Results, judges, and scoring settings.
   %br
   = form_tag competition_competition_results_path(@competition), multipart: true do
     = file_field_tag :results_file
+    = label_tag :custom_name
+    = text_field_tag :custom_name
     %br
     = submit_tag "Upload More Results"
 
