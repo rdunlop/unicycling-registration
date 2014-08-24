@@ -3,6 +3,7 @@ class UsaMembershipsController < ApplicationController
 
   def index
     family_item = @config.usa_family_expense_item
+    raise "Unable to access USA page on non-USA configuration" unless @config.usa?
     @family_registrants = family_item.payment_details.includes(:registrant).paid.map{|pd| pd.registrant}
   end
 
