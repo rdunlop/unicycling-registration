@@ -168,6 +168,7 @@ Workspace::Application.routes.draw do
         post :undelete
         get :reg_fee
         put :update_reg_fee
+        get :results
       end
 
       #normal user

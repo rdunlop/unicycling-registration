@@ -112,6 +112,14 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  # GET /registrants/1/results
+  def results
+    @overall_results = @registrant.results.overall
+    @age_group_results = @registrant.results.age_group
+    respond_to do |format|
+      format.html {}
+    end
+  end
 
 
   # GET /registrants/new

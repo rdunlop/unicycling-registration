@@ -8,8 +8,8 @@
 #  last_name               :string(255)
 #  birthday                :date
 #  gender                  :string(255)
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
+#  created_at              :datetime
+#  updated_at              :datetime
 #  user_id                 :integer
 #  competitor              :boolean
 #  deleted                 :boolean
@@ -71,6 +71,7 @@ class Registrant < ActiveRecord::Base
   has_many :competitors, :through => :members
   has_many :competitions, :through => :competitors
   has_many :competition_wheel_sizes, dependent: :destroy
+  has_many :results, through: :competitors
 
   belongs_to :default_wheel_size, :class_name => "WheelSize", :foreign_key => :wheel_size_id
   belongs_to :user
