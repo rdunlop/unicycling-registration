@@ -1,5 +1,35 @@
 Last Re-Arranged June 20th, 2014.
 
+PDF filenames should use the awards names for filenames.
+Use a less-ugly looking randomizer for the pdf filename.
+
+Registrant Summary of results. Notes:
+  per event:
+
+  - Event name
+  - result (time/points)
+  - Expert placing
+  - Age group name
+  - Age group placing
+
+Possibly store all published results 2x. Once with a TOD, once without any random characters (just "Trials_results.pdf"). This way, any sharing of the link will be to the same-named file at all times
+ - Additionally, we are able to keep around all previously published results, for reference by admins, if desired/needed.
+Add a "Republish" ability for admins (separate from the "Unpublish" ability).
+Does the registrant#summary show 10k standard, or only 10k?
+Competitors#index should have a "Delete all who have dropped"
+- Remove the changing of the judging rules in the migration (so that I can migrate naucc2013 up to current).
+- Multi-tenant architecture:
+ - unireg: naucc2013 ( confirmed)
+ - naucc2014: naucc2014
+ - unicon2014: unicon2014
+
+what is uni-alpha? (same as 'unicycling', but with less (no) data)
+what is unicycling? (naucc2012 Standard Skill routine entry menu)
+
+- Multi-tenant the rulebook too?
+
+- Use a proper E-mailer (SES?)
+
 -- Update all booleans to not include nil (http://www.bignerdranch.com/blog/coding-rails-with-data-integrity/)
 - Run/resolve consistency_fail errors
 - Add a per-competitor report
