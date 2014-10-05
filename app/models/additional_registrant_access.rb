@@ -7,8 +7,8 @@
 #  registrant_id      :integer
 #  declined           :boolean
 #  accepted_readonly  :boolean
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  created_at         :datetime
+#  updated_at         :datetime
 #  accepted_readwrite :boolean          default(FALSE)
 #
 # Indexes

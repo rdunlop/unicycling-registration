@@ -6,8 +6,8 @@
 #  competition_id :integer
 #  judge_type_id  :integer
 #  user_id        :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #
 # Indexes
 #

@@ -8,8 +8,8 @@
 #  cancelled      :boolean
 #  transaction_id :string(255)
 #  completed_date :datetime
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #  payment_date   :string(255)
 #  note           :string(255)
 #

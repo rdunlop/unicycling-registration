@@ -1,0 +1,16 @@
+
+%h1 Volunteer Opportunities
+
+%table.volunteers.sortable
+  %thead
+    %tr
+      %th Volunteer Opportunity
+      %th Num Registrants
+
+  %tbody
+    - @volunteer_opportunities.each do |vo|
+      %tr
+        %td= link_to vo.description, vo
+        %td= vo.volunteer_choices.count
+
+= link_to "New Volunteer Opportunity", new_volunteer_opportunity_path

@@ -8,8 +8,8 @@
 #  start_age         :integer
 #  end_age           :integer
 #  gender            :string(255)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  created_at        :datetime
+#  updated_at        :datetime
 #  wheel_size_id     :integer
 #  position          :integer
 #

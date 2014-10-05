@@ -6,8 +6,8 @@
 #  start_date                    :date
 #  end_date                      :date
 #  name                          :string(255)
-#  created_at                    :datetime         not null
-#  updated_at                    :datetime         not null
+#  created_at                    :datetime
+#  updated_at                    :datetime
 #  competitor_expense_item_id    :integer
 #  noncompetitor_expense_item_id :integer
 #  onsite                        :boolean
