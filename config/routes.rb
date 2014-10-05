@@ -62,6 +62,7 @@ Workspace::Application.routes.draw do
       get :download_all_payments
       get :download_events
       get :download_competitors_for_timers
+      get :results
     end
 
     resources :standard_skill_entries, :only => [:index] do

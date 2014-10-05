@@ -3,6 +3,15 @@ Last Re-Arranged June 20th, 2014.
 PDF filenames should use the awards names for filenames.
 Use a less-ugly looking randomizer for the pdf filename.
 
+Stop putting "Results" for people who are competitors but didn't race. (e.g. Slow Races ugh).
+
+Fix the "Download Results" excel export. 1) too slow. 2) Doesn't work (excel download fail...like at unicon).
+
+Create a way for error-on-lif-import to prompt the user to map the field into a status (DNS, DNF, DQ, etc)
+
+Determine test coverage.
+Add tests to increase coverage of features.
+
 Registrant Summary of results. Notes:
   per event:
 

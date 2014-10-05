@@ -192,4 +192,39 @@ class ExportController < ApplicationController
       format.xls { send_data report.string, :filename => "registrants_with_payments.xls" }
     end
   end
+
+  def results
+    s = Spreadsheet::Workbook.new
+    sheet = s.create_worksheet
+
+    row = 0
+    headers =["ID", "Name", "Gender", "Age", "Competition", "Place", "Result Type", "Result",  "Details",  "Age Group"]
+
+    headers.each_with_index do |head, index|
+      sheet[0, index] = head
+    end
+
+    row = 1
+    Result.includes(competitor: [competition: [], members: [registrant: [:competition_wheel_sizes]], external_results: [], time_results: [], distance_attempts: [], scores: []]).all.each do |result|
+      sheet[row,0] = result.competitor.bib_number
+      sheet[row,1] = result.competitor.to_s
+      sheet[row,2] = result.competitor.gender
+      sheet[row,3] = result.competitor.age
+      sheet[row,4] = result.competitor.competition.award_title
+      sheet[row,5] = result.to_s
+      sheet[row,6] = result.result_type
+      sheet[row,7] = result.competitor.result
+      sheet[row,8] = result.competitor.details
+      sheet[row,9] = result.competitor.age_group_entry_description
+      row += 1
+    end
+
+    report = StringIO.new
+    s.write report
+
+    respond_to do |format|
+      format.xls { send_data report.string, :filename => "results.xls" }
+      #format.xls { render text: report.string, :filename => "results.xls" }
+    end
+  end
 end
