@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe "combined_competitions/new" do
   before(:each) do
-    assign(:combined_competition, stub_model(CombinedCompetition,
-      :name => "MyString"
-    ).as_new_record)
+    assign(:combined_competition, CombinedCompetition.new)
   end
 
   it "renders new combined_competition form" do

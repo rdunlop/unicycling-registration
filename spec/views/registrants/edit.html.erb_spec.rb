@@ -2,21 +2,7 @@ require 'spec_helper'
 
 describe "registrants/edit" do
   before(:each) do
-    @registrant = assign(:registrant, stub_model(Registrant,
-      :first_name => "MyString",
-      :middle_initial => "MyString",
-      :last_name => "MyString",
-      :gender => "MyString",
-      :address_line_1 => "MyString",
-      :address_line_2 => "MyString",
-      :city => "MyString",
-      :state => "MyString",
-      :country => "MyString",
-      :zip_code => "MyString",
-      :phone => "MyString",
-      :mobile => "MyString",
-      :email => "MyString"
-    ))
+    @registrant = assign(:registrant, FactoryGirl.build_stubbed(:registrant))
     @categories = [FactoryGirl.create(:category)]
     @ability = Object.new
     @ability.extend(CanCan::Ability)

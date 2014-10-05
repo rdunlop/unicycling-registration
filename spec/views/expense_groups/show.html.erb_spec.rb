@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "expense_groups/show" do
   before(:each) do
-    @expense_group = assign(:expense_group, stub_model(ExpenseGroup,
+    @expense_group = assign(:expense_group, FactoryGirl.build_stubbed(:expense_group,
       :group_name => "Group Name",
       :visible => false,
       :info_url => "http://google.com",

@@ -4,18 +4,8 @@ describe "expense_groups/index" do
   before(:each) do
     @expense_group = ExpenseGroup.new
     assign(:expense_groups, [
-      stub_model(ExpenseGroup,
-        :group_name => "Group Name",
-        :visible => true,
-        :info_url => "hello world",
-        :position => 1
-      ),
-      stub_model(ExpenseGroup,
-        :group_name => "Group Name",
-        :visible => true,
-        :position => 1
-      )
-    ])
+      FactoryGirl.build_stubbed(:expense_group, group_name: "Group Name", info_url: "hello world"),
+      FactoryGirl.build_stubbed(:expense_group, group_name: "Group Name")])
   end
 
   it "renders a list of expense_groups" do

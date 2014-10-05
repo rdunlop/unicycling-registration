@@ -22,10 +22,7 @@ describe "songs/index" do
 
     allow(@song1).to receive(:human_name).and_return("File Name")
     allow(@song2).to receive(:human_name).and_return("File Name")
-    assign(:song, stub_model(Song,
-      :description => "MyString",
-      :file_name => "MyString"
-    ).as_new_record)
+    assign(:song, Song.new)
     assign(:config, double(:music_submission_end_date => "now"))
     controller.stub(:current_user) { @registrant.user }
   end

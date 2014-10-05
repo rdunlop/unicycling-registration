@@ -2,10 +2,7 @@ require 'spec_helper'
 
 describe "categories/edit" do
   before(:each) do
-    @category = assign(:category, stub_model(Category,
-      :name => "MyString",
-      :position => 1
-    ))
+    @category = assign(:category, FactoryGirl.build_stubbed(:category))
   end
 
   it "renders the edit category form" do

@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe "expense_groups/edit" do
   before(:each) do
-    @expense_group = assign(:expense_group, stub_model(ExpenseGroup,
-      :group_name => "MyString",
-      :visible => false,
-      :position => 1
-    ))
+    @expense_group = assign(:expense_group, FactoryGirl.build_stubbed(:expense_group))
   end
 
   it "renders the edit expense_group form" do

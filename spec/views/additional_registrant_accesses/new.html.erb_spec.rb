@@ -2,13 +2,8 @@ require 'spec_helper'
 
 describe "additional_registrant_accesses/new" do
   before(:each) do
-    assign(:additional_registrant_access, stub_model(AdditionalRegistrantAccess,
-      :user_id => 1,
-      :registrant_id => 1,
-      :declined => false,
-      :accepted_readonly => false
-    ).as_new_record)
-    @user = FactoryGirl.create(:user) 
+    assign(:additional_registrant_access, AdditionalRegistrantAccess.new)
+    @user = FactoryGirl.create(:user)
   end
 
   it "renders new additional_registrant_access form" do

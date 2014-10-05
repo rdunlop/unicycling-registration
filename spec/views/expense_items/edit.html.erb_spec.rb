@@ -2,13 +2,7 @@ require 'spec_helper'
 
 describe "expense_items/edit" do
   before(:each) do
-    @expense_item = assign(:expense_item, stub_model(ExpenseItem,
-      :name => "MyString",
-      :description => "MyString",
-      :cost => "9.99",
-      :export_name => "MyString",
-      :position => 1
-    ))
+    @expense_item = assign(:expense_item, FactoryGirl.build_stubbed(:expense_item))
   end
 
   it "renders the edit expense_item form" do

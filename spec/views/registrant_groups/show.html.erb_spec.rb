@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "registrant_groups/show" do
   before(:each) do
-    @registrant_group = assign(:registrant_group, stub_model(RegistrantGroup,
+    @registrant_group = assign(:registrant_group, FactoryGirl.build_stubbed(:registrant_group,
       :name => "Name",
       :registrant_id => 1
     ))
