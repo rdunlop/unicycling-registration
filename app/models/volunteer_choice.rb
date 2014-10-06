@@ -20,4 +20,12 @@ class VolunteerChoice < ActiveRecord::Base
   belongs_to :volunteer_opportunity
   belongs_to :registrant
 
+  after_create :send_email_to_admins
+
+  def send_email_to_admins
+    if volunteer_opportunity.inform_emails.present?
+      VolunteerMailer.new_volunteer(self).deliver
+    end
+  end
+
 end
