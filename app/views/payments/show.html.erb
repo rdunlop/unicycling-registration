@@ -1,9 +1,3 @@
-<% if mixpanel? %>
-  <script type="text/javascript">
-    mixpanel.track_forms("form", "Paypal Payment Started")
-  </script>
-<% end %>
-
 <h1><%= t(".payment_summary") %></h1>
 <%= render :partial => "summary", :locals => {:payment => @payment } %>
 

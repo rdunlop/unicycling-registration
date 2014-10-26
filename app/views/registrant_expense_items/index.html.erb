@@ -1,9 +1,4 @@
 <h1>Items</h1>
-<% if mixpanel? %>
-  <script type="text/javascript">
-    mixpanel.track("Items Page Loaded")
-  </script>
-<% end %>
 
 <h2><%= @registrant %></h2>
 <% unless @registrant_expense_item.nil? %>

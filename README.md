@@ -221,15 +221,15 @@ Specify your connection settings in the secrets.yml file:
     aws_secret_access_key:
 
 
-Mixpanel Account
+Google Analytics Account
 ----------------
 
-Mixpanel is a service for tracking the way that users interact with the site.
+Google Analytics is a service for tracking the way that users interact with the site.
 
-Adding a mixpanel token enables us to track the flow of users. This setting is
+Adding a google Analytics token enables us to track the flow of users. This setting is
 optional.
 
-    MIXPANEL_TOKEN=<token>
+    google_analytics_tracking_id=<token>
 
 NewRelic Account
 ----------------

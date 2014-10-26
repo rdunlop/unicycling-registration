@@ -1,9 +1,6 @@
 %h1.title
   = @config.short_name
   = t(".registration")
-- if mixpanel?
-  :javascript
-    mixpanel.track("Main Registration Landing Page Loaded")
 - if @display_invitation_request
   .invitation_access_banner
     You have been asked to share a registration with another user.
