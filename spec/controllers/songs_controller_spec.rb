@@ -40,11 +40,11 @@ describe SongsController do
   describe "GET index" do
     it "assigns all songs for reg as @songs" do
       song = FactoryGirl.create(:song, :registrant => @reg)
-      get :index, {:registrant_id => @reg.id}
+      get :index, {:registrant_id => @reg.to_param}
       assigns(:songs).should eq([song])
     end
     it "assigns a new song as @song" do
-      get :index, {:registrant_id => @reg.id}
+      get :index, {:registrant_id => @reg.to_param}
       assigns(:song).should be_a_new(Song)
     end
   end
@@ -71,12 +71,12 @@ describe SongsController do
     describe "with valid params" do
       it "creates a new Song" do
         expect {
-          post :create, {:song => valid_attributes, :registrant_id => @reg.id}
+          post :create, {:song => valid_attributes, :registrant_id => @reg.to_param}
         }.to change(Song, :count).by(1)
       end
 
       it "redirects to the song add_file page" do
-        post :create, {:song => valid_attributes, :registrant_id => @reg.id}
+        post :create, {:song => valid_attributes, :registrant_id => @reg.to_param}
         response.should redirect_to(add_file_song_path(Song.last))
       end
     end
@@ -85,14 +85,14 @@ describe SongsController do
       it "assigns a newly created but unsaved song as @song" do
         # Trigger the behavior that occurs when invalid params are submitted
         Song.any_instance.stub(:save).and_return(false)
-        post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.id}
+        post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.to_param}
         assigns(:song).should be_a_new(Song)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Song.any_instance.stub(:save).and_return(false)
-        post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.id}
+        post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.to_param}
         response.should render_template("index")
       end
     end

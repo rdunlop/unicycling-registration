@@ -46,7 +46,7 @@ class RegistrantExpenseItemsController < ApplicationController
   end
 
   def load_registrant
-    @registrant = Registrant.find(params[:registrant_id])
+    @registrant = Registrant.find_by!(bib_number: params[:registrant_id])
   end
 
   def load_new_registrant_expense_item

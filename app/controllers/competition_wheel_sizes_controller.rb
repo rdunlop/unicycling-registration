@@ -1,5 +1,6 @@
 class CompetitionWheelSizesController < ApplicationController
-  load_and_authorize_resource :registrant, except: :destroy
+  load_resource find_by: :bib_number, except: :destroy
+  authorize_resource except: :destroy
   load_and_authorize_resource through: :registrant, except: :destroy
   load_and_authorize_resource only: :destroy
   before_filter :authenticate_user!

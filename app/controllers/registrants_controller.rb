@@ -1,7 +1,8 @@
 class RegistrantsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :user, only: [:index]
-  load_and_authorize_resource except: :new
+  load_resource find_by: :bib_number, except: :new
+  authorize_resource except: :new
   load_and_authorize_resource through: :current_user, only: :new
   # NOTE: This isn't working 100%, it fails when a create fails (the breadcrumb is incorrect)
 
@@ -75,7 +76,7 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/1/waiver
   def waiver
-    @registrant = Registrant.find(params[:id])
+    @registrant = Registrant.find_by(bib_number: params[:id])
 
     @today_date = Date.today.in_time_zone.strftime("%B %-d, %Y")
 

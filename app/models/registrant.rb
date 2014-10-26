@@ -115,6 +115,10 @@ class Registrant < ActiveRecord::Base
     self.access_code ||= SecureRandom.hex(4)
   end
 
+  def to_param
+    "#{bib_number}" if persisted?
+  end
+
   # uses the CachedSetModel feature to give a key for this registrant's competitors
   def members_cache_key
     Member.cache_key_for_set(id)

@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
-
-  load_and_authorize_resource :registrant, :only => [:index, :create]
+  load_resource :registrant, find_by: :bib_number, only: [:index, :create]
+  authorize_resource :registrant, only: [:index, :create]
   load_and_authorize_resource :through => :registrant, :only => [:create]
   load_and_authorize_resource :user, only: [:my_songs, :create_guest_song]
   load_and_authorize_resource :except => [:create, :my_songs]

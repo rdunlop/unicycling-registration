@@ -56,6 +56,7 @@ FactoryGirl.define do
       end
     end
     after :stub do |reg|
+      reg.bib_number ||= 1234
       ws = WheelSize.find_by(:description => "24\" Wheel")
       if ws.present?
         reg.default_wheel_size = ws

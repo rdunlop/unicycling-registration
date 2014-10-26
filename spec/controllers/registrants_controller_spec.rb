@@ -334,14 +334,14 @@ describe RegistrantsController do
 
       it "doesn't create a new entry if one already exists" do
         RegistrantChoice.count.should == 0
-        put :update, {:id => @reg.id, :registrant => @attributes}
+        put :update, {:id => @reg.to_param, :registrant => @attributes}
         RegistrantChoice.count.should == 1
       end
       it "can update an existing registrant_choice" do
-        put :update, {:id => @reg.id, :registrant => @attributes}
+        put :update, {:id => @reg.to_param, :registrant => @attributes}
         @attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
         @attributes[:registrant_choices_attributes][0][:id] = RegistrantChoice.first.id
-        put :update, {:id => @reg.id, :registrant => @attributes}
+        put :update, {:id => @reg.to_param, :registrant => @attributes}
         response.should redirect_to(registrant_registrant_expense_items_path(@reg))
       end
     end
@@ -377,11 +377,11 @@ describe RegistrantsController do
       end
 
       it "can update the registrant_event_sign_up" do
-        put :update, {:id => @reg.id, :registrant => @attributes}
+        put :update, {:id => @reg.to_param, :registrant => @attributes}
         response.should redirect_to(registrant_registrant_expense_items_path(@reg))
         @new_attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
         expect {
-          put :update, {:id => @reg.id, :registrant => @new_attributes}
+          put :update, {:id => @reg.to_param, :registrant => @new_attributes}
         }.to change(RegistrantEventSignUp, :count).by(0)
         response.should redirect_to(registrant_registrant_expense_items_path(@reg))
       end
@@ -510,14 +510,14 @@ describe RegistrantsController do
       end
       it "un-deletes a deleted registration" do
         registrant = FactoryGirl.create(:competitor, :deleted => true)
-        post :undelete, {:id => registrant.id }
+        post :undelete, {:id => registrant.to_param }
         registrant.reload
         registrant.deleted.should == false
       end
 
       it "redirects to the index" do
         registrant = FactoryGirl.create(:competitor, :deleted => true)
-        post :undelete, {:id => registrant.id }
+        post :undelete, {:id => registrant.to_param }
         response.should redirect_to(manage_all_registrants_path)
       end
 
@@ -528,7 +528,7 @@ describe RegistrantsController do
         end
         it "Cannot undelete a user" do
           registrant = FactoryGirl.create(:competitor, :deleted => true)
-          post :undelete, {:id => registrant.id }
+          post :undelete, {:id => registrant.to_param }
           registrant.reload
           registrant.deleted.should == true
         end
@@ -548,7 +548,7 @@ describe RegistrantsController do
       end
 
       it "can be changed to a different reg period" do
-        put :update_reg_fee, {:id => @reg.id, :registration_period_id => @rp1.id }
+        put :update_reg_fee, {:id => @reg.to_param, :registration_period_id => @rp1.id }
         response.should redirect_to reg_fee_registrant_path(@reg)
         @reg.reload
         @reg.owing_expense_items.count.should == 1
@@ -561,7 +561,7 @@ describe RegistrantsController do
         payment.completed = true
         payment.save
         @reg.reload
-        put :update_reg_fee, {:id => @reg.id, :registration_period_id => @rp1.id }
+        put :update_reg_fee, {:id => @reg.to_param, :registration_period_id => @rp1.id }
         response.should render_template("reg_fee")
       end
     end
