@@ -84,6 +84,7 @@ describe Registrant do
 
   context "checking required attributes" do
     before :each do
+      @reg.bib_number = nil # clear out the auto-set bib_number
       @reg.set_bib_number
     end
     it "has a valid reg from FactoryGirl" do
@@ -187,6 +188,7 @@ describe Registrant do
       end
       it "assigns the second competitor bib_number 2" do
         @reg2 = FactoryGirl.build_stubbed(:competitor)
+        @reg2.bib_number = nil # clear out the auto-set bib_number
         @reg2.set_bib_number
         @reg2.bib_number.should == 2
       end
@@ -196,6 +198,7 @@ describe Registrant do
   context "checking non-competitor default" do
     it "bib_number is set to 2001 as a non-competitor" do
       @nreg = FactoryGirl.build_stubbed(:noncompetitor)
+      @nreg.bib_number = nil # clear out auto-set bib number
       @nreg.set_bib_number
       @nreg.bib_number.should == 2001
     end
@@ -206,6 +209,7 @@ describe Registrant do
       end
       it "assigns the second noncompetitor bib_number 2002" do
         @reg2 = FactoryGirl.build_stubbed(:noncompetitor)
+        @reg2.bib_number = nil # clear out auto-set bib number
         @reg2.set_bib_number
         @reg2.bib_number.should == 2002
       end
