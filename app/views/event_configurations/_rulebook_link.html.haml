@@ -1,4 +1,3 @@
 - cache ['rulebook_link', I18n.locale, @config] do
   - unless @config.rulebook_url.nil?
     .rulebook_link= link_to t("competition_rulebook"), @config.rulebook_url, :target => '_blank', :title =>"Click here for the rulebook that governs this competition!"
-

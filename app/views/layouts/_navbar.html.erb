@@ -6,7 +6,7 @@
   <% end %>
 
   <% m = Menu.new %>
-  <% if current_user.nil? %>
+  <% if !user_signed_in? %>
     <%
       m.headings << Menu::MenuHeading.new(:title => "Log In", :is_link => true, :url => new_user_session_path)
     %>
@@ -101,7 +101,7 @@
     <% end %>
   <% end %>
 
-  <% unless current_user.nil? %>
+  <% if user_signed_in? %>
     <li id="sign-out"><%= link_to "#{current_user} #{t('sign_out')}", destroy_user_session_path, :method => :delete %></li>
   <% end %>
 </ul>
