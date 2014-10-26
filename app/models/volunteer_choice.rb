@@ -18,7 +18,7 @@
 class VolunteerChoice < ActiveRecord::Base
 
   belongs_to :volunteer_opportunity
-  belongs_to :registrant
+  belongs_to :registrant, inverse_of: :volunteer_choices
 
   after_create :send_email_to_admins
 
@@ -26,6 +26,10 @@ class VolunteerChoice < ActiveRecord::Base
     if volunteer_opportunity.inform_emails.present?
       VolunteerMailer.new_volunteer(self).deliver
     end
+  end
+
+  def to_s
+    volunteer_opportunity.to_s
   end
 
 end

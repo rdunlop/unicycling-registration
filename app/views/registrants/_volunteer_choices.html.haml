@@ -1,0 +1,9 @@
+#volunteer_opportunities
+  %h3 Volunteer Opportunities
+  = hidden_field_tag "registrant[volunteer_opportunity_ids][]"
+  %ul
+    - VolunteerOpportunity.all.each do |vop|
+      %li
+        = check_box_tag "registrant[volunteer_opportunity_ids][]", vop.id, @registrant.volunteer_opportunities.include?(vop), id: "registrant_volunteer_opportunity_#{vop.id}"
+        = label_tag "registrant_volunteer_opportunity_#{vop.id}", vop.description
+

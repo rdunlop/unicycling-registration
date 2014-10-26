@@ -1,0 +1,17 @@
+- @categories = categories
+- @registrant = registrant
+= render "/event_configurations/rulebook_link"
+#tabs
+  %ul
+    - @categories.each do |category|
+      %li
+        %a{:href => "#tabs-#{category.id}"}= category
+  - @categories.each do |category|
+    %div{:id => "tabs-#{category.id}"}
+      - if category.info_url.present?
+        .event_link
+          = link_to "#{t('.more_info')} [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"}
+      %table.events.alternate
+        - category.events.each do |event|
+          - next unless event.visible
+          = render :partial => "/attending/event", :locals => {:f => f, :registrant => @registrant, :category => category}, :object => event

@@ -47,6 +47,8 @@ class Registrant < ActiveRecord::Base
   has_many :registrant_event_sign_ups, :dependent => :destroy , :inverse_of => :registrant
   has_many :signed_up_events, -> { where ["signed_up = ?", true ] }, :class_name => 'RegistrantEventSignUp'
   has_many :registrant_expense_items, -> { includes(:expense_item => [:expense_group => :translations, :translations => []]) }, :dependent => :destroy
+  has_many :volunteer_choices, dependent: :destroy, inverse_of: :registrant
+  has_many :volunteer_opportunities, through: :volunteer_choices
 
   has_many :payment_details, -> {includes :payment}, :dependent => :destroy
   has_many :additional_registrant_accesses, :dependent => :destroy
@@ -79,7 +81,7 @@ class Registrant < ActiveRecord::Base
   accepts_nested_attributes_for :contact_detail
   accepts_nested_attributes_for :registrant_choices
   accepts_nested_attributes_for :registrant_event_sign_ups
-
+  accepts_nested_attributes_for :volunteer_choices
 
   before_create :create_associated_required_expense_items
 
