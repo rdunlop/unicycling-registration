@@ -1,0 +1,45 @@
+!!!
+%html
+  %head
+    = render partial: "layouts/metatags"
+    %title
+      = @config.short_name
+      = t(".registration")
+    = stylesheet_link_tag  @config.style_name, :media => "all"
+    - if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true"
+      = stylesheet_link_tag    "dev", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = render "shared/analytics/google"
+    = render partial: "layouts/mixpanel"
+    /[if lt IE 7]
+      <style media="screen" type="text/css">
+      \#container {
+      height:100%;
+      }
+      </style>
+  %body
+    = render partial: "layouts/admin_headers"
+    #container
+      = render :partial => "layouts/navbar"
+      = render :partial => "layouts/test_mode"
+      - if user_signed_in?
+        %ul.breadcrumbs
+          = render_breadcrumbs tag: "li"
+      - else
+        .base_details
+          %span.title= @config.short_name
+          %br
+          = @config.long_name
+          %br
+          = @config.location
+          %br
+          = @config.dates_description
+          %br
+      #main
+        - unless notice.blank?
+          %p.notice= notice
+        - unless alert.blank?
+          %p.alert= alert
+        = yield
+      = render partial: "layouts/footer"
