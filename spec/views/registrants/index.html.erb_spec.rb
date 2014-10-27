@@ -5,6 +5,7 @@ describe "registrants/index" do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }
+    @user = FactoryGirl.build_stubbed(:user)
   end
 
   describe "with no registrants" do
