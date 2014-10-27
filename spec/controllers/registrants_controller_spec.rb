@@ -59,43 +59,6 @@ describe RegistrantsController do
         end
       end
     end
-
-    describe "as the receiver of a registration request" do
-      before(:each) do
-        @other_user = FactoryGirl.create(:user)
-        @my_reg = FactoryGirl.create(:registrant, :user => @user)
-        @req = FactoryGirl.create(:additional_registrant_access, :user => @other_user, :accepted_readonly => false, :registrant => @my_reg)
-      end
-
-      it "displays a banner" do
-        get :index, {:user_id => @user.id}
-        assigns(:display_invitation_request).should == true
-        assigns(:display_invitation_manage_banner).should == false
-      end
-
-      describe "when I have accepted the request" do
-        before(:each) do
-          @req.accepted_readonly = true
-          @req.save!
-        end
-        it "displays the manage banner" do
-          get :index, {:user_id => @user.id}
-          assigns(:display_invitation_request).should == false
-          assigns(:display_invitation_manage_banner).should == true
-        end
-        describe "when I have a second request" do
-          before(:each) do
-            @my_2nd_reg = FactoryGirl.create(:registrant, :user => @user)
-            FactoryGirl.create(:additional_registrant_access, :user => @other_user, :accepted_readonly => false, :registrant => @my_2nd_reg)
-          end
-          it "displays the invitation banner" do
-            get :index, {:user_id => @user.id}
-            assigns(:display_invitation_request).should == true
-            assigns(:display_invitation_manage_banner).should == true
-          end
-        end
-      end
-    end
   end
 
   describe "get all" do
