@@ -43,8 +43,6 @@ class RegistrantsController < ApplicationController
     @my_registrants = @user.registrants.active
     @shared_registrants = @user.accessible_registrants - @my_registrants
     @total_owing = @user.total_owing
-    @display_invitation_request = @user.invitations.need_reply.count > 0
-    @display_invitation_manage_banner = @user.invitations.permitted.count > 0
     @has_print_waiver = @config.has_print_waiver
 
     respond_to do |format|

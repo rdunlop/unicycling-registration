@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   # get all users who have registrants with unpaid fees
   def self.unpaid_reg_fees
     registrants = Registrant.active.select { |reg| !reg.reg_paid? }
-    users = registrants.map { |reg| reg.user }.flatten.uniq
+    registrants.(&:user).flatten.uniq
   end
 
   def self.paid_reg_fees

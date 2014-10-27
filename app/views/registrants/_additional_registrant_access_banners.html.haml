@@ -1,0 +1,10 @@
+- if @user.invitations.need_reply.any?
+  .invitation_access_banner
+    You have been asked to share a registration with another user.
+    = link_to "See the Registration Access", invitations_user_additional_registrant_accesses_path(@user)
+    page for details.
+- if @user.invitations.permitted.any?
+  .invitation_manage_banner
+    You have shared your registration with another user.
+    = link_to "See the Registration Access", invitations_user_additional_registrant_accesses_path(@user)
+    to adjust settings.
