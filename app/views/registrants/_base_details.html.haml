@@ -1,0 +1,41 @@
+= f.hidden_field :competitor
+%h2= @registrant.competitor ? t(".competitor") : t(".noncompetitor")
+- unless @registrant.new_record?
+  .delete_link
+    - if can? :destroy, @registrant
+      = link_to t('.delete'), registrant_path(@registrant), data: { confirm: "Are you sure you want to delete this registration" }, :method => :delete
+.required= t(".required_fields")
+%fieldset.data_block
+  %legend= t(".base_details")
+  %span
+    = render :partial => "/registrants/name", :locals => {:f => f }
+  %span
+    = f.label :birthday, t(".birthday"), :class => "required"
+    = f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true }
+  %span
+    = f.label :gender_male, t('.male'), :class => "required"
+    = f.radio_button :gender, 'Male'
+    = f.label :gender_female, t('.female'), :class => "required"
+    = f.radio_button :gender, 'Female'
+  = f.fields_for :contact_detail do |cd|
+    %span
+      = cd.label :club, t(".primary_team_or_club_name")
+      = cd.text_field :club
+      %br
+      = cd.label :club_contact, t(".primary_team_or_club_contact")
+      = cd.text_field :club_contact, :size => 25
+    - if @config.usa
+      %span
+        = cd.label :usa_member_number, "USA Membership Number"
+        = cd.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{@config.short_name}"
+        %br
+  %span
+    = f.label :volunteer, t(".i_am_interested_in_volunteering")
+    = f.check_box :volunteer, :title => t(".i_accept_to_be_contacted")
+  -if @registrant.competitor
+    %span
+      = f.label :wheel_size_id, t(".default_wheel_size")
+      = f.collection_select :wheel_size_id, WheelSize.all, :id, :description, {}, title: t(".default_wheel_size_description"), class: "wheel_size_choices"
+      - if @registrant.persisted?
+        = link_to "Set Other Wheel Sizes", registrant_competition_wheel_sizes_path(@registrant), target: "_blank", class: "wheel_size_choices"
+      %registrant_wheel_size_constant 24" Wheel

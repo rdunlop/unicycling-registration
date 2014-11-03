@@ -15,20 +15,8 @@
           - else
             %li= @registrant.errors.full_message(attribute, error_message )
 
-  .data_block
-    = render partial: "/registrants/base_details", locals: {f: f}
-
-    = render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor }
     - unless @categories.nil?
       = render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f }
-    - if VolunteerOpportunity.any?
-      = render partial: "volunteer_choices", locals: {f: f}
-    .data_block
-      = render :partial => "contact_detail", :locals => { :reg_f => f, :other_registrant => @other_registrant }
-    - if @has_online_waiver
-      %br
-      .data_block{:style => "margin-top:20px;"}
-        = render :partial => "online_waiver", :locals => {:f => f, :registrant => @registrant }
   .actions
     - if @registrant.competitor
       = f.submit t('.continue'), :class => "competitor registration_button"

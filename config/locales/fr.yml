@@ -41,10 +41,12 @@ fr:
     edit:
       editing_registrant: "Modifier une entrée de compétiteur"
     form:
+      continue: "Sauver et Continuer (Frais...)"
+    base_details:
       competitor: "Compétiteur"
       noncompetitor: "Non-compétiteur"
-      required_fields: "Champs obligatoires"
       delete: "Supprimer"
+      required_fields: "Champs obligatoires"
       base_details: "Informations de base"
       birthday: "Date de naissance"
       male: "Homme"
@@ -52,10 +54,9 @@ fr:
       primary_team_or_club_name: "Nom de l’équipe principale ou de l’association"
       primary_team_or_club_contact: "Nom du contact de l’équipe principale ou de l’association"
       i_am_interested_in_volunteering: "Je suis intéressé à faire du bénévolat"
+      i_accept_to_be_contacted: "J’accepte d’être contacté par courriel par le Comité organisateur"
       default_wheel_size: "Default Wheel Size"
       default_wheel_size_description: "Used to choose Age Groups when applicable. (track, Standard-class events)"
-      i_accept_to_be_contacted: "J’accepte d’être contacté par courriel par le Comité organisateur"
-      continue: "Sauver et Continuer (Frais...)"
     name:
       name: "Nom"
       first_name: "Prénom"

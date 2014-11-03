@@ -46,10 +46,12 @@ en:
     edit:
       editing_registrant: "Editing Registrant"
     form:
+      continue: "Save & Continue (Expenses...)"
+    base_details:
       competitor: "Competitor"
       noncompetitor: "Non-Competitor"
-      required_fields: "Required fields"
       delete: "Delete"
+      required_fields: "Required fields"
       base_details: "Base Details"
       birthday: "Birthday"
       male: "Male"
@@ -57,10 +59,9 @@ en:
       primary_team_or_club_name: "Primary Team or Club Name"
       primary_team_or_club_contact: "Primary Team or Club Contact"
       i_am_interested_in_volunteering: "I am interested in volunteering"
+      i_accept_to_be_contacted: "I accept to be contacted by email by the Organization team"
       default_wheel_size: "Default Wheel Size"
       default_wheel_size_description: "Used to choose Age Groups when applicable. (track, Standard-class events)"
-      i_accept_to_be_contacted: "I accept to be contacted by email by the Organization team"
-      continue: "Save & Continue (Expenses...)"
     name:
       name: "Name"
       first_name: "First"
