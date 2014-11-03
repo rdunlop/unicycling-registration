@@ -29,8 +29,4 @@
       %br
       .data_block{:style => "margin-top:20px;"}
         = render :partial => "online_waiver", :locals => {:f => f, :registrant => @registrant }
-  .actions
-    - if @registrant.competitor
-      = f.submit t('.continue'), :class => "competitor registration_button"
-    - else
-      = f.submit t('.continue'), :class => "noncompetitor registration_button"
+  = render partial: "/registrants/form_actions", locals: {f: f}

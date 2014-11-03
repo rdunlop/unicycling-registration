@@ -45,7 +45,7 @@ en:
       new_registration: "New Registration"
     edit:
       editing_registrant: "Editing Registrant"
-    form:
+    form_actions:
       continue: "Save & Continue (Expenses...)"
     base_details:
       competitor: "Competitor"

@@ -1,4 +1,4 @@
-= form_for(setup_registrant_choices(@registrant)) do |f|
+= form_for(setup_registrant_choices(@registrant), url: wizard_path, method: :put) do |f|
   - if @registrant.errors.any?
     #error_explanation
       %h2
@@ -17,9 +17,5 @@
 
   .data_block
     - if VolunteerOpportunity.any?
-      = render partial: "volunteer_choices", locals: {f: f}
-  .actions
-    - if @registrant.competitor
-      = f.submit t('.continue'), :class => "competitor registration_button"
-    - else
-      = f.submit t('.continue'), :class => "noncompetitor registration_button"
+      = render partial: "/registrants/volunteer_choices", locals: {f: f}
+  = render partial: "/registrants/form_actions", locals: {f: f}

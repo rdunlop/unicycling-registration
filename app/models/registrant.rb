@@ -21,6 +21,7 @@
 #  online_waiver_signature :string(255)
 #  access_code             :string(255)
 #  sorted_last_name        :string(255)
+#  status                  :string(255)      default("active"), not null
 #
 # Indexes
 #

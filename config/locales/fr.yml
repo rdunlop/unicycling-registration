@@ -40,7 +40,7 @@ fr:
       new_registration: "Nouvelle entrée de compétiteur"
     edit:
       editing_registrant: "Modifier une entrée de compétiteur"
-    form:
+    form_actions:
       continue: "Sauver et Continuer (Frais...)"
     base_details:
       competitor: "Compétiteur"
