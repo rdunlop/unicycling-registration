@@ -331,6 +331,8 @@ GEM
       rack (>= 1.0)
     watchr (0.7)
     websocket-driver (0.3.2)
+    wicked (1.1.0)
+      rails (>= 3.0.7)
     wicked_pdf (0.11.0)
       rails
     wkhtmltopdf-binary (0.9.9.3)
@@ -390,5 +392,6 @@ DEPENDENCIES
   unicorn
   virtus
   watchr
+  wicked
   wicked_pdf
   wkhtmltopdf-binary

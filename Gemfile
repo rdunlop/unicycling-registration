@@ -28,16 +28,19 @@ gem 'paper_trail', '~> 3.0.1'
 gem 'exception_notification'
 gem 'memcachier'
 gem 'dalli'
-gem 'acts_as_list'
 gem 'rails_admin'
 gem "fog"
+gem 'http_accept_language'
+gem 'newrelic_rpm'
+
+# Model utils
+gem 'acts_as_list'
 gem 'carrierwave_direct'
 gem 'carmen', '1.0.0' # locked to 1.0.0 because 1.0.1 removed Puerto Rico
 gem 'carmen-rails'
-gem 'http_accept_language'
 gem 'globalize', '~> 4.0.2'
 gem 'virtus'
-gem 'newrelic_rpm'
+gem "wicked"
 
 #gem 'sqlite3'
 gem 'pg'
