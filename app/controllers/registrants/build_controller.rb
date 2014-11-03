@@ -8,24 +8,57 @@ class Registrants::BuildController < ApplicationController
   before_action :load_registrant, only: [:show, :update]
   before_action :load_categories, only: [:show, :update, :add_events]
 
+  def finish_wizard_path
+    registrant_registrant_expense_items_path(@registrant)
+  end
+
   def show
+    case wizard_value(step)
+    when :add_name
+      @has_online_waiver = @config.has_online_waiver
+      @registrant.build_contact_detail if @registrant.contact_detail.nil?
+      unless current_user.registrants.empty?
+        @other_registrant = (current_user.registrants.active - [@registrant]).first
+      end
+    when :add_events
+      skip_step unless @registrant.competitor # only display events for competitors
+    end
+
     render_wizard
   end
 
   def update
-    #params[:registrant][:status] = step.to_s
-    #params[:registrant][:status] = 'active' if step == steps.last
+    case wizard_value(step)
+    when :add_name
+      @registrant.status = "base_details" if @registrant.status == "blank"
+    when :add_events
+      @registrant.status = "events" if @registrant.status == "base_details"
+    when :add_volunteers
+      @registrant.status = "volunteers" if @registrant.status == "events"
+    end
+    @registrant.status = 'active' if step == steps.last
+
     @registrant.update_attributes(registrant_params)
     render_wizard @registrant
   end
 
 
+  # create an initial registrant/blank record
   def create
-    @registrant = Registrant.create
-    redirect_to wizard_path(steps.first, :registrant_id => @registrant.id)
+    competitor_status = get_competitor_value
+    @registrant = Registrant.create status: "blank", competitor: competitor_status, user: @user
+    redirect_to wizard_path(steps.first, user_id: @user, :registrant_id => @registrant.id)
   end
 
   private
+
+  def get_competitor_value
+    if params[:non_competitor].nil?
+      true
+    else
+      ! (params[:non_competitor] == "true")
+    end
+  end
 
   def load_registrant
     @registrant = Registrant.find(params[:registrant_id])

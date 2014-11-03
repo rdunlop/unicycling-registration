@@ -31,6 +31,7 @@ describe 'Logging in to the system' do
       context 'filling in the necessary information' do
         include_context 'basic registrant data'
         before :each do
+          click_button 'Save & Continue (Expenses...)'
           check '100m'
           click_button 'Save & Continue (Expenses...)'
         end

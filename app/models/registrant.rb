@@ -86,33 +86,54 @@ class Registrant < ActiveRecord::Base
 
   before_create :create_associated_required_expense_items
 
-
+  # always present validations
   before_validation :set_bib_number, :on => :create
-  before_validation :set_age
-  before_validation :set_default_wheel_size
-
-  validates_associated :contact_detail
-  validates_associated :registrant_expense_items
-
-  before_validation :set_sorted_last_name
-  validates :first_name, :last_name, :sorted_last_name, :birthday, :gender, :presence => true
-  validates :user_id, :bib_number, :age, :default_wheel_size, :presence => true
-
   validates :competitor, :ineligible, :deleted, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}
-  validate  :gender_present
-
-  validates :online_waiver_signature, :presence => true, :if => "EventConfiguration.singleton.has_online_waiver"
   validate :no_payments_when_deleted
-
-  validate :choices_combination_valid
-  validate :not_exceeding_expense_item_limits
-  validate :check_default_wheel_size_for_age
-
   before_validation :set_access_code
   validates :access_code, presence: true
+  validates :status, presence: true
+
+  # Base details
+  before_validation :set_age, if: :active_or_base_details?
+  before_validation :set_default_wheel_size, if: :active_or_base_details?
+  validates_associated :contact_detail, if: :active_or_base_details?
+  before_validation :set_sorted_last_name, if: :active_or_base_details?
+  validates :first_name, :last_name, :sorted_last_name, :birthday, :gender, :presence => true, if: :active_or_base_details?
+  validates :user_id, :bib_number, :age, :default_wheel_size, :presence => true, if: :active_or_base_details?
+  validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}, if: :active_or_base_details?
+  validate  :gender_present, if: :active_or_base_details?
+  validate :check_default_wheel_size_for_age, if: :active_or_base_details?
+
+  # events
+  validate :choices_combination_valid, if: :active_or_events?
+
+  # Expense items
+  validate :not_exceeding_expense_item_limits, if: :validated?
+  validates_associated :registrant_expense_items, if: :validated?
+
+  # waiver
+  validates :online_waiver_signature, :presence => true, if: :active_or_event_config?
 
   scope :active, -> { where(:deleted => false).order(:bib_number) }
+
+  # Wizard status helpers
+  def validated?
+    status == "active"
+  end
+
+  def active_or_base_details?
+    status == "base_details" || validated?
+  end
+
+  def active_or_events?
+    status == "events" || validated?
+  end
+
+  def active_or_event_config?
+    EventConfiguration.singleton.has_online_waiver && validated?
+  end
+  # end Wizard
 
   def set_access_code
     self.access_code ||= SecureRandom.hex(4)
@@ -306,6 +327,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def name
+    return "(incomplete)" if self.first_name.nil? or self.last_name.nil?
     full_name = self.first_name + " " + self.last_name
     display_eligibility(full_name, ineligible)
   end

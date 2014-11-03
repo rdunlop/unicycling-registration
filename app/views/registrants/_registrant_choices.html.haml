@@ -1,3 +1,5 @@
+- use_wizard = true
+
 - if true
   .pricing_options
     .pricing_option.recommended.competitor_sign_up
@@ -11,7 +13,10 @@
         %li Buy T-Shirts
         %li Buy Dinner Tickets
         %li Support the Unicycling community
-      = link_to t(".create_new_competitor"), new_registrant_path, :class => "competitor registration_button"
+      - if use_wizard
+        = link_to t(".create_new_competitor"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", competitor: true), :class => "competitor registration_button", method: :post
+      - else
+        = link_to t(".create_new_competitor"), new_registrant_path, :class => "competitor registration_button"
     .pricing_option.non-competitor_sign_up
       %h3.title= t('noncompetitor')
       .current_price $40
@@ -22,7 +27,10 @@
         %li Buy T-Shirts
         %li Buy Dinner Tickets
         %li Support the Unicycling community
-      = link_to t(".create_new_noncompetitor"), new_registrant_path(:non_competitor => true), :class => "noncompetitor registration_button"
+      - if use_wizard
+        = link_to t(".create_new_noncompetitor"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", non_competitor: true), :class => "noncompetitor registration_button", method: :post
+      - else
+        = link_to t(".create_new_noncompetitor"), new_registrant_path(:non_competitor => true), :class => "noncompetitor registration_button"
     .pricing_option.spectator_sign_up
       %h3.title= t('spectator')
       .current_price $0
@@ -33,7 +41,10 @@
         %li Buy T-Shirts
         %li Buy Dinner Tickets
         %li Support the Unicycling community
-      = link_to t(".create_new_spectator"), new_registrant_path(:non_competitor => true), :class => "spectator registration_button"
+      - if use_wizard
+        = link_to t(".create_new_spectator"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", competitor: nil), :class => "spectator registration_button", method: :post
+      - else
+        = link_to t(".create_new_spectator"), new_registrant_path(:non_competitor => true), :class => "spectator registration_button"
 - else
   .pricing_options
     .pricing_option
