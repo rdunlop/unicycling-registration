@@ -184,7 +184,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.2)
-    libv8 (3.16.14.3)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     memcachier (0.0.2)
@@ -257,7 +256,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.3.2)
-    ref (1.0.5)
     remotipart (1.2.1)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
@@ -308,9 +306,6 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     syntax (1.2.0)
-    therubyracer (0.12.1)
-      libv8 (~> 3.16.14.0)
-      ref
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -391,7 +386,6 @@ DEPENDENCIES
   spork-rails
   spreadsheet
   syntax
-  therubyracer
   uglifier (>= 1.0.3)
   unicorn
   virtus
