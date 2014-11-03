@@ -1,0 +1,117 @@
+= reg_f.fields_for :contact_detail do |f|
+  %fieldset
+    %legend= t(".contact_information")
+    %fieldset.data_block
+      %legend= t(".address")
+      %table
+        - unless other_registrant.nil?
+          %tr
+            %td{:colspan => "2"}
+              %a#copy_address{ data: { address: other_registrant.contact_detail.address,
+                city: other_registrant.contact_detail.city,
+                country_representing: other_registrant.contact_detail.country_representing,
+                country_residence: other_registrant.contact_detail.country_residence,
+                phone: other_registrant.contact_detail.phone,
+                state: other_registrant.contact_detail.state,
+                zip: other_registrant.contact_detail.zip },
+                href: "#" }
+                Copy Address from #{other_registrant.name}
+        %tr
+          %td
+            = f.label :address, t(".address"), :class => "required"
+          %td
+            = f.text_field :address
+        %tr
+          %td
+            = f.label :city, t(".city"), :class => "required"
+          %td
+            = f.text_field :city
+        %tr
+          %td
+            - if @config.usa == true
+              = f.label :state, t(".state"), :class => "required"
+            - else
+              = f.label :state, t(".state_province")
+          %td
+            = f.text_field :state
+        %tr
+          %td
+            = f.label :country_residence, t(".country_of_residence"), :class => "required"
+          %td
+            - if @config.usa
+              = f.country_select :country_residence, priority: %w(US CA), prompt: ' '
+            - else
+              = f.country_select :country_residence, prompt: ' '
+        %tr
+          %td
+            = f.label :country_representing, t(".country_representing"), :title => t(".country_representing_description")
+          %td
+            - if @config.usa
+              = f.country_select(:country_representing, {priority: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description") })
+            - else
+              = f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description") })
+        %tr
+          %td
+            = f.label :zip, t(".zip"), :class => "required"
+          %td
+            = f.text_field :zip
+        %tr
+          %td
+            = f.label :phone, t(".phone")
+          %td
+            = f.telephone_field :phone
+        %tr
+          %td
+            = f.label :mobile, t(".mobile")
+          %td
+            = f.telephone_field :mobile
+        %tr
+          %td
+            = f.label :email, t(".email")
+          %td
+            = f.email_field :email, :class => "ui-tooltip", :title => "Provide your email address to receive updates to registration, schedule, and new events."
+    %fieldset.data_block
+      %legend= t(".emergency_contact")
+      %table
+        %tr
+          %th{:colspan => "2"}
+            %b= t(".in_case_of_emergency")
+        %tr
+          %td
+            = f.label :emergency_name, t(".name"), :class => "required"
+          %td
+            = f.text_field :emergency_name
+        %tr
+          %td
+            = f.label :emergency_relationship, t(".relationship"), :class => "required"
+          %td
+            = f.text_field :emergency_relationship
+        %tr
+          %td
+            = f.label :emergency_attending, "#{t(".attending")} #{@config.short_name}?"
+          %td
+            = f.check_box :emergency_attending
+        %tr
+          %td
+            = f.label :emergency_primary_phone, t(".primary_phone"), :class => "required"
+          %td
+            = f.telephone_field :emergency_primary_phone
+        %tr
+          %td
+            = f.label :emergency_other_phone, t(".other_phone")
+          %td
+            = f.telephone_field :emergency_other_phone
+    %fieldset.data_block
+      %legend= t(".responsible_adult")
+      %span.extra_info= t(".responsible_adult_detail")
+      %table
+        %tr
+          %td
+            = f.label :responsible_adult_name, t(".name")
+          %td
+            = f.text_field :responsible_adult_name, :class => "ui-tooltip", :title => "The 'Responsible Adult' will be responsible for the registered minor."
+        %tr
+          %td
+            = f.label :responsible_adult_phone, t(".phone")
+          %td
+            = f.telephone_field :responsible_adult_phone
