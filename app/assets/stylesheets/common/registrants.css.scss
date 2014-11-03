@@ -7,12 +7,16 @@ $competitor: #12AC50;
 $competitor_hover: #4CD673;
 $noncompetitor: #266DA5;
 $noncompetitor_hover: #3487C9;
+$spectator: yellow;
 
 .competitor {
   background-color: $competitor;
 }
 .competitor:hover {
   background-color: $competitor_hover;
+}
+.spectator {
+  background-color: $spectator;
 }
 .competitor:active {
   background-color: #55ff55;
@@ -110,20 +114,7 @@ div.required {
 }
 
 // LAYOUT
-.registration_sign_up{
 
-}
-
-.competitor_sign_up,
-.non-competitor_sign_up {
-  display: inline-block;
-  margin: 0;
-  width:49%;
-  a {
-    margin-right: 7%;
-    margin-left: 7%;
-  }
-}
 .sign_up_difference,
 .rulebook_link {
   display: block;
@@ -131,14 +122,6 @@ div.required {
   clear:both;
   text-align: center;
   margin:5px 0 10px 0;
-}
-
-.competitor_sign_up {
-  text-align: right;
-}
-
-.non-competitor_sign_up {
-  text-align: left;
 }
 
 // http://www.usabilitypost.com/2012/01/10/pressed-button-state-with-css3/

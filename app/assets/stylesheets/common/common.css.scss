@@ -1,6 +1,5 @@
-// Place all the application-wide stylesstyles here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$recommended-color: lightblue;
+
 .dev_banner {
   font-weight: bold;
   color: white;
@@ -126,6 +125,45 @@ table.alternate,
 .competitor_sign_up table,
 .non-competitor_sign_up table {
   border-collapse: collapse;
+}
+
+.pricing_options {
+  display: block;
+  .pricing_option {
+    width: 32%;
+    display: inline-block;
+    border: grey thick solid;
+    @media only screen and (max-width: 1000px) {
+      clear: both;
+      width: 100%;
+    }
+    .current_price {
+      font-size: 30px;
+    }
+    .price_note {
+      font-size: 12px;
+    }
+    .price_details {
+      padding: 0;
+      list-style: none;
+    }
+    .highlighted {
+      background-color: rgb(173, 230, 193);
+    }
+  }
+  .recommended {
+    border: $recommended-color thick solid;
+
+    .recommended_title {
+      background-color: $recommended-color;
+      margin: 0;
+    }
+  }
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
 }
 
 input[type="submit"] {

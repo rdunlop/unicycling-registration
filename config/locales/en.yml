@@ -2,6 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  competitor: "Competitor"
+  noncompetitor: "Non-Competitor"
+  spectator: "Spectator"
   layouts:
     application:
       registration: "Registration"
@@ -15,16 +18,18 @@ en:
   registrants:
     index:
       registration: "Registration"
-      create_new_competitor: "Create New Competitor"
-      create_new_noncompetitor: "Create New Non-Competitor"
       whats_the_difference: "What’s the difference?"
-      comp_registration_cost: "Competitor Registration Cost"
-      noncomp_registration_cost: "Non-Competitor Registration Cost"
       be_sure_to_submit_payment: "Once you have created your registrations, be sure to submit payment."
       note_date_of_payment_html: "NOTE! - It is the <b>date of your payment that defines the registration fee</b>, NOT the registration date."
       registration_time: "Registering takes about 15 minutes."
       can_change_events: "After you have finished your registration, you are still able to change your event data."
       onsite_restricted_events: "In order to schedule events properly, On-Site registration will not offer all of the events/items that pre-registration allows."
+    registrant_choices:
+      recommended: Recommended
+      registration: "Registration"
+      create_new_competitor: "Create New Competitor"
+      create_new_noncompetitor: "Create New Non-Competitor"
+      create_new_spectator: "Create New Spectator"
     registrants_list:
       registrations: "Registrations"
       total_amount_owing: "Total Amount Owing:"

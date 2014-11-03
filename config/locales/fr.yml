@@ -1,6 +1,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for other language starting points.
 
 fr:
+  competitor: "Compétiteur"
+  noncompetitor: "Non-compétiteur"
+  spectator: "Spectateur"
   layouts:
     application:
       registration: "Inscriptions"
@@ -9,9 +12,11 @@ fr:
       registration_date_format: "%d %b, %Y"
   registrants:
     index:
+      recommended: Recommandé
       registration: "Inscriptions"
       create_new_competitor: "Inscrire un nouveau compétiteur"
       create_new_noncompetitor: "Inscrire un nouveau non-compétiteur"
+      create_new_spectator: "Inscrire un nouveau spectateur"
       whats_the_difference: "Quelle est la différence ?"
       comp_registration_cost: "Prix d’inscription – Compétiteur"
       noncomp_registration_cost: "Prix d’inscription – Non-compétiteur"

@@ -5,23 +5,11 @@
 
 = render "reg_closed_banner" if EventConfiguration.closed?
 
-%div
-  - if can? :create, Registrant
-    .competitor_sign_up
-      = link_to t(".create_new_competitor"), new_registrant_path, :class => "competitor registration_button"
-    .non-competitor_sign_up
-      = link_to t(".create_new_noncompetitor"), new_registrant_path(:non_competitor => true), :class => "noncompetitor registration_button"
+- if can? :create, Registrant # until registration is closed
+  = render "registrant_choices"
   - unless @config.comp_noncomp_url.nil?
     .sign_up_difference
       = link_to t(".whats_the_difference"), @config.comp_noncomp_url, :class => "fancybox", :title =>"Click here for more information!"
-  .competitor_sign_up
-    = render :partial => "registration_periods/list", :locals => {:competitor => true }
-    %br
-    %br
-  .non-competitor_sign_up
-    = render :partial => "registration_periods/list", :locals => {:competitor => false }
-    %br
-    %br
 = render "/event_configurations/rulebook_link"
 - if @shared_registrants.count > 0
   %div

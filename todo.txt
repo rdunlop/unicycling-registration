@@ -1,5 +1,8 @@
 Last Re-Arranged June 20th, 2014.
 
+- translate the volunteer options form
+- translate the volunteer options form text fields
+
 PDF filenames should use the awards names for filenames.
 Use a less-ugly looking randomizer for the pdf filename.
 
