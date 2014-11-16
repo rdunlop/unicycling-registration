@@ -125,7 +125,7 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   # config.timeout_in = 30.minutes
-  
+
   # If true, expires auth token on session timeout.
   # config.expire_auth_token_on_timeout = false
 
@@ -233,30 +233,5 @@ Devise.setup do |config|
     config.secret_key = ('x' * 30)
   else
     config.secret_key = ENV['SECRET']
-  end
-end
-
-# ROBIN DUNLOP
-# NOTE: The following must be here because the strong_parameters 0.2.1 gem has a bug 
-# which prevents it from working properly with the devise gem.
-# When we remove strong_parameters gem, we can get rid of this
-module ActionController
-  class Parameters < ActiveSupport::HashWithIndifferentAccess
-    def permit(*filters)
-      params = self.class.new
-
-      filters.flatten.each do |filter|
-        case filter
-        when Symbol, String
-          permitted_scalar_filter(params, filter)
-        when Hash then
-          hash_filter(params, filter)
-        end
-      end
-
-      unpermitted_parameters!(params) if self.class.action_on_unpermitted_parameters
-
-      params.permit!
-    end
   end
 end
