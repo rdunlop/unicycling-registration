@@ -31,19 +31,21 @@ FactoryGirl.define do
     birthday Date.new(1990,11,10)
     gender "Male"
     user # FactoryGirl
-    competitor true
+    registrant_type 'competitor'
     ineligible false
     contact_detail # FactoryGirl
 
     factory :competitor do
-      competitor true
+      registrant_type 'competitor'
     end
     factory :noncompetitor do
-      competitor false
+      registrant_type 'noncompetitor'
+    end
+    factory :spectator do
+      registrant_type 'spectator'
     end
 
-    factory :minor_competitor do
-      competitor true
+    factory :minor_competitor, parent: :competitor do
       before(:create) do |reg|
         reg.contact_detail.responsible_adult_name = "Bob Smith"
         reg.contact_detail.responsible_adult_phone = "911"

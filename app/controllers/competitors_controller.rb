@@ -117,7 +117,7 @@ class CompetitorsController < ApplicationController
     @competitor = @competition.competitors.new # so that the form renders ok
     respond_to do |format|
       begin
-        msg = @competition.create_competitors_from_registrants(Registrant.where(:competitor => true))
+        msg = @competition.create_competitors_from_registrants(Registrant.competitor)
         format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
       rescue Exception => ex
         new

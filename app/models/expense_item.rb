@@ -88,13 +88,13 @@ class ExpenseItem < ActiveRecord::Base
 
   def create_reg_items
     if self.expense_group.competitor_required
-      Registrant.where({:competitor => true}).each do |reg|
+      Registrant.competitor.each do |reg|
         reg.build_registration_item(self)
         reg.save
       end
     end
     if self.expense_group.noncompetitor_required
-      Registrant.where({:competitor => false}).each do |reg|
+      Registrant.notcompetitor.each do |reg|
         reg.build_registration_item(self)
         reg.save
       end

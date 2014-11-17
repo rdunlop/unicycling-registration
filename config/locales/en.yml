@@ -46,7 +46,7 @@ en:
     edit:
       editing_registrant: "Editing Registrant"
     form_actions:
-      continue: "Save & Continue (Expenses...)"
+      continue: "Save & Continue"
     base_details:
       competitor: "Competitor"
       noncompetitor: "Non-Competitor"

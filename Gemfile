@@ -60,6 +60,7 @@ group :naucc, :development, :test, :cucumber, :caching do
   #gem 'brakeman'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'rspec-instafail', require: false
   gem 'spork-rails'
   gem 'syntax'
   gem 'watchr'

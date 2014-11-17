@@ -105,7 +105,7 @@ describe CompetitorsController do
         before(:each) do
             FactoryGirl.create(:registrant, :bib_number => 1)
             FactoryGirl.create(:registrant, :bib_number => 2)
-            FactoryGirl.create(:registrant, :bib_number => 3, :competitor => false)
+            FactoryGirl.create(:noncompetitor, :bib_number => 3)
         end
         it "should create a competitor for every registrant" do
             expect {

@@ -138,7 +138,7 @@ describe RegistrantsController do
 
   describe "GET new" do
     it "assigns a new competitor as @registrant" do
-      get :new, {}
+      get :new, {registrant_type: 'competitor'}
       assigns(:registrant).should be_a_new(Registrant)
       assigns(:registrant).competitor.should == true
     end
@@ -147,7 +147,7 @@ describe RegistrantsController do
       @category3 = FactoryGirl.create(:category, :position => 3)
       @category2 = FactoryGirl.create(:category, :position => 2)
 
-      get 'new'
+      get 'new', {registrant_type: 'competitor'}
       assigns(:categories).should == [@category1, @category2, @category3]
     end
     it "sets other_registrant as nil" do
@@ -178,7 +178,7 @@ describe RegistrantsController do
 
   describe "GET new (noncompetitor)" do
     it "assigns a new noncompetitor as @registrant" do
-      get :new, {:non_competitor => "true"}
+      get :new, {registrant_type: 'noncompetitor'}
       assigns(:registrant).should be_a_new(Registrant)
       assigns(:registrant).competitor.should == false
       assigns(:categories).should == nil
@@ -205,7 +205,7 @@ describe RegistrantsController do
       before(:each) do
         @ws20 = FactoryGirl.create(:wheel_size_20)
         @ws24 = FactoryGirl.create(:wheel_size_24)
-        @comp_attributes = valid_attributes.merge({:competitor => true})
+        @comp_attributes = valid_attributes.merge({registrant_type: 'competitor'})
       end
       it "creates a new Registrant" do
         expect {
@@ -216,7 +216,7 @@ describe RegistrantsController do
       it "assigns the registrant to the current user" do
         expect {
           post :create, {:registrant => valid_attributes.merge(
-            competitor: true)
+            registrant_type: 'competitor')
           }
         }.to change(Registrant, :count).by(1)
         Registrant.last.user.should == @user
@@ -244,27 +244,27 @@ describe RegistrantsController do
       it "assigns a newly created but unsaved registrant as @registrant" do
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        post :create, {:registrant => {:competitor => true}}
+        post :create, {:registrant => {registrant_type: 'competitor'}}
         assigns(:registrant).should be_a_new(Registrant)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        post :create, {:registrant => {:competitor => true}}
+        post :create, {:registrant => {registrant_type: 'competitor'}}
         response.should render_template("new")
       end
       it "has categories" do
         # Trigger the behavior that occurs when invalid params are submitted
         category1 = FactoryGirl.create(:category, :position => 1)
         Registrant.any_instance.stub(:save).and_return(false)
-        post :create, {:registrant => {:competitor => true}}
+        post :create, {:registrant => {registrant_type: 'competitor'}}
         assigns(:categories).should == [category1]
       end
       it "should not load categories for a noncompetitor" do
         category1 = FactoryGirl.create(:category, :position => 1)
         Registrant.any_instance.stub(:save).and_return(false)
-        post :create, {:registrant => {:competitor => false}}
+        post :create, {:registrant => {registrant_type: 'noncompetitor'}}
         assigns(:categories).should == nil
       end
     end
@@ -274,7 +274,7 @@ describe RegistrantsController do
         @ev = FactoryGirl.create(:event)
         @ec = FactoryGirl.create(:event_choice, :event => @ev)
         @attributes = valid_attributes.merge({
-          :competitor => true,
+          registrant_type: 'competitor',
           :registrant_event_sign_ups_attributes => [
             { :signed_up => "1",
               :event_category_id => @ev.event_categories.first.id,
@@ -314,7 +314,7 @@ describe RegistrantsController do
         @reg = FactoryGirl.create(:registrant, :user => @user)
         @ecat = FactoryGirl.create(:event).event_categories.first
         @attributes = valid_attributes.merge({
-          :competitor => true,
+          registrant_type: 'competitor',
           :registrant_event_sign_ups_attributes => [
             { :event_category_id => @ecat.id,
               :event_id => @ecat.event.id,
@@ -323,7 +323,7 @@ describe RegistrantsController do
         ]
         })
         @new_attributes = valid_attributes.merge({
-          :competitor => true,
+          registrant_type: 'competitor',
           :registrant_event_sign_ups_attributes => [
             { :event_category_id => @ecat.id,
               :event_id => @ecat.event.id,
@@ -371,7 +371,7 @@ describe RegistrantsController do
 
       it "cannot change the competitor to a non-competitor" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
-        put :update, {:id => registrant.to_param, :registrant => valid_attributes.merge({:competitor => false})}
+        put :update, {:id => registrant.to_param, :registrant => valid_attributes.merge({registrant_type: 'noncompetitor'})}
         assigns(:registrant).should eq(registrant)
         assigns(:registrant).competitor.should == true
       end
@@ -390,26 +390,27 @@ describe RegistrantsController do
     end
 
     describe "with invalid params" do
+      let(:registrant) { FactoryGirl.create(:competitor, user: @user) }
+      let(:do_action) {
+        put :update, {:id => registrant.to_param, :registrant => {registrant_type: 'competitor'}}
+      }
       it "assigns the registrant as @registrant" do
-        registrant = FactoryGirl.create(:competitor, :user => @user)
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registrant.to_param, :registrant => {:competitor => true}}
+        do_action
         assigns(:registrant).should eq(registrant)
       end
       it "loads the categories" do
-        registrant = FactoryGirl.create(:competitor, :user => @user)
         category1 = FactoryGirl.create(:category, :position => 1)
         Registrant.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registrant.to_param, :registrant => {:competitor => true}}
+        do_action
         assigns(:categories).should == [category1]
       end
 
       it "re-renders the 'edit' template" do
-        registrant = FactoryGirl.create(:competitor, :user => @user)
         # Trigger the behavior that occurs when invalid params are submitted
         Registrant.any_instance.stub(:save).and_return(false)
-        put :update, {:id => registrant.to_param, :registrant => {:competitor => true}}
+        do_action
         response.should render_template("edit")
       end
     end

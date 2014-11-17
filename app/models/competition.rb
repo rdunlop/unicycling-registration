@@ -273,7 +273,7 @@ class Competition < ActiveRecord::Base
 
   def other_eligible_registrants
     if EventConfiguration.singleton.usa?
-      Registrant.active.where(:competitor => true).order(:bib_number) - registrants
+      Registrant.active.competitor.order(:bib_number) - registrants
     else
       []
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103011619) do
+ActiveRecord::Schema.define(version: 20141116224808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -668,7 +668,6 @@ ActiveRecord::Schema.define(version: 20141103011619) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.boolean  "competitor"
     t.boolean  "deleted"
     t.integer  "bib_number"
     t.integer  "wheel_size_id"
@@ -678,10 +677,12 @@ ActiveRecord::Schema.define(version: 20141103011619) do
     t.string   "online_waiver_signature"
     t.string   "access_code"
     t.string   "sorted_last_name"
-    t.string   "status",                  default: "active", null: false
+    t.string   "status",                  default: "active",     null: false
+    t.string   "registrant_type",         default: "competitor"
   end
 
   add_index "registrants", ["deleted"], name: "index_registrants_deleted", using: :btree
+  add_index "registrants", ["registrant_type"], name: "index_registrants_on_registrant_type", using: :btree
   add_index "registrants", ["user_id"], name: "index_registrants_on_user_id", using: :btree
 
   create_table "registration_period_translations", force: true do |t|

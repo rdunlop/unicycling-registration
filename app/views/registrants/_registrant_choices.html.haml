@@ -14,9 +14,9 @@
         %li Buy Dinner Tickets
         %li Support the Unicycling community
       - if use_wizard
-        = link_to t(".create_new_competitor"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", competitor: true), :class => "competitor registration_button", method: :post
+        = link_to t(".create_new_competitor"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", registrant_type: 'competitor'), :class => "competitor registration_button", method: :post
       - else
-        = link_to t(".create_new_competitor"), new_registrant_path, :class => "competitor registration_button"
+        = link_to t(".create_new_competitor"), new_registrant_path(registrant_type: 'competitor'), :class => "competitor registration_button"
     .pricing_option.non-competitor_sign_up
       %h3.title= t('noncompetitor')
       .current_price $40
@@ -28,9 +28,9 @@
         %li Buy Dinner Tickets
         %li Support the Unicycling community
       - if use_wizard
-        = link_to t(".create_new_noncompetitor"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", non_competitor: true), :class => "noncompetitor registration_button", method: :post
+        = link_to t(".create_new_noncompetitor"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", registrant_type: 'noncompetitor'), :class => "noncompetitor registration_button", method: :post
       - else
-        = link_to t(".create_new_noncompetitor"), new_registrant_path(:non_competitor => true), :class => "noncompetitor registration_button"
+        = link_to t(".create_new_noncompetitor"), new_registrant_path(registrant_type: 'noncompetitor'), :class => "noncompetitor registration_button"
     .pricing_option.spectator_sign_up
       %h3.title= t('spectator')
       .current_price $0
@@ -42,14 +42,14 @@
         %li Buy Dinner Tickets
         %li Support the Unicycling community
       - if use_wizard
-        = link_to t(".create_new_spectator"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", competitor: nil), :class => "spectator registration_button", method: :post
+        = link_to t(".create_new_spectator"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", registrant_type: 'spectator'), :class => "spectator registration_button", method: :post
       - else
-        = link_to t(".create_new_spectator"), new_registrant_path(:non_competitor => true), :class => "spectator registration_button"
+        = link_to t(".create_new_spectator"), new_registrant_path(registrant_type: 'spectator'), :class => "spectator registration_button"
 - else
   .pricing_options
     .pricing_option
-      = link_to t(".create_new_competitor"), new_registrant_path, :class => "competitor registration_button"
+      = link_to t(".create_new_competitor"), new_registrant_path(registrant_type: 'competitor'), :class => "competitor registration_button"
       = render :partial => "registration_periods/list", :locals => {:competitor => true }
     .pricing_option
-      = link_to t(".create_new_noncompetitor"), new_registrant_path(:non_competitor => true), :class => "noncompetitor registration_button"
+      = link_to t(".create_new_noncompetitor"), new_registrant_path(registrant_type: 'noncompetitor'), :class => "noncompetitor registration_button"
       = render :partial => "registration_periods/list", :locals => {:competitor => false }

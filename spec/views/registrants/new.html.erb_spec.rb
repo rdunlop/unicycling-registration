@@ -30,12 +30,12 @@ describe "registrants/new" do
         assert_select "input#registrant_middle_initial", :name => "registrant[middle_initial]"
         assert_select "input#registrant_last_name", :name => "registrant[last_name]"
         assert_select "input#registrant_gender_male", :name => "registrant[gender]"
-        assert_select "input#registrant_competitor", :name => "registrant[competitor]"
+        assert_select "input#registrant_registrant_type", :name => "registrant[registrant_type]"
       end
     end
     it "displays the 'Continue' button" do
       render
-      assert_select "input[value='Save &amp; Continue (Expenses...)']", 1
+      assert_select "input[value='Save &amp; Continue']", 1
     end
   end
 
@@ -49,7 +49,7 @@ describe "registrants/new" do
     end
     it "displays the 'Save Registration' button" do
       render
-      assert_select "input[value='Save &amp; Continue (Expenses...)']", 1
+      assert_select "input[value='Save &amp; Continue']", 1
     end
   end
 

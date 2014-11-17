@@ -7,7 +7,7 @@ class CompetitionSignUp
 
     @agt = competition.age_group_type
 
-    all_registrants = Registrant.active.where(:competitor => true).order(:bib_number)
+    all_registrants = Registrant.active.competitor.order(:bib_number)
     signed_up_registrants = competition.signed_up_registrants
     @signed_up_list = {}
     @not_signed_up_list = {}

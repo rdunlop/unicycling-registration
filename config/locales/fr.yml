@@ -41,7 +41,7 @@ fr:
     edit:
       editing_registrant: "Modifier une entrée de compétiteur"
     form_actions:
-      continue: "Sauver et Continuer (Frais...)"
+      continue: "Sauver et Continuer"
     base_details:
       competitor: "Compétiteur"
       noncompetitor: "Non-compétiteur"

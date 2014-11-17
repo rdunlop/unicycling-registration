@@ -101,8 +101,8 @@ describe Registrant do
       @reg.valid?.should == false
     end
 
-    it "must have a valid competitor value" do
-      @reg.competitor = nil
+    it "must have a valid registrant_type value" do
+      @reg.registrant_type = nil
     end
 
     it "should be eligible by default" do

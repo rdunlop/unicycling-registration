@@ -36,7 +36,6 @@ class Registrants::BuildController < ApplicationController
     when :add_events
       @registrant.status = "events" if @registrant.status == "base_details"
     when :add_volunteers
-      @registrant.status = "volunteers" if @registrant.status == "events"
     end
     @registrant.status = 'active' if step == steps.last
 
@@ -47,19 +46,14 @@ class Registrants::BuildController < ApplicationController
 
   # create an initial registrant/blank record
   def create
-    competitor_status = get_competitor_value
-    @registrant = Registrant.create status: "blank", competitor: competitor_status, user: @user
+    @registrant = Registrant.create status: "blank", registrant_type: registrant_type, user: @user
     redirect_to wizard_path(steps.first, user_id: @user, :registrant_id => @registrant.id)
   end
 
   private
 
-  def get_competitor_value
-    if params[:non_competitor].nil?
-      true
-    else
-      ! (params[:non_competitor] == "true")
-    end
+  def registrant_type
+    params[:registrant_type]
   end
 
   def load_registrant

@@ -11,7 +11,6 @@
 #  created_at              :datetime
 #  updated_at              :datetime
 #  user_id                 :integer
-#  competitor              :boolean
 #  deleted                 :boolean
 #  bib_number              :integer
 #  wheel_size_id           :integer
@@ -22,11 +21,13 @@
 #  access_code             :string(255)
 #  sorted_last_name        :string(255)
 #  status                  :string(255)      default("active"), not null
+#  registrant_type         :string(255)      default("competitor")
 #
 # Indexes
 #
-#  index_registrants_deleted     (deleted)
-#  index_registrants_on_user_id  (user_id)
+#  index_registrants_deleted             (deleted)
+#  index_registrants_on_registrant_type  (registrant_type)
+#  index_registrants_on_user_id          (user_id)
 #
 
 class Registrant < ActiveRecord::Base
@@ -88,29 +89,38 @@ class Registrant < ActiveRecord::Base
 
   # always present validations
   before_validation :set_bib_number, :on => :create
-  validates :competitor, :ineligible, :deleted, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :bib_number, presence: true
+  validates :registrant_type, inclusion: { in: %w(competitor noncompetitor spectator) }, presence: true
+  validates :ineligible, :deleted, :inclusion => { :in => [true, false] } # because it's a boolean
   validate :no_payments_when_deleted
   before_validation :set_access_code
   validates :access_code, presence: true
   validates :status, presence: true
 
   # Base details
-  before_validation :set_age, if: :active_or_base_details?
-  before_validation :set_default_wheel_size, if: :active_or_base_details?
-  validates_associated :contact_detail, if: :active_or_base_details?
-  before_validation :set_sorted_last_name, if: :active_or_base_details?
-  validates :first_name, :last_name, :sorted_last_name, :birthday, :gender, :presence => true, if: :active_or_base_details?
-  validates :user_id, :bib_number, :age, :default_wheel_size, :presence => true, if: :active_or_base_details?
-  validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}, if: :active_or_base_details?
-  validate  :gender_present, if: :active_or_base_details?
-  validate :check_default_wheel_size_for_age, if: :active_or_base_details?
+
+  # necessary for all registrant types
+  before_validation :set_sorted_last_name, if: :past_step_1?
+  validates :first_name, :last_name, :sorted_last_name, :presence => true, if: :past_step_1?
+  validates :user_id, :presence => true, if: :past_step_1?
+  validates_associated :contact_detail, if: :past_step_1?
+
+  # necessary for comp/non-comp only (not spectators):
+  validates :birthday, :gender, :presence => true, if: :comp_noncomp_past_step_1?
+  validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}, if: :comp_noncomp_past_step_1?
+  validate  :gender_present, if: :comp_noncomp_past_step_1?
+  before_validation :set_age, if: :comp_noncomp_past_step_1?
+  validates :age, :presence => true, if: :comp_noncomp_past_step_1?
+  before_validation :set_default_wheel_size, if: :comp_noncomp_past_step_1?
+  validates :default_wheel_size, :presence => true, if: :comp_noncomp_past_step_1?
+  validate :check_default_wheel_size_for_age, if: :comp_noncomp_past_step_1?
 
   # events
-  validate :choices_combination_valid, if: :active_or_events?
+  validate :choices_combination_valid, if: :past_step_2?
 
   # Expense items
-  validate :not_exceeding_expense_item_limits, if: :validated?
-  validates_associated :registrant_expense_items, if: :validated?
+  validate :not_exceeding_expense_item_limits
+  validates_associated :registrant_expense_items
 
   # waiver
   validates :online_waiver_signature, :presence => true, if: :active_or_event_config?
@@ -118,20 +128,40 @@ class Registrant < ActiveRecord::Base
   scope :active, -> { where(:deleted => false).order(:bib_number) }
 
   # Wizard status helpers
-  def validated?
-    status == "active"
-  end
 
-  def active_or_base_details?
+  # Status progression:
+  #  'blank' - No data has been saved
+  #  'base_details' - We have entered the base details
+  #  'events' - Has entered the events
+  #  'active' - Has entered all data
+
+  # this registrant is on a step subsequent to the initial step
+  def past_step_1?
     status == "base_details" || validated?
   end
 
-  def active_or_events?
-    status == "events" || validated?
+  # Never true for a spectator
+  # Have we entered the base details?
+  def comp_noncomp_past_step_1?
+    !spectator? && (status == "base_details" || validated?)
+  end
+
+  # Never true for a spectator
+  # have we entered events
+  def past_step_2?
+    !spectator? && (status == "events" || validated?)
   end
 
   def active_or_event_config?
-    EventConfiguration.singleton.has_online_waiver && validated?
+    EventConfiguration.singleton.has_online_waiver && past_step_2?
+  end
+
+  def spectator?
+    registrant_type == 'spectator'
+  end
+
+  def validated?
+    status == "active"
   end
   # end Wizard
 
@@ -141,6 +171,18 @@ class Registrant < ActiveRecord::Base
 
   def to_param
     "#{bib_number}" if persisted?
+  end
+
+  def competitor
+    registrant_type == 'competitor'
+  end
+
+  def self.competitor
+    where(registrant_type: 'competitor')
+  end
+
+  def self.notcompetitor
+    where.not(registrant_type: 'competitor')
   end
 
   # uses the CachedSetModel feature to give a key for this registrant's competitors
@@ -160,11 +202,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.select_box_options_to_bib_number
-    self.active.where(:competitor => true).map{ |reg| [reg.with_id_to_s, reg.bib_number] }
+    self.active.competitor.map{ |reg| [reg.with_id_to_s, reg.bib_number] }
   end
 
   def self.select_box_options
-    self.active.where(:competitor => true).map{ |reg| [reg.with_id_to_s, reg.id] }
+    self.active.competitor.map{ |reg| [reg.with_id_to_s, reg.id] }
   end
 
   def self.all_select_box_options
@@ -213,14 +255,18 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.maximum_bib_number(is_competitor)
-    where({:competitor => is_competitor}).maximum("bib_number")
+    if is_competitor
+      competitor.maximum("bib_number")
+    else
+      notcompetitor.maximum('bib_number')
+    end
   end
 
   def set_bib_number
     if bib_number.nil?
-      prev_value = Registrant.maximum_bib_number(self.competitor)
+      prev_value = Registrant.maximum_bib_number(competitor)
 
-      if self.competitor
+      if competitor
         initial_value = 1
       else
         initial_value = 2001
@@ -360,7 +406,7 @@ class Registrant < ActiveRecord::Base
   # Indicates that this registrant has paid their registration_fee
   def reg_paid?
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
-      RegistrationPeriod.paid_for_period(self.competitor, paid_expense_items).present?
+      RegistrationPeriod.paid_for_period(competitor, paid_expense_items).present?
     end
   end
 

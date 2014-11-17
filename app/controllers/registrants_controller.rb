@@ -124,7 +124,7 @@ class RegistrantsController < ApplicationController
   # GET /registrants/new
   # GET /registrants/new.json
   def new
-    @registrant.competitor = get_competitor_value
+    @registrant.registrant_type = get_reg_type
     @registrant.build_contact_detail
     load_online_waiver
     load_categories
@@ -198,13 +198,9 @@ class RegistrantsController < ApplicationController
 
   private
 
-  # determine whether to show the competitor or non-competitor page
-  def get_competitor_value
-    if params[:non_competitor].nil?
-      true
-    else
-      ! (params[:non_competitor] == "true")
-    end
+  # determine whether to show the competitor, non-competitor, or spectator page
+  def get_reg_type
+    params[:registrant_type]
   end
 
   def set_registrants_breadcrumb
@@ -247,7 +243,7 @@ class RegistrantsController < ApplicationController
   end
 
   def attributes
-    [ :first_name, :gender, :last_name, :middle_initial, :birthday, :competitor, :volunteer,
+    [ :first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
       :online_waiver_signature, :wheel_size_id,
       :volunteer_opportunity_ids => [],
       :registrant_choices_attributes => [:event_choice_id, :value, :id],
@@ -263,7 +259,7 @@ class RegistrantsController < ApplicationController
   # don't allow a registrant to be changed from competitor to non-competitor (or vise-versa)
   def registrant_update_params
     attrs = attributes
-    attrs.delete(:competitor)
+    attrs.delete(:registrant_type)
     clear_events_data!(clear_artistic_data!(params.require(:registrant).permit(attrs)))
   end
 

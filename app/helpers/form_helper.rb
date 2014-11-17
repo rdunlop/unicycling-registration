@@ -17,7 +17,7 @@ module FormHelper
 
   def eligible_registrants(competition)
     if @config.usa?
-      Registrant.active.where(:competitor => true)
+      Registrant.active.competitor
     else
       competition.registrants.reorder(:bib_number)
     end
