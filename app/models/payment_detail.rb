@@ -32,6 +32,7 @@ class PaymentDetail < ActiveRecord::Base
   belongs_to :payment, :inverse_of => :payment_details
   belongs_to :expense_item
   has_one :refund_detail
+  has_one :payment_detail_coupon_code
 
   delegate :has_details, :details_label, to: :expense_item
 

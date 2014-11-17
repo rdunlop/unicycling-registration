@@ -10,10 +10,14 @@
 #  place            :integer
 #  user_id          :integer
 #  registrant_id    :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  created_at       :datetime
+#  updated_at       :datetime
 #  competitor_name  :string(255)
 #  category         :string(255)
+#
+# Indexes
+#
+#  index_award_labels_on_user_id  (user_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

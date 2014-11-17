@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: payment_detail_coupons
+# Table name: payment_detail_coupon_codes
 #
 #  id                :integer          not null, primary key
 #  payment_detail_id :integer
@@ -9,6 +9,8 @@
 #  updated_at        :datetime
 #
 
-class PaymentDetailCoupon < ActiveRecord::Base
+class PaymentDetailCouponCode < ActiveRecord::Base
+  belongs_to :coupon_code
+  belongs_to :payment_detail
   validates :payment_detail, :coupon_code, presence: true
 end

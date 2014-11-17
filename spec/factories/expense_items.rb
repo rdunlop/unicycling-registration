@@ -8,8 +8,8 @@
 #  cost                   :decimal(, )
 #  export_name            :string(255)
 #  position               :integer
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  created_at             :datetime
+#  updated_at             :datetime
 #  expense_group_id       :integer
 #  has_details            :boolean
 #  details_label          :string(255)
@@ -17,6 +17,10 @@
 #  tax_percentage         :decimal(5, 3)    default(0.0)
 #  has_custom_cost        :boolean          default(FALSE)
 #  maximum_per_registrant :integer          default(0)
+#
+# Indexes
+#
+#  index_expense_items_expense_group_id  (expense_group_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

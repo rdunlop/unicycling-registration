@@ -10,8 +10,14 @@
 #  minor_dismount   :integer
 #  major_boundary   :integer
 #  minor_boundary   :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+# Indexes
+#
+#  index_boundary_scores_competitor_id                  (competitor_id)
+#  index_boundary_scores_judge_id                       (judge_id)
+#  index_boundary_scores_on_judge_id_and_competitor_id  (judge_id,competitor_id) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

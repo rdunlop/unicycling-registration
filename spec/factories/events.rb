@@ -6,11 +6,16 @@
 #  category_id           :integer
 #  export_name           :string(255)
 #  position              :integer
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
+#  created_at            :datetime
+#  updated_at            :datetime
 #  name                  :string(255)
 #  visible               :boolean
 #  accepts_music_uploads :boolean          default(FALSE)
+#  artistic              :boolean          default(FALSE)
+#
+# Indexes
+#
+#  index_events_category_id  (category_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

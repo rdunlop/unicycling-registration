@@ -19,6 +19,7 @@
 #  created_at              :datetime
 #  updated_at              :datetime
 #  competition_id          :integer
+#  base_points             :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

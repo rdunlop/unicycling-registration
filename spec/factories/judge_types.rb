@@ -12,10 +12,14 @@
 #  val_2_max                    :integer
 #  val_3_max                    :integer
 #  val_4_max                    :integer
-#  created_at                   :datetime         not null
-#  updated_at                   :datetime         not null
+#  created_at                   :datetime
+#  updated_at                   :datetime
 #  event_class                  :string(255)
 #  boundary_calculation_enabled :boolean
+#
+# Indexes
+#
+#  index_judge_types_on_name  (name) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

@@ -1,14 +1,20 @@
 # == Schema Information
 #
-# Table name: distance_attempts
+# Table name: tie_break_adjustments
 #
-#  id            :integer          not null, primary key
-#  competitor_id :integer
-#  distance      :integer
-#  fault         :boolean
-#  judge_id      :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id              :integer          not null, primary key
+#  tie_break_place :integer
+#  judge_id        :integer
+#  competitor_id   :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+# Indexes
+#
+#  index_tie_break_adjustments_competitor_id                  (competitor_id)
+#  index_tie_break_adjustments_judge_id                       (judge_id)
+#  index_tie_break_adjustments_on_competitor_id               (competitor_id) UNIQUE
+#  index_tie_break_adjustments_on_competitor_id_and_judge_id  (competitor_id,judge_id) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

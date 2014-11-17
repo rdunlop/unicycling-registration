@@ -99,6 +99,7 @@ Workspace::Application.routes.draw do
 
       member do
         post :fake_complete
+        post :apply_coupon
       end
     end
     resources :payment_adjustments, :only => [:new]  do

@@ -544,7 +544,7 @@ ActiveRecord::Schema.define(version: 20141117043307) do
   add_index "members", ["competitor_id"], name: "index_members_competitor_id", using: :btree
   add_index "members", ["registrant_id"], name: "index_members_registrant_id", using: :btree
 
-  create_table "payment_detail_coupons", force: true do |t|
+  create_table "payment_detail_coupon_codes", force: true do |t|
     t.integer  "payment_detail_id"
     t.integer  "coupon_code_id"
     t.datetime "created_at"

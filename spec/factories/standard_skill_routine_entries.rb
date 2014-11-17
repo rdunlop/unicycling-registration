@@ -6,8 +6,8 @@
 #  standard_skill_routine_id :integer
 #  standard_skill_entry_id   :integer
 #  position                  :integer
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
+#  created_at                :datetime
+#  updated_at                :datetime
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

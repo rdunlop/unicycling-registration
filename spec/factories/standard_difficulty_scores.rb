@@ -7,8 +7,12 @@
 #  standard_skill_routine_entry_id :integer
 #  judge_id                        :integer
 #  devaluation                     :integer
-#  created_at                      :datetime         not null
-#  updated_at                      :datetime         not null
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#
+# Indexes
+#
+#  standard_diff_judge_routine_comp  (judge_id,standard_skill_routine_entry_id,competitor_id) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

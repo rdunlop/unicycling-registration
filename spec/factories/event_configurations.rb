@@ -9,15 +9,12 @@
 #  dates_description                     :string(255)
 #  event_url                             :string(255)
 #  start_date                            :date
-#  logo_binary                           :binary
 #  contact_email                         :string(255)
 #  artistic_closed_date                  :date
 #  standard_skill_closed_date            :date
-#  tshirt_closed_date                    :date
-#  created_at                            :datetime         not null
-#  updated_at                            :datetime         not null
-#  logo_filename                         :string(255)
-#  logo_type                             :string(255)
+#  event_sign_up_closed_date             :date
+#  created_at                            :datetime
+#  updated_at                            :datetime
 #  test_mode                             :boolean
 #  waiver_url                            :string(255)
 #  comp_noncomp_url                      :string(255)
@@ -33,6 +30,11 @@
 #  online_waiver_text                    :text
 #  music_submission_end_date             :date
 #  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
+#  usa_individual_expense_item_id        :integer
+#  usa_family_expense_item_id            :integer
+#  logo_file                             :string(255)
+#  max_award_place                       :integer          default(5)
+#  display_confirmed_events              :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

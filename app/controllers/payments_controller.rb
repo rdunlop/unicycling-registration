@@ -92,6 +92,16 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def apply_coupon
+    action = CouponApplier.new(@payment, params[:coupon_code])
+    if action.perform
+      flash[:notice] = "Success applying coupon"
+    else
+      flash[:alert] = action.error
+    end
+    redirect_to @payment
+  end
+
   # PayPal notification endpoint
   def notification
     paypal = PaypalConfirmer.new(params, request.raw_post)

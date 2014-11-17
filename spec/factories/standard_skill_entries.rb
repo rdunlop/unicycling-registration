@@ -7,8 +7,12 @@
 #  letter      :string(255)
 #  points      :decimal(6, 2)
 #  description :string(255)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+# Indexes
+#
+#  index_standard_skill_entries_on_letter_and_number  (letter,number) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

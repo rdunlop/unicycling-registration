@@ -5,8 +5,12 @@
 #  id          :integer          not null, primary key
 #  name        :string(255)
 #  description :string(255)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+# Indexes
+#
+#  index_age_group_types_on_name  (name) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

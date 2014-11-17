@@ -6,11 +6,17 @@
 #  payment_id      :integer
 #  registrant_id   :integer
 #  amount          :decimal(, )
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  created_at      :datetime
+#  updated_at      :datetime
 #  expense_item_id :integer
 #  details         :string(255)
 #  free            :boolean          default(FALSE)
+#
+# Indexes
+#
+#  index_payment_details_expense_item_id  (expense_item_id)
+#  index_payment_details_payment_id       (payment_id)
+#  index_payment_details_registrant_id    (registrant_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

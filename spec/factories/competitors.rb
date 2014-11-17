@@ -2,13 +2,23 @@
 #
 # Table name: competitors
 #
-#  id                 :integer          not null, primary key
-#  competition_id     :integer
-#  position           :integer
-#  custom_external_id :integer
-#  custom_name        :string(255)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id                       :integer          not null, primary key
+#  competition_id           :integer
+#  position                 :integer
+#  custom_name              :string(255)
+#  created_at               :datetime
+#  updated_at               :datetime
+#  status                   :integer          default(0)
+#  lowest_member_bib_number :integer
+#  geared                   :boolean          default(FALSE)
+#  riding_wheel_size        :integer
+#  notes                    :string(255)
+#  heat                     :integer
+#  riding_crank_size        :integer
+#
+# Indexes
+#
+#  index_competitors_event_category_id  (competition_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

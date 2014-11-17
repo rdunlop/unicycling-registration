@@ -1,17 +1,19 @@
 # == Schema Information
 #
-# Table name: age_group_entries
+# Table name: heat_times
 #
-#  id                :integer          not null, primary key
-#  age_group_type_id :integer
-#  short_description :string(255)
-#  long_description  :string(255)
-#  start_age         :integer
-#  end_age           :integer
-#  gender            :string(255)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  wheel_size_id     :integer
+#  id             :integer          not null, primary key
+#  competition_id :integer
+#  heat           :integer
+#  minutes        :integer
+#  seconds        :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  scheduled_time :string(255)
+#
+# Indexes
+#
+#  index_heat_times_on_competition_id_and_heat  (competition_id,heat) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

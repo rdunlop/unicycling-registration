@@ -5,9 +5,13 @@
 #  id            :integer          not null, primary key
 #  competitor_id :integer
 #  details       :string(255)
-#  rank          :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  points        :decimal(6, 3)    not null
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+# Indexes
+#
+#  index_external_results_on_competitor_id  (competitor_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

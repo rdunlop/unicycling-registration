@@ -7,8 +7,13 @@
 #  distance      :integer
 #  fault         :boolean
 #  judge_id      :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+# Indexes
+#
+#  index_distance_attempts_competitor_id  (competitor_id)
+#  index_distance_attempts_judge_id       (judge_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

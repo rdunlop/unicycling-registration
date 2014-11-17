@@ -8,10 +8,9 @@
 #  last_name               :string(255)
 #  birthday                :date
 #  gender                  :string(255)
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
+#  created_at              :datetime
+#  updated_at              :datetime
 #  user_id                 :integer
-#  competitor              :boolean
 #  deleted                 :boolean
 #  bib_number              :integer
 #  wheel_size_id           :integer
@@ -19,6 +18,16 @@
 #  ineligible              :boolean          default(FALSE)
 #  volunteer               :boolean
 #  online_waiver_signature :string(255)
+#  access_code             :string(255)
+#  sorted_last_name        :string(255)
+#  status                  :string(255)      default("active"), not null
+#  registrant_type         :string(255)      default("competitor")
+#
+# Indexes
+#
+#  index_registrants_deleted             (deleted)
+#  index_registrants_on_registrant_type  (registrant_type)
+#  index_registrants_on_user_id          (user_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

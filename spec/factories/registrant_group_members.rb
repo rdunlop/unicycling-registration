@@ -5,8 +5,14 @@
 #  id                  :integer          not null, primary key
 #  registrant_id       :integer
 #  registrant_group_id :integer
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+# Indexes
+#
+#  index_registrant_group_mumbers_registrant_group_id  (registrant_group_id)
+#  index_registrant_group_mumbers_registrant_id        (registrant_id)
+#  reg_group_reg_group                                 (registrant_id,registrant_group_id) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

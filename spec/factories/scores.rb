@@ -10,8 +10,14 @@
 #  val_4         :decimal(5, 3)
 #  notes         :text
 #  judge_id      :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+# Indexes
+#
+#  index_scores_competitor_id                  (competitor_id)
+#  index_scores_judge_id                       (judge_id)
+#  index_scores_on_competitor_id_and_judge_id  (competitor_id,judge_id) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
