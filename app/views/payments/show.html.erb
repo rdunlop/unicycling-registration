@@ -1,7 +1,6 @@
 <h1><%= t(".payment_summary") %></h1>
 <%= render :partial => "summary", :locals => {:payment => @payment } %>
 
-
 <% unless @payment.completed %>
   <%= t(".please_proceed_with_payment") %>:
   <div>
