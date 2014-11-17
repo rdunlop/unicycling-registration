@@ -1,0 +1,22 @@
+= form_for([@coupon_code]) do |f|
+  = render partial: "/shared/error_messages", object: @coupon_code
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :code
+    = f.text_field :code
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :price
+    = f.text_field :price
+  .field
+    = f.label :max_num_uses
+    = f.number_field :max_num_uses
+  .field
+    = f.label :expense_item_ids
+    = f.collection_select :expense_item_ids, ExpenseItem.order(:name).all, :id, :name, {include_blank: true}, {multiple: true, class: "chosen-select"}
+  .actions
+    = f.submit

@@ -122,6 +122,7 @@ Workspace::Application.routes.draw do
     end
     resources :competition_wheel_sizes
 
+    resources :coupon_codes
     resources :event_choices, :except => [:index, :create, :new]
 
     resources :events, :except => [:index, :new, :create] do
