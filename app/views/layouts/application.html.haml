@@ -40,5 +40,5 @@
           %p.notice= notice
         - unless alert.blank?
           %p.alert= alert
-        = yield
+        = content_for?(:content) ? yield(:content) : yield
       = render partial: "layouts/footer"

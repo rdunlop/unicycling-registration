@@ -10,6 +10,10 @@ fr:
   date:
     formats:
       registration_date_format: "%d %b, %Y"
+  wizard:
+    add_name: "Nom"
+    add_events: "Compétitions"
+    add_volunteers: "Bénévole"
   registrants:
     index:
       recommended: Recommandé

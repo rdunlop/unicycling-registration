@@ -38,4 +38,22 @@ module FormHelper
   def all_registrant_competitors(form)
     form.select :registrant_id,  Registrant.select_box_options, {:include_blank => true}, autofocus: true, class: 'chosen-select js--autoFocus'
   end
+
+  def wizard_progress_bar
+    content_tag(:div, class: "wizard_progress") do
+      content_tag(:ul) do
+        wizard_steps.collect do |every_step|
+          class_str = "unfinished"
+          class_str = "current"  if every_step == step
+          class_str = "finished" if past_step?(every_step)
+          concat(
+            content_tag(:li, class: class_str) do
+              #link_to I18n.t("wizard.#{every_step}"), wizard_path(every_step)
+              I18n.t("wizard.#{every_step}")
+            end
+          )
+        end
+      end
+    end
+  end
 end

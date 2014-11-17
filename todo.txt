@@ -1,5 +1,6 @@
 Last Re-Arranged June 20th, 2014.
 
+- Does the non-comp/spectator end up 'active'?
 - translate the volunteer options form
 - translate the volunteer options form text fields
 

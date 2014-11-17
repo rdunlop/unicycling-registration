@@ -3,10 +3,20 @@ class Registrants::BuildController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :user
 
-  steps :add_name, :add_events, :add_volunteers
-
   before_action :load_registrant, only: [:show, :update]
+  before_action :set_steps
+  before_action :setup_wizard
+
+  def set_steps
+    if @registrant.competitor
+      self.steps = [:add_name, :add_events, :add_volunteers]
+    else
+      self.steps = [:add_name, :add_volunteers]
+    end
+  end
+
   before_action :load_categories, only: [:show, :update, :add_events]
+  layout "wizard"
 
   def finish_wizard_path
     registrant_registrant_expense_items_path(@registrant)
@@ -21,7 +31,7 @@ class Registrants::BuildController < ApplicationController
         @other_registrant = (current_user.registrants.active - [@registrant]).first
       end
     when :add_events
-      skip_step unless @registrant.competitor # only display events for competitors
+      skip_step
     when :add_volunteers
       skip_step unless VolunteerOpportunity.any?
     end

@@ -15,6 +15,10 @@ en:
       - :month
       - :day
       - :year
+  wizard:
+    add_name: "Name"
+    add_events: "Events"
+    add_volunteers: "Volunteers"
   registrants:
     index:
       registration: "Registration"
