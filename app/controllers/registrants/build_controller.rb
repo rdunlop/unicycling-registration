@@ -8,7 +8,7 @@ class Registrants::BuildController < ApplicationController
   before_action :setup_wizard
 
   def set_steps
-    if @registrant.competitor
+    if @registrant.nil? || @registrant.competitor
       self.steps = [:add_name, :add_events, :add_volunteers]
     else
       self.steps = [:add_name, :add_volunteers]
@@ -31,7 +31,7 @@ class Registrants::BuildController < ApplicationController
         @other_registrant = (current_user.registrants.active - [@registrant]).first
       end
     when :add_events
-      skip_step
+      skip_step unless @registrant.competitor
     when :add_volunteers
       skip_step unless VolunteerOpportunity.any?
     end
