@@ -20,7 +20,7 @@
     %p
       %b= t(".volunteer")
       = @registrant.volunteer
-    - if @registrant.age <= 10
+    - if @registrant.default_wheel_size
       %p
         %b= t(".default_wheel_size")
         = @registrant.default_wheel_size

@@ -39,6 +39,13 @@ describe RequiredExpenseItemCreator do
         @comp.owing_registrant_expense_items.first.expense_item.should == @comp_exp
       end
     end
+
+    describe "as a spectator" do
+      let(:spectator) { FactoryGirl.create(:spectator) }
+
+      specify { expect(spectator.registrant_expense_items.count).to eq(0) }
+      specify { expect(spectator.owing_registrant_expense_items.count).to eq(0) }
+    end
   end
 
 

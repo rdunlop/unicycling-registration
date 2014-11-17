@@ -405,6 +405,7 @@ class Registrant < ActiveRecord::Base
 
   # Indicates that this registrant has paid their registration_fee
   def reg_paid?
+    return true if spectator?
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
       RegistrationPeriod.paid_for_period(competitor, paid_expense_items).present?
     end

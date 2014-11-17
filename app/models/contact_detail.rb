@@ -46,7 +46,7 @@ class ContactDetail < ActiveRecord::Base
   validates :responsible_adult_name, :responsible_adult_phone, :presence => true, :if => :minor?
 
   def minor?
-    registrant && registrant.age < 18
+    registrant && !registrant.spectator? && registrant.age < 18
   end
 
   def country_code
