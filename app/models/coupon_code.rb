@@ -29,7 +29,7 @@ class CouponCode < ActiveRecord::Base
   end
 
   def num_uses
-    payment_detail_coupon_codes.count
+    payment_detail_coupon_codes.completed.count
   end
 
   def to_s

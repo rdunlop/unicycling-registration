@@ -26,6 +26,11 @@ FactoryGirl.define do
     completed false
     cancelled false
     transaction_id "MyString"
-    completed_date "2012-11-23 03:22:05"
+    completed_date  nil
+
+    trait :completed do
+      completed true
+      completed_date "2012-11-23 03:22:05"
+    end
   end
 end
