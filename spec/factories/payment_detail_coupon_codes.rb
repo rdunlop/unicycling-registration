@@ -1,22 +1,12 @@
 # == Schema Information
 #
-# Table name: payment_details
+# Table name: payment_detail_coupon_codes
 #
-#  id              :integer          not null, primary key
-#  payment_id      :integer
-#  registrant_id   :integer
-#  amount          :decimal(, )
-#  created_at      :datetime
-#  updated_at      :datetime
-#  expense_item_id :integer
-#  details         :string(255)
-#  free            :boolean          default(FALSE)
-#
-# Indexes
-#
-#  index_payment_details_expense_item_id  (expense_item_id)
-#  index_payment_details_payment_id       (payment_id)
-#  index_payment_details_registrant_id    (registrant_id)
+#  id                :integer          not null, primary key
+#  payment_detail_id :integer
+#  coupon_code_id    :integer
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
