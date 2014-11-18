@@ -1,3 +1,6 @@
+- restart the wizard at the correct step if someone leaves early
+- don't allow element to be paid for while "incomplete"
+
 Last Re-Arranged June 20th, 2014.
 
 - Does the non-comp/spectator end up 'active'?
