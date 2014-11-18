@@ -13,4 +13,6 @@ class PaymentDetailCouponCode < ActiveRecord::Base
   belongs_to :coupon_code
   belongs_to :payment_detail
   validates :payment_detail, :coupon_code, presence: true
+
+  delegate :price, to: :coupon_code
 end

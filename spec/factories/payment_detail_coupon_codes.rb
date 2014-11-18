@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: payment_details
+#
+#  id              :integer          not null, primary key
+#  payment_id      :integer
+#  registrant_id   :integer
+#  amount          :decimal(, )
+#  created_at      :datetime
+#  updated_at      :datetime
+#  expense_item_id :integer
+#  details         :string(255)
+#  free            :boolean          default(FALSE)
+#
+# Indexes
+#
+#  index_payment_details_expense_item_id  (expense_item_id)
+#  index_payment_details_payment_id       (payment_id)
+#  index_payment_details_registrant_id    (registrant_id)
+#
+
+# Read about factories at https://github.com/thoughtbot/factory_girl
+
+FactoryGirl.define do
+  factory :payment_detail_coupon_code do
+    payment_detail # FactoryGirl
+    coupon_code # FactoryGirl
+  end
+end

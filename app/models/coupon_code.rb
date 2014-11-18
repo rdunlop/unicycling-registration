@@ -16,7 +16,7 @@ class CouponCode < ActiveRecord::Base
   validates :name, :code, :description, presence: true
   validates :max_num_uses, numericality: { greater_than_or_equal_to: 0 }
   validates :price, presence: true
-  has_many :coupon_code_expense_items
+  has_many :coupon_code_expense_items, inverse_of: :coupon_code
   has_many :expense_items, through: :coupon_code_expense_items
 
   accepts_nested_attributes_for :coupon_code_expense_items

@@ -71,13 +71,31 @@ class PaymentDetail < ActiveRecord::Base
     amount
   end
 
+  # update the amount owing for this payment_detail, based on the coupon code applied
+  def recalculate!
+    if payment_detail_coupon_code.nil?
+      update_attribute(:amount, expense_item.total_cost)
+    else
+      update_attribute(:amount, payment_detail_coupon_code.price)
+    end
+  end
+
   def to_s
     res = ""
     res += expense_item.to_s
     if refunded?
       res += " (Refunded)"
     end
+    if coupon_applied?
+      res += " (Discount applied)"
+    end
     res
+  end
+
+  private
+
+  def coupon_applied?
+    payment_detail_coupon_code.present?
   end
 
 end

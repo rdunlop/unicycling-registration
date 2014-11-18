@@ -101,4 +101,14 @@ describe PaymentDetail do
       PaymentDetail.completed.should == []
     end
   end
+
+  describe "with a coupon code" do
+    let(:coupon_code) { FactoryGirl.create(:coupon_code, price: 1.00) }
+
+    it "discounts the payment_detail" do
+      FactoryGirl.create(:payment_detail_coupon_code, payment_detail: @pd, coupon_code: coupon_code)
+      @pd.recalculate!
+      expect(@pd.amount).to eq(1.00)
+    end
+  end
 end

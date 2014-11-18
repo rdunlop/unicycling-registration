@@ -24,6 +24,6 @@
       = submit_tag t(".pay_with_paypal"), :class => "payment_link registration_button"
   - if @config.test_mode
     .test_mode
-      = link_to 'Pretend to pay by credit card', fake_complete_payment_path(@payment), :method => :post
+      = link_to "Pretend to pay by credit card $#{@payment.total_amount}", fake_complete_payment_path(@payment), :method => :post
 
 = link_to t('back'), user_payments_path(current_user)
