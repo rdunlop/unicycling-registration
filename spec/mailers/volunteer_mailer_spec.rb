@@ -8,7 +8,7 @@ describe VolunteerMailer do
     let(:inform_emails) { "test@test.com, test2@test.com" }
 
     it "doesn't create an e-mail" do
-      mail = described_class.new_volunteer(volunteer_choice)
+      mail = described_class.new_volunteer(volunteer_choice.id)
       expect(mail.subject).to eq("New Volunteer Signed Up")
       expect(mail.to).to contain_exactly("test@test.com", "test2@test.com")
     end

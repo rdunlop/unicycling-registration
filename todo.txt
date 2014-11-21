@@ -1,5 +1,7 @@
 - restart the wizard at the correct step if someone leaves early
 - don't allow element to be paid for while "incomplete"
+- do we need to deal with coupons persisting over period end?
+- describe the coupon on the summary page?
 
 Last Re-Arranged June 20th, 2014.
 

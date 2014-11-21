@@ -1,7 +1,7 @@
 class VolunteerMailerPreview < ActionMailer::Preview
 
   def new_volunteer
-    VolunteerMailer.new_volunteer(volunteer_choice)
+    VolunteerMailer.new_volunteer(volunteer_choice.id)
   end
 
   private

@@ -7,7 +7,8 @@ class VolunteerMailer < ActionMailer::Base
     mail to: ENV['ERROR_EMAIL']
   end
 
-  def new_volunteer(volunteer_choice)
+  def new_volunteer(volunteer_choice_id)
+    volunteer_choice =  VolunteerChoice.find(volunteer_choice_id)
     @registrant = volunteer_choice.registrant
     @volunteer_opportunity = volunteer_choice.volunteer_opportunity
 
