@@ -1,0 +1,45 @@
+- if @payment.errors.any?
+  = render partial: "shared/error_messages", object: @payment
+%table.sortable
+  %thead
+    %tr
+      %th= t(".registrant")
+      %th Item
+      %th= t(".details")
+      %th= t(".cost")
+      %th Taxes
+      %th= t(".total_cost")
+      %th.choose_payments
+        %a#unselect_all{:href => "#"}>= t(".unselect_all")
+        \/
+        %a#select_all{:href => "#"}= t(".select_all")
+  %tbody
+    = f.fields_for :payment_details do |pf|
+      %tr
+        %td
+          = pf.hidden_field :registrant_id
+          = pf.object.registrant
+        %td
+          = pf.hidden_field :expense_item_id
+          = pf.object.expense_item
+        %td
+          = pf.hidden_field :details
+          - unless pf.object.details.blank?
+            = "(" + pf.object.details + ")"
+        %td
+          = print_item_cost_currency(pf.object.base_cost)
+          = pf.hidden_field :free
+        %td= print_item_cost_currency(pf.object.tax)
+        %td
+          = pf.hidden_field :amount
+          = print_item_cost_currency(pf.object.amount)
+        %td.choose_payments
+          = pf.check_box :_destroy, {checked: true, :class => "delete_payment_item", "data-cents" => pf.object.amount * 100}, '0', '1'
+  %tfoot
+    %tr
+      %th{:colspan => "4"}
+      %th Total
+      %th#total_field
+      %th.choose_payments
+.actions
+  = f.submit t(".start_payment"), :class => "payment_link registration_button"

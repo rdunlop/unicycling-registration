@@ -25,6 +25,7 @@ class PaymentDetail < ActiveRecord::Base
 
   validates :payment, :registrant_id, :expense_item, :presence => true
   validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+  validate :registrant_must_be_valid
 
   has_paper_trail
 
@@ -46,6 +47,14 @@ class PaymentDetail < ActiveRecord::Base
 
   def self.cache_set_field
     :expense_item_id
+  end
+
+  def registrant_must_be_valid
+    if !registrant.validated? || registrant.invalid?
+      errors[:registrant] = "Registrant #{registrant.to_s} form is incomplete"
+      return false
+    end
+    true
   end
 
   def refunded?
