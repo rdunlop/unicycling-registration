@@ -19,6 +19,7 @@ en:
     add_name: "Name"
     add_events: "Events"
     add_volunteers: "Volunteers"
+    add_contact_details: "Contact Details"
   registrants:
     index:
       registration: "Registration"

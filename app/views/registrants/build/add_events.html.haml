@@ -6,8 +6,6 @@
         prohibited this registrant from being saved:
       %ul
         - @registrant.errors.each do |attribute,error_message|
-          - next if attribute == :gender_male
-          - next if attribute == :gender_female
           - next if "#{attribute}" == "registrant_event_sign_ups.signed_up"
           - next if "#{attribute}" == "registrant_event_sign_ups.event_category_id"
           - if "#{attribute}" == "registrant_event_sign_ups.base"

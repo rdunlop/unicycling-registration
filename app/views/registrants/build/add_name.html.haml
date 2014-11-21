@@ -1,4 +1,4 @@
-= form_for(setup_registrant_choices(@registrant), url: wizard_path, method: :put) do |f|
+= form_for(@registrant, url: wizard_path, method: :put) do |f|
   - if @registrant.errors.any?
     #error_explanation
       %h2
@@ -8,22 +8,10 @@
         - @registrant.errors.each do |attribute,error_message|
           - next if attribute == :gender_male
           - next if attribute == :gender_female
-          - next if "#{attribute}" == "registrant_event_sign_ups.signed_up"
-          - next if "#{attribute}" == "registrant_event_sign_ups.event_category_id"
-          - if "#{attribute}" == "registrant_event_sign_ups.base"
-            %li= error_message
-          - else
-            %li= @registrant.errors.full_message(attribute, error_message )
+          %li= @registrant.errors.full_message(attribute, error_message )
 
   .data_block
     = render partial: "/registrants/base_details", locals: {f: f}
 
-
     = render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor }
-    .data_block
-      = render :partial => "/registrants/contact_detail", :locals => { :reg_f => f, :other_registrant => @other_registrant }
-    - if @has_online_waiver
-      %br
-      .data_block{:style => "margin-top:20px;"}
-        = render :partial => "online_waiver", :locals => {:f => f, :registrant => @registrant }
   = render partial: "/registrants/form_actions", locals: {f: f}

@@ -102,6 +102,10 @@ shared_context 'basic registrant data' do
     select '20',    :from => 'registrant_birthday_3i'
     select '1982',  :from => 'registrant_birthday_1i'
     choose 'Male'
+  end
+end
+shared_context "basic address data" do
+  before :each do
     fill_in 'Address', with: "123 Fake street"
     fill_in "City", with: "Springfield"
     find(:select, 'registrant_contact_detail_attributes_country_residence').first(:option, 'United States').select_option

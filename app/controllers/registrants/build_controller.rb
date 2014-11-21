@@ -9,9 +9,9 @@ class Registrants::BuildController < ApplicationController
 
   def set_steps
     if @registrant.nil? || @registrant.competitor
-      self.steps = [:add_name, :add_events, :add_volunteers]
+      self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details]
     else
-      self.steps = [:add_name, :add_volunteers]
+      self.steps = [:add_name, :add_volunteers, :add_contact_details]
     end
   end
 
@@ -26,7 +26,6 @@ class Registrants::BuildController < ApplicationController
     case wizard_value(step)
     when :add_name
       @has_online_waiver = @config.has_online_waiver
-      @registrant.build_contact_detail if @registrant.contact_detail.nil?
       unless current_user.registrants.empty?
         @other_registrant = (current_user.registrants.active - [@registrant]).first
       end

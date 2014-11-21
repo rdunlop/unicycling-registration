@@ -103,7 +103,6 @@ class Registrant < ActiveRecord::Base
   before_validation :set_sorted_last_name, if: :past_step_1?
   validates :first_name, :last_name, :sorted_last_name, :presence => true, if: :past_step_1?
   validates :user_id, :presence => true, if: :past_step_1?
-  validates_associated :contact_detail, if: :past_step_1?
 
   # necessary for comp/non-comp only (not spectators):
   validates :birthday, :gender, :presence => true, if: :comp_noncomp_past_step_1?
@@ -118,12 +117,16 @@ class Registrant < ActiveRecord::Base
   # events
   validate :choices_combination_valid, if: :past_step_2?
 
+  # waiver
+  validates :online_waiver_signature, :presence => true, if: :active_or_event_config?
+
+  # contact info
+  validates_associated :contact_detail, if: :validated?
+
   # Expense items
   validate :not_exceeding_expense_item_limits
   validates_associated :registrant_expense_items
 
-  # waiver
-  validates :online_waiver_signature, :presence => true, if: :active_or_event_config?
 
   scope :active, -> { where(:deleted => false).order(:bib_number) }
 

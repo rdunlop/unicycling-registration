@@ -4,7 +4,7 @@
     %fieldset.data_block
       %legend= t(".address")
       %table
-        - unless other_registrant.nil?
+        - if other_registrant
           %tr
             %td{:colspan => "2"}
               %a#copy_address{ data: { address: other_registrant.contact_detail.address,
