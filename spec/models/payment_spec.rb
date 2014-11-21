@@ -182,7 +182,7 @@ describe Payment do
         @pd.save
         @pay.completed = true
         @pay.save
-        @reg.owing_registrant_expense_items.should == [@rei]
+        @reg.reload.owing_registrant_expense_items.should == [@rei]
       end
     end
     describe "when the registrant has two t-shirts, who only differ by details" do
@@ -195,7 +195,7 @@ describe Payment do
         @pd.save
         @pay.completed = true
         @pay.save
-        @reg.owing_registrant_expense_items.should == [@rei2]
+        @reg.reload.owing_registrant_expense_items.should == [@rei2]
       end
     end
 
@@ -210,7 +210,7 @@ describe Payment do
       end
 
       it "registrant no longer owes" do
-        @reg.owing_expense_items.should == []
+        @reg.reload.owing_expense_items.should == []
       end
       it "registrant has paid item" do
         @reg.paid_expense_items.should == [@pd.expense_item]
@@ -255,7 +255,7 @@ describe Payment do
       end
 
       it "registrant no longer owes" do
-        @reg.owing_expense_items.should == []
+        @reg.reload.owing_expense_items.should == []
       end
       it "registrant has paid item" do
         @reg.paid_expense_items.should == [@pd.expense_item]
