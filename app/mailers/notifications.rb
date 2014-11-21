@@ -50,7 +50,7 @@ class Notifications < ActionMailer::Base
 
   ######### ADMIN
   def missing_matching_expense_item(payment_id)
-    @payment_id
+    @payment_id = payment_id
 
     mail to: ENV['ERROR_EMAIL'], subject: "Missing reg-item match"
   end
