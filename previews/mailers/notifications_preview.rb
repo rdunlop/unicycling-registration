@@ -6,7 +6,7 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   def payment_completed
-    Notifications.payment_completed(payment)
+    Notifications.payment_completed(payment.id)
   end
 
   def send_feedback
@@ -14,11 +14,11 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   def request_registrant_access
-    Notifications.request_registrant_access(registrant, user)
+    Notifications.request_registrant_access(registrant.id, user.id)
   end
 
   def registrant_access_accepted
-    NotificatinosMailer.registrant_access_accepted(registrant, user)
+    Notifications.registrant_access_accepted(registrant.id, user.id)
   end
 
   def send_mass_email
@@ -27,11 +27,11 @@ class NotificationsPreview < ActionMailer::Preview
 
   ######### ADMIN
   def missing_matching_expense_item
-    Notifications.missing_matching_expense_item(payment)
+    Notifications.missing_matching_expense_item(payment.id)
   end
 
   def updated_current_reg_period
-    Notifications.updated_current_reg_period(old_period, new_period)
+    Notifications.updated_current_reg_period("Early Registration", "Late Registration")
   end
 
   def missing_old_reg_items
@@ -59,13 +59,5 @@ class NotificationsPreview < ActionMailer::Preview
 
   def email
     Email.new(body: "This is a mass e-mail body", subject: "I want to inform all of you")
-  end
-
-  def old_period
-    RegistrationPeriod.new(name: "Early Registration")
-  end
-
-  def new_period
-    RegistrationPeriod.new(name: "Late Registration")
   end
 end

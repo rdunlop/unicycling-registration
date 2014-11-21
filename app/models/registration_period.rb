@@ -122,7 +122,7 @@ class RegistrationPeriod < ActiveRecord::Base
       return false
     end
 
-    Notifications.updated_current_reg_period(old_period, now_period).deliver
+    Notifications.updated_current_reg_period(old_period.try(:name), now_period.try(:name)).deliver
 
     missing_regs = []
 

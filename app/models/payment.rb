@@ -93,7 +93,7 @@ class Payment < ActiveRecord::Base
       unless rei.nil?
         rei.destroy
       else
-        Notifications.missing_matching_expense_item(self).deliver
+        Notifications.missing_matching_expense_item(self.id).deliver
       end
     end
   end
