@@ -1,3 +1,4 @@
+- test that the mass emailer works with sidekiq (serialization/de-serialization)
 - restart the wizard at the correct step if someone leaves early
 - don't allow element to be paid for while "incomplete"
 - do we need to deal with coupons persisting over period end?

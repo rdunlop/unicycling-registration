@@ -35,7 +35,7 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   def missing_old_reg_items
-    bib_numbers = "1,2,3"
+    bib_numbers = [1,2,3]
     Notifications.missing_old_reg_items(bib_numbers)
   end
 
@@ -59,5 +59,9 @@ class NotificationsPreview < ActionMailer::Preview
 
   def email
     Email.new(body: "This is a mass e-mail body", subject: "I want to inform all of you")
+  end
+
+  def addresses
+    ["robin+test@dunlopeb.com", "robin+test2@dunlopweb.com"]
   end
 end
