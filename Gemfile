@@ -32,6 +32,8 @@ gem 'rails_admin'
 gem "fog"
 gem 'http_accept_language'
 gem 'newrelic_rpm'
+gem 'sidekiq'
+gem 'unicorn'
 
 # Model utils
 gem 'acts_as_list'
@@ -44,6 +46,14 @@ gem "wicked"
 
 #gem 'sqlite3'
 gem 'pg'
+
+# deployment
+gem 'capistrano'
+gem 'capistrano-rails'
+gem 'capistrano-rvm'
+gem 'capistrano-bundler'
+gem 'capistrano3-unicorn'
+gem 'capistrano-sidekiq' , github: 'seuros/capistrano-sidekiq'
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'
@@ -86,12 +96,6 @@ gem 'jquery-rails'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
-
-# Use unicorn as the app server
-gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
