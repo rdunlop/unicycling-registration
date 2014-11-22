@@ -5,6 +5,7 @@ gem 'rails', '4.1.7'
 
 # Authentication
 gem 'devise'
+gem 'devise-async'
 gem 'cancancan', '~> 1.9'
 gem 'rolify'
 
