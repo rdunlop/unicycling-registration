@@ -34,6 +34,7 @@ gem 'http_accept_language'
 gem 'newrelic_rpm'
 gem 'sidekiq'
 gem 'unicorn'
+gem 'whenever'
 
 # Model utils
 gem 'acts_as_list'
