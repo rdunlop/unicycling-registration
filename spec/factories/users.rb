@@ -60,6 +60,6 @@ FactoryGirl.define do
       after(:create) {|user| user.add_role :music_dj }
     end
 
-    after(:create) { |user| user.confirm! if ENV["MAIL_SKIP_CONFIRMATION"].nil? }
+    after(:create) { |user| user.confirm! if Rails.application.secrets.mail_skip_confirmation.nil? }
   end
 end

@@ -8,7 +8,7 @@ describe Notifications do
     let(:mail) { Notifications.ipn_received("something") }
 
     it "renders the headers" do
-      ENV['ERROR_EMAIL'] = "robin+e@dunlopweb.com"
+      Rails.application.secrets.error_email = "robin+e@dunlopweb.com"
       mail.subject.should eq("Ipn received")
       mail.to.should eq(["robin+e@dunlopweb.com"])
       mail.from.should eq(["from@example.com"])
@@ -24,7 +24,7 @@ describe Notifications do
     let!(:payment_detail) { FactoryGirl.create(:payment_detail, :amount => 10, :payment => payment) }
     before(:each) do
       payment.reload
-      ENV['PAYMENT_NOTICE_EMAIL'] = "robin+p@dunlopweb.com"
+      Rails.application.secrets.payment_notice_email = "robin+p@dunlopweb.com"
       @mail = Notifications.payment_completed(payment)
     end
 

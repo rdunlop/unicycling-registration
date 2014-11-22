@@ -5,7 +5,7 @@ class Notifications < ActionMailer::Base
   def ipn_received(contents)
     @contents = contents
 
-    mail to: ENV['ERROR_EMAIL']
+    mail to: Rails.application.secrets.error_email
   end
 
   def payment_completed(payment_id)
@@ -14,13 +14,13 @@ class Notifications < ActionMailer::Base
     @total_amount = payment.total_amount
     @event_name = EventConfiguration.singleton.long_name
 
-    mail to: payment.user.email, bcc: ENV['PAYMENT_NOTICE_EMAIL']
+    mail to: payment.user.email, bcc: Rails.application.secrets.payment_notice_email
   end
 
   def send_feedback(form_details)
     @contact_form = form_details
 
-    mail to: ENV['ERROR_EMAIL'], subject: 'Feedback'
+    mail to: Rails.application.secrets.error_email, subject: 'Feedback'
   end
 
   def request_registrant_access(target_registrant_id, requesting_user_id)
@@ -52,7 +52,7 @@ class Notifications < ActionMailer::Base
   def missing_matching_expense_item(payment_id)
     @payment_id = payment_id
 
-    mail to: ENV['ERROR_EMAIL'], subject: "Missing reg-item match"
+    mail to: Rails.application.secrets.error_email, subject: "Missing reg-item match"
   end
 
   def updated_current_reg_period(old_period_name, new_period_name)
@@ -60,12 +60,12 @@ class Notifications < ActionMailer::Base
 
     @new_period_description = new_period_name || "Unspecified"
 
-    mail to: ENV['ERROR_EMAIL'], subject: "Updated Registration Period"
+    mail to: Rails.application.secrets.error_email, subject: "Updated Registration Period"
   end
 
   def missing_old_reg_items(bib_numbers)
     @bib_numbers = bib_numbers
 
-    mail to: ENV['ERROR_EMAIL'], subject: "Registration Items Missing!"
+    mail to: Rails.application.secrets.error_email, subject: "Registration Items Missing!"
   end
 end

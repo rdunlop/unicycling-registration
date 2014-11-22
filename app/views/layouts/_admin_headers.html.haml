@@ -1,7 +1,7 @@
 - if user_signed_in? && current_user.has_role?(:super_admin) && !RegistrationPeriod.update_checked_recently
   .reg_period_update_warning No Registration-Period update has occurred in the past 3 days. Please check your scheduler.
 
-- if ENV['DEVELOPMENT_BANNER'].nil? || ENV['DEVELOPMENT_BANNER'] == "true"
+- if Rails.application.secrets.development_banner
   .dev_banner
     Non-Live System.
     %a#dev_banner_remover{ href: "#", class: "banner_remover", data: { banner_class: "dev_banner"},  title: "Remove dev banner" } [x]

@@ -68,7 +68,7 @@ module ApplicationHelper
   end
 
   def skip_user_creation_confirmation?
-    override_by_env = ENV['MAIL_SKIP_CONFIRMATION'] == "true"
+    override_by_env = Rails.application.secrets.mail_skip_confirmation
     override_by_env || allow_reg_modifications?
   end
 end

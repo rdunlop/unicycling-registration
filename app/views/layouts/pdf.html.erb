@@ -14,7 +14,7 @@
   </style>
 </head>
 <body class="pdf_body" onload='number_pages'>
-  <% if ENV['DEVELOPMENT_BANNER'].nil? or ENV['DEVELOPMENT_BANNER'] == "true" %>
+  <% if Rails.application.secrets.development_banner %>
     <div class="dev_banner">
       Non-Live System.
     </div>

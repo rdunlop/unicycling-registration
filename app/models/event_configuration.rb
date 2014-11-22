@@ -104,7 +104,7 @@ class EventConfiguration < ActiveRecord::Base
     paypal_test_url = "https://www.sandbox.paypal.com"
     paypal_live_url = "https://www.paypal.com"
 
-    if ENV['PAYPAL_TEST'].nil? or ENV['PAYPAL_TEST'] == "true"
+    if Rails.application.secrets.paypal_test
       paypal_test_url
     else
       paypal_live_url

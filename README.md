@@ -361,35 +361,15 @@ Start the Development Environment
 Start the local server
 ----------------------
 
-(inside the VM) Create a local .env file. This file will contain all of the base
-settings, as well as some others that need to be configured properly:
+(inside the VM) Create a local .env file. This file will contain some base settings.
 
     cd workspace
     $ echo "PORT=9292" > .env
     $ echo "RACK_ENV=development" >> .env
     $ echo "WEB_CONCURRENCY=1" >> .env
 
-Each of the settings in the "Base Settings" section above will need to be
+Each of the settings in the settings.yml file will need to be
 configured. Some of these settings should be configured differently:
-
-    PAYPAL_TEST=true
-
- * causes the paypal "sandbox" to be the destination for payments
-
-    DOMAIN=localhost:9292
-
- * causes "Confirmation" e-mails to have links which you can click on which will
-   validate your e-mail address.
-
-
-Other notes about the differences between "Development" and "Production"
-instances:
-
-* On "production", all exceptions are e-mailed to the ERROR_EMAIL address.
-  (Via the exception-logging gem)
-* NOTE: In development, ALL E-MAIL will be sent to the ERROR_EMAIL address,
-  but in production it will flow as expected.
-
 
 Start the server:
 
@@ -481,14 +461,6 @@ To Run the Production setup locally
 * Import the data
 
     $ PGPASSWORD=password pg_restore --verbose --clean --no-acl --no-owner -h localhost -U postgres -d app_production latest.dump
-
-* Set the .env file (only include the last option if you want dev like errors):
-
-    PORT=9292
-    RACK_ENV=production
-    SECRET=< run `rake secret` >
-    DEVELOPMENT_BANNER=false
-    DISPLAY_PRODUCTION_ERRORS=true
 
 * Precompile the assets
 

@@ -30,7 +30,6 @@ Workspace::Application.configure do
   config.active_record.migration_error = :page_load
 
   config.action_mailer.delivery_method = :test
-  ENV['DOMAIN'] = 'localhost'
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large

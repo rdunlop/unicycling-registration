@@ -4,7 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = ENV['MAIL_FULL_EMAIL']
+  config.mailer_sender = Rails.application.secrets.mail_full_email
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -232,6 +232,6 @@ Devise.setup do |config|
   if Rails.env.development? or Rails.env.test? or Rails.env.naucc?
     config.secret_key = ('x' * 30)
   else
-    config.secret_key = ENV['SECRET']
+    config.secret_key = Rails.application.secrets.secret
   end
 end

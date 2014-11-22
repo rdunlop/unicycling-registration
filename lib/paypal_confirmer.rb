@@ -37,7 +37,7 @@ class PaypalConfirmer
   end
 
   def correct_paypal_account?
-    @params["receiver_email"] == ENV["PAYPAL_ACCOUNT"].downcase
+    @params["receiver_email"] == Rails.application.secrets.paypal_account.downcase
   end
 
   def transaction_id

@@ -96,7 +96,7 @@ describe Payment do
 
   describe "With an environment config with test mode disabled" do
     before(:each) do
-      ENV["PAYPAL_TEST"] = "false"
+      Rails.application.secrets.paypal_test = false
     end
     it "has a REAL paypal_post_url" do
       @pay.paypal_post_url.should == "https://www.paypal.com/cgi-bin/webscr"

@@ -267,7 +267,7 @@ describe PaymentsController do
       describe "with a valid post" do
         before(:each) do
           @attributes =  {
-            :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase,
+            :receiver_email => Rails.application.secrets.paypal_account.downcase,
             :payment_status => "Completed",
             :txn_id => "12345",
             :payment_date => "Some Paypal payment date",
@@ -305,7 +305,7 @@ describe PaymentsController do
       describe "with an incorrect payment_id" do
         before(:each) do
           @attributes =  {
-            :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase,
+            :receiver_email => Rails.application.secrets.paypal_account.downcase,
             :payment_status => "Completed",
             :txn_id => "12345",
             :invoice => (@payment.id + 100).to_s,
@@ -328,14 +328,14 @@ describe PaymentsController do
       end
       it "should send an e-mail to notify of payment receipt" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {:mc_gross => "20.00", :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        post :notification, {:mc_gross => "20.00", :receiver_email => Rails.application.secrets.paypal_account.downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 1 # one for success
       end
       it "should send an e-mail to notify of payment error when mc_gross is empty" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {:mc_gross => "", :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        post :notification, {:mc_gross => "", :receiver_email => Rails.application.secrets.paypal_account.downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 2 # one for success, one for the error
@@ -343,7 +343,7 @@ describe PaymentsController do
 
       it "should send an IPN notification message if the total amount doesn't match the payment total" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {:mc_gross => @payment.total_amount - 1, :receiver_email => ENV["PAYPAL_ACCOUNT"].downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        post :notification, {:mc_gross => @payment.total_amount - 1, :receiver_email => Rails.application.secrets.paypal_account.downcase, :payment_status => "Completed", :invoice => @payment.id.to_s}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 2 # one for success, one for the error (payment different)

@@ -11,7 +11,7 @@ Workspace::Application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = !ENV['DISPLAY_PRODUCTION_ERRORS'].nil?
+  config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
@@ -77,8 +77,7 @@ Workspace::Application.configure do
 end
 # backwards-compatible
 error_emails = []
-error_emails << ENV['ERROR_EMAIL'] unless ENV['ERROR_EMAIL'].nil?
-error_emails << ENV['ERROR_EMAIL2'] unless ENV['ERROR_EMAIL2'].nil?
+error_emails << Rails.application.secrets.error_email if Rails.application.secrets.error_email
 
 Workspace::Application.config.middleware.use ExceptionNotification::Rack,
   :email => {

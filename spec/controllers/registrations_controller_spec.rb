@@ -13,7 +13,7 @@ describe RegistrationsController do
 
   describe "confirmation e-mail" do
     after(:each) do
-      ENV['MAIL_SKIP_CONFIRMATION'] = nil
+      Rails.application.secrets.mail_skip_confirmation = nil
     end
     it "sends an e-mail" do
       ActionMailer::Base.deliveries.clear
@@ -24,7 +24,7 @@ describe RegistrationsController do
 
     it "doesn't send an e-mail when skip configured" do
       ActionMailer::Base.deliveries.clear
-      ENV['MAIL_SKIP_CONFIRMATION'] = "true"
+      Rails.application.secrets.mail_skip_confirmation = true
       post :create, valid_attributes
       num_deliveries = ActionMailer::Base.deliveries.size
       u = User.first

@@ -11,9 +11,9 @@ describe PaypalConfirmer do
   end
 
   it "is sent to the correct paypalaccount" do
-    ENV['PAYPAL_ACCOUNT'] = "robin+merchant@dunlopweb.com"
+    Rails.application.secrets.paypal_account = "robin+merchant@dunlopweb.com"
     params = {
-      "receiver_email" => ENV['PAYPAL_ACCOUNT']
+      "receiver_email" => Rails.application.secrets.paypal_account
     }
     confirmer = PaypalConfirmer.new(params, {})
     confirmer.correct_paypal_account?.should == true

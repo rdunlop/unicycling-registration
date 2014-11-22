@@ -41,12 +41,6 @@ Workspace::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
-  ENV['DOMAIN'] = 'localhost'
-
-  ENV['MAIL_FULL_EMAIL'] = "from@example.com"
-  ENV['PAYPAL_ACCOUNT'] = "ROBIN+merchant@dunlopweb.com"
-  ENV['SECRET'] = "somesecretstringisreallylongenoughtobesecurecheckpassing"
-  ENV['ERROR_EMAIL'] = "robin+e@dunlopweb.com"
 end
 
 # Necessary to allow the tests to execute when they don't have a locale defined.

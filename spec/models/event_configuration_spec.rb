@@ -144,16 +144,12 @@ describe EventConfiguration do
     end
   end
 
-  it "returns the live paypal url when nothing is configured" do
-    ENV['PAYPAL_TEST'] = nil
-    EventConfiguration.paypal_base_url.should == "https://www.sandbox.paypal.com"
-  end
   it "returns the live paypal url when TEST is false" do
-    ENV['PAYPAL_TEST'] = "false"
+    Rails.application.secrets.paypal_test = false
     EventConfiguration.paypal_base_url.should == "https://www.paypal.com"
   end
   it "returns the test paypal url when TEST is true" do
-    ENV['PAYPAL_TEST'] = "true"
+    Rails.application.secrets.paypal_test = true
     EventConfiguration.paypal_base_url.should == "https://www.sandbox.paypal.com"
   end
 end
