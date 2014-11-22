@@ -135,7 +135,6 @@ GEM
       compass (>= 0.12.2)
     connection_pool (2.1.0)
     consistency_fail (0.3.2)
-    dalli (2.7.2)
     debug_inspector (0.0.2)
     delorean (2.1.0)
       chronic
@@ -214,7 +213,6 @@ GEM
     kgio (2.9.2)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    memcachier (0.0.2)
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.0)
@@ -285,8 +283,24 @@ GEM
     raindrops (0.13.0)
     rake (10.3.2)
     redis (3.1.0)
+    redis-actionpack (4.0.0)
+      actionpack (~> 4)
+      redis-rack (~> 1.5.0)
+      redis-store (~> 1.1.0)
+    redis-activesupport (4.0.0)
+      activesupport (~> 4)
+      redis-store (~> 1.1.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
+    redis-rack (1.5.0)
+      rack (~> 1.5)
+      redis-store (~> 1.1.0)
+    redis-rails (4.0.0)
+      redis-actionpack (~> 4)
+      redis-activesupport (~> 4)
+      redis-store (~> 1.1.0)
+    redis-store (1.1.4)
+      redis (>= 2.2)
     remotipart (1.2.1)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
@@ -415,7 +429,6 @@ DEPENDENCIES
   chosen-rails
   coffee-rails
   consistency_fail
-  dalli
   delorean
   devise
   exception_notification
@@ -428,7 +441,6 @@ DEPENDENCIES
   globalize (~> 4.0.2)
   http_accept_language
   jquery-rails
-  memcachier
   newrelic_rpm
   paper_trail (~> 3.0.1)
   pg
@@ -438,6 +450,7 @@ DEPENDENCIES
   rails (= 4.1.7)
   rails_admin
   rake
+  redis-rails
   rolify
   rspec-instafail
   rspec-rails

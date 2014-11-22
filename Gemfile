@@ -26,8 +26,7 @@ gem 'font-kit-rails', :git => "git://github.com/sandelius/font-kit-rails.git", :
 gem 'rake'
 gem 'paper_trail', '~> 3.0.1'
 gem 'exception_notification'
-gem 'memcachier'
-gem 'dalli'
+gem 'redis-rails'
 gem 'rails_admin'
 gem "fog"
 gem 'http_accept_language'
