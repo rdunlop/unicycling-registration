@@ -30,6 +30,7 @@ gem 'exception_notification'
 gem 'redis-rails'
 gem 'rails_admin'
 gem "fog"
+gem 'aws-sdk'
 gem 'http_accept_language'
 gem 'newrelic_rpm'
 gem 'sidekiq'
