@@ -3,6 +3,7 @@
 - don't allow element to be paid for while "incomplete"
 - do we need to deal with coupons persisting over period end?
 - describe the coupon on the summary page?
+- re-work the specs to use the default sidekiq queueing for test strategy (remove work-around)
 
 Last Re-Arranged June 20th, 2014.
 

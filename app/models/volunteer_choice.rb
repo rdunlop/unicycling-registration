@@ -24,7 +24,7 @@ class VolunteerChoice < ActiveRecord::Base
 
   def send_email_to_admins
     if volunteer_opportunity.inform_emails.present?
-      VolunteerMailer.new_volunteer(self.id).deliver
+      VolunteerMailer.delay.new_volunteer(self.id)
     end
   end
 

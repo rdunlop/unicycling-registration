@@ -43,7 +43,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
 
     respond_to do |format|
       if @additional_registrant_access.save
-        Notifications.request_registrant_access(@additional_registrant_access.registrant.id, @user.id).deliver
+        Notifications.delay.request_registrant_access(@additional_registrant_access.registrant.id, @user.id)
         format.html { redirect_to user_additional_registrant_accesses_path(@user), notice: 'Additional registrant access request was successfully created.' }
         format.json { render json: @additional_registrant_access, status: :created, location: @additional_registrant_access }
       else
@@ -60,7 +60,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
 
     respond_to do |format|
       if @additional_registrant_access.update_attributes({:declined => false, :accepted_readonly => true })
-        Notifications.registrant_access_accepted(@additional_registrant_access.registrant.id, @additional_registrant_access.user.id).deliver
+        Notifications.delay.registrant_access_accepted(@additional_registrant_access.registrant.id, @additional_registrant_access.user.id)
         format.html { redirect_to invitations_user_additional_registrant_accesses_path(user), notice: 'Additional registrant access was accepted (readonly).' }
         format.json { head :no_content }
       else

@@ -235,3 +235,11 @@ Devise.setup do |config|
     config.secret_key = Rails.application.secrets.secret
   end
 end
+
+if Rails.application.secrets.redis
+  Devise::Async.setup do |config|
+    config.enabled = true
+    config.backend = :sidekiq
+    config.queue   = :default
+  end
+end

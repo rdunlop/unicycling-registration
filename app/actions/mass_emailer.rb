@@ -11,7 +11,7 @@ class MassEmailer
       first_index = 0
       current_set = set_of_addresses.slice(first_index, 30)
       until current_set == [] or current_set.nil?
-        Notifications.send_mass_email(email_form, current_set).deliver
+        Notifications.delay.send_mass_email(email_form, current_set)
         first_index += 30
         current_set = set_of_addresses.slice(first_index, 30)
       end

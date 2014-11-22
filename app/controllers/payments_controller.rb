@@ -110,20 +110,20 @@ class PaymentsController < ApplicationController
         if Payment.exists?(paypal.order_number)
           payment = Payment.find(paypal.order_number)
           if payment.completed
-            Notifications.ipn_received("Payment already completed " + paypal.order_number).deliver
+            Notifications.delay.ipn_received("Payment already completed " + paypal.order_number)
           else
             payment.completed = true
             payment.transaction_id = paypal.transaction_id
             payment.completed_date = DateTime.now
             payment.payment_date = paypal.payment_date
             payment.save
-            Notifications.payment_completed(payment.id).deliver
+            Notifications.delay.payment_completed(payment.id)
             if payment.total_amount != paypal.payment_amount
-              Notifications.ipn_received("Payment total #{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}").deliver
+              Notifications.delay.ipn_received("Payment total #{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}")
             end
           end
         else
-          Notifications.ipn_received("Unable to find Payment " + paypal.order_number).deliver
+          Notifications.delay.ipn_received("Unable to find Payment " + paypal.order_number)
         end
       end
     end

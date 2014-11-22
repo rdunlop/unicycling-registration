@@ -25,7 +25,7 @@ class WelcomeController < ApplicationController
     end
 
     if @contact_form.valid?
-      Notifications.send_feedback(@contact_form).deliver
+      Notifications.delay.send_feedback(@contact_form)
       respond_to do |format|
         format.html { redirect_to welcome_help_path, notice: 'Feedback sent successfully.' }
       end

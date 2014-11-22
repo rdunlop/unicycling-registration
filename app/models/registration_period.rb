@@ -122,7 +122,7 @@ class RegistrationPeriod < ActiveRecord::Base
       return false
     end
 
-    Notifications.updated_current_reg_period(old_period.try(:name), now_period.try(:name)).deliver
+    Notifications.delay.updated_current_reg_period(old_period.try(:name), now_period.try(:name))
 
     missing_regs = []
 
@@ -139,7 +139,7 @@ class RegistrationPeriod < ActiveRecord::Base
     end
 
     if missing_regs.any?
-      Notifications.missing_old_reg_items(missing_regs).deliver
+      Notifications.delay.missing_old_reg_items(missing_regs)
     end
 
     old_period.update_attribute(:current_period, false) unless old_period.nil?
