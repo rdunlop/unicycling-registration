@@ -24,5 +24,9 @@ FactoryGirl.define do
     association :noncompetitor_expense_item, factory: :expense_item, cost: 50
     name "Early Registration"
     onsite false
+
+    trait :current do
+      current_period true
+    end
   end
 end

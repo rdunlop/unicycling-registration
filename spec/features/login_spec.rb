@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'Logging in to the system' do
+  include_context 'basic event configuration'
   include_context 'can login'
 
   context 'as a normal user' do

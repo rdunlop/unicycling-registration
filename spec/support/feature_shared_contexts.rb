@@ -30,7 +30,7 @@ shared_context 'basic event configuration' do |options = {}|
                        :iuf => true, :usa => false, :test_mode => options[:test_mode], :music_submission_end_date => Date.today + 2.months)
     exp_comp = FactoryGirl.create(:expense_item, name: "Early Registration - Competitor", cost: 20.00)
     exp_noncomp = FactoryGirl.create(:expense_item, name: "Early Registration - NonCompetitor", cost: 11.00)
-    FactoryGirl.create(:registration_period, :start_date => Date.today - 1.month, :end_date => Date.today + 1.month, competitor_expense_item: exp_comp, noncompetitor_expense_item: exp_noncomp)
+    FactoryGirl.create(:registration_period, :current, :start_date => Date.today - 1.month, :end_date => Date.today + 1.month, competitor_expense_item: exp_comp, noncompetitor_expense_item: exp_noncomp)
     FactoryGirl.create(:event, :name => "100m")
   end
 end

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'Logging in to the system' do
   let(:user) { FactoryGirl.create :user }
-  include_context 'user is logged in'
   include_context 'basic event configuration'
+  include_context 'user is logged in'
 
   describe "when creating a new noncompetitor" do
     specify 'can create new noncompetitor' do
