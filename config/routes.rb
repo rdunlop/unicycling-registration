@@ -1,4 +1,8 @@
 Workspace::Application.routes.draw do
+  require 'sidekiq/web'
+  authenticate :user, ->(u) { u.has_role? :admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   scope "(:locale)" do
     resources :registrant_groups, :except => [:new] do

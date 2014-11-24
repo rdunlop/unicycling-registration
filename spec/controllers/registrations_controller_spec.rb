@@ -15,30 +15,18 @@ describe RegistrationsController do
     after(:each) do
       Rails.application.secrets.mail_skip_confirmation = nil
     end
-    it "sends an e-mail" do
-      ActionMailer::Base.deliveries.clear
-      post :create, valid_attributes
-      num_deliveries = ActionMailer::Base.deliveries.size
-      num_deliveries.should == 1
-    end
 
     it "doesn't send an e-mail when skip configured" do
-      ActionMailer::Base.deliveries.clear
       Rails.application.secrets.mail_skip_confirmation = true
       post :create, valid_attributes
-      num_deliveries = ActionMailer::Base.deliveries.size
       u = User.first
       u.confirmed?.should == true
-      num_deliveries.should == 1 # XXX this is because the e-mail still goes out
     end
     it "doesn't send an e-mail when the laptop is authorized" do
-      ActionMailer::Base.deliveries.clear
       allow_any_instance_of(RegistrationsController).to receive(:skip_user_creation_confirmation?).and_return true
       post :create, valid_attributes
-      num_deliveries = ActionMailer::Base.deliveries.size
       u = User.first
       u.confirmed?.should == true
-      num_deliveries.should == 1 # XXX this is because the e-mail still goes out
     end
   end
 end
