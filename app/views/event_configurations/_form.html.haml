@@ -135,6 +135,10 @@
       %td= f.check_box :display_confirmed_events
       %td Enabling this displays the confirmed events/unconfirmed events on the Registrant#summary page.
     %tr
+      %th= f.label :spectators
+      %td= f.check_box :spectators
+      %td Enabling this displays the option to enter spectator information, and buy items with them.
+    %tr
       %th= f.label :test_mode
       %td= f.check_box :test_mode
       %td Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.

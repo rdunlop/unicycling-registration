@@ -35,6 +35,7 @@
 #  logo_file                             :string(255)
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE)
+#  spectators                            :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -63,6 +64,7 @@ FactoryGirl.define do
     test_mode true
     style_name "naucc_2013"
     max_award_place 5
+    spectators false
 
     trait :with_usa do
       usa true

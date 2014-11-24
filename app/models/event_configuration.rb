@@ -35,6 +35,7 @@
 #  logo_file                             :string(255)
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE)
+#  spectators                            :boolean          default(FALSE)
 #
 
 class EventConfiguration < ActiveRecord::Base

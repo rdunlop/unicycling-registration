@@ -90,6 +90,9 @@
   %tr
     %th Display Confirmed/Unconfirmed events:
     %td= @config.display_confirmed_events
+  %tr
+    %th Display Spectator Option
+    %td= @config.spectators
 
 - if @event_configurations.count == 0
   = link_to 'New Event configuration', new_event_configuration_path
