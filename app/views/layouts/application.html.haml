@@ -5,9 +5,7 @@
     %title
       = @config.short_name
       = t(".registration")
-    = stylesheet_link_tag  @config.style_name, :media => "all"
-    - if Rails.application.secrets.development_banner
-      = stylesheet_link_tag    "dev", :media => "all"
+    = stylesheet_link_tag @config.style_name, :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
     = render "shared/analytics/google"
