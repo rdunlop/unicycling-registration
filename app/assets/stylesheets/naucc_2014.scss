@@ -11,9 +11,6 @@
  *= require_self
  */
 
- $yellow: rgb(150, 255, 0);
- $blue: rgb(0, 255, 255);
-
 $background: rgb(40, 40, 40);
 $backgroundsub: rgb(40, 40, 40);
 $backgroundhover: rgb(102, 102, 102);
@@ -31,56 +28,33 @@ $red: rgb(255, 0, 0);
 $red-hover: rgb(255, 0, 0);
 $red-active: rgb(220, 0, 0);
 
-.ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
-min-width: 70px;
-}
+@import "new_styles/00_colors";
 
-.competitor,
-.noncompetitor {
-background-color: $unicon-blue;
-}
+// Overwrite colors
 
-.competitor:hover,
-.noncompetitor:hover {
-background-color: $unicon-pink;
-color: black;
-}
+$competitor: $unicon-blue;
+$competitor_hover: $unicon-pink;
+$competitor_active: $unicon-pink-active;
+$noncompetitor: $unicon-blue;
+$noncompetitor_hover: $unicon-pink;
+$noncompetitor_active: $unicon-pink-active;
 
-.competitor:active,
-.noncompetitor:active {
-background-color: $unicon-pink-active;
-}
+$focus: $unicon-blue;
+$focus_hover: $unicon-pink;
+$focus_active: $unicon-pink-active;
 
-.competitor_link,
-.competitor_link:visited,
-.noncompetitor_link,
-.noncompetitor_link:visited {
-  color: black;
-  text-decoration: underline;
-}
-.competitor_link:hover,
-.noncompetitor_link:hover {
-  color: $unicon-pink;
-}
+$nonfocus: #266DA5;
+$nonfocus_hover: #3487C9;
+$nonfocus_active: #5555ff;
 
-.focus_button,
-.nonfocus_button,
-.focus_button:visited,
-.nonfocus_button:visited {
-  background-color: $unicon-blue;
-  color: white;
-}
-
-.focus_button:hover,
-.nonfocus_button:hover {
-  color: black;
-  background-color: $unicon-pink;
-}
-.focus_button:active,
-.nonfocus_button:active {
-  background-color: $unicon-pink-active;
-
-}
+@import "new_styles/breadcrumbs";
+@import "new_styles/02_buttons";
+@import "new_styles/03_forms";
+@import "new_styles/04_summary";
+@import "new_styles/05_wizard";
+@import "new_styles/06_misc";
+@import "new_styles/07_dev_tools";
+@import "new_styles/08_pricing";
 
 .current_reg_period {
   background-color: #fff;

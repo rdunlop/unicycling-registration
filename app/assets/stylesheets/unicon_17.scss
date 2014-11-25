@@ -25,60 +25,37 @@ $unicon-pink: rgb(219, 71, 128);
 $unicon-pink-active: rgb(240, 80, 128);
 $unicon-blue: rgb(36, 130, 181);
 
+@import "new_styles/00_colors";
+
+// Overwrite colors
+
+$competitor: $unicon-blue;
+$noncompetitor: $unicon-blue;
+$competitor_hover: $unicon-pink;
+$noncompetitor_hover: $unicon-pink;
+$competitor_active: $unicon-pink-active;
+$noncompetitor_active: $unicon-pink-active;
+
+$focus: $unicon-blue;
+$focus_hover: $unicon-pink;
+$focus_active: $unicon-pink-active;
+
+$nonfocus: #266DA5;
+$nonfocus_hover: #3487C9;
+$nonfocus_active: #5555ff;
+
+@import "new_styles/breadcrumbs";
+@import "new_styles/02_buttons";
+@import "new_styles/03_forms";
+@import "new_styles/04_summary";
+@import "new_styles/05_wizard";
+@import "new_styles/06_misc";
+@import "new_styles/07_dev_tools";
+@import "new_styles/08_pricing";
+
+
 a:hover {
   color: rgb(219, 71, 128);
-}
-
-
-.ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
-min-width: 70px;
-}
-
-.competitor,
-.noncompetitor {
-background-color: $unicon-blue;
-}
-
-.competitor:hover,
-.noncompetitor:hover {
-background-color: $unicon-pink;
-color: white;
-}
-
-.competitor:active,
-.noncompetitor:active {
-background-color: $unicon-pink-active;
-}
-
-.competitor_link,
-.competitor_link:visited,
-.noncompetitor_link,
-.noncompetitor_link:visited {
-  color: black;
-  text-decoration: underline;
-}
-.competitor_link:hover,
-.noncompetitor_link:hover {
-  color: $unicon-pink;
-}
-
-.focus_button,
-.nonfocus_button,
-.focus_button:visited,
-.nonfocus_button:visited {
-  background-color: $unicon-blue;
-  color: black;
-}
-
-.focus_button:hover,
-.nonfocus_button:hover {
-  color: white;
-  background-color: $unicon-pink;
-}
-.focus_button:active,
-.nonfocus_button:active {
-  background-color: $unicon-pink-active;
-
 }
 
 .current_reg_period {

@@ -1,26 +1,3 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-
-// STYLING
-$focus: #12AC50;
-$focus_hover: #4CD673;
-$nonfocus: #266DA5;
-$nonfocus_hover: #3487C9;
-
-// http://www.usabilitypost.com/2012/01/10/pressed-button-state-with-css3/
-@mixin button($width) {
-  text-decoration: none;
-  border: none;
-  display: inline-block;
-  min-width:$width;
-  padding: 10px 15px;
-  margin: 5px 10px;
-  font-size: 18px;
-  cursor: pointer;
-
-}
 
 .access_code_link {
   background-color: lightgreen;
@@ -34,44 +11,6 @@ $nonfocus_hover: #3487C9;
   background-color: rgb(55, 230, 55);
   padding: 10px;
   text-decoration: none;
-}
-
-.focus_button:visited, .nonfocus_button:visited {
-  color: black;
-}
-.focus_button {
-  @include button(220px);
-  margin: 10px;
-  background-color: $focus;
-}
-a.focus_button, a.nonfocus_button {
-  padding: 10px 0px;
-}
-
-.focus_button:hover {
-  color: white;
-  text-decoration: none;
-  background-color: $focus_hover;
-}
-.focus_button:active {
-  border-color: #205f3c;
-
-}
-
-
-.nonfocus_button {
-  @include button(220px);
-  margin: 5px;
-  background-color: $nonfocus;
-}
-.nonfocus_button:hover {
-  color: white;
-  text-decoration: none;
-  background-color: $nonfocus_hover;
-}
-.nonfocus_button:active {
-  background-color: #5555ff;
-
 }
 
 .help_text {

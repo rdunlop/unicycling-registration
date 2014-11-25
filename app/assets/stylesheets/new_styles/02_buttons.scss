@@ -1,0 +1,202 @@
+.competitor {
+  background-color: $competitor;
+}
+.competitor:hover {
+  color: $competitor;
+  background-color: $competitor_hover;
+}
+.spectator {
+  background-color: $spectator;
+}
+.competitor:active {
+  background-color: $competitor_active;
+}
+
+.reg_already_paid {
+  background-color: red;
+}
+
+.competitor_link {
+  text-decoration: none;
+  color: $competitor;
+}
+.competitor_link:visited {
+  color: $competitor;
+}
+.competitor_link:active {
+  color: $competitor_active;
+}
+.noncompetitor_link {
+  text-decoration: none;
+  color: $noncompetitor;
+}
+.noncompetitor_link:hover {
+  color: $noncompetitor_active;
+}
+.noncompetitor_link:visited {
+  color: $noncompetitor;
+}
+
+.noncompetitor {
+  background-color: $noncompetitor;
+}
+.noncompetitor:hover {
+  color: $noncompetitor;
+  background-color: $noncompetitor_hover;
+}
+.noncompetitor:active {
+  background-color: $noncompetitor_active;
+}
+
+.payment_link,
+input.delete,
+input.sold_out {
+  background-color: #AC2B2B;
+}
+.payment_link:hover,
+input.delete:hover,
+input.sold_out:hover {
+  background-color: #D61414;
+}
+.payment_link:active,,
+input.delete:active,
+input.sold_out:active {
+  background-color: #A01A1A;
+}
+
+input.delete,
+input.sold_out {
+  border: none;
+}
+
+.competitor, .noncompetitor, .payment_link,
+input.delete, input.sold_out {
+  color: white;
+  text-decoration: none;
+}
+.competitor:visited, .noncompetitor:visited, .payment_link:visited {
+  color: white;
+}
+
+// http://www.usabilitypost.com/2012/01/10/pressed-button-state-with-css3/
+@mixin button($width: auto) {
+  text-decoration: none;
+  border: none;
+  display: inline-block;
+  min-width:$width;
+  padding: 10px 15px;
+  margin: 5px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  -moz-border_radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+  border-radius: 10px; /* future proofing */
+}
+
+.focus_button:visited, .nonfocus_button:visited {
+  background-color: $focus;
+  color: black;
+}
+
+.focus_button {
+  @include button(220px);
+  margin: 10px;
+  background-color: $focus;
+  color: black;
+}
+
+a.focus_button, a.nonfocus_button {
+  padding: 10px 0px;
+}
+
+.focus_button:hover {
+  color: white;
+  text-decoration: none;
+  background-color: $focus_hover;
+}
+
+.focus_button:active {
+  background-color: $focus_active;
+  border-color: #205f3c;
+
+}
+
+.nonfocus_button {
+  @include button(220px);
+  margin: 5px;
+  background-color: $nonfocus;
+}
+.nonfocus_button:hover {
+  color: white;
+  text-decoration: none;
+  background-color: $nonfocus_hover;
+}
+.nonfocus_button:active {
+  background-color: $nonfocus_active;
+
+}
+
+
+.action_button {
+  @include button;
+  background-color: #12AC50;
+}
+
+.action_button:hover {
+  background-color: #4CD673;
+}
+.action_button:visited {
+  color: black;
+}
+
+.counter_action_button {
+  @include button;
+  background-color: #F1D6D6;
+}
+.counter_action_button:hover {
+  background-color: #F16565;
+}
+.counter_action_button:visited {
+  color: black;
+}
+
+
+.locked_competition_action {
+  @include button;
+  background-color: #5B99F5;
+}
+.locked_cometition_action:hover {
+  background-color: #9AC0F8;
+}
+
+
+
+.registration_button {
+  @include button(220px);
+  margin-bottom:10px;
+  text-align:center;
+}
+.registration_button:hover, .registration_button:focus {
+  text-decoration: none;
+}
+
+.registrant {
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 11px;
+  border-top-left-radius: 11px;
+  border-top-right-radius: 11px;
+  padding: 3px;
+}
+
+.registrant_edit_button {
+  @include button(auto);
+}
+
+.payment_link {
+  @include button(150px);
+}
+
+.unpaid {
+  color: red;
+}

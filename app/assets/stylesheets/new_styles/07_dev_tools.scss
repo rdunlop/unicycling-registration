@@ -1,0 +1,37 @@
+$recommended-color: lightblue;
+
+.dev_banner {
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: 216px;
+  left: -164px;
+  width: 350px;
+  text-align: center;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  background-color: red;
+  z-index: 1000000;
+}
+#dev_banner_remover {
+  float:right;
+  clear:none;
+  padding: 0px 50px 0 0;
+  color:black;
+  text-decoration:none;
+}
+
+.test_mode {
+  color: red;
+  padding: 0 20px 10px;
+  background: #FFE0E0;
+}
+
+#test_mode_remover {
+  float:right;
+  clear:none;
+  padding:10px;
+  color:black;
+  text-decoration:none;
+}

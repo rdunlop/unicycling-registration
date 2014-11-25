@@ -21,5 +21,8 @@
  *= require jquery.dataTables
  *= require jquery-ui-1.9.2.custom
  *= require font-kit-rails
- %= require breadcrumbs
  */
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+  min-width: 70px;
+}

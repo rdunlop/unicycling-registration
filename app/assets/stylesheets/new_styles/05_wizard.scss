@@ -1,0 +1,20 @@
+.wizard_progress {
+  ul {
+    list-style: none;
+
+    li {
+      display: inline-block;
+      padding: 10px;
+      margin: 10px;
+    }
+  }
+  .finished {
+    background-color: lightblue;
+  }
+  .current {
+    background-color: lightgreen;
+  }
+  .unfinished {
+    background-color: pink;
+  }
+}

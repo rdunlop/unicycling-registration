@@ -3,14 +3,12 @@
     font-weight: 700;
     a, a:hover, a:visited {
       text-decoration: none;
-      color: blue;
+      color: $breadcrumb-color;
     }
     display: inline-block;
   }
-}
 
-@media print {
-  .breadcrumbs {
+  @media print {
     display: none;
   }
 }

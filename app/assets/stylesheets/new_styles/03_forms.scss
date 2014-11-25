@@ -1,0 +1,142 @@
+.required:after {
+  content: " *";
+}
+
+div.delete_link {
+  text-align: right;
+}
+
+div.required {
+  text-align: left;
+}
+
+.free_item {
+  background-color: yellow;
+}
+
+.status_image {
+  height: 20px;
+}
+
+.registration_closed {
+  h2 {
+    color: red
+  }
+  margin-bottom: 20px;
+}
+
+.music_help {
+  text-decoration:none;
+}
+
+// LAYOUT
+
+.sign_up_difference,
+.rulebook_link {
+  display: block;
+  margin: 0 auto;
+  clear:both;
+  text-align: center;
+  margin:5px 0 10px 0;
+}
+
+.registrations_box {
+  margin: 20px 0;
+  display: inline;
+}
+
+.prices_increase {
+  font-size: 12px;
+}
+
+.payment_process {
+}
+
+
+
+.expense_items {
+  td, th {
+    font-size: 8pt;
+  }
+}
+
+.data_block {
+  h2 {
+    background: lightgray;
+  }
+  fieldset > span {
+    display: block;
+  }
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+div.data_block {
+  text-align: center;
+}
+
+.data_group {
+  .heading {
+    font-weight: bold;
+  }
+}
+
+.extra_info {
+  text-align:center;
+  font-size: 10px;
+}
+
+fieldset legend {
+  text-align: center;
+}
+
+
+input.ui-tooltip {
+padding: 1px;
+
+position:relative;
+top: 0px;
+max-width: 10000px;
+box-shadow: none;
+z-index:1;
+}
+
+.placeholder { color: #aaa; }
+
+.edit_link_block {
+  text-align: center;
+}
+
+#waiver_text_box {
+  background-color: #eee;
+  border: solid #333 1px;
+  width: 800px;
+  height: 200px;
+  overflow: scroll;
+  font-size:9pt;
+}
+
+hr {
+  width: 100%;
+}
+
+.wizard_progress {
+  ul {
+    list-style: none;
+
+    li {
+      display: inline-block;
+      padding: 10px;
+      margin: 10px;
+    }
+  }
+  .finished {
+    background-color: lightblue;
+  }
+  .current {
+    background-color: lightgreen;
+  }
+  .unfinished {
+    background-color: pink;
+  }
+}
