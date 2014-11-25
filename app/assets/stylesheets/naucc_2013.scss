@@ -24,24 +24,6 @@ $texthover: rgb(255, 255, 255);
 
 
 @import "new_styles/00_colors";
-
-// Overwrite colors
-
-$competitor: $unicon-blue;
-$noncompetitor: $unicon-blue;
-$competitor_hover: $unicon-pink;
-$noncompetitor_hover: $unicon-pink;
-$competitor_active: $unicon-pink-active;
-$noncompetitor_active: $unicon-pink-active;
-
-$focus: $unicon-blue;
-$focus_hover: $unicon-pink;
-$focus_active: $unicon-pink-active;
-
-$nonfocus: #266DA5;
-$nonfocus_hover: #3487C9;
-$nonfocus_active: #5555ff;
-
 @import "new_styles/breadcrumbs";
 @import "new_styles/02_buttons";
 @import "new_styles/03_forms";
