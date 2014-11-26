@@ -48,8 +48,8 @@ module FormHelper
           class_str = "finished" if past_step?(every_step)
           concat(
             content_tag(:li, class: class_str) do
-              #link_to I18n.t("wizard.#{every_step}"), wizard_path(every_step)
-              I18n.t("wizard.#{every_step}")
+              link_to_if past_step?(every_step), I18n.t("wizard.#{every_step}"), wizard_path(every_step)
+              #I18n.t("wizard.#{every_step}")
             end
           )
         end
