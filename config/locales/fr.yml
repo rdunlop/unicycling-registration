@@ -15,6 +15,7 @@ fr:
     add_events: "Compétitions"
     add_volunteers: "Bénévole"
     add_contact_details: "Coordonnées"
+    expenses: "Frais"
   registrants:
     index:
       recommended: Recommandé

@@ -1,0 +1,5 @@
+= render partial: "/registrant_expense_items/expenses", :locals => {:registrant => @registrant}
+= render partial: "/registrant_expense_items/new_expenses"
+
+= form_for(@registrant, url: wizard_path, method: :put) do |f|
+  = render partial: "/registrants/form_actions", locals: {f: f}

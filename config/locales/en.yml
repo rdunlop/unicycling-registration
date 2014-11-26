@@ -20,6 +20,7 @@ en:
     add_events: "Events"
     add_volunteers: "Volunteers"
     add_contact_details: "Contact Details"
+    expenses: "Expenses"
   registrants:
     index:
       registration: "Registration"

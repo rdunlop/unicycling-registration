@@ -9,9 +9,9 @@ class Registrants::BuildController < ApplicationController
 
   def set_steps
     if @registrant.nil? || @registrant.competitor
-      self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details]
+      self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details, :expenses]
     else
-      self.steps = [:add_name, :add_volunteers, :add_contact_details]
+      self.steps = [:add_name, :add_volunteers, :add_contact_details, :expenses]
     end
   end
 
