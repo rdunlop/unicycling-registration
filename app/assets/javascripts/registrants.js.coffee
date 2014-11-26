@@ -55,3 +55,17 @@ show_hide_wheel_size = ->
   else
     $(".wheel_size_choices").show()
     $("registrant_wheel_size_constant").hide()
+
+$ ->
+    $(".display_new_registrant").hide()
+    $(".default_hide").hide()
+    $(".js--display_new_registrant").click ->
+        reg_type = $(this).data("registrantType")
+        $(".default_hide").hide()
+        $(".#{reg_type}_show").show()
+        $(".display_new_registrant").show("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
+        $("#registrant_registrant_type").val(reg_type)
+        return false
+    $(".js--hide_new_registrant").click ->
+        $(".display_new_registrant").hide("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
+        return false

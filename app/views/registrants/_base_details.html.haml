@@ -1,9 +1,4 @@
 = f.hidden_field :registrant_type
-%h2= @registrant.competitor ? t(".competitor") : t(".noncompetitor")
-- unless @registrant.new_record?
-  .delete_link
-    - if can? :destroy, @registrant
-      = link_to t('.delete'), registrant_path(@registrant), data: { confirm: "Are you sure you want to delete this registration" }, :method => :delete
 .required= t(".required_fields")
 %fieldset.data_block
   %legend= t(".base_details")

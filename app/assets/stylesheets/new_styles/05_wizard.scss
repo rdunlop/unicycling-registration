@@ -1,20 +1,62 @@
+$progress_bar_color: #A0EA90;
+$progress_bar_color_current: #75B367;
+
+$progress_bar_element_width: 120px;
+$progress_bar_border: 2px;
+
 .wizard_progress {
+  display: inline-block;
+  background-color: $progress_bar_color;
   ul {
+    padding: 0;
+    margin: 0;
     list-style: none;
 
     li {
       display: inline-block;
-      padding: 10px;
-      margin: 10px;
+      padding: 10px 0;
+      margin: 0px;
+      width: $progress_bar_element_width;
+      border: $progress_bar_border solid black;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: $progress_bar_element_width;
+        width: 0;
+        height: 0;
+        border: 20px solid transparent;
+        border-left: 12px solid $progress_bar_color;
+        z-index: 1;
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: $progress_bar_element_width + $progress_bar_border;
+        width: 0;
+        height: 0;
+        border: 20px solid transparent;
+        border-left: 12px solid black;
+        z-index: 1;
+      }
     }
   }
   .finished {
-    background-color: lightblue;
+    background-color: $progress_bar_color;
   }
+
   .current {
-    background-color: lightgreen;
+    background-color: $progress_bar_color_current;
+    /* need to set the arrow to the same color */
+    &:after {
+      border-left: 12px solid $progress_bar_color_current;
+    }
   }
+
   .unfinished {
-    background-color: pink;
+    background-color: $progress_bar_color;
   }
 }

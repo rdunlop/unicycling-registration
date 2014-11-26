@@ -56,12 +56,16 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'cancan/matchers'
+require 'capybara/rspec'
+require 'capybara/poltergeist'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 ActiveRecord::Migration.maintain_test_schema!
+
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -119,6 +123,8 @@ RSpec.configure do |config|
       Sidekiq::Testing.inline!(&example)
     end
   end
+
+  config.include Warden::Test::Helpers, type: :feature
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing

@@ -47,10 +47,11 @@ fr:
       editing_registrant: "Modifier une entrée de compétiteur"
     form_actions:
       continue: "Sauver et Continuer"
-    base_details:
+    delete_button:
       competitor: "Compétiteur"
       noncompetitor: "Non-compétiteur"
       delete: "Supprimer"
+    base_details:
       required_fields: "Champs obligatoires"
       base_details: "Informations de base"
       birthday: "Date de naissance"

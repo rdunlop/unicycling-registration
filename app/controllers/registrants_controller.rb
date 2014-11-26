@@ -44,6 +44,7 @@ class RegistrantsController < ApplicationController
     @shared_registrants = @user.accessible_registrants - @my_registrants
     @total_owing = @user.total_owing
     @has_print_waiver = @config.has_print_waiver
+    @registrant = Registrant.new
 
     respond_to do |format|
       format.html # index.html.erb

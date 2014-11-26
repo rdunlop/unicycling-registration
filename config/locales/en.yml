@@ -52,10 +52,11 @@ en:
       editing_registrant: "Editing Registrant"
     form_actions:
       continue: "Save & Continue"
-    base_details:
+    delete_button:
       competitor: "Competitor"
       noncompetitor: "Non-Competitor"
       delete: "Delete"
+    base_details:
       required_fields: "Required fields"
       base_details: "Base Details"
       birthday: "Birthday"

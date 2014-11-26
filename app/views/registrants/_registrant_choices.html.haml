@@ -1,5 +1,3 @@
-- use_wizard = true
-
 .pricing_options
   - reg_period = RegistrationPeriod.current_period
   - if reg_period && reg_period.competitor_expense_item
@@ -9,15 +7,12 @@
       .current_price= print_formatted_currency(reg_period.competitor_expense_item.cost)
       .price_note Prices Increase in #{distance_of_time_in_words(DateTime.now, reg_period.end_date) }
       %ul.price_details
-        %li.highlighted Compete in all events
+        %li.highlighted Can Compete in all events
         %li Participate in Workshops
         %li Buy T-Shirts
         %li Buy Dinner Tickets
         %li Support the Unicycling community
-      - if use_wizard
-        = link_to t(".create_new_competitor"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", registrant_type: 'competitor'), :class => "competitor registration_button", method: :post
-      - else
-        = link_to t(".create_new_competitor"), new_registrant_path(registrant_type: 'competitor'), :class => "competitor registration_button"
+      = link_to t(".create_new_competitor"), {}, class: "js--display_new_registrant competitor registration_button", data: { registrant_type: 'competitor' }
   - if reg_period && reg_period.noncompetitor_expense_item
     .pricing_option.non-competitor_sign_up
       %h3.title= t('noncompetitor')
@@ -29,10 +24,7 @@
         %li Buy T-Shirts
         %li Buy Dinner Tickets
         %li Support the Unicycling community
-      - if use_wizard
-        = link_to t(".create_new_noncompetitor"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", registrant_type: 'noncompetitor'), :class => "noncompetitor registration_button", method: :post
-      - else
-        = link_to t(".create_new_noncompetitor"), new_registrant_path(registrant_type: 'noncompetitor'), :class => "noncompetitor registration_button"
+      = link_to t(".create_new_noncompetitor"), {}, class: "js--display_new_registrant noncompetitor registration_button", data: { registrant_type: 'noncompetitor' }
   - if @config.spectators
     .pricing_option.spectator_sign_up
       %h3.title= t('spectator')
@@ -44,7 +36,6 @@
         %li Buy T-Shirts
         %li Buy Dinner Tickets
         %li Support the Unicycling community
-      - if use_wizard
-        = link_to t(".create_new_spectator"), user_registrant_build_index_path(user_id: @user, registrant_id: "building", registrant_type: 'spectator'), :class => "spectator registration_button", method: :post
-      - else
-        = link_to t(".create_new_spectator"), new_registrant_path(registrant_type: 'spectator'), :class => "spectator registration_button"
+      = link_to t(".create_new_spectator"), {}, class: "js--display_new_registrant spectator registration_button", data: { registrant_type: 'spectator' }
+.display_new_registrant
+  = render partial: "new_name"

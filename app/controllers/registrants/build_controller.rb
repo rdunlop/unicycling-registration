@@ -55,8 +55,17 @@ class Registrants::BuildController < ApplicationController
 
   # create an initial registrant/blank record
   def create
-    @registrant = Registrant.create status: "blank", registrant_type: registrant_type, user: @user
-    redirect_to wizard_path(steps.first, user_id: @user, :registrant_id => @registrant.id)
+    @registrant = Registrant.new(registrant_params)
+    @registrant.user = @user
+    @registrant.status = "base_details"
+    if @registrant.save
+      # drop into the second step
+      set_steps # reset steps to ensure we get the correct set of steps
+      redirect_to wizard_path(steps.second, user_id: @user, :registrant_id => @registrant.id)
+    else
+      flash[:alert] = "Unable to create registrant"
+      redirect_to user_registrants_path(current_user)
+    end
   end
 
   private
@@ -76,7 +85,7 @@ class Registrants::BuildController < ApplicationController
   end
 
    def attributes
-    [ :first_name, :gender, :last_name, :middle_initial, :birthday, :competitor, :volunteer,
+    [ :first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
       :online_waiver_signature, :wheel_size_id,
       :volunteer_opportunity_ids => [],
       :registrant_choices_attributes => [:event_choice_id, :value, :id],
@@ -92,7 +101,7 @@ class Registrants::BuildController < ApplicationController
   # don't allow a registrant to be changed from competitor to non-competitor (or vise-versa)
   def registrant_update_params
     attrs = attributes
-    attrs.delete(:competitor)
+    attrs.delete(:registrant_type)
     clear_events_data!(clear_artistic_data!(params.require(:registrant).permit(attrs)))
   end
 

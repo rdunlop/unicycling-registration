@@ -11,8 +11,8 @@ end
 shared_context 'user is logged in' do
   include_context 'can login'
   before :each do
-    visit new_user_session_path
-    fill_in_login_form
+    login_as user
+    visit '/'
   end
 end
 
