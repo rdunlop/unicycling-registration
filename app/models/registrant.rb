@@ -100,9 +100,9 @@ class Registrant < ActiveRecord::Base
   # Base details
 
   # necessary for all registrant types
-  before_validation :set_sorted_last_name, if: :past_step_1?
-  validates :first_name, :last_name, :sorted_last_name, :presence => true, if: :past_step_1?
-  validates :user_id, :presence => true, if: :past_step_1?
+  before_validation :set_sorted_last_name
+  validates :first_name, :last_name, :sorted_last_name, :presence => true
+  validates :user_id, :presence => true
 
   # necessary for comp/non-comp only (not spectators):
   validates :birthday, :gender, :presence => true, if: :comp_noncomp_past_step_1?
@@ -376,8 +376,8 @@ class Registrant < ActiveRecord::Base
   end
 
   def name
-    return "(incomplete)" if self.first_name.nil? or self.last_name.nil?
     full_name = self.first_name + " " + self.last_name
+    full_name += " (incomplete)" unless self.validated?
     display_eligibility(full_name, ineligible)
   end
 
