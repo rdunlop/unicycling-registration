@@ -19,7 +19,7 @@ class Registrants::BuildController < ApplicationController
   layout "wizard"
 
   def finish_wizard_path
-    registrant_registrant_expense_items_path(@registrant)
+    registrant_path(@registrant)
   end
 
   def show
@@ -84,7 +84,7 @@ class Registrants::BuildController < ApplicationController
     end
   end
 
-   def attributes
+  def attributes
     [ :first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
       :online_waiver_signature, :wheel_size_id,
       :volunteer_opportunity_ids => [],
@@ -102,11 +102,11 @@ class Registrants::BuildController < ApplicationController
   def registrant_update_params
     attrs = attributes
     attrs.delete(:registrant_type)
-    clear_events_data!(clear_artistic_data!(params.require(:registrant).permit(attrs)))
+    clear_events_data!(clear_artistic_data!(params.fetch(:registrant, {}).permit(attrs)))
   end
 
   def registrant_params
-    clear_events_data!(clear_artistic_data!(params.require(:registrant).permit(attributes)))
+    clear_events_data!(clear_artistic_data!(params.fetch(:registrant, {}).permit(attributes)))
   end
 
   def clear_artistic_data!(original_params)

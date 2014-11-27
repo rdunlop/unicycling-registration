@@ -1,21 +1,22 @@
-.expenses.data_block
-  %fieldset
-    %legend= t(".registrants_expenses", :registrant => registrant.to_s)
-    %table#expense_lines
-      %thead
-        %tr
-          %th Item
-          %th
-          %th= t(".cost")
-          %th
-            = t(".paid")
-            ?
-          %th
-      %tbody
-        = render partial: "/registrants/registrant_paid_expenses", locals: { details: true }
-        = render partial: "/registrants/registrant_unpaid_expenses", locals: { include_form: true, details: true }
-      %tfoot
-        %tr
-          %th Total
-          %th= print_formatted_currency(registrant.expenses_total)
-          %th{:colspan => "3"}
+.expenses
+  .data_block
+    %fieldset
+      %legend= t(".registrants_expenses", :registrant => registrant.to_s)
+      %table#expense_lines
+        %thead
+          %tr
+            %th Item
+            %th
+            %th= t(".cost")
+            %th
+              = t(".paid")
+              ?
+            %th
+        %tbody
+          = render partial: "/registrants/registrant_paid_expenses", locals: { details: true }
+          = render partial: "/registrants/registrant_unpaid_expenses", locals: { include_form: true, details: true }
+        %tfoot
+          %tr
+            %th Total
+            %th= print_formatted_currency(registrant.expenses_total)
+            %th{:colspan => "3"}
