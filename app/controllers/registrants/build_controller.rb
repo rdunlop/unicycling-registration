@@ -45,6 +45,8 @@ class Registrants::BuildController < ApplicationController
     when :add_events
       @registrant.status = "events" if @registrant.status == "base_details"
     when :add_volunteers
+    when :add_contact_details
+      @registrant.status = "contact_details" if @registrant.status == "events"
     end
     @registrant.status = 'active' if step == steps.last
 

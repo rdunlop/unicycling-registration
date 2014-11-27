@@ -95,7 +95,20 @@ class Registrant < ActiveRecord::Base
   validate :no_payments_when_deleted
   before_validation :set_access_code
   validates :access_code, presence: true
+
+  # Wizard status helpers
+
+  # Status progression:
+  #  'blank' - No data has been saved
+  #  'base_details' - We have entered the base details
+  #  'events' - Has entered the events
+  #  'contact_details' - Has entered mailing address & signed waiver (if applicable)
+  #  'active' - Has entered all data
+  def self.statuses
+    ["blank", "base_details", "events", "contact_details", "active"]
+  end
   validates :status, presence: true
+  validates :status, inclusion: { in: self.statuses }
 
   # Base details
 
@@ -118,7 +131,7 @@ class Registrant < ActiveRecord::Base
   validate :choices_combination_valid, if: :past_step_2?
 
   # waiver
-  validates :online_waiver_signature, :presence => true, if: :active_or_event_config?
+  validates :online_waiver_signature, :presence => true, if: :needs_waiver?
 
   # contact info
   validates_associated :contact_detail, if: :validated?
@@ -130,33 +143,31 @@ class Registrant < ActiveRecord::Base
 
   scope :active, -> { where(:deleted => false).order(:bib_number) }
 
-  # Wizard status helpers
-
-  # Status progression:
-  #  'blank' - No data has been saved
-  #  'base_details' - We have entered the base details
-  #  'events' - Has entered the events
-  #  'active' - Has entered all data
+  # is the current status past the desired status
+  def status_is_active?(desired_status)
+     self.class.statuses.index(status) >= self.class.statuses.index(desired_status)
+  end
 
   # this registrant is on a step subsequent to the initial step
   def past_step_1?
-    status == "base_details" || validated?
+    status_is_active?("base_details")
   end
+
 
   # Never true for a spectator
   # Have we entered the base details?
   def comp_noncomp_past_step_1?
-    !spectator? && (status == "base_details" || validated?)
+    !spectator? && status_is_active?("base_details")
   end
 
   # Never true for a spectator
   # have we entered events
   def past_step_2?
-    !spectator? && (status == "events" || validated?)
+    !spectator? && status_is_active?("events")
   end
 
-  def active_or_event_config?
-    EventConfiguration.singleton.has_online_waiver && past_step_2?
+  def needs_waiver?
+    EventConfiguration.singleton.has_online_waiver && status_is_active?("contact_details")
   end
 
   def spectator?
