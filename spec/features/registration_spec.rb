@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Logging in to the system', :js do
+describe 'Logging in to the system' do
   let(:user) { FactoryGirl.create :user }
   include_context 'basic event configuration'
   include_context 'user is logged in'

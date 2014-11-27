@@ -6,7 +6,6 @@ require 'delorean'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'cancan/matchers'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
@@ -20,6 +19,9 @@ ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
+
+  config.infer_spec_type_from_file_location!
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -47,6 +49,10 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
+  config.after type: :feature do
+    Warden.test_reset!
+  end
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -56,8 +62,6 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
-
-  config.infer_spec_type_from_file_location!
 
   # Default to using inline, meaning all jobs will run as they're
   # called. Since we primarily are using this for email, this ensures
@@ -76,6 +80,7 @@ RSpec.configure do |config|
     end
   end
 
+  #config.include Devise::TestHelpers, type: :controller
   config.include Warden::Test::Helpers, type: :feature
 
   # Run specs in random order to surface order dependencies. If you find an

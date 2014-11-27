@@ -5,5 +5,5 @@
         %b Every competitor must bring a filled out Legal Waiver to the Competition.
         %br
         Registrants under the age of 18 must have the waiver signed by a Parent/Guardian.
-      - unless @registrant.nil?
+      - if @registrant && @registrant.persisted?
         = link_to 'Print Legal Waiver', waiver_registrant_path(@registrant, :format => 'pdf'), {:class => "print_waiver_link", :target => "_blank" }

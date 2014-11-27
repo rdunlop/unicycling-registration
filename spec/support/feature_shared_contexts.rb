@@ -102,6 +102,7 @@ shared_context 'basic registrant data' do
     select '20',    :from => 'registrant_birthday_3i'
     select '1982',  :from => 'registrant_birthday_1i'
     choose 'Male'
+    sleep 1
   end
 end
 shared_context "basic address data" do

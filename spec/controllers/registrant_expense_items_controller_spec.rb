@@ -43,7 +43,7 @@ describe RegistrantExpenseItemsController do
 
       it "redirects to the created item_registrants_path" do
         post :create, {:registrant_expense_item => valid_attributes, :registrant_id => @reg.to_param}
-        response.should redirect_to(registrant_registrant_expense_items_path(Registrant.last))
+        response.should redirect_to(user_registrant_build_path(@reg.user, Registrant.last.id, :expenses))
       end
     end
 
@@ -76,7 +76,7 @@ describe RegistrantExpenseItemsController do
       registrant_expense_item = FactoryGirl.create(:registrant_expense_item, :registrant => @reg)
       reg = registrant_expense_item.registrant
       delete :destroy, {:id => registrant_expense_item.to_param, :registrant_id => @reg.to_param}
-      response.should redirect_to(registrant_registrant_expense_items_path(reg))
+      response.should redirect_to(user_registrant_build_path(@reg.user, reg.id, :expenses))
     end
   end
 
