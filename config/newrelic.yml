@@ -229,4 +229,4 @@ production:
 staging:
   <<: *default_settings
   monitor_mode: true
-  # app_name: My Application (Staging)
+  app_name: Unicycling Registration (Staging)
