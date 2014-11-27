@@ -102,7 +102,7 @@ shared_context 'basic registrant data' do
     select '20',    :from => 'registrant_birthday_3i'
     select '1982',  :from => 'registrant_birthday_1i'
     choose 'Male'
-    sleep 1
+    sleep 1 # needed or else the feature spec fails to register that the "Male" has been selected.
   end
 end
 shared_context "basic address data" do

@@ -77,12 +77,12 @@ Workspace::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end
-# backwards-compatible
-error_emails = []
-error_emails << Rails.application.secrets.error_email if Rails.application.secrets.error_email
 
-Workspace::Application.config.middleware.use ExceptionNotification::Rack,
-  :email => {
-  :email_prefix => "[Registration Exception] ",
-  :exception_recipients => error_emails
-}
+if Rails.application.secrets.error_emails.present?
+  Workspace::Application.config.middleware.use ExceptionNotification::Rack,
+    :email => {
+    email_prefix: "[Registration Exception] ",
+    sender_address: Rails.application.secrets.mail_full_email,
+    exception_recipients: Rails.application.secrets.error_emails
+  }
+end
