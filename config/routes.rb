@@ -244,7 +244,7 @@ Workspace::Application.routes.draw do
 
     resources :users, :only => [] do
       resources :registrants, :only => [:index] do
-        resources :build, controller: 'registrants/build'
+        resources :build, controller: 'registrants/build', only: [:show, :update, :create]
       end
       resources :payments, :only => [:index]
       resources :additional_registrant_accesses, :only => [:index, :new, :create] do
