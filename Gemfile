@@ -75,7 +75,6 @@ group :naucc, :development, :test, :cucumber, :caching do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'rspec-instafail', require: false
-  gem 'spork-rails'
   gem 'syntax'
   gem 'watchr'
   gem 'foreman'
