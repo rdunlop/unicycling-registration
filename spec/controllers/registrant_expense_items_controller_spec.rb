@@ -28,7 +28,9 @@ describe RegistrantExpenseItemsController do
   end
 
   describe "POST create" do
+    before { request.env["HTTP_REFERER"] = registrant_build_path(Registrant.last.id, :expenses) }
     describe "with valid params" do
+
       it "creates a new RegistrantExpenseItem" do
         expect {
           post :create, {:registrant_expense_item => valid_attributes, :registrant_id => @reg.to_param}
@@ -43,7 +45,7 @@ describe RegistrantExpenseItemsController do
 
       it "redirects to the created item_registrants_path" do
         post :create, {:registrant_expense_item => valid_attributes, :registrant_id => @reg.to_param}
-        response.should redirect_to(user_registrant_build_path(@reg.user, Registrant.last.id, :expenses))
+        response.should redirect_to(registrant_build_path(Registrant.last.id, :expenses))
       end
     end
 
@@ -59,12 +61,14 @@ describe RegistrantExpenseItemsController do
         # Trigger the behavior that occurs when invalid params are submitted
         RegistrantExpenseItem.any_instance.stub(:save).and_return(false)
         post :create, {:registrant_expense_item => { "details" => "invalid value" }, :registrant_id => @reg.to_param}
-        response.should render_template("index")
+        response.should redirect_to(registrant_build_path(Registrant.last.id, :expenses))
       end
     end
   end
 
   describe "DELETE destroy" do
+    before { request.env["HTTP_REFERER"] = registrant_build_path(Registrant.last.id, :expenses) }
+
     it "destroys the requested registrant_expense_item" do
       registrant_expense_item = FactoryGirl.create(:registrant_expense_item, :registrant => @reg)
       expect {
@@ -76,7 +80,7 @@ describe RegistrantExpenseItemsController do
       registrant_expense_item = FactoryGirl.create(:registrant_expense_item, :registrant => @reg)
       reg = registrant_expense_item.registrant
       delete :destroy, {:id => registrant_expense_item.to_param, :registrant_id => @reg.to_param}
-      response.should redirect_to(user_registrant_build_path(@reg.user, reg.id, :expenses))
+      response.should redirect_to(registrant_build_path(reg.id, :expenses))
     end
   end
 

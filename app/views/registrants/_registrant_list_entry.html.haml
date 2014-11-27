@@ -2,14 +2,14 @@
 - reg_class = registrant.registrant_type
 %tr{:class => "#{shared ? "shared" : "my"}_registrant"}
   %td
-    = link_to registrant.name, user_registrant_build_path(registrant.user, registrant, :add_name), :class =>  "#{reg_class}_link"
+    = link_to registrant.name, registrant_build_path(registrant, :add_name), :class =>  "#{reg_class}_link"
     %br
     = t(".#{reg_class}")
   %td
     = print_formatted_currency(registrant.expenses_total)
   %td
     - if can? :update, registrant
-      = link_to t('.edit'), user_registrant_build_path(registrant.user, registrant, :add_name), :class => "registrant_edit_button " + (reg_class)
+      = link_to t('.edit'), registrant_build_path(registrant, :add_name), :class => "registrant_edit_button " + (reg_class)
   %td
     = link_to t('.see_summary'), registrant_path(registrant), :class => "registrant_edit_button " + (reg_class)
   - if @has_print_waiver

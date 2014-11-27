@@ -1,9 +1,9 @@
 class Registrants::BuildController < ApplicationController
   include Wicked::Wizard
   before_filter :authenticate_user!
-  load_and_authorize_resource :user
 
-  before_action :load_registrant, only: [:show, :update]
+  load_resource :registrant, find_by: :bib_number, except: [:index, :create]
+  authorize_resource :registrant
   before_action :set_steps
   before_action :setup_wizard
 
@@ -54,16 +54,15 @@ class Registrants::BuildController < ApplicationController
     render_wizard @registrant
   end
 
-
   # create an initial registrant/blank record
   def create
     @registrant = Registrant.new(registrant_params)
-    @registrant.user = @user
+    @registrant.user = current_user
     @registrant.status = "base_details"
     if @registrant.save
       # drop into the second step
       set_steps # reset steps to ensure we get the correct set of steps
-      redirect_to wizard_path(steps.second, user_id: @user, :registrant_id => @registrant.id)
+      redirect_to wizard_path(steps.second, :registrant_id => @registrant)
     else
       flash[:alert] = "Unable to create registrant"
       redirect_to user_registrants_path(current_user)
@@ -74,10 +73,6 @@ class Registrants::BuildController < ApplicationController
 
   def registrant_type
     params[:registrant_type]
-  end
-
-  def load_registrant
-    @registrant = Registrant.find(params[:registrant_id])
   end
 
   def load_categories

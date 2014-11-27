@@ -163,6 +163,7 @@ Workspace::Application.routes.draw do
     end
 
     resources :registrants, except: [:index] do
+      resources :build, controller: 'registrants/build', only: [:show, :update, :create]
       #admin
       collection do
         get :bag_labels
@@ -243,9 +244,7 @@ Workspace::Application.routes.draw do
     devise_for :users, :controllers => { :registrations => "registrations" }
 
     resources :users, :only => [] do
-      resources :registrants, :only => [:index] do
-        resources :build, controller: 'registrants/build', only: [:show, :update, :create]
-      end
+      resources :registrants, :only => [:index]
       resources :payments, :only => [:index]
       resources :additional_registrant_accesses, :only => [:index, :new, :create] do
         collection do

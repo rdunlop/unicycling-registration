@@ -140,8 +140,8 @@ class Registrant < ActiveRecord::Base
   validate :not_exceeding_expense_item_limits
   validates_associated :registrant_expense_items
 
-
-  scope :active, -> { where(:deleted => false).order(:bib_number) }
+  scope :active_or_incomplete, -> { where(:deleted => false).order(:bib_number) }
+  scope :active, -> { where(status: "active").active_or_incomplete }
 
   # is the current status past the desired status
   def status_is_active?(desired_status)

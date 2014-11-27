@@ -235,7 +235,7 @@ class RegistrantsController < ApplicationController
 
   def load_other_reg
     unless current_user.registrants.empty?
-      @other_registrant = current_user.registrants.active.first
+      @other_registrant = current_user.registrants.active.last
     end
   end
 

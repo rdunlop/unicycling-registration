@@ -15,10 +15,10 @@ class RegistrantExpenseItemsController < ApplicationController
       format.html {
         if @registrant_expense_item.save
           flash[:notice] = "Successfully created Expense Item"
-          redirect_to user_registrant_build_path(@registrant.user, @registrant.id, :expenses)
+          redirect_to :back
         else
-          set_items_breadcrumb
-          render "index", notice: "Error"
+          flash[:alert] = "Error Adding Expense Item"
+          redirect_to :back
         end
       }
     end
@@ -31,10 +31,10 @@ class RegistrantExpenseItemsController < ApplicationController
       format.html {
         if @registrant_expense_item.destroy
           flash[:notice] = "Successfully removed Expense Item"
-          redirect_to user_registrant_build_path(@registrant.user, @registrant.id, :expenses)
+          redirect_to :back
         else
-          set_items_breadcrumb
-          render "index", notice: "ERR"
+          flash[:alert] = "Error Removing Expense Item"
+          redirect_to :back
         end
       }
     end

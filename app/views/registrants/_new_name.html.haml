@@ -1,4 +1,4 @@
-= form_for(@registrant, url: user_registrant_build_index_path(user_id: @user, registrant_id: "building")) do |f|
+= form_for(@registrant, url: registrant_build_index_path(user_id: @user.id, registrant_id: "building")) do |f|
   = render partial: "shared/error_messages", object: @registrant
   - if @registrant.errors.any?
     #error_explanation
