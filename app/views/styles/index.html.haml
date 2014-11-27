@@ -1,0 +1,58 @@
+// Headers
+
+%h1 Level 1 Header
+
+%h2 Level 2 Header
+
+%hr
+// Links
+%a{href: "#"} Link
+
+%hr
+// Buttons
+
+%a.competitor.registration_button Competitor Registration Button
+%br
+%a.noncompetitor.registration_button Non-Competitor Registration Button
+%br
+%a.spectator.registration_button Spectator Registration Button
+
+%br
+%br
+
+%a.focus_button Focus Button
+%br
+%a.nonfocus_button NonFocus Button
+
+%br
+%br
+
+%a.payment_link Pay Now
+
+%br
+%br
+
+Registrant Expense Items
+%br
+%input.cost_item{ type: "submit", value: "Add Item" }
+%br
+%input.delete{ type: "submit", value: "Delete Item" }
+
+%hr
+// Wizard
+.wizard_progress
+  %ul
+    %li.finished
+      %a{href: '#'} First Step
+    %li.current
+      Current Step
+    %li.unfinished
+      Incompleted Step
+    %li.unfinished
+      Incompleted Step
+
+%hr
+// Breadcrumbs
+%ul.breadcrumbs
+  %li
+    %a First Breadcrumb
