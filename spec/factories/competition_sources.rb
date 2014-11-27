@@ -8,8 +8,8 @@
 #  competition_id        :integer
 #  gender_filter         :string(255)
 #  max_place             :integer
-#  created_at            :datetime
-#  updated_at            :datetime
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #  min_age               :integer
 #  max_age               :integer
 #

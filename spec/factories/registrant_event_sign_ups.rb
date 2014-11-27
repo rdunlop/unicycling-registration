@@ -6,8 +6,8 @@
 #  registrant_id     :integer
 #  signed_up         :boolean
 #  event_category_id :integer
-#  created_at        :datetime
-#  updated_at        :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #  event_id          :integer
 #
 # Indexes

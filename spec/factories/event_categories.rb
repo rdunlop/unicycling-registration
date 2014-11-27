@@ -6,8 +6,8 @@
 #  event_id                        :integer
 #  position                        :integer
 #  name                            :string(255)
-#  created_at                      :datetime
-#  updated_at                      :datetime
+#  created_at                      :datetime         not null
+#  updated_at                      :datetime         not null
 #  age_range_start                 :integer          default(0)
 #  age_range_end                   :integer          default(100)
 #  warning_on_registration_summary :boolean          default(FALSE)

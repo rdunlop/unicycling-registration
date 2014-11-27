@@ -6,8 +6,8 @@
 #  group_name                 :string(255)
 #  visible                    :boolean
 #  position                   :integer
-#  created_at                 :datetime
-#  updated_at                 :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
 #  info_url                   :string(255)
 #  competitor_free_options    :string(255)
 #  noncompetitor_free_options :string(255)

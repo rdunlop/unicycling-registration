@@ -10,8 +10,8 @@
 #  minor_dismount   :integer
 #  major_boundary   :integer
 #  minor_boundary   :integer
-#  created_at       :datetime
-#  updated_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 # Indexes
 #

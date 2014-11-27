@@ -7,8 +7,8 @@
 #  minutes             :integer
 #  seconds             :integer
 #  thousands           :integer
-#  created_at          :datetime
-#  updated_at          :datetime
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #  is_start_time       :boolean          default(FALSE)
 #  number_of_laps      :integer
 #  status              :string(255)
@@ -19,7 +19,7 @@
 #
 # Indexes
 #
-#  index_time_results_on_competitor_id  (competitor_id)
+#  index_time_results_on_event_category_id  (competitor_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

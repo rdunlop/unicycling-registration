@@ -9,8 +9,8 @@
 #  minutes             :integer
 #  seconds             :integer
 #  thousands           :integer
-#  created_at          :datetime
-#  updated_at          :datetime
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #  competition_id      :integer
 #  points              :decimal(6, 3)
 #  details             :string(255)

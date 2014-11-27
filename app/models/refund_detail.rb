@@ -5,8 +5,8 @@
 #  id                :integer          not null, primary key
 #  refund_id         :integer
 #  payment_detail_id :integer
-#  created_at        :datetime
-#  updated_at        :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 # Indexes
 #
