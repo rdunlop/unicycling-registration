@@ -10,8 +10,8 @@
           - next if attribute == :gender_female
           %li= @registrant.errors.full_message(attribute, error_message )
 
-  .data_block
-    = render partial: "/registrants/delete_button"
+  .data_block.show_hide_elements{ class: "show_#{@registrant.registrant_type}_elements" }
+    = render partial: "/registrants/header_and_delete_button"
     = render partial: "/registrants/base_details", locals: {f: f}
 
     = render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor }

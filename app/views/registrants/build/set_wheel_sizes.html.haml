@@ -1,0 +1,21 @@
+
+%p
+  Competitors under the age of 10 may elect to race in the Track & Field races on a 16", 20", or 24" wheel size.
+
+%p
+  If you choose the 24" wheel size, you will be racing against older competitors (up to the age of 12)
+
+%p
+  If you choose the 16" or 24" wheel size, you will be racing against similarly-aged kids, on the same wheel size.
+
+%fieldset.data_block
+  %legend Track Racing Wheel Sie
+  = form_for(@registrant, url: wizard_path, method: :put) do |f|
+    = render partial: "shared/error_messages", object: @registrant
+    .data_block
+      = f.label :wheel_size_id, t(".default_wheel_size")
+      = f.collection_select :wheel_size_id, WheelSize.all, :id, :description, {}, title: t(".default_wheel_size_description"), class: "wheel_size_choices"
+    = render partial: "/registrants/form_actions", locals: {f: f}
+
+%fieldset.data_block
+  = link_to "Set Other Wheel Sizes", registrant_competition_wheel_sizes_path(@registrant), target: "_blank", class: "wheel_size_choices"

@@ -1,4 +1,4 @@
-%h2= @registrant.competitor ? t(".competitor") : t(".noncompetitor")
+%h2= t(".#{@registrant.registrant_type}")
 - unless @registrant.new_record?
   .delete_link
     - if can? :destroy, @registrant

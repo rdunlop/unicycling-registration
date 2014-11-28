@@ -18,6 +18,7 @@ en:
   wizard:
     add_name: "Name"
     add_events: "Events"
+    set_wheel_sizes: "Wheel Sizes"
     add_volunteers: "Volunteers"
     add_contact_details: "Contact Details"
     expenses: "Expenses"

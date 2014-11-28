@@ -13,6 +13,7 @@ fr:
   wizard:
     add_name: "Nom"
     add_events: "Compétitions"
+    set_wheel_sizes: "Taille de la roue"
     add_volunteers: "Bénévole"
     add_contact_details: "Coordonnées"
     expenses: "Frais"

@@ -1,3 +1,12 @@
+// -----------------------------------
+// Reset margin around all headers
+
+@each $heading in 1 2 3 4 5 6 {
+  h#{$heading} {
+    margin: 0;
+  }
+}
+
 body {
   margin: 0px;
   background-color: #fff;
@@ -35,6 +44,3 @@ div {
   }
 }
 
-#notice {
-  color: green;
-}

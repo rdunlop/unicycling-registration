@@ -1,0 +1,17 @@
+/*
+ * This is a manifest file for all of new_styles/*
+ * EXCEPT for the 00_colors file.
+ * This allows easy ovewriting of the colors
+ */
+@import "new_styles/breadcrumbs";
+@import "new_styles/02_buttons";
+@import "new_styles/03_forms";
+@import "new_styles/04_summary";
+@import "new_styles/05_wizard";
+@import "new_styles/06_misc";
+@import "new_styles/07_dev_tools";
+@import "new_styles/08_pricing";
+@import "new_styles/09_form_errors";
+@import "new_styles/10_text";
+@import "new_styles/11_registrant_choices";
+@import "new_styles/12_banners";

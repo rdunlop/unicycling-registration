@@ -8,8 +8,9 @@
 
 - cache ['header', I18n.locale, @registrant] do
   .registrant_header
-    %h1
-      = "#{@registrant.last_name}, #{@registrant.first_name} ##{@registrant.bib_number}"
+    .registrant_header__name
+      %h1
+        = "#{@registrant.last_name}, #{@registrant.first_name} ##{@registrant.bib_number}"
     .info_block
       = render partial: "/registrants/unpaid_warnings"
       = render partial: "/registrants/access_code"
@@ -17,7 +18,7 @@
 - cache ['printable_link', I18n.locale, @registrant, @registrant.members_cache_key] do
   .non_printable
     = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
-.registrant_summary
+.registrant_summary{ class: "show_#{@registrant.registrant_type}_elements" }
   .registrant_summary_block
     // this partial includes conditional-display logic..do not cache it
     = render :partial => "/registrants/summary"

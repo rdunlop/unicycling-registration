@@ -1,0 +1,18 @@
+// ---------------------------------
+// Auto show/hide elements based on the parent class.
+// ---------------------------------
+
+// Example:
+// If the parent element has .show_competitor_elements
+//  then any children with .competitor_show will be 'display: block'
+
+@each $type in competitor noncompetitor spectator {
+  .#{$type}_show {
+    display: none;
+  }
+  .show_#{$type}_elements {
+    .#{$type}_show {
+      display: block;
+    }
+  }
+}
