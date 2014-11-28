@@ -28,8 +28,6 @@ $red: rgb(255, 0, 0);
 $red-hover: rgb(255, 0, 0);
 $red-active: rgb(220, 0, 0);
 
-@import "new_styles/00_colors";
-
 // Overwrite colors
 // using HSL values (as per http://demosthenes.info/blog/61/An-Easy-Guide-To-HSL-Color-In-CSS3)
 $background: hsl(219, 50%, 50%);

@@ -1,24 +1,24 @@
-$breadcrumb-color: blue;
+$breadcrumb-color: blue !default;
 
 // STYLING
-$competitor: #12AC50;
-$competitor_hover: #4CD673;
-$competitor_active: #55ff55;
-$noncompetitor: #266DA5;
-$noncompetitor_hover: #3487C9;
-$noncompetitor_active: #3F9ADB;
-$spectator: yellow;
-$spectator_hover: yellow;
-$spectator_active: yellow;
+$competitor: #12AC50 !default;
+$competitor_hover: #4CD673 !default;
+$competitor_active: #55ff55 !default;
+$noncompetitor: #266DA5 !default;
+$noncompetitor_hover: #3487C9 !default;
+$noncompetitor_active: #3F9ADB !default;
+$spectator: yellow !default;
+$spectator_hover: yellow !default;
+$spectator_active: yellow !default;
 
 // Color of the recommended-competitor-type
-$recommended-color: lightblue;
+$recommended-color: lightblue !default;
 
 // Focus buttons (what to do next)
-$focus: #12AC50;
-$focus_hover: #4CD673;
-$focus_active: #5555ff;
+$focus: #12AC50 !default;
+$focus_hover: #4CD673 !default;
+$focus_active: #5555ff !default;
 
-$nonfocus: #266DA5;
-$nonfocus_hover: #3487C9;
-$nonfocus_active: #5555ff;
+$nonfocus: #266DA5 !default;
+$nonfocus_hover: #3487C9 !default;
+$nonfocus_active: #5555ff !default;
