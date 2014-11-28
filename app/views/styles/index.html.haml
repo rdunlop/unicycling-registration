@@ -15,6 +15,11 @@
 .reg_access_banner.non_printing This Computer is authorized
 %h2.current_access_key Today's Access Key is 12345
 
+.invitation_access_banner
+  You have been asked to share a registration with another user.
+  %a{href: '#'} See the Registration Access
+  page for details.
+
 // Links
 %h2.style_head Links
 
@@ -73,3 +78,25 @@ Registrant Expense Items
   »
   %li
     %a Second Breadcrumb
+
+// RegistrationType Choices
+%h2.style_head Registration Choices
+.pricing_options
+  .pricing_option.recommended
+    %h3.recommended_title Recommended
+    %h3.title Competitor
+    .current_price $ lots
+    %ul.price_details
+      %li.highlighted Highlighted Entry
+      %li other entry
+      %li other entry
+    %a.competitor.registration_button Start Comp Reg
+
+  .pricing_option
+    %h3.title Non-Competitor
+    .current_price $ little
+    %ul.price_details
+      %li other entry
+      %li.highlighted Highlighted Entry
+      %li other entry
+    %a.noncompetitor.registration_button Start Non-Comp Reg
