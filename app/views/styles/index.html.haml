@@ -1,15 +1,27 @@
 // Headers
+%h2.style_head Headers
 
 %h1 Level 1 Header
 
 %h2 Level 2 Header
 
-%hr
+// Banners
+%h2.style_head Banners
+
+%p.notice Notice Banner
+%br
+%p.alert Alert Banner
+%br
+.reg_access_banner.non_printing This Computer is authorized
+%h2.current_access_key Today's Access Key is 12345
+
 // Links
+%h2.style_head Links
+
 %a{href: "#"} Link
 
-%hr
 // Buttons
+%h2.style_head Buttons
 
 %a.competitor.registration_button Competitor Registration Button
 %br
@@ -38,8 +50,9 @@ Registrant Expense Items
 %br
 %input.delete{ type: "submit", value: "Delete Item" }
 
-%hr
+
 // Wizard
+%h2.style_head Wizard
 .wizard_progress
   %ul
     %li.finished
@@ -51,8 +64,12 @@ Registrant Expense Items
     %li.unfinished
       Incompleted Step
 
-%hr
 // Breadcrumbs
+%h2.style_head Breadcrumbs
+
 %ul.breadcrumbs
   %li
-    %a First Breadcrumb
+    %a{ href: '#' } First Breadcrumb
+  »
+  %li
+    %a Second Breadcrumb
