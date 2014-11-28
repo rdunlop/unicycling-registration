@@ -1,5 +1,5 @@
-%h2= t("#{@registrant.registrant_type}")
 - unless @registrant.new_record?
+  %h2= t("#{@registrant.registrant_type}")
   .delete_link
     - if can? :destroy, @registrant
       = link_to t('.delete'), registrant_path(@registrant), data: { confirm: "Are you sure you want to delete this registration" }, :method => :delete
