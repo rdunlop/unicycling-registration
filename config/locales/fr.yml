@@ -49,9 +49,7 @@ fr:
       editing_registrant: "Modifier une entrée de compétiteur"
     form_actions:
       continue: "Sauver et Continuer"
-    delete_button:
-      competitor: "Compétiteur"
-      noncompetitor: "Non-compétiteur"
+    header_and_delete_button:
       delete: "Supprimer"
     base_details:
       required_fields: "Champs obligatoires"

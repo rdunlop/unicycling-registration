@@ -1,3 +1,4 @@
+- display the "unpaid" and "access code" only in certain circumstances (on-site reg period)
 - able to delete my own registartion?
 - make "best time" input force seconds (etc)
 - only create the registration record once they have finished step 1?
