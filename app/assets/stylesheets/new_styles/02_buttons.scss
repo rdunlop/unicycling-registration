@@ -210,13 +210,12 @@ input.delete, input.sold_out {
   background-color: #9AC0F8;
 }
 
-
-
 .registration_button {
   @include button(220px);
   margin-bottom:10px;
   text-align:center;
 }
+
 .registration_button:hover, .registration_button:focus {
   text-decoration: none;
 }

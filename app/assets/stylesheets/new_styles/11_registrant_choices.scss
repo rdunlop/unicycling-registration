@@ -14,5 +14,11 @@
     .#{$type}_show {
       display: block;
     }
+
+    // This causes any .registration_button within .competitor_show_elements to extend .competitor styling
+    // (and non-competitor, and spectators)
+    .registration_button {
+      @extend .#{$type};
+    }
   }
 }
