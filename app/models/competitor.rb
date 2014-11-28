@@ -218,7 +218,7 @@ class Competitor < ActiveRecord::Base
 
   def registrants_ids
     if members.any?
-      members.map(&:external_id).join(",")
+      members.map(&:external_id).sort.join(",")
     else
       "(No registrants)"
     end
