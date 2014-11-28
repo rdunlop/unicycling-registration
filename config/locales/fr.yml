@@ -38,6 +38,7 @@ fr:
     registrant_list_entry:
       competitor: "(Compétiteur)"
       noncompetitor: "(Non-compétiteur)"
+      spectator: "(Spectateur)"
       edit: "Réviser"
       see_summary: "Voir le résumé"
     registrant_total_owing:
