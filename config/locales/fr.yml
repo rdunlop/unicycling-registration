@@ -158,6 +158,7 @@ fr:
   attending:
     events:
       more_info: "Plus d’infos"
+    event:
       category: "Catégorie"
 
   registration_periods:
