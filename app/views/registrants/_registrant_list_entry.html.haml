@@ -11,7 +11,10 @@
     - if can? :update, registrant
       = link_to t('.edit'), registrant_build_path(registrant, :add_name), :class => "registrant_edit_button " + (reg_class)
   %td
-    = link_to t('.see_summary'), registrant_path(registrant), :class => "registrant_edit_button " + (reg_class)
+    - if registrant.validated?
+      = link_to t('.see_summary'), registrant_path(registrant), :class => "registrant_edit_button " + (reg_class)
+    - else
+      incomplete
   - if @has_print_waiver
     %td
       = link_to "Legal Waiver (#{registrant.first_name})", waiver_registrant_path(registrant, :format => 'pdf'), {:class => "print_waiver_link", :target => "_blank" }

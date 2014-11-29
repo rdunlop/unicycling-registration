@@ -1,0 +1,39 @@
+#notice {
+  color: green;
+}
+
+.notice {
+  display:inline-block;
+  clear:none;
+  padding: 8px 14px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.alert {
+  display:inline-block;
+  clear:none;
+  padding: 8px 14px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.reg_access_banner {
+  padding: 5px;
+  text-align: center;
+  background: lightgreen;
+}
+
+.current_access_key {
+  background-color: yellow;
+}

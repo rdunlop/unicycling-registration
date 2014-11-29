@@ -9,7 +9,11 @@ class Registrants::BuildController < ApplicationController
 
   def set_steps
     if @registrant.nil? || @registrant.competitor
-      self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details, :expenses]
+      if @registrant.try(:age) && @registrant.age <= 10
+        self.steps = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
+      else
+        self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details, :expenses]
+      end
     else
       self.steps = [:add_name, :add_volunteers, :add_contact_details, :expenses]
     end
@@ -46,7 +50,7 @@ class Registrants::BuildController < ApplicationController
       @registrant.status = "events" if @registrant.status == "base_details"
     when :add_volunteers
     when :add_contact_details
-      @registrant.status = "contact_details" if @registrant.status == "events"
+      @registrant.status = "contact_details" if (@registrant.status == "events" || @registrant.status == "base_details")
     end
     @registrant.status = 'active' if step == steps.last
 

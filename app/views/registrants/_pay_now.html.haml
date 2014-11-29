@@ -8,6 +8,7 @@
       - if rp.nil?
         = "[#{t(".unknown")}]"
       - else
+        = t(".prices_increase")
         - if (DateTime.now > rp.end_date)
           = t(".very_soon")
         - else

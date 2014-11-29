@@ -1,0 +1,30 @@
+
+a {
+  color: #000;
+  &:visited {
+    color: #000;
+  }
+  &:hover {
+    color: #000;
+  }
+}
+
+
+.external_link,
+.external_link:visited {
+  color: $external_link_color;
+  &:hover {
+    color: $external_link_color_hover;
+  }
+}
+
+.access_code_link {
+  @include button(160px);
+  background-color: lightgreen;
+  color: black;
+
+  &:hover {
+    background-color: rgb(55, 230, 55);
+    color: black;
+  }
+}

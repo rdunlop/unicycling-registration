@@ -7,21 +7,26 @@
   = t(".please_proceed_with_payment")
   \:
   %div
-    = form_tag @payment.paypal_post_url do
-      = hidden_field_tag :business, Rails.application.secrets.paypal_account
-      = hidden_field_tag :cancel_return, user_payments_url(current_user)
-      = hidden_field_tag :cmd, "_cart"
-      = hidden_field_tag :currency_code, @config.currency_code
-      = hidden_field_tag :invoice, @payment.id.to_s
-      = hidden_field_tag :no_shipping, "1"
-      = hidden_field_tag :notify_url, notification_payments_url
-      = hidden_field_tag :return, success_payments_url
-      = hidden_field_tag :upload, "1"
-      - @payment.unique_payment_details.each_with_index do |pd, index|
-        = hidden_field_tag "amount_#{index + 1}", pd.amount.to_s
-        = hidden_field_tag "item_name_#{index + 1}", pd.to_s
-        = hidden_field_tag "quantity_#{index + 1}", pd.count.to_s
-      = submit_tag t(".pay_with_paypal"), :class => "payment_link registration_button"
+    - if @payment.total_amount > 0
+      = form_tag @payment.paypal_post_url do
+        = hidden_field_tag :business, Rails.application.secrets.paypal_account
+        = hidden_field_tag :cancel_return, user_payments_url(current_user)
+        = hidden_field_tag :cmd, "_cart"
+        = hidden_field_tag :currency_code, @config.currency_code
+        = hidden_field_tag :invoice, @payment.id.to_s
+        = hidden_field_tag :no_shipping, "1"
+        = hidden_field_tag :notify_url, notification_payments_url
+        = hidden_field_tag :return, success_payments_url
+        = hidden_field_tag :upload, "1"
+        - @payment.unique_payment_details.each_with_index do |pd, index|
+          - next if pd.amount == 0
+          = hidden_field_tag "amount_#{index + 1}", pd.amount.to_s
+          = hidden_field_tag "item_name_#{index + 1}", pd.to_s
+          = hidden_field_tag "quantity_#{index + 1}", pd.count.to_s
+        = submit_tag t(".pay_with_paypal"), :class => "payment_link registration_button"
+    - else
+      = form_tag complete_payment_path(@payment) do
+        = submit_tag "Complete Payment", class: "payment_link registration_button"
   - if @config.test_mode
     .test_mode
       = link_to "Pretend to pay by credit card $#{@payment.total_amount}", fake_complete_payment_path(@payment), :method => :post

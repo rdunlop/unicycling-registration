@@ -37,32 +37,15 @@ $(document).ready ->
     closeEffect: "none"
 
 $ ->
-    $("#registrant_birthday_1i").focusout ->
-      show_hide_wheel_size()
-
-$(document).ready ->
-    show_hide_wheel_size()
-
-show_hide_wheel_size = ->
-  current_year = parseInt($("#registrant_birthday_1i option:last-child").val(), 10)
-  birthday_year = parseInt($("#registrant_birthday_1i").val(), 10)
-  # To account for month-to-month differences, subtract 11 instead of 10
-  if( birthday_year < current_year - 10 - 1)
-    # disable the option to select your wheel size
-    $("#registrant_wheel_size_id").val(3) # 24" Wheel Size
-    $(".wheel_size_choices").hide()
-    $("registrant_wheel_size_constant").show()
-  else
-    $(".wheel_size_choices").show()
-    $("registrant_wheel_size_constant").hide()
-
-$ ->
     $(".display_new_registrant").hide()
-    $(".default_hide").hide()
     $(".js--display_new_registrant").click ->
         reg_type = $(this).data("registrantType")
-        $(".default_hide").hide()
-        $(".#{reg_type}_show").show()
+
+        el = $(".display_new_registrant")
+        el.removeClass(el.data('displaying'))
+        el.addClass("show_#{reg_type}_elements")
+        el.data("displaying", "show_#{reg_type}_elements")
+
         $(".display_new_registrant").show("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
         $("#registrant_registrant_type").val(reg_type)
         return false

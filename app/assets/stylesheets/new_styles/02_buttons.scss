@@ -145,10 +145,6 @@ a.focus_button, a.nonfocus_button {
 }
 
 
-.reg_already_paid {
-  background-color: red;
-}
-
 .competitor_link {
   text-decoration: none;
   color: $competitor;
@@ -170,30 +166,7 @@ a.focus_button, a.nonfocus_button {
   color: $noncompetitor;
 }
 
-
-.payment_link,
-input.delete,
-input.sold_out {
-  background-color: #AC2B2B;
-}
-.payment_link:hover,
-input.delete:hover,
-input.sold_out:hover {
-  background-color: #D61414;
-}
-.payment_link:active,,
-input.delete:active,
-input.sold_out:active {
-  background-color: #A01A1A;
-}
-
-input.delete,
-input.sold_out {
-  border: none;
-}
-
-.competitor, .noncompetitor, .spectator, .payment_link,
-input.delete, input.sold_out {
+.competitor, .noncompetitor, .spectator {
   color: white;
   text-decoration: none;
 
@@ -201,6 +174,54 @@ input.delete, input.sold_out {
     color: white;
   }
 }
+
+// Small Expense Item Buttons
+%small_button {
+  @include button(auto);
+  padding: 5px;
+  font-size: 12px;
+}
+
+.free_item {
+  @extend %small_button;
+  color: white;
+  background-color: $focus;
+
+  &:hover {
+    background-color: $focus_hover;
+  }
+  &:active {
+    background-color: $focus_active;
+  }
+}
+
+.delete {
+  @extend %small_button;
+  color: $nonfocus;
+  background-color: white;
+  border: 1px solid;
+
+  &:hover {
+    color: $nonfocus_hover;
+  }
+  &:active {
+    color: $nonfocus_active;
+  }
+}
+
+.cost_item {
+  @extend %small_button;
+  color: white;
+  background-color: #AC2B2B;
+
+  &:hover {
+    background-color: #D61414;
+  }
+  &:active {
+    background-color: #A01A1A;
+  }
+}
+
 
 .locked_competition_action {
   @include button;
@@ -210,13 +231,12 @@ input.delete, input.sold_out {
   background-color: #9AC0F8;
 }
 
-
-
 .registration_button {
   @include button(220px);
   margin-bottom:10px;
   text-align:center;
 }
+
 .registration_button:hover, .registration_button:focus {
   text-decoration: none;
 }
@@ -235,8 +255,16 @@ input.delete, input.sold_out {
 
 .payment_link {
   @include button(150px);
-}
+  background-color: $payment;
+  color:white;
+  &:visited {
+    color: white;
+  }
 
-.unpaid {
-  color: red;
+  &:hover {
+    background-color:$payment_hover;
+  }
+  &:active {
+    background-color: $payment_active;
+  }
 }

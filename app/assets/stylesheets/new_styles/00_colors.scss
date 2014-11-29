@@ -1,24 +1,48 @@
-$breadcrumb-color: blue;
+// Breadcrumb
+$breadcrumb-color: blue !default;
 
-// STYLING
-$competitor: #12AC50;
-$competitor_hover: #4CD673;
-$competitor_active: #55ff55;
-$noncompetitor: #266DA5;
-$noncompetitor_hover: #3487C9;
-$noncompetitor_active: #3F9ADB;
-$spectator: yellow;
-$spectator_hover: yellow;
-$spectator_active: yellow;
+// Nav Bar
+$background: rgb(40, 40, 40) !default;
+$backgroundhover: rgb(80, 80, 80) !default;
+$submenudivider: rgb(100, 100, 100) !default;
+$text: rgb(36, 130, 181) !default;
+$texthover: rgb(255, 255, 255) !default;
+
+// Main Buttons
+$competitor: #12AC50 !default;
+$competitor_hover: #4CD673 !default;
+$competitor_active: #55ff55 !default;
+$noncompetitor: #266DA5 !default;
+$noncompetitor_hover: #3487C9 !default;
+$noncompetitor_active: #3F9ADB !default;
+$spectator: yellow !default;
+$spectator_hover: yellow !default;
+$spectator_active: yellow !default;
+
+
+// Payment buttons
+$red_hsl: 0;
+$payment: hsl($red_hsl, 50%, 50%) !default;
+$payment_hover: hsl($red_hsl, 85%, 50%) !default;
+$payment_active: hsl($red_hsl, 30%, 50%) !default;
 
 // Color of the recommended-competitor-type
-$recommended-color: lightblue;
+$recommended-color: lightblue !default;
 
 // Focus buttons (what to do next)
-$focus: #12AC50;
-$focus_hover: #4CD673;
-$focus_active: #5555ff;
+$focus: #12AC50 !default;
+$focus_hover: #4CD673 !default;
+$focus_active: #5555ff !default;
 
-$nonfocus: #266DA5;
-$nonfocus_hover: #3487C9;
-$nonfocus_active: #5555ff;
+$nonfocus: #266DA5 !default;
+$nonfocus_hover: #3487C9 !default;
+$nonfocus_active: #5555ff !default;
+
+// Registration Periods
+$reg_current_period_color: black !default;
+$reg_current_period_bg_color: lightgreen !default;
+$reg_closes_color: red !default;
+
+// Links
+$external_link_color: blue !default;
+$external_link_color_hover: blue !default;

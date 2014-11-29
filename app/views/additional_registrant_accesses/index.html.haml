@@ -1,0 +1,24 @@
+%h1 Registrant Record requests
+%p
+  On this page, you can make requests to be granted readonly access to other users' registrant information.
+  %br
+  %br
+  If the request is accepted, you will be able to view their events, and pay for their registration.
+  %br
+  You will not be granted access to their address or contact information
+- unless @additional_registrant_accesses.empty?
+  %table
+    %caption Current Request Statuses
+    %thead
+      %tr
+        %th Registrant
+        %th Status
+        %th Date created
+    %tbody
+      - @additional_registrant_accesses.each do |additional_registrant_access|
+        %tr{:class => "invitation_#{additional_registrant_access.status}"}
+          %td= additional_registrant_access.registrant
+          %td= additional_registrant_access.status
+          %td= additional_registrant_access.created_at
+  %br
+= link_to 'Request Access to a Registration', new_user_additional_registrant_access_path(@user)

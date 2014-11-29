@@ -105,6 +105,12 @@ class RegistrantsController < ApplicationController
   # GET /registrants/1
   # GET /registrants/1.json
   def show
+    unless @registrant.validated?
+      flash[:alert] = "Unable to display Summary of incomplete registrant"
+      redirect_to :back
+      return
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @registrant }

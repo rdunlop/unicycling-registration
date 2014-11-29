@@ -12,22 +12,19 @@
  *= require_self
  */
 
+// Overwrite colors
+
 $background: rgb(40, 40, 40);
 $backgroundsub: rgb(40, 40, 40);
 $backgroundhover: rgb(102, 102, 102);
 $submenudivider: rgb(120, 120, 120);
 $text: rgb(255, 255, 255);
 $texthover: rgb(255, 255, 255);
-@import "navbar/navbar";
-
 
 $unicon-pink: rgb(219, 71, 128);
 $unicon-pink-active: rgb(240, 80, 128);
 $unicon-blue: rgb(36, 130, 181);
 
-@import "new_styles/00_colors";
-
-// Overwrite colors
 
 $competitor: $unicon-blue;
 $noncompetitor: $unicon-blue;
@@ -44,69 +41,14 @@ $nonfocus: #266DA5;
 $nonfocus_hover: #3487C9;
 $nonfocus_active: #5555ff;
 
-@import "new_styles/breadcrumbs";
-@import "new_styles/02_buttons";
-@import "new_styles/03_forms";
-@import "new_styles/04_summary";
-@import "new_styles/05_wizard";
-@import "new_styles/06_misc";
-@import "new_styles/07_dev_tools";
-@import "new_styles/08_pricing";
-@import "new_styles/09_form_errors";
-@import "new_styles/10_text";
+$reg_current_period_color: $unicon-pink;
+$reg_current_period_bg_color: #fff;
+
+$external_link_color_hover: $unicon-pink;
+
+@import "new_styles_list";
 
 a:hover {
   color: rgb(219, 71, 128);
 }
 
-.current_reg_period {
-  background-color: #fff;
-  color: $unicon-pink;
-  font-weight: bolder;
-}
-
-.registration_closes_notice {
-  height: 40px;
-  vertical-align: bottom;
-  color: black;
-}
-
-.unpaid,
-.paid {
-  font-weight: bolder;
-}
-
-.external_link,
-.external_link:visited {
-  color: blue;
-}
-.external_link:hover {
-  color: $unicon-pink;
-}
-
-.base_details .title {
-  font-size: 40px;
-  padding: 20px;
-}
-
-input.free_item {
-  border: none;
-  color: white;
-  background-color: $unicon-pink;
-}
-
-input.cost_item {
-  border: none;
-  color: white;
-  background-color: $unicon-blue;
-}
-
-input.cost_item:hover {
-  background-color: $unicon-pink;
-}
-
-input.free_item:active,
-input.cost_item:active,
-input.free_item:hover {
-  background-color: $unicon-pink-active;
-}

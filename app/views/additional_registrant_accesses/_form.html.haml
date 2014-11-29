@@ -1,0 +1,15 @@
+= form_for([@user, @additional_registrant_access]) do |f|
+  - if @additional_registrant_access.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@additional_registrant_access.errors.count, "error")
+        prohibited this additional_registrant_access from being saved:
+      %ul
+        - @additional_registrant_access.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :registrant_id
+    %br
+    = f.select :registrant_id, Registrant.active.reorder("first_name, last_name").map{ |reg| [reg, reg.id] }, {include_blank: true}, class: 'chosen-select'
+  .actions
+    = f.submit "Send Request"

@@ -9,12 +9,12 @@
       = @registrant.first_name
       = @registrant.middle_initial
       = @registrant.last_name
-    %p
+    %p.competitor_show.noncompetitor_show
       %b= t(".gender")
       = @registrant.gender
 
       %b= t(".birthday")
-      = @registrant.birthday.strftime("%d-%b-%Y")
+      = @registrant.birthday.try(:strftime, "%d-%b-%Y")
       %b= t(".age")
       = @registrant.age
     %p

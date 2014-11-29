@@ -43,10 +43,6 @@ describe "registrants/new" do
     before(:each) do
       @registrant = FactoryGirl.build(:noncompetitor)
     end
-    it "displays the words Non-Competitor" do
-      render
-      assert_select "h2", :text => "Non-Competitor"
-    end
     it "displays the 'Save Registration' button" do
       render
       assert_select "input[value='Save &amp; Continue']", 1

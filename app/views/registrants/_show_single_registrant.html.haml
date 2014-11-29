@@ -8,8 +8,9 @@
 
 - cache ['header', I18n.locale, @registrant] do
   .registrant_header
-    %h1
-      = "#{@registrant.last_name}, #{@registrant.first_name} ##{@registrant.bib_number}"
+    .registrant_header__name
+      %h1
+        = "#{@registrant.last_name}, #{@registrant.first_name} ##{@registrant.bib_number}"
     .info_block
       = render partial: "/registrants/unpaid_warnings"
       = render partial: "/registrants/access_code"
@@ -17,7 +18,7 @@
 - cache ['printable_link', I18n.locale, @registrant, @registrant.members_cache_key] do
   .non_printable
     = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
-.registrant_summary
+.registrant_summary{ class: "show_#{@registrant.registrant_type}_elements" }
   .registrant_summary_block
     // this partial includes conditional-display logic..do not cache it
     = render :partial => "/registrants/summary"
@@ -50,8 +51,5 @@
         = render :partial => "/standard_skill_routines/routine_links", :locals => {:registrant => @registrant}
     %hr.non_printable
     .non_printable
-      - if @registrant.competitor
-        = link_to t(".done"), user_registrants_path(current_user), {:class => "competitor registration_button"}
-      - else
-        = link_to t('.done'), user_registrants_path(current_user), {:class => "noncompetitor registration_button"}
+      = link_to t(".done"), user_registrants_path(current_user), {:class => "registration_button"}
     = render :partial => "/registrants/waiver"

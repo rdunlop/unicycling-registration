@@ -1,15 +1,68 @@
+// Welcome
+%h2.style_head Welcome (Logged-out)
+.base_details
+  .title Welcome to the Unicyclying Convention
+  %div Which is at location
+  %div On date/time
+
+%h1.event_title Unicon 20000 Registration
+
 // Headers
+%h2.style_head Headers
 
 %h1 Level 1 Header
 
 %h2 Level 2 Header
 
-%hr
-// Links
-%a{href: "#"} Link
+// Banners
+%h2.style_head Banners
 
-%hr
+%p.notice Notice Banner
+%br
+%p.alert Alert Banner
+%br
+.reg_access_banner.non_printing This Computer is authorized
+%h2.current_access_key Today's Access Key is 12345
+
+.invitation_access_banner
+  You have been asked to share a registration with another user.
+  %a{href: '#'} See the Registration Access
+  page for details.
+
+.invitation_manage_banner
+  You have shared your registration with another user.
+  %a{href: '#'} See the Registration Access
+  to adjust settings.
+
+.reg_period_update_warning No Registration-Period update has occurred in the past 3 days. Please check your scheduler.
+
+#error_explanation
+  %h2 Some Errors prevented this form from saving
+  %ul
+    %li Error 1
+    %li Error 2
+// Links
+%h2.style_head Links
+
+%a{href: "#"} Normal Link
+%br
+%a.external_link{href: '#'} Link to External Resource
+
+%br
+%a.access_code_link{href: '#'}Use an Access Code
+// Text
+%h2.style_head Text
+
+.paid Paid Text
+%br
+.unpaid Unpaid Text
+%br
+%p Normal Paragraph of text
+%br
+%h3.reg_already_paid Unable to change reg fee after registrant has paid
+
 // Buttons
+%h2.style_head Buttons
 
 %a.competitor.registration_button Competitor Registration Button
 %br
@@ -39,9 +92,25 @@ Registrant Expense Items
 %input.free_item{ type: "submit", value: "Free Item" }
 %br
 %input.delete{ type: "submit", value: "Delete Item" }
+%br
+%input.free_item{ type: 'submit', value: 'One Free', title: "One is free with registration" }
+%br
+%input.sold_out{ disabled: true, type: 'submit', value: 'Sold Out' }
 
-%hr
+// Form Elements
+%h2.style_head Forms
+
+.field_with_errors
+  %label Label with error
+  %input{ type: "text", value: "Text Input with Error"}
+%br
+
+%label Label Without Error
+%input{ type: "text", value: "Text Input without Error"}
+
+
 // Wizard
+%h2.style_head Wizard
 .wizard_progress
   %ul
     %li.finished
@@ -53,8 +122,67 @@ Registrant Expense Items
     %li.unfinished
       Incompleted Step
 
-%hr
+// Nav bar
+%h2.style_head Nav Bar
+
+%nav{ style: 'text-align: left' }
+  %ul
+    %li
+      %a{href: '#'} First Link
+    %li
+      %a{href: '#'} List Link
+      %ul
+        %li
+          %a{href: '#'} Sub element 1
+        %li
+          %a{href: '#'} Sub element 2
+    %li#sign-out
+      %a{href: '#'} Log out user
+
 // Breadcrumbs
+%h2.style_head Breadcrumbs
+
 %ul.breadcrumbs
   %li
-    %a First Breadcrumb
+    %a{ href: '#' } First Breadcrumb
+  »
+  %li
+    %a Second Breadcrumb
+
+// RegistrationType Choices
+%h2.style_head Registration Choices
+.pricing_options
+  .pricing_option.recommended
+    %h3.recommended_title Recommended
+    %h3.title Competitor
+    .current_price $ lots
+    %ul.price_details
+      %li.highlighted Highlighted Entry
+      %li other entry
+      %li other entry
+    %a.competitor.registration_button Start Comp Reg
+
+  .pricing_option
+    %h3.title Non-Competitor
+    .current_price $ little
+    %ul.price_details
+      %li other entry
+      %li.highlighted Highlighted Entry
+      %li other entry
+    %a.noncompetitor.registration_button Start Non-Comp Reg
+
+// Registration Periods
+%h2.style_head Registration Periods
+.data_block
+  %fieldset.registration_period_block
+    %legend Reg Periods
+    %table
+      %tbody
+        %tr.past_reg_period
+          %td Past Period
+        %tr.current_reg_period
+          %td Current Period
+        %tr
+          %td.registration_closes_notice
+            Registration Closes Dec 31, 2000
+

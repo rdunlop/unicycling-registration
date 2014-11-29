@@ -59,7 +59,7 @@ describe 'Logging in to the system' do
 
     describe "and creating another registrant" do
       before :each do
-        visit new_registrant_path(:non_competitor => true)
+        visit new_registrant_path(registrant_type: 'non_competitor')
       end
 
       it "should display the form" do

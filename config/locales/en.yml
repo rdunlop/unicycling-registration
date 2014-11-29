@@ -18,6 +18,7 @@ en:
   wizard:
     add_name: "Name"
     add_events: "Events"
+    set_wheel_sizes: "Wheel Sizes"
     add_volunteers: "Volunteers"
     add_contact_details: "Contact Details"
     expenses: "Expenses"
@@ -42,6 +43,7 @@ en:
     registrant_list_entry:
       competitor: "(Competitor)"
       noncompetitor: "(Non-Competitor)"
+      spectator: "(Spectator)"
       edit: "Edit"
       see_summary: "See Summary"
     registrant_total_owing:
@@ -53,9 +55,7 @@ en:
       editing_registrant: "Editing Registrant"
     form_actions:
       continue: "Save & Continue"
-    delete_button:
-      competitor: "Competitor"
-      noncompetitor: "Non-Competitor"
+    header_and_delete_button:
       delete: "Delete"
     base_details:
       required_fields: "Required fields"
@@ -168,6 +168,7 @@ en:
   attending:
     events:
       more_info: "More Info"
+    event:
       category: "Category"
 
   registration_periods:

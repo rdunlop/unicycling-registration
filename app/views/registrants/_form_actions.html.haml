@@ -1,7 +1,2 @@
 .actions
-  - if @registrant.competitor
-    = f.submit t('.continue'), :class => "competitor registration_button"
-  - elsif @registrant.noncompetitor
-    = f.submit t('.continue'), :class => "noncompetitor registration_button"
-  - else
-    = f.submit t('.continue'), :class => "spectator registration_button"
+  = f.submit t('.continue'), :class => "registration_button"

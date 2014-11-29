@@ -13,6 +13,7 @@ fr:
   wizard:
     add_name: "Nom"
     add_events: "Compétitions"
+    set_wheel_sizes: "Taille de la roue"
     add_volunteers: "Bénévole"
     add_contact_details: "Coordonnées"
     expenses: "Frais"
@@ -37,6 +38,7 @@ fr:
     registrant_list_entry:
       competitor: "(Compétiteur)"
       noncompetitor: "(Non-compétiteur)"
+      spectator: "(Spectateur)"
       edit: "Réviser"
       see_summary: "Voir le résumé"
     registrant_total_owing:
@@ -48,9 +50,7 @@ fr:
       editing_registrant: "Modifier une entrée de compétiteur"
     form_actions:
       continue: "Sauver et Continuer"
-    delete_button:
-      competitor: "Compétiteur"
-      noncompetitor: "Non-compétiteur"
+    header_and_delete_button:
       delete: "Supprimer"
     base_details:
       required_fields: "Champs obligatoires"
@@ -159,6 +159,7 @@ fr:
   attending:
     events:
       more_info: "Plus d’infos"
+    event:
       category: "Catégorie"
 
   registration_periods:
