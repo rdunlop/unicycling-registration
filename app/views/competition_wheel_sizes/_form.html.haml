@@ -2,9 +2,9 @@
   = render partial: "/shared/error_messages", object: @competition_wheel_size
   .field
     = f.label :event
-    = f.collection_select :event_id, Event.order(:name).all, :id, :name, {include_blank: true}, class: "chosen-select"
+    = f.collection_select :event_id, Event.where(accepts_wheel_size_override: true).order(:name), :id, :name, {include_blank: true}, class: "chosen-select"
   .field
     = f.label :wheel_size_id
     = f.collection_select :wheel_size_id, WheelSize.all, :id, :description
   .actions
-    = f.submit
+    = f.submit 'Set Wheel Size', class: 'focus_button'

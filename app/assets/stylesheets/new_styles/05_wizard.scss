@@ -2,8 +2,9 @@ $progress_bar_color_finished: #000;
 $progress_bar_color_current: #175DCF;
 $progress_bar_color_unfinished: #999;
 
-$progress_bar_element_width: 120px;
 $progress_bar_border: 2px;
+$element_padding: 10px;
+$progress_bar_element_width: 120px;
 
 .wizard_progress {
   ul {
@@ -14,7 +15,7 @@ $progress_bar_border: 2px;
 
     li {
       display: inline-block;
-      padding: 10px 0;
+      padding: 10px $element_padding;
       margin: 0px;
       margin-right:-5px;
       min-width: $progress_bar_element_width;
@@ -35,7 +36,7 @@ $progress_bar_border: 2px;
         content: '';
         position: absolute;
         top: 0px;
-        left: $progress_bar_element_width;
+        left: $progress_bar_element_width + ($element_padding * 2);
         width: 0;
         height: 0;
         border: 20px solid transparent;
@@ -46,7 +47,7 @@ $progress_bar_border: 2px;
         content: '';
         position: absolute;
         top: 0px;
-        left: $progress_bar_element_width + $progress_bar_border;
+        left: $progress_bar_element_width + ($element_padding * 2) + $progress_bar_border;
         width: 0;
         height: 0;
         border: 20px solid transparent;
@@ -63,7 +64,7 @@ $progress_bar_border: 2px;
     background-color: $progress_bar_color_current;
     /* need to set the arrow to the same color */
     &:after {
-      border-left-color:$progress_bar_color_current;
+      border-left-color: $progress_bar_color_current;
     }
   }
 

@@ -48,6 +48,8 @@ $ ->
 
         $(".display_new_registrant").show("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
         $("#registrant_registrant_type").val(reg_type)
+        top_pos = el.offset().top
+        $('body').animate({scrollTop:top_pos}, 600)
         return false
     $(".js--hide_new_registrant").click ->
         $(".display_new_registrant").hide("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})

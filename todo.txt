@@ -1,12 +1,14 @@
+- Report who has used a coupon code
+- Go through payments#report and update to show coupons better.
+- Allow navigation forwards to a step which has already been completed.
+- PRevent navigating away when the form is dirty.
 - test/fix IE-compatibility
-- only solicit wheel sizes for SOME other events, and make it fit into the wizard better.
+- remove edit_registrant_path references
 - display the "unpaid" and "access code" only in certain circumstances (on-site reg period)
 - able to delete my own registartion?
 - make "best time" input force seconds (etc)
-- only create the registration record once they have finished step 1?
 - "resume" prompt if you click on "new competitor" when one is already in progress.
 - "upgrade" from non-competitor to competitor?
-- test that the mass emailer works with sidekiq (serialization/de-serialization)
 - restart the wizard at the correct step if someone leaves early
 - don't allow element to be paid for while "incomplete"
 - do we need to deal with coupons persisting over period end?

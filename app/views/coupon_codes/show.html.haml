@@ -1,4 +1,13 @@
 %h1 #{@coupon_code.name} Coupon Code
 
-%h3 Orders:
--#- @coupon_code.applied_to_orders.each do |order|
+%h3 Applied to:
+%table
+  %thead
+    %tr
+      %th Registration
+      %th Date Applied
+  %tbody
+    - @coupon_code.applied_to_payment_details.each do |payment_detail|
+      %tr
+        %td= link_to payment_detail.registrant, payment_detail.registrant
+        %td= payment_detail.payment.completed_date

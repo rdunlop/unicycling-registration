@@ -27,6 +27,19 @@ describe Event do
     @cf.username.should == "robin"
   end
 
+  it "must specify e-mail when not signed in" do
+    @cf.feedback = "This is a great site"
+    expect(@cf).to be_invalid
+    expect(@cf.errors).to include(:email)
+  end
+
+  it "doensn't need to specify e-mail when signed in" do
+    @user = FactoryGirl.create(:user)
+    @cf.update_from_user(@user)
+    @cf.feedback = "This is a great site"
+    expect(@cf).to be_valid
+  end
+
   it "has default registrants" do
     @cf.registrants.should == "unknown"
   end

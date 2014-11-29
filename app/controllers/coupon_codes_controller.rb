@@ -13,6 +13,11 @@ class CouponCodesController < ApplicationController
   def edit
   end
 
+  def show
+    add_breadcrumb "Coupon Codes", coupon_codes_path
+    add_breadcrumb @coupon_code, @coupon_code
+  end
+
   # POST /coupon_codes
   def create
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124005046) do
+ActiveRecord::Schema.define(version: 20141129183454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -381,10 +381,12 @@ ActiveRecord::Schema.define(version: 20141124005046) do
     t.datetime "updated_at"
     t.string   "name"
     t.boolean  "visible"
-    t.boolean  "accepts_music_uploads", default: false
-    t.boolean  "artistic",              default: false
+    t.boolean  "accepts_music_uploads",       default: false
+    t.boolean  "artistic",                    default: false
+    t.boolean  "accepts_wheel_size_override", default: false
   end
 
+  add_index "events", ["accepts_wheel_size_override"], name: "index_events_on_accepts_wheel_size_override", using: :btree
   add_index "events", ["category_id"], name: "index_events_category_id", using: :btree
 
   create_table "expense_group_translations", force: true do |t|

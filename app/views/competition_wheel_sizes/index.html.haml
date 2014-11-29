@@ -1,29 +1,28 @@
-%h1 Registrant Wheel Size Overrides
-
 %h3 Your default Wheel Size is #{@registrant.default_wheel_size}
 %br
-%br
 
-%table
-  %thead
-    %tr
-      %th Event
-      %th Wheel Size
-      %th
-      %th
-  %tbody
-    - @competition_wheel_sizes.each do |competition_wheel_size|
-      - next unless competition_wheel_size.persisted?
+%p Choose the wheel size you will be using for the following events so that you race against the correct age group.
+
+- if @competition_wheel_sizes.any?
+  %h4 Chosen Wheel Sizes
+  %table
+    %thead
       %tr
-        %td= competition_wheel_size.event
-        %td= competition_wheel_size.wheel_size
-        %td= link_to 'Delete', competition_wheel_size, method: :delete, data: { confirm: 'Are you sure?' }
+        %th Event
+        %th Wheel Size
+        %th
+        %th
+    %tbody
+      - @competition_wheel_sizes.each do |competition_wheel_size|
+        - next unless competition_wheel_size.persisted?
+        %tr
+          %td= competition_wheel_size.event
+          %td= competition_wheel_size.wheel_size
+          %td= link_to 'Delete', competition_wheel_size, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete'
 
 %hr
 
-%h1 New Registrant Wheel Size Override
+%h4 Set new Wheel Size
 = render 'form'
 
-%br
-%br
-When you are done, close this window to return to the Registration form.
+%small When you are done, close this window to return to the Registration form.
