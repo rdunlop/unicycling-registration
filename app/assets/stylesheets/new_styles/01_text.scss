@@ -1,0 +1,12 @@
+.reg_already_paid {
+  background-color: red;
+}
+
+.unpaid {
+  color: red;
+}
+
+.unpaid,
+.paid {
+  font-weight: bolder;
+}

@@ -145,10 +145,6 @@ a.focus_button, a.nonfocus_button {
 }
 
 
-.reg_already_paid {
-  background-color: red;
-}
-
 .competitor_link {
   text-decoration: none;
   color: $competitor;
@@ -234,8 +230,4 @@ input.delete, input.sold_out {
 
 .payment_link {
   @include button(150px);
-}
-
-.unpaid {
-  color: red;
 }
