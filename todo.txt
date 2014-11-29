@@ -1,4 +1,6 @@
+- Report who has used a coupon code
 - test/fix IE-compatibility
+- remove edit_registrant_path references
 - only solicit wheel sizes for SOME other events, and make it fit into the wizard better.
 - display the "unpaid" and "access code" only in certain circumstances (on-site reg period)
 - able to delete my own registartion?
