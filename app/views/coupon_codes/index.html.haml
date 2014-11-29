@@ -11,7 +11,7 @@
         %th
       - @coupon_codes.each do |coupon_code|
         %tr
-          %td= coupon_code.name
+          %td= link_to coupon_code.name, coupon_code
           %td= coupon_code.code
           %td= coupon_code.description
           %td= coupon_code.price

@@ -22,6 +22,10 @@ class CouponCode < ActiveRecord::Base
 
   accepts_nested_attributes_for :coupon_code_expense_items
 
+  def applied_to_payment_details
+    payment_detail_coupon_codes.completed.map(&:payment_detail)
+  end
+
   def max_uses_reached?
     return false if max_num_uses == 0
 
