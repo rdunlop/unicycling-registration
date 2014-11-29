@@ -6,8 +6,8 @@
 #  competition_id           :integer
 #  position                 :integer
 #  custom_name              :string(255)
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
+#  created_at               :datetime
+#  updated_at               :datetime
 #  status                   :integer          default(0)
 #  lowest_member_bib_number :integer
 #  geared                   :boolean          default(FALSE)

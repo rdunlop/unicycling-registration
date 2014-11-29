@@ -6,8 +6,8 @@
 #  event_id                      :integer
 #  name                          :string(255)
 #  locked                        :boolean
-#  created_at                    :datetime         not null
-#  updated_at                    :datetime         not null
+#  created_at                    :datetime
+#  updated_at                    :datetime
 #  age_group_type_id             :integer
 #  has_experts                   :boolean          default(FALSE)
 #  scoring_class                 :string(255)

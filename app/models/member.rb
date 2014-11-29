@@ -5,8 +5,8 @@
 #  id                        :integer          not null, primary key
 #  competitor_id             :integer
 #  registrant_id             :integer
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
+#  created_at                :datetime
+#  updated_at                :datetime
 #  dropped_from_registration :boolean          default(FALSE)
 #
 # Indexes

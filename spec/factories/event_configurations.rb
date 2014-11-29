@@ -13,8 +13,8 @@
 #  artistic_closed_date                  :date
 #  standard_skill_closed_date            :date
 #  event_sign_up_closed_date             :date
-#  created_at                            :datetime         not null
-#  updated_at                            :datetime         not null
+#  created_at                            :datetime
+#  updated_at                            :datetime
 #  test_mode                             :boolean
 #  waiver_url                            :string(255)
 #  comp_noncomp_url                      :string(255)

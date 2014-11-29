@@ -6,8 +6,8 @@
 #  payment_id      :integer
 #  registrant_id   :integer
 #  amount          :decimal(, )
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  created_at      :datetime
+#  updated_at      :datetime
 #  expense_item_id :integer
 #  details         :string(255)
 #  free            :boolean          default(FALSE)

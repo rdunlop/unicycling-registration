@@ -8,8 +8,8 @@
 #  cost                   :decimal(, )
 #  export_name            :string(255)
 #  position               :integer
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  created_at             :datetime
+#  updated_at             :datetime
 #  expense_group_id       :integer
 #  has_details            :boolean
 #  details_label          :string(255)

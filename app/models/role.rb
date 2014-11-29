@@ -6,8 +6,8 @@
 #  name          :string(255)
 #  resource_id   :integer
 #  resource_type :string(255)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  created_at    :datetime
+#  updated_at    :datetime
 #
 # Indexes
 #

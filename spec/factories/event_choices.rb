@@ -9,8 +9,8 @@
 #  multiple_values             :string(255)
 #  label                       :string(255)
 #  position                    :integer
-#  created_at                  :datetime         not null
-#  updated_at                  :datetime         not null
+#  created_at                  :datetime
+#  updated_at                  :datetime
 #  autocomplete                :boolean
 #  optional                    :boolean          default(FALSE)
 #  tooltip                     :string(255)
