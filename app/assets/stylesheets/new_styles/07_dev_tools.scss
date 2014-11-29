@@ -36,9 +36,16 @@ $recommended-color: lightblue;
   text-decoration:none;
 }
 
+// For http://<site>/style
 .style_head {
   font-size: 11px;
   color: grey;
   border-bottom: 1px grey solid;
   text-align: left;
+}
+
+.reg_period_update_warning {
+  color: red;
+  padding: 0 20px 10px;
+  background: #FFE0E0;
 }

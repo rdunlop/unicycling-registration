@@ -10,10 +10,6 @@ div.required {
   text-align: left;
 }
 
-.free_item {
-  background-color: yellow;
-}
-
 .status_image {
   height: 20px;
 }
@@ -111,29 +107,4 @@ z-index:1;
   height: 200px;
   overflow: scroll;
   font-size:9pt;
-}
-
-hr {
-  width: 100%;
-}
-
-.wizard_progress {
-  ul {
-    list-style: none;
-
-    li {
-      display: inline-block;
-      padding: 10px;
-      margin: 10px;
-    }
-  }
-  .finished {
-    background-color: lightblue;
-  }
-  .current {
-    background-color: lightgreen;
-  }
-  .unfinished {
-    background-color: pink;
-  }
 }
