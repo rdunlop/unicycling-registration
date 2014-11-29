@@ -1,3 +1,39 @@
+// -----------------------------------
+// Reset margin around all headers
+
+@each $heading in 1 2 3 4 5 6 {
+  h#{$heading} {
+    margin: 0;
+  }
+}
+
+body {
+  margin: 0px;
+  background-color: #fff;
+  color: #333;
+  font-family: 'Open Sans', sans-serif;
+  #font-size: 13px;
+  position:relative
+}
+
+p, ol, ul, td {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+div {
+  &.field, &.actions {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
 .reg_already_paid {
   background-color: red;
 }
@@ -9,4 +45,14 @@
 .unpaid,
 .paid {
   font-weight: bolder;
+}
+
+// Not-logged-in Banner
+
+.base_details {
+  text-align: center;
+  .title {
+    font-size: 40px;
+    padding: 20px;
+  }
 }

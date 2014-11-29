@@ -1,0 +1,19 @@
+
+a {
+  color: #000;
+  &:visited {
+    color: #666;
+  }
+  &:hover {
+    color: #000;
+  }
+}
+
+
+.external_link,
+.external_link:visited {
+  color: $external_link_color;
+  &:hover {
+    color: $external_link_color_hover;
+  }
+}

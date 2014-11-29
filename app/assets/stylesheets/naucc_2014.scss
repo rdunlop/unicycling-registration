@@ -56,20 +56,10 @@ $reg_current_period_color: $red;
 $reg_current_period_bg_color: #fff;
 $reg_closes_color: black;
 
+$external_link_color: blue;
+$external_link_color_hover: blue;
+
 @import "new_styles_list";
-
-.external_link,
-.external_link:visited {
-  color: blue;
-}
-.external_link:hover {
-  color: $red;
-}
-
-.base_details .title {
-  font-size: 40px;
-  padding: 20px;
-}
 
 input.free_item {
   border: none;

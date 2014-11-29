@@ -44,23 +44,12 @@ $nonfocus_active: #5555ff;
 $reg_current_period_color: $unicon-pink;
 $reg_current_period_bg_color: #fff;
 
+$external_link_color_hover: $unicon-pink;
+
 @import "new_styles_list";
 
 a:hover {
   color: rgb(219, 71, 128);
-}
-
-.external_link,
-.external_link:visited {
-  color: blue;
-}
-.external_link:hover {
-  color: $unicon-pink;
-}
-
-.base_details .title {
-  font-size: 40px;
-  padding: 20px;
 }
 
 input.free_item {
