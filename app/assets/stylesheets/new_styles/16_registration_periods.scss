@@ -1,0 +1,21 @@
+$reg_current_period_color: black !default;
+$reg_current_period_bg_color: lightgreen !default;
+$reg_closes_color: red !default;
+
+.current_reg_period {
+  background-color: $reg_current_period_bg_color;
+  color: $reg_current_period_color;
+  font-weight: bolder;
+}
+
+.past_reg_period {
+  text-decoration: line-through;
+}
+
+.registration_closes_notice {
+  text-align: center;
+  color: $reg_closes_color;
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 20px;
+}

@@ -52,19 +52,11 @@ $nonfocus: #266DA5;
 $nonfocus_hover: #3487C9;
 $nonfocus_active: #5555ff;
 
+$reg_current_period_color: $red;
+$reg_current_period_bg_color: #fff;
+$reg_closes_color: black;
+
 @import "new_styles_list";
-
-.current_reg_period {
-  background-color: #fff;
-  color: $red;
-  font-weight: bolder;
-}
-
-.registration_closes_notice {
-  height: 40px;
-  vertical-align: bottom;
-  color: black;
-}
 
 .unpaid,
 .paid {
