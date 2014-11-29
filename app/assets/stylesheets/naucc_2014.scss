@@ -39,19 +39,20 @@ $noncompetitor: hsl($noncomp_hsl, 50%, 50%);
 $noncompetitor_hover: hsl($noncomp_hsl, 85%, 50%);
 $noncompetitor_active: hsl($noncomp_hsl, 30%, 50%);
 
-$spec_hsl: 60;
+$spec_hsl: 180;
 $spectator: hsl($spec_hsl, 50%, 50%);
 $spectator_hover: hsl($spec_hsl, 85%, 50%);
 $spectator_active: hsl($spec_hsl, 30%, 50%);
 
-$focus_hsl: 219;
+$focus_hsl: 217;
 $focus: hsl($focus_hsl, 50%, 50%);
 $focus_hover: hsl($focus_hsl, 85%, 50%);
 $focus_active: hsl($focus_hsl, 30%, 50%);
 
-$nonfocus: #266DA5;
-$nonfocus_hover: #3487C9;
-$nonfocus_active: #5555ff;
+$nonfocus_hsl: 217;
+$nonfocus: hsl($nonfocus_hsl, 80%, 45%);
+$nonfocus_hover: hsl($nonfocus_hsl, 80%, 65%);
+$nonfocus_active: hsl($nonfocus_hsl, 80%, 40%);
 
 $reg_current_period_color: red;
 $reg_current_period_bg_color: #fff;

@@ -1,39 +1,52 @@
-$progress_bar_color: #A0EA90;
-$progress_bar_color_current: #75B367;
+$progress_bar_color_finished: #000;
+$progress_bar_color_current: #175DCF;
+$progress_bar_color_unfinished: #999;
 
-$progress_bar_element_width: 120px;
 $progress_bar_border: 2px;
+$element_padding: 10px;
+$progress_bar_element_width: 120px;
 
 .wizard_progress {
   ul {
     padding: 0;
     margin: 0;
     list-style: none;
+    font-weight: bold;
 
     li {
       display: inline-block;
-      padding: 10px 0;
+      padding: 10px $element_padding;
       margin: 0px;
       width: $progress_bar_element_width;
       border: $progress_bar_border solid black;
       position: relative;
+      color: white;
+
+      a, a:visited, a:active {
+        content: '';
+        color:white;
+      }
+
+      a:hover {
+        color: #ccc;
+      }
 
       &:after {
         content: '';
         position: absolute;
         top: 0px;
-        left: $progress_bar_element_width;
+        left: $progress_bar_element_width + ($element_padding * 2);
         width: 0;
         height: 0;
         border: 20px solid transparent;
-        border-left: 12px solid $progress_bar_color;
+        border-left: 12px solid $progress_bar_color_finished;
         z-index: 1;
       }
       &:before {
         content: '';
         position: absolute;
         top: 0px;
-        left: $progress_bar_element_width + $progress_bar_border;
+        left: $progress_bar_element_width + ($element_padding * 2) + $progress_bar_border;
         width: 0;
         height: 0;
         border: 20px solid transparent;
@@ -43,18 +56,22 @@ $progress_bar_border: 2px;
     }
   }
   .finished {
-    background-color: $progress_bar_color;
+    background-color: $progress_bar_color_finished;
   }
 
   .current {
     background-color: $progress_bar_color_current;
     /* need to set the arrow to the same color */
     &:after {
-      border-left: 12px solid $progress_bar_color_current;
+      border-left-color: $progress_bar_color_current;
     }
   }
 
   .unfinished {
-    background-color: $progress_bar_color;
+    background-color: $progress_bar_color_unfinished;
+    /* need to set the arrow to the same color */
+    &:after {
+      border-left-color: $progress_bar_color_unfinished;
+    }
   }
 }
