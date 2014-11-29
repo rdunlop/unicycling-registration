@@ -8,7 +8,7 @@ describe Notifications do
     let(:mail) { Notifications.ipn_received("something") }
 
     it "renders the headers" do
-      Rails.application.secrets.error_email = "robin+e@dunlopweb.com"
+      Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
       mail.subject.should eq("Ipn received")
       mail.to.should eq(["robin+e@dunlopweb.com"])
       mail.from.should eq(["from@example.com"])

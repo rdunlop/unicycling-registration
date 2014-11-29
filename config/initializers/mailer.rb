@@ -23,7 +23,7 @@ if Rails.env.development? or Rails.env.naucc?
   class OverrideMailRecipient
     def self.delivering_email(mail)
       mail.body = "DEVELOPMENT-OVERRIDE. Was being sent to #{mail.to} bcc: #{mail.bcc}\n" + mail.body.to_s
-      mail.to = Rails.application.secrets.error_email
+      mail.to = Rails.application.secrets.error_emails
       mail.cc = nil
       mail.bcc = nil
     end
