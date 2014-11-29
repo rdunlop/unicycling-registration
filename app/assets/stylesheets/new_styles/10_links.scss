@@ -21,8 +21,10 @@ a {
 .access_code_link {
   @include button(160px);
   background-color: lightgreen;
+  color: black;
 
   &:hover {
     background-color: rgb(55, 230, 55);
+    color: black;
   }
 }
