@@ -67,8 +67,10 @@ en:
       primary_team_or_club_contact: "Primary Team or Club Contact"
       i_am_interested_in_volunteering: "I am interested in volunteering"
       i_accept_to_be_contacted: "I accept to be contacted by email by the Organization team"
-      default_wheel_size: "Default Wheel Size"
-      default_wheel_size_description: "Used to choose Age Groups when applicable. (track, Standard-class events)"
+    build:
+      set_wheel_sizes:
+        default_wheel_size: "Default Wheel Size"
+        default_wheel_size_description: "Used to choose Age Groups when applicable. (track, Standard-class events)"
     name:
       name: "Name"
       first_name: "First"
