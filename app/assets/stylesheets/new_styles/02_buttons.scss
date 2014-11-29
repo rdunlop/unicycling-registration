@@ -185,41 +185,53 @@ a.focus_button, a.nonfocus_button {
 .free_item {
   @extend %small_button;
   color: white;
-  background-color: $focus;
+  background-color: $free_item;
 
   &:hover {
-    background-color: $focus_hover;
+    background-color: $free_item_hover;
   }
   &:active {
-    background-color: $focus_active;
+    background-color: $free_item_active;
   }
 }
 
 .delete {
   @extend %small_button;
-  color: $nonfocus;
+  color: $delete_item;
   background-color: white;
   border: 1px solid;
 
   &:hover {
-    color: $nonfocus_hover;
+    background-color: $delete_item_hover;
+    border-color: $delete_item_hover;
+    color: white;
   }
   &:active {
-    color: $nonfocus_active;
+    background-color: $delete_item_active;
+    border-color: $delete_item_active;
+    color:white;
   }
 }
 
 .cost_item {
   @extend %small_button;
   color: white;
-  background-color: #AC2B2B;
+  background-color: $cost_item;
 
   &:hover {
-    background-color: #D61414;
+    background-color: $cost_item_hover;
   }
   &:active {
-    background-color: #A01A1A;
+    background-color: $cost_item_active;
   }
+}
+
+.sold_out, .sold_out:hover {
+  @extend %small_button;
+  color: #ccc;
+  background-color: #666;
+  box-shadow:none;
+
 }
 
 

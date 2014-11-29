@@ -18,17 +18,15 @@ $submenudivider: rgb(120, 120, 120);
 $text: rgb(255, 255, 255);
 $texthover: rgb(255, 255, 255);
 
-@import "navbar/navbar";
 
-$red: rgb(255, 0, 0);
-$red-hover: rgb(255, 0, 0);
-$red-active: rgb(220, 0, 0);
+$red_hsl: 0;
+$payment: hsl($red_hsl, 50%, 50%);
+$payment_hover: hsl($red_hsl, 85%, 50%);
+$payment_active: hsl($red_hsl, 30%, 50%);
 
-@import "new_styles/00_colors";
 
 // Overwrite colors
 // using HSL values (as per http://demosthenes.info/blog/61/An-Easy-Guide-To-HSL-Color-In-CSS3)
-$background: hsl(219, 50%, 50%);
 
 $comp_hsl: 271;
 $competitor: hsl($comp_hsl, 80%, 45%);
@@ -55,86 +53,23 @@ $nonfocus: hsl($focus_hsl, 80%, 45%);
 $nonfocus_hover: hsl($focus_hsl, 80%, 65%);
 $nonfocus_active: hsl($focus_hsl, 80%, 40%);
 
-@import "new_styles/breadcrumbs";
-@import "new_styles/02_buttons";
-@import "new_styles/03_forms";
-@import "new_styles/04_summary";
-@import "new_styles/05_wizard";
-@import "new_styles/06_misc";
-@import "new_styles/07_dev_tools";
-@import "new_styles/08_pricing";
-@import "new_styles/09_form_errors";
-@import "new_styles/10_text";
+$reg_current_period_color: red;
+$reg_current_period_bg_color: white;
+$reg_closes_color: black;
 
-.current_reg_period {
-  background-color: #fff;
-  color: $red;
-  font-weight: bolder;
-}
+$external_link_color: blue;
+$external_link_color_hover: red;
 
-.registration_closes_notice {
-  height: 40px;
-  vertical-align: bottom;
-  color: black;
-}
+$free_item: $competitor;
+$free_item_hover: $noncompetitor;
+$free_item_active: $noncompetitor_active;
 
-.unpaid,
-.paid {
-  font-weight: bolder;
-}
+$delete_item: $competitor;
+$delete_item_hover: $payment;
+$delete_item_active: $payment_active;
 
-.external_link,
-.external_link:visited {
-  color: blue;
-}
-.external_link:hover {
-  color: $red;
-}
+$cost_item: black;
+$cost_item_hover: $noncompetitor;
+$cost_item_active: $noncompetitor_active;
 
-.base_details .title {
-  font-size: 40px;
-  padding: 20px;
-}
-
-input.free_item {
-  border: none;
-  color: white;
-  background-color: $competitor;
-}
-
-input.cost_item {
-  border: none;
-  color: white;
-  background-color: black;
-}
-
-input.cost_item:hover,
-input.free_item:hover{
-  color:white;
-  background-color: $noncompetitor;
-}
-
-
-
-input.free_item:active,
-input.cost_item:active {
-  background-color: $noncompetitor_active;
-  color:white;
-}
-
-.payment_link,
-input.delete,
-input.sold_out {
-  background-color: $red;
-}
-.payment_link:hover,
-input.delete:hover,
-input.sold_out:hover {
-  background-color:$red-hover;
-  color:black;
-}
-.payment_link:active,,
-input.delete:active,
-input.sold_out:active {
-  background-color: $red-active;
-}
+@import "new_styles_list";
