@@ -17,3 +17,12 @@ a {
     color: $external_link_color_hover;
   }
 }
+
+.access_code_link {
+  @include button(160px);
+  background-color: lightgreen;
+
+  &:hover {
+    background-color: rgb(55, 230, 55);
+  }
+}
