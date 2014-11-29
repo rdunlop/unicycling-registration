@@ -1,46 +1,5 @@
-$background: rgb(40, 40, 40) !default;
-$backgroundhover: rgb(80, 80, 80) !default;
-$submenudivider: rgb(100, 100, 100) !default;
-$height: 50px !default;
-$text: rgb(36, 130, 181) !default;
-$texthover: rgb(255, 255, 255) !default;
 
-$footer_height: 100px !default;
-
-// http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
-html,
-body {
-   margin:0;
-   padding:0;
-   height:100%;
-}
-#container {
-   min-height:100%;
-   position:relative;
-}
-#main {
-   padding:10px;
-   margin-bottom:-$footer_height;   /* Height of the footer */
-   text-align: center;
-   vertical-align: center;
-   /* overflow: auto;*/
-}
-#main:after {
-  content: "";
-  display: block;
-}
-
-#bottom_nav, #main:after {
-  height:$footer_height;
-}
-
-#bottom_nav {
-   text-align: center;
-   /* position:absolute; */
-   bottom:0;
-   width:100%;
-   background: #eeeeee;
-}
+$height: 50px;
 
 nav {
   .logo {
