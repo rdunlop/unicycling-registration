@@ -15,6 +15,7 @@
 //= require chosen-jquery
 //= require fancybox
 //= require jquery.nested-fields
+//= require jquery.are-you-sure
 //= require_tree .
 
 $(document).ready(function() {
@@ -31,6 +32,10 @@ $(document).ready(function () {
       $("input[type='submit']", this).val("Please wait...");
     });
   }
+});
+
+$(document).ready(function() {
+  $('form').areYouSure();
 });
 
 /* Generic sorting dataTable */
