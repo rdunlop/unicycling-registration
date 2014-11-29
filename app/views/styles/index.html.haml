@@ -31,6 +31,11 @@
 
 .reg_period_update_warning No Registration-Period update has occurred in the past 3 days. Please check your scheduler.
 
+#error_explanation
+  %h2 Some Errors prevented this form from saving
+  %ul
+    %li Error 1
+    %li Error 2
 // Links
 %h2.style_head Links
 
@@ -38,6 +43,8 @@
 %br
 %a.external_link{href: '#'} Link to External Resource
 
+%br
+%a.access_code_link{href: '#'}Use an Access Code
 // Text
 %h2.style_head Text
 
@@ -82,6 +89,18 @@ Registrant Expense Items
 %input.free_item{ type: 'submit', value: 'One Free', title: "One is free with registration" }
 %br
 %input.sold_out{ disabled: true, type: 'submit', value: 'Sold Out' }
+
+// Form Elements
+%h2.style_head Forms
+
+.field_with_errors
+  %label Label with error
+  %input{ type: "text", value: "Text Input with Error"}
+%br
+
+%label Label Without Error
+%input{ type: "text", value: "Text Input without Error"}
+
 
 // Wizard
 %h2.style_head Wizard

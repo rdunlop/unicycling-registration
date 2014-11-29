@@ -23,7 +23,7 @@ class PaymentsController < ApplicationController
   end
 
   def registrant_payments
-    registrant = Registrant.find(params[:id])
+    registrant = Registrant.find_by(bib_number: params[:id])
     add_registrant_breadcrumb(registrant)
     add_breadcrumb "Payments"
 
@@ -79,6 +79,22 @@ class PaymentsController < ApplicationController
         format.html { render action: "new" }
         format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def complete
+    unless @payment.total_amount == 0
+      flash[:alert] = "Please use Paypal to complete the payment"
+      redirect_to :back
+    end
+
+    @payment.completed = true
+    @payment.completed_date = DateTime.now
+    @payment.note = "Zero Cost"
+    @payment.save!
+    respond_to do |format|
+      flash[:notice] = "Payment Completed"
+      format.html { redirect_to user_registrants_path(@payment.user) }
     end
   end
 
