@@ -99,7 +99,7 @@ describe PaymentsController do
     end
 
     it "can get the registrants payments" do
-      get :registrant_payments, {:id => @reg.id}
+      get :registrant_payments, {:id => @reg}
       response.should be_success
     end
 
@@ -110,7 +110,7 @@ describe PaymentsController do
       end
 
       it "cannot get the registrants payments" do
-        get :registrant_payments, {:id => @reg.id}
+        get :registrant_payments, {:id => @reg}
         response.should redirect_to(root_path)
       end
     end
