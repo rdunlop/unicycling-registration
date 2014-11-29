@@ -23,9 +23,9 @@ $unicon-pink-active: rgb(0, 255, 255);
 $unicon-blue: rgb(0, 0, 0);
 
 $red_hsl: 0;
-$red: hsl($red_hsl, 50%, 50%);
-$red-hover: hsl($red_hsl, 85%, 50%);
-$red-active: hsl($red_hsl, 30%, 50%);
+$payment: hsl($red_hsl, 50%, 50%);
+$payment_hover: hsl($red_hsl, 85%, 50%);
+$payment_active: hsl($red_hsl, 30%, 50%);
 
 // Overwrite colors
 // using HSL values (as per http://demosthenes.info/blog/61/An-Easy-Guide-To-HSL-Color-In-CSS3)
@@ -53,7 +53,7 @@ $nonfocus: #266DA5;
 $nonfocus_hover: #3487C9;
 $nonfocus_active: #5555ff;
 
-$reg_current_period_color: $red;
+$reg_current_period_color: red;
 $reg_current_period_bg_color: #fff;
 $reg_closes_color: black;
 

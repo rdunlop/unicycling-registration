@@ -255,16 +255,16 @@ a.focus_button, a.nonfocus_button {
 
 .payment_link {
   @include button(150px);
-  background-color: $red;
+  background-color: $payment;
   color:white;
   &:visited {
     color: white;
   }
 
   &:hover {
-    background-color:$red-hover;
+    background-color:$payment_hover;
   }
   &:active {
-    background-color: $red-active;
+    background-color: $payment_active;
   }
 }

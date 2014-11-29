@@ -19,6 +19,13 @@ $spectator: yellow !default;
 $spectator_hover: yellow !default;
 $spectator_active: yellow !default;
 
+
+// Payment buttons
+$red_hsl: 0;
+$payment: hsl($red_hsl, 50%, 50%) !default;
+$payment_hover: hsl($red_hsl, 85%, 50%) !default;
+$payment_active: hsl($red_hsl, 30%, 50%) !default;
+
 // Color of the recommended-competitor-type
 $recommended-color: lightblue !default;
 
