@@ -11,6 +11,10 @@
  *= require_self
  */
 
+// Import default colors
+@import "new_styles/default_hue_variables";
+// Import default styles
+@import "new_styles/default_colors";
 
 $background: rgb(18, 172, 80);
 $backgroundgrad: rgb(76, 214, 115);
@@ -20,4 +24,5 @@ $submenudivider: rgb(18, 172, 80);
 $text: rgb(0, 0, 0);
 $texthover: rgb(255, 255, 255);
 
+// Import all other styles
 @import "new_styles_list";

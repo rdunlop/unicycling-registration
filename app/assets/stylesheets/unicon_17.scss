@@ -12,19 +12,16 @@
  *= require_self
  */
 
+// Import default colors
+@import "new_styles/default_hue_variables";
+
 // Overwrite colors
-
-$background: rgb(40, 40, 40);
-$backgroundsub: rgb(40, 40, 40);
-$backgroundhover: rgb(102, 102, 102);
-$submenudivider: rgb(120, 120, 120);
-$text: rgb(255, 255, 255);
-$texthover: rgb(255, 255, 255);
-
 $unicon-pink: rgb(219, 71, 128);
 $unicon-pink-active: rgb(240, 80, 128);
 $unicon-blue: rgb(36, 130, 181);
 
+// Import default styles
+@import "new_styles/default_colors";
 
 $competitor: $unicon-blue;
 $noncompetitor: $unicon-blue;
@@ -47,8 +44,3 @@ $reg_current_period_bg_color: #fff;
 $external_link_color_hover: $unicon-pink;
 
 @import "new_styles_list";
-
-a:hover {
-  color: rgb(219, 71, 128);
-}
-
