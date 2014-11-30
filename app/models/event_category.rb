@@ -20,8 +20,7 @@
 #
 
 class EventCategory < ActiveRecord::Base
-  belongs_to :event, :inverse_of => :event_categories, :touch => true
-  counter_culture :event
+  belongs_to :event, :inverse_of => :event_categories, :touch => true, counter_cache: true
 
   has_many :registrant_event_sign_ups, :dependent => :destroy
 

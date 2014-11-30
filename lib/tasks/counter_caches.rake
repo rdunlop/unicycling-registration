@@ -1,7 +1,9 @@
 desc "Update all counter caches"
 task :update_counter_caches => :environment do
   puts "Updating Counter Caches..."
-  EventCategory.counter_culture_fix_counts
-  EventChoice.counter_culture_fix_counts
+  Event.all.each do |event|
+    Event.reset_counters(event.id, :event_categories)
+    Event.reset_counters(event.id, :event_choices)
+  end
   puts "done."
 end
