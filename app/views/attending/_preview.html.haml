@@ -1,0 +1,6 @@
+%h2 Preview
+- @categories = Category.load_for_form
+- @registrant = Registrant.new
+= form_for setup_registrant_choices(@registrant) do |f|
+  - unless @categories.nil?
+    = render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f }

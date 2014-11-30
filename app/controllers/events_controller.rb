@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = @category.events
+    @events = @category.events.includes(:event_choices)
     @event = Event.new
     @event.event_categories.build
 

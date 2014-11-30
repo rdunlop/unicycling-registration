@@ -77,7 +77,7 @@ class Registrants::BuildController < ApplicationController
 
   def load_categories
     if @registrant.competitor
-      @categories = Category.includes(:translations, :events => :event_choices)
+      @categories = Category.load_for_form
     end
   end
 
