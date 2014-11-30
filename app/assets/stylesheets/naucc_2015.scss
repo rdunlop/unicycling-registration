@@ -11,54 +11,25 @@
  *= require_self
  */
 
-$background: rgb(40, 40, 40);
-$backgroundsub: rgb(40, 40, 40);
-$backgroundhover: rgb(102, 102, 102);
-$submenudivider: rgb(120, 120, 120);
-$text: rgb(255, 255, 255);
-$texthover: rgb(255, 255, 255);
-
-
-$red_hue: 0;
-$payment: hsl($red_hue, 50%, 50%);
-$payment_hover: hsl($red_hue, 85%, 50%);
-$payment_active: hsl($red_hue, 30%, 50%);
-
+// Import default colors
+@import "new_styles/default_hue_variables";
 
 // Overwrite colors
 // using HSL values (as per http://demosthenes.info/blog/61/An-Easy-Guide-To-HSL-Color-In-CSS3)
 
 $comp_hue: 271;
-$competitor: hsl($comp_hue, 80%, 45%);
-$competitor_hover: hsl($comp_hue, 80%, 65%);
-$competitor_active: hsl($comp_hue, 80%, 40%);
-
 $noncomp_hue: 217;
-$noncompetitor: hsl($noncomp_hue, 80%, 45%);
-$noncompetitor_hover: hsl($noncomp_hue, 80%, 65%);
-$noncompetitor_active: hsl($noncomp_hue, 80%, 40%);
-
 $spec_hue: 180;
-$spectator: hsl($spec_hue, 80%, 45%);
-$spectator_hover: hsl($spec_hue, 80%, 65%);
-$spectator_active: hsl($spec_hue, 80%, 40%);
 
 $focus_hue: 217;
-$focus: hsl($focus_hue, 80%, 45%);
-$focus_hover: hsl($focus_hue, 80%, 65%);
-$focus_active: hsl($focus_hue, 80%, 40%);
-
 $nonfocus_hue: 217;
-$nonfocus: hsl($focus_hue, 80%, 45%);
-$nonfocus_hover: hsl($focus_hue, 80%, 65%);
-$nonfocus_active: hsl($focus_hue, 80%, 40%);
+
+// Import default styles
+@import "new_styles/default_colors";
 
 $reg_current_period_color: red;
 $reg_current_period_bg_color: white;
 $reg_closes_color: black;
-
-$external_link_color: blue;
-$external_link_color_hover: red;
 
 $free_item: $competitor;
 $free_item_hover: $noncompetitor;
@@ -72,4 +43,5 @@ $cost_item: black;
 $cost_item_hover: $noncompetitor;
 $cost_item_active: $noncompetitor_active;
 
+// Import all other styles
 @import "new_styles_list";

@@ -1,0 +1,74 @@
+// All hue variables come from 'default_hue_variables' file
+
+// Breadcrumb
+$breadcrumb-color: blue ; // !default
+
+// Nav Bar
+$background: rgb(40, 40, 40) ; // !default
+$backgroundsub: rgb(40, 40, 40) ; // !default
+$backgroundhover: rgb(102, 102, 102) ; // !default
+$submenudivider: rgb(120, 120, 120) ; // !default
+$text: rgb(255, 255, 255) ; // !default
+$texthover: rgb(255, 255, 255) ; // !default
+
+// Main Buttons
+// $comp_hue: 144;
+// $noncomp_hue: 206;
+// $spec_hue: 180;
+
+$competitor: hsl($comp_hue, 80%, 45%) ; // !default
+$competitor_hover: hsl($comp_hue, 80%, 65%) ; // !default
+$competitor_active: hsl($comp_hue, 80%, 40%) ; // !default
+
+$noncompetitor: hsl($noncomp_hue, 80%, 45%) ; // !default
+$noncompetitor_hover: hsl($noncomp_hue, 80%, 65%) ; // !default
+$noncompetitor_active: hsl($noncomp_hue, 80%, 40%) ; // !default
+
+$spectator: hsl($spec_hue, 80%, 45%) ; // !default
+$spectator_hover: hsl($spec_hue, 80%, 65%) ; // !default
+$spectator_active: hsl($spec_hue, 80%, 40%) ; // !default
+
+
+// Payment buttons
+// $red_hue: 0;
+
+$payment: hsl($red_hue, 50%, 50%) ; // !default
+$payment_hover: hsl($red_hue, 85%, 50%) ; // !default
+$payment_active: hsl($red_hue, 30%, 50%) ; // !default
+
+// Color of the recommended-competitor-type
+$recommended-color: lightblue ; // !default
+
+// Focus buttons (what to do next)
+// $focus_hue: $comp_hue;
+// $nonfocus_hue: $noncomp_hue;
+
+$focus: hsl($focus_hue, 80%, 45%) ; // !default
+$focus_hover: hsl($focus_hue, 80%, 65%) ; // !default
+$focus_active: hsl($focus_hue, 80%, 40%) ; // !default
+
+$nonfocus: hsl($focus_hue, 80%, 45%) ; // !default
+$nonfocus_hover: hsl($focus_hue, 80%, 65%) ; // !default
+$nonfocus_active: hsl($focus_hue, 80%, 40%) ; // !default  
+
+// Registration Periods
+$reg_current_period_color: black ; // !default
+$reg_current_period_bg_color: lightgreen ; // !default
+$reg_closes_color: red ; // !default
+
+// Links
+$external_link_color: blue ; // !default
+$external_link_color_hover: blue ; // !default
+
+// Small Buttons
+$free_item: $focus ; // !default
+$free_item_hover: $focus_hover ; // !default
+$free_item_active: $focus_active ; // !default
+
+$delete_item: $payment ; // !default
+$delete_item_hover: $payment ; // !default
+$delete_item_active: $payment_active ; // !default
+
+$cost_item: #AC2B2B ; // !default
+$cost_item_hover: #D61414 ; // !default
+$cost_item_active: #A01A1A ; // !default
