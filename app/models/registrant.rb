@@ -530,7 +530,7 @@ class Registrant < ActiveRecord::Base
     resu = signed_up_events.where({:event_id => event.id}).first
     # only add the Category if there are more than 1
     results[:category] = nil
-    if event.event_categories.count > 1
+    if event.event_categories.size > 1
       results[:category] = resu.event_category.name.to_s unless resu.nil?
     end
 

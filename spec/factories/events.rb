@@ -9,10 +9,12 @@
 #  created_at                  :datetime
 #  updated_at                  :datetime
 #  name                        :string(255)
-#  visible                     :boolean
+#  visible                     :boolean          default(TRUE), not null
 #  accepts_music_uploads       :boolean          default(FALSE)
 #  artistic                    :boolean          default(FALSE)
 #  accepts_wheel_size_override :boolean          default(FALSE)
+#  event_categories_count      :integer          default(0), not null
+#  event_choices_count         :integer          default(0), not null
 #
 # Indexes
 #

@@ -9,10 +9,12 @@
 #  created_at                  :datetime
 #  updated_at                  :datetime
 #  name                        :string(255)
-#  visible                     :boolean
+#  visible                     :boolean          default(TRUE), not null
 #  accepts_music_uploads       :boolean          default(FALSE)
 #  artistic                    :boolean          default(FALSE)
 #  accepts_wheel_size_override :boolean          default(FALSE)
+#  event_categories_count      :integer          default(0), not null
+#  event_choices_count         :integer          default(0), not null
 #
 # Indexes
 #
@@ -36,12 +38,6 @@ class Event < ActiveRecord::Base
   has_many :time_results, :through => :competitors
 
   belongs_to :category, :inverse_of => :events, :touch => true
-
-  after_initialize :init
-
-  def init
-    self.visible = true if self.visible.nil?
-  end
 
   def self.music_uploadable
     visible.where(:accepts_music_uploads => true)
@@ -103,10 +99,10 @@ class Event < ActiveRecord::Base
 
   def num_choices
     total = 1
-    if event_categories.count > 1
+    if event_categories.size > 1
       total += 1
     end
-    total += event_choices.count
+    total += event_choices.size
   end
 
 end

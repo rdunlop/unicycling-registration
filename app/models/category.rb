@@ -38,4 +38,9 @@ class Category < ActiveRecord::Base
       events.map(&:num_choices).max
     end
   end
+
+  # load all the dependent models necessary to display the event-choices form efficiently
+  def self.load_for_form
+    includes(:translations, events: [event_choices: :translations, event_categories: []])
+  end
 end

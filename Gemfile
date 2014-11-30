@@ -47,6 +47,7 @@ gem 'carmen-rails'
 gem 'globalize', '~> 4.0.2'
 gem 'virtus'
 gem "wicked"
+gem 'counter_culture', '~> 0.1.23'
 
 #gem 'sqlite3'
 gem 'pg'
@@ -75,6 +76,7 @@ group :naucc, :development, :test, :cucumber, :caching do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'rspec-instafail', require: false
+  gem 'test_after_commit'
   gem 'syntax'
   gem 'watchr'
   gem 'foreman'

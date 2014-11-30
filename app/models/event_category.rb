@@ -21,6 +21,7 @@
 
 class EventCategory < ActiveRecord::Base
   belongs_to :event, :inverse_of => :event_categories, :touch => true
+  counter_culture :event
 
   has_many :registrant_event_sign_ups, :dependent => :destroy
 
