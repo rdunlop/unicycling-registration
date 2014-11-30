@@ -41,6 +41,6 @@ class Category < ActiveRecord::Base
 
   # load all the dependent models necessary to display the event-choices form efficiently
   def self.load_for_form
-    includes(:translations, events: [:event_choices, :event_categories])
+    includes(:translations, events: [event_choices: :translations, event_categories: []])
   end
 end
