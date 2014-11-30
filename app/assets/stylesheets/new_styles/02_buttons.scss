@@ -145,34 +145,38 @@ a.focus_button, a.nonfocus_button {
 }
 
 
-.competitor_link {
+%reg_link {
   text-decoration: none;
+}
+
+.competitor_link {
+  @extend %reg_link;
+}
+.noncompetitor_link {
+  @extend %reg_link;
+}
+.spectator_link {
+  @extend %reg_link;
+}
+
+.competitor_link {
   color: $competitor;
 }
 .competitor_link:visited {
   color: $competitor;
 }
-.competitor_link:active {
-  color: $competitor_active;
+.competitor_link:hover {
+  color: $competitor_hover;
 }
+
 .noncompetitor_link {
-  text-decoration: none;
   color: $noncompetitor;
 }
 .noncompetitor_link:hover {
-  color: $noncompetitor_active;
+  color: $noncompetitor_hover;
 }
 .noncompetitor_link:visited {
   color: $noncompetitor;
-}
-
-.competitor, .noncompetitor, .spectator {
-  color: white;
-  text-decoration: none;
-
-  &:visited {
-    color: white;
-  }
 }
 
 // Small Expense Item Buttons

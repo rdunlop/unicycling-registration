@@ -24,8 +24,7 @@
 #
 
 class EventChoice < ActiveRecord::Base
-  belongs_to :event, :touch => true, inverse_of: :event_choices
-  counter_culture :event
+  belongs_to :event, :touch => true, inverse_of: :event_choices, counter_cache: true
 
   has_many :registrant_choices, :dependent => :destroy
   belongs_to :optional_if_event_choice, :class_name => "EventChoice"

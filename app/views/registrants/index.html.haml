@@ -6,10 +6,10 @@
 = render "reg_closed_banner" if EventConfiguration.closed?
 
 - if can? :create, Registrant # until registration is closed
-  = render "registrant_choices"
-  - unless @config.comp_noncomp_url.nil?
+  - if @config.comp_noncomp_url?
     .sign_up_difference
       = link_to t(".whats_the_difference"), @config.comp_noncomp_url, :class => "fancybox", :title =>"Click here for more information!"
+  = render "registrant_choices"
 = render "/event_configurations/rulebook_link"
 - if @shared_registrants.count > 0
   %div
