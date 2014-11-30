@@ -35,4 +35,13 @@ describe CouponCode do
       expect(coupon_code.num_uses).to eq(1)
     end
   end
+
+  describe "it doesn't allow multiple codes with different cases" do
+    let!(:code1) { FactoryGirl.create(:coupon_code, code: "HELLO") }
+    it "doesn't allow downcase version" do
+      code2 = FactoryGirl.build(:coupon_code, code: "hello")
+      expect(code2).to be_invalid
+      expect(code2.errors).to include(:code)
+    end
+  end
 end

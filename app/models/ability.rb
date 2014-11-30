@@ -262,7 +262,7 @@ class Ability
     can :manage, Payment if user.has_role? :super_admin
     can :read, Payment, :user_id => user.id
     unless reg_closed?
-      can [:new, :create, :complete], Payment
+      can [:new, :create, :complete, :apply_coupon], Payment
     end
     if user.has_role?(:payment_admin) || user.has_role?(:admin)
       can [:new, :exchange_choose, :exchange_create, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment

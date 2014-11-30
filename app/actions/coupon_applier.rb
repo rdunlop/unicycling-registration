@@ -3,7 +3,7 @@ class CouponApplier
 
   def initialize(payment, coupon_code_string)
     @payment = payment
-    @coupon_code_string = coupon_code_string
+    @coupon_code_string = coupon_code_string.downcase
   end
 
   def perform

@@ -92,6 +92,8 @@ describe "Ability" do
       let(:payment) { FactoryGirl.create(:payment, :user => @user) }
 
       it { should be_able_to(:read, payment) }
+      it { should be_able_to(:complete, payment) }
+      it { should be_able_to(:apply_coupon, payment) }
     end
 
     describe "when registration is closed" do

@@ -86,6 +86,7 @@ class PaymentsController < ApplicationController
     unless @payment.total_amount == 0
       flash[:alert] = "Please use Paypal to complete the payment"
       redirect_to :back
+      return
     end
 
     @payment.completed = true
