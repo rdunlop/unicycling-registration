@@ -9,6 +9,7 @@ $text: rgb(36, 130, 181) !default;
 $texthover: rgb(255, 255, 255) !default;
 
 // Main Buttons
+$competitor
 $competitor: #12AC50 !default;
 $competitor_hover: #4CD673 !default;
 $competitor_active: #55ff55 !default;
@@ -23,10 +24,10 @@ $spectator_active: yellow !default;
 
 
 // Payment buttons
-$red_hsl: 0;
-$payment: hsl($red_hsl, 50%, 50%) !default;
-$payment_hover: hsl($red_hsl, 85%, 50%) !default;
-$payment_active: hsl($red_hsl, 30%, 50%) !default;
+$red_hue: 0;
+$payment: hsl($red_hue, 50%, 50%) !default;
+$payment_hover: hsl($red_hue, 85%, 50%) !default;
+$payment_active: hsl($red_hue, 30%, 50%) !default;
 
 // Color of the recommended-competitor-type
 $recommended-color: lightblue !default;

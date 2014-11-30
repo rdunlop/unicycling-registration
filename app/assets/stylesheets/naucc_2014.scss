@@ -22,37 +22,37 @@ $unicon-pink: rgb(102, 255, 255);
 $unicon-pink-active: rgb(0, 255, 255);
 $unicon-blue: rgb(0, 0, 0);
 
-$red_hsl: 0;
-$payment: hsl($red_hsl, 50%, 50%);
-$payment_hover: hsl($red_hsl, 85%, 50%);
-$payment_active: hsl($red_hsl, 30%, 50%);
+$red_hue: 0;
+$payment: hsl($red_hue, 50%, 50%);
+$payment_hover: hsl($red_hue, 85%, 50%);
+$payment_active: hsl($red_hue, 30%, 50%);
 
 // Overwrite colors
 // using HSL values (as per http://demosthenes.info/blog/61/An-Easy-Guide-To-HSL-Color-In-CSS3)
 
-$comp_hsl: 219;
-$competitor: hsl($comp_hsl, 50%, 50%);
-$competitor_hover: hsl($comp_hsl, 85%, 50%);
-$competitor_active: hsl($comp_hsl, 30%, 50%);
-$noncomp_hsl: 271;
-$noncompetitor: hsl($noncomp_hsl, 50%, 50%);
-$noncompetitor_hover: hsl($noncomp_hsl, 85%, 50%);
-$noncompetitor_active: hsl($noncomp_hsl, 30%, 50%);
+$comp_hue: 219;
+$competitor: hsl($comp_hue, 50%, 50%);
+$competitor_hover: hsl($comp_hue, 85%, 50%);
+$competitor_active: hsl($comp_hue, 30%, 50%);
+$noncomp_hue: 271;
+$noncompetitor: hsl($noncomp_hue, 50%, 50%);
+$noncompetitor_hover: hsl($noncomp_hue, 85%, 50%);
+$noncompetitor_active: hsl($noncomp_hue, 30%, 50%);
 
-$spec_hsl: 180;
-$spectator: hsl($spec_hsl, 50%, 50%);
-$spectator_hover: hsl($spec_hsl, 85%, 50%);
-$spectator_active: hsl($spec_hsl, 30%, 50%);
+$spec_hue: 180;
+$spectator: hsl($spec_hue, 50%, 50%);
+$spectator_hover: hsl($spec_hue, 85%, 50%);
+$spectator_active: hsl($spec_hue, 30%, 50%);
 
-$focus_hsl: 217;
-$focus: hsl($focus_hsl, 50%, 50%);
-$focus_hover: hsl($focus_hsl, 85%, 50%);
-$focus_active: hsl($focus_hsl, 30%, 50%);
+$focus_hue: 217;
+$focus: hsl($focus_hue, 50%, 50%);
+$focus_hover: hsl($focus_hue, 85%, 50%);
+$focus_active: hsl($focus_hue, 30%, 50%);
 
-$nonfocus_hsl: 217;
-$nonfocus: hsl($nonfocus_hsl, 80%, 45%);
-$nonfocus_hover: hsl($nonfocus_hsl, 80%, 65%);
-$nonfocus_active: hsl($nonfocus_hsl, 80%, 40%);
+$nonfocus_hue: 217;
+$nonfocus: hsl($nonfocus_hue, 80%, 45%);
+$nonfocus_hover: hsl($nonfocus_hue, 80%, 65%);
+$nonfocus_active: hsl($nonfocus_hue, 80%, 40%);
 
 $reg_current_period_color: red;
 $reg_current_period_bg_color: #fff;
