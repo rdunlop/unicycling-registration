@@ -12,9 +12,11 @@ $texthover: rgb(255, 255, 255) !default;
 $competitor: #12AC50 !default;
 $competitor_hover: #4CD673 !default;
 $competitor_active: #55ff55 !default;
+
 $noncompetitor: #266DA5 !default;
 $noncompetitor_hover: #3487C9 !default;
 $noncompetitor_active: #3F9ADB !default;
+
 $spectator: yellow !default;
 $spectator_hover: yellow !default;
 $spectator_active: yellow !default;
@@ -48,12 +50,11 @@ $external_link_color: blue !default;
 $external_link_color_hover: blue !default;
 
 // Small Buttons
-
 $free_item: $focus !default;
 $free_item_hover: $focus_hover !default;
 $free_item_active: $focus_active !default;
 
-$delete_item: $nonfocus !default;
+$delete_item: $payment !default;
 $delete_item_hover: $payment !default;
 $delete_item_active: $payment_active !default;
 
