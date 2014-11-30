@@ -11,60 +11,31 @@
  *= require_self
  */
 
-$background: rgb(40, 40, 40);
-$backgroundsub: rgb(40, 40, 40);
-$backgroundhover: rgb(102, 102, 102);
-$submenudivider: rgb(120, 120, 120);
-$text: rgb(255, 255, 255);
-$texthover: rgb(255, 255, 255);
-
-
-$red_hsl: 0;
-$payment: hsl($red_hsl, 50%, 50%);
-$payment_hover: hsl($red_hsl, 85%, 50%);
-$payment_active: hsl($red_hsl, 30%, 50%);
-
+// Import default colors
+@import "new_styles/default_hue_variables";
 
 // Overwrite colors
 // using HSL values (as per http://demosthenes.info/blog/61/An-Easy-Guide-To-HSL-Color-In-CSS3)
 
-$comp_hsl: 271;
-$competitor: hsl($comp_hsl, 80%, 45%);
-$competitor_hover: hsl($comp_hsl, 80%, 65%);
-$competitor_active: hsl($comp_hsl, 80%, 40%);
+$comp_hue: 271;
+$noncomp_hue: 217;
+$spec_hue: 180;
 
-$noncomp_hsl: 217;
-$noncompetitor: hsl($noncomp_hsl, 80%, 45%);
-$noncompetitor_hover: hsl($noncomp_hsl, 80%, 65%);
-$noncompetitor_active: hsl($noncomp_hsl, 80%, 40%);
+$focus_hue: 217;
+$nonfocus_hue: 217;
 
-$spec_hsl: 180;
-$spectator: hsl($spec_hsl, 80%, 45%);
-$spectator_hover: hsl($spec_hsl, 80%, 65%);
-$spectator_active: hsl($spec_hsl, 80%, 40%);
-
-$focus_hsl: 217;
-$focus: hsl($focus_hsl, 80%, 45%);
-$focus_hover: hsl($focus_hsl, 80%, 65%);
-$focus_active: hsl($focus_hsl, 80%, 40%);
-
-$nonfocus_hsl: 217;
-$nonfocus: hsl($focus_hsl, 80%, 45%);
-$nonfocus_hover: hsl($focus_hsl, 80%, 65%);
-$nonfocus_active: hsl($focus_hsl, 80%, 40%);
+// Import default styles
+@import "new_styles/default_colors";
 
 $reg_current_period_color: red;
 $reg_current_period_bg_color: white;
 $reg_closes_color: black;
 
-$external_link_color: blue;
-$external_link_color_hover: red;
-
 $free_item: $competitor;
 $free_item_hover: $noncompetitor;
 $free_item_active: $noncompetitor_active;
 
-$delete_item: $competitor;
+$delete_item: $payment;
 $delete_item_hover: $payment;
 $delete_item_active: $payment_active;
 
@@ -72,4 +43,5 @@ $cost_item: black;
 $cost_item_hover: $noncompetitor;
 $cost_item_active: $noncompetitor_active;
 
+// Import all other styles
 @import "new_styles_list";

@@ -99,6 +99,8 @@ Registrant Expense Items
 %br
 %input.cost_item{ type: "submit", value: "Add Item" }
 %br
+%input.free_item{ type: "submit", value: "Free Item" }
+%br
 %input.delete{ type: "submit", value: "Delete Item" }
 %br
 %input.free_item{ type: 'submit', value: 'Free Item', title: "One is free with registration" }
@@ -123,15 +125,20 @@ Registrant Expense Items
 .wizard_progress
   %ul
     %li.finished
-      %a{href: '#'} First Step
+      %span.progress_bar_text
+        %a{href: '#'} First Step
     %li.finished
-      %a{href: '#'} Second Step
+      %span.progress_bar_text
+        %a{href: '#'} Second Step
     %li.current
-      Current Step
+      %span.progress_bar_text
+        Current Step
     %li.unfinished
-      Incompleted Step
+      %span.progress_bar_text
+        Incompleted Step
     %li.unfinished
-      Incompleted Step
+      %span.progress_bar_text
+        Incompleted Step
 
 // Nav bar
 %h2.style_head Nav Bar

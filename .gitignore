@@ -10,6 +10,7 @@ config/database.yml
 config/secrets.yml
 # Ignore db dump file
 *.dump
+dump.rdb
 
 # Ignore bundler config
 /.bundle
