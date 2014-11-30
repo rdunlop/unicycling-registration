@@ -11,6 +11,7 @@
 #  expense_item_id :integer
 #  details         :string(255)
 #  free            :boolean          default(FALSE)
+#  refunded        :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -43,7 +44,7 @@ class PaymentDetail < ActiveRecord::Base
   scope :paid, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => false) }
 
   scope :free, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => true) }
-  scope :refunded, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where.not({:refund_details => {:payment_detail_id => nil}}) }
+  scope :refunded, -> { completed.where(refunded: true) }
 
   def self.cache_set_field
     :expense_item_id
@@ -55,10 +56,6 @@ class PaymentDetail < ActiveRecord::Base
       return false
     end
     true
-  end
-
-  def refunded?
-    !refund_detail.nil?
   end
 
   def base_cost
