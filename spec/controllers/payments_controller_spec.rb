@@ -124,6 +124,22 @@ describe PaymentsController do
     end
   end
 
+  describe "Complete a $0 payment" do
+    it "sets the payment completed" do
+      payment = FactoryGirl.create(:payment, :user => @user)
+      post :complete, {id: payment.to_param}
+      expect(payment.reload.completed).to be_truthy
+    end
+
+    it "doesn't allow completing a $1 payment" do
+      request.env["HTTP_REFERER"] = root_path
+      payment = FactoryGirl.create(:payment, :user => @user)
+      FactoryGirl.create(:payment_detail, payment: payment, amount: 1.00)
+      post :complete, {id: payment.to_param}
+      expect(payment.reload.completed).to be_falsy
+    end
+  end
+
   describe "GET new" do
     it "assigns a new payment as @payment" do
       get :new, {}

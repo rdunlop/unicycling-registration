@@ -13,7 +13,9 @@
 #
 
 class CouponCode < ActiveRecord::Base
+  before_validation { |cc| cc.code = cc.code.downcase }
   validates :name, :code, :description, presence: true
+  validates :code, uniqueness: true
   validates :max_num_uses, numericality: { greater_than_or_equal_to: 0 }
   validates :price, presence: true
   has_many :coupon_code_expense_items, inverse_of: :coupon_code

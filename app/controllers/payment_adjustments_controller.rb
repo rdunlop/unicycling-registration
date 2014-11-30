@@ -74,13 +74,13 @@ class PaymentAdjustmentsController < ApplicationController
       begin
         old_item = ExpenseItem.find(old_item_id)
         new_item = ExpenseItem.find(new_item_id)
-        refund = Refund.create_from_details(
+        refund = Refund.build_from_details(
           note: note,
           registrant: registrant,
           item: old_item)
         refunded_pd = refund.refund_details.first.payment_detail
         raise "Unable to find matching paid expense item" unless refunded_pd
-        payment = Payment.create_from_details(
+        payment = Payment.build_from_details(
           note: note,
           registrant: registrant,
           details: refunded_pd.details,

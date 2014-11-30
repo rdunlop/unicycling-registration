@@ -11,6 +11,7 @@
 #  expense_item_id :integer
 #  details         :string(255)
 #  free            :boolean          default(FALSE)
+#  refunded        :boolean          default(FALSE)
 #
 # Indexes
 #

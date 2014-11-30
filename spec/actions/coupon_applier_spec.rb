@@ -17,6 +17,14 @@ describe CouponApplier do
     expect(subject.error).to be_nil
   end
 
+  describe "when the code is typed in uppercase" do
+    let(:coupon_code_string) { coupon_code.code.upcase }
+    it "finds matching coupon even still" do
+      do_action
+      expect(payment.payment_details.first.payment_detail_coupon_code).to be_present
+    end
+  end
+
   describe "when coupon code invalid" do
     let(:coupon_code_string) { "fake" }
      it "returns an error" do

@@ -21,6 +21,7 @@ class RefundDetail < ActiveRecord::Base
   belongs_to :payment_detail, touch: true
 
   after_save :create_required_registrant_item
+  after_save :mark_payment_detail_as_refunded
 
   delegate :percentage, to: :refund
   delegate :registrant, to: :payment_detail
@@ -29,6 +30,10 @@ class RefundDetail < ActiveRecord::Base
     reg = payment_detail.registrant
     reg.create_associated_required_expense_items
     reg.save(validate: false)
+  end
+
+  def mark_payment_detail_as_refunded
+    payment_detail.update_attribute(:refunded, true) unless payment_detail.refunded?
   end
 
   def to_s
