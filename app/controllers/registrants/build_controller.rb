@@ -7,6 +7,10 @@ class Registrants::BuildController < ApplicationController
   before_action :set_steps
   before_action :setup_wizard
 
+  def wizard_controller?
+    true
+  end
+
   def set_steps
     if @registrant.nil? || @registrant.competitor
       if @registrant.try(:age) && @registrant.age <= 10
