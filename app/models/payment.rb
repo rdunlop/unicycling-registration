@@ -151,7 +151,7 @@ class Payment < ActiveRecord::Base
     all
   end
 
-  def self.create_from_details(options)
+  def self.build_from_details(options)
     payment = Payment.new(
       completed: true,
       note: options[:note],
