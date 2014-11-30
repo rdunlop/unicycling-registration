@@ -9,11 +9,6 @@ class ApplicationController < ActionController::Base
   check_authorization :unless => :devise_controller?
   skip_authorization_check :if => :rails_admin_controller?
 
-  def wizard_controller?
-    false
-  end
-  helper_method :wizard_controller?
-
   def rails_admin_controller?
     false
   end

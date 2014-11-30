@@ -1,4 +1,4 @@
 .actions
-  - if wizard_controller? && previous_wizard_path != wizard_path
+  - if defined?(previous_wizard_path) && previous_wizard_path != wizard_path
     = link_to t('back'), previous_wizard_path, class: 'back_link'
   = f.submit t('.continue'), :class => "registration_button"
