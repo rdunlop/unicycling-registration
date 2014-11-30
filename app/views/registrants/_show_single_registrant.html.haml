@@ -24,12 +24,12 @@
     = render :partial => "/registrants/summary"
     - cache ['edit_link', I18n.locale, @registrant] do
       .edit_link_block.js--showElementTarget{ data: { key: "update_registrant" } }
-        = link_to t(".edit_registration"), edit_registrant_path(@registrant)
+        = link_to t(".edit_registration"), registrant_build_path(@registrant, :add_name)
   - cache ['expenses', I18n.locale, @registrant, @registrant.members_cache_key] do
     .registrant_expenses_block
       = render :partial => "/registrants/registrant_expenses"
       .edit_link_block.js--showElementTarget{ data: { key: "create_rei" } }
-        = link_to t(".edit_items"), registrant_registrant_expense_items_path(@registrant)
+        = link_to t(".edit_items"), registrant_build_path(@registrant, :expenses)
       .non_printable.js--showElementTarget{ data: { key: "manage_registrant" } }
         = link_to "List Payments", registrant_payments_path(@registrant)
     .registrant_events_block
@@ -40,7 +40,7 @@
         - else
           = render :partial => "/registrants/registrant_events"
         .edit_link_block.js--showElementTarget{ data: { key: "update_registrant" } }
-          = link_to t(".edit_events"), edit_registrant_path(@registrant)
+          = link_to t(".edit_events"), registrant_build_path(@registrant, :add_events)
 
   // contains caching
   = render partial: "/registrants/registrant_songs"

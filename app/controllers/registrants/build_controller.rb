@@ -29,10 +29,6 @@ class Registrants::BuildController < ApplicationController
   def show
     case wizard_value(step)
     when :add_name
-      @has_online_waiver = @config.has_online_waiver
-      unless current_user.registrants.empty?
-        @other_registrant = (current_user.registrants.active - [@registrant]).first
-      end
     when :add_events
       skip_step unless @registrant.competitor
     when :add_volunteers
