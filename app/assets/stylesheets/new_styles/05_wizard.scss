@@ -1,4 +1,4 @@
-$progress_bar_color_finished: #000;
+$progress_bar_color_finished: rgb(40, 40, 40);
 $progress_bar_color_current: #175DCF;
 $progress_bar_color_unfinished: #999;
 
@@ -9,7 +9,7 @@ $progress_bar_element_width: 120px;
 .wizard_progress {
   ul {
     padding: 0;
-    margin: 0;
+    margin: 10px 0;
     list-style: none;
     font-weight: bold;
 
