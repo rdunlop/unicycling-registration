@@ -7,7 +7,7 @@
 </p>
 
 <% if @registrant.reg_paid? %>
-  <h3 class="reg_already_paid">Unable to change reg fee after registrant has paid</h3>
+  <h3 id="error_explanation">Unable to change reg fee after registrant has paid</h3>
 <% else %>
   <%= form_tag(update_reg_fee_registrant_path(@registrant), {:method => :put}) do %>
     <%= @registrant %>'s Current Registration Item: <b><%= @registrant.registration_item %></b><br />

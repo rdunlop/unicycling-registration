@@ -1,7 +1,7 @@
 // Welcome
 %h2.style_head Welcome (Logged-out)
 .base_details
-  .title Welcome to the Unicyclying Convention
+  .title Welcome to the Unicycling Convention
   %div Which is at location
   %div On date/time
 
@@ -36,6 +36,8 @@
 
 .reg_period_update_warning No Registration-Period update has occurred in the past 3 days. Please check your scheduler.
 
+%br
+
 #error_explanation
   %h2 Some Errors prevented this form from saving
   %ul
@@ -59,7 +61,7 @@
 %br
 %p Normal Paragraph of text
 %br
-%h3.reg_already_paid Unable to change reg fee after registrant has paid
+%h3#error_explanation Unable to change reg fee after registrant has paid
 
 // Buttons
 %h2.style_head Buttons
@@ -91,7 +93,7 @@ Registrant Expense Items
 %br
 %input.delete{ type: "submit", value: "Delete Item" }
 %br
-%input.free_item{ type: 'submit', value: 'One Free', title: "One is free with registration" }
+%input.free_item{ type: 'submit', value: 'Free Item', title: "One is free with registration" }
 %br
 %input.sold_out{ disabled: true, type: 'submit', value: 'Sold Out' }
 
@@ -113,15 +115,20 @@ Registrant Expense Items
 .wizard_progress
   %ul
     %li.finished
-      %a{href: '#'} First Step
+      %span.progress_bar_text
+        %a{href: '#'} First Step
     %li.finished
-      %a{href: '#'} Second Step
+      %span.progress_bar_text
+        %a{href: '#'} Second Step
     %li.current
-      Current Step
+      %span.progress_bar_text
+        Current Step
     %li.unfinished
-      Incompleted Step
+      %span.progress_bar_text
+        Incompleted Step
     %li.unfinished
-      Incompleted Step
+      %span.progress_bar_text
+        Incompleted Step
 
 // Nav bar
 %h2.style_head Nav Bar
