@@ -4,7 +4,9 @@
     %h2 Test Mode Enabled
     %span
       Current User Roles: #{current_user.roles.map{|role| role.name.humanize}.join(", ")}
-    %br
-    - User.roles.each do |role|
-      = link_to "Make me #{role.to_s.humanize}", test_mode_role_event_configurations_path(role: role), :method => :post
-      %br
+    .span.js--hiddenToggleMenu
+      Change Role
+    .js--hiddenToggle
+      - User.roles.each do |role|
+        = link_to "Make me #{role.to_s.humanize}", test_mode_role_event_configurations_path(role: role), :method => :post
+        %br
