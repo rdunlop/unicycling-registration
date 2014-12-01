@@ -1,7 +1,6 @@
 - Manage competition_wheel_size - not authorized.
 - remove the "I want to volunteer" checkbox
 - "Back" link is aweful...fix the styling (perhaps make it into a button?)
-- The "Events" is styled poorly until it's done. (prevent showing it before the page finishes loading?)
 - "Incomplete" on Registration Summary list should be lstyled similarly to "Sold Out".
 
 - Payments#summary page - Total $value received itemized.

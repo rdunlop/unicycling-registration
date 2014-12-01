@@ -1,5 +1,8 @@
 $(document).ready(function() {
-  $( "#tabs" ).tabs({ heightStyle: "auto"});
+  // Hide the tabs until the page is ready to be styled.
+  $( "#tabs" )
+    .show()
+    .tabs({ heightStyle: "auto"});
 });
 
 $(document).on("click", ".primary_checkbox", function() {
