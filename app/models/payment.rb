@@ -35,6 +35,7 @@ class Payment < ActiveRecord::Base
 
   after_save :update_registrant_items
   after_save :touch_payment_details
+  after_save :inform_of_coupons
 
   after_initialize :init
 
@@ -49,6 +50,16 @@ class Payment < ActiveRecord::Base
     end
   end
 
+  def just_completed?
+    self.completed == true && self.completed_changed?
+  end
+
+  def inform_of_coupons
+    return true unless just_completed?
+
+    payment_details.map(&:inform_of_coupon)
+  end
+
   def details
     unless transaction_id.blank?
       return transaction_id
@@ -61,6 +72,13 @@ class Payment < ActiveRecord::Base
     nil
   end
 
+  def complete(options = {})
+    assign_attributes(options)
+    self.completed_date = DateTime.now
+    self.completed = true
+    save
+  end
+
   def transaction_id_or_note
     if completed
       if details.nil?
@@ -70,8 +88,7 @@ class Payment < ActiveRecord::Base
   end
 
   def update_registrant_items
-    return true unless self.completed == true
-    return true unless self.completed_changed?
+    return true unless just_completed?
 
     payment_details.each do |pd|
 
@@ -93,7 +110,7 @@ class Payment < ActiveRecord::Base
       unless rei.nil?
         rei.destroy
       else
-        Notifications.delay.missing_matching_expense_item(self.id)
+        PaymentMailer.delay.missing_matching_expense_item(self.id)
       end
     end
   end

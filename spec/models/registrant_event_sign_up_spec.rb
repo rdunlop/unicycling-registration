@@ -6,9 +6,16 @@
 #  registrant_id     :integer
 #  signed_up         :boolean
 #  event_category_id :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  created_at        :datetime
+#  updated_at        :datetime
 #  event_id          :integer
+#
+# Indexes
+#
+#  index_registrant_event_sign_ups_event_category_id              (event_category_id)
+#  index_registrant_event_sign_ups_event_id                       (event_id)
+#  index_registrant_event_sign_ups_on_registrant_id_and_event_id  (registrant_id,event_id) UNIQUE
+#  index_registrant_event_sign_ups_registrant_id                  (registrant_id)
 #
 
 require 'spec_helper'

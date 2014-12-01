@@ -5,13 +5,18 @@
 #  id              :integer          not null, primary key
 #  registrant_id   :integer
 #  expense_item_id :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  created_at      :datetime
+#  updated_at      :datetime
 #  details         :string(255)
 #  free            :boolean          default(FALSE)
 #  system_managed  :boolean          default(FALSE)
 #  locked          :boolean          default(FALSE)
 #  custom_cost     :decimal(, )
+#
+# Indexes
+#
+#  index_registrant_expense_items_expense_item_id  (expense_item_id)
+#  index_registrant_expense_items_registrant_id    (registrant_id)
 #
 
 require 'spec_helper'

@@ -1,14 +1,5 @@
 class NotificationsPreview < ActionMailer::Preview
 
-  def ipn_received
-    contents = "IPN says"
-    Notifications.ipn_received(contents)
-  end
-
-  def payment_completed
-    Notifications.payment_completed(payment.id)
-  end
-
   def send_feedback
     Notifications.send_feedback(contact_form)
   end
@@ -26,10 +17,6 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   ######### ADMIN
-  def missing_matching_expense_item
-    Notifications.missing_matching_expense_item(payment.id)
-  end
-
   def updated_current_reg_period
     Notifications.updated_current_reg_period("Early Registration", "Late Registration")
   end
@@ -40,10 +27,6 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   private
-
-  def payment
-    Payment.all.sample
-  end
 
   def contact_form
     ContactForm.new(feedback: "This is a great site", email: "big_shot@unicycling.org", signed_in: false)

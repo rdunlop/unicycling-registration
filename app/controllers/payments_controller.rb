@@ -89,10 +89,8 @@ class PaymentsController < ApplicationController
       return
     end
 
-    @payment.completed = true
-    @payment.completed_date = DateTime.now
-    @payment.note = "Zero Cost"
-    @payment.save!
+    @payment.complete(note: "Zero Cost")
+
     respond_to do |format|
       flash[:notice] = "Payment Completed"
       format.html { redirect_to user_registrants_path(@payment.user) }
@@ -100,9 +98,7 @@ class PaymentsController < ApplicationController
   end
 
   def fake_complete
-    @payment.completed = true
-    @payment.note = "Fake_Complete"
-    @payment.save!
+    @payment.complete(note: "Fake_Complete")
 
     respond_to do |format|
       format.html { redirect_to root_path }
@@ -127,20 +123,16 @@ class PaymentsController < ApplicationController
         if Payment.exists?(paypal.order_number)
           payment = Payment.find(paypal.order_number)
           if payment.completed
-            Notifications.delay.ipn_received("Payment already completed " + paypal.order_number)
+            PaymentMailer.delay.ipn_received("Payment already completed " + paypal.order_number)
           else
-            payment.completed = true
-            payment.transaction_id = paypal.transaction_id
-            payment.completed_date = DateTime.now
-            payment.payment_date = paypal.payment_date
-            payment.save
-            Notifications.delay.payment_completed(payment.id)
+            payment.complete(transaction_id: paypal.transaction_id, payment_date: paypal.payment_date)
+            PaymentMailer.delay.payment_completed(payment.id)
             if payment.total_amount != paypal.payment_amount
-              Notifications.delay.ipn_received("Payment total #{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}")
+              PaymentMailer.delay.ipn_received("Payment total #{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}")
             end
           end
         else
-          Notifications.delay.ipn_received("Unable to find Payment " + paypal.order_number)
+          PaymentMailer.delay.ipn_received("Unable to find Payment " + paypal.order_number)
         end
       end
     end

@@ -1,22 +1,6 @@
 class Notifications < ActionMailer::Base
   add_template_helper(ApplicationHelper)
 
-  # contents is a string
-  def ipn_received(contents)
-    @contents = contents
-
-    mail to: Rails.application.secrets.error_emails
-  end
-
-  def payment_completed(payment_id)
-    payment = Payment.find(payment_id)
-    @payment_number = payment.id
-    @total_amount = payment.total_amount
-    @event_name = EventConfiguration.singleton.long_name
-
-    mail to: payment.user.email, bcc: Rails.application.secrets.payment_notice_email
-  end
-
   def send_feedback(form_details)
     @contact_form = form_details
 
@@ -49,12 +33,6 @@ class Notifications < ActionMailer::Base
   end
 
   ######### ADMIN
-  def missing_matching_expense_item(payment_id)
-    @payment_id = payment_id
-
-    mail to: Rails.application.secrets.error_emails, subject: "Missing reg-item match"
-  end
-
   def updated_current_reg_period(old_period_name, new_period_name)
     @old_period_description = old_period_name || "Unspecified"
 

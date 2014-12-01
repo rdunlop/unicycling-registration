@@ -19,4 +19,8 @@ class PaymentDetailCouponCode < ActiveRecord::Base
   def self.completed
     joins(payment_detail: :payment).merge(Payment.completed)
   end
+
+  def inform?
+    coupon_code.inform_emails?
+  end
 end

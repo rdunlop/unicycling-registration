@@ -19,6 +19,7 @@
 #  created_at              :datetime
 #  updated_at              :datetime
 #  competition_id          :integer
+#  base_points             :integer
 #
 
 require 'spec_helper'

@@ -2,17 +2,24 @@
 #
 # Table name: time_results
 #
-#  id             :integer          not null, primary key
-#  competitor_id  :integer
-#  minutes        :integer
-#  seconds        :integer
-#  thousands      :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  is_start_time  :boolean          default(FALSE)
-#  attempt_number :integer
-#  status         :string(255)
-#  comments       :text
+#  id                  :integer          not null, primary key
+#  competitor_id       :integer
+#  minutes             :integer
+#  seconds             :integer
+#  thousands           :integer
+#  created_at          :datetime
+#  updated_at          :datetime
+#  is_start_time       :boolean          default(FALSE)
+#  number_of_laps      :integer
+#  status              :string(255)
+#  comments            :text
+#  comments_by         :string(255)
+#  number_of_penalties :integer
+#  entered_at          :datetime
+#
+# Indexes
+#
+#  index_time_results_on_competitor_id  (competitor_id)
 #
 
 require 'spec_helper'

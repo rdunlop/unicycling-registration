@@ -8,9 +8,16 @@
 #  start_age         :integer
 #  end_age           :integer
 #  gender            :string(255)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  created_at        :datetime
+#  updated_at        :datetime
 #  wheel_size_id     :integer
+#  position          :integer
+#
+# Indexes
+#
+#  age_type_desc                              (age_group_type_id,short_description) UNIQUE
+#  index_age_group_entries_age_group_type_id  (age_group_type_id)
+#  index_age_group_entries_wheel_size_id      (wheel_size_id)
 #
 
 require 'spec_helper'

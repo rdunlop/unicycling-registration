@@ -8,8 +8,16 @@
 #  competition_id        :integer
 #  gender_filter         :string(255)
 #  max_place             :integer
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
+#  created_at            :datetime
+#  updated_at            :datetime
+#  min_age               :integer
+#  max_age               :integer
+#
+# Indexes
+#
+#  index_competition_sources_competition_id         (competition_id)
+#  index_competition_sources_event_category_id      (event_category_id)
+#  index_competition_sources_target_competition_id  (target_competition_id)
 #
 
 require 'spec_helper'

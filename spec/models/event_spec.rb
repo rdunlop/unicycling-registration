@@ -2,15 +2,24 @@
 #
 # Table name: events
 #
-#  id                    :integer          not null, primary key
-#  category_id           :integer
-#  export_name           :string(255)
-#  position              :integer
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  name                  :string(255)
-#  visible               :boolean
-#  accepts_music_uploads :boolean          default(FALSE)
+#  id                          :integer          not null, primary key
+#  category_id                 :integer
+#  export_name                 :string(255)
+#  position                    :integer
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#  name                        :string(255)
+#  visible                     :boolean          default(TRUE), not null
+#  accepts_music_uploads       :boolean          default(FALSE)
+#  artistic                    :boolean          default(FALSE)
+#  accepts_wheel_size_override :boolean          default(FALSE)
+#  event_categories_count      :integer          default(0), not null
+#  event_choices_count         :integer          default(0), not null
+#
+# Indexes
+#
+#  index_events_category_id                     (category_id)
+#  index_events_on_accepts_wheel_size_override  (accepts_wheel_size_override)
 #
 
 require 'spec_helper'

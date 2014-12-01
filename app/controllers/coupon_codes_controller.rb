@@ -52,6 +52,6 @@ class CouponCodesController < ApplicationController
 
   private
   def coupon_code_params
-    params.require(:coupon_code).permit(:name, :description, :code, :max_num_uses, :price, expense_item_ids: [])
+    params.require(:coupon_code).permit(:name, :description, :inform_emails, :code, :max_num_uses, :price, expense_item_ids: [])
   end
 end

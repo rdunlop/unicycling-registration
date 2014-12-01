@@ -1,16 +1,16 @@
 # == Schema Information
 #
-# Table name: age_group_entries
+# Table name: coupon_codes
 #
-#  id                :integer          not null, primary key
-#  age_group_type_id :integer
-#  short_description :string(255)
-#  start_age         :integer
-#  end_age           :integer
-#  gender            :string(255)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  wheel_size_id     :integer
+#  id            :integer          not null, primary key
+#  name          :string(255)
+#  code          :string(255)
+#  description   :string(255)
+#  max_num_uses  :integer          default(0)
+#  price         :decimal(, )
+#  created_at    :datetime
+#  updated_at    :datetime
+#  inform_emails :text
 #
 
 require 'spec_helper'

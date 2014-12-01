@@ -98,6 +98,12 @@ class PaymentDetail < ActiveRecord::Base
     res
   end
 
+  def inform_of_coupon
+    if payment_detail_coupon_code.present? && payment_detail_coupon_code.inform?
+      PaymentMailer.delay.coupon_used(self.id)
+    end
+  end
+
   private
 
   def coupon_applied?
