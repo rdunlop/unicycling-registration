@@ -1,12 +1,16 @@
+- if @registrant.age <= 6
+  %p
+    Competitors age six or younger may elect to race some races on a 16", 20", or 24" wheel size.
 
-%p
-  Competitors under the age of 10 may elect to race some races on a 16", 20", or 24" wheel size.
+  %p
+    If you choose the 20" or 24" wheel size, you may be racing against older competitors (up to the age of 12).
 
-%p
-  If you choose the 24" wheel size, you may be racing against older competitors (up to the age of 12)
+- else
+  %p
+    Competitors under the age of 10 may elect to race some races on a 20" or 24" wheel size. You must be age six or younger to choose a 16" wheel.
 
-%p
-  If you choose the 16" or 24" wheel size, you will be racing against similarly-aged kids, on the same wheel size.
+  %p
+    If you choose the 24" wheel size, you may be racing against older competitors (up to the age of 12)
 
 - if Event.where(accepts_wheel_size_override: true).any?
   %fieldset.data_block
