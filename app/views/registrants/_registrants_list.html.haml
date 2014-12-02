@@ -8,6 +8,10 @@
         - shared_list.each do |registrant|
           = render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => true }
         %tr
-          %td{:colspan => "4"}= t(".total_amount_owing")
-          %td= print_formatted_currency(@total_owing)
+          %td{:colspan => "4"}
+            %strong
+              = t(".total_amount_owing")
+          %td
+            %strong
+              = print_formatted_currency(@total_owing)
 = render :partial => "/registrants/pay_now", :locals => {:total_owing => @total_owing }
