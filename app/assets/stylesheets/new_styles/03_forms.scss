@@ -108,14 +108,6 @@ div.data_block {
   font-size: 10px;
 }
 
-.back_link {
-  &:before {
-    content: '< '
-  }
-  text-decoration: none;
-  font-size: 14px;
-  margin-right: 10px;
-}
 
 fieldset legend {
   text-align: center;

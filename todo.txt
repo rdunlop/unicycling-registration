@@ -1,7 +1,4 @@
 - Manage competition_wheel_size - not authorized.
-- remove the "I want to volunteer" checkbox
-- "Back" link is aweful...fix the styling (perhaps make it into a button?)
-- "Incomplete" on Registration Summary list should be lstyled similarly to "Sold Out".
 - "Prices increase by $x in about 2 months" (add the amount it will increase)
 - Payments#summary page - Total $value received itemized.
  - Count: "#committed" paid (coupon or not), marked free (ie: admin-coupon)

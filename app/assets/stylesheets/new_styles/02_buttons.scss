@@ -188,6 +188,20 @@ a.focus_button, a.nonfocus_button {
 
 }
 
+.back_link {
+  @include button;
+  background-color: black;
+  &:hover {
+    background-color: #383838;
+  }
+  &:active {
+    background-color: #282828;
+  }
+  &:before {
+    content: '< '
+  }
+}
+
 // Small Expense Item Buttons
 %small_button {
   @include button(auto);
