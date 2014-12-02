@@ -8,9 +8,10 @@
 %p
   If you choose the 16" or 24" wheel size, you will be racing against similarly-aged kids, on the same wheel size.
 
-%fieldset.data_block
-  %legend Non-Track Wheel Sizes
-  = link_to "Set Other Wheel Sizes", registrant_competition_wheel_sizes_path(@registrant), class: "fancybox"
+- if Event.where(accepts_wheel_size_override: true).any?
+  %fieldset.data_block
+    %legend Non-Track Wheel Sizes
+    = link_to "Set Other Wheel Sizes", registrant_competition_wheel_sizes_path(@registrant), class: "fancybox"
 
 %fieldset.data_block
   %legend Track Racing Wheel Sie
