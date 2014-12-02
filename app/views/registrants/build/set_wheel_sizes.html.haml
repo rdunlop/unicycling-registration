@@ -18,7 +18,7 @@
     = link_to "Set Other Wheel Sizes", registrant_competition_wheel_sizes_path(@registrant), class: "fancybox"
 
 %fieldset.data_block
-  %legend Track Racing Wheel Sie
+  %legend Track Racing Wheel Size
   = form_for(@registrant, url: wizard_path, method: :put) do |f|
     = render partial: "shared/error_messages", object: @registrant
     .data_block
