@@ -7,8 +7,10 @@
       .current_price= print_formatted_currency(reg_period.competitor_expense_item.cost)
       .price_note Prices Increase in #{distance_of_time_in_words(DateTime.now, reg_period.end_date) }
       %ul.price_details
-        %li.highlighted Can Compete in all events
-        %li Participate in Workshops
+        %li.highlighted Compete in all events
+        %li Participate in all workshops
+        %li Ride at all NAUCC 2015 facilities
+        %li Watch all Competition and Convention activities
         %li Buy T-Shirts
         %li Buy Dinner Tickets
         %li Support the Unicycling community
@@ -19,11 +21,13 @@
       .current_price= print_formatted_currency(reg_period.noncompetitor_expense_item.cost)
       .price_note Prices Increase in #{distance_of_time_in_words(DateTime.now, reg_period.end_date) }
       %ul.price_details
-        %li -
-        %li.highlighted Participate in Workshops
+        %li.highlighted Participate in all workshops
+        %li Ride at all NAUCC 2015 facilities
+        %li Watch all Competition and Convention activities
         %li Buy T-Shirts
         %li Buy Dinner Tickets
         %li Support the Unicycling community
+        %li &nbsp;
       = link_to t(".create_new_noncompetitor"), {}, class: "js--display_new_registrant noncompetitor registration_button", data: { registrant_type: 'noncompetitor' }
   - if @config.spectators
     .pricing_option.spectator_sign_up
@@ -31,11 +35,13 @@
       .current_price $0
       .price_note &nbsp;
       %ul.price_details
-        %li -
-        %li -
+        %li.highlighted Watch all Competition and Convention activities
         %li Buy T-Shirts
         %li Buy Dinner Tickets
         %li Support the Unicycling community
+        %li &nbsp;
+        %li &nbsp;
+        %li &nbsp;
       = link_to t(".create_new_spectator"), {}, class: "js--display_new_registrant spectator registration_button", data: { registrant_type: 'spectator' }
 
 = render partial: "new_name"
