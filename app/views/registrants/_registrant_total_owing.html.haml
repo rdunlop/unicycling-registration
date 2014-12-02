@@ -3,3 +3,7 @@
     %span.unpaid
       = print_formatted_currency(registrant.amount_owing)
       = t(".unpaid")
+  - else
+    %span.paid
+      = t(".paid")
+

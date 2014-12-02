@@ -179,6 +179,29 @@ a.focus_button, a.nonfocus_button {
   color: $noncompetitor;
 }
 
+.incomplete, .incomplete:hover {
+  @include button(auto);
+  color: #ccc;
+  background-color: #666;
+  box-shadow:none !important;
+  cursor: default;
+
+}
+
+.back_link {
+  @include button;
+  background-color: black;
+  &:hover {
+    background-color: #383838;
+  }
+  &:active {
+    background-color: #282828;
+  }
+  &:before {
+    content: '< '
+  }
+}
+
 // Small Expense Item Buttons
 %small_button {
   @include button(auto);

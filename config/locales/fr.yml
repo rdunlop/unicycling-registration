@@ -41,6 +41,7 @@ fr:
       spectator: "(Spectateur)"
       edit: "Réviser"
       see_summary: "Voir le résumé"
+      incomplete: "Incomplet"
     registrant_total_owing:
       unpaid: "impayé"
       paid: "Payé"
