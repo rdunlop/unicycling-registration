@@ -1,6 +1,7 @@
 class VolunteerOpportunitiesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  before_action :add_breadcrumbs
 
   def index
   end
@@ -22,6 +23,17 @@ class VolunteerOpportunitiesController < ApplicationController
   def show
   end
 
+  def update
+    respond_to do |format|
+      if @volunteer_opportunity.update_attributes(volunteer_opportunity_params)
+        format.html { redirect_to(@volunteer_opportunity, :notice => 'Volunteer Opportunity was successfully updated.') }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+
+
   def destroy
     @volunteer_opportunity.destroy
 
@@ -32,6 +44,10 @@ class VolunteerOpportunitiesController < ApplicationController
   end
 
   private
+
+  def add_breadcrumbs
+    add_breadcrumb "Volunteer Opportunities", volunteer_opportunities_path
+  end
 
   def volunteer_opportunity_params
     params.require(:volunteer_opportunity).permit(:description, :display_order, :inform_emails)
