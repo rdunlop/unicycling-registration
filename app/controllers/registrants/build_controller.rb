@@ -32,7 +32,6 @@ class Registrants::BuildController < ApplicationController
     when :add_events
       skip_step unless @registrant.competitor
     when :add_volunteers
-      skip_step unless VolunteerOpportunity.any?
     end
 
     render_wizard

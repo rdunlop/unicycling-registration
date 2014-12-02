@@ -20,7 +20,15 @@ class VolunteerOpportunitiesController < ApplicationController
   end
 
   def show
+  end
 
+  def destroy
+    @volunteer_opportunity.destroy
+
+    respond_to do |format|
+      format.html { redirect_to volunteer_opportunities_path }
+      format.json { head :ok }
+    end
   end
 
   private

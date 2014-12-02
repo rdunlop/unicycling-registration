@@ -6,11 +6,13 @@
     %tr
       %th Volunteer Opportunity
       %th Num Registrants
+      %th Delete
 
   %tbody
     - @volunteer_opportunities.each do |vo|
       %tr
         %td= link_to vo.description, vo
         %td= vo.volunteer_choices.count
+        %td= link_to "Delete", vo, method: :delete, data: { confirm: 'Are you sure?' }
 
 = link_to "New Volunteer Opportunity", new_volunteer_opportunity_path

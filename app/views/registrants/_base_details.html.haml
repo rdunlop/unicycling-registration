@@ -24,6 +24,3 @@
         = cd.label :usa_member_number, "USA Membership Number"
         = cd.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{@config.short_name}"
         %br
-  %div
-    = f.label :volunteer, t(".i_am_interested_in_volunteering")
-    = f.check_box :volunteer, :title => t(".i_accept_to_be_contacted")

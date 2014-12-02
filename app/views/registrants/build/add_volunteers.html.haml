@@ -18,4 +18,8 @@
   .data_block
     - if VolunteerOpportunity.any?
       = render partial: "/registrants/volunteer_choices", locals: {f: f}
+    - else
+      = f.label :volunteer, t(".i_am_interested_in_volunteering")
+      = f.check_box :volunteer, :title => t(".i_accept_to_be_contacted")
+
   = render partial: "/registrants/form_actions", locals: {f: f}

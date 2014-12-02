@@ -60,12 +60,13 @@ fr:
       female: "Femme"
       primary_team_or_club_name: "Nom de l’équipe principale ou de l’association"
       primary_team_or_club_contact: "Nom du contact de l’équipe principale ou de l’association"
-      i_am_interested_in_volunteering: "Je suis intéressé à faire du bénévolat"
-      i_accept_to_be_contacted: "J’accepte d’être contacté par courriel par le Comité organisateur"
     build:
       set_wheel_sizes:
         default_wheel_size: "Default Wheel Size"
         default_wheel_size_description: "Used to choose Age Groups when applicable. (track, Standard-class events)"
+      add_volunteers:
+        i_am_interested_in_volunteering: "Je suis intéressé à faire du bénévolat"
+        i_accept_to_be_contacted: "J’accepte d’être contacté par courriel par le Comité organisateur"
     name:
       name: "Nom"
       first_name: "Prénom"
