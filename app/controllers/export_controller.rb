@@ -75,7 +75,7 @@ class ExportController < ApplicationController
     sheet = s.create_worksheet
     @data.each_with_index do |row, row_number|
       row.each_with_index do |cell, column_number|
-        sheet[row_number,column_number] = cell
+        sheet[row_number, column_number] = cell
       end
     end
 
@@ -94,38 +94,38 @@ class ExportController < ApplicationController
     sheet = s.create_worksheet
 
     row = 0
-    sheet[0,0] = "Expense Item"
-    sheet[0,1] = "Details: #{ei.details_label}"
-    sheet[0,2] = "First Name"
-    sheet[0,3] = "Last Name"
-    sheet[0,4] = "Birthday"
-    sheet[0,5] = "Address Line1"
-    sheet[0,6] = "City"
-    sheet[0,7] = "State"
-    sheet[0,8] = "Zip"
-    sheet[0,9] = "Country"
-    sheet[0,10] = "Phone"
-    sheet[0,11] = "Email"
-    sheet[0,12] = "Club"
+    sheet[0, 0] = "Expense Item"
+    sheet[0, 1] = "Details: #{ei.details_label}"
+    sheet[0, 2] = "First Name"
+    sheet[0, 3] = "Last Name"
+    sheet[0, 4] = "Birthday"
+    sheet[0, 5] = "Address Line1"
+    sheet[0, 6] = "City"
+    sheet[0, 7] = "State"
+    sheet[0, 8] = "Zip"
+    sheet[0, 9] = "Country"
+    sheet[0, 10] = "Phone"
+    sheet[0, 11] = "Email"
+    sheet[0, 12] = "Club"
     row = 1
 
     ei.payment_details.includes(:payment).each do |payment_detail|
       next unless payment_detail.payment.completed
       reg = payment_detail.registrant
-      sheet[row,0] = payment_detail.expense_item.to_s
-      sheet[row,1] = payment_detail.details
-      sheet[row,2] = reg.first_name
-      sheet[row,3] = reg.last_name
-      sheet[row,4] = reg.birthday
-      sheet[row,5] = reg.contact_detail.address
-      sheet[row,6] = reg.contact_detail.city
-      sheet[row,7] = reg.contact_detail.state
-      sheet[row,8] = reg.contact_detail.zip
-      sheet[row,9] = reg.contact_detail.country_residence
-      sheet[row,10] = reg.contact_detail.country_representing
-      sheet[row,11] = reg.contact_detail.phone
-      sheet[row,12] = reg.contact_detail.email
-      sheet[row,13] = reg.club
+      sheet[row, 0] = payment_detail.expense_item.to_s
+      sheet[row, 1] = payment_detail.details
+      sheet[row, 2] = reg.first_name
+      sheet[row, 3] = reg.last_name
+      sheet[row, 4] = reg.birthday
+      sheet[row, 5] = reg.contact_detail.address
+      sheet[row, 6] = reg.contact_detail.city
+      sheet[row, 7] = reg.contact_detail.state
+      sheet[row, 8] = reg.contact_detail.zip
+      sheet[row, 9] = reg.contact_detail.country_residence
+      sheet[row, 10] = reg.contact_detail.country_representing
+      sheet[row, 11] = reg.contact_detail.phone
+      sheet[row, 12] = reg.contact_detail.email
+      sheet[row, 13] = reg.club
       row += 1
     end
 
@@ -142,35 +142,35 @@ class ExportController < ApplicationController
     sheet = s.create_worksheet
 
     row = 0
-    sheet[0,0] = "ID"
-    sheet[0,1] = "USA#"
-    sheet[0,2] = "First Name"
-    sheet[0,3] = "Last Name"
-    sheet[0,4] = "Birthday"
-    sheet[0,5] = "Address Line1"
-    sheet[0,6] = "City"
-    sheet[0,7] = "State"
-    sheet[0,8] = "Zip"
-    sheet[0,9] = "Country"
-    sheet[0,10] = "Phone"
-    sheet[0,11] = "Email"
-    sheet[0,12] = "Club"
+    sheet[0, 0] = "ID"
+    sheet[0, 1] = "USA#"
+    sheet[0, 2] = "First Name"
+    sheet[0, 3] = "Last Name"
+    sheet[0, 4] = "Birthday"
+    sheet[0, 5] = "Address Line1"
+    sheet[0, 6] = "City"
+    sheet[0, 7] = "State"
+    sheet[0, 8] = "Zip"
+    sheet[0, 9] = "Country"
+    sheet[0, 10] = "Phone"
+    sheet[0, 11] = "Email"
+    sheet[0, 12] = "Club"
 
     row = 1
     Registrant.active.includes(:payment_details => [:payment]).each do |reg|
-      sheet[row,0] = reg.bib_number
-      sheet[row,1] = reg.contact_detail.usa_member_number
-      sheet[row,2] = reg.first_name
-      sheet[row,3] = reg.last_name
-      sheet[row,4] = reg.birthday
-      sheet[row,5] = reg.contact_detail.address
-      sheet[row,6] = reg.contact_detail.city
-      sheet[row,7] = reg.contact_detail.state
-      sheet[row,8] = reg.contact_detail.zip
-      sheet[row,9] = reg.contact_detail.country_residence
-      sheet[row,10] = reg.contact_detail.phone
-      sheet[row,11] = reg.contact_detail.email
-      sheet[row,12] = reg.club
+      sheet[row, 0] = reg.bib_number
+      sheet[row, 1] = reg.contact_detail.usa_member_number
+      sheet[row, 2] = reg.first_name
+      sheet[row, 3] = reg.last_name
+      sheet[row, 4] = reg.birthday
+      sheet[row, 5] = reg.contact_detail.address
+      sheet[row, 6] = reg.contact_detail.city
+      sheet[row, 7] = reg.contact_detail.state
+      sheet[row, 8] = reg.contact_detail.zip
+      sheet[row, 9] = reg.contact_detail.country_residence
+      sheet[row, 10] = reg.contact_detail.phone
+      sheet[row, 11] = reg.contact_detail.email
+      sheet[row, 12] = reg.club
       column = 13
       reg.paid_details.each do |pd|
         sheet[row, column] = pd.expense_item.to_s
@@ -202,16 +202,16 @@ class ExportController < ApplicationController
 
     row = 1
     Result.includes(competitor: [competition: [], members: [registrant: [:competition_wheel_sizes]], external_results: [], time_results: [], distance_attempts: [], scores: []]).all.each do |result|
-      sheet[row,0] = result.competitor.bib_number
-      sheet[row,1] = result.competitor.to_s
-      sheet[row,2] = result.competitor.gender
-      sheet[row,3] = result.competitor.age
-      sheet[row,4] = result.competitor.competition.award_title
-      sheet[row,5] = result.to_s
-      sheet[row,6] = result.result_type
-      sheet[row,7] = result.competitor.result
-      sheet[row,8] = result.competitor.details
-      sheet[row,9] = result.competitor.age_group_entry_description
+      sheet[row, 0] = result.competitor.bib_number
+      sheet[row, 1] = result.competitor.to_s
+      sheet[row, 2] = result.competitor.gender
+      sheet[row, 3] = result.competitor.age
+      sheet[row, 4] = result.competitor.competition.award_title
+      sheet[row, 5] = result.to_s
+      sheet[row, 6] = result.result_type
+      sheet[row, 7] = result.competitor.result
+      sheet[row, 8] = result.competitor.details
+      sheet[row, 9] = result.competitor.age_group_entry_description
       row += 1
     end
 

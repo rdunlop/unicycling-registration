@@ -214,7 +214,7 @@ describe Competitor do
 
   describe "when it has multiple members" do
     before(:each) do
-      FactoryGirl.create(:event_configuration, :start_date => Date.new(2010,01,01))
+      FactoryGirl.create(:event_configuration, :start_date => Date.new(2010, 01, 01))
       member = @comp.members(true).first
       @reg1 = member.registrant
 

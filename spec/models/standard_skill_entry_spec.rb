@@ -28,7 +28,7 @@ describe StandardSkillEntry do
   end
   it "can be created from a CSV-based array" do
     s = StandardSkillEntry.new
-    arr = ["307", "n", "4.8","jump mount to seat drag in back, feet holding seat"]
+    arr = ["307", "n", "4.8", "jump mount to seat drag in back, feet holding seat"]
     s.initialize_from_array(arr)
     s.save!
 

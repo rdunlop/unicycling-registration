@@ -278,11 +278,6 @@ Style/SingleLineBlockParams:
 Style/SingleSpaceBeforeFirstArg:
   Enabled: false
 
-# Offense count: 386
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
-  Enabled: false
-
 # Offense count: 5
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

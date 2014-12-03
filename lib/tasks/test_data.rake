@@ -72,7 +72,7 @@ task :create_fake_data => :environment do
   @uphill = create_event(@muni, "Uphill", @uphill_events)
 
   @collective = create_category("Collective Sports")
-  @hockey_events = ["A","B"]
+  @hockey_events = ["A", "B"]
   @hockey = create_event(@collective, "Hockey", @hockey_events)
 
   @distance =  create_category("Distance")

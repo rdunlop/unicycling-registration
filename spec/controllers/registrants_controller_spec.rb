@@ -80,7 +80,7 @@ describe RegistrantsController do
     it "sets the event-related variables" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
-      Date.stub(:today).and_return(Date.new(2012,01,22))
+      Date.stub(:today).and_return(Date.new(2012, 01, 22))
       get :waiver, {:id => registrant.to_param}
 
       assigns(:event_name).should == c.long_name
@@ -165,7 +165,7 @@ describe RegistrantsController do
     end
     describe "when the system is 'closed'" do
       before(:each) do
-        FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2010,02,02))
+        FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 01, 01), :end_date => Date.new(2010, 02, 02))
       end
       it "should not succeed" do
         EventConfiguration.closed?.should == true
@@ -499,8 +499,8 @@ describe RegistrantsController do
 
     describe "PUT change the reg fee" do
       before(:each) do
-        @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2012,01,01))
-        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012,01,02), :end_date => Date.new(2020,02,02))
+        @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 01, 01), :end_date => Date.new(2012, 01, 01))
+        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 02), :end_date => Date.new(2020, 02, 02))
         @reg = FactoryGirl.create(:competitor)
       end
 

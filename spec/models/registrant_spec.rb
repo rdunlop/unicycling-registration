@@ -56,7 +56,7 @@ describe Registrant do
 
   describe "with an event configuration starting date" do
     before(:each) do
-      FactoryGirl.create(:event_configuration, start_date: Date.new(2012,05,20))
+      FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 05, 20))
     end
 
     describe "and a registrant born on the starting day in 1982" do
@@ -140,7 +140,7 @@ describe Registrant do
     end
 
     it "can not have a birthday, while having a configuration" do
-      FactoryGirl.create(:event_configuration, start_date: Date.new(2012,05,20))
+      FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 05, 20))
       @reg.birthday = nil
       @reg.valid?.should == false
     end
@@ -364,14 +364,14 @@ describe Registrant do
     before(:each) do
       @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
       @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
-      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2022, 01, 01), :competitor_expense_item => @comp_exp, :noncompetitor_expense_item => @noncomp_exp)
+      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 01, 01), :end_date => Date.new(2022, 01, 01), :competitor_expense_item => @comp_exp, :noncompetitor_expense_item => @noncomp_exp)
     end
 
     describe "with an older (PAID_FOR) registration_period" do
       before(:each) do
         @oldcomp_exp = FactoryGirl.create(:expense_item, :cost => 90)
         @oldnoncomp_exp = FactoryGirl.create(:expense_item, :cost => 40)
-        @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2009,01,01), :end_date => Date.new(2010, 01, 01),
+        @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2009, 01, 01), :end_date => Date.new(2010, 01, 01),
                                                        :competitor_expense_item => @oldcomp_exp, :noncompetitor_expense_item => @oldnoncomp_exp)
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)

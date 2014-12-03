@@ -63,7 +63,7 @@ describe CombinedCompetitionResult do
       competition3 = FactoryGirl.build_stubbed(:competition)
       competitor1m    = build_competitor(:place => 2, :bib_number => 10, competition: competition1)
       competitor1tt   = build_competitor(:place => 1, :bib_number => 10, competition: competition2)
-      competitor1crit = build_competitor(:place => 10, :bib_number => 10,competition: competition3)
+      competitor1crit = build_competitor(:place => 10, :bib_number => 10, competition: competition3)
       competitor2m    = build_competitor(:place => 2, :bib_number => 20, competition: competition1)
       competitor2tt   = build_competitor(:place => 2, :bib_number => 20, competition: competition2)
       competitor2crit = build_competitor(:place => 2, :bib_number => 20, competition: competition3)

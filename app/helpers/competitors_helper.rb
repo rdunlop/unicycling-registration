@@ -20,7 +20,7 @@ module CompetitorsHelper
     case options[:is_start_times] ? competition.start_data_type : competition.end_data_type
     when "Track E-Timer"
       if options[:is_start_times]
-        link_to "Review",review_competition_lane_assignments_path(competition)
+        link_to "Review", review_competition_lane_assignments_path(competition)
       else
         link_to "View", review_user_competition_import_results_path(current_user, competition)
       end

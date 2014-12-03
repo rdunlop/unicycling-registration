@@ -9,7 +9,7 @@ module TimePrintable
       if thousands % 100 == 0
         thousands_string = ".#{(thousands / 100).to_s}"
       else
-        thousands_string = ".#{thousands.to_s.rjust(3,"0")}"
+        thousands_string = ".#{thousands.to_s.rjust(3, "0")}"
       end
     end
   end
@@ -18,7 +18,7 @@ module TimePrintable
     hours = minutes / 60
     if hours > 0
       remaining_minutes = minutes % 60
-      "#{hours}:#{remaining_minutes.to_s.rjust(2,"0")}"
+      "#{hours}:#{remaining_minutes.to_s.rjust(2, "0")}"
     else
       "#{minutes}"
     end

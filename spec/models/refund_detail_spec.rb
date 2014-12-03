@@ -53,7 +53,7 @@ describe RefundDetail do
 
     describe "when there is a previous active registration_period", :caching => true do
       before(:each) do
-        @rp_prev = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,1,1), :end_date => Date.new(2011,1,1))
+        @rp_prev = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 1, 1), :end_date => Date.new(2011, 1, 1))
       end
 
       it "Doesn't re-add any items if the refund is a non-system-managed item (not the competition item)" do

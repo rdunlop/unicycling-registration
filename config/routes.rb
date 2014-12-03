@@ -93,7 +93,7 @@ Workspace::Application.routes.draw do
 
     resources :refunds, :only => [:show]
 
-    resources :payments, :except => [:index, :edit, :update,:destroy] do
+    resources :payments, :except => [:index, :edit, :update, :destroy] do
       collection do
         get :summary
         post :notification

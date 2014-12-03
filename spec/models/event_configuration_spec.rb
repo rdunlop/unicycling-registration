@@ -113,35 +113,35 @@ describe EventConfiguration do
   end
 
   it "should NOT have standard_skill_closed by default " do
-    EventConfiguration.singleton.standard_skill_closed?(Date.new(2013,1,1)).should == false
+    EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 1, 1)).should == false
   end
 
   describe "with the standard_skill_closed_date defined" do
     it "should be closed on the 5th" do
       @ev.save!
-      EventConfiguration.singleton.standard_skill_closed?(Date.new(2013,5,4)).should == false
-      EventConfiguration.singleton.standard_skill_closed?(Date.new(2013,5,5)).should == true
-      EventConfiguration.singleton.standard_skill_closed?(Date.new(2013,5,6)).should == true
+      EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 5, 4)).should == false
+      EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 5, 5)).should == true
+      EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 5, 6)).should == true
     end
   end
 
   describe "with a registration period" do
     before(:each) do
-      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 11,03), :end_date => Date.new(2012,11,07))
+      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 11, 03), :end_date => Date.new(2012, 11, 07))
     end
     it "should be open on the last day of registration" do
-      EventConfiguration.closed?(Date.new(2012,11,07)).should == false
+      EventConfiguration.closed?(Date.new(2012, 11, 07)).should == false
     end
     it "should be open as long as the registration_period is current" do
-      d = Date.new(2012,11,07)
+      d = Date.new(2012, 11, 07)
       @rp.current_period?(d).should == true
       EventConfiguration.closed?(d).should == false
 
-      e = Date.new(2012,11,8)
+      e = Date.new(2012, 11, 8)
       @rp.current_period?(e).should == true
       EventConfiguration.closed?(e).should == false
 
-      f = Date.new(2012,11,9)
+      f = Date.new(2012, 11, 9)
       @rp.current_period?(f).should == false
       EventConfiguration.closed?(f).should == true
     end
