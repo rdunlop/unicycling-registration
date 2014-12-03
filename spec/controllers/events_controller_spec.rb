@@ -89,7 +89,7 @@ describe EventsController do
         post :create, {
           :category_id => @category.id,
           :event => {:name => "Sample Event",
-          :event_categories_attributes => [
+                     :event_categories_attributes => [
             {
             :name => "The Categorie",
             :position => 1

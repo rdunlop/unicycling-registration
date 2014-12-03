@@ -5,7 +5,7 @@ class RemoveStreetScoreTable < ActiveRecord::Migration
   def up
     StreetScore.all.each do |street|
       Score.create!(:judge_id => street.judge_id, :competitor_id => street.competitor_id,
-                   :val_1 => street.val_1)
+                    :val_1 => street.val_1)
     end
     drop_table :street_scores
   end
@@ -23,7 +23,7 @@ class RemoveStreetScoreTable < ActiveRecord::Migration
     jt = JudgeType.find_by(:event_class => "Street")
     jt.scores.each do |score|
       StreetScore.create!(:judge_id => street.judge_id, :competitor_id => street.competitor_id,
-                   :val_1 => street.val_1)
+                          :val_1 => street.val_1)
     end
   end
 end

@@ -12,8 +12,8 @@ describe StandardSkillRoutineEntriesController do
     new_skill = FactoryGirl.create(:standard_skill_entry)
 
     @valid_attributes = { standard_skill_routine_id: @routine.id,
-                         standard_skill_entry_id: new_skill.id,
-                         position: @initial_entry.position + 1}
+                          standard_skill_entry_id: new_skill.id,
+                          position: @initial_entry.position + 1}
   end
 
   describe "POST create" do

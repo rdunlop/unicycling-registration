@@ -272,18 +272,18 @@ class AwardLabelsController < ApplicationController
         #"rows" =>  6,
         #"column_gutter" =>  9.93, # 0.391 "
         #"row_gutter" =>  9.93 # 0.391"
-    },
-    "Avery8293" => {
-      "paper_size" => "LETTER",
-      "top_margin" => 65.23, # 0.531"
-      "bottom_margin" => 54.23, # 0.531"
-      "left_margin" =>  52.23, # 0.406 "
-      "right_margin" =>  40.23, # 0.406"
-      "columns" =>  4,
-      "rows" =>  5,
-      "column_gutter" =>  55, # 0.391 "
-      "row_gutter" =>  50 # 0.391"
-    }
+      },
+      "Avery8293" => {
+        "paper_size" => "LETTER",
+        "top_margin" => 65.23, # 0.531"
+        "bottom_margin" => 54.23, # 0.531"
+        "left_margin" =>  52.23, # 0.406 "
+        "right_margin" =>  40.23, # 0.406"
+        "columns" =>  4,
+        "rows" =>  5,
+        "column_gutter" =>  55, # 0.391 "
+        "row_gutter" =>  50 # 0.391"
+      }
     }
     # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
     #  and it will wrap lines as necessary, and then shrink the text.

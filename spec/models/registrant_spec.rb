@@ -372,7 +372,7 @@ describe Registrant do
         @oldcomp_exp = FactoryGirl.create(:expense_item, :cost => 90)
         @oldnoncomp_exp = FactoryGirl.create(:expense_item, :cost => 40)
         @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2009,01,01), :end_date => Date.new(2010, 01, 01),
-                                 :competitor_expense_item => @oldcomp_exp, :noncompetitor_expense_item => @oldnoncomp_exp)
+                                                       :competitor_expense_item => @oldcomp_exp, :noncompetitor_expense_item => @oldnoncomp_exp)
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 90, :expense_item => @oldcomp_exp)
