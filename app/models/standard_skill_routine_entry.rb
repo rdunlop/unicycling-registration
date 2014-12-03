@@ -45,7 +45,7 @@ class StandardSkillRoutineEntry < ActiveRecord::Base
     self.standard_skill_routine_entries.build(params)
   end
 
-    private
+  private
 
   def no_more_than_18_skill_entries
     # XXX should not traverse this 'standard_skill_routine' object?

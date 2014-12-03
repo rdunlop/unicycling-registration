@@ -99,12 +99,6 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 19
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/AccessModifierIndentation:
-  Enabled: false
-
 # Offense count: 4
 Style/AccessorMethodName:
   Enabled: false
@@ -113,11 +107,6 @@ Style/AccessorMethodName:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/AndOr:
-  Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/BlockEndNewline:
   Enabled: false
 
 # Offense count: 119

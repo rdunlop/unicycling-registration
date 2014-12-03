@@ -20,7 +20,8 @@ describe TwoAttemptEntry do
       seconds_2: 5,
       thousands_2: 6,
       status_2: "DQ"
-      ) }
+      )
+    }
     it "can save to the database" do
       expect(two_attempt_entry.save).to eq(true)
     end
