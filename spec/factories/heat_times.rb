@@ -20,7 +20,7 @@
 
 FactoryGirl.define do
   factory :heat_time do
-    competition #FactoryGirl
+    competition # FactoryGirl
     heat 1
     minutes 2
     seconds 3

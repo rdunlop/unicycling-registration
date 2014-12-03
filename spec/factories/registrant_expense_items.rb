@@ -23,8 +23,8 @@
 
 FactoryGirl.define do
   factory :registrant_expense_item do
-    registrant #FactoryGirl
-    expense_item #FactoryGirl
+    registrant # FactoryGirl
+    expense_item # FactoryGirl
     system_managed false
   end
 end

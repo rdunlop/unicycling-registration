@@ -24,7 +24,7 @@ describe Upload do
 
     data = up.extract_csv(sample_input)
 
-    data.count.should == 9 #includes header row
+    data.count.should == 9 # includes header row
   end
 
   it "can extract csv for lif race results (exact)" do

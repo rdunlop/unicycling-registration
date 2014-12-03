@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Creating adjustment payments' do
-  #let!(:user) { FactoryGirl.create(:payment_admin) }
+  # let!(:user) { FactoryGirl.create(:payment_admin) }
   let(:user) { FactoryGirl.create(:super_admin_user) }
   include_context 'user is logged in'
   include_context 'basic event configuration'

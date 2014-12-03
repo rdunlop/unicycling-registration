@@ -64,7 +64,7 @@ describe StreetScoresController do
   end
 
   describe "authentication of edit/update pages" do
-    #http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:protecting_pages
+    # http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:protecting_pages
 
     before (:each) do
       # create score with existing current_user

@@ -110,7 +110,7 @@ shared_context "basic address data" do
     fill_in 'Address', with: "123 Fake street"
     fill_in "City", with: "Springfield"
     find(:select, 'registrant_contact_detail_attributes_country_residence').first(:option, 'United States').select_option
-    #select "United States", :from => "Country of residence"
+    # select "United States", :from => "Country of residence"
     fill_in 'Zip', with: '123456'
     fill_in 'registrant_contact_detail_attributes_emergency_name', with: 'John Smith'
     fill_in 'registrant_contact_detail_attributes_emergency_relationship', with: 'friend'

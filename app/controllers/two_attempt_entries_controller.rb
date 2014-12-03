@@ -54,12 +54,12 @@ class TwoAttemptEntriesController < ApplicationController
   def create
     respond_to do |format|
       if @two_attempt_entry.save
-        #format.html { redirect_to user_competition_two_attempt_entries_path(@user, @competition), notice: 'Import result was successfully created.' }
+        # format.html { redirect_to user_competition_two_attempt_entries_path(@user, @competition), notice: 'Import result was successfully created.' }
         format.js { }
       else
-        #index
-        #@two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
-        #format.html { render action: "index" }
+        # index
+        # @two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
+        # format.html { render action: "index" }
         format.js { }
       end
     end

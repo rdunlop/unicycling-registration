@@ -49,7 +49,7 @@ gem 'globalize', '~> 4.0.2'
 gem 'virtus'
 gem "wicked"
 
-#gem 'sqlite3'
+# gem 'sqlite3'
 gem 'pg'
 
 # deployment
@@ -72,7 +72,7 @@ group :naucc, :development, :test, :cucumber, :caching do
   gem 'poltergeist'
   gem 'annotate'
   gem 'bullet'
-  #gem 'brakeman'
+  # gem 'brakeman'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'rspec-instafail', require: false

@@ -98,7 +98,7 @@ class Upload
         minutes = split_by_minutes[1].to_i
         results[:minutes] = minutes + (hours * 60)
       else
-        results[:minutes] = split_by_minutes[0].to_i #full_time[0..(full_time.index(":")-1)].to_i
+        results[:minutes] = split_by_minutes[0].to_i # full_time[0..(full_time.index(":")-1)].to_i
       end
       seconds_and_hundreds = split_by_minutes[-1] # full_time[full_time.index(":")+1..-1]
     end

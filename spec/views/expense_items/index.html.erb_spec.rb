@@ -28,7 +28,7 @@ describe "expense_items/index" do
     assert_select "table#list" do
       assert_select "tr>td", :text => "First".to_s, :count => 1
       assert_select "tr>td", :text => "FDescription".to_s, :count => 1
-      assert_select "tr>td", :text => "9.99".to_s, :count => 2 #one for the cost, one for total_cost
+      assert_select "tr>td", :text => "9.99".to_s, :count => 2 # one for the cost, one for total_cost
       assert_select "tr>td", :text => "ename".to_s, :count => 1
       assert_select "tr>td", :text => 1.to_s, :count => 1
       assert_select "tr>td", :text => "Group 1", :count => 1

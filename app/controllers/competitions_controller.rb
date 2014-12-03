@@ -249,7 +249,7 @@ class CompetitionsController < ApplicationController
 
   def load_new_competition
     @competition = Competition.new(competition_params)
-    params[:id] = 1 if params[:id].nil? #necessary due to bug in the way that cancan does authorization check
+    params[:id] = 1 if params[:id].nil? # necessary due to bug in the way that cancan does authorization check
   end
 
   def load_event

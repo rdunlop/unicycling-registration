@@ -10,7 +10,7 @@ def create_event(category, name, event_categories = [])
   event ||= FactoryGirl.create(:event, category: category, name: name)
   event_categories.each_with_index do |ecat, index|
     if index == 0
-      #replace the 'All' event_category
+      # replace the 'All' event_category
       ecat_el = event.event_categories.find_by(name: "All")
       unless ecat
         ecat_el.name = ecat

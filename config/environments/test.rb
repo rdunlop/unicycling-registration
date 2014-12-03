@@ -53,11 +53,11 @@ class ActionDispatch::Routing::RouteSet::NamedRouteCollection::UrlHelper
 end
 
 # Rails 3
-#class ActionDispatch::Routing::RouteSet
+# class ActionDispatch::Routing::RouteSet
 #  def url_for_with_locale_fix(options)
 #    url_for_without_locale_fix({:locale => I18n.default_locale}.merge(options))
 #  end
 #
 #  alias_method_chain :url_for, :locale_fix
-#end
+# end
 

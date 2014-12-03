@@ -41,7 +41,7 @@ class ExportController < ApplicationController
             break
           end
         end
-        #rc = reg.registrant_event_sign_ups.where({:event_category_id => ec.id}).first
+        # rc = reg.registrant_event_sign_ups.where({:event_category_id => ec.id}).first
         if rc.nil?
           reg_sign_up_data += [nil]
         else
@@ -59,7 +59,7 @@ class ExportController < ApplicationController
             break
           end
         end
-        #rc = reg.registrant_choices.where({:event_choice_id => ec.id}).first
+        # rc = reg.registrant_choices.where({:event_choice_id => ec.id}).first
         if rc.nil?
           reg_event_data += [nil]
         else
@@ -220,7 +220,7 @@ class ExportController < ApplicationController
 
     respond_to do |format|
       format.xls { send_data report.string, :filename => "results.xls" }
-      #format.xls { render text: report.string, :filename => "results.xls" }
+      # format.xls { render text: report.string, :filename => "results.xls" }
     end
   end
 end

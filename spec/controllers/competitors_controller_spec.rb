@@ -70,8 +70,8 @@ describe CompetitorsController do
       end
 
       it "creates associated members also" do
-        @reg2 = FactoryGirl.create(:competitor) #registrant
-        @reg3 = FactoryGirl.create(:competitor) #registrant
+        @reg2 = FactoryGirl.create(:competitor) # registrant
+        @reg3 = FactoryGirl.create(:competitor) # registrant
         expect {
           post :create, {:competitor => valid_attributes.merge(
             {:members_attributes =>

@@ -262,14 +262,14 @@ class AwardLabelsController < ApplicationController
         "column_gutter" =>  20.152, # 0.391 "
         "row_gutter" =>  6.152 # 0.391"
 
-        #"top_margin" => 13.49, # 0.531"
-        #"bottom_margin" => 13.49, # 0.531"
-        #"left_margin" =>  10.31, # 0.406 "
-        #"right_margin" =>  10.31, # 0.406"
-        #"columns" =>  4,
-        #"rows" =>  6,
-        #"column_gutter" =>  9.93, # 0.391 "
-        #"row_gutter" =>  9.93 # 0.391"
+        # "top_margin" => 13.49, # 0.531"
+        # "bottom_margin" => 13.49, # 0.531"
+        # "left_margin" =>  10.31, # 0.406 "
+        # "right_margin" =>  10.31, # 0.406"
+        # "columns" =>  4,
+        # "rows" =>  6,
+        # "column_gutter" =>  9.93, # 0.391 "
+        # "row_gutter" =>  9.93 # 0.391"
       },
       "Avery8293" => {
         "paper_size" => "LETTER",

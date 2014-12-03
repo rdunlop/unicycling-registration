@@ -40,7 +40,7 @@ class DistanceAttemptsController < ApplicationController
         format.js {}
       end
     end
-    #respond_with(@distance_attempt, location: judge_distance_attempts_path(@judge, height: @distance_attempt.distance), action: "index")
+    # respond_with(@distance_attempt, location: judge_distance_attempts_path(@judge, height: @distance_attempt.distance), action: "index")
   end
 
   def destroy

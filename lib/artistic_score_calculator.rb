@@ -89,7 +89,7 @@ class ArtisticScoreCalculator
       @total_points ||= {}
       unless @total_points[competitor.id].nil?
         # Enabling this cache breaks flatland judging...don't know why XXX
-        #return @total_points[competitor.id]
+        # return @total_points[competitor.id]
       end
     end
 

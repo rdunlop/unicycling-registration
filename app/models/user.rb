@@ -82,8 +82,8 @@ class User < ActiveRecord::Base
 
   def self.role_description(role)
     case(role)
-      #when :track_official
-      #when :results_printer
+      # when :track_official
+      # when :results_printer
     when :data_entry_volunteer
       "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
     when :admin

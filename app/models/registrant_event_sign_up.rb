@@ -20,7 +20,7 @@
 
 class RegistrantEventSignUp < ActiveRecord::Base
   validates :event, :registrant, :presence => true
-  #validates :event_category, :presence => true, :if  => "signed_up"
+  # validates :event_category, :presence => true, :if  => "signed_up"
   validates :signed_up, :inclusion => {:in => [true, false] } # because it's a boolean
   validate :category_chosen_when_signed_up
   validate :category_in_age_range

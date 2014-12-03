@@ -234,9 +234,9 @@ class Ability
       end
     end
 
-    #can :create, Song do
+    # can :create, Song do
     #  user.has_role? :admin
-    #end
+    # end
     unless config.music_submission_ended?
       can [:crud, :file_complete, :add_file, :my_songs, :create_guest_song], Song, :user_id => user.id
     end
@@ -301,7 +301,7 @@ class Ability
       end
       can :crud, CompetitionWheelSize # allowed, because we have authorize! calls in the controller
 
-      #can [:create], RegistrantExpenseItem, :user_id => user.id
+      # can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
         (not rei.system_managed) && (user.editable_registrants.include?(rei.registrant))
       end

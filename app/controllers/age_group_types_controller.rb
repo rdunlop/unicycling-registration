@@ -6,7 +6,7 @@ class AgeGroupTypesController < ApplicationController
 
   def index
     @age_group_type = AgeGroupType.new
-    @age_group_type.age_group_entries.build #initial one
+    @age_group_type.age_group_entries.build # initial one
   end
 
   def create

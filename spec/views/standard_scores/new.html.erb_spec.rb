@@ -32,6 +32,6 @@ describe "standard_scores/new" do
     render
 
     rendered.should match(@score1.standard_skill_entry.description)
-    #assert_select "input#competitor_external_id", :name => "registrant[external_id]"
+    # assert_select "input#competitor_external_id", :name => "registrant[external_id]"
   end
 end

@@ -15,7 +15,7 @@ class CompetitorsController < ApplicationController
     add_breadcrumb "Add Competitor"
     @filtered_registrants = @competition.signed_up_registrants
     @competitor = @competition.competitors.new
-    @competitor.members.build #add an initial member
+    @competitor.members.build # add an initial member
   end
 
   # GET /competitions/1/competitors
@@ -67,7 +67,7 @@ class CompetitorsController < ApplicationController
         s.write report
         send_data report.string, :filename => "download_events#{Date.today}.xls"
       }
-      format.html {} #normal
+      format.html {} # normal
     end
   end
 

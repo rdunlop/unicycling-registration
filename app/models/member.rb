@@ -39,7 +39,7 @@ class Member < ActiveRecord::Base
     competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number
   end
 
-    #validates :competitor, :presence => true # removed for spec tests
+    # validates :competitor, :presence => true # removed for spec tests
 
   def destroy_orphaned_competitors
     if competitor and competitor.members.none?

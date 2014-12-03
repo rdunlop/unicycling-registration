@@ -69,7 +69,7 @@ class JudgeType < ActiveRecord::Base
     when "Freestyle"
       points = (1..100).to_a
     when "Street"
-      points = (1..100).to_a #[10, 7, 5, 3, 2, 1]
+      points = (1..100).to_a # [10, 7, 5, 3, 2, 1]
     when "Flatland"
       points = (1..100).to_a
     end
