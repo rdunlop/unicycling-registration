@@ -81,6 +81,6 @@ class RegistrationPeriodsController < ApplicationController
   private
   def registration_period_params
     params.require(:registration_period).permit(:competitor_expense_item_id, :end_date, :name, :noncompetitor_expense_item_id, :start_date, :onsite,
-                                               :translations_attributes => [:id, :locale, :name])
+                                                :translations_attributes => [:id, :locale, :name])
   end
 end

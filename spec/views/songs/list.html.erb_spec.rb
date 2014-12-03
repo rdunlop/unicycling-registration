@@ -4,14 +4,14 @@ describe "songs/list" do
   before(:each) do
     @registrant = FactoryGirl.build_stubbed(:registrant)
     @song1 = FactoryGirl.build_stubbed(:song,
-        :description => "Description",
-        :song_file_name => "File Name",
-        :registrant => @registrant
+                                       :description => "Description",
+                                       :song_file_name => "File Name",
+                                       :registrant => @registrant
     )
     @song2 = FactoryGirl.build_stubbed(:song,
-        :description => "Description",
-        :song_file_name => "File Name",
-        :registrant => @registrant
+                                       :description => "Description",
+                                       :song_file_name => "File Name",
+                                       :registrant => @registrant
     )
     assign(:songs, [@song1, @song2])
     # carrierwasve overwrites these columns

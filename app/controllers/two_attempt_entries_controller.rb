@@ -103,8 +103,8 @@ class TwoAttemptEntriesController < ApplicationController
 
   def two_attempt_entry_params
     params.require(:two_attempt_entry).permit(:bib_number, :is_start_time,
-      :status_1, :minutes_1, :seconds_1, :thousands_1,
-      :status_2, :minutes_2, :seconds_2, :thousands_2)
+                                              :status_1, :minutes_1, :seconds_1, :thousands_1,
+                                              :status_2, :minutes_2, :seconds_2, :thousands_2)
   end
 
   def load_competition

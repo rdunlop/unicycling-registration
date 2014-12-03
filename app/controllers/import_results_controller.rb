@@ -248,7 +248,7 @@ class ImportResultsController < ApplicationController
 
   def import_result_params
     params.require(:import_result).permit(:bib_number, :status, :minutes, :raw_data,
-      :number_of_penalties, :seconds, :thousands, :points, :details, :is_start_time)
+                                          :number_of_penalties, :seconds, :thousands, :points, :details, :is_start_time)
   end
 
   def load_user

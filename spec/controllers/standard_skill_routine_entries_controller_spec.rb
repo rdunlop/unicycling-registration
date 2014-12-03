@@ -40,9 +40,9 @@ describe StandardSkillRoutineEntriesController do
                 # creates 1b,2b,3b,4b
                 skill = FactoryGirl.create(:standard_skill_entry)
                 FactoryGirl.create(:standard_skill_routine_entry, 
-                    :standard_skill_routine => @routine,
-                    :standard_skill_entry => skill,
-                    :position => i+1)
+                                   :standard_skill_routine => @routine,
+                                   :standard_skill_entry => skill,
+                                   :position => i+1)
             end
         end
         it "inserts a new element at the top of the list, by the 'position'" do

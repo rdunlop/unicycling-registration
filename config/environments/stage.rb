@@ -81,9 +81,9 @@ end
 
 if Rails.application.secrets.error_emails.present?
   Workspace::Application.config.middleware.use ExceptionNotification::Rack,
-    :email => {
-    email_prefix: "[stage][Registration Exception] ",
-    sender_address: Rails.application.secrets.mail_full_email,
-    exception_recipients: Rails.application.secrets.error_emails
-  }
+                                               :email => {
+                                               email_prefix: "[stage][Registration Exception] ",
+                                               sender_address: Rails.application.secrets.mail_full_email,
+                                               exception_recipients: Rails.application.secrets.error_emails
+                                             }
 end

@@ -15,7 +15,7 @@ describe Notifications do
 
   describe "registrant_access_accepted" do
     let(:mail) { Notifications.registrant_access_accepted(FactoryGirl.create(:registrant, :first_name => "Billy", :last_name => "Johnson"),
-                                                         FactoryGirl.create(:user, :email => "james@dean.com")) }
+                                                          FactoryGirl.create(:user, :email => "james@dean.com")) }
     it "identifies the accetance of the request" do
       mail.body.should match(/Your request for access to the registration of Billy Johnson has been accepted/)
     end
