@@ -39,19 +39,19 @@ describe FlatlandScoreCalculator do
           @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 4, :val_2 => 0, :val_3 => 0, :val_4 => 1)
         end
         it "has non-zero placing points" do
-            @calc.total_points(@score1.competitor).should == 10  # 11,10,10 (remain: 10)
-            @calc.total_points(@score2.competitor).should == 5   # 6,1,5 (remain: 5)
-            @calc.total_points(@score3.competitor).should == 4   # 1,4,5 (remain: 4)
+          @calc.total_points(@score1.competitor).should == 10  # 11,10,10 (remain: 10)
+          @calc.total_points(@score2.competitor).should == 5   # 6,1,5 (remain: 5)
+          @calc.total_points(@score3.competitor).should == 4   # 1,4,5 (remain: 4)
         end
         it "has non-zero placing points for correct judge_type" do
-            @calc.total_points(@score1.competitor, @judge3.judge_type).should == 10
-            @calc.total_points(@score2.competitor, @judge3.judge_type).should == 5
-            @calc.total_points(@score3.competitor, @judge3.judge_type).should == 4
+          @calc.total_points(@score1.competitor, @judge3.judge_type).should == 10
+          @calc.total_points(@score2.competitor, @judge3.judge_type).should == 5
+          @calc.total_points(@score3.competitor, @judge3.judge_type).should == 4
         end
         it "converts the place points into place" do
-            @calc.place(@score1.competitor).should == 1
-            @calc.place(@score2.competitor).should == 2
-            @calc.place(@score3.competitor).should == 3
+          @calc.place(@score1.competitor).should == 1
+          @calc.place(@score2.competitor).should == 2
+          @calc.place(@score3.competitor).should == 3
         end
         describe "when checking a tie" do
           before(:each) do

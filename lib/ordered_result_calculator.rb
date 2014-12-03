@@ -52,9 +52,9 @@ class OrderedResultCalculator
 
   def competitors_in_sorted_order(competitors)
     @competitors_in_sorted_order ||= if lower_is_better
-      competitors.sort{ |a, b| a.comparable_score <=> b.comparable_score}
+                                       competitors.sort{ |a, b| a.comparable_score <=> b.comparable_score}
                                      else
-      competitors.sort{ |a, b| b.comparable_score <=> a.comparable_score}
+                                       competitors.sort{ |a, b| b.comparable_score <=> a.comparable_score}
     end
   end
 end

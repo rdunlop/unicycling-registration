@@ -385,7 +385,7 @@ Workspace::Application.routes.draw do
       resources :external_results, :shallow => true, :except => [:new, :show]
       resources :published_age_group_entries, only: [:show] do
         member do
-         get :preview
+          get :preview
         end
       end
     end

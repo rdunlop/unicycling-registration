@@ -19,8 +19,8 @@ describe ScoresController do
     @judge.save!
 
     @signed_in_scores = [
-        FactoryGirl.create(:score, :judge => @judge, :competitor => @comp),
-        FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2)]
+      FactoryGirl.create(:score, :judge => @judge, :competitor => @comp),
+      FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2)]
     sign_out @admin
 
     # create a chief_judge, so that this lowly judge-user can see the scores page

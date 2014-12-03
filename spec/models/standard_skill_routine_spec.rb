@@ -24,7 +24,7 @@ describe StandardSkillRoutine do
     entry = @routine.standard_skill_routine_entries.build(
       :position => 1,
       :standard_skill_entry_id => skill.id)
-      @routine.valid?.should == true
+    @routine.valid?.should == true
   end
   it "should not be able to save more than 18 entries per user" do
     18.times do |i|
@@ -69,14 +69,14 @@ describe StandardSkillRoutine do
       :position => 1,
       :standard_skill_entry_id => skill.id)
 
-      @routine.valid?.should == true
+    @routine.valid?.should == true
 
-      ssre = @routine.standard_skill_routine_entries.build(
-        :position => 2,
-        :standard_skill_entry_id => skill.id)
+    ssre = @routine.standard_skill_routine_entries.build(
+      :position => 2,
+      :standard_skill_entry_id => skill.id)
 
-        ssre.valid?.should == false
-        @routine.valid?.should == false
+    ssre.valid?.should == false
+    @routine.valid?.should == false
   end
 
   it "should not be able to have 2 skills with the same number, but different letters" do
@@ -86,16 +86,16 @@ describe StandardSkillRoutine do
       :position => 1,
       :standard_skill_entry_id => skill1.id)
 
-      @routine.valid?.should == true
+    @routine.valid?.should == true
 
-      ssre = @routine.standard_skill_routine_entries.build(
-        :position => 2,
-        :standard_skill_entry_id => skill2.id)
+    ssre = @routine.standard_skill_routine_entries.build(
+      :position => 2,
+      :standard_skill_entry_id => skill2.id)
 
-        ssre.valid?.should == false
-        @routine.valid?.should == false
+    ssre.valid?.should == false
+    @routine.valid?.should == false
 
-        ssre.errors.count.should == 1
+    ssre.errors.count.should == 1
   end
   it "should be able to total up some scores" do
     skill1 = FactoryGirl.create(:standard_skill_entry, :points => 1.1)
@@ -103,13 +103,13 @@ describe StandardSkillRoutine do
     @routine.standard_skill_routine_entries.build(
       :position => 1,
       :standard_skill_entry_id => skill1.id)
-      @routine.standard_skill_routine_entries.build(
-        :position => 2,
-        :standard_skill_entry_id => skill2.id)
+    @routine.standard_skill_routine_entries.build(
+      :position => 2,
+      :standard_skill_entry_id => skill2.id)
 
-        @routine.valid?.should == true
+    @routine.valid?.should == true
 
-        @routine.total_skill_points.should == 3.3
+    @routine.total_skill_points.should == 3.3
   end
 
   it "destroys associated standard_skill_routine_entry upon destroy" do

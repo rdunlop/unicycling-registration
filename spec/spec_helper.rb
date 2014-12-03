@@ -43,7 +43,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each, :type => :view) {
-      assign(:config, EventConfiguration.new)
+    assign(:config, EventConfiguration.new)
   }
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

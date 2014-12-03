@@ -227,16 +227,16 @@ class AwardLabelsController < ApplicationController
 
     Prawn::Labels.types = {
       "Avery5160padded" => {
-      "paper_size" => "LETTER",
-      "top_margin" => 36,
-      "bottom_margin" => 36,
-      "left_margin" => 15.822,
-      "right_margin" => 15.822,
-      "columns" => 3,
-      "rows" => 10,
-      "column_gutter" => 15,
-      "row_gutter" => 2.5 # added padding
-    }
+        "paper_size" => "LETTER",
+        "top_margin" => 36,
+        "bottom_margin" => 36,
+        "left_margin" => 15.822,
+        "right_margin" => 15.822,
+        "columns" => 3,
+        "rows" => 10,
+        "column_gutter" => 15,
+        "row_gutter" => 2.5 # added padding
+      }
     }
     labels = Prawn::Labels.render(names, :type => "Avery5160padded", :shrink_to_fit => true) do |pdf, name|
       pdf.text name, :align =>:center, :valign => :center, :inline_format => true

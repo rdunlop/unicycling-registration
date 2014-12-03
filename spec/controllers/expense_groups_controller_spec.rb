@@ -18,10 +18,10 @@ describe ExpenseGroupsController do
       noncompetitor_required: false,
       visible: true,
       "translations_attributes"=>{
-      "1"=>{
-      "locale"=>"en",
-      "group_name"=>"group_en"
-    }}
+        "1"=>{
+          "locale"=>"en",
+          "group_name"=>"group_en"
+        }}
     }
   end
 

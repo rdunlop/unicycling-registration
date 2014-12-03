@@ -24,10 +24,10 @@ class JudgesController < ApplicationController
   def copy_judges
     @from_event = Competition.find(params[:copy_judges][:competition_id])
     @from_event.judges.each do |source_judge|
-        new_judge = @competition.judges.build
-        new_judge.judge_type = source_judge.judge_type
-        new_judge.user = source_judge.user
-        new_judge.save!
+      new_judge = @competition.judges.build
+      new_judge.judge_type = source_judge.judge_type
+      new_judge.user = source_judge.user
+      new_judge.save!
     end
 
     redirect_to competition_judges_path(@competition), notice: "Copied Judges"

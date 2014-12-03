@@ -144,7 +144,7 @@ class Registrant < ActiveRecord::Base
 
   # is the current status past the desired status
   def status_is_active?(desired_status)
-     self.class.statuses.index(status) >= self.class.statuses.index(desired_status)
+    self.class.statuses.index(status) >= self.class.statuses.index(desired_status)
   end
 
   # this registrant is on a step subsequent to the initial step

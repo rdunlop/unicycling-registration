@@ -47,6 +47,6 @@ class StandardSkillEntry < ActiveRecord::Base
   end
 
   def to_s
-      fullDescription
+    fullDescription
   end
 end

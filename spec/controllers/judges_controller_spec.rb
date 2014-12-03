@@ -63,14 +63,14 @@ describe JudgesController do
 
   describe "POST copy_judges" do
     it "copies judges from event to event" do
-        @new_competition = FactoryGirl.create(:competition)
-        FactoryGirl.create(:judge, :competition => @new_competition)
+      @new_competition = FactoryGirl.create(:competition)
+      FactoryGirl.create(:judge, :competition => @new_competition)
 
-        @ec.judges.count.should == 0
+      @ec.judges.count.should == 0
 
-        post :copy_judges, {:competition_id => @ec.id, :copy_judges => {:competition_id => @new_competition.id}}
+      post :copy_judges, {:competition_id => @ec.id, :copy_judges => {:competition_id => @new_competition.id}}
 
-        @ec.judges.count.should == 1
+      @ec.judges.count.should == 1
     end
     it "should fail when not an admin" do
       sign_out @super_admin

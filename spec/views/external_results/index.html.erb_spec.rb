@@ -5,8 +5,8 @@ describe "external_results/index" do
     @competition = FactoryGirl.build_stubbed(:ranked_competition)
     assign(:competition, @competition)
     @external_results = [
-        FactoryGirl.build_stubbed(:external_result, :details => "Hello", :points => 10),
-        FactoryGirl.build_stubbed(:external_result, :details => "Goodbye", :points => 20)]
+      FactoryGirl.build_stubbed(:external_result, :details => "Hello", :points => 10),
+      FactoryGirl.build_stubbed(:external_result, :details => "Goodbye", :points => 20)]
     assign(:external_results, @external_results)
     @external_result = FactoryGirl.build(:external_result)
     allow(@competition).to receive(:external_results).and_return(@external_results)
@@ -28,7 +28,7 @@ describe "external_results/index" do
   end
   describe "external_results/new" do
     before(:each) do
-        @external_result = ExternalResult.new
+      @external_result = ExternalResult.new
     end
 
     it "renders new external_result form" do

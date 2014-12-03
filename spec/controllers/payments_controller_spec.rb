@@ -240,7 +240,7 @@ describe PaymentsController do
                 :details => "Additional Details",
                 :free => true,
                 :amount => 100
-             }]
+              }]
           }}
           PaymentDetail.count.should == 1
           PaymentDetail.last.refunded?.should == false

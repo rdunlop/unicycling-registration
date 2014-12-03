@@ -52,9 +52,10 @@ describe CombinedCompetitionResult do
 #   1 - Jim   (1 first, 1st in tie-breaker (M))
 #   2 - Robin (1 first)
 #   3 - Scott (0 first)
-def configure_cce(combined_competition_entry, options = {})
-  allow(combined_competition_entry).to receive("points_#{options[:place]}".to_sym).and_return(options[:points])
-end
+  def configure_cce(combined_competition_entry, options = {})
+    allow(combined_competition_entry).to receive("points_#{options[:place]}".to_sym).and_return(options[:points])
+  end
+
   describe "when there is a tie" do
     before(:each) do
       competition1 = FactoryGirl.build_stubbed(:competition)

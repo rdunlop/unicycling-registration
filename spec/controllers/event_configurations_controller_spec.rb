@@ -19,10 +19,10 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe EventConfigurationsController do
-   before(:each) do
-     @user = FactoryGirl.create(:super_admin_user)
-     sign_in @user
-   end
+  before(:each) do
+    @user = FactoryGirl.create(:super_admin_user)
+    sign_in @user
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # EventConfiguration. As you add validations to EventConfiguration, be sure to
@@ -31,12 +31,12 @@ describe EventConfigurationsController do
     {
       standard_skill_closed_date: Date.tomorrow,
       :translations_attributes => {
-       "1" => {
-      locale: "en",
-      short_name: "something short",
-      long_name: "Something Long"
-    }
-    },
+        "1" => {
+          locale: "en",
+          short_name: "something short",
+          long_name: "Something Long"
+        }
+      },
       style_name: "unicon_17"
     }
   end

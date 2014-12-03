@@ -11,8 +11,8 @@ describe EventCategoriesController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-    name: "Unlimited",
-    position: 2
+      name: "Unlimited",
+      position: 2
     }
   end
 

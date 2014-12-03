@@ -116,7 +116,7 @@ describe "when a competition exists before a sign-up" do
       @re = FactoryGirl.create(:registrant_event_sign_up, event_category: event_category, signed_up: false)
       expect(@re.registrant.gender).to eq("Male")
 
-       @re.signed_up = true
+      @re.signed_up = true
       expect {
         expect(@re.save).to be_truthy
       }.to change(Competitor, :count).by(0)

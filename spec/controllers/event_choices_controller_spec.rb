@@ -29,24 +29,24 @@ describe EventChoicesController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-    export_name: "100m",
-    cell_type: "boolean",
-    autocomplete: false,
-    optional: false,
-    optional_if_event_choice_id: nil,
-    required_if_event_choice_id: nil,
-    "translations_attributes"=>{
-      "1"=>{
-      "id"=>"",
-      "locale"=>"en",
-      "label"=>"label_en",
-      "tooltip"=>"tool_en"
-    }, "2"=>{
-      "id"=>"",
-      "locale"=>"fr",
-      "label"=>"label_fr",
-      "tooltip"=>"tool_fr"}
-    }
+      export_name: "100m",
+      cell_type: "boolean",
+      autocomplete: false,
+      optional: false,
+      optional_if_event_choice_id: nil,
+      required_if_event_choice_id: nil,
+      "translations_attributes"=>{
+        "1"=>{
+          "id"=>"",
+          "locale"=>"en",
+          "label"=>"label_en",
+          "tooltip"=>"tool_en"
+        }, "2"=>{
+          "id"=>"",
+          "locale"=>"fr",
+          "label"=>"label_fr",
+          "tooltip"=>"tool_fr"}
+      }
     }
   end
 
@@ -147,17 +147,17 @@ describe EventChoicesController do
           "cell_type"=>"boolean",
           "multiple_values"=>"",
           "translations_attributes"=>{
-          "1"=>{
-          "id"=>"",
-          "locale"=>"en",
-          "label"=>"label_en",
-          "tooltip"=>"tool_en"
-        }, "2"=>{
-          "id"=>"",
-          "locale"=>"fr",
-          "label"=>"label_fr",
-          "tooltip"=>"tool_fr"}
-        },
+            "1"=>{
+              "id"=>"",
+              "locale"=>"en",
+              "label"=>"label_en",
+              "tooltip"=>"tool_en"
+            }, "2"=>{
+              "id"=>"",
+              "locale"=>"fr",
+              "label"=>"label_fr",
+              "tooltip"=>"tool_fr"}
+          },
           "position"=>"6",
           "optional"=>"0",
           "optional_if_event_choice_id"=>"",

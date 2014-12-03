@@ -14,7 +14,7 @@ class ScoresController < ApplicationController
   # GET /judges/1/scores
   def index
     respond_to do |format|
-        format.html
+      format.html
     end
   end
 
@@ -23,10 +23,10 @@ class ScoresController < ApplicationController
     add_breadcrumb "Set Score"
 
     if @judge.judge_type.boundary_calculation_enabled
-        @boundary_score = @competitor.boundary_scores.new
+      @boundary_score = @competitor.boundary_scores.new
     end
     respond_to do |format|
-        format.html
+      format.html
     end
   end
 

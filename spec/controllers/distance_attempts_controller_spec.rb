@@ -8,15 +8,15 @@ describe DistanceAttemptsController do
 
   describe "POST create" do
     before (:each) do
-        @competition = FactoryGirl.create(:distance_competition)
-        @comp = FactoryGirl.create(:event_competitor, :competition => @competition)
-        @judge = FactoryGirl.create(:judge, :competition => @competition)
+      @competition = FactoryGirl.create(:distance_competition)
+      @comp = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @judge = FactoryGirl.create(:judge, :competition => @competition)
     end
     def valid_attributes
       {
-          registrant_id: @comp.members.first.registrant.id,
-          distance: 1.2,
-          fault: false,
+        registrant_id: @comp.members.first.registrant.id,
+        distance: 1.2,
+        fault: false,
       }
     end
     describe "with valid params" do
@@ -31,38 +31,38 @@ describe DistanceAttemptsController do
       end
     end
     describe "with invalid params" do
-        it "renders the 'new' form" do
-           post :create, {:distance_attempt => {:fault => false}, :judge_id => @judge.id}
-           response.should render_template("index")
-        end
+      it "renders the 'new' form" do
+        post :create, {:distance_attempt => {:fault => false}, :judge_id => @judge.id}
+        response.should render_template("index")
+      end
     end
   end
 
   describe "GET list" do
     before(:each) do
-        @competition = FactoryGirl.create(:distance_competition)
-        @comp = FactoryGirl.create(:event_competitor, :competition => @competition)
-        @judge = FactoryGirl.create(:judge, :competition => @competition)
+      @competition = FactoryGirl.create(:distance_competition)
+      @comp = FactoryGirl.create(:event_competitor, :competition => @competition)
+      @judge = FactoryGirl.create(:judge, :competition => @competition)
     end
     it "should return a list of all distance_attempts" do
-        get :list, {:competition_id => @competition.id}
+      get :list, {:competition_id => @competition.id}
 
-        response.should render_template("list")
+      response.should render_template("list")
     end
     it "should return the distance attempts" do
-        da = FactoryGirl.create(:distance_attempt, :judge => @judge, :competitor => @comp)
-        get :list, {:competition_id => @competition.id}
+      da = FactoryGirl.create(:distance_attempt, :judge => @judge, :competitor => @comp)
+      get :list, {:competition_id => @competition.id}
 
-        assigns(:distance_attempts).should eq([da])
+      assigns(:distance_attempts).should eq([da])
     end
     it "should not be accessible to non-data_entry_volunteers" do
-        sign_out @data_entry_volunteer_user
-        @normal_user = FactoryGirl.create(:user)
-        sign_in @normal_user
+      sign_out @data_entry_volunteer_user
+      @normal_user = FactoryGirl.create(:user)
+      sign_in @normal_user
 
-        get :list, {:competition_id => @competition.id}
+      get :list, {:competition_id => @competition.id}
 
-        response.should redirect_to(root_path)
+      response.should redirect_to(root_path)
     end
   end
 end

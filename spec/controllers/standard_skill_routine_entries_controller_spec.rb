@@ -4,7 +4,7 @@ describe StandardSkillRoutineEntriesController do
   before(:each) do
     @user = FactoryGirl.create(:user)
     sign_in @user
-    @ability = Ability.new(@user) 
+    @ability = Ability.new(@user)
 
     @registrant = FactoryGirl.create(:registrant, :user => @user)
     @routine = FactoryGirl.create(:standard_skill_routine, :registrant => @registrant)
@@ -36,29 +36,29 @@ describe StandardSkillRoutineEntriesController do
       end
       describe "when 4 entries already exist" do
         before(:each) do
-            5.times do |i|
-                # creates 1b,2b,3b,4b
-                skill = FactoryGirl.create(:standard_skill_entry)
-                FactoryGirl.create(:standard_skill_routine_entry, 
-                                   :standard_skill_routine => @routine,
-                                   :standard_skill_entry => skill,
-                                   :position => i+1)
-            end
+          5.times do |i|
+              # creates 1b,2b,3b,4b
+            skill = FactoryGirl.create(:standard_skill_entry)
+            FactoryGirl.create(:standard_skill_routine_entry,
+                               :standard_skill_routine => @routine,
+                               :standard_skill_entry => skill,
+                               :position => i+1)
+          end
         end
         it "inserts a new element at the top of the list, by the 'position'" do
           # creates 5b
           skill = FactoryGirl.create(:standard_skill_entry)
-          post :create, {:standard_skill_routine_id => @routine.id, :standard_skill_routine_entry => { 
-              standard_skill_routine_id: @routine.id,
-              standard_skill_entry_id: skill.id,
-              position: 1 }}
+          post :create, {:standard_skill_routine_id => @routine.id, :standard_skill_routine_entry => {
+            standard_skill_routine_id: @routine.id,
+            standard_skill_entry_id: skill.id,
+            position: 1 }}
           response.should redirect_to(standard_skill_routine_path(@routine))
         end
         it "inserts a new one at the bottom of the list, if no position specified" do
           skill = FactoryGirl.create(:standard_skill_entry)
-          post :create, {:standard_skill_routine_id => @routine.id, :standard_skill_routine_entry => { 
-              standard_skill_routine_id: @routine.id,
-              standard_skill_entry_id: skill.id }}
+          post :create, {:standard_skill_routine_id => @routine.id, :standard_skill_routine_entry => {
+            standard_skill_routine_id: @routine.id,
+            standard_skill_entry_id: skill.id }}
           response.should redirect_to(standard_skill_routine_path(@routine))
           # 1 initial, + 5 + 1 == 7
           assigns(:standard_skill_routine_entry).position.should == 7

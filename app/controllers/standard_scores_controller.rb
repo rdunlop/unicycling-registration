@@ -16,11 +16,11 @@ class StandardScoresController < ApplicationController
   def index
     @competitors = @judge.competitors
     @competitors.each do |c|
-        authorize! :read, c
+      authorize! :read, c
     end
 
     respond_to do |format|
-        format.html
+      format.html
     end
   end
 
@@ -31,34 +31,34 @@ class StandardScoresController < ApplicationController
     existing_difficulty_scores = @judge.standard_difficulty_scores.where(:competitor_id => @competitor.id)
 
     existing_scores.each do |s|
-        authorize! :read, s
+      authorize! :read, s
     end
     @skills.each do |skill|
-        existing_score = existing_scores.find_by_standard_skill_routine_entry_id(skill.id)
-        if existing_score.nil?
-            new_score = @competitor.standard_execution_scores.create()
-            new_score.standard_skill_routine_entry = skill
-            new_score.judge = @judge
-            new_score.wave = 0
-            new_score.line = 0
-            new_score.cross = 0
-            new_score.circle = 0
-            new_score.save!
-        end
+      existing_score = existing_scores.find_by_standard_skill_routine_entry_id(skill.id)
+      if existing_score.nil?
+        new_score = @competitor.standard_execution_scores.create()
+        new_score.standard_skill_routine_entry = skill
+        new_score.judge = @judge
+        new_score.wave = 0
+        new_score.line = 0
+        new_score.cross = 0
+        new_score.circle = 0
+        new_score.save!
+      end
     end
 
     existing_difficulty_scores.each do |s|
-        authorize! :read, s
+      authorize! :read, s
     end
     @skills.each do |skill|
-        existing_score = existing_difficulty_scores.find_by_standard_skill_routine_entry_id(skill.id)
-        if existing_score.nil?
-            new_score = @competitor.standard_difficulty_scores.create()
-            new_score.standard_skill_routine_entry = skill
-            new_score.judge = @judge
-            new_score.devaluation = 0
-            new_score.save!
-        end
+      existing_score = existing_difficulty_scores.find_by_standard_skill_routine_entry_id(skill.id)
+      if existing_score.nil?
+        new_score = @competitor.standard_difficulty_scores.create()
+        new_score.standard_skill_routine_entry = skill
+        new_score.judge = @judge
+        new_score.devaluation = 0
+        new_score.save!
+      end
     end
   end
 end

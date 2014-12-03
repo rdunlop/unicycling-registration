@@ -215,7 +215,7 @@ class RegistrantsController < ApplicationController
     if @user == current_user
       add_breadcrumb "My Registrants", user_registrants_path(current_user)
     else
-     add_breadcrumb "Manage Registrants", manage_one_registrants_path
+      add_breadcrumb "Manage Registrants", manage_one_registrants_path
     end
   end
 

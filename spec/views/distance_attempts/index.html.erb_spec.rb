@@ -19,7 +19,7 @@ describe "distance_attempts/index" do
   it "renders a form for searching for a competitor" do
     render
     assert_select "form", :action => judge_distance_attempts_path(@judge), :method => "get" do
-        assert_select "input#distance_attempt_distance", :name => "distance_attempt_distance"
+      assert_select "input#distance_attempt_distance", :name => "distance_attempt_distance"
     end
   end
 end

@@ -24,12 +24,12 @@ describe PaymentAdjustmentsController do
     it "can create a payment with refund elements" do
       expect {
         post :refund_create, {:refund_presenter => {
-        :note => "Cancelled",
-        :paid_details_attributes => {
-          "0" => {
-          :payment_detail_id => @pd.id,
-          :refund => true
-          }}
+          :note => "Cancelled",
+          :paid_details_attributes => {
+            "0" => {
+              :payment_detail_id => @pd.id,
+              :refund => true
+            }}
         }}
       }.to change(RefundDetail, :count).by(1)
       r = Refund.last
