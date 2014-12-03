@@ -134,11 +134,6 @@ Style/ColonMethodCall:
 Style/CommentAnnotation:
   Enabled: false
 
-# Offense count: 19
-# Cop supports --auto-correct.
-Style/CommentIndentation:
-  Enabled: false
-
 # Offense count: 468
 Style/Documentation:
   Enabled: false

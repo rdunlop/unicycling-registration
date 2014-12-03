@@ -40,7 +40,7 @@ class BoundaryScore < ActiveRecord::Base
     if number_of_people <= 2
       people_scale = 1
     else
-        # every time the team doubles in size, the scaling factor halves
+      # every time the team doubles in size, the scaling factor halves
       people_scale = number_of_people / 2.0
     end
 

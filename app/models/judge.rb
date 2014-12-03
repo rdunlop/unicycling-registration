@@ -41,7 +41,7 @@ class Judge < ActiveRecord::Base
 
   delegate :event, to: :competition
 
-    # Note, this appears to be duplicated in ability.rb
+  # Note, this appears to be duplicated in ability.rb
   def check_for_scores
     if scores.count > 0
       errors[:base] << "cannot delete judge containing a score"
@@ -79,7 +79,7 @@ class Judge < ActiveRecord::Base
     end
   end
 
-    # retrieve my judged score for the given competitor
+  # retrieve my judged score for the given competitor
   def get_score(competitor)
     scores.where(:competitor_id => competitor.id).first
   end

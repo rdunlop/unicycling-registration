@@ -12,7 +12,7 @@ class CompetitionPresenter
       "No Competitors Defined"
     when "no_results"
       "No Results Found"
-  #  when "unconfirmed_results"
+    #  when "unconfirmed_results"
     when "incomplete"
       "Results Incomplete"
     when "complete"

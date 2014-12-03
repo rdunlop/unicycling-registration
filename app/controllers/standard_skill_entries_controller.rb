@@ -26,12 +26,12 @@ class StandardSkillEntriesController < ApplicationController
     File.open(params[:dump][:file].tempfile, 'r:ISO-8859-1') do |f|
       f.each do |line|
         row = CSV.parse_line (line)
-       # sample rows:
-       # 308, 'b', '3', 'free side jump mount'
-       # 308, 'c', '3.1', 'side jump mount to seat on side'
- # XXX problems:
- # No way to remove all competitors/re-import
- # no tests
+        # sample rows:
+        # 308, 'b', '3', 'free side jump mount'
+        # 308, 'c', '3.1', 'side jump mount to seat on side'
+        # XXX problems:
+        # No way to remove all competitors/re-import
+        # no tests
 
         std = StandardSkillEntry.new
         std.initialize_from_array(row)

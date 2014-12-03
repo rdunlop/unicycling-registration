@@ -41,12 +41,12 @@ describe PlaceCalculator do
     end
     # XXX
     # it "places 2 ineligibles who come in near each other a separate ranks" do
-      # @calc.place_next(1, false, true).should == 1
-      # @calc.place_next(2, false, true).should == 2
-      # @calc.place_next(3, false).should == 1
-      # @calc.place_next(4, false).should == 2
-      # @calc.place_next(5, false, true).should == 3
-      # @calc.place_next(6, false).should == 3
+    # @calc.place_next(1, false, true).should == 1
+    # @calc.place_next(2, false, true).should == 2
+    # @calc.place_next(3, false).should == 1
+    # @calc.place_next(4, false).should == 2
+    # @calc.place_next(5, false, true).should == 3
+    # @calc.place_next(6, false).should == 3
     # end
 
   end

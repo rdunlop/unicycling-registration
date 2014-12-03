@@ -1,8 +1,8 @@
 class FlatlandScoreCalculator < ArtisticScoreCalculator
-    # ####################################################################
-    #   BY SCORE (JUDGE)
-    # ####################################################################
-    # determining the place points for this score (by-judge)
+  # ####################################################################
+  #   BY SCORE (JUDGE)
+  # ####################################################################
+  # determining the place points for this score (by-judge)
 
   def get_placing_points_for_judge_type(competitor, judge_type)
     if judge_type.nil?
@@ -13,13 +13,13 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
     scores.map {|s| s.total.to_i }
   end
 
-    # ####################################################################
-    #   BY EVENT (all scores, all judges)
-    # ####################################################################
-    #
-    # this should be in "Competitor", but I'm putting here because
-    # I don't want to clutter Competitor (which is not always Score-based)
-    #
+  # ####################################################################
+  #   BY EVENT (all scores, all judges)
+  # ####################################################################
+  #
+  # this should be in "Competitor", but I'm putting here because
+  # I don't want to clutter Competitor (which is not always Score-based)
+  #
   def place(competitor)
     @place ||= {}
     unless @place[competitor.id].nil?
@@ -40,7 +40,7 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
     @place[competitor.id] = my_place
   end
 
-    # the last_trick points are based on the judges that remain. (the judges that remain are calculated on 'Total')
+  # the last_trick points are based on the judges that remain. (the judges that remain are calculated on 'Total')
   def total_last_trick_points(competitor, judge_type)
     if judge_type.nil?
       scores = competitor.scores
@@ -53,8 +53,8 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
 
     totals = scores.map {|s| s.total}
 
-      # choose a 'score' object which is going to be removed
-      #  because it's the 'max' and 'min' object(s)
+    # choose a 'score' object which is going to be removed
+    #  because it's the 'max' and 'min' object(s)
     max = scores.select {|s| s.total == totals.max }.first.val_4
     min = scores.select {|s| s.total == totals.min }.first.val_4
 

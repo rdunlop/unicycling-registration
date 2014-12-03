@@ -54,7 +54,7 @@ class Competitor < ActiveRecord::Base
 
   # not all competitor types require a position
   # validates :position, :presence => true,
-                       #:numericality => {:only_integer => true, :greater_than => 0}
+  #:numericality => {:only_integer => true, :greater_than => 0}
 
   after_initialize :init
 
@@ -539,7 +539,7 @@ class Competitor < ActiveRecord::Base
 
   private
 
-   # time result calculations
+  # time result calculations
   def start_time_results
     time_results.start_times.active
   end

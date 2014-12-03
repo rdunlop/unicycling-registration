@@ -93,7 +93,7 @@ class RegistrantsController < ApplicationController
     @phone = contact_detail.phone
     @mobile = contact_detail.mobile
     @email = contact_detail.email
-     # if no e-mail specified, use the user email?
+    # if no e-mail specified, use the user email?
     @user_email = current_user.email
     @emergency_name = contact_detail.emergency_name
     @emergency_primary_phone = contact_detail.emergency_primary_phone

@@ -37,7 +37,7 @@ describe StandardSkillRoutineEntriesController do
       describe "when 4 entries already exist" do
         before(:each) do
           5.times do |i|
-              # creates 1b,2b,3b,4b
+            # creates 1b,2b,3b,4b
             skill = FactoryGirl.create(:standard_skill_entry)
             FactoryGirl.create(:standard_skill_routine_entry,
                                :standard_skill_routine => @routine,
