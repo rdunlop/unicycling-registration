@@ -49,7 +49,7 @@ class ContactDetail < ActiveRecord::Base
   end
 
   def country_code
-    if self.country_representing.nil? or self.country_representing.empty?
+    if self.country_representing.nil? || self.country_representing.empty?
       self.country_residence
     else
       self.country_representing

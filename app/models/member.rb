@@ -42,14 +42,14 @@ class Member < ActiveRecord::Base
     # validates :competitor, :presence => true # removed for spec tests
 
   def destroy_orphaned_competitors
-    if competitor and competitor.members.none?
+    if competitor && competitor.members.none?
       competitor.destroy
     end
   end
 
   def registrant_once_per_competition
     if new_record?
-      if competitor.nil? or registrant.nil?
+      if competitor.nil? || registrant.nil?
         return
       end
       if registrant.competitors.where(competition: competitor.competition).any?

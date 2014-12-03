@@ -119,7 +119,7 @@ class PaymentsController < ApplicationController
   def notification
     paypal = PaypalConfirmer.new(params, request.raw_post)
     if paypal.valid?
-      if paypal.correct_paypal_account? and paypal.completed?
+      if paypal.correct_paypal_account? && paypal.completed?
         if Payment.exists?(paypal.order_number)
           payment = Payment.find(paypal.order_number)
           if payment.completed

@@ -49,7 +49,7 @@ class RegistrationPeriod < ActiveRecord::Base
   end
 
   def current_period?(date = Date.today)
-    return (self.start_date <= date and date <= last_day)
+    return (self.start_date <= date && date <= last_day)
   end
 
   def past_period?(date = Date.today)

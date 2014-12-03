@@ -103,12 +103,7 @@ Metrics/PerceivedComplexity:
 Style/AccessorMethodName:
   Enabled: false
 
-# Offense count: 51
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/AndOr:
-  Enabled: false
-
+# Robin says: leave this in for now
 # Offense count: 119
 # Cop supports --auto-correct.
 Style/Blocks:

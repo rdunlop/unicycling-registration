@@ -46,8 +46,8 @@ class RegistrantExpenseItem < ActiveRecord::Base
   end
 
   def custom_cost_present
-    if !expense_item.nil? and expense_item.has_custom_cost
-      if self.custom_cost.nil? or self.custom_cost <= 0
+    if !expense_item.nil? && expense_item.has_custom_cost
+      if self.custom_cost.nil? || self.custom_cost <= 0
         errors[:base] << "Must specify a custom cost for this item"
       end
     end
@@ -71,7 +71,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   end
 
   def only_one_free_per_expense_group
-    return true if expense_item_id.nil? or registrant.nil? or (free == false)
+    return true if expense_item_id.nil? || registrant.nil? || (free == false)
 
     eg = expense_item.expense_group
     if registrant.competitor
@@ -94,7 +94,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   end
 
   def no_more_than_max_per_registrant
-    return true if expense_item_id.nil? or registrant.nil?
+    return true if expense_item_id.nil? || registrant.nil?
     max = expense_item.maximum_per_registrant
     return true if max == 0
 

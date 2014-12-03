@@ -14,7 +14,7 @@ class MoveEventClassFromEventToCompetition < ActiveRecord::Migration
 
     Competition.all.each do |competition|
       e = competition.event
-      if e.nil? or e.event_class.nil?
+      if e.nil? || e.event_class.nil?
         competition.scoring_class = "Ranked"
       else
         competition.scoring_class = e.event_class
@@ -33,7 +33,7 @@ class MoveEventClassFromEventToCompetition < ActiveRecord::Migration
 
     Competition.all.each do |competition|
       e = competition.event
-      unless e.nil? or competition.scoring_class.nil?
+      unless e.nil? || competition.scoring_class.nil?
         e.event_class = competition.scoring_class
         e.save
       end

@@ -34,12 +34,12 @@ class StandardSkillRoutineEntry < ActiveRecord::Base
     # keep the position values between 1 and 18
     if self.standard_skill_routine_entries.size > 1
       # if the user doesn't specify a position, default to 'end of list'
-      if params[:position].nil? or params[:position].empty? or params[:position].to_i > self.standard_skill_routine_entries.last.position+1
+      if params[:position].nil? || params[:position].empty? || params[:position].to_i > self.standard_skill_routine_entries.last.position+1
         params[:position] = self.standard_skill_routine_entries.last.position+1
       elsif params[:position].to_i < 1
         params[:position] = 1
       end
-    elsif params[:position].nil? or params[:position].empty?
+    elsif params[:position].nil? || params[:position].empty?
       params[:position] = 1
     end
     self.standard_skill_routine_entries.build(params)

@@ -366,7 +366,7 @@ class Registrant < ActiveRecord::Base
 
   def set_age
     start_date = EventConfiguration.singleton.start_date
-    if start_date.nil? or self.birthday.nil?
+    if start_date.nil? || self.birthday.nil?
       self.age = 99
     else
       self.age = age_at_event_date(start_date)
@@ -532,7 +532,7 @@ class Registrant < ActiveRecord::Base
     results[:additional] = nil
     event.event_choices.each do |ec|
       my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
-      unless my_val.nil? or !my_val.has_value?
+      unless my_val.nil? || !my_val.has_value?
         results[:additional] += " - " unless results[:additional].nil?
         results[:additional] = "" if results[:additional].nil?
         results[:additional] += ec.label + ": " + my_val.describe_value

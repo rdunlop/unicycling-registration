@@ -9,7 +9,7 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-if Rails.env.development? or Rails.env.test? or Rails.env.naucc?
+if Rails.env.development? || Rails.env.test? || Rails.env.naucc?
   Rails.application.config.secret_token = ('x' * 30) # meets minimum requirement of 30 chars long
 else
   Rails.application.config.secret_token = Rails.application.secrets.secret
