@@ -5,7 +5,7 @@ describe "events/index" do
     @ev1 = FactoryGirl.create(:event, :name => "First name")
     @ev2 = FactoryGirl.create(:event, :name => "Second name")
     assign(:events, [
-           @ev1, @ev2
+      @ev1, @ev2
     ])
     @category = @ev1.category
     @event = Event.new

@@ -25,7 +25,7 @@ describe "judges/index" do
   it "should show the 'copy judges' form" do
     render
     assert_select "form", :url => copy_judges_competition_judges_path(@ec), :method => "post" do
-        assert_select "select#copy_judges_competition_id", :name => "copy_judges[competition_id]"
+      assert_select "select#copy_judges_competition_id", :name => "copy_judges[competition_id]"
     end
   end
 

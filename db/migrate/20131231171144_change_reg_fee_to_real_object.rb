@@ -49,7 +49,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     end
 
     def current_period?(date = Date.today)
-      return (self.start_date <= date and date <= last_day)
+      return (self.start_date <= date && date <= last_day)
     end
 
     def self.all_registration_expense_items
@@ -79,7 +79,6 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
       nil
     end
   end
-
 
   def up
     PaymentDetail.reset_column_information

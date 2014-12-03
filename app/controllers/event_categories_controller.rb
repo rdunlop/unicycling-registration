@@ -54,7 +54,6 @@ class EventCategoriesController < ApplicationController
   # PUT /event_categories/1
   # PUT /event_categories/1.json
   def update
-
     respond_to do |format|
       if @event_category.update_attributes(event_category_params)
         format.html { redirect_to event_event_categories_path(@event_category.event), notice: 'Event Category was successfully updated.' }
@@ -85,6 +84,7 @@ class EventCategoriesController < ApplicationController
   end
 
   private
+
   def event_category_params
     params.require(:event_category).permit(:name, :warning_on_registration_summary, :position, :age_group_type_id, :age_range_start, :age_range_end)
   end

@@ -30,7 +30,7 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
   if ENV["CI"]
-    #config.filter_run_excluding :pdf_generation => true
+    # config.filter_run_excluding :pdf_generation => true
   end
 
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -43,7 +43,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each, :type => :view) {
-      assign(:config, EventConfiguration.new)
+    assign(:config, EventConfiguration.new)
   }
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -80,7 +80,7 @@ RSpec.configure do |config|
     end
   end
 
-  #config.include Devise::TestHelpers, type: :controller
+  # config.include Devise::TestHelpers, type: :controller
   config.include Warden::Test::Helpers, type: :feature
 
   # Run specs in random order to surface order dependencies. If you find an

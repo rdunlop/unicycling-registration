@@ -87,10 +87,10 @@ class Registrants::BuildController < ApplicationController
       :registrant_choices_attributes => [:event_choice_id, :value, :id],
       :registrant_event_sign_ups_attributes => [:event_category_id, :signed_up, :event_id, :id],
       :contact_detail_attributes => [:id, :email,
-        :address, :city, :country_residence, :country_representing,
-        :mobile, :phone, :state, :zip, :club, :club_contact, :usa_member_number,
-        :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
-        :responsible_adult_name, :responsible_adult_phone]
+                                     :address, :city, :country_residence, :country_representing,
+                                     :mobile, :phone, :state, :zip, :club, :club_contact, :usa_member_number,
+                                     :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
+                                     :responsible_adult_name, :responsible_adult_phone]
     ]
   end
 
@@ -110,7 +110,7 @@ class Registrants::BuildController < ApplicationController
     return original_params if can? :create_artistic, Registrant
     artistic_event_ids = Event.artistic.map(&:id)
     return original_params unless original_params['registrant_event_sign_ups_attributes']
-    original_params['registrant_event_sign_ups_attributes'].each do |key,value|
+    original_params['registrant_event_sign_ups_attributes'].each do |key, value|
       if artistic_event_ids.include? value['event_id'].to_i
         flash[:alert] = "Modification of Artistic Events is disabled"
         original_params['registrant_event_sign_ups_attributes'].delete(key)
@@ -127,7 +127,7 @@ class Registrants::BuildController < ApplicationController
   def clear_events_data!(original_params)
     return original_params if can? :add_events, Registrant
     return original_params unless original_params['registrant_event_sign_ups_attributes']
-    original_params['registrant_event_sign_ups_attributes'].each do |key,value|
+    original_params['registrant_event_sign_ups_attributes'].each do |key, value|
       event_id = value['event_id'].to_i
       signed_up = value['signed_up'] == "1"
       if !registrant_is_already_signed_up(@registrant, event_id) && signed_up

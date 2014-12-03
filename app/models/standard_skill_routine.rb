@@ -36,7 +36,7 @@ class StandardSkillRoutine < ActiveRecord::Base
     end
 
     # if the user doesn't specify a position, default to 'end of list'
-    if params[:position].nil? or params[:position].empty? or params[:position].to_i > max_skill_number
+    if params[:position].nil? || params[:position].empty? || params[:position].to_i > max_skill_number
       params[:position] = max_skill_number
     elsif params[:position].to_i < 1
       params[:position] = 1

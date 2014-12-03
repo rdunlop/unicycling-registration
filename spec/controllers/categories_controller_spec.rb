@@ -29,7 +29,7 @@ describe CategoriesController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-    name: "something"
+      name: "something"
     }
   end
 

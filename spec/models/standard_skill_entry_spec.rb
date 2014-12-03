@@ -27,16 +27,16 @@ describe StandardSkillEntry do
     std.valid?.should == true
   end
   it "can be created from a CSV-based array" do
-      s = StandardSkillEntry.new
-      arr = ["307", "n", "4.8","jump mount to seat drag in back, feet holding seat"]
-      s.initialize_from_array(arr)
-      s.save!
+    s = StandardSkillEntry.new
+    arr = ["307", "n", "4.8", "jump mount to seat drag in back, feet holding seat"]
+    s.initialize_from_array(arr)
+    s.save!
 
-      s = StandardSkillEntry.last
-      s.number.should == 307
-      s.letter == "n"
-      s.points.should == 4.8
-      s.description.should == 'jump mount to seat drag in back, feet holding seat'
+    s = StandardSkillEntry.last
+    s.number.should == 307
+    s.letter == "n"
+    s.points.should == 4.8
+    s.description.should == 'jump mount to seat drag in back, feet holding seat'
   end
 
   it "displays a full description" do

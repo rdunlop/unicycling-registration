@@ -16,7 +16,6 @@
 #
 
 class VolunteerChoice < ActiveRecord::Base
-
   belongs_to :volunteer_opportunity
   belongs_to :registrant, inverse_of: :volunteer_choices
 
@@ -31,5 +30,4 @@ class VolunteerChoice < ActiveRecord::Base
   def to_s
     volunteer_opportunity.to_s
   end
-
 end

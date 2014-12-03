@@ -41,7 +41,6 @@ class AwardLabelsController < ApplicationController
   # PUT /award_labels/1
   # PUT /award_labels/1.json
   def update
-
     respond_to do |format|
       if @award_label.update_attributes(award_label_params)
         format.html { redirect_to user_award_labels_path(@award_label.user), notice: 'Award label was successfully updated.' }
@@ -228,16 +227,16 @@ class AwardLabelsController < ApplicationController
 
     Prawn::Labels.types = {
       "Avery5160padded" => {
-      "paper_size" => "LETTER",
-      "top_margin" => 36,
-      "bottom_margin" => 36,
-      "left_margin" => 15.822,
-      "right_margin" => 15.822,
-      "columns" => 3,
-      "rows" => 10,
-      "column_gutter" => 15,
-      "row_gutter" => 2.5 # added padding
-    }
+        "paper_size" => "LETTER",
+        "top_margin" => 36,
+        "bottom_margin" => 36,
+        "left_margin" => 15.822,
+        "right_margin" => 15.822,
+        "columns" => 3,
+        "rows" => 10,
+        "column_gutter" => 15,
+        "row_gutter" => 2.5 # added padding
+      }
     }
     labels = Prawn::Labels.render(names, :type => "Avery5160padded", :shrink_to_fit => true) do |pdf, name|
       pdf.text name, :align =>:center, :valign => :center, :inline_format => true
@@ -247,7 +246,6 @@ class AwardLabelsController < ApplicationController
   end
 
   def expert_labels
-
     names = []
     @user.award_labels.each do |label|
       names << lines_from_award_label(label)
@@ -264,26 +262,26 @@ class AwardLabelsController < ApplicationController
         "column_gutter" =>  20.152, # 0.391 "
         "row_gutter" =>  6.152 # 0.391"
 
-        #"top_margin" => 13.49, # 0.531"
-        #"bottom_margin" => 13.49, # 0.531"
-        #"left_margin" =>  10.31, # 0.406 "
-        #"right_margin" =>  10.31, # 0.406"
-        #"columns" =>  4,
-        #"rows" =>  6,
-        #"column_gutter" =>  9.93, # 0.391 "
-        #"row_gutter" =>  9.93 # 0.391"
-    },
-    "Avery8293" => {
-      "paper_size" => "LETTER",
-      "top_margin" => 65.23, # 0.531"
-      "bottom_margin" => 54.23, # 0.531"
-      "left_margin" =>  52.23, # 0.406 "
-      "right_margin" =>  40.23, # 0.406"
-      "columns" =>  4,
-      "rows" =>  5,
-      "column_gutter" =>  55, # 0.391 "
-      "row_gutter" =>  50 # 0.391"
-    }
+        # "top_margin" => 13.49, # 0.531"
+        # "bottom_margin" => 13.49, # 0.531"
+        # "left_margin" =>  10.31, # 0.406 "
+        # "right_margin" =>  10.31, # 0.406"
+        # "columns" =>  4,
+        # "rows" =>  6,
+        # "column_gutter" =>  9.93, # 0.391 "
+        # "row_gutter" =>  9.93 # 0.391"
+      },
+      "Avery8293" => {
+        "paper_size" => "LETTER",
+        "top_margin" => 65.23, # 0.531"
+        "bottom_margin" => 54.23, # 0.531"
+        "left_margin" =>  52.23, # 0.406 "
+        "right_margin" =>  40.23, # 0.406"
+        "columns" =>  4,
+        "rows" =>  5,
+        "column_gutter" =>  55, # 0.391 "
+        "row_gutter" =>  50 # 0.391"
+      }
     }
     # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
     #  and it will wrap lines as necessary, and then shrink the text.
@@ -305,6 +303,7 @@ class AwardLabelsController < ApplicationController
   end
 
   private
+
   def award_label_params
     params.require(:award_label).permit(:age_group, :bib_number, :competition_name, :details, :competitor_name, :category,
                                         :place, :registrant_id, :team_name, :user_id)

@@ -14,13 +14,13 @@ describe ExpenseItemsController do
   def valid_attributes
     {
       :translations_attributes => {
-      "1" => {
-      :locale => "en",
-      :name => "Small T-Shirt",
-      :description => "Small NAUCC T-Shirt",
-      :details_label => nil,
-    }
-    },
+        "1" => {
+          :locale => "en",
+          :name => "Small T-Shirt",
+          :description => "Small NAUCC T-Shirt",
+          :details_label => nil,
+        }
+      },
       :cost => 15.00,
       :has_details => false,
       :expense_group_id => @expense_group.id,

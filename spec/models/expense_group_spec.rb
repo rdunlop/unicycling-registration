@@ -97,5 +97,4 @@ describe ExpenseGroup do
     end
   end
 
-
 end

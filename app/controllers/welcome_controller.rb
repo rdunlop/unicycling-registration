@@ -11,7 +11,6 @@ class WelcomeController < ApplicationController
     raise ActiveRecord::RecordNotFound if ["txt", "png"].include?(params[:format] )
   end
 
-
   def help
     @contact_form = ContactForm.new
     @user = current_user
@@ -58,6 +57,7 @@ class WelcomeController < ApplicationController
   end
 
   private
+
   def contact_form_params
     params.require(:contact_form).permit(:feedback, :email)
   end

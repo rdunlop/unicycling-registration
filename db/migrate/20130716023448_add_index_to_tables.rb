@@ -5,6 +5,5 @@ class AddIndexToTables < ActiveRecord::Migration
     add_index "registrant_event_sign_ups", ["registrant_id"], :name => "index_registrant_event_sign_ups_registrant_id"
     add_index "registrants", ["deleted"], :name => "index_registrants_deleted"
     add_index "registrant_choices", ["registrant_id"], :name => "index_registrant_choices_registrant_id"
-
   end
 end

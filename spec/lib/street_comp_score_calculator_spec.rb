@@ -17,9 +17,9 @@ describe StreetCompScoreCalculator do
       @calc = StreetCompScoreCalculator.new(@competition)
     end
     it "should be able to calculate places" do
-        @calc.place(@comp1).should == 1
-        @calc.place(@comp2).should == 2
-        @calc.place(@comp3).should == 3
+      @calc.place(@comp1).should == 1
+      @calc.place(@comp2).should == 2
+      @calc.place(@comp3).should == 3
     end
 
     it "should have real total_points (with 1 judge)" do
@@ -84,14 +84,14 @@ describe StreetCompScoreCalculator do
           @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 4)
         end
         it "has non-zero placing points" do
-            expect(@calc.total_points(@score1.competitor)).to eq(3)  # 1,1,1
-            expect(@calc.total_points(@score2.competitor)).to eq(7)  # 2,3,2
-            expect(@calc.total_points(@score3.competitor)).to eq (8) # 3,2,3
+          expect(@calc.total_points(@score1.competitor)).to eq(3)  # 1,1,1
+          expect(@calc.total_points(@score2.competitor)).to eq(7)  # 2,3,2
+          expect(@calc.total_points(@score3.competitor)).to eq (8) # 3,2,3
         end
         it "converts the place points into place" do
-            @calc.place(@score1.competitor).should == 1
-            @calc.place(@score2.competitor).should == 2
-            @calc.place(@score3.competitor).should == 3
+          @calc.place(@score1.competitor).should == 1
+          @calc.place(@score2.competitor).should == 2
+          @calc.place(@score3.competitor).should == 3
         end
       end
     end

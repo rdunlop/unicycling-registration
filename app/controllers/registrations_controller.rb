@@ -1,5 +1,4 @@
 class RegistrationsController < Devise::RegistrationsController
-
   def create
     if skip_user_creation_confirmation?
       devise_parameter_sanitizer.for(:sign_up) << [:confirmed_at]

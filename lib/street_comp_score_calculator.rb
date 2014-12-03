@@ -1,5 +1,4 @@
 class StreetCompScoreCalculator < ArtisticScoreCalculator
-
   def initialize(competition)
     super(competition)
   end
@@ -40,6 +39,6 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
 
   # don't eliminate any scores
   def eliminate_high_and_low_score(scores)
-      scores
+    scores
   end
 end

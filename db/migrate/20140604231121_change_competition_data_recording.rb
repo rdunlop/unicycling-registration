@@ -32,6 +32,7 @@ class ChangeCompetitionDataRecording < ActiveRecord::Migration
       value
     end
   end
+
   def unconvert_value(value)
     case value
     when "Two Data Per Line"

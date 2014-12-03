@@ -27,7 +27,7 @@
 
 FactoryGirl.define do
   factory :event_choice do
-    event #FactoryGIrl
+    event # FactoryGIrl
     sequence(:export_name) {|n| "field_#{n}"}
     cell_type "boolean"
     multiple_values nil

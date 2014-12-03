@@ -38,6 +38,7 @@ gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil # necessary for sidekiq routing
 gem 'unicorn'
 gem 'whenever'
+gem 'rubocop', require: false
 
 # Model utils
 gem 'acts_as_list'
@@ -48,7 +49,7 @@ gem 'globalize', '~> 4.0.2'
 gem 'virtus'
 gem "wicked"
 
-#gem 'sqlite3'
+# gem 'sqlite3'
 gem 'pg'
 
 # deployment
@@ -71,7 +72,7 @@ group :naucc, :development, :test, :cucumber, :caching do
   gem 'poltergeist'
   gem 'annotate'
   gem 'bullet'
-  #gem 'brakeman'
+  # gem 'brakeman'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'rspec-instafail', require: false

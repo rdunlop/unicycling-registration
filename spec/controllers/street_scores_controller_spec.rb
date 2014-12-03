@@ -30,15 +30,15 @@ describe StreetScoresController do
       response.should be_success
     end
     describe "when returning a list of scores" do
-        before(:each) do
-            @user_score1 = FactoryGirl.create(:score, :val_1 => 5, :judge => @judge, :competitor => @comp)
-            @user_score2 = FactoryGirl.create(:score, :val_1 => 6, :judge => @judge, :competitor => @comp2)
-        end
+      before(:each) do
+        @user_score1 = FactoryGirl.create(:score, :val_1 => 5, :judge => @judge, :competitor => @comp)
+        @user_score2 = FactoryGirl.create(:score, :val_1 => 6, :judge => @judge, :competitor => @comp2)
+      end
 
-        it "should return them in descending order of val_1 points" do
-            get :index, {:judge_id => @judge.id}
-            assigns(:street_scores).should == [@user_score2, @user_score1]
-        end
+      it "should return them in descending order of val_1 points" do
+        get :index, {:judge_id => @judge.id}
+        assigns(:street_scores).should == [@user_score2, @user_score1]
+      end
     end
   end
 
@@ -53,8 +53,8 @@ describe StreetScoresController do
   end
   describe "DELETE destroy" do
     before(:each) do
-        @user_score1 = FactoryGirl.create(:score, :val_1 => 5, :judge => @judge, :competitor => @comp)
-        @user_score2 = FactoryGirl.create(:score, :val_1 => 6, :judge => @judge, :competitor => @comp2)
+      @user_score1 = FactoryGirl.create(:score, :val_1 => 5, :judge => @judge, :competitor => @comp)
+      @user_score2 = FactoryGirl.create(:score, :val_1 => 6, :judge => @judge, :competitor => @comp2)
     end
     it "should allow access to destroy" do
       expect {
@@ -63,25 +63,25 @@ describe StreetScoresController do
     end
   end
 
-    describe "authentication of edit/update pages" do
-      #http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:protecting_pages
+  describe "authentication of edit/update pages" do
+    # http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:protecting_pages
 
-      before (:each) do
-        # create score with existing current_user
-        @user_score = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp)
+    before (:each) do
+      # create score with existing current_user
+      @user_score = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp)
 
-        # Change logged-in user
-        sign_out @user
-        @auth_user = FactoryGirl.create(:user)
-        sign_in @auth_user
-      end
-      it "should deny access to index" do
-        get :index, {:judge_id => @judge}
-        response.should redirect_to(root_path)
-      end
-      it "should deny access to destroy" do
-        delete :destroy, {:id => @user_score.to_param, :judge_id => @judge}
-        response.should redirect_to(root_path)
-      end
+      # Change logged-in user
+      sign_out @user
+      @auth_user = FactoryGirl.create(:user)
+      sign_in @auth_user
     end
+    it "should deny access to index" do
+      get :index, {:judge_id => @judge}
+      response.should redirect_to(root_path)
+    end
+    it "should deny access to destroy" do
+      delete :destroy, {:id => @user_score.to_param, :judge_id => @judge}
+      response.should redirect_to(root_path)
+    end
+  end
 end

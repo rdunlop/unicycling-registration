@@ -23,7 +23,6 @@
 #
 
 class CombinedCompetitionEntry < ActiveRecord::Base
-
   belongs_to :combined_competition, touch: true
   belongs_to :competition
 

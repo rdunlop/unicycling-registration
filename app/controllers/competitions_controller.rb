@@ -32,7 +32,6 @@ class CompetitionsController < ApplicationController
 
   # POST /competitions/#/create
   def create
-
     if @competition.save
       flash[:notice] = "Competition created successfully"
     end
@@ -131,7 +130,7 @@ class CompetitionsController < ApplicationController
           da = comp.max_successful_distance
           if da != 0
             csv << [comp.export_id,
-              da]
+                    da]
           end
         end
       end
@@ -140,12 +139,12 @@ class CompetitionsController < ApplicationController
         csv << ['judge_id', 'judge_type_id', 'registrant_external_id', 'val1', 'val2', 'val3', 'val4']
         @competition.scores.each do |score|
           csv << [score.judge.external_id,
-            score.judge.judge_type.name,
-            score.competitor.export_id, # use a single value even in groups
-            score.val_1,
-            score.val_2,
-            score.val_3,
-            score.val_4]
+                  score.judge.judge_type.name,
+                  score.competitor.export_id, # use a single value even in groups
+                  score.val_1,
+                  score.val_2,
+                  score.val_3,
+                  score.val_4]
         end
       end
     end
@@ -250,7 +249,7 @@ class CompetitionsController < ApplicationController
 
   def load_new_competition
     @competition = Competition.new(competition_params)
-    params[:id] = 1 if params[:id].nil? #necessary due to bug in the way that cancan does authorization check
+    params[:id] = 1 if params[:id].nil? # necessary due to bug in the way that cancan does authorization check
   end
 
   def load_event
@@ -259,5 +258,4 @@ class CompetitionsController < ApplicationController
     @competition = Competition.new if @competition.nil?
     @competition.event = @event unless @competition.nil?
   end
-
 end

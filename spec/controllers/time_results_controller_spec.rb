@@ -33,7 +33,6 @@ describe TimeResultsController do
     end
   end
 
-
   describe "GET index" do
     it "assigns all time_results as @time_results" do
       time_result = TimeResult.create! valid_attributes

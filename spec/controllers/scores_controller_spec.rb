@@ -19,12 +19,12 @@ describe ScoresController do
     @judge.save!
 
     @signed_in_scores = [
-        FactoryGirl.create(:score, :judge => @judge, :competitor => @comp),
-        FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2)]
+      FactoryGirl.create(:score, :judge => @judge, :competitor => @comp),
+      FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2)]
     sign_out @admin
 
     # create a chief_judge, so that this lowly judge-user can see the scores page
-    #FactoryGirl.create(:chief_judge, :event => @judge.event_category.event, :user => @user)
+    # FactoryGirl.create(:chief_judge, :event => @judge.event_category.event, :user => @user)
     # XXX
     @user.add_role :admin
 
@@ -121,7 +121,7 @@ describe ScoresController do
     end
 
     describe "authentication of edit/update pages" do
-      #http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:protecting_pages
+      # http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:protecting_pages
 
       before (:each) do
         # create score with existing current_user

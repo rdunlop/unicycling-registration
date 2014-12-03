@@ -39,7 +39,7 @@ class ChangeLaneAssignmentFromRegistrantIdToCompetitorId < ActiveRecord::Migrati
       # The competitor with this registrant_id may not exist, if so, create the competitor
       old_reg_id = lane_assignment.registrant_id
       new_comp = lane_assignment.competition.competitors.includes(:members).where(members: {registrant_id: old_reg_id}).first
-      new_comp = lane_assignment.competition.create_competitor_from_registrants([Registrant.find(old_reg_id)],nil) if new_comp.nil?
+      new_comp = lane_assignment.competition.create_competitor_from_registrants([Registrant.find(old_reg_id)], nil) if new_comp.nil?
       lane_assignment.update_attribute(:competitor_id, new_comp.id)
     end
 

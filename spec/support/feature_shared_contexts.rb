@@ -27,7 +27,7 @@ shared_context 'basic event configuration' do |options = {}|
     FactoryGirl.create(:wheel_size_20)
     FactoryGirl.create(:wheel_size_24)
     FactoryGirl.create(:event_configuration, :start_date => Date.today + 6.months,
-                       :iuf => true, :usa => false, :test_mode => options[:test_mode], :music_submission_end_date => Date.today + 2.months)
+                                             :iuf => true, :usa => false, :test_mode => options[:test_mode], :music_submission_end_date => Date.today + 2.months)
     exp_comp = FactoryGirl.create(:expense_item, name: "Early Registration - Competitor", cost: 20.00)
     exp_noncomp = FactoryGirl.create(:expense_item, name: "Early Registration - NonCompetitor", cost: 11.00)
     FactoryGirl.create(:registration_period, :current, :start_date => Date.today - 1.month, :end_date => Date.today + 1.month, competitor_expense_item: exp_comp, noncompetitor_expense_item: exp_noncomp)
@@ -110,7 +110,7 @@ shared_context "basic address data" do
     fill_in 'Address', with: "123 Fake street"
     fill_in "City", with: "Springfield"
     find(:select, 'registrant_contact_detail_attributes_country_residence').first(:option, 'United States').select_option
-    #select "United States", :from => "Country of residence"
+    # select "United States", :from => "Country of residence"
     fill_in 'Zip', with: '123456'
     fill_in 'registrant_contact_detail_attributes_emergency_name', with: 'John Smith'
     fill_in 'registrant_contact_detail_attributes_emergency_relationship', with: 'friend'

@@ -9,7 +9,6 @@ describe PaymentAdjustmentsController do
   let!(:other_payment) { FactoryGirl.create(:payment) }
   let!(:payment_detail) { FactoryGirl.create(:payment_detail, :payment => payment, :amount => 5.22) }
 
-
   describe "GET list" do
     it "assigns all payments as @payments" do
       get :list, {}
@@ -25,12 +24,12 @@ describe PaymentAdjustmentsController do
     it "can create a payment with refund elements" do
       expect {
         post :refund_create, {:refund_presenter => {
-        :note => "Cancelled",
-        :paid_details_attributes => {
-          "0" => {
-          :payment_detail_id => @pd.id,
-          :refund => true
-          }}
+          :note => "Cancelled",
+          :paid_details_attributes => {
+            "0" => {
+              :payment_detail_id => @pd.id,
+              :refund => true
+            }}
         }}
       }.to change(RefundDetail, :count).by(1)
       r = Refund.last

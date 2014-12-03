@@ -17,7 +17,6 @@
 #
 
 class RegistrantChoice < ActiveRecord::Base
-
   validates :event_choice_id, :presence => true, :uniqueness => {:scope => [:registrant_id]}
   validates :registrant, :presence => true
 

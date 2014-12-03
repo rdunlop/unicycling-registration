@@ -6,13 +6,13 @@ describe "award_labels/index" do
     assign(:user, @user)
     assign(:award_labels, [
       FactoryGirl.create(:award_label,
-        :bib_number => 123,
-        :competitor_name => "Robin Dunlop & Connie Cotter",
-        :competition_name => "Pairs Freestyle",
-        :team_name => "TCUC",
-        :category => "Adults",
-        :details => "Winner",
-        :place => 2
+                         :bib_number => 123,
+                         :competitor_name => "Robin Dunlop & Connie Cotter",
+                         :competition_name => "Pairs Freestyle",
+                         :team_name => "TCUC",
+                         :category => "Adults",
+                         :details => "Winner",
+                         :place => 2
       ),
       FactoryGirl.create(:award_label)])
     @award_label = FactoryGirl.build(:award_label)

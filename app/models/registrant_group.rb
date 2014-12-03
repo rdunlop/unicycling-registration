@@ -20,9 +20,8 @@ class RegistrantGroup < ActiveRecord::Base
   accepts_nested_attributes_for :registrant_group_members, :allow_destroy => true
   has_many :registrants, :through => :registrant_group_members
 
-
   def sorted_registrants
-    registrants.sort{|a,b| a.contact_detail.address <=> b.contact_detail.address }
+    registrants.sort{|a, b| a.contact_detail.address <=> b.contact_detail.address }
   end
 
   def to_s

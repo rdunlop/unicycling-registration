@@ -17,11 +17,11 @@ class LaneAssignmentsController < ApplicationController
     lane_assignments.each do |lane_assignment|
       member = lane_assignment.competitor.members.first.registrant
       csv << [nil,
-        lane_assignment.competitor.lowest_member_bib_number,
-        lane_assignment.lane,
-        ActiveSupport::Inflector.transliterate(member.last_name),
-        ActiveSupport::Inflector.transliterate(member.first_name),
-        ActiveSupport::Inflector.transliterate(member.country)]
+              lane_assignment.competitor.lowest_member_bib_number,
+              lane_assignment.lane,
+              ActiveSupport::Inflector.transliterate(member.last_name),
+              ActiveSupport::Inflector.transliterate(member.first_name),
+              ActiveSupport::Inflector.transliterate(member.country)]
     end
   end
 
@@ -73,7 +73,7 @@ class LaneAssignmentsController < ApplicationController
         @lane_assignments = @competition.lane_assignments.where(heat: @heat)
         format.html { render action: "view_heat" }
       end
-      end
+    end
   end
 
   # GET /competitions/#/lane_assignments
@@ -115,7 +115,6 @@ class LaneAssignmentsController < ApplicationController
   # PUT /lane_assignments/1
   # PUT /lane_assignments/1.json
   def update
-
     respond_to do |format|
       if @lane_assignment.update_attributes(lane_assignment_params)
         format.html { redirect_to competition_lane_assignments_path(@lane_assignment.competition), notice: 'Lane assignment was successfully updated.' }
@@ -157,6 +156,4 @@ class LaneAssignmentsController < ApplicationController
   def load_new_lane_assignment
     @lane_assignment = @competition.lane_assignments.new(lane_assignment_params)
   end
-
-
 end

@@ -86,6 +86,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
   end
 
   private
+
   def additional_registrant_access_params
     params.require(:additional_registrant_access).permit(:registrant_id)
   end

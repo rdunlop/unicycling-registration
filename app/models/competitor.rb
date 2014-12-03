@@ -53,8 +53,8 @@ class Competitor < ActiveRecord::Base
   enum status: [:active, :not_qualified, :dns, :withdrawn]
 
   # not all competitor types require a position
-  #validates :position, :presence => true,
-                       #:numericality => {:only_integer => true, :greater_than => 0}
+  # validates :position, :presence => true,
+  #:numericality => {:only_integer => true, :greater_than => 0}
 
   after_initialize :init
 
@@ -71,7 +71,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def must_have_3_members_for_custom_name
-    if (members.size < 3) and !custom_name.blank?
+    if (members.size < 3) && !custom_name.blank?
       errors[:base] << "Must have at least 3 members to specify a custom name"
     end
   end
@@ -235,9 +235,9 @@ class Competitor < ActiveRecord::Base
   # this field is used for data export
   def export_id
     if members.empty?
-        nil
+      nil
     else
-        members.first.external_id
+      members.first.external_id
     end
   end
 
@@ -377,7 +377,7 @@ class Competitor < ActiveRecord::Base
       df = false
       if distance_attempts.count > 1
         if distance_attempts[0].fault == true && distance_attempts[1].fault == true && distance_attempts[0].distance == distance_attempts[1].distance
-           df = true
+          df = true
         end
       end
 
@@ -447,19 +447,19 @@ class Competitor < ActiveRecord::Base
   end
 
   def distance_attempt_status
-      if distance_attempts.count == 0
-          "Not Attempted"
+    if distance_attempts.count == 0
+      "Not Attempted"
+    else
+      if double_fault?
+        "Finished. Final Score #{max_successful_distance}"
       else
-          if double_fault?
-              "Finished. Final Score #{max_successful_distance}"
-          else
-              if single_fault?
-                  "Fault. Next Distance #{max_attempted_distance}+"
-              else
-                  "Success. Next Distance #{max_attempted_distance + 1}+"
-              end
-          end
+        if single_fault?
+          "Fault. Next Distance #{max_attempted_distance}+"
+        else
+          "Success. Next Distance #{max_attempted_distance + 1}+"
+        end
       end
+    end
   end
 
   def is_top?(search_gender)
@@ -539,7 +539,7 @@ class Competitor < ActiveRecord::Base
 
   private
 
-   # time result calculations
+  # time result calculations
   def start_time_results
     time_results.start_times.active
   end

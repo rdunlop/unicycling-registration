@@ -8,7 +8,7 @@ describe OrderedResultCalculator do
 
   before(:each) do
     # Note: Registrants are born in 1990, thus are 22 years old
-    FactoryGirl.create(:event_configuration, :start_date => Date.new(2013,01,01))
+    FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 01, 01))
     @age_group_entry = FactoryGirl.create(:age_group_entry) # 0-100 age group
     @competition = FactoryGirl.create(:ranked_competition, :age_group_type => @age_group_entry.age_group_type)
     @tr1 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :points => 1)

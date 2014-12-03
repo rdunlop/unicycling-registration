@@ -19,12 +19,11 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe EventsController do
-   before do
-     user = FactoryGirl.create(:super_admin_user)
-     sign_in user
-     @category = FactoryGirl.create(:category)
-   end
-
+  before do
+    user = FactoryGirl.create(:super_admin_user)
+    sign_in user
+    @category = FactoryGirl.create(:category)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Event. As you add validations to Event, be sure to
@@ -89,11 +88,11 @@ describe EventsController do
         post :create, {
           :category_id => @category.id,
           :event => {:name => "Sample Event",
-          :event_categories_attributes => [
-            {
-            :name => "The Categorie",
-            :position => 1
-        }] }}
+                     :event_categories_attributes => [
+                       {
+                         :name => "The Categorie",
+                         :position => 1
+                       }] }}
         ev = Event.last
         ev.event_categories.first.name.should == "The Categorie"
         ev.event_categories.count.should == 1
@@ -185,14 +184,14 @@ describe EventsController do
       it "accepts nested attributes" do
         expect {
           put :update, {:id => @event.to_param, :event => {
-          :event_choices_attributes => [
-            {
-          :export_name => "100m",
-          :cell_type => "boolean",
-          :label => "My event Choice",
-          :multiple_values => "m2",
-          :position => 1
-        }] }}
+            :event_choices_attributes => [
+              {
+                :export_name => "100m",
+                :cell_type => "boolean",
+                :label => "My event Choice",
+                :multiple_values => "m2",
+                :position => 1
+              }] }}
         }.to change(EventChoice, :count).by(1)
         ec = EventChoice.last
         ec.export_name.should == "100m"
@@ -206,25 +205,25 @@ describe EventsController do
         put :update, {:id => @event.to_param, :event => {
           :event_choices_attributes => [
             {
-          :export_name => "100m",
-          :cell_type => "boolean",
-          :label => "My event Choice",
-          :multiple_values => "m2",
-          :position => 1
-        }] }}
+              :export_name => "100m",
+              :cell_type => "boolean",
+              :label => "My event Choice",
+              :multiple_values => "m2",
+              :position => 1
+            }] }}
         ec = EventChoice.last
 
         expect {
           put :update, {:id => @event.to_param, :event => {
-          :event_choices_attributes => [
-            {
-          :export_name => ec.export_name,
-          :cell_type => ec.cell_type,
-          :label => "new Label",
-          :multiple_values => ec.multiple_values,
-          :position => ec.position,
-          :id => ec.id
-        }] }}
+            :event_choices_attributes => [
+              {
+                :export_name => ec.export_name,
+                :cell_type => ec.cell_type,
+                :label => "new Label",
+                :multiple_values => ec.multiple_values,
+                :position => ec.position,
+                :id => ec.id
+              }] }}
         }.to change(EventChoice, :count).by(0)
         ec.reload
         ec.label.should == "new Label"
@@ -240,13 +239,13 @@ describe EventsController do
 
         expect {
           put :update, {:id => @event.to_param, :event => {
-          :name => "Sample Event",
-          :event_categories_attributes => [
-            {
-          :name => "New Name",
-          :position => ecat.position,
-          :id => ecat.id
-        }] }}
+            :name => "Sample Event",
+            :event_categories_attributes => [
+              {
+                :name => "New Name",
+                :position => ecat.position,
+                :id => ecat.id
+              }] }}
         }.to change(EventCategory, :count).by(0)
         ecat.reload
         ecat.name.should == "New Name"

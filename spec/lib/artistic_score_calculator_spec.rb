@@ -84,19 +84,19 @@ describe ArtisticScoreCalculator do
           @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 4)
         end
         it "has non-zero placing points" do
-            @calc.total_points(@score1.competitor).should == 1.0
-            @calc.total_points(@score2.competitor).should == 2.5
-            @calc.total_points(@score3.competitor).should == 2.5
+          @calc.total_points(@score1.competitor).should == 1.0
+          @calc.total_points(@score2.competitor).should == 2.5
+          @calc.total_points(@score3.competitor).should == 2.5
         end
         it "has non-zero placing points for correct judge_type" do
-            @calc.total_points(@score1.competitor, @judge3.judge_type).should == 1.0
-            @calc.total_points(@score2.competitor, @judge3.judge_type).should == 2.5
-            @calc.total_points(@score3.competitor, @judge3.judge_type).should == 2.5
+          @calc.total_points(@score1.competitor, @judge3.judge_type).should == 1.0
+          @calc.total_points(@score2.competitor, @judge3.judge_type).should == 2.5
+          @calc.total_points(@score3.competitor, @judge3.judge_type).should == 2.5
         end
         it "converts the place points into place" do
-            @calc.place(@score1.competitor).should == 1
-            @calc.place(@score2.competitor).should == 2
-            @calc.place(@score3.competitor).should == 2
+          @calc.place(@score1.competitor).should == 1
+          @calc.place(@score2.competitor).should == 2
+          @calc.place(@score3.competitor).should == 2
         end
         describe "when there are more competitors than scores, it marks the extras as 0" do
           before(:each) do
@@ -113,15 +113,14 @@ describe ArtisticScoreCalculator do
         end
 
         describe "if I have scores for the other judge_type, but not for this judge_type" do
-            before(:each) do
-                @jt = FactoryGirl.create(:judge_type, :name => "Technical")
-                @judge = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
-            end
-            it "should be able to get the place" do
-                @calc.place(@comp1).should == 1
-            end
+          before(:each) do
+            @jt = FactoryGirl.create(:judge_type, :name => "Technical")
+            @judge = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
+          end
+          it "should be able to get the place" do
+            @calc.place(@comp1).should == 1
+          end
         end
-
 
         describe "with 3 technical judges too" do
           before(:each) do
@@ -161,18 +160,18 @@ describe ArtisticScoreCalculator do
 
           describe "when using NAUCC-style rules" do
             before(:each) do
-                @calc = ArtisticScoreCalculator.new(@competition, false)
+              @calc = ArtisticScoreCalculator.new(@competition, false)
             end
 
-              #10,5,0 -> 1,  2,  3
-              #9,0,3  -> 1,  3,  2
-              #9,4,4  -> 1,2.5,2.5
+            # 10,5,0 -> 1,  2,  3
+            # 9,0,3  -> 1,  3,  2
+            # 9,4,4  -> 1,2.5,2.5
 
-              #1,2,3 -> 3,  2,  1
-              #1,2,3 -> 3,  2,  1
-              #1,2,3 -> 3,  2,  1
+            # 1,2,3 -> 3,  2,  1
+            # 1,2,3 -> 3,  2,  1
+            # 1,2,3 -> 3,  2,  1
 
-              #eliminate 1,3  2,3  3,1
+            # eliminate 1,3  2,3  3,1
             it "calculates the highest_score correctly by judge_type" do
               @calc.highest_score(@score1.competitor, nil).should == 3.0
               @calc.highest_score(@score2.competitor, nil).should == 3.0

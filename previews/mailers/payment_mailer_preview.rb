@@ -1,5 +1,4 @@
 class PaymentMailerPreview < ActionMailer::Preview
-
   def ipn_received
     contents = "IPN says"
     PaymentMailer.ipn_received(contents)

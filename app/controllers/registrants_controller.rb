@@ -93,7 +93,7 @@ class RegistrantsController < ApplicationController
     @phone = contact_detail.phone
     @mobile = contact_detail.mobile
     @email = contact_detail.email
-     # if no e-mail specified, use the user email?
+    # if no e-mail specified, use the user email?
     @user_email = current_user.email
     @emergency_name = contact_detail.emergency_name
     @emergency_primary_phone = contact_detail.emergency_primary_phone
@@ -126,7 +126,6 @@ class RegistrantsController < ApplicationController
       format.html {}
     end
   end
-
 
   # GET /registrants/new
   # GET /registrants/new.json
@@ -169,7 +168,6 @@ class RegistrantsController < ApplicationController
       end
     end
   end
-
 
   # PUT /registrants/1
   # PUT /registrants/1.json
@@ -217,7 +215,7 @@ class RegistrantsController < ApplicationController
     if @user == current_user
       add_breadcrumb "My Registrants", user_registrants_path(current_user)
     else
-     add_breadcrumb "Manage Registrants", manage_one_registrants_path
+      add_breadcrumb "Manage Registrants", manage_one_registrants_path
     end
   end
 
@@ -256,10 +254,10 @@ class RegistrantsController < ApplicationController
       :registrant_choices_attributes => [:event_choice_id, :value, :id],
       :registrant_event_sign_ups_attributes => [:event_category_id, :signed_up, :event_id, :id],
       :contact_detail_attributes => [:id, :email,
-        :address, :city, :country_residence, :country_representing,
-        :mobile, :phone, :state, :zip, :club, :club_contact, :usa_member_number,
-        :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
-        :responsible_adult_name, :responsible_adult_phone]
+                                     :address, :city, :country_residence, :country_representing,
+                                     :mobile, :phone, :state, :zip, :club, :club_contact, :usa_member_number,
+                                     :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
+                                     :responsible_adult_name, :responsible_adult_phone]
     ]
   end
 
@@ -279,7 +277,7 @@ class RegistrantsController < ApplicationController
     return original_params if can? :create_artistic, Registrant
     artistic_event_ids = Event.artistic.map(&:id)
     return original_params unless original_params['registrant_event_sign_ups_attributes']
-    original_params['registrant_event_sign_ups_attributes'].each do |key,value|
+    original_params['registrant_event_sign_ups_attributes'].each do |key, value|
       if artistic_event_ids.include? value['event_id'].to_i
         flash[:alert] = "Modification of Artistic Events is disabled"
         original_params['registrant_event_sign_ups_attributes'].delete(key)
@@ -296,7 +294,7 @@ class RegistrantsController < ApplicationController
   def clear_events_data!(original_params)
     return original_params if can? :add_events, Registrant
     return original_params unless original_params['registrant_event_sign_ups_attributes']
-    original_params['registrant_event_sign_ups_attributes'].each do |key,value|
+    original_params['registrant_event_sign_ups_attributes'].each do |key, value|
       event_id = value['event_id'].to_i
       signed_up = value['signed_up'] == "1"
       if !registrant_is_already_signed_up(@registrant, event_id) && signed_up
@@ -379,5 +377,4 @@ class RegistrantsController < ApplicationController
       end
     end
   end
-
 end

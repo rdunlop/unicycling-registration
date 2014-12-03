@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe OrderedResultCalculator do
 
   def recalc(calc = @calc)
@@ -18,7 +17,7 @@ describe OrderedResultCalculator do
       @event = FactoryGirl.create(:event)
       @age_group_entry = FactoryGirl.create(:age_group_entry) # 0-100 age group
       @competition = FactoryGirl.create(:timed_competition, :age_group_type => @age_group_entry.age_group_type, :event => @event)
-      FactoryGirl.create(:event_configuration, :start_date => Date.new(2013,01,01))
+      FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 01, 01))
       # Note: Registrants are born in 1990, thus are 22 years old
       @tr1 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
       @tr2 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))

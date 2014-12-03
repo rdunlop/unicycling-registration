@@ -145,7 +145,6 @@ class Competition < ActiveRecord::Base
     competitors.map(&:touch)
   end
 
-
   # Other functions
 
   def award_title
@@ -268,7 +267,7 @@ class Competition < ActiveRecord::Base
   end
 
   def sorted_competitors
-    competitors.sort{|a,b| a.bib_number.to_i <=> b.bib_number.to_i }
+    competitors.sort{|a, b| a.bib_number.to_i <=> b.bib_number.to_i }
   end
 
   def other_eligible_registrants
@@ -305,7 +304,7 @@ class Competition < ActiveRecord::Base
   # returns all of the results together, ignoring age-group data
   def results_list
     res = competitors.active.to_a
-    res.sort!{|a,b| a.sorting_overall_place <=> b.sorting_overall_place}
+    res.sort!{|a, b| a.sorting_overall_place <=> b.sorting_overall_place}
   end
 
   def competitors_with_results
@@ -313,16 +312,16 @@ class Competition < ActiveRecord::Base
   end
 
   def expert_results_list(gender)
-    competitors_with_results.select{|comp| comp.gender == gender}.sort{|a,b| a.sorting_overall_place <=> b.sorting_overall_place }
+    competitors_with_results.select{|comp| comp.gender == gender}.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
   end
 
   def ungeared_expert_results_list(gender)
-    competitors_with_results.select{|r| !r.geared? }.sort{|a,b| a.sorting_overall_place <=> b.sorting_overall_place }
+    competitors_with_results.select{|r| !r.geared? }.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
   end
 
   def results_list_for(ag_entry)
     results = competitors.active.select{ |competitor| competitor.has_result? && competitor.age_group_entry == ag_entry }
-    results.sort!{|a,b| a.sorting_place <=> b.sorting_place}
+    results.sort!{|a, b| a.sorting_place <=> b.sorting_place}
   end
 
   def get_judge(user)
@@ -380,8 +379,6 @@ class Competition < ActiveRecord::Base
     end
   end
 
-
-
   # ###########################
   # SCORE CALC-using functions
   # ###########################
@@ -406,7 +403,6 @@ class Competition < ActiveRecord::Base
     score.ties != 0
   end
 
-
   # DISTANCE
   def top_distance_attempts(num = 20)
     max_distances = competitors.map(&:max_successful_distance).sort
@@ -429,6 +425,6 @@ class Competition < ActiveRecord::Base
   def best_distance_attempts
     best_attempts_for_each_competitor = competitors.map(&:max_successful_distance_attempt).compact
 
-    best_attempts_for_each_competitor.sort{ |a,b| b.distance <=> a.distance }
+    best_attempts_for_each_competitor.sort{ |a, b| b.distance <=> a.distance }
   end
 end

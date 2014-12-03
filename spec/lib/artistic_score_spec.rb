@@ -34,10 +34,10 @@ describe ArtisticScoreCalculator do
   let(:tech_type) { FactoryGirl.build_stubbed(:judge_type, :name => "Technical") }
 
   describe "when eliminating scores" do
-    include_context "given rider has scores", name: "A", presentation_scores: [4,4,4,4], technical_scores: [4,4,4,4]
-    include_context "given rider has scores", name: "B", presentation_scores: [1,1,1,1], technical_scores: [1,1,1,1]
-    include_context "given rider has scores", name: "C", presentation_scores: [2,2,3,3], technical_scores: [2,3,2,3]
-    include_context "given rider has scores", name: "D", presentation_scores: [3,3,2,2], technical_scores: [3,2,3,2]
+    include_context "given rider has scores", name: "A", presentation_scores: [4, 4, 4, 4], technical_scores: [4, 4, 4, 4]
+    include_context "given rider has scores", name: "B", presentation_scores: [1, 1, 1, 1], technical_scores: [1, 1, 1, 1]
+    include_context "given rider has scores", name: "C", presentation_scores: [2, 2, 3, 3], technical_scores: [2, 3, 2, 3]
+    include_context "given rider has scores", name: "D", presentation_scores: [3, 3, 2, 2], technical_scores: [3, 2, 3, 2]
 
     before :each do
       allow(competition).to receive_message_chain(:competitors, :active).and_return(competitors.values)
@@ -66,9 +66,9 @@ describe ArtisticScoreCalculator do
   end
 
   describe "when testing ties" do
-    include_context "given rider has scores", name: "A", presentation_scores: [2,1,1], technical_scores: [3,2,2]
-    include_context "given rider has scores", name: "B", presentation_scores: [1,2,3], technical_scores: [1,1,3]
-    include_context "given rider has scores", name: "C", presentation_scores: [3,3,2], technical_scores: [2,3,1]
+    include_context "given rider has scores", name: "A", presentation_scores: [2, 1, 1], technical_scores: [3, 2, 2]
+    include_context "given rider has scores", name: "B", presentation_scores: [1, 2, 3], technical_scores: [1, 1, 3]
+    include_context "given rider has scores", name: "C", presentation_scores: [3, 3, 2], technical_scores: [2, 3, 1]
 
     before :each do
       allow(competition).to receive_message_chain(:competitors, :active).and_return(competitors.values)

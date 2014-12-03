@@ -4,7 +4,6 @@ class DataEntryVolunteersController < ApplicationController
 
   respond_to :html
 
-
   def index
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Manage Data Entry Volunteers", competition_data_entry_volunteers_path(@competition)

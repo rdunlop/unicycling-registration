@@ -59,7 +59,6 @@ Workspace::Application.routes.draw do
       end
     end
 
-
     namespace :export do
       get :index
       get :download_payment_details
@@ -94,7 +93,7 @@ Workspace::Application.routes.draw do
 
     resources :refunds, :only => [:show]
 
-    resources :payments, :except => [:index, :edit, :update,:destroy] do
+    resources :payments, :except => [:index, :edit, :update, :destroy] do
       collection do
         get :summary
         post :notification
@@ -108,18 +107,17 @@ Workspace::Application.routes.draw do
       end
     end
     resources :payment_adjustments, :only => [:new]  do
-        collection do
-          get :list
-          post :adjust_payment_choose
-          post :onsite_pay_confirm
-          post :onsite_pay_create
-          post :refund_choose
-          post :refund_create
-          post :exchange_choose
-          post :exchange_create
-        end
+      collection do
+        get :list
+        post :adjust_payment_choose
+        post :onsite_pay_confirm
+        post :onsite_pay_create
+        post :refund_choose
+        post :refund_create
+        post :exchange_choose
+        post :exchange_create
       end
-
+    end
 
     resources :registration_periods
 
@@ -165,7 +163,7 @@ Workspace::Application.routes.draw do
 
     resources :registrants, except: [:index] do
       resources :build, controller: 'registrants/build', only: [:show, :update, :create]
-      #admin
+      # admin
       collection do
         get :bag_labels
         get :show_all
@@ -180,7 +178,7 @@ Workspace::Application.routes.draw do
         get :results
       end
 
-      #normal user
+      # normal user
       collection do
         get :all
         get :empty_waiver
@@ -253,7 +251,7 @@ Workspace::Application.routes.draw do
         end
       end
       resources :competition, :only => [] do
-        #resources :single_attempt_entries, only: [:index, :create]
+        # resources :single_attempt_entries, only: [:index, :create]
         resources :two_attempt_entries, only: [:index, :create] do
           collection do
             get :proof
@@ -387,7 +385,7 @@ Workspace::Application.routes.draw do
       resources :external_results, :shallow => true, :except => [:new, :show]
       resources :published_age_group_entries, only: [:show] do
         member do
-         get :preview
+          get :preview
         end
       end
     end
@@ -403,7 +401,7 @@ Workspace::Application.routes.draw do
         resources :standard_scores, :only => [:new, :create]
       end
 
-      #choose the desired competitor to add scores to
+      # choose the desired competitor to add scores to
       resources :scores, :only => [:index]
       resources :standard_scores, :only => [:index]
       resources :distance_attempts, :only => [:index, :create]

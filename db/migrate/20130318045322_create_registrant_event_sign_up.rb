@@ -1,5 +1,4 @@
 class CreateRegistrantEventSignUp < ActiveRecord::Migration
-
   # for creating the necessary Event info
   class EventCategory < ActiveRecord::Base
   end

@@ -14,7 +14,7 @@ class RaceDataImporter
     raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments
     self.num_rows_processed = 0
     self.errors = nil
-    raw_data.shift #drop header row
+    raw_data.shift # drop header row
     begin
       ImportResult.transaction do
         raw_data.each do |raw|

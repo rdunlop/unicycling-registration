@@ -156,8 +156,6 @@ describe Payment do
     end
   end
 
-
-
   describe "a payment for a tshirt" do
     before(:each) do
       @pd = FactoryGirl.create(:payment_detail, :payment => @pay)

@@ -1,5 +1,4 @@
 class DistanceScoringClass < BaseScoringClass
-
   def scoring_description
     "Å competitor can attempt repeatedly, scoring higher distances. Eventually the competitor
     will double-fault, and their last successful distance will be their final score.

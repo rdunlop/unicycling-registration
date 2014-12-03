@@ -41,7 +41,7 @@ class AddMissingUniquenessIndexes < ActiveRecord::Migration
 
     add_index :standard_difficulty_scores, [:judge_id, :standard_skill_routine_entry_id, :competitor_id], unique: true, name: "standard_diff_judge_routine_comp"
 
-    add_index :standard_execution_scores, [:judge_id, :standard_skill_routine_entry_id, :competitor_id], unique: true,name: "standard_exec_judge_routine_comp"
+    add_index :standard_execution_scores, [:judge_id, :standard_skill_routine_entry_id, :competitor_id], unique: true, name: "standard_exec_judge_routine_comp"
 
     add_index :standard_skill_entries, [:letter, :number], unique: true
 

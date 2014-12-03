@@ -47,8 +47,8 @@ FactoryGirl.define do
     location "Somewhere"
     dates_description "X through Y"
     event_url "http://www.naucc.com"
-    start_date Date.new(2013,1,1)
-    #logo ""
+    start_date Date.new(2013, 1, 1)
+    # logo ""
     currency nil
     contact_email "robinc@dunlopweb.com"
     artistic_closed_date "2013-1-10"
@@ -56,8 +56,8 @@ FactoryGirl.define do
     has_online_waiver false
     online_waiver_text "Online Waiver."
     usa false
-    #association :usa_family_expense_item, factory: :expense_item, cost: 100
-    #association :usa_individual_expense_item, factory: :expense_item, cost: 50
+    # association :usa_family_expense_item, factory: :expense_item, cost: 100
+    # association :usa_individual_expense_item, factory: :expense_item, cost: 50
     iuf false
     event_sign_up_closed_date "2013-5-10"
     comp_noncomp_url nil

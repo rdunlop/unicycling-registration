@@ -1,7 +1,6 @@
 require 'net/http'
 
 class PaypalConfirmer
-
   def initialize(params, raw_post)
     @params = params
     @raw = raw_post
@@ -25,10 +24,10 @@ class PaypalConfirmer
                            'User-Agent' => "My custom user agent"
                           ).body
 
-                          raise StandardError.new("Faulty paypal result: #{response}") unless ["VERIFIED", "INVALID"].include?(response)
-                          raise StandardError.new("Invalid IPN: #{response}") unless response == "VERIFIED"
+      raise StandardError.new("Faulty paypal result: #{response}") unless ["VERIFIED", "INVALID"].include?(response)
+      raise StandardError.new("Invalid IPN: #{response}") unless response == "VERIFIED"
 
-                          true
+      true
     end
   end
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Completing normal payments' do
-  #let!(:user) { FactoryGirl.create(:payment_admin) }
+  # let!(:user) { FactoryGirl.create(:payment_admin) }
   let(:user) { FactoryGirl.create(:user) }
   include_context 'user is logged in'
   include_context 'unpaid registration'

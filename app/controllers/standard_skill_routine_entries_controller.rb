@@ -40,6 +40,7 @@ class StandardSkillRoutineEntriesController < ApplicationController
   end
 
   private
+
   def standard_skill_routine_entry_params
     params.require(:standard_skill_routine_entry).permit(:standard_skill_entry_id, :position)
   end

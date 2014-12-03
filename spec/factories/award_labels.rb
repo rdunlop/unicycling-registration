@@ -30,7 +30,7 @@ FactoryGirl.define do
     category "All"
     details "MyString"
     place 1
-    user #Factory Girl
+    user # Factory Girl
     registrant # FactoryGirl
   end
 end

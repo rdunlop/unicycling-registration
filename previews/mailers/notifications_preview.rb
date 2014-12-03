@@ -1,5 +1,4 @@
 class NotificationsPreview < ActionMailer::Preview
-
   def send_feedback
     Notifications.send_feedback(contact_form)
   end
@@ -22,7 +21,7 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   def missing_old_reg_items
-    bib_numbers = [1,2,3]
+    bib_numbers = [1, 2, 3]
     Notifications.missing_old_reg_items(bib_numbers)
   end
 

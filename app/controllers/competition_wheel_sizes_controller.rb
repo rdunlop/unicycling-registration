@@ -33,6 +33,7 @@ class CompetitionWheelSizesController < ApplicationController
   end
 
   private
+
   def competition_wheel_size_params
     params.require(:competition_wheel_size).permit(:event_id, :wheel_size_id)
   end

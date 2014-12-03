@@ -1,11 +1,9 @@
 class Menu
-
   def headings
     @headings ||= []
   end
 
   class MenuHeading
-
     attr_accessor :title
     attr_accessor :is_link
     attr_accessor :url

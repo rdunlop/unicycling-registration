@@ -14,7 +14,7 @@ class TimeResultsController < ApplicationController
   # GET competitions/1/time_results
   def index
     add_breadcrumb "Time Results"
-    #@time_results = @competition.time_results.includes(:competitor => [:competition]) # XXX
+    # @time_results = @competition.time_results.includes(:competitor => [:competition]) # XXX
     @time_result = TimeResult.new # @event.time_results.build
 
     respond_to do |format|
@@ -71,6 +71,7 @@ class TimeResultsController < ApplicationController
   end
 
   private
+
   def time_result_params
     params.require(:time_result).permit(:number_of_laps, :comments, :comments_by, :status, :minutes, :seconds, :thousands, :competitor_id)
   end

@@ -17,7 +17,6 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-
     respond_to do |format|
       if @category.save
         format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
@@ -33,7 +32,6 @@ class CategoriesController < ApplicationController
   # PUT /categories/1
   # PUT /categories/1.json
   def update
-
     respond_to do |format|
       if @category.update_attributes(category_params)
         format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
@@ -54,6 +52,7 @@ class CategoriesController < ApplicationController
   end
 
   private
+
   def category_params
     params.require(:category).permit(:name, :position, :info_url,
                                      :translations_attributes => [:id, :locale, :name])

@@ -1,5 +1,4 @@
 class ArtisticScoringClass < BaseScoringClass
-
   def scoring_description
     "Using the Freestyle scoring rules, multiple Presentation and Technical judges
     will score each competitor, and then the resulting placing points will be used to

@@ -18,7 +18,7 @@ require 'spec_helper'
 
 describe RegistrationPeriod do
   before(:each) do
-    @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 11,03), :end_date => Date.new(2012,11,07))
+    @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 11, 03), :end_date => Date.new(2012, 11, 07))
   end
 
   it "is valid from FactoryGirl" do
@@ -61,24 +61,24 @@ describe RegistrationPeriod do
 
   describe "with existing periods" do
     before(:each) do
-      @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 01), :end_date => Date.new(2012,02,02))
-      @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 02, 03), :end_date => Date.new(2012,04,04))
+      @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 01), :end_date => Date.new(2012, 02, 02))
+      @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 02, 03), :end_date => Date.new(2012, 04, 04))
     end
 
     it "can retrieve period" do
-      RegistrationPeriod.relevant_period(Date.new(2012,01,15)).should == @rp1
+      RegistrationPeriod.relevant_period(Date.new(2012, 01, 15)).should == @rp1
     end
 
     it "gets nil for missing section" do
-      RegistrationPeriod.relevant_period(Date.new(2010,01,01)).should == nil
+      RegistrationPeriod.relevant_period(Date.new(2010, 01, 01)).should == nil
     end
 
     it "returns the first registration period INCLUDING the day AFTER the period ends" do
-      RegistrationPeriod.relevant_period(Date.new(2012,02,03)).should == @rp1
+      RegistrationPeriod.relevant_period(Date.new(2012, 02, 03)).should == @rp1
     end
 
     it "returns the second registration period +2 days after the first period ends" do
-      RegistrationPeriod.relevant_period(Date.new(2012,02,04)).should == @rp2
+      RegistrationPeriod.relevant_period(Date.new(2012, 02, 04)).should == @rp2
     end
 
     it "disregards onsite registration periods for last_online_period" do
@@ -88,7 +88,7 @@ describe RegistrationPeriod do
     end
     describe "with more registration periods" do
       before(:each) do
-        @rp0 = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 02, 03), :end_date => Date.new(2010,04,04))
+        @rp0 = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 02, 03), :end_date => Date.new(2010, 04, 04))
       end
       it "returns the periods in ascending date order" do
         RegistrationPeriod.all.should == [@rp0, @rp1, @rp2, @rp]
@@ -110,19 +110,19 @@ describe RegistrationPeriod do
     end
 
     it "can identify the current period" do
-      @rp1.current_period?(Date.new(2012,01,14)).should == true
-      @rp2.current_period?(Date.new(2012,01,14)).should == false
+      @rp1.current_period?(Date.new(2012, 01, 14)).should == true
+      @rp2.current_period?(Date.new(2012, 01, 14)).should == false
     end
     it "can identify past periods" do
-      @rp1.past_period?(Date.new(2012,02,20)).should == true
-      @rp2.past_period?(Date.new(2012,02,20)).should == false
+      @rp1.past_period?(Date.new(2012, 02, 20)).should == true
+      @rp2.past_period?(Date.new(2012, 02, 20)).should == false
     end
   end
 end
 describe "when testing the update function for registration periods", :caching => true do
   before(:each) do
     # create a rp which encompasses "today"
-    @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 12, 21), :end_date => Date.new(2020,11, 7))
+    @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 12, 21), :end_date => Date.new(2020, 11, 7))
     @reg = FactoryGirl.create(:competitor) # will have rp1
     @nc_reg = FactoryGirl.create(:noncompetitor) # will have rp1
   end
@@ -150,11 +150,11 @@ describe "when testing the update function for registration periods", :caching =
     end
 
     it "says that an update has been performed recently" do
-      RegistrationPeriod.update_checked_recently(Date.new(2012,12,22)).should == true
+      RegistrationPeriod.update_checked_recently(Date.new(2012, 12, 22)).should == true
     end
 
     it "(when looking 3 days in the future) says that an update has not yet been done" do
-      RegistrationPeriod.update_checked_recently(Date.new(2012,12,25)).should == false
+      RegistrationPeriod.update_checked_recently(Date.new(2012, 12, 25)).should == false
     end
 
     it "sends an e-mail when it changes the reg period" do
@@ -170,8 +170,8 @@ describe "when testing the update function for registration periods", :caching =
       end
 
       it "doesnt't update this registrants' items when moving to the next period" do
-        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020,11, 8), :end_date => Date.new(2021, 1, 1))
-        @ret = RegistrationPeriod.update_current_period(Date.new(2020,12,1))
+        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
+        @ret = RegistrationPeriod.update_current_period(Date.new(2020, 12, 1))
         @reg.reload
         @reg.registration_item.should == @original_item
       end
@@ -179,12 +179,12 @@ describe "when testing the update function for registration periods", :caching =
     describe "when updating to the next period" do
       before(:each) do
         ActionMailer::Base.deliveries.clear
-        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020,11, 8), :end_date => Date.new(2021, 1, 1))
-        @ret = RegistrationPeriod.update_current_period(Date.new(2020,12,1))
+        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
+        @ret = RegistrationPeriod.update_current_period(Date.new(2020, 12, 1))
       end
 
       it "it indicates that the new period has been recently updated" do
-        RegistrationPeriod.update_checked_recently(Date.new(2020,12,2)).should == true
+        RegistrationPeriod.update_checked_recently(Date.new(2020, 12, 2)).should == true
       end
       it "indicates that it updated" do
         @ret.should == true
@@ -211,7 +211,7 @@ describe "when testing the update function for registration periods", :caching =
     describe "when updating to a non-existent period" do
       before(:each) do
         ActionMailer::Base.deliveries.clear
-        @ret = RegistrationPeriod.update_current_period(Date.new(2020,12,1))
+        @ret = RegistrationPeriod.update_current_period(Date.new(2020, 12, 1))
       end
 
       it "indicates that it updated" do
@@ -236,8 +236,8 @@ describe "when testing the update function for registration periods", :caching =
       describe "when updating to a now-existent period" do
         before(:each) do
           ActionMailer::Base.deliveries.clear
-          @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020,11, 8), :end_date => Date.new(2021, 1, 1))
-          @ret = RegistrationPeriod.update_current_period(Date.new(2020,12,1))
+          @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
+          @ret = RegistrationPeriod.update_current_period(Date.new(2020, 12, 1))
         end
 
         it "indicates that it updated" do

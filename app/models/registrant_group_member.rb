@@ -23,7 +23,6 @@ class RegistrantGroupMember < ActiveRecord::Base
   validates :registrant_id, :uniqueness => {:scope => [:registrant_group_id]}
   validates :registrant_group, :presence => true
 
-
   def to_s
     registrant_group.to_s
   end

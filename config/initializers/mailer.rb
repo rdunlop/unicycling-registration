@@ -19,7 +19,7 @@ unless Rails.env.test?
   end
 end
 
-if Rails.env.development? or Rails.env.naucc?
+if Rails.env.development? || Rails.env.naucc?
   class OverrideMailRecipient
     def self.delivering_email(mail)
       mail.body = "DEVELOPMENT-OVERRIDE. Was being sent to #{mail.to} bcc: #{mail.bcc}\n" + mail.body.to_s

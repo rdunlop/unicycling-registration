@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "categories/index" do
   before(:each) do
     @categories = [FactoryGirl.create(:category, :name => "Cat1", :info_url => "Cat1 link"),
-      FactoryGirl.create(:category, :name => "Cat2", :info_url => "Cat2 link")]
+                   FactoryGirl.create(:category, :name => "Cat2", :info_url => "Cat2 link")]
     @category = Category.new
   end
 

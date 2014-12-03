@@ -51,13 +51,14 @@ class CombinedCompetitionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_combined_competition
-      @combined_competition = CombinedCompetition.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def combined_competition_params
-      params.require(:combined_competition).permit(:name, :use_age_group_places, :percentage_based_calculations)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_combined_competition
+    @combined_competition = CombinedCompetition.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def combined_competition_params
+    params.require(:combined_competition).permit(:name, :use_age_group_places, :percentage_based_calculations)
+  end
 end

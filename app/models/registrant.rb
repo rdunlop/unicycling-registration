@@ -38,7 +38,6 @@ class Registrant < ActiveRecord::Base
 
   after_initialize :init
 
-
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
   has_one :contact_detail, dependent: :destroy, autosave: true, :inverse_of => :registrant
@@ -145,14 +144,13 @@ class Registrant < ActiveRecord::Base
 
   # is the current status past the desired status
   def status_is_active?(desired_status)
-     self.class.statuses.index(status) >= self.class.statuses.index(desired_status)
+    self.class.statuses.index(status) >= self.class.statuses.index(desired_status)
   end
 
   # this registrant is on a step subsequent to the initial step
   def past_step_1?
     status_is_active?("base_details")
   end
-
 
   # Never true for a spectator
   # Have we entered the base details?
@@ -340,7 +338,6 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-
   # ####################################
   # Event Choices Validation
   # ####################################
@@ -369,7 +366,7 @@ class Registrant < ActiveRecord::Base
 
   def set_age
     start_date = EventConfiguration.singleton.start_date
-    if start_date.nil? or self.birthday.nil?
+    if start_date.nil? || self.birthday.nil?
       self.age = 99
     else
       self.age = age_at_event_date(start_date)
@@ -414,7 +411,6 @@ class Registrant < ActiveRecord::Base
     "##{bib_number} - #{to_s}"
   end
 
-
   ###### Expenses ##########
 
   # Indicates that this registrant has paid their registration_fee
@@ -440,7 +436,6 @@ class Registrant < ActiveRecord::Base
   def expenses_total
     amount_owing + amount_paid
   end
-
 
   # returns a list of expense_items that this registrant hasn't paid for
   # INCLUDING the registration cost
@@ -537,7 +532,7 @@ class Registrant < ActiveRecord::Base
     results[:additional] = nil
     event.event_choices.each do |ec|
       my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
-      unless my_val.nil? or !my_val.has_value?
+      unless my_val.nil? || !my_val.has_value?
         results[:additional] += " - " unless results[:additional].nil?
         results[:additional] = "" if results[:additional].nil?
         results[:additional] += ec.label + ": " + my_val.describe_value

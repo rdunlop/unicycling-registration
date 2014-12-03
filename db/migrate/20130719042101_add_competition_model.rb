@@ -1,5 +1,4 @@
 class AddCompetitionModel < ActiveRecord::Migration
-
   def up
     # create the competitions table
     create_table :competitions do |t|

@@ -40,13 +40,13 @@ class CompetitionSource < ActiveRecord::Base
   end
 
   def source_present
-    if self.event_category.nil? and self.competition.nil?
+    if self.event_category.nil? && self.competition.nil?
       errors[:base] << "Must select an Event Category or a Competition"
     end
   end
 
   def max_place_with_competition
-    if self.max_place and self.competition.nil?
+    if self.max_place && self.competition.nil?
       errors[:base] << "Must select a Competition when setting max_place"
     end
   end

@@ -49,6 +49,4 @@ class CompetitionSignUp
       []
     end
   end
-
-
 end

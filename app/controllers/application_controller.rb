@@ -48,29 +48,28 @@ class ApplicationController < ActionController::Base
     end
 
     render :pdf => view_name,
-      :page_size => "Letter",
-      :print_media_type => true,
-      :margin => {:top => 2, :left => 2, :right => 2},
-      :footer => default_footer,
-      :formats => [:html],
-      :orientation => orientation,
-      :disposition => disposition,
-      :layout => "pdf.html"
+           :page_size => "Letter",
+           :print_media_type => true,
+           :margin => {:top => 2, :left => 2, :right => 2},
+           :footer => default_footer,
+           :formats => [:html],
+           :orientation => orientation,
+           :disposition => disposition,
+           :layout => "pdf.html"
   end
 
   # a prototype, not working (currently cutting off lines)
   def render_pdf_with_header(view_name, template, locals)
-
     render :pdf => view_name,
-      :page_size => "Letter",
-      :print_media_type => true,
-      :margin => {:top => 60, :left => 2, :right => 2},
-      :footer => default_footer,
-      :formats => [:html],
-      :header =>{ :html => {template: template, locals: locals}},
-      :orientation => "Portrait",
-      :disposition => "inline",
-      :layout => "pdf.html"
+           :page_size => "Letter",
+           :print_media_type => true,
+           :margin => {:top => 60, :left => 2, :right => 2},
+           :footer => default_footer,
+           :formats => [:html],
+           :header =>{ :html => {template: template, locals: locals}},
+           :orientation => "Portrait",
+           :disposition => "inline",
+           :layout => "pdf.html"
   end
 
   private
@@ -109,6 +108,4 @@ class ApplicationController < ActionController::Base
     add_to_competition_breadcrumb(judge.competition)
     add_breadcrumb judge, judge_scores_path(judge)
   end
-
-
 end

@@ -14,7 +14,6 @@
 #
 
 class CompetitionResult < ActiveRecord::Base
-
   belongs_to :competition, :inverse_of => :competition_results, touch: true
 
   validates :competition, presence: true

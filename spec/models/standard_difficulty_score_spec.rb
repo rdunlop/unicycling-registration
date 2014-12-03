@@ -27,9 +27,9 @@ describe StandardDifficultyScore do
   it "should not be able to have the same score/judge created twice" do
     score = FactoryGirl.create(:standard_difficulty_score)
 
-    score2 = FactoryGirl.build(:standard_difficulty_score, :judge => score.judge, 
-                                                          :competitor => score.competitor, 
-                                                          :standard_skill_routine_entry => score.standard_skill_routine_entry)
+    score2 = FactoryGirl.build(:standard_difficulty_score, :judge => score.judge,
+                                                           :competitor => score.competitor,
+                                                           :standard_skill_routine_entry => score.standard_skill_routine_entry)
 
     score2.save.should == false
   end
@@ -53,9 +53,9 @@ describe StandardDifficultyScore do
   it "should be able to have 2 different skills scored by the same judge" do
     score = FactoryGirl.create(:standard_difficulty_score)
 
-    score2 = FactoryGirl.build(:standard_difficulty_score, :judge => score.judge, 
-                                                          :competitor => score.competitor, 
-                                                          :standard_skill_routine_entry => FactoryGirl.create(:standard_skill_routine_entry))
+    score2 = FactoryGirl.build(:standard_difficulty_score, :judge => score.judge,
+                                                           :competitor => score.competitor,
+                                                           :standard_skill_routine_entry => FactoryGirl.create(:standard_skill_routine_entry))
     score2.save.should == true
   end
 

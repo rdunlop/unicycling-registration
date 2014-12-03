@@ -70,8 +70,8 @@ describe CompetitorsController do
       end
 
       it "creates associated members also" do
-        @reg2 = FactoryGirl.create(:competitor) #registrant
-        @reg3 = FactoryGirl.create(:competitor) #registrant
+        @reg2 = FactoryGirl.create(:competitor) # registrant
+        @reg3 = FactoryGirl.create(:competitor) # registrant
         expect {
           post :create, {:competitor => valid_attributes.merge(
             {:members_attributes =>
@@ -102,52 +102,52 @@ describe CompetitorsController do
     end
 
     describe "add_all adds all registrants" do
-        before(:each) do
-            FactoryGirl.create(:registrant, :bib_number => 1)
-            FactoryGirl.create(:registrant, :bib_number => 2)
-            FactoryGirl.create(:noncompetitor, :bib_number => 3)
-        end
-        it "should create a competitor for every registrant" do
-            expect {
-              post :add_all, {:competition_id => @ec.id}
-            }.to change(Competitor, :count).by(2)
-        end
-        it "should not create any new competitors if we run it twice" do
+      before(:each) do
+        FactoryGirl.create(:registrant, :bib_number => 1)
+        FactoryGirl.create(:registrant, :bib_number => 2)
+        FactoryGirl.create(:noncompetitor, :bib_number => 3)
+      end
+      it "should create a competitor for every registrant" do
+        expect {
+          post :add_all, {:competition_id => @ec.id}
+        }.to change(Competitor, :count).by(2)
+      end
+      it "should not create any new competitors if we run it twice" do
+        post :add_all, {:competition_id => @ec.id}
+
+        expect {
+          post :add_all, {:competition_id => @ec.id}
+        }.to change(Competitor, :count).by(0)
+      end
+
+      describe "when adding multiple non-contiguous external_id registrants" do
+        it "should add them with continuous position numbers" do
+          FactoryGirl.create(:registrant, :bib_number => 9)
+          FactoryGirl.create(:registrant, :bib_number => 8)
+          FactoryGirl.create(:registrant, :bib_number => 7)
+          FactoryGirl.create(:registrant, :bib_number => 6)
+          FactoryGirl.create(:registrant, :bib_number => 5)
+          expect {
             post :add_all, {:competition_id => @ec.id}
+          }.to change(Competitor, :count).by(7)
 
-            expect {
-              post :add_all, {:competition_id => @ec.id}
-            }.to change(Competitor, :count).by(0)
-        end
-
-        describe "when adding multiple non-contiguous external_id registrants" do
-          it "should add them with continuous position numbers" do
-            FactoryGirl.create(:registrant, :bib_number => 9)
-            FactoryGirl.create(:registrant, :bib_number => 8)
-            FactoryGirl.create(:registrant, :bib_number => 7)
-            FactoryGirl.create(:registrant, :bib_number => 6)
-            FactoryGirl.create(:registrant, :bib_number => 5)
-            expect {
-              post :add_all, {:competition_id => @ec.id}
-            }.to change(Competitor, :count).by(7)
-
-            @ec.competitors.each_with_index do |c, i|
-                c.position.should == (i + 1)
-            end
+          @ec.competitors.each_with_index do |c, i|
+            c.position.should == (i + 1)
           end
         end
+      end
     end
     describe "with the 'destroy_all' field" do
-        before(:each) do
-            FactoryGirl.create(:event_competitor, :competition => @ec)
-            FactoryGirl.create(:event_competitor, :competition => @ec)
-            FactoryGirl.create(:event_competitor, :competition => @ec)
-        end
-        it "should remove all competitors in this event" do
-            expect {
-                delete :destroy_all, {:competition_id => @ec.to_param}
-            }.to change(Competitor, :count).by(-3)
-        end
+      before(:each) do
+        FactoryGirl.create(:event_competitor, :competition => @ec)
+        FactoryGirl.create(:event_competitor, :competition => @ec)
+        FactoryGirl.create(:event_competitor, :competition => @ec)
+      end
+      it "should remove all competitors in this event" do
+        expect {
+          delete :destroy_all, {:competition_id => @ec.to_param}
+        }.to change(Competitor, :count).by(-3)
+      end
     end
 
     describe "with invalid params" do

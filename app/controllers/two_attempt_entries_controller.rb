@@ -9,7 +9,6 @@ class TwoAttemptEntriesController < ApplicationController
 
   before_action :set_breadcrumbs
 
-
   # GET /users/#/two_attempt_entry
   # GET /users/#/two_attempt_entrys.json
   def index
@@ -53,15 +52,14 @@ class TwoAttemptEntriesController < ApplicationController
   # POST /users/#/competitions/#/two_attempt_entries
   # POST /users/#/competitions/#/two_attempt_entries.json
   def create
-
     respond_to do |format|
       if @two_attempt_entry.save
-        #format.html { redirect_to user_competition_two_attempt_entries_path(@user, @competition), notice: 'Import result was successfully created.' }
+        # format.html { redirect_to user_competition_two_attempt_entries_path(@user, @competition), notice: 'Import result was successfully created.' }
         format.js { }
       else
-        #index
-        #@two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
-        #format.html { render action: "index" }
+        # index
+        # @two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
+        # format.html { render action: "index" }
         format.js { }
       end
     end
@@ -103,8 +101,8 @@ class TwoAttemptEntriesController < ApplicationController
 
   def two_attempt_entry_params
     params.require(:two_attempt_entry).permit(:bib_number, :is_start_time,
-      :status_1, :minutes_1, :seconds_1, :thousands_1,
-      :status_2, :minutes_2, :seconds_2, :thousands_2)
+                                              :status_1, :minutes_1, :seconds_1, :thousands_1,
+                                              :status_2, :minutes_2, :seconds_2, :thousands_2)
   end
 
   def load_competition

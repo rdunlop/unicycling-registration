@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe RegistrantsController do
-   before(:each) do
-     @user = FactoryGirl.create(:user)
-     sign_in @user
-   end
-
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Registrant. As you add validations to Registrant, be sure to
@@ -18,23 +17,23 @@ describe RegistrantsController do
       user_id: @user.id,
       birthday: Date.new(1982, 01, 19),
       contact_detail_attributes: {
-      address: "123 Fake Street",
-      city: "Madison",
-      state: "WI",
-      country_residence: "US",
-      zip: "12345",
-      club: "TCUC",
-      club_contact: "Connie",
-      usa_member_number: "12345",
-      volunteer: false,
-      emergency_name: "Caitlin",
-      emergency_relationship: "Sig. Oth.",
-      emergency_attending: true,
-      emergency_primary_phone: "306-222-1212",
-      emergency_other_phone: "911",
-      responsible_adult_name: "Andy",
-      responsible_adult_phone: "312-555-5555"
-    }
+        address: "123 Fake Street",
+        city: "Madison",
+        state: "WI",
+        country_residence: "US",
+        zip: "12345",
+        club: "TCUC",
+        club_contact: "Connie",
+        usa_member_number: "12345",
+        volunteer: false,
+        emergency_name: "Caitlin",
+        emergency_relationship: "Sig. Oth.",
+        emergency_attending: true,
+        emergency_primary_phone: "306-222-1212",
+        emergency_other_phone: "911",
+        responsible_adult_name: "Andy",
+        responsible_adult_phone: "312-555-5555"
+      }
     }
   end
 
@@ -81,7 +80,7 @@ describe RegistrantsController do
     it "sets the event-related variables" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
-      Date.stub(:today).and_return(Date.new(2012,01,22))
+      Date.stub(:today).and_return(Date.new(2012, 01, 22))
       get :waiver, {:id => registrant.to_param}
 
       assigns(:event_name).should == c.long_name
@@ -166,7 +165,7 @@ describe RegistrantsController do
     end
     describe "when the system is 'closed'" do
       before(:each) do
-        FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2010,02,02))
+        FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 01, 01), :end_date => Date.new(2010, 02, 02))
       end
       it "should not succeed" do
         EventConfiguration.closed?.should == true
@@ -274,19 +273,19 @@ describe RegistrantsController do
         @ev = FactoryGirl.create(:event)
         @ec = FactoryGirl.create(:event_choice, :event => @ev)
         @attributes = valid_attributes.merge({
-          registrant_type: 'competitor',
-          :registrant_event_sign_ups_attributes => [
-            { :signed_up => "1",
-              :event_category_id => @ev.event_categories.first.id,
-              :event_id => @ev.id
-            }
-          ],
-          :registrant_choices_attributes => [
-            { :event_choice_id => @ec.id,
-              :value => "1"
-            }
-          ]
-        })
+                                               registrant_type: 'competitor',
+                                               :registrant_event_sign_ups_attributes => [
+                                                 { :signed_up => "1",
+                                                   :event_category_id => @ev.event_categories.first.id,
+                                                   :event_id => @ev.id
+                                                 }
+                                               ],
+                                               :registrant_choices_attributes => [
+                                                 { :event_choice_id => @ec.id,
+                                                   :value => "1"
+                                                 }
+                                               ]
+                                             })
       end
 
       it "creates a corresponding event_choice when checkbox is selected" do
@@ -314,23 +313,23 @@ describe RegistrantsController do
         @reg = FactoryGirl.create(:registrant, :user => @user)
         @ecat = FactoryGirl.create(:event).event_categories.first
         @attributes = valid_attributes.merge({
-          registrant_type: 'competitor',
-          :registrant_event_sign_ups_attributes => [
-            { :event_category_id => @ecat.id,
-              :event_id => @ecat.event.id,
-              :signed_up => "1"
-        }
-        ]
-        })
+                                               registrant_type: 'competitor',
+                                               :registrant_event_sign_ups_attributes => [
+                                                 { :event_category_id => @ecat.id,
+                                                   :event_id => @ecat.event.id,
+                                                   :signed_up => "1"
+                                             }
+                                               ]
+                                             })
         @new_attributes = valid_attributes.merge({
-          registrant_type: 'competitor',
-          :registrant_event_sign_ups_attributes => [
-            { :event_category_id => @ecat.id,
-              :event_id => @ecat.event.id,
-              :signed_up => "0"
-        }
-        ]
-        })
+                                                   registrant_type: 'competitor',
+                                                   :registrant_event_sign_ups_attributes => [
+                                                     { :event_category_id => @ecat.id,
+                                                       :event_id => @ecat.event.id,
+                                                       :signed_up => "0"
+                                                 }
+                                                   ]
+                                                 })
       end
 
       it "creates corresponding registrant_event_sign_ups" do
@@ -375,7 +374,6 @@ describe RegistrantsController do
         assigns(:registrant).should eq(registrant)
         assigns(:registrant).competitor.should == true
       end
-
 
       it "redirects competitors to the items" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
@@ -501,8 +499,8 @@ describe RegistrantsController do
 
     describe "PUT change the reg fee" do
       before(:each) do
-        @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2010,01,01), :end_date => Date.new(2012,01,01))
-        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012,01,02), :end_date => Date.new(2020,02,02))
+        @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 01, 01), :end_date => Date.new(2012, 01, 01))
+        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 02), :end_date => Date.new(2020, 02, 02))
         @reg = FactoryGirl.create(:competitor)
       end
 

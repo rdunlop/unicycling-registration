@@ -45,9 +45,9 @@ class StandardSkillRoutinesController < ApplicationController
       csv << ['registrant_id', 'position', 'skill_number', 'skill_letter']
       StandardSkillRoutineEntry.all.each do |skill|
         csv << [skill.standard_skill_routine.registrant.external_id,
-          skill.position,
-          skill.standard_skill_entry.number,
-          skill.standard_skill_entry.letter]
+                skill.position,
+                skill.standard_skill_entry.number,
+                skill.standard_skill_entry.letter]
       end
     end
 

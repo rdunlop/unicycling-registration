@@ -47,11 +47,9 @@ class Ability
       cannot :test_mode_role, EventConfiguration
       cannot :fake_complete, Payment
     end
-
   end
 
   def set_data_entry_volunteer_abilities(user)
-
     can [:read, :enter_sign_in, :update_competitors], Competitor
     can :read, Competition
 
@@ -99,10 +97,8 @@ class Ability
     end
     can :summary, Event
     can :sign_ups, EventCategory
-=begin
-    #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
-    can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
-=end
+    #     #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
+    #     can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
 
     can :manage, Competitor do |comp|
       director_of_competition(user, comp.competition)
@@ -204,7 +200,7 @@ class Ability
       can :list, Song
     end
 
-    if user.has_role? :race_official or user.has_role? :admin
+    if user.has_role?(:race_official) || user.has_role?(:admin)
       # includes :view_heat, and :dq_competitor
       can :manage, LaneAssignment
       can :download_competitors_for_timers, :export
@@ -238,9 +234,9 @@ class Ability
       end
     end
 
-    #can :create, Song do
+    # can :create, Song do
     #  user.has_role? :admin
-    #end
+    # end
     unless config.music_submission_ended?
       can [:crud, :file_complete, :add_file, :my_songs, :create_guest_song], Song, :user_id => user.id
     end
@@ -256,8 +252,8 @@ class Ability
 
   def define_payment_ability(user)
     # Payment
-    can :summary, Payment if (user.has_role? :payment_admin or user.has_role? :admin)
-    can [:details, :admin_view], ExpenseItem if (user.has_role? :payment_admin or user.has_role? :admin)
+    can :summary, Payment if (user.has_role?(:payment_admin) || user.has_role?(:admin))
+    can [:details, :admin_view], ExpenseItem if (user.has_role?(:payment_admin) || user.has_role?(:admin))
     can :read, Payment if user.has_role? :admin
     can :manage, Payment if user.has_role? :super_admin
     can :read, Payment, :user_id => user.id
@@ -305,7 +301,7 @@ class Ability
       end
       can :crud, CompetitionWheelSize # allowed, because we have authorize! calls in the controller
 
-      #can [:create], RegistrantExpenseItem, :user_id => user.id
+      # can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
         (not rei.system_managed) && (user.editable_registrants.include?(rei.registrant))
       end

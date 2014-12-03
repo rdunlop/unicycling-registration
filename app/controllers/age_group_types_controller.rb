@@ -6,7 +6,7 @@ class AgeGroupTypesController < ApplicationController
 
   def index
     @age_group_type = AgeGroupType.new
-    @age_group_type.age_group_entries.build #initial one
+    @age_group_type.age_group_entries.build # initial one
   end
 
   def create
@@ -50,7 +50,6 @@ class AgeGroupTypesController < ApplicationController
   end
 
   def update
-
     if @age_group_type.update_attributes(age_group_type_params)
       flash[:notice] = 'Age Group Type was successfully updated.'
     end
@@ -58,8 +57,9 @@ class AgeGroupTypesController < ApplicationController
   end
 
   private
+
   def age_group_type_params
     params.require(:age_group_type).permit(:name, :description,
-      :age_group_entries_attributes =>[:id, :_destroy, :end_age, :gender, :short_description, :start_age, :wheel_size_id])
+                                           :age_group_entries_attributes =>[:id, :_destroy, :end_age, :gender, :short_description, :start_age, :wheel_size_id])
   end
 end

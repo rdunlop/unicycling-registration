@@ -12,7 +12,7 @@ class CompetitionPresenter
       "No Competitors Defined"
     when "no_results"
       "No Results Found"
-  #  when "unconfirmed_results"
+    #  when "unconfirmed_results"
     when "incomplete"
       "Results Incomplete"
     when "complete"
@@ -32,5 +32,4 @@ class CompetitionPresenter
     return "published" if competition.published? && !competition.awarded?
     return "awarded" if competition.awarded?
   end
-
 end

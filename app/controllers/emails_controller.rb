@@ -33,5 +33,4 @@ class EmailsController < ApplicationController
   def set_email_breadcrumb
     add_breadcrumb "Send Emails"
   end
-
 end

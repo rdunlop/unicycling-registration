@@ -24,7 +24,7 @@
 
 FactoryGirl.define do
   factory :age_group_entry do
-    age_group_type #FactoryGirl
+    age_group_type # FactoryGirl
     sequence(:short_description) { |n| "MyString #{n}" }
     start_age 1
     end_age 100

@@ -34,13 +34,11 @@ class ExternalResultsController < ApplicationController
     @competition = @external_result.competition
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Edit Result"
-
   end
 
   # POST /external_results
   # POST /external_results.json
   def create
-
     respond_to do |format|
       if @external_result.save
         format.html { redirect_to competition_external_results_path(@competition), notice: 'External result was successfully created.' }
@@ -56,7 +54,6 @@ class ExternalResultsController < ApplicationController
   # PUT /external_results/1
   # PUT /external_results/1.json
   def update
-
     respond_to do |format|
       if @external_result.update_attributes(external_result_params)
         format.html { redirect_to competition_external_results_path(@external_result.competition), notice: 'External result was successfully updated.' }
@@ -81,6 +78,7 @@ class ExternalResultsController < ApplicationController
   end
 
   private
+
   def external_result_params
     params.require(:external_result).permit(:competitor_id, :details, :points)
   end

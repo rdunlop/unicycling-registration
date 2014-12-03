@@ -30,7 +30,6 @@ class EventChoicesController < ApplicationController
   # GET /event_choices/1
   # GET /event_choices/1.json
   def show
-
     respond_with(@event_choice)
   end
 
@@ -42,7 +41,6 @@ class EventChoicesController < ApplicationController
   # POST /event/1/event_choices
   # POST /event/1/event_choices.json
   def create
-
     if @event_choice.save
       flash[:notice] = 'Event choice was successfully created.'
     else
@@ -54,7 +52,6 @@ class EventChoicesController < ApplicationController
   # PUT /event_choices/1
   # PUT /event_choices/1.json
   def update
-
     if @event_choice.update_attributes(event_choice_params)
       flash[:notice] = 'Event choice was successfully updated.'
     end
@@ -71,6 +68,7 @@ class EventChoicesController < ApplicationController
   end
 
   private
+
   def event_choice_params
     params.require(:event_choice).permit(:cell_type, :export_name, :label, :multiple_values, :position, :autocomplete, :optional, :tooltip,
                                          :optional_if_event_choice_id, :required_if_event_choice_id,

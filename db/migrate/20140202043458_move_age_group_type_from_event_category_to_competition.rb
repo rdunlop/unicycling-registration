@@ -1,7 +1,7 @@
 class MoveAgeGroupTypeFromEventCategoryToCompetition < ActiveRecord::Migration
   class EventCategory < ActiveRecord::Base
-     belongs_to :age_group_type
-     belongs_to :competition
+    belongs_to :age_group_type
+    belongs_to :competition
   end
   class Competition < ActiveRecord::Base
     belongs_to :age_group_type

@@ -11,7 +11,7 @@ class Printing::EventsController < ApplicationController
   def results
     @competitions = @event.competitions
 
-    @no_page_breaks = true #unless params[:no_page_breaks].nil?
+    @no_page_breaks = true # unless params[:no_page_breaks].nil?
     attachment = "attachment" unless params[:attachment].nil?
 
     name = "#{@config.short_name.tr(" ", "_")}_#{@event.name.tr(" ", "_")}_results"

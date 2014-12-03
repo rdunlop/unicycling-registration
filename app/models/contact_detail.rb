@@ -35,7 +35,6 @@
 #
 
 class ContactDetail < ActiveRecord::Base
-
   belongs_to :registrant, :inverse_of => :contact_detail, touch: true
   belongs_to :usa_family_membership_holder, :class_name => "Registrant"
   validates :address, :city, :country_residence, :zip, :presence => true
@@ -50,7 +49,7 @@ class ContactDetail < ActiveRecord::Base
   end
 
   def country_code
-    if self.country_representing.nil? or self.country_representing.empty?
+    if self.country_representing.nil? || self.country_representing.empty?
       self.country_residence
     else
       self.country_representing

@@ -61,7 +61,6 @@ class User < ActiveRecord::Base
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
 
-
   def touch_for_role(role)
     touch
   end
@@ -82,9 +81,9 @@ class User < ActiveRecord::Base
   end
 
   def self.role_description(role)
-    case(role)
-      #when :track_official
-      #when :results_printer
+    case (role)
+      # when :track_official
+      # when :results_printer
     when :data_entry_volunteer
       "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
     when :admin

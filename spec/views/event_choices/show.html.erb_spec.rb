@@ -4,12 +4,12 @@ describe "event_choices/show" do
   before(:each) do
     @event = FactoryGirl.create(:event)
     @event_choice = FactoryGirl.create(:event_choice,
-      :event => @event,
-      :export_name => "Export Name",
-      :cell_type => "boolean",
-      :multiple_values => "Multiple Values",
-      :label => "Label",
-      :position => 2
+                                       :event => @event,
+                                       :export_name => "Export Name",
+                                       :cell_type => "boolean",
+                                       :multiple_values => "Multiple Values",
+                                       :label => "Label",
+                                       :position => 2
     )
   end
 

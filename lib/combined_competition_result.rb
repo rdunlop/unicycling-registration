@@ -165,7 +165,6 @@ class CombinedCompetitionResult
     end
   end
 
-
   def num_firsts(gender, bib_number)
     registrants(gender)[bib_number].count{ |comp| get_place(comp) == 1}
   end
@@ -214,7 +213,6 @@ class CombinedCompetitionResult
     end
   end
 
-
   def store_registrants(gender)
     competitors = combined_competition.combined_competition_entries.map{ |entry| entry.competitors(gender) }.flatten
 
@@ -239,5 +237,4 @@ class CombinedCompetitionResult
   def registrant_bib_numbers(gender)
     registrants(gender).keys
   end
-
 end

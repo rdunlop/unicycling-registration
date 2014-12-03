@@ -56,7 +56,6 @@ class Event < ActiveRecord::Base
 
   before_validation :build_event_category
 
-
   def build_event_category
     if self.event_categories.empty?
       self.event_categories.build({:name => "All", :position => 1})
@@ -104,5 +103,4 @@ class Event < ActiveRecord::Base
     end
     total += event_choices.size
   end
-
 end
