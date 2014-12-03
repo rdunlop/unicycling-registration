@@ -115,15 +115,6 @@ Style/AccessorMethodName:
 Style/AndOr:
   Enabled: false
 
-# Offense count: 1
-Style/AsciiComments:
-  Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/BlockComments:
-  Enabled: false
-
 # Offense count: 3
 # Cop supports --auto-correct.
 Style/BlockEndNewline:

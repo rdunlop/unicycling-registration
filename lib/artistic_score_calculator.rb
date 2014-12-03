@@ -138,22 +138,20 @@ class ArtisticScoreCalculator
       (total_points - min - max)
     end
 
-=begin
-5.10.1 Removing The High And Low
-After determining placing points as above, discard the highest and lowest placing score
-for each rider. If Rider A has scores of 1,2,1,3,2, take out one of the ones, and the three.
-Then Rider A has 1,2,2, for a total of 5. If Rider B has scores of 2,2,2,2,2, he will end
-up with 2,2,2, a total of 6. The winner is the competitor with the lowest total placing
-points score after the high and low have been removed.
-
-5.10.2 Ties
-If more than one competitor has the same placing score after the above process, those
-riders will be ranked based on their placing scores for Technical. The scoring process
-must be repeated using only the Technical scores for the tied riders to determine this
-rank. High and low placing scores are again removed in the process. If competitors’
-Technical ranking comes out equal, all competitors with the same score are awarded the
-same place.
-=end
+# 5.10.1 Removing The High And Low
+# After determining placing points as above, discard the highest and lowest placing score
+# for each rider. If Rider A has scores of 1,2,1,3,2, take out one of the ones, and the three.
+# Then Rider A has 1,2,2, for a total of 5. If Rider B has scores of 2,2,2,2,2, he will end
+# up with 2,2,2, a total of 6. The winner is the competitor with the lowest total placing
+# points score after the high and low have been removed.
+#
+# 5.10.2 Ties
+# If more than one competitor has the same placing score after the above process, those
+# riders will be ranked based on their placing scores for Technical. The scoring process
+# must be repeated using only the Technical scores for the tied riders to determine this
+# rank. High and low placing scores are again removed in the process. If competitors’
+# Technical ranking comes out equal, all competitors with the same score are awarded the
+# same place.
 
     def new_highest_score(placing_points)
       placing_points.max

@@ -44,16 +44,14 @@ describe CombinedCompetitionResult do
     end
   end
 
-=begin
-  #10 - Robin - M - 2nd (35)   TT - 1st (39)   Crit - 10th (1) Total (75)   ( has more firsts)
-  #20 - Scott - M - 2nd (35)   TT - 2nd (28)   Crit - 2nd (12) Total (75)
-  #30 - Jim   - M - 1st (50)   TT - 5th (18)   Crit - 5th (7)  Total (75)
-  #
-  #Results:
-  # 1 - Jim   (1 first, 1st in tie-breaker (M))
-  # 2 - Robin (1 first)
-  # 3 - Scott (0 first)
-=end
+#   10 - Robin - M - 2nd (35)   TT - 1st (39)   Crit - 10th (1) Total (75)   ( has more firsts)
+#   20 - Scott - M - 2nd (35)   TT - 2nd (28)   Crit - 2nd (12) Total (75)
+#   30 - Jim   - M - 1st (50)   TT - 5th (18)   Crit - 5th (7)  Total (75)
+#
+#   #Results:
+#   1 - Jim   (1 first, 1st in tie-breaker (M))
+#   2 - Robin (1 first)
+#   3 - Scott (0 first)
 def configure_cce(combined_competition_entry, options = {})
   allow(combined_competition_entry).to receive("points_#{options[:place]}".to_sym).and_return(options[:points])
 end
