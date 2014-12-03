@@ -5,7 +5,7 @@ describe "lane_assignments/index" do
     @competition = FactoryGirl.create(:competition)
     assign(:lane_assignments,
       [FactoryGirl.create(:lane_assignment, :competition => @competition, :competitor => FactoryGirl.create(:event_competitor, competition: @competition), :heat => 3, :lane => 4),
-      FactoryGirl.create(:lane_assignment, :competition => @competition, :competitor => FactoryGirl.create(:event_competitor, competition: @competition), :heat => 30, :lane => 40)])
+       FactoryGirl.create(:lane_assignment, :competition => @competition, :competitor => FactoryGirl.create(:event_competitor, competition: @competition), :heat => 30, :lane => 40)])
     @lane_assignment = FactoryGirl.build(:lane_assignment)
   end
 

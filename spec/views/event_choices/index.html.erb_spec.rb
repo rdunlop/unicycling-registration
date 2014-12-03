@@ -12,14 +12,14 @@ describe "event_choices/index" do
                          :label => "Label",
                          :position => 2
                         ),
-                          FactoryGirl.create(:event_choice,
-                                             :event => @event,
-                                             :export_name => "Export Name 2",
-                                             :cell_type => "multiple",
-                                             :multiple_values => "Multiple Values",
-                                             :label => "Label",
-                                             :position => 3
-                                            )
+      FactoryGirl.create(:event_choice,
+                         :event => @event,
+                         :export_name => "Export Name 2",
+                         :cell_type => "multiple",
+                         :multiple_values => "Multiple Values",
+                         :label => "Label",
+                         :position => 3
+                        )
     ]
     @event_choice = EventChoice.new
   end

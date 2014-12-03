@@ -109,11 +109,6 @@ Style/AccessModifierIndentation:
 Style/AccessorMethodName:
   Enabled: false
 
-# Offense count: 31
-# Cop supports --auto-correct.
-Style/AlignArray:
-  Enabled: false
-
 # Offense count: 65
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle, SupportedLastArgumentHashStyles.

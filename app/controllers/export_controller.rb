@@ -10,9 +10,9 @@ class ExportController < ApplicationController
       csv << ['bib_number', 'last_name', 'first_name', 'country']
       Registrant.active.where(competitor: true).each do |registrant|
         csv << [registrant.bib_number,
-          ActiveSupport::Inflector.transliterate(registrant.last_name),
-          ActiveSupport::Inflector.transliterate(registrant.first_name),
-          registrant.country]
+                ActiveSupport::Inflector.transliterate(registrant.last_name),
+                ActiveSupport::Inflector.transliterate(registrant.first_name),
+                registrant.country]
       end
     end
     filename = @config.short_name.downcase.gsub(/[^0-9a-z]/, "_") + "_registrants.csv"

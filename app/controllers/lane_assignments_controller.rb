@@ -17,11 +17,11 @@ class LaneAssignmentsController < ApplicationController
     lane_assignments.each do |lane_assignment|
       member = lane_assignment.competitor.members.first.registrant
       csv << [nil,
-        lane_assignment.competitor.lowest_member_bib_number,
-        lane_assignment.lane,
-        ActiveSupport::Inflector.transliterate(member.last_name),
-        ActiveSupport::Inflector.transliterate(member.first_name),
-        ActiveSupport::Inflector.transliterate(member.country)]
+              lane_assignment.competitor.lowest_member_bib_number,
+              lane_assignment.lane,
+              ActiveSupport::Inflector.transliterate(member.last_name),
+              ActiveSupport::Inflector.transliterate(member.first_name),
+              ActiveSupport::Inflector.transliterate(member.country)]
     end
   end
 

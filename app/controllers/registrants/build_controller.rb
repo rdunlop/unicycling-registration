@@ -87,10 +87,10 @@ class Registrants::BuildController < ApplicationController
       :registrant_choices_attributes => [:event_choice_id, :value, :id],
       :registrant_event_sign_ups_attributes => [:event_category_id, :signed_up, :event_id, :id],
       :contact_detail_attributes => [:id, :email,
-        :address, :city, :country_residence, :country_representing,
-        :mobile, :phone, :state, :zip, :club, :club_contact, :usa_member_number,
-        :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
-        :responsible_adult_name, :responsible_adult_phone]
+                                     :address, :city, :country_residence, :country_representing,
+                                     :mobile, :phone, :state, :zip, :club, :club_contact, :usa_member_number,
+                                     :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
+                                     :responsible_adult_name, :responsible_adult_phone]
     ]
   end
 
