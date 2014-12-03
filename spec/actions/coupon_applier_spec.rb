@@ -27,7 +27,7 @@ describe CouponApplier do
 
   describe "when coupon code invalid" do
     let(:coupon_code_string) { "fake" }
-     it "returns an error" do
+    it "returns an error" do
       do_action
       expect(subject.error).to eq("Coupon Code not found")
     end

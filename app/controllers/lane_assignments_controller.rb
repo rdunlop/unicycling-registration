@@ -73,7 +73,7 @@ class LaneAssignmentsController < ApplicationController
         @lane_assignments = @competition.lane_assignments.where(heat: @heat)
         format.html { render action: "view_heat" }
       end
-      end
+    end
   end
 
   # GET /competitions/#/lane_assignments
