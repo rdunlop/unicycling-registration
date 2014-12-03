@@ -30,5 +30,4 @@ class StandardExecutionScore < ActiveRecord::Base
     validates :line, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
     validates :cross, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
     validates :circle, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
-
 end

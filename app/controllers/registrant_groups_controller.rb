@@ -48,7 +48,6 @@ class RegistrantGroupsController < ApplicationController
   # GET /registrant_groups/1
   # GET /registrant_groups/1.json
   def show
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @registrant_group }
@@ -62,7 +61,6 @@ class RegistrantGroupsController < ApplicationController
   # POST /registrant_groups
   # POST /registrant_groups.json
   def create
-
     respond_to do |format|
       if @registrant_group.save
         format.html { redirect_to @registrant_group, notice: 'Registrant group was successfully created.' }
@@ -77,7 +75,6 @@ class RegistrantGroupsController < ApplicationController
   # PUT /registrant_groups/1
   # PUT /registrant_groups/1.json
   def update
-
     respond_to do |format|
       if @registrant_group.update_attributes(registrant_group_params)
         format.html { redirect_to @registrant_group, notice: 'Registrant group was successfully updated.' }
@@ -101,6 +98,7 @@ class RegistrantGroupsController < ApplicationController
   end
 
   private
+
   def registrant_group_params
     params.require(:registrant_group).permit(:name, :registrant_id,
                                              :registrant_group_members_attributes => [:registrant_id, :_destroy, :id])

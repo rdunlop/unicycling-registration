@@ -374,7 +374,6 @@ describe PaymentsController do
     end
   end
 
-
   describe "GET summary" do
     before(:each) do
       @user.add_role :payment_admin

@@ -8,7 +8,6 @@ class CompetitionResultsController < ApplicationController
 
   # POST /competitions/#/competition_results
   def create
-
     @competition_result.results_file = params[:results_file]
     @competition_result.name = params[:custom_name]
     @competition_result.system_managed = false

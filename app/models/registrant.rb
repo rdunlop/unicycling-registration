@@ -38,7 +38,6 @@ class Registrant < ActiveRecord::Base
 
   after_initialize :init
 
-
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
   has_one :contact_detail, dependent: :destroy, autosave: true, :inverse_of => :registrant
@@ -152,7 +151,6 @@ class Registrant < ActiveRecord::Base
   def past_step_1?
     status_is_active?("base_details")
   end
-
 
   # Never true for a spectator
   # Have we entered the base details?
@@ -340,7 +338,6 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-
   # ####################################
   # Event Choices Validation
   # ####################################
@@ -414,7 +411,6 @@ class Registrant < ActiveRecord::Base
     "##{bib_number} - #{to_s}"
   end
 
-
   ###### Expenses ##########
 
   # Indicates that this registrant has paid their registration_fee
@@ -440,7 +436,6 @@ class Registrant < ActiveRecord::Base
   def expenses_total
     amount_owing + amount_paid
   end
-
 
   # returns a list of expense_items that this registrant hasn't paid for
   # INCLUDING the registration cost

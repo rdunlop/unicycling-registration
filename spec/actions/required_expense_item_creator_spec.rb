@@ -48,7 +48,6 @@ describe RequiredExpenseItemCreator do
     end
   end
 
-
   describe "with an expense_group marked as 'required' created BEFORE the registrant" do
     before(:each) do
       @eg = FactoryGirl.create(:expense_group, :competitor_required => true)

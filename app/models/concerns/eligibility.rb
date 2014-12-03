@@ -4,5 +4,4 @@ module Eligibility
   def display_eligibility(name, ineligible)
     "#{name}#{ "*" if ineligible }"
   end
-
 end

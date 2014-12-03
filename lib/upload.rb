@@ -1,6 +1,5 @@
 require 'csv'
 class Upload
-
   def initialize(separator = ',', bib_number_column_number = 1, time_column_number = nil, laps_column = nil)
     @sep = separator
     @time_column_number = time_column_number

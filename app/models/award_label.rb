@@ -28,7 +28,6 @@ class AwardLabel < ActiveRecord::Base
   belongs_to :user
   belongs_to :registrant
 
-
   def build_name_from_competitor_and_registrant(competitor, registrant)
     res = "#{registrant.first_name} #{registrant.last_name}"
     if competitor.members.count == 2
@@ -40,7 +39,6 @@ class AwardLabel < ActiveRecord::Base
   end
 
   def build_category_name(competitor, expert)
-
     if competitor.members.count > 1
       gender = nil
     else
@@ -59,7 +57,6 @@ class AwardLabel < ActiveRecord::Base
   end
 
   def populate_from_competitor(competitor, registrant, place, expert = false)
-
     # line 1
     self.competitor_name = build_name_from_competitor_and_registrant(competitor, registrant)
 

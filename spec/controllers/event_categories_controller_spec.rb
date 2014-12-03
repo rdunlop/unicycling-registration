@@ -16,8 +16,6 @@ describe EventCategoriesController do
     }
   end
 
-
-
   describe "as a normal user" do
     before(:each) do
       @user = FactoryGirl.create(:user)
@@ -29,7 +27,6 @@ describe EventCategoriesController do
       response.should redirect_to(root_path)
     end
   end
-
 
   describe "GET index" do
     it "assigns all event_categories as @event_categories" do

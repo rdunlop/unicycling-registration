@@ -3,7 +3,6 @@
 
 RailsAdmin.config do |config|
 
-
   ################  Global configuration  ################
 
   # Set the admin name here (optional second array element will appear in red). For example:
@@ -36,7 +35,6 @@ RailsAdmin.config do |config|
   # Label methods for model instances:
   # config.label_methods << :description # Default is [:name, :title]
 
-
   ################  Model configuration  ################
 
   # Each model configuration can alternatively:
@@ -47,11 +45,8 @@ RailsAdmin.config do |config|
   #   - This initializer is loaded once at startup (modifications will show up when restarting the application) but all RailsAdmin configuration would stay in one place.
   #   - Models are reloaded at each request in development mode (when modified), which may smooth your RailsAdmin development workflow.
 
-
   # Now you probably need to tour the wiki a bit: https://github.com/sferik/rails_admin/wiki
   # Anyway, here is how RailsAdmin saw your application's models when you ran the initializer:
-
-
 
   ###  AgeGroupType  ###
 
@@ -60,8 +55,6 @@ RailsAdmin.config do |config|
   #   # You can copy this to a 'rails_admin do ... end' block inside your age_group_type.rb model definition
 
   #   # Found associations:
-
-
 
   #   # Found columns:
 
@@ -95,7 +88,6 @@ RailsAdmin.config do |config|
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
-
 
   ###  Category  ###
 
@@ -141,7 +133,6 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
 
-
   ###  Event  ###
 
   # config.model 'Event' do
@@ -186,7 +177,6 @@ RailsAdmin.config do |config|
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
-
 
   ###  EventChoice  ###
 
@@ -237,7 +227,6 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
 
-
   ###  EventConfiguration  ###
 
   # config.model 'EventConfiguration' do
@@ -245,8 +234,6 @@ RailsAdmin.config do |config|
   #   # You can copy this to a 'rails_admin do ... end' block inside your event_configuration.rb model definition
 
   #   # Found associations:
-
-
 
   #   # Found columns:
 
@@ -296,7 +283,6 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
 
-
   ###  ExpenseGroup  ###
 
   # config.model 'ExpenseGroup' do
@@ -341,7 +327,6 @@ RailsAdmin.config do |config|
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
-
 
   ###  ExpenseItem  ###
 
@@ -393,7 +378,6 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
 
-
   ###  Payment  ###
 
   # config.model 'Payment' do
@@ -443,7 +427,6 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
 
-
   ###  PaymentDetail  ###
 
   # config.model 'PaymentDetail' do
@@ -492,7 +475,6 @@ RailsAdmin.config do |config|
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
-
 
   ###  Registrant  ###
 
@@ -570,7 +552,6 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
 
-
   ###  RegistrantChoice  ###
 
   # config.model 'RegistrantChoice' do
@@ -617,7 +598,6 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
 
-
   ###  RegistrantExpenseItem  ###
 
   # config.model 'RegistrantExpenseItem' do
@@ -663,7 +643,6 @@ RailsAdmin.config do |config|
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
-
 
   ###  RegistrationPeriod  ###
 
@@ -713,7 +692,6 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
 
-
   ###  Role  ###
 
   # config.model 'Role' do
@@ -758,7 +736,6 @@ RailsAdmin.config do |config|
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
-
 
   ###  StandardSkillEntry  ###
 
@@ -805,7 +782,6 @@ RailsAdmin.config do |config|
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
 
-
   ###  StandardSkillRoutine  ###
 
   # config.model 'StandardSkillRoutine' do
@@ -848,7 +824,6 @@ RailsAdmin.config do |config|
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
-
 
   ###  StandardSkillRoutineEntry  ###
 
@@ -894,7 +869,6 @@ RailsAdmin.config do |config|
   #     # you can override a cross-section field configuration in any section with the same syntax `configure :field_name do ... end`
   #     # using `field` instead of `configure` will exclude all other fields and force the ordering
   # end
-
 
   ###  User  ###
 

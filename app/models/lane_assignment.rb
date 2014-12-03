@@ -37,5 +37,4 @@ class LaneAssignment < ActiveRecord::Base
   def matching_record
     @matching_record ||= ImportResult.where(competition: competition, bib_number: competitor.first_bib_number).first
   end
-
 end

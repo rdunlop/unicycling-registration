@@ -15,6 +15,5 @@ module Competeable
   def update_last_data_update_time
     Result.update_last_data_update_time(competition, DateTime.now)
   end
-
 end
 

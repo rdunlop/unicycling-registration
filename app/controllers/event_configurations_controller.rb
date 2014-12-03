@@ -3,7 +3,6 @@ class EventConfigurationsController < ApplicationController
   before_filter :load_event_configuration, :only => [:create]
   load_and_authorize_resource
 
-
   def load_event_configuration
     @event_configuration = EventConfiguration.new(event_configuration_params)
   end
@@ -22,7 +21,6 @@ class EventConfigurationsController < ApplicationController
   # GET /event_configurations/new
   # GET /event_configurations/new.json
   def new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @event_configuration }
@@ -36,7 +34,6 @@ class EventConfigurationsController < ApplicationController
   # POST /event_configurations
   # POST /event_configurations.json
   def create
-
     respond_to do |format|
       if @event_configuration.save
         format.html { redirect_to event_configurations_path, notice: 'Event configuration was successfully created.' }
@@ -51,7 +48,6 @@ class EventConfigurationsController < ApplicationController
   # PUT /event_configurations/1
   # PUT /event_configurations/1.json
   def update
-
     respond_to do |format|
       if @event_configuration.update_attributes(event_configuration_params)
         format.html { redirect_to event_configurations_path, notice: 'Event configuration was successfully updated.' }
@@ -88,6 +84,7 @@ class EventConfigurationsController < ApplicationController
   end
 
   private
+
   def event_configuration_params
     params.require(:event_configuration).permit(:artistic_closed_date, :music_submission_end_date, :artistic_score_elimination_mode_naucc,
                                                 :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location,

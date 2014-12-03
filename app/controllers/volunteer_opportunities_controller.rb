@@ -33,7 +33,6 @@ class VolunteerOpportunitiesController < ApplicationController
     end
   end
 
-
   def destroy
     @volunteer_opportunity.destroy
 

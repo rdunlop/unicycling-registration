@@ -60,7 +60,6 @@ class ApplicationController < ActionController::Base
 
   # a prototype, not working (currently cutting off lines)
   def render_pdf_with_header(view_name, template, locals)
-
     render :pdf => view_name,
            :page_size => "Letter",
            :print_media_type => true,
@@ -109,6 +108,4 @@ class ApplicationController < ActionController::Base
     add_to_competition_breadcrumb(judge.competition)
     add_breadcrumb judge, judge_scores_path(judge)
   end
-
-
 end

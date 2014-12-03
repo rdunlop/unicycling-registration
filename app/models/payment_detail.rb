@@ -109,5 +109,4 @@ class PaymentDetail < ActiveRecord::Base
   def coupon_applied?
     payment_detail_coupon_code.present?
   end
-
 end

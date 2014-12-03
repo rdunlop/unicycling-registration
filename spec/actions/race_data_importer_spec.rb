@@ -17,7 +17,6 @@ describe RaceDataImporter do
   let(:test_file) { fixture_path + '/800m14.lif' }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
-
   describe "when importing CSV data" do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101.txt' }
 
@@ -92,7 +91,6 @@ describe RaceDataImporter do
     create_competitor(competition, 106, 10, 6)
     create_competitor(competition, 107, 10, 7)
     create_competitor(competition, 108, 10, 8)
-
 
     expect {
       expect(importer.process_lif(sample_input, 10)).to be_truthy

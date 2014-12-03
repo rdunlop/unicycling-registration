@@ -145,7 +145,6 @@ class Competition < ActiveRecord::Base
     competitors.map(&:touch)
   end
 
-
   # Other functions
 
   def award_title
@@ -380,8 +379,6 @@ class Competition < ActiveRecord::Base
     end
   end
 
-
-
   # ###########################
   # SCORE CALC-using functions
   # ###########################
@@ -405,7 +402,6 @@ class Competition < ActiveRecord::Base
   def tied(score)
     score.ties != 0
   end
-
 
   # DISTANCE
   def top_distance_attempts(num = 20)

@@ -1,5 +1,4 @@
 class StreetScoringClass < BaseScoringClass
-
   def scoring_description
     "A varation of the artistic scoring, for use in street comp"
   end
@@ -36,7 +35,6 @@ class StreetScoringClass < BaseScoringClass
   def place_all
     score_calculator.update_all_places
   end
-
 
   # Used when trying to destroy all results for a competition
   def all_competitor_results

@@ -22,7 +22,6 @@ class DistanceAttemptsController < ApplicationController
     @distance_attempt ||= DistanceAttempt.new(distance: @height)
   end
 
-
   def create
     @distance_attempt.judge = @judge
     respond_to do |format|
@@ -75,5 +74,4 @@ class DistanceAttemptsController < ApplicationController
     add_to_competition_breadcrumb(@judge.competition)
     add_breadcrumb @judge
   end
-
 end

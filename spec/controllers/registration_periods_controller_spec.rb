@@ -40,7 +40,6 @@ describe RegistrationPeriodsController do
     }
   end
 
-
   describe "as a normal user" do
     before(:each) do 
       @user = FactoryGirl.create(:user)

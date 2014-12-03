@@ -80,7 +80,6 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     end
   end
 
-
   def up
     PaymentDetail.reset_column_information
     Payment.reset_column_information

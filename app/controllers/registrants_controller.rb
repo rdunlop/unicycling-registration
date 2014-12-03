@@ -127,7 +127,6 @@ class RegistrantsController < ApplicationController
     end
   end
 
-
   # GET /registrants/new
   # GET /registrants/new.json
   def new
@@ -169,7 +168,6 @@ class RegistrantsController < ApplicationController
       end
     end
   end
-
 
   # PUT /registrants/1
   # PUT /registrants/1.json
@@ -379,5 +377,4 @@ class RegistrantsController < ApplicationController
       end
     end
   end
-
 end

@@ -26,7 +26,6 @@ describe "scores/index" do
     jt.val_1_max = 23
     jt.save
 
-
     score = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp1)
     score.val_1 = 5.1
     score.val_2 = 2.109

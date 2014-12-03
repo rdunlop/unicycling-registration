@@ -9,7 +9,6 @@ class TwoAttemptEntriesController < ApplicationController
 
   before_action :set_breadcrumbs
 
-
   # GET /users/#/two_attempt_entry
   # GET /users/#/two_attempt_entrys.json
   def index
@@ -53,7 +52,6 @@ class TwoAttemptEntriesController < ApplicationController
   # POST /users/#/competitions/#/two_attempt_entries
   # POST /users/#/competitions/#/two_attempt_entries.json
   def create
-
     respond_to do |format|
       if @two_attempt_entry.save
         #format.html { redirect_to user_competition_two_attempt_entries_path(@user, @competition), notice: 'Import result was successfully created.' }

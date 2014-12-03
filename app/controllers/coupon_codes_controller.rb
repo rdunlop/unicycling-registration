@@ -20,7 +20,6 @@ class CouponCodesController < ApplicationController
 
   # POST /coupon_codes
   def create
-
     respond_to do |format|
       if @coupon_code.save
         format.html { redirect_to coupon_codes_path, notice: 'Coupon Code was successfully created.' }
@@ -33,7 +32,6 @@ class CouponCodesController < ApplicationController
 
   # PUT /coupon_codes/1
   def update
-
     respond_to do |format|
       if @coupon_code.update_attributes(coupon_code_params)
         format.html { redirect_to coupon_codes_path, notice: 'Coupon Code was successfully updated.' }
@@ -51,6 +49,7 @@ class CouponCodesController < ApplicationController
   end
 
   private
+
   def coupon_code_params
     params.require(:coupon_code).permit(:name, :description, :inform_emails, :code, :max_num_uses, :price, expense_item_ids: [])
   end

@@ -137,6 +137,4 @@ class ChoicesValidator
     primary_choice_selected = reg_sign_up_record_for(event)
     primary_choice_selected.errors[:signed_up] = "" unless primary_choice_selected.nil? # the primary checkbox
   end
-
-
 end

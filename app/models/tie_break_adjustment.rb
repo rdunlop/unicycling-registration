@@ -27,5 +27,4 @@ class TieBreakAdjustment < ActiveRecord::Base
 
   # validate uniqueness of this competitor having a tie break adjustment
   validates :competitor_id, uniqueness: { scope: :judge_id }
-
 end

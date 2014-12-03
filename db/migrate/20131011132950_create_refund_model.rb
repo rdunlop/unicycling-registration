@@ -16,6 +16,5 @@ class CreateRefundModel < ActiveRecord::Migration
   def down
     drop_table :refunds
     drop_table :refund_details
-
   end
 end

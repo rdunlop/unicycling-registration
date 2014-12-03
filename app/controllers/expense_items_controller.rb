@@ -31,7 +31,6 @@ class ExpenseItemsController < ApplicationController
   # GET /expense_items/1
   # GET /expense_items/1.json
   def show
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @expense_item }
@@ -45,7 +44,6 @@ class ExpenseItemsController < ApplicationController
   # POST /expense_items
   # POST /expense_items.json
   def create
-
     respond_to do |format|
       if @expense_item.save
         format.html { redirect_to expense_items_path, notice: 'Expense item was successfully created.' }
@@ -61,7 +59,6 @@ class ExpenseItemsController < ApplicationController
   # PUT /expense_items/1
   # PUT /expense_items/1.json
   def update
-
     respond_to do |format|
       if @expense_item.update_attributes(expense_item_params)
         format.html { redirect_to expense_items_path, notice: 'Expense item was successfully updated.' }
@@ -87,6 +84,7 @@ class ExpenseItemsController < ApplicationController
   end
 
   private
+
   def expense_item_params
     params.require(:expense_item).permit(:cost, :description, :export_name, :name, :position, :expense_group_id, :has_details, :has_custom_cost, :details_label, :maximum_available , :maximum_per_registrant, :tax_percentage,
                                          :translations_attributes => [:id, :locale, :name, :description, :details_label])

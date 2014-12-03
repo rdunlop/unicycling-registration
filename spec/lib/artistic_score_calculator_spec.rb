@@ -122,7 +122,6 @@ describe ArtisticScoreCalculator do
             end
         end
 
-
         describe "with 3 technical judges too" do
           before(:each) do
             @judge4 = FactoryGirl.create(:judge, :competition => @competition)

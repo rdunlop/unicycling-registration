@@ -36,7 +36,6 @@ class JudgesController < ApplicationController
   # this is used to update standard_execution_scores
   # PUT /judge/1
   def update
-
     respond_to do |format|
       if @judge.update_attributes(judge_params)
         format.html { redirect_to judge_standard_scores_path(@judge), notice: 'Judge Scores successfully created.' }
@@ -78,6 +77,7 @@ class JudgesController < ApplicationController
   end
 
   private
+
   def judge_params
     params.require(:judge).permit(:judge_type_id, :user_id, :standard_execution_scores_attributes, :standard_difficulty_scores_attributes)
   end

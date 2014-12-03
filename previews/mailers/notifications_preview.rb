@@ -1,5 +1,4 @@
 class NotificationsPreview < ActionMailer::Preview
-
   def send_feedback
     Notifications.send_feedback(contact_form)
   end

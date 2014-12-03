@@ -52,5 +52,4 @@ class CompetitionStateMachine
   def pdf_creator
     CreatesCompetitionResultsPdf.new(competition)
   end
-
 end

@@ -5,7 +5,6 @@ class ScoresController < ApplicationController
   before_filter :find_or_create_score, :only => [:create, :new] # must be performed before load_and_auth_resource
   load_and_authorize_resource
 
-
   before_action :set_judge_breadcrumb
 
   def find_competitor
@@ -70,5 +69,4 @@ class ScoresController < ApplicationController
     end
     @score.assign_attributes(score_params) if params[:score]
   end
-
 end

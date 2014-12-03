@@ -50,8 +50,6 @@ describe EventChoicesController do
     }
   end
 
-
-
   describe "as a normal user" do
     before(:each) do
       @user = FactoryGirl.create(:user)
@@ -63,7 +61,6 @@ describe EventChoicesController do
       response.should redirect_to(root_path)
     end
   end
-
 
   describe "GET index" do
     it "assigns all event_choices as @event_choices" do

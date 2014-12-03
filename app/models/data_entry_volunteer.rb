@@ -20,7 +20,6 @@ class DataEntryVolunteer
     end
   end
 
-
   def save
     return false unless valid?
     begin

@@ -1,5 +1,4 @@
 class MultiLapScoringClass < RaceScoringClass
-
   def scoring_description
     "Each competitor may have multiple time results. A time result is made up
     of an optional 'start time' and a required 'end time'. The #{lower_is_better ? 'Faster' : 'Slower'} time

@@ -6,7 +6,6 @@ class RequiredExpenseItemCreator
   end
 
   def create
-
     # add the registration_period expense_item
     unless registrant.reg_paid?
       registrant.build_registration_item(registration_item)
@@ -29,5 +28,4 @@ class RequiredExpenseItemCreator
     egs.select { |expense_group| expense_group.expense_items.count == 1 }
       .map{ |expense_group| expense_group.expense_items.first }
   end
-
 end

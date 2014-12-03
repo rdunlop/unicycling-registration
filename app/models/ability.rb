@@ -47,11 +47,9 @@ class Ability
       cannot :test_mode_role, EventConfiguration
       cannot :fake_complete, Payment
     end
-
   end
 
   def set_data_entry_volunteer_abilities(user)
-
     can [:read, :enter_sign_in, :update_competitors], Competitor
     can :read, Competition
 

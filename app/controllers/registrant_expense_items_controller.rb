@@ -41,6 +41,7 @@ class RegistrantExpenseItemsController < ApplicationController
   end
 
   private
+
   def registrant_expense_item_params
     params.require(:registrant_expense_item).permit(:expense_item_id, :details, :custom_cost, :free)
   end

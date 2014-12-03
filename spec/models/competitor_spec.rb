@@ -189,7 +189,6 @@ describe Competitor do
         c2.valid?.should == true
         c2.save.should == true
 
-
         comp_again = Competitor.find(@comp.id)
         comp_again.position.should_not == c2.position
     end

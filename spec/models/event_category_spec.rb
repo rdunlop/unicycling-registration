@@ -52,7 +52,6 @@ describe EventCategory do
     @ec.age_is_in_range(40).should == false
   end
 
-
   describe "with some registrant_choices" do
     before(:each) do
       @rc = FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec)

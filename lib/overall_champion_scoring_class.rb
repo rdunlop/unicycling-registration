@@ -1,5 +1,4 @@
 class OverallChampionScoringClass < BaseScoringClass
-
   def scoring_description
     "Uses the chosen Overall Champion Calculation to determine the input competitors.
     Calculates the Overall Champion, and stores their final scores and places"

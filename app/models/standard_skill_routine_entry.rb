@@ -70,7 +70,6 @@ class StandardSkillRoutineEntry < ActiveRecord::Base
       end
     end
 
-
     def each_skill_must_be_different_number
       if new_record?
         standard_skill_routine.standard_skill_routine_entries.each do |first_entry|
@@ -80,5 +79,4 @@ class StandardSkillRoutineEntry < ActiveRecord::Base
         end
       end
     end
-
 end

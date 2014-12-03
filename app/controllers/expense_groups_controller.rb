@@ -16,7 +16,6 @@ class ExpenseGroupsController < ApplicationController
   # GET /expense_groups/1
   # GET /expense_groups/1.json
   def show
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @expense_group }
@@ -30,7 +29,6 @@ class ExpenseGroupsController < ApplicationController
   # POST /expense_groups
   # POST /expense_groups.json
   def create
-
     respond_to do |format|
       if @expense_group.save
         format.html { redirect_to @expense_group, notice: 'Expense group was successfully created.' }
@@ -45,7 +43,6 @@ class ExpenseGroupsController < ApplicationController
   # PUT /expense_groups/1
   # PUT /expense_groups/1.json
   def update
-
     respond_to do |format|
       if @expense_group.update_attributes(expense_group_params)
         format.html { redirect_to @expense_group, notice: 'Expense group was successfully updated.' }
@@ -69,6 +66,7 @@ class ExpenseGroupsController < ApplicationController
   end
 
   private
+
   def expense_group_params
     params.require(:expense_group).permit(:group_name, :position, :admin_visible, :visible, :info_url,
                                           :competitor_free_options, :noncompetitor_free_options,

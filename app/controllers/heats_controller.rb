@@ -146,6 +146,7 @@ class HeatsController < ApplicationController
   end
 
   private
+
   def load_age_group_entry
     @age_group_entry = AgeGroupEntry.find(params[:age_group_entry_id])
   end

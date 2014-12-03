@@ -33,7 +33,6 @@ class RemoveContactInfoFromRegTable < ActiveRecord::Migration
   end
 
   def down
-
     ContactDetail.reset_column_information
 
     change_table :registrants do |t|

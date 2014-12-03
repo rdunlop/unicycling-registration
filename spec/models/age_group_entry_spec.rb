@@ -50,7 +50,6 @@ describe AgeGroupEntry do
     @age_group_entry.wheel_size = FactoryGirl.build_stubbed(:wheel_size)
   end
 
-
   it "requires gender be valid" do
     @age_group_entry.gender = nil
     @age_group_entry.valid?.should == false

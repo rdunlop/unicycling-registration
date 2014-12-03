@@ -32,5 +32,4 @@ class CompetitionPresenter
     return "published" if competition.published? && !competition.awarded?
     return "awarded" if competition.awarded?
   end
-
 end

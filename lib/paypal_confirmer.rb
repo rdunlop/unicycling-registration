@@ -1,7 +1,6 @@
 require 'net/http'
 
 class PaypalConfirmer
-
   def initialize(params, raw_post)
     @params = params
     @raw = raw_post

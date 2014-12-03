@@ -71,6 +71,7 @@ class TimeResultsController < ApplicationController
   end
 
   private
+
   def time_result_params
     params.require(:time_result).permit(:number_of_laps, :comments, :comments_by, :status, :minutes, :seconds, :thousands, :competitor_id)
   end

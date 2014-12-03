@@ -42,7 +42,6 @@ class RegistrationPeriod < ActiveRecord::Base
     Rails.cache.delete("/registration_period/by_date/#{Date.today}")
   end
 
-
   # We allow registrations to arrive 1 day _after_ the end date,
   # to account for timezone differences, and 'last minute' shoppers.
   def last_day
@@ -102,7 +101,6 @@ class RegistrationPeriod < ActiveRecord::Base
     end
     nil
   end
-
 
   def self.current_period
     where(:current_period => true).first

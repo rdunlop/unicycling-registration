@@ -1,5 +1,4 @@
 class StreetCompScoreCalculator < ArtisticScoreCalculator
-
   def initialize(competition)
     super(competition)
   end

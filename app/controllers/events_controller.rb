@@ -55,7 +55,6 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-
     respond_to do |format|
       if @event.save
         format.html { redirect_to category_events_path(@event.category), notice: 'Event was successfully created.' }
@@ -88,7 +87,6 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.json
   def update
-
     respond_to do |format|
       if @event.update_attributes(event_params)
         format.html { redirect_to category_events_path(@event.category), notice: 'Event was successfully updated.' }
@@ -110,6 +108,7 @@ class EventsController < ApplicationController
   end
 
   private
+
   def event_params
     params.require(:event).permit(:category_id, :export_name, :position, :name, :visible, :artistic, :accepts_music_uploads,
                                   :accepts_wheel_size_override,

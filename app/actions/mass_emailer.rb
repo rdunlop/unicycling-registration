@@ -24,5 +24,4 @@ class MassEmailer
   def email_form
     @email_form ||= Email.new(params[:email])
   end
-
 end

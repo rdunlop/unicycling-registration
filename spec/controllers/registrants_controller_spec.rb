@@ -6,7 +6,6 @@ describe RegistrantsController do
      sign_in @user
    end
 
-
   # This should return the minimal set of attributes required to create a valid
   # Registrant. As you add validations to Registrant, be sure to
   # update the return value of this method accordingly.
@@ -375,7 +374,6 @@ describe RegistrantsController do
         assigns(:registrant).should eq(registrant)
         assigns(:registrant).competitor.should == true
       end
-
 
       it "redirects competitors to the items" do
         registrant = FactoryGirl.create(:competitor, :user => @user)

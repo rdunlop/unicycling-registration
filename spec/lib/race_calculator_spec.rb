@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe OrderedResultCalculator do
 
   def recalc(calc = @calc)

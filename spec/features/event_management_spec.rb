@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe 'Creating a Competition from an Event' do
   let!(:user) { FactoryGirl.create(:super_admin_user) }
   include_context 'basic event configuration'

@@ -1,5 +1,4 @@
 class FlatlandScoringClass < BaseScoringClass
-
   def scoring_description
     "A variation of the Artistic Scoring Class, we calculate last-trick
     scores and follow the rulebook (or do we?)"
@@ -37,7 +36,6 @@ class FlatlandScoringClass < BaseScoringClass
   def place_all
     nil
   end
-
 
   # Used when trying to destroy all results for a competition
   def all_competitor_results

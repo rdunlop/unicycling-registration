@@ -22,7 +22,6 @@ class ExportController < ApplicationController
   end
 
   def download_events
-
     event_categories = Event.includes(:event_categories => :event).flat_map{ |ev| ev.event_categories }
     event_categories_titles = event_categories.map{|ec| ec.to_s}
 
@@ -89,7 +88,6 @@ class ExportController < ApplicationController
   end
 
   def download_payment_details
-
     ei = ExpenseItem.find(params[:data][:expense_item_id])
 
     s = Spreadsheet::Workbook.new
@@ -140,8 +138,6 @@ class ExportController < ApplicationController
   end
 
   def download_all_payments
-
-
     s = Spreadsheet::Workbook.new
     sheet = s.create_worksheet
 

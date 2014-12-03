@@ -13,13 +13,11 @@ class ImportResultsController < ApplicationController
 
   # GET /users/#/competitions/#/import_results
   def index
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @import_results }
     end
   end
-
 
   # GET /users/#/competitions/#/import_results/review
   def review
@@ -45,7 +43,6 @@ class ImportResultsController < ApplicationController
   # GET /import_results/1
   # GET /import_results/1.json
   def show
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @import_result }
@@ -60,7 +57,6 @@ class ImportResultsController < ApplicationController
   # POST /users/#/competitions/#/import_results
   # POST /users/#/competitions/#/import_results.json
   def create
-
     respond_to do |format|
       if @import_result.save
         format.html { redirect_to data_entry_user_competition_import_results_path(@user, @competition, is_start_times: @import_result.is_start_time), notice: 'Result was successfully created.' }
@@ -77,7 +73,6 @@ class ImportResultsController < ApplicationController
   # PUT /import_results/1
   # PUT /import_results/1.json
   def update
-
     respond_to do |format|
       if @import_result.update_attributes(import_result_params)
         format.html { redirect_to data_entry_user_competition_import_results_path(@import_result.user, @import_result.competition, is_start_times: @import_result.is_start_time), notice: 'Import result was successfully updated.' }
@@ -108,7 +103,6 @@ class ImportResultsController < ApplicationController
     @import_result = ImportResult.new
     @import_result.is_start_time = @is_start_time
   end
-
 
   def proof_single
     add_breadcrumb "Proof Data"
@@ -222,7 +216,6 @@ class ImportResultsController < ApplicationController
 
   # POST /users/#/competitions/#/import_results/approve
   def approve
-
     n = @import_results.count
     begin
       ImportResult.transaction do

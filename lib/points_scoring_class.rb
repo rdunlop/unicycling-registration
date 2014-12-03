@@ -1,5 +1,4 @@
 class PointsScoringClass < BaseScoringClass
-
   attr_accessor :lower_is_better
 
   def initialize(competition, lower_is_better = true)

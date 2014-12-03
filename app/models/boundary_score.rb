@@ -30,7 +30,6 @@ class BoundaryScore < ActiveRecord::Base
     validates :major_boundary, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
     validates :minor_boundary, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
 
-
     def total
             major_dismount_devalue = 1
             minor_dismount_devalue = 0.5

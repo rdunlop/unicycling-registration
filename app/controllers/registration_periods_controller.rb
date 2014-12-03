@@ -16,7 +16,6 @@ class RegistrationPeriodsController < ApplicationController
   # GET /registration_periods/1
   # GET /registration_periods/1.json
   def show
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @registration_period }
@@ -26,7 +25,6 @@ class RegistrationPeriodsController < ApplicationController
   # GET /registration_periods/new
   # GET /registration_periods/new.json
   def new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @registration_period }
@@ -40,7 +38,6 @@ class RegistrationPeriodsController < ApplicationController
   # POST /registration_periods
   # POST /registration_periods.json
   def create
-
     respond_to do |format|
       if @registration_period.save
         format.html { redirect_to @registration_period, notice: 'Registration period was successfully created.' }
@@ -55,7 +52,6 @@ class RegistrationPeriodsController < ApplicationController
   # PUT /registration_periods/1
   # PUT /registration_periods/1.json
   def update
-
     respond_to do |format|
       if @registration_period.update_attributes(registration_period_params)
         format.html { redirect_to @registration_period, notice: 'Registration period was successfully updated.' }
@@ -79,6 +75,7 @@ class RegistrationPeriodsController < ApplicationController
   end
 
   private
+
   def registration_period_params
     params.require(:registration_period).permit(:competitor_expense_item_id, :end_date, :name, :noncompetitor_expense_item_id, :start_date, :onsite,
                                                 :translations_attributes => [:id, :locale, :name])

@@ -59,7 +59,6 @@ Workspace::Application.routes.draw do
       end
     end
 
-
     namespace :export do
       get :index
       get :download_payment_details
@@ -119,7 +118,6 @@ Workspace::Application.routes.draw do
         post :exchange_create
       end
     end
-
 
     resources :registration_periods
 

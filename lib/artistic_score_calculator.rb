@@ -1,5 +1,4 @@
 class ArtisticScoreCalculator
-
     def initialize(competition, unicon_scoring = true)
       @competition = competition # should use this some where in the calculations?
       @unicon_scoring = unicon_scoring # should do 'elimination' for each judge_type

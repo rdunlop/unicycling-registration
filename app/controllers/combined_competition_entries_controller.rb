@@ -49,6 +49,7 @@ class CombinedCompetitionEntriesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_combined_competition_entry
       @combined_competition_entry = CombinedCompetitionEntry.find(params[:id])

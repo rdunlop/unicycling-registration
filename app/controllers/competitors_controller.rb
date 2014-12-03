@@ -84,7 +84,6 @@ class CompetitorsController < ApplicationController
   end
 
   def add
-
     respond_to do |format|
       begin
         raise "No Registrants selected" if params[:registrants].nil?

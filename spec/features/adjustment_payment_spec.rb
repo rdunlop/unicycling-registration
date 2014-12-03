@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe 'Creating adjustment payments' do
   #let!(:user) { FactoryGirl.create(:payment_admin) }
   let(:user) { FactoryGirl.create(:super_admin_user) }

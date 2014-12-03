@@ -41,6 +41,7 @@ class TieBreakAdjustmentsController < ApplicationController
   end
 
   private
+
   def tie_break_adjustment_params
     params.require(:tie_break_adjustment).permit(:judge_id, :competitor_id, :tie_break_place)
   end

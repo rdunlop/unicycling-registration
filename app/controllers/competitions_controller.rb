@@ -32,7 +32,6 @@ class CompetitionsController < ApplicationController
 
   # POST /competitions/#/create
   def create
-
     if @competition.save
       flash[:notice] = "Competition created successfully"
     end
@@ -259,5 +258,4 @@ class CompetitionsController < ApplicationController
     @competition = Competition.new if @competition.nil?
     @competition.event = @event unless @competition.nil?
   end
-
 end

@@ -31,10 +31,8 @@ class ExpenseItem < ActiveRecord::Base
   validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :tax_percentage, :numericality => {:greater_than_or_equal_to => 0}
 
-
   has_many :payment_details
   has_many :registrant_expense_items, :inverse_of => :expense_item
-
 
   translates :name, :description, :details_label
   accepts_nested_attributes_for :translations

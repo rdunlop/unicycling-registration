@@ -25,7 +25,6 @@ describe EventsController do
      @category = FactoryGirl.create(:category)
    end
 
-
   # This should return the minimal set of attributes required to create a valid
   # Event. As you add validations to Event, be sure to
   # update the return value of this method accordingly.
