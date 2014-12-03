@@ -1,0 +1,4 @@
+AllCops:
+  Exclude:
+    - 'vagrant_postgres91_utf8_rails/**/*'
+inherit_from: .rubocop_todo.yml

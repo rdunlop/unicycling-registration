@@ -38,6 +38,7 @@ gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil # necessary for sidekiq routing
 gem 'unicorn'
 gem 'whenever'
+gem 'rubocop', require: false
 
 # Model utils
 gem 'acts_as_list'
