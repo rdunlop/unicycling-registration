@@ -148,7 +148,7 @@ class ArtisticScoreCalculator
   # If more than one competitor has the same placing score after the above process, those
   # riders will be ranked based on their placing scores for Technical. The scoring process
   # must be repeated using only the Technical scores for the tied riders to determine this
-  # rank. High and low placing scores are again removed in the process. If competitors’
+  # rank. High and low placing scores are again removed in the process. If competitors'
   # Technical ranking comes out equal, all competitors with the same score are awarded the
   # same place.
 

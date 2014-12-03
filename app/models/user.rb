@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
   end
 
   def self.role_description(role)
-    case(role)
+    case (role)
       # when :track_official
       # when :results_printer
     when :data_entry_volunteer

@@ -283,11 +283,6 @@ Style/SingleSpaceBeforeFirstArg:
 Style/SpaceAfterComma:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/SpaceAfterControlKeyword:
-  Enabled: false
-
 # Offense count: 5
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
