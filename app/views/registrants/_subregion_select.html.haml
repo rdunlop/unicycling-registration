@@ -1,0 +1,17 @@
+#registrant_contact_detail_attributes_state_wrapper
+  - parent_region ||= params[:parent_region]
+  - if parent_region.nil?
+    %em
+      = t(".select_country")
+  - else
+    - country = Carmen::Country.coded(parent_region) 
+    - if country.subregions?
+      -if from_object 
+        = f.subregion_select(:state, parent_region)
+      - else
+        = subregion_select("registrant[contact_detail_attributes]", :state, parent_region)
+    - else
+      -if from_object
+        = f.text_field :state
+      -else
+        = text_field("registrant[contact_detail_attributes]", :state)

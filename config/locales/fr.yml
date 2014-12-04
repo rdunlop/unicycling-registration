@@ -94,6 +94,8 @@ fr:
       other_phone: "Autre numéro de téléphone"
       responsible_adult: "Adulte responsable"
       responsible_adult_detail: "(pour les participants de moins de 18 ans)"
+    subregion_select:
+        select_country: "Veuillez sélectionner parmis les pays ci-dessus"
     new_expense:
       add_free_item: "Ajouter gratuitement cet item"
       one_is_free: "One is free with your registration" # XXX Change

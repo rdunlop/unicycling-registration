@@ -28,20 +28,20 @@
             = f.text_field :city
         %tr
           %td
-            - if @config.usa == true
-              = f.label :state, t(".state"), :class => "required"
-            - else
-              = f.label :state, t(".state_province")
-          %td
-            = f.text_field :state
-        %tr
-          %td
             = f.label :country_residence, t(".country_of_residence"), :class => "required"
           %td
             - if @config.usa
               = f.country_select :country_residence, priority: %w(US CA), prompt: ' '
             - else
               = f.country_select :country_residence, prompt: ' '
+        %tr
+          %td
+            - if @config.usa == true
+              = f.label :state, t(".state"), :class => "required"
+            - else
+              = f.label :state, t(".state_province")
+          %td
+            = render partial: '/registrants/subregion_select', locals: {parent_region: f.object.country_residence, f: f, from_object: true}
         %tr
           %td
             = f.label :country_representing, t(".country_representing"), :title => t(".country_representing_description")
