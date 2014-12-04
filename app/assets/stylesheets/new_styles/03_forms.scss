@@ -55,6 +55,19 @@ div.required {
 }
 
 // LAYOUT
+.volunteer_options {
+  list-style: none;
+  text-align: left;
+}
+
+#volunteer_opportunities .three_columns {
+    columns: 3;
+    -webkit-columns: 3;
+    -moz-columns: 3;
+    li {
+      padding-right: 10px;
+    }
+  }
 
 .sign_up_difference,
 .rulebook_link {

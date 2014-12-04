@@ -191,14 +191,23 @@ Paypal Settings required for proper integration:
 
 Configure your paypal account to send out IPN notifications;
   The <notification url> will be the hosted website URL, with /payments/notification at the end.
-  Example: http://uniregtest.herokuapp.com/payments/notification
+  Example: http://registrationtest.unicycling-software.com/payments/notification
 
-. Login to the PayPal merchant account -> Profile -> Instant Payment Notification Preferences -> Enter <notification url> and select radio button “Receive IPN messages” -> Save
+. New Paypal UI: Login to the PayPal merchang account -> Click on the person icon top right next to sign out -> Profile and settings -> My selling tools -> Getting paid and managing my risk -> Instant Payment Notifications -> ...
+
+. Old Paypal UI: Login to the PayPal merchant account -> Profile -> Instant Payment Notification Preferences -> ...
+
+Then: Enter <notification url> and select radio button “Receive IPN messages” -> Save
 
 Enable Auto Return:
-  <return_url> will be http://uniregtest.herokuapp.com/payments/
+  <return_url> will be http://registrationtest.unicycling-software.com/payments/
 
-  "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> Payment Data Transfer On), Auto Return ON: Return URL: <return_url>
+
+ New UI: Click on the person icon top right next to sign out -> Profile and settings -> My selling tools -> Selling Online -> Website prefernces -> ...
+
+ Old UI:  "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> ...
+
+ Then: Payment Data Transfer (On), Auto Return ON: Return URL: <return_url>
 
 Set the "PayPal Account Optional" setting on so that people don't have to have a paypal account to pay
   "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> PayPal Account Optional (On) -> save"
