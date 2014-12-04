@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "event_configurations/index" do
-  let(:config) { FactoryGirl.create(:event_configuration, :iuf => false, :has_print_waiver => false, :has_online_waiver => false, :standard_skill => false, :usa => false, :usa__membership_config => false)}
+  let(:config) { FactoryGirl.create(:event_configuration, :iuf => false, :has_print_waiver => false, :has_online_waiver => false, :standard_skill => false, :usa => false, :usa_membership_config => false)}
   before(:each) do
     assign(:config, config)
     assign(:event_configurations, [

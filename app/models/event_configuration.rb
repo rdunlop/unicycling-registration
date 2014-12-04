@@ -56,7 +56,7 @@ class EventConfiguration < ActiveRecord::Base
   validates :style_name, :inclusion => {:in => self.style_names }
   validates :test_mode, :has_print_waiver, :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :usa, :usa__membership_config, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :usa, :usa_membership_config, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
 
   belongs_to :usa_individual_expense_item, :class_name => "ExpenseItem"
   belongs_to :usa_family_expense_item, :class_name => "ExpenseItem"
