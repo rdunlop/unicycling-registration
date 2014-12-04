@@ -67,6 +67,11 @@ div.required {
     li {
       padding-right: 10px;
     }
+    @media only screen and (max-width: 800px) {
+      columns: 1;
+      -webkit-columns: 1;
+      -moz-columns: 1;
+    }
   }
 
 .sign_up_difference,
