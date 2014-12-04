@@ -101,7 +101,11 @@
     %tr
       %th= f.label :usa
       %td= f.check_box :usa
-      %td Enabling this allows USA membership questions. It also prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed
+      %td This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed
+    %tr
+      %th= f.label :usa_membership_config
+      %td= f.check_box :usa_membership_config
+      %td Enabling this allows USA membership questions.
     %tr
       %th= f.label :usa_individual_expense_item_id
       %td= f.select :usa_individual_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true
