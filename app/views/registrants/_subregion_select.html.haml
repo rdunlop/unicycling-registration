@@ -7,9 +7,9 @@
     - country = Carmen::Country.coded(parent_region) 
     - if country.subregions?
       -if from_object 
-        = f.subregion_select(:state, parent_region)
+        = f.subregion_select(:state, parent_region, include_blank: ' ')
       - else
-        = subregion_select("registrant[contact_detail_attributes]", :state, parent_region)
+        = subregion_select("registrant[contact_detail_attributes]", :state, parent_region, include_blank:' ')
     - else
       -if from_object
         = f.text_field :state
