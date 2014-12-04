@@ -55,7 +55,6 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Manage Music', :url => list_songs_path, :permitted => can?(:list, Song))
       heading.entries << Menu::MenuEntry.new(:title => 'Payments', :url => summary_payments_path, :permitted => can?(:summary, Payment))
       heading.entries << Menu::MenuEntry.new(:title => 'Age Group Type', :url => age_group_types_path, :permitted => can?(:manage, AgeGroupType))
-      heading.entries << Menu::MenuEntry.new(title: "Event Wheel Size", url: competition_wheel_sizes_path, permitted: can?(:read, CompetitionWheelSize))
       heading.entries << Menu::MenuEntry.new(:title => 'Overall Champion Calculators', :url => combined_competitions_path, :permitted => can?(:manage, CombinedCompetition))
       heading.entries << Menu::MenuEntry.new(:title => 'Events Report', :url => summary_events_path, :permitted => can?(:summary, Event))
       heading.entries << Menu::MenuEntry.new(:title => 'Directors', :url => directors_permissions_path, :permitted => can?(:directors, :permission))
