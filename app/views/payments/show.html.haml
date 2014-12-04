@@ -18,7 +18,7 @@
         = hidden_field_tag :notify_url, notification_payments_url
         = hidden_field_tag :return, success_payments_url
         = hidden_field_tag :upload, "1"
-        - index = 1
+        - index = 0
         - @payment.unique_payment_details.each do |pd|
           - next if pd.amount == 0
           = hidden_field_tag "amount_#{index + 1}", pd.amount.to_s
