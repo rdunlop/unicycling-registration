@@ -18,6 +18,6 @@ describe "event_configurations/index" do
     assert_select "tr>td", :text => "http://www.naucc.com".to_s, :count => 1
     assert_select "tr>td", :text => config.contact_email.to_s, :count => 1
     assert_select "tr>td", :text => true.to_s, :count => 1
-    assert_select "tr>td", :text => false.to_s, :count => 7
+    assert_select "tr>td", :text => false.to_s, :count => 8
   end
 end
