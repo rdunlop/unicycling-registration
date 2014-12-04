@@ -17,7 +17,7 @@ class RegistrantExpenseItemsController < ApplicationController
           flash[:notice] = "Successfully created Expense Item"
           redirect_to :back
         else
-          flash[:alert] = "Error Adding Expense Item"
+          flash[:alert] = @registrant_expense_item.errors.full_messages.join(", ")
           redirect_to :back
         end
       }

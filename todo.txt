@@ -1,4 +1,5 @@
 - Manage competition_wheel_size - not authorized.
+- on deletion of a registrant, don't send them to 'not authorized' page.
 - "Prices increase by $x in about 2 months" (add the amount it will increase)
 - Payments#summary page - Total $value received itemized.
  - Count: "#committed" paid (coupon or not), marked free (ie: admin-coupon)

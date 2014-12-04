@@ -99,7 +99,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
     return true if max == 0
 
     if registrant.all_expense_items.count(expense_item) == max
-      errors[:base] = "Each Registrant is only allow #{max} of #{expense_item}"
+      errors[:base] = "Each Registrant is only permitted #{max} of #{expense_item}"
     end
   end
 end
