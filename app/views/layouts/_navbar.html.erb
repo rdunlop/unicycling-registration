@@ -61,7 +61,7 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Export Data', :url => export_index_path, :permitted => can?(:manage, :all))
       heading.entries << Menu::MenuEntry.new(:title => "List Volunteers", :url => volunteers_path, :permitted => can?(:read, :volunteer))
       heading.entries << Menu::MenuEntry.new(title: "List Volunteer Options", url: volunteer_opportunities_path, permitted: can?(:read, VolunteerOpportunity))
-      heading.entries << Menu::MenuEntry.new(:title => 'USA Membership Management', :url => usa_memberships_path, :permitted => can?(:manage, :usa_membership)) if @config.usa?
+      heading.entries << Menu::MenuEntry.new(:title => 'USA Membership Management', :url => usa_memberships_path, :permitted => can?(:manage, :usa_membership)) if @config.usa_membership_config?
       heading.entries << Menu::MenuEntry.new(:title => 'Modification History', :url => rails_admin_path, :permitted => can?(:access, :rails_admin))
       if @config.standard_skill
         heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Routines (view)', :url => standard_skill_routines_path, :permitted => can?(:manage, StandardSkillRoutine))

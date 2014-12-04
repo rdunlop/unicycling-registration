@@ -36,6 +36,7 @@
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE)
 #  spectators                            :boolean          default(FALSE)
+#  usa_membership_config                 :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -68,6 +69,7 @@ FactoryGirl.define do
 
     trait :with_usa do
       usa true
+      usa_membership_config true
       association :usa_family_expense_item, factory: :expense_item, cost: 100
       association :usa_individual_expense_item, factory: :expense_item, cost: 50
     end

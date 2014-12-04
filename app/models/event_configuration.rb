@@ -36,6 +36,7 @@
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE)
 #  spectators                            :boolean          default(FALSE)
+#  usa_membership_config                 :boolean          default(FALSE)
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -55,12 +56,12 @@ class EventConfiguration < ActiveRecord::Base
   validates :style_name, :inclusion => {:in => self.style_names }
   validates :test_mode, :has_print_waiver, :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :usa, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :usa, :usa__membership_config, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
 
   belongs_to :usa_individual_expense_item, :class_name => "ExpenseItem"
   belongs_to :usa_family_expense_item, :class_name => "ExpenseItem"
 
-  validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa"
+  validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa_membership_config"
 
   validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
   validates :max_award_place, presence: true
@@ -74,6 +75,7 @@ class EventConfiguration < ActiveRecord::Base
     self.has_print_waiver = false if self.has_print_waiver.nil?
     self.has_online_waiver = false if self.has_online_waiver.nil?
     self.usa = true if self.usa.nil?
+    self.usa_membership_config = false if self.usa_membership_config.nil?
     self.iuf = false if self.iuf.nil?
     self.standard_skill = true if self.standard_skill.nil?
     self.artistic_score_elimination_mode_naucc = true if self.artistic_score_elimination_mode_naucc.nil?

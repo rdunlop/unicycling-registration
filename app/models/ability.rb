@@ -178,7 +178,7 @@ class Ability
       can :manage, RegistrantGroup
       can :manage, Judge
       can [:directors], :permission
-      if config.usa
+      if config.usa_membership_config
         can :manage, :usa_membership
       end
       can :read, :volunteer

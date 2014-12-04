@@ -36,6 +36,7 @@
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE)
 #  spectators                            :boolean          default(FALSE)
+#  usa_membership_config                 :boolean          default(FALSE)
 #
 
 require 'spec_helper'
