@@ -71,6 +71,19 @@
           %td
             = f.email_field :email, :class => "ui-tooltip", :title => "Provide your email address to receive updates to registration, schedule, and new events."
     %fieldset.data_block
+      %legend Team Affiliation
+      %table
+        %tr
+          %td= f.label :club, t(".primary_team_or_club_name")
+          %td= f.text_field :club
+        %tr
+          %td= f.label :club_contact, t(".primary_team_or_club_contact")
+          %td= f.text_field :club_contact, :size => 25
+        - if @config.usa
+          %tr
+            %td= f.label :usa_member_number, "USA Membership Number"
+            %td= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{@config.short_name}"
+    %fieldset.data_block
       %legend= t(".emergency_contact")
       %table
         %tr
@@ -101,10 +114,12 @@
             = f.label :emergency_other_phone, t(".other_phone")
           %td
             = f.telephone_field :emergency_other_phone
-    %fieldset.data_block
-      %legend= t(".responsible_adult")
-      %span.extra_info= t(".responsible_adult_detail")
-      %table
+        %tr
+          %th{colspan: "2"}
+            %b= t(".responsible_adult")
+        %tr
+          %th{colspan: "2"}
+            %span.extra_info= t(".responsible_adult_detail")
         %tr
           %td
             = f.label :responsible_adult_name, t(".name")

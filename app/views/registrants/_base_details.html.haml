@@ -12,15 +12,3 @@
     = f.radio_button :gender, 'Male'
     = f.label :gender_female, t('.female'), :class => "required"
     = f.radio_button :gender, 'Female'
-  = f.fields_for :contact_detail do |cd|
-    %div
-      = cd.label :club, t(".primary_team_or_club_name")
-      = cd.text_field :club
-      %br
-      = cd.label :club_contact, t(".primary_team_or_club_contact")
-      = cd.text_field :club_contact, :size => 25
-    - if @config.usa
-      %div
-        = cd.label :usa_member_number, "USA Membership Number"
-        = cd.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{@config.short_name}"
-        %br
