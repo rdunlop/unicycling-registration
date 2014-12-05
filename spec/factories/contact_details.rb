@@ -40,8 +40,8 @@ FactoryGirl.define do
   factory :contact_detail do
     address "1234 fake street"
     city "madison"
-    state "StateMyString"
-    country_residence "United States"
+    state "IL"
+    country_residence "US"
     zip "12345"
     phone "PhoMyString"
     mobile "IMobMyString"

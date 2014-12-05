@@ -97,7 +97,7 @@ describe RegistrantsController do
       assigns(:name).should == registrant.to_s
       assigns(:club).should == registrant.club
       assigns(:age).should == registrant.age
-      assigns(:country).should == "United States"
+      assigns(:country).should == "US"
     end
     it "sets the emergency-variables" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
