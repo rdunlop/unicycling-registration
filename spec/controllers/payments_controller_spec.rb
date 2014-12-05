@@ -224,7 +224,7 @@ describe PaymentsController do
         post :create, {:payment => valid_attributes}
         response.should redirect_to(Payment.last)
       end
-      it" assigns the logged in user" do
+      it "assigns the logged in user" do
         post :create, {:payment => valid_attributes}
         Payment.last.user.should == @user
       end
