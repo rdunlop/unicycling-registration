@@ -6,7 +6,7 @@
 #  registrant_id                   :integer
 #  address                         :string(255)
 #  city                            :string(255)
-#  state                           :string(255)
+#  state_code                      :string(255)
 #  zip                             :string(255)
 #  country_residence               :string(255)
 #  country_representing            :string(255)
@@ -59,7 +59,7 @@ describe ContactDetail do
   end
 
   it "requires state" do
-    @cd.state = nil
+    @cd.state_code = nil
     @cd.valid?.should == false
   end
 

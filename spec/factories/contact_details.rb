@@ -6,7 +6,7 @@
 #  registrant_id                   :integer
 #  address                         :string(255)
 #  city                            :string(255)
-#  state                           :string(255)
+#  state_code                      :string(255)
 #  zip                             :string(255)
 #  country_residence               :string(255)
 #  country_representing            :string(255)
@@ -40,7 +40,7 @@ FactoryGirl.define do
   factory :contact_detail do
     address "1234 fake street"
     city "madison"
-    state "IL"
+    state_code "IL"
     country_residence "US"
     zip "12345"
     phone "PhoMyString"

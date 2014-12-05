@@ -6,7 +6,7 @@
 #  registrant_id                   :integer
 #  address                         :string(255)
 #  city                            :string(255)
-#  state                           :string(255)
+#  state_code                      :string(255)
 #  zip                             :string(255)
 #  country_residence               :string(255)
 #  country_representing            :string(255)
@@ -38,7 +38,7 @@ class ContactDetail < ActiveRecord::Base
   belongs_to :registrant, :inverse_of => :contact_detail, touch: true
   belongs_to :usa_family_membership_holder, :class_name => "Registrant"
   validates :address, :city, :country_residence, :zip, :presence => true
-  validates :state, :presence => true, :unless => "EventConfiguration.singleton.usa == false"
+  validates :state_code, :presence => true, :unless => "EventConfiguration.singleton.usa == false"
 
   # contact-info block
   validates :emergency_name, :emergency_relationship, :emergency_primary_phone, :presence => true
@@ -58,5 +58,9 @@ class ContactDetail < ActiveRecord::Base
 
   def country
     Carmen::Country.coded(self.country_code).try(:name)
+  end
+
+  def state
+    Carmen::Country.coded(self.country_code).subregions.coded(self.state_code).try(:name)
   end
 end

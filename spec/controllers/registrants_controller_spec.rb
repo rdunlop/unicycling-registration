@@ -19,7 +19,7 @@ describe RegistrantsController do
       contact_detail_attributes: {
         address: "123 Fake Street",
         city: "Madison",
-        state: "WI",
+        state_code: "WI",
         country_residence: "US",
         zip: "12345",
         club: "TCUC",
