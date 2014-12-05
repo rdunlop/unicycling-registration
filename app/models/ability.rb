@@ -285,6 +285,7 @@ class Ability
     # not-object-specific
     can :empty_waiver, Registrant
     can :all, Registrant
+    can :subregion_options, Registrant
 
     unless artistic_reg_closed?
       can [:create_artistic], Registrant
