@@ -21,6 +21,7 @@ $ ->
     $('#registrant_contact_detail_attributes_phone').val($(this).data("phone"));
     $('#registrant_contact_detail_attributes_country_residence').val($(this).data("country-residence"));
     $('#registrant_contact_detail_attributes_country_representing').val($(this).data("country-representing"));
+    $('select#registrant_contact_detail_attributes_country_residence').trigger('change');
     return false;
 
 $(document).ready ->
@@ -54,3 +55,14 @@ $ ->
     $(".js--hide_new_registrant").click ->
         $(".display_new_registrant").hide("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
         return false
+
+$ ->
+  $('select#registrant_contact_detail_attributes_country_residence').change (event) ->
+    select_wrapper = $('#registrant_contact_detail_attributes_state_wrapper')
+
+    $('select', select_wrapper).attr('disabled', true)
+
+    country_residence = $(this).val()
+
+    url = "../subregion_options?parent_region=#{country_residence}&from_object=false"
+    select_wrapper.load(url)

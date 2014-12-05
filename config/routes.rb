@@ -163,6 +163,7 @@ Workspace::Application.routes.draw do
 
     resources :registrants, except: [:index] do
       resources :build, controller: 'registrants/build', only: [:show, :update, :create]
+      get '/subregion_options' => 'registrants#subregion_options'
       # admin
       collection do
         get :bag_labels
