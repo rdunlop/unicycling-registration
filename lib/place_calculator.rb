@@ -36,6 +36,4 @@ class PlaceCalculator
 
     return place
   end
-
-  private
 end

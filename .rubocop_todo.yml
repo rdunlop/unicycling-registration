@@ -41,10 +41,6 @@ Lint/UnusedBlockArgument:
 Lint/UnusedMethodArgument:
   Enabled: false
 
-# Offense count: 1
-Lint/UselessAccessModifier:
-  Enabled: false
-
 # Offense count: 69
 Lint/UselessAssignment:
   Enabled: false
