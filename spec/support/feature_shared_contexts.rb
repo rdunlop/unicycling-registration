@@ -111,6 +111,7 @@ shared_context "basic address data" do
     fill_in "City", with: "Springfield"
     find(:select, 'registrant_contact_detail_attributes_country_residence').first(:option, 'United States').select_option
     # select "United States", :from => "Country of residence"
+    # do we need to add state here in the same way as country?
     fill_in 'Zip', with: '123456'
     fill_in 'registrant_contact_detail_attributes_emergency_name', with: 'John Smith'
     fill_in 'registrant_contact_detail_attributes_emergency_relationship', with: 'friend'
