@@ -61,6 +61,6 @@ class ContactDetail < ActiveRecord::Base
   end
 
   def state
-    Carmen::Country.coded(self.country_code).subregions.coded(self.state_code).try(:name)
+    Carmen::Country.coded(self.country_residence).subregions.coded(self.state_code).try(:name)
   end
 end
