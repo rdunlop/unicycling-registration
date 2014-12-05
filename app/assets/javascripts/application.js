@@ -35,7 +35,8 @@ $(document).ready(function () {
 });
 
 $(document).ready(function() {
-  $('form').areYouSure();
+  // this conflicts with using a password manager on the log-in page
+  $('form').not(".new_user").areYouSure();
 });
 
 /* Generic sorting dataTable */
