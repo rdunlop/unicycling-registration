@@ -384,9 +384,13 @@ class Registrant < ActiveRecord::Base
   end
 
   def name
-    full_name = self.first_name + " " + self.last_name
-    full_name += " (incomplete)" unless self.validated?
-    display_eligibility(full_name, ineligible)
+    printed_name = self.full_name
+    printed_name += " (incomplete)" unless self.validated?
+    display_eligibility(printed_name, ineligible)
+  end
+
+  def full_name
+    self.first_name + " " + self.last_name
   end
 
   def user_email
