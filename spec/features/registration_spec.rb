@@ -24,24 +24,41 @@ describe 'Logging in to the system' do
         end
       end
     end
+  end
 
-    context 'within the new competitor form' do
-      before { click_link 'Create New Competitor' }
+  context 'within the new competitor form' do
+    before { click_link 'Create New Competitor' }
 
-      context 'filling in the necessary information' do
-        include_context 'basic registrant data'
+    context 'filling in the necessary information' do
+      include_context 'basic registrant data'
+      before :each do
+        click_button 'Save & Continue'
+        check '100m'
+        click_button 'Save & Continue'
+      end
+
+      it "creates a registrant" do
+        expect(user.reload.registrants.count).to eq(1)
+      end
+
+      it "associates the registration period cost" do
+        expect(user.reload.registrants.first.registrant_expense_items.count).to eq(1)
+      end
+
+      describe "when filling in volunteer, and address info" do
         before :each do
-          click_button 'Save & Continue'
-          check '100m'
-          click_button 'Save & Continue'
+          click_button "Save & Continue" # on volunteer page
         end
 
-        it "creates a registrant" do
-          expect(user.reload.registrants.count).to eq(1)
-        end
+        context "blah" do
+          include_context "basic address data"
+          before :each do
+            click_button "Save & Continue"
+          end
 
-        it "associates the registration period cost" do
-          expect(user.reload.registrants.first.registrant_expense_items.count).to eq(1)
+          it "is on the expenses page" do
+            expect(page.current_path).to match(/build\/expenses/)
+          end
         end
       end
     end
