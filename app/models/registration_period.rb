@@ -49,11 +49,11 @@ class RegistrationPeriod < ActiveRecord::Base
   end
 
   def current_period?(date = Date.today)
-    return (self.start_date <= date && date <= last_day)
+    (self.start_date <= date && date <= last_day)
   end
 
   def past_period?(date = Date.today)
-    return (self.last_day < date)
+    (self.last_day < date)
   end
 
   def self.last_online_period
@@ -84,7 +84,7 @@ class RegistrationPeriod < ActiveRecord::Base
         return rp
       end
     end
-    return nil
+    nil
   end
 
   def self.paid_for_period(competitor, paid_items)

@@ -561,7 +561,7 @@ class Registrant < ActiveRecord::Base
       end
     end
 
-    return false
+    false
   end
 
   def has_chosen_free_item_of_expense_item(expense_item)
@@ -578,7 +578,7 @@ class Registrant < ActiveRecord::Base
       end
     end
 
-    return false
+    false
   end
 
   def expense_item_is_free(expense_item)

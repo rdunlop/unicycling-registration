@@ -231,7 +231,7 @@ class Competition < ActiveRecord::Base
         return competitor
       end
     end
-    return nil
+    nil
   end
 
   def create_competitor_from_registrants(registrants, name, status = "active")

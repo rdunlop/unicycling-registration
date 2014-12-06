@@ -181,17 +181,6 @@ Style/Proc:
 Style/RaiseArgs:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/RedundantBegin:
-  Enabled: false
-
-# Offense count: 15
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Enabled: false
-
 # Offense count: 169
 # Cop supports --auto-correct.
 Style/RedundantSelf:

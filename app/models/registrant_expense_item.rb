@@ -90,7 +90,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
         errors[:base] = "Only 1 free item of this item is permitted"
       end
     end
-    return true
+    true
   end
 
   def no_more_than_max_per_registrant

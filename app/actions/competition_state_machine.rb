@@ -24,27 +24,23 @@ class CompetitionStateMachine
   end
 
   def publish
-    begin
-      Competition.transaction do
-        pdf_creator.publish!
-        competition.update_attributes({published: true}) || raise("Unable to save attributes")
-      end
-      true
-    rescue Exception => e
-      false
+    Competition.transaction do
+      pdf_creator.publish!
+      competition.update_attributes({published: true}) || raise("Unable to save attributes")
     end
+    true
+  rescue Exception => e
+    false
   end
 
   def unpublish
-    begin
-      Competition.transaction do
-        pdf_creator.unpublish!
-        competition.update_attributes({published: false}) || raise("Unable to save attributes")
-      end
-      true
-    rescue Exception => e
-      false
+    Competition.transaction do
+      pdf_creator.unpublish!
+      competition.update_attributes({published: false}) || raise("Unable to save attributes")
     end
+    true
+  rescue Exception => e
+    false
   end
 
   private
