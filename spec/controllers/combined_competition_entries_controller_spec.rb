@@ -7,21 +7,22 @@ describe CombinedCompetitionEntriesController do
   let(:competition) { FactoryGirl.create(:competition) }
   let(:combined_competition) { FactoryGirl.create(:combined_competition) }
 
-  let(:valid_attributes) { {
-    :abbreviation => "M",
-    :competition_id => competition.id,
-    :tie_breaker => true,
-    :points_1 => 50,
-    :points_2 => 50,
-    :points_3 => 50,
-    :points_4 => 50,
-    :points_5 => 50,
-    :points_6 => 50,
-    :points_7 => 50,
-    :points_8 => 50,
-    :points_9 => 50,
-    :points_10 => 50
-  } }
+  let(:valid_attributes) { 
+    {
+      :abbreviation => "M",
+      :competition_id => competition.id,
+      :tie_breaker => true,
+      :points_1 => 50,
+      :points_2 => 50,
+      :points_3 => 50,
+      :points_4 => 50,
+      :points_5 => 50,
+      :points_6 => 50,
+      :points_7 => 50,
+      :points_8 => 50,
+      :points_9 => 50,
+      :points_10 => 50
+    } }
 
   describe "GET index" do
     it "assigns all combined_competition_entries as @combined_competition_entries" do

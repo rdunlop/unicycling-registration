@@ -6,7 +6,8 @@ describe TwoAttemptEntry do
   let(:user) { FactoryGirl.create(:user) }
 
   describe "creating time_results from TwoAttemptEntry" do
-    let(:two_attempt_entry) { TwoAttemptEntry.new(
+    let(:two_attempt_entry) { 
+      TwoAttemptEntry.new(
       user: user,
       bib_number: competitor1.bib_number,
       competition: competition,

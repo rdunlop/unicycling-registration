@@ -145,17 +145,6 @@ Style/MethodCallParentheses:
 Style/MethodName:
   Enabled: false
 
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/MultilineBlockLayout:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/MultilineOperationIndentation:
-  Enabled: true
-
 # Offense count: 9
 # Cop supports --auto-correct.
 Style/NegatedIf:
