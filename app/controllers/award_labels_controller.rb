@@ -167,7 +167,7 @@ class AwardLabelsController < ApplicationController
     aw_label.user = my_user
     aw_label.populate_from_competitor(competitor, registrant, place, experts)
 
-    return aw_label.save
+    aw_label.save
   end
 
   def destroy_all

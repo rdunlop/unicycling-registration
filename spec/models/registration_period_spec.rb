@@ -70,7 +70,7 @@ describe RegistrationPeriod do
     end
 
     it "gets nil for missing section" do
-      RegistrationPeriod.relevant_period(Date.new(2010, 01, 01)).should == nil
+      RegistrationPeriod.relevant_period(Date.new(2010, 01, 01)).should be_nil
     end
 
     it "returns the first registration period INCLUDING the day AFTER the period ends" do
@@ -97,7 +97,7 @@ describe RegistrationPeriod do
 
     describe "when searching for a paid-for registration period" do
       it "can retrieve the matching registration_period" do
-        RegistrationPeriod.paid_for_period(true, []).should == nil
+        RegistrationPeriod.paid_for_period(true, []).should be_nil
       end
       it "can retrieve a matching competitor period" do
         RegistrationPeriod.paid_for_period(true, [@rp1.competitor_expense_item]).should == @rp1
@@ -127,7 +127,7 @@ describe "when testing the update function for registration periods", :caching =
     @nc_reg = FactoryGirl.create(:noncompetitor) # will have rp1
   end
   it "initially doesn't have a current_period" do
-    RegistrationPeriod.current_period.should == nil
+    RegistrationPeriod.current_period.should be_nil
   end
   it "initially says that no update has been (yet) performed" do
     RegistrationPeriod.update_checked_recently.should == false
@@ -218,7 +218,7 @@ describe "when testing the update function for registration periods", :caching =
         @ret.should == true
       end
       it "updates the current_period (which is nil)" do
-        RegistrationPeriod.current_period.should == nil
+        RegistrationPeriod.current_period.should be_nil
       end
       it "sends an e-mail when it changes the reg period" do
         num_deliveries = ActionMailer::Base.deliveries.size

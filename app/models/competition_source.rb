@@ -88,7 +88,7 @@ class CompetitionSource < ActiveRecord::Base
     if min_age || max_age
       min = min_age || 0
       max = max_age || 999
-      return false unless (registrant.age >= min && registrant.age <= max)
+      return false unless registrant.age >= min && registrant.age <= max
     end
     true
   end

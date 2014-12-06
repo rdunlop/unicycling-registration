@@ -100,7 +100,7 @@ class RefundPresenter
     end
     refund.refund_date = DateTime.now
     refund.user = self.user
-    return refund
+    refund
   end
 
   def save

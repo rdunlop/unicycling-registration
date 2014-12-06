@@ -252,8 +252,8 @@ class Ability
 
   def define_payment_ability(user)
     # Payment
-    can :summary, Payment if (user.has_role?(:payment_admin) || user.has_role?(:admin))
-    can [:details, :admin_view], ExpenseItem if (user.has_role?(:payment_admin) || user.has_role?(:admin))
+    can :summary, Payment if user.has_role?(:payment_admin) || user.has_role?(:admin)
+    can [:details, :admin_view], ExpenseItem if user.has_role?(:payment_admin) || user.has_role?(:admin)
     can :read, Payment if user.has_role? :admin
     can :manage, Payment if user.has_role? :super_admin
     can :read, Payment, :user_id => user.id
@@ -304,7 +304,7 @@ class Ability
 
       # can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
-        (not rei.system_managed) && (user.editable_registrants.include?(rei.registrant))
+        (!rei.system_managed) && (user.editable_registrants.include?(rei.registrant))
       end
       can :create, Registrant # necessary because we set the user in the controller?
     end

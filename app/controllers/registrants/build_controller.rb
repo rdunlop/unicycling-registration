@@ -45,7 +45,7 @@ class Registrants::BuildController < ApplicationController
       @registrant.status = "events" if @registrant.status == "base_details"
     when :add_volunteers
     when :add_contact_details
-      @registrant.status = "contact_details" if (@registrant.status == "events" || @registrant.status == "base_details")
+      @registrant.status = "contact_details" if @registrant.status == "events" || @registrant.status == "base_details"
     end
     @registrant.status = 'active' if step == steps.last
 
@@ -121,7 +121,7 @@ class Registrants::BuildController < ApplicationController
 
   def registrant_is_already_signed_up(reg, event_id)
     return true if reg.nil? || reg.new_record?
-    return reg.registrant_event_sign_ups.where(event_id: event_id).first.try(:signed_up?)
+    reg.registrant_event_sign_ups.where(event_id: event_id).first.try(:signed_up?)
   end
 
   def clear_events_data!(original_params)

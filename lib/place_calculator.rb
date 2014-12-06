@@ -34,6 +34,6 @@ class PlaceCalculator
       @previous_time = current_time
     end
 
-    return place
+    place
   end
 end

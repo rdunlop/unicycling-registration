@@ -40,9 +40,12 @@ nav {
       overflow: visible;
       position: absolute;
       left: 0;
+      @media only screen and (max-width: 800px) {
+        position: relative;
+      }
     }
     ul.hovered, li.parent_page > ul {
-      width: auto;
+      width: 100%;
       display: block;
       background-color: white;
       color: $text;
@@ -58,8 +61,14 @@ nav {
       ul {
         text-align: center;
         max-width: 800px;
+        @media only screen and (max-width: 800px) {
+          max-width: 100%;
+        }
       }
       display: inline-block;
+      @media only screen and (max-width: 800px) {
+        display: block;
+      }
       a, a:visited {
         display: block;
         padding: ($height/3) 20px;
@@ -83,7 +92,9 @@ nav {
     position: relative;
     display: inline-table;
     font-size: 14px;
-    max-height: $height;
+    @media only screen and (max-width: 800px) {
+      display: block;
+    }
   }
   ul:after {
     content: "";

@@ -68,10 +68,6 @@ Competitors#index should have a "Delete all who have dropped"
 what is uni-alpha? (same as 'unicycling', but with less (no) data)
 what is unicycling? (naucc2012 Standard Skill routine entry menu)
 
-- Multi-tenant the rulebook too?
-
-- Use a proper E-mailer (SES?)
-
 -- Update all booleans to not include nil (http://www.bignerdranch.com/blog/coding-rails-with-data-integrity/)
 - Run/resolve consistency_fail errors
 - Add a per-competitor report

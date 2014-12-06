@@ -105,7 +105,7 @@ describe Competition do
     end
     it "says there are no judges" do
       @ec.has_judge(@user).should == false
-      @ec.get_judge(@user).should == nil
+      @ec.get_judge(@user).should be_nil
     end
 
     describe "as a judge" do

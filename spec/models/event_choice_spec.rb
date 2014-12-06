@@ -71,12 +71,12 @@ describe EventChoice do
 
   it "defaults optional_if_event_choice to nil" do
     ec = EventChoice.new
-    ec.optional_if_event_choice.should == nil
+    ec.optional_if_event_choice.should be_nil
   end
 
   it "defaults required_if_event_choice to nil" do
     ec = EventChoice.new
-    ec.required_if_event_choice.should == nil
+    ec.required_if_event_choice.should be_nil
   end
 
   it "has an event" do
