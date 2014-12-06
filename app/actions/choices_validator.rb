@@ -93,7 +93,7 @@ class ChoicesValidator
 
       if event_choice_chosen?(required_if_event_choice)
         # the required choice IS selected
-        if not reg_choice_chosen
+        if !reg_choice_chosen
           # the choice isn't selected, and the -required- element is chosen
           return false
         end
@@ -109,9 +109,9 @@ class ChoicesValidator
     # check to see if this is optional by way of another choice
     unless optional_if_event_choice.nil?
 
-      if not event_choice_chosen?(optional_if_event_choice)
+      if !event_choice_chosen?(optional_if_event_choice)
         # the optional choice isn't selected
-        if not reg_choice_chosen
+        if !reg_choice_chosen
           # this option is NOT selected, but the optional ISN'T either
           return false
         end

@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def numeric?(val)
-    Float(val) != nil rescue false
+    !Float(val).nil? rescue false
   end
 
   def print_formatted_currency(cost)

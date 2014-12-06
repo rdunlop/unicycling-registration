@@ -31,7 +31,7 @@ describe AgeGroupType do
     end
 
     it "returns nil if no applicable age group entry is found" do
-      @agt.age_group_entry_for(-1, "Male").should == nil
+      @agt.age_group_entry_for(-1, "Male").should be_nil
     end
 
     it "can return the correct age_group_entry for a given age" do
@@ -39,7 +39,7 @@ describe AgeGroupType do
     end
 
     it "returns nil when given a female" do
-      @agt.age_group_entry_for(10, "Female").should == nil
+      @agt.age_group_entry_for(10, "Female").should be_nil
     end
 
     it "returns the age group entry if it is configured with 'mixed'" do

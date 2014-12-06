@@ -519,13 +519,13 @@ class Competitor < ActiveRecord::Base
 
   def better_time(time_1, time_2)
     if lower_is_better
-      if (time_1 < time_2)
+      if time_1 < time_2
         time_1
       else
         time_2
       end
     else
-      if (time_1 < time_2)
+      if time_1 < time_2
         time_2
       else
         time_1

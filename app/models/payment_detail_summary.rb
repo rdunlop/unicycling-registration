@@ -37,10 +37,10 @@ class PaymentDetailSummary
     false
   end
 
-  def ==(other_obj)
-    other_obj.count == self.count &&
-      other_obj.payment_id == self.payment_id &&
-      other_obj.expense_item_id == self.expense_item_id &&
-      other_obj.amount == self.amount
+  def ==(other)
+    other.count == self.count &&
+      other.payment_id == self.payment_id &&
+      other.expense_item_id == self.expense_item_id &&
+      other.amount == self.amount
   end
 end

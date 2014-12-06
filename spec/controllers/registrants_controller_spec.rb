@@ -151,7 +151,7 @@ describe RegistrantsController do
     end
     it "sets other_registrant as nil" do
       get :new
-      assigns(:other_registrant).should == nil
+      assigns(:other_registrant).should be_nil
     end
 
     describe "when another registrant already exists" do
@@ -180,7 +180,7 @@ describe RegistrantsController do
       get :new, {registrant_type: 'noncompetitor'}
       assigns(:registrant).should be_a_new(Registrant)
       assigns(:registrant).competitor.should == false
-      assigns(:categories).should == nil
+      assigns(:categories).should be_nil
     end
   end
 
@@ -195,7 +195,7 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:noncompetitor, :user => @user)
       get :edit, {:id => registrant.to_param}
       response.should be_success
-      assigns(:categories).should == nil
+      assigns(:categories).should be_nil
     end
   end
 
@@ -264,7 +264,7 @@ describe RegistrantsController do
         category1 = FactoryGirl.create(:category, :position => 1)
         Registrant.any_instance.stub(:save).and_return(false)
         post :create, {:registrant => {registrant_type: 'noncompetitor'}}
-        assigns(:categories).should == nil
+        assigns(:categories).should be_nil
       end
     end
     describe "When creating nested registrant choices" do
