@@ -141,6 +141,7 @@ class Registrant < ActiveRecord::Base
 
   scope :active_or_incomplete, -> { where(:deleted => false).order(:bib_number) }
   scope :active, -> { where(status: "active").active_or_incomplete }
+  scope :started, -> { where.not(status: "blank").active_or_incomplete}
 
   # is the current status past the desired status
   def status_is_active?(desired_status)
@@ -222,7 +223,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.all_select_box_options
-    self.active.map{ |reg| [reg.with_id_to_s, reg.id] }
+    self.started.map{ |reg| [reg.with_id_to_s, reg.id] }
   end
 
   def build_registration_item(reg_item)
