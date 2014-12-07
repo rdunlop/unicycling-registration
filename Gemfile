@@ -67,7 +67,7 @@ group :naucc, :development, :caching do
   gem 'simplecov', :require => false, :group => :test
 end
 
-group :naucc, :development, :test, :cucumber, :caching do
+group :unicon, :naucc, :development, :test, :cucumber, :caching do
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'poltergeist'
   gem 'annotate'

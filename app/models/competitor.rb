@@ -180,11 +180,15 @@ class Competitor < ActiveRecord::Base
   public
 
   def has_result?
-    scoring_helper.competitor_has_result?(self)
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/has_result?") do
+      scoring_helper.competitor_has_result?(self)
+    end
   end
 
   def result
-    scoring_helper.competitor_result(self)
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/result") do
+      scoring_helper.competitor_result(self)
+    end
   end
 
   def event
@@ -219,10 +223,12 @@ class Competitor < ActiveRecord::Base
   end
 
   def registrants_ids
-    if members.any?
-      members.map(&:external_id).sort.join(",")
-    else
-      "(No registrants)"
+    Rails.cache.fetch("/competitors/#{id}-#{updated_at}/registrants_ids") do
+      if members.any?
+        members.map(&:external_id).sort.join(",")
+      else
+        "(No registrants)"
+      end
     end
   end
 
