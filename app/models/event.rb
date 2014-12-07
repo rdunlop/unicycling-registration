@@ -101,6 +101,9 @@ class Event < ActiveRecord::Base
     if event_categories.size > 1
       total += 1
     end
+    if accepts_music_uploads?
+      total += 1
+    end
     total += event_choices.size
   end
 end
