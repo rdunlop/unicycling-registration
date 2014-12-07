@@ -1,3 +1,5 @@
+- add admin page which allows clearing cache, and reseting counter caches.
+- remove regsitrant#blank status, since it's unused.
 - Manage competition_wheel_size - not authorized.
 - on deletion of a registrant, don't send them to 'not authorized' page.
 - "Prices increase by $x in about 2 months" (add the amount it will increase) (do not display if price doesn't actually increase: ie non-comps at naucc2015)
