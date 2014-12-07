@@ -72,7 +72,7 @@ class TimeResult < ActiveRecord::Base
   end
 
   def bib_number
-    competitor.members.first.registrant.bib_number
+    competitor.first_bib_number
   end
 
   def entered_at_to_s

@@ -64,12 +64,14 @@ class ArtisticScoreCalculator
   end
 
   def get_placing_points_for_judge_type(competitor, judge_type)
-    if judge_type.nil?
-      scores = competitor.scores
-    else
-      scores = competitor.scores.select {|s| judge_type == s.judge_type }
+    Rails.cache.fetch("/comp/#{competitor.id}-#{competitor.updated_at}/judge_type/#{judge_type.id}") do
+      if judge_type.nil?
+        scores = competitor.scores
+      else
+        scores = competitor.scores.select {|s| judge_type == s.judge_type }
+      end
+      scores.map {|s| s.placing_points }
     end
-    scores.map {|s| s.placing_points }
   end
 
   def new_total_points(competitor)

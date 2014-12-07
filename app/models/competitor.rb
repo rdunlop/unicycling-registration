@@ -85,7 +85,9 @@ class Competitor < ActiveRecord::Base
   end
 
   def first_bib_number
-    members.first.registrant.bib_number
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/first_bib_number") do
+      members.first.registrant.bib_number
+    end
   end
 
   def member_warnings
