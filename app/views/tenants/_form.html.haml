@@ -1,0 +1,20 @@
+= form_for(@tenant) do |f|
+  = render partial: "shared/error_messages", object: @tenant
+
+  %h3 Enter Creation Access code
+  = label_tag :code, "Enter Creation Access code"
+  = text_field_tag :code
+  %table
+    %thead
+      %tr
+        %th= f.label :subdomain
+        %th= f.label :description
+    %tbody
+      %tr
+        %td= f.text_field :subdomain
+        %td What is the prefix you want for the domain?
+      %tr
+        %td= f.text_field :description
+        %td Description to be used for admin purposes only
+
+  = f.submit

@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    = render partial: "layouts/metatags"
+    %title Unicycling Registration
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = render "shared/analytics/google"
+    /[if lt IE 7]
+      <style media="screen" type="text/css">
+      \#container {
+      height:100%;
+      }
+      </style>
+  %body
+    #container
+      #main
+        - unless notice.blank?
+          %p.notice= notice
+        - unless alert.blank?
+          %p.alert= alert
+        = content_for?(:content) ? yield(:content) : yield

@@ -418,6 +418,7 @@ Workspace::Application.routes.draw do
 
   end
 
+  resources :tenants, only: [:index, :create]
   resources :styles, only: :index
 
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'

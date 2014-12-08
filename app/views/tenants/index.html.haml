@@ -1,0 +1,9 @@
+%h1 Conventions
+
+%ul
+  - Tenant.all.each do |tenant|
+    %Li= link_to tenant, tenant.url
+
+%hr
+
+= render partial: "form"

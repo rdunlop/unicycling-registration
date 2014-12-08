@@ -40,6 +40,10 @@ gem 'unicorn'
 gem 'whenever'
 gem 'rubocop', require: false
 
+# multi-tenancy
+#gem 'apartment'
+#gem 'apartment-sidekiq'
+
 # Model utils
 gem 'acts_as_list'
 gem 'carrierwave_direct'
