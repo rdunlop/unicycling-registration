@@ -19,6 +19,7 @@ class TenantsController < ApplicationController
       end
     else
       flash[:alert] = "Incorrect creation code"
+      render :index
     end
   end
 

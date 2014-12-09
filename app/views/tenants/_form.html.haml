@@ -4,16 +4,19 @@
   %h3 Enter Creation Access code
   = label_tag :code, "Enter Creation Access code"
   = text_field_tag :code
+
+  %br
+  %br
   %table
     %thead
       %tr
-        %th= f.label :subdomain
-        %th= f.label :description
     %tbody
       %tr
+        %th= f.label :subdomain
         %td= f.text_field :subdomain
         %td What is the prefix you want for the domain?
       %tr
+        %th= f.label :description
         %td= f.text_field :description
         %td Description to be used for admin purposes only
 
