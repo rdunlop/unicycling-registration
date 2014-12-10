@@ -418,6 +418,7 @@ Workspace::Application.routes.draw do
 
   end
 
+  resources :admin_upgrades, only: [:new, :create]
   resources :tenants, only: [:index, :create]
   resources :styles, only: :index
 

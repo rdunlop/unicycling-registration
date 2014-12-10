@@ -26,6 +26,6 @@ class TenantsController < ApplicationController
   private
 
   def tenant_params
-    params.require(:tenant).permit(:subdomain, :description)
+    params.require(:tenant).permit(:subdomain, :description, :admin_upgrade_code)
   end
 end

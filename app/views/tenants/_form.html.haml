@@ -19,5 +19,9 @@
         %th= f.label :description
         %td= f.text_field :description
         %td Description to be used for admin purposes only
+     %tr
+       %td= f.label :admin_upgrade_code
+       %td= f.text_field :admin_upgrade_code
+       %td Specify the code you want to use to upgrade your user account to an Admin account
 
   = f.submit
