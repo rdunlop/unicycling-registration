@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_tenant
-    @tenant = Tenant.first
+    @tenant = Tenant.first || Tenant.new
   end
 
   def default_footer

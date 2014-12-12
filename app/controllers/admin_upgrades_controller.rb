@@ -9,7 +9,7 @@ class AdminUpgradesController < ApplicationController
     raise CanCan::AccessDenied.new("Incorrect Access code") unless params[:access_code] == @tenant.admin_upgrade_code
 
     current_user.add_role :super_admin
-    flash[:notice] = "Successfully upgraded to admin"
-    redirect_to welcome_index_path
+    flash[:notice] = "Successfully upgraded to super_admin"
+    redirect_to root_path
   end
 end
