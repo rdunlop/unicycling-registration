@@ -70,6 +70,21 @@ class EventConfigurationsController < ApplicationController
     end
   end
 
+  def cache
+  end
+
+  def clear_cache
+    Rails.cache.clear
+    flash[:notice] = "Cache cleared"
+    redirect_to cache_event_configurations_path
+  end
+
+  def clear_counter_cache
+    EventConfiguration.reset_counter_caches
+    flash[:notice] = "Counter cache cleared"
+    redirect_to cache_event_configurations_path
+  end
+
   # FOR THE TEST_MODE flags
   def test_mode_role
     new_role = params[:role]

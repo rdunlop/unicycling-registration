@@ -222,6 +222,9 @@ Workspace::Application.routes.draw do
 
     resources :event_configurations, :except => [:show] do
       collection do
+        get :cache
+        delete :clear_cache
+        delete :clear_counter_cache
         post :test_mode_role
       end
       member do

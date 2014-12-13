@@ -147,4 +147,11 @@ class EventConfiguration < ActiveRecord::Base
   def self.configuration_exists?
     !EventConfiguration.first.nil?
   end
+
+  def self.reset_counter_caches
+    Event.all.each do |event|
+      Event.reset_counters(event.id, :event_categories)
+      Event.reset_counters(event.id, :event_choices)
+    end
+  end
 end

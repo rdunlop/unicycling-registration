@@ -44,6 +44,7 @@
       heading.entries << Menu::MenuEntry.new(:title => 'Expense Groups', :url => expense_groups_path, :permitted => can?(:manage, ExpenseGroup))
       heading.entries << Menu::MenuEntry.new(:title => 'Expense Items', :url => expense_items_path, :permitted => can?(:manage, ExpenseItem))
       heading.entries << Menu::MenuEntry.new(title: 'Coupon Codes', url: coupon_codes_path, permitted: can?(:manage, CouponCode))
+      heading.entries << Menu::MenuEntry.new(title: 'Cache Management', url: cache_event_configurations_path, permitted: can?(:manage, EventConfiguration))
     %>
     <%
       heading = Menu::MenuHeading.new(:title => 'Manage')

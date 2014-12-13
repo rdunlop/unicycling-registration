@@ -1,5 +1,4 @@
 - change paypal's "order #" to a UUID so that it never collides in the future.
-- add admin page which allows clearing cache, and reseting counter caches.
 - remove regsitrant#blank status, since it's unused.
 - Manage competition_wheel_size - not authorized.
 - on deletion of a registrant, don't send them to 'not authorized' page.
