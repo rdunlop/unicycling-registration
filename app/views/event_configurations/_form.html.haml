@@ -79,6 +79,14 @@
       %td= f.text_field :currency_code
       %td For Paypal. Three capital letter code for currency.
     %tr
+      %th= f.label :paypal_account
+      %td= f.text_field :paypal_account
+      %td PayPal "Merchant Account" that will be paid.
+    %tr
+      %th= f.label :paypal_test
+      %td= f.check_box :paypal_test
+      %td allow to pretend to receive payment confirmation from paypal
+    %tr
       %th= f.label :contact_email
       %td= f.email_field :contact_email
       %td This e-mail address will be listed on the "Help" page

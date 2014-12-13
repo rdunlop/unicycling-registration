@@ -99,9 +99,8 @@ describe Payment do
   end
 
   describe "With an environment config with test mode disabled" do
-    before(:each) do
-      Rails.application.secrets.paypal_test = false
-    end
+    let!(:event_configuration) { FactoryGirl.create :event_configuration, paypal_test: false }
+
     it "has a REAL paypal_post_url" do
       @pay.paypal_post_url.should == "https://www.paypal.com/cgi-bin/webscr"
     end

@@ -37,6 +37,8 @@
 #  display_confirmed_events              :boolean          default(FALSE)
 #  spectators                            :boolean          default(FALSE)
 #  usa_membership_config                 :boolean          default(FALSE)
+#  paypal_account                        :string(255)
+#  paypal_test                           :boolean          default(TRUE), not null
 #
 
 require 'spec_helper'
@@ -149,11 +151,11 @@ describe EventConfiguration do
   end
 
   it "returns the live paypal url when TEST is false" do
-    Rails.application.secrets.paypal_test = false
+    @ev.update_attribute(:paypal_test, false)
     EventConfiguration.paypal_base_url.should == "https://www.paypal.com"
   end
   it "returns the test paypal url when TEST is true" do
-    Rails.application.secrets.paypal_test = true
+    @ev.update_attribute(:paypal_test, true)
     EventConfiguration.paypal_base_url.should == "https://www.sandbox.paypal.com"
   end
 end

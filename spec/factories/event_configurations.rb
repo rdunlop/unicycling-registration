@@ -37,6 +37,8 @@
 #  display_confirmed_events              :boolean          default(FALSE)
 #  spectators                            :boolean          default(FALSE)
 #  usa_membership_config                 :boolean          default(FALSE)
+#  paypal_account                        :string(255)
+#  paypal_test                           :boolean          default(TRUE), not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -66,6 +68,7 @@ FactoryGirl.define do
     style_name "naucc_2013"
     max_award_place 5
     spectators false
+    paypal_account "ROBIN+merchant@dunlopweb.com"
 
     trait :with_usa do
       usa true

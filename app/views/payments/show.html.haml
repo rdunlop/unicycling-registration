@@ -9,7 +9,7 @@
   %div
     - if @payment.total_amount > 0
       = form_tag @payment.paypal_post_url do
-        = hidden_field_tag :business, Rails.application.secrets.paypal_account
+        = hidden_field_tag :business, EventConfiguration.singleton.paypal_account
         = hidden_field_tag :cancel_return, user_payments_url(current_user)
         = hidden_field_tag :cmd, "_cart"
         = hidden_field_tag :currency_code, @config.currency_code

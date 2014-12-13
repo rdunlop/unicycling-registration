@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209014225) do
+ActiveRecord::Schema.define(version: 20141213210704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -373,6 +373,8 @@ ActiveRecord::Schema.define(version: 20141209014225) do
     t.boolean  "display_confirmed_events",              default: false
     t.boolean  "spectators",                            default: false
     t.boolean  "usa_membership_config",                 default: false
+    t.string   "paypal_account"
+    t.boolean  "paypal_test",                           default: true,  null: false
   end
 
   create_table "events", force: true do |t|

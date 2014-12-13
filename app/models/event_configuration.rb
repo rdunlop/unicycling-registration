@@ -37,6 +37,8 @@
 #  display_confirmed_events              :boolean          default(FALSE)
 #  spectators                            :boolean          default(FALSE)
 #  usa_membership_config                 :boolean          default(FALSE)
+#  paypal_account                        :string(255)
+#  paypal_test                           :boolean          default(TRUE), not null
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -107,7 +109,7 @@ class EventConfiguration < ActiveRecord::Base
     paypal_test_url = "https://www.sandbox.paypal.com"
     paypal_live_url = "https://www.paypal.com"
 
-    if Rails.application.secrets.paypal_test
+    if singleton.paypal_test?
       paypal_test_url
     else
       paypal_live_url

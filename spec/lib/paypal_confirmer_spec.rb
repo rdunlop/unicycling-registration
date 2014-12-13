@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe PaypalConfirmer do
+  let!(:config) { FactoryGirl.create(:event_configuration) }
 
   it "completed message is marked as complete" do
     params = {
@@ -11,15 +12,16 @@ describe PaypalConfirmer do
   end
 
   it "is sent to the correct paypalaccount" do
-    Rails.application.secrets.paypal_account = "robin+merchant@dunlopweb.com"
+    config.update_attribute(:paypal_account, "robin+merchant@dunlopweb.com")
     params = {
-      "receiver_email" => Rails.application.secrets.paypal_account
+      "receiver_email" => EventConfiguration.singleton.paypal_account
     }
     confirmer = PaypalConfirmer.new(params, {})
     confirmer.correct_paypal_account?.should == true
   end
 
   it "is sent the correct paypal account even when the account was specified with upper-case characters" do
+    expect(EventConfiguration.singleton.paypal_account).to eq("ROBIN+merchant@dunlopweb.com")
     params = {
       "receiver_email" => "robin+merchant@dunlopweb.com"
     }

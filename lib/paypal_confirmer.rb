@@ -36,7 +36,7 @@ class PaypalConfirmer
   end
 
   def correct_paypal_account?
-    @params["receiver_email"] == Rails.application.secrets.paypal_account.downcase
+    @params["receiver_email"] == EventConfiguration.singleton.paypal_account.downcase
   end
 
   def transaction_id
