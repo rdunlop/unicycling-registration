@@ -12,6 +12,7 @@
 #  updated_at     :datetime
 #  payment_date   :string(255)
 #  note           :string(255)
+#  invoice_id     :string(255)
 #
 # Indexes
 #

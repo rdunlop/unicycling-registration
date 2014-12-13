@@ -120,10 +120,10 @@ class PaymentsController < ApplicationController
     paypal = PaypalConfirmer.new(params, request.raw_post)
     if paypal.valid?
       if paypal.correct_paypal_account? && paypal.completed?
-        if Payment.exists?(paypal.order_number)
-          payment = Payment.find(paypal.order_number)
+        if Payment.exists?(invoice_id: paypal.order_number)
+          payment = Payment.find_by(invoice_id: paypal.order_number)
           if payment.completed
-            PaymentMailer.delay.ipn_received("Payment already completed " + paypal.order_number)
+            PaymentMailer.delay.ipn_received("Payment already completed. Invoice ID: " + paypal.order_number)
           else
             payment.complete(transaction_id: paypal.transaction_id, payment_date: paypal.payment_date)
             PaymentMailer.delay.payment_completed(payment.id)
@@ -132,7 +132,7 @@ class PaymentsController < ApplicationController
             end
           end
         else
-          PaymentMailer.delay.ipn_received("Unable to find Payment " + paypal.order_number)
+          PaymentMailer.delay.ipn_received("Unable to find Payment with Invoice ID " + paypal.order_number)
         end
       end
     end

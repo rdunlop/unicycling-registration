@@ -191,26 +191,32 @@ describe PaymentsController do
 
   describe "POST create" do
     describe "with valid params" do
+      let(:do_action) { post :create, {:payment => valid_attributes} }
+
       it "creates a new Payment" do
-        expect {
-          post :create, {:payment => valid_attributes}
-        }.to change(Payment, :count).by(1)
+        expect { do_action }.to change(Payment, :count).by(1)
       end
 
       it "assigns a newly created payment as @payment" do
-        post :create, {:payment => valid_attributes}
+        do_action
         assigns(:payment).should be_a(Payment)
         assigns(:payment).should be_persisted
       end
 
       it "redirects to the created payment" do
-        post :create, {:payment => valid_attributes}
+        do_action
         response.should redirect_to(Payment.last)
       end
       it "assigns the logged in user" do
-        post :create, {:payment => valid_attributes}
+        do_action
         Payment.last.user.should == @user
       end
+
+      it "has an invoice_id" do
+        do_action
+        expect(Payment.last.invoice_id).to be_present
+      end
+
       describe "with nested attributes for payment_details" do
         it "creates the payment_detail" do
           @ei = FactoryGirl.create(:expense_item)
@@ -273,7 +279,7 @@ describe PaymentsController do
             :payment_status => "Completed",
             :txn_id => "12345",
             :payment_date => "Some Paypal payment date",
-            :invoice => @payment.id.to_s,
+            :invoice => @payment.invoice_id,
             :mc_gross => @payment.total_amount
           }
         end
@@ -310,7 +316,7 @@ describe PaymentsController do
             :receiver_email => paypal_account,
             :payment_status => "Completed",
             :txn_id => "12345",
-            :invoice => (@payment.id + 100).to_s,
+            :invoice => "WRONG_INVOICE_NUMBER",
             :mc_gross => @payment.total_amount
           }
         end
@@ -323,21 +329,21 @@ describe PaymentsController do
         end
       end
       it "doesn't set the payment if the wrong paypal account is specified" do
-        post :notification, {:receiver_email => "bob@bob.com", :payment_status => "Completed", :invoice => @payment.id.to_s}
+        post :notification, {:receiver_email => "bob@bob.com", :payment_status => "Completed", :invoice => @payment.invoice_id}
         response.should be_success
         @payment.reload
         @payment.completed.should == false
       end
       it "should send an e-mail to notify of payment receipt" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {mc_gross: "20.00", receiver_email: paypal_account, payment_status: "Completed", :invoice => @payment.id.to_s}
+        post :notification, {mc_gross: "20.00", receiver_email: paypal_account, payment_status: "Completed", :invoice => @payment.invoice_id}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 1 # one for success
       end
       it "should send an e-mail to notify of payment error when mc_gross is empty" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {:mc_gross => "", receiver_email: paypal_account, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        post :notification, {:mc_gross => "", receiver_email: paypal_account, :payment_status => "Completed", :invoice => @payment.invoice_id}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 2 # one for success, one for the error
@@ -345,7 +351,7 @@ describe PaymentsController do
 
       it "should send an IPN notification message if the total amount doesn't match the payment total" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {:mc_gross => @payment.total_amount - 1, receiver_email: paypal_account, :payment_status => "Completed", :invoice => @payment.id.to_s}
+        post :notification, {:mc_gross => @payment.total_amount - 1, receiver_email: paypal_account, :payment_status => "Completed", :invoice => @payment.invoice_id}
         response.should be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         num_deliveries.should == 2 # one for success, one for the error (payment different)

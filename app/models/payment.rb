@@ -12,6 +12,7 @@
 #  updated_at     :datetime
 #  payment_date   :string(255)
 #  note           :string(255)
+#  invoice_id     :string(255)
 #
 # Indexes
 #
@@ -33,6 +34,9 @@ class Payment < ActiveRecord::Base
   has_many :payment_details, :inverse_of => :payment, :dependent => :destroy
   accepts_nested_attributes_for :payment_details, :reject_if => proc { |attributes| attributes['registrant_id'].blank? }
 
+  before_validation :set_invoice_id
+  validates :invoice_id, presence: true
+
   after_save :update_registrant_items
   after_save :touch_payment_details
   after_save :inform_of_coupons
@@ -42,6 +46,10 @@ class Payment < ActiveRecord::Base
   def init
     self.cancelled = false if self.cancelled.nil?
     self.completed = false if self.completed.nil?
+  end
+
+  def set_invoice_id
+    self.invoice_id ||= SecureRandom.hex(10)
   end
 
   def touch_payment_details

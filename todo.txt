@@ -4,7 +4,6 @@
 
 - put a new menu in place which scales better/behaves better
 - test redis caching with shards, does it need a tenant-id?
-- change paypal's "order #" to a UUID so that it never collides in the future.
 - remove regsitrant#blank status, since it's unused.
 - Manage competition_wheel_size - not authorized.
 - on deletion of a registrant, don't send them to 'not authorized' page.

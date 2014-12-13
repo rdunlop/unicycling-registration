@@ -12,6 +12,7 @@
 #  updated_at     :datetime
 #  payment_date   :string(255)
 #  note           :string(255)
+#  invoice_id     :string(255)
 #
 # Indexes
 #
@@ -27,6 +28,7 @@ FactoryGirl.define do
     cancelled false
     transaction_id "MyString"
     completed_date  nil
+    sequence(:invoice_id) {|n| "INVOICE #{n}" }
 
     trait :completed do
       completed true
