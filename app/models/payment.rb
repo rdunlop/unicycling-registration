@@ -35,7 +35,7 @@ class Payment < ActiveRecord::Base
   accepts_nested_attributes_for :payment_details, :reject_if => proc { |attributes| attributes['registrant_id'].blank? }
 
   before_validation :set_invoice_id
-  validates :invoice_id, presence: true
+  validates :invoice_id, presence: true, uniqueness: true
 
   after_save :update_registrant_items
   after_save :touch_payment_details
