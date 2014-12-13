@@ -31,9 +31,9 @@
             = f.label :country_residence, t(".country_of_residence"), :class => "required"
           %td
             - if @config.usa
-              = f.country_select :country_residence, priority: %w(US CA), prompt: ' '
+              = f.country_select :country_residence, {priority: %w(US CA), prompt: ' '}, class: "chosen-select"
             - else
-              = f.country_select :country_residence, prompt: ' '
+              = f.country_select :country_residence, {prompt: ' '}, class: "chosen-select"
         %tr
           %td
             - if @config.usa == true
@@ -47,9 +47,9 @@
             = f.label :country_representing, t(".country_representing"), :title => t(".country_representing_description")
           %td
             - if @config.usa
-              = f.country_select(:country_representing, {priority: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description") })
+              = f.country_select(:country_representing, {priority: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
             - else
-              = f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description") })
+              = f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
         %tr
           %td
             = f.label :zip, t(".zip"), :class => "required"

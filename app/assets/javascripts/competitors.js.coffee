@@ -15,16 +15,8 @@ select_all_competitors = (check_on) ->
       el.trigger("click");
   return false
 
-enable_chosen = ->
-  # enable chosen js
-  $('.chosen-select').chosen
-    allow_single_deselect: true
-    search_contains: true
-    no_results_text: 'No matches'
-    width: '200px'
-
 $ ->
-  enable_chosen()
+  new ChosenEnabler($(".chosen-select"))
 
 # Highlights pairs/sets of data which are not all matching
 $ ->

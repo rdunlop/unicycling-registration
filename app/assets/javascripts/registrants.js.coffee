@@ -65,4 +65,5 @@ $ ->
     country_residence = $(this).val()
 
     url = "/registrants/subregion_options?parent_region=#{country_residence}"
-    select_wrapper.load(url)
+    select_wrapper.load url, ->
+        new ChosenEnabler($(".chosen-select"))

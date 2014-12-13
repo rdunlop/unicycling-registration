@@ -1,15 +1,15 @@
 #registrant_contact_detail_attributes_state_wrapper
   - parent_region ||= params[:parent_region]
-  - if parent_region.nil?
+  - if parent_region.empty?
     %em
       = t(".select_country")
   - else
     - country = Carmen::Country.coded(parent_region)
     - if country.subregions?
       - if from_object
-        = f.subregion_select(:state_code, parent_region, include_blank: true)
+        = f.subregion_select :state_code, parent_region, {include_blank: true}, class: "chosen-select"
       - else
-        = subregion_select("registrant[contact_detail_attributes]", :state_code, parent_region, include_blank: true)
+        = subregion_select "registrant[contact_detail_attributes]", :state_code, parent_region, {include_blank: true}, class: "chosen-select"
     - else
       - if from_object
         = f.text_field :state_code
