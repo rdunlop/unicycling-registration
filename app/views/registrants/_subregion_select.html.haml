@@ -1,6 +1,6 @@
 #registrant_contact_detail_attributes_state_wrapper
   - parent_region ||= params[:parent_region]
-  - if parent_region.empty?
+  - if parent_region.blank?
     %em
       = t(".select_country")
   - else
