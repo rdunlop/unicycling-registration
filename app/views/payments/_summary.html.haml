@@ -1,0 +1,46 @@
+- # locals: payment
+%p
+  %b PaymentID:
+  = payment.id
+%p
+  %b Invoice ID
+  = payment.invoice_id
+
+- if payment.completed
+  %p
+    %b TransactionID:
+    = @payment.transaction_id
+  %p
+    %b Note:
+    = @payment.note
+  %p
+    %b Completed date:
+    = @payment.completed_date
+%table.sortable
+  %caption
+    = t(".payment_details")
+    \:
+  %thead
+    %tr
+      %th= t(".registrant")
+      %th Item
+      %th= t(".cost")
+      %th= t(".tax")
+      %th= t(".total_cost")
+  %tbody
+    - @payment.payment_details.each do |pd|
+      %tr
+        %td
+          = link_to pd.registrant, pd.registrant
+        %td
+          = pd.to_s
+          - unless pd.details.blank?
+            = "(" + pd.details + ")"
+        %td= print_item_cost_currency(pd.base_cost)
+        %td= print_item_cost_currency(pd.tax)
+        %td= print_item_cost_currency(pd.cost)
+  %tfoot
+    %tr
+      %th{:colspan => "3"}
+      %th Total
+      %th= print_formatted_currency(payment.total_amount)
