@@ -1,3 +1,4 @@
+- Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.
 - fix sign-out function
 - Remove "domain" from secrets
 - remove "developmentbanner" from secrets
