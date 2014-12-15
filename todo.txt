@@ -1,3 +1,4 @@
+- fix sign-out function
 - Remove "domain" from secrets
 - remove "developmentbanner" from secrets
 - remove "mail full email" from secrets

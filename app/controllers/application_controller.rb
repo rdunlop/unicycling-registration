@@ -30,15 +30,15 @@ class ApplicationController < ActionController::Base
     Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
     redirect_to root_path, :alert => exception.message
   end
-  before_action :load_config_object
   before_action :load_tenant
+  before_action :load_config_object
 
   def load_config_object
     @config = EventConfiguration.singleton
   end
 
   def load_tenant
-    @tenant = Tenant.first || Tenant.new
+    @tenant = Tenant.find_by(subdomain: Apartment::Tenant.current_tenant)
   end
 
   def default_footer

@@ -2,6 +2,6 @@ Welcome <%= @resource.email %> to the Unicycling Registration!
 
 You can confirm your account email through the link below:
 
-<%= confirmation_url(@resource, :confirmation_token => @token) %>
+<%= user_confirmation_url(@resource, :confirmation_token => @token) %>
 
 If the link doesn't work, please copy-paste the url into a browser.
