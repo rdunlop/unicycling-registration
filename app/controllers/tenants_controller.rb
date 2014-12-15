@@ -10,8 +10,8 @@ class TenantsController < ApplicationController
   def create
     if params[:code] == Rails.application.secrets.instance_creation_code
       if @tenant.save
-        #Apartment::Tenant.create(@tenant.subdomain)
-        #Apartment::Tenant.switch!(@tenant.subdomain)
+        Apartment::Tenant.create(@tenant.subdomain)
+        Apartment::Tenant.switch!(@tenant.subdomain)
         redirect_to root_url, notice: "New Convention created"
       else
         flash[:alert] = "Unable to create new convention"
