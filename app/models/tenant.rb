@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: tenants
+# Table name: public.tenants
 #
 #  id                 :integer          not null, primary key
 #  subdomain          :string(255)
@@ -8,10 +8,6 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  admin_upgrade_code :string(255)
-#
-# Indexes
-#
-#  index_tenants_on_subdomain  (subdomain)
 #
 
 class Tenant < ActiveRecord::Base
@@ -23,6 +19,7 @@ class Tenant < ActiveRecord::Base
   end
 
   def url
+    # XXX to be updated
     "#{subdomain}.localhost.dev:9292"
   end
 end

@@ -1,5 +1,6 @@
+- figure out DNS changes necessary, and nginx changes necessary to allow multiple subdomains
+- fix sign-out function (due to changes in the js for the navbar)
 - Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.
-- fix sign-out function
 - Remove "domain" from secrets
 - remove "developmentbanner" from secrets
 - remove "mail full email" from secrets
