@@ -7,7 +7,7 @@ module SubdomainHelper
   end
 
   def url_for(options = nil)
-    if options.kind_of?(Hash)
+    if options.kind_of?(Hash) && !Rails.env.test?
       current_tenant = Apartment::Tenant.current
       options[:host] = with_subdomain(current_tenant)
     end

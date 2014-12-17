@@ -71,8 +71,13 @@ RSpec.configure do |config|
     Sidekiq::Worker.clear_all
   end
 
-  config.around(:each) do |example|
+  config.before :each, type: :feature do
+    # I'm not sure why we need to create a tenant for feature tests of 'www', but we do
+    Apartment::Tenant.create "www"
+    Apartment::Tenant.switch "www"
+  end
 
+  config.around(:each) do |example|
     if example.metadata[:sidekiq] == :fake
       Sidekiq::Testing.fake!(&example)
     else
