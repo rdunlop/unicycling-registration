@@ -1,4 +1,12 @@
 class TranslateCategoryNameAndEventChoiceLabelAndTooltip < ActiveRecord::Migration
+  class Category < ActiveRecord::Base
+    translates :name
+  end
+
+  class EventChoice < ActiveRecord::Base
+    translates :label, :tooltip
+  end
+
   def up
     Category.create_translation_table!({
                                          :name => :string
