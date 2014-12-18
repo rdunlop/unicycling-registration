@@ -106,6 +106,13 @@ class RegistrationPeriod < ActiveRecord::Base
     where(:current_period => true).first
   end
 
+  def self.update_registration_periods
+    Apartment.tenant_names.each do |tenant|
+      Apartment::Tenant.switch(tenant)
+      update_current_period
+    end
+  end
+
   # run by the scheduler in order to update the current Registration_period,
   # Removes all unpaid reg-items for the old period, and creating ones for the new period
   def self.update_current_period(date = Date.today)
