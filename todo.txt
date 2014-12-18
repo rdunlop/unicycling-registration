@@ -1,8 +1,9 @@
+- Migrat the s3 content when combining servers
+- add ability to easily recalculate multiple events?
+- determine whether data can be successfully imported from older systems.
 - figure out DNS changes necessary, and nginx changes necessary to allow multiple subdomains
 - fix sign-out function (due to changes in the js for the navbar)
 - Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.
-- Remove "domain" from secrets
-- remove "developmentbanner" from secrets
 - remove "mail full email" from secrets
 
 - put a new menu in place which scales better/behaves better
