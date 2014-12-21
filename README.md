@@ -219,7 +219,6 @@ StandardSkillEntry). In order to initially populate these, please run db:seed
 
     $ rake db:seed
 
-When running the system somewhere other than in vagrant,
 you can use the db:setup command to create the database, tables, and seed:
 
     $ rake db:setup
@@ -264,7 +263,7 @@ Code Contribututions
 
 If you would like to contribute any work to the project, please:
 
-* Check out this project, and use the provided vagrantbox to do development/testing
+* Check out this project from github
 * Fork the project
 * For any changes, include updated/added unit tests, and ensure that the whole suite runs
 * Create a pull request
@@ -286,9 +285,8 @@ Idea Contributions
 
 Development Setup instructions:
 -------------------------------
-The Registration codebase includes a vagrantbox for local development and testing.
 
-To use this, you must checkout and build the vagrantbox.
+To use this, you must install a local postgres database server.
 
 
 Getting Started with Development

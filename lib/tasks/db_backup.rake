@@ -11,3 +11,18 @@ task :db_backup_commands => :environment do
   #puts "psql -c 'ALTER SCHEMA public RENAME TO <new_tenant_schema>'"
   #puts "psql -c 'ALTER SCHEMA alpha_old RENAME TO public'"
 end
+
+# To Restore a database from a single-instance server:
+# pg_dump the data into new_subdomain.dump
+
+# restore the data
+#  pg_restore --verbose --clean --no-acl --no-owner -h localhost -U robindunlop -d new_instance new_subdomain.dump
+
+# alter the schema
+# psql -c 'ALTER schema public RENAME to new_subdomain' new_instance
+
+# Dump the new schema
+# pg_dump -n new_subdomain new_instance -f new_subdomain.schema
+
+# Load the schema into the combined database
+# psql -f new_subdomain.schema <combined_database>
