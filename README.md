@@ -28,6 +28,7 @@ Its features include:
 * Administrative data reports which show the payment receipt details
 * Administrative data-download options, which provide easy export of event sign
   up details.
+* Judging and scoring systems for various competition types
 
 
 This documentation is broken into 2 sections:
@@ -38,31 +39,19 @@ This documentation is broken into 2 sections:
 How to use the site for your own convention
 ===========================================
 
-The following instructions detail how to create/launch your own copy of the
-registration site. These instructions can be used as many times as you would
-like. It is recommended that you launch 2 copies, one for "test" purposes, and
-one for "live" information gathering.
+The application is capable of running multiple conventions on a single server,
+and no longer needs each convention to manage its own servers/hosting.
 
-The following instructions use "uniregtest.herokuapp.com" as the URL for all
-"hosted site" instructions. You should replace this with
-<yoursite>.herokuapp.com
+Contact Robin (robin@dunlopweb.com) in order to create a new convention. Generally you
+will also want to use a 'test' instance in order to test/explore features without
 
 How to contribute time/effort to the Registration Site
 ------------------------------------------------------
 
 The following directions assume that you can use "google", and are willing to
-read the instructions for github and heroku.
+read the instructions for github.
 
 * Download the code from github
-* Download the heroku tool
-* Create a new heroku instance
-
-    $ heroku apps:create uniregtest
-
-* Upload the code
-
-    $ git push heroku master
-
 * Configure the Base Settings for the application (see below)
 * Configure the Event Configuration (offered events/prices) (see below)
 
@@ -73,28 +62,14 @@ Base Settings
 The 'Base Settings' are set once by the Site Administrator, and are not able to
 be changed by any users of the system (neither normal users, nor admins).
 These settings are base settings such as security keys (secret hash), usernames/passwords for
-e-mail system integration, and paypal account details.
-
-    heroku config:add <variable>=<value>
-
-Eventually, these may be replaced using thor:
-http://blog.leshill.org/blog/2010/11/02/heroku-environment-variables.html
-
+e-mail system integration, AWS S3 storage integration.
 
 Registration-Update Scheduler
 ------------------------------
 
 In order to automatically update the registration period when the current period
-ends, a scheduled task must be executed daily.
-
-* Install the scheduling addon:
-
-    $  heroku addons:add scheduler:standard
-
-* Configure the scheduler via the webpage interface:
-
-    $ heroku addons:open scheduler
-    Add Job: "rake update_registration_period" - Daily - 05:00 UTC
+ends, a scheduled task must be executed daily. This is done with the 'whenever' gem
+which schedules the task to run daily
 
 Secret Hash
 -----------
@@ -112,21 +87,10 @@ Setting this flag will remove the "Development Site" banner
 
     DEVELOPMENT_BANNER=false
 
-Memcache
+Caching
 --------
 
-When deploying, please install a memcache client on your heroku instance:
-
-    $ heroku addons:add memcachier
-
-Database
---------
-
-For any non-trivial number of registrations, you will quickly reach 10,000 rows in the database (each registrant is ~100 rows, due to one row per event choice, etc).
-Heroku's 'dev' plan (free plan) allows 10,000 rows, so if you're hosting this for an event, you should upgrade to a paid tier database.
-The 'basic' tier is $9, an allows 10,000,000 rows (many more than you're likely to need)
-
-See https://devcenter.heroku.com/articles/upgrade-heroku-postgres-with-pgbackups
+When deploying, we use a redis caching server
 
 Email System integration
 ------------------------
@@ -163,13 +127,6 @@ The DOMAIN setting is used to build the links in the e-mails, set it to the host
 
     DOMAIN=uniregtest.herokuapp.com
 
-If you want to host your system from a different URL (search heroku
-documentation for details), you should set the DOMAIN to the URL that you will be using.
-
-    Example custom domain:
-    $ heroku domains:add reg.unicon17.ca
-
-
 If you want to allow user accounts to be created WITHOUT requiring e-mail
 confirmation, set the following variable, or "Authorize the laptop":
 
@@ -179,13 +136,13 @@ Paypal Account
 --------------
 
 Specify the paypal account "Merchant Account" that will be paid.
+Set these in your "Base Configuration" (EventConfiguration table)
 
-    PAYPAL_ACCOUNT=robin@dunlopweb.com
+  PAYPAL_ACCOUNT=robin@dunlopweb.com
 
 Specify whether to use the LIVE or TEST PAYPAL Site (default: Test)
 
     PAYPAL_TEST=false
-
 
 Paypal Settings required for proper integration:
 
@@ -221,7 +178,7 @@ These files include:
 
  - The main app logo
  - Any uploaded Songs (if that feature is enabled)
- - [future feature] PDFs of results.
+ - PDFs of results.
 
 Specify your connection settings in the secrets.yml file:
 
@@ -244,9 +201,6 @@ NewRelic Account
 ----------------
 
 NewRelic is a performance monitoring tool, install it via the addons page, or commmand line.
-
-    heroku addons:add newrelic:stark --app <app name>
-
 
 Set the following settings
 
@@ -348,29 +302,15 @@ Set your local git credentials
     $ git config --local user.name "Robin Dunlop" (Enter YOUR name instead)
     $ git config --local user.email robin@dunlopweb.com (Enter YOUR email instead)
 
-Install the required software
------------------------------
-
-* Sun Virtualbox (www.virtualbox.org)
-* Vagrantbox (vagrantup.com)
-
-
 Setup the database
 ==================
     Copy `config/database_template.yml` to `config/database.yml`  and make
       any necessary adjustments for your local environment.
 
-Start the Development Environment
-=================================
-
-    cd vagrant_postgres91_utf8_rails
-    vagrant up (this will also create the databases, and run the bundler)
-    vagrant ssh
-
 Start the local server
 ----------------------
 
-(inside the VM) Create a local .env file. This file will contain some base settings.
+Create a local .env file. This file will contain some base settings.
 
     cd workspace
     $ echo "PORT=9292" > .env
@@ -399,10 +339,6 @@ To Stop the server
 
 * Press Ctrl-C on the Server console
 
-    exit
-    vagrant halt
-
-
 If making changes to the logic
 ==============================
 
@@ -419,8 +355,6 @@ This step is necessary if you make changes to the db schema in development, or i
 To Run the test suite
 ---------------------
 
-(inside the VM)
-
     cd workspace
     rspec spec
 
@@ -433,19 +367,10 @@ or to run each type of test separately
 
 
 
-In order to create a database backup from heroku for use on your development
+In order to create a database backup from production for use on your development
 system (if so desired):
-* Install the pgbackups addon (so that you can take backups/dumps)
 
-    $ heroku addons:add pgbackups
-
-* Create a snapshot
-
-    $ heroku pgbackups:capture --expire
-
-* Download the backup
-
-    $ curl -o latest.dump `heroku pgbackups:url`
+    Instructions missing
 
 * Import the data (from inside your VM)
 
