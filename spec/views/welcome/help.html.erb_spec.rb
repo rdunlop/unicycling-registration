@@ -1,6 +1,10 @@
 require 'spec_helper'
 
-describe "welcome/help.html.erb" do
+describe "welcome/help" do
+  before :each do
+    assign(:tenant, FactoryGirl.create(:tenant))
+  end
+
   it "should have some help" do
     @user = FactoryGirl.create(:user)
     sign_in @user
