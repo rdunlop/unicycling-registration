@@ -27,6 +27,7 @@ gem 'font-kit-rails', :git => "git://github.com/sandelius/font-kit-rails.git", :
 gem 'rake'
 gem 'paper_trail', '~> 3.0.1'
 gem 'exception_notification'
+gem 'redis-store', git: "git://github.com/rdunlop/redis-store.git" # necessary for lambda namespace (https://github.com/redis-store/redis-store/pull/163)
 gem 'redis-rails'
 gem 'rails_admin'
 gem "fog"

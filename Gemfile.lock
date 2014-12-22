@@ -10,6 +10,13 @@ GIT
       xpath (~> 2.0)
 
 GIT
+  remote: git://github.com/rdunlop/redis-store.git
+  revision: 89a77957f1e1f66fff15cf161ecc6306553278e1
+  specs:
+    redis-store (1.1.4)
+      redis (>= 2.2)
+
+GIT
   remote: git://github.com/sandelius/font-kit-rails.git
   revision: 480c979b84aa4d32652772822dee2366c37eed2e
   ref: 480c979b84aa4d32652772822dee2366c37eed2e
@@ -214,7 +221,7 @@ GEM
     hike (1.2.3)
     hitimes (1.2.2)
     http_accept_language (2.0.2)
-    i18n (0.6.11)
+    i18n (0.7.0)
     ice_nine (0.11.0)
     ipaddress (0.8.0)
     jquery-rails (3.1.2)
@@ -232,7 +239,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.0)
-    minitest (5.4.3)
+    minitest (5.5.0)
     multi_json (1.10.1)
     nested_form (0.3.2)
     net-scp (1.2.1)
@@ -305,7 +312,7 @@ GEM
     rainbow (2.0.0)
     raindrops (0.13.0)
     rake (10.4.0)
-    redis (3.1.0)
+    redis (3.2.0)
     redis-actionpack (4.0.0)
       actionpack (~> 4)
       redis-rack (~> 1.5.0)
@@ -322,8 +329,6 @@ GEM
       redis-actionpack (~> 4)
       redis-activesupport (~> 4)
       redis-store (~> 1.1.0)
-    redis-store (1.1.4)
-      redis (>= 2.2)
     remotipart (1.2.1)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
@@ -485,6 +490,7 @@ DEPENDENCIES
   rails_admin
   rake
   redis-rails
+  redis-store!
   rolify
   rspec-instafail
   rspec-rails
