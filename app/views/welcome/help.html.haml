@@ -1,9 +1,7 @@
-%h1 Help
-%h2 This site is for the Unicycling Convention registration
-%h3 FAQ
-- cache [:help_text] do
-  Cached text
-  = @tenant.subdomain
+- cache [:help_headers] do
+  %h1 Help
+  %h2 This site is for the #{@tenant.subdomain} Unicycling Convention registration
+  %h3 FAQ
 
 .help_text
   %ul
@@ -16,25 +14,25 @@
     %li
       %b How do I Register:
       Once you have signed in, choose "Create New Competitor" or "Creat New Non-Competitor" and fill out the fields.
-      %br/
+      %br
       Pay for the registration in order to secure your registration
     %li
       %b How to share Registration Details:
       As a Team Captain or Club leader you can request access so that you can pay for other members' registrations, as well as see the events that they have signed up for
-      %br/
+      %br
       - if signed_in?
         Request access to your team's registrations through the #{link_to "Registrant Access Request", user_additional_registrant_accesses_path(@user)} Form
 If you have any problems or questions about registration, please contact #{@config.contact_email}
-%br/
-%br/
+%br
+%br
 or submit feedback:
-%br/
+%br
 %h4 Feedback
 = render :partial => "/shared/error_messages", :object => @contact_form
 = form_for @contact_form, url: welcome_feedback_path do |f|
   = f.label :email, "Your Email"
   = f.text_field :email, :placeholder => "Optional"
-  %br/
+  %br
   = f.text_area :feedback, {:cols => 100, :rows => 6 }
-  %br/
+  %br
   = f.submit "Send Feedback", :class => "focus_button"
