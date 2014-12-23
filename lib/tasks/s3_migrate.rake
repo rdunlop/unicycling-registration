@@ -23,7 +23,7 @@ def move_s3(old_path, new_path)
   puts "moving #{old_path} => #{new_path}"
   s3 = AWS::S3.new(access_key_id: Rails.application.secrets.aws_access_key,
             secret_access_key: Rails.application.secrets.aws_secret_access_key,
-            region: 'us-east-1')
+            region: Rails.application.secrets.aws_region)
   bucket = s3.buckets[Rails.application.secrets.aws_bucket]
   obj = bucket.objects[old_path]
   puts "obj.key not found (#{obj.key}" unless obj.exists?
