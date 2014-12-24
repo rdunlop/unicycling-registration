@@ -1,4 +1,9 @@
-ActionMailer::Base.default :from => Rails.application.secrets.mail_full_email
+ActionMailer::Base.default :from => Proc.new { from_address }
+
+def from_address
+  tenant = Tenant.find_by(subdomain: Apartment::Tenant.current)
+  "#{tenant.try(:description)} <#{Rails.application.secrets.mail_full_email}>"
+end
 
 ActionMailer::Base.default_url_options[:host] = Rails.application.secrets.domain
 Rails.application.config.action_mailer.default_url_options ||= {}
