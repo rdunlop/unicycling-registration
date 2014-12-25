@@ -1,8 +1,8 @@
 # Require whichever elevator you're using below here...
 #
-# require 'apartment/elevators/generic'
+require 'apartment/elevators/generic'
 # require 'apartment/elevators/domain'
-require 'apartment/elevators/subdomain'
+# require 'apartment/elevators/subdomain'
 
 #
 # Apartment Configuration
@@ -17,7 +17,7 @@ Apartment.configure do |config|
   #
   # config.excluded_models = %w{Tenant}
   #
-  config.excluded_models = %w{ Tenant }
+  config.excluded_models = %w{ Tenant TenantAlias }
 
   # use postgres schemas?
   config.use_schemas = true
@@ -39,10 +39,12 @@ end
 ##
 # Elevator Configuration
 
-# Rails.application.config.middleware.use 'Apartment::Elevators::Generic', lambda { |request|
-#   # TODO: supply generic implementation
-# }
+unless Rails.env.test?
+  Rails.application.config.middleware.use 'Apartment::Elevators::Generic', lambda { |request|
+    Tenant.find_tenant_by_hostname(request.host).try(:subdomain) || "public"
+  }
+end
 
 # Rails.application.config.middleware.use 'Apartment::Elevators::Domain'
 
-Rails.application.config.middleware.use 'Apartment::Elevators::Subdomain' unless Rails.env.test?
+# Rails.application.config.middleware.use 'Apartment::Elevators::Subdomain' unless Rails.env.test?

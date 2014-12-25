@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141213224724) do
+ActiveRecord::Schema.define(version: 20141224221101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -846,6 +846,17 @@ ActiveRecord::Schema.define(version: 20141213224724) do
   end
 
   add_index "standard_skill_routines", ["registrant_id"], name: "index_standard_skill_routines_on_registrant_id", unique: true, using: :btree
+
+  create_table "tenant_aliases", force: true do |t|
+    t.integer  "tenant_id",                      null: false
+    t.string   "website_alias",                  null: false
+    t.boolean  "primary_domain", default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tenant_aliases", ["tenant_id", "primary_domain"], name: "index_tenant_aliases_on_tenant_id_and_primary_domain", using: :btree
+  add_index "tenant_aliases", ["website_alias"], name: "index_tenant_aliases_on_website_alias", using: :btree
 
   create_table "tenants", force: true do |t|
     t.string   "subdomain"

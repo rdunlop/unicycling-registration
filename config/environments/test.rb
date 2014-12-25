@@ -41,7 +41,13 @@ Workspace::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
 end
+
+Rails.application.secrets.domain = "localhost.dev"
+Rails.application.secrets.mail_full_email = "from@example.com"
+Rails.application.secrets.secret = "somesecretstringisreallylongenoughtobesecurecheckpassing"
+Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
 
 # Necessary to allow the tests to execute when they don't have a locale defined.
 #  As per (https://github.com/rspec/rspec-rails/issues/255)

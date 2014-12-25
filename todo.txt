@@ -1,7 +1,7 @@
-- remove "mail full email" from secrets
-- separate google analytics by domain?
+- Allow arbitrary URLs to be resolved by the tenants, to allow CNAME records
+ - DNS changes, as well as Tenant Model/Elevator changes
+ - Add a "primary domain" option, and ensure all URL-redirects go there.
 - add ability to easily recalculate multiple events?
-- determine whether data can be successfully imported from older systems.
 - update rails to 4.2
 - fix sign-out function (due to changes in the js for the navbar)
 - Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.
@@ -89,8 +89,6 @@ what is unicycling? (naucc2012 Standard Skill routine entry menu)
 - Add a count of compettitors to the sign up lists (public display)
 - Allow entering a penalty for Slow Races, which then subtracts a second for each penalty.
 - Re-Work the slow-race data entry (as per Scott).
-- Add a "Deploy on Heroku" button?
-- Setting places for a 10 person Pairs routine takes too long (> 30 seconds)
 - Why doesn't the artistic summary show the places? (make it print ordered by place, and then remove the top summary?)
 - De-emphasize the green-"other data entry" button, and also de-emphasize the brue "already scored" judging opetiosn.
 - Allow multi-delete of award labels

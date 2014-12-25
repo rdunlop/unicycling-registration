@@ -2,7 +2,7 @@
 
 %ul
   - Tenant.all.each do |tenant|
-    %li= link_to tenant, tenant.url
+    %li= link_to tenant, tenant.base_url
 
 %hr
 
