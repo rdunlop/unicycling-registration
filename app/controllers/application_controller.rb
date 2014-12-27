@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
   before_action :load_tenant
   before_action :load_config_object
 
+  def raise_not_found!
+    raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
+  end
+
   def load_config_object
     @config = EventConfiguration.singleton
   end
@@ -84,7 +88,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_home_breadcrumb
-    add_breadcrumb "Home", root_path
+    add_breadcrumb "Home", Proc.new { root_path }
   end
 
   def add_registrant_breadcrumb(registrant)

@@ -26,6 +26,12 @@ module Workspace
 
     config.encoding = "utf-8"
 
+    config.action_dispatch.rescue_responses.merge!(
+      'Errors::TenantNotFound' => :not_found
+    )
+
+    config.exceptions_app = self.routes
+
     config.generators do |g|
       g.helper_specs false
       g.routing_specs false

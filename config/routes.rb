@@ -4,6 +4,11 @@ Workspace::Application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  get '404', to: 'errors#not_found'
+  get '415', to: 'errors#not_found'
+  get '422', to: 'errors#not_permitted'
+  get '500', to: 'errors#server_error'
+
   scope "(:locale)" do
     resources :registrant_groups, :except => [:new] do
       collection do
@@ -484,4 +489,7 @@ Workspace::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+  fallback_options = Rails.env.development? ? { unmatched_route: /(?!.*rails\/mailers).*/ } : {}
+  get '*unmatched_route', fallback_options.merge(to: 'application#raise_not_found!')
 end
