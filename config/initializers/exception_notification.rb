@@ -16,7 +16,7 @@ ExceptionNotification.configure do |config|
   # if we throw an exception while rendering the template,
   # the exception is wrapped in a ActionView::Template::Error
   config.ignore_if do |exception, options|
-    exception.respond_to? :original_exception && exception.original_exception.is_a?(Errors::TenantNotFound)
+    exception.respond_to?(:original_exception) && exception.original_exception.is_a?(Errors::TenantNotFound)
   end
 
   # Notifiers =================================================================
