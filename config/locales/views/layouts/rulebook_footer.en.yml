@@ -1,6 +1,7 @@
 ---
 en:
-  attending:
-    rulebook_link:
+  layouts:
+    rulebook_footer:
+      header: Rules
       competition_rulebook: Competition Rulebook
       rulebook_tooltip: Click here for the rulebook that governs this competition!

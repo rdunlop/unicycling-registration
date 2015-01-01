@@ -1,0 +1,9 @@
+- cache_i18n ['rulebook_footer', @config] do
+  - if @config.rulebook_url.present? || @config.rules_file_name?
+    %ul
+      %li.footer__list-header
+        %h6= t(".header")
+      - if @config.rulebook_url.present?
+        %li= link_to t(".competition_rulebook"), @config.rulebook_url, target: '_blank', title: t(".rulebook_tooltip")
+      - if @config.rules_file_name?
+        %li= render "/shared/additional_rules_link"
