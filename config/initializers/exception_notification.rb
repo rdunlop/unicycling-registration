@@ -5,7 +5,10 @@ require 'exception_notification/sidekiq'
 ExceptionNotification.configure do |config|
   # Ignore additional exception types.
   # ActiveRecord::RecordNotFound, AbstractController::ActionNotFound and ActionController::RoutingError are already added.
-  config.ignored_exceptions += %w{ActionView::TemplateError CustomError}
+
+  # Note: we ignore the ActionView::Template::Error because this is thrown
+  #  if issues are raised while rendering the template
+  config.ignored_exceptions += %w{Errors::TenantNotFound ActionView::Template::Error}
 
   # Adds a condition to decide when an exception must be ignored or not.
   # The ignore_if method can be invoked multiple times to add extra conditions.
