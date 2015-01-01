@@ -20,7 +20,7 @@ Workspace::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = true # XXX robin did this,but isn't sure about it
+  config.serve_static_assets = false # nginx should serve static assets
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -53,6 +53,7 @@ Workspace::Application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
+
   if Rails.application.secrets.redis
     config.cache_store = :redis_store, Redis.cache_configuration
   end
@@ -76,13 +77,4 @@ Workspace::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-end
-
-if Rails.application.secrets.error_emails.present?
-  Workspace::Application.config.middleware.use ExceptionNotification::Rack,
-                                               :email => {
-                                                 email_prefix: "[Registration Exception] ",
-                                                 sender_address: Rails.application.secrets.mail_full_email,
-                                                 exception_recipients: Rails.application.secrets.error_emails
-                                               }
 end

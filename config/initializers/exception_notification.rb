@@ -5,22 +5,22 @@ require 'exception_notification/sidekiq'
 ExceptionNotification.configure do |config|
   # Ignore additional exception types.
   # ActiveRecord::RecordNotFound, AbstractController::ActionNotFound and ActionController::RoutingError are already added.
-  config.ignored_exceptions += %w{Errors::TenantNotFound}
+  config.ignored_exceptions += %w{ActionView::TemplateError CustomError}
 
   # Adds a condition to decide when an exception must be ignored or not.
   # The ignore_if method can be invoked multiple times to add extra conditions.
-  # config.ignore_if do |exception, options|
-  #   not Rails.env.production?
-  # end
+  config.ignore_if do |exception, options|
+    not Rails.application.secrets.error_emails.present?
+  end
 
   # Notifiers =================================================================
 
   # Email notifier sends notifications by email.
-  # config.add_notifier :email, {
-  #  :email_prefix         => "[ERROR] ",
-  #  :sender_address       => %{"Notifier" <notifier@example.com>},
-  #  :exception_recipients => %w{exceptions@example.com}
-  # }
+  config.add_notifier :email, {
+    email_prefix: "[#{Rails.env}][Registration Exception] ",
+    sender_address: Rails.application.secrets.mail_full_email,
+    exception_recipients: Rails.application.secrets.error_emails
+  }
 
   # Campfire notifier sends notifications to your Campfire room. Requires 'tinder' gem.
   # config.add_notifier :campfire, {
