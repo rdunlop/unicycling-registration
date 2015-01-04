@@ -75,6 +75,10 @@ class ExpenseItem < ActiveRecord::Base
     paid_items.map(&:cost).inject(:+).to_f
   end
 
+  def free_items
+    payment_details.free
+  end
+
   def num_free
     free_items.count
   end
