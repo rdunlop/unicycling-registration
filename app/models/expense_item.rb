@@ -55,7 +55,7 @@ class ExpenseItem < ActiveRecord::Base
 
   # items paid for
   def paid_items
-    payment_details.paid
+    payment_details.paid.where(refunded: false)
   end
 
   def num_paid_with_coupon
@@ -73,20 +73,6 @@ class ExpenseItem < ActiveRecord::Base
   # how much have we received for the paid items
   def total_amount_paid
     paid_items.map(&:cost).inject(:+).to_f
-  end
-
-
-
-  def refunded_items
-    payment_details.refunded
-  end
-
-  def num_refunded
-    refunded_items.count
-  end
-
-  def free_items
-    payment_details.free
   end
 
   def num_free
