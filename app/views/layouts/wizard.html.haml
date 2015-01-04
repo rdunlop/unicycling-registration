@@ -1,5 +1,5 @@
 - content_for :content do
-  %h1 #{@registrant.name}
+  %h1 #{@registrant.full_name}
   = wizard_progress_bar
   .data_block.show_hide_elements{ class: "show_#{@registrant.registrant_type}_elements" }
     = yield
