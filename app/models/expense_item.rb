@@ -31,8 +31,9 @@ class ExpenseItem < ActiveRecord::Base
   validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :tax_percentage, :numericality => {:greater_than_or_equal_to => 0}
 
-  has_many :payment_details
-  has_many :registrant_expense_items, :inverse_of => :expense_item
+  has_many :payment_details, dependent: :restrict_with_error
+  has_many :registrant_expense_items, :inverse_of => :expense_item, dependent: :restrict_with_error
+  has_many :coupon_code_expense_items, dependent: :destroy
 
   translates :name, :description, :details_label
   accepts_nested_attributes_for :translations
@@ -52,13 +53,29 @@ class ExpenseItem < ActiveRecord::Base
     self.has_custom_cost = false if self.has_custom_cost.nil?
   end
 
+  # items paid for
   def paid_items
     payment_details.paid
+  end
+
+  def num_paid_with_coupon
+    paid_items.with_coupon.count
+  end
+
+  def num_paid_without_coupon
+    num_paid - num_paid_with_coupon
   end
 
   def num_paid
     paid_items.count
   end
+
+  # how much have we received for the paid items
+  def total_amount_paid
+    paid_items.map(&:cost).inject(:+).to_f
+  end
+
+
 
   def refunded_items
     payment_details.refunded

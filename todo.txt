@@ -2,7 +2,6 @@
  - DNS changes, as well as Tenant Model/Elevator changes
  - Add a "primary domain" option, and ensure all URL-redirects go there.
 - add ability to easily recalculate multiple events?
-- Handle issue when a tenant doesn't exist, but attempts browse
 - update rails to 4.2
 - fix sign-out function (due to changes in the js for the navbar)
 - Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.

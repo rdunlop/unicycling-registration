@@ -5,12 +5,10 @@ class ExpenseItemsController < ApplicationController
   # GET /expense_items/1/details
   def details
     add_payment_summary_breadcrumb
-    @filter = params[:filter]
-    add_breadcrumb "#{@filter.humanize} Items"
+    add_breadcrumb "#{@expense_item.to_s} Items"
 
-    filters = %(paid refunded free unpaid)
-    raise "unknown filter" unless filters.include?(@filter)
-    @details = @expense_item.send("#{@filter}_items")
+    @paid_details = @expense_item.paid_items
+    @unpaid_details = @expense_item.unpaid_items
   end
 
   # ############################

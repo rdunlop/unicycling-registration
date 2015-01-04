@@ -15,6 +15,7 @@ class PaymentDetailCouponCode < ActiveRecord::Base
   validates :payment_detail, :coupon_code, presence: true
 
   delegate :price, to: :coupon_code
+  delegate :to_s, to: :coupon_code
 
   def self.completed
     joins(payment_detail: :payment).merge(Payment.completed)

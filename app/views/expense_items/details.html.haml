@@ -1,4 +1,52 @@
-%h1 Listing #{@filter.humanize} Payment Details for #{@expense_item}
+%h1 Listing Payment Details for #{@expense_item}
+
+%h3 Paid Items
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Registrant
+      %th Email
+      %th Details
+      %th Date
+      %th Coupon
+      %th Amount Paid
+  %tbody
+    - @paid_details.each do |detail|
+      %tr
+        %td= detail.registrant.bib_number
+        %td= link_to detail.registrant, detail.registrant
+        %td= detail.registrant.user.email
+        %td= detail.details
+        %td= detail.created_at
+        %td= detail.coupon_applied? ? detail.payment_detail_coupon_code.to_s : ""
+        %td= print_formatted_currency(detail.cost)
+  %tfoot
+    %tr
+      %td
+      %td
+      %td
+      %td
+      %td
+      %th Total
+      %th= print_formatted_currency(@expense_item.total_amount_paid)
+%hr
+
+%h3 Applied Coupons
+%table.sortable
+  %thead
+    %tr
+      %th Coupon
+      %th Num Applied
+  %tbody
+    - @expense_item.coupon_code_expense_items.map(&:coupon_code).each do |coupon|
+      %tr
+        %td= coupon
+        %td= @paid_details.includes(:payment_detail_coupon_code).merge(PaymentDetailCouponCode.where(coupon_code: coupon)).count
+
+%hr
+
+%h3 Unpaid Items
 %table.sortable
   %thead
     %tr
@@ -8,10 +56,10 @@
       %th Details
       %th Date
   %tbody
-    - @details.each do |detail|
+    - @unpaid_details.each do |reg_item|
       %tr
-        %td= detail.registrant.bib_number
-        %td= link_to detail.registrant, detail.registrant
-        %td= detail.registrant.user.email
-        %td= detail.details
-        %td= detail.created_at
+        %td= reg_item.registrant.bib_number
+        %td= link_to reg_item.registrant, reg_item.registrant
+        %td= reg_item.registrant.user.try(:email)
+        %td= reg_item.details
+        %td= reg_item.created_at

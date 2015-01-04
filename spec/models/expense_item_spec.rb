@@ -140,6 +140,7 @@ describe ExpenseItem do
       @payment.payment.completed.should == false
       @item.num_selected_items.should == 0
       @item.num_paid.should == 0
+      @item.total_amount_paid.should == 0
     end
 
     it "counts this entry as a selected_item when the payment is complete" do
@@ -148,6 +149,7 @@ describe ExpenseItem do
       pay.save!
       @item.num_selected_items.should == 1
       @item.num_paid.should == 1
+      @item.total_amount_paid.should == 9.99
     end
   end
 
@@ -159,7 +161,7 @@ describe ExpenseItem do
     it "can have a first item" do
       @re = FactoryGirl.build(:expense_item, :expense_group => @rg)
       @re.valid?.should == true
-    end 
+    end
 
     it "cannot have a second item" do
       @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
@@ -177,14 +179,14 @@ describe ExpenseItem do
     it "can have a first item" do
       @re = FactoryGirl.build(:expense_item, :expense_group => @rg)
       @re.valid?.should == true
-    end 
+    end
 
     it "cannot have a second item" do
       @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
       @rg.reload
       @re2 = FactoryGirl.build(:expense_item, :expense_group => @rg)
       @re2.valid?.should == false
-    end 
+    end
     describe "with a pre-existing registrant" do
       before(:each) do
         @reg = FactoryGirl.create(:competitor)
