@@ -1,59 +1,90 @@
-- Allow arbitrary URLs to be resolved by the tenants, to allow CNAME records
- - DNS changes, as well as Tenant Model/Elevator changes
- - Add a "primary domain" option, and ensure all URL-redirects go there.
-- add ability to easily recalculate multiple events?
-- update rails to 4.2
+Reorganized January 14, 2015.
+
+========================================================================================================================
+Features which the IUF would like added:
+- Translate the whole Front End,
+ - translate the volunteer options form
+ - translate the volunteer options form text fields
+ - Enable easier switching between language choices.
+ - Add translations for Spanish, French, German, Japanese
+- Translate the whole back-end
+ - translate into German, Spanish, French, Japanese
+- Build Wizards/Instructions design for allowing self-serve creation of a Convention
+ - Create pre-configured event types (100m, Marathon, etc) which can be chosen for inclusion in a convention
+ - Guide a user through the creation of a Convention
+- Be able to force competitors to have a valid IUF membership number in order to register for UNICON (or other Conventions)
+ - Be able to extract the base details from the IUF database when the user has entered their information.
+ - Be able to re-sync the data back into IUF database?
+- Improve the Track e-timer import process, so that it is less labor intensive, and less error prone
+ - Use the raw files, instead of the LIF files (JCountu?)
+ - Create a way for error-on-lif-import to prompt the user to map the field into a status (DNS, DNF, DQ, etc)?
+- Improve the Freestyle Judging Data entry, to allow easier management of judging by the Chief Judge
+ - Add the Judging Reference sheets to the system?
+ - Improve the ability to create judge accounts for people who don't have log-in accounts. (yet associate these accounts with their Registrants)
+- What overall awards are required to be calculated/posted for Unicon?
+
+========================================================================================================================
+Features which NAUCC would like added:
+- Use new Menubar system, to allow for better responsiveness at smaller screen sizes
+- make "best time" input force seconds (etc)
+ - Add much more logic into the 'best time' field to help it become useful information, to be used by the system for creating start-lists, etc
+- "upgrade" from non-competitor to competitor? ....some way for Admins...
+- PDF filenames should use the awards names for filenames.
+- Use a less-ugly looking randomizer for the pdf filename.
+- Allow DNF status, which shows the result, but marks them an DNF and doesn't take any places. (see Marathon results)
+- Add a count of compettitors to the sign up lists (public display)
+- Allow entering a penalty for Slow Races, which then subtracts a second for each penalty.
+- Re-Work the slow-race data entry (as per Scott).
+- Add ability to reset user's email password by admin-level people
+
+========================================================================================================================
+Bugs which Robin would like fixed:
 - fix sign-out function (due to changes in the js for the navbar)
 - Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.
+- Stop putting "Results" for people who are competitors but didn't race. (e.g. Slow Races ugh).
+- Fix the "Download Results" excel export. 1) too slow. 2) Doesn't work (excel download fail...like at unicon).
+- Time Results Edit should have penalties (WTF robin)
 
-- put a new menu in place which scales better/behaves better
+========================================================================================================================
+Features which Robin would like added:
+- update rails to 4.2 - Need to wait for globalize gem to be updated for rails 4.2.
 - remove regsitrant#blank status, since it's unused.
+- Add a per-competitor report
+- Only print the # of laps if it is fewer than the max # laps.
+- Subscribe to Results notifications, pay $ to subscribe?
+- Change the URL format for various pages, so that it's nicer/more descriptive (like using the bib number, or the event name?)
+
+========================================================================================================================
+Other Features:
+- Email reminder to people who haven't paid for their registrations yet.
+- Allow navigation forwards to a step which has already been completed.
+- display the "unpaid" and "access code" only in certain circumstances (on-site reg period)
+- "resume" prompt if you click on "new competitor" when one is already in progress.
+- describe the coupon on the summary page?
+
+========================================================================================================================
+Other Bugs:
 - Manage competition_wheel_size - not authorized.
 - on deletion of a registrant, don't send them to 'not authorized' page.
-- "Prices increase by $x in about 2 months" (add the amount it will increase) (do not display if price doesn't actually increase: ie non-comps at naucc2015)
-- Payments#summary page - Total $value received itemized.
- - Count: "#committed" paid (coupon or not), marked free (ie: admin-coupon)
-"Track Racing Wheel Size" -(not "Default")
-- If no "Override wheel size" options are selecetd, don't show the ability set them.
 
-- Email reminder to people who haven't paid for their registrations yet.
-- Make a Hamburger for Scott.
-
-- Report who has used a coupon code
-- Go through payments#report and update to show coupons better.
-- Allow navigation forwards to a step which has already been completed.
-- test/fix IE-compatibility
+========================================================================================================================
+Other Cleanup:
 - remove edit_registrant_path references
-- display the "unpaid" and "access code" only in certain circumstances (on-site reg period)
-- able to delete my own registartion?
-- make "best time" input force seconds (etc)
-- "resume" prompt if you click on "new competitor" when one is already in progress.
-- "upgrade" from non-competitor to competitor? ....some way for Admins...
- - Comp/non-comp. Spectator ...what can you do....make it non-hard-coded.
-- restart the wizard at the correct step if someone leaves early
-- don't allow element to be paid for while "incomplete"
-- do we need to deal with coupons persisting over period end?
-- describe the coupon on the summary page?
 - re-work the specs to use the default sidekiq queueing for test strategy (remove work-around)
+- Determine test coverage.
+- Update all booleans to not include nil (http://www.bignerdranch.com/blog/coding-rails-with-data-integrity/)
+- Run/resolve consistency_fail errors
 
-Last Re-Arranged June 20th, 2014.
 
-- Does the non-comp/spectator end up 'active'?
-- translate the volunteer options form
-- translate the volunteer options form text fields
+========================================================================================================================
+Other:
+- "Prices increase by $x in about 2 months" (add the amount it will increase) (do not display if price doesn't actually increase: ie non-comps at naucc2015)
+- change decsription of "default wheel size" to "Track Racing Wheel Size" -(not "Default")
+- test/fix IE-compatibility
 
-PDF filenames should use the awards names for filenames.
-Use a less-ugly looking randomizer for the pdf filename.
 
-Stop putting "Results" for people who are competitors but didn't race. (e.g. Slow Races ugh).
-
-Fix the "Download Results" excel export. 1) too slow. 2) Doesn't work (excel download fail...like at unicon).
-
-Create a way for error-on-lif-import to prompt the user to map the field into a status (DNS, DNF, DQ, etc)
-
-Determine test coverage.
-Add tests to increase coverage of features.
-
+========================================================================================================================
+========================================================================================================================
 Registrant Summary of results. Notes:
   per event:
 
@@ -68,27 +99,14 @@ Possibly store all published results 2x. Once with a TOD, once without any rando
 Add a "Republish" ability for admins (separate from the "Unpublish" ability).
 Does the registrant#summary show 10k standard, or only 10k?
 Competitors#index should have a "Delete all who have dropped"
-- Remove the changing of the judging rules in the migration (so that I can migrate naucc2013 up to current).
-- Multi-tenant architecture:
- - unireg: naucc2013 ( confirmed)
- - naucc2014: naucc2014
- - unicon2014: unicon2014
 
 what is uni-alpha? (same as 'unicycling', but with less (no) data)
 what is unicycling? (naucc2012 Standard Skill routine entry menu)
 
--- Update all booleans to not include nil (http://www.bignerdranch.com/blog/coding-rails-with-data-integrity/)
-- Run/resolve consistency_fail errors
-- Add a per-competitor report
-- Allow DNF status, which shows the result, but marks them an DNF and doesn't take any places. (see Marathon results)
-- Only print the # of laps if it is fewer than the max # laps.
-- Time REsults Edit should have penalties (WTF robin)
 - Allow specifying the precision of expected data input (thousands, or hundreds, and REQUIRE that many digits)
-- What overall awards are required to be calculated/posted for Unicon?
-- Change the URL format for various pages, so that it's nicer/more descriptive (like using the bib number, or the event name?)
-- Add a count of compettitors to the sign up lists (public display)
-- Allow entering a penalty for Slow Races, which then subtracts a second for each penalty.
-- Re-Work the slow-race data entry (as per Scott).
+ - This should help prevent some input mistakes
+
+
 - Why doesn't the artistic summary show the places? (make it print ordered by place, and then remove the top summary?)
 - De-emphasize the green-"other data entry" button, and also de-emphasize the brue "already scored" judging opetiosn.
 - Allow multi-delete of award labels
@@ -106,10 +124,7 @@ what is unicycling? (naucc2012 Standard Skill routine entry menu)
 - Fix RailsAdmin by dealing with DqRequest circular dependency?
 - Remove leading 0 in stillstand results. was hundreds, not thousands.
 
-Robin's Todo List tomorrow:
-- allow PDF upload of results.
-- Code Cyclocross (so that the # of heats is used for calculations)
-- Add ability to reset user's email password by admin-level people
+
 -
 
 - Heat/Lane auto-assignment takes >30 seconds with >300 competitors
