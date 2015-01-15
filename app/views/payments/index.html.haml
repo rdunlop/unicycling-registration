@@ -1,0 +1,38 @@
+%h1= t(".persons_payments", :registrant => @title_name )
+- unless @payments.empty?
+  %table.payments.alternate
+    %tr
+      %th Invoice Number
+      %th Amount
+      %th Details (txn/note)
+      %th Completed date
+      %th
+    - @payments.each do |payment|
+      %tr
+        %td= payment.id
+        %td= print_formatted_currency(payment.total_amount)
+        %td= payment.details
+        %td= payment.completed_date
+        %td
+          - if can? :read, payment
+            = link_to 'Show Details', payment
+%br
+- unless @refunds.empty?
+  %table.refunds.alternate
+    %tr
+      %th Refund Id
+      %th Refunded by
+      %th Refund Date
+      %th Details (note)
+      %th
+    - @refunds.each do |refund|
+      %tr
+        %td= refund.id
+        %td= refund.user
+        %td= refund.refund_date
+        %td= refund.note
+        %td
+          - if can? :read, refund
+            = link_to "Refund Details", refund
+%br
+= render partial: "/registrants/pay_now", :locals => {:total_owing => current_user.total_owing }

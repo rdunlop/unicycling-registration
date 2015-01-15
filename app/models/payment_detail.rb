@@ -46,6 +46,8 @@ class PaymentDetail < ActiveRecord::Base
   scope :free, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => true) }
   scope :refunded, -> { completed.where(refunded: true) }
 
+  scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: {payment_detail_id: nil } ) }
+
   def self.cache_set_field
     :expense_item_id
   end
@@ -103,8 +105,6 @@ class PaymentDetail < ActiveRecord::Base
       PaymentMailer.delay.coupon_used(self.id)
     end
   end
-
-  private
 
   def coupon_applied?
     payment_detail_coupon_code.present?

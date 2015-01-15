@@ -6,7 +6,7 @@ gem 'rails', '4.1.8'
 # Authentication
 gem 'devise'
 gem 'devise-async'
-gem 'cancancan', '~> 1.9'
+gem 'cancancan', '~> 1.10'
 gem 'rolify'
 
 # Output reports

@@ -1,59 +1,186 @@
-- Allow arbitrary URLs to be resolved by the tenants, to allow CNAME records
- - DNS changes, as well as Tenant Model/Elevator changes
- - Add a "primary domain" option, and ensure all URL-redirects go there.
-- add ability to easily recalculate multiple events?
-- Handle issue when a tenant doesn't exist, but attempts browse
-- update rails to 4.2
+Reorganized January 14, 2015.
+
+========================================================================================================================
+Features which the IUF would like added:
+- Translate the whole Front End,
+ - translate the volunteer options form
+ - translate the volunteer options form text fields
+ - Enable easier switching between language choices.
+ - Add translations for Spanish, French, German, Japanese
+- Translate the whole back-end
+ - translate into German, Spanish, French, Japanese
+- Build Wizards/Instructions design for allowing self-serve creation of a Convention
+ - Create pre-configured event types (100m, Marathon, etc) which can be chosen for inclusion in a convention
+ - Guide a user through the creation of a Convention
+- Be able to force competitors to have a valid IUF membership number in order to register for UNICON (or other Conventions)
+ - Be able to extract the base details from the IUF database when the user has entered their information.
+ - Be able to re-sync the data back into IUF database?
+- Improve the Track e-timer import process, so that it is less labor intensive, and less error prone
+ - Use the raw files, instead of the LIF files (JCountu?)
+ - Create a way for error-on-lif-import to prompt the user to map the field into a status (DNS, DNF, DQ, etc)?
+- Importing results without a lane, nor a DQ, crashes the system (see Heat 13 Race 48)
+- Improve the Track day data recording so that NO data has to be deleted. Perhaps mark them as "Confirmed" in order to track the agreement between judges+timers.
+- Allow the "Track" importer the "ability" to Accept the results for the LIF import.
+- Better handle malformed LIF data from the track timer people. (without status, what should I do?)
+
+- Improve the Freestyle Judging Data entry, to allow easier management of judging by the Chief Judge
+ - Add the Judging Reference sheets to the system?
+ - Improve the ability to create judge accounts for people who don't have log-in accounts. (yet associate these accounts with their Registrants)
+- What overall awards are required to be calculated/posted for Unicon?
+- Change "add Attempt" to "Enter Attempt"
+- Trials Finals Candidates listed twice (see backup file july31Midnight.dump)
+- When entering one-attempt data, it doesn't keep it in "entered order" when refreshing the page. (Patricia)
+- Allow directors to use the Heats menus
+- Allow Excel import of data for Timing. (like export the Two Attepmt entry document.) (same with bottom of the hill "Single attempt")
+- Create "Emergency Contact Info" report PDF which we print for having on-site at each of the competitions.
+ - ID, Name, Gender, Age, Phone, Club, Country, Emergency Contact, Name, Phone, Attending?
+- Import Heat#s (id,heat#)
+ - Matching Export function?
+- need a way to be able to add a payment item to a registrant (as a payment_admin, onsite).
+- Can we have the onsite people approve the things that they can buy?
+ - Unicon: benoit/hugo want to be able to calc prices(incl tax) easily, but also control who can buy what.
+
+========================================================================================================================
+Features which NAUCC would like added:
+- Use new Menubar system, to allow for better responsiveness at smaller screen sizes
+- make "best time" input force seconds (etc)
+ - Add much more logic into the 'best time' field to help it become useful information, to be used by the system for creating start-lists, etc
+- "upgrade" from non-competitor to competitor? ....some way for Admins...
+- PDF filenames should use the awards names for filenames.
+- Use a less-ugly looking randomizer for the pdf filename.
+- Allow DNF status, which shows the result, but marks them an DNF and doesn't take any places. (see Marathon results)
+- Add a count of compettitors to the sign up lists (public display)
+- Allow entering a penalty for Slow Races, which then subtracts a second for each penalty.
+- Re-Work the slow-race data entry (as per Scott).
+- Add ability to reset user's email password by admin-level people
+- UI for using the "International (Ineligible)" selection for registrants.
+- Include a Report which shows the way that experts are positioned on the track
+- Competitors#index should have a "Delete all who have dropped"
+- Allow specifying the precision of expected data input (thousands, or hundreds, and REQUIRE that many digits)
+ - This should help prevent some input mistakes
+- allow marking a registrant as DNF (or some way of making that clearer when doing data entry of single-data results)
+- Add a page which lists the High/Long result which require tie breaks (top 3 places which are tie, by age group results)
+- Make the music file download as a zip file, or folder file thing.
+ - and rename the files so that they are in competitor order. (by file sorted order)
+- Printing/entry of the Heat Data (gear/crank) is sorted incorrectly where there are heat times also).
+- If I change a TimeResult from DQ to not-DQ, it doesn't cause the competitor to be updated/touched.
+- Allow DNS, DNF
+- Fix the "Display Candidates -> create heat" to allow un-selecting peoplo for the heat (male and female heat separately)
+- For Trials Finals, put the Expert Male and Expert Female separately, with a small heading in front of each.
+- When doing MUNI data entry, it should easily allow changing the result to be "this competition" instead of auto-adding to another event. Perhaps make the auto-select-event a feature flag?
+- Feedback from Chris Hugo, The "Manage Competitors" button is not clearly the next action I need to do.
+ - make it more obvious.
+
+========================================================================================================================
+Bugs which Robin would like fixed:
 - fix sign-out function (due to changes in the js for the navbar)
 - Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.
+- Stop putting "Results" for people who are competitors but didn't race. (e.g. Slow Races ugh).
+- Fix the "Download Results" excel export. 1) too slow. 2) Doesn't work (excel download fail...like at unicon).
+- Time Results Edit should have penalties (WTF robin)
+- What happens if a competitor has no members? (do the pages display? do the calculations die?)
+- Import Data without a Heat/Lane should show a nice error message
+ - With a link to the Heat/lane data for lookup
+- Caching on the Registrant#summary is broken, it doesn't notice changes to the competitor (only changes to the member).
+- When a registrant loads the /edit page, and they get an error on submit, frequently they get another "event choice has already been taken" error when the subsequently try saving.
+- Really Really slow Heat assignment
+- Slow Lane Assign updating (because of the re-display, not because of the update itself?)
+- Unable to use the export functions (doesn't like transferring that much data over the response?)
+- auto-trim the first/last names (pre and post spaces)
+- If a competitor is marked as "not qualiified" AFTEr having been scored for freestyle, they should NOT appear in the ranked results. (see Pairs Freestyle NAUCC)
+- able to crash the system (dos attack) by attempting to approve only the Start Times.
+- If a Fininsh timei s DQ, and a start is not, it says "Unknown" (fix this).
+- Lauren Atkinson Long Jump label, didn't fit on the label.
+BUG- I can crash the system by trying to re-sort the age groups for Track (because it doesn't have a position?)
+BUG: - Why can't I print James Richardson's Cyclocross medal (it splits into 2 pages)
+BUG- printing from connie's firefox doesn't work very well (Pdf)
+- Competitor List for Artistic Group/Club should not list the competitors...it's way too long.
+BUG: Previewing results to be posted is WAY too slow. (timeout 1/2 the time)
+- BUG: if the competitor DQs and re-runs, both results are marked as DQ for some reason. (Lucas Clegg)
+- Edit COmptetitor didn't change the name of the competitor.
+- When doing an import Lif without choosing a file, it fails.
+- fix competitor-advanced-add to work well with chosen-rails
 
-- put a new menu in place which scales better/behaves better
+========================================================================================================================
+Features which Robin would like added:
+- update rails to 4.2 - Need to wait for globalize gem to be updated for rails 4.2.
 - remove regsitrant#blank status, since it's unused.
+- Add a per-competitor report
+- Only print the # of laps if it is fewer than the max # laps.
+- Subscribe to Results notifications, pay $ to subscribe?
+- Change the URL format for various pages, so that it's nicer/more descriptive (like using the bib number, or the event name?)
+- Put "DQ" after all of the places on the results printouts
+- Show the price rates/dates even on non-signed-in page?
+- De-emphasize the green-"other data entry" button, and also de-emphasize the brue "already scored" judging opetiosn.
+- Allow multi-delete of award labels
+- Fix the header/grouping on the PDFs for headers.
+- Fix the "Source from Competition" when doing Group competitions...it doesn't allow creation of groups (only indiduals)
+- Add the times to the relay results printouts (age group specific)
+- figure out how to let the IUF slalom results (555 results) be imported in < 30 seconds, and be scored in < 30 seconds. (really really long).
+- Disallow setting a val_1_max > 99, as it doesn't work in the database storage (exception when trying to store score of 100). Or expand the range of the score value fields.
+- Fix RailsAdmin by dealing with DqRequest circular dependency?
+- Remove leading 0 in stillstand results. was hundreds, not thousands.
+- Heat/Lane auto-assignment takes >30 seconds with >300 competitors
+- Prevent the "set age groups results" from re-loading the page (it's slow)
+- Add Heat divisions between each Heat, and also add page-breaks between each Heat.
+- Add Repeating Headers on all PDF pages.
+- Improve the ability to see the history of a registrant modification.
+- Prevent people from changing their name/address, so that people can't "Sell" their early registrations?s
+- Add a quick-access menu for Registrant/Edit
+- Rename CompetitonWheelSize to EventWheelSizeOverride?
+- The name of the competitoin for "800m Expert" is missing on Results page
+- Configurable: Allow Hugo's Rules for High/Long....use a warning if they choose to move on without completing.
+- Create an Excel export for heat Number management by Directros (bib, heat, age, age group, event sign up details)
+- Create Excel import of the above file.
+- Cache the age group entry in the competitor (and update it as necessary)
+- Feature: print a cover page for Artistic Results?
+- For High/Long, have a second data recorder, for helping? or another recording device for showing the competitors their results.
+ - E.g. An iPad showing the last 4 attempts, automatically updating.
+
+========================================================================================================================
+Other Features:
+- Email reminder to people who haven't paid for their registrations yet.
+- Allow navigation forwards to a step which has already been completed.
+- display the "unpaid" and "access code" only in certain circumstances (on-site reg period)
+- "resume" prompt if you click on "new competitor" when one is already in progress.
+- describe the coupon on the summary page?
+- Add a "Republish" ability for admins (separate from the "Unpublish" ability).
+- Why doesn't the artistic summary show the places? (make it print ordered by place, and then remove the top summary?)
+- Add HighlightIfDuplicate to the StreetScore judging page. (for ties)
+- make hours and minutes and seconds line up properly. (so that 1 hour (without miliseconds) and minutes (with miliseconds) show up more clearly.
+- make the "Mark as inactive" clearer for admin users, when managing Freestyle competitors, so that we don't "delete" competitors after they have started judging (for clarity).
+- "Delete all registrants who have dropped this competition" button, or multi-delete?
+- Have a "Data Checking" station, which allows looking at results for High/Long as they are being run?
+- Have a "View Results" button for each competitor's results?
+- Shade out a competitor who has results when they cannot have more results (like High/Long when double-faulted, or External Results?)
+- Improve the performance of the competitors#index page, based on newrelic performance. (add caching?)
+- Accept leading zeros for iD numbers field.
+
+========================================================================================================================
+Other Bugs:
 - Manage competition_wheel_size - not authorized.
 - on deletion of a registrant, don't send them to 'not authorized' page.
-- "Prices increase by $x in about 2 months" (add the amount it will increase) (do not display if price doesn't actually increase: ie non-comps at naucc2015)
-- Payments#summary page - Total $value received itemized.
- - Count: "#committed" paid (coupon or not), marked free (ie: admin-coupon)
-"Track Racing Wheel Size" -(not "Default")
-- If no "Override wheel size" options are selecetd, don't show the ability set them.
+- able to crash the system (dos attack) by attempting to approve only the Start Times.
 
-- Email reminder to people who haven't paid for their registrations yet.
-- Make a Hamburger for Scott.
-
-- Report who has used a coupon code
-- Go through payments#report and update to show coupons better.
-- Allow navigation forwards to a step which has already been completed.
-- test/fix IE-compatibility
+========================================================================================================================
+Other Cleanup:
 - remove edit_registrant_path references
-- display the "unpaid" and "access code" only in certain circumstances (on-site reg period)
-- able to delete my own registartion?
-- make "best time" input force seconds (etc)
-- "resume" prompt if you click on "new competitor" when one is already in progress.
-- "upgrade" from non-competitor to competitor? ....some way for Admins...
- - Comp/non-comp. Spectator ...what can you do....make it non-hard-coded.
-- restart the wizard at the correct step if someone leaves early
-- don't allow element to be paid for while "incomplete"
-- do we need to deal with coupons persisting over period end?
-- describe the coupon on the summary page?
 - re-work the specs to use the default sidekiq queueing for test strategy (remove work-around)
+- Determine test coverage.
+- Update all booleans to not include nil (http://www.bignerdranch.com/blog/coding-rails-with-data-integrity/)
+- Run/resolve consistency_fail errors
 
-Last Re-Arranged June 20th, 2014.
 
-- Does the non-comp/spectator end up 'active'?
-- translate the volunteer options form
-- translate the volunteer options form text fields
+========================================================================================================================
+Other:
+- "Prices increase by $x in about 2 months" (add the amount it will increase) (do not display if price doesn't actually increase: ie non-comps at naucc2015)
+- change decsription of "default wheel size" to "Track Racing Wheel Size" -(not "Default")
+- test/fix IE-compatibility
+- allow modification of the selected registrant when doing "Edit" of imported results...so that we can adjust it while doing "import somewhere else" imports. (like Muni XC)
 
-PDF filenames should use the awards names for filenames.
-Use a less-ugly looking randomizer for the pdf filename.
 
-Stop putting "Results" for people who are competitors but didn't race. (e.g. Slow Races ugh).
-
-Fix the "Download Results" excel export. 1) too slow. 2) Doesn't work (excel download fail...like at unicon).
-
-Create a way for error-on-lif-import to prompt the user to map the field into a status (DNS, DNF, DQ, etc)
-
-Determine test coverage.
-Add tests to increase coverage of features.
+========================================================================================================================
+Other Notes:
 
 Registrant Summary of results. Notes:
   per event:
@@ -66,55 +193,11 @@ Registrant Summary of results. Notes:
 
 Possibly store all published results 2x. Once with a TOD, once without any random characters (just "Trials_results.pdf"). This way, any sharing of the link will be to the same-named file at all times
  - Additionally, we are able to keep around all previously published results, for reference by admins, if desired/needed.
-Add a "Republish" ability for admins (separate from the "Unpublish" ability).
-Does the registrant#summary show 10k standard, or only 10k?
-Competitors#index should have a "Delete all who have dropped"
-- Remove the changing of the judging rules in the migration (so that I can migrate naucc2013 up to current).
-- Multi-tenant architecture:
- - unireg: naucc2013 ( confirmed)
- - naucc2014: naucc2014
- - unicon2014: unicon2014
 
 what is uni-alpha? (same as 'unicycling', but with less (no) data)
 what is unicycling? (naucc2012 Standard Skill routine entry menu)
-
--- Update all booleans to not include nil (http://www.bignerdranch.com/blog/coding-rails-with-data-integrity/)
-- Run/resolve consistency_fail errors
-- Add a per-competitor report
-- Allow DNF status, which shows the result, but marks them an DNF and doesn't take any places. (see Marathon results)
-- Only print the # of laps if it is fewer than the max # laps.
-- Time REsults Edit should have penalties (WTF robin)
-- Allow specifying the precision of expected data input (thousands, or hundreds, and REQUIRE that many digits)
-- What overall awards are required to be calculated/posted for Unicon?
-- Change the URL format for various pages, so that it's nicer/more descriptive (like using the bib number, or the event name?)
-- Add a count of compettitors to the sign up lists (public display)
-- Allow entering a penalty for Slow Races, which then subtracts a second for each penalty.
-- Re-Work the slow-race data entry (as per Scott).
-- Why doesn't the artistic summary show the places? (make it print ordered by place, and then remove the top summary?)
-- De-emphasize the green-"other data entry" button, and also de-emphasize the brue "already scored" judging opetiosn.
-- Allow multi-delete of award labels
-- Fix the header/grouping on the PDFs for headers.
-- Fix the "Source from Competition" when doing Group competitions...it doesn't allow creation of groups (only indiduals)
-- Add the times to the relay results printouts (age group specific)
-- Improve the Track day data recording so that NO data has to be deleted. Perhaps mark them as "Confirmed" in order to track the agreement between judges+timers.
-- Allow the "Track" importer the "ability" to Accept the results for the LIF import.
-- Better handle malformed LIF data from the track timer people. (without status, what should I do?)
-- allow marking a registrant as DNF (or some way of making that clearer when doing data entry of single-data results)
-- figure out how to let the IUF slalom results (555 results) be imported in < 30 seconds, and be scored in < 30 seconds. (really really long).
-- Disallow setting a val_1_max > 99, as it doesn't work in the database storage (exception when trying to store score of 100). Or expand the range of the score value fields.
-- allow modification of the selected registrant when doing "Edit" of imported results...so that we can adjust it while doing "import somewhere else" imports. (like Muni XC)
-- Add HighlightIfDuplicate to the StreetScore judging page. (for ties)
-- Fix RailsAdmin by dealing with DqRequest circular dependency?
-- Remove leading 0 in stillstand results. was hundreds, not thousands.
-
-Robin's Todo List tomorrow:
-- allow PDF upload of results.
-- Code Cyclocross (so that the # of heats is used for calculations)
-- Add ability to reset user's email password by admin-level people
--
-
-- Heat/Lane auto-assignment takes >30 seconds with >300 competitors
-- Add a page which lists the High/Long result which require tie breaks (top 3 places which are tie, by age group results)
+========================================================================================================================
+========================================================================================================================
 - Add a rulebook rule for how to cut off the ends of High/Long competition (you are allowed to jump...forever?)
 - add recommendations for how to schedule an event, including awarding younger riders' awards earlier, and not performing awards the same evening as an event.
 - add recommendation for scheduling event to include always having water stations, clearly labeled bathrooms, and announcing medical services are available, where.
@@ -126,96 +209,35 @@ Robin's Todo List tomorrow:
     t.integer  "riding_crank_size" into a separate table, has_one relationship
 - How did Mimi import results as Robin?
  - prevent additions/modifications after the event is locked, ?even by Robin?
-- Make the music file download as a zip file, or folder file thing.
- - and rename the files so that they are in competitor order. (by file sorted order)
-- make hours and minutes and seconds line up properly. (so that 1 hour (without miliseconds) and minutes (with miliseconds) show up more clearly.
-- make the "Mark as inactive" clearer for admin users, when managing Freestyle competitors, so that we don't "delete" competitors after they have started judging (for clarity).
-- "Delete all registrants who have dropped this competition" button, or multi-delete?
 - Eliminate the ImportResults, replace it with a boolean "tentative" flag?
-- Add ability to upload arbitrary PDF results for a competition (for example: Flatland Results)
-- Have a "Data Checking" station, which allows looking at results for High/Long as they are being run?
-- Have a "View Results" button for each competitor's results?
-- Shade out a competitor who has results when they cannot have more results (like High/Long when double-faulted, or External Results?)
--
-
 - Sort the labels to be printed in a stable order 9so that they match the announcer form?)
 - Allow administrators to reset passwords on user accounts.
-- If there are people without a 2nd muni event, get their chip returned.
 - Better scoring display, so that it displays/removes columns as necessary.
 - falls count judging,
  - number of competitors in each group.
 Feature:
-- Undo the changes to the Judge Type, so that we can migrate the NAUCC database?
 - # results for High/Long judges should show the number of unique competitors each judge has entered? (right now it's 0)
 - Make the UI of the High/Long data entry more usable.
-- Change "add Attempt" to "Enter Attempt"
 
 Track day to-do:
 - make the results text smaller (fewer printed sheets)
 - Ensure that Multiple Heat#1 doesn't break the importer.
 - combine the DQ with the data-DQ, so that only a single row appears. (or allow multiple rows to exist?)
 - Disable the "next heat is in...<category>" function.
-- Ensure that the results-caching files work
-- Get a test file from the timers which has DNS/DNF/etc
 - create role for importing the data?
 - create role for teh ipads?
 - Recalculating the results is too long (difficult to take the system down that long)
 - When the importer chooses to "restart", only THEIR results should be deleted. (we delete the line-judge's results too...oops).
 
-- Prevent the "set age groups results" from re-loading the page (it's slow)
 
-BUG:
-- Printing/entry of the Heat Data (gear/crank) is sorted incorrectly where there are heat times also).
-- If I change a TimeResult from DQ to not-DQ, it doesn't cause the competitor to be updated/touched.
-- Allow DNS, DNF
-- Fix the "Display Candidates -> create heat" to allow un-selecting peoplo for the heat (male and female heat separately)
-
-- Add tests to increase coverage, for both functional, and unit tests.
-
-
-BUG:
-- Importing results without a lane, nor a DQ, crashes the system (see Heat 13 Race 48)
-- Trials Finals Candidates listed twice (see backup file july31Midnight.dump)
-- When entering one-attempt data, it doesn't keep it in "entered order" when refreshing the page. (Patricia)
-- Allow directors to use the Heats menus
-
-Request:
-- For Trials Finals, put the Expert Male and Expert Female separately, with a small heading in front of each.
-
-Request:
-- Add Heat divisions between each Heat, and also add page-breaks between each Heat.
-- Add Repeating Headers on all PDF pages.
 BUGS:
-- Caching on the Registrant#summary is broken, it doesn't notice changes to the competitor (only changes to the member).
-- When a registrant loads the /edit page, and they get an error on submit, frequently they get another "event choice has already been taken" error when the subsequently try saving.
-- Really Really slow Heat assignment
-- Slow Lane Assign updating (because of the re-display, not because of the update itself?)
-- Unable to use the export functions (doesn't like transferring that much data over the response?)
-- auto-trim the first/last names (pre and post spaces)
-
 - Should force each competitor to choose their t-shirt size OR choose not to have a t-shirt.
 - Should force the format of the Best Times to be specific, per event (so that some events are minutes, or seconds, or hours)
 
-- Prevent navigating away from a form after it has been changed (ie: adding/removing events without saving it).
-- Improve the ability to see the history of a registrant modification.
-
-- Prevent people from changing their name/address, so that people can't "Sell" their early registrations?s
-- Add a quick-access menu for Registrant/Edit
 - Eliminate the :expires_in from songs.
-
-Questions
-=========
-- Awards Sheets (to be given with the medals)
- - Business Cardstock? Cardstock+cutter?
- - What order to run track heats ? (based on when the finals are)
-- MUni 30 males qualified...what if there are people who don't show up...we don't give 31st a place, do we?
-- 100m Experts, same question
 
 ========
 - Allow Competition Wheel Size Overrides to be set, even when first creating a competitor (it doesn't have a record to do this on, initially).
-- Rename CompetitonWheelSize to EventWheelSizeOverride?
-
-BUG: able to crash the system (dos attack) by attempting to approve only the Start Times.
 
 - OnSite Registration/Payments.
  - What can people buy? how do we manage that?
@@ -227,28 +249,13 @@ BUG: able to crash the system (dos attack) by attempting to approve only the Sta
 
 - Show a message on the EDIT page if they are confirmed in a different competition within the event.
 
-BUG:
-- The name of the competitoin for "800m Expert" is missing on Results page
-
-TO DO:
-- Allow Hugo's Rules for High/Long....use a warning if they choose to move on without completing.
-
-
-- Create an Excel export for heat Number management by Directros (bib, heat, age, age group, event sign up details)
-- Create Excel import of the above file.
-
-
-Need to allow Hours minutes seconds, for Two Attempt Entry.
-
-- Allow Excel import of data for Timing. (like export the Two Attepmt entry document.) (same with bottom of the hill "Single attempt")
+- Need to allow Hours minutes seconds, for Two Attempt Entry.
 
 
 BUGS:
 - Deleting the last member of a competitor doesn't delete the competitor.
 - There is some scenario causing orphaned members to exist (no associated competitor)
 - Direcotr is not authorized to Enter/Modify Results, even though they see the link (Gossi)
-
-- 10k has a rule which allows people to complete only 3 laps, and get a time, and place lower than those who have 4 laps. (how do we do this in data?)
 
 - Slopestyle Street:
 5 judges, each judge scores the competitor by:
@@ -258,108 +265,47 @@ BUGS:
 A super-judge by Time:
  - Time (/5, fastest=5, slowest=0)
 
-
-- If Eli fails to jump 10, he should not be able to jump 15 or fail jump 15.
--
-
-- Improve the performance of the competitors#index page, based on newrelic performance. (add caching?)
-
-- Create "Emergency Contact Info" report PDF which we print for having on-site at each of the competitions.
- - ID, Name, Gender, Age, Phone, Club, Country, Emergency Contact, Name, Phone, Attending?
 - Adjust marking of "dropped" to handle changing-the-chosen-event-category
-
-- Import Heat#s (id,heat#)
- - Matching Export function?
-
-
-- Onsite reg for marathon is allowed
-- Onsite reg for Muni is allowed, but you need to pay for MUni bus ticket yourself.
-- need a way to be able to add a payment item to a registrant (as a payment_admin, onsite).
-
-
-- Add ability to list the people who have bought items (total list, after +/- refunds)
-- Configure Age Groups for UNICON (10k, Muni)
- - Do I need to change the uniqueness check on Age Gorup ENtry to scope over the gender also? (compare age group descriptions against NAUCC, to see if gender should be in the description field)
-
 - Disable the "auto-matching to another competition" feature. Make this ONLY available for 10k.
-- E-mail to the track timing guys.
 - Allow importing system to automatically change/choose the competition (based on lane-assignments)
 - Display Scores should show the Combinedcompetition scores page (more details than just place)
 - Create a new Falls-
 
-
-
 - Patricia Feature: Competitior Management Page, there is still a red warning if their partner isn't signed up for that competition which makes it unclear whether the person isn't signed up at all or if they are just in another age group. Robin: Make it clearer when a registrant is in a different filter vs when they are in this pairs-age-group.
 
-- If a competitor is marked as "not qualiified" AFTEr having been scored for freestyle, they should NOT appear in the ranked results. (see Pairs Freestyle NAUCC)
-
-- Can we have the onsite people approve the things that they can buy?
- - Unicon: benoit/hugo want to be able to calc prices(incl tax) easily, but also control who can buy what.
-
-- Cache the age group entry in the competitor (and update it as necessary)
-BUG: able to crash the system (dos attack) by attempting to approve only the Start Times.
-
-Feature: - Allow mulitple "published results" to be printed, so that we can re-publish without having to un-publish first, and also see our copies of published results.
 - Remove all Boundary Score calculation logic, replace it with a new judge type, which affects "Presentation" Judge-type display.
 - Hugo: we need to e-mail all <10 age people to have them tell us what size of wheel they plan on riding in the track and muni and distance events.
 - Q: How are "Notes" for a score entered? displayed?
-Feature - When doing MUNI data entry, it should easily allow changing the result to be "this competition" instead of auto-adding to another event. Perhaps make the auto-select-event a feature flag?
-- Accept leading zeros for iD numbers field.
 - TwoAttempEntry, should require thousands in both T1 and T2, does it?
 - Eliminate the difference between Proof and Review. (these two pages are very similar)
-- If a Fininsh timei s DQ, and a start is not, it says "Unknown" (fix this).
 - Can we Run High/Long by age group, so that we can keep the distance at a long thing, and
-- Feature: print a cover page for Artistic Results?
 - Allow Admin to be able to edit imported scores.
 - Have a way to enter "Hours" for start time/finish times.
 BUG- Unable to enter external Result with a DQ (the "not qualifieD" of the Competitor doesn't seem to take effect over the external result
 BUG- how can I manage ALL distance attempts (to edit/delete) to fix problems with the data?
-- For High/Long, have a second data recorder, for helping? or another recording device for showing the competitors their results.
-- Mass Start Sign-in list should include blank lines for people who are not signed up.(10)
 
-- Ask Benoit/HUgo to rent hotspots for us also.
+- Mass Start Sign-in list should include blank lines for people who are not signed up.(10)
 - needa bility to select and delete multiple entries from the awards labels page.
-- Lauren Atkinson Long Jump label, didn't fit on the label.
 - Idea: make it not allowed to put a DQ for a higher attempt without first marking sccess at the present level.
-BUG- I can crash the system by trying to re-sort the age groups for Track (because it doesn't have a position?)
-BUG: - Why can't I print James Richardson's Cyclocross medal (it splits into 2 pages)
-BUG- printing from connie's firefox doesn't work very well (Pdf)
-- Competitor List for Artistic Group/Club should not list the competitors...it's way too long.
-DONE- Print Candido Santiago 1st place Basketball medal, give to Jim Sowers.
-BUG: Previewing results to be posted is WAY too slow. (timeout 1/2 the time)
+
 - The awards are still printing a little off the labels at times
 - In the 50m WW, why doesn't a 20" able to compete? Is it the size of the cranks.
 - When doing data entry, show results from other importers...without the ability to edit them?
-- warn if data entered in a form when pressing "Back" button.
 - make the Katie page auto-updating?
 - Don't allow another import to overwrite an existing TimeResult.
 - Make an easier way for the "Ready to be published" to be known.
 - Wheel Walk results show doesn't Experts vs not, in order to be able to differenciate.
   - Also decide whether Experts should be 1 or 2 (m/f) competitions.
-- BUG: if the competitor DQs and re-runs, both results are marked as DQ for some reason. (Lucas Clegg)
 - Result sshould should the best-times-qualifying for 800m Experts.
-- Edit COmptetitor didn't change the name of the competitor.
-- When doing an import Lif without choosing a file, it fails.
+
 - allow directors to set competitor heat/etc.
 - Make Changes for LaneAssignment
-- Natalie to do importing?
-Done- PDF button for AgeGroup
-ConfirmedDone - Order Age Group display by position order?
-Done- "Cancel and delete" button
 - make the default download PDF filename more relevant, for awards-printer-person.
-
-- Feedback from Chris Hugo, The "Manage Competitors" button is not clearly the next action I need to do.
- - make it more obvious.
 
 - add blank lines at the end of the sign-in-sheets.
 - Add ability to enter 10k results, to the right categories.
-DONE- Add Expert to the Results PDF
 - Also have a way to do "Ungeared"
   - The medal will say "Ungeared Male" instead of "Expert Male"
-Done - Rename "Expert Labels" to "Download Labels"
-Done - No 4th/5th places.
-- Make an account for Kirsten which
-Done- Make the Award Competition chooser alphabetical and chosen-rails
 - Make Judge-account-creation easier
 - When randomly-sorting, it should return to the same page
 - Upgrade the JudgeType descriptions for the new rules
@@ -371,34 +317,10 @@ Done- Make the Award Competition chooser alphabetical and chosen-rails
 - On the Judge Management page, the Tech/Pres categories should be ordered (not swap sides randomly)
 - Make the Judges-chooser alphabetical, and Chosen.
 
-- fix competitor-advanced-add to work well with chosen-rails
 - better way to do in-place sorting than the current age-group-type sorting.
 - Should I move the location of the ID# on the registration form?
 - Marathon data entry should be Hours, minutes, seconds? (instead of min/sec/thou)
 - Firefox sortable doesn't sort as well (see data-entry menu when dates are crossing a month boundary)
-- Add a one-time code for all registration forms, so that people can get into their registration form easily.
- -
-- Does TimeTrial have Standard and Unlimited Classes?
- -No, only unlimited.
-- Does every distance event have a Standard class?
- -
-- Or does "Overall Distance Champion" only apply to the Unlimited class?
- - yes, for now, only unlimited
-
-WIFI:
-- CHange all access points to be the same key/password/name?
-
-
-- Is a competitor required to race in all of the distance events on the same size of wheel?
- - No, they can use any wheel size they want.
-- Is a competitor required to participate in Distance events on the same size of wheel as in the track? (for 0-10 age, for exxample)
- - no
-- Need to re-sort the age groups for Track.
-
-- Josh(timer) needs certain lists.
-
-- Music upload should restrict file extensions to mp3/m4a,....
- - should require at least 0.3 Mb?
 
 - USA membershp page, allow easy adding/editing of USA# to a reg.
 - Allow easy way to export the list of e-mails of those who remain.
@@ -411,14 +333,11 @@ Jim:
 - When registering, invalid Country says "2 errors" when there is only 1
 
 Kathleen notes:
-Done- need to see what age/age-group each person is assigned.
- Done- Need to have Gender also.
  - Filters for Heat/age-group (filter before-and-after Heat # X)
  Done- Put the Heat/Lane/ID/Name/age/age-group/Gender, (because it doesn't need to be sorted by ID)
  - When re-sorting, some of the data goes away.
  - color-code filled-heats.
   - Use a "show Heat X and above text-area"
- Done- Condense the display, put the Forms on the Left, and the data on the right.
  - "Is tehre a way to put a Line between each Heat?"
   - Perhaps remove all of the sortability, and only make it prettier, using dark-lines between heats.
 
@@ -464,27 +383,7 @@ Done- need to see what age/age-group each person is assigned.
 - Patricia - Will there be a judge of "Falls" for "Group/Club"?
  -  "Major and Minor faults are counted by 2 people and averaged, and then those scores are used by all of the judegs.""
 
-- Benoit/Scott/Patricia - do you see value in allowing UDA to show the Competitor List for each event.
- - Yes, do expose this to the public. Id, name, age-group, country, state, team.
-- Hugo/Benoit -  Relay, does 4x100 compete by wheel-size /age group, or against everyone?
-- Hugo/Benoit/Ptricia - What "Overall Champions" do you want at NAUCC/UNICON, and what calculation would you like used for this? (the rulebook only lists Track)
-- Patricia/NAUCC-director: Patricia: what is the NAUCC rules for Trials? Hand-vs-not-hands? (how are points calculated?)
-- Patricia, Mary, do you have a summary of the awards that you are expecting to give out?
-
-- Mary, when are we printing the registartion sheets?
- - We want this done by Thursday night. Robin will e-mail people.
-
-- Spencer Hotchberg - director of Flatland, please check with him for the scoring/needs of his event, for “Double elimination”.
- - What e-scoring do you want/need?
-
-- Scott, I have some comments/questions about the IUF Rulebook, can I send them your way?
 - Scott/Hugo/benoit - UNICON rule: Scott, can we add a rule to Trials for tie-breakers, so that we know that people need to be present for tie-breaking.
-
-- Hugo/Benoit: What have you allocated for Awards? Can you send me a breakdown? Will it be medals? what size? for which places for which event? Are you giving out ribbons for Basketball/Hockey B-League? etc etc
-
-- Hugo/Benoit (or the specific Director) - What is X-Style, judging-related.
-- Hugo/Benoit: how are you recording Slow Races? Do you have E-Timer for that?
-- Hugo/Benoit - Are they running Standard Skill without Data?
 
 ================================================================================================
 ===== Development Items that MUST be done before we do another run-through/demo
@@ -666,10 +565,6 @@ ADMIN Config-Watching View:
 ====== Other (not necessary in any way)
 
 ==== High Impact & Low Effort
-- UI for using the "International (Ineligible)" selection for registrants.
-- Put "DQ" after all of the places on the results printouts
-- Show the price rates/dates even on non-signed-in page?
-- Include a Report which shows the way that experts are positioned on the track
 NEED To make the registration deadlines clear.
 - Exiting with a balance due, cause a popup?
 - Possibly use "stripe" for the creditcard vendor.
@@ -782,25 +677,3 @@ When an error occurs, put the focus on the first box that is missing.
 The error shouldn’t “or rank” because it doesn’t exist here
 Don’t allow tab to the competition rulebook.
 When there is double-entry it should be highlighted.
-
-======================================================================================================================
-======================================================================================================================
-======================================================================================================================
-======================================================================================================================
-======================================================================================================================
-======================================================================================================================
-
-
-
-========================================================================================================================
-TESTING:
-- What happens if a competitor has no members? (do the pages display? do the calculations die?)
-- Import Data without a Heat/Lane should show a nice error message
- - With a link to the Heat/lane data for lookup
-
-========================================================================================================================
-RULEBOOK
-- Opensource the Rulebook software
- - address some of the rulebook software issues (See Jan23 E-mail)
-
-========================================================================================================================

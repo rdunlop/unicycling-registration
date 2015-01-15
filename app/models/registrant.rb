@@ -198,6 +198,10 @@ class Registrant < ActiveRecord::Base
     where.not(registrant_type: 'competitor')
   end
 
+  def self.spectator
+    where(registrant_type: 'spectator')
+  end
+
   # uses the CachedSetModel feature to give a key for this registrant's competitors
   def members_cache_key
     Member.cache_key_for_set(id)
