@@ -23,13 +23,18 @@ class EventsController < ApplicationController
     @num_male_competitors = Registrant.active.competitor.where({:gender => "Male"}).count
     @num_female_competitors = Registrant.active.competitor.where({:gender => "Female"}).count
     @num_competitors = @num_male_competitors + @num_female_competitors
+
     @num_male_noncompetitors = Registrant.active.notcompetitor.where({:gender => "Male"}).count
     @num_female_noncompetitors = Registrant.active.notcompetitor.where({:gender => "Female"}).count
     @num_noncompetitors = @num_male_noncompetitors + @num_female_noncompetitors
 
-    @num_male_registrants = @num_male_competitors + @num_male_noncompetitors
-    @num_female_registrants = @num_female_competitors + @num_female_noncompetitors
-    @num_registrants = @num_competitors + @num_noncompetitors
+    @num_male_spectators = Registrant.active.spectator.where({:gender => "Male"}).count
+    @num_female_spectators = Registrant.active.spectator.where({:gender => "Female"}).count
+    @num_spectators = @num_male_noncompetitors + @num_female_noncompetitors
+
+    @num_male_registrants = @num_male_competitors + @num_male_noncompetitors + @num_male_spectators
+    @num_female_registrants = @num_female_competitors + @num_female_noncompetitors + @num_female_spectators
+    @num_registrants = @num_competitors + @num_noncompetitors + @num_spectators
   end
 
   def sign_ups
