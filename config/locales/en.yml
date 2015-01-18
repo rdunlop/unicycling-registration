@@ -8,6 +8,8 @@ en:
   layouts:
     application:
       registration: "Registration"
+  prices_increase_soon: "Prices Increase in less than 1 day"
+  prices_increase_at_date: "Prices Increase in %{end_date}"
   date:
     formats:
       registration_date_format: "%b %d, %Y"
@@ -105,10 +107,7 @@ en:
       online_waiver_signature: "Signature: "
     pay_now:
       pay_now: "Pay Now"
-      prices_increase: "Prices Increase"
-      very_soon: "Very Soon"
       unknown: "Unknown"
-      in: "in"
     show_single_registrant:
       registration_summary: "Registration Summary"
       printable_pdf: "Printable (Pdf)"

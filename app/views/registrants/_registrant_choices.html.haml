@@ -5,7 +5,7 @@
       %h3.recommended_title= t('.recommended')
       %h3.title= t('competitor')
       .current_price= print_formatted_currency(reg_period.competitor_expense_item.cost)
-      .price_note Prices Increase in #{distance_of_time_in_words(DateTime.now, reg_period.end_date) }
+      .price_note= print_time_until_prices_increase(reg_period)
       %ul.price_details
         %li.highlighted Compete in all events
         %li Participate in all workshops
@@ -19,7 +19,7 @@
     .pricing_option.non-competitor_sign_up
       %h3.title= t('noncompetitor')
       .current_price= print_formatted_currency(reg_period.noncompetitor_expense_item.cost)
-      .price_note Prices Increase in #{distance_of_time_in_words(DateTime.now, reg_period.end_date) }
+      .price_note= print_time_until_prices_increase(reg_period)
       %ul.price_details
         %li.highlighted Participate in all workshops
         %li Ride at all NAUCC 2015 facilities
