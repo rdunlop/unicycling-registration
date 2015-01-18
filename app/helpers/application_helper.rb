@@ -35,6 +35,15 @@ module ApplicationHelper
     number_to_currency(cost, format: EventConfiguration.singleton.currency, locale: :en)
   end
 
+  def print_time_until_prices_increase(reg_period)
+    if (DateTime.now > reg_period.end_date)
+      t("prices_increase_soon")
+    else
+      end_date = distance_of_time_in_words(DateTime.now, reg_period.last_day) + " (" + (l (reg_period.last_day), format: :short) + ")"
+      t("prices_increase_at_date", end_date: end_date)
+    end
+  end
+
   def text_to_html_linebreaks(text)
     start_tag = '<p>'
     text = text.to_s.dup

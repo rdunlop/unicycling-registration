@@ -7,6 +7,8 @@ fr:
   layouts:
     application:
       registration: "Inscriptions"
+  prices_increase_soon: "Les prix augmentent en moins d'un jour"
+  prices_increase_at_date: "Les prix augmentent das %{end_date}"
   date:
     formats:
       registration_date_format: "%d %b, %Y"
@@ -107,10 +109,7 @@ fr:
       paid: "Payé"
     pay_now:
       pay_now: "Payer maintenant"
-      prices_increase: "Les prix augmentent"
-      very_soon: "très bientôt"
       unknown: "quand?"
-      in: "dans"
     items:
       continue: "Continuer"
     show_single_registrant:

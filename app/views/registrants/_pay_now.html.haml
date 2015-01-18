@@ -8,9 +8,4 @@
       - if rp.nil?
         = "[#{t(".unknown")}]"
       - else
-        = t(".prices_increase")
-        - if (DateTime.now > rp.end_date)
-          = t(".very_soon")
-        - else
-          = t(".in")
-          = distance_of_time_in_words(DateTime.now, rp.last_day) + " (" + (l (rp.last_day), format: :short) + ")"
+        = print_time_until_prices_increase(rp)
