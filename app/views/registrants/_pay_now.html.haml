@@ -13,4 +13,4 @@
           = t(".very_soon")
         - else
           = t(".in")
-          = distance_of_time_in_words(DateTime.now, rp.end_date) + " (" + (l ((rp.end_date) + 1), format: :short) + ")"
+          = distance_of_time_in_words(DateTime.now, rp.last_day) + " (" + (l (rp.last_day), format: :short) + ")"
