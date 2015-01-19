@@ -61,6 +61,19 @@ describe RegistrantExpenseItem do
     end
   end
 
+  describe "when the expense item has fractional tax" do
+    before :each do
+      @ei = @rei.expense_item
+      @ei.cost = 17
+      @ei.tax_percentage = 5.5
+      @ei.save
+    end
+
+    it "should round" do
+      @rei.total_cost.should == 17.94
+    end
+  end
+
   describe "when the item is free" do
     before(:each) do
       @rei.free = true

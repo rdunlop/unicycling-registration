@@ -67,7 +67,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   end
 
   def total_cost
-    cost + tax
+    (cost + tax).round(2)
   end
 
   def only_one_free_per_expense_group
