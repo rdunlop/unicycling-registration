@@ -130,7 +130,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def total_cost
-    cost + tax
+    (cost + tax).round(2)
   end
 
   def num_selected_items

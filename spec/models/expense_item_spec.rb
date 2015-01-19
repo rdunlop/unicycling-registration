@@ -77,6 +77,15 @@ describe ExpenseItem do
     end
   end
 
+  describe "with a tax percentage of 5%" do
+    it "has no fractional-penny results" do
+      @item.cost = 17
+      @item.tax_percentage = 5.5
+      @item.tax.should == 0.94
+      @item.total_cost.should == 17.94
+    end
+  end
+
   it "must have a name" do
     @item.name = nil
     @item.valid?.should == false

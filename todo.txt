@@ -139,6 +139,7 @@ OTHER
 
 ========================================================================================================================
 Features which NAUCC would like added:
+- On Payments#Summary, show the total-we-can-keep (ie: without taxes/fees)
 - Ability to upgrade a registration before/after having been paid (from Non-Comp to Comp, spectator to non-comp)
 - "upgrade" from non-competitor to competitor? ....some way for Admins...
 - Use new Menubar system, to allow for better responsiveness at smaller screen sizes
