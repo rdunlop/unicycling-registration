@@ -128,6 +128,7 @@ describe "Ability" do
 
     it { should be_able_to(:read, Registrant) }
     it { should be_able_to(:manage, Competitor) }
+    it { should be_able_to(:read, VolunteerOpportunity) }
 
     it { should be_able_to(:manage_all, Registrant) }
 

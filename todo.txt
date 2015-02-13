@@ -139,12 +139,15 @@ OTHER
 
 ========================================================================================================================
 Features which NAUCC would like added:
+- End date for coupons (not valid after this date)
+- Payments#summary page should summarize payments so that all items of the same price/tax are combined onto one line (see patricia e-mail Jan 17)
 - On Payments#Summary, show the total-we-can-keep (ie: without taxes/fees)
 - Ability to upgrade a registration before/after having been paid (from Non-Comp to Comp, spectator to non-comp)
 - "upgrade" from non-competitor to competitor? ....some way for Admins...
 - Use new Menubar system, to allow for better responsiveness at smaller screen sizes
 - make "best time" input force seconds (etc)
  - Add much more logic into the 'best time' field to help it become useful information, to be used by the system for creating start-lists, etc
+ - Allow formats: "hh:mm", "min:sec", "mm:ss:hh"
  - Should force the format of the Best Times to be specific, per event (so that some events are minutes, or seconds, or hours)
 - PDF filenames should use the awards names for filenames.
 - Use a less-ugly looking randomizer for the pdf filename.
@@ -200,6 +203,7 @@ Features which NAUCC would like added:
 
 ========================================================================================================================
 Bugs which Robin would like fixed:
+- RailsAdmin
 - fix sign-out function (due to changes in the js for the navbar)
 - Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.
 - Stop putting "Results" for people who are competitors but didn't race. (e.g. Slow Races ugh).
@@ -238,6 +242,7 @@ BUG: Previewing results to be posted is WAY too slow. (timeout 1/2 the time)
 
 ========================================================================================================================
 Features which Robin would like added:
+- First "resend e-mail" attempt by a user should say "please check your spam folders".
 - update rails to 4.2 - Need to wait for globalize gem to be updated for rails 4.2.
 - HTML5 Required-field Shim fallback on Safari
 - Placeholder Shim fallback

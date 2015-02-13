@@ -43,7 +43,7 @@ The application is capable of running multiple conventions on a single server,
 and no longer needs each convention to manage its own servers/hosting.
 
 Contact Robin (robin@dunlopweb.com) in order to create a new convention. Generally you
-will also want to use a 'test' instance in order to test/explore features without
+will also want to use a 'test' instance in order to test/explore features without affecting your "live" site.
 
 How to contribute time/effort to the Registration Site
 ------------------------------------------------------
@@ -138,11 +138,11 @@ Paypal Account
 Specify the paypal account "Merchant Account" that will be paid.
 Set these in your "Base Configuration" (EventConfiguration table)
 
-  PAYPAL_ACCOUNT=robin@dunlopweb.com
+  Paypal Account
 
 Specify whether to use the LIVE or TEST PAYPAL Site (default: Test)
 
-    PAYPAL_TEST=false
+    Paypal Test Mode
 
 Paypal Settings required for proper integration:
 

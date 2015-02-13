@@ -181,6 +181,7 @@ class Ability
         can :manage, :usa_membership
       end
       can :read, :volunteer
+      can :read, VolunteerOpportunity
 
       can :manage, :payment_adjustment
       can :display_acl, :permission
