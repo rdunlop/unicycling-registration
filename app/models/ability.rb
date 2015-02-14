@@ -157,6 +157,10 @@ class Ability
       return # required in order to allow rails_admin to function
     end
 
+    if user.has_role? :convention_admin
+      can :manage, TenantAlias
+    end
+
     if user.has_role? :awards_admin
       can [:read, :results, :publish, :unpublish, :award], Competition
       can :manage, AwardLabel

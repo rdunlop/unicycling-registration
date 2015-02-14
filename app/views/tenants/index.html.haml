@@ -1,9 +1,11 @@
-%h1 Conventions
+%h1 Conventions configured on this server
 
-%ul
+%ul.config_fields
   - Tenant.all.each do |tenant|
     %li= link_to tenant, tenant.base_url
 
 %hr
+
+%h2 Create a new Convention
 
 = render partial: "form"

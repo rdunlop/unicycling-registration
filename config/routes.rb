@@ -428,6 +428,12 @@ Workspace::Application.routes.draw do
 
   resources :admin_upgrades, only: [:new, :create]
   resources :tenants, only: [:index, :create]
+  resources :tenant_aliases, only: [:index, :create, :destroy] do
+    member do
+      post :verify
+      post :activate
+    end
+  end
   resources :styles, only: :index
 
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'

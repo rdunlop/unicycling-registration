@@ -120,6 +120,15 @@ describe "Ability" do
     end
   end
 
+  describe "as a convention admin" do
+    before(:each) do
+      @user = FactoryGirl.create(:convention_admin_user)
+    end
+    subject { @ability = Ability.new(@user) }
+
+    it { should be_able_to(:manage, TenantAlias) }
+  end
+
   describe "as an admin" do
     before(:each) do
       @user = FactoryGirl.create(:admin_user)
@@ -169,6 +178,7 @@ describe "Ability" do
     subject { @ability = Ability.new(@user) }
 
     it { should be_able_to(:access, :rails_admin) }
+    it { should be_able_to(:manage, TenantAlias) }
   end
 
   describe "as a data_entry_volunteer" do

@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:normal_user, :music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :payment_admin, :admin, :super_admin]
+    [:normal_user, :music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :payment_admin, :convention_admin, :admin, :super_admin]
   end
 
   def self.role_description(role)
@@ -97,6 +97,13 @@ class User < ActiveRecord::Base
       - Can enter recorded Results
       Can Create Award Labels
       Can adjust wheel-size settings for users.
+      "
+    when :convention_admin
+      "[e.g. Olaf Scholte]
+      Able to configure the Convention settings with regards to registration settings
+      Can set payment amounts
+      Can set events offered
+      Can set the PayPal details
       "
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"

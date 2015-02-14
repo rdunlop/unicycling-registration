@@ -139,6 +139,14 @@ OTHER
 
 ========================================================================================================================
 Features which NAUCC would like added:
+- When building a new instance, have a clear progression from:
+ - Setup (no new user sign-ups)
+ - Testing (new user sign-ups, but no real payments)
+ - Clear stored data
+ - Live (real payments.)
+- Allow TenantAlias to be set without verification
+ - Add code which actually verifies a tenant alias before marking it as "verified"
+ - Prevent "Activating" Tenant-Alias which is not verified.
 - End date for coupons (not valid after this date)
 - Payments#summary page should summarize payments so that all items of the same price/tax are combined onto one line (see patricia e-mail Jan 17)
 - On Payments#Summary, show the total-we-can-keep (ie: without taxes/fees)
@@ -203,6 +211,8 @@ Features which NAUCC would like added:
 
 ========================================================================================================================
 Bugs which Robin would like fixed:
+- Need to seed new tenants
+- Fix mailer when mailing from regtest site.
 - RailsAdmin
 - fix sign-out function (due to changes in the js for the navbar)
 - Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.

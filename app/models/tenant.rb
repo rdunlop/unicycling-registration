@@ -27,8 +27,12 @@ class Tenant < ActiveRecord::Base
   end
 
   def base_url
-    raw_url = tenant_aliases.primary.first.try(:to_s) || url
+    raw_url = tenant_aliases.primary.first.try(:to_s) || permanent_url
     "http://#{raw_url}"
+  end
+
+  def permanent_url
+    "#{subdomain}.#{Rails.application.secrets.domain}"
   end
 
   private
@@ -37,7 +41,4 @@ class Tenant < ActiveRecord::Base
     where(subdomain: hostname.split('.')[0]).first
   end
 
-  def url
-    "#{subdomain}.#{Rails.application.secrets.domain}"
-  end
 end
