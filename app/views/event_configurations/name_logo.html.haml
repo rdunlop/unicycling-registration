@@ -1,0 +1,47 @@
+%h1 Name & Logo
+
+= form_for(@event_configuration) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+  %table.alternate
+    %thead
+      %tr
+        %th Field
+        - languages.each do |lang|
+          %th= long_language_name(lang)
+    %tbody
+      %tr
+        %th Short Name
+        - languages.each do |lang|
+          = f.globalize_fields_for lang do |g|
+            %td= g.text_field :short_name
+      %tr
+        %th Long Name
+        - languages.each do |lang|
+          = f.globalize_fields_for lang do |g|
+            %td= g.text_field :long_name
+      %tr
+        %th Location
+        - languages.each do |lang|
+          = f.globalize_fields_for lang do |g|
+            %td= g.text_field :location
+      %tr
+        %th Dates Description
+        - languages.each do |lang|
+          = f.globalize_fields_for lang do |g|
+            %td= g.text_field :dates_description
+      %tr
+        %th= f.label :event_url, "Main Website"
+        %td= f.url_field :event_url
+        %td Links from the Menubar logo to this URL.
+      %tr
+        %th= f.label :logo_file
+        %td
+          = f.file_field :logo_file
+          = image_tag(@event_configuration.logo_file.url) if @event_configuration.logo_file?
+        %td Logo should be 93px x 38px
+
+      %tr
+        %th= f.label :start_date, "First Day of Competition"
+        %td= f.date_select :start_date
+        %td Registrant Ages are calculated based on this date
+  = f.submit

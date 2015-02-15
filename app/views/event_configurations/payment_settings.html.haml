@@ -1,0 +1,25 @@
+%h1 Payment Settings
+
+= form_for(@event_configuration) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+  %table.alternate
+    %tr
+      %th= f.label :paypal_account, "Paypal Merchant Account Email"
+      %td= f.text_field :paypal_account
+    %tr
+      %th= f.label :currency_code
+      %td= f.text_field :currency_code
+      %td For Paypal. Three capital letter code for currency.
+    %tr
+      %th= f.label :currency
+      %td= f.text_field :currency
+      %td
+        For use when printing/displaying currency on the webpage. Defaults to "%u%n USD".
+        %br/
+        Must be in the form of 'format' from: #{link_to "Rails options{}", "http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html#method-i-number_to_currency"}
+    %tr
+      %th= f.label :paypal_test
+      %td= f.check_box :paypal_test
+      %td allow to pretend to receive payment confirmation from paypal
+  .actions
+    = f.submit

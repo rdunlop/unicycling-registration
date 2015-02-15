@@ -234,6 +234,9 @@ Workspace::Application.routes.draw do
       end
       collection do
         get :base_settings
+        get :name_logo
+        get :important_dates
+        get :payment_settings
       end
     end
 

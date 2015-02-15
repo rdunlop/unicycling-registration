@@ -1,0 +1,42 @@
+%h1 Important Dates
+
+= form_for(@event_configuration) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+  %table.alternate
+    %tr
+      %th= f.label :artistic_closed_date
+      %td= f.date_select :artistic_closed_date
+      %td Not currently used
+    %tr
+      %th= f.label :music_submission_end_date
+      %td= f.date_select :music_submission_end_date, include_blank: true
+      %td Specify the date at which music submissions will no longer be allowed
+    %tr
+      %th= f.label :event_sign_up_closed_date
+      %td= f.date_select :event_sign_up_closed_date
+      %td After this date, only administrators can add events to registrations. (though they can still remove them)
+
+    %tr
+      %th THE FOLLOWING SHOULD BE SOMEWHERE ELSE
+    %tr
+      %th= f.label :usa
+      %td= f.check_box :usa
+      %td This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed
+    %tr
+      %th= f.label :iuf
+      %td= f.check_box :iuf
+      %td Enabling this allows IUF membership questions.
+    %tr
+      %th= f.label :max_award_place
+      %td= f.number_field :max_award_place, {min: 0}
+      %td This sets the maximum place to print awards for. (applies to both age group and expert)
+    %tr
+      %th= f.label :display_confirmed_events
+      %td= f.check_box :display_confirmed_events
+      %td Enabling this displays the confirmed events/unconfirmed events on the Registrant#summary page.
+    %tr
+      %th= f.label :test_mode
+      %td= f.check_box :test_mode
+      %td Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.
+  .actions
+    = f.submit
