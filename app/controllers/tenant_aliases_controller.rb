@@ -34,6 +34,6 @@ class TenantAliasesController < ApplicationController
   private
 
   def tenant_alias_params
-    params.require(:tenant_alias).permit(:id, :website_alias, :primary_domain)
+    params.require(:tenant_alias).permit(:website_alias)
   end
 end
