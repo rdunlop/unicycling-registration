@@ -16,7 +16,6 @@
 #  created_at                            :datetime
 #  updated_at                            :datetime
 #  test_mode                             :boolean
-#  waiver_url                            :string(255)
 #  comp_noncomp_url                      :string(255)
 #  standard_skill                        :boolean          default(FALSE)
 #  usa                                   :boolean          default(FALSE)

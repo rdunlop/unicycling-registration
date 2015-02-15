@@ -48,7 +48,71 @@
     We provide a waiver for the user to print/sign at the event. (available in advance on the website so that children can have their parents sign it)
   = f.label :custom_waiver_text
   = f.text_area :custom_waiver_text, size: "60x12", placeholder: EventConfiguration.default_waiver_text
+
+  %hr
+
+  %h3 Website Style
+  = f.label :style_name
+  = f.select :style_name, EventConfiguration.style_names
+
+  %hr
+
+  %h3 Contact Details
+  = f.label :contact_email
+  = f.email_field :contact_email
+  .description
+    Displayed on the "Help" page
+
+  %hr
+
+  %h3 Unicycling Society of America (USA) Membership Summary
+
+  = f.label :usa_membership_config, "Display USA admin pages"
+  = f.check_box :usa_membership_config
+
+  = f.label :usa_individual_expense_item_id
+  = f.select :usa_individual_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true
+  = f.label :usa_family_expense_item_id
+  = f.select :usa_family_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true
+
+  %hr
+
+  %h3 Artistic Scoring Mode
+  %p
+    This chooses whether to eliminate 1 high, 1 low judge during scoring (Small Event), 1 high, 1 low elimination PER JUDGE TYPE during scoring (Large Event).
+
+  = f.label :artistic_score_elimination_mode_naucc, "Small Group"
+  = f.check_box :artistic_score_elimination_mode_naucc
+
+  %hr
+
+  %h3 Rulebook
+
+  = f.label :rulebook_url, "Rulebook PDF URL"
+  = f.url_field :rulebook_url
+
+  %p
+    The current IUF Rulebook can be found at:
+    = link_to "https://unicycling.org/files/current-iuf-rulebook.pdf", "https://unicycling.org/files/current-iuf-rulebook.pdf"
+
+  %hr
+
+  %h3 Standard Skill
+
+  %p
+    Enabling this feature allows a registrant to submit their standard skill routine with their registration.
+
+  %p
+    Note: The Standard Skill Judging system is currently incomplete, and not included in this online system
+
+  = f.label :standard_skill, "Enable Standard Skill Submisssion System"
+  = f.check_box :standard_skill
+
+  = f.label :standard_skill_closed_date, "Last day to submit Standard Skill Routines online"
+  = f.date_select :standard_skill_closed_date
+
   = f.submit
+
 
   %hr
   %hr
@@ -82,9 +146,7 @@
             (#{long_language_name(lang)})
           %td= g.text_field :dates_description
     %tr
-      %th= f.label :style_name
-      %td= f.select :style_name, EventConfiguration.style_names, :include_blank => true
-      %td Select the style to be applied to the site
+
     %tr
       %th= f.label :event_url
       %td= f.url_field :event_url
@@ -121,10 +183,6 @@
       %td= f.check_box :paypal_test
       %td allow to pretend to receive payment confirmation from paypal
     %tr
-      %th= f.label :contact_email
-      %td= f.email_field :contact_email
-      %td This e-mail address will be listed on the "Help" page
-    %tr
       %th= f.label :artistic_closed_date
       %td= f.date_select :artistic_closed_date
       %td Not currently used
@@ -133,45 +191,17 @@
       %td= f.date_select :music_submission_end_date, include_blank: true
       %td Specify the date at which music submissions will no longer be allowed
     %tr
-      %th= f.label :standard_skill
-      %td= f.check_box :standard_skill
-      %td Enabling this allows standard skill.
-    %tr
-      %th= f.label :standard_skill_closed_date
-      %td= f.date_select :standard_skill_closed_date
-      %td This date defines when the users are no longer able to create/update standard skill routines
-    %tr
       %th= f.label :usa
       %td= f.check_box :usa
       %td This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed
-    %tr
-      %th= f.label :usa_membership_config
-      %td= f.check_box :usa_membership_config
-      %td Enabling this allows USA membership questions.
-    %tr
-      %th= f.label :usa_individual_expense_item_id
-      %td= f.select :usa_individual_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true
-      %td This allows us to know who has paid for a USA individual membership
-    %tr
-      %th= f.label :usa_family_expense_item_id
-      %td= f.select :usa_family_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true
-      %td This allows us to know who has paid for a USA individual membership
     %tr
       %th= f.label :iuf
       %td= f.check_box :iuf
       %td Enabling this allows IUF membership questions.
     %tr
-      %th= f.label :rulebook_url
-      %td= f.url_field :rulebook_url
-      %td If left blank, no rulebook links are displayed. Otherwise provides external link to rulebook pdf.
-    %tr
       %th= f.label :event_sign_up_closed_date
       %td= f.date_select :event_sign_up_closed_date
       %td After this date, only administrators can add events to registrations. (though they can still remove them)
-    %tr
-      %th= f.label :artistic_score_elimination_mode_naucc
-      %td= f.check_box :artistic_score_elimination_mode_naucc
-      %td This chooses whether to score artistic in "NAUCC" rules (1 high, 1 low elimination), or "UNICON" rules (1 high, 1 low elimination PER JUDGE TYPE)
     %tr
       %th= f.label :max_award_place
       %td= f.number_field :max_award_place, {min: 0}

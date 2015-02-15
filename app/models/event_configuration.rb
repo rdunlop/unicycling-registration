@@ -16,7 +16,6 @@
 #  created_at                            :datetime
 #  updated_at                            :datetime
 #  test_mode                             :boolean
-#  waiver_url                            :string(255)
 #  comp_noncomp_url                      :string(255)
 #  standard_skill                        :boolean          default(FALSE)
 #  usa                                   :boolean          default(FALSE)
@@ -51,10 +50,10 @@ class EventConfiguration < ActiveRecord::Base
   validates :comp_noncomp_url, :format => URI.regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
 
   def self.style_names
-    ["unicon_17", "naucc_2013", "naucc_2014", "naucc_2015"]
+    [["Blue and Pink", "unicon_17"], ["Green and Blue", "naucc_2013"], ["Blue Purple Green", "naucc_2014"], ["Purple Blue Green", "naucc_2015"]]
   end
 
-  validates :style_name, :inclusion => {:in => self.style_names }
+  validates :style_name, :inclusion => {:in => self.style_names.map{|y| y[1]} }
   validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :waiver, inclusion: { in: ["none", "online", "print"] }
   validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
