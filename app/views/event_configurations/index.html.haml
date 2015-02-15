@@ -32,9 +32,6 @@
     %tr
       %td Access Settings
 
-- if @event_configurations.count == 0
-  = link_to 'New Event configuration', new_event_configuration_path
-- else
+- unless @event_configurations.count == 0
   - event_configuration = @event_configurations.first
-  = link_to 'Edit', edit_event_configuration_path(event_configuration)
   = link_to 'Delete', event_configuration, method: :delete, data: { confirm: 'Are you sure?' }

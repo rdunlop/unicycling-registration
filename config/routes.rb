@@ -225,7 +225,7 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :event_configurations, :except => [:show] do
+    resources :event_configurations, :except => [:show, :new, :edit] do
       collection do
         get :cache
         delete :clear_cache

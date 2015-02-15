@@ -20,19 +20,6 @@ class EventConfigurationsController < ApplicationController
     end
   end
 
-  # GET /event_configurations/new
-  # GET /event_configurations/new.json
-  def new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @event_configuration }
-    end
-  end
-
-  # GET /event_configurations/1/edit
-  def edit
-  end
-
   # POST /event_configurations
   # POST /event_configurations.json
   def create
