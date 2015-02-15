@@ -1,0 +1,19 @@
+.waiver_form {
+  margin: 10px;
+
+  h1 {
+    text-align: center;
+  }
+
+  .waiver_contents {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+
+    padding: 20px 0;
+  }
+
+  .waiver_text {
+    text-indent: 1.5em;
+  }
+}

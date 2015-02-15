@@ -44,8 +44,12 @@ module ApplicationHelper
     end
   end
 
-  def text_to_html_linebreaks(text)
-    start_tag = '<p>'
+  def text_to_html_linebreaks(text, add_class = nil)
+    if add_class
+      start_tag = "<p class=\"#{add_class}\">"
+    else
+      start_tag = '<p>'
+    end
     text = text.to_s.dup
     text.gsub!(/\r?\n/, "\n")                     # \r\n and \r => \n
     text.gsub!(/\n\n+/, "</p>\n\n#{start_tag}")   # 2+ newline  => paragraph

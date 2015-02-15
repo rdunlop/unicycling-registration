@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150214214426) do
+ActiveRecord::Schema.define(version: 20150215140210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -354,7 +354,6 @@ ActiveRecord::Schema.define(version: 20150214214426) do
     t.boolean  "test_mode"
     t.string   "waiver_url"
     t.string   "comp_noncomp_url"
-    t.boolean  "has_print_waiver"
     t.boolean  "standard_skill",                        default: false
     t.boolean  "usa",                                   default: false
     t.boolean  "iuf",                                   default: false
@@ -362,8 +361,7 @@ ActiveRecord::Schema.define(version: 20150214214426) do
     t.text     "currency"
     t.string   "rulebook_url"
     t.string   "style_name"
-    t.boolean  "has_online_waiver"
-    t.text     "online_waiver_text"
+    t.text     "custom_waiver_text"
     t.date     "music_submission_end_date"
     t.boolean  "artistic_score_elimination_mode_naucc", default: true
     t.integer  "usa_individual_expense_item_id"
@@ -374,7 +372,8 @@ ActiveRecord::Schema.define(version: 20150214214426) do
     t.boolean  "spectators",                            default: false
     t.boolean  "usa_membership_config",                 default: false
     t.string   "paypal_account"
-    t.boolean  "paypal_test",                           default: true,  null: false
+    t.boolean  "paypal_test",                           default: true,   null: false
+    t.string   "waiver",                                default: "none"
   end
 
   create_table "events", force: true do |t|

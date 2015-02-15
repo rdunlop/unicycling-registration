@@ -1,20 +1,22 @@
 class EventConfigurationsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_event_configuration, :only => [:create]
+  before_filter :load_new_event_configuration, :only => [:create]
+  before_filter :load_event_configuration, except: :create
   load_and_authorize_resource
 
   def load_event_configuration
+    @event_configuration = EventConfiguration.singleton
+  end
+
+  def load_new_event_configuration
     @event_configuration = EventConfiguration.new(event_configuration_params)
   end
 
   # GET /event_configurations
   # GET /event_configurations.json
   def index
-    @event_configurations = EventConfiguration.all
-
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @event_configurations }
     end
   end
 
@@ -105,9 +107,9 @@ class EventConfigurationsController < ApplicationController
                                                 :contact_email, :currency, :currency_code, :dates_description, :event_url, :iuf, :location,
                                                 :logo_file, :max_award_place,
                                                 :long_name, :rulebook_url, :short_name, :standard_skill, :standard_skill_closed_date, :style_name,
-                                                :start_date, :event_sign_up_closed_date, :test_mode, :usa, :has_print_waiver, :waiver_url, :has_online_waiver,
+                                                :start_date, :event_sign_up_closed_date, :test_mode, :usa, :waiver, :waiver_url,
                                                 :display_confirmed_events, :spectators, :paypal_account, :paypal_test,
-                                                :online_waiver_text, :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,
+                                                :custom_waiver_text, :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,
                                                 :translations_attributes => [:id, :locale, :short_name, :long_name, :location, :dates_description])
   end
 end

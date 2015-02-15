@@ -139,6 +139,7 @@ OTHER
 
 ========================================================================================================================
 Features which NAUCC would like added:
+- Fix printed PDF waiver, so that it has 2 columns again.
 - When building a new instance, have a clear progression from:
  - Setup (no new user sign-ups)
  - Testing (new user sign-ups, but no real payments)

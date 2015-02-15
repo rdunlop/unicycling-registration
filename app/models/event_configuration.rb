@@ -18,7 +18,6 @@
 #  test_mode                             :boolean
 #  waiver_url                            :string(255)
 #  comp_noncomp_url                      :string(255)
-#  has_print_waiver                      :boolean
 #  standard_skill                        :boolean          default(FALSE)
 #  usa                                   :boolean          default(FALSE)
 #  iuf                                   :boolean          default(FALSE)
@@ -26,8 +25,7 @@
 #  currency                              :text
 #  rulebook_url                          :string(255)
 #  style_name                            :string(255)
-#  has_online_waiver                     :boolean
-#  online_waiver_text                    :text
+#  custom_waiver_text                    :text
 #  music_submission_end_date             :date
 #  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
 #  usa_individual_expense_item_id        :integer
@@ -39,6 +37,7 @@
 #  usa_membership_config                 :boolean          default(FALSE)
 #  paypal_account                        :string(255)
 #  paypal_test                           :boolean          default(TRUE), not null
+#  waiver                                :string(255)      default("none")
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -56,7 +55,8 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   validates :style_name, :inclusion => {:in => self.style_names }
-  validates :test_mode, :has_print_waiver, :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :waiver, inclusion: { in: ["none", "online", "print"] }
   validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :usa, :usa_membership_config, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
 
@@ -74,8 +74,6 @@ class EventConfiguration < ActiveRecord::Base
 
   def init
     self.test_mode = true if self.test_mode.nil?
-    self.has_print_waiver = false if self.has_print_waiver.nil?
-    self.has_online_waiver = false if self.has_online_waiver.nil?
     self.usa = true if self.usa.nil?
     self.usa_membership_config = false if self.usa_membership_config.nil?
     self.iuf = false if self.iuf.nil?
@@ -89,6 +87,23 @@ class EventConfiguration < ActiveRecord::Base
     self.contact_email ||= ""
     self.max_award_place ||= 5
     self.display_confirmed_events = false if self.display_confirmed_events.nil?
+  end
+
+  def has_print_waiver
+    waiver == "print"
+  end
+
+  def has_online_waiver
+    waiver == "online"
+  end
+
+  def self.default_waiver_text
+    I18n.t("waiver_text")
+  end
+
+  def waiver_text
+    return custom_waiver_text unless custom_waiver_text.blank?
+    self.class.default_waiver_text
   end
 
   # allows creating competitors during lane assignment

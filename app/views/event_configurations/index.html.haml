@@ -1,107 +1,36 @@
-%h1 Base Configuration
+%h1 Convention Setup
+
+%p Before we can launch the registration system, many things must be configured
 
 %table.alternate
-  %legend Effective Configuration
-  %tr
-    %th Short name
-    %td= @config.short_name
-  %tr
-    %th Long name
-    %td= @config.long_name
-  %tr
-    %th Style name
-    %td= @config.style_name
-  %tr
-    %th Location
-    %td= @config.location
-  %tr
-    %th Dates description
-    %td= @config.dates_description
-  %tr
-    %th Event url
-    %td= @config.event_url
-  %tr
-    %th Print Waiver
-    %td= @config.has_print_waiver
-  %tr
-    %th Waiver url
-    %td= @config.waiver_url
-  %tr
-    %th Online Waiver
-    %td= @config.has_online_waiver
-  %tr
-    %th Online Waiver Text
-    %td
-      %span.admin_show_waiver_truncate= @config.online_waiver_text
-  %tr
-    %th Comp/Non-Comp url
-    %td= @config.comp_noncomp_url
-  %tr
-    %th Start date
-    %td= @config.start_date
-  %tr
-    %th Logo
-    %td= image_tag(@config.logo_file.url, :width => "100px")
-  %tr
-    %th Currency (example)
-    %td= @config.currency
-  %tr
-    %th Currency Code
-    %td= @config.currency_code
-  %tr
-    %th PayPal Account
-    %td= @config.paypal_account
-  %tr
-    %th PayPal Test Mode
-    %td= @config.paypal_test
-  %tr
-    %th Contact email
-    %td= @config.contact_email
-  %tr
-    %th Artistic closed date
-    %td= @config.artistic_closed_date
-  %tr
-    %th Standard skill
-    %td= @config.standard_skill
-  %tr
-    %th Standard skill closed date
-    %td= @config.standard_skill_closed_date
-  %tr
-    %th USA
-    %td= @config.usa
-  %tr
-    %th USA Membership
-    %td= @config.usa_membership_config
-  %tr
-    %th USA Expense Items (for export/marking confirming)
-    %td
-      = @config.usa_individual_expense_item
-      %br
-      = @config.usa_family_expense_item
-  %tr
-    %th IUF
-    %td= @config.iuf
-  %tr
-    %th Rulebook URL
-    %td= @config.rulebook_url
-  %tr
-    %th Event Sign up closed date
-    %td= @config.event_sign_up_closed_date
-  %tr
-    %th Music Submission End date
-    %td= @config.music_submission_end_date
-  %tr
-    %th Maximum Medal Place
-    %td= @config.max_award_place
-  %tr
-    %th Test Mode
-    %td= @config.test_mode
-  %tr
-    %th Display Confirmed/Unconfirmed events:
-    %td= @config.display_confirmed_events
-  %tr
-    %th Display Spectator Option
-    %td= @config.spectators
+  %thead
+    %tr
+      %th
+      %th Status
+  %tbody
+    %tr
+      %td= link_to "Base Settings", base_settings_event_configurations_path
+      %td
+    %tr
+      %td= link_to "Domain Setup", tenant_aliases_path
+    %tr
+      %td Name + Logo
+    %tr
+      %td Registration Costs
+    %tr
+      %td Important Deadlines
+    %tr
+      %td Other Items for Sale
+    %tr
+      %td Coupon Codes
+    %tr
+      %td Events
+    %tr
+      %td Volunteer Options
+    %tr
+      %td Payment Settings
+    %tr
+      %td Access Settings
 
 - if @event_configurations.count == 0
   = link_to 'New Event configuration', new_event_configuration_path

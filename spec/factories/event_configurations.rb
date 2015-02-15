@@ -18,7 +18,6 @@
 #  test_mode                             :boolean
 #  waiver_url                            :string(255)
 #  comp_noncomp_url                      :string(255)
-#  has_print_waiver                      :boolean
 #  standard_skill                        :boolean          default(FALSE)
 #  usa                                   :boolean          default(FALSE)
 #  iuf                                   :boolean          default(FALSE)
@@ -26,8 +25,7 @@
 #  currency                              :text
 #  rulebook_url                          :string(255)
 #  style_name                            :string(255)
-#  has_online_waiver                     :boolean
-#  online_waiver_text                    :text
+#  custom_waiver_text                    :text
 #  music_submission_end_date             :date
 #  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
 #  usa_individual_expense_item_id        :integer
@@ -39,6 +37,7 @@
 #  usa_membership_config                 :boolean          default(FALSE)
 #  paypal_account                        :string(255)
 #  paypal_test                           :boolean          default(TRUE), not null
+#  waiver                                :string(255)      default("none")
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -55,9 +54,8 @@ FactoryGirl.define do
     currency nil
     contact_email "robinc@dunlopweb.com"
     artistic_closed_date "2013-1-10"
-    has_print_waiver true
-    has_online_waiver false
-    online_waiver_text "Online Waiver."
+    waiver "print"
+    custom_waiver_text "Online Waiver."
     usa false
     # association :usa_family_expense_item, factory: :expense_item, cost: 100
     # association :usa_individual_expense_item, factory: :expense_item, cost: 50

@@ -18,7 +18,6 @@
 #  test_mode                             :boolean
 #  waiver_url                            :string(255)
 #  comp_noncomp_url                      :string(255)
-#  has_print_waiver                      :boolean
 #  standard_skill                        :boolean          default(FALSE)
 #  usa                                   :boolean          default(FALSE)
 #  iuf                                   :boolean          default(FALSE)
@@ -26,8 +25,7 @@
 #  currency                              :text
 #  rulebook_url                          :string(255)
 #  style_name                            :string(255)
-#  has_online_waiver                     :boolean
-#  online_waiver_text                    :text
+#  custom_waiver_text                    :text
 #  music_submission_end_date             :date
 #  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
 #  usa_individual_expense_item_id        :integer
@@ -39,6 +37,7 @@
 #  usa_membership_config                 :boolean          default(FALSE)
 #  paypal_account                        :string(255)
 #  paypal_test                           :boolean          default(TRUE), not null
+#  waiver                                :string(255)      default("none")
 #
 
 require 'spec_helper'

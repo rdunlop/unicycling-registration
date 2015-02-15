@@ -232,8 +232,8 @@ Workspace::Application.routes.draw do
         delete :clear_counter_cache
         post :test_mode_role
       end
-      member do
-        get 'logo'
+      collection do
+        get :base_settings
       end
     end
 

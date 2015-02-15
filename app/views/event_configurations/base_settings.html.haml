@@ -1,5 +1,57 @@
-= form_for(@event_configuration, :html => {:multipart=> true}) do |f|
+%h1 Base Settings
+
+= form_for(@event_configuration) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
+
+  %h3 Registrant Types
+
+  %fieldset
+    %legend Registration Types Available
+
+    = check_box_tag :competitor, true, true, disabled: true
+    = label_tag :competitor
+    %br
+    = check_box_tag :noncompetitor, true, true, disabled: true
+    = label_tag :noncompetitor
+    .info_bubble
+      .info Non-Competitors cannot sign up for events
+    %br
+    = f.check_box :spectators
+    = f.label :spectators
+    .info_bubble
+      .info Spectators need not pay for base-registration items
+
+  = f.label :comp_noncomp_url, "Comp/Non-Comp Explanation"
+  = f.url_field :comp_noncomp_url
+  .description
+    Specify a link which explains the difference between the offered Registration Types
+  = link_to 'Test this URL', '#'
+  %hr
+
+  %h3 Waiver
+
+  = f.label :waiver_none, "No Waiver"
+  = f.radio_button :waiver, 'none'
+  %br
+  = f.label :waiver_online, "Online Waiver"
+  = f.radio_button :waiver, 'online'
+  %br
+  = f.label :waiver_print, "Print Waiver"
+  = f.radio_button :waiver, 'print'
+
+  %p
+    %b Online Waiver
+    User is required to sign the waiver
+
+  %p
+    %b Printed Waiver
+    We provide a waiver for the user to print/sign at the event. (available in advance on the website so that children can have their parents sign it)
+  = f.label :custom_waiver_text
+  = f.text_area :custom_waiver_text, size: "60x12", placeholder: EventConfiguration.default_waiver_text
+  = f.submit
+
+  %hr
+  %hr
   %table.alternate
     %thead
       %tr
@@ -37,29 +89,8 @@
       %th= f.label :event_url
       %td= f.url_field :event_url
       %td Links from the Menubar logo to this URL.
-    %tr
-      %th= f.label :waiver_url
-      %td= f.url_field :waiver_url
-      %td Currently unused
-    %tr
-      %th Waiver
-      %th
-        = f.label :waiver_none, "No Waiver"
-        = f.radio_button :waiver, 'none'
-        %br
-        = f.label :waiver_online, "Online Waiver"
-        = f.radio_button :waiver, 'online'
-        %br
-        = f.label :waiver_print, "Print Waiver"
-        = f.radio_button :waiver, 'print'
-    %tr
-      %th= f.label :custom_waiver_text
-      %td= f.text_area :custom_waiver_text, size: "60x12", placeholder: EventConfiguration.default_waiver_text
-      %td Custom text for the online waiver (if you want to change it)
-    %tr
-      %th= f.label :comp_noncomp_url
-      %td= f.url_field :comp_noncomp_url
-      %td A link to text that describes the difference between Comptitors and Non-comptitors.
+
+
     %tr
       %th= f.label :start_date
       %td= f.date_select :start_date
@@ -149,10 +180,6 @@
       %th= f.label :display_confirmed_events
       %td= f.check_box :display_confirmed_events
       %td Enabling this displays the confirmed events/unconfirmed events on the Registrant#summary page.
-    %tr
-      %th= f.label :spectators
-      %td= f.check_box :spectators
-      %td Enabling this displays the option to enter spectator information, and buy items with them.
     %tr
       %th= f.label :test_mode
       %td= f.check_box :test_mode

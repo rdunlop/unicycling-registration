@@ -2,7 +2,7 @@
   %legend Waiver
   - cache [@config] do
     #waiver_text_box
-      = text_to_html_linebreaks(@config.online_waiver_text).html_safe
+      = text_to_html_linebreaks(@config.waiver_text).html_safe
   %p
     - if @registrant.age.nil?
       By signing in the box below, you are agreeing to the waiver above. If you are under 18, you must have a parent/legal guardian sign for you.

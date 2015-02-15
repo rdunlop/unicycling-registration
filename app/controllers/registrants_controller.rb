@@ -68,8 +68,8 @@ class RegistrantsController < ApplicationController
     @event_start_date = @config.start_date.try(:strftime, "%b %-d, %Y")
 
     respond_to do |format|
-      format.html { render action: "waiver", :layout => nil }
-      format.pdf { render :pdf => "waiver", :formats => [:html] }
+      format.html { render action: "waiver", :layout => nil, :layout => "pdf.html" }
+      format.pdf { render :pdf => "waiver", :formats => [:html], :layout => "pdf.html" }
     end
   end
 
