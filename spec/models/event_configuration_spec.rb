@@ -68,7 +68,7 @@ describe EventConfiguration do
     @ev.style_name = "fake"
     @ev.valid?.should == false
 
-    @ev.style_name = EventConfiguration.style_names.first
+    @ev.style_name = EventConfiguration.style_names.first[1]
     @ev.valid?.should == true
   end
 
