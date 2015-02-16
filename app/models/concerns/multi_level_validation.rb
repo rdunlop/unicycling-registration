@@ -31,6 +31,7 @@ module MultiLevelValidation
 
   def apply_validation(step_name)
     index = get_step_index(step_name)
+    self.validations_applied ||= 0 # deal with nil
     self.validations_applied |= (1 << index)
   end
 

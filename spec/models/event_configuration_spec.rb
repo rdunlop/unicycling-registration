@@ -53,11 +53,13 @@ describe EventConfiguration do
 
   it "has a short name" do
     @ev.short_name = nil
+    @ev.apply_validation(:name_logo)
     @ev.valid?.should == false
   end
 
   it "does not allows a blank style_name" do
     @ev.style_name = nil
+    @ev.apply_validation(:base_settings)
     @ev.valid?.should == false
   end
 
@@ -67,6 +69,7 @@ describe EventConfiguration do
 
   it "style_name must be a valid_style_name" do
     @ev.style_name = "fake"
+    @ev.apply_validation(:base_settings)
     @ev.valid?.should == false
 
     @ev.style_name = EventConfiguration.style_names.first[1]
@@ -79,11 +82,13 @@ describe EventConfiguration do
 
   it "has a long name" do
     @ev.long_name = nil
+    @ev.apply_validation(:name_logo)
     @ev.valid?.should == false
   end
 
   it "event_url can be nil" do
     @ev.event_url = nil
+    @ev.apply_validation(:name_logo)
     @ev.valid?.should == true
   end
 
@@ -102,6 +107,7 @@ describe EventConfiguration do
 
   it "must have a test_mode" do
     @ev.test_mode = nil
+    @ev.apply_validation(:important_dates)
     @ev.valid?.should == false
   end
 
