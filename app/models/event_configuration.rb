@@ -45,6 +45,7 @@ class EventConfiguration < ActiveRecord::Base
 
   mount_uploader :logo_file, LogoUploader
 
+  # Need to make these validations only apply when certain forms are submitted?
   validates :short_name, :long_name, :presence => true
   validates :event_url, :format => URI.regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI.regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"

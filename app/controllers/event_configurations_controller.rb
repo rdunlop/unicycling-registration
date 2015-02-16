@@ -26,10 +26,8 @@ class EventConfigurationsController < ApplicationController
     respond_to do |format|
       if @event_configuration.save
         format.html { redirect_to event_configurations_path, notice: 'Event configuration was successfully created.' }
-        format.json { render json: @event_configuration, status: :created, location: @event_configuration }
       else
-        format.html { render action: "new" }
-        format.json { render json: @event_configuration.errors, status: :unprocessable_entity }
+        format.html { render action: "index" }
       end
     end
   end
@@ -40,10 +38,8 @@ class EventConfigurationsController < ApplicationController
     respond_to do |format|
       if @event_configuration.update_attributes(event_configuration_params)
         format.html { redirect_to event_configurations_path, notice: 'Event configuration was successfully updated.' }
-        format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @event_configuration.errors, status: :unprocessable_entity }
+        format.html { render action: "index" }
       end
     end
   end
