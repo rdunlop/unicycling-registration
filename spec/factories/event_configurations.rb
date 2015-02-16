@@ -37,6 +37,7 @@
 #  paypal_account                        :string(255)
 #  paypal_test                           :boolean          default(TRUE), not null
 #  waiver                                :string(255)      default("none")
+#  validations_applied                   :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

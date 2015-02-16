@@ -37,16 +37,20 @@
 #  paypal_account                        :string(255)
 #  paypal_test                           :boolean          default(TRUE), not null
 #  waiver                                :string(255)      default("none")
+#  validations_applied                   :integer
 #
 
 class EventConfiguration < ActiveRecord::Base
+  include MultiLevelValidation
+  specify_validations :base_settings, :name_logo, :payment_settings, :important_dates
+
   translates :short_name, :long_name, :location, :dates_description
   accepts_nested_attributes_for :translations
 
   mount_uploader :logo_file, LogoUploader
 
   # Need to make these validations only apply when certain forms are submitted?
-  validates :short_name, :long_name, :presence => true
+  validates :short_name, :long_name, :presence => true, if: :name_logo_applied?
   validates :event_url, :format => URI.regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI.regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
 
@@ -54,19 +58,22 @@ class EventConfiguration < ActiveRecord::Base
     [["Blue and Pink", "unicon_17"], ["Green and Blue", "naucc_2013"], ["Blue Purple Green", "naucc_2014"], ["Purple Blue Green", "naucc_2015"]]
   end
 
-  validates :style_name, :inclusion => {:in => self.style_names.map{|y| y[1]} }
-  validates :test_mode, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :waiver, inclusion: { in: ["none", "online", "print"] }
-  validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :usa, :usa_membership_config, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
+  # base settings
+  validates :style_name, :inclusion => {:in => self.style_names.map{|y| y[1]} }, if: :base_settings_applied?
+  validates :waiver, inclusion: { in: ["none", "online", "print"] }, if: :base_settings_applied?
+  validates :usa_membership_config, :standard_skill, :inclusion => { :in => [true, false] }, if: :base_settings_applied? # because it's a boolean
+  validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] }, if: :base_settings_applied? # because it's a boolean
+  validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
 
   belongs_to :usa_individual_expense_item, :class_name => "ExpenseItem"
   belongs_to :usa_family_expense_item, :class_name => "ExpenseItem"
 
   validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa_membership_config"
 
-  validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
-  validates :max_award_place, presence: true
+
+  validates :usa, :iuf, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
+  validates :test_mode, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
+  validates :max_award_place, presence: true, if: :important_dates_applied?
 
   before_validation :clear_of_blank_strings
 
@@ -113,7 +120,8 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def clear_of_blank_strings
-    self.rulebook_url = nil if rulebook_url == ""
+    self.rulebook_url = nil if rulebook_url.blank?
+    self.event_url = nil if event_url.blank?
   end
 
   def self.singleton

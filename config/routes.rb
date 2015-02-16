@@ -232,11 +232,19 @@ Workspace::Application.routes.draw do
         delete :clear_counter_cache
         post :test_mode_role
       end
+
       collection do
         get :base_settings
+        put :update_base_settings
+
         get :name_logo
+        put :update_name_logo
+
         get :important_dates
+        put :update_important_dates
+
         get :payment_settings
+        put :update_payment_settings
       end
     end
 

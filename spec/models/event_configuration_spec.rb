@@ -37,6 +37,7 @@
 #  paypal_account                        :string(255)
 #  paypal_test                           :boolean          default(TRUE), not null
 #  waiver                                :string(255)      default("none")
+#  validations_applied                   :integer
 #
 
 require 'spec_helper'
@@ -155,5 +156,17 @@ describe EventConfiguration do
   it "returns the test paypal url when TEST is true" do
     @ev.update_attribute(:paypal_test, true)
     EventConfiguration.paypal_base_url.should == "https://www.sandbox.paypal.com"
+  end
+
+  describe "when doing partial_model validations" do
+    it "allows waiver nil when not validated" do
+      @ec = FactoryGirl.build :event_configuration
+      @ec.validations_applied = 0
+      @ec.waiver = nil
+      expect(@ec).to be_valid
+
+      @ec.apply_validation(:base_settings)
+      expect(@ec).to be_invalid
+    end
   end
 end
