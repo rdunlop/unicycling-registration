@@ -110,7 +110,17 @@ div.required {
   display: inline-block;
   vertical-align: top;
   text-align: left;
+
+  table tr td {
+    &:first-child {
+      text-align: right;
+    }
+  }
 }
+.field {
+  line-height: 1.5;
+}
+
 div.data_block {
   text-align: center;
 }
@@ -129,6 +139,23 @@ div.data_block {
 
 fieldset legend {
   text-align: center;
+}
+
+$header-bg: darkgray;
+.form__fieldset {
+  border: none;
+  text-align: left;
+  background: lightgray;
+  padding: 0 10px;
+  width: 400px;
+  margin: auto;
+
+  h3 {
+    text-align: center;
+    background-color: $header-bg;
+    border-bottom: black 1px solid;
+    margin: 0;
+  }
 }
 
 

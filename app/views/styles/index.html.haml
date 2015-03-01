@@ -108,16 +108,131 @@ Registrant Expense Items
 %br
 %input.sold_out{ disabled: true, type: 'submit', value: 'Sold Out' }
 
-// Form Elements
-%h2.style_head Forms
+// Help
+%h2.style_head Help
 
-.field_with_errors
+.help_bubble{ title: "This is some help text" }
+
+// Form Elements
+%h2.style_head Form Elements
+
+.field.field_with_errors
   %label Label with error
-  %input{ type: "text", value: "Text Input with Error"}
+  %input{ type: "text" }
+
+.field
+  %label Label Without Error
+  %input{ type: "text" }
+
+.field
+  %label Text field with supporting details
+  %input{ type: "text" }
+  .input_details
+    These are some various instructions and details which are useful when filling in this text input box.
+    Please be aware of all the instructions
+
+.field
+  %label.required Required Element
+
+.field
+  %label Chosen-Select options
+  %select.chosen-select
+    %option Option 1
+    %option Option 2
+
+.field
+  %label.label--checkbox{ for: 'the_checkbox' } Checkbox label
+  %input{ type: "checkbox", id: 'the_checkbox' }
+
+.field
+  %label.label--radio{ for: 'waiver_none' } No Waiver
+  %input{ type: "radio", id: 'waiver_none', name: 'waiver' }
+  %br
+  %label.label--radio{ for: 'waiver_online' } Online Waiver
+  %input{ type: "radio", id: 'waiver_online', name: 'waiver' }
+  %br
+  %label.label--radio{ for: 'waiver_print' } Waiver Print
+  %input{ type: "radio", id: 'waiver_print', name: 'waiver' }
+
+.field
+  %label Custom TextArea input
+  %textarea{ placeholder: "this is some of the text that could appear in a textarea", cols: "60", rows: "12" }
+
+.field
+  %label Upload a file
+  %input{ type: "file" }
+
+.field
+  %label{ for: 'start_date' } Date chooser
+  = date_select :start_date, Date.today
+
+%h2.style_head Forms (old-style markup)
+
+%fieldset.data_block
+  %legend This is the legend
+  %table
+    %tbody
+      %tr
+        %td
+          %label The label
+        %td
+          %input{ type: "text" }
+      %tr
+        %td
+          %label a much longer label
+        %td
+          %input{ type: "text" }
+      %tr
+        %td
+          %label Chosen-Select
+        %td
+          %select.chosen-select
+            %option Option 1
+            %option Option 2
+            %option Option 3
+      %tr
+        %td
+          %label{ for: 'the_checkbox' } Checkbox label
+        %td
+          %input{ type: "checkbox", id: 'the_checkbox' }
+
 %br
 
-%label Label Without Error
-%input{ type: "text", value: "Text Input without Error"}
+%h2.style_head Forms
+
+%fieldset.form__fieldset
+  %h3 This is the new header
+  .field
+    %label{ for: 'short' } Short Label
+    %input{ type: "text", id: 'short' }
+  .field
+    %label{ for: 'long' } Much longer label here
+    %input{ type: "text", id: 'long' }
+  .field
+    %label{ for: 'the_select' } Chosen-Select
+    %select.chosen-select#the_select
+      %option Option 1
+      %option Option 2
+      %option Option 3
+  .field
+    %label{ for: 'email' } Email
+    %input{ type: "email", id: 'email' }
+    .input_details
+      These are some various instructions and details which are useful when filling in this text input box.
+      Please be aware of all the instructions
+  .field
+    %label{ for: 'phone' } Phone
+    %input{ type: "telephone", id: 'phone' }
+  .field
+    %label Gender
+    %label.label--radio{ for: 'gender_male' } Male
+    %input{ type: "radio", value: 'Male', id: 'gender_male', name: 'gender' }
+    %br
+    %label.label--radio{ for: 'gender_female' } Female
+    %input{ type: "radio", value: 'Female', id: 'gender_female', name: 'gender' }
+  .field
+    %label.label--checkbox{ for: 'the_checkbox2' } Checkbox label
+    %input{ type: "checkbox", id: 'the_checkbox2' }
 
 
 // Wizard

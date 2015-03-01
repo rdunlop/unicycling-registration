@@ -3,51 +3,51 @@
 = form_for(@event_configuration, url: update_base_settings_event_configurations_path, method: :put) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
 
-  %h3 Registrant Types
 
-  %fieldset
-    %legend Registration Types Available
+  %fieldset.form__fieldset
+    %h3 Registrant Types
+    .label Registration Types Available
 
-    = check_box_tag :competitor, true, true, disabled: true
-    = label_tag :competitor
-    %br
-    = check_box_tag :noncompetitor, true, true, disabled: true
-    = label_tag :noncompetitor
-    .info_bubble
-      .info Non-Competitors cannot sign up for events
-    %br
-    = f.check_box :spectators
-    = f.label :spectators
-    .info_bubble
-      .info Spectators need not pay for base-registration items
+    .field
+      = label_tag :competitor, nil, class: 'label--checkbox'
+      = check_box_tag :competitor, true, true, disabled: true
+    .field
+      = label_tag :noncompetitor, nil, class: 'label--checkbox'
+      = check_box_tag :noncompetitor, true, true, disabled: true
+      .help_bubble{ title: "Non-Competitors cannot sign up for events" }
+    .field
+      = f.label :spectators, nil, class: 'label--checkbox'
+      = f.check_box :spectators
+      .help_bubble{ title: "Spectators need not pay for base-registration items" }
 
-  = f.label :comp_noncomp_url, "Comp/Non-Comp Explanation"
-  = f.url_field :comp_noncomp_url
-  .description
-    Specify a link which explains the difference between the offered Registration Types
-  = link_to 'Test this URL', '#'
+    .field
+      = f.label :comp_noncomp_url, "Comp/Non-Comp Explanation"
+      = f.url_field :comp_noncomp_url
+      .input_details Specify a link which explains the difference between the offered Registration Types
+      = link_to 'Test this URL', '#'
+
   %hr
 
-  %h3 Waiver
+  %fieldset.form__fieldset
+    %h3 Waiver
 
-  = f.label :waiver_none, "No Waiver"
-  = f.radio_button :waiver, 'none'
-  %br
-  = f.label :waiver_online, "Online Waiver"
-  = f.radio_button :waiver, 'online'
-  %br
-  = f.label :waiver_print, "Print Waiver"
-  = f.radio_button :waiver, 'print'
+    .field
+      = f.label :waiver_none, "No Waiver", class: 'label--radio'
+      = f.radio_button :waiver, 'none'
 
-  %p
-    %b Online Waiver
-    User is required to sign the waiver
+    .field
+      = f.label :waiver_online, "Online Waiver", class: 'label--radio'
+      = f.radio_button :waiver, 'online'
+      .help_bubble{ title: "User is required to sign the waiver" }
 
-  %p
-    %b Printed Waiver
-    We provide a waiver for the user to print/sign at the event. (available in advance on the website so that children can have their parents sign it)
-  = f.label :custom_waiver_text
-  = f.text_area :custom_waiver_text, size: "60x12", placeholder: EventConfiguration.default_waiver_text
+    .field
+      = f.label :waiver_print, "Print Waiver", class: 'label--radio'
+      = f.radio_button :waiver, 'print'
+      .help_bubble{ title: "We provide a waiver for the user to print/sign at the event. (available in advance on the website so that children can have their parents sign it)"}
+
+    .field
+      = f.label :custom_waiver_text
+      = f.text_area :custom_waiver_text, size: "60x12", placeholder: EventConfiguration.default_waiver_text
 
   %hr
 

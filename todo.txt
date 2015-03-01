@@ -139,6 +139,10 @@ OTHER
 
 ========================================================================================================================
 Features which NAUCC would like added:
+- Unlist the test sites from google
+- Create robots files ?
+- Upgrade Ruby
+- Upgrade Rails (upgrade globalize)
 - Fix printed PDF waiver, so that it has 2 columns again.
 - When building a new instance, have a clear progression from:
  - Setup (no new user sign-ups)
