@@ -1,7 +1,13 @@
 class EventConfigurationsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_new_event_configuration, :only => [:create]
-  before_filter :load_event_configuration, except: :create
+  before_action :authenticate_user!
+  before_action :load_new_event_configuration, :only => [:create]
+  before_action :load_event_configuration, except: :create
+  before_action :set_convention_setup_breadcrumb
+  before_action :set_base_settings_breadcrumb, only: [:update_base_settings, :base_settings]
+  before_action :set_name_logo_breadcrumb, only: [:update_name_logo, :name_logo]
+  before_action :set_important_dates_breadcrumb, only: [:update_important_dates, :important_dates]
+  before_action :set_payment_settings_breadcrumb, only: [:update_payment_settings, :payment_settings]
+
   load_and_authorize_resource
 
   def load_event_configuration
@@ -12,11 +18,10 @@ class EventConfigurationsController < ApplicationController
     @event_configuration = EventConfiguration.new(event_configuration_params)
   end
 
-  # GET /event_configurations
-  # GET /event_configurations.json
-  def index
+  # GET /event_configurations/convention_setup
+  def convention_setup
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
     end
   end
 
@@ -25,7 +30,7 @@ class EventConfigurationsController < ApplicationController
     @event_configuration.apply_validation(:base_settings)
     respond_to do |format|
       if @event_configuration.save
-        format.html { redirect_to base_settings_event_configurations_path, notice: 'Event configuration was successfully updated.' }
+        format.html { redirect_to base_settings_event_configuration_path, notice: 'Event configuration was successfully updated.' }
       else
         format.html { render action: "base_settings" }
       end
@@ -37,7 +42,7 @@ class EventConfigurationsController < ApplicationController
     @event_configuration.apply_validation(:name_logo)
     respond_to do |format|
       if @event_configuration.save
-        format.html { redirect_to name_logo_event_configurations_path, notice: 'Event configuration was successfully updated.' }
+        format.html { redirect_to name_logo_event_configuration_path, notice: 'Event configuration was successfully updated.' }
       else
         format.html { render action: "name_logo" }
       end
@@ -49,7 +54,7 @@ class EventConfigurationsController < ApplicationController
     @event_configuration.apply_validation(:important_dates)
     respond_to do |format|
       if @event_configuration.save
-        format.html { redirect_to important_dates_event_configurations_path, notice: 'Event configuration was successfully updated.' }
+        format.html { redirect_to important_dates_event_configuration_path, notice: 'Event configuration was successfully updated.' }
       else
         format.html { render action: "important_dates" }
       end
@@ -61,7 +66,7 @@ class EventConfigurationsController < ApplicationController
     @event_configuration.apply_validation(:payment_settings)
     respond_to do |format|
       if @event_configuration.save
-        format.html { redirect_to payment_settings_event_configurations_path, notice: 'Event configuration was successfully updated.' }
+        format.html { redirect_to payment_settings_event_configuration_path, notice: 'Event configuration was successfully updated.' }
       else
         format.html { render action: "payment_settings" }
       end
@@ -73,9 +78,9 @@ class EventConfigurationsController < ApplicationController
   def create
     respond_to do |format|
       if @event_configuration.save
-        format.html { redirect_to event_configurations_path, notice: 'Event configuration was successfully created.' }
+        format.html { redirect_to convention_setup_event_configuration_path, notice: 'Event configuration was successfully created.' }
       else
-        format.html { render action: "index" }
+        format.html { render action: "convention_setup" }
       end
     end
   end
@@ -85,9 +90,9 @@ class EventConfigurationsController < ApplicationController
   def update
     respond_to do |format|
       if @event_configuration.update_attributes(event_configuration_params)
-        format.html { redirect_to event_configurations_path, notice: 'Event configuration was successfully updated.' }
+        format.html { redirect_to convention_setup_event_configuration_path, notice: 'Event configuration was successfully updated.' }
       else
-        format.html { render action: "index" }
+        format.html { render action: "convention_setup" }
       end
     end
   end
@@ -98,7 +103,7 @@ class EventConfigurationsController < ApplicationController
     @event_configuration.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_configurations_url }
+      format.html { redirect_to convention_setup_event_configuration_url }
       format.json { head :no_content }
     end
   end
@@ -109,13 +114,13 @@ class EventConfigurationsController < ApplicationController
   def clear_cache
     Rails.cache.clear
     flash[:notice] = "Cache cleared"
-    redirect_to cache_event_configurations_path
+    redirect_to cache_event_configuration_path
   end
 
   def clear_counter_cache
     EventConfiguration.reset_counter_caches
     flash[:notice] = "Counter cache cleared"
-    redirect_to cache_event_configurations_path
+    redirect_to cache_event_configuration_path
   end
 
   # FOR THE TEST_MODE flags
@@ -132,6 +137,26 @@ class EventConfigurationsController < ApplicationController
   end
 
   private
+
+  def set_convention_setup_breadcrumb
+    add_breadcrumb "Convention Setup", convention_setup_event_configuration_path
+  end
+
+  def set_base_settings_breadcrumb
+    add_breadcrumb "Base Settings", base_settings_event_configuration_path
+  end
+
+  def set_name_logo_breadcrumb
+    add_breadcrumb "Name and Logo", name_logo_event_configuration_path
+  end
+
+  def set_payment_settings_breadcrumb
+    add_breadcrumb "Payment Settings", payment_settings_event_configuration_path
+  end
+
+  def set_important_dates_breadcrumb
+    add_breadcrumb "Important Deadlines", important_dates_event_configuration_path
+  end
 
   def base_settings_params
     params.require(:event_configuration).permit(:spectators, :standard_skill, :standard_skill_closed_date, :style_name,

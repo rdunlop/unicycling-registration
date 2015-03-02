@@ -1,5 +1,6 @@
 class TenantAliasesController < ApplicationController
   load_and_authorize_resource
+  before_action :set_breadcrumbs
 
   def index
     @tenant_alias = @tenant.tenant_aliases.first || TenantAlias.new
@@ -32,6 +33,11 @@ class TenantAliasesController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_breadcrumb "Convention Setup", convention_setup_event_configuration_path
+    add_breadcrumb "Domain Setup", tenant_aliases_path
+  end
 
   def tenant_alias_params
     params.require(:tenant_alias).permit(:website_alias)

@@ -23,10 +23,10 @@ describe EventConfigurationsController do
     }
   end
 
-  describe "GET index" do
+  describe "GET convention_setup" do
     it "assigns all event_configurations as @event_configurations" do
       event_configuration = EventConfiguration.create! valid_attributes
-      get :index, {}
+      get :convention_setup, {}
       assigns(:event_configurations).should eq([event_configuration])
     end
   end
@@ -47,7 +47,7 @@ describe EventConfigurationsController do
 
       it "redirects to the created event_configuration" do
         post :create, {:event_configuration => valid_attributes}
-        response.should redirect_to(event_configurations_path)
+        response.should redirect_to(convention_setup_event_configuration_path)
       end
     end
 
@@ -63,7 +63,7 @@ describe EventConfigurationsController do
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
         post :create, {:event_configuration => {:long_name => "long name"}}
-        response.should render_template("index")
+        response.should render_template("convention_setup")
       end
     end
   end
@@ -89,7 +89,7 @@ describe EventConfigurationsController do
       it "redirects to the event_configuration" do
         event_configuration = EventConfiguration.create! valid_attributes
         put :update, {:id => event_configuration.to_param, :event_configuration => valid_attributes}
-        response.should redirect_to(event_configurations_path)
+        response.should redirect_to(convention_setup_event_configuration_path)
       end
     end
 
@@ -107,7 +107,7 @@ describe EventConfigurationsController do
         # Trigger the behavior that occurs when invalid params are submitted
         EventConfiguration.any_instance.stub(:save).and_return(false)
         put :update, {:id => event_configuration.to_param, :event_configuration => {:long_name => "long name"}}
-        response.should render_template("index")
+        response.should render_template("convention_setup")
       end
     end
   end
@@ -123,7 +123,7 @@ describe EventConfigurationsController do
     it "redirects to the event_configurations list" do
       event_configuration = EventConfiguration.create! valid_attributes
       delete :destroy, {:id => event_configuration.to_param}
-      response.should redirect_to(event_configurations_url)
+      response.should redirect_to(convention_setup_event_configuration_url)
     end
   end
 
@@ -134,7 +134,7 @@ describe EventConfigurationsController do
     end
 
     it "Cannot view configurations" do
-      get :index
+      get :convention_setup
       response.should redirect_to(root_path)
     end
     it "Cannot edit configuration" do
