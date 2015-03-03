@@ -1,0 +1,50 @@
+= form_for(@expense_item) do |f|
+  = render partial: "shared/error_messages", object: @expense_item
+
+  .field
+    = f.label :expense_group_id
+    = f.select :expense_group_id, ExpenseGroup.user_manageable.map {|eg| [eg.group_name, eg.id] }
+    %br
+    - languages.each do |lang|
+      = f.globalize_fields_for lang do |g|
+        %b= long_language_name(lang)
+        %br
+        = g.label :name
+        = g.text_field :name
+        %br
+        = g.label :description
+        = g.text_field :description
+        %br
+        = g.label :details_label, "Details (What details do we want to ask the user for)"
+        = g.text_field :details_label
+        %br
+        %br
+    = f.label :has_details
+    = f.check_box :has_details
+    %br
+    %br
+    = f.label :has_custom_cost
+    = f.check_box :has_custom_cost
+    %br
+    %br
+    = f.label :cost
+    = f.text_field :cost
+    %br
+    = f.label :tax_percentage
+    = f.number_field :tax_percentage, :step => 0.001
+    %br
+    = f.label :export_name
+    = f.text_field :export_name
+    %br
+    = f.label :position
+    = f.number_field :position
+    %br
+    = f.label :maximum_available
+    (How many are available for sale)
+    \#{f.number_field :maximum_available}
+    %br
+    = f.label :maximum_per_registrant
+    (How many are permitted for each registrant)
+    \#{f.number_field :maximum_per_registrant}
+  .actions
+    = f.submit

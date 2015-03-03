@@ -25,7 +25,9 @@ class RegistrationPeriod < ActiveRecord::Base
   accepts_nested_attributes_for :translations
 
   belongs_to :competitor_expense_item, :class_name => "ExpenseItem"
+  accepts_nested_attributes_for :competitor_expense_item
   belongs_to :noncompetitor_expense_item, :class_name => "ExpenseItem"
+  accepts_nested_attributes_for :noncompetitor_expense_item
 
   validates :onsite, :inclusion => { :in => [true, false] } # because it's a boolean
 
@@ -33,6 +35,8 @@ class RegistrationPeriod < ActiveRecord::Base
 
   after_save :clear_cache
   after_destroy :clear_cache
+
+  alias_attribute :to_s, :name
 
   def init
     self.onsite = false if self.onsite.nil?

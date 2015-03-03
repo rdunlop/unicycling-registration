@@ -14,6 +14,7 @@
 #  competitor_required        :boolean          default(FALSE)
 #  noncompetitor_required     :boolean          default(FALSE)
 #  admin_visible              :boolean          default(FALSE)
+#  registration_items         :boolean          default(FALSE), not null
 #
 
 class ExpenseGroup < ActiveRecord::Base
@@ -39,11 +40,30 @@ class ExpenseGroup < ActiveRecord::Base
     where("visible = true or admin_visible = true")
   end
 
+  def self.registration_items_group
+    where(registration_items: true).first || create_registration_items_group
+  end
+
+  def self.create_registration_items_group
+    create({
+      visible: false,
+      admin_visible: false,
+      registration_items: true,
+      competitor_required: false,
+      noncompetitor_required: false,
+      group_name: "Registration",
+    })
+  end
+
   after_initialize :init
 
   def init
     self.competitor_required = false if self.competitor_required.nil?
     self.noncompetitor_required = false if self.competitor_required.nil?
+  end
+
+  def self.user_manageable
+    where(registration_items: false)
   end
 
   def self.for_competitor_type(is_competitor)

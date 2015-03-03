@@ -5,6 +5,7 @@ class ExpenseGroupsController < ApplicationController
   # GET /expense_groups
   # GET /expense_groups.json
   def index
+    @expense_groups = ExpenseGroup.user_manageable
     @expense_group = ExpenseGroup.new
 
     respond_to do |format|

@@ -1,6 +1,8 @@
 class RegistrationPeriodsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
+
+  before_action :set_breadcrumbs
 
   # GET /registration_periods
   # GET /registration_periods.json
@@ -25,6 +27,8 @@ class RegistrationPeriodsController < ApplicationController
   # GET /registration_periods/new
   # GET /registration_periods/new.json
   def new
+    @registration_period.build_competitor_expense_item
+    @registration_period.build_noncompetitor_expense_item
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @registration_period }
@@ -38,8 +42,10 @@ class RegistrationPeriodsController < ApplicationController
   # POST /registration_periods
   # POST /registration_periods.json
   def create
+    creator = CreatesRegistrationPeriod.new(@registration_period)
+
     respond_to do |format|
-      if @registration_period.save
+      if creator.perform
         format.html { redirect_to @registration_period, notice: 'Registration period was successfully created.' }
         format.json { render json: @registration_period, status: :created, location: @registration_period }
       else
@@ -76,8 +82,16 @@ class RegistrationPeriodsController < ApplicationController
 
   private
 
+  def set_breadcrumbs
+    add_breadcrumb "Convention Setup", convention_setup_event_configuration_path
+    add_breadcrumb "Registration Costs", registration_periods_path
+  end
+
   def registration_period_params
     params.require(:registration_period).permit(:competitor_expense_item_id, :end_date, :name, :noncompetitor_expense_item_id, :start_date, :onsite,
-                                                :translations_attributes => [:id, :locale, :name])
+                                                translations_attributes: [:id, :locale, :name],
+                                                competitor_expense_item_attributes: [:id, :cost, :tax_percentage],
+                                                noncompetitor_expense_item_attributes: [:id, :cost, :tax_percentage]
+                                                )
   end
 end

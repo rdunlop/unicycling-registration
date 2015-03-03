@@ -17,8 +17,14 @@ describe RegistrationPeriodsController do
       end_date: Date.new(2013, 02, 20),
       onsite: false,
       name: "Early",
-      competitor_expense_item_id: @comp_exp.id,
-      noncompetitor_expense_item_id: @noncomp_exp.id
+      competitor_expense_item_attributes: {
+        cost: @comp_exp.cost,
+        tax_percentage: @comp_exp.tax_percentage
+      },
+      noncompetitor_expense_item_attributes: {
+        cost: @noncomp_exp.cost,
+        tax_percentage: @noncomp_exp.tax_percentage,
+      }
     }
   end
 
@@ -36,7 +42,7 @@ describe RegistrationPeriodsController do
 
   describe "GET index" do
     it "assigns all registration_periods as @registration_periods" do
-      registration_period = RegistrationPeriod.create! valid_attributes
+      registration_period = FactoryGirl.create :registration_period
       get :index, {}
       assigns(:registration_periods).should eq([registration_period])
     end
@@ -44,7 +50,7 @@ describe RegistrationPeriodsController do
 
   describe "GET show" do
     it "assigns the requested registration_period as @registration_period" do
-      registration_period = RegistrationPeriod.create! valid_attributes
+      registration_period = FactoryGirl.create :registration_period
       get :show, {:id => registration_period.to_param}
       assigns(:registration_period).should eq(registration_period)
     end
@@ -59,7 +65,7 @@ describe RegistrationPeriodsController do
 
   describe "GET edit" do
     it "assigns the requested registration_period as @registration_period" do
-      registration_period = RegistrationPeriod.create! valid_attributes
+      registration_period = FactoryGirl.create :registration_period
       get :edit, {:id => registration_period.to_param}
       assigns(:registration_period).should eq(registration_period)
     end
@@ -105,7 +111,7 @@ describe RegistrationPeriodsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested registration_period" do
-        registration_period = RegistrationPeriod.create! valid_attributes
+        registration_period = FactoryGirl.create :registration_period
         # Assuming there are no other registration_periods in the database, this
         # specifies that the RegistrationPeriod created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,21 +121,25 @@ describe RegistrationPeriodsController do
       end
 
       it "assigns the requested registration_period as @registration_period" do
-        registration_period = RegistrationPeriod.create! valid_attributes
+        registration_period = FactoryGirl.create :registration_period
         put :update, {:id => registration_period.to_param, :registration_period => valid_attributes}
         assigns(:registration_period).should eq(registration_period)
       end
 
       it "redirects to the registration_period" do
-        registration_period = RegistrationPeriod.create! valid_attributes
-        put :update, {:id => registration_period.to_param, :registration_period => valid_attributes}
+        registration_period = FactoryGirl.create :registration_period
+        params = valid_attributes.merge({
+          competitor_expense_item_attributes: { id: registration_period.competitor_expense_item.id },
+          noncompetitor_expense_item_attributes: { id: registration_period.noncompetitor_expense_item.id },
+          })
+        put :update, {:id => registration_period.to_param, :registration_period => params}
         response.should redirect_to(registration_period)
       end
     end
 
     describe "with invalid params" do
       it "assigns the registration_period as @registration_period" do
-        registration_period = RegistrationPeriod.create! valid_attributes
+        registration_period = FactoryGirl.create :registration_period
         # Trigger the behavior that occurs when invalid params are submitted
         RegistrationPeriod.any_instance.stub(:save).and_return(false)
         put :update, {:id => registration_period.to_param, :registration_period => {:name => 'fake'}}
@@ -137,7 +147,7 @@ describe RegistrationPeriodsController do
       end
 
       it "re-renders the 'edit' template" do
-        registration_period = RegistrationPeriod.create! valid_attributes
+        registration_period = FactoryGirl.create :registration_period
         # Trigger the behavior that occurs when invalid params are submitted
         RegistrationPeriod.any_instance.stub(:save).and_return(false)
         put :update, {:id => registration_period.to_param, :registration_period => {:onsite => true}}
@@ -148,14 +158,14 @@ describe RegistrationPeriodsController do
 
   describe "DELETE destroy" do
     it "destroys the requested registration_period" do
-      registration_period = RegistrationPeriod.create! valid_attributes
+      registration_period = FactoryGirl.create :registration_period
       expect {
         delete :destroy, {:id => registration_period.to_param}
       }.to change(RegistrationPeriod, :count).by(-1)
     end
 
     it "redirects to the registration_periods list" do
-      registration_period = RegistrationPeriod.create! valid_attributes
+      registration_period = FactoryGirl.create :registration_period
       delete :destroy, {:id => registration_period.to_param}
       response.should redirect_to(registration_periods_url)
     end

@@ -14,6 +14,7 @@
 #  competitor_required        :boolean          default(FALSE)
 #  noncompetitor_required     :boolean          default(FALSE)
 #  admin_visible              :boolean          default(FALSE)
+#  registration_items         :boolean          default(FALSE), not null
 #
 
 require 'spec_helper'
