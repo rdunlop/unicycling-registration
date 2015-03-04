@@ -59,6 +59,27 @@ describe RegistrationPeriod do
     RegistrationPeriod.last_online_period.should == @rp
   end
 
+  describe "with associated expense_items" do
+    let!(:comp_item) { @rp.competitor_expense_item }
+    let!(:noncomp_item) { @rp.noncompetitor_expense_item }
+
+    it "removes the expense item on RP deletion" do
+      @rp.destroy
+      expect(comp_item).to be_destroyed
+      expect(noncomp_item).to be_destroyed
+    end
+
+    describe "when the expense_item has a payment" do
+      before do
+        FactoryGirl.create :payment_detail, expense_item: comp_item
+      end
+
+      it "can't remove the RP on deletion" do
+        expect(@rp.destroy).to be_falsy
+      end
+    end
+  end
+
   describe "with existing periods" do
     before(:each) do
       @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 01), :end_date => Date.new(2012, 02, 02))
