@@ -17,7 +17,7 @@
 class RegistrationPeriod < ActiveRecord::Base
   include CachedModel
 
-  default_scope { order('start_date ASC') }
+  default_scope { order(:start_date) }
 
   validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
 

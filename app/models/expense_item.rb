@@ -24,7 +24,6 @@
 #
 
 class ExpenseItem < ActiveRecord::Base
-  default_scope { order('expense_group_id ASC, position ASC') }
 
   validates :name, :description, :position, :cost, :expense_group, :tax_percentage, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
@@ -52,6 +51,15 @@ class ExpenseItem < ActiveRecord::Base
     self.tax_percentage = 0 if self.tax_percentage.nil?
     self.has_custom_cost = false if self.has_custom_cost.nil?
   end
+
+  def self.ordered
+    order(:expense_group_id, :position)
+  end
+
+  def self.user_manageable
+    includes(:expense_group).where(expense_groups: { registration_items: false })
+  end
+
 
   # items paid for
   def paid_items

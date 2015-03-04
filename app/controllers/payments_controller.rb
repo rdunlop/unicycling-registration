@@ -40,7 +40,7 @@ class PaymentsController < ApplicationController
 
   def summary
     add_payment_summary_breadcrumb
-    @expense_items = ExpenseItem.includes(:translations, :expense_group => [:translations])
+    @expense_items = ExpenseItem.includes(:translations, :expense_group => [:translations]).ordered
   end
 
   # GET /payments/1

@@ -180,6 +180,19 @@ describe ExpenseItem do
     end
   end
 
+  describe "with an expense_group set for registration_items" do
+    before(:each) do
+      @rg = FactoryGirl.create(:expense_group, :registration)
+    end
+
+    it "isn't user_manageable" do
+      @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+      expect(ExpenseItem.user_manageable).to eq([@item])
+      expect(ExpenseItem.all).to match_array([@re, @item])
+    end
+  end
+
+
   describe "with an expense_group set for 'competitor_required'" do
     before(:each) do
       @rg = FactoryGirl.create(:expense_group, :competitor_required => true)

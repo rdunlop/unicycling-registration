@@ -19,7 +19,7 @@ class VolunteerOpportunity < ActiveRecord::Base
   validates :description, :display_order, presence: true
   validates :description, uniqueness: true
 
-  default_scope { order("display_order ASC") }
+  default_scope { order(:display_order) }
 
   has_many :volunteer_choices, dependent: :destroy
 

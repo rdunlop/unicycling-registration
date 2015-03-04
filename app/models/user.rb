@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   devise :confirmable
 
-  default_scope { order('email ASC') }
+  default_scope { order(:email) }
 
   has_paper_trail :meta => {:user_id => :id }
 
