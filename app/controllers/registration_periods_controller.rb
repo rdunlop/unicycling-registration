@@ -72,7 +72,9 @@ class RegistrationPeriodsController < ApplicationController
   # DELETE /registration_periods/1
   # DELETE /registration_periods/1.json
   def destroy
-    @registration_period.destroy
+    if !@registration_period.destroy
+      flash[:alert] = "Unable to destroy Registration Period"
+    end
 
     respond_to do |format|
       format.html { redirect_to registration_periods_url }
