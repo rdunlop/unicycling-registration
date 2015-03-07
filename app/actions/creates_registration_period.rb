@@ -26,7 +26,6 @@ class CreatesRegistrationPeriod
   def set_details(expense_item, name)
     expense_item.expense_group = reg_expense_group
     expense_item.name = name
-    expense_item.description = name
     expense_item.position = (reg_expense_group.expense_items.map(&:position).max || 0) + 1
   end
 

@@ -13,7 +13,6 @@ describe "expense_items/edit" do
     assert_select "form", :action => expense_group_expense_items_path(@expense_group, @expense_item), :method => "post" do
       assert_select "input#expense_item_has_details", :name => "expense_item[has_details]"
       assert_select "input#expense_item_cost", :name => "expense_item[cost]"
-      assert_select "input#expense_item_export_name", :name => "expense_item[export_name]"
     end
   end
 end

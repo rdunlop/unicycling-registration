@@ -70,7 +70,7 @@ class EventChoicesController < ApplicationController
   private
 
   def event_choice_params
-    params.require(:event_choice).permit(:cell_type, :export_name, :label, :multiple_values, :position, :autocomplete, :optional, :tooltip,
+    params.require(:event_choice).permit(:cell_type, :label, :multiple_values, :position, :autocomplete, :optional, :tooltip,
                                          :optional_if_event_choice_id, :required_if_event_choice_id,
                                          :translations_attributes => [:id, :label, :tooltip, :locale])
   end

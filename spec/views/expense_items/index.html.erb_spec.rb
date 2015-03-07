@@ -6,16 +6,12 @@ describe "expense_items/index" do
     @group2 = FactoryGirl.create(:expense_group, :group_name => "Group 2")
     @item1 = FactoryGirl.create(:expense_item,
                                 :name => "First",
-                                :description => "FDescription",
                                 :cost => 9.99,
-                                :export_name => "ename",
                                 :position => 1,
                                 :expense_group => @group1)
     @item2 = FactoryGirl.create(:expense_item,
                                 :name => "Second",
-                                :description => "SDescription",
                                 :cost => 31.99,
-                                :export_name => "sname",
                                 :position => 2,
                                 :expense_group => @group2)
     @expense_items = [ @item1, @item2 ]
@@ -39,7 +35,6 @@ describe "expense_items/index" do
     assert_select "form", :action => expense_group_expense_items_path(@expense_group), :method => "post" do
       assert_select "input#expense_item_cost", :name => "expense_item[cost]"
       assert_select "input#expense_item_has_details", :name => "expense_item[has_details]"
-      assert_select "input#expense_item_export_name", :name => "expense_item[export_name]"
     end
   end
 end

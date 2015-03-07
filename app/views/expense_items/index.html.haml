@@ -5,7 +5,6 @@
     %thead
       %tr
         %th Name
-        %th Description
         %th Cost
         %th Tax Percentage
         %th Tax (calculated)
@@ -16,7 +15,6 @@
       - @expense_items.each do |expense_item|
         %tr
           %td= expense_item.name
-          %td= expense_item.description
           %td
             - unless expense_item.has_custom_cost
               = expense_item.cost

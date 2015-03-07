@@ -24,7 +24,6 @@ describe "events/index" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => category_events_path(@category), :method => "post" do
-      assert_select "input#event_export_name", :name => "event[export_name]"
       assert_select "input#event_position", :name => "event[position]"
     end
   end

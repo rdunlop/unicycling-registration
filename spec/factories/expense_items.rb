@@ -4,9 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string(255)
-#  description            :string(255)
 #  cost                   :decimal(, )
-#  export_name            :string(255)
 #  position               :integer
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -28,9 +26,7 @@
 FactoryGirl.define do
   factory :expense_item do
     sequence(:name) {|n| "T-Shirt Size ##{n}" }
-    description "TShirt Small"
     cost "9.99"
-    export_name "t_shirt_small"
     position 1
     expense_group # FactoryGirl
     has_details false

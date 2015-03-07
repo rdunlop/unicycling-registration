@@ -113,9 +113,9 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:category_id, :export_name, :position, :name, :visible, :artistic, :accepts_music_uploads,
+    params.require(:event).permit(:category_id, :position, :name, :visible, :artistic, :accepts_music_uploads,
                                   :accepts_wheel_size_override,
-                                  :event_choices_attributes => [:export_name, :cell_type, :label, :multiple_values, :position, :id],
+                                  :event_choices_attributes => [:cell_type, :label, :multiple_values, :position, :id],
                                   :event_categories_attributes => [:name, :position, :id])
   end
 

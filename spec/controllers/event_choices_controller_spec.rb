@@ -11,7 +11,6 @@ describe EventChoicesController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      export_name: "100m",
       cell_type: "boolean",
       autocomplete: false,
       optional: false,
@@ -125,7 +124,6 @@ describe EventChoicesController do
     describe "with translations specified for label/tooltip" do
       before(:each) do
         @ec_params = {
-          :export_name => "new_ec",
           "cell_type"=>"boolean",
           "multiple_values"=>"",
           "translations_attributes"=>{

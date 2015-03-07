@@ -4,9 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string(255)
-#  description            :string(255)
 #  cost                   :decimal(, )
-#  export_name            :string(255)
 #  position               :integer
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -25,7 +23,7 @@
 
 class ExpenseItem < ActiveRecord::Base
 
-  validates :name, :description, :position, :cost, :expense_group, :tax_percentage, :presence => true
+  validates :name, :position, :cost, :expense_group, :tax_percentage, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :tax_percentage, :numericality => {:greater_than_or_equal_to => 0}
@@ -34,7 +32,7 @@ class ExpenseItem < ActiveRecord::Base
   has_many :registrant_expense_items, :inverse_of => :expense_item, dependent: :restrict_with_error
   has_many :coupon_code_expense_items, dependent: :destroy
 
-  translates :name, :description, :details_label
+  translates :name, :details_label
   accepts_nested_attributes_for :translations
 
   belongs_to :expense_group, :inverse_of => :expense_items

@@ -5,7 +5,6 @@
   %table.event_listing
     %tr
       %th Name
-      %th Export Name
       %th Type
       %th Position
       %th
@@ -15,7 +14,6 @@
     - @events.each do |event|
       %tr
         %th= event.name
-        %td{:colspan => "2"}= event.export_name
         %td= event.position
         %td= link_to 'Event Categories', event_event_categories_path(event)
         %td= link_to 'Event Choices', event_event_choices_path(event)
@@ -23,8 +21,7 @@
         %td= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' }
       - event.event_choices.each do |event_choice|
         %tr
-          %td &lfloor;
-          %td= event_choice.label
+          %td &lfloor; #{event_choice.label}
           %td= event_choice.cell_type
           %td= event_choice.position
       %tr

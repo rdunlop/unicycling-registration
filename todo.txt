@@ -1,6 +1,5 @@
 - add ability to sort/save expense_group order
 - add ability to sort/save expense_item order
-- remove unused colums description, export_name,
 - add breadcurmbs for expense_item
 - figure out "enabled" vs "visible" for expense groups
 

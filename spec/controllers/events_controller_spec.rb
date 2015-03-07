@@ -168,7 +168,6 @@ describe EventsController do
           put :update, {:id => @event.to_param, :event => {
             :event_choices_attributes => [
               {
-                :export_name => "100m",
                 :cell_type => "boolean",
                 :label => "My event Choice",
                 :multiple_values => "m2",
@@ -176,7 +175,6 @@ describe EventsController do
               }] }}
         }.to change(EventChoice, :count).by(1)
         ec = EventChoice.last
-        ec.export_name.should == "100m"
         ec.cell_type.should == "boolean"
         ec.label.should == "My event Choice"
         ec.multiple_values.should == "m2"
@@ -187,7 +185,6 @@ describe EventsController do
         put :update, {:id => @event.to_param, :event => {
           :event_choices_attributes => [
             {
-              :export_name => "100m",
               :cell_type => "boolean",
               :label => "My event Choice",
               :multiple_values => "m2",
@@ -199,7 +196,6 @@ describe EventsController do
           put :update, {:id => @event.to_param, :event => {
             :event_choices_attributes => [
               {
-                :export_name => ec.export_name,
                 :cell_type => ec.cell_type,
                 :label => "new Label",
                 :multiple_values => ec.multiple_values,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150302234335) do
+ActiveRecord::Schema.define(version: 20150307041930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -307,7 +307,6 @@ ActiveRecord::Schema.define(version: 20150302234335) do
 
   create_table "event_choices", force: true do |t|
     t.integer  "event_id"
-    t.string   "export_name"
     t.string   "cell_type"
     t.string   "multiple_values"
     t.string   "label"
@@ -322,7 +321,6 @@ ActiveRecord::Schema.define(version: 20150302234335) do
   end
 
   add_index "event_choices", ["event_id", "position"], name: "index_event_choices_on_event_id_and_position", unique: true, using: :btree
-  add_index "event_choices", ["export_name"], name: "index_event_choices_on_export_name", unique: true, using: :btree
 
   create_table "event_configuration_translations", force: true do |t|
     t.integer  "event_configuration_id", null: false
@@ -378,7 +376,6 @@ ActiveRecord::Schema.define(version: 20150302234335) do
 
   create_table "events", force: true do |t|
     t.integer  "category_id"
-    t.string   "export_name"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -426,7 +423,6 @@ ActiveRecord::Schema.define(version: 20150302234335) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.string   "description"
     t.string   "details_label"
   end
 
@@ -435,9 +431,7 @@ ActiveRecord::Schema.define(version: 20150302234335) do
 
   create_table "expense_items", force: true do |t|
     t.string   "name"
-    t.string   "description"
     t.decimal  "cost"
-    t.string   "export_name"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"

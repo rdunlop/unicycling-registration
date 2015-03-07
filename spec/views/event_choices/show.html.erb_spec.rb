@@ -5,7 +5,6 @@ describe "event_choices/show" do
     @event = FactoryGirl.create(:event)
     @event_choice = FactoryGirl.create(:event_choice,
                                        :event => @event,
-                                       :export_name => "Export Name",
                                        :cell_type => "boolean",
                                        :multiple_values => "Multiple Values",
                                        :label => "Label",
@@ -16,7 +15,6 @@ describe "event_choices/show" do
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Export Name/)
     rendered.should match(/boolean/)
     rendered.should match(/Multiple Values/)
     rendered.should match(/Label/)

@@ -4,7 +4,6 @@
 #
 #  id                          :integer          not null, primary key
 #  category_id                 :integer
-#  export_name                 :string(255)
 #  position                    :integer
 #  created_at                  :datetime
 #  updated_at                  :datetime

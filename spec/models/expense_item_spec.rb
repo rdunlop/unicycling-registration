@@ -4,9 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string(255)
-#  description            :string(255)
 #  cost                   :decimal(, )
-#  export_name            :string(255)
 #  position               :integer
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -92,10 +90,6 @@ describe ExpenseItem do
   end
   it "by default has a normal cost" do
     @item.has_custom_cost.should == false
-  end
-  it "must have a description" do
-    @item.description = nil
-    @item.valid?.should == false
   end
   it "must have a position" do
     @item.position = nil

@@ -22,9 +22,6 @@
       %td= f.label :name
       %td= f.text_field :name, :title => "'Standard Skill' is a special name, it causes a link on the registration form summary"
     %tr
-      %td= f.label :export_name
-      %td= f.text_field :export_name
-    %tr
       %td= f.label :position
       %td= f.number_field :position
     %tr
@@ -48,9 +45,6 @@
     %tr
       %th.center{:colspan => "2"} Event Choices
     = f.fields_for :event_choices do |ec|
-      %tr
-        %td= ec.label :export_name
-        %td= ec.text_field :export_name
       %tr
         %td= ec.label :cell_type
         %td= ec.select :cell_type, EventChoice.cell_types

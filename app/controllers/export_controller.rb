@@ -133,7 +133,7 @@ class ExportController < ApplicationController
     s.write report
 
     respond_to do |format|
-      format.xls { send_data report.string, :filename => "#{ei.description}.xls" }
+      format.xls { send_data report.string, :filename => "#{ei.name}.xls" }
     end
   end
 

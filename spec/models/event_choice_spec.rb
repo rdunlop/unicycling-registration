@@ -4,7 +4,6 @@
 #
 #  id                          :integer          not null, primary key
 #  event_id                    :integer
-#  export_name                 :string(255)
 #  cell_type                   :string(255)
 #  multiple_values             :string(255)
 #  label                       :string(255)
@@ -20,7 +19,6 @@
 # Indexes
 #
 #  index_event_choices_on_event_id_and_position  (event_id,position) UNIQUE
-#  index_event_choices_on_export_name            (export_name) UNIQUE
 #
 
 require 'spec_helper'
@@ -43,15 +41,6 @@ describe EventChoice do
     @ec.tooltip = ""
     @ec.valid?.should == true
     (@ec.tooltip.blank? ? true : false ).should == true
-  end
-
-  it "requires a export_name" do
-    @ec.export_name = nil
-    @ec.valid?.should == false
-  end
-  it "export name must be unique" do
-    @ec2 = FactoryGirl.build(:event_choice, :export_name => @ec.export_name)
-    @ec2.valid?.should == false
   end
 
   it "must have a value for optional" do

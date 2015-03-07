@@ -4,7 +4,6 @@
 #
 #  id                          :integer          not null, primary key
 #  event_id                    :integer
-#  export_name                 :string(255)
 #  cell_type                   :string(255)
 #  multiple_values             :string(255)
 #  label                       :string(255)
@@ -20,7 +19,6 @@
 # Indexes
 #
 #  index_event_choices_on_event_id_and_position  (event_id,position) UNIQUE
-#  index_event_choices_on_export_name            (export_name) UNIQUE
 #
 
 class EventChoice < ActiveRecord::Base
@@ -31,7 +29,6 @@ class EventChoice < ActiveRecord::Base
   belongs_to :required_if_event_choice, :class_name => "EventChoice"
 
   validates :label, {:presence => true}
-  validates :export_name, {:presence => true, :uniqueness => true}
 
   translates :label, :tooltip
   accepts_nested_attributes_for :translations

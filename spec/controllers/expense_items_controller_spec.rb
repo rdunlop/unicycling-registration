@@ -17,7 +17,6 @@ describe ExpenseItemsController do
         "1" => {
           :locale => "en",
           :name => "Small T-Shirt",
-          :description => "Small NAUCC T-Shirt",
           :details_label => nil,
         }
       },

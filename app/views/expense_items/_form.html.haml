@@ -9,9 +9,6 @@
         = g.label :name
         = g.text_field :name
         .field
-          = g.label :description
-          = g.text_field :description
-        .field
           = g.label :details_label, "Question"
           = g.text_field :details_label
   .field
@@ -30,9 +27,6 @@
   .field
     = f.label :tax_percentage
     = f.number_field :tax_percentage, :step => 0.001
-  .field
-    = f.label :export_name
-    = f.text_field :export_name
   .field
     = f.label :maximum_available, "Max Total Number for Sale"
     = f.number_field :maximum_available
