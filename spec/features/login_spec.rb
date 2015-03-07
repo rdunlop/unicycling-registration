@@ -24,21 +24,4 @@ describe 'Logging in to the system' do
       end
     end
   end
-
-  context 'as an admin', login: true do
-    let(:user) { FactoryGirl.create :super_admin_user }
-
-    context 'that is not logged in' do
-      let(:path) { '/convention_setup' }
-
-      specify 'is redirected to the proper path after logging in' do
-        visit path
-        expect(current_path).to eq new_user_session_path
-
-        fill_in_login_form
-
-        expect(current_path).to eq path
-      end
-    end
-  end
 end

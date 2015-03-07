@@ -1,8 +1,8 @@
 class ConventionSetupController < ApplicationController
   before_action :set_breadcrumb
-  authorize_resource class: false
 
   def index
+    authorize! :read, :convention_setup
   end
 
   private

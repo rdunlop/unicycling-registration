@@ -23,31 +23,12 @@ describe EventConfigurationsController do
     }
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested event_configuration" do
-      event_configuration = EventConfiguration.create! valid_attributes
-      expect {
-        delete :destroy, {:id => event_configuration.to_param}
-      }.to change(EventConfiguration, :count).by(-1)
-    end
-
-    it "redirects to the event_configurations list" do
-      event_configuration = EventConfiguration.create! valid_attributes
-      delete :destroy, {:id => event_configuration.to_param}
-      response.should redirect_to(convention_setup_event_configuration_url)
-    end
-  end
-
   describe "as a logged in user" do
     before(:each) do
       @user = FactoryGirl.create(:user)
       sign_in @user
     end
 
-    it "Cannot view configurations" do
-      get :convention_setup
-      response.should redirect_to(root_path)
-    end
     it "Cannot edit configuration" do
       event_configuration = EventConfiguration.create! valid_attributes
       get :base_settings, {:id => event_configuration.to_param}

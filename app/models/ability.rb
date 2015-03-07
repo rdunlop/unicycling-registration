@@ -161,6 +161,8 @@ class Ability
       can :manage, TenantAlias
       can :manage, EventConfiguration
       can :manage, :convention_setup
+      can :read, :onsite_registration
+      can :manage, ExpenseGroup
     end
 
     if user.has_role? :awards_admin

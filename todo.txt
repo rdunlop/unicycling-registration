@@ -1,6 +1,5 @@
 - add ability to sort/save expense_group order
 - add ability to sort/save expense_item order
-- figure out "enabled" vs "visible" for expense groups
 
 Reorganized January 15, 2015.
 

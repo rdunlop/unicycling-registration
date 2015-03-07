@@ -5,7 +5,6 @@
     %th Sort
     %th Group name
     %th Info Url
-    %th Enabled
     %th
     %th
     %th
@@ -13,7 +12,6 @@
     %tr
       %td= 'TBD'
       %td= expense_group.group_name
-      %td= expense_group.visible
       %td= link_to 'Details', expense_group_expense_items_path(expense_group)
       %td= link_to 'Edit', edit_expense_group_path(expense_group)
       %td= link_to 'Delete', expense_group, method: :delete, data: { confirm: 'Are you sure?' }

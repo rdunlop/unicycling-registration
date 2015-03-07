@@ -41,6 +41,7 @@
       end
       heading.entries << Menu::MenuEntry.new(:title => 'User Permissions', :url => permissions_path, :permitted => can?(:manage, User))
       heading.entries << Menu::MenuEntry.new(title: 'Cache Management', url: cache_event_configuration_path, permitted: can?(:manage, EventConfiguration))
+      heading.entries << Menu::MenuEntry.new(title: 'On-Site Registration', url: onsite_registration_path, permitted: can?(:read, :onsite_registration))
     %>
     <%
       heading = Menu::MenuHeading.new(:title => 'Manage')
