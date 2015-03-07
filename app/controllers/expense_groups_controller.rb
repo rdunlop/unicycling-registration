@@ -1,4 +1,4 @@
-class ExpenseGroupsController < ApplicationController
+class ExpenseGroupsController < ConventionSetupController
   before_action :authenticate_user!
   load_and_authorize_resource
   before_action :set_breadcrumbs
@@ -60,7 +60,6 @@ class ExpenseGroupsController < ApplicationController
   private
 
   def set_breadcrumbs
-    add_breadcrumb "Convention Setup", convention_setup_event_configuration_path
     add_breadcrumb "Other Items For Sale", expense_groups_path
   end
 

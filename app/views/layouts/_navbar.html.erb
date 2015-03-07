@@ -34,7 +34,7 @@
     <%
       heading = Menu::MenuHeading.new(:title => 'Site Config')
       m.headings << heading
-      heading.entries << Menu::MenuEntry.new(:title => 'Convention Setup', :url => convention_setup_event_configuration_path, :permitted => can?(:manage, EventConfiguration))
+      heading.entries << Menu::MenuEntry.new(:title => 'Convention Setup', :url => convention_setup_path, :permitted => can?(:read, :convention_setup))
       heading.entries << Menu::MenuEntry.new(:title => 'Event Offerings', :url => convention_setup_categories_path, :permitted => can?(:manage, Category))
       if @config.standard_skill
         heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Entries', :url => standard_skill_entries_path, :permitted => can?(:manage, StandardSkillEntry))

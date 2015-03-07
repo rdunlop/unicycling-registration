@@ -31,7 +31,3 @@
       %td= link_to "Payment Settings", payment_settings_event_configuration_path
     %tr
       %td Access Settings
-
-- unless @event_configurations.count == 0
-  - event_configuration = @event_configurations.first
-  = link_to 'Delete', event_configuration, method: :delete, data: { confirm: 'Are you sure?' }

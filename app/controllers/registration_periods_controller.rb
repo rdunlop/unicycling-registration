@@ -1,4 +1,4 @@
-class RegistrationPeriodsController < ApplicationController
+class RegistrationPeriodsController < ConventionSetupController
   before_action :authenticate_user!
   load_and_authorize_resource
 
@@ -85,7 +85,6 @@ class RegistrationPeriodsController < ApplicationController
   private
 
   def set_breadcrumbs
-    add_breadcrumb "Convention Setup", convention_setup_event_configuration_path
     add_breadcrumb "Registration Costs", registration_periods_path
   end
 

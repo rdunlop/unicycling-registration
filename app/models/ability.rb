@@ -160,6 +160,7 @@ class Ability
     if user.has_role? :convention_admin
       can :manage, TenantAlias
       can :manage, EventConfiguration
+      can :manage, :convention_setup
     end
 
     if user.has_role? :awards_admin

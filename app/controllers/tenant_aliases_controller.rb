@@ -1,4 +1,4 @@
-class TenantAliasesController < ApplicationController
+class TenantAliasesController < ConventionSetupController
   load_and_authorize_resource
   before_action :set_breadcrumbs
 
@@ -35,7 +35,6 @@ class TenantAliasesController < ApplicationController
   private
 
   def set_breadcrumbs
-    add_breadcrumb "Convention Setup", convention_setup_event_configuration_path
     add_breadcrumb "Domain Setup", tenant_aliases_path
   end
 

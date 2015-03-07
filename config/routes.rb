@@ -152,6 +152,7 @@ Workspace::Application.routes.draw do
       end
     end
 
+    get '/convention_setup', to: 'convention_setup#index'
     namespace :convention_setup do
       resources :categories, :except => [:new, :show] do
         resources :events, :only => [:index, :create]
@@ -234,7 +235,6 @@ Workspace::Application.routes.draw do
 
     resource :event_configuration, :except => [:show, :new, :edit] do
       collection do
-        get :convention_setup
         get :cache
         delete :clear_cache
         delete :clear_counter_cache

@@ -1,8 +1,7 @@
-class EventConfigurationsController < ApplicationController
+class EventConfigurationsController < ConventionSetupController
   before_action :authenticate_user!
   before_action :load_new_event_configuration, :only => [:create]
   before_action :load_event_configuration, except: :create
-  before_action :set_convention_setup_breadcrumb
   before_action :set_base_settings_breadcrumb, only: [:update_base_settings, :base_settings]
   before_action :set_name_logo_breadcrumb, only: [:update_name_logo, :name_logo]
   before_action :set_important_dates_breadcrumb, only: [:update_important_dates, :important_dates]
@@ -16,13 +15,6 @@ class EventConfigurationsController < ApplicationController
 
   def load_new_event_configuration
     @event_configuration = EventConfiguration.new(event_configuration_params)
-  end
-
-  # GET /event_configurations/convention_setup
-  def convention_setup
-    respond_to do |format|
-      format.html
-    end
   end
 
   def update_base_settings
@@ -137,10 +129,6 @@ class EventConfigurationsController < ApplicationController
   end
 
   private
-
-  def set_convention_setup_breadcrumb
-    add_breadcrumb "Convention Setup", convention_setup_event_configuration_path
-  end
 
   def set_base_settings_breadcrumb
     add_breadcrumb "Base Settings", base_settings_event_configuration_path
