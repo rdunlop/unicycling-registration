@@ -134,11 +134,8 @@ Workspace::Application.routes.draw do
     resources :competition_wheel_sizes
 
     resources :coupon_codes
-    resources :event_choices, :except => [:index, :create, :new]
 
-    resources :events, :except => [:index, :new, :create] do
-      resources :event_choices, :only => [:index, :create]
-      resources :event_categories, :only => [:index, :create]
+    resources :events, only: [:show] do
       collection do
         get 'summary'
       end
@@ -149,14 +146,22 @@ Workspace::Application.routes.draw do
       end
       resources :competitions, :only => [:new, :create]
     end
-    resources :event_categories, :except => [:index, :create, :new, :show] do
+    resources :event_categories, only: [] do
       member do
         get :sign_ups
       end
     end
 
-    resources :categories, :except => [:new, :show] do
-      resources :events, :only => [:index, :create]
+    namespace :convention_setup do
+      resources :categories, :except => [:new, :show] do
+        resources :events, :only => [:index, :create]
+      end
+      resources :events, :except => [:index, :new, :create] do
+        resources :event_choices, :only => [:index, :create]
+        resources :event_categories, :only => [:index, :create]
+      end
+      resources :event_choices, :except => [:index, :create, :new]
+      resources :event_categories, :except => [:index, :create, :new, :show]
     end
 
     # backwards-compatible URL

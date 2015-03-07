@@ -1,0 +1,18 @@
+%p
+  %b Label:
+  = @event_choice.label
+%p
+  %b Event:
+  = @event_choice.event_id
+%p
+  %b Cell type:
+  = @event_choice.cell_type
+%p
+  %b Multiple values:
+  = @event_choice.multiple_values
+%p
+  %b Position:
+  = @event_choice.position
+= link_to 'Edit', edit_convention_setup_event_choice_path(@event_choice)
+|
+\#{link_to 'Back', convention_setup_event_event_choices_path(@event_choice.event)}

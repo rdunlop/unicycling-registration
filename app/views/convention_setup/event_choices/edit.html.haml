@@ -1,0 +1,5 @@
+%h1 Editing event_choice
+= render 'form'
+= link_to 'Show', [:convention_setup, @event_choice]
+|
+\#{link_to 'Back', convention_setup_event_event_choices_path(@event_choice.event)}
