@@ -66,6 +66,7 @@ gem 'capistrano3-unicorn'
 gem 'capistrano-sidekiq' , github: 'seuros/capistrano-sidekiq'
 
 group :naucc, :development, :caching do
+  gem 'quiet_assets'
   gem 'consistency_fail'
   gem 'better_errors'
   gem "binding_of_caller"
