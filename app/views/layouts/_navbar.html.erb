@@ -35,15 +35,11 @@
       heading = Menu::MenuHeading.new(:title => 'Site Config')
       m.headings << heading
       heading.entries << Menu::MenuEntry.new(:title => 'Convention Setup', :url => convention_setup_event_configuration_path, :permitted => can?(:manage, EventConfiguration))
-      heading.entries << Menu::MenuEntry.new(:title => 'Registration Periods', :url => registration_periods_path, :permitted => can?(:manage, RegistrationPeriod))
       heading.entries << Menu::MenuEntry.new(:title => 'Event Offerings', :url => categories_path, :permitted => can?(:manage, Category))
       if @config.standard_skill
         heading.entries << Menu::MenuEntry.new(:title => 'Standard Skill Entries', :url => standard_skill_entries_path, :permitted => can?(:manage, StandardSkillEntry))
       end
       heading.entries << Menu::MenuEntry.new(:title => 'User Permissions', :url => permissions_path, :permitted => can?(:manage, User))
-      heading.entries << Menu::MenuEntry.new(:title => 'Expense Groups', :url => expense_groups_path, :permitted => can?(:manage, ExpenseGroup))
-      heading.entries << Menu::MenuEntry.new(:title => 'Expense Items', :url => expense_items_path, :permitted => can?(:manage, ExpenseItem))
-      heading.entries << Menu::MenuEntry.new(title: 'Coupon Codes', url: coupon_codes_path, permitted: can?(:manage, CouponCode))
       heading.entries << Menu::MenuEntry.new(title: 'Cache Management', url: cache_event_configuration_path, permitted: can?(:manage, EventConfiguration))
     %>
     <%

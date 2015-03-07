@@ -34,14 +34,6 @@ describe ExpenseGroupsController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested expense_group as @expense_group" do
-      expense_group = ExpenseGroup.create! valid_attributes
-      get :show, {:id => expense_group.to_param}
-      assigns(:expense_group).should eq(expense_group)
-    end
-  end
-
   describe "GET edit" do
     it "assigns the requested expense_group as @expense_group" do
       expense_group = ExpenseGroup.create! valid_attributes
@@ -67,7 +59,7 @@ describe ExpenseGroupsController do
 
       it "redirects to the created expense_group" do
         post :create, {:expense_group => valid_attributes}
-        response.should redirect_to(ExpenseGroup.last)
+        response.should redirect_to(expense_groups_path)
       end
     end
 
@@ -109,7 +101,7 @@ describe ExpenseGroupsController do
       it "redirects to the expense_group" do
         expense_group = ExpenseGroup.create! valid_attributes
         put :update, {:id => expense_group.to_param, :expense_group => valid_attributes}
-        response.should redirect_to(expense_group)
+        response.should redirect_to(expense_groups_path)
       end
     end
 

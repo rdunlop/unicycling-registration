@@ -88,9 +88,11 @@ Workspace::Application.routes.draw do
     #### For Registration creation purposes
     ###
 
-    resources :expense_groups
+    resources :expense_groups, except: [:show] do
+      resources :expense_items, :except => [:new, :show]
+    end
 
-    resources :expense_items, :except => [:new, :show] do
+    resources :expense_items, only: [] do
       member do
         get :details
       end

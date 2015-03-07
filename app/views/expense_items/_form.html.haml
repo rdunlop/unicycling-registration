@@ -1,50 +1,43 @@
-= form_for(@expense_item) do |f|
+= form_for([@expense_item.expense_group, @expense_item]) do |f|
   = render partial: "shared/error_messages", object: @expense_item
 
   .field
-    = f.label :expense_group_id
-    = f.select :expense_group_id, ExpenseGroup.user_manageable.map {|eg| [eg.group_name, eg.id] }
-    %br
     - languages.each do |lang|
       = f.globalize_fields_for lang do |g|
         %b= long_language_name(lang)
         %br
         = g.label :name
         = g.text_field :name
-        %br
-        = g.label :description
-        = g.text_field :description
-        %br
-        = g.label :details_label, "Details (What details do we want to ask the user for)"
-        = g.text_field :details_label
-        %br
-        %br
-    = f.label :has_details
+        .field
+          = g.label :description
+          = g.text_field :description
+        .field
+          = g.label :details_label, "Question"
+          = g.text_field :details_label
+  .field
+    = f.label :has_details, "Ask a question from registrant"
     = f.check_box :has_details
-    %br
-    %br
-    = f.label :has_custom_cost
-    = f.check_box :has_custom_cost
-    %br
-    %br
+    .input_details
+      Ask the user for additional details when they purchase this item
+  .field
     = f.label :cost
     = f.text_field :cost
-    %br
+  .field
+    = f.label :has_custom_cost, "Donation"
+    = f.check_box :has_custom_cost
+    .input_details
+      Allows the registrant to choose how much to pay for this item
+  .field
     = f.label :tax_percentage
     = f.number_field :tax_percentage, :step => 0.001
-    %br
+  .field
     = f.label :export_name
     = f.text_field :export_name
-    %br
-    = f.label :position
-    = f.number_field :position
-    %br
-    = f.label :maximum_available
-    (How many are available for sale)
-    \#{f.number_field :maximum_available}
-    %br
-    = f.label :maximum_per_registrant
-    (How many are permitted for each registrant)
-    \#{f.number_field :maximum_per_registrant}
+  .field
+    = f.label :maximum_available, "Max Total Number for Sale"
+    = f.number_field :maximum_available
+  .field
+    = f.label :maximum_per_registrant,"Max per registrant"
+    = f.number_field :maximum_per_registrant
   .actions
     = f.submit

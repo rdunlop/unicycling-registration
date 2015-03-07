@@ -1,6 +1,7 @@
 class ExpenseGroupsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
+  before_action :set_breadcrumbs
 
   # GET /expense_groups
   # GET /expense_groups.json
@@ -14,17 +15,9 @@ class ExpenseGroupsController < ApplicationController
     end
   end
 
-  # GET /expense_groups/1
-  # GET /expense_groups/1.json
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @expense_group }
-    end
-  end
-
   # GET /expense_groups/1/edit
   def edit
+    add_breadcrumb @expense_group
   end
 
   # POST /expense_groups
@@ -32,11 +25,9 @@ class ExpenseGroupsController < ApplicationController
   def create
     respond_to do |format|
       if @expense_group.save
-        format.html { redirect_to @expense_group, notice: 'Expense group was successfully created.' }
-        format.json { render json: @expense_group, status: :created, location: @expense_group }
+        format.html { redirect_to expense_groups_path, notice: 'Expense group was successfully created.' }
       else
         format.html { render action: "index" }
-        format.json { render json: @expense_group.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,7 +37,7 @@ class ExpenseGroupsController < ApplicationController
   def update
     respond_to do |format|
       if @expense_group.update_attributes(expense_group_params)
-        format.html { redirect_to @expense_group, notice: 'Expense group was successfully updated.' }
+        format.html { redirect_to expense_groups_path, notice: 'Expense group was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -67,6 +58,11 @@ class ExpenseGroupsController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_breadcrumb "Convention Setup", convention_setup_event_configuration_path
+    add_breadcrumb "Other Items For Sale", expense_groups_path
+  end
 
   def expense_group_params
     params.require(:expense_group).permit(:group_name, :position, :admin_visible, :visible, :info_url,

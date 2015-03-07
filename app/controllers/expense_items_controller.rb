@@ -1,5 +1,6 @@
 class ExpenseItemsController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource :expense_group, except: :details
   load_and_authorize_resource
 
   # GET /expense_items/1/details
@@ -18,8 +19,8 @@ class ExpenseItemsController < ApplicationController
   # GET /expense_items
   # GET /expense_items.json
   def index
-    @expense_items = ExpenseItem.user_manageable.ordered
-    @expense_item = ExpenseItem.new
+    @expense_items = @expense_group.expense_items.user_manageable.ordered
+    @expense_item = @expense_group.expense_items.build
 
     respond_to do |format|
       format.html # index.html.erb
@@ -32,7 +33,6 @@ class ExpenseItemsController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @expense_item }
     end
   end
 
@@ -43,14 +43,13 @@ class ExpenseItemsController < ApplicationController
   # POST /expense_items
   # POST /expense_items.json
   def create
+    @expense_item.expense_group = @expense_group
     respond_to do |format|
       if @expense_item.save
-        format.html { redirect_to expense_items_path, notice: 'Expense item was successfully created.' }
-        format.json { render json: @expense_item, status: :created, location: expense_items_path }
+        format.html { redirect_to expense_group_expense_items_path(@expense_group), notice: 'Expense item was successfully created.' }
       else
-        @expense_items = ExpenseItem.user_manageable.ordered
+        @expense_items = @expense_group.expense_items.user_manageable.ordered
         format.html { render action: "index" }
-        format.json { render json: @expense_item.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,11 +59,9 @@ class ExpenseItemsController < ApplicationController
   def update
     respond_to do |format|
       if @expense_item.update_attributes(expense_item_params)
-        format.html { redirect_to expense_items_path, notice: 'Expense item was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to expense_group_expense_items_path(@expense_group), notice: 'Expense item was successfully updated.' }
       else
         format.html { render action: "edit" }
-        format.json { render json: @expense_item.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -77,7 +74,7 @@ class ExpenseItemsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to expense_items_url }
+      format.html { redirect_to expense_group_expense_items_url(@expense_group) }
       format.json { head :no_content }
     end
   end
@@ -85,7 +82,8 @@ class ExpenseItemsController < ApplicationController
   private
 
   def expense_item_params
-    params.require(:expense_item).permit(:cost, :description, :export_name, :name, :position, :expense_group_id, :has_details, :has_custom_cost, :details_label, :maximum_available , :maximum_per_registrant, :tax_percentage,
+    params.require(:expense_item).permit(:cost, :description, :export_name, :name, :position, :has_details,
+                                         :has_custom_cost, :details_label, :maximum_available , :maximum_per_registrant, :tax_percentage,
                                          :translations_attributes => [:id, :locale, :name, :description, :details_label])
   end
 end

@@ -1,0 +1,6 @@
+%h1 #{@expense_group} - Expense Group Details
+= render 'form'
+
+= link_to 'Delete', @expense_group, method: :delete, data: { confirm: 'Are you sure?' }
+|
+\#{link_to 'Back', expense_groups_path}
