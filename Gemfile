@@ -50,7 +50,7 @@ gem 'acts_as_list'
 gem 'carrierwave_direct'
 gem 'carmen', '1.0.0' # locked to 1.0.0 because 1.0.1 removed Puerto Rico
 gem 'carmen-rails'
-gem 'globalize', '~> 4.0.2'
+gem 'globalize', '~> 4.0.3'
 gem 'virtus'
 gem "wicked"
 
