@@ -10,7 +10,6 @@ describe "expense_groups/edit" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => expense_groups_path(@expense_group), :method => "post" do
-      assert_select "input#expense_group_visible", :name => "expense_group[visible]"
       assert_select "input#expense_group_position", :name => "expense_group[position]"
       assert_select "input#expense_group_info_url", :name => "expense_group[info_url]"
     end

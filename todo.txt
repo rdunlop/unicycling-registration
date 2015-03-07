@@ -1,5 +1,6 @@
 - add ability to sort/save expense_group order
 - add ability to sort/save expense_item order
+- Remove the old registrants controller paths, and improve the wizard navigation to allow jumping forward and backward.
 
 Reorganized January 15, 2015.
 

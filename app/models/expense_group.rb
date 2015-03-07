@@ -58,6 +58,7 @@ class ExpenseGroup < ActiveRecord::Base
   def init
     self.competitor_required = false if self.competitor_required.nil?
     self.noncompetitor_required = false if self.competitor_required.nil?
+    self.visible = true if self.visible.nil?
   end
 
   def self.user_manageable

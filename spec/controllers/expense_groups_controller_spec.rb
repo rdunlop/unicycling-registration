@@ -16,7 +16,6 @@ describe ExpenseGroupsController do
       noncompetitor_free_options: nil,
       competitor_required: false,
       noncompetitor_required: false,
-      visible: true,
       "translations_attributes"=>{
         "1"=>{
           "locale"=>"en",
