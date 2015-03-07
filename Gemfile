@@ -16,7 +16,8 @@ gem 'spreadsheet'
 gem 'prawn-labels'
 
 # Front-end
-gem 'formtastic'
+gem 'simple_form'
+gem 'country_select'
 gem 'chosen-rails'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'

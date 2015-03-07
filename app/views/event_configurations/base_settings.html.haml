@@ -1,6 +1,6 @@
 %h1 Base Settings
 
-= form_for(@event_configuration, url: update_base_settings_event_configuration_path, method: :put) do |f|
+= simple_form_for(@event_configuration, url: update_base_settings_event_configuration_path, method: :put) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
 
 
@@ -9,57 +9,39 @@
     .label Registration Types Available
 
     .field
-      = label_tag :competitor, nil, class: 'label--checkbox'
       = check_box_tag :competitor, true, true, disabled: true
+      = label_tag :competitor, nil, class: 'label--checkbox'
     .field
-      = label_tag :noncompetitor, nil, class: 'label--checkbox'
       = check_box_tag :noncompetitor, true, true, disabled: true
+      = label_tag :noncompetitor, nil, class: 'label--checkbox'
       .help_bubble{ title: "Non-Competitors cannot sign up for events" }
-    .field
-      = f.label :spectators, nil, class: 'label--checkbox'
-      = f.check_box :spectators
-      .help_bubble{ title: "Spectators need not pay for base-registration items" }
+    = f.input :spectators
+    .help_bubble{ title: "Spectators need not pay for base-registration items" }
 
-    .field
-      = f.label :comp_noncomp_url, "Comp/Non-Comp Explanation"
-      = f.url_field :comp_noncomp_url
-      .input_details Specify a link which explains the difference between the offered Registration Types
-      = link_to 'Test this URL', '#'
+    = f.input :comp_noncomp_url
+    .input_details Specify a link which explains the difference between the offered Registration Types
+    = link_to 'Test this URL', '#'
 
   %hr
 
   %fieldset.form__fieldset
     %h3 Waiver
 
-    .field
-      = f.label :waiver_none, "No Waiver", class: 'label--radio'
-      = f.radio_button :waiver, 'none'
+    = f.input :waiver, as: :radio_buttons, collection: [:none, :online, :print]
+    .help_bubble{ title: "Online: User is required to sign the waiver" }
+    .help_bubble{ title: "Print: We provide a waiver for the user to print/sign at the event. (available in advance on the website so that children can have their parents sign it)" }
 
-    .field
-      = f.label :waiver_online, "Online Waiver", class: 'label--radio'
-      = f.radio_button :waiver, 'online'
-      .help_bubble{ title: "User is required to sign the waiver" }
-
-    .field
-      = f.label :waiver_print, "Print Waiver", class: 'label--radio'
-      = f.radio_button :waiver, 'print'
-      .help_bubble{ title: "We provide a waiver for the user to print/sign at the event. (available in advance on the website so that children can have their parents sign it)"}
-
-    .field
-      = f.label :custom_waiver_text
-      = f.text_area :custom_waiver_text, size: "60x12", placeholder: EventConfiguration.default_waiver_text
+    = f.input :custom_waiver_text, placeholder: EventConfiguration.default_waiver_text, input_html: { size: "60x12" }
 
   %hr
 
   %h3 Website Style
-  = f.label :style_name
-  = f.select :style_name, EventConfiguration.style_names
+  = f.input :style_name, collection: EventConfiguration.style_names, include_blank: false
 
   %hr
 
   %h3 Contact Details
-  = f.label :contact_email
-  = f.email_field :contact_email
+  = f.input :contact_email
   .description
     Displayed on the "Help" page
 
@@ -67,13 +49,10 @@
 
   %h3 Unicycling Society of America (USA) Membership Summary
 
-  = f.label :usa_membership_config, "Display USA admin pages"
-  = f.check_box :usa_membership_config
+  = f.input :usa_membership_config
 
-  = f.label :usa_individual_expense_item_id
-  = f.select :usa_individual_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true
-  = f.label :usa_family_expense_item_id
-  = f.select :usa_family_expense_item_id, ExpenseItem.all.map {|ei| [ei.name, ei.id] }, include_blank: true
+  = f.association :usa_individual_expense_item, collection: ExpenseItem.user_manageable
+  = f.association :usa_family_expense_item, collection: ExpenseItem.user_manageable
 
   %hr
 
@@ -81,15 +60,13 @@
   %p
     This chooses whether to eliminate 1 high, 1 low judge during scoring (Small Event), 1 high, 1 low elimination PER JUDGE TYPE during scoring (Large Event).
 
-  = f.label :artistic_score_elimination_mode_naucc, "Small Group"
-  = f.check_box :artistic_score_elimination_mode_naucc
+  = f.input :artistic_score_elimination_mode_naucc
 
   %hr
 
   %h3 Rulebook
 
-  = f.label :rulebook_url, "Rulebook PDF URL"
-  = f.url_field :rulebook_url
+  = f.input :rulebook_url
 
   %p
     The current IUF Rulebook can be found at:
@@ -105,10 +82,8 @@
   %p
     Note: The Standard Skill Judging system is currently incomplete, and not included in this online system
 
-  = f.label :standard_skill, "Enable Standard Skill Submisssion System"
-  = f.check_box :standard_skill
+  = f.input :standard_skill
 
-  = f.label :standard_skill_closed_date, "Last day to submit Standard Skill Routines online"
-  = f.date_select :standard_skill_closed_date
+  = f.input :standard_skill_closed_date
 
-  = f.submit
+  = f.button :submit

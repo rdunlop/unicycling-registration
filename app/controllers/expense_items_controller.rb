@@ -44,6 +44,7 @@ class ExpenseItemsController < ApplicationController
   # POST /expense_items.json
   def create
     @expense_item.expense_group = @expense_group
+    @expense_item.position ||= (@expense_group.expense_items.map(&:position).max || 0 )+ 1
     respond_to do |format|
       if @expense_item.save
         format.html { redirect_to expense_group_expense_items_path(@expense_group), notice: 'Expense item was successfully created.' }

@@ -1,0 +1,46 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    labels:
+      event_configuration:
+        comp_noncomp_url: "Comp/Non-Comp Explanation"
+        usa_membership_config: "Display USA admin pages"
+        artistic_score_elimination_mode_naucc: "Small Group"
+        rulebook_url: "Rulebook PDF URL"
+        standard_skill: "Enable Standard Skill Submisssion System"
+        standard_skill_closed_date: "Last day to submit Standard Skill Routines online"
+    options:
+      event_configuration:
+        waiver:
+          none: "No Wavier"
+          online: "Online Waiver"
+          print: "Print Waiver"
+
+    # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'
