@@ -1,4 +1,4 @@
-= form_for(@registration_period) do |f|
+= simple_form_for(@registration_period) do |f|
   = render partial: "shared/error_messages", object: @registration_period
   .field
     - languages.each do |lang|
@@ -9,37 +9,31 @@
         )
         \#{g.text_field :name}
         %br
-  .field
-    = f.label :onsite
-    = f.check_box :onsite, :title => "This causes the 'Online Registration Closes' banner to be displayed appropriately in the Cost tables"
-    .input_details
-      Traditionally, online registration closes a little before the convention starts, and on-site registration is only allowed in the registration-hall, on convention-controlled computers.
-    .input_details
-      This allows coordination of printing registration packets, preparing competitor lists, and other last-minute minutae
-  .field
-    = f.label :start_date, :title => "Specify the Date following the previous period's 'End Date'"
-    = f.date_select :start_date
-  .field
-    = f.label :end_date, :title => "Specify the last date that these prices apply"
-    = f.date_select :end_date
-    .input_details
-      Because many people only pay at the last possible minute, the price automatically increases ~36 hours after end of the End Date. This allows last-minute registrants a reprieve.
-  .field
-    Competitor
-    = f.fields_for :competitor_expense_item do |ce|
-      = ce.label :cost
-      = ce.text_field :cost
-      %br
-      = ce.label :tax_percentage
-      = ce.number_field :tax_percentage, :step => 0.001
-  .field
-    Non Competitor
-    = f.fields_for :noncompetitor_expense_item do |ce|
-      = ce.label :cost
-      = ce.text_field :cost
-      %br
-      = ce.label :tax_percentage
-      = ce.number_field :tax_percentage, :step => 0.001
+  = f.input :onsite
+  .help_bubble{ title: "This causes the 'Online Registration Closes' banner to be displayed appropriately in the Cost tables" }
+  .input_details
+    Traditionally, online registration closes a little before the convention starts, and on-site registration is only allowed in the registration-hall, on convention-controlled computers.
+  .input_details
+    This allows coordination of printing registration packets, preparing competitor lists, and other last-minute minutae
 
-  .actions
-    = f.submit
+  = f.input :start_date
+  .help_bubble{ title: "Specify the Date following the previous period's 'End Date'" }
+
+  = f.input :end_date
+  .help_bubble{ title: "Specify the last date that these prices apply" }
+  .input_details
+    Because many people only pay at the last possible minute, the price automatically increases ~36 hours after end of the End Date. This allows last-minute registrants a reprieve.
+
+  Competitor
+  = f.simple_fields_for :competitor_expense_item do |ce|
+    = ce.input :cost
+
+    = ce.input :tax_percentage
+
+  Non Competitor
+  = f.simple_fields_for :noncompetitor_expense_item do |ce|
+    = ce.input :cost
+
+    = ce.input :tax_percentage
+
+  = f.button :submit
