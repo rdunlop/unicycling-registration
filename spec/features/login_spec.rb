@@ -18,7 +18,7 @@ describe 'Logging in to the system' do
       end
 
       specify 'is not allowed to event_configuration' do
-        visit '/event_configuration/convention_setup'
+        visit '/convention_setup'
         expect(current_path).to eq user_registrants_path(user)
         expect(page).to have_content 'You are not authorized to access this page'
       end
@@ -29,7 +29,7 @@ describe 'Logging in to the system' do
     let(:user) { FactoryGirl.create :super_admin_user }
 
     context 'that is not logged in' do
-      let(:path) { '/event_configuration/convention_setup' }
+      let(:path) { '/convention_setup' }
 
       specify 'is redirected to the proper path after logging in' do
         visit path

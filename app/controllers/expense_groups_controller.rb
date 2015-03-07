@@ -64,7 +64,7 @@ class ExpenseGroupsController < ConventionSetupController
   end
 
   def expense_group_params
-    params.require(:expense_group).permit(:group_name, :position, :admin_visible, :visible, :info_url,
+    params.require(:expense_group).permit(:group_name, :position, :visible, :info_url,
                                           :competitor_free_options, :noncompetitor_free_options,
                                           :competitor_required, :noncompetitor_required, :translations_attributes => [:id, :locale, :group_name])
   end

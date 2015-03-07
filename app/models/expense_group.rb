@@ -13,7 +13,6 @@
 #  noncompetitor_free_options :string(255)
 #  competitor_required        :boolean          default(FALSE)
 #  noncompetitor_required     :boolean          default(FALSE)
-#  admin_visible              :boolean          default(FALSE)
 #  registration_items         :boolean          default(FALSE), not null
 #
 
@@ -37,7 +36,7 @@ class ExpenseGroup < ActiveRecord::Base
   scope :visible, -> { where(:visible => true) }
 
   def self.admin_visible
-    where("visible = true or admin_visible = true")
+    where.not(registration_items: true)
   end
 
   def self.registration_items_group
@@ -47,7 +46,6 @@ class ExpenseGroup < ActiveRecord::Base
   def self.create_registration_items_group
     create({
       visible: false,
-      admin_visible: false,
       registration_items: true,
       competitor_required: false,
       noncompetitor_required: false,

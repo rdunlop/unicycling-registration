@@ -13,7 +13,6 @@
 #  noncompetitor_free_options :string(255)
 #  competitor_required        :boolean          default(FALSE)
 #  noncompetitor_required     :boolean          default(FALSE)
-#  admin_visible              :boolean          default(FALSE)
 #  registration_items         :boolean          default(FALSE), not null
 #
 
