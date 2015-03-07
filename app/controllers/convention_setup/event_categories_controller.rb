@@ -1,11 +1,11 @@
-class ConventionSetup::EventCategoriesController < ApplicationController
-  before_filter :authenticate_user!
+class ConventionSetup::EventCategoriesController < ConventionSetupController
+  before_action :authenticate_user!
   load_and_authorize_resource
 
-  before_filter :load_event, :only => [:index, :create]
+  before_action :load_event, :only => [:index, :create]
+  before_action :set_breadcrumbs
 
   respond_to :html
-
 
   # GET /event_categories
   # GET /event_categories.json
@@ -57,6 +57,12 @@ class ConventionSetup::EventCategoriesController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_breadcrumb "Event Categories", convention_setup_categories_path
+    add_breadcrumb "#{@event.category} Events", convention_setup_event_path(@event) if @event
+    add_breadcrumb "Event Categories",convention_setup_event_event_categories_path(@event) if @event
+  end
 
   def load_event
     @event = Event.find(params[:event_id])

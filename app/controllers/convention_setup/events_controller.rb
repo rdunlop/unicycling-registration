@@ -1,8 +1,10 @@
-class ConventionSetup::EventsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_category, :only => [:index, :create]
-  before_filter :load_new_event, :only => [:create]
+class ConventionSetup::EventsController < ConventionSetupController
+  before_action :authenticate_user!
+  before_action :load_category, :only => [:index, :create]
+  before_action :load_new_event, :only => [:create]
   load_and_authorize_resource
+  before_action :set_categories_breadcrumb
+  before_action :set_events_breadcrumb
 
   respond_to :html
 
@@ -56,6 +58,10 @@ class ConventionSetup::EventsController < ApplicationController
   end
 
   private
+
+  def set_events_breadcrumb
+    add_breadcrumb "#{@category} Events", convention_setup_category_events_path(@category) if @category
+  end
 
   def event_params
     params.require(:event).permit(:category_id, :position, :name, :visible, :artistic, :accepts_music_uploads,

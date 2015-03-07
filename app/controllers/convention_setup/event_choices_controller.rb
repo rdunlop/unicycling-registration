@@ -1,8 +1,10 @@
-class ConventionSetup::EventChoicesController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_event, :only => [:index, :create]
-  before_filter :load_new_event_choice, :only => [:create]
+class ConventionSetup::EventChoicesController < ConventionSetupController
+  before_action :authenticate_user!
+  before_action :load_event, :only => [:index, :create]
+  before_action :load_new_event_choice, :only => [:create]
   load_and_authorize_resource
+
+  before_action :set_breadcrumbs
 
   respond_to :html
 
@@ -56,6 +58,12 @@ class ConventionSetup::EventChoicesController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_breadcrumb "Event Categories", convention_setup_categories_path
+    add_breadcrumb "#{@event.category} Events", convention_setup_event_path(@event) if @event
+    add_breadcrumb "Event Choices", convention_setup_event_event_choices_path(@event) if @event
+  end
 
   def load_event
     @event = Event.find(params[:event_id])

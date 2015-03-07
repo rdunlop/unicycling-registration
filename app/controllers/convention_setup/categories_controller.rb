@@ -1,6 +1,7 @@
-class ConventionSetup::CategoriesController < ApplicationController
-  before_filter :authenticate_user!
+class ConventionSetup::CategoriesController < ConventionSetupController
+  before_action :authenticate_user!
   load_and_authorize_resource
+  before_action :set_categories_breadcrumb
 
   respond_to :html
 
