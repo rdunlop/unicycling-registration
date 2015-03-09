@@ -26,14 +26,18 @@
 
   Competitor
   = f.simple_fields_for :competitor_expense_item do |ce|
-    = ce.input :cost
+    = ce.input :cost, input_html: { class: "js--costInputComp" }
 
-    = ce.input :tax
+    = ce.input :tax, input_html: { class: "js--costInputComp" }
+    Total
+    = text_field_tag :total_comp, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInputComp" }
 
   Non Competitor
   = f.simple_fields_for :noncompetitor_expense_item do |ce|
-    = ce.input :cost
+    = ce.input :cost, input_html: { class: "js--costInputNonComp" }
 
-    = ce.input :tax
+    = ce.input :tax, input_html: { class: "js--costInputNonComp" }
+    Total
+    = text_field_tag :total_comp, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInputNonComp" }
 
   = f.button :submit

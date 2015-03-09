@@ -22,7 +22,9 @@
   = f.input :tax, input_html: { class: "js--costInput" }
   Total
   = text_field_tag :total, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInput" }
-  = f.input :maximum_available
-  = f.input :maximum_per_registrant
+  = label_tag :limit_quantities_available
+  = check_box_tag :limit_quantities_available, nil, f.object.has_limits?, class: 'js--inputEnable', data: { targets: 'js--inputConditional' }
+  = f.input :maximum_available, input_html: { class: 'js--inputConditional' }
+  = f.input :maximum_per_registrant, input_html: { class: 'js--inputConditional' }
 
   = f.button :submit

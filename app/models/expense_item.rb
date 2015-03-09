@@ -148,4 +148,10 @@ class ExpenseItem < ActiveRecord::Base
       num_selected_items >= maximum_available
     end
   end
+
+  def has_limits?
+    return true if (maximum_available && maximum_available > 0)
+    return true if (maximum_per_registrant && maximum_per_registrant > 0)
+    false
+  end
 end
