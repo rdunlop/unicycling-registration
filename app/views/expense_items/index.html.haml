@@ -24,6 +24,7 @@
           %td= link_to 'Edit', edit_expense_group_expense_item_path(@expense_group, expense_item)
           %td= link_to 'Delete', [@expense_group, expense_item], method: :delete, data: { confirm: 'Are you sure?' }
 
-.configuration_new_entry_form
-  %h2 New expense_item
+%h2 New expense_item
+
+%fieldset.form__fieldset
   = render 'form'

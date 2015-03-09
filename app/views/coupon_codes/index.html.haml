@@ -20,4 +20,5 @@
           %td= link_to 'Delete', coupon_code, method: :delete, data: { confirm: 'Are you sure?' }
     %br
     %h3 New Coupon Code
-    = render 'form'
+    %fieldset.form__fieldset
+      = render 'form'

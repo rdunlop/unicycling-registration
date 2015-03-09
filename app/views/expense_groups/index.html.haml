@@ -17,4 +17,6 @@
       %td= link_to 'Delete', expense_group, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
 %h2 New expense_group
-= render 'form'
+
+%fieldset.form__fieldset
+  = render 'form'

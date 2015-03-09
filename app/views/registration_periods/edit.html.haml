@@ -1,6 +1,6 @@
 %h1 Editing #{@registration_period} Registration Period
 
-%fieldset
+%fieldset.form__fieldset
   = render 'form'
 
 = link_to 'Delete', @registration_period, method: :delete, data: { confirm: 'Are you sure?' }
