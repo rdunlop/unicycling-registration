@@ -84,7 +84,7 @@ class ExpenseItemsController < ApplicationController
 
   def expense_item_params
     params.require(:expense_item).permit(:cost, :name, :position, :has_details,
-                                         :has_custom_cost, :details_label, :maximum_available , :maximum_per_registrant, :tax_percentage,
+                                         :has_custom_cost, :details_label, :maximum_available , :maximum_per_registrant, :tax,
                                          :translations_attributes => [:id, :locale, :name, :details_label])
   end
 end

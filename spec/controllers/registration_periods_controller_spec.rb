@@ -19,11 +19,11 @@ describe RegistrationPeriodsController do
       name: "Early",
       competitor_expense_item_attributes: {
         cost: @comp_exp.cost,
-        tax_percentage: @comp_exp.tax_percentage
+        tax: @comp_exp.tax
       },
       noncompetitor_expense_item_attributes: {
         cost: @noncomp_exp.cost,
-        tax_percentage: @noncomp_exp.tax_percentage,
+        tax: @noncomp_exp.tax,
       }
     }
   end

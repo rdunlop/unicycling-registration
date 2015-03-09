@@ -91,8 +91,8 @@ class RegistrationPeriodsController < ConventionSetupController
   def registration_period_params
     params.require(:registration_period).permit(:competitor_expense_item_id, :end_date, :name, :noncompetitor_expense_item_id, :start_date, :onsite,
                                                 translations_attributes: [:id, :locale, :name],
-                                                competitor_expense_item_attributes: [:id, :cost, :tax_percentage],
-                                                noncompetitor_expense_item_attributes: [:id, :cost, :tax_percentage]
+                                                competitor_expense_item_attributes: [:id, :cost, :tax],
+                                                noncompetitor_expense_item_attributes: [:id, :cost, :tax]
                                                 )
   end
 end

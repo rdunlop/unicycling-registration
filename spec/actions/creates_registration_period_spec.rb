@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe CreatesRegistrationPeriod do
-  let(:comp_expense_item) { ExpenseItem.new cost: 100, tax_percentage: 0 }
-  let(:noncomp_expense_item) { ExpenseItem.new cost: 10, tax_percentage: 0 }
+  let(:comp_expense_item) { ExpenseItem.new cost: 100, tax: 0 }
+  let(:noncomp_expense_item) { ExpenseItem.new cost: 10, tax: 0 }
   let(:reg_period) { FactoryGirl.build :registration_period, competitor_expense_item: comp_expense_item, noncompetitor_expense_item: noncomp_expense_item }
 
   def perform

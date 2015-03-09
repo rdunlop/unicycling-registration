@@ -28,12 +28,12 @@
   = f.simple_fields_for :competitor_expense_item do |ce|
     = ce.input :cost
 
-    = ce.input :tax_percentage
+    = ce.input :tax
 
   Non Competitor
   = f.simple_fields_for :noncompetitor_expense_item do |ce|
     = ce.input :cost
 
-    = ce.input :tax_percentage
+    = ce.input :tax
 
   = f.button :submit

@@ -2,16 +2,16 @@
 #
 # Table name: registrant_expense_items
 #
-#  id              :integer          not null, primary key
-#  registrant_id   :integer
-#  expense_item_id :integer
-#  created_at      :datetime
-#  updated_at      :datetime
-#  details         :string(255)
-#  free            :boolean          default(FALSE)
-#  system_managed  :boolean          default(FALSE)
-#  locked          :boolean          default(FALSE)
-#  custom_cost     :decimal(, )
+#  id                :integer          not null, primary key
+#  registrant_id     :integer
+#  expense_item_id   :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#  details           :string(255)
+#  free              :boolean          default(FALSE)
+#  system_managed    :boolean          default(FALSE)
+#  locked            :boolean          default(FALSE)
+#  custom_cost_cents :integer
 #
 # Indexes
 #
@@ -65,7 +65,7 @@ describe RegistrantExpenseItem do
     before :each do
       @ei = @rei.expense_item
       @ei.cost = 17
-      @ei.tax_percentage = 5.5
+      @ei.tax = 0.94
       @ei.save
     end
 

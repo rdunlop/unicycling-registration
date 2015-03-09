@@ -87,7 +87,7 @@ describe Payment do
 
       describe "with different amounts" do
         before(:each) do
-          @pdc = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => @pd.amount + 10, :details => @pd.details, :expense_item => @pd.expense_item)
+          @pdc = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => 99.98, :details => @pd.details, :expense_item => @pd.expense_item)
         end
 
         it "does not group them together" do

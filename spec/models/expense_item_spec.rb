@@ -4,7 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string(255)
-#  cost                   :decimal(, )
 #  position               :integer
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -12,9 +11,10 @@
 #  has_details            :boolean
 #  details_label          :string(255)
 #  maximum_available      :integer
-#  tax_percentage         :decimal(5, 3)    default(0.0)
 #  has_custom_cost        :boolean          default(FALSE)
 #  maximum_per_registrant :integer          default(0)
+#  cost_cents             :integer
+#  tax_cents              :integer
 #
 # Indexes
 #
@@ -28,8 +28,8 @@ describe ExpenseItem do
     @item = FactoryGirl.create(:expense_item)
   end
 
-  it "must have a tax_percentage" do
-    @item.tax_percentage = nil
+  it "must have tax" do
+    @item.tax_cents = nil
     @item.valid?.should == false
   end
 
@@ -50,36 +50,22 @@ describe ExpenseItem do
   describe "With a tax percentage of 5%" do
     before(:each) do
       @item.cost = 100
-      @item.tax_percentage = 5
+      @item.tax = 5
     end
 
-    it "has a tax of 5$" do
+    it "has a tax of $5" do
       @item.tax.should == 5
     end
 
     it "has a total_cost of 5+100" do
       @item.total_cost.should == 105
     end
-
-    describe "with a fractional tax_percentage" do
-      before(:each) do
-        @item.tax_percentage = 14.975
-      end
-      it "rounds up the taxes to the next penny" do
-        @item.tax.should == 14.98
-      end
-      it "rounds up to the next penny even for small fractions" do
-        @item.tax_percentage = 14.001
-        @item.tax.should == 14.01
-      end
-    end
   end
 
   describe "with a tax percentage of 5%" do
     it "has no fractional-penny results" do
       @item.cost = 17
-      @item.tax_percentage = 5.5
-      @item.tax.should == 0.94
+      @item.tax = 0.94
       @item.total_cost.should == 17.94
     end
   end
@@ -96,7 +82,7 @@ describe ExpenseItem do
     @item.valid?.should == false
   end
   it "must have a cost" do
-    @item.cost = nil
+    @item.cost_cents = nil
     @item.valid?.should == false
   end
   it "must have a value for the has_details field" do
@@ -108,14 +94,14 @@ describe ExpenseItem do
     item.has_details.should == false
   end
 
-  it "should default to a tax_percentage of 0" do
+  it "should default to a tax of 0" do
     item = ExpenseItem.new
-    item.tax_percentage.should == 0
+    expect(item.tax).to eq(0)
   end
 
-  it "must have a tax percentage >= 0" do
-    @item.tax_percentage = -1
-    @item.valid?.should == false
+  it "must have a tax >= 0" do
+    @item.tax = -1
+    expect(@item).to be_invalid
   end
 
   it "must have an expense group" do

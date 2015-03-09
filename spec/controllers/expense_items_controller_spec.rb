@@ -23,7 +23,7 @@ describe ExpenseItemsController do
       :cost => 15.00,
       :has_details => false,
       :position => 1,
-      :tax_percentage => 0,
+      :tax => 0,
       :maximum_available => nil
     }
   end

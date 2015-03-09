@@ -5,13 +5,13 @@
 #  id              :integer          not null, primary key
 #  payment_id      :integer
 #  registrant_id   :integer
-#  amount          :decimal(, )
 #  created_at      :datetime
 #  updated_at      :datetime
 #  expense_item_id :integer
 #  details         :string(255)
 #  free            :boolean          default(FALSE)
 #  refunded        :boolean          default(FALSE)
+#  amount_cents    :integer
 #
 # Indexes
 #

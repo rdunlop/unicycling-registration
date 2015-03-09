@@ -4,7 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string(255)
-#  cost                   :decimal(, )
 #  position               :integer
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -12,9 +11,10 @@
 #  has_details            :boolean
 #  details_label          :string(255)
 #  maximum_available      :integer
-#  tax_percentage         :decimal(5, 3)    default(0.0)
 #  has_custom_cost        :boolean          default(FALSE)
 #  maximum_per_registrant :integer          default(0)
+#  cost_cents             :integer
+#  tax_cents              :integer
 #
 # Indexes
 #
@@ -23,10 +23,12 @@
 
 class ExpenseItem < ActiveRecord::Base
 
-  validates :name, :position, :cost, :expense_group, :tax_percentage, :presence => true
+  validates :name, :position, :cost, :expense_group, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :tax_percentage, :numericality => {:greater_than_or_equal_to => 0}
+
+  monetize :tax_cents, :cost_cents, numericality: { greater_than_or_equal_to: 0 }
+  monetize :total_cost_cents
 
   has_many :payment_details, dependent: :restrict_with_error
   has_many :registrant_expense_items, :inverse_of => :expense_item, dependent: :restrict_with_error
@@ -46,7 +48,7 @@ class ExpenseItem < ActiveRecord::Base
 
   def init
     self.has_details = false if self.has_details.nil?
-    self.tax_percentage = 0 if self.tax_percentage.nil?
+    self.tax_cents = 0 if self.tax_cents.nil?
     self.has_custom_cost = false if self.has_custom_cost.nil?
   end
 
@@ -123,20 +125,8 @@ class ExpenseItem < ActiveRecord::Base
     self.expense_group.to_s + " - " + name
   end
 
-  # round the taxes to the next highest penny
-  def tax
-    raw_tax_cents = (cost * (tax_percentage/100.0)) * 100
-    fractions_of_penny = ((raw_tax_cents).to_i - (raw_tax_cents) != 0)
-
-    tax_cents = raw_tax_cents.to_i
-    if fractions_of_penny
-      tax_cents += 1
-    end
-    tax_cents / 100.0
-  end
-
-  def total_cost
-    (cost + tax).round(2)
+  def total_cost_cents
+    (cost_cents + tax_cents) if cost_cents && tax_cents
   end
 
   def num_selected_items

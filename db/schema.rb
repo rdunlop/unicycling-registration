@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307064522) do
+ActiveRecord::Schema.define(version: 20150307190020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -260,10 +260,10 @@ ActiveRecord::Schema.define(version: 20150307064522) do
     t.string   "code"
     t.string   "description"
     t.integer  "max_num_uses",  default: 0
-    t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "inform_emails"
+    t.integer  "price_cents"
   end
 
   create_table "distance_attempts", force: true do |t|
@@ -430,7 +430,6 @@ ActiveRecord::Schema.define(version: 20150307064522) do
 
   create_table "expense_items", force: true do |t|
     t.string   "name"
-    t.decimal  "cost"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -438,9 +437,10 @@ ActiveRecord::Schema.define(version: 20150307064522) do
     t.boolean  "has_details"
     t.string   "details_label"
     t.integer  "maximum_available"
-    t.decimal  "tax_percentage",         precision: 5, scale: 3, default: 0.0
-    t.boolean  "has_custom_cost",                                default: false
-    t.integer  "maximum_per_registrant",                         default: 0
+    t.boolean  "has_custom_cost",        default: false
+    t.integer  "maximum_per_registrant", default: 0
+    t.integer  "cost_cents"
+    t.integer  "tax_cents"
   end
 
   add_index "expense_items", ["expense_group_id"], name: "index_expense_items_expense_group_id", using: :btree
@@ -556,13 +556,13 @@ ActiveRecord::Schema.define(version: 20150307064522) do
   create_table "payment_details", force: true do |t|
     t.integer  "payment_id"
     t.integer  "registrant_id"
-    t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "expense_item_id"
     t.string   "details"
     t.boolean  "free",            default: false
     t.boolean  "refunded",        default: false
+    t.integer  "amount_cents"
   end
 
   add_index "payment_details", ["expense_item_id"], name: "index_payment_details_expense_item_id", using: :btree
@@ -658,10 +658,10 @@ ActiveRecord::Schema.define(version: 20150307064522) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "details"
-    t.boolean  "free",            default: false
-    t.boolean  "system_managed",  default: false
-    t.boolean  "locked",          default: false
-    t.decimal  "custom_cost"
+    t.boolean  "free",              default: false
+    t.boolean  "system_managed",    default: false
+    t.boolean  "locked",            default: false
+    t.integer  "custom_cost_cents"
   end
 
   add_index "registrant_expense_items", ["expense_item_id"], name: "index_registrant_expense_items_expense_item_id", using: :btree

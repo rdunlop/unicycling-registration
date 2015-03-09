@@ -18,6 +18,7 @@ gem 'prawn-labels'
 # Front-end
 gem 'simple_form'
 gem 'country_select'
+gem 'money-rails'
 gem 'chosen-rails'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'

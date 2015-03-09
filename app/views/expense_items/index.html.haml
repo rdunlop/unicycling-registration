@@ -6,8 +6,7 @@
       %tr
         %th Name
         %th Cost
-        %th Tax Percentage
-        %th Tax (calculated)
+        %th Tax
         %th Total (calculated)
         %th
         %th
@@ -20,7 +19,6 @@
               = expense_item.cost
             - else
               N/A
-          %td= expense_item.tax_percentage
           %td= expense_item.tax
           %td= expense_item.total_cost
           %td= link_to 'Edit', edit_expense_group_expense_item_path(@expense_group, expense_item)
