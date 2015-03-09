@@ -23,6 +23,14 @@ en:
         has_custom_cost: "Donation"
         maximum_available: "Max Total Number for Sale"
         maximum_per_registrant: "Max per registrant"
+      coupon_code:
+        inform_emails: E-mails to notify on each coupon use
+    placeholders:
+      coupon_code:
+        code: "Code for user to enter"
+    hints:
+      coupon_code:
+        inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone uses this coupon"
     options:
       event_configuration:
         waiver:
