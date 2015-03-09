@@ -18,6 +18,11 @@ en:
         rulebook_url: "Rulebook PDF URL"
         standard_skill: "Enable Standard Skill Submisssion System"
         standard_skill_closed_date: "Last day to submit Standard Skill Routines online"
+      expense_item:
+        has_details: "Ask a question from registrant"
+        has_custom_cost: "Donation"
+        maximum_available: "Max Total Number for Sale"
+        maximum_per_registrant: "Max per registrant"
     options:
       event_configuration:
         waiver:

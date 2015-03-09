@@ -1,4 +1,4 @@
-= form_for([@expense_item.expense_group, @expense_item]) do |f|
+= simple_form_for([@expense_item.expense_group, @expense_item]) do |f|
   = render partial: "shared/error_messages", object: @expense_item
 
   .field
@@ -11,27 +11,18 @@
         .field
           = g.label :details_label, "Question"
           = g.text_field :details_label
-  .field
-    = f.label :has_details, "Ask a question from registrant"
-    = f.check_box :has_details
-    .input_details
-      Ask the user for additional details when they purchase this item
-  .field
-    = f.label :cost
-    = f.text_field :cost
-  .field
-    = f.label :has_custom_cost, "Donation"
-    = f.check_box :has_custom_cost
-    .input_details
-      Allows the registrant to choose how much to pay for this item
-  .field
-    = f.label :tax
-    = f.number_field :tax, :step => 0.001
-  .field
-    = f.label :maximum_available, "Max Total Number for Sale"
-    = f.number_field :maximum_available
-  .field
-    = f.label :maximum_per_registrant,"Max per registrant"
-    = f.number_field :maximum_per_registrant
-  .actions
-    = f.submit
+  = f.input :has_details
+  .input_details
+    Ask the user for additional details when they purchase this item
+  = f.input :cost, input_html: { class: "js--costInput" }
+  = f.input :has_custom_cost
+  .input_details
+    Allows the registrant to choose how much to pay for this item
+
+  = f.input :tax, input_html: { class: "js--costInput" }
+  Total
+  = text_field_tag :total, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInput" }
+  = f.input :maximum_available
+  = f.input :maximum_per_registrant
+
+  = f.button :submit
