@@ -1,12 +1,5 @@
 = form_for([:convention_setup, @event, @event_choice]) do |f|
-  - if @event_choice.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@event_choice.errors.count, "error")
-        prohibited this event_choice from being saved:
-      %ul
-        - @event_choice.errors.full_messages.each do |msg|
-          %li= msg
+  = render partial: "shared/error_messages", object: @event_choice
   .field
     = f.label :cell_type
     %br

@@ -1,73 +1,29 @@
-= form_for(@event.persisted? ? [:convention_setup, @event] : [:convention_setup, @category, @event] ) do |f|
-  - if @event.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@event.errors.count, "error")
-        prohibited this event from being saved:
-      %ul
-        - @event.errors.full_messages.each do |msg|
-          %li= msg
-  %table.event_edit
-    %tr
-      %th{:colspan => "2"}
-        Event: #{@event.name}
-    %tr
-      %td= f.label :category_id
-      %td
-        - if @event.persisted?
-          = f.select :category_id, Category.all.map{|c| [c.name, c.id]}
-        - else
-          = @category
-    %tr
-      %td= f.label :name
-      %td= f.text_field :name, :title => "'Standard Skill' is a special name, it causes a link on the registration form summary"
-    %tr
-      %td= f.label :position
-      %td= f.number_field :position
-    %tr
-      %td= f.label :visible
-      %td= f.check_box :visible
-    %tr
-      %td= f.label :artistic
-      %td
-        = f.check_box :artistic
-        %br
-        Setting this boolean will automatically restrict changes after the Artistic Closed Date.
-    %tr
-      %td= f.label :accepts_music_uploads
-      %td= f.check_box :accepts_music_uploads
-    %tr
-      %td= f.label :accepts_wheel_size_override
-      %td
-        = f.check_box :accepts_wheel_size_override
-        %br
-        Setting this option presents children &lt;= 10 years old with the ability to specify a wheel size override.
-    %tr
-      %th.center{:colspan => "2"} Event Choices
-    = f.fields_for :event_choices do |ec|
-      %tr
-        %td= ec.label :cell_type
-        %td= ec.select :cell_type, EventChoice.cell_types
-      %tr
-        %td= ec.label :multiple_values
-        %td= ec.text_field :multiple_values
-      %tr
-        %td= ec.label :label
-        %td= ec.text_field :label
-      %tr
-        %td= ec.label :position
-        %td= ec.number_field :position
-    %tr
-      %th.center{:colspan => "2"} Event Categories
-    = f.fields_for :event_categories do |ec|
-      %tr
-        %td= ec.label :name
-        %td
-          = ec.text_field :name
-          %br
-          (specify 'All' if there is only 1 category)
-      %tr
-        %td= ec.label :position
-        %td= ec.number_field :position
-    %tr
-      %td.center{:colspan => "2"}= f.submit
+= simple_form_for(@event.persisted? ? [:convention_setup, @event] : [:convention_setup, @category, @event] ) do |f|
+  = render partial: "shared/error_messages", object: @event
+  %h2 Event: #{@event.name}
+
+  - if @event.persisted?
+    = f.association :category, collection: Category.all, label_method: :name
+  - else
+    = @category
+
+  = f.input :name, hint: "'Standard Skill' is a special name, it causes a link on the registration form summary"
+
+  = f.input :position
+  = f.input :visible
+  = f.input :artistic, hint: "Setting this boolean will automatically restrict changes after the Artistic Closed Date."
+  = f.input :accepts_music_uploads
+  = f.input :accepts_wheel_size_override, hint: "Setting this option presents children <= 10 years old with the ability to specify a wheel size override."
+
+  %h3 Event Choices
+  = f.simple_fields_for :event_choices do |ec|
+    = ec.input :cell_type, collection: EventChoice.cell_types
+    = ec.input :multiple_values
+    = ec.input :label
+    = ec.input :position
+
+  %h3 Event Categories
+  = f.simple_fields_for :event_categories do |ec|
+    = ec.input :name, hint: "specify 'All' if there is only 1 category"
+    = ec.input :position
+  = f.button :submit

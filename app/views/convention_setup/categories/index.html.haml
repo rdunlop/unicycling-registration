@@ -18,8 +18,9 @@
           %td= link_to 'Events', convention_setup_category_events_path(category)
           %td= link_to 'Edit', edit_convention_setup_category_path(category)
           %td= link_to 'Delete', [:convention_setup, category], method: :delete, data: { confirm: 'Are you sure?' }
-    %br/
-    %h3 New Category
-    = render 'form'
+    %br
+    %fieldset.form__fieldset
+      %h3 New Category
+      = render 'form'
   .configuration_preview_block
     = render :partial => "/attending/preview"

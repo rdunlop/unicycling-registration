@@ -20,6 +20,7 @@
 .configuration_preview_block
   = render :partial => "/attending/preview"
 .configuration_new_entry_form
-  %h3 New event_category
-  = render 'form'
+  %fieldset.form__fieldset
+    %h3 New event_category
+    = render 'form'
   = link_to 'Back', convention_setup_category_events_path(@event.category)

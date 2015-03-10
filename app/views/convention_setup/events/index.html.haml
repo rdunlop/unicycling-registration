@@ -29,7 +29,7 @@
 .configuration_preview_block
   = render :partial => "/attending/preview"
 .configuration_new_entry_form
-  %br
-  %h3 New Event
-  = render :partial => "form"
+  %fieldset.form__fieldset
+    %h1 New Event
+    = render :partial => "form"
   = link_to 'Back', convention_setup_categories_path
