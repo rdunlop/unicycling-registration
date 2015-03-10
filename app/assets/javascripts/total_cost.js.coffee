@@ -20,12 +20,8 @@ class @TotalCostDisplayer
     $(".#{@sourceClass()}")
 
   bindSources: ->
-    # Why is this necessary? how do I deal with this scope better?
-    that = this
-    @sourceElements().each ->
-      source_el = $(this)
-      source_el.on "change", =>
-        that.recalculateTotal()
+    @sourceElements().on 'change', =>
+      @recalculateTotal()
 
   recalculateTotal: ->
     total = 0

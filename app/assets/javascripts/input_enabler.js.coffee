@@ -21,7 +21,6 @@ class @InputEnabler
 
   bindSource: ->
     @checkbox.on "change", =>
-      console.log "Hi"
       @enableDisable()
 
   enableDisable: ->
@@ -30,6 +29,7 @@ class @InputEnabler
         $(this).attr("disabled", false)
     else
       @targetElements().each ->
+        $(this).val("")
         $(this).attr("disabled", true)
 
 $ ->
