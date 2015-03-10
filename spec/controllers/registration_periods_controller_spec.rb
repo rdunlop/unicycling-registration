@@ -48,14 +48,6 @@ describe RegistrationPeriodsController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested registration_period as @registration_period" do
-      registration_period = FactoryGirl.create :registration_period
-      get :show, {:id => registration_period.to_param}
-      assigns(:registration_period).should eq(registration_period)
-    end
-  end
-
   describe "GET new" do
     it "assigns a new registration_period as @registration_period" do
       get :new, {}
@@ -87,7 +79,7 @@ describe RegistrationPeriodsController do
 
       it "redirects to the created registration_period" do
         post :create, {:registration_period => valid_attributes}
-        response.should redirect_to(RegistrationPeriod.last)
+        response.should redirect_to(registration_periods_path)
       end
     end
 
@@ -133,7 +125,7 @@ describe RegistrationPeriodsController do
           noncompetitor_expense_item_attributes: { id: registration_period.noncompetitor_expense_item.id },
           })
         put :update, {:id => registration_period.to_param, :registration_period => params}
-        response.should redirect_to(registration_period)
+        response.should redirect_to(registration_periods_path)
       end
     end
 

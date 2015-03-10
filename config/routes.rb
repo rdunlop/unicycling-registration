@@ -126,7 +126,7 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :registration_periods
+    resources :registration_periods, except: :show
 
     resources :combined_competitions do
       resources :combined_competition_entries, except: [:show]

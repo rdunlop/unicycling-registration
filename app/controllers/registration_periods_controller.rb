@@ -11,32 +11,23 @@ class RegistrationPeriodsController < ConventionSetupController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @registration_periods }
-    end
-  end
-
-  # GET /registration_periods/1
-  # GET /registration_periods/1.json
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @registration_period }
     end
   end
 
   # GET /registration_periods/new
   # GET /registration_periods/new.json
   def new
+    add_breadcrumb "New Registration Period"
     @registration_period.build_competitor_expense_item
     @registration_period.build_noncompetitor_expense_item
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @registration_period }
     end
   end
 
   # GET /registration_periods/1/edit
   def edit
+    add_breadcrumb "Edit Registration Period"
   end
 
   # POST /registration_periods
@@ -46,11 +37,9 @@ class RegistrationPeriodsController < ConventionSetupController
 
     respond_to do |format|
       if creator.perform
-        format.html { redirect_to @registration_period, notice: 'Registration period was successfully created.' }
-        format.json { render json: @registration_period, status: :created, location: @registration_period }
+        format.html { redirect_to registration_periods_path, notice: 'Registration period was successfully created.' }
       else
         format.html { render action: "new" }
-        format.json { render json: @registration_period.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,11 +49,9 @@ class RegistrationPeriodsController < ConventionSetupController
   def update
     respond_to do |format|
       if @registration_period.update_attributes(registration_period_params)
-        format.html { redirect_to @registration_period, notice: 'Registration period was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to registration_periods_path, notice: 'Registration period was successfully updated.' }
       else
         format.html { render action: "edit" }
-        format.json { render json: @registration_period.errors, status: :unprocessable_entity }
       end
     end
   end
