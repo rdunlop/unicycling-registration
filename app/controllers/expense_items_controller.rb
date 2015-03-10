@@ -1,7 +1,9 @@
-class ExpenseItemsController < ApplicationController
-  before_filter :authenticate_user!
+class ExpenseItemsController < ConventionSetupController
+  before_action :authenticate_user!
   load_and_authorize_resource :expense_group, except: :details
   load_and_authorize_resource
+
+  before_action :set_breadcrumbs
 
   # GET /expense_items/1/details
   def details
@@ -28,16 +30,9 @@ class ExpenseItemsController < ApplicationController
     end
   end
 
-  # GET /expense_items/1
-  # GET /expense_items/1.json
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-    end
-  end
-
   # GET /expense_items/1/edit
   def edit
+    add_breadcrumb "Edit Expense Item"
   end
 
   # POST /expense_items
@@ -81,6 +76,11 @@ class ExpenseItemsController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_breadcrumb "Other Items For Sale", expense_groups_path
+    add_breadcrumb "#{@expense_group} Expense Items", expense_group_expense_items_path(@expense_group) if @expense_group
+  end
 
   def expense_item_params
     params.require(:expense_item).permit(:cost, :name, :position, :has_details,

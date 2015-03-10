@@ -1,6 +1,8 @@
-class CouponCodesController < ApplicationController
-  before_filter :authenticate_user!
+class CouponCodesController < ConventionSetupController
+  before_action :authenticate_user!
   load_and_authorize_resource
+
+  before_action :set_breadcrumbs
 
   respond_to :html
 
@@ -11,10 +13,10 @@ class CouponCodesController < ApplicationController
 
   # GET /coupon_codes/1/edit
   def edit
+    add_breadcrumb "Edit Coupon Code"
   end
 
   def show
-    add_breadcrumb "Coupon Codes", coupon_codes_path
     add_breadcrumb @coupon_code, @coupon_code
   end
 
@@ -49,6 +51,10 @@ class CouponCodesController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_breadcrumb "Coupon Codes", coupon_codes_path
+  end
 
   def coupon_code_params
     params.require(:coupon_code).permit(:name, :description, :inform_emails, :code, :max_num_uses, :price, expense_item_ids: [])
