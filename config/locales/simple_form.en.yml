@@ -25,12 +25,15 @@ en:
         maximum_per_registrant: "Max per registrant"
       coupon_code:
         inform_emails: E-mails to notify on each coupon use
+      volunteer_opportunity: "E-mail addresses to notify on each volunteer sign-up"
     placeholders:
       coupon_code:
         code: "Code for user to enter"
     hints:
       coupon_code:
         inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone uses this coupon"
+      volunteer_opportunity:
+        inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone signs up as volunteer"
     options:
       event_configuration:
         waiver:

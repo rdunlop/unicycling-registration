@@ -1,15 +1,6 @@
-= form_for(@volunteer_opportunity) do |f|
+= simple_form_for(@volunteer_opportunity) do |f|
   = render partial: "/shared/error_messages", object: @volunteer_opportunity
-  %table
-    %thead
-      %tr
-        %th= f.label :description
-        %th= f.label :display_order
-        %th= f.label :inform_emails, "A comma-separate list of e-mail addresses which will be informed when someone signs up as volunteer"
-        %th
-    %tbody
-      %tr
-        %td= f.text_field :description
-        %td= f.number_field :display_order, {min: 0}
-        %td= f.text_field :inform_emails
-        %td= f.submit
+  = f.input :description
+  = f.input :inform_emails
+  = f.input :display_order
+  = f.button :submit

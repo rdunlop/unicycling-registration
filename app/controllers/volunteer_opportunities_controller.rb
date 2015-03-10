@@ -1,9 +1,10 @@
-class VolunteerOpportunitiesController < ApplicationController
-  before_filter :authenticate_user!
+class VolunteerOpportunitiesController < ConventionSetupController
+  before_action :authenticate_user!
   load_and_authorize_resource
   before_action :add_breadcrumbs
 
   def index
+    @volunteers = Registrant.active.where(volunteer: true)
   end
 
   def new
@@ -21,6 +22,7 @@ class VolunteerOpportunitiesController < ApplicationController
   end
 
   def show
+    add_breadcrumb "#{@volunteer_opportunity} Volunteers"
   end
 
   def update

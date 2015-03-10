@@ -188,7 +188,6 @@ class Ability
       if config.usa_membership_config
         can :manage, :usa_membership
       end
-      can :read, :volunteer
       can :read, VolunteerOpportunity
 
       can :manage, :payment_adjustment

@@ -18,6 +18,7 @@
 class VolunteerOpportunity < ActiveRecord::Base
   validates :description, :display_order, presence: true
   validates :description, uniqueness: true
+  validates :display_order, numericality: { greater_than: 0 }
 
   default_scope { order(:display_order) }
 
