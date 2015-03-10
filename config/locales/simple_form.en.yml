@@ -29,11 +29,13 @@ en:
     placeholders:
       coupon_code:
         code: "Code for user to enter"
+      volunteer_opportunity:
+        inform_emails: "comma-separated list of e-mail addresses"
     hints:
       coupon_code:
         inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone uses this coupon"
       volunteer_opportunity:
-        inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone signs up as volunteer"
+        inform_emails: "when someone signs up for this volunteer position, an e-mail will be sent to these email addresses"
     options:
       event_configuration:
         waiver:

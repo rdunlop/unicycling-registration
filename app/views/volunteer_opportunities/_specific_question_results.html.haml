@@ -1,7 +1,7 @@
 %table.volunteers.sortable
   %thead
     %tr
-      %th Volunteer Opportunity
+      %th Volunteer Role
       %th Num Registrants
       %th Delete
 
@@ -10,6 +10,6 @@
       %tr
         %td= link_to vo.description, vo
         %td= vo.volunteer_choices.count
-        %td= link_to "Delete", vo, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to "Delete", vo, method: :delete, data: { confirm: 'Are you sure? This will delete all registrant selections for this volunteer option' }
 
-= link_to "New Volunteer Opportunity", new_volunteer_opportunity_path
+= link_to "New Volunteer Role", new_volunteer_opportunity_path
