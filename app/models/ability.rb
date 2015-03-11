@@ -157,13 +157,27 @@ class Ability
       return # required in order to allow rails_admin to function
     end
 
+    # #################################################
+    # Begin new role definitions
+    # #################################################
     if user.has_role? :convention_admin
       can :manage, TenantAlias
       can :manage, EventConfiguration
       can :manage, :convention_setup
       can :read, :onsite_registration
       can :manage, ExpenseGroup
+      can :manage, ExpenseItem
+      can :manage, CouponCode
+      can :manage, RegistrationPeriod
+      can :manage, Category
+      can :manage, Event
+      can :manage, EventChoice
+      can :manage, EventCategory
+      can :manage, VolunteerOpportunity
     end
+    # #################################################
+    # End new role definitions
+    # #################################################
 
     if user.has_role? :awards_admin
       can [:read, :results, :publish, :unpublish, :award], Competition

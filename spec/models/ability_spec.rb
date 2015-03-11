@@ -125,7 +125,17 @@ describe "Ability" do
       @user = FactoryGirl.create(:convention_admin_user)
     end
     subject { @ability = Ability.new(@user) }
-
+    it { should be_able_to(:read, :convention_setup) }
+    it { should be_able_to(:manage, EventConfiguration) }
+    it { should be_able_to(:manage, RegistrationPeriod) }
+    it { should be_able_to(:manage, ExpenseGroup) }
+    it { should be_able_to(:manage, ExpenseItem) }
+    it { should be_able_to(:manage, CouponCode) }
+    it { should be_able_to(:manage, Category) }
+    it { should be_able_to(:manage, Event) }
+    it { should be_able_to(:manage, EventChoice) }
+    it { should be_able_to(:manage, EventCategory) }
+    it { should be_able_to(:manage, VolunteerOpportunity) }
     it { should be_able_to(:manage, TenantAlias) }
   end
 
