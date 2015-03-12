@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307190020) do
+ActiveRecord::Schema.define(version: 20150312113739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -331,6 +331,9 @@ ActiveRecord::Schema.define(version: 20150307190020) do
     t.string   "long_name"
     t.string   "location"
     t.string   "dates_description"
+    t.text     "competitor_benefits"
+    t.text     "noncompetitor_benefits"
+    t.text     "spectator_benefits"
   end
 
   add_index "event_configuration_translations", ["event_configuration_id"], name: "index_8da8125feacb8971b8fc26e0e628b77608288047", using: :btree

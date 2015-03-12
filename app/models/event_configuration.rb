@@ -45,6 +45,7 @@ class EventConfiguration < ActiveRecord::Base
   specify_validations :base_settings, :name_logo, :payment_settings, :important_dates
 
   translates :short_name, :long_name, :location, :dates_description
+  translates :competitor_benefits, :noncompetitor_benefits, :spectator_benefits
   accepts_nested_attributes_for :translations
 
   mount_uploader :logo_file, LogoUploader
@@ -111,6 +112,26 @@ class EventConfiguration < ActiveRecord::Base
   def waiver_text
     return custom_waiver_text unless custom_waiver_text.blank?
     self.class.default_waiver_text
+  end
+
+  def benefits_list(text)
+    if text
+      text.split("\n")
+    else
+      []
+    end
+  end
+
+  def competitor_benefits_list
+    benefits_list(competitor_benefits)
+  end
+
+  def noncompetitor_benefits_list
+    benefits_list(noncompetitor_benefits)
+  end
+
+  def spectator_benefits_list
+    benefits_list(spectator_benefits)
   end
 
   # allows creating competitors during lane assignment

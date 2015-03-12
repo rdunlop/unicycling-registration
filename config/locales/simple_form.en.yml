@@ -36,6 +36,10 @@ en:
         inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone uses this coupon"
       volunteer_opportunity:
         inform_emails: "when someone signs up for this volunteer position, an e-mail will be sent to these email addresses"
+      event_configuration:
+        competitor_benefits: "Appears on the Registration Homepage, describing the benefits of Competitor Registration"
+        noncompetitor_benefits: "Appears on the Registration Homepage, describing the benefits of NonCompetitor Registration"
+        spectator_benefits: "Appears on the Registration Homepage, describing the benefits of Spectator Registration"
     options:
       event_configuration:
         waiver:

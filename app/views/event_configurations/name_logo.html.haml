@@ -30,6 +30,21 @@
           = f.globalize_fields_for lang do |g|
             %td= g.text_field :dates_description
       %tr
+        %th Competitor Benefits
+        - languages.each do |lang|
+          = f.globalize_fields_for lang do |g|
+            %td= g.text_area :competitor_benefits
+      %tr
+        %th NonCompetitor Benefits
+        - languages.each do |lang|
+          = f.globalize_fields_for lang do |g|
+            %td= g.text_area :noncompetitor_benefits
+      %tr
+        %th Spectator Benefits
+        - languages.each do |lang|
+          = f.globalize_fields_for lang do |g|
+            %td= g.text_area :spectator_benefits
+      %tr
         %th= f.label :event_url, "Main Website"
         %td= f.url_field :event_url
         %td Links from the Menubar logo to this URL.

@@ -119,7 +119,9 @@ class EventConfigurationsController < ConventionSetupController
   def name_logo_params
     params.require(:event_configuration).permit(:long_name, :short_name, :logo_file, :dates_description,
       :start_date, :event_url, :location,
-      :translations_attributes => [:id, :locale, :short_name, :long_name, :location, :dates_description])
+      translations_attributes: [
+        :id, :locale, :short_name, :long_name, :location, :dates_description,
+        :competitor_benefits, :noncompetitor_benefits, :spectator_benefits])
   end
 
   def payment_settings_params
