@@ -3,23 +3,18 @@
   Note: If there is only one event_category, the user will not be presented with a selection-box.
   .field
     = f.label :name
-    %br
     = f.text_field :name
   .field
     = f.label :position
-    %br
     = f.number_field :position
   .field
     = f.label :age_range_start
-    %br
     = f.number_field :age_range_start, :in => 0..100
   .field
     = f.label :age_range_end
-    %br
     = f.number_field :age_range_end, :in => 0..100
   .field
     = f.label :warning_on_registration_summary
-    %br
     = f.check_box :warning_on_registration_summary
   .actions
     = f.submit
