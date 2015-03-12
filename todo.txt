@@ -2,6 +2,7 @@
 - add ability to sort/save expense_item order
 - Why do simple-form select boxes have blank option by default?
 - Remove the old registrants controller paths, and improve the wizard navigation to allow jumping forward and backward.
+- Make "Standard Skill" event/gathering clearer.
 
 Reorganized January 15, 2015.
 

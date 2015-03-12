@@ -1,6 +1,7 @@
 = simple_form_for(@event.persisted? ? [:convention_setup, @event] : [:convention_setup, @category, @event] ) do |f|
   = render partial: "shared/error_messages", object: @event
   %h2 Event: #{@event.name}
+  = f.input :name
 
   - if @event.persisted?
     = f.association :category, collection: Category.all, label_method: :name
@@ -27,7 +28,6 @@
 
   .js--hiddenToggleMenu Advanced Settings
   .js--hiddenToggle
-    = f.input :name, hint: "'Standard Skill' is a special name, it causes a link on the registration form summary"
 
     = f.input :position
     = f.input :visible
