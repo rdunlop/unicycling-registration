@@ -48,7 +48,7 @@ class LaneAssignmentsController < ApplicationController
   end
 
   def dq_competitor
-    @dq_request = DQRequest.new(params[:dq_request])
+    @dq_request = DqRequest.new(params[:dq_request])
 
     bib_number = @dq_request.bib_number
     @heat = @dq_request.heat.to_i
