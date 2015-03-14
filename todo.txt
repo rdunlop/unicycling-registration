@@ -1,4 +1,5 @@
 - Upgrade to rspec3 "expect" syntax
+- ALways set "position" (event creation, event-category creation)
 - add ability to sort/save expense_group order
 - add ability to sort/save expense_item order
 - Why do simple-form select boxes have blank option by default?

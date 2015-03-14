@@ -1,4 +1,4 @@
-<% cache ['navbar', I18n.locale, current_user, @config, Category] do %>
+<% cache ['navbar', I18n.locale, current_user, @config, Category, Competition] do %>
 <nav class="non_printable">
 <ul>
   <% if EventConfiguration.configuration_exists? %>
@@ -79,8 +79,10 @@
       end
     %>
   <% end %>
-  <%  m.headings << Menu::MenuHeading.new(:title => t('results'), :is_link => true, :url => results_path)
+  <% if Competition.any? %>
+    <%  m.headings << Menu::MenuHeading.new(title: t('results'), is_link: true, url: results_path)
   %>
+  <% end %>
   <% m.headings.each do |heading| %>
     <% next unless heading.has_permitted_entry %>
     <% if heading.is_link %>
