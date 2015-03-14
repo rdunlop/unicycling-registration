@@ -4,7 +4,7 @@
       %td= ce
       - if details
         %td= ce.details_description
-      %td= print_item_cost_currency(ce.cost)
+      %td= print_item_cost_currency(ce.total_cost)
       - if ce.free
         %td n/a
       - else

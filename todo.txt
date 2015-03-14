@@ -1,7 +1,7 @@
 - add ability to sort/save expense_group order
 - add ability to sort/save expense_item order
 - Why do simple-form select boxes have blank option by default?
-- Remove the old registrants controller paths, and improve the wizard navigation to allow jumping forward and backward.
+- Remove the old registrants controller paths, and improve the wizard navigation to allow jumping forward and backward. Update the specs for the buildController
 - Make "Standard Skill" event/gathering clearer.
 - Allow the user to jump forward in the wizard if they have already visited that step.
 - Fix Styling of ContactDetails page, which currently is strange with VAT

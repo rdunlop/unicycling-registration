@@ -438,7 +438,7 @@ class Registrant < ActiveRecord::Base
 
   def amount_owing
     Rails.cache.fetch("/registrants/#{id}-#{updated_at}/amount_owing") do
-      registrant_expense_items.inject(0){|total, item| total + item.cost}
+      registrant_expense_items.inject(0){|total, item| total + item.total_cost}
     end
   end
 

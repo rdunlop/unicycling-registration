@@ -1,14 +1,11 @@
 class RegistrantsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :user, only: [:index]
-  load_resource find_by: :bib_number, except: :new
-  authorize_resource except: :new
-  load_and_authorize_resource through: :current_user, only: :new
-  # NOTE: This isn't working 100%, it fails when a create fails (the breadcrumb is incorrect)
+  load_resource find_by: :bib_number
+  authorize_resource
 
   before_action :set_registrants_breadcrumb
-  before_action :set_single_registrant_breadcrumb, only: [:edit, :show, :reg_fee]
-  before_action :set_new_registrant_breadcrumb, only: [:new]
+  before_action :set_single_registrant_breadcrumb, only: [:show, :reg_fee]
 
   # GET /registrants/manage_all
   def manage_all
@@ -127,63 +124,6 @@ class RegistrantsController < ApplicationController
     end
   end
 
-  # GET /registrants/new
-  # GET /registrants/new.json
-  def new
-    @registrant.registrant_type = get_reg_type
-    @registrant.build_contact_detail
-    load_online_waiver
-    load_categories
-    load_other_reg
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @registrant }
-    end
-  end
-
-  # GET /registrants/1/edit
-  def edit
-    add_breadcrumb "Edit", edit_registrant_path(@registrant)
-    load_categories
-    load_online_waiver
-  end
-
-  # POST /registrants
-  # POST /registrants.json
-  def create
-    @registrant.user = current_user
-
-    respond_to do |format|
-      if @registrant.save
-        format.html { redirect_to registrant_registrant_expense_items_path(@registrant), notice: 'Registrant was successfully created.' }
-        format.json { render json: @registrant, status: :created, location: @registrant }
-      else
-        @user = current_user
-        add_breadcrumb "New"
-        load_categories
-        load_online_waiver
-        format.html { render action: "new" }
-        format.json { render json: @registrant.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /registrants/1
-  # PUT /registrants/1.json
-  def update
-    respond_to do |format|
-      if @registrant.update_attributes(registrant_update_params)
-        format.html { redirect_to registrant_registrant_expense_items_path(@registrant), notice: 'Registrant was successfully updated.' }
-        format.json { head :no_content }
-      else
-        edit
-        format.html { render action: "edit" }
-        format.json { render json: @registrant.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /registrants/1
   # DELETE /registrants/1.json
   def destroy
@@ -191,12 +131,10 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       if @registrant.save
-        format.html { redirect_to manage_all_registrants_path, notice: 'Registrant deleted' }
+        format.html { redirect_to root_path, notice: 'Registrant deleted' }
         format.json { head :no_content }
       else
-        edit
-        format.html { render action: "edit" }
-        format.json { render json: @registrant }
+        format.html { redirect_to root_path, alert: "Error deleting registrant" }
       end
     end
   end
@@ -223,28 +161,8 @@ class RegistrantsController < ApplicationController
     add_registrant_breadcrumb(@registrant)
   end
 
-  def set_new_registrant_breadcrumb
-    add_breadcrumb "New", new_registrant_path
-  end
-
   def set_reg_fee_breadcrumb
     add_breadcrumb "Set Reg Fee"
-  end
-
-  def load_categories
-    if @registrant.competitor
-      @categories = Category.includes(:translations, :events => :event_choices)
-    end
-  end
-
-  def load_other_reg
-    unless current_user.registrants.empty?
-      @other_registrant = current_user.registrants.active.last
-    end
-  end
-
-  def load_online_waiver
-    @has_online_waiver = @config.has_online_waiver
   end
 
   def attributes

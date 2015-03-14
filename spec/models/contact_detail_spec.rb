@@ -62,6 +62,7 @@ describe ContactDetail do
 
     it "requires vat_number if from italy" do
       @cd.country_residence = "IT"
+      @cd.birthplace = "Place"
       @cd.vat_number = nil
       expect(@cd).to be_invalid
       @cd.vat_number = "12345"

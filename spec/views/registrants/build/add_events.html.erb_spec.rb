@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-describe "registrants/new" do
+describe "registrants/build/add_events" do
+  let(:wizard_path) { "/" }
   before(:each) do
     @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
     @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
@@ -14,39 +15,7 @@ describe "registrants/new" do
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability) { @ability }
     controller.stub(:current_user) { FactoryGirl.create(:user) }
-  end
-  describe "Competitor" do
-    before(:each) do
-      @registrant = FactoryGirl.build(:competitor)
-      @categories = [] # none are _needed_
-    end
-
-    it "renders new registrant form" do
-      render
-
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      assert_select "form", :action => registrants_path, :method => "post" do
-        assert_select "input#registrant_first_name", :name => "registrant[first_name]"
-        assert_select "input#registrant_middle_initial", :name => "registrant[middle_initial]"
-        assert_select "input#registrant_last_name", :name => "registrant[last_name]"
-        assert_select "input#registrant_gender_male", :name => "registrant[gender]"
-        assert_select "input#registrant_registrant_type", :name => "registrant[registrant_type]"
-      end
-    end
-    it "displays the 'Continue' button" do
-      render
-      assert_select "input[value='Save &amp; Continue']", 1
-    end
-  end
-
-  describe "as non-competitor" do
-    before(:each) do
-      @registrant = FactoryGirl.build(:noncompetitor)
-    end
-    it "displays the 'Save Registration' button" do
-      render
-      assert_select "input[value='Save &amp; Continue']", 1
-    end
+    allow(view).to receive(:wizard_path).and_return(wizard_path)
   end
 
   describe "the events lists" do
@@ -68,7 +37,7 @@ describe "registrants/new" do
         render
 
         # Run the generator again with the --webrat flag if you want to use webrat matchers
-        assert_select "form", :action => registrants_path, :method => "post" do
+        assert_select "form", :action => wizard_path, :method => "post" do
           assert_select "input#registrant_registrant_choices_attributes_0_event_choice_id", :name => "registrant[registrant_choices_attributes][0][event_choice_id]" do
             assert_select "input[value='#{@ec1.id}']"
           end
@@ -136,7 +105,7 @@ describe "registrants/new" do
         it "should have the text input" do
           render
 
-          assert_select "form", :action => registrants_path, :method => "post" do
+          assert_select "form", :action => wizard_path, :method => "post" do
             assert_select "input#registrant_registrant_choices_attributes_0_event_choice_id", :name => "registrant[registrant_choices_attributes][0][event_choice_id]" do
               assert_select "input[value='#{@ec1.id}']"
             end
@@ -187,33 +156,6 @@ describe "registrants/new" do
           end
         end
       end
-    end
-  end
-
-  describe "Competitor" do
-    before(:each) do
-      @registrant = FactoryGirl.create(:competitor)
-      @categories = [] # none are _needed_
-    end
-    it "renders dates in nice formats" do
-      render
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Jan 10, 2012/)
-      rendered.should match(/Feb 11, 2012/)
-    end
-    it "lists competitor costs" do
-      render
-      rendered.should match(/100/)
-    end
-  end
-
-  describe "as non-competitor" do
-    before(:each) do
-      @registrant = FactoryGirl.create(:noncompetitor)
-    end
-    it "displays the registration_period for non-competitors" do
-      render
-      rendered.should match(/50/)
     end
   end
 end

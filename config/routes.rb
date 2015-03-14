@@ -183,7 +183,7 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :registrants, except: [:index] do
+    resources :registrants, except: [:index, :new, :create, :edit, :update] do
       resources :build, controller: 'registrants/build', only: [:show, :update, :create]
       # admin
       collection do
