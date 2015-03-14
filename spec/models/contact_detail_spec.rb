@@ -55,6 +55,28 @@ describe ContactDetail do
     @cd.valid?.should == false
   end
 
+  context "when vat_mode is enabled" do
+    before :each do
+      EventConfiguration.singleton.update_attribute(:vat_mode, true)
+    end
+
+    it "requires vat_number if from italy" do
+      @cd.country_residence = "IT"
+      @cd.vat_number = nil
+      expect(@cd).to be_invalid
+      @cd.vat_number = "12345"
+      expect(@cd).to be_valid
+    end
+
+    it "doesn't require vat_number if from canada" do
+      @cd.country_residence = "CA"
+      @cd.vat_number = nil
+      expect(@cd).to be_valid
+      @cd.vat_number = "12345"
+      expect(@cd).to be_valid
+    end
+  end
+
   it "requires city" do
     @cd.city = nil
     @cd.valid?.should == false

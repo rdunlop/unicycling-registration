@@ -45,6 +45,12 @@ class ContactDetail < ActiveRecord::Base
   # contact-info block
   validates :emergency_name, :emergency_relationship, :emergency_primary_phone, :presence => true
   validates :responsible_adult_name, :responsible_adult_phone, :presence => true, :if => :minor?
+  validates :vat_number, :birthplace, presence: { message: "must be specified if you are from Italy" }, if: :vat_required?
+
+  # Italians are required to enter VAT_Number and Birthplace
+  def vat_required?
+    EventConfiguration.singleton.vat_mode? && country_residence == "IT"
+  end
 
   def minor?
     registrant && !registrant.spectator? && registrant.age < 18
