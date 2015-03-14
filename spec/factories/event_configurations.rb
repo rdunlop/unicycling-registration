@@ -21,7 +21,6 @@
 #  usa                                   :boolean          default(FALSE)
 #  iuf                                   :boolean          default(FALSE)
 #  currency_code                         :string(255)
-#  currency                              :text
 #  rulebook_url                          :string(255)
 #  style_name                            :string(255)
 #  custom_waiver_text                    :text
@@ -52,7 +51,7 @@ FactoryGirl.define do
     event_url "http://www.naucc.com"
     start_date Date.new(2013, 1, 1)
     # logo ""
-    currency nil
+    currency_code "USD"
     contact_email "robinc@dunlopweb.com"
     artistic_closed_date "2013-1-10"
     waiver "print"

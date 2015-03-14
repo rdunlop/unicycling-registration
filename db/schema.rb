@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314191902) do
+ActiveRecord::Schema.define(version: 20150314195007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -360,7 +360,6 @@ ActiveRecord::Schema.define(version: 20150314191902) do
     t.boolean  "usa",                                   default: false
     t.boolean  "iuf",                                   default: false
     t.string   "currency_code"
-    t.text     "currency"
     t.string   "rulebook_url"
     t.string   "style_name"
     t.text     "custom_waiver_text"

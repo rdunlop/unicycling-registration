@@ -26,13 +26,13 @@ module ApplicationHelper
   end
 
   def print_formatted_currency(cost)
-    # print in :en locale so that it is '$'
-    number_to_currency(cost, format: EventConfiguration.singleton.currency, locale: :en)
+    ec = EventConfiguration.singleton
+    number_to_currency(cost, format: ec.currency, unit: ec.currency_unit)
   end
 
   def print_item_cost_currency(cost)
     return "Free" if cost == 0
-    number_to_currency(cost, format: EventConfiguration.singleton.currency, locale: :en)
+    print_formatted_currency(cost)
   end
 
   def print_time_until_prices_increase(reg_period)

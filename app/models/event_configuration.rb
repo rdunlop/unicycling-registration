@@ -21,7 +21,6 @@
 #  usa                                   :boolean          default(FALSE)
 #  iuf                                   :boolean          default(FALSE)
 #  currency_code                         :string(255)
-#  currency                              :text
 #  rulebook_url                          :string(255)
 #  style_name                            :string(255)
 #  custom_waiver_text                    :text
@@ -60,6 +59,11 @@ class EventConfiguration < ActiveRecord::Base
     [["Blue and Pink", "unicon_17"], ["Green and Blue", "naucc_2013"], ["Blue Purple Green", "naucc_2014"], ["Purple Blue Green", "naucc_2015"]]
   end
 
+  def self.currency_codes
+    ["USD", "CAD", "EUR"]
+  end
+
+  validates :currency_code, inclusion: { in: self.currency_codes }, allow_nil: true
   # base settings
   validates :style_name, :inclusion => {:in => self.style_names.map{|y| y[1]} }, if: :base_settings_applied?
   validates :waiver, inclusion: { in: ["none", "online", "print"] }, if: :base_settings_applied?
@@ -90,11 +94,32 @@ class EventConfiguration < ActiveRecord::Base
     self.style_name ||= "naucc_2013"
     self.long_name ||= ""
     self.short_name ||= ""
-    self.currency ||= "%u%n USD"
     self.currency_code ||= "USD"
     self.contact_email ||= ""
     self.max_award_place ||= 5
     self.display_confirmed_events = false if self.display_confirmed_events.nil?
+  end
+
+  def currency
+    case currency_code
+    when "USD"
+      "%u%n USD"
+    when "CAD"
+      "%u%n CAD"
+    when "EUR"
+      "%n%u"
+    end
+  end
+
+  def currency_unit
+    case currency_code
+    when "USD"
+      "$"
+    when "CAD"
+      "$"
+    when "EUR"
+      "€"
+    end
   end
 
   def has_print_waiver

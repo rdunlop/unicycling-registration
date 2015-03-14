@@ -21,7 +21,6 @@
 #  usa                                   :boolean          default(FALSE)
 #  iuf                                   :boolean          default(FALSE)
 #  currency_code                         :string(255)
-#  currency                              :text
 #  rulebook_url                          :string(255)
 #  style_name                            :string(255)
 #  custom_waiver_text                    :text
@@ -43,6 +42,9 @@
 
 require 'spec_helper'
 
+# so that I can test print_item_cost_currency
+include ApplicationHelper
+
 describe EventConfiguration do
   before(:each) do
     @ev = FactoryGirl.build(:event_configuration, :standard_skill_closed_date => Date.new(2013, 5, 5))
@@ -62,6 +64,25 @@ describe EventConfiguration do
     @ev.style_name = nil
     @ev.apply_validation(:base_settings)
     @ev.valid?.should == false
+  end
+
+  it "doesn't allow an unknown currency code" do
+    @ev.currency_code = "Robin"
+    expect(@ev).to be_invalid
+  end
+
+  context "when in EUR format" do
+    before :each do
+      @ev.update_attribute(:currency_code, "EUR")
+    end
+
+    it "returns the EUR symbol" do
+      expect(@ev.currency_unit).to eq("€")
+    end
+
+    it "converts from EUR to Symbol" do
+      expect(print_item_cost_currency(10)).to eq("10.00€")
+    end
   end
 
   it "has a list of style_names" do

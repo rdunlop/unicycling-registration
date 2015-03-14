@@ -1,3 +1,4 @@
+- Upgrade to rspec3 "expect" syntax
 - add ability to sort/save expense_group order
 - add ability to sort/save expense_item order
 - Why do simple-form select boxes have blank option by default?

@@ -18,6 +18,7 @@ en:
         rulebook_url: "Rulebook PDF URL"
         standard_skill: "Enable Standard Skill Submisssion System"
         standard_skill_closed_date: "Last day to submit Standard Skill Routines online"
+        paypal_account: "Paypal Merchant Account Email"
       expense_item:
         has_details: "Ask a question from registrant"
         has_custom_cost: "Donation"
@@ -40,6 +41,7 @@ en:
         competitor_benefits: "Appears on the Registration Homepage, describing the benefits of Competitor Registration"
         noncompetitor_benefits: "Appears on the Registration Homepage, describing the benefits of NonCompetitor Registration"
         spectator_benefits: "Appears on the Registration Homepage, describing the benefits of Spectator Registration"
+        paypal_test: "allow to pretend to receive payment confirmation from paypal"
     options:
       event_configuration:
         waiver:
