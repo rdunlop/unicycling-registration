@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312120027) do
+ActiveRecord::Schema.define(version: 20150314191902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -410,15 +410,15 @@ ActiveRecord::Schema.define(version: 20150312120027) do
 
   create_table "expense_groups", force: true do |t|
     t.string   "group_name"
-    t.boolean  "visible"
+    t.boolean  "visible",                    default: true,  null: false
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "info_url"
     t.string   "competitor_free_options"
     t.string   "noncompetitor_free_options"
-    t.boolean  "competitor_required",        default: false
-    t.boolean  "noncompetitor_required",     default: false
+    t.boolean  "competitor_required",        default: false, null: false
+    t.boolean  "noncompetitor_required",     default: false, null: false
     t.boolean  "registration_items",         default: false, null: false
   end
 

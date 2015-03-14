@@ -4,15 +4,15 @@
 #
 #  id                         :integer          not null, primary key
 #  group_name                 :string(255)
-#  visible                    :boolean
+#  visible                    :boolean          default(TRUE), not null
 #  position                   :integer
 #  created_at                 :datetime
 #  updated_at                 :datetime
 #  info_url                   :string(255)
 #  competitor_free_options    :string(255)
 #  noncompetitor_free_options :string(255)
-#  competitor_required        :boolean          default(FALSE)
-#  noncompetitor_required     :boolean          default(FALSE)
+#  competitor_required        :boolean          default(FALSE), not null
+#  noncompetitor_required     :boolean          default(FALSE), not null
 #  registration_items         :boolean          default(FALSE), not null
 #
 
@@ -33,10 +33,16 @@ class ExpenseGroup < ActiveRecord::Base
   validates :noncompetitor_free_options, :inclusion => { :in => self.free_options, :allow_blank => true }
 
   default_scope { order(:position) }
-  scope :visible, -> { where(:visible => true) }
+  scope :visible, -> { where(visible: true).not_a_required_item_group }
 
   def self.admin_visible
-    where.not(registration_items: true)
+    where.not(registration_items: true).not_a_required_item_group
+  end
+
+  # If an Item from this group is required (ie: automatically added).
+  # Don't display the group in the list(s).
+  def self.not_a_required_item_group
+    where(competitor_required: false, noncompetitor_required: false)
   end
 
   def self.registration_items_group
@@ -51,14 +57,6 @@ class ExpenseGroup < ActiveRecord::Base
              noncompetitor_required: false,
              group_name: "Registration",
            })
-  end
-
-  after_initialize :init
-
-  def init
-    self.competitor_required = false if self.competitor_required.nil?
-    self.noncompetitor_required = false if self.competitor_required.nil?
-    self.visible = true if self.visible.nil?
   end
 
   def self.user_manageable
