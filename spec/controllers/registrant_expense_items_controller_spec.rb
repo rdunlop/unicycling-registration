@@ -18,15 +18,6 @@ describe RegistrantExpenseItemsController do
     }
   end
 
-  describe "GET index" do
-    it "assigns the requested registrant as @registrant" do
-      registrant = FactoryGirl.create(:competitor, :user => @user)
-      get :index, {:registrant_id => registrant.to_param}
-      assigns(:registrant).should eq(registrant)
-      response.should be_success
-    end
-  end
-
   describe "POST create" do
     before { request.env["HTTP_REFERER"] = registrant_build_path(Registrant.last.id, :expenses) }
     describe "with valid params" do

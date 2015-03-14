@@ -209,7 +209,7 @@ Workspace::Application.routes.draw do
       member do
         get :waiver
       end
-      resources :registrant_expense_items, :only => [:index, :create, :destroy]
+      resources :registrant_expense_items, :only => [:create, :destroy]
       resources :standard_skill_routines, :only => [:index, :create]
       member do
         get :payments, to: "payments#registrant_payments"
