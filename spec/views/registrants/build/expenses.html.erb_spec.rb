@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-describe "registrant_expense_items/index" do
+describe "registrants/build/expenses" do
+  let(:wizard_path) { "/" }
   before(:each) do
     @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
     @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
@@ -10,6 +11,7 @@ describe "registrant_expense_items/index" do
                                               :competitor_expense_item => @comp_exp,
                                               :noncompetitor_expense_item => @noncomp_exp)
     @registrant = FactoryGirl.create(:competitor)
+    allow(view).to receive(:wizard_path).and_return(wizard_path)
   end
 
   it "renders add_items form" do

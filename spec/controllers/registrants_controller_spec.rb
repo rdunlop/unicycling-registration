@@ -156,7 +156,7 @@ describe RegistrantsController do
     it "redirects to the registrants list" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       delete :destroy, {:id => registrant.to_param}
-      response.should redirect_to(manage_all_registrants_path)
+      response.should redirect_to(root_path)
     end
 
     describe "as normal user" do
@@ -201,7 +201,7 @@ describe RegistrantsController do
       it "redirects to the root" do
         registrant = FactoryGirl.create(:competitor, :deleted => true)
         post :undelete, {:id => registrant.to_param }
-        response.should redirect_to(root_path)
+        response.should redirect_to(manage_all_registrants_path)
       end
 
       describe "as a normal user" do
