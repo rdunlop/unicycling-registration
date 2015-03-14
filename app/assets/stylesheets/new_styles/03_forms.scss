@@ -143,9 +143,9 @@ fieldset legend {
 
 $header-bg: darkgray;
 .form__fieldset {
-  border: none;
+  border: thick rgb(182, 173, 173) solid;
   text-align: left;
-  background: lightgray;
+  background: rgb(232, 232, 232);
   padding: 0 10px;
   width: 400px;
   margin: auto;
