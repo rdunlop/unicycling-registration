@@ -27,6 +27,8 @@
 #  updated_at                      :datetime
 #  usa_confirmed_paid              :boolean          default(FALSE)
 #  usa_family_membership_holder_id :integer
+#  birthplace                      :string(255)
+#  vat_number                      :string(255)
 #
 # Indexes
 #

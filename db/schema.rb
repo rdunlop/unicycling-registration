@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312113739) do
+ActiveRecord::Schema.define(version: 20150312120027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,6 +243,8 @@ ActiveRecord::Schema.define(version: 20150312113739) do
     t.datetime "updated_at"
     t.boolean  "usa_confirmed_paid",              default: false
     t.integer  "usa_family_membership_holder_id"
+    t.string   "birthplace"
+    t.string   "vat_number"
   end
 
   add_index "contact_details", ["registrant_id"], name: "index_contact_details_on_registrant_id", unique: true, using: :btree
@@ -375,6 +377,7 @@ ActiveRecord::Schema.define(version: 20150312113739) do
     t.boolean  "paypal_test",                           default: true,   null: false
     t.string   "waiver",                                default: "none"
     t.integer  "validations_applied"
+    t.boolean  "vat_mode",                              default: false,  null: false
   end
 
   create_table "events", force: true do |t|

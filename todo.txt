@@ -3,6 +3,17 @@
 - Why do simple-form select boxes have blank option by default?
 - Remove the old registrants controller paths, and improve the wizard navigation to allow jumping forward and backward.
 - Make "Standard Skill" event/gathering clearer.
+- Allow the user to jump forward in the wizard if they have already visited that step.
+- Fix Styling of ContactDetails page, which currently is strange with VAT
+- Require that VAT be filled in for certain types of people?
+- All prices must be listed INCLUDING VAT
+- IF someone enters VAT_Id, they are charged WITHOUT VAT
+ - Do I need to validate the VAT_ID? (Probably, how?)
+- say "Including 22% VAT" somewhere
+- Italians, if they enter VAT_ID, still have to pay VAT, but Marco will submit that.
+- Italians are REQUIRED to enter a VAT_ID.
+- Are Italians able to use the same VAT_ID for themselves and also their family?
+-
 
 Reorganized January 15, 2015.
 
