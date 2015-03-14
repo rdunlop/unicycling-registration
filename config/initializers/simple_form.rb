@@ -6,7 +6,7 @@ SimpleForm.setup do |config|
   # stack. The options given below are used to wrap the
   # whole input.
   config.wrappers :default, class: :field,
-    hint_class: :field_with_hint, error_class: :field_with_errors do |b|
+                            hint_class: :field_with_hint, error_class: :field_with_errors do |b|
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
     # given input by passing: `f.input EXTENSION_NAME => false`.
@@ -167,30 +167,28 @@ end
 
 module SimpleForm
   module Inputs
-=begin
-    module TextInputs
-      def input_html_options
-        options = super
-
-        options[:class] ||= []
-        options[:class] << "input--text"
-        options[:class] << "js--inputText"
-
-        options
-      end
-    end
-
-    module CollectionSelect
-      def input_html_options
-        options = super
-
-        options[:class] ||= []
-        options[:class] << " input--select"
-
-        options
-      end
-    end
-=end
+    #     module TextInputs
+    #       def input_html_options
+    #         options = super
+    #
+    #         options[:class] ||= []
+    #         options[:class] << "input--text"
+    #         options[:class] << "js--inputText"
+    #
+    #         options
+    #       end
+    #     end
+    #
+    #     module CollectionSelect
+    #       def input_html_options
+    #         options = super
+    #
+    #         options[:class] ||= []
+    #         options[:class] << " input--select"
+    #
+    #         options
+    #       end
+    #     end
     module BooleanWrap
       def input_html_options
         options = super
@@ -212,27 +210,25 @@ module SimpleForm
         options
       end
     end
-=begin
-    module CheckboxCollectionWrap
-      def input_html_options
-        options = super
-
-        options[:class] ||= []
-        options[:class] << "input--boolean"
-
-        options
-      end
-
-      def input_options
-        options = super
-
-        options[:item_wrapper_tag] = false
-        options[:item_label_class] = "label--boolean label--checkbox js--inputBoolean"
-
-        options
-      end
-    end
-=end
+    #     module CheckboxCollectionWrap
+    #       def input_html_options
+    #         options = super
+    #
+    #         options[:class] ||= []
+    #         options[:class] << "input--boolean"
+    #
+    #         options
+    #       end
+    #
+    #       def input_options
+    #         options = super
+    #
+    #         options[:item_wrapper_tag] = false
+    #         options[:item_label_class] = "label--boolean label--checkbox js--inputBoolean"
+    #
+    #         options
+    #       end
+    #     end
     module RadioCollectionWrap
       def input_html_options
         options = super
@@ -252,35 +248,31 @@ module SimpleForm
         options
       end
     end
-=begin
-    class StringInput
-      include TextInputs
-    end
-
-    class PasswordInput
-      include TextInputs
-    end
-
-    class NumericInput
-      include TextInputs
-    end
-=end
+    #     class StringInput
+    #       include TextInputs
+    #     end
+    #
+    #     class PasswordInput
+    #       include TextInputs
+    #     end
+    #
+    #     class NumericInput
+    #       include TextInputs
+    #     end
     class BooleanInput
       include BooleanWrap
     end
-=begin
-    class GroupedCollectionSelectInput
-      include CollectionSelect
-    end
-
-    class CollectionSelectInput
-      include CollectionSelect
-    end
-
-    class CollectionCheckBoxesInput
-      include CheckboxCollectionWrap
-    end
-=end
+    #     class GroupedCollectionSelectInput
+    #       include CollectionSelect
+    #     end
+    #
+    #     class CollectionSelectInput
+    #       include CollectionSelect
+    #     end
+    #
+    #     class CollectionCheckBoxesInput
+    #       include CheckboxCollectionWrap
+    #     end
     class CollectionRadioButtonsInput
       include RadioCollectionWrap
     end

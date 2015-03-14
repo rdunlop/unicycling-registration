@@ -72,7 +72,6 @@ class EventConfiguration < ActiveRecord::Base
 
   validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa_membership_config"
 
-
   validates :usa, :iuf, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
   validates :test_mode, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
   validates :max_award_place, presence: true, if: :important_dates_applied?

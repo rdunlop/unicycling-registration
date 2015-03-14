@@ -121,9 +121,9 @@ describe RegistrationPeriodsController do
       it "redirects to the registration_period" do
         registration_period = FactoryGirl.create :registration_period
         params = valid_attributes.merge({
-          competitor_expense_item_attributes: { id: registration_period.competitor_expense_item.id },
-          noncompetitor_expense_item_attributes: { id: registration_period.noncompetitor_expense_item.id },
-          })
+                                          competitor_expense_item_attributes: { id: registration_period.competitor_expense_item.id },
+                                          noncompetitor_expense_item_attributes: { id: registration_period.noncompetitor_expense_item.id },
+                                        })
         put :update, {:id => registration_period.to_param, :registration_period => params}
         response.should redirect_to(registration_periods_path)
       end

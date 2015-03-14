@@ -22,7 +22,6 @@
 #
 
 class ExpenseItem < ActiveRecord::Base
-
   validates :name, :position, :cost, :expense_group, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
@@ -59,7 +58,6 @@ class ExpenseItem < ActiveRecord::Base
   def self.user_manageable
     includes(:expense_group).where(expense_groups: { registration_items: false })
   end
-
 
   # items paid for
   def paid_items
@@ -150,8 +148,8 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def has_limits?
-    return true if (maximum_available && maximum_available > 0)
-    return true if (maximum_per_registrant && maximum_per_registrant > 0)
+    return true if maximum_available && maximum_available > 0
+    return true if maximum_per_registrant && maximum_per_registrant > 0
     false
   end
 end

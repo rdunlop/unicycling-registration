@@ -172,7 +172,6 @@ describe ExpenseItem do
     end
   end
 
-
   describe "with an expense_group set for 'competitor_required'" do
     before(:each) do
       @rg = FactoryGirl.create(:expense_group, :competitor_required => true)

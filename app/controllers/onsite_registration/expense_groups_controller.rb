@@ -10,5 +10,4 @@ class OnsiteRegistration::ExpenseGroupsController < ApplicationController
     @expense_group.update_attribute(:visible, !@expense_group.visible)
     redirect_to action: :index
   end
-
 end

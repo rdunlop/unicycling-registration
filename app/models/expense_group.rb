@@ -45,12 +45,12 @@ class ExpenseGroup < ActiveRecord::Base
 
   def self.create_registration_items_group
     create({
-      visible: false,
-      registration_items: true,
-      competitor_required: false,
-      noncompetitor_required: false,
-      group_name: "Registration",
-    })
+             visible: false,
+             registration_items: true,
+             competitor_required: false,
+             noncompetitor_required: false,
+             group_name: "Registration",
+           })
   end
 
   after_initialize :init

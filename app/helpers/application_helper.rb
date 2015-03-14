@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def print_time_until_prices_increase(reg_period)
-    if (DateTime.now > reg_period.end_date)
+    if DateTime.now > reg_period.end_date
       t("prices_increase_soon")
     else
       end_date = distance_of_time_in_words(DateTime.now, reg_period.last_day) + " (" + (l (reg_period.last_day), format: :short) + ")"

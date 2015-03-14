@@ -27,7 +27,6 @@ describe EventsController do
     end
   end
 
-
   describe "POST create_director" do
     it "creates a new director" do
       user = FactoryGirl.create(:user)

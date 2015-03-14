@@ -23,7 +23,6 @@ class ChangeDecimalsToCents < ActiveRecord::Migration
   end
 
   def down
-
     add_column :registrant_expense_items, :custom_cost, :decimal
     execute "UPDATE registrant_expense_items SET custom_cost = (custom_cost_cents / 100.0)"
     remove_column :registrant_expense_items, :custom_cost_cents

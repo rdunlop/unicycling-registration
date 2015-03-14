@@ -35,10 +35,7 @@ class Tenant < ActiveRecord::Base
     "#{subdomain}.#{Rails.application.secrets.domain}"
   end
 
-  private
-
   def self.find_by_first_subdomain(hostname)
     where(subdomain: hostname.split('.')[0]).first
   end
-
 end

@@ -36,6 +36,7 @@ module MultiLevelValidation
   end
 
   private
+
   def is_step_applied?(step_name)
     return false if validations_applied.nil?
     index = get_step_index(step_name)
@@ -50,7 +51,6 @@ module MultiLevelValidation
 
   module ClassMethods
     def specify_validations(*step_names)
-
       define_method("step_names") do
         step_names
       end

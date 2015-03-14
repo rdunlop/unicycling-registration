@@ -108,21 +108,21 @@ class EventConfigurationsController < ConventionSetupController
 
   def base_settings_params
     params.require(:event_configuration).permit(:spectators, :standard_skill, :standard_skill_closed_date, :style_name,
-      :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,
-      :waiver, :waiver_url, :custom_waiver_text,
-      :vat_mode,
-      :contact_email,
-      :artistic_score_elimination_mode_naucc,
-      :rulebook_url
+                                                :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,
+                                                :waiver, :waiver_url, :custom_waiver_text,
+                                                :vat_mode,
+                                                :contact_email,
+                                                :artistic_score_elimination_mode_naucc,
+                                                :rulebook_url
       )
   end
 
   def name_logo_params
     params.require(:event_configuration).permit(:long_name, :short_name, :logo_file, :dates_description,
-      :start_date, :event_url, :location,
-      translations_attributes: [
-        :id, :locale, :short_name, :long_name, :location, :dates_description,
-        :competitor_benefits, :noncompetitor_benefits, :spectator_benefits])
+                                                :start_date, :event_url, :location,
+                                                translations_attributes: [
+                                                  :id, :locale, :short_name, :long_name, :location, :dates_description,
+                                                  :competitor_benefits, :noncompetitor_benefits, :spectator_benefits])
   end
 
   def payment_settings_params
