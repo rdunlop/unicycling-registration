@@ -229,14 +229,14 @@ Registrant Expense Items
     %input{ type: "telephone", id: 'phone' }
   .field
     %label Gender
-    %label.label--radio{ for: 'gender_male' } Male
     %input{ type: "radio", value: 'Male', id: 'gender_male', name: 'gender' }
+    %label.label--radio{ for: 'gender_male' } Male
     %br
-    %label.label--radio{ for: 'gender_female' } Female
     %input{ type: "radio", value: 'Female', id: 'gender_female', name: 'gender' }
+    %label.label--radio{ for: 'gender_female' } Female
   .field
-    %label.label--checkbox{ for: 'the_checkbox2' } Checkbox label
     %input{ type: "checkbox", id: 'the_checkbox2' }
+    %label.label--checkbox{ for: 'the_checkbox2' } Checkbox label
 
 
 // Wizard
@@ -324,3 +324,5 @@ Registrant Expense Items
           %td.registration_closes_notice
             Registration Closes Dec 31, 2000
 
+%h2.style_head Event Choices
+= render "/attending/preview"
