@@ -32,4 +32,6 @@
     = f.input :position
     = f.input :visible
     = f.input :artistic, hint: "Setting this boolean will automatically restrict changes after the Artistic Closed Date."
+    .field
+      .input_details The Artistic Closed Date is #{EventConfiguration.singleton.artistic_closed_date.presence || "Undefined"}
   = f.button :submit
