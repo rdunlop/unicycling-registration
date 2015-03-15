@@ -30,7 +30,7 @@ class RegistrantsController < ApplicationController
       if params[:summary] == "1"
         redirect_to registrant_path(registrant)
       else
-        redirect_to edit_registrant_path(registrant)
+        redirect_to registrant_build_path(registrant, :add_name)
       end
     end
   end
