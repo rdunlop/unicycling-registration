@@ -8,13 +8,13 @@ describe PaymentPresenter do
 
   it "requires that the note be set" do
     @pay.user = FactoryGirl.create(:admin_user)
-    @pay.valid?.should == false
+    expect(@pay.valid?).to eq(false)
     @pay.note = "Hello"
-    @pay.valid?.should == true
+    expect(@pay.valid?).to eq(true)
   end
 
   it "has some new_details" do
-    @pay.new_details.size.should == 5
+    expect(@pay.new_details.size).to eq(5)
   end
 
   describe "when a registrant has paid for something" do
@@ -26,24 +26,24 @@ describe PaymentPresenter do
 
     it "has paid_items for the registrant" do
       @reg.reload
-      @reg.paid_details.size.should == 1
+      expect(@reg.paid_details.size).to eq(1)
     end
 
     it "lists the paid items for the registrant" do
       @pay.add_registrant(@reg)
-      @pay.paid_details.size.should == 1
+      expect(@pay.paid_details.size).to eq(1)
     end
 
     it "lists all registrants as @registrants" do
-      @pay.registrants.should == []
+      expect(@pay.registrants).to eq([])
       @pay.add_registrant(@reg)
-      @pay.registrants.should == [@reg]
+      expect(@pay.registrants).to eq([@reg])
     end
 
     it "includes the details in the payment_detail_presenter" do
       @pay.add_registrant(@reg)
       pdp = @pay.paid_details.first
-      pdp.details.should == "Some details"
+      expect(pdp.details).to eq("Some details")
     end
   end
 
@@ -54,22 +54,22 @@ describe PaymentPresenter do
       @reg.reload
     end
     it "has unpaid_details" do
-      @reg.owing_registrant_expense_items.size.should == 1
+      expect(@reg.owing_registrant_expense_items.size).to eq(1)
     end
 
     it "lists the unpaid items for the registrant" do
       @pay.add_registrant(@reg)
-      @pay.unpaid_details.size.should == 1
+      expect(@pay.unpaid_details.size).to eq(1)
     end
 
     it "lists all registrants as @registrants" do
       @pay.add_registrant(@reg)
-      @pay.registrants.should == [@reg]
+      expect(@pay.registrants).to eq([@reg])
     end
     it "includes the details in the payment_detail_presenter" do
       @pay.add_registrant(@reg)
       pdp = @pay.unpaid_details.first
-      pdp.details.should == "Some other details"
+      expect(pdp.details).to eq("Some other details")
     end
   end
 end

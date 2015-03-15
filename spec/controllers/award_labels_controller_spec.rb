@@ -21,14 +21,14 @@ describe AwardLabelsController do
     it "assigns all award_labels as @award_labels" do
       aw_label = FactoryGirl.create(:award_label, :user => @admin_user)
       get :index, {:user_id => @admin_user}
-      assigns(:award_labels).should eq([aw_label])
+      expect(assigns(:award_labels)).to eq([aw_label])
     end
   end
 
   describe "GET edit" do
     it "assigns the requested award_label as @award_label" do
       get :edit, {:id => award_label.to_param}
-      assigns(:award_label).should eq(award_label)
+      expect(assigns(:award_label)).to eq(award_label)
     end
   end
 
@@ -42,29 +42,29 @@ describe AwardLabelsController do
 
       it "assigns a newly created award_label as @award_label" do
         post :create, {:award_label => valid_attributes, :user_id => @admin_user.id}
-        assigns(:award_label).should be_a(AwardLabel)
-        assigns(:award_label).should be_persisted
+        expect(assigns(:award_label)).to be_a(AwardLabel)
+        expect(assigns(:award_label)).to be_persisted
       end
 
       it "redirects to the created award_label" do
         post :create, {:award_label => valid_attributes, :user_id => @admin_user.id}
-        response.should redirect_to(user_award_labels_path(@admin_user))
+        expect(response).to redirect_to(user_award_labels_path(@admin_user))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved award_label as @award_label" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AwardLabel.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
         post :create, {:award_label => { "bib_number" => "invalid value" }, :user_id => @admin_user.id}
-        assigns(:award_label).should be_a_new(AwardLabel)
+        expect(assigns(:award_label)).to be_a_new(AwardLabel)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AwardLabel.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
         post :create, {:award_label => { "bib_number" => "invalid value" }, :user_id => @admin_user.id}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
     end
   end
@@ -76,34 +76,34 @@ describe AwardLabelsController do
         # specifies that the AwardLabel created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        AwardLabel.any_instance.should_receive(:update_attributes).with({ "bib_number" => "1" })
+        expect_any_instance_of(AwardLabel).to receive(:update_attributes).with({ "bib_number" => "1" })
         put :update, {:id => award_label.to_param, :award_label => { "bib_number" => "1" }}
       end
 
       it "assigns the requested award_label as @award_label" do
         put :update, {:id => award_label.to_param, :award_label => valid_attributes}
-        assigns(:award_label).should eq(award_label)
+        expect(assigns(:award_label)).to eq(award_label)
       end
 
       it "redirects to the award_label" do
         put :update, {:id => award_label.to_param, :award_label => valid_attributes}
-        response.should redirect_to(user_award_labels_path(@admin_user))
+        expect(response).to redirect_to(user_award_labels_path(@admin_user))
       end
     end
 
     describe "with invalid params" do
       it "assigns the award_label as @award_label" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AwardLabel.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
         put :update, {:id => award_label.to_param, :award_label => { "bib_number" => "invalid value" }}
-        assigns(:award_label).should eq(award_label)
+        expect(assigns(:award_label)).to eq(award_label)
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AwardLabel.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
         put :update, {:id => award_label.to_param, :award_label => { "bib_number" => "invalid value" }}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -118,7 +118,7 @@ describe AwardLabelsController do
 
     it "redirects to the award_labels list" do
       delete :destroy, {:id => award_label.to_param}
-      response.should redirect_to(user_award_labels_path(@admin_user))
+      expect(response).to redirect_to(user_award_labels_path(@admin_user))
     end
   end
 

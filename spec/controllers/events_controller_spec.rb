@@ -23,7 +23,7 @@ describe EventsController do
 
     it "Cannot read summary" do
       get :summary
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 
@@ -32,7 +32,7 @@ describe EventsController do
       user = FactoryGirl.create(:user)
       event = FactoryGirl.create(:event)
       post :create_director, {:user_id => user.id, :id => event.id}
-      User.with_role(:director, event).should == [user]
+      expect(User.with_role(:director, event)).to eq([user])
     end
   end
 
@@ -42,7 +42,7 @@ describe EventsController do
       event = FactoryGirl.create(:event)
       user.add_role :director, event
       delete :destroy_director, {:user_id => user.id, :id => event.id}
-      User.with_role(:director, event).should == []
+      expect(User.with_role(:director, event)).to eq([])
     end
   end
 
@@ -50,8 +50,8 @@ describe EventsController do
     it "assigns all events as @events" do
       event = FactoryGirl.create(:event)
       get :summary, {}
-      response.should be_success
-      assigns(:events).should eq([event])
+      expect(response).to be_success
+      expect(assigns(:events)).to eq([event])
     end
     describe "With competitors and non-competitors" do
       before(:each) do
@@ -61,15 +61,15 @@ describe EventsController do
       end
       it "sets the number of registrants as @num_registrants" do
         get :summary, {}
-        assigns(:num_registrants).should == 3
+        expect(assigns(:num_registrants)).to eq(3)
       end
       it "sets the number of competitors as @num_competitors" do
         get :summary, {}
-        assigns(:num_competitors).should == 2
+        expect(assigns(:num_competitors)).to eq(2)
       end
       it "sets the number of non_competitors as @num_noncompetitors" do
         get :summary, {}
-        assigns(:num_noncompetitors).should == 1
+        expect(assigns(:num_noncompetitors)).to eq(1)
       end
     end
   end

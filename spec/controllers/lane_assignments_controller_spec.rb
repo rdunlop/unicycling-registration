@@ -24,14 +24,14 @@ describe LaneAssignmentsController do
     it "assigns all lane_assignments as @lane_assignments" do
       la = FactoryGirl.create(:lane_assignment, :competition => @competition)
       get :index, {:competition_id => @competition.id}
-      assigns(:lane_assignments).should eq([la])
+      expect(assigns(:lane_assignments)).to eq([la])
     end
   end
 
   describe "GET edit" do
     it "assigns the requested lane_assignment as @lane_assignment" do
       get :edit, {:id => lane_assignment.to_param}
-      assigns(:lane_assignment).should eq(lane_assignment)
+      expect(assigns(:lane_assignment)).to eq(lane_assignment)
     end
   end
 
@@ -45,29 +45,29 @@ describe LaneAssignmentsController do
 
       it "assigns a newly created lane_assignment as @lane_assignment" do
         post :create, {:lane_assignment => valid_attributes, :competition_id => @competition.id}
-        assigns(:lane_assignment).should be_a(LaneAssignment)
-        assigns(:lane_assignment).should be_persisted
+        expect(assigns(:lane_assignment)).to be_a(LaneAssignment)
+        expect(assigns(:lane_assignment)).to be_persisted
       end
 
       it "redirects to the created lane_assignment" do
         post :create, {:lane_assignment => valid_attributes, :competition_id => @competition.id}
-        response.should redirect_to(competition_lane_assignments_path(@competition))
+        expect(response).to redirect_to(competition_lane_assignments_path(@competition))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved lane_assignment as @lane_assignment" do
         # Trigger the behavior that occurs when invalid params are submitted
-        LaneAssignment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(LaneAssignment).to receive(:save).and_return(false)
         post :create, {:lane_assignment => { "competition_id" => "invalid value" }, :competition_id => @competition.id}
-        assigns(:lane_assignment).should be_a_new(LaneAssignment)
+        expect(assigns(:lane_assignment)).to be_a_new(LaneAssignment)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        LaneAssignment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(LaneAssignment).to receive(:save).and_return(false)
         post :create, {:lane_assignment => { "competition_id" => "invalid value" }, :competition_id => @competition.id}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
     end
   end
@@ -79,34 +79,34 @@ describe LaneAssignmentsController do
         # specifies that the LaneAssignment created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        LaneAssignment.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(LaneAssignment).to receive(:update_attributes).with({})
         put :update, {:id => lane_assignment.to_param, :lane_assignment => { "something" => "1" }}
       end
 
       it "assigns the requested lane_assignment as @lane_assignment" do
         put :update, {:id => lane_assignment.to_param, :lane_assignment => valid_attributes}
-        assigns(:lane_assignment).should eq(lane_assignment)
+        expect(assigns(:lane_assignment)).to eq(lane_assignment)
       end
 
       it "redirects to the lane_assignment" do
         put :update, {:id => lane_assignment.to_param, :lane_assignment => valid_attributes}
-        response.should redirect_to(competition_lane_assignments_path(@competition))
+        expect(response).to redirect_to(competition_lane_assignments_path(@competition))
       end
     end
 
     describe "with invalid params" do
       it "assigns the lane_assignment as @lane_assignment" do
         # Trigger the behavior that occurs when invalid params are submitted
-        LaneAssignment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(LaneAssignment).to receive(:save).and_return(false)
         put :update, {:id => lane_assignment.to_param, :lane_assignment => { "competition_id" => "invalid value" }}
-        assigns(:lane_assignment).should eq(lane_assignment)
+        expect(assigns(:lane_assignment)).to eq(lane_assignment)
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        LaneAssignment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(LaneAssignment).to receive(:save).and_return(false)
         put :update, {:id => lane_assignment.to_param, :lane_assignment => { "competition_id" => "invalid value" }}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -122,7 +122,7 @@ describe LaneAssignmentsController do
     it "redirects to the lane_assignments list" do
       lane_assignment = FactoryGirl.create(:lane_assignment, :competition => @competition)
       delete :destroy, {:id => lane_assignment.to_param}
-      response.should redirect_to(competition_lane_assignments_path(@competition))
+      expect(response).to redirect_to(competition_lane_assignments_path(@competition))
     end
   end
 

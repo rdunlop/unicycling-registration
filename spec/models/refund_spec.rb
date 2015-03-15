@@ -23,22 +23,22 @@ describe Refund do
   end
 
   it "should have 100% refund" do
-    @refund.percentage.should == 100
+    expect(@refund.percentage).to eq(100)
   end
 
   it "creates a valid from factoryGirl" do
-    @refund.valid?.should == true
+    expect(@refund.valid?).to eq(true)
   end
 
   it "requires a user" do
     @refund.user = nil
-    @refund.valid?.should == false
+    expect(@refund.valid?).to eq(false)
   end
 
   it "requires a note" do
     @refund.note = nil
-    @refund.valid?.should == false
+    expect(@refund.valid?).to eq(false)
     @refund.note = ""
-    @refund.valid?.should == false
+    expect(@refund.valid?).to eq(false)
   end
 end

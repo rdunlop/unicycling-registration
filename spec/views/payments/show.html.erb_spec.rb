@@ -10,15 +10,15 @@ describe "payments/show" do
 
     @ability = Object.new
     @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
-    controller.stub(:current_user) { user }
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:current_user) { user }
   end
 
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/1/)
-    rendered.should match(/#{@payment_detail.registrant}/)
+    expect(rendered).to match(/1/)
+    expect(rendered).to match(/#{@payment_detail.registrant}/)
   end
   it "renders a form for the paypal integration" do
     render

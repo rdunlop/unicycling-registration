@@ -42,8 +42,8 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       other_reg = FactoryGirl.create(:registrant)
       get :index, {:user_id => @user.id}
-      assigns(:my_registrants).should eq([registrant])
-      assigns(:shared_registrants).should == []
+      expect(assigns(:my_registrants)).to eq([registrant])
+      expect(assigns(:shared_registrants)).to eq([])
     end
 
     describe "as the sender of a registration request" do
@@ -54,7 +54,7 @@ describe RegistrantsController do
         end
         it "shows the registrant" do
           get :index, {:user_id => @user.id}
-          assigns(:shared_registrants).should == [@other_reg]
+          expect(assigns(:shared_registrants)).to eq([@other_reg])
         end
       end
     end
@@ -65,7 +65,7 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       other_reg = FactoryGirl.create(:registrant)
       get :all, {}
-      assigns(:registrants).should eq([registrant, other_reg])
+      expect(assigns(:registrants)).to eq([registrant, other_reg])
     end
   end
 
@@ -73,20 +73,20 @@ describe RegistrantsController do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       get :waiver, {:id => registrant.to_param}
-      response.should be_success
-      assigns(:registrant).should eq(registrant)
+      expect(response).to be_success
+      expect(assigns(:registrant)).to eq(registrant)
     end
 
     it "sets the event-related variables" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
-      Date.stub(:today).and_return(Date.new(2012, 01, 22))
+      allow(Date).to receive(:today).and_return(Date.new(2012, 01, 22))
       get :waiver, {:id => registrant.to_param}
 
-      assigns(:event_name).should == c.long_name
-      assigns(:event_start_date).should == "Jul 21, 2013"
+      expect(assigns(:event_name)).to eq(c.long_name)
+      expect(assigns(:event_start_date)).to eq("Jul 21, 2013")
 
-      assigns(:today_date).should == "January 22, 2012"
+      expect(assigns(:today_date)).to eq("January 22, 2012")
     end
 
     it "sets the contact details" do
@@ -94,19 +94,19 @@ describe RegistrantsController do
       c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
       get :waiver, {:id => registrant.to_param}
 
-      assigns(:name).should == registrant.to_s
-      assigns(:club).should == registrant.club
-      assigns(:age).should == registrant.age
-      assigns(:country).should == "US"
+      expect(assigns(:name)).to eq(registrant.to_s)
+      expect(assigns(:club)).to eq(registrant.club)
+      expect(assigns(:age)).to eq(registrant.age)
+      expect(assigns(:country)).to eq("US")
     end
     it "sets the emergency-variables" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       c = FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 07, 21))
       get :waiver, {:id => registrant.to_param}
 
-      assigns(:emergency_name).should == registrant.contact_detail.emergency_name
-      assigns(:emergency_primary_phone).should == registrant.contact_detail.emergency_primary_phone
-      assigns(:emergency_other_phone).should == registrant.contact_detail.emergency_other_phone
+      expect(assigns(:emergency_name)).to eq(registrant.contact_detail.emergency_name)
+      expect(assigns(:emergency_primary_phone)).to eq(registrant.contact_detail.emergency_primary_phone)
+      expect(assigns(:emergency_other_phone)).to eq(registrant.contact_detail.emergency_other_phone)
     end
   end
 
@@ -114,14 +114,14 @@ describe RegistrantsController do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       get :show, {:id => registrant.to_param}
-      assigns(:registrant).should eq(registrant)
+      expect(assigns(:registrant)).to eq(registrant)
     end
 
     it "cannot read another user's registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       sign_in FactoryGirl.create(:user)
       get :show, {:id => registrant.to_param}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
     describe "as an admin" do
       before(:each) do
@@ -130,7 +130,7 @@ describe RegistrantsController do
       it "Can read other users registrant" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         get :show, {:id => registrant.to_param}
-        assigns(:registrant).should eq(registrant)
+        expect(assigns(:registrant)).to eq(registrant)
       end
     end
   end
@@ -150,13 +150,13 @@ describe RegistrantsController do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       delete :destroy, {:id => registrant.to_param}
       registrant.reload
-      registrant.deleted.should == true
+      expect(registrant.deleted).to eq(true)
     end
 
     it "redirects to the registrants list" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       delete :destroy, {:id => registrant.to_param}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
 
     describe "as normal user" do
@@ -166,7 +166,7 @@ describe RegistrantsController do
       it "cannot destroy another user's registrant" do
         registrant = FactoryGirl.create(:competitor)
         delete :destroy, {:id => registrant.to_param}
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
   end
@@ -183,7 +183,7 @@ describe RegistrantsController do
         registrant = FactoryGirl.create(:competitor)
         other_reg = FactoryGirl.create(:registrant)
         get :manage_all, {}
-        assigns(:registrants).should =~[registrant, other_reg]
+        expect(assigns(:registrants)).to match_array([registrant, other_reg])
       end
     end
 
@@ -195,13 +195,13 @@ describe RegistrantsController do
         registrant = FactoryGirl.create(:competitor, :deleted => true)
         post :undelete, {:id => registrant.to_param }
         registrant.reload
-        registrant.deleted.should == false
+        expect(registrant.deleted).to eq(false)
       end
 
       it "redirects to the root" do
         registrant = FactoryGirl.create(:competitor, :deleted => true)
         post :undelete, {:id => registrant.to_param }
-        response.should redirect_to(manage_all_registrants_path)
+        expect(response).to redirect_to(manage_all_registrants_path)
       end
 
       describe "as a normal user" do
@@ -213,7 +213,7 @@ describe RegistrantsController do
           registrant = FactoryGirl.create(:competitor, :deleted => true)
           post :undelete, {:id => registrant.to_param }
           registrant.reload
-          registrant.deleted.should == true
+          expect(registrant.deleted).to eq(true)
         end
       end
     end
@@ -226,17 +226,17 @@ describe RegistrantsController do
       end
 
       it "initially has a reg fee from rp2" do
-        @reg.owing_expense_items.count.should == 1
-        @reg.owing_expense_items.first.should == @rp2.competitor_expense_item
+        expect(@reg.owing_expense_items.count).to eq(1)
+        expect(@reg.owing_expense_items.first).to eq(@rp2.competitor_expense_item)
       end
 
       it "can be changed to a different reg period" do
         put :update_reg_fee, {:id => @reg.to_param, :registration_period_id => @rp1.id }
-        response.should redirect_to reg_fee_registrant_path(@reg)
+        expect(response).to redirect_to reg_fee_registrant_path(@reg)
         @reg.reload
-        @reg.owing_expense_items.count.should == 1
-        @reg.owing_expense_items.first.should == @rp1.competitor_expense_item
-        @reg.registrant_expense_items.first.locked.should == true
+        expect(@reg.owing_expense_items.count).to eq(1)
+        expect(@reg.owing_expense_items.first).to eq(@rp1.competitor_expense_item)
+        expect(@reg.registrant_expense_items.first.locked).to eq(true)
       end
       it "cannot be updated if the registrant is already paid" do
         payment = FactoryGirl.create(:payment)
@@ -245,7 +245,7 @@ describe RegistrantsController do
         payment.save
         @reg.reload
         put :update_reg_fee, {:id => @reg.to_param, :registration_period_id => @rp1.id }
-        response.should render_template("reg_fee")
+        expect(response).to render_template("reg_fee")
       end
     end
   end

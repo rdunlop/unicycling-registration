@@ -32,8 +32,8 @@ describe ExpenseItemsController do
     it "assigns all expense_items as @expense_items" do
       expense_item = FactoryGirl.create :expense_item, expense_group: @expense_group
       get :index, { expense_group_id: @expense_group.id }
-      assigns(:expense_items).should eq([expense_item])
-      assigns(:expense_item).should be_a_new(ExpenseItem)
+      expect(assigns(:expense_items)).to eq([expense_item])
+      expect(assigns(:expense_item)).to be_a_new(ExpenseItem)
     end
   end
 
@@ -41,7 +41,7 @@ describe ExpenseItemsController do
     it "assigns the requested expense_item as @expense_item" do
       expense_item = FactoryGirl.create :expense_item
       get :edit, { id: expense_item.to_param, expense_group_id: @expense_group.id }
-      assigns(:expense_item).should eq(expense_item)
+      expect(assigns(:expense_item)).to eq(expense_item)
     end
   end
 
@@ -55,33 +55,33 @@ describe ExpenseItemsController do
 
       it "assigns a newly created expense_item as @expense_item" do
         post :create, {:expense_item => valid_attributes, expense_group_id: @expense_group.id}
-        assigns(:expense_item).should be_a(ExpenseItem)
-        assigns(:expense_item).should be_persisted
+        expect(assigns(:expense_item)).to be_a(ExpenseItem)
+        expect(assigns(:expense_item)).to be_persisted
       end
 
       it "redirects to the created expense_item" do
         post :create, {:expense_item => valid_attributes, expense_group_id: @expense_group.id}
-        response.should redirect_to(expense_group_expense_items_path(@expense_group))
+        expect(response).to redirect_to(expense_group_expense_items_path(@expense_group))
       end
       it "sets the maximum_per_registrant" do
         post :create, {expense_group_id: @expense_group.id, :expense_item => valid_attributes.merge({:maximum_per_registrant => 1})}
-        assigns(:expense_item).maximum_per_registrant.should == 1
+        expect(assigns(:expense_item).maximum_per_registrant).to eq(1)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved expense_item as @expense_item" do
         # Trigger the behavior that occurs when invalid params are submitted
-        ExpenseItem.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ExpenseItem).to receive(:save).and_return(false)
         post :create, {:expense_item => {:position => 1}, expense_group_id: @expense_group.id}
-        assigns(:expense_item).should be_a_new(ExpenseItem)
+        expect(assigns(:expense_item)).to be_a_new(ExpenseItem)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        ExpenseItem.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ExpenseItem).to receive(:save).and_return(false)
         post :create, {:expense_item => {:position => 1}, expense_group_id: @expense_group.id}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
     end
   end
@@ -94,20 +94,20 @@ describe ExpenseItemsController do
         # specifies that the ExpenseItem created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        ExpenseItem.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(ExpenseItem).to receive(:update_attributes).with({})
         put :update, {:id => expense_item.to_param, :expense_item => {'these' => 'params'}, expense_group_id: @expense_group.id}
       end
 
       it "assigns the requested expense_item as @expense_item" do
         expense_item = FactoryGirl.create :expense_item
         put :update, {:id => expense_item.to_param, :expense_item => valid_attributes, expense_group_id: @expense_group.id}
-        assigns(:expense_item).should eq(expense_item)
+        expect(assigns(:expense_item)).to eq(expense_item)
       end
 
       it "redirects to the expense_item" do
         expense_item = FactoryGirl.create :expense_item
         put :update, {:id => expense_item.to_param, :expense_item => valid_attributes, expense_group_id: @expense_group.id}
-        response.should redirect_to(expense_group_expense_items_path(@expense_group))
+        expect(response).to redirect_to(expense_group_expense_items_path(@expense_group))
       end
     end
 
@@ -115,17 +115,17 @@ describe ExpenseItemsController do
       it "assigns the expense_item as @expense_item" do
         expense_item = FactoryGirl.create :expense_item
         # Trigger the behavior that occurs when invalid params are submitted
-        ExpenseItem.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ExpenseItem).to receive(:save).and_return(false)
         put :update, {:id => expense_item.to_param, :expense_item => {:position => 1}, expense_group_id: @expense_group.id}
-        assigns(:expense_item).should eq(expense_item)
+        expect(assigns(:expense_item)).to eq(expense_item)
       end
 
       it "re-renders the 'edit' template" do
         expense_item = FactoryGirl.create :expense_item
         # Trigger the behavior that occurs when invalid params are submitted
-        ExpenseItem.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ExpenseItem).to receive(:save).and_return(false)
         put :update, {:id => expense_item.to_param, :expense_item => {:position => 1}, expense_group_id: @expense_group.id}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -141,7 +141,7 @@ describe ExpenseItemsController do
     it "redirects to the expense_items list" do
       expense_item = FactoryGirl.create :expense_item, expense_group: @expense_group
       delete :destroy, {:id => expense_item.to_param, expense_group_id: @expense_group.id}
-      response.should redirect_to(expense_group_expense_items_url(@expense_group))
+      expect(response).to redirect_to(expense_group_expense_items_url(@expense_group))
     end
   end
 

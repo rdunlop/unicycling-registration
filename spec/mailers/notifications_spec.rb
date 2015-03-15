@@ -11,7 +11,7 @@ describe Notifications do
                                               FactoryGirl.create(:user, :email => "james@dean.com"))
     }
     it "identifies the person making the request" do
-      mail.body.should match(/james@dean.com has requested permission to view the registration record of Billy Johnson/)
+      expect(mail.body).to match(/james@dean.com has requested permission to view the registration record of Billy Johnson/)
     end
   end
 
@@ -21,7 +21,7 @@ describe Notifications do
                                                FactoryGirl.create(:user, :email => "james@dean.com"))
     }
     it "identifies the accetance of the request" do
-      mail.body.should match(/Your request for access to the registration of Billy Johnson has been accepted/)
+      expect(mail.body).to match(/Your request for access to the registration of Billy Johnson has been accepted/)
     end
   end
 

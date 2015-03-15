@@ -18,7 +18,7 @@ describe AdditionalRegistrantAccessesController do
     it "assigns all additional_registrant_accesses as @additional_registrant_accesses" do
       additional_registrant_access = FactoryGirl.create(:additional_registrant_access, :user => @user, :registrant => @reg)
       get :index, {:user_id => @user.id}
-      assigns(:additional_registrant_accesses).should eq([additional_registrant_access])
+      expect(assigns(:additional_registrant_accesses)).to eq([additional_registrant_access])
     end
   end
 
@@ -27,19 +27,19 @@ describe AdditionalRegistrantAccessesController do
       my_reg = FactoryGirl.create(:registrant, :user => @user)
       ada = FactoryGirl.create(:additional_registrant_access, :registrant => my_reg)
       get :invitations, {:user_id => @user.id}
-      assigns(:additional_registrant_accesses).should eq([ada])
+      expect(assigns(:additional_registrant_accesses)).to eq([ada])
     end
     it "doesn't assign other people's invitations" do
       ada = FactoryGirl.create(:additional_registrant_access)
       get :invitations, {:user_id => @user.id}
-      assigns(:additional_registrant_accesses).should eq([])
+      expect(assigns(:additional_registrant_accesses)).to eq([])
     end
   end
 
   describe "GET new" do
     it "assigns a new additional_registrant_access as @additional_registrant_access" do
       get :new, {:user_id => @user.id}
-      assigns(:additional_registrant_access).should be_a_new(AdditionalRegistrantAccess)
+      expect(assigns(:additional_registrant_access)).to be_a_new(AdditionalRegistrantAccess)
     end
   end
 
@@ -53,36 +53,36 @@ describe AdditionalRegistrantAccessesController do
 
       it "assigns a newly created additional_registrant_access as @additional_registrant_access" do
         post :create, {:user_id => @user.id, :additional_registrant_access => valid_attributes}
-        assigns(:additional_registrant_access).should be_persisted
+        expect(assigns(:additional_registrant_access)).to be_persisted
       end
 
       it "redirects to the created additional_registrant_access" do
         post :create, {:user_id => @user.id, :additional_registrant_access => valid_attributes}
-        response.should redirect_to(user_additional_registrant_accesses_path(@user))
+        expect(response).to redirect_to(user_additional_registrant_accesses_path(@user))
       end
       it "creates an e-mail to the target registrants' user" do
         ActionMailer::Base.deliveries.clear
         post :create, {:user_id => @user.id, :additional_registrant_access => valid_attributes}
         num_deliveries = ActionMailer::Base.deliveries.size
-        num_deliveries.should == 1
+        expect(num_deliveries).to eq(1)
         mail = ActionMailer::Base.deliveries.first
-        mail.to.should == [@reg.user.email]
+        expect(mail.to).to eq([@reg.user.email])
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved additional_registrant_access as @additional_registrant_access" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AdditionalRegistrantAccess.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AdditionalRegistrantAccess).to receive(:save).and_return(false)
         post :create, {:user_id => @user.id, :additional_registrant_access => { "registrant_id" => "invalid value" }}
-        assigns(:additional_registrant_access).should be_a_new(AdditionalRegistrantAccess)
+        expect(assigns(:additional_registrant_access)).to be_a_new(AdditionalRegistrantAccess)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AdditionalRegistrantAccess.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AdditionalRegistrantAccess).to receive(:save).and_return(false)
         post :create, {:user_id => @user.id, :additional_registrant_access => { "registrant_id" => "invalid value" }}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -100,7 +100,7 @@ describe AdditionalRegistrantAccessesController do
       end
       it "redirects to the root if unauthorized" do
         put :accept_readonly, {:id => @additional_registrant_access.to_param}
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
 
       describe "when signed in as the target of the invitation" do
@@ -118,9 +118,9 @@ describe AdditionalRegistrantAccessesController do
           ActionMailer::Base.deliveries.clear
           put :accept_readonly, {:id => @additional_registrant_access.to_param}
           num_deliveries = ActionMailer::Base.deliveries.size
-          num_deliveries.should == 1
+          expect(num_deliveries).to eq(1)
           mail = ActionMailer::Base.deliveries.first
-          mail.to.should == [@user.email]
+          expect(mail.to).to eq([@user.email])
         end
       end
     end
@@ -131,16 +131,16 @@ describe AdditionalRegistrantAccessesController do
       additional_registrant_access = FactoryGirl.create(:additional_registrant_access, :user => @user, :registrant => @reg)
 
       delete :decline, {:id => additional_registrant_access.to_param}
-      additional_registrant_access.reload.declined.should == false
+      expect(additional_registrant_access.reload.declined).to eq(false)
     end
     it "decline the requested additional_registrant_access" do
       sign_out @user
       sign_in @reg.user
       additional_registrant_access = FactoryGirl.create(:additional_registrant_access, :user => @user, :registrant => @reg)
 
-      additional_registrant_access.declined.should == false
+      expect(additional_registrant_access.declined).to eq(false)
       delete :decline, {:id => additional_registrant_access.to_param}
-      additional_registrant_access.reload.declined.should == true
+      expect(additional_registrant_access.reload.declined).to eq(true)
     end
 
     it "redirects to the additional_registrant_accesses list" do
@@ -148,7 +148,7 @@ describe AdditionalRegistrantAccessesController do
       sign_in @reg.user
       additional_registrant_access = FactoryGirl.create(:additional_registrant_access, :user => @user, :registrant => @reg)
       delete :decline, {:id => additional_registrant_access.to_param}
-      response.should redirect_to(invitations_user_additional_registrant_accesses_path(@reg.user))
+      expect(response).to redirect_to(invitations_user_additional_registrant_accesses_path(@reg.user))
     end
   end
 

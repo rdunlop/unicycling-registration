@@ -24,7 +24,7 @@ describe ConventionSetup::EventsController do
 
     it "Cannot read events" do
       get :index, {:category_id => @category.id}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 
@@ -33,9 +33,9 @@ describe ConventionSetup::EventsController do
       event = FactoryGirl.create(:event, :category => @category)
       event2 = FactoryGirl.create(:event)
       get :index, {:category_id => @category.id}
-      assigns(:events).should eq([event])
-      assigns(:event).should be_a_new(Event)
-      assigns(:category).should eq(@category)
+      expect(assigns(:events)).to eq([event])
+      expect(assigns(:event)).to be_a_new(Event)
+      expect(assigns(:category)).to eq(@category)
     end
   end
 
@@ -43,7 +43,7 @@ describe ConventionSetup::EventsController do
     it "assigns the requested event as @event" do
       event = FactoryGirl.create(:event, :category => @category)
       get :edit, {:id => event.to_param}
-      assigns(:event).should eq(event)
+      expect(assigns(:event)).to eq(event)
     end
   end
 
@@ -57,13 +57,13 @@ describe ConventionSetup::EventsController do
 
       it "assigns a newly created event as @event" do
         post :create, {:event => valid_attributes, :category_id => @category.id}
-        assigns(:event).should be_a(Event)
-        assigns(:event).should be_persisted
+        expect(assigns(:event)).to be_a(Event)
+        expect(assigns(:event)).to be_persisted
       end
 
       it "redirects to the created event" do
         post :create, {:event => valid_attributes, :category_id => @category.id}
-        response.should redirect_to(convention_setup_category_events_path(@category))
+        expect(response).to redirect_to(convention_setup_category_events_path(@category))
       end
 
       it "doesn't create a category if one is supplied" do
@@ -76,24 +76,24 @@ describe ConventionSetup::EventsController do
                          :position => 1
                        }] }}
         ev = Event.last
-        ev.event_categories.first.name.should == "The Categorie"
-        ev.event_categories.count.should == 1
+        expect(ev.event_categories.first.name).to eq("The Categorie")
+        expect(ev.event_categories.count).to eq(1)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved event as @event" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Event.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Event).to receive(:save).and_return(false)
         post :create, {:event => {:name => "event"}, :category_id => @category.id}
-        assigns(:event).should be_a_new(Event)
+        expect(assigns(:event)).to be_a_new(Event)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Event.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Event).to receive(:save).and_return(false)
         post :create, {:event => {:name => "event"}, :category_id => @category.id}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
     end
   end
@@ -106,20 +106,20 @@ describe ConventionSetup::EventsController do
         # specifies that the Event created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Event.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(Event).to receive(:update_attributes).with({})
         put :update, {:id => event.to_param, :event => {'these' => 'params'}}
       end
 
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
         put :update, {:id => event.to_param, :event => valid_attributes}
-        assigns(:event).should eq(event)
+        expect(assigns(:event)).to eq(event)
       end
 
       it "redirects to the event" do
         event = FactoryGirl.create(:event, :category => @category)
         put :update, {:id => event.to_param, :event => valid_attributes}
-        response.should redirect_to(convention_setup_category_events_path(@category))
+        expect(response).to redirect_to(convention_setup_category_events_path(@category))
       end
     end
 
@@ -127,17 +127,17 @@ describe ConventionSetup::EventsController do
       it "assigns the event as @event" do
         event = FactoryGirl.create(:event)
         # Trigger the behavior that occurs when invalid params are submitted
-        Event.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Event).to receive(:save).and_return(false)
         put :update, {:id => event.to_param, :event => {:name => "event"}}
-        assigns(:event).should eq(event)
+        expect(assigns(:event)).to eq(event)
       end
 
       it "re-renders the 'edit' template" do
         event = FactoryGirl.create(:event)
         # Trigger the behavior that occurs when invalid params are submitted
-        Event.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Event).to receive(:save).and_return(false)
         put :update, {:id => event.to_param, :event => {:name => "event"}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
     describe "with nested event_choices" do
@@ -156,10 +156,10 @@ describe ConventionSetup::EventsController do
               }] }}
         }.to change(EventChoice, :count).by(1)
         ec = EventChoice.last
-        ec.cell_type.should == "boolean"
-        ec.label.should == "My event Choice"
-        ec.multiple_values.should == "m2"
-        ec.position.should == 1
+        expect(ec.cell_type).to eq("boolean")
+        expect(ec.label).to eq("My event Choice")
+        expect(ec.multiple_values).to eq("m2")
+        expect(ec.position).to eq(1)
       end
 
       it "accepts nested attributes" do
@@ -185,7 +185,7 @@ describe ConventionSetup::EventsController do
               }] }}
         }.to change(EventChoice, :count).by(0)
         ec.reload
-        ec.label.should == "new Label"
+        expect(ec.label).to eq("new Label")
       end
     end
 
@@ -207,7 +207,7 @@ describe ConventionSetup::EventsController do
               }] }}
         }.to change(EventCategory, :count).by(0)
         ecat.reload
-        ecat.name.should == "New Name"
+        expect(ecat.name).to eq("New Name")
       end
     end
   end
@@ -223,7 +223,7 @@ describe ConventionSetup::EventsController do
     it "redirects to the events list" do
       event = FactoryGirl.create(:event, :category => @category)
       delete :destroy, {:id => event.to_param}
-      response.should redirect_to(convention_setup_category_events_path(@category))
+      expect(response).to redirect_to(convention_setup_category_events_path(@category))
     end
   end
 end

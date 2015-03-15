@@ -51,7 +51,7 @@ describe Registrant do
     it "should have a 20\" wheel" do
       @reg.default_wheel_size = nil
       @reg.set_default_wheel_size
-      @reg.default_wheel_size.should == @ws20
+      expect(@reg.default_wheel_size).to eq(@ws20)
     end
   end
 
@@ -66,12 +66,12 @@ describe Registrant do
         @reg.set_age
       end
       it "should have an age of 30" do
-        @reg.age.should == 30
+        expect(@reg.age).to eq(30)
       end
 
       it "should have a wheel_size of 24\"" do
         @reg.set_default_wheel_size
-        @reg.default_wheel_size.should == @ws24
+        expect(@reg.default_wheel_size).to eq(@ws24)
       end
     end
 
@@ -81,13 +81,13 @@ describe Registrant do
         @reg.set_age
       end
       it "should have an age of 29" do
-        @reg.age.should == 29
+        expect(@reg.age).to eq(29)
       end
 
       it "cannot choose a 20\" wheel" do
         @reg.default_wheel_size = @ws20
         @reg.check_default_wheel_size_for_age
-        @reg.errors.should_not be_empty
+        expect(@reg.errors).not_to be_empty
       end
     end
   end
@@ -98,17 +98,17 @@ describe Registrant do
       @reg.set_bib_number
     end
     it "has a valid reg from FactoryGirl" do
-      @reg.valid?.should == true
+      expect(@reg.valid?).to eq(true)
     end
 
     it "requires a user" do
       @reg.user = nil
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "requires a deleted status" do
       @reg.deleted = nil
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "must have a valid registrant_type value" do
@@ -117,80 +117,80 @@ describe Registrant do
 
     it "should be eligible by default" do
       r = Registrant.new
-      r.ineligible.should == false
+      expect(r.ineligible).to eq(false)
     end
 
     it "should not be a volunteer by default" do
       r = Registrant.new
-      r.volunteer.should == false
+      expect(r.volunteer).to eq(false)
     end
 
     it "must have a value for ineligible" do
       @reg.ineligible = nil
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "requires an bib_number" do
       @reg.bib_number = nil
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "requires a birthday" do
       @reg.birthday = nil
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "can not have a birthday, while having a configuration" do
       FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 05, 20))
       @reg.birthday = nil
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "requires first name" do
       @reg.first_name = nil
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "requires last name" do
       @reg.last_name = nil
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "requires gender" do
       @reg.gender = nil
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "has no paid_expense_items" do
-      @reg.paid_expense_items.should == []
+      expect(@reg.paid_expense_items).to eq([])
     end
 
     it "has either Male or Female gender" do
       @reg.gender = "Male"
-      @reg.valid?.should == true
+      expect(@reg.valid?).to eq(true)
 
       @reg.gender = "Female"
-      @reg.valid?.should == true
+      expect(@reg.valid?).to eq(true)
 
       @reg.gender = "Other"
-      @reg.valid?.should == false
+      expect(@reg.valid?).to eq(false)
     end
 
     it "defaults the deleted flag to false" do
       reg = Registrant.new
-      reg.deleted.should == false
+      expect(reg.deleted).to eq(false)
     end
 
     it "has a to_s" do
-      @reg.to_s.should == @reg.first_name + " " + @reg.last_name
+      expect(@reg.to_s).to eq(@reg.first_name + " " + @reg.last_name)
     end
 
     it "has a name field" do
-      @reg.name.should == @reg.first_name + " " + @reg.last_name
+      expect(@reg.name).to eq(@reg.first_name + " " + @reg.last_name)
     end
 
     it "bib_number is set to 1 as a competitor" do
-      @reg.bib_number.should == 1
+      expect(@reg.bib_number).to eq(1)
     end
     describe "with a second competitor" do
       before(:each) do
@@ -200,7 +200,7 @@ describe Registrant do
         @reg2 = FactoryGirl.build_stubbed(:competitor)
         @reg2.bib_number = nil # clear out the auto-set bib_number
         @reg2.set_bib_number
-        @reg2.bib_number.should == 2
+        expect(@reg2.bib_number).to eq(2)
       end
     end
   end
@@ -210,7 +210,7 @@ describe Registrant do
       @nreg = FactoryGirl.build_stubbed(:noncompetitor)
       @nreg.bib_number = nil # clear out auto-set bib number
       @nreg.set_bib_number
-      @nreg.bib_number.should == 2001
+      expect(@nreg.bib_number).to eq(2001)
     end
 
     describe "with a second non-competitor" do
@@ -221,17 +221,17 @@ describe Registrant do
         @reg2 = FactoryGirl.build_stubbed(:noncompetitor)
         @reg2.bib_number = nil # clear out auto-set bib number
         @reg2.set_bib_number
-        @reg2.bib_number.should == 2002
+        expect(@reg2.bib_number).to eq(2002)
       end
     end
   end
 
   context "associations" do
     it "has an owing cost of 0 by default" do
-      @reg.amount_owing.should == 0
+      expect(@reg.amount_owing).to eq(0)
     end
     it "always displays the expenses_total" do
-      @reg.expenses_total.should == 0
+      expect(@reg.expenses_total).to eq(0)
     end
   end
 end
@@ -242,7 +242,7 @@ describe Registrant do
   end
 
   it "has a valid reg from FactoryGirl" do
-    @reg.valid?.should == true
+    expect(@reg.valid?).to eq(true)
   end
 
   it "has an access_code" do
@@ -256,7 +256,7 @@ describe Registrant do
     end
     it "can build a competitor" do
       @reg2 = FactoryGirl.create(:competitor)
-      @reg2.external_id.should == 2
+      expect(@reg2.external_id).to eq(2)
     end
   end
 
@@ -270,18 +270,18 @@ describe Registrant do
     end
 
     it "has expense_items" do
-      @reg.registrant_expense_items.should == [@rei]
-      @reg.expense_items.should == [@item]
+      expect(@reg.registrant_expense_items).to eq([@rei])
+      expect(@reg.expense_items).to eq([@item])
     end
     it "describes the expense_total as the sum" do
-      @reg.expenses_total.should == @item.cost
+      expect(@reg.expenses_total).to eq(@item.cost)
     end
     it "lists the item as an owing_expense_item" do
-      @reg.owing_expense_items.should == [@item]
-      @reg.owing_registrant_expense_items.first.should == @rei
+      expect(@reg.owing_expense_items).to eq([@item])
+      expect(@reg.owing_registrant_expense_items.first).to eq(@rei)
     end
     it "lists no details for its items" do
-      @reg.owing_expense_items_with_details.should == [[@item, nil]]
+      expect(@reg.owing_expense_items_with_details).to eq([[@item, nil]])
     end
 
     describe "With an expense_item having text details" do
@@ -292,7 +292,7 @@ describe Registrant do
       end
 
       it "should transfer the text along" do
-        @reg.owing_expense_items_with_details.should == [[@item, "These are some details"]]
+        expect(@reg.owing_expense_items_with_details).to eq([[@item, "These are some details"]])
       end
     end
 
@@ -310,13 +310,13 @@ describe Registrant do
         @reg.reload
       end
       it "lists one remaining item as owing" do
-        @reg.owing_expense_items.should == [@item]
+        expect(@reg.owing_expense_items).to eq([@item])
       end
       it "lists the item as paid for" do
-        @reg.paid_expense_items.should == [@item]
+        expect(@reg.paid_expense_items).to eq([@item])
       end
       it "should list the item twice in the all_expense_items" do
-        @reg.all_expense_items.should == [@item, @item]
+        expect(@reg.all_expense_items).to eq([@item, @item])
       end
     end
   end
@@ -327,21 +327,21 @@ describe Registrant do
       @reg.reload
     end
     it "can access its registrant choices" do
-      @reg.registrant_choices.should == [@rc]
+      expect(@reg.registrant_choices).to eq([@rc])
     end
     it "can access the event_choices" do
-      @reg.event_choices.should == [@rc.event_choice]
+      expect(@reg.event_choices).to eq([@rc.event_choice])
     end
     it "can access the events" do
-      @reg.events.should == [@rc.event_choice.event]
+      expect(@reg.events).to eq([@rc.event_choice.event])
     end
     it "can access the categories" do
-      @reg.categories.should == [@rc.event_choice.event.category]
+      expect(@reg.categories).to eq([@rc.event_choice.event.category])
     end
     it "Destroys the related registrant_choice upon destroy" do
-      RegistrantChoice.all.count.should == 1
+      expect(RegistrantChoice.all.count).to eq(1)
       @reg.destroy
-      RegistrantChoice.all.count.should == 0
+      expect(RegistrantChoice.all.count).to eq(0)
     end
   end
   describe "with a standard_skill registrant_choice" do
@@ -352,12 +352,12 @@ describe Registrant do
       @reg.reload
     end
     it "should list as having standard skill" do
-      @reg.has_standard_skill?.should == true
+      expect(@reg.has_standard_skill?).to eq(true)
     end
     it "should not list if not selected" do
       @rc.signed_up = false
       @rc.save!
-      @reg.has_standard_skill?.should == false
+      expect(@reg.has_standard_skill?).to eq(false)
     end
   end
 
@@ -383,11 +383,11 @@ describe Registrant do
         @comp.reload
       end
       it "should return nil as the registration_item" do
-        @comp.registrant_expense_items.count.should == 0
+        expect(@comp.registrant_expense_items.count).to eq(0)
       end
       it "should not allow deleting the registrant" do
         @comp.deleted = true
-        @comp.valid?.should == false
+        expect(@comp.valid?).to eq(false)
       end
     end
 
@@ -402,26 +402,26 @@ describe Registrant do
         @comp.reload
       end
       it "should have associated payment_details" do
-        @comp.payment_details.should == [@payment_detail]
+        expect(@comp.payment_details).to eq([@payment_detail])
       end
       it "should have an amount_paid" do
-        @comp.amount_paid.should == 100
+        expect(@comp.amount_paid).to eq(100)
       end
       it "should owe 0" do
-        @comp.amount_owing.should == 0
+        expect(@comp.amount_owing).to eq(0)
       end
       it "lists the paid_expense_items" do
-        @comp.paid_expense_items.should == [@payment_detail.expense_item]
+        expect(@comp.paid_expense_items).to eq([@payment_detail.expense_item])
       end
       it "lists no items as an owing_expense_item" do
-        @comp.owing_expense_items.should == []
+        expect(@comp.owing_expense_items).to eq([])
       end
       it "knows that the registration_fee has been paid" do
-        @comp.reg_paid?.should == true
+        expect(@comp.reg_paid?).to eq(true)
       end
 
       it "lists the payment_detail as a paid_detail" do
-        @comp.paid_details.should == [@payment_detail]
+        expect(@comp.paid_details).to eq([@payment_detail])
       end
 
       describe "with a refund of everything it has completed" do
@@ -430,17 +430,17 @@ describe Registrant do
         end
 
         it "lists nothing as paid" do
-          @comp.paid_details.should == []
-          @comp.payment_details.count.should == 1
+          expect(@comp.paid_details).to eq([])
+          expect(@comp.payment_details.count).to eq(1)
         end
 
         it "no longer lists the registration as paid" do
-          @comp.reg_paid?.should == false
+          expect(@comp.reg_paid?).to eq(false)
         end
 
         it "can delete the registrant" do
           @comp.deleted = true
-          @comp.valid?.should == true
+          expect(@comp.valid?).to eq(true)
         end
       end
     end
@@ -452,22 +452,22 @@ describe Registrant do
         @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100, :expense_item => @comp_exp)
       end
       it "should have associated payment_details" do
-        @comp.payment_details.should == [@payment_detail]
+        expect(@comp.payment_details).to eq([@payment_detail])
       end
       it "should not have an amount_paid" do
-        @comp.amount_paid.should == 0
+        expect(@comp.amount_paid).to eq(0)
       end
       it "should owe 100" do
-        @comp.amount_owing.should == 100
+        expect(@comp.amount_owing).to eq(100)
       end
       it "lists the paid_expense_items" do
-        @comp.paid_expense_items.should == []
+        expect(@comp.paid_expense_items).to eq([])
       end
       it "lists no items as an owing_expense_item" do
-        @comp.owing_expense_items.should == [@comp_exp]
+        expect(@comp.owing_expense_items).to eq([@comp_exp])
       end
       it "knows that the registration_fee has NOT been paid" do
-        @comp.reg_paid?.should == false
+        expect(@comp.reg_paid?).to eq(false)
       end
     end
   end
@@ -479,7 +479,7 @@ describe Registrant do
     end
 
     it "marks the registrant as expense_item_is_free for this expense_item" do
-      @reg.expense_item_is_free(@ei).should == true
+      expect(@reg.expense_item_is_free(@ei)).to eq(true)
     end
 
     it "is invalid without the item" do
@@ -505,7 +505,7 @@ describe Registrant do
     end
 
     it "marks the registrant as expense_item_is_free for this expense_item" do
-      @reg.expense_item_is_free(@ei).should == true
+      expect(@reg.expense_item_is_free(@ei)).to eq(true)
     end
     describe "when it has a non-free item of the same expense_group (not free though)" do
       before(:each) do
@@ -514,7 +514,7 @@ describe Registrant do
       end
 
       it "shows that a free item is available" do
-        @reg.expense_item_is_free(@ei).should == true
+        expect(@reg.expense_item_is_free(@ei)).to eq(true)
       end
     end
 
@@ -526,11 +526,11 @@ describe Registrant do
 
       it "doesn't allow registrant to have 2 free of this group" do
         @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
-        @rei.valid?.should == false
+        expect(@rei.valid?).to eq(false)
       end
 
       it "shows that it has the given expense_group" do
-        @reg.has_chosen_free_item_from_expense_group(@eg).should == true
+        expect(@reg.has_chosen_free_item_from_expense_group(@eg)).to eq(true)
       end
     end
 
@@ -546,7 +546,7 @@ describe Registrant do
       end
 
       it "shows that it has the given expense_group" do
-        @reg.has_chosen_free_item_from_expense_group(@eg).should == true
+        expect(@reg.has_chosen_free_item_from_expense_group(@eg)).to eq(true)
       end
     end
   end
@@ -558,7 +558,7 @@ describe Registrant do
     end
 
     it "marks the registrant as expense_item_is_free for this expense_item" do
-      @reg.expense_item_is_free(@ei).should == true
+      expect(@reg.expense_item_is_free(@ei)).to eq(true)
     end
 
     describe "when it has a non-free item of the same expense_group (not free though)" do
@@ -568,7 +568,7 @@ describe Registrant do
       end
 
       it "shows that a free item is available" do
-        @reg.expense_item_is_free(@ei).should == true
+        expect(@reg.expense_item_is_free(@ei)).to eq(true)
       end
     end
 
@@ -580,13 +580,13 @@ describe Registrant do
 
       it "doesn't allow registrant to have 2 free of this expense_item" do
         @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
-        @rei.valid?.should == false
+        expect(@rei.valid?).to eq(false)
       end
 
       it "allows different free expense_items in the same group" do
         @ei2 = FactoryGirl.create(:expense_item, :expense_group => @eg)
         @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei2, :free => true)
-        @rei.valid?.should == true
+        expect(@rei.valid?).to eq(true)
       end
     end
   end
@@ -600,10 +600,10 @@ describe Registrant do
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
       @reg.reload
-      @reg.owing_registrant_expense_items.count.should == 0
+      expect(@reg.owing_registrant_expense_items.count).to eq(0)
       @nc_reg.reload
-      @nc_reg.owing_registrant_expense_items.count.should == 1
-      @nc_reg.owing_registrant_expense_items.last.system_managed.should == true
+      expect(@nc_reg.owing_registrant_expense_items.count).to eq(1)
+      expect(@nc_reg.owing_registrant_expense_items.last.system_managed).to eq(true)
     end
   end
 
@@ -615,8 +615,8 @@ describe Registrant do
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
       @reg.reload
-      @reg.owing_registrant_expense_items.last.expense_item.should == @ei
-      @reg.owing_registrant_expense_items.last.system_managed.should == true
+      expect(@reg.owing_registrant_expense_items.last.expense_item).to eq(@ei)
+      expect(@reg.owing_registrant_expense_items.last.system_managed).to eq(true)
     end
   end
 
@@ -628,8 +628,8 @@ describe Registrant do
     end
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
-      @reg2.owing_registrant_expense_items.last.expense_item.should == @ei
-      @reg2.owing_registrant_expense_items.last.system_managed.should == true
+      expect(@reg2.owing_registrant_expense_items.last.expense_item).to eq(@ei)
+      expect(@reg2.owing_registrant_expense_items.last.system_managed).to eq(true)
     end
 
     describe "when it has paid for the expense_item" do
@@ -643,7 +643,7 @@ describe Registrant do
       end
 
       it "no longer has the item as owing" do
-        @reg2.owing_registrant_expense_items.count.should == 0
+        expect(@reg2.owing_registrant_expense_items.count).to eq(0)
       end
     end
   end

@@ -36,7 +36,7 @@ describe RegistrationPeriodsController do
 
     it "Cannot read registration_periods" do
       get :index
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 
@@ -44,14 +44,14 @@ describe RegistrationPeriodsController do
     it "assigns all registration_periods as @registration_periods" do
       registration_period = FactoryGirl.create :registration_period
       get :index, {}
-      assigns(:registration_periods).should eq([registration_period])
+      expect(assigns(:registration_periods)).to eq([registration_period])
     end
   end
 
   describe "GET new" do
     it "assigns a new registration_period as @registration_period" do
       get :new, {}
-      assigns(:registration_period).should be_a_new(RegistrationPeriod)
+      expect(assigns(:registration_period)).to be_a_new(RegistrationPeriod)
     end
   end
 
@@ -59,7 +59,7 @@ describe RegistrationPeriodsController do
     it "assigns the requested registration_period as @registration_period" do
       registration_period = FactoryGirl.create :registration_period
       get :edit, {:id => registration_period.to_param}
-      assigns(:registration_period).should eq(registration_period)
+      expect(assigns(:registration_period)).to eq(registration_period)
     end
   end
 
@@ -73,29 +73,29 @@ describe RegistrationPeriodsController do
 
       it "assigns a newly created registration_period as @registration_period" do
         post :create, {:registration_period => valid_attributes}
-        assigns(:registration_period).should be_a(RegistrationPeriod)
-        assigns(:registration_period).should be_persisted
+        expect(assigns(:registration_period)).to be_a(RegistrationPeriod)
+        expect(assigns(:registration_period)).to be_persisted
       end
 
       it "redirects to the created registration_period" do
         post :create, {:registration_period => valid_attributes}
-        response.should redirect_to(registration_periods_path)
+        expect(response).to redirect_to(registration_periods_path)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved registration_period as @registration_period" do
         # Trigger the behavior that occurs when invalid params are submitted
-        RegistrationPeriod.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(RegistrationPeriod).to receive(:save).and_return(false)
         post :create, {:registration_period => {:onsite => true}}
-        assigns(:registration_period).should be_a_new(RegistrationPeriod)
+        expect(assigns(:registration_period)).to be_a_new(RegistrationPeriod)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        RegistrationPeriod.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(RegistrationPeriod).to receive(:save).and_return(false)
         post :create, {:registration_period => {:onsite => true}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -108,14 +108,14 @@ describe RegistrationPeriodsController do
         # specifies that the RegistrationPeriod created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        RegistrationPeriod.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(RegistrationPeriod).to receive(:update_attributes).with({})
         put :update, {:id => registration_period.to_param, :registration_period => {'these' => 'params'}}
       end
 
       it "assigns the requested registration_period as @registration_period" do
         registration_period = FactoryGirl.create :registration_period
         put :update, {:id => registration_period.to_param, :registration_period => valid_attributes}
-        assigns(:registration_period).should eq(registration_period)
+        expect(assigns(:registration_period)).to eq(registration_period)
       end
 
       it "redirects to the registration_period" do
@@ -125,7 +125,7 @@ describe RegistrationPeriodsController do
                                           noncompetitor_expense_item_attributes: { id: registration_period.noncompetitor_expense_item.id },
                                         })
         put :update, {:id => registration_period.to_param, :registration_period => params}
-        response.should redirect_to(registration_periods_path)
+        expect(response).to redirect_to(registration_periods_path)
       end
     end
 
@@ -133,17 +133,17 @@ describe RegistrationPeriodsController do
       it "assigns the registration_period as @registration_period" do
         registration_period = FactoryGirl.create :registration_period
         # Trigger the behavior that occurs when invalid params are submitted
-        RegistrationPeriod.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(RegistrationPeriod).to receive(:save).and_return(false)
         put :update, {:id => registration_period.to_param, :registration_period => {:name => 'fake'}}
-        assigns(:registration_period).should eq(registration_period)
+        expect(assigns(:registration_period)).to eq(registration_period)
       end
 
       it "re-renders the 'edit' template" do
         registration_period = FactoryGirl.create :registration_period
         # Trigger the behavior that occurs when invalid params are submitted
-        RegistrationPeriod.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(RegistrationPeriod).to receive(:save).and_return(false)
         put :update, {:id => registration_period.to_param, :registration_period => {:onsite => true}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -159,7 +159,7 @@ describe RegistrationPeriodsController do
     it "redirects to the registration_periods list" do
       registration_period = FactoryGirl.create :registration_period
       delete :destroy, {:id => registration_period.to_param}
-      response.should redirect_to(registration_periods_url)
+      expect(response).to redirect_to(registration_periods_url)
     end
   end
 

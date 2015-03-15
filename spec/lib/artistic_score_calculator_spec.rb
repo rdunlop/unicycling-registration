@@ -11,12 +11,12 @@ describe ArtisticScoreCalculator do
     let(:tie_score) { 1 }
     let(:all_tie_scores) { [1, 2, 3, 4] }
 
-    it { subject.new_place(first, all_scores, tie_score, all_tie_scores).should == 1 }
-    it { subject.new_place(second, all_scores, 2, all_tie_scores).should == 2 }
+    it { expect(subject.new_place(first, all_scores, tie_score, all_tie_scores)).to eq(1) }
+    it { expect(subject.new_place(second, all_scores, 2, all_tie_scores)).to eq(2) }
 
     # if the overall scores are tied, fall back to the secondary scores for tie-breaker
-    it { subject.new_place(1.5, [1.5, 1.5], 1, [1, 2]).should == 1 }
-    it { subject.new_place(1.5, [1.5, 1.5], 2, [1, 2]).should == 2 }
+    it { expect(subject.new_place(1.5, [1.5, 1.5], 1, [1, 2])).to eq(1) }
+    it { expect(subject.new_place(1.5, [1.5, 1.5], 2, [1, 2])).to eq(2) }
   end
 end
 
@@ -38,9 +38,9 @@ describe ArtisticScoreCalculator do
     end
 
     it "should have total_points of 0 (with 1 judge)" do
-      @calc.total_points(@score1.competitor).should == 0.0
-      @calc.total_points(@score2.competitor).should == 0.0
-      @calc.total_points(@score3.competitor).should == 0.0
+      expect(@calc.total_points(@score1.competitor)).to eq(0.0)
+      expect(@calc.total_points(@score2.competitor)).to eq(0.0)
+      expect(@calc.total_points(@score3.competitor)).to eq(0.0)
     end
 
     describe "and there are 2 judges" do
@@ -52,28 +52,28 @@ describe ArtisticScoreCalculator do
       end
 
       it "determines the highest place ranked" do
-        @calc.lowest_score(@score1.competitor).should == 1
-        @calc.lowest_score(@score2.competitor).should == 2 # by judge1
-        @calc.lowest_score(@score3.competitor).should == 2 # by judge2
+        expect(@calc.lowest_score(@score1.competitor)).to eq(1)
+        expect(@calc.lowest_score(@score2.competitor)).to eq(2) # by judge1
+        expect(@calc.lowest_score(@score3.competitor)).to eq(2) # by judge2
 
-        @calc.lowest_score(@score2_1.competitor).should == 1
-        @calc.lowest_score(@score2_2.competitor).should == 2 # by judge1
-        @calc.lowest_score(@score2_3.competitor).should == 2 # by judge2
+        expect(@calc.lowest_score(@score2_1.competitor)).to eq(1)
+        expect(@calc.lowest_score(@score2_2.competitor)).to eq(2) # by judge1
+        expect(@calc.lowest_score(@score2_3.competitor)).to eq(2) # by judge2
       end
       it "determines the lowest place ranked" do
-        @calc.highest_score(@score1.competitor).should == 1
-        @calc.highest_score(@score2.competitor).should == 3 # by judge2
-        @calc.highest_score(@score3.competitor).should == 3 # by judge1
+        expect(@calc.highest_score(@score1.competitor)).to eq(1)
+        expect(@calc.highest_score(@score2.competitor)).to eq(3) # by judge2
+        expect(@calc.highest_score(@score3.competitor)).to eq(3) # by judge1
 
-        @calc.highest_score(@score2_1.competitor).should == 1
-        @calc.highest_score(@score2_2.competitor).should == 3 # by judge2
-        @calc.highest_score(@score2_3.competitor).should == 3 # by judge1
+        expect(@calc.highest_score(@score2_1.competitor)).to eq(1)
+        expect(@calc.highest_score(@score2_2.competitor)).to eq(3) # by judge2
+        expect(@calc.highest_score(@score2_3.competitor)).to eq(3) # by judge1
       end
 
       it "has 0.0 for the total placing points, after subtracting high and low (only 2 judges)" do
-        @calc.total_points(@score1.competitor).should == 0.0
-        @calc.total_points(@score2.competitor).should == 0.0
-        @calc.total_points(@score3.competitor).should == 0.0
+        expect(@calc.total_points(@score1.competitor)).to eq(0.0)
+        expect(@calc.total_points(@score2.competitor)).to eq(0.0)
+        expect(@calc.total_points(@score3.competitor)).to eq(0.0)
       end
 
       describe "with a 3rd judge's scores" do
@@ -84,19 +84,19 @@ describe ArtisticScoreCalculator do
           @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 4)
         end
         it "has non-zero placing points" do
-          @calc.total_points(@score1.competitor).should == 1.0
-          @calc.total_points(@score2.competitor).should == 2.5
-          @calc.total_points(@score3.competitor).should == 2.5
+          expect(@calc.total_points(@score1.competitor)).to eq(1.0)
+          expect(@calc.total_points(@score2.competitor)).to eq(2.5)
+          expect(@calc.total_points(@score3.competitor)).to eq(2.5)
         end
         it "has non-zero placing points for correct judge_type" do
-          @calc.total_points(@score1.competitor, @judge3.judge_type).should == 1.0
-          @calc.total_points(@score2.competitor, @judge3.judge_type).should == 2.5
-          @calc.total_points(@score3.competitor, @judge3.judge_type).should == 2.5
+          expect(@calc.total_points(@score1.competitor, @judge3.judge_type)).to eq(1.0)
+          expect(@calc.total_points(@score2.competitor, @judge3.judge_type)).to eq(2.5)
+          expect(@calc.total_points(@score3.competitor, @judge3.judge_type)).to eq(2.5)
         end
         it "converts the place points into place" do
-          @calc.place(@score1.competitor).should == 1
-          @calc.place(@score2.competitor).should == 2
-          @calc.place(@score3.competitor).should == 2
+          expect(@calc.place(@score1.competitor)).to eq(1)
+          expect(@calc.place(@score2.competitor)).to eq(2)
+          expect(@calc.place(@score3.competitor)).to eq(2)
         end
         describe "when there are more competitors than scores, it marks the extras as 0" do
           before(:each) do
@@ -104,11 +104,11 @@ describe ArtisticScoreCalculator do
           end
 
           it "puts that competitor as first" do
-            @calc.place(@comp1).should == 1
+            expect(@calc.place(@comp1)).to eq(1)
           end
 
           it "puts the other competitor as NA" do
-            @calc.place(@comp4).should == 0
+            expect(@calc.place(@comp4)).to eq(0)
           end
         end
 
@@ -118,7 +118,7 @@ describe ArtisticScoreCalculator do
             @judge = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
           end
           it "should be able to get the place" do
-            @calc.place(@comp1).should == 1
+            expect(@calc.place(@comp1)).to eq(1)
           end
         end
 
@@ -142,20 +142,20 @@ describe ArtisticScoreCalculator do
           end
 
           it "has non-zero placing points for correct judge_type" do
-            @calc.total_points(@score1.competitor, @judge4.judge_type).should == 3.0
-            @calc.total_points(@score2.competitor, @judge4.judge_type).should == 2.0
-            @calc.total_points(@score3.competitor, @judge4.judge_type).should == 1.0
+            expect(@calc.total_points(@score1.competitor, @judge4.judge_type)).to eq(3.0)
+            expect(@calc.total_points(@score2.competitor, @judge4.judge_type)).to eq(2.0)
+            expect(@calc.total_points(@score3.competitor, @judge4.judge_type)).to eq(1.0)
           end
 
           it "has total_points for both judge_types, after eliminating high-low from each type" do
-            @calc.total_points(@score1.competitor).should == 4.0
-            @calc.total_points(@score2.competitor).should == 4.5
-            @calc.total_points(@score3.competitor).should == 3.5
+            expect(@calc.total_points(@score1.competitor)).to eq(4.0)
+            expect(@calc.total_points(@score2.competitor)).to eq(4.5)
+            expect(@calc.total_points(@score3.competitor)).to eq(3.5)
           end
           it "determines the places correctly" do
-            @calc.place(@score1.competitor).should == 2
-            @calc.place(@score2.competitor).should == 3
-            @calc.place(@score3.competitor).should == 1
+            expect(@calc.place(@score1.competitor)).to eq(2)
+            expect(@calc.place(@score2.competitor)).to eq(3)
+            expect(@calc.place(@score3.competitor)).to eq(1)
           end
 
           describe "when using NAUCC-style rules" do
@@ -173,35 +173,35 @@ describe ArtisticScoreCalculator do
 
             # eliminate 1,3  2,3  3,1
             it "calculates the highest_score correctly by judge_type" do
-              @calc.highest_score(@score1.competitor, nil).should == 3.0
-              @calc.highest_score(@score2.competitor, nil).should == 3.0
-              @calc.highest_score(@score3.competitor, nil).should == 3.0
+              expect(@calc.highest_score(@score1.competitor, nil)).to eq(3.0)
+              expect(@calc.highest_score(@score2.competitor, nil)).to eq(3.0)
+              expect(@calc.highest_score(@score3.competitor, nil)).to eq(3.0)
             end
 
             it "calculates the lowest_score correctly by judge_type" do
-              @calc.lowest_score(@score1.competitor, nil).should == 1.0
-              @calc.lowest_score(@score2.competitor, nil).should == 2.0
-              @calc.lowest_score(@score3.competitor, nil).should == 1.0
+              expect(@calc.lowest_score(@score1.competitor, nil)).to eq(1.0)
+              expect(@calc.lowest_score(@score2.competitor, nil)).to eq(2.0)
+              expect(@calc.lowest_score(@score3.competitor, nil)).to eq(1.0)
             end
 
             it "has non-zero placing points for correct judge_type" do
-              @calc.total_points(@score1.competitor, @judge1.judge_type).should == 1.0
-              @calc.total_points(@score2.competitor, @judge1.judge_type).should == 2.5
-              @calc.total_points(@score3.competitor, @judge1.judge_type).should == 2.5
+              expect(@calc.total_points(@score1.competitor, @judge1.judge_type)).to eq(1.0)
+              expect(@calc.total_points(@score2.competitor, @judge1.judge_type)).to eq(2.5)
+              expect(@calc.total_points(@score3.competitor, @judge1.judge_type)).to eq(2.5)
 
-              @calc.total_points(@score1.competitor, @judge4.judge_type).should == 3.0
-              @calc.total_points(@score2.competitor, @judge4.judge_type).should == 2.0
-              @calc.total_points(@score3.competitor, @judge4.judge_type).should == 1.0
+              expect(@calc.total_points(@score1.competitor, @judge4.judge_type)).to eq(3.0)
+              expect(@calc.total_points(@score2.competitor, @judge4.judge_type)).to eq(2.0)
+              expect(@calc.total_points(@score3.competitor, @judge4.judge_type)).to eq(1.0)
             end
             it "has total_points for both judge_types, after eliminating high-low from each type" do
-              @calc.total_points(@score1.competitor).should == 8.0
-              @calc.total_points(@score2.competitor).should == 8.5
-              @calc.total_points(@score3.competitor).should == 6.5
+              expect(@calc.total_points(@score1.competitor)).to eq(8.0)
+              expect(@calc.total_points(@score2.competitor)).to eq(8.5)
+              expect(@calc.total_points(@score3.competitor)).to eq(6.5)
             end
             it "determines the places correctly" do
-              @calc.place(@score1.competitor).should == 2
-              @calc.place(@score2.competitor).should == 3
-              @calc.place(@score3.competitor).should == 1
+              expect(@calc.place(@score1.competitor)).to eq(2)
+              expect(@calc.place(@score2.competitor)).to eq(3)
+              expect(@calc.place(@score3.competitor)).to eq(1)
             end
             describe "When one of the competitors is invalidated" do
               before do
@@ -209,9 +209,9 @@ describe ArtisticScoreCalculator do
               end
 
               it "determines the places without this competitor" do
-                @calc.place(@score1.competitor).should == 0
-                @calc.place(@score2.competitor).should == 2
-                @calc.place(@score3.competitor).should == 1
+                expect(@calc.place(@score1.competitor)).to eq(0)
+                expect(@calc.place(@score2.competitor)).to eq(2)
+                expect(@calc.place(@score3.competitor)).to eq(1)
               end
             end
           end

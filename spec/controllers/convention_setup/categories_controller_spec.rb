@@ -23,7 +23,7 @@ describe ConventionSetup::CategoriesController do
 
     it "Cannot read categories" do
       get :index
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 
@@ -31,8 +31,8 @@ describe ConventionSetup::CategoriesController do
     it "assigns all categories as @categories" do
       category = Category.create! valid_attributes
       get :index, {}
-      assigns(:categories).should eq([category])
-      assigns(:category).should be_a_new(Category)
+      expect(assigns(:categories)).to eq([category])
+      expect(assigns(:category)).to be_a_new(Category)
     end
   end
 
@@ -40,7 +40,7 @@ describe ConventionSetup::CategoriesController do
     it "assigns the requested category as @category" do
       category = Category.create! valid_attributes
       get :edit, {:id => category.to_param}
-      assigns(:category).should eq(category)
+      expect(assigns(:category)).to eq(category)
     end
   end
 
@@ -54,13 +54,13 @@ describe ConventionSetup::CategoriesController do
 
       it "assigns a newly created category as @category" do
         post :create, {:category => valid_attributes}
-        assigns(:category).should be_a(Category)
-        assigns(:category).should be_persisted
+        expect(assigns(:category)).to be_a(Category)
+        expect(assigns(:category)).to be_persisted
       end
 
       it "redirects to the created category" do
         post :create, {:category => valid_attributes}
-        response.should redirect_to(convention_setup_categories_path)
+        expect(response).to redirect_to(convention_setup_categories_path)
       end
     end
 
@@ -68,17 +68,17 @@ describe ConventionSetup::CategoriesController do
       it "assigns a newly created but unsaved category as @category" do
         # Trigger the behavior that occurs when invalid params are submitted
         category = Category.create! valid_attributes
-        Category.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Category).to receive(:save).and_return(false)
         post :create, {:category => {:name => "Hi"}}
-        assigns(:category).should be_a_new(Category)
-        assigns(:categories).should == [category]
+        expect(assigns(:category)).to be_a_new(Category)
+        expect(assigns(:categories)).to eq([category])
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Category.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Category).to receive(:save).and_return(false)
         post :create, {:category => {:name => "Hi"}}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
     end
   end
@@ -91,20 +91,20 @@ describe ConventionSetup::CategoriesController do
         # specifies that the Category created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Category.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(Category).to receive(:update_attributes).with({})
         put :update, {:id => category.to_param, :category => {'these' => 'params'}}
       end
 
       it "assigns the requested category as @category" do
         category = Category.create! valid_attributes
         put :update, {:id => category.to_param, :category => valid_attributes}
-        assigns(:category).should eq(category)
+        expect(assigns(:category)).to eq(category)
       end
 
       it "redirects to the category" do
         category = Category.create! valid_attributes
         put :update, {:id => category.to_param, :category => valid_attributes}
-        response.should redirect_to(convention_setup_categories_path)
+        expect(response).to redirect_to(convention_setup_categories_path)
       end
     end
 
@@ -112,17 +112,17 @@ describe ConventionSetup::CategoriesController do
       it "assigns the category as @category" do
         category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Category.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Category).to receive(:save).and_return(false)
         put :update, {:id => category.to_param, :category => {:name => 'fake'}}
-        assigns(:category).should eq(category)
+        expect(assigns(:category)).to eq(category)
       end
 
       it "re-renders the 'edit' template" do
         category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Category.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Category).to receive(:save).and_return(false)
         put :update, {:id => category.to_param, :category => {:name => "Hi"}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -138,7 +138,7 @@ describe ConventionSetup::CategoriesController do
     it "redirects to the categories list" do
       category = Category.create! valid_attributes
       delete :destroy, {:id => category.to_param}
-      response.should redirect_to(convention_setup_categories_url)
+      expect(response).to redirect_to(convention_setup_categories_url)
     end
   end
 

@@ -4,7 +4,7 @@ describe "scores/index" do
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
+    allow(controller).to receive(:current_ability) { @ability }
 
     @ec = FactoryGirl.create(:competition)
     @judge = FactoryGirl.create(:judge, :competition => @ec)
@@ -40,8 +40,8 @@ describe "scores/index" do
   end
   it "renders the titles and ranges" do
     render
-    rendered.should match(/#{@judge.judge_type.val_1_description}/)
-    rendered.should match(/\(0-#{@judge.judge_type.val_1_max}\)/)
+    expect(rendered).to match(/#{@judge.judge_type.val_1_description}/)
+    expect(rendered).to match(/\(0-#{@judge.judge_type.val_1_max}\)/)
   end
 
   it "renders a list of scores" do
@@ -79,6 +79,6 @@ describe "scores/index" do
 
   it "shows a 'this event is locked' message when the event is locked" do
     render
-    rendered.should match(/Scores for this event are now locked \(closed\)/)
+    expect(rendered).to match(/Scores for this event are now locked \(closed\)/)
   end
 end

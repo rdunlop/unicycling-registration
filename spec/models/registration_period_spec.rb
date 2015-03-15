@@ -22,41 +22,41 @@ describe RegistrationPeriod do
   end
 
   it "is valid from FactoryGirl" do
-    @rp.valid?.should == true
+    expect(@rp.valid?).to eq(true)
   end
 
   it "must have a start date" do
     @rp.start_date = nil
-    @rp.valid?.should == false
+    expect(@rp.valid?).to eq(false)
   end
 
   it "must have an end date" do
     @rp.end_date = nil
-    @rp.valid?.should == false
+    expect(@rp.valid?).to eq(false)
   end
 
   it "must have a competitor_expense_item" do
     @rp.competitor_expense_item = nil
-    @rp.valid?.should == false
+    expect(@rp.valid?).to eq(false)
   end
 
   it "must have a noncompetitor_expense_item" do
     @rp.noncompetitor_expense_item = nil
-    @rp.valid?.should == false
+    expect(@rp.valid?).to eq(false)
   end
 
   it "must have onsite set" do
     @rp.onsite = nil
-    @rp.valid?.should == false
+    expect(@rp.valid?).to eq(false)
   end
 
   it "is not onsite by default" do
     rp = RegistrationPeriod.new
-    rp.onsite.should == false
+    expect(rp.onsite).to eq(false)
   end
 
   it "can determine the last online registration period" do
-    RegistrationPeriod.last_online_period.should == @rp
+    expect(RegistrationPeriod.last_online_period).to eq(@rp)
   end
 
   describe "with associated expense_items" do
@@ -87,56 +87,56 @@ describe RegistrationPeriod do
     end
 
     it "can retrieve period" do
-      RegistrationPeriod.relevant_period(Date.new(2012, 01, 15)).should == @rp1
+      expect(RegistrationPeriod.relevant_period(Date.new(2012, 01, 15))).to eq(@rp1)
     end
 
     it "gets nil for missing section" do
-      RegistrationPeriod.relevant_period(Date.new(2010, 01, 01)).should be_nil
+      expect(RegistrationPeriod.relevant_period(Date.new(2010, 01, 01))).to be_nil
     end
 
     it "returns the first registration period INCLUDING the day AFTER the period ends" do
-      RegistrationPeriod.relevant_period(Date.new(2012, 02, 03)).should == @rp1
+      expect(RegistrationPeriod.relevant_period(Date.new(2012, 02, 03))).to eq(@rp1)
     end
 
     it "returns the second registration period +2 days after the first period ends" do
-      RegistrationPeriod.relevant_period(Date.new(2012, 02, 04)).should == @rp2
+      expect(RegistrationPeriod.relevant_period(Date.new(2012, 02, 04))).to eq(@rp2)
     end
 
     it "disregards onsite registration periods for last_online_period" do
       @rp.onsite = true
       @rp.save!
-      RegistrationPeriod.last_online_period.should == @rp2
+      expect(RegistrationPeriod.last_online_period).to eq(@rp2)
     end
     describe "with more registration periods" do
       before(:each) do
         @rp0 = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 02, 03), :end_date => Date.new(2010, 04, 04))
       end
       it "returns the periods in ascending date order" do
-        RegistrationPeriod.all.should == [@rp0, @rp1, @rp2, @rp]
+        expect(RegistrationPeriod.all).to eq([@rp0, @rp1, @rp2, @rp])
       end
     end
 
     describe "when searching for a paid-for registration period" do
       it "can retrieve the matching registration_period" do
-        RegistrationPeriod.paid_for_period(true, []).should be_nil
+        expect(RegistrationPeriod.paid_for_period(true, [])).to be_nil
       end
       it "can retrieve a matching competitor period" do
-        RegistrationPeriod.paid_for_period(true, [@rp1.competitor_expense_item]).should == @rp1
-        RegistrationPeriod.paid_for_period(true, [@rp2.competitor_expense_item]).should == @rp2
+        expect(RegistrationPeriod.paid_for_period(true, [@rp1.competitor_expense_item])).to eq(@rp1)
+        expect(RegistrationPeriod.paid_for_period(true, [@rp2.competitor_expense_item])).to eq(@rp2)
       end
       it "can retrieve a matching noncompetitor period" do
-        RegistrationPeriod.paid_for_period(false, [@rp1.noncompetitor_expense_item]).should == @rp1
-        RegistrationPeriod.paid_for_period(false, [@rp2.noncompetitor_expense_item]).should == @rp2
+        expect(RegistrationPeriod.paid_for_period(false, [@rp1.noncompetitor_expense_item])).to eq(@rp1)
+        expect(RegistrationPeriod.paid_for_period(false, [@rp2.noncompetitor_expense_item])).to eq(@rp2)
       end
     end
 
     it "can identify the current period" do
-      @rp1.current_period?(Date.new(2012, 01, 14)).should == true
-      @rp2.current_period?(Date.new(2012, 01, 14)).should == false
+      expect(@rp1.current_period?(Date.new(2012, 01, 14))).to eq(true)
+      expect(@rp2.current_period?(Date.new(2012, 01, 14))).to eq(false)
     end
     it "can identify past periods" do
-      @rp1.past_period?(Date.new(2012, 02, 20)).should == true
-      @rp2.past_period?(Date.new(2012, 02, 20)).should == false
+      expect(@rp1.past_period?(Date.new(2012, 02, 20))).to eq(true)
+      expect(@rp2.past_period?(Date.new(2012, 02, 20))).to eq(false)
     end
   end
 end
@@ -148,17 +148,17 @@ describe "when testing the update function for registration periods", :caching =
     @nc_reg = FactoryGirl.create(:noncompetitor) # will have rp1
   end
   it "initially doesn't have a current_period" do
-    RegistrationPeriod.current_period.should be_nil
+    expect(RegistrationPeriod.current_period).to be_nil
   end
   it "initially says that no update has been (yet) performed" do
-    RegistrationPeriod.update_checked_recently.should == false
+    expect(RegistrationPeriod.update_checked_recently).to eq(false)
   end
 
   it "initially, the registrant has an expense_item from the current period" do
-    @reg.registrant_expense_items.count.should == 1
-    @reg.registrant_expense_items.first.expense_item.should == @rp1.competitor_expense_item
-    @nc_reg.registrant_expense_items.count.should == 1
-    @nc_reg.registrant_expense_items.first.expense_item.should == @rp1.noncompetitor_expense_item
+    expect(@reg.registrant_expense_items.count).to eq(1)
+    expect(@reg.registrant_expense_items.first.expense_item).to eq(@rp1.competitor_expense_item)
+    expect(@nc_reg.registrant_expense_items.count).to eq(1)
+    expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@rp1.noncompetitor_expense_item)
   end
 
   describe "after the update has been called" do
@@ -167,20 +167,20 @@ describe "when testing the update function for registration periods", :caching =
       RegistrationPeriod.update_current_period(Date.new(2012, 12, 22))
     end
     it "sets the current period when invoked" do
-      RegistrationPeriod.current_period.should == @rp1
+      expect(RegistrationPeriod.current_period).to eq(@rp1)
     end
 
     it "says that an update has been performed recently" do
-      RegistrationPeriod.update_checked_recently(Date.new(2012, 12, 22)).should == true
+      expect(RegistrationPeriod.update_checked_recently(Date.new(2012, 12, 22))).to eq(true)
     end
 
     it "(when looking 3 days in the future) says that an update has not yet been done" do
-      RegistrationPeriod.update_checked_recently(Date.new(2012, 12, 25)).should == false
+      expect(RegistrationPeriod.update_checked_recently(Date.new(2012, 12, 25))).to eq(false)
     end
 
     it "sends an e-mail when it changes the reg period" do
       num_deliveries = ActionMailer::Base.deliveries.size
-      num_deliveries.should == 1
+      expect(num_deliveries).to eq(1)
     end
 
     describe "when a registrant has a LOCKED registration_item" do
@@ -194,7 +194,7 @@ describe "when testing the update function for registration periods", :caching =
         @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
         @ret = RegistrationPeriod.update_current_period(Date.new(2020, 12, 1))
         @reg.reload
-        @reg.registration_item.should == @original_item
+        expect(@reg.registration_item).to eq(@original_item)
       end
     end
     describe "when updating to the next period" do
@@ -205,28 +205,28 @@ describe "when testing the update function for registration periods", :caching =
       end
 
       it "it indicates that the new period has been recently updated" do
-        RegistrationPeriod.update_checked_recently(Date.new(2020, 12, 2)).should == true
+        expect(RegistrationPeriod.update_checked_recently(Date.new(2020, 12, 2))).to eq(true)
       end
       it "indicates that it updated" do
-        @ret.should == true
+        expect(@ret).to eq(true)
       end
       it "updates the current_period" do
-        RegistrationPeriod.current_period.should == @rp2
+        expect(RegistrationPeriod.current_period).to eq(@rp2)
       end
       it "sends an e-mail when it changes the reg period" do
         num_deliveries = ActionMailer::Base.deliveries.size
-        num_deliveries.should == 1
+        expect(num_deliveries).to eq(1)
         email = ActionMailer::Base.deliveries.first
-        email.subject.should == "Updated Registration Period"
+        expect(email.subject).to eq("Updated Registration Period")
       end
       it "changes the registrant's item to the new period" do
         @reg.reload
-        @reg.registrant_expense_items.count.should == 1
-        @reg.registrant_expense_items.first.expense_item.should == @rp2.competitor_expense_item
+        expect(@reg.registrant_expense_items.count).to eq(1)
+        expect(@reg.registrant_expense_items.first.expense_item).to eq(@rp2.competitor_expense_item)
 
         @nc_reg.reload
-        @nc_reg.registrant_expense_items.count.should == 1
-        @nc_reg.registrant_expense_items.first.expense_item.should == @rp2.noncompetitor_expense_item
+        expect(@nc_reg.registrant_expense_items.count).to eq(1)
+        expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@rp2.noncompetitor_expense_item)
       end
     end
     describe "when updating to a non-existent period" do
@@ -236,23 +236,23 @@ describe "when testing the update function for registration periods", :caching =
       end
 
       it "indicates that it updated" do
-        @ret.should == true
+        expect(@ret).to eq(true)
       end
       it "updates the current_period (which is nil)" do
-        RegistrationPeriod.current_period.should be_nil
+        expect(RegistrationPeriod.current_period).to be_nil
       end
       it "sends an e-mail when it changes the reg period" do
         num_deliveries = ActionMailer::Base.deliveries.size
-        num_deliveries.should == 1
+        expect(num_deliveries).to eq(1)
         email = ActionMailer::Base.deliveries.first
-        email.subject.should == "Updated Registration Period"
+        expect(email.subject).to eq("Updated Registration Period")
       end
       it "does not delete the registrant's reg_item" do
         @reg.reload
-        @reg.registrant_expense_items.count.should == 1
+        expect(@reg.registrant_expense_items.count).to eq(1)
 
         @nc_reg.reload
-        @nc_reg.registrant_expense_items.count.should == 1
+        expect(@nc_reg.registrant_expense_items.count).to eq(1)
       end
       describe "when updating to a now-existent period" do
         before(:each) do
@@ -262,25 +262,25 @@ describe "when testing the update function for registration periods", :caching =
         end
 
         it "indicates that it updated" do
-          @ret.should == true
+          expect(@ret).to eq(true)
         end
         it "updates the current_period" do
-          RegistrationPeriod.current_period.should == @rp2
+          expect(RegistrationPeriod.current_period).to eq(@rp2)
         end
         it "sends an e-mail when it changes the reg period" do
           num_deliveries = ActionMailer::Base.deliveries.size
-          num_deliveries.should == 1
+          expect(num_deliveries).to eq(1)
           email = ActionMailer::Base.deliveries.first
-          email.subject.should == "Updated Registration Period"
+          expect(email.subject).to eq("Updated Registration Period")
         end
         it "changes the registrant's item to the new period" do
           @reg.reload
-          @reg.registrant_expense_items.count.should == 1
-          @reg.registrant_expense_items.first.expense_item.should == @rp2.competitor_expense_item
+          expect(@reg.registrant_expense_items.count).to eq(1)
+          expect(@reg.registrant_expense_items.first.expense_item).to eq(@rp2.competitor_expense_item)
 
           @nc_reg.reload
-          @nc_reg.registrant_expense_items.count.should == 1
-          @nc_reg.registrant_expense_items.first.expense_item.should == @rp2.noncompetitor_expense_item
+          expect(@nc_reg.registrant_expense_items.count).to eq(1)
+          expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@rp2.noncompetitor_expense_item)
         end
       end
     end

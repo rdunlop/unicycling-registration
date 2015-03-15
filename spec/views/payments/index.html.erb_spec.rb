@@ -10,8 +10,8 @@ describe "payments/index" do
 
     @ability = Object.new
     @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
-    controller.stub(:current_user) { FactoryGirl.create(:user) }
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
 
     assign(:refunds, [])
   end

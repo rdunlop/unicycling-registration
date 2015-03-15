@@ -11,7 +11,7 @@ describe PermissionsController do
       admin_user = FactoryGirl.create(:admin_user)
       user = FactoryGirl.create(:user)
       get :index, {}
-      assigns(:users).should =~ [@super_user, admin_user, user]
+      expect(assigns(:users)).to match_array([@super_user, admin_user, user])
     end
   end
 
@@ -22,16 +22,16 @@ describe PermissionsController do
       end
       it "can change a user to an admin" do
         put :set_role, {:user_id => @user.to_param, :role_name => :admin}
-        response.should redirect_to(permissions_path)
+        expect(response).to redirect_to(permissions_path)
         @user.reload
-        @user.has_role?(:admin).should == true
+        expect(@user.has_role?(:admin)).to eq(true)
       end
       it "can change an admin back to a user" do
         admin = FactoryGirl.create(:admin_user)
         put :set_role, {:user_id => admin.to_param, :role_name => :admin}
-        response.should redirect_to(permissions_path)
+        expect(response).to redirect_to(permissions_path)
         admin.reload
-        admin.has_role?(:admin).should == false
+        expect(admin.has_role?(:admin)).to eq(false)
       end
 
       it "is not possible as a normal admin user" do
@@ -40,9 +40,9 @@ describe PermissionsController do
         sign_in admin_user
 
         put :set_role, {:user_id => @user.to_param, :role_name => :admin}
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
         @user.reload
-        @user.has_role?(:admin).should == false
+        expect(@user.has_role?(:admin)).to eq(false)
       end
     end
   end
@@ -54,13 +54,13 @@ describe PermissionsController do
 
     it "can access the acl page" do
       get :acl
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "can authorize acl" do
       allow_any_instance_of(ApplicationController).to receive(:modification_access_key).and_return(123456)
       post :set_acl, {access_key: "123456"}
-      flash[:notice].should == "Successfully Enabled Access"
+      expect(flash[:notice]).to eq("Successfully Enabled Access")
     end
 
     describe "can use an access code" do

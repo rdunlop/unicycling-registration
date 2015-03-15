@@ -22,12 +22,12 @@ describe RefundDetail do
   end
 
   it "has a valid rd from factoryGirl" do
-    @rd.valid?.should == true
+    expect(@rd.valid?).to eq(true)
   end
 
   it "requires a payment_detail" do
     @rd.payment_detail = nil
-    @rd.valid?.should == false
+    expect(@rd.valid?).to eq(false)
   end
 
   describe "when there is an active registration_period", :caching => true do
@@ -36,19 +36,19 @@ describe RefundDetail do
     end
     it "re-creates the registration_expense_item successfully" do
       @reg = FactoryGirl.create(:competitor)
-      @reg.registrant_expense_items.count.should == 1
+      expect(@reg.registrant_expense_items.count).to eq(1)
       @pd = FactoryGirl.create(:payment_detail, :registrant => @reg, :expense_item => @rp.competitor_expense_item)
       payment = @pd.payment
       payment.reload
       payment.completed = true
       payment.save
       @reg.reload
-      @reg.registrant_expense_items.count.should == 0
+      expect(@reg.registrant_expense_items.count).to eq(0)
 
       @pd.reload
       @rd1 = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
       @reg.reload
-      @reg.registrant_expense_items.count.should == 1
+      expect(@reg.registrant_expense_items.count).to eq(1)
     end
 
     describe "when there is a previous active registration_period", :caching => true do
@@ -65,12 +65,12 @@ describe RefundDetail do
         payment.completed = true
         payment.save
         @reg.reload
-        @reg.registrant_expense_items.count.should == 0
+        expect(@reg.registrant_expense_items.count).to eq(0)
 
         @pd2.reload
         @rd1 = FactoryGirl.create(:refund_detail, :payment_detail => @pd2)
         @reg.reload
-        @reg.registrant_expense_items.count.should == 0
+        expect(@reg.registrant_expense_items.count).to eq(0)
       end
     end
   end

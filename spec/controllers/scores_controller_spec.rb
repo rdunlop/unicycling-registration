@@ -47,7 +47,7 @@ describe ScoresController do
     it "assigns the requested score as @score" do
       score = @signed_in_scores[0]
       get :new, {:judge_id => @judge.id, :competitor_id => @comp.id}
-      assigns(:score).should eq(score)
+      expect(assigns(:score)).to eq(score)
     end
   end
 
@@ -85,20 +85,20 @@ describe ScoresController do
         # specifies that the Score created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Score.any_instance.should_receive(:assign_attributes).with({'val_1' => '2.1'})
+        expect_any_instance_of(Score).to receive(:assign_attributes).with({'val_1' => '2.1'})
         post :create, {:score => {:val_1 => '2.1'}, :judge_id => @judge, :competitor_id => @comp.id}
       end
 
       it "assigns the requested score as @score" do
         score = @signed_in_scores[0]
         post :create, {:score => valid_attributes, :judge_id => @judge, :competitor_id => @comp.id}
-        assigns(:score).should eq(score)
+        expect(assigns(:score)).to eq(score)
       end
 
       it "redirects to the score" do
         score = @signed_in_scores[0]
         post :create, {:score => valid_attributes, :judge_id => @judge, :competitor_id => @comp.id}
-        response.should redirect_to(judge_scores_url(@judge))
+        expect(response).to redirect_to(judge_scores_url(@judge))
       end
     end
 
@@ -106,17 +106,17 @@ describe ScoresController do
       it "assigns the score as @score" do
         score = @signed_in_scores[0]
         # Trigger the behavior that occurs when invalid params are submitted
-        Score.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Score).to receive(:save).and_return(false)
         post :create, {:score => {:number_of_people => 1}, :judge_id => @judge, :competitor_id => @comp.id}
-        assigns(:score).should eq(score)
+        expect(assigns(:score)).to eq(score)
       end
 
       it "re-renders the 'new' template" do
         score = @signed_in_scores[0]
         # Trigger the behavior that occurs when invalid params are submitted
-        Score.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Score).to receive(:save).and_return(false)
         post :create, {:score => {:val_1 => 1}, :judge_id => @judge.id, :competitor_id => @comp.id}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
 
@@ -134,11 +134,11 @@ describe ScoresController do
       end
       it "should deny access to edit" do
         get :new, {:judge_id => @judge, :competitor_id => @comp.id}
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
       it "should deny access to update" do
         post :create, {:judge_id => @judge, :competitor_id => @comp.id}
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
     end
   end

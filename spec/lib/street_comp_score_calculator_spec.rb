@@ -17,9 +17,9 @@ describe StreetCompScoreCalculator do
       @calc = StreetCompScoreCalculator.new(@competition)
     end
     it "should be able to calculate places" do
-      @calc.place(@comp1).should == 1
-      @calc.place(@comp2).should == 2
-      @calc.place(@comp3).should == 3
+      expect(@calc.place(@comp1)).to eq(1)
+      expect(@calc.place(@comp2)).to eq(2)
+      expect(@calc.place(@comp3)).to eq(3)
     end
 
     it "should have real total_points (with 1 judge)" do
@@ -40,13 +40,13 @@ describe StreetCompScoreCalculator do
         @score7 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp7, :val_1 => 7)
       end
       it "can place the competitors" do
-        @calc.place(@comp1).should == 1
-        @calc.place(@comp2).should == 3
-        @calc.place(@comp3).should == 7
-        @calc.place(@comp4).should == 5
-        @calc.place(@comp5).should == 4
-        @calc.place(@comp6).should == 6
-        @calc.place(@comp7).should == 2
+        expect(@calc.place(@comp1)).to eq(1)
+        expect(@calc.place(@comp2)).to eq(3)
+        expect(@calc.place(@comp3)).to eq(7)
+        expect(@calc.place(@comp4)).to eq(5)
+        expect(@calc.place(@comp5)).to eq(4)
+        expect(@calc.place(@comp6)).to eq(6)
+        expect(@calc.place(@comp7)).to eq(2)
       end
     end
 
@@ -56,10 +56,10 @@ describe StreetCompScoreCalculator do
         @score4 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp4, :val_1 => 5)
       end
       it "should calculate the places" do
-        @calc.place(@comp1).should == 1
-        @calc.place(@comp2).should == 2
-        @calc.place(@comp4).should == 2
-        @calc.place(@comp3).should == 4
+        expect(@calc.place(@comp1)).to eq(1)
+        expect(@calc.place(@comp2)).to eq(2)
+        expect(@calc.place(@comp4)).to eq(2)
+        expect(@calc.place(@comp3)).to eq(4)
       end
     end
     describe "and there are 2 judges" do
@@ -89,9 +89,9 @@ describe StreetCompScoreCalculator do
           expect(@calc.total_points(@score3.competitor)).to eq (8) # 3,2,3
         end
         it "converts the place points into place" do
-          @calc.place(@score1.competitor).should == 1
-          @calc.place(@score2.competitor).should == 2
-          @calc.place(@score3.competitor).should == 3
+          expect(@calc.place(@score1.competitor)).to eq(1)
+          expect(@calc.place(@score2.competitor)).to eq(2)
+          expect(@calc.place(@score3.competitor)).to eq(3)
         end
       end
     end

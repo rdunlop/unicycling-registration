@@ -13,8 +13,8 @@ describe "registrants/build/add_events" do
     FactoryGirl.create(:wheel_size_24, id: 3)
     @ability = Object.new
     @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
-    controller.stub(:current_user) { FactoryGirl.create(:user) }
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
     allow(view).to receive(:wizard_path).and_return(wizard_path)
   end
 

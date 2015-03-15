@@ -26,10 +26,10 @@ describe OrderedResultCalculator do
     it "calculates the results the same" do
       @calc = OrderedResultCalculator.new(@competition)
       recalc
-      @tr1.reload.competitor.overall_place.should == 1
-      @tr2.reload.competitor.overall_place.should == 2
-      @tr3.reload.competitor.overall_place.should == 3
-      @tr4.reload.competitor.overall_place.should == 4
+      expect(@tr1.reload.competitor.overall_place).to eq(1)
+      expect(@tr2.reload.competitor.overall_place).to eq(2)
+      expect(@tr3.reload.competitor.overall_place).to eq(3)
+      expect(@tr4.reload.competitor.overall_place).to eq(4)
     end
 
   end
@@ -42,19 +42,19 @@ describe OrderedResultCalculator do
     it "sets the competitor places to same order as the points" do
       recalc
 
-      @tr1.reload.competitor.place.should == 1
-      @tr2.reload.competitor.place.should == 2
-      @tr3.reload.competitor.place.should == 3
-      @tr4.reload.competitor.place.should == 4
+      expect(@tr1.reload.competitor.place).to eq(1)
+      expect(@tr2.reload.competitor.place).to eq(2)
+      expect(@tr3.reload.competitor.place).to eq(3)
+      expect(@tr4.reload.competitor.place).to eq(4)
     end
 
     it "ignores competitors without scores" do
       @comp5 = FactoryGirl.create(:event_competitor, competition: @competition)
       recalc
-      @tr1.reload.competitor.place.should == 1
-      @tr2.reload.competitor.place.should == 2
-      @tr3.reload.competitor.place.should == 3
-      @tr4.reload.competitor.place.should == 4
+      expect(@tr1.reload.competitor.place).to eq(1)
+      expect(@tr2.reload.competitor.place).to eq(2)
+      expect(@tr3.reload.competitor.place).to eq(3)
+      expect(@tr4.reload.competitor.place).to eq(4)
     end
 
     describe "with an ineligible registrant in first place" do
@@ -70,9 +70,9 @@ describe OrderedResultCalculator do
         @tr2.reload
         @tr3.reload
 
-        @tr1.competitor.place.should == 1
-        @tr2.competitor.place.should == 1
-        @tr3.competitor.place.should == 2
+        expect(@tr1.competitor.place).to eq(1)
+        expect(@tr2.competitor.place).to eq(1)
+        expect(@tr3.competitor.place).to eq(2)
       end
     end
   end
@@ -84,10 +84,10 @@ describe OrderedResultCalculator do
     it "Sets the competitor places to the opposite of the points" do
       recalc
 
-      @tr1.reload.competitor.place.should == 4
-      @tr2.reload.competitor.place.should == 3
-      @tr3.reload.competitor.place.should == 2
-      @tr4.reload.competitor.place.should == 1
+      expect(@tr1.reload.competitor.place).to eq(4)
+      expect(@tr2.reload.competitor.place).to eq(3)
+      expect(@tr3.reload.competitor.place).to eq(2)
+      expect(@tr4.reload.competitor.place).to eq(1)
     end
   end
 

@@ -39,7 +39,7 @@ describe ConventionSetup::EventChoicesController do
 
     it "Cannot read event_choices" do
       get :index, {:event_id => @event.id}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 
@@ -47,17 +47,17 @@ describe ConventionSetup::EventChoicesController do
     it "assigns all event_choices as @event_choices" do
       event_choice = EventChoice.create! valid_attributes.merge({:event_id => @event.id})
       get :index, {:event_id => @event.id}
-      assigns(:event_choices).should eq(@event.event_choices)
+      expect(assigns(:event_choices)).to eq(@event.event_choices)
     end
     it "does not show event choices from other events" do
       event_choice = FactoryGirl.create(:event_choice)
       get :index, {:event_id => @event.id}
-      assigns(:event_choices).should eq(@event.event_choices)
+      expect(assigns(:event_choices)).to eq(@event.event_choices)
     end
     it "assigns a new event_choice" do
       event_choice = EventChoice.create! valid_attributes.merge({:event_id => @event.id})
       get :index, {:event_id => @event.id}
-      assigns(:event_choice).should be_a_new(EventChoice)
+      expect(assigns(:event_choice)).to be_a_new(EventChoice)
     end
   end
 
@@ -65,7 +65,7 @@ describe ConventionSetup::EventChoicesController do
     it "assigns the requested event_choice as @event_choice" do
       event_choice = EventChoice.create! valid_attributes
       get :show, {:id => event_choice.to_param}
-      assigns(:event_choice).should eq(event_choice)
+      expect(assigns(:event_choice)).to eq(event_choice)
     end
   end
 
@@ -73,7 +73,7 @@ describe ConventionSetup::EventChoicesController do
     it "assigns the requested event_choice as @event_choice" do
       event_choice = FactoryGirl.create(:event_choice)
       get :edit, {:id => event_choice.to_param}
-      assigns(:event_choice).should eq(event_choice)
+      expect(assigns(:event_choice)).to eq(event_choice)
     end
   end
 
@@ -87,37 +87,37 @@ describe ConventionSetup::EventChoicesController do
 
       it "assigns a newly created event_choice as @event_choice" do
         post :create, {:event_id => @event.id, :event_choice => valid_attributes}
-        assigns(:event_choice).should be_a(EventChoice)
-        assigns(:event_choice).should be_persisted
+        expect(assigns(:event_choice)).to be_a(EventChoice)
+        expect(assigns(:event_choice)).to be_persisted
       end
 
       it "redirects to the created event_choice" do
         post :create, {:event_id => @event.id, :event_choice => valid_attributes}
-        response.should redirect_to(convention_setup_event_event_choices_path(@event))
+        expect(response).to redirect_to(convention_setup_event_event_choices_path(@event))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved event_choice as @event_choice" do
         # Trigger the behavior that occurs when invalid params are submitted
-        EventChoice.any_instance.stub(:valid?).and_return(false)
-        EventChoice.any_instance.stub(:errors).and_return("something")
+        allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
+        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
         post :create, {:event_id => @event.id, :event_choice => {:optional => false}}
-        assigns(:event_choice).should be_a_new(EventChoice)
+        expect(assigns(:event_choice)).to be_a_new(EventChoice)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        EventChoice.any_instance.stub(:valid?).and_return(false)
-        EventChoice.any_instance.stub(:errors).and_return("something")
+        allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
+        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
         post :create, {:event_id => @event.id, :event_choice => {:optional => false}}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
       it "loads the event" do
-        EventChoice.any_instance.stub(:valid?).and_return(false)
-        EventChoice.any_instance.stub(:errors).and_return("something")
+        allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
+        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
         post :create, {:event_id => @event.id, :event_choice => {:optional => false}}
-        assigns(:event).should == @event
+        expect(assigns(:event)).to eq(@event)
       end
     end
 
@@ -151,11 +151,11 @@ describe ConventionSetup::EventChoicesController do
         }.to change(EventChoice, :count).by(1)
         ec = EventChoice.last
         I18n.locale = "en"
-        ec.label.should == "label_en"
-        ec.tooltip.should == "tool_en"
+        expect(ec.label).to eq("label_en")
+        expect(ec.tooltip).to eq("tool_en")
         I18n.locale = "fr"
-        ec.label.should == "label_fr"
-        ec.tooltip.should == "tool_fr"
+        expect(ec.label).to eq("label_fr")
+        expect(ec.tooltip).to eq("tool_fr")
         I18n.locale = "en"
       end
     end
@@ -169,20 +169,20 @@ describe ConventionSetup::EventChoicesController do
         # specifies that the EventChoice created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        EventChoice.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(EventChoice).to receive(:update_attributes).with({})
         put :update, {:id => event_choice.to_param, :event_choice => {'these' => 'params'}}
       end
 
       it "assigns the requested event_choice as @event_choice" do
         event_choice = EventChoice.create! valid_attributes
         put :update, {:id => event_choice.to_param, :event_choice => valid_attributes}
-        assigns(:event_choice).should eq(event_choice)
+        expect(assigns(:event_choice)).to eq(event_choice)
       end
 
       it "redirects to the event_choice" do
         event_choice = EventChoice.create! valid_attributes
         put :update, {:id => event_choice.to_param, :event_choice => valid_attributes}
-        response.should redirect_to([:convention_setup, event_choice])
+        expect(response).to redirect_to([:convention_setup, event_choice])
       end
     end
 
@@ -190,19 +190,19 @@ describe ConventionSetup::EventChoicesController do
       it "assigns the event_choice as @event_choice" do
         event_choice = EventChoice.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        EventChoice.any_instance.stub(:valid?).and_return(false)
-        EventChoice.any_instance.stub(:errors).and_return("something")
+        allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
+        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
         put :update, {:id => event_choice.to_param, :event_choice => {:optional => false}}
-        assigns(:event_choice).should eq(event_choice)
+        expect(assigns(:event_choice)).to eq(event_choice)
       end
 
       it "re-renders the 'edit' template" do
         event_choice = EventChoice.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        EventChoice.any_instance.stub(:valid?).and_return(false)
-        EventChoice.any_instance.stub(:errors).and_return("something")
+        allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
+        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
         put :update, {:id => event_choice.to_param, :event_choice => {:optional => false}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -219,7 +219,7 @@ describe ConventionSetup::EventChoicesController do
       event_choice = FactoryGirl.create(:event_choice)
       event = event_choice.event
       delete :destroy, {:id => event_choice.to_param}
-      response.should redirect_to(convention_setup_event_event_choices_path(event))
+      expect(response).to redirect_to(convention_setup_event_event_choices_path(event))
     end
   end
 

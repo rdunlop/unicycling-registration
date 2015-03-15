@@ -24,7 +24,7 @@ describe StandardSkillEntry do
     std.letter = "a"
     std.points = 1.3
     std.description = "riding holding seatpost, one hand"
-    std.valid?.should == true
+    expect(std.valid?).to eq(true)
   end
   it "can be created from a CSV-based array" do
     s = StandardSkillEntry.new
@@ -33,22 +33,22 @@ describe StandardSkillEntry do
     s.save!
 
     s = StandardSkillEntry.last
-    s.number.should == 307
+    expect(s.number).to eq(307)
     s.letter == "n"
-    s.points.should == 4.8
-    s.description.should == 'jump mount to seat drag in back, feet holding seat'
+    expect(s.points).to eq(4.8)
+    expect(s.description).to eq('jump mount to seat drag in back, feet holding seat')
   end
 
   it "displays a full description" do
     std = FactoryGirl.build(:standard_skill_entry)
-    std.fullDescription.should == std.number.to_s + std.letter + " - riding - 8"
+    expect(std.fullDescription).to eq(std.number.to_s + std.letter + " - riding - 8")
   end
   it "should be a non_riding_skill if >= 100" do
     std = FactoryGirl.build(:standard_skill_entry)
-    std.non_riding_skill.should == false
+    expect(std.non_riding_skill).to eq(false)
 
     std = FactoryGirl.build(:standard_skill_entry, :number => 100)
-    std.non_riding_skill.should == true
+    expect(std.non_riding_skill).to eq(true)
   end
 
   describe "with associated routine entries" do
@@ -57,7 +57,7 @@ describe StandardSkillEntry do
     end
     it "has associated entry" do
       skill = @entry.standard_skill_entry
-      skill.standard_skill_routine_entries.should == [@entry]
+      expect(skill.standard_skill_routine_entries).to eq([@entry])
     end
     it "removes the associated entry upon destroy" do
       skill = @entry.standard_skill_entry

@@ -33,7 +33,7 @@ describe TenantAliasesController do
 
     it "Cannot read aliases" do
       get :index
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 end

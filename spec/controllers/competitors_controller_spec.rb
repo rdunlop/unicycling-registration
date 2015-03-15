@@ -19,7 +19,7 @@ describe CompetitorsController do
     it "assigns all competitors as @competitors" do
       competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
       get :index, {:competition_id => @ec.id}
-      assigns(:competitors).should == [competitor]
+      expect(assigns(:competitors)).to eq([competitor])
     end
   end
 
@@ -27,13 +27,13 @@ describe CompetitorsController do
     it "assigns the requested competitor as @competitor" do
       competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
       get :edit, {:id => competitor.to_param}
-      assigns(:competitor).should eq(competitor)
+      expect(assigns(:competitor)).to eq(competitor)
     end
   end
   describe "GET new" do
     it "assigns a new competitor as @competitor" do
       get :new, {:competition_id => @ec.to_param}
-      assigns(:competitor).should be_a_new(Competitor)
+      expect(assigns(:competitor)).to be_a_new(Competitor)
     end
   end
 
@@ -47,8 +47,8 @@ describe CompetitorsController do
 
       it "assigns a newly created competitor as @competitor" do
         post :create, {:competitor => valid_attributes, :competition_id => @ec.id}
-        assigns(:competitor).should be_a(Competitor)
-        assigns(:competitor).should be_persisted
+        expect(assigns(:competitor)).to be_a(Competitor)
+        expect(assigns(:competitor)).to be_persisted
       end
 
       it "creates associated members also" do
@@ -66,7 +66,7 @@ describe CompetitorsController do
 
       it "redirects back to index" do
         post :create, {:competitor => valid_attributes, :competition_id => @ec.id}
-        response.should redirect_to(competition_competitors_path(@ec))
+        expect(response).to redirect_to(competition_competitors_path(@ec))
       end
       it "can create with custom external id and name" do
         reg1 = FactoryGirl.create(:competitor)
@@ -114,7 +114,7 @@ describe CompetitorsController do
           }.to change(Competitor, :count).by(7)
 
           @ec.competitors.each_with_index do |c, i|
-            c.position.should == (i + 1)
+            expect(c.position).to eq(i + 1)
           end
         end
       end
@@ -135,17 +135,17 @@ describe CompetitorsController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved competitor as @competitor" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Competitor.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Competitor).to receive(:save).and_return(false)
         post :create, {:competitor => {:custom_name => "name"}, :competition_id => @ec.id}
-        assigns(:competitor).should be_a_new(Competitor)
+        expect(assigns(:competitor)).to be_a_new(Competitor)
       end
 
       it "re-renders the 'competitors#new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Competitor.any_instance.stub(:valid?).and_return(false)
-        Competitor.any_instance.stub(:errors).and_return("anything")
+        allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
+        allow_any_instance_of(Competitor).to receive(:errors).and_return("anything")
         post :create, {:competitor => {:custom_name => "name"}, :competition_id => @ec.id}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -158,20 +158,20 @@ describe CompetitorsController do
         # specifies that the Competitor created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Competitor.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(Competitor).to receive(:update_attributes).with({})
         put :update, {:id => competitor.to_param, :competitor => {'these' => 'params'}}
       end
 
       it "assigns the requested competitor as @competitor" do
         competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         put :update, {:id => competitor.to_param, :competitor => valid_attributes}
-        assigns(:competitor).should eq(competitor)
+        expect(assigns(:competitor)).to eq(competitor)
       end
 
       it "redirects to the competition" do
         competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         put :update, {:id => competitor.to_param, :competitor => valid_attributes}
-        response.should redirect_to(competition_competitors_path(competitor.competition))
+        expect(response).to redirect_to(competition_competitors_path(competitor.competition))
       end
     end
 
@@ -179,19 +179,19 @@ describe CompetitorsController do
       it "assigns the competitor as @competitor" do
         competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         # Trigger the behavior that occurs when invalid params are submitted
-        Competitor.any_instance.stub(:valid?).and_return(false)
-        Competitor.any_instance.stub(:errors).and_return("anything")
+        allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
+        allow_any_instance_of(Competitor).to receive(:errors).and_return("anything")
         put :update, {:id => competitor.to_param, :competitor => {:custom_name => "name"}}
-        assigns(:competitor).should eq(competitor)
+        expect(assigns(:competitor)).to eq(competitor)
       end
 
       it "re-renders the 'events#edit' template" do
         competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
         # Trigger the behavior that occurs when invalid params are submitted
-        Competitor.any_instance.stub(:valid?).and_return(false)
-        Competitor.any_instance.stub(:errors).and_return("anything")
+        allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
+        allow_any_instance_of(Competitor).to receive(:errors).and_return("anything")
         put :update, {:id => competitor.to_param, :competitor => {:custom_name => "name"}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -207,7 +207,7 @@ describe CompetitorsController do
     it "redirects to the competitor#new page" do
       competitor = FactoryGirl.create(:event_competitor, :competition => @ec)
       delete :destroy, {:id => competitor.to_param}
-      response.should redirect_to(competition_competitors_path(@ec))
+      expect(response).to redirect_to(competition_competitors_path(@ec))
     end
   end
 end

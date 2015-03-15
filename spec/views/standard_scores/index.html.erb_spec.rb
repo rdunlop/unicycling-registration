@@ -12,6 +12,6 @@ describe "standard_scores/index" do
 
     render
 
-    rendered.should match(/Robin/)
+    expect(rendered).to match(/Robin/)
   end
 end

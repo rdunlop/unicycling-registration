@@ -9,14 +9,14 @@ describe StandardSkillEntriesController do
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
   describe "GET 'upload_file'" do
     it "returns error" do
       get 'upload_file'
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
 
     it "succeeds as super_admin" do
@@ -25,7 +25,7 @@ describe StandardSkillEntriesController do
       sign_in @super_user
 
       get 'upload_file'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 end

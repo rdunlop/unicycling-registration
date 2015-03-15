@@ -24,7 +24,7 @@ describe ConventionSetup::EventCategoriesController do
 
     it "Cannot read event_categories" do
       get :index, {:event_id => @event.id}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 
@@ -32,17 +32,17 @@ describe ConventionSetup::EventCategoriesController do
     it "assigns all event_categories as @event_categories" do
       event_category = EventCategory.create! valid_attributes.merge({:event_id => @event.id})
       get :index, {:event_id => @event.id}
-      assigns(:event_categories).should eq(@event.event_categories)
+      expect(assigns(:event_categories)).to eq(@event.event_categories)
     end
     it "does not show event choices from other events" do
       event_category = FactoryGirl.create(:event).event_categories.first
       get :index, {:event_id => @event.id}
-      assigns(:event_categories).should eq(@event.event_categories)
+      expect(assigns(:event_categories)).to eq(@event.event_categories)
     end
     it "assigns a new event_category" do
       event_category = EventCategory.create! valid_attributes.merge({:event_id => @event.id})
       get :index, {:event_id => @event.id}
-      assigns(:event_category).should be_a_new(EventCategory)
+      expect(assigns(:event_category)).to be_a_new(EventCategory)
     end
   end
 
@@ -50,7 +50,7 @@ describe ConventionSetup::EventCategoriesController do
     it "assigns the requested event_category as @event_category" do
       event_category = @event.event_categories.first
       get :edit, {:id => event_category.to_param}
-      assigns(:event_category).should eq(event_category)
+      expect(assigns(:event_category)).to eq(event_category)
     end
   end
 
@@ -64,34 +64,34 @@ describe ConventionSetup::EventCategoriesController do
 
       it "assigns a newly created event_category as @event_category" do
         post :create, {:event_id => @event.id, :event_category => valid_attributes}
-        assigns(:event_category).should be_a(EventCategory)
-        assigns(:event_category).should be_persisted
+        expect(assigns(:event_category)).to be_a(EventCategory)
+        expect(assigns(:event_category)).to be_persisted
       end
 
       it "redirects to the created event_category" do
         post :create, {:event_id => @event.id, :event_category => valid_attributes}
-        response.should redirect_to(convention_setup_event_event_categories_path(@event))
+        expect(response).to redirect_to(convention_setup_event_event_categories_path(@event))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved event_category as @event_category" do
         # Trigger the behavior that occurs when invalid params are submitted
-        EventCategory.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
         post :create, {:event_id => @event.id, :event_category => {:name => "cat name"}}
-        assigns(:event_category).should be_a_new(EventCategory)
+        expect(assigns(:event_category)).to be_a_new(EventCategory)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        EventCategory.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
         post :create, {:event_id => @event.id, :event_category => {:name => "cat name"}}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
       it "loads the event" do
-        EventCategory.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
         post :create, {:event_id => @event.id, :event_category => {:name => "cat name"}}
-        assigns(:event).should == @event
+        expect(assigns(:event)).to eq(@event)
       end
     end
   end
@@ -104,20 +104,20 @@ describe ConventionSetup::EventCategoriesController do
         # specifies that the EventCategory created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        EventCategory.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(EventCategory).to receive(:update_attributes).with({})
         put :update, {:id => event_category.to_param, :event_category => {'these' => 'params'}}
       end
 
       it "assigns the requested event_category as @event_category" do
         event_category = @event.event_categories.first
         put :update, {:id => event_category.to_param, :event_category => valid_attributes}
-        assigns(:event_category).should eq(event_category)
+        expect(assigns(:event_category)).to eq(event_category)
       end
 
       it "redirects to the event" do
         event_category = @event.event_categories.first
         put :update, {:id => event_category.to_param, :event_category => valid_attributes}
-        response.should redirect_to(convention_setup_event_event_categories_path(event_category.event))
+        expect(response).to redirect_to(convention_setup_event_event_categories_path(event_category.event))
       end
     end
 
@@ -125,17 +125,17 @@ describe ConventionSetup::EventCategoriesController do
       it "assigns the event_category as @event_category" do
         event_category = @event.event_categories.first
         # Trigger the behavior that occurs when invalid params are submitted
-        EventCategory.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
         put :update, {:id => event_category.to_param, :event_category => {:name => "cat name"}}
-        assigns(:event_category).should eq(event_category)
+        expect(assigns(:event_category)).to eq(event_category)
       end
 
       it "re-renders the 'edit' template" do
         event_category = @event.event_categories.first
         # Trigger the behavior that occurs when invalid params are submitted
-        EventCategory.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
         put :update, {:id => event_category.to_param, :event_category => {:name => "cat name"}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -152,7 +152,7 @@ describe ConventionSetup::EventCategoriesController do
       event_category = FactoryGirl.create(:event_category, :event => @event, :position => 2)
       event = event_category.event
       delete :destroy, {:id => event_category.to_param}
-      response.should redirect_to(convention_setup_event_event_categories_path(event))
+      expect(response).to redirect_to(convention_setup_event_event_categories_path(event))
     end
   end
 end

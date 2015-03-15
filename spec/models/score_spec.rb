@@ -105,7 +105,7 @@ describe Score do
     it "Must have a value above 0" do
       subject.val_1 = -1
       subject.val_2 = -1
-      subject.valid?.should == false
+      expect(subject.valid?).to eq(false)
     end
 
     it "should total the values to create the Total" do
@@ -114,7 +114,7 @@ describe Score do
       subject.val_3 = 3.0
       subject.val_4 = 4.0
 
-      subject.total.should == 10
+      expect(subject.total).to eq(10)
     end
   end
 end
@@ -129,7 +129,7 @@ describe Score do
 
     score2 = FactoryGirl.build(:score, :judge => score.judge, :competitor => score.competitor)
 
-    score2.valid?.should == false
+    expect(score2.valid?).to eq(false)
   end
 
   it "should store the judge" do
@@ -138,12 +138,12 @@ describe Score do
     score.val_2 = 2.0
     score.val_3 = 3.0
     score.val_4 = 4.0
-    score.valid?.should == false
-    score.total.should == 0
+    expect(score.valid?).to eq(false)
+    expect(score.total).to eq(0)
     score.competitor_id = 4
-    score.valid?.should == false
+    expect(score.valid?).to eq(false)
     score.judge = @judge
-    score.valid?.should == true
+    expect(score.valid?).to eq(true)
   end
   it "should validate the bounds of the Values" do
     score = Score.new
@@ -153,9 +153,9 @@ describe Score do
     score.val_4 = 4.0
     score.competitor_id = 4
     score.judge = @judge
-    score.valid?.should == true
+    expect(score.valid?).to eq(true)
     score.val_1 = 11.0
-    score.valid?.should == false
+    expect(score.valid?).to eq(false)
   end
   describe "when the score is based on a judge with judge_type" do
     before(:each) do
@@ -172,35 +172,35 @@ describe Score do
     it "Should validate the bounds of the values when the judge_type specifies different max" do
       score = @score
 
-      score.valid?.should == true
+      expect(score.valid?).to eq(true)
       score.val_1 = 10.0
-      score.valid?.should == false
+      expect(score.valid?).to eq(false)
       score.val_1 = 5.0
-      score.valid?.should == true
+      expect(score.valid?).to eq(true)
     end
     it "should check each column separately for max" do
       score = @score
-      score.valid?.should == true
+      expect(score.valid?).to eq(true)
 
       score.val_1 = 6.0
-      score.valid?.should == false
+      expect(score.valid?).to eq(false)
       score.val_1 = 5.0
-      score.valid?.should == true
+      expect(score.valid?).to eq(true)
 
       score.val_2 = 7.0
-      score.valid?.should == false
+      expect(score.valid?).to eq(false)
       score.val_2 = 2.0
-      score.valid?.should == true
+      expect(score.valid?).to eq(true)
 
       score.val_3 = 9.0
-      score.valid?.should == false
+      expect(score.valid?).to eq(false)
       score.val_3 = 7.0
-      score.valid?.should == true
+      expect(score.valid?).to eq(true)
 
       score.val_4 = 21.0
-      score.valid?.should == false
+      expect(score.valid?).to eq(false)
       score.val_4 = 20.0
-      score.valid?.should == true
+      expect(score.valid?).to eq(true)
     end
   end
 end

@@ -128,7 +128,7 @@ describe Competitor do
     comp.registrants << reg
     comp.competition = competition
     comp.position = 1
-    comp.save.should == true
+    expect(comp.save).to eq(true)
   end
   it "should modify the other competitor's position" do
     competition = FactoryGirl.create(:competition)
@@ -139,67 +139,67 @@ describe Competitor do
     comp.registrants << reg1
     comp.competition = competition
     comp.position = 1
-    comp.save.should == true
+    expect(comp.save).to eq(true)
 
     comp = Competitor.new
     comp.registrants << reg2
     comp.competition = competition
     comp.position = 1
-    comp.save.should == true
+    expect(comp.save).to eq(true)
 
     comps = competition.competitors
-    comps.count.should == 2
-    comps[0].position.should == 1
-    comps[1].position.should == 2
+    expect(comps.count).to eq(2)
+    expect(comps[0].position).to eq(1)
+    expect(comps[1].position).to eq(2)
   end
   it "should have name/id from the registrant" do
     reg  = @comp.registrants.first
 
-    @comp.name.should == reg.name
-    @comp.bib_number.should == reg.external_id.to_s
+    expect(@comp.name).to eq(reg.name)
+    expect(@comp.bib_number).to eq(reg.external_id.to_s)
   end
   it "should be elgiible" do
-    @comp.ineligible.should == false
+    expect(@comp.ineligible).to eq(false)
   end
   it "should not set the external name if it is a blank-string" do
     @comp.custom_name = ""
     reg = @comp.registrants.first
 
-    @comp.bib_number.should == reg.external_id.to_s
-    @comp.name.should == reg.name
+    expect(@comp.bib_number).to eq(reg.external_id.to_s)
+    expect(@comp.name).to eq(reg.name)
   end
   it "should allow setting the custom_name to nil" do
     @comp.custom_name = nil
-    @comp.valid?.should == true
+    expect(@comp.valid?).to eq(true)
   end
   it "must have 3 competitors to allow a custom name" do
     @comp.custom_name = "Sargent Pepper"
-    @comp.valid?.should == false
+    expect(@comp.valid?).to eq(false)
     member2 = @comp.members.build
     member3 = @comp.members.build
     member2.registrant = FactoryGirl.create(:registrant)
     member3.registrant = FactoryGirl.create(:registrant)
-    @comp.valid?.should == true
-    @comp.valid?.should == true
-    @comp.name.should == "Sargent Pepper"
+    expect(@comp.valid?).to eq(true)
+    expect(@comp.valid?).to eq(true)
+    expect(@comp.name).to eq("Sargent Pepper")
   end
   it "setting the same position for another competitor should modify the original competitor" do
     c2 = FactoryGirl.build(:event_competitor, :competition => @comp.competition, :position => @comp.position)
 
-    c2.valid?.should == true
-    c2.save.should == true
+    expect(c2.valid?).to eq(true)
+    expect(c2.save).to eq(true)
 
     comp_again = Competitor.find(@comp.id)
-    comp_again.position.should_not == c2.position
+    expect(comp_again.position).not_to eq(c2.position)
   end
   describe "when checking the export_id field" do
     it "should return the registrant when only one" do
-      @comp.export_id.should == @comp.registrants.first.external_id
+      expect(@comp.export_id).to eq(@comp.registrants.first.external_id)
     end
     it "should return the first registrant when two registrants" do
       @comp.registrants << FactoryGirl.create(:registrant)
       @comp.save!
-      @comp.export_id.should == @comp.registrants.first.external_id
+      expect(@comp.export_id).to eq(@comp.registrants.first.external_id)
     end
   end
 
@@ -208,8 +208,8 @@ describe Competitor do
 
     member.destroy
     @comp.reload
-    @comp.name.should == "(No registrants)"
-    @comp.bib_number.should == "(No registrants)"
+    expect(@comp.name).to eq("(No registrants)")
+    expect(@comp.bib_number).to eq("(No registrants)")
   end
 
   describe "when it has multiple members" do
@@ -225,10 +225,10 @@ describe Competitor do
       @reg2 = member2.registrant
     end
     it "should display the external id's for all members" do
-      @comp.bib_number.should == (@reg1.external_id.to_s + "," + @reg2.external_id.to_s)
+      expect(@comp.bib_number).to eq(@reg1.external_id.to_s + "," + @reg2.external_id.to_s)
     end
     it "should display the ages for all members (when they are the same)" do
-      @comp.age.should == (@reg1.age)
+      expect(@comp.age).to eq(@reg1.age)
     end
 
     it "should store the mimimum bib_number" do
@@ -243,11 +243,11 @@ describe Competitor do
       member3 = FactoryGirl.create(:member, :competitor => @comp2, :registrant => @reg3)
       @comp2.reload
 
-      @comp2.age.should == @reg3.age
+      expect(@comp2.age).to eq(@reg3.age)
     end
     it "should display '(mixed)', if there are multiple members (even if they are the same gender)" do
       # this is so that the overall placing calculation works properly with mixed-gender groups
-      @comp.gender.should == "(mixed)"
+      expect(@comp.gender).to eq("(mixed)")
     end
 
     it "can determine the majority country" do
@@ -258,7 +258,7 @@ describe Competitor do
       expect(@comp.majority_country([nil, nil])).to eq(nil)
     end
     it "should display the source country" do
-      @comp.country.should == @reg1.country
+      expect(@comp.country).to eq(@reg1.country)
     end
 
     it "should display (mixed) if both genders exist" do
@@ -267,13 +267,13 @@ describe Competitor do
       member3 = FactoryGirl.create(:member, :competitor => @comp, :registrant => @reg3)
       @comp.reload
 
-      @comp.gender.should == "(mixed)"
+      expect(@comp.gender).to eq("(mixed)")
     end
 
     it "should respond to member_has_bib_number?" do
-      @comp.member_has_bib_number?(@reg1.bib_number).should == true
-      @comp.member_has_bib_number?(@reg2.bib_number).should == true
-      @comp.member_has_bib_number?(-1).should == false
+      expect(@comp.member_has_bib_number?(@reg1.bib_number)).to eq(true)
+      expect(@comp.member_has_bib_number?(@reg2.bib_number)).to eq(true)
+      expect(@comp.member_has_bib_number?(-1)).to eq(false)
     end
   end
 
@@ -301,19 +301,19 @@ describe Competitor do
     end
 
     it "should be able to access the reg via event" do
-      @competition.registrants.should == [@reg]
+      expect(@competition.registrants).to eq([@reg])
     end
     it "should be able to access the event via reg" do
-      @reg.competitions.should == [@competition]
+      expect(@reg.competitions).to eq([@competition])
     end
     it "should be able to access the competitors via competition" do
-      @competition.competitors.should == [@cr]
+      expect(@competition.competitors).to eq([@cr])
     end
     it "should be able to access the competitors via registrant" do
-      @reg.competitors.should == [@cr]
+      expect(@reg.competitors).to eq([@cr])
     end
     it "should be able to access the scores via competitor" do
-      @cr.scores.should == [@score]
+      expect(@cr.scores).to eq([@score])
     end
   end
   describe "with a standard execution score" do
@@ -322,7 +322,7 @@ describe Competitor do
     end
 
     it "should be able to get the scores from the competitor" do
-      @st_score.competitor.standard_execution_scores.should == [@st_score]
+      expect(@st_score.competitor.standard_execution_scores).to eq([@st_score])
     end
   end
   describe "with a score" do
@@ -331,9 +331,9 @@ describe Competitor do
     end
     it "should delete the score when the associated competitor is deleted" do
       @comp = @score.competitor
-      Score.count.should == 1
+      expect(Score.count).to eq(1)
       @comp.destroy
-      Score.count.should == 0
+      expect(Score.count).to eq(0)
     end
   end
   describe "with a boundary_score" do
@@ -342,9 +342,9 @@ describe Competitor do
     end
     it "should delete the boundary_score when the associated competitor is deleted" do
       @comp = @score.competitor
-      BoundaryScore.count.should == 1
+      expect(BoundaryScore.count).to eq(1)
       @comp.destroy
-      BoundaryScore.count.should == 0
+      expect(BoundaryScore.count).to eq(0)
     end
   end
   describe "with a distance attempt" do
@@ -355,45 +355,45 @@ describe Competitor do
     it "should be accessible from the competitor" do
       da = FactoryGirl.create(:distance_attempt, :competitor => @comp)
 
-      @comp.distance_attempts.should == [da]
+      expect(@comp.distance_attempts).to eq([da])
     end
 
     it "should delete related distance_attempts if the competitor is deleted" do
       da = FactoryGirl.create(:distance_attempt)
 
       comp = da.competitor
-      DistanceAttempt.count.should == 1
+      expect(DistanceAttempt.count).to eq(1)
       Delorean.jump 2
 
       comp.destroy
-      DistanceAttempt.count.should == 0
+      expect(DistanceAttempt.count).to eq(0)
     end
 
     it "should indicate double_fault if two attempts at the same distance are found" do
-      @comp.double_fault?.should == false
+      expect(@comp.double_fault?).to eq(false)
       da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
-      @comp.reload.double_fault?.should == false
+      expect(@comp.reload.double_fault?).to eq(false)
       Delorean.jump 2
       da2 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
 
-      @comp.reload.double_fault?.should == true
+      expect(@comp.reload.double_fault?).to eq(true)
     end
     it "should NOT indicate double_fault if two consecutive attempts at different distances are found" do
-      @comp.double_fault?.should == false
+      expect(@comp.double_fault?).to eq(false)
       da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
-      @comp.reload.double_fault?.should == false
+      expect(@comp.reload.double_fault?).to eq(false)
       Delorean.jump 2
       da2 = FactoryGirl.create(:distance_attempt, :distance => da1.distance + 1, :competitor => @comp, :fault => true)
 
-      @comp.reload.double_fault?.should == false
+      expect(@comp.reload.double_fault?).to eq(false)
     end
 
     it "should return the max attempted distance" do
-      @comp.max_attempted_distance.should == 0
-      @comp.max_successful_distance.should == 0
+      expect(@comp.max_attempted_distance).to eq(0)
+      expect(@comp.max_successful_distance).to eq(0)
       da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
-      @comp.reload.max_attempted_distance.should == da1.distance
-      @comp.reload.max_successful_distance.should == 0
+      expect(@comp.reload.max_attempted_distance).to eq(da1.distance)
+      expect(@comp.reload.max_successful_distance).to eq(0)
     end
 
     it "should return the attempts is descending distance order" do
@@ -401,17 +401,17 @@ describe Competitor do
       da2 = FactoryGirl.create(:distance_attempt, :distance => 2, :competitor => @comp, :fault => false)
       da3 = FactoryGirl.create(:distance_attempt, :distance => 3, :competitor => @comp, :fault => false)
 
-      @comp.distance_attempts.should == [da3, da2, da1]
+      expect(@comp.distance_attempts).to eq([da3, da2, da1])
     end
     it "should return the attempts in descending attempt order (if the same distance)" do
       da1 = FactoryGirl.create(:distance_attempt, :distance => 1, :competitor => @comp, :fault => true)
       da2 = FactoryGirl.create(:distance_attempt, :distance => 1, :competitor => @comp, :fault => false)
 
-      @comp.distance_attempts.should == [da2, da1]
+      expect(@comp.distance_attempts).to eq([da2, da1])
     end
 
     it "should describe the status clearly" do
-      @comp.distance_attempt_status.should == "Not Attempted"
+      expect(@comp.distance_attempt_status).to eq("Not Attempted")
     end
 
     describe "when attempts have already been made" do
@@ -425,18 +425,18 @@ describe Competitor do
       it "should not be allowed to attempt a smaller distance" do
         da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 5)
 
-        da.valid?.should == false
+        expect(da.valid?).to eq(false)
       end
       it "should return the max successful distance" do
-        @comp.max_successful_distance.should == 10
+        expect(@comp.max_successful_distance).to eq(10)
       end
 
       it "should not allow another attempt when in double-fault" do
         FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
         da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 25, :fault => false)
 
-        @comp.reload.double_fault?.should == true
-        da.valid?.should == false
+        expect(@comp.reload.double_fault?).to eq(true)
+        expect(da.valid?).to eq(false)
       end
 
       describe "when there are 2 faults" do
@@ -445,11 +445,11 @@ describe Competitor do
         end
         it "should allow the 2nd attempt to also be a fault" do
 
-          Competitor.find(@comp).double_fault?.should == true
-          @da2.valid?.should == true
+          expect(Competitor.find(@comp).double_fault?).to eq(true)
+          expect(@da2.valid?).to eq(true)
         end
         it "should describe the status" do
-          @comp.reload.distance_attempt_status.should == "Finished. Final Score 10"
+          expect(@comp.reload.distance_attempt_status).to eq("Finished. Final Score 10")
         end
       end
 
@@ -460,11 +460,11 @@ describe Competitor do
 
         da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 25, :fault => false)
 
-        da.valid?.should == true
+        expect(da.valid?).to eq(true)
       end
 
       it "should describe its status clearly" do
-        @comp.reload.distance_attempt_status.should == "Fault. Next Distance 15+"
+        expect(@comp.reload.distance_attempt_status).to eq("Fault. Next Distance 15+")
       end
 
       describe "the last attempt was a success" do
@@ -472,7 +472,7 @@ describe Competitor do
           FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 20, :fault => false)
         end
         it "should have a nice status" do
-          @comp.reload.distance_attempt_status.should == "Success. Next Distance 21+"
+          expect(@comp.reload.distance_attempt_status).to eq("Success. Next Distance 21+")
         end
       end
 
@@ -513,7 +513,7 @@ describe Competitor do
     end
 
     it "should be ineligible itself" do
-      @comp.ineligible.should == true
+      expect(@comp.ineligible).to eq(true)
     end
   end
 end

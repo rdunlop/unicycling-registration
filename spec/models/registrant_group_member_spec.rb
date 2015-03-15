@@ -24,25 +24,25 @@ describe RegistrantGroupMember do
   end
 
   it "has a valid factory" do
-    @rgm.valid?.should == true
+    expect(@rgm.valid?).to eq(true)
   end
 
   it "registrant is required" do
     @rgm.registrant = nil
-    @rgm.valid?.should == false
+    expect(@rgm.valid?).to eq(false)
   end
 
   it "registrant_group is required" do
     @rgm.registrant_group = nil
-    @rgm.valid?.should == false
+    expect(@rgm.valid?).to eq(false)
   end
 
   it "describes itself as the group" do
-    @rgm.to_s.should == @rg.name
+    expect(@rgm.to_s).to eq(@rg.name)
   end
 
   it "cannot have the same member twice in the same group" do
     @rgm2 = FactoryGirl.build(:registrant_group_member, :registrant => @rgm.registrant, :registrant_group => @rg)
-    @rgm2.valid?.should == false
+    expect(@rgm2.valid?).to eq(false)
   end
 end

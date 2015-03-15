@@ -32,7 +32,7 @@ describe EventConfigurationsController do
     it "Cannot edit configuration" do
       event_configuration = EventConfiguration.create! valid_attributes
       get :base_settings, {:id => event_configuration.to_param}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
 
     describe "POST 'test_mode_role'" do
@@ -41,18 +41,18 @@ describe EventConfigurationsController do
       end
       it "redirects to root" do
         post 'test_mode_role', role: "normal_user"
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
       end
       it "changes my user to admin" do
         post 'test_mode_role', :role => "admin"
         @user.reload
-        @user.has_role?(:admin).should == true
+        expect(@user.has_role?(:admin)).to eq(true)
       end
       it "cannot change if config test_mode is disabled" do
         FactoryGirl.create(:event_configuration, :test_mode => false)
         post 'test_mode_role', role: "admin"
         @user.reload
-        @user.has_role?(:admin).should == false
+        expect(@user.has_role?(:admin)).to eq(false)
       end
     end
   end

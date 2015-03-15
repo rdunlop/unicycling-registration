@@ -10,11 +10,11 @@ describe "welcome/help" do
     sign_in @user
     @contact_form = ContactForm.new
     render
-    rendered.should match(/Help/)
+    expect(rendered).to match(/Help/)
   end
   it "should be able to display when not signed in" do
     @contact_form = ContactForm.new
     render
-    rendered.should match(/Help/)
+    expect(rendered).to match(/Help/)
   end
 end

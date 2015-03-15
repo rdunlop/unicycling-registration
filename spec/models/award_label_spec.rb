@@ -28,27 +28,27 @@ describe AwardLabel do
   end
 
   it "has a valid factory" do
-    @al.valid?.should == true
+    expect(@al.valid?).to eq(true)
   end
 
   it "must have a registrant" do
     @al.registrant_id = nil
-    @al.valid?.should == false
+    expect(@al.valid?).to eq(false)
   end
 
   it "must have a user" do
     @al.user_id = nil
-    @al.valid?.should == false
+    expect(@al.valid?).to eq(false)
   end
 
   it "must have a place" do
     @al.place = nil
-    @al.valid?.should == false
+    expect(@al.valid?).to eq(false)
   end
 
   it "must have a positive place" do
     @al.place = 0
-    @al.valid?.should == false
+    expect(@al.valid?).to eq(false)
   end
 end
 
@@ -70,8 +70,8 @@ describe AwardLabel do
       @al.populate_from_competitor(@comp, @reg, 1)
     end
     it "Can create the awards label from a competitor" do
-      @al.line_1.should == "#{@reg.first_name} #{@reg.last_name}"
-      @al.valid?.should == true
+      expect(@al.line_1).to eq("#{@reg.first_name} #{@reg.last_name}")
+      expect(@al.valid?).to eq(true)
     end
 
     it "displays both names if in a pair" do
@@ -80,7 +80,7 @@ describe AwardLabel do
       allow(@comp).to receive(:registrants).and_return([@reg, @reg2])
 
       @al.populate_from_competitor(@comp, @reg, 1)
-      @al.line_1.should == "#{@reg.first_name} #{@reg.last_name} & #{@reg2.first_name} #{@reg2.last_name}"
+      expect(@al.line_1).to eq("#{@reg.first_name} #{@reg.last_name} & #{@reg2.first_name} #{@reg2.last_name}")
     end
 
     it "displays the award_title_name as line 2 for freestyle events" do
@@ -91,7 +91,7 @@ describe AwardLabel do
       competition.save!
 
       @al.populate_from_competitor(@comp, @reg, 1)
-      @al.line_2.should == "Individual"
+      expect(@al.line_2).to eq("Individual")
     end
 
     it "displays the award subtitle as line 4" do
@@ -102,13 +102,13 @@ describe AwardLabel do
       competition.save!
 
       @al.populate_from_competitor(@comp, @reg, 1)
-      @al.line_4.should == "Intermediate Club"
+      expect(@al.line_4).to eq("Intermediate Club")
     end
 
     it "displays the team name as line 3" do
       @comp.custom_name = "Robin Team"
       @al.populate_from_competitor(@comp, @reg, 1)
-      @al.line_3.should == "Robin Team"
+      expect(@al.line_3).to eq("Robin Team")
     end
 
     describe "when the competitor has expert results" do
@@ -120,38 +120,38 @@ describe AwardLabel do
       it "uses the age group and the gender as line 4" do
         allow(@comp).to receive(:age_group_entry_description).and_return("This is the age group")
         @al.populate_from_competitor(@comp, @reg, 3, false)
-        @al.line_4.should == "This is the age group"
+        expect(@al.line_4).to eq("This is the age group")
       end
 
       it "sets the age group to Expert Male when expert" do
         @al.populate_from_competitor(@comp, @reg, 3, true)
-        @al.line_4.should == "Expert Male"
+        expect(@al.line_4).to eq("Expert Male")
       end
     end
 
     it "stores the competitor.result as details, and line 5" do
       @al.populate_from_competitor(@comp, @reg, 1)
-      @al.line_5.should == "Some Result"
+      expect(@al.line_5).to eq("Some Result")
     end
 
     it "sets the award place from the competitor" do
       @al.populate_from_competitor(@comp, @reg, 2)
-      @al.place.should == 2
+      expect(@al.place).to eq(2)
     end
 
     it "translates from places to line6" do
       @al.place = 1
-      @al.line_6.should == "1st Place"
+      expect(@al.line_6).to eq("1st Place")
       @al.place = 2
-      @al.line_6.should == "2nd Place"
+      expect(@al.line_6).to eq("2nd Place")
       @al.place = 3
-      @al.line_6.should == "3rd Place"
+      expect(@al.line_6).to eq("3rd Place")
       @al.place = 4
-      @al.line_6.should == "4th Place"
+      expect(@al.line_6).to eq("4th Place")
       @al.place = 5
-      @al.line_6.should == "5th Place"
+      expect(@al.line_6).to eq("5th Place")
       @al.place = 6
-      @al.line_6.should == "6th Place"
+      expect(@al.line_6).to eq("6th Place")
     end
   end
 end

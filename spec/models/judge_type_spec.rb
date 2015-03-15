@@ -34,18 +34,18 @@ describe JudgeType do
     jt.name = "Presentation"
     jt.event_class = "Freestyle"
     jt.boundary_calculation_enabled = false
-    jt.valid?.should == true
+    expect(jt.valid?).to eq(true)
   end
 
   it "destroys the judge when it is destroyed" do
     judge = FactoryGirl.create(:judge)
     jt = judge.judge_type
 
-    Judge.count.should == 1
+    expect(Judge.count).to eq(1)
 
     jt.destroy
 
-    Judge.count.should == 0
+    expect(Judge.count).to eq(0)
   end
   it "requires limits to be specified" do
     jt = JudgeType.new
@@ -57,22 +57,22 @@ describe JudgeType do
     jt.name = "Presentation"
     jt.val_1_max = nil
     jt.boundary_calculation_enabled = false
-    jt.valid?.should == false
+    expect(jt.valid?).to eq(false)
     jt.val_1_max = 15
-    jt.valid?.should == true
+    expect(jt.valid?).to eq(true)
   end
   it "require event_class" do
     jt = FactoryGirl.build(:judge_type)
     ec = jt.event_class
     jt.event_class = nil
-    jt.valid?.should == false
+    expect(jt.valid?).to eq(false)
     jt.event_class = ec
-    jt.valid?.should == true
+    expect(jt.valid?).to eq(true)
   end
   it "allows boundary_calculation_enabled" do
     jt = FactoryGirl.build(:judge_type)
     jt.boundary_calculation_enabled = true
-    jt.valid?.should == false # XXX Boundary Scores are disabled
+    expect(jt.valid?).to eq(false) # XXX Boundary Scores are disabled
   end
 
   it "can convert places into points" do

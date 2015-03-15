@@ -28,8 +28,8 @@ describe ExpenseGroupsController do
     it "assigns all expense_groups as @expense_groups" do
       expense_group = ExpenseGroup.create! valid_attributes
       get :index, {}
-      assigns(:expense_groups).should eq([expense_group])
-      assigns(:expense_group).should be_a_new(ExpenseGroup)
+      expect(assigns(:expense_groups)).to eq([expense_group])
+      expect(assigns(:expense_group)).to be_a_new(ExpenseGroup)
     end
   end
 
@@ -37,7 +37,7 @@ describe ExpenseGroupsController do
     it "assigns the requested expense_group as @expense_group" do
       expense_group = ExpenseGroup.create! valid_attributes
       get :edit, {:id => expense_group.to_param}
-      assigns(:expense_group).should eq(expense_group)
+      expect(assigns(:expense_group)).to eq(expense_group)
     end
   end
 
@@ -51,30 +51,30 @@ describe ExpenseGroupsController do
 
       it "assigns a newly created expense_group as @expense_group" do
         post :create, {:expense_group => valid_attributes}
-        assigns(:expense_group).should be_a(ExpenseGroup)
-        assigns(:expense_group).should be_persisted
-        assigns(:expense_group).group_name.should == "group_en"
+        expect(assigns(:expense_group)).to be_a(ExpenseGroup)
+        expect(assigns(:expense_group)).to be_persisted
+        expect(assigns(:expense_group).group_name).to eq("group_en")
       end
 
       it "redirects to the created expense_group" do
         post :create, {:expense_group => valid_attributes}
-        response.should redirect_to(expense_groups_path)
+        expect(response).to redirect_to(expense_groups_path)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved expense_group as @expense_group" do
         # Trigger the behavior that occurs when invalid params are submitted
-        ExpenseGroup.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
         post :create, {:expense_group => {:info_url => "hi"}}
-        assigns(:expense_group).should be_a_new(ExpenseGroup)
+        expect(assigns(:expense_group)).to be_a_new(ExpenseGroup)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        ExpenseGroup.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
         post :create, {:expense_group => {:info_url => "hi"}}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
     end
   end
@@ -87,20 +87,20 @@ describe ExpenseGroupsController do
         # specifies that the ExpenseGroup created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        ExpenseGroup.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(ExpenseGroup).to receive(:update_attributes).with({})
         put :update, {:id => expense_group.to_param, :expense_group => {'these' => 'params'}}
       end
 
       it "assigns the requested expense_group as @expense_group" do
         expense_group = ExpenseGroup.create! valid_attributes
         put :update, {:id => expense_group.to_param, :expense_group => valid_attributes}
-        assigns(:expense_group).should eq(expense_group)
+        expect(assigns(:expense_group)).to eq(expense_group)
       end
 
       it "redirects to the expense_group" do
         expense_group = ExpenseGroup.create! valid_attributes
         put :update, {:id => expense_group.to_param, :expense_group => valid_attributes}
-        response.should redirect_to(expense_groups_path)
+        expect(response).to redirect_to(expense_groups_path)
       end
     end
 
@@ -108,17 +108,17 @@ describe ExpenseGroupsController do
       it "assigns the expense_group as @expense_group" do
         expense_group = ExpenseGroup.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        ExpenseGroup.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
         put :update, {:id => expense_group.to_param, :expense_group => {:info_url => "fake"}}
-        assigns(:expense_group).should eq(expense_group)
+        expect(assigns(:expense_group)).to eq(expense_group)
       end
 
       it "re-renders the 'edit' template" do
         expense_group = ExpenseGroup.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        ExpenseGroup.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
         put :update, {:id => expense_group.to_param, :expense_group => {:info_url => "hi"}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -134,7 +134,7 @@ describe ExpenseGroupsController do
     it "redirects to the expense_groups list" do
       expense_group = ExpenseGroup.create! valid_attributes
       delete :destroy, {:id => expense_group.to_param}
-      response.should redirect_to(expense_groups_url)
+      expect(response).to redirect_to(expense_groups_url)
     end
   end
 

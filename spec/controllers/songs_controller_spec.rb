@@ -23,18 +23,18 @@ describe SongsController do
     it "assigns all songs for reg as @songs" do
       song = FactoryGirl.create(:song, :registrant => @reg)
       get :index, {:registrant_id => @reg.to_param}
-      assigns(:songs).should eq([song])
+      expect(assigns(:songs)).to eq([song])
     end
     it "assigns a new song as @song" do
       get :index, {:registrant_id => @reg.to_param}
-      assigns(:song).should be_a_new(Song)
+      expect(assigns(:song)).to be_a_new(Song)
     end
   end
 
   describe "GET list" do
     it "loads all songs" do
       get :list
-      response.should redirect_to(root_url)
+      expect(response).to redirect_to(root_url)
     end
     describe "as an admin" do
       before :each do
@@ -44,7 +44,7 @@ describe SongsController do
       it "views the songs list" do
         song = FactoryGirl.create(:song, :registrant => @reg)
         get :list
-        assigns(:songs).should eq([song])
+        expect(assigns(:songs)).to eq([song])
       end
     end
   end
@@ -59,23 +59,23 @@ describe SongsController do
 
       it "redirects to the song add_file page" do
         post :create, {:song => valid_attributes, :registrant_id => @reg.to_param}
-        response.should redirect_to(add_file_song_path(Song.last))
+        expect(response).to redirect_to(add_file_song_path(Song.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved song as @song" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Song.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Song).to receive(:save).and_return(false)
         post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.to_param}
-        assigns(:song).should be_a_new(Song)
+        expect(assigns(:song)).to be_a_new(Song)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Song.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Song).to receive(:save).and_return(false)
         post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.to_param}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
     end
   end
@@ -91,7 +91,7 @@ describe SongsController do
     it "redirects to the songs list" do
       song = FactoryGirl.create(:song, registrant: @reg, user: @reg.user)
       delete :destroy, {:id => song.to_param}
-      response.should redirect_to(registrant_songs_path(@reg))
+      expect(response).to redirect_to(registrant_songs_path(@reg))
     end
   end
 

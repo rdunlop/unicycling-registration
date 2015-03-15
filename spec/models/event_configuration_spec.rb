@@ -53,19 +53,19 @@ describe EventConfiguration do
   end
 
   it "is valid from factoryGirl" do
-    @ev.valid?.should == true
+    expect(@ev.valid?).to eq(true)
   end
 
   it "has a short name" do
     @ev.short_name = nil
     @ev.apply_validation(:name_logo)
-    @ev.valid?.should == false
+    expect(@ev.valid?).to eq(false)
   end
 
   it "does not allows a blank style_name" do
     @ev.style_name = nil
     @ev.apply_validation(:base_settings)
-    @ev.valid?.should == false
+    expect(@ev.valid?).to eq(false)
   end
 
   it "doesn't allow an unknown currency code" do
@@ -88,72 +88,72 @@ describe EventConfiguration do
   end
 
   it "has a list of style_names" do
-    EventConfiguration.style_names.count.should > 0
+    expect(EventConfiguration.style_names.count).to be > 0
   end
 
   it "style_name must be a valid_style_name" do
     @ev.style_name = "fake"
     @ev.apply_validation(:base_settings)
-    @ev.valid?.should == false
+    expect(@ev.valid?).to eq(false)
 
     @ev.style_name = EventConfiguration.style_names.first[1]
-    @ev.valid?.should == true
+    expect(@ev.valid?).to eq(true)
   end
 
   it "has a style_name even without having any entries" do
-    EventConfiguration.new.style_name.should == "naucc_2013"
+    expect(EventConfiguration.new.style_name).to eq("naucc_2013")
   end
 
   it "has a long name" do
     @ev.long_name = nil
     @ev.apply_validation(:name_logo)
-    @ev.valid?.should == false
+    expect(@ev.valid?).to eq(false)
   end
 
   it "event_url can be nil" do
     @ev.event_url = nil
     @ev.apply_validation(:name_logo)
-    @ev.valid?.should == true
+    expect(@ev.valid?).to eq(true)
   end
 
   it "event_url must be url" do
     @ev.event_url = "hello"
-    @ev.valid?.should == false
+    expect(@ev.valid?).to eq(false)
 
     @ev.event_url = "http://www.google.com"
-    @ev.valid?.should == true
+    expect(@ev.valid?).to eq(true)
   end
 
   it "can have a blank comp_noncomp_url" do
     @ev.comp_noncomp_url = ""
-    @ev.valid?.should == true
+    expect(@ev.valid?).to eq(true)
   end
 
   it "must have a test_mode" do
     @ev.test_mode = nil
     @ev.apply_validation(:important_dates)
-    @ev.valid?.should == false
+    expect(@ev.valid?).to eq(false)
   end
 
   it "defaults test_mode to true" do
     ev = EventConfiguration.new
-    ev.test_mode.should == true
+    expect(ev.test_mode).to eq(true)
   end
 
   it "should be open if no periods are defined" do
-    EventConfiguration.closed?.should == false
+    expect(EventConfiguration.closed?).to eq(false)
   end
 
   it "should NOT have standard_skill_closed by default " do
-    EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 1, 1)).should == false
+    expect(EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 1, 1))).to eq(false)
   end
 
   describe "with the standard_skill_closed_date defined" do
     it "should be closed on the 5th" do
       @ev.save!
-      EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 5, 4)).should == false
-      EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 5, 5)).should == true
-      EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 5, 6)).should == true
+      expect(EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 5, 4))).to eq(false)
+      expect(EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 5, 5))).to eq(true)
+      expect(EventConfiguration.singleton.standard_skill_closed?(Date.new(2013, 5, 6))).to eq(true)
     end
   end
 
@@ -162,30 +162,30 @@ describe EventConfiguration do
       @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 11, 03), :end_date => Date.new(2012, 11, 07))
     end
     it "should be open on the last day of registration" do
-      EventConfiguration.closed?(Date.new(2012, 11, 07)).should == false
+      expect(EventConfiguration.closed?(Date.new(2012, 11, 07))).to eq(false)
     end
     it "should be open as long as the registration_period is current" do
       d = Date.new(2012, 11, 07)
-      @rp.current_period?(d).should == true
-      EventConfiguration.closed?(d).should == false
+      expect(@rp.current_period?(d)).to eq(true)
+      expect(EventConfiguration.closed?(d)).to eq(false)
 
       e = Date.new(2012, 11, 8)
-      @rp.current_period?(e).should == true
-      EventConfiguration.closed?(e).should == false
+      expect(@rp.current_period?(e)).to eq(true)
+      expect(EventConfiguration.closed?(e)).to eq(false)
 
       f = Date.new(2012, 11, 9)
-      @rp.current_period?(f).should == false
-      EventConfiguration.closed?(f).should == true
+      expect(@rp.current_period?(f)).to eq(false)
+      expect(EventConfiguration.closed?(f)).to eq(true)
     end
   end
 
   it "returns the live paypal url when TEST is false" do
     @ev.update_attribute(:paypal_test, false)
-    EventConfiguration.paypal_base_url.should == "https://www.paypal.com"
+    expect(EventConfiguration.paypal_base_url).to eq("https://www.paypal.com")
   end
   it "returns the test paypal url when TEST is true" do
     @ev.update_attribute(:paypal_test, true)
-    EventConfiguration.paypal_base_url.should == "https://www.sandbox.paypal.com"
+    expect(EventConfiguration.paypal_base_url).to eq("https://www.sandbox.paypal.com")
   end
 
   describe "when doing partial_model validations" do

@@ -33,9 +33,9 @@ describe PaymentAdjustmentsController do
         }}
       }.to change(RefundDetail, :count).by(1)
       r = Refund.last
-      r.note.should eq("Cancelled")
+      expect(r.note).to eq("Cancelled")
       rd = RefundDetail.last
-      rd.payment_detail.should == @pd
+      expect(rd.payment_detail).to eq(@pd)
     end
   end
 
@@ -53,7 +53,7 @@ describe PaymentAdjustmentsController do
           new_item_id: new_expense_item.id}
       }.to change(RefundDetail, :count).by(1)
       r = Refund.last
-      r.note.should eq("exchange shirts")
+      expect(r.note).to eq("exchange shirts")
       expect(r.refund_details.first.payment_detail).to eq(payment_detail)
 
       p = Payment.last

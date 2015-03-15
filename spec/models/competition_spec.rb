@@ -39,51 +39,51 @@ describe Competition do
     @ec = FactoryGirl.create(:competition, :event => @ev)
   end
   it "is valid from FactoryGirl" do
-    @ec.valid?.should == true
+    expect(@ec.valid?).to eq(true)
   end
 
   it "allows a start_data_type" do
     @ec.start_data_type = "One Data Per Line"
-    @ec.valid?.should == true
+    expect(@ec.valid?).to eq(true)
   end
 
   it "allows blank start_data_type" do
     @ec.start_data_type = nil
-    @ec.should be_valid
+    expect(@ec).to be_valid
     @ec.start_data_type = ""
-    @ec.should be_valid
+    expect(@ec).to be_valid
   end
 
   it "requires an event" do
     @ec.event = nil
-    @ec.valid?.should == false
+    expect(@ec.valid?).to eq(false)
   end
 
   it "requires a name" do
     @ec.name = nil
-    @ec.valid?.should == false
+    expect(@ec.valid?).to eq(false)
   end
   describe "the scoring_class" do
     it "cannot be blank" do
       @ec.scoring_class = nil
-      @ec.valid?.should == false
+      expect(@ec.valid?).to eq(false)
     end
     it "can be Freestyle" do
       @ec.scoring_class = "Freestyle"
-      @ec.valid?.should == true
+      expect(@ec.valid?).to eq(true)
     end
     it "can be Flatland" do
       @ec.scoring_class = "Flatland"
-      @ec.valid?.should == true
+      expect(@ec.valid?).to eq(true)
     end
     it "can be Street" do
       @ec.scoring_class = "Street"
-      @ec.valid?.should == true
+      expect(@ec.valid?).to eq(true)
     end
     it "can be High/Long" do
       @ec.scoring_class = "High/Long"
       @ec.age_group_type = FactoryGirl.build_stubbed(:age_group_type)
-      @ec.valid?.should == true
+      expect(@ec.valid?).to eq(true)
     end
 
     it "can be overall Champion" do
@@ -96,7 +96,7 @@ describe Competition do
 
   it "is not_expert by default" do
     comp = Competition.new
-    comp.has_experts.should == false
+    expect(comp.has_experts).to eq(false)
   end
 
   describe "with a user" do
@@ -104,8 +104,8 @@ describe Competition do
       @user = FactoryGirl.create(:user)
     end
     it "says there are no judges" do
-      @ec.has_judge(@user).should == false
-      @ec.get_judge(@user).should be_nil
+      expect(@ec.has_judge(@user)).to eq(false)
+      expect(@ec.get_judge(@user)).to be_nil
     end
 
     describe "as a judge" do
@@ -114,8 +114,8 @@ describe Competition do
       end
 
       it "has judge" do
-        @ec.has_judge(@user).should == true
-        @ec.get_judge(@user).should == @judge
+        expect(@ec.has_judge(@user)).to eq(true)
+        expect(@ec.get_judge(@user)).to eq(@judge)
       end
     end
   end
@@ -139,16 +139,16 @@ describe Competition do
             FactoryGirl.create(:competitor)]
     @ec.create_competitor_from_registrants(regs, "Robin's Team")
     comp = Competitor.last
-    comp.members.count.should == 3
-    comp.name.should == "Robin's Team"
+    expect(comp.members.count).to eq(3)
+    expect(comp.name).to eq("Robin's Team")
   end
 
   it "has an event" do
-    @ec.event.should == @ev
+    expect(@ec.event).to eq(@ev)
   end
 
   it "uses the event name in its name" do
-    @ec.to_s.should == @ec.name
+    expect(@ec.to_s).to eq(@ec.name)
   end
 
   it "doesn't allow automatic competitor creation with multi-reg competitions" do

@@ -59,27 +59,27 @@ describe OrderedResultCalculator do
         @reg.contact_detail.responsible_adult_name = "Bob Smith"
         @reg.contact_detail.responsible_adult_phone = "911"
         @reg.save!
-        @reg.age.should == 1
+        expect(@reg.age).to eq(1)
 
         @reg = @tr2.competitor.registrants.first
         @reg.birthday = Date.today - 60.years
         @reg.save!
-        @reg.age.should == 60
+        expect(@reg.age).to eq(60)
 
         recalc
 
-        @tr1.competitor.place.should == 1 # not a tie, different groups
-        @tr2.competitor.place.should == 1 # not a tie, different groups
+        expect(@tr1.competitor.place).to eq(1) # not a tie, different groups
+        expect(@tr2.competitor.place).to eq(1) # not a tie, different groups
       end
     end
 
     it "places everyone as 0 if they have no time" do
       recalc
 
-      @tr1.competitor.place_formatted.should == "Unknown"
-      @tr2.competitor.place_formatted.should == "Unknown"
-      @tr3.competitor.place_formatted.should == "Unknown"
-      @tr4.competitor.place_formatted.should == "Unknown"
+      expect(@tr1.competitor.place_formatted).to eq("Unknown")
+      expect(@tr2.competitor.place_formatted).to eq("Unknown")
+      expect(@tr3.competitor.place_formatted).to eq("Unknown")
+      expect(@tr4.competitor.place_formatted).to eq("Unknown")
     end
 
     it "places the first place as first" do
@@ -88,7 +88,7 @@ describe OrderedResultCalculator do
 
       recalc
 
-      @tr1.competitor.place.should == 1
+      expect(@tr1.competitor.place).to eq(1)
     end
 
     it "places DQ's as 'DQ'" do
@@ -98,7 +98,7 @@ describe OrderedResultCalculator do
 
       recalc
 
-      @tr1.competitor.place_formatted.should == "DQ"
+      expect(@tr1.competitor.place_formatted).to eq("DQ")
     end
 
     describe "when tr1 is slower than tr2" do
@@ -118,8 +118,8 @@ describe OrderedResultCalculator do
 
         recalc
 
-        @tr1.competitor.place.should == 2
-        @tr2.competitor.place.should == 1
+        expect(@tr1.competitor.place).to eq(2)
+        expect(@tr2.competitor.place).to eq(1)
       end
       describe "when the first competitor is ineligible" do
         before(:each) do
@@ -130,10 +130,10 @@ describe OrderedResultCalculator do
         end
 
         it "places the faster competitor first" do
-          @tr2.competitor.place.should == 1
+          expect(@tr2.competitor.place).to eq(1)
         end
         it "places the slower competitor (eligible) as 1st also" do
-          @tr1.competitor.place.should == 1
+          expect(@tr1.competitor.place).to eq(1)
         end
       end
     end
@@ -148,8 +148,8 @@ describe OrderedResultCalculator do
       it "ties for first" do
         recalc
 
-        @tr1.competitor.place.should == 1
-        @tr2.competitor.place.should == 1
+        expect(@tr1.competitor.place).to eq(1)
+        expect(@tr2.competitor.place).to eq(1)
       end
 
       it "places slower score as 3rd place" do
@@ -158,7 +158,7 @@ describe OrderedResultCalculator do
 
         recalc
 
-        @tr3.competitor.place.should == 3
+        expect(@tr3.competitor.place).to eq(3)
       end
 
       describe "if 3-way tie" do
@@ -173,10 +173,10 @@ describe OrderedResultCalculator do
         it "ties 3 for first, and one for 4th" do
           recalc
 
-          @tr1.competitor.place.should == 1
-          @tr2.competitor.place.should == 1
-          @tr3.competitor.place.should == 1
-          @tr4.competitor.place.should == 4
+          expect(@tr1.competitor.place).to eq(1)
+          expect(@tr2.competitor.place).to eq(1)
+          expect(@tr3.competitor.place).to eq(1)
+          expect(@tr4.competitor.place).to eq(4)
         end
       end
     end
@@ -198,12 +198,12 @@ describe OrderedResultCalculator do
       rc = OrderedResultCalculator.new(@comp)
       recalc(rc)
 
-      tr1.reload.competitor.place.should == 1
-      tr2.reload.competitor.place.should == 2
-      tr3.reload.competitor.place.should == 3
-      tr4.reload.competitor.place.should == 4
-      tr5.reload.competitor.place.should == 5
-      tr6.reload.competitor.place.should == 6
+      expect(tr1.reload.competitor.place).to eq(1)
+      expect(tr2.reload.competitor.place).to eq(2)
+      expect(tr3.reload.competitor.place).to eq(3)
+      expect(tr4.reload.competitor.place).to eq(4)
+      expect(tr5.reload.competitor.place).to eq(5)
+      expect(tr6.reload.competitor.place).to eq(6)
     end
   end
 end

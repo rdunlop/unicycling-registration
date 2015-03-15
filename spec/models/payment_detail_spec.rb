@@ -28,69 +28,69 @@ describe PaymentDetail do
   end
 
   it "can be cerated by factory" do
-    @pd.valid?.should == true
+    expect(@pd.valid?).to eq(true)
   end
 
   it "must have a payment" do
     @pd.payment = nil
-    @pd.valid?.should == false
+    expect(@pd.valid?).to eq(false)
   end
 
   it "does not allow negative amounts" do
     @pd.amount = -1
-    @pd.valid?.should == false
+    expect(@pd.valid?).to eq(false)
   end
 
   it "must have a registrant" do
     @pd.registrant = nil
-    @pd.valid?.should == false
+    expect(@pd.valid?).to eq(false)
   end
 
   it "must have an amount" do
     @pd.amount_cents = nil
-    @pd.valid?.should == false
+    expect(@pd.valid?).to eq(false)
   end
   it "must have an item" do
     @pd.expense_item = nil
-    @pd.valid?.should == false
+    expect(@pd.valid?).to eq(false)
   end
   it "has additional description if it is refunded" do
-    @pd.refunded?.should == false
-    @pd.to_s.should == @pd.expense_item.to_s
+    expect(@pd.refunded?).to eq(false)
+    expect(@pd.to_s).to eq(@pd.expense_item.to_s)
     @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
     @pd.reload
-    @pd.refunded?.should == true
-    @pd.to_s.should == "#{@pd.expense_item.to_s} (Refunded)"
+    expect(@pd.refunded?).to eq(true)
+    expect(@pd.to_s).to eq("#{@pd.expense_item.to_s} (Refunded)")
   end
 
   it "indicates that it is a refund if it has an associated refund_detail" do
-    @pd.refunded?.should == false
+    expect(@pd.refunded?).to eq(false)
     @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
     @pd.reload
-    @pd.refunded?.should == true
-    @ref.percentage.should == 100
-    @pd.cost.should == 0
+    expect(@pd.refunded?).to eq(true)
+    expect(@ref.percentage).to eq(100)
+    expect(@pd.cost).to eq(0)
   end
 
   it "it marks the cost as partial if the refund is not 100%" do
-    @pd.refunded?.should == false
+    expect(@pd.refunded?).to eq(false)
     @refund_detail = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
     @refund = @refund_detail.refund
     @refund.percentage = 50
     @refund.save!
     @pd.reload
-    @pd.refunded?.should == true
-    @pd.cost.should == @pd.amount / 2.0
+    expect(@pd.refunded?).to eq(true)
+    expect(@pd.cost).to eq(@pd.amount / 2.0)
   end
 
   it "is not refunded by default" do
     pay = PaymentDetail.new
-    pay.refunded?.should == false
+    expect(pay.refunded?).to eq(false)
   end
 
   it "is not scoped as completed if not completed" do
-    @pd.payment.completed.should == false
-    PaymentDetail.completed.should == []
+    expect(@pd.payment.completed).to eq(false)
+    expect(PaymentDetail.completed).to eq([])
   end
 
   describe "when a payment is completed" do
@@ -100,12 +100,12 @@ describe PaymentDetail do
       pay.save!
     end
     it "is scoped as completed when payment is completed" do
-      PaymentDetail.completed.should == [@pd]
+      expect(PaymentDetail.completed).to eq([@pd])
     end
 
     it "doesn't list refunded payments" do
       @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
-      PaymentDetail.completed.should == []
+      expect(PaymentDetail.completed).to eq([])
     end
   end
 

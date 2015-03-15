@@ -27,7 +27,7 @@ describe StreetScoresController do
   describe "GET index" do
     it "assigns all scores as @scores" do
       get :index, {:judge_id => @judge.id}
-      response.should be_success
+      expect(response).to be_success
     end
     describe "when returning a list of scores" do
       before(:each) do
@@ -37,7 +37,7 @@ describe StreetScoresController do
 
       it "should return them in descending order of val_1 points" do
         get :index, {:judge_id => @judge.id}
-        assigns(:street_scores).should == [@user_score2, @user_score1]
+        expect(assigns(:street_scores)).to eq([@user_score2, @user_score1])
       end
     end
   end
@@ -77,11 +77,11 @@ describe StreetScoresController do
     end
     it "should deny access to index" do
       get :index, {:judge_id => @judge}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
     it "should deny access to destroy" do
       delete :destroy, {:id => @user_score.to_param, :judge_id => @judge}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 end

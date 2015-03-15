@@ -21,34 +21,34 @@ describe RegistrantGroup do
   end
 
   it "has a valid factory" do
-    @rg.valid?.should == true
+    expect(@rg.valid?).to eq(true)
   end
 
   it "name is optional" do
     @rg.name = nil
-    @rg.valid?.should == true
+    expect(@rg.valid?).to eq(true)
   end
 
   it "has a contact_person" do
-    @rg.contact_person.should_not be_nil
+    expect(@rg.contact_person).not_to be_nil
   end
 
   it "has multiple registrant_group_members" do
     FactoryGirl.create(:registrant_group_member, :registrant_group => @rg)
     FactoryGirl.create(:registrant_group_member, :registrant_group => @rg)
     FactoryGirl.create(:registrant_group_member, :registrant_group => @rg)
-    @rg.registrant_group_members.count.should == 3
+    expect(@rg.registrant_group_members.count).to eq(3)
   end
 
   it "can assign a registrant to the contact_person" do
     @reg = FactoryGirl.create(:noncompetitor)
     @rg.contact_person = @reg
-    @rg.contact_person.should == @reg
+    expect(@rg.contact_person).to eq(@reg)
   end
 
   it "can be found via the registrant" do
     @rgm = FactoryGirl.create(:registrant_group_member, :registrant_group => @rg)
     @reg = @rgm.registrant
-    @reg.registrant_groups.should == [@rg]
+    expect(@reg.registrant_groups).to eq([@rg])
   end
 end

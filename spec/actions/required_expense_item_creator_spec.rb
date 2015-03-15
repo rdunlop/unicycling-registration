@@ -18,13 +18,13 @@ describe RequiredExpenseItemCreator do
         @noncomp.create_associated_required_expense_items
       end
       it "should owe different cost" do
-        @noncomp.amount_owing.should == 50
+        expect(@noncomp.amount_owing).to eq(50)
       end
       it "retrieves the non-comp registration_item" do
-        @noncomp.registrant_expense_items.first.expense_item.should == @noncomp_exp
+        expect(@noncomp.registrant_expense_items.first.expense_item).to eq(@noncomp_exp)
       end
       it "lists the item as an owing_expense_item" do
-        @noncomp.owing_expense_items.should == [@noncomp_exp]
+        expect(@noncomp.owing_expense_items).to eq([@noncomp_exp])
       end
     end
 
@@ -33,10 +33,10 @@ describe RequiredExpenseItemCreator do
         @comp = FactoryGirl.create(:competitor)
       end
       it "retrieves the comp registration_item" do
-        @comp.registrant_expense_items.first.expense_item.should == @comp_exp
+        expect(@comp.registrant_expense_items.first.expense_item).to eq(@comp_exp)
       end
       it "lists the item as an owing_expense_item" do
-        @comp.owing_registrant_expense_items.first.expense_item.should == @comp_exp
+        expect(@comp.owing_registrant_expense_items.first.expense_item).to eq(@comp_exp)
       end
     end
 
@@ -56,8 +56,8 @@ describe RequiredExpenseItemCreator do
     end
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
-      @reg2.owing_registrant_expense_items.last.expense_item.should == @ei
-      @reg2.owing_registrant_expense_items.last.system_managed.should == true
+      expect(@reg2.owing_registrant_expense_items.last.expense_item).to eq(@ei)
+      expect(@reg2.owing_registrant_expense_items.last.system_managed).to eq(true)
     end
   end
 end

@@ -28,28 +28,28 @@ describe Event do
     @ev = FactoryGirl.create(:event)
   end
   it "is valid from FactoryGirl" do
-    @ev.valid?.should == true
+    expect(@ev.valid?).to eq(true)
   end
 
   it "requires a category" do
     @ev.category = nil
-    @ev.valid?.should == false
+    expect(@ev.valid?).to eq(false)
   end
 
   it "requires a name" do
     @ev.name = nil
-    @ev.valid?.should == false
+    expect(@ev.valid?).to eq(false)
   end
 
   it "should have name as to_s" do
-    @ev.to_s.should == @ev.name
+    expect(@ev.to_s).to eq(@ev.name)
   end
 
   it "describes itself as StandardSkill if named so" do
-    @ev.standard_skill?.should == false
+    expect(@ev.standard_skill?).to eq(false)
     @ev.name = "Standard Skill"
     @ev.save!
-    @ev.standard_skill?.should == true
+    expect(@ev.standard_skill?).to eq(true)
   end
 
   it "has many event_choices" do
@@ -62,7 +62,7 @@ describe Event do
     @ec2 = FactoryGirl.create(:event_choice, :event => @ev, :position => 2)
     @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :position => 3)
 
-    @ev.event_choices.should == [@ec2, @ec3, @ec4]
+    expect(@ev.event_choices).to eq([@ec2, @ec3, @ec4])
   end
   it "destroys associated event_choices upon destroy" do
     FactoryGirl.create(:event_choice, :event => @ev)
@@ -78,16 +78,16 @@ describe Event do
   end
 
   it "creates an associated event_category automatically" do
-    @ev.event_categories.count.should == 1
+    expect(@ev.event_categories.count).to eq(1)
     @category = @ev.event_categories.first
-    @category.name.should == 'All'
-    @category.position.should == 1
+    expect(@category.name).to eq('All')
+    expect(@category.position).to eq(1)
   end
 
   it "has many event_categories" do
     @ecat1 = @ev.event_categories.first
     @ecat2 = FactoryGirl.create(:event_category, :event => @ev, :name => "Other", :position => 2)
-    @ev.event_categories.should == [@ecat1, @ecat2]
+    expect(@ev.event_categories).to eq([@ecat1, @ecat2])
   end
 
   describe "when a user has chosen an event" do
@@ -97,16 +97,16 @@ describe Event do
     end
 
     it "will know that it is selected" do
-      @ev.num_signed_up_registrants.should == 1
+      expect(@ev.num_signed_up_registrants).to eq(1)
     end
     it "will not count entries which are not selected" do
       @ec.signed_up = false
       @ec.save
-      @ev.num_signed_up_registrants.should == 0
+      expect(@ev.num_signed_up_registrants).to eq(0)
     end
     it "will not count if no one has selected the choice" do
       event = FactoryGirl.create(:event)
-      event.num_signed_up_registrants.should == 0
+      expect(event.num_signed_up_registrants).to eq(0)
     end
   end
   describe "when there is a director" do
@@ -116,7 +116,7 @@ describe Event do
     end
 
     it "has directors" do
-      @ev.directors.should == [@user]
+      expect(@ev.directors).to eq([@user])
     end
   end
 end

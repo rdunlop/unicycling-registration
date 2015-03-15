@@ -29,7 +29,7 @@ describe TimeResultsController do
 
     it "Cannot read time_results" do
       get :index, {:competition_id => @competition.id}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 
@@ -37,11 +37,11 @@ describe TimeResultsController do
     it "assigns all time_results as @time_results" do
       time_result = TimeResult.create! valid_attributes
       get :index, {:competition_id => @competition.id}
-      assigns(:time_results).should eq([time_result])
+      expect(assigns(:time_results)).to eq([time_result])
     end
     it "assigns a new time_result" do
       get :index, {:competition_id => @competition.id}
-      assigns(:time_result).should be_a_new(TimeResult)
+      expect(assigns(:time_result)).to be_a_new(TimeResult)
     end
   end
 
@@ -49,7 +49,7 @@ describe TimeResultsController do
     it "assigns the requested time_result as @time_result" do
       time_result = TimeResult.create! valid_attributes
       get :edit, {:id => time_result.id}
-      assigns(:time_result).should eq(time_result)
+      expect(assigns(:time_result)).to eq(time_result)
     end
   end
 
@@ -63,39 +63,39 @@ describe TimeResultsController do
 
       it "assigns a newly created time_result as @time_result" do
         post :create, {:competition_id => @competition.id, :time_result => valid_attributes}
-        assigns(:time_result).should be_a(TimeResult)
-        assigns(:time_result).should be_persisted
+        expect(assigns(:time_result)).to be_a(TimeResult)
+        expect(assigns(:time_result)).to be_persisted
       end
 
       it "redirects to the created time_result" do
         post :create, {:competition_id => @competition.id, :time_result => valid_attributes}
-        response.should redirect_to(competition_time_results_path(@competition))
+        expect(response).to redirect_to(competition_time_results_path(@competition))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved event_category as @event_category" do
         # Trigger the behavior that occurs when invalid params are submitted
-        TimeResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         post :create, {:competition_id => @competition.id, :time_result => {status: "DQ"}}
-        assigns(:time_result).should be_a_new(TimeResult)
+        expect(assigns(:time_result)).to be_a_new(TimeResult)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        TimeResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         post :create, {:competition_id => @competition.id, :time_result => {status: "DQ"}}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
       it "loads the time_results" do
-        TimeResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         post :create, {:competition_id => @competition.id, :time_result => {status: "DQ"}}
-        assigns(:time_results).should == []
+        expect(assigns(:time_results)).to eq([])
       end
       it "loads the event" do
-        TimeResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         post :create, {:competition_id => @competition.id, :time_result => {status: "DQ"}}
-        assigns(:competition).should == @competition
+        expect(assigns(:competition)).to eq(@competition)
       end
     end
   end
@@ -108,14 +108,14 @@ describe TimeResultsController do
         # specifies that the EventCategory created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        TimeResult.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(TimeResult).to receive(:update_attributes).with({})
         put :update, {:id => time_result.to_param, :time_result => {'these' => 'params'}}
       end
 
       it "redirects to the event time results" do
         time_result = TimeResult.create! valid_attributes
         put :update, {:id => time_result.to_param, :time_result => valid_attributes}
-        response.should redirect_to(competition_time_results_path(@competition))
+        expect(response).to redirect_to(competition_time_results_path(@competition))
       end
     end
 
@@ -123,17 +123,17 @@ describe TimeResultsController do
       it "assigns the time_result as @time_result" do
         time_result = TimeResult.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        TimeResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         put :update, {:id => time_result.to_param, :time_result => {status: "DQ"}}
-        assigns(:time_result).should eq(time_result)
+        expect(assigns(:time_result)).to eq(time_result)
       end
 
       it "re-renders the 'edit' template" do
         time_result = TimeResult.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        TimeResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         put :update, {:id => time_result.to_param, :time_result => {status: "DQ"}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -150,7 +150,7 @@ describe TimeResultsController do
       time_result = FactoryGirl.create(:time_result)
       competition = time_result.competition
       delete :destroy, {:id => time_result.to_param}
-      response.should redirect_to(competition_time_results_path(competition))
+      expect(response).to redirect_to(competition_time_results_path(competition))
     end
   end
 

@@ -40,8 +40,8 @@ xdescribe Registrants::BuildController do
   describe "GET new" do
     it "assigns a new competitor as @registrant" do
       get :new, {registrant_type: 'competitor'}
-      assigns(:registrant).should be_a_new(Registrant)
-      assigns(:registrant).competitor.should == true
+      expect(assigns(:registrant)).to be_a_new(Registrant)
+      expect(assigns(:registrant).competitor).to eq(true)
     end
     it "returns a list of all of the events" do
       @category1 = FactoryGirl.create(:category, :position => 1)
@@ -49,7 +49,7 @@ xdescribe Registrants::BuildController do
       @category2 = FactoryGirl.create(:category, :position => 2)
 
       get 'new', {registrant_type: 'competitor'}
-      assigns(:categories).should == [@category1, @category2, @category3]
+      expect(assigns(:categories)).to eq([@category1, @category2, @category3])
     end
 
     describe "when the system is 'closed'" do
@@ -57,9 +57,9 @@ xdescribe Registrants::BuildController do
         FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 01, 01), :end_date => Date.new(2010, 02, 02))
       end
       it "should not succeed" do
-        EventConfiguration.closed?.should == true
+        expect(EventConfiguration.closed?).to eq(true)
         get :new
-        response.should_not be_success
+        expect(response).not_to be_success
       end
     end
   end
@@ -68,14 +68,14 @@ xdescribe Registrants::BuildController do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, :user => @user)
       get :edit, {:id => registrant.to_param}
-      assigns(:registrant).should eq(registrant)
+      expect(assigns(:registrant)).to eq(registrant)
     end
     it "should not load categories for a noncompetitor" do
       category1 = FactoryGirl.create(:category, :position => 1)
       registrant = FactoryGirl.create(:noncompetitor, :user => @user)
       get :edit, {:id => registrant.to_param}
-      response.should be_success
-      assigns(:categories).should be_nil
+      expect(response).to be_success
+      expect(assigns(:categories)).to be_nil
     end
   end
 
@@ -98,53 +98,53 @@ xdescribe Registrants::BuildController do
             registrant_type: 'competitor')
           }
         }.to change(Registrant, :count).by(1)
-        Registrant.last.user.should == @user
-        Registrant.last.contact_detail.should_not be_nil
+        expect(Registrant.last.user).to eq(@user)
+        expect(Registrant.last.contact_detail).not_to be_nil
       end
 
       it "sets the registrant as a competitor" do
         post :create, {:registrant => @comp_attributes}
-        Registrant.last.competitor.should == true
+        expect(Registrant.last.competitor).to eq(true)
       end
 
       it "assigns a newly created registrant as @registrant" do
         post :create, {:registrant => @comp_attributes}
-        assigns(:registrant).should be_a(Registrant)
-        assigns(:registrant).should be_persisted
+        expect(assigns(:registrant)).to be_a(Registrant)
+        expect(assigns(:registrant)).to be_persisted
       end
 
       it "redirects to the created registrant" do
         post :create, {:registrant => @comp_attributes}
-        response.should redirect_to(registrant_registrant_expense_items_path(Registrant.last))
+        expect(response).to redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved registrant as @registrant" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Registrant.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, {:registrant => {registrant_type: 'competitor'}}
-        assigns(:registrant).should be_a_new(Registrant)
+        expect(assigns(:registrant)).to be_a_new(Registrant)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Registrant.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, {:registrant => {registrant_type: 'competitor'}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
       it "has categories" do
         # Trigger the behavior that occurs when invalid params are submitted
         category1 = FactoryGirl.create(:category, :position => 1)
-        Registrant.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, {:registrant => {registrant_type: 'competitor'}}
-        assigns(:categories).should == [category1]
+        expect(assigns(:categories)).to eq([category1])
       end
       it "should not load categories for a noncompetitor" do
         category1 = FactoryGirl.create(:category, :position => 1)
-        Registrant.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, {:registrant => {registrant_type: 'noncompetitor'}}
-        assigns(:categories).should be_nil
+        expect(assigns(:categories)).to be_nil
       end
     end
     describe "When creating nested registrant choices" do
@@ -175,16 +175,16 @@ xdescribe Registrants::BuildController do
       end
 
       it "doesn't create a new entry if one already exists" do
-        RegistrantChoice.count.should == 0
+        expect(RegistrantChoice.count).to eq(0)
         put :update, {:id => @reg.to_param, :registrant => @attributes}
-        RegistrantChoice.count.should == 1
+        expect(RegistrantChoice.count).to eq(1)
       end
       it "can update an existing registrant_choice" do
         put :update, {:id => @reg.to_param, :registrant => @attributes}
         @attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
         @attributes[:registrant_choices_attributes][0][:id] = RegistrantChoice.first.id
         put :update, {:id => @reg.to_param, :registrant => @attributes}
-        response.should redirect_to(registrant_registrant_expense_items_path(@reg))
+        expect(response).to redirect_to(registrant_registrant_expense_items_path(@reg))
       end
     end
 
@@ -220,12 +220,12 @@ xdescribe Registrants::BuildController do
 
       it "can update the registrant_event_sign_up" do
         put :update, {:id => @reg.to_param, :registrant => @attributes}
-        response.should redirect_to(registrant_registrant_expense_items_path(@reg))
+        expect(response).to redirect_to(registrant_registrant_expense_items_path(@reg))
         @new_attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
         expect {
           put :update, {:id => @reg.to_param, :registrant => @new_attributes}
         }.to change(RegistrantEventSignUp, :count).by(0)
-        response.should redirect_to(registrant_registrant_expense_items_path(@reg))
+        expect(response).to redirect_to(registrant_registrant_expense_items_path(@reg))
       end
     end
   end
@@ -238,32 +238,32 @@ xdescribe Registrants::BuildController do
         # specifies that the Registrant created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Registrant.any_instance.should_receive(:update_attributes).with({})
+        expect_any_instance_of(Registrant).to receive(:update_attributes).with({})
         put :update, {:id => registrant.to_param, :registrant => {'these' => 'params'}}
       end
 
       it "assigns the requested registrant as @registrant" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
-        assigns(:registrant).should eq(registrant)
+        expect(assigns(:registrant)).to eq(registrant)
       end
 
       it "cannot change the competitor to a non-competitor" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes.merge({registrant_type: 'noncompetitor'})}
-        assigns(:registrant).should eq(registrant)
-        assigns(:registrant).competitor.should == true
+        expect(assigns(:registrant)).to eq(registrant)
+        expect(assigns(:registrant).competitor).to eq(true)
       end
 
       it "redirects competitors to the items" do
         registrant = FactoryGirl.create(:competitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
-        response.should redirect_to(registrant_registrant_expense_items_path(Registrant.last))
+        expect(response).to redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
       it "redirects noncompetitors to the items" do
         registrant = FactoryGirl.create(:noncompetitor, :user => @user)
         put :update, {:id => registrant.to_param, :registrant => valid_attributes}
-        response.should redirect_to(registrant_registrant_expense_items_path(Registrant.last))
+        expect(response).to redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
     end
 
@@ -274,22 +274,22 @@ xdescribe Registrants::BuildController do
       }
       it "assigns the registrant as @registrant" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Registrant.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         do_action
-        assigns(:registrant).should eq(registrant)
+        expect(assigns(:registrant)).to eq(registrant)
       end
       it "loads the categories" do
         category1 = FactoryGirl.create(:category, :position => 1)
-        Registrant.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         do_action
-        assigns(:categories).should == [category1]
+        expect(assigns(:categories)).to eq([category1])
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Registrant.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         do_action
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end

@@ -23,21 +23,21 @@ describe ExpenseGroup do
     @group = FactoryGirl.create(:expense_group)
   end
   it "can be created by the factory" do
-    @group.valid?.should == true
+    expect(@group.valid?).to eq(true)
   end
   it "must have a name" do
     @group.group_name = nil
-    @group.valid?.should == false
+    expect(@group.valid?).to eq(false)
   end
   it "must have a visible setting of true or false" do
     @group.visible = nil
-    @group.valid?.should == false
+    expect(@group.valid?).to eq(false)
 
     @group.visible = true
-    @group.valid?.should == true
+    expect(@group.valid?).to eq(true)
   end
   it "should have a nice to_s" do
-    @group.to_s.should == @group.group_name
+    expect(@group.to_s).to eq(@group.group_name)
   end
 
   it "should only list the visible groups" do
@@ -47,25 +47,25 @@ describe ExpenseGroup do
 
   it "can have an expense_group without a free_option value" do
     @group.competitor_free_options = nil
-    @group.valid?.should == true
+    expect(@group.valid?).to eq(true)
   end
   it "can have an expense_group without a free_option value" do
     @group.noncompetitor_free_options = nil
-    @group.valid?.should == true
+    expect(@group.valid?).to eq(true)
   end
 
   it "defaults to not required" do
     @group = ExpenseGroup.new
-    @group.competitor_required.should == false
-    @group.noncompetitor_required.should == false
+    expect(@group.competitor_required).to eq(false)
+    expect(@group.noncompetitor_required).to eq(false)
   end
 
   it "requires that the 'required' fields be set" do
     @group.competitor_required = nil
-    @group.valid?.should == false
+    expect(@group.valid?).to eq(false)
     @group.competitor_required = false
     @group.noncompetitor_required = nil
-    @group.valid?.should == false
+    expect(@group.valid?).to eq(false)
   end
 
   describe "with expense_items" do
@@ -74,7 +74,7 @@ describe ExpenseGroup do
       @item1 = FactoryGirl.create(:expense_item, :expense_group => @group, :position => 1)
     end
     it "orders the items by position" do
-      @group.expense_items.should == [@item1, @item2]
+      expect(@group.expense_items).to eq([@item1, @item2])
     end
   end
 
@@ -89,11 +89,11 @@ describe ExpenseGroup do
     end
 
     it "lists them in order" do
-      ExpenseGroup.all.should == [@group, @group2, @group3, @group4]
+      expect(ExpenseGroup.all).to eq([@group, @group2, @group3, @group4])
     end
 
     it "lists the 'visible' ones in order" do
-      ExpenseGroup.visible.should == [@group2, @group3, @group4]
+      expect(ExpenseGroup.visible).to eq([@group2, @group3, @group4])
     end
   end
 

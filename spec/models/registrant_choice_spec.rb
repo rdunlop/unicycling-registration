@@ -23,25 +23,25 @@ describe RegistrantChoice do
     @rc = FactoryGirl.create(:registrant_choice)
   end
   it "is valid from FactoryGirl" do
-    @rc.valid?.should == true
+    expect(@rc.valid?).to eq(true)
   end
   it "requires an event_choice" do
     @rc.event_choice = nil
-    @rc.valid?.should == false
+    expect(@rc.valid?).to eq(false)
   end
 
   it "requires a registrant" do
     @rc.registrant = nil
-    @rc.valid?.should == false
+    expect(@rc.valid?).to eq(false)
   end
 
   it "determines if it has a value" do
-    @rc.has_value?.should == false
+    expect(@rc.has_value?).to eq(false)
   end
 
   it "cannot have 2 choices for the same event_choice" do
     @rc = FactoryGirl.build(:registrant_choice, :event_choice => @rc.event_choice, :registrant => @rc.registrant)
-    @rc.valid?.should == false
+    expect(@rc.valid?).to eq(false)
   end
 
   describe "when a boolean has a value 1" do
@@ -50,7 +50,7 @@ describe RegistrantChoice do
       @rc.save
     end
     it "has_value" do
-      @rc.has_value?.should == true
+      expect(@rc.has_value?).to eq(true)
     end
   end
   describe "when a multiple input has a value" do
@@ -63,12 +63,12 @@ describe RegistrantChoice do
     it "has_value with a selection" do
       @rc.value = "hello"
       @rc.save!
-      @rc.has_value?.should == true
+      expect(@rc.has_value?).to eq(true)
     end
     it "has no value when blank" do
       @rc.value = ""
       @rc.save!
-      @rc.has_value?.should == false
+      expect(@rc.has_value?).to eq(false)
     end
   end
 
@@ -80,11 +80,11 @@ describe RegistrantChoice do
     end
     it "has_value with anything" do
       @rc.value = "hi"
-      @rc.has_value?.should == true
+      expect(@rc.has_value?).to eq(true)
     end
     it "has no value with blank" do
       @rc.value = ""
-      @rc.has_value?.should == false
+      expect(@rc.has_value?).to eq(false)
     end
   end
 
@@ -96,22 +96,22 @@ describe RegistrantChoice do
     end
     it "has_value with anything" do
       @rc.value = "3:00"
-      @rc.has_value?.should == true
-      @rc.valid?.should == true
+      expect(@rc.has_value?).to eq(true)
+      expect(@rc.valid?).to eq(true)
     end
     it "has no value with blank" do
       @rc.value = ""
-      @rc.has_value?.should == false
-      @rc.valid?.should == true
+      expect(@rc.has_value?).to eq(false)
+      expect(@rc.valid?).to eq(true)
     end
     it "accepts numbers with :'s" do
       @rc.value = "1:23:45"
-      @rc.has_value?.should == true
-      @rc.valid?.should == true
+      expect(@rc.has_value?).to eq(true)
+      expect(@rc.valid?).to eq(true)
     end
     it "doesn't accept numbers without signs" do
       @rc.value = "12345"
-      @rc.valid?.should == false
+      expect(@rc.valid?).to eq(false)
     end
   end
 end

@@ -12,8 +12,8 @@ describe "registrants/build/add_name" do
     FactoryGirl.create(:wheel_size_24, id: 3)
     @ability = Object.new
     @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
-    controller.stub(:current_user) { FactoryGirl.create(:user) }
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
     allow(view).to receive(:wizard_path).and_return("/")
   end
 
@@ -25,12 +25,12 @@ describe "registrants/build/add_name" do
     it "renders dates in nice formats" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Jan 10, 2012/)
-      rendered.should match(/Feb 11, 2012/)
+      expect(rendered).to match(/Jan 10, 2012/)
+      expect(rendered).to match(/Feb 11, 2012/)
     end
     it "lists competitor costs" do
       render
-      rendered.should match(/100/)
+      expect(rendered).to match(/100/)
     end
   end
 
@@ -40,7 +40,7 @@ describe "registrants/build/add_name" do
     end
     it "displays the registration_period for non-competitors" do
       render
-      rendered.should match(/50/)
+      expect(rendered).to match(/50/)
     end
   end
 end

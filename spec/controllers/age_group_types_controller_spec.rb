@@ -15,8 +15,8 @@ describe AgeGroupTypesController do
     it "returns http success" do
       agt = FactoryGirl.create(:age_group_type)
       get 'index'
-      response.should be_success
-      assigns(:age_group_types).should == [agt]
+      expect(response).to be_success
+      expect(assigns(:age_group_types)).to eq([agt])
     end
   end
 
@@ -25,7 +25,7 @@ describe AgeGroupTypesController do
       age_group_type = FactoryGirl.create(:age_group_type)
       age_group_entry = FactoryGirl.create(:age_group_entry, :age_group_type => age_group_type)
       get :show, {:id => age_group_type.id}
-      assigns(:age_group_type).should eq(age_group_type)
+      expect(assigns(:age_group_type)).to eq(age_group_type)
     end
   end
 
@@ -34,7 +34,7 @@ describe AgeGroupTypesController do
       expect {
         post :create, {:age_group_type => valid_attributes}
       }.to change(AgeGroupType, :count).by(1)
-      response.should redirect_to(age_group_types_path)
+      expect(response).to redirect_to(age_group_types_path)
     end
   end
 
@@ -44,7 +44,7 @@ describe AgeGroupTypesController do
       expect {
         delete 'destroy', {:id => agt.id}
       }.to change(AgeGroupType, :count).by(-1)
-      response.should redirect_to(age_group_types_path)
+      expect(response).to redirect_to(age_group_types_path)
     end
   end
 
@@ -52,7 +52,7 @@ describe AgeGroupTypesController do
     it "returns http success" do
       agt = FactoryGirl.create(:age_group_type)
       put 'update', {:id => agt.id, :age_group_type => valid_attributes}
-      response.should redirect_to(age_group_types_path)
+      expect(response).to redirect_to(age_group_types_path)
     end
   end
 

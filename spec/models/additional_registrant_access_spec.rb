@@ -25,31 +25,31 @@ describe AdditionalRegistrantAccess do
     @ara = FactoryGirl.create(:additional_registrant_access)
   end
   it "can be created from factorygirl" do
-    @ara.valid?.should == true
+    expect(@ara.valid?).to eq(true)
   end
   it "must have a registrant" do
     @ara.registrant = nil
-    @ara.valid?.should == false
+    expect(@ara.valid?).to eq(false)
   end
 
   it "must have a user" do
     @ara.user = nil
-    @ara.valid?.should == false
+    expect(@ara.valid?).to eq(false)
   end
 
   it "is declined:false by default" do
     ara = AdditionalRegistrantAccess.new
-    ara.declined.should == false
+    expect(ara.declined).to eq(false)
   end
 
   it "is accepted_readonly:false by default" do
     ara = AdditionalRegistrantAccess.new
-    ara.accepted_readonly.should == false
+    expect(ara.accepted_readonly).to eq(false)
   end
 
   it "Cannot have a duplicate request" do
     ara2 = FactoryGirl.build(:additional_registrant_access, :user => @ara.user, :registrant => @ara.registrant)
-    ara2.valid?.should == false
+    expect(ara2.valid?).to eq(false)
   end
 
   describe "when neither declined nor accepeted" do
@@ -58,7 +58,7 @@ describe AdditionalRegistrantAccess do
       @ara.accepted_readonly = false
     end
     it "has a new status" do
-      @ara.status.should == "New"
+      expect(@ara.status).to eq("New")
     end
   end
   describe "when it is accepted" do
@@ -66,7 +66,7 @@ describe AdditionalRegistrantAccess do
       @ara.accepted_readonly = true
     end
     it "has an Accepted status" do
-      @ara.status.should == "Accepted"
+      expect(@ara.status).to eq("Accepted")
     end
   end
   describe "when it is declined" do
@@ -74,11 +74,11 @@ describe AdditionalRegistrantAccess do
       @ara.declined = true
     end
     it "has a Declined status" do
-      @ara.status.should == "Declined"
+      expect(@ara.status).to eq("Declined")
     end
     it "even when also accepted" do
       @ara.accepted_readonly = true
-      @ara.status.should == "Declined"
+      expect(@ara.status).to eq("Declined")
     end
   end
 end
