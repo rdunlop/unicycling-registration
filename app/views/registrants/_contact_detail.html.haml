@@ -70,6 +70,13 @@
             = f.label :email, t(".email")
           %td
             = f.email_field :email, :class => "ui-tooltip", :title => "Provide your email address to receive updates to registration, schedule, and new events."
+        - if EventConfiguration.singleton.italian_requirements?
+          %tr
+            %td= f.label :birthplace
+            %td= f.text_field :birthplace
+          %tr
+            %td= f.label :italian_fiscal_code
+            %td= f.text_field :italian_fiscal_code
     %fieldset.data_block
       %legend Team Affiliation
       %table
@@ -83,16 +90,6 @@
           %tr
             %td= f.label :usa_member_number, "USA Membership Number"
             %td= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{@config.short_name}"
-    - if EventConfiguration.singleton.vat_mode?
-      %fieldset.data_block
-        %legend Tax Information (Required for Italian participants)
-        %table
-          %tr
-            %td= f.label :birthplace
-            %td= f.text_field :birthplace
-          %tr
-            %td= f.label :vat_number
-            %td= f.text_field :vat_number
     %fieldset.data_block
       %legend= t(".emergency_contact")
       %table

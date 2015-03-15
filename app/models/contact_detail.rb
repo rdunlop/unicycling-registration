@@ -28,7 +28,7 @@
 #  usa_confirmed_paid              :boolean          default(FALSE)
 #  usa_family_membership_holder_id :integer
 #  birthplace                      :string(255)
-#  vat_number                      :string(255)
+#  italian_fiscal_code             :string(255)
 #
 # Indexes
 #
@@ -45,11 +45,12 @@ class ContactDetail < ActiveRecord::Base
   # contact-info block
   validates :emergency_name, :emergency_relationship, :emergency_primary_phone, :presence => true
   validates :responsible_adult_name, :responsible_adult_phone, :presence => true, :if => :minor?
-  validates :vat_number, :birthplace, presence: { message: "must be specified if you are from Italy" }, if: :vat_required?
+  validates :birthplace, presence: true, if: "EventConfiguration.singleton.italian_requirements?"
+  validates :italian_fiscal_code, format: { with: /\A[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]\Z/, message: "must be specified if you are from Italy" }, if: :vat_required?
 
   # Italians are required to enter VAT_Number and Birthplace
   def vat_required?
-    EventConfiguration.singleton.vat_mode? && country_residence == "IT"
+    EventConfiguration.singleton.italian_requirements? && country_residence == "IT"
   end
 
   def minor?

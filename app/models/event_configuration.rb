@@ -37,7 +37,7 @@
 #  paypal_test                           :boolean          default(TRUE), not null
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
-#  vat_mode                              :boolean          default(FALSE), not null
+#  italian_requirements                  :boolean          default(FALSE), not null
 #
 
 class EventConfiguration < ActiveRecord::Base

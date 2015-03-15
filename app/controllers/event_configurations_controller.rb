@@ -110,7 +110,7 @@ class EventConfigurationsController < ConventionSetupController
     params.require(:event_configuration).permit(:spectators, :standard_skill, :standard_skill_closed_date, :style_name,
                                                 :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,
                                                 :waiver, :waiver_url, :custom_waiver_text,
-                                                :vat_mode,
+                                                :italian_requirements,
                                                 :contact_email,
                                                 :artistic_score_elimination_mode_naucc,
                                                 :rulebook_url

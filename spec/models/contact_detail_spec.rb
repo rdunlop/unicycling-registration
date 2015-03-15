@@ -28,7 +28,7 @@
 #  usa_confirmed_paid              :boolean          default(FALSE)
 #  usa_family_membership_holder_id :integer
 #  birthplace                      :string(255)
-#  vat_number                      :string(255)
+#  italian_fiscal_code             :string(255)
 #
 # Indexes
 #
@@ -55,25 +55,34 @@ describe ContactDetail do
     @cd.valid?.should == false
   end
 
-  context "when vat_mode is enabled" do
+  context "when italian_requirements is enabled" do
     before :each do
-      EventConfiguration.singleton.update_attribute(:vat_mode, true)
+      EventConfiguration.singleton.update_attribute(:italian_requirements, true)
     end
 
     it "requires vat_number if from italy" do
       @cd.country_residence = "IT"
       @cd.birthplace = "Place"
-      @cd.vat_number = nil
+      @cd.italian_fiscal_code = nil
       expect(@cd).to be_invalid
-      @cd.vat_number = "12345"
+      @cd.italian_fiscal_code = "CCCCCC99C99C999C"
+      expect(@cd).to be_valid
+    end
+
+    it "requires birthplace" do
+      @cd.country_residence = "CA"
+      @cd.birthplace = nil
+      expect(@cd).to be_invalid
+      @cd.birthplace = "Canada"
       expect(@cd).to be_valid
     end
 
     it "doesn't require vat_number if from canada" do
       @cd.country_residence = "CA"
-      @cd.vat_number = nil
+      @cd.birthplace = "Canada"
+      @cd.italian_fiscal_code = nil
       expect(@cd).to be_valid
-      @cd.vat_number = "12345"
+      @cd.italian_fiscal_code = "CCCCCC99C99C999C"
       expect(@cd).to be_valid
     end
   end
