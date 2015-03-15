@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315154351) do
+ActiveRecord::Schema.define(version: 20150315163930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -377,6 +377,8 @@ ActiveRecord::Schema.define(version: 20150315154351) do
     t.string   "waiver",                                default: "none"
     t.integer  "validations_applied"
     t.boolean  "italian_requirements",                  default: false,  null: false
+    t.string   "rules_file_name"
+    t.boolean  "accept_rules",                          default: false,  null: false
   end
 
   create_table "events", force: true do |t|
@@ -712,6 +714,7 @@ ActiveRecord::Schema.define(version: 20150315154351) do
     t.string   "sorted_last_name"
     t.string   "status",                  default: "active",     null: false
     t.string   "registrant_type",         default: "competitor"
+    t.boolean  "rules_accepted",          default: false,        null: false
   end
 
   add_index "registrants", ["deleted"], name: "index_registrants_deleted", using: :btree

@@ -1,6 +1,6 @@
 %h1 Base Settings
 
-= simple_form_for(@event_configuration, url: update_base_settings_event_configuration_path, method: :put) do |f|
+= simple_form_for(@event_configuration, url: update_base_settings_event_configuration_path, method: :put, multipart: true) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
 
 
@@ -32,6 +32,11 @@
 
     = f.input :custom_waiver_text, placeholder: EventConfiguration.default_waiver_text, input_html: { size: "60x12" }
 
+  %fieldset.form__fieldset
+    %h3 Rules
+
+    = f.input :rules_file_name
+    = f.input :accept_rules, hint: "Enable this to force all registrants to accept the rules attached in PDF"
   %hr
 
   %h3 Website Style

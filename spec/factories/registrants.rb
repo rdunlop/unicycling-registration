@@ -22,6 +22,7 @@
 #  sorted_last_name        :string(255)
 #  status                  :string(255)      default("active"), not null
 #  registrant_type         :string(255)      default("competitor")
+#  rules_accepted          :boolean          default(FALSE), not null
 #
 # Indexes
 #

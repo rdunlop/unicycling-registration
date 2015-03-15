@@ -82,7 +82,7 @@ class Registrants::BuildController < ApplicationController
 
   def attributes
     [ :first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
-      :online_waiver_signature, :wheel_size_id,
+      :online_waiver_signature, :wheel_size_id, :rules_accepted,
       volunteer_opportunity_ids: [],
       registrant_choices_attributes: [:event_choice_id, :value, :id],
       registrant_event_sign_ups_attributes: [:event_category_id, :signed_up, :event_id, :id],

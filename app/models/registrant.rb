@@ -22,6 +22,7 @@
 #  sorted_last_name        :string(255)
 #  status                  :string(255)      default("active"), not null
 #  registrant_type         :string(255)      default("competitor")
+#  rules_accepted          :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -131,6 +132,7 @@ class Registrant < ActiveRecord::Base
 
   # waiver
   validates :online_waiver_signature, :presence => true, if: :needs_waiver?
+  validates :rules_accepted, acceptance: { accept: true }, if: :needs_rules_accepted?
 
   # contact info
   validates_associated :contact_detail, if: :validated?
@@ -168,6 +170,10 @@ class Registrant < ActiveRecord::Base
 
   def needs_waiver?
     EventConfiguration.singleton.has_online_waiver && status_is_active?("contact_details")
+  end
+
+  def needs_rules_accepted?
+    EventConfiguration.singleton.accept_rules? && status_is_active?("contact_details")
   end
 
   def spectator?

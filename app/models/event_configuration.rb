@@ -38,6 +38,8 @@
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
 #  italian_requirements                  :boolean          default(FALSE), not null
+#  rules_file_name                       :string(255)
+#  accept_rules                          :boolean          default(FALSE), not null
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -81,6 +83,8 @@ class EventConfiguration < ActiveRecord::Base
   validates :max_award_place, presence: true, if: :important_dates_applied?
 
   before_validation :clear_of_blank_strings
+
+  mount_uploader :rules_file_name, PdfUploader
 
   after_initialize :init
 

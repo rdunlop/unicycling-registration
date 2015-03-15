@@ -111,6 +111,7 @@ class EventConfigurationsController < ConventionSetupController
                                                 :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,
                                                 :waiver, :waiver_url, :custom_waiver_text,
                                                 :italian_requirements,
+                                                :accept_rules, :rules_file_name,
                                                 :contact_email,
                                                 :artistic_score_elimination_mode_naucc,
                                                 :rulebook_url

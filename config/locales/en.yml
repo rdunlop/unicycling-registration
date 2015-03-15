@@ -105,6 +105,8 @@ en:
         select_country: "Please select a country above"
     online_waiver:
       online_waiver_signature: "Signature: "
+    rules_acceptance:
+      rules_agreement: I accept the Rules.
     pay_now:
       pay_now: "Pay Now"
       unknown: "Unknown"
