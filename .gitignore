@@ -17,6 +17,7 @@ dump.rdb
 /.capistrano
 /notes_and_stuff
 /public/uploads
+/public/public
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

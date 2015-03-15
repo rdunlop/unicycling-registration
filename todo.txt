@@ -1,5 +1,4 @@
 - Deletion of ExpenseGroup should propogate to RegistrantExpenseItems? (M al Cubo fee)
-- Upgrade to rspec3 "expect" syntax
 - ALways set "position" (event creation, event-category creation)
 - add ability to sort/save expense_group order
 - add ability to sort/save expense_item order
