@@ -1,8 +1,8 @@
 ActionMailer::Base.default :from => Proc.new { from_address }
 
 def from_address
-  tenant = Tenant.find_by(subdomain: Apartment::Tenant.current)
-  "#{tenant.try(:description)} <#{Rails.application.secrets.mail_full_email}>"
+  name = EventConfiguration.singleton.short_name
+  "#{name} <#{Rails.application.secrets.mail_full_email}>"
 end
 
 ActionMailer::Base.default_url_options[:host] = Rails.application.secrets.domain
