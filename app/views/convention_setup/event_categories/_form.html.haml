@@ -1,20 +1,9 @@
-= form_for([:convention_setup, @event, @event_category]) do |f|
+= simple_form_for([:convention_setup, @event, @event_category]) do |f|
   = render partial: "/shared/error_messages", object: @event_category
   Note: If there is only one event_category, the user will not be presented with a selection-box.
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :position
-    = f.number_field :position
-  .field
-    = f.label :age_range_start
-    = f.number_field :age_range_start, :in => 0..100
-  .field
-    = f.label :age_range_end
-    = f.number_field :age_range_end, :in => 0..100
-  .field
-    = f.label :warning_on_registration_summary
-    = f.check_box :warning_on_registration_summary
-  .actions
-    = f.submit
+  = f.input :name
+  = f.input :position
+  = f.input :age_range_start
+  = f.input :age_range_end
+  = f.input :warning_on_registration_summary
+  = f.button :submit

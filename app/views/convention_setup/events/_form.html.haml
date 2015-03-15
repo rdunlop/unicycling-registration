@@ -24,14 +24,14 @@
       = ec.input :position
 
   = f.input :accepts_music_uploads
-  = f.input :accepts_wheel_size_override, hint: "Setting this option presents children <= 10 years old with the ability to specify a wheel size override."
+  = f.input :accepts_wheel_size_override
 
   .js--hiddenToggleMenu Advanced Settings
   .js--hiddenToggle
 
     = f.input :position
     = f.input :visible
-    = f.input :artistic, hint: "Setting this boolean will automatically restrict changes after the Artistic Closed Date."
+    = f.input :artistic
     .field
       .input_details The Artistic Closed Date is #{EventConfiguration.singleton.artistic_closed_date.presence || "Undefined"}
   = f.button :submit

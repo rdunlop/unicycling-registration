@@ -27,6 +27,8 @@ en:
       coupon_code:
         inform_emails: E-mails to notify on each coupon use
       volunteer_opportunity: "E-mail addresses to notify on each volunteer sign-up"
+      event:
+        accepts_music_uploads: "Request Music be Uploaded"
     placeholders:
       coupon_code:
         code: "Code for user to enter"
@@ -43,6 +45,10 @@ en:
         noncompetitor_benefits: "Appears on the Registration Homepage, describing the benefits of NonCompetitor Registration"
         spectator_benefits: "Appears on the Registration Homepage, describing the benefits of Spectator Registration"
         paypal_test: "allow to pretend to receive payment confirmation from paypal"
+      event:
+        accepts_music_uploads: Check this box if each competitor may choose music for their competition
+        accepts_wheel_size_override: "Setting this option presents children <= 10 years old with the ability to specify a wheel size override."
+        artistic: "Setting this boolean will automatically restrict changes after the Artistic Closed Date."
     options:
       event_configuration:
         waiver:
