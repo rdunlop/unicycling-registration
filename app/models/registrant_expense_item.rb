@@ -83,7 +83,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
     end
 
     case free_options
-    when "One Free In Group"
+    when "One Free In Group", "One Free In Group REQUIRED"
       if registrant.has_chosen_free_item_from_expense_group(eg)
         errors[:base] = "Only 1 free item is permitted in this expense_group"
       end

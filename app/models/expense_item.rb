@@ -105,7 +105,7 @@ class ExpenseItem < ActiveRecord::Base
       end
     end
     if self.expense_group.noncompetitor_required
-      Registrant.notcompetitor.each do |reg|
+      Registrant.noncompetitor.each do |reg|
         reg.build_registration_item(self)
         reg.save
       end

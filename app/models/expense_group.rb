@@ -26,7 +26,7 @@ class ExpenseGroup < ActiveRecord::Base
   accepts_nested_attributes_for :translations
 
   def self.free_options
-    ["None Free", "One Free In Group", "One Free of Each In Group"]
+    ["None Free", "One Free In Group", "One Free In Group REQUIRED", "One Free of Each In Group"]
   end
 
   validates :competitor_free_options, :inclusion => { :in => self.free_options, :allow_blank => true }

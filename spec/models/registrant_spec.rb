@@ -471,6 +471,32 @@ describe Registrant do
     end
   end
 
+  describe "with an expense_group which REQUIRES one free item per group" do
+    before(:each) do
+      @eg = FactoryGirl.create(:expense_group, :competitor_free_options => "One Free In Group REQUIRED")
+      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+    end
+
+    it "marks the registrant as expense_item_is_free for this expense_item" do
+      @reg.expense_item_is_free(@ei).should == true
+    end
+
+    it "is invalid without the item" do
+      expect(@reg).to be_invalid
+    end
+
+    context "when it has the (free) expense item" do
+      before(:each) do
+        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, free: true)
+        @reg.reload
+      end
+
+      it "is valid" do
+        expect(@reg).to be_valid
+      end
+    end
+  end
+
   describe "with an expense_group which allows one free item per group" do
     before(:each) do
       @eg = FactoryGirl.create(:expense_group, :competitor_free_options => "One Free In Group")

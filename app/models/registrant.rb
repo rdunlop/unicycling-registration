@@ -138,6 +138,7 @@ class Registrant < ActiveRecord::Base
   # Expense items
   validate :not_exceeding_expense_item_limits
   validates_associated :registrant_expense_items
+  validate :has_necessary_free_items, if: :validated?
 
   scope :active_or_incomplete, -> { where(:deleted => false).order(:bib_number) }
   scope :active, -> { where(status: "active").active_or_incomplete }
@@ -192,6 +193,10 @@ class Registrant < ActiveRecord::Base
 
   def self.competitor
     where(registrant_type: 'competitor')
+  end
+
+  def self.noncompetitor
+    where(registrant_type: 'noncompetitor')
   end
 
   def self.notcompetitor
@@ -594,7 +599,7 @@ class Registrant < ActiveRecord::Base
       free_options = expense_item.expense_group.noncompetitor_free_options
     end
     case free_options
-    when "One Free In Group"
+    when "One Free In Group", "One Free In Group REQUIRED"
       return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
     when "One Free of Each In Group"
       return !has_chosen_free_item_of_expense_item(expense_item)
@@ -609,6 +614,14 @@ class Registrant < ActiveRecord::Base
       num_ei = expense_items.count(ei)
       if !ei.can_i_add?(num_ei)
         errors[:base] << "There are not that many #{ei.to_s} available"
+      end
+    end
+  end
+
+  def has_necessary_free_items
+    ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED").each do |expense_group|
+      if all_expense_items.none? { |expense_item| expense_item.expense_group == expense_group}
+        errors[:base] << "You must choose a free #{expense_group}"
       end
     end
   end
