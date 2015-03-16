@@ -1,10 +1,7 @@
 - # locals: payment
 %p
   %b PaymentID:
-  = payment.id
-%p
-  %b Invoice ID
-  = payment.invoice_id
+  #{payment.id} - #{payment.invoice_id}
 
 - if payment.completed
   %p
