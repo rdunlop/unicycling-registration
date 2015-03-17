@@ -37,7 +37,7 @@ class RegistrantsController < ApplicationController
 
   # GET /users/12/registrants
   def index
-    @my_registrants = @user.registrants.active
+    @my_registrants = @user.registrants.active_or_incomplete
     @shared_registrants = @user.accessible_registrants - @my_registrants
     @total_owing = @user.total_owing
     @has_print_waiver = @config.has_print_waiver
