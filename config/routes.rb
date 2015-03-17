@@ -72,6 +72,7 @@ Workspace::Application.routes.draw do
       get :download_competitors_for_timers
       get :results
     end
+    resource :import, only: [:new, :create]
 
     resources :standard_skill_entries, :only => [:index] do
       collection do
