@@ -66,8 +66,6 @@ en:
       birthday: "Birthday"
       male: "Male"
       female: "Female"
-      primary_team_or_club_name: "Primary Team or Club Name"
-      primary_team_or_club_contact: "Primary Team or Club Contact"
     build:
       set_wheel_sizes:
         default_wheel_size: "Default Wheel Size"
@@ -101,6 +99,8 @@ en:
       other_phone: "Other phone"
       responsible_adult: "Responsible Adult"
       responsible_adult_detail: "(for Registrants Under the age of 18)"
+      primary_team_or_club_name: "Primary Team or Club Name"
+      primary_team_or_club_contact: "Primary Team or Club Contact"
     subregion_select:
         select_country: "Please select a country above"
     online_waiver:

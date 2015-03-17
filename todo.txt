@@ -1,3 +1,4 @@
+- Create Download for each payment ID the entire anagrafic data for each registrant involved + items bought (as listed below) + total cost of the item bought (as listed below). (as detailed in "Body_Purchase" email)
 - Deletion of ExpenseGroup should propogate to RegistrantExpenseItems? (M al Cubo fee)
 - ALways set "position" (event creation, event-category creation)
 - add ability to sort/save expense_group order

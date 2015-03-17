@@ -61,8 +61,6 @@ fr:
       birthday: "Date de naissance"
       male: "Homme"
       female: "Femme"
-      primary_team_or_club_name: "Nom de l’équipe principale ou de l’association"
-      primary_team_or_club_contact: "Nom du contact de l’équipe principale ou de l’association"
     build:
       set_wheel_sizes:
         default_wheel_size: "Default Wheel Size"
@@ -96,6 +94,8 @@ fr:
       other_phone: "Autre numéro de téléphone"
       responsible_adult: "Adulte responsable"
       responsible_adult_detail: "(pour les participants de moins de 18 ans)"
+      primary_team_or_club_name: "Nom de l’équipe principale ou de l’association"
+      primary_team_or_club_contact: "Nom du contact de l’équipe principale ou de l’association"
     subregion_select:
         select_country: "Veuillez sélectionner parmis les pays ci-dessus"
     new_expense:
