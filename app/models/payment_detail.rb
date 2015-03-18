@@ -54,6 +54,7 @@ class PaymentDetail < ActiveRecord::Base
   end
 
   def registrant_must_be_valid
+    return true
     if registrant && (!registrant.validated? || registrant.invalid?)
       errors[:registrant] = "Registrant #{registrant.to_s} form is incomplete"
       return false
