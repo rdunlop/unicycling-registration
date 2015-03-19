@@ -5,7 +5,7 @@
       = t(".select_country")
   - else
     - country = Carmen::Country.coded(parent_region)
-    - if country.subregions?
+    - if country.try(:subregions?)
       - if from_object
         = f.subregion_select :state_code, parent_region, {include_blank: true}, class: "chosen-select"
       - else
