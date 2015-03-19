@@ -7,7 +7,7 @@ Workspace::Application.routes.draw do
   get '404', to: 'errors#not_found'
   get '415', to: 'errors#not_found'
   get '422', to: 'errors#not_permitted'
-  get '500', to: 'errors#server_error'
+  get '500', to: 'errors#internal_server_error'
 
   scope "(:locale)" do
     resources :registrant_groups, :except => [:new] do

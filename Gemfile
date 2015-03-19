@@ -42,6 +42,7 @@ gem 'sinatra', '>= 1.3.0', :require => nil # necessary for sidekiq routing
 gem 'unicorn', require: false
 gem 'whenever'
 gem 'rubocop', require: false
+gem 'gaffe'
 
 # multi-tenancy
 gem 'apartment'

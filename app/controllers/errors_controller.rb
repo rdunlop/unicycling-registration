@@ -1,4 +1,5 @@
 class ErrorsController < ApplicationController
+  include Gaffe::Errors
   skip_authorization_check
 
   def not_found
@@ -13,7 +14,7 @@ class ErrorsController < ApplicationController
     render status: 422, layout: false
   end
 
-  def server_error
+  def internal_server_error
     render status: 500, layout: false
   end
 end
