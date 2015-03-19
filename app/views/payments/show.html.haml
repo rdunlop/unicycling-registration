@@ -21,7 +21,8 @@
         - index = 0
         - @payment.unique_payment_details.each do |pd|
           - next if pd.amount == 0
-          = hidden_field_tag "amount_#{index + 1}", pd.amount.to_s
+          -# This must be in the format of "12.34" (no commas)
+          = hidden_field_tag "amount_#{index + 1}", pd.amount.format_with_settings(separator: ".", symbol: nil)
           = hidden_field_tag "item_name_#{index + 1}", pd.to_s
           = hidden_field_tag "quantity_#{index + 1}", pd.count.to_s
           - index += 1
@@ -31,6 +32,6 @@
         = submit_tag "Complete Payment", class: "payment_link registration_button"
   - if @config.test_mode
     .test_mode
-      = link_to "Pretend to pay by credit card $#{@payment.total_amount}", fake_complete_payment_path(@payment), :method => :post
+      = link_to "Pretend to pay by credit card #{print_formatted_currency(@payment.total_amount)}", fake_complete_payment_path(@payment), :method => :post
 
 = link_to t('back'), user_payments_path(current_user)
