@@ -285,6 +285,7 @@ class Ability
       can [:new, :exchange_choose, :exchange_create, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
       can [:read], Registrant
       can [:list, :payments, :payment_details], :export_payment
+      can [:download_all], :export_registrant
     end
   end
 

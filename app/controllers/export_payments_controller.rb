@@ -1,4 +1,5 @@
 class ExportPaymentsController < ApplicationController
+  before_filter :authenticate_user!
   authorize_resource class: false
 
   include ExcelOutputter
