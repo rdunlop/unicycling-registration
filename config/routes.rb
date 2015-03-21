@@ -104,8 +104,8 @@ Workspace::Application.routes.draw do
     resources :payments, :except => [:index, :edit, :update, :destroy] do
       collection do
         get :summary
-        post :notification
-        get :success
+        post :notification, controller: "paypal_payments"
+        get :success, controller: "paypal_payments"
       end
 
       member do
