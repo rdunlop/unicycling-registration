@@ -14,7 +14,7 @@
   = link_to "Manually Receive Payment", new_payment_adjustment_path
   %br
 
-- if can? :list, :export_payments
+- if can? :list, :export_payment
   = link_to "Download Payments", list_export_payments_path
 
 -# = link_to "Reg Fee", reg_fee_registrant_path(registrant)
