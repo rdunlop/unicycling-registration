@@ -1,23 +1,27 @@
-%h1 Payments Summary
+%h1 Payments Management
 
-- if can? :new, :payment_adjustment
-  = link_to "Create Adjustment Payment", new_payment_adjustment_path
-  %br
+- cache [Payment] do
+  %div
+    %strong Total Amount Received
+    = print_formatted_currency(Payment.total_received)
+
 - if can? :list, :payment_adjustment
   = link_to "View list of Payments/Refunds", list_payment_adjustments_path
+
+- if can? :new, :payment_adjustment
+  = link_to "Create Refund/Exchange", new_payment_adjustment_path
+  %br
+  = link_to "Manually Receive Payment", new_payment_adjustment_path
+  %br
+
+- if can? :list, :export_payments
+  = link_to "Download Payments", list_export_payments_path
+
+-# = link_to "Reg Fee", reg_fee_registrant_path(registrant)
+
 %br
 %Br
 
-
-- cache [Payment] do
-  %table
-    %caption Payments Summary
-    %thead
-      %tr
-        %th Total Amount Received
-    %tbody
-      %tr
-        %td= print_formatted_currency(Payment.total_received)
 
 %hr
 %h2 Expenses by Group
@@ -46,3 +50,16 @@
           %td
             - unpaid_count = item.num_unpaid
             = unpaid_count
+
+- if CouponCode.any?
+  %h2 Coupon Codes
+  %table.sortable
+    %thead
+      %tr
+        %th Coupon
+        %th Number Applied
+    %tbody
+      - CouponCode.all.each do |coupon_code|
+        %tr
+          %td= link_to coupon_code, coupon_code
+          %td= coupon_code.applied_to_payment_details.count

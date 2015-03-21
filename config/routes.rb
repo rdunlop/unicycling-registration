@@ -101,6 +101,13 @@ Workspace::Application.routes.draw do
 
     resources :refunds, :only => [:show]
 
+    resource :export_payments, only: [] do
+      collection do
+        get :list
+        put :payments
+        put :payment_details
+      end
+    end
     resources :payments, :except => [:index, :edit, :update, :destroy] do
       collection do
         get :summary
