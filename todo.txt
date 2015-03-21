@@ -1,3 +1,4 @@
+- Stop directing user to different homepage based on their role
 - Pay_now partial "Total" is in $ (should be in EUR)
 -"Missing reg-item match" emails are sent when I'm doing manual payments. Stop this when done through the admin system?
 - Create Download for each payment ID the entire anagrafic data for each registrant involved + items bought (as listed below) + total cost of the item bought (as listed below). (as detailed in "Body_Purchase" email)

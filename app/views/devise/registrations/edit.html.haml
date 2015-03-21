@@ -1,4 +1,4 @@
-%h2 Edit #{resource_name.to_s.humanize}
+%h1 My Account
 
 %h3 Change Email or Password
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
@@ -7,15 +7,18 @@
     = f.label :email
     %br
     = f.email_field :email
-  %div
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br
-    = f.password_field :password, :autocomplete => "off"
-  %div
-    = f.label :password_confirmation
-    %br
-    = f.password_field :password_confirmation
+
+  %fieldset.data_block
+    %legend Change password:
+    %div
+      = f.label :password
+      %i (leave blank if you don't want to change it)
+      %br
+      = f.password_field :password, :autocomplete => "off"
+    %div
+      = f.label :password_confirmation
+      %br
+      = f.password_field :password_confirmation
   %div
     = f.label :current_password
     %i (we need your current password to confirm your changes)
