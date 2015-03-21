@@ -1,0 +1,26 @@
+%h2 Events by Category
+%ul.categoryList
+  - @categories.each do |category|
+    %li
+      %strong= category
+      %ul.categoryList__eventList
+        - category.events.each do |event|
+          - if can?(:read, event)
+            %li= link_to event, event_path(event)
+
+
+- if can?(:directors, :permission)
+  %hr
+  %h2 Manage Directors
+  %li= link_to 'Directors', directors_permissions_path
+
+- if can?(:manage, AgeGroupType)
+  %hr
+  %h2 Age Groups
+  %li= link_to  'Age Group Type', age_group_types_path
+
+
+%hr
+%h2 Competition Types
+- if can?(:manage, CombinedCompetition)
+  %li= link_to 'Overall Champion Calculators', combined_competitions_path

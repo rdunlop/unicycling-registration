@@ -7,13 +7,9 @@ class EventsController < ApplicationController
   respond_to :html
 
   # GET /events
-  # GET /events.json
   def index
-    @events = @category.events.includes(:event_choices)
-    @event = Event.new
-    @event.event_categories.build
-
-    respond_with(@events)
+    @categories = Category.includes(:translations).includes(:events)
+    respond_with(@categories)
   end
 
   # GET /events/summary

@@ -264,18 +264,17 @@ Registrant Expense Items
 %h2.style_head Nav Bar
 
 %nav{ style: 'text-align: left' }
-  %ul
+  .hamburger Menu
+  %ul.navList
+    %li= link_to image_tag("http://placehold.it/93x38.jpg", class: "logo"), root_url, {:class => "logo_link"}
     %li
       %a{href: '#'} First Link
     %li
       %a{href: '#'} List Link
-      %ul
-        %li
-          %a{href: '#'} Sub element 1
-        %li
-          %a{href: '#'} Sub element 2
-    %li#sign-out
-      %a{href: '#'} Log out user
+    %li
+      = link_to "My Account", "/"
+  .accountNav
+    = link_to "Log out user", "/", method: :delete, data: { confirm: "Log Out?" }
 
 // Breadcrumbs
 %h2.style_head Breadcrumbs

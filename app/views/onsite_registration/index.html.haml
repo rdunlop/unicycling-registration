@@ -4,3 +4,6 @@
 %small Example: you may want to only sell T-Shirts at the T-Shirt table.
 
 = link_to "View Items for Sale", onsite_registration_expense_groups_path
+
+- if can?(:display_acl, :permission)
+  %li= link_to  'Authorized Laptop', acl_permissions_path

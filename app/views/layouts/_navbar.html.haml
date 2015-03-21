@@ -1,0 +1,66 @@
+- cache ['navbar', I18n.locale, current_user, @config, Category, Competition] do
+  %nav.non_printable
+    .hamburger Menu
+    %ul.navList
+      - if EventConfiguration.configuration_exists?
+        = render partial: "/layouts/logo"
+      - if !user_signed_in?
+        %li= link_to "Log In", new_user_session_path
+      - else
+        %li= link_to t('my_registrations'), user_registrants_path(current_user)
+        %li= link_to t('my_payments'), user_payments_path(current_user)
+        - if @config.standard_skill
+          %li= link_to 'My Standard Skill Routines', standard_skill_routines_path
+        %li= link_to t('all_registrants'), all_registrants_path
+        - if Competition.any?
+          %li= link_to t('results'), results_path
+        %li= link_to t('my_account'), edit_user_registration_path
+    - if user_signed_in?
+      .accountNav
+        = link_to t('sign_out'), destroy_user_session_path, :method => :delete
+
+  - if user_signed_in? && current_user.roles.any?
+    %nav.non_printable
+      %ul.navList
+        - if can?(:read, :convention_setup)
+          %li= link_to 'Convention Setup', convention_setup_path
+        - if can?(:manage, User)
+          %li= link_to 'User Permissions',  permissions_path
+        - if can?(:summary, Event)
+          %li= link_to  'Registration Overview', summary_events_path
+        %li= link_to 'Competitions', events_path
+        - if can?(:manage, AwardLabel)
+          %li= link_to  'Print/Create Awards', user_award_labels_path(current_user)
+        - if can?(:list, Song)
+          %li= link_to  'Manage Music', list_songs_path
+        - if can?(:summary, Payment)
+          %li= link_to  'Payments', summary_payments_path
+        - if can?(:read, :onsite_registration)
+          %li= link_to 'On-Site Registration', onsite_registration_path
+    %nav.non_printable
+      %ul.navList
+        - if @config.standard_skill && can?(:manage, StandardSkillEntry)
+          %li= link_to 'Standard Skill Entries', standard_skill_entries_path
+        - if can?(:manage, EventConfiguration)
+          %li= link_to 'Cache Management', cache_event_configuration_path
+        - if can?(:manage_one, Registrant)
+          %li= link_to  'Registrants (edit/print)', manage_one_registrants_path
+        - if can?(:bag_labels, Registrant)
+          %li= link_to  'Registrants (bag labels)', bag_labels_registrants_path(:format => :pdf)
+        - if can?(:read, Email)
+          %li= link_to  'Registrants (email)', emails_path
+        - if can?(:manage, Registrant)
+          %li= link_to  'Registrant Groups', registrant_groups_path
+        - if can?(:manage, :all)
+          %li= link_to  'Export Data', export_index_path
+        - if can?(:manage, :all)
+          %li= link_to  'Import Data', new_import_path
+        - if can?(:manage, :usa_membership) && @config.usa_membership_config?
+          %li= link_to  'USA Membership Management', usa_memberships_path
+        - if can?(:access, :rails_admin)
+          %li= link_to  'Modification History', rails_admin_path
+        - if @config.standard_skill
+          - if can?(:manage, StandardSkillRoutine)
+            %li= link_to  'Standard Skill Routines (view)', standard_skill_routines_path
+          - if can?(:manage, StandardSkillRoutine)
+            %li= link_to  'Standard Skill Routines (export)', download_file_standard_skill_routines_path

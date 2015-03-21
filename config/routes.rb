@@ -136,7 +136,7 @@ Workspace::Application.routes.draw do
 
     resources :coupon_codes
 
-    resources :events, only: [:show] do
+    resources :events, only: [:index, :show] do
       collection do
         get 'summary'
       end

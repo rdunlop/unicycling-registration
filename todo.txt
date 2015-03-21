@@ -1,10 +1,8 @@
-- Add /apple-touch-icon.png so that NewRelic errors go away. /apple-touch-icon-precomposed.png
- - Prevent RecordNotFound from going to NewRelic?
- - (ie: prevent things-not-sent-to-exception-notifier from going to NewRelic)
-
-- Fix "Logout"
+- Pay_now partial "Total" is in $ (should be in EUR)
+-"Missing reg-item match" emails are sent when I'm doing manual payments. Stop this when done through the admin system?
 - Create Download for each payment ID the entire anagrafic data for each registrant involved + items bought (as listed below) + total cost of the item bought (as listed below). (as detailed in "Body_Purchase" email)
 - Do I need PDT in PayPal?
+ - Do I even need IPN? I specify the notify_url in the paypal cart submission...
 - Add notes about how to set up PayPal integration to the Payments page (/notification...)
 - Can I allow incomplete registrants to see the "Summary" page?
 - On the "All Registrants" view, remove the "Events" link for NonCompetitors/Spectators.
