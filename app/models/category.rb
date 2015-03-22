@@ -19,7 +19,7 @@ class Category < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  translates :name
+  translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   after_save(:touch_event_configuration)

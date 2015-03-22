@@ -33,7 +33,7 @@ class ExpenseItem < ActiveRecord::Base
   has_many :registrant_expense_items, :inverse_of => :expense_item, dependent: :restrict_with_error
   has_many :coupon_code_expense_items, dependent: :destroy
 
-  translates :name, :details_label
+  translates :name, :details_label, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   belongs_to :expense_group, :inverse_of => :expense_items

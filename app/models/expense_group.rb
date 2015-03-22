@@ -22,7 +22,7 @@ class ExpenseGroup < ActiveRecord::Base
 
   has_many :expense_items, -> {order "expense_items.position"}, :inverse_of => :expense_group
 
-  translates :group_name
+  translates :group_name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   def self.free_options

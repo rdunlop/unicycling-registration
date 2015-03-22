@@ -30,7 +30,7 @@ class EventChoice < ActiveRecord::Base
 
   validates :label, {:presence => true}
 
-  translates :label, :tooltip
+  translates :label, :tooltip, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   def self.cell_types

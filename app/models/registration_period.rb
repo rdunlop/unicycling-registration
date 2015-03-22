@@ -21,7 +21,7 @@ class RegistrationPeriod < ActiveRecord::Base
 
   validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
 
-  translates :name
+  translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   belongs_to :competitor_expense_item, :class_name => "ExpenseItem", dependent: :destroy

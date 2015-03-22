@@ -46,8 +46,8 @@ class EventConfiguration < ActiveRecord::Base
   include MultiLevelValidation
   specify_validations :base_settings, :name_logo, :payment_settings, :important_dates
 
-  translates :short_name, :long_name, :location, :dates_description
-  translates :competitor_benefits, :noncompetitor_benefits, :spectator_benefits
+  translates :short_name, :long_name, :location, :dates_description, fallbacks_for_empty_translations: true
+  translates :competitor_benefits, :noncompetitor_benefits, :spectator_benefits, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   mount_uploader :logo_file, LogoUploader
