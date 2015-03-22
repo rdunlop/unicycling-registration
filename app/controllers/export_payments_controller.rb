@@ -18,7 +18,7 @@ class ExportPaymentsController < ApplicationController
       data << [
         payment.id,
         payment.completed_date.to_s,
-        print_formatted_currency(payment.total_amount),
+        payment.total_amount.to_s,
         payment.transaction_id,
         payment.invoice_id,
         payment.note
@@ -40,7 +40,7 @@ class ExportPaymentsController < ApplicationController
         payment_detail.payment_id,
         payment_detail.expense_item.id,
         payment_detail.expense_item.to_s,
-        print_formatted_currency(payment_detail.amount),
+        payment_detail.amount.to_s,
         payment_detail.registrant.bib_number
       ]
     end
