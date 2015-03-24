@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
   private
 
   def locale_parameter
-    params[:locale] if I18n.available_locales.include?(params[:locale].to_sym)
+    params[:locale] if I18n.available_locales.include?(params[:locale].try(:to_sym))
   end
 
   def locale_from_user
