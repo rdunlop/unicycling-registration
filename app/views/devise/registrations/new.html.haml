@@ -1,5 +1,5 @@
-%h2 Sign Up
-%p After Signing up, you will receive a confirmation E-mail that you must open to confirm your e-mail address
+%h2= t(".header")
+%p= t(".confirmation_reminder")
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = devise_error_messages!
   %div
@@ -9,12 +9,12 @@
   %div
     = f.label :password
     %br
-    %span.extra_info (minimum 6 characters)
+    %span.extra_info= t(".password_min_length")
     %br
     = f.password_field :password
   %div
     = f.label :password_confirmation
     %br
     = f.password_field :password_confirmation
-  %div= f.submit "Sign Up", :class => "focus_button"
+  %div= f.submit t(".sign_up"), :class => "focus_button"
 = render "devise/shared/links"
