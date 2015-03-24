@@ -1,0 +1,12 @@
+en:
+  devise:
+    registrations:
+      edit:
+        title: "My Account"
+        change_header: "Change Email or Password"
+        change_password: "Change password:"
+        blank_notice: "leave blank if you don't want to change it"
+        confirm_password_notice: "we need your current password to confirm your changes"
+        action: "Update"
+        current_permissions: "Current Permissions"
+        upgrade_to_admin_action: "Upgrade my account to an Admin account"

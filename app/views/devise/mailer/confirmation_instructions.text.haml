@@ -1,0 +1,7 @@
+#{ t(".welcome_message", email: @resource.email) }
+
+#{ t(".confirm_your_account_instructions") }
+
+\#{user_confirmation_url(@resource, :confirmation_token => @token)}
+
+#{ t(".copy_paste_instructions") }
