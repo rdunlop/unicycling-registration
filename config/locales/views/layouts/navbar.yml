@@ -1,0 +1,21 @@
+en:
+  layouts:
+    navbar:
+      log_in: Log In
+      my_registrations: "My Registrations"
+      my_payments: "My Payments"
+      my_standard_skill_routines: My Standard Skill Routines
+      all_registrants: "All Registrants"
+      results: "Competitions/Results"
+      my_account: "My Account"
+      sign_out: "Sign out"
+
+fr:
+  layouts:
+    navbar:
+      my_registrations: "Mes inscriptions"
+      my_payments: "Mes paiements"
+      all_registrants: "Tous les participants"
+      results: "Compétitions/Resultat"
+      my_account: "My Account"
+      sign_out: "Déconnexion"

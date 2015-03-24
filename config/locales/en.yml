@@ -23,13 +23,4 @@ en:
     expenses: "Expenses"
 
   # Common, used on many pages
-  my_registrations: "My Registrations"
-  results: "Competitions/Results"
-  my_payments: "My Payments"
-  all_registrants: "All Registrants"
-  my_account: "My Account"
-  sign_out: "Sign out"
-  competition_rulebook: "Competition Rulebook"
-  developed_by: "Developed by Robin Dunlop and Scott Wilton"
-  help: "Help"
   back: "Back"
