@@ -1,0 +1,17 @@
+en:
+  registrants:
+    base_details:
+      required_fields: "Required fields"
+      base_details: "Base Details"
+      birthday: "Birthday"
+      male: "Male"
+      female: "Female"
+
+fr:
+  registrants:
+    base_details:
+      required_fields: "Champs obligatoires"
+      base_details: "Informations de base"
+      birthday: "Date de naissance"
+      male: "Homme"
+      female: "Femme"

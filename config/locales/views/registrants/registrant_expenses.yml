@@ -1,0 +1,13 @@
+en:
+  registrants:
+    registrant_expenses:
+      expenses: "Expenses"
+      cost: "Cost"
+      paid: "Paid"
+
+fr:
+  registrants:
+    registrant_expenses:
+      expenses: "Frais"
+      cost: "Prix"
+      paid: "Payé"

@@ -1,0 +1,9 @@
+en:
+  registrants:
+    edit:
+      editing_registrant: "Editing Registrant"
+
+fr:
+  registrants:
+    edit:
+      editing_registrant: "Modifier une entrée de compétiteur"

@@ -1,0 +1,9 @@
+en:
+  registrants:
+    subregion_select:
+      select_country: "Please select a country above"
+
+fr:
+  registrants:
+    subregion_select:
+      select_country: "Veuillez sélectionner parmis les pays ci-dessus"

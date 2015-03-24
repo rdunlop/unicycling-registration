@@ -1,4 +1,5 @@
 - Stop directing user to different homepage based on their role
+- Override Taiwan, make it into a country, not a PRC?
 - Allow admins to make payments against incomplete registrations (payment_detail creation with invalid registrant?) (for transferring payments)
 - Allow easy listing of incomplete registrants?
 - Pay_now partial "Total" is in $ (should be in EUR)

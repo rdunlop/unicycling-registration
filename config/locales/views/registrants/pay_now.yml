@@ -1,0 +1,11 @@
+en:
+  registrants:
+    pay_now:
+      pay_now: "Pay Now"
+      unknown: "Unknown"
+
+fr:
+  registrants:
+    pay_now:
+      pay_now: "Payer maintenant"
+      unknown: "quand?"

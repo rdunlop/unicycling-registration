@@ -1,0 +1,11 @@
+en:
+  payments:
+    index:
+      my_payments: "My Payments"
+      persons_payments: "%{registrant}'s Payments"
+
+fr:
+  payments:
+    index:
+      my_payments: "Mes paiements"
+      persons_payments: "%{registrant}'s paiements"

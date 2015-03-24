@@ -1,0 +1,11 @@
+en:
+  registrants:
+    registrant_total_owing:
+      unpaid: "Unpaid"
+      paid: "Paid"
+
+fr:
+  registrants:
+    registrant_total_owing:
+      unpaid: "impayé"
+      paid: "Payé"

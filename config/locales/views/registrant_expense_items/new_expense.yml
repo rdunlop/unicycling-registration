@@ -1,0 +1,15 @@
+en:
+  registrant_expense_items:
+    new_expense:
+      add_free_item: "Add FREE Item"
+      one_is_free: "One is free with your registration"
+      add_item: "Add Item"
+      sold_out: "Sold Out"
+
+fr:
+  registrant_expense_items:
+    new_expense:
+      add_free_item: "Ajouter gratuitement cet item"
+      one_is_free: "One is free with your registration" # XXX Change
+      add_item: "Ajouter l’item"
+      sold_out: "Sold Out" # XXX

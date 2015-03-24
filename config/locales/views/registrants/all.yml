@@ -1,0 +1,15 @@
+en:
+  registrants:
+    all:
+      all_registrants: "All Registrants"
+      id: "ID"
+      name: "Name"
+      country: "Country"
+
+fr:
+  registrants:
+    all:
+      all_registrants: "Tous les participants"
+      ID: "Numéro "
+      name: "Nom"
+      country: "Pays"

@@ -1,0 +1,9 @@
+en:
+  registrants:
+    new:
+      new_registration: "New Registration"
+
+fr:
+  registrants:
+    new:
+      new_registration: "Nouvelle entrée de compétiteur"

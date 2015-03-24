@@ -1,0 +1,13 @@
+en:
+  payments:
+    show:
+      payment_summary: "Payment Summary"
+      please_proceed_with_payment: "Please proceed with your payment"
+      pay_with_paypal: "Pay with Paypal"
+
+fr:
+  payments:
+    show:
+      payment_summary: "Résumé du paiement"
+      please_proceed_with_payment: "Veuillez procéder à votre paiement"
+      pay_with_paypal: "Payer avec Paypal"

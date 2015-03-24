@@ -1,0 +1,13 @@
+en:
+  registrants:
+    name:
+      name: "Name"
+      first_name: "First"
+      last_name: "Last"
+
+fr:
+  registrants:
+    name:
+      name: "Nom"
+      first_name: "Prénom"
+      last_name: "Nom"

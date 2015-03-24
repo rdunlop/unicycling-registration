@@ -1,0 +1,17 @@
+en:
+  payments:
+    summary:
+      payment_details: "Payment Details"
+      registrant: "Registrant"
+      cost: "Cost"
+      tax: "Tax"
+      total_cost: "Total Cost"
+
+fr:
+  payments:
+    summary:
+      payment_details: "Détails du paiement"
+      registrant: "Participant"
+      cost: "Prix"
+      tax: "taxes"
+      total_cost: "Prix total"

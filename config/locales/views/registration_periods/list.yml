@@ -1,0 +1,17 @@
+en:
+  registration_periods:
+    list:
+      competitor_registration_cost: "Competitor Registration Cost"
+      noncompetitor_registration_cost: "Non-Competitor Registration Cost"
+      from: "From"
+      to: "to"
+      online_registration_closes: "Online Registration Closes"
+
+fr:
+  registration_periods:
+    list:
+      competitor_registration_cost: "Prix d’inscription – Compétiteur"
+      noncompetitor_registration_cost: "Prix d’inscription – Non-compétiteur"
+      from: "Du"
+      to: "au"
+      online_registration_closes: "Fermeture des inscriptions en ligne le"
