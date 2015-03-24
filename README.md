@@ -272,11 +272,15 @@ Translations
 ------------
 If you would like to contribute language translations, please see:
 
-* config/locale/en.yml - The english translation of the static text strings used
+* config/locale/ - The existing translations of the static text strings used
   in the site
+** Each of these files will need to have the new language added
+
 * app/helpers/language_helper.rb - A place where each of the used languages is
   defined, so that the admin pages show form elements to set these language
   fields.
+
+* config/application.rb - `config.i18n.available_locales = [:en, :fr]` needs to be expanded
 
 Idea Contributions
 ------------------

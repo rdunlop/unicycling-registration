@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
 
-  before_filter :set_locale
-  before_filter :set_home_breadcrumb, unless: :rails_admin_controller?
+  before_action :set_locale
+  before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
   protect_from_forgery
   check_authorization :unless => :devise_controller?
@@ -16,14 +16,6 @@ class ApplicationController < ActionController::Base
   def default_url_options(options={})
     logger.debug "default_url_options is passed options: #{options.inspect}\n"
     { locale: I18n.locale }
-  end
-
-  def set_locale
-    if params[:locale].blank?
-      I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
-    elsif I18n.available_locales.include?(params[:locale].to_sym)
-      I18n.locale = params[:locale]
-    end
   end
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -86,6 +78,22 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def locale_parameter
+    params[:locale] if I18n.available_locales.include?(params[:locale].to_sym)
+  end
+
+  def locale_from_user
+    nil
+  end
+
+  def locale_from_headers
+    http_accept_language.compatible_language_from(I18n.available_locales)
+  end
+
+  def set_locale
+    I18n.locale = locale_parameter || locale_from_user || locale_from_headers || I18n.default_locale
+  end
 
   def set_home_breadcrumb
     add_breadcrumb "Home", Proc.new { root_path }
