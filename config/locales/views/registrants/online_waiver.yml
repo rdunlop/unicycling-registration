@@ -1,7 +1,9 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
   registrants:
     online_waiver:
-      online_waiver_signature: "Signature: "
+      header: Waiver
+      by_signing_you_agree_by_age: |
+        By signing in the box below, you are agreeing to the waiver above. If you are under 18, you must have a parent/legal guardian sign for you.
+      by_having_your_parent_sign_you_agree: |
+        By having your parent/legal guardian sign in the box below, they are agreeing to the waiver above.
+      by_signing_you_agree: By signing in the box below, you are agreeing to the waiver above.

@@ -1,5 +1,5 @@
 %fieldset.data_block
-  %legend Rules
-  = link_to "Rules", EventConfiguration.singleton.rules_file_name_url, target: "_blank"
+  %legend= t(".header")
+  = link_to t(".the_rules"), EventConfiguration.singleton.rules_file_name_url, target: "_blank"
   = f.label :rules_accepted, t(".rules_agreement"), class: "required"
   = f.check_box :rules_accepted

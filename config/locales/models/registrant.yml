@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    attributes:
+      registrant:
+        online_waiver_signature: Signature
+
+fr:
+  activerecord:
+    attributes:
+      registrant:
+        online_waiver_signature: "Signee"
