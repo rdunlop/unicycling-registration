@@ -18,6 +18,6 @@
         = t('.incomplete')
   - if @has_print_waiver
     %td
-      = link_to "Legal Waiver (#{registrant.first_name})", waiver_registrant_path(registrant, :format => 'pdf'), {:class => "print_waiver_link", :target => "_blank" }
+      = link_to t(".legal_waiver", first_name: registrant.first_name), waiver_registrant_path(registrant, format: 'pdf'), { class: "print_waiver_link", target: "_blank" }
   %td
     = render partial: "registrant_total_owing", locals: { registrant: registrant }

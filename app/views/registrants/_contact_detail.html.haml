@@ -69,7 +69,7 @@
           %td
             = f.label :email, t(".email")
           %td
-            = f.email_field :email, :class => "ui-tooltip", :title => "Provide your email address to receive updates to registration, schedule, and new events."
+            = f.email_field :email, :class => "ui-tooltip", title: t(".email_tooltip")
         - if EventConfiguration.singleton.italian_requirements?
           %tr
             %td= f.label :birthplace
@@ -78,7 +78,7 @@
             %td= f.label :italian_fiscal_code
             %td= f.text_field :italian_fiscal_code
     %fieldset.data_block
-      %legend Team Affiliation
+      %legend= t(".team_affiliation")
       %table
         %tr
           %td= f.label :club, t(".primary_team_or_club_name")
@@ -88,8 +88,8 @@
           %td= f.text_field :club_contact, :size => 25
         - if @config.usa
           %tr
-            %td= f.label :usa_member_number, "USA Membership Number"
-            %td= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", :title => "A USA membership is required to participate at #{@config.short_name}"
+            %td= f.label :usa_member_number, t(".usa_membership_number")
+            %td= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", title: t(".usa_membership_number_tooltip", convention_name: @config.short_name)
     %fieldset.data_block
       %legend= t(".emergency_contact")
       %table
@@ -131,7 +131,7 @@
           %td
             = f.label :responsible_adult_name, t(".name")
           %td
-            = f.text_field :responsible_adult_name, :class => "ui-tooltip", :title => "The 'Responsible Adult' will be responsible for the registered minor."
+            = f.text_field :responsible_adult_name, :class => "ui-tooltip", title: t(".responsible_adult_tooltip")
         %tr
           %td
             = f.label :responsible_adult_phone, t(".phone")

@@ -25,3 +25,6 @@ en:
   # Common, used on many pages
   back: "Back"
   cancel: "Cancel"
+  breadcrumbs:
+    home: "Home"
+    my_registrants: "My Registrants"

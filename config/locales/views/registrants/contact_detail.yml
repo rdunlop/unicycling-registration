@@ -13,6 +13,7 @@ en:
       phone: "Phone"
       mobile: "Mobile"
       email: "Email"
+      email_tooltip: "Provide your email address to receive updates to registration, schedule, and new events."
       emergency_contact: "Emergency Contact"
       in_case_of_emergency: "In case of emergency"
       name: "Name"
@@ -22,8 +23,12 @@ en:
       other_phone: "Other phone"
       responsible_adult: "Responsible Adult"
       responsible_adult_detail: "(for Registrants Under the age of 18)"
+      team_affiliation: Team Affiliation
       primary_team_or_club_name: "Primary Team or Club Name"
       primary_team_or_club_contact: "Primary Team or Club Contact"
+      usa_membership_number: "USA Membership Number"
+      usa_membership_number_tooltip: "A USA membership is required to participate at %{convention_name}"
+      responsibel_adult_tooltip: "The 'Responsible Adult' will be responsible for the registered minor."
 
 fr:
   registrants:

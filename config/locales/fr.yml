@@ -20,3 +20,5 @@ fr:
   # Common:
   back: "Retour"
 
+  breadcrumbs:
+    #home: "Maison"

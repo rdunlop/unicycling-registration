@@ -96,7 +96,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_home_breadcrumb
-    add_breadcrumb "Home", Proc.new { root_path }
+    add_breadcrumb t("home", scope: "breadcrumbs"), Proc.new { root_path }
   end
 
   def add_registrant_breadcrumb(registrant)

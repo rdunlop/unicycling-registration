@@ -7,6 +7,7 @@ en:
       edit: "Edit"
       see_summary: "See Summary"
       incomplete: "Incomplete"
+      legal_waiver: "Legal Waiver (%{first_name})"
 
 fr:
   registrants:

@@ -118,7 +118,7 @@ class RegistrantsController < ApplicationController
   private
 
   def set_registrants_breadcrumb
-    add_breadcrumb "My Registrants", user_registrants_path(current_user)
+    add_breadcrumb t("my_registrants", scope: "breadcrumbs"), user_registrants_path(current_user)
   end
 
   def set_single_registrant_breadcrumb
