@@ -197,16 +197,16 @@ Workspace::Application.routes.draw do
       # admin
       collection do
         get '/subregion_options' => 'registrants#subregion_options'
-        get :bag_labels
-        get :show_all
-        get :manage_all
-        get :manage_one
-        post :choose_one
+        get :bag_labels, controller: "admin/registrants"
+        get :show_all, controller: "admin/registrants"
+        get :manage_all, controller: "admin/registrants" # How do I use cancan on this, if I were to name the action 'index'?
+        get :manage_one, controller: "admin/registrants"
+        post :choose_one, controller: "admin/registrants"
       end
       member do
-        post :undelete
-        get :reg_fee
-        put :update_reg_fee
+        post :undelete, controller: "admin/registrants"
+        get :reg_fee, controller: "admin/registrants"
+        put :update_reg_fee, controller: "admin/registrants"
         get :results
       end
 

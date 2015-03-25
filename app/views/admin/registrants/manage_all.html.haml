@@ -1,10 +1,10 @@
 .non_printable
-  - if can? :bag_labels, Registrant
+  - if can? :bag_labels, :registrant
     = link_to 'Bag Labels PDF', bag_labels_registrants_path
     %br
   = link_to '(pdf)', manage_all_registrants_path(:format => :pdf)
   %br
-  - if can? :show_all, Registrant
+  - if can? :show_all, :registrant
     = link_to "All Registrants Summaries (pdf)", show_all_registrants_path(:format => :pdf)
 
 %h1 Edit Registrants
@@ -31,9 +31,9 @@
       - @registrants.find_each(batch_size: 100) do |registrant|
         - if can? :edit, registrant
           %span.js--showElement{ data: { key: "edit_registrant#{registrant.id}" } }
-        - if can? :reg_fee, registrant
+        - if can? :set_reg_fee, :registrant
           %span.js--showElement{ data: { key: "reg_fee#{registrant.id}" } }
-        - if can? :undelete, registrant
+        - if can? :undelete, :registrant
           %span.js--showElement{ data: { key: "undelete#{registrant.id}" } }
         - cache [I18n.locale, registrant, @config] do
           %tr

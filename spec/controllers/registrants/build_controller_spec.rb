@@ -26,7 +26,7 @@ xdescribe Registrants::BuildController do
         club_contact: "Connie",
         usa_member_number: "12345",
         volunteer: false,
-        emergency_name: "Caitlin",
+        emergency_name: "Jane",
         emergency_relationship: "Sig. Oth.",
         emergency_attending: true,
         emergency_primary_phone: "306-222-1212",

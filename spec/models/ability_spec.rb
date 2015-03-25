@@ -149,7 +149,7 @@ describe "Ability" do
     it { is_expected.to be_able_to(:manage, Competitor) }
     it { is_expected.to be_able_to(:read, VolunteerOpportunity) }
 
-    it { is_expected.to be_able_to(:manage_all, Registrant) }
+    it { is_expected.to be_able_to(:manage_all, :registrant) }
 
     describe "with another user having a registrant" do
       let(:registration) { FactoryGirl.create(:registrant) }

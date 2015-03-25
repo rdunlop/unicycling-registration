@@ -51,7 +51,7 @@ FactoryGirl.define do
     club "TCUC"
     club_contact "Connie Cotter"
     usa_member_number "00001"
-    emergency_name "Caitlin Goeres"
+    emergency_name "Jane Doe"
     emergency_relationship "SO"
     emergency_attending false
     emergency_primary_phone "306-555-1212"
