@@ -2,6 +2,7 @@ en:
   attending:
     rulebook_link:
       competition_rulebook: "Competition Rulebook"
+      rulebook_tooltip: "Click here for the rulebook that governs this competition!"
 
 fr:
   attending:

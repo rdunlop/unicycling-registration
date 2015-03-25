@@ -3,6 +3,10 @@ en:
     index:
       registration: "Registration"
       whats_the_difference: "What’s the difference?"
+      difference_tooltip: "Click here for more information!"
+      registrants_includes_shared: "The Registrants list includes Registrants shared with you. See the"
+      registrant_access_page_title: "Registrant Access"
+      link_end: "page for details."
       be_sure_to_submit_payment: "Once you have created your registrations, be sure to submit payment."
       note_date_of_payment_html: "NOTE! - It is the <b>date of your payment that defines the registration fee</b>, NOT the registration date."
       registration_time: "Registering takes about 15 minutes."

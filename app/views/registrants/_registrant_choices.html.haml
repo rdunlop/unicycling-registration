@@ -22,7 +22,7 @@
   - if @config.spectators
     .pricing_option.spectator_sign_up
       %h3.title= t('spectator')
-      .current_price $0
+      .current_price= print_formatted_currency(0)
       .price_note &nbsp;
       %ul.price_details
         - EventConfiguration.singleton.spectator_benefits_list.each do |item|

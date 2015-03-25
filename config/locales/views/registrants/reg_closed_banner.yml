@@ -1,0 +1,6 @@
+en:
+  registrants:
+    reg_closed_banner:
+      online_registration_is_closed: Online Registration is now closed
+      no_changes_permitted: You cannot make any more changes to your registration details.
+      onsite_changes_explanation: "If you have any outstanding payments, you may be able to continue this registration on-site (at the discretion of the event-organizers)"
