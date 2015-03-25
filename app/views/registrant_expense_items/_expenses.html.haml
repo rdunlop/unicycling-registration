@@ -5,7 +5,7 @@
       %table#expense_lines
         %thead
           %tr
-            %th Item
+            %th= RegistrantExpenseItem.model_name.human
             %th
             %th= t(".cost")
             %th
@@ -17,6 +17,6 @@
           = render partial: "/registrants/registrant_unpaid_expenses", locals: { include_form: true, details: true }
         %tfoot
           %tr
-            %th Total
+            %th= t(".total")
             %th= print_formatted_currency(registrant.expenses_total)
             %th{:colspan => "3"}

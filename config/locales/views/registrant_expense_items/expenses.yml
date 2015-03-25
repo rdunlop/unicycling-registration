@@ -4,6 +4,7 @@ en:
       registrants_expenses: "%{registrant}'s Expenses"
       cost: "Cost"
       paid: "Paid"
+      total: "Total"
 
 fr:
   registrant_expense_items:

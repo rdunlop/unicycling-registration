@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      registrant_expense_item:
+        one: Item
+        other: Items
