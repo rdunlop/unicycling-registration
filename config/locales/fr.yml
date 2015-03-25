@@ -18,6 +18,8 @@ fr:
     expenses: "Frais"
 
   # Common:
+  "yes": "Oui"
+  "no": "Non"
   back: "Retour"
 
   breadcrumbs:

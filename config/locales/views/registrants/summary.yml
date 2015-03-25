@@ -8,6 +8,7 @@ en:
       age: "Age"
       volunteer: "Volunteer"
       default_wheel_size: "Default Wheel Size"
+      user_account_email: "User Account Email"
 
 fr:
   registrants:

@@ -1,13 +1,6 @@
 en:
   registrants:
     contact_summary:
-      address: "Address"
-      representing_country: "Representing country"
-      phone: "Phone"
-      mobile: "Mobile"
-      email: "Email"
-      team_club: "Team/Club"
-      team_club_contact: "Team/Club Contact"
       true: "true"
       false: "false"
       emergency_contact_name: "Emergency Contact Name"
@@ -19,13 +12,6 @@ en:
 fr:
   registrants:
     contact_summary:
-      address: "Adresse"
-      representing_country: "Pays représenté"
-      phone: "Numéro de téléphone"
-      mobile: "Numéro de portable"
-      email: "Courriel"
-      team_club: "Équipe/Association"
-      team_club_contact: "Nom du contact du club/association"
       true: "vrai"
       false: "faux"
       emergency_contact_name: "Nom de la personne à contacter en cas d’urgence"

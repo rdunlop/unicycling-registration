@@ -23,6 +23,8 @@ en:
     expenses: "Expenses"
 
   # Common, used on many pages
+  "yes": "Yes"
+  "no": "No"
   back: "Back"
   cancel: "Cancel"
   breadcrumbs:

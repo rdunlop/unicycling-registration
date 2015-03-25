@@ -5,6 +5,7 @@ en:
       printable_pdf: "Printable (Pdf)"
       edit_registration: "Edit Registration"
       edit_items: "Edit Items"
+      list_payments: "List Payments"
       edit_events: "Edit Events"
       done: "Done"
 
