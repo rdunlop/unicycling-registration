@@ -29,9 +29,6 @@ en:
       volunteer_opportunity: "E-mail addresses to notify on each volunteer sign-up"
       event:
         accepts_music_uploads: "Request Music be Uploaded"
-      contact_detail:
-        birthplace: Birthplace
-        italian_fiscal_code: Fiscal Code (Required for Italian Participants)
     placeholders:
       coupon_code:
         code: "Code for user to enter"

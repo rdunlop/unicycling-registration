@@ -1,0 +1,50 @@
+en:
+  activerecord:
+    models:
+      contact_detail:
+        one: Contact Detail
+        other: Contact Details
+    attributes:
+      contact_detail:
+        birthplace: Birthplace
+        italian_fiscal_code: Fiscal Code (Required for Italian Participants)
+        address: "Address"
+        city: "City"
+        country_residence: "Country of residence"
+        country_representing: "Country representing"
+        zip: "Zip"
+        phone: "Phone"
+        mobile: "Mobile"
+        email: "Email"
+        club: "Primary Team or Club Name"
+        club_contact: "Primary Team or Club Contact"
+        usa_member_number: "USA Membership Number"
+        emergency_name: "Name"
+        emergency_relationship: "Relationship"
+        emergency_primary_phone: "Primary Phone"
+        emergency_other_phone: "Other phone"
+        responsible_adulte_name: "Name"
+        responsible_adult_phone: "Primary Phone"
+
+fr:
+  activerecord:
+    attributes:
+      contact_detail:
+        address: "Adresse"
+        city: "Ville"
+        country_residence: "Pays de residence"
+        country_representing: "Pays représenté"
+        zip: "Code postal"
+        phone: "Numéro de téléphone"
+        mobile: "Numéro de portable"
+        email: "Courriel"
+        club: "Nom de l’équipe principale ou de l’association"
+        club_contact: "Nom du contact de l’équipe principale ou de l’association"
+        emergency_name: "Nom"
+        emergency_relationship: "Lien"
+        emergency_primary_phone: "Numéro de téléphone principal"
+        emergency_other_phone: "Autre numéro de téléphone"
+        responsible_adult_name: "Nom"
+        responsible_adult_phone: "Numéro de téléphone principal"
+
+
