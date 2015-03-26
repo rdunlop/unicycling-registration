@@ -1,6 +1,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for other language starting points.
 
 fr:
+  language_name: Français
   competitor: "Compétiteur"
   noncompetitor: "Non-compétiteur"
   spectator: "Spectateur"

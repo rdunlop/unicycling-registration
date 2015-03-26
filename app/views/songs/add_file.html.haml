@@ -1,0 +1,21 @@
+%h1= t(".title")
+%h3
+  = Event.model_name.human
+  #{@song.event} - #{@song.description}
+%fieldset.wizard.wizard_other_step
+  %legend= t(".step_1")
+  = t(".step_1_description")
+%fieldset.wizard
+  %legend= t(".step_2")
+  = t(".upload_music_file")
+
+  \#{direct_upload_form_for @uploader do |f|}
+    = hidden_field_tag 'Content-Type', 'audio/mpeg'
+    %small
+      %b= t(".note")
+      = t(".max_file_size", size_mb: 40)
+      %br
+    = f.file_field :song_file_name
+    = f.submit t(".upload")
+%br
+= link_to t("back"), registrant_songs_path(@song.registrant)

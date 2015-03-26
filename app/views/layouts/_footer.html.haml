@@ -1,5 +1,9 @@
 - cache ['footer', I18n.locale, @config] do
   .non_printable#bottom_nav
+    .choose_language
+      %ul
+        - I18n.available_locales.each do |locale|
+          %li= link_to t("language_name", locale: locale), root_path(locale: locale), hreflang: locale, lang: locale
     = render "/attending/rulebook_link"
 
     = link_to t('.help'), welcome_help_path

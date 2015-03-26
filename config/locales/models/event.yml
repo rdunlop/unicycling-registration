@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      contact_detail:
+        one: Event
+        other: Events
+    attributes:
+      event:
+        id: ID
+
+
+fr:
+  activerecord:
+    attributes:
+      event:
+        id: ID

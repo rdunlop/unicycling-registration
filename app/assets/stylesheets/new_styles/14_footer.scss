@@ -35,3 +35,15 @@ body {
    width:100%;
    background: #eeeeee;
 }
+
+.choose_language {
+  position: absolute;
+  right: 0;
+  padding: 0 10px;
+  text-align: left;
+  text-transform: uppercase;
+
+  ul {
+    list-style: none;
+  }
+}

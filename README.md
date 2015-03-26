@@ -282,6 +282,10 @@ If you would like to contribute language translations, please see:
 
 * config/application.rb - `config.i18n.available_locales = [:en, :fr]` needs to be expanded
 
+* app/views/layouts/application.rb - Ensure that the 'lang' attribute is appropriately set.
+
+* app/views/layouts/_footer.html.haml - Ensure that the link to the language is appropriately tagged/translated.
+
 Idea Contributions
 ------------------
 

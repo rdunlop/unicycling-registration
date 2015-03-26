@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    attributes:
+      song:
+        description: Description
+        song_file_name: File name
+        updated_at: Last Updated
