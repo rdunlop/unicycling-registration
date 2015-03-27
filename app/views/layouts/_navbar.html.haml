@@ -22,6 +22,7 @@
   - if user_signed_in? && current_user.roles.any?
     %nav.non_printable
       %ul.navList
+        %li= link_to 'Data Entry', welcome_data_entry_menu_path
         - if can?(:read, :convention_setup)
           %li= link_to 'Convention Setup', convention_setup_path
         - if can?(:manage, User)
