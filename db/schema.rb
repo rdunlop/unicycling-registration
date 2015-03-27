@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315163930) do
+ActiveRecord::Schema.define(version: 20150327032301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,11 +19,11 @@ ActiveRecord::Schema.define(version: 20150315163930) do
   create_table "additional_registrant_accesses", force: true do |t|
     t.integer  "user_id"
     t.integer  "registrant_id"
-    t.boolean  "declined"
-    t.boolean  "accepted_readonly"
+    t.boolean  "declined",           default: false, null: false
+    t.boolean  "accepted_readonly",  default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "accepted_readwrite", default: false
+    t.boolean  "accepted_readwrite", default: false, null: false
   end
 
   add_index "additional_registrant_accesses", ["registrant_id", "user_id"], name: "ada_reg_user", unique: true, using: :btree
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
   create_table "combined_competition_entries", force: true do |t|
     t.integer  "combined_competition_id"
     t.string   "abbreviation"
-    t.boolean  "tie_breaker"
+    t.boolean  "tie_breaker",             default: false, null: false
     t.integer  "points_1"
     t.integer  "points_2"
     t.integer  "points_3"
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "use_age_group_places",          default: false
-    t.boolean  "percentage_based_calculations", default: false
+    t.boolean  "use_age_group_places",          default: false, null: false
+    t.boolean  "percentage_based_calculations", default: false, null: false
   end
 
   add_index "combined_competitions", ["name"], name: "index_combined_competitions_on_name", unique: true, using: :btree
@@ -139,8 +139,8 @@ ActiveRecord::Schema.define(version: 20150315163930) do
   create_table "competition_results", force: true do |t|
     t.integer  "competition_id"
     t.string   "results_file"
-    t.boolean  "system_managed"
-    t.boolean  "published"
+    t.boolean  "system_managed", default: false, null: false
+    t.boolean  "published",      default: false, null: false
     t.datetime "published_date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.integer  "target_competition_id"
     t.integer  "event_category_id"
     t.integer  "competition_id"
-    t.string   "gender_filter"
+    t.string   "gender_filter",         default: "Both", null: false
     t.integer  "max_place"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -181,20 +181,20 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "age_group_type_id"
-    t.boolean  "has_experts",                   default: false
+    t.boolean  "has_experts",                   default: false, null: false
     t.string   "scoring_class"
     t.string   "start_data_type"
     t.string   "end_data_type"
-    t.boolean  "uses_lane_assignments",         default: false
+    t.boolean  "uses_lane_assignments",         default: false, null: false
     t.datetime "scheduled_completion_at"
-    t.boolean  "published",                     default: false
-    t.boolean  "awarded",                       default: false
+    t.boolean  "published",                     default: false, null: false
+    t.boolean  "awarded",                       default: false, null: false
     t.string   "award_title_name"
     t.string   "award_subtitle_name"
     t.string   "num_members_per_competitor"
-    t.boolean  "automatic_competitor_creation", default: false
+    t.boolean  "automatic_competitor_creation", default: false, null: false
     t.integer  "combined_competition_id"
-    t.boolean  "order_finalized",               default: false
+    t.boolean  "order_finalized",               default: false, null: false
     t.integer  "penalty_seconds"
   end
 
@@ -209,7 +209,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "updated_at"
     t.integer  "status",                   default: 0
     t.integer  "lowest_member_bib_number"
-    t.boolean  "geared",                   default: false
+    t.boolean  "geared",                   default: false, null: false
     t.integer  "riding_wheel_size"
     t.string   "notes"
     t.integer  "heat"
@@ -241,7 +241,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.string   "responsible_adult_phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "usa_confirmed_paid",              default: false
+    t.boolean  "usa_confirmed_paid",              default: false, null: false
     t.integer  "usa_family_membership_holder_id"
     t.string   "birthplace"
     t.string   "italian_fiscal_code"
@@ -271,7 +271,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
   create_table "distance_attempts", force: true do |t|
     t.integer  "competitor_id"
     t.decimal  "distance",      precision: 4, scale: 0
-    t.boolean  "fault"
+    t.boolean  "fault",                                 default: false, null: false
     t.integer  "judge_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -288,7 +288,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "updated_at"
     t.integer  "age_range_start",                 default: 0
     t.integer  "age_range_end",                   default: 100
-    t.boolean  "warning_on_registration_summary", default: false
+    t.boolean  "warning_on_registration_summary", default: false, null: false
   end
 
   add_index "event_categories", ["event_id", "name"], name: "index_event_categories_on_event_id_and_name", unique: true, using: :btree
@@ -315,8 +315,8 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "autocomplete"
-    t.boolean  "optional",                    default: false
+    t.boolean  "autocomplete",                default: false, null: false
+    t.boolean  "optional",                    default: false, null: false
     t.string   "tooltip"
     t.integer  "optional_if_event_choice_id"
     t.integer  "required_if_event_choice_id"
@@ -354,24 +354,24 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.date     "event_sign_up_closed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "test_mode"
+    t.boolean  "test_mode",                             default: false,  null: false
     t.string   "comp_noncomp_url"
-    t.boolean  "standard_skill",                        default: false
-    t.boolean  "usa",                                   default: false
-    t.boolean  "iuf",                                   default: false
+    t.boolean  "standard_skill",                        default: false,  null: false
+    t.boolean  "usa",                                   default: false,  null: false
+    t.boolean  "iuf",                                   default: false,  null: false
     t.string   "currency_code"
     t.string   "rulebook_url"
     t.string   "style_name"
     t.text     "custom_waiver_text"
     t.date     "music_submission_end_date"
-    t.boolean  "artistic_score_elimination_mode_naucc", default: true
+    t.boolean  "artistic_score_elimination_mode_naucc", default: true,   null: false
     t.integer  "usa_individual_expense_item_id"
     t.integer  "usa_family_expense_item_id"
     t.string   "logo_file"
     t.integer  "max_award_place",                       default: 5
-    t.boolean  "display_confirmed_events",              default: false
-    t.boolean  "spectators",                            default: false
-    t.boolean  "usa_membership_config",                 default: false
+    t.boolean  "display_confirmed_events",              default: false,  null: false
+    t.boolean  "spectators",                            default: false,  null: false
+    t.boolean  "usa_membership_config",                 default: false,  null: false
     t.string   "paypal_account"
     t.boolean  "paypal_test",                           default: true,   null: false
     t.string   "waiver",                                default: "none"
@@ -388,9 +388,9 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "updated_at"
     t.string   "name"
     t.boolean  "visible",                     default: true,  null: false
-    t.boolean  "accepts_music_uploads",       default: false
-    t.boolean  "artistic",                    default: false
-    t.boolean  "accepts_wheel_size_override", default: false
+    t.boolean  "accepts_music_uploads",       default: false, null: false
+    t.boolean  "artistic",                    default: false, null: false
+    t.boolean  "accepts_wheel_size_override", default: false, null: false
     t.integer  "event_categories_count",      default: 0,     null: false
     t.integer  "event_choices_count",         default: 0,     null: false
   end
@@ -441,13 +441,13 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "expense_group_id"
-    t.boolean  "has_details"
+    t.boolean  "has_details",            default: false, null: false
     t.string   "details_label"
     t.integer  "maximum_available"
-    t.boolean  "has_custom_cost",        default: false
+    t.boolean  "has_custom_cost",        default: false, null: false
     t.integer  "maximum_per_registrant", default: 0
     t.integer  "cost_cents"
-    t.integer  "tax_cents"
+    t.integer  "tax_cents",              default: 0,     null: false
   end
 
   add_index "expense_items", ["expense_group_id"], name: "index_expense_items_expense_group_id", using: :btree
@@ -486,7 +486,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.integer  "competition_id"
     t.decimal  "points",              precision: 6, scale: 3
     t.string   "details"
-    t.boolean  "is_start_time",                               default: false
+    t.boolean  "is_start_time",                               default: false, null: false
     t.integer  "number_of_laps"
     t.string   "status"
     t.text     "comments"
@@ -512,7 +512,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "event_class"
-    t.boolean  "boundary_calculation_enabled"
+    t.boolean  "boundary_calculation_enabled", default: false, null: false
   end
 
   add_index "judge_types", ["name"], name: "index_judge_types_on_name", unique: true, using: :btree
@@ -547,7 +547,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.integer  "registrant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "dropped_from_registration", default: false
+    t.boolean  "dropped_from_registration", default: false, null: false
   end
 
   add_index "members", ["competitor_id"], name: "index_members_competitor_id", using: :btree
@@ -567,8 +567,8 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "updated_at"
     t.integer  "expense_item_id"
     t.string   "details"
-    t.boolean  "free",            default: false
-    t.boolean  "refunded",        default: false
+    t.boolean  "free",            default: false, null: false
+    t.boolean  "refunded",        default: false, null: false
     t.integer  "amount_cents"
   end
 
@@ -578,8 +578,8 @@ ActiveRecord::Schema.define(version: 20150315163930) do
 
   create_table "payments", force: true do |t|
     t.integer  "user_id"
-    t.boolean  "completed"
-    t.boolean  "cancelled"
+    t.boolean  "completed",      default: false, null: false
+    t.boolean  "cancelled",      default: false, null: false
     t.string   "transaction_id"
     t.datetime "completed_date"
     t.datetime "created_at"
@@ -665,9 +665,9 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "details"
-    t.boolean  "free",              default: false
-    t.boolean  "system_managed",    default: false
-    t.boolean  "locked",            default: false
+    t.boolean  "free",              default: false, null: false
+    t.boolean  "system_managed",    default: false, null: false
+    t.boolean  "locked",            default: false, null: false
     t.integer  "custom_cost_cents"
   end
 
@@ -703,12 +703,12 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.boolean  "deleted"
+    t.boolean  "deleted",                 default: false,        null: false
     t.integer  "bib_number"
     t.integer  "wheel_size_id"
     t.integer  "age"
-    t.boolean  "ineligible",              default: false
-    t.boolean  "volunteer"
+    t.boolean  "ineligible",              default: false,        null: false
+    t.boolean  "volunteer",               default: false,        null: false
     t.string   "online_waiver_signature"
     t.string   "access_code"
     t.string   "sorted_last_name"
@@ -740,8 +740,8 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "updated_at"
     t.integer  "competitor_expense_item_id"
     t.integer  "noncompetitor_expense_item_id"
-    t.boolean  "onsite"
-    t.boolean  "current_period",                default: false
+    t.boolean  "onsite",                        default: false, null: false
+    t.boolean  "current_period",                default: false, null: false
   end
 
   create_table "results", force: true do |t|
@@ -890,7 +890,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.integer  "thousands"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_start_time",       default: false
+    t.boolean  "is_start_time",       default: false, null: false
     t.integer  "number_of_laps"
     t.string   "status"
     t.text     "comments"
@@ -913,7 +913,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.integer  "thousands_1"
     t.integer  "thousands_2"
     t.string   "status_2"
-    t.boolean  "is_start_time",  default: false
+    t.boolean  "is_start_time",  default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -935,7 +935,7 @@ ActiveRecord::Schema.define(version: 20150315163930) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "guest",                  default: false
+    t.boolean  "guest",                  default: false, null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

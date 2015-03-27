@@ -11,12 +11,12 @@
 #  created_at              :datetime
 #  updated_at              :datetime
 #  user_id                 :integer
-#  deleted                 :boolean
+#  deleted                 :boolean          default(FALSE), not null
 #  bib_number              :integer
 #  wheel_size_id           :integer
 #  age                     :integer
-#  ineligible              :boolean          default(FALSE)
-#  volunteer               :boolean
+#  ineligible              :boolean          default(FALSE), not null
+#  volunteer               :boolean          default(FALSE), not null
 #  online_waiver_signature :string(255)
 #  access_code             :string(255)
 #  sorted_last_name        :string(255)

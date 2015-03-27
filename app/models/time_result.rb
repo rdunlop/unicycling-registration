@@ -9,7 +9,7 @@
 #  thousands           :integer
 #  created_at          :datetime
 #  updated_at          :datetime
-#  is_start_time       :boolean          default(FALSE)
+#  is_start_time       :boolean          default(FALSE), not null
 #  number_of_laps      :integer
 #  status              :string(255)
 #  comments            :text
@@ -49,7 +49,6 @@ class TimeResult < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.is_start_time = false if self.is_start_time.nil?
     self.minutes = 0 if self.minutes.nil?
     self.seconds = 0 if self.seconds.nil?
     self.thousands = 0 if self.thousands.nil?

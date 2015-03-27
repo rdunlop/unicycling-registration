@@ -10,7 +10,7 @@
 #  updated_at               :datetime
 #  status                   :integer          default(0)
 #  lowest_member_bib_number :integer
-#  geared                   :boolean          default(FALSE)
+#  geared                   :boolean          default(FALSE), not null
 #  riding_wheel_size        :integer
 #  notes                    :string(255)
 #  heat                     :integer

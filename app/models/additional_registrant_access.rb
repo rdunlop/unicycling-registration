@@ -5,11 +5,11 @@
 #  id                 :integer          not null, primary key
 #  user_id            :integer
 #  registrant_id      :integer
-#  declined           :boolean
-#  accepted_readonly  :boolean
+#  declined           :boolean          default(FALSE), not null
+#  accepted_readonly  :boolean          default(FALSE), not null
 #  created_at         :datetime
 #  updated_at         :datetime
-#  accepted_readwrite :boolean          default(FALSE)
+#  accepted_readwrite :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -27,14 +27,6 @@ class AdditionalRegistrantAccess < ActiveRecord::Base
   scope :full_access, -> { where(accepted_readwrite: true ) }
   scope :permitted, -> { where("accepted_readonly = true OR accepted_readwrite = true") }
   scope :need_reply, -> { where(accepted_readwrite: false, accepted_readonly: false, declined: false) }
-
-  after_initialize :init
-
-  def init
-    self.accepted_readwrite = false if self.accepted_readwrite.nil?
-    self.accepted_readonly = false if self.accepted_readonly.nil?
-    self.declined = false if self.declined.nil?
-  end
 
   def status
     return "Declined" if declined

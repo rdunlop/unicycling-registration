@@ -6,7 +6,7 @@
 #  target_competition_id :integer
 #  event_category_id     :integer
 #  competition_id        :integer
-#  gender_filter         :string(255)
+#  gender_filter         :string(255)      default("Both"), not null
 #  max_place             :integer
 #  created_at            :datetime
 #  updated_at            :datetime

@@ -19,7 +19,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
-#  guest                  :boolean          default(FALSE)
+#  guest                  :boolean          default(FALSE), not null
 #
 # Indexes
 #

@@ -10,7 +10,7 @@
 #  updated_at                      :datetime
 #  age_range_start                 :integer          default(0)
 #  age_range_end                   :integer          default(100)
-#  warning_on_registration_summary :boolean          default(FALSE)
+#  warning_on_registration_summary :boolean          default(FALSE), not null
 #
 # Indexes
 #

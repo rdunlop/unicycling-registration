@@ -10,8 +10,8 @@
 #  updated_at                    :datetime
 #  competitor_expense_item_id    :integer
 #  noncompetitor_expense_item_id :integer
-#  onsite                        :boolean
-#  current_period                :boolean          default(FALSE)
+#  onsite                        :boolean          default(FALSE), not null
+#  current_period                :boolean          default(FALSE), not null
 #
 
 class RegistrationPeriod < ActiveRecord::Base
@@ -31,16 +31,10 @@ class RegistrationPeriod < ActiveRecord::Base
 
   validates :onsite, :inclusion => { :in => [true, false] } # because it's a boolean
 
-  after_initialize :init
-
   after_save :clear_cache
   after_destroy :clear_cache
 
   alias_attribute :to_s, :name
-
-  def init
-    self.onsite = false if self.onsite.nil?
-  end
 
   def clear_cache
     Rails.cache.delete("/registration_period/by_date/#{Date.today}")

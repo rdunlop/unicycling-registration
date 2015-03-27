@@ -10,8 +10,8 @@
 #  position                    :integer
 #  created_at                  :datetime
 #  updated_at                  :datetime
-#  autocomplete                :boolean
-#  optional                    :boolean          default(FALSE)
+#  autocomplete                :boolean          default(FALSE), not null
+#  optional                    :boolean          default(FALSE), not null
 #  tooltip                     :string(255)
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer

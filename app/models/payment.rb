@@ -4,8 +4,8 @@
 #
 #  id             :integer          not null, primary key
 #  user_id        :integer
-#  completed      :boolean
-#  cancelled      :boolean
+#  completed      :boolean          default(FALSE), not null
+#  cancelled      :boolean          default(FALSE), not null
 #  transaction_id :string(255)
 #  completed_date :datetime
 #  created_at     :datetime
@@ -40,13 +40,6 @@ class Payment < ActiveRecord::Base
   after_save :update_registrant_items
   after_save :touch_payment_details
   after_save :inform_of_coupons
-
-  after_initialize :init
-
-  def init
-    self.cancelled = false if self.cancelled.nil?
-    self.completed = false if self.completed.nil?
-  end
 
   def set_invoice_id
     self.invoice_id ||= SecureRandom.hex(10)

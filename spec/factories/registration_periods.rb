@@ -10,8 +10,8 @@
 #  updated_at                    :datetime
 #  competitor_expense_item_id    :integer
 #  noncompetitor_expense_item_id :integer
-#  onsite                        :boolean
-#  current_period                :boolean          default(FALSE)
+#  onsite                        :boolean          default(FALSE), not null
+#  current_period                :boolean          default(FALSE), not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

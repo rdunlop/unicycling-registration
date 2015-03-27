@@ -8,13 +8,13 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  expense_group_id       :integer
-#  has_details            :boolean
+#  has_details            :boolean          default(FALSE), not null
 #  details_label          :string(255)
 #  maximum_available      :integer
-#  has_custom_cost        :boolean          default(FALSE)
+#  has_custom_cost        :boolean          default(FALSE), not null
 #  maximum_per_registrant :integer          default(0)
 #  cost_cents             :integer
-#  tax_cents              :integer
+#  tax_cents              :integer          default(0), not null
 #
 # Indexes
 #
@@ -42,14 +42,6 @@ class ExpenseItem < ActiveRecord::Base
   before_destroy :check_for_payment_details
 
   after_create :create_reg_items
-
-  after_initialize :init
-
-  def init
-    self.has_details = false if self.has_details.nil?
-    self.tax_cents = 0 if self.tax_cents.nil?
-    self.has_custom_cost = false if self.has_custom_cost.nil?
-  end
 
   def self.ordered
     order(:expense_group_id, :position)

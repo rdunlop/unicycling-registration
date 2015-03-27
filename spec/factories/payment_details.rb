@@ -9,8 +9,8 @@
 #  updated_at      :datetime
 #  expense_item_id :integer
 #  details         :string(255)
-#  free            :boolean          default(FALSE)
-#  refunded        :boolean          default(FALSE)
+#  free            :boolean          default(FALSE), not null
+#  refunded        :boolean          default(FALSE), not null
 #  amount_cents    :integer
 #
 # Indexes

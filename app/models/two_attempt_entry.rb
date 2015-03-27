@@ -14,7 +14,7 @@
 #  thousands_1    :integer
 #  thousands_2    :integer
 #  status_2       :string(255)
-#  is_start_time  :boolean          default(FALSE)
+#  is_start_time  :boolean          default(FALSE), not null
 #  created_at     :datetime
 #  updated_at     :datetime
 #

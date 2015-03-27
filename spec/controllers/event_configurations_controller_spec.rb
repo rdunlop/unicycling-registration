@@ -11,6 +11,7 @@ describe EventConfigurationsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
+      test_mode: true,
       standard_skill_closed_date: Date.tomorrow,
       :translations_attributes => {
         "1" => {
@@ -28,9 +29,9 @@ describe EventConfigurationsController do
       @user = FactoryGirl.create(:user)
       sign_in @user
     end
+    let!(:event_configuration) { EventConfiguration.create! valid_attributes }
 
     it "Cannot edit configuration" do
-      event_configuration = EventConfiguration.create! valid_attributes
       get :base_settings, {:id => event_configuration.to_param}
       expect(response).to redirect_to(root_path)
     end
@@ -49,7 +50,7 @@ describe EventConfigurationsController do
         expect(@user.has_role?(:admin)).to eq(true)
       end
       it "cannot change if config test_mode is disabled" do
-        FactoryGirl.create(:event_configuration, :test_mode => false)
+        event_configuration.update_attribute(:test_mode, false)
         post 'test_mode_role', role: "admin"
         @user.reload
         expect(@user.has_role?(:admin)).to eq(false)

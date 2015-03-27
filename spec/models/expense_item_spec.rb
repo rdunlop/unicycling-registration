@@ -8,13 +8,13 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  expense_group_id       :integer
-#  has_details            :boolean
+#  has_details            :boolean          default(FALSE), not null
 #  details_label          :string(255)
 #  maximum_available      :integer
-#  has_custom_cost        :boolean          default(FALSE)
+#  has_custom_cost        :boolean          default(FALSE), not null
 #  maximum_per_registrant :integer          default(0)
 #  cost_cents             :integer
-#  tax_cents              :integer
+#  tax_cents              :integer          default(0), not null
 #
 # Indexes
 #

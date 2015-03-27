@@ -15,24 +15,24 @@
 #  event_sign_up_closed_date             :date
 #  created_at                            :datetime
 #  updated_at                            :datetime
-#  test_mode                             :boolean
+#  test_mode                             :boolean          default(FALSE), not null
 #  comp_noncomp_url                      :string(255)
-#  standard_skill                        :boolean          default(FALSE)
-#  usa                                   :boolean          default(FALSE)
-#  iuf                                   :boolean          default(FALSE)
+#  standard_skill                        :boolean          default(FALSE), not null
+#  usa                                   :boolean          default(FALSE), not null
+#  iuf                                   :boolean          default(FALSE), not null
 #  currency_code                         :string(255)
 #  rulebook_url                          :string(255)
 #  style_name                            :string(255)
 #  custom_waiver_text                    :text
 #  music_submission_end_date             :date
-#  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
+#  artistic_score_elimination_mode_naucc :boolean          default(TRUE), not null
 #  usa_individual_expense_item_id        :integer
 #  usa_family_expense_item_id            :integer
 #  logo_file                             :string(255)
 #  max_award_place                       :integer          default(5)
-#  display_confirmed_events              :boolean          default(FALSE)
-#  spectators                            :boolean          default(FALSE)
-#  usa_membership_config                 :boolean          default(FALSE)
+#  display_confirmed_events              :boolean          default(FALSE), not null
+#  spectators                            :boolean          default(FALSE), not null
+#  usa_membership_config                 :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
 #  paypal_test                           :boolean          default(TRUE), not null
 #  waiver                                :string(255)      default("none")
@@ -135,9 +135,9 @@ describe EventConfiguration do
     expect(@ev.valid?).to eq(false)
   end
 
-  it "defaults test_mode to true" do
+  it "defaults test_mode to false" do
     ev = EventConfiguration.new
-    expect(ev.test_mode).to eq(true)
+    expect(ev.test_mode).to eq(false)
   end
 
   it "should be open if no periods are defined" do

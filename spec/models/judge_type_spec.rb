@@ -15,7 +15,7 @@
 #  created_at                   :datetime
 #  updated_at                   :datetime
 #  event_class                  :string(255)
-#  boundary_calculation_enabled :boolean
+#  boundary_calculation_enabled :boolean          default(FALSE), not null
 #
 # Indexes
 #
