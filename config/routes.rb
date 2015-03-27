@@ -52,15 +52,16 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :permissions, :only => [:index] do
+    resources :permissions, :only => [:index], controller: "admin/permissions" do
       collection do
         post :create_race_official
         get :directors
         put :set_role
-        get :acl
-        post :set_acl
-        get :code
-        post :use_code
+
+        get :acl, controller: "permissions"
+        post :set_acl, controller: "permissions"
+        get :code, controller: "permissions"
+        post :use_code, controller: "permissions"
       end
     end
 

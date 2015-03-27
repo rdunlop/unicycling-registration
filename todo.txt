@@ -1,3 +1,12 @@
+- make all select boxes chosen-select boxes?
+- move competitor_benefits onto the registration_periods admin page?
+- move the 'first day of competition' to the 'important dates' page?
+- Add "Payment Setting" for "Bank Payment"
+- Add ability to register without having an "active registration period"?
+- Add ability to specify "Package" of items
+- Add Ability for Convention Admin to set User Roles for:
+ - Payment Admin
+ - Convention Admin
 - Test whether devise emails include locales
 - Upgrade Devise to latest, pull down/compare devise.en.yml
 - i18n javascript "Please Wait" and other strings in JS

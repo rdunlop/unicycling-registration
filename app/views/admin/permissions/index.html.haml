@@ -1,0 +1,54 @@
+%h1 User Management
+
+%h3 Users with advanced permissions:
+%table.sortable
+  %thead
+    %tr
+      %th User
+      - User.roles.each do |role|
+        %th= role
+  %tbody
+    - User.with_any_role(*User.roles).each do |user|
+      %tr
+        %th= user
+        - User.roles.each do |role|
+          %td= user.has_role?(role)
+
+%h3 Add new permission
+= form_tag(set_role_permissions_path, { :method => :put}) do
+  = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s", {:include_blank => true})
+  = select_tag :role_name, options_for_select(User.roles)
+  = submit_tag "Add Permission"
+
+%h3 Role Descriptions:
+- User.roles.each do |role|
+  %h4= role
+  %pre= User.role_description(role)
+
+%hr
+- roles = User.roles
+%h2 Role Descriptions
+- User.roles.each do |role|
+  %h3= role
+  %p
+  %pre= User.role_description(role)
+  %br
+  %table.sortable
+    %thead
+      %tr
+        %th Email
+        %th
+          Remove #{role}
+    %tbody
+      - User.with_role(role).each do |user|
+        %tr
+          %td= user
+          %td
+            = form_tag(set_role_permissions_path, { :method => :put }) do
+              = hidden_field_tag :role_name, role
+              = hidden_field_tag :user_id, user.id
+              = submit_tag "Remove #{role}"
+  = form_tag(set_role_permissions_path, { :method => :put}) do
+    = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s", {:include_blank => true})
+    = hidden_field_tag :role_name, role
+    = submit_tag "Add #{role}"
