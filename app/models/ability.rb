@@ -175,6 +175,13 @@ class Ability
       can :manage, EventCategory
       can :manage, VolunteerOpportunity
     end
+
+    if user.has_role? :music_dj
+      can :list, :song
+      # automatically can download music via S3 links
+    end
+
+
     # #################################################
     # End new role definitions
     # #################################################
@@ -215,10 +222,6 @@ class Ability
       can [:read], Registrant
       can [:read, :create, :list], Email
       can [:directors], :permission
-    end
-
-    if user.has_role? :music_dj
-      can :list, Song
     end
 
     if user.has_role?(:race_official) || user.has_role?(:admin)
@@ -303,7 +306,8 @@ class Ability
       can :crud, CompetitionWheelSize
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
-      can [:crud, :file_complete, :add_file, :list], Song
+      can [:crud, :file_complete, :add_file], Song
+      can :list, :song
       can [:crud], CompetitionWheelSize
     end
     # not-object-specific

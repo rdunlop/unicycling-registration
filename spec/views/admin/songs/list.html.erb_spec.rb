@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "songs/list" do
+describe "admin/songs/list" do
   before(:each) do
     @registrant = FactoryGirl.build_stubbed(:registrant)
     @song1 = FactoryGirl.build_stubbed(:song,

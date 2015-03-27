@@ -31,24 +31,6 @@ describe SongsController do
     end
   end
 
-  describe "GET list" do
-    it "loads all songs" do
-      get :list
-      expect(response).to redirect_to(root_url)
-    end
-    describe "as an admin" do
-      before :each do
-        sign_out @user
-        sign_in FactoryGirl.create(:admin_user)
-      end
-      it "views the songs list" do
-        song = FactoryGirl.create(:song, :registrant => @reg)
-        get :list
-        expect(assigns(:songs)).to eq([song])
-      end
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Song" do

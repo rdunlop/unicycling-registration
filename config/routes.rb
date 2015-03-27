@@ -231,7 +231,7 @@ Workspace::Application.routes.draw do
 
     resources :songs, :only => [:destroy] do
       collection do
-        get :list
+        get :list, controller: "admin/songs"
       end
       member do
         get :add_file

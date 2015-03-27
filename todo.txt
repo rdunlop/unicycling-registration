@@ -3,6 +3,7 @@
 - i18n javascript "Please Wait" and other strings in JS
 - i18n controller flash messages
 - i18n songs pages
+- move the music_dj abilities into admin namespace/scope/controller
 
 - Stop directing user to different homepage based on their role
 - Override Taiwan, make it into a country, not a PRC?
