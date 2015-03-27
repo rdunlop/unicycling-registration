@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "combined_competitions/new" do
+describe "compete/combined_competitions/new" do
   before(:each) do
     assign(:combined_competition, CombinedCompetition.new)
   end

@@ -8,6 +8,10 @@ describe 'Entering Points data' do
   include_context 'user is logged in'
 
   describe "the event on the page" do
+    before :each do
+      click_link "Data Entry"
+    end
+
     specify { expect(page).to have_content("Basketball") }
 
     describe "when entering results" do

@@ -348,7 +348,7 @@ describe "Ability" do
     subject { @ability = Ability.new(nil) }
 
     it { is_expected.to be_able_to(:index, :result) }
-    it { is_expected.to be_able_to(:read, CombinedCompetition) }
+    it { is_expected.to be_able_to(:scores, :result) }
     it { is_expected.to be_able_to(:announcer, @competition) }
 
     describe "when a competition has published age_group_entry results" do

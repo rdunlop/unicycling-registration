@@ -1,4 +1,4 @@
-class CombinedCompetitionEntriesController < ApplicationController
+class Compete::CombinedCompetitionEntriesController < ApplicationController
   before_filter :authenticate_user!
 
   before_action :load_combined_competition

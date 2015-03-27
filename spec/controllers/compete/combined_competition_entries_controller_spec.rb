@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe CombinedCompetitionEntriesController do
+describe Compete::CombinedCompetitionEntriesController do
   before(:each) do
     sign_in FactoryGirl.create(:super_admin_user)
   end
   let(:competition) { FactoryGirl.create(:competition) }
   let(:combined_competition) { FactoryGirl.create(:combined_competition) }
 
-  let(:valid_attributes) { 
+  let(:valid_attributes) {
     {
       :abbreviation => "M",
       :competition_id => competition.id,

@@ -8,12 +8,13 @@ describe 'Judging an event' do
   include_context 'user is logged in'
 
   describe "user is presented with a judging menu" do
-    it "is on the data entry menu" do
-      expect(page).to have_content("Data Entry Menu")
+    it "is on the data entry menu option" do
+      expect(page).to have_content("Data Entry")
     end
 
     describe "in event judging" do
       before :each do
+        click_link "Data Entry"
         click_link "Individual - Presentation"
       end
 

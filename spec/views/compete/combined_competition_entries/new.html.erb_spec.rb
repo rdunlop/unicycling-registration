@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "combined_competition_entries/new" do
+describe "compete/combined_competition_entries/new" do
   before(:each) do
     @combined_competition = FactoryGirl.build_stubbed(:combined_competition)
     @combined_competition_entry = CombinedCompetitionEntry.new

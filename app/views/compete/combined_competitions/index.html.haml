@@ -16,7 +16,7 @@
         %td= link_to 'Edit', edit_combined_competition_path(combined_competition)
         %td= link_to 'Delete', combined_competition, method: :delete, data: { confirm: 'Are you sure?' }
         %td= link_to "Edit Entries", combined_competition_combined_competition_entries_path(combined_competition)
-        %td= link_to "View Results", combined_competition_path(combined_competition)
+        %td= link_to "View Results", scores_result_path(combined_competition.competition) if combined_competition.competition
 
 %br
 = link_to 'New Overall Champion Calculator', new_combined_competition_path

@@ -28,7 +28,6 @@ class WelcomeController < ApplicationController
     end
   end
 
-  # chooses the page to display
   def index
     flash.keep
     redirect_to user_registrants_path(current_user)

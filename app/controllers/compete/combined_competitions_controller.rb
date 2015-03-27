@@ -1,7 +1,5 @@
-class CombinedCompetitionsController < ApplicationController
-  before_filter :authenticate_user!, except: :show
-
-  before_action :set_combined_competition, only: [:show, :edit, :update, :destroy]
+class Compete::CombinedCompetitionsController < ApplicationController
+  before_filter :authenticate_user!
 
   load_and_authorize_resource
 
@@ -11,13 +9,9 @@ class CombinedCompetitionsController < ApplicationController
   def index
   end
 
-  # GET /combined_competitions/1
-  def show
-  end
-
   # GET /combined_competitions/new
   def new
-    @combined_competition = CombinedCompetition.new
+    #@combined_competition = CombinedCompetition.new
   end
 
   # GET /combined_competitions/1/edit
@@ -26,7 +20,7 @@ class CombinedCompetitionsController < ApplicationController
 
   # POST /combined_competitions
   def create
-    @combined_competition = CombinedCompetition.new(combined_competition_params)
+    #@combined_competition = CombinedCompetition.new(combined_competition_params)
 
     if @combined_competition.save
       redirect_to combined_competition_combined_competition_entries_path(@combined_competition), notice: 'Combined competition was successfully created.'
@@ -51,11 +45,6 @@ class CombinedCompetitionsController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_combined_competition
-    @combined_competition = CombinedCompetition.find(params[:id])
-  end
 
   # Only allow a trusted parameter "white list" through.
   def combined_competition_params

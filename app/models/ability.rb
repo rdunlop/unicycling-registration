@@ -29,8 +29,7 @@ class Ability
 
     can :read, StandardSkillEntry
     can :read, AgeGroupType
-    can :index, :result
-    can :read, CombinedCompetition
+    can [:index, :scores], :result
     can [:announcer, :start_list], Competition
     can [:acl, :set_acl, :code, :use_code], :permission
     can :show, PublishedAgeGroupEntry do |entry|

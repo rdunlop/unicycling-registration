@@ -45,7 +45,7 @@ Workspace::Application.routes.draw do
     # ADMIN (for use in Setting up the system)
     #
     #
-    resources :age_group_types, :except => [:new] do
+    resources :age_group_types, :except => [:new], controller: "compete/age_group_types" do
       member do
         get :set_sort
         post :sort
@@ -137,8 +137,8 @@ Workspace::Application.routes.draw do
 
     resources :registration_periods, except: :show
 
-    resources :combined_competitions do
-      resources :combined_competition_entries, except: [:show]
+    resources :combined_competitions, except: :show, controller: "compete/combined_competitions" do
+      resources :combined_competition_entries, except: [:show], controller: "compete/combined_competition_entries"
     end
     resources :competition_wheel_sizes
 
@@ -280,7 +280,12 @@ Workspace::Application.routes.draw do
     get "volunteers", to: "volunteers#index"
     resources :volunteer_opportunities
 
-    get "results", to: "results#index"
+    resources :results, only: [:index] do
+      member do
+        get :scores
+      end
+    end
+    #get "results", to: "results#index"
     get "welcome/help"
     post "welcome/feedback"
     get "welcome/confirm"

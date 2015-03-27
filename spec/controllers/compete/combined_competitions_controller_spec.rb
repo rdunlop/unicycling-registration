@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CombinedCompetitionsController do
+describe Compete::CombinedCompetitionsController do
   before(:each) do
     sign_in FactoryGirl.create(:super_admin_user)
   end
@@ -12,14 +12,6 @@ describe CombinedCompetitionsController do
       combined_competition = CombinedCompetition.create! valid_attributes
       get :index, {}
       expect(assigns(:combined_competitions)).to eq([combined_competition])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested combined_competition as @combined_competition" do
-      combined_competition = CombinedCompetition.create! valid_attributes
-      get :show, {:id => combined_competition.to_param}
-      expect(assigns(:combined_competition)).to eq(combined_competition)
     end
   end
 
