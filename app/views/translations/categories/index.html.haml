@@ -1,0 +1,4 @@
+%h1 Translate Categories
+
+- @categories.each do |category|
+  = link_to category, edit_translations_category_path(category)

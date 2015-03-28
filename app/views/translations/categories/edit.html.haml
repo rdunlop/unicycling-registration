@@ -1,0 +1,9 @@
+%fieldset.form__fieldset
+  = simple_form_for([:translations, @category]) do |f|
+    - languages.each do |lang|
+      = f.globalize_fields_for lang do |g|
+        .field
+          = g.label :name
+          (#{long_language_name(lang)})
+          = g.text_field :name
+    = f.button :submit

@@ -1,3 +1,5 @@
+- "Feedback" should also be sent to the info@ address of the tenant
+- drop the "base-level" translation attributes from tables
 - make all select boxes chosen-select boxes?
 - move competitor_benefits onto the registration_periods admin page?
 - move the 'first day of competition' to the 'important dates' page?

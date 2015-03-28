@@ -11,48 +11,40 @@ class EventConfigurationsController < ConventionSetupController
   def update_base_settings
     @event_configuration.assign_attributes(base_settings_params)
     @event_configuration.apply_validation(:base_settings)
-    respond_to do |format|
-      if @event_configuration.save
-        format.html { redirect_to base_settings_event_configuration_path, notice: 'Event configuration was successfully updated.' }
-      else
-        format.html { render action: "base_settings" }
-      end
+    if @event_configuration.save
+      redirect_to base_settings_event_configuration_path, notice: 'Event configuration was successfully updated.'
+    else
+      render action: "base_settings"
     end
   end
 
   def update_name_logo
     @event_configuration.assign_attributes(name_logo_params)
     @event_configuration.apply_validation(:name_logo)
-    respond_to do |format|
-      if @event_configuration.save
-        format.html { redirect_to name_logo_event_configuration_path, notice: 'Event configuration was successfully updated.' }
-      else
-        format.html { render action: "name_logo" }
-      end
+    if @event_configuration.save
+      redirect_to name_logo_event_configuration_path, notice: 'Event configuration was successfully updated.'
+    else
+      render action: "name_logo"
     end
   end
 
   def update_important_dates
     @event_configuration.assign_attributes(important_dates_params)
     @event_configuration.apply_validation(:important_dates)
-    respond_to do |format|
-      if @event_configuration.save
-        format.html { redirect_to important_dates_event_configuration_path, notice: 'Event configuration was successfully updated.' }
-      else
-        format.html { render action: "important_dates" }
-      end
+    if @event_configuration.save
+      redirect_to important_dates_event_configuration_path, notice: 'Event configuration was successfully updated.'
+    else
+      render action: "important_dates"
     end
   end
 
   def update_payment_settings
     @event_configuration.assign_attributes(payment_settings_params)
     @event_configuration.apply_validation(:payment_settings)
-    respond_to do |format|
-      if @event_configuration.save
-        format.html { redirect_to payment_settings_event_configuration_path, notice: 'Event configuration was successfully updated.' }
-      else
-        format.html { render action: "payment_settings" }
-      end
+    if @event_configuration.save
+      redirect_to payment_settings_event_configuration_path, notice: 'Event configuration was successfully updated.'
+    else
+      render action: "payment_settings"
     end
   end
 
@@ -79,9 +71,8 @@ class EventConfigurationsController < ConventionSetupController
       current_user.remove_role role.name if User.roles.include?(role.name.to_sym)
     end
     current_user.add_role new_role unless new_role.to_sym == :normal_user
-    respond_to do |format|
-      format.html { redirect_to :back, notice: 'User Permissions successfully updated.' }
-    end
+
+    redirect_to :back, notice: 'User Permissions successfully updated.'
   end
 
   private

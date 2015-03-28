@@ -65,6 +65,11 @@ Workspace::Application.routes.draw do
       end
     end
 
+    namespace :translations do
+      resource :event_configuration, only: [:edit, :update]
+      resources :categories, only: [:index, :edit, :update]
+    end
+
     namespace :export do
       get :index
       get :download_payment_details

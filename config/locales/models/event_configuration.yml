@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    attributes:
+      event_configuration:
+        short_name: Short Name
+        long_name: Long Name
+        location: Location
+        dates_description: Dates Description
+        competitor_benefits: Competitor Benefits
+        noncompetitor_benefits: NonCompetitor Benefits
+        spectator_benefits: Spectator Benefits
+        event_url: Main Website
+        start_date: First Day of Competition
+
