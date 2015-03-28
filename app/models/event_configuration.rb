@@ -52,7 +52,6 @@ class EventConfiguration < ActiveRecord::Base
 
   mount_uploader :logo_file, LogoUploader
 
-  # Need to make these validations only apply when certain forms are submitted?
   validates :short_name, :long_name, :presence => true, if: :name_logo_applied?
   validates :event_url, :format => URI.regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI.regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
@@ -90,8 +89,6 @@ class EventConfiguration < ActiveRecord::Base
 
   def init
     self.style_name ||= "naucc_2013"
-    self.long_name ||= ""
-    self.short_name ||= ""
     self.currency_code ||= "USD"
     self.contact_email ||= ""
     self.max_award_place ||= 5
