@@ -8,6 +8,6 @@
     = f.input :currency_code, collection: EventConfiguration.currency_codes
     = f.input :paypal_mode, collection: EventConfiguration.paypal_modes
     = f.input :offline_payment
-    = f.input :offline_payment_description, as: :text
+    = f.input :offline_payment_description, as: :text, input_html: { class: "tinymce" }
 
     = f.button :submit

@@ -1,0 +1,4 @@
+toolbar:
+  - styleselect | bold italic | undo redo
+menubar: false
+statusbar: false

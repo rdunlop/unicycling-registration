@@ -16,6 +16,7 @@
 //= require fancybox
 //= require jquery.nested-fields
 //= require jquery.are-you-sure
+//= require tinymce
 //= require_tree .
 
 $(document).ready(function() {
