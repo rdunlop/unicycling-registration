@@ -120,6 +120,7 @@ Workspace::Application.routes.draw do
         get :summary
         post :notification, controller: "paypal_payments"
         get :success, controller: "paypal_payments"
+        get :offline
       end
 
       member do

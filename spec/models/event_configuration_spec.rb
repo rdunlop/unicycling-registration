@@ -34,12 +34,13 @@
 #  spectators                            :boolean          default(FALSE), not null
 #  usa_membership_config                 :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
-#  paypal_test                           :boolean          default(TRUE), not null
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
 #  italian_requirements                  :boolean          default(FALSE), not null
 #  rules_file_name                       :string(255)
 #  accept_rules                          :boolean          default(FALSE), not null
+#  paypal_mode                           :string(255)      default("disabled")
+#  offline_payment                       :boolean          default(FALSE), not null
 #
 
 require 'spec_helper'

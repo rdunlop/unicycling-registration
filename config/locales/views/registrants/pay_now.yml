@@ -3,6 +3,7 @@ en:
     pay_now:
       pay_now: "Pay Now"
       unknown: "Unknown"
+      offline_payment: "Payment Instructions"
 
 fr:
   registrants:

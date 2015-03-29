@@ -11,4 +11,6 @@ en:
         spectator_benefits: Spectator Benefits
         event_url: Main Website
         start_date: First Day of Competition
+        offline_payment: "Provide details about offline payment"
+        offline_payment_description: "Details for Offline Payment"
 

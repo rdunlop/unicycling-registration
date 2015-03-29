@@ -11,7 +11,7 @@ en:
       note_date_of_payment_html: "NOTE! - It is the <b>date of your payment that defines the registration fee</b>, NOT the registration date."
       registration_time: "Registering takes about 15 minutes."
       can_change_events: "After you have finished your registration, you are still able to change your event data."
-      onsite_restricted_events: "In order to schedule events properly, On-Site registration will not offer all of the events/items that pre-registration allows."
+      onsite_restricted_events: "In order to schedule events properly, On-Site registration may not offer all of the events/items that pre-registration allows."
 
 fr:
   registrants:

@@ -1,7 +1,8 @@
 - move EventConfiguration elements which are competition-specific elswhere.
  - max # places
  - Judging Mode
- -
+- Make payment_settings: offline_payment_description into a Wysiwyg (same with waiver text field)
+
 - "Feedback" should also be sent to the info@ address of the tenant
 - drop the "base-level" translation attributes from tables
 - make all select boxes chosen-select boxes?

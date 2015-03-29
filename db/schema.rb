@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150327032301) do
+ActiveRecord::Schema.define(version: 20150328233256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -325,8 +325,8 @@ ActiveRecord::Schema.define(version: 20150327032301) do
   add_index "event_choices", ["event_id", "position"], name: "index_event_choices_on_event_id_and_position", unique: true, using: :btree
 
   create_table "event_configuration_translations", force: true do |t|
-    t.integer  "event_configuration_id", null: false
-    t.string   "locale",                 null: false
+    t.integer  "event_configuration_id",      null: false
+    t.string   "locale",                      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "short_name"
@@ -336,6 +336,7 @@ ActiveRecord::Schema.define(version: 20150327032301) do
     t.text     "competitor_benefits"
     t.text     "noncompetitor_benefits"
     t.text     "spectator_benefits"
+    t.text     "offline_payment_description"
   end
 
   add_index "event_configuration_translations", ["event_configuration_id"], name: "index_8da8125feacb8971b8fc26e0e628b77608288047", using: :btree
@@ -354,31 +355,32 @@ ActiveRecord::Schema.define(version: 20150327032301) do
     t.date     "event_sign_up_closed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "test_mode",                             default: false,  null: false
+    t.boolean  "test_mode",                             default: false,      null: false
     t.string   "comp_noncomp_url"
-    t.boolean  "standard_skill",                        default: false,  null: false
-    t.boolean  "usa",                                   default: false,  null: false
-    t.boolean  "iuf",                                   default: false,  null: false
+    t.boolean  "standard_skill",                        default: false,      null: false
+    t.boolean  "usa",                                   default: false,      null: false
+    t.boolean  "iuf",                                   default: false,      null: false
     t.string   "currency_code"
     t.string   "rulebook_url"
     t.string   "style_name"
     t.text     "custom_waiver_text"
     t.date     "music_submission_end_date"
-    t.boolean  "artistic_score_elimination_mode_naucc", default: true,   null: false
+    t.boolean  "artistic_score_elimination_mode_naucc", default: true,       null: false
     t.integer  "usa_individual_expense_item_id"
     t.integer  "usa_family_expense_item_id"
     t.string   "logo_file"
     t.integer  "max_award_place",                       default: 5
-    t.boolean  "display_confirmed_events",              default: false,  null: false
-    t.boolean  "spectators",                            default: false,  null: false
-    t.boolean  "usa_membership_config",                 default: false,  null: false
+    t.boolean  "display_confirmed_events",              default: false,      null: false
+    t.boolean  "spectators",                            default: false,      null: false
+    t.boolean  "usa_membership_config",                 default: false,      null: false
     t.string   "paypal_account"
-    t.boolean  "paypal_test",                           default: true,   null: false
     t.string   "waiver",                                default: "none"
     t.integer  "validations_applied"
-    t.boolean  "italian_requirements",                  default: false,  null: false
+    t.boolean  "italian_requirements",                  default: false,      null: false
     t.string   "rules_file_name"
-    t.boolean  "accept_rules",                          default: false,  null: false
+    t.boolean  "accept_rules",                          default: false,      null: false
+    t.string   "paypal_mode",                           default: "disabled"
+    t.boolean  "offline_payment",                       default: false,      null: false
   end
 
   create_table "events", force: true do |t|

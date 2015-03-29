@@ -34,12 +34,13 @@
 #  spectators                            :boolean          default(FALSE), not null
 #  usa_membership_config                 :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
-#  paypal_test                           :boolean          default(TRUE), not null
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
 #  italian_requirements                  :boolean          default(FALSE), not null
 #  rules_file_name                       :string(255)
 #  accept_rules                          :boolean          default(FALSE), not null
+#  paypal_mode                           :string(255)      default("disabled")
+#  offline_payment                       :boolean          default(FALSE), not null
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -48,6 +49,7 @@ class EventConfiguration < ActiveRecord::Base
 
   translates :short_name, :long_name, :location, :dates_description, fallbacks_for_empty_translations: true
   translates :competitor_benefits, :noncompetitor_benefits, :spectator_benefits, fallbacks_for_empty_translations: true
+  translates :offline_payment_description, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   mount_uploader :logo_file, LogoUploader
@@ -80,6 +82,11 @@ class EventConfiguration < ActiveRecord::Base
   validates :usa, :iuf, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
   validates :test_mode, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
   validates :max_award_place, presence: true, if: :important_dates_applied?
+  def self.paypal_modes
+    ["disabled", "test", "enabled"]
+  end
+
+  validates :paypal_mode, inclusion: { in: self.paypal_modes }
 
   before_validation :clear_of_blank_strings
 
@@ -90,7 +97,6 @@ class EventConfiguration < ActiveRecord::Base
   def init
     self.style_name ||= "naucc_2013"
     self.currency_code ||= "USD"
-    self.contact_email ||= ""
     self.max_award_place ||= 5
   end
 
@@ -114,6 +120,14 @@ class EventConfiguration < ActiveRecord::Base
     when "EUR"
       "€"
     end
+  end
+
+  def online_payment?
+    paypal_mode == "test" || paypal_mode == "enabled"
+  end
+
+  def paypal_test?
+    paypal_mode == "test"
   end
 
   def has_print_waiver

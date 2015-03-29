@@ -6,6 +6,8 @@
 
     = f.input :paypal_account
     = f.input :currency_code, collection: EventConfiguration.currency_codes
-    = f.input :paypal_test
+    = f.input :paypal_mode, collection: EventConfiguration.paypal_modes
+    = f.input :offline_payment
+    = f.input :offline_payment_description, as: :text
 
     = f.button :submit

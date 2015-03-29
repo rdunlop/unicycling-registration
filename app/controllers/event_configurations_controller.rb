@@ -116,7 +116,7 @@ class EventConfigurationsController < ConventionSetupController
   end
 
   def payment_settings_params
-    params.require(:event_configuration).permit(:paypal_account, :paypal_test,
+    params.require(:event_configuration).permit(:paypal_account, :paypal_mode, :offline_payment, :offline_payment_description,
                                                 :currency, :currency_code)
   end
 
