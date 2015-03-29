@@ -32,6 +32,15 @@ class ApplicationController < ActionController::Base
   def load_config_object
     @config = EventConfiguration.singleton
     I18n.available_locales = EventConfiguration.all_available_languages & @config.enabled_locales
+    set_fallbacks
+  end
+
+  def set_fallbacks
+    fallbacks_hash = {}
+    I18n.available_locales.each do |locale|
+      fallbacks_hash[locale] = [locale, *(I18n.available_locales - [locale])]
+    end
+    Globalize.fallbacks = fallbacks_hash
   end
 
   def load_tenant

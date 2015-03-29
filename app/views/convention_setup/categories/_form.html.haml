@@ -1,10 +1,5 @@
 = simple_form_for([:convention_setup, @category]) do |f|
-  - languages.each do |lang|
-    = f.globalize_fields_for lang do |g|
-      .field
-        = g.label :name
-        (#{long_language_name(lang)})
-        = g.text_field :name
+  = f.input :name
   = f.input :position
   = f.input :info_url
   = f.button :submit
