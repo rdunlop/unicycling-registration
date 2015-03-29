@@ -71,15 +71,6 @@ In order to automatically update the registration period when the current period
 ends, a scheduled task must be executed daily. This is done with the 'whenever' gem
 which schedules the task to run daily
 
-Secret Hash
------------
-
-The 'Secret' key is required in order to generate secure cookies. With this in place, users can return to the site and have their accounts still logged in (this is a good thing).
-
-    SECRET=<run rake secret on the command line>
-
-(I use 'rake secret' (from my development environment) to generate a random secure value. I only run it once, and it should be a different value for each of your system). If you don't have a development environment, type approximately a  hundred numbers as your "SECRET"
-
 Production flag
 ---------------
 
