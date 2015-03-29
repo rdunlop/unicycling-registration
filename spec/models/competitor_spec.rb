@@ -445,7 +445,7 @@ describe Competitor do
         end
         it "should allow the 2nd attempt to also be a fault" do
 
-          expect(Competitor.find(@comp).double_fault?).to eq(true)
+          expect(@comp.reload.double_fault?).to eq(true)
           expect(@da2.valid?).to eq(true)
         end
         it "should describe the status" do
