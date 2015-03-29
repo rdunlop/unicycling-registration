@@ -2,7 +2,7 @@ class Notifications < ActionMailer::Base
   add_template_helper(ApplicationHelper)
 
   def send_feedback(form_details)
-    @contact_form = form_details
+    @contact_form = ContactForm.deserialize(form_details)
 
     mail to: EventConfiguration.singleton.contact_email.presence,
          cc: Rails.application.secrets.error_emails, subject: 'Feedback'
@@ -21,7 +21,8 @@ class Notifications < ActionMailer::Base
     mail to: requesting_user.email, subject: 'Registrantion Access Granted'
   end
 
-  def send_mass_email(email, addresses)
+  def send_mass_email(email_yaml, addresses)
+    email = Email.deserialize(email_yaml)
     @body = email.body
 
     mail bcc: addresses, subject: email.subject

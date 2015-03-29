@@ -34,6 +34,14 @@ class ContactForm
     @signed_in = true
   end
 
+  def serialize
+    YAML::dump(self)
+  end
+
+  def self.deserialize(yaml)
+    YAML::load(yaml)
+  end
+
   def persisted?
     false
   end
