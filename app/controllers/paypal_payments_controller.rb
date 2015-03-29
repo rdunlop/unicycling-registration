@@ -10,16 +10,16 @@ class PaypalPaymentsController < ApplicationController
         if Payment.exists?(invoice_id: paypal.order_number)
           payment = Payment.find_by(invoice_id: paypal.order_number)
           if payment.completed
-            PaymentMailer.delay.ipn_received("Payment already completed. Invoice ID: " + paypal.order_number)
+            PaymentMailer.ipn_received("Payment already completed. Invoice ID: " + paypal.order_number).deliver_later
           else
             payment.complete(transaction_id: paypal.transaction_id, payment_date: paypal.payment_date)
-            PaymentMailer.delay.payment_completed(payment.id)
+            PaymentMailer.payment_completed(payment).deliver_later
             if payment.total_amount != paypal.payment_amount
-              PaymentMailer.delay.ipn_received("Payment total #{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}")
+              PaymentMailer.ipn_received("Payment total #{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}").deliver_later
             end
           end
         else
-          PaymentMailer.delay.ipn_received("Unable to find Payment with Invoice ID " + paypal.order_number)
+          PaymentMailer.ipn_received("Unable to find Payment with Invoice ID " + paypal.order_number).deliver_later
         end
       end
     end

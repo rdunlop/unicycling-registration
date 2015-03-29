@@ -111,7 +111,7 @@ class Payment < ActiveRecord::Base
       unless rei.nil?
         rei.destroy
       else
-        PaymentMailer.delay.missing_matching_expense_item(self.id)
+        PaymentMailer.missing_matching_expense_item(self.id).deliver_later
       end
     end
   end

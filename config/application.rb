@@ -38,6 +38,8 @@ module Workspace
       'Errors::TenantNotFound' => :not_found
     )
 
+    config.active_job.queue_adapter = :sidekiq
+
     config.generators do |g|
       g.helper_specs false
       g.routing_specs false
