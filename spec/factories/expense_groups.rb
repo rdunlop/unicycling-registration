@@ -3,7 +3,6 @@
 # Table name: expense_groups
 #
 #  id                         :integer          not null, primary key
-#  group_name                 :string(255)
 #  visible                    :boolean          default(TRUE), not null
 #  position                   :integer
 #  created_at                 :datetime

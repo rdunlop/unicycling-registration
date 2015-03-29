@@ -3,10 +3,6 @@
 # Table name: event_configurations
 #
 #  id                                    :integer          not null, primary key
-#  short_name                            :string(255)
-#  long_name                             :string(255)
-#  location                              :string(255)
-#  dates_description                     :string(255)
 #  event_url                             :string(255)
 #  start_date                            :date
 #  contact_email                         :string(255)

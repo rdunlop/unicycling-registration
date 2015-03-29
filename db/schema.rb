@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329044153) do
+ActiveRecord::Schema.define(version: 20150329051332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 20150329044153) do
   add_index "boundary_scores", ["judge_id"], name: "index_boundary_scores_judge_id", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -311,13 +310,11 @@ ActiveRecord::Schema.define(version: 20150329044153) do
     t.integer  "event_id"
     t.string   "cell_type"
     t.string   "multiple_values"
-    t.string   "label"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "autocomplete",                default: false, null: false
     t.boolean  "optional",                    default: false, null: false
-    t.string   "tooltip"
     t.integer  "optional_if_event_choice_id"
     t.integer  "required_if_event_choice_id"
   end
@@ -343,10 +340,6 @@ ActiveRecord::Schema.define(version: 20150329044153) do
   add_index "event_configuration_translations", ["locale"], name: "index_event_configuration_translations_on_locale", using: :btree
 
   create_table "event_configurations", force: true do |t|
-    t.string   "short_name"
-    t.string   "long_name"
-    t.string   "location"
-    t.string   "dates_description"
     t.string   "event_url"
     t.date     "start_date"
     t.string   "contact_email"
@@ -413,7 +406,6 @@ ActiveRecord::Schema.define(version: 20150329044153) do
   add_index "expense_group_translations", ["locale"], name: "index_expense_group_translations_on_locale", using: :btree
 
   create_table "expense_groups", force: true do |t|
-    t.string   "group_name"
     t.boolean  "visible",                    default: true,  null: false
     t.integer  "position"
     t.datetime "created_at"
@@ -439,13 +431,11 @@ ActiveRecord::Schema.define(version: 20150329044153) do
   add_index "expense_item_translations", ["locale"], name: "index_expense_item_translations_on_locale", using: :btree
 
   create_table "expense_items", force: true do |t|
-    t.string   "name"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "expense_group_id"
     t.boolean  "has_details",            default: false, null: false
-    t.string   "details_label"
     t.integer  "maximum_available"
     t.boolean  "has_custom_cost",        default: false, null: false
     t.integer  "maximum_per_registrant", default: 0
@@ -738,7 +728,6 @@ ActiveRecord::Schema.define(version: 20150329044153) do
   create_table "registration_periods", force: true do |t|
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "competitor_expense_item_id"

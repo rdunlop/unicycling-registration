@@ -3,13 +3,11 @@
 # Table name: expense_items
 #
 #  id                     :integer          not null, primary key
-#  name                   :string(255)
 #  position               :integer
 #  created_at             :datetime
 #  updated_at             :datetime
 #  expense_group_id       :integer
 #  has_details            :boolean          default(FALSE), not null
-#  details_label          :string(255)
 #  maximum_available      :integer
 #  has_custom_cost        :boolean          default(FALSE), not null
 #  maximum_per_registrant :integer          default(0)
