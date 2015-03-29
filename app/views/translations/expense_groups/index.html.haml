@@ -1,0 +1,5 @@
+%h1 Translate Expense Group
+
+%ul
+  - @expense_groups.each do |expense_group|
+    %li= link_to expense_group, edit_translations_expense_group_path(expense_group)

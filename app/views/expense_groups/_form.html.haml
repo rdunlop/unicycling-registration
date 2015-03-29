@@ -1,15 +1,8 @@
 = form_for(@expense_group) do |f|
   = render partial: "/shared/error_messages", object: @expense_group
   .field
-    - languages.each do |lang|
-      = f.globalize_fields_for lang do |g|
-        = g.label :group_name
-        (
-        %b= long_language_name(lang)
-        )
-        %br
-        = g.text_field :group_name
-        %br
+    = f.label :group_name
+    = f.text_field :group_name
   .field
     = f.label :info_url
     = f.url_field :info_url

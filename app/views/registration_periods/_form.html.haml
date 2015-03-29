@@ -1,14 +1,6 @@
 = simple_form_for(@registration_period) do |f|
   = render partial: "shared/error_messages", object: @registration_period
-  .field
-    - languages.each do |lang|
-      = f.globalize_fields_for lang do |g|
-        = g.label :name
-        (
-        %b>= long_language_name(lang)
-        )
-        \#{g.text_field :name}
-        %br
+  = f.input :name
   = f.input :onsite
   .help_bubble{ title: "This causes the 'Online Registration Closes' banner to be displayed appropriately in the Cost tables" }
   .input_details

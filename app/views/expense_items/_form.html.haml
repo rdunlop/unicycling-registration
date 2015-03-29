@@ -1,19 +1,12 @@
 = simple_form_for([@expense_item.expense_group, @expense_item]) do |f|
   = render partial: "shared/error_messages", object: @expense_item
 
-  .field
-    - languages.each do |lang|
-      = f.globalize_fields_for lang do |g|
-        %b= long_language_name(lang)
-        %br
-        = g.label :name
-        = g.text_field :name
-        .field
-          = g.label :details_label, "Question"
-          = g.text_field :details_label
-  = f.input :has_details
+  = f.input :name
+  = f.input :has_details, input_html: { class: "js--inputEnable", data: { targets: "js--labelConditional" } }
   .input_details
     Ask the user for additional details when they purchase this item
+  = f.input :details_label, input_html: { class: "js--labelConditional" }
+  %hr
   = f.input :cost, input_html: { class: "js--costInput" }
   = f.input :has_custom_cost
   .input_details

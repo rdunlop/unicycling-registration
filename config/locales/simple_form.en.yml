@@ -22,6 +22,7 @@ en:
       expense_item:
         has_details: "Ask a question from registrant"
         has_custom_cost: "Donation"
+        details_label: "Question"
         maximum_available: "Max Total Number for Sale"
         maximum_per_registrant: "Max per registrant"
       coupon_code:

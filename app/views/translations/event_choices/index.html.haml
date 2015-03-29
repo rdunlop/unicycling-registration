@@ -1,0 +1,5 @@
+%h1 Translate Event Choices
+
+%ul
+  - @event_choices.each do |event_choice|
+    %li= link_to event_choice, edit_translations_event_choice_path(event_choice)
