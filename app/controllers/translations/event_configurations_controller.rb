@@ -1,7 +1,7 @@
-class Translations::EventConfigurationsController < ConventionSetupController
+class Translations::EventConfigurationsController < Admin::TranslationsController
   before_action :authenticate_user!
   before_action :load_event_configuration
-  load_and_authorize_resource
+  load_resource
 
   def edit
   end

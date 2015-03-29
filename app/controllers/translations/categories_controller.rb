@@ -1,8 +1,9 @@
-class Translations::CategoriesController < ConventionSetupController
+class Translations::CategoriesController < Admin::TranslationsController
   before_action :authenticate_user!
-  load_and_authorize_resource
+  load_resource
 
   def index
+    @categories = Category.all
   end
 
   # GET /translations/categories/1/edit

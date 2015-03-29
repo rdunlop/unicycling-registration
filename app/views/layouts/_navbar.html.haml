@@ -38,6 +38,8 @@
           %li= link_to  'Payments', summary_payments_path
         - if can?(:read, :onsite_registration)
           %li= link_to 'On-Site Registration', onsite_registration_path
+        - if can?(:read, :translation)
+          %li= link_to "Translations", translations_path
     %nav.non_printable
       %ul.navList
         - if @config.standard_skill && can?(:manage, StandardSkillEntry)

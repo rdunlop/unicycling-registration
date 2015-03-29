@@ -180,6 +180,9 @@ class Ability
       # automatically can download music via S3 links
     end
 
+    if user.has_role? :translator
+      can :manage, :translation
+    end
     # #################################################
     # End new role definitions
     # #################################################
