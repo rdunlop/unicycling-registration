@@ -6,6 +6,7 @@ describe "registrants/index" do
     @ability.extend(CanCan::Ability)
     allow(controller).to receive(:current_ability) { @ability }
     @user = FactoryGirl.build_stubbed(:user)
+    assign(:config, FactoryGirl.create(:event_configuration))
   end
 
   describe "with no registrants" do

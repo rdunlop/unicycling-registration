@@ -180,12 +180,12 @@ describe EventConfiguration do
     end
   end
 
-  it "returns the live paypal url when TEST is false" do
-    @ev.update_attribute(:paypal_test, false)
+  it "returns the live paypal url when paypal mode is enabled" do
+    @ev.update_attribute(:paypal_mode, "enabled")
     expect(EventConfiguration.paypal_base_url).to eq("https://www.paypal.com")
   end
-  it "returns the test paypal url when TEST is true" do
-    @ev.update_attribute(:paypal_test, true)
+  it "returns the test paypal url when paypal mode is TEST" do
+    @ev.update_attribute(:paypal_mode, "test")
     expect(EventConfiguration.paypal_base_url).to eq("https://www.sandbox.paypal.com")
   end
 

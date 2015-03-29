@@ -56,10 +56,8 @@ class PaymentsController < ApplicationController
 
     if @payment.save
       redirect_to @payment, notice: 'Payment was successfully created.'
-      render json: @payment, status: :created, location: @payment
     else
       render action: "new"
-      render json: @payment.errors, status: :unprocessable_entity
     end
   end
 

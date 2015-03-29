@@ -100,7 +100,7 @@ describe Payment do
   end
 
   describe "With an environment config with test mode disabled" do
-    let!(:event_configuration) { FactoryGirl.create :event_configuration, paypal_test: false }
+    let!(:event_configuration) { FactoryGirl.create :event_configuration, paypal_mode: "enabled" }
 
     it "has a REAL paypal_post_url" do
       expect(@pay.paypal_post_url).to eq("https://www.paypal.com/cgi-bin/webscr")
