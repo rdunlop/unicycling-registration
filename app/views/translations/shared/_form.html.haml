@@ -1,0 +1,27 @@
+%h1 Translate #{class_name}
+
+-#
+  - class_name.translates?
+= form_for(object, url: target_path, method: :put) do |f|
+  = render partial: "/shared/error_messages", object: object
+  %table.alternate
+    %thead
+      %tr
+        %th
+        - languages.each do |lang|
+          %th= long_language_name(lang)
+    %tbody
+      - class_name.translated_attribute_names.each do |attr_sym|
+        %tr
+          %th= class_name.human_attribute_name(attr_sym)
+          - languages.each do |lang|
+            = f.globalize_fields_for lang do |g|
+              - if class_name.translation_class.columns_hash[attr_sym.to_s].type == :string
+                %td= g.text_field attr_sym
+              - else
+                - if defined?(wysiwyg) && wysiwyg.include?(attr_sym)
+                  %td= g.text_area attr_sym, class: "tinymce"
+                - else
+                  %td= g.text_area attr_sym
+  = f.submit
+

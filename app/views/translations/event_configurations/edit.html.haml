@@ -1,25 +1,4 @@
-%h1 Translate Event Configuration
-
--#
-  - class_name.translates?
-= form_for(@event_configuration, url: translations_event_configuration_path, method: :put) do |f|
-  = render partial: "/shared/error_messages", object: @event_configuration
-  - class_name = EventConfiguration
-  %table.alternate
-    %thead
-      %tr
-        %th Field
-        - languages.each do |lang|
-          %th= long_language_name(lang)
-    %tbody
-      - class_name.translated_attribute_names.each do |attr_sym|
-        %tr
-          %th= class_name.human_attribute_name(attr_sym)
-          - languages.each do |lang|
-            = f.globalize_fields_for lang do |g|
-              - if class_name.translation_class.columns_hash[attr_sym.to_s].type == :string
-                %td= g.text_field attr_sym
-              - else
-                %td= g.text_area attr_sym
-  = f.submit
-
+= render partial: "/translations/shared/form",
+         locals: { class_name: EventConfiguration, object: @event_configuration,
+         target_path: translations_event_configuration_path,
+         wysiwyg: [:offline_payment_description] }
