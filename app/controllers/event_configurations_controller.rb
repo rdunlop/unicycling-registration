@@ -105,7 +105,8 @@ class EventConfigurationsController < ConventionSetupController
                                                 :accept_rules, :rules_file_name,
                                                 :contact_email,
                                                 :artistic_score_elimination_mode_naucc,
-                                                :rulebook_url
+                                                :rulebook_url,
+                                                enabled_locales: []
       )
   end
 

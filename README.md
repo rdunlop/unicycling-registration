@@ -276,11 +276,11 @@ If you would like to contribute language translations, please see:
   in the site
 ** Each of these files will need to have the new language added
 
-* app/helpers/language_helper.rb - A place where each of the used languages is
-  defined, so that the admin pages show form elements to set these language
-  fields.
+1. First create a root-level en.yml file, and set the "language_name"
 
-* config/application.rb - `config.i18n.available_locales = [:en, :fr]` needs to be expanded
+2. Add the language to the `all_available_languages` in the EventConfiguration class
+
+3. Choose the language in your Event Configuration.
 
 * app/views/layouts/application.rb - Ensure that the 'lang' attribute is appropriately set.
 

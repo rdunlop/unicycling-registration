@@ -39,6 +39,13 @@
     = f.input :accept_rules, hint: "Enable this to force all registrants to accept the rules attached in PDF"
   %hr
 
+  %fieldset.form__fieldset
+    %h3 Offered Languages
+
+    = f.input :enabled_locales, collection: EventConfiguration.all_available_languages, input_html: { multiple: true }
+
+  %hr
+
   %h3 Website Style
   = f.input :style_name, collection: EventConfiguration.style_names, include_blank: false
 

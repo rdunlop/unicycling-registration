@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
 
   def load_config_object
     @config = EventConfiguration.singleton
+    I18n.available_locales = EventConfiguration.all_available_languages & @config.enabled_locales
   end
 
   def load_tenant

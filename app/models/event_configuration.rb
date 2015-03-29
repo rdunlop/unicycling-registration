@@ -41,6 +41,7 @@
 #  accept_rules                          :boolean          default(FALSE), not null
 #  paypal_mode                           :string(255)      default("disabled")
 #  offline_payment                       :boolean          default(FALSE), not null
+#  enabled_locales                       :string(255)      default("en,fr"), not null
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -57,6 +58,7 @@ class EventConfiguration < ActiveRecord::Base
   validates :short_name, :long_name, :presence => true, if: :name_logo_applied?
   validates :event_url, :format => URI.regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI.regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
+  validates :enabled_locales, presence: true
 
   def self.style_names
     [["Blue and Pink", "unicon_17"], ["Green and Blue", "naucc_2013"], ["Blue Purple Green", "naucc_2014"], ["Purple Blue Green", "naucc_2015"]]
@@ -232,5 +234,22 @@ class EventConfiguration < ActiveRecord::Base
       Event.reset_counters(event.id, :event_categories)
       Event.reset_counters(event.id, :event_choices)
     end
+  end
+
+  # Convert from stored string "en,fr" to [:en, :fr]
+  def enabled_locales
+    self[:enabled_locales].split(",").map(&:to_sym)
+  end
+
+  # convert from passed in array ["", "en", "fr"] to "en,fr"
+  def enabled_locales=(values)
+    languages = values.reject{|x| x.blank?}
+    # add default, since it's the configured fallback it must exist
+    languages = (languages << I18n.default_locale.to_s).uniq
+    self[:enabled_locales] = languages.join(",")
+  end
+
+  def self.all_available_languages
+    [:en, :fr, :de, :hu]
   end
 end
