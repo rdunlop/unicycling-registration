@@ -1,3 +1,11 @@
+- Send Olaf a report of the hosting costs for prod+dev
+- replace better_erors with web-console
+- upgrade sass-rails
+- why did I need to change to raise_with_exception? (dependent: :destroy -> dependent: :raise...)
+- install tolk for translation?
+- remove respond_with class-level responders.
+- Use ActiveJob for mailer, remove serialization steps
+- Address deprecation messages
 - move EventConfiguration elements which are competition-specific elswhere.
  - max # places
  - Judging Mode

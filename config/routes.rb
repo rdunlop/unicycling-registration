@@ -335,11 +335,11 @@ Workspace::Application.routes.draw do
             delete :delete_heat
 
             get  :data_entry
-            get :import_csv, as: "display_csv", to: :display_csv
+            get :import_csv, as: "display_csv", action: :display_csv
             post :import_csv
-            get :import_chip, as: "display_chip", to: :display_chip
+            get :import_chip, as: "display_chip", action: :display_chip
             post :import_chip
-            get :import_lif, as: "display_lif", to: :display_lif
+            get :import_lif, as: "display_lif", action: :display_lif
             post :import_lif
             delete :destroy_all
           end

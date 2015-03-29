@@ -27,7 +27,7 @@ class CouponCode < ActiveRecord::Base
 
   has_many :coupon_code_expense_items, inverse_of: :coupon_code, dependent: :destroy
   has_many :expense_items, through: :coupon_code_expense_items
-  has_many :payment_detail_coupon_codes, dependent: :restrict_with_error
+  has_many :payment_detail_coupon_codes, dependent: :restrict_with_exception
 
   accepts_nested_attributes_for :coupon_code_expense_items
 

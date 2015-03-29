@@ -17,11 +17,10 @@ describe "distance_attempts/list" do
 
   it "renders a table containing all of the distance attempts" do
     render
-
-    assert_select "tr>td", :text => @da1.distance, :count => 1
+    assert_select "tr>td", :text => @da1.distance.to_s, :count => 1
     assert_select "tr>td", :text => @comp1.name, :count => 1
-    assert_select "tr>td", :text => @comp1.age, :count => 1
+    assert_select "tr>td", :text => @comp1.age.to_s, :count => 1
     assert_select "tr>td", :text => @judge.name, :count => 1
-    assert_select "tr>td", :text => @da1.created_at, :count => 1
+    assert_select "tr>td", :text => @da1.created_at.to_s, :count => 1
   end
 end

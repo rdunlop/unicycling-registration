@@ -3,19 +3,15 @@ class AwardLabelsController < ApplicationController
   load_and_authorize_resource
 
   before_action :load_user, :only => [:index, :create, :create_by_competition, :create_labels, :expert_labels, :announcer_sheet, :normal_labels, :destroy_all, :create_labels_by_registrant]
-  respond_to :html
 
   def load_user
     @user = User.find(params[:user_id])
   end
 
   # GET /users/#/award_labels
-  # GET /users/#/award_labels.json
   def index
     @award_labels = @user.award_labels.includes(:registrant)
     @award_label = AwardLabel.new
-
-    respond_with @award_labels
   end
 
   # GET /award_labels/1/edit
@@ -53,12 +49,10 @@ class AwardLabelsController < ApplicationController
   end
 
   # DELETE /award_labels/1
-  # DELETE /award_labels/1.json
   def destroy
     @user = @award_label.user
     @award_label.destroy
-
-    respond_with(@award_label, location: user_award_labels_path(@user) )
+    redirect_to user_award_labels_path(@user)
   end
 
   def set_int_if_present(value, default)

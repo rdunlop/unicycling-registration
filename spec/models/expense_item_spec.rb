@@ -119,7 +119,7 @@ describe ExpenseItem do
 
     it "should not be able to destroy this item" do
       expect(ExpenseItem.all.count).to eq(1)
-      @item.destroy
+      expect { @item.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
       expect(ExpenseItem.all.count).to eq(1)
     end
 

@@ -44,9 +44,19 @@ RSpec.configure do |config|
     ActionController::Base.perform_caching = caching
   end
 
-  config.before(:each, :type => :view) {
+  config.before(:each, :type => :view) do
     assign(:config, EventConfiguration.new)
-  }
+  end
+
+
+  # this is necessary so that spec path builders without locales don't
+  # incorrectly specify positional arguments into the 'locale' argument
+  config.before(:each, type: :feature) do
+    default_url_options[:locale] = I18n.default_locale
+  end
+  config.before :each, type: :view do
+    controller.default_url_options[:locale] = I18n.default_locale
+  end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby "2.1.2"
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.1'
 
 # Authentication
 gem 'devise'
@@ -55,7 +55,7 @@ gem 'acts_as_list'
 gem 'carrierwave_direct'
 gem 'carmen', '1.0.0' # locked to 1.0.0 because 1.0.1 removed Puerto Rico
 gem 'carmen-rails'
-gem 'globalize', '~> 4.0.3'
+gem 'globalize', '~> 5.0.0'
 gem 'virtus'
 gem "wicked"
 

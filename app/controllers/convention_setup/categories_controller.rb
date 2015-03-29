@@ -3,8 +3,6 @@ class ConventionSetup::CategoriesController < ConventionSetupController
   load_and_authorize_resource
   before_action :set_categories_breadcrumb
 
-  respond_to :html
-
   # GET /categories
   # GET /categories.json
   def index
@@ -45,7 +43,7 @@ class ConventionSetup::CategoriesController < ConventionSetupController
   def destroy
     @category.destroy
 
-    respond_with([:convention_setup, @category])
+    redirect_to [:convention_setup, @category]
   end
 
   private

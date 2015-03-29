@@ -74,7 +74,7 @@ describe RegistrationPeriod do
       end
 
       it "can't remove the RP on deletion" do
-        expect(@rp.destroy).to be_falsy
+        expect { @rp.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
       end
     end
   end
