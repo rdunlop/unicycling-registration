@@ -19,15 +19,16 @@
 
 = render :partial => "registrants_list", :locals => {:shared_list => @shared_registrants, :my_registrants_list => @my_registrants}
 = render partial: "waiver_blank"
-%hr
-%p
-  = t(".be_sure_to_submit_payment")
-%p= t(".note_date_of_payment_html")
-= render :partial => "waiver"
-%p
-  = t(".registration_time")
-  %br
-  = t(".can_change_events")
-  %br
-  = t(".onsite_restricted_events")
-  %br
+- if @config.online_payment?
+  %hr
+  %p
+    = t(".be_sure_to_submit_payment")
+  %p= t(".note_date_of_payment_html")
+  = render :partial => "waiver"
+  %p
+    = t(".registration_time")
+    %br
+    = t(".can_change_events")
+    %br
+    = t(".onsite_restricted_events")
+    %br
