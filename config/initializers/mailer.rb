@@ -37,3 +37,8 @@ if Rails.env.development? || Rails.env.naucc?
   end
   ActionMailer::Base.register_interceptor(OverrideMailRecipient)
 end
+
+# force the mailer to always queue on the 'default' queue
+class ActionMailer::DeliveryJob
+  queue_as :default
+end
