@@ -93,7 +93,7 @@ describe Payment do
         it "does not group them together" do
           expect(@pay.unique_payment_details.count).to eq(2)
           expect(@pay.unique_payment_details).to match_array([PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 1, :amount => @pdc.amount}),
-                                                 PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd2.amount})])
+                                                              PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd2.amount})])
         end
       end
     end

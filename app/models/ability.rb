@@ -180,7 +180,6 @@ class Ability
       # automatically can download music via S3 links
     end
 
-
     # #################################################
     # End new role definitions
     # #################################################
@@ -295,7 +294,7 @@ class Ability
   # Registrant
   def define_registrant_ability(user)
     if user.has_role? :admin
-      #can :create, RegFee
+      # can :create, RegFee
       can :set_reg_fee, :registrant
       can :undelete, :registrant
       can :manage_all, :registrant

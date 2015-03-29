@@ -11,7 +11,7 @@ class Compete::CombinedCompetitionsController < ApplicationController
 
   # GET /combined_competitions/new
   def new
-    #@combined_competition = CombinedCompetition.new
+    # @combined_competition = CombinedCompetition.new
   end
 
   # GET /combined_competitions/1/edit
@@ -20,7 +20,7 @@ class Compete::CombinedCompetitionsController < ApplicationController
 
   # POST /combined_competitions
   def create
-    #@combined_competition = CombinedCompetition.new(combined_competition_params)
+    # @combined_competition = CombinedCompetition.new(combined_competition_params)
 
     if @combined_competition.save
       redirect_to combined_competition_combined_competition_entries_path(@combined_competition), notice: 'Combined competition was successfully created.'

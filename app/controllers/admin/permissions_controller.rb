@@ -40,5 +40,4 @@ class Admin::PermissionsController < ApplicationController
   def directors
     @events = Event.order(:name).all
   end
-
 end

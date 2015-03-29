@@ -1,5 +1,4 @@
 class PermissionsController < ApplicationController
-  #before_filter :authenticate_user!, except: [:acl, :set_acl, :code, :use_code]
   authorize_resource class: false
 
   def acl

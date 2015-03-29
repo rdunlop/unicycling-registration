@@ -6,7 +6,7 @@ class ExportRegistrantsController < ApplicationController
 
   def download_all
     headers = ["Registrant ID", "First Name", "Last Name", "Address", "City", "Zip", "Country",
-      "Place of Birth", "Birthday", "Italian Fiscal Code", "Volunteer", "email", "Phone", "Mobile", "User Email"]
+               "Place of Birth", "Birthday", "Italian Fiscal Code", "Volunteer", "email", "Phone", "Mobile", "User Email"]
 
     data = []
     Registrant.active_or_incomplete.includes(:contact_detail).each do |registrant|
