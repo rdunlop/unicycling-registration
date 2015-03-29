@@ -22,10 +22,7 @@
       %br
       - if signed_in?
         Request access to your team's registrations through the #{link_to "Registrant Access Request", user_additional_registrant_accesses_path(@user)} Form
-If you have any problems or questions about registration, please contact #{@config.contact_email}
-%br
-%br
-or submit feedback:
+If you have any problems or questions about registration, please submit feedback below:
 %br
 %h4 Feedback
 = render :partial => "/shared/error_messages", :object => @contact_form
