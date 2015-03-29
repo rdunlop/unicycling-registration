@@ -1,5 +1,7 @@
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'rails' do
+  add_filter '/spec/'
+end
 require 'rubygems'
 require 'delorean'
 # This file is copied to spec/ when you run 'rails generate rspec:install'
