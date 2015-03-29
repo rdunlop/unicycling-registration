@@ -617,7 +617,12 @@ class Registrant < ActiveRecord::Base
   end
 
   def has_necessary_free_items
-    ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED").each do |expense_group|
+    if competitor
+      free_groups_required = ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
+    else
+      free_groups_required = ExpenseGroup.where(noncompetitor_free_options: "One Free In Group REQUIRED")
+    end
+    free_groups_required.each do |expense_group|
       if all_expense_items.none? { |expense_item| expense_item.expense_group == expense_group}
         errors[:base] << "You must choose a free #{expense_group}"
       end
