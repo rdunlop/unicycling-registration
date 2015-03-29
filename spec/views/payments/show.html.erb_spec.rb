@@ -24,15 +24,15 @@ describe "payments/show" do
     render
 
     assert_select "form", :action => @payment.paypal_post_url, :method => "post" do
-      assert_select ("input[type=hidden][name=business][value=" + @config.paypal_account + "]")
-      assert_select "input[type=hidden][name=cancel_return][value=" + user_payments_url(user) + "]"
+      assert_select ("input[type=hidden][name=business][value='" + @config.paypal_account + "']")
+      assert_select "input[type=hidden][name=cancel_return][value='" + user_payments_url(user) + "']"
       assert_select "input[type=hidden][name=cmd][value='_cart']"
       assert_select "input[type=hidden][name=currency_code][value='USD']"
-      assert_select "input[type=hidden][name=invoice][value=" + @payment.invoice_id + "]"
-      assert_select "input[type=hidden][name=no_shipping][value=1]"
-      assert_select "input[type=hidden][name=notify_url][value=" + notification_payments_url + "]"
-      assert_select "input[type=hidden][name=return][value=" + success_payments_url + "]"
-      assert_select "input[type=hidden][name=upload][value=1]"
+      assert_select "input[type=hidden][name=invoice][value='" + @payment.invoice_id + "']"
+      assert_select "input[type=hidden][name=no_shipping][value='1']"
+      assert_select "input[type=hidden][name=notify_url][value='" + notification_payments_url + "']"
+      assert_select "input[type=hidden][name=return][value='" + success_payments_url + "']"
+      assert_select "input[type=hidden][name=upload][value='1']"
 
       assert_select "input[type=submit]"
     end
@@ -41,9 +41,9 @@ describe "payments/show" do
     render
 
     assert_select "form", :action => @payment.paypal_post_url, :method => "post" do
-      assert_select "input[type=hidden][name=amount_1][value=" + @payment_detail.amount.to_s + "]"
-      assert_select "input[type=hidden][name=item_name_1][value=" + @payment_detail.expense_item.to_s + "]"
-      assert_select "input[type=hidden][name=quantity_1][value=1]"
+      assert_select "input[type=hidden][name=amount_1][value='" + @payment_detail.amount.to_s + "']"
+      assert_select "input[type=hidden][name=item_name_1][value='" + @payment_detail.expense_item.to_s + "']"
+      assert_select "input[type=hidden][name=quantity_1][value='1']"
     end
   end
 end
