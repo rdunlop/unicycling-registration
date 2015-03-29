@@ -4,7 +4,6 @@ class Notifications < ActionMailer::Base
   def send_feedback(form_details)
     @contact_form = form_details
 
-    binding.pry
     mail to: EventConfiguration.singleton.contact_email.presence,
       cc: Rails.application.secrets.error_emails, subject: 'Feedback'
   end
