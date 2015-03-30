@@ -4,6 +4,7 @@ describe AdditionalRegistrantAccessesController do
   before(:each) do
     @reg = FactoryGirl.create(:registrant)
     @user = FactoryGirl.create(:user)
+    @tenant = FactoryGirl.create(:tenant, :test_schema)
     sign_in @user
   end
 
