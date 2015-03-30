@@ -9,7 +9,7 @@
   %legend= t(".step_2")
   = t(".upload_music_file")
 
-  \#{direct_upload_form_for @uploader do |f|}
+  = direct_upload_form_for @uploader do |f|
     = hidden_field_tag 'Content-Type', 'audio/mpeg'
     %small
       %b= t(".note")
