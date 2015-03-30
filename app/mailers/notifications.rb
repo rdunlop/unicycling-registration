@@ -1,5 +1,4 @@
-class Notifications < ActionMailer::Base
-  add_template_helper(ApplicationHelper)
+class Notifications < TenantAwareMailer
 
   def send_feedback(form_details)
     @contact_form = ContactForm.deserialize(form_details)

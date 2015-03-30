@@ -1,6 +1,4 @@
-class VolunteerMailer < ActionMailer::Base
-  add_template_helper(ApplicationHelper)
-
+class VolunteerMailer < TenantAwareMailer
   def new_volunteer(volunteer_choice)
     @registrant = volunteer_choice.registrant
     @volunteer_opportunity = volunteer_choice.volunteer_opportunity

@@ -6,7 +6,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   config.mailer_sender = Rails.application.secrets.mail_full_email
   config.mailer.class_eval do
-    helper :subdomain
+    include SubdomainHelper
   end
 
   # Configure the class responsible to send e-mails.

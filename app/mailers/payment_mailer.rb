@@ -1,5 +1,4 @@
-class PaymentMailer < ActionMailer::Base
-  add_template_helper(ApplicationHelper)
+class PaymentMailer < TenantAwareMailer
 
   # contents is a string
   def ipn_received(contents)

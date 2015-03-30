@@ -1,7 +1,6 @@
 module ApplicationHelper
   include ActionView::Helpers::NumberHelper
   include LanguageHelper
-  include SubdomainHelper
 
   def current_ability
     @current_ability ||= Ability.new(current_user, allow_reg_modifications?)
