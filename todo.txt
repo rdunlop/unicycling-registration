@@ -4,6 +4,11 @@
 - upgrade sass-rails
 - why did I need to change to raise_with_exception? (dependent: :destroy -> dependent: :raise...)
 - install tolk for translation?
+ - Adjust import routine to load all languages from i18n.backend
+ - Adjust import to ignore [:world] domain
+ - fix pagination
+ - make Exporter write back to the same files which had the original content
+ - Add authentication
 - remove respond_with class-level responders.
 - move EventConfiguration elements which are competition-specific elswhere.
  - max # places
