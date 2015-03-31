@@ -69,7 +69,6 @@ class EventConfiguration < ActiveRecord::Base
   validates :style_name, :inclusion => {:in => self.style_names.map{|y| y[1]} }, if: :base_settings_applied?
   validates :waiver, inclusion: { in: ["none", "online", "print"] }, if: :base_settings_applied?
   validates :usa_membership_config, :standard_skill, :inclusion => { :in => [true, false] }, if: :base_settings_applied? # because it's a boolean
-  validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] }, if: :base_settings_applied? # because it's a boolean
   validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
 
   belongs_to :usa_individual_expense_item, :class_name => "ExpenseItem"
@@ -79,7 +78,10 @@ class EventConfiguration < ActiveRecord::Base
 
   validates :usa, :iuf, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
   validates :test_mode, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
-  validates :max_award_place, presence: true, if: :important_dates_applied?
+
+  validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] }
+  validates :max_award_place, presence: true
+
   def self.paypal_modes
     ["disabled", "test", "enabled"]
   end

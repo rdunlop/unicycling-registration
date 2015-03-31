@@ -1,3 +1,6 @@
+- if can? :read, :competition_setup
+  = link_to "Competition Setup", competition_setup_path
+
 %h2 Events by Category
 %ul.categoryList
   - @categories.each do |category|

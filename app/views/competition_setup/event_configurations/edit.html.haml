@@ -1,0 +1,16 @@
+%h1 Base Competition Settings
+
+= simple_form_for(@event_configuration, url: competition_setup_event_configuration_path, method: :put) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+
+  %fieldset.form__fieldset
+    %h3 Artistic Scoring Mode
+    %p
+      This chooses whether to eliminate 1 high, 1 low judge during scoring (Small Event), 1 high, 1 low elimination PER JUDGE TYPE during scoring (Large Event).
+
+    = f.input :artistic_score_elimination_mode_naucc
+
+    = f.label :max_award_place
+    = f.number_field :max_award_place, {min: 0}
+    %p This sets the maximum place to print awards for. (applies to both age group and expert)
+  = f.button :submit

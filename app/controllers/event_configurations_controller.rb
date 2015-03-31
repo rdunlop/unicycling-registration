@@ -104,7 +104,6 @@ class EventConfigurationsController < ConventionSetupController
                                                 :italian_requirements,
                                                 :accept_rules, :rules_file_name,
                                                 :contact_email,
-                                                :artistic_score_elimination_mode_naucc,
                                                 :rulebook_url,
                                                 enabled_locales: []
       )
@@ -124,7 +123,6 @@ class EventConfigurationsController < ConventionSetupController
   def important_dates_params
     params.require(:event_configuration).permit(:artistic_closed_date, :music_submission_end_date, :event_sign_up_closed_date,
                                                 :iuf,
-                                                :max_award_place,
                                                 :test_mode, :usa,
                                                 :display_confirmed_events)
   end

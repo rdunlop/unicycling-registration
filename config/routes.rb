@@ -186,6 +186,11 @@ Workspace::Application.routes.draw do
       resources :event_categories, :except => [:index, :create, :new, :show]
     end
 
+    get '/competition_setup', to: 'competition_setup#index'
+    namespace :competition_setup do
+      resource :event_configuration, only: [:edit, :update]
+    end
+
     get '/onsite_registration', to: 'onsite_registration#index'
     namespace :onsite_registration do
       resources :expense_groups, only: [:index] do
