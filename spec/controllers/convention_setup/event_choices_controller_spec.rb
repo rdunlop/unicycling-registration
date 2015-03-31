@@ -222,5 +222,4 @@ describe ConventionSetup::EventChoicesController do
       expect(response).to redirect_to(convention_setup_event_event_choices_path(event))
     end
   end
-
 end

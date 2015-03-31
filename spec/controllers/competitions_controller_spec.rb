@@ -62,7 +62,6 @@ describe CompetitionsController do
     end
 
     describe "with invalid params" do
-
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
@@ -76,7 +75,6 @@ describe CompetitionsController do
         expect(assigns(:event)).to eq(@event)
       end
     end
-
   end
 
   describe "PUT update" do

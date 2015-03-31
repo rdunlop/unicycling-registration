@@ -152,5 +152,4 @@ describe AdditionalRegistrantAccessesController do
       expect(response).to redirect_to(invitations_user_additional_registrant_accesses_path(@reg.user))
     end
   end
-
 end

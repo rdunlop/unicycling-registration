@@ -1,5 +1,4 @@
 class Notifications < TenantAwareMailer
-
   def send_feedback(form_details)
     @contact_form = ContactForm.deserialize(form_details)
 

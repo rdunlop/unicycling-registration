@@ -125,5 +125,4 @@ describe Compete::CombinedCompetitionsController do
       expect(response).to redirect_to(combined_competitions_url)
     end
   end
-
 end

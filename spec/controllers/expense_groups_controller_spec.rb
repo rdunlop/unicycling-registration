@@ -137,5 +137,4 @@ describe ExpenseGroupsController do
       expect(response).to redirect_to(expense_groups_url)
     end
   end
-
 end

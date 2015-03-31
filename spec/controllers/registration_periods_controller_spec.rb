@@ -162,5 +162,4 @@ describe RegistrationPeriodsController do
       expect(response).to redirect_to(registration_periods_url)
     end
   end
-
 end

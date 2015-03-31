@@ -92,7 +92,6 @@ class Payment < ActiveRecord::Base
     return true unless just_completed?
 
     payment_details.each do |pd|
-
       rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => pd.details}).first
       unless pd.details.nil?
         if rei.nil? && pd.details.empty?

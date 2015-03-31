@@ -48,6 +48,5 @@ describe PlaceCalculator do
     # @calc.place_next(5, false, true).should == 3
     # @calc.place_next(6, false).should == 3
     # end
-
   end
 end

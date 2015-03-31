@@ -8,7 +8,6 @@ require 'apartment/elevators/generic'
 # Apartment Configuration
 #
 Apartment.configure do |config|
-
   # These models will not be multi-tenanted,
   # but remain in the global (public) namespace
   #
@@ -33,7 +32,7 @@ Apartment.configure do |config|
   # config.append_environment = true
 
   # supply list of database names for migrations to run on
-  config.tenant_names = lambda{ Tenant.pluck :subdomain }
+  config.tenant_names = ->{ Tenant.pluck :subdomain }
 end
 
 ##

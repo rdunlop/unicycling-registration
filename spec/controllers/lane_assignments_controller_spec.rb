@@ -125,5 +125,4 @@ describe LaneAssignmentsController do
       expect(response).to redirect_to(competition_lane_assignments_path(@competition))
     end
   end
-
 end

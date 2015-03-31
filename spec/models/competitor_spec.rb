@@ -444,7 +444,6 @@ describe Competitor do
           @da2 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
         end
         it "should allow the 2nd attempt to also be a fault" do
-
           expect(@comp.reload.double_fault?).to eq(true)
           expect(@da2.valid?).to eq(true)
         end

@@ -95,5 +95,4 @@ describe ExpenseGroup do
       expect(ExpenseGroup.visible).to eq([@group2, @group3, @group4])
     end
   end
-
 end

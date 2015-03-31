@@ -15,7 +15,6 @@ describe OrderedResultCalculator do
     @tr2 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :points => 2)
     @tr3 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :points => 3)
     @tr4 = FactoryGirl.create(:external_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition), :points => 4)
-
   end
   describe "without an age group" do
     before :each do
@@ -31,7 +30,6 @@ describe OrderedResultCalculator do
       expect(@tr3.reload.competitor.overall_place).to eq(3)
       expect(@tr4.reload.competitor.overall_place).to eq(4)
     end
-
   end
 
   describe "when calculating the placing of lower-points-is-better races" do
@@ -90,6 +88,5 @@ describe OrderedResultCalculator do
       expect(@tr4.reload.competitor.place).to eq(1)
     end
   end
-
 end
 

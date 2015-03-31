@@ -55,5 +55,4 @@ describe Compete::AgeGroupTypesController do
       expect(response).to redirect_to(age_group_types_path)
     end
   end
-
 end

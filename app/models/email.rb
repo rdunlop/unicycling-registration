@@ -88,10 +88,10 @@ class Email
   end
 
   def serialize
-    YAML::dump(self)
+    YAML.dump(self)
   end
 
   def self.deserialize(yaml)
-    YAML::load(yaml)
+    YAML.load(yaml)
   end
 end

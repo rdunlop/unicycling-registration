@@ -141,5 +141,4 @@ describe ConventionSetup::CategoriesController do
       expect(response).to redirect_to(convention_setup_categories_url)
     end
   end
-
 end

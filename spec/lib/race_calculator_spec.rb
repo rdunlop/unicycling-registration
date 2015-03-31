@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe OrderedResultCalculator do
-
   def recalc(calc = @calc)
     Rails.cache.clear
     calc.update_all_places
@@ -115,7 +114,6 @@ describe OrderedResultCalculator do
         @tr2.save!
       end
       it "places fast times first" do
-
         recalc
 
         expect(@tr1.competitor.place).to eq(2)

@@ -144,5 +144,4 @@ describe ExpenseItemsController do
       expect(response).to redirect_to(expense_group_expense_items_url(@expense_group))
     end
   end
-
 end

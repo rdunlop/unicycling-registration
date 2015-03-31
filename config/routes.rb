@@ -477,7 +477,6 @@ Workspace::Application.routes.draw do
     end
     resources :distance_attempts, :only => [:update, :destroy]
     resources :tie_break_adjustments, only: [:destroy]
-
   end
 
   resources :admin_upgrades, only: [:new, :create]

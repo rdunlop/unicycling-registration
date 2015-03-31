@@ -56,7 +56,6 @@ describe CouponApplier do
       let!(:new_payment_detail) { FactoryGirl.create(:payment_detail, payment: new_payment, expense_item: expense_item) }
 
       it "doesn't allow being applied again" do
-
         act = described_class.new(new_payment.reload, coupon_code_string)
         act.perform
         expect(act.error).to eq("Coupon limit reached")

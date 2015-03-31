@@ -21,7 +21,6 @@ describe RegistrantExpenseItemsController do
   describe "POST create" do
     before { request.env["HTTP_REFERER"] = registrant_build_path(Registrant.last.id, :expenses) }
     describe "with valid params" do
-
       it "creates a new RegistrantExpenseItem" do
         expect {
           post :create, {:registrant_expense_item => valid_attributes, :registrant_id => @reg.to_param}
@@ -74,5 +73,4 @@ describe RegistrantExpenseItemsController do
       expect(response).to redirect_to(registrant_build_path(reg.id, :expenses))
     end
   end
-
 end

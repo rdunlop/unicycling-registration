@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "standard_scores/new" do
-
   it "renders successfully all skills" do
     ec = FactoryGirl.create(:competition)
     @c = FactoryGirl.create(:event_competitor, :competition => ec)

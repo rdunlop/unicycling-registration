@@ -35,7 +35,6 @@ describe StandardExecutionScore do
                                                           :standard_skill_routine_entry => score.standard_skill_routine_entry)
 
     expect(score2.save).to eq(false)
-
   end
 
   it "should be able to have 2 different skills scored by the same judge" do

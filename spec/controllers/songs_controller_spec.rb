@@ -76,5 +76,4 @@ describe SongsController do
       expect(response).to redirect_to(registrant_songs_path(@reg))
     end
   end
-
 end

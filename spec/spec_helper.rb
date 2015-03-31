@@ -21,7 +21,6 @@ ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
-
   config.infer_spec_type_from_file_location!
 
   # ## Mock Framework
@@ -46,7 +45,6 @@ RSpec.configure do |config|
   config.before(:each, :type => :view) do
     assign(:config, EventConfiguration.new)
   end
-
 
   # this is necessary so that spec path builders without locales don't
   # incorrectly specify positional arguments into the 'locale' argument

@@ -140,5 +140,4 @@ describe RegistrantGroupsController do
       expect(response).to redirect_to(registrant_groups_url)
     end
   end
-
 end

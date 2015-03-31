@@ -25,5 +25,4 @@ describe Notifications do
       expect(mail.body).to match(/Your request for access to the registration of Billy Johnson has been accepted/)
     end
   end
-
 end

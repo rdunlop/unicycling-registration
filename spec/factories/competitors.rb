@@ -42,5 +42,4 @@ FactoryGirl.define do
     registrant
     association :competitor, :factory => :event_competitor
   end
-
 end

@@ -129,5 +129,4 @@ describe ExternalResultsController do
       expect(response).to redirect_to(competition_external_results_path(@competition))
     end
   end
-
 end

@@ -148,5 +148,4 @@ describe EventChoice do
     ec2 = FactoryGirl.build(:event_choice, :event => @ev2, :position => 2)
     expect(ec2.valid?).to eq(true)
   end
-
 end

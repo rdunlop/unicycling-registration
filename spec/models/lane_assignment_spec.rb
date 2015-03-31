@@ -19,7 +19,6 @@
 require 'spec_helper'
 
 describe LaneAssignment do
-
   describe "with an existing lane assignment" do
     before(:each) do
       @la = FactoryGirl.create(:lane_assignment)

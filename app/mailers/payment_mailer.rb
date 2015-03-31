@@ -1,5 +1,4 @@
 class PaymentMailer < TenantAwareMailer
-
   # contents is a string
   def ipn_received(contents)
     @contents = contents

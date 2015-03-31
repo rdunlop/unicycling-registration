@@ -121,5 +121,4 @@ describe AwardLabelsController do
       expect(response).to redirect_to(user_award_labels_path(@admin_user))
     end
   end
-
 end

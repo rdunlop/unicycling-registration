@@ -153,5 +153,4 @@ describe TimeResultsController do
       expect(response).to redirect_to(competition_time_results_path(competition))
     end
   end
-
 end

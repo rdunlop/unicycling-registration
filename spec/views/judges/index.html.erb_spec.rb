@@ -28,5 +28,4 @@ describe "judges/index" do
       assert_select "select#copy_judges_competition_id", :name => "copy_judges[competition_id]"
     end
   end
-
 end
