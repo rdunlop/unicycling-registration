@@ -9,6 +9,16 @@ class ConventionSetup::CategoriesController < ConventionSetupController
     @category = Category.new
   end
 
+  # POST /categories/:id/update_row_order (via AJAX)
+  def update_row_order
+    obj = Category.find(params[:category_id])
+    new_position = params[:row_order_position].to_i + 1
+    obj.insert_at(new_position)
+    #obj.row_order_position = new_position
+    obj.save
+    render nothing: true
+  end
+
   # GET /categories/1/edit
   def edit
   end

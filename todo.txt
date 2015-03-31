@@ -1,3 +1,14 @@
+- fix the "position" and "sort" problem for various admin models.
+- drag_drop_sortable vs reorder_rows.js.coffee
+ - use ranked_model instead of acts_as_list?
+ - add handle-icon-mouse-cursor to sortable tables
+ - add grab icon?
+ - make into concern
+ - remove position column from display
+ - make position a default-set value
+- Make Initial Nested-Categories fully-featured (none by default?)
+ - Can we fix it so that the default eventCategory is not required?
+- Make initial Event-creation have Nested-Choices too? (none by default?)
 - BUG: first-creation of new language translation is not persisted (2nd one is)
 - Send Olaf a report of the hosting costs for prod+dev
 - replace better_erors with web-console
@@ -13,8 +24,6 @@
 - Make payment_settings: offline_payment_description into a Wysiwyg (same with waiver text field)
 
 - make all select boxes chosen-select boxes?
-- move competitor_benefits onto the registration_periods admin page?
-- move the 'first day of competition' to the 'important dates' page?
 - Add Ability for Convention Admin to set User Roles for:
  - Payment Admin
  - Convention Admin

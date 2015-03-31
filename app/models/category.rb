@@ -12,6 +12,7 @@
 class Category < ActiveRecord::Base
   include CachedModel
 
+  acts_as_list
   default_scope { order(:position) }
 
   has_many :events, -> {order("events.position") }, :dependent => :destroy, :inverse_of => :category

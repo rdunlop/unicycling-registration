@@ -176,6 +176,7 @@ Workspace::Application.routes.draw do
     get '/convention_setup', to: 'convention_setup#index'
     namespace :convention_setup do
       resources :categories, :except => [:new, :show] do
+        post :update_row_order, on: :collection
         resources :events, :only => [:index, :create]
       end
       resources :events, :except => [:index, :new, :create] do

@@ -1,23 +1,25 @@
 %h1 Listing Categories
 .group
   .configuration_settings_block
-    %table
-      %tr
-        %th Name
-        %th Position
-        %th Link
-        %th
-        %th
-        %th
-      - @categories.each do |category|
+    %table#sortable2
+      %thead
         %tr
-          %td= category.name
-          %td= category.position
-          %td
-            %a{:href => category.info_url, :target => "_blank"} Link
-          %td= link_to 'Events', convention_setup_category_events_path(category)
-          %td= link_to 'Edit', edit_convention_setup_category_path(category)
-          %td= link_to 'Delete', [:convention_setup, category], method: :delete, data: { confirm: 'Are you sure?' }
+          %th Name
+          %th Position
+          %th Link
+          %th
+          %th
+          %th
+      %tbody
+        - @categories.each do |category|
+          %tr.item{ data: { item_id: category.id } }
+            %td= category.name
+            %td= category.position
+            %td
+              %a{:href => category.info_url, :target => "_blank"} Link
+            %td= link_to 'Events', convention_setup_category_events_path(category)
+            %td= link_to 'Edit', edit_convention_setup_category_path(category)
+            %td= link_to 'Delete', [:convention_setup, category], method: :delete, data: { confirm: 'Are you sure?' }
     %br
     %fieldset.form__fieldset
       %h3 New Category
