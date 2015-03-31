@@ -21,6 +21,9 @@
     .input_details Specify a link which explains the difference between the offered Registration Types
     = link_to 'Test this URL', '#'
 
+    = f.input :competitor_benefits, as: :text
+    = f.input :noncompetitor_benefits, as: :text
+    = f.input :spectator_benefits, as: :text
   %hr
 
   %fieldset.form__fieldset

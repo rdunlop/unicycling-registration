@@ -21,15 +21,6 @@
         %th= f.label :dates_description
         %td= f.text_field :dates_description
       %tr
-        %th= f.label :competitor_benefits
-        %td= f.text_area :competitor_benefits
-      %tr
-        %th= f.label :noncompetitor_benefits
-        %td= f.text_area :noncompetitor_benefits
-      %tr
-        %th= f.label :spectator_benefits
-        %td= f.text_area :spectator_benefits
-      %tr
         %th= f.label :event_url
         %td= f.url_field :event_url
         %td Links from the Menubar logo to this URL.
@@ -40,8 +31,4 @@
           = image_tag(@event_configuration.logo_file.url) if @event_configuration.logo_file?
         %td Logo should be 93px x 38px
 
-      %tr
-        %th= f.label :start_date
-        %td= f.date_select :start_date
-        %td Registrant Ages are calculated based on this date
   = f.submit

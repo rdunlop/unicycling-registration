@@ -10,9 +10,6 @@
  - make Exporter write back to the same files which had the original content
  - Add authentication
 - remove respond_with class-level responders.
-- move EventConfiguration elements which are competition-specific elswhere.
- - max # places
- - Judging Mode
 - Make payment_settings: offline_payment_description into a Wysiwyg (same with waiver text field)
 
 - make all select boxes chosen-select boxes?

@@ -15,6 +15,10 @@
       %th= f.label :event_sign_up_closed_date
       %td= f.date_select :event_sign_up_closed_date
       %td After this date, only administrators can add events to registrations. (though they can still remove them)
+    %tr
+      %th= f.label :start_date
+      %td= f.date_select :start_date
+      %td Registrant Ages are calculated based on this date
 
     %tr
       %th THE FOLLOWING SHOULD BE SOMEWHERE ELSE

@@ -98,7 +98,8 @@ class EventConfigurationsController < ConventionSetupController
   end
 
   def base_settings_params
-    params.require(:event_configuration).permit(:spectators, :standard_skill, :standard_skill_closed_date, :style_name,
+    params.require(:event_configuration).permit(:spectators, :competitor_benefits, :noncompetitor_benefits, :spectator_benefits,
+                                                :standard_skill, :standard_skill_closed_date, :style_name,
                                                 :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,
                                                 :waiver, :waiver_url, :custom_waiver_text,
                                                 :italian_requirements,
@@ -111,8 +112,7 @@ class EventConfigurationsController < ConventionSetupController
 
   def name_logo_params
     params.require(:event_configuration).permit(:long_name, :short_name, :logo_file, :dates_description,
-                                                :start_date, :event_url, :location,
-                                                :competitor_benefits, :noncompetitor_benefits, :spectator_benefits)
+                                                :event_url, :location)
   end
 
   def payment_settings_params
@@ -122,6 +122,7 @@ class EventConfigurationsController < ConventionSetupController
 
   def important_dates_params
     params.require(:event_configuration).permit(:artistic_closed_date, :music_submission_end_date, :event_sign_up_closed_date,
+                                                :start_date,
                                                 :iuf,
                                                 :test_mode, :usa,
                                                 :display_confirmed_events)
