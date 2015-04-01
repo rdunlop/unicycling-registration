@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401030455) do
+ActiveRecord::Schema.define(version: 20150401141025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -965,14 +965,14 @@ ActiveRecord::Schema.define(version: 20150401030455) do
 
   create_table "volunteer_opportunities", force: :cascade do |t|
     t.string   "description",   limit: 255
-    t.integer  "display_order"
+    t.integer  "position"
     t.text     "inform_emails"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "volunteer_opportunities", ["description"], name: "index_volunteer_opportunities_on_description", unique: true, using: :btree
-  add_index "volunteer_opportunities", ["display_order"], name: "index_volunteer_opportunities_on_display_order", using: :btree
+  add_index "volunteer_opportunities", ["position"], name: "index_volunteer_opportunities_on_position", using: :btree
 
   create_table "wheel_sizes", force: :cascade do |t|
     t.integer  "position"

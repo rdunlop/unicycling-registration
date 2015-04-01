@@ -303,7 +303,9 @@ Workspace::Application.routes.draw do
     put "usa_memberships", to: "usa_memberships#update"
     get "usa_memberships/export", to: "usa_memberships#export"
     get "volunteers", to: "volunteers#index"
-    resources :volunteer_opportunities
+    resources :volunteer_opportunities do
+      post :update_row_order, on: :collection
+    end
 
     resources :results, only: [:index] do
       member do

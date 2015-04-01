@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :volunteer_opportunity do
     sequence(:description) { |n| "Artistic Judge #{n}" }
-    display_order 1
     inform_emails "test@dunlopweb.com"
   end
 end
@@ -14,13 +13,13 @@ end
 #
 #  id            :integer          not null, primary key
 #  description   :string(255)
-#  display_order :integer
+#  position      :integer
 #  inform_emails :text
 #  created_at    :datetime
 #  updated_at    :datetime
 #
 # Indexes
 #
-#  index_volunteer_opportunities_on_description    (description) UNIQUE
-#  index_volunteer_opportunities_on_display_order  (display_order)
+#  index_volunteer_opportunities_on_description  (description) UNIQUE
+#  index_volunteer_opportunities_on_position     (position)
 #

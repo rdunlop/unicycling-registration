@@ -1,4 +1,6 @@
 class VolunteerOpportunitiesController < ConventionSetupController
+  include SortableObject
+
   before_action :authenticate_user!
   load_and_authorize_resource
   before_action :add_breadcrumbs
@@ -46,11 +48,15 @@ class VolunteerOpportunitiesController < ConventionSetupController
 
   private
 
+  def sortable_object
+    VolunteerOpportunity.find(params[:id])
+  end
+
   def add_breadcrumbs
     add_breadcrumb "Volunteer Opportunities", volunteer_opportunities_path
   end
 
   def volunteer_opportunity_params
-    params.require(:volunteer_opportunity).permit(:description, :display_order, :inform_emails)
+    params.require(:volunteer_opportunity).permit(:description, :inform_emails)
   end
 end
