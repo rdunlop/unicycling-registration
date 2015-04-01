@@ -20,7 +20,7 @@
 #
 
 class ExpenseItem < ActiveRecord::Base
-  validates :name, :position, :cost, :expense_group, :presence => true
+  validates :name, :cost, :expense_group, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
 
@@ -36,6 +36,8 @@ class ExpenseItem < ActiveRecord::Base
 
   belongs_to :expense_group, :inverse_of => :expense_items
   validates :expense_group_id, :uniqueness => true, :if => "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
+
+  acts_as_restful_list
 
   before_destroy :check_for_payment_details
 

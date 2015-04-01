@@ -100,10 +100,12 @@ Workspace::Application.routes.draw do
     ###
 
     resources :expense_groups, except: [:show] do
+      post :update_row_order, on: :collection
       resources :expense_items, :except => [:new, :show]
     end
 
     resources :expense_items, only: [] do
+      post :update_row_order, on: :collection
       member do
         get :details
       end

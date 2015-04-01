@@ -10,8 +10,8 @@ GIT
       xpath (~> 2.0)
 
 GIT
-  remote: git://github.com/noelrappin/acts_as_restful_list.git
-  revision: 0b790a67e4acafc5a5d654898eb8e6d11ca7a833
+  remote: git://github.com/rdunlop/acts_as_restful_list.git
+  revision: 913eb3030e170eaef8d1abc81e85cdc077166d03
   specs:
     acts_as_restful_list (0.6)
 

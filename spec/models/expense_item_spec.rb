@@ -75,10 +75,6 @@ describe ExpenseItem do
   it "by default has a normal cost" do
     expect(@item.has_custom_cost).to eq(false)
   end
-  it "must have a position" do
-    @item.position = nil
-    expect(@item.valid?).to eq(false)
-  end
   it "must have a cost" do
     @item.cost_cents = nil
     expect(@item.valid?).to eq(false)

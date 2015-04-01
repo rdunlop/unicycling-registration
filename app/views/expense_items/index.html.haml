@@ -1,7 +1,7 @@
 %h1 Listing #{@expense_group} expense_items
 
 .configuration_settings_block
-  %table#list.sortable
+  %table#list.js--sortable{ data: { target: update_row_order_expense_items_path } }
     %thead
       %tr
         %th Name
@@ -12,7 +12,7 @@
         %th
     %tbody
       - @expense_items.each do |expense_item|
-        %tr
+        %tr.item{ data: { item_id: expense_item.id } }
           %td= expense_item.name
           %td
             - unless expense_item.has_custom_cost

@@ -19,6 +19,5 @@
   = check_box_tag :limit_quantities_available, nil, f.object.has_limits?, class: 'js--inputEnable', data: { targets: 'js--inputConditional' }
   = f.input :maximum_available, input_html: { class: 'js--inputConditional' }
   = f.input :maximum_per_registrant, input_html: { class: 'js--inputConditional' }
-  = f.input :position
 
   = f.button :submit

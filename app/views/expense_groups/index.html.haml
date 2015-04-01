@@ -1,21 +1,21 @@
 %h1 Other Items For Sale
 
-%table.alternate
-  %tr
-    %th Sort
-    %th Group name
-    %th Info Url
-    %th
-    %th
-    %th
-  - @expense_groups.each do |expense_group|
+%table.alternate.js--sortable{ data: { target: update_row_order_expense_groups_path } }
+  %thead
     %tr
-      %td= 'TBD'
-      %td= expense_group.group_name
-      %td= link_to 'Details', expense_group_expense_items_path(expense_group)
-      %td= link_to 'Edit', edit_expense_group_path(expense_group)
-      %td= link_to 'Delete', expense_group, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+      %th Group name
+      %th Info Url
+      %th
+      %th
+      %th
+  %tbody
+    - @expense_groups.each do |expense_group|
+      %tr.item{ data: { item_id: expense_group.id } }
+        %td= expense_group.group_name
+        %td= link_to 'Details', expense_group_expense_items_path(expense_group)
+        %td= link_to 'Edit', edit_expense_group_path(expense_group)
+        %td= link_to 'Delete', expense_group, method: :delete, data: { confirm: 'Are you sure?' }
+%br
 %h2 New expense_group
 
 %fieldset.form__fieldset

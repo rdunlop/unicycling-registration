@@ -69,8 +69,9 @@ describe ExpenseGroup do
 
   describe "with expense_items" do
     before(:each) do
-      @item2 = FactoryGirl.create(:expense_item, :expense_group => @group, :position => 2)
-      @item1 = FactoryGirl.create(:expense_item, :expense_group => @group, :position => 1)
+      @item2 = FactoryGirl.create(:expense_item, :expense_group => @group)
+      @item1 = FactoryGirl.create(:expense_item, :expense_group => @group)
+      @item2.update_attribute(:position, 2)
     end
     it "orders the items by position" do
       expect(@group.expense_items).to eq([@item1, @item2])
@@ -82,9 +83,10 @@ describe ExpenseGroup do
       @group.position = 1
       @group.visible = false
       @group.save
-      @group3 = FactoryGirl.create(:expense_group, :position => 3)
-      @group2 = FactoryGirl.create(:expense_group, :position => 2)
-      @group4 = FactoryGirl.create(:expense_group, :position => 4)
+      @group3 = FactoryGirl.create(:expense_group)
+      @group2 = FactoryGirl.create(:expense_group)
+      @group4 = FactoryGirl.create(:expense_group)
+      @group3.update_attribute(:position, 3)
     end
 
     it "lists them in order" do

@@ -1,4 +1,6 @@
 class ExpenseGroupsController < ConventionSetupController
+  include SortableObject
+
   before_action :authenticate_user!
   load_and_authorize_resource
   before_action :set_breadcrumbs
@@ -8,11 +10,6 @@ class ExpenseGroupsController < ConventionSetupController
   def index
     @expense_groups = ExpenseGroup.user_manageable
     @expense_group = ExpenseGroup.new
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @expense_groups }
-    end
   end
 
   # GET /expense_groups/1/edit
@@ -23,12 +20,11 @@ class ExpenseGroupsController < ConventionSetupController
   # POST /expense_groups
   # POST /expense_groups.json
   def create
-    respond_to do |format|
-      if @expense_group.save
-        format.html { redirect_to expense_groups_path, notice: 'Expense group was successfully created.' }
-      else
-        format.html { render action: "index" }
-      end
+    if @expense_group.save
+      redirect_to expense_groups_path, notice: 'Expense group was successfully created.'
+    else
+      index
+      render action: "index"
     end
   end
 
@@ -59,12 +55,16 @@ class ExpenseGroupsController < ConventionSetupController
 
   private
 
+  def sortable_object
+    ExpenseGroup.find(params[:id])
+  end
+
   def set_breadcrumbs
     add_breadcrumb "Other Items For Sale", expense_groups_path
   end
 
   def expense_group_params
-    params.require(:expense_group).permit(:group_name, :position, :info_url,
+    params.require(:expense_group).permit(:group_name, :info_url,
                                           :competitor_free_options, :noncompetitor_free_options,
                                           :competitor_required, :noncompetitor_required, :translations_attributes => [:id, :locale, :group_name])
   end

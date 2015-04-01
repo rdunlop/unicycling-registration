@@ -1,3 +1,6 @@
+- Add migration to set any unset position elements?
+- Fix ExpenseGroup Sorting issue? (why is it failing?)
+- Add migration to require that position is not-null?
 - Improve the action-flow through the convention-setup...always advance to the next page
 - make the side-nav links be "active" highlighted.
 - Split apart Admin-portion of various controllers into "Convention Setup", so that layouts are properly applied? (or just mark those particular actions as having the "application" layout?)
