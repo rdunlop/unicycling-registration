@@ -1,11 +1,10 @@
 %h1 Listing Categories
 .group
   .configuration_settings_block
-    %table#sortable2
+    %table.js--sortable{ data: { target: update_row_order_convention_setup_categories_path } }
       %thead
         %tr
           %th Name
-          %th Position
           %th Link
           %th
           %th
@@ -14,7 +13,6 @@
         - @categories.each do |category|
           %tr.item{ data: { item_id: category.id } }
             %td= category.name
-            %td= category.position
             %td
               %a{:href => category.info_url, :target => "_blank"} Link
             %td= link_to 'Events', convention_setup_category_events_path(category)

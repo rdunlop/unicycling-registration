@@ -51,7 +51,7 @@ gem 'apartment'
 gem 'apartment-sidekiq'
 
 # Model utils
-gem 'acts_as_list'
+gem 'acts_as_restful_list', github: 'noelrappin/acts_as_restful_list'
 gem 'carrierwave_direct'
 gem 'carmen', '1.0.0' # locked to 1.0.0 because 1.0.1 removed Puerto Rico
 gem 'carmen-rails'

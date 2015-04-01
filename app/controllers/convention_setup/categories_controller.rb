@@ -1,4 +1,6 @@
 class ConventionSetup::CategoriesController < ConventionSetupController
+  include SortableObject
+
   before_action :authenticate_user!
   load_and_authorize_resource
   before_action :set_categories_breadcrumb
@@ -7,16 +9,6 @@ class ConventionSetup::CategoriesController < ConventionSetupController
   # GET /categories.json
   def index
     @category = Category.new
-  end
-
-  # POST /categories/:id/update_row_order (via AJAX)
-  def update_row_order
-    obj = Category.find(params[:category_id])
-    new_position = params[:row_order_position].to_i + 1
-    obj.insert_at(new_position)
-    #obj.row_order_position = new_position
-    obj.save
-    render nothing: true
   end
 
   # GET /categories/1/edit
@@ -58,8 +50,12 @@ class ConventionSetup::CategoriesController < ConventionSetupController
 
   private
 
+  def sortable_object
+    @sortable_object ||= Category.find(params[:id])
+  end
+
   def category_params
-    params.require(:category).permit(:name, :position, :info_url,
+    params.require(:category).permit(:name, :info_url,
                                      :translations_attributes => [:id, :locale, :name])
   end
 end

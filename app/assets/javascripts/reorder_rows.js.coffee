@@ -1,11 +1,17 @@
-$ ->
-  if $('#sortable2').length > 0
-    table_width = $('#sortable2').width()
-    cells = $('#sortable2').find('tr')[0].cells.length
-    desired_width = table_width / cells + 'px'
-    $('.table td').css('width', desired_width)
+# To use this, create a table and add .js--sortable class
+# you must also have a data-element on the table with type 'target' which is the URL to post to
+# on each individual row, you should have an "item-id" data element, which holds
+# the value of the object's id.
 
-    $('#sortable2').sortable(
+$ ->
+  sortable_table = $('.js--sortable')
+  if sortable_table.length > 0
+    table_width = sortable_table.width()
+    cells = sortable_table.find('tr')[0].cells.length
+    desired_width = table_width / cells + 'px'
+    sortable_table.find('td').css('width', desired_width)
+
+    sortable_table.sortable(
       axis: 'y'
       items: '.item'
       cursor: 'move'
@@ -22,8 +28,8 @@ $ ->
         position = ui.item.index() # this will not work with paginated items, as the index is zero on every page
         $.ajax(
           type: 'POST'
-          url: '/convention_setup/categories/update_row_order'
+          url: sortable_table.data('target')
           dataType: 'json'
-          data: { category_id: item_id, row_order_position: position }
+          data: { id: item_id, row_order_position: position }
         )
     )

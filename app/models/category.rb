@@ -12,12 +12,12 @@
 class Category < ActiveRecord::Base
   include CachedModel
 
-  acts_as_list
+  acts_as_restful_list
   default_scope { order(:position) }
 
   has_many :events, -> {order("events.position") }, :dependent => :destroy, :inverse_of => :category
 
-  validates :name, :presence => true
+  validates :name, :position, :presence => true
 
   translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations

@@ -3,9 +3,6 @@
 - Split apart Admin-portion of various controllers into "Convention Setup", so that layouts are properly applied? (or just mark those particular actions as having the "application" layout?)
 - fix the "position" and "sort" problem for various admin models.
 - drag_drop_sortable vs reorder_rows.js.coffee
- - use ranked_model instead of acts_as_list?
- - add handle-icon-mouse-cursor to sortable tables
- - add grab icon?
  - make into concern
  - remove position column from display
  - make position a default-set value

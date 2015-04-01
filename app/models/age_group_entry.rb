@@ -29,7 +29,7 @@ class AgeGroupEntry < ActiveRecord::Base
   belongs_to :age_group_type, :touch => true, inverse_of: :age_group_entries
   belongs_to :wheel_size
 
-  acts_as_list :scope => :age_group_type
+  acts_as_restful_list :scope => :age_group_type
 
   default_scope { order(:position) }
 
