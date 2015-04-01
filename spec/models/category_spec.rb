@@ -31,9 +31,11 @@ describe Category do
   end
   describe "with multiple categories" do
     before(:each) do
-      @category2 = FactoryGirl.create(:category, :position => 2)
-      @category1 = FactoryGirl.create(:category, :position => 1)
+      @category2 = FactoryGirl.create(:category)
+      @category1 = FactoryGirl.create(:category)
+      @category1.update_attribute(:position, 1)
     end
+
     it "lists them in position order" do
       expect(Category.all).to eq([@category1, @category2])
     end

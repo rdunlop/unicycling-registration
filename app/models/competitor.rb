@@ -53,7 +53,6 @@ class Competitor < ActiveRecord::Base
   enum status: [:active, :not_qualified, :dns, :withdrawn]
 
   # not all competitor types require a position
-  # validates :position, :presence => true,
   #:numericality => {:only_integer => true, :greater_than => 0}
 
   after_initialize :init

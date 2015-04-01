@@ -17,7 +17,7 @@ class Category < ActiveRecord::Base
 
   has_many :events, -> {order("events.position") }, :dependent => :destroy, :inverse_of => :category
 
-  validates :name, :position, :presence => true
+  validates :name, :presence => true
 
   translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
