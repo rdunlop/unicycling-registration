@@ -118,7 +118,9 @@ class Ability
       user.has_role? :director, comp.event
     end
 
-    can [:set_sort, :sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
+    # TODO: is there a way to scope this better?
+    can [:update_row_order], Competitor, if: user.has_role?(:director, :any)
+    can [:set_sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
       director_of_competition(user, comp)
     end
 

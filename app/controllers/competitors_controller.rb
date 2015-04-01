@@ -1,10 +1,12 @@
 require 'csv'
 class CompetitorsController < ApplicationController
+  include SortableObject
+
   before_filter :authenticate_user!
-  load_and_authorize_resource :competition, except: [:edit, :update, :destroy]
+  load_and_authorize_resource :competition, except: [:edit, :update, :destroy, :update_row_order]
   before_filter :load_new_competitor, :only => [:create]
-  load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy]
-  load_and_authorize_resource :only => [:edit, :update, :destroy]
+  load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy, :update_row_order]
+  load_and_authorize_resource :only => [:edit, :update, :destroy, :update_row_order]
 
   before_action :set_parent_breadcrumbs, only: [:index, :enter_sign_in, :new, :edit, :display_candidates]
 
@@ -166,6 +168,10 @@ class CompetitorsController < ApplicationController
   end
 
   private
+
+  def sortable_object
+    Competitor.find(params[:id])
+  end
 
   def competitor_params
     params.require(:competitor).permit(:status, :position, :custom_name, :heat, :geared, :riding_wheel_size, :riding_crank_size, :notes, {:members_attributes => [:registrant_id, :id, :_destroy] } )

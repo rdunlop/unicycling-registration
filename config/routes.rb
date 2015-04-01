@@ -380,12 +380,13 @@ Workspace::Application.routes.draw do
     ### For event-data-gathering/reporting purposes
     ###############################################
 
-    resources :competitors, :only => [:edit, :update, :destroy]
+    resources :competitors, only: [:edit, :update, :destroy] do
+      post :update_row_order, on: :collection
+    end
 
     resources :competitions, :only => [:show, :edit, :update, :destroy] do
       member do
         get :set_sort
-        post :sort
         put :toggle_final_sort
         post :sort_random
         post :set_age_group_places

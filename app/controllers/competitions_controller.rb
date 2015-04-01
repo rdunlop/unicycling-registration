@@ -65,15 +65,6 @@ class CompetitionsController < ApplicationController
     add_breadcrumb "Sort Competitors"
   end
 
-  def sort
-    @competitors = @competition.competitors
-    @competitors.each do |comp|
-      comp.position = params['competitor'].index(comp.id.to_s) + 1
-      comp.save
-    end
-    respond_with(@competition)
-  end
-
   def toggle_final_sort
     new_value = !@competition.order_finalized
 
@@ -90,7 +81,8 @@ class CompetitionsController < ApplicationController
   def sort_random
     @competitors = @competition.competitors
     @competitors.shuffle.each_with_index do |comp, index|
-      comp.position = index + 1
+      # reload or else the acts_as_restful_list positioning gets screwed up
+      comp.reload.position = index + 1
       comp.save!
     end
     flash[:notice] = "Shuffled Competitor sort order"
