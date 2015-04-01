@@ -217,7 +217,7 @@ describe "Ability" do
       end
       it { is_expected.to be_able_to(:create_scores, @competition) }
       it { is_expected.to be_able_to(:read, Competitor) }
-      it { is_expected.not_to be_able_to(:sort, @competition) }
+      it { is_expected.not_to be_able_to(:set_sort, @competition) }
       it { is_expected.not_to be_able_to(:sort_random, @competition) }
       it { is_expected.not_to be_able_to(:review_heat, @competition) }
       it { is_expected.not_to be_able_to(:approve_heat, @competition) }
@@ -267,7 +267,7 @@ describe "Ability" do
     subject { @ability = Ability.new(@user) }
 
     describe "when the event is unlocked" do
-      it { is_expected.to be_able_to(:sort, @competition) }
+      it { is_expected.to be_able_to(:set_sort, @competition) }
       it { is_expected.to be_able_to(:sort_random, @competition) }
       it { is_expected.to be_able_to(:lock, @competition) }
       it { is_expected.to be_able_to(:manage, ImportResult) }
@@ -278,7 +278,7 @@ describe "Ability" do
       before :each do
         @competition.update_attribute(:locked, true)
       end
-      it { is_expected.not_to be_able_to(:sort, @competition) }
+      it { is_expected.not_to be_able_to(:set_sort, @competition) }
       it { is_expected.not_to be_able_to(:sort_random, @competition) }
       it { is_expected.not_to be_able_to(:lock, @competition) }
       it { is_expected.not_to be_able_to(:create, Judge.new(competition: @competition)) }
