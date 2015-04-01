@@ -1,22 +1,23 @@
 %h1 Listing Event Categories for #{@event}
 .configuration_settings_block
-  %table
-    %tr
-      %th Name
-      %th Position
-      %th Allowed Age Range
-      %th Warning on Registration Summary
-      %th
-      %th
-      %th
-    - @event_categories.each do |event_category|
+  %table.js--sortable{ data: { target: update_row_order_convention_setup_event_event_categories_path(@event) } }
+    %thead
       %tr
-        %td= event_category.name
-        %td= event_category.position
-        %td= "#{event_category.age_range_start}-#{event_category.age_range_end}"
-        %td= event_category.warning_on_registration_summary
-        %td= link_to 'Edit', edit_convention_setup_event_category_path(event_category)
-        %td= link_to 'Delete', [:convention_setup, event_category], method: :delete, data: { confirm: 'Are you sure?' }
+        %th Name
+        %th Allowed Age Range
+        %th Warning on Registration Summary
+        %th
+        %th
+        %th
+    %tbody
+      - @event_categories.each do |event_category|
+        %tr.item{ data: { item_id: event_category.id } }
+          %td= event_category.name
+          %td= "#{event_category.age_range_start}-#{event_category.age_range_end}"
+          %td= event_category.warning_on_registration_summary
+          %td= link_to 'Edit', edit_convention_setup_event_category_path(event_category)
+          %td= link_to 'Delete', [:convention_setup, event_category], method: :delete, data: { confirm: 'Are you sure?' }
+
 .configuration_preview_block
   = render :partial => "/attending/preview"
 .configuration_new_entry_form

@@ -178,10 +178,17 @@ Workspace::Application.routes.draw do
         resources :events, :only => [:index, :create]
       end
       resources :events, :except => [:index, :new, :create] do
-        resources :event_choices, :only => [:index, :create]
-        resources :event_categories, :only => [:index, :create]
+        post :update_row_order, on: :collection
+
+        resources :event_choices, :only => [:index, :create] do
+          post :update_row_order, on: :collection
+        end
+
+        resources :event_categories, :only => [:index, :create] do
+          post :update_row_order, on: :collection
+        end
       end
-      resources :event_choices, :except => [:index, :create, :new]
+      resources :event_choices, :except => [:index, :create, :new, :show]
       resources :event_categories, :except => [:index, :create, :new, :show]
     end
 

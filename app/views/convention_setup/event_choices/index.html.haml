@@ -1,27 +1,26 @@
 %h1
   Listing event_choices for #{@event}
 .configuration_settings_block
-  %table
-    %tr
-      %th Label
-      %th Cell type
-      %th Multiple values
-      %th Position
-      %th Optional
-      %th
-      %th
-      %th
-    - @event_choices.each do |event_choice|
-      - next if event_choice.new_record?
+  %table.js--sortable{ data: { target: update_row_order_convention_setup_event_event_choices_path(@event) } }
+    %thead
       %tr
-        %td= event_choice.label
-        %td= event_choice.cell_type
-        %td= event_choice.multiple_values
-        %td= event_choice.position
-        %td= event_choice.optional
-        %td= link_to 'Show', [:convention_setup, event_choice]
-        %td= link_to 'Edit', edit_convention_setup_event_choice_path(event_choice)
-        %td= link_to 'Delete', [:convention_setup, event_choice], method: :delete, data: { confirm: 'Are you sure?' }
+        %th Label
+        %th Cell type
+        %th Multiple values
+        %th Optional
+        %th
+        %th
+    %tbody
+      - @event_choices.each do |event_choice|
+        - next if event_choice.new_record?
+        %tr.item{ data: { item_id: event_choice.id } }
+          %td= event_choice.label
+          %td= event_choice.cell_type
+          %td= event_choice.multiple_values
+          %td= event_choice.optional
+          %td= link_to 'Edit', edit_convention_setup_event_choice_path(event_choice)
+          %td= link_to 'Delete', [:convention_setup, event_choice], method: :delete, data: { confirm: 'Are you sure?' }
+
 .configuration_preview_block
   = render :partial => "/attending/preview"
 .configuration_new_entry_form

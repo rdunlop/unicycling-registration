@@ -11,7 +11,6 @@ describe "convention_setup/events/edit" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => event_path(@event), :method => "post" do
       assert_select "select#event_category_id", :name => "event[category_id]"
-      assert_select "input#event_position", :name => "event[position]"
     end
   end
 end

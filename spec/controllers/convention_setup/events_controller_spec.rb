@@ -72,8 +72,7 @@ describe ConventionSetup::EventsController do
           :event => {:name => "Sample Event",
                      :event_categories_attributes => [
                        {
-                         :name => "The Categorie",
-                         :position => 1
+                         :name => "The Categorie"
                        }] }}
         ev = Event.last
         expect(ev.event_categories.first.name).to eq("The Categorie")
@@ -151,8 +150,7 @@ describe ConventionSetup::EventsController do
               {
                 :cell_type => "boolean",
                 :label => "My event Choice",
-                :multiple_values => "m2",
-                :position => 1
+                :multiple_values => "m2"
               }] }}
         }.to change(EventChoice, :count).by(1)
         ec = EventChoice.last
@@ -168,8 +166,7 @@ describe ConventionSetup::EventsController do
             {
               :cell_type => "boolean",
               :label => "My event Choice",
-              :multiple_values => "m2",
-              :position => 1
+              :multiple_values => "m2"
             }] }}
         ec = EventChoice.last
 
@@ -180,7 +177,6 @@ describe ConventionSetup::EventsController do
                 :cell_type => ec.cell_type,
                 :label => "new Label",
                 :multiple_values => ec.multiple_values,
-                :position => ec.position,
                 :id => ec.id
               }] }}
         }.to change(EventChoice, :count).by(0)
@@ -202,7 +198,6 @@ describe ConventionSetup::EventsController do
             :event_categories_attributes => [
               {
                 :name => "New Name",
-                :position => ecat.position,
                 :id => ecat.id
               }] }}
         }.to change(EventCategory, :count).by(0)

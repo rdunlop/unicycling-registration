@@ -12,7 +12,7 @@ describe CompetitorsController do
   # Competitor. As you add validations to Competitor, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { position: 1}
+    { notes: "hello" }
   end
 
   describe "GET index" do

@@ -14,10 +14,6 @@
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer
 #
-# Indexes
-#
-#  index_event_choices_on_event_id_and_position  (event_id,position) UNIQUE
-#
 
 class EventChoice < ActiveRecord::Base
   belongs_to :event, :touch => true, inverse_of: :event_choices, counter_cache: true
@@ -36,9 +32,9 @@ class EventChoice < ActiveRecord::Base
   end
 
   validates :cell_type, :inclusion => {:in => self.cell_types }
-  validates :position, :uniqueness => {:scope => [:event_id]}
   validates :autocomplete, :inclusion => {:in => [true, false] } # because it's a boolean
   validates :optional, :inclusion => {:in => [true, false] } # because it's a boolean
+  acts_as_restful_list scope: :event
 
   def choicename
     "choice#{id}"

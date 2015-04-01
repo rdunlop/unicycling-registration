@@ -74,7 +74,7 @@ describe RegistrantEventSignUp do
     describe "When the event has multiple categories" do
       before :each do
         @event = @re.event_category.event
-        @cat2 = FactoryGirl.create(:event_category, event: @event, position: 2)
+        @cat2 = FactoryGirl.create(:event_category, event: @event)
       end
 
       it "marks the member as dropped when I change the category I signed up for" do

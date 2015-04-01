@@ -14,6 +14,5 @@
 FactoryGirl.define do
   factory :category do
     sequence(:name) {|n| "TheCategory #{n}"}
-    position 1
   end
 end

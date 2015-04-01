@@ -43,14 +43,6 @@ xdescribe Registrants::BuildController do
       expect(assigns(:registrant)).to be_a_new(Registrant)
       expect(assigns(:registrant).competitor).to eq(true)
     end
-    it "returns a list of all of the events" do
-      @category1 = FactoryGirl.create(:category, :position => 1)
-      @category3 = FactoryGirl.create(:category, :position => 3)
-      @category2 = FactoryGirl.create(:category, :position => 2)
-
-      get 'new', {registrant_type: 'competitor'}
-      expect(assigns(:categories)).to eq([@category1, @category2, @category3])
-    end
 
     describe "when the system is 'closed'" do
       before(:each) do
@@ -71,7 +63,7 @@ xdescribe Registrants::BuildController do
       expect(assigns(:registrant)).to eq(registrant)
     end
     it "should not load categories for a noncompetitor" do
-      category1 = FactoryGirl.create(:category, :position => 1)
+      category1 = FactoryGirl.create(:category)
       registrant = FactoryGirl.create(:noncompetitor, :user => @user)
       get :edit, {:id => registrant.to_param}
       expect(response).to be_success
@@ -135,13 +127,13 @@ xdescribe Registrants::BuildController do
       end
       it "has categories" do
         # Trigger the behavior that occurs when invalid params are submitted
-        category1 = FactoryGirl.create(:category, :position => 1)
+        category1 = FactoryGirl.create(:category)
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, {:registrant => {registrant_type: 'competitor'}}
         expect(assigns(:categories)).to eq([category1])
       end
       it "should not load categories for a noncompetitor" do
-        category1 = FactoryGirl.create(:category, :position => 1)
+        category1 = FactoryGirl.create(:category)
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, {:registrant => {registrant_type: 'noncompetitor'}}
         expect(assigns(:categories)).to be_nil
@@ -279,7 +271,7 @@ xdescribe Registrants::BuildController do
         expect(assigns(:registrant)).to eq(registrant)
       end
       it "loads the categories" do
-        category1 = FactoryGirl.create(:category, :position => 1)
+        category1 = FactoryGirl.create(:category)
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         do_action
         expect(assigns(:categories)).to eq([category1])

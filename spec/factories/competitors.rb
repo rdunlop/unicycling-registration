@@ -28,7 +28,6 @@ require 'rspec/mocks/standalone'
 FactoryGirl.define do
   factory :event_competitor, :class => Competitor do
     competition  # FactoryGirl
-    sequence(:position)
     after(:create) do |comp|
       FactoryGirl.create(:member, :competitor => comp)
       comp.reload

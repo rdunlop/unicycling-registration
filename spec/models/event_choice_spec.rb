@@ -14,17 +14,13 @@
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer
 #
-# Indexes
-#
-#  index_event_choices_on_event_id_and_position  (event_id,position) UNIQUE
-#
 
 require 'spec_helper'
 
 describe EventChoice do
   before(:each) do
     @event = FactoryGirl.create(:event)
-    @ec = FactoryGirl.create(:event_choice, :event => @event, :position => 2)
+    @ec = FactoryGirl.create(:event_choice, :event => @event)
   end
   it "is valid from FactoryGirl" do
     expect(@ec.valid?).to eq(true)
@@ -134,18 +130,12 @@ describe EventChoice do
     end
   end
 
-  it "cannot have duplicate positions" do
-    @ev = FactoryGirl.create(:event)
-    FactoryGirl.create(:event_choice, :event => @ev, :position => 1)
-    ec2 = FactoryGirl.build(:event_choice, :event => @ev)
-    ec2.position = 1
-    expect(ec2.valid?).to eq(false)
-  end
   it "can have the same position but in different events" do
     @ev = FactoryGirl.create(:event)
     @ev2 = FactoryGirl.create(:event)
-    ec1 = FactoryGirl.create(:event_choice, :event => @ev, :position => 2)
-    ec2 = FactoryGirl.build(:event_choice, :event => @ev2, :position => 2)
+    ec1 = FactoryGirl.create(:event_choice, :event => @ev)
+    ec2 = FactoryGirl.create(:event_choice, :event => @ev2)
+    expect(ec1.position).to eq(ec2.position)
     expect(ec2.valid?).to eq(true)
   end
 end

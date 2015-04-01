@@ -58,9 +58,10 @@ describe Event do
   end
 
   it "sorts event choices by position" do
-    @ec4 = FactoryGirl.create(:event_choice, :event => @ev, :position => 4)
-    @ec2 = FactoryGirl.create(:event_choice, :event => @ev, :position => 2)
-    @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :position => 3)
+    @ec4 = FactoryGirl.create(:event_choice, :event => @ev)
+    @ec2 = FactoryGirl.create(:event_choice, :event => @ev)
+    @ec3 = FactoryGirl.create(:event_choice, :event => @ev)
+    @ec4.update_attribute(:position, 4)
 
     expect(@ev.event_choices).to eq([@ec2, @ec3, @ec4])
   end
@@ -86,7 +87,7 @@ describe Event do
 
   it "has many event_categories" do
     @ecat1 = @ev.event_categories.first
-    @ecat2 = FactoryGirl.create(:event_category, :event => @ev, :name => "Other", :position => 2)
+    @ecat2 = FactoryGirl.create(:event_category, :event => @ev, :name => "Other")
     expect(@ev.event_categories).to eq([@ecat1, @ecat2])
   end
 

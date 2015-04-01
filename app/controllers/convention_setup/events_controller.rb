@@ -1,4 +1,6 @@
 class ConventionSetup::EventsController < ConventionSetupController
+  include SortableObject
+
   before_action :authenticate_user!
   before_action :load_category, :only => [:index, :create]
   before_action :load_new_event, :only => [:create]
@@ -59,15 +61,19 @@ class ConventionSetup::EventsController < ConventionSetupController
 
   private
 
+  def sortable_object
+    Event.find(params[:id])
+  end
+
   def set_events_breadcrumb
     add_breadcrumb "#{@category} Events", convention_setup_category_events_path(@category) if @category
   end
 
   def event_params
-    params.require(:event).permit(:category_id, :position, :name, :visible, :artistic, :accepts_music_uploads,
+    params.require(:event).permit(:category_id, :name, :visible, :artistic, :accepts_music_uploads,
                                   :accepts_wheel_size_override,
-                                  :event_choices_attributes => [:cell_type, :label, :multiple_values, :position, :id],
-                                  :event_categories_attributes => [:name, :position, :id])
+                                  :event_choices_attributes => [:cell_type, :label, :multiple_values, :id],
+                                  :event_categories_attributes => [:name, :id])
   end
 
   def load_category

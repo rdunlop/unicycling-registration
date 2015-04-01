@@ -14,9 +14,8 @@
 #
 # Indexes
 #
-#  index_event_categories_event_id                  (event_id,position)
-#  index_event_categories_on_event_id_and_name      (event_id,name) UNIQUE
-#  index_event_categories_on_event_id_and_position  (event_id,position) UNIQUE
+#  index_event_categories_event_id              (event_id,position)
+#  index_event_categories_on_event_id_and_name  (event_id,name) UNIQUE
 #
 
 class EventCategory < ActiveRecord::Base
@@ -28,7 +27,8 @@ class EventCategory < ActiveRecord::Base
 
   validates :event, presence: true
   validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
-  validates :position, :uniqueness => {:scope => [:event_id]}
+
+  acts_as_restful_list scope: :event
 
   def to_s
     event.to_s + " - " + self.name

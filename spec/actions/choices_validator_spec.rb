@@ -24,7 +24,7 @@ describe ChoicesValidator do
     end
     describe "and a text field" do
       before(:each) do
-        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Team", :position => 1, :cell_type => "text")
+        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Team", :cell_type => "text")
         @rc2 = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec2, :value => "My Team")
       end
       it "can describe the event" do
@@ -33,7 +33,7 @@ describe ChoicesValidator do
     end
     describe "and a select field" do
       before(:each) do
-        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Category", :position => 1, :cell_type => "multiple")
+        @ec2 = FactoryGirl.create(:event_choice, :event => @event, :label => "Category", :cell_type => "multiple")
         @rc2 = FactoryGirl.create(:registrant_choice, :registrant => @reg, :event_choice => @ec2, :value => "Advanced")
       end
       it "can describe the event" do
@@ -90,7 +90,7 @@ describe ChoicesValidator do
       describe "with a text_field optional_if_event_choice to the boolean" do
         before(:each) do
           FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
-          @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :cell_type => "text", :optional_if_event_choice => @ec2, :position => 2)
+          @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :cell_type => "text", :optional_if_event_choice => @ec2)
           @reg.reload
         end
 
@@ -111,7 +111,7 @@ describe ChoicesValidator do
       describe "with a text_field required_if_event_choice" do
         before(:each) do
           FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec1, :signed_up => true, :registrant => @reg)
-          @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :cell_type => "text", :required_if_event_choice => @ec2, :position => 2)
+          @ec3 = FactoryGirl.create(:event_choice, :event => @ev, :cell_type => "text", :required_if_event_choice => @ec2)
           @reg.reload
         end
 

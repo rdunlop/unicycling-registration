@@ -61,14 +61,6 @@ describe ConventionSetup::EventChoicesController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested event_choice as @event_choice" do
-      event_choice = EventChoice.create! valid_attributes
-      get :show, {:id => event_choice.to_param}
-      expect(assigns(:event_choice)).to eq(event_choice)
-    end
-  end
-
   describe "GET edit" do
     it "assigns the requested event_choice as @event_choice" do
       event_choice = FactoryGirl.create(:event_choice)
@@ -138,7 +130,6 @@ describe ConventionSetup::EventChoicesController do
               "label"=>"label_fr",
               "tooltip"=>"tool_fr"}
           },
-          "position"=>"6",
           "optional"=>"0",
           "optional_if_event_choice_id"=>"",
           "autocomplete"=>"0"

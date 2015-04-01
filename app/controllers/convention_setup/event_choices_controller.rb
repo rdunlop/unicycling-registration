@@ -1,4 +1,6 @@
 class ConventionSetup::EventChoicesController < ConventionSetupController
+  include SortableObject
+
   before_action :authenticate_user!
   before_action :load_event, :only => [:index, :create]
   before_action :load_new_event_choice, :only => [:create]
@@ -15,12 +17,6 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
     @event_choice = EventChoice.new
 
     respond_with([:convention_setup, @event_choices])
-  end
-
-  # GET /event_choices/1
-  # GET /event_choices/1.json
-  def show
-    respond_with(@event_choice)
   end
 
   # GET /event_choices/1/edit
@@ -59,6 +55,10 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
 
   private
 
+  def sortable_object
+    EventChoice.find(params[:id])
+  end
+
   def set_breadcrumbs
     add_breadcrumb "Event Categories", convention_setup_categories_path
     add_breadcrumb "#{@event.category} Events", convention_setup_event_path(@event) if @event
@@ -78,7 +78,7 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
   end
 
   def event_choice_params
-    params.require(:event_choice).permit(:cell_type, :label, :multiple_values, :position, :autocomplete, :optional, :tooltip,
+    params.require(:event_choice).permit(:cell_type, :label, :multiple_values, :autocomplete, :optional, :tooltip,
                                          :optional_if_event_choice_id, :required_if_event_choice_id,
                                          :translations_attributes => [:id, :label, :tooltip, :locale])
   end

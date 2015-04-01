@@ -28,6 +28,5 @@ FactoryGirl.define do
     category # FactoryGirl
     sequence(:name) {|n| "Teh event number #{n}" }
     visible true
-    position 1
   end
 end

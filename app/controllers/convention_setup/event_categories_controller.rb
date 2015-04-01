@@ -1,4 +1,6 @@
 class ConventionSetup::EventCategoriesController < ConventionSetupController
+  include SortableObject
+
   before_action :authenticate_user!
   load_and_authorize_resource
 
@@ -58,6 +60,10 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
 
   private
 
+  def sortable_object
+    EventCategory.find(params[:id])
+  end
+
   def set_breadcrumbs
     add_breadcrumb "Event Categories", convention_setup_categories_path
     add_breadcrumb "#{@event.category} Events", convention_setup_category_events_path(@event.category) if @event
@@ -73,7 +79,7 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
   end
 
   def event_category_params
-    params.require(:event_category).permit(:name, :warning_on_registration_summary, :position, :age_group_type_id, :age_range_start, :age_range_end)
+    params.require(:event_category).permit(:name, :warning_on_registration_summary, :age_group_type_id, :age_range_start, :age_range_end)
   end
 end
 

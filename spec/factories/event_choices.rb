@@ -14,10 +14,6 @@
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer
 #
-# Indexes
-#
-#  index_event_choices_on_event_id_and_position  (event_id,position) UNIQUE
-#
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
@@ -27,7 +23,6 @@ FactoryGirl.define do
     cell_type "boolean"
     multiple_values nil
     label "Event_choice chosen"
-    position 1
     autocomplete false
     optional false
   end

@@ -1,42 +1,24 @@
-= form_for([:convention_setup, @event, @event_choice]) do |f|
+= simple_form_for([:convention_setup, @event, @event_choice]) do |f|
   = render partial: "shared/error_messages", object: @event_choice
-  .field
-    = f.label :cell_type
-    = f.select :cell_type, EventChoice.cell_types
-  .field
-    = f.label :multiple_values
-    = f.text_field :multiple_values, :title => "Only used with the 'multiple' option"
-    %br
-  .field
-    = f.label :label
-    = f.text_field :label
-  .field
-    = f.label :tooltip
-    = f.text_field :tooltip, title: "This will be presented when the user hovers over the label"
-  .field
-    = f.label :position
-    = f.number_field :position
-  .field
-    = f.label :optional
-    = f.check_box :optional
-    %br
-    Enabling this allows the user to not enter data in this field
-  .field
-    = f.label :optional_if_event_choice_id, "Optional if this event_choice is chosen"
-    = f.select :optional_if_event_choice_id, @event_choices.map{|ec| [ec.label, ec.id]}, :include_blank => true
-    %br
-    Choosing an Event Choice here allows this field to be optional.
-  .field
-    = f.label :required_if_event_choice_id, "Required if this event_choice is chosen"
-    = f.select :required_if_event_choice_id, @event_choices.map{|ec| [ec.label, ec.id]}, :include_blank => true
-    %br
-    Choosing an Event Choice here requires this field to be present.
-  .field
-    = f.label :autocomplete
-    = f.check_box :autocomplete
-    %br
-    Enabling this option will cause Auto-complete suggestions to be presented to each registrant.
-    %br
-    (If Scott says his Team is "The Scott Team", when a different user types "The" into the "Team", "The Scott Team" will be suggested).
-  .actions
-    = f.submit
+
+  = f.input :cell_type, collection: EventChoice.cell_types
+  = f.input :multiple_values, input_html: { title: "Only used with the 'multiple' option" }
+  = f.input :label
+  = f.input :tooltip, input_html: { title: "This will be presented when the user hovers over the label" }
+
+  = f.input :optional
+  Enabling this allows the user to not enter data in this field
+
+  = f.input :optional_if_event_choice_id, collection: @event_choices.map{|ec| [ec.label, ec.id]}
+  Choosing an Event Choice here allows this field to be optional.
+
+  = f.input :required_if_event_choice_id, collection: @event_choices.map{|ec| [ec.label, ec.id]}
+  Choosing an Event Choice here allows this field to be optional.
+
+  = f.input :autocomplete
+  Enabling this option will cause Auto-complete suggestions to be presented to each registrant.
+  %br
+  (If Scott says his Team is "The Scott Team", when a different user types "The" into the "Team", "The Scott Team" will be suggested).
+  %br
+
+  = f.submit

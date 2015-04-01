@@ -38,6 +38,8 @@ class Event < ActiveRecord::Base
 
   belongs_to :category, :inverse_of => :events, :touch => true
 
+  acts_as_restful_list scope: :category
+
   def self.music_uploadable
     visible.where(:accepts_music_uploads => true)
   end
@@ -57,7 +59,7 @@ class Event < ActiveRecord::Base
 
   def build_event_category
     if self.event_categories.empty?
-      self.event_categories.build({:name => "All", :position => 1})
+      self.event_categories.build name: "All"
     end
   end
 

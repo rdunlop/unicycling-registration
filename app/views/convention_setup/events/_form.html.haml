@@ -15,13 +15,11 @@
       = ec.input :cell_type, collection: EventChoice.cell_types
       = ec.input :multiple_values
       = ec.input :label
-      = ec.input :position
 
   %fieldset
     %h3 Event Categories
     = f.simple_fields_for :event_categories do |ec|
       = ec.input :name, hint: "specify 'All' if there is only 1 category"
-      = ec.input :position
 
   = f.input :accepts_music_uploads
   = f.input :accepts_wheel_size_override
@@ -29,7 +27,6 @@
   .js--hiddenToggleMenu Advanced Settings
   .js--hiddenToggle
 
-    = f.input :position
     = f.input :visible
     = f.input :artistic
     .field

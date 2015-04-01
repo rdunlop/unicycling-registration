@@ -11,8 +11,7 @@ describe ConventionSetup::EventCategoriesController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      name: "Unlimited",
-      position: 2
+      name: "Unlimited"
     }
   end
 
@@ -142,14 +141,14 @@ describe ConventionSetup::EventCategoriesController do
 
   describe "DELETE destroy" do
     it "destroys the requested event_category" do
-      event_category = FactoryGirl.create(:event_category, :event => @event, :position => 2)
+      event_category = FactoryGirl.create(:event_category, :event => @event)
       expect {
         delete :destroy, {:id => event_category.to_param}
       }.to change(EventCategory, :count).by(-1)
     end
 
     it "redirects to the event_categories list" do
-      event_category = FactoryGirl.create(:event_category, :event => @event, :position => 2)
+      event_category = FactoryGirl.create(:event_category, :event => @event)
       event = event_category.event
       delete :destroy, {:id => event_category.to_param}
       expect(response).to redirect_to(convention_setup_event_event_categories_path(event))
