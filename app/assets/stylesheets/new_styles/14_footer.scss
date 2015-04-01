@@ -21,7 +21,22 @@ body {
 }
 #main:after {
   content: "";
-  display: block;
+  display: table;
+  clear: both;
+}
+
+#side_nav {
+  text-align: left;
+  float: left;
+  width: 20%; /* matches with #side_content */
+}
+.sideNav__list {
+  list-decoration: none;
+}
+#side_content {
+  text-align: left;
+  width: 80%; /* matches with #side_nav */
+  float: right;
 }
 
 #bottom_nav, #main:after {

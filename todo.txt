@@ -1,3 +1,6 @@
+- Improve the action-flow through the convention-setup...always advance to the next page
+- make the side-nav links be "active" highlighted.
+- Split apart Admin-portion of various controllers into "Convention Setup", so that layouts are properly applied? (or just mark those particular actions as having the "application" layout?)
 - fix the "position" and "sort" problem for various admin models.
 - drag_drop_sortable vs reorder_rows.js.coffee
  - use ranked_model instead of acts_as_list?

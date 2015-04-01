@@ -1,0 +1,21 @@
+- content_for :content do
+  #side_nav
+    %h2 Convention Setup
+
+    %ul.sideNav__list
+      %li= link_to "Base Settings", base_settings_event_configuration_path
+      %li= link_to "Domain Setup", tenant_aliases_path
+      %Li= link_to "Name + Logo", name_logo_event_configuration_path
+      %li= link_to "Registration Costs", registration_periods_path
+      %li= link_to "Important Deadlines", important_dates_event_configuration_path
+      %li= link_to "Other Items for Sale", expense_groups_path
+      %li= link_to "Coupon Codes", coupon_codes_path
+      %li= link_to "Events", convention_setup_categories_path
+      %li= link_to "Volunteer Options", volunteer_opportunities_path
+      %li= link_to "Payment Settings", payment_settings_event_configuration_path
+      %li Access Settings
+  #side_content
+    = yield
+
+
+= render template: "layouts/application"
