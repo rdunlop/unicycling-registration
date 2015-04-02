@@ -1,0 +1,15 @@
+%table.volunteers.js--sortable{ data: { target: update_row_order_convention_setup_volunteer_opportunities_path } }
+  %thead
+    %tr
+      %th Volunteer Role
+      %th Num Registrants
+      %th Delete
+
+  %tbody
+    - @volunteer_opportunities.each do |vo|
+      %tr.item{ data: { item_id: vo.id } }
+        %td= link_to vo.description, vo
+        %td= vo.volunteer_choices.count
+        %td= link_to "Delete", [:convention_setup, vo], method: :delete, data: { confirm: 'Are you sure? This will delete all registrant selections for this volunteer option' }
+
+= link_to "New Volunteer Role", new_convention_setup_volunteer_opportunity_path

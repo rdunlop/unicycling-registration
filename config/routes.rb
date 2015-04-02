@@ -192,6 +192,10 @@ Workspace::Application.routes.draw do
       end
       resources :event_choices, :except => [:index, :create, :new, :show]
       resources :event_categories, :except => [:index, :create, :new, :show]
+
+      resources :volunteer_opportunities, except: [:show] do
+        post :update_row_order, on: :collection
+      end
     end
 
     get '/competition_setup', to: 'competition_setup#index'
@@ -303,9 +307,7 @@ Workspace::Application.routes.draw do
     put "usa_memberships", to: "usa_memberships#update"
     get "usa_memberships/export", to: "usa_memberships#export"
     get "volunteers", to: "volunteers#index"
-    resources :volunteer_opportunities do
-      post :update_row_order, on: :collection
-    end
+    resources :volunteer_opportunities, only: [:show]
 
     resources :results, only: [:index] do
       member do

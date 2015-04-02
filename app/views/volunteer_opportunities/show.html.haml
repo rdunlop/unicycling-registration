@@ -9,8 +9,6 @@
       %th Registrant
 
   %tbody
-    - @volunteer_opportunity.volunteer_choices.each do |vc|
+    - @volunteer_opportunity.volunteer_choices.includes(:registrant).each do |vc|
       %tr
         %td= vc.registrant
-
-= link_to "Edit Role", edit_volunteer_opportunity_path(@volunteer_opportunity)
