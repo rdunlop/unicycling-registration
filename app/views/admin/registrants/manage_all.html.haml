@@ -31,8 +31,6 @@
       - @registrants.find_each(batch_size: 100) do |registrant|
         - if can? :edit, registrant
           %span.js--showElement{ data: { key: "edit_registrant#{registrant.id}" } }
-        - if can? :set_reg_fee, :registrant
-          %span.js--showElement{ data: { key: "reg_fee#{registrant.id}" } }
         - if can? :undelete, :registrant
           %span.js--showElement{ data: { key: "undelete#{registrant.id}" } }
         - cache [I18n.locale, registrant, @config] do
@@ -53,8 +51,6 @@
               %span.js--showElementTarget{ data: { key: "edit_registrant#{registrant.id}" } }
                 = link_to "Events", registrant_build_path(registrant, :add_events)
                 = link_to "Items", registrant_build_path(registrant, :expenses)
-              %span.js--showElementTarget{ data: { key: "reg_fee#{registrant.id}" } }
-                = link_to "Reg Fee", reg_fee_registrant_path(registrant)
             %td.non_printable
               %span.js--showElementTarget{ data: { key: "undelete#{registrant.id}" } }
               - if registrant.deleted

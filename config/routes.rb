@@ -120,6 +120,10 @@ Workspace::Application.routes.draw do
         put :payment_details
       end
     end
+
+    get  "/payments/set_reg_fees", controller: "admin/reg_fees", action: :index, as: "set_reg_fees"
+    post "/payments/update_reg_fee", controller: "admin/reg_fees", action: :update_reg_fee, as: "update_reg_fee"
+
     resources :payments, :except => [:index, :edit, :update, :destroy] do
       collection do
         get :summary
@@ -159,11 +163,11 @@ Workspace::Application.routes.draw do
     resources :events, only: [:index, :show] do
       collection do
         get :summary
-        post :create_director
         get "specific_volunteers/:volunteer_opportunity_id", to: :specific_volunteers, as: :specific_volunteers
         get :general_volunteers
       end
       member do
+        post :create_director
         delete :destroy_director
         get :sign_ups
       end
@@ -236,8 +240,6 @@ Workspace::Application.routes.draw do
       end
       member do
         post :undelete, controller: "admin/registrants"
-        get :reg_fee, controller: "admin/registrants"
-        put :update_reg_fee, controller: "admin/registrants"
         get :results
       end
 

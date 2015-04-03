@@ -31,6 +31,7 @@ class PaymentsController < ApplicationController
     add_breadcrumb t("my_registrants", scope: "breadcrumbs"), user_registrants_path(current_user)
   end
 
+  # /payments/summary
   def summary
     add_payment_summary_breadcrumb
     @expense_items = ExpenseItem.includes(:translations, :expense_group => [:translations]).ordered
