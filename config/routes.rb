@@ -158,10 +158,12 @@ Workspace::Application.routes.draw do
 
     resources :events, only: [:index, :show] do
       collection do
-        get 'summary'
+        get :summary
+        post :create_director
+        get "specific_volunteers/:volunteer_opportunity_id", to: :specific_volunteers, as: :specific_volunteers
+        get :general_volunteers
       end
       member do
-        post :create_director
         delete :destroy_director
         get :sign_ups
       end
@@ -306,8 +308,6 @@ Workspace::Application.routes.draw do
     get "usa_memberships", to: "usa_memberships#index"
     put "usa_memberships", to: "usa_memberships#update"
     get "usa_memberships/export", to: "usa_memberships#export"
-    get "volunteers", to: "volunteers#index"
-    resources :volunteer_opportunities, only: [:show]
 
     resources :results, only: [:index] do
       member do

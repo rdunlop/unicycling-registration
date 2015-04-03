@@ -6,7 +6,6 @@ class ConventionSetup::VolunteerOpportunitiesController < ConventionSetupControl
   before_action :add_breadcrumbs
 
   def index
-    @volunteers = Registrant.active.where(volunteer: true)
   end
 
   def new
