@@ -284,6 +284,7 @@ class Ability
     can :read, Payment if user.has_role? :admin
     can :manage, Payment if user.has_role? :super_admin
     can :read, Payment, :user_id => user.id
+    can :set_reg_fee, :registrant
     unless reg_closed?
       can [:new, :create, :complete, :apply_coupon], Payment
     end
