@@ -1,0 +1,11 @@
+.l--2up {
+  .l--column {
+    width: 50%;
+    float: left;
+  }
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}

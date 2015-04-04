@@ -55,6 +55,7 @@ Workspace::Application.routes.draw do
         post :create_race_official
         get :directors
         put :set_role
+        put :set_password
 
         get :acl, controller: "permissions"
         post :set_acl, controller: "permissions"

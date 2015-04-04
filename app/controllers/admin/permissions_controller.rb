@@ -20,20 +20,27 @@ class Admin::PermissionsController < ApplicationController
       flash[:alert] = "Role not found (#{role})"
     end
 
-    respond_to do |format|
-      format.html { redirect_to permissions_path }
-    end
+    redirect_to permissions_path
+  end
+
+  def set_password
+    @user = User.find(params[:user_id])
+    new_password = params[:password]
+
+    @user.password = new_password
+    @user.save!
+    @user.confirm!
+
+    redirect_to permissions_path
   end
 
   def create_race_official
     @competition = Competition.find(params[:competition_id])
     @user = User.find(params[:user_id])
-    respond_to do |format|
-      if @user.add_role(:race_official)
-        format.html { redirect_to competition_judges_path(@competition), notice: 'Race Official successfully created.' }
-      else
-        format.html { redirect_to competition_judges_path(@competiton), alert: 'Unable to add Race Official role to user.' }
-      end
+    if @user.add_role(:race_official)
+      redirect_to competition_judges_path(@competition), notice: 'Race Official successfully created.'
+    else
+      redirect_to competition_judges_path(@competiton), alert: 'Unable to add Race Official role to user.'
     end
   end
 

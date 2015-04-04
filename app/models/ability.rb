@@ -208,7 +208,7 @@ class Ability
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
-      can [:directors], :permission
+      can [:directors, :set_password], :permission
       if config.usa_membership_config
         can :manage, :usa_membership
       end
