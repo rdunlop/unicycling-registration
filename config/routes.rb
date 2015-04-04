@@ -163,7 +163,7 @@ Workspace::Application.routes.draw do
     resources :events, only: [:index, :show] do
       collection do
         get :summary
-        get "specific_volunteers/:volunteer_opportunity_id", to: :specific_volunteers, as: :specific_volunteers
+        get "specific_volunteers/:volunteer_opportunity_id", action: :specific_volunteers, as: :specific_volunteers
         get :general_volunteers
       end
       member do
