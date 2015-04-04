@@ -30,5 +30,12 @@
           = f.file_field :logo_file
           = image_tag(@event_configuration.logo_file.url) if @event_configuration.logo_file?
         %td Logo should be 93px x 38px
+      %tr
+        %th= f.label :contact_email
+        %td= f.text_field :contact_email
+        %td This is the target for all "Feedback" emails on the "Help" page.
+      %tr
+        %th= f.label :style_name
+        %td= f.select :style_name, EventConfiguration.style_names, include_blank: false
 
   = f.submit

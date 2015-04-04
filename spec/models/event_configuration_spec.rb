@@ -187,13 +187,13 @@ describe EventConfiguration do
   end
 
   describe "when doing partial_model validations" do
-    it "allows waiver nil when not validated" do
+    it "allows short_name nil when not validated" do
       @ec = FactoryGirl.build :event_configuration
       @ec.validations_applied = 0
-      @ec.waiver = nil
+      @ec.short_name = nil
       expect(@ec).to be_valid
 
-      @ec.apply_validation(:base_settings)
+      @ec.apply_validation(:name_logo)
       expect(@ec).to be_invalid
     end
   end

@@ -1,5 +1,7 @@
 - Clean up the Bank Transfer received/cheque-received pages
   - Send Marco instructions
+- "all T-shirt have zero but the sum should be the same number of all rider paid  in this case 220
+the column Num unpaid is 293 and include also the Rider unpaid"
 - Add migration to set any unset position elements?
 - Add migration to require that position is not-null?
 - Improve the action-flow through the convention-setup...always advance to the next page

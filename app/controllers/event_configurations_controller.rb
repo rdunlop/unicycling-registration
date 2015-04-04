@@ -8,43 +8,21 @@ class EventConfigurationsController < ConventionSetupController
 
   load_and_authorize_resource
 
-  def update_base_settings
-    @event_configuration.assign_attributes(base_settings_params)
-    @event_configuration.apply_validation(:base_settings)
-    if @event_configuration.save
-      redirect_to base_settings_event_configuration_path, notice: 'Event configuration was successfully updated.'
-    else
-      render action: "base_settings"
+  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :important_dates, :payment_settings, :advanced_settings]
+
+  EVENT_CONFIG_PAGES.each do |page|
+    define_method("update_#{page}") do
+      update(page)
     end
   end
 
-  def update_name_logo
-    @event_configuration.assign_attributes(name_logo_params)
-    @event_configuration.apply_validation(:name_logo)
+  def update(page)
+    @event_configuration.assign_attributes(send("#{page}_params"))
+    @event_configuration.apply_validation(page)
     if @event_configuration.save
-      redirect_to name_logo_event_configuration_path, notice: 'Event configuration was successfully updated.'
+      redirect_to convention_setup_path, notice: 'Event configuration was successfully updated.'
     else
-      render action: "name_logo"
-    end
-  end
-
-  def update_important_dates
-    @event_configuration.assign_attributes(important_dates_params)
-    @event_configuration.apply_validation(:important_dates)
-    if @event_configuration.save
-      redirect_to important_dates_event_configuration_path, notice: 'Event configuration was successfully updated.'
-    else
-      render action: "important_dates"
-    end
-  end
-
-  def update_payment_settings
-    @event_configuration.assign_attributes(payment_settings_params)
-    @event_configuration.apply_validation(:payment_settings)
-    if @event_configuration.save
-      redirect_to payment_settings_event_configuration_path, notice: 'Event configuration was successfully updated.'
-    else
-      render action: "payment_settings"
+      render action: page
     end
   end
 
@@ -97,22 +75,29 @@ class EventConfigurationsController < ConventionSetupController
     @event_configuration = EventConfiguration.singleton
   end
 
-  def base_settings_params
-    params.require(:event_configuration).permit(:spectators, :competitor_benefits, :noncompetitor_benefits, :spectator_benefits,
-                                                :standard_skill, :standard_skill_closed_date, :style_name,
-                                                :comp_noncomp_url, :usa_individual_expense_item_id, :usa_family_expense_item_id,
-                                                :waiver, :waiver_url, :custom_waiver_text,
-                                                :italian_requirements,
+  def registrant_types_params
+    params.require(:event_configuration).permit(:spectators,
+                                                :competitor_benefits, :noncompetitor_benefits, :spectator_benefits,
+                                                :comp_noncomp_url)
+  end
+
+  def rules_waiver_params
+    params.require(:event_configuration).permit(:waiver, :waiver_url, :custom_waiver_text,
                                                 :accept_rules, :rules_file_name,
-                                                :contact_email,
-                                                :rulebook_url,
+                                                :rulebook_url)
+  end
+
+  def advanced_settings_params
+    params.require(:event_configuration).permit(:standard_skill, :standard_skill_closed_date,
+                                                :usa_individual_expense_item_id, :usa_family_expense_item_id,
+                                                :italian_requirements,
                                                 enabled_locales: []
       )
   end
 
   def name_logo_params
     params.require(:event_configuration).permit(:long_name, :short_name, :logo_file, :dates_description,
-                                                :event_url, :location)
+                                                :event_url, :location, :contact_email, :style_name)
   end
 
   def payment_settings_params

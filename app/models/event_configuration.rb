@@ -65,10 +65,10 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   validates :currency_code, inclusion: { in: self.currency_codes }, allow_nil: true
-  # base settings
-  validates :style_name, :inclusion => {:in => self.style_names.map{|y| y[1]} }, if: :base_settings_applied?
-  validates :waiver, inclusion: { in: ["none", "online", "print"] }, if: :base_settings_applied?
-  validates :usa_membership_config, :standard_skill, :inclusion => { :in => [true, false] }, if: :base_settings_applied? # because it's a boolean
+  validates :style_name, :inclusion => {:in => self.style_names.map{|y| y[1]} }
+  validates :waiver, inclusion: { in: ["none", "online", "print"] }
+
+  validates :usa_membership_config, :standard_skill, :inclusion => { :in => [true, false] }
   validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
 
   belongs_to :usa_individual_expense_item, :class_name => "ExpenseItem"
@@ -76,8 +76,8 @@ class EventConfiguration < ActiveRecord::Base
 
   validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa_membership_config"
 
-  validates :usa, :iuf, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
-  validates :test_mode, :inclusion => { :in => [true, false] }, if: :important_dates_applied? # because it's a boolean
+  validates :usa, :iuf, :inclusion => { :in => [true, false] }
+  validates :test_mode, :inclusion => { :in => [true, false] }
 
   validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] }
   validates :max_award_place, presence: true
