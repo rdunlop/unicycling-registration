@@ -5,23 +5,28 @@
     %strong Total Amount Received
     = print_formatted_currency(Payment.total_received)
 
-- if can? :list, :payment_adjustment
-  = link_to "View list of Payments/Refunds", list_payment_adjustments_path
-
-- if can? :new, :payment_adjustment
-  = link_to "Create Refund/Exchange", new_payment_adjustment_path
-  %br
-  = link_to "Manually Receive Payment", new_payment_adjustment_path
-  %br
-
-- if can? :list, :export_payment
-  = link_to "Download Payments", list_export_payments_path
-  %br
 
 - if can? :set_reg_fee, :registrant
   = link_to "Adjust a Registrant's Registration Fee", set_reg_fees_path
   %br
   %small If we need to lock a competitor into a previous Registration Period
+  %br
+
+- if can? :new, :manual_payment
+  = link_to "Manually Receive Payment", new_manual_payment_path
+  %br
+
+- if can? :new, :payment_adjustment # change this to a different action
+  = link_to "Create Refund/Exchange", new_payment_adjustment_path
+  %br
+
+- if can? :list, :payment_adjustment
+  = link_to "View list of Payments/Refunds", list_payment_adjustments_path
+
+- if can? :list, :export_payment
+  = link_to "Download Payments", list_export_payments_path
+  %br
+
 
 %br
 %br

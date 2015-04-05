@@ -290,6 +290,7 @@ class Ability
     end
     can [:offline], Payment
     if user.has_role?(:payment_admin) || user.has_role?(:admin)
+      can [:new, :choose, :create], :manual_payment
       can [:new, :exchange_choose, :exchange_create, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
       can [:read], Registrant
       can [:list, :payments, :payment_details], :export_payment

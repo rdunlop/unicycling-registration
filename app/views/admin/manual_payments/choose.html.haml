@@ -1,0 +1,45 @@
+%h1 Receive Payment
+
+= form_for(@payment_presenter, :url => manual_payments_path, method: :post) do |pf|
+  = render :partial => "/shared/error_messages", :object => @payment_presenter
+  %br
+  %br
+  %b.payment_instructions
+    Please describe the payment. Examples:
+    %br
+    Cash
+    %br
+    Cheque
+    %br
+  = pf.label :note
+  = pf.text_field :note
+
+  %h1 Chosen (but unpaid) Items
+  .payment_instructions
+    Check off the items to be marked as paid
+  %table.sortable
+    %thead
+      %tr
+        %th Registrant
+        %th Item
+        %th Cost
+        %th Details (only required for some items)
+        %th Mark this item as having Money-Received
+        %th= #Give this item to the Registrant for free
+    %tbody
+      = pf.fields_for :unpaid_details do |unpaid_detail|
+        %tr
+          %td
+            = unpaid_detail.object.registrant
+            = unpaid_detail.hidden_field :registrant_expense_item_id
+          %td
+            = unpaid_detail.object.expense_item
+          %td= unpaid_detail.object.cost
+          %td
+            = unpaid_detail.object.details
+          %td= unpaid_detail.check_box :pay_for
+          %td= #unpaid_detail.check_box :free
+  = submit_tag "Mark elements Received", :class => "payment_link registration_button"
+
+%div
+  = link_to 'Back', new_payment_adjustment_path

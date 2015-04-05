@@ -139,6 +139,12 @@ Workspace::Application.routes.draw do
         post :apply_coupon
       end
     end
+    resources :manual_payments, only: [:new, :create], controller: "admin/manual_payments" do
+      collection do
+        get :choose
+      end
+    end
+
     resources :payment_adjustments, :only => [:new]  do
       collection do
         get :list
