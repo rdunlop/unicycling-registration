@@ -197,6 +197,16 @@ class Ability
       can [:details, :admin_view], ExpenseItem
       can :read, CouponCode
     end
+
+    if user.has_role? :event_planner
+      can :summary, Event
+      can :sign_ups, EventCategory
+      can [:manage_all, :show_all], :registrant
+      can [:read], Registrant
+      can [:read, :create, :list], Email
+      can [:directors], :permission
+    end
+
     # #################################################
     # End new role definitions
     # #################################################
@@ -230,14 +240,7 @@ class Ability
       can :display_acl, :permission
     end
 
-    if user.has_role? :event_planner
-      can :summary, Event
-      can :sign_ups, EventCategory
-      can [:manage_all, :show_all], :registrant
-      can [:read], Registrant
-      can [:read, :create, :list], Email
-      can [:directors], :permission
-    end
+
 
     if user.has_role?(:race_official) || user.has_role?(:admin)
       # includes :view_heat, and :dq_competitor
