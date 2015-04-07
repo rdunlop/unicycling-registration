@@ -27,7 +27,8 @@ class Admin::RegFeesController < ApplicationController
 
     if error || !registrant.set_registration_item_expense(new_reg_item)
       set_reg_fee_breadcrumb
-      render :index, alert: error_message
+      flash.now[:alert] = error_message
+      render :index
     else
       redirect_to set_reg_fees_path, notice: 'Reg Fee Updated successfully.'
     end

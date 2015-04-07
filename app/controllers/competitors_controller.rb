@@ -122,7 +122,8 @@ class CompetitorsController < ApplicationController
         format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
       rescue Exception => ex
         new
-        format.html { render "new", alert: "Error adding Registrants. #{ex}" }
+        flash.now[:alert] = "Error adding Registrants. #{ex}"
+        format.html { render "new" }
       end
     end
   end

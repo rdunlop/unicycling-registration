@@ -1,12 +1,17 @@
 class Admin::ManualPaymentsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
+  before_action :set_breadcrumbs
   authorize_resource class: false
 
   def new
+    add_breadcrumb "New Manual Payment"
     @registrants = Registrant.order(:bib_number)
   end
 
   def choose
+    add_breadcrumb "New Manual Payment", new_manual_payment_path
+    add_breadcrumb "Choose Payment Items"
+
     @payment_presenter = ManualPayment.new
     params[:registrant_ids].each do |reg_id|
       registrant = Registrant.find(reg_id)
@@ -23,5 +28,11 @@ class Admin::ManualPaymentsController < ApplicationController
     else
       render :choose
     end
+  end
+
+  private
+
+  def set_breadcrumbs
+    add_breadcrumb "Payments Management", summary_payments_path
   end
 end

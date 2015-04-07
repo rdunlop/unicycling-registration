@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
     when :payment_admin
-      "[e.g. Garrett Macey] Able to view the payments that have been received, the total number of items paid."
+      "[e.g. Garrett Macey] Able to view the payments that have been received, the total number of items paid. Set Registration Fees, and receive payments"
     when :event_planner
       "[e.g. Mary Koehler]
       Able to view/review the event sign_ups.

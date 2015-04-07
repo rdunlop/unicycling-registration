@@ -185,6 +185,18 @@ class Ability
     if user.has_role? :translator
       can :manage, :translation
     end
+
+    if user.has_role? :payment_admin
+      can :summary, Payment
+      can [:new, :choose, :create], :manual_payment
+      can :set_reg_fee, :registrant
+      can [:read], Registrant
+      can [:list, :payments, :payment_details], :export_payment
+      can [:download_all], :export_registrant
+      # Allow adding items which only admins can add
+      can [:details, :admin_view], ExpenseItem
+      can :read, CouponCode
+    end
     # #################################################
     # End new role definitions
     # #################################################
@@ -279,22 +291,15 @@ class Ability
 
   def define_payment_ability(user)
     # Payment
-    can :summary, Payment if user.has_role?(:payment_admin) || user.has_role?(:admin)
-    can [:details, :admin_view], ExpenseItem if user.has_role?(:payment_admin) || user.has_role?(:admin)
     can :read, Payment if user.has_role? :admin
     can :manage, Payment if user.has_role? :super_admin
     can :read, Payment, :user_id => user.id
-    can :set_reg_fee, :registrant
     unless reg_closed?
       can [:new, :create, :complete, :apply_coupon], Payment
     end
     can [:offline], Payment
-    if user.has_role?(:payment_admin) || user.has_role?(:admin)
-      can [:new, :choose, :create], :manual_payment
+    if user.has_role?(:admin)
       can [:new, :exchange_choose, :exchange_create, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
-      can [:read], Registrant
-      can [:list, :payments, :payment_details], :export_payment
-      can [:download_all], :export_registrant
     end
   end
 
