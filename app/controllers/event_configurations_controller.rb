@@ -1,10 +1,6 @@
 class EventConfigurationsController < ConventionSetupController
   before_action :authenticate_user!
   before_action :load_event_configuration
-  before_action :set_base_settings_breadcrumb, only: [:update_base_settings, :base_settings]
-  before_action :set_name_logo_breadcrumb, only: [:update_name_logo, :name_logo]
-  before_action :set_important_dates_breadcrumb, only: [:update_important_dates, :important_dates]
-  before_action :set_payment_settings_breadcrumb, only: [:update_payment_settings, :payment_settings]
 
   load_and_authorize_resource
 
@@ -13,6 +9,10 @@ class EventConfigurationsController < ConventionSetupController
   EVENT_CONFIG_PAGES.each do |page|
     define_method("update_#{page}") do
       update(page)
+    end
+    before_action "set_#{page}_breadcrumbs".to_sym, only: ["update_#{page}".to_sym, "#{page}".to_sym]
+    define_method("set_#{page}_breadcrumbs") do
+      add_breadcrumb page.to_s.humanize
     end
   end
 
@@ -54,22 +54,6 @@ class EventConfigurationsController < ConventionSetupController
   end
 
   private
-
-  def set_base_settings_breadcrumb
-    add_breadcrumb "Base Settings", base_settings_event_configuration_path
-  end
-
-  def set_name_logo_breadcrumb
-    add_breadcrumb "Name and Logo", name_logo_event_configuration_path
-  end
-
-  def set_payment_settings_breadcrumb
-    add_breadcrumb "Payment Settings", payment_settings_event_configuration_path
-  end
-
-  def set_important_dates_breadcrumb
-    add_breadcrumb "Important Deadlines", important_dates_event_configuration_path
-  end
 
   def load_event_configuration
     @event_configuration = EventConfiguration.singleton

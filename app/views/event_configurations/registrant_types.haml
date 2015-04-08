@@ -1,6 +1,6 @@
 %h1 Registrant Types
 
-= simple_form_for(@event_configuration, url: update_base_settings_event_configuration_path, method: :put, multipart: true) do |f|
+= simple_form_for(@event_configuration, url: update_registrant_types_event_configuration_path, method: :put, multipart: true) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
 
   %fieldset.form__fieldset
