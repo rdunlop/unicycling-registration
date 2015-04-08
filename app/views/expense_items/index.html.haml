@@ -1,4 +1,4 @@
-%h1 Listing #{@expense_group} expense_items
+%h1 Listing #{@expense_group} expense items
 
 .configuration_settings_block
   %table#list.js--sortable{ data: { target: update_row_order_expense_items_path } }
@@ -24,7 +24,7 @@
           %td= link_to 'Edit', edit_expense_group_expense_item_path(@expense_group, expense_item)
           %td= link_to 'Delete', [@expense_group, expense_item], method: :delete, data: { confirm: 'Are you sure?' }
 
-%h2 New expense_item
+%h2 New expense item
 
 %fieldset.form__fieldset
   = render 'form'
