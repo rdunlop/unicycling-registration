@@ -8,19 +8,6 @@ $(document).ready ->
   $("table.alternate th").css "background-color", "#fff"
 
 
-calculateTotal = ->
-  all_values = $("input[data-cents]");
-  total_cents = 0;
-  all_values.each ->
-    el = $(this);
-    if (el.prop('checked'))
-      total_cents += parseInt(el.data("cents"));
-  return (total_cents / 100).toFixed(2);
-
-$(document).on "change", ".delete_payment_item", ->
-  del = $(this);
-  $("#total_field").html(calculateTotal());
-
 $(document).on "click", "#unselect_all", ->
     select_all(false);
 
@@ -33,7 +20,3 @@ select_all = (check_on) ->
     if (el.prop('checked') != check_on)
       el.trigger("click");
   return false
-
-$(document).ready ->
-  #/ calculate initially
-  $("#total_field").html(calculateTotal());
