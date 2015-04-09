@@ -10,7 +10,7 @@ class ManualPaymentDetail
   validates :registrant_expense_item_id, :presence => true
 
   # these are derived from the REI
-  delegate :registrant_id, :expense_item_id, :free, :cost, :details, to: :registrant_expense_item
+  delegate :registrant_id, :expense_item_id, :free, :total_cost, :details, to: :registrant_expense_item
 
   def initialize(params = {})
     params.each do |name, value|
@@ -91,7 +91,7 @@ class ManualPayment
     if new_detail.pay_for
       detail = payment.payment_details.build
       detail.free = new_detail.free
-      detail.amount = new_detail.cost
+      detail.amount = new_detail.total_cost
       detail.registrant_id = new_detail.registrant_id
       detail.expense_item_id = new_detail.expense_item_id
       detail.details = new_detail.details
