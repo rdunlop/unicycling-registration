@@ -8,6 +8,10 @@ class PaymentMailerPreview < ActionMailer::Preview
     PaymentMailer.payment_completed(payment)
   end
 
+  def manual_payment_completed
+    PaymentMailer.manual_payment_completed(payment, user)
+  end
+
   def coupon_used
     PaymentMailer.coupon_used(payment_detail)
   end
@@ -25,5 +29,9 @@ class PaymentMailerPreview < ActionMailer::Preview
 
   def payment_detail
     PaymentDetailCouponCode.first.payment_detail
+  end
+
+  def user
+    User.all.sample
   end
 end

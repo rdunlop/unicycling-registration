@@ -7,7 +7,7 @@ class ManualPaymentDetail
 
   attribute :registrant_expense_item_id, Integer
   attribute :pay_for, Boolean
-  validates :registrant_expense_item_id, :presence => true
+  validates :registrant_expense_item_id, presence: true
 
   # these are derived from the REI
   delegate :registrant_id, :expense_item_id, :free, :total_cost, :details, to: :registrant_expense_item

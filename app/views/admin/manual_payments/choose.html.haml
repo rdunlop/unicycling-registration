@@ -1,7 +1,11 @@
 %h1 Receive Payment
 
-= form_for(@payment_presenter, :url => manual_payments_path, method: :post) do |pf|
-  = render :partial => "/shared/error_messages", :object => @payment_presenter
+%p
+  %b Note
+  An email will be sent to the the associated user account when a payment is completed.
+
+= form_for(@manual_payment, :url => manual_payments_path, method: :post) do |pf|
+  = render :partial => "/shared/error_messages", :object => @manual_payment
   %br
   %br
   %b.payment_instructions

@@ -4,28 +4,32 @@ class Admin::ManualPaymentsController < ApplicationController
   authorize_resource class: false
 
   def new
-    add_breadcrumb "New Manual Payment"
     @registrants = Registrant.order(:bib_number)
   end
 
   def choose
-    add_breadcrumb "New Manual Payment", new_manual_payment_path
     add_breadcrumb "Choose Payment Items"
 
-    @payment_presenter = ManualPayment.new
+    @manual_payment = ManualPayment.new
     params[:registrant_ids].each do |reg_id|
       registrant = Registrant.find(reg_id)
-      @payment_presenter.add_registrant(registrant)
+      @manual_payment.add_registrant(registrant)
     end
   end
 
   def create
-    @payment_presenter = ManualPayment.new(params[:manual_payment])
-    @payment_presenter.user = current_user
+    @manual_payment= ManualPayment.new(params[:manual_payment])
+    @manual_payment.user = current_user
 
-    if @payment_presenter.save
-      redirect_to payment_path(@payment_presenter.saved_payment), notice: "Successfully created payment"
+    if @manual_payment.save
+      payment = @manual_payment.saved_payment
+      users = payment.payment_details.map(&:registrant).map(&:user).flatten.uniq
+      users.each do |user|
+        PaymentMailer.manual_payment_completed(payment, user).deliver_later
+      end
+      redirect_to payment_path(payment), notice: "Successfully created payment and sent e-mail"
     else
+      add_breadcrumb "Choose Payment Items"
       render :choose
     end
   end
@@ -34,5 +38,6 @@ class Admin::ManualPaymentsController < ApplicationController
 
   def set_breadcrumbs
     add_breadcrumb "Payments Management", summary_payments_path
+    add_breadcrumb "New Manual Payment", new_manual_payment_path
   end
 end

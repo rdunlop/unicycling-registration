@@ -14,6 +14,13 @@ class PaymentMailer < TenantAwareMailer
     mail to: payment.user.email, bcc: Rails.application.secrets.payment_notice_email
   end
 
+  def manual_payment_completed(payment, user)
+    @payment_number = payment.id
+    @event_name = EventConfiguration.singleton.long_name
+
+    mail to: user.email, bcc: Rails.application.secrets.payment_notice_email
+  end
+
   def coupon_used(payment_detail)
     @coupon = payment_detail.payment_detail_coupon_code.coupon_code
     @registrant = payment_detail.registrant
