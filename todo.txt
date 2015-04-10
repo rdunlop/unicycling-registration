@@ -1,5 +1,6 @@
 - Clean up the Bank Transfer received/cheque-received pages
   - Send Marco instructions
+- Use SimpleForm for registration flow. Remove "required" class adjustments.
 - "all T-shirt have zero but the sum should be the same number of all rider paid  in this case 220
 the column Num unpaid is 293 and include also the Rider unpaid"
 - Add migration to set any unset position elements?
