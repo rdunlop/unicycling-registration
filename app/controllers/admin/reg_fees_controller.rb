@@ -1,87 +1,35 @@
 class Admin::RegFeesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_payments_breadcrumb
+  before_action :set_reg_fee_breadcrumb
 
   # GET /payments/set_reg_fees
   def index
     authorize! :set_reg_fee, :registrant
-    set_reg_fee_breadcrumb
+    @reg_fee = RegFee.new
   end
 
   # POST /payments/update_reg_fee
-  # Params: { registrant_id, registration_period_id }
+  # Params: { reg_fee: { registrant_id, registration_period_id } }
   def update_reg_fee
     authorize! :set_reg_fee, :registrant
 
-    error = false
+    @reg_fee = RegFee.new(reg_fee_params)
 
-    if params[:registrant_id].present? && params[:registration_period_id].present?
-      registrant = Registrant.find(params[:registrant_id])
-      new_rp = RegistrationPeriod.find(params[:registration_period_id])
-      new_reg_item = new_rp.expense_item_for(registrant.competitor)
-
-      # only possible if the registrant is unpaid
-      if registrant.reg_paid?
-        error = true
-        error_message = "This registrant is already paid"
-      end
+    if @reg_fee.save
+      cost_description = print_formatted_currency(@reg_fee.new_registration_item.cost)
+      redirect_to set_reg_fees_path, notice: "Reg Fee For #{@reg_fee.registrant.to_s} Updated Successfully (#{cost_description})"
     else
-      error = true
-      error_message = "Must specify both Registrant and Registration Period"
-    end
-
-    if error || !registrant.set_registration_item_expense(new_reg_item)
       set_reg_fee_breadcrumb
-      flash.now[:alert] = error_message
       render :index
-    else
-      cost_description = print_formatted_currency(new_reg_item.cost)
-      redirect_to set_reg_fees_path, notice: "Reg Fee For #{registrant.to_s} Updated Successfully (#{cost_description})"
     end
   end
-  #   def reg_fee
-  #     @reg_fee = RegFee.new(@registrant)
-  #     set_reg_fee_breadcrumb
-  #   end
-  #
-  #   def update_reg_fee
-  #     @reg_fee = RegFee.new(@registrant, attributes)
-  #
-  #     if @reg_fee.save
-  #       redirect_to reg_fee_registrant_path(@registrant), notice: 'Reg Fee Updated successfully.'
-  #     else
-  #       render :reg_fee
-  #     end
-  #   end
-  #
-  #   class RegFee
-  #
-  #     def errors
-  #     end
-  #
-  #     def save
-  #       # activeattr for validations?
-  #       new_rp = RegistrationPeriod.find(params[:registration_period_id])
-  #
-  #       new_reg_item = new_rp.expense_item_for(@registrant.competitor)
-  #
-  #       error = false
-  #       # only possible if the registrant is unpaid
-  #       if @registrant.reg_paid?
-  #         error = true
-  #         error_message = "This registrant is already paid"
-  #       end
-  #
-  #       respond_to do |format|
-  #         if error || !@registrant.set_registration_item_expense(new_reg_item)
-  #           set_reg_fee_breadcrumb
-  #           format.html { render "reg_fee", alert: error_message  }
-  #         else
-  #           format.html { redirect_to reg_fee_registrant_path(@registrant), notice: 'Reg Fee Updated successfully.' }
-  #         end
-  #       end
-  #     end
-  #   end
+
+  private
+
+  def reg_fee_params
+    params.require(:reg_fee).permit(:registrant_id, :registration_period_id)
+  end
 
   private
 
