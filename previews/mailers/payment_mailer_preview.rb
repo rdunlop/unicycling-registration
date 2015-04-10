@@ -5,7 +5,7 @@ class PaymentMailerPreview < ActionMailer::Preview
   end
 
   def payment_completed
-    PaymentMailer.payment_completed(payment.id)
+    PaymentMailer.payment_completed(payment)
   end
 
   def coupon_used
