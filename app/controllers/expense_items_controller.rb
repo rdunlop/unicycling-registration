@@ -1,5 +1,4 @@
 class ExpenseItemsController < ApplicationController
-
   before_action :authenticate_user!
   load_and_authorize_resource
 
@@ -17,5 +16,4 @@ class ExpenseItemsController < ApplicationController
     add_payment_summary_breadcrumb
     add_breadcrumb "#{@expense_item.to_s} Items"
   end
-
 end

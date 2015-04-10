@@ -26,7 +26,6 @@ class RegFee
     registrant.set_registration_item_expense(new_registration_item)
   end
 
-
   def registrant
     return nil unless registrant_id.present?
     @registrant ||= Registrant.find(registrant_id)
@@ -41,5 +40,4 @@ class RegFee
   def registration_period
     RegistrationPeriod.find(registration_period_id)
   end
-
 end

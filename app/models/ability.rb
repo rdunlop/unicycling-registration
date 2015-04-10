@@ -240,8 +240,6 @@ class Ability
       can :display_acl, :permission
     end
 
-
-
     if user.has_role?(:race_official) || user.has_role?(:admin)
       # includes :view_heat, and :dq_competitor
       can :manage, LaneAssignment
