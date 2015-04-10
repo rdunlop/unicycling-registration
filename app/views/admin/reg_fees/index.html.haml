@@ -3,14 +3,14 @@
 %p This form allows you to specify the registration period to be set for this registrant.
 %p
   %b NOTE:
-  The registration period selected will be "Locked", and will not automatically increase as the dates go by
+  Once specified, the selected registration period will be "Locked" for the registrant, and will not automatically increase as the dates go by
   %br
   %b NOTE:
-  There is currently no way to "unlock" an item.
+  Even after "Locking" the registration period, you can specify a registration period for a registrant again.
 
 = form_tag update_reg_fee_path, method: :post do
   = label_tag :registrant_id, "Registrant"
-  = select_tag :registrant_id, options_from_collection_for_select(Registrant.active, "id", "name"), class: "chosen-select", include_blank: true
+  = select_tag :registrant_id, options_from_collection_for_select(Registrant.active, "id", "with_id_to_s"), class: "chosen-select", include_blank: true
   = label_tag :registration_period_id, "New Registration Period"
   = select_tag :registration_period_id, options_from_collection_for_select(RegistrationPeriod.all, "id", "name"), class: "chosen-select", include_blank: true
   = submit_tag "Lock Reg Fee"

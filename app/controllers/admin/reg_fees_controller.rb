@@ -13,16 +13,21 @@ class Admin::RegFeesController < ApplicationController
   def update_reg_fee
     authorize! :set_reg_fee, :registrant
 
-    registrant = Registrant.find(params[:registrant_id])
-    new_rp = RegistrationPeriod.find(params[:registration_period_id])
-
-    new_reg_item = new_rp.expense_item_for(registrant.competitor)
-
     error = false
-    # only possible if the registrant is unpaid
-    if registrant.reg_paid?
+
+    if params[:registrant_id].present? && params[:registration_period_id].present?
+      registrant = Registrant.find(params[:registrant_id])
+      new_rp = RegistrationPeriod.find(params[:registration_period_id])
+      new_reg_item = new_rp.expense_item_for(registrant.competitor)
+
+      # only possible if the registrant is unpaid
+      if registrant.reg_paid?
+        error = true
+        error_message = "This registrant is already paid"
+      end
+    else
       error = true
-      error_message = "This registrant is already paid"
+      error_message = "Must specify both Registrant and Registration Period"
     end
 
     if error || !registrant.set_registration_item_expense(new_reg_item)
@@ -30,7 +35,8 @@ class Admin::RegFeesController < ApplicationController
       flash.now[:alert] = error_message
       render :index
     else
-      redirect_to set_reg_fees_path, notice: 'Reg Fee Updated successfully.'
+      cost_description = print_formatted_currency(new_reg_item.cost)
+      redirect_to set_reg_fees_path, notice: "Reg Fee For #{registrant.to_s} Updated Successfully (#{cost_description})"
     end
   end
   #   def reg_fee
