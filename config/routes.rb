@@ -100,13 +100,16 @@ Workspace::Application.routes.draw do
     #### For Registration creation purposes
     ###
 
-    resources :expense_groups, except: [:show] do
+    resources :expense_groups, except: [:show], controller: "convention_setup/expense_groups" do
       post :update_row_order, on: :collection
-      resources :expense_items, :except => [:new, :show]
+      resources :expense_items, :except => [:new, :show], controller: "convention_setup/expense_items"
+    end
+
+    resources :expense_items, only: [], controller: "convention_setup/expense_items" do
+      post :update_row_order, on: :collection
     end
 
     resources :expense_items, only: [] do
-      post :update_row_order, on: :collection
       member do
         get :details
       end

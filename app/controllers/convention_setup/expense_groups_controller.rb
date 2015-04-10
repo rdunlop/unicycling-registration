@@ -1,4 +1,4 @@
-class ExpenseGroupsController < ConventionSetupController
+class ConventionSetup::ExpenseGroupsController < ConventionSetupController
   include SortableObject
 
   before_action :authenticate_user!
