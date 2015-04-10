@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "expense_groups/index" do
+describe "convention_setup/expense_groups/index" do
   before(:each) do
     @expense_group = ExpenseGroup.new
     assign(:expense_groups, [

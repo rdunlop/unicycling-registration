@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "expense_groups/edit" do
+describe "convention_setup/expense_groups/edit" do
   before(:each) do
     @expense_group = assign(:expense_group, FactoryGirl.build_stubbed(:expense_group))
   end

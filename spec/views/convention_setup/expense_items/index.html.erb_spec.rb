@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "expense_items/index" do
+describe "convention_setup/expense_items/index" do
   before(:each) do
     @group1 = FactoryGirl.create(:expense_group, :group_name => "Group 1")
     @group2 = FactoryGirl.create(:expense_group, :group_name => "Group 2")
