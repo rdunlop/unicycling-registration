@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExpenseGroupsController do
+describe ConventionSetup::ExpenseGroupsController do
   before(:each) do
     @admin = FactoryGirl.create(:super_admin_user)
     sign_in @admin
