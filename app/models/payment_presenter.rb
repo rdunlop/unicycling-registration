@@ -45,8 +45,6 @@ class PaymentPresenter
     attribute :expense_item_id, Integer
     attribute :details, String
 
-    attribute :pay_for, Boolean
-
     attribute :amount, Decimal
     attribute :free, Boolean
 
@@ -138,7 +136,7 @@ class PaymentPresenter
   end
 
   def build_payment_detail(payment, new_detail)
-    if new_detail.pay_for || new_detail.free
+    if new_detail.free
       detail = payment.payment_details.build
       detail.free = new_detail.free
       detail.amount = new_detail.cost
