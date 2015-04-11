@@ -1,5 +1,15 @@
 %h1 Cache Management
 
+%p
+  This page is only to be used if these appears to be some sort of caching-related issue.
+
+%p
+  Generally, you should not need to use this page.
+
+%p
+  %b Note
+  Clearing the cache has performance impacts, it will slow things down for a while.
+
 %ul
   %li= link_to "Clear Cache", clear_cache_event_configuration_path, method: :delete, data: { confirm: "This will clear all data cache" }
   %li= link_to "Clear Counter Cache", clear_counter_cache_event_configuration_path, method: :delete, data: { confirm: "This will clear counter caches" }

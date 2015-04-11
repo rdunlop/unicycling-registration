@@ -4,12 +4,13 @@ class Admin::PermissionsController < ApplicationController
 
   def index
     @users = User.includes(:roles).all
+    @available_roles = current_user.roles_accessible
   end
 
   def set_role
     @user = User.find(params[:user_id])
     role = params[:role_name]
-    if User.roles.include?(role.to_sym)
+    if current_user.roles_accessible.include?(role.to_sym)
       if @user.has_role? role
         @user.remove_role role
       else
@@ -34,6 +35,7 @@ class Admin::PermissionsController < ApplicationController
     redirect_to permissions_path
   end
 
+  # this should b e moved somewhere
   def create_race_official
     @competition = Competition.find(params[:competition_id])
     @user = User.find(params[:user_id])

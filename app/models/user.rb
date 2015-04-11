@@ -77,7 +77,24 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:normal_user, :music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :payment_admin, :convention_admin, :admin, :super_admin]
+    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :payment_admin, :convention_admin, :admin, :super_admin]
+  end
+
+  # List which roles each roles can add to other users
+  def self.role_transfer_permissions
+    {
+      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj],
+      payment_admin: [:payment_admin],
+      event_planner: [:event_planner],
+      music_dj: [:music_dj]
+    }
+  end
+
+  def roles_accessible
+    roles.map(&:name).inject([]) do |array, role|
+      new_roles = self.class.role_transfer_permissions[role.to_sym]
+      array += new_roles if new_roles.present?
+    end.uniq
   end
 
   def self.role_description(role)
@@ -101,9 +118,13 @@ class User < ActiveRecord::Base
     when :convention_admin
       "[e.g. Olaf Scholte]
       Able to configure the Convention settings with regards to registration settings
-      Can set payment amounts
-      Can set events offered
+      Can setup the look-and-feel, Convention Name, and Domain URL settings.
+      Can set payment costs
       Can set the PayPal details
+      Can set events offered
+      Can set the volunteer options
+      Can reset users passwords
+      Can create payment_admin, event_planner, and music_dj users
       "
     when :translator
       "[e.g. Olaf]
@@ -112,10 +133,15 @@ class User < ActiveRecord::Base
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
     when :payment_admin
-      "[e.g. Garrett Macey] Able to view the payments that have been received, the total number of items paid. Set Registration Fees, and receive payments"
+      "[e.g. Garrett Macey]
+      Able to view the payments that have been received
+      Able to see the total number of items paid.
+      Able to Set Registration Fees per user
+      Able to mark checks as received"
     when :event_planner
       "[e.g. Mary Koehler]
       Able to view/review the event sign_ups.
+      Able to SEARCH & MODIFY any registration.
       Able to view/send emails to all registrants"
     when :awards_admin
       "[e.g. Kirsten]
@@ -125,8 +151,6 @@ class User < ActiveRecord::Base
     when :music_dj
       "[e.g. JoAnn]
       Able to view/download any music from the Manage Music page"
-    when :normal_user
-      "[e.g. John Smith] (no special abilities)"
     else
       "No Description Available"
     end

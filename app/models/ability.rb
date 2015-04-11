@@ -48,6 +48,8 @@ class Ability
   end
 
   def set_data_entry_volunteer_abilities(user)
+    can :data_entry_menu, :welcome
+
     can [:read, :enter_sign_in, :update_competitors], Competitor
     can :read, Competition
 
@@ -147,10 +149,6 @@ class Ability
   def define_ability_for_logged_in_user(user)
     alias_action :create, :read, :update, :destroy, :to => :crud
 
-    if user.roles.any?
-      can :data_entry_menu, :welcome
-    end
-
     if user.has_role? :super_admin
       can :access, :rails_admin
       can :dashboard
@@ -164,17 +162,20 @@ class Ability
     if user.has_role? :convention_admin
       can :manage, TenantAlias
       can :manage, EventConfiguration
+      cannot :cache, EventConfiguration
       can :manage, :convention_setup
+      can :crud, ExpenseGroup
+      can :crud, ExpenseItem
+      can :crud, CouponCode
+      can :crud, RegistrationPeriod
+      can :crud, Category
+      can :crud, Event
+      can :crud, EventChoice
+      can :crud, EventCategory
+      can :crud, VolunteerOpportunity
       can :read, :onsite_registration
-      can :manage, ExpenseGroup
-      can :manage, ExpenseItem
-      can :manage, CouponCode
-      can :manage, RegistrationPeriod
-      can :manage, Category
-      can :manage, Event
-      can :manage, EventChoice
-      can :manage, EventCategory
-      can :manage, VolunteerOpportunity
+      can :toggle_visibility, ExpenseGroup
+      can [:read, :set_role, :set_password], :permission
     end
 
     if user.has_role? :music_dj
@@ -194,12 +195,13 @@ class Ability
       can [:list, :payments, :payment_details], :export_payment
       can [:download_all], :export_registrant
       # Allow adding items which only admins can add
-      can [:details, :admin_view], ExpenseItem
+      can :admin_view, ExpenseItem
+      can :details, ExpenseItem
       can :read, CouponCode
     end
 
     if user.has_role? :event_planner
-      can :summary, Event
+      can [:summary, :general_volunteers, :specific_volunteers], Event
       can :sign_ups, EventCategory
       can [:manage_all, :show_all], :registrant
       can [:read], Registrant

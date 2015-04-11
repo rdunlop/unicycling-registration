@@ -52,11 +52,14 @@ class EventsController < ApplicationController
     end
   end
 
+  # THIS SHOULD BE MOVED
   # GET /events/1
   def show
     add_category_breadcrumb(@event.category)
     add_event_breadcrumb(@event)
   end
+
+  # THIS SHOULD BE MOVED
 
   # POST /events/1/create_director
   def create_director
@@ -66,6 +69,8 @@ class EventsController < ApplicationController
     redirect_to event_path(@event), notice: 'Created Director'
   end
 
+
+  # THIS SHOULD BE MOVED
   # DELETE /events/1/destroy_director
   def destroy_director
     user = User.find(params[:user_id])
