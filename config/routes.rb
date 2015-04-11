@@ -168,7 +168,7 @@ Workspace::Application.routes.draw do
     end
     resources :competition_wheel_sizes
 
-    resources :coupon_codes
+    resources :coupon_codes, only: [:show]
 
     resources :events, only: [:index, :show] do
       collection do
@@ -212,6 +212,10 @@ Workspace::Application.routes.draw do
       resources :volunteer_opportunities, except: [:show] do
         post :update_row_order, on: :collection
       end
+
+    end
+    scope "convention_setup", module: "convention_setup" do
+      resources :coupon_codes, except: [:show]
     end
 
     get '/competition_setup', to: 'competition_setup#index'
