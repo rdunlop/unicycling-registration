@@ -1,24 +1,24 @@
 %h1 Listing Coupon Codes
-.group
-  .configuration_settings_block
-    %table
-      %tr
-        %th Name
-        %th Code
-        %th Description
-        %th Price
-        %th Expense Items
-        %th
-      - @coupon_codes.each do |coupon_code|
-        %tr
-          %td= link_to coupon_code.name, coupon_code
-          %td= coupon_code.code
-          %td= coupon_code.description
-          %td= coupon_code.price
-          %td= coupon_code.coupon_code_expense_items.map(&:expense_item).map(&:to_s).join(", ")
-          %td= link_to 'Edit', edit_coupon_code_path(coupon_code)
-          %td= link_to 'Delete', coupon_code, method: :delete, data: { confirm: 'Are you sure?' }
-    %br
-    %h3 New Coupon Code
-    %fieldset.form__fieldset
-      = render 'form'
+
+%table
+  %tr
+    %th Name
+    %th Code
+    %th Description
+    %th Price
+    %th Expense Items
+    %th
+  - @coupon_codes.each do |coupon_code|
+    %tr
+      %td= link_to coupon_code.name, coupon_code
+      %td= coupon_code.code
+      %td= coupon_code.description
+      %td= coupon_code.price
+      %td= coupon_code.coupon_code_expense_items.map(&:expense_item).map(&:to_s).join(", ")
+      %td= link_to 'Edit', edit_coupon_code_path(coupon_code)
+      %td= link_to 'Delete', coupon_code, method: :delete, data: { confirm: 'Are you sure?' }
+%br
+
+%h3 New Coupon Code
+%fieldset.form__fieldset
+  = render 'form'
