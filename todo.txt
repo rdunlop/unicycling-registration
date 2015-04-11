@@ -6,10 +6,8 @@ the column Num unpaid is 293 and include also the Rider unpaid"
 - Add migration to set any unset position elements?
 - Add migration to require that position is not-null?
 - make the side-nav links be "active" highlighted.
-- Split apart Admin-portion of various controllers into "Convention Setup", so that layouts are properly applied? (or just mark those particular actions as having the "application" layout?)
 - Make Initial Nested-Categories fully-featured (none by default?)
  - Can we fix it so that the default eventCategory is not required?
-- Make initial Event-creation have Nested-Choices too? (none by default?)
 - BUG: first-creation of new language translation is not persisted (2nd one is)
 - Send Olaf a report of the hosting costs for prod+dev
 - replace better_erors with web-console
@@ -34,7 +32,6 @@ the column Num unpaid is 293 and include also the Rider unpaid"
 - Override Taiwan, make it into a country, not a PRC?
 - Allow admins to make payments against incomplete registrations (payment_detail creation with invalid registrant?) (for transferring payments)
 - Allow easy listing of incomplete registrants?
-- Pay_now partial "Total" is in $ (should be in EUR)
 -"Missing reg-item match" emails are sent when I'm doing manual payments. Stop this when done through the admin system?
 - Create Download for each payment ID the entire anagrafic data for each registrant involved + items bought (as listed below) + total cost of the item bought (as listed below). (as detailed in "Body_Purchase" email)
 - Do I need PDT in PayPal?
@@ -43,23 +40,11 @@ the column Num unpaid is 293 and include also the Rider unpaid"
 - Can I allow incomplete registrants to see the "Summary" page?
 - On the "All Registrants" view, remove the "Events" link for NonCompetitors/Spectators.
 - Deletion of ExpenseGroup should propogate to RegistrantExpenseItems? (M al Cubo fee)
-- ALways set "position" (event creation, event-category creation)
-- add ability to sort/save expense_group order
-- add ability to sort/save expense_item order
 - Why do simple-form select boxes have blank option by default?
 - Remove the old registrants controller paths, and improve the wizard navigation to allow jumping forward and backward. Update the specs for the buildController
 - Make "Standard Skill" event/gathering clearer.
 - Allow the user to jump forward in the wizard if they have already visited that step.
 - Fix Styling of ContactDetails page, which currently is strange with VAT
-- Require that VAT be filled in for certain types of people?
-- All prices must be listed INCLUDING VAT
-- IF someone enters VAT_Id, they are charged WITHOUT VAT
- - Do I need to validate the VAT_ID? (Probably, how?)
-- say "Including 22% VAT" somewhere
-- Italians, if they enter VAT_ID, still have to pay VAT, but Marco will submit that.
-- Italians are REQUIRED to enter a VAT_ID.
-- Are Italians able to use the same VAT_ID for themselves and also their family?
--
 
 Reorganized January 15, 2015.
 
@@ -82,13 +67,12 @@ Features which the IUF would like added:
 ===============
 
 #1 - Self-serve configuration of Registration
-- Build Wizards/Instructions design for allowing self-serve creation of a Convention
+DONE - Build Wizards/Instructions design for allowing self-serve creation of a Convention
  - Create pre-configured event types (100m, Marathon, etc) which can be chosen for inclusion in a convention
  - Guide a user through the creation of a Convention
 - Make the site more robust when creating/deleting expense items/registration periods (scott broke it easily by deleting an expense item, I think)
-- Allow administrators to reset passwords on user accounts.
-- Add ability to reset user's email password by admin-level people
-- UI for setting a user's registration period to be locked into previous period.
+DONE- Add ability to reset user's email password by admin-level people
+DONE- UI for setting a user's registration period to be locked into previous period.
 -BUG: prevent selecting dates which are not possible (Scott problem).
 -CLEANUP: Rename CompetitonWheelSize to EventWheelSizeOverride?
 
