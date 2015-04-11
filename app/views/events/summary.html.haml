@@ -56,7 +56,15 @@
 %hr
 %h3 Signed Up Volunteers
 
-%ul
-  %li= link_to "General Volunteers", general_volunteers_events_path
-  - @volunteer_opportunities.each do |vo|
-    %li= link_to vo.description, specific_volunteers_events_path(vo)
+%table.sortable
+  %thead
+    %th Volunteer Type
+    %th # Signed Up
+  %tbody
+    %tr
+      %td= link_to "General Volunteers", general_volunteers_events_path
+      %td= Registrant.active.where(volunteer: true).count
+    - @volunteer_opportunities.each do |vo|
+      %tr
+        %td= link_to vo.description, specific_volunteers_events_path(vo)
+        %td= vo.volunteer_choices.count
