@@ -37,6 +37,7 @@ class RegistrationPeriod < ActiveRecord::Base
 
   def clear_cache
     Rails.cache.delete("/registration_period/by_date/#{Date.today}")
+    RegistrationPeriod.update_current_period
   end
 
   # We allow registrations to arrive 1 day _after_ the end date,

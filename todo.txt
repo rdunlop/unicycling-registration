@@ -1,3 +1,4 @@
+- consistently put "delete" in the "edit" menu.
 - Set the current reg period when first creating them?
 - Who should be able to print registration summaries? From what page?
 - who can set registrants as ineligible?
