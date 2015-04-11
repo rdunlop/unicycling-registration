@@ -41,14 +41,16 @@ class EventConfigurationsController < ConventionSetupController
     redirect_to cache_event_configuration_path
   end
 
-  # FOR THE TEST_MODE flags
+  # Toggle a role for the current user
+  # Only enabled when the TEST_MODE flag is set
   def test_mode_role
-    new_role = params[:role]
-    roles = current_user.roles
-    roles.each do |role|
-      current_user.remove_role role.name if User.roles.include?(role.name.to_sym)
+    role = params[:role]
+
+    if current_user.has_role? role
+      current_user.remove_role role
+    else
+      current_user.add_role role
     end
-    current_user.add_role new_role unless new_role.to_sym == :normal_user
 
     redirect_to :back, notice: 'User Permissions successfully updated.'
   end
