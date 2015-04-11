@@ -13,7 +13,7 @@ describe "convention_setup/events/index" do
 
   it "renders a list of events" do
     render
-    assert_select "h2", :text => "Category: " + @category.to_s
+    assert_select "h1", :text => "Events in Category: " + @category.to_s
     # This is the same label 2x, because 2 for the event names,
     assert_select "tr>th", :text => @ev1.to_s, :count => 1
     assert_select "tr>th", :text => @ev2.to_s, :count => 1

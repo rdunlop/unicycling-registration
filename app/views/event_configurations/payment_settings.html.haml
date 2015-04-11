@@ -1,12 +1,12 @@
-%fieldset.form__fieldset
-  %h1 Payment Settings
+%h1 Payment Settings
 
+%fieldset.form__fieldset
   = simple_form_for(@event_configuration, url: update_payment_settings_event_configuration_path, method: :put) do |f|
     = render partial: "/shared/error_messages", object: @event_configuration
 
     = f.input :paypal_account
     = f.input :currency_code, collection: EventConfiguration.currency_codes
-    = f.input :paypal_mode, collection: EventConfiguration.paypal_modes
+    = f.input :paypal_mode, collection: EventConfiguration.paypal_modes, include_blank: false
     = f.input :offline_payment
     = f.input :offline_payment_description, as: :text, input_html: { class: "tinymce" }
 

@@ -9,6 +9,7 @@ class ConventionSetup::VolunteerOpportunitiesController < ConventionSetupControl
   end
 
   def new
+    add_breadcrumb "New Volunteer Opportunity"
   end
 
   # POST volunteer_opportunities

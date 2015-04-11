@@ -1,5 +1,7 @@
 %h1 Advanced Settings
 
+%p These settings enable/disable various portions of the site. Most likely you should not change any of these settings for your convention.
+
 = simple_form_for(@event_configuration, url: update_advanced_settings_event_configuration_path, method: :put, multipart: true) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
 
@@ -23,6 +25,7 @@
     = f.association :usa_family_expense_item, collection: ExpenseItem.user_manageable
 
 
+  %fieldset.form__fieldset
     %h3 Standard Skill
 
     %p
@@ -38,6 +41,7 @@
   %fieldset.form__fieldset
     = f.input :usa
     = f.input :iuf
+    IUF is Unused?
     = f.input :display_confirmed_events
     = f.input :test_mode
 
