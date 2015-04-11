@@ -78,7 +78,7 @@ module ApplicationHelper
   end
 
   def modification_access_key(date = Date.today)
-    hash = Digest::SHA256.hexdigest(date.to_s + Rails.application.config.secret_token)
+    hash = Digest::SHA256.hexdigest(date.to_s + Rails.application.secrets.secret_key_base + Apartment::Tenant.current)
     hash.to_i(16) % 1000000
   end
 

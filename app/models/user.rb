@@ -126,6 +126,7 @@ class User < ActiveRecord::Base
       Can set events offered
       Can set the volunteer options
       Can reset users passwords
+      Can set up 'Authorized Laptops' for use in on-site registration
       Can create payment_admin, event_planner, and music_dj users
       "
     when :translator

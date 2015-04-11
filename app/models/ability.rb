@@ -174,6 +174,7 @@ class Ability
       can :crud, EventCategory
       can :crud, VolunteerOpportunity
       can :read, :onsite_registration
+      can :display_acl, :permission
       can :toggle_visibility, ExpenseGroup
       can [:read, :set_role, :set_password], :permission
     end
@@ -239,7 +240,6 @@ class Ability
       can :read, VolunteerOpportunity
 
       can :manage, :payment_adjustment
-      can :display_acl, :permission
     end
 
     if user.has_role?(:race_official) || user.has_role?(:admin)

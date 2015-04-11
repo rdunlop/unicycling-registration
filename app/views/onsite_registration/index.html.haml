@@ -5,5 +5,5 @@
 
 = link_to "View Items for Sale", onsite_registration_expense_groups_path
 
-- if can?(:display_acl, :permission)
+- if can? :display_acl, :permission
   %li= link_to  'Authorized Laptop', acl_permissions_path

@@ -1,7 +1,6 @@
 - Set the current reg period when first creating them?
 - Who should be able to print registration summaries? From what page?
 - who can set registrants as ineligible?
-
 - Add ability to send an e-mail to configurable list when manual payment is completed.
 - Add display of number of remaining items for sale (when limited).
 - Clean up the Bank Transfer received/cheque-received pages
