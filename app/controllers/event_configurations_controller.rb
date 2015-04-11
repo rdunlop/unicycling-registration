@@ -75,6 +75,9 @@ class EventConfigurationsController < ConventionSetupController
     params.require(:event_configuration).permit(:standard_skill, :standard_skill_closed_date,
                                                 :usa_individual_expense_item_id, :usa_family_expense_item_id,
                                                 :italian_requirements,
+                                                :iuf,
+                                                :test_mode, :usa,
+                                                :display_confirmed_events,
                                                 enabled_locales: []
       )
   end
@@ -91,9 +94,6 @@ class EventConfigurationsController < ConventionSetupController
 
   def important_dates_params
     params.require(:event_configuration).permit(:artistic_closed_date, :music_submission_end_date, :event_sign_up_closed_date,
-                                                :start_date,
-                                                :iuf,
-                                                :test_mode, :usa,
-                                                :display_confirmed_events)
+                                                :start_date)
   end
 end

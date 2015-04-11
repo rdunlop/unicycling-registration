@@ -8,14 +8,12 @@
 
     = f.input :enabled_locales, collection: EventConfiguration.all_available_languages, input_html: { multiple: true }
 
-  %hr
   %fieldset.form__fieldset
     %h3 Tax Settings
     = f.input :italian_requirements
     .description
       Requires collection of BirthPlace from everyone, and Italian Fiscal Code from Italian registrants.
 
-  %hr
   %fieldset.form__fieldset
     %h3 Unicycling Society of America (USA) Membership Summary
 
@@ -36,5 +34,11 @@
     = f.input :standard_skill
 
     = f.input :standard_skill_closed_date
+
+  %fieldset.form__fieldset
+    = f.input :usa
+    = f.input :iuf
+    = f.input :display_confirmed_events
+    = f.input :test_mode
 
   = f.button :submit
