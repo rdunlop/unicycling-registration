@@ -1,25 +1,14 @@
 = simple_form_for(@event.persisted? ? [:convention_setup, @event] : [:convention_setup, @category, @event] ) do |f|
   = render partial: "shared/error_messages", object: @event
-  %h2 Event: #{@event.name}
   = f.input :name
 
   - if @event.persisted?
-    = f.association :category, collection: Category.all, label_method: :name
-  - else
-    = @category
-
-
-  %fieldset
-    %h3 Event Choices
-    = f.simple_fields_for :event_choices do |ec|
-      = ec.input :cell_type, collection: EventChoice.cell_types
-      = ec.input :multiple_values
-      = ec.input :label
+    = f.association :category, collection: Category.all, label_method: :name, include_blank: false
 
   %fieldset
     %h3 Event Categories
     = f.simple_fields_for :event_categories do |ec|
-      = ec.input :name, hint: "specify 'All' if there is only 1 category"
+      = ec.input :name, hint: "specify 'All' if there is only 1 category (note: advanced options are available under 'Event Categories')"
 
   = f.input :accepts_music_uploads
   = f.input :accepts_wheel_size_override

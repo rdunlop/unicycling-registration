@@ -61,7 +61,7 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
 
   def set_breadcrumbs
     add_breadcrumb "Event Categories", convention_setup_categories_path
-    add_breadcrumb "#{@event.category} Events", convention_setup_event_path(@event) if @event
+    add_breadcrumb "#{@event.category} Events", convention_setup_category_events_path(@event.category) if @event
     add_breadcrumb "Event Choices", convention_setup_event_event_choices_path(@event) if @event
   end
 
