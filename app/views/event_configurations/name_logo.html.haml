@@ -1,41 +1,15 @@
 %h1 Name & Logo
 
-= form_for(@event_configuration, url: update_name_logo_event_configuration_path, method: :put) do |f|
+= simple_form_for(@event_configuration, url: update_name_logo_event_configuration_path, method: :put) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
-  %table.alternate
-    %thead
-      %tr
-        %th Field
-        %th= long_language_name(I18n.locale)
-    %tbody
-      %tr
-        %th= f.label :short_name
-        %td= f.text_field :short_name
-      %tr
-        %th= f.label :long_name
-        %td= f.text_field :long_name
-      %tr
-        %th= f.label :location
-        %td= f.text_field :location
-      %tr
-        %th= f.label :dates_description
-        %td= f.text_field :dates_description
-      %tr
-        %th= f.label :event_url
-        %td= f.url_field :event_url
-        %td Links from the Menubar logo to this URL.
-      %tr
-        %th= f.label :logo_file
-        %td
-          = f.file_field :logo_file
-          = image_tag(@event_configuration.logo_file.url) if @event_configuration.logo_file?
-        %td Logo should be 93px x 38px
-      %tr
-        %th= f.label :contact_email
-        %td= f.text_field :contact_email
-        %td This is the target for all "Feedback" emails on the "Help" page.
-      %tr
-        %th= f.label :style_name
-        %td= f.select :style_name, EventConfiguration.style_names, include_blank: false
-
-  = f.submit
+  %fieldset.form__fieldset
+    = f.input :short_name
+    = f.input :long_name
+    = f.input :location
+    = f.input :dates_description
+    = f.input :event_url
+    = f.input :logo_file
+    = image_tag(@event_configuration.logo_file.url) if @event_configuration.logo_file?
+    = f.input :contact_email
+    = f.input :style_name, collection: EventConfiguration.style_names, include_blank: false
+    = f.button :submit

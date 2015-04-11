@@ -16,7 +16,7 @@
   .input_details
     Because many people only pay at the last possible minute, the price automatically increases ~36 hours after end of the End Date. This allows last-minute registrants a reprieve.
 
-  Competitor
+  %h3 Competitor
   = f.simple_fields_for :competitor_expense_item do |ce|
     = ce.input :cost, input_html: { class: "js--costInputComp" }
 
@@ -24,12 +24,12 @@
     Total
     = text_field_tag :total_comp, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInputComp" }
 
-  Non Competitor
+  %h3 Non Competitor
   = f.simple_fields_for :noncompetitor_expense_item do |ce|
     = ce.input :cost, input_html: { class: "js--costInputNonComp" }
 
     = ce.input :tax, input_html: { class: "js--costInputNonComp" }
     Total
     = text_field_tag :total_comp, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInputNonComp" }
-
+  %br
   = f.button :submit

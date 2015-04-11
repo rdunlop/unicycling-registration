@@ -10,14 +10,13 @@
     .help_bubble{ title: "Online: User is required to sign the waiver" }
     .help_bubble{ title: "Print: We provide a waiver for the user to print/sign at the event. (available in advance on the website so that children can have their parents sign it)" }
 
-    = f.input :custom_waiver_text, placeholder: EventConfiguration.default_waiver_text, input_html: { size: "60x12" }
+    = f.input :custom_waiver_text, placeholder: EventConfiguration.default_waiver_text
 
   %fieldset.form__fieldset
     %h3 Rules
 
     = f.input :rules_file_name
     = f.input :accept_rules, hint: "Enable this to force all registrants to accept the rules attached in PDF"
-  %hr
 
   %fieldset.form__fieldset
 

@@ -27,8 +27,9 @@
         = render partial: "shared/error_messages", object: @tenant_alias
         Enter the URL of the new domain
         = f.text_field :website_alias
-        = f.submit "Verify Alias CNAME Record"
-  %li
+        =# f.submit "Verify Alias CNAME Record"
+        = f.submit "Save Record"
+  -# %li
     = label_tag :verified, "Alias Verified"
     = check_box_tag :verified, nil, @tenant_alias.verified?, disabled: true
   %li
@@ -38,4 +39,5 @@
       - else
         = link_to "Set Alias as Primary Domain", activate_tenant_alias_path(@tenant_alias), method: :post, class: "focus_button"
     - else
-      Before you can activate the alias, you must verify it.
+      -#Before you can activate the alias, you must verify it.
+      Before you can activate the alias, you must "Save Record" it.

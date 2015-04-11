@@ -51,6 +51,17 @@ en:
         spectator_benefits: "Appears on the Registration Homepage, describing the benefits of Spectator Registration"
         paypal_test: "allow to pretend to receive payment confirmation from paypal"
         comp_noncomp_url: Specify a link which explains the difference between the offered Registration Types
+        event_url: Links from the Menubar logo to this URL.
+        logo_file: Logo should be 93px x 38px
+        contact_email: This is the target for all "Feedback" emails on the "Help" page.
+        artistic_closed_date: From this date, normal registrants cannot ADD any events marked as "Artistic"
+        music_submission_end_date: The date at which music submissions will no longer be allowed
+        event_sign_up_closed_date: After this date, ONLY administrators can add events to registrations. (though they can still remove them)
+        start_date: Registrant Ages are calculated based on this date
+        usa: This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed
+        iuf: Enabling this allows IUF membership questions.
+        display_confirmed_events: Enabling this displays the confirmed events/unconfirmed events on the Registrant-summary page.
+        test_mode: Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.
       event:
         accepts_music_uploads: Check this box if each competitor may choose music for their competition
         accepts_wheel_size_override: Setting this option presents children 10-and-younger with the ability to specify a wheel size override.
