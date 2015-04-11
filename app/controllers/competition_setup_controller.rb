@@ -3,6 +3,8 @@ class CompetitionSetupController < ApplicationController
 
   def index
     authorize! :read, :competition_setup
+
+    @categories = Category.includes(:translations).includes(:events)
   end
 
   private

@@ -170,7 +170,7 @@ Workspace::Application.routes.draw do
 
     resources :coupon_codes, only: [:show]
 
-    resources :events, only: [:index, :show] do
+    resources :events, only: [:show] do
       collection do
         get :summary
         get "specific_volunteers/:volunteer_opportunity_id", action: :specific_volunteers, as: :specific_volunteers

@@ -6,13 +6,6 @@ class EventsController < ApplicationController
 
   respond_to :html
 
-  # This should move somewhere else
-  # GET /events
-  def index
-    @categories = Category.includes(:translations).includes(:events)
-    respond_with(@categories)
-  end
-
   # GET /events/summary
   def summary
     @num_male_competitors = Registrant.active.competitor.where({:gender => "Male"}).count

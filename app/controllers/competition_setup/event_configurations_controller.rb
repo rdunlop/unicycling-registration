@@ -1,4 +1,4 @@
-class CompetitionSetup::EventConfigurationsController < ConventionSetupController
+class CompetitionSetup::EventConfigurationsController < CompetitionSetupController
   before_action :authenticate_user!
   before_action :load_event_configuration
   before_action :set_breadcrumb
