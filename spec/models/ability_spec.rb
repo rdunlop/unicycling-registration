@@ -127,16 +127,19 @@ describe "Ability" do
     subject { @ability = Ability.new(@user) }
     it { is_expected.to be_able_to(:read, :convention_setup) }
     it { is_expected.to be_able_to(:manage, EventConfiguration) }
-    it { is_expected.to be_able_to(:manage, RegistrationPeriod) }
-    it { is_expected.to be_able_to(:manage, ExpenseGroup) }
-    it { is_expected.to be_able_to(:manage, ExpenseItem) }
-    it { is_expected.to be_able_to(:manage, CouponCode) }
-    it { is_expected.to be_able_to(:manage, Category) }
-    it { is_expected.to be_able_to(:manage, Event) }
-    it { is_expected.to be_able_to(:manage, EventChoice) }
-    it { is_expected.to be_able_to(:manage, EventCategory) }
-    it { is_expected.to be_able_to(:manage, VolunteerOpportunity) }
+    it { is_expected.to be_able_to(:crud, RegistrationPeriod) }
+    it { is_expected.to be_able_to(:crud, ExpenseGroup) }
+    it { is_expected.to be_able_to(:crud, ExpenseItem) }
+    it { is_expected.to be_able_to(:crud, CouponCode) }
+    it { is_expected.to be_able_to(:crud, Category) }
+    it { is_expected.to be_able_to(:crud, Event) }
+    it { is_expected.to be_able_to(:crud, EventChoice) }
+    it { is_expected.to be_able_to(:crud, EventCategory) }
+    it { is_expected.to be_able_to(:crud, VolunteerOpportunity) }
     it { is_expected.to be_able_to(:manage, TenantAlias) }
+    it { is_expected.to be_able_to(:read, :permission)}
+    it { is_expected.to be_able_to(:set_password, :permission)}
+    it { is_expected.to be_able_to(:set_role, :permission)}
   end
 
   describe "as an admin" do

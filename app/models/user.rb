@@ -83,6 +83,7 @@ class User < ActiveRecord::Base
   # List which roles each roles can add to other users
   def self.role_transfer_permissions
     {
+      super_admin: [*roles],
       convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj],
       payment_admin: [:payment_admin],
       event_planner: [:event_planner],
@@ -94,6 +95,7 @@ class User < ActiveRecord::Base
     roles.map(&:name).inject([]) do |array, role|
       new_roles = self.class.role_transfer_permissions[role.to_sym]
       array += new_roles if new_roles.present?
+      array
     end.uniq
   end
 
