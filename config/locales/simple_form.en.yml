@@ -45,11 +45,12 @@ en:
       volunteer_opportunity:
         inform_emails: "when someone signs up for this volunteer position, an e-mail will be sent to these email addresses"
       event_configuration:
-        spectators: Spectators can buy items without paying for registration
+        spectators: Spectators are not charged "Registration Fees", and can buy items without paying for registration
         competitor_benefits: "Appears on the Registration Homepage, describing the benefits of Competitor Registration"
         noncompetitor_benefits: "Appears on the Registration Homepage, describing the benefits of NonCompetitor Registration"
         spectator_benefits: "Appears on the Registration Homepage, describing the benefits of Spectator Registration"
         paypal_test: "allow to pretend to receive payment confirmation from paypal"
+        comp_noncomp_url: Specify a link which explains the difference between the offered Registration Types
       event:
         accepts_music_uploads: Check this box if each competitor may choose music for their competition
         accepts_wheel_size_override: Setting this option presents children 10-and-younger with the ability to specify a wheel size override.
