@@ -141,16 +141,22 @@ describe RegistrationPeriod do
 end
 describe "when testing the update function for registration periods", :caching => true do
   before(:each) do
+    ActionMailer::Base.deliveries.clear
     # create a rp which encompasses "today"
     @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 12, 21), :end_date => Date.new(2020, 11, 7))
     @reg = FactoryGirl.create(:competitor) # will have rp1
     @nc_reg = FactoryGirl.create(:noncompetitor) # will have rp1
   end
-  it "initially doesn't have a current_period" do
-    expect(RegistrationPeriod.current_period).to be_nil
+  it "automically has the current_period set already" do
+    expect(RegistrationPeriod.current_period).to eq(@rp1)
   end
-  it "initially says that no update has been (yet) performed" do
-    expect(RegistrationPeriod.update_checked_recently).to eq(false)
+
+  it "says that an update has been performed recently" do
+    expect(RegistrationPeriod.update_checked_recently).to eq(true)
+  end
+
+  it "(when looking 3 days in the future) says that an update has not yet been done" do
+    expect(RegistrationPeriod.update_checked_recently(Date.today + 3.days)).to eq(false)
   end
 
   it "initially, the registrant has an expense_item from the current period" do
@@ -160,64 +166,110 @@ describe "when testing the update function for registration periods", :caching =
     expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@rp1.noncompetitor_expense_item)
   end
 
-  describe "after the update has been called" do
+  it "sends an e-mail when it changes the reg period" do
+    num_deliveries = ActionMailer::Base.deliveries.size
+    expect(num_deliveries).to eq(1)
+  end
+
+  describe "when a registrant has a LOCKED registration_item" do
+    before(:each) do
+      @original_item = rei = @reg.registration_item
+      rei.locked = true
+      rei.save
+    end
+
+    it "doesnt't update this registrants' items when moving to the next period" do
+      @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
+      Delorean.time_travel_to Date.new(2020, 12, 1) do
+        RegistrationPeriod.update_current_period
+      end
+      @reg.reload
+      expect(@reg.registration_item).to eq(@original_item)
+    end
+  end
+  describe "when updating to the next period" do
+    before(:each) do
+      @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
+      ActionMailer::Base.deliveries.clear
+      Delorean.time_travel_to Date.new(2020, 12, 1) do
+        @ret = RegistrationPeriod.update_current_period
+      end
+    end
+
+    it "it indicates that the new period has been recently updated" do
+      expect(RegistrationPeriod.update_checked_recently(Date.new(2020, 12, 2))).to eq(true)
+    end
+
+    it "indicates that it updated" do
+      expect(@ret).to eq(true)
+    end
+
+    it "updates the current_period" do
+      expect(RegistrationPeriod.current_period).to eq(@rp2)
+    end
+
+    it "changes the registrant's item to the new period" do
+      @reg.reload
+      expect(@reg.registrant_expense_items.count).to eq(1)
+      expect(@reg.registrant_expense_items.first.expense_item).to eq(@rp2.competitor_expense_item)
+
+      @nc_reg.reload
+      expect(@nc_reg.registrant_expense_items.count).to eq(1)
+      expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@rp2.noncompetitor_expense_item)
+    end
+  end
+
+  describe "when updating to a non-existent period" do
     before(:each) do
       ActionMailer::Base.deliveries.clear
-      RegistrationPeriod.update_current_period(Date.new(2012, 12, 22))
-    end
-    it "sets the current period when invoked" do
-      expect(RegistrationPeriod.current_period).to eq(@rp1)
-    end
-
-    it "says that an update has been performed recently" do
-      expect(RegistrationPeriod.update_checked_recently(Date.new(2012, 12, 22))).to eq(true)
+      Delorean.time_travel_to Date.new(2020, 12, 1) do
+        @ret = RegistrationPeriod.update_current_period
+      end
     end
 
-    it "(when looking 3 days in the future) says that an update has not yet been done" do
-      expect(RegistrationPeriod.update_checked_recently(Date.new(2012, 12, 25))).to eq(false)
+    it "indicates that it updated" do
+      expect(@ret).to eq(true)
+    end
+
+    it "updates the current_period (which is nil)" do
+      expect(RegistrationPeriod.current_period).to be_nil
     end
 
     it "sends an e-mail when it changes the reg period" do
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(1)
+      email = ActionMailer::Base.deliveries.first
+      expect(email.subject).to eq("Updated Registration Period")
     end
 
-    describe "when a registrant has a LOCKED registration_item" do
-      before(:each) do
-        @original_item = rei = @reg.registration_item
-        rei.locked = true
-        rei.save
-      end
+    it "does not delete the registrant's reg_item" do
+      @reg.reload
+      expect(@reg.registrant_expense_items.count).to eq(1)
 
-      it "doesnt't update this registrants' items when moving to the next period" do
-        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
-        @ret = RegistrationPeriod.update_current_period(Date.new(2020, 12, 1))
-        @reg.reload
-        expect(@reg.registration_item).to eq(@original_item)
-      end
+      @nc_reg.reload
+      expect(@nc_reg.registrant_expense_items.count).to eq(1)
     end
-    describe "when updating to the next period" do
+
+    describe "when updating to a now-existent period" do
       before(:each) do
         ActionMailer::Base.deliveries.clear
-        @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
-        @ret = RegistrationPeriod.update_current_period(Date.new(2020, 12, 1))
+        Delorean.time_travel_to Date.new(2020, 12, 1) do
+          @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
+          @ret = RegistrationPeriod.update_current_period
+        end
       end
 
-      it "it indicates that the new period has been recently updated" do
-        expect(RegistrationPeriod.update_checked_recently(Date.new(2020, 12, 2))).to eq(true)
-      end
-      it "indicates that it updated" do
-        expect(@ret).to eq(true)
-      end
       it "updates the current_period" do
         expect(RegistrationPeriod.current_period).to eq(@rp2)
       end
+
       it "sends an e-mail when it changes the reg period" do
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1)
         email = ActionMailer::Base.deliveries.first
         expect(email.subject).to eq("Updated Registration Period")
       end
+
       it "changes the registrant's item to the new period" do
         @reg.reload
         expect(@reg.registrant_expense_items.count).to eq(1)
@@ -226,61 +278,6 @@ describe "when testing the update function for registration periods", :caching =
         @nc_reg.reload
         expect(@nc_reg.registrant_expense_items.count).to eq(1)
         expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@rp2.noncompetitor_expense_item)
-      end
-    end
-    describe "when updating to a non-existent period" do
-      before(:each) do
-        ActionMailer::Base.deliveries.clear
-        @ret = RegistrationPeriod.update_current_period(Date.new(2020, 12, 1))
-      end
-
-      it "indicates that it updated" do
-        expect(@ret).to eq(true)
-      end
-      it "updates the current_period (which is nil)" do
-        expect(RegistrationPeriod.current_period).to be_nil
-      end
-      it "sends an e-mail when it changes the reg period" do
-        num_deliveries = ActionMailer::Base.deliveries.size
-        expect(num_deliveries).to eq(1)
-        email = ActionMailer::Base.deliveries.first
-        expect(email.subject).to eq("Updated Registration Period")
-      end
-      it "does not delete the registrant's reg_item" do
-        @reg.reload
-        expect(@reg.registrant_expense_items.count).to eq(1)
-
-        @nc_reg.reload
-        expect(@nc_reg.registrant_expense_items.count).to eq(1)
-      end
-      describe "when updating to a now-existent period" do
-        before(:each) do
-          ActionMailer::Base.deliveries.clear
-          @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
-          @ret = RegistrationPeriod.update_current_period(Date.new(2020, 12, 1))
-        end
-
-        it "indicates that it updated" do
-          expect(@ret).to eq(true)
-        end
-        it "updates the current_period" do
-          expect(RegistrationPeriod.current_period).to eq(@rp2)
-        end
-        it "sends an e-mail when it changes the reg period" do
-          num_deliveries = ActionMailer::Base.deliveries.size
-          expect(num_deliveries).to eq(1)
-          email = ActionMailer::Base.deliveries.first
-          expect(email.subject).to eq("Updated Registration Period")
-        end
-        it "changes the registrant's item to the new period" do
-          @reg.reload
-          expect(@reg.registrant_expense_items.count).to eq(1)
-          expect(@reg.registrant_expense_items.first.expense_item).to eq(@rp2.competitor_expense_item)
-
-          @nc_reg.reload
-          expect(@nc_reg.registrant_expense_items.count).to eq(1)
-          expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@rp2.noncompetitor_expense_item)
-        end
       end
     end
   end

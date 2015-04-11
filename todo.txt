@@ -1,4 +1,5 @@
 - consistently put "delete" in the "edit" menu.
+- Disable certain features on the "Test" domain...like actually receiving money from paypal... Or ???
 - Set the current reg period when first creating them?
 - Who should be able to print registration summaries? From what page?
 - who can set registrants as ineligible?
