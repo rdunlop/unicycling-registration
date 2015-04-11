@@ -37,21 +37,7 @@
           = ec.check_box :value, :title => choice.tooltip
           = ec.label :value, choice.label, :title => choice.tooltip
         - when "text"
-          - if ec.object.event_choice.autocomplete
-            - ac_class = "autocomplete#{choice.id}"
-            = ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip, :class => ac_class
-            - autocomplete_choices = []
-            - choice.unique_values.each do |c|
-              - autocomplete_choices << "'" + raw(escape_javascript(c)) + "'"
-
-            :javascript
-              $(".#{ac_class}").autocomplete({
-                              source: [
-                              #{autocomplete_choices.join(",")}
-                              ,'']
-                            });
-          - else
-            = ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip
+          = ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip
         - when "multiple"
           = ec.label :value, choice.label, :title => choice.tooltip
           = ec.select :value, ec.object.event_choice.values, {:include_blank => true}, :title => choice.tooltip

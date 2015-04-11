@@ -36,6 +36,15 @@ en:
       volunteer_opportunity:
         inform_emails: "comma-separated list of e-mail addresses"
     hints:
+      category:
+        info_url: This link appears on the Category page, and can serve as a link to additional information about the events in this category.
+      event_category:
+        warning_on_registration_summary: Any registrant who is signed up for this category will have a warning on their registration form.
+      event_choice:
+        tooltip: This will be presented when the user hovers over the label
+        optional: Allows the user to choose not to enter data in this field
+        optional_if_event_choice_id: If the user has chosen this other "Event Choice", this field is optional. (e.g. "Team name" optional if "Pickup")
+        required_if_event_choice_id: If the user has chosen this other "Event Choice", this field is required. (e.g. "Best Time Convention" if "best time")
       expense_group:
         info_url: This link appears on the expenses page, useful if the expenses need further explanation, or to show pictures
         competitor_required: An element of this expense group MUST be selected by the registrant (if there is only 1 item in the group, it will automatically be chosen)

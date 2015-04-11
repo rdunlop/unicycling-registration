@@ -12,7 +12,6 @@ describe ConventionSetup::EventChoicesController do
   def valid_attributes
     {
       cell_type: "boolean",
-      autocomplete: false,
       optional: false,
       optional_if_event_choice_id: nil,
       required_if_event_choice_id: nil,
@@ -132,7 +131,6 @@ describe ConventionSetup::EventChoicesController do
           },
           "optional"=>"0",
           "optional_if_event_choice_id"=>"",
-          "autocomplete"=>"0"
         }
       end
 

@@ -1,4 +1,6 @@
 = simple_form_for([:convention_setup, @category]) do |f|
   = f.input :name
-  = f.input :info_url
+  = f.input :info_url, input_html: { class: "js--fancyboxUrl" }
+  = link_to 'Test this URL', '#', class: "fancybox js--dynamicFancybox"
+  %br
   = f.button :submit

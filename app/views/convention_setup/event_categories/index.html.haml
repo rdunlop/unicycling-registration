@@ -1,27 +1,25 @@
 %h1 Listing Event Categories for #{@event}
-.configuration_settings_block
-  %table.js--sortable{ data: { target: update_row_order_convention_setup_event_event_categories_path(@event) } }
-    %thead
-      %tr
-        %th Name
-        %th Allowed Age Range
-        %th Warning on Registration Summary
-        %th
-        %th
-        %th
-    %tbody
-      - @event_categories.each do |event_category|
-        %tr.item{ data: { item_id: event_category.id } }
-          %td= event_category.name
-          %td= "#{event_category.age_range_start}-#{event_category.age_range_end}"
-          %td= event_category.warning_on_registration_summary
-          %td= link_to 'Edit', edit_convention_setup_event_category_path(event_category)
-          %td= link_to 'Delete', [:convention_setup, event_category], method: :delete, data: { confirm: 'Are you sure?' }
+%table.js--sortable{ data: { target: update_row_order_convention_setup_event_event_categories_path(@event) } }
+  %thead
+    %tr
+      %th Name
+      %th Allowed Age Range
+      %th Warning on Registration Summary
+      %th
+      %th
+      %th
+  %tbody
+    - @event_categories.each do |event_category|
+      %tr.item{ data: { item_id: event_category.id } }
+        %td= event_category.name
+        %td= "#{event_category.age_range_start}-#{event_category.age_range_end}"
+        %td= event_category.warning_on_registration_summary
+        %td= link_to 'Edit', edit_convention_setup_event_category_path(event_category)
+        %td= link_to 'Delete', [:convention_setup, event_category], method: :delete, data: { confirm: 'Are you sure?' }
 
-.configuration_preview_block
-  = render :partial => "/attending/preview"
-.configuration_new_entry_form
-  %fieldset.form__fieldset
-    %h3 New event_category
-    = render 'form'
-  = link_to 'Back', convention_setup_category_events_path(@event.category)
+= render :partial => "/attending/preview"
+
+%fieldset.form__fieldset
+  %h3 New event category
+  = render 'form'
+= link_to 'Back', convention_setup_category_events_path(@event.category)

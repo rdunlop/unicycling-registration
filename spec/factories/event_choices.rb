@@ -9,7 +9,6 @@
 #  position                    :integer
 #  created_at                  :datetime
 #  updated_at                  :datetime
-#  autocomplete                :boolean          default(FALSE), not null
 #  optional                    :boolean          default(FALSE), not null
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer
@@ -23,7 +22,6 @@ FactoryGirl.define do
     cell_type "boolean"
     multiple_values nil
     label "Event_choice chosen"
-    autocomplete false
     optional false
   end
 end

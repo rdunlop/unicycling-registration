@@ -78,7 +78,7 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
   end
 
   def event_choice_params
-    params.require(:event_choice).permit(:cell_type, :label, :multiple_values, :autocomplete, :optional, :tooltip,
+    params.require(:event_choice).permit(:cell_type, :label, :multiple_values, :optional, :tooltip,
                                          :optional_if_event_choice_id, :required_if_event_choice_id,
                                          :translations_attributes => [:id, :label, :tooltip, :locale])
   end

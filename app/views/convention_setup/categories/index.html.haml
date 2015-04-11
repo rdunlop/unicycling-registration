@@ -1,26 +1,20 @@
 %h1 Listing Categories
-.group
-  .configuration_settings_block
-    %table.js--sortable{ data: { target: update_row_order_convention_setup_categories_path } }
-      %thead
-        %tr
-          %th Name
-          %th Link
-          %th
-          %th
-          %th
-      %tbody
-        - @categories.each do |category|
-          %tr.item{ data: { item_id: category.id } }
-            %td= category.name
-            %td
-              %a{:href => category.info_url, :target => "_blank"} Link
-            %td= link_to 'Events', convention_setup_category_events_path(category)
-            %td= link_to 'Edit', edit_convention_setup_category_path(category)
-            %td= link_to 'Delete', [:convention_setup, category], method: :delete, data: { confirm: 'Are you sure?' }
-    %br
-    %fieldset.form__fieldset
-      %h3 New Category
-      = render 'form'
-  .configuration_preview_block
-    = render :partial => "/attending/preview"
+%table.js--sortable{ data: { target: update_row_order_convention_setup_categories_path } }
+  %thead
+    %tr
+      %th Name
+      %th
+      %th
+      %th
+  %tbody
+    - @categories.each do |category|
+      %tr.item{ data: { item_id: category.id } }
+        %td= category.name
+        %td= link_to 'Events', convention_setup_category_events_path(category)
+        %td= link_to 'Edit', edit_convention_setup_category_path(category)
+        %td= link_to 'Delete', [:convention_setup, category], method: :delete, data: { confirm: 'Are you sure?' }
+%br
+%fieldset.form__fieldset
+  %h3 New Category
+  = render 'form'
+= render :partial => "/attending/preview"

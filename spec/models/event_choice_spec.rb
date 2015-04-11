@@ -9,7 +9,6 @@
 #  position                    :integer
 #  created_at                  :datetime
 #  updated_at                  :datetime
-#  autocomplete                :boolean          default(FALSE), not null
 #  optional                    :boolean          default(FALSE), not null
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer
@@ -88,11 +87,6 @@ describe EventChoice do
 
   it "cannot have an arbitrary cell_type" do
     @ec.cell_type = "robin"
-    expect(@ec.valid?).to eq(false)
-  end
-
-  it "must have a autocomplete value" do
-    @ec.autocomplete = nil
     expect(@ec.valid?).to eq(false)
   end
 

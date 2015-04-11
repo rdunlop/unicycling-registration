@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401141025) do
+ActiveRecord::Schema.define(version: 20150411031005) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -311,7 +312,6 @@ ActiveRecord::Schema.define(version: 20150401141025) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "autocomplete",                            default: false, null: false
     t.boolean  "optional",                                default: false, null: false
     t.integer  "optional_if_event_choice_id"
     t.integer  "required_if_event_choice_id"
@@ -979,4 +979,5 @@ ActiveRecord::Schema.define(version: 20150401141025) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
 end
