@@ -22,14 +22,16 @@
   - if user_signed_in? && current_user.roles.any?
     %nav.non_printable
       %ul.navList
-        %li= link_to 'Data Entry', welcome_data_entry_menu_path
+        - if can? :data_entry_menu, :welcome
+          %li= link_to 'Data Entry', welcome_data_entry_menu_path
         - if can?(:read, :convention_setup)
           %li= link_to 'Convention Setup', convention_setup_path
-        - if can?(:manage, User)
-          %li= link_to 'User Permissions',  permissions_path
+        - if can?(:read, :permission)
+          %li= link_to 'User Management',  permissions_path
         - if can?(:summary, Event)
           %li= link_to  'Registration Overview', summary_events_path
-        %li= link_to 'Competitions', events_path
+        -# THIS SHOULD BE hidden for convention-setup people
+        %li= link_to 'Competition Overview', events_path
         - if can?(:manage, AwardLabel)
           %li= link_to  'Print/Create Awards', user_award_labels_path(current_user)
         - if can?(:list, :song)
@@ -44,7 +46,7 @@
       %ul.navList
         - if @config.standard_skill && can?(:manage, StandardSkillEntry)
           %li= link_to 'Standard Skill Entries', standard_skill_entries_path
-        - if can?(:manage, EventConfiguration)
+        - if can?(:cache, EventConfiguration)
           %li= link_to 'Cache Management', cache_event_configuration_path
         - if can?(:manage_all, :registrant)
           %li= link_to  'Registrants (edit/print)', manage_one_registrants_path
