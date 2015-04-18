@@ -1,3 +1,4 @@
+- Figure out how to re-sync new translations into tolk.
 - Email: You have been made a director email []optional
 - Restrictive email filter on stage.
 - consistently put "delete" in the "edit" menu.

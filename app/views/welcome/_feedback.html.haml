@@ -1,0 +1,9 @@
+%h4= t(".header")
+= render :partial => "/shared/error_messages", :object => @contact_form
+= form_for @contact_form, url: welcome_feedback_path do |f|
+  = f.label :email, t(".email")
+  = f.text_field :email, placeholder: t(".optional")
+  %br
+  = f.text_area :feedback, {:cols => 100, :rows => 6 }
+  %br
+  = f.submit t(".submit"), :class => "focus_button"

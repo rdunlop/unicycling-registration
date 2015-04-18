@@ -1,0 +1,7 @@
+en:
+  welcome:
+    feedback:
+      header: Feedback
+      email: Your Email
+      optional: Optional
+      submit: Send Feedback

@@ -1,5 +1,5 @@
 - cache [:help_headers] do
-  %h1 Help
+  %h1= t('.header')
   %h2 This site is for the #{@tenant.subdomain} Unicycling Convention registration
   %h3 FAQ
 
@@ -24,12 +24,4 @@
         Request access to your team's registrations through the #{link_to "Registrant Access Request", user_additional_registrant_accesses_path(@user)} Form
 If you have any problems or questions about registration, please submit feedback below:
 %br
-%h4 Feedback
-= render :partial => "/shared/error_messages", :object => @contact_form
-= form_for @contact_form, url: welcome_feedback_path do |f|
-  = f.label :email, "Your Email"
-  = f.text_field :email, :placeholder => "Optional"
-  %br
-  = f.text_area :feedback, {:cols => 100, :rows => 6 }
-  %br
-  = f.submit "Send Feedback", :class => "focus_button"
+= render "feedback"
