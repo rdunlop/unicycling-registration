@@ -46,6 +46,13 @@ gem 'whenever'
 gem 'rubocop', require: false
 gem 'gaffe'
 
+# I18n Translation
+# use rdunlop branch which has:
+#  fixed the Pagination-Load issue
+#  specific import/export functions to match the translation-file structure used
+gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
+gem 'kaminari'
+
 # multi-tenancy
 gem 'apartment'
 gem 'apartment-sidekiq'
@@ -59,7 +66,6 @@ gem 'globalize', '~> 5.0.0'
 gem 'virtus'
 gem "wicked"
 
-# gem 'sqlite3'
 gem 'pg'
 
 # deployment

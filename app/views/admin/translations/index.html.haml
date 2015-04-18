@@ -2,12 +2,9 @@
 
 %p From this page, you can adjust the translation of various Convention-specific elements
 
-%p
-  %b Note:
-  You cannot translate the website text from this page, that is only possible through the code.
-
 %hr
 
+%h2 Convention-Specific translations:
 %ul
   %li= link_to "Event Configuration", edit_translations_event_configuration_path
   %li= link_to "Categories", translations_categories_path
@@ -15,3 +12,21 @@
   %li= link_to "Expense Groups", translations_expense_groups_path
   %li= link_to "Expense Items", translations_expense_items_path
   %li= link_to "Registration Periods", translations_registration_periods_path
+
+%hr
+
+%h2 Shared Translations.
+
+%p You can also translate many other pieces of information which are shared by ALL of the registration systems
+
+%b Please be cautious when making translations here, as they will affect not only YOUR convention, but ALL conventions.
+
+%br
+= link_to "Text Translation System", tolk_path, class: "focus_button", target: "_blank"
+
+%p
+  Once you are done translation, you should press the "Apply Changes" button in the "Text Translation System" in order to apply the changes to the site.
+
+%p
+  %b Note
+  Please only "Apply Changes" when you are done, because it can has performance implications.

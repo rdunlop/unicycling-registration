@@ -9,7 +9,7 @@ set :stages, %w(prod)
 set :linked_files, %w{config/database.yml config/secrets.yml config/newrelic.yml public/robots.txt}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps config/custom_locales}
 
 before 'deploy', 'sidekiq:stop'
 after 'deploy:publishing', 'deploy:restart'

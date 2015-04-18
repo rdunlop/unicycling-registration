@@ -1,4 +1,5 @@
 Workspace::Application.routes.draw do
+  mount Tolk::Engine => '/tolk', :as => 'tolk'
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.has_role?(:admin) || u.has_role?(:super_admin) } do
     mount Sidekiq::Web => '/sidekiq'

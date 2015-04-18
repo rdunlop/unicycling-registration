@@ -154,6 +154,9 @@ class User < ActiveRecord::Base
     when :music_dj
       "[e.g. JoAnn]
       Able to view/download any music from the Manage Music page"
+    when :translator
+      "Able to access the translation menu.
+      Enter new translations, and apply them to the site"
     else
       "No Description Available"
     end

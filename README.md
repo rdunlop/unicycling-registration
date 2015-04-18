@@ -29,6 +29,7 @@ Its features include:
 * Administrative data-download options, which provide easy export of event sign
   up details.
 * Judging and scoring systems for various competition types
+* Multi-Language support, to allow the registration system to be enabled in any language
 
 
 This documentation is broken into 2 sections:
@@ -45,8 +46,53 @@ and no longer needs each convention to manage its own servers/hosting.
 Contact Robin (robin@dunlopweb.com) in order to create a new convention. Generally you
 will also want to use a 'test' instance in order to test/explore features without affecting your "live" site.
 
+
+How to add/improve Translations
+-------------------------------
+If you would like to contribute language translations, the first step is to ask for a "translator" account.
+
+Once you have a translator account, a "Translation" menu item will appear, which will allow you to see/adjust/improve the translations for any language (except English).
+
+- If you find that there is any text which only appears in English, or where the english is incorrect, please use the "Feedback" form to let me know, and I'll enable it in the translation system.
+
+
+If we want to add a new language to the list of possible translations:
+
+1. First create a root-level `base.en.yml` file, and set the "language_name"
+
+2. Add the language to the `all_available_languages` in the EventConfiguration class
+
+3. Choose the language in your Event Configuration.
+
+* app/views/layouts/application.rb - Ensure that the 'lang' attribute is appropriately set.
+
+* app/views/layouts/_footer.html.haml - Ensure that the link to the language is appropriately tagged/translated.
+
+
+Technical Details
+-----------------
+Loading the translation files into the translator app (this is only necessary once):
+
+1. `cp -R config/locales config/custom_locales`
+
+2. In a Rails Console:
+
+    Tolk::Locale.locales_config_path = Rails.root.join("config","locales")
+    Tolk::Locale.sync_from_disk!
+    Tolk::Locale.primary_locale(true) #reset the primary locale
+
+3. Restart the server
+
+
+Extracting the new translations out of the system, and back into the source-code
+
+1. Use the "Apply" button in the translation system
+
+2. scp the `config/custom_locales` onto your local machine's `config/locales`, and commit the changes.
+
+
 How to contribute time/effort to the Registration Site
-------------------------------------------------------
+======================================================
 
 The following directions assume that you can use "google", and are willing to
 read the instructions for github.
@@ -215,6 +261,11 @@ you can use the db:setup command to create the database, tables, and seed:
     $ rake db:setup
 
 
+In order for Tolk (the Translation system) to output properly, you have to seed the custom_locales directory.
+
+    $ cp -R config/locales config/custom_locales
+
+
 Event Configuration
 -------------------
 
@@ -258,24 +309,6 @@ If you would like to contribute any work to the project, please:
 * Fork the project
 * For any changes, include updated/added unit tests, and ensure that the whole suite runs
 * Create a pull request
-
-Translations
-------------
-If you would like to contribute language translations, please see:
-
-* config/locale/ - The existing translations of the static text strings used
-  in the site
-** Each of these files will need to have the new language added
-
-1. First create a root-level en.yml file, and set the "language_name"
-
-2. Add the language to the `all_available_languages` in the EventConfiguration class
-
-3. Choose the language in your Event Configuration.
-
-* app/views/layouts/application.rb - Ensure that the 'lang' attribute is appropriately set.
-
-* app/views/layouts/_footer.html.haml - Ensure that the link to the language is appropriately tagged/translated.
 
 Idea Contributions
 ------------------

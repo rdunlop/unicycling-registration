@@ -23,6 +23,15 @@ GIT
       redis (>= 2.2)
 
 GIT
+  remote: git://github.com/rdunlop/tolk.git
+  revision: 1d6fb863b4665b611a18173c673d8ec4ab05da89
+  branch: improve_import_export
+  specs:
+    tolk (1.9.1)
+      rails (>= 4.0, < 4.3)
+      safe_yaml (>= 0.8.6)
+
+GIT
   remote: git://github.com/sandelius/font-kit-rails.git
   revision: 480c979b84aa4d32652772822dee2366c37eed2e
   ref: 480c979b84aa4d32652772822dee2366c37eed2e
@@ -543,6 +552,7 @@ DEPENDENCIES
   globalize (~> 5.0.0)
   http_accept_language
   jquery-rails
+  kaminari
   money-rails
   newrelic_rpm
   paper_trail (~> 3.0.1)
@@ -568,6 +578,7 @@ DEPENDENCIES
   spreadsheet
   syntax
   tinymce-rails
+  tolk!
   uglifier (>= 1.0.3)
   unicorn
   virtus

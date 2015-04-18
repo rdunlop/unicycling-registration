@@ -1,3 +1,5 @@
+- Email: You have been made a director email []optional
+- Restrictive email filter on stage.
 - consistently put "delete" in the "edit" menu.
 - Disable certain features on the "Test" domain...like actually receiving money from paypal... Or ???
 - Set the current reg period when first creating them?

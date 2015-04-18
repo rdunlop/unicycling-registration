@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411031005) do
+ActiveRecord::Schema.define(version: 20150415020656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -888,6 +888,32 @@ ActiveRecord::Schema.define(version: 20150411031005) do
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_competitor_id", using: :btree
+
+  create_table "tolk_locales", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_locales", ["name"], name: "index_tolk_locales_on_name", unique: true, using: :btree
+
+  create_table "tolk_phrases", force: :cascade do |t|
+    t.text     "key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tolk_translations", force: :cascade do |t|
+    t.integer  "phrase_id"
+    t.integer  "locale_id"
+    t.text     "text"
+    t.text     "previous_text"
+    t.boolean  "primary_updated", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_translations", ["phrase_id", "locale_id"], name: "index_tolk_translations_on_phrase_id_and_locale_id", unique: true, using: :btree
 
   create_table "two_attempt_entries", force: :cascade do |t|
     t.integer  "user_id"
