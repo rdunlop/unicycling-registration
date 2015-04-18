@@ -1,0 +1,9 @@
+---
+en:
+  devise:
+    passwords:
+      edit:
+        action: Change my password
+        password_confirmation_label: Confirm new password
+        password_label: New password
+        title: Change your password

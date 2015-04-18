@@ -1,0 +1,12 @@
+---
+en:
+  songs:
+    add_file:
+      max_file_size: Maximum file size is %{size_mb} MB
+      note: 'NOTE:'
+      step_1: Step 1
+      step_1_description: Enter Event/Description
+      step_2: Step 2
+      title: Upload song (Step 2)
+      upload: Upload Music
+      upload_music_file: Upload Music File.

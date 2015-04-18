@@ -1,0 +1,10 @@
+---
+fr:
+  registrants:
+    contact_summary:
+      emergency_contact_attending: Personne à contacter en cas d’urgence présente
+      emergency_contact_name: Nom de la personne à contacter en cas d’urgence
+      emergency_contact_phone: Numéro de téléphone de la personne à contacter en cas
+        d’urgence
+      emergency_contact_relationship: Lien avec la personne à contacter en cas d’urgence
+      responsible_adult: Adulte responsable

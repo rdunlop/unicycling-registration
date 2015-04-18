@@ -1,0 +1,10 @@
+---
+fr:
+  registrants:
+    show_single_registrant:
+      done: Terminé
+      edit_events: Modifier les compétitions
+      edit_items: Modifier les items
+      edit_registration: Modifier l’inscription
+      printable_pdf: Imprimable (pdf)
+      registration_summary: Résumé de l’inscription

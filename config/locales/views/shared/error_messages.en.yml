@@ -1,0 +1,6 @@
+---
+en:
+  shared:
+    error_messages:
+      errors_prevented_object_from_being_saved: 'prohibited this object from being
+        saved:'

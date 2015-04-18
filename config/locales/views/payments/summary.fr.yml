@@ -1,0 +1,9 @@
+---
+fr:
+  payments:
+    summary:
+      cost: Prix
+      payment_details: Détails du paiement
+      registrant: Participant
+      tax: taxes
+      total_cost: Prix total

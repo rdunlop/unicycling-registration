@@ -1,0 +1,20 @@
+---
+fr:
+  activerecord:
+    attributes:
+      contact_detail:
+        address: Adresse
+        city: Ville
+        club: Nom de l’équipe principale ou de l’association
+        club_contact: Nom du contact de l’équipe principale ou de l’association
+        country_representing: Pays représenté
+        country_residence: Pays de residence
+        email: Courriel
+        emergency_name: Nom
+        emergency_other_phone: Autre numéro de téléphone
+        emergency_primary_phone: Numéro de téléphone principal
+        emergency_relationship: Lien
+        mobile: Numéro de portable
+        phone: Numéro de téléphone
+        responsible_adult_phone: Numéro de téléphone principal
+        zip: Code postal

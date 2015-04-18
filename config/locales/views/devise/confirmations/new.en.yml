@@ -1,0 +1,8 @@
+---
+en:
+  devise:
+    confirmations:
+      new:
+        spam_reminder: If you have not received your E-mail Confirmation message,
+          please be sure to check your SPAM filter.
+        title: Resend confirmation instructions

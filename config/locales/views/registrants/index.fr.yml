@@ -1,0 +1,16 @@
+---
+fr:
+  registrants:
+    index:
+      be_sure_to_submit_payment: Une fois vos inscriptions créées, assurez-vous de
+        soumettre un paiement.
+      can_change_events: Une fois votre inscription terminée, vous pourrez toujours
+        modifier les informations reliées à vos compétitions.
+      note_date_of_payment_html: NOTE ! – Votre <b>date de paiement définie le prix
+        de votre inscription</b>, et NON votre date d’inscription.
+      onsite_restricted_events: Afin de planifier les événements de manière appropriée,
+        l’inscription sur place ne pourra offrir tous les événements/items que la
+        pré-inscription permet.
+      registration: Inscriptions
+      registration_time: L’inscription prend environ 15 minutes.
+      whats_the_difference: Quelle est la différence ?

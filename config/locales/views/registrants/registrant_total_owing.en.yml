@@ -1,0 +1,6 @@
+---
+en:
+  registrants:
+    registrant_total_owing:
+      paid: Paid
+      unpaid: Unpaid

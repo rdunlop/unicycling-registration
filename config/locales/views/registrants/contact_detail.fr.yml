@@ -1,0 +1,15 @@
+---
+fr:
+  registrants:
+    contact_detail:
+      address: Adresse
+      attending: Présent à
+      contact_information: Coordonnées
+      country_representing_description: Si vous représentez un pays différent de celui
+        où vous résidez, entrez-le ici
+      emergency_contact: Coordonnées d’urgence
+      in_case_of_emergency: En cas d’urgence
+      responsible_adult: Adulte responsable
+      responsible_adult_detail: "(pour les participants de moins de 18 ans)"
+      state: "État"
+      state_province: "État/Province"

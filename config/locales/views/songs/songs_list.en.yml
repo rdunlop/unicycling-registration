@@ -1,0 +1,18 @@
+---
+en:
+  songs:
+    songs_list:
+      add_song: Add Song
+      changes_after_deadline: After that time, if you need to change your music, please
+        contact the director/organizers (or use 'Help'->'Feedback').
+      description: For some competitions, music is played during the competitor's
+        competition time. Please upload an mp3 with the music you would like played.
+        Please provide music of the appropriate length (see rulebook) for your competition/category.
+      download: Download
+      guest: Guest?
+      music_deadline: Music may be uploaded until %{end_date}
+      reg_name: Reg Name
+      remove: Remove
+      requirements: You are still required to have the music on a CD or MP3 player
+        at the competition. This is so that if there are technical difficulties with
+        the uploaded version, there is an alternate copy available.

@@ -1,0 +1,10 @@
+---
+en:
+  registrants:
+    registrant_events:
+      age_group: Age Group
+      category: Category
+      confirmed_events: Confirmed Events
+      event: Event
+      events: Events
+      unconfirmed_events: Unconfirmed Events

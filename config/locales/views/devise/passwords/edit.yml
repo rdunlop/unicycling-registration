@@ -1,8 +1,0 @@
-en:
-  devise:
-    passwords:
-      edit:
-        title: Change your password
-        password_label: "New password"
-        password_confirmation_label: "Confirm new password"
-        action: "Change my password"

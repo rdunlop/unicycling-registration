@@ -1,0 +1,9 @@
+---
+fr:
+  registrants:
+    registrant_choices:
+      create_new_competitor: Inscrire un nouveau compétiteur
+      create_new_noncompetitor: Inscrire un nouveau non-compétiteur
+      create_new_spectator: Inscrire un nouveau spectateur
+      recommended: Recommandé
+      registration: Inscriptions

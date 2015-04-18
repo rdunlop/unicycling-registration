@@ -1,0 +1,9 @@
+---
+en:
+  payments:
+    summary:
+      cost: Cost
+      payment_details: Payment Details
+      registrant: Registrant
+      tax: Tax
+      total_cost: Total Cost

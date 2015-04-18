@@ -1,0 +1,20 @@
+---
+en:
+  registrants:
+    index:
+      be_sure_to_submit_payment: Once you have created your registrations, be sure
+        to submit payment.
+      can_change_events: After you have finished your registration, you are still
+        able to change your event data.
+      difference_tooltip: Click here for more information!
+      link_end: page for details.
+      note_date_of_payment_html: NOTE! - It is the <b>date of your payment that defines
+        the registration fee</b>, NOT the registration date.
+      onsite_restricted_events: In order to schedule events properly, On-Site registration
+        may not offer all of the events/items that pre-registration allows.
+      registrant_access_page_title: Registrant Access
+      registrants_includes_shared: The Registrants list includes Registrants shared
+        with you. See the
+      registration: Registration
+      registration_time: Registering takes about 15 minutes.
+      whats_the_difference: What’s the difference?

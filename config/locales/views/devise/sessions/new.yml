@@ -1,6 +1,0 @@
-en:
-  devise:
-    sessions:
-      new:
-        use_access_code: "Use an access code"
-        action: "Log in"

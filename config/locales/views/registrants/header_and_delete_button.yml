@@ -1,9 +1,0 @@
-en:
-  registrants:
-    header_and_delete_button:
-      delete: "Delete"
-
-fr:
-  registrants:
-    header_and_delete_button:
-      delete: "Supprimer"

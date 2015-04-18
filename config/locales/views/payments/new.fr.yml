@@ -1,0 +1,6 @@
+---
+fr:
+  payments:
+    new:
+      select_the_items_to_pay_for: Sélectionner les items pour lesquels vous souhaitez
+        payer

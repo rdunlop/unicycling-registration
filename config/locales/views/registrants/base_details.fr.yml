@@ -1,0 +1,9 @@
+---
+fr:
+  registrants:
+    base_details:
+      base_details: Informations de base
+      birthday: Date de naissance
+      female: Femme
+      male: Homme
+      required_fields: Champs obligatoires

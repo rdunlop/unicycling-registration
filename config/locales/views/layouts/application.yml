@@ -1,8 +1,0 @@
-en:
-  layouts:
-    application:
-      registration: "Registration"
-fr:
-  layouts:
-    application:
-      registration: "Inscriptions"
