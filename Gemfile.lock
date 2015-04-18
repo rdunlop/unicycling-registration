@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: git://github.com/rdunlop/tolk.git
-  revision: 1d6fb863b4665b611a18173c673d8ec4ab05da89
+  revision: bb030c4b40c399b0e60eaafc81ca00e86f716ee7
   branch: improve_import_export
   specs:
     tolk (1.9.1)
@@ -251,7 +251,7 @@ GEM
     formatador (0.2.5)
     gaffe (1.0.2)
       rails (>= 3.2.0)
-    globalid (0.3.3)
+    globalid (0.3.5)
       activesupport (>= 4.1.0)
     globalize (5.0.1)
       activemodel (>= 4.2.0, < 4.3)
@@ -281,7 +281,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.2)
-    minitest (5.5.1)
+    minitest (5.6.0)
     monetize (1.1.0)
       money (~> 6.5.0)
     money (6.5.1)
@@ -297,7 +297,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     newrelic_rpm (3.8.1.221)
-    nokogiri (1.6.5)
+    nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
     paper_trail (3.0.1)
