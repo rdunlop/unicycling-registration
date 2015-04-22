@@ -177,6 +177,7 @@ class Ability
       can :display_acl, :permission
       can :toggle_visibility, ExpenseGroup
       can [:read, :set_role, :set_password], :permission
+      can :manage, :translation
     end
 
     if user.has_role? :music_dj
@@ -186,6 +187,7 @@ class Ability
 
     if user.has_role? :translator
       can :manage, :translation
+      can :manage, :all_site_translations
     end
 
     if user.has_role? :payment_admin

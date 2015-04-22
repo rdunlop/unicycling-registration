@@ -1,10 +1,10 @@
 - 1) Upload translations from YML
 - 2) Translate the EN into FR
 - 3) Export the EN/FR into .yml files
-- 4) Save the YML files to git
+- 4) Save the YML files to git (scp the files from /config/custom_locales into local /config/locales directory)
 - 5) create new translations in code, thus changing the en.yml file
-- 6) re-sync, and if the primary locales' phrase has changed, set the "primary_updated = true"
-- 7) delete any phrases which no longer exist in the primary locale
+- 6) re-sync, and if the primary locales' phrase has changed, set the "primary_updated = true" on all translations
+- 7) [not yet done] delete any phrases which no longer exist in the primary locale
 
 - OPEN PRs against Tolk
 

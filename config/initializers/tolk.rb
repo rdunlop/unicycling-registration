@@ -6,7 +6,7 @@
 
 require 'cancancan'
 Tolk::ApplicationController.authenticator = proc {
-  authorize! :manage, :translation
+  authorize! :manage, :all_site_translations
 }
 
 Tolk.config do |config|

@@ -15,22 +15,14 @@
 
 %hr
 
-%h2 Shared Translations.
+- if can? :manage, :all_site_translations
+  = render "all_site_translations"
+- else
+  %h2 Shared Text
 
-%p You can also translate many other pieces of information which are shared by ALL of the registration systems
+  %p There is a lot of text which is shared between all of the different conventions. If you notice some text which is not translated, and is not listed in the above types of elements, it is probably "shared" text.
 
-%b Please be cautious when making translations here, as they will affect not only YOUR convention, but ALL conventions.
-
-%br
-= link_to "Text Translation System", tolk_path, class: "focus_button", target: "_blank"
-
-%p
-  Once you are done translation, you should press the "Apply Changes" button in the "Text Translation System" in order to apply the changes to the site.
-
-%p
-  %b Note
-  Some changes may not be reflected immediately due to the caching system. (I'm working on figuring out how to improve this)
-
-%p
-  %b Note
-  Please only "Apply Changes" when you are done, because it can has performance implications.
+  %p
+    If you would like to help translate that text, please
+    = link_to "contact Robin", welcome_help_path
+    (it requires additional training)

@@ -60,9 +60,11 @@ If we want to add a new language to the list of possible translations:
 
 1. First create a root-level `base.en.yml` file, and set the "language_name"
 
-2. Add the language to the `all_available_languages` in the EventConfiguration class
+2. Download the appropriate rails i18n file from the rails-i18n project (rails.xx.yml)
 
-3. Choose the language in your Event Configuration.
+3. Add the language to the `all_available_languages` in the EventConfiguration class
+
+4. Choose the language in your Event Configuration.
 
 * app/views/layouts/application.rb - Ensure that the 'lang' attribute is appropriately set.
 
