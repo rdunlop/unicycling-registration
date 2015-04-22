@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: git://github.com/rdunlop/tolk.git
-  revision: bb030c4b40c399b0e60eaafc81ca00e86f716ee7
+  revision: 2f06dd5eee4a7808700d92db0b648f7a195f11b7
   branch: improve_import_export
   specs:
     tolk (1.9.1)

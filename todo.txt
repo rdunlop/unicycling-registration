@@ -1,7 +1,27 @@
+- 1) Upload translations from YML
+- 2) Translate the EN into FR
+- 3) Export the EN/FR into .yml files
+- 4) Save the YML files to git
+- 5) create new translations in code, thus changing the en.yml file
+- 6) re-sync, and if the primary locales' phrase has changed, set the "primary_updated = true"
+- 7) delete any phrases which no longer exist in the primary locale
+
+- OPEN PRs against Tolk
+
+- create a global_translations role, and assign it to Olaf/Mark.
+- allow convention_admin to set the translations of all other attributes
+- Allow multiple language 'login' screen?
+- Add button which will clear the cache for '/views' for i18n purposes?
 - Figure out how to re-sync new translations into tolk.
+ - refactor the sync fuction to allow for delete-those-not-present?
+ - Put in some PRs for tolk re: fixes found (pagination, documentation?)
+ - Add description to admin to ensure that they know they should also translate the various models
+ - Add ability for ConventionAdmin to set a 'translator"
+- Override Taiwan, make it into a country, not a PRC?
+- add a log-rotate function?
 - Email: You have been made a director email []optional
-- Restrictive email filter on stage.
-- consistently put "delete" in the "edit" menu.
+- Restrictive email filter on stage, but allow sign-up-without-confirmation?
+- consistently put "delete" in the "edit" menu?
 - Disable certain features on the "Test" domain...like actually receiving money from paypal... Or ???
 - Set the current reg period when first creating them?
 - Who should be able to print registration summaries? From what page?
@@ -23,23 +43,14 @@ the column Num unpaid is 293 and include also the Rider unpaid"
 - replace better_erors with web-console
 - upgrade sass-rails
 - why did I need to change to raise_with_exception? (dependent: :destroy -> dependent: :raise...)
-- install tolk for translation?
- - Adjust import routine to load all languages from i18n.backend
- - Adjust import to ignore [:world] domain
- - fix pagination
- - make Exporter write back to the same files which had the original content
- - Add authentication
 - remove respond_with class-level responders.
 - Make payment_settings: offline_payment_description into a Wysiwyg (same with waiver text field)
-
 - make all select boxes chosen-select boxes?
 - Add Ability for Convention Admin to set User Roles for:
  - Payment Admin
  - Convention Admin
 - i18n javascript "Please Wait" and other strings in JS
 - i18n controller flash messages
-
-- Override Taiwan, make it into a country, not a PRC?
 - Allow admins to make payments against incomplete registrations (payment_detail creation with invalid registrant?) (for transferring payments)
 - Allow easy listing of incomplete registrants?
 -"Missing reg-item match" emails are sent when I'm doing manual payments. Stop this when done through the admin system?
