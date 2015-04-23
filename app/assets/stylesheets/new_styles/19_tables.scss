@@ -15,3 +15,14 @@
 .active-item-shadow {
   background-color: grey;
 }
+
+.translation_language {
+  display: inline-block;
+  text-align: left;
+  border-right: 1px gray solid;
+  padding: 5px;
+}
+
+.translation_element {
+  display: block;
+}
