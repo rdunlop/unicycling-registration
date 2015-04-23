@@ -19,6 +19,35 @@ namespace :deploy do
   end
 end
 
+namespace :deploy do
+  task :install_translations => [:set_rails_env] do
+    on primary(:app) do
+      within release_path do
+        with :rails_env => fetch(:rails_env) do
+          execute :rake, "import_translations_from_yml"
+        end
+      end
+    end
+  end
+end
+after 'deploy:published', 'deploy:install_translations'
+
+namespace :translation do
+  task :download do
+    on primary(:app) do
+      download! "#{release_path}/config/custom_locales/", "config/", recursive: true
+      FileUtils.rm_rf "config/locales"
+      FileUtils.mv "config/custom_locales/", "config/locales"
+    end
+  end
+
+  task :prime do
+    on primary(:app) do
+       execute "cp -R #{release_path}/config/locales/* #{release_path}/config/custom_locales/"
+     end
+   end
+end
+
 set :whenever_command,      ->{ [:bundle, :exec, :whenever] }
 set :whenever_environment,  ->{ fetch :rails_env }
 set :whenever_identifier,   ->{ fetch :application }

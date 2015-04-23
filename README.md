@@ -75,22 +75,41 @@ Technical Details
 -----------------
 Loading the translation files into the translator app (this is only necessary once):
 
-1. `cp -R config/locales config/custom_locales`
+1. Clear the current loaded Tolk Content (** This is a very destructive step. Be warned! **)
 
-2. In a Rails Console:
+    `rake clear_translations`
 
-    Tolk::Locale.locales_config_path = Rails.root.join("config","locales")
-    Tolk::Locale.sync_from_disk!
-    Tolk::Locale.primary_locale(true) #reset the primary locale
+2. Load all translations from config/locales:
+
+    `rake import_translations_from_yml`
 
 3. Restart the server
 
 
+Downloading new translations from Tolk
+--------------------------------------
 Extracting the new translations out of the system, and back into the source-code
 
-1. Use the "Apply" button in the translation system
+1. Prime the extraction directory, so that we know which keys/translations to extract.
+    `cap stage translation:prime`
 
-2. scp the `config/custom_locales` onto your local machine's `config/locales`, and commit the changes.
+2. Use the "Apply" button in the translation system to write all Tolk Translations to disk.
+
+3. Copy the changed yml files down to your local machine:
+
+    `cap stage translation:download`
+    or
+    `cap production translation:download`
+
+    this will copy the remote `config/custom_locales` onto your local machine's `config/locales`
+
+4. Commit the changes
+
+
+Deploying code with new translations needed
+--------------------------------------------
+
+When you perform a `cap stage deploy` it will automatically run `rake import_translations_from_yml` which will update the existing Tolk translations with any new/changed keys. No further steps should be necessary.
 
 
 How to contribute time/effort to the Registration Site

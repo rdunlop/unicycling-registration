@@ -1,3 +1,5 @@
+- BUG: first-creation of new language translation is not persisted (2nd one is)
+
 - 1) Upload translations from YML
 - 2) Translate the EN into FR
 - 3) Export the EN/FR into .yml files
@@ -38,7 +40,6 @@ the column Num unpaid is 293 and include also the Rider unpaid"
 - make the side-nav links be "active" highlighted.
 - Make Initial Nested-Categories fully-featured (none by default?)
  - Can we fix it so that the default eventCategory is not required?
-- BUG: first-creation of new language translation is not persisted (2nd one is)
 - Send Olaf a report of the hosting costs for prod+dev
 - replace better_erors with web-console
 - upgrade sass-rails

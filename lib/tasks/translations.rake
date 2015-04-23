@@ -5,3 +5,12 @@ task :import_translations_from_yml => :environment do
   Tolk::Locale.sync_from_disk!
   puts "done."
 end
+
+desc "Clear Translations from Tolk"
+task :clear_translations => :environment do
+  puts "Clearing Translations..."
+  Tolk::Locale.destroy_all
+  Tolk::Phrase.destroy_all
+  Tolk::Translation.destroy_all
+  puts "done."
+end
