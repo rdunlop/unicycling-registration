@@ -19,6 +19,7 @@ class RegistrationPeriod < ActiveRecord::Base
   default_scope { order(:start_date) }
 
   validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
+  validates :name, presence: true
 
   translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
