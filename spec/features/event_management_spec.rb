@@ -14,7 +14,7 @@ describe 'Creating a Competition from an Event' do
     expect(page).to have_content("Manage Individual Competitions")
   end
 
-  describe "when on the new competition page" do
+  xdescribe "when on the new competition page" do
     before :each do
       click_link "Create New Competition"
     end
