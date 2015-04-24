@@ -1,4 +1,9 @@
 %h1= @competition
+- if can? :update, @competition
+  = link_to 'Edit', edit_competition_path(@competition)
+
+- if can? :destroy, @competition
+  = link_to 'Delete',  competition_path(@competition), :method => :delete, data: { :confirm => "Are you sure you want to destroy the COMPETITION?" }
 
 - if @competition.locked
   .locked_banner LOCKED

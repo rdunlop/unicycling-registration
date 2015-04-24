@@ -1,6 +1,8 @@
 %h1 Competition Setup
 
-%p Before we can use the competition system, configure it.
+%p Below are the list of Events which you can manage.
+
+%p Please create Director(s) for each event. You (or the director) can create Competition(s) for each event, which will dictate how the data gathering occurs for that event.
 
 %table.alternate
   %thead
@@ -13,20 +15,35 @@
       %td
 
 %h2 Events by Category
-%ul.categoryList
-  - @categories.each do |category|
-    %li
-      %strong= category
-      %ul.categoryList__eventList
-        - category.events.each do |event|
-          - if can?(:read, event)
-            %li= link_to event, event_path(event)
-
-
-- if can? :directors, :permission
-  %hr
-  %h2 Manage Directors
-  %li= link_to 'Directors', directors_permissions_path
+%table.alternate
+  %thead
+    %tr
+      %th Category
+      %th Event
+      %th Directors
+      %th Competitions
+      %th
+  %tbody
+    - @categories.each do |category|
+      - category.events.each do |event|
+        - next unless can? :read, event
+        %tr
+          %td= category
+          %td= link_to event, event_path(event)
+          %td
+            %ul.categoryList__eventList
+              - event.directors.each do |director|
+                %li= director
+          %td
+            %ul.categoryList__eventList
+              - event.competitions.each do |competition|
+                %li= link_to competition, competition
+          %td
+            %ul.categoryList__eventList
+              - if can? :directors, :permission
+                %li= link_to 'Manage Directors', directors_permissions_path
+              - if can? :create, Competition
+                %li= link_to "Create New Competition", new_event_competition_path(event)
 
 - if can? :manage, AgeGroupType
   %hr

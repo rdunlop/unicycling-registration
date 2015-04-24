@@ -45,7 +45,6 @@
     <thead>
       <tr>
         <th>Competition</th>
-        <th>Manage</th>
       </tr>
     </thead>
 
@@ -53,22 +52,10 @@
       <% @event.competitions.each do |competition| %>
         <tr>
           <td><%= link_to competition, competition %></td>
-          <td>
-            <% if can? :update, competition %>
-              <%= link_to 'Edit', edit_competition_path(competition) %>
-            <% end %>
-            <% if can? :destroy, competition %>
-              <%= link_to 'Delete',  competition_path(competition), :method => :delete, data: { :confirm => "Are you sure you want to destroy the COMPETITION?" } %>
-            <% end %>
-          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-<% end %>
-
-<% if can? :create, Competition %>
-  <%= link_to "Create New Competition", new_event_competition_path(@event) %><br />
 <% end %>
 
 <hr />
