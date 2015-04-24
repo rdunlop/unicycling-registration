@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
       @contact_form.update_from_user(current_user)
     end
 
-    if @contact_form.valid? && (signed_in? || verify_recaptcha)
+    if @contact_form.valid? && captcha_valid?
       Notifications.send_feedback(@contact_form.serialize).deliver_later
       respond_to do |format|
         format.html { redirect_to welcome_help_path, notice: 'Feedback sent successfully.' }
@@ -38,7 +38,19 @@ class WelcomeController < ApplicationController
     @director_events = Event.with_role(:director, current_user)
   end
 
+
   private
+
+  def captcha_valid?
+    return true unless recaptcha_required?
+
+    verify_recaptcha
+  end
+
+  def recaptcha_required?
+    Rails.application.secrets.recaptcha_private_key.present? && !signed_in?
+  end
+  helper_method :recaptcha_required?
 
   # This tries to get around the apple-touch-icon.png requests
   #  and the humans.txt requests

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "welcome/help" do
   before :each do
+    allow(view).to receive(:recaptcha_required?).and_return(false)
     assign(:tenant, FactoryGirl.create(:tenant))
   end
 
