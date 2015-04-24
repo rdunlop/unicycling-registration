@@ -53,6 +53,7 @@ gem 'gaffe'
 #  specific import/export functions to match the translation-file structure used
 gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 gem 'kaminari'
+gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 # multi-tenancy
 gem 'apartment'
