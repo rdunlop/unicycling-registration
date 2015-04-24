@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
       @contact_form.update_from_user(current_user)
     end
 
-    if @contact_form.valid?
+    if @contact_form.valid? && (signed_in? || verify_recaptcha)
       Notifications.send_feedback(@contact_form.serialize).deliver_later
       respond_to do |format|
         format.html { redirect_to welcome_help_path, notice: 'Feedback sent successfully.' }

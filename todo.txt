@@ -1,4 +1,4 @@
-- BUG: first-creation of new language translation is not persisted (2nd one is)
+- Certificate request from Hugo.
 
 - 1) Upload translations from YML
 - 2) Translate the EN into FR
@@ -14,11 +14,6 @@
 - allow convention_admin to set the translations of all other attributes
 - Allow multiple language 'login' screen?
 - Add button which will clear the cache for '/views' for i18n purposes?
-- Figure out how to re-sync new translations into tolk.
- - refactor the sync fuction to allow for delete-those-not-present?
- - Put in some PRs for tolk re: fixes found (pagination, documentation?)
- - Add description to admin to ensure that they know they should also translate the various models
- - Add ability for ConventionAdmin to set a 'translator"
 - Override Taiwan, make it into a country, not a PRC?
 - add a log-rotate function?
 - Email: You have been made a director email []optional
