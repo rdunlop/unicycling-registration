@@ -88,7 +88,7 @@ describe Compete::CombinedCompetitionsController do
       it "redirects to the combined_competition" do
         combined_competition = CombinedCompetition.create! valid_attributes
         put :update, {:id => combined_competition.to_param, :combined_competition => valid_attributes}
-        expect(response).to redirect_to(combined_competition)
+        expect(response).to redirect_to(combined_competitions_path)
       end
     end
 
