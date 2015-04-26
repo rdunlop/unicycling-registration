@@ -39,12 +39,12 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1
   def show
-    add_breadcrumb "New Payment"
+    add_breadcrumb t("new_payment", scope: "breadcrumbs")
   end
 
   # GET /payments/new
   def new
-    add_breadcrumb "New Payment"
+    add_breadcrumb t("new_payment", scope: "breadcrumbs")
     payment_creator = PaymentCreator.new(@payment)
     current_user.accessible_registrants.each do |reg|
       payment_creator.add_registrant(reg)
@@ -99,7 +99,7 @@ class PaymentsController < ApplicationController
 
   def set_payments_breadcrumb
     if @user == current_user
-      add_breadcrumb "My Payments", user_payments_path(current_user)
+      add_breadcrumb t("my_payments", scope: "layouts.navbar"), user_payments_path(current_user)
     end
   end
 end

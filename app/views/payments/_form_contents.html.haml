@@ -3,11 +3,11 @@
 %table.sortable
   %thead
     %tr
-      %th= t(".registrant")
-      %th Item
+      %th= Registrant.model_name.human
+      %th= RegistrantExpenseItem.model_name.human
       %th= t(".details")
       %th= t(".cost")
-      %th Taxes
+      %th= RegistrantExpenseItem.human_attribute_name(:tax)
       %th= t(".total_cost")
       %th.choose_payments
         %a#unselect_all{:href => "#"}>= t(".unselect_all")
@@ -38,7 +38,7 @@
   %tfoot
     %tr
       %th{:colspan => "4"}
-      %th Total
+      %th= Payment.human_attribute_name(:total)
       %th.js--total
       %th.choose_payments
 .actions

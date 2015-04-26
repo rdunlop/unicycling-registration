@@ -4,3 +4,6 @@ fr:
     attributes:
       registrant:
         online_waiver_signature: Signee
+    models:
+      registrant:
+        one: Participant

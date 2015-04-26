@@ -4,7 +4,6 @@ en:
     form_contents:
       cost: Cost
       details: Details
-      registrant: Registrant
       select_all: Select All
       start_payment: Start Payment
       total_cost: Total Cost

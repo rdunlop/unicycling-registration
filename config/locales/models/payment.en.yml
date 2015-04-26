@@ -1,0 +1,6 @@
+---
+en:
+  activerecord:
+    attributes:
+      payment:
+        total: Total

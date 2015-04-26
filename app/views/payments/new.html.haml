@@ -1,0 +1,8 @@
+%h1= t(".title")
+%div
+  = t(".select_the_items_to_pay_for")
+  \:
+.payment_details
+  = render '/payments/form'
+%div
+  = link_to t('back'), user_registrants_path(current_user)

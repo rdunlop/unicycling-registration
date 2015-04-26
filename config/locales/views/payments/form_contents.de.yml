@@ -4,7 +4,6 @@ de:
     form_contents:
       cost: Kosten
       details: Details
-      registrant: Angemeldeter
       select_all: Alles auswählen
       start_payment: Bezahlung beginnen
       total_cost: Komplette Kosten
