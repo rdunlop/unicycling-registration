@@ -32,7 +32,7 @@ class Compete::CombinedCompetitionsController < ApplicationController
   # PATCH/PUT /combined_competitions/1
   def update
     if @combined_competition.update(combined_competition_params)
-      redirect_to @combined_competition, notice: 'Combined competition was successfully updated.'
+      redirect_to combined_competitions_path, notice: 'Combined competition was successfully updated.'
     else
       render action: 'edit'
     end

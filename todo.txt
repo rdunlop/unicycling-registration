@@ -47,9 +47,6 @@ the column Num unpaid is 293 and include also the Rider unpaid"
 - remove respond_with class-level responders.
 - Make payment_settings: offline_payment_description into a Wysiwyg (same with waiver text field)
 - make all select boxes chosen-select boxes?
-- Add Ability for Convention Admin to set User Roles for:
- - Payment Admin
- - Convention Admin
 - i18n javascript "Please Wait" and other strings in JS
 - i18n controller flash messages
 - Allow admins to make payments against incomplete registrations (payment_detail creation with invalid registrant?) (for transferring payments)
