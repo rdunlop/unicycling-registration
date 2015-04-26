@@ -86,4 +86,14 @@ module ApplicationHelper
     override_by_env = Rails.application.secrets.mail_skip_confirmation
     override_by_env || allow_reg_modifications?
   end
+
+  def new_locale_path(new_locale, existing_path = request.original_fullpath)
+    current_locale_prefix = "/#{I18n.locale}/"
+    if existing_path.starts_with?(current_locale_prefix)
+      "/#{new_locale}/" + existing_path[current_locale_prefix.length..-1]
+    else
+      root_path(locale: new_locale)
+    end
+  end
+
 end
