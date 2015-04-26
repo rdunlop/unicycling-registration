@@ -11,3 +11,14 @@ en:
 
         Payment #%{payment_number} has been completed.
       subject: Payment Received
+    payment_completed:
+      body: |-
+        %{event_name} - Payment Received.
+
+        A payment for %{amount} has been received.
+
+        Log in, and choose 'My Payments' to see full details.
+
+        Payment #%{payment_number} has been completed.
+
+      subject: Payment Compleetd

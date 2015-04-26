@@ -6,3 +6,5 @@ de:
         in, und wähle 'Meine Zahlungen' um alle Details zu sehen.\r\n\r\nZahlung #%{payment_number}
         ist vollständig."
       subject: Zahlung erhalten
+    payment_complteed:
+      subject: Zahlung erhalten
