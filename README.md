@@ -97,7 +97,7 @@ Extracting the new translations out of the system, and back into the source-code
 
     `cap stage translation:download`
     or
-    `cap production translation:download`
+    `cap prod translation:download`
 
     this will copy the remote `config/custom_locales` onto your local machine's `config/locales`
 

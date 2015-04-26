@@ -23,4 +23,7 @@ de:
         responsible_adult_phone: Haupt Rufnummer
         usa_member_number: USA Mitglieds Nummer
         zip: Postleitzahl
-    models: 
+    models:
+      contact_detail:
+        one: Kontakt Detail
+        other: Kontakt Details

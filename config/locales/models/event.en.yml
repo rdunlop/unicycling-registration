@@ -4,7 +4,3 @@ en:
     attributes:
       event:
         id: ID
-    models:
-      contact_detail:
-        one: Contact Detail
-        other: Contact Details
