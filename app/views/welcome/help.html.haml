@@ -1,27 +1,30 @@
-- cache [:help_headers] do
+- cache [:help_headers, I18n.locale] do
   %h1= t('.header')
-  %h2 This site is for the #{@tenant.subdomain} Unicycling Convention registration
-  %h3 FAQ
+  %h2= t(".subheader", domain: @tenant.subdomain)
+  %h3= t(".frequently_asked_questions")
 
 .help_text
   %ul
     %li
-      %b I cannot Log in:
-      Once you have Signed Up, check your e-mail for a confirmation message. Check all spam filters. Choose "Resend Confirmation E-mail" if you cannot find the e-mail
+      %b= t(".i_cannot_login")
+      \:
+      = t(".login_help")
     %li
-      %b> Translations
-      \: I found a missing/mistake in a translation. Submit the translation details here in the 'feedback', or apply to be a translator, and help do more of the translations for a language.
+      %b= t(".translations")
+      \:
+      = t(".translation_help")
     %li
-      %b How do I Register:
-      Once you have signed in, choose "Create New Competitor" or "Create New Non-Competitor" and fill out the fields.
-      %br
-      Pay for the registration in order to secure your registration
+      %b= t(".registration")
+      \:
+      = t(".registration_help")
     %li
-      %b How to share Registration Details:
-      As a Team Captain or Club leader you can request access so that you can pay for other members' registrations, as well as see the events that they have signed up for
+      %b= t(".sharing_registration_details")
+      \:
+      = t(".sharing_registration_details_help")
       %br
       - if signed_in?
-        Request access to your team's registrations through the #{link_to "Registrant Access Request", user_additional_registrant_accesses_path(@user)} Form
-If you have any problems or questions about registration, please submit feedback below:
+        = t(".sharing_link", link: link_to(AdditionalRegistrantAccess.model_name.human, user_additional_registrant_accesses_path(@user)) ).html_safe
+
+= t(".general_help")
 %br
 = render "feedback"

@@ -1,0 +1,7 @@
+---
+en:
+  payments:
+    add_coupon:
+      have_a_coupon: Have a coupon?
+      submit: Apply Coupon Code
+      coupon_code: Coupon Code

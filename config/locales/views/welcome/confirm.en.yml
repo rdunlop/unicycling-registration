@@ -1,0 +1,6 @@
+en:
+  welcome:
+    confirm:
+      confirm_header: Confirm Your Email
+      check_email: Please check your E-mail for a confirmation message
+      verify_account: You must verify your account before you can sign in
