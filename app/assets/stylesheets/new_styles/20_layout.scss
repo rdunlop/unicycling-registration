@@ -15,3 +15,14 @@
   display: inline-block;
   vertical-align: top;
 }
+
+.translation_examples {
+  text-align: left;
+
+  .example {
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid black;
+    padding: 10px;
+  }
+}
