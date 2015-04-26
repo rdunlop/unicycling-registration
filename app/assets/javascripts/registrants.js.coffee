@@ -15,36 +15,41 @@ $ ->
   $(document).on "click", "#copy_address", ->
     $('#registrant_contact_detail_attributes_address').val($(this).data("address"));
     $('#registrant_contact_detail_attributes_city').val($(this).data("city"));
-    $('#registrant_contact_detail_attributes_state').val($(this).data("state"));
     $('#registrant_contact_detail_attributes_country').val($(this).data("country"));
     $('#registrant_contact_detail_attributes_zip').val($(this).data("zip"));
     $('#registrant_contact_detail_attributes_phone').val($(this).data("phone"));
     $('#registrant_contact_detail_attributes_country_residence').val($(this).data("country-residence"));
     $('#registrant_contact_detail_attributes_country_representing').val($(this).data("country-representing"));
-    $('select#registrant_contact_detail_attributes_country_residence').trigger('change');
+
+    # store the state so that the ajax callback can select the correct state
+    $('select#registrant_contact_detail_attributes_country_residence').data("state-to-be", $(this).data("state"));
+
+    $('select#registrant_contact_detail_attributes_country_residence').trigger('chosen:updated');
+    $('select#registrant_contact_detail_attributes_country_residence').trigger("change");
+    $('select#registrant_contact_detail_attributes_country_representing').trigger('chosen:updated');
     return false;
 
 $(document).ready ->
   $('input, textarea').placeholder()
 
 $ ->
-    $(".display_new_registrant").hide()
-    $(".js--display_new_registrant").click ->
-        reg_type = $(this).data("registrantType")
+  $(".display_new_registrant").hide()
+  $(".js--display_new_registrant").click ->
+    reg_type = $(this).data("registrantType")
 
-        el = $(".display_new_registrant")
-        el.removeClass(el.data('displaying'))
-        el.addClass("show_#{reg_type}_elements")
-        el.data("displaying", "show_#{reg_type}_elements")
+    el = $(".display_new_registrant")
+    el.removeClass(el.data('displaying'))
+    el.addClass("show_#{reg_type}_elements")
+    el.data("displaying", "show_#{reg_type}_elements")
 
-        $(".display_new_registrant").show("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
-        $("#registrant_registrant_type").val(reg_type)
-        top_pos = el.offset().top
-        $('body').animate({scrollTop:top_pos}, 600)
-        return false
-    $(".js--hide_new_registrant").click ->
-        $(".display_new_registrant").hide("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
-        return false
+    $(".display_new_registrant").show("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
+    $("#registrant_registrant_type").val(reg_type)
+    top_pos = el.offset().top
+    $('body').animate({scrollTop:top_pos}, 600)
+    return false
+  $(".js--hide_new_registrant").click ->
+    $(".display_new_registrant").hide("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
+    return false
 
 $ ->
   $('select#registrant_contact_detail_attributes_country_residence').change (event) ->
@@ -56,4 +61,9 @@ $ ->
 
     url = "/registrants/subregion_options?parent_region=#{country_residence}"
     select_wrapper.load url, ->
-        new ChosenEnabler($(".chosen-select"))
+      new ChosenEnabler($(".chosen-select"))
+      state = $('select#registrant_contact_detail_attributes_country_residence').data("state-to-be");
+      if state != undefined
+        $('#registrant_contact_detail_attributes_state_code').val(state);
+        $('select#registrant_contact_detail_attributes_state_code').trigger("chosen:updated");
+
