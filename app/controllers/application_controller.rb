@@ -2,7 +2,10 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
 
+  before_action :load_config_object
   before_action :set_locale
+  before_action :load_tenant
+
   before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
   protect_from_forgery
@@ -22,8 +25,6 @@ class ApplicationController < ActionController::Base
     Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
     redirect_to root_path, :alert => exception.message
   end
-  before_action :load_tenant
-  before_action :load_config_object
 
   def raise_not_found!
     raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
