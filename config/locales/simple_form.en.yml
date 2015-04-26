@@ -35,6 +35,10 @@ en:
         code: "Code for user to enter"
       volunteer_opportunity:
         inform_emails: "comma-separated list of e-mail addresses"
+      competitor_expense_item:
+        cost: "e.g. 12.00"
+      noncompetitor_expense_item:
+        cost: "e.g. 12.00"
     hints:
       category:
         info_url: This link appears on the Category page, and can serve as a link to additional information about the events in this category.
@@ -51,6 +55,7 @@ en:
         noncompetitor_required: An element of this expense group MUST be selected by the registrant (if there is only 1 item in the group, it will automatically be chosen)
       coupon_code:
         inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone uses this coupon"
+        price: The price to be charged when using this coupon.
       volunteer_opportunity:
         inform_emails: "when someone signs up for this volunteer position, an e-mail will be sent to these email addresses"
       event_configuration:
@@ -60,6 +65,7 @@ en:
         spectator_benefits: "Appears on the Registration Homepage, describing the benefits of Spectator Registration"
         paypal_test: "allow to pretend to receive payment confirmation from paypal"
         comp_noncomp_url: Specify a link which explains the difference between the offered Registration Types
+        dates_description: This description appears on the not-logged-in page, and should describe the dates of the convention.
         event_url: Links from the Menubar logo to this URL.
         logo_file: Logo should be 93px x 38px
         contact_email: This is the target for all "Feedback" emails on the "Help" page.

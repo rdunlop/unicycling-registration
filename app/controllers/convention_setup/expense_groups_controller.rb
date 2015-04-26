@@ -60,7 +60,7 @@ class ConventionSetup::ExpenseGroupsController < ConventionSetupController
   end
 
   def set_breadcrumbs
-    add_breadcrumb "Other Items For Sale", expense_groups_path
+    add_breadcrumb "Items For Sale", expense_groups_path
   end
 
   def expense_group_params
