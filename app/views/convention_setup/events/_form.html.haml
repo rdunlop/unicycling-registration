@@ -8,7 +8,7 @@
   %fieldset
     %h3 Event Categories
     = f.simple_fields_for :event_categories do |ec|
-      = ec.input :name, hint: "specify 'All' if there is only 1 category (note: advanced options are available under 'Event Categories')"
+      = ec.input :name, label: "Event Category Name", hint: "specify 'All' if there is only 1 category (note: advanced options are available under 'Event Categories')"
 
   = f.input :accepts_music_uploads
   = f.input :accepts_wheel_size_override
