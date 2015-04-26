@@ -1,0 +1,7 @@
+---
+de:
+  activerecord:
+    attributes:
+      registrant:
+        bib_number: ID
+        online_waiver_signature: Unterschrift

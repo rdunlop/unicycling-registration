@@ -1,0 +1,9 @@
+---
+de:
+  registrants:
+    contact_summary:
+      emergency_contact_attending: Teilnehmender Notfall Kontakt
+      emergency_contact_name: Name der Notfall Kontaktperson
+      emergency_contact_phone: Telefonnummer der Notfall Kontaktperson
+      emergency_contact_relationship: Beziehung zur Notfall Kontaktperson
+      responsible_adult: Verantwortlicher Erwachsener

@@ -1,0 +1,10 @@
+---
+de:
+  devise:
+    registrations:
+      new:
+        confirmation_reminder: Nach der Registrierung erhältst du eine Email die du
+          öffnen musst um deine EMail Adresse zu bestätigen
+        header: Registrieren
+        password_min_length: "(mindestens 6 Zeichen)"
+        sign_up: Registrieren

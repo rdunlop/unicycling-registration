@@ -1,0 +1,8 @@
+---
+de:
+  registrants:
+    build:
+      set_wheel_sizes:
+        default_wheel_size: Standard Radgröße
+        default_wheel_size_description: Verwendet um ALtersklassen zu wählen soweit
+          zutreffend. (Rennbahn, Standard Wettkämpfe)

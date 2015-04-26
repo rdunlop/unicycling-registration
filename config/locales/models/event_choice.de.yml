@@ -1,0 +1,7 @@
+---
+de:
+  activerecord:
+    attributes:
+      event_choice:
+        optional_if_event_choice_id: Optional wenn diese Event Art gewählt wurde
+        required_if_event_choice_id: Erforderlich wenn diese Event Art gewählt wurde

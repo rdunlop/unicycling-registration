@@ -1,0 +1,9 @@
+---
+de:
+  registrants:
+    registrant_choices:
+      create_new_competitor: Neuen Teilnehmer anlegen
+      create_new_noncompetitor: Neuen Begleiter Anlegen
+      create_new_spectator: Neuen Zuschauer Anlegen
+      recommended: Empfohlen
+      registration: Anmeldung

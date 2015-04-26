@@ -1,0 +1,11 @@
+---
+de:
+  devise:
+    mailer:
+      confirmation_instructions:
+        action: Bestätige mein Konto
+        confirm_your_account_instructions: 'Du kannst dein Konto Email durch den Link
+          im folgenden bestätigen:'
+        copy_paste_instructions: Wenn der Link nicht funktioniert, kopiere die URL
+          direkt in deinen Browser.
+        welcome_message: Wilkommen %{email} zur Einrad Anmeldung!

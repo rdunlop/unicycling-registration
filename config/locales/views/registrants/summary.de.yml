@@ -1,0 +1,12 @@
+---
+de:
+  registrants:
+    summary:
+      age: Alter
+      birthday: Geburtstag
+      default_wheel_size: Standard Radgröße
+      gender: Geschlecht
+      name: Name
+      registration_summary: Anmelde Zusammenfassung
+      user_account_email: Email des Benutzer Kontos
+      volunteer: Freiwilliger Helfer

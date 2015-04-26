@@ -1,0 +1,23 @@
+---
+de:
+  registrants:
+    contact_detail:
+      address: Adresse
+      attending: Teilnehmen
+      contact_information: Kontakt Informationen
+      copy_from_other_registrant: Kopiere die Adresse von %{other_name}
+      country_representing_description: Wenn du ein anderes Land als dein Heimatland
+        repräsentierst, trag es hier ein
+      email_tooltip: Gib deine EMail Adresse an um Aktualisierungen zur Anmeldung,
+        dem Zeitplan und neuen Wettbewerben zu erhalten.
+      emergency_contact: Notfall Kontakt
+      in_case_of_emergency: In einem Notfall
+      responsible_adult: Verantwortlicher Erwachsener
+      responsible_adult_detail: "(für Angemeldete die nicht Volljährig sind)"
+      responsible_adult_tooltip: Der 'verantwortliche Erwachsene' ist verantwortlich
+        für den angemeldeten minderjährigen.
+      state: Bundesland
+      state_province: Bundesland/Region
+      team_affiliation: Team Zugehörigkeit
+      usa_membership_number_tooltip: Eine USA Mitgliedschaft ist erforderlich um an
+        der %{convention_name} teilnehmen zu können

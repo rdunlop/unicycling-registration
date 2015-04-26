@@ -1,0 +1,7 @@
+---
+de:
+  devise:
+    sessions:
+      new:
+        action: Anmelden
+        use_access_code: Verwende einen Zugangs Code

@@ -1,0 +1,11 @@
+---
+de:
+  registrants:
+    show_single_registrant:
+      done: Fertig
+      edit_events: Wettbewerbe bearbeiten
+      edit_items: Artikel bearbeiten
+      edit_registration: Anmeldung bearbeiten
+      list_payments: Zahlungen auflisten
+      printable_pdf: Druckversion (PDF)
+      registration_summary: Anmelde Zusammenfassung

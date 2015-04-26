@@ -1,0 +1,26 @@
+---
+de:
+  activerecord:
+    attributes:
+      contact_detail:
+        address: Adresse
+        birthplace: Geburtsort
+        city: Stadt
+        club: Haupt Team oder Vereins Name
+        club_contact: Haupt Team oder Vereins Kontakt
+        country_representing: Repräsentiertes Land
+        country_residence: Heimatland
+        email: Email
+        emergency_name: Name
+        emergency_other_phone: Alternative Rufnummer
+        emergency_primary_phone: Haupt Rufnummer
+        emergency_relationship: Beziehung
+        italian_fiscal_code: Umsatzsteuer Ident Nummer (erforderlich für Italienische
+          Teilnehmer)
+        mobile: Mobiltelefonnummer
+        phone: Telefonnummer
+        responsible_adulte_name: Name
+        responsible_adult_phone: Haupt Rufnummer
+        usa_member_number: USA Mitglieds Nummer
+        zip: Postleitzahl
+    models: 
