@@ -6,5 +6,5 @@
   = f.input :inform_emails
   = f.input :price
   = f.input :max_num_uses
-  = f.association :expense_items, collection: ExpenseItem.user_manageable.includes(:translations).order(:name).all, label_method: :name, include_blank: true, input_html: { multiple: true, class: "chosen-select" }
+  = f.association :expense_items, collection: ExpenseItem.includes(:translations).order(:name).all, label_method: :to_s, include_blank: true, input_html: { multiple: true, class: "chosen-select" }
   = f.button :submit

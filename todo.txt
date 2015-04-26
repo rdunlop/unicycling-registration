@@ -1,4 +1,9 @@
+- Make EventConfiguration "submit" action say "Save & Continue"
+ - Make it always actually continue
+- Add markings which would indicate that we've finished a configuration step.
+- i18n the javascript "are you sure you want to leave"
 - Certificate request from Hugo.
+- Confirm that naucc2015 is using coupon codes with Registration items, and adjust coupon_codes/_form.thml.haml appropriately.
 
 - 1) Upload translations from YML
 - 2) Translate the EN into FR
