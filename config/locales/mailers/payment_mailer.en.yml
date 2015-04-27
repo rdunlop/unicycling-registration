@@ -21,4 +21,4 @@ en:
 
         Payment #%{payment_number} has been completed.
 
-      subject: Payment Compleetd
+      subject: Payment Completed
