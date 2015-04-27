@@ -14,3 +14,8 @@ en:
         short_name: Short Name
         spectator_benefits: Spectator Benefits
         start_date: First Day of Competition
+  helpers:
+    submit:
+      event_configuration:
+        create: "Save & Continue"
+        update: "Save & Continue"
