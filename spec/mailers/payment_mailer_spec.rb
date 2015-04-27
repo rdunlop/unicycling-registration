@@ -29,7 +29,7 @@ describe PaymentMailer do
     end
 
     it "renders the headers" do
-      expect(@mail.subject).to eq("Payment completed")
+      expect(@mail.subject).to eq("Payment Completed")
       expect(@mail.to).to eq([payment.user.email])
       expect(@mail.bcc).to eq(["robin+p@dunlopweb.com"])
       expect(@mail.from).to eq(["from@example.com"])
