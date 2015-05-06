@@ -1,3 +1,12 @@
+New Rules changes:
+- 1.11 -  Must post the Name + Country of all competitors/results
+       - Must post the Name + Country of all judges on the panel?
+- Identify the country represented by a Competitor (based on the residence/representing, or arbitrary choice?)
+- Create a "Clerk" role which can access read-only access for lane assignments.
+- Create a "Picker" role which can assess Lane-finish/DQ at track races.
+- Create a "Recorder" role for various events
+-
+
 - Make EventConfiguration "submit" action say "Save & Continue"
  - Make it always actually continue
 - Add markings which would indicate that we've finished a configuration step.
