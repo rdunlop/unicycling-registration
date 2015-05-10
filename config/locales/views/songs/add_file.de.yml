@@ -3,10 +3,10 @@ de:
   songs:
     add_file:
       max_file_size: Die maximale Dateigröße beträgt %{size_mb} MB
-      note: 'HINWEIS:'
+      note: 'Hinweis:'
       step_1: Schritt 1
       step_1_description: Wettbewerb/Beschreibung eingeben
       step_2: Schritt 2
       title: Lied hochladen (Schritt 2)
       upload: Musik hochladen
-      upload_music_file: Musik Datei hochladen
+      upload_music_file: Musik Datei hochladen.

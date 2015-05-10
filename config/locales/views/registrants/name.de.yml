@@ -2,6 +2,6 @@
 de:
   registrants:
     name:
-      first_name: Zuerst
-      last_name: Zuletzt
+      first_name: Vorname
+      last_name: Nachname
       name: Name

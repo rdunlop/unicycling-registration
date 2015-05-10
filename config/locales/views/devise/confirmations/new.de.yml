@@ -3,6 +3,6 @@ de:
   devise:
     confirmations:
       new:
-        spam_reminder: Wenn du keine Bestätigungs Email erhalten hast, überprüfe deinen
-          Spam Filter
+        spam_reminder: Wenn du keine Bestätigungs E-Mail erhalten hast, überprüfe
+          deinen Spam Filter
         title: Bestätigungs Instruktionen erneut senden

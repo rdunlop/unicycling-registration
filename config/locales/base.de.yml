@@ -5,9 +5,12 @@ de:
   breadcrumbs:
     home: Startseite
     my_registrants: Meine Anmeldungen
+    new_payment: Neue Zahlung
   cancel: Verwerfen
   competitor: Teilnehmer
   date:
+    formats:
+      registration_date_format: "%d %b, %Y"
     order:
     - :month
     - :day
@@ -15,7 +18,7 @@ de:
   language_name: Deutsch
   'no': Nein
   noncompetitor: Begleiter
-  prices_increase_at_date: Der Preis steigt am %{end_date}
+  prices_increase_at_date: Der Preis steigt in %{end_date}
   prices_increase_soon: Der Preis steigt in weniger als einem Tag
   spectator: Zuschauer
   wizard:

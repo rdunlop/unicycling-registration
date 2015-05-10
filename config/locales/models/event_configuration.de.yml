@@ -14,3 +14,8 @@ de:
         short_name: Kurzname
         spectator_benefits: Zuschauer Vorteile
         start_date: Erster Tag der Veranstaltung
+  helpers:
+    submit:
+      event_configuration:
+        create: Speichern und weiter
+        update: Speichern und weiter

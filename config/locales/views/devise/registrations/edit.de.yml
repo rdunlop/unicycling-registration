@@ -5,7 +5,7 @@ de:
       edit:
         action: Aktualisierung
         blank_notice: Leer lassen wenn du nichts ändern möchtest
-        change_header: "Ändere die Email Adresse oder das Passwort"
+        change_header: "Ändere die E-Mail Adresse oder das Passwort"
         change_password: 'Passwort ändern:'
         confirm_password_notice: Wir benötigen das aktuelle Passwort um deine Änderungen
           zu bestätigen

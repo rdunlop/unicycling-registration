@@ -1,6 +1,9 @@
 ---
 de:
   activerecord:
+    attributes:
+      registrant_expense_item:
+        tax: Steuern
     models:
       registrant_expense_item:
         one: Artikel

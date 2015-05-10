@@ -9,8 +9,9 @@ de:
           Link zu zusätzlichen Informationen über die Wettbewerbe dieser Kategorie
           verwendet werden.
       coupon_code:
-        inform_emails: Eine Komma separierte Liste von EMail Adressen die informiert
+        inform_emails: Eine Komma separierte Liste von E-Mail Adressen die informiert
           werden wenn jemand diesen Coupon verwendet
+        price: Der Preis der berechnet wird wenn dieser Coupon verwendet wird
       event:
         accepts_music_uploads: Aktiviere diese Box wenn jeder Teilnehmer Musik für
           seinen Wettkampf auswählen soll
@@ -27,8 +28,8 @@ de:
           gewählt hat ist dieses Feld optional. (z.B. "Team Name" ist optional wenn
           "Pickup" gewählt wurde)
         required_if_event_choice_id: Wenn der Nutzer diese andere 'Wettbewerbs Auswahl'
-          gewählt hat ist dieses Feld erforderlich. (z.B. "Beste Wettkampf Zeit" ist
-          erforderlich wenn "Beste Zeit" gewählt wurde)
+          gewählt hat ist dieses Feld erforderlich. (z.B. "Wettkampf der besten Zeit"
+          ist erforderlich wenn "Beste Zeit" gewählt wurde)
         tooltip: Dies wird angezeigt wenn der Nutzer mit der Maus über dieses Feld
           fährt
       event_configuration:
@@ -38,12 +39,14 @@ de:
           Vorteile eine Teilnehmer Anmeldung bietet
         comp_noncomp_url: Definiert einen Link der die Unterschiede zwischen den verschiedenen
           angebotenen Anmelde Varianten erklärt
-        contact_email: Dies ist das Ziel für alle "Feedback" EMails auf der Hilfe
+        contact_email: Dies ist das Ziel für alle "Feedback" E-Mail auf der Hilfe
           Seite.
+        dates_description: Diese Beschreibung erscheint auf der nicht-angemeldet Seite
+          und sollte die Daten der Veranstaltung beschreiben.
         display_confirmed_events: Das aktivieren dieser Funktion zeigt die bestätigten
           Wettbewerbe/unbestätigten Wettbewerbe auf der Zusammenfassungs Seite den
           Teilnehmers an.
-        event_sign_up_closed_date: NAch diesem Datum können nur noch Administratoren
+        event_sign_up_closed_date: Nach diesem Datum können nur noch Administratoren
           Wettbewerbe zu Teilnehmern nachmelden. (wärend sie diese immernoch entfernen
           können)
         event_url: Links vom Menü Bar Logo zu dieser URL
@@ -75,16 +78,16 @@ de:
           ausgewählt)
       volunteer_opportunity:
         inform_emails: Wenn jemand sich für diese Helfer Position anmeldet wird eine
-          Email an diese Email Adresse gesendet
+          E-Mail an diese E-Mail Adresse gesendet
     labels:
       coupon_code:
-        inform_emails: Emails um über jeden Coupon Gebrauch zu informieren
+        inform_emails: E-Mail um über jeden Coupon Gebrauch zu informieren
       event:
         accepts_music_uploads: Anfrage um Musik hoch zu laden
       event_configuration:
         artistic_score_elimination_mode_naucc: Kleine Gruppe
         comp_noncomp_url: Teilnehmer/Begleiter Erklärung
-        paypal_account: Paypal Händler Account EMail
+        paypal_account: Paypal Händler Account E-Mail
         rulebook_url: URL zum Rulebook im PDF Format
         standard_skill: Aktiviere das Standard Skill Submissions System
         standard_skill_closed_date: Letzter Tag um Standard Skill Routinen online
@@ -93,23 +96,27 @@ de:
       expense_item:
         details_label: Frage
         has_custom_cost: Spende
-        has_details: EIne Frage an den Teilnehmer stellen
-        maximum_available: Maximale Stückzahl zum Verkauf
-        maximum_per_registrant: Maximum pro Teilnehmer
-      volunteer_opportunity: Email Adresse um über jede Helfer Anmeldung informiert
+        has_details: Eine Frage an den Teilnehmer stellen
+        maximum_available: Maximale gesamte Stückzahl zum Verkauf
+        maximum_per_registrant: Maximum Stückzahl pro Teilnehmer
+      volunteer_opportunity: E-Mail Adresse um über jede Helfer Anmeldung informiert
         zu werden
     'no': Nein
     options:
       event_configuration:
         waiver:
-          none: keine Verzichtserklärung
+          none: Keine Verzichtserklärung
           online: Online Verzichtserklärung
           print: Verzichtserklärung drucken
     placeholders:
+      competitor_expense_item:
+        cost: z.B 12.00
       coupon_code:
         code: Code den der Benutzer eingeben muss
+      noncompetitor_expense_item:
+        cost: z.B. 12.00
       volunteer_opportunity:
-        inform_emails: Komma separierte Liste von EMail Adressen
+        inform_emails: Komma separierte Liste von E-Mail Adressen
     required:
       mark: "*"
       text: Erforderlich

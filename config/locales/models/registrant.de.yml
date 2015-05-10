@@ -8,3 +8,4 @@ de:
     models:
       registrant:
         one: Angemeldeter
+        other: Angemeldeter
