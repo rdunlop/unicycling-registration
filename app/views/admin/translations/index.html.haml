@@ -17,6 +17,7 @@
 
 - if can? :manage, :all_site_translations
   = render "all_site_translations"
+  %hr
 - else
   %h2 Shared Text
 
@@ -26,3 +27,10 @@
     If you would like to help translate that text, please
     = link_to "contact Robin", welcome_help_path
     (it requires additional training)
+  %hr
+
+%h2 Clear Caching after making translation changes
+
+%p Once you are finished translating various files (and have "applied the changes" if doing shared translations), you should clear the caching so that all possible pages are cleared of caching.
+
+= link_to "Clear Translation Cache", translations_cache_path, method: :delete, class: "focus_button", data: { confirm: "Are you sure? This has performance impacts as the cache is being rebuilt (please don't do this frequently) " }

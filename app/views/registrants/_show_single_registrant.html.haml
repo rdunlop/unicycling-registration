@@ -6,7 +6,7 @@
   - if can? :manage, @registrant
     .js--showElement{ data: { key: "manage_registrant" } }
 
-- cache ['header', I18n.locale, @registrant] do
+- cache_i18n ['header', @registrant] do
   .registrant_header
     .registrant_header__name
       %h1
@@ -15,17 +15,17 @@
       = render partial: "/registrants/unpaid_warnings"
       = render partial: "/registrants/access_code"
 
-- cache ['printable_link', I18n.locale, @registrant, @registrant.members_cache_key] do
+- cache_i18n ['printable_link', @registrant, @registrant.members_cache_key] do
   .non_printable
     = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
 .registrant_summary{ class: "show_#{@registrant.registrant_type}_elements" }
   .registrant_summary_block
     // this partial includes conditional-display logic..do not cache it
     = render :partial => "/registrants/summary"
-    - cache ['edit_link', I18n.locale, @registrant] do
+    - cache_i18n ['edit_link', @registrant] do
       .edit_link_block.js--showElementTarget{ data: { key: "update_registrant" } }
         = link_to t(".edit_registration"), registrant_build_path(@registrant, :add_name)
-  - cache ['expenses', I18n.locale, @registrant, @registrant.members_cache_key] do
+  - cache_i18n ['expenses', @registrant, @registrant.members_cache_key] do
     .registrant_expenses_block
       = render :partial => "/registrants/registrant_expenses"
       .edit_link_block.js--showElementTarget{ data: { key: "create_rei" } }
@@ -44,7 +44,7 @@
 
   // contains caching
   = render partial: "/registrants/registrant_songs"
-  - cache ['standard_and_waiver', I18n.locale, @registrant] do
+  - cache_i18n ['standard_and_waiver', @registrant] do
     - if @registrant.has_standard_skill?
       %hr.non_printable
       .edit_link_block

@@ -1,4 +1,4 @@
--cache [@competition, @config, I18n.locale] do
+- cache_i18n [@competition, @config] do
   %h2= "#{@competition.award_title} Competitors"
 
   %table.full.grid.sortable
@@ -14,7 +14,8 @@
       - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
       - competitors = competitors.reorder("competitors.lowest_member_bib_number")
       - competitors.each do |comp|
-        - cache [@competition, comp, @config, I18n.locale] do
+        -# Why is this cached with i18n?
+        - cache_i18n [@competition, comp, @config] do
           %tr
             %td= comp.bib_number
             %td

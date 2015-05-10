@@ -1,4 +1,4 @@
-- cache [:help_headers, I18n.locale] do
+- cache_i18n [:help_headers] do
   %h1= t('.header')
   %h2= t(".subheader", domain: @tenant.subdomain)
   %h3= t(".frequently_asked_questions")

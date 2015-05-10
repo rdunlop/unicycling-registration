@@ -1,4 +1,4 @@
-- cache [I18n.locale, @config, @registrant, include_form, details] do
+- cache_i18n [@config, @registrant, include_form, details] do
   - @registrant.owing_registrant_expense_items.each do |ce|
     %tr
       %td= ce

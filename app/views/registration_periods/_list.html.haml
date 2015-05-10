@@ -1,6 +1,6 @@
 // Note: the associated competitor_expense_item/noncompetitor_expense_item
 // is also necessary, but doesn't cache-invalidete
-- cache [I18n.locale, competitor, RegistrationPeriod], expires_in: 30.minutes do
+- cache_i18n [competitor, RegistrationPeriod], expires_in: 30.minutes do
   %fieldset.registration_period_block
     %legend= competitor ? t(".competitor_registration_cost") : t(".noncompetitor_registration_cost")
     %table

@@ -12,4 +12,5 @@
 
 %ul
   %li= link_to "Clear Cache", clear_cache_event_configuration_path, method: :delete, data: { confirm: "This will clear all data cache" }
+  %li= link_to "Clear Translation Cache", translations_cache_path, method: :delete, data: { confirm: "This will clear i18n view caches" }
   %li= link_to "Clear Counter Cache", clear_counter_cache_event_configuration_path, method: :delete, data: { confirm: "This will clear counter caches" }

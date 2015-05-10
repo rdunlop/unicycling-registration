@@ -27,13 +27,13 @@
       %th.non_printable User
   %tbody
     // # includes 'current_user' because of the 'can? Calls
-    - cache ['index_all.registrant', I18n.locale, Registrant, current_user, @config ] do
+    - cache_i18n ['index_all.registrant', Registrant, current_user, @config ], expires_in: 1.minute do
       - @registrants.find_each(batch_size: 100) do |registrant|
         - if can? :edit, registrant
           %span.js--showElement{ data: { key: "edit_registrant#{registrant.id}" } }
         - if can? :undelete, :registrant
           %span.js--showElement{ data: { key: "undelete#{registrant.id}" } }
-        - cache [I18n.locale, registrant, @config] do
+        - cache_i18n [registrant, @config] do
           %tr
             %td= registrant.bib_number
             %td= registrant.last_name

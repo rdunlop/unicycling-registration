@@ -6,6 +6,12 @@ class Admin::TranslationsController < ApplicationController
   def index
   end
 
+  def clear_cache
+    clear_cache_i18n
+    flash[:notice] = "Translation Cache cleared"
+    redirect_to translations_path
+  end
+
   private
 
   def add_breadcrumbs

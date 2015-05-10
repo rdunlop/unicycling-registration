@@ -1,4 +1,4 @@
--cache [@competition, @config, I18n.locale] do
+- cache_i18n [@competition, @config] do
   %h2= "Order of #{@competition.award_title} Competitors"
 
   - heat_times = @competition.heat_times

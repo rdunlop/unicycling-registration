@@ -1,8 +1,8 @@
-- cache [I18n.locale, @config, @registrant], expires_in: 1.hour do
+- cache_i18n [@config, @registrant], expires_in: 1.hour do
   - if @registrant.competitor && (@registrant.songs.count > 0 || !@config.music_submission_ended?)
     .registrant_data_group.non_printable
       %fieldset.data_block
-        - cache ['songs_menu', I18n.locale, @config, @registrant] do
+        - cache_i18n ['songs_menu', @config, @registrant] do
           %legend= t(".header")
           %table
             %thead

@@ -66,6 +66,7 @@ Workspace::Application.routes.draw do
     end
 
     get '/translations', to: 'admin/translations#index'
+    delete '/translations/cache', to: 'admin/translations#clear_cache'
     namespace :translations do
       resource :event_configuration, only: [:edit, :update]
       resources :categories, only: [:index, :edit, :update]

@@ -14,7 +14,8 @@
 
     %tbody
       - competitors.each do |comp|
-        - cache [@competition, comp, @config, I18n.locale] do
+        -# Why is this cached with i18n?
+        - cache_i18n [@competition, comp, @config] do
           %tr
             %td= comp.bib_number
             %td

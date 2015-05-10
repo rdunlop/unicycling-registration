@@ -1,6 +1,6 @@
 %fieldset.data_block
   %legend= t(".header")
-  - cache [@config] do
+  - cache_i18n [@config] do
     #waiver_text_box
       = text_to_html_linebreaks(@config.waiver_text).html_safe
   %p

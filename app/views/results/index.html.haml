@@ -12,7 +12,7 @@
       %th Date Published
   %tbody
     - Competition.includes(:published_age_group_entries).all.each do |competition|
-      - cache [competition, I18n.locale] do
+      - cache_i18n [competition] do
         %tr
           %td= competition.end_time_to_s
           %td= competition.award_title_name

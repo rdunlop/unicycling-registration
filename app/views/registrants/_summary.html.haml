@@ -1,5 +1,5 @@
 %fieldset.data_block.registrant_details_summary
-  - cache [I18n.locale, @registrant] do
+  - cache_i18n [@registrant] do
     %legend= t(".registration_summary")
     %p.non_printable
       %b #{t(".user_account_email")}:

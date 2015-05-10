@@ -13,7 +13,8 @@
 
     %tbody
       - competitors.each do |comp|
-        - cache [@competition, comp, @config, I18n.locale] do
+        -# Why is this cached with i18n?
+        - cache_i18n [@competition, comp, @config] do
           %tr
             - if heat_times.count > 0
               %td= heat_times.where(heat: comp.heat).first.try(:scheduled_time)

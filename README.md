@@ -87,14 +87,17 @@ Deploying code with new translations needed
 
 When you perform a `cap stage deploy` it will automatically run `rake import_translations_from_yml` and `rake write_tolk_to_disk` which will update the existing Tolk translations with any new/changed keys. No further steps should be necessary.
 
+You may need to clear the translation cache in order for the existing cached pages to be cleared.
 
 Downloading new translations from Tolk
 --------------------------------------
 Extracting the new translations out of the system, and back into the source-code
 
-1. Use the "Apply" button in the translation system to write all Tolk Translations to disk.
+1. Use the "Apply" button in the translation system to write all Tolk Translations to disk (and apply them to the front-end)
 
-2. Copy the changed yml files down to your local machine:
+2. Use the "Clear Translations Cache" button to cause all cached pages to be cleared, and new ones generated.
+
+3. Copy the changed yml files down to your local machine:
 
     `cap stage translation:download`
     or
@@ -102,9 +105,9 @@ Extracting the new translations out of the system, and back into the source-code
 
     this will copy the remote `config/locales` onto your local machine's `config/locales`
 
-3. Examine the changes, to ensure that you aren't accidentally removing changes which you want.
+4. Examine the changes, to ensure that you aren't accidentally removing changes which you want.
 
-4. Commit the changes.
+5. Commit the changes.
 
 
 Other Commands available (useful for testing:
