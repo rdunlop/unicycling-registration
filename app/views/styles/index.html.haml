@@ -276,6 +276,12 @@ Registrant Expense Items
   .accountNav
     = link_to "Log out user", "/", method: :delete, data: { confirm: "Log Out?" }
 
+%nav.admin_bar{ style: 'text-align: left' }
+  .hamburger Menu
+  %ul.navList
+    %li
+      %a{href: '$'} Admin Menu
+
 // Breadcrumbs
 %h2.style_head Breadcrumbs
 

@@ -52,7 +52,7 @@
       - cache_i18n [Competition] do
         - Competition.all.find_each(batch_size: 10) do |competition|
           - cache_i18n [competition] do
-            %trs
+            %tr
               %td= competition.end_time_to_s
               %td= competition.event.category
               %td= competition.event

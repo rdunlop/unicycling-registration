@@ -38,6 +38,14 @@ nav {
   }
   display: block;
   background: $background;
+
+  &.admin_bar {
+    background-color: red;
+
+    a {
+      background-color: inherit;
+    }
+  }
 }
 
 ul.navList {
