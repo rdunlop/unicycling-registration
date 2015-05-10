@@ -71,43 +71,56 @@ If we want to add a new language to the list of possible translations:
 
 Technical Details
 -----------------
-Loading the translation files into the translator app (this is only necessary once):
+Each time that a deployment occurs, the translation files in /config/locales will be loaded into the database.
 
-1. Clear the current loaded Tolk Content (** This is a very destructive step. Be warned! **)
+Since the English translatios are considered the "base locale", changes to those entris have specific impacts.
 
-    `rake clear_translations`
+* If an English phrase is _added_, the db will have a new entry added, and marked so that non-English translations can be provided.
 
-2. Load all translations from config/locales:
+* If an English phrase is _updated_, the db will be marked so that the non-encglish phrases can be reviewed to ensure that they still make sense.
 
-    `rake import_translations_from_yml`
+* If an English phraes is _deleted_, the db ...I don't know, I haven't done this yet.
 
-3. Restart the server
+
+Deploying code with new translations needed
+--------------------------------------------
+
+When you perform a `cap stage deploy` it will automatically run `rake import_translations_from_yml` and `rake write_tolk_to_disk` which will update the existing Tolk translations with any new/changed keys. No further steps should be necessary.
 
 
 Downloading new translations from Tolk
 --------------------------------------
 Extracting the new translations out of the system, and back into the source-code
 
-1. Prime the extraction directory, so that we know which keys/translations to extract.
-    `cap stage translation:prime`
+1. Use the "Apply" button in the translation system to write all Tolk Translations to disk.
 
-2. Use the "Apply" button in the translation system to write all Tolk Translations to disk.
-
-3. Copy the changed yml files down to your local machine:
+2. Copy the changed yml files down to your local machine:
 
     `cap stage translation:download`
     or
     `cap prod translation:download`
 
-    this will copy the remote `config/custom_locales` onto your local machine's `config/locales`
+    this will copy the remote `config/locales` onto your local machine's `config/locales`
 
-4. Commit the changes
+3. Examine the changes, to ensure that you aren't accidentally removing changes which you want.
+
+4. Commit the changes.
 
 
-Deploying code with new translations needed
---------------------------------------------
+Other Commands available (useful for testing:
+---------------------------------------------
 
-When you perform a `cap stage deploy` it will automatically run `rake import_translations_from_yml` which will update the existing Tolk translations with any new/changed keys. No further steps should be necessary.
+* Clear the current loaded Tolk Content (** This is a very destructive step. Be warned! **)
+
+    `rake clear_translations`
+
+    This command can also be useful if you want to remove invalid translations from the tolk db, and reload from disk.
+
+* Load all translations from config/locales:
+
+    `rake import_translations_from_yml`
+
+* Restart the server
 
 
 How to contribute time/effort to the Registration Site
@@ -278,11 +291,6 @@ StandardSkillEntry). In order to initially populate these, please run db:seed
 you can use the db:setup command to create the database, tables, and seed:
 
     $ rake db:setup
-
-
-In order for Tolk (the Translation system) to output properly, you have to seed the custom_locales directory.
-
-    $ cp -R config/locales config/custom_locales
 
 
 Event Configuration

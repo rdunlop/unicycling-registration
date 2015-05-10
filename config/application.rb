@@ -25,9 +25,6 @@ module Workspace
     config.i18n.default_locale = :en
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
-    # Tolk outputs files to this directory, which allows us to apply the changes without a new code-deploy
-    config.i18n.load_path += Dir[Rails.root.join('config', 'custom_locales', '**', '*.yml').to_s]
-
     # These are the default list of available languages.
     # Note: this is overwritten in application_controller.rb once an EventConfiguration is loaded.
     config.i18n.available_locales = [:en, :fr, :de, :hu]

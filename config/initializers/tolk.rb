@@ -11,7 +11,6 @@ Tolk::ApplicationController.authenticator = proc {
 
 Tolk.config do |config|
   config.dump_to_files = true
-  config.dump_path = Proc.new { "#{Rails.application.root}/config/custom_locales" }
   # If you need to add a mapping do it like this :
   # May we suggest you use http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
   # config.mapping['fr-ES']   = 'Frañol !'
