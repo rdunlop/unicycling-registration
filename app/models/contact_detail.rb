@@ -66,15 +66,17 @@ class ContactDetail < ActiveRecord::Base
   end
 
   def country
-    Carmen::Country.coded(self.country_code).try(:name)
+    country = ISO3166::Country[country_code]
+    country.translations[I18n.locale.to_s] || country.name
   end
 
+  # Display the state, based on the country_residence
   def state
-    country_el = Carmen::Country.coded(self.country_residence)
-    if country_el.try(:subregions?)
-      country_el.subregions.coded(self.state_code).try(:name)
+    country = ISO3166::Country[country_residence]
+    if country.try(:subdivisions?)
+      country.subdivisions[state_code].try(:[], "name")
     else
-      self.state_code
+      state_code
     end
   end
 end
