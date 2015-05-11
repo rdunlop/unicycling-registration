@@ -18,6 +18,8 @@ New Rules changes:
 
 - OPEN PRs against Tolk
 
+- Why doesn't en.waiver_text appear for the "Default Waiver" when none is defined for de.? (scott noticed this)
+- FIX the history-of-changes-of-a-record UI featuer.
 - create a global_translations role, and assign it to Olaf/Mark.
 - allow convention_admin to set the translations of all other attributes
 - Allow multiple language 'login' screen?
