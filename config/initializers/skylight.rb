@@ -1,2 +1,2 @@
 # Enable Skylight reporting in the staging environment
-config.skylight.environments += ['stage']
+Rails.application.config.skylight.environments += ['stage']
