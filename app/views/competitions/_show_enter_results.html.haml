@@ -1,0 +1,9 @@
+- if @competition.num_members_per_competitor != "One" && !@competition.uses_judges
+  %p.multiPersonCompetition
+    When entering results for a multi-person competition, please choose a single ID from each group. When you Approve the results, they will be properly associated with the group.
+
+- if @competition.uses_judges
+  %h2 Judges
+  = render partial: "judging_results_summary", locals: {competition: @competition }
+- else
+  = render partial: "data_entry_links", locals: {competition: @competition }

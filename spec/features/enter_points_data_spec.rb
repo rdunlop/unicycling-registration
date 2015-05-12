@@ -17,7 +17,9 @@ describe 'Entering Points data' do
     describe "when entering results" do
       before :each do
         click_link "Basketball"
-        click_link "Single"
+        within "#side_nav" do
+          click_link "Entry Form"
+        end
       end
 
       it "can add and update scores" do

@@ -2,15 +2,18 @@ require 'csv'
 require 'upload'
 class CompetitionsController < ApplicationController
   include EventsHelper
-  before_filter :authenticate_user!
-  before_filter :load_new_competition, :only => [:create]
-  before_filter :load_competition, except: [:create, :new]
+  layout "competition_management"
 
-  before_filter :load_event, :only => [:create, :new]
+  before_action :authenticate_user!
+  before_action :load_new_competition, :only => [:create]
+  before_action :load_competition, except: [:create, :new]
+
+  before_action :load_event_from_competition, only: [:edit]
+  before_action :load_event, :only => [:create, :new]
 
   load_and_authorize_resource
 
-  before_action :set_parent_breadcrumbs, only: [:new, :edit, :show, :set_sort]
+  before_action :add_competition_setup_breadcrumb, only: [:new, :edit, :show, :set_sort]
 
   respond_to :html, :js
 
@@ -230,11 +233,6 @@ class CompetitionsController < ApplicationController
                                         :heat_times_attributes => [:id, :scheduled_time, :heat, :minutes, :seconds, :_destroy] )
   end
 
-  def set_parent_breadcrumbs
-    @event ||= @competition.event
-    add_category_breadcrumb(@event.category)
-  end
-
   def load_competition
     @competition = Competition.find(params[:id])
   end
@@ -242,6 +240,10 @@ class CompetitionsController < ApplicationController
   def load_new_competition
     @competition = Competition.new(competition_params)
     params[:id] = 1 if params[:id].nil? # necessary due to bug in the way that cancan does authorization check
+  end
+
+  def load_event_from_competition
+    @event ||= @competition.event
   end
 
   def load_event

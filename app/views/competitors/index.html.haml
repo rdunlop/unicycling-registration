@@ -96,16 +96,6 @@ List of all competitors, including registrant info, with edit/delete, marking th
 
     = submit_tag Competitor.not_qualified_text, :class => "multiclick counter_action_button", :data => { :confirm => "This will create a Single competitor for each registrants, and mark these as 'not qualified'. Continue?" }
 %hr
-- if @competition.compete_in_order
-  -if @competition.order_finalized?
-    %b Order Has been finalized
-    %br
-    = link_to "Sort Competitors", set_sort_competition_path(@competition), class: "minor_action"
-  - else
-    Once you have completed creating all of the competitors, you should use the "Sort" functions to shuffle or specify the order of competition.
-    %br
-    = link_to "Sort Competitors", set_sort_competition_path(@competition), class: "action_button"
-  %hr
 %p
   Advanced Options:
   = link_to 'Advanced Create Competitor', new_competition_competitor_path(@competition), class: "minor_action"

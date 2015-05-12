@@ -140,4 +140,8 @@ class ApplicationController < ActionController::Base
     add_to_competition_breadcrumb(judge.competition)
     add_breadcrumb judge, judge_scores_path(judge)
   end
+
+  def add_competition_setup_breadcrumb
+    add_breadcrumb "Competitions", competition_setup_path
+  end
 end

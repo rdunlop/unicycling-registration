@@ -2,145 +2,21 @@
 - if can? :update, @competition
   = link_to 'Edit', edit_competition_path(@competition)
 
-- if can? :destroy, @competition
-  = link_to 'Delete',  competition_path(@competition), :method => :delete, data: { :confirm => "Are you sure you want to destroy the COMPETITION?" }
+%p Manage Competitors, Judges, Volunteers and Results.
 
-- if @competition.locked
-  .locked_banner LOCKED
+.accordion
+  %h2 Competitor Selected
+  %div
+    = render "show_competitors_selected"
 
-Results, judges, and scoring settings.
+  %h2 Volunteers Configured
+  %div
+    = render "show_volunteers_configured"
 
-- if can? :lock, @competition
-  %h2 Director Abilities
+  %h2 Enter Results
+  %div
+    = render "show_enter_results"
 
-  - if @competition.age_group_type
-    %h3 Review Age Group Configuration
-    = link_to "View Age Group", age_group_type_path(@competition.age_group_type)
-    %small If these are incorrect, contact an Admin
-
-  %h3 View List of Competitors who want to participate
-  = link_to "Events Report", summary_events_path
-
-  %h3 Competitor Management
-  %table
-    %tr
-      %th #Signed up
-      %th #Assigned Registrants
-      %th Manage Competitor List
-    %tr.js--highlightMatching
-      %td.js--shouldMatch= @competition.signed_up_registrants.count
-      %td.js--shouldMatch= @competition.num_assigned_registrants
-      %td= link_to 'Manage Competitors', competition_competitors_path(@competition), class: 'action_button'
-      %td= link_to "Display Candidates", display_candidates_competition_competitors_path(@competition)
-      - if @competition.uses_lane_assignments
-        %td= link_to "Assign Heats", competition_heats_path(@competition)
-
-  %hr
-
-%h2 Data Entry
-- if @competition.num_members_per_competitor != "One" && !@competition.uses_judges
-  %p.multiPersonCompetition
-    When entering results for a multi-person competition, please choose a single ID from each group. When you Approve the results, they will be properly associated with the group.
-
-- if @competition.uses_judges
-  = link_to "Competitor list", announcer_printing_competition_path(@competition)
-  = link_to "(pdf)", announcer_printing_competition_path(@competition, :format => :pdf)
-- else
-  %table.sortable
-    %thead
-      = render partial: "data_entry_links_header"
-    %tbody
-      = render partial: "data_entry_links", locals: {competition: @competition }
-
-- if @competition.start_list?
-  %h2 Start List
-  = link_to "Start list", start_list_printing_competition_path(@competition)
-  = link_to "(pdf)", start_list_printing_competition_path(@competition, :format => :pdf)
-
-- if can? :lock, @competition
-  %h2 Judges
-  - if @competition.uses_judges
-    = render partial: "judging_results_summary", locals: {competition: @competition }
-  %br
-  = link_to "Manage Judges/Data-Entry for #{@competition}", competition_judges_path(@competition)
-
-
-- if can? :result, @competition
-  %h2 Monitor Results
-  %p
-    = link_to 'View', result_competition_path(@competition)
-    = link_to '(anonymous)', result_competition_path(@competition, anonymous: true)
-
-  - unless @competition.results_path.nil?
-    %h2 Manage Results
-    %p
-      = link_to("Enter/Modify Results", @competition.results_path)
-
-- if can? :results, @competition
-  %h2 Preview Results to be posted
-  %p
-    = link_to "View", results_printing_competition_path(@competition)
-    = link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
-
-- if can? :lock, @competition
-  %h2 Lock (Complete) the competition Results
-  - if @competition.locked?
-    = link_to 'Unlock', lock_competition_path(@competition), :method => :delete, data: { confirm: "Are you sure?" }
-  - else
-    = link_to 'Lock', lock_competition_path(@competition), :method => :post, data: { confirm: "No more results can be changed. This cannot be undone by a Director. Continue?" }, class: "action_button"
-
-- if can? :publish, @competition
-
-  - if @competition.has_age_group_entry_results?
-    %h2 Publish Age Group Entries
-    = render partial: "publish_age_group_entries"
-
-  %h2 Competition Results
-  %table
-    %thead
-      %tr
-        %th Result
-        %th Action
-    %tbody
-      - @competition.competition_results.each do |result|
-        %tr
-          %td
-            = link_to result.to_s, result.results_file_url
-            %br
-          %td
-            - unless result.system_managed
-              = link_to "Delete", competition_result_path(result), method: :delete, data: { confirm: "Are you sure?" }
-
-  %h5 Official Result
-  - if @competition.published?
-    = link_to 'Un-Publish', publish_competition_path(@competition), :method => :delete, data: { confirm: "Remove data from online results?" }
-  - else
-    = link_to 'Publish', publish_competition_path(@competition), :method => :post, data: { confirm: "This will make the data available online for all to see. Continue?" }, class: "action_button"
-  %h5 Additional Results
-  Upload additional PDF files here.
-  %br
-  = form_tag competition_competition_results_path(@competition), multipart: true do
-    = file_field_tag :results_file
-    = label_tag :custom_name
-    = text_field_tag :custom_name
-    %br
-    = submit_tag "Upload More Results"
-
-- if can? :manage, AwardLabel
-  %h2 Display/print Awards
-  = link_to "Awards System", user_award_labels_path(current_user)
-  %hr
-
-- if can? :award, @competition
-  %h2 Mark this Competition as "Awarded"
-  - if @competition.awarded?
-    = link_to 'Un-award', award_competition_path(@competition), :method => :delete, data: { confirm: "Remove awarded flag from competition?" }
-  - else
-    = link_to 'Award', award_competition_path(@competition), :method => :post, data: { confirm: "This will mark the competition as awarded. Continue?" }, class: "action_button"
-%hr
-
-%h2 Scoring Type/Rules
-
-%h3= @competition.scoring_class
-%p
-  = @competition.scoring_description
+  %h2 Results For Approval
+  %div
+    = render "show_results_for_approval"

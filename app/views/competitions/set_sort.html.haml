@@ -1,6 +1,7 @@
 %h3= "#{@competition.event} - #{@competition}"
 
 - if @competition.compete_in_order
+  %p Once you have completed creating all of the competitors, you should use the "Sort" functions to shuffle or specify the order of competition.
   - if @competition.order_finalized?
     %h3= "Sort Order Finalized!"
 
