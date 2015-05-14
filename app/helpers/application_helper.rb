@@ -95,5 +95,4 @@ module ApplicationHelper
       root_path(locale: new_locale)
     end
   end
-
 end

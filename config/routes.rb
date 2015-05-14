@@ -214,7 +214,6 @@ Workspace::Application.routes.draw do
       resources :volunteer_opportunities, except: [:show] do
         post :update_row_order, on: :collection
       end
-
     end
     scope "convention_setup", module: "convention_setup" do
       resources :coupon_codes, except: [:show]

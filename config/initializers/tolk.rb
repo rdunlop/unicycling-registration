@@ -3,7 +3,6 @@
 # Tolk config file. Generated on April 14, 2015 21:06
 # See github.com/tolk/tolk for more informations
 
-
 require 'cancancan'
 Tolk::ApplicationController.authenticator = proc {
   authorize! :manage, :all_site_translations
@@ -414,5 +413,4 @@ Tolk.config do |config|
   # config.mapping['zh-TW']   = 'Chinese (Traditional)'
   # config.mapping['zu']      = 'Zulu'
   # config.mapping['zu-ZA']   = 'Zulu (South Africa)
-
 end

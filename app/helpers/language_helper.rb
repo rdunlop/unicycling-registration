@@ -8,7 +8,7 @@ module LanguageHelper
   end
 
   def cache_i18n(keys, options = {})
-   cache [:i18n, I18n.locale, *keys], options do
+    cache [:i18n, I18n.locale, *keys], options do
       yield
     end
   end

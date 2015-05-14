@@ -38,7 +38,6 @@ class WelcomeController < ApplicationController
     @director_events = Event.with_role(:director, current_user)
   end
 
-
   private
 
   def captcha_valid?

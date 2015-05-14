@@ -62,7 +62,6 @@ class EventsController < ApplicationController
     redirect_to event_path(@event), notice: 'Created Director'
   end
 
-
   # THIS SHOULD BE MOVED
   # DELETE /events/1/destroy_director
   def destroy_director
