@@ -1,5 +1,8 @@
 %h1= "#{@competition} - Manage Competitors"
 
+%p
+  If this competition is sourced from other competition results
+  = link_to "Display Candidates", display_candidates_competition_competitors_path(@competition)
 - if @competition.automatic_competitor_creation?
   .competition_instructions
     This event is configured for <b>Automatic</b> Competitor creation.

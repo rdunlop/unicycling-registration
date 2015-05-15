@@ -1,10 +1,11 @@
 require 'csv'
 class CompetitorsController < ApplicationController
+  layout "competition_management"
   include SortableObject
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource :competition, except: [:edit, :update, :destroy, :update_row_order]
-  before_filter :load_new_competitor, :only => [:create]
+  before_action :load_new_competitor, :only => [:create]
   load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy, :update_row_order]
   load_and_authorize_resource :only => [:edit, :update, :destroy, :update_row_order]
 
@@ -52,6 +53,7 @@ class CompetitorsController < ApplicationController
     redirect_to competition_competitors_path(@competition)
   end
 
+  # Should move this to be the same place as the Printing::CompetitionsController#sign_in_sheet action
   def enter_sign_in
     add_breadcrumb "Enter Sign-In"
     @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
