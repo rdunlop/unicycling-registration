@@ -4,10 +4,12 @@ class CompetitionResultsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :competition
   load_and_authorize_resource through: :competition
+  before_action :set_breadcrumbs
 
   respond_to :html
 
   def index
+    add_breadcrumb "Additional Results"
   end
 
   # POST /competitions/#/competition_results
@@ -36,5 +38,11 @@ class CompetitionResultsController < ApplicationController
     @competition_result.destroy
 
     respond_with(@competition_result, location: competition_path(@competition))
+  end
+
+  private
+
+  def set_breadcrumbs
+    add_breadcrumb @competition, competition_path(@competition)
   end
 end

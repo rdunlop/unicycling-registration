@@ -1,3 +1,9 @@
+%p
+  There are currently
+  %span.num_results
+    = @competition.num_results
+  results
+
 - if @competition.num_members_per_competitor != "One" && !@competition.uses_judges
   %p.multiPersonCompetition
     When entering results for a multi-person competition, please choose a single ID from each group. When you Approve the results, they will be properly associated with the group.

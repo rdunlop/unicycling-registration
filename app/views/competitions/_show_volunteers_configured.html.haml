@@ -1,1 +1,10 @@
-= link_to "Manage Judges/Data-Entry for #{@competition}", competition_judges_path(@competition)
+%p
+  There are currently
+  %span.num_volunteers
+    = @competition.judges.count
+  judges assigned.
+
+%p
+  Please configure volunteers to help with data entry/judging
+
+= link_to "Manage Volunteers for #{@competition}", competition_judges_path(@competition)
