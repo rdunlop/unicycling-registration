@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
   skip_authorization_check
-  # before_filter :authenticate_user!
+  # before_action :authenticate_user!
   authorize_resource class: false
 
   def index

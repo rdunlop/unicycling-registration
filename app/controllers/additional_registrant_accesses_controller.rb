@@ -1,9 +1,9 @@
 class AdditionalRegistrantAccessesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource :user, :only => [:create, :index, :new, :invitations]
   load_and_authorize_resource :additional_registrant_access, :through => :user, :only => [:index, :new, :invitations]
   load_and_authorize_resource :except => [:create, :index, :new, :invitations]
-  before_filter :load_new_additional_registrant_access, :only => [:create]
+  before_action :load_new_additional_registrant_access, :only => [:create]
 
   def load_new_additional_registrant_access
     @additional_registrant_access = @user.additional_registrant_accesses.build(additional_registrant_access_params)

@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource :user, only: :index
   load_and_authorize_resource :except => [:registrant_payments]
 

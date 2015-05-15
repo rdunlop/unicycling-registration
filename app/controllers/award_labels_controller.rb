@@ -1,5 +1,5 @@
 class AwardLabelsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   before_action :load_user, :only => [:index, :create, :create_by_competition, :create_labels, :expert_labels, :announcer_sheet, :normal_labels, :destroy_all, :create_labels_by_registrant]

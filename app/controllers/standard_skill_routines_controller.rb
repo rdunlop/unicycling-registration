@@ -1,9 +1,9 @@
 require 'csv'
 class StandardSkillRoutinesController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_new_standard_skill_routine, :only => [:create]
+  before_action :authenticate_user!
+  before_action :load_new_standard_skill_routine, :only => [:create]
   load_and_authorize_resource
-  before_filter :load_registrant, :only => [:create]
+  before_action :load_registrant, :only => [:create]
 
   def load_new_standard_skill_routine
     @routine = StandardSkillRoutine.new
@@ -19,7 +19,7 @@ class StandardSkillRoutinesController < ApplicationController
     @routine.registrant = @registrant
     @routine.save!
 
-    redirect_to standard_skill_routine_path(@routine), notice: 'Standard Skill Routine Successfully Started.' 
+    redirect_to standard_skill_routine_path(@routine), notice: 'Standard Skill Routine Successfully Started.'
   end
 
   # GET /standard_skill_routines/:id

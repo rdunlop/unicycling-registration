@@ -1,5 +1,5 @@
 class Compete::CombinedCompetitionEntriesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   before_action :load_combined_competition
   before_action :set_combined_competition_entry, only: [:edit, :update, :destroy]

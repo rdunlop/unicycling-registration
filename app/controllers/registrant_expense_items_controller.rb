@@ -1,8 +1,8 @@
 class RegistrantExpenseItemsController < ApplicationController
-  before_filter :load_registrant
-  before_filter :load_new_registrant_expense_item, only: [:create]
+  before_action :load_registrant
+  before_action :load_new_registrant_expense_item, only: [:create]
   load_and_authorize_resource
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   before_action :set_registrant_breadcrumb
 

@@ -1,6 +1,6 @@
 class Registrants::BuildController < ApplicationController
   include Wicked::Wizard
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   load_resource :registrant, find_by: :bib_number, except: [:index, :create]
   authorize_resource :registrant

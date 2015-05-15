@@ -1,8 +1,8 @@
 class Printing::EventsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   authorize_resource :event, :parent => false
 
-  before_filter :load_event
+  before_action :load_event
 
   def load_event
     @event = Event.find(params[:id])

@@ -1,6 +1,6 @@
 require 'csv'
 class HeatsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource :competition, except: [:edit, :update, :destroy]
 
   before_action :set_parent_breadcrumbs

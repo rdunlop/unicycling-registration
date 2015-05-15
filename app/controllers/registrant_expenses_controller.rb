@@ -1,5 +1,5 @@
 class RegistrantExpensesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource :except => [:single]
   skip_authorization_check :only => [:single]
 

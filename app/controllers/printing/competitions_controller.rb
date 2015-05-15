@@ -1,6 +1,6 @@
 class Printing::CompetitionsController < ApplicationController
-  before_filter :authenticate_user!, except: [:announcer]
-  before_filter :load_competition
+  before_action :authenticate_user!, except: [:announcer]
+  before_action :load_competition
   authorize_resource :competition, :parent => false
 
   before_action :set_breadcrumbs, only: [:announcer, :sign_in_sheet]

@@ -1,7 +1,7 @@
 class LaneAssignmentsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_competition, except: [:edit, :update, :destroy]
-  before_filter :load_new_lane_assignment, :only => [:create]
+  before_action :authenticate_user!
+  before_action :load_competition, except: [:edit, :update, :destroy]
+  before_action :load_new_lane_assignment, :only => [:create]
   load_and_authorize_resource through: :competition, except: [:edit, :update, :destroy]
   load_and_authorize_resource only: [:edit, :update, :destroy]
 

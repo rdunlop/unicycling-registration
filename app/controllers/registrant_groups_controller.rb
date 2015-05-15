@@ -1,6 +1,6 @@
 class RegistrantGroupsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_new_registrant_group, :only => [:create]
+  before_action :authenticate_user!
+  before_action :load_new_registrant_group, :only => [:create]
   load_and_authorize_resource
 
   def load_new_registrant_group
