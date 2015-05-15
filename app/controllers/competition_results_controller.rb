@@ -1,5 +1,7 @@
 class CompetitionResultsController < ApplicationController
-  before_filter :authenticate_user!
+  layout "competition_management"
+
+  before_action :authenticate_user!
   load_and_authorize_resource :competition
   load_and_authorize_resource through: :competition
 

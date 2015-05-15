@@ -1,6 +1,7 @@
 class JudgesController < ApplicationController
+  layout "competition_management"
   load_and_authorize_resource :competition, :only => [:index, :create, :destroy, :copy_judges]
-  before_filter :load_new_judge, :only => [:create]
+  before_action :load_new_judge, :only => [:create]
   load_and_authorize_resource
 
   respond_to :html
