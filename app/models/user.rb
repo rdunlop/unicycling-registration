@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :payment_admin, :convention_admin, :admin, :super_admin]
+    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :competition_admin, :payment_admin, :convention_admin, :admin, :super_admin]
   end
 
   # List which roles each roles can add to other users
@@ -85,6 +85,8 @@ class User < ActiveRecord::Base
     {
       super_admin: [*roles],
       convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj],
+      #competition_admin: [:director],
+      director: [:data_entry_volunteer, :race_official],
       payment_admin: [:payment_admin],
       event_planner: [:event_planner],
       music_dj: [:music_dj]
@@ -101,10 +103,7 @@ class User < ActiveRecord::Base
 
   def self.role_description(role)
     case (role)
-      # when :track_official
       # when :results_printer
-    when :data_entry_volunteer
-      "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
     when :admin
       "[e.g. Scott/Connie]
       Able to create onsite payments,
@@ -129,9 +128,25 @@ class User < ActiveRecord::Base
       Can set up 'Authorized Laptops' for use in on-site registration
       Can create payment_admin, event_planner, and music_dj users
       "
-    when :translator
-      "[e.g. Olaf]
-      Able to see the Translate menu, and submit adjusted titles for all the translated elements
+    when :competition_admin
+      "[e.g. Scott Wilton]
+      Able to create competitions, and adjust competition configuration
+      Able to create/manage Age Groups
+      Can create director, data_entry_volunteer, race_official
+      Can reset user passwords
+      "
+    when :director
+      "[e.g. Wendy Gryzch]
+      Able to assign registrants to competitors
+      Can create judges, volunteers
+      Can reset user passwords
+      "
+    when :data_entry_volunteer
+      "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
+    when :race_official
+      "[e.g. Mary Koehler]
+      Able to DQ at start or end-line of Race
+      Able to download heat-lists for Track E-Timers
       "
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
@@ -155,7 +170,8 @@ class User < ActiveRecord::Base
       "[e.g. JoAnn]
       Able to view/download any music from the Manage Music page"
     when :translator
-      "Able to access the translation menu.
+      "[e.g. Olaf]
+      Able to access the translation menu.
       Enter new translations, and apply them to the site"
     else
       "No Description Available"

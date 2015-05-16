@@ -209,7 +209,13 @@ class Ability
       can [:manage_all, :show_all], :registrant
       can [:read], Registrant
       can [:read, :create, :list], Email
-      can [:directors], :permission
+    end
+
+    if user.has_role? :competition_admin
+      can :read, :competition_setup
+      can :read, Event
+      can :manage, :director
+      can [:read, :set_role, :set_password], :permission
     end
 
     # #################################################
@@ -235,7 +241,7 @@ class Ability
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
-      can [:directors, :set_password], :permission
+      can [:set_password], :permission
       if config.usa_membership_config
         can :manage, :usa_membership
       end

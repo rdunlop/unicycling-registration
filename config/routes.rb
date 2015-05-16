@@ -179,8 +179,6 @@ Workspace::Application.routes.draw do
         get :general_volunteers
       end
       member do
-        post :create_director
-        delete :destroy_director
         get :sign_ups
       end
       resources :competitions, :only => [:new, :create]
@@ -222,6 +220,10 @@ Workspace::Application.routes.draw do
     get '/competition_setup', to: 'competition_setup#index'
     namespace :competition_setup do
       resource :event_configuration, only: [:edit, :update]
+    end
+
+    scope module: "competition_setup" do
+      resources :directors, only: [:index, :create, :destroy]
     end
 
     get '/onsite_registration', to: 'onsite_registration#index'

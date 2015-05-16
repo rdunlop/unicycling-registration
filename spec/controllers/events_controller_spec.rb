@@ -27,25 +27,6 @@ describe EventsController do
     end
   end
 
-  describe "POST create_director" do
-    it "creates a new director" do
-      user = FactoryGirl.create(:user)
-      event = FactoryGirl.create(:event)
-      post :create_director, {:user_id => user.id, :id => event.id}
-      expect(User.with_role(:director, event)).to eq([user])
-    end
-  end
-
-  describe "DELETE director" do
-    it "can delete a director" do
-      user = FactoryGirl.create(:user)
-      event = FactoryGirl.create(:event)
-      user.add_role :director, event
-      delete :destroy_director, {:user_id => user.id, :id => event.id}
-      expect(User.with_role(:director, event)).to eq([])
-    end
-  end
-
   describe "GET summary" do
     it "assigns all events as @events" do
       event = FactoryGirl.create(:event)

@@ -2,8 +2,8 @@ class CompetitionSetup::EventConfigurationsController < CompetitionSetupControll
   before_action :authenticate_user!
   before_action :load_event_configuration
   before_action :set_breadcrumb
-
-  load_and_authorize_resource
+  authorize_resource :competition_setup, class: false
+  load_resource
 
   def edit
   end

@@ -40,11 +40,11 @@
                 %li= link_to competition, competition
           %td
             %ul.categoryList__eventList
-              - if can? :directors, :permission
-                %li= link_to 'Manage Directors', directors_permissions_path
               - if can? :create, Competition
                 %li= link_to "Create New Competition", new_event_competition_path(event)
 
+- if can? :read, :director
+  = link_to 'Manage Directors', directors_path
 - if can? :manage, AgeGroupType
   %hr
   %h2 Age Groups

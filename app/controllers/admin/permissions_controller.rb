@@ -45,8 +45,4 @@ class Admin::PermissionsController < ApplicationController
       redirect_to competition_judges_path(@competiton), alert: 'Unable to add Race Official role to user.'
     end
   end
-
-  def directors
-    @events = Event.order(:name).all
-  end
 end

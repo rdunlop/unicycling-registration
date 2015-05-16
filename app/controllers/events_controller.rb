@@ -52,25 +52,6 @@ class EventsController < ApplicationController
     add_event_breadcrumb(@event)
   end
 
-  # THIS SHOULD BE MOVED
-
-  # POST /events/1/create_director
-  def create_director
-    user = User.find(params[:user_id])
-    user.add_role(:director, @event)
-
-    redirect_to event_path(@event), notice: 'Created Director'
-  end
-
-  # THIS SHOULD BE MOVED
-  # DELETE /events/1/destroy_director
-  def destroy_director
-    user = User.find(params[:user_id])
-    user.remove_role(:director, @event)
-
-    redirect_to event_path(@event), notice: 'Removed Director'
-  end
-
   private
 
   def set_breadcrumb

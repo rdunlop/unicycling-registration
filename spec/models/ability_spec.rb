@@ -142,6 +142,14 @@ describe "Ability" do
     it { is_expected.to be_able_to(:set_role, :permission)}
   end
 
+  describe "as a competition admin" do
+    before(:each) do
+      @user = FactoryGirl.create(:competition_admin_user)
+    end
+    subject { @ability = Ability.new(@user) }
+    it { is_expected.to be_able_to(:read, :permission) }
+  end
+
   describe "as an admin" do
     before(:each) do
       @user = FactoryGirl.create(:admin_user)
