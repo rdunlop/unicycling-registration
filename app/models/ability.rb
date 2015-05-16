@@ -215,7 +215,8 @@ class Ability
       can :read, :competition_setup
       can :read, Event
       can :manage, :director
-      can [:read, :set_role, :set_password], :permission
+      can :create, Competition
+      #can [:read, :set_role, :set_password], :permission
     end
 
     # #################################################

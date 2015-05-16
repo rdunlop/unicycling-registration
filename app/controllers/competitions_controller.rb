@@ -2,7 +2,7 @@ require 'csv'
 require 'upload'
 class CompetitionsController < ApplicationController
   include EventsHelper
-  layout "competition_management"
+  layout "competition_management", except: :new
 
   before_action :authenticate_user!
   before_action :load_new_competition, :only => [:create]
