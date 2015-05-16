@@ -7,7 +7,7 @@
   %tbody
     - @events.each do |event|
       %tr
-        %td= link_to_if(can?(:show, event), event, event_path(event))
+        %td= event
         %td
           - User.with_role(:director, event).each do |user|
             = user

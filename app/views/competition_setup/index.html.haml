@@ -4,15 +4,7 @@
 
 %p Please create Director(s) for each event. You (or the director) can create Competition(s) for each event, which will dictate how the data gathering occurs for that event.
 
-%table.alternate
-  %thead
-    %tr
-      %th
-      %th Status
-  %tbody
-    %tr
-      %td= link_to "Global Competition Settings", edit_competition_setup_event_configuration_path
-      %td
+= link_to "Global Competition Settings", edit_competition_setup_event_configuration_path
 
 %h2 Events by Category
 %table.alternate
@@ -26,10 +18,9 @@
   %tbody
     - @categories.each do |category|
       - category.events.each do |event|
-        - next unless can? :read, event
         %tr
           %td= category
-          %td= link_to event, event_path(event)
+          %td= event
           %td
             %ul.categoryList__eventList
               - event.directors.each do |director|

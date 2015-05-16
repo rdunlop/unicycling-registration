@@ -39,7 +39,7 @@ class CompetitionsController < ApplicationController
       flash[:notice] = "Competition created successfully"
     end
 
-    respond_with(@competition, location: event_path(@competition.event))
+    respond_with(@competition, location: competition_setup_path)
   end
 
   # PUT /competitions/1
@@ -50,16 +50,15 @@ class CompetitionsController < ApplicationController
     else
       @event = @competition.event
     end
-    respond_with(@competition, location: event_path(@competition.event))
+    respond_with(@competition)
   end
 
   # DELETE /competitions/1
   # DELETE /competitions/1.json
   def destroy
-    target_url = event_path(@competition.event)
     @competition.destroy
 
-    respond_with(@competition, location: target_url)
+    respond_with(@competition, location: competition_setup_path)
   end
 
   def set_sort

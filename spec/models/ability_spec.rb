@@ -147,7 +147,7 @@ describe "Ability" do
       @user = FactoryGirl.create(:competition_admin_user)
     end
     subject { @ability = Ability.new(@user) }
-    it { is_expected.to be_able_to(:read, :permission) }
+    it { is_expected.to be_able_to :read, :competition_setup }
   end
 
   describe "as an admin" do

@@ -122,10 +122,6 @@ class ApplicationController < ActionController::Base
     add_breadcrumb "#{category}"
   end
 
-  def add_event_breadcrumb(event)
-    add_breadcrumb "#{event}", event_path(event)
-  end
-
   def add_competition_breadcrumb(competition)
     add_breadcrumb "#{competition}", (competition_path(competition) if can? :show, competition)
   end

@@ -37,19 +37,11 @@ class EventsController < ApplicationController
 
   def sign_ups
     add_category_breadcrumb(@event.category)
-    add_event_breadcrumb(@event)
     add_breadcrumb "Sign Ups"
     respond_to do |format|
       format.html
       format.pdf { render_common_pdf "show" }
     end
-  end
-
-  # THIS SHOULD BE MOVED
-  # GET /events/1
-  def show
-    add_category_breadcrumb(@event.category)
-    add_event_breadcrumb(@event)
   end
 
   private

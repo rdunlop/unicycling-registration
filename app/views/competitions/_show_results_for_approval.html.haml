@@ -15,6 +15,11 @@
     = link_to "View", results_printing_competition_path(@competition)
     = link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
 
+  -# Who should have access to these?
+  %h3 Results for ALL Competitions in this event
+  = link_to "View", results_printing_event_path(@competition.event)
+  = link_to "(pdf)", results_printing_event_path(@competition.event, :format => :pdf)
+
 - if can? :lock, @competition
   %h2 Lock (Complete) the competition Results
   - if @competition.locked?

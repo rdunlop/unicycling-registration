@@ -213,9 +213,8 @@ class Ability
 
     if user.has_role? :competition_admin
       can :read, :competition_setup
-      can :read, Event
       can :manage, :director
-      can :create, Competition
+      can [:crud], Competition
       #can [:read, :set_role, :set_password], :permission
     end
 

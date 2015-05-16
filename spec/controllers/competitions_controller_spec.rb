@@ -55,9 +55,9 @@ describe CompetitionsController do
         expect(assigns(:competition)).to be_persisted
       end
 
-      it "redirects to the created competition's event" do
+      it "redirects to the competition_setup path" do
         post :create, {:event_id => @event.id, :competition => valid_attributes}
-        expect(response).to redirect_to(event_path(@event))
+        expect(response).to redirect_to(competition_setup_path)
       end
     end
 
@@ -95,10 +95,10 @@ describe CompetitionsController do
         expect(assigns(:competition)).to eq(competition)
       end
 
-      it "redirects to the competition's event" do
+      it "redirects to the competition" do
         competition = FactoryGirl.create(:competition)
         put :update, {:id => competition.to_param, :competition => valid_attributes}
-        expect(response).to redirect_to(event_path(competition.event))
+        expect(response).to redirect_to(competition)
       end
     end
 
@@ -131,10 +131,10 @@ describe CompetitionsController do
       }.to change(Competition, :count).by(-1)
     end
 
-    it "redirects to the event_categories list" do
+    it "redirects to the competition_setup_path" do
       competition = FactoryGirl.create(:competition, :event => @event)
       delete :destroy, {:id => competition.to_param}
-      expect(response).to redirect_to(event_path(@event))
+      expect(response).to redirect_to(competition_setup_path)
     end
   end
 
