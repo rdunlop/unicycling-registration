@@ -74,7 +74,7 @@ class JudgesController < ApplicationController
 
     @judges = @competition.judges
     @competitions_with_judges = Competition.event_order.select{ |comp| comp.uses_judges } - [@competition]
-    @judge ||= Judge.new
+    @judge ||= @competition.judges.build
   end
 
   private

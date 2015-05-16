@@ -112,7 +112,7 @@ describe JudgesController do
       other_data_entry_volunteer_user.add_role(:data_entry_volunteer)
       @judge = FactoryGirl.create(:judge, :user => @data_entry_volunteer_user, :competition => @ec)
       get :index, {:competition_id  => @ec}
-      expect(assigns(:judges)).to eq([@judge])
+      expect(assigns(:judges)).to include(@judge)
     end
 
     it "has a blank judge" do

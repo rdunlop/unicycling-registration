@@ -8,4 +8,6 @@
       - next unless judge.persisted?
       %tr
         %td= judge.name
-        %td= link_to 'Delete', competition_judge_path(judge.competition, judge), data: {confirm: 'Are you sure?'}, method: :delete
+        %td
+          - if can? :destroy, judge
+            = link_to 'Delete', competition_judge_path(judge.competition, judge), data: {confirm: 'Are you sure?'}, method: :delete

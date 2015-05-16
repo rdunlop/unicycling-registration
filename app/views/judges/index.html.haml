@@ -4,27 +4,12 @@
   - @judge_types.each do |judge_type|
     .judge_type_summary
       = render partial: "judge_type_summary", locals: {judge_type: judge_type, judges: @judges.where(judge_type: judge_type) }
-  %h3 Add judges
-  = render partial: "/shared/error_messages", object: @judge
-  %fieldset.judge_entry_choice
-    %legend
-      %b Option 1:
-      Add judges individually
-    = form_for [@competition, @judge] do |f|
-      = f.label :user_id, "Volunteer"
-      = f.select :user_id, @all_data_entry_volunteers.map { |user| [user, user.id] }, { include_blank: true }, class: "chosen-select"
-      %br
-      = f.label :judge_type_id
-      = f.select :judge_type_id, @judge_types.map { |jt| [jt, jt.id] }
-      %br
-      = f.submit "Add Judge", class: "action_button"
-  %fieldset.judge_entry_choice
-    %legend
-      %b Option 2:
-      Copy judges list
-    .judges
-      = render :partial => "copy_judges"
 
+
+  - if can? :create, @judge
+    = render "add_judges"
+  - else
+    %p Judge Management is no longer allowed (competition is locked)
 
 - elsif @competition.uses_lane_assignments
   %h1 Manage RaceOfficials

@@ -83,33 +83,16 @@ class Ability
     can :manage, TieBreakAdjustment
   end
 
-  def director_of_competition(user, competition)
+  def director_and_unlocked(user, competition)
     !competition.locked && user.has_role?(:director, competition.try(:event))
   end
 
   def set_director_abilities(user)
     set_data_entry_volunteer_abilities(user)
 
-    # :read is main director menu-page
-    # :results is for printing
-    can [:results, :sign_ups], Event do |ev|
-      user.has_role? :director, ev
-    end
-    can :summary, Event
-    can :sign_ups, EventCategory
-    #     #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
-    #     can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
-
-    can :manage, Competitor do |comp|
-      director_of_competition(user, comp.competition)
-    end
-
+    # Abilities to be able to read data about a competition
     can :read, Competition do |competition|
       user.has_role? :director, competition.event
-    end
-
-    can :manage, Member do |member|
-      director_of_competition(user, member.competitor.competition)
     end
 
     can [:read], Score do |score|
@@ -120,29 +103,50 @@ class Ability
       user.has_role? :director, comp.event
     end
 
-    # TODO: is there a way to scope this better? and also to honor the 'locked' status
-    can [:update_row_order], Competitor, if: user.has_role?(:director, :any)
-    can [:set_sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
-      director_of_competition(user, comp)
-    end
-
-    can :manage, ImportResult do |import_result|
-      director_of_competition(user, import_result.competition)
-    end
-
-    can :manage, TimeResult do |time_result|
-      director_of_competition(user, time_result.competition)
+    can [:read], Judge do |judge|
+      user.has_role? :director, judge.competition.try(:event)
     end
 
     can :manage, DataEntryVolunteer
-
     can :create_race_official, :permission
 
-    can [:crud, :copy_judges], Judge do |judge|
-      (judge.scores.count == 0) && (director_of_competition(user, judge.competition))
+    # :results is for printing
+    can [:results, :sign_ups], Event do |ev|
+      user.has_role? :director, ev
     end
-    can [:read], Judge do |judge|
-      (director_of_competition(user, judge.competition))
+    can :summary, Event
+    can :sign_ups, EventCategory
+    #     #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
+    #     can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
+
+    # Abilities to be able to change data about a competition
+    can :manage, Competitor do |comp|
+      director_and_unlocked(user, comp.competition)
+    end
+
+    can :manage, Member do |member|
+      director_and_unlocked(user, member.competitor.competition)
+    end
+
+    # TODO: is there a way to scope this better? and also to honor the 'locked' status
+    can [:update_row_order], Competitor, if: user.has_role?(:director, :any)
+
+    can [:set_sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
+      director_and_unlocked(user, comp)
+    end
+
+    # Data Management
+    can :manage, ImportResult do |import_result|
+      director_and_unlocked(user, import_result.competition)
+    end
+
+    can :manage, TimeResult do |time_result|
+      director_and_unlocked(user, time_result.competition)
+    end
+
+    can [:crud, :copy_judges], Judge do |judge|
+      # Only allow creating judges when there are no scores yet entered
+      (judge.scores.count == 0) && (director_and_unlocked(user, judge.competition))
     end
   end
 
