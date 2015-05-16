@@ -39,5 +39,6 @@
   - else
     = link_to 'Publish', publish_competition_path(@competition), :method => :post, data: { confirm: "This will make the data available online for all to see. Continue?" }, class: "action_button"
 
+- if can? :read, @competition
   = link_to "Add Additional Results PDFs", competition_competition_results_path(@competition)
   %p There are currently #{@competition.competition_results.count} Additional Results attached to this event

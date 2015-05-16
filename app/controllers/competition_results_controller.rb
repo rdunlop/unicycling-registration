@@ -2,8 +2,9 @@ class CompetitionResultsController < ApplicationController
   layout "competition_management"
 
   before_action :authenticate_user!
-  load_and_authorize_resource :competition
-  load_and_authorize_resource through: :competition
+  load_resource :competition
+  load_resource through: :competition
+  authorize_resource :competition
   before_action :set_breadcrumbs
 
   respond_to :html
