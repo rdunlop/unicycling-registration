@@ -224,7 +224,7 @@ class Competitor < ActiveRecord::Base
   def registrants_ids
     Rails.cache.fetch("/competitors/#{id}-#{updated_at}/registrants_ids") do
       if members.any?
-        members.map(&:external_id).sort.join(",")
+        members.map(&:external_id).sort.join(", ")
       else
         "(No registrants)"
       end
