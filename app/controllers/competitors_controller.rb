@@ -177,7 +177,7 @@ class CompetitorsController < ApplicationController
   end
 
   def competitor_params
-    params.require(:competitor).permit(:status, :position, :custom_name, :heat, :geared, :riding_wheel_size, :riding_crank_size, :notes, {:members_attributes => [:registrant_id, :id, :_destroy] } )
+    params.require(:competitor).permit(:status, :position, :custom_name, {:members_attributes => [:registrant_id, :id, :_destroy] } )
   end
 
   def update_competitors_params
