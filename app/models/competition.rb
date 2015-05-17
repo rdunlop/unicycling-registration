@@ -94,7 +94,7 @@ class Competition < ActiveRecord::Base
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
             :build_import_result_from_raw, :score_calculator,
-            :result_description, :compete_in_order, :scoring_description,
+            :result_description, :compete_in_order?, :scoring_description,
             :example_result, :imports_times, :results_path, :scoring_path, to: :scoring_helper
 
   def no_competition_sources_when_overall_calculation
@@ -158,9 +158,13 @@ class Competition < ActiveRecord::Base
   end
 
   def start_list?
+    uses_lane_assignments? || compete_in_order? || start_data_type == "Mass Start"
+  end
+
+  def start_list_present?
     if uses_lane_assignments?
       lane_assignments.any?
-    elsif compete_in_order
+    elsif compete_in_order?
       order_finalized?
     elsif start_data_type == "Mass Start"
       heat_numbers.any?

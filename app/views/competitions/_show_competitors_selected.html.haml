@@ -17,7 +17,7 @@
 %ul
   %li= link_to 'Manage Competitors', competition_competitors_path(@competition)
 
-  - if @competition.compete_in_order
+  - if @competition.compete_in_order?
     %li= link_to "Set Order",  set_sort_competition_path(@competition)
 
   - if @competition.uses_lane_assignments
@@ -27,7 +27,7 @@
     = link_to "Competitor list", announcer_printing_competition_path(@competition)
     = link_to "(pdf)", announcer_printing_competition_path(@competition, :format => :pdf)
 
-- if @competition.compete_in_order
+- if @competition.compete_in_order?
   - if @competition.order_finalized?
     The Competitor Order has been Finalized
   - else

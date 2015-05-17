@@ -12,7 +12,7 @@ class Compete::SignInsController < ApplicationController
   # GET /competitions/1/sign_ins
   def show
     add_breadcrumb "Sign-In Sheets"
-    if @competition.start_list?
+    if @competition.start_list_present?
       @competitors = @competition.competitors.reorder(:heat, :lowest_member_bib_number)
     else
       @competitors = @competition.competitors.reorder(:lowest_member_bib_number)

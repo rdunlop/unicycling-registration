@@ -3,7 +3,7 @@
     %h2 Competitors
     %ul.sideNav__list
       %li= link_to "Choose Competitors", competition_competitors_path(@competition)
-      - if @competition.compete_in_order
+      - if @competition.compete_in_order?
         %li= link_to "Set Order",  set_sort_competition_path(@competition)
       %li= link_to "View List", announcer_printing_competition_path(@competition)
 

@@ -1,6 +1,9 @@
 - cache_i18n [@competition, @config] do
   %h2= "#{@competition.award_title} Competitors"
 
+  - if @competition.start_list?
+    %p These competitors are in ID order. Not in competition-order
+
   %table.full.grid.sortable
     %thead
       %tr

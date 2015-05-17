@@ -125,7 +125,6 @@ DONE- UI for setting a user's registration period to be locked into previous per
 - Make it impossible for more import results to be entered once an event has been locked also.
 - UI for using the "International (Ineligible)" selection for registrants.
 -BUG: Add ability to fix typo in user's name (when assigning data entry volunteers)
--BUG: Fix problem when typing in value for "position" and getting it wrong (and it breaks the system)
 
 #5 - IUF ID
 - Be able to force competitors to have a valid IUF membership number in order to register for UNICON (or other Conventions)

@@ -3,9 +3,9 @@
 %table.full.grid.race.sign_in_sheet
   %thead
     %tr
-      - if @competition.compete_in_order
+      - if @competition.compete_in_order?
         %th Order
-      - if @competition.start_list?
+      - if @competition.start_list_present?
         %th Heat
       %th ID
       %th Name
@@ -18,9 +18,9 @@
   %tbody
     - @competitors.active.each do |comp|
       %tr
-        - if @competition.compete_in_order
+        - if @competition.compete_in_order?
           %td= comp.position
-        - if @competition.start_list?
+        - if @competition.start_list_present?
           %th= comp.heat
         %td.bib_number= comp.bib_number
         %td.name

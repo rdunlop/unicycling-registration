@@ -6,7 +6,7 @@
   - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
 
   // Artistic
-  - if @competition.compete_in_order
+  - if @competition.compete_in_order?
     - competitors = competitors.reorder("competitors.position")
     = render partial: "artistic_start_list", locals: { competitors: competitors }
 

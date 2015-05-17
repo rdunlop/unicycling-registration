@@ -9,95 +9,16 @@
     %br
     Any Registrant who is added to this event will automatically create a competitor.
 
+= render "display_sign_ups"
+
 %p
   These are all of the competitors configured for this competition
-%table.sortable.competitor_statuses
-  %caption Competitors
-  %thead
-    %tr
-      - if @competition.compete_in_order
-        %th.competitor_member Order
-      %th.sign_up ID
-      %th.sign_up Name
-      %th.sign_up Age
-      %th.sign_up Gender
-      - if @config.usa?
-        %th.sign_up State
-      - else
-        %th.sign_up Country
-      %th.sign_up Age Group
-      %th.sign_up Original Event Selection
-      %th Warnings?
-      %th.competitor_member
-  %tbody
-    - @competitors.each do |competitor|
-      - next if competitor.new_record?
-      %tr{:class => competitor.status == "active" ? "active" : "not_active", id: "row#{competitor.id}" }
-        - if @competition.compete_in_order
-          %td
-            = competitor.position
-        - event_category = nil
-        - registrant = competitor.members.first.registrant
-        - event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category)
-        %td= competitor.bib_number
-        %td= competitor.detailed_name
-        %td= competitor.age
-        %td= competitor.gender
-        - if @config.usa?
-          %td= competitor.state
-        - else
-          %td= competitor.country
-        %td= competitor.age_group_entry_description
-        %td= event_category
-        %td.js--highlightIfNotBlank= competitor.member_warnings
-        %td
-          = link_to 'Edit', edit_competitor_path(competitor)
-          = link_to 'Delete', competitor, method: :delete, data: { confirm: 'Are you sure?' }, remote: true
+- if @competition.compete_in_order?
+  %p
+    %b Note
+    These are not in order of competition
+= render "display_competitors"
 
-
-List of all competitors, including registrant info, with edit/delete, marking those who have NOT signed up.
-
-%p Please choose the registrants that you would like from the following list, and create competitors from those registrants. All registrants should be associated with competitors
-
-- @remaining_registrants = @registrants - (@competition.competitors.map{ |comp| comp.registrants }.flatten)
-
-= form_tag(add_competition_competitors_path(@competition), {:method => :post}) do
-  %table.sortable
-    %caption Signed-up registrants who are not yet competitors
-    %thead
-      %tr
-        %th
-          %a#competitor_select_all{:href => "#"}> All
-          \/
-          %a#competitor_unselect_all{:href => "#"} None
-        %th ID
-        %th Name
-        %th Sign Up Details
-        %th Assigned to another competition?
-    %tbody
-      - @remaining_registrants.each do |reg|
-        %tr
-          - assigned_comp = reg.matching_competition_in_event(@competition.event)
-          %td= check_box_tag "registrants[]", reg.id, !assigned_comp, :class => "registrant_checkbox"
-          %td= reg.bib_number
-          %td= reg
-          %td= reg.describe_event(@competition.event)
-          %td= assigned_comp
-
-  - if @remaining_registrants.any?
-    - display_all = @competition.num_members_per_competitor.nil?
-    - if display_all || @competition.num_members_per_competitor == "One"
-      = submit_tag Competitor.single_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" }
-      %br
-    - if @competition.num_members_per_competitor == "Two"
-      = submit_tag Competitor.group_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a Pair with the chosen registrants. Continue?" }
-      %br
-    - if display_all ||  @competition.num_members_per_competitor == "Three or more"
-      = submit_tag Competitor.group_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a Single competitor for all chosen registrants. Continue?" }
-      = text_field_tag :group_name, nil, :placeholder => "Group Name (optional)"
-      %br
-
-    = submit_tag Competitor.not_qualified_text, :class => "multiclick counter_action_button", :data => { :confirm => "This will create a Single competitor for each registrants, and mark these as 'not qualified'. Continue?" }
 %hr
 %p
   Advanced Options:

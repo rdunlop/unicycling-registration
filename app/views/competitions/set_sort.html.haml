@@ -1,22 +1,25 @@
 %h3= "#{@competition.event} - #{@competition}"
 
-- if @competition.compete_in_order
-  %p Once you have completed creating all of the competitors, you should use the "Sort" functions to shuffle or specify the order of competition.
+- if @competition.compete_in_order?
+  %p Once all competitors have been created, the sort order should be set.
+  %p Once the sort order has been "Finalized", it will be published for all to see.
   - if @competition.order_finalized?
     %h3= "Sort Order Finalized!"
 
     = link_to "UnMark Sort order as Final", toggle_final_sort_competition_path(@competition), class: "counter_action_button", method: :put, data: { confirm: "Un-finalize competitor order?" }
 
   - else
-    %h4 Sort Competitors Manually (live-save)
+    %fieldset.form__fieldset.data_block
+      %h3 Random Sort
+      = link_to "Apply Random Sort", sort_random_competition_path(@competition), method: :post, data: { confirm: "Are you sure?" }, class: "nonfocus_button"
 
-    %div
-      = render partial: "competitor_sort_list", object: @competition
-      %hr
+    %fieldset.form__fieldset.data_block
+      %h3 Manual Sort
+      %p Drag and Drop competitors to specify the sort order (live-save)
 
-    %h4 Sort Competitors Randomly
+      %div
+        = render partial: "competitor_sort_list", object: @competition
 
-    = link_to "Apply Random Sort", sort_random_competition_path(@competition), method: :post, data: { confirm: "Are you sure?" }, class: "action_button"
     %hr
 
     = link_to "Mark Sort order as Final", toggle_final_sort_competition_path(@competition), class: "action_button", method: :put, data: { confirm: "Have you finished setting the competitor order?" }

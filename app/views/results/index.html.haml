@@ -24,7 +24,10 @@
               = link_to "Competitor List", announcer_printing_competition_path(competition)
           %td
             - if competition.start_list?
-              = link_to "Start List", start_list_printing_competition_path(competition)
+              - if competition.start_list_present?
+                = link_to "Start List", start_list_printing_competition_path(competition)
+              - else
+                Not yet available
           %td
             - if !competition.published? && competition.has_age_group_entry_results?
               - competition.published_age_group_entries.each do |entry|

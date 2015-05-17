@@ -1,0 +1,37 @@
+%table.sortable.competitor_statuses
+  %caption Competitors
+  %thead
+    %tr
+      %th.sign_up ID
+      %th.sign_up Name
+      %th.sign_up Age
+      %th.sign_up Gender
+      - if @config.usa?
+        %th.sign_up State
+      - else
+        %th.sign_up Country
+      %th.sign_up Age Group
+      %th.sign_up Original Event Selection
+      %th Warnings?
+      %th.competitor_member
+  %tbody
+    - @competitors.each do |competitor|
+      - next if competitor.new_record?
+      %tr{:class => competitor.status == "active" ? "active" : "not_active", id: "row#{competitor.id}" }
+        - event_category = nil
+        - registrant = competitor.members.first.registrant
+        - event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category)
+        %td= competitor.bib_number
+        %td= competitor.detailed_name
+        %td= competitor.age
+        %td= competitor.gender
+        - if @config.usa?
+          %td= competitor.state
+        - else
+          %td= competitor.country
+        %td= competitor.age_group_entry_description
+        %td= event_category
+        %td.js--highlightIfNotBlank= competitor.member_warnings
+        %td
+          = link_to 'Edit', edit_competitor_path(competitor)
+          = link_to 'Delete', competitor, method: :delete, data: { confirm: 'Are you sure?' }, remote: true
