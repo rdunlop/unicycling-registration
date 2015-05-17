@@ -9,7 +9,7 @@ class CompetitorsController < ApplicationController
   load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy, :update_row_order]
   load_and_authorize_resource :only => [:edit, :update, :destroy, :update_row_order]
 
-  before_action :set_parent_breadcrumbs, only: [:index, :enter_sign_in, :new, :edit, :display_candidates]
+  before_action :set_parent_breadcrumbs, only: [:index, :new, :edit, :display_candidates]
 
   respond_to :html
 
@@ -51,40 +51,6 @@ class CompetitorsController < ApplicationController
       flash[:alert] = "Error creating lane assignments/competitors #{ex}"
     end
     redirect_to competition_competitors_path(@competition)
-  end
-
-  # Should move this to be the same place as the Printing::CompetitionsController#sign_in_sheet action
-  def enter_sign_in
-    add_breadcrumb "Enter Sign-In"
-    @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
-    respond_to do |format|
-      format.xls {
-        s = Spreadsheet::Workbook.new
-
-        sheet = s.create_worksheet
-        @competitors.each_with_index do |comp, row_number|
-          sheet[row_number, 0] = comp.lowest_member_bib_number
-          sheet[row_number, 1] = comp.detailed_name
-        end
-
-        report = StringIO.new
-        s.write report
-        send_data report.string, :filename => "download_events#{Date.today}.xls"
-      }
-      format.html {} # normal
-    end
-  end
-
-  def update_competitors
-    respond_to do |format|
-      if @competition.update_attributes(update_competitors_params)
-        flash[:notice] = 'Competitors successfully updated.'
-        format.html { redirect_to :back }
-      else
-        enter_sign_in
-        format.html { render "enter_sign_in" }
-      end
-    end
   end
 
   def add
@@ -178,10 +144,6 @@ class CompetitorsController < ApplicationController
 
   def competitor_params
     params.require(:competitor).permit(:status, :position, :custom_name, {:members_attributes => [:registrant_id, :id, :_destroy] } )
-  end
-
-  def update_competitors_params
-    params.require(:competition).permit(:competitors_attributes => [:id, :status, :heat, :geared, :riding_wheel_size, :riding_crank_size, :notes])
   end
 
   def load_competition

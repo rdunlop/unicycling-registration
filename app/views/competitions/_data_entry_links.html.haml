@@ -35,7 +35,7 @@
       = link_to "Start Lists", sign_in_sheet_printing_competition_path(competition)
       = link_to "(pdf)", sign_in_sheet_printing_competition_path(competition, :format => :pdf)
 
-    %li= link_to "Enter Sign-Ins", enter_sign_in_competition_competitors_path(competition)
+    %li= link_to "Enter Sign-Ins", edit_competition_sign_ins_path(competition)
 
   - when "Externally Ranked"
     %li= link_to "View", review_user_competition_import_results_path(current_user, competition, options)

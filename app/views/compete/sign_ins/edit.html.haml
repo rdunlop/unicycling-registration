@@ -4,7 +4,7 @@
   These are all of the competitors configured for this competition
   %br
 = render partial: "shared/error_messages", object: @competition
-= form_for @competition, url: update_competitors_competition_competitors_path(@competition), method: :put do |f|
+= form_for @competition, url: competition_sign_ins_path(@competition), method: :put do |f|
   %table.competitor_statuses
     %caption Competitors
     %thead
