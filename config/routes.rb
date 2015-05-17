@@ -438,6 +438,7 @@ Workspace::Application.routes.draw do
       end
       scope module: "compete" do
         resource :sign_ins, only: [:show, :edit, :update]
+        resource :waves, only: [:show, :update]
       end
 
       resources :heats, :only => [:index, :new, :create] do
@@ -445,9 +446,6 @@ Workspace::Application.routes.draw do
           # Track (LaneAssignments)
           delete :destroy_all
 
-          # 10k (Competitor->Heat)
-          get :upload_form
-          post :upload
           get "age_group_entries/:age_group_entry_id/set_sort", to: "heats#set_sort", as: "set_sort"
           post "age_group_entries/:age_group_entry_id/set_sort", to: "heats#sort", as: "sort"
         end

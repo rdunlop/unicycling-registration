@@ -5,6 +5,8 @@
       %li= link_to "Choose Competitors", competition_competitors_path(@competition)
       - if @competition.compete_in_order?
         %li= link_to "Set Order",  set_sort_competition_path(@competition)
+      - elsif @competition.start_list?
+        %li= link_to "Assign Heats", competition_heats_path(@competition)
       %li= link_to "View List", announcer_printing_competition_path(@competition)
 
     %h2 Data Entry

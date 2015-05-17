@@ -28,22 +28,6 @@ class Compete::SignInsController < ApplicationController
   def edit
     add_breadcrumb "Enter Sign-In"
     @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
-    respond_to do |format|
-      format.xls {
-        s = Spreadsheet::Workbook.new
-
-        sheet = s.create_worksheet
-        @competitors.each_with_index do |comp, row_number|
-          sheet[row_number, 0] = comp.lowest_member_bib_number
-          sheet[row_number, 1] = comp.detailed_name
-        end
-
-        report = StringIO.new
-        s.write report
-        send_data report.string, :filename => "download_events#{Date.today}.xls"
-      }
-      format.html {} # normal
-    end
   end
 
   # PUT /competitions/1/sign_ins

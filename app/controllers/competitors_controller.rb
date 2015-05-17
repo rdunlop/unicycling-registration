@@ -1,4 +1,3 @@
-require 'csv'
 class CompetitorsController < ApplicationController
   layout "competition_management"
   include SortableObject
