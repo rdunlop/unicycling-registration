@@ -2,11 +2,27 @@ class Compete::SignInsController < ApplicationController
   layout "competition_management"
 
   before_action :authenticate_user!
-  load_and_authorize_resource :competition
+  load_resource :competition
+  authorize_resource :competition, parent: false
 
   before_action :set_parent_breadcrumbs
 
   respond_to :html
+
+  # GET /competitions/1/sign_ins
+  def show
+    add_breadcrumb "Sign-In Sheets"
+    if @competition.start_list?
+      @competitors = @competition.competitors.reorder(:heat, :lowest_member_bib_number)
+    else
+      @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
+    end
+
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf("show") }
+    end
+  end
 
   # GET /competitions/1/sign_ins/edit
   def edit

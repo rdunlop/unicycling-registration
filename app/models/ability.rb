@@ -50,7 +50,7 @@ class Ability
   def set_data_entry_volunteer_abilities(user)
     can :data_entry_menu, :welcome
 
-    can [:read, :enter_sign_in, :update_competitors], Competitor
+    can [:read], Competitor
     can :read, Competition
 
     can :read, Judge, :user_id => user.id
@@ -66,7 +66,7 @@ class Ability
     end
 
     # printing forms:
-    can [:announcer, :heat_recording, :single_attempt_recording, :two_attempt_recording, :sign_in_sheet], Competition
+    can [:announcer, :heat_recording, :single_attempt_recording, :two_attempt_recording], Competition
 
     # data entry
     can :manage, ImportResult do |import_result|

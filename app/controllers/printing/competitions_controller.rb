@@ -3,7 +3,7 @@ class Printing::CompetitionsController < ApplicationController
   before_action :load_competition
   authorize_resource :competition, :parent => false
 
-  before_action :set_breadcrumbs, only: [:announcer, :sign_in_sheet]
+  before_action :set_breadcrumbs, only: [:announcer]
 
   def announcer
     add_breadcrumb "Competitor List"
@@ -32,19 +32,6 @@ class Printing::CompetitionsController < ApplicationController
     end
   end
 
-  def sign_in_sheet
-    add_breadcrumb "Sign-In Sheets"
-    if @competition.start_list?
-      @competitors = @competition.competitors.reorder(:heat, :lowest_member_bib_number)
-    else
-      @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
-    end
-
-    respond_to do |format|
-      format.html
-      format.pdf { render_common_pdf("sign_in_sheet") }
-    end
-  end
 
   def single_attempt_recording
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"

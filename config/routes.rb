@@ -33,7 +33,6 @@ Workspace::Application.routes.draw do
           get :single_attempt_recording
           get :two_attempt_recording
           get :results
-          get :sign_in_sheet
         end
       end
       resources :events, :only => [] do
@@ -438,7 +437,7 @@ Workspace::Application.routes.draw do
         end
       end
       scope module: "compete" do
-        resource :sign_ins, only: [:edit, :update]
+        resource :sign_ins, only: [:show, :edit, :update]
       end
 
       resources :heats, :only => [:index, :new, :create] do
