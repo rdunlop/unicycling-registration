@@ -11,7 +11,7 @@ class Compete::WavesController < ApplicationController
 
   # GET /competitions/1/waves
   def show
-    add_breadcrumb "Current Heats"
+    add_breadcrumb "Current Waves"
     @competitors = @competition.competitors
     respond_to do |format|
       format.xls {
@@ -19,11 +19,11 @@ class Compete::WavesController < ApplicationController
 
         sheet = s.create_worksheet
         sheet[0, 0] = "ID"
-        sheet[0, 1] = "Heat"
+        sheet[0, 1] = "Wave"
         sheet[0, 2] = "Name"
         @competitors.each.with_index(1) do |comp, row_number|
           sheet[row_number, 0] = comp.lowest_member_bib_number
-          sheet[row_number, 1] = comp.heat
+          sheet[row_number, 1] = comp.wave
           sheet[row_number, 2] = comp.detailed_name
         end
 
@@ -50,12 +50,12 @@ class Compete::WavesController < ApplicationController
             next if index == 0
             row = CSV.parse_line (line)
             bib_number = row[0]
-            heat = row[1]
+            wave = row[1]
             # skip blank lines
-            next if bib_number.nil? && heat.nil?
+            next if bib_number.nil? && wave.nil?
             competitor = @competition.competitors.where(lowest_member_bib_number: bib_number).first
             raise "Unable to find competitor #{bib_number}" if competitor.nil?
-            competitor.update_attribute(:heat, heat)
+            competitor.update_attribute(:wave, wave)
           end
         end
       end

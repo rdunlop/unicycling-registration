@@ -4,7 +4,7 @@
   %caption Competitors
   %thead
     %tr
-      %th Heat
+      %th Wave
       %th.sign_up ID
       %th.sign_up Name
       %th.sign_up Age
@@ -14,7 +14,7 @@
   %tbody
     - @competitors.each do |competitor|
       %tr
-        %th= competitor.heat
+        %th= competitor.wave
         %td= competitor.lowest_member_bib_number
         %td= competitor.to_s
         %td= competitor.age

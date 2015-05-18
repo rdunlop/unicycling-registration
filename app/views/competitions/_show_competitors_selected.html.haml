@@ -22,7 +22,7 @@
 
   - elsif @competition.start_list?
     -# Heats
-    %li= link_to "Assign Heats", competition_heats_path(@competition)
+    %li= link_to "Assign Heats/Waves", competition_heats_path(@competition)
 
   %li
     = link_to "Competitor list", announcer_printing_competition_path(@competition)

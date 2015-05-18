@@ -11,8 +11,12 @@ describe "judges/index" do
     assign(:judge_types, [])
     assign(:judges, [])
     assign(:competitions_with_judges, [])
-    assign(:judge, Judge.new)
+    assign(:judge, Judge.new(competition: @ec))
+
+    user = FactoryGirl.create(:super_admin_user)
+    sign_in user
   end
+
   it "should show the 'new judge type'" do
     render
 

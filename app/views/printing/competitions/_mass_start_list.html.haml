@@ -1,7 +1,7 @@
 .nobreak
-  %h3= "Heat #{heat}"
-  - if heat_times.count > 0
-    %h4= heat_times.where(heat: heat).first.try(:scheduled_time)
+  %h3= "Wave #{wave}"
+  - if wave_times.count > 0
+    %h4= wave_times.where(wave: wave).first.try(:scheduled_time)
 
   %table.full.grid
     %thead

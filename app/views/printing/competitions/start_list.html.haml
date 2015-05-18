@@ -1,7 +1,7 @@
 - cache_i18n [@competition, @config] do
   %h2= "Order of #{@competition.award_title} Competitors"
 
-  - heat_times = @competition.heat_times
+  - wave_times = @competition.wave_times
 
   - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
 
@@ -13,12 +13,12 @@
   // Track
   - if @competition.uses_lane_assignments?
     - competitors = competitors.includes(:lane_assignments).reorder("lane_assignments.heat, lane_assignments.lane")
-    = render partial: "lane_assignment_start_list", locals: { competitors: competitors, heat_times: heat_times }
+    = render partial: "lane_assignment_start_list", locals: { competitors: competitors, wave_times: wave_times }
 
   // Distance Mass Start
-  - has_heats = competitors.where.not(heat: nil).any?
-  - if has_heats
-    - heats = competitors.map(&:heat).uniq.compact.sort
-    - heats.each do |heat|
-      - filtered_competitors = competitors.where(heat: heat).reorder(:lowest_member_bib_number)
-      = render partial: "mass_start_list", locals: { heat: heat, competitors: filtered_competitors, heat_times: heat_times }
+  - has_waves = competitors.where.not(wave: nil).any?
+  - if has_waves
+    - waves = competitors.map(&:wave).uniq.compact.sort
+    - waves.each do |wave|
+      - filtered_competitors = competitors.where(wave: wave).reorder(:lowest_member_bib_number)
+      = render partial: "mass_start_list", locals: { wave: wave, competitors: filtered_competitors, wave_times: wave_times }

@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415020656) do
+ActiveRecord::Schema.define(version: 20150517205930) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -210,7 +211,7 @@ ActiveRecord::Schema.define(version: 20150415020656) do
     t.boolean  "geared",                               default: false, null: false
     t.integer  "riding_wheel_size"
     t.string   "notes",                    limit: 255
-    t.integer  "heat"
+    t.integer  "wave"
     t.integer  "riding_crank_size"
   end
 
@@ -449,18 +450,6 @@ ActiveRecord::Schema.define(version: 20150415020656) do
   end
 
   add_index "external_results", ["competitor_id"], name: "index_external_results_on_competitor_id", using: :btree
-
-  create_table "heat_times", force: :cascade do |t|
-    t.integer  "competition_id"
-    t.integer  "heat"
-    t.integer  "minutes"
-    t.integer  "seconds"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "scheduled_time", limit: 255
-  end
-
-  add_index "heat_times", ["competition_id", "heat"], name: "index_heat_times_on_competition_id_and_heat", unique: true, using: :btree
 
   create_table "import_results", force: :cascade do |t|
     t.integer  "user_id"
@@ -998,10 +987,23 @@ ActiveRecord::Schema.define(version: 20150415020656) do
   add_index "volunteer_opportunities", ["description"], name: "index_volunteer_opportunities_on_description", unique: true, using: :btree
   add_index "volunteer_opportunities", ["position"], name: "index_volunteer_opportunities_on_position", using: :btree
 
+  create_table "wave_times", force: :cascade do |t|
+    t.integer  "competition_id"
+    t.integer  "wave"
+    t.integer  "minutes"
+    t.integer  "seconds"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "scheduled_time", limit: 255
+  end
+
+  add_index "wave_times", ["competition_id", "wave"], name: "index_wave_times_on_competition_id_and_wave", unique: true, using: :btree
+
   create_table "wheel_sizes", force: :cascade do |t|
     t.integer  "position"
     t.string   "description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
 end

@@ -13,7 +13,7 @@
 #  geared                   :boolean          default(FALSE), not null
 #  riding_wheel_size        :integer
 #  notes                    :string(255)
-#  heat                     :integer
+#  wave                     :integer
 #  riding_crank_size        :integer
 #
 # Indexes
@@ -56,13 +56,13 @@ describe Competitor do
       end
     end
 
-    describe "when there is a matching heat + heat_time" do
+    describe "when there is a matching wave + wave_time" do
       before :each do
-        allow(@competition).to receive(:heat_time_for).with(1).and_return(30)
+        allow(@competition).to receive(:wave_time_for).with(1).and_return(30)
       end
 
-      it "uses the heat time for start times" do
-        @comp.heat = 1
+      it "uses the wave time for start times" do
+        @comp.wave = 1
         expect(@comp.best_time_in_thousands).to eq(30000)
       end
     end
@@ -225,7 +225,7 @@ describe Competitor do
       @reg2 = member2.registrant
     end
     it "should display the external id's for all members" do
-      expect(@comp.bib_number).to eq(@reg1.external_id.to_s + "," + @reg2.external_id.to_s)
+      expect(@comp.bib_number).to eq(@reg1.external_id.to_s + ", " + @reg2.external_id.to_s)
     end
     it "should display the ages for all members (when they are the same)" do
       expect(@comp.age).to eq(@reg1.age)

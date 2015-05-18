@@ -13,7 +13,7 @@
 #  geared                   :boolean          default(FALSE), not null
 #  riding_wheel_size        :integer
 #  notes                    :string(255)
-#  heat                     :integer
+#  wave                     :integer
 #  riding_crank_size        :integer
 #
 # Indexes

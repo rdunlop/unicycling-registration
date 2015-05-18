@@ -1,10 +1,10 @@
 # == Schema Information
 #
-# Table name: heat_times
+# Table name: wave_times
 #
 #  id             :integer          not null, primary key
 #  competition_id :integer
-#  heat           :integer
+#  wave           :integer
 #  minutes        :integer
 #  seconds        :integer
 #  created_at     :datetime
@@ -13,15 +13,15 @@
 #
 # Indexes
 #
-#  index_heat_times_on_competition_id_and_heat  (competition_id,heat) UNIQUE
+#  index_wave_times_on_competition_id_and_wave  (competition_id,wave) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :heat_time do
+  factory :wave_time do
     competition # FactoryGirl
-    heat 1
+    wave 1
     minutes 2
     seconds 3
   end

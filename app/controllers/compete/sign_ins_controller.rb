@@ -13,7 +13,7 @@ class Compete::SignInsController < ApplicationController
   def show
     add_breadcrumb "Sign-In Sheets"
     if @competition.start_list_present?
-      @competitors = @competition.competitors.reorder(:heat, :lowest_member_bib_number)
+      @competitors = @competition.competitors.reorder(:wave, :lowest_member_bib_number)
     else
       @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
     end
@@ -46,7 +46,7 @@ class Compete::SignInsController < ApplicationController
   private
 
   def update_competitors_params
-    params.require(:competition).permit(:competitors_attributes => [:id, :status, :heat, :geared, :riding_wheel_size, :riding_crank_size, :notes])
+    params.require(:competition).permit(:competitors_attributes => [:id, :status, :wave, :geared, :riding_wheel_size, :riding_crank_size, :notes])
   end
 
   def set_parent_breadcrumbs

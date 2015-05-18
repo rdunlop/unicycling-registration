@@ -51,13 +51,13 @@ class Competition < ActiveRecord::Base
   has_many :competition_sources, :foreign_key => "target_competition_id", :inverse_of => :target_competition, :dependent => :destroy
   has_many :combined_competition_entries, dependent: :destroy
   has_many :published_age_group_entries, dependent: :destroy
-  has_many :heat_times, dependent: :destroy
+  has_many :wave_times, dependent: :destroy
   has_many :competition_results, dependent: :destroy
   belongs_to :combined_competition
 
   accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
   accepts_nested_attributes_for :competitors
-  accepts_nested_attributes_for :heat_times, allow_destroy: true
+  accepts_nested_attributes_for :wave_times, allow_destroy: true
 
   has_many :lane_assignments, :dependent => :destroy
 
@@ -341,9 +341,9 @@ class Competition < ActiveRecord::Base
     scoring_class
   end
 
-  def heat_time_for(heat_number)
-    configured_heat_time = heat_times.where(heat: heat_number).first
-    configured_heat_time.total_seconds if configured_heat_time
+  def wave_time_for(wave_number)
+    configured_wave_time = wave_times.where(wave: wave_number).first
+    configured_wave_time.total_seconds if configured_wave_time
   end
 
   def can_calculated_age_group_results?

@@ -13,7 +13,7 @@
 #  geared                   :boolean          default(FALSE), not null
 #  riding_wheel_size        :integer
 #  notes                    :string(255)
-#  heat                     :integer
+#  wave                     :integer
 #  riding_crank_size        :integer
 #
 # Indexes
@@ -311,7 +311,7 @@ class Competitor < ActiveRecord::Base
     if competition.uses_lane_assignments
       lane_assignments.first.try(:heat)
     else
-      read_attribute(:heat)
+      read_attribute(:wave)
     end
   end
 
@@ -521,7 +521,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def competition_start_time
-    competition.heat_time_for(heat) || 0
+    competition.wave_time_for(heat) || 0
   end
 
   def better_time(time_1, time_2)
