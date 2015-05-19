@@ -13,9 +13,8 @@ config/skylight.yml
 *.dump
 dump.rdb
 
-# Ignore schema downloads but include the db schema
+# Ignore schema downloads
 *.schema
-!db.schema
 
 # Ignore bundler config
 /.bundle
