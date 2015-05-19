@@ -1,0 +1,19 @@
+---
+de:
+  songs:
+    songs_list:
+      add_song: Lied hinzufügen
+      changes_after_deadline: Wenn du nach diesem Datum deine Musik ändern musst,
+        kontaktiere bitte den Direktor/Organisator (oder benutze 'Hilfe'->'Feedback').
+      description: Für bestimmte Wettbewerbe wird Musik während der Wettbewerbszeit
+        des Teilnehmers gespielt. Bitte laden eine mp3 Datei mit deiner Wunsch- Musik
+        hoch. Bitte verwende Musik mit der entsprechenden Länge (siehe Regelbuch)
+        für deinen Wettbewerb / Kategorie.
+      download: Herunterladen
+      guest: Gast?
+      music_deadline: Musik kann bis zum %{end_date} hochgeladen werden
+      reg_name: Anmelde Name
+      remove: Entfernen
+      requirements: Es ist trotzdem erforderlich, die Musik auf einer CD oder einem
+        MP3-Player zum Wettbewerb dabei zu haben. Dies ist erforderlich um bei technischen
+        Problemen mit dem upload eine alternative Kopie zur Verfügung zu haben.

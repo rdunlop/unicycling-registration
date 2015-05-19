@@ -1,6 +1,0 @@
-el = $($.trim('<%= escape_javascript render :partial => "/age_group_types/age_group_entry_sort_list", :object => @age_group_type %>'))
-
-p = $('table').parent()
-p.children().remove()
-p.append(el)
-set_sortable();

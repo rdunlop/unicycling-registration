@@ -6,8 +6,8 @@
 #  name                          :string(255)
 #  created_at                    :datetime
 #  updated_at                    :datetime
-#  use_age_group_places          :boolean          default(FALSE)
-#  percentage_based_calculations :boolean          default(FALSE)
+#  use_age_group_places          :boolean          default(FALSE), not null
+#  percentage_based_calculations :boolean          default(FALSE), not null
 #
 # Indexes
 #

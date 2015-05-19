@@ -1,0 +1,10 @@
+---
+en:
+  activerecord:
+    attributes:
+      registrant_expense_item:
+        tax: Taxes
+    models:
+      registrant_expense_item:
+        one: Item
+        other: Items

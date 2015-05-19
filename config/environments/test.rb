@@ -1,4 +1,4 @@
-Workspace::Application.configure do
+Rails.application.configure do
   config.after_initialize do
     PaperTrail.enabled = false
   end
@@ -14,12 +14,12 @@ Workspace::Application.configure do
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
-  config.eager_load = false
+  config.eager_load = true # set to true so that simplecov sees all files
 
   config.active_record.maintain_test_schema = true
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
+  config.serve_static_files  = true
   config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching.
@@ -39,31 +39,17 @@ Workspace::Application.configure do
 
   config.assets.raise_runtime_errors = true
 
+  # Randomize the order test cases are executed.
+  config.active_support.test_order = :random
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
 end
 
 Rails.application.secrets.domain = "localhost.dev"
 Rails.application.secrets.mail_full_email = "from@example.com"
-Rails.application.secrets.secret = "somesecretstringisreallylongenoughtobesecurecheckpassing"
+Rails.application.secrets.secret_token = "somesecretstringisreallylongenoughtobesecurecheckpassing"
 Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
-
-# Necessary to allow the tests to execute when they don't have a locale defined.
-#  As per (https://github.com/rspec/rspec-rails/issues/255)
-# Rails 4
-class ActionDispatch::Routing::RouteSet::NamedRouteCollection::UrlHelper
-  def call(t, args)
-    t.url_for(handle_positional_args(t, args, { locale: I18n.default_locale }.merge( @options ), @segment_keys))
-  end
-end
-
-# Rails 3
-# class ActionDispatch::Routing::RouteSet
-#  def url_for_with_locale_fix(options)
-#    url_for_without_locale_fix({:locale => I18n.default_locale}.merge(options))
-#  end
-#
-#  alias_method_chain :url_for, :locale_fix
-# end
-

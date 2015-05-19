@@ -105,5 +105,4 @@ task :create_fake_data => :environment do
 
     @regs << reg
   end
-
 end

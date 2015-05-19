@@ -6,7 +6,7 @@
 #  target_competition_id :integer
 #  event_category_id     :integer
 #  competition_id        :integer
-#  gender_filter         :string(255)
+#  gender_filter         :string(255)      default("Both"), not null
 #  max_place             :integer
 #  created_at            :datetime
 #  updated_at            :datetime
@@ -28,35 +28,35 @@ describe CompetitionSource do
     @cs = FactoryGirl.create(:competition_source, :target_competition => @competition)
   end
   it "is valid from FactoryGirl" do
-    @cs.valid?.should == true
+    expect(@cs.valid?).to eq(true)
   end
 
   it "requires a gender_filter" do
     @cs.gender_filter = nil
-    @cs.valid?.should == false
+    expect(@cs.valid?).to eq(false)
   end
   it "requires an target_competition" do
     @cs.target_competition = nil
-    @cs.valid?.should == false
+    expect(@cs.valid?).to eq(false)
   end
 
   it "requires a competition or event_category" do
     @cs.event_category = nil
     @cs.competition = nil
-    @cs.valid?.should == false
+    expect(@cs.valid?).to eq(false)
   end
 
   it "cannot select max_place without choosing competition" do
     @cs.competition = nil
     @cs.max_place = 1
-    @cs.valid?.should == false
+    expect(@cs.valid?).to eq(false)
 
     @cs.competition = FactoryGirl.create(:competition)
-    @cs.valid?.should == true
+    expect(@cs.valid?).to eq(true)
   end
 
   it "can be found from the competition" do
-    @competition.competition_sources.should == [@cs]
+    expect(@competition.competition_sources).to eq([@cs])
   end
 
   describe "with a competition_source targetting another competition" do
@@ -70,13 +70,13 @@ describe CompetitionSource do
       @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
       FactoryGirl.create(:result, place: 1, result_type: "Overall", competitor: @competitor)
 
-      @cs2.signed_up_registrants.count.should == 1
+      expect(@cs2.signed_up_registrants.count).to eq(1)
     end
     it "doesn't choose a competitor with an overall_place worse than the required" do
       @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
       FactoryGirl.create(:result, place: 3, result_type: "Overall", competitor: @competitor)
 
-      @cs2.signed_up_registrants.count.should == 0
+      expect(@cs2.signed_up_registrants.count).to eq(0)
     end
   end
 
@@ -88,7 +88,7 @@ describe CompetitionSource do
       allow(reg).to receive(:age).and_return(11)
       @cs.min_age = 10
       @cs.max_age = 11
-      @cs.signed_up_registrants.count.should == 1
+      expect(@cs.signed_up_registrants.count).to eq(1)
     end
   end
 end

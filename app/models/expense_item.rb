@@ -3,20 +3,16 @@
 # Table name: expense_items
 #
 #  id                     :integer          not null, primary key
-#  name                   :string(255)
-#  description            :string(255)
-#  cost                   :decimal(, )
-#  export_name            :string(255)
 #  position               :integer
 #  created_at             :datetime
 #  updated_at             :datetime
 #  expense_group_id       :integer
-#  has_details            :boolean
-#  details_label          :string(255)
+#  has_details            :boolean          default(FALSE), not null
 #  maximum_available      :integer
-#  tax_percentage         :decimal(5, 3)    default(0.0)
-#  has_custom_cost        :boolean          default(FALSE)
+#  has_custom_cost        :boolean          default(FALSE), not null
 #  maximum_per_registrant :integer          default(0)
+#  cost_cents             :integer
+#  tax_cents              :integer          default(0), not null
 #
 # Indexes
 #
@@ -24,33 +20,35 @@
 #
 
 class ExpenseItem < ActiveRecord::Base
-  default_scope { order('expense_group_id ASC, position ASC') }
-
-  validates :name, :description, :position, :cost, :expense_group, :tax_percentage, :presence => true
+  validates :name, :cost, :expense_group, :presence => true
   validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
   validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :tax_percentage, :numericality => {:greater_than_or_equal_to => 0}
 
-  has_many :payment_details, dependent: :restrict_with_error
-  has_many :registrant_expense_items, :inverse_of => :expense_item, dependent: :restrict_with_error
+  monetize :tax_cents, :cost_cents, numericality: { greater_than_or_equal_to: 0 }
+  monetize :total_cost_cents
+
+  has_many :payment_details, dependent: :restrict_with_exception
+  has_many :registrant_expense_items, :inverse_of => :expense_item, dependent: :restrict_with_exception
   has_many :coupon_code_expense_items, dependent: :destroy
 
-  translates :name, :description, :details_label
+  translates :name, :details_label, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   belongs_to :expense_group, :inverse_of => :expense_items
   validates :expense_group_id, :uniqueness => true, :if => "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
 
+  acts_as_restful_list
+
   before_destroy :check_for_payment_details
 
   after_create :create_reg_items
 
-  after_initialize :init
+  def self.ordered
+    order(:expense_group_id, :position)
+  end
 
-  def init
-    self.has_details = false if self.has_details.nil?
-    self.tax_percentage = 0 if self.tax_percentage.nil?
-    self.has_custom_cost = false if self.has_custom_cost.nil?
+  def self.user_manageable
+    includes(:expense_group).where(expense_groups: { registration_items: false })
   end
 
   # items paid for
@@ -99,7 +97,7 @@ class ExpenseItem < ActiveRecord::Base
       end
     end
     if self.expense_group.noncompetitor_required
-      Registrant.notcompetitor.each do |reg|
+      Registrant.noncompetitor.each do |reg|
         reg.build_registration_item(self)
         reg.save
       end
@@ -117,20 +115,8 @@ class ExpenseItem < ActiveRecord::Base
     self.expense_group.to_s + " - " + name
   end
 
-  # round the taxes to the next highest penny
-  def tax
-    raw_tax_cents = (cost * (tax_percentage/100.0)) * 100
-    fractions_of_penny = ((raw_tax_cents).to_i - (raw_tax_cents) != 0)
-
-    tax_cents = raw_tax_cents.to_i
-    if fractions_of_penny
-      tax_cents += 1
-    end
-    tax_cents / 100.0
-  end
-
-  def total_cost
-    cost + tax
+  def total_cost_cents
+    (cost_cents + tax_cents) if cost_cents && tax_cents
   end
 
   def num_selected_items
@@ -151,5 +137,11 @@ class ExpenseItem < ActiveRecord::Base
     else
       num_selected_items >= maximum_available
     end
+  end
+
+  def has_limits?
+    return true if maximum_available && maximum_available > 0
+    return true if maximum_per_registrant && maximum_per_registrant > 0
+    false
   end
 end

@@ -1,0 +1,49 @@
+%h1 User Management
+
+%h3 Users with advanced permissions:
+%table.sortable
+  %thead
+    %tr
+      %th User
+      - @available_roles.each do |role|
+        %th= role
+  %tbody
+    - User.with_any_role(*@available_roles).each do |user|
+      %tr
+        %th= user
+        - @available_roles.each do |role|
+          %td
+            = user.has_role?(role)
+            - if user.has_role?(role)
+              = link_to "X", set_role_permissions_path(role_name: role, user_id: user.id), method: :put, data: { confirm: "Are you sure?" }
+
+.l--2up
+  .l--column
+    %fieldset.form__fieldset
+      %h3 Add new permission
+      = form_tag(set_role_permissions_path, { :method => :put}) do
+        = label_tag :user_id, "User"
+        = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true , class: "chosen-select"
+        %br
+        = label_tag :role_name, "Role"
+        = select_tag :role_name, options_for_select(@available_roles), include_blank: true
+        %br
+        = submit_tag "Add Permission"
+
+  .l--column
+    - if can? :set_password, :permission
+      %fieldset.form__fieldset
+        %h3 Set User Password
+        = form_tag(set_password_permissions_path, { :method => :put}) do
+          = label_tag :user_id, "User"
+          = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true, class: "chosen-select"
+          %br
+          = label_tag :password
+          = text_field_tag :password
+          %br
+          = submit_tag "Set Password"
+
+%h3 Role Descriptions:
+- @available_roles.each do |role|
+  %h4= role
+  %pre= User.role_description(role)

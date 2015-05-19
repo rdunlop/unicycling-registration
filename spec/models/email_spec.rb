@@ -5,11 +5,11 @@ describe Email do
     @email = FactoryGirl.build(:email)
   end
   it "is initially valid" do
-    @email.valid?.should == true
+    expect(@email.valid?).to eq(true)
   end
   it "must have a subject" do
     @email.subject = nil
-    @email.valid?.should == false
+    expect(@email.valid?).to eq(false)
   end
   describe "with one confirmed account, and one with unpaid registrant" do
     before(:each) do
@@ -20,18 +20,18 @@ describe Email do
 
     it "lists email addresses of all users when confirmed_accounts selected" do
       @email.confirmed_accounts = true
-      @email.filtered_user_emails.should =~ [@reg.user.email, @user.email]
+      expect(@email.filtered_user_emails).to match_array([@reg.user.email, @user.email])
     end
 
     it "lists email addresses only of the user with unpaid registrants" do
       @email.unpaid_reg_accounts = true
-      @email.filtered_user_emails.should =~ [@reg.user.email]
+      expect(@email.filtered_user_emails).to match_array([@reg.user.email])
     end
 
     it "doesn't list the user twice if they have 2 registrants to pay for" do
       @reg2 = FactoryGirl.create(:competitor, :user => @reg.user)
       @email.unpaid_reg_accounts = true
-      @email.filtered_user_emails.should =~ [@reg.user.email]
+      expect(@email.filtered_user_emails).to match_array([@reg.user.email])
     end
   end
 end

@@ -58,7 +58,7 @@ class BaseScoringClass
   end
 
   # Do the competitors compete in a pre-defined order?
-  def compete_in_order
+  def compete_in_order?
     false
   end
 

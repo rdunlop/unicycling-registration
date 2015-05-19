@@ -5,8 +5,8 @@
 #  id             :integer          not null, primary key
 #  competition_id :integer
 #  results_file   :string(255)
-#  system_managed :boolean
-#  published      :boolean
+#  system_managed :boolean          default(FALSE), not null
+#  published      :boolean          default(FALSE), not null
 #  published_date :datetime
 #  created_at     :datetime
 #  updated_at     :datetime

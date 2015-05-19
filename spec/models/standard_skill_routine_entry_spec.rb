@@ -23,6 +23,6 @@ describe StandardSkillRoutineEntry do
     skr.save!
 
     skr = StandardSkillRoutineEntry.last
-    skr.standard_skill_entry.description.should == "riding - 8"
+    expect(skr.standard_skill_entry.description).to eq("riding - 8")
   end
 end

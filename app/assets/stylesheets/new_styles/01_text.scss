@@ -34,6 +34,56 @@ div {
   }
 }
 
+.field {
+  label {
+    display: block;
+    line-height: 1.2;
+    margin: 0 0 0.25em;
+    padding: 0;
+  }
+  .label--radio, .label--checkbox {
+    display: inline-block;
+  }
+
+  .input_details {
+    color: gray;
+    text-align: left;
+    font-size: 10px;
+  }
+
+  textarea.text {
+    width: 100%;
+    height: 8em;
+  }
+}
+.field input, .field select {
+  width: 100%;
+  margin: 0;
+  font-size: 13px;
+}
+.field {
+  input[type="radio"], input[type="checkbox"] {
+    width: auto;
+  }
+  input[disabled="disabled"] {
+    background-color: lightgrey;
+  }
+}
+
+$help_size: 16px;
+.help_bubble {
+  display: inline-block;
+  border: solid thin;
+  border-radius: $help_size;
+  width: $help_size;
+  height: $help_size;
+  font-size: 11px;
+  text-align: center;
+  &:before {
+    content: '?';
+  }
+}
+
 .unpaid {
   color: red;
 }

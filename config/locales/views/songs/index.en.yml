@@ -1,0 +1,10 @@
+---
+en:
+  songs:
+    index:
+      add_songs_for_others: Add songs for other registrants
+      new_song: New song (Step 1)
+      step_1: Step 1
+      step_2: Step 2
+      title: "%{name}'s songs"
+      upload_file: Upload Music File

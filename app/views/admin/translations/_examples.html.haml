@@ -1,0 +1,39 @@
+%h3 Some texts need to be left alone:
+
+.translation_examples
+  .example
+    Example:
+    %pre
+      \---
+      one: Contact Detail
+      other: Contact Details
+
+    Should become:
+    %pre
+      \---
+      one: Kontakt Detail
+      other: Kontakt Details
+
+  .example
+    Example:
+    %pre
+      \---
+      \- :month
+      \- :day
+      \- :year
+
+    should become:
+    %pre
+      \---
+      \- :month
+      \- :day
+      \- :year
+
+  .example
+    Example:
+    %pre
+      Welcome %{email} to the Unicycling Registration!
+
+    Should become:
+    %pre
+      Wilkommen %{email} zur Einrad Anmeldung!

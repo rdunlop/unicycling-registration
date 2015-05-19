@@ -1,0 +1,25 @@
+en:
+  welcome:
+    help:
+      header: Help
+      subheader: This site is for the %{domain} Unicycling Convention registration
+      frequently_asked_questions: FAQ
+      i_cannot_login: I cannot Log in
+      login_help: Once you have Signed Up, check your e-mail for a confirmation message.
+        Check all spam filters. Choose "Resend Confirmation E-mail" if you cannot find
+        the e-mail
+      translations: Translations
+      translation_help: I found a missing/mistake in a translation. Submit the translatio
+        details here in the 'feedback', or apply to be a translator, and help do more of
+        the translations for a language.
+      registration: How do I Register
+      registration_help: Once you have signed in, choose "Create New Competitor" or =
+        "Create New Non-Competitor" and fill out the fields.
+
+        Pay for the registration in order to secure your registration
+      sharing_registration_details: How to share Registration Details
+      sharing_registration_details_help: As a Team Captain or Club leader you can
+        request access so that you can pay for other members' registrations, as
+        well as see the events that they have signed up for.
+      sharing_link: Request access to your team's registrations through the %{link} Form
+      general_help: If you have any problems or questions about registration, please submit feedback below

@@ -1,0 +1,48 @@
+%h1 Advanced Settings
+
+%p These settings enable/disable various portions of the site. Most likely you should not change any of these settings for your convention.
+
+= simple_form_for(@event_configuration, url: update_advanced_settings_event_configuration_path, method: :put, multipart: true) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+
+  %fieldset.form__fieldset
+    %h3 Offered Languages
+
+    = f.input :enabled_locales, collection: EventConfiguration.all_available_languages, input_html: { multiple: true }
+
+  %fieldset.form__fieldset
+    %h3 Tax Settings
+    = f.input :italian_requirements
+    .description
+      Requires collection of BirthPlace from everyone, and Italian Fiscal Code from Italian registrants.
+
+  %fieldset.form__fieldset
+    %h3 Unicycling Society of America (USA) Membership Summary
+
+    = f.input :usa_membership_config
+
+    = f.association :usa_individual_expense_item, collection: ExpenseItem.user_manageable
+    = f.association :usa_family_expense_item, collection: ExpenseItem.user_manageable
+
+
+  %fieldset.form__fieldset
+    %h3 Standard Skill
+
+    %p
+      Enabling this feature allows a registrant to submit their standard skill routine with their registration.
+
+    %p
+      Note: The Standard Skill Judging system is currently incomplete, and not included in this online system
+
+    = f.input :standard_skill
+
+    = f.input :standard_skill_closed_date
+
+  %fieldset.form__fieldset
+    = f.input :usa
+    = f.input :iuf
+    IUF is Unused?
+    = f.input :display_confirmed_events
+    = f.input :test_mode
+
+  = f.button :submit

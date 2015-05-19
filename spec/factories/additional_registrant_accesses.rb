@@ -5,11 +5,11 @@
 #  id                 :integer          not null, primary key
 #  user_id            :integer
 #  registrant_id      :integer
-#  declined           :boolean
-#  accepted_readonly  :boolean
+#  declined           :boolean          default(FALSE), not null
+#  accepted_readonly  :boolean          default(FALSE), not null
 #  created_at         :datetime
 #  updated_at         :datetime
-#  accepted_readwrite :boolean          default(FALSE)
+#  accepted_readwrite :boolean          default(FALSE), not null
 #
 # Indexes
 #

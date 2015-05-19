@@ -7,13 +7,8 @@
       .current_price= print_formatted_currency(reg_period.competitor_expense_item.cost)
       .price_note= print_time_until_prices_increase(reg_period)
       %ul.price_details
-        %li.highlighted Compete in all events
-        %li Participate in all workshops
-        %li Ride at all NAUCC 2015 facilities
-        %li Watch all Competition and Convention activities
-        %li Buy T-Shirts
-        %li Buy Dinner Tickets
-        %li Support the Unicycling community
+        - EventConfiguration.singleton.competitor_benefits_list.each do |item|
+          %li= item
       = link_to t(".create_new_competitor"), {}, class: "js--display_new_registrant competitor registration_button", data: { registrant_type: 'competitor' }
   - if reg_period && reg_period.noncompetitor_expense_item
     .pricing_option.non-competitor_sign_up
@@ -21,27 +16,17 @@
       .current_price= print_formatted_currency(reg_period.noncompetitor_expense_item.cost)
       .price_note= print_time_until_prices_increase(reg_period)
       %ul.price_details
-        %li.highlighted Participate in all workshops
-        %li Ride at all NAUCC 2015 facilities
-        %li Watch all Competition and Convention activities
-        %li Buy T-Shirts
-        %li Buy Dinner Tickets
-        %li Support the Unicycling community
-        %li &nbsp;
+        - EventConfiguration.singleton.noncompetitor_benefits_list.each do |item|
+          %li= item
       = link_to t(".create_new_noncompetitor"), {}, class: "js--display_new_registrant noncompetitor registration_button", data: { registrant_type: 'noncompetitor' }
   - if @config.spectators
     .pricing_option.spectator_sign_up
       %h3.title= t('spectator')
-      .current_price $0
+      .current_price= print_formatted_currency(0)
       .price_note &nbsp;
       %ul.price_details
-        %li.highlighted Watch all Competition and Convention activities
-        %li Buy T-Shirts
-        %li Buy Dinner Tickets
-        %li Support the Unicycling community
-        %li &nbsp;
-        %li &nbsp;
-        %li &nbsp;
+        - EventConfiguration.singleton.spectator_benefits_list.each do |item|
+          %li= item
       = link_to t(".create_new_spectator"), {}, class: "js--display_new_registrant spectator registration_button", data: { registrant_type: 'spectator' }
 
 = render partial: "new_name"

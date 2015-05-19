@@ -3,10 +3,6 @@
 # Table name: event_configurations
 #
 #  id                                    :integer          not null, primary key
-#  short_name                            :string(255)
-#  long_name                             :string(255)
-#  location                              :string(255)
-#  dates_description                     :string(255)
 #  event_url                             :string(255)
 #  start_date                            :date
 #  contact_email                         :string(255)
@@ -15,80 +11,160 @@
 #  event_sign_up_closed_date             :date
 #  created_at                            :datetime
 #  updated_at                            :datetime
-#  test_mode                             :boolean
-#  waiver_url                            :string(255)
+#  test_mode                             :boolean          default(FALSE), not null
 #  comp_noncomp_url                      :string(255)
-#  has_print_waiver                      :boolean
-#  standard_skill                        :boolean          default(FALSE)
-#  usa                                   :boolean          default(FALSE)
-#  iuf                                   :boolean          default(FALSE)
+#  standard_skill                        :boolean          default(FALSE), not null
+#  usa                                   :boolean          default(FALSE), not null
+#  iuf                                   :boolean          default(FALSE), not null
 #  currency_code                         :string(255)
-#  currency                              :text
 #  rulebook_url                          :string(255)
 #  style_name                            :string(255)
-#  has_online_waiver                     :boolean
-#  online_waiver_text                    :text
+#  custom_waiver_text                    :text
 #  music_submission_end_date             :date
-#  artistic_score_elimination_mode_naucc :boolean          default(TRUE)
+#  artistic_score_elimination_mode_naucc :boolean          default(TRUE), not null
 #  usa_individual_expense_item_id        :integer
 #  usa_family_expense_item_id            :integer
 #  logo_file                             :string(255)
 #  max_award_place                       :integer          default(5)
-#  display_confirmed_events              :boolean          default(FALSE)
-#  spectators                            :boolean          default(FALSE)
-#  usa_membership_config                 :boolean          default(FALSE)
+#  display_confirmed_events              :boolean          default(FALSE), not null
+#  spectators                            :boolean          default(FALSE), not null
+#  usa_membership_config                 :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
-#  paypal_test                           :boolean          default(TRUE), not null
+#  waiver                                :string(255)      default("none")
+#  validations_applied                   :integer
+#  italian_requirements                  :boolean          default(FALSE), not null
+#  rules_file_name                       :string(255)
+#  accept_rules                          :boolean          default(FALSE), not null
+#  paypal_mode                           :string(255)      default("disabled")
+#  offline_payment                       :boolean          default(FALSE), not null
+#  enabled_locales                       :string(255)      default("en,fr"), not null
 #
 
 class EventConfiguration < ActiveRecord::Base
-  translates :short_name, :long_name, :location, :dates_description
+  include MultiLevelValidation
+  specify_validations :base_settings, :name_logo, :payment_settings, :important_dates
+
+  translates :short_name, :long_name, :location, :dates_description, fallbacks_for_empty_translations: true
+  translates :competitor_benefits, :noncompetitor_benefits, :spectator_benefits, fallbacks_for_empty_translations: true
+  translates :offline_payment_description, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   mount_uploader :logo_file, LogoUploader
 
-  validates :short_name, :long_name, :presence => true
+  validates :short_name, :long_name, :presence => true, if: :name_logo_applied?
   validates :event_url, :format => URI.regexp(%w(http https)), :unless => "event_url.nil?"
   validates :comp_noncomp_url, :format => URI.regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
+  validates :enabled_locales, presence: true
 
   def self.style_names
-    ["unicon_17", "naucc_2013", "naucc_2014", "naucc_2015"]
+    [["Blue and Pink", "unicon_17"], ["Green and Blue", "naucc_2013"], ["Blue Purple Green", "naucc_2014"], ["Purple Blue Green", "naucc_2015"]]
   end
 
-  validates :style_name, :inclusion => {:in => self.style_names }
-  validates :test_mode, :has_print_waiver, :has_online_waiver, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :usa, :usa_membership_config, :iuf, :standard_skill, :inclusion => { :in => [true, false] } # because it's a boolean
+  def self.currency_codes
+    ["USD", "CAD", "EUR"]
+  end
+
+  validates :currency_code, inclusion: { in: self.currency_codes }, allow_nil: true
+  validates :style_name, :inclusion => {:in => self.style_names.map{|y| y[1]} }
+  validates :waiver, inclusion: { in: ["none", "online", "print"] }
+
+  validates :usa_membership_config, :standard_skill, :inclusion => { :in => [true, false] }
+  validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
 
   belongs_to :usa_individual_expense_item, :class_name => "ExpenseItem"
   belongs_to :usa_family_expense_item, :class_name => "ExpenseItem"
 
   validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa_membership_config"
 
-  validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
+  validates :usa, :iuf, :inclusion => { :in => [true, false] }
+  validates :test_mode, :inclusion => { :in => [true, false] }
+
+  validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] }
   validates :max_award_place, presence: true
 
+  def self.paypal_modes
+    ["disabled", "test", "enabled"]
+  end
+
+  validates :paypal_mode, inclusion: { in: self.paypal_modes }
+
   before_validation :clear_of_blank_strings
+
+  mount_uploader :rules_file_name, PdfUploader
 
   after_initialize :init
 
   def init
-    self.test_mode = true if self.test_mode.nil?
-    self.has_print_waiver = false if self.has_print_waiver.nil?
-    self.has_online_waiver = false if self.has_online_waiver.nil?
-    self.usa = true if self.usa.nil?
-    self.usa_membership_config = false if self.usa_membership_config.nil?
-    self.iuf = false if self.iuf.nil?
-    self.standard_skill = true if self.standard_skill.nil?
-    self.artistic_score_elimination_mode_naucc = true if self.artistic_score_elimination_mode_naucc.nil?
     self.style_name ||= "naucc_2013"
-    self.long_name ||= ""
-    self.short_name ||= ""
-    self.currency ||= "%u%n USD"
     self.currency_code ||= "USD"
-    self.contact_email ||= ""
     self.max_award_place ||= 5
-    self.display_confirmed_events = false if self.display_confirmed_events.nil?
+  end
+
+  def currency
+    case currency_code
+    when "USD"
+      "%u%n USD"
+    when "CAD"
+      "%u%n CAD"
+    when "EUR"
+      "%n%u"
+    end
+  end
+
+  def currency_unit
+    case currency_code
+    when "USD"
+      "$"
+    when "CAD"
+      "$"
+    when "EUR"
+      "€"
+    end
+  end
+
+  def online_payment?
+    paypal_mode == "test" || paypal_mode == "enabled"
+  end
+
+  def paypal_test?
+    paypal_mode == "test"
+  end
+
+  def has_print_waiver
+    waiver == "print"
+  end
+
+  def has_online_waiver
+    waiver == "online"
+  end
+
+  def self.default_waiver_text
+    I18n.t("waiver_text")
+  end
+
+  def waiver_text
+    return custom_waiver_text unless custom_waiver_text.blank?
+    self.class.default_waiver_text
+  end
+
+  def benefits_list(text)
+    if text
+      text.split("\n")
+    else
+      []
+    end
+  end
+
+  def competitor_benefits_list
+    benefits_list(competitor_benefits)
+  end
+
+  def noncompetitor_benefits_list
+    benefits_list(noncompetitor_benefits)
+  end
+
+  def spectator_benefits_list
+    benefits_list(spectator_benefits)
   end
 
   # allows creating competitors during lane assignment
@@ -98,7 +174,8 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def clear_of_blank_strings
-    self.rulebook_url = nil if rulebook_url == ""
+    self.rulebook_url = nil if rulebook_url.blank?
+    self.event_url = nil if event_url.blank?
   end
 
   def self.singleton
@@ -155,5 +232,22 @@ class EventConfiguration < ActiveRecord::Base
       Event.reset_counters(event.id, :event_categories)
       Event.reset_counters(event.id, :event_choices)
     end
+  end
+
+  # Convert from stored string "en,fr" to [:en, :fr]
+  def enabled_locales
+    self[:enabled_locales].split(",").map(&:to_sym)
+  end
+
+  # convert from passed in array ["", "en", "fr"] to "en,fr"
+  def enabled_locales=(values)
+    languages = values.reject{|x| x.blank?}
+    # add default, since it's the configured fallback it must exist
+    languages = (languages << I18n.default_locale.to_s).uniq
+    self[:enabled_locales] = languages.join(",")
+  end
+
+  def self.all_available_languages
+    [:en, :fr, :de, :hu]
   end
 end

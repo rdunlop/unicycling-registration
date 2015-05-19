@@ -18,9 +18,9 @@ require 'spec_helper'
 describe AgeGroupType do
   it "must have a name" do
     agt = AgeGroupType.new
-    agt.valid?.should == false
+    expect(agt.valid?).to eq(false)
     agt.name = "Default"
-    agt.valid?.should == true
+    expect(agt.valid?).to eq(true)
   end
 
   describe "with a set of age group entries" do
@@ -31,21 +31,21 @@ describe AgeGroupType do
     end
 
     it "returns nil if no applicable age group entry is found" do
-      @agt.age_group_entry_for(-1, "Male").should be_nil
+      expect(@agt.age_group_entry_for(-1, "Male")).to be_nil
     end
 
     it "can return the correct age_group_entry for a given age" do
-      @agt.age_group_entry_for(10, "Male").should == @age1
+      expect(@agt.age_group_entry_for(10, "Male")).to eq(@age1)
     end
 
     it "returns nil when given a female" do
-      @agt.age_group_entry_for(10, "Female").should be_nil
+      expect(@agt.age_group_entry_for(10, "Female")).to be_nil
     end
 
     it "returns the age group entry if it is configured with 'mixed'" do
       @age1.gender = "Mixed"
       @age1.save!
-      @agt.age_group_entry_for(10, "Female").should == @age1
+      expect(@agt.age_group_entry_for(10, "Female")).to eq(@age1)
     end
 
     describe "when searching a no-wheel-size age_group while using a wheel size" do
@@ -53,7 +53,7 @@ describe AgeGroupType do
         @ws = FactoryGirl.create(:wheel_size_20)
       end
       it "still finds the age group entry" do
-        @agt.age_group_entry_for(10, "Male", @ws.id).should == @age1
+        expect(@agt.age_group_entry_for(10, "Male", @ws.id)).to eq(@age1)
       end
     end
 
@@ -66,10 +66,10 @@ describe AgeGroupType do
         @age1b = FactoryGirl.create(:age_group_entry, :age_group_type => @agt, :start_age => 0, :end_age => 12, :gender => "Male", :wheel_size => @ws24)
       end
       it "puts the rider on a 20\" wheel in the correct age group" do
-        @agt.age_group_entry_for(10, "Male", @ws20).should == @age1
+        expect(@agt.age_group_entry_for(10, "Male", @ws20)).to eq(@age1)
       end
       it "puts the rider on a 24\" wheel in the correct age group" do
-        @agt.age_group_entry_for(10, "Male", @ws24).should == @age1b
+        expect(@agt.age_group_entry_for(10, "Male", @ws24)).to eq(@age1b)
       end
     end
   end
@@ -77,6 +77,6 @@ describe AgeGroupType do
   it "must have a unique name" do
     agt = FactoryGirl.create(:age_group_type)
     agt2 = FactoryGirl.build(:age_group_type, :name => agt.name)
-    agt2.valid?.should == false
+    expect(agt2.valid?).to eq(false)
   end
 end

@@ -14,15 +14,15 @@ describe "standard_skill_routines/show" do
 
     @ability = Object.new
     @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
+    allow(controller).to receive(:current_ability) { @ability }
     @ability.can :manage, StandardSkillRoutine
     @ability.can :manage, StandardSkillRoutineEntry
   end
 
   it "renders a list of skills" do
     render
-    rendered.should match(/One/)
-    rendered.should match(/Five/)
+    expect(rendered).to match(/One/)
+    expect(rendered).to match(/Five/)
   end
 
   it "renders new entry form" do

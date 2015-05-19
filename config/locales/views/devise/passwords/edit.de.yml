@@ -1,0 +1,9 @@
+---
+de:
+  devise:
+    passwords:
+      edit:
+        action: Mein Passwort ändern
+        password_confirmation_label: Bestätige das neue Passwort
+        password_label: Neues Passwort
+        title: "Ändere dein Passwort"

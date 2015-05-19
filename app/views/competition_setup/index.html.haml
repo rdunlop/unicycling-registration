@@ -1,0 +1,51 @@
+%h1 Competition Setup
+
+%p Below are the list of Events which you can manage.
+
+%p Please create Director(s) for each event. You (or the director) can create Competition(s) for each event, which will dictate how the data gathering occurs for that event.
+
+= link_to "Global Competition Settings", edit_competition_setup_event_configuration_path
+- if can? :read, :ineligible_registrant
+  %br
+  = link_to "Manage Ineligible Registrants", ineligible_registrants_path
+
+%h2 Events by Category
+%table.alternate
+  %thead
+    %tr
+      %th Category
+      %th Event
+      %th Directors
+      %th Competitions
+      %th
+  %tbody
+    - @categories.each do |category|
+      - category.events.each do |event|
+        %tr
+          %td= category
+          %td= event
+          %td
+            %ul.categoryList__eventList
+              - event.directors.each do |director|
+                %li= director
+          %td
+            %ul.categoryList__eventList
+              - event.competitions.each do |competition|
+                %li= link_to competition, competition
+          %td
+            %ul.categoryList__eventList
+              - if can? :create, Competition
+                %li= link_to "Create New Competition", new_event_competition_path(event)
+
+- if can? :read, :director
+  = link_to 'Manage Directors', directors_path
+- if can? :manage, AgeGroupType
+  %hr
+  %h2 Age Groups
+  %li= link_to  'Age Group Type', age_group_types_path
+
+
+%hr
+%h2 Competition Types
+- if can? :manage, CombinedCompetition
+  %li= link_to 'Overall Champion Calculators', combined_competitions_path

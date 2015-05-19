@@ -1,0 +1,7 @@
+---
+en:
+  registrants:
+    pay_now:
+      offline_payment: Payment Instructions
+      pay_now: Pay Now
+      unknown: Unknown

@@ -1,6 +1,6 @@
 - @categories = categories
 - @registrant = registrant
-= render "/event_configurations/rulebook_link"
+= render partial: "/attending/rulebook_link"
 #tabs
   %ul
     - @categories.each do |category|

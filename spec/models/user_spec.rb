@@ -19,7 +19,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
-#  guest                  :boolean          default(FALSE)
+#  guest                  :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -36,7 +36,7 @@ describe User do
   end
 
   it "can be created by factory girl" do
-    @user.valid?.should == true
+    expect(@user.valid?).to eq(true)
   end
 
   it "can specify a custom name" do
@@ -46,7 +46,7 @@ describe User do
   end
 
   it "can sum the amount owing from all registrants" do
-    @user.total_owing.should == 0
+    expect(@user.total_owing).to eq(0)
   end
   describe "with an expense_item" do
     before(:each) do
@@ -55,11 +55,11 @@ describe User do
 
     it "calculates the cost of a competitor" do
       @comp = FactoryGirl.create(:competitor, :user => @user)
-      @user.total_owing.should == 100
+      expect(@user.total_owing).to eq(100)
     end
     it "calculates the cost of a noncompetitor" do
       @comp = FactoryGirl.create(:noncompetitor, :user => @user)
-      @user.total_owing.should == 50
+      expect(@user.total_owing).to eq(50)
     end
   end
   describe "with related registrants" do
@@ -77,7 +77,7 @@ describe User do
       end
 
       it "lists only users who have registranst" do
-        User.all_with_registrants.should == [@user]
+        expect(User.all_with_registrants).to eq([@user])
       end
     end
     describe "with a user who is not confirmed" do
@@ -87,22 +87,22 @@ describe User do
         u.save!
       end
       it "should not list the non-confirmed user" do
-        User.confirmed.should == [@user]
+        expect(User.confirmed).to eq([@user])
       end
     end
 
     it "orders the registrants by bib_number" do
       # @reg2, being a non-competitor, is a higher bib_number than the other two compeittors
-      @user.registrants.active.should == [@reg1, @reg3, @reg2]
+      expect(@user.registrants.active).to eq([@reg1, @reg3, @reg2])
     end
 
     it "determines if the user has a related minor" do
-      @user.has_minor?.should == false
+      expect(@user.has_minor?).to eq(false)
     end
     it "says no_minors if there are none" do
       FactoryGirl.create(:event_configuration, :start_date => Date.today)
       @reg4 = FactoryGirl.create(:minor_competitor, :user => @user, :birthday => Date.today - 10.years)
-      @user.has_minor?.should == true
+      expect(@user.has_minor?).to eq(true)
     end
   end
 
@@ -114,7 +114,7 @@ describe User do
     end
 
     it "lists them in alphabetical order" do
-      User.all.should == [@a, @b, @c, @user]
+      expect(User.all).to eq([@a, @b, @c, @user])
     end
   end
 end

@@ -1,6 +1,5 @@
-require 'csv'
 class HeatsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource :competition, except: [:edit, :update, :destroy]
 
   before_action :set_parent_breadcrumbs
@@ -103,39 +102,6 @@ class HeatsController < ApplicationController
   def set_sort
     add_breadcrumb "Set Heat/Lane assignment order"
     @lane_assignments = @competition.lane_assignments.includes(:competitor).select { |lane_assignment| lane_assignment.competitor.age_group_entry == @age_group_entry }
-  end
-
-  def upload_form
-  end
-
-  def upload
-    if params[:file].respond_to?(:tempfile)
-      file = params[:file].tempfile
-    else
-      file = params[:file]
-    end
-
-    begin
-      Competitor.transaction do
-        File.open(file, 'r:ISO-8859-1') do |f|
-          f.each do |line|
-            row = CSV.parse_line (line)
-            bib_number = row[0]
-            heat = row[1]
-            # skip blank lines
-            next if bib_number.nil? && heat.nil?
-            competitor = @competition.competitors.where(lowest_member_bib_number: bib_number).first
-            raise "Unable to find competitor #{bib_number}" if competitor.nil?
-            competitor.update_attribute(:heat, heat)
-          end
-        end
-      end
-      flash[:notice] = "Heats Configured"
-    rescue Exception => ex
-      flash[:alert] = "Error processing file #{ex}"
-    end
-
-    redirect_to competition_heats_path(@competition)
   end
 
   # DELETE /events/10/competitors/destroy_all

@@ -20,9 +20,8 @@ describe "award_labels/index" do
 
   it "renders a list of award_labels" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => 123.to_s, :count => 1
-    assert_select "tr>td", :text => "Robin Dunlop &amp; Connie Cotter".to_s, :count => 1
+    assert_select "tr>td", :text => "Robin Dunlop & Connie Cotter".to_s, :count => 1
     assert_select "tr>td", :text => "Pairs Freestyle".to_s, :count => 1
     assert_select "tr>td", :text => "TCUC".to_s, :count => 1
     assert_select "tr>td", :text => "Adults".to_s, :count => 1
@@ -34,11 +33,10 @@ describe "award_labels/index" do
     before(:each) do
       assign(:award_label, FactoryGirl.build(:award_label))
     end
-  
+
     it "renders new award_label form" do
       render
-  
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
+
       assert_select "form", :action => user_award_labels_path(@user), :method => "post" do
         assert_select "input#award_label_bib_number", :name => "award_label[bib_number]"
         assert_select "input#award_label_competitor_name", :name => "award_label[competitor_name]"

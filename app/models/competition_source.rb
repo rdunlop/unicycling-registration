@@ -6,7 +6,7 @@
 #  target_competition_id :integer
 #  event_category_id     :integer
 #  competition_id        :integer
-#  gender_filter         :string(255)
+#  gender_filter         :string(255)      default("Both"), not null
 #  max_place             :integer
 #  created_at            :datetime
 #  updated_at            :datetime
@@ -32,12 +32,6 @@ class CompetitionSource < ActiveRecord::Base
   validates :target_competition, :presence => true
   validate :source_present
   validate :max_place_with_competition
-
-  after_initialize :init
-
-  def init
-    self.gender_filter = "Both" if self.gender_filter.nil?
-  end
 
   def source_present
     if self.event_category.nil? && self.competition.nil?

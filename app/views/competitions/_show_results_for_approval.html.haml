@@ -1,0 +1,44 @@
+- if can? :result, @competition
+  %h2 View Entered Data Summary
+  %p
+    = link_to 'View', result_competition_path(@competition)
+    = link_to '(anonymous)', result_competition_path(@competition, anonymous: true)
+
+  - unless @competition.results_path.nil?
+    %h2 Manage Results
+    %p
+      = link_to("Enter/Modify Results", @competition.results_path)
+
+- if can? :results, @competition
+  %h2 Preview Results to be posted
+  %p
+    = link_to "View", results_printing_competition_path(@competition)
+    = link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
+
+  -# Who should have access to these?
+  %h3 Results for ALL Competitions in this event
+  = link_to "View", results_printing_event_path(@competition.event)
+  = link_to "(pdf)", results_printing_event_path(@competition.event, :format => :pdf)
+
+- if can? :lock, @competition
+  %h2 Lock (Complete) the competition Results
+  - if @competition.locked?
+    = link_to 'Unlock', lock_competition_path(@competition), :method => :delete, data: { confirm: "Are you sure?" }
+  - else
+    = link_to 'Lock', lock_competition_path(@competition), :method => :post, data: { confirm: "No more results can be changed. This cannot be undone by a Director. Continue?" }, class: "action_button"
+
+- if can? :publish, @competition
+
+  - if @competition.has_age_group_entry_results?
+    %h2 Publish Age Group Entries
+    = render partial: "publish_age_group_entries"
+
+  %h5 Official Result
+  - if @competition.published?
+    = link_to 'Un-Publish', publish_competition_path(@competition), :method => :delete, data: { confirm: "Remove data from online results?" }
+  - else
+    = link_to 'Publish', publish_competition_path(@competition), :method => :post, data: { confirm: "This will make the data available online for all to see. Continue?" }, class: "action_button"
+
+- if can? :read, @competition
+  = link_to "Add Additional Results PDFs", competition_competition_results_path(@competition)
+  %p There are currently #{@competition.competition_results.count} Additional Results attached to this event

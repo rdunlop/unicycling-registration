@@ -13,7 +13,7 @@
 class StandardSkillRoutineEntry < ActiveRecord::Base
   belongs_to :standard_skill_entry
   belongs_to :standard_skill_routine
-  acts_as_list :scope => :standard_skill_routine
+  acts_as_restful_list :scope => :standard_skill_routine
 
   validates :standard_skill_entry_id, :standard_skill_routine_id, :presence => true
   validates :position, :presence => true, :numericality => {:only_integer => true}

@@ -1,0 +1,109 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    labels:
+      event_configuration:
+        comp_noncomp_url: "Comp/Non-Comp Explanation"
+        usa_membership_config: "Display USA admin pages"
+        artistic_score_elimination_mode_naucc: "Small Group"
+        rulebook_url: "Rulebook PDF URL"
+        standard_skill: "Enable Standard Skill Submisssion System"
+        standard_skill_closed_date: "Last day to submit Standard Skill Routines online"
+        paypal_account: "Paypal Merchant Account Email"
+      expense_item:
+        has_details: "Ask a question from registrant"
+        has_custom_cost: "Donation"
+        details_label: "Question"
+        maximum_available: "Max Total Number for Sale"
+        maximum_per_registrant: "Max per registrant"
+      coupon_code:
+        inform_emails: E-mails to notify on each coupon use
+      volunteer_opportunity: "E-mail addresses to notify on each volunteer sign-up"
+      event:
+        accepts_music_uploads: "Request Music be Uploaded"
+    placeholders:
+      coupon_code:
+        code: "Code for user to enter"
+      volunteer_opportunity:
+        inform_emails: "comma-separated list of e-mail addresses"
+      competitor_expense_item:
+        cost: "e.g. 12.00"
+      noncompetitor_expense_item:
+        cost: "e.g. 12.00"
+    hints:
+      category:
+        info_url: This link appears on the Category page, and can serve as a link to additional information about the events in this category.
+      event_category:
+        warning_on_registration_summary: Any registrant who is signed up for this category will have a warning on their registration form.
+      event_choice:
+        tooltip: This will be presented when the user hovers over the label
+        optional: Allows the user to choose not to enter data in this field
+        optional_if_event_choice_id: If the user has chosen this other "Event Choice", this field is optional. (e.g. "Team name" optional if "Pickup")
+        required_if_event_choice_id: If the user has chosen this other "Event Choice", this field is required. (e.g. "Best Time Convention" if "best time")
+      expense_group:
+        info_url: This link appears on the expenses page, useful if the expenses need further explanation, or to show pictures
+        competitor_required: An element of this expense group MUST be selected by the registrant (if there is only 1 item in the group, it will automatically be chosen)
+        noncompetitor_required: An element of this expense group MUST be selected by the registrant (if there is only 1 item in the group, it will automatically be chosen)
+      coupon_code:
+        inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone uses this coupon"
+        price: The price to be charged when using this coupon.
+      volunteer_opportunity:
+        inform_emails: "when someone signs up for this volunteer position, an e-mail will be sent to these email addresses"
+      event_configuration:
+        spectators: Spectators are not charged "Registration Fees", and can buy items without paying for registration
+        competitor_benefits: "Appears on the Registration Homepage, describing the benefits of Competitor Registration"
+        noncompetitor_benefits: "Appears on the Registration Homepage, describing the benefits of NonCompetitor Registration"
+        spectator_benefits: "Appears on the Registration Homepage, describing the benefits of Spectator Registration"
+        paypal_test: "allow to pretend to receive payment confirmation from paypal"
+        comp_noncomp_url: Specify a link which explains the difference between the offered Registration Types
+        dates_description: This description appears on the not-logged-in page, and should describe the dates of the convention.
+        event_url: Links from the Menubar logo to this URL.
+        logo_file: Logo should be 93px x 38px
+        contact_email: This is the target for all "Feedback" emails on the "Help" page.
+        artistic_closed_date: From this date, normal registrants cannot ADD any events marked as "Artistic"
+        music_submission_end_date: The date at which music submissions will no longer be allowed
+        event_sign_up_closed_date: After this date, ONLY administrators can add events to registrations. (though they can still remove them)
+        start_date: Registrant Ages are calculated based on this date
+        usa: This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed
+        iuf: Enabling this allows IUF membership questions.
+        display_confirmed_events: Enabling this displays the confirmed events/unconfirmed events on the Registrant-summary page.
+        test_mode: Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.
+      event:
+        accepts_music_uploads: Check this box if each competitor may choose music for their competition
+        accepts_wheel_size_override: Setting this option presents children 10-and-younger with the ability to specify a wheel size override.
+        artistic: "Setting this boolean will automatically restrict changes after the Artistic Closed Date."
+    options:
+      event_configuration:
+        waiver:
+          none: "No Wavier"
+          online: "Online Waiver"
+          print: "Print Waiver"
+
+    # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

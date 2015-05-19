@@ -37,7 +37,7 @@ describe DataEntryVolunteersController do
       sign_in @user
 
       post :create, {:data_entry_volunteer => {user_id: @user.id, name: "Robin"}, :competition_id => @ec.id}
-      response.should redirect_to(root_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 

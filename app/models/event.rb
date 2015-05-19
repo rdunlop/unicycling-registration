@@ -4,15 +4,14 @@
 #
 #  id                          :integer          not null, primary key
 #  category_id                 :integer
-#  export_name                 :string(255)
 #  position                    :integer
 #  created_at                  :datetime
 #  updated_at                  :datetime
 #  name                        :string(255)
 #  visible                     :boolean          default(TRUE), not null
-#  accepts_music_uploads       :boolean          default(FALSE)
-#  artistic                    :boolean          default(FALSE)
-#  accepts_wheel_size_override :boolean          default(FALSE)
+#  accepts_music_uploads       :boolean          default(FALSE), not null
+#  artistic                    :boolean          default(FALSE), not null
+#  accepts_wheel_size_override :boolean          default(FALSE), not null
 #  event_categories_count      :integer          default(0), not null
 #  event_choices_count         :integer          default(0), not null
 #
@@ -39,6 +38,8 @@ class Event < ActiveRecord::Base
 
   belongs_to :category, :inverse_of => :events, :touch => true
 
+  acts_as_restful_list scope: :category
+
   def self.music_uploadable
     visible.where(:accepts_music_uploads => true)
   end
@@ -58,7 +59,7 @@ class Event < ActiveRecord::Base
 
   def build_event_category
     if self.event_categories.empty?
-      self.event_categories.build({:name => "All", :position => 1})
+      self.event_categories.build name: "All"
     end
   end
 

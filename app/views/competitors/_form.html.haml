@@ -1,30 +1,11 @@
 - # variable 'form' is being passed in
 = render :partial => "/shared/error_messages", :object => form
 = form_for form.persisted? ? form : [form.competition, form] do |f|
-  = f.label :position
-  = f.text_field :position
-  %br
   = f.label :custom_name, "Group/Team Name (optional)"
   = f.text_field :custom_name
   %br
   = f.label :status
   = f.select :status, Competitor.statuses.keys
-  %br
-  = f.label :heat
-  = f.number_field :heat
-  %br
-  = f.label :geared
-  = f.check_box :geared
-  %br
-  = f.label :riding_wheel_size
-  = f.number_field :riding_wheel_size
-  %br
-  = f.label :riding_crank_size
-  = f.number_field :riding_crank_size
-  %br
-  = f.label :notes
-  = f.text_field :notes
-  %br
   %fieldset.items
     %legend Registrants
     = f.nested_fields_for :members do |member_f|

@@ -1,10 +1,17 @@
 class CompetitionResultsController < ApplicationController
-  before_filter :authenticate_user!
-  load_and_authorize_resource :competition, only: [:create]
-  load_and_authorize_resource through: :competition, only: :create
-  load_and_authorize_resource except: :create
+  layout "competition_management"
+
+  before_action :authenticate_user!
+  load_resource :competition
+  load_resource through: :competition
+  authorize_resource :competition
+  before_action :set_breadcrumbs
 
   respond_to :html
+
+  def index
+    add_breadcrumb "Additional Results"
+  end
 
   # POST /competitions/#/competition_results
   def create
@@ -27,11 +34,16 @@ class CompetitionResultsController < ApplicationController
     end
   end
 
-  # DELETE /competition_results/1
+  # DELETE /competitions/#/competition_results/1
   def destroy
-    target_url = competition_path(@competition_result.competition)
     @competition_result.destroy
 
-    respond_with(@competition_result, location: target_url)
+    respond_with(@competition_result, location: competition_path(@competition))
+  end
+
+  private
+
+  def set_breadcrumbs
+    add_breadcrumb @competition, competition_path(@competition)
   end
 end

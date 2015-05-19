@@ -1,0 +1,26 @@
+%h2 Additional Results
+%p These files will be published online immediately
+
+%table
+  %thead
+    %tr
+      %th Result
+      %th
+  %tbody
+    - @competition_results.each do |result|
+      %tr
+        %td
+          = link_to result.to_s, result.results_file_url
+          %br
+        %td
+          - unless result.system_managed
+            = link_to "Delete", competition_competition_result_path(@competition, result), method: :delete, data: { confirm: "Are you sure?" }
+
+%h3 Upload additional PDF files here
+
+= form_tag competition_competition_results_path(@competition), multipart: true do
+  = file_field_tag :results_file
+  = label_tag :custom_name
+  = text_field_tag :custom_name
+  %br
+  = submit_tag "Upload More Results"

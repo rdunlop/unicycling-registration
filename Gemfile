@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
 ruby "2.1.2"
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.1'
 
 # Authentication
 gem 'devise'
+gem 'devise-i18n'
 gem 'devise-async'
 gem 'cancancan', '~> 1.10'
 gem 'rolify'
@@ -16,12 +17,16 @@ gem 'spreadsheet'
 gem 'prawn-labels'
 
 # Front-end
-gem 'formtastic'
+gem 'simple_form'
+gem 'country_select'
+gem 'money-rails'
 gem 'chosen-rails'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'
 gem 'fancybox2-rails', '~> 0.2.8'
 gem 'font-kit-rails', :git => "git://github.com/sandelius/font-kit-rails.git", :ref => "480c979b84aa4d32652772822dee2366c37eed2e" # to get a change which includes font-url
+gem 'tinymce-rails'
+gem 'recaptcha'
 
 # system utils
 gem 'rake'
@@ -34,27 +39,34 @@ gem "fog"
 gem 'aws-sdk'
 gem 'http_accept_language'
 gem 'newrelic_rpm'
+gem 'skylight'
 gem 'sidekiq'
 # if you require 'sinatra' you get the Sinatra DSL extended to Object
 gem 'sinatra', '>= 1.3.0', :require => nil # necessary for sidekiq routing
-gem 'unicorn'
+gem 'unicorn', require: false
 gem 'whenever'
 gem 'rubocop', require: false
+gem 'gaffe'
+
+# I18n Translation
+# use rdunlop branch which has:
+#  fixed the Pagination-Load issue
+#  specific import/export functions to match the translation-file structure used
+gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
+gem 'kaminari'
+gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 # multi-tenancy
 gem 'apartment'
 gem 'apartment-sidekiq'
 
 # Model utils
-gem 'acts_as_list'
+gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
 gem 'carrierwave_direct'
-gem 'carmen', '1.0.0' # locked to 1.0.0 because 1.0.1 removed Puerto Rico
-gem 'carmen-rails'
-gem 'globalize', '~> 4.0.2'
+gem 'globalize', '~> 5.0.0'
 gem 'virtus'
 gem "wicked"
 
-# gem 'sqlite3'
 gem 'pg'
 
 # deployment
@@ -66,6 +78,7 @@ gem 'capistrano3-unicorn'
 gem 'capistrano-sidekiq' , github: 'seuros/capistrano-sidekiq'
 
 group :naucc, :development, :caching do
+  gem 'quiet_assets'
   gem 'consistency_fail'
   gem 'better_errors'
   gem "binding_of_caller"

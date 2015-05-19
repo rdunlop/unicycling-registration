@@ -1,4 +1,5 @@
 Workspace::Application.routes.draw do
+  mount Tolk::Engine => '/tolk', :as => 'tolk'
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.has_role?(:admin) || u.has_role?(:super_admin) } do
     mount Sidekiq::Web => '/sidekiq'
@@ -7,7 +8,7 @@ Workspace::Application.routes.draw do
   get '404', to: 'errors#not_found'
   get '415', to: 'errors#not_found'
   get '422', to: 'errors#not_permitted'
-  get '500', to: 'errors#server_error'
+  get '500', to: 'errors#internal_server_error'
 
   scope "(:locale)" do
     resources :registrant_groups, :except => [:new] do
@@ -32,7 +33,6 @@ Workspace::Application.routes.draw do
           get :single_attempt_recording
           get :two_attempt_recording
           get :results
-          get :sign_in_sheet
         end
       end
       resources :events, :only => [] do
@@ -45,33 +45,46 @@ Workspace::Application.routes.draw do
     # ADMIN (for use in Setting up the system)
     #
     #
-    resources :age_group_types, :except => [:new] do
-      member do
-        get :set_sort
-        post :sort
-      end
+    resources :age_group_types, :except => [:new], controller: "compete/age_group_types"
+    resources :age_group_entries, only: [], controller: "compete/age_group_entries" do
+      post :update_row_order, on: :collection
     end
 
-    resources :permissions, :only => [:index] do
+    resources :permissions, :only => [:index], controller: "admin/permissions" do
       collection do
         post :create_race_official
         get :directors
         put :set_role
-        get :acl
-        post :set_acl
-        get :code
-        post :use_code
+        put :set_password
+
+        get :acl, controller: "permissions"
+        post :set_acl, controller: "permissions"
+        get :code, controller: "permissions"
+        post :use_code, controller: "permissions"
       end
+    end
+
+    get '/translations', to: 'admin/translations#index'
+    delete '/translations/cache', to: 'admin/translations#clear_cache'
+    namespace :translations do
+      resource :event_configuration, only: [:edit, :update]
+      resources :categories, only: [:index, :edit, :update]
+      resources :event_choices, only: [:index, :edit, :update]
+      resources :expense_groups, only: [:index, :edit, :update]
+      resources :expense_items, only: [:index, :edit, :update]
+      resources :registration_periods, only: [:index, :edit, :update]
     end
 
     namespace :export do
       get :index
       get :download_payment_details
-      get :download_all_payments
+      get :download_all_payments, controller: "/export_registrants", action: "download_with_payment_details"
+      get :download_all_registrants, controller: "/export_registrants", action: "download_all"
       get :download_events
       get :download_competitors_for_timers
       get :results
     end
+    resource :import, only: [:new, :create]
 
     resources :standard_skill_entries, :only => [:index] do
       collection do
@@ -88,9 +101,16 @@ Workspace::Application.routes.draw do
     #### For Registration creation purposes
     ###
 
-    resources :expense_groups
+    resources :expense_groups, except: [:show], controller: "convention_setup/expense_groups" do
+      post :update_row_order, on: :collection
+      resources :expense_items, :except => [:new, :show], controller: "convention_setup/expense_items"
+    end
 
-    resources :expense_items, :except => [:new, :show] do
+    resources :expense_items, only: [], controller: "convention_setup/expense_items" do
+      post :update_row_order, on: :collection
+    end
+
+    resources :expense_items, only: [] do
       member do
         get :details
       end
@@ -98,11 +118,23 @@ Workspace::Application.routes.draw do
 
     resources :refunds, :only => [:show]
 
+    resource :export_payments, only: [] do
+      collection do
+        get :list
+        put :payments
+        put :payment_details
+      end
+    end
+
+    get  "/payments/set_reg_fees", controller: "admin/reg_fees", action: :index, as: "set_reg_fees"
+    post "/payments/update_reg_fee", controller: "admin/reg_fees", action: :update_reg_fee, as: "update_reg_fee"
+
     resources :payments, :except => [:index, :edit, :update, :destroy] do
       collection do
         get :summary
-        post :notification
-        get :success
+        post :notification, controller: "paypal_payments"
+        get :success, controller: "paypal_payments"
+        get :offline
       end
 
       member do
@@ -111,6 +143,12 @@ Workspace::Application.routes.draw do
         post :apply_coupon
       end
     end
+    resources :manual_payments, only: [:new, :create], controller: "admin/manual_payments" do
+      collection do
+        get :choose
+      end
+    end
+
     resources :payment_adjustments, :only => [:new]  do
       collection do
         get :list
@@ -124,37 +162,76 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :registration_periods
+    resources :registration_periods, except: :show
 
-    resources :combined_competitions do
-      resources :combined_competition_entries, except: [:show]
+    resources :combined_competitions, except: :show, controller: "compete/combined_competitions" do
+      resources :combined_competition_entries, except: [:show], controller: "compete/combined_competition_entries"
     end
     resources :competition_wheel_sizes
 
-    resources :coupon_codes
-    resources :event_choices, :except => [:index, :create, :new]
+    resources :coupon_codes, only: [:show]
 
-    resources :events, :except => [:index, :new, :create] do
-      resources :event_choices, :only => [:index, :create]
-      resources :event_categories, :only => [:index, :create]
+    resources :events, only: [] do
       collection do
-        get 'summary'
+        get :summary
+        get "specific_volunteers/:volunteer_opportunity_id", action: :specific_volunteers, as: :specific_volunteers
+        get :general_volunteers
       end
       member do
-        post :create_director
-        delete :destroy_director
         get :sign_ups
       end
       resources :competitions, :only => [:new, :create]
     end
-    resources :event_categories, :except => [:index, :create, :new, :show] do
+    resources :event_categories, only: [] do
       member do
         get :sign_ups
       end
     end
 
-    resources :categories, :except => [:new, :show] do
-      resources :events, :only => [:index, :create]
+    get '/convention_setup', to: 'convention_setup#index'
+    namespace :convention_setup do
+      resources :categories, :except => [:new, :show] do
+        post :update_row_order, on: :collection
+        resources :events, :only => [:index, :create]
+      end
+      resources :events, :except => [:index, :new, :create] do
+        post :update_row_order, on: :collection
+
+        resources :event_choices, :only => [:index, :create] do
+          post :update_row_order, on: :collection
+        end
+
+        resources :event_categories, :only => [:index, :create] do
+          post :update_row_order, on: :collection
+        end
+      end
+      resources :event_choices, :except => [:index, :create, :new, :show]
+      resources :event_categories, :except => [:index, :create, :new, :show]
+
+      resources :volunteer_opportunities, except: [:show] do
+        post :update_row_order, on: :collection
+      end
+    end
+    scope "convention_setup", module: "convention_setup" do
+      resources :coupon_codes, except: [:show]
+    end
+
+    get '/competition_setup', to: 'competition_setup#index'
+    namespace :competition_setup do
+      resource :event_configuration, only: [:edit, :update]
+    end
+
+    scope module: "competition_setup" do
+      resources :directors, only: [:index, :create, :destroy]
+    end
+
+    get '/onsite_registration', to: 'onsite_registration#index'
+    namespace :onsite_registration do
+      resources :expense_groups, only: [:index] do
+        member do
+          put :toggle_visibility
+        end
+      end
     end
 
     # backwards-compatible URL
@@ -166,21 +243,19 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :registrants, except: [:index] do
+    resources :registrants, except: [:index, :new, :create, :edit, :update] do
       resources :build, controller: 'registrants/build', only: [:show, :update, :create]
       # admin
       collection do
         get '/subregion_options' => 'registrants#subregion_options'
-        get :bag_labels
-        get :show_all
-        get :manage_all
-        get :manage_one
-        post :choose_one
+        get :bag_labels, controller: "admin/registrants"
+        get :show_all, controller: "admin/registrants"
+        get :manage_all, controller: "admin/registrants" # How do I use cancan on this, if I were to name the action 'index'?
+        get :manage_one, controller: "admin/registrants"
+        post :choose_one, controller: "admin/registrants"
       end
       member do
-        post :undelete
-        get :reg_fee
-        put :update_reg_fee
+        post :undelete, controller: "admin/registrants"
         get :results
       end
 
@@ -192,7 +267,7 @@ Workspace::Application.routes.draw do
       member do
         get :waiver
       end
-      resources :registrant_expense_items, :only => [:index, :create, :destroy]
+      resources :registrant_expense_items, :only => [:create, :destroy]
       resources :standard_skill_routines, :only => [:index, :create]
       member do
         get :payments, to: "payments#registrant_payments"
@@ -205,7 +280,7 @@ Workspace::Application.routes.draw do
 
     resources :songs, :only => [:destroy] do
       collection do
-        get :list
+        get :list, controller: "admin/songs"
       end
       member do
         get :add_file
@@ -225,25 +300,32 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :event_configurations, :except => [:show] do
+    resource :event_configuration, :except => [:show, :new, :edit, :create, :update] do
       collection do
         get :cache
         delete :clear_cache
         delete :clear_counter_cache
         post :test_mode_role
       end
-      member do
-        get 'logo'
+
+      collection do
+        EventConfigurationsController::EVENT_CONFIG_PAGES.each do |page|
+          get page
+          put "update_#{page}"
+        end
       end
     end
 
     get "usa_memberships", to: "usa_memberships#index"
     put "usa_memberships", to: "usa_memberships#update"
     get "usa_memberships/export", to: "usa_memberships#export"
-    get "volunteers", to: "volunteers#index"
-    resources :volunteer_opportunities
 
-    get "results", to: "results#index"
+    resources :results, only: [:index] do
+      member do
+        get :scores
+      end
+    end
+    # get "results", to: "results#index"
     get "welcome/help"
     post "welcome/feedback"
     get "welcome/confirm"
@@ -281,11 +363,11 @@ Workspace::Application.routes.draw do
             delete :delete_heat
 
             get  :data_entry
-            get :import_csv, as: "display_csv", to: :display_csv
+            get :import_csv, as: "display_csv", action: :display_csv
             post :import_csv
-            get :import_chip, as: "display_chip", to: :display_chip
+            get :import_chip, as: "display_chip", action: :display_chip
             post :import_chip
-            get :import_lif, as: "display_lif", to: :display_lif
+            get :import_lif, as: "display_lif", action: :display_lif
             post :import_lif
             delete :destroy_all
           end
@@ -316,18 +398,22 @@ Workspace::Application.routes.draw do
     end
     resources :import_results, :only => [:edit, :update, :destroy]
     resources :two_attempt_entries, :only => [:edit, :update, :destroy]
-    resources :competition_results, only: [:destroy]
 
     ###############################################
     ### For event-data-gathering/reporting purposes
     ###############################################
 
-    resources :competitors, :only => [:edit, :update, :destroy]
+    resources :competitors, only: [:edit, :update, :destroy] do
+      post :update_row_order, on: :collection
+    end
+
+    scope module: "compete" do
+      resources :ineligible_registrants, only: [:index, :create, :destroy]
+    end
 
     resources :competitions, :only => [:show, :edit, :update, :destroy] do
       member do
         get :set_sort
-        post :sort
         put :toggle_final_sort
         post :sort_random
         post :set_age_group_places
@@ -344,17 +430,19 @@ Workspace::Application.routes.draw do
         post :award
         delete :award
       end
-      resources :competition_results, only: [:create]
+      resources :competition_results, only: [:index, :create, :destroy]
       resources :competitors, :only => [:index, :new, :create] do
         collection do
           post :add
           post :add_all
           delete :destroy_all
-          get :enter_sign_in
-          put :update_competitors
           get :display_candidates
           post :create_from_candidates
         end
+      end
+      scope module: "compete" do
+        resource :sign_ins, only: [:show, :edit, :update]
+        resource :waves, only: [:show, :update]
       end
 
       resources :heats, :only => [:index, :new, :create] do
@@ -362,9 +450,6 @@ Workspace::Application.routes.draw do
           # Track (LaneAssignments)
           delete :destroy_all
 
-          # 10k (Competitor->Heat)
-          get :upload_form
-          post :upload
           get "age_group_entries/:age_group_entry_id/set_sort", to: "heats#set_sort", as: "set_sort"
           post "age_group_entries/:age_group_entry_id/set_sort", to: "heats#sort", as: "sort"
         end
@@ -423,64 +508,20 @@ Workspace::Application.routes.draw do
     end
     resources :distance_attempts, :only => [:update, :destroy]
     resources :tie_break_adjustments, only: [:destroy]
-
   end
 
   resources :admin_upgrades, only: [:new, :create]
   resources :tenants, only: [:index, :create]
+  resources :tenant_aliases, only: [:index, :create, :destroy] do
+    member do
+      post :verify
+      post :activate
+    end
+  end
   resources :styles, only: :index
 
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
   get '/:locale' => 'welcome#index' # to match /en  to send to /en/welcome
   root :to => 'welcome#index'
 

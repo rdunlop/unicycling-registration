@@ -1,0 +1,28 @@
+.l--2up {
+  .l--column {
+    width: 50%;
+    float: left;
+  }
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+
+.g-recaptcha {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.translation_examples {
+  text-align: left;
+
+  .example {
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid black;
+    padding: 10px;
+  }
+}

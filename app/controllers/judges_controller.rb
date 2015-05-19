@@ -1,6 +1,7 @@
 class JudgesController < ApplicationController
+  layout "competition_management"
   load_and_authorize_resource :competition, :only => [:index, :create, :destroy, :copy_judges]
-  before_filter :load_new_judge, :only => [:create]
+  before_action :load_new_judge, :only => [:create]
   load_and_authorize_resource
 
   respond_to :html
@@ -73,7 +74,7 @@ class JudgesController < ApplicationController
 
     @judges = @competition.judges
     @competitions_with_judges = Competition.event_order.select{ |comp| comp.uses_judges } - [@competition]
-    @judge ||= Judge.new
+    @judge ||= @competition.judges.build
   end
 
   private

@@ -2,8 +2,11 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
 
-  before_filter :set_locale
-  before_filter :set_home_breadcrumb, unless: :rails_admin_controller?
+  before_action :load_config_object
+  before_action :set_locale
+  before_action :load_tenant
+
+  before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
   protect_from_forgery
   check_authorization :unless => :devise_controller?
@@ -18,20 +21,10 @@ class ApplicationController < ActionController::Base
     { locale: I18n.locale }
   end
 
-  def set_locale
-    if params[:locale].blank?
-      I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
-    elsif I18n.available_locales.include?(params[:locale].to_sym)
-      I18n.locale = params[:locale]
-    end
-  end
-
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
     redirect_to root_path, :alert => exception.message
   end
-  before_action :load_tenant
-  before_action :load_config_object
 
   def raise_not_found!
     raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
@@ -39,6 +32,16 @@ class ApplicationController < ActionController::Base
 
   def load_config_object
     @config = EventConfiguration.singleton
+    I18n.available_locales = EventConfiguration.all_available_languages & @config.enabled_locales
+    set_fallbacks
+  end
+
+  def set_fallbacks
+    fallbacks_hash = {}
+    I18n.available_locales.each do |locale|
+      fallbacks_hash[locale] = [locale, *(I18n.available_locales - [locale])]
+    end
+    Globalize.fallbacks = fallbacks_hash
   end
 
   def load_tenant
@@ -87,8 +90,24 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def locale_parameter
+    params[:locale] if I18n.available_locales.include?(params[:locale].try(:to_sym))
+  end
+
+  def locale_from_user
+    nil
+  end
+
+  def locale_from_headers
+    http_accept_language.compatible_language_from(I18n.available_locales)
+  end
+
+  def set_locale
+    I18n.locale = locale_parameter || locale_from_user || locale_from_headers || I18n.default_locale
+  end
+
   def set_home_breadcrumb
-    add_breadcrumb "Home", Proc.new { root_path }
+    add_breadcrumb t("home", scope: "breadcrumbs"), Proc.new { root_path }
   end
 
   def add_registrant_breadcrumb(registrant)
@@ -101,10 +120,6 @@ class ApplicationController < ActionController::Base
 
   def add_category_breadcrumb(category)
     add_breadcrumb "#{category}"
-  end
-
-  def add_event_breadcrumb(event)
-    add_breadcrumb "#{event}", event_path(event)
   end
 
   def add_competition_breadcrumb(competition)
@@ -120,5 +135,9 @@ class ApplicationController < ActionController::Base
   def add_to_judge_breadcrumb(judge)
     add_to_competition_breadcrumb(judge.competition)
     add_breadcrumb judge, judge_scores_path(judge)
+  end
+
+  def add_competition_setup_breadcrumb
+    add_breadcrumb "Competitions", competition_setup_path
   end
 end

@@ -1,9 +1,11 @@
 class PaymentAdjustmentsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_resource :payment
   authorize_resource class: false
 
   def list
+    add_breadcrumb "Payment Management", summary_payments_path
+    add_breadcrumb "Payments and Refunds"
     @payments = Payment.includes(:user)
     @refunds = Refund.includes(:user)
   end

@@ -7,7 +7,7 @@
 #  registrant_id             :integer
 #  created_at                :datetime
 #  updated_at                :datetime
-#  dropped_from_registration :boolean          default(FALSE)
+#  dropped_from_registration :boolean          default(FALSE), not null
 #
 # Indexes
 #

@@ -1,0 +1,9 @@
+---
+de:
+  registrants:
+    reg_closed_banner:
+      no_changes_permitted: Du kannst deine Anmelde Details nicht mehr ändern.
+      online_registration_is_closed: Die Online Anmeldung ist jetzt geschlossen
+      onsite_changes_explanation: Falls du noch offene Zahlungen hast ist es evtl.
+        möglich diese inaktive Anmeldung abzuschließen (dies liegt im Ermessen des
+        Veranstalters)

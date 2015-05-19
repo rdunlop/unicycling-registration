@@ -1,0 +1,23 @@
+= simple_form_for([@expense_item.expense_group, @expense_item]) do |f|
+  = render partial: "shared/error_messages", object: @expense_item
+
+  = f.input :name
+  = f.input :has_details, input_html: { class: "js--inputEnable", data: { targets: "js--labelConditional" } }
+  .input_details
+    Ask the user for additional details when they purchase this item
+  = f.input :details_label, input_html: { class: "js--labelConditional" }
+  %hr
+  = f.input :cost, input_html: { class: "js--costInput" }
+  = f.input :has_custom_cost
+  .input_details
+    Allows the registrant to choose how much to pay for this item
+
+  = f.input :tax, input_html: { class: "js--costInput" }
+  Total
+  = text_field_tag :total, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInput" }
+  = label_tag :limit_quantities_available
+  = check_box_tag :limit_quantities_available, nil, f.object.has_limits?, class: 'js--inputEnable', data: { targets: 'js--inputConditional' }
+  = f.input :maximum_available, input_html: { class: 'js--inputConditional' }
+  = f.input :maximum_per_registrant, input_html: { class: 'js--inputConditional' }
+
+  = f.button :submit

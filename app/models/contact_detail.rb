@@ -25,8 +25,10 @@
 #  responsible_adult_phone         :string(255)
 #  created_at                      :datetime
 #  updated_at                      :datetime
-#  usa_confirmed_paid              :boolean          default(FALSE)
+#  usa_confirmed_paid              :boolean          default(FALSE), not null
 #  usa_family_membership_holder_id :integer
+#  birthplace                      :string(255)
+#  italian_fiscal_code             :string(255)
 #
 # Indexes
 #
@@ -43,6 +45,13 @@ class ContactDetail < ActiveRecord::Base
   # contact-info block
   validates :emergency_name, :emergency_relationship, :emergency_primary_phone, :presence => true
   validates :responsible_adult_name, :responsible_adult_phone, :presence => true, :if => :minor?
+  validates :birthplace, presence: true, if: "EventConfiguration.singleton.italian_requirements?"
+  validates :italian_fiscal_code, format: { with: /\A[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]\Z/, message: "must be specified if you are from Italy" }, if: :vat_required?
+
+  # Italians are required to enter VAT_Number and Birthplace
+  def vat_required?
+    EventConfiguration.singleton.italian_requirements? && country_residence == "IT"
+  end
 
   def minor?
     registrant && !registrant.spectator? && registrant.age < 18
@@ -57,10 +66,17 @@ class ContactDetail < ActiveRecord::Base
   end
 
   def country
-    Carmen::Country.coded(self.country_code).try(:name)
+    country = ISO3166::Country[country_code]
+    country.translations[I18n.locale.to_s] || country.name
   end
 
+  # Display the state, based on the country_residence
   def state
-    Carmen::Country.coded(self.country_residence).subregions.coded(self.state_code).try(:name)
+    country = ISO3166::Country[country_residence]
+    if country.try(:subdivisions?)
+      country.subdivisions[state_code].try(:[], "name")
+    else
+      state_code
+    end
   end
 end

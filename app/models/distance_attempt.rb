@@ -4,8 +4,8 @@
 #
 #  id            :integer          not null, primary key
 #  competitor_id :integer
-#  distance      :integer
-#  fault         :boolean
+#  distance      :decimal(4, )
+#  fault         :boolean          default(FALSE), not null
 #  judge_id      :integer
 #  created_at    :datetime
 #  updated_at    :datetime

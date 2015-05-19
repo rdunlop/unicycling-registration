@@ -1,5 +1,5 @@
 !!!
-%html
+%html{ lang: I18n.locale }
   %head
     = render partial: "layouts/metatags"
     %title
@@ -36,3 +36,4 @@
           %p.alert= alert
         = content_for?(:content) ? yield(:content) : yield
       = render partial: "layouts/footer"
+  = tinymce

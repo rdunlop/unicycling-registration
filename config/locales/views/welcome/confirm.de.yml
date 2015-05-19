@@ -1,0 +1,7 @@
+---
+de:
+  welcome:
+    confirm:
+      check_email: Bitte schau in deine E-Mail nach der Bestätigungs Mail
+      confirm_header: Bestätige deine E-Mail Adresse
+      verify_account: Du musst dein Konto bestätigen bevor du dich anmelden kannst

@@ -1,0 +1,6 @@
+---
+de:
+  shared:
+    error_messages:
+      errors_prevented_object_from_being_saved: 'es ist nicht zulässig dieses Objekt
+        zu speichern:'

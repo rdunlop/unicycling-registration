@@ -1,22 +1,19 @@
+%p= t(".description")
+%b= t(".requirements")
 %p
-  For some competitions, music is played during the competitor's competition time. Please upload an mp3 with the music you would like played. Please provide music of the appropriate length (see rulebook) for your competition/category.
-%b You are still required to have the music on a CD or MP3 player at the competition. This is so that if there are technical difficulties with the uploaded version, there is an alternate copy available.
-%p
-  %b
-    Music may be uploaded until
-    = @config.music_submission_end_date
-  After that time, if you need to change your music, please contact the director/organizers (or use "Help"->"Feedback").
+  %b= t(".music_deadline", end_date: @config.music_submission_end_date)
+  = t(".changes_after_deadline")
 
 %table.sortable
   %thead
     %tr
-      %th Reg ID
-      %th Reg Name
-      %th Guest?
-      %th Event
-      %th Description
-      %th File name
-      %th Last Updated
+      %th= Registrant.human_attribute_name(:bib_number)
+      %th= t(".reg_name")
+      %th= t(".guest")
+      %th= Event.model_name.human
+      %th= Song.human_attribute_name(:description)
+      %th= Song.human_attribute_name(:song_file_name)
+      %th= Song.human_attribute_name(:updated_at)
       %th
       %th
   %tbody
@@ -25,14 +22,14 @@
       %tr
         %td= song.registrant.bib_number
         %td= song.registrant
-        %td= song.uploaded_by_guest? ? "Yes" : ""
+        %td= song.uploaded_by_guest? ? t("yes") : ""
         %td= song.event
         %td= song.description
         %td= song.human_name
         %td= song.updated_at
         %td
           - if song.song_file_name.present?
-            = link_to 'Download', song.song_file_name_url, target: '_blank'
+            = link_to t(".download"), song.song_file_name_url, target: '_blank'
           - else
-            = link_to 'Add Song', add_file_song_path(song)
-        %td= link_to 'Remove', song, method: :delete, data: { confirm: 'Are you sure?' }
+            = link_to t(".add_song"), add_file_song_path(song)
+        %td= link_to t(".remove"), song, method: :delete, data: { confirm: t("are_you_sure") }

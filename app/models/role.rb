@@ -26,5 +26,4 @@ class Role < ActiveRecord::Base
     res += "(#{resource})" if resource.present?
     res
   end
-
 end

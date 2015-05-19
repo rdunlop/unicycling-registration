@@ -29,6 +29,7 @@ Its features include:
 * Administrative data-download options, which provide easy export of event sign
   up details.
 * Judging and scoring systems for various competition types
+* Multi-Language support, to allow the registration system to be enabled in any language
 
 
 This documentation is broken into 2 sections:
@@ -43,10 +44,90 @@ The application is capable of running multiple conventions on a single server,
 and no longer needs each convention to manage its own servers/hosting.
 
 Contact Robin (robin@dunlopweb.com) in order to create a new convention. Generally you
-will also want to use a 'test' instance in order to test/explore features without
+will also want to use a 'test' instance in order to test/explore features without affecting your "live" site.
+
+
+How to add/improve Translations
+-------------------------------
+If you would like to contribute language translations, the first step is to ask for a "translator" account.
+
+Once you have a translator account, a "Translation" menu item will appear, which will allow you to see/adjust/improve the translations for any language (except English).
+
+- If you find that there is any text which only appears in English, or where the english is incorrect, please use the "Feedback" form to let me know, and I'll enable it in the translation system.
+
+
+If we want to add a new language to the list of possible translations:
+
+1. First create a root-level `base.en.yml` file, and set the "language_name"
+
+2. Add the language to the `all_available_languages` in the EventConfiguration class
+
+3. Choose the language in your Event Configuration.
+
+* app/views/layouts/application.rb - Ensure that the 'lang' attribute is appropriately set.
+
+* app/views/layouts/_footer.html.haml - Ensure that the link to the language is appropriately tagged/translated.
+
+
+Technical Details
+-----------------
+Each time that a deployment occurs, the translation files in /config/locales will be loaded into the database.
+
+Since the English translatios are considered the "base locale", changes to those entris have specific impacts.
+
+* If an English phrase is _added_, the db will have a new entry added, and marked so that non-English translations can be provided.
+
+* If an English phrase is _updated_, the db will be marked so that the non-encglish phrases can be reviewed to ensure that they still make sense.
+
+* If an English phraes is _deleted_, the db ...I don't know, I haven't done this yet.
+
+
+Deploying code with new translations needed
+--------------------------------------------
+
+When you perform a `cap stage deploy` it will automatically run `rake import_translations_from_yml` and `rake write_tolk_to_disk` which will update the existing Tolk translations with any new/changed keys. No further steps should be necessary.
+
+You may need to clear the translation cache in order for the existing cached pages to be cleared.
+
+Downloading new translations from Tolk
+--------------------------------------
+Extracting the new translations out of the system, and back into the source-code
+
+1. Use the "Apply" button in the translation system to write all Tolk Translations to disk (and apply them to the front-end)
+
+2. Use the "Clear Translations Cache" button to cause all cached pages to be cleared, and new ones generated.
+
+3. Copy the changed yml files down to your local machine:
+
+    `cap stage translation:download`
+    or
+    `cap prod translation:download`
+
+    this will copy the remote `config/locales` onto your local machine's `config/locales`
+
+4. Examine the changes, to ensure that you aren't accidentally removing changes which you want.
+
+5. Commit the changes.
+
+
+Other Commands available (useful for testing:
+---------------------------------------------
+
+* Clear the current loaded Tolk Content (** This is a very destructive step. Be warned! **)
+
+    `rake clear_translations`
+
+    This command can also be useful if you want to remove invalid translations from the tolk db, and reload from disk.
+
+* Load all translations from config/locales:
+
+    `rake import_translations_from_yml`
+
+* Restart the server
+
 
 How to contribute time/effort to the Registration Site
-------------------------------------------------------
+======================================================
 
 The following directions assume that you can use "google", and are willing to
 read the instructions for github.
@@ -70,15 +151,6 @@ Registration-Update Scheduler
 In order to automatically update the registration period when the current period
 ends, a scheduled task must be executed daily. This is done with the 'whenever' gem
 which schedules the task to run daily
-
-Secret Hash
------------
-
-The 'Secret' key is required in order to generate secure cookies. With this in place, users can return to the site and have their accounts still logged in (this is a good thing).
-
-    SECRET=<run rake secret on the command line>
-
-(I use 'rake secret' (from my development environment) to generate a random secure value. I only run it once, and it should be a different value for each of your system). If you don't have a development environment, type approximately a  hundred numbers as your "SECRET"
 
 Production flag
 ---------------
@@ -138,11 +210,11 @@ Paypal Account
 Specify the paypal account "Merchant Account" that will be paid.
 Set these in your "Base Configuration" (EventConfiguration table)
 
-  PAYPAL_ACCOUNT=robin@dunlopweb.com
+  Paypal Account
 
 Specify whether to use the LIVE or TEST PAYPAL Site (default: Test)
 
-    PAYPAL_TEST=false
+    Paypal Test Mode
 
 Paypal Settings required for proper integration:
 
@@ -211,6 +283,14 @@ To View the local NewRelic Inforamtion
 
     `http://localhost:9292/newrelic` (when in development or caching modes)
 
+Skylight
+--------
+
+We use https://skylight.io for exception and performance monitoring.
+
+Set up a skylight account, and set the token in the config/skylight.yml file
+
+
 Seed Data
 ---------
 
@@ -267,16 +347,6 @@ If you would like to contribute any work to the project, please:
 * Fork the project
 * For any changes, include updated/added unit tests, and ensure that the whole suite runs
 * Create a pull request
-
-Translations
-------------
-If you would like to contribute language translations, please see:
-
-* config/locale/en.yml - The english translation of the static text strings used
-  in the site
-* app/helpers/language_helper.rb - A place where each of the used languages is
-  defined, so that the admin pages show form elements to set these language
-  fields.
 
 Idea Contributions
 ------------------

@@ -2,16 +2,16 @@
 #
 # Table name: registrant_expense_items
 #
-#  id              :integer          not null, primary key
-#  registrant_id   :integer
-#  expense_item_id :integer
-#  created_at      :datetime
-#  updated_at      :datetime
-#  details         :string(255)
-#  free            :boolean          default(FALSE)
-#  system_managed  :boolean          default(FALSE)
-#  locked          :boolean          default(FALSE)
-#  custom_cost     :decimal(, )
+#  id                :integer          not null, primary key
+#  registrant_id     :integer
+#  expense_item_id   :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#  details           :string(255)
+#  free              :boolean          default(FALSE), not null
+#  system_managed    :boolean          default(FALSE), not null
+#  locked            :boolean          default(FALSE), not null
+#  custom_cost_cents :integer
 #
 # Indexes
 #
@@ -29,15 +29,15 @@ describe RegistrantExpenseItem do
     @ei.save
   end
   it "can be created by factory" do
-    @rei.valid?.should == true
+    expect(@rei.valid?).to eq(true)
   end
   it "must have registrant" do
     @rei.registrant_id = nil
-    @rei.valid?.should == false
+    expect(@rei.valid?).to eq(false)
   end
   it "must have expense_item" do
     @rei.expense_item_id = nil
-    @rei.valid?.should == false
+    expect(@rei.valid?).to eq(false)
   end
 
   describe "when the expense_item is custom_cost=true" do
@@ -48,16 +48,29 @@ describe RegistrantExpenseItem do
     end
     it "should require a custom_cost" do
       @rei.custom_cost = nil
-      @rei.valid?.should == false
+      expect(@rei.valid?).to eq(false)
     end
     it "should be acceptable if the custom_cost is set" do
       @rei.custom_cost = 1
-      @rei.valid?.should == true
+      expect(@rei.valid?).to eq(true)
     end
 
     it "should not allow a negative custom_cost" do
       @rei.custom_cost = -10
-      @rei.valid?.should == false
+      expect(@rei.valid?).to eq(false)
+    end
+  end
+
+  describe "when the expense item has fractional tax" do
+    before :each do
+      @ei = @rei.expense_item
+      @ei.cost = 17
+      @ei.tax = 0.94
+      @ei.save
+    end
+
+    it "should round" do
+      expect(@rei.total_cost).to eq(17.94)
     end
   end
 
@@ -68,22 +81,22 @@ describe RegistrantExpenseItem do
     end
 
     it "has a cost of 0" do
-      @rei.cost.should == 0
+      expect(@rei.cost).to eq(0)
     end
 
     it "has 0 taxes" do
-      @rei.tax.should == 0
+      expect(@rei.tax).to eq(0)
     end
   end
   it "must associate with the registrant" do
     @reg = FactoryGirl.create(:registrant)
     @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg)
-    @rei.registrant.should == @reg
+    expect(@rei.registrant).to eq(@reg)
   end
   it "must associate with the expense_item" do
     @item = FactoryGirl.create(:expense_item)
     @rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @item)
-    @rei.expense_item.should == @item
+    expect(@rei.expense_item).to eq(@item)
   end
 
   describe "with an expense_item with a limited number available" do
@@ -93,16 +106,16 @@ describe RegistrantExpenseItem do
 
     it "allows creating a registrant expense_item" do
       @rei = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
-      @rei.valid?.should == true
+      expect(@rei.valid?).to eq(true)
     end
 
     it "allows creating the maximum amount" do
       @rei = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
-      @rei.valid?.should == true
+      expect(@rei.valid?).to eq(true)
       @rei.save!
 
       @rei2 = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
-      @rei2.valid?.should == true
+      expect(@rei2.valid?).to eq(true)
       @rei2.save!
     end
 
@@ -114,7 +127,7 @@ describe RegistrantExpenseItem do
       reg = @rei2.registrant
       reg.reload
       @rei3 = reg.registrant_expense_items.build({:expense_item_id => @ei.id})
-      reg.valid?.should == false
+      expect(reg.valid?).to eq(false)
     end
   end
 
@@ -126,17 +139,17 @@ describe RegistrantExpenseItem do
 
     it "allows creating a registrant expense_item" do
       @rei = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
-      @rei.valid?.should == true
+      expect(@rei.valid?).to eq(true)
     end
 
     it "doesn't allow creating more than the max amount" do
       @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
-      @rei.valid?.should == true
+      expect(@rei.valid?).to eq(true)
       @rei.save!
       @reg.reload
 
       @rei2 = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
-      @rei2.valid?.should == false
+      expect(@rei2.valid?).to eq(false)
     end
 
     it "allows creating max PER registrant" do
@@ -144,7 +157,7 @@ describe RegistrantExpenseItem do
       @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
       @rei2 = FactoryGirl.build(:registrant_expense_item, :registrant => @reg2, :expense_item => @ei)
 
-      @rei2.valid?.should == true
+      expect(@rei2.valid?).to eq(true)
     end
 
     describe "when the limit is 2 per registrant" do
@@ -156,7 +169,7 @@ describe RegistrantExpenseItem do
       it "can create 2 expense_items for the registrant" do
         @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
         @rei2 = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
-        @rei2.valid?.should == true
+        expect(@rei2.valid?).to eq(true)
       end
     end
   end

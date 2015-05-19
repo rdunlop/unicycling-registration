@@ -29,8 +29,7 @@ class Ability
 
     can :read, StandardSkillEntry
     can :read, AgeGroupType
-    can :index, :result
-    can :read, CombinedCompetition
+    can [:index, :scores], :result
     can [:announcer, :start_list], Competition
     can [:acl, :set_acl, :code, :use_code], :permission
     can :show, PublishedAgeGroupEntry do |entry|
@@ -49,7 +48,9 @@ class Ability
   end
 
   def set_data_entry_volunteer_abilities(user)
-    can [:read, :enter_sign_in, :update_competitors], Competitor
+    can :data_entry_menu, :welcome
+
+    can [:read], Competitor
     can :read, Competition
 
     can :read, Judge, :user_id => user.id
@@ -65,7 +66,7 @@ class Ability
     end
 
     # printing forms:
-    can [:announcer, :heat_recording, :single_attempt_recording, :two_attempt_recording, :sign_in_sheet], Competition
+    can [:announcer, :heat_recording, :single_attempt_recording, :two_attempt_recording], Competition
 
     # data entry
     can :manage, ImportResult do |import_result|
@@ -82,33 +83,16 @@ class Ability
     can :manage, TieBreakAdjustment
   end
 
-  def director_of_competition(user, competition)
+  def director_and_unlocked(user, competition)
     !competition.locked && user.has_role?(:director, competition.try(:event))
   end
 
   def set_director_abilities(user)
     set_data_entry_volunteer_abilities(user)
 
-    # :read is main director menu-page
-    # :results is for printing
-    can [:results, :sign_ups], Event do |ev|
-      user.has_role? :director, ev
-    end
-    can :summary, Event
-    can :sign_ups, EventCategory
-    #     #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
-    #     can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
-
-    can :manage, Competitor do |comp|
-      director_of_competition(user, comp.competition)
-    end
-
+    # Abilities to be able to read data about a competition
     can :read, Competition do |competition|
       user.has_role? :director, competition.event
-    end
-
-    can :manage, Member do |member|
-      director_of_competition(user, member.competitor.competition)
     end
 
     can [:read], Score do |score|
@@ -119,36 +103,55 @@ class Ability
       user.has_role? :director, comp.event
     end
 
-    can [:set_sort, :sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
-      director_of_competition(user, comp)
-    end
-
-    can :manage, ImportResult do |import_result|
-      director_of_competition(user, import_result.competition)
-    end
-
-    can :manage, TimeResult do |time_result|
-      director_of_competition(user, time_result.competition)
+    can [:read], Judge do |judge|
+      user.has_role? :director, judge.competition.try(:event)
     end
 
     can :manage, DataEntryVolunteer
-
     can :create_race_official, :permission
 
-    can [:crud, :copy_judges], Judge do |judge|
-      (judge.scores.count == 0) && (director_of_competition(user, judge.competition))
+    # :results is for printing
+    can [:results, :sign_ups], Event do |ev|
+      user.has_role? :director, ev
     end
-    can [:read], Judge do |judge|
-      (director_of_competition(user, judge.competition))
+    can :summary, Event
+    can :sign_ups, EventCategory
+    #     #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
+    #     can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
+
+    # Abilities to be able to change data about a competition
+    can :manage, Competitor do |comp|
+      director_and_unlocked(user, comp.competition)
+    end
+
+    can :manage, Member do |member|
+      director_and_unlocked(user, member.competitor.competition)
+    end
+
+    # TODO: is there a way to scope this better? and also to honor the 'locked' status
+    can [:update_row_order], Competitor, if: user.has_role?(:director, :any)
+
+    can [:set_sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
+      director_and_unlocked(user, comp)
+    end
+
+    # Data Management
+    can :manage, ImportResult do |import_result|
+      director_and_unlocked(user, import_result.competition)
+    end
+
+    can :manage, TimeResult do |time_result|
+      director_and_unlocked(user, time_result.competition)
+    end
+
+    can [:crud, :copy_judges], Judge do |judge|
+      # Only allow creating judges when there are no scores yet entered
+      (judge.scores.count == 0) && (director_and_unlocked(user, judge.competition))
     end
   end
 
   def define_ability_for_logged_in_user(user)
     alias_action :create, :read, :update, :destroy, :to => :crud
-
-    if user.roles.any?
-      can :data_entry_menu, :welcome
-    end
 
     if user.has_role? :super_admin
       can :access, :rails_admin
@@ -156,6 +159,73 @@ class Ability
       can :manage, :all
       return # required in order to allow rails_admin to function
     end
+
+    # #################################################
+    # Begin new role definitions
+    # #################################################
+    if user.has_role? :convention_admin
+      can :manage, TenantAlias
+      can :manage, EventConfiguration
+      cannot :cache, EventConfiguration
+      can :manage, :convention_setup
+      can :crud, ExpenseGroup
+      can :crud, ExpenseItem
+      can :crud, CouponCode
+      can :crud, RegistrationPeriod
+      can :crud, Category
+      can :crud, Event
+      can :crud, EventChoice
+      can :crud, EventCategory
+      can :crud, VolunteerOpportunity
+      can :read, :onsite_registration
+      can :display_acl, :permission
+      can :toggle_visibility, ExpenseGroup
+      can [:read, :set_role, :set_password], :permission
+      can :manage, :translation
+    end
+
+    if user.has_role? :music_dj
+      can :list, :song
+      # automatically can download music via S3 links
+    end
+
+    if user.has_role? :translator
+      can :manage, :translation
+      can :manage, :all_site_translations
+    end
+
+    if user.has_role? :payment_admin
+      can :summary, Payment
+      can [:new, :choose, :create], :manual_payment
+      can :set_reg_fee, :registrant
+      can [:read], Registrant
+      can [:list, :payments, :payment_details], :export_payment
+      can [:download_all], :export_registrant
+      # Allow adding items which only admins can add
+      can :admin_view, ExpenseItem
+      can :details, ExpenseItem
+      can :read, CouponCode
+    end
+
+    if user.has_role? :event_planner
+      can [:summary, :general_volunteers, :specific_volunteers], Event
+      can :sign_ups, EventCategory
+      can [:manage_all, :show_all], :registrant
+      can [:read], Registrant
+      can [:read, :create, :list], Email
+    end
+
+    if user.has_role? :competition_admin
+      can :read, :competition_setup
+      can :manage, :director
+      can :manage, :ineligible_registrant
+      can [:crud], Competition
+      #can [:read, :set_role, :set_password], :permission
+    end
+
+    # #################################################
+    # End new role definitions
+    # #################################################
 
     if user.has_role? :awards_admin
       can [:read, :results, :publish, :unpublish, :award], Competition
@@ -176,27 +246,13 @@ class Ability
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
-      can [:directors], :permission
+      can [:set_password], :permission
       if config.usa_membership_config
         can :manage, :usa_membership
       end
-      can :read, :volunteer
+      can :read, VolunteerOpportunity
 
       can :manage, :payment_adjustment
-      can :display_acl, :permission
-    end
-
-    if user.has_role? :event_planner
-      can :summary, Event
-      can :sign_ups, EventCategory
-      can [:manage_one, :choose_one, :manage_all], Registrant
-      can [:read, :show_all], Registrant
-      can [:read, :create, :list], Email
-      can [:directors], :permission
-    end
-
-    if user.has_role? :music_dj
-      can :list, Song
     end
 
     if user.has_role?(:race_official) || user.has_role?(:admin)
@@ -251,34 +307,34 @@ class Ability
 
   def define_payment_ability(user)
     # Payment
-    can :summary, Payment if user.has_role?(:payment_admin) || user.has_role?(:admin)
-    can [:details, :admin_view], ExpenseItem if user.has_role?(:payment_admin) || user.has_role?(:admin)
     can :read, Payment if user.has_role? :admin
     can :manage, Payment if user.has_role? :super_admin
     can :read, Payment, :user_id => user.id
     unless reg_closed?
       can [:new, :create, :complete, :apply_coupon], Payment
     end
-    if user.has_role?(:payment_admin) || user.has_role?(:admin)
+    can [:offline], Payment
+    if user.has_role?(:admin)
       can [:new, :exchange_choose, :exchange_create, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
-      can [:read], Registrant
     end
   end
 
   # Registrant
   def define_registrant_ability(user)
     if user.has_role? :admin
-      can :reg_fee, Registrant
-      can :update_reg_fee, Registrant
-      can [:manage_one, :choose_one, :manage_all], Registrant
+      # can :create, RegFee
+      can :set_reg_fee, :registrant
+      can :undelete, :registrant
+      can :manage_all, :registrant
+      can :bag_labels, :registrant
+
       can [:read, :create, :list], Email
-      can :bag_labels, Registrant
-      can :undelete, Registrant
       can :crud, Registrant
       can :crud, CompetitionWheelSize
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
-      can [:crud, :file_complete, :add_file, :list], Song
+      can [:crud, :file_complete, :add_file], Song
+      can :list, :song
       can [:crud], CompetitionWheelSize
     end
     # not-object-specific

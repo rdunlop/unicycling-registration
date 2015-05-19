@@ -8,19 +8,19 @@ describe TwoAttemptEntry do
   describe "creating time_results from TwoAttemptEntry" do
     let(:two_attempt_entry) { 
       TwoAttemptEntry.new(
-      user: user,
-      bib_number: competitor1.bib_number,
-      competition: competition,
-
-      minutes_1: 1,
-      seconds_1: 2,
-      thousands_1: 3,
-      status_1: nil,
-
-      minutes_2: 4,
-      seconds_2: 5,
-      thousands_2: 6,
-      status_2: "DQ"
+        user: user,
+        bib_number: competitor1.bib_number,
+        competition: competition,
+  
+        minutes_1: 1,
+        seconds_1: 2,
+        thousands_1: 3,
+        status_1: nil,
+  
+        minutes_2: 4,
+        seconds_2: 5,
+        thousands_2: 6,
+        status_2: "DQ"
       )
     }
     it "can save to the database" do
@@ -49,7 +49,7 @@ end
 #  thousands_1    :integer
 #  thousands_2    :integer
 #  status_2       :string(255)
-#  is_start_time  :boolean          default(FALSE)
+#  is_start_time  :boolean          default(FALSE), not null
 #  created_at     :datetime
 #  updated_at     :datetime
 #

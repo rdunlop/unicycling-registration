@@ -1,0 +1,28 @@
+<h1>Listing Entries for <%= @combined_competition %></h1>
+
+<%= render partial: "/results/points_breakdown" %>
+<hr>
+
+<h3>Manage Entries</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Entry Set</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @combined_competition_entries.each do |cc| %>
+      <tr>
+        <th><%= cc %></th>
+        <td><%= link_to 'Edit', edit_combined_competition_combined_competition_entry_path(@combined_competition, cc) %></td>
+        <td><%= link_to 'Delete', [@combined_competition, cc], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New calculation source', new_combined_competition_combined_competition_entry_path(@combined_competition) %>

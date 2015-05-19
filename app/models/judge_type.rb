@@ -15,7 +15,7 @@
 #  created_at                   :datetime
 #  updated_at                   :datetime
 #  event_class                  :string(255)
-#  boundary_calculation_enabled :boolean
+#  boundary_calculation_enabled :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -48,7 +48,6 @@ class JudgeType < ActiveRecord::Base
     self.val_2_max ||= 10
     self.val_3_max ||= 10
     self.val_4_max ||= 10
-    self.boundary_calculation_enabled = false if self.boundary_calculation_enabled.nil?
   end
 
   def num_columns

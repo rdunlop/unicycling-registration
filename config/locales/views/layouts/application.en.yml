@@ -1,0 +1,5 @@
+---
+en:
+  layouts:
+    application:
+      registration: Registration

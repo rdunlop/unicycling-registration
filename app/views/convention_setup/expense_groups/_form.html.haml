@@ -1,0 +1,15 @@
+= simple_form_for(@expense_group) do |f|
+  = render partial: "/shared/error_messages", object: @expense_group
+  = f.input :group_name
+  = f.input :info_url, input_html: { class: "js--fancyboxUrl" }
+  = link_to 'Test this URL', '#', class: "fancybox js--dynamicFancybox"
+
+  %h3 Does a Competitor get one free?
+  = f.input :competitor_free_options, collection: ExpenseGroup.free_options
+  = f.input :competitor_required
+
+  %h3 Does a NonCompetitor get one free?
+  = f.input :noncompetitor_free_options, collection: ExpenseGroup.free_options
+  = f.input :noncompetitor_required
+
+  = f.button :submit

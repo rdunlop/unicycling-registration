@@ -1,0 +1,15 @@
+%h1 Volunteer Opportunities
+
+%p When registering, a user can be asked to volunteer for any volunteer role.
+
+= radio_button_tag :volunteer_type, "one", VolunteerOpportunity.all.none?, class: "js--displayIfChecked", data: { displayBlock: "js--checkedSourceOne" }
+= label_tag :volunteer_type_one, "Ask \"I want to Volunteer\""
+%br
+= radio_button_tag :volunteer_type, "many", VolunteerOpportunity.all.any?, class: "js--displayIfChecked", data: { displayBlock: "js--checkedSourceMany" }
+= label_tag :volunteer_type_many, "Ask \"I want to Volunteer for <role>\""
+
+.generic_results.js--checkedSourceOne
+  Every Registrant will be asked "Do you want to Volunteer?""
+
+.specific_results.js--checkedSourceMany
+  = render "specific_question_results"

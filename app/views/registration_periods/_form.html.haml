@@ -1,0 +1,35 @@
+= simple_form_for(@registration_period) do |f|
+  = render partial: "shared/error_messages", object: @registration_period
+  = f.input :name
+  = f.input :onsite
+  .help_bubble{ title: "This causes the 'Online Registration Closes' banner to be displayed appropriately in the Cost tables" }
+  .input_details
+    Traditionally, online registration closes a little before the convention starts, and on-site registration is only allowed in the registration-hall, on convention-controlled computers.
+  .input_details
+    This allows coordination of printing registration packets, preparing competitor lists, and other last-minute minutae
+
+  = f.input :start_date
+  .help_bubble{ title: "Specify the Date following the previous period's 'End Date'" }
+
+  = f.input :end_date
+  .help_bubble{ title: "Specify the last date that these prices apply" }
+  .input_details
+    Because many people only pay at the last possible minute, the price automatically increases ~36 hours after end of the End Date. This allows last-minute registrants a reprieve.
+
+  %h3 Competitor
+  = f.simple_fields_for :competitor_expense_item do |ce|
+    = ce.input :cost, input_html: { class: "js--costInputComp" }
+
+    = ce.input :tax, input_html: { class: "js--costInputComp" }
+    Total
+    = text_field_tag :total_comp, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInputComp" }
+
+  %h3 Non Competitor
+  = f.simple_fields_for :noncompetitor_expense_item do |ce|
+    = ce.input :cost, input_html: { class: "js--costInputNonComp" }
+
+    = ce.input :tax, input_html: { class: "js--costInputNonComp" }
+    Total
+    = text_field_tag :total_comp, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInputNonComp" }
+  %br
+  = f.button :submit

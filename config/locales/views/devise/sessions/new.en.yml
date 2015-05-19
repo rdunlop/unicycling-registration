@@ -1,0 +1,7 @@
+---
+en:
+  devise:
+    sessions:
+      new:
+        action: Log in
+        use_access_code: Use an access code

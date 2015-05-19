@@ -86,4 +86,12 @@ class Email
   def persisted?
     false
   end
+
+  def serialize
+    YAML.dump(self)
+  end
+
+  def self.deserialize(yaml)
+    YAML.load(yaml)
+  end
 end

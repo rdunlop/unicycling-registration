@@ -1,15 +1,9 @@
 class WelcomeController < ApplicationController
-  before_filter :authenticate_user!, :only => [:index]
+  before_action :authenticate_user!, :only => [:index, :data_entry_menu]
   skip_authorization_check only: [:index, :help, :feedback, :confirm]
   authorize_resource class: false, only: [:data_entry_menu]
 
   before_action :check_acceptable_format
-
-  # This tries to get around the apple-touch-icon.png requests
-  #  and the humans.txt requests
-  def check_acceptable_format
-    raise ActiveRecord::RecordNotFound if ["txt", "png"].include?(params[:format] )
-  end
 
   def help
     @contact_form = ContactForm.new
@@ -23,8 +17,8 @@ class WelcomeController < ApplicationController
       @contact_form.update_from_user(current_user)
     end
 
-    if @contact_form.valid?
-      Notifications.delay.send_feedback(@contact_form)
+    if @contact_form.valid? && captcha_valid?
+      Notifications.send_feedback(@contact_form.serialize).deliver_later
       respond_to do |format|
         format.html { redirect_to welcome_help_path, notice: 'Feedback sent successfully.' }
       end
@@ -34,21 +28,9 @@ class WelcomeController < ApplicationController
     end
   end
 
-  # chooses the page to display
   def index
-    respond_to do |format|
-      if signed_in?
-        if current_user.roles.any?
-          flash.keep
-          format.html { redirect_to welcome_data_entry_menu_path }
-        else
-          flash.keep
-          format.html { redirect_to user_registrants_path(current_user) }
-        end
-      else
-        format.html { redirect_to root_path }
-      end
-    end
+    flash.keep
+    redirect_to user_registrants_path(current_user)
   end
 
   def data_entry_menu
@@ -57,6 +39,26 @@ class WelcomeController < ApplicationController
   end
 
   private
+
+  def captcha_valid?
+    return true unless recaptcha_required?
+
+    verify_recaptcha
+  end
+
+  def recaptcha_required?
+    Rails.application.secrets.recaptcha_private_key.present? && !signed_in?
+  end
+  helper_method :recaptcha_required?
+
+  # This tries to get around the apple-touch-icon.png requests
+  #  and the humans.txt requests
+  def check_acceptable_format
+    if ["txt", "png"].include?(params[:format] )
+      params[:format] = nil
+      raise ActiveRecord::RecordNotFound.new
+    end
+  end
 
   def contact_form_params
     params.require(:contact_form).permit(:feedback, :email)

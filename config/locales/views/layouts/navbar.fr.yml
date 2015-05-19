@@ -1,0 +1,10 @@
+---
+fr:
+  layouts:
+    navbar:
+      all_registrants: Tous les participants
+      my_account: My Account
+      my_payments: Mes paiements
+      my_registrations: Mes inscriptions
+      results: Compétitions/Resultat
+      sign_out: Déconnexion

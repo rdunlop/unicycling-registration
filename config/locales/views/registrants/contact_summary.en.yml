@@ -1,0 +1,9 @@
+---
+en:
+  registrants:
+    contact_summary:
+      emergency_contact_attending: Emergency Contact Attending
+      emergency_contact_name: Emergency Contact Name
+      emergency_contact_phone: Emergency Contact Phone
+      emergency_contact_relationship: Emergency Contact Relationship
+      responsible_adult: Responsible Adult

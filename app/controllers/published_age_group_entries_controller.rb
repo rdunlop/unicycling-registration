@@ -1,5 +1,5 @@
 class PublishedAgeGroupEntriesController < ApplicationController
-  before_filter :authenticate_user!, except: :show
+  before_action :authenticate_user!, except: :show
 
   before_action :load_competition
 

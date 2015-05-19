@@ -11,17 +11,18 @@
 #  created_at              :datetime
 #  updated_at              :datetime
 #  user_id                 :integer
-#  deleted                 :boolean
+#  deleted                 :boolean          default(FALSE), not null
 #  bib_number              :integer
 #  wheel_size_id           :integer
 #  age                     :integer
-#  ineligible              :boolean          default(FALSE)
-#  volunteer               :boolean
+#  ineligible              :boolean          default(FALSE), not null
+#  volunteer               :boolean          default(FALSE), not null
 #  online_waiver_signature :string(255)
 #  access_code             :string(255)
 #  sorted_last_name        :string(255)
 #  status                  :string(255)      default("active"), not null
 #  registrant_type         :string(255)      default("competitor")
+#  rules_accepted          :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -35,8 +36,6 @@ class Registrant < ActiveRecord::Base
   include CachedModel
 
   after_save :touch_members
-
-  after_initialize :init
 
   has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
 
@@ -131,6 +130,7 @@ class Registrant < ActiveRecord::Base
 
   # waiver
   validates :online_waiver_signature, :presence => true, if: :needs_waiver?
+  validates :rules_accepted, acceptance: { accept: true }, if: :needs_rules_accepted?
 
   # contact info
   validates_associated :contact_detail, if: :validated?
@@ -138,6 +138,7 @@ class Registrant < ActiveRecord::Base
   # Expense items
   validate :not_exceeding_expense_item_limits
   validates_associated :registrant_expense_items
+  validate :has_necessary_free_items, if: :validated?
 
   scope :active_or_incomplete, -> { where(:deleted => false).order(:bib_number) }
   scope :active, -> { where(status: "active").active_or_incomplete }
@@ -169,6 +170,10 @@ class Registrant < ActiveRecord::Base
     EventConfiguration.singleton.has_online_waiver && status_is_active?("contact_details")
   end
 
+  def needs_rules_accepted?
+    EventConfiguration.singleton.accept_rules? && status_is_active?("contact_details")
+  end
+
   def spectator?
     registrant_type == 'spectator'
   end
@@ -192,6 +197,10 @@ class Registrant < ActiveRecord::Base
 
   def self.competitor
     where(registrant_type: 'competitor')
+  end
+
+  def self.noncompetitor
+    where(registrant_type: 'noncompetitor')
   end
 
   def self.notcompetitor
@@ -324,12 +333,6 @@ class Registrant < ActiveRecord::Base
     bib_number
   end
 
-  def init
-    self.deleted = false if self.deleted.nil?
-    self.ineligible = false if self.ineligible.nil?
-    self.volunteer = false if self.volunteer.nil?
-  end
-
   def gender_present
     if gender.blank?
       errors[:gender_male] = "" # Cause the label to be highlighted
@@ -438,7 +441,7 @@ class Registrant < ActiveRecord::Base
 
   def amount_owing
     Rails.cache.fetch("/registrants/#{id}-#{updated_at}/amount_owing") do
-      registrant_expense_items.inject(0){|total, item| total + item.cost}
+      registrant_expense_items.inject(0){|total, item| total + item.total_cost}
     end
   end
 
@@ -594,7 +597,7 @@ class Registrant < ActiveRecord::Base
       free_options = expense_item.expense_group.noncompetitor_free_options
     end
     case free_options
-    when "One Free In Group"
+    when "One Free In Group", "One Free In Group REQUIRED"
       return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
     when "One Free of Each In Group"
       return !has_chosen_free_item_of_expense_item(expense_item)
@@ -609,6 +612,19 @@ class Registrant < ActiveRecord::Base
       num_ei = expense_items.count(ei)
       if !ei.can_i_add?(num_ei)
         errors[:base] << "There are not that many #{ei.to_s} available"
+      end
+    end
+  end
+
+  def has_necessary_free_items
+    if competitor
+      free_groups_required = ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
+    else
+      free_groups_required = ExpenseGroup.where(noncompetitor_free_options: "One Free In Group REQUIRED")
+    end
+    free_groups_required.each do |expense_group|
+      if all_expense_items.none? { |expense_item| expense_item.expense_group == expense_group}
+        errors[:base] << "You must choose a free #{expense_group}"
       end
     end
   end

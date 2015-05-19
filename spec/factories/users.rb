@@ -19,7 +19,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
-#  guest                  :boolean          default(FALSE)
+#  guest                  :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -41,6 +41,14 @@ FactoryGirl.define do
     end
     factory :super_admin_user do
       after(:create) {|user| user.add_role :super_admin }
+    end
+
+    factory :convention_admin_user do
+      after(:create) {|user| user.add_role :convention_admin }
+    end
+
+    factory :competition_admin_user do
+      after(:create) {|user| user.add_role :competition_admin }
     end
 
     factory :data_entry_volunteer_user do

@@ -24,7 +24,7 @@ describe "songs/index" do
     allow(@song2).to receive(:human_name).and_return("File Name")
     assign(:song, Song.new)
     assign(:config, double(:music_submission_end_date => "now"))
-    controller.stub(:current_user) { @registrant.user }
+    allow(controller).to receive(:current_user) { @registrant.user }
   end
 
   it "renders a list of songs" do

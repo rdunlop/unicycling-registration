@@ -5,13 +5,13 @@
 #  id              :integer          not null, primary key
 #  payment_id      :integer
 #  registrant_id   :integer
-#  amount          :decimal(, )
 #  created_at      :datetime
 #  updated_at      :datetime
 #  expense_item_id :integer
 #  details         :string(255)
-#  free            :boolean          default(FALSE)
-#  refunded        :boolean          default(FALSE)
+#  free            :boolean          default(FALSE), not null
+#  refunded        :boolean          default(FALSE), not null
+#  amount_cents    :integer
 #
 # Indexes
 #
@@ -25,8 +25,9 @@ class PaymentDetail < ActiveRecord::Base
   include HasDetailsDescription
 
   validates :payment, :registrant_id, :expense_item, :presence => true
-  validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
   validate :registrant_must_be_valid
+
+  monetize :amount_cents, numericality: { greater_than_or_equal_to: 0 }
 
   has_paper_trail
 
@@ -102,7 +103,7 @@ class PaymentDetail < ActiveRecord::Base
 
   def inform_of_coupon
     if payment_detail_coupon_code.present? && payment_detail_coupon_code.inform?
-      PaymentMailer.delay.coupon_used(self.id)
+      PaymentMailer.coupon_used(self).deliver_later
     end
   end
 

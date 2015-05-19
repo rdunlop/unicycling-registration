@@ -16,26 +16,26 @@ describe WheelSize do
     @ws = FactoryGirl.create(:wheel_size)
   end
   it "is valid" do
-    @ws.valid?.should == true
+    expect(@ws.valid?).to eq(true)
   end
 
   it "requires a position" do
     @ws.position = nil
-    @ws.valid?.should == false
+    expect(@ws.valid?).to eq(false)
   end
 
   it "requires a description" do
     @ws.description = nil
-    @ws.valid?.should == false
+    expect(@ws.valid?).to eq(false)
   end
 
   it "returns the wheel sizes in position order" do
     @ws3 = FactoryGirl.create(:wheel_size, :position => 3)
     @ws2 = FactoryGirl.create(:wheel_size, :position => 2)
-    WheelSize.all.should == [@ws3, @ws2, @ws]
+    expect(WheelSize.all).to eq([@ws3, @ws2, @ws])
   end
 
   it "returns the description as the to_s" do
-    @ws.to_s.should == @ws.description
+    expect(@ws.to_s).to eq(@ws.description)
   end
 end

@@ -1,0 +1,9 @@
+---
+en:
+  registrants:
+    base_details:
+      base_details: Base Details
+      birthday: Birthday
+      female: Female
+      male: Male
+      required_fields: Required fields

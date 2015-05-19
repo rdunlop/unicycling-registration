@@ -1,18 +1,18 @@
-%h1 Listing #{@registrant}'s songs
+%h1= t(".title", name: @registrant.to_s)
 = render "songs_list"
 %br
 
-%h1 New song (Step 1)
+%h1= t(".new_song")
 %fieldset.wizard
-  %legend Step 1
+  %legend= t(".step_1")
   = render 'form'
 
 %fieldset.wizard.wizard_other_step
-  %legend Step 2
-  Upload Music File
+  %legend= t(".step_2")
+  = t(".upload_file")
 
 %br
 
-= link_to "Back", registrant_path(@registrant)
+= link_to t("back"), registrant_path(@registrant)
 %br
-= link_to "Add songs for other registrants", my_songs_user_songs_path(current_user)
+= link_to t(".add_songs_for_others"), my_songs_user_songs_path(current_user)

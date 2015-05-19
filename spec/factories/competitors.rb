@@ -10,10 +10,10 @@
 #  updated_at               :datetime
 #  status                   :integer          default(0)
 #  lowest_member_bib_number :integer
-#  geared                   :boolean          default(FALSE)
+#  geared                   :boolean          default(FALSE), not null
 #  riding_wheel_size        :integer
 #  notes                    :string(255)
-#  heat                     :integer
+#  wave                     :integer
 #  riding_crank_size        :integer
 #
 # Indexes
@@ -28,7 +28,6 @@ require 'rspec/mocks/standalone'
 FactoryGirl.define do
   factory :event_competitor, :class => Competitor do
     competition  # FactoryGirl
-    sequence(:position)
     after(:create) do |comp|
       FactoryGirl.create(:member, :competitor => comp)
       comp.reload
@@ -42,5 +41,4 @@ FactoryGirl.define do
     registrant
     association :competitor, :factory => :event_competitor
   end
-
 end

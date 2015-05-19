@@ -1,0 +1,95 @@
+-# needs I18n
+.waiver_form
+  %h1
+    = @event_name
+    %br
+    Competitive and Non-Competitive Event Release Form
+  .waiver_contents
+    .fields{:style => "font-size:13px;"}
+      %p
+        %span{:style => "font-weight:bold;"} Complete the following:
+        %br
+        %br
+        Today's date: &nbsp;
+        %span{:style => "text-decoration:underline;"}= @today_date
+        %br
+        Club/team name: &nbsp;
+        %span{:style => "text-decoration:underline;"}= @club
+        %br
+        Racing age, as of July 21, 2013: &nbsp;
+        %span{:style => "text-decoration:underline;"}= @age
+        - if @age.nil? or @age < 18
+          %br
+          (If under 18, parent/guardian must sign Release as indicated below.)
+      %p
+        Name: &nbsp;
+        %span{:style => "text-decoration:underline;"}= @name
+        %br
+        Address: &nbsp;
+        %span{:style => "text-decoration:underline;"}= @address
+        %br
+        City: &nbsp;
+        %span{:style => "text-decoration:underline;"}= @city
+        %br
+        State, Zip and Country: &nbsp;
+        %span{:style => "text-decoration:underline;"}
+          = @state
+          = @zip
+          ,
+          \#{@country}
+        %br
+        Phone: &nbsp;
+        %span{:style => "text-decoration:underline;"}
+          - unless @phone.blank?
+            = @phone
+          - unless @mobile.blank?
+            , #{@mobile}
+        %br
+        Email: &nbsp;
+        %span{:style => "text-decoration:underline;"}
+          - unless @email.blank?
+            = @email
+          - else
+            = @user_email
+        %br
+        Emergency contact: &nbsp;
+        %span{:style => "text-decoration:underline;"}= @emergency_name
+        %br
+        Emergency contact phone: &nbsp;
+        %span{:style => "text-decoration:underline;"}
+          = @emergency_primary_phone
+          - unless @emergency_other_phone.blank?
+            , #{@emergency_other_phone}
+    = text_to_html_linebreaks(@config.waiver_text, "waiver_text").html_safe
+
+    %br
+    %hr{:style => "height:1px;color:#444;background-color:#444;border:none;"}/
+    .signature{:style => "font-size:14px;"}
+      %span{:style => "float:left"} Signature
+      %span{:style => "float:right;"} Date
+    %br
+    %br
+    - if @age.nil? or @age < 18
+      %p{:style => "font-weight:bold;"}
+        Consent and release of parent or guardian, if above entrant is under 18 years of age
+        on #{@event_start_date}.
+      %p{:style => "text-indent: 1.5em; margin-top: 0"}
+        I am the parent or guardian of
+        %span{:style => "text-decoration:underline;"}= @name
+        (child).  My Child is fit
+        for the event, and I consent to my Child's participation.  I HAVE READ AND I
+        UNDERSTAND THE ABOVE CONTRACT.  In consideration of allowing my Child to participate,
+        I consent to the contract and agree that ITS TERMS SHALL LIKEWISE BIND ME, MY CHILD,
+        and our heirs, legal representatives, and assignees.  I HEREBY RELEASE AND SHALL
+        DEFEND, INDEMNIFY AND HOLD HARMLESS THE RELEASEES FROM EVERY CLAIM AND LIABILITY that
+        I or my Child may allege against the Releasees (including reasonable legal fees and
+        costs) as a direct or indirect result of injury or death to me or my Child because of
+        my Child's participation in the event, WHETHER CAUSE BY THE NEGLIGENCE OF THE
+        RELEASEES OR OTHERS TO THE MAXIMUM EXTENT PERMITED BY LAW.  I PROMISE NOT TO SUE
+        RELEASEES on my behalf or on behalf of my Child regarding any claim arising
+        from my Child's participation in the event.
+      %br
+      %hr{:style => "height:1px;color:#444;background-color:#444;border:none;"}/
+      .signature{:style => "font-size:14px;"}
+        %span{:style => "float:left"} Parent/Guardian Signature
+        %span{:style => "float:right;"} Date

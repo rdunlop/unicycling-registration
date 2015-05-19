@@ -1,8 +1,8 @@
 class StandardScoresController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
-  before_filter :find_judge
-  before_filter :find_competitor, :except => [:index]
+  before_action :find_judge
+  before_action :find_competitor, :except => [:index]
 
   def find_judge
     @judge = Judge.find(params[:judge_id])

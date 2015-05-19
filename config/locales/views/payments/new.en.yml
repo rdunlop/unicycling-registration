@@ -1,0 +1,6 @@
+---
+en:
+  payments:
+    new:
+      title: New payment
+      select_the_items_to_pay_for: Select the items to pay for

@@ -4,8 +4,8 @@
 #
 #  id            :integer          not null, primary key
 #  competitor_id :integer
-#  distance      :integer
-#  fault         :boolean
+#  distance      :decimal(4, )
+#  fault         :boolean          default(FALSE), not null
 #  judge_id      :integer
 #  created_at    :datetime
 #  updated_at    :datetime
@@ -30,39 +30,39 @@ describe DistanceAttempt do
     it "should have an associated competitor" do
       @da.distance = 1.0
       @da.judge_id = @judge.id
-      @da.valid?.should == false
+      expect(@da.valid?).to eq(false)
 
       @da.competitor_id = @comp.id
-      @da.valid?.should == true
+      expect(@da.valid?).to eq(true)
     end
     it "should have a distance" do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
-      @da.valid?.should == false
+      expect(@da.valid?).to eq(false)
 
       @da.distance = 1.0
-      @da.valid?.should == true
+      expect(@da.valid?).to eq(true)
     end
     it "should have a positive distance" do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
-      @da.valid?.should == false
+      expect(@da.valid?).to eq(false)
 
       @da.distance = -1.0
-      @da.valid?.should == false
+      expect(@da.valid?).to eq(false)
     end
     it "should have a distance less than 1000" do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
       @da.distance = 1000
-      @da.valid?.should == false
+      expect(@da.valid?).to eq(false)
     end
     it "should have a judge" do
       @da.competitor_id = @comp.id
       @da.distance = 100
-      @da.valid?.should == false
+      expect(@da.valid?).to eq(false)
       @da.judge_id = @judge.id
-      @da.valid?.should == true
+      expect(@da.valid?).to eq(true)
     end
   end
 end

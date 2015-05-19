@@ -4,23 +4,14 @@
 #
 #  id                          :integer          not null, primary key
 #  event_id                    :integer
-#  export_name                 :string(255)
 #  cell_type                   :string(255)
 #  multiple_values             :string(255)
-#  label                       :string(255)
 #  position                    :integer
 #  created_at                  :datetime
 #  updated_at                  :datetime
-#  autocomplete                :boolean
-#  optional                    :boolean          default(FALSE)
-#  tooltip                     :string(255)
+#  optional                    :boolean          default(FALSE), not null
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer
-#
-# Indexes
-#
-#  index_event_choices_on_event_id_and_position  (event_id,position) UNIQUE
-#  index_event_choices_on_export_name            (export_name) UNIQUE
 #
 
 class EventChoice < ActiveRecord::Base
@@ -30,10 +21,9 @@ class EventChoice < ActiveRecord::Base
   belongs_to :optional_if_event_choice, :class_name => "EventChoice"
   belongs_to :required_if_event_choice, :class_name => "EventChoice"
 
-  validates :label, {:presence => true}
-  validates :export_name, {:presence => true, :uniqueness => true}
+  validates :label, :cell_type, presence: true
 
-  translates :label, :tooltip
+  translates :label, :tooltip, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   def self.cell_types
@@ -41,16 +31,8 @@ class EventChoice < ActiveRecord::Base
   end
 
   validates :cell_type, :inclusion => {:in => self.cell_types }
-  validates :position, :uniqueness => {:scope => [:event_id]}
-  validates :autocomplete, :inclusion => {:in => [true, false] } # because it's a boolean
   validates :optional, :inclusion => {:in => [true, false] } # because it's a boolean
-
-  after_initialize :init
-
-  def init
-    self.autocomplete = false if self.autocomplete.nil?
-    self.optional = false if self.optional.nil?
-  end
+  acts_as_restful_list scope: :event
 
   def choicename
     "choice#{id}"

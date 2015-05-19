@@ -1,0 +1,36 @@
+%h1 Translate the system configuration
+
+%p From this page, you can adjust the translation of various Convention-specific elements
+
+%hr
+
+%h2 Convention-Specific translations:
+%ul
+  %li= link_to "Event Configuration", edit_translations_event_configuration_path
+  %li= link_to "Categories", translations_categories_path
+  %li= link_to "Event Choices", translations_event_choices_path
+  %li= link_to "Expense Groups", translations_expense_groups_path
+  %li= link_to "Expense Items", translations_expense_items_path
+  %li= link_to "Registration Periods", translations_registration_periods_path
+
+%hr
+
+- if can? :manage, :all_site_translations
+  = render "all_site_translations"
+  %hr
+- else
+  %h2 Shared Text
+
+  %p There is a lot of text which is shared between all of the different conventions. If you notice some text which is not translated, and is not listed in the above types of elements, it is probably "shared" text.
+
+  %p
+    If you would like to help translate that text, please
+    = link_to "contact Robin", welcome_help_path
+    (it requires additional training)
+  %hr
+
+%h2 Clear Caching after making translation changes
+
+%p Once you are finished translating various files (and have "applied the changes" if doing shared translations), you should clear the caching so that all possible pages are cleared of caching.
+
+= link_to "Clear Translation Cache", translations_cache_path, method: :delete, class: "focus_button", data: { confirm: "Are you sure? This has performance impacts as the cache is being rebuilt (please don't do this frequently) " }

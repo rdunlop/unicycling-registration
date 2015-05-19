@@ -1,18 +1,18 @@
 class NotificationsPreview < ActionMailer::Preview
   def send_feedback
-    Notifications.send_feedback(contact_form)
+    Notifications.send_feedback(contact_form.serialize)
   end
 
   def request_registrant_access
-    Notifications.request_registrant_access(registrant.id, user.id)
+    Notifications.request_registrant_access(registrant, user)
   end
 
   def registrant_access_accepted
-    Notifications.registrant_access_accepted(registrant.id, user.id)
+    Notifications.registrant_access_accepted(registrant, user)
   end
 
   def send_mass_email
-    Notifications.send_mass_email(email, addresses)
+    Notifications.send_mass_email(email.serialize, addresses)
   end
 
   ######### ADMIN

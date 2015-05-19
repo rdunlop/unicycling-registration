@@ -52,7 +52,6 @@
         %th Item
         %th Cost
         %th Details (only required for some items)
-        %th Mark this item as having Money-Received
         %th Give this item to the Registrant for free
     %tbody
       = pf.fields_for :unpaid_details do |unpaid_detail|
@@ -67,7 +66,6 @@
           %td
             = unpaid_detail.object.details
             = unpaid_detail.hidden_field :details
-          %td= unpaid_detail.check_box :pay_for
           %td= unpaid_detail.check_box :free
   %a#show_hide_admin_payments_other_new{:href => "#"} select other item
   %table#admin_payments_other_new.sortable
@@ -76,7 +74,6 @@
         %th Registrant
         %th Item
         %th Details (only required for some items)
-        %th Pay for this item
         %th Mark this item as free
     %tbody
       = pf.fields_for :new_details do |new_detail|
@@ -84,7 +81,6 @@
           %td= new_detail.select :registrant_id, @registrants.map {|reg| [reg, reg.id] }, :include_blank => true
           %td= new_detail.select :expense_item_id, ExpenseItem.all.map {|ei| [ei.to_s + " - " + ei.cost.to_s, ei.id] }, :include_blank => true
           %td= new_detail.text_field :details
-          %td= new_detail.check_box :pay_for
           %td= new_detail.check_box :free
   = pf.submit "Create and Save Payment", :class => "payment_link registration_button"
 %div

@@ -14,7 +14,7 @@
 #  competition_id      :integer
 #  points              :decimal(6, 3)
 #  details             :string(255)
-#  is_start_time       :boolean          default(FALSE)
+#  is_start_time       :boolean          default(FALSE), not null
 #  number_of_laps      :integer
 #  status              :string(255)
 #  comments            :text

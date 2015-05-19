@@ -34,8 +34,7 @@ describe StandardExecutionScore do
                                                           :competitor => score.competitor, 
                                                           :standard_skill_routine_entry => score.standard_skill_routine_entry)
 
-    score2.save.should == false
-
+    expect(score2.save).to eq(false)
   end
 
   it "should be able to have 2 different skills scored by the same judge" do
@@ -44,25 +43,25 @@ describe StandardExecutionScore do
     score2 = FactoryGirl.build(:standard_execution_score, :judge => score.judge, 
                                                           :competitor => score.competitor, 
                                                           :standard_skill_routine_entry => FactoryGirl.create(:standard_skill_routine_entry))
-    score2.save.should == true
+    expect(score2.save).to eq(true)
   end
 
   it "should store the score" do
     score = StandardExecutionScore.new
-    score.valid?.should == false
+    expect(score.valid?).to eq(false)
     score.competitor = @competitor
-    score.valid?.should == false
+    expect(score.valid?).to eq(false)
     score.judge = @judge
-    score.valid?.should == false
+    expect(score.valid?).to eq(false)
     score.standard_skill_routine_entry = @ssre
-    score.valid?.should == false
+    expect(score.valid?).to eq(false)
     score.wave = 0
-    score.valid?.should == false
+    expect(score.valid?).to eq(false)
     score.line = 0
-    score.valid?.should == false
+    expect(score.valid?).to eq(false)
     score.cross = 0
-    score.valid?.should == false
+    expect(score.valid?).to eq(false)
     score.circle = 0
-    score.valid?.should == true
+    expect(score.valid?).to eq(true)
   end
 end

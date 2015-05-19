@@ -18,7 +18,7 @@ describe ImportResultsController do
   describe "GET edit" do
     it "assigns the requested import_result as @import_result" do
       get :edit, {:id => import_result.to_param}
-      assigns(:import_result).should eq(import_result)
+      expect(assigns(:import_result)).to eq(import_result)
     end
   end
 
@@ -37,29 +37,29 @@ describe ImportResultsController do
 
       it "assigns a newly created import_result as @import_result" do
         post :create, {:import_result => valid_attributes, :user_id => @admin_user.id, :competition_id => @competition.id}
-        assigns(:import_result).should be_a(ImportResult)
-        assigns(:import_result).should be_persisted
+        expect(assigns(:import_result)).to be_a(ImportResult)
+        expect(assigns(:import_result)).to be_persisted
       end
 
       it "redirects to the user's import_results" do
         post :create, {:import_result => valid_attributes, :user_id => @admin_user.id, :competition_id => @competition.id}
-        response.should redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition, is_start_times: false))
+        expect(response).to redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition, is_start_times: false))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved import_result as @import_result" do
         # Trigger the behavior that occurs when invalid params are submitted
-        ImportResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
         post :create, {:import_result => { "raw_data" => "invalid value" }, :user_id => @admin_user.id, :competition_id => @competition.id}
-        assigns(:import_result).should be_a_new(ImportResult)
+        expect(assigns(:import_result)).to be_a_new(ImportResult)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        ImportResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
         post :create, {:import_result => { "raw_data" => "invalid value" }, :user_id => @admin_user.id, :competition_id => @competition.id}
-        response.should render_template("data_entry")
+        expect(response).to render_template("data_entry")
       end
     end
   end
@@ -71,34 +71,34 @@ describe ImportResultsController do
         # specifies that the ImportResult created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        ImportResult.any_instance.should_receive(:update_attributes).with({ "raw_data" => "MyString" })
+        expect_any_instance_of(ImportResult).to receive(:update_attributes).with({ "raw_data" => "MyString" })
         put :update, {:id => import_result.to_param, :import_result => { "raw_data" => "MyString" }}
       end
 
       it "assigns the requested import_result as @import_result" do
         put :update, {:id => import_result.to_param, :import_result => valid_attributes}
-        assigns(:import_result).should eq(import_result)
+        expect(assigns(:import_result)).to eq(import_result)
       end
 
       it "redirects to the import_result" do
         put :update, {:id => import_result.to_param, :import_result => valid_attributes}
-        response.should redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition, is_start_times: import_result.is_start_time))
+        expect(response).to redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition, is_start_times: import_result.is_start_time))
       end
     end
 
     describe "with invalid params" do
       it "assigns the import_result as @import_result" do
         # Trigger the behavior that occurs when invalid params are submitted
-        ImportResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
         put :update, {:id => import_result.to_param, :import_result => { "raw_data" => "invalid value" }}
-        assigns(:import_result).should eq(import_result)
+        expect(assigns(:import_result)).to eq(import_result)
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        ImportResult.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
         put :update, {:id => import_result.to_param, :import_result => { "raw_data" => "invalid value" }}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -116,7 +116,7 @@ describe ImportResultsController do
 
     it "redirects to the import_results list" do
       delete :destroy, {:id => import_result.to_param}
-      response.should redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition))
+      expect(response).to redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition))
     end
   end
 
@@ -127,7 +127,7 @@ describe ImportResultsController do
       @config = FactoryGirl.create(:event_configuration, :with_usa)
       import = FactoryGirl.create(:import_result, :competition => competition, bib_number: reg.bib_number)
       post :approve, {:user_id => import.user, :competition_id => competition.id}
-      response.should redirect_to(result_competition_path(competition))
+      expect(response).to redirect_to(result_competition_path(competition))
     end
   end
 
@@ -137,7 +137,7 @@ describe ImportResultsController do
       import = FactoryGirl.create(:import_result, :competition => competition)
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
       delete :destroy_all, {:user_id => import.user, :competition_id => competition.id}
-      response.should redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
+      expect(response).to redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
     end
   end
 end

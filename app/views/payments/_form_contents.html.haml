@@ -3,11 +3,11 @@
 %table.sortable
   %thead
     %tr
-      %th= t(".registrant")
-      %th Item
+      %th= Registrant.model_name.human
+      %th= RegistrantExpenseItem.model_name.human
       %th= t(".details")
       %th= t(".cost")
-      %th Taxes
+      %th= RegistrantExpenseItem.human_attribute_name(:tax)
       %th= t(".total_cost")
       %th.choose_payments
         %a#unselect_all{:href => "#"}>= t(".unselect_all")
@@ -34,12 +34,12 @@
           = pf.hidden_field :amount
           = print_item_cost_currency(pf.object.amount)
         %td.choose_payments
-          = pf.check_box :_destroy, {checked: true, :class => "delete_payment_item", "data-cents" => pf.object.amount * 100}, '0', '1'
+          = pf.check_box :_destroy, {checked: true, :class => "delete_payment_item js--costItem", data: { cents: pf.object.amount.to_f * 100 } }, '0', '1'
   %tfoot
     %tr
       %th{:colspan => "4"}
-      %th Total
-      %th#total_field
+      %th= Payment.human_attribute_name(:total)
+      %th.js--total
       %th.choose_payments
 .actions
   = f.submit t(".start_payment"), :class => "payment_link registration_button"

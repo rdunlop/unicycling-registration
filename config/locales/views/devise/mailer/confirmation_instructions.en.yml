@@ -1,0 +1,11 @@
+---
+en:
+  devise:
+    mailer:
+      confirmation_instructions:
+        action: Confirm my account
+        confirm_your_account_instructions: 'You can confirm your account email through
+          the link below:'
+        copy_paste_instructions: If the link doesn't work, please copy-paste the url
+          into a browser.
+        welcome_message: Welcome %{email} to the Unicycling Registration!

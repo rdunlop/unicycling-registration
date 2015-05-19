@@ -10,10 +10,10 @@
 #  updated_at               :datetime
 #  status                   :integer          default(0)
 #  lowest_member_bib_number :integer
-#  geared                   :boolean          default(FALSE)
+#  geared                   :boolean          default(FALSE), not null
 #  riding_wheel_size        :integer
 #  notes                    :string(255)
-#  heat                     :integer
+#  wave                     :integer
 #  riding_crank_size        :integer
 #
 # Indexes
@@ -27,7 +27,7 @@ class Competitor < ActiveRecord::Base
   has_many :members, dependent: :destroy, :inverse_of => :competitor
   has_many :registrants, through: :members
   belongs_to :competition, touch: true, inverse_of: :competitors
-  acts_as_list :scope => :competition
+  acts_as_restful_list scope: :competition
 
   has_many :lane_assignments, dependent: :destroy
   has_many :scores, :dependent => :destroy
@@ -53,7 +53,6 @@ class Competitor < ActiveRecord::Base
   enum status: [:active, :not_qualified, :dns, :withdrawn]
 
   # not all competitor types require a position
-  # validates :position, :presence => true,
   #:numericality => {:only_integer => true, :greater_than => 0}
 
   after_initialize :init
@@ -225,7 +224,7 @@ class Competitor < ActiveRecord::Base
   def registrants_ids
     Rails.cache.fetch("/competitors/#{id}-#{updated_at}/registrants_ids") do
       if members.any?
-        members.map(&:external_id).sort.join(",")
+        members.map(&:external_id).sort.join(", ")
       else
         "(No registrants)"
       end
@@ -312,7 +311,7 @@ class Competitor < ActiveRecord::Base
     if competition.uses_lane_assignments
       lane_assignments.first.try(:heat)
     else
-      read_attribute(:heat)
+      read_attribute(:wave)
     end
   end
 
@@ -522,7 +521,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def competition_start_time
-    competition.heat_time_for(heat) || 0
+    competition.wave_time_for(heat) || 0
   end
 
   def better_time(time_1, time_2)

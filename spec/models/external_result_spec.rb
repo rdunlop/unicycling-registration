@@ -21,21 +21,21 @@ describe ExternalResult do
     @er = FactoryGirl.create(:external_result)
   end
   it "has a valid factory" do
-    @er.valid?.should == true
+    expect(@er.valid?).to eq(true)
   end
 
   it "must have a competitor" do
     @er.competitor = nil
-    @er.valid?.should == false
+    expect(@er.valid?).to eq(false)
   end
 
   it "optional to have details" do
     @er.details = nil
-    @er.valid?.should == true
+    expect(@er.valid?).to eq(true)
   end
 
   it "must have a value for points" do
     @er.points = nil
-    @er.valid?.should == false
+    expect(@er.valid?).to eq(false)
   end
 end

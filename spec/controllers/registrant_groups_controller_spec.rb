@@ -17,8 +17,8 @@ describe RegistrantGroupsController do
     it "assigns all registrant_groups as @registrant_groups" do
       registrant_group = RegistrantGroup.create! valid_attributes
       get :index, {}
-      assigns(:registrant_groups).should eq([registrant_group])
-      assigns(:registrant_group).should be_a_new(RegistrantGroup)
+      expect(assigns(:registrant_groups)).to eq([registrant_group])
+      expect(assigns(:registrant_group)).to be_a_new(RegistrantGroup)
     end
   end
 
@@ -26,7 +26,7 @@ describe RegistrantGroupsController do
     it "assigns the requested registrant_group as @registrant_group" do
       registrant_group = RegistrantGroup.create! valid_attributes
       get :show, {:id => registrant_group.to_param}
-      assigns(:registrant_group).should eq(registrant_group)
+      expect(assigns(:registrant_group)).to eq(registrant_group)
     end
   end
 
@@ -34,7 +34,7 @@ describe RegistrantGroupsController do
     it "assigns the requested registrant_group as @registrant_group" do
       registrant_group = RegistrantGroup.create! valid_attributes
       get :edit, {:id => registrant_group.to_param}
-      assigns(:registrant_group).should eq(registrant_group)
+      expect(assigns(:registrant_group)).to eq(registrant_group)
     end
   end
 
@@ -55,29 +55,29 @@ describe RegistrantGroupsController do
 
       it "assigns a newly created registrant_group as @registrant_group" do
         post :create, {:registrant_group => valid_attributes}
-        assigns(:registrant_group).should be_a(RegistrantGroup)
-        assigns(:registrant_group).should be_persisted
+        expect(assigns(:registrant_group)).to be_a(RegistrantGroup)
+        expect(assigns(:registrant_group)).to be_persisted
       end
 
       it "redirects to the created registrant_group" do
         post :create, {:registrant_group => valid_attributes}
-        response.should redirect_to(RegistrantGroup.last)
+        expect(response).to redirect_to(RegistrantGroup.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved registrant_group as @registrant_group" do
         # Trigger the behavior that occurs when invalid params are submitted
-        RegistrantGroup.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(RegistrantGroup).to receive(:save).and_return(false)
         post :create, {:registrant_group => { "name" => "invalid value" }}
-        assigns(:registrant_group).should be_a_new(RegistrantGroup)
+        expect(assigns(:registrant_group)).to be_a_new(RegistrantGroup)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        RegistrantGroup.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(RegistrantGroup).to receive(:save).and_return(false)
         post :create, {:registrant_group => { "name" => "invalid value" }}
-        response.should render_template("index")
+        expect(response).to render_template("index")
       end
     end
   end
@@ -90,20 +90,20 @@ describe RegistrantGroupsController do
         # specifies that the RegistrantGroup created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        RegistrantGroup.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
+        expect_any_instance_of(RegistrantGroup).to receive(:update_attributes).with({ "name" => "MyString" })
         put :update, {:id => registrant_group.to_param, :registrant_group => { "name" => "MyString" }}
       end
 
       it "assigns the requested registrant_group as @registrant_group" do
         registrant_group = RegistrantGroup.create! valid_attributes
         put :update, {:id => registrant_group.to_param, :registrant_group => valid_attributes}
-        assigns(:registrant_group).should eq(registrant_group)
+        expect(assigns(:registrant_group)).to eq(registrant_group)
       end
 
       it "redirects to the registrant_group" do
         registrant_group = RegistrantGroup.create! valid_attributes
         put :update, {:id => registrant_group.to_param, :registrant_group => valid_attributes}
-        response.should redirect_to(registrant_group)
+        expect(response).to redirect_to(registrant_group)
       end
     end
 
@@ -111,17 +111,17 @@ describe RegistrantGroupsController do
       it "assigns the registrant_group as @registrant_group" do
         registrant_group = RegistrantGroup.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        RegistrantGroup.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(RegistrantGroup).to receive(:save).and_return(false)
         put :update, {:id => registrant_group.to_param, :registrant_group => { "name" => "invalid value" }}
-        assigns(:registrant_group).should eq(registrant_group)
+        expect(assigns(:registrant_group)).to eq(registrant_group)
       end
 
       it "re-renders the 'edit' template" do
         registrant_group = RegistrantGroup.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        RegistrantGroup.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(RegistrantGroup).to receive(:save).and_return(false)
         put :update, {:id => registrant_group.to_param, :registrant_group => { "name" => "invalid value" }}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -137,8 +137,7 @@ describe RegistrantGroupsController do
     it "redirects to the registrant_groups list" do
       registrant_group = RegistrantGroup.create! valid_attributes
       delete :destroy, {:id => registrant_group.to_param}
-      response.should redirect_to(registrant_groups_url)
+      expect(response).to redirect_to(registrant_groups_url)
     end
   end
-
 end

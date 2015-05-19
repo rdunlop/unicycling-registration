@@ -8,7 +8,6 @@ require 'apartment/elevators/generic'
 # Apartment Configuration
 #
 Apartment.configure do |config|
-
   # These models will not be multi-tenanted,
   # but remain in the global (public) namespace
   #
@@ -17,13 +16,13 @@ Apartment.configure do |config|
   #
   # config.excluded_models = %w{Tenant}
   #
-  config.excluded_models = %w{ Tenant TenantAlias }
+  config.excluded_models = %w{ Tenant TenantAlias Tolk::Locale Tolk::Translation Tolk::Phrase }
 
   # use postgres schemas?
   config.use_schemas = true
 
   # use raw SQL dumps for creating postgres schemas? (only appies with use_schemas set to true)
-  #config.use_sql = true
+  # config.use_sql = true
 
   # configure persistent schemas (E.g. hstore )
   # config.persistent_schemas = %w{ hstore }
@@ -33,7 +32,7 @@ Apartment.configure do |config|
   # config.append_environment = true
 
   # supply list of database names for migrations to run on
-  config.tenant_names = lambda{ Tenant.pluck :subdomain }
+  config.tenant_names = ->{ Tenant.pluck :subdomain }
 end
 
 ##

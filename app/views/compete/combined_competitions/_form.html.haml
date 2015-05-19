@@ -1,0 +1,16 @@
+= form_for(@combined_competition) do |f|
+  = render partial: "shared/error_messages", object: @combined_competition
+  .field
+    = f.label :name
+    %br
+    = f.text_field :name
+  .field
+    = f.label :use_age_group_places
+    %br
+    = f.check_box :use_age_group_places
+  .field
+    = f.label :percentage_based_calculations
+    %br
+    = f.check_box :percentage_based_calculations
+  .actions
+    = f.submit

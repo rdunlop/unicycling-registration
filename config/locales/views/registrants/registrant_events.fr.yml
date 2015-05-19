@@ -1,0 +1,9 @@
+---
+fr:
+  registrants:
+    registrant_events:
+      age_group: Groupe d’âge
+      category: Catégorie
+      confirmed_events: Compétitions Non-Confirmé
+      event: Compétition
+      events: Compétitions

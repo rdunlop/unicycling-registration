@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      registrant:
+        bib_number: ID
+        online_waiver_signature: Signature
+    models:
+      registrant:
+        one: Registrant
+        other: Registrants

@@ -1,0 +1,3 @@
+- if @config.has_print_waiver
+  = t(".everyone_must_sign")
+  = link_to t(".a_waiver"), empty_waiver_registrants_path(:format => 'pdf'), { class: "print_waiver_link", target: "_blank" }

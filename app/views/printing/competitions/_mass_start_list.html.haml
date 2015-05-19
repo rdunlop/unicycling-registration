@@ -1,7 +1,7 @@
 .nobreak
-  %h3= "Heat #{heat}"
-  - if heat_times.count > 0
-    %h4= heat_times.where(heat: heat).first.try(:scheduled_time)
+  %h3= "Wave #{wave}"
+  - if wave_times.count > 0
+    %h4= wave_times.where(wave: wave).first.try(:scheduled_time)
 
   %table.full.grid
     %thead
@@ -14,7 +14,8 @@
 
     %tbody
       - competitors.each do |comp|
-        - cache [@competition, comp, @config, I18n.locale] do
+        -# Why is this cached with i18n?
+        - cache_i18n [@competition, comp, @config] do
           %tr
             %td= comp.bib_number
             %td

@@ -1,0 +1,28 @@
+---
+en:
+  activerecord:
+    attributes:
+      contact_detail:
+        address: Address
+        birthplace: Birthplace
+        city: City
+        club: Primary Team or Club Name
+        club_contact: Primary Team or Club Contact
+        country_representing: Country representing
+        country_residence: Country of residence
+        email: Email
+        emergency_name: Name
+        emergency_other_phone: Other phone
+        emergency_primary_phone: Primary Phone
+        emergency_relationship: Relationship
+        italian_fiscal_code: Fiscal Code (Required for Italian Participants)
+        mobile: Mobile
+        phone: Phone
+        responsible_adult_phone: Primary Phone
+        responsible_adulte_name: Name
+        usa_member_number: USA Membership Number
+        zip: Zip
+    models:
+      contact_detail:
+        one: Contact Detail
+        other: Contact Details

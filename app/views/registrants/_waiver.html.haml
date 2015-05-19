@@ -1,9 +1,9 @@
-- cache [@config, @registrant] do
+- cache_i18n [@config, @registrant] do
   - if @config.has_print_waiver
     .data_block.non_printable
       %p
-        %b Every competitor must bring a filled out Legal Waiver to the Competition.
+        %b= t(".headline")
         %br
-        Registrants under the age of 18 must have the waiver signed by a Parent/Guardian.
+        = t(".parent_guardian_blurb")
       - if @registrant && @registrant.persisted?
-        = link_to 'Print Legal Waiver', waiver_registrant_path(@registrant, :format => 'pdf'), {:class => "print_waiver_link", :target => "_blank" }
+        = link_to t(".print_legal_waiver"), waiver_registrant_path(@registrant, format: 'pdf'), { class: "print_waiver_link", target: "_blank" }

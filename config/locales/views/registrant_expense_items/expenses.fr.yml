@@ -1,0 +1,7 @@
+---
+fr:
+  registrant_expense_items:
+    expenses:
+      cost: Prix
+      paid: Payé
+      registrants_expenses: Frais de %{registrant}

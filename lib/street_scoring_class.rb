@@ -57,7 +57,7 @@ class StreetScoringClass < BaseScoringClass
     false
   end
 
-  def compete_in_order
+  def compete_in_order?
     true
   end
 end

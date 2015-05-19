@@ -108,17 +108,135 @@ Registrant Expense Items
 %br
 %input.sold_out{ disabled: true, type: 'submit', value: 'Sold Out' }
 
-// Form Elements
-%h2.style_head Forms
+// Help
+%h2.style_head Help
 
-.field_with_errors
+.help_bubble{ title: "This is some help text" }
+
+// Form Elements
+%h2.style_head Form Elements
+
+.field.field_with_errors
   %label Label with error
-  %input{ type: "text", value: "Text Input with Error"}
+  %input{ type: "text" }
+
+.field
+  %label Label Without Error
+  %input{ type: "text" }
+
+.field
+  %label Text field with supporting details
+  %input{ type: "text" }
+  .input_details
+    These are some various instructions and details which are useful when filling in this text input box.
+    Please be aware of all the instructions
+
+.field
+  %label.required Required Element
+
+.field
+  %label Disabled Element
+  %input{ disabled: "disabled", placeholder: "disabled element" }
+
+.field
+  %label Chosen-Select options
+  %select.chosen-select
+    %option Option 1
+    %option Option 2
+
+.field
+  %label.label--checkbox{ for: 'the_checkbox' } Checkbox label
+  %input{ type: "checkbox", id: 'the_checkbox' }
+
+.field
+  %label.label--radio{ for: 'waiver_none' } No Waiver
+  %input{ type: "radio", id: 'waiver_none', name: 'waiver' }
+  %br
+  %label.label--radio{ for: 'waiver_online' } Online Waiver
+  %input{ type: "radio", id: 'waiver_online', name: 'waiver' }
+  %br
+  %label.label--radio{ for: 'waiver_print' } Waiver Print
+  %input{ type: "radio", id: 'waiver_print', name: 'waiver' }
+
+.field
+  %label Custom TextArea input
+  %textarea{ placeholder: "this is some of the text that could appear in a textarea", cols: "60", rows: "12" }
+
+.field
+  %label Upload a file
+  %input{ type: "file" }
+
+.field
+  %label{ for: 'start_date' } Date chooser
+  = date_select :start_date, Date.today
+
+%h2.style_head Forms (old-style markup)
+
+%fieldset.data_block
+  %legend This is the legend
+  %table
+    %tbody
+      %tr
+        %td
+          %label The label
+        %td
+          %input{ type: "text" }
+      %tr
+        %td
+          %label a much longer label
+        %td
+          %input{ type: "text" }
+      %tr
+        %td
+          %label Chosen-Select
+        %td
+          %select.chosen-select
+            %option Option 1
+            %option Option 2
+            %option Option 3
+      %tr
+        %td
+          %label{ for: 'the_checkbox' } Checkbox label
+        %td
+          %input{ type: "checkbox", id: 'the_checkbox' }
+
 %br
 
-%label Label Without Error
-%input{ type: "text", value: "Text Input without Error"}
+%h2.style_head Forms
 
+%fieldset.form__fieldset
+  %h3 This is the new header
+  .field
+    %label{ for: 'short' } Short Label
+    %input{ type: "text", id: 'short' }
+  .field
+    %label{ for: 'long' } Much longer label here
+    %input{ type: "text", id: 'long' }
+  .field
+    %label{ for: 'the_select' } Chosen-Select
+    %select.chosen-select#the_select
+      %option Option 1
+      %option Option 2
+      %option Option 3
+  .field
+    %label{ for: 'email' } Email
+    %input{ type: "email", id: 'email' }
+    .input_details
+      These are some various instructions and details which are useful when filling in this text input box.
+      Please be aware of all the instructions
+  .field
+    %label{ for: 'phone' } Phone
+    %input{ type: "telephone", id: 'phone' }
+  .field
+    %label Gender
+    %input{ type: "radio", value: 'Male', id: 'gender_male', name: 'gender' }
+    %label.label--radio{ for: 'gender_male' } Male
+    %br
+    %input{ type: "radio", value: 'Female', id: 'gender_female', name: 'gender' }
+    %label.label--radio{ for: 'gender_female' } Female
+  .field
+    %input{ type: "checkbox", id: 'the_checkbox2' }
+    %label.label--checkbox{ for: 'the_checkbox2' } Checkbox label
 
 // Wizard
 %h2.style_head Wizard
@@ -145,18 +263,23 @@ Registrant Expense Items
 %h2.style_head Nav Bar
 
 %nav{ style: 'text-align: left' }
-  %ul
+  .hamburger Menu
+  %ul.navList
+    %li= link_to image_tag("http://placehold.it/93x38.jpg", class: "logo"), root_url, {:class => "logo_link"}
     %li
       %a{href: '#'} First Link
     %li
       %a{href: '#'} List Link
-      %ul
-        %li
-          %a{href: '#'} Sub element 1
-        %li
-          %a{href: '#'} Sub element 2
-    %li#sign-out
-      %a{href: '#'} Log out user
+    %li
+      = link_to "My Account", "/"
+  .accountNav
+    = link_to "Log out user", "/", method: :delete, data: { confirm: "Log Out?" }
+
+%nav.admin_bar{ style: 'text-align: left' }
+  .hamburger Menu
+  %ul.navList
+    %li
+      %a{href: '$'} Admin Menu
 
 // Breadcrumbs
 %h2.style_head Breadcrumbs
@@ -205,3 +328,5 @@ Registrant Expense Items
           %td.registration_closes_notice
             Registration Closes Dec 31, 2000
 
+%h2.style_head Event Choices
+= render "/attending/preview"

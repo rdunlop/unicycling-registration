@@ -28,9 +28,10 @@
   = select_tag :registrant_id, options_from_collection_for_select(@registrants, "id", "to_s")
   %br
   = label_tag :old_item_id
-  = select_tag :old_item_id, options_from_collection_for_select(ExpenseItem.order(:name), "id", "to_s")
+  - items_options = options_from_collection_for_select(ExpenseItem.includes(:translations).order(:name), "id", "to_s")
+  = select_tag :old_item_id, items_options
   = label_tag :new_item_id
-  = select_tag :new_item_id, options_from_collection_for_select(ExpenseItem.order(:name), "id", "to_s")
+  = select_tag :new_item_id, items_options
   = submit_tag "Create Exchange", :class => "payment_link registration_button"
 %br
   = link_to 'Back', new_payment_adjustment_path

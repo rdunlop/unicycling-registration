@@ -1,0 +1,21 @@
+---
+en:
+  activerecord:
+    attributes:
+      event_configuration:
+        competitor_benefits: Competitor Benefits
+        dates_description: Dates Description
+        event_url: Main Website
+        location: Location
+        long_name: Long Name
+        noncompetitor_benefits: NonCompetitor Benefits
+        offline_payment: Provide details about offline payment
+        offline_payment_description: Details for Offline Payment
+        short_name: Short Name
+        spectator_benefits: Spectator Benefits
+        start_date: First Day of Competition
+  helpers:
+    submit:
+      event_configuration:
+        create: "Save & Continue"
+        update: "Save & Continue"

@@ -1,5 +1,5 @@
 #volunteer_opportunities
-  %h3 Volunteer Opportunities
+  %h3= t(".header")
   = hidden_field_tag "registrant[volunteer_opportunity_ids][]"
   %ul.volunteer_options{:class => ("three_columns" if VolunteerOpportunity.count >= 12)}
     - VolunteerOpportunity.all.each do |vop|

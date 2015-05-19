@@ -10,8 +10,8 @@ describe "registration_periods/edit" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => registration_periods_path(@registration_period), :method => "post" do
-      assert_select "select#registration_period_competitor_expense_item_id", :name => "registration_period[competitor_expense_item_id]"
-      assert_select "select#registration_period_noncompetitor_expense_item_id", :name => "registration_period[noncompetitor_expense_item_id]"
+      assert_select "input#registration_period_competitor_expense_item_attributes_id", :name => "registration_period[competitor_expense_item_attributes][id]"
+      assert_select "input#registration_period_noncompetitor_expense_item_attributes_id", :name => "registration_period[noncompetitor_expense_item_attributes][id]"
       assert_select "input#registration_period_onsite", :name => "registration_period[onsite]"
     end
   end

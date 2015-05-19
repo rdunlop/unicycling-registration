@@ -4,8 +4,8 @@
 #
 #  id             :integer          not null, primary key
 #  user_id        :integer
-#  completed      :boolean
-#  cancelled      :boolean
+#  completed      :boolean          default(FALSE), not null
+#  cancelled      :boolean          default(FALSE), not null
 #  transaction_id :string(255)
 #  completed_date :datetime
 #  created_at     :datetime

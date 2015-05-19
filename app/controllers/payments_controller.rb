@@ -1,25 +1,17 @@
 class PaymentsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:notification, :success]
+  before_action :authenticate_user!
   load_and_authorize_resource :user, only: :index
-  load_and_authorize_resource :except => [:registrant_payments, :notification, :success]
-  skip_authorization_check :only => [:notification, :success]
-  skip_before_filter :verify_authenticity_token, :only => [:notification, :success]
+  load_and_authorize_resource :except => [:registrant_payments]
 
-  before_action :set_payments_breadcrumb, except: [:notification, :success]
+  before_action :set_payments_breadcrumb
 
   # GET /users/12/payments
-  # GET /users/12/payments.json
   # or
   # GET /registrants/1/payments
   def index
     @payments = @user.payments.completed
     @refunds = @user.refunds
     @title_name = @user.to_s
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @payments }
-    end
   end
 
   def registrant_payments
@@ -32,53 +24,41 @@ class PaymentsController < ApplicationController
     @refunds = registrant.refunds.uniq
     @title_name = registrant.to_s
 
-    respond_to do |format|
-      format.html { render action: "index" }# index.html.erb
-      format.json { render json: @payments }
-    end
+    render action: "index" # index.html.erb
   end
 
+  def offline
+    add_breadcrumb t("my_registrants", scope: "breadcrumbs"), user_registrants_path(current_user)
+  end
+
+  # /payments/summary
   def summary
     add_payment_summary_breadcrumb
-    @expense_items = ExpenseItem.includes(:translations, :expense_group => [:translations])
+    @expense_items = ExpenseItem.includes(:translations, :expense_group => [:translations]).ordered
   end
 
   # GET /payments/1
-  # GET /payments/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @payment }
-    end
+    add_breadcrumb t("new_payment", scope: "breadcrumbs")
   end
 
   # GET /payments/new
-  # GET /payments/new.json
   def new
+    add_breadcrumb t("new_payment", scope: "breadcrumbs")
     payment_creator = PaymentCreator.new(@payment)
     current_user.accessible_registrants.each do |reg|
       payment_creator.add_registrant(reg)
     end
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @payment }
-    end
   end
 
   # POST /payments
-  # POST /payments.json
   def create
     @payment.user = current_user
 
-    respond_to do |format|
-      if @payment.save
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
-        format.json { render json: @payment, status: :created, location: @payment }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
-      end
+    if @payment.save
+      redirect_to @payment, notice: 'Payment was successfully created.'
+    else
+      render action: "new"
     end
   end
 
@@ -91,18 +71,14 @@ class PaymentsController < ApplicationController
 
     @payment.complete(note: "Zero Cost")
 
-    respond_to do |format|
-      flash[:notice] = "Payment Completed"
-      format.html { redirect_to user_registrants_path(@payment.user) }
-    end
+    flash[:notice] = "Payment Completed"
+    redirect_to user_registrants_path(@payment.user)
   end
 
   def fake_complete
     @payment.complete(note: "Fake_Complete")
 
-    respond_to do |format|
-      format.html { redirect_to root_path }
-    end
+    redirect_to root_path
   end
 
   def apply_coupon
@@ -115,34 +91,6 @@ class PaymentsController < ApplicationController
     redirect_to @payment
   end
 
-  # PayPal notification endpoint
-  def notification
-    paypal = PaypalConfirmer.new(params, request.raw_post)
-    if paypal.valid?
-      if paypal.correct_paypal_account? && paypal.completed?
-        if Payment.exists?(invoice_id: paypal.order_number)
-          payment = Payment.find_by(invoice_id: paypal.order_number)
-          if payment.completed
-            PaymentMailer.delay.ipn_received("Payment already completed. Invoice ID: " + paypal.order_number)
-          else
-            payment.complete(transaction_id: paypal.transaction_id, payment_date: paypal.payment_date)
-            PaymentMailer.delay.payment_completed(payment.id)
-            if payment.total_amount != paypal.payment_amount
-              PaymentMailer.delay.ipn_received("Payment total #{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}")
-            end
-          end
-        else
-          PaymentMailer.delay.ipn_received("Unable to find Payment with Invoice ID " + paypal.order_number)
-        end
-      end
-    end
-    render :nothing => true
-  end
-
-  # PayPal return endpoint
-  def success
-  end
-
   private
 
   def payment_params
@@ -151,9 +99,7 @@ class PaymentsController < ApplicationController
 
   def set_payments_breadcrumb
     if @user == current_user
-      add_breadcrumb "My Payments", user_payments_path(current_user)
-    else
-      add_breadcrumb "New Payment"
+      add_breadcrumb t("my_payments", scope: "layouts.navbar"), user_payments_path(current_user)
     end
   end
 end

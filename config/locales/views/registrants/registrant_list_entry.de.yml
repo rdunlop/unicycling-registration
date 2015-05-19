@@ -1,0 +1,11 @@
+---
+de:
+  registrants:
+    registrant_list_entry:
+      competitor: "(Teilnehmer)"
+      edit: Bearbeiten
+      incomplete: Unvollständig
+      legal_waiver: Verbindliche Verzichtserklärung (%{first_name})
+      noncompetitor: "(Begleiter)"
+      see_summary: Zusammenfassung ansehen
+      spectator: "(Zuschauer)"

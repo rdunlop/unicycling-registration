@@ -1,0 +1,20 @@
+%h3 Add judges
+= render partial: "/shared/error_messages", object: @judge
+%fieldset.judge_entry_choice
+  %legend
+    %b Option 1:
+    Add judges individually
+  = form_for [@competition, @judge] do |f|
+    = f.label :user_id, "Volunteer"
+    = f.select :user_id, @all_data_entry_volunteers.map { |user| [user, user.id] }, { include_blank: true }, class: "chosen-select"
+    %br
+    = f.label :judge_type_id
+    = f.select :judge_type_id, @judge_types.map { |jt| [jt, jt.id] }
+    %br
+    = f.submit "Add Judge", class: "action_button"
+%fieldset.judge_entry_choice
+  %legend
+    %b Option 2:
+    Copy judges list
+  .judges
+    = render :partial => "copy_judges"

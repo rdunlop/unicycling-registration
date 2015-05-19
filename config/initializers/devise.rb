@@ -6,7 +6,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   config.mailer_sender = Rails.application.secrets.mail_full_email
   config.mailer.class_eval do
-    helper :subdomain
+    include SubdomainHelper
   end
 
   # Configure the class responsible to send e-mails.
@@ -232,11 +232,6 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
-  if Rails.env.development? || Rails.env.test? || Rails.env.naucc?
-    config.secret_key = ('x' * 30)
-  else
-    config.secret_key = Rails.application.secrets.secret
-  end
 end
 
 if Rails.application.secrets.redis

@@ -7,7 +7,7 @@
 #  registrant_id             :integer
 #  created_at                :datetime
 #  updated_at                :datetime
-#  dropped_from_registration :boolean          default(FALSE)
+#  dropped_from_registration :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -21,14 +21,14 @@ describe Member do
   it "must have a competitor and registrant" do
     member = Member.new
 
-    member.valid?.should == false
+    expect(member.valid?).to eq(false)
 
     member.competitor = FactoryGirl.create(:event_competitor)
 
-    member.valid?.should == false
+    expect(member.valid?).to eq(false)
 
     member.registrant = FactoryGirl.create(:registrant)
 
-    member.valid?.should == true
+    expect(member.valid?).to eq(true)
   end
 end

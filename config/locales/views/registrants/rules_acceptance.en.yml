@@ -1,0 +1,7 @@
+---
+en:
+  registrants:
+    rules_acceptance:
+      header: Rules
+      rules_agreement: I accept the Rules.
+      the_rules: The Rules

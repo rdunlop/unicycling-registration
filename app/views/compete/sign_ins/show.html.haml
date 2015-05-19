@@ -1,0 +1,38 @@
+%h2= "#{@competition} Sign-In"
+
+%table.full.grid.race.sign_in_sheet
+  %thead
+    %tr
+      - if @competition.compete_in_order?
+        %th Order
+      - if @competition.start_list_present?
+        %th Wave
+      %th ID
+      %th Name
+      %th Age
+      %th Signed-In
+      %th Geared
+      %th Wheel Size
+      %th Crank Size
+      %th Notes
+  %tbody
+    - @competitors.active.each do |comp|
+      %tr
+        - if @competition.compete_in_order?
+          %td= comp.position
+        - if @competition.start_list_present?
+          %th= comp.wave
+        %td.bib_number= comp.bib_number
+        %td.name
+          - if comp.team_name.present?
+            %b= comp.team_name
+            %br
+          - comp.members.each do |member|
+            = member
+            %br
+        %td.age= comp.age
+        %td.signed_in
+        %td.geared
+        %td.wheel_size
+        %td.crank_size
+        %td

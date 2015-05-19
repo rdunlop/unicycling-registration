@@ -1,0 +1,21 @@
+---
+de:
+  registrants:
+    index:
+      be_sure_to_submit_payment: Wenn du deine Anmeldung fertiggestellt hast, denk
+        daran die Zahlung zu senden.
+      can_change_events: Nachdem du dich angemeldet hast kannst du weiterhin deine
+        Anmelde Daten ändern.
+      difference_tooltip: Klicke hier für mehr Informationen!
+      link_end: Seite für Details
+      note_date_of_payment_html: ACHTUNG! - Das <b>Datum der Zahlung ist entscheidend
+        für die Anmeldegebühr</b>, NICHT das Anmelde Datum.
+      onsite_restricted_events: Um den Zeitplan einhalten zu können ist es möglich
+        das bei der Anmeldung vor Ort nicht alle Wettkämpfe bzw. Artikel noch zur
+        Wahl stehen.
+      registrant_access_page_title: Angemeldeten Zugriff
+      registrants_includes_shared: Die Liste der Angemeldeten enthält auch Anmeldungen
+        die mit dir geteilt wurden. Siehe die
+      registration: Anmeldung
+      registration_time: DIe Anmeldung wird etwa 15 Minuten dauern.
+      whats_the_difference: Was ist der Unterschied?

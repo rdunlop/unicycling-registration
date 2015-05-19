@@ -4,12 +4,13 @@
     %em
       = t(".select_country")
   - else
-    - country = Carmen::Country.coded(parent_region)
-    - if country.subregions?
+    - country = ISO3166::Country.new(parent_region)
+    - if country.try(:subdivisions?)
+      - state_options = country.subdivisions.map{ |state, hash| [hash["name"], state] }
       - if from_object
-        = f.subregion_select :state_code, parent_region, {include_blank: true}, class: "chosen-select"
+        = f.select :state_code, state_options, {include_blank: true}, class: "chosen-select"
       - else
-        = subregion_select "registrant[contact_detail_attributes]", :state_code, parent_region, {include_blank: true}, class: "chosen-select"
+        = select_tag "registrant[contact_detail_attributes][state_code]", options_for_select(state_options), {include_blank: true, class: "chosen-select" }
     - else
       - if from_object
         = f.text_field :state_code

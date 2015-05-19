@@ -1,0 +1,9 @@
+%h1= "#{@competition} - Upload Heat Assignment"
+
+Upload a Spreadsheet containing at least 2 columns. ID and Heat. (with an (ignored) header row).
+%br
+Each row must contain a valid Registrant ID and Heat.
+
+= form_tag competition_waves_path(@competition), method: :put, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Upload Heat assignments"

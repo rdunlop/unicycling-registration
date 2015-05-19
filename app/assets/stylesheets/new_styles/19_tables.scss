@@ -1,0 +1,28 @@
+.js--sortable {
+  thead {
+    tr:first-child:after {
+      content: '(sortable)';
+      color: lightgrey;
+    }
+  }
+  tbody {
+    tr {
+      cursor: row-resize;
+    }
+  }
+}
+
+.active-item-shadow {
+  background-color: grey;
+}
+
+.translation_language {
+  display: inline-block;
+  text-align: left;
+  border-right: 1px gray solid;
+  padding: 5px;
+}
+
+.translation_element {
+  display: block;
+}

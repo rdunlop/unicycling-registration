@@ -9,20 +9,20 @@
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  age_group_type_id             :integer
-#  has_experts                   :boolean          default(FALSE)
+#  has_experts                   :boolean          default(FALSE), not null
 #  scoring_class                 :string(255)
 #  start_data_type               :string(255)
 #  end_data_type                 :string(255)
-#  uses_lane_assignments         :boolean          default(FALSE)
+#  uses_lane_assignments         :boolean          default(FALSE), not null
 #  scheduled_completion_at       :datetime
-#  published                     :boolean          default(FALSE)
-#  awarded                       :boolean          default(FALSE)
+#  published                     :boolean          default(FALSE), not null
+#  awarded                       :boolean          default(FALSE), not null
 #  award_title_name              :string(255)
 #  award_subtitle_name           :string(255)
 #  num_members_per_competitor    :string(255)
-#  automatic_competitor_creation :boolean          default(FALSE)
+#  automatic_competitor_creation :boolean          default(FALSE), not null
 #  combined_competition_id       :integer
-#  order_finalized               :boolean          default(FALSE)
+#  order_finalized               :boolean          default(FALSE), not null
 #  penalty_seconds               :integer
 #
 # Indexes
@@ -33,6 +33,7 @@
 
 class Competition < ActiveRecord::Base
   include CachedModel
+  include Slugify
 
   belongs_to :age_group_type, :inverse_of => :competitions
   belongs_to :event, :inverse_of => :competitions
@@ -50,13 +51,13 @@ class Competition < ActiveRecord::Base
   has_many :competition_sources, :foreign_key => "target_competition_id", :inverse_of => :target_competition, :dependent => :destroy
   has_many :combined_competition_entries, dependent: :destroy
   has_many :published_age_group_entries, dependent: :destroy
-  has_many :heat_times, dependent: :destroy
+  has_many :wave_times, dependent: :destroy
   has_many :competition_results, dependent: :destroy
   belongs_to :combined_competition
 
   accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
   accepts_nested_attributes_for :competitors
-  accepts_nested_attributes_for :heat_times, allow_destroy: true
+  accepts_nested_attributes_for :wave_times, allow_destroy: true
 
   has_many :lane_assignments, :dependent => :destroy
 
@@ -94,7 +95,7 @@ class Competition < ActiveRecord::Base
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
             :build_import_result_from_raw, :score_calculator,
-            :result_description, :compete_in_order, :scoring_description,
+            :result_description, :compete_in_order?, :scoring_description,
             :example_result, :imports_times, :results_path, :scoring_path, to: :scoring_helper
 
   def no_competition_sources_when_overall_calculation
@@ -158,9 +159,13 @@ class Competition < ActiveRecord::Base
   end
 
   def start_list?
+    uses_lane_assignments? || compete_in_order? || start_data_type == "Mass Start"
+  end
+
+  def start_list_present?
     if uses_lane_assignments?
       lane_assignments.any?
-    elsif compete_in_order
+    elsif compete_in_order?
       order_finalized?
     elsif start_data_type == "Mass Start"
       heat_numbers.any?
@@ -336,9 +341,9 @@ class Competition < ActiveRecord::Base
     scoring_class
   end
 
-  def heat_time_for(heat_number)
-    configured_heat_time = heat_times.where(heat: heat_number).first
-    configured_heat_time.total_seconds if configured_heat_time
+  def wave_time_for(wave_number)
+    configured_wave_time = wave_times.where(wave: wave_number).first
+    configured_wave_time.total_seconds if configured_wave_time
   end
 
   def can_calculated_age_group_results?

@@ -5,41 +5,40 @@
 #  id                            :integer          not null, primary key
 #  start_date                    :date
 #  end_date                      :date
-#  name                          :string(255)
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  competitor_expense_item_id    :integer
 #  noncompetitor_expense_item_id :integer
-#  onsite                        :boolean
-#  current_period                :boolean          default(FALSE)
+#  onsite                        :boolean          default(FALSE), not null
+#  current_period                :boolean          default(FALSE), not null
 #
 
 class RegistrationPeriod < ActiveRecord::Base
   include CachedModel
 
-  default_scope { order('start_date ASC') }
+  default_scope { order(:start_date) }
 
   validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
+  validates :name, presence: true
 
-  translates :name
+  translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
-  belongs_to :competitor_expense_item, :class_name => "ExpenseItem"
-  belongs_to :noncompetitor_expense_item, :class_name => "ExpenseItem"
+  belongs_to :competitor_expense_item, :class_name => "ExpenseItem", dependent: :destroy
+  accepts_nested_attributes_for :competitor_expense_item
+  belongs_to :noncompetitor_expense_item, :class_name => "ExpenseItem", dependent: :destroy
+  accepts_nested_attributes_for :noncompetitor_expense_item
 
   validates :onsite, :inclusion => { :in => [true, false] } # because it's a boolean
-
-  after_initialize :init
 
   after_save :clear_cache
   after_destroy :clear_cache
 
-  def init
-    self.onsite = false if self.onsite.nil?
-  end
+  alias_attribute :to_s, :name
 
   def clear_cache
     Rails.cache.delete("/registration_period/by_date/#{Date.today}")
+    RegistrationPeriod.update_current_period
   end
 
   # We allow registrations to arrive 1 day _after_ the end date,
@@ -127,7 +126,7 @@ class RegistrationPeriod < ActiveRecord::Base
       return false
     end
 
-    Notifications.delay.updated_current_reg_period(old_period.try(:name), now_period.try(:name))
+    Notifications.updated_current_reg_period(old_period.try(:name), now_period.try(:name)).deliver_later
 
     missing_regs = []
 
@@ -144,7 +143,7 @@ class RegistrationPeriod < ActiveRecord::Base
     end
 
     if missing_regs.any?
-      Notifications.delay.missing_old_reg_items(missing_regs)
+      Notifications.missing_old_reg_items(missing_regs).deliver_later
     end
 
     old_period.update_attribute(:current_period, false) unless old_period.nil?

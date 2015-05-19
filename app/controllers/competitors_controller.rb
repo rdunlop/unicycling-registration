@@ -1,12 +1,14 @@
-require 'csv'
 class CompetitorsController < ApplicationController
-  before_filter :authenticate_user!
-  load_and_authorize_resource :competition, except: [:edit, :update, :destroy]
-  before_filter :load_new_competitor, :only => [:create]
-  load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy]
-  load_and_authorize_resource :only => [:edit, :update, :destroy]
+  layout "competition_management"
+  include SortableObject
 
-  before_action :set_parent_breadcrumbs, only: [:index, :enter_sign_in, :new, :edit, :display_candidates]
+  before_action :authenticate_user!
+  load_and_authorize_resource :competition, except: [:edit, :update, :destroy, :update_row_order]
+  before_action :load_new_competitor, :only => [:create]
+  load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy, :update_row_order]
+  load_and_authorize_resource :only => [:edit, :update, :destroy, :update_row_order]
+
+  before_action :set_parent_breadcrumbs, only: [:index, :new, :edit, :display_candidates]
 
   respond_to :html
 
@@ -50,39 +52,6 @@ class CompetitorsController < ApplicationController
     redirect_to competition_competitors_path(@competition)
   end
 
-  def enter_sign_in
-    add_breadcrumb "Enter Sign-In"
-    @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
-    respond_to do |format|
-      format.xls {
-        s = Spreadsheet::Workbook.new
-
-        sheet = s.create_worksheet
-        @competitors.each_with_index do |comp, row_number|
-          sheet[row_number, 0] = comp.lowest_member_bib_number
-          sheet[row_number, 1] = comp.detailed_name
-        end
-
-        report = StringIO.new
-        s.write report
-        send_data report.string, :filename => "download_events#{Date.today}.xls"
-      }
-      format.html {} # normal
-    end
-  end
-
-  def update_competitors
-    respond_to do |format|
-      if @competition.update_attributes(update_competitors_params)
-        flash[:notice] = 'Competitors successfully updated.'
-        format.html { redirect_to :back }
-      else
-        enter_sign_in
-        format.html { render "enter_sign_in" }
-      end
-    end
-  end
-
   def add
     respond_to do |format|
       begin
@@ -120,7 +89,8 @@ class CompetitorsController < ApplicationController
         format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
       rescue Exception => ex
         new
-        format.html { render "new", alert: "Error adding Registrants. #{ex}" }
+        flash.now[:alert] = "Error adding Registrants. #{ex}"
+        format.html { render "new" }
       end
     end
   end
@@ -167,12 +137,12 @@ class CompetitorsController < ApplicationController
 
   private
 
-  def competitor_params
-    params.require(:competitor).permit(:status, :position, :custom_name, :heat, :geared, :riding_wheel_size, :riding_crank_size, :notes, {:members_attributes => [:registrant_id, :id, :_destroy] } )
+  def sortable_object
+    Competitor.find(params[:id])
   end
 
-  def update_competitors_params
-    params.require(:competition).permit(:competitors_attributes => [:id, :status, :heat, :geared, :riding_wheel_size, :riding_crank_size, :notes])
+  def competitor_params
+    params.require(:competitor).permit(:status, :custom_name, {:members_attributes => [:registrant_id, :id, :_destroy] } )
   end
 
   def load_competition

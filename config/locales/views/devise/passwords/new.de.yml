@@ -1,0 +1,7 @@
+---
+de:
+  devise:
+    passwords:
+      new:
+        action: Sende mir Instruktionen um mein Passwort zurück zu setzen
+        title: Hast du dein Passwort vergessen?

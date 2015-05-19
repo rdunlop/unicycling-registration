@@ -1,0 +1,8 @@
+---
+en:
+  registrant_expense_items:
+    new_expense:
+      add_free_item: Add FREE Item
+      add_item: Add Item
+      one_is_free: One is free with your registration
+      sold_out: Sold Out

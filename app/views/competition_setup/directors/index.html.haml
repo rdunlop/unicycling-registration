@@ -1,0 +1,20 @@
+%h1 List Directors
+%table.sortable
+  %thead
+    %tr
+      %th Event
+      %th Director
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td= event
+        %td
+          - User.with_role(:director, event).each do |user|
+            = user
+            = link_to "Delete", director_path(user.id, event_id: event.id), method: :delete,  data: {confirm: "Are you sure?" }
+
+%h2 Create Director
+= form_tag(directors_path, :method => "post") do |f|
+  = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true, class: "chosen-select"
+  = select_tag :event_id, options_from_collection_for_select(Event.all, "id", "to_s"), include_blank: true, class: "chosen-select"
+  = submit_tag "Add Director", :class => "focus_button"

@@ -1,4 +1,4 @@
-class DQRequest
+class DqRequest
   include ActiveModel::Validations
   include ActiveModel::Conversion
 

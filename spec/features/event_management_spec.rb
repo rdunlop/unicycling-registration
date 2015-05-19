@@ -7,16 +7,14 @@ describe 'Creating a Competition from an Event' do
   include_context 'user is logged in'
 
   before :each do
-    visit event_path(Event.last)
-  end
-
-  it "is on the judging menu" do
-    expect(page).to have_content("Manage Individual Competitions")
+    visit competition_setup_path
   end
 
   describe "when on the new competition page" do
     before :each do
-      click_link "Create New Competition"
+      within("tbody tr:first") do
+        click_link "Create New Competition"
+      end
     end
 
     it "has the new page" do

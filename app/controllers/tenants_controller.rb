@@ -13,6 +13,7 @@ class TenantsController < ApplicationController
       if @new_tenant.save
         Apartment::Tenant.create(@new_tenant.subdomain)
         Apartment::Tenant.switch(@new_tenant.subdomain)
+        Rails.application.load_seed
         redirect_to root_url, notice: "New Convention created"
       else
         flash[:alert] = "Unable to create new convention"
@@ -27,7 +28,6 @@ class TenantsController < ApplicationController
   private
 
   def tenant_params
-    params.require(:tenant).permit(:subdomain, :description, :admin_upgrade_code,
-                                   :tenant_aliases_attributes =>[:id, :_destroy, :website_alias, :primary_domain])
+    params.require(:tenant).permit(:subdomain, :description, :admin_upgrade_code)
   end
 end

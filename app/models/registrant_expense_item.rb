@@ -2,16 +2,16 @@
 #
 # Table name: registrant_expense_items
 #
-#  id              :integer          not null, primary key
-#  registrant_id   :integer
-#  expense_item_id :integer
-#  created_at      :datetime
-#  updated_at      :datetime
-#  details         :string(255)
-#  free            :boolean          default(FALSE)
-#  system_managed  :boolean          default(FALSE)
-#  locked          :boolean          default(FALSE)
-#  custom_cost     :decimal(, )
+#  id                :integer          not null, primary key
+#  registrant_id     :integer
+#  expense_item_id   :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#  details           :string(255)
+#  free              :boolean          default(FALSE), not null
+#  system_managed    :boolean          default(FALSE), not null
+#  locked            :boolean          default(FALSE), not null
+#  custom_cost_cents :integer
 #
 # Indexes
 #
@@ -33,6 +33,8 @@ class RegistrantExpenseItem < ActiveRecord::Base
   validate :no_more_than_max_per_registrant, :on => :create
   validate :custom_cost_present
 
+  monetize :custom_cost_cents, allow_nil: true
+
   delegate :has_details, :details_label, to: :expense_item
 
   def self.cache_set_field
@@ -47,7 +49,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   def custom_cost_present
     if !expense_item.nil? && expense_item.has_custom_cost
-      if self.custom_cost.nil? || self.custom_cost <= 0
+      if self.custom_cost_cents.nil? || self.custom_cost_cents <= 0
         errors[:base] << "Must specify a custom cost for this item"
       end
     end
@@ -67,7 +69,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   end
 
   def total_cost
-    cost + tax
+    (cost + tax).round(2)
   end
 
   def only_one_free_per_expense_group
@@ -81,7 +83,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
     end
 
     case free_options
-    when "One Free In Group"
+    when "One Free In Group", "One Free In Group REQUIRED"
       if registrant.has_chosen_free_item_from_expense_group(eg)
         errors[:base] = "Only 1 free item is permitted in this expense_group"
       end

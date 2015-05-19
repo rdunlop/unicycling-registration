@@ -1,0 +1,48 @@
+
+%p
+  There are currently
+  %span.signed_up_count
+    = @competition.signed_up_registrants.count
+  registrants for this event
+
+%p
+  There are currently
+  %span.assigned_registrants
+    = @competition.num_assigned_registrants
+  registrants assigned to competition in
+  %span.assigned_competitors
+    = @competition.num_competitors
+  competitors.
+
+%ul
+  %li= link_to 'Manage Competitors', competition_competitors_path(@competition)
+
+  - if @competition.compete_in_order?
+    %li= link_to "Set Order",  set_sort_competition_path(@competition)
+
+  - elsif @competition.start_list?
+    -# Heats
+    %li= link_to "Assign Heats/Waves", competition_heats_path(@competition)
+
+  %li
+    = link_to "Competitor list", announcer_printing_competition_path(@competition)
+    = link_to "(pdf)", announcer_printing_competition_path(@competition, :format => :pdf)
+
+- if @competition.compete_in_order?
+  - if @competition.order_finalized?
+    The Competitor Order has been Finalized
+  - else
+    The Competitor Order has
+    %strong Not
+    been finalized
+
+-# This should be moved to the Competitor List page
+- if @competition.age_group_type
+  %h3 Review Age Group Configuration
+  = link_to "View Age Group", age_group_type_path(@competition.age_group_type)
+  %small If these are incorrect, contact an Admin
+
+- if @competition.start_list?
+  %h2 Start List
+  = link_to "Start list", start_list_printing_competition_path(@competition)
+  = link_to "(pdf)", start_list_printing_competition_path(@competition, :format => :pdf)

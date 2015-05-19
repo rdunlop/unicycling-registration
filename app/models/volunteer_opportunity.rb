@@ -4,22 +4,24 @@
 #
 #  id            :integer          not null, primary key
 #  description   :string(255)
-#  display_order :integer
+#  position      :integer
 #  inform_emails :text
 #  created_at    :datetime
 #  updated_at    :datetime
 #
 # Indexes
 #
-#  index_volunteer_opportunities_on_description    (description) UNIQUE
-#  index_volunteer_opportunities_on_display_order  (display_order)
+#  index_volunteer_opportunities_on_description  (description) UNIQUE
+#  index_volunteer_opportunities_on_position     (position)
 #
 
 class VolunteerOpportunity < ActiveRecord::Base
-  validates :description, :display_order, presence: true
+  validates :description, presence: true
   validates :description, uniqueness: true
 
-  default_scope { order("display_order ASC") }
+  acts_as_restful_list
+
+  default_scope { order(:position) }
 
   has_many :volunteer_choices, dependent: :destroy
 

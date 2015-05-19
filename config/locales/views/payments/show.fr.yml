@@ -1,0 +1,7 @@
+---
+fr:
+  payments:
+    show:
+      payment_summary: Résumé du paiement
+      pay_with_paypal: Payer avec Paypal
+      please_proceed_with_payment: Veuillez procéder à votre paiement

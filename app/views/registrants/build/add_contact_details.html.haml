@@ -1,5 +1,6 @@
 - @registrant.build_contact_detail if @registrant.contact_detail.nil?
 - @has_online_waiver = @config.has_online_waiver
+- @has_rules = @config.accept_rules
 - @other_registrant = (current_user.registrants.active - [@registrant]).last
 = form_for(@registrant, url: wizard_path, method: :put) do |f|
   - if @registrant.errors.any?
@@ -11,4 +12,8 @@
     %br
     .data_block{:style => "margin-top:20px;"}
       = render :partial => "/registrants/online_waiver", :locals => {:f => f, :registrant => @registrant }
+  - if @has_rules
+    %br
+    .data_block{:style => "margin-top:20px;"}
+      = render :partial => "/registrants/rules_acceptance", :locals => {:f => f}
   = render partial: "/registrants/form_actions", locals: {f: f}

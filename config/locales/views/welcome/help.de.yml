@@ -1,0 +1,27 @@
+---
+de:
+  welcome:
+    help:
+      frequently_asked_questions: FAQ
+      general_help: Wenn du Probleme oder Fragen zur Anmeldung hast, schick uns dein
+        Feedback
+      header: Hilfe
+      i_cannot_login: Ich kann mich nicht anmelden
+      login_help: Wenn du dich registriert hast, schau in deinen E-Mail nach der Bestätigungs
+        Mail. Sieh auch in den Spam Mails nach. Wähle "Die Bestätigungs Mail erneut
+        senden" wenn du die Mail nicht finden kannst
+      registration: Wie kann ich mich anmelden
+      registration_help: "Wenn du dich angemeldet hast, wähle \"Neuen Teilnehmer anlegen\"
+        oder = \"Neuen Begleiter anlegen\" und fülle alle Felder aus\r\nZahle dann
+        die Anmeldegebühr um deine Anmeldung zu sichern."
+      sharing_link: Bitte die für dein Team angemeldeten um Zugriff mit diesem %{link}
+        Formular
+      sharing_registration_details: Wie man Anmelde Details teilen kann
+      sharing_registration_details_help: Als Team Leiter, Vereins Vorsitzender oder
+        Trainer kannst du um Zugriff bitten um die Anmeldungen deiner Mitglieder zu
+        bezahlen und/oder die Anmelde Daten einzusehen und/oder zu ändern.
+      subheader: Diese Seite ist für die %{domain} Einrad Veranstaltungs Registrierung
+      translation_help: Ich habe eine fehlende/falsche Übersetzung gefunden. Schick
+        uns die Details dazu hier als Feedback or stimme zu ein Übersetzer zu werden
+        um die Übersetzung einer Sprache zu kompletieren.
+      translations: "Übersetzungen"

@@ -1,5 +1,5 @@
 class TimeResultsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource :competition, :except => [:edit, :destroy, :update]
   load_and_authorize_resource :time_result
 

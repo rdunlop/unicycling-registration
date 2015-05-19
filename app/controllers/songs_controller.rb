@@ -6,7 +6,7 @@ class SongsController < ApplicationController
   load_and_authorize_resource :except => [:create, :my_songs]
   before_action :load_songs, :only => [:index, :create, :add_file]
 
-  before_action :set_breadcrumbs, :except => [:list, :my_songs, :create_guest_song]
+  before_action :set_breadcrumbs, :except => [:my_songs, :create_guest_song]
 
   def load_songs
     @registrant ||= @song.registrant
@@ -17,10 +17,6 @@ class SongsController < ApplicationController
   def index
     add_breadcrumb "Songs"
     @song = Song.new
-  end
-
-  # GET /songs/list
-  def list
   end
 
   # GET /users/#/my_songs

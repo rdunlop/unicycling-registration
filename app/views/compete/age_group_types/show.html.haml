@@ -1,0 +1,18 @@
+- cache [@age_group_type] do
+  %h1 Listing #{@age_group_type} Age Group Entries
+  %table.js--sortable{ data: { target: update_row_order_age_group_entries_path } }
+    %thead
+      %tr
+        %th Description
+        %th Start age
+        %th End age
+        %th Wheel Size
+        %th Gender
+    %tbody
+      - @age_group_type.age_group_entries.each do |age_group_entry|
+        %tr.item{ data: { item_id: age_group_entry.id } }
+          %td= age_group_entry.short_description
+          %td= age_group_entry.start_age
+          %td= age_group_entry.end_age
+          %td= age_group_entry.wheel_size
+          %td= age_group_entry.gender

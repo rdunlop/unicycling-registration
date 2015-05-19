@@ -1,6 +1,6 @@
 class StreetScoresController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_competition, :except => [:destroy]
+  before_action :authenticate_user!
+  before_action :load_competition, :except => [:destroy]
   load_and_authorize_resource :score
 
   def load_competition

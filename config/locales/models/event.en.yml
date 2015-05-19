@@ -1,0 +1,6 @@
+---
+en:
+  activerecord:
+    attributes:
+      event:
+        id: ID

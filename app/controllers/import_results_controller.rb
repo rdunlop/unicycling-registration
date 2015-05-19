@@ -1,6 +1,6 @@
 require 'upload'
 class ImportResultsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   before_action :load_user, except: [:show, :edit, :update, :destroy]
   before_action :load_competition, except: [:show, :edit, :update, :destroy]
   before_action :load_new_import_result, :only => [:create]

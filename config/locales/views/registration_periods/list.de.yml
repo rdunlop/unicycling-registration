@@ -1,0 +1,9 @@
+---
+de:
+  registration_periods:
+    list:
+      competitor_registration_cost: Teilnehmer Anmeldegebühren
+      from: Von
+      noncompetitor_registration_cost: Begleiter Anmeldegebühren
+      online_registration_closes: Online Anmeldung schließt am
+      to: bis

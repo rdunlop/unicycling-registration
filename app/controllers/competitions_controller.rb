@@ -2,15 +2,18 @@ require 'csv'
 require 'upload'
 class CompetitionsController < ApplicationController
   include EventsHelper
-  before_filter :authenticate_user!
-  before_filter :load_new_competition, :only => [:create]
-  before_filter :load_competition, except: [:create, :new]
+  layout "competition_management", except: :new
 
-  before_filter :load_event, :only => [:create, :new]
+  before_action :authenticate_user!
+  before_action :load_new_competition, :only => [:create]
+  before_action :load_competition, except: [:create, :new]
+
+  before_action :load_event_from_competition, only: [:edit]
+  before_action :load_event, :only => [:create, :new]
 
   load_and_authorize_resource
 
-  before_action :set_parent_breadcrumbs, only: [:new, :edit, :show, :set_sort]
+  before_action :add_competition_setup_breadcrumb, only: [:new, :edit, :show, :set_sort]
 
   respond_to :html, :js
 
@@ -36,7 +39,7 @@ class CompetitionsController < ApplicationController
       flash[:notice] = "Competition created successfully"
     end
 
-    respond_with(@competition, location: event_path(@competition.event))
+    respond_with(@competition, location: competition_setup_path)
   end
 
   # PUT /competitions/1
@@ -47,31 +50,21 @@ class CompetitionsController < ApplicationController
     else
       @event = @competition.event
     end
-    respond_with(@competition, location: event_path(@competition.event))
+    respond_with(@competition)
   end
 
   # DELETE /competitions/1
   # DELETE /competitions/1.json
   def destroy
-    target_url = event_path(@competition.event)
     @competition.destroy
 
-    respond_with(@competition, location: target_url)
+    respond_with(@competition, location: competition_setup_path)
   end
 
   def set_sort
     add_breadcrumb "#{@competition}", competition_path(@competition)
     add_breadcrumb "Manage Competitors", competition_competitors_path(@competition)
     add_breadcrumb "Sort Competitors"
-  end
-
-  def sort
-    @competitors = @competition.competitors
-    @competitors.each do |comp|
-      comp.position = params['competitor'].index(comp.id.to_s) + 1
-      comp.save
-    end
-    respond_with(@competition)
   end
 
   def toggle_final_sort
@@ -90,7 +83,8 @@ class CompetitionsController < ApplicationController
   def sort_random
     @competitors = @competition.competitors
     @competitors.shuffle.each_with_index do |comp, index|
-      comp.position = index + 1
+      # reload or else the acts_as_restful_list positioning gets screwed up
+      comp.reload.position = index + 1
       comp.save!
     end
     flash[:notice] = "Shuffled Competitor sort order"
@@ -235,12 +229,7 @@ class CompetitionsController < ApplicationController
                                         :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,
                                         :penalty_seconds, :automatic_competitor_creation, :combined_competition_id,
                                         :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy],
-                                        :heat_times_attributes => [:id, :scheduled_time, :heat, :minutes, :seconds, :_destroy] )
-  end
-
-  def set_parent_breadcrumbs
-    @event ||= @competition.event
-    add_category_breadcrumb(@event.category)
+                                        :wave_times_attributes => [:id, :scheduled_time, :wave, :minutes, :seconds, :_destroy] )
   end
 
   def load_competition
@@ -250,6 +239,10 @@ class CompetitionsController < ApplicationController
   def load_new_competition
     @competition = Competition.new(competition_params)
     params[:id] = 1 if params[:id].nil? # necessary due to bug in the way that cancan does authorization check
+  end
+
+  def load_event_from_competition
+    @event ||= @competition.event
   end
 
   def load_event

@@ -1,0 +1,25 @@
+---
+fr:
+  back: Retour
+  competitor: Compétiteur
+  date:
+    formats:
+      registration_date_format: "%d %b, %Y"
+    order:
+    - :day
+    - :month
+    - :year
+  language_name: Français
+  'no': Non
+  noncompetitor: Non-compétiteur
+  prices_increase_at_date: Les prix augmentent das %{end_date}
+  prices_increase_soon: Les prix augmentent en moins d'un jour
+  spectator: Spectateur
+  wizard:
+    add_contact_details: Coordonnées
+    add_events: Compétitions
+    add_name: Nom
+    add_volunteers: Bénévole
+    expenses: Frais
+    set_wheel_sizes: Taille de la roue
+  'yes': Oui

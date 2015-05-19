@@ -1,9 +1,9 @@
 class AdditionalRegistrantAccessesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource :user, :only => [:create, :index, :new, :invitations]
   load_and_authorize_resource :additional_registrant_access, :through => :user, :only => [:index, :new, :invitations]
   load_and_authorize_resource :except => [:create, :index, :new, :invitations]
-  before_filter :load_new_additional_registrant_access, :only => [:create]
+  before_action :load_new_additional_registrant_access, :only => [:create]
 
   def load_new_additional_registrant_access
     @additional_registrant_access = @user.additional_registrant_accesses.build(additional_registrant_access_params)
@@ -43,7 +43,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
 
     respond_to do |format|
       if @additional_registrant_access.save
-        Notifications.delay.request_registrant_access(@additional_registrant_access.registrant.id, @user.id)
+        Notifications.request_registrant_access(@additional_registrant_access.registrant, @user).deliver_later
         format.html { redirect_to user_additional_registrant_accesses_path(@user), notice: 'Additional registrant access request was successfully created.' }
         format.json { render json: @additional_registrant_access, status: :created, location: @additional_registrant_access }
       else
@@ -60,7 +60,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
 
     respond_to do |format|
       if @additional_registrant_access.update_attributes({:declined => false, :accepted_readonly => true })
-        Notifications.delay.registrant_access_accepted(@additional_registrant_access.registrant.id, @additional_registrant_access.user.id)
+        Notifications.registrant_access_accepted(@additional_registrant_access.registrant, @additional_registrant_access.user).deliver_later
         format.html { redirect_to invitations_user_additional_registrant_accesses_path(user), notice: 'Additional registrant access was accepted (readonly).' }
         format.json { head :no_content }
       else

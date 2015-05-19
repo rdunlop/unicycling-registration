@@ -10,13 +10,12 @@
 #  updated_at                      :datetime
 #  age_range_start                 :integer          default(0)
 #  age_range_end                   :integer          default(100)
-#  warning_on_registration_summary :boolean          default(FALSE)
+#  warning_on_registration_summary :boolean          default(FALSE), not null
 #
 # Indexes
 #
-#  index_event_categories_event_id                  (event_id,position)
-#  index_event_categories_on_event_id_and_name      (event_id,name) UNIQUE
-#  index_event_categories_on_event_id_and_position  (event_id,position) UNIQUE
+#  index_event_categories_event_id              (event_id,position)
+#  index_event_categories_on_event_id_and_name  (event_id,name) UNIQUE
 #
 
 require 'spec_helper'
@@ -27,29 +26,29 @@ describe EventCategory do
     @ec = @ev.event_categories.first
   end
   it "is valid from FactoryGirl" do
-    @ec.valid?.should == true
+    expect(@ec.valid?).to eq(true)
   end
 
   it "requires a name" do
     @ec.name = nil
-    @ec.valid?.should == false
+    expect(@ec.valid?).to eq(false)
   end
 
   it "has an event" do
-    @ec.event.should == @ev
+    expect(@ec.event).to eq(@ev)
   end
 
   it "uses the event name in its name" do
-    @ec.to_s.should == @ev.to_s + " - " + @ec.name
+    expect(@ec.to_s).to eq(@ev.to_s + " - " + @ec.name)
   end
 
   it "can determine if an age is in range" do
     @ec.age_range_start = 1
     @ec.age_range_end = 10
-    @ec.age_is_in_range(1).should == true
-    @ec.age_is_in_range(10).should == true
-    @ec.age_is_in_range(4).should == true
-    @ec.age_is_in_range(40).should == false
+    expect(@ec.age_is_in_range(1)).to eq(true)
+    expect(@ec.age_is_in_range(10)).to eq(true)
+    expect(@ec.age_is_in_range(4)).to eq(true)
+    expect(@ec.age_is_in_range(40)).to eq(false)
   end
 
   describe "with some registrant_choices" do
@@ -58,11 +57,11 @@ describe EventCategory do
     end
 
     it "has associated registrant_event_sign_ups" do
-      @ec.registrant_event_sign_ups.should == [@rc]
+      expect(@ec.registrant_event_sign_ups).to eq([@rc])
     end
 
     it "can count the number of signed_up competitors" do
-      @ec.num_signed_up_registrants.should == 1
+      expect(@ec.num_signed_up_registrants).to eq(1)
     end
   end
 
@@ -73,7 +72,7 @@ describe EventCategory do
     Delorean.jump 2
 
     @ec.touch
-    @event.reload.updated_at.to_s.should_not == old_update_time.to_s
+    expect(@event.reload.updated_at.to_s).not_to eq(old_update_time.to_s)
   end
 
   describe "with a signed up, but deleted registrant" do

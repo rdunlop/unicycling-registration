@@ -1,0 +1,31 @@
+%h1 Listing #{@expense_group} expense items
+
+%p Create an Expense Item for each type of #{@expense_group} you want to sell. E.g. Small T-Shirt...
+
+%table#list.js--sortable{ data: { target: update_row_order_expense_items_path } }
+  %thead
+    %tr
+      %th Name
+      %th Cost
+      %th Tax
+      %th Total (calculated)
+      %th
+      %th
+  %tbody
+    - @expense_items.each do |expense_item|
+      %tr.item{ data: { item_id: expense_item.id } }
+        %td= expense_item.name
+        %td
+          - unless expense_item.has_custom_cost
+            = expense_item.cost
+          - else
+            N/A
+        %td= expense_item.tax
+        %td= expense_item.total_cost
+        %td= link_to 'Edit', edit_expense_group_expense_item_path(@expense_group, expense_item)
+        %td= link_to 'Delete', [@expense_group, expense_item], method: :delete, data: { confirm: 'Are you sure?' }
+
+%h2 New expense item
+
+%fieldset.form__fieldset
+  = render 'form'

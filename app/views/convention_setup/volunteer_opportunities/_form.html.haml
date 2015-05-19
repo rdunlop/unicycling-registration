@@ -1,0 +1,5 @@
+= simple_form_for([:convention_setup, @volunteer_opportunity]) do |f|
+  = render partial: "/shared/error_messages", object: @volunteer_opportunity
+  = f.input :description
+  = f.input :inform_emails
+  = f.button :submit

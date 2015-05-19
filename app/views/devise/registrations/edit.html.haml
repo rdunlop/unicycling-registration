@@ -1,36 +1,39 @@
-%h2 Edit #{resource_name.to_s.humanize}
+%h1= t(".title")
 
-%h3 Change Email or Password
+%h3= t(".change_header")
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
   %div
     = f.label :email
     %br
     = f.email_field :email
-  %div
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br
-    = f.password_field :password, :autocomplete => "off"
-  %div
-    = f.label :password_confirmation
-    %br
-    = f.password_field :password_confirmation
+
+  %fieldset.data_block
+    %legend= t(".change_password")
+    %div
+      = f.label :password
+      %i (#{t(".blank_notice")})
+      %br
+      = f.password_field :password, :autocomplete => "off"
+    %div
+      = f.label :password_confirmation
+      %br
+      = f.password_field :password_confirmation
   %div
     = f.label :current_password
-    %i (we need your current password to confirm your changes)
+    %i (#{t(".confirm_password_notice")})
     %br
     = f.password_field :current_password
-  %div= f.submit "Update", :class => "focus_button"
+  %div= f.submit t(".action"), :class => "focus_button"
 
 - if resource.roles.any?
-  %h3 Current Permissions
+  %h3= t(".current_permissions")
   %ul
     - resource.roles.each do |role|
       %li= role
   %br
 
-= link_to "Upgrade my account to an Admin account", new_admin_upgrade_path, class: "minor_link"
+= link_to t(".upgrade_to_admin_action"), new_admin_upgrade_path, class: "minor_link"
 %br
 
-= link_to "Back", :back
+= link_to t("back"), :back

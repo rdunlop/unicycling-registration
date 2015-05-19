@@ -4,8 +4,8 @@
 #
 #  id             :integer          not null, primary key
 #  user_id        :integer
-#  completed      :boolean
-#  cancelled      :boolean
+#  completed      :boolean          default(FALSE), not null
+#  cancelled      :boolean          default(FALSE), not null
 #  transaction_id :string(255)
 #  completed_date :datetime
 #  created_at     :datetime
@@ -28,22 +28,22 @@ describe Payment do
   end
 
   it "can be created by FactoryGirl" do
-    @pay.valid?.should == true
+    expect(@pay.valid?).to eq(true)
   end
 
   it "defaults completed to false" do
     p = Payment.new
-    p.completed.should == false
+    expect(p.completed).to eq(false)
   end
 
   it "defaults cancelled to false" do
     p = Payment.new
-    p.cancelled.should == false
+    expect(p.cancelled).to eq(false)
   end
 
   it "Requires user" do
     @pay.user = nil
-    @pay.valid?.should == false
+    expect(@pay.valid?).to eq(false)
   end
 
   describe "with payment details" do
@@ -53,15 +53,15 @@ describe Payment do
     end
 
     it "has payment_details" do
-      @pay.payment_details.should == [@pd]
+      expect(@pay.payment_details).to eq([@pd])
     end
     it "can calcalate the payment total-amount" do
       @pd2 = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => 23.0)
-      (@pay.total_amount == "80.49".to_f).should == true
+      expect(@pay.total_amount == "80.49".to_f).to eq(true)
     end
 
     it "has a list of unique_payment_deatils" do
-      @pay.unique_payment_details.should == [PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 1, :amount => @pd.amount })]
+      expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 1, :amount => @pd.amount })])
     end
 
     describe "with mulitple payment_details of the same expense_item" do
@@ -71,8 +71,8 @@ describe Payment do
       end
 
       it "only lists the element once" do
-        @pay.unique_payment_details.count.should == 1
-        @pay.unique_payment_details.should == [PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd.amount})]
+        expect(@pay.unique_payment_details.count).to eq(1)
+        expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd.amount})])
       end
 
       describe "with payment_details of different expense_items" do
@@ -81,29 +81,29 @@ describe Payment do
         end
 
         it "lists the entries separately" do
-          @pay.unique_payment_details.count.should == 2
+          expect(@pay.unique_payment_details.count).to eq(2)
         end
       end
 
       describe "with different amounts" do
         before(:each) do
-          @pdc = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => @pd.amount + 10, :details => @pd.details, :expense_item => @pd.expense_item)
+          @pdc = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => 99.98, :details => @pd.details, :expense_item => @pd.expense_item)
         end
 
         it "does not group them together" do
-          @pay.unique_payment_details.count.should == 2
-          @pay.unique_payment_details.should =~ [PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 1, :amount => @pdc.amount}),
-                                                 PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd2.amount})]
+          expect(@pay.unique_payment_details.count).to eq(2)
+          expect(@pay.unique_payment_details).to match_array([PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 1, :amount => @pdc.amount}),
+                                                              PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd2.amount})])
         end
       end
     end
   end
 
   describe "With an environment config with test mode disabled" do
-    let!(:event_configuration) { FactoryGirl.create :event_configuration, paypal_test: false }
+    let!(:event_configuration) { FactoryGirl.create :event_configuration, paypal_mode: "enabled" }
 
     it "has a REAL paypal_post_url" do
-      @pay.paypal_post_url.should == "https://www.paypal.com/cgi-bin/webscr"
+      expect(@pay.paypal_post_url).to eq("https://www.paypal.com/cgi-bin/webscr")
     end
   end
 
@@ -113,18 +113,18 @@ describe Payment do
     pd.registrant = FactoryGirl.create(:registrant)
     pd.amount = 100
     pd.expense_item = FactoryGirl.create(:expense_item)
-    PaymentDetail.all.count.should == 0
+    expect(PaymentDetail.all.count).to eq(0)
     pay.save
-    PaymentDetail.all.count.should == 1
+    expect(PaymentDetail.all.count).to eq(1)
   end
 
   it "destroys related payment_details upon destroy" do
     pay = FactoryGirl.create(:payment)
     pd = FactoryGirl.create(:payment_detail, :payment => pay)
     pay.reload
-    PaymentDetail.all.count.should == 1
+    expect(PaymentDetail.all.count).to eq(1)
     pay.destroy
-    PaymentDetail.all.count.should == 0
+    expect(PaymentDetail.all.count).to eq(0)
   end
 
   describe "with a completed payment" do
@@ -133,13 +133,13 @@ describe Payment do
     it "can determine the total received" do
       pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
       payment.reload
-      Payment.total_received.should == 15.33
+      expect(Payment.total_received).to eq(15.33)
     end
 
     it "returns the set of paid expense_items" do
       pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
       payment.reload
-      Payment.paid_expense_items.should == [pd.expense_item]
+      expect(Payment.paid_expense_items).to eq([pd.expense_item])
     end
 
     describe "with a refund" do
@@ -151,7 +151,7 @@ describe Payment do
       end
 
       it "doesn't list the item in the paid_expense_items" do
-        Payment.paid_expense_items.should == []
+        expect(Payment.paid_expense_items).to eq([])
       end
     end
   end
@@ -166,7 +166,7 @@ describe Payment do
     end
 
     it "registrant owes for this item" do
-      @reg.owing_expense_items.should == [@rei.expense_item]
+      expect(@reg.owing_expense_items).to eq([@rei.expense_item])
     end
     describe "when the user has a free t-shirt and a paid t-shirt" do
       before(:each) do
@@ -177,14 +177,14 @@ describe Payment do
       it "markes the correct one as paid when we pay for the non-free one" do
         @pay.completed = true
         @pay.save
-        @reg.owing_registrant_expense_items.should == [@rei_free]
+        expect(@reg.owing_registrant_expense_items).to eq([@rei_free])
       end
       it "markes the correct one as paid when we pay for the free one" do
         @pd.free = true
         @pd.save
         @pay.completed = true
         @pay.save
-        @reg.reload.owing_registrant_expense_items.should == [@rei]
+        expect(@reg.reload.owing_registrant_expense_items).to eq([@rei])
       end
     end
     describe "when the registrant has two t-shirts, who only differ by details" do
@@ -197,7 +197,7 @@ describe Payment do
         @pd.save
         @pay.completed = true
         @pay.save
-        @reg.reload.owing_registrant_expense_items.should == [@rei2]
+        expect(@reg.reload.owing_registrant_expense_items).to eq([@rei2])
       end
     end
 
@@ -212,10 +212,10 @@ describe Payment do
       end
 
       it "registrant no longer owes" do
-        @reg.reload.owing_expense_items.should == []
+        expect(@reg.reload.owing_expense_items).to eq([])
       end
       it "registrant has paid item" do
-        @reg.paid_expense_items.should == [@pd.expense_item]
+        expect(@reg.paid_expense_items).to eq([@pd.expense_item])
       end
     end
 
@@ -231,18 +231,18 @@ describe Payment do
       end
 
       it "registrant still owes" do
-        @reg.owing_expense_items.should == [@rei.expense_item]
+        expect(@reg.owing_expense_items).to eq([@rei.expense_item])
       end
 
       it "registrant has paid item" do
-        @reg.paid_expense_items.should == [@pd.expense_item]
+        expect(@reg.paid_expense_items).to eq([@pd.expense_item])
       end
 
       it "should email the admin" do
         num_deliveries = ActionMailer::Base.deliveries.size
-        num_deliveries.should == 1
+        expect(num_deliveries).to eq(1)
         mail = ActionMailer::Base.deliveries.first
-        mail.subject.should == "Missing reg-item match"
+        expect(mail.subject).to eq("Missing reg-item match")
       end
     end
 
@@ -257,10 +257,10 @@ describe Payment do
       end
 
       it "registrant no longer owes" do
-        @reg.reload.owing_expense_items.should == []
+        expect(@reg.reload.owing_expense_items).to eq([])
       end
       it "registrant has paid item" do
-        @reg.paid_expense_items.should == [@pd.expense_item]
+        expect(@reg.paid_expense_items).to eq([@pd.expense_item])
       end
     end
 
@@ -270,10 +270,10 @@ describe Payment do
         @pay.save
       end
       it "registrant no longer owes" do
-        @reg.owing_expense_items.should == []
+        expect(@reg.owing_expense_items).to eq([])
       end
       it "registrant has paid item" do
-        @reg.paid_expense_items.should == [@pd.expense_item]
+        expect(@reg.paid_expense_items).to eq([@pd.expense_item])
       end
 
       describe "when the payment is saved after being paid" do
@@ -283,7 +283,7 @@ describe Payment do
           @reg.reload
         end
         it "doesn't remove more items from the registrant_expenses" do
-          @reg.owing_expense_items.should == [@rei2.expense_item]
+          expect(@reg.owing_expense_items).to eq([@rei2.expense_item])
         end
       end
     end
@@ -301,8 +301,8 @@ describe Payment do
     end
 
     it "initially has the reg_item" do
-      @reg_with_reg_item.registrant_expense_items.count.should == 1
-      @reg_with_reg_item.registrant_expense_items.first.expense_item.should == @reg_period.competitor_expense_item
+      expect(@reg_with_reg_item.registrant_expense_items.count).to eq(1)
+      expect(@reg_with_reg_item.registrant_expense_items.first.expense_item).to eq(@reg_period.competitor_expense_item)
     end
 
     it "sends no e-mail" do
@@ -311,7 +311,7 @@ describe Payment do
       @pay.completed = true
       @pay.save
       num_deliveries = ActionMailer::Base.deliveries.size
-      num_deliveries.should == 0
+      expect(num_deliveries).to eq(0)
       mail = ActionMailer::Base.deliveries.first
     end
   end

@@ -1,9 +1,10 @@
 = form_for(@new_tenant) do |f|
   = render partial: "shared/error_messages", object: @tenant
 
-  %h3 Enter Creation Access code
-  = label_tag :code, "Enter Creation Access code"
-  = text_field_tag :code
+  %p
+    In order to create a convention, you must prove you are allowed to do so by entering the Creation Access code.
+  = label_tag :code, "Creation Access Code"
+  = password_field_tag :code
 
   %br
   %br
@@ -13,37 +14,15 @@
     %tbody
       %tr
         %th= f.label :subdomain
-        %td= f.text_field :subdomain
-        %td What is the prefix you want for the domain? (*.#{Rails.application.secrets.domain})
+        %td= f.text_field :subdomain, placeholder: 'naucc2000'
+        %td What is the prefix you want for the domain? (&lt;subdomain&gt;.#{Rails.application.secrets.domain})
       %tr
         %th= f.label :description
-        %td= f.text_field :description
-        %td Description to be used for admin purposes only
+        %td= f.text_field :description, placeholder: "NAUCC 2000"
+        %td Description to be used on this page. (you can customize the name later)
       %tr
         %th= f.label :admin_upgrade_code
         %td= f.text_field :admin_upgrade_code
-        %td Specify the code you want to use to upgrade your user account to an Admin account
-
-  %br
-  If you are hosting this site under a different URL, enter it here.
-  %table.items
-    %caption Custom Domains
-    %thead
-      %tr
-        %th URL
-        %th Primary Domain
-        %th
-    %tbody
-      = f.nested_fields_for :tenant_aliases, render_template: false do |member_f|
-        %tr.item
-          %td= member_f.text_field :website_alias
-          %td= member_f.check_box :primary_domain
-          %td
-            %a.remove{:href => "#"} remove
-            = member_f.hidden_field :id
-            = member_f.hidden_field :_destroy
-  %a.add{:href => "#"} add entry
-  %br
-  = nested_fields_templates
+        %td Specify the code you want to use to upgrade your user account to an Convention Admin account.
 
   = f.submit

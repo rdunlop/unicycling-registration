@@ -4,8 +4,22 @@ $height: 50px;
 .logo {
   height: 38px;
 }
-.logo_link {
-  padding: 5px;
+
+/* Specificity hack */
+.logo_link.logo_link {
+  padding: 0px;
+}
+
+%navElement {
+  font-size: 14px;
+  padding: 0;
+  margin: 0px 10px;
+  text-align: center;
+  color: $text;
+  a, a:visited {
+    color: $text;
+    text-decoration: none;
+  }
 }
 
 nav {
@@ -15,93 +29,78 @@ nav {
   a {
     background-color: $background;
   }
-  li#sign-out {
-    float: right;
-    font-size: 0.8em;
+  .accountNav {
+    @extend %navElement;
+    position: absolute;
+    right: 0;
+    padding: 9px;
+    display: inline-block;
+  }
+  display: block;
+  background: $background;
+
+  &.admin_bar {
+    background-color: red;
+
     a {
-      display: inline-block;
-      padding-left: 20px;
-      padding-right: 20px;
+      background-color: inherit;
     }
   }
-  ul {
-    li.hovered {
-      > a {
-        color: $texthover;
-        background-color: $backgroundhover;
-      }
-      a:hover {
-        background-color: $backgroundhover;
-      }
-    }
-    ul {
-      display: none;
-      z-index: 100;
-      overflow: visible;
-      position: absolute;
-      left: 0;
-      @media only screen and (max-width: 800px) {
-        position: relative;
-      }
-    }
-    ul.hovered, li.parent_page > ul {
-      width: 100%;
-      display: block;
-      background-color: white;
-      color: $text;
-      font-size: 10px;
-      a {
-        padding: ($height/4) 10px;
-      }
-    }
-    ul.current_page {
-      z-index: 50;
-    }
-    li {
-      ul {
-        text-align: center;
-        max-width: 800px;
-        @media only screen and (max-width: 800px) {
-          max-width: 100%;
-        }
-      }
-      display: inline-block;
-      @media only screen and (max-width: 800px) {
-        display: block;
-      }
-      a, a:visited {
-        display: block;
-        padding: ($height/3) 20px;
-        color: $text;
-        text-decoration: none;
-      }
-    }
-    li.current_page > a, li.parent_page > a {
-      color: red;
-      background: $backgroundhover;
+}
+
+ul.navList {
+  li:hover {
+    > a {
       color: $texthover;
+      background-color: $backgroundhover;
     }
-    a.disabled {
-      display: none;
+    a:hover {
+      background-color: $backgroundhover;
     }
-    background: $background;
-    width: 100%;
-    padding: 0;
-    margin: 0px;
-    list-style: none;
-    position: relative;
-    display: inline-table;
-    font-size: 14px;
-    @media only screen and (max-width: 800px) {
+  }
+  li {
+    margin: 0 5px;
+    display: inline-block;
+    a {
+      padding: 10px 5px;
       display: block;
     }
   }
-  ul:after {
+  @extend %navElement;
+  list-style: none;
+  position: relative;
+  display: inline-table;
+
+  &:after {
     content: "";
     clear: both;
     display: block;
   }
-  display: block;
-  height: $height * 2;
+}
+.hamburger {
+  @extend %navElement;
+  display: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+  ul.navList {
+    display: none;
+    &.is--visible {
+      display: block;
+    }
+
+    li {
+      display: block;
+      a {
+        display: block;
+      }
+      text-align: center;
+      padding: 10px;
+    }
+  }
+  .hamburger {
+    display: block;
+  }
 }
 

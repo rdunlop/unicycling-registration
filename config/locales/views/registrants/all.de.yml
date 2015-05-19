@@ -1,0 +1,8 @@
+---
+de:
+  registrants:
+    all:
+      all_registrants: Alle Angemeldeten
+      country: Land
+      id: ID
+      name: Name

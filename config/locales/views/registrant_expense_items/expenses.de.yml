@@ -1,0 +1,8 @@
+---
+de:
+  registrant_expense_items:
+    expenses:
+      cost: Kosten
+      paid: Bezahlt
+      registrants_expenses: "%{registrant}'s Ausgaben"
+      total: Total

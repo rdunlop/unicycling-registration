@@ -1,4 +1,6 @@
 class DataEntryVolunteersController < ApplicationController
+  layout "competition_management"
+
   load_and_authorize_resource :competition
   before_action :load_new_data_entry_volunteer, only: :index
 

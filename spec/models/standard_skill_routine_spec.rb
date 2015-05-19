@@ -24,19 +24,19 @@ describe StandardSkillRoutine do
     entry = @routine.standard_skill_routine_entries.build(
       :position => 1,
       :standard_skill_entry_id => skill.id)
-    @routine.valid?.should == true
+    expect(@routine.valid?).to eq(true)
   end
   it "should not be able to save more than 18 entries per user" do
     18.times do |i|
       skill = FactoryGirl.create(:standard_skill_entry)
       @routine.standard_skill_routine_entries.create(:position => 1, :standard_skill_entry_id => skill.id)
     end
-    @routine.valid?.should == true
+    expect(@routine.valid?).to eq(true)
     skill = FactoryGirl.create(:standard_skill_entry)
     ssre = @routine.standard_skill_routine_entries.build(:position => 1, :standard_skill_entry_id => skill.id)
 
-    ssre.valid?.should == false
-    @routine.valid?.should == false
+    expect(ssre.valid?).to eq(false)
+    expect(@routine.valid?).to eq(false)
   end
 
   describe "with a routine containing 12 skills > 100" do
@@ -51,15 +51,15 @@ describe StandardSkillRoutine do
     it "should not allow a 13th entry with skill > 100" do
       skill = FactoryGirl.create(:standard_skill_entry, number: 101)
       ssre = @routine.standard_skill_routine_entries.build(:position => 1, :standard_skill_entry_id => skill.id)
-      @routine.valid?.should == false
-      ssre.valid?.should == false
+      expect(@routine.valid?).to eq(false)
+      expect(ssre.valid?).to eq(false)
     end
 
     it "should allow a 13th entry with skill < 100" do
       skill = FactoryGirl.create(:standard_skill_entry, number: 10)
       ssre = @routine.standard_skill_routine_entries.build(:position => 1, :standard_skill_entry_id => skill.id)
-      @routine.valid?.should == true
-      ssre.valid?.should == true
+      expect(@routine.valid?).to eq(true)
+      expect(ssre.valid?).to eq(true)
     end
   end
 
@@ -69,14 +69,14 @@ describe StandardSkillRoutine do
       :position => 1,
       :standard_skill_entry_id => skill.id)
 
-    @routine.valid?.should == true
+    expect(@routine.valid?).to eq(true)
 
     ssre = @routine.standard_skill_routine_entries.build(
       :position => 2,
       :standard_skill_entry_id => skill.id)
 
-    ssre.valid?.should == false
-    @routine.valid?.should == false
+    expect(ssre.valid?).to eq(false)
+    expect(@routine.valid?).to eq(false)
   end
 
   it "should not be able to have 2 skills with the same number, but different letters" do
@@ -86,16 +86,16 @@ describe StandardSkillRoutine do
       :position => 1,
       :standard_skill_entry_id => skill1.id)
 
-    @routine.valid?.should == true
+    expect(@routine.valid?).to eq(true)
 
     ssre = @routine.standard_skill_routine_entries.build(
       :position => 2,
       :standard_skill_entry_id => skill2.id)
 
-    ssre.valid?.should == false
-    @routine.valid?.should == false
+    expect(ssre.valid?).to eq(false)
+    expect(@routine.valid?).to eq(false)
 
-    ssre.errors.count.should == 1
+    expect(ssre.errors.count).to eq(1)
   end
   it "should be able to total up some scores" do
     skill1 = FactoryGirl.create(:standard_skill_entry, :points => 1.1)
@@ -107,9 +107,9 @@ describe StandardSkillRoutine do
       :position => 2,
       :standard_skill_entry_id => skill2.id)
 
-    @routine.valid?.should == true
+    expect(@routine.valid?).to eq(true)
 
-    @routine.total_skill_points.should == 3.3
+    expect(@routine.total_skill_points).to eq(3.3)
   end
 
   it "destroys associated standard_skill_routine_entry upon destroy" do
@@ -117,10 +117,10 @@ describe StandardSkillRoutine do
 
     @routine.reload
 
-    StandardSkillRoutineEntry.count.should == 1
+    expect(StandardSkillRoutineEntry.count).to eq(1)
 
     @routine.destroy
 
-    StandardSkillRoutineEntry.count.should == 0
+    expect(StandardSkillRoutineEntry.count).to eq(0)
   end
 end

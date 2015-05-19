@@ -5,6 +5,6 @@ describe "standard_skill_entries/index" do
     assign(:standard_skill_entries, [FactoryGirl.create(:standard_skill_entry, :description => "first skill")])
     render
 
-    rendered.should match(/first skill/)
+    expect(rendered).to match(/first skill/)
   end
 end

@@ -26,4 +26,4 @@
         = render :partial => "registration_periods/list", locals: {competitor: false}
 
     = render partial: "/registrants/form_actions", locals: {f: f}
-    = link_to "Cancel", {}, class: "js--hide_new_registrant"
+    = link_to t("cancel"), {}, class: "js--hide_new_registrant"

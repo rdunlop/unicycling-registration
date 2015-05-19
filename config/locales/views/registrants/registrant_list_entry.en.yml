@@ -1,0 +1,11 @@
+---
+en:
+  registrants:
+    registrant_list_entry:
+      competitor: "(Competitor)"
+      edit: Edit
+      incomplete: Incomplete
+      legal_waiver: Legal Waiver (%{first_name})
+      noncompetitor: "(Non-Competitor)"
+      see_summary: See Summary
+      spectator: "(Spectator)"

@@ -12,7 +12,7 @@
       %th Date Published
   %tbody
     - Competition.includes(:published_age_group_entries).all.each do |competition|
-      - cache [competition, I18n.locale] do
+      - cache_i18n [competition] do
         %tr
           %td= competition.end_time_to_s
           %td= competition.award_title_name
@@ -24,7 +24,10 @@
               = link_to "Competitor List", announcer_printing_competition_path(competition)
           %td
             - if competition.start_list?
-              = link_to "Start List", start_list_printing_competition_path(competition)
+              - if competition.start_list_present?
+                = link_to "Start List", start_list_printing_competition_path(competition)
+              - else
+                Not yet available
           %td
             - if !competition.published? && competition.has_age_group_entry_results?
               - competition.published_age_group_entries.each do |entry|
@@ -60,4 +63,4 @@
       - CombinedCompetition.all.each do |combined_competition|
         %tr
           %td= combined_competition.name
-          %td= link_to "Results", combined_competition_path(combined_competition)
+          %td= link_to "Results", scores_result_path(combined_competition.competition)

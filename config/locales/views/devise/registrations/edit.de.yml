@@ -1,0 +1,14 @@
+---
+de:
+  devise:
+    registrations:
+      edit:
+        action: Aktualisierung
+        blank_notice: Leer lassen wenn du nichts ändern möchtest
+        change_header: "Ändere die E-Mail Adresse oder das Passwort"
+        change_password: 'Passwort ändern:'
+        confirm_password_notice: Wir benötigen das aktuelle Passwort um deine Änderungen
+          zu bestätigen
+        current_permissions: Aktuelle Rechte
+        title: Mein Konto
+        upgrade_to_admin_action: Stufe mein Konto zum Administrator Konto hoch

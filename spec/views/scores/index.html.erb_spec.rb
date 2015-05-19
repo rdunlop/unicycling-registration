@@ -4,7 +4,7 @@ describe "scores/index" do
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
+    allow(controller).to receive(:current_ability) { @ability }
 
     @ec = FactoryGirl.create(:competition)
     @judge = FactoryGirl.create(:judge, :competition => @ec)
@@ -40,30 +40,27 @@ describe "scores/index" do
   end
   it "renders the titles and ranges" do
     render
-    rendered.should match(/#{@judge.judge_type.val_1_description}/)
-    rendered.should match(/\(0-#{@judge.judge_type.val_1_max}\)/)
+    expect(rendered).to match(/#{@judge.judge_type.val_1_description}/)
+    expect(rendered).to match(/\(0-#{@judge.judge_type.val_1_max}\)/)
   end
 
   it "renders a list of scores" do
     render
-    assert_select "tr:nth-child(1)" do |row|
-      assert_select "td", :text => @comp1.bib_number.to_s, :count => 1
-      assert_select "td", :text => @comp1.name.to_s, :count => 1
-      assert_select "td", :text => "5.1".to_s, :count => 1
-      assert_select "td", :text => "2.109".to_s, :count => 1
-      assert_select "td", :text => "3.19".to_s, :count => 1
-      assert_select "td", :text => "4.1".to_s, :count => 1
-      assert_select "td", :text => "14.499".to_s, :count => 1
-    end
-    assert_select "tr:nth-child(2)" do |row|
-      assert_select "td", :text => @comp2.bib_number.to_s, :count => 1
-      assert_select "td", :text => @comp2.name.to_s, :count => 1
-      assert_select "td", :text => "1.1".to_s, :count => 1
-      assert_select "td", :text => "1.2".to_s, :count => 1
-      assert_select "td", :text => "1.3".to_s, :count => 1
-      assert_select "td", :text => "1.4".to_s, :count => 1
-      assert_select "td", :text => "5.0".to_s, :count => 1
-    end
+    assert_select "tr>td", :text => @comp1.bib_number.to_s, :count => 1
+    assert_select "tr>td", :text => @comp1.name.to_s, :count => 1
+    assert_select "tr>td", :text => "5.1".to_s, :count => 1
+    assert_select "tr>td", :text => "2.109".to_s, :count => 1
+    assert_select "tr>td", :text => "3.19".to_s, :count => 1
+    assert_select "tr>td", :text => "4.1".to_s, :count => 1
+    assert_select "tr>td", :text => "14.499".to_s, :count => 1
+
+    assert_select "tr>td", :text => @comp2.bib_number.to_s, :count => 1
+    assert_select "tr>td", :text => @comp2.name.to_s, :count => 1
+    assert_select "tr>td", :text => "1.1".to_s, :count => 1
+    assert_select "tr>td", :text => "1.2".to_s, :count => 1
+    assert_select "tr>td", :text => "1.3".to_s, :count => 1
+    assert_select "tr>td", :text => "1.4".to_s, :count => 1
+    assert_select "tr>td", :text => "5.0".to_s, :count => 1
   end
   it "shows the update button" do
     @ability.can :create_scores, @ec
@@ -72,13 +69,11 @@ describe "scores/index" do
   end
   it "doesn't show the update button if event is locked" do
     render
-    assert_select "tr:nth-child(1)" do |row|
-      assert_select "a", :text => "Set Score".to_s, :count => 0
-    end
+    assert_select "a", :text => "Set Score".to_s, :count => 0
   end
 
   it "shows a 'this event is locked' message when the event is locked" do
     render
-    rendered.should match(/Scores for this event are now locked \(closed\)/)
+    expect(rendered).to match(/Scores for this event are now locked \(closed\)/)
   end
 end

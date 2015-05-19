@@ -1,0 +1,8 @@
+---
+en:
+  registrants:
+    all:
+      all_registrants: All Registrants
+      country: Country
+      id: ID
+      name: Name

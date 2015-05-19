@@ -3,7 +3,6 @@
 # Table name: categories
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
 #  position   :integer
 #  created_at :datetime
 #  updated_at :datetime
@@ -13,13 +12,14 @@
 class Category < ActiveRecord::Base
   include CachedModel
 
-  default_scope { order('position ASC') }
+  acts_as_restful_list
+  default_scope { order(:position) }
 
   has_many :events, -> {order("events.position") }, :dependent => :destroy, :inverse_of => :category
 
   validates :name, :presence => true
 
-  translates :name
+  translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
   after_save(:touch_event_configuration)

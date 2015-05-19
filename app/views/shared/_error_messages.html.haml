@@ -2,7 +2,7 @@
   #error_explanation
     %h2
       = pluralize(error_messages.errors.count, "error")
-      prohibited this object from being saved:
+      = t(".errors_prevented_object_from_being_saved")
     %ul
       - error_messages.errors.full_messages.each do |msg|
         %li= msg

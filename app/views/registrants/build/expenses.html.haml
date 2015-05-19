@@ -1,3 +1,5 @@
+= render partial: "/shared/error_messages", object: @registrant
+
 = render partial: "/registrant_expense_items/new_expenses"
 = render partial: "/registrant_expense_items/expenses", :locals => {:registrant => @registrant}
 

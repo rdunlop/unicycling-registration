@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "standard_scores/new" do
-
   it "renders successfully all skills" do
     ec = FactoryGirl.create(:competition)
     @c = FactoryGirl.create(:event_competitor, :competition => ec)
@@ -31,7 +30,7 @@ describe "standard_scores/new" do
 
     render
 
-    rendered.should match(@score1.standard_skill_entry.description)
+    expect(rendered).to match(@score1.standard_skill_entry.description)
     # assert_select "input#competitor_external_id", :name => "registrant[external_id]"
   end
 end

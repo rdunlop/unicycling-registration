@@ -1,0 +1,10 @@
+---
+de:
+  songs:
+    index:
+      add_songs_for_others: Ein Lied für einen anderen Teilnehmer hochladen
+      new_song: Neues Lied (Schritt 1)
+      step_1: Schritt 1
+      step_2: Schritt 2
+      title: "%{name}'s Lieder"
+      upload_file: Musik Datei hochladen

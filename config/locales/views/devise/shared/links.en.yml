@@ -1,0 +1,11 @@
+---
+en:
+  devise:
+    shared:
+      links:
+        already_have_an_account: Already have an account?
+        forgot_your_password: Forgot your password?
+        log_in_here: Log In Here
+        need_confirmation_instructions: Didn't receive confirmation instructions?
+        new_user: Are you a New User?
+        sign_up_here: Sign Up Here

@@ -14,6 +14,8 @@ module Workspace
     # -- all .rb files in that directory are automatically loaded.
     config.autoload_paths += %W(#{config.root}/lib)
 
+    config.skylight.environments += ['stage']
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Central Time (US & Canada)'
@@ -23,14 +25,22 @@ module Workspace
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = true
     config.i18n.default_locale = :en
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+
+    # These are the default list of available languages.
+    # Note: this is overwritten in application_controller.rb once an EventConfiguration is loaded.
+    config.i18n.available_locales = [:en, :fr, :de, :hu]
 
     config.encoding = "utf-8"
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
 
     config.action_dispatch.rescue_responses.merge!(
       'Errors::TenantNotFound' => :not_found
     )
 
-    config.exceptions_app = self.routes
+    config.active_job.queue_adapter = :sidekiq
 
     config.generators do |g|
       g.helper_specs false

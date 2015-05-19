@@ -1,0 +1,10 @@
+---
+fr:
+  registrants:
+    registrant_list_entry:
+      competitor: "(Compétiteur)"
+      edit: Réviser
+      incomplete: Incomplet
+      noncompetitor: "(Non-compétiteur)"
+      see_summary: Voir le résumé
+      spectator: "(Spectateur)"

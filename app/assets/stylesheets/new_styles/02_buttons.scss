@@ -16,6 +16,7 @@
   -moz-box-shadow:    0px 5px 4px rgba(50, 50, 50, 0.75);
   box-shadow:         0px 5px 4px rgba(50, 50, 50, 0.75);
   color: white;
+  text-align: center;
 
   &:hover, &:visited {
     color: white;
@@ -82,10 +83,6 @@
   margin: 10px;
   background-color: $focus;
   color: white;
-}
-
-a.focus_button, a.nonfocus_button {
-  padding: 10px 0px;
 }
 
 .focus_button:hover {

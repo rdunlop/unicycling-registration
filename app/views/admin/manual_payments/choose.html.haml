@@ -1,0 +1,57 @@
+%h1 Receive Payment
+
+%p
+  %b Note
+  An email will be sent to the the associated user account when a payment is completed.
+
+= form_for(@manual_payment, :url => manual_payments_path, method: :post) do |pf|
+  = render :partial => "/shared/error_messages", :object => @manual_payment
+  %br
+  %br
+  %b.payment_instructions
+    Please describe the payment. Examples:
+    %br
+    Cash
+    %br
+    Cheque
+    %br
+  = pf.label :note
+  = pf.text_field :note
+
+  %h1 Chosen (but unpaid) Items
+  .payment_instructions
+    Check off the items to be marked as paid
+  %table.sortable
+    %thead
+      %tr
+        %th Registrant
+        %th Item
+        %th Cost
+        %th Details (only required for some items)
+        %th Mark this item as having Money-Received
+        %th= #Give this item to the Registrant for free
+    %tbody
+      = pf.fields_for :unpaid_details do |unpaid_detail|
+        %tr
+          %td
+            = unpaid_detail.object.registrant
+            = unpaid_detail.hidden_field :registrant_expense_item_id
+          %td
+            = unpaid_detail.object.expense_item
+          %td= unpaid_detail.object.total_cost
+          %td
+            = unpaid_detail.object.details
+          %td= unpaid_detail.check_box :pay_for, { class: "js--costItem", data: { cents: (unpaid_detail.object.total_cost.to_f * 100)} }
+          %td= #unpaid_detail.check_box :free
+
+    %tfoot
+      %tr
+        %th
+        %th Total
+        %th.js--total
+        %th{ colspan: 2 }
+
+  = submit_tag "Mark elements Received", :class => "payment_link registration_button"
+
+%div
+  = link_to 'Back', new_manual_payment_path

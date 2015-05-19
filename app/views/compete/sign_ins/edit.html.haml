@@ -1,0 +1,40 @@
+%h1= "#{@competition} - Sign-In List"
+
+%p
+  These are all of the competitors configured for this competition
+  %br
+= render partial: "shared/error_messages", object: @competition
+= form_for @competition, url: competition_sign_ins_path(@competition), method: :put do |f|
+  %table.competitor_statuses
+    %caption Competitors
+    %thead
+      %tr
+        %th.sign_up ID
+        %th.sign_up Name
+        %th.sign_up Age
+        %th.sign_up Gender
+        %th Status
+        %th Wave#
+        %th Geared
+        %th Wheel Size
+        %th Crank Size (mm)
+        %th Notes
+        %th
+    %tbody
+      - @competitors.each do |competitor|
+        = f.fields_for :competitors, competitor do |comp_f|
+          %tr
+            %td= comp_f.object.bib_number
+            %td= comp_f.object.detailed_name
+            %td= comp_f.object.age
+            %td= comp_f.object.gender
+            %td= comp_f.select :status, Competitor.statuses.keys
+            %Th= comp_f.number_field :wave, class: "sign_in_heat"
+            %td= comp_f.check_box :geared
+            %td= comp_f.number_field :riding_wheel_size, class: "sign_in_wheel_size"
+            %td= comp_f.number_field :riding_crank_size, class: "sign_in_crank_size"
+            %td= comp_f.text_field :notes, class: "sign_in_notes"
+  = f.submit
+%br
+
+= link_to "Back", @competition

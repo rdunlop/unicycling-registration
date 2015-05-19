@@ -56,7 +56,7 @@ class ArtisticScoringClass < BaseScoringClass
     judge_scores_path(judge)
   end
 
-  def compete_in_order
+  def compete_in_order?
     true
   end
 

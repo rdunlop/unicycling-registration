@@ -1,14 +1,20 @@
 module LanguageHelper
-  @@languages = [
-    {:short_name => :en, :long_name => "English"},
-    {:short_name => :fr, :long_name => "French"}
-  ]
   def languages
-    @@languages.collect{|lang| lang[:short_name]}
+    I18n.available_locales
   end
 
   def long_language_name(language)
-    el = @@languages.select { |lang| lang[:short_name] == language}.first
-    el[:long_name] unless el.nil?
+    t("language_name", locale: language)
+  end
+
+  def cache_i18n(keys, options = {})
+    cache [:i18n, I18n.locale, *keys], options do
+      yield
+    end
+  end
+
+  # Clear any keys which were written by the `cache_i18n` function above
+  def clear_cache_i18n
+    Rails.cache.delete_matched 'views/i18n/*'
   end
 end

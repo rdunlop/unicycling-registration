@@ -22,17 +22,17 @@ require 'spec_helper'
 describe Song do
   let(:song) { FactoryGirl.build_stubbed(:song) }
   it "must be valid by default" do
-    song.valid?.should == true
+    expect(song.valid?).to eq(true)
   end
   it "must have an event" do
     song.event = nil
-    song.valid?.should == false
+    expect(song.valid?).to eq(false)
   end
 
   it "must have a description" do
     song.event = FactoryGirl.build_stubbed(:event)
     song.description = nil
-    song.valid?.should == false
+    expect(song.valid?).to eq(false)
   end
 
   describe "with a song created" do
@@ -41,12 +41,12 @@ describe Song do
 
     it "cannot create a second song for the same event for the same registrant"  do
       song2 = FactoryGirl.build(:song, registrant: registrant, event: song1.event, user: song1.user)
-      song2.should be_invalid
+      expect(song2).to be_invalid
     end
 
     it "can create a second song for the same event, different registrant" do
       song1a = FactoryGirl.build(:song, event: song1.event, user: song1.user)
-      song1a.should be_valid
+      expect(song1a).to be_valid
     end
   end
 end

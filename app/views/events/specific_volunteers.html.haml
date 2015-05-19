@@ -1,0 +1,13 @@
+%h1 Volunteer: #{@volunteer_opportunity}
+
+%h2 Signed-up
+
+%table.volunteers.sortable
+  %thead
+    %tr
+      %th Registrant
+
+  %tbody
+    - @volunteer_opportunity.volunteer_choices.includes(:registrant).each do |vc|
+      %tr
+        %td= vc.registrant

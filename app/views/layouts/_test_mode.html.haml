@@ -8,5 +8,5 @@
       Change Role
     .js--hiddenToggle
       - User.roles.each do |role|
-        = link_to "Make me #{role.to_s.humanize}", test_mode_role_event_configurations_path(role: role), :method => :post
+        = link_to "Toggle #{role.to_s.humanize} Role", test_mode_role_event_configuration_path(role: role), :method => :post
         %br

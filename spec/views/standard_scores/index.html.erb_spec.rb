@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "standard_scores/index" do
-
   it "renders successfully all competitors" do
     assign(:judge, FactoryGirl.create(:judge))
     c = FactoryGirl.create(:event_competitor)
@@ -12,6 +11,6 @@ describe "standard_scores/index" do
 
     render
 
-    rendered.should match(/Robin/)
+    expect(rendered).to match(/Robin/)
   end
 end

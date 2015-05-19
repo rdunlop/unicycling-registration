@@ -1,5 +1,7 @@
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'rails' do
+  add_filter '/spec/'
+end
 require 'rubygems'
 require 'delorean'
 # This file is copied to spec/ when you run 'rails generate rspec:install'
@@ -19,7 +21,6 @@ ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
-
   config.infer_spec_type_from_file_location!
 
   # ## Mock Framework
@@ -33,7 +34,6 @@ RSpec.configure do |config|
     # config.filter_run_excluding :pdf_generation => true
   end
 
-  config.treat_symbols_as_metadata_keys_with_true_values = true
   config.around(:each, :caching) do |example|
     caching = ActionController::Base.perform_caching
     ActionController::Base.perform_caching = example.metadata[:caching]
@@ -42,9 +42,18 @@ RSpec.configure do |config|
     ActionController::Base.perform_caching = caching
   end
 
-  config.before(:each, :type => :view) {
+  config.before(:each, :type => :view) do
     assign(:config, EventConfiguration.new)
-  }
+  end
+
+  # this is necessary so that spec path builders without locales don't
+  # incorrectly specify positional arguments into the 'locale' argument
+  config.before(:each, type: :feature) do
+    default_url_options[:locale] = I18n.default_locale
+  end
+  config.before :each, type: :view do
+    controller.default_url_options[:locale] = I18n.default_locale
+  end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

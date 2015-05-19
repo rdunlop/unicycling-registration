@@ -1,0 +1,5 @@
+%h1 Translate Registration Period
+
+%ul
+  - @registration_periods.each do |registration_period|
+    %li= link_to registration_period, edit_translations_registration_period_path(registration_period)

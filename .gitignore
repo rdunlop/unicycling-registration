@@ -8,6 +8,7 @@
 
 config/database.yml
 config/secrets.yml
+config/skylight.yml
 # Ignore db dump file
 *.dump
 dump.rdb
@@ -18,6 +19,11 @@ dump.rdb
 
 # Ignore bundler config
 /.bundle
+/.capistrano
+/notes_and_stuff
+/public/uploads
+/public/public
+/config/custom_locales
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

@@ -2,7 +2,7 @@
   %table.full.grid
     %thead
       %tr
-        - if heat_times.count > 0
+        - if wave_times.count > 0
           %th Scheduled Time
         %th Heat/Lane
         %th ID
@@ -13,10 +13,11 @@
 
     %tbody
       - competitors.each do |comp|
-        - cache [@competition, comp, @config, I18n.locale] do
+        -# Why is this cached with i18n?
+        - cache_i18n [@competition, comp, @config] do
           %tr
-            - if heat_times.count > 0
-              %td= heat_times.where(heat: comp.heat).first.try(:scheduled_time)
+            - if wave_times.count > 0
+              %td= wave_times.where(wave: comp.heat).first.try(:scheduled_time)
             - la = comp.lane_assignments.first
             - if la
               %td #{la.heat} - #{la.lane}

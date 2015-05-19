@@ -1,0 +1,13 @@
+---
+de:
+  payment_mailer:
+    manual_payment_completed:
+      body: "%{event_name} - Zahlung erhalten.\r\n\r\nEine Zahlung ist eingegangen.\r\n\r\nLog
+        in, und wähle 'Meine Zahlungen' um alle Details zu sehen.\r\n\r\nZahlung #%{payment_number}
+        ist vollständig."
+      subject: Zahlung erhalten
+    payment_completed:
+      body: "%{event_name} - Zahlung erhalten.\r\n\r\nEine Zahlung über %{amount}
+        ist eingegegangen.\r\n\r\nMelde dich an und wähle 'Meine Zahlungen' um alle
+        Details zu sehen.\r\n\r\nDie Zahlung #%{payment_number} ist komplett abgeschlossen."
+      subject: Zahlung erhalten

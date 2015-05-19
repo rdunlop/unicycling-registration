@@ -1,0 +1,10 @@
+---
+de:
+  registrants:
+    registrant_events:
+      age_group: Altersklasse
+      category: Kategorie
+      confirmed_events: Bestätigte Wettbewerbe
+      event: Wettbewerb
+      events: Wettbewerbe
+      unconfirmed_events: Unbestätigte Wettbewerbe

@@ -1,15 +1,16 @@
 %fieldset.data_block
-  %legend Waiver
-  - cache [@config] do
+  %legend= t(".header")
+  - cache_i18n [@config] do
     #waiver_text_box
-      = text_to_html_linebreaks(@config.online_waiver_text).html_safe
+      = text_to_html_linebreaks(@config.waiver_text).html_safe
   %p
     - if @registrant.age.nil?
-      By signing in the box below, you are agreeing to the waiver above. If you are under 18, you must have a parent/legal guardian sign for you.
+      = t(".by_signing_you_agree_by_age")
     - else
       - if @registrant.minor?
-        By having your parent/legal guardian sign in the box below, they are agreeing to the waiver above.
+        = t(".by_having_your_parent_sign_you_agree")
+
       - else
-        By signing in the box below, you are agreeing to the waiver above.
-  = f.label :online_waiver_signature, t(".online_waiver_signature"), :class => "required"
+        = t(".by_signing_you_agree")
+  = f.label :online_waiver_signature, :class => "required"
   = f.text_field :online_waiver_signature, :size => 25

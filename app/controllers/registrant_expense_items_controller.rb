@@ -1,14 +1,10 @@
 class RegistrantExpenseItemsController < ApplicationController
-  before_filter :load_registrant
-  before_filter :load_new_registrant_expense_item, only: [:create]
+  before_action :load_registrant
+  before_action :load_new_registrant_expense_item, only: [:create]
   load_and_authorize_resource
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   before_action :set_registrant_breadcrumb
-  before_action :set_items_breadcrumb, only: [:index]
-
-  def index
-  end
 
   def create
     respond_to do |format|
@@ -57,9 +53,5 @@ class RegistrantExpenseItemsController < ApplicationController
 
   def set_registrant_breadcrumb
     add_registrant_breadcrumb(@registrant)
-  end
-
-  def set_items_breadcrumb
-    add_breadcrumb "Items", registrant_registrant_expense_items_path(@registrant)
   end
 end

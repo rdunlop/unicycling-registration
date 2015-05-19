@@ -1,0 +1,11 @@
+---
+en:
+  registrants:
+    show_single_registrant:
+      done: Done
+      edit_events: Edit Events
+      edit_items: Edit Items
+      edit_registration: Edit Registration
+      list_payments: List Payments
+      printable_pdf: Printable (Pdf)
+      registration_summary: Registration Summary

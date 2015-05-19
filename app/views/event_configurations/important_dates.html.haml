@@ -1,0 +1,11 @@
+%h1 Important Dates
+
+= simple_form_for(@event_configuration, url: update_important_dates_event_configuration_path, method: :put) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+
+  %fieldset.form__fieldset
+    = f.input :artistic_closed_date
+    = f.input :music_submission_end_date, include_blank: true
+    = f.input :event_sign_up_closed_date
+    = f.input :start_date
+    = f.button :submit

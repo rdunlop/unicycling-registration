@@ -19,7 +19,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
-#  guest                  :boolean          default(FALSE)
+#  guest                  :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   devise :confirmable
 
-  default_scope { order('email ASC') }
+  default_scope { order(:email) }
 
   has_paper_trail :meta => {:user_id => :id }
 
@@ -77,15 +77,33 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:normal_user, :music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :payment_admin, :admin, :super_admin]
+    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :competition_admin, :payment_admin, :convention_admin, :admin, :super_admin]
+  end
+
+  # List which roles each roles can add to other users
+  def self.role_transfer_permissions
+    {
+      super_admin: [*roles],
+      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj],
+      #competition_admin: [:director],
+      director: [:data_entry_volunteer, :race_official],
+      payment_admin: [:payment_admin],
+      event_planner: [:event_planner],
+      music_dj: [:music_dj]
+    }
+  end
+
+  def roles_accessible
+    roles.map(&:name).inject([]) do |array, role|
+      new_roles = self.class.role_transfer_permissions[role.to_sym]
+      array += new_roles if new_roles.present?
+      array
+    end.uniq
   end
 
   def self.role_description(role)
     case (role)
-      # when :track_official
       # when :results_printer
-    when :data_entry_volunteer
-      "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
     when :admin
       "[e.g. Scott/Connie]
       Able to create onsite payments,
@@ -98,13 +116,51 @@ class User < ActiveRecord::Base
       Can Create Award Labels
       Can adjust wheel-size settings for users.
       "
+    when :convention_admin
+      "[e.g. Olaf Scholte]
+      Able to configure the Convention settings with regards to registration settings
+      Can setup the look-and-feel, Convention Name, and Domain URL settings.
+      Can set payment costs
+      Can set the PayPal details
+      Can set events offered
+      Can set the volunteer options
+      Can reset users passwords
+      Can set up 'Authorized Laptops' for use in on-site registration
+      Can create payment_admin, event_planner, and music_dj users
+      "
+    when :competition_admin
+      "[e.g. Scott Wilton]
+      Able to create competitions, and adjust competition configuration
+      Able to create/manage Age Groups
+      Can set registrants as ineligible
+      Can create director, data_entry_volunteer, race_official
+      Can reset user passwords
+      "
+    when :director
+      "[e.g. Wendy Gryzch]
+      Able to assign registrants to competitors
+      Can create judges, volunteers
+      Can reset user passwords
+      "
+    when :data_entry_volunteer
+      "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
+    when :race_official
+      "[e.g. Mary Koehler]
+      Able to DQ at start or end-line of Race
+      Able to download heat-lists for Track E-Timers
+      "
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
     when :payment_admin
-      "[e.g. Garrett Macey] Able to view the payments that have been received, the total number of items paid."
+      "[e.g. Garrett Macey]
+      Able to view the payments that have been received
+      Able to see the total number of items paid.
+      Able to Set Registration Fees per user
+      Able to mark checks as received"
     when :event_planner
       "[e.g. Mary Koehler]
       Able to view/review the event sign_ups.
+      Able to SEARCH & MODIFY any registration.
       Able to view/send emails to all registrants"
     when :awards_admin
       "[e.g. Kirsten]
@@ -114,8 +170,10 @@ class User < ActiveRecord::Base
     when :music_dj
       "[e.g. JoAnn]
       Able to view/download any music from the Manage Music page"
-    when :normal_user
-      "[e.g. John Smith] (no special abilities)"
+    when :translator
+      "[e.g. Olaf]
+      Able to access the translation menu.
+      Enter new translations, and apply them to the site"
     else
       "No Description Available"
     end

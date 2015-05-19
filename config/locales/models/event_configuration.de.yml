@@ -1,0 +1,21 @@
+---
+de:
+  activerecord:
+    attributes:
+      event_configuration:
+        competitor_benefits: Teilnehmer Vorteile
+        dates_description: Daten Beschreibung
+        event_url: Haupt Webseite
+        location: Ort
+        long_name: Voller Name
+        noncompetitor_benefits: Begleiter Vorteile
+        offline_payment: Gib Details zur offline Zahlmethode an
+        offline_payment_description: Details der offline Zahlmethode
+        short_name: Kurzname
+        spectator_benefits: Zuschauer Vorteile
+        start_date: Erster Tag der Veranstaltung
+  helpers:
+    submit:
+      event_configuration:
+        create: Speichern und weiter
+        update: Speichern und weiter

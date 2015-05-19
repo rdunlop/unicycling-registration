@@ -3,20 +3,16 @@
 # Table name: expense_items
 #
 #  id                     :integer          not null, primary key
-#  name                   :string(255)
-#  description            :string(255)
-#  cost                   :decimal(, )
-#  export_name            :string(255)
 #  position               :integer
 #  created_at             :datetime
 #  updated_at             :datetime
 #  expense_group_id       :integer
-#  has_details            :boolean
-#  details_label          :string(255)
+#  has_details            :boolean          default(FALSE), not null
 #  maximum_available      :integer
-#  tax_percentage         :decimal(5, 3)    default(0.0)
-#  has_custom_cost        :boolean          default(FALSE)
+#  has_custom_cost        :boolean          default(FALSE), not null
 #  maximum_per_registrant :integer          default(0)
+#  cost_cents             :integer
+#  tax_cents              :integer          default(0), not null
 #
 # Indexes
 #
@@ -30,98 +26,85 @@ describe ExpenseItem do
     @item = FactoryGirl.create(:expense_item)
   end
 
-  it "must have a tax_percentage" do
-    @item.tax_percentage = nil
-    @item.valid?.should == false
+  it "must have tax" do
+    @item.tax_cents = nil
+    expect(@item.valid?).to eq(false)
   end
 
   it "can create from factory" do
-    @item.valid?.should == true
+    expect(@item.valid?).to eq(true)
   end
 
   describe "With a tax percent of 0" do
     it "has a tax of 0" do
-      @item.tax.should == 0
+      expect(@item.tax).to eq(0)
     end
 
     it "has a total_cost equal to the cost" do
-      @item.total_cost.should == @item.cost
+      expect(@item.total_cost).to eq(@item.cost)
     end
   end
 
   describe "With a tax percentage of 5%" do
     before(:each) do
       @item.cost = 100
-      @item.tax_percentage = 5
+      @item.tax = 5
     end
 
-    it "has a tax of 5$" do
-      @item.tax.should == 5
+    it "has a tax of $5" do
+      expect(@item.tax).to eq(5)
     end
 
     it "has a total_cost of 5+100" do
-      @item.total_cost.should == 105
+      expect(@item.total_cost).to eq(105)
     end
+  end
 
-    describe "with a fractional tax_percentage" do
-      before(:each) do
-        @item.tax_percentage = 14.975
-      end
-      it "rounds up the taxes to the next penny" do
-        @item.tax.should == 14.98
-      end
-      it "rounds up to the next penny even for small fractions" do
-        @item.tax_percentage = 14.001
-        @item.tax.should == 14.01
-      end
+  describe "with a tax percentage of 5%" do
+    it "has no fractional-penny results" do
+      @item.cost = 17
+      @item.tax = 0.94
+      expect(@item.total_cost).to eq(17.94)
     end
   end
 
   it "must have a name" do
     @item.name = nil
-    @item.valid?.should == false
+    expect(@item.valid?).to eq(false)
   end
   it "by default has a normal cost" do
-    @item.has_custom_cost.should == false
-  end
-  it "must have a description" do
-    @item.description = nil
-    @item.valid?.should == false
-  end
-  it "must have a position" do
-    @item.position = nil
-    @item.valid?.should == false
+    expect(@item.has_custom_cost).to eq(false)
   end
   it "must have a cost" do
-    @item.cost = nil
-    @item.valid?.should == false
+    @item.cost_cents = nil
+    expect(@item.valid?).to eq(false)
   end
   it "must have a value for the has_details field" do
     @item.has_details = nil
-    @item.valid?.should == false
+    expect(@item.valid?).to eq(false)
   end
   it "should have a default of no details" do
     item = ExpenseItem.new
-    item.has_details.should == false
+    expect(item.has_details).to eq(false)
   end
 
-  it "should default to a tax_percentage of 0" do
+  it "should default to a tax of 0" do
     item = ExpenseItem.new
-    item.tax_percentage.should == 0
+    expect(item.tax).to eq(0)
   end
 
-  it "must have a tax percentage >= 0" do
-    @item.tax_percentage = -1
-    @item.valid?.should == false
+  it "must have a tax >= 0" do
+    @item.tax = -1
+    expect(@item).to be_invalid
   end
 
   it "must have an expense group" do
     @item.expense_group = nil
-    @item.valid?.should == false
+    expect(@item.valid?).to eq(false)
   end
 
   it "should have a decent description" do
-    @item.to_s.should == @item.expense_group.to_s + " - " + @item.name
+    expect(@item.to_s).to eq(@item.expense_group.to_s + " - " + @item.name)
   end
 
   describe "when an associated payment has been created" do
@@ -131,25 +114,25 @@ describe ExpenseItem do
     end
 
     it "should not be able to destroy this item" do
-      ExpenseItem.all.count.should == 1
-      @item.destroy
-      ExpenseItem.all.count.should == 1
+      expect(ExpenseItem.all.count).to eq(1)
+      expect { @item.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
+      expect(ExpenseItem.all.count).to eq(1)
     end
 
     it "does not count this entry as a selected_item when the payment is incomplete" do
-      @payment.payment.completed.should == false
-      @item.num_selected_items.should == 0
-      @item.num_paid.should == 0
-      @item.total_amount_paid.should == 0
+      expect(@payment.payment.completed).to eq(false)
+      expect(@item.num_selected_items).to eq(0)
+      expect(@item.num_paid).to eq(0)
+      expect(@item.total_amount_paid).to eq(0)
     end
 
     it "counts this entry as a selected_item when the payment is complete" do
       pay = @payment.payment
       pay.completed = true
       pay.save!
-      @item.num_selected_items.should == 1
-      @item.num_paid.should == 1
-      @item.total_amount_paid.should == 9.99
+      expect(@item.num_selected_items).to eq(1)
+      expect(@item.num_paid).to eq(1)
+      expect(@item.total_amount_paid).to eq(9.99)
     end
   end
 
@@ -160,14 +143,26 @@ describe ExpenseItem do
 
     it "can have a first item" do
       @re = FactoryGirl.build(:expense_item, :expense_group => @rg)
-      @re.valid?.should == true
+      expect(@re.valid?).to eq(true)
     end
 
     it "cannot have a second item" do
       @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
       @rg.reload
       @re2 = FactoryGirl.build(:expense_item, :expense_group => @rg)
-      @re2.valid?.should == false
+      expect(@re2.valid?).to eq(false)
+    end
+  end
+
+  describe "with an expense_group set for registration_items" do
+    before(:each) do
+      @rg = FactoryGirl.create(:expense_group, :registration)
+    end
+
+    it "isn't user_manageable" do
+      @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+      expect(ExpenseItem.user_manageable).to eq([@item])
+      expect(ExpenseItem.all).to match_array([@re, @item])
     end
   end
 
@@ -178,14 +173,14 @@ describe ExpenseItem do
 
     it "can have a first item" do
       @re = FactoryGirl.build(:expense_item, :expense_group => @rg)
-      @re.valid?.should == true
+      expect(@re.valid?).to eq(true)
     end
 
     it "cannot have a second item" do
       @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
       @rg.reload
       @re2 = FactoryGirl.build(:expense_item, :expense_group => @rg)
-      @re2.valid?.should == false
+      expect(@re2.valid?).to eq(false)
     end
     describe "with a pre-existing registrant" do
       before(:each) do
@@ -193,19 +188,19 @@ describe ExpenseItem do
       end
 
       it "creates a registrant_expense_item" do
-        @reg.registrant_expense_items.count.should == 0
+        expect(@reg.registrant_expense_items.count).to eq(0)
         @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
         @reg.reload
-        @reg.registrant_expense_items.count.should == 1
-        @reg.registrant_expense_items.first.expense_item.should == @re
+        expect(@reg.registrant_expense_items.count).to eq(1)
+        expect(@reg.registrant_expense_items.first.expense_item).to eq(@re)
       end
       it "does not create extra entries if the expense_item is updated" do
-        @reg.registrant_expense_items.count.should == 0
+        expect(@reg.registrant_expense_items.count).to eq(0)
         @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
         @re.save
         @reg.reload
-        @reg.registrant_expense_items.count.should == 1
-        @reg.registrant_expense_items.first.expense_item.should == @re
+        expect(@reg.registrant_expense_items.count).to eq(1)
+        expect(@reg.registrant_expense_items.first.expense_item).to eq(@re)
       end
     end
   end
@@ -216,8 +211,8 @@ describe ExpenseItem do
     end
 
     it "should count the entry as a selected_item" do
-      @item.num_selected_items.should == 1
-      @item.num_unpaid.should == 1
+      expect(@item.num_selected_items).to eq(1)
+      expect(@item.num_unpaid).to eq(1)
     end
 
     describe "when the registrant is deleted" do
@@ -228,7 +223,7 @@ describe ExpenseItem do
       end
 
       it "should not count the expense_item as num_unpaid" do
-        @item.num_unpaid.should == 0
+        expect(@item.num_unpaid).to eq(0)
       end
     end
   end
@@ -243,8 +238,8 @@ describe ExpenseItem do
         @reg = FactoryGirl.create(:competitor)
       end
       it "should list the item as un_paid" do
-        @item.num_unpaid.should == 1
-        @nc_item.num_unpaid.should == 0
+        expect(@item.num_unpaid).to eq(1)
+        expect(@nc_item.num_unpaid).to eq(0)
       end
     end
     describe "with a single non_competitor" do
@@ -253,8 +248,8 @@ describe ExpenseItem do
       end
 
       it "counts the nc item only" do
-        @nc_item.num_unpaid.should == 1
-        @item.num_unpaid.should == 0
+        expect(@nc_item.num_unpaid).to eq(1)
+        expect(@item.num_unpaid).to eq(0)
       end
     end
   end

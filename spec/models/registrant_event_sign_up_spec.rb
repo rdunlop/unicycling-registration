@@ -25,16 +25,16 @@ describe RegistrantEventSignUp do
     @re = FactoryGirl.create(:registrant_event_sign_up)
   end
   it "is valid from FactoryGirl" do
-    @re.valid?.should == true
+    expect(@re.valid?).to eq(true)
   end
   it "requires an event_category" do
     @re.event_category = nil
-    @re.valid?.should == false
+    expect(@re.valid?).to eq(false)
   end
 
   it "requires a registrant" do
     @re.registrant = nil
-    @re.valid?.should == false
+    expect(@re.valid?).to eq(false)
   end
 
   describe "when an auto-competitor event exists" do
@@ -74,7 +74,7 @@ describe RegistrantEventSignUp do
     describe "When the event has multiple categories" do
       before :each do
         @event = @re.event_category.event
-        @cat2 = FactoryGirl.create(:event_category, event: @event, position: 2)
+        @cat2 = FactoryGirl.create(:event_category, event: @event)
       end
 
       it "marks the member as dropped when I change the category I signed up for" do

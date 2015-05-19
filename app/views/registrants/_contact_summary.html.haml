@@ -1,7 +1,7 @@
-- cache [I18n.locale, @config, contact_detail] do
+- cache_i18n [@config, contact_detail] do
   %div.contact_detail_summary
     %p
-      %b= t(".address")
+      %b= ContactDetail.human_attribute_name(:address)
       = contact_detail.address
     %p
       = contact_detail.city
@@ -9,26 +9,26 @@
       = contact_detail.country_residence
       = contact_detail.zip
     %p
-      %b= t(".representing_country")
+      %b= ContactDetail.human_attribute_name(:country_representing)
       = contact_detail.country
     %p
-      %b= t(".phone")
+      %b= ContactDetail.human_attribute_name(:phone)
       = contact_detail.phone
     %p
-      %b= t(".mobile")
+      %b= ContactDetail.human_attribute_name(:mobile)
       = contact_detail.mobile
     %p
-      %b= t(".email")
+      %b= ContactDetail.human_attribute_name(:email)
       = contact_detail.email
     %p
-      %b= t(".team_club")
+      %b= ContactDetail.human_attribute_name(:club)
       = contact_detail.club
     %p
-      %b= t(".team_club_contact")
+      %b= ContactDetail.human_attribute_name(:club_contact)
       = contact_detail.club_contact
     - if @config.usa
       %p
-        %b USA Member Number
+        %b= ContactDetail.human_attribute_name(:usa_member_number)
         = contact_detail.usa_member_number
     %p
       %b= t(".emergency_contact_name")
@@ -38,7 +38,7 @@
       = contact_detail.emergency_relationship
     %p
       %b= t(".emergency_contact_attending")
-      = contact_detail.emergency_attending ? "yes" : "no"
+      = contact_detail.emergency_attending ? t("yes") : t("no")
     %p
       %b= t(".emergency_contact_phone")
       = contact_detail.emergency_primary_phone

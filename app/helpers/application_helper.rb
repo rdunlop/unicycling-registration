@@ -1,7 +1,6 @@
 module ApplicationHelper
   include ActionView::Helpers::NumberHelper
   include LanguageHelper
-  include SubdomainHelper
 
   def current_ability
     @current_ability ||= Ability.new(current_user, allow_reg_modifications?)
@@ -26,26 +25,32 @@ module ApplicationHelper
   end
 
   def print_formatted_currency(cost)
-    # print in :en locale so that it is '$'
-    number_to_currency(cost, format: EventConfiguration.singleton.currency, locale: :en)
+    ec = EventConfiguration.singleton
+    number_to_currency(cost, format: ec.currency, unit: ec.currency_unit)
   end
 
   def print_item_cost_currency(cost)
     return "Free" if cost == 0
-    number_to_currency(cost, format: EventConfiguration.singleton.currency, locale: :en)
+    print_formatted_currency(cost)
   end
 
   def print_time_until_prices_increase(reg_period)
-    if (DateTime.now > reg_period.end_date)
-      t("prices_increase_soon")
-    else
-      end_date = distance_of_time_in_words(DateTime.now, reg_period.last_day) + " (" + (l (reg_period.last_day), format: :short) + ")"
-      t("prices_increase_at_date", end_date: end_date)
+    if EventConfiguration.singleton.online_payment?
+      if DateTime.now > reg_period.end_date
+        t("prices_increase_soon")
+      else
+        end_date = distance_of_time_in_words(DateTime.now, reg_period.last_day) + " (" + (l (reg_period.last_day), format: :short) + ")"
+        t("prices_increase_at_date", end_date: end_date)
+      end
     end
   end
 
-  def text_to_html_linebreaks(text)
-    start_tag = '<p>'
+  def text_to_html_linebreaks(text, add_class = nil)
+    if add_class
+      start_tag = "<p class=\"#{add_class}\">"
+    else
+      start_tag = '<p>'
+    end
     text = text.to_s.dup
     text.gsub!(/\r?\n/, "\n")                     # \r\n and \r => \n
     text.gsub!(/\n\n+/, "</p>\n\n#{start_tag}")   # 2+ newline  => paragraph
@@ -73,12 +78,21 @@ module ApplicationHelper
   end
 
   def modification_access_key(date = Date.today)
-    hash = Digest::SHA256.hexdigest(date.to_s + Rails.application.config.secret_token)
+    hash = Digest::SHA256.hexdigest(date.to_s + Rails.application.secrets.secret_key_base + Apartment::Tenant.current)
     hash.to_i(16) % 1000000
   end
 
   def skip_user_creation_confirmation?
     override_by_env = Rails.application.secrets.mail_skip_confirmation
     override_by_env || allow_reg_modifications?
+  end
+
+  def new_locale_path(new_locale, existing_path = request.original_fullpath)
+    current_locale_prefix = "/#{I18n.locale}/"
+    if existing_path.starts_with?(current_locale_prefix)
+      "/#{new_locale}/" + existing_path[current_locale_prefix.length..-1]
+    else
+      root_path(locale: new_locale)
+    end
   end
 end

@@ -1,0 +1,10 @@
+---
+en:
+  payments:
+    form_contents:
+      cost: Cost
+      details: Details
+      select_all: Select All
+      start_payment: Start Payment
+      total_cost: Total Cost
+      unselect_all: Unselect All

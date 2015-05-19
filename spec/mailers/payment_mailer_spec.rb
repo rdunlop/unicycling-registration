@@ -9,13 +9,13 @@ describe PaymentMailer do
 
     it "renders the headers" do
       Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
-      mail.subject.should eq("Ipn received")
-      mail.to.should eq(["robin+e@dunlopweb.com"])
-      mail.from.should eq(["from@example.com"])
+      expect(mail.subject).to eq("Ipn received")
+      expect(mail.to).to eq(["robin+e@dunlopweb.com"])
+      expect(mail.from).to eq(["from@example.com"])
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("something")
+      expect(mail.body.encoded).to match("something")
     end
   end
 
@@ -29,17 +29,17 @@ describe PaymentMailer do
     end
 
     it "renders the headers" do
-      @mail.subject.should eq("Payment completed")
-      @mail.to.should eq([payment.user.email])
-      @mail.bcc.should eq(["robin+p@dunlopweb.com"])
-      @mail.from.should eq(["from@example.com"])
+      expect(@mail.subject).to eq("Payment Completed")
+      expect(@mail.to).to eq([payment.user.email])
+      expect(@mail.bcc).to eq(["robin+p@dunlopweb.com"])
+      expect(@mail.from).to eq(["from@example.com"])
     end
 
     it "assigns the total_amount" do
-      @mail.body.should match(/A payment for \$10.00 USD has been received/)
+      expect(@mail.body).to match(/A payment for \$10.00 USD has been received/)
     end
     it "assigns the full-event-name to @event_name" do
-      @mail.body.should match(/NAUCC 2140 - Payment Received/)
+      expect(@mail.body).to match(/NAUCC 2140 - Payment Received/)
     end
   end
 end
