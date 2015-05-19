@@ -132,6 +132,7 @@ class User < ActiveRecord::Base
       "[e.g. Scott Wilton]
       Able to create competitions, and adjust competition configuration
       Able to create/manage Age Groups
+      Can set registrants as ineligible
       Can create director, data_entry_volunteer, race_official
       Can reset user passwords
       "

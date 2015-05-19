@@ -5,6 +5,9 @@
 %p Please create Director(s) for each event. You (or the director) can create Competition(s) for each event, which will dictate how the data gathering occurs for that event.
 
 = link_to "Global Competition Settings", edit_competition_setup_event_configuration_path
+- if can? :read, :ineligible_registrant
+  %br
+  = link_to "Manage Ineligible Registrants", ineligible_registrants_path
 
 %h2 Events by Category
 %table.alternate

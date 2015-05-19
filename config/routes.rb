@@ -407,6 +407,10 @@ Workspace::Application.routes.draw do
       post :update_row_order, on: :collection
     end
 
+    scope module: "compete" do
+      resources :ineligible_registrants, only: [:index, :create, :destroy]
+    end
+
     resources :competitions, :only => [:show, :edit, :update, :destroy] do
       member do
         get :set_sort

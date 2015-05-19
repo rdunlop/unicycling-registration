@@ -1,0 +1,36 @@
+%h1 Ineligible Registrants
+
+%p Sometimes international competitors attend and compete at National events.
+
+%p According to the rules, they are not allowed to place in the competitions.
+
+%p
+  By marking them as
+  %b Ineligible Registrants
+  They can still be processed as normal registrants, but their scores will be discarded when determining who places.
+
+%p
+  %b Example:
+  If an Ineligible Registrant places 2nd for an event, it will appear as:
+  %ul
+    %li 1st - Registrant A
+    %li 2nd - Registrant B
+    %li 2nd - Ineligible Registrant
+    %li 3rd - Registrant C
+
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Action
+  %tbody
+    - @ineligible_registrants.each do |registrant|
+      %tr
+        %td= registrant.bib_number
+        %td= registrant.to_s
+        %td= link_to "Mark Eligible", ineligible_registrant_path(registrant), method: :delete
+
+%hr
+%h2 Add New Ineligible Registrant
+= render "form"
