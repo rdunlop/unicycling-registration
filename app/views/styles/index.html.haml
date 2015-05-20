@@ -170,6 +170,10 @@ Registrant Expense Items
   %label{ for: 'start_date' } Date chooser
   = date_select :start_date, Date.today
 
+.field
+  %label{ for: 'end_date' } DatePicker Date chooser
+  %input{ class: 'date_picker', value: "2015-05-20", id: 'end_date', data: { value: "2015/05/20" } }
+
 %h2.style_head Forms (old-style markup)
 
 %fieldset.data_block

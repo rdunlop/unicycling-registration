@@ -68,7 +68,6 @@ If we want to add a new language to the list of possible translations:
 
 * app/views/layouts/_footer.html.haml - Ensure that the link to the language is appropriately tagged/translated.
 
-
 Technical Details
 -----------------
 Each time that a deployment occurs, the translation files in /config/locales will be loaded into the database.

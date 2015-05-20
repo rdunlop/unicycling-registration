@@ -8,10 +8,11 @@
   .input_details
     This allows coordination of printing registration packets, preparing competitor lists, and other last-minute minutae
 
-  = f.input :start_date
+  = f.input :start_date, as: :date_picker
   .help_bubble{ title: "Specify the Date following the previous period's 'End Date'" }
 
-  = f.input :end_date
+  = f.input :end_date, as: :date_picker
+
   .help_bubble{ title: "Specify the last date that these prices apply" }
   .input_details
     Because many people only pay at the last possible minute, the price automatically increases ~36 hours after end of the End Date. This allows last-minute registrants a reprieve.

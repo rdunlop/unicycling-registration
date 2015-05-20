@@ -302,6 +302,8 @@ GEM
       ast (>= 1.1, < 3.0)
     pdf-core (0.1.6)
     pg (0.18.1)
+    pickadate-rails (3.5.5.0)
+      railties (>= 3.1.0)
     poltergeist (1.5.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -555,6 +557,7 @@ DEPENDENCIES
   newrelic_rpm
   paper_trail (~> 3.0.1)
   pg
+  pickadate-rails
   poltergeist
   prawn-labels
   pry

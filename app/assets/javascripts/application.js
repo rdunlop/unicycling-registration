@@ -17,6 +17,9 @@
 //= require jquery.nested-fields
 //= require jquery.are-you-sure
 //= require tinymce
+//= require pickadate/legacy
+//= require pickadate/picker
+//= require pickadate/picker.date
 //= require_tree .
 
 $(document).ready(function() {
