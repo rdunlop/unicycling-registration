@@ -2,7 +2,7 @@ require 'csv'
 require 'upload'
 class CompetitionsController < ApplicationController
   include EventsHelper
-  layout "competition_management", except: :new
+  layout "competition_management", except: [:new, :create]
 
   before_action :authenticate_user!
   before_action :load_new_competition, :only => [:create]
@@ -37,9 +37,10 @@ class CompetitionsController < ApplicationController
   def create
     if @competition.save
       flash[:notice] = "Competition created successfully"
+      redirect_to competition_setup_path
+    else
+      render :new
     end
-
-    respond_with(@competition, location: competition_setup_path)
   end
 
   # PUT /competitions/1
