@@ -6,10 +6,6 @@ class JudgesController < ApplicationController
 
   respond_to :html
 
-  def load_new_judge
-    @judge = @competition.judges.new(judge_params)
-  end
-
   # POST /competitions/#/judges
   # POST /competitions/#/judges.json
   def create
@@ -78,6 +74,10 @@ class JudgesController < ApplicationController
   end
 
   private
+
+  def load_new_judge
+    @judge = @competition.judges.new(judge_params)
+  end
 
   def judge_params
     params.require(:judge).permit(:judge_type_id, :user_id, :standard_execution_scores_attributes, :standard_difficulty_scores_attributes)

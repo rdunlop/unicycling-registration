@@ -6,18 +6,6 @@ class ExternalResultsController < ApplicationController
 
   before_action :set_breadcrumbs, only: :index
 
-  def set_breadcrumbs
-    add_to_competition_breadcrumb(@competition)
-  end
-
-  def load_competition
-    @competition = Competition.find(params[:competition_id])
-  end
-
-  def load_new_external_result
-    @external_result = @competition.external_results.new(external_result_params)
-  end
-
   # GET /competitions/#/external_results
   def index
     add_breadcrumb "Points Results"
@@ -78,6 +66,18 @@ class ExternalResultsController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_to_competition_breadcrumb(@competition)
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_new_external_result
+    @external_result = @competition.external_results.new(external_result_params)
+  end
 
   def external_result_params
     params.require(:external_result).permit(:competitor_id, :details, :points)
