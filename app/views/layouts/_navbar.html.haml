@@ -62,6 +62,8 @@
           %li= link_to  'Import Data', new_import_path
         - if can?(:manage, :usa_membership) && @config.usa_membership_config?
           %li= link_to  'USA Membership Management', usa_memberships_path
+        - if can?(:read, :research)
+          %li= link_to  'Multi-Tenant Research', research_competitions_path
         - if can?(:access, :rails_admin)
           %li= link_to  'Modification History', rails_admin_path
         - if @config.standard_skill

@@ -100,6 +100,13 @@ Workspace::Application.routes.draw do
 
     #### For Registration creation purposes
     ###
+    namespace "research" do
+      resources :competitions, only: [:index] do
+        collection do
+          get :competitions
+        end
+      end
+    end
 
     resources :expense_groups, except: [:show], controller: "convention_setup/expense_groups" do
       post :update_row_order, on: :collection

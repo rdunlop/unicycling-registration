@@ -1,0 +1,34 @@
+%h2 Comparison of Competitors from each tenant.
+
+%table.sortable
+  %thead
+    %tr
+      %th Tenant
+      %th Competition ID
+      %th Competition Name
+      %th Scoring Class
+      %th Has Experts
+      %th Start Data Type
+      %th End Data Type
+      %th Uses Lane Assignments
+      %th Num Member Competitors
+      %th Penalty Seconds
+      %th Combined Competition ID
+      %th Age Group Type ID
+  %tbody
+    - Tenant.all.each do |tenant|
+      - Apartment::Tenant.switch tenant.subdomain
+      - Competition.all.each do |competition|
+        %tr
+          %td= tenant.subdomain
+          %td= competition.id
+          %td= competition.name
+          %td= competition.scoring_class
+          %td= competition.has_experts
+          %td= competition.start_data_type
+          %td= competition.end_data_type
+          %td= competition.uses_lane_assignments
+          %td= competition.num_members_per_competitor
+          %td= competition.penalty_seconds
+          %td= competition.combined_competition_id
+          %td= competition.age_group_type_id
