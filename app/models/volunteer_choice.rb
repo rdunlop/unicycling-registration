@@ -3,8 +3,8 @@
 # Table name: volunteer_choices
 #
 #  id                       :integer          not null, primary key
-#  registrant_id            :integer
-#  volunteer_opportunity_id :integer
+#  registrant_id            :integer          not null
+#  volunteer_opportunity_id :integer          not null
 #  created_at               :datetime
 #  updated_at               :datetime
 #
@@ -18,6 +18,9 @@
 class VolunteerChoice < ActiveRecord::Base
   belongs_to :volunteer_opportunity
   belongs_to :registrant, inverse_of: :volunteer_choices
+
+  validates :registrant_id, :volunteer_opportunity_id, presence: true
+  validates :registrant_id, uniqueness: { scope: [:volunteer_opportunity_id] }
 
   after_create :send_email_to_admins
 

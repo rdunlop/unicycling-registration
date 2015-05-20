@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517205930) do
+ActiveRecord::Schema.define(version: 20150520011530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -966,8 +966,8 @@ ActiveRecord::Schema.define(version: 20150517205930) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   create_table "volunteer_choices", force: :cascade do |t|
-    t.integer  "registrant_id"
-    t.integer  "volunteer_opportunity_id"
+    t.integer  "registrant_id",            null: false
+    t.integer  "volunteer_opportunity_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -977,7 +977,7 @@ ActiveRecord::Schema.define(version: 20150517205930) do
   add_index "volunteer_choices", ["volunteer_opportunity_id"], name: "index_volunteer_choices_on_volunteer_opportunity_id", using: :btree
 
   create_table "volunteer_opportunities", force: :cascade do |t|
-    t.string   "description",   limit: 255
+    t.string   "description",   limit: 255, null: false
     t.integer  "position"
     t.text     "inform_emails"
     t.datetime "created_at"

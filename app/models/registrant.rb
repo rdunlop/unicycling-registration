@@ -401,19 +401,11 @@ class Registrant < ActiveRecord::Base
     self.first_name + " " + self.last_name
   end
 
-  def user_email
-    user.email
+  def email
+    contact_detail.try(:email).try(:presence) || user.email
   end
 
   delegate :country_code, :country, :state, :club, to: :contact_detail, allow_nil: true
-
-  def as_json(options={})
-    options = {
-      :only => [:first_name, :last_name, :gender, :birthday, :bib_number],
-      :methods => [:user_email]
-    }
-    super(options)
-  end
 
   def to_s
     name + (deleted ? " (deleted)" : "")

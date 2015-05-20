@@ -12,8 +12,8 @@ end
 # Table name: volunteer_choices
 #
 #  id                       :integer          not null, primary key
-#  registrant_id            :integer
-#  volunteer_opportunity_id :integer
+#  registrant_id            :integer          not null
+#  volunteer_opportunity_id :integer          not null
 #  created_at               :datetime
 #  updated_at               :datetime
 #
