@@ -187,7 +187,9 @@ Workspace::Application.routes.draw do
       member do
         get :sign_ups
       end
-      resources :competitions, :only => [:new, :create]
+      scope module: "competition_setup" do
+        resources :competitions, :only => [:new, :create]
+      end
     end
     resources :event_categories, only: [] do
       member do
@@ -418,7 +420,10 @@ Workspace::Application.routes.draw do
       resources :ineligible_registrants, only: [:index, :create, :destroy]
     end
 
-    resources :competitions, :only => [:show, :edit, :update, :destroy] do
+    scope module: "competition_setup" do
+      resources :competitions, :only => [:edit, :update, :destroy]
+    end
+    resources :competitions, :only => [:show] do
       member do
         get :set_sort
         put :toggle_final_sort
