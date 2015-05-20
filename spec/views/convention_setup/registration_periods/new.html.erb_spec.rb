@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "registration_periods/new" do
+describe "convention_setup/registration_periods/new" do
   before(:each) do
     @registration_period = FactoryGirl.build(:registration_period)
     @registration_period.build_competitor_expense_item

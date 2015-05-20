@@ -169,7 +169,9 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :registration_periods, except: :show
+    scope module: "convention_setup" do
+      resources :registration_periods, except: :show
+    end
 
     resources :combined_competitions, except: :show, controller: "compete/combined_competitions" do
       resources :combined_competition_entries, except: [:show], controller: "compete/combined_competition_entries"

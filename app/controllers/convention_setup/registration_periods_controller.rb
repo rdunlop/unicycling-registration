@@ -1,4 +1,4 @@
-class RegistrationPeriodsController < ConventionSetupController
+class ConventionSetup::RegistrationPeriodsController < ConventionSetupController
   before_action :authenticate_user!
   load_and_authorize_resource
 

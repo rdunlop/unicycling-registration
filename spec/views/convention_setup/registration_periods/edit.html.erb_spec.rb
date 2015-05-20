@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "registration_periods/edit" do
+describe "convention_setup/registration_periods/edit" do
   before(:each) do
     @registration_period = FactoryGirl.create(:registration_period)
   end

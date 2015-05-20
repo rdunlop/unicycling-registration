@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RegistrationPeriodsController do
+describe ConventionSetup::RegistrationPeriodsController do
   before(:each) do
     user = FactoryGirl.create(:super_admin_user)
     sign_in user
