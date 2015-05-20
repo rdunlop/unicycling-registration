@@ -7,6 +7,7 @@ New Rules changes:
 - Create a "Recorder" role for various events
 -
 
+- add ability for AwardAdmin to modify all awards at once (for bulk updates, bulk-deletions)
 - Make EventConfiguration "submit" action say "Save & Continue"
  - Make it always actually continue
 - Add markings which would indicate that we've finished a configuration step.

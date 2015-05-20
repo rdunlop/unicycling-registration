@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
     {
       super_admin: [*roles],
       convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj],
-      #competition_admin: [:director],
+      competition_admin: [:awards_admin],
       director: [:data_entry_volunteer, :race_official],
       payment_admin: [:payment_admin],
       event_planner: [:event_planner],
