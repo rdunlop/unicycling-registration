@@ -3,12 +3,6 @@ class StreetScoresController < ApplicationController
   before_action :load_competition, :except => [:destroy]
   load_and_authorize_resource :score
 
-  def load_competition
-    @judge = Judge.find(params[:judge_id])
-    @competition = @judge.competition
-    @street_scores = @judge.scores.sort {|a, b| b.val_1 <=> a.val_1 }
-  end
-
   def index
     @score = @judge.scores.new
     @competitors = @competition.competitors.reorder(:position)
@@ -45,4 +39,13 @@ class StreetScoresController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def load_competition
+    @judge = Judge.find(params[:judge_id])
+    @competition = @judge.competition
+    @street_scores = @judge.scores.sort {|a, b| b.val_1 <=> a.val_1 }
+  end
+
 end

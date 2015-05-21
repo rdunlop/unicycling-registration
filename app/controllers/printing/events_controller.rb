@@ -4,10 +4,6 @@ class Printing::EventsController < ApplicationController
 
   before_action :load_event
 
-  def load_event
-    @event = Event.find(params[:id])
-  end
-
   def results
     @competitions = @event.competitions
 
@@ -21,5 +17,12 @@ class Printing::EventsController < ApplicationController
       format.pdf { render_common_pdf(name, "Portrait", attachment) }
     end
   end
+
+  private
+
+  def load_event
+    @event = Event.find(params[:id])
+  end
+
 end
 

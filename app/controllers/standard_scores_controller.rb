@@ -4,14 +4,6 @@ class StandardScoresController < ApplicationController
   before_action :find_judge
   before_action :find_competitor, :except => [:index]
 
-  def find_judge
-    @judge = Judge.find(params[:judge_id])
-  end
-
-  def find_competitor
-    @competitor = Competitor.find(params[:competitor_id])
-  end
-
   # GET /judges/29/standard_scores
   def index
     @competitors = @judge.competitors
@@ -61,4 +53,15 @@ class StandardScoresController < ApplicationController
       end
     end
   end
+
+  private
+
+  def find_judge
+    @judge = Judge.find(params[:judge_id])
+  end
+
+  def find_competitor
+    @competitor = Competitor.find(params[:competitor_id])
+  end
+
 end

@@ -5,14 +5,6 @@ class StandardSkillRoutinesController < ApplicationController
   load_and_authorize_resource
   before_action :load_registrant, :only => [:create]
 
-  def load_new_standard_skill_routine
-    @routine = StandardSkillRoutine.new
-  end
-
-  def load_registrant
-    @registrant = Registrant.find(params[:registrant_id])
-  end
-
   # POST /registrants/:id/standard_skill_routines/
   def create
     authorize! :read, @registrant
@@ -56,4 +48,15 @@ class StandardSkillRoutinesController < ApplicationController
               :type => 'text/csv; charset=utf-8; header=present',
               :filename => filename)
   end
+
+  private
+
+  def load_new_standard_skill_routine
+    @routine = StandardSkillRoutine.new
+  end
+
+  def load_registrant
+    @registrant = Registrant.find(params[:registrant_id])
+  end
+
 end

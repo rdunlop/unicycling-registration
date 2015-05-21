@@ -8,11 +8,6 @@ class SongsController < ApplicationController
 
   before_action :set_breadcrumbs, :except => [:my_songs, :create_guest_song]
 
-  def load_songs
-    @registrant ||= @song.registrant
-    @songs = @registrant.songs
-  end
-
   # GET /registrants/1/songs
   def index
     add_breadcrumb "Songs"
@@ -92,6 +87,11 @@ class SongsController < ApplicationController
   end
 
   private
+
+  def load_songs
+    @registrant ||= @song.registrant
+    @songs = @registrant.songs
+  end
 
   # Only allow a trusted parameter "white list" through.
   def song_params

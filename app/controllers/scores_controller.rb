@@ -7,10 +7,6 @@ class ScoresController < ApplicationController
 
   before_action :set_judge_breadcrumb
 
-  def find_competitor
-    @competitor = Competitor.find_by_id(params[:competitor_id])
-  end
-
   # GET /judges/1/scores
   def index
     respond_to do |format|
@@ -47,6 +43,10 @@ class ScoresController < ApplicationController
   end
 
   private
+
+  def find_competitor
+    @competitor = Competitor.find_by_id(params[:competitor_id])
+  end
 
   def score_params
     params.require(:score).permit(:val_1, :val_2, :val_3, :val_4, :notes)

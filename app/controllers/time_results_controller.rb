@@ -5,10 +5,6 @@ class TimeResultsController < ApplicationController
 
   before_action :set_breadcrumbs, only: :index
 
-  def set_breadcrumbs
-    add_to_competition_breadcrumb(@competition)
-  end
-
   # XXX look into https://github.com/railscasts/396-importing-csv-and-excel/blob/master/store-with-validations/app/models/product_import.rb ??
 
   # GET competitions/1/time_results
@@ -71,6 +67,10 @@ class TimeResultsController < ApplicationController
   end
 
   private
+
+  def set_breadcrumbs
+    add_to_competition_breadcrumb(@competition)
+  end
 
   def time_result_params
     params.require(:time_result).permit(:number_of_laps, :comments, :comments_by, :status, :minutes, :seconds, :thousands, :competitor_id)
