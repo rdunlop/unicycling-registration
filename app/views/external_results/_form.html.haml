@@ -1,0 +1,19 @@
+= form_for(@external_result.new_record? ? [@competition, @external_result] : @external_result) do |f|
+  - if @external_result.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@external_result.errors.count, "error")
+        prohibited this external_result from being saved:
+      %ul
+        - @external_result.errors.full_messages.each do |msg|
+          %li= msg
+  %table
+    %tr
+      %th= f.label :competitor_id
+      %th= f.label :points
+      %th= f.label :details
+    %tr
+      %td= competitor_select_box(f, @competition)
+      %td= f.number_field :points, {min: 0, :step => 0.001 }
+      %td= f.text_field :details
+      %td= f.submit

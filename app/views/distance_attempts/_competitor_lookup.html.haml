@@ -1,0 +1,6 @@
+%div
+  %h2 Competitor Lookup
+  = form_tag(judge_distance_attempts_path(@judge), :method => "get") do
+    = label_tag(:external_id, 'ID')
+    = text_field_tag(:external_id, nil, {:autofocus => true, :required => true, :autocomplete => 'off'})
+    = submit_tag('Lookup')

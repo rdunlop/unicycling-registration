@@ -1,5 +1,0 @@
-<% if registrant.standard_skill_routine.nil? %>
-  <%= link_to "Create Standard Skill Routine for #{registrant}", registrant_standard_skill_routines_path(registrant), :method => :post %>
-<% else %>
-  <%= link_to "View Standard Skill Routine for #{registrant}", standard_skill_routine_path(registrant.standard_skill_routine) %>
-<% end %>

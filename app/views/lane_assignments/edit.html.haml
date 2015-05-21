@@ -1,0 +1,5 @@
+%h1 Editing lane_assignment
+= @lane_assignment.competition
+= render partial: 'form', locals: { remote: false }
+= link_to 'Back', competition_lane_assignments_path(@lane_assignment.competition)
+|

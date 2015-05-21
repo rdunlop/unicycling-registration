@@ -1,8 +1,0 @@
-<% if !competitor.new_record? %>
-<tr>
-    <td><%= competitor.position %></td>
-    <td><%= competitor.bib_number %></td>
-    <td><%= competitor.name %></td>
-    <td><%= link_to 'score', new_judge_competitor_standard_score_path(@judge, competitor) %> </td>
-</tr>
-<% end %>

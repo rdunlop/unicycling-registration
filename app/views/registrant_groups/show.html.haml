@@ -1,0 +1,15 @@
+%p
+  %b Name:
+  = @registrant_group.name
+%p
+  %b Contact person:
+  = @registrant_group.contact_person
+%p
+  %b Members:
+  %br/
+  - @registrant_group.registrant_group_members.each do |member|
+    = member.registrant
+    %br/
+= link_to 'Edit', edit_registrant_group_path(@registrant_group)
+|
+\#{link_to 'Back', registrant_groups_path}

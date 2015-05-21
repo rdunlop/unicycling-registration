@@ -1,8 +1,0 @@
-<div class="race_recording">
-  <h1><%= @event %> Results</h1>
-  <hr />
-  <% @competitions.each do |competition| %>
-    <% @competition = competition %>
-    <%= render partial: "/printing/competitions/results" %>
-  <% end %>
-</div>

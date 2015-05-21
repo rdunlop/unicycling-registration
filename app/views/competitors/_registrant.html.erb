@@ -1,7 +1,0 @@
-<% fields_for :registrants do |reg| %>
-<div class="field">
-  <%= reg.label :registrant_id %><br />
-  <%= reg.select(:registrant_id, Registrant.select_box_options) %>
-</div>
-<% end %>
-

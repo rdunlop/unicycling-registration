@@ -1,0 +1,6 @@
+%h1 Editing import_result
+- @user = @import_result.user
+- @competition = @import_result.competition
+%p#notice
+= render 'form'
+= link_to 'Back', :back

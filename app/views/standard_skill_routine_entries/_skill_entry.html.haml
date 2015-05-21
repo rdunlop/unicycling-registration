@@ -1,0 +1,10 @@
+- return if skill_entry.new_record?
+%tr.skill_entry{:id => "skill" + skill_entry.id.to_s}
+  %td= skill_entry.position
+  %td= skill_entry.standard_skill_entry.number
+  %td= skill_entry.standard_skill_entry.letter
+  %td= skill_entry.standard_skill_entry.points
+  %td= skill_entry.standard_skill_entry.description
+  %td
+    - if can? :destroy, skill_entry
+      = link_to 'destroy', [@standard_skill_routine, skill_entry], remote: true, data: { confirm: 'Are you sure?' }, method: :delete

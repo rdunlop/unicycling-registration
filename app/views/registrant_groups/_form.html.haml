@@ -1,0 +1,46 @@
+%h2 All Registrants
+= form_for(setup_registrant_group(@registrant_group)) do |f|
+  - if @registrant_group.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@registrant_group.errors.count, "error")
+        prohibited this registrant_group from being saved:
+      %ul
+        - @registrant_group.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :name
+    %br
+    = f.text_field :name
+  .field
+    = f.label :registrant_id, "Contact Person"
+    %br
+    = f.select :registrant_id, Registrant.select_box_options, :include_blank => true
+  %table.sortable
+    %thead
+      %tr
+        %th
+        %th ID
+        %th First Name
+        %th Last Name
+        %th Club
+        %th Address
+        %th City
+        %th Registrant Group(s)
+    %tbody
+      = f.fields_for :registrant_group_members do |ff|
+        %tr
+          %td
+            = ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0','1'
+            = ff.hidden_field :registrant_id
+            = ff.hidden_field :id
+          %td= ff.object.registrant.bib_number
+          %td= ff.object.registrant.first_name
+          %td= ff.object.registrant.last_name
+          %td= ff.object.registrant.contact_detail.club
+          %td= ff.object.registrant.contact_detail.address
+          %td= ff.object.registrant.contact_detail.city
+          %td= ff.object.registrant.registrant_groups.to_a.join(" ")
+  %br
+  .actions
+    = f.submit
