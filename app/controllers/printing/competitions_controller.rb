@@ -32,7 +32,6 @@ class Printing::CompetitionsController < ApplicationController
     end
   end
 
-
   def single_attempt_recording
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
 

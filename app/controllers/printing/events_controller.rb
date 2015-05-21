@@ -23,6 +23,5 @@ class Printing::EventsController < ApplicationController
   def load_event
     @event = Event.find(params[:id])
   end
-
 end
 

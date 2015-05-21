@@ -182,5 +182,4 @@ class CompetitionsController < ApplicationController
   def load_competition
     @competition = Competition.find(params[:id])
   end
-
 end

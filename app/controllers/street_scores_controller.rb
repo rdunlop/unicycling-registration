@@ -47,5 +47,4 @@ class StreetScoresController < ApplicationController
     @competition = @judge.competition
     @street_scores = @judge.scores.sort {|a, b| b.val_1 <=> a.val_1 }
   end
-
 end

@@ -222,7 +222,7 @@ class Ability
       can [:crud], AgeGroupType
       can :update_row_order, AgeGroupEntry
       can [:crud], Competition
-      #can [:read, :set_role, :set_password], :permission
+      # can [:read, :set_role, :set_password], :permission
     end
 
     # #################################################

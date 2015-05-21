@@ -63,5 +63,4 @@ class StandardScoresController < ApplicationController
   def find_competitor
     @competitor = Competitor.find(params[:competitor_id])
   end
-
 end

@@ -58,5 +58,4 @@ class StandardSkillRoutinesController < ApplicationController
   def load_registrant
     @registrant = Registrant.find(params[:registrant_id])
   end
-
 end
