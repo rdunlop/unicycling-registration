@@ -1,5 +1,5 @@
 %h1 Registrant Groups
-%hr/
+%hr
 - @registrant_groups.each do |rg|
   %h2
     = rg.name
@@ -14,4 +14,4 @@
         %tr
           %td= registrant_group_member.registrant.bib_number
           %td= registrant_group_member.registrant
-  %hr/
+  %hr

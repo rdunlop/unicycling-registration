@@ -23,6 +23,6 @@
           %td= da.competitor.age_group_entry_description
           %td= da.competitor.place
           %td= da.competitor.overall_place_formatted
-  %hr/
+  %hr
   - if can? :export_scores, @competition
     = link_to 'Download Scores CSV', export_scores_competition_path(@competition)
