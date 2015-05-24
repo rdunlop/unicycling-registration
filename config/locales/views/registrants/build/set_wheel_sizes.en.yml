@@ -1,8 +1,0 @@
----
-en:
-  registrants:
-    build:
-      set_wheel_sizes:
-        default_wheel_size: Default Wheel Size
-        default_wheel_size_description: Used to choose Age Groups when applicable.
-          (track, Standard-class events)

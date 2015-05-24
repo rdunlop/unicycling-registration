@@ -4,7 +4,7 @@ en:
     summary:
       age: Age
       birthday: Birthday
-      default_wheel_size: Default Wheel Size
+      default_wheel_size: Default Track Racing Wheel Size
       gender: Gender
       name: Name
       registration_summary: Registration Summary

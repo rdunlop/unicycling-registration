@@ -5,6 +5,7 @@ en:
       registrant:
         bib_number: ID
         online_waiver_signature: Signature
+        wheel_size_id: Default Track Racing Wheel Size
     models:
       registrant:
         one: Registrant

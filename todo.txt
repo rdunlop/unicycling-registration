@@ -527,9 +527,7 @@ Other:
 - Make the Pay Now a button-like-thing.. For a Sinlge Registrant, Make the Pay Now part of the regsitration.
 - Add the "Heat/Lane" to the results listing page (and some reports too?)
 - Combine multiple expenses onto one line for ease of seeing.
-- Be able to give other users the permissions that THEY have themselves. (Kathleen gives Scott permissions...)
 - Replace magic strings with class constants
-- Make a single expense_group for registration_fees, and prevent using it elsewhere.
 - UTF8 encoding of the list elements sent to Paypal (to allow for french characters) Search "Notification of payment received" in e-mail
 - replace has_details/print_details with common helper function?
  - Display the "details" for payment entries of paid entries on various places where it is displayed

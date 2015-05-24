@@ -79,6 +79,9 @@ de:
       volunteer_opportunity:
         inform_emails: Wenn jemand sich für diese Helfer Position anmeldet wird eine
           E-Mail an diese E-Mail Adresse gesendet
+      registrant:
+        wheel_size_id: Verwendet um Altersklassen zu wählen soweit
+          zutreffend. (Rennbahn, Standard Wettkämpfe)
     labels:
       coupon_code:
         inform_emails: E-Mail um über jeden Coupon Gebrauch zu informieren
