@@ -26,7 +26,7 @@
     %p
       %b= ContactDetail.human_attribute_name(:club_contact)
       = contact_detail.club_contact
-    - if @config.usa
+    - if @config.usa?
       %p
         %b= ContactDetail.human_attribute_name(:usa_member_number)
         = contact_detail.usa_member_number
@@ -38,7 +38,7 @@
       = contact_detail.emergency_relationship
     %p
       %b= t(".emergency_contact_attending")
-      = contact_detail.emergency_attending ? t("yes") : t("no")
+      = contact_detail.emergency_attending? ? t("yes") : t("no")
     %p
       %b= t(".emergency_contact_phone")
       = contact_detail.emergency_primary_phone

@@ -58,11 +58,11 @@ class Ability
     # Freestyle
     can :create, Score
     can [:read, :update, :destroy], Score do |score|
-      score.try(:user) == user && !score.competitor.competition.locked
+      score.try(:user) == user && !score.competitor.competition.locked?
     end
 
     can [:create_scores], Competition do |competition|
-      !competition.locked
+      !competition.locked?
     end
 
     # printing forms:
@@ -70,12 +70,12 @@ class Ability
 
     # data entry
     can :manage, ImportResult do |import_result|
-      !import_result.competition.locked
+      !import_result.competition.locked?
     end
     cannot [:approve, :approve_heat], ImportResult
 
     can :manage, TwoAttemptEntry do |two_attempt_entry|
-      !two_attempt_entry.competition.locked
+      !two_attempt_entry.competition.locked?
     end
 
     # High/Long Data Entry
@@ -84,7 +84,7 @@ class Ability
   end
 
   def director_and_unlocked(user, competition)
-    !competition.locked && user.has_role?(:director, competition.try(:event))
+    !competition.locked? && user.has_role?(:director, competition.try(:event))
   end
 
   def set_director_abilities(user)
@@ -249,7 +249,7 @@ class Ability
       can :manage, RegistrantGroup
       can :manage, Judge
       can [:set_password], :permission
-      if config.usa_membership_config
+      if config.usa_membership_config?
         can :manage, :usa_membership
       end
       can :read, VolunteerOpportunity
@@ -361,7 +361,7 @@ class Ability
 
       # can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
-        (!rei.system_managed) && (user.editable_registrants.include?(rei.registrant))
+        (!rei.system_managed?) && (user.editable_registrants.include?(rei.registrant))
       end
       can :create, Registrant # necessary because we set the user in the controller?
     end

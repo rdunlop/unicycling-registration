@@ -29,9 +29,9 @@ class AdditionalRegistrantAccess < ActiveRecord::Base
   scope :need_reply, -> { where(accepted_readwrite: false, accepted_readonly: false, declined: false) }
 
   def status
-    return "Declined" if declined
-    return "Accepted" if accepted_readonly
-    return "Full Access" if accepted_readwrite
+    return "Declined" if declined?
+    return "Accepted" if accepted_readonly?
+    return "Full Access" if accepted_readwrite?
     "New"
   end
 end

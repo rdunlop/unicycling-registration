@@ -18,7 +18,7 @@
       %td= @num_male_noncompetitors
       %td= @num_female_noncompetitors
       %td= @num_noncompetitors
-    - if @config.spectators
+    - if @config.spectators?
       %tr
         %th Spectators
         %td n/a

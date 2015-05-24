@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520011530) do
+ActiveRecord::Schema.define(version: 20150524152950) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -175,7 +176,7 @@ ActiveRecord::Schema.define(version: 20150520011530) do
   create_table "competitions", force: :cascade do |t|
     t.integer  "event_id"
     t.string   "name",                          limit: 255
-    t.boolean  "locked"
+    t.boolean  "locked",                                    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "age_group_type_id"
@@ -232,7 +233,7 @@ ActiveRecord::Schema.define(version: 20150520011530) do
     t.string   "usa_member_number",               limit: 255
     t.string   "emergency_name",                  limit: 255
     t.string   "emergency_relationship",          limit: 255
-    t.boolean  "emergency_attending"
+    t.boolean  "emergency_attending",                         default: false, null: false
     t.string   "emergency_primary_phone",         limit: 255
     t.string   "emergency_other_phone",           limit: 255
     t.string   "responsible_adult_name",          limit: 255
@@ -623,7 +624,7 @@ ActiveRecord::Schema.define(version: 20150520011530) do
 
   create_table "registrant_event_sign_ups", force: :cascade do |t|
     t.integer  "registrant_id"
-    t.boolean  "signed_up"
+    t.boolean  "signed_up",         default: false, null: false
     t.integer  "event_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -829,7 +830,7 @@ ActiveRecord::Schema.define(version: 20150520011530) do
     t.boolean  "primary_domain",             default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "verified",                   default: false
+    t.boolean  "verified",                   default: false, null: false
   end
 
   add_index "tenant_aliases", ["tenant_id", "primary_domain"], name: "index_tenant_aliases_on_tenant_id_and_primary_domain", using: :btree
@@ -1004,4 +1005,5 @@ ActiveRecord::Schema.define(version: 20150520011530) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
 end

@@ -8,7 +8,7 @@
 #  primary_domain :boolean          default(FALSE), not null
 #  created_at     :datetime
 #  updated_at     :datetime
-#  verified       :boolean          default(FALSE)
+#  verified       :boolean          default(FALSE), not null
 #
 
 require 'spec_helper'

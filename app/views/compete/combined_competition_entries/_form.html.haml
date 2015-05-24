@@ -18,7 +18,7 @@
     = f.number_field :base_points, {min: 0}
   - for place in 1..10
     .field
-      - if@combined_competition.percentage_based_calculations
+      - if @combined_competition.percentage_based_calculations?
         = f.label "points_#{place}".to_sym, "Bonus Percentage #{place}"
       - else
         = f.label "points_#{place}".to_sym

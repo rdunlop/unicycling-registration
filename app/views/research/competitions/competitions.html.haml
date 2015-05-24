@@ -24,10 +24,10 @@
           %td= competition.id
           %td= competition.name
           %td= competition.scoring_class
-          %td= competition.has_experts
+          %td= competition.has_experts?
           %td= competition.start_data_type
           %td= competition.end_data_type
-          %td= competition.uses_lane_assignments
+          %td= competition.uses_lane_assignments?
           %td= competition.num_members_per_competitor
           %td= competition.penalty_seconds
           %td= competition.combined_competition_id

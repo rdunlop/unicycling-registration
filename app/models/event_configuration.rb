@@ -74,7 +74,7 @@ class EventConfiguration < ActiveRecord::Base
   belongs_to :usa_individual_expense_item, :class_name => "ExpenseItem"
   belongs_to :usa_family_expense_item, :class_name => "ExpenseItem"
 
-  validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa_membership_config"
+  validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: :usa_membership_config?
 
   validates :usa, :iuf, :inclusion => { :in => [true, false] }
   validates :test_mode, :inclusion => { :in => [true, false] }

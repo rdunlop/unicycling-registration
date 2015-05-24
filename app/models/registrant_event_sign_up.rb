@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  registrant_id     :integer
-#  signed_up         :boolean
+#  signed_up         :boolean          default(FALSE), not null
 #  event_category_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime
@@ -42,7 +42,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
   def auto_create_competitor
     if signed_up
       event_category.competitions_being_fed(registrant).each do |competition|
-        next unless competition.automatic_competitor_creation
+        next unless competition.automatic_competitor_creation?
         next if registrant.competitions.include?(competition)
         competition.create_competitors_from_registrants([registrant], nil)
       end

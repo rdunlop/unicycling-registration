@@ -1,7 +1,7 @@
 - cache [attempt, attempt.competitor] do
   %tr
     %td= attempt.distance
-    %td= attempt.fault ? "Fault" : ""
+    %td= attempt.fault? ? "Fault" : ""
     %td= attempt.competitor.bib_number
     %td= attempt.competitor
     %td= attempt.competitor.gender

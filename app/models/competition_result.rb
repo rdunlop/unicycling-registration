@@ -37,7 +37,7 @@ class CompetitionResult < ActiveRecord::Base
   end
 
   def to_s
-    if system_managed
+    if system_managed?
       "Results"
     else
       name.presence || "Additional Results"

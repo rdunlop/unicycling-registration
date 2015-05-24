@@ -1,4 +1,4 @@
-- if user_signed_in? && @config.test_mode
+- if user_signed_in? && @config.test_mode?
   .test_mode
     %a#test_mode_remover.banner_remover{"data-banner-class" => "test_mode", :href => "#", :title => "Remove test banner"} [x]
     %h2 Test Mode Enabled

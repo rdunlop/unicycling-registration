@@ -5,7 +5,7 @@
 #  id                            :integer          not null, primary key
 #  event_id                      :integer
 #  name                          :string(255)
-#  locked                        :boolean
+#  locked                        :boolean          default(FALSE), not null
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  age_group_type_id             :integer

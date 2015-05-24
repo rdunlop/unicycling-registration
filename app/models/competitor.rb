@@ -97,7 +97,7 @@ class Competitor < ActiveRecord::Base
     end
 
     members.each do |member|
-      if member.dropped_from_registration
+      if member.dropped_from_registration?
         error += "Registrant has dropped this event from their registration"
       elsif !competition_registrants.include?(member.registrant)
         error += "Registrant #{member} is not in the default list for this competition"
@@ -308,7 +308,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def heat
-    if competition.uses_lane_assignments
+    if competition.uses_lane_assignments?
       lane_assignments.first.try(:heat)
     else
       read_attribute(:wave)
@@ -383,7 +383,7 @@ class Competitor < ActiveRecord::Base
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{DistanceAttempt.cache_key_for_set(id)}/double_fault") do
       df = false
       if distance_attempts.count > 1
-        if distance_attempts[0].fault == true && distance_attempts[1].fault == true && distance_attempts[0].distance == distance_attempts[1].distance
+        if distance_attempts[0].fault? && distance_attempts[1].fault? && distance_attempts[0].distance == distance_attempts[1].distance
           df = true
         end
       end
@@ -399,7 +399,7 @@ class Competitor < ActiveRecord::Base
   def single_fault?
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/single_fault?") do
       if distance_attempts.count > 0
-        distance_attempts.first.fault == true
+        distance_attempts.first.fault?
       else
         false
       end

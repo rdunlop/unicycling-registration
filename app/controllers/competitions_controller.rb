@@ -24,7 +24,7 @@ class CompetitionsController < ApplicationController
   end
 
   def toggle_final_sort
-    new_value = !@competition.order_finalized
+    new_value = !@competition.order_finalized?
 
     if new_value
       flash[:notice] = "Sort Order finalized"

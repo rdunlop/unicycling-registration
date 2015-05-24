@@ -184,11 +184,11 @@ class User < ActiveRecord::Base
   end
 
   def editable_registrants
-    (additional_registrant_accesses.full_access.map(&:registrant) + registrants).select{|reg| !reg.deleted}
+    (additional_registrant_accesses.full_access.map(&:registrant) + registrants).select{ |reg| !reg.deleted? }
   end
 
   def accessible_registrants
-    (additional_registrant_accesses.permitted.map(&:registrant) + registrants).select{|reg| !reg.deleted}
+    (additional_registrant_accesses.permitted.map(&:registrant) + registrants).select{ |reg| !reg.deleted? }
   end
 
   def total_owing

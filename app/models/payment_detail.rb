@@ -37,7 +37,7 @@ class PaymentDetail < ActiveRecord::Base
   has_one :refund_detail
   has_one :payment_detail_coupon_code
 
-  delegate :has_details, :details_label, to: :expense_item
+  delegate :has_details?, :details_label, to: :expense_item
 
   # excludes refunded items
   scope :completed, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}}) }

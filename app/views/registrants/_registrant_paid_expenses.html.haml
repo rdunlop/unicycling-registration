@@ -4,7 +4,7 @@
       %td= pei
       - if details
         %td
-          - if pei.has_details
+          - if pei.has_details?
             = "#{pei.details_label}: #{pei.details}"
       %td= print_item_cost_currency(pei.cost)
       %td= "✓ (#{t(".paid")})"

@@ -4,7 +4,7 @@
     Competitors:
   %thead
     %tr
-      - if @combined_competition.use_age_group_places
+      - if @combined_competition.use_age_group_places?
         %th Age group
         %th Age Group Place
       - else
@@ -22,7 +22,7 @@
       %tr
         - if results_competition
           - comp = results_competitors.find{|comp| comp.lowest_member_bib_number == result[:bib_number] }
-        - if @combined_competition.use_age_group_places
+        - if @combined_competition.use_age_group_places?
           %td= comp.try(:age_group_entry_description)
           %td= comp.try(:place)
         - else

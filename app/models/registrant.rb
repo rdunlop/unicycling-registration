@@ -337,7 +337,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def no_payments_when_deleted
-    if paid_details.count > 0 && self.deleted
+    if paid_details.count > 0 && deleted?
       errors[:base] << "Cannot delete a registration which has completed payments (refund them before deleting the registrant)"
     end
   end

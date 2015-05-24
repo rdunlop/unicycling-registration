@@ -18,7 +18,7 @@ class ScoresController < ApplicationController
   def new
     add_breadcrumb "Set Score"
 
-    if @judge.judge_type.boundary_calculation_enabled
+    if @judge.judge_type.boundary_calculation_enabled?
       @boundary_score = @competitor.boundary_scores.new
     end
     respond_to do |format|

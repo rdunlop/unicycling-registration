@@ -52,7 +52,7 @@ class DistanceScoringClass < BaseScoringClass
 
   def competitor_dq?(competitor)
     return false if competitor.best_distance_attempt.nil?
-    competitor.best_distance_attempt.fault
+    competitor.best_distance_attempt.fault?
   end
 
   # Function which places all of the competitors in the competition

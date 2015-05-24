@@ -53,6 +53,6 @@
                 = link_to "Items", registrant_build_path(registrant, :expenses)
             %td.non_printable
               %span.js--showElementTarget{ data: { key: "undelete#{registrant.id}" } }
-              - if registrant.deleted
+              - if registrant.deleted?
                 = link_to 'Undelete', undelete_registrant_path(registrant), :method => :post, data: { confirm: "Undelete this registrant?" }
             %td.non_printable= registrant.user

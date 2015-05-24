@@ -58,7 +58,7 @@ class RegistrationPeriod < ActiveRecord::Base
   def self.last_online_period
     last_period = nil
     RegistrationPeriod.all.each do |rp|
-      next if rp.onsite
+      next if rp.onsite?
       last_period = rp
     end
     last_period

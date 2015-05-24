@@ -11,7 +11,7 @@ class RaceDataImporter
   def process_lif(file, heat)
     upload = Upload.new
     raw_data = upload.extract_csv(file)
-    raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments
+    raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments?
     self.num_rows_processed = 0
     self.errors = nil
     raw_data.shift # drop header row

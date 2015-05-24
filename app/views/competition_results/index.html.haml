@@ -13,7 +13,7 @@
           = link_to result.to_s, result.results_file_url
           %br
         %td
-          - unless result.system_managed
+          - unless result.system_managed?
             = link_to "Delete", competition_competition_result_path(@competition, result), method: :delete, data: { confirm: "Are you sure?" }
 
 %h3 Upload additional PDF files here

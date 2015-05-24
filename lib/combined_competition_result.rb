@@ -1,7 +1,7 @@
 class CombinedCompetitionResult
   attr_accessor :combined_competition, :results_competition
 
-  delegate :percentage_based_calculations, to: :combined_competition
+  delegate :percentage_based_calculations?, to: :combined_competition
 
   def initialize(combined_competition, results_competition = nil)
     @combined_competition = combined_competition
@@ -73,7 +73,7 @@ class CombinedCompetitionResult
   end
 
   def calc_points(entry, competitor)
-    if percentage_based_calculations
+    if percentage_based_calculations?
       calc_perc_points(
         best_time: entry.best_time_in_thousands(competitor.gender),
         time: competitor.best_time_in_thousands,
@@ -97,7 +97,7 @@ class CombinedCompetitionResult
 
   def get_place(competitor)
     return nil if competitor.nil?
-    if combined_competition.use_age_group_places
+    if combined_competition.use_age_group_places?
       competitor.place
     else
       competitor.overall_place

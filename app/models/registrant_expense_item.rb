@@ -35,7 +35,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   monetize :custom_cost_cents, allow_nil: true
 
-  delegate :has_details, :details_label, to: :expense_item
+  delegate :has_details?, :details_label, to: :expense_item
 
   def self.cache_set_field
     :expense_item_id
@@ -48,7 +48,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   end
 
   def custom_cost_present
-    if !expense_item.nil? && expense_item.has_custom_cost
+    if !expense_item.nil? && expense_item.has_custom_cost?
       if self.custom_cost_cents.nil? || self.custom_cost_cents <= 0
         errors[:base] << "Must specify a custom cost for this item"
       end
@@ -57,7 +57,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   def cost
     return 0 if free
-    return custom_cost if expense_item.has_custom_cost
+    return custom_cost if expense_item.has_custom_cost?
 
     expense_item.cost
   end

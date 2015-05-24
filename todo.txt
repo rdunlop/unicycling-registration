@@ -492,12 +492,10 @@ Other Cleanup:
 - remove edit_registrant_path references
 - re-work the specs to use the default sidekiq queueing for test strategy (remove work-around)
 - Determine test coverage.
-- Update all booleans to not include nil (http://www.bignerdranch.com/blog/coding-rails-with-data-integrity/)
 - Run/resolve consistency_fail errors
 - Eliminate the ImportResults, replace it with a boolean "tentative" flag?
 - Move the "PDF" link to be inside the HTML form on all pages, instead of next to the HTML pageview link.
 - Add test for lane_assignment, and view_heat and dq_request paths.
-- Booleans in models should be "?" like? ("has_experts?")
 - Wrap Permissions (on User) properly, so that cancan sees/manages it (currently it's can?(:manage, User))
 - Remove Version table and paper_trail...replace with something else?
 - Remove all json responds to, except where I need it. (and remove all respond_to blocks).
@@ -506,7 +504,6 @@ Other Cleanup:
 ========================================================================================================================
 Other:
 - "Prices increase by $x in about 2 months" (add the amount it will increase) (do not display if price doesn't actually increase: ie non-comps at naucc2015)
-- change decsription of "default wheel size" to "Track Racing Wheel Size" -(not "Default")
 - test/fix IE-compatibility
 - allow modification of the selected registrant when doing "Edit" of imported results...so that we can adjust it while doing "import somewhere else" imports. (like Muni XC)
 - TwoAttempEntry, should require thousands in both T1 and T2, does it?

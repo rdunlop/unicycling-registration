@@ -43,6 +43,6 @@
           = ec.select :value, ec.object.event_choice.values, {:include_blank => true}, :title => choice.tooltip
         - when "best_time"
           = ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip.blank? ? choice.tooltip : "hh:mm:ss or mm:ss"
-  - if event.accepts_music_uploads
+  - if event.accepts_music_uploads?
     %td
       %a.music_help{:href => "#", :title => "Upload your music for this event from the 'Summary' page"} Upload Your Music?

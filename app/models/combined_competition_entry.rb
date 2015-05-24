@@ -36,7 +36,7 @@ class CombinedCompetitionEntry < ActiveRecord::Base
   validates :tie_breaker, inclusion: { in: [true, false] }
 
   def to_s
-    abbreviation + (tie_breaker ? "*" : "")
+    abbreviation + (tie_breaker? ? "*" : "")
   end
 
   def competitors(gender)
@@ -74,6 +74,6 @@ class CombinedCompetitionEntry < ActiveRecord::Base
   private
 
   def is_percentage_based?
-    combined_competition.percentage_based_calculations
+    combined_competition.percentage_based_calculations?
   end
 end

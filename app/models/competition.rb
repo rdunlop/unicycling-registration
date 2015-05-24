@@ -5,7 +5,7 @@
 #  id                            :integer          not null, primary key
 #  event_id                      :integer
 #  name                          :string(255)
-#  locked                        :boolean
+#  locked                        :boolean          default(FALSE), not null
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  age_group_type_id             :integer
@@ -105,7 +105,7 @@ class Competition < ActiveRecord::Base
   end
 
   def automatic_competitor_creation_only_with_one
-    if num_members_per_competitor != "One" && automatic_competitor_creation
+    if num_members_per_competitor != "One" && automatic_competitor_creation?
       errors.add(:automatic_competitor_creation, "Only valid with one-member-competitor competitions")
     end
   end
@@ -117,7 +117,7 @@ class Competition < ActiveRecord::Base
     end
 
     # has_expert is only allowed when there is also an age group type
-    if has_experts && age_group_type.nil?
+    if has_experts? && age_group_type.nil?
       errors[:age_group_type_id] << "Must specify an age group to also have Experts chosen"
     end
 
@@ -127,7 +127,7 @@ class Competition < ActiveRecord::Base
   end
 
   def published_only_when_locked
-    if published && !locked
+    if published && !locked?
       errors[:base] << "Cannot Publish an unlocked Competition"
     end
   end
