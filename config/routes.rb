@@ -254,28 +254,32 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :registrants, except: [:index, :new, :create, :edit, :update] do
+    scope module: "admin" do
+      resources :registrants, only: [] do
+        collection do
+          get :bag_labels
+          get :show_all
+          get :manage_all # How do I use cancan on this, if I were to name the action 'index'?
+          get :manage_one
+          post :choose_one
+        end
+        member do
+          post :undelete
+        end
+      end
+    end
+
+    resources :registrants, only: [:show, :destroy] do
       resources :build, controller: 'registrants/build', only: [:show, :update, :create]
-      # admin
-      collection do
-        get '/subregion_options' => 'registrants#subregion_options'
-        get :bag_labels, controller: "admin/registrants"
-        get :show_all, controller: "admin/registrants"
-        get :manage_all, controller: "admin/registrants" # How do I use cancan on this, if I were to name the action 'index'?
-        get :manage_one, controller: "admin/registrants"
-        post :choose_one, controller: "admin/registrants"
-      end
-      member do
-        post :undelete, controller: "admin/registrants"
-        get :results
-      end
 
       # normal user
       collection do
         get :all
         get :empty_waiver
+        get :subregion_options
       end
       member do
+        get :results
         get :waiver
       end
       resources :registrant_expense_items, :only => [:create, :destroy]
