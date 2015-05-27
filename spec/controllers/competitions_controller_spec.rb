@@ -18,7 +18,7 @@ describe CompetitionsController do
   end
   describe "DELETE lock" do
     it "unlocks the competition" do
-      competition = FactoryGirl.create(:competition, event: @event, locked: true)
+      competition = FactoryGirl.create(:competition, :locked, event: @event)
       delete :unlock, {:id => competition.to_param}
       competition.reload
       expect(competition.locked?).to eq(false)
@@ -27,7 +27,7 @@ describe CompetitionsController do
 
   describe "POST publish" do
     it "publishes the competition results" do
-      competition = FactoryGirl.create(:competition, event: @event, locked: true)
+      competition = FactoryGirl.create(:competition, :locked, event: @event)
       post :publish, {:id => competition.to_param}
       competition.reload
       expect(competition.published?).to eq(true)
@@ -35,7 +35,7 @@ describe CompetitionsController do
   end
   describe "DELETE publish" do
     it "un-publishes the competition" do
-      competition = FactoryGirl.create(:competition, event: @event, locked: true, published: true)
+      competition = FactoryGirl.create(:competition, :locked, :published, event: @event)
       delete :unpublish, {:id => competition.to_param}
       competition.reload
       expect(competition.published?).to eq(false)

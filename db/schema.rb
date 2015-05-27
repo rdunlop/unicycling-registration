@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524152950) do
+ActiveRecord::Schema.define(version: 20150524230829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,7 +176,6 @@ ActiveRecord::Schema.define(version: 20150524152950) do
   create_table "competitions", force: :cascade do |t|
     t.integer  "event_id"
     t.string   "name",                          limit: 255
-    t.boolean  "locked",                                    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "age_group_type_id"
@@ -186,7 +185,6 @@ ActiveRecord::Schema.define(version: 20150524152950) do
     t.string   "end_data_type",                 limit: 255
     t.boolean  "uses_lane_assignments",                     default: false, null: false
     t.datetime "scheduled_completion_at"
-    t.boolean  "published",                                 default: false, null: false
     t.boolean  "awarded",                                   default: false, null: false
     t.string   "award_title_name",              limit: 255
     t.string   "award_subtitle_name",           limit: 255
@@ -195,6 +193,8 @@ ActiveRecord::Schema.define(version: 20150524152950) do
     t.integer  "combined_competition_id"
     t.boolean  "order_finalized",                           default: false, null: false
     t.integer  "penalty_seconds"
+    t.datetime "locked_at"
+    t.datetime "published_at"
   end
 
   add_index "competitions", ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true, using: :btree

@@ -1,3 +1,6 @@
+- improve '/registrant/:id/results' page to honor 'published' status, and also clear up results.
+- Feedback should automatically set the "Reply-to" address to the entered E-mail/logged-in-user's e-mail.
+
 New Rules changes:
 - 1.11 -  Must post the Name + Country of all competitors/results
        - Must post the Name + Country of all judges on the panel?
@@ -18,7 +21,7 @@ New Rules changes:
 - 7) [not yet done] delete any phrases which no longer exist in the primary locale
 
 - OPEN PRs against Tolk
-
+- gem "jc-validates_timeliness"
 - How to "Award"/"Un-Award" a competition (deleted this option from competition#show)
 - Why doesn't en.waiver_text appear for the "Default Waiver" when none is defined for de.? (scott noticed this)
 - FIX the history-of-changes-of-a-record UI featuer.

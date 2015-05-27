@@ -5,7 +5,6 @@
 #  id                            :integer          not null, primary key
 #  event_id                      :integer
 #  name                          :string(255)
-#  locked                        :boolean          default(FALSE), not null
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  age_group_type_id             :integer
@@ -15,7 +14,6 @@
 #  end_data_type                 :string(255)
 #  uses_lane_assignments         :boolean          default(FALSE), not null
 #  scheduled_completion_at       :datetime
-#  published                     :boolean          default(FALSE), not null
 #  awarded                       :boolean          default(FALSE), not null
 #  award_title_name              :string(255)
 #  award_subtitle_name           :string(255)
@@ -24,6 +22,8 @@
 #  combined_competition_id       :integer
 #  order_finalized               :boolean          default(FALSE), not null
 #  penalty_seconds               :integer
+#  locked_at                     :datetime
+#  published_at                  :datetime
 #
 # Indexes
 #
@@ -126,14 +126,22 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def published?
+    published_at.present?
+  end
+
+  def locked?
+    locked_at.present?
+  end
+
   def published_only_when_locked
-    if published && !locked?
+    if published? && !locked?
       errors[:base] << "Cannot Publish an unlocked Competition"
     end
   end
 
   def awarded_only_when_published
-    if awarded && !published
+    if awarded? && !published?
       errors[:base] << "Cannot Award an un-published Competition"
     end
   end

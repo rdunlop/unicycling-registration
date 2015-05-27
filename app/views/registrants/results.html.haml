@@ -7,12 +7,14 @@
     %tr
       %th Competition
       %th Place
+      %th Status
       %th Detail
   %tbody
     - @overall_results.each do |result|
       %tr
         %td= result.competitor.competition
         %td= result.place
+        %td= result.status
         %td
           = "#{result.competitor.to_s}<br>".html_safe if result.competitor.members.count > 1
           = result.competitor.result
@@ -26,6 +28,7 @@
       %th Competition
       %th Age Group
       %th Place
+      %th Status
       %th Detail
   %tbody
     - @age_group_results.each do |result|
@@ -33,6 +36,7 @@
         %td= result.competitor.competition
         %td= result.competitor.age_group_entry_description
         %td= result.place
+        %td= result.status
         %td
           = "#{result.competitor.to_s}<br>".html_safe if result.competitor.members.count > 1
           = result.competitor.result

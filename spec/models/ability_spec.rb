@@ -223,28 +223,24 @@ describe "Ability" do
     it { is_expected.to be_able_to(:create, Score) }
 
     describe "with a Competition" do
-      before(:each) do
-        @competition = FactoryGirl.create(:competition)
-      end
-      it { is_expected.to be_able_to(:create_scores, @competition) }
+      let(:competition) { FactoryGirl.create(:competition) }
+
+      it { is_expected.to be_able_to(:create_scores, competition) }
       it { is_expected.to be_able_to(:read, Competitor) }
-      it { is_expected.not_to be_able_to(:set_sort, @competition) }
-      it { is_expected.not_to be_able_to(:sort_random, @competition) }
-      it { is_expected.not_to be_able_to(:review_heat, @competition) }
-      it { is_expected.not_to be_able_to(:approve_heat, @competition) }
+      it { is_expected.not_to be_able_to(:set_sort, competition) }
+      it { is_expected.not_to be_able_to(:sort_random, competition) }
+      it { is_expected.not_to be_able_to(:review_heat, competition) }
+      it { is_expected.not_to be_able_to(:approve_heat, competition) }
 
       describe "when the Competition is locked" do
-        before(:each) do
-          @competition.locked = true
-          @competition.save!
-        end
+        let(:competition) { FactoryGirl.create(:competition, :locked) }
 
-        it { is_expected.not_to be_able_to(:create_scores, @competition) }
+        it { is_expected.not_to be_able_to(:create_scores, competition) }
       end
       describe "with a score" do
         before(:each) do
-          @judge = FactoryGirl.create(:judge, :user => @user, :competition => @competition)
-          competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+          @judge = FactoryGirl.create(:judge, :user => @user, :competition => competition)
+          competitor = FactoryGirl.create(:event_competitor, competition: competition)
           @score = FactoryGirl.create(:score, :judge => @judge, competitor: competitor)
           @other_score = FactoryGirl.create(:score, :competitor => @score.competitor) # different judge user
         end
@@ -254,11 +250,7 @@ describe "Ability" do
         it { is_expected.not_to be_able_to(:read, @other_score) }
 
         describe "when the competition is locked" do
-          before(:each) do
-            @competition.locked = true
-            @competition.save!
-            @score.reload
-          end
+          let(:competition) { FactoryGirl.create(:competition, :locked) }
 
           it { is_expected.not_to be_able_to(:update, @score) }
         end
@@ -267,39 +259,37 @@ describe "Ability" do
   end
 
   describe "as a director" do
+    let(:competition) { FactoryGirl.create(:competition) }
     before(:each) do
-      @competition = FactoryGirl.create(:competition)
-      @event_category = @competition.event.event_categories.first
-      @competition.save!
+      @event_category = competition.event.event_categories.first
       @user = FactoryGirl.create(:user)
-      @user.add_role :director, @competition.event
+      @user.add_role :director, competition.event
       @user.add_role :data_entry_volunteer
     end
     subject { @ability = Ability.new(@user) }
 
     describe "when the event is unlocked" do
-      it { is_expected.to be_able_to(:set_sort, @competition) }
-      it { is_expected.to be_able_to(:sort_random, @competition) }
-      it { is_expected.to be_able_to(:lock, @competition) }
+      it { is_expected.to be_able_to(:set_sort, competition) }
+      it { is_expected.to be_able_to(:sort_random, competition) }
+      it { is_expected.to be_able_to(:lock, competition) }
       it { is_expected.to be_able_to(:manage, ImportResult) }
       it { is_expected.to be_able_to(:create, Judge) }
     end
 
     describe "when the event is locked" do
-      before :each do
-        @competition.update_attribute(:locked, true)
-      end
-      it { is_expected.not_to be_able_to(:set_sort, @competition) }
-      it { is_expected.not_to be_able_to(:sort_random, @competition) }
-      it { is_expected.not_to be_able_to(:lock, @competition) }
-      it { is_expected.not_to be_able_to(:create, Judge.new(competition: @competition)) }
-      it { is_expected.to be_able_to(:read, @competition) }
+      let(:competition) { FactoryGirl.create(:competition, :locked) }
+
+      it { is_expected.not_to be_able_to(:set_sort, competition) }
+      it { is_expected.not_to be_able_to(:sort_random, competition) }
+      it { is_expected.not_to be_able_to(:lock, competition) }
+      it { is_expected.not_to be_able_to(:create, Judge.new(competition: competition)) }
+      it { is_expected.to be_able_to(:read, competition) }
     end
 
-    it { is_expected.to be_able_to(:read, @competition) }
-    it { is_expected.not_to be_able_to(:read, @competition.event) }
-    it { is_expected.to be_able_to(:export_scores, @competition) }
-    it { is_expected.not_to be_able_to(:edit, @competition) }
+    it { is_expected.to be_able_to(:read, competition) }
+    it { is_expected.not_to be_able_to(:read, competition.event) }
+    it { is_expected.to be_able_to(:export_scores, competition) }
+    it { is_expected.not_to be_able_to(:edit, competition) }
     it { is_expected.to be_able_to(:create, DataEntryVolunteer) }
     it { is_expected.to be_able_to(:summary, Event) }
 
@@ -312,7 +302,7 @@ describe "Ability" do
 
     describe "with an associated judge to my event" do
       before(:each) do
-        @judge = FactoryGirl.create(:judge, :competition => @competition)
+        @judge = FactoryGirl.create(:judge, :competition => competition)
       end
       it { is_expected.to be_able_to(:destroy, @judge) }
       it { is_expected.to be_able_to(:create, Judge) }

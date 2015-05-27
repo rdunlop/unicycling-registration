@@ -5,7 +5,6 @@
 #  id                            :integer          not null, primary key
 #  event_id                      :integer
 #  name                          :string(255)
-#  locked                        :boolean          default(FALSE), not null
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  age_group_type_id             :integer
@@ -15,7 +14,6 @@
 #  end_data_type                 :string(255)
 #  uses_lane_assignments         :boolean          default(FALSE), not null
 #  scheduled_completion_at       :datetime
-#  published                     :boolean          default(FALSE), not null
 #  awarded                       :boolean          default(FALSE), not null
 #  award_title_name              :string(255)
 #  award_subtitle_name           :string(255)
@@ -24,6 +22,8 @@
 #  combined_competition_id       :integer
 #  order_finalized               :boolean          default(FALSE), not null
 #  penalty_seconds               :integer
+#  locked_at                     :datetime
+#  published_at                  :datetime
 #
 # Indexes
 #
@@ -121,14 +121,14 @@ describe Competition do
   end
 
   it "Cannot be published until it is locked" do
-    @ec.locked = false
-    @ec.published = true
+    @ec.locked_at = nil
+    @ec.published_at = DateTime.now
     expect(@ec).to be_invalid
   end
 
   it "Cannot be awarded until it is published" do
-    @ec.locked = true
-    @ec.published = false
+    @ec.locked_at = DateTime.now
+    @ec.published_at = nil
     @ec.awarded = true
     expect(@ec).to be_invalid
   end
