@@ -155,6 +155,11 @@ Workspace::Application.routes.draw do
         get :choose
       end
     end
+    resources :manual_refunds, only: [:new, :create], controller: "admin/manual_refunds" do
+      collection do
+        get :choose
+      end
+    end
 
     resources :payment_adjustments, :only => [:new]  do
       collection do

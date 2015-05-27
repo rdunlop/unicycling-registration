@@ -27,15 +27,6 @@ class PaymentAdjustmentsController < ApplicationController
     end
   end
 
-  def onsite_pay_choose
-    @p = PaymentPresenter.new
-
-    params[:registrant_id].each do |reg_id|
-      reg = Registrant.find(reg_id)
-      @p.add_registrant(reg)
-    end
-  end
-
   def refund_choose
     @refund_presenter = RefundPresenter.new
 
@@ -104,6 +95,16 @@ class PaymentAdjustmentsController < ApplicationController
 
     @registrants = [registrant.reload]
     render "exchange_choose"
+  end
+
+  # Actions which allow an admin to mark certain items as "Free for this registrant"
+  def onsite_pay_choose
+    @p = PaymentPresenter.new
+
+    params[:registrant_id].each do |reg_id|
+      reg = Registrant.find(reg_id)
+      @p.add_registrant(reg)
+    end
   end
 
   def onsite_pay_confirm

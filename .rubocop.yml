@@ -1,4 +1,7 @@
 AllCops:
   Exclude:
+    - ".bundle/**/*" # Auto-generated
+    - "bin/**/*" # Auto-generated
+    - "db/schema.rb" # Auto-generated
     - 'vagrant_postgres91_utf8_rails/**/*'
 inherit_from: .rubocop_todo.yml

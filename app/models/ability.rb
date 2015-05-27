@@ -197,6 +197,7 @@ class Ability
     if user.has_role? :payment_admin
       can :summary, Payment
       can [:new, :choose, :create], :manual_payment
+      can [:new, :choose, :create], :manual_refund
       can :set_reg_fee, :registrant
       can [:read], Registrant
       can [:list, :payments, :payment_details], :export_payment
