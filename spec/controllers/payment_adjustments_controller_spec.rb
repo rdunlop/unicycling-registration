@@ -16,29 +16,6 @@ describe PaymentAdjustmentsController do
     end
   end
 
-  describe "POST refund_create" do
-    before(:each) do
-      @pd = FactoryGirl.create(:payment_detail)
-    end
-
-    it "can create a payment with refund elements" do
-      expect {
-        post :refund_create, {:refund_presenter => {
-          :note => "Cancelled",
-          :paid_details_attributes => {
-            "0" => {
-              :payment_detail_id => @pd.id,
-              :refund => true
-            }}
-        }}
-      }.to change(RefundDetail, :count).by(1)
-      r = Refund.last
-      expect(r.note).to eq("Cancelled")
-      rd = RefundDetail.last
-      expect(rd.payment_detail).to eq(@pd)
-    end
-  end
-
   describe "POST exchange_create" do
     let(:registrant) { payment_detail.registrant.reload }
     let(:new_expense_item) { FactoryGirl.create(:expense_item) }

@@ -27,26 +27,6 @@ class PaymentAdjustmentsController < ApplicationController
     end
   end
 
-  def refund_choose
-    @refund_presenter = RefundPresenter.new
-
-    params[:registrant_id].each do |reg_id|
-      reg = Registrant.find(reg_id)
-      @refund_presenter.add_registrant(reg)
-    end
-  end
-
-  def refund_create
-    @refund_presenter= RefundPresenter.new(params[:refund_presenter])
-    @refund_presenter.user = current_user
-
-    if @refund_presenter.save
-      redirect_to list_payment_adjustments_path, notice: "Successfully created refund"
-    else
-      render "refund_choose"
-    end
-  end
-
   def exchange_choose
     @registrants = []
 
