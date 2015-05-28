@@ -195,9 +195,12 @@ class Ability
     end
 
     if user.has_role? :payment_admin
-      can :summary, Payment
+      # Can read _any_ payment
+      can [:read, :summary], Payment
+      can :read, Refund
       can [:new, :choose, :create], :manual_payment
       can [:new, :choose, :create], :manual_refund
+      can :list, :payment_adjustment
       can :set_reg_fee, :registrant
       can [:read], Registrant
       can [:list, :payments, :payment_details], :export_payment
@@ -211,8 +214,9 @@ class Ability
     if user.has_role? :event_planner
       can [:summary, :general_volunteers, :specific_volunteers], Event
       can :sign_ups, EventCategory
+      can :sign_ups, Event
       can [:manage_all, :show_all], :registrant
-      can [:read], Registrant
+      can [:read, :update, :destroy], Registrant
       can [:read, :create, :list], Email
     end
 

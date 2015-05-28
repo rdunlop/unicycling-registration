@@ -3,21 +3,9 @@ class Registrants::BuildController < ApplicationController
   before_action :authenticate_user!
 
   load_resource :registrant, find_by: :bib_number, except: [:index, :create]
-  authorize_resource :registrant
   before_action :set_steps
   before_action :setup_wizard
-
-  def set_steps
-    if @registrant.nil? || @registrant.competitor
-      if @registrant.try(:age) && @registrant.age <= 10
-        self.steps = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
-      else
-        self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details, :expenses]
-      end
-    else
-      self.steps = [:add_name, :add_volunteers, :add_contact_details, :expenses]
-    end
-  end
+  authorize_resource :registrant
 
   before_action :load_categories, only: [:show, :update, :add_events]
   layout "wizard"
@@ -38,6 +26,8 @@ class Registrants::BuildController < ApplicationController
   end
 
   def update
+    # this is so that we have a clearer ability.rb specification
+    authorize! :update, @registrant
     case wizard_value(step)
     when :add_name
       @registrant.status = "base_details" if @registrant.status == "blank"
@@ -69,6 +59,18 @@ class Registrants::BuildController < ApplicationController
   end
 
   private
+
+  def set_steps
+    if @registrant.nil? || @registrant.competitor
+      if @registrant.try(:age) && @registrant.age <= 10
+        self.steps = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
+      else
+        self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details, :expenses]
+      end
+    else
+      self.steps = [:add_name, :add_volunteers, :add_contact_details, :expenses]
+    end
+  end
 
   def registrant_type
     params[:registrant_type]
