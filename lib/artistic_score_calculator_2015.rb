@@ -75,7 +75,7 @@ class ArtisticScoreCalculator_2015
 
     if judge_type.nil?
       scores = competitor.scores.joins(:judge).merge(Judge.active)
-      # need to gather the results by judge_type, so that I can average them?
+      # XXX need to gather the results by judge_type, so that I can average them?
     else
       scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
     end
