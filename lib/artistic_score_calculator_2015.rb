@@ -71,7 +71,7 @@ class ArtisticScoreCalculator_2015
   #
   # return a numeric
   def total_points(competitor, judge_type = nil)
-    #Rails.cache.fetch("/comp/#{competitor.id}-#{competitor.updated_at}/judge_type/#{judge_type.try(:id)}") do
+    # Rails.cache.fetch("/comp/#{competitor.id}-#{competitor.updated_at}/judge_type/#{judge_type.try(:id)}") do
 
     if judge_type.nil?
       scores = competitor.scores.joins(:judge).merge(Judge.active)

@@ -1,5 +1,4 @@
 class FlatlandPointsCalculator
-
   # Return the numeric place of this score, compared to the results of the other scores by this judge
   # Input: score: the numeric score in question
   # input: all_scores: an array of numeric other results

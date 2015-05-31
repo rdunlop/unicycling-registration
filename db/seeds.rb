@@ -8,117 +8,117 @@
 
 JudgeType.find_or_create_by(name: "Presentation", event_class: "Freestyle") do |judge_type|
   judge_type.assign_attributes(
-                   val_1_description: "Mistakes: Dismounts",
-                   val_2_description: "Choreography & Style",
-                   val_3_description: "Showmanship and Originality",
-                   val_4_description: "Interpretation",
-                   val_1_max: 10,
-                   val_2_max: 15,
-                   val_3_max: 15,
-                   val_4_max: 10
+    val_1_description: "Mistakes: Dismounts",
+    val_2_description: "Choreography & Style",
+    val_3_description: "Showmanship and Originality",
+    val_4_description: "Interpretation",
+    val_1_max: 10,
+    val_2_max: 15,
+    val_3_max: 15,
+    val_4_max: 10
                   )
 end
 JudgeType.find_or_create_by(name: "Technical", event_class: "Freestyle") do |judge_type|
   judge_type.assign_attributes(
-                   val_1_description: "Quantity of Unicycling Skills & Transitions",
-                   val_2_description: "Mastery and Quality of Execution",
-                   val_3_description: "Difficulty and Duration",
-                   val_4_description: "N/A",
-                   val_1_max: 10,
-                   val_2_max: 15,
-                   val_3_max: 15,
-                   val_4_max: 0
+    val_1_description: "Quantity of Unicycling Skills & Transitions",
+    val_2_description: "Mastery and Quality of Execution",
+    val_3_description: "Difficulty and Duration",
+    val_4_description: "N/A",
+    val_1_max: 10,
+    val_2_max: 15,
+    val_3_max: 15,
+    val_4_max: 0
                   )
 end
 
 JudgeType.find_or_create_by(name: "Flatland Judge Type", event_class: "Flatland") do |judge_type|
   judge_type.assign_attributes(
-                   val_1_description: "?",
-                   val_2_description: "?",
-                   val_3_description: "?",
-                   val_4_description: "?",
-                   val_1_max: 10,
-                   val_2_max: 10,
-                   val_3_max: 10,
-                   val_4_max: 10
+    val_1_description: "?",
+    val_2_description: "?",
+    val_3_description: "?",
+    val_4_description: "?",
+    val_1_max: 10,
+    val_2_max: 10,
+    val_3_max: 10,
+    val_4_max: 10
                   )
 end
 
 JudgeType.find_or_create_by(name: "High/Long Judge Type", event_class: "High/Long") do |judge_type|
   judge_type.assign_attributes(
-                   val_1_description: "?",
-                   val_2_description: "?",
-                   val_3_description: "?",
-                   val_4_description: "?",
-                   val_1_max: 10,
-                   val_2_max: 10,
-                   val_3_max: 10,
-                   val_4_max: 10
+    val_1_description: "?",
+    val_2_description: "?",
+    val_3_description: "?",
+    val_4_description: "?",
+    val_1_max: 10,
+    val_2_max: 10,
+    val_3_max: 10,
+    val_4_max: 10
                   )
 end
 
 JudgeType.find_or_create_by(name: "Street Judge Zone 1", event_class: "Street") do |judge_type|
   judge_type.assign_attributes(
-                   val_1_description: "Score",
-                   val_2_description: "n/a",
-                   val_3_description: "n/a",
-                   val_4_description: "n/a",
-                   val_1_max: 100,
-                   val_2_max: 0,
-                   val_3_max: 0,
-                   val_4_max: 0
+    val_1_description: "Score",
+    val_2_description: "n/a",
+    val_3_description: "n/a",
+    val_4_description: "n/a",
+    val_1_max: 100,
+    val_2_max: 0,
+    val_3_max: 0,
+    val_4_max: 0
                   )
 end
 
 JudgeType.find_or_create_by(name: "Street Judge Zone 2", event_class: "Street") do |judge_type|
   judge_type.assign_attributes(
-                   val_1_description: "Score",
-                   val_2_description: "n/a",
-                   val_3_description: "n/a",
-                   val_4_description: "n/a",
-                   val_1_max: 100,
-                   val_2_max: 0,
-                   val_3_max: 0,
-                   val_4_max: 0
+    val_1_description: "Score",
+    val_2_description: "n/a",
+    val_3_description: "n/a",
+    val_4_description: "n/a",
+    val_1_max: 100,
+    val_2_max: 0,
+    val_3_max: 0,
+    val_4_max: 0
                   )
 end
 
 JudgeType.find_or_create_by(name: "Street Judge Zone 3", event_class: "Street") do |judge_type|
   judge_type.assign_attributes(
-                   val_1_description: "Score",
-                   val_2_description: "n/a",
-                   val_3_description: "n/a",
-                   val_4_description: "n/a",
-                   val_1_max: 100,
-                   val_2_max: 0,
-                   val_3_max: 0,
-                   val_4_max: 0
+    val_1_description: "Score",
+    val_2_description: "n/a",
+    val_3_description: "n/a",
+    val_4_description: "n/a",
+    val_1_max: 100,
+    val_2_max: 0,
+    val_3_max: 0,
+    val_4_max: 0
                 )
 end
 
 JudgeType.find_or_create_by(name: "Performance", event_class: "Artistic Freestyle IUF 2015") do |judge_type|
-    judge_type.assign_attributes(
-                   val_1_description: "Mistakes: Dismounts",
-                   val_2_description: "Presence/Execution",
-                   val_3_description: "Composition/Choreography",
-                   val_4_description: "Interpretation of the Music/Timing",
-                   val_1_max: 10,
-                   val_2_max: 10,
-                   val_3_max: 10,
-                   val_4_max: 10
-                   )
+  judge_type.assign_attributes(
+    val_1_description: "Mistakes: Dismounts",
+    val_2_description: "Presence/Execution",
+    val_3_description: "Composition/Choreography",
+    val_4_description: "Interpretation of the Music/Timing",
+    val_1_max: 10,
+    val_2_max: 10,
+    val_3_max: 10,
+    val_4_max: 10
+                 )
 end
 
 JudgeType.find_or_create_by(name: "Technical", event_class: "Artistic Freestyle IUF 2015") do |judge_type|
   judge_type.assign_attributes(
-                   val_1_description: "Quantity of Unicycling Skills & Transitions",
-                   val_2_description: "Mastery and Quality of Execution",
-                   val_3_description: "Difficulty and Duration",
-                   val_4_description: "N/A",
-                   val_1_max: 10,
-                   val_2_max: 15,
-                   val_3_max: 15,
-                   val_4_max: 0
+    val_1_description: "Quantity of Unicycling Skills & Transitions",
+    val_2_description: "Mastery and Quality of Execution",
+    val_3_description: "Difficulty and Duration",
+    val_4_description: "N/A",
+    val_1_max: 10,
+    val_2_max: 15,
+    val_3_max: 15,
+    val_4_max: 0
                   )
 end
 

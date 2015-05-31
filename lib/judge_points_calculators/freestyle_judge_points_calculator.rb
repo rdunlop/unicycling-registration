@@ -1,5 +1,4 @@
 class FreestyleJudgePointsCalculator
-
   # Return the numeric place of this score, compared to the results of the other scores by this judge
   # Input: score: the numeric score in question
   # input: all_scores: an array of numeric other results
@@ -26,7 +25,6 @@ class FreestyleJudgePointsCalculator
   def lower_is_better
     false
   end
-
 
   def new_calc_place(score, scores)
     my_place = 1
