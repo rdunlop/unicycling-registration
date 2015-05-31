@@ -19,7 +19,7 @@
 #
 # Indexes
 #
-#  index_judge_types_on_name  (name) UNIQUE
+#  index_judge_types_on_name_and_event_class  (name,event_class) UNIQUE
 #
 
 require 'spec_helper'

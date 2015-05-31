@@ -9,10 +9,4 @@ module Judgeable
 
     delegate :user, to: :judge
   end
-
-  # determining the place points for this score (by-judge)
-  def tied
-    judge.competition.tied(self)
-  end
 end
-

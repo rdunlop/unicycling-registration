@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524230829) do
+ActiveRecord::Schema.define(version: 20150530165103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -492,7 +492,7 @@ ActiveRecord::Schema.define(version: 20150524230829) do
     t.boolean  "boundary_calculation_enabled",             default: false, null: false
   end
 
-  add_index "judge_types", ["name"], name: "index_judge_types_on_name", unique: true, using: :btree
+  add_index "judge_types", ["name", "event_class"], name: "index_judge_types_on_name_and_event_class", unique: true, using: :btree
 
   create_table "judges", force: :cascade do |t|
     t.integer  "competition_id"

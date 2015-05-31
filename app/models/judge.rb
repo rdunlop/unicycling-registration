@@ -83,4 +83,19 @@ class Judge < ActiveRecord::Base
   def get_score(competitor)
     scores.where(:competitor_id => competitor.id).first
   end
+
+  # Return the calculated total points for this score
+  # which will probably be related to the other scores by this judge
+  #
+  # returns a numeric (probably afraction)
+  def placing_points_for(score)
+    return 0 if score.invalid?
+    judge_type.score_calculator.judged_points(score_totals, score.total)
+  end
+
+  # Return the numeric place of this score, compared to the results of the other scores by this judge
+  def judged_place(score)
+    return 0 if score.invalid?
+    judge_type.score_calculator.judged_place(score_totals, score.total)
+  end
 end

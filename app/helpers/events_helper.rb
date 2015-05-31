@@ -5,7 +5,7 @@ module EventsHelper
     case class_name
     when 'High/Long'
       link_to "#{judge.competition} - #{judge.judge_type.name}", judge_distance_attempts_path(judge), options
-    when 'Freestyle'
+    when 'Freestyle', "Artistic Freestyle IUF 2015"
       link_to "#{judge.competition} - #{judge.judge_type.name}", judge_scores_path(judge), options
     when 'Flatland'
       link_to judge.judge_type.name, competition_competitors_path(judge.competition), options

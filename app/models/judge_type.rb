@@ -19,7 +19,7 @@
 #
 # Indexes
 #
-#  index_judge_types_on_name  (name) UNIQUE
+#  index_judge_types_on_name_and_event_class  (name,event_class) UNIQUE
 #
 
 class JudgeType < ActiveRecord::Base
@@ -27,7 +27,7 @@ class JudgeType < ActiveRecord::Base
   has_many :competitions, :through => :judges
   has_many :scores, :through => :judges
 
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, presence: true, uniqueness: { scope: :event_class }
   validates :event_class, :inclusion => { :in => Competition.scoring_classes }
 
   validates :val_1_description, :presence => true
@@ -63,21 +63,16 @@ class JudgeType < ActiveRecord::Base
     name
   end
 
-  def convert_place_to_points(place, ties)
+  def score_calculator
     case event_class
     when "Freestyle"
-      points = (1..100).to_a
+      FreestyleJudgePointsCalculator.new
+    when "Artistic Freestyle IUF 2015"
+      Freestyle_2015_JudgePointsCalculator.new
     when "Street"
-      points = (1..100).to_a # [10, 7, 5, 3, 2, 1]
+      StreetPointsCalculator.new
     when "Flatland"
-      points = (1..100).to_a
+      FlatlandPointsCalculator.new
     end
-
-    total_points = 0
-    (ties + 1).times do
-      total_points +=  points[place - 1] unless points[place - 1].nil?
-      place = place + 1
-    end
-    (total_points * 1.0) / (ties + 1)
   end
 end

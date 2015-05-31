@@ -69,7 +69,7 @@ class Competition < ActiveRecord::Base
   validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true }
 
   def self.scoring_classes
-    ["Freestyle", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
+    ["Freestyle", "Artistic Freestyle IUF 2015", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
   end
 
   validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }
@@ -379,6 +379,8 @@ class Competition < ActiveRecord::Base
       @ers ||= PointsScoringClass.new(self, false)
     when "Freestyle"
       @asc ||= ArtisticScoringClass.new(self)
+    when "Artistic Freestyle IUF 2015"
+      @asc2015 ||= ArtisticScoringClass_2015.new(self)
     when "Flatland"
       @fsc ||= FlatlandScoringClass.new(self)
     when "Street"
@@ -412,9 +414,6 @@ class Competition < ActiveRecord::Base
 
   # SCORE
   # determining the place points for this score (by-judge)
-  def tied(score)
-    score.ties != 0
-  end
 
   # DISTANCE
   def top_distance_attempts(num = 20)

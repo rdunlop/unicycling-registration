@@ -77,50 +77,13 @@ class Score < ActiveRecord::Base
     end
   end
 
-  def lower_is_better
-    case judge_type.event_class
-    when "Freestyle"
-      false
-    when "Street"
-      false
-    when "Flatland"
-      false
-    end
-  end
-
-  def new_calc_place(score, scores)
-    my_place = 1
-    scores.each do |each_score|
-      if (lower_is_better && each_score < score) || (!lower_is_better && score < each_score)
-        my_place = my_place + 1
-      end
-    end
-    my_place
-  end
-
-  def new_ties(score, scores)
-    ties = 0
-    scores.each do |each_score|
-      if each_score == score
-        ties = ties + 1
-      end
-    end
-    ties - 1 # eliminate tie-with-self from scores
-  end
-
-  def ties # always has '1' tie...with itself
-    # XXX refactor this redundant code:
-    scores_for_judge = judge.score_totals
-    new_ties(total, scores_for_judge)
-  end
-
   def judged_place
     return 0 if invalid?
-    scores_for_judge = judge.score_totals
-    new_calc_place(total, scores_for_judge)
+    judge.judged_place(self)
   end
 
   def placing_points
-    judge_type.convert_place_to_points(judged_place, ties)
+    return 0 if invalid?
+    judge.placing_points_for(self)
   end
 end

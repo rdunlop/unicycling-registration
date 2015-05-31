@@ -34,70 +34,9 @@ describe Score do
     it "says that it has a judge_place of 0" do
       expect(subject.judged_place).to eq(0)
     end
-  end
 
-  describe "ties" do
-    before :each do
-      allow(subject).to receive(:ties).and_return(1)
-      allow(subject).to receive(:judged_place).and_return(2)
-    end
-    it "calculates the placing points for this tie score" do
-      expect(subject.placing_points).to eq(2.5)
-    end
-  end
-
-  describe "with multiple scores" do
-    before :each do
-      allow(judge).to receive(:score_totals).and_return([0, 5, 10, 5])
-    end
-
-    describe "the lowest scoring competitor" do
-      before :each do
-        allow(subject).to receive(:total).and_return(0)
-      end
-
-      it "calculates the proper placement of each score" do
-        expect(subject.judged_place).to eq(4)
-      end
-
-      it {
-        expect(subject.ties).to eq(0)
-      }
-
-      it "has the lowest (after ties) placing points" do
-        expect(subject.placing_points).to eq(4)
-      end
-    end
-
-    describe "the highest scoring competitor" do
-      before :each do
-        allow(subject).to receive(:total).and_return(10)
-      end
-
-      it {
-        expect(subject.judged_place).to eq(1)
-      }
-
-      it "has 1 placing point (highest)" do
-        expect(subject.placing_points).to eq(1)
-      end
-    end
-    describe "the tie in the middle" do
-      before :each do
-        allow(subject).to receive(:total).and_return(5)
-      end
-
-      it {
-        expect(subject.judged_place).to eq(2)
-      }
-
-      it "has a tie" do
-        expect(subject.ties).to eq(1)
-      end
-
-      it "splits the placing points" do
-        expect(subject.placing_points).to eq(2.5)
-      end
+    it "says that it has a judge_points of 0" do
+      expect(subject.placing_points).to eq(0)
     end
   end
 

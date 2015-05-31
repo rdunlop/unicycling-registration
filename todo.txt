@@ -1,3 +1,5 @@
+- remove skylight
+- ensure that DQ/DNS competitors have correct points/places
 - improve '/registrant/:id/results' page to honor 'published' status, and also clear up results.
 - Feedback should automatically set the "Reply-to" address to the entered E-mail/logged-in-user's e-mail.
 
