@@ -2,13 +2,12 @@ class ArtisticScoringClass_2015 < BaseScoringClass
   def scoring_description
     "Using the Freestyle scoring rules, multiple Performance and Technical judges
     will score each competitor, and then the resulting points (converted to percentage of points) will be used to
-    calculate the winner"
+    calculate the winner. As per the IUF 2015 Rulebook"
   end
 
   # This is used temporarily to access the calculator, but will likely be private-ized soon
   def score_calculator
-    unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc?
-    ArtisticScoreCalculator_2015.new(@competition, unicon_scoring)
+    ArtisticScoreCalculator_2015.new(@competition)
   end
 
   # describes how to label the results of this competition
