@@ -1,0 +1,3 @@
+test:
+  pre:
+    - mv config/secrets.yml.template config/secrets.yml
