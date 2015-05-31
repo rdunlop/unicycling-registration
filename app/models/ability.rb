@@ -226,7 +226,7 @@ class Ability
       can :manage, :ineligible_registrant
       can [:crud], AgeGroupType
       can :update_row_order, AgeGroupEntry
-      can [:crud, :lock, :unlock], Competition
+      can [:crud, :set_places, :lock, :unlock], Competition
       # can [:read, :set_role, :set_password], :permission
     end
 

@@ -1,9 +1,7 @@
-%h1 Results for #{@competition}
-
-- if Result.competition_calc_needed?(@competition)
-  .calc_needed Places should be re-calculated.
 
 - if can? :set_places, @competition
+  - if Result.competition_calc_needed?(@competition)
+    .calc_needed Places should be re-calculated.
   .non_printable
     = link_to "Set All Places", set_places_competition_path(@competition), method: :post, data: { confirm: "This may take a few seconds" }
     - if @competition.can_calculated_age_group_results?
