@@ -43,6 +43,16 @@ class JudgesController < ApplicationController
     end
   end
 
+  # this is used to toggle the active-status of a judge
+  def toggle_status
+    if @judge.active?
+      @judge.update_attribute(:status, "removed")
+    else
+      @judge.update_attribute(:status, "active")
+    end
+    redirect_to :back
+  end
+
   # DELETE /judges/1
   # DELETE /judges/1.json
   def destroy

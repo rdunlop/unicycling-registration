@@ -8,6 +8,7 @@
 #  user_id        :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  status         :string           default("active"), not null
 #
 # Indexes
 #
@@ -38,8 +39,17 @@ class Judge < ActiveRecord::Base
   validates :competition_id, :presence => true
   validates :judge_type_id, :presence => true, :uniqueness => {:scope => [:competition_id, :user_id] }
   validates :user_id, :presence => true
+  validates :status, inclusion: { in: ["active", "removed"] }
 
   delegate :event, to: :competition
+
+  def self.active
+    where(status: "active")
+  end
+
+  def active?
+    status == "active"
+  end
 
   # Note, this appears to be duplicated in ability.rb
   def check_for_scores

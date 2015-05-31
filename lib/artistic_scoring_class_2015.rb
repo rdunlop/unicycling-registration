@@ -62,4 +62,8 @@ class ArtisticScoringClass_2015 < BaseScoringClass
   def requires_age_groups
     false
   end
+
+  def can_eliminate_judges?
+    true
+  end
 end

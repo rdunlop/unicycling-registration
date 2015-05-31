@@ -73,4 +73,8 @@ class BaseScoringClass
   def requires_age_groups
     true
   end
+
+  def can_eliminate_judges?
+    false
+  end
 end

@@ -509,6 +509,10 @@ Workspace::Application.routes.draw do
     resources :time_results, :except => [:index, :new, :show, :create]
 
     resources :judges, :only => [:update] do
+      member do
+        put :toggle_status
+      end
+
       resources :competitors, :only => [] do
         resources :scores, :only => [:new, :create]
 

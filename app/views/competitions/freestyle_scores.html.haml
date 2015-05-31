@@ -11,6 +11,8 @@
       = render partial: "scores_judging_headers", locals: { judges: judges, judge_type: jt, anonymous: @anonymous }
       - @competition.competitors.active.each do |competitor|
         = render partial: "scores_competitor_judge_results", locals: { competitor: competitor, judges: judges }
+      - if @competition.can_eliminate_judges?
+        = render partial: "scores_judging_footers", locals: { judges: judges, judge_type: jt, anonymous: @anonymous }
   = render partial: "scores_summary", locals: { competitors: @competition.competitors.active }
   .non_printable
     %hr

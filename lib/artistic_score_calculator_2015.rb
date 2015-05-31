@@ -74,10 +74,10 @@ class ArtisticScoreCalculator_2015
     #Rails.cache.fetch("/comp/#{competitor.id}-#{competitor.updated_at}/judge_type/#{judge_type.try(:id)}") do
 
     if judge_type.nil?
-      scores = competitor.scores
+      scores = competitor.scores.joins(:judge).merge(Judge.active)
       # need to gather the results by judge_type, so that I can average them?
     else
-      scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id })
+      scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
     end
 
     points = (scores.to_a.sum(&:placing_points) / scores.count.to_f).round(2)

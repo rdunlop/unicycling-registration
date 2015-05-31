@@ -103,7 +103,7 @@ class Ability
       user.has_role? :director, comp.event
     end
 
-    can [:read], Judge do |judge|
+    can [:read, :toggle_status], Judge do |judge|
       user.has_role? :director, judge.competition.try(:event)
     end
 
