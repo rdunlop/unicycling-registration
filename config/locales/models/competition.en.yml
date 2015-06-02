@@ -1,0 +1,21 @@
+---
+en:
+  activerecord:
+    attributes:
+      competition:
+        name: Competition Name
+        scheduled_completion_at: Scheduled Completion Time
+        scoring_class: Scoring Type
+        num_members_per_competitor: Team Size
+        penalty_seconds: Seconds per Penalty
+        uses_lane_assignments: Compete in Lanes/Heats
+        start_data_type: Start Line Data Entry
+        end_data_type: Finish Line Data Entry
+        combined_competition_id: Overall Champion Calculation
+        award_title_name: Award Title
+        award_subtitle_name: Award Subtitle
+        has_experts: Calculate Experts too
+    models:
+      competition:
+        one: Competition
+        other: Competitions

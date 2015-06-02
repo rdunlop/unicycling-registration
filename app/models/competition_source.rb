@@ -33,6 +33,14 @@ class CompetitionSource < ActiveRecord::Base
   validate :source_present
   validate :max_place_with_competition
 
+  def registration_source?
+    event_category.present?
+  end
+
+  def competition_source?
+    competition.present?
+  end
+
   def source_present
     if self.event_category.nil? && self.competition.nil?
       errors[:base] << "Must select an Event Category or a Competition"

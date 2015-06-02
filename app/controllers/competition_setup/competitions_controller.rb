@@ -17,8 +17,6 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   # /events/#/competitions/new
   def new
     add_breadcrumb "New Competition"
-
-    @competition.competition_sources.build
   end
 
   # POST /competitions/#/create

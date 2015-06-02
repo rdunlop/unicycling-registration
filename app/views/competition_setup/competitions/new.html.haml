@@ -1,14 +1,17 @@
-%h1 New Competition
-%h2 Event: #{@event}
-%h3 Signed Up Registrants Count: #{@event.num_signed_up_registrants}
-%br
+%h1 New #{@event} Competition
+%p
+  If you have multiple sets of people competing at the same time, and their scores are judged against each other, choose "age-group"
+%p
+  If each set of competitors is independent, choose "without age groups"
+%p
+  If this competition is a summary of the placings of other competitions, choose "Overall"
 
-%b NOTE:
-This will only create the competition.
+%p
+  %b NOTE:
+  This will only create the competition.
 
-%br
-The Event Director will need to assign/randomize the competitor list.
+%p
+  The Event Director will need to assign/randomize the competitor list.
 
-%br
-%br
-= render 'form'
+%fieldset.form__fieldset
+  = render 'form'
