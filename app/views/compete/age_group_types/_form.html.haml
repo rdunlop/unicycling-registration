@@ -1,28 +1,28 @@
-= form_for(@age_group_type) do |f|
-  = render partial: "shared/error_messages", object: @age_group_type
+%fieldset.form__fieldset
+  = simple_form_for(@age_group_type) do |f|
+    = render partial: "shared/error_messages", object: @age_group_type
 
-  %div
-    = f.label :name
-    = f.text_field :name, :autofocus => "true"
-    %table.items.sortable
-      %caption Entries
-      %thead
-        %tr
-          %th Description
-          %th Start Age
-          %th End Age
-          %th Required Wheel Size (optional)
-          %th Gender
-          %th
-      %tbody
-        = f.nested_fields_for :age_group_entries, render_template: false do |member_f|
-          %tr.item
-            = render partial: "age_group_entry", locals: {f: member_f}
-            %td
-              %a.remove{:href => "#"} remove
-              = member_f.hidden_field :id
-              = member_f.hidden_field :_destroy
-    %a.add{:href => "#"} add entry
-    %br
-    = nested_fields_templates
-    = f.submit
+    = f.input :name, autofocus: true
+
+    %div
+      %table.items.sortable
+        %thead
+          %tr
+            %th Description
+            %th Start Age
+            %th End Age
+            %th Required Wheel Size (optional)
+            %th Gender
+            %th
+        %tbody
+          = f.nested_fields_for :age_group_entries, render_template: false do |member_f|
+            %tr.item
+              = render partial: "age_group_entry", locals: {f: member_f}
+              %td
+                %a.remove{:href => "#"} remove
+                = member_f.hidden_field :id
+                = member_f.hidden_field :_destroy
+      %a.add{:href => "#"} add new
+      %br
+      = nested_fields_templates
+    = f.button :submit

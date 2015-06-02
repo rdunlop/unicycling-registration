@@ -2,4 +2,4 @@
 %td= f.number_field :start_age, {min: 0}
 %td= f.number_field :end_age, {min: 0}
 %td= f.select :wheel_size_id, WheelSize.all.map { |ws| [ws.description, ws.id] }, {:include_blank => true}, :title => "Specify \"blank\" to ignore the competitor's specified wheel size."
-%td= f.select :gender, ['Male', 'Female', 'Mixed']
+%td= f.select :gender, ['Mixed', 'Male', 'Female']
