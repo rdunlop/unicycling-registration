@@ -44,6 +44,20 @@ en:
         info_url: This link appears on the Category page, and can serve as a link to additional information about the events in this category.
       event_category:
         warning_on_registration_summary: Any registrant who is signed up for this category will have a warning on their registration form.
+      competition:
+        scheduled_completion_at: Used to order the results in the admin overview
+        scoring_class: Choose the calculation system
+        num_members_per_competitor: For most events this will be "One"
+        penalty_seconds: Is it possible to penalize a competitor "X" seconds for an infraction (like dismounting the unicycle)?
+        uses_lane_assignments: Enables the Heat Assignment tool
+        award_title_name: Text appearing on official results and awards
+        award_subtitle_name: |
+          Enter an optional additional Line of award text. NOTE: Only allowed WITHOUT Age Group
+        has_experts: |
+          Select this if the results entered here should ALSO be awarded ignoring age-groups results.
+          Selecting this checkbox will cause Expert Awards to be created, separately from age-group results
+          If this competition is ONLY experts, then this checkbox is not required, as they will be placed in a single age group/result.
+          You MUST Also have an Age Group specified
       event_choice:
         tooltip: This will be presented when the user hovers over the label
         optional: Allows the user to choose not to enter data in this field

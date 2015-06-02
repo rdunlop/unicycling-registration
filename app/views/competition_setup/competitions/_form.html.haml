@@ -1,18 +1,40 @@
-= form_for(@competition.new_record? ? [@event, @competition] : [@competition], html: {class: 'multiple_nested'}) do |f|
+= simple_form_for(@competition.new_record? ? [@event, @competition] : [@competition], html: {class: 'multiple_nested'}) do |f|
   = render partial: "/shared/error_messages", object: @competition
-  .field
-    = f.label :name, "Display Name"
-    %br
-    = f.text_field :name
-  .field
-    = f.label :scheduled_completion_at
-    %br
-    = f.datetime_select :scheduled_completion_at, include_blank: true
 
-  %h2 Settings for selecting the competitors from sign-ups
-  = render partial: "competition_sources_form", locals: {f: f, event: @event}
-  = f.label :num_members_per_competitor
-  = f.select :num_members_per_competitor, Competition.num_member_options, include_blank: true
+  = f.input :name
+  = f.input :scheduled_completion_at, include_blank: true
+
+  = f.input :age_group_type_id, collection: AgeGroupType.all, include_blank: true
+  = link_to "Manage Age Groups", age_group_types_path, target: "_blank"
+
+  = f.input :scoring_class, collection: Competition.scoring_classes, include_blank: true
+  = f.input :num_members_per_competitor, collection: Competition.num_member_options, include_blank: true
+
+  %b Penalties
+  %p Is it possible to penalize a competitor "X" seconds for an infraction (like dismounting the unicycle)?
+  = f.input :penalty_seconds
+
+  = f.input :uses_lane_assignments
+
+  %hr
+
+  %h3 Competition Sources
+  .field
+    = radio_button_tag :competition_source, "registration", f.object.has_registration_sources?, class: 'js--displayIfChecked', data: { displayblock: "js--registrationSourcesForm" }
+    = label_tag :competition_source_registration, "Competitors From Registration List"
+  .field
+    = radio_button_tag :competition_source, "competition", f.object.has_competition_sources?, class: 'js--displayIfChecked', data: { displayblock: "js--competitionSourcesForm" }
+    = label_tag :competition_source_competition, "Competitors From other Competition Source"
+  .competitionSource__registration.js--registrationSourcesForm
+    = render partial: "registration_sources_form", locals: {f: f, event: @event}
+
+  .competitionSource__competition.js--competitionSourcesForm
+    = render partial: "competition_sources_form", locals: {f: f, event: @event}
+
+  %h3 Data Entry Setup
+
+  = f.input :start_data_type, collection: Competition.data_recording_types, :include_blank => true
+  = f.input :end_data_type, collection: Competition.data_recording_types, :include_blank => true
 
   %br
   = f.label :automatic_competitor_creation
@@ -20,62 +42,15 @@
 
   %p Selecting this option will automatically create a competitor whenever a registrant signs up for any source-event.
 
-  %h2 Settings For gathering the results
-  %table
-    %thead
-      %tr
-        %th= f.label :uses_lane_assignments
-        %th= f.label :start_data_type
-        %th= f.label :end_data_type
-        %Th= f.label :penalty_seconds, "Seconds applied per penalty"
-    %tbody
-      %tr
-        %td= f.check_box :uses_lane_assignments, title: "Selecting this checkbox enables the Heat/Lane assignment system"
-        %td= f.select :start_data_type, Competition.data_recording_types, :include_blank => true
-        %td= f.select :end_data_type, Competition.data_recording_types, :include_blank => true
-        %td= f.number_field :penalty_seconds
   = render partial: "competition_heats_form", locals: {f: f}
 
-  %h2 Settings for Scoring the results
-  .field
-    %b= f.label :scoring_class
-    %br
-    = f.select :scoring_class, Competition.scoring_classes, include_blank: true
-  .field
-    = f.label :combined_competition_id, "Associated Overall Champion"
-    = f.select :combined_competition_id, CombinedCompetition.all.map{|cc| [cc, cc.id]}, include_blank: true
-  .field
-    = f.label :age_group_type_id
-    = f.select :age_group_type_id, AgeGroupType.all.map{|agt| [agt,agt.id]}, include_blank: true
+  %p If creating an "Overall" competition for aggregate scoring, choose the scoring class
+  = f.input :combined_competition_id, collection: CombinedCompetition.all, include_blank: true
+  = link_to "Manage Scoring Classes", combined_competitions_path, target: "_blank"
 
+  %h3 Settings for printing the awards
+  = f.input :award_title_name
+  = f.input :award_subtitle_name
+  = f.input :has_experts
 
-  %h2 Settings for printing the awards
-  %table
-    %tbody
-      %tr
-        %th= f.label :award_title_name
-        %td= f.text_field :award_title_name
-        %td Enter the text for the Award
-      %tr
-        %th= f.label :award_subtitle_name
-        %td= f.text_field :award_subtitle_name
-        %td
-          Enter an optional additional Line of award text. NOTE: Only allowed
-          %b without
-          Age Group
-      %tr
-        %th= f.label :has_experts
-        %td= f.check_box :has_experts
-        %td
-          Select this if the results entered here should ALSO be awarded ignoring age-groups results.
-          %br
-          Selecting this checkbox will cause Expert Awards to be created, separately from age-group results
-          %br
-          If this competition is ONLY experts, then this checkbox is not required, as they will be placed in a single age group/result.
-          %br
-          You
-          %b Must
-          Also have an Age Group specified
-          %br
-  .actions
-    = f.submit
+  = f.button :submit

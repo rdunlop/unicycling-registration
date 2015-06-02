@@ -267,6 +267,14 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def has_registration_sources?
+    competition_sources.any? { |source| source.registration_source? }
+  end
+
+  def has_competition_sources?
+    competition_sources.any? { |source| source.competition_source? }
+  end
+
   def signed_up_registrants
     @signed_up_registrants ||= competition_sources.inject([]) do |memo, cs|
       memo += cs.signed_up_registrants
