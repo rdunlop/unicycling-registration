@@ -50,9 +50,12 @@ en:
         num_members_per_competitor: For most events this will be "One"
         penalty_seconds: Is it possible to penalize a competitor "X" seconds for an infraction (like dismounting the unicycle)?
         uses_lane_assignments: Enables the Heat Assignment tool
-        award_title_name: Text appearing on official results and awards
+        award_title_name: |
+          Text appearing on official results and awards
+          E.g. Individual Freestyle
         award_subtitle_name: |
           Enter an optional additional Line of award text. NOTE: Only allowed WITHOUT Age Group
+          e.g. Novice Male
         has_experts: |
           Select this if the results entered here should ALSO be awarded ignoring age-groups results.
           Selecting this checkbox will cause Expert Awards to be created, separately from age-group results
