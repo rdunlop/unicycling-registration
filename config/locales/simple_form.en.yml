@@ -50,6 +50,9 @@ en:
         num_members_per_competitor: For most events this will be "One"
         penalty_seconds: Is it possible to penalize a competitor "X" seconds for an infraction (like dismounting the unicycle)?
         uses_lane_assignments: Enables the Heat Assignment tool
+        combined_competition_id: |
+          This should only be enabled the actual overall comp. Not the competitions that are part of this.
+          (ie not for the 10k, only for the "Road Racing Overall Competition")
         award_title_name: |
           Text appearing on official results and awards
           E.g. Individual Freestyle
