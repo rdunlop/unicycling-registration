@@ -50,16 +50,17 @@
           %td= ecat
           %td
             = link_to "HTML", sign_ups_event_category_path(ecat)
-            = link_to "PDF", sign_ups_event_category_path(ecat, :format => "pdf")
+            = link_to "PDF", sign_ups_event_category_path(ecat, :format => :pdf)
           %td= ecat.num_signed_up_registrants
-      %tr
-        %td ALL Categories (combined)
-        %td= event
-        %td
-        %td
-          = link_to 'View All Sign Up lists', sign_ups_event_path(event)
-          = link_to '(pdf)', sign_ups_event_path(event, :format => :pdf)
-        %td= event.num_signed_up_registrants
+      - if event.event_categories.count > 1
+        %tr
+          %td= event.category
+          %td= event
+          %td ALL Combined
+          %td
+            = link_to 'HTML', sign_ups_event_path(event)
+            = link_to 'PDF', sign_ups_event_path(event, :format => :pdf)
+          %td= event.num_signed_up_registrants
 
 %hr
 %h3 Signed Up Volunteers
