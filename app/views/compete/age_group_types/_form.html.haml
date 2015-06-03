@@ -19,10 +19,10 @@
             %tr.item
               = render partial: "age_group_entry", locals: {f: member_f}
               %td
-                %a.remove{:href => "#"} remove
+                = link_to 'remove', "#", class: "remove", data: { confirm: "Are you sure?" }#%a.remove{:href => "#"} remove
                 = member_f.hidden_field :id
                 = member_f.hidden_field :_destroy
-      %a.add{:href => "#"} add new
-      %br
+      .text--right
+        = link_to "add new", "#", class: "add"
       = nested_fields_templates
     = f.button :submit
