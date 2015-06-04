@@ -47,7 +47,8 @@ include ApplicationHelper
 
 describe EventConfiguration do
   before(:each) do
-    @ev = FactoryGirl.build(:event_configuration, :standard_skill_closed_date => Date.new(2013, 5, 5))
+    @ev = EventConfiguration.singleton
+    @ev.assign_attributes(FactoryGirl.attributes_for(:event_configuration, :standard_skill_closed_date => Date.new(2013, 5, 5)))
   end
 
   it "is valid from factoryGirl" do

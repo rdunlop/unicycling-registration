@@ -179,7 +179,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.singleton
-    EventConfiguration.includes(:translations).first || EventConfiguration.new
+    @singleton ||= EventConfiguration.includes(:translations).first || EventConfiguration.new
   end
 
   def self.paypal_base_url

@@ -5,6 +5,9 @@
 - ensure that DQ/DNS competitors have correct points/places
 - improve '/registrant/:id/results' page to honor 'published' status, and also clear up results.
 - Feedback should automatically set the "Reply-to" address to the entered E-mail/logged-in-user's e-mail.
+- Pretend to be any user, so that you can see what they see.
+- Allow creating Expert events without specifynig an age group? (ie: 100m expert shouldn't need an age group)
+
 
 New Rules changes:
 - 1.11 -  Must post the Name + Country of all competitors/results
