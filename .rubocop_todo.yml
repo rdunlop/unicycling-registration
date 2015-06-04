@@ -231,12 +231,12 @@ Style/SpaceBeforeBlockBraces:
 # Offense count: 5
 # Cop supports --auto-correct.
 Style/SpaceBeforeComma:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 4
 # Cop supports --auto-correct.
 Style/SpaceBeforeComment:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 204
 # Cop supports --auto-correct.
@@ -258,7 +258,7 @@ Style/SpaceInsideHashLiteralBraces:
 # Offense count: 10
 # Cop supports --auto-correct.
 Style/SpaceInsideParens:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 6425
 # Cop supports --auto-correct.

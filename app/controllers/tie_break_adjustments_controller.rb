@@ -34,7 +34,7 @@ class TieBreakAdjustmentsController < ApplicationController
 
   def index
     add_to_competition_breadcrumb(@judge.competition)
-    add_breadcrumb "Distance Attempt Entry" , judge_distance_attempts_path(@judge)
+    add_breadcrumb "Distance Attempt Entry", judge_distance_attempts_path(@judge)
     add_breadcrumb "Add Tie Break Adjustments", judge_tie_break_adjustments_path(@judge)
 
     @tie_break_adjustment ||= TieBreakAdjustment.new

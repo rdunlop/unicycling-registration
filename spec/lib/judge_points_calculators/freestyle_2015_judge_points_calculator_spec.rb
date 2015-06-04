@@ -16,8 +16,8 @@ describe Freestyle_2015_JudgePointsCalculator do
 
     it "rounds the percentages correctly" do
       expect(subject.judged_points(score_totals, 28.83)).to eq(30.76)
-      expect(subject.judged_points(score_totals, 29.9 )).to eq(31.90)
-      expect(subject.judged_points(score_totals, 35   )).to eq(37.34)
+      expect(subject.judged_points(score_totals, 29.9)).to eq(31.90)
+      expect(subject.judged_points(score_totals, 35)).to eq(37.34)
     end
   end
 

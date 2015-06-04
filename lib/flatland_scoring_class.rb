@@ -26,7 +26,7 @@ class FlatlandScoringClass < BaseScoringClass
   # returns the result for this competitor
   def competitor_result(competitor)
     if self.competitor_has_result?(competitor)
-      nil# not applicable in Freestyle
+      nil # not applicable in Freestyle
     else
       nil
     end

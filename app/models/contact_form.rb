@@ -4,7 +4,7 @@ class ContactForm
 
   attr_accessor :feedback, :email, :signed_in
   validates_presence_of :feedback
-  validates_presence_of :email, message: "can't be empty when not signed in" , unless: '@signed_in.present?'
+  validates_presence_of :email, message: "can't be empty when not signed in", unless: '@signed_in.present?'
 
   def initialize(attributes = {})
     attributes.each do |name, value|

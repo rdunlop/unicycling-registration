@@ -33,7 +33,7 @@ describe EventChoice do
   it "can have an empty tooltip" do
     @ec.tooltip = ""
     expect(@ec.valid?).to eq(true)
-    expect(@ec.tooltip.blank? ? true : false ).to eq(true)
+    expect(@ec.tooltip.blank? ? true : false).to eq(true)
   end
 
   it "must have a value for optional" do

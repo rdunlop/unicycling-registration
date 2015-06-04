@@ -61,7 +61,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
                                         :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,
                                         :penalty_seconds, :automatic_competitor_creation, :combined_competition_id,
                                         competition_sources_attributes: [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy],
-                                        wave_times_attributes: [:id, :scheduled_time, :wave, :minutes, :seconds, :_destroy] )
+                                        wave_times_attributes: [:id, :scheduled_time, :wave, :minutes, :seconds, :_destroy])
   end
 
   def load_competition

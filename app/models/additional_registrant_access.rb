@@ -24,7 +24,7 @@ class AdditionalRegistrantAccess < ActiveRecord::Base
   validates :user, :registrant, presence: true
   validates :registrant_id, uniqueness: {scope: [:user_id]}
 
-  scope :full_access, -> { where(accepted_readwrite: true ) }
+  scope :full_access, -> { where(accepted_readwrite: true) }
   scope :permitted, -> { where("accepted_readonly = true OR accepted_readwrite = true") }
   scope :need_reply, -> { where(accepted_readwrite: false, accepted_readonly: false, declined: false) }
 

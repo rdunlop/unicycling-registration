@@ -54,7 +54,7 @@ class WelcomeController < ApplicationController
   # This tries to get around the apple-touch-icon.png requests
   #  and the humans.txt requests
   def check_acceptable_format
-    if ["txt", "png"].include?(params[:format] )
+    if ["txt", "png"].include?(params[:format])
       params[:format] = nil
       raise ActiveRecord::RecordNotFound.new
     end

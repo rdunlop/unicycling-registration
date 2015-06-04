@@ -76,7 +76,7 @@ gem 'capistrano-rails'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano3-unicorn'
-gem 'capistrano-sidekiq' , github: 'seuros/capistrano-sidekiq'
+gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
 
 group :naucc, :development, :caching do
   gem 'quiet_assets'
