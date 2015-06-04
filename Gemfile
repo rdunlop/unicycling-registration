@@ -24,7 +24,7 @@ gem 'chosen-rails'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'
 gem 'fancybox2-rails', '~> 0.2.8'
-gem 'font-kit-rails', :git => "git://github.com/sandelius/font-kit-rails.git", :ref => "480c979b84aa4d32652772822dee2366c37eed2e" # to get a change which includes font-url
+gem 'font-kit-rails', git: "git://github.com/sandelius/font-kit-rails.git", ref: "480c979b84aa4d32652772822dee2366c37eed2e" # to get a change which includes font-url
 gem 'tinymce-rails'
 gem 'recaptcha'
 gem 'pickadate-rails'
@@ -43,7 +43,7 @@ gem 'newrelic_rpm'
 gem 'skylight'
 gem 'sidekiq'
 # if you require 'sinatra' you get the Sinatra DSL extended to Object
-gem 'sinatra', '>= 1.3.0', :require => nil # necessary for sidekiq routing
+gem 'sinatra', '>= 1.3.0', require: nil # necessary for sidekiq routing
 gem 'unicorn', require: false
 gem 'whenever'
 gem 'rubocop', require: false
@@ -83,7 +83,7 @@ group :naucc, :development, :caching do
   gem 'consistency_fail'
   gem 'better_errors'
   gem "binding_of_caller"
-  gem 'simplecov', :require => false, :group => :test
+  gem 'simplecov', require: false, group: :test
 end
 
 group :unicon, :naucc, :development, :test, :cucumber, :caching do

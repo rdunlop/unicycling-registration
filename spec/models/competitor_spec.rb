@@ -37,7 +37,7 @@ describe Competitor do
 
   describe "when there are time results" do
     before :each do
-      @tr1 = FactoryGirl.build_stubbed(:time_result, :minutes => 1)
+      @tr1 = FactoryGirl.build_stubbed(:time_result, minutes: 1)
       allow(@comp).to receive(:finish_time_results).and_return([@tr1])
     end
 
@@ -47,7 +47,7 @@ describe Competitor do
 
     describe "when there is also a start time" do
       before :each do
-        @tr2 = FactoryGirl.build_stubbed(:time_result, :is_start_time => true, :seconds => 10)
+        @tr2 = FactoryGirl.build_stubbed(:time_result, is_start_time: true, seconds: 10)
         allow(@comp).to receive(:start_time_results).and_return([@tr2])
       end
 
@@ -69,11 +69,11 @@ describe Competitor do
   end
   describe "when there are multiple start and end times" do
     before :each do
-      @start1 = FactoryGirl.build_stubbed(:time_result, :is_start_time => true, :minutes => 1)
-      @start2 = FactoryGirl.build_stubbed(:time_result, :is_start_time => true, :minutes => 10)
+      @start1 = FactoryGirl.build_stubbed(:time_result, is_start_time: true, minutes: 1)
+      @start2 = FactoryGirl.build_stubbed(:time_result, is_start_time: true, minutes: 10)
 
-      @end1 = FactoryGirl.build_stubbed(:time_result, :minutes => 2, :seconds => 30)
-      @end2 = FactoryGirl.build_stubbed(:time_result, :minutes => 10, :seconds => 45)
+      @end1 = FactoryGirl.build_stubbed(:time_result, minutes: 2, seconds: 30)
+      @end2 = FactoryGirl.build_stubbed(:time_result, minutes: 10, seconds: 45)
 
       allow(@comp).to receive(:start_time_results).and_return([@start1, @start2])
       allow(@comp).to receive(:finish_time_results).and_return([@end1, @end2])
@@ -102,8 +102,8 @@ describe Competitor do
 
   describe "when there are end times without start times" do
     before :each do
-      @end1 = FactoryGirl.build_stubbed(:time_result, :minutes => 2, :seconds => 30)
-      @end2 = FactoryGirl.build_stubbed(:time_result, :minutes => 10, :seconds => 45)
+      @end1 = FactoryGirl.build_stubbed(:time_result, minutes: 2, seconds: 30)
+      @end2 = FactoryGirl.build_stubbed(:time_result, minutes: 10, seconds: 45)
 
       allow(@comp).to receive(:finish_time_results).and_return([@end1, @end2])
     end
@@ -184,7 +184,7 @@ describe Competitor do
     expect(@comp.name).to eq("Sargent Pepper")
   end
   it "setting the same position for another competitor should modify the original competitor" do
-    c2 = FactoryGirl.build(:event_competitor, :competition => @comp.competition, :position => @comp.position)
+    c2 = FactoryGirl.build(:event_competitor, competition: @comp.competition, position: @comp.position)
 
     expect(c2.valid?).to eq(true)
     expect(c2.save).to eq(true)
@@ -214,13 +214,13 @@ describe Competitor do
 
   describe "when it has multiple members" do
     before(:each) do
-      FactoryGirl.create(:event_configuration, :start_date => Date.new(2010, 01, 01))
+      FactoryGirl.create(:event_configuration, start_date: Date.new(2010, 01, 01))
       member = @comp.members(true).first
       @reg1 = member.registrant
 
       Delorean.jump 2
       @comp.reload
-      member2 = FactoryGirl.create(:member, :competitor => @comp)
+      member2 = FactoryGirl.create(:member, competitor: @comp)
       @comp.reload
       @reg2 = member2.registrant
     end
@@ -238,9 +238,9 @@ describe Competitor do
 
     it "should display the maximum ages for all members (when they are different)" do
       Delorean.jump 2
-      @reg3 = FactoryGirl.create(:registrant, :birthday => Date.new(1980, 02, 10))
+      @reg3 = FactoryGirl.create(:registrant, birthday: Date.new(1980, 02, 10))
       @comp2 = FactoryGirl.create(:event_competitor)
-      member3 = FactoryGirl.create(:member, :competitor => @comp2, :registrant => @reg3)
+      member3 = FactoryGirl.create(:member, competitor: @comp2, registrant: @reg3)
       @comp2.reload
 
       expect(@comp2.age).to eq(@reg3.age)
@@ -263,8 +263,8 @@ describe Competitor do
 
     it "should display (mixed) if both genders exist" do
       Delorean.jump 2
-      @reg3 = FactoryGirl.create(:registrant, :gender => "Female")
-      member3 = FactoryGirl.create(:member, :competitor => @comp, :registrant => @reg3)
+      @reg3 = FactoryGirl.create(:registrant, gender: "Female")
+      member3 = FactoryGirl.create(:member, competitor: @comp, registrant: @reg3)
       @comp.reload
 
       expect(@comp.gender).to eq("(mixed)")
@@ -292,8 +292,8 @@ describe Competitor do
       @score.val_3 = 3.0
       @score.val_4 = 4.0
       @score.judge = FactoryGirl.create(:judge,
-                                        :user => FactoryGirl.create(:admin_user),
-                                        :judge_type => FactoryGirl.create(:judge_type))
+                                        user: FactoryGirl.create(:admin_user),
+                                        judge_type: FactoryGirl.create(:judge_type))
       @score.competitor = @cr
       @score.save
       @competition.reload
@@ -353,7 +353,7 @@ describe Competitor do
       @da = DistanceAttempt.new
     end
     it "should be accessible from the competitor" do
-      da = FactoryGirl.create(:distance_attempt, :competitor => @comp)
+      da = FactoryGirl.create(:distance_attempt, competitor: @comp)
 
       expect(@comp.distance_attempts).to eq([da])
     end
@@ -371,19 +371,19 @@ describe Competitor do
 
     it "should indicate double_fault if two attempts at the same distance are found" do
       expect(@comp.double_fault?).to eq(false)
-      da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
+      da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.double_fault?).to eq(false)
       Delorean.jump 2
-      da2 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
+      da2 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
 
       expect(@comp.reload.double_fault?).to eq(true)
     end
     it "should NOT indicate double_fault if two consecutive attempts at different distances are found" do
       expect(@comp.double_fault?).to eq(false)
-      da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
+      da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.double_fault?).to eq(false)
       Delorean.jump 2
-      da2 = FactoryGirl.create(:distance_attempt, :distance => da1.distance + 1, :competitor => @comp, :fault => true)
+      da2 = FactoryGirl.create(:distance_attempt, distance: da1.distance + 1, competitor: @comp, fault: true)
 
       expect(@comp.reload.double_fault?).to eq(false)
     end
@@ -391,21 +391,21 @@ describe Competitor do
     it "should return the max attempted distance" do
       expect(@comp.max_attempted_distance).to eq(0)
       expect(@comp.max_successful_distance).to eq(0)
-      da1 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :fault => true)
+      da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.max_attempted_distance).to eq(da1.distance)
       expect(@comp.reload.max_successful_distance).to eq(0)
     end
 
     it "should return the attempts is descending distance order" do
-      da1 = FactoryGirl.create(:distance_attempt, :distance => 1, :competitor => @comp, :fault => false)
-      da2 = FactoryGirl.create(:distance_attempt, :distance => 2, :competitor => @comp, :fault => false)
-      da3 = FactoryGirl.create(:distance_attempt, :distance => 3, :competitor => @comp, :fault => false)
+      da1 = FactoryGirl.create(:distance_attempt, distance: 1, competitor: @comp, fault: false)
+      da2 = FactoryGirl.create(:distance_attempt, distance: 2, competitor: @comp, fault: false)
+      da3 = FactoryGirl.create(:distance_attempt, distance: 3, competitor: @comp, fault: false)
 
       expect(@comp.distance_attempts).to eq([da3, da2, da1])
     end
     it "should return the attempts in descending attempt order (if the same distance)" do
-      da1 = FactoryGirl.create(:distance_attempt, :distance => 1, :competitor => @comp, :fault => true)
-      da2 = FactoryGirl.create(:distance_attempt, :distance => 1, :competitor => @comp, :fault => false)
+      da1 = FactoryGirl.create(:distance_attempt, distance: 1, competitor: @comp, fault: true)
+      da2 = FactoryGirl.create(:distance_attempt, distance: 1, competitor: @comp, fault: false)
 
       expect(@comp.distance_attempts).to eq([da2, da1])
     end
@@ -416,14 +416,14 @@ describe Competitor do
 
     describe "when attempts have already been made" do
       before (:each) do
-        FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 10, :fault => false)
+        FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 10, fault: false)
         Delorean.jump 2
-        FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
+        FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
         Delorean.jump 2
       end
 
       it "should not be allowed to attempt a smaller distance" do
-        da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 5)
+        da = FactoryGirl.build(:distance_attempt, competitor: @comp, distance: 5)
 
         expect(da.valid?).to eq(false)
       end
@@ -432,8 +432,8 @@ describe Competitor do
       end
 
       it "should not allow another attempt when in double-fault" do
-        FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
-        da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 25, :fault => false)
+        FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
+        da = FactoryGirl.build(:distance_attempt, competitor: @comp, distance: 25, fault: false)
 
         expect(@comp.reload.double_fault?).to eq(true)
         expect(da.valid?).to eq(false)
@@ -441,7 +441,7 @@ describe Competitor do
 
       describe "when there are 2 faults" do
         before(:each) do
-          @da2 = FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 15, :fault => true)
+          @da2 = FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
         end
         it "should allow the 2nd attempt to also be a fault" do
           expect(@comp.reload.double_fault?).to eq(true)
@@ -453,11 +453,11 @@ describe Competitor do
       end
 
       it "should allow multiple faults, interspersed within the attempts" do
-        FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 20, :fault => false)
+        FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 20, fault: false)
         Delorean.jump 2
-        FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 25, :fault => true)
+        FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 25, fault: true)
 
-        da = FactoryGirl.build(:distance_attempt, :competitor => @comp, :distance => 25, :fault => false)
+        da = FactoryGirl.build(:distance_attempt, competitor: @comp, distance: 25, fault: false)
 
         expect(da.valid?).to eq(true)
       end
@@ -468,7 +468,7 @@ describe Competitor do
 
       describe "the last attempt was a success" do
         before(:each) do
-          FactoryGirl.create(:distance_attempt, :competitor => @comp, :distance => 20, :fault => false)
+          FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 20, fault: false)
         end
         it "should have a nice status" do
           expect(@comp.reload.distance_attempt_status).to eq("Success. Next Distance 21+")
@@ -494,8 +494,8 @@ describe Competitor do
     describe "when there are DQs and live results" do
       before :each do
         @comp.competition.scoring_class = "Shortest Time"
-        @end1 = FactoryGirl.create(:time_result, competitor: @comp, :minutes => 2, :seconds => 30)
-        @end2 = FactoryGirl.create(:time_result, competitor: @comp, :minutes => 0, :seconds => 45, status: "DQ")
+        @end1 = FactoryGirl.create(:time_result, competitor: @comp, minutes: 2, seconds: 30)
+        @end2 = FactoryGirl.create(:time_result, competitor: @comp, minutes: 0, seconds: 45, status: "DQ")
       end
 
       it "doesn't choose DQ as the best time" do

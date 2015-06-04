@@ -22,15 +22,15 @@
 class TwoAttemptEntry < ActiveRecord::Base
   include FindsMatchingCompetitor
 
-  validates :competition_id, :presence => true
-  validates :user_id, :bib_number, :presence => true
+  validates :competition_id, presence: true
+  validates :user_id, :bib_number, presence: true
   validate :results_for_competition
-  validates :minutes_1, :seconds_1, :thousands_1, :numericality => {:greater_than_or_equal_to => 0}, allow_nil: true
-  validates :minutes_2, :seconds_2, :thousands_2, :numericality => {:greater_than_or_equal_to => 0}, allow_nil: true
+  validates :minutes_1, :seconds_1, :thousands_1, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
+  validates :minutes_2, :seconds_2, :thousands_2, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 
   before_validation :clear_status_of_string
-  validates :status_1, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
-  validates :status_2, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
+  validates :status_1, inclusion: { in: TimeResult.status_values, allow_nil: true }
+  validates :status_2, inclusion: { in: TimeResult.status_values, allow_nil: true }
   validates :is_start_time, inclusion: { in: [true, false] }
 
   belongs_to :user

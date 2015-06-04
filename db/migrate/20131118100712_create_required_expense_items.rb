@@ -19,7 +19,7 @@ class CreateRequiredExpenseItems < ActiveRecord::Migration
   end
 
   def up
-    add_column :registrant_expense_items, :system_managed, :boolean, :default => false
+    add_column :registrant_expense_items, :system_managed, :boolean, default: false
 
     Registrant.reset_column_information
     RegistrantExpenseItem.reset_column_information
@@ -30,7 +30,7 @@ class CreateRequiredExpenseItems < ActiveRecord::Migration
       ei = eg.expense_items.first
       Registrant.all.each do |reg|
         next unless (reg.competitor && eg.competitor_required) || ((!reg.competitor) && eg.noncompetitor_required)
-        next if reg.payment_details.where(:payments => {:completed  => true}).map { |pd| pd.expense_item_id}.include?(ei.id)
+        next if reg.payment_details.where(payments: {completed: true}).map { |pd| pd.expense_item_id}.include?(ei.id)
         re = RegistrantExpenseItem.new
         re.registrant_id = reg.id
         re.expense_item_id = ei.id

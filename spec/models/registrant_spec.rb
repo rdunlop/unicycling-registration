@@ -263,7 +263,7 @@ describe Registrant do
   describe "with an expense_item" do
     before(:each) do
       @item = FactoryGirl.create(:expense_item)
-      @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
+      @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @item)
       @reg.registrant_expense_items << @rei
       @rei.save
       @reg.reload
@@ -299,12 +299,12 @@ describe Registrant do
     describe "having paid for the item once, but still having it as a registrant_expense_item" do
       before(:each) do
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :amount => @item.cost, :expense_item => @item)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @reg, amount: @item.cost, expense_item: @item)
         @payment.reload
         @payment.completed = true
         @payment.save!
 
-        rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @item)
+        rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @item)
         @reg.registrant_expense_items << rei
         rei.save
         @reg.reload
@@ -323,7 +323,7 @@ describe Registrant do
 
   describe "with a registrant_choice" do
     before(:each) do
-      @rc = FactoryGirl.create(:registrant_choice, :registrant => @reg)
+      @rc = FactoryGirl.create(:registrant_choice, registrant: @reg)
       @reg.reload
     end
     it "can access its registrant choices" do
@@ -346,9 +346,9 @@ describe Registrant do
   end
   describe "with a standard_skill registrant_choice" do
     before(:each) do
-      event = FactoryGirl.create(:event, :name => "Standard Skill")
+      event = FactoryGirl.create(:event, name: "Standard Skill")
       event_category = event.event_categories.first
-      @rc = FactoryGirl.create(:registrant_event_sign_up, :event => event, :event_category => event_category, :registrant => @reg, :signed_up => true)
+      @rc = FactoryGirl.create(:registrant_event_sign_up, event: event, event_category: event_category, registrant: @reg, signed_up: true)
       @reg.reload
     end
     it "should list as having standard skill" do
@@ -363,20 +363,20 @@ describe Registrant do
 
   describe "with a registration_period" do
     before(:each) do
-      @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
-      @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
-      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 01, 01), :end_date => Date.new(2022, 01, 01), :competitor_expense_item => @comp_exp, :noncompetitor_expense_item => @noncomp_exp)
+      @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
+      @noncomp_exp = FactoryGirl.create(:expense_item, cost: 50)
+      @rp = FactoryGirl.create(:registration_period, start_date: Date.new(2010, 01, 01), end_date: Date.new(2022, 01, 01), competitor_expense_item: @comp_exp, noncompetitor_expense_item: @noncomp_exp)
     end
 
     describe "with an older (PAID_FOR) registration_period" do
       before(:each) do
-        @oldcomp_exp = FactoryGirl.create(:expense_item, :cost => 90)
-        @oldnoncomp_exp = FactoryGirl.create(:expense_item, :cost => 40)
-        @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2009, 01, 01), :end_date => Date.new(2010, 01, 01),
-                                                       :competitor_expense_item => @oldcomp_exp, :noncompetitor_expense_item => @oldnoncomp_exp)
+        @oldcomp_exp = FactoryGirl.create(:expense_item, cost: 90)
+        @oldnoncomp_exp = FactoryGirl.create(:expense_item, cost: 40)
+        @rp = FactoryGirl.create(:registration_period, start_date: Date.new(2009, 01, 01), end_date: Date.new(2010, 01, 01),
+                                                       competitor_expense_item: @oldcomp_exp, noncompetitor_expense_item: @oldnoncomp_exp)
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 90, :expense_item => @oldcomp_exp)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @comp, amount: 90, expense_item: @oldcomp_exp)
         @payment.reload
         @payment.completed = true
         @payment.save
@@ -395,7 +395,7 @@ describe Registrant do
       before(:each) do
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100, :expense_item => @comp_exp)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @comp, amount: 100, expense_item: @comp_exp)
         @payment.reload
         @payment.completed = true
         @payment.save
@@ -426,7 +426,7 @@ describe Registrant do
 
       describe "with a refund of everything it has completed" do
         before(:each) do
-          @ref_det = FactoryGirl.create(:refund_detail, :payment_detail => @payment_detail)
+          @ref_det = FactoryGirl.create(:refund_detail, payment_detail: @payment_detail)
         end
 
         it "lists nothing as paid" do
@@ -449,7 +449,7 @@ describe Registrant do
       before(:each) do
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @comp, :amount => 100, :expense_item => @comp_exp)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @comp, amount: 100, expense_item: @comp_exp)
       end
       it "should have associated payment_details" do
         expect(@comp.payment_details).to eq([@payment_detail])
@@ -474,8 +474,8 @@ describe Registrant do
 
   describe "with an expense_group which REQUIRES one free item per group" do
     before(:each) do
-      @eg = FactoryGirl.create(:expense_group, :competitor_free_options => "One Free In Group REQUIRED")
-      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+      @eg = FactoryGirl.create(:expense_group, competitor_free_options: "One Free In Group REQUIRED")
+      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
     end
 
     it "marks the registrant as expense_item_is_free for this expense_item" do
@@ -488,7 +488,7 @@ describe Registrant do
 
     context "when it has the (free) expense item" do
       before(:each) do
-        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, free: true)
+        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
         @reg.reload
       end
 
@@ -500,8 +500,8 @@ describe Registrant do
 
   describe "with an expense_group which allows one free item per group" do
     before(:each) do
-      @eg = FactoryGirl.create(:expense_group, :competitor_free_options => "One Free In Group")
-      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+      @eg = FactoryGirl.create(:expense_group, competitor_free_options: "One Free In Group")
+      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
     end
 
     it "marks the registrant as expense_item_is_free for this expense_item" do
@@ -509,7 +509,7 @@ describe Registrant do
     end
     describe "when it has a non-free item of the same expense_group (not free though)" do
       before(:each) do
-        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei)
         @reg.reload
       end
 
@@ -520,12 +520,12 @@ describe Registrant do
 
     describe "when it has a free expense_item" do
       before(:each) do
-        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
+        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
         @reg.reload
       end
 
       it "doesn't allow registrant to have 2 free of this group" do
-        @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
+        @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
         expect(@rei.valid?).to eq(false)
       end
 
@@ -536,9 +536,9 @@ describe Registrant do
 
     describe "when it has a paid expense_item" do
       before(:each) do
-        @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+        @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
         @pay = FactoryGirl.create(:payment)
-        @pei = FactoryGirl.create(:payment_detail, :registrant => @reg, :payment => @pay, :expense_item => @ei, :free => true)
+        @pei = FactoryGirl.create(:payment_detail, registrant: @reg, payment: @pay, expense_item: @ei, free: true)
         @pay.reload
         @pay.completed = true
         @pay.save!
@@ -553,8 +553,8 @@ describe Registrant do
 
   describe "with an expense_group which allows one free item per item in group" do
     before(:each) do
-      @eg = FactoryGirl.create(:expense_group, :competitor_free_options => "One Free of Each In Group")
-      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+      @eg = FactoryGirl.create(:expense_group, competitor_free_options: "One Free of Each In Group")
+      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
     end
 
     it "marks the registrant as expense_item_is_free for this expense_item" do
@@ -563,7 +563,7 @@ describe Registrant do
 
     describe "when it has a non-free item of the same expense_group (not free though)" do
       before(:each) do
-        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei)
         @reg.reload
       end
 
@@ -574,18 +574,18 @@ describe Registrant do
 
     describe "when it has a free expense_item" do
       before(:each) do
-        FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
+        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
         @reg.reload
       end
 
       it "doesn't allow registrant to have 2 free of this expense_item" do
-        @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei, :free => true)
+        @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
         expect(@rei.valid?).to eq(false)
       end
 
       it "allows different free expense_items in the same group" do
-        @ei2 = FactoryGirl.create(:expense_item, :expense_group => @eg)
-        @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei2, :free => true)
+        @ei2 = FactoryGirl.create(:expense_item, expense_group: @eg)
+        @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @ei2, free: true)
         expect(@rei.valid?).to eq(true)
       end
     end
@@ -594,8 +594,8 @@ describe Registrant do
   describe "with an expense_group marked as 'required' created AFTER the non-competitor registrant" do
     before(:each) do
       @nc_reg = FactoryGirl.create(:noncompetitor)
-      @eg = FactoryGirl.create(:expense_group, :noncompetitor_required => true)
-      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+      @eg = FactoryGirl.create(:expense_group, noncompetitor_required: true)
+      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
     end
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
@@ -609,8 +609,8 @@ describe Registrant do
 
   describe "with an expense_group marked as 'required' created AFTER the registrant" do
     before(:each) do
-      @eg = FactoryGirl.create(:expense_group, :competitor_required => true)
-      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+      @eg = FactoryGirl.create(:expense_group, competitor_required: true)
+      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
     end
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
@@ -622,8 +622,8 @@ describe Registrant do
 
   describe "with an expense_group marked as 'required' created BEFORE the registrant" do
     before(:each) do
-      @eg = FactoryGirl.create(:expense_group, :competitor_required => true)
-      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+      @eg = FactoryGirl.create(:expense_group, competitor_required: true)
+      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
       @reg2 = FactoryGirl.create(:competitor)
     end
 
@@ -635,7 +635,7 @@ describe Registrant do
     describe "when it has paid for the expense_item" do
       before(:each) do
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg2, :amount => @ei.cost, :expense_item => @ei)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @reg2, amount: @ei.cost, expense_item: @ei)
         @payment.reload
         @payment.completed = true
         @payment.save!

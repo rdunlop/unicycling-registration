@@ -54,7 +54,7 @@ class ExportRegistrantsController < ApplicationController
     sheet[0, 12] = "Club"
 
     row = 1
-    Registrant.active.includes(:payment_details => [:payment]).each do |reg|
+    Registrant.active.includes(payment_details: [:payment]).each do |reg|
       sheet[row, 0] = reg.bib_number
       sheet[row, 1] = reg.contact_detail.usa_member_number
       sheet[row, 2] = reg.first_name
@@ -82,7 +82,7 @@ class ExportRegistrantsController < ApplicationController
     s.write report
 
     respond_to do |format|
-      format.xls { send_data report.string, :filename => "registrants_with_payments.xls" }
+      format.xls { send_data report.string, filename: "registrants_with_payments.xls" }
     end
   end
 end

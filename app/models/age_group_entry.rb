@@ -21,12 +21,12 @@
 #
 
 class AgeGroupEntry < ActiveRecord::Base
-  validates :age_group_type, :short_description, :start_age, :end_age, :presence => true
-  validates :start_age, :end_age, :numericality => {:greater_than_or_equal_to => 0}
-  validates :short_description, :uniqueness => {:scope => :age_group_type_id}
-  validates :gender, :inclusion => {:in => %w(Male Female Mixed), :message => "%{value} must be either 'Male', 'Female' or 'Mixed'"}
+  validates :age_group_type, :short_description, :start_age, :end_age, presence: true
+  validates :start_age, :end_age, numericality: {greater_than_or_equal_to: 0}
+  validates :short_description, uniqueness: {scope: :age_group_type_id}
+  validates :gender, inclusion: {in: %w(Male Female Mixed), message: "%{value} must be either 'Male', 'Female' or 'Mixed'"}
 
-  belongs_to :age_group_type, :touch => true, inverse_of: :age_group_entries
+  belongs_to :age_group_type, touch: true, inverse_of: :age_group_entries
   belongs_to :wheel_size
 
   acts_as_restful_list scope: :age_group_type

@@ -29,7 +29,7 @@ class Compete::WavesController < ApplicationController
 
         report = StringIO.new
         s.write report
-        send_data report.string, :filename => "#{@competition.slug}-waves-draft-#{Date.today}.xls"
+        send_data report.string, filename: "#{@competition.slug}-waves-draft-#{Date.today}.xls"
       }
       format.html {} # normal
     end

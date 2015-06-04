@@ -23,6 +23,6 @@ class Translations::ExpenseItemsController < Admin::TranslationsController
   private
 
   def expense_item_params
-    params.require(:expense_item).permit(:translations_attributes => [:id, :locale, :name, :details_label])
+    params.require(:expense_item).permit(translations_attributes: [:id, :locale, :name, :details_label])
   end
 end

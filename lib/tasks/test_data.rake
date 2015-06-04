@@ -61,7 +61,7 @@ def create_competition(event, competition_name, event_cat_names, source_competit
   end
 end
 
-task :create_fake_data => :environment do
+task create_fake_data: :environment do
   @track = create_category("Track")
   @t100m = create_event(@track, "100m")
   @t400m = create_event(@track, "400m")

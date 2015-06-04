@@ -20,8 +20,8 @@ describe PaymentPresenter do
   describe "when a registrant has paid for something" do
     before(:each) do
       @reg = FactoryGirl.create(:competitor)
-      @payment = FactoryGirl.create(:payment, :completed => true)
-      @pd = FactoryGirl.create(:payment_detail, :payment => @payment, :registrant => @reg, :details => "Some details")
+      @payment = FactoryGirl.create(:payment, completed: true)
+      @pd = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @reg, details: "Some details")
     end
 
     it "has paid_items for the registrant" do
@@ -50,7 +50,7 @@ describe PaymentPresenter do
   describe "when a registrant has selected something, but not paid for" do
     before(:each) do
       @reg = FactoryGirl.create(:competitor)
-      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :details => "Some other details")
+      @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, details: "Some other details")
       @reg.reload
     end
     it "has unpaid_details" do

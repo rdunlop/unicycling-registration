@@ -11,12 +11,12 @@ describe "import_results/edit" do
       render
 
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      assert_select "form", :action => import_result_path(@import_result), :method => "post" do
-        assert_select "select#import_result_bib_number", :name => "import_result[bib_number]"
-        assert_select "input#import_result_minutes", :name => "import_result[minutes]"
-        assert_select "input#import_result_seconds", :name => "import_result[seconds]"
-        assert_select "input#import_result_thousands", :name => "import_result[thousands]"
-        assert_select "select#import_result_status", :name => "import_result[status]"
+      assert_select "form", action: import_result_path(@import_result), method: "post" do
+        assert_select "select#import_result_bib_number", name: "import_result[bib_number]"
+        assert_select "input#import_result_minutes", name: "import_result[minutes]"
+        assert_select "input#import_result_seconds", name: "import_result[seconds]"
+        assert_select "input#import_result_thousands", name: "import_result[thousands]"
+        assert_select "select#import_result_status", name: "import_result[status]"
       end
     end
   end
@@ -31,9 +31,9 @@ describe "import_results/edit" do
       render
 
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      assert_select "form", :action => import_result_path(@import_result), :method => "post" do
-        assert_select "select#import_result_bib_number", :name => "import_result[bib_number]"
-        assert_select "input#import_result_details", :name => "import_result[details]"
+      assert_select "form", action: import_result_path(@import_result), method: "post" do
+        assert_select "select#import_result_bib_number", name: "import_result[bib_number]"
+        assert_select "input#import_result_details", name: "import_result[details]"
       end
     end
   end

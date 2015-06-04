@@ -4,7 +4,7 @@ class CreateCompetitionSourceModel < ActiveRecord::Migration
   end
 
   class CompetitionSource < ActiveRecord::Base
-    belongs_to :target_competition, :class_name => "Competition"
+    belongs_to :target_competition, class_name: "Competition"
     belongs_to :event_category
     belongs_to :competition
   end
@@ -19,18 +19,18 @@ class CreateCompetitionSourceModel < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :competition_sources, ["competition_id"], :name => "index_competition_sources_competition_id"
-    add_index :competition_sources, ["event_category_id"], :name => "index_competition_sources_event_category_id"
-    add_index :competition_sources, ["target_competition_id"], :name => "index_competition_sources_target_competition_id"
+    add_index :competition_sources, ["competition_id"], name: "index_competition_sources_competition_id"
+    add_index :competition_sources, ["event_category_id"], name: "index_competition_sources_event_category_id"
+    add_index :competition_sources, ["target_competition_id"], name: "index_competition_sources_target_competition_id"
 
     CompetitionSource.reset_column_information
     Competition.reset_column_information
 
     Competition.all.each do |competition|
       cs = CompetitionSource.new(
-        :target_competition_id => competition.id,
-        :gender_filter => competition.gender_filter,
-        :event_category_id => competition.event_category_id
+        target_competition_id: competition.id,
+        gender_filter: competition.gender_filter,
+        event_category_id: competition.event_category_id
       )
       cs.save!
     end

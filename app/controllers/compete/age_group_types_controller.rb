@@ -42,6 +42,6 @@ class Compete::AgeGroupTypesController < ApplicationController
 
   def age_group_type_params
     params.require(:age_group_type).permit(:name, :description,
-                                           :age_group_entries_attributes =>[:id, :_destroy, :end_age, :gender, :short_description, :start_age, :wheel_size_id])
+                                           age_group_entries_attributes: [:id, :_destroy, :end_age, :gender, :short_description, :start_age, :wheel_size_id])
   end
 end

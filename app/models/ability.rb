@@ -53,7 +53,7 @@ class Ability
     can [:read], Competitor
     can :read, Competition
 
-    can :read, Judge, :user_id => user.id
+    can :read, Judge, user_id: user.id
 
     # Freestyle
     can :create, Score
@@ -151,7 +151,7 @@ class Ability
   end
 
   def define_ability_for_logged_in_user(user)
-    alias_action :create, :read, :update, :destroy, :to => :crud
+    alias_action :create, :read, :update, :destroy, to: :crud
 
     if user.has_role? :super_admin
       can :access, :rails_admin
@@ -229,7 +229,7 @@ class Ability
       can [:crud, :set_places, :lock, :unlock], Competition
       can [:crud], CombinedCompetition
       can [:crud], CombinedCompetitionEntry
-      # can [:read, :set_role, :set_password], :permission
+      can [:read, :set_role, :set_password], :permission
     end
 
     # #################################################
@@ -302,12 +302,12 @@ class Ability
     #  user.has_role? :admin
     # end
     unless config.music_submission_ended?
-      can [:crud, :file_complete, :add_file, :my_songs, :create_guest_song], Song, :user_id => user.id
+      can [:crud, :file_complete, :add_file, :my_songs, :create_guest_song], Song, user_id: user.id
     end
 
     # Sharing Registrants across Users
-    can :read, User, :id => user.id
-    can [:read, :new, :create], AdditionalRegistrantAccess, :user_id => user.id
+    can :read, User, id: user.id
+    can [:read, :new, :create], AdditionalRegistrantAccess, user_id: user.id
     can :invitations, AdditionalRegistrantAccess
     can [:decline, :accept_readonly], AdditionalRegistrantAccess do |aca|
       aca.registrant.user == user
@@ -318,7 +318,7 @@ class Ability
     # Payment
     can :read, Payment if user.has_role? :admin
     can :manage, Payment if user.has_role? :super_admin
-    can :read, Payment, :user_id => user.id
+    can :read, Payment, user_id: user.id
     unless reg_closed?
       can [:new, :create, :complete, :apply_coupon], Payment
     end
@@ -360,7 +360,7 @@ class Ability
     end
 
     unless reg_closed?
-      can [:update, :destroy], Registrant, :user_id => user.id
+      can [:update, :destroy], Registrant, user_id: user.id
       can [:update], Registrant do |reg|
         user.editable_registrants.include?(reg)
       end
@@ -378,7 +378,7 @@ class Ability
     end
 
     # :read_contact_info allows viewing the contact_info block (additional_registrant_accesess don't allow this)
-    can [:waiver, :read_contact_info], Registrant, :user_id => user.id
+    can [:waiver, :read_contact_info], Registrant, user_id: user.id
     can [:read_contact_info], Registrant do |reg|
       user.editable_registrants.include?(reg)
     end

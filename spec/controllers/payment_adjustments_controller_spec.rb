@@ -5,9 +5,9 @@ describe PaymentAdjustmentsController do
     @user = FactoryGirl.create(:super_admin_user)
     sign_in @user
   end
-  let!(:payment) { FactoryGirl.create(:payment, :completed => true) }
+  let!(:payment) { FactoryGirl.create(:payment, completed: true) }
   let!(:other_payment) { FactoryGirl.create(:payment) }
-  let!(:payment_detail) { FactoryGirl.create(:payment_detail, :payment => payment, :amount => 5.22) }
+  let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount: 5.22) }
 
   describe "GET list" do
     it "assigns all payments as @payments" do

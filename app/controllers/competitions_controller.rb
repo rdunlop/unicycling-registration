@@ -62,7 +62,7 @@ class CompetitionsController < ApplicationController
   def set_places
     @competition.scoring_helper.place_all
     Result.update_last_calc_places_time(@competition)
-    redirect_to result_competition_path(@competition), :notice => "All Places updated"
+    redirect_to result_competition_path(@competition), notice: "All Places updated"
   end
 
   def result
@@ -100,8 +100,8 @@ class CompetitionsController < ApplicationController
     end
     filename = @competition.name.downcase.gsub(/[^0-9a-z]/, "_") + ".csv"
     send_data(csv_string,
-              :type => 'text/csv; charset=utf-8; header=present',
-              :filename => filename)
+              type: 'text/csv; charset=utf-8; header=present',
+              filename: filename)
   end
 
   def lock

@@ -26,8 +26,8 @@ describe AgeGroupType do
   describe "with a set of age group entries" do
     before(:each) do
       @agt = FactoryGirl.create(:age_group_type)
-      @age1 = FactoryGirl.create(:age_group_entry, :age_group_type => @agt, :start_age => 0, :end_age => 10, :gender => "Male")
-      @age2 = FactoryGirl.create(:age_group_entry, :age_group_type => @agt, :start_age => 11, :end_age => 100, :gender => "Male")
+      @age1 = FactoryGirl.create(:age_group_entry, age_group_type: @agt, start_age: 0, end_age: 10, gender: "Male")
+      @age2 = FactoryGirl.create(:age_group_entry, age_group_type: @agt, start_age: 11, end_age: 100, gender: "Male")
     end
 
     it "returns nil if no applicable age group entry is found" do
@@ -63,7 +63,7 @@ describe AgeGroupType do
         @ws24 = FactoryGirl.create(:wheel_size_24)
         @age1.wheel_size = @ws20
         @age1.save
-        @age1b = FactoryGirl.create(:age_group_entry, :age_group_type => @agt, :start_age => 0, :end_age => 12, :gender => "Male", :wheel_size => @ws24)
+        @age1b = FactoryGirl.create(:age_group_entry, age_group_type: @agt, start_age: 0, end_age: 12, gender: "Male", wheel_size: @ws24)
       end
       it "puts the rider on a 20\" wheel in the correct age group" do
         expect(@agt.age_group_entry_for(10, "Male", @ws20)).to eq(@age1)
@@ -76,7 +76,7 @@ describe AgeGroupType do
 
   it "must have a unique name" do
     agt = FactoryGirl.create(:age_group_type)
-    agt2 = FactoryGirl.build(:age_group_type, :name => agt.name)
+    agt2 = FactoryGirl.build(:age_group_type, name: agt.name)
     expect(agt2.valid?).to eq(false)
   end
 end

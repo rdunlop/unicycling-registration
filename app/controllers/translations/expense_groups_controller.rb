@@ -23,6 +23,6 @@ class Translations::ExpenseGroupsController < Admin::TranslationsController
   private
 
   def expense_group_params
-    params.require(:expense_group).permit(:translations_attributes => [:id, :locale, :group_name])
+    params.require(:expense_group).permit(translations_attributes: [:id, :locale, :group_name])
   end
 end

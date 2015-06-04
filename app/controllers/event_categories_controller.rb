@@ -2,7 +2,7 @@ class EventCategoriesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
-  before_action :load_event_category, :only => [:sign_ups]
+  before_action :load_event_category, only: [:sign_ups]
 
   before_action :set_breadcrumb, only: [:sign_ups]
 

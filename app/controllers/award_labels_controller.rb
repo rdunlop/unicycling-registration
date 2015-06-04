@@ -2,7 +2,7 @@ class AwardLabelsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
-  before_action :load_user, :only => [:index, :create, :create_by_competition, :create_labels, :expert_labels, :announcer_sheet, :normal_labels, :destroy_all, :create_labels_by_registrant]
+  before_action :load_user, only: [:index, :create, :create_by_competition, :create_labels, :expert_labels, :announcer_sheet, :normal_labels, :destroy_all, :create_labels_by_registrant]
 
   def load_user
     @user = User.find(params[:user_id])
@@ -232,11 +232,11 @@ class AwardLabelsController < ApplicationController
         "row_gutter" => 2.5 # added padding
       }
     }
-    labels = Prawn::Labels.render(names, :type => "Avery5160padded", :shrink_to_fit => true) do |pdf, name|
-      pdf.text name, :align =>:center, :valign => :center, :inline_format => true
+    labels = Prawn::Labels.render(names, type: "Avery5160padded", shrink_to_fit: true) do |pdf, name|
+      pdf.text name, align: :center, valign: :center, inline_format: true
     end
 
-    send_data labels, :filename => "normal-labels-#{Date.today}.pdf"
+    send_data labels, filename: "normal-labels-#{Date.today}.pdf"
   end
 
   def expert_labels
@@ -280,11 +280,11 @@ class AwardLabelsController < ApplicationController
     # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
     #  and it will wrap lines as necessary, and then shrink the text.
 
-    labels = Prawn::Labels.render(names, :type => "Avery8293", :shrink_to_fit => true) do |pdf, name|
-      pdf.text name, :align => :center, :inline_format => true, :valign => :center
+    labels = Prawn::Labels.render(names, type: "Avery8293", shrink_to_fit: true) do |pdf, name|
+      pdf.text name, align: :center, inline_format: true, valign: :center
     end
 
-    send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
+    send_data labels, filename: "bag-labels-#{Date.today}.pdf", type: "application/pdf"
   end
 
   def announcer_sheet

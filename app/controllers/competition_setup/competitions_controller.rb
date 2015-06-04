@@ -2,11 +2,11 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   layout "competition_management", except: [:new, :create]
 
   before_action :authenticate_user!
-  before_action :load_new_competition, :only => [:create]
+  before_action :load_new_competition, only: [:create]
   before_action :load_competition, except: [:create, :new]
 
   before_action :load_event_from_competition, only: [:edit]
-  before_action :load_event, :only => [:create, :new]
+  before_action :load_event, only: [:create, :new]
 
   load_and_authorize_resource
 
@@ -60,8 +60,8 @@ class CompetitionSetup::CompetitionsController < ApplicationController
                                         :age_group_type_id, :scoring_class, :has_experts, :award_title_name,
                                         :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,
                                         :penalty_seconds, :automatic_competitor_creation, :combined_competition_id,
-                                        :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy],
-                                        :wave_times_attributes => [:id, :scheduled_time, :wave, :minutes, :seconds, :_destroy] )
+                                        competition_sources_attributes: [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy],
+                                        wave_times_attributes: [:id, :scheduled_time, :wave, :minutes, :seconds, :_destroy] )
   end
 
   def load_competition

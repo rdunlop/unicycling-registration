@@ -4,8 +4,8 @@ describe ConventionSetup::RegistrationPeriodsController do
   before(:each) do
     user = FactoryGirl.create(:super_admin_user)
     sign_in user
-    @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
-    @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
+    @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
+    @noncomp_exp = FactoryGirl.create(:expense_item, cost: 50)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -58,7 +58,7 @@ describe ConventionSetup::RegistrationPeriodsController do
   describe "GET edit" do
     it "assigns the requested registration_period as @registration_period" do
       registration_period = FactoryGirl.create :registration_period
-      get :edit, {:id => registration_period.to_param}
+      get :edit, {id: registration_period.to_param}
       expect(assigns(:registration_period)).to eq(registration_period)
     end
   end
@@ -67,18 +67,18 @@ describe ConventionSetup::RegistrationPeriodsController do
     describe "with valid params" do
       it "creates a new RegistrationPeriod" do
         expect {
-          post :create, {:registration_period => valid_attributes}
+          post :create, {registration_period: valid_attributes}
         }.to change(RegistrationPeriod, :count).by(1)
       end
 
       it "assigns a newly created registration_period as @registration_period" do
-        post :create, {:registration_period => valid_attributes}
+        post :create, {registration_period: valid_attributes}
         expect(assigns(:registration_period)).to be_a(RegistrationPeriod)
         expect(assigns(:registration_period)).to be_persisted
       end
 
       it "redirects to the created registration_period" do
-        post :create, {:registration_period => valid_attributes}
+        post :create, {registration_period: valid_attributes}
         expect(response).to redirect_to(registration_periods_path)
       end
     end
@@ -87,14 +87,14 @@ describe ConventionSetup::RegistrationPeriodsController do
       it "assigns a newly created but unsaved registration_period as @registration_period" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationPeriod).to receive(:save).and_return(false)
-        post :create, {:registration_period => {:onsite => true}}
+        post :create, {registration_period: {onsite: true}}
         expect(assigns(:registration_period)).to be_a_new(RegistrationPeriod)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationPeriod).to receive(:save).and_return(false)
-        post :create, {:registration_period => {:onsite => true}}
+        post :create, {registration_period: {onsite: true}}
         expect(response).to render_template("new")
       end
     end
@@ -109,12 +109,12 @@ describe ConventionSetup::RegistrationPeriodsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         expect_any_instance_of(RegistrationPeriod).to receive(:update_attributes).with({})
-        put :update, {:id => registration_period.to_param, :registration_period => {'these' => 'params'}}
+        put :update, {id: registration_period.to_param, registration_period: {'these' => 'params'}}
       end
 
       it "assigns the requested registration_period as @registration_period" do
         registration_period = FactoryGirl.create :registration_period
-        put :update, {:id => registration_period.to_param, :registration_period => valid_attributes}
+        put :update, {id: registration_period.to_param, registration_period: valid_attributes}
         expect(assigns(:registration_period)).to eq(registration_period)
       end
 
@@ -124,7 +124,7 @@ describe ConventionSetup::RegistrationPeriodsController do
                                           competitor_expense_item_attributes: { id: registration_period.competitor_expense_item.id },
                                           noncompetitor_expense_item_attributes: { id: registration_period.noncompetitor_expense_item.id },
                                         })
-        put :update, {:id => registration_period.to_param, :registration_period => params}
+        put :update, {id: registration_period.to_param, registration_period: params}
         expect(response).to redirect_to(registration_periods_path)
       end
     end
@@ -134,7 +134,7 @@ describe ConventionSetup::RegistrationPeriodsController do
         registration_period = FactoryGirl.create :registration_period
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationPeriod).to receive(:save).and_return(false)
-        put :update, {:id => registration_period.to_param, :registration_period => {:name => 'fake'}}
+        put :update, {id: registration_period.to_param, registration_period: {name: 'fake'}}
         expect(assigns(:registration_period)).to eq(registration_period)
       end
 
@@ -142,7 +142,7 @@ describe ConventionSetup::RegistrationPeriodsController do
         registration_period = FactoryGirl.create :registration_period
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationPeriod).to receive(:save).and_return(false)
-        put :update, {:id => registration_period.to_param, :registration_period => {:onsite => true}}
+        put :update, {id: registration_period.to_param, registration_period: {onsite: true}}
         expect(response).to render_template("edit")
       end
     end
@@ -152,13 +152,13 @@ describe ConventionSetup::RegistrationPeriodsController do
     it "destroys the requested registration_period" do
       registration_period = FactoryGirl.create :registration_period
       expect {
-        delete :destroy, {:id => registration_period.to_param}
+        delete :destroy, {id: registration_period.to_param}
       }.to change(RegistrationPeriod, :count).by(-1)
     end
 
     it "redirects to the registration_periods list" do
       registration_period = FactoryGirl.create :registration_period
-      delete :destroy, {:id => registration_period.to_param}
+      delete :destroy, {id: registration_period.to_param}
       expect(response).to redirect_to(registration_periods_url)
     end
   end

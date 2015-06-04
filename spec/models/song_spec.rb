@@ -37,7 +37,7 @@ describe Song do
 
   describe "with a song created" do
     let(:registrant) { FactoryGirl.create(:registrant) }
-    let!(:song1) { FactoryGirl.create(:song, :registrant => registrant)}
+    let!(:song1) { FactoryGirl.create(:song, registrant: registrant)}
 
     it "cannot create a second song for the same event for the same registrant"  do
       song2 = FactoryGirl.build(:song, registrant: registrant, event: song1.event, user: song1.user)

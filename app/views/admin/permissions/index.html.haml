@@ -50,6 +50,11 @@
           %br
           = submit_tag "Set Password"
 
+- if can? :read, :director
+  %div
+    = link_to 'Manage Directors', directors_path
+
+%hr
 %h3 Role Descriptions:
 - @available_roles.each do |role|
   %h4= role

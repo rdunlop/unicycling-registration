@@ -25,20 +25,20 @@ class Judge < ActiveRecord::Base
 
   before_destroy :check_for_scores # must occur before the dependent->destroy
 
-  has_many :scores, -> {order("competitors.position").includes(:competitor) }, :dependent => :destroy
-  has_many :boundary_scores, -> {order("competitors.position").includes(:competitor) }, :dependent => :destroy
-  has_many :standard_execution_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, :dependent => :destroy
-  has_many :standard_difficulty_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, :dependent => :destroy
-  has_many :competitors, -> {order "position"}, :through => :competition
+  has_many :scores, -> {order("competitors.position").includes(:competitor) }, dependent: :destroy
+  has_many :boundary_scores, -> {order("competitors.position").includes(:competitor) }, dependent: :destroy
+  has_many :standard_execution_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, dependent: :destroy
+  has_many :standard_difficulty_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, dependent: :destroy
+  has_many :competitors, -> {order "position"}, through: :competition
   has_many :distance_attempts, -> {order "id DESC"}, dependent: :destroy
   has_many :tie_break_adjustments, dependent: :destroy
 
   accepts_nested_attributes_for :standard_execution_scores
   accepts_nested_attributes_for :standard_difficulty_scores
 
-  validates :competition_id, :presence => true
-  validates :judge_type_id, :presence => true, :uniqueness => {:scope => [:competition_id, :user_id] }
-  validates :user_id, :presence => true
+  validates :competition_id, presence: true
+  validates :judge_type_id, presence: true, uniqueness: {scope: [:competition_id, :user_id] }
+  validates :user_id, presence: true
   validates :status, inclusion: { in: ["active", "removed"] }
 
   delegate :event, to: :competition
@@ -91,7 +91,7 @@ class Judge < ActiveRecord::Base
 
   # retrieve my judged score for the given competitor
   def get_score(competitor)
-    scores.where(:competitor_id => competitor.id).first
+    scores.where(competitor_id: competitor.id).first
   end
 
   # Return the calculated total points for this score

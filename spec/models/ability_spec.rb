@@ -15,8 +15,8 @@ describe "Ability" do
 
     describe "with Additional Registrant Accesses" do
       before(:each) do
-        @ara = FactoryGirl.create(:additional_registrant_access, :user => @user, :accepted_readonly => true)
-        @ara_to_me = FactoryGirl.create(:additional_registrant_access, :registrant => FactoryGirl.create(:registrant, :user => @user))
+        @ara = FactoryGirl.create(:additional_registrant_access, user: @user, accepted_readonly: true)
+        @ara_to_me = FactoryGirl.create(:additional_registrant_access, registrant: FactoryGirl.create(:registrant, user: @user))
         @ara_to_other = FactoryGirl.create(:additional_registrant_access)
       end
       it { is_expected.to be_able_to(:read, @ara) }
@@ -35,7 +35,7 @@ describe "Ability" do
     end
 
     describe "with a registration" do
-      let(:registration) { FactoryGirl.build_stubbed(:registrant, :user => @user) }
+      let(:registration) { FactoryGirl.build_stubbed(:registrant, user: @user) }
       before(:each) do
         allow(@user).to receive(:registrants).and_return([registration])
       end
@@ -72,7 +72,7 @@ describe "Ability" do
       end
       describe "with a StandardSkillRoutine" do
         before(:each) do
-          @routine = FactoryGirl.create(:standard_skill_routine, :registrant => registration)
+          @routine = FactoryGirl.create(:standard_skill_routine, registrant: registration)
         end
 
         it { is_expected.to be_able_to(:destroy, @routine) }
@@ -80,8 +80,8 @@ describe "Ability" do
 
       describe "with a required expense_item" do
         before(:each) do
-          eg = FactoryGirl.create(:expense_group, :competitor_required => true)
-          @ei = FactoryGirl.create(:expense_item, :expense_group => eg)
+          eg = FactoryGirl.create(:expense_group, competitor_required: true)
+          @ei = FactoryGirl.create(:expense_item, expense_group: eg)
         end
 
         it { is_expected.not_to be_able_to(:destroy, registration.registrant_expense_items.first) }
@@ -89,7 +89,7 @@ describe "Ability" do
     end
 
     describe "With a payment" do
-      let(:payment) { FactoryGirl.create(:payment, :user => @user) }
+      let(:payment) { FactoryGirl.create(:payment, user: @user) }
 
       it { is_expected.to be_able_to(:read, payment) }
       it { is_expected.to be_able_to(:complete, payment) }
@@ -98,7 +98,7 @@ describe "Ability" do
 
     describe "when registration is closed" do
       before(:each) do
-        FactoryGirl.create(:registration_period, :onsite => false, :end_date => 10.days.ago)
+        FactoryGirl.create(:registration_period, onsite: false, end_date: 10.days.ago)
       end
 
       it { is_expected.not_to be_able_to(:create, Registrant) }
@@ -176,7 +176,7 @@ describe "Ability" do
     end
     describe "when registration is closed" do
       before(:each) do
-        FactoryGirl.create(:registration_period, :onsite => false, :end_date => 10.days.ago)
+        FactoryGirl.create(:registration_period, onsite: false, end_date: 10.days.ago)
       end
 
       it { is_expected.to be_able_to(:create, Registrant) }
@@ -239,10 +239,10 @@ describe "Ability" do
       end
       describe "with a score" do
         before(:each) do
-          @judge = FactoryGirl.create(:judge, :user => @user, :competition => competition)
+          @judge = FactoryGirl.create(:judge, user: @user, competition: competition)
           competitor = FactoryGirl.create(:event_competitor, competition: competition)
-          @score = FactoryGirl.create(:score, :judge => @judge, competitor: competitor)
-          @other_score = FactoryGirl.create(:score, :competitor => @score.competitor) # different judge user
+          @score = FactoryGirl.create(:score, judge: @judge, competitor: competitor)
+          @other_score = FactoryGirl.create(:score, competitor: @score.competitor) # different judge user
         end
 
         it { is_expected.to be_able_to(:update, @score) }
@@ -302,7 +302,7 @@ describe "Ability" do
 
     describe "with an associated judge to my event" do
       before(:each) do
-        @judge = FactoryGirl.create(:judge, :competition => competition)
+        @judge = FactoryGirl.create(:judge, competition: competition)
       end
       it { is_expected.to be_able_to(:destroy, @judge) }
       it { is_expected.to be_able_to(:create, Judge) }
@@ -311,7 +311,7 @@ describe "Ability" do
 
       describe "When the judge has a score" do
         before :each do
-          @score = FactoryGirl.create(:score, :judge => @judge)
+          @score = FactoryGirl.create(:score, judge: @judge)
         end
 
         it { is_expected.not_to be_able_to(:destroy, @judge) }

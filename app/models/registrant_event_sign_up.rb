@@ -19,16 +19,16 @@
 #
 
 class RegistrantEventSignUp < ActiveRecord::Base
-  validates :event, :registrant, :presence => true
+  validates :event, :registrant, presence: true
   # validates :event_category, :presence => true, :if  => "signed_up"
-  validates :signed_up, :inclusion => {:in => [true, false] } # because it's a boolean
+  validates :signed_up, inclusion: {in: [true, false] } # because it's a boolean
   validate :category_chosen_when_signed_up
   validate :category_in_age_range
-  validates :event_id, :presence => true, :uniqueness => {:scope => [:registrant_id]}
+  validates :event_id, presence: true, uniqueness: {scope: [:registrant_id]}
 
-  has_paper_trail :meta => { :registrant_id => :registrant_id }
+  has_paper_trail meta: { registrant_id: :registrant_id }
 
-  belongs_to :registrant, :inverse_of => :registrant_event_sign_ups, touch: true
+  belongs_to :registrant, inverse_of: :registrant_event_sign_ups, touch: true
   belongs_to :event_category, touch: true
   belongs_to :event
 

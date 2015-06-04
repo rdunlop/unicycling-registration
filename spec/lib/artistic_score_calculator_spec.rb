@@ -23,18 +23,18 @@ end
 describe ArtisticScoreCalculator do
   before(:each) do
     @competition = FactoryGirl.create(:competition)
-    @judge1 = FactoryGirl.create(:judge, :competition => @competition)
+    @judge1 = FactoryGirl.create(:judge, competition: @competition)
     @jt = @judge1.judge_type
     @calc = ArtisticScoreCalculator.new(@competition)
-    @comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
-    @comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
-    @comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
+    @comp1 = FactoryGirl.create(:event_competitor, competition: @competition)
+    @comp2 = FactoryGirl.create(:event_competitor, competition: @competition)
+    @comp3 = FactoryGirl.create(:event_competitor, competition: @competition)
   end
   describe "when calculating the placement points of an event" do
     before(:each) do
-      @score1 = FactoryGirl.create(:score, :judge => @judge1, :competitor => @comp1, :val_1 => 10)
-      @score2 = FactoryGirl.create(:score, :judge => @judge1, :competitor => @comp2, :val_1 => 5)
-      @score3 = FactoryGirl.create(:score, :judge => @judge1, :competitor => @comp3, :val_1 => 0)
+      @score1 = FactoryGirl.create(:score, judge: @judge1, competitor: @comp1, val_1: 10)
+      @score2 = FactoryGirl.create(:score, judge: @judge1, competitor: @comp2, val_1: 5)
+      @score3 = FactoryGirl.create(:score, judge: @judge1, competitor: @comp3, val_1: 0)
     end
 
     it "should have total_points of 0 (with 1 judge)" do
@@ -45,10 +45,10 @@ describe ArtisticScoreCalculator do
 
     describe "and there are 2 judges" do
       before(:each) do
-        @judge2 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
-        @score2_1 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score1.competitor, :val_1 => 9)
-        @score2_2 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score2.competitor, :val_1 => 0)
-        @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 3)
+        @judge2 = FactoryGirl.create(:judge, competition: @competition, judge_type: @jt)
+        @score2_1 = FactoryGirl.create(:score, judge: @judge2, competitor: @score1.competitor, val_1: 9)
+        @score2_2 = FactoryGirl.create(:score, judge: @judge2, competitor: @score2.competitor, val_1: 0)
+        @score2_3 = FactoryGirl.create(:score, judge: @judge2, competitor: @score3.competitor, val_1: 3)
       end
 
       it "determines the highest place ranked" do
@@ -78,10 +78,10 @@ describe ArtisticScoreCalculator do
 
       describe "with a 3rd judge's scores" do
         before(:each) do
-          @judge3 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
-          @score3_1 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score1.competitor, :val_1 => 9)
-          @score3_2 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score2.competitor, :val_1 => 4)
-          @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 4)
+          @judge3 = FactoryGirl.create(:judge, competition: @competition, judge_type: @jt)
+          @score3_1 = FactoryGirl.create(:score, judge: @judge3, competitor: @score1.competitor, val_1: 9)
+          @score3_2 = FactoryGirl.create(:score, judge: @judge3, competitor: @score2.competitor, val_1: 4)
+          @score3_3 = FactoryGirl.create(:score, judge: @judge3, competitor: @score3.competitor, val_1: 4)
         end
         it "has non-zero placing points" do
           expect(@calc.total_points(@score1.competitor)).to eq(1.0)
@@ -100,7 +100,7 @@ describe ArtisticScoreCalculator do
         end
         describe "when there are more competitors than scores, it marks the extras as 0" do
           before(:each) do
-            @comp4 = FactoryGirl.create(:event_competitor, :competition => @competition)
+            @comp4 = FactoryGirl.create(:event_competitor, competition: @competition)
           end
 
           it "puts that competitor as first" do
@@ -114,8 +114,8 @@ describe ArtisticScoreCalculator do
 
         describe "if I have scores for the other judge_type, but not for this judge_type" do
           before(:each) do
-            @jt = FactoryGirl.create(:judge_type, :name => "Technical")
-            @judge = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
+            @jt = FactoryGirl.create(:judge_type, name: "Technical")
+            @judge = FactoryGirl.create(:judge, competition: @competition, judge_type: @jt)
           end
           it "should be able to get the place" do
             expect(@calc.place(@comp1)).to eq(1)
@@ -124,21 +124,21 @@ describe ArtisticScoreCalculator do
 
         describe "with 3 technical judges too" do
           before(:each) do
-            @judge4 = FactoryGirl.create(:judge, :competition => @competition)
+            @judge4 = FactoryGirl.create(:judge, competition: @competition)
             @jt2 = @judge4.judge_type
-            @score4_1 = FactoryGirl.create(:score, :judge => @judge4, :competitor => @score1.competitor, :val_1 => 1)
-            @score4_2 = FactoryGirl.create(:score, :judge => @judge4, :competitor => @score2.competitor, :val_1 => 2)
-            @score4_3 = FactoryGirl.create(:score, :judge => @judge4, :competitor => @score3.competitor, :val_1 => 3)
+            @score4_1 = FactoryGirl.create(:score, judge: @judge4, competitor: @score1.competitor, val_1: 1)
+            @score4_2 = FactoryGirl.create(:score, judge: @judge4, competitor: @score2.competitor, val_1: 2)
+            @score4_3 = FactoryGirl.create(:score, judge: @judge4, competitor: @score3.competitor, val_1: 3)
 
-            @judge5 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt2)
-            @score5_1 = FactoryGirl.create(:score, :judge => @judge5, :competitor => @score1.competitor, :val_1 => 1)
-            @score5_2 = FactoryGirl.create(:score, :judge => @judge5, :competitor => @score2.competitor, :val_1 => 2)
-            @score5_3 = FactoryGirl.create(:score, :judge => @judge5, :competitor => @score3.competitor, :val_1 => 3)
+            @judge5 = FactoryGirl.create(:judge, competition: @competition, judge_type: @jt2)
+            @score5_1 = FactoryGirl.create(:score, judge: @judge5, competitor: @score1.competitor, val_1: 1)
+            @score5_2 = FactoryGirl.create(:score, judge: @judge5, competitor: @score2.competitor, val_1: 2)
+            @score5_3 = FactoryGirl.create(:score, judge: @judge5, competitor: @score3.competitor, val_1: 3)
 
-            @judge6 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt2)
-            @score6_1 = FactoryGirl.create(:score, :judge => @judge6, :competitor => @score1.competitor, :val_1 => 1)
-            @score6_2 = FactoryGirl.create(:score, :judge => @judge6, :competitor => @score2.competitor, :val_1 => 2)
-            @score6_3 = FactoryGirl.create(:score, :judge => @judge6, :competitor => @score3.competitor, :val_1 => 3)
+            @judge6 = FactoryGirl.create(:judge, competition: @competition, judge_type: @jt2)
+            @score6_1 = FactoryGirl.create(:score, judge: @judge6, competitor: @score1.competitor, val_1: 1)
+            @score6_2 = FactoryGirl.create(:score, judge: @judge6, competitor: @score2.competitor, val_1: 2)
+            @score6_3 = FactoryGirl.create(:score, judge: @judge6, competitor: @score3.competitor, val_1: 3)
           end
 
           it "has non-zero placing points for correct judge_type" do

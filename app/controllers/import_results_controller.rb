@@ -3,8 +3,8 @@ class ImportResultsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_user, except: [:show, :edit, :update, :destroy]
   before_action :load_competition, except: [:show, :edit, :update, :destroy]
-  before_action :load_new_import_result, :only => [:create]
-  before_action :load_import_results, :only => [:data_entry, :display_csv, :display_chip, :display_lif, :index, :proof_single]
+  before_action :load_new_import_result, only: [:create]
+  before_action :load_import_results, only: [:data_entry, :display_csv, :display_chip, :display_lif, :index, :proof_single]
   before_action :load_results_for_competition, only: [:review, :approve]
   before_action :filter_import_results_by_start_times, only: [:proof_single, :data_entry, :review, :approve]
   load_and_authorize_resource
@@ -31,7 +31,7 @@ class ImportResultsController < ApplicationController
   def review_heat
     @heat = params[:heat]
 
-    @import_results = ImportResult.where(:competition_id => @competition, heat: @heat)
+    @import_results = ImportResult.where(competition_id: @competition, heat: @heat)
 
     @lane_assignments = LaneAssignment.where(competition: @competition, heat: @heat)
 
@@ -176,14 +176,14 @@ class ImportResultsController < ApplicationController
 
   # DELETE /users/#/competitions/#/import_results/destroy_all
   def destroy_all
-    @user.import_results.where(:competition_id => @competition).destroy_all
+    @user.import_results.where(competition_id: @competition).destroy_all
     redirect_to :back
   end
 
   def approve_heat
     @heat = params[:heat].to_i
 
-    import_results = ImportResult.where(:competition_id => @competition, heat: @heat)
+    import_results = ImportResult.where(competition_id: @competition, heat: @heat)
 
     begin
       ImportResult.transaction do
@@ -208,7 +208,7 @@ class ImportResultsController < ApplicationController
   def delete_heat
     @heat = params[:heat].to_i
 
-    import_results = ImportResult.where(:competition_id => @competition, heat: @heat)
+    import_results = ImportResult.where(competition_id: @competition, heat: @heat)
     import_results.destroy_all
 
     redirect_to display_lif_user_competition_import_results_path(current_user, @competition, heat: @heat), notice: "deleted Heat # #{@heat} results. Try Again?"
@@ -257,7 +257,7 @@ class ImportResultsController < ApplicationController
   end
 
   def load_results_for_competition
-    @import_results = ImportResult.where(:competition_id => @competition)
+    @import_results = ImportResult.where(competition_id: @competition)
   end
 
   def filter_import_results_by_start_times

@@ -5,8 +5,8 @@ describe Admin::ManualRefundsController do
     @user = FactoryGirl.create(:payment_admin)
     sign_in @user
   end
-  let!(:payment) { FactoryGirl.create(:payment, :completed => true) }
-  let!(:payment_detail) { FactoryGirl.create(:payment_detail, :payment => payment, :amount => 5.22) }
+  let!(:payment) { FactoryGirl.create(:payment, completed: true) }
+  let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount: 5.22) }
 
   describe "POST refund create" do
     before(:each) do
@@ -15,7 +15,7 @@ describe Admin::ManualRefundsController do
 
     it "can create a payment with refund elements" do
       expect {
-        post :create, {:manual_refund => {
+        post :create, {manual_refund: {
           note: "Cancelled",
           percentage: 100,
           items_attributes: {

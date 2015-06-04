@@ -24,20 +24,20 @@
 class Competitor < ActiveRecord::Base
   include Eligibility
 
-  has_many :members, dependent: :destroy, :inverse_of => :competitor
+  has_many :members, dependent: :destroy, inverse_of: :competitor
   has_many :registrants, through: :members
   belongs_to :competition, touch: true, inverse_of: :competitors
   acts_as_restful_list scope: :competition
 
   has_many :lane_assignments, dependent: :destroy
-  has_many :scores, :dependent => :destroy
-  has_many :boundary_scores, :dependent => :destroy
-  has_many :standard_execution_scores, :dependent => :destroy
-  has_many :standard_difficulty_scores, :dependent => :destroy
-  has_many :distance_attempts, -> { order "distance DESC, id DESC" }, :dependent => :destroy
+  has_many :scores, dependent: :destroy
+  has_many :boundary_scores, dependent: :destroy
+  has_many :standard_execution_scores, dependent: :destroy
+  has_many :standard_difficulty_scores, dependent: :destroy
+  has_many :distance_attempts, -> { order "distance DESC, id DESC" }, dependent: :destroy
   has_one :tie_break_adjustment, dependent: :destroy
-  has_many :time_results, :dependent => :destroy
-  has_many :external_results, :dependent => :destroy
+  has_many :time_results, dependent: :destroy
+  has_many :external_results, dependent: :destroy
   has_many :results, dependent: :destroy, inverse_of: :competitor
 
   # these are here to allow eager loading/performance optimization
@@ -46,7 +46,7 @@ class Competitor < ActiveRecord::Base
 
   accepts_nested_attributes_for :members, allow_destroy: true
 
-  validates :competition_id, :presence => true
+  validates :competition_id, presence: true
   validates_associated :members
   validate :must_have_3_members_for_custom_name
 
@@ -199,7 +199,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def member_has_bib_number?(bib_number)
-    members.includes(:registrant).where({:registrants => {:bib_number => bib_number}}).count > 0
+    members.includes(:registrant).where({registrants: {bib_number: bib_number}}).count > 0
   end
 
   def team_name
@@ -434,7 +434,7 @@ class Competitor < ActiveRecord::Base
 
   def max_successful_distance_attempt
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance_attempt") do
-      distance_attempts.where(:fault => false).first
+      distance_attempts.where(fault: false).first
     end
   end
 

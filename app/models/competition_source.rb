@@ -21,15 +21,15 @@
 #
 
 class CompetitionSource < ActiveRecord::Base
-  belongs_to :event_category, :inverse_of => :competition_sources
-  belongs_to :target_competition, :class_name => "Competition", :inverse_of => :competition_sources
+  belongs_to :event_category, inverse_of: :competition_sources
+  belongs_to :target_competition, class_name: "Competition", inverse_of: :competition_sources
   belongs_to :competition
 
   def self.gender_filters
     ["Both", "Male", "Female"]
   end
-  validates :gender_filter, :inclusion => { :in => self.gender_filters, :allow_nil => false }
-  validates :target_competition, :presence => true
+  validates :gender_filter, inclusion: { in: self.gender_filters, allow_nil: false }
+  validates :target_competition, presence: true
   validate :source_present
   validate :max_place_with_competition
 

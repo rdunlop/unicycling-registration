@@ -3,9 +3,9 @@ module Judgeable
   include Competeable
 
   included do
-    belongs_to :judge, :touch => true
+    belongs_to :judge, touch: true
 
-    validates :judge_id, :presence => true, :uniqueness => {:scope => [:competitor_id]}
+    validates :judge_id, presence: true, uniqueness: {scope: [:competitor_id]}
 
     delegate :user, to: :judge
   end

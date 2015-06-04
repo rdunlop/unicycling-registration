@@ -28,7 +28,7 @@ class TimeResult < ActiveRecord::Base
   include StatusNilWhenEmpty
   include CachedSetModel
 
-  validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}
+  validates :minutes, :seconds, :thousands, numericality: {greater_than_or_equal_to: 0}
 
   def self.cache_set_field
     :competitor_id
@@ -38,13 +38,13 @@ class TimeResult < ActiveRecord::Base
     ["DQ"]
   end
 
-  validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
+  validates :status, inclusion: { in: TimeResult.status_values, allow_nil: true }
 
-  validates :is_start_time, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :is_start_time, inclusion: { in: [true, false] } # because it's a boolean
 
   scope :fastest_first, -> { order("status DESC, minutes, seconds, thousands") }
-  scope :start_times, -> { where(:is_start_time => true) }
-  scope :finish_times, -> { where(:is_start_time => false) }
+  scope :start_times, -> { where(is_start_time: true) }
+  scope :finish_times, -> { where(is_start_time: false) }
 
   after_initialize :init
 
@@ -64,8 +64,8 @@ class TimeResult < ActiveRecord::Base
 
   def as_json(options={})
     options = {
-      :except => [:id, :created_at, :updated_at, :competitor_id],
-      :methods => [:bib_number]
+      except: [:id, :created_at, :updated_at, :competitor_id],
+      methods: [:bib_number]
     }
     super(options)
   end

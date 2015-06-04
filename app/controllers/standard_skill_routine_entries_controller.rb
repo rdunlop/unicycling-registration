@@ -1,8 +1,8 @@
 class StandardSkillRoutineEntriesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :standard_skill_routine
-  before_action :load_new_standard_skill_routine_entry, :only => [:create]
-  load_and_authorize_resource :standard_skill_routine_entry, :through => :standard_skill_routine, :only => [:destroy]
+  before_action :load_new_standard_skill_routine_entry, only: [:create]
+  load_and_authorize_resource :standard_skill_routine_entry, through: :standard_skill_routine, only: [:destroy]
 
   def load_new_standard_skill_routine_entry
     @standard_skill_routine_entry = @standard_skill_routine.add_standard_skill_routine_entry(standard_skill_routine_entry_params)

@@ -18,10 +18,10 @@ class PaymentPresenter
   def add_registrant(registrant)
     registrant.owing_registrant_expense_items.each do |rei|
       next if rei.free
-      @new_expense_items << PaymentDetailPresenter.new(:registrant_id => rei.registrant.id, :expense_item_id => rei.expense_item.id, :free => rei.free, :amount => rei.total_cost, :details => rei.details)
+      @new_expense_items << PaymentDetailPresenter.new(registrant_id: rei.registrant.id, expense_item_id: rei.expense_item.id, free: rei.free, amount: rei.total_cost, details: rei.details)
     end
     registrant.paid_details.each do |pd|
-      @existing_payment_details << PaymentDetailPresenter.new(:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :amount => pd.amount, :details => pd.details)
+      @existing_payment_details << PaymentDetailPresenter.new(registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, amount: pd.amount, details: pd.details)
     end
   end
 
@@ -48,7 +48,7 @@ class PaymentPresenter
     attribute :amount, Decimal
     attribute :free, Boolean
 
-    validates :registrant_id, :presence => true
+    validates :registrant_id, presence: true
 
     def initialize(params = {})
       params.each do |name, value|

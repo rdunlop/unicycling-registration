@@ -24,7 +24,7 @@ require 'spec_helper'
 
 describe Score do
   let(:judge) { FactoryGirl.build_stubbed(:judge) }
-  let(:subject) { FactoryGirl.build_stubbed(:score, :val_1 => 10, :judge => judge) }
+  let(:subject) { FactoryGirl.build_stubbed(:score, val_1: 10, judge: judge) }
 
   describe "when the score is invalid" do
     before(:each) do
@@ -66,7 +66,7 @@ describe Score do
   it "should not be able to have the same score/judge created twice" do
     score = FactoryGirl.create(:score)
 
-    score2 = FactoryGirl.build(:score, :judge => score.judge, :competitor => score.competitor)
+    score2 = FactoryGirl.build(:score, judge: score.judge, competitor: score.competitor)
 
     expect(score2.valid?).to eq(false)
   end
@@ -98,8 +98,8 @@ describe Score do
   end
   describe "when the score is based on a judge with judge_type" do
     before(:each) do
-      @jt = FactoryGirl.create(:judge_type, :val_1_max => 5, :val_2_max => 6, :val_3_max => 7, :val_4_max => 20)
-      @judge = FactoryGirl.create(:judge, :judge_type => @jt)
+      @jt = FactoryGirl.create(:judge_type, val_1_max: 5, val_2_max: 6, val_3_max: 7, val_4_max: 20)
+      @judge = FactoryGirl.create(:judge, judge_type: @jt)
       @score = Score.new
       @score.val_1 = 1.0
       @score.val_2 = 2.0

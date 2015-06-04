@@ -40,7 +40,7 @@ describe RegistrantChoice do
   end
 
   it "cannot have 2 choices for the same event_choice" do
-    @rc = FactoryGirl.build(:registrant_choice, :event_choice => @rc.event_choice, :registrant => @rc.registrant)
+    @rc = FactoryGirl.build(:registrant_choice, event_choice: @rc.event_choice, registrant: @rc.registrant)
     expect(@rc.valid?).to eq(false)
   end
 

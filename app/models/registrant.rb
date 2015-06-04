@@ -37,45 +37,45 @@ class Registrant < ActiveRecord::Base
 
   after_save :touch_members
 
-  has_paper_trail :meta => { :registrant_id => :id, :user_id => :user_id }
+  has_paper_trail meta: { registrant_id: :id, user_id: :user_id }
 
-  has_one :contact_detail, dependent: :destroy, autosave: true, :inverse_of => :registrant
-  has_one :standard_skill_routine, :dependent => :destroy
+  has_one :contact_detail, dependent: :destroy, autosave: true, inverse_of: :registrant
+  has_one :standard_skill_routine, dependent: :destroy
 
   # may move into another object
-  has_many :registrant_choices, :dependent => :destroy, :inverse_of => :registrant
-  has_many :registrant_event_sign_ups, :dependent => :destroy , :inverse_of => :registrant
-  has_many :signed_up_events, -> { where ["signed_up = ?", true ] }, :class_name => 'RegistrantEventSignUp'
-  has_many :registrant_expense_items, -> { includes(:expense_item => [:expense_group => :translations, :translations => []]) }, :dependent => :destroy
+  has_many :registrant_choices, dependent: :destroy, inverse_of: :registrant
+  has_many :registrant_event_sign_ups, dependent: :destroy , inverse_of: :registrant
+  has_many :signed_up_events, -> { where ["signed_up = ?", true ] }, class_name: 'RegistrantEventSignUp'
+  has_many :registrant_expense_items, -> { includes(expense_item: [expense_group: :translations, translations: []]) }, dependent: :destroy
   has_many :volunteer_choices, dependent: :destroy, inverse_of: :registrant
   has_many :volunteer_opportunities, through: :volunteer_choices
 
-  has_many :payment_details, -> {includes :payment}, :dependent => :destroy
-  has_many :additional_registrant_accesses, :dependent => :destroy
-  has_many :registrant_group_members, :dependent => :destroy
-  has_many :songs, :dependent => :destroy
+  has_many :payment_details, -> {includes :payment}, dependent: :destroy
+  has_many :additional_registrant_accesses, dependent: :destroy
+  has_many :registrant_group_members, dependent: :destroy
+  has_many :songs, dependent: :destroy
 
   # THROUGH
-  has_many :event_choices, :through => :registrant_choices
-  has_many :events, :through => :event_choices
-  has_many :categories, :through => :events
+  has_many :event_choices, through: :registrant_choices
+  has_many :events, through: :event_choices
+  has_many :categories, through: :events
 
-  has_many :expense_items, :through => :registrant_expense_items
+  has_many :expense_items, through: :registrant_expense_items
 
-  has_many :payments, :through => :payment_details
-  has_many :refund_details, :through => :payment_details
-  has_many :refunds, :through => :refund_details
+  has_many :payments, through: :payment_details
+  has_many :refund_details, through: :payment_details
+  has_many :refunds, through: :refund_details
 
-  has_many :registrant_groups, :through => :registrant_group_members
+  has_many :registrant_groups, through: :registrant_group_members
 
   # For event competitions/results
-  has_many :members, :dependent => :destroy
-  has_many :competitors, :through => :members
-  has_many :competitions, :through => :competitors
+  has_many :members, dependent: :destroy
+  has_many :competitors, through: :members
+  has_many :competitions, through: :competitors
   has_many :competition_wheel_sizes, dependent: :destroy
   has_many :results, through: :competitors
 
-  belongs_to :default_wheel_size, :class_name => "WheelSize", :foreign_key => :wheel_size_id
+  belongs_to :default_wheel_size, class_name: "WheelSize", foreign_key: :wheel_size_id
   belongs_to :user
 
   accepts_nested_attributes_for :contact_detail
@@ -86,10 +86,10 @@ class Registrant < ActiveRecord::Base
   before_create :create_associated_required_expense_items
 
   # always present validations
-  before_validation :set_bib_number, :on => :create
+  before_validation :set_bib_number, on: :create
   validates :bib_number, presence: true
   validates :registrant_type, inclusion: { in: %w(competitor noncompetitor spectator) }, presence: true
-  validates :ineligible, :deleted, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :ineligible, :deleted, inclusion: { in: [true, false] } # because it's a boolean
   validate :no_payments_when_deleted
   before_validation :set_access_code
   validates :access_code, presence: true
@@ -112,24 +112,24 @@ class Registrant < ActiveRecord::Base
 
   # necessary for all registrant types
   before_validation :set_sorted_last_name
-  validates :first_name, :last_name, :sorted_last_name, :presence => true
-  validates :user_id, :presence => true
+  validates :first_name, :last_name, :sorted_last_name, presence: true
+  validates :user_id, presence: true
 
   # necessary for comp/non-comp only (not spectators):
-  validates :birthday, :gender, :presence => true, if: :comp_noncomp_past_step_1?
-  validates :gender, :inclusion => {:in => %w(Male Female), :message => "%{value} must be either 'Male' or 'Female'"}, if: :comp_noncomp_past_step_1?
+  validates :birthday, :gender, presence: true, if: :comp_noncomp_past_step_1?
+  validates :gender, inclusion: {in: %w(Male Female), message: "%{value} must be either 'Male' or 'Female'"}, if: :comp_noncomp_past_step_1?
   validate  :gender_present, if: :comp_noncomp_past_step_1?
   before_validation :set_age, if: :comp_noncomp_past_step_1?
-  validates :age, :presence => true, if: :comp_noncomp_past_step_1?
+  validates :age, presence: true, if: :comp_noncomp_past_step_1?
   before_validation :set_default_wheel_size, if: :comp_noncomp_past_step_1?
-  validates :default_wheel_size, :presence => true, if: :comp_noncomp_past_step_1?
+  validates :default_wheel_size, presence: true, if: :comp_noncomp_past_step_1?
   validate :check_default_wheel_size_for_age, if: :comp_noncomp_past_step_1?
 
   # events
   validate :choices_combination_valid, if: :past_step_2?
 
   # waiver
-  validates :online_waiver_signature, :presence => true, if: :needs_waiver?
+  validates :online_waiver_signature, presence: true, if: :needs_waiver?
   validates :rules_accepted, acceptance: { accept: true }, if: :needs_rules_accepted?
 
   # contact info
@@ -140,7 +140,7 @@ class Registrant < ActiveRecord::Base
   validates_associated :registrant_expense_items
   validate :has_necessary_free_items, if: :validated?
 
-  scope :active_or_incomplete, -> { where(:deleted => false).order(:bib_number) }
+  scope :active_or_incomplete, -> { where(deleted: false).order(:bib_number) }
   scope :active, -> { where(status: "active").active_or_incomplete }
   scope :started, -> { where.not(status: "blank").active_or_incomplete}
 
@@ -237,7 +237,7 @@ class Registrant < ActiveRecord::Base
 
   def build_registration_item(reg_item)
     unless reg_item.nil? || has_expense_item?(reg_item)
-      registrant_expense_items.build(:expense_item => reg_item, :system_managed => true)
+      registrant_expense_items.build(expense_item: reg_item, system_managed: true)
     end
   end
 
@@ -256,7 +256,7 @@ class Registrant < ActiveRecord::Base
 
   def registration_item
     all_reg_items = RegistrationPeriod.all_registration_expense_items
-    registrant_expense_items.where({:system_managed => true, :expense_item_id => all_reg_items}).first
+    registrant_expense_items.where({system_managed: true, expense_item_id: all_reg_items}).first
   end
 
   # for use when overriding the default system-managed reg_item
@@ -378,7 +378,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def has_standard_skill?
-    signed_up_events.includes(:event_category => [:event]).each do |rc|
+    signed_up_events.includes(event_category: [:event]).each do |rc|
       next if rc.event_category.nil?
       if rc.event_category.event.standard_skill?
         return true
@@ -483,11 +483,11 @@ class Registrant < ActiveRecord::Base
   # does this registrant have this event checked off?
   def has_event?(event)
     @has_event ||= {}
-    @has_event[event] ||= signed_up_events.where({:event_id => event.id}).any?
+    @has_event[event] ||= signed_up_events.where({event_id: event.id}).any?
   end
 
   def active_competitors(event)
-    competitors.includes(:competition => :event).active.joins(:competition).where("competitions.event_id = ?", event)
+    competitors.includes(competition: :event).active.joins(:competition).where("competitions.event_id = ?", event)
   end
 
   def active_competitor(event)
@@ -522,7 +522,7 @@ class Registrant < ActiveRecord::Base
     results = {}
     results[:description] = event.name
 
-    resu = signed_up_events.where({:event_id => event.id}).first
+    resu = signed_up_events.where({event_id: event.id}).first
     # only add the Category if there are more than 1
     results[:category] = nil
     if event.event_categories.size > 1
@@ -531,7 +531,7 @@ class Registrant < ActiveRecord::Base
 
     results[:additional] = nil
     event.event_choices.each do |ec|
-      my_val = self.registrant_choices.where({:event_choice_id => ec.id}).first
+      my_val = self.registrant_choices.where({event_choice_id: ec.id}).first
       unless my_val.nil? || !my_val.has_value?
         results[:additional] += " - " unless results[:additional].nil?
         results[:additional] = "" if results[:additional].nil?

@@ -1,6 +1,6 @@
 class TimeResultsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :competition, :except => [:edit, :destroy, :update]
+  load_and_authorize_resource :competition, except: [:edit, :destroy, :update]
   load_and_authorize_resource :time_result
 
   before_action :set_breadcrumbs, only: :index
@@ -30,12 +30,12 @@ class TimeResultsController < ApplicationController
   def create
     respond_to do |format|
       if @time_result.save
-        format.html { redirect_to(competition_time_results_path(@time_result.competition), :notice => 'Time result was successfully created.') }
-        format.json { render :json => @time_result, :status => :created, :location => @time_result.event }
+        format.html { redirect_to(competition_time_results_path(@time_result.competition), notice: 'Time result was successfully created.') }
+        format.json { render json: @time_result, status: :created, location: @time_result.event }
       else
         @time_results = @competition.time_results
-        format.html { render :action => "index" }
-        format.json { render :json => @time_result.errors, :status => :unprocessable_entity }
+        format.html { render action: "index" }
+        format.json { render json: @time_result.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,11 +45,11 @@ class TimeResultsController < ApplicationController
   def update
     respond_to do |format|
       if @time_result.update_attributes(time_result_params)
-        format.html { redirect_to(competition_time_results_path(@time_result.competition), :notice => 'Time result was successfully updated.') }
+        format.html { redirect_to(competition_time_results_path(@time_result.competition), notice: 'Time result was successfully updated.') }
         format.json { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.json { render :json => @time_result.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @time_result.errors, status: :unprocessable_entity }
       end
     end
   end

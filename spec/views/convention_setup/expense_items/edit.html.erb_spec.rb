@@ -10,9 +10,9 @@ describe "convention_setup/expense_items/edit" do
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form", :action => expense_group_expense_items_path(@expense_group, @expense_item), :method => "post" do
-      assert_select "input#expense_item_has_details", :name => "expense_item[has_details]"
-      assert_select "input#expense_item_cost", :name => "expense_item[cost]"
+    assert_select "form", action: expense_group_expense_items_path(@expense_group, @expense_item), method: "post" do
+      assert_select "input#expense_item_has_details", name: "expense_item[has_details]"
+      assert_select "input#expense_item_cost", name: "expense_item[cost]"
     end
   end
 end

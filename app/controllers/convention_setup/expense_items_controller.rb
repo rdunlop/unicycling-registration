@@ -77,6 +77,6 @@ class ConventionSetup::ExpenseItemsController < ConventionSetupController
   def expense_item_params
     params.require(:expense_item).permit(:cost, :name, :has_details,
                                          :has_custom_cost, :details_label, :maximum_available , :maximum_per_registrant, :tax,
-                                         :translations_attributes => [:id, :locale, :name, :details_label])
+                                         translations_attributes: [:id, :locale, :name, :details_label])
   end
 end

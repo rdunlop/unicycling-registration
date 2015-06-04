@@ -4,7 +4,7 @@ describe SongsController do
   before(:each) do
     FactoryGirl.create(:event_configuration, music_submission_end_date: Date.today + 4.days)
     @user = FactoryGirl.create(:user)
-    @reg = FactoryGirl.create(:competitor, :user => @user)
+    @reg = FactoryGirl.create(:competitor, user: @user)
     sign_in @user
   end
 
@@ -12,7 +12,7 @@ describe SongsController do
   # Song. As you add validations to Song, be sure to
   # adjust the attributes here as well.
   let(:event) { FactoryGirl.create(:event) }
-  let(:valid_attributes) { { :description => "MyString", :event_id => event.id } }
+  let(:valid_attributes) { { description: "MyString", event_id: event.id } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -21,12 +21,12 @@ describe SongsController do
 
   describe "GET index" do
     it "assigns all songs for reg as @songs" do
-      song = FactoryGirl.create(:song, :registrant => @reg)
-      get :index, {:registrant_id => @reg.to_param}
+      song = FactoryGirl.create(:song, registrant: @reg)
+      get :index, {registrant_id: @reg.to_param}
       expect(assigns(:songs)).to eq([song])
     end
     it "assigns a new song as @song" do
-      get :index, {:registrant_id => @reg.to_param}
+      get :index, {registrant_id: @reg.to_param}
       expect(assigns(:song)).to be_a_new(Song)
     end
   end
@@ -35,12 +35,12 @@ describe SongsController do
     describe "with valid params" do
       it "creates a new Song" do
         expect {
-          post :create, {:song => valid_attributes, :registrant_id => @reg.to_param}
+          post :create, {song: valid_attributes, registrant_id: @reg.to_param}
         }.to change(Song, :count).by(1)
       end
 
       it "redirects to the song add_file page" do
-        post :create, {:song => valid_attributes, :registrant_id => @reg.to_param}
+        post :create, {song: valid_attributes, registrant_id: @reg.to_param}
         expect(response).to redirect_to(add_file_song_path(Song.last))
       end
     end
@@ -49,14 +49,14 @@ describe SongsController do
       it "assigns a newly created but unsaved song as @song" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Song).to receive(:save).and_return(false)
-        post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.to_param}
+        post :create, {song: { "description" => "invalid value" }, registrant_id: @reg.to_param}
         expect(assigns(:song)).to be_a_new(Song)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Song).to receive(:save).and_return(false)
-        post :create, {:song => { "description" => "invalid value" }, :registrant_id => @reg.to_param}
+        post :create, {song: { "description" => "invalid value" }, registrant_id: @reg.to_param}
         expect(response).to render_template("index")
       end
     end
@@ -66,13 +66,13 @@ describe SongsController do
     it "destroys the requested song" do
       song = FactoryGirl.create(:song, registrant: @reg, user: @reg.user)
       expect {
-        delete :destroy, {:id => song.to_param}
+        delete :destroy, {id: song.to_param}
       }.to change(Song, :count).by(-1)
     end
 
     it "redirects to the songs list" do
       song = FactoryGirl.create(:song, registrant: @reg, user: @reg.user)
-      delete :destroy, {:id => song.to_param}
+      delete :destroy, {id: song.to_param}
       expect(response).to redirect_to(registrant_songs_path(@reg))
     end
   end

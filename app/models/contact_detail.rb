@@ -37,14 +37,14 @@
 #
 
 class ContactDetail < ActiveRecord::Base
-  belongs_to :registrant, :inverse_of => :contact_detail, touch: true
-  belongs_to :usa_family_membership_holder, :class_name => "Registrant"
-  validates :address, :city, :country_residence, :zip, :presence => true
-  validates :state_code, :presence => true, :unless => "EventConfiguration.singleton.usa == false"
+  belongs_to :registrant, inverse_of: :contact_detail, touch: true
+  belongs_to :usa_family_membership_holder, class_name: "Registrant"
+  validates :address, :city, :country_residence, :zip, presence: true
+  validates :state_code, presence: true, unless: "EventConfiguration.singleton.usa == false"
 
   # contact-info block
-  validates :emergency_name, :emergency_relationship, :emergency_primary_phone, :presence => true
-  validates :responsible_adult_name, :responsible_adult_phone, :presence => true, :if => :minor?
+  validates :emergency_name, :emergency_relationship, :emergency_primary_phone, presence: true
+  validates :responsible_adult_name, :responsible_adult_phone, presence: true, if: :minor?
   validates :birthplace, presence: true, if: "EventConfiguration.singleton.italian_requirements?"
   validates :italian_fiscal_code, format: { with: /\A[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]\Z/, message: "must be specified if you are from Italy" }, if: :vat_required?
 

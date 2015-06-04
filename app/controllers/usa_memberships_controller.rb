@@ -52,7 +52,7 @@ class UsaMembershipsController < ApplicationController
     sheet[0, 17] = "Confirmed already a USA member"
 
     row = 1
-    Registrant.active.includes(:payment_details => [:payment]).each do |reg|
+    Registrant.active.includes(payment_details: [:payment]).each do |reg|
       sheet[row, 0] = reg.bib_number
       sheet[row, 1] = reg.contact_detail.usa_member_number
       sheet[row, 2] = reg.first_name
@@ -78,7 +78,7 @@ class UsaMembershipsController < ApplicationController
     s.write report
 
     respond_to do |format|
-      format.xls { send_data report.string, :filename => "registrants_with_usa_membership_details.xls" }
+      format.xls { send_data report.string, filename: "registrants_with_usa_membership_details.xls" }
     end
   end
 end

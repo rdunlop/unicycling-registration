@@ -18,18 +18,18 @@ class RegistrationPeriod < ActiveRecord::Base
 
   default_scope { order(:start_date) }
 
-  validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, :presence => true
+  validates :start_date, :end_date, :competitor_expense_item, :noncompetitor_expense_item, presence: true
   validates :name, presence: true
 
   translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
-  belongs_to :competitor_expense_item, :class_name => "ExpenseItem", dependent: :destroy
+  belongs_to :competitor_expense_item, class_name: "ExpenseItem", dependent: :destroy
   accepts_nested_attributes_for :competitor_expense_item
-  belongs_to :noncompetitor_expense_item, :class_name => "ExpenseItem", dependent: :destroy
+  belongs_to :noncompetitor_expense_item, class_name: "ExpenseItem", dependent: :destroy
   accepts_nested_attributes_for :noncompetitor_expense_item
 
-  validates :onsite, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :onsite, inclusion: { in: [true, false] } # because it's a boolean
 
   after_save :clear_cache
   after_destroy :clear_cache
@@ -74,7 +74,7 @@ class RegistrationPeriod < ActiveRecord::Base
 
     RegistrationPeriod.includes(:competitor_expense_item, :noncompetitor_expense_item).each do |rp|
       if rp.current_period?(date)
-        Rails.cache.write("/registration_period/by_date/#{date}", rp.id, :expires_in => 5.minutes)
+        Rails.cache.write("/registration_period/by_date/#{date}", rp.id, expires_in: 5.minutes)
         return rp
       end
     end
@@ -97,7 +97,7 @@ class RegistrationPeriod < ActiveRecord::Base
   end
 
   def self.current_period
-    where(:current_period => true).first
+    where(current_period: true).first
   end
 
   def self.update_registration_periods

@@ -4,7 +4,7 @@ module Competeable
   included do
     belongs_to :competitor, touch: true
 
-    validates :competitor_id, :presence => true
+    validates :competitor_id, presence: true
 
     after_save    :update_last_data_update_time
     after_destroy :update_last_data_update_time

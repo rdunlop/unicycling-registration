@@ -16,10 +16,10 @@
 #
 
 class ExpenseGroup < ActiveRecord::Base
-  validates :group_name, :presence => true
-  validates :visible, :competitor_required, :noncompetitor_required, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :group_name, presence: true
+  validates :visible, :competitor_required, :noncompetitor_required, inclusion: { in: [true, false] } # because it's a boolean
 
-  has_many :expense_items, -> {order "expense_items.position"}, :inverse_of => :expense_group
+  has_many :expense_items, -> {order "expense_items.position"}, inverse_of: :expense_group
 
   translates :group_name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
@@ -28,8 +28,8 @@ class ExpenseGroup < ActiveRecord::Base
     ["None Free", "One Free In Group", "One Free In Group REQUIRED", "One Free of Each In Group"]
   end
 
-  validates :competitor_free_options, :inclusion => { :in => self.free_options, :allow_blank => true }
-  validates :noncompetitor_free_options, :inclusion => { :in => self.free_options, :allow_blank => true }
+  validates :competitor_free_options, inclusion: { in: self.free_options, allow_blank: true }
+  validates :noncompetitor_free_options, inclusion: { in: self.free_options, allow_blank: true }
 
   default_scope { order(:position) }
   scope :visible, -> { where(visible: true).not_a_required_item_group }
@@ -66,9 +66,9 @@ class ExpenseGroup < ActiveRecord::Base
 
   def self.for_competitor_type(is_competitor)
     if is_competitor
-      where({:competitor_required => true})
+      where({competitor_required: true})
     else
-      where({:noncompetitor_required => true})
+      where({noncompetitor_required: true})
     end
   end
 

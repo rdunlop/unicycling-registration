@@ -47,7 +47,7 @@ describe StandardSkillEntry do
     std = FactoryGirl.build(:standard_skill_entry)
     expect(std.non_riding_skill).to eq(false)
 
-    std = FactoryGirl.build(:standard_skill_entry, :number => 100)
+    std = FactoryGirl.build(:standard_skill_entry, number: 100)
     expect(std.non_riding_skill).to eq(true)
   end
 

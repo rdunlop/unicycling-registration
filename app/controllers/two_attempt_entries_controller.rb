@@ -1,8 +1,8 @@
 class TwoAttemptEntriesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :user
-  before_action :load_competition, :only => [:index, :proof, :create, :approve]
-  before_action :load_new_two_attempt_entry, :only => [:create]
+  before_action :load_competition, only: [:index, :proof, :create, :approve]
+  before_action :load_new_two_attempt_entry, only: [:create]
   before_action :set_is_start_time, only: [:index, :proof, :approve]
   before_action :load_two_attempt_entries, only: [:index, :proof, :approve]
   load_and_authorize_resource

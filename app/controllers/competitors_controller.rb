@@ -4,9 +4,9 @@ class CompetitorsController < ApplicationController
 
   before_action :authenticate_user!
   load_and_authorize_resource :competition, except: [:edit, :update, :destroy, :update_row_order]
-  before_action :load_new_competitor, :only => [:create]
-  load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy, :update_row_order]
-  load_and_authorize_resource :only => [:edit, :update, :destroy, :update_row_order]
+  before_action :load_new_competitor, only: [:create]
+  load_and_authorize_resource through: :competition, except: [:edit, :update, :destroy, :update_row_order]
+  load_and_authorize_resource only: [:edit, :update, :destroy, :update_row_order]
 
   before_action :set_parent_breadcrumbs, only: [:index, :new, :edit, :display_candidates]
 
@@ -24,7 +24,7 @@ class CompetitorsController < ApplicationController
   def index
     add_breadcrumb "Manage Competitors"
     @registrants = @competition.signed_up_registrants
-    @competitors = @competition.competitors.includes(:members => [:registrant])
+    @competitors = @competition.competitors.includes(members: [:registrant])
   end
 
   # show the competitors, their overall places, and their times
@@ -142,7 +142,7 @@ class CompetitorsController < ApplicationController
   end
 
   def competitor_params
-    params.require(:competitor).permit(:status, :custom_name, {:members_attributes => [:registrant_id, :id, :_destroy] } )
+    params.require(:competitor).permit(:status, :custom_name, {members_attributes: [:registrant_id, :id, :_destroy] } )
   end
 
   def load_competition

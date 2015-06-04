@@ -8,7 +8,7 @@ env = ENV['RAILS_ENV'] || "stage"
 worker_processes 1
 
 # listen
-listen "/tmp/unicorn-unicycling-registrationtest.socket", :backlog => 64
+listen "/tmp/unicorn-unicycling-registrationtest.socket", backlog: 64
 
 # preload
 preload_app true

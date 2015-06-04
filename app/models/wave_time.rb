@@ -17,10 +17,10 @@
 #
 
 class WaveTime < ActiveRecord::Base
-  validates :wave, :competition, :minutes, :seconds, :presence => true
-  validates :minutes, :seconds, :numericality => {:greater_than_or_equal_to => 0}, allow_nil: true
+  validates :wave, :competition, :minutes, :seconds, presence: true
+  validates :minutes, :seconds, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 
-  validates :wave, :uniqueness => {:scope => [:competition_id] }
+  validates :wave, uniqueness: {scope: [:competition_id] }
 
   belongs_to :competition, inverse_of: :wave_times, touch: true
 

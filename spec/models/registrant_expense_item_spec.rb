@@ -90,72 +90,72 @@ describe RegistrantExpenseItem do
   end
   it "must associate with the registrant" do
     @reg = FactoryGirl.create(:registrant)
-    @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg)
+    @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg)
     expect(@rei.registrant).to eq(@reg)
   end
   it "must associate with the expense_item" do
     @item = FactoryGirl.create(:expense_item)
-    @rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @item)
+    @rei = FactoryGirl.create(:registrant_expense_item, expense_item: @item)
     expect(@rei.expense_item).to eq(@item)
   end
 
   describe "with an expense_item with a limited number available" do
     before(:each) do
-      @ei = FactoryGirl.create(:expense_item, :maximum_available => 2)
+      @ei = FactoryGirl.create(:expense_item, maximum_available: 2)
     end
 
     it "allows creating a registrant expense_item" do
-      @rei = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
+      @rei = FactoryGirl.build(:registrant_expense_item, expense_item: @ei)
       expect(@rei.valid?).to eq(true)
     end
 
     it "allows creating the maximum amount" do
-      @rei = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
+      @rei = FactoryGirl.build(:registrant_expense_item, expense_item: @ei)
       expect(@rei.valid?).to eq(true)
       @rei.save!
 
-      @rei2 = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
+      @rei2 = FactoryGirl.build(:registrant_expense_item, expense_item: @ei)
       expect(@rei2.valid?).to eq(true)
       @rei2.save!
     end
 
     it "doesn't allow creating more than the maxiumum" do
-      @rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @ei)
-      @rei2 = FactoryGirl.create(:registrant_expense_item, :expense_item => @ei)
+      @rei = FactoryGirl.create(:registrant_expense_item, expense_item: @ei)
+      @rei2 = FactoryGirl.create(:registrant_expense_item, expense_item: @ei)
       @ei.reload
 
       reg = @rei2.registrant
       reg.reload
-      @rei3 = reg.registrant_expense_items.build({:expense_item_id => @ei.id})
+      @rei3 = reg.registrant_expense_items.build({expense_item_id: @ei.id})
       expect(reg.valid?).to eq(false)
     end
   end
 
   describe "with an expense_item with a limited number available PER REGISTRANT" do
     before(:each) do
-      @ei = FactoryGirl.create(:expense_item, :maximum_per_registrant => 1)
+      @ei = FactoryGirl.create(:expense_item, maximum_per_registrant: 1)
       @reg = FactoryGirl.create(:registrant)
     end
 
     it "allows creating a registrant expense_item" do
-      @rei = FactoryGirl.build(:registrant_expense_item, :expense_item => @ei)
+      @rei = FactoryGirl.build(:registrant_expense_item, expense_item: @ei)
       expect(@rei.valid?).to eq(true)
     end
 
     it "doesn't allow creating more than the max amount" do
-      @rei = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+      @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @ei)
       expect(@rei.valid?).to eq(true)
       @rei.save!
       @reg.reload
 
-      @rei2 = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+      @rei2 = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @ei)
       expect(@rei2.valid?).to eq(false)
     end
 
     it "allows creating max PER registrant" do
       @reg2 = FactoryGirl.create(:registrant)
-      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
-      @rei2 = FactoryGirl.build(:registrant_expense_item, :registrant => @reg2, :expense_item => @ei)
+      @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei)
+      @rei2 = FactoryGirl.build(:registrant_expense_item, registrant: @reg2, expense_item: @ei)
 
       expect(@rei2.valid?).to eq(true)
     end
@@ -167,8 +167,8 @@ describe RegistrantExpenseItem do
       end
 
       it "can create 2 expense_items for the registrant" do
-        @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
-        @rei2 = FactoryGirl.build(:registrant_expense_item, :registrant => @reg, :expense_item => @ei)
+        @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei)
+        @rei2 = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @ei)
         expect(@rei2.valid?).to eq(true)
       end
     end

@@ -23,23 +23,23 @@
 #
 
 class JudgeType < ActiveRecord::Base
-  has_many :judges, :dependent => :destroy
-  has_many :competitions, :through => :judges
-  has_many :scores, :through => :judges
+  has_many :judges, dependent: :destroy
+  has_many :competitions, through: :judges
+  has_many :scores, through: :judges
 
   validates :name, presence: true, uniqueness: { scope: :event_class }
-  validates :event_class, :inclusion => { :in => Competition.scoring_classes }
+  validates :event_class, inclusion: { in: Competition.scoring_classes }
 
-  validates :val_1_description, :presence => true
-  validates :val_2_description, :presence => true
-  validates :val_3_description, :presence => true
-  validates :val_4_description, :presence => true
+  validates :val_1_description, presence: true
+  validates :val_2_description, presence: true
+  validates :val_3_description, presence: true
+  validates :val_4_description, presence: true
 
-  validates :val_1_max, :presence => true
-  validates :val_2_max, :presence => true
-  validates :val_3_max, :presence => true
-  validates :val_4_max, :presence => true
-  validates :boundary_calculation_enabled, :inclusion => { :in => [false] }  # boundary calculations are disabled
+  validates :val_1_max, presence: true
+  validates :val_2_max, presence: true
+  validates :val_3_max, presence: true
+  validates :val_4_max, presence: true
+  validates :boundary_calculation_enabled, inclusion: { in: [false] }  # boundary calculations are disabled
 
   after_initialize :init
 

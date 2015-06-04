@@ -1,7 +1,7 @@
 class ExternalResultsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_competition, :only => [:index, :create]
-  before_action :load_new_external_result, :only => [:create]
+  before_action :load_competition, only: [:index, :create]
+  before_action :load_new_external_result, only: [:create]
   load_and_authorize_resource
 
   before_action :set_breadcrumbs, only: :index

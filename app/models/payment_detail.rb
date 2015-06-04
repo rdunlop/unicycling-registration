@@ -24,7 +24,7 @@ class PaymentDetail < ActiveRecord::Base
   include CachedSetModel
   include HasDetailsDescription
 
-  validates :payment, :registrant_id, :expense_item, :presence => true
+  validates :payment, :registrant_id, :expense_item, presence: true
   validate :registrant_must_be_valid
 
   monetize :amount_cents, numericality: { greater_than_or_equal_to: 0 }
@@ -32,7 +32,7 @@ class PaymentDetail < ActiveRecord::Base
   has_paper_trail
 
   belongs_to :registrant, touch: true
-  belongs_to :payment, :inverse_of => :payment_details
+  belongs_to :payment, inverse_of: :payment_details
   belongs_to :expense_item
   has_one :refund_detail
   has_one :payment_detail_coupon_code
@@ -40,11 +40,11 @@ class PaymentDetail < ActiveRecord::Base
   delegate :has_details?, :details_label, to: :expense_item
 
   # excludes refunded items
-  scope :completed, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}}) }
+  scope :completed, -> { includes(:payment).includes(:refund_detail).where(payments: {completed: true}).where({refund_details: {payment_detail_id: nil}}) }
 
-  scope :paid, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => false) }
+  scope :paid, -> { includes(:payment).where(payments: {completed: true}).where(free: false) }
 
-  scope :free, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => true) }
+  scope :free, -> { includes(:payment).where(payments: {completed: true}).where(free: true) }
   scope :refunded, -> { completed.where(refunded: true) }
 
   scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: {payment_detail_id: nil } ) }

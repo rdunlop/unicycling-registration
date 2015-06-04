@@ -28,7 +28,7 @@ class SetRegistrantDefaultWheelSize < ActiveRecord::Migration
       end
     end
 
-    belongs_to :default_wheel_size, :class_name => "WheelSize", :foreign_key => :wheel_size_id
+    belongs_to :default_wheel_size, class_name: "WheelSize", foreign_key: :wheel_size_id
   end
 
   def up

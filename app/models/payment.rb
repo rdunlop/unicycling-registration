@@ -22,17 +22,17 @@
 class Payment < ActiveRecord::Base
   include CachedModel
 
-  scope :completed, -> { where(:completed => true) }
+  scope :completed, -> { where(completed: true) }
 
-  validates :user_id, :presence => true
+  validates :user_id, presence: true
   validate :transaction_id_or_note
   validates_associated :payment_details
 
   has_paper_trail
 
   belongs_to :user
-  has_many :payment_details, :inverse_of => :payment, :dependent => :destroy
-  accepts_nested_attributes_for :payment_details, :reject_if => proc { |attributes| attributes['registrant_id'].blank? }
+  has_many :payment_details, inverse_of: :payment, dependent: :destroy
+  accepts_nested_attributes_for :payment_details, reject_if: proc { |attributes| attributes['registrant_id'].blank? }
 
   before_validation :set_invoice_id
   validates :invoice_id, presence: true, uniqueness: true
@@ -92,10 +92,10 @@ class Payment < ActiveRecord::Base
     return true unless just_completed?
 
     payment_details.each do |pd|
-      rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => pd.details}).first
+      rei = RegistrantExpenseItem.where({registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, details: pd.details}).first
       unless pd.details.nil?
         if rei.nil? && pd.details.empty?
-          rei = RegistrantExpenseItem.where({:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :details => nil}).first
+          rei = RegistrantExpenseItem.where({registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, details: nil}).first
         end
       end
 
@@ -128,7 +128,7 @@ class Payment < ActiveRecord::Base
       end
 
       if res.nil?
-        results << PaymentDetailSummary.new({:expense_item_id => pd.expense_item_id, :count => 1, :amount => pd.amount})
+        results << PaymentDetailSummary.new({expense_item_id: pd.expense_item_id, count: 1, amount: pd.amount})
       else
         res.count += 1
       end
@@ -146,7 +146,7 @@ class Payment < ActiveRecord::Base
 
   def self.total_received
     total = 0
-    Payment.includes(:payment_details => [:refund_detail]).completed.each do |payment|
+    Payment.includes(payment_details: [:refund_detail]).completed.each do |payment|
       total += payment.total_amount
     end
     total
@@ -162,7 +162,7 @@ class Payment < ActiveRecord::Base
 
   def self.paid_expense_items
     all = []
-    Registrant.includes(:payment_details => [:expense_item]).each do |reg|
+    Registrant.includes(payment_details: [:expense_item]).each do |reg|
       all += reg.paid_expense_items
     end
     all

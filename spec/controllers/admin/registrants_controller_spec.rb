@@ -27,15 +27,15 @@ describe Admin::RegistrantsController do
         FactoryGirl.create(:registration_period)
       end
       it "un-deletes a deleted registration" do
-        registrant = FactoryGirl.create(:competitor, :deleted => true)
-        post :undelete, {:id => registrant.to_param }
+        registrant = FactoryGirl.create(:competitor, deleted: true)
+        post :undelete, {id: registrant.to_param }
         registrant.reload
         expect(registrant.deleted).to eq(false)
       end
 
       it "redirects to the root" do
-        registrant = FactoryGirl.create(:competitor, :deleted => true)
-        post :undelete, {:id => registrant.to_param }
+        registrant = FactoryGirl.create(:competitor, deleted: true)
+        post :undelete, {id: registrant.to_param }
         expect(response).to redirect_to(manage_all_registrants_path)
       end
 
@@ -45,8 +45,8 @@ describe Admin::RegistrantsController do
           sign_in @user
         end
         it "Cannot undelete a user" do
-          registrant = FactoryGirl.create(:competitor, :deleted => true)
-          post :undelete, {:id => registrant.to_param }
+          registrant = FactoryGirl.create(:competitor, deleted: true)
+          post :undelete, {id: registrant.to_param }
           registrant.reload
           expect(registrant.deleted).to eq(true)
         end

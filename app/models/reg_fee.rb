@@ -8,7 +8,7 @@ class RegFee
   attribute :registrant_id, Integer
   attribute :registration_period_id, Integer
 
-  validates :registrant_id, :registration_period_id, :presence => true
+  validates :registrant_id, :registration_period_id, presence: true
   validate :registrant_is_not_paid
 
   def registrant_is_not_paid

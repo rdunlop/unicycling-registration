@@ -17,10 +17,10 @@ describe CombinedCompetitionResult do
   let(:race_100m) { FactoryGirl.create(:timed_competition) }
   let(:combined_competition) { FactoryGirl.create(:combined_competition) }
   let(:combined_competition_result) { CombinedCompetitionResult.new(combined_competition).results("Male") }
-  let(:combined_competition_entry) { FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition, :abbreviation => "TT", competition: race_100m) }
+  let(:combined_competition_entry) { FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition, abbreviation: "TT", competition: race_100m) }
 
   before(:each) do
-    build_competitor(:place => 1, :bib_number => 10, competition: combined_competition_entry.competition)
+    build_competitor(place: 1, bib_number: 10, competition: combined_competition_entry.competition)
   end
 
   it "lists competitors" do
@@ -29,7 +29,7 @@ describe CombinedCompetitionResult do
 
   it "lists the first place details" do
     result_1 = combined_competition_result
-    expect(result_1).to eq([{:bib_number => 10, :results => {"TT" => { :entry_place => 1, :entry_points => 50 } }, :total_points => 50 }])
+    expect(result_1).to eq([{bib_number: 10, results: {"TT" => { entry_place: 1, entry_points: 50 } }, total_points: 50 }])
   end
 
   describe "with a tie-breaker" do
@@ -61,35 +61,35 @@ describe CombinedCompetitionResult do
       competition1 = FactoryGirl.build_stubbed(:competition)
       competition2 = FactoryGirl.build_stubbed(:competition)
       competition3 = FactoryGirl.build_stubbed(:competition)
-      competitor1m    = build_competitor(:place => 2, :bib_number => 10, competition: competition1)
-      competitor1tt   = build_competitor(:place => 1, :bib_number => 10, competition: competition2)
-      competitor1crit = build_competitor(:place => 10, :bib_number => 10, competition: competition3)
-      competitor2m    = build_competitor(:place => 2, :bib_number => 20, competition: competition1)
-      competitor2tt   = build_competitor(:place => 2, :bib_number => 20, competition: competition2)
-      competitor2crit = build_competitor(:place => 2, :bib_number => 20, competition: competition3)
-      competitor3m    = build_competitor(:place => 1, :bib_number => 30, competition: competition1)
-      competitor3tt   = build_competitor(:place => 5, :bib_number => 30, competition: competition2)
-      competitor3crit = build_competitor(:place => 5, :bib_number => 30, competition: competition3)
-      m_combined_competition_entry = FactoryGirl.build_stubbed(:combined_competition_entry, :abbreviation => "M", :tie_breaker => true, competition: competition1)
+      competitor1m    = build_competitor(place: 2, bib_number: 10, competition: competition1)
+      competitor1tt   = build_competitor(place: 1, bib_number: 10, competition: competition2)
+      competitor1crit = build_competitor(place: 10, bib_number: 10, competition: competition3)
+      competitor2m    = build_competitor(place: 2, bib_number: 20, competition: competition1)
+      competitor2tt   = build_competitor(place: 2, bib_number: 20, competition: competition2)
+      competitor2crit = build_competitor(place: 2, bib_number: 20, competition: competition3)
+      competitor3m    = build_competitor(place: 1, bib_number: 30, competition: competition1)
+      competitor3tt   = build_competitor(place: 5, bib_number: 30, competition: competition2)
+      competitor3crit = build_competitor(place: 5, bib_number: 30, competition: competition3)
+      m_combined_competition_entry = FactoryGirl.build_stubbed(:combined_competition_entry, abbreviation: "M", tie_breaker: true, competition: competition1)
       # allow(competitor1m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
       # allow(competitor2m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
       # allow(competitor3m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
-      tt_combined_competition_entry = FactoryGirl.build_stubbed(:combined_competition_entry, :abbreviation => "TT", :tie_breaker => false, competition: competition2)
+      tt_combined_competition_entry = FactoryGirl.build_stubbed(:combined_competition_entry, abbreviation: "TT", tie_breaker: false, competition: competition2)
       # allow(competitor1tt).to receive_message_chain(:competition, :combined_competition_entries).and_return([tt_combined_competition_entry])
       # allow(competitor2tt).to receive_message_chain(:competition, :combined_competition_entries).and_return([tt_combined_competition_entry])
       # allow(competitor3tt).to receive_message_chain(:competition, :combined_competition_entries).and_return([tt_combined_competition_entry])
-      crit_combined_competition_entry = FactoryGirl.build_stubbed(:combined_competition_entry, :abbreviation => "Crit", :tie_breaker => false, competition: competition3)
+      crit_combined_competition_entry = FactoryGirl.build_stubbed(:combined_competition_entry, abbreviation: "Crit", tie_breaker: false, competition: competition3)
       # allow(competitor1crit).to receive_message_chain(:competition, :combined_competition_entries).and_return([crit_combined_competition_entry])
       # allow(competitor2crit).to receive_message_chain(:competition, :combined_competition_entries).and_return([crit_combined_competition_entry])
       # allow(competitor3crit).to receive_message_chain(:competition, :combined_competition_entries).and_return([crit_combined_competition_entry])
-      configure_cce(m_combined_competition_entry, :place => 2, :points => 35)
-      configure_cce(m_combined_competition_entry, :place => 1, :points => 50)
-      configure_cce(tt_combined_competition_entry, :place => 1, :points => 39)
-      configure_cce(tt_combined_competition_entry, :place => 2, :points => 28)
-      configure_cce(tt_combined_competition_entry, :place => 5, :points => 18)
-      configure_cce(crit_combined_competition_entry, :place => 10, :points => 1)
-      configure_cce(crit_combined_competition_entry, :place => 2, :points => 12)
-      configure_cce(crit_combined_competition_entry, :place => 5, :points => 7)
+      configure_cce(m_combined_competition_entry, place: 2, points: 35)
+      configure_cce(m_combined_competition_entry, place: 1, points: 50)
+      configure_cce(tt_combined_competition_entry, place: 1, points: 39)
+      configure_cce(tt_combined_competition_entry, place: 2, points: 28)
+      configure_cce(tt_combined_competition_entry, place: 5, points: 18)
+      configure_cce(crit_combined_competition_entry, place: 10, points: 1)
+      configure_cce(crit_combined_competition_entry, place: 2, points: 12)
+      configure_cce(crit_combined_competition_entry, place: 5, points: 7)
       allow(m_combined_competition_entry).to receive(:competitors).and_return([competitor1m, competitor2m, competitor3m])
       allow(tt_combined_competition_entry).to receive(:competitors).and_return([competitor1tt, competitor2tt, competitor3tt])
       allow(crit_combined_competition_entry).to receive(:competitors).and_return([competitor1crit, competitor2crit, competitor3crit])

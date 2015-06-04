@@ -12,6 +12,6 @@ class CreateImportedDataTable < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :import_results, [:user_id], :name => "index_imported_results_user_id"
+    add_index :import_results, [:user_id], name: "index_imported_results_user_id"
   end
 end

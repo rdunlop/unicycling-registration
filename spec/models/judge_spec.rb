@@ -23,7 +23,7 @@ require 'spec_helper'
 describe Judge do
   describe "when the judge has scores" do
     let(:judge) { FactoryGirl.build_stubbed(:judge) }
-    let(:score) {FactoryGirl.create(:score, :judge => judge) }
+    let(:score) {FactoryGirl.create(:score, judge: judge) }
     before(:each) do
       allow(judge).to receive(:scores).and_return([score])
     end

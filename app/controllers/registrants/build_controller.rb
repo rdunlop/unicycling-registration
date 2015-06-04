@@ -51,7 +51,7 @@ class Registrants::BuildController < ApplicationController
     if @registrant.save
       # drop into the second step
       set_steps # reset steps to ensure we get the correct set of steps
-      redirect_to wizard_path(steps.second, :registrant_id => @registrant)
+      redirect_to wizard_path(steps.second, registrant_id: @registrant)
     else
       flash[:alert] = "Unable to create registrant: " + @registrant.errors.full_messages.join(", ")
       redirect_to user_registrants_path(current_user)

@@ -35,31 +35,31 @@ class Competition < ActiveRecord::Base
   include CachedModel
   include Slugify
 
-  belongs_to :age_group_type, :inverse_of => :competitions
-  belongs_to :event, :inverse_of => :competitions
+  belongs_to :age_group_type, inverse_of: :competitions
+  belongs_to :event, inverse_of: :competitions
 
-  has_many :competitors, -> { order "position" }, :dependent => :destroy, inverse_of: :competition
-  has_many :registrants, :through => :competitors
+  has_many :competitors, -> { order "position" }, dependent: :destroy, inverse_of: :competition
+  has_many :registrants, through: :competitors
   has_many :results, through: :competitors
 
-  has_many :judges, -> { order "judge_type_id" }, :dependent => :destroy
-  has_many :judge_types, :through => :judges
-  has_many :scores, :through => :judges
-  has_many :distance_attempts, :through => :competitors
-  has_many :time_results, :through => :competitors
-  has_many :external_results, :through => :competitors
-  has_many :competition_sources, :foreign_key => "target_competition_id", :inverse_of => :target_competition, :dependent => :destroy
+  has_many :judges, -> { order "judge_type_id" }, dependent: :destroy
+  has_many :judge_types, through: :judges
+  has_many :scores, through: :judges
+  has_many :distance_attempts, through: :competitors
+  has_many :time_results, through: :competitors
+  has_many :external_results, through: :competitors
+  has_many :competition_sources, foreign_key: "target_competition_id", inverse_of: :target_competition, dependent: :destroy
   has_many :combined_competition_entries, dependent: :destroy
   has_many :published_age_group_entries, dependent: :destroy
   has_many :wave_times, dependent: :destroy
   has_many :competition_results, dependent: :destroy
   belongs_to :combined_competition
 
-  accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
+  accepts_nested_attributes_for :competition_sources, reject_if: :no_source_selected, allow_destroy: true
   accepts_nested_attributes_for :competitors
   accepts_nested_attributes_for :wave_times, allow_destroy: true
 
-  has_many :lane_assignments, :dependent => :destroy
+  has_many :lane_assignments, dependent: :destroy
 
   def self.data_recording_types
     ["Two Data Per Line", "One Data Per Line", "Track E-Timer", "Externally Ranked", "Mass Start", "Chip-Timing"]
@@ -72,7 +72,7 @@ class Competition < ActiveRecord::Base
     ["Freestyle", "Artistic Freestyle IUF 2015", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
   end
 
-  validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }
+  validates :scoring_class, inclusion: { in: self.scoring_classes, allow_nil: false }
 
   def self.num_member_options
     ["One", "Two", "Three or more"]
@@ -82,7 +82,7 @@ class Competition < ActiveRecord::Base
 
   validate :automatic_competitor_creation_only_with_one
 
-  validates :event_id, :presence => true
+  validates :event_id, presence: true
   validate :published_only_when_locked
   validate :awarded_only_when_published
   validate :award_label_title_checks
@@ -91,7 +91,7 @@ class Competition < ActiveRecord::Base
 
   scope :event_order, -> { includes(:event).order("events.name") }
 
-  validates :name, :award_title_name, :presence => true
+  validates :name, :award_title_name, presence: true
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
             :build_import_result_from_raw, :score_calculator, :can_eliminate_judges?,
@@ -346,7 +346,7 @@ class Competition < ActiveRecord::Base
   end
 
   def get_judge(user)
-    judges.where({:user_id => user.id}).first
+    judges.where({user_id: user.id}).first
   end
 
   def has_judge(user)

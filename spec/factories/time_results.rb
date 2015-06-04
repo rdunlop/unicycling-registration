@@ -26,7 +26,7 @@
 
 FactoryGirl.define do
   factory :time_result do
-    association :competitor, :factory => :event_competitor
+    association :competitor, factory: :event_competitor
     status nil
     is_start_time false
     minutes 0

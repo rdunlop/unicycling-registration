@@ -21,8 +21,8 @@ class LaneAssignment < ActiveRecord::Base
   belongs_to :competitor, touch: true
   include CompetitorAutoCreation
 
-  validates :competition, :competitor, :heat, :lane, :presence => true
-  validates :heat, :uniqueness => {:scope => [:competition_id, :lane] }
+  validates :competition, :competitor, :heat, :lane, presence: true
+  validates :heat, uniqueness: {scope: [:competition_id, :lane] }
 
   default_scope { order(:heat, :lane) }
 

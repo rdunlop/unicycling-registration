@@ -19,7 +19,7 @@ class ExternalResult < ActiveRecord::Base
   include Placeable
   include CachedSetModel
 
-  validates :points, :presence => true
+  validates :points, presence: true
 
   def self.cache_set_field
     :competitor_id

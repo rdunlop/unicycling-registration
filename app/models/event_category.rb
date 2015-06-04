@@ -19,14 +19,14 @@
 #
 
 class EventCategory < ActiveRecord::Base
-  belongs_to :event, :inverse_of => :event_categories, :touch => true, counter_cache: true
+  belongs_to :event, inverse_of: :event_categories, touch: true, counter_cache: true
 
-  has_many :registrant_event_sign_ups, :dependent => :destroy
+  has_many :registrant_event_sign_ups, dependent: :destroy
 
-  has_many :competition_sources, :dependent => :destroy
+  has_many :competition_sources, dependent: :destroy
 
   validates :event, presence: true
-  validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
+  validates :name, {presence: true, uniqueness: {scope: [:event_id]} }
 
   acts_as_restful_list scope: :event
 

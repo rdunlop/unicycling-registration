@@ -75,7 +75,7 @@ describe AwardLabel do
     end
 
     it "displays both names if in a pair" do
-      @reg2 = FactoryGirl.build_stubbed(:competitor, :first_name => "Bob", :last_name => "Smith")
+      @reg2 = FactoryGirl.build_stubbed(:competitor, first_name: "Bob", last_name: "Smith")
       allow(@comp).to receive_message_chain(:members, :count).and_return(2)
       allow(@comp).to receive(:registrants).and_return([@reg, @reg2])
 

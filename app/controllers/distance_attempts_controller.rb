@@ -2,7 +2,7 @@ class DistanceAttemptsController < ApplicationController
   load_resource :judge, except: [:list, :destroy]
   load_and_authorize_resource through: :judge, except: [:list, :destroy]
   load_and_authorize_resource only: [:destroy]
-  before_action :load_competition, :except => [:list, :destroy]
+  before_action :load_competition, except: [:list, :destroy]
 
   before_action :set_judge_breadcrumb, except: [:list, :destroy]
 

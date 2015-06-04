@@ -28,7 +28,7 @@ class Score < ActiveRecord::Base
   end
 
   self.score_fields.each do |sym|
-    validates sym, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+    validates sym, presence: true, numericality: {greater_than_or_equal_to: 0}
   end
   before_validation :set_zero_for_non_applicable_scores
 

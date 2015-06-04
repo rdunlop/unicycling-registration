@@ -13,11 +13,11 @@
 #
 
 class StandardSkillRoutine < ActiveRecord::Base
-  validates :registrant_id, { :presence => true, :uniqueness => true }
+  validates :registrant_id, { presence: true, uniqueness: true }
 
   belongs_to :registrant
 
-  has_many :standard_skill_routine_entries, -> {order "position"}, :dependent => :destroy
+  has_many :standard_skill_routine_entries, -> {order "position"}, dependent: :destroy
 
   def total_skill_points
     total = 0

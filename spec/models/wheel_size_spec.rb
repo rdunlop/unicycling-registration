@@ -30,8 +30,8 @@ describe WheelSize do
   end
 
   it "returns the wheel sizes in position order" do
-    @ws3 = FactoryGirl.create(:wheel_size, :position => 3)
-    @ws2 = FactoryGirl.create(:wheel_size, :position => 2)
+    @ws3 = FactoryGirl.create(:wheel_size, position: 3)
+    @ws2 = FactoryGirl.create(:wheel_size, position: 2)
     expect(WheelSize.all).to eq([@ws3, @ws2, @ws])
   end
 

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 def create_competitor(competition, bib_number, heat, lane)
-  reg = FactoryGirl.create(:registrant, :bib_number => 101)
-  competitor = FactoryGirl.create(:event_competitor, :competition => competition)
-  member = FactoryGirl.create(:member, :competitor => competitor, :registrant => reg)
+  reg = FactoryGirl.create(:registrant, bib_number: 101)
+  competitor = FactoryGirl.create(:event_competitor, competition: competition)
+  member = FactoryGirl.create(:member, competitor: competitor, registrant: reg)
   if heat && lane
-    FactoryGirl.create(:lane_assignment, :competition => competition, :competitor => competitor, :heat => heat, :lane => lane)
+    FactoryGirl.create(:lane_assignment, competition: competition, competitor: competitor, heat: heat, lane: lane)
   end
 end
 
@@ -21,7 +21,7 @@ describe RaceDataImporter do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101.txt' }
 
     it "creates a competitor" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       expect{
         importer.process_csv(sample_input, false)
@@ -39,7 +39,7 @@ describe RaceDataImporter do
     end
 
     it "can import start times" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       expect{
         importer.process_csv(sample_input, true)
@@ -55,7 +55,7 @@ describe RaceDataImporter do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101_dq.txt' }
 
     it "creates a dq competitor" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       expect{
         importer.process_csv(sample_input, true)

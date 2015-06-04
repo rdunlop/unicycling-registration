@@ -20,10 +20,10 @@ namespace :deploy do
 end
 
 namespace :deploy do
-  task :install_translations => [:set_rails_env] do
+  task install_translations: [:set_rails_env] do
     on primary(:app) do
       within release_path do
-        with :rails_env => fetch(:rails_env) do
+        with rails_env: fetch(:rails_env) do
           execute :rake, "import_translations_from_yml"
           execute :rake, "write_tolk_to_disk"
         end

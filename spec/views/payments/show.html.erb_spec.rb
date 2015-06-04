@@ -5,7 +5,7 @@ describe "payments/show" do
   before(:each) do
     @config = FactoryGirl.create(:event_configuration)
     @payment = FactoryGirl.create(:payment)
-    @payment_detail = FactoryGirl.create(:payment_detail, :payment => @payment)
+    @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment)
     @payment.reload
 
     @ability = Object.new
@@ -23,7 +23,7 @@ describe "payments/show" do
   it "renders a form for the paypal integration" do
     render
 
-    assert_select "form", :action => @payment.paypal_post_url, :method => "post" do
+    assert_select "form", action: @payment.paypal_post_url, method: "post" do
       assert_select ("input[type=hidden][name=business][value='" + @config.paypal_account + "']")
       assert_select "input[type=hidden][name=cancel_return][value='" + user_payments_url(user) + "']"
       assert_select "input[type=hidden][name=cmd][value='_cart']"
@@ -40,7 +40,7 @@ describe "payments/show" do
   it "renders the sub-entries for associated payment_details" do
     render
 
-    assert_select "form", :action => @payment.paypal_post_url, :method => "post" do
+    assert_select "form", action: @payment.paypal_post_url, method: "post" do
       assert_select "input[type=hidden][name=amount_1][value='" + @payment_detail.amount.to_s + "']"
       assert_select "input[type=hidden][name=item_name_1][value='" + @payment_detail.expense_item.to_s + "']"
       assert_select "input[type=hidden][name=quantity_1][value='1']"

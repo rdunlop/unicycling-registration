@@ -7,7 +7,7 @@ class SetPrimaryChoiceLabelToEventName < ActiveRecord::Migration
   def up
     EventChoice.reset_column_information
     Event.reset_column_information
-    EventChoice.where({:position => 1}).each do |ec|
+    EventChoice.where({position: 1}).each do |ec|
       ev = Event.find(ec.event_id)
       ec.label = ev.name
       ec.save!

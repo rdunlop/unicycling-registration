@@ -20,7 +20,7 @@
 
 FactoryGirl.define do
   factory :result do
-    association :competitor, :factory => :event_competitor # FactoryGirl
+    association :competitor, factory: :event_competitor # FactoryGirl
     place 1
     result_type "AgeGroup"
   end

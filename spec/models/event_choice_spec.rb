@@ -19,7 +19,7 @@ require 'spec_helper'
 describe EventChoice do
   before(:each) do
     @event = FactoryGirl.create(:event)
-    @ec = FactoryGirl.create(:event_choice, :event => @event)
+    @ec = FactoryGirl.create(:event_choice, event: @event)
   end
   it "is valid from FactoryGirl" do
     expect(@ec.valid?).to eq(true)
@@ -111,7 +111,7 @@ describe EventChoice do
 
   describe "with associated registrant_choice" do
     before(:each) do
-      @rc = FactoryGirl.create(:registrant_choice, :event_choice => @ec)
+      @rc = FactoryGirl.create(:registrant_choice, event_choice: @ec)
     end
     it "deletes the RC when deleted" do
       expect(RegistrantChoice.all.count).to eq(1)
@@ -127,8 +127,8 @@ describe EventChoice do
   it "can have the same position but in different events" do
     @ev = FactoryGirl.create(:event)
     @ev2 = FactoryGirl.create(:event)
-    ec1 = FactoryGirl.create(:event_choice, :event => @ev)
-    ec2 = FactoryGirl.create(:event_choice, :event => @ev2)
+    ec1 = FactoryGirl.create(:event_choice, event: @ev)
+    ec2 = FactoryGirl.create(:event_choice, event: @ev2)
     expect(ec1.position).to eq(ec2.position)
     expect(ec2.valid?).to eq(true)
   end

@@ -15,9 +15,9 @@ class Category < ActiveRecord::Base
   acts_as_restful_list
   default_scope { order(:position) }
 
-  has_many :events, -> {order("events.position") }, :dependent => :destroy, :inverse_of => :category
+  has_many :events, -> {order("events.position") }, dependent: :destroy, inverse_of: :category
 
-  validates :name, :presence => true
+  validates :name, presence: true
 
   translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations

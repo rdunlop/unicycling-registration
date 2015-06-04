@@ -53,7 +53,7 @@ describe EventCategory do
 
   describe "with some registrant_choices" do
     before(:each) do
-      @rc = FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec)
+      @rc = FactoryGirl.create(:registrant_event_sign_up, event: @ev, event_category: @ec)
     end
 
     it "has associated registrant_event_sign_ups" do
@@ -78,7 +78,7 @@ describe EventCategory do
   describe "with a signed up, but deleted registrant" do
     before :each do
       reg = FactoryGirl.create(:registrant)
-      FactoryGirl.create(:registrant_event_sign_up, :event => @ev, :event_category => @ec, :signed_up => true, :registrant => reg)
+      FactoryGirl.create(:registrant_event_sign_up, event: @ev, event_category: @ec, signed_up: true, registrant: reg)
       reg.deleted = true
       reg.save!
     end

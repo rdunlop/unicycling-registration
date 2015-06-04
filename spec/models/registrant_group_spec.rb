@@ -34,9 +34,9 @@ describe RegistrantGroup do
   end
 
   it "has multiple registrant_group_members" do
-    FactoryGirl.create(:registrant_group_member, :registrant_group => @rg)
-    FactoryGirl.create(:registrant_group_member, :registrant_group => @rg)
-    FactoryGirl.create(:registrant_group_member, :registrant_group => @rg)
+    FactoryGirl.create(:registrant_group_member, registrant_group: @rg)
+    FactoryGirl.create(:registrant_group_member, registrant_group: @rg)
+    FactoryGirl.create(:registrant_group_member, registrant_group: @rg)
     expect(@rg.registrant_group_members.count).to eq(3)
   end
 
@@ -47,7 +47,7 @@ describe RegistrantGroup do
   end
 
   it "can be found via the registrant" do
-    @rgm = FactoryGirl.create(:registrant_group_member, :registrant_group => @rg)
+    @rgm = FactoryGirl.create(:registrant_group_member, registrant_group: @rg)
     @reg = @rgm.registrant
     expect(@reg.registrant_groups).to eq([@rg])
   end

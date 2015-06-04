@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
   protect_from_forgery
-  check_authorization :unless => :devise_controller?
-  skip_authorization_check :if => :rails_admin_controller?
+  check_authorization unless: :devise_controller?
+  skip_authorization_check if: :rails_admin_controller?
 
   def rails_admin_controller?
     false
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
-    redirect_to root_path, :alert => exception.message
+    redirect_to root_path, alert: exception.message
   end
 
   def raise_not_found!
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def default_footer
-    {:left => '[date] [time]', :center => @config.short_name, :right => 'Page [page] of [topage]'}
+    {left: '[date] [time]', center: @config.short_name, right: 'Page [page] of [topage]'}
   end
 
   def render_common_pdf(view_name, orientation = "Portrait", attachment = false)
@@ -63,29 +63,29 @@ class ApplicationController < ActionController::Base
       disposition = "inline"
     end
 
-    render :pdf => view_name,
-           :page_size => "Letter",
-           :print_media_type => true,
-           :margin => {:top => 2, :left => 2, :right => 2},
-           :footer => default_footer,
-           :formats => [:html],
-           :orientation => orientation,
-           :disposition => disposition,
-           :layout => "pdf.html"
+    render pdf: view_name,
+           page_size: "Letter",
+           print_media_type: true,
+           margin: {top: 2, left: 2, right: 2},
+           footer: default_footer,
+           formats: [:html],
+           orientation: orientation,
+           disposition: disposition,
+           layout: "pdf.html"
   end
 
   # a prototype, not working (currently cutting off lines)
   def render_pdf_with_header(view_name, template, locals)
-    render :pdf => view_name,
-           :page_size => "Letter",
-           :print_media_type => true,
-           :margin => {:top => 60, :left => 2, :right => 2},
-           :footer => default_footer,
-           :formats => [:html],
-           :header =>{ :html => {template: template, locals: locals}},
-           :orientation => "Portrait",
-           :disposition => "inline",
-           :layout => "pdf.html"
+    render pdf: view_name,
+           page_size: "Letter",
+           print_media_type: true,
+           margin: {top: 60, left: 2, right: 2},
+           footer: default_footer,
+           formats: [:html],
+           header: { html: {template: template, locals: locals}},
+           orientation: "Portrait",
+           disposition: "inline",
+           layout: "pdf.html"
   end
 
   private

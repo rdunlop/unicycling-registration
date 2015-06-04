@@ -16,7 +16,7 @@ class AddEventCategoriesModel < ActiveRecord::Migration
     EventChoice.all.each do |ec|
       if ec.cell_type == 'multiple'
         ec.multiple_values.split(%r{,\s*}).each_with_index do |val, i|
-          EventCategory.create :event_id => ec.event_id, :name => val, :position => i + 1
+          EventCategory.create event_id: ec.event_id, name: val, position: i + 1
         end
       end
     end

@@ -42,7 +42,7 @@ RSpec.configure do |config|
     ActionController::Base.perform_caching = caching
   end
 
-  config.before(:each, :type => :view) do
+  config.before(:each, type: :view) do
     assign(:config, EventConfiguration.new)
   end
 

@@ -24,13 +24,13 @@ class RegistrantExpenseItem < ActiveRecord::Base
   include HasDetailsDescription
 
   belongs_to :registrant, touch: true
-  belongs_to :expense_item, :inverse_of => :registrant_expense_items
+  belongs_to :expense_item, inverse_of: :registrant_expense_items
 
-  has_paper_trail :meta => { :registrant_id => :registrant_id }
+  has_paper_trail meta: { registrant_id: :registrant_id }
 
-  validates :expense_item, :registrant, :presence => true
-  validate :only_one_free_per_expense_group, :on => :create
-  validate :no_more_than_max_per_registrant, :on => :create
+  validates :expense_item, :registrant, presence: true
+  validate :only_one_free_per_expense_group, on: :create
+  validate :no_more_than_max_per_registrant, on: :create
   validate :custom_cost_present
 
   monetize :custom_cost_cents, allow_nil: true

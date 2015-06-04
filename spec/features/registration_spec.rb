@@ -66,7 +66,7 @@ describe 'Logging in to the system' do
 
   describe "when a noncompetitor registrant exists" do
     before :each do
-      registrant = FactoryGirl.create(:noncompetitor, :user => user)
+      registrant = FactoryGirl.create(:noncompetitor, user: user)
       visit registrant_path(registrant)
     end
 

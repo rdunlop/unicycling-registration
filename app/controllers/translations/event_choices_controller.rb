@@ -23,6 +23,6 @@ class Translations::EventChoicesController < Admin::TranslationsController
   private
 
   def event_choice_params
-    params.require(:event_choice).permit(:translations_attributes => [:id, :locale, :label, :tooltip])
+    params.require(:event_choice).permit(translations_attributes: [:id, :locale, :label, :tooltip])
   end
 end

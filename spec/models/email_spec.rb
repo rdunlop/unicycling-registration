@@ -29,7 +29,7 @@ describe Email do
     end
 
     it "doesn't list the user twice if they have 2 registrants to pay for" do
-      @reg2 = FactoryGirl.create(:competitor, :user => @reg.user)
+      @reg2 = FactoryGirl.create(:competitor, user: @reg.user)
       @email.unpaid_reg_accounts = true
       expect(@email.filtered_user_emails).to match_array([@reg.user.email])
     end

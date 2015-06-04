@@ -4,7 +4,7 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
   before_action :authenticate_user!
   load_and_authorize_resource
 
-  before_action :load_event, :only => [:index, :create]
+  before_action :load_event, only: [:index, :create]
   before_action :set_breadcrumbs
 
   respond_to :html

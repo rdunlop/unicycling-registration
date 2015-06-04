@@ -25,7 +25,7 @@ require 'spec_helper'
 describe CompetitionSource do
   before(:each) do
     @competition = FactoryGirl.create(:competition)
-    @cs = FactoryGirl.create(:competition_source, :target_competition => @competition)
+    @cs = FactoryGirl.create(:competition_source, target_competition: @competition)
   end
   it "is valid from FactoryGirl" do
     expect(@cs.valid?).to eq(true)
@@ -63,17 +63,17 @@ describe CompetitionSource do
     before(:each) do
       @competition2 = FactoryGirl.create(:competition)
       @source_competition = FactoryGirl.create(:ranked_competition)
-      @cs2 = FactoryGirl.create(:competition_source, :competition => @source_competition, :target_competition => @competition2, :max_place => 2)
+      @cs2 = FactoryGirl.create(:competition_source, competition: @source_competition, target_competition: @competition2, max_place: 2)
     end
 
-    it "chooses competitors from the source_competition with a good enough overall_place", :caching => true do
-      @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
+    it "chooses competitors from the source_competition with a good enough overall_place", caching: true do
+      @competitor = FactoryGirl.create(:event_competitor, competition: @source_competition)
       FactoryGirl.create(:result, place: 1, result_type: "Overall", competitor: @competitor)
 
       expect(@cs2.signed_up_registrants.count).to eq(1)
     end
     it "doesn't choose a competitor with an overall_place worse than the required" do
-      @competitor = FactoryGirl.create(:event_competitor, :competition => @source_competition)
+      @competitor = FactoryGirl.create(:event_competitor, competition: @source_competition)
       FactoryGirl.create(:result, place: 3, result_type: "Overall", competitor: @competitor)
 
       expect(@cs2.signed_up_registrants.count).to eq(0)

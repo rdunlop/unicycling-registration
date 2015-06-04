@@ -4,25 +4,25 @@ describe FlatlandScoreCalculator do
   describe "when calculating the placement points of an event" do
     before(:each) do
       @competition = FactoryGirl.create(:competition)
-      @comp1 = FactoryGirl.create(:event_competitor, :competition => @competition)
-      @comp2 = FactoryGirl.create(:event_competitor, :competition => @competition)
-      @comp3 = FactoryGirl.create(:event_competitor, :competition => @competition)
-      @judge = FactoryGirl.create(:judge, :competition => @competition)
+      @comp1 = FactoryGirl.create(:event_competitor, competition: @competition)
+      @comp2 = FactoryGirl.create(:event_competitor, competition: @competition)
+      @comp3 = FactoryGirl.create(:event_competitor, competition: @competition)
+      @judge = FactoryGirl.create(:judge, competition: @competition)
       @jt = @judge.judge_type
       @jt.event_class = "Flatland"
       @jt.save!
-      @score1 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp1, :val_1 => 10, :val_2 => 0, :val_3 => 0, :val_4 => 1)
-      @score2 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp2, :val_1 => 5, :val_2 => 0, :val_3 => 0, :val_4 => 1)
-      @score3 = FactoryGirl.create(:score, :judge => @judge, :competitor => @comp3, :val_1 => 0, :val_2 => 0, :val_3 => 0, :val_4 => 1)
+      @score1 = FactoryGirl.create(:score, judge: @judge, competitor: @comp1, val_1: 10, val_2: 0, val_3: 0, val_4: 1)
+      @score2 = FactoryGirl.create(:score, judge: @judge, competitor: @comp2, val_1: 5, val_2: 0, val_3: 0, val_4: 1)
+      @score3 = FactoryGirl.create(:score, judge: @judge, competitor: @comp3, val_1: 0, val_2: 0, val_3: 0, val_4: 1)
       @calc = FlatlandScoreCalculator.new(@competition)
     end
 
     describe "and there are 2 judges" do
       before(:each) do
-        @judge2 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
-        @score2_1 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score1.competitor, :val_1 => 9, :val_2 => 0, :val_3 => 0, :val_4 => 1)
-        @score2_2 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score2.competitor, :val_1 => 0, :val_2 => 0, :val_3 => 0, :val_4 => 1)
-        @score2_3 = FactoryGirl.create(:score, :judge => @judge2, :competitor => @score3.competitor, :val_1 => 3, :val_2 => 0, :val_3 => 0, :val_4 => 1)
+        @judge2 = FactoryGirl.create(:judge, competition: @competition, judge_type: @jt)
+        @score2_1 = FactoryGirl.create(:score, judge: @judge2, competitor: @score1.competitor, val_1: 9, val_2: 0, val_3: 0, val_4: 1)
+        @score2_2 = FactoryGirl.create(:score, judge: @judge2, competitor: @score2.competitor, val_1: 0, val_2: 0, val_3: 0, val_4: 1)
+        @score2_3 = FactoryGirl.create(:score, judge: @judge2, competitor: @score3.competitor, val_1: 3, val_2: 0, val_3: 0, val_4: 1)
       end
 
       it "has 0.0 for the total placing points, after subtracting high and low (only 2 judges)" do
@@ -33,10 +33,10 @@ describe FlatlandScoreCalculator do
 
       describe "with a 3rd judge's scores" do
         before(:each) do
-          @judge3 = FactoryGirl.create(:judge, :competition => @competition, :judge_type => @jt)
-          @score3_1 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score1.competitor, :val_1 => 9, :val_2 => 0, :val_3 => 0, :val_4 => 1)
-          @score3_2 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score2.competitor, :val_1 => 4, :val_2 => 0, :val_3 => 0, :val_4 => 1)
-          @score3_3 = FactoryGirl.create(:score, :judge => @judge3, :competitor => @score3.competitor, :val_1 => 4, :val_2 => 0, :val_3 => 0, :val_4 => 1)
+          @judge3 = FactoryGirl.create(:judge, competition: @competition, judge_type: @jt)
+          @score3_1 = FactoryGirl.create(:score, judge: @judge3, competitor: @score1.competitor, val_1: 9, val_2: 0, val_3: 0, val_4: 1)
+          @score3_2 = FactoryGirl.create(:score, judge: @judge3, competitor: @score2.competitor, val_1: 4, val_2: 0, val_3: 0, val_4: 1)
+          @score3_3 = FactoryGirl.create(:score, judge: @judge3, competitor: @score3.competitor, val_1: 4, val_2: 0, val_3: 0, val_4: 1)
         end
         it "has non-zero placing points" do
           expect(@calc.total_points(@score1.competitor)).to eq(10)  # 11,10,10 (remain: 10)

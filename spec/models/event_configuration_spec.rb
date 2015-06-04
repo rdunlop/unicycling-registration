@@ -48,7 +48,7 @@ include ApplicationHelper
 describe EventConfiguration do
   before(:each) do
     @ev = EventConfiguration.singleton
-    @ev.assign_attributes(FactoryGirl.attributes_for(:event_configuration, :standard_skill_closed_date => Date.new(2013, 5, 5)))
+    @ev.assign_attributes(FactoryGirl.attributes_for(:event_configuration, standard_skill_closed_date: Date.new(2013, 5, 5)))
   end
 
   it "is valid from factoryGirl" do
@@ -158,7 +158,7 @@ describe EventConfiguration do
 
   describe "with a registration period" do
     before(:each) do
-      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 11, 03), :end_date => Date.new(2012, 11, 07))
+      @rp = FactoryGirl.create(:registration_period, start_date: Date.new(2012, 11, 03), end_date: Date.new(2012, 11, 07))
     end
     it "should be open on the last day of registration" do
       expect(EventConfiguration.closed?(Date.new(2012, 11, 07))).to eq(false)

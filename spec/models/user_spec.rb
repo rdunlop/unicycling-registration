@@ -54,19 +54,19 @@ describe User do
     end
 
     it "calculates the cost of a competitor" do
-      @comp = FactoryGirl.create(:competitor, :user => @user)
+      @comp = FactoryGirl.create(:competitor, user: @user)
       expect(@user.total_owing).to eq(100)
     end
     it "calculates the cost of a noncompetitor" do
-      @comp = FactoryGirl.create(:noncompetitor, :user => @user)
+      @comp = FactoryGirl.create(:noncompetitor, user: @user)
       expect(@user.total_owing).to eq(50)
     end
   end
   describe "with related registrants" do
     before(:each) do
-      @reg1 = FactoryGirl.create(:competitor, :user => @user)
-      @reg2 = FactoryGirl.create(:noncompetitor, :user => @user)
-      @reg3 = FactoryGirl.create(:competitor, :user => @user)
+      @reg1 = FactoryGirl.create(:competitor, user: @user)
+      @reg2 = FactoryGirl.create(:noncompetitor, user: @user)
+      @reg3 = FactoryGirl.create(:competitor, user: @user)
 
       @reg1.first_name = "holly"
       @reg1.save
@@ -100,17 +100,17 @@ describe User do
       expect(@user.has_minor?).to eq(false)
     end
     it "says no_minors if there are none" do
-      FactoryGirl.create(:event_configuration, :start_date => Date.today)
-      @reg4 = FactoryGirl.create(:minor_competitor, :user => @user, :birthday => Date.today - 10.years)
+      FactoryGirl.create(:event_configuration, start_date: Date.today)
+      @reg4 = FactoryGirl.create(:minor_competitor, user: @user, birthday: Date.today - 10.years)
       expect(@user.has_minor?).to eq(true)
     end
   end
 
   describe "with 3 users" do
     before(:each) do
-      @b = FactoryGirl.create(:user, :email => "b@b.com")
-      @a = FactoryGirl.create(:admin_user, :email => "a@a.com")
-      @c = FactoryGirl.create(:super_admin_user, :email => "c@c.com")
+      @b = FactoryGirl.create(:user, email: "b@b.com")
+      @a = FactoryGirl.create(:admin_user, email: "a@a.com")
+      @c = FactoryGirl.create(:super_admin_user, email: "c@c.com")
     end
 
     it "lists them in alphabetical order" do

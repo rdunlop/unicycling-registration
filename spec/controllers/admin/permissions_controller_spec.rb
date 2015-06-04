@@ -21,14 +21,14 @@ describe Admin::PermissionsController do
         @user = FactoryGirl.create(:user)
       end
       it "can change a user to an admin" do
-        put :set_role, {:user_id => @user.to_param, :role_name => :admin}
+        put :set_role, {user_id: @user.to_param, role_name: :admin}
         expect(response).to redirect_to(permissions_path)
         @user.reload
         expect(@user.has_role?(:admin)).to eq(true)
       end
       it "can change an admin back to a user" do
         admin = FactoryGirl.create(:admin_user)
-        put :set_role, {:user_id => admin.to_param, :role_name => :admin}
+        put :set_role, {user_id: admin.to_param, role_name: :admin}
         expect(response).to redirect_to(permissions_path)
         admin.reload
         expect(admin.has_role?(:admin)).to eq(false)
@@ -39,7 +39,7 @@ describe Admin::PermissionsController do
         sign_out @super_user
         sign_in admin_user
 
-        put :set_role, {:user_id => @user.to_param, :role_name => :admin}
+        put :set_role, {user_id: @user.to_param, role_name: :admin}
         expect(response).to redirect_to(root_path)
         @user.reload
         expect(@user.has_role?(:admin)).to eq(false)

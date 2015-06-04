@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Judging an event' do
   let!(:user) { FactoryGirl.create(:data_entry_volunteer_user, name: "Judge User") }
   include_context 'basic event configuration'
-  include_context 'freestyle_event', :name => "Individual"
+  include_context 'freestyle_event', name: "Individual"
   include_context "judge_is_assigned_to_competition", user_name: "Judge User", competition_name: "Individual"
   include_context 'user is logged in'
 

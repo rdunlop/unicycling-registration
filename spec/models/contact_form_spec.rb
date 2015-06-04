@@ -50,7 +50,7 @@ describe Event do
   end
 
   it "can be updated by a user object" do
-    @reg = FactoryGirl.create(:competitor, :first_name => "Bob", :last_name => "Smith")
+    @reg = FactoryGirl.create(:competitor, first_name: "Bob", last_name: "Smith")
     @cf.update_from_user(@reg.user)
     expect(@cf.username).to eq(@reg.user.email)
     expect(@cf.registrants).to eq("Bob Smith")

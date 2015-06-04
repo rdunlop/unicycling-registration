@@ -1,6 +1,6 @@
 class ExportController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource :class => false
+  authorize_resource class: false
 
   def index
   end
@@ -17,20 +17,20 @@ class ExportController < ApplicationController
     end
     filename = @config.short_name.downcase.gsub(/[^0-9a-z]/, "_") + "_registrants.csv"
     send_data(csv_string,
-              :type => 'text/csv; charset=utf-8; header=present',
-              :filename => filename)
+              type: 'text/csv; charset=utf-8; header=present',
+              filename: filename)
   end
 
   def download_events
-    event_categories = Event.includes(:event_categories => :event).flat_map{ |ev| ev.event_categories }
+    event_categories = Event.includes(event_categories: :event).flat_map{ |ev| ev.event_categories }
     event_categories_titles = event_categories.map{|ec| ec.to_s}
 
-    event_choices = Event.includes(:event_choices => :event).flat_map{ |ev| ev.event_choices }
+    event_choices = Event.includes(event_choices: :event).flat_map{ |ev| ev.event_choices }
     event_titles = event_choices.map{|ec| ec.to_s}
 
     titles = ["ID", "Registrant Name", "Age", "Gender"] + event_categories_titles + event_titles
     competitor_data = []
-    Registrant.active.includes(:registrant_event_sign_ups => [], :registrant_choices => :event_choice).each do |reg|
+    Registrant.active.includes(registrant_event_sign_ups: [], registrant_choices: :event_choice).each do |reg|
       reg_sign_up_data = []
       event_categories.each do |ec|
         # for performance reasons, loop it
@@ -83,7 +83,7 @@ class ExportController < ApplicationController
     s.write report
 
     respond_to do |format|
-      format.xls { send_data report.string, :filename => "download_events#{Date.today}.xls" }
+      format.xls { send_data report.string, filename: "download_events#{Date.today}.xls" }
     end
   end
 
@@ -133,7 +133,7 @@ class ExportController < ApplicationController
     s.write report
 
     respond_to do |format|
-      format.xls { send_data report.string, :filename => "#{ei.name}.xls" }
+      format.xls { send_data report.string, filename: "#{ei.name}.xls" }
     end
   end
 
@@ -167,7 +167,7 @@ class ExportController < ApplicationController
     s.write report
 
     respond_to do |format|
-      format.xls { send_data report.string, :filename => "results.xls" }
+      format.xls { send_data report.string, filename: "results.xls" }
       # format.xls { render text: report.string, :filename => "results.xls" }
     end
   end

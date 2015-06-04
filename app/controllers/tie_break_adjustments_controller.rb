@@ -1,5 +1,5 @@
 class TieBreakAdjustmentsController < ApplicationController
-  load_and_authorize_resource :judge, :only => [:index, :create]
+  load_and_authorize_resource :judge, only: [:index, :create]
   load_and_authorize_resource through: :judge, only: [:index, :create]
   load_and_authorize_resource only: :destroy
 

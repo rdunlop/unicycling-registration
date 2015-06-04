@@ -14,10 +14,10 @@
 #
 
 class AgeGroupType < ActiveRecord::Base
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, presence: true, uniqueness: true
 
-  has_many :age_group_entries, -> {order "age_group_entries.position"}, :dependent => :destroy, inverse_of: :age_group_type
-  has_many :competitions, :dependent => :nullify
+  has_many :age_group_entries, -> {order "age_group_entries.position"}, dependent: :destroy, inverse_of: :age_group_type
+  has_many :competitions, dependent: :nullify
 
   accepts_nested_attributes_for :age_group_entries, allow_destroy: true
 
@@ -37,7 +37,7 @@ class AgeGroupType < ActiveRecord::Base
     entries = age_group_entries.where("(start_age <= :age AND :age <= end_age) AND " \
                                       "(gender = 'Mixed' OR gender = :gender) AND " \
                                       "(wheel_size_id IS NULL or wheel_size_id = :wheel_size_id)",
-                                      :age => age, :gender => gender, :wheel_size_id => default_wheel_size_id)
+                                      age: age, gender: gender, wheel_size_id: default_wheel_size_id)
     entries.first
   end
 
@@ -50,8 +50,8 @@ class AgeGroupType < ActiveRecord::Base
 
   def as_json(options={})
     options = {
-      :except => [:id, :updated_at, :created_at],
-      :methods => [:age_group_entries]
+      except: [:id, :updated_at, :created_at],
+      methods: [:age_group_entries]
     }
     super(options)
   end

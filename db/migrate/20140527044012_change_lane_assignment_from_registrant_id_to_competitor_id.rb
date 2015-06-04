@@ -1,6 +1,6 @@
 class ChangeLaneAssignmentFromRegistrantIdToCompetitorId < ActiveRecord::Migration
   class Competition < ActiveRecord::Base
-    has_many :lane_assignments, :dependent => :destroy
+    has_many :lane_assignments, dependent: :destroy
     has_many :competitors
 
     def create_competitor_from_registrants(registrants, name)

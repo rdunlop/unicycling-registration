@@ -36,7 +36,7 @@ require 'spec_helper'
 describe Competition do
   before(:each) do
     @ev = FactoryGirl.create(:event)
-    @ec = FactoryGirl.create(:competition, :event => @ev)
+    @ec = FactoryGirl.create(:competition, event: @ev)
   end
   it "is valid from FactoryGirl" do
     expect(@ec.valid?).to eq(true)
@@ -110,7 +110,7 @@ describe Competition do
 
     describe "as a judge" do
       before(:each) do
-        @judge = FactoryGirl.create(:judge, :competition => @ec, :user => @user)
+        @judge = FactoryGirl.create(:judge, competition: @ec, user: @user)
       end
 
       it "has judge" do

@@ -16,10 +16,10 @@
 #
 
 class StandardSkillEntry < ActiveRecord::Base
-  has_many :standard_skill_routine_entries, :dependent => :destroy
+  has_many :standard_skill_routine_entries, dependent: :destroy
 
-  validates :number, :points, :description, :presence => true
-  validates :letter, :presence => true, :uniqueness => {:scope => :number } # not allowed to have the same number/letter pair twice
+  validates :number, :points, :description, presence: true
+  validates :letter, presence: true, uniqueness: {scope: :number } # not allowed to have the same number/letter pair twice
 
   default_scope { order('number, letter') }
 

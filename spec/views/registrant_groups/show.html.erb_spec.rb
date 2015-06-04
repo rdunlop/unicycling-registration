@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "registrant_groups/show" do
   before(:each) do
     @registrant_group = assign(:registrant_group, FactoryGirl.build_stubbed(:registrant_group,
-                                                                            :name => "Name",
-                                                                            :registrant_id => 1
+                                                                            name: "Name",
+                                                                            registrant_id: 1
     ))
   end
 

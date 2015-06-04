@@ -111,17 +111,17 @@ class CombinedCompetitionResult
       if matching_comp
         points = calc_points(entry, matching_comp)
         competitor_results[entry.abbreviation] = {
-          :entry_place => get_place(matching_comp),
-          :entry_points => points
+          entry_place: get_place(matching_comp),
+          entry_points: points
         }
       end
     end
     total_points = 0
     competitor_results.keys.map { |race| total_points += competitor_results[race][:entry_points] }
     {
-      :bib_number => bib_number,
-      :results => competitor_results,
-      :total_points => total_points
+      bib_number: bib_number,
+      results: competitor_results,
+      total_points: total_points
     }
   end
 

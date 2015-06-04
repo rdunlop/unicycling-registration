@@ -20,22 +20,22 @@ class PopulateRegistrantEventSignUp < ActiveRecord::Migration
     RegistrantChoice.reset_column_information
 
     # For each primary choice
-    EventChoice.where({:position => 1}).each do |ec|
+    EventChoice.where({position: 1}).each do |ec|
       # find all registrants who have chosen this
-      RegistrantChoice.where({:event_choice_id => ec.id}).each do |rc|
+      RegistrantChoice.where({event_choice_id: ec.id}).each do |rc|
         next if rc.value == "0"
         # determine the event_category for this user
-        category_ec = EventChoice.where({:cell_type => "category", :event_id => ec.event_id}).first
+        category_ec = EventChoice.where({cell_type: "category", event_id: ec.event_id}).first
         category_id = nil
         unless category_ec.nil?
-          reg_category_choice = RegistrantChoice.where({:event_choice_id => category_ec.id, :registrant_id => rc.registrant_id}).first
+          reg_category_choice = RegistrantChoice.where({event_choice_id: category_ec.id, registrant_id: rc.registrant_id}).first
           category_id = reg_category_choice.event_category_id unless reg_category_choice.nil?
         end
         if category_id.nil?
-          category_id = EventCategory.where({:event_id => ec.event_id}).first.id
+          category_id = EventCategory.where({event_id: ec.event_id}).first.id
         end
 
-        RegistrantEventSignUp.create! :registrant_id => rc.registrant_id, :signed_up => true, :event_category_id => category_id
+        RegistrantEventSignUp.create! registrant_id: rc.registrant_id, signed_up: true, event_category_id: category_id
       end
     end
   end

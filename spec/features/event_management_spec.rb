@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Creating a Competition from an Event' do
   let!(:user) { FactoryGirl.create(:super_admin_user) }
   include_context 'basic event configuration'
-  include_context 'freestyle_event', :name => "Individual"
+  include_context 'freestyle_event', name: "Individual"
   include_context 'user is logged in'
 
   before :each do

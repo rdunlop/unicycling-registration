@@ -42,7 +42,7 @@ describe AgeGroupEntry do
   end
 
   it "can have the same short_description, as long as it has a different age_group_type" do
-    age2 = FactoryGirl.build(:age_group_entry, :short_description => @age_group_entry.short_description)
+    age2 = FactoryGirl.build(:age_group_entry, short_description: @age_group_entry.short_description)
     expect(age2.valid?).to eq(true)
   end
 

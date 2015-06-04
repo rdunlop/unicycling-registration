@@ -15,7 +15,7 @@ class ConventionSetup::VolunteerOpportunitiesController < ConventionSetupControl
   # POST volunteer_opportunities
   def create
     if @volunteer_opportunity.save
-      redirect_to convention_setup_volunteer_opportunities_path, :notice => 'Volunteer Opportunity was successfully created.'
+      redirect_to convention_setup_volunteer_opportunities_path, notice: 'Volunteer Opportunity was successfully created.'
     else
       render :new
     end
@@ -23,7 +23,7 @@ class ConventionSetup::VolunteerOpportunitiesController < ConventionSetupControl
 
   def update
     if @volunteer_opportunity.update_attributes(volunteer_opportunity_params)
-      redirect_to convention_setup_volunteer_opportunities_path, :notice => 'Volunteer Opportunity was successfully updated.'
+      redirect_to convention_setup_volunteer_opportunities_path, notice: 'Volunteer Opportunity was successfully updated.'
     else
       render :edit
     end

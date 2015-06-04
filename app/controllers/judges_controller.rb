@@ -1,7 +1,7 @@
 class JudgesController < ApplicationController
   layout "competition_management"
-  load_and_authorize_resource :competition, :only => [:index, :create, :destroy, :copy_judges]
-  before_action :load_new_judge, :only => [:create]
+  load_and_authorize_resource :competition, only: [:index, :create, :destroy, :copy_judges]
+  before_action :load_new_judge, only: [:create]
   load_and_authorize_resource
 
   respond_to :html
@@ -74,7 +74,7 @@ class JudgesController < ApplicationController
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Manage Judges", competition_judges_path(@competition)
 
-    @judge_types = JudgeType.order(:id).where(:event_class => @competition.event_class)
+    @judge_types = JudgeType.order(:id).where(event_class: @competition.event_class)
     @all_data_entry_volunteers = User.with_role(:data_entry_volunteer).order(:email)
     @race_officials = User.with_role(:race_official).order(:email)
 

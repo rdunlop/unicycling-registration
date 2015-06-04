@@ -109,7 +109,7 @@ describe ExpenseItem do
 
   describe "when an associated payment has been created" do
     before(:each) do
-      @payment = FactoryGirl.create(:payment_detail, :expense_item => @item)
+      @payment = FactoryGirl.create(:payment_detail, expense_item: @item)
       @item.reload
     end
 
@@ -138,18 +138,18 @@ describe ExpenseItem do
 
   describe "with an expense_group set for 'noncompetitor_required'" do
     before(:each) do
-      @rg = FactoryGirl.create(:expense_group, :noncompetitor_required => true)
+      @rg = FactoryGirl.create(:expense_group, noncompetitor_required: true)
     end
 
     it "can have a first item" do
-      @re = FactoryGirl.build(:expense_item, :expense_group => @rg)
+      @re = FactoryGirl.build(:expense_item, expense_group: @rg)
       expect(@re.valid?).to eq(true)
     end
 
     it "cannot have a second item" do
-      @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+      @re = FactoryGirl.create(:expense_item, expense_group: @rg)
       @rg.reload
-      @re2 = FactoryGirl.build(:expense_item, :expense_group => @rg)
+      @re2 = FactoryGirl.build(:expense_item, expense_group: @rg)
       expect(@re2.valid?).to eq(false)
     end
   end
@@ -160,7 +160,7 @@ describe ExpenseItem do
     end
 
     it "isn't user_manageable" do
-      @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+      @re = FactoryGirl.create(:expense_item, expense_group: @rg)
       expect(ExpenseItem.user_manageable).to eq([@item])
       expect(ExpenseItem.all).to match_array([@re, @item])
     end
@@ -168,18 +168,18 @@ describe ExpenseItem do
 
   describe "with an expense_group set for 'competitor_required'" do
     before(:each) do
-      @rg = FactoryGirl.create(:expense_group, :competitor_required => true)
+      @rg = FactoryGirl.create(:expense_group, competitor_required: true)
     end
 
     it "can have a first item" do
-      @re = FactoryGirl.build(:expense_item, :expense_group => @rg)
+      @re = FactoryGirl.build(:expense_item, expense_group: @rg)
       expect(@re.valid?).to eq(true)
     end
 
     it "cannot have a second item" do
-      @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+      @re = FactoryGirl.create(:expense_item, expense_group: @rg)
       @rg.reload
-      @re2 = FactoryGirl.build(:expense_item, :expense_group => @rg)
+      @re2 = FactoryGirl.build(:expense_item, expense_group: @rg)
       expect(@re2.valid?).to eq(false)
     end
     describe "with a pre-existing registrant" do
@@ -189,14 +189,14 @@ describe ExpenseItem do
 
       it "creates a registrant_expense_item" do
         expect(@reg.registrant_expense_items.count).to eq(0)
-        @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+        @re = FactoryGirl.create(:expense_item, expense_group: @rg)
         @reg.reload
         expect(@reg.registrant_expense_items.count).to eq(1)
         expect(@reg.registrant_expense_items.first.expense_item).to eq(@re)
       end
       it "does not create extra entries if the expense_item is updated" do
         expect(@reg.registrant_expense_items.count).to eq(0)
-        @re = FactoryGirl.create(:expense_item, :expense_group => @rg)
+        @re = FactoryGirl.create(:expense_item, expense_group: @rg)
         @re.save
         @reg.reload
         expect(@reg.registrant_expense_items.count).to eq(1)
@@ -207,7 +207,7 @@ describe ExpenseItem do
 
   describe "with associated registrant_expense_items" do
     before(:each) do
-      @rei = FactoryGirl.create(:registrant_expense_item, :expense_item => @item)
+      @rei = FactoryGirl.create(:registrant_expense_item, expense_item: @item)
     end
 
     it "should count the entry as a selected_item" do
@@ -230,7 +230,7 @@ describe ExpenseItem do
 
   describe "when a registration has a registration_period" do
     before(:each) do
-      @rp = FactoryGirl.create(:registration_period, :competitor_expense_item => @item)
+      @rp = FactoryGirl.create(:registration_period, competitor_expense_item: @item)
       @nc_item = @rp.noncompetitor_expense_item
     end
     describe "with a single competitor" do

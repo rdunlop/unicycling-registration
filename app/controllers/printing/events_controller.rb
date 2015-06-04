@@ -1,6 +1,6 @@
 class Printing::EventsController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource :event, :parent => false
+  authorize_resource :event, parent: false
 
   before_action :load_event
 

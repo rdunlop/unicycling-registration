@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  before_action :authenticate_user!, :only => [:index, :data_entry_menu]
+  before_action :authenticate_user!, only: [:index, :data_entry_menu]
   skip_authorization_check only: [:index, :help, :feedback, :confirm]
   authorize_resource class: false, only: [:data_entry_menu]
 
