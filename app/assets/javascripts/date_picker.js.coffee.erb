@@ -5,3 +5,7 @@ $ ->
     selectYears: true,
     selectMonths: true
   })
+
+  $(".datetimepicker").datetimepicker({
+    defaultDate: '<%= EventConfiguration.singleton.start_date.strftime("%Y/%m/%d") %>'
+  })

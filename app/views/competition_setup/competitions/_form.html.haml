@@ -2,7 +2,7 @@
   = render partial: "/shared/error_messages", object: @competition
 
   = f.input :name
-  = f.input :scheduled_completion_at, include_blank: true
+  = f.input :scheduled_completion_at, as: :datetime_picker, include_blank: true
 
   = f.input :age_group_type_id, collection: AgeGroupType.all, include_blank: true
   = link_to "Manage Age Groups", age_group_types_path, target: "_blank"

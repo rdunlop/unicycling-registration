@@ -20,6 +20,7 @@
 //= require pickadate/legacy
 //= require pickadate/picker
 //= require pickadate/picker.date
+//= require jquery.datetimepicker
 //= require_tree .
 
 $(document).ready(function() {

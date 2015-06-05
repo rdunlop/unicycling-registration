@@ -28,6 +28,7 @@ gem 'font-kit-rails', git: "git://github.com/sandelius/font-kit-rails.git", ref:
 gem 'tinymce-rails'
 gem 'recaptcha'
 gem 'pickadate-rails'
+gem 'jquery-datetimepicker-rails'
 
 # system utils
 gem 'rake'
