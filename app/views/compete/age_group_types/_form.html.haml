@@ -19,7 +19,7 @@
             %tr.item
               = render partial: "age_group_entry", locals: {f: member_f}
               %td
-                = link_to 'remove', "#", class: "remove", data: { confirm: "Are you sure?" }#%a.remove{:href => "#"} remove
+                = link_to 'remove', "#", class: "remove", data: { confirm: "Are you sure?" }
                 = member_f.hidden_field :id
                 = member_f.hidden_field :_destroy
       .text--right
