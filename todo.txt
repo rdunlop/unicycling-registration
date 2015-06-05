@@ -1,3 +1,4 @@
+- test that using erb in JS for datetimepicker isn't cached inadvertantly
 - High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
 - data entry page should say "nothing to see ehere" if you haven't been assigned yet.
 - why can a super create a spectator

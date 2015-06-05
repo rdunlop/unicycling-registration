@@ -7,5 +7,5 @@ $ ->
   })
 
   $(".datetimepicker").datetimepicker({
-    defaultDate: '<%= EventConfiguration.singleton.start_date.strftime("%Y/%m/%d") %>'
+    defaultDate: '<%= EventConfiguration.singleton.start_date.try(:strftime, "%Y/%m/%d") %>'
   })
