@@ -1,3 +1,4 @@
-database:
+test:
   pre:
-    - cp config/secrets.yml.template config/secrets.yml
+    - cp config/secrets.yml.template config/secrets.yml:
+        parallel: true
