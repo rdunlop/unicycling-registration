@@ -1,10 +1,9 @@
 $ ->
-  $('.date_picker').pickadate({
-    hiddenName: true,
-    formatSubmit: "yyyy/mm/dd",
-    selectYears: true,
-    selectMonths: true
-  })
+  $(".datepicker").datetimepicker(
+    timepicker: false,
+    format: "Y/m/d",
+    defaultDate: '<%= EventConfiguration.singleton.start_date.try(:strftime, "%Y/%m/%d") %>'
+    )
 
   $(".datetimepicker").datetimepicker({
     defaultDate: '<%= EventConfiguration.singleton.start_date.try(:strftime, "%Y/%m/%d") %>'

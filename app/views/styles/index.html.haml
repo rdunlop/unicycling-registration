@@ -172,7 +172,11 @@ Registrant Expense Items
 
 .field
   %label{ for: 'end_date' } DatePicker Date chooser
-  %input{ class: 'date_picker', value: "2015-05-20", id: 'end_date', data: { value: "2015/05/20" } }
+  %input{ class: 'datepicker', value: "2015/05/20", id: 'end_date' }
+
+.field
+  %label{ for: 'end_datetime' } DateTimePicker Date chooser
+  %input{ class: 'datetimepicker', value: "2015/05/20 11:30", id: 'end_datetime' }
 
 %h2.style_head Forms (old-style markup)
 
