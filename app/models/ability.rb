@@ -216,7 +216,7 @@ class Ability
       can :sign_ups, EventCategory
       can :sign_ups, Event
       can [:manage_all, :show_all], :registrant
-      can [:read, :update, :destroy], Registrant
+      can [:read, :update, :destroy, :add_events, :create_artistic], Registrant
       can [:read, :create, :list], Email
     end
 

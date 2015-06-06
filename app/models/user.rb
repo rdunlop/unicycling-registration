@@ -161,6 +161,7 @@ class User < ActiveRecord::Base
       "[e.g. Mary Koehler]
       Able to view/review the event sign_ups.
       Able to SEARCH & MODIFY any registration.
+      Able to Add/Modify event choices, at all times.
       Able to view/send emails to all registrants"
     when :awards_admin
       "[e.g. Kirsten]
