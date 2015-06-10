@@ -11,7 +11,7 @@ class Admin::RegistrantsController < ApplicationController
     @registrants = Registrant.includes(:user, :contact_detail)
     respond_to do |format|
       format.html { render "manage_all" }
-      format.pdf { render pdf: "manage_all", template: "registrants/manage_all.html.haml", formats: [:html], layout: "pdf.html" }
+      format.pdf { render pdf: "manage_all", template: "admin/registrants/manage_all.html.haml", formats: [:html], layout: "pdf.html" }
     end
   end
 
