@@ -28,6 +28,14 @@ class CompetitionResult < ActiveRecord::Base
     where(published: true)
   end
 
+  def self.official
+    where(system_managed: true)
+  end
+
+  def self.additional
+    where(system_managed: false)
+  end
+
   def remove_uploaded_file
     remove_results_file!
   end

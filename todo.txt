@@ -1,9 +1,49 @@
+- Fix the fact that Additional Results count the official results too
+- Add Final Street scoring system
+ - As per rulebook
+- make the hamburger taller
+- Flatland judging should be in UDA
+- Street Prelim rules are 1..100 pts?
+- Street Finals are 10,8,6,3,2,1 pts? - need to set up a new scoring system?
+
+- Disable start/finish data-entry if you choose certain scoring types (like Street, High/Long, freestyle, Flat?)
+
+- Expose Wave Time to the Director management system
+Only allow Wave Times if scoring type is set correctly.
+
+- Add a "RefundS" or "misc" column to make the payments page make sense after processing refunds
+
+- After refunding, if the registration can be deleted, prompt the admin whether they want to delete that user.
+- High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
+
+
+- Allow creating Expert events without specifynig an age group? (ie: 100m expert shouldn't need an age group)
+
+
+- Describe the Scoring classes better:
+ - Externally Ranked - Provide an Export/Import routine for entering the results
+ - One-Result - Each
+ - Street -
+
+- If we could have a device at the start/end line, how do we enter data, as the data arrives??? global problem to solve.
+- On-Site E-Scoring of Trials Line-Judge results
+ - Able to specify the line, the "hand"-ness, the Competitor
+- Show the live, results of all competitors.
+- Show the results, per-competitor ?
+- Cache the page, use JS
+
+- All Start Lists should be download by Excel (e.g. of every table which we print)
+- Should we show any of these results liv? (like live-results of Muni Downhill?)
+- lap counting?
+ - ID of person, on a running clock
+  - Cyclocross, Marathon, Criterium.
+
+MUni - Have network connections.
+ - Allow live-entry of data for Uphill/Downhill
 - serve the datetimepicker only to admin pages?
  - try minified?
-  - remove the old datetime picker?
 - fix problem with datepicker showing the same date if multiple dates appear on the page.
 - test that using erb in JS for datetimepicker isn't cached inadvertantly
-- High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
 - data entry page should say "nothing to see ehere" if you haven't been assigned yet.
 - why can a super create a spectator
 - remove skylight
@@ -11,7 +51,6 @@
 - improve '/registrant/:id/results' page to honor 'published' status, and also clear up results.
 - Feedback should automatically set the "Reply-to" address to the entered E-mail/logged-in-user's e-mail.
 - Pretend to be any user, so that you can see what they see.
-- Allow creating Expert events without specifynig an age group? (ie: 100m expert shouldn't need an age group)
 
 
 New Rules changes:

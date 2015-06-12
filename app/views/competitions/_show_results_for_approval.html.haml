@@ -30,15 +30,19 @@
 - if can? :publish, @competition
 
   - if @competition.has_age_group_entry_results?
-    %h2 Publish Age Group Entries
+    %h2 Preliminary Age Group Entry Results
     = render partial: "publish_age_group_entries"
 
-  %h5 Official Result
+  %h3 Official Result
+  - result = @competition.competition_results.official.first
+  = link_to_if result.present?, "Official Result", result.results_file_url, class: "official_result_link"
   - if @competition.published?
+    %br
     = link_to 'Un-Publish', publish_competition_path(@competition), :method => :delete, data: { confirm: "Remove data from online results?" }
   - else
     = link_to 'Publish', publish_competition_path(@competition), :method => :post, data: { confirm: "This will make the data available online for all to see. Continue?" }, class: "action_button"
 
 - if can? :read, @competition
+  %h4 Additional Results
   = link_to "Add Additional Results PDFs", competition_competition_results_path(@competition)
-  %p There are currently #{@competition.competition_results.count} Results attached to this event
+  %p There are currently #{@competition.competition_results.additional.count} Additional Results attached to this event
