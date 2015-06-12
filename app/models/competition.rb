@@ -51,7 +51,7 @@ class Competition < ActiveRecord::Base
   has_many :competition_sources, foreign_key: "target_competition_id", inverse_of: :target_competition, dependent: :destroy
   has_many :combined_competition_entries, dependent: :destroy
   has_many :published_age_group_entries, dependent: :destroy
-  has_many :wave_times, dependent: :destroy
+  has_many :wave_times, inverse_of: :competition, dependent: :destroy
   has_many :competition_results, dependent: :destroy
   belongs_to :combined_competition
 
