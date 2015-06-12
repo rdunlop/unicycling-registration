@@ -1,26 +1,6 @@
 require 'spec_helper'
 
 describe ArtisticScoreCalculator do
-  let(:competition) { FactoryGirl.build_stubbed(:competition) }
-  subject { ArtisticScoreCalculator.new(competition) }
-
-  describe "when determining place from points" do
-    let(:first) { 1 }
-    let(:second) { 2 }
-    let(:all_scores) { [first, second, 3, 4] }
-    let(:tie_score) { 1 }
-    let(:all_tie_scores) { [1, 2, 3, 4] }
-
-    it { expect(subject.new_place(first, all_scores, tie_score, all_tie_scores)).to eq(1) }
-    it { expect(subject.new_place(second, all_scores, 2, all_tie_scores)).to eq(2) }
-
-    # if the overall scores are tied, fall back to the secondary scores for tie-breaker
-    it { expect(subject.new_place(1.5, [1.5, 1.5], 1, [1, 2])).to eq(1) }
-    it { expect(subject.new_place(1.5, [1.5, 1.5], 2, [1, 2])).to eq(2) }
-  end
-end
-
-describe ArtisticScoreCalculator do
   before(:each) do
     @competition = FactoryGirl.create(:competition)
     @judge1 = FactoryGirl.create(:judge, competition: @competition)

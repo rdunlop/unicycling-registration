@@ -21,12 +21,9 @@ class StreetCompScoreCalculator < ArtisticScoreCalculator
     end
 
     my_points = total_points(competitor)
-    total_points_per_competitor     = competitor.competition.competitors.map { |comp| total_points(comp) }
+    total_points_per_competitor = competitor.competition.competitors.map { |comp| total_points(comp) }
 
-    my_tie_break_points = 0
-    tie_break_points_per_competitor = competitor.competition.competitors.map { |comp| 0 }
-
-    my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor, true)
+    my_place = RankCalculator.new(total_points_per_competitor).rank(my_points)
 
     @place[competitor.id] = my_place
   end

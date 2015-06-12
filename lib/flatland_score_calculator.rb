@@ -32,7 +32,10 @@ class FlatlandScoreCalculator < ArtisticScoreCalculator
     my_tie_break_points = total_last_trick_points(competitor, nil)
     tie_break_points_per_competitor = competitor.competition.competitors.map { |comp|  total_last_trick_points(comp, nil) }
 
-    my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor, false)
+    rank_calc = RankCalculator.new(total_points_per_competitor, tie_break_points_per_competitor)
+    rank_calc.lower_is_better = false
+    my_place = rank_calc.rank(my_points, my_tie_break_points)
+
     if my_points == 0
       my_place = 0
     end

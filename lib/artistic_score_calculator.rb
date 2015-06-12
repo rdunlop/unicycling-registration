@@ -11,34 +11,12 @@ class ArtisticScoreCalculator
     end
   end
 
-  def compared_score_is_better(my_score, compared_score, lower_is_better)
-    if lower_is_better
-      compared_score < my_score
-    else
-      compared_score > my_score
-    end
-  end
   # ####################################################################
   #   BY EVENT (all scores, all judges)
   # ####################################################################
   #
   # this should be in "Competitor", but I'm putting here because
   # I don't want to clutter Competitor (which is not always Score-based)
-  def new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor, lower_numbers_are_better = true)
-    my_place = 1
-    total_points_per_competitor.each_with_index do |comp_points, index|
-      next if comp_points == 0
-
-      if compared_score_is_better(my_points, comp_points, lower_numbers_are_better)
-        my_place = my_place + 1
-      elsif comp_points == my_points
-        if compared_score_is_better(my_tie_break_points, tie_break_points_per_competitor[index], lower_numbers_are_better)
-          my_place = my_place + 1
-        end
-      end
-    end
-    my_place
-  end
 
   def place(competitor)
     @place ||= {}
@@ -55,7 +33,8 @@ class ArtisticScoreCalculator
     my_tie_break_points = total_points(competitor, jt)
     tie_break_points_per_competitor = competitors.map { |comp| total_points(comp, jt) }
 
-    my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor)
+    my_place = RankCalculator.new(total_points_per_competitor, tie_break_points_per_competitor).rank(my_points, my_tie_break_points)
+
     if my_points == 0 || !competitors.include?(competitor) # inactive competitor
       my_place = 0
     end

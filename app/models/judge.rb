@@ -97,7 +97,7 @@ class Judge < ActiveRecord::Base
   # Return the calculated total points for this score
   # which will probably be related to the other scores by this judge
   #
-  # returns a numeric (probably afraction)
+  # returns a numeric (probably a fraction)
   def placing_points_for(score)
     return 0 if score.invalid?
     judge_type.score_calculator.judged_points(score_totals, score.total)

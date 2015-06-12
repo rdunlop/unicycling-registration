@@ -1,5 +1,7 @@
 - Add Final Street scoring system
- - As per rulebook
+ - As per rulebook https://unicycling.org/files/iuf-rulebook-2015-prelim.pdf
+- Re-write the Street scoring system to not be subclass of artistic.
+- Fix ability to preview/review street scores (throws an exception)
 - Are the order of age groups important for anything other than Track? Can we clean that up?
 - make the hamburger taller
   - bring in the svg icons
