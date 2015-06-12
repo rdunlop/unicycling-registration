@@ -1,6 +1,7 @@
-- Fix the fact that Additional Results count the official results too
 - Add Final Street scoring system
  - As per rulebook
+- Are the order of age groups important for anything other than Track? Can we clean that up?
+
 - make the hamburger taller
 - Flatland judging should be in UDA
 - Street Prelim rules are 1..100 pts?

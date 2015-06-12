@@ -1,5 +1,8 @@
 - cache [@age_group_type] do
   %h1 Listing #{@age_group_type} Age Group Entries
+
+  = render "order_warning"
+
   %table.js--sortable{ data: { target: update_row_order_age_group_entries_path } }
     %thead
       %tr
