@@ -17,28 +17,6 @@ class ArtisticScoreCalculator_2015
   # this should be in "Competitor", but I'm putting here because
   # I don't want to clutter Competitor (which is not always Score-based)
   # inputs:
-  #  my_points: points for the current competitor: e.g. 30.1
-  # total_points_per_competitor: array of all points: e.g. [40, 30, 30.1, 29, 12, 12]
-  # my_tie_break_points: points for me in tie-breaker: e.g. [15]
-  # tie_break_points_per_competitor: array of all tie-break points: e.g. [20, 15, 14, 10, 2, 1]
-  #
-  # result a numeric place
-  def new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor)
-    my_place = 1
-    total_points_per_competitor.each_with_index do |comp_points, index|
-      next if comp_points == 0
-
-      if comp_points > my_points
-        my_place = my_place + 1
-      elsif comp_points == my_points
-        if tie_break_points_per_competitor[index] > my_tie_break_points
-          my_place = my_place + 1
-        end
-      end
-    end
-    my_place
-  end
-
   def place(competitor)
     @place ||= {}
     unless @place[competitor.id].nil?
@@ -60,7 +38,9 @@ class ArtisticScoreCalculator_2015
     my_tie_break_points = total_points(competitor, jt)
     tie_break_points_per_competitor = competitors.map { |comp| total_points(comp, jt) }
 
-    my_place = new_place(my_points, total_points_per_competitor, my_tie_break_points, tie_break_points_per_competitor)
+    rank_calc = RankCalculator.new(total_points_per_competitor, tie_break_points_per_competitor)
+    rank_calc.lower_is_better = false
+    my_place = rank_calc.rank(my_points, my_tie_break_points)
 
     @place[competitor.id] = my_place
   end

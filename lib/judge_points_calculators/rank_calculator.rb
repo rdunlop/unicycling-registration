@@ -5,6 +5,12 @@
 class RankCalculator
   attr_accessor :lower_is_better
 
+  #  my_points: points for the current competitor: e.g. 30.1
+  # total_points_per_competitor: array of all points: e.g. [40, 30, 30.1, 29, 12, 12]
+  # my_tie_break_points: points for me in tie-breaker: e.g. [15]
+  # tie_break_points_per_competitor: array of all tie-break points: e.g. [20, 15, 14, 10, 2, 1]
+  #
+  # result a numeric place
   def initialize(total_points_per_competitor, tie_break_points_per_competitor = nil)
     @total_points_per_competitor = total_points_per_competitor
     @tie_break_points_per_competitor = tie_break_points_per_competitor
