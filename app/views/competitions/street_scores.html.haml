@@ -8,7 +8,7 @@
   - @competition.judge_types.uniq.each do |jt|
     %table.scores_outer
       - judges = @competition.judges.where(judge_type: jt).order(:id)
-      = render partial: "scores_judging_headers", locals: { judges: judges, judge_type: jt }
+      = render partial: "scores_judging_headers", locals: { judges: judges, judge_type: jt, anonymous: false }
       - @competition.competitors.each do |competitor|
         - cache [competitor, jt, @competition] do
           = render partial: "scores_competitor_judge_results", locals: { competitor: competitor, judges: judges }
