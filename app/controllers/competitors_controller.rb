@@ -100,12 +100,13 @@ class CompetitorsController < ApplicationController
   def create
     if @competitor.save
       flash[:notice] = 'Competition registrant was successfully created.'
+      redirect_to competition_competitors_path(@competition)
     else
       @registrants = @competition.signed_up_registrants
+      @competitors = @competition.competitors.includes(members: [:registrant])
       flash.now[:alert] = 'Error adding Registrant'
+      render :index
     end
-
-    respond_with(@competitor, location: competition_competitors_path(@competition))
   end
 
   # PUT /competitors/1
@@ -113,8 +114,11 @@ class CompetitorsController < ApplicationController
   def update
     if @competitor.update_attributes(competitor_params)
       flash[:notice] = 'Competition registrant was successfully updated.'
+      redirect_to competition_competitors_path(@competitor.competition)
+    else
+      @competition = @competitor.competition
+      render :edit
     end
-    respond_with(@competitor, location: competition_competitors_path(@competitor.competition), action: "edit")
   end
 
   # DELETE /competitors/1
