@@ -55,6 +55,8 @@ class Competitor < ActiveRecord::Base
   # not all competitor types require a position
   #:numericality => {:only_integer => true, :greater_than => 0}
 
+  delegate :scoring_calculator, to: :competition
+
   after_initialize :init
 
   def init
@@ -125,7 +127,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def comparable_score
-    scoring_helper.competitor_comparable_result(self)
+    scoring_calculator.competitor_comparable_result(self)
   end
 
   def place
@@ -190,7 +192,7 @@ class Competitor < ActiveRecord::Base
 
   def result
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/result") do
-      scoring_helper.competitor_result(self)
+      scoring_calculator.competitor_comparable_result(self)
     end
   end
 
@@ -357,10 +359,12 @@ class Competitor < ActiveRecord::Base
 
   def ineligible
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
+      return true unless active?
+
       if members.empty?
         false
       else
-        eligibles =members.map(&:ineligible)
+        eligibles = members.map(&:ineligible)
         if eligibles.uniq.count > 1
           true # includes both eligible status AND ineligible status
         else

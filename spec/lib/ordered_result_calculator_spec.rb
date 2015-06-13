@@ -73,6 +73,24 @@ describe OrderedResultCalculator do
         expect(@tr3.competitor.place).to eq(2)
       end
     end
+
+    describe "with a disqualified registrant in first place" do
+      before(:each) do
+        comp = @tr1.competitor
+        comp.status = "not_qualified"
+        comp.save!
+        @tr1.reload
+      end
+      it "places the first 2 competitors as first" do
+        recalc
+        @tr2.reload
+        @tr3.reload
+
+        expect(@tr1.competitor.place).to eq(1)
+        expect(@tr2.competitor.place).to eq(1)
+        expect(@tr3.competitor.place).to eq(2)
+      end
+    end
   end
 
   describe "when calculating the placing of higher-points-is-better races" do
