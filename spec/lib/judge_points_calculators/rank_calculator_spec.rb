@@ -16,10 +16,19 @@ describe RankCalculator do
     # if the overall scores are tied, fall back to the secondary scores for tie-breaker
     describe "overall scores are tied" do
       let(:all_scores) { [1.5, 1.5] }
-      let(:all_tie_scores) { [1,2] }
+      let(:all_tie_scores) { [1, 2] }
 
       it { expect(subject.rank(1.5, 1)).to eq(1) }
       it { expect(subject.rank(1.5, 2)).to eq(2) }
+    end
+
+    describe "scores are tied, with no tie-breakers" do
+      let(:all_scores) { [1, 2, 2, 3] }
+      let(:all_tie_scores) { nil }
+
+      it { expect(subject.rank(1)).to eq(1) }
+      it { expect(subject.rank(2)).to eq(2) }
+      it { expect(subject.rank(3)).to eq(4) }
     end
   end
 end

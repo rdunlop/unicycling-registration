@@ -29,7 +29,7 @@ class ArtisticScoreCalculator
     my_points = total_points(competitor)
     total_points_per_competitor = competitors.map { |comp| total_points(comp) }
 
-    jt = JudgeType.find_by_name("Technical") # TODO this should be properly identified
+    jt = JudgeType.find_by(name: "Technical", event_class: competitor.competition.event_class) # TODO this should be properly identified
     my_tie_break_points = total_points(competitor, jt)
     tie_break_points_per_competitor = competitors.map { |comp| total_points(comp, jt) }
 
@@ -51,17 +51,6 @@ class ArtisticScoreCalculator
       end
       scores.map {|s| s.placing_points }
     end
-  end
-
-  def new_total_points(competitor)
-    placing_points_for_all_judges = get_placing_points_for_judge_type(competitor, nil)
-
-    total_points = placing_points_for_all_judges.reduce(:+) # sum the remaining values
-
-    min = new_lowest_score(placing_points_for_all_judges)
-    max = new_highest_score(placing_points_for_all_judges)
-
-    (total_points - min - max)
   end
 
   def total_points(competitor, judge_type = nil)
@@ -132,14 +121,6 @@ class ArtisticScoreCalculator
   # rank. High and low placing scores are again removed in the process. If competitors'
   # Technical ranking comes out equal, all competitors with the same score are awarded the
   # same place.
-
-  def new_highest_score(placing_points)
-    placing_points.max
-  end
-
-  def new_lowest_score(placing_points)
-    placing_points.min
-  end
 
   def highest_score(competitor, judge_type = nil)
     get_placing_points_for_judge_type(competitor, judge_type).max

@@ -42,7 +42,6 @@ class RankCalculator
     @tie_break_points_per_competitor.present?
   end
 
-
   def compared_score_is_better(my_score, compared_score)
     if lower_is_better
       compared_score < my_score
