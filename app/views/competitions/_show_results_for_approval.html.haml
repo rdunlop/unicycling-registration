@@ -35,7 +35,8 @@
 
   %h3 Official Result
   - result = @competition.competition_results.official.first
-  = link_to_if result.present?, "Official Result", result.results_file_url, class: "official_result_link"
+  - if result.present?
+    = link_to "Official Result", result.results_file_url, class: "official_result_link"
   - if @competition.published?
     %br
     = link_to 'Un-Publish', publish_competition_path(@competition), :method => :delete, data: { confirm: "Remove data from online results?" }
