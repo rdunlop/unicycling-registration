@@ -190,7 +190,7 @@ class Competitor < ActiveRecord::Base
 
   def has_result?
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/has_result?") do
-      scoring_helper.competitor_has_result?(self)
+      scoring_calculator.competitor_has_result?(self)
     end
   end
 

@@ -11,6 +11,11 @@ class RaceResultCalculator
     is used to determine the placing of the competitor."
   end
 
+  # describes whether the given competitor has any results associated
+  def competitor_has_result?(competitor)
+    competitor.time_results.any?
+  end
+
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result?

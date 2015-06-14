@@ -11,6 +11,11 @@ class ExternalResultResultCalculator
     (for use on the awards/results sheets). #{lower_is_better ? 'Lower' : 'Higher'} points are better"
   end
 
+  # describes whether the given competitor has any results associated
+  def competitor_has_result?(competitor)
+    competitor.external_result.present?
+  end
+
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result?

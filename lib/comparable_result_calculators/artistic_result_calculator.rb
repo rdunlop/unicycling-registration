@@ -9,6 +9,11 @@ class ArtisticResultCalculator
     calculate the winner"
   end
 
+  # describes whether the given competitor has any results associated
+  def competitor_has_result?(competitor)
+    competitor.scores.any?
+  end
+
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result?

@@ -22,11 +22,6 @@ class DistanceScoringClass < BaseScoringClass
     "distance_attempts"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    competitor.distance_attempts.any?
-  end
-
   def imports_times
     true
   end

@@ -18,11 +18,6 @@ class ArtisticScoringClass_2015 < BaseScoringClass
     "freestyle_scores"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    competitor.scores.count > 0
-  end
-
   def competitor_dq?(competitor)
     false
   end

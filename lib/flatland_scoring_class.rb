@@ -17,11 +17,6 @@ class FlatlandScoringClass < BaseScoringClass
     "freestyle_scores"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    false
-  end
-
   # Used when trying to destroy all results for a competition
   def all_competitor_results
     nil

@@ -28,17 +28,8 @@ class RaceScoringClass < BaseScoringClass
     "time_results"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    @competitor_has_result ||= {}
-    if @competitor_has_result[competitor].nil?
-      @competitor_has_result[competitor] = competitor.time_results.any?
-    end
-    @competitor_has_result[competitor]
-  end
-
   def competitor_dq?(competitor)
-    self.competitor_has_result?(competitor) && competitor.time_results.all?{|t| t.disqualified }
+    competitor.has_result? && competitor.time_results.all?{|t| t.disqualified }
   end
 
   # Used when trying to destroy all results for a competition

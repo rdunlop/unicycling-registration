@@ -38,11 +38,6 @@ class OverallChampionScoringClass < BaseScoringClass
     "overall_champion"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    true # always indicate that we have a result, so that all competitors are created.
-  end
-
   def imports_times
     false
   end

@@ -16,11 +16,6 @@ class StreetScoringClass < BaseScoringClass
     "freestyle_scores"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    competitor.scores.count > 0
-  end
-
   # Used when trying to destroy all results for a competition
   def all_competitor_results
     nil

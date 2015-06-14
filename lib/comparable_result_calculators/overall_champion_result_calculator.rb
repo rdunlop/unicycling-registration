@@ -21,6 +21,11 @@ class OverallChampionResultCalculator
     Calculates the Overall Champion, and stores their final scores and places"
   end
 
+  # describes whether the given competitor has any results associated
+  def competitor_has_result?(competitor)
+    true # always indicate that we have a result, so that all competitors are created.
+  end
+
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result?

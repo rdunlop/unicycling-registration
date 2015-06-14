@@ -5,6 +5,11 @@ class ArtisticResultCalculator_2015
     calculate the winner. As per the IUF 2015 Rulebook"
   end
 
+  # describes whether the given competitor has any results associated
+  def competitor_has_result?(competitor)
+    competitor.scores.any?
+  end
+
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result?

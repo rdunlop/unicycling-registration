@@ -16,11 +16,6 @@ class BaseScoringClass
     nil
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    raise StandardError.new("No Has Result Defined")
-  end
-
   def imports_times
     false
   end

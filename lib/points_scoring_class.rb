@@ -28,11 +28,6 @@ class PointsScoringClass < BaseScoringClass
     "external_results"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    competitor.external_result.present?
-  end
-
   def competitor_dq?(competitor)
     false
   end

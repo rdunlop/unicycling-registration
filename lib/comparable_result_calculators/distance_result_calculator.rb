@@ -5,6 +5,11 @@ class DistanceResultCalculator
     The competitor with the highest max distance will win."
   end
 
+  # describes whether the given competitor has any results associated
+  def competitor_has_result?(competitor)
+    competitor.distance_attempts.any?
+  end
+
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result?

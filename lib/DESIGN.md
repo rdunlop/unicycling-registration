@@ -54,7 +54,7 @@ DESIGN:
 ################### Level 2 comparable_score #####################
 The ComparableScore and TieBreakerComparableScore are determined by:
  - A "ResultCalculator" class, based on the event_class of the Competition
- The ResultCalculator must have 2 functions 'competitor_comparable_result' and 'competitor_tie_break_comparable_result'
+ The ResultCalculator must have 3 functions 'competitor_has_result?', 'competitor_comparable_result' and 'competitor_tie_break_comparable_result'
  The result will be a numeric value, which can be used to determine the relative rank of the competitor
 
 When using ExternalResult, TimeResult, or DistanceAttempt, this value is determined by querying competitor for directly-attached data.
