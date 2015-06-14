@@ -8,7 +8,7 @@
       %th # Results Entered
       %th Results
   %tbody
-    - competition.judges.each do |judge|
+    - competition.judges.includes(:user, :judge_type).each do |judge|
       %tr.js--highlightMatching
         %td= judge
         %td.js--shouldMatch= competition.competitors.active.count
