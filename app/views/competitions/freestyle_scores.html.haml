@@ -7,9 +7,9 @@
 
   - @competition.judge_types.uniq.each do |jt|
     %table.scores_outer
-      - judges = @competition.judges.where(judge_type: jt).order(:id)
+      - judges = @competition.judges.where(judge_type: jt).includes(:user, :judge_type).order(:id)
       = render partial: "scores_judging_headers", locals: { judges: judges, judge_type: jt, anonymous: @anonymous }
-      - @competition.competitors.active.each do |competitor|
+      - @competition.competitors.includes(:scores).active.each do |competitor|
         = render partial: "scores_competitor_judge_results", locals: { competitor: competitor, judges: judges }
       - if @competition.can_eliminate_judges?
         = render partial: "scores_judging_footers", locals: { judges: judges, judge_type: jt, anonymous: @anonymous }
