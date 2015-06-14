@@ -1,3 +1,5 @@
+- Make the StreetComp scoring able to function fast enough
+ - Add Caching/etc
 - Combine StreetPointsCalculator, FlatlandPointsCalculator, and FreestyleJUdgePointsCalcluator (they're identical logic)
 - Handle Ineligible results when calculating placing points?
 - Make ExternalResult a :has_one relationship?
