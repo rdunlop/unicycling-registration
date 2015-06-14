@@ -127,7 +127,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def comparable_score
-    scoring_calculator.competitor_comparable_result(self)
+    @comparable_score ||= scoring_calculator.competitor_comparable_result(self)
   end
 
   def comparable_tie_break_score
