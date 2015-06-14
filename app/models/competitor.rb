@@ -356,7 +356,7 @@ class Competitor < ActiveRecord::Base
       if members.empty?
         nil
       else
-        members.first.registrant.wheel_size_for_event(event).id
+        members.first.registrant.wheel_size_id_for_event(event)
       end
     end
   end

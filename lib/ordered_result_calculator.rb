@@ -47,7 +47,7 @@ class OrderedResultCalculator
   private
 
   def all_competitors_in_sorted_order
-    @all_competitors_in_sorted_order ||= competitors_in_sorted_order(competition.competitors.includes(:age_group_results, :overall_results, :time_results, scores: [judge: :judge_type]))
+    @all_competitors_in_sorted_order ||= competitors_in_sorted_order(competition.competitors.includes(:age_group_results, :overall_results, :time_results, members: [registrant: [:competition_wheel_sizes]], scores: [judge: :judge_type]))
   end
 
   def competitors_in_sorted_order(competitors)

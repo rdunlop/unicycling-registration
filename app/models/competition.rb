@@ -358,8 +358,12 @@ class Competition < ActiveRecord::Base
   end
 
   def wave_time_for(wave_number)
-    configured_wave_time = wave_times.where(wave: wave_number).first
-    configured_wave_time.total_seconds if configured_wave_time
+    return if wave_number.nil?
+
+    @wave_time_for ||= []
+    return @wave_time_for[wave_number] if @wave_time_for[wave_number]
+
+    @wave_time_for[wave_number] = wave_times.find_by(wave: wave_number).try(:total_seconds)
   end
 
   def can_calculated_age_group_results?

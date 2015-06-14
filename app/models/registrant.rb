@@ -302,9 +302,8 @@ class Registrant < ActiveRecord::Base
     end
   end
 
-  def wheel_size_for_event(event)
-    override = competition_wheel_sizes.where(event: event).first
-    override.try(:wheel_size) || default_wheel_size
+  def wheel_size_id_for_event(event)
+    competition_wheel_sizes.select{ |cws| cws.event_id == event.id }.try(:wheel_size_id) || wheel_size_id
   end
 
   def set_default_wheel_size
