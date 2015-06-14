@@ -474,19 +474,6 @@ describe Competitor do
           expect(@comp.reload.distance_attempt_status).to eq("Success. Next Distance 21+")
         end
       end
-
-      describe "with a tie_breaker result" do
-        before :each do
-          FactoryGirl.create(:tie_break_adjustment, competitor: @comp, tie_break_place: 1)
-        end
-
-        it "should have a non-0 tie breaker adjustment value" do
-          expect(@comp.tie_breaker_adjustment_value).to eq(0.9)
-        end
-      end
-      it "should have a 0 tie_breaker_adjustment" do
-        expect(@comp.tie_breaker_adjustment_value).to eq(0)
-      end
     end
   end
 

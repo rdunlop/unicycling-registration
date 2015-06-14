@@ -21,7 +21,13 @@ class DistanceResultCalculator
     end
   end
 
+  # Higher is better
+  # those who have tie_break_adjustments are higher than those who don't
   def competitor_tie_break_comparable_result(competitor)
-    competitor.tie_breaker_adjustment_value
+    if competitor.tie_break_adjustment
+      1 - (competitor.tie_break_adjustment.tie_break_place * 0.1)
+    else
+      0
+    end
   end
 end

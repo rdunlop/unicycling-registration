@@ -426,14 +426,6 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def tie_breaker_adjustment_value
-    if tie_break_adjustment
-      1 - (tie_break_adjustment.tie_break_place * 0.1)
-    else
-      0
-    end
-  end
-
   def max_successful_distance
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance") do
       max_successful_distance_attempt.try(:distance) || 0
