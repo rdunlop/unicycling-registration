@@ -103,9 +103,8 @@ class CompetitorsController < ApplicationController
       redirect_to competition_competitors_path(@competition)
     else
       @registrants = @competition.signed_up_registrants
-      @competitors = @competition.competitors.includes(members: [:registrant])
       flash.now[:alert] = 'Error adding Registrant'
-      render :index
+      render :new
     end
   end
 
