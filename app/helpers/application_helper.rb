@@ -2,6 +2,10 @@ module ApplicationHelper
   include ActionView::Helpers::NumberHelper
   include LanguageHelper
 
+  def log(msg)
+   Rails.logger.debug msg
+  end
+
   def current_ability
     @current_ability ||= Ability.new(current_user, allow_reg_modifications?)
   end
