@@ -27,7 +27,7 @@ class StreetResultCalculator
     if judge_type.nil?
       scores = competitor.scores
     else
-      scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id })
+      scores = competitor.scores.select{ |score| score.judge_type == judge_type }
     end
     scores.map(&:placing_points).reduce(:+) || 0
   end

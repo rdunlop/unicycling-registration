@@ -13,7 +13,7 @@ class StreetScoringClass < BaseScoringClass
   end
 
   def render_path
-    "street_scores"
+    "freestyle_scores"
   end
 
   # describes whether the given competitor has any results associated
