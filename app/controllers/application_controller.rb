@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_tenant
-    @tenant = Tenant.find_by(subdomain: Apartment::Tenant.current_tenant) || public_tenant
+    @tenant = Tenant.find_by(subdomain: Apartment::Tenant.current) || public_tenant
   end
 
   def public_tenant
