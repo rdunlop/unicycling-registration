@@ -53,14 +53,14 @@ class CompetitionsController < ApplicationController
       flash[:alert] = "You must specify an age group entry"
     else
       age_group_entry = AgeGroupEntry.find(params[:age_group_entry_id])
-      @competition.scoring_helper.place_age_group_entry(age_group_entry)
+      @competition.place_age_group_entry(age_group_entry)
       flash[:notice] = "All Places updated for #{age_group_entry}"
     end
     redirect_to result_competition_path(@competition)
   end
 
   def set_places
-    @competition.scoring_helper.place_all
+    @competition.place_all
     Result.update_last_calc_places_time(@competition)
     redirect_to result_competition_path(@competition), notice: "All Places updated"
   end

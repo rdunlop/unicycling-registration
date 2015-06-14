@@ -22,14 +22,10 @@ class FreestyleJudgePointsCalculator
     PlacingPointsCalculator.new(place, ties).points
   end
 
-  def lower_is_better
-    false
-  end
-
   def new_calc_place(score, scores)
     my_place = 1
     scores.each do |each_score|
-      if (lower_is_better && each_score < score) || (!lower_is_better && score < each_score)
+      if score < each_score
         my_place = my_place + 1
       end
     end

@@ -130,6 +130,10 @@ class Competitor < ActiveRecord::Base
     scoring_calculator.competitor_comparable_result(self)
   end
 
+  def comparable_tie_break_score
+    scoring_calculator.competitor_tie_break_comparable_result(self)
+  end
+
   def place
     return 0 if disqualified
     age_group_results.first.try(:place)
@@ -192,7 +196,7 @@ class Competitor < ActiveRecord::Base
 
   def result
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/result") do
-      scoring_calculator.competitor_comparable_result(self)
+      scoring_calculator.competitor_result(self)
     end
   end
 

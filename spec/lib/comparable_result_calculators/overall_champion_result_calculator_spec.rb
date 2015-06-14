@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CombinedCompetitionResult do
+describe OverallChampionResultCalculator do
   def build_competitor(options = {})
     competition = (options[:competition]) || FactoryGirl.create(:competition)
     reg = FactoryGirl.create(:registrant, bib_number: options[:bib_number], gender: "Male")
@@ -16,7 +16,7 @@ describe CombinedCompetitionResult do
 
   let(:race_100m) { FactoryGirl.create(:timed_competition) }
   let(:combined_competition) { FactoryGirl.create(:combined_competition) }
-  let(:combined_competition_result) { CombinedCompetitionResult.new(combined_competition).results("Male") }
+  let(:combined_competition_result) { described_class.new(combined_competition).results("Male") }
   let(:combined_competition_entry) { FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition, abbreviation: "TT", competition: race_100m) }
 
   before(:each) do
@@ -110,7 +110,7 @@ describe CombinedCompetitionResult do
   end
 end
 
-describe CombinedCompetitionResult do
+describe OverallChampionResultCalculator do
   let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, percentage_based_calculations: true }
   let(:result) { described_class.new(combined_competition) }
 

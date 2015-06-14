@@ -1,6 +1,8 @@
-class CombinedCompetitionResult
+# Calculates "Result" entries for all competitors
+# in the overall competition
+#
+class OverallChampionResultCalculator
   attr_accessor :combined_competition, :results_competition
-
   delegate :percentage_based_calculations?, to: :combined_competition
 
   def initialize(combined_competition, results_competition = nil)
@@ -10,30 +12,39 @@ class CombinedCompetitionResult
     @registrant_bib_numbers ||= {}
   end
 
-  def update_all_places
-    if results_competition
-      clear_competitors
-      build_competitors
-      store_places
+  def lower_is_better
+    false
+  end
+
+  def scoring_description
+    "Uses the chosen Overall Champion Calculation to determine the input competitors.
+    Calculates the Overall Champion, and stores their final scores and places"
+  end
+
+  # returns the result for this competitor
+  def competitor_result(competitor)
+    if competitor.has_result?
+      competitor_score(competitor)
     end
   end
 
-  def clear_competitors
-    results_competition.competitors.destroy_all
+  # returns the result for this competitor
+  def competitor_comparable_result(competitor)
+    if competitor.has_result?
+      competitor_score(competitor)
+    else
+      0
+    end
   end
 
-  def build_competitors
-    registrant_bib_numbers("Male").each do |bib_number|
-      results_competition.create_competitor_from_registrants([Registrant.find_by(bib_number: bib_number)], nil)
-    end
-    registrant_bib_numbers("Female").each do |bib_number|
-      results_competition.create_competitor_from_registrants([Registrant.find_by(bib_number: bib_number)], nil)
-    end
-    results_competition.reload
+  def competitor_tie_break_comparable_result(competitor)
+    nil
   end
 
-  def store_places
-    OrderedResultCalculator.new(results_competition, false).update_all_places
+  # What are the bib numbers of all competitors
+  # who have results in the overall competition?
+  def competitor_bib_numbers
+    registrant_bib_numbers("Male") + registrant_bib_numbers("Female")
   end
 
   def competitor_score(competitor)

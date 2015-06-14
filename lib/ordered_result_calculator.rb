@@ -23,7 +23,7 @@ class OrderedResultCalculator
     competitors = competition.competitors.select{ |c| c.age_group_entry == entry }
     competitors_in_sorted_order(competitors).each do |competitor|
       age_place_calc = get_place_calculator(competitor.age_group_entry_description)
-      new_place = age_place_calc.place_next(competitor.comparable_score, competitor.disqualified, competitor.ineligible)
+      new_place = age_place_calc.place_next(competitor.comparable_score, dq: competitor.disqualified, ineligible: competitor.ineligible)
       Result.create_new!(competitor, new_place, "AgeGroup", competitor.age_group_entry_description)
     end
   end
@@ -31,7 +31,7 @@ class OrderedResultCalculator
   def update_age_group_results
     all_competitors_in_sorted_order.each do |competitor|
       age_place_calc = get_place_calculator(competitor.age_group_entry_description)
-      new_place = age_place_calc.place_next(competitor.comparable_score, competitor.disqualified, competitor.ineligible)
+      new_place = age_place_calc.place_next(competitor.comparable_score, dq: competitor.disqualified, ineligible: competitor.ineligible)
       Result.create_new!(competitor, new_place, "AgeGroup", competitor.age_group_entry_description)
     end
   end
@@ -39,7 +39,7 @@ class OrderedResultCalculator
   def update_overall_results
     all_competitors_in_sorted_order.each do |competitor|
       gender_place_calc = get_place_calculator("Overall: #{competitor.gender}") # differentiate between Overall and an age group named "Male"
-      new_place = gender_place_calc.place_next(competitor.comparable_score, competitor.disqualified, competitor.ineligible)
+      new_place = gender_place_calc.place_next(competitor.comparable_score, dq: competitor.disqualified, ineligible: competitor.ineligible)
       Result.create_new!(competitor, new_place, "Overall")
     end
   end
@@ -51,10 +51,6 @@ class OrderedResultCalculator
   end
 
   def competitors_in_sorted_order(competitors)
-    @competitors_in_sorted_order ||= if lower_is_better
-                                       competitors.sort{ |a, b| a.comparable_score <=> b.comparable_score}
-                                     else
-                                       competitors.sort{ |a, b| b.comparable_score <=> a.comparable_score}
-    end
+    @competitors_in_sorted_order ||= CompetitorOrderer.new(competitors, lower_is_better).sort
   end
 end

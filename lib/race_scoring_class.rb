@@ -12,10 +12,8 @@ class RaceScoringClass < BaseScoringClass
     is used to determine the placing of the competitor."
   end
 
-  # This is used temporarily to access the calculator, but will likely be private-ized soon
-  def score_calculator
-    OrderedResultCalculator.new(@competition, lower_is_better)
-  end
+  # def lower_is_better
+  # attr_accessor (see above)
 
   # describes how to label the results of this competition
   def result_description
@@ -39,35 +37,8 @@ class RaceScoringClass < BaseScoringClass
     @competitor_has_result[competitor]
   end
 
-  # returns the result for this competitor
-  def competitor_result(competitor)
-    if self.competitor_has_result?(competitor)
-      TimeResultPresenter.new(competitor.best_time_in_thousands).full_time
-    else
-      nil
-    end
-  end
-
-  # returns the result for this competitor
-  def competitor_comparable_result(competitor)
-    if self.competitor_has_result?(competitor)
-      competitor.best_time_in_thousands
-    else
-      0
-    end
-  end
-
   def competitor_dq?(competitor)
     self.competitor_has_result?(competitor) && competitor.time_results.all?{|t| t.disqualified }
-  end
-
-  # Function which places all of the competitors in the competition
-  def place_all
-    score_calculator.update_all_places
-  end
-
-  def place_age_group_entry(entry)
-    score_calculator.update_age_group_entry_results(entry)
   end
 
   # Used when trying to destroy all results for a competition

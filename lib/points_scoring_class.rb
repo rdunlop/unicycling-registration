@@ -12,10 +12,8 @@ class PointsScoringClass < BaseScoringClass
     (for use on the awards/results sheets). #{lower_is_better ? 'Lower' : 'Higher'} points are better"
   end
 
-  # This is used temporarily to access the calculator, but will likely be private-ized soon
-  def score_calculator
-    OrderedResultCalculator.new(@competition, lower_is_better)
-  end
+  #def lower_is_better
+  # attr_accessor (see above)
 
   # describes how to label the results of this competition
   def result_description
@@ -35,30 +33,8 @@ class PointsScoringClass < BaseScoringClass
     competitor.external_results.any?
   end
 
-  # returns the result for this competitor
-  def competitor_result(competitor)
-    if self.competitor_has_result?(competitor)
-      competitor.external_results.first.try(:details)
-    else
-      nil
-    end
-  end
-
-  def competitor_comparable_result(competitor)
-    if self.competitor_has_result?(competitor)
-      competitor.external_results.first.points
-    else
-      0
-    end
-  end
-
   def competitor_dq?(competitor)
     false
-  end
-
-  # Function which places all of the competitors in the competition
-  def place_all
-    score_calculator.update_all_places
   end
 
   # Used when trying to destroy all results for a competition

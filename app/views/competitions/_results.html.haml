@@ -1,4 +1,6 @@
-
+- if can? :update, @competition
+  .non_printable
+    = @competition.event_class
 - if can? :set_places, @competition
   - if Result.competition_calc_needed?(@competition)
     .calc_needed Places should be re-calculated.

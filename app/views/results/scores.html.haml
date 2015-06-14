@@ -10,6 +10,6 @@
   %h2 Age Group Results
 .combined_competition_results
   .combined_competition_results__male
-    = render partial: "new_results", locals: {results: CombinedCompetitionResult.new(@combined_competition), gender: "Male" }
+    = render partial: "new_results", locals: {results: OverallChampionResultCalculator.new(@combined_competition), gender: "Male" }
   .combined_competition_results__female
-    = render partial: "new_results", locals: {results: CombinedCompetitionResult.new(@combined_competition), gender: "Female" }
+    = render partial: "new_results", locals: {results: OverallChampionResultCalculator.new(@combined_competition), gender: "Female" }

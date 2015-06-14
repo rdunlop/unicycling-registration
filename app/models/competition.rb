@@ -94,7 +94,7 @@ class Competition < ActiveRecord::Base
   validates :name, :award_title_name, presence: true
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
-            :build_import_result_from_raw, :score_calculator, :can_eliminate_judges?,
+            :build_import_result_from_raw, :can_eliminate_judges?,
             :result_description, :compete_in_order?, :scoring_description,
             :example_result, :imports_times, :results_path, :scoring_path, to: :scoring_helper
 
@@ -377,26 +377,86 @@ class Competition < ActiveRecord::Base
     case event_class
     when "Shortest Time"
       @rc ||= RaceScoringClass.new(self)
+    when "Timed Multi-Lap"
+      @rc ||= RaceScoringClass.new(self)
+
     when "Longest Time"
       @rc ||= RaceScoringClass.new(self, false)
-    when "Timed Multi-Lap"
-      @rc ||= MultiLapScoringClass.new(self)
+
     when "Points Low to High"
       @ers ||= PointsScoringClass.new(self)
+
     when "Points High to Low"
       @ers ||= PointsScoringClass.new(self, false)
+
     when "Freestyle"
       @asc ||= ArtisticScoringClass.new(self)
+
     when "Artistic Freestyle IUF 2015"
       @asc2015 ||= ArtisticScoringClass_2015.new(self)
+
     when "Flatland"
       @fsc ||= FlatlandScoringClass.new(self)
+
     when "Street"
       @ssc ||= StreetScoringClass.new(self)
+
     when "High/Long"
       @dsc ||= DistanceScoringClass.new(self)
+
     when "Overall Champion"
       @oc ||= OverallChampionScoringClass.new(self)
+    else
+      nil
+    end
+  end
+
+  def place_all
+    if event_class == "Overall Champion"
+      scoring_helper.rebuild_competitors(scoring_calculator.competitor_bib_numbers)
+    end
+    OrderedResultCalculator.new(self, scoring_helper.lower_is_better).update_all_places
+  end
+
+  def place_age_group_entry(age_group_entry)
+    OrderedResultCalculator.new(self, scoring_helper.lower_is_better).update_age_group_entry_results(age_group_entry)
+  end
+
+  # The ScoringCalculator is used to determine the numeric result
+  # for each given competitor.
+  # Depending on the type of competition, this requires that we look at different
+  # data/objects
+  # Some, it's as simple as reading their maximum time
+  # Some, it requires that we compare the judge results between different places
+  #
+  # All ScoreCalculators result in a function 'competitor_comparable_result' which
+  # provides a numeric/comparable score for the competitor
+  def scoring_calculator
+    case event_class
+    when "Shortest Time"
+      @scrc ||= RaceResultCalculator.new
+    when "Longest Time"
+      ### XXX this is strange...the determination as to which is the better score is not needed here?
+      @scsc ||= RaceResultCalculator.new(false)
+    when "Timed Multi-Lap"
+      @scrc ||= MultiLapResultCalculator.new
+    when "Points Low to High"
+      @scers ||= ExternalResultResultCalculator.new
+    when "Points High to Low"
+      @scers ||= ExternalResultResultCalculator.new
+    when "Freestyle"
+      unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc?
+      @scasc ||= ArtisticResultCalculator.new(unicon_scoring)
+    when "Artistic Freestyle IUF 2015"
+      @scasc ||= ArtisticResultCalculator_2015.new
+    when "Flatland"
+      @scsc ||= FlatlandResultCalculator.new
+    when "Street"
+      @scsc ||= StreetResultCalculator.new
+    when "High/Long"
+      @scdsc ||= DistanceResultCalculator.new
+    when "Overall Champion"
+      @ascoc ||= OverallChampionResultCalculator.new(self.combined_competition, self)
     else
       nil
     end
@@ -408,7 +468,7 @@ class Competition < ActiveRecord::Base
 
   # COMPETITOR
   def competitor_placing_points(competitor, judge_type)
-    sc = score_calculator
+    sc = scoring_calculator
     if sc.nil?
       0
     else

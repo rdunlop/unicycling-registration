@@ -4,9 +4,8 @@ class FlatlandScoringClass < BaseScoringClass
     scores and follow the rulebook (or do we?)"
   end
 
-  # This is used temporarily to access the calculator, but will likely be private-ized soon
-  def score_calculator
-    FlatlandScoreCalculator.new(@competition)
+  def lower_is_better
+    false
   end
 
   # describes how to label the results of this competition
@@ -21,20 +20,6 @@ class FlatlandScoringClass < BaseScoringClass
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     false
-  end
-
-  # returns the result for this competitor
-  def competitor_result(competitor)
-    if self.competitor_has_result?(competitor)
-      nil # not applicable in Freestyle
-    else
-      nil
-    end
-  end
-
-  # Function which places all of the competitors in the competition
-  def place_all
-    nil
   end
 
   # Used when trying to destroy all results for a competition
