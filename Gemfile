@@ -40,7 +40,6 @@ gem "fog"
 gem 'aws-sdk'
 gem 'http_accept_language'
 gem 'newrelic_rpm'
-gem 'skylight'
 gem 'sidekiq'
 # if you require 'sinatra' you get the Sinatra DSL extended to Object
 gem 'sinatra', '>= 1.3.0', require: nil # necessary for sidekiq routing

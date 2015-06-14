@@ -282,14 +282,6 @@ To View the local NewRelic Inforamtion
 
     `http://localhost:9292/newrelic` (when in development or caching modes)
 
-Skylight
---------
-
-We use https://skylight.io for exception and performance monitoring.
-
-Set up a skylight account, and set the token in the config/skylight.yml file
-
-
 Seed Data
 ---------
 

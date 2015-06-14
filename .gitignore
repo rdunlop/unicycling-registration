@@ -8,7 +8,6 @@
 
 config/database.yml
 config/secrets.yml
-config/skylight.yml
 # Ignore db dump file
 *.dump
 dump.rdb
