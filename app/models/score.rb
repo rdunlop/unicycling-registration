@@ -35,29 +35,44 @@ class Score < ActiveRecord::Base
   validate :values_within_judge_type_bounds
 
   delegate :judge_type, to: :judge
+  delegate :score_calculator, to: :judge_type
+
+  def display_score?(score_number)
+    judge_type.send("val_#{score_number}_max") > 0
+  end
+
+  # Sum of all entered values for this score.
+  def total
+    if self.invalid?
+      0
+    else
+      self.class.score_fields.inject(0){ |sum, sym| sum + self.send(sym) }
+    end
+  end
+
+  # Return the numeric place of this score, compared to the results of the other scores by this judge
+  def judged_place
+    return 0 if invalid?
+    score_calculator.judged_place(judge.score_totals, total)
+  end
+
+  # Return this score, after having converted it into placing points
+  # which will require comparing it against the scores this judge gave other competitors
+  def placing_points
+    return 0 if invalid?
+    score_calculator.judged_points(judge.score_totals, total)
+  end
+
+  private
 
   def set_zero_for_non_applicable_scores
     if judge && judge_type
       (1..4).each do |score_number|
-        if judge_type.send("val_#{score_number}_max") == 0
+        if !display_score?(score_number)
           self.send("val_#{score_number}=", 0)
         end
       end
     end
-  end
-
-  def display_score(score_number)
-    judge.judge_type.send("val_#{score_number}_max") > 0
-  end
-
-  def validate_judge_score(value_sym, max_score)
-    if self.send(value_sym) > max_score
-      errors[value_sym] << "#{value_sym.to_s} must be <= #{max_score}"
-    end
-  end
-
-  def all_values_present
-    self.class.score_fields.all? { |sym| self.send(sym) }
   end
 
   def values_within_judge_type_bounds
@@ -69,21 +84,13 @@ class Score < ActiveRecord::Base
     end
   end
 
-  def total
-    if self.invalid?
-      0
-    else
-      self.class.score_fields.inject(0){ |sum, sym| sum + self.send(sym) }
+  def all_values_present
+    self.class.score_fields.all? { |sym| self.send(sym) }
+  end
+
+  def validate_judge_score(value_sym, max_score)
+    if self.send(value_sym) > max_score
+      errors[value_sym] << "#{value_sym.to_s} must be <= #{max_score}"
     end
-  end
-
-  def judged_place
-    return 0 if invalid?
-    judge.judged_place(self)
-  end
-
-  def placing_points
-    return 0 if invalid?
-    judge.placing_points_for(self)
   end
 end
