@@ -102,8 +102,9 @@ class RegistrationPeriod < ActiveRecord::Base
 
   def self.update_registration_periods
     Apartment.tenant_names.each do |tenant|
-      Apartment::Tenant.switch(tenant)
-      update_current_period
+      Apartment::Tenant.switch(tenant) do
+        update_current_period
+      end
     end
   end
 
