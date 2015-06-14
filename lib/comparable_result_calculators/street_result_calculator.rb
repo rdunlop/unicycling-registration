@@ -7,8 +7,6 @@ class StreetResultCalculator
   def competitor_result(competitor)
     if competitor.has_result?
       total_points(competitor)
-    else
-      nil
     end
   end
 

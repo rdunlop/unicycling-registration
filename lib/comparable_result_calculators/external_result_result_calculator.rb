@@ -15,8 +15,6 @@ class ExternalResultResultCalculator
   def competitor_result(competitor)
     if competitor.has_result?
       competitor.external_results.first.try(:details)
-    else
-      nil
     end
   end
 

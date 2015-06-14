@@ -41,16 +41,16 @@ describe RegistrantGroupsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new RegistrantGroup" do
-        expect {
+        expect do
           post :create, {registrant_group: valid_attributes}
-        }.to change(RegistrantGroup, :count).by(1)
+        end.to change(RegistrantGroup, :count).by(1)
       end
 
       it "creates a new RegistrantGroup and nested member" do
         reg = FactoryGirl.create(:registrant)
-        expect {
+        expect do
           post :create, {registrant_group: { name: "Fun1", registrant_group_members_attributes: [{registrant_id: reg.id } ] }}
-        }.to change(RegistrantGroupMember, :count).by(1)
+        end.to change(RegistrantGroupMember, :count).by(1)
       end
 
       it "assigns a newly created registrant_group as @registrant_group" do
@@ -129,9 +129,9 @@ describe RegistrantGroupsController do
   describe "DELETE destroy" do
     it "destroys the requested registrant_group" do
       registrant_group = RegistrantGroup.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {id: registrant_group.to_param}
-      }.to change(RegistrantGroup, :count).by(-1)
+      end.to change(RegistrantGroup, :count).by(-1)
     end
 
     it "redirects to the registrant_groups list" do

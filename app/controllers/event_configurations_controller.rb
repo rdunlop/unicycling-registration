@@ -81,7 +81,7 @@ class EventConfigurationsController < ConventionSetupController
                                                 :test_mode, :usa,
                                                 :display_confirmed_events,
                                                 enabled_locales: []
-      )
+                                               )
   end
 
   def name_logo_params

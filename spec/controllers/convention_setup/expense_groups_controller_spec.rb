@@ -44,9 +44,9 @@ describe ConventionSetup::ExpenseGroupsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new ExpenseGroup" do
-        expect {
+        expect do
           post :create, {expense_group: valid_attributes}
-        }.to change(ExpenseGroup, :count).by(1)
+        end.to change(ExpenseGroup, :count).by(1)
       end
 
       it "assigns a newly created expense_group as @expense_group" do
@@ -126,9 +126,9 @@ describe ConventionSetup::ExpenseGroupsController do
   describe "DELETE destroy" do
     it "destroys the requested expense_group" do
       expense_group = ExpenseGroup.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {id: expense_group.to_param}
-      }.to change(ExpenseGroup, :count).by(-1)
+      end.to change(ExpenseGroup, :count).by(-1)
     end
 
     it "redirects to the expense_groups list" do

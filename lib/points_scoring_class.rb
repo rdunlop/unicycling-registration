@@ -12,7 +12,7 @@ class PointsScoringClass < BaseScoringClass
     (for use on the awards/results sheets). #{lower_is_better ? 'Lower' : 'Higher'} points are better"
   end
 
-  #def lower_is_better
+  # def lower_is_better
   # attr_accessor (see above)
 
   # describes how to label the results of this competition

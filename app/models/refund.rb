@@ -25,15 +25,15 @@ class Refund < ActiveRecord::Base
   has_many :refund_details, dependent: :destroy
 
   def self.build_from_details(options)
-    pd = options[:registrant].paid_details.select{|payment_detail| payment_detail.expense_item == options[:item] }.first
+    pd = options[:registrant].paid_details.find{|payment_detail| payment_detail.expense_item == options[:item] }
     refund = Refund.new(
       refund_date: DateTime.now,
       note: options[:note],
       percentage: 100
-      )
+    )
     refund.refund_details.build(
       payment_detail: pd
-      )
+    )
     refund
   end
 end

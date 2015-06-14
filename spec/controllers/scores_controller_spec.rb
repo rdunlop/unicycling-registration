@@ -58,9 +58,9 @@ describe ScoresController do
     end
     describe "with valid params" do
       it "creates a new Score" do
-        expect {
+        expect do
           post :create, {score: valid_attributes, judge_id: @other_judge.id, competitor_id: @comp.id}
-        }.to change(Score, :count).by(1)
+        end.to change(Score, :count).by(1)
       end
     end
   end
@@ -71,9 +71,9 @@ describe ScoresController do
       @comp.competition.save!
     end
     it "should not be allowed to create scores" do
-      expect {
+      expect do
         post :create, {score: valid_attributes, judge_id: @other_judge.id, competitor_id: @comp.id}
-      }.to change(Score, :count).by(0)
+      end.to change(Score, :count).by(0)
     end
   end
 

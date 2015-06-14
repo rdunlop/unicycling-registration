@@ -47,9 +47,9 @@ describe AdditionalRegistrantAccessesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new AdditionalRegistrantAccess" do
-        expect {
+        expect do
           post :create, {user_id: @user.id, additional_registrant_access: valid_attributes}
-        }.to change(AdditionalRegistrantAccess, :count).by(1)
+        end.to change(AdditionalRegistrantAccess, :count).by(1)
       end
 
       it "assigns a newly created additional_registrant_access as @additional_registrant_access" do
@@ -95,9 +95,9 @@ describe AdditionalRegistrantAccessesController do
       end
 
       it "cannot accept its own invitation" do
-        expect {
+        expect do
           put :accept_readonly, {id: @additional_registrant_access.to_param}
-        }.to_not change(@additional_registrant_access, :accepted_readonly)
+        end.to_not change(@additional_registrant_access, :accepted_readonly)
       end
       it "redirects to the root if unauthorized" do
         put :accept_readonly, {id: @additional_registrant_access.to_param}
@@ -111,9 +111,9 @@ describe AdditionalRegistrantAccessesController do
         end
 
         it "allows the registrant's user to accept the invitation" do
-          expect {
+          expect do
             put :accept_readonly, {id: @additional_registrant_access.to_param}
-          }.to_not change(@additional_registrant_access, :accepted_readonly)
+          end.to_not change(@additional_registrant_access, :accepted_readonly)
         end
         it "creates an e-mail to the requesting user" do
           ActionMailer::Base.deliveries.clear

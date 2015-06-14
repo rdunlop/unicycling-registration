@@ -10,8 +10,6 @@ class MultiLapResultCalculator
   def competitor_result(competitor)
     if competitor.has_result?
       TimeResultPresenter.new(competitor.best_time_in_thousands).full_time.to_s + " (" + competitor.num_laps.to_s + " laps)"
-    else
-      nil
     end
   end
 

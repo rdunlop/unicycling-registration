@@ -71,9 +71,9 @@ describe LaneAssignment do
         reg = FactoryGirl.create(:registrant)
         competition = FactoryGirl.create(:competition)
         @la = FactoryGirl.build(:lane_assignment, competitor: nil, registrant_id: reg.id, competition: competition)
-        expect {
+        expect do
           @la.save
-        }.to change(Competitor, :count).by(1)
+        end.to change(Competitor, :count).by(1)
       end
 
       it "can assign lane to existing competitor" do
@@ -81,9 +81,9 @@ describe LaneAssignment do
         competitor = FactoryGirl.create(:event_competitor, competition: competition)
         reg = competitor.members.first.registrant
         @la = FactoryGirl.build(:lane_assignment, competitor: nil, registrant_id: reg.id, competition: competition)
-        expect {
+        expect do
           @la.save
-        }.to change(Competitor, :count).by(0)
+        end.to change(Competitor, :count).by(0)
       end
     end
 
@@ -92,9 +92,9 @@ describe LaneAssignment do
         reg = FactoryGirl.create(:registrant)
         competition = FactoryGirl.create(:competition)
         @la = FactoryGirl.build(:lane_assignment, competitor: nil, registrant_id: reg.id, competition: competition)
-        expect {
+        expect do
           @la.save
-        }.to change(Competitor, :count).by(0)
+        end.to change(Competitor, :count).by(0)
       end
     end
   end

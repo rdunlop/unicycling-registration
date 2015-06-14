@@ -33,9 +33,9 @@ describe Compete::CombinedCompetitionsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new CombinedCompetition" do
-        expect {
+        expect do
           post :create, {combined_competition: valid_attributes}
-        }.to change(CombinedCompetition, :count).by(1)
+        end.to change(CombinedCompetition, :count).by(1)
       end
 
       it "assigns a newly created combined_competition as @combined_competition" do
@@ -114,9 +114,9 @@ describe Compete::CombinedCompetitionsController do
   describe "DELETE destroy" do
     it "destroys the requested combined_competition" do
       combined_competition = CombinedCompetition.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {id: combined_competition.to_param}
-      }.to change(CombinedCompetition, :count).by(-1)
+      end.to change(CombinedCompetition, :count).by(-1)
     end
 
     it "redirects to the combined_competitions list" do

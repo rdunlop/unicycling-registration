@@ -25,9 +25,9 @@ describe 'Creating a Competition from an Event' do
       fill_in :competition_name, with: "The only competition"
       fill_in :competition_award_title_name, with: "The Best Competition"
       select "Freestyle", from: "Scoring Type"
-      expect {
+      expect do
         click_button "Create Competition"
-      }.to change(Competition, :count).by(1)
+      end.to change(Competition, :count).by(1)
     end
   end
 end

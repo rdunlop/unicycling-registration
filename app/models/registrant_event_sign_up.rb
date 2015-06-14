@@ -54,7 +54,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
     if signed_up_was && signed_up_changed? && !signed_up
       ec = EventCategory.find(event_category_id_was)
       ec.competitions_being_fed(registrant).each do |competition|
-        member = registrant.members.select{|mem| mem.competitor.competition == competition}.first
+        member = registrant.members.find{|mem| mem.competitor.competition == competition}
         member.update_attributes(dropped_from_registration: true) if member
       end
     end
@@ -63,7 +63,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
     if signed_up && event_category_id_changed? && !event_category_id_was.nil?
       old_category = EventCategory.find(event_category_id_was)
       old_category.competitions_being_fed(registrant).each do |competition|
-        member = registrant.members.select{|mem| mem.competitor.try(:competition) == competition}.first
+        member = registrant.members.find{|mem| mem.competitor.try(:competition) == competition}
         member.update_attributes(dropped_from_registration: true) if member
       end
     end

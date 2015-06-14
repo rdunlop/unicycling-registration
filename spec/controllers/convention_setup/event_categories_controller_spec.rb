@@ -56,9 +56,9 @@ describe ConventionSetup::EventCategoriesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new EventCategory" do
-        expect {
+        expect do
           post :create, {event_id: @event.id, event_category: valid_attributes}
-        }.to change(EventCategory, :count).by(1)
+        end.to change(EventCategory, :count).by(1)
       end
 
       it "assigns a newly created event_category as @event_category" do
@@ -142,9 +142,9 @@ describe ConventionSetup::EventCategoriesController do
   describe "DELETE destroy" do
     it "destroys the requested event_category" do
       event_category = FactoryGirl.create(:event_category, event: @event)
-      expect {
+      expect do
         delete :destroy, {id: event_category.to_param}
-      }.to change(EventCategory, :count).by(-1)
+      end.to change(EventCategory, :count).by(-1)
     end
 
     it "redirects to the event_categories list" do

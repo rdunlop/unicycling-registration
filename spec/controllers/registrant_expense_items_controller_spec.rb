@@ -22,9 +22,9 @@ describe RegistrantExpenseItemsController do
     before { request.env["HTTP_REFERER"] = registrant_build_path(Registrant.last.id, :expenses) }
     describe "with valid params" do
       it "creates a new RegistrantExpenseItem" do
-        expect {
+        expect do
           post :create, {registrant_expense_item: valid_attributes, registrant_id: @reg.to_param}
-        }.to change(RegistrantExpenseItem, :count).by(1)
+        end.to change(RegistrantExpenseItem, :count).by(1)
       end
 
       it "assigns a newly created registrant_expense_item as @registrant_expense_item" do
@@ -61,9 +61,9 @@ describe RegistrantExpenseItemsController do
 
     it "destroys the requested registrant_expense_item" do
       registrant_expense_item = FactoryGirl.create(:registrant_expense_item, registrant: @reg)
-      expect {
+      expect do
         delete :destroy, {id: registrant_expense_item.to_param, registrant_id: @reg.to_param}
-      }.to change(RegistrantExpenseItem, :count).by(-1)
+      end.to change(RegistrantExpenseItem, :count).by(-1)
     end
 
     it "redirects to the registrant_items list" do

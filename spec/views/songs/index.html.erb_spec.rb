@@ -8,13 +8,13 @@ describe "songs/index" do
                                        song_file_name: "File Name",
                                        registrant: @registrant,
                                        user: @registrant.user
-    )
+                                      )
     @song2 = FactoryGirl.build_stubbed(:song,
                                        description: "Description",
                                        song_file_name: "File Name",
                                        registrant: @registrant,
                                        user: @registrant.user
-    )
+                                      )
     assign(:songs, [@song1, @song2])
     # carrierwasve overwrites these columns
     allow(@song1).to receive(:song_file_name_url).and_return("http://localhost/file1.mp3")

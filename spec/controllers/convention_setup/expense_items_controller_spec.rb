@@ -48,9 +48,9 @@ describe ConventionSetup::ExpenseItemsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new ExpenseItem" do
-        expect {
+        expect do
           post :create, {expense_item: valid_attributes, expense_group_id: @expense_group.id}
-        }.to change(ExpenseItem, :count).by(1)
+        end.to change(ExpenseItem, :count).by(1)
       end
 
       it "assigns a newly created expense_item as @expense_item" do
@@ -133,9 +133,9 @@ describe ConventionSetup::ExpenseItemsController do
   describe "DELETE destroy" do
     it "destroys the requested expense_item" do
       expense_item = FactoryGirl.create :expense_item
-      expect {
+      expect do
         delete :destroy, {id: expense_item.to_param, expense_group_id: @expense_group.id}
-      }.to change(ExpenseItem, :count).by(-1)
+      end.to change(ExpenseItem, :count).by(-1)
     end
 
     it "redirects to the expense_items list" do

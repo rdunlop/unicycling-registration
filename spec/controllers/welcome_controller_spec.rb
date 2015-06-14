@@ -13,9 +13,9 @@ describe WelcomeController do
     it "returns 404-not-found" do
       @user = FactoryGirl.create(:user)
       sign_in @user
-      expect {
+      expect do
         get 'index', {locale: 'humans', format: 'txt' }
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 

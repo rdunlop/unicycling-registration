@@ -31,9 +31,9 @@ describe Compete::AgeGroupTypesController do
 
   describe "POST 'create'" do
     it "creates the new age group type" do
-      expect {
+      expect do
         post :create, {age_group_type: valid_attributes}
-      }.to change(AgeGroupType, :count).by(1)
+      end.to change(AgeGroupType, :count).by(1)
       expect(response).to redirect_to(age_group_types_path)
     end
   end
@@ -41,9 +41,9 @@ describe Compete::AgeGroupTypesController do
   describe "DELETE 'destroy'" do
     it "returns http success" do
       agt = FactoryGirl.create(:age_group_type)
-      expect {
+      expect do
         delete 'destroy', {id: agt.id}
-      }.to change(AgeGroupType, :count).by(-1)
+      end.to change(AgeGroupType, :count).by(-1)
       expect(response).to redirect_to(age_group_types_path)
     end
   end

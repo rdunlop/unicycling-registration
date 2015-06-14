@@ -406,8 +406,6 @@ class Competition < ActiveRecord::Base
 
     when "Overall Champion"
       @oc ||= OverallChampionScoringClass.new(self)
-    else
-      nil
     end
   end
 
@@ -457,8 +455,6 @@ class Competition < ActiveRecord::Base
       @scdsc ||= DistanceResultCalculator.new
     when "Overall Champion"
       @ascoc ||= OverallChampionResultCalculator.new(self.combined_competition, self)
-    else
-      nil
     end
   end
 

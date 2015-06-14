@@ -23,9 +23,9 @@ describe RaceDataImporter do
     it "creates a competitor" do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
-      expect{
+      expect do
         importer.process_csv(sample_input, false)
-      }.to change(ImportResult, :count).by(1)
+      end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
       ir = ImportResult.first
@@ -41,9 +41,9 @@ describe RaceDataImporter do
     it "can import start times" do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
-      expect{
+      expect do
         importer.process_csv(sample_input, true)
-      }.to change(ImportResult, :count).by(1)
+      end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
       ir = ImportResult.first
@@ -57,9 +57,9 @@ describe RaceDataImporter do
     it "creates a dq competitor" do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
-      expect{
+      expect do
         importer.process_csv(sample_input, true)
-      }.to change(ImportResult, :count).by(1)
+      end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
       expect(ImportResult.first.disqualified).to eq(true)
@@ -77,9 +77,9 @@ describe RaceDataImporter do
     create_competitor(competition, 108, 10, 8)
 
     importer = RaceDataImporter.new(competition, admin_user)
-    expect {
+    expect do
       expect(importer.process_lif(sample_input, 10)).to be_truthy
-    }.to change(ImportResult, :count).by(8)
+    end.to change(ImportResult, :count).by(8)
   end
 
   it "gives good error message upon failure" do
@@ -92,9 +92,9 @@ describe RaceDataImporter do
     create_competitor(competition, 107, 10, 7)
     create_competitor(competition, 108, 10, 8)
 
-    expect {
+    expect do
       expect(importer.process_lif(sample_input, 10)).to be_truthy
-    }.to change(ImportResult, :count).by(8)
+    end.to change(ImportResult, :count).by(8)
 
     expect(importer.errors).to_not be_nil
   end

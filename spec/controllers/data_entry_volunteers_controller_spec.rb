@@ -21,9 +21,9 @@ describe DataEntryVolunteersController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Volunteer" do
-        expect {
+        expect do
           post :create, {data_entry_volunteer: {user_id: @user.id, name: "Robin"}, competition_id: @ec.id}
-        }.to change(@user.roles, :count).by(1)
+        end.to change(@user.roles, :count).by(1)
       end
 
       it "updates the user's name" do
@@ -43,9 +43,9 @@ describe DataEntryVolunteersController do
 
   describe "missing a name" do
     it "doesn't create the volunteer" do
-      expect {
+      expect do
         post :create, { data_entry_volunteer: {user_id: @user.id, name: ""}, competition_id: @ec.id }
-      }.to_not change(@user.roles, :count)
+      end.to_not change(@user.roles, :count)
     end
   end
 end

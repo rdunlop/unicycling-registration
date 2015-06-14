@@ -71,7 +71,7 @@ class TwoAttemptEntry < ActiveRecord::Base
       seconds: seconds,
       thousands: thousands,
       status: status
-      )
+    )
   end
 
   def full_time_1

@@ -39,7 +39,7 @@ class ChoicesValidator
   end
 
   def reg_sign_up_record_for(event)
-    @registrant.registrant_event_sign_ups.select{|resu| resu.event_id == event.id}.first
+    @registrant.registrant_event_sign_ups.find{|resu| resu.event_id == event.id}
   end
 
   def signed_up_for(event)
@@ -55,12 +55,12 @@ class ChoicesValidator
     reg_choice_chosen = reg_choice.present? && reg_choice.has_value?
 
     if event_selected && !valid_with_required_selection(event_choice, reg_choice_chosen)
-      @registrant.errors[:base] << "#{event_choice.to_s } must be specified if #{required_if_event_choice.to_s} is chosen"
+      @registrant.errors[:base] << "#{event_choice.to_s} must be specified if #{required_if_event_choice.to_s} is chosen"
       return false
     end
 
     if event_selected && !valid_with_optional_selection(event_choice, reg_choice_chosen)
-      @registrant.errors[:base] << "#{event_choice.to_s } must be specified unless #{optional_if_event_choice.to_s} is chosen"
+      @registrant.errors[:base] << "#{event_choice.to_s} must be specified unless #{optional_if_event_choice.to_s} is chosen"
       return false
     end
 
@@ -125,7 +125,7 @@ class ChoicesValidator
   end
 
   def get_choice_for_event_choice(event_choice)
-    registrant_choices.select{|rc| rc.event_choice_id == event_choice.id}.first
+    registrant_choices.find{|rc| rc.event_choice_id == event_choice.id}
   end
 
   def event_choice_chosen?(event_choice)

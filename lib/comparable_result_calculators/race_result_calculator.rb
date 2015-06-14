@@ -15,8 +15,6 @@ class RaceResultCalculator
   def competitor_result(competitor)
     if competitor.has_result?
       TimeResultPresenter.new(competitor.best_time_in_thousands).full_time
-    else
-      nil
     end
   end
 

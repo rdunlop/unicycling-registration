@@ -14,7 +14,7 @@ class Compete::WavesController < ApplicationController
     add_breadcrumb "Current Waves"
     @competitors = @competition.competitors
     respond_to do |format|
-      format.xls {
+      format.xls do
         s = Spreadsheet::Workbook.new
 
         sheet = s.create_worksheet
@@ -30,7 +30,7 @@ class Compete::WavesController < ApplicationController
         report = StringIO.new
         s.write report
         send_data report.string, filename: "#{@competition.slug}-waves-draft-#{Date.today}.xls"
-      }
+      end
       format.html {} # normal
     end
   end

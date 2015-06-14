@@ -67,15 +67,15 @@ describe Event do
   end
   it "destroys associated event_choices upon destroy" do
     FactoryGirl.create(:event_choice, event: @ev)
-    expect {
+    expect do
       @ev.destroy
-    }.to change(EventChoice, :count).by(-1)
+    end.to change(EventChoice, :count).by(-1)
   end
 
   it "destroys associated event_categories upon destroy" do
-    expect {
+    expect do
       @ev.destroy
-    }.to change(EventCategory, :count).by(-1)
+    end.to change(EventCategory, :count).by(-1)
   end
 
   it "creates an associated event_category automatically" do

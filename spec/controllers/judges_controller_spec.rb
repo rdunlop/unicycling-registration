@@ -23,9 +23,9 @@ describe JudgesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new EventJudgeType" do
-        expect {
+        expect do
           post :create, {judge: valid_attributes, competition_id: @ec.id}
-        }.to change(Judge, :count).by(1)
+        end.to change(Judge, :count).by(1)
       end
 
       it "assigns a newly created judge as @judge" do
@@ -89,9 +89,9 @@ describe JudgesController do
   describe "DELETE destroy" do
     it "destroys the requested judge" do
       judge = FactoryGirl.create(:judge, competition: @ec)
-      expect {
+      expect do
         delete :destroy, {id: judge.to_param, competition_id: @ec.id}
-      }.to change(Judge, :count).by(-1)
+      end.to change(Judge, :count).by(-1)
     end
 
     it "redirects to the judges list" do

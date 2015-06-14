@@ -7,7 +7,7 @@ describe Compete::CombinedCompetitionEntriesController do
   let(:competition) { FactoryGirl.create(:competition) }
   let(:combined_competition) { FactoryGirl.create(:combined_competition) }
 
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     {
       abbreviation: "M",
       competition_id: competition.id,
@@ -22,7 +22,8 @@ describe Compete::CombinedCompetitionEntriesController do
       points_8: 50,
       points_9: 50,
       points_10: 50
-    } }
+    }
+  end
 
   describe "GET index" do
     it "assigns all combined_competition_entries as @combined_competition_entries" do
@@ -50,9 +51,9 @@ describe Compete::CombinedCompetitionEntriesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new CombinedCompetitionEntry" do
-        expect {
+        expect do
           post :create, {combined_competition_entry: valid_attributes, combined_competition_id: combined_competition.id}
-        }.to change(CombinedCompetitionEntry, :count).by(1)
+        end.to change(CombinedCompetitionEntry, :count).by(1)
       end
 
       it "redirects to the created combined_competition" do
@@ -115,9 +116,9 @@ describe Compete::CombinedCompetitionEntriesController do
   describe "DELETE destroy" do
     it "destroys the requested combined_competition_entry" do
       combined_competition_entry = FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition)
-      expect {
+      expect do
         delete :destroy, {id: combined_competition_entry.to_param, combined_competition_id: combined_competition.id}
-      }.to change(CombinedCompetitionEntry, :count).by(-1)
+      end.to change(CombinedCompetitionEntry, :count).by(-1)
     end
 
     it "redirects to the combined_competition_entries list" do

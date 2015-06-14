@@ -79,17 +79,17 @@ xdescribe Registrants::BuildController do
         @comp_attributes = valid_attributes.merge({registrant_type: 'competitor'})
       end
       it "creates a new Registrant" do
-        expect {
+        expect do
           post :create, {registrant: @comp_attributes}
-        }.to change(Registrant, :count).by(1)
+        end.to change(Registrant, :count).by(1)
       end
 
       it "assigns the registrant to the current user" do
-        expect {
+        expect do
           post :create, {registrant: valid_attributes.merge(
             registrant_type: 'competitor')
           }
-        }.to change(Registrant, :count).by(1)
+        end.to change(Registrant, :count).by(1)
         expect(Registrant.last.user).to eq(@user)
         expect(Registrant.last.contact_detail).not_to be_nil
       end
@@ -161,9 +161,9 @@ xdescribe Registrants::BuildController do
       end
 
       it "creates a corresponding event_choice when checkbox is selected" do
-        expect {
+        expect do
           post 'create', {id: @reg, registrant: @attributes}
-        }.to change(RegistrantChoice, :count).by(1)
+        end.to change(RegistrantChoice, :count).by(1)
       end
 
       it "doesn't create a new entry if one already exists" do
@@ -205,18 +205,18 @@ xdescribe Registrants::BuildController do
       end
 
       it "creates corresponding registrant_event_sign_ups" do
-        expect {
+        expect do
           post 'create', {id: @reg, registrant: @attributes}
-        }.to change(RegistrantEventSignUp, :count).by(1)
+        end.to change(RegistrantEventSignUp, :count).by(1)
       end
 
       it "can update the registrant_event_sign_up" do
         put :update, {id: @reg.to_param, registrant: @attributes}
         expect(response).to redirect_to(registrant_registrant_expense_items_path(@reg))
         @new_attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
-        expect {
+        expect do
           put :update, {id: @reg.to_param, registrant: @new_attributes}
-        }.to change(RegistrantEventSignUp, :count).by(0)
+        end.to change(RegistrantEventSignUp, :count).by(0)
         expect(response).to redirect_to(registrant_registrant_expense_items_path(@reg))
       end
     end
@@ -261,9 +261,9 @@ xdescribe Registrants::BuildController do
 
     describe "with invalid params" do
       let(:registrant) { FactoryGirl.create(:competitor, user: @user) }
-      let(:do_action) {
+      let(:do_action) do
         put :update, {id: registrant.to_param, registrant: {registrant_type: 'competitor'}}
-      }
+      end
       it "assigns the registrant as @registrant" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)

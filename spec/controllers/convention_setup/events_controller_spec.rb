@@ -50,9 +50,9 @@ describe ConventionSetup::EventsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Event" do
-        expect {
+        expect do
           post :create, {event: valid_attributes, category_id: @category.id}
-        }.to change(Event, :count).by(1)
+        end.to change(Event, :count).by(1)
       end
 
       it "assigns a newly created event as @event" do
@@ -144,7 +144,7 @@ describe ConventionSetup::EventsController do
         @event = FactoryGirl.create(:event)
       end
       it "accepts nested attributes" do
-        expect {
+        expect do
           put :update, {id: @event.to_param, event: {
             event_choices_attributes: [
               {
@@ -152,7 +152,7 @@ describe ConventionSetup::EventsController do
                 label: "My event Choice",
                 multiple_values: "m2"
               }] }}
-        }.to change(EventChoice, :count).by(1)
+        end.to change(EventChoice, :count).by(1)
         ec = EventChoice.last
         expect(ec.cell_type).to eq("boolean")
         expect(ec.label).to eq("My event Choice")
@@ -170,7 +170,7 @@ describe ConventionSetup::EventsController do
             }] }}
         ec = EventChoice.last
 
-        expect {
+        expect do
           put :update, {id: @event.to_param, event: {
             event_choices_attributes: [
               {
@@ -179,7 +179,7 @@ describe ConventionSetup::EventsController do
                 multiple_values: ec.multiple_values,
                 id: ec.id
               }] }}
-        }.to change(EventChoice, :count).by(0)
+        end.to change(EventChoice, :count).by(0)
         ec.reload
         expect(ec.label).to eq("new Label")
       end
@@ -192,7 +192,7 @@ describe ConventionSetup::EventsController do
       it "can update event_categories" do
         ecat = @event.event_categories.last
 
-        expect {
+        expect do
           put :update, {id: @event.to_param, event: {
             name: "Sample Event",
             event_categories_attributes: [
@@ -200,7 +200,7 @@ describe ConventionSetup::EventsController do
                 name: "New Name",
                 id: ecat.id
               }] }}
-        }.to change(EventCategory, :count).by(0)
+        end.to change(EventCategory, :count).by(0)
         ecat.reload
         expect(ecat.name).to eq("New Name")
       end
@@ -210,9 +210,9 @@ describe ConventionSetup::EventsController do
   describe "DELETE destroy" do
     it "destroys the requested event" do
       event = FactoryGirl.create(:event)
-      expect {
+      expect do
         delete :destroy, {id: event.to_param}
-      }.to change(Event, :count).by(-1)
+      end.to change(Event, :count).by(-1)
     end
 
     it "redirects to the events list" do

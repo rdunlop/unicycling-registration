@@ -5,7 +5,7 @@ describe "registrant_groups/show" do
     @registrant_group = assign(:registrant_group, FactoryGirl.build_stubbed(:registrant_group,
                                                                             name: "Name",
                                                                             registrant_id: 1
-    ))
+                                                                           ))
   end
 
   it "renders attributes in <p>" do

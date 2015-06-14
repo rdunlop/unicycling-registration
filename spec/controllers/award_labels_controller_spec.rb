@@ -35,9 +35,9 @@ describe AwardLabelsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new AwardLabel" do
-        expect {
+        expect do
           post :create, {award_label: valid_attributes, user_id: @admin_user.id}
-        }.to change(AwardLabel, :count).by(1)
+        end.to change(AwardLabel, :count).by(1)
       end
 
       it "assigns a newly created award_label as @award_label" do
@@ -111,9 +111,9 @@ describe AwardLabelsController do
   describe "DELETE destroy" do
     it "destroys the requested award_label" do
       aw_label = FactoryGirl.create(:award_label, user: @admin_user)
-      expect {
+      expect do
         delete :destroy, {id: aw_label.to_param}
-      }.to change(AwardLabel, :count).by(-1)
+      end.to change(AwardLabel, :count).by(-1)
     end
 
     it "redirects to the award_labels list" do

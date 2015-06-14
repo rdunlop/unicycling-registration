@@ -38,9 +38,9 @@ describe LaneAssignmentsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new LaneAssignment" do
-        expect {
+        expect do
           post :create, {lane_assignment: valid_attributes, competition_id: @competition.id}
-        }.to change(LaneAssignment, :count).by(1)
+        end.to change(LaneAssignment, :count).by(1)
       end
 
       it "assigns a newly created lane_assignment as @lane_assignment" do
@@ -114,9 +114,9 @@ describe LaneAssignmentsController do
   describe "DELETE destroy" do
     it "destroys the requested lane_assignment" do
       lane_assignment = FactoryGirl.create(:lane_assignment)
-      expect {
+      expect do
         delete :destroy, {id: lane_assignment.to_param}
-      }.to change(LaneAssignment, :count).by(-1)
+      end.to change(LaneAssignment, :count).by(-1)
     end
 
     it "redirects to the lane_assignments list" do

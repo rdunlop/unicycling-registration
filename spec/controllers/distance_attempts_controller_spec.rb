@@ -23,9 +23,9 @@ describe DistanceAttemptsController do
       it "creates a new DistanceAttempt" do
         request.env["HTTP_REFERER"] = judge_distance_attempts_path(@judge)
 
-        expect {
+        expect do
           post :create, {distance_attempt: valid_attributes, judge_id: @judge.id}
-        }.to change(DistanceAttempt, :count).by(1)
+        end.to change(DistanceAttempt, :count).by(1)
 
         expect(response).to redirect_to(judge_distance_attempts_path(@judge))
       end

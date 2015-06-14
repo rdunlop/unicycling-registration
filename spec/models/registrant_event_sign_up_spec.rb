@@ -49,9 +49,9 @@ describe RegistrantEventSignUp do
       expect(@re.save).to be_truthy
 
       @re.signed_up = true
-      expect {
+      expect do
         expect(@re.save).to be_truthy
-      }.to change(Competitor, :count).by(0)
+      end.to change(Competitor, :count).by(0)
     end
   end
 
@@ -95,14 +95,14 @@ describe "when a competition exists before a sign-up" do
 
   it "adds the competition on change of state" do
     @re = FactoryGirl.create(:registrant_event_sign_up, event_category: event_category, signed_up: false)
-    expect {
+    expect do
       expect(@re.save).to be_truthy
-    }.to change(Competitor, :count).by(0)
+    end.to change(Competitor, :count).by(0)
 
     @re.signed_up = true
-    expect {
+    expect do
       expect(@re.save).to be_truthy
-    }.to change(Competitor, :count).by(1)
+    end.to change(Competitor, :count).by(1)
 
     expect(Competitor.last.status).to eq("active")
   end
@@ -117,9 +117,9 @@ describe "when a competition exists before a sign-up" do
       expect(@re.registrant.gender).to eq("Male")
 
       @re.signed_up = true
-      expect {
+      expect do
         expect(@re.save).to be_truthy
-      }.to change(Competitor, :count).by(0)
+      end.to change(Competitor, :count).by(0)
     end
   end
 end

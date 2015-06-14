@@ -61,9 +61,9 @@ describe StandardSkillEntry do
     end
     it "removes the associated entry upon destroy" do
       skill = @entry.standard_skill_entry
-      expect {
+      expect do
         skill.destroy
-      }.to change(StandardSkillRoutineEntry, :count).by(-1)
+      end.to change(StandardSkillRoutineEntry, :count).by(-1)
     end
   end
 end

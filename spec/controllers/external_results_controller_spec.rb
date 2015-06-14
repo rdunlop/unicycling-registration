@@ -37,9 +37,9 @@ describe ExternalResultsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new ExternalResult" do
-        expect {
+        expect do
           post :create, {external_result: valid_attributes, competition_id: @competition.id}
-        }.to change(ExternalResult, :count).by(1)
+        end.to change(ExternalResult, :count).by(1)
       end
 
       it "assigns a newly created external_result as @external_result" do
@@ -118,9 +118,9 @@ describe ExternalResultsController do
   describe "DELETE destroy" do
     it "destroys the requested external_result" do
       external_result = ExternalResult.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, {id: external_result.to_param}
-      }.to change(ExternalResult, :count).by(-1)
+      end.to change(ExternalResult, :count).by(-1)
     end
 
     it "redirects to the external_results list" do

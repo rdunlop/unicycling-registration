@@ -173,14 +173,14 @@ class Payment < ActiveRecord::Base
       completed: true,
       note: options[:note],
       completed_date: DateTime.now,
-      )
+    )
     payment.payment_details.build(
       registrant: options[:registrant],
       expense_item: options[:item],
       details: options[:details],
       amount: options[:amount],
       free: false
-      )
+    )
     payment
   end
 end

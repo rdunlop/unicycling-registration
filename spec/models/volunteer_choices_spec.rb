@@ -21,9 +21,9 @@ describe VolunteerChoice do
     end
 
     specify do
-      expect {
+      expect do
         subject.save
-      }.to change(VolunteerChoice, :count).by(1)
+      end.to change(VolunteerChoice, :count).by(1)
     end
   end
 end

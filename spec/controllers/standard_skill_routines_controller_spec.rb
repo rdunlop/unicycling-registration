@@ -20,9 +20,9 @@ describe StandardSkillRoutinesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new routine" do
-        expect {
+        expect do
           post :create, {registrant_id: @registrant.id}
-        }.to change(StandardSkillRoutine, :count).by(1)
+        end.to change(StandardSkillRoutine, :count).by(1)
       end
 
       it "redirects to the created routine" do

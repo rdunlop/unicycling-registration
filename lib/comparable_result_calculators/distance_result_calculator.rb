@@ -10,8 +10,6 @@ class DistanceResultCalculator
     if competitor.has_result?
       max_distance = competitor.max_successful_distance
       "#{max_distance} cm" unless max_distance == 0
-    else
-      nil
     end
   end
 

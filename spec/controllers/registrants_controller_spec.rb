@@ -141,9 +141,9 @@ describe RegistrantsController do
     end
     it "destroys the requested registrant" do
       registrant = FactoryGirl.create(:competitor, user: @user)
-      expect {
+      expect do
         delete :destroy, {id: registrant.to_param}
-      }.to change(Registrant.active, :count).by(-1)
+      end.to change(Registrant.active, :count).by(-1)
     end
 
     it "sets the registrant as 'deleted'" do

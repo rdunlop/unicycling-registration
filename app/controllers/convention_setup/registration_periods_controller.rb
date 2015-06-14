@@ -80,6 +80,6 @@ class ConventionSetup::RegistrationPeriodsController < ConventionSetupController
                                                 translations_attributes: [:id, :locale, :name],
                                                 competitor_expense_item_attributes: [:id, :cost, :tax],
                                                 noncompetitor_expense_item_attributes: [:id, :cost, :tax]
-                                                )
+                                               )
   end
 end

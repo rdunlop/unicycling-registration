@@ -45,9 +45,9 @@ describe StreetScoresController do
   describe "POST create" do
     describe "with valid competitor_id" do
       it "creates a new Score" do
-        expect {
+        expect do
           post :update_score, {competitor_id: @comp2.id, score: 4, judge_id: @judge.id, format: :js}
-        }.to change(Score, :count).by(1)
+        end.to change(Score, :count).by(1)
       end
     end
   end
@@ -57,9 +57,9 @@ describe StreetScoresController do
       @user_score2 = FactoryGirl.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
     end
     it "should allow access to destroy" do
-      expect {
+      expect do
         delete :destroy, {id: @user_score1.to_param, judge_id: @judge.id}
-      }.to change(Score, :count).by(-1)
+      end.to change(Score, :count).by(-1)
     end
   end
 

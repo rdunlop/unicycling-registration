@@ -71,9 +71,9 @@ describe ConventionSetup::EventChoicesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new EventChoice" do
-        expect {
+        expect do
           post :create, {event_id: @event.id, event_choice: valid_attributes}
-        }.to change(EventChoice, :count).by(1)
+        end.to change(EventChoice, :count).by(1)
       end
 
       it "assigns a newly created event_choice as @event_choice" do
@@ -135,9 +135,9 @@ describe ConventionSetup::EventChoicesController do
       end
 
       it "can create the event_choice" do
-        expect {
+        expect do
           post :create, event_id: @event.id, event_choice: @ec_params, locale: "en"
-        }.to change(EventChoice, :count).by(1)
+        end.to change(EventChoice, :count).by(1)
         ec = EventChoice.last
         I18n.locale = "en"
         expect(ec.label).to eq("label_en")
@@ -199,9 +199,9 @@ describe ConventionSetup::EventChoicesController do
   describe "DELETE destroy" do
     it "destroys the requested event_choice" do
       event_choice = FactoryGirl.create(:event_choice)
-      expect {
+      expect do
         delete :destroy, {id: event_choice.to_param}
-      }.to change(EventChoice, :count).by(-1)
+      end.to change(EventChoice, :count).by(-1)
     end
 
     it "redirects to the event_choices list" do

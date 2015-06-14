@@ -67,7 +67,7 @@ class CombinedCompetitionEntry < ActiveRecord::Base
 
   def determine_best_time_in_thousands(gender)
     first_place_results = competition.results.includes(:competitor).overall.where(place: 1)
-    gender_comp = first_place_results.map(&:competitor).select{ |comp| comp.gender == gender}.first
+    gender_comp = first_place_results.map(&:competitor).find{ |comp| comp.gender == gender}
     gender_comp.try(:best_time_in_thousands)
   end
 

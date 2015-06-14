@@ -37,15 +37,15 @@ describe CompetitionSetup::CompetitionsController do
   describe "POST create" do
     describe "with valid params" do
       it "can create a competition" do
-        expect {
+        expect do
           post :create, {event_id: @event.id, competition: valid_attributes}
-        }.to change(Competition, :count).by(1)
+        end.to change(Competition, :count).by(1)
       end
       it "can create a Female gender_filter competition" do
         @comp = FactoryGirl.create(:competition)
-        expect {
+        expect do
           post :create, {event_id: @event.id, competition: valid_attributes.merge({competition_sources_attributes: [{competition_id: @comp.id, gender_filter: "Female"}]}) }
-        }.to change(Competition, :count).by(1)
+        end.to change(Competition, :count).by(1)
         expect(CompetitionSource.last.gender_filter).to eq("Female")
       end
 
@@ -126,9 +126,9 @@ describe CompetitionSetup::CompetitionsController do
   describe "DELETE destroy" do
     it "destroys the requested competition" do
       competition = FactoryGirl.create(:competition, event: @event)
-      expect {
+      expect do
         delete :destroy, {id: competition.to_param}
-      }.to change(Competition, :count).by(-1)
+      end.to change(Competition, :count).by(-1)
     end
 
     it "redirects to the competition_setup_path" do

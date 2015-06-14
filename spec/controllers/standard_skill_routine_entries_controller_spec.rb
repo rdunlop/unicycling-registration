@@ -19,9 +19,9 @@ describe StandardSkillRoutineEntriesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new StandardSkillRoutineEntry" do
-        expect {
+        expect do
           post :create, {standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes}
-        }.to change(StandardSkillRoutineEntry, :count).by(1)
+        end.to change(StandardSkillRoutineEntry, :count).by(1)
       end
 
       it "assigns a newly created entry as @entry" do
@@ -87,9 +87,9 @@ describe StandardSkillRoutineEntriesController do
       end
 
       it "Cannot create new entries" do
-        expect {
+        expect do
           post :create, {standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes}
-        }.to change(StandardSkillRoutineEntry, :count).by(0)
+        end.to change(StandardSkillRoutineEntry, :count).by(0)
       end
     end
   end
@@ -97,9 +97,9 @@ describe StandardSkillRoutineEntriesController do
   describe "DELETE destroy" do
     it "destroys the requested entry" do
       entry = @initial_entry
-      expect {
+      expect do
         delete :destroy, {standard_skill_routine_id: @routine.id, id: entry.to_param}
-      }.to change(StandardSkillRoutineEntry, :count).by(-1)
+      end.to change(StandardSkillRoutineEntry, :count).by(-1)
     end
 
     it "redirects to the entries list" do

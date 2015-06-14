@@ -73,6 +73,5 @@ describe PlaceCalculator do
       expect(@calc.place_next(5, ineligible: true)).to eq(3)
       expect(@calc.place_next(6)).to eq(3)
     end
-
   end
 end

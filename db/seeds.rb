@@ -16,7 +16,7 @@ JudgeType.find_or_create_by(name: "Presentation", event_class: "Freestyle") do |
     val_2_max: 15,
     val_3_max: 15,
     val_4_max: 10
-                  )
+  )
 end
 JudgeType.find_or_create_by(name: "Technical", event_class: "Freestyle") do |judge_type|
   judge_type.assign_attributes(
@@ -28,7 +28,7 @@ JudgeType.find_or_create_by(name: "Technical", event_class: "Freestyle") do |jud
     val_2_max: 15,
     val_3_max: 15,
     val_4_max: 0
-                  )
+  )
 end
 
 JudgeType.find_or_create_by(name: "Flatland Judge Type", event_class: "Flatland") do |judge_type|
@@ -41,7 +41,7 @@ JudgeType.find_or_create_by(name: "Flatland Judge Type", event_class: "Flatland"
     val_2_max: 10,
     val_3_max: 10,
     val_4_max: 10
-                  )
+  )
 end
 
 JudgeType.find_or_create_by(name: "High/Long Judge Type", event_class: "High/Long") do |judge_type|
@@ -54,7 +54,7 @@ JudgeType.find_or_create_by(name: "High/Long Judge Type", event_class: "High/Lon
     val_2_max: 10,
     val_3_max: 10,
     val_4_max: 10
-                  )
+  )
 end
 
 JudgeType.find_or_create_by(name: "Street Judge Zone 1", event_class: "Street") do |judge_type|
@@ -67,7 +67,7 @@ JudgeType.find_or_create_by(name: "Street Judge Zone 1", event_class: "Street") 
     val_2_max: 0,
     val_3_max: 0,
     val_4_max: 0
-                  )
+  )
 end
 
 JudgeType.find_or_create_by(name: "Street Judge Zone 2", event_class: "Street") do |judge_type|
@@ -80,7 +80,7 @@ JudgeType.find_or_create_by(name: "Street Judge Zone 2", event_class: "Street") 
     val_2_max: 0,
     val_3_max: 0,
     val_4_max: 0
-                  )
+  )
 end
 
 JudgeType.find_or_create_by(name: "Street Judge Zone 3", event_class: "Street") do |judge_type|
@@ -93,7 +93,7 @@ JudgeType.find_or_create_by(name: "Street Judge Zone 3", event_class: "Street") 
     val_2_max: 0,
     val_3_max: 0,
     val_4_max: 0
-                )
+  )
 end
 
 JudgeType.find_or_create_by(name: "Performance", event_class: "Artistic Freestyle IUF 2015") do |judge_type|
@@ -106,7 +106,7 @@ JudgeType.find_or_create_by(name: "Performance", event_class: "Artistic Freestyl
     val_2_max: 10,
     val_3_max: 10,
     val_4_max: 10
-                 )
+  )
 end
 
 JudgeType.find_or_create_by(name: "Technical", event_class: "Artistic Freestyle IUF 2015") do |judge_type|
@@ -119,7 +119,7 @@ JudgeType.find_or_create_by(name: "Technical", event_class: "Artistic Freestyle 
     val_2_max: 15,
     val_3_max: 15,
     val_4_max: 0
-                  )
+  )
 end
 
 if WheelSize.count == 0

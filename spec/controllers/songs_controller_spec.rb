@@ -34,9 +34,9 @@ describe SongsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Song" do
-        expect {
+        expect do
           post :create, {song: valid_attributes, registrant_id: @reg.to_param}
-        }.to change(Song, :count).by(1)
+        end.to change(Song, :count).by(1)
       end
 
       it "redirects to the song add_file page" do
@@ -65,9 +65,9 @@ describe SongsController do
   describe "DELETE destroy" do
     it "destroys the requested song" do
       song = FactoryGirl.create(:song, registrant: @reg, user: @reg.user)
-      expect {
+      expect do
         delete :destroy, {id: song.to_param}
-      }.to change(Song, :count).by(-1)
+      end.to change(Song, :count).by(-1)
     end
 
     it "redirects to the songs list" do

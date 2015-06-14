@@ -63,7 +63,7 @@ class LaneAssignmentsController < ApplicationController
       comments_by: @dq_request.comments_by,
       competition: @competition,
       user: current_user
-      )
+    )
 
     respond_to do |format|
       if ir.save

@@ -25,7 +25,7 @@ class UpgradeJudgingTypesToNewRules < ActiveRecord::Migration
         val_2_max: 15,
         val_3_max: 15,
         val_4_max: 0,
-        )
+      )
       jt.save!
     end
   end

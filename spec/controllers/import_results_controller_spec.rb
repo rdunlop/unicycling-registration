@@ -25,9 +25,9 @@ describe ImportResultsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new ImportResult" do
-        expect {
+        expect do
           post :create, {import_result: valid_attributes, user_id: @admin_user.id, competition_id: @competition.id}
-        }.to change(ImportResult, :count).by(1)
+        end.to change(ImportResult, :count).by(1)
       end
 
       it "creates a new ImportResult with start_time" do
@@ -109,9 +109,9 @@ describe ImportResultsController do
     end
     it "destroys the requested import_result" do
       im_result = FactoryGirl.create(:import_result, user: @admin_user, competition: @competition)
-      expect {
+      expect do
         delete :destroy, {id: im_result.to_param}
-      }.to change(ImportResult, :count).by(-1)
+      end.to change(ImportResult, :count).by(-1)
     end
 
     it "redirects to the import_results list" do

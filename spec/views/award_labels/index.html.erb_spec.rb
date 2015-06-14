@@ -13,7 +13,7 @@ describe "award_labels/index" do
                          category: "Adults",
                          details: "Winner",
                          place: 2
-      ),
+                        ),
       FactoryGirl.create(:award_label)])
     @award_label = FactoryGirl.build(:award_label)
   end

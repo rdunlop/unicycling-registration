@@ -66,9 +66,9 @@ describe ConventionSetup::RegistrationPeriodsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new RegistrationPeriod" do
-        expect {
+        expect do
           post :create, {registration_period: valid_attributes}
-        }.to change(RegistrationPeriod, :count).by(1)
+        end.to change(RegistrationPeriod, :count).by(1)
       end
 
       it "assigns a newly created registration_period as @registration_period" do
@@ -151,9 +151,9 @@ describe ConventionSetup::RegistrationPeriodsController do
   describe "DELETE destroy" do
     it "destroys the requested registration_period" do
       registration_period = FactoryGirl.create :registration_period
-      expect {
+      expect do
         delete :destroy, {id: registration_period.to_param}
-      }.to change(RegistrationPeriod, :count).by(-1)
+      end.to change(RegistrationPeriod, :count).by(-1)
     end
 
     it "redirects to the registration_periods list" do

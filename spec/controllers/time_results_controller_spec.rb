@@ -56,9 +56,9 @@ describe TimeResultsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new TimeResult" do
-        expect {
+        expect do
           post :create, {competition_id: @competition.id, time_result: valid_attributes}
-        }.to change(TimeResult, :count).by(1)
+        end.to change(TimeResult, :count).by(1)
       end
 
       it "assigns a newly created time_result as @time_result" do
@@ -141,9 +141,9 @@ describe TimeResultsController do
   describe "DELETE destroy" do
     it "destroys the requested time_result" do
       time_result = FactoryGirl.create(:time_result)
-      expect {
+      expect do
         delete :destroy, {id: time_result.to_param}
-      }.to change(TimeResult, :count).by(-1)
+      end.to change(TimeResult, :count).by(-1)
     end
 
     it "redirects to the event's time_results list" do

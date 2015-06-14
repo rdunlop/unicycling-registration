@@ -22,13 +22,13 @@ describe PaymentAdjustmentsController do
     let(:other_expense_item) { FactoryGirl.create(:expense_item) }
 
     it "can create an exchange of elements" do
-      expect {
+      expect do
         post :exchange_create, {
           note: "exchange shirts",
           registrant_id: registrant.id,
           old_item_id: payment_detail.expense_item.id,
           new_item_id: new_expense_item.id}
-      }.to change(RefundDetail, :count).by(1)
+      end.to change(RefundDetail, :count).by(1)
       r = Refund.last
       expect(r.note).to eq("exchange shirts")
       expect(r.refund_details.first.payment_detail).to eq(payment_detail)
@@ -40,13 +40,13 @@ describe PaymentAdjustmentsController do
     end
 
     it "doesn't create any refunds when there is not a matching paid expense item" do
-      expect {
+      expect do
         post :exchange_create, {
           note: "exchange shirts",
           registrant_id: registrant.id,
           old_item_id: other_expense_item.id,
           new_item_id: new_expense_item.id}
-      }.to_not change(Refund, :count)
+      end.to_not change(Refund, :count)
     end
   end
 end

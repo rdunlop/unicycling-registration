@@ -29,9 +29,9 @@ describe FreestyleJudgePointsCalculator do
 
     describe "the highest scoring competitor" do
       let(:score) { 10 }
-      it {
+      it do
         expect(judged_place).to eq(1)
-      }
+      end
 
       it "has 1 placing point (highest)" do
         expect(judged_points).to eq(1)
@@ -40,9 +40,9 @@ describe FreestyleJudgePointsCalculator do
 
     describe "the tie in the middle" do
       let(:score) { 5 }
-      it {
+      it do
         expect(judged_place).to eq(2)
-      }
+      end
 
       it "splits the placing points" do
         expect(judged_points).to eq(2.5)
