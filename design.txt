@@ -13,6 +13,7 @@ EventClass
 An EventClass has the following effects:
 - Competition: how do "places" get calculated?
 - Competition: what is the printed description of the results ("Time", "Score", etc)
+- Competition: can_calculated_age_group_results? which enables calculating placings per-age-group (ie: before the whole competition data is entered)
 - AwardLabel: do we print the name of the competition along with the Event name, or just the competition name ***** do some other way?
 - Competitor: does a competitor have any results, based on the way that the competition is being calculated
 - Competitor: what is the current score/result for the competitor
