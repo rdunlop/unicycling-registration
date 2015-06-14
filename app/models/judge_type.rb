@@ -65,14 +65,10 @@ class JudgeType < ActiveRecord::Base
 
   def score_calculator
     case event_class
-    when "Freestyle"
-      FreestyleJudgePointsCalculator.new
+    when "Freestyle", "Street", "Flatland"
+      GenericPlacingPointsCalculator.new
     when "Artistic Freestyle IUF 2015"
       Freestyle_2015_JudgePointsCalculator.new
-    when "Street"
-      StreetPointsCalculator.new
-    when "Flatland"
-      FlatlandPointsCalculator.new
     end
   end
 end
