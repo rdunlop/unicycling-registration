@@ -1,8 +1,5 @@
-- Make the StreetComp scoring able to function fast enough
- - Add Caching/etc
 - Combine StreetPointsCalculator, FlatlandPointsCalculator, and FreestyleJUdgePointsCalcluator (they're identical logic)
 - Handle Ineligible results when calculating placing points?
-- Make ExternalResult a :has_one relationship?
 - Extract tie_breaker_adjustment_value out of Competitor into DistanceResultCalculator?
 - Flatland/etc calculation with "ineligible", does it properly give placing points?
 - Extract "best_result_in_thounsands" out of Competitor, into a RaceResultCalculator?

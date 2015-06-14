@@ -14,13 +14,13 @@ class ExternalResultResultCalculator
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result?
-      competitor.external_results.first.try(:details)
+      competitor.external_result.try(:details)
     end
   end
 
   def competitor_comparable_result(competitor)
     if competitor.has_result?
-      competitor.external_results.first.points
+      competitor.external_result.points
     else
       0
     end

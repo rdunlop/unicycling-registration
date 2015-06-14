@@ -37,7 +37,7 @@ class Competitor < ActiveRecord::Base
   has_many :distance_attempts, -> { order "distance DESC, id DESC" }, dependent: :destroy
   has_one :tie_break_adjustment, dependent: :destroy
   has_many :time_results, dependent: :destroy
-  has_many :external_results, dependent: :destroy
+  has_one :external_result, dependent: :destroy
   has_many :results, dependent: :destroy, inverse_of: :competitor
 
   # these are here to allow eager loading/performance optimization
