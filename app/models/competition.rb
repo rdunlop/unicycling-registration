@@ -472,10 +472,6 @@ class Competition < ActiveRecord::Base
     end
   end
 
-  def competitor_total_placing_points(competitor)
-    competitor_placing_points(competitor, nil)
-  end
-
   # SCORE
   # determining the place points for this score (by-judge)
 
