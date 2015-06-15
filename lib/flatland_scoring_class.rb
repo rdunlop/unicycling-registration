@@ -17,6 +17,10 @@ class FlatlandScoringClass < BaseScoringClass
     "freestyle_scores"
   end
 
+  def competitor_dq?(competitor)
+    false
+  end
+
   # Used when trying to destroy all results for a competition
   def all_competitor_results
     nil
@@ -24,6 +28,10 @@ class FlatlandScoringClass < BaseScoringClass
 
   def uses_judges
     true
+  end
+
+  def scoring_path(judge)
+    judge_scores_path(judge)
   end
 
   def include_event_name

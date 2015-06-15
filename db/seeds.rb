@@ -33,14 +33,14 @@ end
 
 JudgeType.find_or_create_by(name: "Flatland Judge Type", event_class: "Flatland") do |judge_type|
   judge_type.assign_attributes(
-    val_1_description: "?",
-    val_2_description: "?",
-    val_3_description: "?",
-    val_4_description: "?",
-    val_1_max: 10,
-    val_2_max: 10,
-    val_3_max: 10,
-    val_4_max: 10
+    val_1_description: "Variety",
+    val_2_description: "Consistency/Flow",
+    val_3_description: "Difficulty",
+    val_4_description: "Last Trick",
+    val_1_max: 30,
+    val_2_max: 30,
+    val_3_max: 30,
+    val_4_max: 9
   )
 end
 

@@ -29,12 +29,10 @@ class FlatlandResultCalculator
     total_last_trick_points(competitor)
   end
 
-  private
-
   # Return the resulting score for this competitor
   # after having eliminated the highest and lowest total score
   # Note: There is only 1 judge-type for flatland
-  def total_points(competitor)
+  def total_points(competitor, _judge_type = nil)
     scores = competitor.scores.map(&:total)
 
     if scores.count <= 2
@@ -48,6 +46,8 @@ class FlatlandResultCalculator
 
     total_points - min - max
   end
+
+  private
 
   # the last_trick points are stored in val_4
   # This also eliminates the high and low Score object (based on its total score)
