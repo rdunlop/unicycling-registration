@@ -29,6 +29,9 @@ describe GenericPlacingPointsCalculator do
       expect(pts(2, 0)).to eq(7)
       expect(pts(2, 1)).to eq(6)
       expect(pts(2, 2)).to eq(5)
+      expect(pts(6, 0)).to eq(1)
+      expect(pts(7, 0)).to eq(0)
+      expect(pts(15, 1)).to eq(0)
     end
   end
 

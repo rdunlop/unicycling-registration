@@ -36,9 +36,14 @@ class GenericPlacingPointsCalculator
     total_points = 0
     current_place = place
     (ties + 1).times do
-      total_points += points_per_rank[current_place - 1]
+      total_points += points_for(current_place)
       current_place += 1
     end
     total_points.to_f / (ties + 1)
+  end
+
+  def points_for(rank)
+    return 0 if rank > points_per_rank.length
+    points_per_rank[rank - 1]
   end
 end
