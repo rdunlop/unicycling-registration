@@ -22,7 +22,7 @@ class StreetScoringClass < BaseScoringClass
   end
 
   def uses_judges
-    true
+    "Street"
   end
 
   def scoring_path(judge)

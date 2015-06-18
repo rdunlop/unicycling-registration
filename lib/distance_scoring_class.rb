@@ -37,7 +37,7 @@ class DistanceScoringClass < BaseScoringClass
   end
 
   def uses_judges
-    true
+    "High/Long"
   end
 
   def scoring_path(judge)

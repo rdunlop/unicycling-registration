@@ -69,7 +69,7 @@ class Competition < ActiveRecord::Base
   validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true }
 
   def self.scoring_classes
-    ["Freestyle", "Artistic Freestyle IUF 2015", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
+    ["Freestyle", "Artistic Freestyle IUF 2015", "High/Long", "Flatland", "Street", "Street Final", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
   end
 
   validates :scoring_class, inclusion: { in: self.scoring_classes, allow_nil: false }
@@ -402,7 +402,7 @@ class Competition < ActiveRecord::Base
     when "Flatland"
       @fsc ||= FlatlandScoringClass.new(self)
 
-    when "Street"
+    when "Street", "Street Final"
       @ssc ||= StreetScoringClass.new(self)
 
     when "High/Long"
@@ -453,12 +453,23 @@ class Competition < ActiveRecord::Base
       @scasc ||= ArtisticResultCalculator_2015.new
     when "Flatland"
       @scsc ||= FlatlandResultCalculator.new
-    when "Street"
+    when "Street", "Street Final"
       @scsc ||= StreetResultCalculator.new
     when "High/Long"
       @scdsc ||= DistanceResultCalculator.new
     when "Overall Champion"
       @ascoc ||= OverallChampionResultCalculator.new(self.combined_competition, self)
+    end
+  end
+
+  def judge_score_calculator
+    case event_class
+    when "Freestyle", "Street", "Flatland"
+      GenericPlacingPointsCalculator.new
+    when "Street Final"
+      GenericPlacingPointsCalculator.new(points_per_rank: [10, 7, 5, 3, 2, 1])
+    when "Artistic Freestyle IUF 2015"
+      Freestyle_2015_JudgePointsCalculator.new
     end
   end
 

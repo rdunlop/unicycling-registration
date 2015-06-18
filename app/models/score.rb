@@ -35,7 +35,7 @@ class Score < ActiveRecord::Base
   validate :values_within_judge_type_bounds
 
   delegate :judge_type, to: :judge
-  delegate :score_calculator, to: :judge_type
+  delegate :judge_score_calculator, to: :competition
 
   def display_score?(score_number)
     judge_type.send("val_#{score_number}_max") > 0
@@ -53,14 +53,14 @@ class Score < ActiveRecord::Base
   # Return the numeric place of this score, compared to the results of the other scores by this judge
   def judged_place
     return 0 if invalid?
-    score_calculator.judged_place(judge.score_totals, total)
+    judge_score_calculator.judged_place(judge.score_totals, total)
   end
 
   # Return this score, after having converted it into placing points
   # which will require comparing it against the scores this judge gave other competitors
   def placing_points
     return 0 if invalid?
-    score_calculator.judged_points(judge.score_totals, total)
+    judge_score_calculator.judged_points(judge.score_totals, total)
   end
 
   private

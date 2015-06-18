@@ -27,7 +27,7 @@ class FlatlandScoringClass < BaseScoringClass
   end
 
   def uses_judges
-    true
+    "Flatland"
   end
 
   def scoring_path(judge)

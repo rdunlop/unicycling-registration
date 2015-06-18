@@ -28,7 +28,7 @@ class ArtisticScoringClass < BaseScoringClass
   end
 
   def uses_judges
-    true
+    "Freestyle"
   end
 
   def scoring_path(judge)

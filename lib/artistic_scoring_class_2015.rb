@@ -28,7 +28,7 @@ class ArtisticScoringClass_2015 < BaseScoringClass
   end
 
   def uses_judges
-    true
+    "Artistic Freestyle IUF 2015"
   end
 
   def scoring_path(judge)
