@@ -1,10 +1,13 @@
 class StreetScoringClass < BaseScoringClass
-  def scoring_description
-    "A varation of the artistic scoring, for use in street comp"
+  attr_accessor :lower_is_better
+
+  def initialize(competition, lower_is_better = true)
+    super(competition)
+    @lower_is_better = lower_is_better
   end
 
-  def lower_is_better
-    true
+  def scoring_description
+    "A varation of the artistic scoring, for use in street comp"
   end
 
   # describes how to label the results of this competition
