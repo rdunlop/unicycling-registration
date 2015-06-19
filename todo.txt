@@ -1,3 +1,4 @@
+- upgrade ruby to 2.2.2
  +source 'https://rails-assets.org' do
 > +  gem 'rails-assets-datetimepicker'
 > +end

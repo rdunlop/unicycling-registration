@@ -3,7 +3,7 @@ module ApplicationHelper
   include LanguageHelper
 
   def log(msg)
-   Rails.logger.debug msg
+    Rails.logger.debug msg
   end
 
   def current_ability
