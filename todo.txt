@@ -3,7 +3,6 @@
 > +  gem 'rails-assets-datetimepicker'
 > +end
 
-- Try .merge instead of .select{ } for db-less sub-selects?
 - Handle Ineligible results when calculating placing points?
 - Flatland/etc calculation with "ineligible", does it properly give placing points?
 - Extract "best_result_in_thounsands" out of Competitor, into a RaceResultCalculator?
@@ -12,19 +11,11 @@
   - Is this even possible, considering different interaction-requirements?
   - Is this a good idea?
 - Make External Result data entry system smarter, so that it doesn't prompt me to enter scores for a competitor which already has scores. (use chosen's greyed-out-select?)
-- Add Final Street scoring system
- - As per rulebook https://unicycling.org/files/iuf-rulebook-2015-prelim.pdf
 - Are the order of age groups important for anything other than Track? Can we clean that up?
 - make the hamburger taller
   - bring in the svg icons
-- Flatland judging should be in UDA
-- Street Prelim rules are 1..100 pts?
-- Street Finals are 10,8,6,3,2,1 pts? - need to set up a new scoring system?
 
 - Disable start/finish data-entry if you choose certain scoring types (like Street, High/Long, freestyle, Flat?)
-
-- Expose Wave Time to the Director management system
-Only allow Wave Times if scoring type is set correctly.
 
 - Add a "RefundS" or "misc" column to make the payments page make sense after processing refunds
 
