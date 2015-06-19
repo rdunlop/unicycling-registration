@@ -3,7 +3,7 @@ class Compete::WaveTimesController < ApplicationController
   before_action :authenticate_user!
 
   load_resource :competition
-  load_and_authorize_resource :wave_time
+  load_and_authorize_resource :wave_time, through: :competition
 
   before_action :set_parent_breadcrumbs
 

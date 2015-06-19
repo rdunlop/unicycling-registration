@@ -14,13 +14,6 @@
       %li= link_to "Volunteers", competition_judges_path(@competition)
       = render "/competitions/data_entry_links", competition: @competition
 
-      -#
-        %li= link_to "Check-In", '#'
-        %li= link_to "DQ & Line-Up Information", '#'
-        %li= link_to "Start Line", '#'
-        %li= link_to "Finish Line", '#'
-        %li= link_to "Track E-Timer Entry", '#'
-
     %h2 Results
     %ul.sideNav__list
       %li= link_to "Monitor", result_competition_path(@competition)

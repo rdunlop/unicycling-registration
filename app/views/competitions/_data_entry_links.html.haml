@@ -25,6 +25,7 @@
       = link_to "Start Lists", competition_sign_ins_path(competition)
       = link_to "(pdf)", competition_sign_ins_path(competition, :format => :pdf)
 
+    %li= link_to "Set Competition Wave Times", competition_wave_times_path(competition)
     %li= link_to "Enter Sign-Ins", edit_competition_sign_ins_path(competition)
     %li= link_to "Import Wave Assignments", competition_wave_assignments_path(competition)
 

@@ -144,6 +144,10 @@ class Ability
       director_and_unlocked(user, time_result.competition)
     end
 
+    can :manage, WaveTime do |wave_time|
+      director_and_unlocked(user, wave_time.competition)
+    end
+
     can [:crud, :copy_judges], Judge do |judge|
       # Only allow creating judges when there are no scores yet entered
       (judge.scores.count == 0) && (director_and_unlocked(user, judge.competition))
