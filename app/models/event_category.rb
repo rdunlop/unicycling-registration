@@ -43,13 +43,11 @@ class EventCategory < ActiveRecord::Base
   end
 
   def signed_up_registrants
-    registrant_event_sign_ups.signed_up.map{|resu| resu.registrant }.select{ |reg| !reg.deleted? }
+    registrant_event_sign_ups.signed_up
   end
 
   def num_signed_up_registrants
-    Rails.cache.fetch("/event_category/#{id}-#{updated_at}/num_signed_up_registrants") do
-      signed_up_registrants.count
-    end
+    signed_up_registrants.count
   end
 
   def age_is_in_range(age)
