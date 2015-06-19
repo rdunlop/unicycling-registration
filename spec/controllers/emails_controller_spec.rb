@@ -18,7 +18,7 @@ describe EmailsController do
     end
 
     it "breaks apart large requests into multiple smaller requests" do
-      50.times do |n|
+      50.times do |_n|
         FactoryGirl.create(:user)
       end
       ActionMailer::Base.deliveries.clear

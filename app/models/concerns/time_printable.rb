@@ -7,7 +7,7 @@ module TimePrintable
       ""
     else
       if thousands % 100 == 0
-        thousands_string = ".#{(thousands / 100).to_s}"
+        thousands_string = ".#{(thousands / 100)}"
       else
         thousands_string = ".#{thousands.to_s.rjust(3, "0")}"
       end

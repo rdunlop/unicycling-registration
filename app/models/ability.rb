@@ -154,16 +154,7 @@ class Ability
     end
   end
 
-  def define_ability_for_logged_in_user(user)
-    alias_action :create, :read, :update, :destroy, to: :crud
-
-    if user.has_role? :super_admin
-      can :access, :rails_admin
-      can :dashboard
-      can :manage, :all
-      return # required in order to allow rails_admin to function
-    end
-
+  def define_convention_admin_roles(user)
     # #################################################
     # Begin new role definitions
     # #################################################
@@ -187,16 +178,24 @@ class Ability
       can [:read, :set_role, :set_password], :permission
       can :manage, :translation
     end
+  end
 
+  def define_music_dj_roles(user)
     if user.has_role? :music_dj
       can :list, :song
       # automatically can download music via S3 links
     end
+  end
+
+  def define_translator_roles(user)
 
     if user.has_role? :translator
       can :manage, :translation
       can :manage, :all_site_translations
     end
+  end
+
+  def define_payment_admin_roles(user)
 
     if user.has_role? :payment_admin
       # Can read _any_ payment
@@ -214,6 +213,10 @@ class Ability
       can :details, ExpenseItem
       can :read, CouponCode
     end
+  end
+
+  def define_event_planner_roles(user)
+
 
     if user.has_role? :event_planner
       can [:summary, :general_volunteers, :specific_volunteers], Event
@@ -223,7 +226,9 @@ class Ability
       can [:read, :update, :destroy, :add_events, :create_artistic], Registrant
       can [:read, :create, :list], Email
     end
+  end
 
+  def define_competition_admin_roles(user)
     if user.has_role? :competition_admin
       can :read, :competition_setup
       can :manage, :director
@@ -235,6 +240,24 @@ class Ability
       can [:crud], CombinedCompetitionEntry
       can [:read, :set_role, :set_password], :permission
     end
+  end
+
+  def define_ability_for_logged_in_user(user)
+    alias_action :create, :read, :update, :destroy, to: :crud
+
+    if user.has_role? :super_admin
+      can :access, :rails_admin
+      can :dashboard
+      can :manage, :all
+      return # required in order to allow rails_admin to function
+    end
+
+    define_convention_admin_roles(user)
+    define_music_dj_roles(user)
+    define_translator_roles(user)
+    define_payment_admin_roles(user)
+    define_event_planner_roles(user)
+    define_competition_admin_roles(user)
 
     # #################################################
     # End new role definitions

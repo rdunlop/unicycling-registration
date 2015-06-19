@@ -407,7 +407,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def with_id_to_s
-    "##{bib_number} - #{to_s}"
+    "##{bib_number} - #{self}"
   end
 
   ###### Expenses ##########
@@ -598,7 +598,7 @@ class Registrant < ActiveRecord::Base
     expense_items.uniq.each do |ei|
       num_ei = expense_items.count(ei)
       if !ei.can_i_add?(num_ei)
-        errors[:base] << "There are not that many #{ei.to_s} available"
+        errors[:base] << "There are not that many #{ei} available"
       end
     end
   end

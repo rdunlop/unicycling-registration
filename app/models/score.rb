@@ -90,7 +90,7 @@ class Score < ActiveRecord::Base
 
   def validate_judge_score(value_sym, max_score)
     if self.send(value_sym) > max_score
-      errors[value_sym] << "#{value_sym.to_s} must be <= #{max_score}"
+      errors[value_sym] << "#{value_sym} must be <= #{max_score}"
     end
   end
 end

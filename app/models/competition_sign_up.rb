@@ -11,7 +11,7 @@ class CompetitionSignUp
     signed_up_registrants = competition.signed_up_registrants
     @signed_up_list = {}
     @not_signed_up_list = {}
-    age_group_entries.each do |description, gender|
+    age_group_entries.each do |description, _gender|
       @signed_up_list[description] = []
       @not_signed_up_list[description] = []
     end

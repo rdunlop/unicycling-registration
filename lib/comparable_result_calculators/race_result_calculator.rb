@@ -32,7 +32,7 @@ class RaceResultCalculator
     end
   end
 
-  def competitor_tie_break_comparable_result(competitor)
+  def competitor_tie_break_comparable_result(_competitor)
     nil
   end
 end

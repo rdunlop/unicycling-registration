@@ -22,7 +22,7 @@ class OverallChampionResultCalculator
   end
 
   # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
+  def competitor_has_result?(_competitor)
     true # always indicate that we have a result, so that all competitors are created.
   end
 
@@ -42,7 +42,7 @@ class OverallChampionResultCalculator
     end
   end
 
-  def competitor_tie_break_comparable_result(competitor)
+  def competitor_tie_break_comparable_result(_competitor)
     nil
   end
 

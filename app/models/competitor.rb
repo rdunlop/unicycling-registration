@@ -86,7 +86,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def to_s_with_id
-    "##{bib_number}-#{to_s}"
+    "##{bib_number}-#{self}"
   end
 
   def first_bib_number
@@ -304,7 +304,7 @@ class Competitor < ActiveRecord::Base
 
     max_matches = different_countries.map{|c| count_of_countries[c] }.max
 
-    countries_at_max_matches = count_of_countries.select{|key, value| value == max_matches }.keys
+    countries_at_max_matches = count_of_countries.select{|_key, value| value == max_matches }.keys
 
     countries_at_max_matches.sort.join(", ") unless countries_at_max_matches.empty?
   end

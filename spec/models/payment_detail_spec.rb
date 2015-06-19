@@ -60,7 +60,7 @@ describe PaymentDetail do
     @ref = FactoryGirl.create(:refund_detail, payment_detail: @pd)
     @pd.reload
     expect(@pd.refunded?).to eq(true)
-    expect(@pd.to_s).to eq("#{@pd.expense_item.to_s} (Refunded)")
+    expect(@pd.to_s).to eq("#{@pd.expense_item} (Refunded)")
   end
 
   it "indicates that it is a refund if it has an associated refund_detail" do

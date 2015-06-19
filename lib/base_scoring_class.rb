@@ -42,11 +42,11 @@ class BaseScoringClass
     false
   end
 
-  def build_result_from_imported(import_result)
+  def build_result_from_imported(_import_result)
     raise NotImplementedError
   end
 
-  def build_import_result_from_raw(raw)
+  def build_import_result_from_raw(_raw)
     raise NotImplementedError
   end
 

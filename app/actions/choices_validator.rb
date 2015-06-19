@@ -55,12 +55,12 @@ class ChoicesValidator
     reg_choice_chosen = reg_choice.present? && reg_choice.has_value?
 
     if event_selected && !valid_with_required_selection(event_choice, reg_choice_chosen)
-      @registrant.errors[:base] << "#{event_choice.to_s} must be specified if #{required_if_event_choice.to_s} is chosen"
+      @registrant.errors[:base] << "#{event_choice} must be specified if #{required_if_event_choice} is chosen"
       return false
     end
 
     if event_selected && !valid_with_optional_selection(event_choice, reg_choice_chosen)
-      @registrant.errors[:base] << "#{event_choice.to_s} must be specified unless #{optional_if_event_choice.to_s} is chosen"
+      @registrant.errors[:base] << "#{event_choice} must be specified unless #{optional_if_event_choice} is chosen"
       return false
     end
 
@@ -70,12 +70,12 @@ class ChoicesValidator
 
     if event_selected && !reg_choice_chosen
       return true if event_choice.cell_type == "boolean"
-      @registrant.errors[:base] << "#{event_choice.to_s} must be specified"
+      @registrant.errors[:base] << "#{event_choice} must be specified"
       reg_choice.errors[:value] = "" unless reg_choice.nil?
       reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
       return false
     elsif !event_selected && reg_choice_chosen
-      @registrant.errors[:base] << "#{event_choice.to_s} cannot be specified if the event isn't chosen"
+      @registrant.errors[:base] << "#{event_choice} cannot be specified if the event isn't chosen"
       reg_choice.errors[:value] = "" unless reg_choice.nil?
       reg_choice.errors[:event_category_id] = "" unless reg_choice.nil?
       return false

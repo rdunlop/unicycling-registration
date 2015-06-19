@@ -9,13 +9,13 @@ ExceptionNotification.configure do |config|
 
   # Adds a condition to decide when an exception must be ignored or not.
   # The ignore_if method can be invoked multiple times to add extra conditions.
-  config.ignore_if do |exception, options|
+  config.ignore_if do |_exception, _options|
     !Rails.application.secrets.error_emails.present?
   end
 
   # if we throw an exception while rendering the template,
   # the exception is wrapped in a ActionView::Template::Error
-  config.ignore_if do |exception, options|
+  config.ignore_if do |exception, _options|
     exception.respond_to?(:original_exception) && exception.original_exception.is_a?(Errors::TenantNotFound)
   end
 

@@ -14,6 +14,6 @@ class ExpenseItemsController < ApplicationController
 
   def set_breadcrumbs
     add_payment_summary_breadcrumb
-    add_breadcrumb "#{@expense_item.to_s} Items"
+    add_breadcrumb "#{@expense_item} Items"
   end
 end

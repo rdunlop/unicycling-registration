@@ -42,7 +42,7 @@ class OverallChampionScoringClass < BaseScoringClass
     false
   end
 
-  def competitor_dq?(competitor)
+  def competitor_dq?(_competitor)
     false
   end
 

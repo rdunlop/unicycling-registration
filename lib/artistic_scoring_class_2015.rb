@@ -18,7 +18,7 @@ class ArtisticScoringClass_2015 < BaseScoringClass
     "freestyle_scores"
   end
 
-  def competitor_dq?(competitor)
+  def competitor_dq?(_competitor)
     false
   end
 

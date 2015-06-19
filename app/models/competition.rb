@@ -335,7 +335,7 @@ class Competition < ActiveRecord::Base
     competitors_with_results.select{|comp| comp.gender == gender}.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
   end
 
-  def ungeared_expert_results_list(gender)
+  def ungeared_expert_results_list(_gender)
     competitors_with_results.select{|r| !r.geared? }.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
   end
 

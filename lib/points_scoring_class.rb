@@ -28,7 +28,7 @@ class PointsScoringClass < BaseScoringClass
     "external_results"
   end
 
-  def competitor_dq?(competitor)
+  def competitor_dq?(_competitor)
     false
   end
 

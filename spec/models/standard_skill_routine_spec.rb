@@ -27,7 +27,7 @@ describe StandardSkillRoutine do
     expect(@routine.valid?).to eq(true)
   end
   it "should not be able to save more than 18 entries per user" do
-    18.times do |i|
+    18.times do |_i|
       skill = FactoryGirl.create(:standard_skill_entry)
       @routine.standard_skill_routine_entries.create(position: 1, standard_skill_entry_id: skill.id)
     end

@@ -56,7 +56,7 @@ class Upload
     results
   end
 
-  def convert_timing_csv_to_hash(arr, time_column_number = nil)
+  def convert_timing_csv_to_hash(arr, _time_column_number = nil)
     results = {}
 
     results[:bib] = arr[@bib_number_column_number].to_i

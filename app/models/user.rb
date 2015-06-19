@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
 
-  def touch_for_role(role)
+  def touch_for_role(_role)
     touch
   end
 
