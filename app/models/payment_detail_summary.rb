@@ -38,9 +38,9 @@ class PaymentDetailSummary
   end
 
   def ==(other)
-    other.count == self.count &&
-      other.payment_id == self.payment_id &&
-      other.expense_item_id == self.expense_item_id &&
-      other.amount == self.amount
+    other.count == count &&
+      other.payment_id == payment_id &&
+      other.expense_item_id == expense_item_id &&
+      other.amount == amount
   end
 end

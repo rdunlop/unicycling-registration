@@ -100,20 +100,20 @@ class ManualPayment
 
   def build_payment
     payment = Payment.new
-    payment.note = self.note
+    payment.note = note
 
     unpaid_details.each do |ud|
       build_payment_detail(payment, ud)
     end
     payment.completed = true
     payment.completed_date = DateTime.now
-    payment.user = self.user
+    payment.user = user
     payment
   end
 
   def save
     return false if invalid?
-    payment = self.build_payment
+    payment = build_payment
     return false if payment.invalid? # how to show when this fails?
 
     self.saved_payment = payment

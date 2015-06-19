@@ -28,7 +28,7 @@ class CompetitionSource < ActiveRecord::Base
   def self.gender_filters
     ["Both", "Male", "Female"]
   end
-  validates :gender_filter, inclusion: { in: self.gender_filters, allow_nil: false }
+  validates :gender_filter, inclusion: { in: gender_filters, allow_nil: false }
   validates :target_competition, presence: true
   validate :source_present
   validate :max_place_with_competition
@@ -42,19 +42,19 @@ class CompetitionSource < ActiveRecord::Base
   end
 
   def source_present
-    if self.event_category.nil? && self.competition.nil?
+    if event_category.nil? && competition.nil?
       errors[:base] << "Must select an Event Category or a Competition"
     end
   end
 
   def max_place_with_competition
-    if self.max_place && self.competition.nil?
+    if max_place && competition.nil?
       errors[:base] << "Must select a Competition when setting max_place"
     end
   end
 
   def to_s
-    target_competition.to_s + " -> " + self.competition + self.event_category
+    target_competition.to_s + " -> " + competition + event_category
   end
 
   # XXX this needs cachnig somehow.

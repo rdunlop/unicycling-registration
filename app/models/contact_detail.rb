@@ -58,10 +58,10 @@ class ContactDetail < ActiveRecord::Base
   end
 
   def country_code
-    if self.country_representing.nil? || self.country_representing.empty?
-      self.country_residence
+    if country_representing.nil? || country_representing.empty?
+      country_residence
     else
-      self.country_representing
+      country_representing
     end
   end
 

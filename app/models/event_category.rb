@@ -31,7 +31,7 @@ class EventCategory < ActiveRecord::Base
   acts_as_restful_list scope: :event
 
   def to_s
-    event.to_s + " - " + self.name
+    event.to_s + " - " + name
   end
 
   def self.with_warnings

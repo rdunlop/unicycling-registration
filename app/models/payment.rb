@@ -52,7 +52,7 @@ class Payment < ActiveRecord::Base
   end
 
   def just_completed?
-    self.completed == true && self.completed_changed?
+    completed == true && self.completed_changed?
   end
 
   def inform_of_coupons
@@ -110,7 +110,7 @@ class Payment < ActiveRecord::Base
       unless rei.nil?
         rei.destroy
       else
-        PaymentMailer.missing_matching_expense_item(self.id).deliver_later
+        PaymentMailer.missing_matching_expense_item(id).deliver_later
       end
     end
   end

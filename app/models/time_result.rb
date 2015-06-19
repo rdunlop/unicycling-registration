@@ -49,9 +49,9 @@ class TimeResult < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.minutes = 0 if self.minutes.nil?
-    self.seconds = 0 if self.seconds.nil?
-    self.thousands = 0 if self.thousands.nil?
+    self.minutes = 0 if minutes.nil?
+    self.seconds = 0 if seconds.nil?
+    self.thousands = 0 if thousands.nil?
   end
 
   def self.active

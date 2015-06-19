@@ -60,7 +60,7 @@ class Competitor < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.status = :active if self.status.nil?
+    self.status = :active if status.nil?
   end
 
   def self.active

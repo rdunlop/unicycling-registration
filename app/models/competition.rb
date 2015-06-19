@@ -65,19 +65,19 @@ class Competition < ActiveRecord::Base
   end
 
   before_validation :clear_data_types_of_strings
-  validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true }
+  validates :start_data_type, :end_data_type, inclusion: { in: data_recording_types, allow_nil: true }
 
   def self.scoring_classes
     ["Freestyle", "Artistic Freestyle IUF 2015", "High/Long", "Flatland", "Street", "Street Final", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
   end
 
-  validates :scoring_class, inclusion: { in: self.scoring_classes, allow_nil: false }
+  validates :scoring_class, inclusion: { in: scoring_classes, allow_nil: false }
 
   def self.num_member_options
     ["One", "Two", "Three or more"]
   end
   before_validation :clear_num_members_per_compeititor_of_strings
-  validates :num_members_per_competitor, inclusion: { in: self.num_member_options, allow_nil: true }
+  validates :num_members_per_competitor, inclusion: { in: num_member_options, allow_nil: true }
 
   validate :automatic_competitor_creation_only_with_one
 
@@ -86,7 +86,7 @@ class Competition < ActiveRecord::Base
   validate :awarded_only_when_published
   validate :award_label_title_checks
   validate :no_competition_sources_when_overall_calculation
-  validates :combined_competition, presence: true, if: Proc.new{ |f| f.scoring_class == "Overall Champion" }
+  validates :combined_competition, presence: true, if: proc{ |f| f.scoring_class == "Overall Champion" }
 
   scope :event_order, -> { includes(:event).order("events.name") }
 
@@ -149,7 +149,7 @@ class Competition < ActiveRecord::Base
 
   # Call this when an update occurs to competition which may affect competitors
   def touch_competitors
-    self.touch
+    touch
     competitors.map(&:touch)
   end
 
@@ -162,7 +162,7 @@ class Competition < ActiveRecord::Base
   end
 
   def to_s
-    self.name
+    name
   end
 
   def start_list?
@@ -459,7 +459,7 @@ class Competition < ActiveRecord::Base
     when "High/Long"
       @scdsc ||= DistanceResultCalculator.new
     when "Overall Champion"
-      @ascoc ||= OverallChampionResultCalculator.new(self.combined_competition, self)
+      @ascoc ||= OverallChampionResultCalculator.new(combined_competition, self)
     end
   end
 

@@ -13,7 +13,7 @@ class DataEntryVolunteer
     attributes.each do |name, value|
       send("#{name}=", value)
     end
-    if self.user_id
+    if user_id
       self.user = User.find(user_id)
     else
       self.user ||= User.new

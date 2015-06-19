@@ -97,17 +97,17 @@ class ManualRefund
 
   def build_refund
     refund = Refund.new
-    refund.note = self.note
-    refund.percentage = self.percentage
+    refund.note = note
+    refund.percentage = percentage
 
-    self.items.each do |pd|
+    items.each do |pd|
       if pd.refund
         detail = refund.refund_details.build()
         detail.payment_detail_id = pd.paid_detail_id
       end
     end
     refund.refund_date = DateTime.now
-    refund.user = self.user
+    refund.user = user
     refund
   end
 end

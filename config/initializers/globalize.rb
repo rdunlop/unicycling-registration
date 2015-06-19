@@ -35,7 +35,7 @@ module Globalize
           # locale not in use after creation
           def init_translations
             I18n.translated_locales.reject{|key| key == :root }.each do |locale|
-              translation = self.translations.find_by_locale locale.to_s
+              translation = translations.find_by_locale locale.to_s
               if translation.nil?
                 translations.build locale: locale
                 save

@@ -7,20 +7,20 @@ class SetRegistrantDefaultWheelSize < ActiveRecord::Migration
   class Registrant < ActiveRecord::Base
     def age
       start_date = EventConfiguration.singleton.start_date
-      if start_date.nil? || self.birthday.nil?
+      if start_date.nil? || birthday.nil?
         99
       else
-        if (self.birthday.month < start_date.month) || (self.birthday.month == start_date.month && self.birthday.day <= start_date.day)
-          start_date.year - self.birthday.year
+        if (birthday.month < start_date.month) || (birthday.month == start_date.month && birthday.day <= start_date.day)
+          start_date.year - birthday.year
         else
-          (start_date.year - 1) - self.birthday.year
+          (start_date.year - 1) - birthday.year
         end
       end
     end
 
     def set_default_wheel_size
-      if self.default_wheel_size.nil?
-        if self.age > 10
+      if default_wheel_size.nil?
+        if age > 10
           self.default_wheel_size = WheelSize.find_by_description("24\" Wheel")
         else
           self.default_wheel_size = WheelSize.find_by_description("20\" Wheel")

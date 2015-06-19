@@ -16,7 +16,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     has_many :payment_details, -> {includes :payment}, dependent: :destroy
 
     def reg_paid?
-      if RegistrationPeriod.paid_for_period(self.competitor, self.paid_expense_items).nil?
+      if RegistrationPeriod.paid_for_period(competitor, paid_expense_items).nil?
         false
       else
         true
@@ -28,7 +28,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     end
 
     def paid_details
-      self.payment_details.completed.clone
+      payment_details.completed.clone
     end
   end
 
@@ -45,11 +45,11 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     belongs_to :noncompetitor_expense_item, class_name: "ExpenseItem"
 
     def last_day
-      self.end_date + 1.day
+      end_date + 1.day
     end
 
     def current_period?(date = Date.today)
-      (self.start_date <= date && date <= last_day)
+      (start_date <= date && date <= last_day)
     end
 
     def self.all_registration_expense_items

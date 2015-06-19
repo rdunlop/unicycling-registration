@@ -81,27 +81,27 @@ class AwardLabel < ActiveRecord::Base
   end
 
   def line_1
-    self.competitor_name
+    competitor_name
   end
 
   def line_2
-    self.competition_name
+    competition_name
   end
 
   def line_3
-    self.team_name
+    team_name
   end
 
   def line_4
-    self.category
+    category
   end
 
   def line_5
-    self.details
+    details
   end
 
   def line_6
-    case self.place
+    case place
     when 1
       "1st Place"
     when 2

@@ -43,7 +43,7 @@ module CachedModel
     end
 
     def cache_key_base
-      "#{self.model_name}/collection"
+      "#{model_name}/collection"
     end
   end
 end

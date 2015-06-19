@@ -1,4 +1,4 @@
-ActionMailer::Base.default from: Proc.new { from_address }
+ActionMailer::Base.default from: proc { from_address }
 
 def from_address
   name = EventConfiguration.singleton.short_name

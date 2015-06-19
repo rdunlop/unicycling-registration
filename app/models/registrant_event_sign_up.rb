@@ -70,21 +70,21 @@ class RegistrantEventSignUp < ActiveRecord::Base
   end
 
   def category_chosen_when_signed_up
-    if self.signed_up && self.event_category.nil?
-      errors[:base] << "Cannot sign up for #{self.event.name} without choosing a category"
+    if signed_up && event_category.nil?
+      errors[:base] << "Cannot sign up for #{event.name} without choosing a category"
     end
   end
 
   def category_in_age_range
-    unless self.event_category.nil? || registrant.nil?
-      if self.signed_up && !(self.event_category.age_is_in_range(registrant.age))
-        errors[:base] << "You must be between #{self.event_category.age_range_start} and #{self.event_category.age_range_end}
-        years old to select #{self.event_category.name} for #{self.event.name} in #{self.event.category}"
+    unless event_category.nil? || registrant.nil?
+      if signed_up && !(event_category.age_is_in_range(registrant.age))
+        errors[:base] << "You must be between #{event_category.age_range_start} and #{event_category.age_range_end}
+        years old to select #{event_category.name} for #{event.name} in #{event.category}"
       end
     end
   end
 
   def to_s
-    self.event_category.to_s
+    event_category.to_s
   end
 end

@@ -128,30 +128,14 @@ Style/Next:
 Style/NumericLiterals:
   MinDigits: 15
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  Enabled: false
-
 # Offense count: 22
 # Configuration parameters: NamePrefix, NamePrefixBlacklist.
 Style/PredicateName:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/Proc:
-  Enabled: false
-
 # Offense count: 8
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/RaiseArgs:
-  Enabled: false
-
-# Offense count: 169
-# Cop supports --auto-correct.
-Style/RedundantSelf:
   Enabled: false
 
 # Offense count: 3
@@ -196,16 +180,6 @@ Style/SpaceAroundOperators:
 Style/SpaceBeforeBlockBraces:
   Enabled: false
 
-# Offense count: 5
-# Cop supports --auto-correct.
-Style/SpaceBeforeComma:
-  Enabled: true
-
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/SpaceBeforeComment:
-  Enabled: true
-
 # Offense count: 204
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
@@ -223,33 +197,16 @@ Style/SpaceInsideBrackets:
 Style/SpaceInsideHashLiteralBraces:
   Enabled: false
 
-# Offense count: 10
-# Cop supports --auto-correct.
-Style/SpaceInsideParens:
-  Enabled: true
-
 # Offense count: 6425
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/StringLiterals:
   Enabled: false
 
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/StringLiteralsInInterpolation:
-  Enabled: false
-
 # Offense count: 47
 # Cop supports --auto-correct.
 # Configuration parameters: IgnoredMethods.
 Style/SymbolProc:
-  Enabled: false
-
-# Offense count: 13
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
   Enabled: false
 
 # Offense count: 6

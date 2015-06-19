@@ -16,7 +16,7 @@ Apartment.configure do |config|
   #
   # config.excluded_models = %w{Tenant}
   #
-  config.excluded_models = %w{ Tenant TenantAlias Tolk::Locale Tolk::Translation Tolk::Phrase }
+  config.excluded_models = %w(Tenant TenantAlias Tolk::Locale Tolk::Translation Tolk::Phrase)
 
   # use postgres schemas?
   config.use_schemas = true

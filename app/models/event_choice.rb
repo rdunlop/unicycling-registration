@@ -30,7 +30,7 @@ class EventChoice < ActiveRecord::Base
     ["boolean", "text", "multiple", "best_time"]
   end
 
-  validates :cell_type, inclusion: {in: self.cell_types }
+  validates :cell_type, inclusion: {in: cell_types }
   validates :optional, inclusion: {in: [true, false] } # because it's a boolean
   acts_as_restful_list scope: :event
 
@@ -43,10 +43,10 @@ class EventChoice < ActiveRecord::Base
   end
 
   def unique_values
-    self.registrant_choices.map{|rc| rc.value}.uniq
+    registrant_choices.map{|rc| rc.value}.uniq
   end
 
   def to_s
-    self.event.to_s + " - " + self.label
+    event.to_s + " - " + label
   end
 end

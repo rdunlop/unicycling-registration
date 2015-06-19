@@ -43,13 +43,13 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   def to_s
     ret = expense_item.to_s
-    ret += " (locked)" if self.locked
+    ret += " (locked)" if locked
     ret
   end
 
   def custom_cost_present
     if !expense_item.nil? && expense_item.has_custom_cost?
-      if self.custom_cost_cents.nil? || self.custom_cost_cents <= 0
+      if custom_cost_cents.nil? || custom_cost_cents <= 0
         errors[:base] << "Must specify a custom cost for this item"
       end
     end

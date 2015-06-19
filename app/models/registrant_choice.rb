@@ -30,13 +30,13 @@ class RegistrantChoice < ActiveRecord::Base
   def has_value?
     case event_choice.cell_type
     when "boolean"
-      return self.value != "0"
+      return value != "0"
     when "multiple"
-      return self.value != ""
+      return value != ""
     when "text"
-      return self.value != ""
+      return value != ""
     when "best_time"
-      return self.value != ""
+      return value != ""
     else
       return false
     end
@@ -45,9 +45,9 @@ class RegistrantChoice < ActiveRecord::Base
   def describe_value
     case event_choice.cell_type
     when "boolean"
-      self.value != "0" ? "yes" : "no"
+      value != "0" ? "yes" : "no"
     else
-      self.value
+      value
     end
   end
 end

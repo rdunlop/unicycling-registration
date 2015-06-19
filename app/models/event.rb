@@ -58,15 +58,15 @@ class Event < ActiveRecord::Base
   before_validation :build_event_category
 
   def build_event_category
-    if self.event_categories.empty?
-      self.event_categories.build name: "All"
+    if event_categories.empty?
+      event_categories.build name: "All"
     end
   end
 
   validate :has_event_category
 
   def has_event_category
-    if self.event_categories.empty?
+    if event_categories.empty?
       errors[:base] << "Must define an event category"
     end
   end

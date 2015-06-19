@@ -106,7 +106,7 @@ class Registrant < ActiveRecord::Base
     ["blank", "base_details", "events", "contact_details", "active"]
   end
   validates :status, presence: true
-  validates :status, inclusion: { in: self.statuses }
+  validates :status, inclusion: { in: statuses }
 
   # Base details
 
@@ -228,11 +228,11 @@ class Registrant < ActiveRecord::Base
   end
 
   def self.select_box_options
-    self.active.competitor.map{ |reg| [reg.with_id_to_s, reg.id] }
+    active.competitor.map{ |reg| [reg.with_id_to_s, reg.id] }
   end
 
   def self.all_select_box_options
-    self.started.map{ |reg| [reg.with_id_to_s, reg.id] }
+    started.map{ |reg| [reg.with_id_to_s, reg.id] }
   end
 
   def build_registration_item(reg_item)
@@ -369,7 +369,7 @@ class Registrant < ActiveRecord::Base
 
   def set_age
     start_date = EventConfiguration.singleton.start_date
-    if start_date.nil? || self.birthday.nil?
+    if start_date.nil? || birthday.nil?
       self.age = 99
     else
       self.age = age_at_event_date(start_date)
@@ -387,13 +387,13 @@ class Registrant < ActiveRecord::Base
   end
 
   def name
-    printed_name = self.full_name
+    printed_name = full_name
     printed_name += " (incomplete)" unless self.validated?
     display_eligibility(printed_name, ineligible)
   end
 
   def full_name
-    self.first_name + " " + self.last_name
+    first_name + " " + last_name
   end
 
   def email
@@ -530,7 +530,7 @@ class Registrant < ActiveRecord::Base
 
     results[:additional] = nil
     event.event_choices.each do |ec|
-      my_val = self.registrant_choices.where({event_choice_id: ec.id}).first
+      my_val = registrant_choices.where({event_choice_id: ec.id}).first
       unless my_val.nil? || !my_val.has_value?
         results[:additional] += " - " unless results[:additional].nil?
         results[:additional] = "" if results[:additional].nil?

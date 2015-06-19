@@ -27,7 +27,7 @@ class Score < ActiveRecord::Base
     [:val_1, :val_2, :val_3, :val_4]
   end
 
-  self.score_fields.each do |sym|
+  score_fields.each do |sym|
     validates sym, presence: true, numericality: {greater_than_or_equal_to: 0}
   end
   before_validation :set_zero_for_non_applicable_scores
@@ -46,7 +46,7 @@ class Score < ActiveRecord::Base
     if self.invalid?
       0
     else
-      self.class.score_fields.inject(0){ |sum, sym| sum + self.send(sym) }
+      self.class.score_fields.inject(0){ |sum, sym| sum + send(sym) }
     end
   end
 
@@ -69,7 +69,7 @@ class Score < ActiveRecord::Base
     if judge && judge_type
       (1..4).each do |score_number|
         if !display_score?(score_number)
-          self.send("val_#{score_number}=", 0)
+          send("val_#{score_number}=", 0)
         end
       end
     end
@@ -85,11 +85,11 @@ class Score < ActiveRecord::Base
   end
 
   def all_values_present
-    self.class.score_fields.all? { |sym| self.send(sym) }
+    self.class.score_fields.all? { |sym| send(sym) }
   end
 
   def validate_judge_score(value_sym, max_score)
-    if self.send(value_sym) > max_score
+    if send(value_sym) > max_score
       errors[value_sym] << "#{value_sym} must be <= #{max_score}"
     end
   end

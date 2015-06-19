@@ -129,7 +129,7 @@ class RaceDataImporter
 
   def add_error(lane)
     error_message = "Missing Lane Assignment for Lane #{lane}"
-    if self.errors.nil?
+    if errors.nil?
       self.errors = error_message
     else
       self.errors += error_message

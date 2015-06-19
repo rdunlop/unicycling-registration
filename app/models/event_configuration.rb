@@ -64,8 +64,8 @@ class EventConfiguration < ActiveRecord::Base
     ["USD", "CAD", "EUR"]
   end
 
-  validates :currency_code, inclusion: { in: self.currency_codes }, allow_nil: true
-  validates :style_name, inclusion: {in: self.style_names.map{|y| y[1]} }
+  validates :currency_code, inclusion: { in: currency_codes }, allow_nil: true
+  validates :style_name, inclusion: {in: style_names.map{|y| y[1]} }
   validates :waiver, inclusion: { in: ["none", "online", "print"] }
 
   validates :usa_membership_config, :standard_skill, inclusion: { in: [true, false] }
@@ -86,7 +86,7 @@ class EventConfiguration < ActiveRecord::Base
     ["disabled", "test", "enabled"]
   end
 
-  validates :paypal_mode, inclusion: { in: self.paypal_modes }
+  validates :paypal_mode, inclusion: { in: paypal_modes }
 
   before_validation :clear_of_blank_strings
 

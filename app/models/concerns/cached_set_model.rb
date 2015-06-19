@@ -36,7 +36,7 @@ module CachedSetModel
   end
 
   def element_value
-    self.send(self.class.cache_set_field)
+    send(self.class.cache_set_field)
   end
 
   def do_touch_set
@@ -62,7 +62,7 @@ module CachedSetModel
     end
 
     def cache_set_key_base(element_value)
-      "#{self.model_name}/collection_subset/#{element_value}"
+      "#{model_name}/collection_subset/#{element_value}"
     end
   end
 end

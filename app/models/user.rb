@@ -197,7 +197,7 @@ class User < ActiveRecord::Base
   end
 
   def has_minor?
-    self.registrants.active.each do |reg|
+    registrants.active.each do |reg|
       if reg.minor?
         return true
       end

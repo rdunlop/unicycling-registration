@@ -188,7 +188,6 @@ class Ability
   end
 
   def define_translator_roles(user)
-
     if user.has_role? :translator
       can :manage, :translation
       can :manage, :all_site_translations
@@ -196,7 +195,6 @@ class Ability
   end
 
   def define_payment_admin_roles(user)
-
     if user.has_role? :payment_admin
       # Can read _any_ payment
       can [:read, :summary], Payment
@@ -216,8 +214,6 @@ class Ability
   end
 
   def define_event_planner_roles(user)
-
-
     if user.has_role? :event_planner
       can [:summary, :general_volunteers, :specific_volunteers], Event
       can :sign_ups, EventCategory
