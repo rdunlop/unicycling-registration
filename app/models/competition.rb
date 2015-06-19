@@ -57,7 +57,6 @@ class Competition < ActiveRecord::Base
 
   accepts_nested_attributes_for :competition_sources, reject_if: :no_source_selected, allow_destroy: true
   accepts_nested_attributes_for :competitors
-  accepts_nested_attributes_for :wave_times, allow_destroy: true
 
   has_many :lane_assignments, dependent: :destroy
 

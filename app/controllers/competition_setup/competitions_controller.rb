@@ -60,8 +60,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
                                         :age_group_type_id, :scoring_class, :has_experts, :award_title_name,
                                         :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,
                                         :penalty_seconds, :automatic_competitor_creation, :combined_competition_id,
-                                        competition_sources_attributes: [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy],
-                                        wave_times_attributes: [:id, :scheduled_time, :wave, :minutes, :seconds, :_destroy])
+                                        competition_sources_attributes: [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy])
   end
 
   def load_competition

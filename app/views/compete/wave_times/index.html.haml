@@ -1,0 +1,23 @@
+%h1 Competition Wave Times
+%p For some competitions, multiple waves of competitors will be competing on the course at the same time, but have started at different times. In order to adjust their recorded time properly, the start-time for each wave is configured here, and that amount of time will be removed from the competitors total time.
+
+%table
+  %thead
+    %tr
+      %th Scheduled Time Description
+      %th Wave #
+      %th Minutes
+      %th Seconds
+  %tbody
+    - @wave_times.each do |wave_time|
+      %tr
+        %td= wave_time.scheduled_time
+        %td= wave_time.wave
+        %td= wave_time.minutes
+        %td= wave_time.seconds
+        %td= link_to "Edit", edit_competition_wave_time_path(@competition, wave_time)
+        %td= link_to "Delete", competition_wave_time_path(@competition, wave_time), method: :delete, data: { confirm: "Are you sure?" }
+
+%h3 New Wave Time
+= render "form"
+

@@ -104,6 +104,8 @@ en:
       registrant:
         wheel_size_id: Used to choose Age Groups when applicable.
           (track, Standard-class events)
+      wave_time:
+        scheduled_time: "E.g. 02:00, 03:00"
     options:
       event_configuration:
         waiver:

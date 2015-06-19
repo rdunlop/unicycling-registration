@@ -1,5 +1,6 @@
 require 'csv'
-class Compete::WavesController < ApplicationController
+class Compete::WaveAssignmentsController < ApplicationController
+  layout "competition_management"
   before_action :authenticate_user!
 
   load_resource :competition

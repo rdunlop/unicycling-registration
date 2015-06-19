@@ -42,8 +42,6 @@
 
   %p Selecting this option will automatically create a competitor whenever a registrant signs up for any source-event.
 
-  = render partial: "competition_heats_form", locals: {f: f}
-
   %p If creating an "Overall" competition for aggregate scoring, choose the scoring class
   = f.input :combined_competition_id, collection: CombinedCompetition.all, include_blank: true
   = link_to "Manage Scoring Classes", combined_competitions_path, target: "_blank"

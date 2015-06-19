@@ -1,0 +1,10 @@
+%fieldset.form__fieldset
+  = simple_form_for([@competition, @wave_time]) do |f|
+    = render partial: "shared/error_messages", object: @wave_time
+
+    = f.input :scheduled_time
+    = f.input :wave
+    = f.input :minutes, input_html: {min: 0}
+    = f.input :seconds, input_html: {min: 0}
+
+    = f.button :submit
