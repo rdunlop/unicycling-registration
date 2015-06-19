@@ -13,4 +13,3 @@ module Placeable
     raise NotImplementedError
   end
 end
-

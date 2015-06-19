@@ -27,4 +27,3 @@ class EventCategoriesController < ApplicationController
     add_breadcrumb "Events Report", summary_events_path
   end
 end
-

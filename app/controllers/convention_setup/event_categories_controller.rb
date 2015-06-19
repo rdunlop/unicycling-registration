@@ -82,4 +82,3 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
     params.require(:event_category).permit(:name, :warning_on_registration_summary, :age_group_type_id, :age_range_start, :age_range_end)
   end
 end
-

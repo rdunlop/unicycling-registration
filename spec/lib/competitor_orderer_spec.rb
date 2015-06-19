@@ -46,4 +46,3 @@ describe CompetitorOrderer do
     end
   end
 end
-

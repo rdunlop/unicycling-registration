@@ -9,4 +9,3 @@ module StatusNilWhenEmpty
     self.status = nil if status == ""
   end
 end
-

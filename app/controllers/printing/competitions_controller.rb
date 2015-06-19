@@ -57,7 +57,7 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def results
-    name = "#{@config.short_name.tr(" ", "_")}_#{@competition.name.tr(" ", "_")}_results"
+    name = "#{@config.short_name.tr(' ', '_')}_#{@competition.name.tr(' ', '_')}_results"
     attachment = true unless params[:attachment].nil?
 
     respond_to do |format|
@@ -76,4 +76,3 @@ class Printing::CompetitionsController < ApplicationController
     add_to_competition_breadcrumb(@competition)
   end
 end
-

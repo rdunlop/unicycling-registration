@@ -277,4 +277,3 @@ class ImportResultsController < ApplicationController
     add_to_competition_breadcrumb(@competition)
   end
 end
-

@@ -107,4 +107,3 @@ describe OrderedResultCalculator do
     end
   end
 end
-

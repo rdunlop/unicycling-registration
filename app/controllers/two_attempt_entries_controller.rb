@@ -129,4 +129,3 @@ class TwoAttemptEntriesController < ApplicationController
     @is_start_time = params[:is_start_times] && params[:is_start_times] == "true"
   end
 end
-
