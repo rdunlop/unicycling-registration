@@ -43,7 +43,7 @@ class EventCategory < ActiveRecord::Base
   end
 
   def signed_up_registrants
-    registrant_event_sign_ups.signed_up
+    registrant_event_sign_ups.signed_up.map(&:registrant)
   end
 
   def num_signed_up_registrants
