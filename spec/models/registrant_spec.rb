@@ -117,7 +117,7 @@ describe Registrant do
 
     it "should be eligible by default" do
       r = Registrant.new
-      expect(r.ineligible).to eq(false)
+      expect(r.ineligible?).to eq(false)
     end
 
     it "should not be a volunteer by default" do

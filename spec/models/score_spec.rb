@@ -78,11 +78,12 @@ describe Score do
     score.val_3 = 3.0
     score.val_4 = 4.0
     expect(score.valid?).to eq(false)
-    expect(score.total).to eq(0)
-    score.competitor_id = 4
+    expect(score.total).to be_nil
+    score.competitor = FactoryGirl.build_stubbed(:event_competitor)
     expect(score.valid?).to eq(false)
     score.judge = @judge
     expect(score.valid?).to eq(true)
+    expect(score.total).to eq(10)
   end
   it "should validate the bounds of the Values" do
     score = Score.new

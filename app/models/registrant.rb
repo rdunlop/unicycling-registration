@@ -389,7 +389,7 @@ class Registrant < ActiveRecord::Base
   def name
     printed_name = full_name
     printed_name += " (incomplete)" unless self.validated?
-    display_eligibility(printed_name, ineligible)
+    display_eligibility(printed_name, ineligible?)
   end
 
   def full_name

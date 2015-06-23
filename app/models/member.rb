@@ -58,5 +58,5 @@ class Member < ActiveRecord::Base
     end
   end
 
-  delegate :club, :state, :country, :ineligible, :gender, :to_s, :external_id, :age, to: :registrant
+  delegate :club, :state, :country, :ineligible?, :gender, :to_s, :external_id, :age, to: :registrant
 end
