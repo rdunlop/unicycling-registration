@@ -21,6 +21,7 @@ PRiorities as per Scott/Robin Discussion:
 - Add specs to ensure that data entry volunteers controller works (ie: is "confirm!" deprecated?)
 - Assign Data Entry roles per Competition for volunteers.
  - Want to be able to track WHO Entered the data. (ie: remove the ImportResults system, and properly manage the data flow.)
+ - Unable to data-entry Multi-Lap Races (import doesn'n ask for number of laps)
 - Live Data Entry for Muni
 - Make Track E-Timer import better
 - High/Long live display

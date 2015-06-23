@@ -44,7 +44,7 @@ An EventClass has the following effects:
   #
   #     #           ExternalResultResCalc BOTH ...but different PointsScoringClass invocations?
   #     "Points" => ["Low to High", "High to Low"],
-  #        start_entry => []
+  #        start_entry => [nil, "Mass Start"] (allows multiple waves for Trials, for example)
   #        end_entry=> ["One Data Per Line", "Externally Ranked (CSV)"]
   #
   #     #          RaceResultCalculator BOTH...but different RaceScoringClass Invokations?

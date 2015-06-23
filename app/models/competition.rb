@@ -165,17 +165,19 @@ class Competition < ActiveRecord::Base
     name
   end
 
+  # should this competition have a start list?
   def start_list?
     uses_lane_assignments? || compete_in_order? || start_data_type == "Mass Start"
   end
 
+  # Public: Is there any data to put on a start list?
   def start_list_present?
     if uses_lane_assignments?
       lane_assignments.any?
     elsif compete_in_order?
       order_finalized?
     elsif start_data_type == "Mass Start"
-      heat_numbers.any?
+      wave_numbers.any?
     else
       false
     end
@@ -188,6 +190,11 @@ class Competition < ActiveRecord::Base
     else
       lane_assignments.map(&:heat).uniq.compact.sort
     end
+  end
+
+  def wave_numbers
+    waves = competitors.map(&:wave).uniq.compact.sort
+    waves.any?
   end
 
   def end_time_to_s

@@ -320,8 +320,6 @@ class Competitor < ActiveRecord::Base
   def heat
     if competition.uses_lane_assignments?
       lane_assignments.first.try(:heat)
-    else
-      read_attribute(:wave)
     end
   end
 
@@ -525,7 +523,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def competition_start_time
-    competition.wave_time_for(heat) || 0
+    competition.wave_time_for(wave) || 0
   end
 
   def better_time(time_1, time_2)

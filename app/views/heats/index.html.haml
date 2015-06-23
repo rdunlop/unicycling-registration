@@ -5,8 +5,7 @@
   %thead
     %tr
       %th Heat
-      - if @competition.uses_lane_assignments?
-        %th Lane
+      %th Lane
       %th.sign_up ID
       %th.sign_up Name
       %th.sign_up Age
@@ -17,8 +16,7 @@
     - @competitors.each do |competitor|
       %tr
         %th= competitor.heat
-        - if @competition.uses_lane_assignments?
-          %th= competitor.lane
+        %th= competitor.lane
         %td= competitor.lowest_member_bib_number
         %td= competitor.to_s
         %td= competitor.age
@@ -26,17 +24,17 @@
         %td= competitor.age_group_entry_description
         %td= competitor.best_time
 %br
-- if @competition.uses_lane_assignments?
-  = link_to "set heats/lanes", new_competition_heat_path(@competition)
-  %br
-  = link_to "delete all lane assignments", destroy_all_competition_heats_path(@competition), method: :delete, data: { confirm: "remove all heat/lane assignments?" }
-  %br
 
-  %h3 Manually Sort Age Groups
-  - @competition.age_group_entries.each do |age_group_entry|
-    = link_to "Manually Sort #{age_group_entry}", set_sort_competition_heats_path(@competition, age_group_entry)
-    %br
-  %hr
+= link_to "set heats/lanes", new_competition_heat_path(@competition)
+%br
+= link_to "delete all lane assignments", destroy_all_competition_heats_path(@competition), method: :delete, data: { confirm: "remove all heat/lane assignments?" }
+%br
+
+%h3 Manually Sort Age Groups
+- @competition.age_group_entries.each do |age_group_entry|
+  = link_to "Manually Sort #{age_group_entry}", set_sort_competition_heats_path(@competition, age_group_entry)
+  %br
+%hr
 
 %br
 = link_to "Back", @competition

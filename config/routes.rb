@@ -467,6 +467,7 @@ Workspace::Application.routes.draw do
         resources :wave_times
       end
 
+      resources :waves, only: [:index]
       resources :heats, only: [:index, :new, :create] do
         collection do
           # Track (LaneAssignments)
