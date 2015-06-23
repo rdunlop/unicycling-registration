@@ -33,7 +33,6 @@ PRiorities as per Scott/Robin Discussion:
 
 
 - Fix breadcrumbs on Competition-management sub-screens
-- upgrade ruby to 2.2.2
  +source 'https://rails-assets.org' do
 > +  gem 'rails-assets-datetimepicker'
 > +end
