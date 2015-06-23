@@ -1,3 +1,38 @@
+- No Judge Types for Group Freestyle? WTF - No Seed Loaded? Why?
+? ask scott/patricia? - Boundary-score calculation judge for freestyle? (major/minor falls counter)
+ - For UNIOEC?
+- Must update the Ineligibility of all registrants before starting competition.
+
+PRiorities as per Scott/Robin Discussion:
+- artistic ineligible dismissed
+- Refunds misc column calc
+- High/Long new Rules about Faults/re-attempts (ie: the Hugo Rules) should be separated
+- 12-attempt High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
+ - Perhaps just use the existing UI, but auto-load the last 12 attepmts of that competitor once you have entered the competitor Id.
+?ask scott? - Country-specific competition/announcement, per competitor/ group?
+- Deal with XXX marks
+
+** Go Live
+
+- Per-Competitor results
+- Overall Competition logic changes (DaveKrack)
+
+- Track day, running-results
+- Add specs to ensure that data entry volunteers controller works (ie: is "confirm!" deprecated?)
+- Assign Data Entry roles per Competition for volunteers.
+ - Want to be able to track WHO Entered the data. (ie: remove the ImportResults system, and properly manage the data flow.)
+- Live Data Entry for Muni
+- Make Track E-Timer import better
+- High/Long live display
+- Live Data Entry for Trials
+
+- Text-Message on new result
+
+- Expert T-Shirt
+-
+
+
+- Fix breadcrumbs on Competition-management sub-screens
 - upgrade ruby to 2.2.2
  +source 'https://rails-assets.org' do
 > +  gem 'rails-assets-datetimepicker'
