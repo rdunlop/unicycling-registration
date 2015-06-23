@@ -33,7 +33,7 @@ class FlatlandResultCalculator
   # after having eliminated the highest and lowest total score
   # Note: There is only 1 judge-type for flatland
   def total_points(competitor, _judge_type = nil)
-    scores = competitor.scores.map(&:total)
+    scores = competitor.scores.map(&:total).compact
 
     if scores.count <= 2
       return 0
@@ -60,7 +60,7 @@ class FlatlandResultCalculator
       return 0
     end
 
-    totals = scores.map(&:total)
+    totals = scores.map(&:total).compact
 
     # choose a 'score' object which is going to be removed
     #  because it's the 'max' and 'min' object(s)

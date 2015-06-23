@@ -43,23 +43,23 @@ class Score < ActiveRecord::Base
 
   # Sum of all entered values for this score.
   def total
-    if self.invalid?
-      0
-    else
-      self.class.score_fields.inject(0){ |sum, sym| sum + send(sym) }
-    end
+    return nil if invalid? || competitor.ineligible?
+
+    self.class.score_fields.inject(0){ |sum, sym| sum + send(sym) }
   end
 
   # Return the numeric place of this score, compared to the results of the other scores by this judge
   def judged_place
-    return 0 if invalid?
+    return nil if invalid? || competitor.ineligible?
+
     judge_score_calculator.judged_place(judge.score_totals, total)
   end
 
   # Return this score, after having converted it into placing points
   # which will require comparing it against the scores this judge gave other competitors
   def placing_points
-    return 0 if invalid?
+    return nil if invalid? || competitor.ineligible?
+
     judge_score_calculator.judged_points(judge.score_totals, total)
   end
 

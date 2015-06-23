@@ -22,14 +22,14 @@ require 'spec_helper'
 
 describe Judge do
   describe "when the judge has scores" do
-    let(:judge) { FactoryGirl.build_stubbed(:judge) }
+    let(:judge) { FactoryGirl.create(:judge) }
     let(:score) {FactoryGirl.create(:score, judge: judge) }
     before(:each) do
       allow(judge).to receive(:scores).and_return([score])
     end
 
     it "cannot destroy the judge" do
-      expect(judge.check_for_scores).to eq(false)
+      expect(judge.destroy).to eq(false)
     end
   end
 end

@@ -32,11 +32,11 @@ describe Score do
     end
 
     it "says that it has a judge_place of 0" do
-      expect(subject.judged_place).to eq(0)
+      expect(subject.judged_place).to be_nil
     end
 
     it "says that it has a judge_points of 0" do
-      expect(subject.placing_points).to eq(0)
+      expect(subject.placing_points).to be_nil
     end
   end
 

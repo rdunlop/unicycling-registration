@@ -51,18 +51,6 @@ class Judge < ActiveRecord::Base
     status == "active"
   end
 
-  # Note, this appears to be duplicated in ability.rb
-  def check_for_scores
-    if scores.count > 0
-      errors[:base] << "cannot delete judge containing a score"
-      return false
-    end
-    if distance_attempts.count > 0
-      errors[:base] << "cannot delete judge containing distance attempts"
-      return false
-    end
-  end
-
   def num_scored_competitors
     if scores.count > 0
       scores.count
@@ -85,12 +73,22 @@ class Judge < ActiveRecord::Base
 
   def score_totals
     Rails.cache.fetch("/judge/#{id}-#{updated_at}/score_totals") do
-      scores.map { |s| s.total }
+      scores.map(&:total).compact
     end
   end
 
-  # retrieve my judged score for the given competitor
-  def get_score(competitor)
-    scores.where(competitor_id: competitor.id).first
+  private
+
+  # Note, this appears to be duplicated in ability.rb
+  def check_for_scores
+    if scores.count > 0
+      errors[:base] << "cannot delete judge containing a score"
+      return false
+    end
+    if distance_attempts.count > 0
+      errors[:base] << "cannot delete judge containing distance attempts"
+      return false
+    end
   end
+
 end
