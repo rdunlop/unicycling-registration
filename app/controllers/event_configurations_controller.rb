@@ -75,6 +75,7 @@ class EventConfigurationsController < ConventionSetupController
 
   def advanced_settings_params
     params.require(:event_configuration).permit(:standard_skill, :standard_skill_closed_date,
+                                                :usa_membership_config,
                                                 :usa_individual_expense_item_id, :usa_family_expense_item_id,
                                                 :italian_requirements,
                                                 :iuf,

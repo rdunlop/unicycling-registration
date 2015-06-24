@@ -618,11 +618,15 @@ class Registrant < ActiveRecord::Base
 
   def paid_individual_usa?
     ind = EventConfiguration.singleton.usa_individual_expense_item
+    return false unless ind.present?
+
     paid_expense_items.include?(ind)
   end
 
   def paid_family_usa?
     fam = EventConfiguration.singleton.usa_family_expense_item
+    return false unless fam.present?
+
     paid_expense_items.include?(fam)
   end
 
