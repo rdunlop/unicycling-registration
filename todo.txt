@@ -38,6 +38,7 @@ PRiorities as per Scott/Robin Discussion:
 > +  gem 'rails-assets-datetimepicker'
 > +end
 
+- If a competition is created with "automatic competitor creation", it should prompt "Should I add all currently configured competitors?" immediately after creating the competition.
 - Handle Ineligible results when calculating placing points?
 - Flatland/etc calculation with "ineligible", does it properly give placing points?
 - Extract "best_result_in_thounsands" out of Competitor, into a RaceResultCalculator?

@@ -214,7 +214,7 @@ class Competitor < ActiveRecord::Base
 
   def name
     comp_name = team_name || registrants_names
-    display_eligibility(comp_name, ineligible)
+    display_eligibility(comp_name, ineligible?)
   end
 
   def registrants_names
@@ -359,14 +359,14 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def ineligible
+  def ineligible?
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
       return true unless active?
 
       if members.empty?
         false
       else
-        eligibles = members.map(&:ineligible)
+        eligibles = members.map(&:ineligible?)
         if eligibles.uniq.count > 1
           true # includes both eligible status AND ineligible status
         else

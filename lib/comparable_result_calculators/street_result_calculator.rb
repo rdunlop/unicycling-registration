@@ -34,7 +34,7 @@ class StreetResultCalculator
     else
       scores = competitor.scores.select{ |score| score.judge_type == judge_type }
     end
-    scores.map(&:placing_points).reduce(:+) || 0
+    scores.map(&:placing_points).compact.reduce(:+) || 0
   end
 
   private

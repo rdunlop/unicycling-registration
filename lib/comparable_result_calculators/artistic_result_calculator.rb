@@ -76,7 +76,7 @@ class ArtisticResultCalculator
     else
       scores = competitor.scores.select {|s| judge_type == s.judge_type }
     end
-    scores.map(&:placing_points)
+    scores.map(&:placing_points).compact
   end
 
   # XXX Should the tie-break have to remove the SAME high/low judges?

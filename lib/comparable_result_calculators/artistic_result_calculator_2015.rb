@@ -44,6 +44,8 @@ class ArtisticResultCalculator_2015
       scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
     end
 
-    (scores.to_a.sum(&:placing_points) / scores.count.to_f).round(2)
+    active_scores = scores.map(&:placing_points).compact
+
+    (active_scores.sum / active_scores.count.to_f).round(2)
   end
 end

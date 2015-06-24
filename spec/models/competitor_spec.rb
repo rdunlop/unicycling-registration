@@ -159,7 +159,7 @@ describe Competitor do
     expect(@comp.bib_number).to eq(reg.external_id.to_s)
   end
   it "should be elgiible" do
-    expect(@comp.ineligible).to eq(false)
+    expect(@comp.ineligible?).to eq(false)
   end
   it "should not set the external name if it is a blank-string" do
     @comp.custom_name = ""
@@ -499,7 +499,7 @@ describe Competitor do
     end
 
     it "should be ineligible itself" do
-      expect(@comp.ineligible).to eq(true)
+      expect(@comp.ineligible?).to eq(true)
     end
   end
 end
