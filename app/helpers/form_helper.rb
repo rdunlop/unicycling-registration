@@ -28,7 +28,7 @@ module FormHelper
   end
 
   def competitor_select_box(form, competition)
-    form.select :competitor_id, competition.competitors.active.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true}, autofocus: true, class: 'chosen-select js--autoFocus'
+    form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true}, autofocus: true, class: 'chosen-select js--autoFocus'
   end
 
   def no_form_competitor_select_box(competition)
