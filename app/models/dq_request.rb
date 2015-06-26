@@ -3,7 +3,7 @@ class DqRequest
   include ActiveModel::Conversion
 
   attr_accessor :bib_number, :heat, :lane, :comments, :comments_by
-  validates_presence_of :bib_number, :heat, :lane, :comments, :comments_by
+  validates :bib_number, :heat, :lane, :comments, :comments_by, presence: true
 
   def initialize(attributes = {})
     attributes.each do |name, value|

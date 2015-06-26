@@ -85,11 +85,6 @@ Rails/Output:
 Rails/TimeZone:
   Enabled: false
 
-# Offense count: 5
-# Configuration parameters: Include.
-Rails/Validation:
-  Enabled: false
-
 # Offense count: 3
 Style/AccessorMethodName:
   Enabled: false
