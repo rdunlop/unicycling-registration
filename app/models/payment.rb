@@ -107,10 +107,10 @@ class Payment < ActiveRecord::Base
         end
       end
 
-      unless rei.nil?
-        rei.destroy
-      else
+      if rei.nil?
         PaymentMailer.missing_matching_expense_item(id).deliver_later
+      else
+        rei.destroy
       end
     end
   end

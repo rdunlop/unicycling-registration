@@ -20,7 +20,7 @@
 FactoryGirl.define do
   factory :standard_skill_entry do
     sequence(:number)
-    sequence(:letter) do |n| 
+    sequence(:letter) do |n|
       x = "a"
       n.times do |_i|
         x = x.next
