@@ -132,7 +132,7 @@ class RegistrationPeriod < ActiveRecord::Base
 
         next if new_item.nil?
 
-        if !reg.set_registration_item_expense(new_item, false)
+        unless reg.set_registration_item_expense(new_item, false)
           missing_regs << reg.bib_number
         end
       end

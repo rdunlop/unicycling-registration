@@ -476,7 +476,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def is_top?(search_gender)
-    return false if !has_result?
+    return false unless has_result?
     return false if search_gender != gender
 
     overall_place.to_i > 0 && overall_place.to_i <= 10

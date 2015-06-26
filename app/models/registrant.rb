@@ -597,7 +597,7 @@ class Registrant < ActiveRecord::Base
     expense_items = registrant_expense_items.map{|rei| rei.new_record? ? rei.expense_item : nil}.reject { |ei| ei.nil? }
     expense_items.uniq.each do |ei|
       num_ei = expense_items.count(ei)
-      if !ei.can_i_add?(num_ei)
+      unless ei.can_i_add?(num_ei)
         errors[:base] << "There are not that many #{ei} available"
       end
     end

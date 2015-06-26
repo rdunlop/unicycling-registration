@@ -68,7 +68,7 @@ class Score < ActiveRecord::Base
   def set_zero_for_non_applicable_scores
     if judge && judge_type
       (1..4).each do |score_number|
-        if !display_score?(score_number)
+        unless display_score?(score_number)
           send("val_#{score_number}=", 0)
         end
       end

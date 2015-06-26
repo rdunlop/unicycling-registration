@@ -59,7 +59,7 @@ class ConventionSetup::RegistrationPeriodsController < ConventionSetupController
   # DELETE /registration_periods/1
   # DELETE /registration_periods/1.json
   def destroy
-    if !@registration_period.destroy
+    unless @registration_period.destroy
       flash[:alert] = "Unable to destroy Registration Period"
     end
 

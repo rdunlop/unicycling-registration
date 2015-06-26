@@ -32,7 +32,7 @@ class ChoicesValidator
       # using .select instead of .where, because we need to validate not-yet-saved data
       reg_choice = get_choice_for_event_choice(event_choice)
 
-      if !valid_event_choice_registrant_choice(event_selected, event_choice, reg_choice)
+      unless valid_event_choice_registrant_choice(event_selected, event_choice, reg_choice)
         mark_event_sign_up_as_error(event)
       end
     end
@@ -93,7 +93,7 @@ class ChoicesValidator
 
       if event_choice_chosen?(required_if_event_choice)
         # the required choice IS selected
-        if !reg_choice_chosen
+        unless reg_choice_chosen
           # the choice isn't selected, and the -required- element is chosen
           return false
         end
@@ -111,7 +111,7 @@ class ChoicesValidator
 
       if !event_choice_chosen?(optional_if_event_choice)
         # the optional choice isn't selected
-        if !reg_choice_chosen
+        unless reg_choice_chosen
           # this option is NOT selected, but the optional ISN'T either
           return false
         end
