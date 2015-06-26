@@ -30,7 +30,7 @@ class StandardSkillEntriesController < ApplicationController
         std = StandardSkillEntry.new
         std.initialize_from_array(row)
         if std.save
-          n = n + 1
+          n += 1
         end
       end
     end

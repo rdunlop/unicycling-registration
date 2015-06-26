@@ -143,10 +143,6 @@ Style/RaiseArgs:
 Style/RegexpLiteral:
   Enabled: false
 
-# Offense count: 6
-Style/SelfAssignment:
-  Enabled: false
-
 # Offense count: 33
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
