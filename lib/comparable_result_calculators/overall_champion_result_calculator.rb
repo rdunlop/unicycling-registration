@@ -215,7 +215,7 @@ class OverallChampionResultCalculator
         places_in_tie_breaker = bib_numbers_with_this_number_of_firsts.map{ |bib_number| place_of_tie_breaker(gender, bib_number) }
         places_in_tie_breaker.uniq.sort.each do |place|
           bib_numbers_with_this_number_of_firsts.each do |bib_number|
-            if place  == place_of_tie_breaker(gender, bib_number)
+            if place == place_of_tie_breaker(gender, bib_number)
               results << [calc_score, bib_number]
             end
           end

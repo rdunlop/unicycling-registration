@@ -16,10 +16,10 @@ describe ConventionSetup::ExpenseGroupsController do
       noncompetitor_free_options: nil,
       competitor_required: false,
       noncompetitor_required: false,
-      "translations_attributes"=>{
-        "1"=>{
-          "locale"=>"en",
-          "group_name"=>"group_en"
+      "translations_attributes" => {
+        "1" => {
+          "locale" => "en",
+          "group_name" => "group_en"
         }}
     }
   end

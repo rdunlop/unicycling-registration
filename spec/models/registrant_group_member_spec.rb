@@ -19,7 +19,7 @@ require 'spec_helper'
 
 describe RegistrantGroupMember do
   before(:each) do
-    @rgm= FactoryGirl.create(:registrant_group_member)
+    @rgm = FactoryGirl.create(:registrant_group_member)
     @rg = @rgm.registrant_group
   end
 

@@ -142,7 +142,7 @@ class ExportController < ApplicationController
     sheet = s.create_worksheet
 
     row = 0
-    headers =["ID", "Name", "Gender", "Age", "Competition", "Place", "Result Type", "Result",  "Details",  "Age Group"]
+    headers = ["ID", "Name", "Gender", "Age", "Competition", "Place", "Result Type", "Result",  "Details",  "Age Group"]
 
     headers.each_with_index do |head, index|
       sheet[0, index] = head

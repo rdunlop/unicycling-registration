@@ -45,7 +45,7 @@ describe Event do
   end
 
   it "can overwrite registrants" do
-    @cf.registrants= "my registrants"
+    @cf.registrants = "my registrants"
     expect(@cf.registrants).to eq("my registrants")
   end
 

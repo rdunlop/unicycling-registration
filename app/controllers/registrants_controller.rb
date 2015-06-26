@@ -58,7 +58,7 @@ class RegistrantsController < ApplicationController
     @city = contact_detail.city
     @state = contact_detail.state
     @zip = contact_detail.zip
-    @country= contact_detail.country_residence
+    @country = contact_detail.country_residence
     @phone = contact_detail.phone
     @mobile = contact_detail.mobile
     @email = contact_detail.email

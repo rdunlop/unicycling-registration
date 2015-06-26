@@ -15,17 +15,17 @@ describe ConventionSetup::EventChoicesController do
       optional: false,
       optional_if_event_choice_id: nil,
       required_if_event_choice_id: nil,
-      "translations_attributes"=>{
-        "1"=>{
-          "id"=>"",
-          "locale"=>"en",
-          "label"=>"label_en",
-          "tooltip"=>"tool_en"
-        }, "2"=>{
-          "id"=>"",
-          "locale"=>"fr",
-          "label"=>"label_fr",
-          "tooltip"=>"tool_fr"}
+      "translations_attributes" => {
+        "1" => {
+          "id" => "",
+          "locale" => "en",
+          "label" => "label_en",
+          "tooltip" => "tool_en"
+        }, "2" => {
+          "id" => "",
+          "locale" => "fr",
+          "label" => "label_fr",
+          "tooltip" => "tool_fr"}
       }
     }
   end
@@ -115,22 +115,22 @@ describe ConventionSetup::EventChoicesController do
     describe "with translations specified for label/tooltip" do
       before(:each) do
         @ec_params = {
-          "cell_type"=>"boolean",
-          "multiple_values"=>"",
-          "translations_attributes"=>{
-            "1"=>{
-              "id"=>"",
-              "locale"=>"en",
-              "label"=>"label_en",
-              "tooltip"=>"tool_en"
-            }, "2"=>{
-              "id"=>"",
-              "locale"=>"fr",
-              "label"=>"label_fr",
-              "tooltip"=>"tool_fr"}
+          "cell_type" => "boolean",
+          "multiple_values" => "",
+          "translations_attributes" => {
+            "1" => {
+              "id" => "",
+              "locale" => "en",
+              "label" => "label_en",
+              "tooltip" => "tool_en"
+            }, "2" => {
+              "id" => "",
+              "locale" => "fr",
+              "label" => "label_fr",
+              "tooltip" => "tool_fr"}
           },
-          "optional"=>"0",
-          "optional_if_event_choice_id"=>"",
+          "optional" => "0",
+          "optional_if_event_choice_id" => "",
         }
       end
 

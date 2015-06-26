@@ -18,7 +18,7 @@ class Admin::ManualPaymentsController < ApplicationController
   end
 
   def create
-    @manual_payment= ManualPayment.new(params[:manual_payment])
+    @manual_payment = ManualPayment.new(params[:manual_payment])
     @manual_payment.user = current_user
 
     if @manual_payment.save

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CompetitionSetup::CompetitionsController do
   before(:each) do
-    @admin_user =FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryGirl.create(:super_admin_user)
     sign_in @admin_user
     @event = FactoryGirl.create(:event)
     @event_category = @event.event_categories.first
