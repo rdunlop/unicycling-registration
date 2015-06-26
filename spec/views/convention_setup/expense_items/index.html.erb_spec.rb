@@ -14,7 +14,7 @@ describe "convention_setup/expense_items/index" do
                                 cost: 31.99,
                                 position: 2,
                                 expense_group: @group2)
-    @expense_items = [ @item1, @item2 ]
+    @expense_items = [@item1, @item2]
     @expense_item = ExpenseItem.new expense_group: @group1
     @expense_group = @group1
   end

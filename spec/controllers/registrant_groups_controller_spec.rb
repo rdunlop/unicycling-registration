@@ -49,7 +49,7 @@ describe RegistrantGroupsController do
       it "creates a new RegistrantGroup and nested member" do
         reg = FactoryGirl.create(:registrant)
         expect do
-          post :create, {registrant_group: { name: "Fun1", registrant_group_members_attributes: [{registrant_id: reg.id } ] }}
+          post :create, {registrant_group: { name: "Fun1", registrant_group_members_attributes: [{registrant_id: reg.id }] }}
         end.to change(RegistrantGroupMember, :count).by(1)
       end
 

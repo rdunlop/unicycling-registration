@@ -83,17 +83,17 @@ class Registrants::BuildController < ApplicationController
   end
 
   def attributes
-    [ :first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
-      :online_waiver_signature, :wheel_size_id, :rules_accepted,
-      volunteer_opportunity_ids: [],
-      registrant_choices_attributes: [:event_choice_id, :value, :id],
-      registrant_event_sign_ups_attributes: [:event_category_id, :signed_up, :event_id, :id],
-      contact_detail_attributes: [:id, :email,
-                                  :birthplace, :italian_fiscal_code,
-                                  :address, :city, :country_residence, :country_representing,
-                                  :mobile, :phone, :state_code, :zip, :club, :club_contact, :usa_member_number,
-                                  :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
-                                  :responsible_adult_name, :responsible_adult_phone]
+    [:first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
+     :online_waiver_signature, :wheel_size_id, :rules_accepted,
+     volunteer_opportunity_ids: [],
+     registrant_choices_attributes: [:event_choice_id, :value, :id],
+     registrant_event_sign_ups_attributes: [:event_category_id, :signed_up, :event_id, :id],
+     contact_detail_attributes: [:id, :email,
+                                 :birthplace, :italian_fiscal_code,
+                                 :address, :city, :country_residence, :country_representing,
+                                 :mobile, :phone, :state_code, :zip, :club, :club_contact, :usa_member_number,
+                                 :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
+                                 :responsible_adult_name, :responsible_adult_phone]
     ]
   end
 
