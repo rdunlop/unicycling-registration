@@ -94,11 +94,10 @@ class User < ActiveRecord::Base
   end
 
   def roles_accessible
-    roles.map(&:name).inject([]) do |array, role|
+    roles.map(&:name).each_with_object([]) do |role, array|
       new_roles = self.class.role_transfer_permissions[role.to_sym]
-      array += new_roles if new_roles.present?
-      array
-    end.uniq
+      array << new_roles if new_roles.present?
+    end.flatten.uniq
   end
 
   def self.role_description(role)

@@ -90,5 +90,4 @@ class Judge < ActiveRecord::Base
       return false
     end
   end
-
 end

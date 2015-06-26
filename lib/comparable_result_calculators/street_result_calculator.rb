@@ -37,5 +37,4 @@ class StreetResultCalculator
     scores.map(&:placing_points).compact.reduce(:+) || 0
   end
 
-  private
 end

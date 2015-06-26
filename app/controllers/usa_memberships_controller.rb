@@ -22,9 +22,9 @@ class UsaMembershipsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to usa_memberships_path }
-      format.js {
+      format.js do
         load_family_registrants
-      }
+      end
     end
   end
 
@@ -93,5 +93,4 @@ class UsaMembershipsController < ApplicationController
       @family_registrants = []
     end
   end
-
 end

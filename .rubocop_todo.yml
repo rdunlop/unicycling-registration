@@ -226,10 +226,6 @@ Style/TrailingWhitespace:
 Style/TrivialAccessors:
   Enabled: false
 
-# Offense count: 2
-Style/UnlessElse:
-  Enabled: false
-
 # Offense count: 49
 # Cop supports --auto-correct.
 # Configuration parameters: WordRegex.

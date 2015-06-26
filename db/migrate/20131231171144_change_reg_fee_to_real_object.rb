@@ -99,12 +99,12 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
         end
 
         # go through every registrant, and create a system entry for that expense item if they haven't paid for registration.
-        unless reg.reg_paid?
+        if reg.reg_paid?
+          puts "Skipping creating REI for reg #{reg.bib_number}"
+        else
           rei = reg.registrant_expense_items.build({expense_item_id: ei.id, system_managed: true})
           puts "creating REI of #{ei.id} for reg: #{reg.bib_number}"
           rei.save!
-        else
-          puts "Skipping creating REI for reg #{reg.bib_number}"
         end
       end
     end
