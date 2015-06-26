@@ -352,7 +352,7 @@ class Competition < ActiveRecord::Base
   end
 
   def get_judge(user)
-    judges.where({user_id: user.id}).first
+    judges.find_by({user_id: user.id})
   end
 
   def has_judge(user)

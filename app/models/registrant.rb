@@ -256,7 +256,7 @@ class Registrant < ActiveRecord::Base
 
   def registration_item
     all_reg_items = RegistrationPeriod.all_registration_expense_items
-    registrant_expense_items.where({system_managed: true, expense_item_id: all_reg_items}).first
+    registrant_expense_items.find_by({system_managed: true, expense_item_id: all_reg_items})
   end
 
   # for use when overriding the default system-managed reg_item
@@ -521,7 +521,7 @@ class Registrant < ActiveRecord::Base
     results = {}
     results[:description] = event.name
 
-    resu = signed_up_events.where({event_id: event.id}).first
+    resu = signed_up_events.find_by({event_id: event.id})
     # only add the Category if there are more than 1
     results[:category] = nil
     if event.event_categories.size > 1
@@ -530,7 +530,7 @@ class Registrant < ActiveRecord::Base
 
     results[:additional] = nil
     event.event_choices.each do |ec|
-      my_val = registrant_choices.where({event_choice_id: ec.id}).first
+      my_val = registrant_choices.find_by({event_choice_id: ec.id})
       unless my_val.nil? || !my_val.has_value?
         results[:additional] += " - " unless results[:additional].nil?
         results[:additional] = "" if results[:additional].nil?

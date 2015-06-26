@@ -30,7 +30,5 @@ class VolunteerChoice < ActiveRecord::Base
     end
   end
 
-  def to_s
-    volunteer_opportunity.to_s
-  end
+  delegate :to_s, to: :volunteer_opportunity
 end

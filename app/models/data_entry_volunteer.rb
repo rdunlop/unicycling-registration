@@ -38,13 +38,9 @@ class DataEntryVolunteer
     true
   end
 
-  def to_param
-    user.to_param
-  end
+  delegate :to_param, to: :user
 
-  def id
-    user.id
-  end
+  delegate :id, to: :user
 
   def persisted?
     false

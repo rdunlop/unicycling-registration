@@ -78,9 +78,7 @@ class TimeResult < ActiveRecord::Base
     entered_at.to_formatted_s(:short) if entered_at
   end
 
-  def event
-    competitor.event
-  end
+  delegate :event, to: :competitor
 
   def full_time
     return "" if disqualified

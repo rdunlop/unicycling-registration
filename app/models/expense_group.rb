@@ -47,7 +47,7 @@ class ExpenseGroup < ActiveRecord::Base
   end
 
   def self.registration_items_group
-    where(registration_items: true).first || create_registration_items_group
+    find_by(registration_items: true) || create_registration_items_group
   end
 
   def self.create_registration_items_group

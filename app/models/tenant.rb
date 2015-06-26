@@ -36,6 +36,6 @@ class Tenant < ActiveRecord::Base
   end
 
   def self.find_by_first_subdomain(hostname)
-    where(subdomain: hostname.split('.')[0]).first
+    find_by(subdomain: hostname.split('.')[0])
   end
 end

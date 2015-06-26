@@ -12,7 +12,7 @@ module CompetitorAutoCreation
       reg = Registrant.find(registrant_id)
 
       # does a competitor exist with this bib_number
-      self.competitor = reg.competitors.where(competition: competition).first
+      self.competitor = reg.competitors.find_by(competition: competition)
 
       if !competitor && EventConfiguration.singleton.can_create_competitors_at_lane_assignment
         # create a competitor if necessary

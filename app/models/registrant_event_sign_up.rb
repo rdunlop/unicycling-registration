@@ -84,7 +84,5 @@ class RegistrantEventSignUp < ActiveRecord::Base
     end
   end
 
-  def to_s
-    event_category.to_s
-  end
+  delegate :to_s, to: :event_category
 end

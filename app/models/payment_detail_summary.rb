@@ -29,9 +29,7 @@ class PaymentDetailSummary
     self.expense_item_id = item.id
   end
 
-  def to_s
-    expense_item.to_s
-  end
+  delegate :to_s, to: :expense_item
 
   def persisted?
     false

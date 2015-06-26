@@ -97,7 +97,7 @@ class RegistrationPeriod < ActiveRecord::Base
   end
 
   def self.current_period
-    where(current_period: true).first
+    find_by(current_period: true)
   end
 
   def self.update_registration_periods
@@ -127,7 +127,7 @@ class RegistrationPeriod < ActiveRecord::Base
     missing_regs = []
 
     unless now_period.nil?
-      Registrant.all.each do |reg|
+      Registrant.all.find_each do |reg|
         new_item = now_period.expense_item_for(reg.competitor)
 
         next if new_item.nil?

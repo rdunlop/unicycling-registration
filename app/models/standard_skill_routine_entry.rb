@@ -22,13 +22,9 @@ class StandardSkillRoutineEntry < ActiveRecord::Base
   validate :no_more_than_12_non_riding_skills
   validate :each_skill_must_be_different_number
 
-  def skill_number_and_letter
-    standard_skill_entry.skill_number_and_letter
-  end
+  delegate :skill_number_and_letter, to: :standard_skill_entry
 
-  def description
-    standard_skill_entry.description
-  end
+  delegate :description, to: :standard_skill_entry
 
   def add_standard_skill_routine_entry(params)
     # keep the position values between 1 and 18

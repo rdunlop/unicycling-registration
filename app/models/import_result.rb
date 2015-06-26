@@ -79,7 +79,7 @@ class ImportResult < ActiveRecord::Base
       matching_competition = matching_registrant.matching_competition_in_event(competition.event)
       if matching_competition
         # another competition with a competitor in the same event exists, use a competitor there
-        competitor = matching_registrant.competitors.where(competition: matching_competition).first
+        competitor = matching_registrant.competitors.find_by(competition: matching_competition)
         raise "error finding matching competitor" if competitor.nil?
         target_competition = matching_competition
       end

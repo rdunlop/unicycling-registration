@@ -120,9 +120,7 @@ class Competitor < ActiveRecord::Base
     registrants.first.registrant_choices.joins(:event_choice).merge(EventChoice.where(cell_type: "best_time", event: event)).first.try(:describe_value)
   end
 
-  def scoring_helper
-    competition.scoring_helper
-  end
+  delegate :scoring_helper, to: :competition
 
   def disqualified
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{Result.cache_key_for_set(id)}dq") do
@@ -204,9 +202,7 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def event
-    competition.event
-  end
+  delegate :event, to: :competition
 
   def member_has_bib_number?(bib_number)
     members.includes(:registrant).where({registrants: {bib_number: bib_number}}).count > 0
@@ -436,7 +432,7 @@ class Competitor < ActiveRecord::Base
 
   def max_successful_distance_attempt
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance_attempt") do
-      distance_attempts.where(fault: false).first
+      distance_attempts.find_by(fault: false)
     end
   end
 
@@ -546,9 +542,7 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def lower_is_better
-    scoring_helper.lower_is_better
-  end
+  delegate :lower_is_better, to: :scoring_helper
 
   private
 
