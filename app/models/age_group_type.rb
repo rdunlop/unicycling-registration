@@ -48,7 +48,7 @@ class AgeGroupType < ActiveRecord::Base
     end
   end
 
-  def as_json(options={})
+  def as_json(options = {})
     options = {
       except: [:id, :updated_at, :created_at],
       methods: [:age_group_entries]

@@ -34,7 +34,7 @@ class AgeGroupEntry < ActiveRecord::Base
   default_scope { order(:position) }
 
   # possibly replace this with override serializable hash (https://github.com/rails/rails/pull/2200)
-  def as_json(options={})
+  def as_json(options = {})
     options ||= {}
     options[:except] = [:id, :age_group_type_id, :created_at, :updated_at, :wheel_size_id]
     options[:methods] = [:wheel_size_name]

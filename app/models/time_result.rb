@@ -62,7 +62,7 @@ class TimeResult < ActiveRecord::Base
     status == "DQ"
   end
 
-  def as_json(options={})
+  def as_json(options = {})
     options = {
       except: [:id, :created_at, :updated_at, :competitor_id],
       methods: [:bib_number]
