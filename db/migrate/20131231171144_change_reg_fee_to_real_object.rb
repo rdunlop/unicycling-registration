@@ -100,10 +100,10 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
 
         # go through every registrant, and create a system entry for that expense item if they haven't paid for registration.
         if reg.reg_paid?
-          puts "Skipping creating REI for reg #{reg.bib_number}"
+          puts "Skipping creating REI for reg #{reg.bib_number}" # rubocop:disable Rails/Output
         else
           rei = reg.registrant_expense_items.build({expense_item_id: ei.id, system_managed: true})
-          puts "creating REI of #{ei.id} for reg: #{reg.bib_number}"
+          puts "creating REI of #{ei.id} for reg: #{reg.bib_number}" # rubocop:disable Rails/Output
           rei.save!
         end
       end
@@ -114,7 +114,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     # remove any registrant_expense_items from the set of registration_fees
     RegistrationPeriod.all_registration_expense_items.each do |ei|
       RegistrantExpenseItem.where({expense_item_id: ei.id}).each do |rei|
-        puts "deleting rei for #{rei.registrant.bib_number}"
+        puts "deleting rei for #{rei.registrant.bib_number}" # rubocop:disable Rails/Output
         rei.destroy
       end
     end

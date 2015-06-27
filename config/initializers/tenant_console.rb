@@ -1,3 +1,4 @@
+# rubocop:disable Rails/Output
 if defined?(Rails::Console)
   def switch_tenant
     puts "Select your tenant:"

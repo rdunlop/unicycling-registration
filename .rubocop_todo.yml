@@ -67,11 +67,6 @@ Rails/Date:
 Rails/HasAndBelongsToMany:
   Enabled: false
 
-# Offense count: 15
-# Configuration parameters: Include.
-Rails/Output:
-  Enabled: false
-
 # Offense count: 22
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Rails/TimeZone:

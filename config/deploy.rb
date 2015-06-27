@@ -33,6 +33,7 @@ namespace :deploy do
 end
 after 'deploy:published', 'deploy:install_translations'
 
+# rubocop:disable Rails/Output
 namespace :translation do
   task :download do
     local_diff = `git status --untracked-files=no --porcelain`

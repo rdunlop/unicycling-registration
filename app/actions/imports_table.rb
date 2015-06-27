@@ -10,9 +10,9 @@ class ImportsTable
     if obj.save
       true
     else
-      puts "Error doing import of #{new_hash}"
+      Rails.logger.debug "Error doing import of #{new_hash}"
       obj.errors.each do |error|
-        puts error
+        Rails.logger.debug error
       end
       false
     end

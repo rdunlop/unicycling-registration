@@ -1,4 +1,5 @@
 # config/unicorn.rb
+# rubocop:disable Rails/Output
 worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 timeout 250
 preload_app true
