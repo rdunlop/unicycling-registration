@@ -2,12 +2,14 @@
   %thead
     %tr
       %th Volunteer Role
+      %th Edit
       %th Delete
 
   %tbody
     - @volunteer_opportunities.each do |vo|
       %tr.item{ data: { item_id: vo.id } }
         %td= vo.description
+        %td= link_to "Edit", [:edit, :convention_setup, vo]
         %td= link_to "Delete", [:convention_setup, vo], method: :delete, data: { confirm: 'Are you sure? This will delete all registrant selections for this volunteer option' }
 
 = link_to "New Volunteer Role", new_convention_setup_volunteer_opportunity_path
