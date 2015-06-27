@@ -51,5 +51,5 @@ end
 
 Rails.application.secrets.domain = "localhost.dev"
 Rails.application.secrets.mail_full_email = "from@example.com"
-Rails.application.secrets.secret_token = "somesecretstringisreallylongenoughtobesecurecheckpassing"
+Rails.application.secrets.secret_key_base = "somesecretstringisreallylongenoughtobesecurecheckpassing"
 Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
