@@ -26,7 +26,7 @@ class DataEntryVolunteer
       user.confirm! unless user.confirmed?
       user.update_attributes!(name: name)
       user.add_role(:data_entry_volunteer)
-    rescue ActiveRecord::RecordInvalid => invalid
+    rescue ActiveRecord::RecordInvalid
       return false
     end
     true

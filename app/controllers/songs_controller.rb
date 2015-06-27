@@ -74,7 +74,6 @@ class SongsController < ApplicationController
   def destroy
     # destroys the song file on S3
     @song.remove_song_file_name!
-    reg = @song.registrant
 
     if @song.uploaded_by_guest?
       return_path = my_songs_user_songs_path(@song.user)

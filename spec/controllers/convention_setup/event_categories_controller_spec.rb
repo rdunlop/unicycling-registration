@@ -28,19 +28,20 @@ describe ConventionSetup::EventCategoriesController do
   end
 
   describe "GET index" do
+    before do
+      EventCategory.create! valid_attributes.merge({event_id: @event.id})
+      get :index, {event_id: @event.id}
+    end
+
     it "assigns all event_categories as @event_categories" do
-      event_category = EventCategory.create! valid_attributes.merge({event_id: @event.id})
-      get :index, {event_id: @event.id}
       expect(assigns(:event_categories)).to eq(@event.event_categories)
     end
+
     it "does not show event choices from other events" do
-      event_category = FactoryGirl.create(:event).event_categories.first
-      get :index, {event_id: @event.id}
       expect(assigns(:event_categories)).to eq(@event.event_categories)
     end
+
     it "assigns a new event_category" do
-      event_category = EventCategory.create! valid_attributes.merge({event_id: @event.id})
-      get :index, {event_id: @event.id}
       expect(assigns(:event_category)).to be_a_new(EventCategory)
     end
   end

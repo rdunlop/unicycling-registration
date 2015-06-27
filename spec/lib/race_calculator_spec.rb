@@ -182,7 +182,7 @@ describe OrderedResultCalculator do
   describe "when calculating multiple scores (bug)" do
     it "has increasing thousands" do
       @all_together = FactoryGirl.create(:age_group_type)
-      entr = FactoryGirl.create(:age_group_entry, age_group_type: @all_together, start_age: 0, end_age: 100, gender: "Male")
+      FactoryGirl.create(:age_group_entry, age_group_type: @all_together, start_age: 0, end_age: 100, gender: "Male")
       @comp = FactoryGirl.create(:timed_competition, age_group_type: @all_together)
       Delorean.jump 2
       tr1 = FactoryGirl.create(:time_result, minutes: 1, seconds: 15, thousands: 935, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
@@ -202,6 +202,7 @@ describe OrderedResultCalculator do
       expect(tr4.reload.competitor.place).to eq(4)
       expect(tr5.reload.competitor.place).to eq(5)
       expect(tr6.reload.competitor.place).to eq(6)
+      expect(tr7.reload.competitor.place).to eq(7)
     end
   end
 end

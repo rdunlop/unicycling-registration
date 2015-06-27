@@ -36,7 +36,7 @@ describe Admin::RegFeesController do
 
     it "cannot be updated if the registrant is already paid" do
       payment = FactoryGirl.create(:payment)
-      pd = FactoryGirl.create(:payment_detail, registrant: @reg, expense_item: @reg.registrant_expense_items.first.expense_item, payment: payment)
+      FactoryGirl.create(:payment_detail, registrant: @reg, expense_item: @reg.registrant_expense_items.first.expense_item, payment: payment)
       payment.completed = true
       payment.save
       @reg.reload

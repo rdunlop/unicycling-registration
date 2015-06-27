@@ -240,7 +240,7 @@ describe Competitor do
       Delorean.jump 2
       @reg3 = FactoryGirl.create(:registrant, birthday: Date.new(1980, 02, 10))
       @comp2 = FactoryGirl.create(:event_competitor)
-      member3 = FactoryGirl.create(:member, competitor: @comp2, registrant: @reg3)
+      FactoryGirl.create(:member, competitor: @comp2, registrant: @reg3)
       @comp2.reload
 
       expect(@comp2.age).to eq(@reg3.age)
@@ -264,7 +264,7 @@ describe Competitor do
     it "should display (mixed) if both genders exist" do
       Delorean.jump 2
       @reg3 = FactoryGirl.create(:registrant, gender: "Female")
-      member3 = FactoryGirl.create(:member, competitor: @comp, registrant: @reg3)
+      FactoryGirl.create(:member, competitor: @comp, registrant: @reg3)
       @comp.reload
 
       expect(@comp.gender).to eq("(mixed)")
@@ -371,19 +371,21 @@ describe Competitor do
 
     it "should indicate double_fault if two attempts at the same distance are found" do
       expect(@comp.double_fault?).to eq(false)
-      da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
+      FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.double_fault?).to eq(false)
+
       Delorean.jump 2
-      da2 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
+      FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
 
       expect(@comp.reload.double_fault?).to eq(true)
     end
+
     it "should NOT indicate double_fault if two consecutive attempts at different distances are found" do
       expect(@comp.double_fault?).to eq(false)
       da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.double_fault?).to eq(false)
       Delorean.jump 2
-      da2 = FactoryGirl.create(:distance_attempt, distance: da1.distance + 1, competitor: @comp, fault: true)
+      FactoryGirl.create(:distance_attempt, distance: da1.distance + 1, competitor: @comp, fault: true)
 
       expect(@comp.reload.double_fault?).to eq(false)
     end

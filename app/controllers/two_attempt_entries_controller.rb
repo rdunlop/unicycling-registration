@@ -39,8 +39,6 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   def destroy
-    user = @two_attempt_entry.user
-    competition = @two_attempt_entry.competition
     @two_attempt_entry.destroy
 
     respond_to do |format|

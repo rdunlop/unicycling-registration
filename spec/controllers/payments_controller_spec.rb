@@ -62,12 +62,12 @@ describe PaymentsController do
         expect(assigns(:payments)).to eq([@payment])
       end
       it "does not include other people's payments" do
-        p2 = FactoryGirl.create(:payment, user: @super_admin)
+        FactoryGirl.create(:payment, user: @super_admin)
         get :index, {user_id: @user.id}
         expect(assigns(:payments)).to eq([@payment])
       end
       it "doesn't list my payments which are not completed" do
-        incomplete_payment = FactoryGirl.create(:payment, completed: false, user: @user)
+        FactoryGirl.create(:payment, completed: false, user: @user)
         get :index, {user_id: @user.id}
         expect(assigns(:payments)).to eq([@payment])
       end

@@ -31,7 +31,7 @@ describe ConventionSetup::EventsController do
   describe "GET index" do
     it "assigns all events as @events" do
       event = FactoryGirl.create(:event, category: @category)
-      event2 = FactoryGirl.create(:event)
+      FactoryGirl.create(:event)
       get :index, {category_id: @category.id}
       expect(assigns(:events)).to eq([event])
       expect(assigns(:event)).to be_a_new(Event)

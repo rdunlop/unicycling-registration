@@ -1,9 +1,6 @@
 # see https://github.com/sosedoff/capistrano-unicorn/blob/master/examples/rails3.rb
 # see https://ariejan.net/2011/09/14/lighting-fast-zero-downtime-deployments-with-git-capistrano-nginx-and-unicorn/
 
-# env
-env = ENV['RAILS_ENV'] || "stage"
-
 # workers
 worker_processes 1
 

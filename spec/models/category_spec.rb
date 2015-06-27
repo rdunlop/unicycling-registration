@@ -53,7 +53,7 @@ describe Category do
 
   it "destroy related events upon destroy" do
     cat = FactoryGirl.create(:category)
-    event1 = FactoryGirl.create(:event, category: cat)
+    FactoryGirl.create(:event, category: cat)
     expect(Event.all.count).to eq(1)
     cat.destroy
     expect(Event.all.count).to eq(0)

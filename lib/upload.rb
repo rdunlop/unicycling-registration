@@ -118,9 +118,9 @@ class Upload
     return arr[@time_column_number] unless @time_column_number.nil?
 
     if arr.count == 11
-      full_time = arr[5]
+      arr[5]
     else
-      full_time = arr[6]
+      arr[6]
     end
   end
 end

@@ -21,14 +21,6 @@ Lint/RescueException:
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
 
-# Offense count: 64
-Lint/UselessAssignment:
-  Enabled: false
-
-# Offense count: 1
-Lint/Void:
-  Enabled: false
-
 # Offense count: 140
 Metrics/AbcSize:
   Max: 78

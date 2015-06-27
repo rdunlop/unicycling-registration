@@ -120,7 +120,7 @@ describe Payment do
 
   it "destroys related payment_details upon destroy" do
     pay = FactoryGirl.create(:payment)
-    pd = FactoryGirl.create(:payment_detail, payment: pay)
+    FactoryGirl.create(:payment_detail, payment: pay)
     pay.reload
     expect(PaymentDetail.all.count).to eq(1)
     pay.destroy
@@ -131,7 +131,7 @@ describe Payment do
     let (:payment) { FactoryGirl.create(:payment, completed: true) }
 
     it "can determine the total received" do
-      pd = FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
+      FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
       payment.reload
       expect(Payment.total_received).to eq(15.33)
     end
@@ -312,7 +312,6 @@ describe Payment do
       @pay.save
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(0)
-      mail = ActionMailer::Base.deliveries.first
     end
   end
 end

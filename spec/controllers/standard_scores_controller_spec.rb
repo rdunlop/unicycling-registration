@@ -33,7 +33,7 @@ describe StandardScoresController do
 
   describe "GET new" do
     it "assigns the associated skills_routines as @skills" do
-      score = FactoryGirl.create(:standard_execution_score, judge: @judge, competitor: @comp)
+      FactoryGirl.create(:standard_execution_score, judge: @judge, competitor: @comp)
       @routine = FactoryGirl.create(:standard_skill_routine, registrant: @comp.registrants.first)
       skill = FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: @routine)
 

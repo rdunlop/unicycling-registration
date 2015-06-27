@@ -9,7 +9,7 @@ describe ChoicesValidator do
     before(:each) do
       @event = FactoryGirl.create(:event)
       @ec = @event.event_categories.first
-      rc = FactoryGirl.create(:registrant_event_sign_up, registrant: @reg, event: @event, event_category: @ec, signed_up: true)
+      FactoryGirl.create(:registrant_event_sign_up, registrant: @reg, event: @event, event_category: @ec, signed_up: true)
     end
     it "can determine whether it has the event" do
       expect(@reg.has_event?(@event)).to eq(true)

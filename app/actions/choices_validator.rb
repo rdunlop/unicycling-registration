@@ -88,9 +88,6 @@ class ChoicesValidator
 
     unless required_if_event_choice.nil?
 
-      required_reg_choice = get_choice_for_event_choice(required_if_event_choice)
-      required_has_value = required_reg_choice.present? && required_reg_choice.has_value?
-
       if event_choice_chosen?(required_if_event_choice)
         # the required choice IS selected
         unless reg_choice_chosen

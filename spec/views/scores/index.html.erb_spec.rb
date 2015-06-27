@@ -34,7 +34,7 @@ describe "scores/index" do
     score.notes = "My Notes"
     score.save!
 
-    score2 = FactoryGirl.create(:score, judge: @judge, competitor: @comp2)
+    FactoryGirl.create(:score, judge: @judge, competitor: @comp2)
 
     assign(:competitors, [@comp1, @comp2])
   end

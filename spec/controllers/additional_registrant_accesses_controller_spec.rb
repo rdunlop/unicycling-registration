@@ -31,7 +31,7 @@ describe AdditionalRegistrantAccessesController do
       expect(assigns(:additional_registrant_accesses)).to eq([ada])
     end
     it "doesn't assign other people's invitations" do
-      ada = FactoryGirl.create(:additional_registrant_access)
+      FactoryGirl.create(:additional_registrant_access)
       get :invitations, {user_id: @user.id}
       expect(assigns(:additional_registrant_accesses)).to eq([])
     end

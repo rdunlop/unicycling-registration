@@ -44,17 +44,19 @@ describe ConventionSetup::EventChoicesController do
 
   describe "GET index" do
     it "assigns all event_choices as @event_choices" do
-      event_choice = EventChoice.create! valid_attributes.merge({event_id: @event.id})
+      EventChoice.create! valid_attributes.merge({event_id: @event.id})
       get :index, {event_id: @event.id}
       expect(assigns(:event_choices)).to eq(@event.event_choices)
     end
+
     it "does not show event choices from other events" do
-      event_choice = FactoryGirl.create(:event_choice)
+      FactoryGirl.create(:event_choice)
       get :index, {event_id: @event.id}
       expect(assigns(:event_choices)).to eq(@event.event_choices)
     end
+
     it "assigns a new event_choice" do
-      event_choice = EventChoice.create! valid_attributes.merge({event_id: @event.id})
+      EventChoice.create! valid_attributes.merge({event_id: @event.id})
       get :index, {event_id: @event.id}
       expect(assigns(:event_choice)).to be_a_new(EventChoice)
     end

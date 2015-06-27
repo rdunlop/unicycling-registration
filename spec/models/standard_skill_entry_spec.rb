@@ -34,7 +34,7 @@ describe StandardSkillEntry do
 
     s = StandardSkillEntry.last
     expect(s.number).to eq(307)
-    s.letter == "n"
+    expect(s.letter).to eq("n")
     expect(s.points).to eq(4.8)
     expect(s.description).to eq('jump mount to seat drag in back, feet holding seat')
   end

@@ -3,7 +3,7 @@ require 'spec_helper'
 def create_competitor(competition, _bib_number, heat, lane)
   reg = FactoryGirl.create(:registrant, bib_number: 101)
   competitor = FactoryGirl.create(:event_competitor, competition: competition)
-  member = FactoryGirl.create(:member, competitor: competitor, registrant: reg)
+  FactoryGirl.create(:member, competitor: competitor, registrant: reg)
   if heat && lane
     FactoryGirl.create(:lane_assignment, competition: competition, competitor: competitor, heat: heat, lane: lane)
   end

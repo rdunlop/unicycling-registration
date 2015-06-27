@@ -21,7 +21,7 @@ describe StandardSkillRoutine do
 
   it "should be able to save an entry" do
     skill = FactoryGirl.create(:standard_skill_entry)
-    entry = @routine.standard_skill_routine_entries.build(
+    @routine.standard_skill_routine_entries.build(
       position: 1,
       standard_skill_entry_id: skill.id)
     expect(@routine.valid?).to eq(true)
@@ -113,7 +113,7 @@ describe StandardSkillRoutine do
   end
 
   it "destroys associated standard_skill_routine_entry upon destroy" do
-    skill = FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: @routine)
+    FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: @routine)
 
     @routine.reload
 

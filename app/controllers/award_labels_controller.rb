@@ -177,6 +177,7 @@ class AwardLabelsController < ApplicationController
     lines += label.line_4 + "\n" if label.line_4.present?
     lines += label.line_5 + "\n" if label.line_5.present?
     lines += "<b>" + label.line_6 + "</b>" + "\n" if label.line_6.present?
+    lines
   end
 
   def initialize_by_skipped_positions

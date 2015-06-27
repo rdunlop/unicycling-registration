@@ -40,7 +40,7 @@ describe RegistrantsController do
   describe "GET index" do
     it "assigns all registrants as @registrants" do
       registrant = FactoryGirl.create(:competitor, user: @user)
-      other_reg = FactoryGirl.create(:registrant)
+      FactoryGirl.create(:registrant) # other user's registrant
       get :index, {user_id: @user.id}
       expect(assigns(:my_registrants)).to eq([registrant])
       expect(assigns(:shared_registrants)).to eq([])
@@ -70,28 +70,26 @@ describe RegistrantsController do
   end
 
   describe "GET waiver" do
+    let(:registrant) { FactoryGirl.create(:competitor, user: @user) }
+    let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 07, 21)) }
+
     it "assigns the requested registrant as @registrant" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
       get :waiver, {id: registrant.to_param}
       expect(response).to be_success
       expect(assigns(:registrant)).to eq(registrant)
     end
 
     it "sets the event-related variables" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
-      c = FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 07, 21))
       allow(Date).to receive(:today).and_return(Date.new(2012, 01, 22))
       get :waiver, {id: registrant.to_param}
 
-      expect(assigns(:event_name)).to eq(c.long_name)
+      expect(assigns(:event_name)).to eq(event_configuration.long_name)
       expect(assigns(:event_start_date)).to eq("Jul 21, 2013")
 
       expect(assigns(:today_date)).to eq("January 22, 2012")
     end
 
     it "sets the contact details" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
-      c = FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 07, 21))
       get :waiver, {id: registrant.to_param}
 
       expect(assigns(:name)).to eq(registrant.to_s)
@@ -99,9 +97,8 @@ describe RegistrantsController do
       expect(assigns(:age)).to eq(registrant.age)
       expect(assigns(:country)).to eq("US")
     end
+
     it "sets the emergency-variables" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
-      c = FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 07, 21))
       get :waiver, {id: registrant.to_param}
 
       expect(assigns(:emergency_name)).to eq(registrant.contact_detail.emergency_name)

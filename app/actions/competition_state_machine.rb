@@ -29,7 +29,7 @@ class CompetitionStateMachine
       competition.touch(:published_at) || raise("Unable to save attributes")
     end
     true
-  rescue Exception => e
+  rescue Exception
     false
   end
 
@@ -39,7 +39,7 @@ class CompetitionStateMachine
       competition.update_attribute(:published_at, nil) || raise("Unable to save attributes")
     end
     true
-  rescue Exception => e
+  rescue Exception
     false
   end
 

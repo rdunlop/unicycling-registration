@@ -283,13 +283,13 @@ class Competition < ActiveRecord::Base
 
   def signed_up_registrants
     @signed_up_registrants ||= competition_sources.inject([]) do |memo, cs|
-      memo += cs.signed_up_registrants
+      memo + cs.signed_up_registrants
     end
   end
 
   def signed_up_competitors
     @signed_up_competitors ||= competition_sources.inject([]) do |memo, cs|
-      memo += cs.signed_up_competitors
+      memo + cs.signed_up_competitors
     end
   end
 

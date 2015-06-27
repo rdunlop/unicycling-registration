@@ -63,7 +63,7 @@ xdescribe Registrants::BuildController do
       expect(assigns(:registrant)).to eq(registrant)
     end
     it "should not load categories for a noncompetitor" do
-      category1 = FactoryGirl.create(:category)
+      FactoryGirl.create(:category)
       registrant = FactoryGirl.create(:noncompetitor, user: @user)
       get :edit, {id: registrant.to_param}
       expect(response).to be_success
@@ -133,7 +133,7 @@ xdescribe Registrants::BuildController do
         expect(assigns(:categories)).to eq([category1])
       end
       it "should not load categories for a noncompetitor" do
-        category1 = FactoryGirl.create(:category)
+        FactoryGirl.create(:category)
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, {registrant: {registrant_type: 'noncompetitor'}}
         expect(assigns(:categories)).to be_nil

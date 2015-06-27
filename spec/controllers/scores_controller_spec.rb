@@ -80,7 +80,6 @@ describe ScoresController do
   describe "POST create On an existing score" do
     describe "with valid params" do
       it "updates the requested score" do
-        score = @signed_in_scores[0]
         # Assuming there are no other scores in the database, this
         # specifies that the Score created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -96,7 +95,6 @@ describe ScoresController do
       end
 
       it "redirects to the score" do
-        score = @signed_in_scores[0]
         post :create, {score: valid_attributes, judge_id: @judge, competitor_id: @comp.id}
         expect(response).to redirect_to(judge_scores_url(@judge))
       end
@@ -112,7 +110,6 @@ describe ScoresController do
       end
 
       it "re-renders the 'new' template" do
-        score = @signed_in_scores[0]
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Score).to receive(:save).and_return(false)
         post :create, {score: {val_1: 1}, judge_id: @judge.id, competitor_id: @comp.id}

@@ -12,7 +12,7 @@ class Email
   attribute :category_id, Integer
 
   attr_accessor :subject, :body
-  validates_presence_of :subject, :body
+  validates :subject, :body, presence: true
 
   def initialize(attributes = {})
     attributes.each do |name, value|
