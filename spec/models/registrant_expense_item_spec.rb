@@ -126,7 +126,7 @@ describe RegistrantExpenseItem do
 
       reg = @rei2.registrant
       reg.reload
-      @rei3 = reg.registrant_expense_items.build({expense_item_id: @ei.id})
+      @rei3 = reg.registrant_expense_items.build(expense_item_id: @ei.id)
       expect(reg.valid?).to eq(false)
     end
   end

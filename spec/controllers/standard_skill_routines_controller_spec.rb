@@ -10,7 +10,7 @@ describe StandardSkillRoutinesController do
   describe "GET show" do
     it "assigns the requested routine as @standard_skill_routine" do
       routine = FactoryGirl.create(:standard_skill_routine, registrant: @registrant)
-      get :show, {id: routine.to_param}
+      get :show, id: routine.to_param
       expect(assigns(:standard_skill_routine)).to eq(routine)
       expect(assigns(:total)).to eq(0)
       expect(assigns(:entry)).to be_a_new(StandardSkillRoutineEntry)
@@ -21,18 +21,18 @@ describe StandardSkillRoutinesController do
     describe "with valid params" do
       it "creates a new routine" do
         expect do
-          post :create, {registrant_id: @registrant.id}
+          post :create, registrant_id: @registrant.id
         end.to change(StandardSkillRoutine, :count).by(1)
       end
 
       it "redirects to the created routine" do
-        post :create, {registrant_id: @registrant.id}
+        post :create, registrant_id: @registrant.id
         expect(response).to redirect_to(StandardSkillRoutine.last)
       end
     end
 
     it "Cannot create a routine for another user" do
-      post :create, {registrant_id: FactoryGirl.create(:registrant).id}
+      post :create, registrant_id: FactoryGirl.create(:registrant).id
       expect(response).to redirect_to(root_path)
     end
 
@@ -42,7 +42,7 @@ describe StandardSkillRoutinesController do
       end
 
       it "cannot create a new routine" do
-        post :create, {registrant_id: @registrant.id}
+        post :create, registrant_id: @registrant.id
         expect(response).to redirect_to(root_path)
       end
     end

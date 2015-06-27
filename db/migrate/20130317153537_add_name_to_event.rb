@@ -11,7 +11,7 @@ class AddNameToEvent < ActiveRecord::Migration
     Event.reset_column_information
     EventChoice.reset_column_information
 
-    EventChoice.where({position: 1}).each do |ec|
+    EventChoice.where(position: 1).each do |ec|
       ev = ec.event
       ev.name = ec.label
       ev.save!

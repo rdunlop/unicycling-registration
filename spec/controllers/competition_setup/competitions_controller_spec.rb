@@ -21,7 +21,7 @@ describe CompetitionSetup::CompetitionsController do
 
   describe "GET new" do
     it "assigns the event as @event" do
-      get :new, {event_id: @event.id}
+      get :new, event_id: @event.id
       expect(assigns(:event)).to eq(@event)
     end
   end
@@ -29,7 +29,7 @@ describe CompetitionSetup::CompetitionsController do
   describe "GET edit" do
     it "assigns the requested competition as @competition" do
       competition = FactoryGirl.create(:competition)
-      get :edit, {id: competition.to_param}
+      get :edit, id: competition.to_param
       expect(assigns(:competition)).to eq(competition)
     end
   end
@@ -38,25 +38,25 @@ describe CompetitionSetup::CompetitionsController do
     describe "with valid params" do
       it "can create a competition" do
         expect do
-          post :create, {event_id: @event.id, competition: valid_attributes}
+          post :create, event_id: @event.id, competition: valid_attributes
         end.to change(Competition, :count).by(1)
       end
       it "can create a Female gender_filter competition" do
         @comp = FactoryGirl.create(:competition)
         expect do
-          post :create, {event_id: @event.id, competition: valid_attributes.merge({competition_sources_attributes: [{competition_id: @comp.id, gender_filter: "Female"}]}) }
+          post :create, event_id: @event.id, competition: valid_attributes.merge(competition_sources_attributes: [{competition_id: @comp.id, gender_filter: "Female"}])
         end.to change(Competition, :count).by(1)
         expect(CompetitionSource.last.gender_filter).to eq("Female")
       end
 
       it "assigns a newly created competition as @competition" do
-        post :create, {event_id: @event.id, competition: valid_attributes}
+        post :create, event_id: @event.id, competition: valid_attributes
         expect(assigns(:competition)).to be_a(Competition)
         expect(assigns(:competition)).to be_persisted
       end
 
       it "redirects to the competition_setup path" do
-        post :create, {event_id: @event.id, competition: valid_attributes}
+        post :create, event_id: @event.id, competition: valid_attributes
         expect(response).to redirect_to(competition_setup_path)
       end
     end
@@ -66,12 +66,12 @@ describe CompetitionSetup::CompetitionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
         allow_any_instance_of(Competition).to receive(:errors).and_return("anything")
-        post :create, {event_id: @event.id, competition: {name: "comp"}}
+        post :create, event_id: @event.id, competition: {name: "comp"}
         expect(response).to render_template("new")
       end
       it "loads the event" do
         allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
-        post :create, {event_id: @event.id, competition: {name: "comp"}}
+        post :create, event_id: @event.id, competition: {name: "comp"}
         expect(assigns(:event)).to eq(@event)
       end
     end
@@ -86,18 +86,18 @@ describe CompetitionSetup::CompetitionsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         expect_any_instance_of(Competition).to receive(:update_attributes).with({})
-        put :update, {id: competition.to_param, competition: {'there' => 'params'}}
+        put :update, id: competition.to_param, competition: {'there' => 'params'}
       end
 
       it "assigns the requested competition as @competition" do
         competition = FactoryGirl.create(:competition)
-        put :update, {id: competition.to_param, competition: valid_attributes}
+        put :update, id: competition.to_param, competition: valid_attributes
         expect(assigns(:competition)).to eq(competition)
       end
 
       it "redirects to the competition" do
         competition = FactoryGirl.create(:competition)
-        put :update, {id: competition.to_param, competition: valid_attributes}
+        put :update, id: competition.to_param, competition: valid_attributes
         expect(response).to redirect_to(competition)
       end
     end
@@ -108,7 +108,7 @@ describe CompetitionSetup::CompetitionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
         allow_any_instance_of(Competition).to receive(:errors).and_return("anything")
-        put :update, {id: competition.to_param, competition: {name: "fake"}}
+        put :update, id: competition.to_param, competition: {name: "fake"}
         expect(assigns(:competition)).to eq(competition)
       end
 
@@ -117,7 +117,7 @@ describe CompetitionSetup::CompetitionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
         allow_any_instance_of(Competition).to receive(:errors).and_return("anything")
-        put :update, {id: competition.to_param, competition: {name: "comp"}}
+        put :update, id: competition.to_param, competition: {name: "comp"}
         expect(response).to render_template("edit")
       end
     end
@@ -127,13 +127,13 @@ describe CompetitionSetup::CompetitionsController do
     it "destroys the requested competition" do
       competition = FactoryGirl.create(:competition, event: @event)
       expect do
-        delete :destroy, {id: competition.to_param}
+        delete :destroy, id: competition.to_param
       end.to change(Competition, :count).by(-1)
     end
 
     it "redirects to the competition_setup_path" do
       competition = FactoryGirl.create(:competition, event: @event)
-      delete :destroy, {id: competition.to_param}
+      delete :destroy, id: competition.to_param
       expect(response).to redirect_to(competition_setup_path)
     end
   end

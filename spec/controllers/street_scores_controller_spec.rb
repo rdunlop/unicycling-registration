@@ -26,7 +26,7 @@ describe StreetScoresController do
 
   describe "GET index" do
     it "assigns all scores as @scores" do
-      get :index, {judge_id: @judge.id}
+      get :index, judge_id: @judge.id
       expect(response).to be_success
     end
     describe "when returning a list of scores" do
@@ -36,7 +36,7 @@ describe StreetScoresController do
       end
 
       it "should return them in descending order of val_1 points" do
-        get :index, {judge_id: @judge.id}
+        get :index, judge_id: @judge.id
         expect(assigns(:street_scores)).to eq([@user_score2, @user_score1])
       end
     end
@@ -46,7 +46,7 @@ describe StreetScoresController do
     describe "with valid competitor_id" do
       it "creates a new Score" do
         expect do
-          post :update_score, {competitor_id: @comp2.id, score: 4, judge_id: @judge.id, format: :js}
+          post :update_score, competitor_id: @comp2.id, score: 4, judge_id: @judge.id, format: :js
         end.to change(Score, :count).by(1)
       end
     end
@@ -58,7 +58,7 @@ describe StreetScoresController do
     end
     it "should allow access to destroy" do
       expect do
-        delete :destroy, {id: @user_score1.to_param, judge_id: @judge.id}
+        delete :destroy, id: @user_score1.to_param, judge_id: @judge.id
       end.to change(Score, :count).by(-1)
     end
   end
@@ -76,11 +76,11 @@ describe StreetScoresController do
       sign_in @auth_user
     end
     it "should deny access to index" do
-      get :index, {judge_id: @judge}
+      get :index, judge_id: @judge
       expect(response).to redirect_to(root_path)
     end
     it "should deny access to destroy" do
-      delete :destroy, {id: @user_score.to_param, judge_id: @judge}
+      delete :destroy, id: @user_score.to_param, judge_id: @judge
       expect(response).to redirect_to(root_path)
     end
   end

@@ -6,3 +6,7 @@ AllCops:
   RunRailsCops: true
 
 inherit_from: .rubocop_todo.yml
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+  Enabled: true

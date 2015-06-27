@@ -15,7 +15,7 @@ describe Admin::ManualRefundsController do
 
     it "can create a payment with refund elements" do
       expect do
-        post :create, {manual_refund: {
+        post :create, manual_refund: {
           note: "Cancelled",
           percentage: 100,
           items_attributes: {
@@ -23,7 +23,7 @@ describe Admin::ManualRefundsController do
               paid_detail_id: @pd.id,
               refund: true
             }}
-        }}
+        }
       end.to change(RefundDetail, :count).by(1)
       r = Refund.last
       expect(r.note).to eq("Cancelled")

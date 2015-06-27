@@ -41,7 +41,7 @@ describe RegistrantsController do
     it "assigns all registrants as @registrants" do
       registrant = FactoryGirl.create(:competitor, user: @user)
       FactoryGirl.create(:registrant) # other user's registrant
-      get :index, {user_id: @user.id}
+      get :index, user_id: @user.id
       expect(assigns(:my_registrants)).to eq([registrant])
       expect(assigns(:shared_registrants)).to eq([])
     end
@@ -53,7 +53,7 @@ describe RegistrantsController do
           FactoryGirl.create(:additional_registrant_access, user: @user, accepted_readonly: true, registrant: @other_reg)
         end
         it "shows the registrant" do
-          get :index, {user_id: @user.id}
+          get :index, user_id: @user.id
           expect(assigns(:shared_registrants)).to eq([@other_reg])
         end
       end
@@ -74,14 +74,14 @@ describe RegistrantsController do
     let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 07, 21)) }
 
     it "assigns the requested registrant as @registrant" do
-      get :waiver, {id: registrant.to_param}
+      get :waiver, id: registrant.to_param
       expect(response).to be_success
       expect(assigns(:registrant)).to eq(registrant)
     end
 
     it "sets the event-related variables" do
       allow(Date).to receive(:today).and_return(Date.new(2012, 01, 22))
-      get :waiver, {id: registrant.to_param}
+      get :waiver, id: registrant.to_param
 
       expect(assigns(:event_name)).to eq(event_configuration.long_name)
       expect(assigns(:event_start_date)).to eq("Jul 21, 2013")
@@ -90,7 +90,7 @@ describe RegistrantsController do
     end
 
     it "sets the contact details" do
-      get :waiver, {id: registrant.to_param}
+      get :waiver, id: registrant.to_param
 
       expect(assigns(:name)).to eq(registrant.to_s)
       expect(assigns(:club)).to eq(registrant.club)
@@ -99,7 +99,7 @@ describe RegistrantsController do
     end
 
     it "sets the emergency-variables" do
-      get :waiver, {id: registrant.to_param}
+      get :waiver, id: registrant.to_param
 
       expect(assigns(:emergency_name)).to eq(registrant.contact_detail.emergency_name)
       expect(assigns(:emergency_primary_phone)).to eq(registrant.contact_detail.emergency_primary_phone)
@@ -110,14 +110,14 @@ describe RegistrantsController do
   describe "GET show" do
     it "assigns the requested registrant as @registrant" do
       registrant = FactoryGirl.create(:competitor, user: @user)
-      get :show, {id: registrant.to_param}
+      get :show, id: registrant.to_param
       expect(assigns(:registrant)).to eq(registrant)
     end
 
     it "cannot read another user's registrant" do
       registrant = FactoryGirl.create(:competitor, user: @user)
       sign_in FactoryGirl.create(:user)
-      get :show, {id: registrant.to_param}
+      get :show, id: registrant.to_param
       expect(response).to redirect_to(root_path)
     end
     describe "as an admin" do
@@ -126,7 +126,7 @@ describe RegistrantsController do
       end
       it "Can read other users registrant" do
         registrant = FactoryGirl.create(:competitor, user: @user)
-        get :show, {id: registrant.to_param}
+        get :show, id: registrant.to_param
         expect(assigns(:registrant)).to eq(registrant)
       end
     end
@@ -139,20 +139,20 @@ describe RegistrantsController do
     it "destroys the requested registrant" do
       registrant = FactoryGirl.create(:competitor, user: @user)
       expect do
-        delete :destroy, {id: registrant.to_param}
+        delete :destroy, id: registrant.to_param
       end.to change(Registrant.active, :count).by(-1)
     end
 
     it "sets the registrant as 'deleted'" do
       registrant = FactoryGirl.create(:competitor, user: @user)
-      delete :destroy, {id: registrant.to_param}
+      delete :destroy, id: registrant.to_param
       registrant.reload
       expect(registrant.deleted).to eq(true)
     end
 
     it "redirects to the registrants list" do
       registrant = FactoryGirl.create(:competitor, user: @user)
-      delete :destroy, {id: registrant.to_param}
+      delete :destroy, id: registrant.to_param
       expect(response).to redirect_to(root_path)
     end
 
@@ -162,7 +162,7 @@ describe RegistrantsController do
       end
       it "cannot destroy another user's registrant" do
         registrant = FactoryGirl.create(:competitor)
-        delete :destroy, {id: registrant.to_param}
+        delete :destroy, id: registrant.to_param
         expect(response).to redirect_to(root_path)
       end
     end

@@ -4,7 +4,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     belongs_to :expense_item
     has_one :refund_detail
 
-    scope :completed, -> { includes(:payment).includes(:refund_detail).where(payments: {completed: true}).where({refund_details: {payment_detail_id: nil}}) }
+    scope :completed, -> { includes(:payment).includes(:refund_detail).where(payments: {completed: true}).where(refund_details: {payment_detail_id: nil}) }
   end
 
   class Payment < ActiveRecord::Base
@@ -102,7 +102,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
         if reg.reg_paid?
           puts "Skipping creating REI for reg #{reg.bib_number}" # rubocop:disable Rails/Output
         else
-          rei = reg.registrant_expense_items.build({expense_item_id: ei.id, system_managed: true})
+          rei = reg.registrant_expense_items.build(expense_item_id: ei.id, system_managed: true)
           puts "creating REI of #{ei.id} for reg: #{reg.bib_number}" # rubocop:disable Rails/Output
           rei.save!
         end
@@ -113,7 +113,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
   def down
     # remove any registrant_expense_items from the set of registration_fees
     RegistrationPeriod.all_registration_expense_items.each do |ei|
-      RegistrantExpenseItem.where({expense_item_id: ei.id}).each do |rei|
+      RegistrantExpenseItem.where(expense_item_id: ei.id).each do |rei|
         puts "deleting rei for #{rei.registrant.bib_number}" # rubocop:disable Rails/Output
         rei.destroy
       end

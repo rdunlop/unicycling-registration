@@ -33,7 +33,7 @@ describe PaypalPaymentsController do
       end
 
       it "is OK even when incomplete" do
-        post :notification, {payment_status: "Incomplete"}
+        post :notification, payment_status: "Incomplete"
         expect(response).to be_success
       end
 
@@ -94,21 +94,21 @@ describe PaypalPaymentsController do
         end
       end
       it "doesn't set the payment if the wrong paypal account is specified" do
-        post :notification, {receiver_email: "bob@bob.com", payment_status: "Completed", invoice: @payment.invoice_id}
+        post :notification, receiver_email: "bob@bob.com", payment_status: "Completed", invoice: @payment.invoice_id
         expect(response).to be_success
         @payment.reload
         expect(@payment.completed).to eq(false)
       end
       it "should send an e-mail to notify of payment receipt" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {mc_gross: "20.00", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id}
+        post :notification, mc_gross: "20.00", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id
         expect(response).to be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1) # one for success
       end
       it "should send an e-mail to notify of payment error when mc_gross is empty" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {mc_gross: "", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id}
+        post :notification, mc_gross: "", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id
         expect(response).to be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(2) # one for success, one for the error
@@ -116,7 +116,7 @@ describe PaypalPaymentsController do
 
       it "should send an IPN notification message if the total amount doesn't match the payment total" do
         ActionMailer::Base.deliveries.clear
-        post :notification, {mc_gross: @payment.total_amount - 1, receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id}
+        post :notification, mc_gross: @payment.total_amount - 1, receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id
         expect(response).to be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(2) # one for success, one for the error (payment different)
@@ -125,7 +125,7 @@ describe PaypalPaymentsController do
 
     describe "when directed to the payment_success page" do
       it "can get there without being logged in" do
-        get :success, {}
+        get :success
         expect(response).to be_success
       end
     end

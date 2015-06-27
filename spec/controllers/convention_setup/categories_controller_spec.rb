@@ -39,7 +39,7 @@ describe ConventionSetup::CategoriesController do
   describe "GET edit" do
     it "assigns the requested category as @category" do
       category = Category.create! valid_attributes
-      get :edit, {id: category.to_param}
+      get :edit, id: category.to_param
       expect(assigns(:category)).to eq(category)
     end
   end
@@ -48,18 +48,18 @@ describe ConventionSetup::CategoriesController do
     describe "with valid params" do
       it "creates a new Category" do
         expect do
-          post :create, {category: valid_attributes}
+          post :create, category: valid_attributes
         end.to change(Category, :count).by(1)
       end
 
       it "assigns a newly created category as @category" do
-        post :create, {category: valid_attributes}
+        post :create, category: valid_attributes
         expect(assigns(:category)).to be_a(Category)
         expect(assigns(:category)).to be_persisted
       end
 
       it "redirects to the created category" do
-        post :create, {category: valid_attributes}
+        post :create, category: valid_attributes
         expect(response).to redirect_to(convention_setup_categories_path)
       end
     end
@@ -69,7 +69,7 @@ describe ConventionSetup::CategoriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         category = Category.create! valid_attributes
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-        post :create, {category: {name: "Hi"}}
+        post :create, category: {name: "Hi"}
         expect(assigns(:category)).to be_a_new(Category)
         expect(assigns(:categories)).to eq([category])
       end
@@ -77,7 +77,7 @@ describe ConventionSetup::CategoriesController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-        post :create, {category: {name: "Hi"}}
+        post :create, category: {name: "Hi"}
         expect(response).to render_template("index")
       end
     end
@@ -92,18 +92,18 @@ describe ConventionSetup::CategoriesController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         expect_any_instance_of(Category).to receive(:update_attributes).with({})
-        put :update, {id: category.to_param, category: {'these' => 'params'}}
+        put :update, id: category.to_param, category: {'these' => 'params'}
       end
 
       it "assigns the requested category as @category" do
         category = Category.create! valid_attributes
-        put :update, {id: category.to_param, category: valid_attributes}
+        put :update, id: category.to_param, category: valid_attributes
         expect(assigns(:category)).to eq(category)
       end
 
       it "redirects to the category" do
         category = Category.create! valid_attributes
-        put :update, {id: category.to_param, category: valid_attributes}
+        put :update, id: category.to_param, category: valid_attributes
         expect(response).to redirect_to(convention_setup_categories_path)
       end
     end
@@ -113,7 +113,7 @@ describe ConventionSetup::CategoriesController do
         category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-        put :update, {id: category.to_param, category: {name: 'fake'}}
+        put :update, id: category.to_param, category: {name: 'fake'}
         expect(assigns(:category)).to eq(category)
       end
 
@@ -121,7 +121,7 @@ describe ConventionSetup::CategoriesController do
         category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-        put :update, {id: category.to_param, category: {name: "Hi"}}
+        put :update, id: category.to_param, category: {name: "Hi"}
         expect(response).to render_template("edit")
       end
     end
@@ -131,13 +131,13 @@ describe ConventionSetup::CategoriesController do
     it "destroys the requested category" do
       category = Category.create! valid_attributes
       expect do
-        delete :destroy, {id: category.to_param}
+        delete :destroy, id: category.to_param
       end.to change(Category, :count).by(-1)
     end
 
     it "redirects to the categories list" do
       category = Category.create! valid_attributes
-      delete :destroy, {id: category.to_param}
+      delete :destroy, id: category.to_param
       expect(response).to redirect_to(convention_setup_categories_url)
     end
   end

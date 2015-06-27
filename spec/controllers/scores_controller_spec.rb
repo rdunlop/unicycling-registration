@@ -46,7 +46,7 @@ describe ScoresController do
   describe "GET new" do
     it "assigns the requested score as @score" do
       score = @signed_in_scores[0]
-      get :new, {judge_id: @judge.id, competitor_id: @comp.id}
+      get :new, judge_id: @judge.id, competitor_id: @comp.id
       expect(assigns(:score)).to eq(score)
     end
   end
@@ -59,7 +59,7 @@ describe ScoresController do
     describe "with valid params" do
       it "creates a new Score" do
         expect do
-          post :create, {score: valid_attributes, judge_id: @other_judge.id, competitor_id: @comp.id}
+          post :create, score: valid_attributes, judge_id: @other_judge.id, competitor_id: @comp.id
         end.to change(Score, :count).by(1)
       end
     end
@@ -72,7 +72,7 @@ describe ScoresController do
     end
     it "should not be allowed to create scores" do
       expect do
-        post :create, {score: valid_attributes, judge_id: @other_judge.id, competitor_id: @comp.id}
+        post :create, score: valid_attributes, judge_id: @other_judge.id, competitor_id: @comp.id
       end.to change(Score, :count).by(0)
     end
   end
@@ -84,18 +84,18 @@ describe ScoresController do
         # specifies that the Score created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        expect_any_instance_of(Score).to receive(:assign_attributes).with({'val_1' => '2.1'})
-        post :create, {score: {val_1: '2.1'}, judge_id: @judge, competitor_id: @comp.id}
+        expect_any_instance_of(Score).to receive(:assign_attributes).with('val_1' => '2.1')
+        post :create, score: {val_1: '2.1'}, judge_id: @judge, competitor_id: @comp.id
       end
 
       it "assigns the requested score as @score" do
         score = @signed_in_scores[0]
-        post :create, {score: valid_attributes, judge_id: @judge, competitor_id: @comp.id}
+        post :create, score: valid_attributes, judge_id: @judge, competitor_id: @comp.id
         expect(assigns(:score)).to eq(score)
       end
 
       it "redirects to the score" do
-        post :create, {score: valid_attributes, judge_id: @judge, competitor_id: @comp.id}
+        post :create, score: valid_attributes, judge_id: @judge, competitor_id: @comp.id
         expect(response).to redirect_to(judge_scores_url(@judge))
       end
     end
@@ -105,14 +105,14 @@ describe ScoresController do
         score = @signed_in_scores[0]
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Score).to receive(:save).and_return(false)
-        post :create, {score: {number_of_people: 1}, judge_id: @judge, competitor_id: @comp.id}
+        post :create, score: {number_of_people: 1}, judge_id: @judge, competitor_id: @comp.id
         expect(assigns(:score)).to eq(score)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Score).to receive(:save).and_return(false)
-        post :create, {score: {val_1: 1}, judge_id: @judge.id, competitor_id: @comp.id}
+        post :create, score: {val_1: 1}, judge_id: @judge.id, competitor_id: @comp.id
         expect(response).to render_template("new")
       end
     end
@@ -130,11 +130,11 @@ describe ScoresController do
         sign_in @auth_user
       end
       it "should deny access to edit" do
-        get :new, {judge_id: @judge, competitor_id: @comp.id}
+        get :new, judge_id: @judge, competitor_id: @comp.id
         expect(response).to redirect_to(root_path)
       end
       it "should deny access to update" do
-        post :create, {judge_id: @judge, competitor_id: @comp.id}
+        post :create, judge_id: @judge, competitor_id: @comp.id
         expect(response).to redirect_to(root_path)
       end
     end

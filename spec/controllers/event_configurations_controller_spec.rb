@@ -32,7 +32,7 @@ describe EventConfigurationsController do
     let!(:event_configuration) { EventConfiguration.create! valid_attributes }
 
     it "Cannot edit configuration" do
-      get :advanced_settings, {id: event_configuration.to_param}
+      get :advanced_settings, id: event_configuration.to_param
       expect(response).to redirect_to(root_path)
     end
 

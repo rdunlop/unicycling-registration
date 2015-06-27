@@ -11,7 +11,7 @@ module FormHelper
   end
 
   def registrant_bib_number_select_box(form, competition)
-    form.select :bib_number, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.bib_number] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus' }
+    form.select :bib_number, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.bib_number] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
   end
 
   def eligible_registrants(competition)
@@ -23,11 +23,11 @@ module FormHelper
   end
 
   def registrant_id_select_box(form, competition)
-    form.select :registrant_id, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.id] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus' }
+    form.select :registrant_id, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.id] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
   end
 
   def competitor_select_box(form, competition)
-    form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true}, autofocus: true, class: 'chosen-select js--autoFocus'
+    form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
   end
 
   def no_form_competitor_select_box(competition)
@@ -35,7 +35,7 @@ module FormHelper
   end
 
   def all_registrant_competitors(form)
-    form.select :registrant_id,  Registrant.select_box_options, {include_blank: true}, autofocus: true, class: 'chosen-select js--autoFocus'
+    form.select :registrant_id,  Registrant.select_box_options, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
   end
 
   def wizard_progress_bar(allow_navigation = false)

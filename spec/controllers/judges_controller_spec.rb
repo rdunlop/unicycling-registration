@@ -24,18 +24,18 @@ describe JudgesController do
     describe "with valid params" do
       it "creates a new EventJudgeType" do
         expect do
-          post :create, {judge: valid_attributes, competition_id: @ec.id}
+          post :create, judge: valid_attributes, competition_id: @ec.id
         end.to change(Judge, :count).by(1)
       end
 
       it "assigns a newly created judge as @judge" do
-        post :create, {judge: valid_attributes, competition_id: @ec.id}
+        post :create, judge: valid_attributes, competition_id: @ec.id
         expect(assigns(:judge)).to be_a(Judge)
         expect(assigns(:judge)).to be_persisted
       end
 
       it "redirects to the events show page" do
-        post :create, {judge: valid_attributes, competition_id: @ec.id}
+        post :create, judge: valid_attributes, competition_id: @ec.id
         expect(response).to redirect_to(competition_judges_path(@ec))
       end
     end
@@ -45,7 +45,7 @@ describe JudgesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:valid?).and_return(false)
         allow_any_instance_of(Judge).to receive(:errors).and_return("something")
-        post :create, {judge: {user_id: 1}, competition_id: @ec.id}
+        post :create, judge: {user_id: 1}, competition_id: @ec.id
         expect(assigns(:judge)).to be_a_new(Judge)
         expect(assigns(:judge_types)).to eq([@judge_type])
         expect(assigns(:all_data_entry_volunteers)).to eq([@data_entry_volunteer_user])
@@ -55,7 +55,7 @@ describe JudgesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:valid?).and_return(false)
         allow_any_instance_of(Judge).to receive(:errors).and_return("something")
-        post :create, {judge: {user_id: 1}, competition_id: @ec.id}
+        post :create, judge: {user_id: 1}, competition_id: @ec.id
         expect(response).to render_template("index")
       end
     end
@@ -68,7 +68,7 @@ describe JudgesController do
 
       expect(@ec.judges.count).to eq(0)
 
-      post :copy_judges, {competition_id: @ec.id, copy_judges: {competition_id: @new_competition.id}}
+      post :copy_judges, competition_id: @ec.id, copy_judges: {competition_id: @new_competition.id}
 
       expect(@ec.judges.count).to eq(1)
     end
@@ -81,7 +81,7 @@ describe JudgesController do
 
       expect(@ec.judges.count).to eq(0)
 
-      post :copy_judges, {competition_id: @ec.id, copy_judges: {competition_id: @new_competition }}
+      post :copy_judges, competition_id: @ec.id, copy_judges: {competition_id: @new_competition }
       expect(response).to redirect_to(root_path)
     end
   end
@@ -90,20 +90,20 @@ describe JudgesController do
     it "destroys the requested judge" do
       judge = FactoryGirl.create(:judge, competition: @ec)
       expect do
-        delete :destroy, {id: judge.to_param, competition_id: @ec.id}
+        delete :destroy, id: judge.to_param, competition_id: @ec.id
       end.to change(Judge, :count).by(-1)
     end
 
     it "redirects to the judges list" do
       judge = FactoryGirl.create(:judge, competition: @ec)
-      delete :destroy, {id: judge.to_param, competition_id: @ec.id}
+      delete :destroy, id: judge.to_param, competition_id: @ec.id
       expect(response).to redirect_to(competition_judges_path(@ec))
     end
   end
 
   describe "GET index" do
     it "displays all of the judges for all" do
-      get :index, {competition_id: @ec}
+      get :index, competition_id: @ec
       expect(assigns(:all_data_entry_volunteers)).to eq([@data_entry_volunteer_user])
     end
 
@@ -111,12 +111,12 @@ describe JudgesController do
       other_data_entry_volunteer_user = FactoryGirl.create(:user)
       other_data_entry_volunteer_user.add_role(:data_entry_volunteer)
       @judge = FactoryGirl.create(:judge, user: @data_entry_volunteer_user, competition: @ec)
-      get :index, {competition_id: @ec}
+      get :index, competition_id: @ec
       expect(assigns(:judges)).to include(@judge)
     end
 
     it "has a blank judge" do
-      get :index, {competition_id: @ec}
+      get :index, competition_id: @ec
       expect(assigns(:judge)).to be_a_new(Judge)
     end
   end

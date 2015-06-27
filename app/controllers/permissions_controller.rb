@@ -35,7 +35,7 @@ class PermissionsController < ApplicationController
 
   def create_guest_user(registrant_id)
     reg = Registrant.find(registrant_id)
-    user = reg.additional_registrant_accesses.map(&:user).find{|user| user.guest? }
+    user = reg.additional_registrant_accesses.map(&:user).find(&:guest?)
     return user if user
     user ||= User.create(name: "guest", guest: true, confirmed_at: Time.current, email: "robin+guest#{Time.now.to_i}#{rand(99)}@dunlopweb.com")
     user.save!(validate: false)

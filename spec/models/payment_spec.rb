@@ -61,7 +61,7 @@ describe Payment do
     end
 
     it "has a list of unique_payment_deatils" do
-      expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new({expense_item_id: @pd.expense_item_id, count: 1, amount: @pd.amount })])
+      expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 1, amount: @pd.amount)])
     end
 
     describe "with mulitple payment_details of the same expense_item" do
@@ -72,7 +72,7 @@ describe Payment do
 
       it "only lists the element once" do
         expect(@pay.unique_payment_details.count).to eq(1)
-        expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new({expense_item_id: @pd.expense_item_id, count: 3, amount: @pd.amount})])
+        expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 3, amount: @pd.amount)])
       end
 
       describe "with payment_details of different expense_items" do
@@ -92,8 +92,8 @@ describe Payment do
 
         it "does not group them together" do
           expect(@pay.unique_payment_details.count).to eq(2)
-          expect(@pay.unique_payment_details).to match_array([PaymentDetailSummary.new({expense_item_id: @pd.expense_item_id, count: 1, amount: @pdc.amount}),
-                                                              PaymentDetailSummary.new({expense_item_id: @pd.expense_item_id, count: 3, amount: @pd2.amount})])
+          expect(@pay.unique_payment_details).to match_array([PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 1, amount: @pdc.amount),
+                                                              PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 3, amount: @pd2.amount)])
         end
       end
     end

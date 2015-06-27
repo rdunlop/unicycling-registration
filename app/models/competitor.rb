@@ -205,7 +205,7 @@ class Competitor < ActiveRecord::Base
   delegate :event, to: :competition
 
   def member_has_bib_number?(bib_number)
-    members.includes(:registrant).where({registrants: {bib_number: bib_number}}).count > 0
+    members.includes(:registrant).where(registrants: {bib_number: bib_number}).count > 0
   end
 
   def team_name

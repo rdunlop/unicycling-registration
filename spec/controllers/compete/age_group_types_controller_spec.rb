@@ -24,7 +24,7 @@ describe Compete::AgeGroupTypesController do
     it "assigns all age_group_entries as @age_group_entries" do
       age_group_type = FactoryGirl.create(:age_group_type)
       FactoryGirl.create(:age_group_entry, age_group_type: age_group_type)
-      get :show, {id: age_group_type.id}
+      get :show, id: age_group_type.id
       expect(assigns(:age_group_type)).to eq(age_group_type)
     end
   end
@@ -32,7 +32,7 @@ describe Compete::AgeGroupTypesController do
   describe "POST 'create'" do
     it "creates the new age group type" do
       expect do
-        post :create, {age_group_type: valid_attributes}
+        post :create, age_group_type: valid_attributes
       end.to change(AgeGroupType, :count).by(1)
       expect(response).to redirect_to(age_group_types_path)
     end
@@ -42,7 +42,7 @@ describe Compete::AgeGroupTypesController do
     it "returns http success" do
       agt = FactoryGirl.create(:age_group_type)
       expect do
-        delete 'destroy', {id: agt.id}
+        delete 'destroy', id: agt.id
       end.to change(AgeGroupType, :count).by(-1)
       expect(response).to redirect_to(age_group_types_path)
     end
@@ -51,7 +51,7 @@ describe Compete::AgeGroupTypesController do
   describe "PUT 'update'" do
     it "returns http success" do
       agt = FactoryGirl.create(:age_group_type)
-      put 'update', {id: agt.id, age_group_type: valid_attributes}
+      put 'update', id: agt.id, age_group_type: valid_attributes
       expect(response).to redirect_to(age_group_types_path)
     end
   end

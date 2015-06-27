@@ -28,7 +28,7 @@ describe OrderedResultCalculator do
 
     describe "with a DQ and a non-DQ for the same competitor" do
       before :each do
-        @tr1.update_attributes({status: "DQ", minutes: 0, seconds: 0, thousands: 0})
+        @tr1.update_attributes(status: "DQ", minutes: 0, seconds: 0, thousands: 0)
         @tr1b = FactoryGirl.create(:time_result, competitor: @tr1.competitor, minutes: 2, seconds: 3, thousands: 300)
       end
 

@@ -9,7 +9,7 @@ class RemovePrimaryChoiceAndCategoryChoice < ActiveRecord::Migration
     RegistrantChoice.reset_column_information
 
     EventChoice.where("position = 1 or cell_type = 'category'").each do |ec|
-      RegistrantChoice.where({event_choice_id: ec.id}).delete_all
+      RegistrantChoice.where(event_choice_id: ec.id).delete_all
       ec.destroy
     end
   end

@@ -181,8 +181,8 @@ describe ChoicesValidator do
       @ei = FactoryGirl.create(:expense_item, maximum_available: 1)
     end
     it "cannot save with 2 registrante_expense_items when only 1 should be possible" do
-      @ei1 = @reg.registrant_expense_items.build({expense_item_id: @ei.id})
-      @ei2 = @reg.registrant_expense_items.build({expense_item_id: @ei.id})
+      @ei1 = @reg.registrant_expense_items.build(expense_item_id: @ei.id)
+      @ei2 = @reg.registrant_expense_items.build(expense_item_id: @ei.id)
       expect(@reg.valid?).to eq(false)
     end
   end

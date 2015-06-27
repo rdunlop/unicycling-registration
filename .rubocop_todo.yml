@@ -17,10 +17,6 @@ Lint/ParenthesesAsGroupedExpression:
 Lint/RescueException:
   Enabled: false
 
-# Offense count: 1
-Lint/ShadowingOuterLocalVariable:
-  Enabled: false
-
 # Offense count: 140
 Metrics/AbcSize:
   Max: 78
@@ -78,12 +74,6 @@ Style/AccessorMethodName:
 
 # Offense count: 2
 Style/AsciiComments:
-  Enabled: false
-
-# Offense count: 530
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/BracesAroundHashParameters:
   Enabled: false
 
 # Offense count: 3

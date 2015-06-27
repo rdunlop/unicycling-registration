@@ -51,13 +51,11 @@ class ExpenseGroup < ActiveRecord::Base
   end
 
   def self.create_registration_items_group
-    create({
-             visible: false,
-             registration_items: true,
-             competitor_required: false,
-             noncompetitor_required: false,
-             group_name: "Registration",
-           })
+    create(visible: false,
+           registration_items: true,
+           competitor_required: false,
+           noncompetitor_required: false,
+           group_name: "Registration",)
   end
 
   def self.user_manageable
@@ -66,9 +64,9 @@ class ExpenseGroup < ActiveRecord::Base
 
   def self.for_competitor_type(is_competitor)
     if is_competitor
-      where({competitor_required: true})
+      where(competitor_required: true)
     else
-      where({noncompetitor_required: true})
+      where(noncompetitor_required: true)
     end
   end
 

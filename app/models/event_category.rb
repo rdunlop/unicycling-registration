@@ -26,7 +26,7 @@ class EventCategory < ActiveRecord::Base
   has_many :competition_sources, dependent: :destroy
 
   validates :event, presence: true
-  validates :name, {presence: true, uniqueness: {scope: [:event_id]} }
+  validates :name, presence: true, uniqueness: {scope: [:event_id]}
 
   acts_as_restful_list scope: :event
 

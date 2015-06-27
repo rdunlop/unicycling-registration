@@ -21,7 +21,7 @@ describe ExternalResultsController do
   describe "GET index" do
     it "assigns all external_results as @external_results" do
       external_result = ExternalResult.create! valid_attributes
-      get :index, {competition_id: @competition.id}
+      get :index, competition_id: @competition.id
       expect(assigns(:external_results)).to eq([external_result])
     end
   end
@@ -29,7 +29,7 @@ describe ExternalResultsController do
   describe "GET edit" do
     it "assigns the requested external_result as @external_result" do
       external_result = ExternalResult.create! valid_attributes
-      get :edit, {id: external_result.to_param}
+      get :edit, id: external_result.to_param
       expect(assigns(:external_result)).to eq(external_result)
     end
   end
@@ -38,18 +38,18 @@ describe ExternalResultsController do
     describe "with valid params" do
       it "creates a new ExternalResult" do
         expect do
-          post :create, {external_result: valid_attributes, competition_id: @competition.id}
+          post :create, external_result: valid_attributes, competition_id: @competition.id
         end.to change(ExternalResult, :count).by(1)
       end
 
       it "assigns a newly created external_result as @external_result" do
-        post :create, {external_result: valid_attributes, competition_id: @competition.id}
+        post :create, external_result: valid_attributes, competition_id: @competition.id
         expect(assigns(:external_result)).to be_a(ExternalResult)
         expect(assigns(:external_result)).to be_persisted
       end
 
       it "redirects to the created external_result" do
-        post :create, {external_result: valid_attributes, competition_id: @competition.id}
+        post :create, external_result: valid_attributes, competition_id: @competition.id
         expect(response).to redirect_to(competition_external_results_path(@competition))
       end
     end
@@ -58,14 +58,14 @@ describe ExternalResultsController do
       it "assigns a newly created but unsaved external_result as @external_result" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
-        post :create, {external_result: { "competitor_id" => "invalid value" }, competition_id: @competition.id}
+        post :create, external_result: { "competitor_id" => "invalid value" }, competition_id: @competition.id
         expect(assigns(:external_result)).to be_a_new(ExternalResult)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
-        post :create, {external_result: { "competitor_id" => "invalid value" }, competition_id: @competition.id}
+        post :create, external_result: { "competitor_id" => "invalid value" }, competition_id: @competition.id
         expect(response).to render_template("index")
       end
     end
@@ -79,19 +79,19 @@ describe ExternalResultsController do
         # specifies that the ExternalResult created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        expect_any_instance_of(ExternalResult).to receive(:update_attributes).with({ "competitor_id" => "1" })
-        put :update, {id: external_result.to_param, external_result: { "competitor_id" => "1" }}
+        expect_any_instance_of(ExternalResult).to receive(:update_attributes).with("competitor_id" => "1")
+        put :update, id: external_result.to_param, external_result: { "competitor_id" => "1" }
       end
 
       it "assigns the requested external_result as @external_result" do
         external_result = ExternalResult.create! valid_attributes
-        put :update, {id: external_result.to_param, external_result: valid_attributes}
+        put :update, id: external_result.to_param, external_result: valid_attributes
         expect(assigns(:external_result)).to eq(external_result)
       end
 
       it "redirects to the external_result index" do
         external_result = ExternalResult.create! valid_attributes
-        put :update, {id: external_result.to_param, external_result: valid_attributes}
+        put :update, id: external_result.to_param, external_result: valid_attributes
         expect(response).to redirect_to(competition_external_results_path(@competition))
       end
     end
@@ -101,7 +101,7 @@ describe ExternalResultsController do
         external_result = ExternalResult.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
-        put :update, {id: external_result.to_param, external_result: { "competitor_id" => "invalid value" }}
+        put :update, id: external_result.to_param, external_result: { "competitor_id" => "invalid value" }
         expect(assigns(:external_result)).to eq(external_result)
       end
 
@@ -109,7 +109,7 @@ describe ExternalResultsController do
         external_result = ExternalResult.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
-        put :update, {id: external_result.to_param, external_result: { "competitor_id" => "invalid value" }}
+        put :update, id: external_result.to_param, external_result: { "competitor_id" => "invalid value" }
         expect(response).to render_template("edit")
       end
     end
@@ -119,13 +119,13 @@ describe ExternalResultsController do
     it "destroys the requested external_result" do
       external_result = ExternalResult.create! valid_attributes
       expect do
-        delete :destroy, {id: external_result.to_param}
+        delete :destroy, id: external_result.to_param
       end.to change(ExternalResult, :count).by(-1)
     end
 
     it "redirects to the external_results list" do
       external_result = ExternalResult.create! valid_attributes
-      delete :destroy, {id: external_result.to_param}
+      delete :destroy, id: external_result.to_param
       expect(response).to redirect_to(competition_external_results_path(@competition))
     end
   end

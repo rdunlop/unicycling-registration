@@ -22,19 +22,19 @@ describe PaymentsController do
   describe "POST fake_complete" do
     it "sets the payment as completed" do
       payment = FactoryGirl.create(:payment, user: @user, transaction_id: nil)
-      post :fake_complete, {id: payment.to_param}
+      post :fake_complete, id: payment.to_param
       payment.reload
       expect(payment.completed).to eq(true)
     end
     it "redirects to registrants page" do
       payment = FactoryGirl.create(:payment, user: @user)
-      post :fake_complete, {id: payment.to_param}
+      post :fake_complete, id: payment.to_param
       expect(response).to redirect_to root_path
     end
     it "cannot change if config test_mode is disabled" do
       @config.update_attribute(:test_mode, false)
       payment = FactoryGirl.create(:payment, user: @user)
-      post :fake_complete, {id: payment.to_param}
+      post :fake_complete, id: payment.to_param
       payment.reload
       expect(payment.completed).to eq(false)
     end
@@ -46,7 +46,7 @@ describe PaymentsController do
       @payment = FactoryGirl.create(:payment, user: @user, completed: true)
     end
     it "doesn't assign other people's payments as @payments" do
-      get :index, {user_id: @super_admin.id}
+      get :index, user_id: @super_admin.id
       expect(assigns(:payments)).to eq([])
     end
     describe "as normal user" do
@@ -54,21 +54,21 @@ describe PaymentsController do
         sign_in @user
       end
       it "can read index" do
-        get :index, {user_id: @user.id}
+        get :index, user_id: @user.id
         expect(response).to be_success
       end
       it "receives a list of payments" do
-        get :index, {user_id: @user.id}
+        get :index, user_id: @user.id
         expect(assigns(:payments)).to eq([@payment])
       end
       it "does not include other people's payments" do
         FactoryGirl.create(:payment, user: @super_admin)
-        get :index, {user_id: @user.id}
+        get :index, user_id: @user.id
         expect(assigns(:payments)).to eq([@payment])
       end
       it "doesn't list my payments which are not completed" do
         FactoryGirl.create(:payment, completed: false, user: @user)
-        get :index, {user_id: @user.id}
+        get :index, user_id: @user.id
         expect(assigns(:payments)).to eq([@payment])
       end
     end
@@ -82,7 +82,7 @@ describe PaymentsController do
     end
 
     it "can get the registrants payments" do
-      get :registrant_payments, {id: @reg}
+      get :registrant_payments, id: @reg
       expect(response).to be_success
     end
 
@@ -93,7 +93,7 @@ describe PaymentsController do
       end
 
       it "cannot get the registrants payments" do
-        get :registrant_payments, {id: @reg}
+        get :registrant_payments, id: @reg
         expect(response).to redirect_to(root_path)
       end
     end
@@ -102,7 +102,7 @@ describe PaymentsController do
   describe "GET show" do
     it "assigns the requested payment as @payment" do
       payment = FactoryGirl.create(:payment, user: @user)
-      get :show, {id: payment.to_param}
+      get :show, id: payment.to_param
       expect(assigns(:payment)).to eq(payment)
     end
   end
@@ -110,7 +110,7 @@ describe PaymentsController do
   describe "Complete a $0 payment" do
     it "sets the payment completed" do
       payment = FactoryGirl.create(:payment, user: @user)
-      post :complete, {id: payment.to_param}
+      post :complete, id: payment.to_param
       expect(payment.reload.completed).to be_truthy
     end
 
@@ -118,14 +118,14 @@ describe PaymentsController do
       request.env["HTTP_REFERER"] = root_path
       payment = FactoryGirl.create(:payment, user: @user)
       FactoryGirl.create(:payment_detail, payment: payment, amount: 1.00)
-      post :complete, {id: payment.to_param}
+      post :complete, id: payment.to_param
       expect(payment.reload.completed).to be_falsy
     end
   end
 
   describe "GET new" do
     it "assigns a new payment as @payment" do
-      get :new, {}
+      get :new
       expect(assigns(:payment)).to be_a_new(Payment)
       expect(assigns(:payment).payment_details).to eq([])
     end
@@ -136,19 +136,19 @@ describe PaymentsController do
         @reg = FactoryGirl.create(:competitor, user: @user)
       end
       it "assigns a new payment_detail for the registrant" do
-        get :new, {}
+        get :new
         pd = assigns(:payment).payment_details.first
         expect(pd.registrant).to eq(@reg)
         expect(assigns(:payment).payment_details.first).to eq(assigns(:payment).payment_details.last)
       end
       it "sets the amount to the owing amount" do
         expect(@user.registrants.count).to eq(1)
-        get :new, {}
+        get :new
         pd = assigns(:payment).payment_details.first
         expect(pd.amount).to eq(@reg_period.competitor_expense_item.cost)
       end
       it "associates the payment_detail with the expense_item" do
-        get :new, {}
+        get :new
         pd = assigns(:payment).payment_details.first
         expect(pd.expense_item).to eq(@reg_period.competitor_expense_item)
       end
@@ -159,7 +159,7 @@ describe PaymentsController do
         @payment.reload
         @payment.completed = true
         @payment.save
-        get :new, {}
+        get :new
         pd = assigns(:payment).payment_details.first
         expect(pd.registrant).to eq(@reg)
         expect(assigns(:payment).payment_details.first).to eq(assigns(:payment).payment_details.last)
@@ -174,14 +174,14 @@ describe PaymentsController do
           @payment.save
         end
         it "handles registrants who have paid, but owe more" do
-          get :new, {}
+          get :new
           pd = assigns(:payment).payment_details.first
           expect(pd.registrant).to eq(@reg)
           expect(assigns(:payment).payment_details.first).to eq(assigns(:payment).payment_details.last)
           expect(pd.expense_item).to eq(@rei.expense_item)
         end
         it "copies the details" do
-          get :new, {}
+          get :new
           pd = assigns(:payment).payment_details.first
           expect(pd.details).to eq("Additional Details")
         end
@@ -191,7 +191,7 @@ describe PaymentsController do
 
   describe "POST create" do
     describe "with valid params" do
-      let(:do_action) { post :create, {payment: valid_attributes} }
+      let(:do_action) { post :create, payment: valid_attributes }
 
       it "creates a new Payment" do
         expect { do_action }.to change(Payment, :count).by(1)
@@ -221,7 +221,7 @@ describe PaymentsController do
         it "creates the payment_detail" do
           @ei = FactoryGirl.create(:expense_item)
           @reg = FactoryGirl.create(:competitor)
-          post :create, {payment: {
+          post :create, payment: {
             payment_details_attributes: [
               {
                 registrant_id: @reg.id,
@@ -230,7 +230,7 @@ describe PaymentsController do
                 free: true,
                 amount: 100
               }]
-          }}
+          }
           expect(PaymentDetail.count).to eq(1)
           expect(PaymentDetail.last.refunded?).to eq(false)
         end
@@ -241,14 +241,14 @@ describe PaymentsController do
       it "assigns a newly created but unsaved payment as @payment" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Payment).to receive(:save).and_return(false)
-        post :create, {payment: {other: true}}
+        post :create, payment: {other: true}
         expect(assigns(:payment)).to be_a_new(Payment)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Payment).to receive(:save).and_return(false)
-        post :create, {payment: {other: true}}
+        post :create, payment: {other: true}
         expect(response).to render_template("new")
       end
     end
@@ -263,7 +263,7 @@ describe PaymentsController do
 
     it "assigns the known expense groups as expense_groups" do
       item = payment_detail.expense_item
-      get :summary, {}
+      get :summary
       expect(assigns(:expense_items)).to eq([item])
     end
   end

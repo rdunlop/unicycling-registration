@@ -92,10 +92,10 @@ class Payment < ActiveRecord::Base
     return true unless just_completed?
 
     payment_details.each do |pd|
-      rei = RegistrantExpenseItem.find_by({registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, details: pd.details})
+      rei = RegistrantExpenseItem.find_by(registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, details: pd.details)
       unless pd.details.nil?
         if rei.nil? && pd.details.empty?
-          rei = RegistrantExpenseItem.find_by({registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, details: nil})
+          rei = RegistrantExpenseItem.find_by(registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, details: nil)
         end
       end
 
@@ -128,7 +128,7 @@ class Payment < ActiveRecord::Base
       end
 
       if res.nil?
-        results << PaymentDetailSummary.new({expense_item_id: pd.expense_item_id, count: 1, amount: pd.amount})
+        results << PaymentDetailSummary.new(expense_item_id: pd.expense_item_id, count: 1, amount: pd.amount)
       else
         res.count += 1
       end

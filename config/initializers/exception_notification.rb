@@ -22,11 +22,9 @@ ExceptionNotification.configure do |config|
   # Notifiers =================================================================
 
   # Email notifier sends notifications by email.
-  config.add_notifier :email, {
-    email_prefix: "[#{Rails.env}][Registration Exception] ",
-    sender_address: Rails.application.secrets.mail_full_email,
-    exception_recipients: Rails.application.secrets.error_emails
-  }
+  config.add_notifier :email,     email_prefix: "[#{Rails.env}][Registration Exception] ",
+                                  sender_address: Rails.application.secrets.mail_full_email,
+                                  exception_recipients: Rails.application.secrets.error_emails
 
   # Campfire notifier sends notifications to your Campfire room. Requires 'tinder' gem.
   # config.add_notifier :campfire, {

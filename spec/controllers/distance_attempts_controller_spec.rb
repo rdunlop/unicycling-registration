@@ -24,7 +24,7 @@ describe DistanceAttemptsController do
         request.env["HTTP_REFERER"] = judge_distance_attempts_path(@judge)
 
         expect do
-          post :create, {distance_attempt: valid_attributes, judge_id: @judge.id}
+          post :create, distance_attempt: valid_attributes, judge_id: @judge.id
         end.to change(DistanceAttempt, :count).by(1)
 
         expect(response).to redirect_to(judge_distance_attempts_path(@judge))
@@ -32,7 +32,7 @@ describe DistanceAttemptsController do
     end
     describe "with invalid params" do
       it "renders the 'new' form" do
-        post :create, {distance_attempt: {fault: false}, judge_id: @judge.id}
+        post :create, distance_attempt: {fault: false}, judge_id: @judge.id
         expect(response).to render_template("index")
       end
     end
@@ -45,13 +45,13 @@ describe DistanceAttemptsController do
       @judge = FactoryGirl.create(:judge, competition: @competition)
     end
     it "should return a list of all distance_attempts" do
-      get :list, {competition_id: @competition.id}
+      get :list, competition_id: @competition.id
 
       expect(response).to render_template("list")
     end
     it "should return the distance attempts" do
       da = FactoryGirl.create(:distance_attempt, judge: @judge, competitor: @comp)
-      get :list, {competition_id: @competition.id}
+      get :list, competition_id: @competition.id
 
       expect(assigns(:distance_attempts)).to eq([da])
     end
@@ -60,7 +60,7 @@ describe DistanceAttemptsController do
       @normal_user = FactoryGirl.create(:user)
       sign_in @normal_user
 
-      get :list, {competition_id: @competition.id}
+      get :list, competition_id: @competition.id
 
       expect(response).to redirect_to(root_path)
     end

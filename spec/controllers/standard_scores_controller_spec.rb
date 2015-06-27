@@ -25,7 +25,7 @@ describe StandardScoresController do
 
   describe "GET index" do
     it "assigns all competitors as @competitors" do
-      get :index, {judge_id: @judge.id}
+      get :index, judge_id: @judge.id
       expect(response).to be_success
       expect(assigns(:competitors)).to eq([@comp, @comp2])
     end
@@ -37,7 +37,7 @@ describe StandardScoresController do
       @routine = FactoryGirl.create(:standard_skill_routine, registrant: @comp.registrants.first)
       skill = FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: @routine)
 
-      get :new, {judge_id: @judge.id, competitor_id: @comp.id}
+      get :new, judge_id: @judge.id, competitor_id: @comp.id
       expect(assigns(:skills)).to eq([skill])
     end
   end
