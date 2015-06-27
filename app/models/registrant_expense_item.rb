@@ -37,6 +37,10 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   delegate :has_details?, :details_label, to: :expense_item
 
+  def self.free
+    where(free: true)
+  end
+
   def self.cache_set_field
     :expense_item_id
   end

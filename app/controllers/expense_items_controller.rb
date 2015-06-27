@@ -8,6 +8,7 @@ class ExpenseItemsController < ApplicationController
   def details
     @paid_details = @expense_item.paid_items
     @unpaid_details = @expense_item.unpaid_items
+    @free_with_registration = @expense_item.free_items
   end
 
   private

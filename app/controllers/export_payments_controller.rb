@@ -44,6 +44,16 @@ class ExportPaymentsController < ApplicationController
         payment_detail.registrant.bib_number
       ]
     end
+    RegistrantExpenseItem.free.includes(:registrant).each do |rei|
+      next unless rei.registrant.reg_paid?
+      data << [
+        "Free With Reg",
+        rei.expense_item.id,
+        rei.expense_item.to_s,
+        "0",
+        rei.registrant.bib_number
+      ]
+    end
 
     filename = "#{@config.short_name} PaymentDetails #{Date.today}"
 

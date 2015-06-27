@@ -64,6 +64,16 @@ class ExpenseItem < ActiveRecord::Base
     num_paid - num_paid_with_coupon
   end
 
+  # How many of this expense item are free
+  def num_free
+    free_items.count
+  end
+
+  def free_items
+    paid_free_items + free_items_with_reg_paid
+  end
+
+  # Items which are fully paid
   def num_paid
     paid_items.count
   end
@@ -73,20 +83,15 @@ class ExpenseItem < ActiveRecord::Base
     paid_items.map(&:cost).inject(:+).to_f
   end
 
-  def free_items
-    payment_details.free
-  end
-
-  def num_free
-    free_items.count
-  end
-
+  # Items which are unpaid.
+  # Note: Free items which are associated with Paid Registrants are considered Paid/Free.
   def unpaid_items
-    registrant_expense_items.joins(:registrant).where(registrants: {deleted: false})
+    reis = registrant_expense_items.joins(:registrant).where(registrants: {deleted: false})
+    reis.free.select{ |rei| !rei.registrant.reg_paid? } + reis.where(free: false)
   end
 
   def num_unpaid
-    unpaid_items.count
+    unpaid_items.count #free.select{|rei| !rei.registrant.reg_paid? }.count + unpaid_items.where(free: false).count
   end
 
   def create_reg_items
@@ -143,5 +148,15 @@ class ExpenseItem < ActiveRecord::Base
     return true if maximum_available && maximum_available > 0
     return true if maximum_per_registrant && maximum_per_registrant > 0
     false
+  end
+
+  private
+
+  def paid_free_items
+    paid_items.free
+  end
+
+  def free_items_with_reg_paid
+    registrant_expense_items.joins(:registrant).where(registrants: {deleted: false}).free.select{ |rei| rei.registrant.reg_paid? }
   end
 end

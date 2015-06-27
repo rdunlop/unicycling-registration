@@ -1,7 +1,7 @@
 %h1 Listing Payment Details for #{@expense_item}
 
 - cache [PaymentDetail.cache_key_for_set(@expense_item.id), CouponCode.cache_key] do
-  %h3 Paid Items
+  %h3 Paid Items (no discount)
   %table.sortable
     %thead
       %tr
@@ -44,6 +44,26 @@
         %tr
           %td= coupon
           %td= @paid_details.includes(:payment_detail_coupon_code).merge(PaymentDetailCouponCode.where(coupon_code: coupon)).count
+
+%hr
+
+%h3 Paid Items (free with registration)
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Registrant
+      %th Email
+      %th Details
+      %th Date
+  %tbody
+    - @free_with_registration.each do |detail|
+      %tr
+        %td= detail.registrant.bib_number
+        %td= link_to detail.registrant, detail.registrant
+        %td= detail.registrant.user.email
+        %td= detail.details
+        %td= detail.created_at
 
 %hr
 
