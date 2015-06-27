@@ -26,7 +26,9 @@ class VolunteerChoice < ActiveRecord::Base
 
   def send_email_to_admins
     if volunteer_opportunity.inform_emails.present?
-      VolunteerMailer.new_volunteer(self).deliver_later
+      # Wait a minute to deliver so that the VolunteerChoice has been created
+      # before attempting to e-mail
+      VolunteerMailer.new_volunteer(self).deliver_later(wait: 1.minute)
     end
   end
 
