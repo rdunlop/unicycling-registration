@@ -33,7 +33,11 @@
           %th
           %th
     %tbody
-      = render partial: 'import_result', collection: @import_results
+      - if @competition.imports_times?
+        = render partial: 'imported_time_result', collection: @import_results, as: :import_result
+      - else
+        = render partial: 'imported_points_result', collection: @import_results, as: :import_result
+
 
     %tfoot
       %tr
