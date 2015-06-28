@@ -69,7 +69,7 @@ class RaceScoringClass < BaseScoringClass
       status: dq ? "DQ" : nil)
   end
 
-  def imports_times
+  def imports_times?
     true
   end
 end

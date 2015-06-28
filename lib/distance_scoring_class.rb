@@ -22,10 +22,6 @@ class DistanceScoringClass < BaseScoringClass
     "distance_attempts"
   end
 
-  def imports_times
-    true
-  end
-
   def competitor_dq?(competitor)
     return false if competitor.best_distance_attempt.nil?
     competitor.best_distance_attempt.fault?

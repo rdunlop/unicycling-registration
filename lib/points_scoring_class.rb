@@ -63,4 +63,8 @@ class PointsScoringClass < BaseScoringClass
   def requires_age_groups
     false
   end
+
+  def imports_points?
+    true
+  end
 end

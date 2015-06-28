@@ -38,10 +38,6 @@ class OverallChampionScoringClass < BaseScoringClass
     "overall_champion"
   end
 
-  def imports_times
-    false
-  end
-
   def competitor_dq?(_competitor)
     false
   end

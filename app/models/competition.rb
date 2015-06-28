@@ -95,7 +95,7 @@ class Competition < ActiveRecord::Base
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
             :build_import_result_from_raw, :can_eliminate_judges?,
             :result_description, :compete_in_order?, :scoring_description,
-            :example_result, :imports_times, :results_path, :scoring_path, to: :scoring_helper
+            :example_result, :imports_times?, :imports_points?, :results_path, :scoring_path, to: :scoring_helper
 
   def no_competition_sources_when_overall_calculation
     if scoring_class == "Overall Champion" && competition_sources.size > 0

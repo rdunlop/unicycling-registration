@@ -1,3 +1,8 @@
+Want to do:
+- spec which uses import_results_Controller->display_csv -> import_csv to create external results
+ - then uses Approve action to convert the results to real results.
+
+
 - No Judge Types for Group Freestyle? WTF - No Seed Loaded? Why?
  - Try it on the staging server
 ? ask scott/patricia? - Boundary-score calculation judge for freestyle? (major/minor falls counter)

@@ -8,7 +8,7 @@
         %th ID
         %th Name
         %th Competitor Exists?
-        - if @competition.imports_times
+        - if @competition.imports_times?
           %th Time
         - else
           %th Points
@@ -23,7 +23,7 @@
           %td= index + 1
           %td= result.bib_number
           = render partial: "matching_registrant_cell", locals: { import_result: result }
-          - if @competition.imports_times
+          - if @competition.imports_times?
             %td= result.full_time
           - else
             %td= result.points

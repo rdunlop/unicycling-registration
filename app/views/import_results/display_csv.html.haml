@@ -2,7 +2,7 @@
 
 %h2 CSV Import Instructions
 
-- if @competition.uses_lane_assignments?
+- if @competition.imports_times?
   Please import a Comma-Separated-File file with the following format (for 'Distance' competitions):
 
   %ul
@@ -20,8 +20,9 @@
     = check_box_tag :start_times
     %br
     = submit_tag "Load CSV to Temp Table"
+  = render :partial => "imported_time_results"
 
-- elsif @competition.event_class == "Points High to Low" || @competition.event_class == "Points Low to High"
+- elsif @competition.imports_points?
   Please import a Comma-Separated-File file with the following format (for 'Points' Competitions):
   %ul
     %li Column 1: ID
@@ -35,4 +36,4 @@
     = file_field_tag "file"
     = submit_tag "Load CSV to Temp Table"
 
-= render :partial => "imported_results"
+  = render :partial => "imported_points_results"

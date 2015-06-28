@@ -16,7 +16,11 @@ class BaseScoringClass
     nil
   end
 
-  def imports_times
+  def imports_points?
+    false
+  end
+
+  def imports_times?
     false
   end
 
