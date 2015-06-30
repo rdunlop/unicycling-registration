@@ -181,7 +181,7 @@ Workspace::Application.routes.draw do
     end
     resources :competition_wheel_sizes
 
-    resources :coupon_codes, only: [:show]
+    resources :coupon_code_summaries, only: [:show]
 
     resources :events, only: [] do
       collection do
