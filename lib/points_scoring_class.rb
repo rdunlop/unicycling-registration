@@ -52,14 +52,6 @@ class PointsScoringClass < BaseScoringClass
       details: import_result.details)
   end
 
-  # from CSV to import_result
-  def build_import_result_from_raw(raw)
-    ImportResult.new(
-      bib_number: raw[0],
-      points: raw[1],
-      details: raw[2])
-  end
-
   def requires_age_groups
     false
   end

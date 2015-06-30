@@ -50,10 +50,6 @@ class BaseScoringClass
     raise NotImplementedError
   end
 
-  def build_import_result_from_raw(_raw)
-    raise NotImplementedError
-  end
-
   def requires_age_groups
     true
   end

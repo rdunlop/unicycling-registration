@@ -51,12 +51,6 @@ class ImportResult < ActiveRecord::Base
 
   scope :entered_order, -> { reorder(:id) }
 
-  def set_details_if_blank
-    if details.blank? && points?
-      self.details = "#{points}pts"
-    end
-  end
-
   def competitor_name
     matching_registrant
   end
@@ -108,5 +102,11 @@ class ImportResult < ActiveRecord::Base
 
   def time_is_present?
     minutes && seconds && thousands
+  end
+
+  def set_details_if_blank
+    if details.blank? && points?
+      self.details = "#{points}pts"
+    end
   end
 end

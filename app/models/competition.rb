@@ -93,7 +93,7 @@ class Competition < ActiveRecord::Base
   validates :name, :award_title_name, presence: true
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
-            :build_import_result_from_raw, :can_eliminate_judges?,
+            :can_eliminate_judges?,
             :result_description, :compete_in_order?, :scoring_description,
             :example_result, :imports_times?, :imports_points?, :results_path, :scoring_path, to: :scoring_helper
 

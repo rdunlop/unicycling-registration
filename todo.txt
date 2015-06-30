@@ -1,7 +1,9 @@
 Want to do:
 - spec which uses import_results_Controller->display_csv -> import_csv to create external results
  - then uses Approve action to convert the results to real results.
-
+- Determine if the servers have any ImportResults left on them.
+- Migration to add "status" to External Results (like that of TimeResult)
+- Migration to add "imported_by_id" to External_result, and to time_result
 
 - No Judge Types for Group Freestyle? WTF - No Seed Loaded? Why?
  - Try it on the staging server

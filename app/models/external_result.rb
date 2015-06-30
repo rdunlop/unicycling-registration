@@ -25,6 +25,17 @@ class ExternalResult < ActiveRecord::Base
     :competitor_id
   end
 
+  # from CSV to import_result
+  def self.build_and_save_imported_result(raw, raw_data, user, competition)
+    ImportResult.create(
+      bib_number: raw[0],
+      points: raw[1],
+      details: raw[2],
+      raw_data: raw_data,
+      user: user,
+      competition: competition)
+  end
+
   def disqualified
     false
   end

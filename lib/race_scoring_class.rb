@@ -59,16 +59,6 @@ class RaceScoringClass < BaseScoringClass
       entered_at: import_result.created_at)
   end
 
-  def build_import_result_from_raw(raw)
-    dq = (raw[4] == "DQ")
-    ImportResult.new(
-      bib_number: raw[0],
-      minutes: raw[1],
-      seconds: raw[2],
-      thousands: raw[3],
-      status: dq ? "DQ" : nil)
-  end
-
   def imports_times?
     true
   end
