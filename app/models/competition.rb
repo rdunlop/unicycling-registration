@@ -193,8 +193,7 @@ class Competition < ActiveRecord::Base
   end
 
   def wave_numbers
-    waves = competitors.map(&:wave).uniq.compact.sort
-    waves.any?
+    competitors.map(&:wave).uniq.compact.sort
   end
 
   def end_time_to_s
