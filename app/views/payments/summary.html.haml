@@ -74,5 +74,5 @@
     %tbody
       - CouponCode.all.each do |coupon_code|
         %tr
-          %td= link_to coupon_code, coupon_code
+          %td= link_to coupon_code, coupon_code_summary_path(coupon_code)
           %td= coupon_code.applied_to_payment_details.count
