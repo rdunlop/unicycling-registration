@@ -11,7 +11,7 @@
 #  updated_at          :datetime
 #  is_start_time       :boolean          default(FALSE), not null
 #  number_of_laps      :integer
-#  status              :string(255)
+#  status              :string(255)      not null
 #  comments            :text
 #  comments_by         :string(255)
 #  number_of_penalties :integer

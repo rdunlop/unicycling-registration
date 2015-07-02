@@ -11,7 +11,7 @@
 #  updated_at          :datetime
 #  is_start_time       :boolean          default(FALSE), not null
 #  number_of_laps      :integer
-#  status              :string(255)
+#  status              :string(255)      not null
 #  comments            :text
 #  comments_by         :string(255)
 #  number_of_penalties :integer
@@ -36,7 +36,7 @@ class TimeResult < ActiveRecord::Base
   end
 
   def self.status_values
-    ["DQ"]
+    ["active", "DQ"]
   end
 
   validates :status, inclusion: { in: TimeResult.status_values, allow_nil: true }
@@ -58,7 +58,7 @@ class TimeResult < ActiveRecord::Base
   end
 
   def self.active
-    where(status: nil)
+    where(status: "active")
   end
 
   def self.build_and_save_imported_result(raw, raw_data, user, competition, is_start_time)
@@ -68,7 +68,7 @@ class TimeResult < ActiveRecord::Base
       minutes: raw[1],
       seconds: raw[2],
       thousands: raw[3],
-      status: dq ? "DQ" : nil,
+      status: dq ? "DQ" : "active",
       raw_data: raw_data,
       user: user,
       competition: competition,

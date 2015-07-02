@@ -13,7 +13,7 @@ describe TimeResultsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      status: nil,
+      status: "active",
       minutes: 0,
       seconds: 1,
       thousands: 2,

@@ -46,12 +46,13 @@ class RaceScoringClass < BaseScoringClass
   end
 
   def build_result_from_imported(import_result)
+    status = import_result.status.nil? ? "active" : import_result.status
     TimeResult.new(
       minutes: import_result.minutes,
       seconds: import_result.seconds,
       thousands: import_result.thousands,
       number_of_penalties: import_result.number_of_penalties,
-      status: import_result.status,
+      status: status,
       comments: import_result.comments,
       comments_by: import_result.comments_by,
       number_of_laps: import_result.number_of_laps,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701223853) do
+ActiveRecord::Schema.define(version: 20150702012904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -872,7 +872,7 @@ ActiveRecord::Schema.define(version: 20150701223853) do
     t.datetime "updated_at"
     t.boolean  "is_start_time",                   default: false, null: false
     t.integer  "number_of_laps"
-    t.string   "status",              limit: 255
+    t.string   "status",              limit: 255,                 null: false
     t.text     "comments"
     t.string   "comments_by",         limit: 255
     t.integer  "number_of_penalties"

@@ -549,11 +549,11 @@ class Competitor < ActiveRecord::Base
   # time result calculations
   def start_time_results
     # time_results.start_times.active
-    time_results.select{ |time_result| time_result.status.nil? && time_result.is_start_time }
+    time_results.select{ |time_result| time_result.status == "active" && time_result.is_start_time }
   end
 
   def finish_time_results
     # time_results.finish_times.active
-    time_results.select{ |time_result| time_result.status.nil? && time_result.is_start_time == false }
+    time_results.select{ |time_result| time_result.status == "active" && time_result.is_start_time == false }
   end
 end
