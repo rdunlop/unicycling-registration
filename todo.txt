@@ -1,9 +1,7 @@
-- Fix the RegistrantGroup Feature, and document what it can do.
 Want to do:
 - spec which uses import_results_Controller->display_csv -> import_csv to create external results
  - then uses Approve action to convert the results to real results.
 - Determine if the servers have any ImportResults left on them.
-- Migrate existing TimeResult data to have an "active" status, to make it consistent with ExternalResult
 
 ? ask scott/patricia? - Boundary-score calculation judge for freestyle? (major/minor falls counter)
  - For UNIOEC?
