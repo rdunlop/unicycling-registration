@@ -52,7 +52,7 @@ class TwoAttemptEntry < ActiveRecord::Base
       competitor = competition.find_competitor_with_bib_number(bib_number)
     end
 
-    tr1 = build_result(minutes_1, seconds_1, thousands_1, status_1)
+    tr1 = build_result(minutes_1, seconds_1, thousands_1, convert_status(status_1))
     tr1.competitor = competitor
     tr1.entered_at = created_at
     tr1.entered_by = user
@@ -60,7 +60,7 @@ class TwoAttemptEntry < ActiveRecord::Base
     tr1.save!
 
     if minutes_2
-      tr2 = build_result(minutes_2, seconds_2, thousands_2, status_2)
+      tr2 = build_result(minutes_2, seconds_2, thousands_2, convert_status(status_2))
       tr2.competitor = competitor
       tr2.entered_at = created_at
       tr2.entered_by = user
@@ -78,6 +78,12 @@ class TwoAttemptEntry < ActiveRecord::Base
   end
 
   private
+
+  # convert from ImportStatus statuses [nil, DQ]
+  # to TimeresultStatuses ["active", "DQ"]
+  def convert_status(old_status)
+    old_status.nil? ? "active" : old_status
+  end
 
   def build_result(minutes, seconds, thousands, status)
     TimeResult.new(
