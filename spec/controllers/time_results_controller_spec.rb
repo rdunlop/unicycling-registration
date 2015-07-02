@@ -35,7 +35,7 @@ describe TimeResultsController do
 
   describe "GET index" do
     it "assigns all time_results as @time_results" do
-      time_result = TimeResult.create! valid_attributes
+      time_result = FactoryGirl.create(:time_result, competitor: @competitor)
       get :index, competition_id: @competition.id
       expect(assigns(:time_results)).to eq([time_result])
     end
@@ -47,7 +47,7 @@ describe TimeResultsController do
 
   describe "GET edit" do
     it "assigns the requested time_result as @time_result" do
-      time_result = TimeResult.create! valid_attributes
+      time_result = FactoryGirl.create(:time_result)
       get :edit, id: time_result.id
       expect(assigns(:time_result)).to eq(time_result)
     end
@@ -103,7 +103,7 @@ describe TimeResultsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested time_result" do
-        time_result = TimeResult.create! valid_attributes
+        time_result = FactoryGirl.create(:time_result)
         # Assuming there are no other event_categories in the database, this
         # specifies that the EventCategory created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -113,7 +113,7 @@ describe TimeResultsController do
       end
 
       it "redirects to the event time results" do
-        time_result = TimeResult.create! valid_attributes
+        time_result = FactoryGirl.create(:time_result)
         put :update, id: time_result.to_param, time_result: valid_attributes
         expect(response).to redirect_to(competition_time_results_path(@competition))
       end
@@ -121,7 +121,7 @@ describe TimeResultsController do
 
     describe "with invalid params" do
       it "assigns the time_result as @time_result" do
-        time_result = TimeResult.create! valid_attributes
+        time_result = FactoryGirl.create(:time_result)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         put :update, id: time_result.to_param, time_result: {status: "DQ"}
@@ -129,7 +129,7 @@ describe TimeResultsController do
       end
 
       it "re-renders the 'edit' template" do
-        time_result = TimeResult.create! valid_attributes
+        time_result = FactoryGirl.create(:time_result)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         put :update, id: time_result.to_param, time_result: {status: "DQ"}

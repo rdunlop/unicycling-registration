@@ -13,7 +13,7 @@ class ExternalResultResultCalculator
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.external_result.present?
+    competitor.external_result.try(:active?)
   end
 
   # returns the result for this competitor

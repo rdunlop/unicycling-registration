@@ -11,6 +11,7 @@ class ExternalResultsController < ApplicationController
     add_breadcrumb "Points Results"
 
     @external_result = ExternalResult.new
+    @external_results = @external_results.active
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,6 +29,8 @@ class ExternalResultsController < ApplicationController
   # POST /external_results.json
   def create
     respond_to do |format|
+      @external_result.status = "active"
+      @external_result.entered_by = current_user
       if @external_result.save
         format.html { redirect_to competition_external_results_path(@competition), notice: 'External result was successfully created.' }
         format.json { render json: @external_result, status: :created, location: @external_result }
@@ -80,6 +83,6 @@ class ExternalResultsController < ApplicationController
   end
 
   def external_result_params
-    params.require(:external_result).permit(:competitor_id, :details, :points)
+    params.require(:external_result).permit(:competitor_id, :details, :points, :status)
   end
 end

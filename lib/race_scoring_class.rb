@@ -56,7 +56,8 @@ class RaceScoringClass < BaseScoringClass
       comments_by: import_result.comments_by,
       number_of_laps: import_result.number_of_laps,
       is_start_time: import_result.is_start_time,
-      entered_at: import_result.created_at)
+      entered_at: import_result.created_at,
+      entered_by: import_result.user)
   end
 
   def imports_times?

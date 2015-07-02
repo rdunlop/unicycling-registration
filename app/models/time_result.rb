@@ -16,6 +16,7 @@
 #  comments_by         :string(255)
 #  number_of_penalties :integer
 #  entered_at          :datetime
+#  entered_by_id       :integer          not null
 #
 # Indexes
 #
@@ -39,6 +40,8 @@ class TimeResult < ActiveRecord::Base
   end
 
   validates :status, inclusion: { in: TimeResult.status_values, allow_nil: true }
+
+  belongs_to :entered_by, class_name: 'User', foreign_key: :entered_by_id
 
   validates :is_start_time, inclusion: { in: [true, false] } # because it's a boolean
 

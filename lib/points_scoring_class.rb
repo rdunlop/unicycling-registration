@@ -49,7 +49,10 @@ class PointsScoringClass < BaseScoringClass
   def build_result_from_imported(import_result)
     ExternalResult.new(
       points: import_result.points,
-      details: import_result.details)
+      details: import_result.details,
+      entered_at: import_result.created_at,
+      entered_by: import_result.user,
+      status: "active")
   end
 
   def requires_age_groups

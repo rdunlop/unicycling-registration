@@ -29,6 +29,7 @@ class TimeResultsController < ApplicationController
   # POST event/1/time_results.json
   def create
     respond_to do |format|
+      @time_result.entered_by = current_user
       if @time_result.save
         format.html { redirect_to(competition_time_results_path(@time_result.competition), notice: 'Time result was successfully created.') }
         format.json { render json: @time_result, status: :created, location: @time_result.event }

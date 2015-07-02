@@ -16,6 +16,7 @@
 #  comments_by         :string(255)
 #  number_of_penalties :integer
 #  entered_at          :datetime
+#  entered_by_id       :integer          not null
 #
 # Indexes
 #

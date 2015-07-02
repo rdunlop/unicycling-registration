@@ -10,7 +10,11 @@
 
 
 <% else %>
-  var new_row = $("<%= escape_javascript(render partial: 'import_result', locals: {import_result: @import_result }) %>")
+  <% if @competition.imports_times? %>
+    var new_row = $("<%= escape_javascript(render partial: 'imported_time_result', locals: {import_result: @import_result }) %>")
+  <% else %>
+    var new_row = $("<%= escape_javascript(render partial: 'imported_points_result', locals: {import_result: @import_result }) %>")
+  <% end %>
   new_row.appendTo(".import_results");
   new_row.effect("highlight", {}, 3000);
   $(".data_entry").trigger("reset");

@@ -52,26 +52,21 @@ class TwoAttemptEntry < ActiveRecord::Base
       competitor = competition.find_competitor_with_bib_number(bib_number)
     end
 
-    tr1 = build_result_from_imported(minutes_1, seconds_1, thousands_1, status_1)
+    tr1 = build_result(minutes_1, seconds_1, thousands_1, status_1)
     tr1.competitor = competitor
+    tr1.entered_at = created_at
+    tr1.entered_by = user
     tr1.is_start_time = is_start_time
     tr1.save!
 
     if minutes_2
-      tr2 = build_result_from_imported(minutes_2, seconds_2, thousands_2, status_2)
+      tr2 = build_result(minutes_2, seconds_2, thousands_2, status_2)
       tr2.competitor = competitor
+      tr2.entered_at = created_at
+      tr2.entered_by = user
       tr2.is_start_time = is_start_time
       tr2.save!
     end
-  end
-
-  def build_result_from_imported(minutes, seconds, thousands, status)
-    TimeResult.new(
-      minutes: minutes,
-      seconds: seconds,
-      thousands: thousands,
-      status: status
-    )
   end
 
   def full_time_1
@@ -83,6 +78,15 @@ class TwoAttemptEntry < ActiveRecord::Base
   end
 
   private
+
+  def build_result(minutes, seconds, thousands, status)
+    TimeResult.new(
+      minutes: minutes,
+      seconds: seconds,
+      thousands: thousands,
+      status: status
+    )
+  end
 
   def time_is_present?
     minutes_1 && seconds_1 && thousands_1

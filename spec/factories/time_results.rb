@@ -16,6 +16,7 @@
 #  comments_by         :string(255)
 #  number_of_penalties :integer
 #  entered_at          :datetime
+#  entered_by_id       :integer          not null
 #
 # Indexes
 #
@@ -27,6 +28,7 @@
 FactoryGirl.define do
   factory :time_result do
     association :competitor, factory: :event_competitor
+    association :entered_by, factory: :user
     status nil
     is_start_time false
     minutes 0

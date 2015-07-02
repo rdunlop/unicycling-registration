@@ -1,12 +1,10 @@
+- Fix the RegistrantGroup Feature, and document what it can do.
 Want to do:
 - spec which uses import_results_Controller->display_csv -> import_csv to create external results
  - then uses Approve action to convert the results to real results.
 - Determine if the servers have any ImportResults left on them.
-- Migration to add "status" to External Results (like that of TimeResult)
-- Migration to add "imported_by_id" to External_result, and to time_result
+- Migrate existing TimeResult data to have an "active" status, to make it consistent with ExternalResult
 
-- No Judge Types for Group Freestyle? WTF - No Seed Loaded? Why?
- - Try it on the staging server
 ? ask scott/patricia? - Boundary-score calculation judge for freestyle? (major/minor falls counter)
  - For UNIOEC?
 - Must update the Ineligibility of all registrants before starting competition.
