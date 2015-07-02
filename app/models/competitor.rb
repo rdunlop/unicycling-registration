@@ -122,7 +122,7 @@ class Competitor < ActiveRecord::Base
 
   delegate :scoring_helper, to: :competition
 
-  def disqualified
+  def disqualified?
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{Result.cache_key_for_set(id)}dq") do
       scoring_helper.competitor_dq?(self)
     end
@@ -137,22 +137,22 @@ class Competitor < ActiveRecord::Base
   end
 
   def place
-    return 0 if disqualified
+    return 0 if disqualified?
     age_group_results.first.try(:place)
   end
 
   def overall_place
-    return 0 if disqualified
+    return 0 if disqualified?
     overall_results.first.try(:place)
   end
 
   def sorting_place
-    return 999 if disqualified || place.nil?
+    return 999 if disqualified? || place.nil?
     place
   end
 
   def place_formatted
-    return "DQ" if disqualified
+    return "DQ" if disqualified?
 
     if place == 0 || place.nil?
       return "Unknown"
@@ -162,12 +162,12 @@ class Competitor < ActiveRecord::Base
   end
 
   def sorting_overall_place
-    return 999 if disqualified || overall_place.nil?
+    return 999 if disqualified? || overall_place.nil?
     overall_place
   end
 
   def overall_place_formatted
-    return "DQ" if disqualified
+    return "DQ" if disqualified?
 
     if overall_place == 0
       return "Unknown"

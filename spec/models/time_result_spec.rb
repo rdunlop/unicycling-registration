@@ -57,7 +57,7 @@ describe TimeResult do
   describe "With a new TimeResult" do
     subject { TimeResult.new }
     it "defaults to not DQ" do
-      expect(subject.disqualified).to eq(false)
+      expect(subject.disqualified?).to eq(false)
     end
 
     it "defaults to 0 minutes" do

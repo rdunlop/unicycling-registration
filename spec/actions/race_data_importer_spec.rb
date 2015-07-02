@@ -33,7 +33,7 @@ describe RaceDataImporter do
       expect(ir.minutes).to eq(1)
       expect(ir.seconds).to eq(2)
       expect(ir.thousands).to eq(300)
-      expect(ir.disqualified).to eq(false)
+      expect(ir.disqualified?).to eq(false)
       expect(ir.competition).to eq(competition)
       expect(ir.is_start_time).to eq(false)
     end
@@ -62,7 +62,7 @@ describe RaceDataImporter do
       end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
-      expect(ImportResult.first.disqualified).to eq(true)
+      expect(ImportResult.first.disqualified?).to eq(true)
     end
   end
 

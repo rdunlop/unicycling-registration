@@ -75,7 +75,7 @@ class TimeResult < ActiveRecord::Base
       is_start_time: is_start_time)
   end
 
-  def disqualified
+  def disqualified?
     status == "DQ"
   end
 
@@ -98,7 +98,7 @@ class TimeResult < ActiveRecord::Base
   delegate :event, to: :competitor
 
   def full_time
-    return "" if disqualified
+    return "" if disqualified?
 
     TimeResultPresenter.new(full_time_in_thousands).full_time
   end

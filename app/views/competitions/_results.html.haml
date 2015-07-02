@@ -36,7 +36,7 @@
         %td= comp.bib_number
         %td= comp
         %td= comp.result
-        %td= comp.disqualified ? "yes" : ""
+        %td= comp.disqualified? ? "yes" : ""
         - if @competition.has_age_group_entry_results?
           %td= comp.age_group_entry_description
           %td= comp.place_formatted

@@ -60,7 +60,7 @@ class DistanceAttempt < ActiveRecord::Base
     distance
   end
 
-  def disqualified
+  def disqualified?
     fault
   end
 end

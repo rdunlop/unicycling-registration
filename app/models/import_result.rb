@@ -59,7 +59,7 @@ class ImportResult < ActiveRecord::Base
     matching_competitor.has_result? if competitor_exists?
   end
 
-  def disqualified
+  def disqualified?
     status == "DQ"
   end
 
@@ -94,7 +94,7 @@ class ImportResult < ActiveRecord::Base
 
   # determines that the import_result has enough information
   def results_for_competition
-    return if disqualified
+    return if disqualified?
     unless time_is_present? || points?
       errors.add(:base, "Must select either time or points")
     end

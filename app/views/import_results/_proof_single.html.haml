@@ -27,7 +27,7 @@
             %td= result.full_time
           - else
             %td= result.points
-          %td= result.disqualified ? "yes" : ""
+          %td= result.disqualified? ? "yes" : ""
           %td= result.created_at.to_formatted_s(:short)
 
 %hr

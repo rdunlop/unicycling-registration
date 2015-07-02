@@ -27,7 +27,7 @@
         %td.js--highlightIfNotBlank= result.competitor_has_results? ? "WARN: Competitor has result" : ""
         %td= result.raw_data
         %td= result.full_time
-        %td= result.disqualified ? "DQ" : ""
+        %td= result.disqualified? ? "DQ" : ""
         %td= result.is_start_time? ? "Yes" : ""
         %td= result.user
         %td= link_to 'Edit', edit_import_result_path(result)

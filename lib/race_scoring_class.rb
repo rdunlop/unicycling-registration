@@ -29,7 +29,7 @@ class RaceScoringClass < BaseScoringClass
   end
 
   def competitor_dq?(competitor)
-    competitor.has_result? && competitor.time_results.all?{|t| t.disqualified }
+    competitor.has_result? && competitor.time_results.all?(&:disqualified?)
   end
 
   # Used when trying to destroy all results for a competition

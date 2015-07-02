@@ -7,6 +7,6 @@
     %td= import_result.thousands
     - if import_result.competition.has_penalty?
       %td= import_result.number_of_penalties
-    %td= import_result.disqualified ? "Yes" : ""
+    %td= import_result.disqualified? ? "Yes" : ""
     %td= link_to 'Edit', edit_import_result_path(import_result)
     %td= link_to 'Delete', import_result, method: :delete, data: { confirm: 'Are you sure?' }

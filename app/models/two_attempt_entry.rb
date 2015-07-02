@@ -98,12 +98,12 @@ class TwoAttemptEntry < ActiveRecord::Base
     minutes_1 && seconds_1 && thousands_1
   end
 
-  def disqualified
+  def disqualified?
     status_1 == "DQ"
   end
 
   def results_for_competition
-    return if disqualified
+    return if disqualified?
     unless time_is_present?
       errors.add(:base, "Must enter time or dq")
     end
