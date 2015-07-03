@@ -1,9 +1,12 @@
+- display_group_size = @competition.num_members_per_competitor == "Three or more"
 %table.sortable.competitor_statuses
   %caption Competitors
   %thead
     %tr
       %th.sign_up ID
       %th.sign_up Name
+      - if display_group_size
+        %th.sign_up # Members
       %th.sign_up Age
       %th.sign_up Gender
       - if @config.usa?
@@ -23,6 +26,8 @@
         - event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category)
         %td= competitor.bib_number
         %td= competitor.detailed_name
+        - if display_group_size
+          %td= competitor.members.count
         %td= competitor.age
         %td= competitor.gender
         - if @config.usa?
