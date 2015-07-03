@@ -9,8 +9,9 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  entered_by_id :integer          not null
-#  entered_at    :datetime
+#  entered_at    :datetime         not null
 #  status        :string           not null
+#  preliminary   :boolean          not null
 #
 # Indexes
 #

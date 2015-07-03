@@ -15,8 +15,9 @@
 #  comments            :text
 #  comments_by         :string(255)
 #  number_of_penalties :integer
-#  entered_at          :datetime
+#  entered_at          :datetime         not null
 #  entered_by_id       :integer          not null
+#  preliminary         :boolean
 #
 # Indexes
 #
@@ -59,6 +60,10 @@ class TimeResult < ActiveRecord::Base
 
   def self.active
     where(status: "active")
+  end
+
+  def self.preliminary
+    where(preliminary: true)
   end
 
   def self.build_and_save_imported_result(raw, raw_data, user, competition, is_start_time)

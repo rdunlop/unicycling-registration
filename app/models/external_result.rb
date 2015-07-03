@@ -9,8 +9,9 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  entered_by_id :integer          not null
-#  entered_at    :datetime
+#  entered_at    :datetime         not null
 #  status        :string           not null
+#  preliminary   :boolean          not null
 #
 # Indexes
 #
@@ -22,12 +23,8 @@ class ExternalResult < ActiveRecord::Base
   include Placeable
   include CachedSetModel
 
-  def self.active_statuses
-    ["active"] # and "DQ" ?
-  end
-
   def self.status_values
-    ["preliminary"] + active_statuses
+    ["active", "DQ"]
   end
 
   validates :status, inclusion: { in: ExternalResult.status_values }
@@ -42,15 +39,19 @@ class ExternalResult < ActiveRecord::Base
 
   # "active" and "DQ" are considered active states
   def self.active
-    where(status: active_statuses)
+    where(preliminary: false)
   end
 
-  def preliminary?
-    status == "preliminary"
+  def self.preliminary
+    where(preliminary: true)
   end
 
   def active?
     !preliminary?
+  end
+
+  def disqualified?
+    status == "DQ"
   end
 
   # from CSV to import_result

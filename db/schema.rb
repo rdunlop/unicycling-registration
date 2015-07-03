@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702012904) do
+ActiveRecord::Schema.define(version: 20150703002546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -448,8 +448,9 @@ ActiveRecord::Schema.define(version: 20150702012904) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "entered_by_id",                                     null: false
-    t.datetime "entered_at"
+    t.datetime "entered_at",                                        null: false
     t.string   "status",                                            null: false
+    t.boolean  "preliminary",                                       null: false
   end
 
   add_index "external_results", ["competitor_id"], name: "index_external_results_on_competitor_id", using: :btree
@@ -876,8 +877,9 @@ ActiveRecord::Schema.define(version: 20150702012904) do
     t.text     "comments"
     t.string   "comments_by",         limit: 255
     t.integer  "number_of_penalties"
-    t.datetime "entered_at"
+    t.datetime "entered_at",                                      null: false
     t.integer  "entered_by_id",                                   null: false
+    t.boolean  "preliminary"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_competitor_id", using: :btree

@@ -3,6 +3,18 @@ Want to do:
  - then uses Approve action to convert the results to real results.
 - Determine if the servers have any ImportResults left on them.
 
+- make ExternalResult unique on CompetitorID (since each competitor has ONE external_result)
+- Remove default_scope on ImportResult
+
+Changes for External Data Results Entry:
+- Don't allow people to be entered who are not competitors to have data entry
+- For NAUCC, allow people to be added to a competition easily
+- When entering External Results data, prevent selecting people who already have a result entered (gray out their name?)
+
+NEED to clear up the "target_competition" logic of the import! function (used for the mulitple-10k competition-in-same-dataset problem)
+
+WHEN DOING an Import from CSV, fail the whole import, listing the entries which cannot be handled yet clearly, allowing them to be resolved (perhaps a "add these people as competitors" choice?)
+
 ? ask scott/patricia? - Boundary-score calculation judge for freestyle? (major/minor falls counter)
  - For UNIOEC?
 - Must update the Ineligibility of all registrants before starting competition.

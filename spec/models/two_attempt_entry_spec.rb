@@ -28,6 +28,7 @@ describe TwoAttemptEntry do
     end
 
     it "can import the results to time results" do
+      two_attempt_entry.save
       expect { two_attempt_entry.import! }.to change(TimeResult, :count).by(2)
     end
   end

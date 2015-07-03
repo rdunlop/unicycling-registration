@@ -500,6 +500,7 @@ Workspace::Application.routes.draw do
         end
       end
       resources :external_results, shallow: true, except: [:new, :show]
+      resources :preliminary_external_results, shallow: true, except: [:new, :show]
       resources :published_age_group_entries, only: [:show] do
         member do
           get :preview

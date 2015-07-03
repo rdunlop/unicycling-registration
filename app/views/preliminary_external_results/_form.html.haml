@@ -1,4 +1,4 @@
-= simple_form_for(@external_result.new_record? ? [@competition, @external_result] : @external_result) do |f|
+= simple_form_for(@external_result, url: @external_result.new_record? ? competition_preliminary_external_results_path(@competition) : preliminary_external_result_path(@external_result)) do |f|
   - if @external_result.errors.any?
     #error_explanation
       %h2

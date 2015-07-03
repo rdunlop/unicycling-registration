@@ -1,0 +1,28 @@
+%h1 Listing Preliminary Entered-Points Results for #{@competition}
+%table.sortable
+  %thead
+    %tr
+      %th Competitor
+      %th Points
+      %th Details
+      %th Disqualified
+      %th Entered At
+      %th ID
+      %th Name
+      %th Age Group
+      %th
+      %th
+  %tbody
+    - @competition.external_results.each do |external_result|
+      - next unless external_result.persisted?
+      %tr
+        %td= external_result.competitor
+        %td= external_result.points
+        %td= external_result.details
+        %td= external_result.disqualified?
+        %td= external_result.entered_at
+        %td= external_result.competitor.bib_number
+        %td= external_result.competitor
+        %td= external_result.competitor.age_group_entry_description
+        %td= link_to 'Edit', edit_preliminary_external_result_path(external_result)
+        %td= link_to 'Delete', preliminary_external_result_path(external_result), method: :delete, data: { confirm: 'Are you sure?' }

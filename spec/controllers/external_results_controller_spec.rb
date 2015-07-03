@@ -14,6 +14,7 @@ describe ExternalResultsController do
   def valid_attributes
     { "competitor_id" =>  @competitor.id,
       "details" => "soomething",
+      "status" => "active",
       "points" => 1
     }
   end
