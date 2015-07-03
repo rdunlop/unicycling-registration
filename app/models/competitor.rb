@@ -103,17 +103,17 @@ class Competitor < ActiveRecord::Base
     competition_registrants = competition.signed_up_registrants
     error = ""
     if status != "active"
-      error += "Competitor is #{status}"
+      error += "Competitor is #{status}<br>"
     end
 
     members.each do |member|
       if member.dropped_from_registration?
-        error += "Registrant has dropped this event from their registration"
+        error += "Registrant has dropped this event from their registration<br>"
       elsif !competition_registrants.include?(member.registrant)
-        error += "Registrant #{member} is not in the default list for this competition"
+        error += "Registrant #{member} is not in the default list for this competition<br>"
       end
     end
-    error
+    error.html_safe
   end
 
   def best_time
