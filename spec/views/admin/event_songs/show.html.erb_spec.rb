@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "admin/songs/list" do
+describe "admin/event_songs/show" do
   before(:each) do
     @registrant = FactoryGirl.build_stubbed(:registrant)
     @song1 = FactoryGirl.build_stubbed(:song,
@@ -21,6 +21,7 @@ describe "admin/songs/list" do
     allow(@song1).to receive(:human_name).and_return("File Name")
     allow(@song2).to receive(:human_name).and_return("File Name")
     assign(:config, double(music_submission_end_date: "now"))
+    assign(:event, @song1.event)
   end
 
   it "renders a list of songs" do

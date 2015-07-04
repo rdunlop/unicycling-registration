@@ -339,7 +339,7 @@ describe "Ability" do
     end
     subject { @ability = Ability.new(@user) }
 
-    it { is_expected.to be_able_to :list, :song }
+    it { is_expected.to be_able_to :manage, :event_song }
   end
 
   describe "When not logged in" do
