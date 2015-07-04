@@ -47,6 +47,40 @@
 
 %hr
 
+%h3 Refunded Items
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Registrant
+      %th Details
+      %th Refund Note
+      %th Coupon
+      %th Amount Paid
+      %th Amount Refunded
+      %th Resulting Amount Paid
+  %tbody
+    - @refunded_details.each do |detail|
+      %tr
+        %td= detail.registrant.bib_number
+        %td= link_to detail.registrant, detail.registrant
+        %td= detail.details
+        %td= detail.refund_detail.refund.note
+        %td= detail.coupon_applied? ? detail.payment_detail_coupon_code.to_s : ""
+        %td= print_formatted_currency(detail.amount)
+        %td= print_formatted_currency(detail.amount_refunded)
+        %th= print_formatted_currency(detail.cost)
+  %tfoot
+    %tr
+      %td
+      %td
+      %td
+      %td
+      %td
+      %td
+      %th Total
+      %th= print_formatted_currency(@expense_item.total_amount_paid_after_refunds)
+
 %h3 Paid Items (free with registration)
 %table.sortable
   %thead

@@ -75,9 +75,13 @@ class PaymentDetail < ActiveRecord::Base
 
   def cost
     return 0 if free
-    return ((100 - refund_detail.percentage.to_f) / 100) * amount if refunded?
+    return amount - amount_refunded if refunded?
 
     amount
+  end
+
+  def amount_refunded
+    ((refund_detail.percentage.to_f) / 100) * amount
   end
 
   # update the amount owing for this payment_detail, based on the coupon code applied
