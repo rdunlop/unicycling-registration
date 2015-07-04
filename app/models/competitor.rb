@@ -23,6 +23,7 @@
 
 class Competitor < ActiveRecord::Base
   include Eligibility
+  include Slugify
 
   has_many :members, dependent: :destroy, inverse_of: :competitor
   has_many :registrants, through: :members

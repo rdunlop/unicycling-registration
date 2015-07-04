@@ -270,9 +270,10 @@ Workspace::Application.routes.draw do
           post :undelete
         end
       end
-      resources :event_songs, only: [:index, :show, :create] do
-        # XXX For the Download Zip Action
+      resources :competition_songs, only: [:show, :create] do
+        get :download_zip
       end
+      resources :event_songs, only: [:index, :show, :create]
     end
 
     resources :registrants, only: [:show, :destroy] do

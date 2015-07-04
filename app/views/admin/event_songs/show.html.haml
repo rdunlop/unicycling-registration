@@ -1,4 +1,9 @@
-%h2 #{@competition} Songs
+%h2 #{@event} Songs
+
+%p
+  This page lists all songs which
+  %b Are not
+  assigned to a competitor yet
 
 %table.sortable
   %thead
@@ -10,7 +15,6 @@
       %th File name
       %th Updated Date
       %th Download
-      %th Competitor
   %tbody
     - @songs.each do |song|
       %tr
@@ -23,12 +27,3 @@
         %td
           - if song.song_file_name.present?
             = link_to 'Download', song.song_file_name_url, target: '_blank'
-        %td
-          - if song.competitor.present?
-            = song.competitor.to_s
-            %br
-          = form_tag(event_songs_path, method: :post) do
-            = hidden_field_tag :event_id, @event.id
-            = hidden_field_tag :song_id, song.id
-            = select_tag :competitor_id, options_from_collection_for_select(@event.competitors.active, "id", "to_s_with_id"), include_blank: true, class: "chosen-select js--autoFocus"
-            = submit_tag "Assign"

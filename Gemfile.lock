@@ -429,6 +429,7 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-ole (1.2.11.7)
     ruby-progressbar (1.7.5)
+    rubyzip (1.1.7)
     safe_yaml (1.0.4)
     sass (3.4.14)
     sass-rails (5.0.1)
@@ -575,6 +576,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter (= 0.2.2)
   rubocop
+  rubyzip
   sass-rails
   sidekiq
   simple_form

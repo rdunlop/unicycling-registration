@@ -47,6 +47,7 @@ gem 'unicorn', require: false
 gem 'whenever'
 gem 'rubocop', require: false
 gem 'gaffe'
+gem 'rubyzip'
 
 # I18n Translation
 # use rdunlop branch which has:

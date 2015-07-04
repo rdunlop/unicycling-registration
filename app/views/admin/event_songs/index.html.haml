@@ -4,9 +4,12 @@
   %thead
     %tr
       %th Event
-      %th # Uploaded Songs
+      %th Competition
+      %th # Event Uploaded Songs
   %tbody
     - @event.each do |event|
-      %tr
-        %td= link_to event, event_song_path(event)
-        %td= event.songs.count
+      - event.competitions.each do |competition|
+        %tr
+          %td= link_to event, event_song_path(event)
+          %td= link_to competition, competition_song_path(competition)
+          %td= event.songs.count
