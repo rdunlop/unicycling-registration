@@ -14,6 +14,8 @@
       - else
         %th.sign_up Country
       %th.sign_up Age Group
+      - if @competition.event.accepts_music_uploads?
+        %th.sign_up Music
       %th.sign_up Original Event Selection
       %th Warnings?
       %th.competitor_member
@@ -35,6 +37,8 @@
         - else
           %td= competitor.country
         %td= competitor.age_group_entry_description
+        - if @competition.event.accepts_music_uploads?
+          %td= competitor.has_music?
         %td= event_category
         %td.js--highlightIfNotBlank= competitor.member_warnings
         %td

@@ -37,6 +37,7 @@ class Event < ActiveRecord::Base
   has_many :time_results, through: :competitors
 
   belongs_to :category, inverse_of: :events, touch: true
+  has_many :songs
 
   acts_as_restful_list scope: :category
 

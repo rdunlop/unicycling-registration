@@ -1,4 +1,4 @@
-%h2 All Songs
+%h2 #{@competition} Songs
 
 %table.sortable
   %thead
@@ -6,21 +6,29 @@
       %th Reg ID
       %th Reg Name
       %th Guest?
-      %th Event
       %th Description
       %th File name
       %th Updated Date
       %th Download
+      %th Competitor
   %tbody
     - @songs.each do |song|
       %tr
         %td= song.registrant.bib_number
         %td= song.registrant
         %td.js--highlightIfNotBlank= song.uploaded_by_guest? ? "Yes (#{song.user})" : ""
-        %td= song.event
         %td= song.description
         %td= song.human_name
         %td= song.updated_at
         %td
           - if song.song_file_name.present?
             = link_to 'Download', song.song_file_name_url, target: '_blank'
+        %td
+          - if song.competitor.present?
+            = song.competitor.to_s
+            %br
+          = form_tag(event_songs_path, method: :post) do
+            = hidden_field_tag :event_id, @event.id
+            = hidden_field_tag :song_id, song.id
+            = select_tag :competitor_id, options_from_collection_for_select(@event.competitors.active, "id", "to_s_with_id"), include_blank: true, class: "chosen-select js--autoFocus"
+            = submit_tag "Assign"

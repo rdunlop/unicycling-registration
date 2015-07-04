@@ -182,7 +182,7 @@ class Ability
 
   def define_music_dj_roles(user)
     if user.has_role? :music_dj
-      can :list, :song
+      can :manage, :event_song
       # automatically can download music via S3 links
     end
   end
@@ -366,7 +366,7 @@ class Ability
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
       can [:crud, :file_complete, :add_file], Song
-      can :list, :song
+      can :manage, :event_song
       can [:crud], CompetitionWheelSize
     end
     # not-object-specific

@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe Admin::SongsController do
+describe Admin::EventSongsController do
   before(:each) do
     FactoryGirl.create(:event_configuration, music_submission_end_date: Date.today + 4.days)
     @user = FactoryGirl.create(:user)
     sign_in @user
   end
 
-  describe "GET list" do
+  describe "GET index" do
     it "loads all songs" do
-      get :list
+      get :index
       expect(response).to redirect_to(root_url)
     end
     describe "as an admin" do
@@ -17,10 +17,9 @@ describe Admin::SongsController do
         sign_out @user
         sign_in FactoryGirl.create(:admin_user)
       end
-      it "views the songs list" do
-        song = FactoryGirl.create(:song)
-        get :list
-        expect(assigns(:songs)).to eq([song])
+      it "views the songs list index" do
+        get :index
+        expect(response).to_not redirect_to(root_url)
       end
     end
   end

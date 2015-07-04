@@ -10,9 +10,11 @@
 #  updated_at     :datetime
 #  event_id       :integer
 #  user_id        :integer
+#  competitor_id  :integer
 #
 # Indexes
 #
+#  index_songs_on_competitor_id                           (competitor_id) UNIQUE
 #  index_songs_on_user_id_and_registrant_id_and_event_id  (user_id,registrant_id,event_id) UNIQUE
 #  index_songs_registrant_id                              (registrant_id)
 #
@@ -23,6 +25,7 @@ class Song < ActiveRecord::Base
   belongs_to :registrant, touch: true
   belongs_to :event
   belongs_to :user
+  belongs_to :competitor#, allow_nil: true
 
   validates :registrant_id, :user_id, :event_id, :description, presence: true
 

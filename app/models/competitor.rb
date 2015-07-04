@@ -29,6 +29,8 @@ class Competitor < ActiveRecord::Base
   belongs_to :competition, touch: true, inverse_of: :competitors
   acts_as_restful_list scope: :competition
 
+  has_one :music_file, class_name: "Song", foreign_key: "competitor_id", dependent: :nullify
+
   has_many :lane_assignments, dependent: :destroy
   has_many :scores, dependent: :destroy
   has_many :boundary_scores, dependent: :destroy
@@ -374,6 +376,10 @@ class Competitor < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def has_music?
+    music_file.present?
   end
 
   def club

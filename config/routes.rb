@@ -270,6 +270,9 @@ Workspace::Application.routes.draw do
           post :undelete
         end
       end
+      resources :event_songs, only: [:index, :show, :create] do
+        # XXX For the Download Zip Action
+      end
     end
 
     resources :registrants, only: [:show, :destroy] do
@@ -297,9 +300,6 @@ Workspace::Application.routes.draw do
     resources :competition_wheel_sizes, only: :destroy
 
     resources :songs, only: [:destroy] do
-      collection do
-        get :list, controller: "admin/songs"
-      end
       member do
         get :add_file
         get :file_complete

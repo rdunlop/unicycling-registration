@@ -34,8 +34,8 @@
           %li= link_to 'Competition Overview', competition_setup_path
         - if can?(:manage, AwardLabel)
           %li= link_to  'Print/Create Awards', user_award_labels_path(current_user)
-        - if can?(:list, :song)
-          %li= link_to  'Manage Music', list_songs_path
+        - if can?(:manage, :event_song)
+          %li= link_to  'Manage Music', event_songs_path
         - if can?(:summary, Payment)
           %li= link_to  'Payments', summary_payments_path
         - if can?(:read, :onsite_registration)

@@ -1,0 +1,12 @@
+%h2 All Songs
+
+%table.sortable
+  %thead
+    %tr
+      %th Event
+      %th # Uploaded Songs
+  %tbody
+    - @event.each do |event|
+      %tr
+        %td= link_to event, event_song_path(event)
+        %td= event.songs.count
