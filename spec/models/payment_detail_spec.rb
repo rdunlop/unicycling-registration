@@ -24,7 +24,7 @@ require 'spec_helper'
 
 describe PaymentDetail do
   before(:each) do
-    @pd = FactoryGirl.create(:payment_detail)
+    @pd = FactoryGirl.create(:payment_detail, amount: 90)
   end
 
   it "can be cerated by factory" do
@@ -80,7 +80,7 @@ describe PaymentDetail do
     @refund.save!
     @pd.reload
     expect(@pd.refunded?).to eq(true)
-    expect(@pd.cost).to eq(@pd.amount / 2.0)
+    expect(@pd.cost).to eq(45) # amount is 90, 50% of 90 is 45
   end
 
   it "is not refunded by default" do
