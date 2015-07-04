@@ -39,7 +39,5 @@ class Admin::CompetitionSongsController < ApplicationController
     zip_creator.zip_file(filename) do |zip_file|
       send_data(zip_file, :type => 'application/zip', :filename => filename)
     end
-
-    redirect_to competition_song_path(competition)
   end
 end
