@@ -19,7 +19,7 @@
         - EventConfiguration.singleton.noncompetitor_benefits_list.each do |item|
           %li= item
       = link_to t(".create_new_noncompetitor"), {}, class: "js--display_new_registrant noncompetitor registration_button", data: { registrant_type: 'noncompetitor' }
-  - if @config.spectators
+  - if @config.spectators?
     .pricing_option.spectator_sign_up
       %h3.title= t('spectator')
       .current_price= print_formatted_currency(0)

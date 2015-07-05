@@ -11,11 +11,13 @@
 #  updated_at          :datetime
 #  is_start_time       :boolean          default(FALSE), not null
 #  number_of_laps      :integer
-#  status              :string(255)
+#  status              :string(255)      not null
 #  comments            :text
 #  comments_by         :string(255)
 #  number_of_penalties :integer
-#  entered_at          :datetime
+#  entered_at          :datetime         not null
+#  entered_by_id       :integer          not null
+#  preliminary         :boolean
 #
 # Indexes
 #
@@ -27,7 +29,7 @@ require 'spec_helper'
 describe TimeResult do
   before(:each) do
     @competitor = FactoryGirl.create(:event_competitor)
-    @tr = FactoryGirl.create(:time_result, :competitor => @competitor)
+    @tr = FactoryGirl.create(:time_result, competitor: @competitor)
   end
   it "is valid from FactoryGirl" do
     expect(@tr.valid?).to eq(true)
@@ -56,7 +58,7 @@ describe TimeResult do
   describe "With a new TimeResult" do
     subject { TimeResult.new }
     it "defaults to not DQ" do
-      expect(subject.disqualified).to eq(false)
+      expect(subject.disqualified?).to eq(false)
     end
 
     it "defaults to 0 minutes" do

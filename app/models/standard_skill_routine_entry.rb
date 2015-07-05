@@ -13,36 +13,32 @@
 class StandardSkillRoutineEntry < ActiveRecord::Base
   belongs_to :standard_skill_entry
   belongs_to :standard_skill_routine
-  acts_as_restful_list :scope => :standard_skill_routine
+  acts_as_restful_list scope: :standard_skill_routine
 
-  validates :standard_skill_entry_id, :standard_skill_routine_id, :presence => true
-  validates :position, :presence => true, :numericality => {:only_integer => true}
+  validates :standard_skill_entry_id, :standard_skill_routine_id, presence: true
+  validates :position, presence: true, numericality: {only_integer: true}
 
   validate :no_more_than_18_skill_entries
   validate :no_more_than_12_non_riding_skills
   validate :each_skill_must_be_different_number
 
-  def skill_number_and_letter
-    standard_skill_entry.skill_number_and_letter
-  end
+  delegate :skill_number_and_letter, to: :standard_skill_entry
 
-  def description
-    standard_skill_entry.description
-  end
+  delegate :description, to: :standard_skill_entry
 
   def add_standard_skill_routine_entry(params)
     # keep the position values between 1 and 18
-    if self.standard_skill_routine_entries.size > 1
+    if standard_skill_routine_entries.size > 1
       # if the user doesn't specify a position, default to 'end of list'
-      if params[:position].nil? || params[:position].empty? || params[:position].to_i > self.standard_skill_routine_entries.last.position+1
-        params[:position] = self.standard_skill_routine_entries.last.position+1
+      if params[:position].nil? || params[:position].empty? || params[:position].to_i > standard_skill_routine_entries.last.position + 1
+        params[:position] = standard_skill_routine_entries.last.position + 1
       elsif params[:position].to_i < 1
         params[:position] = 1
       end
     elsif params[:position].nil? || params[:position].empty?
       params[:position] = 1
     end
-    self.standard_skill_routine_entries.build(params)
+    standard_skill_routine_entries.build(params)
   end
 
   private

@@ -1,5 +1,5 @@
 %h1 Two Attempt Entries
-- if @competition.locked
+- if @competition.locked?
   .locked_banner LOCKED
 
 = link_to "Proof", proof_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time)

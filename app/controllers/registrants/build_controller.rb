@@ -3,21 +3,9 @@ class Registrants::BuildController < ApplicationController
   before_action :authenticate_user!
 
   load_resource :registrant, find_by: :bib_number, except: [:index, :create]
-  authorize_resource :registrant
   before_action :set_steps
   before_action :setup_wizard
-
-  def set_steps
-    if @registrant.nil? || @registrant.competitor
-      if @registrant.try(:age) && @registrant.age <= 10
-        self.steps = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
-      else
-        self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details, :expenses]
-      end
-    else
-      self.steps = [:add_name, :add_volunteers, :add_contact_details, :expenses]
-    end
-  end
+  authorize_resource :registrant
 
   before_action :load_categories, only: [:show, :update, :add_events]
   layout "wizard"
@@ -38,6 +26,8 @@ class Registrants::BuildController < ApplicationController
   end
 
   def update
+    # this is so that we have a clearer ability.rb specification
+    authorize! :update, @registrant
     case wizard_value(step)
     when :add_name
       @registrant.status = "base_details" if @registrant.status == "blank"
@@ -61,7 +51,7 @@ class Registrants::BuildController < ApplicationController
     if @registrant.save
       # drop into the second step
       set_steps # reset steps to ensure we get the correct set of steps
-      redirect_to wizard_path(steps.second, :registrant_id => @registrant)
+      redirect_to wizard_path(steps.second, registrant_id: @registrant)
     else
       flash[:alert] = "Unable to create registrant: " + @registrant.errors.full_messages.join(", ")
       redirect_to user_registrants_path(current_user)
@@ -69,6 +59,18 @@ class Registrants::BuildController < ApplicationController
   end
 
   private
+
+  def set_steps
+    if @registrant.nil? || @registrant.competitor
+      if @registrant.try(:age) && @registrant.age <= 10
+        self.steps = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
+      else
+        self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details, :expenses]
+      end
+    else
+      self.steps = [:add_name, :add_volunteers, :add_contact_details, :expenses]
+    end
+  end
 
   def registrant_type
     params[:registrant_type]
@@ -81,17 +83,17 @@ class Registrants::BuildController < ApplicationController
   end
 
   def attributes
-    [ :first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
-      :online_waiver_signature, :wheel_size_id, :rules_accepted,
-      volunteer_opportunity_ids: [],
-      registrant_choices_attributes: [:event_choice_id, :value, :id],
-      registrant_event_sign_ups_attributes: [:event_category_id, :signed_up, :event_id, :id],
-      contact_detail_attributes: [:id, :email,
-                                  :birthplace, :italian_fiscal_code,
-                                  :address, :city, :country_residence, :country_representing,
-                                  :mobile, :phone, :state_code, :zip, :club, :club_contact, :usa_member_number,
-                                  :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
-                                  :responsible_adult_name, :responsible_adult_phone]
+    [:first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
+     :online_waiver_signature, :wheel_size_id, :rules_accepted,
+     volunteer_opportunity_ids: [],
+     registrant_choices_attributes: [:event_choice_id, :value, :id],
+     registrant_event_sign_ups_attributes: [:event_category_id, :signed_up, :event_id, :id],
+     contact_detail_attributes: [:id, :email,
+                                 :birthplace, :italian_fiscal_code,
+                                 :address, :city, :country_residence, :country_representing,
+                                 :mobile, :phone, :state_code, :zip, :club, :club_contact, :usa_member_number,
+                                 :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
+                                 :responsible_adult_name, :responsible_adult_phone]
     ]
   end
 

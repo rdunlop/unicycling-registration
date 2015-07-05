@@ -13,20 +13,62 @@ EventClass
 An EventClass has the following effects:
 - Competition: how do "places" get calculated?
 - Competition: what is the printed description of the results ("Time", "Score", etc)
-- AWardLabel: do we print the name of the competition along with the Event name, or just the competition name ***** do some other way?
+- Competition: can_calculated_age_group_results? which enables calculating placings per-age-group (ie: before the whole competition data is entered)
+- AwardLabel: do we print the name of the competition along with the Event name, or just the competition name ***** do some other way?
 - Competitor: does a competitor have any results, based on the way that the competition is being calculated
-- Compteitor: what is the current score/result for the competitor 
+- Competitor: what is the current score/result for the competitor
 - JudgeType: Display this judge-type as an option when
 - CompetitionController: what are all of the results for a competiton (be able to destroy them all)
-- CompetitonController: when setting all places, where do I redirect to (XXX can be eliminated with helpers?)
-- CompetiionController: export_function chooses the results (should be combined with the competitor.result probably)
+- CompetitionController: when setting all places, where do I redirect to (XXX can be eliminated with helpers?)
+- CompetitionController: export_function chooses the results (should be combined with the competitor.result probably)
 - EventsController: chooses which events to show on each of the pages o
 - ImportController: determine the type of data being importetd for a competition (Time, or External)
-- ImportController :determine how to convert from an ImportResult into a true result (Time, or External)
+- ImportController: determine how to convert from an ImportResult into a true result (Time, or External)
 
 - EventsHelper: Where are scores entered
 - EventsHelper: Where are scores summarized
 - EventsHelper: some others (not needed?)
+
+
+  # def self.scoring_options
+  #   {
+  #     # How to gather
+  #     # results
+  #     #              How to calculate scores from those results
+  #     #
+  #     # Settings:    ArtScorClass           ArtScorClass2015  StreetScoreClass     StreetScoreClass
+  #     #              ArtResCalc             ArtResCalc2015,   StreetResCalc,        StreetFinalResCalc
+  #     "Artistic" => ["Freestyle <= 2014", "Freestyle 2015+", "Street Comp Prelim", "Street Comp Final"],
+  #        start_entry => []
+  #        end_entry=> [(implied) "Judges"]
+  #
+  #     #           ExternalResultResCalc BOTH ...but different PointsScoringClass invocations?
+  #     "Points" => ["Low to High", "High to Low"],
+  #        start_entry => [nil, "Mass Start"] (allows multiple waves for Trials, for example)
+  #        end_entry=> ["One Data Per Line", "Externally Ranked (CSV)"]
+  #
+  #     #          RaceResultCalculator BOTH...but different RaceScoringClass Invokations?
+  #     "Timed" => ["Shortest Time", "Longest Time", "Shortest Time Multi-Lap"],
+  #        start_entry => ["Two Data Per Line", "One Data Per Line", "Mass Start" (allows Wave entry, and Geared/Crank entry too, for now)]
+  #        end_entry=> ["Two Data Per Line", "One Data Per Line", "Track E-Timer", "Externally Ranked (CSV)", "Chip-Timing"]
+  #        note: Setting "end_entry" to "Track E-Timer" Enables the heat/lane assignment system
+  #        note: cannot set start_entry to anything if end_entry is Track E-Timer
+  #
+  #     "High/Long" => ["<= 2014", "2015+"],
+  #        end_entry=> [(implied) "High/Long Judges"]
+  #
+  #     "Overall", => [],
+  #   }
+  # end
+  #
+  # Migration:
+  #  end_entry of Track E-Timer => start_entry= nil (and confirm that uses_lane_assignments: true)
+  #  DROP uses_lane_assignments  (part of the Scoring Class now )
+  #  ScoringClass migrations:
+  #   Freestyle => ""
+
+  # it might be useful to separate the Wave-Recording from the Geared/CrankSize recording, for some events gather that during check-in
+
 
 
 Registration (Ruby on Rails)
@@ -159,5 +201,5 @@ Things that UCP does that are not handled by the above design:
 - Report of the results for a competitor (summary format)
 - Printing Start-lists (well, maybe by the new judging system?)
 - Allow easy addition of new registrants (multiple systems need multiple-updates)
-- 
+-
 

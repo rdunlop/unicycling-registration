@@ -16,4 +16,3 @@ class Printing::RaceRecordingController < ApplicationController
     end
   end
 end
-

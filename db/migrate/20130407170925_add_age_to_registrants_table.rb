@@ -5,13 +5,13 @@ class AddAgeToRegistrantsTable < ActiveRecord::Migration
   class Registrant < ActiveRecord::Base
     def set_age
       start_date = EventConfiguration.first.start_date
-      if start_date.nil? || self.birthday.nil?
+      if start_date.nil? || birthday.nil?
         self.age = 99
       else
-        if (self.birthday.month < start_date.month) || (self.birthday.month == start_date.month && self.birthday.day <= start_date.day)
-          self.age = start_date.year - self.birthday.year
+        if (birthday.month < start_date.month) || (birthday.month == start_date.month && birthday.day <= start_date.day)
+          self.age = start_date.year - birthday.year
         else
-          self.age = (start_date.year - 1) - self.birthday.year
+          self.age = (start_date.year - 1) - birthday.year
         end
       end
     end

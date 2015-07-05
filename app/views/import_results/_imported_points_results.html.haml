@@ -1,0 +1,12 @@
+%table.import_results
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Competitor Exists?
+      %th Rank (External)
+      %th Details (external)
+      %th Disqualified
+      %th
+  %tbody
+    = render partial: 'imported_points_result', collection: @import_results, as: :import_result

@@ -34,7 +34,7 @@ describe StandardSkillEntry do
 
     s = StandardSkillEntry.last
     expect(s.number).to eq(307)
-    s.letter == "n"
+    expect(s.letter).to eq("n")
     expect(s.points).to eq(4.8)
     expect(s.description).to eq('jump mount to seat drag in back, feet holding seat')
   end
@@ -47,7 +47,7 @@ describe StandardSkillEntry do
     std = FactoryGirl.build(:standard_skill_entry)
     expect(std.non_riding_skill).to eq(false)
 
-    std = FactoryGirl.build(:standard_skill_entry, :number => 100)
+    std = FactoryGirl.build(:standard_skill_entry, number: 100)
     expect(std.non_riding_skill).to eq(true)
   end
 
@@ -61,9 +61,9 @@ describe StandardSkillEntry do
     end
     it "removes the associated entry upon destroy" do
       skill = @entry.standard_skill_entry
-      expect {
+      expect do
         skill.destroy
-      }.to change(StandardSkillRoutineEntry, :count).by(-1)
+      end.to change(StandardSkillRoutineEntry, :count).by(-1)
     end
   end
 end

@@ -2,7 +2,7 @@ class AwardLabelsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
-  before_action :load_user, :only => [:index, :create, :create_by_competition, :create_labels, :expert_labels, :announcer_sheet, :normal_labels, :destroy_all, :create_labels_by_registrant]
+  before_action :load_user, only: [:index, :create, :create_by_competition, :create_labels, :expert_labels, :announcer_sheet, :normal_labels, :destroy_all, :create_labels_by_registrant]
 
   def load_user
     @user = User.find(params[:user_id])
@@ -79,7 +79,7 @@ class AwardLabelsController < ApplicationController
     n = 0
     competition.competitors.active.each do |competitor|
       competitor.members.each do |member|
-        n += create_labels_for_competitor(competitor, member.registrant, @user, true, competition.has_experts, min_place, max_place)
+        n += create_labels_for_competitor(competitor, member.registrant, @user, true, competition.has_experts?, min_place, max_place)
       end
     end
     respond_to do |format|
@@ -136,7 +136,7 @@ class AwardLabelsController < ApplicationController
     end
 
     if experts
-      if competition.has_experts
+      if competition.has_experts?
         if create_label(competitor, registrant, true, min_place, max_place, user)
           n += 1
         end
@@ -177,6 +177,7 @@ class AwardLabelsController < ApplicationController
     lines += label.line_4 + "\n" if label.line_4.present?
     lines += label.line_5 + "\n" if label.line_5.present?
     lines += "<b>" + label.line_6 + "</b>" + "\n" if label.line_6.present?
+    lines
   end
 
   def initialize_by_skipped_positions
@@ -232,11 +233,11 @@ class AwardLabelsController < ApplicationController
         "row_gutter" => 2.5 # added padding
       }
     }
-    labels = Prawn::Labels.render(names, :type => "Avery5160padded", :shrink_to_fit => true) do |pdf, name|
-      pdf.text name, :align =>:center, :valign => :center, :inline_format => true
+    labels = Prawn::Labels.render(names, type: "Avery5160padded", shrink_to_fit: true) do |pdf, name|
+      pdf.text name, align: :center, valign: :center, inline_format: true
     end
 
-    send_data labels, :filename => "normal-labels-#{Date.today}.pdf"
+    send_data labels, filename: "normal-labels-#{Date.today}.pdf"
   end
 
   def expert_labels
@@ -280,11 +281,11 @@ class AwardLabelsController < ApplicationController
     # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
     #  and it will wrap lines as necessary, and then shrink the text.
 
-    labels = Prawn::Labels.render(names, :type => "Avery8293", :shrink_to_fit => true) do |pdf, name|
-      pdf.text name, :align => :center, :inline_format => true, :valign => :center
+    labels = Prawn::Labels.render(names, type: "Avery8293", shrink_to_fit: true) do |pdf, name|
+      pdf.text name, align: :center, inline_format: true, valign: :center
     end
 
-    send_data labels, :filename => "bag-labels-#{Date.today}.pdf", :type => "application/pdf"
+    send_data labels, filename: "bag-labels-#{Date.today}.pdf", type: "application/pdf"
   end
 
   def announcer_sheet

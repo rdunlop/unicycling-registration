@@ -21,32 +21,40 @@
 #
 
 class CompetitionSource < ActiveRecord::Base
-  belongs_to :event_category, :inverse_of => :competition_sources
-  belongs_to :target_competition, :class_name => "Competition", :inverse_of => :competition_sources
+  belongs_to :event_category, inverse_of: :competition_sources
+  belongs_to :target_competition, class_name: "Competition", inverse_of: :competition_sources
   belongs_to :competition
 
   def self.gender_filters
     ["Both", "Male", "Female"]
   end
-  validates :gender_filter, :inclusion => { :in => self.gender_filters, :allow_nil => false }
-  validates :target_competition, :presence => true
+  validates :gender_filter, inclusion: { in: gender_filters, allow_nil: false }
+  validates :target_competition, presence: true
   validate :source_present
   validate :max_place_with_competition
 
+  def registration_source?
+    event_category.present?
+  end
+
+  def competition_source?
+    competition.present?
+  end
+
   def source_present
-    if self.event_category.nil? && self.competition.nil?
+    if event_category.nil? && competition.nil?
       errors[:base] << "Must select an Event Category or a Competition"
     end
   end
 
   def max_place_with_competition
-    if self.max_place && self.competition.nil?
+    if max_place && competition.nil?
       errors[:base] << "Must select a Competition when setting max_place"
     end
   end
 
   def to_s
-    target_competition.to_s + " -> " + self.competition + self.event_category
+    target_competition.to_s + " -> " + competition + event_category
   end
 
   # XXX this needs cachnig somehow.

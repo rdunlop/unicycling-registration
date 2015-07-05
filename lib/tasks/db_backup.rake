@@ -1,5 +1,5 @@
 desc "This task describes how to migrate the data to the single-instance"
-task :db_backup_commands => :environment do
+task db_backup_commands: :environment do
   puts "psql -c 'create database app_tenant template <current_app_db>' <current_app_db>"
   puts "psql -c 'ALTER schema public RENAME to <new_tenant_schema>' app_tenant"
   puts "pg_dump -n <new_tenant_schema> app_tenant -f tenant.schema"

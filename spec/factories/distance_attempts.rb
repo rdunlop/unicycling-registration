@@ -20,7 +20,7 @@
 
 FactoryGirl.define do
   factory :distance_attempt do
-    association :competitor, :factory => :event_competitor
+    association :competitor, factory: :event_competitor
     judge      # use FactoryGirl to create
     distance 220
     fault false

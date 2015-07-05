@@ -2,8 +2,8 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
   include SortableObject
 
   before_action :authenticate_user!
-  before_action :load_event, :only => [:index, :create]
-  before_action :load_new_event_choice, :only => [:create]
+  before_action :load_event, only: [:index, :create]
+  before_action :load_new_event_choice, only: [:create]
   load_and_authorize_resource
 
   before_action :set_breadcrumbs
@@ -80,6 +80,6 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
   def event_choice_params
     params.require(:event_choice).permit(:cell_type, :label, :multiple_values, :optional, :tooltip,
                                          :optional_if_event_choice_id, :required_if_event_choice_id,
-                                         :translations_attributes => [:id, :label, :tooltip, :locale])
+                                         translations_attributes: [:id, :label, :tooltip, :locale])
   end
 end

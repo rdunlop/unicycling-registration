@@ -4,9 +4,9 @@ class CompetitorsController < ApplicationController
 
   before_action :authenticate_user!
   load_and_authorize_resource :competition, except: [:edit, :update, :destroy, :update_row_order]
-  before_action :load_new_competitor, :only => [:create]
-  load_and_authorize_resource :through => :competition, :except => [:edit, :update, :destroy, :update_row_order]
-  load_and_authorize_resource :only => [:edit, :update, :destroy, :update_row_order]
+  before_action :load_new_competitor, only: [:create]
+  load_and_authorize_resource through: :competition, except: [:edit, :update, :destroy, :update_row_order]
+  load_and_authorize_resource only: [:edit, :update, :destroy, :update_row_order]
 
   before_action :set_parent_breadcrumbs, only: [:index, :new, :edit, :display_candidates]
 
@@ -24,7 +24,7 @@ class CompetitorsController < ApplicationController
   def index
     add_breadcrumb "Manage Competitors"
     @registrants = @competition.signed_up_registrants
-    @competitors = @competition.competitors.includes(:members => [:registrant])
+    @competitors = @competition.competitors.includes(members: [:registrant])
   end
 
   # show the competitors, their overall places, and their times
@@ -100,12 +100,12 @@ class CompetitorsController < ApplicationController
   def create
     if @competitor.save
       flash[:notice] = 'Competition registrant was successfully created.'
+      redirect_to competition_competitors_path(@competition)
     else
       @registrants = @competition.signed_up_registrants
       flash.now[:alert] = 'Error adding Registrant'
+      render :new
     end
-
-    respond_with(@competitor, location: competition_competitors_path(@competition))
   end
 
   # PUT /competitors/1
@@ -113,8 +113,11 @@ class CompetitorsController < ApplicationController
   def update
     if @competitor.update_attributes(competitor_params)
       flash[:notice] = 'Competition registrant was successfully updated.'
+      redirect_to competition_competitors_path(@competitor.competition)
+    else
+      @competition = @competitor.competition
+      render :edit
     end
-    respond_with(@competitor, location: competition_competitors_path(@competitor.competition), action: "edit")
   end
 
   # DELETE /competitors/1
@@ -142,7 +145,7 @@ class CompetitorsController < ApplicationController
   end
 
   def competitor_params
-    params.require(:competitor).permit(:status, :custom_name, {:members_attributes => [:registrant_id, :id, :_destroy] } )
+    params.require(:competitor).permit(:status, :custom_name, members_attributes: [:registrant_id, :id, :_destroy])
   end
 
   def load_competition

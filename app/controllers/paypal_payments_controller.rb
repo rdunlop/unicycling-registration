@@ -23,7 +23,7 @@ class PaypalPaymentsController < ApplicationController
         end
       end
     end
-    render :nothing => true
+    render nothing: true
   end
 
   # PayPal return endpoint

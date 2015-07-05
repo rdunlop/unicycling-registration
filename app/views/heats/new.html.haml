@@ -1,8 +1,10 @@
 %h1= "#{@competition} - Heat/Lane Assignment"
 
+%p This form can be used to automatically assign competitors to heats/lanes. This system will prevent assigning competitors from multiple age groups to the same heat.
+
 = form_tag competition_heats_path(@competition), method: :post do
-  = label_tag :lanes
+  = label_tag :lanes, "Number of Lanes per Heat"
   = text_field_tag :lanes
-  = submit_tag "Create Heat/Lane assignments"
+  = submit_tag "Create Heat/Lane Assignments"
 
 = link_to "Back", @competition

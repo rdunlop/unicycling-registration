@@ -1,6 +1,6 @@
 %h1 Data Entry for #{@competition}
 
-- if @competition.locked
+- if @competition.locked?
   .locked_banner LOCKED
 
 = link_to "Proof", proof_single_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), class: 'action_button'

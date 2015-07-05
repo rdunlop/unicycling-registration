@@ -1,14 +1,10 @@
 class JudgesController < ApplicationController
   layout "competition_management"
-  load_and_authorize_resource :competition, :only => [:index, :create, :destroy, :copy_judges]
-  before_action :load_new_judge, :only => [:create]
+  load_and_authorize_resource :competition, only: [:index, :create, :destroy, :copy_judges]
+  before_action :load_new_judge, only: [:create]
   load_and_authorize_resource
 
   respond_to :html
-
-  def load_new_judge
-    @judge = @competition.judges.new(judge_params)
-  end
 
   # POST /competitions/#/judges
   # POST /competitions/#/judges.json
@@ -47,6 +43,16 @@ class JudgesController < ApplicationController
     end
   end
 
+  # this is used to toggle the active-status of a judge
+  def toggle_status
+    if @judge.active?
+      @judge.update_attribute(:status, "removed")
+    else
+      @judge.update_attribute(:status, "active")
+    end
+    redirect_to :back
+  end
+
   # DELETE /judges/1
   # DELETE /judges/1.json
   def destroy
@@ -68,7 +74,7 @@ class JudgesController < ApplicationController
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Manage Judges", competition_judges_path(@competition)
 
-    @judge_types = JudgeType.order(:id).where(:event_class => @competition.event_class)
+    @judge_types = JudgeType.order(:name).where(event_class: @competition.uses_judges)
     @all_data_entry_volunteers = User.with_role(:data_entry_volunteer).order(:email)
     @race_officials = User.with_role(:race_official).order(:email)
 
@@ -78,6 +84,10 @@ class JudgesController < ApplicationController
   end
 
   private
+
+  def load_new_judge
+    @judge = @competition.judges.new(judge_params)
+  end
 
   def judge_params
     params.require(:judge).permit(:judge_type_id, :user_id, :standard_execution_scores_attributes, :standard_difficulty_scores_attributes)

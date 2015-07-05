@@ -24,7 +24,7 @@ require 'spec_helper'
 
 describe PaymentDetail do
   before(:each) do
-    @pd = FactoryGirl.create(:payment_detail)
+    @pd = FactoryGirl.create(:payment_detail, amount: 90)
   end
 
   it "can be cerated by factory" do
@@ -57,15 +57,15 @@ describe PaymentDetail do
   it "has additional description if it is refunded" do
     expect(@pd.refunded?).to eq(false)
     expect(@pd.to_s).to eq(@pd.expense_item.to_s)
-    @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
+    @ref = FactoryGirl.create(:refund_detail, payment_detail: @pd)
     @pd.reload
     expect(@pd.refunded?).to eq(true)
-    expect(@pd.to_s).to eq("#{@pd.expense_item.to_s} (Refunded)")
+    expect(@pd.to_s).to eq("#{@pd.expense_item} (Refunded)")
   end
 
   it "indicates that it is a refund if it has an associated refund_detail" do
     expect(@pd.refunded?).to eq(false)
-    @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
+    @ref = FactoryGirl.create(:refund_detail, payment_detail: @pd)
     @pd.reload
     expect(@pd.refunded?).to eq(true)
     expect(@ref.percentage).to eq(100)
@@ -74,13 +74,13 @@ describe PaymentDetail do
 
   it "it marks the cost as partial if the refund is not 100%" do
     expect(@pd.refunded?).to eq(false)
-    @refund_detail = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
+    @refund_detail = FactoryGirl.create(:refund_detail, payment_detail: @pd)
     @refund = @refund_detail.refund
     @refund.percentage = 50
     @refund.save!
     @pd.reload
     expect(@pd.refunded?).to eq(true)
-    expect(@pd.cost).to eq(@pd.amount / 2.0)
+    expect(@pd.cost).to eq(45) # amount is 90, 50% of 90 is 45
   end
 
   it "is not refunded by default" do
@@ -104,7 +104,7 @@ describe PaymentDetail do
     end
 
     it "doesn't list refunded payments" do
-      @ref = FactoryGirl.create(:refund_detail, :payment_detail => @pd)
+      @ref = FactoryGirl.create(:refund_detail, payment_detail: @pd)
       expect(PaymentDetail.completed).to eq([])
     end
   end

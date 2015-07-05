@@ -1,0 +1,6 @@
+= render :partial => "results"
+%br
+%h2 New Time Result
+- unless @time_result.nil?
+  = render 'form'
+= link_to "Back", @competition

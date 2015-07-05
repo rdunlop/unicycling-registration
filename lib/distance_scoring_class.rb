@@ -5,9 +5,8 @@ class DistanceScoringClass < BaseScoringClass
     The competitor with the highest max distance will win."
   end
 
-  # This is used temporarily to access the calculator, but will likely be private-ized soon
-  def score_calculator
-    OrderedResultCalculator.new(@competition, false)
+  def lower_is_better
+    false
   end
 
   # describes how to label the results of this competition
@@ -23,41 +22,9 @@ class DistanceScoringClass < BaseScoringClass
     "distance_attempts"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    competitor.distance_attempts.any?
-  end
-
-  # returns the result for this competitor
-  def competitor_result(competitor)
-    if self.competitor_has_result?(competitor)
-      max_distance = competitor.max_successful_distance
-      "#{max_distance} cm" unless max_distance == 0
-    else
-      nil
-    end
-  end
-
-  def competitor_comparable_result(competitor)
-    if self.competitor_has_result?(competitor)
-      competitor.max_successful_distance + competitor.tie_breaker_adjustment_value
-    else
-      0
-    end
-  end
-
-  def imports_times
-    true
-  end
-
   def competitor_dq?(competitor)
     return false if competitor.best_distance_attempt.nil?
-    competitor.best_distance_attempt.fault
-  end
-
-  # Function which places all of the competitors in the competition
-  def place_all
-    score_calculator.update_all_places
+    competitor.best_distance_attempt.fault?
   end
 
   # Used when trying to destroy all results for a competition
@@ -66,7 +33,7 @@ class DistanceScoringClass < BaseScoringClass
   end
 
   def uses_judges
-    true
+    "High/Long"
   end
 
   def scoring_path(judge)

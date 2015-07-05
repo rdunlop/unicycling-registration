@@ -1,0 +1,16 @@
+%h1 New refund
+%p
+  %b Note
+  This doesn't actually send them back money, only changes the accounting within the registration system.
+
+%div
+  Select the Registrants to refund payments for:
+%br
+.payment_details
+  = form_tag(choose_manual_refunds_path, method: :get) do
+    = label_tag(:registrant_ids, "Registrants")
+    = select_tag(:registrant_ids, options_from_collection_for_select(@registrants, "id", "with_id_to_s"), :multiple => true, class: 'chosen-select')
+    %br
+    = submit_tag('Start Payment Refund')
+  %div
+    = link_to 'Back', summary_payments_path

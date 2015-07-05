@@ -1,5 +1,7 @@
 class Compete::AgeGroupTypesController < ApplicationController
   before_action :authenticate_user!
+  before_action :add_breadcrumbs
+
   load_and_authorize_resource
 
   respond_to :html
@@ -40,8 +42,12 @@ class Compete::AgeGroupTypesController < ApplicationController
 
   private
 
+  def add_breadcrumbs
+    add_breadcrumb "Age Group Types", age_group_types_path
+  end
+
   def age_group_type_params
     params.require(:age_group_type).permit(:name, :description,
-                                           :age_group_entries_attributes =>[:id, :_destroy, :end_age, :gender, :short_description, :start_age, :wheel_size_id])
+                                           age_group_entries_attributes: [:id, :_destroy, :end_age, :gender, :short_description, :start_age, :wheel_size_id])
   end
 end

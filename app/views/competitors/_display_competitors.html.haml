@@ -1,9 +1,12 @@
+- display_group_size = @competition.num_members_per_competitor == "Three or more"
 %table.sortable.competitor_statuses
   %caption Competitors
   %thead
     %tr
       %th.sign_up ID
       %th.sign_up Name
+      - if display_group_size
+        %th.sign_up # Members
       %th.sign_up Age
       %th.sign_up Gender
       - if @config.usa?
@@ -11,6 +14,8 @@
       - else
         %th.sign_up Country
       %th.sign_up Age Group
+      - if @competition.event.accepts_music_uploads?
+        %th.sign_up Music
       %th.sign_up Original Event Selection
       %th Warnings?
       %th.competitor_member
@@ -23,6 +28,8 @@
         - event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category)
         %td= competitor.bib_number
         %td= competitor.detailed_name
+        - if display_group_size
+          %td= competitor.members.count
         %td= competitor.age
         %td= competitor.gender
         - if @config.usa?
@@ -30,6 +37,8 @@
         - else
           %td= competitor.country
         %td= competitor.age_group_entry_description
+        - if @competition.event.accepts_music_uploads?
+          %td= competitor.has_music?
         %td= event_category
         %td.js--highlightIfNotBlank= competitor.member_warnings
         %td

@@ -31,13 +31,13 @@ module Globalize
           def after_save
             init_translations
           end
-          # Builds an empty translation for each available 
+          # Builds an empty translation for each available
           # locale not in use after creation
           def init_translations
             I18n.translated_locales.reject{|key| key == :root }.each do |locale|
-              translation = self.translations.find_by_locale locale.to_s
+              translation = translations.find_by_locale locale.to_s
               if translation.nil?
-                translations.build :locale => locale
+                translations.build locale: locale
                 save
               end
             end

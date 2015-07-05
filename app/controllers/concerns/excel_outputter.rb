@@ -17,6 +17,6 @@ module ExcelOutputter
     report = StringIO.new
     s.write report
 
-    send_data report.string, :filename => "#{filename}.xls"
+    send_data report.string, filename: "#{filename}.xls"
   end
 end

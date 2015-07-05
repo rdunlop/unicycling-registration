@@ -19,27 +19,27 @@
 #
 # Indexes
 #
-#  index_judge_types_on_name  (name) UNIQUE
+#  index_judge_types_on_name_and_event_class  (name,event_class) UNIQUE
 #
 
 class JudgeType < ActiveRecord::Base
-  has_many :judges, :dependent => :destroy
-  has_many :competitions, :through => :judges
-  has_many :scores, :through => :judges
+  has_many :judges, dependent: :destroy
+  has_many :competitions, through: :judges
+  has_many :scores, through: :judges
 
-  validates :name, :presence => true, :uniqueness => true
-  validates :event_class, :inclusion => { :in => Competition.scoring_classes }
+  validates :name, presence: true, uniqueness: { scope: :event_class }
+  validates :event_class, inclusion: { in: Competition.scoring_classes }
 
-  validates :val_1_description, :presence => true
-  validates :val_2_description, :presence => true
-  validates :val_3_description, :presence => true
-  validates :val_4_description, :presence => true
+  validates :val_1_description, presence: true
+  validates :val_2_description, presence: true
+  validates :val_3_description, presence: true
+  validates :val_4_description, presence: true
 
-  validates :val_1_max, :presence => true
-  validates :val_2_max, :presence => true
-  validates :val_3_max, :presence => true
-  validates :val_4_max, :presence => true
-  validates :boundary_calculation_enabled, :inclusion => { :in => [false] }  # boundary calculations are disabled
+  validates :val_1_max, presence: true
+  validates :val_2_max, presence: true
+  validates :val_3_max, presence: true
+  validates :val_4_max, presence: true
+  validates :boundary_calculation_enabled, inclusion: { in: [false] }  # boundary calculations are disabled
 
   after_initialize :init
 
@@ -61,23 +61,5 @@ class JudgeType < ActiveRecord::Base
 
   def to_s
     name
-  end
-
-  def convert_place_to_points(place, ties)
-    case event_class
-    when "Freestyle"
-      points = (1..100).to_a
-    when "Street"
-      points = (1..100).to_a # [10, 7, 5, 3, 2, 1]
-    when "Flatland"
-      points = (1..100).to_a
-    end
-
-    total_points = 0
-    (ties + 1).times do
-      total_points +=  points[place - 1] unless points[place - 1].nil?
-      place = place + 1
-    end
-    (total_points * 1.0) / (ties + 1)
   end
 end

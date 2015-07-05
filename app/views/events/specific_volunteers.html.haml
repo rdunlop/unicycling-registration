@@ -6,10 +6,10 @@
   %thead
     %tr
       %th Registrant
-      %th email
+      %th Email
 
   %tbody
-    - @volunteer_opportunity.volunteer_choices.includes(:registrant).each do |vc|
+    - @volunteer_opportunity.active_registrants.each do |registrant|
       %tr
-        %td= vc.registrant.active
-        %td= vc.registrant.contact_detail.email.presence || vc.registrant.user_email
+        %td= registrant
+        %td= registrant.email

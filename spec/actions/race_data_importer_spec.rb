@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-def create_competitor(competition, bib_number, heat, lane)
-  reg = FactoryGirl.create(:registrant, :bib_number => 101)
-  competitor = FactoryGirl.create(:event_competitor, :competition => competition)
-  member = FactoryGirl.create(:member, :competitor => competitor, :registrant => reg)
+def create_competitor(competition, _bib_number, heat, lane)
+  reg = FactoryGirl.create(:registrant, bib_number: 101)
+  competitor = FactoryGirl.create(:event_competitor, competition: competition)
+  FactoryGirl.create(:member, competitor: competitor, registrant: reg)
   if heat && lane
-    FactoryGirl.create(:lane_assignment, :competition => competition, :competitor => competitor, :heat => heat, :lane => lane)
+    FactoryGirl.create(:lane_assignment, competition: competition, competitor: competitor, heat: heat, lane: lane)
   end
 end
 
@@ -21,11 +21,11 @@ describe RaceDataImporter do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101.txt' }
 
     it "creates a competitor" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
-      expect{
+      expect do
         importer.process_csv(sample_input, false)
-      }.to change(ImportResult, :count).by(1)
+      end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
       ir = ImportResult.first
@@ -33,17 +33,17 @@ describe RaceDataImporter do
       expect(ir.minutes).to eq(1)
       expect(ir.seconds).to eq(2)
       expect(ir.thousands).to eq(300)
-      expect(ir.disqualified).to eq(false)
+      expect(ir.disqualified?).to eq(false)
       expect(ir.competition).to eq(competition)
       expect(ir.is_start_time).to eq(false)
     end
 
     it "can import start times" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
-      expect{
+      expect do
         importer.process_csv(sample_input, true)
-      }.to change(ImportResult, :count).by(1)
+      end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
       ir = ImportResult.first
@@ -55,14 +55,14 @@ describe RaceDataImporter do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101_dq.txt' }
 
     it "creates a dq competitor" do
-      @reg = FactoryGirl.create(:registrant, :bib_number => 101)
+      @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
-      expect{
+      expect do
         importer.process_csv(sample_input, true)
-      }.to change(ImportResult, :count).by(1)
+      end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
-      expect(ImportResult.first.disqualified).to eq(true)
+      expect(ImportResult.first.disqualified?).to eq(true)
     end
   end
 
@@ -77,9 +77,9 @@ describe RaceDataImporter do
     create_competitor(competition, 108, 10, 8)
 
     importer = RaceDataImporter.new(competition, admin_user)
-    expect {
+    expect do
       expect(importer.process_lif(sample_input, 10)).to be_truthy
-    }.to change(ImportResult, :count).by(8)
+    end.to change(ImportResult, :count).by(8)
   end
 
   it "gives good error message upon failure" do
@@ -92,9 +92,9 @@ describe RaceDataImporter do
     create_competitor(competition, 107, 10, 7)
     create_competitor(competition, 108, 10, 8)
 
-    expect {
+    expect do
       expect(importer.process_lif(sample_input, 10)).to be_truthy
-    }.to change(ImportResult, :count).by(8)
+    end.to change(ImportResult, :count).by(8)
 
     expect(importer.errors).to_not be_nil
   end

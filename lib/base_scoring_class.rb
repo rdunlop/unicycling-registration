@@ -7,11 +7,6 @@ class BaseScoringClass
     @competition = competition
   end
 
-  # This is used temporarily to access the calculator, but will likely be private-ized soon
-  def score_calculator
-    raise StandardError.new("No Score Calculator Defined")
-  end
-
   # describes how to label the results of this competition
   def result_description
     raise StandardError.new("No Result Description Defined")
@@ -21,22 +16,11 @@ class BaseScoringClass
     nil
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    raise StandardError.new("No Has Result Defined")
+  def imports_points?
+    false
   end
 
-  # returns the result for this competitor
-  def competitor_result(competitor)
-    raise StandardError.new("No Competitor Result Defined")
-  end
-
-  # Function which places all of the competitors in the competition
-  def place_all
-    nil
-  end
-
-  def imports_times
+  def imports_times?
     false
   end
 
@@ -62,15 +46,15 @@ class BaseScoringClass
     false
   end
 
-  def build_result_from_imported(import_result)
-    raise NotImplementedError
-  end
-
-  def build_import_result_from_raw(raw)
+  def build_result_from_imported(_import_result)
     raise NotImplementedError
   end
 
   def requires_age_groups
     true
+  end
+
+  def can_eliminate_judges?
+    false
   end
 end

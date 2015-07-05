@@ -8,6 +8,7 @@
 #  user_id        :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  status         :string           default("active"), not null
 #
 # Indexes
 #
@@ -21,14 +22,14 @@ require 'spec_helper'
 
 describe Judge do
   describe "when the judge has scores" do
-    let(:judge) { FactoryGirl.build_stubbed(:judge) }
-    let(:score) {FactoryGirl.create(:score, :judge => judge) }
+    let(:judge) { FactoryGirl.create(:judge) }
+    let(:score) {FactoryGirl.create(:score, judge: judge) }
     before(:each) do
       allow(judge).to receive(:scores).and_return([score])
     end
 
     it "cannot destroy the judge" do
-      expect(judge.check_for_scores).to eq(false)
+      expect(judge.destroy).to eq(false)
     end
   end
 end

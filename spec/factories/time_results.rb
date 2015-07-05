@@ -11,11 +11,13 @@
 #  updated_at          :datetime
 #  is_start_time       :boolean          default(FALSE), not null
 #  number_of_laps      :integer
-#  status              :string(255)
+#  status              :string(255)      not null
 #  comments            :text
 #  comments_by         :string(255)
 #  number_of_penalties :integer
-#  entered_at          :datetime
+#  entered_at          :datetime         not null
+#  entered_by_id       :integer          not null
+#  preliminary         :boolean
 #
 # Indexes
 #
@@ -26,8 +28,11 @@
 
 FactoryGirl.define do
   factory :time_result do
-    association :competitor, :factory => :event_competitor
-    status nil
+    association :competitor, factory: :event_competitor
+    association :entered_by, factory: :user
+    entered_at DateTime.now
+    status "active"
+    preliminary false
     is_start_time false
     minutes 0
     seconds 0

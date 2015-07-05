@@ -16,10 +16,10 @@ describe ConventionSetup::ExpenseGroupsController do
       noncompetitor_free_options: nil,
       competitor_required: false,
       noncompetitor_required: false,
-      "translations_attributes"=>{
-        "1"=>{
-          "locale"=>"en",
-          "group_name"=>"group_en"
+      "translations_attributes" => {
+        "1" => {
+          "locale" => "en",
+          "group_name" => "group_en"
         }}
     }
   end
@@ -36,7 +36,7 @@ describe ConventionSetup::ExpenseGroupsController do
   describe "GET edit" do
     it "assigns the requested expense_group as @expense_group" do
       expense_group = ExpenseGroup.create! valid_attributes
-      get :edit, {:id => expense_group.to_param}
+      get :edit, id: expense_group.to_param
       expect(assigns(:expense_group)).to eq(expense_group)
     end
   end
@@ -44,20 +44,20 @@ describe ConventionSetup::ExpenseGroupsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new ExpenseGroup" do
-        expect {
-          post :create, {:expense_group => valid_attributes}
-        }.to change(ExpenseGroup, :count).by(1)
+        expect do
+          post :create, expense_group: valid_attributes
+        end.to change(ExpenseGroup, :count).by(1)
       end
 
       it "assigns a newly created expense_group as @expense_group" do
-        post :create, {:expense_group => valid_attributes}
+        post :create, expense_group: valid_attributes
         expect(assigns(:expense_group)).to be_a(ExpenseGroup)
         expect(assigns(:expense_group)).to be_persisted
         expect(assigns(:expense_group).group_name).to eq("group_en")
       end
 
       it "redirects to the created expense_group" do
-        post :create, {:expense_group => valid_attributes}
+        post :create, expense_group: valid_attributes
         expect(response).to redirect_to(expense_groups_path)
       end
     end
@@ -66,14 +66,14 @@ describe ConventionSetup::ExpenseGroupsController do
       it "assigns a newly created but unsaved expense_group as @expense_group" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
-        post :create, {:expense_group => {:info_url => "hi"}}
+        post :create, expense_group: {info_url: "hi"}
         expect(assigns(:expense_group)).to be_a_new(ExpenseGroup)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
-        post :create, {:expense_group => {:info_url => "hi"}}
+        post :create, expense_group: {info_url: "hi"}
         expect(response).to render_template("index")
       end
     end
@@ -88,18 +88,18 @@ describe ConventionSetup::ExpenseGroupsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         expect_any_instance_of(ExpenseGroup).to receive(:update_attributes).with({})
-        put :update, {:id => expense_group.to_param, :expense_group => {'these' => 'params'}}
+        put :update, id: expense_group.to_param, expense_group: {'these' => 'params'}
       end
 
       it "assigns the requested expense_group as @expense_group" do
         expense_group = ExpenseGroup.create! valid_attributes
-        put :update, {:id => expense_group.to_param, :expense_group => valid_attributes}
+        put :update, id: expense_group.to_param, expense_group: valid_attributes
         expect(assigns(:expense_group)).to eq(expense_group)
       end
 
       it "redirects to the expense_group" do
         expense_group = ExpenseGroup.create! valid_attributes
-        put :update, {:id => expense_group.to_param, :expense_group => valid_attributes}
+        put :update, id: expense_group.to_param, expense_group: valid_attributes
         expect(response).to redirect_to(expense_groups_path)
       end
     end
@@ -109,7 +109,7 @@ describe ConventionSetup::ExpenseGroupsController do
         expense_group = ExpenseGroup.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
-        put :update, {:id => expense_group.to_param, :expense_group => {:info_url => "fake"}}
+        put :update, id: expense_group.to_param, expense_group: {info_url: "fake"}
         expect(assigns(:expense_group)).to eq(expense_group)
       end
 
@@ -117,7 +117,7 @@ describe ConventionSetup::ExpenseGroupsController do
         expense_group = ExpenseGroup.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
-        put :update, {:id => expense_group.to_param, :expense_group => {:info_url => "hi"}}
+        put :update, id: expense_group.to_param, expense_group: {info_url: "hi"}
         expect(response).to render_template("edit")
       end
     end
@@ -126,14 +126,14 @@ describe ConventionSetup::ExpenseGroupsController do
   describe "DELETE destroy" do
     it "destroys the requested expense_group" do
       expense_group = ExpenseGroup.create! valid_attributes
-      expect {
-        delete :destroy, {:id => expense_group.to_param}
-      }.to change(ExpenseGroup, :count).by(-1)
+      expect do
+        delete :destroy, id: expense_group.to_param
+      end.to change(ExpenseGroup, :count).by(-1)
     end
 
     it "redirects to the expense_groups list" do
       expense_group = ExpenseGroup.create! valid_attributes
-      delete :destroy, {:id => expense_group.to_param}
+      delete :destroy, id: expense_group.to_param
       expect(response).to redirect_to(expense_groups_url)
     end
   end

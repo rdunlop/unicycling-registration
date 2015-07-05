@@ -18,10 +18,10 @@ class PaymentPresenter
   def add_registrant(registrant)
     registrant.owing_registrant_expense_items.each do |rei|
       next if rei.free
-      @new_expense_items << PaymentDetailPresenter.new(:registrant_id => rei.registrant.id, :expense_item_id => rei.expense_item.id, :free => rei.free, :amount => rei.total_cost, :details => rei.details)
+      @new_expense_items << PaymentDetailPresenter.new(registrant_id: rei.registrant.id, expense_item_id: rei.expense_item.id, free: rei.free, amount: rei.total_cost, details: rei.details)
     end
     registrant.paid_details.each do |pd|
-      @existing_payment_details << PaymentDetailPresenter.new(:registrant_id => pd.registrant.id, :expense_item_id => pd.expense_item.id, :free => pd.free, :amount => pd.amount, :details => pd.details)
+      @existing_payment_details << PaymentDetailPresenter.new(registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, amount: pd.amount, details: pd.details)
     end
   end
 
@@ -48,7 +48,7 @@ class PaymentPresenter
     attribute :amount, Decimal
     attribute :free, Boolean
 
-    validates :registrant_id, :presence => true
+    validates :registrant_id, presence: true
 
     def initialize(params = {})
       params.each do |name, value|
@@ -124,14 +124,14 @@ class PaymentPresenter
 
   # delegate to the underlying payment
   def errors
-    p = self.build_payment
+    p = build_payment
     p.valid?
     p.errors
   end
 
   # validate based on the undelying payment validation
   def valid?
-    p = self.build_payment
+    p = build_payment
     p.valid?
   end
 
@@ -148,7 +148,7 @@ class PaymentPresenter
 
   def build_payment
     payment = Payment.new
-    payment.note = self.note
+    payment.note = note
 
     unpaid_details.each do |ud|
       build_payment_detail(payment, ud)
@@ -158,13 +158,13 @@ class PaymentPresenter
     end
     payment.completed = true
     payment.completed_date = DateTime.now
-    payment.user = self.user
+    payment.user = user
     payment
   end
 
   def save
     # XXX any way to have this automatically call valid? (instead of me having to do so?)
-    payment = self.build_payment
+    payment = build_payment
     self.valid?
     return false unless payment.valid?
     self.saved_payment = payment

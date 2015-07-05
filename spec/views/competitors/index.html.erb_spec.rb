@@ -12,6 +12,6 @@ describe "competitors/index" do
   it "renders add competitor form" do
     render
 
-    assert_select "form", :count => 1
+    assert_select "form", count: 1
   end
 end

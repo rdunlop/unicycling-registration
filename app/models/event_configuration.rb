@@ -51,9 +51,9 @@ class EventConfiguration < ActiveRecord::Base
 
   mount_uploader :logo_file, LogoUploader
 
-  validates :short_name, :long_name, :presence => true, if: :name_logo_applied?
-  validates :event_url, :format => URI.regexp(%w(http https)), :unless => "event_url.nil?"
-  validates :comp_noncomp_url, :format => URI.regexp(%w(http https)), :unless => "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
+  validates :short_name, :long_name, presence: true, if: :name_logo_applied?
+  validates :event_url, format: URI.regexp(%w(http https)), unless: "event_url.nil?"
+  validates :comp_noncomp_url, format: URI.regexp(%w(http https)), unless: "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
   validates :enabled_locales, presence: true
 
   def self.style_names
@@ -64,29 +64,27 @@ class EventConfiguration < ActiveRecord::Base
     ["USD", "CAD", "EUR"]
   end
 
-  validates :currency_code, inclusion: { in: self.currency_codes }, allow_nil: true
-  validates :style_name, :inclusion => {:in => self.style_names.map{|y| y[1]} }
+  validates :currency_code, inclusion: { in: currency_codes }, allow_nil: true
+  validates :style_name, inclusion: {in: style_names.map{|y| y[1]} }
   validates :waiver, inclusion: { in: ["none", "online", "print"] }
 
-  validates :usa_membership_config, :standard_skill, :inclusion => { :in => [true, false] }
-  validates :standard_skill_closed_date, :presence => true, :unless => "standard_skill.nil? or standard_skill == false"
+  validates :usa_membership_config, :standard_skill, inclusion: { in: [true, false] }
+  validates :standard_skill_closed_date, presence: true, unless: "standard_skill.nil? or standard_skill == false"
 
-  belongs_to :usa_individual_expense_item, :class_name => "ExpenseItem"
-  belongs_to :usa_family_expense_item, :class_name => "ExpenseItem"
+  belongs_to :usa_individual_expense_item, class_name: "ExpenseItem"
+  belongs_to :usa_family_expense_item, class_name: "ExpenseItem"
 
-  validates :usa_individual_expense_item, :usa_family_expense_item, presence: { message: "Must be specified when enabling 'usa' mode"}, if: "self.usa_membership_config"
+  validates :usa, :iuf, inclusion: { in: [true, false] }
+  validates :test_mode, inclusion: { in: [true, false] }
 
-  validates :usa, :iuf, :inclusion => { :in => [true, false] }
-  validates :test_mode, :inclusion => { :in => [true, false] }
-
-  validates :artistic_score_elimination_mode_naucc, :inclusion => { :in => [true, false] }
+  validates :artistic_score_elimination_mode_naucc, inclusion: { in: [true, false] }
   validates :max_award_place, presence: true
 
   def self.paypal_modes
     ["disabled", "test", "enabled"]
   end
 
-  validates :paypal_mode, inclusion: { in: self.paypal_modes }
+  validates :paypal_mode, inclusion: { in: paypal_modes }
 
   before_validation :clear_of_blank_strings
 
@@ -228,7 +226,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.reset_counter_caches
-    Event.all.each do |event|
+    Event.all.find_each do |event|
       Event.reset_counters(event.id, :event_categories)
       Event.reset_counters(event.id, :event_choices)
     end

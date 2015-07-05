@@ -9,7 +9,7 @@ en:
         competition time. Please upload an mp3 with the music you would like played.
         Please provide music of the appropriate length (see rulebook) for your competition/category.
       download: Download
-      guest: Guest?
+      guest: This song was uploaded by another registrant?
       music_deadline: Music may be uploaded until %{end_date}
       reg_name: Reg Name
       remove: Remove

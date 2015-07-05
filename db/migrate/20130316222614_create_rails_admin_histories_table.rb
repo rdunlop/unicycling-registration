@@ -5,11 +5,11 @@ class CreateRailsAdminHistoriesTable < ActiveRecord::Migration
       t.string :username
       t.integer :item
       t.string :table
-      t.integer :month, :limit => 2
-      t.integer :year, :limit => 5
+      t.integer :month, limit: 2
+      t.integer :year, limit: 5
       t.timestamps
     end
-    add_index(:rails_admin_histories, [:item, :table, :month, :year], :name => 'index_rails_admin_histories' )
+    add_index(:rails_admin_histories, [:item, :table, :month, :year], name: 'index_rails_admin_histories')
   end
 
   def self.down

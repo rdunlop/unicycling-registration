@@ -2,13 +2,17 @@ module ApplicationHelper
   include ActionView::Helpers::NumberHelper
   include LanguageHelper
 
+  def log(msg)
+    Rails.logger.debug msg
+  end
+
   def current_ability
     @current_ability ||= Ability.new(current_user, allow_reg_modifications?)
   end
 
   def setup_registrant_choices(registrant)
     EventChoice.all.each do |ec|
-      if registrant.registrant_choices.where({:event_choice_id => ec.id}).empty?
+      if registrant.registrant_choices.where(event_choice_id: ec.id).empty?
         registrant.registrant_choices.build(event_choice_id: ec.id)
       end
     end

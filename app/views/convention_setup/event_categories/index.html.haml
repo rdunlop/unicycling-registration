@@ -13,7 +13,7 @@
       %tr.item{ data: { item_id: event_category.id } }
         %td= event_category.name
         %td= "#{event_category.age_range_start}-#{event_category.age_range_end}"
-        %td= event_category.warning_on_registration_summary
+        %td= event_category.warning_on_registration_summary?
         %td= link_to 'Edit', edit_convention_setup_event_category_path(event_category)
         %td= link_to 'Delete', [:convention_setup, event_category], method: :delete, data: { confirm: 'Are you sure?' }
 

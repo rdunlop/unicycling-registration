@@ -12,10 +12,8 @@ class RaceScoringClass < BaseScoringClass
     is used to determine the placing of the competitor."
   end
 
-  # This is used temporarily to access the calculator, but will likely be private-ized soon
-  def score_calculator
-    OrderedResultCalculator.new(@competition, lower_is_better)
-  end
+  # def lower_is_better
+  # attr_accessor (see above)
 
   # describes how to label the results of this competition
   def result_description
@@ -30,44 +28,8 @@ class RaceScoringClass < BaseScoringClass
     "time_results"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    @competitor_has_result ||= {}
-    if @competitor_has_result[competitor].nil?
-      @competitor_has_result[competitor] = competitor.time_results.any?
-    end
-    @competitor_has_result[competitor]
-  end
-
-  # returns the result for this competitor
-  def competitor_result(competitor)
-    if self.competitor_has_result?(competitor)
-      TimeResultPresenter.new(competitor.best_time_in_thousands).full_time
-    else
-      nil
-    end
-  end
-
-  # returns the result for this competitor
-  def competitor_comparable_result(competitor)
-    if self.competitor_has_result?(competitor)
-      competitor.best_time_in_thousands
-    else
-      0
-    end
-  end
-
   def competitor_dq?(competitor)
-    self.competitor_has_result?(competitor) && competitor.time_results.all?{|t| t.disqualified }
-  end
-
-  # Function which places all of the competitors in the competition
-  def place_all
-    score_calculator.update_all_places
-  end
-
-  def place_age_group_entry(entry)
-    score_calculator.update_age_group_entry_results(entry)
+    competitor.has_result? && competitor.time_results.all?(&:disqualified?)
   end
 
   # Used when trying to destroy all results for a competition
@@ -84,30 +46,22 @@ class RaceScoringClass < BaseScoringClass
   end
 
   def build_result_from_imported(import_result)
+    status = import_result.status.nil? ? "active" : import_result.status
     TimeResult.new(
       minutes: import_result.minutes,
       seconds: import_result.seconds,
       thousands: import_result.thousands,
       number_of_penalties: import_result.number_of_penalties,
-      status: import_result.status,
+      status: status,
       comments: import_result.comments,
       comments_by: import_result.comments_by,
       number_of_laps: import_result.number_of_laps,
       is_start_time: import_result.is_start_time,
-      entered_at: import_result.created_at)
+      entered_at: import_result.created_at,
+      entered_by: import_result.user)
   end
 
-  def build_import_result_from_raw(raw)
-    dq = (raw[4] == "DQ")
-    ImportResult.new(
-      bib_number: raw[0],
-      minutes: raw[1],
-      seconds: raw[2],
-      thousands: raw[3],
-      status: dq ? "DQ" : nil)
-  end
-
-  def imports_times
+  def imports_times?
     true
   end
 end

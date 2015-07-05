@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby "2.1.2"
-gem 'rails', '4.2.1'
+ruby "2.2.2"
+gem 'rails', '4.2.3'
 
 # Authentication
 gem 'devise'
@@ -24,9 +24,10 @@ gem 'chosen-rails'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'
 gem 'fancybox2-rails', '~> 0.2.8'
-gem 'font-kit-rails', :git => "git://github.com/sandelius/font-kit-rails.git", :ref => "480c979b84aa4d32652772822dee2366c37eed2e" # to get a change which includes font-url
+gem 'font-kit-rails', git: "git://github.com/sandelius/font-kit-rails.git", ref: "480c979b84aa4d32652772822dee2366c37eed2e" # to get a change which includes font-url
 gem 'tinymce-rails'
 gem 'recaptcha'
+gem 'jquery-datetimepicker-rails'
 
 # system utils
 gem 'rake'
@@ -39,14 +40,14 @@ gem "fog"
 gem 'aws-sdk'
 gem 'http_accept_language'
 gem 'newrelic_rpm'
-gem 'skylight'
 gem 'sidekiq'
 # if you require 'sinatra' you get the Sinatra DSL extended to Object
-gem 'sinatra', '>= 1.3.0', :require => nil # necessary for sidekiq routing
+gem 'sinatra', '>= 1.3.0', require: nil # necessary for sidekiq routing
 gem 'unicorn', require: false
 gem 'whenever'
 gem 'rubocop', require: false
 gem 'gaffe'
+gem 'rubyzip'
 
 # I18n Translation
 # use rdunlop branch which has:
@@ -75,14 +76,14 @@ gem 'capistrano-rails'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano3-unicorn'
-gem 'capistrano-sidekiq' , github: 'seuros/capistrano-sidekiq'
+gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
 
 group :naucc, :development, :caching do
   gem 'quiet_assets'
   gem 'consistency_fail'
   gem 'better_errors'
   gem "binding_of_caller"
-  gem 'simplecov', :require => false, :group => :test
+  gem 'simplecov', require: false, group: :test
 end
 
 group :unicon, :naucc, :development, :test, :cucumber, :caching do
@@ -93,6 +94,7 @@ group :unicon, :naucc, :development, :test, :cucumber, :caching do
   # gem 'brakeman'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'rspec_junit_formatter', '0.2.2'
   gem 'rspec-instafail', require: false
   gem 'syntax'
   gem 'watchr'

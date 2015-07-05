@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Creating a Competition from an Event' do
   let!(:user) { FactoryGirl.create(:super_admin_user) }
   include_context 'basic event configuration'
-  include_context 'freestyle_event', :name => "Individual"
+  include_context 'freestyle_event', name: "Individual"
   include_context 'user is logged in'
 
   before :each do
@@ -24,10 +24,10 @@ describe 'Creating a Competition from an Event' do
     it "can create a new competition" do
       fill_in :competition_name, with: "The only competition"
       fill_in :competition_award_title_name, with: "The Best Competition"
-      select "Freestyle", from: "Scoring class"
-      expect {
+      select "Freestyle", from: "Scoring Type"
+      expect do
         click_button "Create Competition"
-      }.to change(Competition, :count).by(1)
+      end.to change(Competition, :count).by(1)
     end
   end
 end

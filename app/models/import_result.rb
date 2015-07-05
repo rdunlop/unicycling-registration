@@ -34,12 +34,12 @@ class ImportResult < ActiveRecord::Base
   include StatusNilWhenEmpty
   include FindsMatchingCompetitor
 
-  validates :competition_id, :presence => true
-  validates :user_id, :bib_number, :presence => true
+  validates :competition_id, presence: true
+  validates :user_id, :bib_number, presence: true
   validate :results_for_competition
-  validates :minutes, :seconds, :thousands, :numericality => {:greater_than_or_equal_to => 0}, allow_nil: true
+  validates :minutes, :seconds, :thousands, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 
-  validates :status, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
+  validates :status, inclusion: { in: TimeResult.status_values, allow_nil: true }
   before_validation :set_details_if_blank
   validates :details, presence: true, if: "points?"
   validates :is_start_time, inclusion: { in: [true, false] }
@@ -51,12 +51,6 @@ class ImportResult < ActiveRecord::Base
 
   scope :entered_order, -> { reorder(:id) }
 
-  def set_details_if_blank
-    if details.blank? && points?
-      self.details = "#{points}pts"
-    end
-  end
-
   def competitor_name
     matching_registrant
   end
@@ -65,7 +59,7 @@ class ImportResult < ActiveRecord::Base
     matching_competitor.has_result? if competitor_exists?
   end
 
-  def disqualified
+  def disqualified?
     status == "DQ"
   end
 
@@ -79,7 +73,7 @@ class ImportResult < ActiveRecord::Base
       matching_competition = matching_registrant.matching_competition_in_event(competition.event)
       if matching_competition
         # another competition with a competitor in the same event exists, use a competitor there
-        competitor = matching_registrant.competitors.where(competition: matching_competition).first
+        competitor = matching_registrant.competitors.find_by(competition: matching_competition)
         raise "error finding matching competitor" if competitor.nil?
         target_competition = matching_competition
       end
@@ -100,7 +94,7 @@ class ImportResult < ActiveRecord::Base
 
   # determines that the import_result has enough information
   def results_for_competition
-    return if disqualified
+    return if disqualified?
     unless time_is_present? || points?
       errors.add(:base, "Must select either time or points")
     end
@@ -108,5 +102,11 @@ class ImportResult < ActiveRecord::Base
 
   def time_is_present?
     minutes && seconds && thousands
+  end
+
+  def set_details_if_blank
+    if details.blank? && points?
+      self.details = "#{points}pts"
+    end
   end
 end

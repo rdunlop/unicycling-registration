@@ -16,7 +16,7 @@
       %tr.item{ data: { item_id: expense_item.id } }
         %td= expense_item.name
         %td
-          - unless expense_item.has_custom_cost
+          - unless expense_item.has_custom_cost?
             = expense_item.cost
           - else
             N/A

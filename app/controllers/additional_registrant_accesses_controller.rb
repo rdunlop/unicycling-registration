@@ -1,9 +1,9 @@
 class AdditionalRegistrantAccessesController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :user, :only => [:create, :index, :new, :invitations]
-  load_and_authorize_resource :additional_registrant_access, :through => :user, :only => [:index, :new, :invitations]
-  load_and_authorize_resource :except => [:create, :index, :new, :invitations]
-  before_action :load_new_additional_registrant_access, :only => [:create]
+  load_and_authorize_resource :user, only: [:create, :index, :new, :invitations]
+  load_and_authorize_resource :additional_registrant_access, through: :user, only: [:index, :new, :invitations]
+  load_and_authorize_resource except: [:create, :index, :new, :invitations]
+  before_action :load_new_additional_registrant_access, only: [:create]
 
   def load_new_additional_registrant_access
     @additional_registrant_access = @user.additional_registrant_accesses.build(additional_registrant_access_params)
@@ -59,7 +59,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
     user = @additional_registrant_access.registrant.user
 
     respond_to do |format|
-      if @additional_registrant_access.update_attributes({:declined => false, :accepted_readonly => true })
+      if @additional_registrant_access.update_attributes(declined: false, accepted_readonly: true)
         Notifications.registrant_access_accepted(@additional_registrant_access.registrant, @additional_registrant_access.user).deliver_later
         format.html { redirect_to invitations_user_additional_registrant_accesses_path(user), notice: 'Additional registrant access was accepted (readonly).' }
         format.json { head :no_content }
@@ -76,7 +76,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
     user = @additional_registrant_access.registrant.user
 
     respond_to do |format|
-      if @additional_registrant_access.update_attributes({:declined => true, :accepted_readonly => false })
+      if @additional_registrant_access.update_attributes(declined: true, accepted_readonly: false)
         format.html { redirect_to invitations_user_additional_registrant_accesses_path(user), notice: 'Request declined' }
         format.json { head :no_content }
       else

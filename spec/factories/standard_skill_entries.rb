@@ -20,13 +20,13 @@
 FactoryGirl.define do
   factory :standard_skill_entry do
     sequence(:number)
-    sequence(:letter) { |n| 
+    sequence(:letter) do |n|
       x = "a"
-      n.times do |i|
+      n.times do |_i|
         x = x.next
       end
       x
-    }
+    end
     points "1.3"
     description "riding - 8"
   end

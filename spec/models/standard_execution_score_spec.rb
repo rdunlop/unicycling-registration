@@ -23,16 +23,16 @@ require 'spec_helper'
 describe StandardExecutionScore do
   before (:each) do
     @judge = FactoryGirl.create(:judge)
-    @competitor = FactoryGirl.create(:event_competitor, :competition => @judge.competition)
+    @competitor = FactoryGirl.create(:event_competitor, competition: @judge.competition)
     @ssre = FactoryGirl.create(:standard_skill_routine_entry)
   end
 
   it "should not be able to have the same score/judge created twice" do
     score = FactoryGirl.create(:standard_execution_score)
 
-    score2 = FactoryGirl.build(:standard_execution_score, :judge => score.judge, 
-                                                          :competitor => score.competitor, 
-                                                          :standard_skill_routine_entry => score.standard_skill_routine_entry)
+    score2 = FactoryGirl.build(:standard_execution_score, judge: score.judge,
+                                                          competitor: score.competitor,
+                                                          standard_skill_routine_entry: score.standard_skill_routine_entry)
 
     expect(score2.save).to eq(false)
   end
@@ -40,9 +40,9 @@ describe StandardExecutionScore do
   it "should be able to have 2 different skills scored by the same judge" do
     score = FactoryGirl.create(:standard_execution_score)
 
-    score2 = FactoryGirl.build(:standard_execution_score, :judge => score.judge, 
-                                                          :competitor => score.competitor, 
-                                                          :standard_skill_routine_entry => FactoryGirl.create(:standard_skill_routine_entry))
+    score2 = FactoryGirl.build(:standard_execution_score, judge: score.judge,
+                                                          competitor: score.competitor,
+                                                          standard_skill_routine_entry: FactoryGirl.create(:standard_skill_routine_entry))
     expect(score2.save).to eq(true)
   end
 

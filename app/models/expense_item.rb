@@ -20,22 +20,22 @@
 #
 
 class ExpenseItem < ActiveRecord::Base
-  validates :name, :cost, :expense_group, :presence => true
-  validates :has_details, :inclusion => { :in => [true, false] } # because it's a boolean
-  validates :has_custom_cost, :inclusion => { :in => [true, false] } # because it's a boolean
+  validates :name, :cost, :expense_group, presence: true
+  validates :has_details, inclusion: { in: [true, false] } # because it's a boolean
+  validates :has_custom_cost, inclusion: { in: [true, false] } # because it's a boolean
 
   monetize :tax_cents, :cost_cents, numericality: { greater_than_or_equal_to: 0 }
   monetize :total_cost_cents
 
   has_many :payment_details, dependent: :restrict_with_exception
-  has_many :registrant_expense_items, :inverse_of => :expense_item, dependent: :restrict_with_exception
+  has_many :registrant_expense_items, inverse_of: :expense_item, dependent: :restrict_with_exception
   has_many :coupon_code_expense_items, dependent: :destroy
 
   translates :name, :details_label, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
-  belongs_to :expense_group, :inverse_of => :expense_items
-  validates :expense_group_id, :uniqueness => true, :if => "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
+  belongs_to :expense_group, inverse_of: :expense_items
+  validates :expense_group_id, uniqueness: true, if: "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
 
   acts_as_restful_list
 
@@ -56,6 +56,10 @@ class ExpenseItem < ActiveRecord::Base
     payment_details.paid.where(refunded: false)
   end
 
+  def refunded_items
+    payment_details.paid.where(refunded: true)
+  end
+
   def num_paid_with_coupon
     paid_items.with_coupon.count
   end
@@ -64,6 +68,16 @@ class ExpenseItem < ActiveRecord::Base
     num_paid - num_paid_with_coupon
   end
 
+  # How many of this expense item are free
+  def num_free
+    free_items.count
+  end
+
+  def free_items
+    paid_free_items + free_items_with_reg_paid
+  end
+
+  # Items which are fully paid
   def num_paid
     paid_items.count
   end
@@ -73,30 +87,29 @@ class ExpenseItem < ActiveRecord::Base
     paid_items.map(&:cost).inject(:+).to_f
   end
 
-  def free_items
-    payment_details.free
+  def total_amount_paid_after_refunds
+    refunded_items.map(&:cost).inject(:+).to_f
   end
 
-  def num_free
-    free_items.count
-  end
-
+  # Items which are unpaid.
+  # Note: Free items which are associated with Paid Registrants are considered Paid/Free.
   def unpaid_items
-    registrant_expense_items.joins(:registrant).where(:registrants => {:deleted => false})
+    reis = registrant_expense_items.joins(:registrant).where(registrants: {deleted: false})
+    reis.free.select{ |rei| !rei.registrant.reg_paid? } + reis.where(free: false)
   end
 
   def num_unpaid
-    unpaid_items.count
+    unpaid_items.count #free.select{|rei| !rei.registrant.reg_paid? }.count + unpaid_items.where(free: false).count
   end
 
   def create_reg_items
-    if self.expense_group.competitor_required
+    if expense_group.competitor_required?
       Registrant.competitor.each do |reg|
         reg.build_registration_item(self)
         reg.save
       end
     end
-    if self.expense_group.noncompetitor_required
+    if expense_group.noncompetitor_required?
       Registrant.noncompetitor.each do |reg|
         reg.build_registration_item(self)
         reg.save
@@ -112,7 +125,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def to_s
-    self.expense_group.to_s + " - " + name
+    expense_group.to_s + " - " + name
   end
 
   def total_cost_cents
@@ -143,5 +156,15 @@ class ExpenseItem < ActiveRecord::Base
     return true if maximum_available && maximum_available > 0
     return true if maximum_per_registrant && maximum_per_registrant > 0
     false
+  end
+
+  private
+
+  def paid_free_items
+    paid_items.free
+  end
+
+  def free_items_with_reg_paid
+    registrant_expense_items.joins(:registrant).where(registrants: {deleted: false}).free.select{ |rei| rei.registrant.reg_paid? }
   end
 end

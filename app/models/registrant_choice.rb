@@ -17,26 +17,26 @@
 #
 
 class RegistrantChoice < ActiveRecord::Base
-  validates :event_choice_id, :presence => true, :uniqueness => {:scope => [:registrant_id]}
-  validates :registrant, :presence => true
+  validates :event_choice_id, presence: true, uniqueness: {scope: [:registrant_id]}
+  validates :registrant, presence: true
 
-  has_paper_trail :meta => { :registrant_id => :registrant_id }
+  has_paper_trail meta: { registrant_id: :registrant_id }
 
   belongs_to :event_choice
-  belongs_to :registrant, :inverse_of => :registrant_choices, touch: true
+  belongs_to :registrant, inverse_of: :registrant_choices, touch: true
 
-  validates_format_of :value, :with => /\A([0-9]{1,2}:)+[0-9]{2}\z/, :if => "event_choice.try(:cell_type) == 'best_time'", :message => "must be of the form hh:mm:ss or mm:ss", :allow_blank => true
+  validates :value, format: { with: /\A([0-9]{1,2}:)+[0-9]{2}\z/, message: "must be of the form hh:mm:ss or mm:ss"}, allow_blank: true, if: "event_choice.try(:cell_type) == 'best_time'"
 
   def has_value?
     case event_choice.cell_type
     when "boolean"
-      return self.value != "0"
+      return value != "0"
     when "multiple"
-      return self.value != ""
+      return value != ""
     when "text"
-      return self.value != ""
+      return value != ""
     when "best_time"
-      return self.value != ""
+      return value != ""
     else
       return false
     end
@@ -45,9 +45,9 @@ class RegistrantChoice < ActiveRecord::Base
   def describe_value
     case event_choice.cell_type
     when "boolean"
-      self.value != "0" ? "yes" : "no"
+      value != "0" ? "yes" : "no"
     else
-      self.value
+      value
     end
   end
 end

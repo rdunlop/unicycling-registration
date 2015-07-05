@@ -5,7 +5,6 @@
 #  id                            :integer          not null, primary key
 #  event_id                      :integer
 #  name                          :string(255)
-#  locked                        :boolean
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  age_group_type_id             :integer
@@ -15,7 +14,6 @@
 #  end_data_type                 :string(255)
 #  uses_lane_assignments         :boolean          default(FALSE), not null
 #  scheduled_completion_at       :datetime
-#  published                     :boolean          default(FALSE), not null
 #  awarded                       :boolean          default(FALSE), not null
 #  award_title_name              :string(255)
 #  award_subtitle_name           :string(255)
@@ -24,6 +22,8 @@
 #  combined_competition_id       :integer
 #  order_finalized               :boolean          default(FALSE), not null
 #  penalty_seconds               :integer
+#  locked_at                     :datetime
+#  published_at                  :datetime
 #
 # Indexes
 #
@@ -35,68 +35,67 @@ class Competition < ActiveRecord::Base
   include CachedModel
   include Slugify
 
-  belongs_to :age_group_type, :inverse_of => :competitions
-  belongs_to :event, :inverse_of => :competitions
+  belongs_to :age_group_type, inverse_of: :competitions
+  belongs_to :event, inverse_of: :competitions
 
-  has_many :competitors, -> { order "position" }, :dependent => :destroy, inverse_of: :competition
-  has_many :registrants, :through => :competitors
+  has_many :competitors, -> { order "position" }, dependent: :destroy, inverse_of: :competition
+  has_many :registrants, through: :competitors
   has_many :results, through: :competitors
 
-  has_many :judges, -> { order "judge_type_id" }, :dependent => :destroy
-  has_many :judge_types, :through => :judges
-  has_many :scores, :through => :judges
-  has_many :distance_attempts, :through => :competitors
-  has_many :time_results, :through => :competitors
-  has_many :external_results, :through => :competitors
-  has_many :competition_sources, :foreign_key => "target_competition_id", :inverse_of => :target_competition, :dependent => :destroy
+  has_many :judges, -> { order "judge_type_id" }, dependent: :destroy
+  has_many :judge_types, through: :judges
+  has_many :scores, through: :judges
+  has_many :distance_attempts, through: :competitors
+  has_many :time_results, through: :competitors
+  has_many :external_results, through: :competitors
+  has_many :competition_sources, foreign_key: "target_competition_id", inverse_of: :target_competition, dependent: :destroy
   has_many :combined_competition_entries, dependent: :destroy
   has_many :published_age_group_entries, dependent: :destroy
-  has_many :wave_times, dependent: :destroy
+  has_many :wave_times, inverse_of: :competition, dependent: :destroy
   has_many :competition_results, dependent: :destroy
   belongs_to :combined_competition
 
-  accepts_nested_attributes_for :competition_sources, :reject_if => :no_source_selected, allow_destroy: true
+  accepts_nested_attributes_for :competition_sources, reject_if: :no_source_selected, allow_destroy: true
   accepts_nested_attributes_for :competitors
-  accepts_nested_attributes_for :wave_times, allow_destroy: true
 
-  has_many :lane_assignments, :dependent => :destroy
+  has_many :lane_assignments, dependent: :destroy
 
   def self.data_recording_types
     ["Two Data Per Line", "One Data Per Line", "Track E-Timer", "Externally Ranked", "Mass Start", "Chip-Timing"]
   end
 
   before_validation :clear_data_types_of_strings
-  validates :start_data_type, :end_data_type, inclusion: { in: self.data_recording_types, allow_nil: true }
+  validates :start_data_type, :end_data_type, inclusion: { in: data_recording_types, allow_nil: true }
 
   def self.scoring_classes
-    ["Freestyle", "High/Long", "Flatland", "Street", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
+    ["Freestyle", "Artistic Freestyle IUF 2015", "High/Long", "Flatland", "Street", "Street Final", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
   end
 
-  validates :scoring_class, :inclusion => { :in => self.scoring_classes, :allow_nil => false }
+  validates :scoring_class, inclusion: { in: scoring_classes, allow_nil: false }
 
   def self.num_member_options
     ["One", "Two", "Three or more"]
   end
   before_validation :clear_num_members_per_compeititor_of_strings
-  validates :num_members_per_competitor, inclusion: { in: self.num_member_options, allow_nil: true }
+  validates :num_members_per_competitor, inclusion: { in: num_member_options, allow_nil: true }
 
   validate :automatic_competitor_creation_only_with_one
 
-  validates :event_id, :presence => true
+  validates :event_id, presence: true
   validate :published_only_when_locked
   validate :awarded_only_when_published
   validate :award_label_title_checks
   validate :no_competition_sources_when_overall_calculation
-  validates :combined_competition, presence: true, if: Proc.new{ |f| f.scoring_class == "Overall Champion" }
+  validates :combined_competition, presence: true, if: proc{ |f| f.scoring_class == "Overall Champion" }
 
   scope :event_order, -> { includes(:event).order("events.name") }
 
-  validates :name, :award_title_name, :presence => true
+  validates :name, :award_title_name, presence: true
 
   delegate  :results_importable, :render_path, :uses_judges, :build_result_from_imported,
-            :build_import_result_from_raw, :score_calculator,
+            :can_eliminate_judges?,
             :result_description, :compete_in_order?, :scoring_description,
-            :example_result, :imports_times, :results_path, :scoring_path, to: :scoring_helper
+            :example_result, :imports_times?, :imports_points?, :results_path, :scoring_path, to: :scoring_helper
 
   def no_competition_sources_when_overall_calculation
     if scoring_class == "Overall Champion" && competition_sources.size > 0
@@ -105,7 +104,7 @@ class Competition < ActiveRecord::Base
   end
 
   def automatic_competitor_creation_only_with_one
-    if num_members_per_competitor != "One" && automatic_competitor_creation
+    if num_members_per_competitor != "One" && automatic_competitor_creation?
       errors.add(:automatic_competitor_creation, "Only valid with one-member-competitor competitions")
     end
   end
@@ -117,7 +116,7 @@ class Competition < ActiveRecord::Base
     end
 
     # has_expert is only allowed when there is also an age group type
-    if has_experts && age_group_type.nil?
+    if has_experts? && age_group_type.nil?
       errors[:age_group_type_id] << "Must specify an age group to also have Experts chosen"
     end
 
@@ -126,14 +125,22 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def published?
+    published_at.present?
+  end
+
+  def locked?
+    locked_at.present?
+  end
+
   def published_only_when_locked
-    if published && !locked
+    if published? && !locked?
       errors[:base] << "Cannot Publish an unlocked Competition"
     end
   end
 
   def awarded_only_when_published
-    if awarded && !published
+    if awarded? && !published?
       errors[:base] << "Cannot Award an un-published Competition"
     end
   end
@@ -142,7 +149,7 @@ class Competition < ActiveRecord::Base
 
   # Call this when an update occurs to competition which may affect competitors
   def touch_competitors
-    self.touch
+    touch
     competitors.map(&:touch)
   end
 
@@ -155,20 +162,22 @@ class Competition < ActiveRecord::Base
   end
 
   def to_s
-    self.name
+    name
   end
 
+  # should this competition have a start list?
   def start_list?
     uses_lane_assignments? || compete_in_order? || start_data_type == "Mass Start"
   end
 
+  # Public: Is there any data to put on a start list?
   def start_list_present?
     if uses_lane_assignments?
       lane_assignments.any?
     elsif compete_in_order?
       order_finalized?
     elsif start_data_type == "Mass Start"
-      heat_numbers.any?
+      wave_numbers.any?
     else
       false
     end
@@ -181,6 +190,10 @@ class Competition < ActiveRecord::Base
     else
       lane_assignments.map(&:heat).uniq.compact.sort
     end
+  end
+
+  def wave_numbers
+    competitors.map(&:wave).uniq.compact.sort
   end
 
   def end_time_to_s
@@ -259,15 +272,23 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def has_registration_sources?
+    competition_sources.any? { |source| source.registration_source? }
+  end
+
+  def has_competition_sources?
+    competition_sources.any? { |source| source.competition_source? }
+  end
+
   def signed_up_registrants
     @signed_up_registrants ||= competition_sources.inject([]) do |memo, cs|
-      memo += cs.signed_up_registrants
+      memo + cs.signed_up_registrants
     end
   end
 
   def signed_up_competitors
     @signed_up_competitors ||= competition_sources.inject([]) do |memo, cs|
-      memo += cs.signed_up_competitors
+      memo + cs.signed_up_competitors
     end
   end
 
@@ -320,7 +341,7 @@ class Competition < ActiveRecord::Base
     competitors_with_results.select{|comp| comp.gender == gender}.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
   end
 
-  def ungeared_expert_results_list(gender)
+  def ungeared_expert_results_list(_gender)
     competitors_with_results.select{|r| !r.geared? }.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
   end
 
@@ -330,7 +351,7 @@ class Competition < ActiveRecord::Base
   end
 
   def get_judge(user)
-    judges.where({:user_id => user.id}).first
+    judges.find_by(user_id: user.id)
   end
 
   def has_judge(user)
@@ -342,8 +363,12 @@ class Competition < ActiveRecord::Base
   end
 
   def wave_time_for(wave_number)
-    configured_wave_time = wave_times.where(wave: wave_number).first
-    configured_wave_time.total_seconds if configured_wave_time
+    return if wave_number.nil?
+
+    @wave_time_for ||= []
+    return @wave_time_for[wave_number] if @wave_time_for[wave_number]
+
+    @wave_time_for[wave_number] = wave_times.find_by(wave: wave_number).try(:total_seconds)
   end
 
   def can_calculated_age_group_results?
@@ -361,26 +386,97 @@ class Competition < ActiveRecord::Base
     case event_class
     when "Shortest Time"
       @rc ||= RaceScoringClass.new(self)
+    when "Timed Multi-Lap"
+      @rc ||= RaceScoringClass.new(self)
+
     when "Longest Time"
       @rc ||= RaceScoringClass.new(self, false)
-    when "Timed Multi-Lap"
-      @rc ||= MultiLapScoringClass.new(self)
+
     when "Points Low to High"
       @ers ||= PointsScoringClass.new(self)
+
     when "Points High to Low"
       @ers ||= PointsScoringClass.new(self, false)
+
     when "Freestyle"
       @asc ||= ArtisticScoringClass.new(self)
+
+    when "Artistic Freestyle IUF 2015"
+      @asc2015 ||= ArtisticScoringClass_2015.new(self)
+
     when "Flatland"
       @fsc ||= FlatlandScoringClass.new(self)
+
     when "Street"
       @ssc ||= StreetScoringClass.new(self)
+    when "Street Final"
+      @ssc ||= StreetScoringClass.new(self, false)
+
     when "High/Long"
       @dsc ||= DistanceScoringClass.new(self)
+
     when "Overall Champion"
       @oc ||= OverallChampionScoringClass.new(self)
-    else
-      nil
+    end
+  end
+
+  def place_all
+    if event_class == "Overall Champion"
+      scoring_helper.rebuild_competitors(scoring_calculator.competitor_bib_numbers)
+    end
+    OrderedResultCalculator.new(self, scoring_helper.lower_is_better).update_all_places
+  end
+
+  def place_age_group_entry(age_group_entry)
+    OrderedResultCalculator.new(self, scoring_helper.lower_is_better).update_age_group_entry_results(age_group_entry)
+  end
+
+  # The ScoringCalculator is used to determine the numeric result
+  # for each given competitor.
+  # Depending on the type of competition, this requires that we look at different
+  # data/objects
+  # Some, it's as simple as reading their maximum time
+  # Some, it requires that we compare the judge results between different places
+  #
+  # All ScoreCalculators result in a function 'competitor_comparable_result' which
+  # provides a numeric/comparable score for the competitor
+  def scoring_calculator
+    case event_class
+    when "Shortest Time"
+      @scrc ||= RaceResultCalculator.new
+    when "Longest Time"
+      ### XXX this is strange...the determination as to which is the better score is not needed here?
+      @scsc ||= RaceResultCalculator.new(false)
+    when "Timed Multi-Lap"
+      @scrc ||= MultiLapResultCalculator.new
+    when "Points Low to High"
+      @scers ||= ExternalResultResultCalculator.new
+    when "Points High to Low"
+      @scers ||= ExternalResultResultCalculator.new
+    when "Freestyle"
+      unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc?
+      @scasc ||= ArtisticResultCalculator.new(unicon_scoring)
+    when "Artistic Freestyle IUF 2015"
+      @scasc ||= ArtisticResultCalculator_2015.new
+    when "Flatland"
+      @scsc ||= FlatlandResultCalculator.new
+    when "Street", "Street Final"
+      @scsc ||= StreetResultCalculator.new
+    when "High/Long"
+      @scdsc ||= DistanceResultCalculator.new
+    when "Overall Champion"
+      @ascoc ||= OverallChampionResultCalculator.new(combined_competition, self)
+    end
+  end
+
+  def judge_score_calculator
+    case event_class
+    when "Freestyle", "Street", "Flatland"
+      GenericPlacingPointsCalculator.new
+    when "Street Final"
+      GenericPlacingPointsCalculator.new(points_per_rank: [10, 7, 5, 3, 2, 1])
+    when "Artistic Freestyle IUF 2015"
+      Freestyle_2015_JudgePointsCalculator.new
     end
   end
 
@@ -390,7 +486,7 @@ class Competition < ActiveRecord::Base
 
   # COMPETITOR
   def competitor_placing_points(competitor, judge_type)
-    sc = score_calculator
+    sc = scoring_calculator
     if sc.nil?
       0
     else
@@ -398,15 +494,8 @@ class Competition < ActiveRecord::Base
     end
   end
 
-  def competitor_total_placing_points(competitor)
-    competitor_placing_points(competitor, nil)
-  end
-
   # SCORE
   # determining the place points for this score (by-judge)
-  def tied(score)
-    score.ties != 0
-  end
 
   # DISTANCE
   def top_distance_attempts(num = 20)

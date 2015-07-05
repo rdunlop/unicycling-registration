@@ -26,19 +26,19 @@
 require 'rspec/mocks/standalone'
 
 FactoryGirl.define do
-  factory :event_competitor, :class => Competitor do
+  factory :event_competitor, class: Competitor do
     competition  # FactoryGirl
     after(:create) do |comp|
-      FactoryGirl.create(:member, :competitor => comp)
+      FactoryGirl.create(:member, competitor: comp)
       comp.reload
     end
     after(:stub) do |competitor|
-      allow(competitor).to receive(:members).and_return([FactoryGirl.build_stubbed(:member, :competitor => competitor)])
+      allow(competitor).to receive(:members).and_return([FactoryGirl.build_stubbed(:member, competitor: competitor)])
     end
   end
 
-  factory :member, :class => Member do
+  factory :member, class: Member do
     registrant
-    association :competitor, :factory => :event_competitor
+    association :competitor, factory: :event_competitor
   end
 end

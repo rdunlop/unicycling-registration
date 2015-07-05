@@ -10,10 +10,10 @@ describe "lane_assignments/edit" do
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form", :action => lane_assignment_path(@lane_assignment), :method => "post" do
-      assert_select "select#lane_assignment_competitor_id", :name => "lane_assignment[competitor_id]"
-      assert_select "input#lane_assignment_heat", :name => "lane_assignment[heat]"
-      assert_select "input#lane_assignment_lane", :name => "lane_assignment[lane]"
+    assert_select "form", action: lane_assignment_path(@lane_assignment), method: "post" do
+      assert_select "select#lane_assignment_competitor_id", name: "lane_assignment[competitor_id]"
+      assert_select "input#lane_assignment_heat", name: "lane_assignment[heat]"
+      assert_select "input#lane_assignment_lane", name: "lane_assignment[lane]"
     end
   end
 end

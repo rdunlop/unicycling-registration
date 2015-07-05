@@ -17,6 +17,7 @@
 //= require jquery.nested-fields
 //= require jquery.are-you-sure
 //= require tinymce
+//= require jquery.datetimepicker
 //= require_tree .
 
 $(document).ready(function() {
@@ -59,20 +60,21 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(e) {
+  var init_new_row = function(item) {
+    new ChosenEnabler($(item).find(".chosen-select"));
+    $(item).find("input[autofocus='autofocus']").focus();
+  };
+
   $('FORM').each(function() {
     if ($(this).hasClass('multiple_nested')) {
       $('.nested_nested').nestedFields({
-        afterInsert: function(item) {
-          new ChosenEnabler($(item));
-        }
+        afterInsert: init_new_row
       });
     }
     else
     {
       $(this).nestedFields({
-        afterInsert: function(item) {
-          new ChosenEnabler($(item));
-        }
+        afterInsert: init_new_row
      });
     }
   });

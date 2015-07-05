@@ -5,7 +5,6 @@
 #  id                            :integer          not null, primary key
 #  event_id                      :integer
 #  name                          :string(255)
-#  locked                        :boolean
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  age_group_type_id             :integer
@@ -15,7 +14,6 @@
 #  end_data_type                 :string(255)
 #  uses_lane_assignments         :boolean          default(FALSE), not null
 #  scheduled_completion_at       :datetime
-#  published                     :boolean          default(FALSE), not null
 #  awarded                       :boolean          default(FALSE), not null
 #  award_title_name              :string(255)
 #  award_subtitle_name           :string(255)
@@ -24,6 +22,8 @@
 #  combined_competition_id       :integer
 #  order_finalized               :boolean          default(FALSE), not null
 #  penalty_seconds               :integer
+#  locked_at                     :datetime
+#  published_at                  :datetime
 #
 # Indexes
 #
@@ -38,7 +38,7 @@ FactoryGirl.define do
     event # FactoryGirl
     sequence(:name) {|n| "Competition #{n}"}
     sequence(:award_title_name) {|n| "Competition #{n}"}
-    locked false
+    locked_at nil
     scoring_class "Freestyle"
 
     factory :distance_competition do
@@ -72,6 +72,14 @@ FactoryGirl.define do
     factory :high_points_competition do
       scoring_class "Points High to Low"
       age_group_type # factory Girl
+    end
+
+    trait :locked do
+      locked_at DateTime.now
+    end
+
+    trait :published do
+      published_at DateTime.now
     end
   end
 end

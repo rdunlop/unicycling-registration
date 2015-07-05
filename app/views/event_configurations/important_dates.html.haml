@@ -4,8 +4,8 @@
   = render partial: "/shared/error_messages", object: @event_configuration
 
   %fieldset.form__fieldset
-    = f.input :artistic_closed_date
-    = f.input :music_submission_end_date, include_blank: true
-    = f.input :event_sign_up_closed_date
-    = f.input :start_date
+    = f.input :artistic_closed_date, as: :date_picker
+    = f.input :music_submission_end_date, as: :date_picker, include_blank: true
+    = f.input :event_sign_up_closed_date, as: :date_picker
+    = f.input :start_date, as: :date_picker
     = f.button :submit

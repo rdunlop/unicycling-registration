@@ -3,16 +3,11 @@ module Judgeable
   include Competeable
 
   included do
-    belongs_to :judge, :touch => true
+    belongs_to :judge, touch: true
 
-    validates :judge_id, :presence => true, :uniqueness => {:scope => [:competitor_id]}
+    validates :judge_id, presence: true
+    validates :judge_id, uniqueness: {scope: [:competitor_id]}, on: :create
 
     delegate :user, to: :judge
   end
-
-  # determining the place points for this score (by-judge)
-  def tied
-    judge.competition.tied(self)
-  end
 end
-

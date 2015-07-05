@@ -8,7 +8,7 @@ class RegistrantExpenseItemsController < ApplicationController
 
   def create
     respond_to do |format|
-      format.html {
+      format.html do
         if @registrant_expense_item.save
           flash[:notice] = "Successfully created Expense Item"
           redirect_to :back
@@ -16,7 +16,7 @@ class RegistrantExpenseItemsController < ApplicationController
           flash[:alert] = @registrant_expense_item.errors.full_messages.join(", ")
           redirect_to :back
         end
-      }
+      end
     end
   end
 
@@ -24,7 +24,7 @@ class RegistrantExpenseItemsController < ApplicationController
     @registrant_expense_item = @registrant.registrant_expense_items.find(params[:id])
 
     respond_to do |format|
-      format.html {
+      format.html do
         if @registrant_expense_item.destroy
           flash[:notice] = "Successfully removed Expense Item"
           redirect_to :back
@@ -32,7 +32,7 @@ class RegistrantExpenseItemsController < ApplicationController
           flash[:alert] = "Error Removing Expense Item"
           redirect_to :back
         end
-      }
+      end
     end
   end
 

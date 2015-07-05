@@ -8,8 +8,8 @@ class AddPaypalToEventConfigurations < ActiveRecord::Migration
 
     EventConfiguration.reset_column_information
     ec = EventConfiguration.first
-    ec.update_attributes( paypal_account: Rails.application.secrets.paypal_account,
-                          paypal_test: Rails.application.secrets.fetch(:paypal_test, false) ) if ec.present?
+    ec.update_attributes(paypal_account: Rails.application.secrets.paypal_account,
+                         paypal_test: Rails.application.secrets.fetch(:paypal_test, false)) if ec.present?
   end
 
   def down

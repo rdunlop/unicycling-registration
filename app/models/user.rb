@@ -42,12 +42,12 @@ class User < ActiveRecord::Base
 
   default_scope { order(:email) }
 
-  has_paper_trail :meta => {:user_id => :id }
+  has_paper_trail meta: {user_id: :id }
 
   has_many :registrants, -> { includes [:registrant_expense_items, :payment_details] }
 
-  has_many :additional_registrant_accesses, :dependent => :destroy
-  has_many :invitations, :through => :registrants, :class_name => "AdditionalRegistrantAccess", :source => :additional_registrant_accesses
+  has_many :additional_registrant_accesses, dependent: :destroy
+  has_many :invitations, through: :registrants, class_name: "AdditionalRegistrantAccess", source: :additional_registrant_accesses
 
   has_many :judges
 
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
 
-  def touch_for_role(role)
+  def touch_for_role(_role)
     touch
   end
 
@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
     {
       super_admin: [*roles],
       convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj],
-      #competition_admin: [:director],
+      competition_admin: [:awards_admin],
       director: [:data_entry_volunteer, :race_official],
       payment_admin: [:payment_admin],
       event_planner: [:event_planner],
@@ -94,11 +94,10 @@ class User < ActiveRecord::Base
   end
 
   def roles_accessible
-    roles.map(&:name).inject([]) do |array, role|
+    roles.map(&:name).each_with_object([]) do |role, array|
       new_roles = self.class.role_transfer_permissions[role.to_sym]
-      array += new_roles if new_roles.present?
-      array
-    end.uniq
+      array << new_roles if new_roles.present?
+    end.flatten.uniq
   end
 
   def self.role_description(role)
@@ -161,6 +160,7 @@ class User < ActiveRecord::Base
       "[e.g. Mary Koehler]
       Able to view/review the event sign_ups.
       Able to SEARCH & MODIFY any registration.
+      Able to Add/Modify event choices, at all times.
       Able to view/send emails to all registrants"
     when :awards_admin
       "[e.g. Kirsten]
@@ -184,11 +184,11 @@ class User < ActiveRecord::Base
   end
 
   def editable_registrants
-    (additional_registrant_accesses.full_access.map(&:registrant) + registrants).select{|reg| !reg.deleted}
+    (additional_registrant_accesses.full_access.map(&:registrant) + registrants).select{ |reg| !reg.deleted? }
   end
 
   def accessible_registrants
-    (additional_registrant_accesses.permitted.map(&:registrant) + registrants).select{|reg| !reg.deleted}
+    (additional_registrant_accesses.permitted.map(&:registrant) + registrants).select{ |reg| !reg.deleted? }
   end
 
   def total_owing
@@ -196,7 +196,7 @@ class User < ActiveRecord::Base
   end
 
   def has_minor?
-    self.registrants.active.each do |reg|
+    registrants.active.each do |reg|
       if reg.minor?
         return true
       end

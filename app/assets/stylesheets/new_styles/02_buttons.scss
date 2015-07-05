@@ -18,9 +18,6 @@
   color: white;
   text-align: center;
 
-  &:hover, &:visited {
-    color: white;
-  }
   &:active {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -73,7 +70,7 @@
 // -----------------------------------------
 /* Focus Buttons */
 // -----------------------------------------
-.focus_button:visited, .nonfocus_button:visited {
+.focus_button:visited {
   background-color: $focus;
   color: white;
 }
@@ -95,6 +92,11 @@
   background-color: $focus_active;
   border-color: #205f3c;
 
+}
+
+.nonfocus_button:visited {
+  background-color: white;
+  color: $nonfocus;
 }
 
 .nonfocus_button {

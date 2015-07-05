@@ -1,0 +1,18 @@
+%h1 My Standard Skill Routines
+%table
+  %caption My Registrations
+  %thead
+    %tr
+      %th Registant
+      %th Signed-up for Standard skill?
+      %th Standard Skill Routine created?
+  %tbody
+    - @registrants.each do |reg|
+      %tr
+        %td= reg
+        %td= reg.has_standard_skill?
+        %td
+          - if reg.standard_skill_routine.nil?
+            No
+          - else
+            = link_to "Yes", standard_skill_routine_path(reg.standard_skill_routine)

@@ -1,7 +1,7 @@
 class LaneAssignmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition, except: [:edit, :update, :destroy]
-  before_action :load_new_lane_assignment, :only => [:create]
+  before_action :load_new_lane_assignment, only: [:create]
   load_and_authorize_resource through: :competition, except: [:edit, :update, :destroy]
   load_and_authorize_resource only: [:edit, :update, :destroy]
 
@@ -34,8 +34,8 @@ class LaneAssignmentsController < ApplicationController
 
     filename = "heats_#{@competition.to_s.parameterize}.evt"
     send_data(csv_string,
-              :type => 'text/csv; charset=utf-8; header=present',
-              :filename => filename)
+              type: 'text/csv; charset=utf-8; header=present',
+              filename: filename)
   end
 
   def view_heat
@@ -63,7 +63,7 @@ class LaneAssignmentsController < ApplicationController
       comments_by: @dq_request.comments_by,
       competition: @competition,
       user: current_user
-      )
+    )
 
     respond_to do |format|
       if ir.save
@@ -118,7 +118,7 @@ class LaneAssignmentsController < ApplicationController
     respond_to do |format|
       if @lane_assignment.update_attributes(lane_assignment_params)
         format.html { redirect_to competition_lane_assignments_path(@lane_assignment.competition), notice: 'Lane assignment was successfully updated.' }
-        format.js { render :js => "window.location.replace('#{competition_lane_assignments_path(@lane_assignment.competition)}');" }
+        format.js { render js: "window.location.replace('#{competition_lane_assignments_path(@lane_assignment.competition)}');" }
       else
         @competition = @lane_assignment.competition
         format.html { render action: "edit" }
@@ -150,7 +150,7 @@ class LaneAssignmentsController < ApplicationController
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
-    raise StandardError.new("Competition is not set to use lane assignments") unless @competition.uses_lane_assignments
+    raise StandardError.new("Competition is not set to use lane assignments") unless @competition.uses_lane_assignments?
   end
 
   def load_new_lane_assignment

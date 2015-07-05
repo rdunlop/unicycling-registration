@@ -20,25 +20,25 @@
 
     %li= link_to "Verification", review_user_competition_import_results_path(current_user, competition, options)
 
-  - when "Track E-Timer"
-    %li
-      = link_to "Recording Sheet", heat_recording_printing_competition_path(competition)
-      = link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf)
-
-    - if competition.uses_lane_assignments
-      %li= link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
-      %li= link_to "Set Lane Assignments", competition_lane_assignments_path(competition)
-    %li= link_to "Review", review_competition_lane_assignments_path(competition)
-
   - when "Mass Start"
     %li
       = link_to "Start Lists", competition_sign_ins_path(competition)
       = link_to "(pdf)", competition_sign_ins_path(competition, :format => :pdf)
 
+    %li= link_to "Set Competition Wave Times", competition_wave_times_path(competition)
     %li= link_to "Enter Sign-Ins", edit_competition_sign_ins_path(competition)
+    %li= link_to "Import Wave Assignments", competition_wave_assignments_path(competition)
 
   - when "Externally Ranked"
     %li= link_to "View", review_user_competition_import_results_path(current_user, competition, options)
+
+  - if competition.uses_lane_assignments?
+    %li
+      = link_to "Recording Sheet", heat_recording_printing_competition_path(competition)
+      = link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf)
+    %li= link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
+    %li= link_to "Set Lane Assignments", competition_lane_assignments_path(competition)
+    %li= link_to "Review", review_competition_lane_assignments_path(competition)
 
 %h3 Finish Line
 %ul
@@ -58,6 +58,7 @@
       = link_to "(pdf)", single_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
 
     %li= link_to "Entry Form", data_entry_user_competition_import_results_path(current_user, competition, is_start_times: false)
+    %li= link_to "New Entry Form", competition_preliminary_external_results_path(competition)
     %li= link_to "Verification", review_user_competition_import_results_path(current_user, competition, options)
 
   - when "Track E-Timer"
@@ -68,14 +69,11 @@
     %li= link_to "Track Importing", display_lif_user_competition_import_results_path(current_user, competition)
     %li= link_to "View", review_user_competition_import_results_path(current_user, competition)
 
-  - when "Mass Start"
-    %li
-      = link_to "Start Lists", competition_sign_ins_path(competition)
-      = link_to "(pdf)", competition_sign_ins_path(competition, :format => :pdf)
-
   - when "Externally Ranked"
     %li= link_to "View", review_user_competition_import_results_path(current_user, competition, options)
-    %li= link_to "Import CSV", display_csv_user_competition_import_results_path(current_user, competition)
 
   - when "Chip-Timing"
     %li= link_to "Import CSV", display_chip_user_competition_import_results_path(current_user, competition)
+
+  - if competition.imports_times? || competition.imports_points?
+    %li= link_to "Import CSV", display_csv_user_competition_import_results_path(current_user, competition)

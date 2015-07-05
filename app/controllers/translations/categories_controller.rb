@@ -23,6 +23,6 @@ class Translations::CategoriesController < Admin::TranslationsController
   private
 
   def category_params
-    params.require(:category).permit(:translations_attributes => [:id, :locale, :name])
+    params.require(:category).permit(translations_attributes: [:id, :locale, :name])
   end
 end

@@ -18,11 +18,11 @@
 class Member < ActiveRecord::Base
   include CachedSetModel
 
-  belongs_to :competitor, touch: true, :inverse_of => :members
+  belongs_to :competitor, touch: true, inverse_of: :members
   belongs_to :registrant
   after_destroy :destroy_orphaned_competitors
 
-  validates :registrant, :presence => true
+  validates :registrant, presence: true
   validate :registrant_once_per_competition
 
   after_save :update_min_bib_number
@@ -58,5 +58,5 @@ class Member < ActiveRecord::Base
     end
   end
 
-  delegate :club, :state, :country, :ineligible, :gender, :to_s, :external_id, :age, to: :registrant
+  delegate :club, :state, :country, :ineligible?, :gender, :to_s, :external_id, :age, to: :registrant
 end

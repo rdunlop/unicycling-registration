@@ -40,7 +40,7 @@ describe ExpenseGroup do
   end
 
   it "should only list the visible groups" do
-    @group2 = FactoryGirl.create(:expense_group, :visible => true)
+    @group2 = FactoryGirl.create(:expense_group, visible: true)
     ExpenseGroup.visible == [@group]
   end
 
@@ -69,8 +69,8 @@ describe ExpenseGroup do
 
   describe "with expense_items" do
     before(:each) do
-      @item2 = FactoryGirl.create(:expense_item, :expense_group => @group)
-      @item1 = FactoryGirl.create(:expense_item, :expense_group => @group)
+      @item2 = FactoryGirl.create(:expense_item, expense_group: @group)
+      @item1 = FactoryGirl.create(:expense_item, expense_group: @group)
       @item2.update_attribute(:position, 2)
     end
     it "orders the items by position" do

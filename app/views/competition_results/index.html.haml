@@ -4,17 +4,15 @@
 %table
   %thead
     %tr
-      %th Result
+      %th Additional Result
       %th
   %tbody
-    - @competition_results.each do |result|
+    - @competition_results.active.additional.each do |result|
       %tr
         %td
           = link_to result.to_s, result.results_file_url
-          %br
         %td
-          - unless result.system_managed
-            = link_to "Delete", competition_competition_result_path(@competition, result), method: :delete, data: { confirm: "Are you sure?" }
+          = link_to "Delete", competition_competition_result_path(@competition, result), method: :delete, data: { confirm: "Are you sure?" }
 
 %h3 Upload additional PDF files here
 

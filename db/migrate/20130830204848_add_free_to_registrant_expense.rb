@@ -5,7 +5,7 @@ class AddFreeToRegistrantExpense < ActiveRecord::Migration
   end
 
   def up
-    add_column :registrant_expense_items, :free, :boolean, :default => false
+    add_column :registrant_expense_items, :free, :boolean, default: false
     Registrant.reset_column_information
     RegistrantExpenseItem.reset_column_information
 

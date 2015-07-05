@@ -1,0 +1,54 @@
+= simple_form_for(@competition.new_record? ? [@event, @competition] : [@competition], html: {class: 'multiple_nested'}) do |f|
+  = render partial: "/shared/error_messages", object: @competition
+
+  = f.input :name
+  = f.input :scheduled_completion_at, as: :datetime_picker, include_blank: true
+
+  = f.input :age_group_type_id, collection: AgeGroupType.all, include_blank: true
+  = link_to "Manage Age Groups", age_group_types_path, target: "_blank"
+
+  = f.input :scoring_class, collection: Competition.scoring_classes, include_blank: true
+  = f.input :num_members_per_competitor, collection: Competition.num_member_options, include_blank: true
+
+  %b Penalties
+  %p Is it possible to penalize a competitor "X" seconds for an infraction (like dismounting the unicycle)?
+  = f.input :penalty_seconds
+  %hr
+  = f.input :uses_lane_assignments
+
+  %hr
+
+  %h3 Competition Sources
+  .field
+    = radio_button_tag :competition_source, "registration", f.object.has_registration_sources?, class: 'js--displayIfChecked', data: { displayblock: "js--registrationSourcesForm" }
+    = label_tag :competition_source_registration, "Competitors From Registration List"
+  .field
+    = radio_button_tag :competition_source, "competition", f.object.has_competition_sources?, class: 'js--displayIfChecked', data: { displayblock: "js--competitionSourcesForm" }
+    = label_tag :competition_source_competition, "Competitors From other Competition Source"
+  .competitionSource__registration.js--registrationSourcesForm
+    = render partial: "registration_sources_form", locals: {f: f, event: @event}
+
+  .competitionSource__competition.js--competitionSourcesForm
+    = render partial: "competition_sources_form", locals: {f: f, event: @event}
+
+  %h3 Data Entry Setup
+
+  = f.input :start_data_type, collection: Competition.data_recording_types, :include_blank => true
+  = f.input :end_data_type, collection: Competition.data_recording_types, :include_blank => true
+
+  %br
+  = f.label :automatic_competitor_creation
+  = f.check_box :automatic_competitor_creation
+
+  %p Selecting this option will automatically create a competitor whenever a registrant signs up for any source-event.
+
+  %p If creating an "Overall" competition for aggregate scoring, choose the scoring class
+  = f.input :combined_competition_id, collection: CombinedCompetition.all, include_blank: true
+  = link_to "Manage Scoring Classes", combined_competitions_path, target: "_blank"
+
+  %h3 Settings for printing the awards
+  = f.input :award_title_name
+  = f.input :award_subtitle_name
+  = f.input :has_experts
+
+  = f.button :submit

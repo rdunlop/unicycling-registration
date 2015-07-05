@@ -13,7 +13,7 @@ class DataEntryVolunteer
     attributes.each do |name, value|
       send("#{name}=", value)
     end
-    if self.user_id
+    if user_id
       self.user = User.find(user_id)
     else
       self.user ||= User.new
@@ -26,7 +26,7 @@ class DataEntryVolunteer
       user.confirm! unless user.confirmed?
       user.update_attributes!(name: name)
       user.add_role(:data_entry_volunteer)
-    rescue ActiveRecord::RecordInvalid => invalid
+    rescue ActiveRecord::RecordInvalid
       return false
     end
     true
@@ -38,13 +38,9 @@ class DataEntryVolunteer
     true
   end
 
-  def to_param
-    user.to_param
-  end
+  delegate :to_param, to: :user
 
-  def id
-    user.id
-  end
+  delegate :id, to: :user
 
   def persisted?
     false

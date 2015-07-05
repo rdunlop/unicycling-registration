@@ -21,7 +21,7 @@ describe Category do
 
   it "has events" do
     cat = FactoryGirl.create(:category)
-    ev = FactoryGirl.create(:event, :category => cat)
+    ev = FactoryGirl.create(:event, category: cat)
     expect(cat.events).to eq([ev])
   end
 
@@ -43,9 +43,9 @@ describe Category do
 
   it "events should be sorted by position" do
     cat = FactoryGirl.create(:category)
-    event1 = FactoryGirl.create(:event, :category => cat)
-    event3 = FactoryGirl.create(:event, :category => cat)
-    event2 = FactoryGirl.create(:event, :category => cat)
+    event1 = FactoryGirl.create(:event, category: cat)
+    event3 = FactoryGirl.create(:event, category: cat)
+    event2 = FactoryGirl.create(:event, category: cat)
     event3.update_attribute(:position, 3)
 
     expect(cat.events).to eq([event1, event2, event3])
@@ -53,7 +53,7 @@ describe Category do
 
   it "destroy related events upon destroy" do
     cat = FactoryGirl.create(:category)
-    event1 = FactoryGirl.create(:event, :category => cat)
+    FactoryGirl.create(:event, category: cat)
     expect(Event.all.count).to eq(1)
     cat.destroy
     expect(Event.all.count).to eq(0)

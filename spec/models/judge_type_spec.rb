@@ -19,7 +19,7 @@
 #
 # Indexes
 #
-#  index_judge_types_on_name  (name) UNIQUE
+#  index_judge_types_on_name_and_event_class  (name,event_class) UNIQUE
 #
 
 require 'spec_helper'
@@ -73,27 +73,5 @@ describe JudgeType do
     jt = FactoryGirl.build(:judge_type)
     jt.boundary_calculation_enabled = true
     expect(jt.valid?).to eq(false) # XXX Boundary Scores are disabled
-  end
-
-  it "can convert places into points" do
-    jt = FactoryGirl.build_stubbed(:judge_type)
-    jt.event_class = "Street"
-    expect(jt.convert_place_to_points(1, 0)).to eq(1.0)
-    expect(jt.convert_place_to_points(2, 0)).to eq(2.0)
-    expect(jt.convert_place_to_points(4, 2)).to eq(5.0)
-    expect(jt.convert_place_to_points(7, 0)).to eq(7.0)
-    expect(jt.convert_place_to_points(7, 1)).to eq(7.5)
-  end
-  it "can convert places into points" do
-    jt = FactoryGirl.build_stubbed(:judge_type)
-    jt.event_class = "Flatland"
-    expect(jt.convert_place_to_points(1, 0)).to eq(1.0)
-  end
-  it "can convert places into points" do
-    jt = FactoryGirl.build_stubbed(:judge_type)
-    jt.event_class = "Freestyle"
-    expect(jt.convert_place_to_points(1, 0)).to eq(1.0)
-    expect(jt.convert_place_to_points(2, 0)).to eq(2.0)
-    expect(jt.convert_place_to_points(2, 1)).to eq(2.5)
   end
 end

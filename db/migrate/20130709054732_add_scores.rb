@@ -13,7 +13,7 @@ class AddScores < ActiveRecord::Migration
 
     create_table :distance_attempts do |t|
       t.integer  :competitor_id
-      t.decimal  :distance,      :precision => 4, :scale => 0
+      t.decimal  :distance,      precision: 4, scale: 0
       t.boolean  :fault
       t.integer  :judge_id
       t.timestamps
@@ -21,10 +21,10 @@ class AddScores < ActiveRecord::Migration
 
     create_table :scores do |t|
       t.integer  :competitor_id
-      t.decimal  :val_1,          :precision => 5, :scale => 3
-      t.decimal  :val_2,          :precision => 5, :scale => 3
-      t.decimal  :val_3,          :precision => 5, :scale => 3
-      t.decimal  :val_4,          :precision => 5, :scale => 3
+      t.decimal  :val_1,          precision: 5, scale: 3
+      t.decimal  :val_2,          precision: 5, scale: 3
+      t.decimal  :val_3,          precision: 5, scale: 3
+      t.decimal  :val_4,          precision: 5, scale: 3
       t.text     :notes
       t.integer  :judge_id
       t.timestamps
@@ -49,10 +49,10 @@ class AddScores < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table "street_scores", :force => true do |t|
+    create_table "street_scores", force: true do |t|
       t.integer  :competitor_id
       t.integer  :judge_id
-      t.decimal  :val_1,          :precision => 5, :scale => 3
+      t.decimal  :val_1,          precision: 5, scale: 3
       t.timestamps
     end
   end

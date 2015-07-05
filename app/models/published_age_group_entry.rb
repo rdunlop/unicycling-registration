@@ -16,9 +16,7 @@ class PublishedAgeGroupEntry < ActiveRecord::Base
 
   before_create :set_published_at_date
 
-  def to_s
-    age_group_entry.to_s
-  end
+  delegate :to_s, to: :age_group_entry
 
   def published_formatted
     published_at.to_formatted_s(:short)

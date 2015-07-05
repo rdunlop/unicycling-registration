@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517205930) do
+ActiveRecord::Schema.define(version: 20150704143742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,7 +176,6 @@ ActiveRecord::Schema.define(version: 20150517205930) do
   create_table "competitions", force: :cascade do |t|
     t.integer  "event_id"
     t.string   "name",                          limit: 255
-    t.boolean  "locked"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "age_group_type_id"
@@ -186,7 +185,6 @@ ActiveRecord::Schema.define(version: 20150517205930) do
     t.string   "end_data_type",                 limit: 255
     t.boolean  "uses_lane_assignments",                     default: false, null: false
     t.datetime "scheduled_completion_at"
-    t.boolean  "published",                                 default: false, null: false
     t.boolean  "awarded",                                   default: false, null: false
     t.string   "award_title_name",              limit: 255
     t.string   "award_subtitle_name",           limit: 255
@@ -195,6 +193,8 @@ ActiveRecord::Schema.define(version: 20150517205930) do
     t.integer  "combined_competition_id"
     t.boolean  "order_finalized",                           default: false, null: false
     t.integer  "penalty_seconds"
+    t.datetime "locked_at"
+    t.datetime "published_at"
   end
 
   add_index "competitions", ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true, using: :btree
@@ -233,7 +233,7 @@ ActiveRecord::Schema.define(version: 20150517205930) do
     t.string   "usa_member_number",               limit: 255
     t.string   "emergency_name",                  limit: 255
     t.string   "emergency_relationship",          limit: 255
-    t.boolean  "emergency_attending"
+    t.boolean  "emergency_attending",                         default: false, null: false
     t.string   "emergency_primary_phone",         limit: 255
     t.string   "emergency_other_phone",           limit: 255
     t.string   "responsible_adult_name",          limit: 255
@@ -447,6 +447,10 @@ ActiveRecord::Schema.define(version: 20150517205930) do
     t.decimal  "points",                    precision: 6, scale: 3, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "entered_by_id",                                     null: false
+    t.datetime "entered_at",                                        null: false
+    t.string   "status",                                            null: false
+    t.boolean  "preliminary",                                       null: false
   end
 
   add_index "external_results", ["competitor_id"], name: "index_external_results_on_competitor_id", using: :btree
@@ -492,7 +496,7 @@ ActiveRecord::Schema.define(version: 20150517205930) do
     t.boolean  "boundary_calculation_enabled",             default: false, null: false
   end
 
-  add_index "judge_types", ["name"], name: "index_judge_types_on_name", unique: true, using: :btree
+  add_index "judge_types", ["name", "event_class"], name: "index_judge_types_on_name_and_event_class", unique: true, using: :btree
 
   create_table "judges", force: :cascade do |t|
     t.integer  "competition_id"
@@ -500,6 +504,7 @@ ActiveRecord::Schema.define(version: 20150517205930) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status",         default: "active", null: false
   end
 
   add_index "judges", ["competition_id"], name: "index_judges_event_category_id", using: :btree
@@ -624,7 +629,7 @@ ActiveRecord::Schema.define(version: 20150517205930) do
 
   create_table "registrant_event_sign_ups", force: :cascade do |t|
     t.integer  "registrant_id"
-    t.boolean  "signed_up"
+    t.boolean  "signed_up",         default: false, null: false
     t.integer  "event_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -767,8 +772,10 @@ ActiveRecord::Schema.define(version: 20150517205930) do
     t.datetime "updated_at"
     t.integer  "event_id"
     t.integer  "user_id"
+    t.integer  "competitor_id"
   end
 
+  add_index "songs", ["competitor_id"], name: "index_songs_on_competitor_id", unique: true, using: :btree
   add_index "songs", ["registrant_id"], name: "index_songs_registrant_id", using: :btree
   add_index "songs", ["user_id", "registrant_id", "event_id"], name: "index_songs_on_user_id_and_registrant_id_and_event_id", unique: true, using: :btree
 
@@ -830,7 +837,7 @@ ActiveRecord::Schema.define(version: 20150517205930) do
     t.boolean  "primary_domain",             default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "verified",                   default: false
+    t.boolean  "verified",                   default: false, null: false
   end
 
   add_index "tenant_aliases", ["tenant_id", "primary_domain"], name: "index_tenant_aliases_on_tenant_id_and_primary_domain", using: :btree
@@ -868,11 +875,13 @@ ActiveRecord::Schema.define(version: 20150517205930) do
     t.datetime "updated_at"
     t.boolean  "is_start_time",                   default: false, null: false
     t.integer  "number_of_laps"
-    t.string   "status",              limit: 255
+    t.string   "status",              limit: 255,                 null: false
     t.text     "comments"
     t.string   "comments_by",         limit: 255
     t.integer  "number_of_penalties"
-    t.datetime "entered_at"
+    t.datetime "entered_at",                                      null: false
+    t.integer  "entered_by_id",                                   null: false
+    t.boolean  "preliminary"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_competitor_id", using: :btree
@@ -966,8 +975,8 @@ ActiveRecord::Schema.define(version: 20150517205930) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   create_table "volunteer_choices", force: :cascade do |t|
-    t.integer  "registrant_id"
-    t.integer  "volunteer_opportunity_id"
+    t.integer  "registrant_id",            null: false
+    t.integer  "volunteer_opportunity_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -977,7 +986,7 @@ ActiveRecord::Schema.define(version: 20150517205930) do
   add_index "volunteer_choices", ["volunteer_opportunity_id"], name: "index_volunteer_choices_on_volunteer_opportunity_id", using: :btree
 
   create_table "volunteer_opportunities", force: :cascade do |t|
-    t.string   "description",   limit: 255
+    t.string   "description",   limit: 255, null: false
     t.integer  "position"
     t.text     "inform_emails"
     t.datetime "created_at"

@@ -30,13 +30,13 @@
           %td
             = f.label :country_residence, :class => "required"
           %td
-            - if @config.usa
+            - if @config.usa?
               = f.country_select :country_residence, {priority_countries: %w(US CA), prompt: ' '}, class: "chosen-select"
             - else
               = f.country_select :country_residence, {prompt: ' '}, class: "chosen-select"
         %tr
           %td
-            - if @config.usa == true
+            - if @config.usa?
               = f.label :state_code, t(".state"), :class => "required"
             - else
               = f.label :state_code, t(".state_province")
@@ -46,7 +46,7 @@
           %td
             = f.label :country_representing, :title => t(".country_representing_description")
           %td
-            - if @config.usa
+            - if @config.usa?
               = f.country_select(:country_representing, {priority_countries: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
             - else
               = f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
@@ -86,7 +86,7 @@
         %tr
           %td= f.label :club_contact
           %td= f.text_field :club_contact, :size => 25
-        - if @config.usa
+        - if @config.usa?
           %tr
             %td= f.label :usa_member_number
             %td= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", title: t(".usa_membership_number_tooltip", convention_name: @config.short_name)

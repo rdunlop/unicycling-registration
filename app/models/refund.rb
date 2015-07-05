@@ -16,24 +16,24 @@
 #
 
 class Refund < ActiveRecord::Base
-  validates :refund_date, :user_id, :note, :percentage, :presence => true
+  validates :refund_date, :user_id, :note, :percentage, presence: true
   validates :percentage, inclusion: { in: 0..100 }
 
   validates_associated :refund_details
 
   belongs_to :user
-  has_many :refund_details, :dependent => :destroy
+  has_many :refund_details, dependent: :destroy
 
   def self.build_from_details(options)
-    pd = options[:registrant].paid_details.select{|payment_detail| payment_detail.expense_item == options[:item] }.first
+    pd = options[:registrant].paid_details.find{|payment_detail| payment_detail.expense_item == options[:item] }
     refund = Refund.new(
       refund_date: DateTime.now,
       note: options[:note],
       percentage: 100
-      )
+    )
     refund.refund_details.build(
       payment_detail: pd
-      )
+    )
     refund
   end
 end

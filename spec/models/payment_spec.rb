@@ -48,7 +48,7 @@ describe Payment do
 
   describe "with payment details" do
     before(:each) do
-      @pd = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => 57.49)
+      @pd = FactoryGirl.create(:payment_detail, payment: @pay, amount: 57.49)
       @pay.reload
     end
 
@@ -56,28 +56,28 @@ describe Payment do
       expect(@pay.payment_details).to eq([@pd])
     end
     it "can calcalate the payment total-amount" do
-      @pd2 = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => 23.0)
+      @pd2 = FactoryGirl.create(:payment_detail, payment: @pay, amount: 23.0)
       expect(@pay.total_amount == "80.49".to_f).to eq(true)
     end
 
     it "has a list of unique_payment_deatils" do
-      expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 1, :amount => @pd.amount })])
+      expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 1, amount: @pd.amount)])
     end
 
     describe "with mulitple payment_details of the same expense_item" do
       before(:each) do
-        @pd2 = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => @pd.amount, :details => @pd.details, :expense_item => @pd.expense_item)
-        @pd3 = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => @pd.amount, :details => @pd.details, :expense_item => @pd.expense_item)
+        @pd2 = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, expense_item: @pd.expense_item)
+        @pd3 = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, expense_item: @pd.expense_item)
       end
 
       it "only lists the element once" do
         expect(@pay.unique_payment_details.count).to eq(1)
-        expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd.amount})])
+        expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 3, amount: @pd.amount)])
       end
 
       describe "with payment_details of different expense_items" do
         before(:each) do
-          @pdb = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => @pd.amount, :details => @pd.details)
+          @pdb = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details)
         end
 
         it "lists the entries separately" do
@@ -87,13 +87,13 @@ describe Payment do
 
       describe "with different amounts" do
         before(:each) do
-          @pdc = FactoryGirl.create(:payment_detail, :payment => @pd.payment, :amount => 99.98, :details => @pd.details, :expense_item => @pd.expense_item)
+          @pdc = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: 99.98, details: @pd.details, expense_item: @pd.expense_item)
         end
 
         it "does not group them together" do
           expect(@pay.unique_payment_details.count).to eq(2)
-          expect(@pay.unique_payment_details).to match_array([PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 1, :amount => @pdc.amount}),
-                                                              PaymentDetailSummary.new({:expense_item_id => @pd.expense_item_id, :count => 3, :amount => @pd2.amount})])
+          expect(@pay.unique_payment_details).to match_array([PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 1, amount: @pdc.amount),
+                                                              PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 3, amount: @pd2.amount)])
         end
       end
     end
@@ -120,7 +120,7 @@ describe Payment do
 
   it "destroys related payment_details upon destroy" do
     pay = FactoryGirl.create(:payment)
-    pd = FactoryGirl.create(:payment_detail, :payment => pay)
+    FactoryGirl.create(:payment_detail, payment: pay)
     pay.reload
     expect(PaymentDetail.all.count).to eq(1)
     pay.destroy
@@ -128,25 +128,25 @@ describe Payment do
   end
 
   describe "with a completed payment" do
-    let (:payment) { FactoryGirl.create(:payment, :completed => true) }
+    let (:payment) { FactoryGirl.create(:payment, completed: true) }
 
     it "can determine the total received" do
-      pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
+      FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
       payment.reload
       expect(Payment.total_received).to eq(15.33)
     end
 
     it "returns the set of paid expense_items" do
-      pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
+      pd = FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
       payment.reload
       expect(Payment.paid_expense_items).to eq([pd.expense_item])
     end
 
     describe "with a refund" do
       before(:each) do
-        pd = FactoryGirl.create(:payment_detail, :payment => payment, :amount => 15.33)
+        pd = FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
         @ref = FactoryGirl.create(:refund)
-        @rd = FactoryGirl.create(:refund_detail, :refund => @ref, :payment_detail => pd)
+        @rd = FactoryGirl.create(:refund_detail, refund: @ref, payment_detail: pd)
         payment.reload
       end
 
@@ -158,10 +158,10 @@ describe Payment do
 
   describe "a payment for a tshirt" do
     before(:each) do
-      @pd = FactoryGirl.create(:payment_detail, :payment => @pay)
+      @pd = FactoryGirl.create(:payment_detail, payment: @pay)
       @pay.reload
       @reg = @pd.registrant
-      @rei = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item, :free => @pd.free, :details => @pd.details)
+      @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @pd.expense_item, free: @pd.free, details: @pd.details)
       @reg.reload
     end
 
@@ -170,7 +170,7 @@ describe Payment do
     end
     describe "when the user has a free t-shirt and a paid t-shirt" do
       before(:each) do
-        @rei_free = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item, :free => true)
+        @rei_free = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @pd.expense_item, free: true)
         @reg.reload
       end
 
@@ -189,7 +189,7 @@ describe Payment do
     end
     describe "when the registrant has two t-shirts, who only differ by details" do
       before(:each) do
-        @rei2 = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item, :details => "for My Kid")
+        @rei2 = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @pd.expense_item, details: "for My Kid")
         @reg.reload
       end
 
@@ -278,7 +278,7 @@ describe Payment do
 
       describe "when the payment is saved after being paid" do
         before(:each) do
-          @rei2 = FactoryGirl.create(:registrant_expense_item, :registrant => @reg, :expense_item => @pd.expense_item)
+          @rei2 = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @pd.expense_item)
           @pay.save
           @reg.reload
         end
@@ -292,7 +292,7 @@ describe Payment do
     before(:each) do
       @reg_period = FactoryGirl.create(:registration_period)
       @pay = FactoryGirl.create(:payment)
-      @pd = FactoryGirl.create(:payment_detail, :payment => @pay, :amount => @reg_period.competitor_expense_item.cost)
+      @pd = FactoryGirl.create(:payment_detail, payment: @pay, amount: @reg_period.competitor_expense_item.cost)
 
       @reg_with_reg_item = FactoryGirl.create(:competitor)
       @pd.registrant = @reg_with_reg_item
@@ -312,7 +312,6 @@ describe Payment do
       @pay.save
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(0)
-      mail = ActionMailer::Base.deliveries.first
     end
   end
 end

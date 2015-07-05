@@ -1,0 +1,27 @@
+%h1= "#{@competition} - Heat Assignment"
+
+%table.competitor_statuses.sortable
+  %caption Competitors
+  %thead
+    %tr
+      %th Wave
+      %th.sign_up ID
+      %th.sign_up Name
+      %th.sign_up Age
+      %th.sign_up Gender
+      %th Age Group
+      %th Best Time
+  %tbody
+    - @competitors.each do |competitor|
+      %tr
+        %th= competitor.wave
+        %td= competitor.lowest_member_bib_number
+        %td= competitor.to_s
+        %td= competitor.age
+        %td= competitor.gender
+        %td= competitor.age_group_entry_description
+        %td= competitor.best_time
+%br
+
+= render "download_form"
+= render "upload_form"

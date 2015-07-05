@@ -1,5 +1,12 @@
 %h1 User Management
 
+%p Listed on this page are all of the roles which you have the permission to see.
+%p
+  %b Note
+  There may be additional roles which you
+  %u do not
+  have permission to see
+
 %h3 Users with advanced permissions:
 %table.sortable
   %thead
@@ -43,6 +50,11 @@
           %br
           = submit_tag "Set Password"
 
+- if can? :read, :director
+  %div
+    = link_to 'Manage Directors', directors_path
+
+%hr
 %h3 Role Descriptions:
 - @available_roles.each do |role|
   %h4= role

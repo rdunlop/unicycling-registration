@@ -6,7 +6,7 @@
         - @combined_competition_entries.each do |cc|
           %th= cc
     %tbody
-      - if @combined_competition.percentage_based_calculations
+      - if @combined_competition.percentage_based_calculations?
         %tr
           %th Base Points
           - @combined_competition_entries.each do |cc|

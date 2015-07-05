@@ -37,8 +37,8 @@ class RegistrantsController < ApplicationController
     @event_start_date = @config.start_date.try(:strftime, "%b %-d, %Y")
 
     respond_to do |format|
-      format.html { render action: "waiver", :layout => nil, :layout => "pdf.html" }
-      format.pdf { render :pdf => "waiver", :formats => [:html], :layout => "pdf.html" }
+      format.html { render action: "waiver", layout: "pdf.html" }
+      format.pdf { render pdf: "waiver", formats: [:html], layout: "pdf.html" }
     end
   end
 
@@ -58,7 +58,7 @@ class RegistrantsController < ApplicationController
     @city = contact_detail.city
     @state = contact_detail.state
     @zip = contact_detail.zip
-    @country= contact_detail.country_residence
+    @country = contact_detail.country_residence
     @phone = contact_detail.phone
     @mobile = contact_detail.mobile
     @email = contact_detail.email
@@ -126,16 +126,16 @@ class RegistrantsController < ApplicationController
   end
 
   def attributes
-    [ :first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
-      :online_waiver_signature, :wheel_size_id,
-      :volunteer_opportunity_ids => [],
-      :registrant_choices_attributes => [:event_choice_id, :value, :id],
-      :registrant_event_sign_ups_attributes => [:event_category_id, :signed_up, :event_id, :id],
-      :contact_detail_attributes => [:id, :email,
-                                     :address, :city, :country_residence, :country_representing,
-                                     :mobile, :phone, :state_code, :zip, :club, :club_contact, :usa_member_number,
-                                     :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
-                                     :responsible_adult_name, :responsible_adult_phone]
+    [:first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
+     :online_waiver_signature, :wheel_size_id,
+     volunteer_opportunity_ids: [],
+     registrant_choices_attributes: [:event_choice_id, :value, :id],
+     registrant_event_sign_ups_attributes: [:event_category_id, :signed_up, :event_id, :id],
+     contact_detail_attributes: [:id, :email,
+                                 :address, :city, :country_residence, :country_representing,
+                                 :mobile, :phone, :state_code, :zip, :club, :club_contact, :usa_member_number,
+                                 :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
+                                 :responsible_adult_name, :responsible_adult_phone]
     ]
   end
 

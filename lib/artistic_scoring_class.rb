@@ -5,10 +5,8 @@ class ArtisticScoringClass < BaseScoringClass
     calculate the winner"
   end
 
-  # This is used temporarily to access the calculator, but will likely be private-ized soon
-  def score_calculator
-    unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc
-    ArtisticScoreCalculator.new(@competition, unicon_scoring)
+  def lower_is_better
+    true
   end
 
   # describes how to label the results of this competition
@@ -20,27 +18,8 @@ class ArtisticScoringClass < BaseScoringClass
     "freestyle_scores"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    competitor.scores.count > 0
-  end
-
-  # returns the result for this competitor
-  def competitor_result(competitor)
-    if self.competitor_has_result?(competitor)
-      nil# not applicable in Freestyle
-    else
-      nil
-    end
-  end
-
-  def competitor_dq?(competitor)
+  def competitor_dq?(_competitor)
     false
-  end
-
-  # Function which places all of the competitors in the competition
-  def place_all
-    score_calculator.update_all_places
   end
 
   # Used when trying to destroy all results for a competition
@@ -49,7 +28,7 @@ class ArtisticScoringClass < BaseScoringClass
   end
 
   def uses_judges
-    true
+    "Freestyle"
   end
 
   def scoring_path(judge)

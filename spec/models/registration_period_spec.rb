@@ -17,7 +17,7 @@ require 'spec_helper'
 
 describe RegistrationPeriod do
   before(:each) do
-    @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 11, 03), :end_date => Date.new(2012, 11, 07))
+    @rp = FactoryGirl.create(:registration_period, start_date: Date.new(2012, 11, 03), end_date: Date.new(2012, 11, 07))
   end
 
   it "is valid from FactoryGirl" do
@@ -81,8 +81,8 @@ describe RegistrationPeriod do
 
   describe "with existing periods" do
     before(:each) do
-      @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 01, 01), :end_date => Date.new(2012, 02, 02))
-      @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 02, 03), :end_date => Date.new(2012, 04, 04))
+      @rp1 = FactoryGirl.create(:registration_period, start_date: Date.new(2012, 01, 01), end_date: Date.new(2012, 02, 02))
+      @rp2 = FactoryGirl.create(:registration_period, start_date: Date.new(2012, 02, 03), end_date: Date.new(2012, 04, 04))
     end
 
     it "can retrieve period" do
@@ -108,7 +108,7 @@ describe RegistrationPeriod do
     end
     describe "with more registration periods" do
       before(:each) do
-        @rp0 = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 02, 03), :end_date => Date.new(2010, 04, 04))
+        @rp0 = FactoryGirl.create(:registration_period, start_date: Date.new(2010, 02, 03), end_date: Date.new(2010, 04, 04))
       end
       it "returns the periods in ascending date order" do
         expect(RegistrationPeriod.all).to eq([@rp0, @rp1, @rp2, @rp])
@@ -139,11 +139,11 @@ describe RegistrationPeriod do
     end
   end
 end
-describe "when testing the update function for registration periods", :caching => true do
+describe "when testing the update function for registration periods", caching: true do
   before(:each) do
     ActionMailer::Base.deliveries.clear
     # create a rp which encompasses "today"
-    @rp1 = FactoryGirl.create(:registration_period, :start_date => Date.new(2012, 12, 21), :end_date => Date.new(2020, 11, 7))
+    @rp1 = FactoryGirl.create(:registration_period, start_date: Date.new(2012, 12, 21), end_date: Date.new(2020, 11, 7))
     @reg = FactoryGirl.create(:competitor) # will have rp1
     @nc_reg = FactoryGirl.create(:noncompetitor) # will have rp1
   end
@@ -179,7 +179,7 @@ describe "when testing the update function for registration periods", :caching =
     end
 
     it "doesnt't update this registrants' items when moving to the next period" do
-      @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
+      @rp2 = FactoryGirl.create(:registration_period, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
       Delorean.time_travel_to Date.new(2020, 12, 1) do
         RegistrationPeriod.update_current_period
       end
@@ -189,7 +189,7 @@ describe "when testing the update function for registration periods", :caching =
   end
   describe "when updating to the next period" do
     before(:each) do
-      @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
+      @rp2 = FactoryGirl.create(:registration_period, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
       ActionMailer::Base.deliveries.clear
       Delorean.time_travel_to Date.new(2020, 12, 1) do
         @ret = RegistrationPeriod.update_current_period
@@ -254,7 +254,7 @@ describe "when testing the update function for registration periods", :caching =
       before(:each) do
         ActionMailer::Base.deliveries.clear
         Delorean.time_travel_to Date.new(2020, 12, 1) do
-          @rp2 = FactoryGirl.create(:registration_period, :start_date => Date.new(2020, 11, 8), :end_date => Date.new(2021, 1, 1))
+          @rp2 = FactoryGirl.create(:registration_period, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
           @ret = RegistrationPeriod.update_current_period
         end
       end

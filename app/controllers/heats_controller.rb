@@ -7,33 +7,21 @@ class HeatsController < ApplicationController
 
   respond_to :html
 
-  # GET /competitions/:competition_id/1/competitors/new
-  def new
-    add_breadcrumb "Create Track Lane Assignments"
-  end
-
-  # GET /competitions/1/competitors
+  # GET /competitions/1/heats
   def index
     add_breadcrumb "Current Heats"
     @competitors = @competition.competitors
   end
 
-  def create_heats_from(competitors, current_heat, max_lane_number)
-    lane_number = 1
-    heat_number = current_heat
-    competitors.sort{|a, b| b.best_time <=> a.best_time}.each do |competitor|
-      if lane_number > max_lane_number
-        heat_number += 1
-        lane_number = 1
-      end
-      LaneAssignment.create!(competitor: competitor, lane: lane_number, heat: heat_number, competition: competitor.competition)
-      lane_number += 1
-    end
-    return heat_number if lane_number == 1
-    heat_number + 1
+  # GET /competitions/1/heats/new
+  def new
+    add_breadcrumb "Create Track Lane Assignments"
   end
 
-  # process a form submission which includes HEAT&Lane for each candidate, creating the competitor as well as the lane assignment
+  # process a form submission which includes HEAT&Lane for each candidate, creating the nocessary lane assignment
+  # It creates heats for each age group
+  # parameters:
+  #  - Lanes - maximum number of lanes for each heat
   def create
     max_lane_number = params[:lanes].to_i
     begin
@@ -112,6 +100,21 @@ class HeatsController < ApplicationController
   end
 
   private
+
+  def create_heats_from(competitors, current_heat, max_lane_number)
+    next_lane_number = 1
+    heat_number = current_heat
+    competitors.sort{|a, b| b.best_time <=> a.best_time}.each do |competitor|
+      if next_lane_number > max_lane_number
+        heat_number += 1
+        next_lane_number = 1
+      end
+      LaneAssignment.create!(competitor: competitor, lane: next_lane_number, heat: heat_number, competition: competitor.competition)
+      next_lane_number += 1
+    end
+    return heat_number if next_lane_number == 1
+    heat_number + 1
+  end
 
   def load_age_group_entry
     @age_group_entry = AgeGroupEntry.find(params[:age_group_entry_id])

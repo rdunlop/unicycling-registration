@@ -13,7 +13,7 @@ describe EventConfigurationsController do
     {
       test_mode: true,
       standard_skill_closed_date: Date.tomorrow,
-      :translations_attributes => {
+      translations_attributes: {
         "1" => {
           locale: "en",
           short_name: "something short",
@@ -32,7 +32,7 @@ describe EventConfigurationsController do
     let!(:event_configuration) { EventConfiguration.create! valid_attributes }
 
     it "Cannot edit configuration" do
-      get :advanced_settings, {:id => event_configuration.to_param}
+      get :advanced_settings, id: event_configuration.to_param
       expect(response).to redirect_to(root_path)
     end
 
@@ -45,7 +45,7 @@ describe EventConfigurationsController do
         expect(response).to redirect_to(root_path)
       end
       it "changes my user to admin" do
-        post 'test_mode_role', :role => "admin"
+        post 'test_mode_role', role: "admin"
         @user.reload
         expect(@user.has_role?(:admin)).to eq(true)
       end

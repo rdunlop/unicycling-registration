@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe PaymentMailer do
   before(:each) do
-    @ec = FactoryGirl.create(:event_configuration, :long_name => "NAUCC 2140")
+    @ec = FactoryGirl.create(:event_configuration, long_name: "NAUCC 2140")
   end
   describe "ipn_received" do
     let(:mail) { PaymentMailer.ipn_received("something") }
@@ -20,8 +20,8 @@ describe PaymentMailer do
   end
 
   describe "payment_completed" do
-    let(:payment) { FactoryGirl.create(:payment, :completed => true) }
-    let!(:payment_detail) { FactoryGirl.create(:payment_detail, :amount => 10, :payment => payment) }
+    let(:payment) { FactoryGirl.create(:payment, completed: true) }
+    let!(:payment_detail) { FactoryGirl.create(:payment_detail, amount: 10, payment: payment) }
     before(:each) do
       payment.reload
       Rails.application.secrets.payment_notice_email = "robin+p@dunlopweb.com"

@@ -1,0 +1,20 @@
+.nested_nested
+  .items
+    = f.nested_fields_for :competition_sources do |cs|
+      .item
+        Event Category
+        = cs.select :event_category_id, event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true
+        %br
+
+        Gender
+        = cs.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true
+        %br
+        Age Range
+        = cs.number_field :min_age, {min: 0, placeholder: "min"}
+        \-
+        = cs.number_field :max_age, {min: 0, placeholder: "max"}
+        .remove_label
+          %a{href: '#', class: 'remove'} remove
+          = cs.hidden_field :id
+          = cs.hidden_field :_destroy
+  %a{ href: "#", class: "add"} add entry

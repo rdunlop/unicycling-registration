@@ -1,3 +1,4 @@
+# rubocop:disable Rails/Output
 if defined?(Rails::Console)
   def switch_tenant
     puts "Select your tenant:"
@@ -5,7 +6,7 @@ if defined?(Rails::Console)
       puts tenant.subdomain
     end
     print "Enter tenant: "
-    Apartment::Tenant.switch(gets.strip)
+    Apartment::Tenant.switch!(gets.strip)
     puts "Tenant Switched to #{Apartment::Tenant.current}"
   end
   switch_tenant()

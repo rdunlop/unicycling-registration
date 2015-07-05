@@ -21,8 +21,8 @@ class LaneAssignment < ActiveRecord::Base
   belongs_to :competitor, touch: true
   include CompetitorAutoCreation
 
-  validates :competition, :competitor, :heat, :lane, :presence => true
-  validates :heat, :uniqueness => {:scope => [:competition_id, :lane] }
+  validates :competition, :competitor, :heat, :lane, presence: true
+  validates :heat, uniqueness: {scope: [:competition_id, :lane] }
 
   default_scope { order(:heat, :lane) }
 
@@ -35,6 +35,6 @@ class LaneAssignment < ActiveRecord::Base
   end
 
   def matching_record
-    @matching_record ||= ImportResult.where(competition: competition, bib_number: competitor.first_bib_number).first
+    @matching_record ||= ImportResult.find_by(competition: competition, bib_number: competitor.first_bib_number)
   end
 end

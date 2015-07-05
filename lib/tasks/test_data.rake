@@ -2,7 +2,7 @@ desc "This task creates a whole set of fake event/registrations/competitions/sig
 
 def create_category(name)
   cat = Category.find_by(name: name)
-  cat ||= FactoryGirl.create(:category, name: name)
+  FactoryGirl.create(:category, name: name) if cat.nil?
 end
 
 def create_event(category, name, event_categories = [])
@@ -18,7 +18,7 @@ def create_event(category, name, event_categories = [])
       end
     end
     ecat_el = event.event_categories.find_by(name: ecat)
-    ecat_el ||= FactoryGirl.create(:event_category, event: event, name: ecat, position: index + 2)
+    FactoryGirl.create(:event_category, event: event, name: ecat, position: index + 2) if ecat_el.nil?
   end
   event
 end
@@ -28,7 +28,7 @@ def create_registrant(first_name, last_name, email_name)
   user ||= FactoryGirl.create(:user, email: "#{email_name}@dunlopweb.com")
   reg = Registrant.find_by(first_name: first_name, last_name: last_name)
   birthday = Date.today - rand(19..99).years
-  reg ||= FactoryGirl.create(:competitor, first_name: first_name, last_name: last_name, user: user, birthday: birthday)
+  FactoryGirl.create(:competitor, first_name: first_name, last_name: last_name, user: user, birthday: birthday) if reg.nil?
 end
 
 def sign_up_for_event(reg, event, event_category = nil)
@@ -38,7 +38,7 @@ def sign_up_for_event(reg, event, event_category = nil)
   ecat_name = event_category || "All"
   ecat = event.event_categories.find_by(name: ecat_name)
   resu = RegistrantEventSignUp.find_by(registrant: reg, event: event, event_category: ecat)
-  resu ||= FactoryGirl.create(:registrant_event_sign_up, registrant: reg, event: event, event_category: ecat, signed_up: true)
+  FactoryGirl.create(:registrant_event_sign_up, registrant: reg, event: event, event_category: ecat, signed_up: true) if resu.nil?
 end
 
 def sign_up_for_random_event(reg, event, event_categories)
@@ -47,21 +47,21 @@ end
 
 def create_competition(event, competition_name, event_cat_names, source_competition = nil)
   comp = Competition.find_by(name: competition_name)
-  comp ||= FactoryGirl.create(:competition, event: event, name: competition_name, scoring_class: "Shortest Time", start_data_type: "Track E-Timer", end_data_type: "Track E-Timer")
+  FactoryGirl.create(:competition, event: event, name: competition_name, scoring_class: "Shortest Time", start_data_type: "Track E-Timer", end_data_type: "Track E-Timer") if comp.nil?
 
   event_cat_names.each do |ecat_name|
     ecat = event.event_categories.find_by(name: ecat_name)
-    source = CompetitionSource.find_by(target_competition: comp, event_category: ecat)
-    source ||= FactoryGirl.create(:competition_source, target_competition: comp, event_category: ecat)
+    competition_source = CompetitionSource.find_by(target_competition: comp, event_category: ecat)
+    FactoryGirl.create(:competition_source, target_competition: comp, event_category: ecat) if competition_source.nil?
   end
 
   [source_competition].each do |source|
-    source = CompetitionSource.find_by(target_competition: comp, competition: source)
-    source ||= FactoryGirl.create(:competition_source, target_competition: comp, competition: source)
+    competition_source = CompetitionSource.find_by(target_competition: comp, competition: source)
+    FactoryGirl.create(:competition_source, target_competition: comp, competition: source) if competition_source.nil?
   end
 end
 
-task :create_fake_data => :environment do
+task create_fake_data: :environment do
   @track = create_category("Track")
   @t100m = create_event(@track, "100m")
   @t400m = create_event(@track, "400m")

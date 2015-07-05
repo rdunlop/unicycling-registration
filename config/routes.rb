@@ -11,7 +11,7 @@ Workspace::Application.routes.draw do
   get '500', to: 'errors#internal_server_error'
 
   scope "(:locale)" do
-    resources :registrant_groups, :except => [:new] do
+    resources :registrant_groups, except: [:new] do
       collection do
         get :list
       end
@@ -25,7 +25,7 @@ Workspace::Application.routes.draw do
         get :blank
         get :instructions
       end
-      resources :competitions, :only => [] do
+      resources :competitions, only: [] do
         member do
           get :announcer
           get :start_list
@@ -35,7 +35,7 @@ Workspace::Application.routes.draw do
           get :results
         end
       end
-      resources :events, :only => [] do
+      resources :events, only: [] do
         member do
           get :results
         end
@@ -45,12 +45,12 @@ Workspace::Application.routes.draw do
     # ADMIN (for use in Setting up the system)
     #
     #
-    resources :age_group_types, :except => [:new], controller: "compete/age_group_types"
+    resources :age_group_types, except: [:new], controller: "compete/age_group_types"
     resources :age_group_entries, only: [], controller: "compete/age_group_entries" do
       post :update_row_order, on: :collection
     end
 
-    resources :permissions, :only => [:index], controller: "admin/permissions" do
+    resources :permissions, only: [:index], controller: "admin/permissions" do
       collection do
         post :create_race_official
         get :directors
@@ -86,13 +86,13 @@ Workspace::Application.routes.draw do
     end
     resource :import, only: [:new, :create]
 
-    resources :standard_skill_entries, :only => [:index] do
+    resources :standard_skill_entries, only: [:index] do
       collection do
         get :upload_file
         post :upload
       end
     end
-    resources :standard_skill_routines, :only => [] do
+    resources :standard_skill_routines, only: [] do
       collection do
         get :download_file
       end
@@ -100,10 +100,17 @@ Workspace::Application.routes.draw do
 
     #### For Registration creation purposes
     ###
+    namespace "research" do
+      resources :competitions, only: [:index] do
+        collection do
+          get :competitions
+        end
+      end
+    end
 
     resources :expense_groups, except: [:show], controller: "convention_setup/expense_groups" do
       post :update_row_order, on: :collection
-      resources :expense_items, :except => [:new, :show], controller: "convention_setup/expense_items"
+      resources :expense_items, except: [:new, :show], controller: "convention_setup/expense_items"
     end
 
     resources :expense_items, only: [], controller: "convention_setup/expense_items" do
@@ -116,7 +123,7 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :refunds, :only => [:show]
+    resources :refunds, only: [:show]
 
     resource :export_payments, only: [] do
       collection do
@@ -129,7 +136,7 @@ Workspace::Application.routes.draw do
     get  "/payments/set_reg_fees", controller: "admin/reg_fees", action: :index, as: "set_reg_fees"
     post "/payments/update_reg_fee", controller: "admin/reg_fees", action: :update_reg_fee, as: "update_reg_fee"
 
-    resources :payments, :except => [:index, :edit, :update, :destroy] do
+    resources :payments, except: [:index, :edit, :update, :destroy] do
       collection do
         get :summary
         post :notification, controller: "paypal_payments"
@@ -148,28 +155,33 @@ Workspace::Application.routes.draw do
         get :choose
       end
     end
+    resources :manual_refunds, only: [:new, :create], controller: "admin/manual_refunds" do
+      collection do
+        get :choose
+      end
+    end
 
-    resources :payment_adjustments, :only => [:new]  do
+    resources :payment_adjustments, only: [:new]  do
       collection do
         get :list
         post :adjust_payment_choose
         post :onsite_pay_confirm
         post :onsite_pay_create
-        post :refund_choose
-        post :refund_create
         post :exchange_choose
         post :exchange_create
       end
     end
 
-    resources :registration_periods, except: :show
+    scope module: "convention_setup" do
+      resources :registration_periods, except: :show
+    end
 
     resources :combined_competitions, except: :show, controller: "compete/combined_competitions" do
       resources :combined_competition_entries, except: [:show], controller: "compete/combined_competition_entries"
     end
     resources :competition_wheel_sizes
 
-    resources :coupon_codes, only: [:show]
+    resources :coupon_code_summaries, only: [:show]
 
     resources :events, only: [] do
       collection do
@@ -180,7 +192,9 @@ Workspace::Application.routes.draw do
       member do
         get :sign_ups
       end
-      resources :competitions, :only => [:new, :create]
+      scope module: "competition_setup" do
+        resources :competitions, only: [:new, :create]
+      end
     end
     resources :event_categories, only: [] do
       member do
@@ -190,23 +204,23 @@ Workspace::Application.routes.draw do
 
     get '/convention_setup', to: 'convention_setup#index'
     namespace :convention_setup do
-      resources :categories, :except => [:new, :show] do
+      resources :categories, except: [:new, :show] do
         post :update_row_order, on: :collection
-        resources :events, :only => [:index, :create]
+        resources :events, only: [:index, :create]
       end
-      resources :events, :except => [:index, :new, :create] do
+      resources :events, except: [:index, :new, :create] do
         post :update_row_order, on: :collection
 
-        resources :event_choices, :only => [:index, :create] do
+        resources :event_choices, only: [:index, :create] do
           post :update_row_order, on: :collection
         end
 
-        resources :event_categories, :only => [:index, :create] do
+        resources :event_categories, only: [:index, :create] do
           post :update_row_order, on: :collection
         end
       end
-      resources :event_choices, :except => [:index, :create, :new, :show]
-      resources :event_categories, :except => [:index, :create, :new, :show]
+      resources :event_choices, except: [:index, :create, :new, :show]
+      resources :event_categories, except: [:index, :create, :new, :show]
 
       resources :volunteer_opportunities, except: [:show] do
         post :update_row_order, on: :collection
@@ -243,64 +257,69 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :registrants, except: [:index, :new, :create, :edit, :update] do
+    scope module: "admin" do
+      resources :registrants, only: [] do
+        collection do
+          get :bag_labels
+          get :show_all
+          get :manage_all # How do I use cancan on this, if I were to name the action 'index'?
+          get :manage_one
+          post :choose_one
+        end
+        member do
+          post :undelete
+        end
+      end
+      resources :competition_songs, only: [:show, :create] do
+        get :download_zip
+      end
+      resources :event_songs, only: [:index, :show, :create]
+    end
+
+    resources :registrants, only: [:show, :destroy] do
       resources :build, controller: 'registrants/build', only: [:show, :update, :create]
-      # admin
-      collection do
-        get '/subregion_options' => 'registrants#subregion_options'
-        get :bag_labels, controller: "admin/registrants"
-        get :show_all, controller: "admin/registrants"
-        get :manage_all, controller: "admin/registrants" # How do I use cancan on this, if I were to name the action 'index'?
-        get :manage_one, controller: "admin/registrants"
-        post :choose_one, controller: "admin/registrants"
-      end
-      member do
-        post :undelete, controller: "admin/registrants"
-        get :results
-      end
 
       # normal user
       collection do
         get :all
         get :empty_waiver
+        get :subregion_options
       end
       member do
+        get :results
         get :waiver
       end
-      resources :registrant_expense_items, :only => [:create, :destroy]
-      resources :standard_skill_routines, :only => [:index, :create]
+      resources :registrant_expense_items, only: [:create, :destroy]
+      resources :standard_skill_routines, only: [:index, :create]
       member do
         get :payments, to: "payments#registrant_payments"
       end
-      resources :payments, :only => [:index]
-      resources :songs, :only => [:index, :create]
+      resources :payments, only: [:index]
+      resources :songs, only: [:index, :create]
       resources :competition_wheel_sizes, only: [:index, :create]
     end
     resources :competition_wheel_sizes, only: :destroy
 
-    resources :songs, :only => [:destroy] do
-      collection do
-        get :list, controller: "admin/songs"
-      end
+    resources :songs, only: [:destroy] do
       member do
         get :add_file
         get :file_complete
       end
     end
 
-    resources :standard_skill_routines, :only => [:show, :index] do
-      resources :standard_skill_routine_entries, :only => [:destroy, :create]
+    resources :standard_skill_routines, only: [:show, :index] do
+      resources :standard_skill_routine_entries, only: [:destroy, :create]
     end
-    resources :standard_skill_entries, :only => [:index]
+    resources :standard_skill_entries, only: [:index]
 
     # for AJAX use:
-    resources :registrant_expenses, :only => [] do
+    resources :registrant_expenses, only: [] do
       collection do
         post 'single'
       end
     end
 
-    resource :event_configuration, :except => [:show, :new, :edit, :create, :update] do
+    resource :event_configuration, except: [:show, :new, :edit, :create, :update] do
       collection do
         get :cache
         delete :clear_cache
@@ -331,17 +350,17 @@ Workspace::Application.routes.draw do
     get "welcome/confirm"
     get 'welcome/data_entry_menu'
 
-    devise_for :users, :controllers => { :registrations => "registrations" }
+    devise_for :users, controllers: { registrations: "registrations" }
 
-    resources :users, :only => [] do
-      resources :registrants, :only => [:index]
-      resources :payments, :only => [:index]
-      resources :additional_registrant_accesses, :only => [:index, :new, :create] do
+    resources :users, only: [] do
+      resources :registrants, only: [:index]
+      resources :payments, only: [:index]
+      resources :additional_registrant_accesses, only: [:index, :new, :create] do
         collection do
           get :invitations
         end
       end
-      resources :competition, :only => [] do
+      resources :competition, only: [] do
         # resources :single_attempt_entries, only: [:index, :create]
         resources :two_attempt_entries, only: [:index, :create] do
           collection do
@@ -350,7 +369,7 @@ Workspace::Application.routes.draw do
           end
         end
 
-        resources :import_results, :only => [:create] do
+        resources :import_results, only: [:create] do
           collection do
             get :proof_single
 
@@ -373,7 +392,7 @@ Workspace::Application.routes.draw do
           end
         end
       end
-      resources :award_labels, :shallow => true, :except => [:new, :show] do
+      resources :award_labels, shallow: true, except: [:new, :show] do
         collection do
           post :create_by_competition
           post :create_labels
@@ -383,21 +402,21 @@ Workspace::Application.routes.draw do
           get :announcer_sheet
         end
       end
-      resources :songs, :only => [] do
+      resources :songs, only: [] do
         collection do
           get :my_songs
           post :create_guest_song
         end
       end
     end
-    resources :additional_registrant_accesses, :only => [] do
+    resources :additional_registrant_accesses, only: [] do
       member do
         put :accept_readonly
         delete :decline
       end
     end
-    resources :import_results, :only => [:edit, :update, :destroy]
-    resources :two_attempt_entries, :only => [:edit, :update, :destroy]
+    resources :import_results, only: [:edit, :update, :destroy]
+    resources :two_attempt_entries, only: [:edit, :update, :destroy]
 
     ###############################################
     ### For event-data-gathering/reporting purposes
@@ -411,7 +430,10 @@ Workspace::Application.routes.draw do
       resources :ineligible_registrants, only: [:index, :create, :destroy]
     end
 
-    resources :competitions, :only => [:show, :edit, :update, :destroy] do
+    scope module: "competition_setup" do
+      resources :competitions, only: [:edit, :update, :destroy]
+    end
+    resources :competitions, only: [:show] do
       member do
         get :set_sort
         put :toggle_final_sort
@@ -431,7 +453,7 @@ Workspace::Application.routes.draw do
         delete :award
       end
       resources :competition_results, only: [:index, :create, :destroy]
-      resources :competitors, :only => [:index, :new, :create] do
+      resources :competitors, only: [:index, :new, :create] do
         collection do
           post :add
           post :add_all
@@ -442,10 +464,12 @@ Workspace::Application.routes.draw do
       end
       scope module: "compete" do
         resource :sign_ins, only: [:show, :edit, :update]
-        resource :waves, only: [:show, :update]
+        resource :wave_assignments, only: [:show, :update]
+        resources :wave_times
       end
 
-      resources :heats, :only => [:index, :new, :create] do
+      resources :waves, only: [:index]
+      resources :heats, only: [:index, :new, :create] do
         collection do
           # Track (LaneAssignments)
           delete :destroy_all
@@ -455,15 +479,15 @@ Workspace::Application.routes.draw do
         end
       end
 
-      resources :data_entry_volunteers, :only => [:index, :create]
+      resources :data_entry_volunteers, only: [:index, :create]
 
-      resources :judges,      :only => [:index, :create, :destroy] do
+      resources :judges,      only: [:index, :create, :destroy] do
         collection do
           post :copy_judges
         end
       end
-      resources :time_results, :only => [:index, :create]
-      resources :lane_assignments, :only => [:index, :create] do
+      resources :time_results, only: [:index, :create]
+      resources :lane_assignments, only: [:index, :create] do
         collection do
           get :view_heat
           post :dq_competitor
@@ -476,37 +500,42 @@ Workspace::Application.routes.draw do
           get :list
         end
       end
-      resources :external_results, :shallow => true, :except => [:new, :show]
+      resources :external_results, shallow: true, except: [:new, :show]
+      resources :preliminary_external_results, shallow: true, except: [:new, :show]
       resources :published_age_group_entries, only: [:show] do
         member do
           get :preview
         end
       end
     end
-    resources :lane_assignments, :except => [:new, :index, :create, :show]
+    resources :lane_assignments, except: [:new, :index, :create, :show]
 
-    resources :time_results, :except => [:index, :new, :show, :create]
+    resources :time_results, except: [:index, :new, :show, :create]
 
-    resources :judges, :only => [:update] do
-      resources :competitors, :only => [] do
-        resources :scores, :only => [:new, :create]
+    resources :judges, only: [:update] do
+      member do
+        put :toggle_status
+      end
+
+      resources :competitors, only: [] do
+        resources :scores, only: [:new, :create]
 
         # display chosen competitors current scores, and update them
-        resources :standard_scores, :only => [:new, :create]
+        resources :standard_scores, only: [:new, :create]
       end
 
       # choose the desired competitor to add scores to
-      resources :scores, :only => [:index]
-      resources :standard_scores, :only => [:index]
-      resources :distance_attempts, :only => [:index, :create]
+      resources :scores, only: [:index]
+      resources :standard_scores, only: [:index]
+      resources :distance_attempts, only: [:index, :create]
       resources :tie_break_adjustments, only: [:index, :create]
-      resources :street_scores, :only => [:index, :destroy] do
+      resources :street_scores, only: [:index, :destroy] do
         collection do
           post :update_score
         end
       end
     end
-    resources :distance_attempts, :only => [:update, :destroy]
+    resources :distance_attempts, only: [:update, :destroy]
     resources :tie_break_adjustments, only: [:destroy]
   end
 
@@ -523,7 +552,7 @@ Workspace::Application.routes.draw do
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
 
   get '/:locale' => 'welcome#index' # to match /en  to send to /en/welcome
-  root :to => 'welcome#index'
+  root to: 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

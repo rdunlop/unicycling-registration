@@ -19,10 +19,9 @@
 
 %fieldset.data_block
   %legend Track Racing Wheel Size
-  = form_for(@registrant, url: wizard_path, method: :put) do |f|
+  = simple_form_for(@registrant, url: wizard_path, method: :put) do |f|
     = render partial: "shared/error_messages", object: @registrant
     .data_block
-      = f.label :wheel_size_id, t(".default_wheel_size")
-      = f.collection_select :wheel_size_id, WheelSize.all, :id, :description, {}, title: t(".default_wheel_size_description"), class: "wheel_size_choices"
+      = f.input :wheel_size_id, collection: WheelSize.all, include_blank: false
     = render partial: "/registrants/form_actions", locals: {f: f}
 

@@ -7,7 +7,7 @@ class CouponApplier
   end
 
   def perform
-    if !coupon_code
+    unless coupon_code
       self.error = "Coupon Code not found"
       return false
     end

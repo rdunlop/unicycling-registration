@@ -19,7 +19,7 @@
         %td= f.number_field :minutes, {min: 0}
         %td= f.number_field :seconds, {min: 0}
         %td= f.number_field :thousands, {min: 0}
-        %td= f.select :status, TimeResult.status_values, include_blank: true
+        %td= f.select :status, TimeResult.status_values, include_blank: false
         %td= f.text_field :comments
         %td= f.text_field :comments_by
         %td= f.number_field :number_of_laps, {min: 1}

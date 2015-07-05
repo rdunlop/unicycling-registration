@@ -27,37 +27,52 @@ class Score < ActiveRecord::Base
     [:val_1, :val_2, :val_3, :val_4]
   end
 
-  self.score_fields.each do |sym|
-    validates sym, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+  score_fields.each do |sym|
+    validates sym, presence: true, numericality: {greater_than_or_equal_to: 0}
   end
   before_validation :set_zero_for_non_applicable_scores
 
   validate :values_within_judge_type_bounds
 
   delegate :judge_type, to: :judge
+  delegate :judge_score_calculator, to: :competition
+
+  def display_score?(score_number)
+    judge_type.send("val_#{score_number}_max") > 0
+  end
+
+  # Sum of all entered values for this score.
+  def total
+    return nil if invalid? || competitor.ineligible?
+
+    self.class.score_fields.inject(0){ |sum, sym| sum + send(sym) }
+  end
+
+  # Return the numeric place of this score, compared to the results of the other scores by this judge
+  def judged_place
+    return nil if invalid? || competitor.ineligible?
+
+    judge_score_calculator.judged_place(judge.score_totals, total)
+  end
+
+  # Return this score, after having converted it into placing points
+  # which will require comparing it against the scores this judge gave other competitors
+  def placing_points
+    return nil if invalid? || competitor.ineligible?
+
+    judge_score_calculator.judged_points(judge.score_totals, total)
+  end
+
+  private
 
   def set_zero_for_non_applicable_scores
     if judge && judge_type
       (1..4).each do |score_number|
-        if judge_type.send("val_#{score_number}_max") == 0
-          self.send("val_#{score_number}=", 0)
+        unless display_score?(score_number)
+          send("val_#{score_number}=", 0)
         end
       end
     end
-  end
-
-  def display_score(score_number)
-    judge.judge_type.send("val_#{score_number}_max") > 0
-  end
-
-  def validate_judge_score(value_sym, max_score)
-    if self.send(value_sym) > max_score
-      errors[value_sym] << "#{value_sym.to_s} must be <= #{max_score}"
-    end
-  end
-
-  def all_values_present
-    self.class.score_fields.all? { |sym| self.send(sym) }
   end
 
   def values_within_judge_type_bounds
@@ -69,58 +84,13 @@ class Score < ActiveRecord::Base
     end
   end
 
-  def total
-    if self.invalid?
-      0
-    else
-      self.class.score_fields.inject(0){ |sum, sym| sum + self.send(sym) }
+  def all_values_present
+    self.class.score_fields.all? { |sym| send(sym) }
+  end
+
+  def validate_judge_score(value_sym, max_score)
+    if send(value_sym) > max_score
+      errors[value_sym] << "#{value_sym} must be <= #{max_score}"
     end
-  end
-
-  def lower_is_better
-    case judge_type.event_class
-    when "Freestyle"
-      false
-    when "Street"
-      false
-    when "Flatland"
-      false
-    end
-  end
-
-  def new_calc_place(score, scores)
-    my_place = 1
-    scores.each do |each_score|
-      if (lower_is_better && each_score < score) || (!lower_is_better && score < each_score)
-        my_place = my_place + 1
-      end
-    end
-    my_place
-  end
-
-  def new_ties(score, scores)
-    ties = 0
-    scores.each do |each_score|
-      if each_score == score
-        ties = ties + 1
-      end
-    end
-    ties - 1 # eliminate tie-with-self from scores
-  end
-
-  def ties # always has '1' tie...with itself
-    # XXX refactor this redundant code:
-    scores_for_judge = judge.score_totals
-    new_ties(total, scores_for_judge)
-  end
-
-  def judged_place
-    return 0 if invalid?
-    scores_for_judge = judge.score_totals
-    new_calc_place(total, scores_for_judge)
-  end
-
-  def placing_points
-    judge_type.convert_place_to_points(judged_place, ties)
   end
 end

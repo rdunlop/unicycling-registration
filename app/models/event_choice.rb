@@ -15,11 +15,11 @@
 #
 
 class EventChoice < ActiveRecord::Base
-  belongs_to :event, :touch => true, inverse_of: :event_choices, counter_cache: true
+  belongs_to :event, touch: true, inverse_of: :event_choices, counter_cache: true
 
-  has_many :registrant_choices, :dependent => :destroy
-  belongs_to :optional_if_event_choice, :class_name => "EventChoice"
-  belongs_to :required_if_event_choice, :class_name => "EventChoice"
+  has_many :registrant_choices, dependent: :destroy
+  belongs_to :optional_if_event_choice, class_name: "EventChoice"
+  belongs_to :required_if_event_choice, class_name: "EventChoice"
 
   validates :label, :cell_type, presence: true
 
@@ -30,8 +30,8 @@ class EventChoice < ActiveRecord::Base
     ["boolean", "text", "multiple", "best_time"]
   end
 
-  validates :cell_type, :inclusion => {:in => self.cell_types }
-  validates :optional, :inclusion => {:in => [true, false] } # because it's a boolean
+  validates :cell_type, inclusion: {in: cell_types }
+  validates :optional, inclusion: {in: [true, false] } # because it's a boolean
   acts_as_restful_list scope: :event
 
   def choicename
@@ -43,10 +43,10 @@ class EventChoice < ActiveRecord::Base
   end
 
   def unique_values
-    self.registrant_choices.map{|rc| rc.value}.uniq
+    registrant_choices.map{|rc| rc.value}.uniq
   end
 
   def to_s
-    self.event.to_s + " - " + self.label
+    event.to_s + " - " + label
   end
 end

@@ -13,15 +13,15 @@
 #
 
 class StandardSkillRoutine < ActiveRecord::Base
-  validates :registrant_id, { :presence => true, :uniqueness => true }
+  validates :registrant_id, presence: true, uniqueness: true
 
   belongs_to :registrant
 
-  has_many :standard_skill_routine_entries, -> {order "position"}, :dependent => :destroy
+  has_many :standard_skill_routine_entries, -> {order "position"}, dependent: :destroy
 
   def total_skill_points
     total = 0
-    self.standard_skill_routine_entries.each do |entry|
+    standard_skill_routine_entries.each do |entry|
       total += entry.standard_skill_entry.points unless entry.standard_skill_entry.nil?
     end
     total
@@ -29,8 +29,8 @@ class StandardSkillRoutine < ActiveRecord::Base
 
   def add_standard_skill_routine_entry(params)
     # keep the position values between 1 and 18
-    if self.standard_skill_routine_entries.size >= 1
-      max_skill_number = self.standard_skill_routine_entries.last.position + 1
+    if standard_skill_routine_entries.size >= 1
+      max_skill_number = standard_skill_routine_entries.last.position + 1
     else
       max_skill_number = 1
     end
@@ -41,6 +41,6 @@ class StandardSkillRoutine < ActiveRecord::Base
     elsif params[:position].to_i < 1
       params[:position] = 1
     end
-    self.standard_skill_routine_entries.build(params)
+    standard_skill_routine_entries.build(params)
   end
 end

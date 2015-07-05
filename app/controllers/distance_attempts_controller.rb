@@ -2,7 +2,7 @@ class DistanceAttemptsController < ApplicationController
   load_resource :judge, except: [:list, :destroy]
   load_and_authorize_resource through: :judge, except: [:list, :destroy]
   load_and_authorize_resource only: [:destroy]
-  before_action :load_competition, :except => [:list, :destroy]
+  before_action :load_competition, except: [:list, :destroy]
 
   before_action :set_judge_breadcrumb, except: [:list, :destroy]
 
@@ -26,17 +26,17 @@ class DistanceAttemptsController < ApplicationController
     @distance_attempt.judge = @judge
     respond_to do |format|
       if @distance_attempt.save
-        format.html {
+        format.html do
           flash[:notice] = 'Distance Attempt was successfully created.'
           redirect_to :back
-        }
+        end
         format.js { }
       else
-        format.html {
+        format.html do
           @distance_attempts = @judge.distance_attempts
           index
           render "index"
-        }
+        end
         format.js {}
       end
     end

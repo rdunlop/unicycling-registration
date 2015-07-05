@@ -11,13 +11,13 @@ class CompetitionSignUp
     signed_up_registrants = competition.signed_up_registrants
     @signed_up_list = {}
     @not_signed_up_list = {}
-    age_group_entries.each do |description, gender|
+    age_group_entries.each do |description, _gender|
       @signed_up_list[description] = []
       @not_signed_up_list[description] = []
     end
 
     all_registrants.each do |reg|
-      calculated_ag = @agt.age_group_entry_for(reg.age, reg.gender, reg.wheel_size_for_event(competition.event).id).to_s unless @agt.nil?
+      calculated_ag = @agt.age_group_entry_for(reg.age, reg.gender, reg.wheel_size_id_for_event(competition.event)).to_s unless @agt.nil?
       calculated_ag = reg.gender if @agt.nil?
       next if calculated_ag.empty?
 

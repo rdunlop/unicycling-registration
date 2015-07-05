@@ -6,11 +6,11 @@ class CompetitionStateMachine
   end
 
   def lock
-    competition.update_attributes(locked: true)
+    competition.touch(:locked_at)
   end
 
   def unlock
-    competition.update_attributes(locked: false)
+    competition.update_attribute(:locked_at, nil)
   end
 
   def publish_age_group_entry(entry_id)
@@ -26,20 +26,20 @@ class CompetitionStateMachine
   def publish
     Competition.transaction do
       pdf_creator.publish!
-      competition.update_attributes({published: true}) || raise("Unable to save attributes")
+      competition.touch(:published_at) || raise("Unable to save attributes")
     end
     true
-  rescue Exception => e
+  rescue Exception
     false
   end
 
   def unpublish
     Competition.transaction do
       pdf_creator.unpublish!
-      competition.update_attributes({published: false}) || raise("Unable to save attributes")
+      competition.update_attribute(:published_at, nil) || raise("Unable to save attributes")
     end
     true
-  rescue Exception => e
+  rescue Exception
     false
   end
 

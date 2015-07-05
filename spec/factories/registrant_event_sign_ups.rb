@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  registrant_id     :integer
-#  signed_up         :boolean
+#  signed_up         :boolean          default(FALSE), not null
 #  event_category_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime

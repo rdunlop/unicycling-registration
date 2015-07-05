@@ -1,6 +1,6 @@
 class ImportsController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource :class => false
+  authorize_resource class: false
 
   def new
   end

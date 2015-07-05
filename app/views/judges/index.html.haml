@@ -10,7 +10,7 @@
   - else
     %p Judge Management is no longer allowed (competition is locked)
 
-- elsif @competition.uses_lane_assignments
+- elsif @competition.uses_lane_assignments?
   %h1 Manage RaceOfficials
   %p These Users have the ability to assign Lane Assignments, as well as DQ competitors and see who is in each Heat/Lane.
   %table.sortable

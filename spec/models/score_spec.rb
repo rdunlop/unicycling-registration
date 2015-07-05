@@ -24,7 +24,7 @@ require 'spec_helper'
 
 describe Score do
   let(:judge) { FactoryGirl.build_stubbed(:judge) }
-  let(:subject) { FactoryGirl.build_stubbed(:score, :val_1 => 10, :judge => judge) }
+  let(:subject) { FactoryGirl.build_stubbed(:score, val_1: 10, judge: judge) }
 
   describe "when the score is invalid" do
     before(:each) do
@@ -32,72 +32,11 @@ describe Score do
     end
 
     it "says that it has a judge_place of 0" do
-      expect(subject.judged_place).to eq(0)
-    end
-  end
-
-  describe "ties" do
-    before :each do
-      allow(subject).to receive(:ties).and_return(1)
-      allow(subject).to receive(:judged_place).and_return(2)
-    end
-    it "calculates the placing points for this tie score" do
-      expect(subject.placing_points).to eq(2.5)
-    end
-  end
-
-  describe "with multiple scores" do
-    before :each do
-      allow(judge).to receive(:score_totals).and_return([0, 5, 10, 5])
+      expect(subject.judged_place).to be_nil
     end
 
-    describe "the lowest scoring competitor" do
-      before :each do
-        allow(subject).to receive(:total).and_return(0)
-      end
-
-      it "calculates the proper placement of each score" do
-        expect(subject.judged_place).to eq(4)
-      end
-
-      it {
-        expect(subject.ties).to eq(0)
-      }
-
-      it "has the lowest (after ties) placing points" do
-        expect(subject.placing_points).to eq(4)
-      end
-    end
-
-    describe "the highest scoring competitor" do
-      before :each do
-        allow(subject).to receive(:total).and_return(10)
-      end
-
-      it {
-        expect(subject.judged_place).to eq(1)
-      }
-
-      it "has 1 placing point (highest)" do
-        expect(subject.placing_points).to eq(1)
-      end
-    end
-    describe "the tie in the middle" do
-      before :each do
-        allow(subject).to receive(:total).and_return(5)
-      end
-
-      it {
-        expect(subject.judged_place).to eq(2)
-      }
-
-      it "has a tie" do
-        expect(subject.ties).to eq(1)
-      end
-
-      it "splits the placing points" do
-        expect(subject.placing_points).to eq(2.5)
-      end
+    it "says that it has a judge_points of 0" do
+      expect(subject.placing_points).to be_nil
     end
   end
 
@@ -127,7 +66,7 @@ describe Score do
   it "should not be able to have the same score/judge created twice" do
     score = FactoryGirl.create(:score)
 
-    score2 = FactoryGirl.build(:score, :judge => score.judge, :competitor => score.competitor)
+    score2 = FactoryGirl.build(:score, judge: score.judge, competitor: score.competitor)
 
     expect(score2.valid?).to eq(false)
   end
@@ -139,11 +78,12 @@ describe Score do
     score.val_3 = 3.0
     score.val_4 = 4.0
     expect(score.valid?).to eq(false)
-    expect(score.total).to eq(0)
-    score.competitor_id = 4
+    expect(score.total).to be_nil
+    score.competitor = FactoryGirl.build_stubbed(:event_competitor)
     expect(score.valid?).to eq(false)
     score.judge = @judge
     expect(score.valid?).to eq(true)
+    expect(score.total).to eq(10)
   end
   it "should validate the bounds of the Values" do
     score = Score.new
@@ -159,8 +99,8 @@ describe Score do
   end
   describe "when the score is based on a judge with judge_type" do
     before(:each) do
-      @jt = FactoryGirl.create(:judge_type, :val_1_max => 5, :val_2_max => 6, :val_3_max => 7, :val_4_max => 20)
-      @judge = FactoryGirl.create(:judge, :judge_type => @jt)
+      @jt = FactoryGirl.create(:judge_type, val_1_max: 5, val_2_max: 6, val_3_max: 7, val_4_max: 20)
+      @judge = FactoryGirl.create(:judge, judge_type: @jt)
       @score = Score.new
       @score.val_1 = 1.0
       @score.val_2 = 2.0

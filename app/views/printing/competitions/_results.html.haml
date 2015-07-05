@@ -7,7 +7,7 @@
     - @all_competitors = @competition.results_list
     = render :partial => "/printing/competitions/competition_results", :locals => {:description => nil, :result_description => nil, :competitors => @all_competitors, place_function: :overall_place_formatted }
   - else
-    - if @competition.has_experts
+    - if @competition.has_experts?
       - ["Male", "Female"].each do |gender|
         = render partial: "/printing/competitions/competition_results", locals: { description: "Expert #{gender}", result_description: @competition.result_description, competitors: @competition.expert_results_list(gender), place_function: :overall_place_formatted }
     - @competition.age_group_entries.each do |ag_entry|

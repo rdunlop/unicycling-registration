@@ -1,0 +1,31 @@
+= form_for(@award_label.new_record? ? [@user, @award_label] : [@award_label]) do |f|
+  - if @award_label.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@award_label.errors.count, "error")
+        prohibited this award_label from being saved:
+      %ul
+        - @award_label.errors.full_messages.each do |msg|
+          %li= msg
+  %table
+    %thead
+      %tr
+        %th= f.label :bib_number
+        %th= f.label :competitor_name
+        %th= f.label :competition_name
+        %th= f.label :team_name
+        %th= f.label :category
+        %th= f.label :details
+        %th= f.label :place
+        %th= f.label :registrant_id
+        %th
+    %tbody
+  %td= f.number_field :bib_number
+  %td= f.text_field :competitor_name
+  %td= f.text_field :competition_name
+  %td= f.text_field :team_name
+  %td= f.text_field :category
+  %td= f.text_field :details
+  %td= f.number_field :place, {min: 0}
+  %td= f.select :registrant_id, Registrant.select_box_options
+  %td= f.submit

@@ -14,11 +14,11 @@
 #
 
 class CompetitionResult < ActiveRecord::Base
-  belongs_to :competition, :inverse_of => :competition_results, touch: true
+  belongs_to :competition, inverse_of: :competition_results, touch: true
 
   validates :competition, presence: true
   validates :published_date, :results_file, presence: true
-  validates :system_managed, :uniqueness => { :scope => [:competition_id] }, if:  Proc.new{ |f| f.system_managed? }
+  validates :system_managed, uniqueness: { scope: [:competition_id] }, if:  proc{ |f| f.system_managed? }
 
   before_destroy :remove_uploaded_file
 
@@ -26,6 +26,14 @@ class CompetitionResult < ActiveRecord::Base
 
   def self.active
     where(published: true)
+  end
+
+  def self.official
+    where(system_managed: true)
+  end
+
+  def self.additional
+    where(system_managed: false)
   end
 
   def remove_uploaded_file
@@ -37,7 +45,7 @@ class CompetitionResult < ActiveRecord::Base
   end
 
   def to_s
-    if system_managed
+    if system_managed?
       "Results"
     else
       name.presence || "Additional Results"

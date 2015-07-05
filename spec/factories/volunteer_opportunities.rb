@@ -12,7 +12,7 @@ end
 # Table name: volunteer_opportunities
 #
 #  id            :integer          not null, primary key
-#  description   :string(255)
+#  description   :string(255)      not null
 #  position      :integer
 #  inform_emails :text
 #  created_at    :datetime

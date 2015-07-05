@@ -23,21 +23,24 @@
 
 class Competitor < ActiveRecord::Base
   include Eligibility
+  include Slugify
 
-  has_many :members, dependent: :destroy, :inverse_of => :competitor
+  has_many :members, dependent: :destroy, inverse_of: :competitor
   has_many :registrants, through: :members
   belongs_to :competition, touch: true, inverse_of: :competitors
   acts_as_restful_list scope: :competition
 
+  has_one :music_file, class_name: "Song", foreign_key: "competitor_id", dependent: :nullify
+
   has_many :lane_assignments, dependent: :destroy
-  has_many :scores, :dependent => :destroy
-  has_many :boundary_scores, :dependent => :destroy
-  has_many :standard_execution_scores, :dependent => :destroy
-  has_many :standard_difficulty_scores, :dependent => :destroy
-  has_many :distance_attempts, -> { order "distance DESC, id DESC" }, :dependent => :destroy
+  has_many :scores, dependent: :destroy
+  has_many :boundary_scores, dependent: :destroy
+  has_many :standard_execution_scores, dependent: :destroy
+  has_many :standard_difficulty_scores, dependent: :destroy
+  has_many :distance_attempts, -> { order "distance DESC, id DESC" }, dependent: :destroy
   has_one :tie_break_adjustment, dependent: :destroy
-  has_many :time_results, :dependent => :destroy
-  has_many :external_results, :dependent => :destroy
+  has_many :time_results, dependent: :destroy
+  has_one :external_result, dependent: :destroy
   has_many :results, dependent: :destroy, inverse_of: :competitor
 
   # these are here to allow eager loading/performance optimization
@@ -46,7 +49,7 @@ class Competitor < ActiveRecord::Base
 
   accepts_nested_attributes_for :members, allow_destroy: true
 
-  validates :competition_id, :presence => true
+  validates :competition_id, presence: true
   validates_associated :members
   validate :must_have_3_members_for_custom_name
 
@@ -55,18 +58,28 @@ class Competitor < ActiveRecord::Base
   # not all competitor types require a position
   #:numericality => {:only_integer => true, :greater_than => 0}
 
+  delegate :scoring_calculator, to: :competition
+
   after_initialize :init
 
   def init
-    self.status = :active if self.status.nil?
+    self.status = :active if status.nil?
   end
 
   def self.active
     where(status: Competitor.statuses[:active])
   end
 
+  def self.ordered
+    reorder(lowest_member_bib_number: :asc)
+  end
+
   def self.ungeared
     where(geared: false)
+  end
+
+  def active?
+    status == "active"
   end
 
   def must_have_3_members_for_custom_name
@@ -80,7 +93,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def to_s_with_id
-    "##{bib_number}-#{to_s}"
+    "##{bib_number}-#{self}"
   end
 
   def first_bib_number
@@ -93,54 +106,56 @@ class Competitor < ActiveRecord::Base
     competition_registrants = competition.signed_up_registrants
     error = ""
     if status != "active"
-      error += "Competitor is #{status}"
+      error += "Competitor is #{status}<br>"
     end
 
     members.each do |member|
-      if member.dropped_from_registration
-        error += "Registrant has dropped this event from their registration"
+      if member.dropped_from_registration?
+        error += "Registrant has dropped this event from their registration<br>"
       elsif !competition_registrants.include?(member.registrant)
-        error += "Registrant #{member} is not in the default list for this competition"
+        error += "Registrant #{member} is not in the default list for this competition<br>"
       end
     end
-    error
+    error.html_safe
   end
 
   def best_time
     registrants.first.registrant_choices.joins(:event_choice).merge(EventChoice.where(cell_type: "best_time", event: event)).first.try(:describe_value)
   end
 
-  def scoring_helper
-    competition.scoring_helper
-  end
+  delegate :scoring_helper, to: :competition
 
-  def disqualified
+  def disqualified?
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{Result.cache_key_for_set(id)}dq") do
       scoring_helper.competitor_dq?(self)
     end
   end
 
   def comparable_score
-    scoring_helper.competitor_comparable_result(self)
+    @comparable_score ||= scoring_calculator.competitor_comparable_result(self)
+  end
+
+  def comparable_tie_break_score
+    scoring_calculator.competitor_tie_break_comparable_result(self)
   end
 
   def place
-    return 0 if disqualified
+    return 0 if disqualified?
     age_group_results.first.try(:place)
   end
 
   def overall_place
-    return 0 if disqualified
+    return 0 if disqualified?
     overall_results.first.try(:place)
   end
 
   def sorting_place
-    return 999 if disqualified || place.nil?
+    return 999 if disqualified? || place.nil?
     place
   end
 
   def place_formatted
-    return "DQ" if disqualified
+    return "DQ" if disqualified?
 
     if place == 0 || place.nil?
       return "Unknown"
@@ -150,12 +165,12 @@ class Competitor < ActiveRecord::Base
   end
 
   def sorting_overall_place
-    return 999 if disqualified || overall_place.nil?
+    return 999 if disqualified? || overall_place.nil?
     overall_place
   end
 
   def overall_place_formatted
-    return "DQ" if disqualified
+    return "DQ" if disqualified?
 
     if overall_place == 0
       return "Unknown"
@@ -180,22 +195,20 @@ class Competitor < ActiveRecord::Base
 
   def has_result?
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/has_result?") do
-      scoring_helper.competitor_has_result?(self)
+      scoring_calculator.competitor_has_result?(self)
     end
   end
 
   def result
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/result") do
-      scoring_helper.competitor_result(self)
+      scoring_calculator.competitor_result(self)
     end
   end
 
-  def event
-    competition.event
-  end
+  delegate :event, to: :competition
 
   def member_has_bib_number?(bib_number)
-    members.includes(:registrant).where({:registrants => {:bib_number => bib_number}}).count > 0
+    members.includes(:registrant).where(registrants: {bib_number: bib_number}).count > 0
   end
 
   def team_name
@@ -204,7 +217,7 @@ class Competitor < ActiveRecord::Base
 
   def name
     comp_name = team_name || registrants_names
-    display_eligibility(comp_name, ineligible)
+    display_eligibility(comp_name, ineligible?)
   end
 
   def registrants_names
@@ -294,7 +307,7 @@ class Competitor < ActiveRecord::Base
 
     max_matches = different_countries.map{|c| count_of_countries[c] }.max
 
-    countries_at_max_matches = count_of_countries.select{|key, value| value == max_matches }.keys
+    countries_at_max_matches = count_of_countries.select{|_key, value| value == max_matches }.keys
 
     countries_at_max_matches.sort.join(", ") unless countries_at_max_matches.empty?
   end
@@ -308,10 +321,8 @@ class Competitor < ActiveRecord::Base
   end
 
   def heat
-    if competition.uses_lane_assignments
+    if competition.uses_lane_assignments?
       lane_assignments.first.try(:heat)
-    else
-      read_attribute(:wave)
     end
   end
 
@@ -346,17 +357,19 @@ class Competitor < ActiveRecord::Base
       if members.empty?
         nil
       else
-        members.first.registrant.wheel_size_for_event(event).id
+        members.first.registrant.wheel_size_id_for_event(event)
       end
     end
   end
 
-  def ineligible
+  def ineligible?
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
+      return true unless active?
+
       if members.empty?
         false
       else
-        eligibles =members.map(&:ineligible)
+        eligibles = members.map(&:ineligible?)
         if eligibles.uniq.count > 1
           true # includes both eligible status AND ineligible status
         else
@@ -364,6 +377,10 @@ class Competitor < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def has_music?
+    music_file.present?
   end
 
   def club
@@ -383,7 +400,7 @@ class Competitor < ActiveRecord::Base
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{DistanceAttempt.cache_key_for_set(id)}/double_fault") do
       df = false
       if distance_attempts.count > 1
-        if distance_attempts[0].fault == true && distance_attempts[1].fault == true && distance_attempts[0].distance == distance_attempts[1].distance
+        if distance_attempts[0].fault? && distance_attempts[1].fault? && distance_attempts[0].distance == distance_attempts[1].distance
           df = true
         end
       end
@@ -399,7 +416,7 @@ class Competitor < ActiveRecord::Base
   def single_fault?
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/single_fault?") do
       if distance_attempts.count > 0
-        distance_attempts.first.fault == true
+        distance_attempts.first.fault?
       else
         false
       end
@@ -414,14 +431,6 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def tie_breaker_adjustment_value
-    if tie_break_adjustment
-      1 - (tie_break_adjustment.tie_break_place * 0.1)
-    else
-      0
-    end
-  end
-
   def max_successful_distance
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance") do
       max_successful_distance_attempt.try(:distance) || 0
@@ -430,7 +439,7 @@ class Competitor < ActiveRecord::Base
 
   def max_successful_distance_attempt
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance_attempt") do
-      distance_attempts.where(:fault => false).first
+      distance_attempts.find_by(fault: false)
     end
   end
 
@@ -470,7 +479,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def is_top?(search_gender)
-    return false if !has_result?
+    return false unless has_result?
     return false if search_gender != gender
 
     overall_place.to_i > 0 && overall_place.to_i <= 10
@@ -521,7 +530,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def competition_start_time
-    competition.wave_time_for(heat) || 0
+    competition.wave_time_for(wave) || 0
   end
 
   def better_time(time_1, time_2)
@@ -540,18 +549,18 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def lower_is_better
-    scoring_helper.lower_is_better
-  end
+  delegate :lower_is_better, to: :scoring_helper
 
   private
 
   # time result calculations
   def start_time_results
-    time_results.start_times.active
+    # time_results.start_times.active
+    time_results.select{ |time_result| time_result.status == "active" && time_result.is_start_time }
   end
 
   def finish_time_results
-    time_results.finish_times.active
+    # time_results.finish_times.active
+    time_results.select{ |time_result| time_result.status == "active" && time_result.is_start_time == false }
   end
 end

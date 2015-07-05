@@ -1,6 +1,6 @@
 class RegistrantGroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_new_registrant_group, :only => [:create]
+  before_action :load_new_registrant_group, only: [:create]
   load_and_authorize_resource
 
   def load_new_registrant_group
@@ -38,11 +38,11 @@ class RegistrantGroupsController < ApplicationController
       label_text << text
     end
 
-    labels = Prawn::Labels.render(label_text, :type => "Avery5160", :shrink_to_fit => true) do |pdf, name|
-      pdf.text name, :align =>:center, :valign => :center, :inline_format => true
+    labels = Prawn::Labels.render(label_text, type: "Avery5160", shrink_to_fit: true) do |pdf, name|
+      pdf.text name, align: :center, valign: :center, inline_format: true
     end
 
-    send_data labels, :filename => "address-labels-#{Date.today}.pdf"
+    send_data labels, filename: "address-labels-#{Date.today}.pdf"
   end
 
   # GET /registrant_groups/1
@@ -101,6 +101,6 @@ class RegistrantGroupsController < ApplicationController
 
   def registrant_group_params
     params.require(:registrant_group).permit(:name, :registrant_id,
-                                             :registrant_group_members_attributes => [:registrant_id, :_destroy, :id])
+                                             registrant_group_members_attributes: [:registrant_id, :_destroy, :id])
   end
 end

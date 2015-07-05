@@ -10,12 +10,12 @@
 #
 
 class WheelSize < ActiveRecord::Base
-  validates :position, :description, :presence => true
+  validates :position, :description, presence: true
 
   default_scope { order("position DESC") }
 
-  has_many :age_group_entries, :dependent => :nullify
-  has_many :registrants, :dependent => :nullify
+  has_many :age_group_entries, dependent: :nullify
+  has_many :registrants, dependent: :nullify
 
   def to_s
     description

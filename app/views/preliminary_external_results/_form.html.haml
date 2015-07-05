@@ -1,0 +1,21 @@
+= simple_form_for(@external_result, url: @external_result.new_record? ? competition_preliminary_external_results_path(@competition) : preliminary_external_result_path(@external_result)) do |f|
+  - if @external_result.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@external_result.errors.count, "error")
+        prohibited this external_result from being saved:
+      %ul
+        - @external_result.errors.full_messages.each do |msg|
+          %li= msg
+  %table
+    %tr
+      %th= f.label :competitor_id
+      %th= f.label :points
+      %th= f.label :details
+      %th= f.label :status
+    %tr
+      %td= competitor_select_box(f, @competition)
+      %td= f.input :points, input_html: {min: 0, :step => 0.001 }, label: false
+      %td= f.input :details, label: false
+      %td= f.input :status, label: false, collection: ExternalResult.status_values, include_blank: false
+      %td= f.submit

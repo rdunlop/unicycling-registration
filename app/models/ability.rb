@@ -53,16 +53,16 @@ class Ability
     can [:read], Competitor
     can :read, Competition
 
-    can :read, Judge, :user_id => user.id
+    can :read, Judge, user_id: user.id
 
     # Freestyle
     can :create, Score
     can [:read, :update, :destroy], Score do |score|
-      score.try(:user) == user && !score.competitor.competition.locked
+      score.try(:user) == user && !score.competitor.competition.locked?
     end
 
     can [:create_scores], Competition do |competition|
-      !competition.locked
+      !competition.locked?
     end
 
     # printing forms:
@@ -70,12 +70,12 @@ class Ability
 
     # data entry
     can :manage, ImportResult do |import_result|
-      !import_result.competition.locked
+      !import_result.competition.locked?
     end
     cannot [:approve, :approve_heat], ImportResult
 
     can :manage, TwoAttemptEntry do |two_attempt_entry|
-      !two_attempt_entry.competition.locked
+      !two_attempt_entry.competition.locked?
     end
 
     # High/Long Data Entry
@@ -84,7 +84,7 @@ class Ability
   end
 
   def director_and_unlocked(user, competition)
-    !competition.locked && user.has_role?(:director, competition.try(:event))
+    !competition.locked? && user.has_role?(:director, competition.try(:event))
   end
 
   def set_director_abilities(user)
@@ -103,7 +103,7 @@ class Ability
       user.has_role? :director, comp.event
     end
 
-    can [:read], Judge do |judge|
+    can [:read, :toggle_status], Judge do |judge|
       user.has_role? :director, judge.competition.try(:event)
     end
 
@@ -114,7 +114,7 @@ class Ability
     can [:results, :sign_ups], Event do |ev|
       user.has_role? :director, ev
     end
-    can :summary, Event
+    can [:summary, :general_volunteers, :specific_volunteers], Event
     can :sign_ups, EventCategory
     #     #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
     #     can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
@@ -144,22 +144,17 @@ class Ability
       director_and_unlocked(user, time_result.competition)
     end
 
+    can :manage, WaveTime do |wave_time|
+      director_and_unlocked(user, wave_time.competition)
+    end
+
     can [:crud, :copy_judges], Judge do |judge|
       # Only allow creating judges when there are no scores yet entered
       (judge.scores.count == 0) && (director_and_unlocked(user, judge.competition))
     end
   end
 
-  def define_ability_for_logged_in_user(user)
-    alias_action :create, :read, :update, :destroy, :to => :crud
-
-    if user.has_role? :super_admin
-      can :access, :rails_admin
-      can :dashboard
-      can :manage, :all
-      return # required in order to allow rails_admin to function
-    end
-
+  def define_convention_admin_roles(user)
     # #################################################
     # Begin new role definitions
     # #################################################
@@ -183,20 +178,31 @@ class Ability
       can [:read, :set_role, :set_password], :permission
       can :manage, :translation
     end
+  end
 
+  def define_music_dj_roles(user)
     if user.has_role? :music_dj
-      can :list, :song
+      can :manage, :event_song
+      can :manage, :competition_song
       # automatically can download music via S3 links
     end
+  end
 
+  def define_translator_roles(user)
     if user.has_role? :translator
       can :manage, :translation
       can :manage, :all_site_translations
     end
+  end
 
+  def define_payment_admin_roles(user)
     if user.has_role? :payment_admin
-      can :summary, Payment
+      # Can read _any_ payment
+      can [:read, :summary], Payment
+      can :read, Refund
       can [:new, :choose, :create], :manual_payment
+      can [:new, :choose, :create], :manual_refund
+      can :list, :payment_adjustment
       can :set_reg_fee, :registrant
       can [:read], Registrant
       can [:list, :payments, :payment_details], :export_payment
@@ -206,22 +212,49 @@ class Ability
       can :details, ExpenseItem
       can :read, CouponCode
     end
+  end
 
+  def define_event_planner_roles(user)
     if user.has_role? :event_planner
       can [:summary, :general_volunteers, :specific_volunteers], Event
       can :sign_ups, EventCategory
+      can :sign_ups, Event
       can [:manage_all, :show_all], :registrant
-      can [:read], Registrant
+      can [:read, :update, :destroy, :add_events, :create_artistic], Registrant
       can [:read, :create, :list], Email
     end
+  end
 
+  def define_competition_admin_roles(user)
     if user.has_role? :competition_admin
       can :read, :competition_setup
       can :manage, :director
       can :manage, :ineligible_registrant
-      can [:crud], Competition
-      #can [:read, :set_role, :set_password], :permission
+      can [:crud], AgeGroupType
+      can :update_row_order, AgeGroupEntry
+      can [:crud, :set_places, :lock, :unlock], Competition
+      can [:crud], CombinedCompetition
+      can [:crud], CombinedCompetitionEntry
+      can [:read, :set_role, :set_password], :permission
     end
+  end
+
+  def define_ability_for_logged_in_user(user)
+    alias_action :create, :read, :update, :destroy, to: :crud
+
+    if user.has_role? :super_admin
+      can :access, :rails_admin
+      can :dashboard
+      can :manage, :all
+      return # required in order to allow rails_admin to function
+    end
+
+    define_convention_admin_roles(user)
+    define_music_dj_roles(user)
+    define_translator_roles(user)
+    define_payment_admin_roles(user)
+    define_event_planner_roles(user)
+    define_competition_admin_roles(user)
 
     # #################################################
     # End new role definitions
@@ -247,7 +280,7 @@ class Ability
       can :manage, RegistrantGroup
       can :manage, Judge
       can [:set_password], :permission
-      if config.usa_membership_config
+      if config.usa_membership_config?
         can :manage, :usa_membership
       end
       can :read, VolunteerOpportunity
@@ -293,12 +326,12 @@ class Ability
     #  user.has_role? :admin
     # end
     unless config.music_submission_ended?
-      can [:crud, :file_complete, :add_file, :my_songs, :create_guest_song], Song, :user_id => user.id
+      can [:crud, :file_complete, :add_file, :my_songs, :create_guest_song], Song, user_id: user.id
     end
 
     # Sharing Registrants across Users
-    can :read, User, :id => user.id
-    can [:read, :new, :create], AdditionalRegistrantAccess, :user_id => user.id
+    can :read, User, id: user.id
+    can [:read, :new, :create], AdditionalRegistrantAccess, user_id: user.id
     can :invitations, AdditionalRegistrantAccess
     can [:decline, :accept_readonly], AdditionalRegistrantAccess do |aca|
       aca.registrant.user == user
@@ -309,7 +342,7 @@ class Ability
     # Payment
     can :read, Payment if user.has_role? :admin
     can :manage, Payment if user.has_role? :super_admin
-    can :read, Payment, :user_id => user.id
+    can :read, Payment, user_id: user.id
     unless reg_closed?
       can [:new, :create, :complete, :apply_coupon], Payment
     end
@@ -334,7 +367,8 @@ class Ability
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
       can [:crud, :file_complete, :add_file], Song
-      can :list, :song
+      can :manage, :event_song
+      can :manage, :competition_song
       can [:crud], CompetitionWheelSize
     end
     # not-object-specific
@@ -351,7 +385,7 @@ class Ability
     end
 
     unless reg_closed?
-      can [:update, :destroy], Registrant, :user_id => user.id
+      can [:update, :destroy], Registrant, user_id: user.id
       can [:update], Registrant do |reg|
         user.editable_registrants.include?(reg)
       end
@@ -359,7 +393,7 @@ class Ability
 
       # can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
-        (!rei.system_managed) && (user.editable_registrants.include?(rei.registrant))
+        (!rei.system_managed?) && (user.editable_registrants.include?(rei.registrant))
       end
       can :create, Registrant # necessary because we set the user in the controller?
     end
@@ -369,7 +403,7 @@ class Ability
     end
 
     # :read_contact_info allows viewing the contact_info block (additional_registrant_accesess don't allow this)
-    can [:waiver, :read_contact_info], Registrant, :user_id => user.id
+    can [:waiver, :read_contact_info], Registrant, user_id: user.id
     can [:read_contact_info], Registrant do |reg|
       user.editable_registrants.include?(reg)
     end

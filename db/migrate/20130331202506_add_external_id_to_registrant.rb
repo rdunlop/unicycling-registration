@@ -15,7 +15,7 @@ class AddExternalIdToRegistrant < ActiveRecord::Migration
         reg.external_id = next_noncomp_id
         next_noncomp_id += 1
       end
-      reg.save(:validate => false)
+      reg.save(validate: false)
     end
   end
 

@@ -2,63 +2,19 @@ require 'csv'
 require 'upload'
 class CompetitionsController < ApplicationController
   include EventsHelper
-  layout "competition_management", except: :new
+  layout "competition_management"
 
   before_action :authenticate_user!
-  before_action :load_new_competition, :only => [:create]
-  before_action :load_competition, except: [:create, :new]
-
-  before_action :load_event_from_competition, only: [:edit]
-  before_action :load_event, :only => [:create, :new]
+  before_action :load_competition
 
   load_and_authorize_resource
 
-  before_action :add_competition_setup_breadcrumb, only: [:new, :edit, :show, :set_sort]
+  before_action :add_competition_setup_breadcrumb, only: [:show, :set_sort]
 
   respond_to :html, :js
 
-  # /events/#/competitions/new
-  def new
-    add_breadcrumb "New Competition"
-
-    @competition.competition_sources.build
-  end
-
-  # GET /competitions/1/edit
-  def edit
-    add_breadcrumb "Edit Competition"
-  end
-
   def show
     add_breadcrumb "#{@competition}"
-  end
-
-  # POST /competitions/#/create
-  def create
-    if @competition.save
-      flash[:notice] = "Competition created successfully"
-    end
-
-    respond_with(@competition, location: competition_setup_path)
-  end
-
-  # PUT /competitions/1
-  # PUT /competitions/1.json
-  def update
-    if @competition.update_attributes(competition_params)
-      flash[:notice] = 'Competition was successfully updated.'
-    else
-      @event = @competition.event
-    end
-    respond_with(@competition)
-  end
-
-  # DELETE /competitions/1
-  # DELETE /competitions/1.json
-  def destroy
-    @competition.destroy
-
-    respond_with(@competition, location: competition_setup_path)
   end
 
   def set_sort
@@ -68,7 +24,7 @@ class CompetitionsController < ApplicationController
   end
 
   def toggle_final_sort
-    new_value = !@competition.order_finalized
+    new_value = !@competition.order_finalized?
 
     if new_value
       flash[:notice] = "Sort Order finalized"
@@ -97,16 +53,16 @@ class CompetitionsController < ApplicationController
       flash[:alert] = "You must specify an age group entry"
     else
       age_group_entry = AgeGroupEntry.find(params[:age_group_entry_id])
-      @competition.scoring_helper.place_age_group_entry(age_group_entry)
+      @competition.place_age_group_entry(age_group_entry)
       flash[:notice] = "All Places updated for #{age_group_entry}"
     end
     redirect_to result_competition_path(@competition)
   end
 
   def set_places
-    @competition.scoring_helper.place_all
+    @competition.place_all
     Result.update_last_calc_places_time(@competition)
-    redirect_to result_competition_path(@competition), :notice => "All Places updated"
+    redirect_to result_competition_path(@competition), notice: "All Places updated"
   end
 
   def result
@@ -144,8 +100,8 @@ class CompetitionsController < ApplicationController
     end
     filename = @competition.name.downcase.gsub(/[^0-9a-z]/, "_") + ".csv"
     send_data(csv_string,
-              :type => 'text/csv; charset=utf-8; header=present',
-              :filename => filename)
+              type: 'text/csv; charset=utf-8; header=present',
+              filename: filename)
   end
 
   def lock
@@ -223,32 +179,7 @@ class CompetitionsController < ApplicationController
 
   private
 
-  def competition_params
-    params.require(:competition).permit(:name, :uses_lane_assignments, :start_data_type, :end_data_type,
-                                        :age_group_type_id, :scoring_class, :has_experts, :award_title_name,
-                                        :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,
-                                        :penalty_seconds, :automatic_competitor_creation, :combined_competition_id,
-                                        :competition_sources_attributes => [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy],
-                                        :wave_times_attributes => [:id, :scheduled_time, :wave, :minutes, :seconds, :_destroy] )
-  end
-
   def load_competition
     @competition = Competition.find(params[:id])
-  end
-
-  def load_new_competition
-    @competition = Competition.new(competition_params)
-    params[:id] = 1 if params[:id].nil? # necessary due to bug in the way that cancan does authorization check
-  end
-
-  def load_event_from_competition
-    @event ||= @competition.event
-  end
-
-  def load_event
-    @event = Event.find(params[:event_id])
-    # required in order to set up the 'new' element
-    @competition = Competition.new if @competition.nil?
-    @competition.event = @event unless @competition.nil?
   end
 end

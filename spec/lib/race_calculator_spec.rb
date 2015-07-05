@@ -12,28 +12,28 @@ describe OrderedResultCalculator do
 
   describe "when calculating the placing of timed races" do
     before(:each) do
-      @event_configuration = FactoryGirl.create(:event_configuration, :start_date => Date.today)
+      @event_configuration = FactoryGirl.create(:event_configuration, start_date: Date.today)
       @event = FactoryGirl.create(:event)
       @age_group_entry = FactoryGirl.create(:age_group_entry) # 0-100 age group
-      @competition = FactoryGirl.create(:timed_competition, :age_group_type => @age_group_entry.age_group_type, :event => @event)
-      FactoryGirl.create(:event_configuration, :start_date => Date.new(2013, 01, 01))
+      @competition = FactoryGirl.create(:timed_competition, age_group_type: @age_group_entry.age_group_type, event: @event)
+      FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 01, 01))
       # Note: Registrants are born in 1990, thus are 22 years old
-      @tr1 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
-      @tr2 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
-      @tr3 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
-      @tr4 = FactoryGirl.create(:time_result, :competitor => FactoryGirl.create(:event_competitor, :competition => @competition))
+      @tr1 = FactoryGirl.create(:time_result, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
+      @tr2 = FactoryGirl.create(:time_result, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
+      @tr3 = FactoryGirl.create(:time_result, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
+      @tr4 = FactoryGirl.create(:time_result, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
 
       @calc = OrderedResultCalculator.new(@competition)
     end
 
     describe "with a DQ and a non-DQ for the same competitor" do
       before :each do
-        @tr1.update_attributes({status: "DQ", minutes: 0, seconds: 0, thousands: 0})
+        @tr1.update_attributes(status: "DQ", minutes: 0, seconds: 0, thousands: 0)
         @tr1b = FactoryGirl.create(:time_result, competitor: @tr1.competitor, minutes: 2, seconds: 3, thousands: 300)
       end
 
       it "should not consider the DQ to be the best time" do
-        expect(@tr1.competitor.disqualified).to be_falsy
+        expect(@tr1.competitor.disqualified?).to be_falsy
         expect(@tr1.competitor.best_time_in_thousands).to eq(@tr1b.result)
       end
     end
@@ -41,7 +41,7 @@ describe OrderedResultCalculator do
     describe "with 2 age_groups" do
       before(:each) do
         @age_group_type = @age_group_entry.age_group_type
-        @age_group_entry2 = FactoryGirl.create(:age_group_entry, :age_group_type => @age_group_type, :start_age => 50, :end_age => 100, :short_description => "50-100")
+        @age_group_entry2 = FactoryGirl.create(:age_group_entry, age_group_type: @age_group_type, start_age: 50, end_age: 100, short_description: "50-100")
         @age_group_entry.start_age = 0
         @age_group_entry.end_age = 49
         @age_group_entry.save!
@@ -54,7 +54,7 @@ describe OrderedResultCalculator do
         @tr2.save!
 
         @reg = @tr1.competitor.registrants.first
-        @reg.birthday= Date.today - 1.year
+        @reg.birthday = Date.today - 1.year
         @reg.contact_detail.responsible_adult_name = "Bob Smith"
         @reg.contact_detail.responsible_adult_phone = "911"
         @reg.save!
@@ -182,16 +182,16 @@ describe OrderedResultCalculator do
   describe "when calculating multiple scores (bug)" do
     it "has increasing thousands" do
       @all_together = FactoryGirl.create(:age_group_type)
-      entr = FactoryGirl.create(:age_group_entry, :age_group_type => @all_together, :start_age => 0, :end_age => 100, :gender => "Male")
-      @comp = FactoryGirl.create(:timed_competition, :age_group_type => @all_together)
+      FactoryGirl.create(:age_group_entry, age_group_type: @all_together, start_age: 0, end_age: 100, gender: "Male")
+      @comp = FactoryGirl.create(:timed_competition, age_group_type: @all_together)
       Delorean.jump 2
-      tr1 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 15, :thousands => 935, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
-      tr2 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 23, :thousands => 97, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
-      tr4 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 26, :thousands => 745, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
-      tr5 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 28, :thousands => 498, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
-      tr3 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 25, :thousands => 206, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
-      tr6 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 32, :thousands => 508, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
-      tr7 = FactoryGirl.create(:time_result, :minutes => 1, :seconds => 32, :thousands => 815, :competitor => FactoryGirl.create(:event_competitor, :competition => @comp))
+      tr1 = FactoryGirl.create(:time_result, minutes: 1, seconds: 15, thousands: 935, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
+      tr2 = FactoryGirl.create(:time_result, minutes: 1, seconds: 23, thousands: 97, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
+      tr4 = FactoryGirl.create(:time_result, minutes: 1, seconds: 26, thousands: 745, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
+      tr5 = FactoryGirl.create(:time_result, minutes: 1, seconds: 28, thousands: 498, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
+      tr3 = FactoryGirl.create(:time_result, minutes: 1, seconds: 25, thousands: 206, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
+      tr6 = FactoryGirl.create(:time_result, minutes: 1, seconds: 32, thousands: 508, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
+      tr7 = FactoryGirl.create(:time_result, minutes: 1, seconds: 32, thousands: 815, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
 
       rc = OrderedResultCalculator.new(@comp)
       recalc(rc)
@@ -202,6 +202,7 @@ describe OrderedResultCalculator do
       expect(tr4.reload.competitor.place).to eq(4)
       expect(tr5.reload.competitor.place).to eq(5)
       expect(tr6.reload.competitor.place).to eq(6)
+      expect(tr7.reload.competitor.place).to eq(7)
     end
   end
 end

@@ -1,28 +1,17 @@
 class ExternalResultsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_competition, :only => [:index, :create]
-  before_action :load_new_external_result, :only => [:create]
+  before_action :load_competition, only: [:index, :create]
+  before_action :load_new_external_result, only: [:create]
   load_and_authorize_resource
 
   before_action :set_breadcrumbs, only: :index
-
-  def set_breadcrumbs
-    add_to_competition_breadcrumb(@competition)
-  end
-
-  def load_competition
-    @competition = Competition.find(params[:competition_id])
-  end
-
-  def load_new_external_result
-    @external_result = @competition.external_results.new(external_result_params)
-  end
 
   # GET /competitions/#/external_results
   def index
     add_breadcrumb "Points Results"
 
     @external_result = ExternalResult.new
+    @external_results = @external_results.active
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,6 +29,9 @@ class ExternalResultsController < ApplicationController
   # POST /external_results.json
   def create
     respond_to do |format|
+      @external_result.preliminary = false
+      @external_result.entered_by = current_user
+      @external_result.entered_at = DateTime.now
       if @external_result.save
         format.html { redirect_to competition_external_results_path(@competition), notice: 'External result was successfully created.' }
         format.json { render json: @external_result, status: :created, location: @external_result }
@@ -79,7 +71,19 @@ class ExternalResultsController < ApplicationController
 
   private
 
+  def set_breadcrumbs
+    add_to_competition_breadcrumb(@competition)
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_new_external_result
+    @external_result = @competition.external_results.new(external_result_params)
+  end
+
   def external_result_params
-    params.require(:external_result).permit(:competitor_id, :details, :points)
+    params.require(:external_result).permit(:competitor_id, :details, :points, :status)
   end
 end

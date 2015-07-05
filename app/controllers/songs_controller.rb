@@ -1,17 +1,12 @@
 class SongsController < ApplicationController
   load_resource :registrant, find_by: :bib_number, only: [:index, :create]
   authorize_resource :registrant, only: [:index, :create]
-  load_and_authorize_resource :through => :registrant, :only => [:create]
+  load_and_authorize_resource through: :registrant, only: [:create]
   load_and_authorize_resource :user, only: [:my_songs, :create_guest_song]
-  load_and_authorize_resource :except => [:create, :my_songs]
-  before_action :load_songs, :only => [:index, :create, :add_file]
+  load_and_authorize_resource except: [:create, :my_songs]
+  before_action :load_songs, only: [:index, :create, :add_file]
 
-  before_action :set_breadcrumbs, :except => [:my_songs, :create_guest_song]
-
-  def load_songs
-    @registrant ||= @song.registrant
-    @songs = @registrant.songs
-  end
+  before_action :set_breadcrumbs, except: [:my_songs, :create_guest_song]
 
   # GET /registrants/1/songs
   def index
@@ -79,7 +74,6 @@ class SongsController < ApplicationController
   def destroy
     # destroys the song file on S3
     @song.remove_song_file_name!
-    reg = @song.registrant
 
     if @song.uploaded_by_guest?
       return_path = my_songs_user_songs_path(@song.user)
@@ -92,6 +86,11 @@ class SongsController < ApplicationController
   end
 
   private
+
+  def load_songs
+    @registrant ||= @song.registrant
+    @songs = @registrant.songs
+  end
 
   # Only allow a trusted parameter "white list" through.
   def song_params

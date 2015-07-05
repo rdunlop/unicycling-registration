@@ -4,9 +4,25 @@ class OverallChampionScoringClass < BaseScoringClass
     Calculates the Overall Champion, and stores their final scores and places"
   end
 
-  # This is used temporarily to access the calculator, but will likely be private-ized soon
-  def score_calculator
-    @score_calculator ||= CombinedCompetitionResult.new(@competition.combined_competition, @competition)
+  # Remove all competitors, and re-add them to the competition
+  def rebuild_competitors(bib_numbers)
+    clear_competitors
+    build_competitors(bib_numbers)
+  end
+
+  def clear_competitors
+    @competition.competitors.destroy_all
+  end
+
+  def build_competitors(bib_numbers)
+    bib_numbers.each do |bib_number|
+      @competition.create_competitor_from_registrants([Registrant.find_by(bib_number: bib_number)], nil)
+    end
+    @competition.reload
+  end
+
+  def lower_is_better
+    false
   end
 
   # describes how to label the results of this competition
@@ -22,31 +38,8 @@ class OverallChampionScoringClass < BaseScoringClass
     "overall_champion"
   end
 
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    true # always indicate that we have a result, so that all competitors are created.
-  end
-
-  # returns the overall points calculated for this competitor
-  def competitor_result(competitor)
-    nil
-  end
-
-  def competitor_comparable_result(competitor)
-    score_calculator.competitor_score(competitor)
-  end
-
-  def imports_times
+  def competitor_dq?(_competitor)
     false
-  end
-
-  def competitor_dq?(competitor)
-    false
-  end
-
-  # Function which places all of the competitors in the competition
-  def place_all
-    score_calculator.update_all_places
   end
 
   def requires_age_groups

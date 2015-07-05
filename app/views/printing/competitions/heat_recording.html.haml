@@ -1,0 +1,27 @@
+.race_recording
+  - @competition_sign_up.age_group_entries.each do |description, gender|
+    %h1 Race Recording Form
+    %hr
+    %h2= @competition
+    %hr
+    %h2.age_group_description= description
+    %h2.age_group_gender= gender
+    %div{:style => "clear: both"}
+    %hr
+    %table.full.grid.race
+      %thead
+        %tr
+          %th.heat_entry Heat
+          %th.lane_entry Lane
+          %th.id ID
+          %th.name Name
+          %th.dq DQ?
+          %th.notes Notes
+      %tbody
+        - @competition_sign_up.signed_up_list(description).each do |reg|
+          = render :partial => "heat_entry", :locals => {:id => reg.bib_number, :name => reg.to_s, :not_signed_up => false }
+        - @competition_sign_up.not_signed_up_list(description).each do |reg|
+          = render :partial => "heat_entry", :locals => {:id => reg.bib_number, :name => reg.to_s, :not_signed_up => true }
+        - 5.times do
+          = render :partial => "heat_entry", :locals => {:id => nil, :name => nil, :not_signed_up => false}
+    .page-break

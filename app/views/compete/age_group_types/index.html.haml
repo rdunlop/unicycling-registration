@@ -1,18 +1,20 @@
 %h1 Age Group Types
 %p An Age Group Type describes how competitors are segregated into different competitor groups
-%div
-  %table
+
+%table
+  %tr
+    %th Name
+    %th Details
+    %th Currently used by
+    %th
+  - @age_group_types.each do |age_group_type|
     %tr
-      %th Name
-      %th Entries
-      %th
-      %th
-    - @age_group_types.each do |age_group_type|
-      %tr
-        %td= age_group_type.name
-        %td= link_to 'Entries', age_group_type_path(age_group_type)
-        %td= link_to 'Edit', edit_age_group_type_path(age_group_type)
-        %td= link_to 'Delete', age_group_type_path(age_group_type), method: :delete, data: { confirm: 'Are you sure?' }
-  %br
-  %h3 New Age Group Type
-  = render 'form'
+      %td= age_group_type.name
+      %td= link_to 'Entries', age_group_type_path(age_group_type)
+      %td= age_group_type.competitions.map(&:to_s).join(", ")
+      %td
+        = link_to 'Edit', edit_age_group_type_path(age_group_type)
+        = link_to 'Delete', age_group_type_path(age_group_type), method: :delete, data: { confirm: 'Are you sure?' }
+%br
+%h3 New Age Group Type
+= render 'form'

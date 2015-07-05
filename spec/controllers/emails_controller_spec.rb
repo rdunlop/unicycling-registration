@@ -10,7 +10,7 @@ describe EmailsController do
     it "can send an e-mail" do
       FactoryGirl.create(:user)
       ActionMailer::Base.deliveries.clear
-      post :create, { :email => {:subject => "Hello werld", :body => "This is the body", :confirmed_accounts => true, competition_id: [] }}
+      post :create, email: {subject: "Hello werld", body: "This is the body", confirmed_accounts: true, competition_id: [] }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(1)
       message = ActionMailer::Base.deliveries.first
@@ -18,11 +18,11 @@ describe EmailsController do
     end
 
     it "breaks apart large requests into multiple smaller requests" do
-      50.times do |n|
+      50.times do |_n|
         FactoryGirl.create(:user)
       end
       ActionMailer::Base.deliveries.clear
-      post :create, { :email => {:subject => "Hello werld", :body => "This is the body", :confirmed_accounts => true, competition_id: [] }}
+      post :create, email: {subject: "Hello werld", body: "This is the body", confirmed_accounts: true, competition_id: [] }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(2)
 

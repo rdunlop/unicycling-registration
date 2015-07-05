@@ -1,0 +1,11 @@
+%tr
+  %td
+  %td
+  - if not_signed_up
+    %td.not_signed_up= id
+    %td.not_signed_up= name
+  - else
+    %td= id
+    %td= name
+  %td
+  %td

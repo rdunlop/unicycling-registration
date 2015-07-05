@@ -1,0 +1,17 @@
+%h1 Registrant Groups
+%hr
+- @registrant_groups.each do |rg|
+  %h2
+    = rg.name
+    \- #{rg.contact_person}
+  %table
+    %thead
+      %tr
+        %th ID
+        %th Member Name
+    %tbody
+      - rg.registrant_group_members.each do |registrant_group_member|
+        %tr
+          %td= registrant_group_member.registrant.bib_number
+          %td= registrant_group_member.registrant
+  %hr

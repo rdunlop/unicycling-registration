@@ -1,11 +1,13 @@
 class StreetScoringClass < BaseScoringClass
-  def scoring_description
-    "A varation of the artistic scoring, for use in street comp"
+  attr_accessor :lower_is_better
+
+  def initialize(competition, lower_is_better = true)
+    super(competition)
+    @lower_is_better = lower_is_better
   end
 
-  # This is used temporarily to access the calculator, but will likely be private-ized soon
-  def score_calculator
-    StreetCompScoreCalculator.new(@competition)
+  def scoring_description
+    "A varation of the artistic scoring, for use in street comp"
   end
 
   # describes how to label the results of this competition
@@ -14,26 +16,7 @@ class StreetScoringClass < BaseScoringClass
   end
 
   def render_path
-    "street_scores"
-  end
-
-  # describes whether the given competitor has any results associated
-  def competitor_has_result?(competitor)
-    competitor.scores.count > 0
-  end
-
-  # returns the result for this competitor
-  def competitor_result(competitor)
-    if self.competitor_has_result?(competitor)
-      nil# not applicable in Freestyle
-    else
-      nil
-    end
-  end
-
-  # Function which places all of the competitors in the competition
-  def place_all
-    score_calculator.update_all_places
+    "freestyle_scores"
   end
 
   # Used when trying to destroy all results for a competition
@@ -42,14 +25,14 @@ class StreetScoringClass < BaseScoringClass
   end
 
   def uses_judges
-    true
+    "Street"
   end
 
   def scoring_path(judge)
     judge_street_scores_path(judge)
   end
 
-  def competitor_dq?(competitor)
+  def competitor_dq?(_competitor)
     false
   end
 

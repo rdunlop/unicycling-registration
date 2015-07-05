@@ -26,20 +26,20 @@ shared_context 'basic event configuration' do |options = {}|
     FactoryGirl.create(:wheel_size_16)
     FactoryGirl.create(:wheel_size_20)
     FactoryGirl.create(:wheel_size_24)
-    FactoryGirl.create(:event_configuration, :start_date => Date.today + 6.months,
-                                             :iuf => true, :usa => false, :usa_membership_config => false, :test_mode => options[:test_mode], :music_submission_end_date => Date.today + 2.months)
+    FactoryGirl.create(:event_configuration, start_date: Date.today + 6.months,
+                                             iuf: true, usa: false, usa_membership_config: false, test_mode: options[:test_mode], music_submission_end_date: Date.today + 2.months)
     exp_comp = FactoryGirl.create(:expense_item, name: "Early Registration - Competitor", cost: 20.00)
     exp_noncomp = FactoryGirl.create(:expense_item, name: "Early Registration - NonCompetitor", cost: 11.00)
-    FactoryGirl.create(:registration_period, :current, :start_date => Date.today - 1.month, :end_date => Date.today + 1.month, competitor_expense_item: exp_comp, noncompetitor_expense_item: exp_noncomp)
-    FactoryGirl.create(:event, :name => "100m")
+    FactoryGirl.create(:registration_period, :current, start_date: Date.today - 1.month, end_date: Date.today + 1.month, competitor_expense_item: exp_comp, noncompetitor_expense_item: exp_noncomp)
+    FactoryGirl.create(:event, name: "100m")
   end
 end
 
 shared_context "freestyle_event" do |options = {}|
   before :each do
-    event = FactoryGirl.create(:event, :name => options[:name])
-    competition = FactoryGirl.create(:competition, event: event, :name => options[:name])
-    FactoryGirl.create(:event_competitor, :competition => competition)
+    event = FactoryGirl.create(:event, name: options[:name])
+    competition = FactoryGirl.create(:competition, event: event, name: options[:name])
+    FactoryGirl.create(:event_competitor, competition: competition)
     reg = Registrant.first
     reg.first_name = "Robin"
     reg.last_name = "Robin"
@@ -49,9 +49,9 @@ end
 
 shared_context "points_event" do |options = {}|
   before :each do
-    event = FactoryGirl.create(:event, :name => options[:name])
-    competition = FactoryGirl.create(:ranked_competition, event: event, :name => options[:name], start_data_type: 'One Data Per Line')
-    FactoryGirl.create(:event_competitor, :competition => competition)
+    event = FactoryGirl.create(:event, name: options[:name])
+    competition = FactoryGirl.create(:ranked_competition, event: event, name: options[:name], start_data_type: 'One Data Per Line')
+    FactoryGirl.create(:event_competitor, competition: competition)
     reg = Registrant.first
     reg.first_name = "Robin"
     reg.last_name = "Robin"
@@ -98,9 +98,9 @@ shared_context 'basic registrant data' do
   before :each do
     fill_in 'registrant_first_name', with: 'Robin'
     fill_in 'registrant_last_name',  with: 'Dunlop'
-    select 'May',   :from => 'registrant_birthday_2i'
-    select '20',    :from => 'registrant_birthday_3i'
-    select '1982',  :from => 'registrant_birthday_1i'
+    select 'May',   from: 'registrant_birthday_2i'
+    select '20',    from: 'registrant_birthday_3i'
+    select '1982',  from: 'registrant_birthday_1i'
     choose 'Male'
     sleep 1 # needed or else the feature spec fails to register that the "Male" has been selected.
   end

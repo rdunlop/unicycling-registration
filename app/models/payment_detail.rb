@@ -24,7 +24,7 @@ class PaymentDetail < ActiveRecord::Base
   include CachedSetModel
   include HasDetailsDescription
 
-  validates :payment, :registrant_id, :expense_item, :presence => true
+  validates :payment, :registrant_id, :expense_item, presence: true
   validate :registrant_must_be_valid
 
   monetize :amount_cents, numericality: { greater_than_or_equal_to: 0 }
@@ -32,22 +32,22 @@ class PaymentDetail < ActiveRecord::Base
   has_paper_trail
 
   belongs_to :registrant, touch: true
-  belongs_to :payment, :inverse_of => :payment_details
+  belongs_to :payment, inverse_of: :payment_details
   belongs_to :expense_item
   has_one :refund_detail
   has_one :payment_detail_coupon_code
 
-  delegate :has_details, :details_label, to: :expense_item
+  delegate :has_details?, :details_label, to: :expense_item
 
   # excludes refunded items
-  scope :completed, -> { includes(:payment).includes(:refund_detail).where(:payments => {:completed => true}).where({:refund_details => {:payment_detail_id => nil}}) }
+  scope :completed, -> { includes(:payment).includes(:refund_detail).where(payments: {completed: true}).where(refund_details: {payment_detail_id: nil}) }
 
-  scope :paid, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => false) }
+  scope :paid, -> { includes(:payment).where(payments: {completed: true}).where(free: false) }
 
-  scope :free, -> { includes(:payment).where(:payments => {:completed => true}).where(:free => true) }
+  scope :free, -> { includes(:payment).where(payments: {completed: true}).where(free: true) }
   scope :refunded, -> { completed.where(refunded: true) }
 
-  scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: {payment_detail_id: nil } ) }
+  scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: {payment_detail_id: nil }) }
 
   def self.cache_set_field
     :expense_item_id
@@ -55,7 +55,7 @@ class PaymentDetail < ActiveRecord::Base
 
   def registrant_must_be_valid
     if registrant && (!registrant.validated? || registrant.invalid?)
-      errors[:registrant] = "Registrant #{registrant.to_s} form is incomplete"
+      errors[:registrant] = "Registrant #{registrant} form is incomplete"
       return false
     end
     true
@@ -75,9 +75,13 @@ class PaymentDetail < ActiveRecord::Base
 
   def cost
     return 0 if free
-    return ((100 - refund_detail.percentage.to_f) / 100) * amount if refunded?
+    return amount - amount_refunded if refunded?
 
     amount
+  end
+
+  def amount_refunded
+    ((refund_detail.percentage.to_f) / 100) * amount
   end
 
   # update the amount owing for this payment_detail, based on the coupon code applied

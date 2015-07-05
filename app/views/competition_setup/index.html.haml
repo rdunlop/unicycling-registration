@@ -39,7 +39,7 @@
 
 - if can? :read, :director
   = link_to 'Manage Directors', directors_path
-- if can? :manage, AgeGroupType
+- if can? :crud, AgeGroupType
   %hr
   %h2 Age Groups
   %li= link_to  'Age Group Type', age_group_types_path

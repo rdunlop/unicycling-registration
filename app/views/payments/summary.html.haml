@@ -16,6 +16,10 @@
   = link_to "Manually Receive Payment", new_manual_payment_path
   %br
 
+- if can? :new, :manual_refund
+  = link_to "Create Refund", new_manual_refund_path
+  %br
+
 - if can? :new, :payment_adjustment # change this to a different action
   = link_to "Create Refund/Exchange", new_payment_adjustment_path
   %br
@@ -70,5 +74,5 @@
     %tbody
       - CouponCode.all.each do |coupon_code|
         %tr
-          %td= link_to coupon_code, coupon_code
+          %td= link_to coupon_code, coupon_code_summary_path(coupon_code)
           %td= coupon_code.applied_to_payment_details.count

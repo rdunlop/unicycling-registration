@@ -3,7 +3,7 @@
 # Table name: volunteer_opportunities
 #
 #  id            :integer          not null, primary key
-#  description   :string(255)
+#  description   :string(255)      not null
 #  position      :integer
 #  inform_emails :text
 #  created_at    :datetime
@@ -22,8 +22,12 @@ class VolunteerOpportunity < ActiveRecord::Base
   acts_as_restful_list
 
   default_scope { order(:position) }
-
   has_many :volunteer_choices, dependent: :destroy
+  has_many :registrants, through: :volunteer_choices
+
+  def active_registrants
+    registrants.merge(Registrant.active)
+  end
 
   def to_s
     description

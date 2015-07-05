@@ -19,19 +19,19 @@
 #
 
 class EventCategory < ActiveRecord::Base
-  belongs_to :event, :inverse_of => :event_categories, :touch => true, counter_cache: true
+  belongs_to :event, inverse_of: :event_categories, touch: true, counter_cache: true
 
-  has_many :registrant_event_sign_ups, :dependent => :destroy
+  has_many :registrant_event_sign_ups, dependent: :destroy
 
-  has_many :competition_sources, :dependent => :destroy
+  has_many :competition_sources, dependent: :destroy
 
   validates :event, presence: true
-  validates :name, {:presence => true, :uniqueness => {:scope => [:event_id]} }
+  validates :name, presence: true, uniqueness: {scope: [:event_id]}
 
   acts_as_restful_list scope: :event
 
   def to_s
-    event.to_s + " - " + self.name
+    event.to_s + " - " + name
   end
 
   def self.with_warnings
@@ -43,13 +43,11 @@ class EventCategory < ActiveRecord::Base
   end
 
   def signed_up_registrants
-    registrant_event_sign_ups.signed_up.map{|resu| resu.registrant }.select{ |reg| !reg.deleted }
+    registrant_event_sign_ups.signed_up.map(&:registrant)
   end
 
   def num_signed_up_registrants
-    Rails.cache.fetch("/event_category/#{id}-#{updated_at}/num_signed_up_registrants") do
-      signed_up_registrants.count
-    end
+    signed_up_registrants.count
   end
 
   def age_is_in_range(age)

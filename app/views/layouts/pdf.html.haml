@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    %title Unicycling Registration
+    / include all of the normal Style
+    = wicked_pdf_stylesheet_link_tag    "naucc_2014"
+    / Include the pdf style, to override some of the existing style
+    = wicked_pdf_stylesheet_link_tag    "pdf"
+    :css
+      .non_printable {
+        display: none;
+      }
+  %body.pdf_body{:onload => "number_pages"}
+    - if Rails.application.secrets.development_banner
+      .dev_banner
+        Non-Live System.
+    .body
+      = yield

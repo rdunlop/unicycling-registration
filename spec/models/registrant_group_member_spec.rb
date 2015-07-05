@@ -19,7 +19,7 @@ require 'spec_helper'
 
 describe RegistrantGroupMember do
   before(:each) do
-    @rgm= FactoryGirl.create(:registrant_group_member)
+    @rgm = FactoryGirl.create(:registrant_group_member)
     @rg = @rgm.registrant_group
   end
 
@@ -42,7 +42,7 @@ describe RegistrantGroupMember do
   end
 
   it "cannot have the same member twice in the same group" do
-    @rgm2 = FactoryGirl.build(:registrant_group_member, :registrant => @rgm.registrant, :registrant_group => @rg)
+    @rgm2 = FactoryGirl.build(:registrant_group_member, registrant: @rgm.registrant, registrant_group: @rg)
     expect(@rgm2.valid?).to eq(false)
   end
 end

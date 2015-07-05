@@ -4,7 +4,7 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
   before_action :authenticate_user!
   load_and_authorize_resource
 
-  before_action :load_event, :only => [:index, :create]
+  before_action :load_event, only: [:index, :create]
   before_action :set_breadcrumbs
 
   respond_to :html
@@ -82,4 +82,3 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
     params.require(:event_category).permit(:name, :warning_on_registration_summary, :age_group_type_id, :age_range_start, :age_range_end)
   end
 end
-

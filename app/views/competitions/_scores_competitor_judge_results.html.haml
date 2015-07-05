@@ -4,7 +4,7 @@
   %td= competitor.bib_number
   %td.right_edge= competitor.name
   - judges.each do |judge|
-    - score = judge.get_score(competitor)
+    - score = competitor.scores.find{ |score| score.judge_id == judge.id}
     - if !score.nil?
       - judge.judge_type.num_columns.times do |i|
         %td

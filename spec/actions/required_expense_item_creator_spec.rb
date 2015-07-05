@@ -7,9 +7,9 @@ describe RequiredExpenseItemCreator do
 
   describe "with a registration_period" do
     before(:each) do
-      @comp_exp = FactoryGirl.create(:expense_item, :cost => 100)
-      @noncomp_exp = FactoryGirl.create(:expense_item, :cost => 50)
-      @rp = FactoryGirl.create(:registration_period, :start_date => Date.new(2010, 01, 01), :end_date => Date.new(2022, 01, 01), :competitor_expense_item => @comp_exp, :noncompetitor_expense_item => @noncomp_exp)
+      @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
+      @noncomp_exp = FactoryGirl.create(:expense_item, cost: 50)
+      @rp = FactoryGirl.create(:registration_period, start_date: Date.new(2010, 01, 01), end_date: Date.new(2022, 01, 01), competitor_expense_item: @comp_exp, noncompetitor_expense_item: @noncomp_exp)
     end
 
     describe "as a non-Competitor" do
@@ -50,8 +50,8 @@ describe RequiredExpenseItemCreator do
 
   describe "with an expense_group marked as 'required' created BEFORE the registrant" do
     before(:each) do
-      @eg = FactoryGirl.create(:expense_group, :competitor_required => true)
-      @ei = FactoryGirl.create(:expense_item, :expense_group => @eg)
+      @eg = FactoryGirl.create(:expense_group, competitor_required: true)
+      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
       @reg2 = FactoryGirl.create(:competitor)
     end
 

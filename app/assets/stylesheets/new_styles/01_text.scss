@@ -56,7 +56,7 @@ div {
     height: 8em;
   }
 }
-.field input, .field select {
+.field > input, .field > select {
   width: 100%;
   margin: 0;
   font-size: 13px;

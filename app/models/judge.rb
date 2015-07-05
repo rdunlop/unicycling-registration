@@ -8,6 +8,7 @@
 #  user_id        :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  status         :string           default("active"), not null
 #
 # Indexes
 #
@@ -24,33 +25,30 @@ class Judge < ActiveRecord::Base
 
   before_destroy :check_for_scores # must occur before the dependent->destroy
 
-  has_many :scores, -> {order("competitors.position").includes(:competitor) }, :dependent => :destroy
-  has_many :boundary_scores, -> {order("competitors.position").includes(:competitor) }, :dependent => :destroy
-  has_many :standard_execution_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, :dependent => :destroy
-  has_many :standard_difficulty_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, :dependent => :destroy
-  has_many :competitors, -> {order "position"}, :through => :competition
+  has_many :scores, -> {order("competitors.position").includes(:competitor) }, dependent: :destroy
+  has_many :boundary_scores, -> {order("competitors.position").includes(:competitor) }, dependent: :destroy
+  has_many :standard_execution_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, dependent: :destroy
+  has_many :standard_difficulty_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, dependent: :destroy
+  has_many :competitors, -> {order "position"}, through: :competition
   has_many :distance_attempts, -> {order "id DESC"}, dependent: :destroy
   has_many :tie_break_adjustments, dependent: :destroy
 
   accepts_nested_attributes_for :standard_execution_scores
   accepts_nested_attributes_for :standard_difficulty_scores
 
-  validates :competition_id, :presence => true
-  validates :judge_type_id, :presence => true, :uniqueness => {:scope => [:competition_id, :user_id] }
-  validates :user_id, :presence => true
+  validates :competition_id, presence: true
+  validates :judge_type_id, presence: true, uniqueness: {scope: [:competition_id, :user_id] }
+  validates :user_id, presence: true
+  validates :status, inclusion: { in: ["active", "removed"] }
 
   delegate :event, to: :competition
 
-  # Note, this appears to be duplicated in ability.rb
-  def check_for_scores
-    if scores.count > 0
-      errors[:base] << "cannot delete judge containing a score"
-      return false
-    end
-    if distance_attempts.count > 0
-      errors[:base] << "cannot delete judge containing distance attempts"
-      return false
-    end
+  def self.active
+    where(status: "active")
+  end
+
+  def active?
+    status == "active"
   end
 
   def num_scored_competitors
@@ -75,12 +73,21 @@ class Judge < ActiveRecord::Base
 
   def score_totals
     Rails.cache.fetch("/judge/#{id}-#{updated_at}/score_totals") do
-      scores.map { |s| s.total }
+      scores.map(&:total).compact
     end
   end
 
-  # retrieve my judged score for the given competitor
-  def get_score(competitor)
-    scores.where(:competitor_id => competitor.id).first
+  private
+
+  # Note, this appears to be duplicated in ability.rb
+  def check_for_scores
+    if scores.count > 0
+      errors[:base] << "cannot delete judge containing a score"
+      return false
+    end
+    if distance_attempts.count > 0
+      errors[:base] << "cannot delete judge containing distance attempts"
+      return false
+    end
   end
 end

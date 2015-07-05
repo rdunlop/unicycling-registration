@@ -1,10 +1,9 @@
 class UsaMembershipsController < ApplicationController
   authorize_resource class: false
+  before_action :load_family_registrants, only: :index
 
   def index
-    family_item = @config.usa_family_expense_item
-    raise "Unable to access USA page on non-USA configuration" unless @config.usa?
-    @family_registrants = family_item.payment_details.includes(:registrant).paid.map{|pd| pd.registrant}
+    raise "Unable to access USA page on non-USA configuration" unless @config.usa_membership_config?
   end
 
   def update
@@ -23,7 +22,9 @@ class UsaMembershipsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to usa_memberships_path }
-      format.js {}
+      format.js do
+        load_family_registrants
+      end
     end
   end
 
@@ -52,7 +53,7 @@ class UsaMembershipsController < ApplicationController
     sheet[0, 17] = "Confirmed already a USA member"
 
     row = 1
-    Registrant.active.includes(:payment_details => [:payment]).each do |reg|
+    Registrant.active.includes(payment_details: [:payment]).each do |reg|
       sheet[row, 0] = reg.bib_number
       sheet[row, 1] = reg.contact_detail.usa_member_number
       sheet[row, 2] = reg.first_name
@@ -78,7 +79,18 @@ class UsaMembershipsController < ApplicationController
     s.write report
 
     respond_to do |format|
-      format.xls { send_data report.string, :filename => "registrants_with_usa_membership_details.xls" }
+      format.xls { send_data report.string, filename: "registrants_with_usa_membership_details.xls" }
+    end
+  end
+
+  private
+
+  def load_family_registrants
+    family_item = @config.usa_family_expense_item
+    if family_item.present?
+      @family_registrants = family_item.payment_details.includes(:registrant).paid.map{|pd| pd.registrant}
+    else
+      @family_registrants = []
     end
   end
 end

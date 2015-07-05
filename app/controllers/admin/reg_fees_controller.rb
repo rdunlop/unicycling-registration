@@ -18,7 +18,7 @@ class Admin::RegFeesController < ApplicationController
 
     if @reg_fee.save
       cost_description = print_formatted_currency(@reg_fee.new_registration_item.cost)
-      redirect_to set_reg_fees_path, notice: "Reg Fee For #{@reg_fee.registrant.to_s} Updated Successfully (#{cost_description})"
+      redirect_to set_reg_fees_path, notice: "Reg Fee For #{@reg_fee.registrant} Updated Successfully (#{cost_description})"
     else
       set_reg_fee_breadcrumb
       render :index

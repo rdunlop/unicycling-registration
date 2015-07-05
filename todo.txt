@@ -1,3 +1,116 @@
+Want to do:
+- spec which uses import_results_Controller->display_csv -> import_csv to create external results
+ - then uses Approve action to convert the results to real results.
+- Determine if the servers have any ImportResults left on them.
+
+- make ExternalResult unique on CompetitorID (since each competitor has ONE external_result)
+- Remove default_scope on ImportResult
+
+Changes for External Data Results Entry:
+- Don't allow people to be entered who are not competitors to have data entry
+- For NAUCC, allow people to be added to a competition easily
+- When entering External Results data, prevent selecting people who already have a result entered (gray out their name?)
+
+NEED to clear up the "target_competition" logic of the import! function (used for the mulitple-10k competition-in-same-dataset problem)
+
+WHEN DOING an Import from CSV, fail the whole import, listing the entries which cannot be handled yet clearly, allowing them to be resolved (perhaps a "add these people as competitors" choice?)
+
+? ask scott/patricia? - Boundary-score calculation judge for freestyle? (major/minor falls counter)
+ - For UNIOEC?
+- Must update the Ineligibility of all registrants before starting competition.
+
+PRiorities as per Scott/Robin Discussion:
+- artistic ineligible dismissed
+- Refunds misc column calc
+- High/Long new Rules about Faults/re-attempts (ie: the Hugo Rules) should be separated
+- 12-attempt High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
+ - Perhaps just use the existing UI, but auto-load the last 12 attepmts of that competitor once you have entered the competitor Id.
+?ask scott? - Country-specific competition/announcement, per competitor/ group?
+- Deal with XXX marks
+
+** Go Live
+
+- Per-Competitor results
+- Overall Competition logic changes (DaveKrack)
+
+- Track day, running-results
+- Add specs to ensure that data entry volunteers controller works (ie: is "confirm!" deprecated?)
+ - Need to upgrade Devise first?
+- Assign Data Entry roles per Competition for volunteers.
+ - Want to be able to track WHO Entered the data. (ie: remove the ImportResults system, and properly manage the data flow.)
+ - Unable to data-entry Multi-Lap Races (import doesn'n ask for number of laps)
+- Live Data Entry for Muni
+- Make Track E-Timer import better
+- High/Long live display
+- Live Data Entry for Trials
+
+- Text-Message on new result
+
+- Expert T-Shirt
+-
+
+
+- Fix breadcrumbs on Competition-management sub-screens
+ +source 'https://rails-assets.org' do
+> +  gem 'rails-assets-datetimepicker'
+> +end
+
+- If a competition is created with "automatic competitor creation", it should prompt "Should I add all currently configured competitors?" immediately after creating the competition.
+- Handle Ineligible results when calculating placing points?
+- Flatland/etc calculation with "ineligible", does it properly give placing points?
+- Extract "best_result_in_thounsands" out of Competitor, into a RaceResultCalculator?
+ - Will this fix the XXX note in competition.rb?
+- Combine the scoring data entry paths, with different partials as necessary?
+  - Is this even possible, considering different interaction-requirements?
+  - Is this a good idea?
+- Make External Result data entry system smarter, so that it doesn't prompt me to enter scores for a competitor which already has scores. (use chosen's greyed-out-select?)
+- Are the order of age groups important for anything other than Track? Can we clean that up?
+- make the hamburger taller
+  - bring in the svg icons
+
+- Disable start/finish data-entry if you choose certain scoring types (like Street, High/Long, freestyle, Flat?)
+
+- Add a "RefundS" or "misc" column to make the payments page make sense after processing refunds
+
+- After refunding, if the registration can be deleted, prompt the admin whether they want to delete that user.
+- High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
+
+
+- Allow creating Expert events without specifynig an age group? (ie: 100m expert shouldn't need an age group)
+
+
+- Describe the Scoring classes better:
+ - Externally Ranked - Provide an Export/Import routine for entering the results
+ - One-Result - Each
+ - Street -
+
+- If we could have a device at the start/end line, how do we enter data, as the data arrives??? global problem to solve.
+- On-Site E-Scoring of Trials Line-Judge results
+ - Able to specify the line, the "hand"-ness, the Competitor
+- Show the live, results of all competitors.
+- Show the results, per-competitor ?
+- Cache the page, use JS
+
+- All Start Lists should be download by Excel (e.g. of every table which we print)
+- Should we show any of these results liv? (like live-results of Muni Downhill?)
+- lap counting?
+ - ID of person, on a running clock
+  - Cyclocross, Marathon, Criterium.
+
+MUni - Have network connections.
+ - Allow live-entry of data for Uphill/Downhill
+- serve the datetimepicker only to admin pages?
+ - try minified?
+- fix problem with datepicker showing the same date if multiple dates appear on the page.
+- test that using erb in JS for datetimepicker isn't cached inadvertantly
+- data entry page should say "nothing to see ehere" if you haven't been assigned yet.
+- why can a super create a spectator
+- ensure that DQ/DNS competitors have correct points/places
+- improve '/registrant/:id/results' page to honor 'published' status, and also clear up results.
+- Feedback should automatically set the "Reply-to" address to the entered E-mail/logged-in-user's e-mail.
+- Pretend to be any user, so that you can see what they see.
+
+
 New Rules changes:
 - 1.11 -  Must post the Name + Country of all competitors/results
        - Must post the Name + Country of all judges on the panel?
@@ -7,6 +120,7 @@ New Rules changes:
 - Create a "Recorder" role for various events
 -
 
+- add ability for AwardAdmin to modify all awards at once (for bulk updates, bulk-deletions)
 - Make EventConfiguration "submit" action say "Save & Continue"
  - Make it always actually continue
 - Add markings which would indicate that we've finished a configuration step.
@@ -17,7 +131,7 @@ New Rules changes:
 - 7) [not yet done] delete any phrases which no longer exist in the primary locale
 
 - OPEN PRs against Tolk
-
+- gem "jc-validates_timeliness"
 - How to "Award"/"Un-Award" a competition (deleted this option from competition#show)
 - Why doesn't en.waiver_text appear for the "Default Waiver" when none is defined for de.? (scott noticed this)
 - FIX the history-of-changes-of-a-record UI featuer.
@@ -491,12 +605,10 @@ Other Cleanup:
 - remove edit_registrant_path references
 - re-work the specs to use the default sidekiq queueing for test strategy (remove work-around)
 - Determine test coverage.
-- Update all booleans to not include nil (http://www.bignerdranch.com/blog/coding-rails-with-data-integrity/)
 - Run/resolve consistency_fail errors
 - Eliminate the ImportResults, replace it with a boolean "tentative" flag?
 - Move the "PDF" link to be inside the HTML form on all pages, instead of next to the HTML pageview link.
 - Add test for lane_assignment, and view_heat and dq_request paths.
-- Booleans in models should be "?" like? ("has_experts?")
 - Wrap Permissions (on User) properly, so that cancan sees/manages it (currently it's can?(:manage, User))
 - Remove Version table and paper_trail...replace with something else?
 - Remove all json responds to, except where I need it. (and remove all respond_to blocks).
@@ -505,7 +617,6 @@ Other Cleanup:
 ========================================================================================================================
 Other:
 - "Prices increase by $x in about 2 months" (add the amount it will increase) (do not display if price doesn't actually increase: ie non-comps at naucc2015)
-- change decsription of "default wheel size" to "Track Racing Wheel Size" -(not "Default")
 - test/fix IE-compatibility
 - allow modification of the selected registrant when doing "Edit" of imported results...so that we can adjust it while doing "import somewhere else" imports. (like Muni XC)
 - TwoAttempEntry, should require thousands in both T1 and T2, does it?
@@ -526,9 +637,7 @@ Other:
 - Make the Pay Now a button-like-thing.. For a Sinlge Registrant, Make the Pay Now part of the regsitration.
 - Add the "Heat/Lane" to the results listing page (and some reports too?)
 - Combine multiple expenses onto one line for ease of seeing.
-- Be able to give other users the permissions that THEY have themselves. (Kathleen gives Scott permissions...)
 - Replace magic strings with class constants
-- Make a single expense_group for registration_fees, and prevent using it elsewhere.
 - UTF8 encoding of the list elements sent to Paypal (to allow for french characters) Search "Notification of payment received" in e-mail
 - replace has_details/print_details with common helper function?
  - Display the "details" for payment entries of paid entries on various places where it is displayed

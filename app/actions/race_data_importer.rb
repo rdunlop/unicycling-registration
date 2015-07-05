@@ -11,7 +11,7 @@ class RaceDataImporter
   def process_lif(file, heat)
     upload = Upload.new
     raw_data = upload.extract_csv(file)
-    raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments
+    raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments?
     self.num_rows_processed = 0
     self.errors = nil
     raw_data.shift # drop header row
@@ -51,29 +51,34 @@ class RaceDataImporter
 
   def process_csv(file, start_times)
     upload = Upload.new
-    is_start_time = start_times || false
     # FOR EXCEL DATA:
     raw_data = upload.extract_csv(file)
     self.num_rows_processed = 0
     self.errors = nil
-    begin
+    if @competition.imports_times?
+      is_start_time = start_times || false
       ImportResult.transaction do
         raw_data.each do |raw|
-          raw_data = upload.convert_array_to_string(raw)
-          result = @competition.build_import_result_from_raw(raw)
-          result.raw_data = raw_data
-          result.user = @user
-          result.competition = @competition
-          result.is_start_time = is_start_time
-          if result.save!
+          data = upload.convert_array_to_string(raw)
+          if TimeResult.build_and_save_imported_result(raw, data, @user, @competition, is_start_time)
             self.num_rows_processed += 1
           end
         end
       end
-    rescue ActiveRecord::RecordInvalid => invalid
-      @errors = invalid
-      return false
+    elsif @competition.imports_points?
+      ExternalResult.transaction do
+        raw_data.each do |raw|
+          data = upload.convert_array_to_string(raw)
+          if ExternalResult.build_and_save_imported_result(raw, data, @user, @competition)
+            self.num_rows_processed += 1
+          end
+        end
+      end
     end
+
+  rescue ActiveRecord::RecordInvalid => invalid
+    @errors = invalid
+    return false
   end
 
   def process_chip(file, bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)
@@ -129,7 +134,7 @@ class RaceDataImporter
 
   def add_error(lane)
     error_message = "Missing Lane Assignment for Lane #{lane}"
-    if self.errors.nil?
+    if errors.nil?
       self.errors = error_message
     else
       self.errors += error_message

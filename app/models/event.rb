@@ -24,49 +24,50 @@
 class Event < ActiveRecord::Base
   resourcify
 
-  has_many :event_choices, -> {order "event_choices.position"}, :dependent => :destroy, :inverse_of => :event
+  has_many :event_choices, -> {order "event_choices.position"}, dependent: :destroy, inverse_of: :event
   accepts_nested_attributes_for :event_choices
 
-  has_many :event_categories, -> { order "event_categories.position"}, :dependent => :destroy, :inverse_of => :event
+  has_many :event_categories, -> { order "event_categories.position"}, dependent: :destroy, inverse_of: :event
   accepts_nested_attributes_for :event_categories
 
-  has_many :registrant_event_sign_ups, :dependent => :destroy, :inverse_of => :event
+  has_many :registrant_event_sign_ups, dependent: :destroy, inverse_of: :event
 
-  has_many :competitions, -> {order "competitions.name"}, :dependent => :destroy, :inverse_of => :event
-  has_many :competitors, :through => :competitions
-  has_many :time_results, :through => :competitors
+  has_many :competitions, -> {order "competitions.name"}, dependent: :destroy, inverse_of: :event
+  has_many :competitors, through: :competitions
+  has_many :time_results, through: :competitors
 
-  belongs_to :category, :inverse_of => :events, :touch => true
+  belongs_to :category, inverse_of: :events, touch: true
+  has_many :songs
 
   acts_as_restful_list scope: :category
 
   def self.music_uploadable
-    visible.where(:accepts_music_uploads => true)
+    visible.where(accepts_music_uploads: true)
   end
 
   def self.visible
-    where(:visible => true)
+    where(visible: true)
   end
 
   def self.artistic
     where(artistic: true)
   end
 
-  validates :name, :presence => true
-  validates :category_id, :presence => true
+  validates :name, presence: true
+  validates :category_id, presence: true
 
   before_validation :build_event_category
 
   def build_event_category
-    if self.event_categories.empty?
-      self.event_categories.build name: "All"
+    if event_categories.empty?
+      event_categories.build name: "All"
     end
   end
 
   validate :has_event_category
 
   def has_event_category
-    if self.event_categories.empty?
+    if event_categories.empty?
       errors[:base] << "Must define an event category"
     end
   end
@@ -90,7 +91,7 @@ class Event < ActiveRecord::Base
   end
 
   def signed_up_registrants
-    registrant_event_sign_ups.signed_up.map{|resu| resu.registrant}.select{|reg| !reg.deleted}
+    registrant_event_sign_ups.signed_up
   end
 
   def competitor_registrants
@@ -105,6 +106,6 @@ class Event < ActiveRecord::Base
     if accepts_music_uploads?
       total += 1
     end
-    total += event_choices.size
+    total + event_choices.size
   end
 end

@@ -1,0 +1,15 @@
+%table.import_results
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Competitor Exists?
+      %th Minutes
+      %th Seconds
+      %th Thousands
+      - if @competition.has_penalty?
+        %th # Penalties
+      %th Disqualified
+      %th
+  %tbody
+    = render partial: 'imported_time_result', collection: @import_results, as: :import_result

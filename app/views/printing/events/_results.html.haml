@@ -1,0 +1,8 @@
+.race_recording
+  %h1
+    = @event
+    Results
+  %hr
+  - @competitions.each do |competition|
+    - @competition = competition
+    = render partial: "/printing/competitions/results"

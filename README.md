@@ -1,7 +1,7 @@
 Registration Site
 =================
 
-[![Build Status](https://travis-ci.org/rdunlop/unicycling-registration.png?branch=master)](https://travis-ci.org/rdunlop/unicycling-registration)
+[![Circle CI](https://circleci.com/gh/rdunlop/unicycling-registration.svg?style=svg)](https://circleci.com/gh/rdunlop/unicycling-registration)
 [![Dependency Status](https://gemnasium.com/rdunlop/unicycling-registration.png)](https://gemnasium.com/rdunlop/unicycling-registration)
 [![Code Climate](https://codeclimate.com/github/rdunlop/unicycling-registration.png)](https://codeclimate.com/github/rdunlop/unicycling-registration)
 
@@ -67,7 +67,6 @@ If we want to add a new language to the list of possible translations:
 * app/views/layouts/application.rb - Ensure that the 'lang' attribute is appropriately set.
 
 * app/views/layouts/_footer.html.haml - Ensure that the link to the language is appropriately tagged/translated.
-
 
 Technical Details
 -----------------
@@ -282,14 +281,6 @@ Set the following settings
 To View the local NewRelic Inforamtion
 
     `http://localhost:9292/newrelic` (when in development or caching modes)
-
-Skylight
---------
-
-We use https://skylight.io for exception and performance monitoring.
-
-Set up a skylight account, and set the token in the config/skylight.yml file
-
 
 Seed Data
 ---------

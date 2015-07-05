@@ -22,15 +22,15 @@
 class TwoAttemptEntry < ActiveRecord::Base
   include FindsMatchingCompetitor
 
-  validates :competition_id, :presence => true
-  validates :user_id, :bib_number, :presence => true
+  validates :competition_id, presence: true
+  validates :user_id, :bib_number, presence: true
   validate :results_for_competition
-  validates :minutes_1, :seconds_1, :thousands_1, :numericality => {:greater_than_or_equal_to => 0}, allow_nil: true
-  validates :minutes_2, :seconds_2, :thousands_2, :numericality => {:greater_than_or_equal_to => 0}, allow_nil: true
+  validates :minutes_1, :seconds_1, :thousands_1, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
+  validates :minutes_2, :seconds_2, :thousands_2, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 
   before_validation :clear_status_of_string
-  validates :status_1, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
-  validates :status_2, :inclusion => { :in => TimeResult.status_values, :allow_nil => true }
+  validates :status_1, inclusion: { in: TimeResult.status_values, allow_nil: true }
+  validates :status_2, inclusion: { in: TimeResult.status_values, allow_nil: true }
   validates :is_start_time, inclusion: { in: [true, false] }
 
   belongs_to :user
@@ -52,26 +52,21 @@ class TwoAttemptEntry < ActiveRecord::Base
       competitor = competition.find_competitor_with_bib_number(bib_number)
     end
 
-    tr1 = build_result_from_imported(minutes_1, seconds_1, thousands_1, status_1)
+    tr1 = build_result(minutes_1, seconds_1, thousands_1, convert_status(status_1))
     tr1.competitor = competitor
+    tr1.entered_at = created_at
+    tr1.entered_by = user
     tr1.is_start_time = is_start_time
     tr1.save!
 
     if minutes_2
-      tr2 = build_result_from_imported(minutes_2, seconds_2, thousands_2, status_2)
+      tr2 = build_result(minutes_2, seconds_2, thousands_2, convert_status(status_2))
       tr2.competitor = competitor
+      tr2.entered_at = created_at
+      tr2.entered_by = user
       tr2.is_start_time = is_start_time
       tr2.save!
     end
-  end
-
-  def build_result_from_imported(minutes, seconds, thousands, status)
-    TimeResult.new(
-      minutes: minutes,
-      seconds: seconds,
-      thousands: thousands,
-      status: status
-      )
   end
 
   def full_time_1
@@ -84,16 +79,31 @@ class TwoAttemptEntry < ActiveRecord::Base
 
   private
 
+  # convert from ImportStatus statuses [nil, DQ]
+  # to TimeresultStatuses ["active", "DQ"]
+  def convert_status(old_status)
+    old_status.nil? ? "active" : old_status
+  end
+
+  def build_result(minutes, seconds, thousands, status)
+    TimeResult.new(
+      minutes: minutes,
+      seconds: seconds,
+      thousands: thousands,
+      status: status
+    )
+  end
+
   def time_is_present?
     minutes_1 && seconds_1 && thousands_1
   end
 
-  def disqualified
+  def disqualified?
     status_1 == "DQ"
   end
 
   def results_for_competition
-    return if disqualified
+    return if disqualified?
     unless time_is_present?
       errors.add(:base, "Must enter time or dq")
     end

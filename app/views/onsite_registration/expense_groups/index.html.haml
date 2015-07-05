@@ -10,5 +10,5 @@
     - @expense_groups.each do |expense_group|
       %tr
         %th= expense_group
-        %th= expense_group.visible
+        %th= expense_group.visible?
         %th= link_to "Toggle", toggle_visibility_onsite_registration_expense_group_path(expense_group), method: :put

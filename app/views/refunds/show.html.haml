@@ -1,0 +1,18 @@
+%h1= t(".refund")
+%p
+  %b Note:
+  = @refund.note
+  %br
+  %b Refund Percentage:
+  = @refund.percentage
+%table.sortable
+  %thead
+    %tr
+      %th Registrant
+      %th Item
+  %tbody
+    - @refund.refund_details.each do |detail|
+      %tr
+        %td= detail.registrant
+        %td= detail
+= link_to t('back'), user_payments_path(current_user)

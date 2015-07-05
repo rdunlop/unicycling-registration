@@ -1,6 +1,7 @@
 %h1= @competition
 - if can? :update, @competition
   = link_to 'Edit', edit_competition_path(@competition)
+  = @competition.event_class
 
 %p Manage Competitors, Judges, Volunteers and Results.
 

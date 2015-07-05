@@ -18,7 +18,7 @@
 #  usa_member_number               :string(255)
 #  emergency_name                  :string(255)
 #  emergency_relationship          :string(255)
-#  emergency_attending             :boolean
+#  emergency_attending             :boolean          default(FALSE), not null
 #  emergency_primary_phone         :string(255)
 #  emergency_other_phone           :string(255)
 #  responsible_adult_name          :string(255)
@@ -42,7 +42,7 @@ describe ContactDetail do
   before(:each) do
     FactoryGirl.create(:event_configuration, :with_usa)
     @reg = FactoryGirl.build_stubbed(:registrant)
-    @cd = FactoryGirl.build_stubbed(:contact_detail, :registrant => @reg)
+    @cd = FactoryGirl.build_stubbed(:contact_detail, registrant: @reg)
     allow(@reg).to receive(:age).and_return(20)
   end
 

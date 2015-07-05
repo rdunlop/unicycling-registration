@@ -1,0 +1,39 @@
+%h1
+  = @standard_skill_routine.registrant
+  \- Standard Skill Routine
+%p
+  You may have a maximum of 18 skills in your program.
+  %br
+  If you have more than 12 skills in your program, a maximum of 12 skills may be non-riding skills (Skill numbers above 100).
+  %br
+  All skills must have a different skill number.
+- if false #!@config.standard_skill_entry_editable
+  %h2.closed Standard Skill Entry is now closed. See you soon
+- else
+  %p
+    %b Your list of skills is automatically saved each time you make changes to it.
+%p
+  You can see a #{link_to 'list of all approved skills here', standard_skill_entries_path}
+%table#skills
+  %thead
+    %tr
+      %th Position#
+      %th Skill Number
+      %th Letter
+      %th Points
+      %th Description
+      %th Remove
+  %tbody
+    = render :partial => '/standard_skill_routine_entries/skill_entry', :collection => @entries
+  %tfoot
+    %tr
+      %td
+      %td
+      %th Total
+      %th#skill_total= @total
+      %td
+      %td
+%hr
+- if can? :create, StandardSkillRoutineEntry
+  %h3 Add new Standard Skill Entry
+  = render :partial => 'form', :object => @entry

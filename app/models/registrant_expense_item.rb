@@ -24,18 +24,22 @@ class RegistrantExpenseItem < ActiveRecord::Base
   include HasDetailsDescription
 
   belongs_to :registrant, touch: true
-  belongs_to :expense_item, :inverse_of => :registrant_expense_items
+  belongs_to :expense_item, inverse_of: :registrant_expense_items
 
-  has_paper_trail :meta => { :registrant_id => :registrant_id }
+  has_paper_trail meta: { registrant_id: :registrant_id }
 
-  validates :expense_item, :registrant, :presence => true
-  validate :only_one_free_per_expense_group, :on => :create
-  validate :no_more_than_max_per_registrant, :on => :create
+  validates :expense_item, :registrant, presence: true
+  validate :only_one_free_per_expense_group, on: :create
+  validate :no_more_than_max_per_registrant, on: :create
   validate :custom_cost_present
 
   monetize :custom_cost_cents, allow_nil: true
 
-  delegate :has_details, :details_label, to: :expense_item
+  delegate :has_details?, :details_label, to: :expense_item
+
+  def self.free
+    where(free: true)
+  end
 
   def self.cache_set_field
     :expense_item_id
@@ -43,13 +47,13 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   def to_s
     ret = expense_item.to_s
-    ret += " (locked)" if self.locked
+    ret += " (locked)" if locked
     ret
   end
 
   def custom_cost_present
-    if !expense_item.nil? && expense_item.has_custom_cost
-      if self.custom_cost_cents.nil? || self.custom_cost_cents <= 0
+    if !expense_item.nil? && expense_item.has_custom_cost?
+      if custom_cost_cents.nil? || custom_cost_cents <= 0
         errors[:base] << "Must specify a custom cost for this item"
       end
     end
@@ -57,7 +61,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   def cost
     return 0 if free
-    return custom_cost if expense_item.has_custom_cost
+    return custom_cost if expense_item.has_custom_cost?
 
     expense_item.cost
   end

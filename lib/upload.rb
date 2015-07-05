@@ -56,7 +56,7 @@ class Upload
     results
   end
 
-  def convert_timing_csv_to_hash(arr, time_column_number = nil)
+  def convert_timing_csv_to_hash(arr, _time_column_number = nil)
     results = {}
 
     results[:bib] = arr[@bib_number_column_number].to_i
@@ -104,9 +104,9 @@ class Upload
     end
 
     index = seconds_and_hundreds.index(".")
-    results[:seconds] = seconds_and_hundreds[0..(index-1)].to_i
+    results[:seconds] = seconds_and_hundreds[0..(index - 1)].to_i
 
-    thous = seconds_and_hundreds[(index+1)..-1]
+    thous = seconds_and_hundreds[(index + 1)..-1]
     if thous.length == 1
       results[:thousands] = thous.to_i * 100
     else
@@ -118,9 +118,9 @@ class Upload
     return arr[@time_column_number] unless @time_column_number.nil?
 
     if arr.count == 11
-      full_time = arr[5]
+      arr[5]
     else
-      full_time = arr[6]
+      arr[6]
     end
   end
 end

@@ -56,6 +56,6 @@ class ConventionSetup::CategoriesController < ConventionSetupController
 
   def category_params
     params.require(:category).permit(:name, :info_url,
-                                     :translations_attributes => [:id, :locale, :name])
+                                     translations_attributes: [:id, :locale, :name])
   end
 end

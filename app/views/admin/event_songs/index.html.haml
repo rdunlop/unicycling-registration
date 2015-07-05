@@ -1,0 +1,15 @@
+%h2 All Songs
+
+%table.sortable
+  %thead
+    %tr
+      %th Event
+      %th Competition
+      %th # Event Uploaded Songs
+  %tbody
+    - @event.each do |event|
+      - event.competitions.each do |competition|
+        %tr
+          %td= link_to event, event_song_path(event)
+          %td= link_to competition, competition_song_path(competition)
+          %td= event.songs.count

@@ -1,14 +1,11 @@
 # see https://github.com/sosedoff/capistrano-unicorn/blob/master/examples/rails3.rb
 # see https://ariejan.net/2011/09/14/lighting-fast-zero-downtime-deployments-with-git-capistrano-nginx-and-unicorn/
 
-# env
-env = ENV['RAILS_ENV'] || "stage"
-
 # workers
 worker_processes 1
 
 # listen
-listen "/tmp/unicorn-unicycling-registrationtest.socket", :backlog => 64
+listen "/tmp/unicorn-unicycling-registrationtest.socket", backlog: 64
 
 # preload
 preload_app true
@@ -23,12 +20,12 @@ stderr_path "log/unicorn.stderr.log"
 stdout_path "log/unicorn.stdout.log"
 
 # use correct Gemfile
-before_exec do |server|
+before_exec do |_server|
   ENV['BUNDLE_GEMFILE'] = "#{app_path}/current/Gemfile"
 end
 
 # zero downtime
-before_fork do |server, worker|
+before_fork do |server, _worker|
   # the following is highly recomended for Rails + "preload_app true"
   # as there's no need for the master process to hold a connection
   if defined?(ActiveRecord::Base)
@@ -47,7 +44,7 @@ before_fork do |server, worker|
   end
 end
 
-after_fork do |server, worker|
+after_fork do |_server, _worker|
   if defined?(ActiveRecord::Base)
     ActiveRecord::Base.establish_connection
   end

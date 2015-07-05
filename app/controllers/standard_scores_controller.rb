@@ -2,15 +2,7 @@ class StandardScoresController < ApplicationController
   before_action :authenticate_user!
 
   before_action :find_judge
-  before_action :find_competitor, :except => [:index]
-
-  def find_judge
-    @judge = Judge.find(params[:judge_id])
-  end
-
-  def find_competitor
-    @competitor = Competitor.find(params[:competitor_id])
-  end
+  before_action :find_competitor, except: [:index]
 
   # GET /judges/29/standard_scores
   def index
@@ -27,8 +19,8 @@ class StandardScoresController < ApplicationController
   # GET /judges/29/competitors/4/new
   def new
     @skills = @competitor.registrants.first.standard_skill_routine.standard_skill_routine_entries
-    existing_scores =            @judge.standard_execution_scores.where(:competitor_id => @competitor.id)
-    existing_difficulty_scores = @judge.standard_difficulty_scores.where(:competitor_id => @competitor.id)
+    existing_scores =            @judge.standard_execution_scores.where(competitor_id: @competitor.id)
+    existing_difficulty_scores = @judge.standard_difficulty_scores.where(competitor_id: @competitor.id)
 
     existing_scores.each do |s|
       authorize! :read, s
@@ -60,5 +52,15 @@ class StandardScoresController < ApplicationController
         new_score.save!
       end
     end
+  end
+
+  private
+
+  def find_judge
+    @judge = Judge.find(params[:judge_id])
+  end
+
+  def find_competitor
+    @competitor = Competitor.find(params[:competitor_id])
   end
 end

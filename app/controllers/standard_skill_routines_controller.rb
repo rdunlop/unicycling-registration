@@ -1,17 +1,9 @@
 require 'csv'
 class StandardSkillRoutinesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_new_standard_skill_routine, :only => [:create]
+  before_action :load_new_standard_skill_routine, only: [:create]
   load_and_authorize_resource
-  before_action :load_registrant, :only => [:create]
-
-  def load_new_standard_skill_routine
-    @routine = StandardSkillRoutine.new
-  end
-
-  def load_registrant
-    @registrant = Registrant.find(params[:registrant_id])
-  end
+  before_action :load_registrant, only: [:create]
 
   # POST /registrants/:id/standard_skill_routines/
   def create
@@ -53,7 +45,17 @@ class StandardSkillRoutinesController < ApplicationController
 
     filename = "standard_skills.txt"
     send_data(csv_string,
-              :type => 'text/csv; charset=utf-8; header=present',
-              :filename => filename)
+              type: 'text/csv; charset=utf-8; header=present',
+              filename: filename)
+  end
+
+  private
+
+  def load_new_standard_skill_routine
+    @routine = StandardSkillRoutine.new
+  end
+
+  def load_registrant
+    @registrant = Registrant.find(params[:registrant_id])
   end
 end

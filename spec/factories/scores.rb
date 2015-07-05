@@ -24,7 +24,7 @@
 
 FactoryGirl.define do
   factory :score do
-    association :competitor, :factory => :event_competitor
+    association :competitor, factory: :event_competitor
     judge
     val_1 1.1
     val_2 1.2

@@ -29,7 +29,7 @@
       %tr
         %td= registrant.bib_number
         %td= registrant.to_s
-        %td= link_to "Mark Eligible", ineligible_registrant_path(registrant), method: :delete
+        %td= link_to "Mark Eligible", ineligible_registrant_path(registrant.id), method: :delete
 
 %hr
 %h2 Add New Ineligible Registrant

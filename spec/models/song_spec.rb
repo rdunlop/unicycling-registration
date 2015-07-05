@@ -10,9 +10,11 @@
 #  updated_at     :datetime
 #  event_id       :integer
 #  user_id        :integer
+#  competitor_id  :integer
 #
 # Indexes
 #
+#  index_songs_on_competitor_id                           (competitor_id) UNIQUE
 #  index_songs_on_user_id_and_registrant_id_and_event_id  (user_id,registrant_id,event_id) UNIQUE
 #  index_songs_registrant_id                              (registrant_id)
 #
@@ -37,7 +39,7 @@ describe Song do
 
   describe "with a song created" do
     let(:registrant) { FactoryGirl.create(:registrant) }
-    let!(:song1) { FactoryGirl.create(:song, :registrant => registrant)}
+    let!(:song1) { FactoryGirl.create(:song, registrant: registrant)}
 
     it "cannot create a second song for the same event for the same registrant"  do
       song2 = FactoryGirl.build(:song, registrant: registrant, event: song1.event, user: song1.user)

@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :user, only: :index
-  load_and_authorize_resource :except => [:registrant_payments]
+  load_and_authorize_resource except: [:registrant_payments]
 
   before_action :set_payments_breadcrumb
 
@@ -34,7 +34,7 @@ class PaymentsController < ApplicationController
   # /payments/summary
   def summary
     add_payment_summary_breadcrumb
-    @expense_items = ExpenseItem.includes(:translations, :expense_group => [:translations]).ordered
+    @expense_items = ExpenseItem.includes(:translations, expense_group: [:translations]).ordered
   end
 
   # GET /payments/1
@@ -94,7 +94,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(:payment_details_attributes => [:amount, :registrant_id, :expense_item_id, :details, :free, :_destroy])
+    params.require(:payment).permit(payment_details_attributes: [:amount, :registrant_id, :expense_item_id, :details, :free, :_destroy])
   end
 
   def set_payments_breadcrumb

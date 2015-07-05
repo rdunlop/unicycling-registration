@@ -1,0 +1,14 @@
+%h1 Standard-Skill Entries
+%p These are the available Standard Skill entries
+%table
+  %tr
+    %th Number
+    %th Letter
+    %th Points
+    %th Description
+  - @standard_skill_entries.each do |entry|
+    %tr
+      %td= entry.number
+      %td= entry.letter
+      %td= entry.points
+      %td= entry.description

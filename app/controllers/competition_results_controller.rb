@@ -28,9 +28,9 @@ class CompetitionResultsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {
+      format.html do
         redirect_to @competition_result.competition
-      }
+      end
     end
   end
 

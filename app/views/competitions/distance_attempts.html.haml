@@ -1,0 +1,28 @@
+%h1
+  Distance Attempts - #{@competition}
+= render :partial => "/competitions/results"
+.scores
+  %h3
+    = @competition
+    Best Successful Attempts
+  %table.distance_attempts.sortable
+    %thead
+      %tr
+        %th ID
+        %th Name
+        %th Distance
+        %th Age Group
+        %th Place
+        %th Overall Place
+    %tbody
+      - @competition.best_distance_attempts.each do |da|
+        %tr
+          %td= da.competitor.bib_number
+          %td= da.competitor.name
+          %td= da.distance
+          %td= da.competitor.age_group_entry_description
+          %td= da.competitor.place
+          %td= da.competitor.overall_place_formatted
+  %hr
+  - if can? :export_scores, @competition
+    = link_to 'Download Scores CSV', export_scores_competition_path(@competition)

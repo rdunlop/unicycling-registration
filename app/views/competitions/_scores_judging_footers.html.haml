@@ -1,0 +1,13 @@
+// Locals: judges, judge_type, anonymous
+- total_judge_columns = 4 + (judges.count * (judge_type.num_columns + 2))
+
+%tr.non_printable.js--hiddenToggle
+  %th{ colspan: 3 }
+
+  - judges.each_with_index do |judge, index|
+    %th{ colspan: judge_type.num_columns + 2, class: "judge_status_#{judge.status}" }
+      = link_to "DQ Judge Scores", toggle_status_judge_path(judge), method: :put, class: "nonfocus_button", data: { confirm: "This will toggle whether the scores are included or not in the calculation. Continue?" }
+  %th
+%tr
+  %th{ colspan: total_judge_columns }
+    = link_to "View Judge DQ Options", '', class: "js--hiddenToggleMenu"

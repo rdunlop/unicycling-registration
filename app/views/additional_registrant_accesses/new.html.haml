@@ -1,0 +1,11 @@
+%h1 New Registrant Access Request
+%p
+  Creating a new Registrant Access request will send an e-mail to the registrant, requesting access.
+  The email will contain:
+  %ul
+    %li Your e-mail address
+    %li A link to accept/decline the request
+  When you have been granted access, you will also receive an e-mail.
+  %br
+= render 'form'
+= link_to 'Back', user_additional_registrant_accesses_path(@user)

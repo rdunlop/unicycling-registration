@@ -1,15 +1,11 @@
 class ScoresController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :judge # requires that the current user is able to access the judge, thus hiding scores
-  before_action :find_competitor, :except => [:index]
-  before_action :find_or_create_score, :only => [:create, :new] # must be performed before load_and_auth_resource
+  before_action :find_competitor, except: [:index]
+  before_action :find_or_create_score, only: [:create, :new] # must be performed before load_and_auth_resource
   load_and_authorize_resource
 
   before_action :set_judge_breadcrumb
-
-  def find_competitor
-    @competitor = Competitor.find_by_id(params[:competitor_id])
-  end
 
   # GET /judges/1/scores
   def index
@@ -22,7 +18,7 @@ class ScoresController < ApplicationController
   def new
     add_breadcrumb "Set Score"
 
-    if @judge.judge_type.boundary_calculation_enabled
+    if @judge.judge_type.boundary_calculation_enabled?
       @boundary_score = @competitor.boundary_scores.new
     end
     respond_to do |format|
@@ -47,6 +43,10 @@ class ScoresController < ApplicationController
   end
 
   private
+
+  def find_competitor
+    @competitor = Competitor.find_by_id(params[:competitor_id])
+  end
 
   def score_params
     params.require(:score).permit(:val_1, :val_2, :val_3, :val_4, :notes)

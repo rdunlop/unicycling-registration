@@ -1,0 +1,39 @@
+%h2 #{@competition} Songs
+
+%p
+  This page lists all songs which were uploaded for #{@competition.event} AND the registrant is listed as a competitor.
+
+%p
+  Each song must be assigned to a competitor
+
+%table.sortable
+  %thead
+    %tr
+      %th Reg ID
+      %th Reg Name
+      %th Description
+      %th File name
+      %th Updated Date
+      %th Download
+      %th Competitor
+      %th Assign
+  %tbody
+    - @songs.each do |song|
+      %tr
+        %td= song.registrant.bib_number
+        %td= song.registrant
+        %td= song.description
+        %td= song.human_name
+        %td= song.updated_at
+        %td
+          - if song.song_file_name.present?
+            = link_to 'Download', song.song_file_name_url, target: '_blank'
+        %td.js--highlightIfBlank= song.competitor
+        %td
+          = form_tag(competition_songs_path, method: :post) do
+            = hidden_field_tag :competition_id, @competition.id
+            = hidden_field_tag :song_id, song.id
+            = no_form_competitor_select_box(@competition)
+            = submit_tag "Assign"
+
+= link_to "Download Zip of Songs", competition_song_download_zip_path(@competition)

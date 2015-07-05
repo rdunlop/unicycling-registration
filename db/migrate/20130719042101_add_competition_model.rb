@@ -8,7 +8,7 @@ class AddCompetitionModel < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :competitions, ["event_id"], :name => "index_competitions_event_id"
+    add_index :competitions, ["event_id"], name: "index_competitions_event_id"
 
     # Associate competitors with the competition
     rename_column :competitors, :event_category_id, :competition_id

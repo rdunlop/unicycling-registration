@@ -23,12 +23,12 @@
 class BoundaryScore < ActiveRecord::Base
   include Judgeable
 
-  validates :number_of_people, :presence => true, :numericality => {:greater_than => 0}
+  validates :number_of_people, presence: true, numericality: {greater_than: 0}
 
-  validates :major_dismount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
-  validates :minor_dismount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
-  validates :major_boundary, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
-  validates :minor_boundary, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+  validates :major_dismount, presence: true, numericality: {greater_than_or_equal_to: 0}
+  validates :minor_dismount, presence: true, numericality: {greater_than_or_equal_to: 0}
+  validates :major_boundary, presence: true, numericality: {greater_than_or_equal_to: 0}
+  validates :minor_boundary, presence: true, numericality: {greater_than_or_equal_to: 0}
 
   def total
     major_dismount_devalue = 1
@@ -44,10 +44,7 @@ class BoundaryScore < ActiveRecord::Base
       people_scale = number_of_people / 2.0
     end
 
-    result = 10 - (((self.major_dismount * major_dismount_devalue)     +
-     (self.major_boundary * major_boundary_devalue)     +
-     (self.minor_dismount * minor_dismount_devalue)     +
-     (self.minor_boundary * minor_boundary_devalue)) / people_scale)
+    result = 10 - (((major_dismount * major_dismount_devalue) + (major_boundary * major_boundary_devalue) + (minor_dismount * minor_dismount_devalue) + (minor_boundary * minor_boundary_devalue)) / people_scale)
 
     if result < 0
       0

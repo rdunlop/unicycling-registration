@@ -22,7 +22,7 @@
 
 FactoryGirl.define do
   factory :standard_execution_score do
-    association :competitor, :factory => :event_competitor
+    association :competitor, factory: :event_competitor
     standard_skill_routine_entry # FactoryGirl
     judge # FactoryGirl
     wave 1

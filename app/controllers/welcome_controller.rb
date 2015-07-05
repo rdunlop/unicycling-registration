@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  before_action :authenticate_user!, :only => [:index, :data_entry_menu]
+  before_action :authenticate_user!, only: [:index, :data_entry_menu]
   skip_authorization_check only: [:index, :help, :feedback, :confirm]
   authorize_resource class: false, only: [:data_entry_menu]
 
@@ -54,7 +54,7 @@ class WelcomeController < ApplicationController
   # This tries to get around the apple-touch-icon.png requests
   #  and the humans.txt requests
   def check_acceptable_format
-    if ["txt", "png"].include?(params[:format] )
+    if ["txt", "png"].include?(params[:format])
       params[:format] = nil
       raise ActiveRecord::RecordNotFound.new
     end

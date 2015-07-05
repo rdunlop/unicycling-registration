@@ -1,0 +1,44 @@
+%h1 Listing payments And Refunds
+%br
+%br
+%table.sortable
+  %thead
+    %tr
+      %th Payment ID
+      %th User
+      %th Completed
+      %th Cancelled
+      %th Transaction
+      %th Note
+      %th Completed date
+      %th Payment date
+      %th
+  %tbody
+    - @payments.each do |payment|
+      %tr
+        %td= payment.id
+        %td= payment.user
+        %td= payment.completed
+        %td= payment.cancelled
+        %td= payment.transaction_id
+        %td= payment.note
+        %td= payment.completed_date
+        %td= payment.payment_date
+        %td= link_to 'Show', payment
+%br
+%table.sortable
+  %thead
+    %tr
+      %th Refund ID
+      %th User
+      %th Note
+      %th Refund Date
+      %th
+  %tbody
+    - @refunds.each do |refund|
+      %tr
+        %td= refund.id
+        %td= refund.user
+        %td= refund.note
+        %td= refund.refund_date
+        %td= link_to 'Show', refund

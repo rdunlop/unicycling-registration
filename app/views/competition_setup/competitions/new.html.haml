@@ -1,0 +1,17 @@
+%h1 New #{@event} Competition
+%p
+  If you have multiple sets of people competing at the same time, and their scores are judged against each other, choose "age-group"
+%p
+  If each set of competitors is independent, choose "without age groups"
+%p
+  If this competition is a summary of the placings of other competitions, choose "Overall"
+
+%p
+  %b NOTE:
+  This will only create the competition.
+
+%p
+  The Event Director will need to assign/randomize the competitor list.
+
+%fieldset.form__fieldset
+  = render 'form'

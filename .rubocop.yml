@@ -1,4 +1,12 @@
 AllCops:
   Exclude:
-    - 'vagrant_postgres91_utf8_rails/**/*'
+    - ".bundle/**/*" # Auto-generated
+    - "bin/**/*" # Auto-generated
+    - "db/schema.rb" # Auto-generated
+  RunRailsCops: true
+
 inherit_from: .rubocop_todo.yml
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+  Enabled: true

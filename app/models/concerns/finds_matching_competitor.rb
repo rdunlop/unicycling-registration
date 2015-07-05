@@ -9,7 +9,7 @@ module FindsMatchingCompetitor
   end
 
   def matching_competitor
-    @matching_competitor ||= matching_registrant.competitors.where(competition: competition).first if matching_registrant
+    @matching_competitor ||= matching_registrant.competitors.find_by(competition: competition) if matching_registrant
   end
 
   def competitor_exists?

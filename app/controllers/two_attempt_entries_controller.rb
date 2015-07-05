@@ -1,8 +1,8 @@
 class TwoAttemptEntriesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :user
-  before_action :load_competition, :only => [:index, :proof, :create, :approve]
-  before_action :load_new_two_attempt_entry, :only => [:create]
+  before_action :load_competition, only: [:index, :proof, :create, :approve]
+  before_action :load_new_two_attempt_entry, only: [:create]
   before_action :set_is_start_time, only: [:index, :proof, :approve]
   before_action :load_two_attempt_entries, only: [:index, :proof, :approve]
   load_and_authorize_resource
@@ -39,8 +39,6 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   def destroy
-    user = @two_attempt_entry.user
-    competition = @two_attempt_entry.competition
     @two_attempt_entry.destroy
 
     respond_to do |format|
@@ -129,4 +127,3 @@ class TwoAttemptEntriesController < ApplicationController
     @is_start_time = params[:is_start_times] && params[:is_start_times] == "true"
   end
 end
-

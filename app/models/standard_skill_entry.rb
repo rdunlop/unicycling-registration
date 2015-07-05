@@ -16,10 +16,10 @@
 #
 
 class StandardSkillEntry < ActiveRecord::Base
-  has_many :standard_skill_routine_entries, :dependent => :destroy
+  has_many :standard_skill_routine_entries, dependent: :destroy
 
-  validates :number, :points, :description, :presence => true
-  validates :letter, :presence => true, :uniqueness => {:scope => :number } # not allowed to have the same number/letter pair twice
+  validates :number, :points, :description, presence: true
+  validates :letter, presence: true, uniqueness: {scope: :number } # not allowed to have the same number/letter pair twice
 
   default_scope { order('number, letter') }
 
@@ -31,11 +31,11 @@ class StandardSkillEntry < ActiveRecord::Base
   end
 
   def fullDescription
-    self.skill_number_and_letter + " - " + self.description
+    skill_number_and_letter + " - " + description
   end
 
   def skill_number_and_letter
-    self.number.to_s + "" + self.letter
+    number.to_s + "" + letter
   end
 
   def non_riding_skill

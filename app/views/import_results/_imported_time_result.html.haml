@@ -1,0 +1,12 @@
+- cache [import_result, Registrant, import_result.competition] do
+  %tr
+    %td= import_result.bib_number
+    = render partial: "matching_registrant_cell", locals: { import_result: import_result }
+    %td= import_result.minutes
+    %td= import_result.seconds
+    %td= import_result.thousands
+    - if import_result.competition.has_penalty?
+      %td= import_result.number_of_penalties
+    %td= import_result.disqualified? ? "Yes" : ""
+    %td= link_to 'Edit', edit_import_result_path(import_result)
+    %td= link_to 'Delete', import_result, method: :delete, data: { confirm: 'Are you sure?' }

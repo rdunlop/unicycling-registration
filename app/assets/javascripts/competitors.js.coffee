@@ -39,7 +39,7 @@ $ ->
   $(".js--hiddenToggleMenu").each ->
     $(this).on "click", ->
       $(".js--hiddenToggle").toggle()
-
+      return false
 
 $ ->
   $(".js--shouldNotMatchSet").each ->

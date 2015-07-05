@@ -1,0 +1,7 @@
+- if !competitor.new_record?
+  %tr
+    %td= competitor.position
+    %td= competitor.bib_number
+    %td= competitor.name
+    %td
+      = link_to 'score', new_judge_competitor_standard_score_path(@judge, competitor)

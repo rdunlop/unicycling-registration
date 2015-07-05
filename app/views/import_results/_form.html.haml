@@ -4,7 +4,7 @@
   = f.hidden_field :is_start_time
 
   - cache ['description', @competition] do
-    - unless @competition.imports_times
+    - if @competition.imports_points?
       %p.detailsDescription
         The Points are used to calculate the result. The Details will be printed on the medals.
         %br
@@ -20,7 +20,7 @@
           %th ID
           %th Name
           %th Competitor Exists?
-          - if @competition.imports_times
+          - if @competition.imports_times?
             %th Minutes
             %th Seconds
             %th Thousands
@@ -33,13 +33,17 @@
           %th
           %th
     %tbody
-      = render partial: 'import_result', collection: @import_results
+      - if @competition.imports_times?
+        = render partial: 'imported_time_result', collection: @import_results, as: :import_result
+      - else
+        = render partial: 'imported_points_result', collection: @import_results, as: :import_result
+
 
     %tfoot
       %tr
         %td{ colspan: 2}= registrant_bib_number_select_box(f, @competition)
         %td
-        - if @competition.imports_times
+        - if @competition.imports_times?
           %td= f.number_field :minutes, {:min => 0}
           %td= f.number_field :seconds, {:min => 0}
           %td= f.number_field :thousands, {:min => 0}

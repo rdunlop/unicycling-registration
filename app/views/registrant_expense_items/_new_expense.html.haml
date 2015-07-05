@@ -2,7 +2,7 @@
   %td
     = item.name
   %td
-    - unless item.has_custom_cost
+    - unless item.has_custom_cost?
       = print_item_cost_currency(item.total_cost)
   %td
     = form_for [@registrant, @registrant_expense_item] do |ff|
@@ -11,11 +11,11 @@
       = ff.hidden_field :expense_item_id
       - if show_as_free
         = ff.hidden_field :free, {:value => 1}
-      - if @registrant_expense_item.has_details
+      - if @registrant_expense_item.has_details?
         = ff.label :details, @registrant_expense_item.details_label
         \:
         \#{ff.text_field :details}
-      - if item.has_custom_cost
+      - if item.has_custom_cost?
         (#{@config.currency_code})
         \#{ff.number_field :custom_cost, {min: 0}}
       - if show_as_free
