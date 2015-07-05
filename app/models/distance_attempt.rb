@@ -30,7 +30,7 @@ class DistanceAttempt < ActiveRecord::Base
   validates :distance,      presence: true, numericality: {greater_than_or_equal_to: 0, less_than: 1000}
 
   validate :must_not_have_new_attempt_less_than_existing_attempt
-  validate :cannot_have_new_attempts_after_double_fault
+  validate :cannot_have_new_attempts_after_certain_jumps
 
   def self.cache_set_field
     :competitor_id
@@ -46,11 +46,11 @@ class DistanceAttempt < ActiveRecord::Base
     end
   end
 
-  def cannot_have_new_attempts_after_double_fault
+  def cannot_have_new_attempts_after_certain_jumps
     if new_record?
       unless competitor.nil? || distance.nil?
-        if competitor(true).double_fault?
-          errors[:base] << "Unable to make new attempts after having double fault (fault_distance: #{competitor.max_attempted_distance})"
+        if competitor(true).no_more_jumps?
+          errors[:base] << "Unable to make new attempts - #{competitor.distance_attempt_status}"
         end
       end
     end

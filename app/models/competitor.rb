@@ -395,87 +395,14 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  # for distance_attempt logic, there are certain 'states' that a competitor can get into
-  def double_fault?
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{DistanceAttempt.cache_key_for_set(id)}/double_fault") do
-      df = false
-      if distance_attempts.count > 1
-        if distance_attempts[0].fault? && distance_attempts[1].fault? && distance_attempts[0].distance == distance_attempts[1].distance
-          df = true
-        end
-      end
+  delegate :max_attempted_distance, :has_attempt?, :has_successful_attempt?,
+    :max_successful_distance, :max_successful_distance_attempt,
+    :distance_attempt_status,
+    :no_more_jumps?,
+    to: :distance_manager
 
-      df
-    end
-  end
-
-  def distance_attempt_cache_key_base
-    "/competitor/#{id}-#{updated_at}/#{DistanceAttempt.cache_key_for_set(id)}/"
-  end
-
-  def single_fault?
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/single_fault?") do
-      if distance_attempts.count > 0
-        distance_attempts.first.fault?
-      else
-        false
-      end
-    end
-  end
-
-  def max_attempted_distance
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_attempted_distance") do
-      return 0 unless distance_attempts.any?
-
-      distance_attempts.first.distance
-    end
-  end
-
-  def max_successful_distance
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance") do
-      max_successful_distance_attempt.try(:distance) || 0
-    end
-  end
-
-  def max_successful_distance_attempt
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance_attempt") do
-      distance_attempts.find_by(fault: false)
-    end
-  end
-
-  def best_distance_attempt
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/best_distance_attempt") do
-      # best non-fault result, or, if there are none of those, best result (which will be a fault)
-      max_successful_distance_attempt || distance_attempts.first
-    end
-  end
-
-  def distance_attempt_status_code
-    if double_fault?
-      "double_fault"
-    else
-      if single_fault?
-        "single_fault"
-      else
-        "can_attempt"
-      end
-    end
-  end
-
-  def distance_attempt_status
-    if distance_attempts.count == 0
-      "Not Attempted"
-    else
-      if double_fault?
-        "Finished. Final Score #{max_successful_distance}"
-      else
-        if single_fault?
-          "Fault. Next Distance #{max_attempted_distance}+"
-        else
-          "Success. Next Distance #{max_attempted_distance + 1}+"
-        end
-      end
-    end
+  def distance_manager
+    @distance_manager ||= DistanceAttemptFinalManager.new(self)
   end
 
   def is_top?(search_gender)

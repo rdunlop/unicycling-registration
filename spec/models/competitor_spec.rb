@@ -369,25 +369,25 @@ describe Competitor do
       expect(DistanceAttempt.count).to eq(0)
     end
 
-    it "should indicate double_fault if two attempts at the same distance are found" do
-      expect(@comp.double_fault?).to eq(false)
+    it "should indicate no_more_jumps if two attempts at the same distance are found" do
+      expect(@comp.no_more_jumps?).to eq(false)
       FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
-      expect(@comp.reload.double_fault?).to eq(false)
+      expect(@comp.reload.no_more_jumps?).to eq(false)
 
       Delorean.jump 2
       FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
 
-      expect(@comp.reload.double_fault?).to eq(true)
+      expect(@comp.reload.no_more_jumps?).to eq(true)
     end
 
-    it "should NOT indicate double_fault if two consecutive attempts at different distances are found" do
-      expect(@comp.double_fault?).to eq(false)
+    it "should NOT indicate no_more_jumps if two consecutive attempts at different distances are found" do
+      expect(@comp.no_more_jumps?).to eq(false)
       da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
-      expect(@comp.reload.double_fault?).to eq(false)
+      expect(@comp.reload.no_more_jumps?).to eq(false)
       Delorean.jump 2
       FactoryGirl.create(:distance_attempt, distance: da1.distance + 1, competitor: @comp, fault: true)
 
-      expect(@comp.reload.double_fault?).to eq(false)
+      expect(@comp.reload.no_more_jumps?).to eq(false)
     end
 
     it "should return the max attempted distance" do
@@ -437,7 +437,7 @@ describe Competitor do
         FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
         da = FactoryGirl.build(:distance_attempt, competitor: @comp, distance: 25, fault: false)
 
-        expect(@comp.reload.double_fault?).to eq(true)
+        expect(@comp.reload.no_more_jumps?).to eq(true)
         expect(da.valid?).to eq(false)
       end
 
@@ -446,7 +446,7 @@ describe Competitor do
           @da2 = FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
         end
         it "should allow the 2nd attempt to also be a fault" do
-          expect(@comp.reload.double_fault?).to eq(true)
+          expect(@comp.reload.no_more_jumps?).to eq(true)
           expect(@da2.valid?).to eq(true)
         end
         it "should describe the status" do

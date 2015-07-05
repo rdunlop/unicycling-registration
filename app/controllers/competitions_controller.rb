@@ -77,10 +77,9 @@ class CompetitionsController < ApplicationController
       csv_string = CSV.generate do |csv|
         csv << ['registrant_external_id', 'distance']
         @competition.competitors.each do |comp|
-          da = comp.max_successful_distance
-          if da != 0
+          if comp.has_result?
             csv << [comp.export_id,
-                    da]
+                    comp.result]
           end
         end
       end

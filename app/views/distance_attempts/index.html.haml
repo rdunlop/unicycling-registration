@@ -8,8 +8,6 @@
   .recent_attempt_list
     = render partial: "attempt_list", locals: {title: "Recent Attempts", list: @recent_distance_attempts, display_delete: true }
     (only the recent  ~20 are listed)
-  -#.best_attempts_list
-    = render partial: "attempt_list", locals: {title: "Best Attempts", list: @max_distance_attempts, display_delete: false }
 
 %hr
 

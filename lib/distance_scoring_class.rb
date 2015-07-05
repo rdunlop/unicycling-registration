@@ -1,7 +1,7 @@
 class DistanceScoringClass < BaseScoringClass
   def scoring_description
-    "Å competitor can attempt repeatedly, scoring higher distances. Eventually the competitor
-    will double-fault, and their last successful distance will be their final score.
+    "Å competitor can attempt repeatedly, scoring higher distances.
+    Their last successful distance will be their final score.
     The competitor with the highest max distance will win."
   end
 
@@ -23,8 +23,8 @@ class DistanceScoringClass < BaseScoringClass
   end
 
   def competitor_dq?(competitor)
-    return false if competitor.best_distance_attempt.nil?
-    competitor.best_distance_attempt.fault?
+    return false unless competitor.has_attempt?
+    !competitor.has_successful_attempt?
   end
 
   # Used when trying to destroy all results for a competition

@@ -16,7 +16,7 @@
         - next unless tba.persisted?
         - cache [tba] do
           %tr
-            %td= tba.competitor.max_successful_distance
+            %td= tba.competitor.result
             %td= tba.competitor.age_group_entry_description
             %td= tba.competitor.bib_number
             %td= tba.competitor.to_s
