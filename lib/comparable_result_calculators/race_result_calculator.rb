@@ -13,7 +13,7 @@ class RaceResultCalculator
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.time_results.any?
+    competitor.time_results.finish_times.any?
   end
 
   # returns the result for this competitor
