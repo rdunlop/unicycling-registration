@@ -42,7 +42,7 @@ class Email
       "User Accounts with ANY Registrants who have NOT Paid Reg Fees"
     elsif no_reg_accounts
       "User Accounts with No Registrants"
-    elsif competition_id.any?
+    elsif competitions.any?
       "Emails of users/registrants associated with #{competitions.map(&:to_s).join(' ')}"
     elsif category_id.present?
       "Emails of users/registrants associated with any competition in #{category}"
@@ -60,7 +60,7 @@ class Email
       User.unpaid_reg_fees.map{|user| user.email }
     elsif no_reg_accounts
       (User.confirmed - User.all_with_registrants).map{|user| user.email }
-    elsif competition_id.any?
+    elsif competitions.any?
       competitions.map(&:registrants).flatten.map(&:user).map(&:email).compact.uniq
     elsif category_id.present?
       category.events.map(&:competitor_registrants).flatten.map(&:user).map(&:email).compact.uniq
