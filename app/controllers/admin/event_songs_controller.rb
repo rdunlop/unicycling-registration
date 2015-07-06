@@ -5,7 +5,6 @@ class Admin::EventSongsController < ApplicationController
   # GET /event_songs
   def index
     @event = Event.music_uploadable
-
   end
 
   # GET /event_songs/:id
@@ -20,5 +19,4 @@ class Admin::EventSongsController < ApplicationController
   def add_breadcrumbs
     add_breadcrumb "Music"
   end
-
 end

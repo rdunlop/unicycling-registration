@@ -99,7 +99,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def num_unpaid
-    unpaid_items.count #free.select{|rei| !rei.registrant.reg_paid? }.count + unpaid_items.where(free: false).count
+    unpaid_items.count # free.select{|rei| !rei.registrant.reg_paid? }.count + unpaid_items.where(free: false).count
   end
 
   def create_reg_items

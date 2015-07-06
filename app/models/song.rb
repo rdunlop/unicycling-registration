@@ -25,7 +25,7 @@ class Song < ActiveRecord::Base
   belongs_to :registrant, touch: true
   belongs_to :event
   belongs_to :user
-  belongs_to :competitor#, allow_nil: true
+  belongs_to :competitor
 
   validates :registrant_id, :user_id, :event_id, :description, presence: true
 

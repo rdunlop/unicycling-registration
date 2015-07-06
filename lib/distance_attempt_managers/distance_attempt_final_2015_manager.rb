@@ -1,5 +1,4 @@
 class DistanceAttemptFinal_2015_Manager < DistanceAttemptManager
-
   def no_more_jumps?
     triple_fault?
   end

@@ -11,16 +11,16 @@ class MusicZipCreator
   #   MusicZipCreator.new(competition).zip_file(filename) do |zip_file|
   #     send_data(zip_file, :type => 'application/zip', :filename => filename)
   #   end
-  def zip_file(filename, &block)
+  def zip_file(filename, &_block)
     temp_file = Tempfile.new(filename)
     zip_contents = []
 
     begin
-      #This is the tricky part
-      #Initialize the temp file as a zip file
-      Zip::OutputStream.open(temp_file) { |zos| }
+      # This is the tricky part
+      # Initialize the temp file as a zip file
+      Zip::OutputStream.open(temp_file) { |_zos| }
 
-      #Add files to the zip file as usual
+      # Add files to the zip file as usual
       Zip::File.open(temp_file.path, Zip::File::CREATE) do |zip|
         competition.competitors.each do |competitor|
           if competitor.has_music?
@@ -32,19 +32,19 @@ class MusicZipCreator
         end
       end
 
-      #Read the binary data from the file
+      # Read the binary data from the file
       zip_data = File.read(temp_file.path)
 
-      #Send the data to the browser as an attachment
-      #We do not send the file directly because it will
-      #get deleted before rails actually starts sending it
+      # Send the data to the browser as an attachment
+      # We do not send the file directly because it will
+      # get deleted before rails actually starts sending it
       yield zip_data
     ensure
       zip_contents.each do |file|
         file.close
         file.unlink
       end
-      #Close and delete the temp file
+      # Close and delete the temp file
       temp_file.close
       temp_file.unlink
     end
@@ -65,5 +65,4 @@ class MusicZipCreator
     name += song_file_name
     name.first(59) + ".mp3"
   end
-
 end

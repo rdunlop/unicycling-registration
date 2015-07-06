@@ -65,10 +65,6 @@ class ExternalResult < ActiveRecord::Base
       competition: competition)
   end
 
-  def disqualified?
-    false
-  end
-
   def result
     points
   end

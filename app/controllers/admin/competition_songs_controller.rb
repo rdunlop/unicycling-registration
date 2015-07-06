@@ -35,9 +35,9 @@ class Admin::CompetitionSongsController < ApplicationController
   def download_zip
     competition = Competition.find(params[:competition_song_id])
     zip_creator = MusicZipCreator.new(competition)
-    filename = 'music_files-'+competition.to_s.gsub(/[^0-9a-zA-Z]/,'')+'.zip'
+    filename = 'music_files-' + competition.to_s.gsub(/[^0-9a-zA-Z]/, '') + '.zip'
     zip_creator.zip_file(filename) do |zip_file|
-      send_data(zip_file, :type => 'application/zip', :filename => filename)
+      send_data(zip_file, type: 'application/zip', filename: filename)
     end
   end
 end

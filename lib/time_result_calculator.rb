@@ -36,7 +36,7 @@ class TimeResultCalculator
 
   # return nil if there are no matching start times
   def matching_start_time(finish_time)
-     start_times.select{ |t| t < finish_time}.sort.max
+    start_times.select{ |t| t < finish_time}.sort.max
   end
 
   def competition_start_time_in_thousands
@@ -58,5 +58,4 @@ class TimeResultCalculator
       end
     end
   end
-
 end

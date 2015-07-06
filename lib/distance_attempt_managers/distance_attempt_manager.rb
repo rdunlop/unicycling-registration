@@ -102,5 +102,4 @@ class DistanceAttemptManager
       end
     end
   end
-
 end
