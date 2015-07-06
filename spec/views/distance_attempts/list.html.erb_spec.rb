@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "distance_attempts/list" do
   before(:each) do
-    @ec = FactoryGirl.create(:competition)
+    @ec = FactoryGirl.create(:distance_competition)
     @ev = @ec.event
     assign(:event, @ev)
 

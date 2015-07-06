@@ -24,9 +24,10 @@
 require 'spec_helper'
 
 describe Competitor do
+  let(:competition) { FactoryGirl.build_stubbed(:timed_competition) }
+
   before :each do
-    @competition = FactoryGirl.build_stubbed(:timed_competition)
-    @comp = FactoryGirl.build_stubbed(:event_competitor, competition: @competition)
+    @comp = FactoryGirl.build_stubbed(:event_competitor, competition: competition)
     allow(@comp).to receive(:lower_is_better).and_return(true)
     Rails.cache.clear
   end
@@ -58,7 +59,7 @@ describe Competitor do
 
     describe "when there is a matching wave + wave_time" do
       before :each do
-        allow(@competition).to receive(:wave_time_for).with(1).and_return(30)
+        allow(competition).to receive(:wave_time_for).with(1).and_return(30)
       end
 
       it "uses the wave time for start times" do
@@ -115,8 +116,10 @@ describe Competitor do
 end
 
 describe Competitor do
+  let(:competition) { FactoryGirl.create(:competition) }
+
   before(:each) do
-    @comp = FactoryGirl.create(:event_competitor)
+    @comp = FactoryGirl.create(:event_competitor, competition: competition)
   end
 
   it "should join a registrant and a event" do
@@ -348,6 +351,8 @@ describe Competitor do
     end
   end
   describe "with a distance attempt" do
+    let(:competition) { FactoryGirl.create(:distance_competition) }
+
     before(:each) do
       Delorean.jump 2
       @da = DistanceAttempt.new
@@ -359,9 +364,9 @@ describe Competitor do
     end
 
     it "should delete related distance_attempts if the competitor is deleted" do
-      da = FactoryGirl.create(:distance_attempt)
+      comp = FactoryGirl.create(:event_competitor, competition: competition)
+      da = FactoryGirl.create(:distance_attempt, competitor: comp)
 
-      comp = da.competitor
       expect(DistanceAttempt.count).to eq(1)
       Delorean.jump 2
 
