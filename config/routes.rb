@@ -527,7 +527,11 @@ Workspace::Application.routes.draw do
       # choose the desired competitor to add scores to
       resources :scores, only: [:index]
       resources :standard_scores, only: [:index]
-      resources :distance_attempts, only: [:index, :create]
+      resources :distance_attempts, only: [:index, :create] do
+        collection do
+          get :competitor_details
+        end
+      end
       resources :tie_break_adjustments, only: [:index, :create]
       resources :street_scores, only: [:index, :destroy] do
         collection do

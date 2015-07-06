@@ -1,10 +1,10 @@
 = render :partial => "/shared/error_messages", :object => @distance_attempt
 = form_for @distance_attempt, :url => judge_distance_attempts_path(@judge), remote: true do |f|
+  = f.label :registrant_id, "Competitor", class: "distance_label"
+  = competitor_select_box(f, @competition, id: "competitors")
+  %br
   = f.label :distance, class: "distance_label"
   = f.number_field :distance, class: "distance_input", autocomplete: 'off', required: true, min: 0
-  %br
-  = f.label :registrant_id, "Competitor", class: "distance_label"
-  = registrant_id_select_box(f, @competition)
   %br
   = f.label :fault, class: "distance_fault_label"
   = f.check_box :fault, class: "distance_input"

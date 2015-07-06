@@ -2,7 +2,12 @@
 
 #notice
 
-= render partial: "form"
+= render partial: 'competitor_lookup'
+
+.l--2up
+  .l--column
+    = render "form"
+  #competitor_details_holder.l--column
 
 .attempts_lists
   .recent_attempt_list

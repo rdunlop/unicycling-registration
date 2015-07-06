@@ -6,8 +6,8 @@
       = competitor_attempts.first.competitor
       's attempts
     %thead
-  %th Distance (cm)
-  %th Fault
-  %th Remove
-  %tbody
-    = render :partial => "attempt", :collection => competitor_attempts
+      %th Distance (cm)
+      %th Fault
+      %th Remove
+      %tbody
+        = render :partial => "attempt", :collection => competitor_attempts, locals: { display_delete: false }

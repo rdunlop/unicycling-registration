@@ -1,0 +1,5 @@
+<%= render "load_competitor_details" %>
+
+var comp_select = $("#competitors");
+comp_select.val(<%= @competitor.id %>);
+comp_select.trigger("chosen:updated");
