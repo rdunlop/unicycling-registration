@@ -1,3 +1,5 @@
+# Base Class for all Distance Attempt Managers
+# Helps determine the successful, unsucessful distance for a competitor
 class DistanceAttemptManager
   attr_accessor :competitor
 

@@ -402,7 +402,7 @@ class Competitor < ActiveRecord::Base
     to: :distance_manager
 
   def distance_manager
-    @distance_manager ||= DistanceAttemptFinalManager.new(self)
+    @distance_manager ||= competition.distance_attempt_manager.new(self)
   end
 
   def is_top?(search_gender)

@@ -68,7 +68,7 @@ class Competition < ActiveRecord::Base
   validates :start_data_type, :end_data_type, inclusion: { in: data_recording_types, allow_nil: true }
 
   def self.scoring_classes
-    ["Freestyle", "Artistic Freestyle IUF 2015", "High/Long", "High/Long Preliminary IUF 2015", "Flatland", "Street", "Street Final", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
+    ["Freestyle", "Artistic Freestyle IUF 2015", "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015", "Flatland", "Street", "Street Final", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
   end
 
   validates :scoring_class, inclusion: { in: scoring_classes, allow_nil: false }
@@ -412,7 +412,7 @@ class Competition < ActiveRecord::Base
     when "Street Final"
       @ssc ||= StreetScoringClass.new(self, false)
 
-    when "High/Long", "High/Long Preliminary IUF 2015"
+    when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"
       @dsc ||= DistanceScoringClass.new(self)
 
     when "Overall Champion"
@@ -462,7 +462,7 @@ class Competition < ActiveRecord::Base
       @scsc ||= FlatlandResultCalculator.new
     when "Street", "Street Final"
       @scsc ||= StreetResultCalculator.new
-    when "High/Long", "High/Long Preliminary IUF 2015"
+    when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"
       @scdsc ||= DistanceResultCalculator.new
     when "Overall Champion"
       @ascoc ||= OverallChampionResultCalculator.new(combined_competition, self)
@@ -477,6 +477,19 @@ class Competition < ActiveRecord::Base
       GenericPlacingPointsCalculator.new(points_per_rank: [10, 7, 5, 3, 2, 1])
     when "Artistic Freestyle IUF 2015"
       Freestyle_2015_JudgePointsCalculator.new
+    end
+  end
+
+  def distance_attempt_manager
+    case event_class
+    when "High/Long"
+      DistanceAttemptFinalManager
+    when "High/Long Preliminary IUF 2015"
+      DistanceAttemptPreliminaryManager
+    when "High/Long Final IUF 2015"
+      DistanceAttemptFinal_2015_Manager
+    else
+      raise NotImplementedError
     end
   end
 
