@@ -433,23 +433,6 @@ class Competitor < ActiveRecord::Base
     res.join(", ")
   end
 
-  def best_time_in_thousands
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/best_time_in_thousands") do
-      start_times = start_time_results.map(&:full_time_in_thousands)
-      finish_times = finish_time_results.map(&:full_time_in_thousands)
-
-      best_finish_time = 0
-      finish_times.each do |ft|
-        matching_start_time = start_times.select{ |t| t < ft}.sort.max || (competition_start_time * 1000)
-        new_finish_time = ft - matching_start_time
-        if best_finish_time == 0 || (new_finish_time == better_time(best_finish_time, new_finish_time))
-          best_finish_time = new_finish_time
-        end
-      end
-      best_finish_time
-    end
-  end
-
   def num_laps
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/num_laps") do
       finish_time_results.first.try(:number_of_laps) || 0
@@ -460,19 +443,11 @@ class Competitor < ActiveRecord::Base
     competition.wave_time_for(wave) || 0
   end
 
-  def better_time(time_1, time_2)
-    if lower_is_better
-      if time_1 < time_2
-        time_1
-      else
-        time_2
-      end
-    else
-      if time_1 < time_2
-        time_2
-      else
-        time_1
-      end
+  def best_time_in_thousands
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/best_time_in_thousands") do
+      start_times = start_time_results.map(&:full_time_in_thousands)
+      finish_times = finish_time_results.map(&:full_time_in_thousands)
+      TimeResultCalculator.new(start_times, finish_times, competition_start_time, lower_is_better).best_time_in_thousands
     end
   end
 
