@@ -1,5 +1,3 @@
-- Fix the Competitor Emailer -> "Category" doesn't work.
-
 - USA management for Spectator should not be required
  - For Registration table, they will have to bring proof that they have paid.
  - Scott may log into the site and confirm that they're paid.
