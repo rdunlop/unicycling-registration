@@ -392,10 +392,10 @@ describe Competitor do
 
     it "should return the max attempted distance" do
       expect(@comp.max_attempted_distance).to eq(0)
-      expect(@comp.max_successful_distance).to eq(0)
+      expect(@comp.max_successful_distance).to be_nil
       da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.max_attempted_distance).to eq(da1.distance)
-      expect(@comp.reload.max_successful_distance).to eq(0)
+      expect(@comp.reload.max_successful_distance).to be_nil
     end
 
     it "should return the attempts is descending distance order" do
