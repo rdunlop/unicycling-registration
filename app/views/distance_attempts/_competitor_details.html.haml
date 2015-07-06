@@ -8,4 +8,4 @@
 
   %br
 
-  = render partial: 'competitor_attempts', object: @competitor.distance_attempts
+  = render partial: 'attempt_list', locals: { list: @competitor.distance_attempts, display_delete: false, title: "#{@competitor}'s attempts" }
