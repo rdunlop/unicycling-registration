@@ -14,6 +14,9 @@ class UsaMembershipsController < ApplicationController
     if params[:external_confirm]
       cd.update_attribute(:usa_confirmed_paid, true)
       flash[:notice] = "Marked #{@registrant} as confirmed"
+    elsif params[:external_unconfirm]
+      cd.update_attribute(:usa_confirmed_paid, false)
+      flash[:notice] = "Marked #{@registrant} as unconfirmed"
     elsif params[:family_membership_registrant_id]
       cd.update_attribute(:usa_family_membership_holder_id, params[:family_membership_registrant_id])
       flash[:notice] = "Marked #{@registrant} as family-member"

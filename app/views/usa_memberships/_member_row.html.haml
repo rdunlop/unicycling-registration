@@ -20,6 +20,7 @@
     %td
       - if reg.contact_detail.usa_confirmed_paid?
         = "Confirmed"
+        = link_to "Mark as unconfirmed", usa_memberships_path(registrant_id: reg.id, external_unconfirm: true), method: :put, remote: true
       - else
         = link_to "Mark as confirmed", usa_memberships_path(registrant_id: reg.id, external_confirm: true), method: :put, remote: true
     %td
