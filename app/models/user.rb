@@ -77,15 +77,15 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :competition_admin, :payment_admin, :convention_admin, :admin, :super_admin]
+    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :competition_admin, :payment_admin, :membership_admin, :convention_admin, :admin, :super_admin]
   end
 
   # List which roles each roles can add to other users
   def self.role_transfer_permissions
     {
       super_admin: [*roles],
-      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj],
-      competition_admin: [:awards_admin],
+      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin],
+      competition_admin: [:competition_admin, :awards_admin],
       director: [:data_entry_volunteer, :race_official],
       payment_admin: [:payment_admin],
       event_planner: [:event_planner],
@@ -162,6 +162,10 @@ class User < ActiveRecord::Base
       Able to SEARCH & MODIFY any registration.
       Able to Add/Modify event choices, at all times.
       Able to view/send emails to all registrants"
+    when :membership_admin
+      "Able to view the USA Memberships page.
+      Able to update the USA Membership numbers
+      Able to indicate whether a user is up-to-date with USA membership fees"
     when :awards_admin
       "[e.g. Kirsten]
       Able to view the data results

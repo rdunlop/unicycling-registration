@@ -214,6 +214,12 @@ class Ability
     end
   end
 
+  def define_membership_admin_roles(user)
+    if user.has_role?(:membership_admin) && config.usa_membership_config?
+      can :manage, :usa_membership
+    end
+  end
+
   def define_event_planner_roles(user)
     if user.has_role? :event_planner
       can [:summary, :general_volunteers, :specific_volunteers], Event
@@ -255,6 +261,7 @@ class Ability
     define_payment_admin_roles(user)
     define_event_planner_roles(user)
     define_competition_admin_roles(user)
+    define_membership_admin_roles(user)
 
     # #################################################
     # End new role definitions
