@@ -39,12 +39,12 @@ class PaymentDetail < ActiveRecord::Base
 
   delegate :has_details?, :details_label, to: :expense_item
 
-  # excludes refunded items
-  scope :completed, -> { includes(:payment).includes(:refund_detail).where(payments: {completed: true}).where(refund_details: {payment_detail_id: nil}) }
+  scope :completed, -> { includes(:payment).where(payments: {completed: true}) }
+  scope :not_refunded, -> { includes(:refund_detail).where(refund_details: { payment_detail_id: nil}) }
 
-  scope :paid, -> { includes(:payment).where(payments: {completed: true}).where(free: false) }
+  scope :paid, -> { completed.where(free: false) }
 
-  scope :free, -> { includes(:payment).where(payments: {completed: true}).where(free: true) }
+  scope :free, -> { completed.where(free: true) }
   scope :refunded, -> { completed.where(refunded: true) }
 
   scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: {payment_detail_id: nil }) }
