@@ -1,10 +1,10 @@
 class UsaMembershipsController < ApplicationController
   authorize_resource class: false
   before_action :load_family_registrants, only: :index
+  before_action :load_registrants, only: [:index, :export]
 
   def index
     raise "Unable to access USA page on non-USA configuration" unless @config.usa_membership_config?
-    @registrants = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).includes(:contact_detail => [:usa_family_membership_holder]).active
   end
 
   def update
@@ -54,7 +54,7 @@ class UsaMembershipsController < ApplicationController
     sheet[0, 17] = "Confirmed already a USA member"
 
     row = 1
-    Registrant.active.includes(payment_details: [:payment]).each do |reg|
+    @registrants.includes(payment_details: [:payment]).each do |reg|
       sheet[row, 0] = reg.bib_number
       sheet[row, 1] = reg.contact_detail.usa_member_number
       sheet[row, 2] = reg.first_name
@@ -85,6 +85,10 @@ class UsaMembershipsController < ApplicationController
   end
 
   private
+
+  def load_registrants
+    @registrants = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).includes(:contact_detail => [:usa_family_membership_holder]).active
+  end
 
   def load_family_registrants
     family_item = @config.usa_family_expense_item
