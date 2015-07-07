@@ -1,6 +1,3 @@
-- add ability to set the USA number for a competitor,or to "Contact_details"
-- Create a new role which allows for the management of the USA page(s).
-
 - make CompetitionAdmin as powerful as any director? No.
 - CompetitionAdmin should be able to unlock a competition?
 - CompetitionAdmin can manage competitors and view sign up lists.

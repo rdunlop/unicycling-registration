@@ -8,7 +8,7 @@
         = form_tag usa_memberships_update_number_path(registrant_id: reg.id), method: :put, remote: true do
           = text_field_tag :membership_number, reg.contact_detail.usa_member_number
           = submit_tag "Update USA #"
-    %td= link_to reg.first_name, registrant_build_path(reg, :add_name)
+    %td= reg.first_name
     %td= reg.last_name
     %td= reg.age
     %td= reg.birthday
