@@ -4,5 +4,6 @@ en:
     all:
       all_registrants: All Registrants
       country: Country
+      registrant_type: Type
       id: ID
       name: Name

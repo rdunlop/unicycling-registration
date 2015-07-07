@@ -4,6 +4,7 @@ class UsaMembershipsController < ApplicationController
 
   def index
     raise "Unable to access USA page on non-USA configuration" unless @config.usa_membership_config?
+    @registrants = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).includes(:contact_detail => [:usa_family_membership_holder]).active
   end
 
   def update

@@ -6,6 +6,7 @@
       %tr
         %th= t(".ID")
         %th= t(".name")
+        %th= t(".registrant_type")
         - if @config.usa?
           %th= t(".state")
         - else
@@ -15,6 +16,7 @@
         %tr
           %td= registrant.bib_number
           %td= registrant
+          %td= registrant.registrant_type
           - if @config.usa?
             %td= registrant.state
           - else
