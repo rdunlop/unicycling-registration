@@ -2,7 +2,12 @@
 - cache [reg, @config] do
   %tr{ class: reg.usa_membership_paid? ? "usa_confirmed" : "", id: "reg_#{reg.id}" }
     %td= reg.bib_number
-    %td= reg.contact_detail.usa_member_number
+    %td
+      %span.usa_number.js--toggle{ id: "usa_number_#{reg.bib_number}", data: { toggle_target: "#usa_number_form_#{reg.bib_number}" } }= reg.contact_detail.usa_member_number.presence || "set number"
+      %span{ id: "usa_number_form_#{reg.bib_number}" }
+        = form_tag usa_memberships_update_number_path(registrant_id: reg.id), method: :put, remote: true do
+          = text_field_tag :membership_number, reg.contact_detail.usa_member_number
+          = submit_tag "Update USA #"
     %td= link_to reg.first_name, registrant_build_path(reg, :add_name)
     %td= reg.last_name
     %td= reg.age
@@ -16,7 +21,7 @@
       - if reg.contact_detail.usa_confirmed_paid?
         = "Confirmed"
       - else
-        =link_to "Mark as confirmed", usa_memberships_path(registrant_id: reg.id, external_confirm: true), method: :put, remote: true
+        = link_to "Mark as confirmed", usa_memberships_path(registrant_id: reg.id, external_confirm: true), method: :put, remote: true
     %td
       - if reg.contact_detail.usa_family_membership_holder_id?
         = reg.contact_detail.usa_family_membership_holder

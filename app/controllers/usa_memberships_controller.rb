@@ -29,6 +29,24 @@ class UsaMembershipsController < ApplicationController
     end
   end
 
+  def update_number
+    @registrant = Registrant.find(params[:registrant_id])
+    cd = @registrant.contact_detail
+
+    if params[:membership_number]
+      cd.update_attribute(:usa_member_number, params[:membership_number])
+      flash[:notice] = "Updated Member Number"
+    else
+      flash[:alert] = "Unable to update member number"
+    end
+
+    respond_to do |format|
+      format.js do
+        load_family_registrants
+      end
+    end
+  end
+
   def export
     s = Spreadsheet::Workbook.new
     sheet = s.create_worksheet

@@ -338,6 +338,7 @@ Workspace::Application.routes.draw do
     get "usa_memberships", to: "usa_memberships#index"
     put "usa_memberships", to: "usa_memberships#update"
     get "usa_memberships/export", to: "usa_memberships#export"
+    put "usa_memberships/update_number", to: "usa_memberships#update_number"
 
     resources :results, only: [:index] do
       member do

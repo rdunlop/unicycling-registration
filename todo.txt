@@ -1,5 +1,4 @@
 - add ability to set the USA number for a competitor,or to "Contact_details"
-- Remove Spectators from the page.
 - Create a new role which allows for the management of the USA page(s).
 
 - make CompetitionAdmin as powerful as any director? No.
