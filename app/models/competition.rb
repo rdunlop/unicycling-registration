@@ -133,6 +133,10 @@ class Competition < ActiveRecord::Base
     locked_at.present?
   end
 
+  def unlocked?
+    !locked?
+  end
+
   def published_only_when_locked
     if published? && !locked?
       errors[:base] << "Cannot Publish an unlocked Competition"

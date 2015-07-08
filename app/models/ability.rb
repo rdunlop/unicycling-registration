@@ -87,17 +87,21 @@ class Ability
     !competition.locked? && user.has_role?(:director, competition.try(:event))
   end
 
+  def director_or_competition_admin?(user, competition)
+    user.has_role?(:director, competition.try(:event)) || user.has_role?(:competition_admin)
+  end
+
   def set_director_abilities(user)
     set_data_entry_volunteer_abilities(user)
 
     # Abilities to be able to read data about a competition
     can :read, Competition do |competition|
-      user.has_role? :director, competition.event
+      user.has_role?(:director, competition.event) || user.has_role?(:competition_admin)
     end
 
     # SignUp/Competitor management abilities
     can [:sign_ups], Event do |ev|
-      user.has_role? :director, ev
+      user.has_role? :director, ev || user.has_role?(:competition_admin)
     end
 
     can :sign_ups, EventCategory
@@ -105,19 +109,16 @@ class Ability
     #     can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
 
     # Abilities to be able to change data about a competition
-    can :manage, Competitor do |comp|
-      director_and_unlocked(user, comp.competition)
+    can [:manage, :update_row_order], Competitor do |comp|
+      comp.unlocked? && (director_or_competition_admin?(user, comp.competition))
     end
 
     can :manage, Member do |member|
-      director_and_unlocked(user, member.competitor.competition)
+      comp.unlocked? && (director_or_competition_admin?(user, member.competitor.competition))
     end
 
-    # TODO: is there a way to scope this better? and also to honor the 'locked' status
-    can [:update_row_order], Competitor, if: user.has_role?(:director, :any)
-
     can [:set_sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
-      director_and_unlocked(user, comp)
+      comp.unlocked? && (director_or_competition_admin?(user, comp))
     end
 
     # Volunteer Abilities
