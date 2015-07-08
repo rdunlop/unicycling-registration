@@ -111,7 +111,7 @@ class Competitor < ActiveRecord::Base
 
     members.each do |member|
       if member.dropped_from_registration?
-        error += "Registrant has dropped this event from their registration<br>"
+        error += "Registrant #{member} has dropped this event from their registration<br>"
       elsif !competition_registrants.include?(member.registrant)
         error += "Registrant #{member} is not in the default list for this competition<br>"
       end
