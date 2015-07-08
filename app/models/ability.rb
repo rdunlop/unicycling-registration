@@ -95,26 +95,11 @@ class Ability
       user.has_role? :director, competition.event
     end
 
-    can [:read], Score do |score|
-      user.has_role? :director, score.competition.event
-    end
-
-    can [:export_scores, :results, :result], Competition do |comp|
-      user.has_role? :director, comp.event
-    end
-
-    can [:read, :toggle_status], Judge do |judge|
-      user.has_role? :director, judge.competition.try(:event)
-    end
-
-    can :manage, DataEntryVolunteer
-    can :create_race_official, :permission
-
-    # :results is for printing
-    can [:results, :sign_ups], Event do |ev|
+    # SignUp/Competitor management abilities
+    can [:sign_ups], Event do |ev|
       user.has_role? :director, ev
     end
-    can [:summary, :general_volunteers, :specific_volunteers], Event
+
     can :sign_ups, EventCategory
     #     #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
     #     can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
@@ -135,6 +120,38 @@ class Ability
       director_and_unlocked(user, comp)
     end
 
+    # Volunteer Abilities
+
+    can [:summary, :general_volunteers, :specific_volunteers], Event
+
+    can :manage, DataEntryVolunteer
+
+    # Judging/Scoring Abilities
+
+    can [:read], Score do |score|
+      user.has_role? :director, score.competition.event
+    end
+
+    can [:export_scores, :results, :result], Competition do |comp|
+      user.has_role? :director, comp.event
+    end
+
+    can [:results], Event do |ev|
+      user.has_role? :director, ev
+    end
+
+
+    can [:read, :toggle_status], Judge do |judge|
+      user.has_role? :director, judge.competition.try(:event)
+    end
+
+    can [:crud, :copy_judges], Judge do |judge|
+      # Only allow creating judges when there are no scores yet entered
+      (judge.scores.count == 0) && (director_and_unlocked(user, judge.competition))
+    end
+
+    can :create_race_official, :permission
+
     # Data Management
     can :manage, ImportResult do |import_result|
       director_and_unlocked(user, import_result.competition)
@@ -148,10 +165,6 @@ class Ability
       director_and_unlocked(user, wave_time.competition)
     end
 
-    can [:crud, :copy_judges], Judge do |judge|
-      # Only allow creating judges when there are no scores yet entered
-      (judge.scores.count == 0) && (director_and_unlocked(user, judge.competition))
-    end
   end
 
   def define_convention_admin_roles(user)
