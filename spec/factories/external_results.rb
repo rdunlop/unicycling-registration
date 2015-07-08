@@ -15,7 +15,7 @@
 #
 # Indexes
 #
-#  index_external_results_on_competitor_id  (competitor_id)
+#  index_external_results_on_competitor_id  (competitor_id) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

@@ -134,6 +134,9 @@ class User < ActiveRecord::Base
       Can set registrants as ineligible
       Can create director, data_entry_volunteer, race_official
       Can reset user passwords
+      Can View all Event Sign Ups
+      Can Manage all Competition Competitors (while competition is unlocked)
+      Can Lock/Unlock Competition
       "
     when :director
       "[e.g. Wendy Gryzch]

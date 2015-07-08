@@ -15,7 +15,7 @@
 #
 # Indexes
 #
-#  index_external_results_on_competitor_id  (competitor_id)
+#  index_external_results_on_competitor_id  (competitor_id) UNIQUE
 #
 
 class ExternalResult < ActiveRecord::Base
@@ -27,6 +27,7 @@ class ExternalResult < ActiveRecord::Base
     ["active", "DQ"]
   end
 
+  validates :competitor_id, uniqueness: true
   validates :status, inclusion: { in: ExternalResult.status_values }
 
   belongs_to :entered_by, class_name: 'User', foreign_key: :entered_by_id

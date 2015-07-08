@@ -1,16 +1,4 @@
-- make CompetitionAdmin as powerful as any director? No.
-- CompetitionAdmin should be able to unlock a competition?
-- CompetitionAdmin can manage competitors and view sign up lists.
- - BUT, Managing data, should be enabled on a per-competition basis.
- - "if you need to deal with RESULT DATA within a competition, you need to become a director"
- - CompetitionAdmin should NOT be able to specify the list of judges. RaceOfficials are here.
- - CompetitionAdmin CAN specify the data entry volunteers for a competition
-
 - Add tests around the new library refactorings
-- USA management for Spectator should not be required
- - For Registration table, they will have to bring proof that they have paid.
- - Scott may log into the site and confirm that they're paid.
- - On the USA management page, it goes to the wrong step in the wizard, it should go to the details page.....instead bring the USA number box into the other page?
 - How does a Director manage/adjust the high/long scores after a judge has judged?
 
 Want to do:
@@ -18,7 +6,6 @@ Want to do:
  - then uses Approve action to convert the results to real results.
 - Determine if the servers have any ImportResults left on them.
 
-- make ExternalResult unique on CompetitorID (since each competitor has ONE external_result)
 - Remove default_scope on ImportResult
 
 Changes for External Data Results Entry:
