@@ -1,0 +1,17 @@
+<% if @competitor.errors.any? %>
+  var errors = $("<ul />");
+  <% @competitor.errors.full_messages.each do |error| %>
+    errors.append('<li><%= escape_javascript( error ) %></li>');
+  <% end %>
+
+  // Display errors on form
+  $('#notice').html($("<div id=\"error_explanation\" />").append(errors));
+
+<% else %>
+  el = $(".js--competitors");
+  el.append($('<option/>', {
+    value: <%= @competitor.id %>,
+    text : "<%= @competitor.to_s_with_id %>"
+  }));
+  el.trigger("chosen:updated");
+<% end %>

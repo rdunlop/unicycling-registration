@@ -100,11 +100,17 @@ class CompetitorsController < ApplicationController
   def create
     if @competitor.save
       flash[:notice] = 'Competition registrant was successfully created.'
-      redirect_to competition_competitors_path(@competition)
+      respond_to do |format|
+        format.html { redirect_to competition_competitors_path(@competition) }
+        format.js
+      end
     else
       @registrants = @competition.signed_up_registrants
       flash.now[:alert] = 'Error adding Registrant'
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.js
+      end
     end
   end
 

@@ -9,7 +9,7 @@
     .field
       = f.label :registrant_id
       %br
-      = f.select :registrant_id, options_from_collection_for_select(Registrant.active.where(competitor: true), "id", "with_id_to_s"), {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus' }
+      = f.select :registrant_id, options_from_collection_for_select(Registrant.active.competitor, "id", "with_id_to_s"), {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus' }
   .field
     = f.label :heat
     %br
