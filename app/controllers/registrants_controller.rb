@@ -89,10 +89,9 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/1/results
   def results
-    @overall_results = @registrant.results.overall
-    @age_group_results = @registrant.results.age_group
+    @results = @registrant.results
     respond_to do |format|
-      format.html {}
+      format.html
     end
   end
 

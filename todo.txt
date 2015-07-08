@@ -1,3 +1,5 @@
+- `competitor_result` is exposing the total score for a freestyle competitor....should not (did not used to?) do this?
+
 - Add tests around the new library refactorings
 - How does a Director manage/adjust the high/long scores after a judge has judged?
 

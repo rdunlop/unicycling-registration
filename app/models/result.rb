@@ -28,6 +28,8 @@ class Result < ActiveRecord::Base
   validates :competitor, :place, :result_type, presence: true
   validates :competitor_id, uniqueness: { scope: [:result_type] }
 
+  delegate :competition, to: :competitor
+
   def self.age_group
     where(result_type: "AgeGroup")
   end
@@ -56,6 +58,18 @@ class Result < ActiveRecord::Base
     ldut = last_data_update_time(competition)
     lcpt = last_calc_places_time(competition)
     lcpt.nil? || (ldut.present? && (ldut > lcpt))
+  end
+
+  def age_group_type?
+    result_type == "AgeGroup"
+  end
+
+  def category_description
+    if age_group_type?
+      competitor.age_group_entry_description
+    else
+      "Overall"
+    end
   end
 
   def to_s
