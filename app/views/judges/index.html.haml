@@ -8,7 +8,7 @@
   - if can? :create, @judge
     = render "add_judges"
   - else
-    %p Judge Management is no longer allowed (competition is locked)
+    %p You cannot manage Judges (competition is locked, or you lack permissions)
 
 - elsif @competition.uses_lane_assignments?
   %h1 Manage RaceOfficials
