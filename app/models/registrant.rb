@@ -631,6 +631,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def usa_membership_paid?
+    return false unless validated?
     contact_detail.usa_confirmed_paid || contact_detail.usa_family_membership_holder_id? || paid_individual_usa? || paid_family_usa?
   end
 
