@@ -1,9 +1,8 @@
 .competitor_details_block
   .competitor_details
-    %span= @competitor.bib_number
+    %span= "##{@competitor.bib_number}"
     %span= @competitor.name
-    %span= @competitor.age
-    %span= @competitor.gender
+    %span= "#{@competitor.gender}, Age #{@competitor.age}"
     %span.status{ class: @competitor.distance_attempt_status_code }= @competitor.distance_attempt_status
 
   %br

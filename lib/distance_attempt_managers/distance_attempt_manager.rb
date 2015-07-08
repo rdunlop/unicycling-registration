@@ -13,6 +13,26 @@ class DistanceAttemptManager
     raise NotImplementedError
   end
 
+  def acceptable_distance?(distance)
+    acceptable_distance_error(distance).nil?
+  end
+
+  def acceptable_distance_error(distance)
+    max_attempt = distance_attempts.first
+    if max_attempt.present?
+      if max_attempt.fault?
+        if distance < max_attempt.distance
+          "New Distance (#{distance}) must be greater than or equal to #{max_attempt.distance}"
+        end
+      else
+        # no fault
+        if distance <= max_attempt.distance
+          "New Distance (#{distance}) must be greater than #{max_attempted_distance}"
+        end
+      end
+    end
+  end
+
   def max_attempted_distance
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_attempted_distance") do
       return 0 unless distance_attempts.any?

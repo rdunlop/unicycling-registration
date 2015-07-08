@@ -3,6 +3,12 @@ class DistanceAttemptFinal_2015_Manager < DistanceAttemptManager
     triple_fault?
   end
 
+  def acceptable_distance_error(distance)
+    if single_fault? && distance != max_attempted_distance
+      "Riders must successfully complete each distance before moving on to the next distance. Please complete #{max_attempted_distance}"
+    end
+  end
+
   private
 
   # for distance_attempt logic, there are certain 'states' that a competitor can get into
@@ -20,4 +26,5 @@ class DistanceAttemptFinal_2015_Manager < DistanceAttemptManager
       df
     end
   end
+
 end

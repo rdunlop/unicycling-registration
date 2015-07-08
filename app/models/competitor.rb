@@ -398,6 +398,7 @@ class Competitor < ActiveRecord::Base
   delegate :max_attempted_distance, :has_attempt?, :has_successful_attempt?,
            :max_successful_distance, :max_successful_distance_attempt,
            :distance_attempt_status, :distance_attempt_status_code,
+           :acceptable_distance_error, :acceptable_distance?,
            :no_more_jumps?,
            to: :distance_manager
 

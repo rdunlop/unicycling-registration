@@ -39,8 +39,8 @@ class DistanceAttempt < ActiveRecord::Base
   def must_not_have_new_attempt_less_than_existing_attempt
     if new_record?
       unless competitor.nil? || distance.nil?
-        if competitor.max_attempted_distance > distance
-          errors[:distance] << "New Distance (#{distance}) must be equal or greater than existing max distance attempt (#{competitor.max_attempted_distance})"
+        unless competitor.acceptable_distance?(distance)
+          errors[:distance] << competitor.acceptable_distance_error(distance)
         end
       end
     end
