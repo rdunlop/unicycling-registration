@@ -20,11 +20,6 @@ WHEN DOING an Import from CSV, fail the whole import, listing the entries which 
 ? ask scott/patricia? - Boundary-score calculation judge for freestyle? (major/minor falls counter)
  - For UNIOEC?
 - Must update the Ineligibility of all registrants before starting competition.
-- Clean up models#song.rb
- - File.basename(song_file_name.path)
- - line 36
- - .path seems to be printing the filenames url_encoded
-
 
 PRiorities as per Scott/Robin Discussion:
 - artistic ineligible dismissed

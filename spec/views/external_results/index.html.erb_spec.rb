@@ -5,11 +5,11 @@ describe "external_results/index" do
     @competition = FactoryGirl.build_stubbed(:ranked_competition)
     assign(:competition, @competition)
     @external_results = [
-      FactoryGirl.build_stubbed(:external_result, details: "Hello", points: 10),
-      FactoryGirl.build_stubbed(:external_result, details: "Goodbye", points: 20)]
-    assign(:external_results, @external_results)
+      FactoryGirl.create(:external_result, details: "Hello", points: 10),
+      FactoryGirl.create(:external_result, details: "Goodbye", points: 20)]
+    assign(:external_results, ExternalResult.all)
     @external_result = FactoryGirl.build(:external_result)
-    allow(@competition).to receive(:external_results).and_return(@external_results)
+    allow(@competition).to receive(:external_results).and_return(ExternalResult.all)
     allow(@external_results[0].competitor).to receive(:place).and_return(1)
     allow(@external_results[1].competitor).to receive(:place).and_return(2)
     allow(@external_results[0].competitor).to receive(:competition).and_return(@competition)
