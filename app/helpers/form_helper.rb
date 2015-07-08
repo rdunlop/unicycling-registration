@@ -29,7 +29,8 @@ module FormHelper
   # The form element which is used to enter data
   def competitor_select_box(form, competition, options = {})
     options.merge!(autofocus: true, class: "chosen-select js--autoFocus #{options[:class]}")
-    form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true}, options
+    disabled_ids = options[:disabled_ids]
+    form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true, disabled: disabled_ids}, options
   end
 
   # The form element which is used to create a new competitor, if one shows up last minute for a competition
