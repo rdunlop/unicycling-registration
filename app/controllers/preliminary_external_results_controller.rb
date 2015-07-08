@@ -1,8 +1,9 @@
 class PreliminaryExternalResultsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_competition, only: [:index, :create]
+  before_action :load_competition, only: [:index, :create, :review, :approve]
   before_action :load_new_external_result, only: [:create]
   load_and_authorize_resource :external_result, parent: false
+  before_action :filter_results_to_preliminary, only: [:index, :review, :approve]
 
   before_action :set_breadcrumbs, only: :index
 
@@ -11,7 +12,6 @@ class PreliminaryExternalResultsController < ApplicationController
     add_breadcrumb "Preliminary Points Results"
 
     @external_result = ExternalResult.new
-    @external_results = @external_results.preliminary
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,7 +35,7 @@ class PreliminaryExternalResultsController < ApplicationController
       if @external_result.save
         format.html { redirect_to competition_preliminary_external_results_path(@competition), notice: 'External result was successfully created.' }
       else
-        @external_results = @competition.external_results
+        @external_results = @competition.external_results.preliminary
         format.html { render action: "index" }
       end
     end
@@ -64,6 +64,17 @@ class PreliminaryExternalResultsController < ApplicationController
     end
   end
 
+  # GET /competitions/:competition_id/preliminary_external_results/review
+  def review
+  end
+
+  # POST .../approve
+  def approve
+    @external_results.update_all(preliminary: false)
+    flash[:notice] = "Results Approved"
+    redirect_to result_competition_path(@competition)
+  end
+
   private
 
   def set_breadcrumbs
@@ -76,6 +87,10 @@ class PreliminaryExternalResultsController < ApplicationController
 
   def load_new_external_result
     @external_result = @competition.external_results.new(external_result_params)
+  end
+
+  def filter_results_to_preliminary
+    @external_results = @external_results.preliminary
   end
 
   def external_result_params

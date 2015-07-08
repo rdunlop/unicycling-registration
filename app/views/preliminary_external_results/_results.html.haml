@@ -13,7 +13,7 @@
       %th
       %th
   %tbody
-    - @competition.external_results.each do |external_result|
+    - @competition.external_results.preliminary.each do |external_result|
       - next unless external_result.persisted?
       %tr
         %td= external_result.competitor

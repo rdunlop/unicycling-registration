@@ -36,7 +36,7 @@ class ExternalResultsController < ApplicationController
         format.html { redirect_to competition_external_results_path(@competition), notice: 'External result was successfully created.' }
         format.json { render json: @external_result, status: :created, location: @external_result }
       else
-        @external_results = @competition.external_results
+        @external_results = @competition.external_results.active
         format.html { render action: "index" }
         format.json { render json: @external_result.errors, status: :unprocessable_entity }
       end
