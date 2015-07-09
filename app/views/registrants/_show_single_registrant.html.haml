@@ -18,21 +18,21 @@
 - cache_i18n ['printable_link', @registrant, @registrant.members_cache_key] do
   .non_printable
     = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
-.registrant_summary{ class: "show_#{@registrant.registrant_type}_elements" }
-  .registrant_summary_block
+.row{ class: "show_#{@registrant.registrant_type}_elements" }
+  .small-12.large-4.columns
     // this partial includes conditional-display logic..do not cache it
     = render :partial => "/registrants/summary"
     - cache_i18n ['edit_link', @registrant] do
       .edit_link_block.js--showElementTarget{ data: { key: "update_registrant" } }
         = link_to t(".edit_registration"), registrant_build_path(@registrant, :add_name)
   - cache_i18n ['expenses', @registrant, @registrant.members_cache_key] do
-    .registrant_expenses_block
+    .small-12.large-4.columns
       = render :partial => "/registrants/registrant_expenses"
       .edit_link_block.js--showElementTarget{ data: { key: "create_rei" } }
         = link_to t(".edit_items"), registrant_build_path(@registrant, :expenses)
       .non_printable.js--showElementTarget{ data: { key: "manage_registrant" } }
         = link_to t(".list_payments"), registrant_payments_path(@registrant)
-    .registrant_events_block
+    .small-12.large-4.columns
       - if @registrant.competitor
         - if @config.display_confirmed_events?
           = render partial: "/registrants/registrant_confirmed_events"

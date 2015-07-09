@@ -19,59 +19,11 @@
   }
 }
 
-.registrant_summary {
-  padding: 0;
-  border-collapse: collapse;
+.event_heading {
+  background: #f3f3f3;
+  text-align: center;
+  font-weight: bold;
 }
-
-.registrant_summary {
-  fieldset {
-    border: none;
-  }
-  table {
-    width: 100%;
-    thead th {
-      text-decoration: underline;
-    }
-  }
-  legend {
-    width: 100%;
-    background-color: lightgrey;
-    font-weight: bold;
-    font-size: 22px;
-  }
-  .registrant_summary_block {
-    width: 30%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .registrant_expenses_block {
-    display: inline-block;
-    width: 25%;
-    vertical-align: top;
-  }
-  .registrant_events_block {
-    display: inline-block;
-    width: 40%;
-    vertical-align: top;
-  }
-}
-.registrant_summary {
-  .events_summary_table {
-    text-align: left;
-  }
-  .event_heading {
-    background: #f3f3f3;
-    text-align: center;
-    font-weight: bold;
-  }
-  table {
-    td {
-      padding: 1px;
-    }
-  }
-}
-
 
 .contact_detail_summary, .registrant_details_summary {
   b:after {

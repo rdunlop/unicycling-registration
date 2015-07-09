@@ -1,3 +1,7 @@
+=================== New STyling =========================
+
+Need to be able to print-pdf of Registrant Summary with confidence that it will lay out nicely.
+
 ================== New Awards/Results Calculation Logic ============================
 - Combine the AwardLabel multiple-lines-of-text with the Registrant#results page, with the Result object data
 - Why are we always listing "Overall" as well as "Age Group" for each competition type?
