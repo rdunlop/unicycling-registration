@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require chosen-jquery
 //= require fancybox
 //= require jquery.nested-fields
@@ -126,3 +127,5 @@ $(function() {
     $(this).attr('title', 'Not Qualified');
   });
 });
+
+$(function(){ $(document).foundation(); });
