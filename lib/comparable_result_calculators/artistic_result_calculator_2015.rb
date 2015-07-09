@@ -10,11 +10,9 @@ class ArtisticResultCalculator_2015
     competitor.scores.any?
   end
 
-  # returns the result for this competitor
+  # returns the result to be displayed for this competitor
   def competitor_result(competitor)
-    if competitor.has_result?
-      total_points(competitor)
-    end
+    nil
   end
 
   # returns the result for this competitor
