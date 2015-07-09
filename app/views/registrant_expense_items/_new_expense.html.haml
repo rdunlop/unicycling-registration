@@ -13,7 +13,6 @@
         = ff.hidden_field :free, {:value => 1}
       - if @registrant_expense_item.has_details?
         = ff.label :details, @registrant_expense_item.details_label
-        \:
         \#{ff.text_field :details}
       - if item.has_custom_cost?
         (#{@config.currency_code})
