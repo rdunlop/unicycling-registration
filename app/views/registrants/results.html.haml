@@ -11,7 +11,9 @@
   %tbody
     - @results.each do |result|
       %tr
-        %td= result.competition
+        %td
+          = result.competition.award_title_name
+          = result.competition.award_subtitle_name
         %td= result.category_description
         %td= result.place
         %td= result.status

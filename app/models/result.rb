@@ -96,10 +96,12 @@ class Result < ActiveRecord::Base
     end
 
     if existing_result
-      if existing_result.place == new_place
+      if existing_result.place == new_place && existing_result.status == status && existing_result.result_subtype == result_subtype
         return
       else
         existing_result.place = new_place
+        existing_result.status = status
+        existing_result.result_subtype = result_subtype
         existing_result.save!
       end
     else
