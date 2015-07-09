@@ -48,18 +48,16 @@ module FormHelper
   end
 
   def wizard_progress_bar(allow_navigation = false)
-    content_tag(:div, class: "wizard_progress") do
-      content_tag(:ul) do
-        wizard_steps.collect do |every_step|
-          class_str = "unfinished"
-          class_str = "current"  if every_step == step
-          class_str = "finished" if past_step?(every_step)
-          concat(
-            content_tag(:li, class: class_str) do
-              link_to_if past_step?(every_step) || allow_navigation, I18n.t("wizard.#{every_step}"), wizard_path(every_step)
-            end
-          )
-        end
+    content_tag(:ul, class: "button-group") do
+      wizard_steps.collect do |every_step|
+        class_str = "secondary"
+        class_str = nil  if every_step == step
+        class_str = "success" if past_step?(every_step)
+        concat(
+          content_tag(:li) do
+            link_to_if past_step?(every_step) || allow_navigation, I18n.t("wizard.#{every_step}"), wizard_path(every_step), class: "button #{class_str}"
+          end
+        )
       end
     end
   end
