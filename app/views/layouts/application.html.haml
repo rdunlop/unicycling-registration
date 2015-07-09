@@ -23,7 +23,7 @@
       = render :partial => "layouts/test_mode"
       - if user_signed_in?
         %ul.breadcrumbs
-          = render_breadcrumbs tag: "li"
+          = render_breadcrumbs tag: "li", separator: ""
       - else
         .base_details
           .title= @config.short_name
