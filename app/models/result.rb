@@ -38,6 +38,11 @@ class Result < ActiveRecord::Base
     where(result_type: "Overall")
   end
 
+  # Filter Results to display only those which are marked as "Awarded" in the Database
+  def self.awarded
+    joins(competitor: [:competition]).merge(Competition.awarded)
+  end
+
   def self.update_last_data_update_time(competition, datetime = DateTime.now)
     Rails.cache.write("/competition/#{competition.id}/last_data_update_time", datetime)
   end

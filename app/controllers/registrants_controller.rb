@@ -89,7 +89,7 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/1/results
   def results
-    @results = @registrant.results
+    @results = @registrant.results.awarded
     respond_to do |format|
       format.html
     end

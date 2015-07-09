@@ -125,6 +125,10 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def self.awarded
+    where(awarded: true)
+  end
+
   def published?
     published_at.present?
   end
