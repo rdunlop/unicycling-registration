@@ -40,6 +40,8 @@ class Competitor < ActiveRecord::Base
   has_many :distance_attempts, -> { order "distance DESC, id DESC" }, dependent: :destroy
   has_one :tie_break_adjustment, dependent: :destroy
   has_many :time_results, dependent: :destroy
+  has_many :start_time_results, -> { active.merge(TimeResult.start_times) }, class_name: "TimeResult"
+  has_many :finish_time_results, -> { active.merge(TimeResult.finish_times) }, class_name: "TimeResult"
   has_one :external_result, dependent: :destroy
   has_many :results, dependent: :destroy, inverse_of: :competitor
 
@@ -454,16 +456,4 @@ class Competitor < ActiveRecord::Base
 
   delegate :lower_is_better, to: :scoring_helper
 
-  private
-
-  # time result calculations
-  def start_time_results
-    # time_results.start_times.active
-    time_results.select{ |time_result| time_result.status == "active" && time_result.is_start_time }
-  end
-
-  def finish_time_results
-    # time_results.finish_times.active
-    time_results.select{ |time_result| time_result.status == "active" && time_result.is_start_time == false }
-  end
 end
