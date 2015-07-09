@@ -13,7 +13,6 @@
           - else
             %li= @registrant.errors.full_message(attribute, error_message )
 
-  .data_block
-    - unless @categories.nil?
-      = render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f }
+  - unless @categories.nil?
+    = render :partial => "/attending/events", :locals => {:registrant => @registrant, :categories => @categories, :f => f }
   = render partial: "/registrants/form_actions", locals: {f: f}

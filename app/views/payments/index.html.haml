@@ -1,6 +1,6 @@
 %h1= t(".persons_payments", :registrant => @title_name )
 - unless @payments.empty?
-  %table.payments.alternate
+  %table.payments
     %tr
       %th Payment Id
       %th Amount
@@ -18,7 +18,7 @@
             = link_to 'Show Details', payment
 %br
 - unless @refunds.empty?
-  %table.refunds.alternate
+  %table.refunds
     %tr
       %th Refund Id
       %th Refunded by
