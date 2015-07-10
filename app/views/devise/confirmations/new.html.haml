@@ -1,11 +1,11 @@
 %h2= t(".title")
 
 %p= t(".spam_reminder")
-= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
   = devise_error_messages!
   %div
     = f.label :email
     %br
     = f.email_field :email
-  %div= f.submit t(".title"), :class => "focus_button"
+  %div= f.button :submit, t(".title"), :class => "focus_button"
 = render "devise/shared/links"

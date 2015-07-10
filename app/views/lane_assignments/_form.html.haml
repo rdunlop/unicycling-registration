@@ -1,4 +1,4 @@
-= form_for(@lane_assignment.persisted? ? @lane_assignment : [@competition, @lane_assignment], remote: remote) do |f|
+= simple_form_for(@lane_assignment.persisted? ? @lane_assignment : [@competition, @lane_assignment], remote: remote) do |f|
   = render partial: "/shared/error_messages", object: @lane_assignment
   - if @lane_assignment.persisted? || !@config.can_create_competitors_at_lane_assignment
     .field
@@ -19,4 +19,4 @@
     %br
     = f.number_field :lane, {min: 1, required: true}
   .actions
-    = f.submit class: "multiclick"
+    = f.button :submit, class: "multiclick"

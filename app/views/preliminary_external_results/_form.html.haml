@@ -18,4 +18,4 @@
       %td= f.input :points, input_html: {min: 0, :step => 0.001 }, label: false
       %td= f.input :details, label: false
       %td= f.input :status, label: false, collection: ExternalResult.status_values, include_blank: false
-      %td= f.submit
+      %td= f.button :submit

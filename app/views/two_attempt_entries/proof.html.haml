@@ -35,4 +35,4 @@
           %td.competitor_not_exists No
 - if can? :approve, ImportResult
   %ul
-    %li= link_to "Accept these Results", approve_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "data_import_submit"
+    %li= link_to "Accept these Results", approve_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "button success"

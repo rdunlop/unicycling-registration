@@ -1,6 +1,6 @@
 %h4= t(".header")
 = render :partial => "/shared/error_messages", :object => @contact_form
-= form_for @contact_form, url: welcome_feedback_path do |f|
+= simple_form_for @contact_form, url: welcome_feedback_path do |f|
   = f.label :email, t(".email")
   = f.text_field :email, placeholder: t(".optional")
   %br
@@ -8,4 +8,4 @@
   %br
   - if recaptcha_required?
     = recaptcha_tags
-  = f.submit t(".submit"), :class => "focus_button"
+  = f.button :submit, t(".submit"), :class => "focus_button"

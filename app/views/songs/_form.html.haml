@@ -1,8 +1,8 @@
-= form_for(@song.new_record? ? [@registrant, @song] : [@song]) do |f|
+= simple_form_for(@song.new_record? ? [@registrant, @song] : [@song]) do |f|
   = render partial: "shared/error_messages", object: @song
   .field
     = f.label :event
     = f.collection_select :event_id, Event.music_uploadable, :id, :name
     = f.label :description
     = f.text_field :description
-    = f.submit "Next Step"
+    = f.button :submit, "Next Step"

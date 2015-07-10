@@ -1,13 +1,14 @@
 %h1= t(".title")
 
 %h3= t(".change_header")
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
   %div
     = f.label :email
     %br
     = f.email_field :email
 
+  -# this page needs help
   %fieldset.data_block
     %legend= t(".change_password")
     %div
@@ -24,7 +25,7 @@
     %i (#{t(".confirm_password_notice")})
     %br
     = f.password_field :current_password
-  %div= f.submit t(".action"), :class => "focus_button"
+  %div= f.button :submit, t(".action"), :class => "focus_button"
 
 - if resource.roles.any?
   %h3= t(".current_permissions")

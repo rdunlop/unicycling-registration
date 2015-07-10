@@ -1,4 +1,4 @@
-= form_for(@award_label.new_record? ? [@user, @award_label] : [@award_label]) do |f|
+= simple_form_for(@award_label.new_record? ? [@user, @award_label] : [@award_label]) do |f|
   - if @award_label.errors.any?
     #error_explanation
       %h2
@@ -28,4 +28,4 @@
   %td= f.text_field :details
   %td= f.number_field :place, {min: 0}
   %td= f.select :registrant_id, Registrant.select_box_options
-  %td= f.submit
+  %td= f.button :submit

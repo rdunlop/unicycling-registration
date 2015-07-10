@@ -1,4 +1,4 @@
-= form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry], |
+= simple_form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry], |
   {:remote => false, :html => {:class => "data_entry"}}) do |f|                                    |
   = render partial: "/shared/error_messages", object: @two_attempt_entry
   = f.hidden_field :is_start_time
@@ -34,6 +34,6 @@
         %td= f.number_field :seconds_2, {:min => 0}
         %td= f.number_field :thousands_2, {:min => 0}
         %td= f.select :status_2, TimeResult.status_values, include_blank: true
-        %td{ colspan: "3"}= f.submit "Submit", :class => "multiclick"
+        %td{ colspan: "3"}= f.button :submit, "Submit", :class => "multiclick"
 
 #notice

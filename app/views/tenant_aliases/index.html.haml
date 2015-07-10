@@ -23,12 +23,12 @@
       = label_tag :website_alias
       = text_field_tag :website_alias, @tenant_alias.website_alias, disabled: true
     - else
-      = form_for(@tenant_alias) do |f|
+      = simple_form_for(@tenant_alias) do |f|
         = render partial: "shared/error_messages", object: @tenant_alias
         Enter the URL of the new domain
         = f.text_field :website_alias
         =# f.submit "Verify Alias CNAME Record"
-        = f.submit "Save Record"
+        = f.button :submit, "Save Record"
   -# %li
     = label_tag :verified, "Alias Verified"
     = check_box_tag :verified, nil, @tenant_alias.verified?, disabled: true

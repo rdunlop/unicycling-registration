@@ -1,4 +1,4 @@
-= form_for(@song, url: create_guest_song_user_songs_path(@user)) do |f|
+= simple_form_for(@song, url: create_guest_song_user_songs_path(@user)) do |f|
   = render partial: "shared/error_messages", object: @song
   .field
     = f.label :registrant_id
@@ -7,4 +7,4 @@
     = f.collection_select :event_id, Event.music_uploadable, :id, :name
     = f.label :description
     = f.text_field :description
-    = f.submit "Next Step"
+    = f.button :submit, "Next Step"

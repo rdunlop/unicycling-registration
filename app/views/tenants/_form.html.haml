@@ -1,4 +1,4 @@
-= form_for(@new_tenant) do |f|
+= simple_form_for(@new_tenant) do |f|
   = render partial: "shared/error_messages", object: @tenant
 
   %p
@@ -25,4 +25,4 @@
         %td= f.text_field :admin_upgrade_code
         %td Specify the code you want to use to upgrade your user account to an Convention Admin account.
 
-  = f.submit
+  = f.button :submit

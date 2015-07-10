@@ -2,7 +2,7 @@
 
 -#
   - class_name.translates?
-= form_for(object, url: target_path, method: :put) do |f|
+= simple_form_for(object, url: target_path, method: :put) do |f|
   = render partial: "/shared/error_messages", object: object
   - languages.each do |lang|
     .translation_language
@@ -19,5 +19,5 @@
               - else
                 = g.text_area attr_sym
   %br
-  = f.submit
+  = f.button :submit
 

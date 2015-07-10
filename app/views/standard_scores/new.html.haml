@@ -1,6 +1,6 @@
 %h2= @competitor
 .skills
-  = form_for @judge do |f|
+  = simple_form_for @judge do |f|
     %table
       %thead
         %tr
@@ -34,4 +34,4 @@
               %td= scores_form.text_field :line, :size => 5
               %td= scores_form.text_field :cross, :size => 5
               %td= scores_form.text_field :circle, :size => 5
-    = f.submit
+    = f.button :submit

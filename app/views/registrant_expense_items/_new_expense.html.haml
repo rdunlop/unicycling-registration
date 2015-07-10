@@ -5,7 +5,7 @@
     - unless item.has_custom_cost?
       = print_item_cost_currency(item.total_cost)
   %td
-    = form_for [@registrant, @registrant_expense_item] do |ff|
+    = simple_form_for [@registrant, @registrant_expense_item] do |ff|
       = render :partial => "/shared/error_messages", :object => @registrant_expense_item
       = ff.hidden_field :registrant_id
       = ff.hidden_field :expense_item_id
@@ -18,8 +18,8 @@
         (#{@config.currency_code})
         \#{ff.number_field :custom_cost, {min: 0}}
       - if show_as_free
-        = ff.submit t(".add_free_item"), {:title => t(".one_is_free"), :class => "free_item"}
+        = ff.button :submit, t(".add_free_item"), {:title => t(".one_is_free"), :class => "free_item"}
       - elsif item.maximum_reached?
-        = ff.submit t(".sold_out"), :disabled => true, :class => "sold_out"
+        = ff.button :submit, t(".sold_out"), :disabled => true, :class => "sold_out"
       - else
-        = ff.submit t(".add_item"), :class => "cost_item"
+        = ff.button :submit, t(".add_item"), :class => "cost_item"

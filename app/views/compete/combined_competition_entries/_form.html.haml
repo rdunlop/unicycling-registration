@@ -1,4 +1,4 @@
-= form_for([@combined_competition, @combined_competition_entry]) do |f|
+= simple_form_for([@combined_competition, @combined_competition_entry]) do |f|
   = render partial: "/shared/error_messages", object: @combined_competition_entry
   .field
     = f.label :abbreviation
@@ -25,4 +25,4 @@
       %br
       = f.number_field "points_#{place}".to_sym, {min: 0}
   .actions
-    = f.submit
+    = f.button :submit

@@ -1,4 +1,4 @@
-= form_for(@time_result.new_record? ? [@competition, @time_result] : [@time_result]) do |f|
+= simple_form_for(@time_result.new_record? ? [@competition, @time_result] : [@time_result]) do |f|
   = render partial: "/shared/error_messages", object: @time_result
   %table
     %thead
@@ -23,4 +23,4 @@
         %td= f.text_field :comments
         %td= f.text_field :comments_by
         %td= f.number_field :number_of_laps, {min: 1}
-        %td= f.submit
+        %td= f.button :submit

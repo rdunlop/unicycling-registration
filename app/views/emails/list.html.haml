@@ -27,7 +27,7 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
 
 %h4 E-mail
 = render :partial => "/shared/error_messages", :object => @email_form
-= form_for @email_form, url: emails_path do |f|
+= simple_form_for @email_form, url: emails_path do |f|
   = render partial: "form", locals: { f: f }
   %br
   %br
@@ -40,5 +40,5 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
   = f.label :body
   = f.text_area :body, {:cols => 100, :rows => 6 }
   %br
-  = f.submit "Send Email", :class => "focus_button"
+  = f.button :submit, "Send Email", :class => "focus_button"
 %hr
