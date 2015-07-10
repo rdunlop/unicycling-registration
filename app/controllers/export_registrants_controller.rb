@@ -5,7 +5,7 @@ class ExportRegistrantsController < ApplicationController
   include ExcelOutputter
 
   def download_all
-    headers = ["Registrant ID", "First Name", "Last Name", "Address", "City", "Zip", "Country",
+    headers = ["Registrant ID", "First Name", "Last Name", "Gender", "Address", "City", "Zip", "Country",
                "Place of Birth", "Birthday", "Italian Fiscal Code", "Volunteer", "email", "Phone", "Mobile", "User Email"]
 
     data = []
@@ -14,6 +14,7 @@ class ExportRegistrantsController < ApplicationController
         registrant.bib_number,
         registrant.first_name,
         registrant.last_name,
+        registrant.gender,
         registrant.contact_detail.try(:address),
         registrant.contact_detail.try(:city),
         registrant.contact_detail.try(:zip),
