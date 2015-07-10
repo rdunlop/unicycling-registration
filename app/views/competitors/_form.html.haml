@@ -1,11 +1,13 @@
 - # variable 'form' is being passed in
 = render :partial => "/shared/error_messages", :object => form
-= form_for form.persisted? ? form : [form.competition, form] do |f|
-  = f.label :custom_name, "Group/Team Name (optional)"
-  = f.text_field :custom_name
-  %br
-  = f.label :status
-  = f.select :status, Competitor.statuses.keys
+= simple_form_for form.persisted? ? form : [form.competition, form] do |f|
+  .row
+    .small-6.columns
+      = f.label :custom_name, "Group/Team Name (optional)"
+      = f.text_field :custom_name
+    .small-3.columns
+      = f.label :status
+      = f.select :status, Competitor.statuses.keys
   %fieldset.items
     %legend Registrants
     = f.nested_fields_for :members do |member_f|
@@ -18,4 +20,4 @@
   %a.add{:href => "#"} add registrant
   %br
   %br
-  = f.submit
+  = f.button :submit

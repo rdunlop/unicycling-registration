@@ -268,7 +268,7 @@ $include-html-global-classes: $include-html-classes;
 // $code-padding: rem-calc(2) rem-calc(5) rem-calc(1);
 
 // We use these to style anchors
-// $anchor-text-decoration: none;
+$anchor-text-decoration: underline;
 // $anchor-text-decoration-hover: none;
 // $anchor-font-color: $primary-color;
 // $anchor-font-color-hover: scale-color($anchor-font-color, $lightness: -14%);
