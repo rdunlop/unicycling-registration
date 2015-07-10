@@ -7,15 +7,16 @@
       %ul
         - @external_result.errors.full_messages.each do |msg|
           %li= msg
-  %table
-    %tr
-      %th= f.label :competitor_id
-      %th= f.label :points
-      %th= f.label :details
-      %th= f.label :status
-    %tr
-      %td= competitor_select_box(f, @competition)
-      %td= f.input :points, input_html: {min: 0, :step => 0.001 }, label: false
-      %td= f.input :details, label: false
-      %td= f.input :status, label: false, collection: ExternalResult.status_values, include_blank: false
-      %td= f.button :submit
+  %div
+    .row
+      .small-3.columns
+        = f.label :competitor_id
+        = competitor_select_box(f, @competition)
+      .small-2.columns
+        = f.input :points, input_html: {min: 0, :step => 0.001 }
+      .small-2.columns
+        = f.input :details
+      .small-2.columns
+        = f.input :status, collection: ExternalResult.status_values, include_blank: false
+      .small-3.columns
+        = f.button :submit

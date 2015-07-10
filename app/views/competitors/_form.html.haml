@@ -3,21 +3,22 @@
 = simple_form_for form.persisted? ? form : [form.competition, form] do |f|
   .row
     .small-6.columns
+      %fieldset.items
+        %legend Registrants
+        = f.nested_fields_for :members do |member_f|
+          .item
+            = member_f.label :registrant
+            = all_registrant_competitors(member_f)
+            %a.remove{:href => "#"} remove
+            = member_f.hidden_field :id
+            = member_f.hidden_field :_destroy
+      %a.add{:href => "#"} add registrant
+    .small-3.columns
       = f.label :custom_name, "Group/Team Name (optional)"
       = f.text_field :custom_name
     .small-3.columns
       = f.label :status
       = f.select :status, Competitor.statuses.keys
-  %fieldset.items
-    %legend Registrants
-    = f.nested_fields_for :members do |member_f|
-      .item
-        = member_f.label :registrant
-        = all_registrant_competitors(member_f)
-        %a.remove{:href => "#"} remove
-        = member_f.hidden_field :id
-        = member_f.hidden_field :_destroy
-  %a.add{:href => "#"} add registrant
   %br
   %br
   = f.button :submit
