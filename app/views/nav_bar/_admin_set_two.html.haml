@@ -1,0 +1,27 @@
+- if @config.standard_skill && can?(:manage, StandardSkillEntry)
+  %li= link_to 'Standard Skill Entries', standard_skill_entries_path
+- if can?(:cache, EventConfiguration)
+  %li= link_to 'Cache Management', cache_event_configuration_path
+- if can?(:manage_all, :registrant)
+  %li= link_to  'Registrants (edit/print)', manage_one_registrants_path
+- if can?(:bag_labels, :registrant)
+  %li= link_to  'Registrants (bag labels)', bag_labels_registrants_path(:format => :pdf)
+- if can?(:read, Email)
+  %li= link_to  'Registrants (email)', emails_path
+- if can?(:manage, Registrant)
+  %li= link_to  'Registrant Groups', registrant_groups_path
+- if can?(:manage, :all)
+  %li= link_to  'Export Data', export_index_path
+- if can?(:manage, :all)
+  %li= link_to  'Import Data', new_import_path
+- if can?(:manage, :usa_membership) && @config.usa_membership_config?
+  %li= link_to  'USA Membership Management', usa_memberships_path
+- if can?(:read, :research)
+  %li= link_to  'Multi-Tenant Research', research_competitions_path
+- if can?(:access, :rails_admin)
+  %li= link_to  'Modification History', rails_admin_path
+- if @config.standard_skill
+  - if can?(:manage, StandardSkillRoutine)
+    %li= link_to  'Standard Skill Routines (view)', standard_skill_routines_path
+  - if can?(:manage, StandardSkillRoutine)
+    %li= link_to  'Standard Skill Routines (export)', download_file_standard_skill_routines_path

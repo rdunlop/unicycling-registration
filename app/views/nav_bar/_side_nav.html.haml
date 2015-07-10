@@ -1,0 +1,24 @@
+%nav.tab-bar.show-for-small-only
+  %section.left-small
+    %a.left-off-canvas-toggle.menu-icon{ href: "#"}
+      %span
+  %section.middle.tab-bar-section= @config.short_name
+  %section.right
+    = link_to t('.sign_out'), destroy_user_session_path, method: :delete
+
+%aside.left-off-canvas-menu
+  %ul.off-canvas-list
+    = render "nav_bar/my_links"
+    - if user_signed_in? && current_user.roles.any?
+      %li.has-submenu.admin_bar
+        %a{ href: "#" } Admin Bar
+        %ul.left-submenu.admin_bar
+          %li.back
+            %a{ href: "#" } Back
+          = render "nav_bar/admin_set_one"
+      %li.has-submenu.admin_bar
+        %a{ href: "#" } Admin Bar
+        %ul.left-submenu.admin_bar
+          %li.back
+            %a{ href: "#" } Back
+          = render "nav_bar/admin_set_two"

@@ -1,7 +1,7 @@
 ---
 en:
-  layouts:
-    navbar:
+  nav_bar:
+    my_links:
       all_registrants: All Registrants
       log_in: Log In
       my_account: My Account
@@ -9,4 +9,3 @@ en:
       my_registrations: My Registrations
       my_standard_skill_routines: My Standard Skill Routines
       results: Competitions/Results
-      sign_out: Sign out

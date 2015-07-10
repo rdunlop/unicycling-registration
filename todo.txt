@@ -1,6 +1,7 @@
 =================== New STyling =========================
 
 Need to be able to print-pdf of Registrant Summary with confidence that it will lay out nicely.
+Change fieldset__form to be .row-like?
 
 ================== New Awards/Results Calculation Logic ============================
 - Combine the AwardLabel multiple-lines-of-text with the Registrant#results page, with the Result object data
