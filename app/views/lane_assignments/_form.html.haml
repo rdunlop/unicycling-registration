@@ -1,22 +1,22 @@
 = simple_form_for(@lane_assignment.persisted? ? @lane_assignment : [@competition, @lane_assignment], remote: remote) do |f|
   = render partial: "/shared/error_messages", object: @lane_assignment
-  - if @lane_assignment.persisted? || !@config.can_create_competitors_at_lane_assignment
-    .field
-      = f.label :competitor_id
+  .row
+    .small-6.columns
+      - if @lane_assignment.persisted? || !@config.can_create_competitors_at_lane_assignment
+        = f.label :competitor_id
+        %br
+        = competitor_select_box(f, @competition)
+      - else
+        = f.label :registrant_id
+        %br
+        = f.select :registrant_id, options_from_collection_for_select(Registrant.active.competitor, "id", "with_id_to_s"), {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus' }
+    .small-3.columns
+      = f.label :heat
       %br
-      = competitor_select_box(f, @competition)
-  - else
-    .field
-      = f.label :registrant_id
+      = f.number_field :heat, {min: 1, required: true}
+    .small-3.columns
+      = f.label :lane
       %br
-      = f.select :registrant_id, options_from_collection_for_select(Registrant.active.competitor, "id", "with_id_to_s"), {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus' }
-  .field
-    = f.label :heat
-    %br
-    = f.number_field :heat, {min: 1, required: true}
-  .field
-    = f.label :lane
-    %br
-    = f.number_field :lane, {min: 1, required: true}
-  .actions
+      = f.number_field :lane, {min: 1, required: true}
+  .row
     = f.button :submit, class: "multiclick"
