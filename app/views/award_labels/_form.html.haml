@@ -7,25 +7,25 @@
       %ul
         - @award_label.errors.full_messages.each do |msg|
           %li= msg
-  %table
-    %thead
-      %tr
-        %th= f.label :bib_number
-        %th= f.label :competitor_name
-        %th= f.label :competition_name
-        %th= f.label :team_name
-        %th= f.label :category
-        %th= f.label :details
-        %th= f.label :place
-        %th= f.label :registrant_id
-        %th
-    %tbody
-  %td= f.number_field :bib_number
-  %td= f.text_field :competitor_name
-  %td= f.text_field :competition_name
-  %td= f.text_field :team_name
-  %td= f.text_field :category
-  %td= f.text_field :details
-  %td= f.number_field :place, {min: 0}
-  %td= f.select :registrant_id, Registrant.select_box_options
-  %td= f.button :submit
+  .row
+    .small-1.column= f.label :bib_number
+    .small-2.column= f.label :competitor_name
+    .small-2.column= f.label :competition_name
+    .small-2.column= f.label :team_name
+    .small-2.column= f.label :category
+    .small-2.column.end= f.label :details
+  .row
+    .small-1.column= f.number_field :bib_number
+    .small-2.column= f.text_field :competitor_name
+    .small-2.column= f.text_field :competition_name
+    .small-2.column= f.text_field :team_name
+    .small-2.column= f.text_field :category
+    .small-2.column.end= f.text_field :details
+  .row
+    .small-1.column= f.label :place
+    .small-3.column.end= f.label :registrant_id
+  .row
+    .small-1.column= f.number_field :place, {min: 0}
+    .small-3.column.end= f.select :registrant_id, Registrant.select_box_options
+  .row
+    .small-12.column= f.button :submit
