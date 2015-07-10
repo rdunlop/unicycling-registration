@@ -1,6 +1,5 @@
 - if user_signed_in? && @config.test_mode?
-  .test_mode
-    %a#test_mode_remover.banner_remover{"data-banner-class" => "test_mode", :href => "#", :title => "Remove test banner"} [x]
+  .alert-box.alert.top_banner{ data: { alert: true } }
     %h2 Test Mode Enabled
     %span
       Current User Roles: #{current_user.roles.map{|role| role.name.humanize}.join(", ")}
@@ -10,3 +9,4 @@
       - User.roles.each do |role|
         = link_to "Toggle #{role.to_s.humanize} Role", test_mode_role_event_configuration_path(role: role), :method => :post
         %br
+    %a.close{ href: "#" } &times;

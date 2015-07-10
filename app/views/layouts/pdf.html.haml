@@ -13,7 +13,7 @@
       }
   %body.pdf_body{:onload => "number_pages"}
     - if Rails.application.secrets.development_banner
-      .dev_banner
+      .alert-box.alert.top_banner{ data: { alert: true } }
         Non-Live System.
     .body
       = yield

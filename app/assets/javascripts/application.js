@@ -21,13 +21,6 @@
 //= require jquery.datetimepicker
 //= require_tree .
 
-$(document).ready(function() {
-  $(document).on("click", ".banner_remover", function() {
-    $("." + $(this).data("banner-class")).remove();
-    return false;
-  });
-});
-
 $(document).ready(function () {
   if (!$('input').hasClass("multiclick")) {
     $('form').submit(function() {

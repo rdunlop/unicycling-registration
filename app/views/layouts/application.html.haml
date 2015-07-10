@@ -20,12 +20,13 @@
     = render partial: "layouts/admin_headers"
     .off-canvas-wrap{ data: { offcanvas: true } }
       .inner-wrap
+        = render "layouts/test_mode"
         = render "nav_bar/side_nav"
 
         #container
           = render "nav_bar/top_nav"
 
-          = render :partial => "layouts/test_mode"
+
           - if user_signed_in?
             = render "shared/breadcrumbs"
           - else
