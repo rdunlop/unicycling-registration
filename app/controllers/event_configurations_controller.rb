@@ -7,9 +7,9 @@ class EventConfigurationsController < ConventionSetupController
   EVENT_CONFIG_PAGES.each do |page|
     define_method("update_#{page}") do
       update(page)
-      authorize @event_configuration, :setup_convention?
     end
     before_action "set_#{page}_breadcrumbs".to_sym, only: ["update_#{page}".to_sym, "#{page}".to_sym]
+    before_action "authorize_convention_setup".to_sym, only: ["update_#{page}".to_sym, "#{page}".to_sym]
     define_method("set_#{page}_breadcrumbs") do
       add_breadcrumb page.to_s.humanize
     end
@@ -49,6 +49,10 @@ class EventConfigurationsController < ConventionSetupController
 
   def authorize_cache
     authorize @event_configuration, :manage_cache?
+  end
+
+  def authorize_convention_setup
+    authorize @event_configuration, :setup_convention?
   end
 
   def update(page)

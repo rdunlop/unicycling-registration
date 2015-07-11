@@ -134,9 +134,6 @@ describe "Ability" do
     it { is_expected.to be_able_to(:crud, EventChoice) }
     it { is_expected.to be_able_to(:crud, EventCategory) }
     it { is_expected.to be_able_to(:crud, VolunteerOpportunity) }
-    it { is_expected.to be_able_to(:read, :permission)}
-    it { is_expected.to be_able_to(:set_password, :permission)}
-    it { is_expected.to be_able_to(:set_role, :permission)}
   end
 
   describe "as an admin" do
