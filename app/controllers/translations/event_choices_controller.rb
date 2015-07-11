@@ -22,7 +22,7 @@ class Translations::EventChoicesController < Admin::TranslationsController
   private
 
   def load_event_choice
-    @event_choice = EventChoice.find(params[:id]
+    @event_choice = EventChoice.find(params[:id])
   end
 
   def event_choice_params
