@@ -1,6 +1,6 @@
 - return if total_owing == 0
 .registrations_box
-  - if @config.online_payment? && can?(:create, Payment)
+  - if @config.online_payment? && policy(@user).create_payments?
     .payment_process
       = link_to t(".pay_now"), new_payment_path, :class => "payment_link"
     .prices_increase

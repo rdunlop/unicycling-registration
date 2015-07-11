@@ -38,7 +38,7 @@ class Admin::RegistrantsController < ApplicationController
   end
 
   def undelete
-    authorize! :undelete, :registrant
+    authorize @registrant, :undelete?
     @registrant.deleted = false
 
     respond_to do |format|
@@ -93,9 +93,5 @@ class Admin::RegistrantsController < ApplicationController
 
   def load_registrant
     @registrant = Registrant.find_by(bib_number: params[:id])
-  end
-
-  def authorize
-    authorize! :manage, :registrants
   end
 end

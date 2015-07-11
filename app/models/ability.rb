@@ -341,12 +341,10 @@ class Ability
       can :bag_labels, :registrant
 
       can [:read, :create, :list], Email
-      can :crud, CompetitionWheelSize
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
       can :manage, :event_song
       can :manage, :competition_song
-      can [:crud], CompetitionWheelSize
     end
 
     unless artistic_reg_closed?
@@ -358,8 +356,6 @@ class Ability
     end
 
     unless reg_closed?
-      can :crud, CompetitionWheelSize # allowed, because we have authorize! calls in the controller
-
       # can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
         (!rei.system_managed?) && (user.editable_registrants.include?(rei.registrant))

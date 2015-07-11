@@ -2,11 +2,9 @@ require 'spec_helper'
 
 describe "registrants/index" do
   before(:each) do
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    allow(controller).to receive(:current_ability) { @ability }
     @user = FactoryGirl.build_stubbed(:user)
     assign(:config, FactoryGirl.create(:event_configuration))
+    assign(:registrant, Registrant.new)
   end
 
   describe "with no registrants" do
@@ -43,7 +41,6 @@ describe "registrants/index" do
     end
 
     it "renders a list of registrants" do
-      @ability.can :create, Payment
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
       assert_select "a", text: "Robin Dunlop".to_s, count: 1

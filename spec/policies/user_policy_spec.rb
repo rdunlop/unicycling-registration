@@ -29,4 +29,10 @@ describe UserPolicy do
       expect(subject).to permit(user, user)
     end
   end
+
+  permissions :create_payments? do
+    it "allows me to create payments" do
+      expect(subject).to permit(user, user)
+    end
+  end
 end
