@@ -172,8 +172,6 @@ class Ability
   def define_payment_admin_roles(user)
     if user.has_role? :payment_admin
       # Can read _any_ payment
-      can [:new, :choose, :create], :manual_payment
-      can [:new, :choose, :create], :manual_refund
       can :list, :payment_adjustment
       can :set_reg_fee, :registrant
       can [:list, :payments, :payment_details], :export_payment

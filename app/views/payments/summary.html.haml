@@ -6,11 +6,11 @@
   %small If we need to lock a competitor into a previous Registration Period
   %br
 
-- if can? :new, :manual_payment
+- if policy(current_user).manage_all_payments?
   = link_to "Manually Receive Payment", new_manual_payment_path
   %br
 
-- if can? :new, :manual_refund
+- if policy(current_user).manage_all_payments?
   = link_to "Create Refund", new_manual_refund_path
   %br
 

@@ -8,6 +8,11 @@ class UserPolicy < ApplicationPolicy
     !reg_closed? || super_admin?
   end
 
+  # is this user allowed to make manual-received payments/etc?
+  def manage_all_payments?
+    payment_admin? || super_admin?
+  end
+
   def logged_in?
     true
   end
