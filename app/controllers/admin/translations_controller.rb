@@ -1,6 +1,5 @@
 class Admin::TranslationsController < ApplicationController
-  before_action :authenticate_user!
-  authorize_resource :translation, class: false
+  before_action :authorize_setup
   before_action :add_breadcrumbs
 
   def index
@@ -13,6 +12,10 @@ class Admin::TranslationsController < ApplicationController
   end
 
   private
+
+  def authorize_setup
+    authorize @config, :setup_convention?
+  end
 
   def add_breadcrumbs
     add_breadcrumb "Translations", translations_path

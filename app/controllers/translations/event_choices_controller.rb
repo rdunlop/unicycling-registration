@@ -1,6 +1,5 @@
 class Translations::EventChoicesController < Admin::TranslationsController
-  before_action :authenticate_user!
-  load_resource
+  before_action :load_event_choice, except: :index
 
   def index
     @event_choices = EventChoice.all
@@ -21,6 +20,10 @@ class Translations::EventChoicesController < Admin::TranslationsController
   end
 
   private
+
+  def load_event_choice
+    @event_choice = EventChoice.find(params[:id]
+  end
 
   def event_choice_params
     params.require(:event_choice).permit(translations_attributes: [:id, :locale, :label, :tooltip])

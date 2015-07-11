@@ -165,34 +165,15 @@ class Ability
 
   end
 
-  def define_convention_admin_roles(user)
-    # #################################################
-    # Begin new role definitions
-    # #################################################
-    if user.has_role? :convention_admin
-      can :crud, RegistrationPeriod
-      can :crud, Category
-      can :crud, Event
-      can :crud, EventChoice
-      can :crud, EventCategory
-      can :crud, VolunteerOpportunity
-      can :read, :onsite_registration
-      can :manage, :translation
-    end
-  end
+  # #################################################
+  # Begin new role definitions
+  # #################################################
 
   def define_music_dj_roles(user)
     if user.has_role? :music_dj
       can :manage, :event_song
       can :manage, :competition_song
       # automatically can download music via S3 links
-    end
-  end
-
-  def define_translator_roles(user)
-    if user.has_role? :translator
-      can :manage, :translation
-      can :manage, :all_site_translations
     end
   end
 
@@ -263,9 +244,7 @@ class Ability
       return # required in order to allow rails_admin to function
     end
 
-    define_convention_admin_roles(user)
     define_music_dj_roles(user)
-    define_translator_roles(user)
     define_payment_admin_roles(user)
     define_event_planner_roles(user)
     define_competition_admin_roles(user)

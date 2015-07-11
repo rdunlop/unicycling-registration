@@ -1,10 +1,9 @@
 class ConventionSetup::EventChoicesController < ConventionSetupController
   include SortableObject
 
-  before_action :authenticate_user!
   before_action :load_event, only: [:index, :create]
-  before_action :load_new_event_choice, only: [:create]
-  load_and_authorize_resource
+  before_action :load_event_choice, except: [:index, :create]
+  before_action :authorize_setup
 
   before_action :set_breadcrumbs
 
@@ -27,6 +26,7 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
   # POST /event/1/event_choices
   # POST /event/1/event_choices.json
   def create
+    @event_choice = @event.event_choices.new(event_choice_params)
     if @event_choice.save
       flash[:notice] = 'Event choice was successfully created.'
     else
@@ -55,6 +55,10 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
 
   private
 
+  def authorize_setup
+    authorize @config, :setup_convention?
+  end
+
   def sortable_object
     EventChoice.find(params[:id])
   end
@@ -67,10 +71,6 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
 
   def load_event
     @event = Event.find(params[:event_id])
-  end
-
-  def load_new_event_choice
-    @event_choice = @event.event_choices.new(event_choice_params)
   end
 
   def load_choices

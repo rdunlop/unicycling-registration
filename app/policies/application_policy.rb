@@ -35,6 +35,10 @@ class ApplicationPolicy
     false
   end
 
+  def translator?
+    user.has_role?(:translator)
+  end
+
   def convention_admin?
     user.has_role?(:convention_admin)
   end

@@ -15,7 +15,7 @@
 
 %hr
 
-- if can? :manage, :all_site_translations
+- if policy(:translation, :manage_all_site_translations?)
   = render "all_site_translations"
   %hr
 - else

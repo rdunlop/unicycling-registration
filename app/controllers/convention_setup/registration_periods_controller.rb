@@ -1,6 +1,6 @@
 class ConventionSetup::RegistrationPeriodsController < ConventionSetupController
-  before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :authorize_setup
+  before_action :load_registration_period, except: [:index, :create]
 
   before_action :set_breadcrumbs
 
@@ -33,6 +33,7 @@ class ConventionSetup::RegistrationPeriodsController < ConventionSetupController
   # POST /registration_periods
   # POST /registration_periods.json
   def create
+    @registration_period = RegistrationPeriod.new(registration_period_params)
     creator = CreatesRegistrationPeriod.new(@registration_period)
 
     respond_to do |format|
@@ -70,6 +71,14 @@ class ConventionSetup::RegistrationPeriodsController < ConventionSetupController
   end
 
   private
+
+  def authorize_setup
+    authorize @config, :setup_convention?
+  end
+
+  def load_registration_period
+    RegistrationPeriod.find(params[:id])
+  end
 
   def set_breadcrumbs
     add_breadcrumb "Registration Costs", registration_periods_path
