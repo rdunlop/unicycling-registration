@@ -8,10 +8,6 @@ class PreliminaryExternalResultsController < ApplicationController
 
   before_action :set_breadcrumbs, only: :index
 
-  def authorize_res
-    authorize! :create_preliminary_result, (@competition || @external_result.competition)
-  end
-
   # GET /competitions/#/preliminary_external_results
   def index
     add_breadcrumb "Preliminary Points Results"
@@ -99,6 +95,10 @@ class PreliminaryExternalResultsController < ApplicationController
   end
 
   private
+
+  def authorize_res
+    authorize! :create_preliminary_result, (@competition || @external_result.competition)
+  end
 
   def set_breadcrumbs
     add_to_competition_breadcrumb(@competition)

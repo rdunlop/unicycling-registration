@@ -45,16 +45,6 @@ class PointsScoringClass < BaseScoringClass
     competition_external_results_path(competition)
   end
 
-  # from import_result to external_result
-  def build_result_from_imported(import_result)
-    ExternalResult.new(
-      points: import_result.points,
-      details: import_result.details,
-      entered_at: import_result.created_at,
-      entered_by: import_result.user,
-      status: "active")
-  end
-
   def requires_age_groups
     false
   end
