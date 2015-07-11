@@ -5,4 +5,10 @@ class CompetitionPolicy < ApplicationPolicy
     user.has_role?(:race_official, record) || admin? || super_admin?
   end
 
+  class Scope < Scope
+    def resolve
+      scope.none
+    end
+  end
+
 end
