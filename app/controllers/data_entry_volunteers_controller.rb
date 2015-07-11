@@ -11,7 +11,6 @@ class DataEntryVolunteersController < ApplicationController
     add_breadcrumb "Manage Data Entry Volunteers", competition_data_entry_volunteers_path(@competition)
 
     @all_data_entry_volunteers = User.with_role(:data_entry_volunteer).order(:email)
-    @race_officials = User.with_role(:race_official).order(:email)
 
     @events = Event.all
   end

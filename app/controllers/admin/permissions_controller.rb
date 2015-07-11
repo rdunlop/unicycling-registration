@@ -35,14 +35,4 @@ class Admin::PermissionsController < ApplicationController
     redirect_to permissions_path
   end
 
-  # this should b e moved somewhere
-  def create_race_official
-    @competition = Competition.find(params[:competition_id])
-    @user = User.find(params[:user_id])
-    if @user.add_role(:race_official)
-      redirect_to competition_judges_path(@competition), notice: 'Race Official successfully created.'
-    else
-      redirect_to competition_judges_path(@competiton), alert: 'Unable to add Race Official role to user.'
-    end
-  end
 end

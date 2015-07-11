@@ -7,7 +7,6 @@ describe "judges/index" do
     assign(:competition, @ec)
     assign(:events, [])
     assign(:all_data_entry_volunteers, [])
-    assign(:race_officials, [])
     assign(:judge_types, [])
     assign(:judges, [])
     assign(:competitions_with_judges, [])

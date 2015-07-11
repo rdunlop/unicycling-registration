@@ -52,7 +52,6 @@ Workspace::Application.routes.draw do
 
     resources :permissions, only: [:index], controller: "admin/permissions" do
       collection do
-        post :create_race_official
         get :directors
         put :set_role
         put :set_password
@@ -481,6 +480,12 @@ Workspace::Application.routes.draw do
       end
 
       resources :data_entry_volunteers, only: [:index, :create]
+      resources :volunteers, only: [:index, :destroy] do
+        collection do
+          post ":volunteer_type", to: :create, as: :create
+          delete ":volunteer_type", to: :destroy, as: :destroy
+        end
+      end
 
       resources :judges,      only: [:index, :create, :destroy] do
         collection do

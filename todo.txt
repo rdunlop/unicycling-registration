@@ -60,6 +60,7 @@ PRiorities as per Scott/Robin Discussion:
 - Add specs to ensure that data entry volunteers controller works (ie: is "confirm!" deprecated?)
  - Need to upgrade Devise first?
 - Assign Data Entry roles per Competition for volunteers.
+ - XXX FIX Competition permissions...currently "can :read, Competition" is giving access to all the stuff UNDER competition. (oops)
  - Want to be able to track WHO Entered the data. (ie: remove the ImportResults system, and properly manage the data flow.)
  - Unable to data-entry Multi-Lap Races (import doesn'n ask for number of laps)
 - Live Data Entry for Muni
@@ -81,22 +82,15 @@ PRiorities as per Scott/Robin Discussion:
 - If a competition is created with "automatic competitor creation", it should prompt "Should I add all currently configured competitors?" immediately after creating the competition.
 - Handle Ineligible results when calculating placing points?
 - Flatland/etc calculation with "ineligible", does it properly give placing points?
-- Extract "best_result_in_thounsands" out of Competitor, into a RaceResultCalculator?
- - Will this fix the XXX note in competition.rb?
 - Combine the scoring data entry paths, with different partials as necessary?
   - Is this even possible, considering different interaction-requirements?
   - Is this a good idea?
 - Make External Result data entry system smarter, so that it doesn't prompt me to enter scores for a competitor which already has scores. (use chosen's greyed-out-select?)
 - Are the order of age groups important for anything other than Track? Can we clean that up?
-- make the hamburger taller
-  - bring in the svg icons
 
 - Disable start/finish data-entry if you choose certain scoring types (like Street, High/Long, freestyle, Flat?)
 
-- Add a "RefundS" or "misc" column to make the payments page make sense after processing refunds
-
 - After refunding, if the registration can be deleted, prompt the admin whether they want to delete that user.
-- High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
 
 
 - Allow creating Expert events without specifynig an age group? (ie: 100m expert shouldn't need an age group)

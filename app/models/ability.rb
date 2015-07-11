@@ -155,8 +155,6 @@ class Ability
       (judge.scores.count == 0) && (director_and_unlocked(user, judge.competition))
     end
 
-    can :create_race_official, :permission
-
     # Data Management
     can :manage, ImportResult do |import_result|
       director_and_unlocked(user, import_result.competition)
@@ -263,6 +261,20 @@ class Ability
     end
   end
 
+  def define_volunteer_roles(user)
+    # includes :view_heat, and :dq_competitor
+    can :manage, LaneAssignment do |lane_assignment|
+      user.has_role?(:race_official, lane_assignment.competition) || user.has_role?(:admin)
+    end
+
+    if user.has_role?(:race_official, :any) || user.has_role?(:admin)
+      can :download_competitors_for_timers, :export
+    end
+
+    # Start Line Volunteer
+    # End Line Volunteer
+  end
+
   def define_ability_for_logged_in_user(user)
     alias_action :create, :read, :update, :destroy, to: :crud
 
@@ -280,6 +292,7 @@ class Ability
     define_event_planner_roles(user)
     define_competition_admin_roles(user)
     define_membership_admin_roles(user)
+    define_volunteer_roles(user)
 
     # #################################################
     # End new role definitions
@@ -311,12 +324,6 @@ class Ability
       can :read, VolunteerOpportunity
 
       can :manage, :payment_adjustment
-    end
-
-    if user.has_role?(:race_official) || user.has_role?(:admin)
-      # includes :view_heat, and :dq_competitor
-      can :manage, LaneAssignment
-      can :download_competitors_for_timers, :export
     end
 
     # Scoring abilities

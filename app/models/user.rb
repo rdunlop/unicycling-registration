@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
       super_admin: [*roles],
       convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin],
       competition_admin: [:competition_admin, :awards_admin],
-      director: [:data_entry_volunteer, :race_official],
+      director: [:data_entry_volunteer],
       payment_admin: [:payment_admin],
       event_planner: [:event_planner],
       music_dj: [:music_dj]
@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
       Able to create competitions, and adjust competition configuration
       Able to create/manage Age Groups
       Can set registrants as ineligible
-      Can create director, data_entry_volunteer, race_official
+      Can create director, data_entry_volunteer
       Can reset user passwords
       Can View all Event Sign Ups
       Can Manage all Competition Competitors (while competition is unlocked)
@@ -146,11 +146,6 @@ class User < ActiveRecord::Base
       "
     when :data_entry_volunteer
       "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
-    when :race_official
-      "[e.g. Mary Koehler]
-      Able to DQ at start or end-line of Race
-      Able to download heat-lists for Track E-Timers
-      "
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
     when :payment_admin
@@ -183,6 +178,22 @@ class User < ActiveRecord::Base
       Enter new translations, and apply them to the site"
     else
       "No Description Available"
+    end
+  end
+
+  def self.volunteer_role_descriptions(role)
+    case role
+    when :race_official
+      "[e.g. Mary Koehler]
+      Able to DQ at start or end-line of Race
+      Able to download heat-lists for Track E-Timers
+      "
+    when :start_line_volunteer
+      "Able to enter Start Line results (transcribed)"
+    when :end_line_volunteer
+      "Able to enter Finish Line Results (transcribed)"
+    else
+      "No description"
     end
   end
 
