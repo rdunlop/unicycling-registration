@@ -8,9 +8,6 @@ describe "payments/index" do
       @pay1, @pay2
     ])
 
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
 
     assign(:refunds, [])
