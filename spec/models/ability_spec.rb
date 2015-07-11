@@ -298,8 +298,6 @@ describe "Ability" do
       it { is_expected.to be_able_to(:sign_ups, other_event_category) }
     end
 
-    it { is_expected.to be_able_to(:create_race_official, :permission) }
-
     describe "with an associated judge to my event" do
       before(:each) do
         @judge = FactoryGirl.create(:judge, competition: competition)
