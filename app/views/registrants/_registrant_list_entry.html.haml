@@ -8,7 +8,7 @@
   %td
     = print_formatted_currency(registrant.expenses_total)
   %td
-    - if can? :update, registrant
+    - if policy(registrant).update?
       = link_to t('.edit'), registrant_build_path(registrant, :add_name), :class => "registrant_edit_button " + (reg_class)
   %td
     - if registrant.validated?

@@ -344,7 +344,6 @@ class Ability
     if user.has_role? :admin
       # can :create, RegFee
       can :set_reg_fee, :registrant
-      can :undelete, :registrant
       can :manage_all, :registrant
       can :bag_labels, :registrant
 

@@ -29,9 +29,9 @@
     // # includes 'current_user' because of the 'can? Calls
     - cache_i18n ['index_all.registrant', Registrant, current_user, @config ], expires_in: 1.minute do
       - @registrants.find_each(batch_size: 100) do |registrant|
-        - if can? :edit, registrant
+        - if policy(registrant).edit?
           %span.js--showElement{ data: { key: "edit_registrant#{registrant.id}" } }
-        - if can? :undelete, :registrant
+        - if policy(registrant).undelete?
           %span.js--showElement{ data: { key: "undelete#{registrant.id}" } }
         - cache_i18n [registrant, @config] do
           %tr
