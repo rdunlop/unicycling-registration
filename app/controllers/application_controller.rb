@@ -21,6 +21,11 @@ class ApplicationController < ActionController::Base
     false
   end
 
+  # Override the default pundit_user so that we can pass additional state to the policies
+  def pundit_user
+    UserContext.new(current_user, EventConfiguration.closed?, allow_reg_modifications?)
+  end
+
   def default_url_options(_options = {})
     { locale: I18n.locale }
   end

@@ -200,6 +200,13 @@ class User < ActiveRecord::Base
   def to_s
     name || email
   end
+#   def additional_editable_registrants
+#     Registrant.active_or_incomplete.joins(:additional_registrant_accesses).merge(additional_registrant_accesses.full_access)
+#   end
+
+#   def additional_accessible_registrants
+#     Registrant.active_or_incomplete.joins(:additional_registrant_accesses).merge(additional_registrant_accesses.permitted)
+#   end
 
   def editable_registrants
     (additional_registrant_accesses.full_access.map(&:registrant) + registrants).select{ |reg| !reg.deleted? }

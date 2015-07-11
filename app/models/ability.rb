@@ -186,7 +186,6 @@ class Ability
       can [:new, :choose, :create], :manual_refund
       can :list, :payment_adjustment
       can :set_reg_fee, :registrant
-      can [:read], Registrant
       can [:list, :payments, :payment_details], :export_payment
       can [:download_all], :export_registrant
       # Allow adding items which only admins can add
@@ -207,7 +206,7 @@ class Ability
       can :sign_ups, EventCategory
       can :sign_ups, Event
       can [:manage_all, :show_all], :registrant
-      can [:read, :update, :destroy, :add_events, :create_artistic], Registrant
+      can [:add_events, :create_artistic], Registrant
       can [:read, :create, :list], Email
     end
   end
@@ -350,7 +349,6 @@ class Ability
       can :bag_labels, :registrant
 
       can [:read, :create, :list], Email
-      can :crud, Registrant
       can :crud, CompetitionWheelSize
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
@@ -359,10 +357,6 @@ class Ability
       can :manage, :competition_song
       can [:crud], CompetitionWheelSize
     end
-    # not-object-specific
-    can :empty_waiver, Registrant
-    can :all, Registrant
-    can :subregion_options, Registrant
 
     unless artistic_reg_closed?
       can [:create_artistic], Registrant
@@ -373,21 +367,12 @@ class Ability
     end
 
     unless reg_closed?
-      can [:update, :destroy], Registrant, user_id: user.id
-      can [:update], Registrant do |reg|
-        user.editable_registrants.include?(reg)
-      end
       can :crud, CompetitionWheelSize # allowed, because we have authorize! calls in the controller
 
       # can [:create], RegistrantExpenseItem, :user_id => user.id
       can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
         (!rei.system_managed?) && (user.editable_registrants.include?(rei.registrant))
       end
-      can :create, Registrant # necessary because we set the user in the controller?
-    end
-
-    can :read, Registrant do |reg|
-      user.accessible_registrants.include?(reg)
     end
 
     # :read_contact_info allows viewing the contact_info block (additional_registrant_accesess don't allow this)

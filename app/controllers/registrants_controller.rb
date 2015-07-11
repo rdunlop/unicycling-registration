@@ -1,14 +1,16 @@
 class RegistrantsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :user, only: [:index]
-  load_resource find_by: :bib_number
-  authorize_resource
+  before_action :load_user, only: [:index]
+  before_action :load_registrant_by_bib_number, only: [:show, :results, :destroy, :waiver]
+  before_action :authorize_registrant, only: [:show, :results, :destroy]
+  before_action :authorize_logged_in, only: [:all, :empty_waiver, :subregion_options]
 
   before_action :set_registrants_breadcrumb
   before_action :set_single_registrant_breadcrumb, only: [:show]
 
   # GET /users/12/registrants
   def index
+    authorize @user, :registrants?
     @my_registrants = @user.registrants.active_or_incomplete
     @shared_registrants = @user.accessible_registrants - @my_registrants
     @total_owing = @user.total_owing
@@ -44,8 +46,6 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/1/waiver
   def waiver
-    @registrant = Registrant.find_by(bib_number: params[:id])
-
     @today_date = Date.today.in_time_zone.strftime("%B %-d, %Y")
 
     @name = @registrant.to_s
@@ -115,6 +115,22 @@ class RegistrantsController < ApplicationController
   end
 
   private
+
+  def load_user
+    @user = User.find(params[:user_id])
+  end
+
+  def load_registrant_by_bib_number
+    @registrant = Registrant.find_by(bib_number: params[:id])
+  end
+
+  def authorize_registrant
+    authorize @registrant
+  end
+
+  def authorize_logged_in
+    authorize current_user, :logged_in?
+  end
 
   def set_registrants_breadcrumb
     add_breadcrumb t("my_registrants", scope: "breadcrumbs"), user_registrants_path(current_user)

@@ -1,9 +1,20 @@
 class ApplicationPolicy
-  attr_reader :user, :record
+  attr_reader :user, :record, :reg_closed, :authorized_laptop
 
-  def initialize(user, record)
-    raise Pundit::NotAuthorizedError, "must be logged in" unless user
-    @user = user
+  def initialize(user_context, record)
+    if user_context.is_a?(UserContext)
+      @user = user_context.user
+      @reg_closed = user_context.reg_closed
+      @authorized_laptop = user_context.authorized_laptop
+    else
+      # for ease of testing, we allow passing a non-user context
+      # in the actual system, we will always encapsulate the user in a UserContext object
+      @user = user_context
+      @reg_closed = false
+      @authorized_laptop = false
+    end
+
+    raise Pundit::NotAuthorizedError, "must be logged in" unless @user
     @record = record
   end
 
@@ -33,6 +44,16 @@ class ApplicationPolicy
 
   def destroy?
     false
+  end
+
+  private
+
+  def event_planner?
+    user.has_role?(:event_planner)
+  end
+
+  def payment_admin?
+    user.has_role?(:payment_admin)
   end
 
   def translator?
