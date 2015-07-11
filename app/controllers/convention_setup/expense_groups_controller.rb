@@ -1,8 +1,8 @@
 class ConventionSetup::ExpenseGroupsController < ConventionSetupController
   include SortableObject
 
-  before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :authorize_permissions
+  before_action :load_expense_group, only: [:edit, :update, :destroy]
   before_action :set_breadcrumbs
 
   # GET /expense_groups
@@ -20,6 +20,7 @@ class ConventionSetup::ExpenseGroupsController < ConventionSetupController
   # POST /expense_groups
   # POST /expense_groups.json
   def create
+    @expense_group = ExpenseGroup.new(expense_group_params)
     if @expense_group.save
       redirect_to expense_groups_path, notice: 'Expense group was successfully created.'
     else
@@ -46,6 +47,7 @@ class ConventionSetup::ExpenseGroupsController < ConventionSetupController
   # DELETE /expense_groups/1.json
   def destroy
     @expense_group.destroy
+    flash[:notice] = "Expense Item Removed"
 
     respond_to do |format|
       format.html { redirect_to expense_groups_url }
@@ -54,6 +56,14 @@ class ConventionSetup::ExpenseGroupsController < ConventionSetupController
   end
 
   private
+
+  def authorize_permissions
+    authorize @config, :setup_convention?
+  end
+
+  def load_expense_group
+    @expense_group = ExpenseGroup.find(params[:id])
+  end
 
   def sortable_object
     ExpenseGroup.find(params[:id])

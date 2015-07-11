@@ -170,7 +170,6 @@ class Ability
     # Begin new role definitions
     # #################################################
     if user.has_role? :convention_admin
-      can :crud, ExpenseGroup
       can :crud, ExpenseItem
       can :crud, CouponCode
       can :crud, RegistrationPeriod
@@ -180,7 +179,6 @@ class Ability
       can :crud, EventCategory
       can :crud, VolunteerOpportunity
       can :read, :onsite_registration
-      can :toggle_visibility, ExpenseGroup
       can :manage, :translation
     end
   end
