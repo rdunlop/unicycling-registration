@@ -1,7 +1,7 @@
 class CouponCodeSummariesController < ApplicationController
-  before_action :authenticate_user!
-  load_and_authorize_resource :coupon_code, parent: false
 
   def show
+    @coupon_code = CouponCode.find(params[:id])
+    authorize :coupon_code_summary
   end
 end

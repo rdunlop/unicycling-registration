@@ -170,8 +170,6 @@ class Ability
     # Begin new role definitions
     # #################################################
     if user.has_role? :convention_admin
-      can :crud, ExpenseItem
-      can :crud, CouponCode
       can :crud, RegistrationPeriod
       can :crud, Category
       can :crud, Event
@@ -213,7 +211,6 @@ class Ability
       # Allow adding items which only admins can add
       can :admin_view, ExpenseItem
       can :details, ExpenseItem
-      can :read, CouponCode
     end
   end
 

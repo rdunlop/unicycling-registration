@@ -1,6 +1,6 @@
 class ConventionSetup::CouponCodesController < ConventionSetupController
-  before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :load_coupon_code, except: [:index, :create]
+  before_action :authorize_setup
 
   before_action :set_breadcrumbs
 
@@ -18,6 +18,7 @@ class ConventionSetup::CouponCodesController < ConventionSetupController
 
   # POST /convention_setup/coupon_codes
   def create
+    @coupon_code = CouponCode.new(coupon_code_params)
     respond_to do |format|
       if @coupon_code.save
         format.html { redirect_to coupon_codes_path, notice: 'Coupon Code was successfully created.' }
@@ -47,6 +48,10 @@ class ConventionSetup::CouponCodesController < ConventionSetupController
   end
 
   private
+
+  def authorize_setup
+    authorize @config, :setup_convention?
+  end
 
   def set_breadcrumbs
     add_breadcrumb "Coupon Codes", coupon_codes_path

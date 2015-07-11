@@ -1,9 +1,9 @@
 class ConventionSetup::ExpenseItemsController < ConventionSetupController
   include SortableObject
 
-  before_action :authenticate_user!
-  load_and_authorize_resource :expense_group
-  load_and_authorize_resource
+  before_action :load_expense_group
+  before_action :load_expense_item, except: [:index, :create]
+  before_action :authorize_setup
 
   before_action :set_breadcrumbs
 
@@ -27,6 +27,7 @@ class ConventionSetup::ExpenseItemsController < ConventionSetupController
   # POST /expense_items
   # POST /expense_items.json
   def create
+    @expense_item = ExpenseItem.new(expense_item_params)
     @expense_item.expense_group = @expense_group
     respond_to do |format|
       if @expense_item.save
@@ -64,6 +65,18 @@ class ConventionSetup::ExpenseItemsController < ConventionSetupController
   end
 
   private
+
+  def authorize_setup
+    authorize @config, :setup_convention?
+  end
+
+  def load_expense_group
+    @expense_group = ExpenseGroup.find(params[:expense_group_id])
+  end
+
+  def load_expense_item
+    @expense_item = ExpenseItem.find(params[:id])
+  end
 
   def sortable_object
     ExpenseItem.find(params[:id])

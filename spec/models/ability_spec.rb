@@ -126,9 +126,6 @@ describe "Ability" do
     end
     subject { @ability = Ability.new(@user) }
     it { is_expected.to be_able_to(:crud, RegistrationPeriod) }
-    it { is_expected.to be_able_to(:crud, ExpenseGroup) }
-    it { is_expected.to be_able_to(:crud, ExpenseItem) }
-    it { is_expected.to be_able_to(:crud, CouponCode) }
     it { is_expected.to be_able_to(:crud, Category) }
     it { is_expected.to be_able_to(:crud, Event) }
     it { is_expected.to be_able_to(:crud, EventChoice) }
