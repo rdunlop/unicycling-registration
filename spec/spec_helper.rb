@@ -11,6 +11,7 @@ require 'rspec/rails'
 require 'cancan/matchers'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require "pundit/rspec"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
