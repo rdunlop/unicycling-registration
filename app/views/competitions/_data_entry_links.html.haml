@@ -36,9 +36,10 @@
     %li
       = link_to "Recording Sheet", heat_recording_printing_competition_path(competition)
       = link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf)
-    %li= link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
-    %li= link_to "Set Lane Assignments", competition_lane_assignments_path(competition)
-    %li= link_to "Review", review_competition_lane_assignments_path(competition)
+    - if policy(competition).manage_lane_assignments?
+      %li= link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
+      %li= link_to "Set Lane Assignments", competition_lane_assignments_path(competition)
+      %li= link_to "Review", review_competition_lane_assignments_path(competition)
 
 %h3 Finish Line
 %ul
