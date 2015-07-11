@@ -59,14 +59,6 @@ describe "Ability" do
       end
     end
 
-    describe "With a payment" do
-      let(:payment) { FactoryGirl.create(:payment, user: @user) }
-
-      it { is_expected.to be_able_to(:read, payment) }
-      it { is_expected.to be_able_to(:complete, payment) }
-      it { is_expected.to be_able_to(:apply_coupon, payment) }
-    end
-
     describe "when standard_skill is closed" do
       before(:each) do
         @config.update_attribute(:standard_skill_closed_date, 10.days.ago)
@@ -101,11 +93,6 @@ describe "Ability" do
 
       it { is_expected.to be_able_to(:manage, StandardSkillRoutine) }
       it { is_expected.to be_able_to(:manage, StandardSkillRoutineEntry) }
-    end
-    describe "With a payment for another user" do
-      let(:payment) { FactoryGirl.create(:payment) }
-
-      it { is_expected.to be_able_to(:read, payment) }
     end
     it { is_expected.to be_able_to(:create_director, Judge) }
     it { is_expected.to be_able_to(:create, Judge) }
