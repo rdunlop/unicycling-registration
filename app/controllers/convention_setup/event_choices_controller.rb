@@ -77,6 +77,10 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
     @event_choices = @event.event_choices
   end
 
+  def load_event_choice
+    @event_choice = EventChoice.find(params[:id])
+  end
+
   def event_choice_params
     params.require(:event_choice).permit(:cell_type, :label, :multiple_values, :optional, :tooltip,
                                          :optional_if_event_choice_id, :required_if_event_choice_id,

@@ -1,7 +1,7 @@
 class TenantAliasesController < ConventionSetupController
   before_action :load_tenant_alias, only: [:activate, :destroy]
 
-  before_action :authorize_tenant_alias
+  before_action :authorize_setup
   before_action :set_breadcrumbs
 
   def index
@@ -40,8 +40,8 @@ class TenantAliasesController < ConventionSetupController
     @tenant_alias = TenantAlias.find(params[:id])
   end
 
-  def authorize_tenant_alias
-    authorize TenantAlias.new, :manage?
+  def authorize_setup
+    authorize @config, :setup_convention?
   end
 
   def set_breadcrumbs
