@@ -39,6 +39,10 @@ class ApplicationPolicy
     user.has_role?(:convention_admin)
   end
 
+  def competition_admin?
+    user.has_role?(:competition_admin)
+  end
+
   def super_admin?
     user.has_role?(:super_admin)
   end

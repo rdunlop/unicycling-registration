@@ -30,7 +30,7 @@
           %li= link_to 'User Management',  permissions_path
         - if can?(:summary, Event)
           %li= link_to  'Registration Overview', summary_events_path
-        - if can? :read, :competition_setup
+        - if policy(@config).setup_competition?
           %li= link_to 'Competition Overview', competition_setup_path
         - if can?(:manage, AwardLabel)
           %li= link_to  'Print/Create Awards', user_award_labels_path(current_user)

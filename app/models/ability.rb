@@ -35,11 +35,9 @@ class Ability
 
     if config.test_mode
       # allow the user to upgrade their account in TEST MODE
-      can :test_mode_role, EventConfiguration
       can :fake_complete, Payment
     else
       # disable for all
-      cannot :test_mode_role, EventConfiguration
       cannot :fake_complete, Payment
     end
   end
@@ -172,8 +170,6 @@ class Ability
     # Begin new role definitions
     # #################################################
     if user.has_role? :convention_admin
-      can :manage, EventConfiguration
-      cannot :cache, EventConfiguration
       can :manage, :convention_setup
       can :crud, ExpenseGroup
       can :crud, ExpenseItem
@@ -245,7 +241,6 @@ class Ability
 
   def define_competition_admin_roles(user)
     if user.has_role? :competition_admin
-      can :read, :competition_setup
       can :manage, :director
       can :manage, :ineligible_registrant
       can [:crud], AgeGroupType

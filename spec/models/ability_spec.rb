@@ -126,7 +126,6 @@ describe "Ability" do
     end
     subject { @ability = Ability.new(@user) }
     it { is_expected.to be_able_to(:read, :convention_setup) }
-    it { is_expected.to be_able_to(:manage, EventConfiguration) }
     it { is_expected.to be_able_to(:crud, RegistrationPeriod) }
     it { is_expected.to be_able_to(:crud, ExpenseGroup) }
     it { is_expected.to be_able_to(:crud, ExpenseItem) }
@@ -139,14 +138,6 @@ describe "Ability" do
     it { is_expected.to be_able_to(:read, :permission)}
     it { is_expected.to be_able_to(:set_password, :permission)}
     it { is_expected.to be_able_to(:set_role, :permission)}
-  end
-
-  describe "as a competition admin" do
-    before(:each) do
-      @user = FactoryGirl.create(:competition_admin_user)
-    end
-    subject { @ability = Ability.new(@user) }
-    it { is_expected.to be_able_to :read, :competition_setup }
   end
 
   describe "as an admin" do
