@@ -1,7 +1,5 @@
 class ResultsController < ApplicationController
-  skip_authorization_check
-  # before_action :authenticate_user!
-  authorize_resource class: false
+  before_action :skip_authorization
 
   def index
     add_breadcrumb "Results"

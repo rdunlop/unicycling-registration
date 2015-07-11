@@ -29,9 +29,6 @@ class Ability
 
     can :read, StandardSkillEntry
     can :read, AgeGroupType
-    can [:index, :scores], :result
-    can [:announcer, :start_list], Competition
-    can [:acl, :set_acl, :code, :use_code], :permission
     can :show, PublishedAgeGroupEntry do |entry|
       entry.published_at.present?
     end
@@ -175,7 +172,6 @@ class Ability
     # Begin new role definitions
     # #################################################
     if user.has_role? :convention_admin
-      can :manage, TenantAlias
       can :manage, EventConfiguration
       cannot :cache, EventConfiguration
       can :manage, :convention_setup

@@ -136,7 +136,6 @@ describe "Ability" do
     it { is_expected.to be_able_to(:crud, EventChoice) }
     it { is_expected.to be_able_to(:crud, EventCategory) }
     it { is_expected.to be_able_to(:crud, VolunteerOpportunity) }
-    it { is_expected.to be_able_to(:manage, TenantAlias) }
     it { is_expected.to be_able_to(:read, :permission)}
     it { is_expected.to be_able_to(:set_password, :permission)}
     it { is_expected.to be_able_to(:set_role, :permission)}
@@ -211,7 +210,6 @@ describe "Ability" do
     subject { @ability = Ability.new(@user) }
 
     it { is_expected.to be_able_to(:access, :rails_admin) }
-    it { is_expected.to be_able_to(:manage, TenantAlias) }
   end
 
   describe "as a data_entry_volunteer" do
@@ -345,10 +343,6 @@ describe "Ability" do
       @competition = FactoryGirl.create(:competition)
     end
     subject { @ability = Ability.new(nil) }
-
-    it { is_expected.to be_able_to(:index, :result) }
-    it { is_expected.to be_able_to(:scores, :result) }
-    it { is_expected.to be_able_to(:announcer, @competition) }
 
     describe "when a competition has published age_group_entry results" do
       before :each do
