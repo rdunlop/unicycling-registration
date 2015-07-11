@@ -19,7 +19,7 @@
       - if @competition.uses_judges
         %li= link_to "Judges", competition_judges_path(@competition)
       - else
-        %li= link_to "", ""
+        %li= link_to "Volunteers", competition_volunteers_path(@competition)
       = render "/competitions/data_entry_links", competition: @competition
 
     %h2 Results
