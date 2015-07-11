@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
+  include Pundit
 
   before_action :load_config_object
   before_action :set_locale
@@ -9,8 +10,12 @@ class ApplicationController < ActionController::Base
   before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
   protect_from_forgery
-  check_authorization unless: :devise_controller?
+  check_authorization unless: :devise_controller_or_pundit_handled?
   skip_authorization_check if: :rails_admin_controller?
+
+  def devise_controller_or_pundit_handled?
+    devise_controller? || pundit_policy_authorized?
+  end
 
   def rails_admin_controller?
     false
@@ -22,8 +27,10 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
-    redirect_to root_path, alert: exception.message
+    user_not_authorized
   end
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def raise_not_found!
     raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
@@ -88,6 +95,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
+  end
 
   def locale_parameter
     params[:locale] if I18n.available_locales.include?(params[:locale].try(:to_sym))

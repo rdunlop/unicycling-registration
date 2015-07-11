@@ -262,10 +262,6 @@ class Ability
   end
 
   def define_volunteer_roles(user)
-    # includes :view_heat, and :dq_competitor
-    can :manage, LaneAssignment do |lane_assignment|
-      user.has_role?(:race_official, lane_assignment.competition) || user.has_role?(:admin)
-    end
 
     if user.has_role?(:race_official, :any) || user.has_role?(:admin)
       can :download_competitors_for_timers, :export
