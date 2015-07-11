@@ -34,7 +34,6 @@ describe OrderedResultCalculator do
 
       it "should not consider the DQ to be the best time" do
         expect(@tr1.competitor.disqualified?).to be_falsy
-        binding.pry
         expect(@tr1.competitor.best_time_in_thousands).to eq(@tr1b.result)
       end
     end
