@@ -69,7 +69,7 @@ describe RegistrantPolicy do
     let(:reg_closed?) { false }
     let(:authorized_laptop?) { false }
     let(:user) { my_user }
-    let(:user_context) { UserContext.new(user, reg_closed?, authorized_laptop?) }
+    let(:user_context) { UserContext.new(user, false, reg_closed?, authorized_laptop?) }
 
     describe "while registration is open" do
 

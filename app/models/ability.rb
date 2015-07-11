@@ -309,13 +309,6 @@ class Ability
       end
     end
 
-    # can :create, Song do
-    #  user.has_role? :admin
-    # end
-    unless config.music_submission_ended?
-      can [:crud, :file_complete, :add_file, :my_songs, :create_guest_song], Song, user_id: user.id
-    end
-
     # Sharing Registrants across Users
     can :read, User, id: user.id
     can [:read, :new, :create], AdditionalRegistrantAccess, user_id: user.id
@@ -351,7 +344,6 @@ class Ability
       can :crud, CompetitionWheelSize
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
-      can [:crud, :file_complete, :add_file], Song
       can :manage, :event_song
       can :manage, :competition_song
       can [:crud], CompetitionWheelSize

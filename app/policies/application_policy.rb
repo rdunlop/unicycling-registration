@@ -1,15 +1,18 @@
 class ApplicationPolicy
   attr_reader :user, :record, :reg_closed, :authorized_laptop
+  attr_reader :config
 
   def initialize(user_context, record)
     if user_context.is_a?(UserContext)
       @user = user_context.user
+      @config = user_context.config
       @reg_closed = user_context.reg_closed
       @authorized_laptop = user_context.authorized_laptop
     else
       # for ease of testing, we allow passing a non-user context
       # in the actual system, we will always encapsulate the user in a UserContext object
       @user = user_context
+      @config = OpenStruct.new(music_submission_ended?: true)
       @reg_closed = false
       @authorized_laptop = false
     end
