@@ -23,7 +23,6 @@ describe "Ability" do
       it { is_expected.to be_able_to(:create, @ara) }
       it { is_expected.to be_able_to(:new, @ara) }
       it { is_expected.to be_able_to(:invitations, AdditionalRegistrantAccess) }
-      it { is_expected.to be_able_to(:read, @ara.registrant) }
       it { is_expected.not_to be_able_to(:read_contact_info, @ara.registrant) }
 
       it { is_expected.to be_able_to(:decline, @ara_to_me) }
@@ -40,36 +39,8 @@ describe "Ability" do
         allow(@user).to receive(:registrants).and_return([registration])
       end
 
-      it { is_expected.to be_able_to(:read, registration) }
-      it { is_expected.to be_able_to(:read_contact_info, registration) }
-      it { is_expected.to be_able_to(:all, registration) }
-      it { is_expected.to be_able_to(:waiver, registration) }
-      it { is_expected.to be_able_to(:empty_waiver, Registrant) }
       it { is_expected.to be_able_to(:index, RegistrantExpenseItem) }
-      it { is_expected.to be_able_to(:index, Song) }
 
-      describe "with songs" do
-        let(:song1) { FactoryGirl.build_stubbed(:song, registrant: registration, user: registration.user) }
-        let(:registration_2) { FactoryGirl.build_stubbed(:registrant) }
-        let(:song2) { FactoryGirl.build_stubbed(:song, registrant: registration_2, user: registration_2.user) }
-        before(:each) do
-          allow(registration).to receive(:songs).and_return([song1])
-        end
-
-        describe "can edit his own song" do
-          it { is_expected.to be_able_to(:edit, song1) }
-          it { is_expected.to be_able_to(:update, song1) }
-          it { is_expected.to be_able_to(:add_file, song1) }
-          it { is_expected.to be_able_to(:file_complete, song1) }
-          it { is_expected.to be_able_to(:destroy, song1) }
-        end
-
-        describe "cannot edit another user's song" do
-          it { is_expected.not_to be_able_to(:edit, song2)  }
-          it { is_expected.not_to be_able_to(:update, song2)  }
-          it { is_expected.not_to be_able_to(:destroy, song2)  }
-        end
-      end
       describe "with a StandardSkillRoutine" do
         before(:each) do
           @routine = FactoryGirl.create(:standard_skill_routine, registrant: registration)
@@ -96,20 +67,6 @@ describe "Ability" do
       it { is_expected.to be_able_to(:apply_coupon, payment) }
     end
 
-    describe "when registration is closed" do
-      before(:each) do
-        FactoryGirl.create(:registration_period, onsite: false, end_date: 10.days.ago)
-      end
-
-      it { is_expected.not_to be_able_to(:create, Registrant) }
-
-      describe "when the computer is authorized to modify reg" do
-        subject { @ability = Ability.new(@user, true) }
-
-        it { is_expected.to be_able_to(:create, Registrant) }
-      end
-    end
-
     describe "when standard_skill is closed" do
       before(:each) do
         @config.update_attribute(:standard_skill_closed_date, 10.days.ago)
@@ -126,17 +83,10 @@ describe "Ability" do
     end
     subject { @ability = Ability.new(@user) }
 
-    it { is_expected.to be_able_to(:read, Registrant) }
     it { is_expected.to be_able_to(:manage, Competitor) }
     it { is_expected.to be_able_to(:read, VolunteerOpportunity) }
 
     it { is_expected.to be_able_to(:manage_all, :registrant) }
-
-    describe "with another user having a registrant" do
-      let(:registration) { FactoryGirl.create(:registrant) }
-      it { is_expected.to be_able_to(:read, registration) }
-      it { is_expected.to be_able_to(:crud, registration) }
-    end
 
     describe "with an rei" do
       let(:rei) { FactoryGirl.create(:registrant_expense_item) }
@@ -149,7 +99,6 @@ describe "Ability" do
         FactoryGirl.create(:registration_period, onsite: false, end_date: 10.days.ago)
       end
 
-      it { is_expected.to be_able_to(:create, Registrant) }
       it { is_expected.to be_able_to(:manage, StandardSkillRoutine) }
       it { is_expected.to be_able_to(:manage, StandardSkillRoutineEntry) }
     end

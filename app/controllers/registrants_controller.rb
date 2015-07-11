@@ -2,7 +2,7 @@ class RegistrantsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_user, only: [:index]
   before_action :load_registrant_by_bib_number, only: [:show, :results, :destroy, :waiver]
-  before_action :authorize_registrant, only: [:show, :results, :destroy]
+  before_action :authorize_registrant, only: [:show, :results, :destroy, :waiver]
   before_action :authorize_logged_in, only: [:all, :empty_waiver, :subregion_options]
 
   before_action :set_registrants_breadcrumb
@@ -15,7 +15,7 @@ class RegistrantsController < ApplicationController
     @shared_registrants = @user.accessible_registrants - @my_registrants
     @total_owing = @user.total_owing
     @has_print_waiver = @config.has_print_waiver
-    @registrant = Registrant.new
+    @registrant = Registrant.new(user: @user)
 
     respond_to do |format|
       format.html # index.html.erb

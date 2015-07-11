@@ -20,6 +20,10 @@ class RegistrantPolicy < ApplicationPolicy
     (user_record? && !registration_closed?) || event_planner? || super_admin?
   end
 
+  def waiver?
+    show?
+  end
+
   def undelete?
     super_admin?
   end
