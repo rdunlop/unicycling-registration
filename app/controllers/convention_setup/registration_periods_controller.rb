@@ -1,6 +1,6 @@
 class ConventionSetup::RegistrationPeriodsController < ConventionSetupController
   before_action :authorize_setup
-  before_action :load_registration_period, except: [:index, :create]
+  before_action :load_registration_period, except: [:index, :new, :create]
 
   before_action :set_breadcrumbs
 
@@ -17,6 +17,7 @@ class ConventionSetup::RegistrationPeriodsController < ConventionSetupController
   # GET /registration_periods/new
   # GET /registration_periods/new.json
   def new
+    @registration_period = RegistrationPeriod.new
     add_breadcrumb "New Registration Period"
     @registration_period.build_competitor_expense_item
     @registration_period.build_noncompetitor_expense_item
@@ -77,7 +78,7 @@ class ConventionSetup::RegistrationPeriodsController < ConventionSetupController
   end
 
   def load_registration_period
-    RegistrationPeriod.find(params[:id])
+    @registration_period = RegistrationPeriod.find(params[:id])
   end
 
   def set_breadcrumbs

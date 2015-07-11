@@ -20,4 +20,10 @@ describe CompetitionPolicy do
       expect(subject).to permit(user, competition)
     end
   end
+
+  permissions :show? do
+    it "denies access to normal user" do
+      expect(subject).not_to permit(FactoryGirl.create(:user), competition)
+    end
+  end
 end

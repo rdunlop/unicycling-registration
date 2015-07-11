@@ -2,6 +2,7 @@ class ConventionSetup::EventsController < ConventionSetupController
   include SortableObject
 
   before_action :load_category, only: [:index, :create]
+  before_action :load_event, except: [:index, :create]
   before_action :authorize_setup
   before_action :set_categories_breadcrumb
   before_action :set_events_breadcrumb
@@ -83,7 +84,7 @@ class ConventionSetup::EventsController < ConventionSetupController
     @category = Category.find(params[:category_id])
   end
 
-  def load_new_event
-    @event = @category.events.build(event_params)
+  def load_event
+    @event = Event.find(params[:id])
   end
 end

@@ -120,19 +120,6 @@ describe "Ability" do
     end
   end
 
-  describe "as a convention admin" do
-    before(:each) do
-      @user = FactoryGirl.create(:convention_admin_user)
-    end
-    subject { @ability = Ability.new(@user) }
-    it { is_expected.to be_able_to(:crud, RegistrationPeriod) }
-    it { is_expected.to be_able_to(:crud, Category) }
-    it { is_expected.to be_able_to(:crud, Event) }
-    it { is_expected.to be_able_to(:crud, EventChoice) }
-    it { is_expected.to be_able_to(:crud, EventCategory) }
-    it { is_expected.to be_able_to(:crud, VolunteerOpportunity) }
-  end
-
   describe "as an admin" do
     before(:each) do
       @user = FactoryGirl.create(:admin_user)

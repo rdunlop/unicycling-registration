@@ -78,6 +78,10 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
     @event = Event.find(params[:event_id])
   end
 
+  def load_event_category
+    @event_category = EventCategory.find(params[:id])
+  end
+
   def load_categories
     @event_categories = @event.event_categories
   end

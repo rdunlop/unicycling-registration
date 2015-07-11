@@ -8,6 +8,7 @@ class ConventionSetup::CategoriesController < ConventionSetupController
   # GET /categories
   # GET /categories.json
   def index
+    @categories = Category.all
     @category = Category.new
   end
 
