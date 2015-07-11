@@ -50,7 +50,7 @@ end
 shared_context "points_event" do |options = {}|
   before :each do
     event = FactoryGirl.create(:event, name: options[:name])
-    competition = FactoryGirl.create(:ranked_competition, event: event, name: options[:name], start_data_type: 'One Data Per Line')
+    competition = FactoryGirl.create(:ranked_competition, event: event, name: options[:name], end_data_type: "One Data Per Line")
     FactoryGirl.create(:event_competitor, competition: competition)
     reg = Registrant.first
     reg.first_name = "Robin"

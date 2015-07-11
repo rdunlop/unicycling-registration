@@ -55,23 +55,12 @@ class RaceDataImporter
     raw_data = upload.extract_csv(file)
     self.num_rows_processed = 0
     self.errors = nil
-    if @competition.imports_times?
-      is_start_time = start_times || false
-      ImportResult.transaction do
-        raw_data.each do |raw|
-          data = upload.convert_array_to_string(raw)
-          if TimeResult.build_and_save_imported_result(raw, data, @user, @competition, is_start_time)
-            self.num_rows_processed += 1
-          end
-        end
-      end
-    elsif @competition.imports_points?
-      ExternalResult.transaction do
-        raw_data.each do |raw|
-          data = upload.convert_array_to_string(raw)
-          if ExternalResult.build_and_save_imported_result(raw, data, @user, @competition)
-            self.num_rows_processed += 1
-          end
+    is_start_time = start_times || false
+    ImportResult.transaction do
+      raw_data.each do |raw|
+        data = upload.convert_array_to_string(raw)
+        if TimeResult.build_and_save_imported_result(raw, data, @user, @competition, is_start_time)
+          self.num_rows_processed += 1
         end
       end
     end

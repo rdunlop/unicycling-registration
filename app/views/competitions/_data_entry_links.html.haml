@@ -57,10 +57,11 @@
       = link_to "Recording Sheets", single_attempt_recording_printing_competition_path(competition, options)
       = link_to "(pdf)", single_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
 
-    %li= link_to "Entry Form", data_entry_user_competition_import_results_path(current_user, competition, is_start_times: false)
-    %li= link_to "New Entry Form", competition_preliminary_external_results_path(competition)
-    %li= link_to "Verification", review_user_competition_import_results_path(current_user, competition, options)
-
+    - if competition.imports_times?
+      %li= link_to "Entry Form", data_entry_user_competition_import_results_path(current_user, competition, is_start_times: false)
+      %li= link_to "Verification", review_user_competition_import_results_path(current_user, competition, options)
+    - elsif competition.imports_points?
+      %li= link_to "Entry Form", competition_preliminary_external_results_path(competition)
   - when "Track E-Timer"
     %li
       = link_to "Recording Sheet", heat_recording_printing_competition_path(competition)
@@ -75,5 +76,8 @@
   - when "Chip-Timing"
     %li= link_to "Import Chip CSV", display_chip_user_competition_import_results_path(current_user, competition)
 
-  - if competition.imports_times? || competition.imports_points?
+  - if competition.imports_times?
     %li= link_to "Import CSV", display_csv_user_competition_import_results_path(current_user, competition)
+
+  - if competition.imports_points?
+    %li= link_to "Import CSV", display_csv_competition_preliminary_external_results_path(competition)

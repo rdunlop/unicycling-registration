@@ -74,6 +74,10 @@ class Ability
     end
     cannot [:approve, :approve_heat], ImportResult
 
+    can :create_preliminary_result, Competition do |competition|
+      competition.unlocked?
+    end
+
     can :manage, TwoAttemptEntry do |two_attempt_entry|
       !two_attempt_entry.competition.locked?
     end

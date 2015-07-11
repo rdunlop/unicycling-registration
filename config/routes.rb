@@ -506,6 +506,8 @@ Workspace::Application.routes.draw do
         collection do
           get :review
           post :approve
+          get :display_csv
+          post :import_csv
         end
       end
       resources :published_age_group_entries, only: [:show] do
