@@ -32,7 +32,7 @@
         %td= refund.refund_date
         %td= refund.note
         %td
-          - if can? :read, refund
+          - if policy(refund).show?
             = link_to "Refund Details", refund
 %br
 = render partial: "/registrants/pay_now", :locals => {:total_owing => current_user.total_owing }
