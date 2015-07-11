@@ -32,14 +32,6 @@ class Ability
     can :show, PublishedAgeGroupEntry do |entry|
       entry.published_at.present?
     end
-
-    if config.test_mode
-      # allow the user to upgrade their account in TEST MODE
-      can :fake_complete, Payment
-    else
-      # disable for all
-      cannot :fake_complete, Payment
-    end
   end
 
   def set_data_entry_volunteer_abilities(user)
@@ -180,7 +172,6 @@ class Ability
   def define_payment_admin_roles(user)
     if user.has_role? :payment_admin
       # Can read _any_ payment
-      can [:read, :summary], Payment
       can :read, Refund
       can [:new, :choose, :create], :manual_payment
       can [:new, :choose, :create], :manual_refund
@@ -319,14 +310,6 @@ class Ability
   end
 
   def define_payment_ability(user)
-    # Payment
-    can :read, Payment if user.has_role? :admin
-    can :manage, Payment if user.has_role? :super_admin
-    can :read, Payment, user_id: user.id
-    unless reg_closed?
-      can [:new, :create, :complete, :apply_coupon], Payment
-    end
-    can [:offline], Payment
     if user.has_role?(:admin)
       can [:new, :exchange_choose, :exchange_create, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
     end

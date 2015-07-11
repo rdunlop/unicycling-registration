@@ -293,7 +293,6 @@ Workspace::Application.routes.draw do
       member do
         get :payments, to: "payments#registrant_payments"
       end
-      resources :payments, only: [:index]
       resources :songs, only: [:index, :create]
       resources :competition_wheel_sizes, only: [:index, :create, :destroy]
     end
