@@ -110,11 +110,11 @@ class Ability
 
     # Abilities to be able to change data about a competition
     can [:manage, :update_row_order], Competitor do |comp|
-      comp.unlocked? && (director_or_competition_admin?(user, comp.competition))
+      comp.competition.unlocked? && (director_or_competition_admin?(user, comp.competition))
     end
 
     can :manage, Member do |member|
-      comp.unlocked? && (director_or_competition_admin?(user, member.competitor.competition))
+      member.competitor.competition.unlocked? && (director_or_competition_admin?(user, member.competitor.competition))
     end
 
     can [:set_sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
