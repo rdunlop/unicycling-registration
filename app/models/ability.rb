@@ -170,7 +170,6 @@ class Ability
     # Begin new role definitions
     # #################################################
     if user.has_role? :convention_admin
-      can :manage, :convention_setup
       can :crud, ExpenseGroup
       can :crud, ExpenseItem
       can :crud, CouponCode
@@ -181,9 +180,7 @@ class Ability
       can :crud, EventCategory
       can :crud, VolunteerOpportunity
       can :read, :onsite_registration
-      can :display_acl, :permission
       can :toggle_visibility, ExpenseGroup
-      can [:read, :set_role, :set_password], :permission
       can :manage, :translation
     end
   end
@@ -248,7 +245,6 @@ class Ability
       can [:crud, :set_places, :lock, :unlock], Competition
       can [:crud], CombinedCompetition
       can [:crud], CombinedCompetitionEntry
-      can [:read, :set_role, :set_password], :permission
     end
   end
 
@@ -304,7 +300,6 @@ class Ability
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
-      can [:set_password], :permission
       if config.usa_membership_config?
         can :manage, :usa_membership
       end

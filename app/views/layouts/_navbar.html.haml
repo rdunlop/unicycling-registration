@@ -24,9 +24,9 @@
       %ul.navList
         - if can? :data_entry_menu, :welcome
           %li= link_to 'Data Entry', welcome_data_entry_menu_path
-        - if can?(:read, :convention_setup)
+        - if policy(@config).setup_convention?
           %li= link_to 'Convention Setup', convention_setup_path
-        - if can?(:read, :permission)
+        - if policy(:permission).index?
           %li= link_to 'User Management',  permissions_path
         - if can?(:summary, Event)
           %li= link_to  'Registration Overview', summary_events_path
@@ -46,7 +46,7 @@
       %ul.navList
         - if @config.standard_skill && can?(:manage, StandardSkillEntry)
           %li= link_to 'Standard Skill Entries', standard_skill_entries_path
-        - if can?(:cache, EventConfiguration)
+        - if policy(@config).manage_cache?
           %li= link_to 'Cache Management', cache_event_configuration_path
         - if can?(:manage_all, :registrant)
           %li= link_to  'Registrants (edit/print)', manage_one_registrants_path

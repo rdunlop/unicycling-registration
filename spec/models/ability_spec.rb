@@ -125,7 +125,6 @@ describe "Ability" do
       @user = FactoryGirl.create(:convention_admin_user)
     end
     subject { @ability = Ability.new(@user) }
-    it { is_expected.to be_able_to(:read, :convention_setup) }
     it { is_expected.to be_able_to(:crud, RegistrationPeriod) }
     it { is_expected.to be_able_to(:crud, ExpenseGroup) }
     it { is_expected.to be_able_to(:crud, ExpenseItem) }

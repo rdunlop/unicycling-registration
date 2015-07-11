@@ -1,6 +1,5 @@
 class Admin::PermissionsController < ApplicationController
-  before_action :authenticate_user!
-  authorize_resource class: false
+  before_action :authorize_permission
 
   def index
     @users = User.includes(:roles).all
@@ -35,4 +34,9 @@ class Admin::PermissionsController < ApplicationController
     redirect_to permissions_path
   end
 
+  private
+
+  def authorize_permission
+    authorize :permission
+  end
 end

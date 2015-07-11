@@ -4,7 +4,7 @@
 
 %p Authorizations are valid for 24 hours unless revoked earlier.
 
-- if can? :display_acl, :permission
+- if policy(:permission).display_acl?
   %b Administrator
   To authorize A laptop, <u>on that laptop</u> go to #{acl_permissions_url} and type in the access key
 
