@@ -13,6 +13,11 @@ class UserPolicy < ApplicationPolicy
     payment_admin? || super_admin?
   end
 
+  # the old way of doing manual payments
+  def manage_old_payment_adjustments?
+    super_admin?
+  end
+
   def logged_in?
     true
   end

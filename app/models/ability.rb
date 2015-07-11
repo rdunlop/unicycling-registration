@@ -172,7 +172,6 @@ class Ability
   def define_payment_admin_roles(user)
     if user.has_role? :payment_admin
       # Can read _any_ payment
-      can :list, :payment_adjustment
       can :set_reg_fee, :registrant
       can [:list, :payments, :payment_details], :export_payment
       can [:download_all], :export_registrant
@@ -265,8 +264,6 @@ class Ability
         can :manage, :usa_membership
       end
       can :read, VolunteerOpportunity
-
-      can :manage, :payment_adjustment
     end
 
     # Scoring abilities
@@ -303,12 +300,6 @@ class Ability
     can :invitations, AdditionalRegistrantAccess
     can [:decline, :accept_readonly], AdditionalRegistrantAccess do |aca|
       aca.registrant.user == user
-    end
-  end
-
-  def define_payment_ability(user)
-    if user.has_role?(:admin)
-      can [:new, :exchange_choose, :exchange_create, :adjust_payment_choose, :onsite_pay_confirm, :onsite_pay_choose, :onsite_pay_create], :payment_adjustment
     end
   end
 

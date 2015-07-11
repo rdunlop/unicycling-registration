@@ -14,11 +14,11 @@
   = link_to "Create Refund", new_manual_refund_path
   %br
 
-- if can? :new, :payment_adjustment # change this to a different action
+- if policy(current_user).manage_old_payment_adjustments?
   = link_to "Create Refund/Exchange", new_payment_adjustment_path
   %br
 
-- if can? :list, :payment_adjustment
+- if policy(current_user).manage_all_payments?
   = link_to "View list of Payments/Refunds", list_payment_adjustments_path
 
 - if can? :list, :export_payment
