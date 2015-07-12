@@ -221,8 +221,6 @@ class Ability
       set_director_abilities(user)
     end
 
-    define_registrant_ability(user)
-
     # Standard Skill Routines
     if user.has_role? :admin
       can :manage, StandardSkillRoutineEntry
@@ -244,27 +242,6 @@ class Ability
     can :invitations, AdditionalRegistrantAccess
     can [:decline, :accept_readonly], AdditionalRegistrantAccess do |aca|
       aca.registrant.user == user
-    end
-  end
-
-  # Registrant
-  def define_registrant_ability(user)
-    if user.has_role? :admin
-      can [:index, :create, :destroy], RegistrantExpenseItem
-      can :manage, :event_song
-    end
-
-    unless reg_closed?
-      # can [:create], RegistrantExpenseItem, :user_id => user.id
-      can [:index, :create, :destroy], RegistrantExpenseItem do |rei|
-        (!rei.system_managed?) && (user.editable_registrants.include?(rei.registrant))
-      end
-    end
-
-    # :read_contact_info allows viewing the contact_info block (additional_registrant_accesess don't allow this)
-    can [:waiver, :read_contact_info], Registrant, user_id: user.id
-    can [:read_contact_info], Registrant do |reg|
-      user.editable_registrants.include?(reg)
     end
   end
 end
