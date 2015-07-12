@@ -118,7 +118,7 @@ class Registrants::BuildController < ApplicationController
 
   def clear_artistic_data!(original_params)
     # XXX Only do this if I'm not an admin-level person
-    return original_params if can? :create_artistic, Registrant
+    return original_params if policy(current_user).add_artistic_events?
     artistic_event_ids = Event.artistic.map(&:id)
     return original_params unless original_params['registrant_event_sign_ups_attributes']
     original_params['registrant_event_sign_ups_attributes'].each do |key, value|
@@ -136,7 +136,7 @@ class Registrants::BuildController < ApplicationController
   end
 
   def clear_events_data!(original_params)
-    return original_params if can? :add_events, Registrant
+    return original_params if policy(current_user).add_events?
     return original_params unless original_params['registrant_event_sign_ups_attributes']
     original_params['registrant_event_sign_ups_attributes'].each do |key, value|
       event_id = value['event_id'].to_i

@@ -11,14 +11,6 @@ class Ability
     EventConfiguration.closed? && !allow_reg_modifications
   end
 
-  def artistic_reg_closed?
-    reg_closed? || config.artistic_closed?
-  end
-
-  def event_sign_up_closed?
-    reg_closed? || config.event_sign_up_closed?
-  end
-
   def initialize(user, allow_reg_modifications = false)
     @allow_reg_modifications = allow_reg_modifications
 
@@ -157,7 +149,6 @@ class Ability
 
   def define_event_planner_roles(user)
     if user.has_role? :event_planner
-      can [:add_events, :create_artistic], Registrant
       can [:read, :create, :list], Email
     end
   end
@@ -269,17 +260,8 @@ class Ability
       can :bag_labels, :registrant
 
       can [:read, :create, :list], Email
-      can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
       can :manage, :event_song
-    end
-
-    unless artistic_reg_closed?
-      can [:create_artistic], Registrant
-    end
-
-    unless event_sign_up_closed?
-      can [:add_events], Registrant
     end
 
     unless reg_closed?

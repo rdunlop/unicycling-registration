@@ -18,6 +18,14 @@ class UserPolicy < ApplicationPolicy
     event_planner? || super_admin?
   end
 
+  def add_events?
+    !event_sign_up_closed? || event_planner? || super_admin?
+  end
+
+  def add_artistic_events?
+    !artistic_reg_closed? || event_planner? || super_admin?
+  end
+
   def manage_music?
     music_dj? || super_admin?
   end
@@ -41,4 +49,13 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  private
+
+  def event_sign_up_closed?
+    registration_closed? || config.event_sign_up_closed?
+  end
+
+  def artistic_reg_closed?
+    registration_closed? || config.artistic_closed?
+  end
 end
