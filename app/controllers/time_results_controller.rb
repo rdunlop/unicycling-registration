@@ -1,7 +1,7 @@
 class TimeResultsController < ApplicationController
-  before_action :authenticate_user!
-  load_and_authorize_resource :competition, except: [:edit, :destroy, :update]
-  load_and_authorize_resource :time_result
+  before_action :authorize_data_entry, except: [:index]
+  before_action :load_competition, except: [:edit, :destroy, :update]
+  before_action :load_time_result, only: [:edit, :update, :destroy]
 
   before_action :set_breadcrumbs, only: :index
 
@@ -9,6 +9,7 @@ class TimeResultsController < ApplicationController
 
   # GET competitions/1/time_results
   def index
+    authorize @competition, :view_result_data?
     add_breadcrumb "Time Results"
     # @time_results = @competition.time_results.includes(:competitor => [:competition]) # XXX
     @time_result = TimeResult.new # @event.time_results.build
@@ -20,7 +21,6 @@ class TimeResultsController < ApplicationController
 
   # GET /time_results/1/edit
   def edit
-    @competition = @time_result.competition
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Edit Time Result"
   end
@@ -28,6 +28,7 @@ class TimeResultsController < ApplicationController
   # POST event/1/time_results
   # POST event/1/time_results.json
   def create
+    @time_result = @competition.time_results.build(time_result_params)
     respond_to do |format|
       @time_result.entered_by = current_user
       @time_result.entered_at = DateTime.now
@@ -47,7 +48,7 @@ class TimeResultsController < ApplicationController
   def update
     respond_to do |format|
       if @time_result.update_attributes(time_result_params)
-        format.html { redirect_to(competition_time_results_path(@time_result.competition), notice: 'Time result was successfully updated.') }
+        format.html { redirect_to(competition_time_results_path(@competition), notice: 'Time result was successfully updated.') }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -59,16 +60,28 @@ class TimeResultsController < ApplicationController
   # DELETE time_results/1
   # DELETE time_results/1.json
   def destroy
-    competition = @time_result.competition
     @time_result.destroy
 
     respond_to do |format|
-      format.html { redirect_to competition_time_results_path(competition) }
+      format.html { redirect_to competition_time_results_path(@competition) }
       format.json { head :ok }
     end
   end
 
   private
+
+  def authorize_data_entry
+    authorize @competition, :modify_result_data?
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_time_result
+    @time_result = TimeResult.find(params[:id])
+    @competition = @time_result.competition
+  end
 
   def set_breadcrumbs
     add_to_competition_breadcrumb(@competition)

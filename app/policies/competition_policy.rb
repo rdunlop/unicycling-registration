@@ -78,6 +78,15 @@ class CompetitionPolicy < ApplicationPolicy
     data_entry_volunteer? || director?
   end
 
+  # DATA MANAGEMENT
+  def view_result_data?
+    director?(record.competition) || super_admin?
+  end
+
+  def modify_result_data?
+    record.unlocked? && view_result_data?
+  end
+
   def single_attempt_recording?
     data_entry_volunteer? || director?
   end

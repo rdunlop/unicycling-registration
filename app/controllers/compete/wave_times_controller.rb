@@ -1,9 +1,10 @@
 class Compete::WaveTimesController < ApplicationController
   layout "competition_management"
-  before_action :authenticate_user!
 
-  load_resource :competition
-  load_and_authorize_resource :wave_time, through: :competition
+  before_action :load_competition
+  before_action :authorize_data_entry, except: [:index]
+
+  before_action :load_wave_time, only: [:edit, :update, :destroy]
 
   before_action :set_parent_breadcrumbs
 
@@ -11,11 +12,14 @@ class Compete::WaveTimesController < ApplicationController
 
   # GET /competitions/1/wave_times
   def index
+    authorize @competition, :view_result_data?
     @wave_times = @competition.wave_times
     @wave_time = WaveTime.new
   end
 
   def create
+    @wave_time = @competition.wave_times.build(wave_time_params)
+
     @wave_time.competition = @competition
     if @wave_time.save
       flash[:notice] = "Wave Time Created"
@@ -51,6 +55,18 @@ class Compete::WaveTimesController < ApplicationController
   end
 
   private
+
+  def authorize_data_entry
+    authorize @competition, :modify_result_data?
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_wave_time
+    @wave_time = @competition.wave_times.find(params[:id])
+  end
 
   def wave_time_params
     params.require(:wave_time).permit(:id, :scheduled_time, :wave, :minutes, :seconds)

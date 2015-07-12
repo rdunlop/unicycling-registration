@@ -32,11 +32,6 @@ class Ability
     can :read, Judge, user_id: user.id
 
     # data entry
-    can :manage, ImportResult do |import_result|
-      !import_result.competition.locked?
-    end
-    cannot [:approve, :approve_heat], ImportResult
-
     can :manage, TwoAttemptEntry do |two_attempt_entry|
       !two_attempt_entry.competition.locked?
     end
@@ -57,30 +52,8 @@ class Ability
   def set_director_abilities(user)
     set_data_entry_volunteer_abilities(user)
 
-
     # Volunteer Abilities
-
     can :manage, DataEntryVolunteer
-
-    # Judging/Scoring Abilities
-
-    can [:results], Event do |ev|
-      user.has_role? :director, ev
-    end
-
-    # Data Management
-    can :manage, ImportResult do |import_result|
-      director_and_unlocked(user, import_result.competition)
-    end
-
-    can :manage, TimeResult do |time_result|
-      director_and_unlocked(user, time_result.competition)
-    end
-
-    can :manage, WaveTime do |wave_time|
-      director_and_unlocked(user, wave_time.competition)
-    end
-
   end
 
   # #################################################
@@ -123,10 +96,6 @@ class Ability
     # Competitor Assignment
     if user.has_role? :admin
       set_data_entry_volunteer_abilities(user)
-      can [:results], Event
-      can :manage, ImportResult
-      can :manage, TimeResult
-      can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
       can :read, VolunteerOpportunity

@@ -16,6 +16,10 @@ class EventPolicy < ApplicationPolicy
     manage?
   end
 
+  def results?
+    director?(record)
+  end
+
   private
 
   def manage?
