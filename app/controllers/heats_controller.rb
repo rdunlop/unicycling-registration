@@ -1,9 +1,9 @@
 class HeatsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :competition, except: [:edit, :update, :destroy]
-
+  before_action :load_competition
   before_action :set_parent_breadcrumbs
   before_action :load_age_group_entry, only: [:sort, :set_sort]
+  before_action :authorize_competition
 
   respond_to :html
 
@@ -116,6 +116,10 @@ class HeatsController < ApplicationController
     heat_number + 1
   end
 
+  def authorize_competition
+    authorize @competition, :heat_recording?
+  end
+
   def load_age_group_entry
     @age_group_entry = AgeGroupEntry.find(params[:age_group_entry_id])
   end
@@ -123,4 +127,9 @@ class HeatsController < ApplicationController
   def set_parent_breadcrumbs
     add_breadcrumb "#{@competition}", competition_path(@competition)
   end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
 end

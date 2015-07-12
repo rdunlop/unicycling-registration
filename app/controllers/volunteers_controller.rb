@@ -4,7 +4,9 @@
 class VolunteersController < ApplicationController
   layout "competition_management"
 
-  load_and_authorize_resource :competition
+  before_action :load_competition
+  before_action :authorize_competition
+
   before_action :validate_volunteer_type, only: [:create, :destroy]
 
   def index
@@ -45,5 +47,13 @@ class VolunteersController < ApplicationController
   def validate_volunteer_type
     @volunteer_type = params[:volunteer_type]
     @volunteer_type == "race_official"
+  end
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def authorize_competition
+    authorize @competition, :manage_volunteers?
   end
 end
