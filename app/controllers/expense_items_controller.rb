@@ -3,6 +3,7 @@ class ExpenseItemsController < ApplicationController
 
   # GET /expense_items/1/details
   def details
+    @expense_item = ExpenseItem.find(params[:id])
     authorize current_user, :manage_all_payments?
     @paid_details = @expense_item.paid_items
     @unpaid_details = @expense_item.unpaid_items

@@ -14,7 +14,7 @@ class OnsiteRegistration::ExpenseGroupsController < ApplicationController
   private
 
   def authorize_setup
-    authorize @config, :setup_convention
+    authorize @config, :setup_convention?
   end
 
 end
