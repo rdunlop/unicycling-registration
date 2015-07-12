@@ -78,8 +78,6 @@ describe "Ability" do
     it { is_expected.to be_able_to(:manage, Competitor) }
     it { is_expected.to be_able_to(:read, VolunteerOpportunity) }
 
-    it { is_expected.to be_able_to(:manage_all, :registrant) }
-
     describe "with an rei" do
       let(:rei) { FactoryGirl.create(:registrant_expense_item) }
       it { is_expected.to be_able_to(:index, RegistrantExpenseItem) }

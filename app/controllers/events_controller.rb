@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
   # GET /events/summary
   def summary
+    @events = Event.all
     authorize Event.new
     @num_male_competitors = Registrant.active.competitor.where(gender: "Male").count
     @num_female_competitors = Registrant.active.competitor.where(gender: "Female").count
