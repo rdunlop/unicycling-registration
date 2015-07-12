@@ -4,12 +4,14 @@ class EventConfigurationsController < ConventionSetupController
 
   EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :important_dates, :payment_settings, :advanced_settings]
 
+  before_action :authorize_convention_setup, only: EVENT_CONFIG_PAGES
+
   EVENT_CONFIG_PAGES.each do |page|
     define_method("update_#{page}") do
+      authorize_convention_setup
       update(page)
     end
     before_action "set_#{page}_breadcrumbs".to_sym, only: ["update_#{page}".to_sym, "#{page}".to_sym]
-    before_action "authorize_convention_setup".to_sym, only: ["update_#{page}".to_sym, "#{page}".to_sym]
     define_method("set_#{page}_breadcrumbs") do
       add_breadcrumb page.to_s.humanize
     end
