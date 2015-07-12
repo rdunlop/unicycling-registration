@@ -6,7 +6,9 @@ class PaymentsController < ApplicationController
   # GET /users/12/payments
   # or
   def index
-    @user = User.find_by(params[:user_id])
+    @user = User.find(params[:user_id])
+    authorize @user, :payments?
+
     @payments = @user.payments.completed
     @refunds = @user.refunds
     @title_name = @user.to_s
@@ -15,6 +17,8 @@ class PaymentsController < ApplicationController
   # GET /registrants/1/payments
   def registrant_payments
     registrant = Registrant.find_by(bib_number: params[:id])
+    authorize registrant, :payments?
+
     add_registrant_breadcrumb(registrant)
     add_breadcrumb "Payments"
 

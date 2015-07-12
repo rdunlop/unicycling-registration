@@ -1,5 +1,9 @@
 class PaymentPolicy < ApplicationPolicy
 
+  def index?
+    true
+  end
+
   def show?
     user_record? || payment_admin? || super_admin?
   end
@@ -38,10 +42,6 @@ class PaymentPolicy < ApplicationPolicy
 
   def user_record?
     record.user == user
-  end
-
-  def registration_closed?
-    reg_closed && !authorized_laptop
   end
 
   class Scope < Scope

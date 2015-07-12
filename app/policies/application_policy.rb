@@ -83,6 +83,11 @@ class ApplicationPolicy
     user.has_role?(:admin)
   end
 
+  def registration_closed?
+    reg_closed && !authorized_laptop
+  end
+
+
   def scope
     Pundit.policy_scope!(user, record.class)
   end

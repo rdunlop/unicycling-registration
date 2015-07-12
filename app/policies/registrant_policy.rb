@@ -28,6 +28,11 @@ class RegistrantPolicy < ApplicationPolicy
     super_admin?
   end
 
+  # view the registrant-specific payments
+  def payments?
+    super_admin?
+  end
+
   private
 
   def user_record?
@@ -36,10 +41,6 @@ class RegistrantPolicy < ApplicationPolicy
 
   def shared_editable_record?
     user.editable_registrants.include?(record)
-  end
-
-  def registration_closed?
-    reg_closed && !authorized_laptop
   end
 
   class Scope < Scope

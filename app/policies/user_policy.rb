@@ -4,8 +4,13 @@ class UserPolicy < ApplicationPolicy
     record == user || payment_admin? || event_planner? || super_admin?
   end
 
+  # view the user-specific payments
+  def payments?
+    record == user || super_admin?
+  end
+
   def create_payments?
-    !reg_closed? || super_admin?
+    !registration_closed? || super_admin?
   end
 
   def manage_music?
