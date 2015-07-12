@@ -1,18 +1,17 @@
 class Admin::RegFeesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_payments_breadcrumb
   before_action :set_reg_fee_breadcrumb
 
   # GET /payments/set_reg_fees
   def index
-    authorize! :set_reg_fee, :registrant
+    authorize current_user, :manage_all_payments?
     @reg_fee = RegFee.new
   end
 
   # POST /payments/update_reg_fee
   # Params: { reg_fee: { registrant_id, registration_period_id } }
   def update_reg_fee
-    authorize! :set_reg_fee, :registrant
+    authorize current_user, :manage_all_payments?
 
     @reg_fee = RegFee.new(reg_fee_params)
 

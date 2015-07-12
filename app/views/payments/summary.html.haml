@@ -1,6 +1,6 @@
 %h1 Payments Management
 
-- if can? :set_reg_fee, :registrant
+- if policy(current_user).manage_all_payments?
   = link_to "Adjust a Registrant's Registration Fee", set_reg_fees_path
   %br
   %small If we need to lock a competitor into a previous Registration Period
@@ -21,7 +21,7 @@
 - if policy(current_user).manage_all_payments?
   = link_to "View list of Payments/Refunds", list_payment_adjustments_path
 
-- if can? :list, :export_payment
+- if policy(current_user).manage_all_payments?
   = link_to "Download Payments", list_export_payments_path
   %br
 

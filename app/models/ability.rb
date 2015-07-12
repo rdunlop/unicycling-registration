@@ -163,10 +163,6 @@ class Ability
 
   def define_payment_admin_roles(user)
     if user.has_role? :payment_admin
-      # Can read _any_ payment
-      can :set_reg_fee, :registrant
-      can [:list, :payments, :payment_details], :export_payment
-      can [:download_all], :export_registrant
       # Allow adding items which only admins can add
       can :admin_view, ExpenseItem
       can :details, ExpenseItem
@@ -296,7 +292,6 @@ class Ability
   def define_registrant_ability(user)
     if user.has_role? :admin
       # can :create, RegFee
-      can :set_reg_fee, :registrant
       can :manage_all, :registrant
       can :bag_labels, :registrant
 

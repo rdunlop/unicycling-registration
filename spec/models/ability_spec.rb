@@ -98,18 +98,6 @@ describe "Ability" do
     it { is_expected.to be_able_to(:create, Judge) }
   end
 
-  describe "as a payment_admin" do
-    before :each do
-      @user = FactoryGirl.create(:payment_admin)
-    end
-    subject { @ability = Ability.new(@user) }
-
-    it { is_expected.to be_able_to :list, :export_payment }
-    it { is_expected.to be_able_to :payments, :export_payment }
-    it { is_expected.to be_able_to :payment_details, :export_payment }
-    it { is_expected.to be_able_to :download_all, :export_registrant }
-  end
-
   describe "as a super_admin" do
     before(:each) do
       @user = FactoryGirl.create(:super_admin_user)
