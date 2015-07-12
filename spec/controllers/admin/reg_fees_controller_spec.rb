@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::RegFeesController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:admin_user)
+    @admin_user = FactoryGirl.create(:payment_admin)
     sign_in @admin_user
   end
 

@@ -76,7 +76,7 @@ class ApplicationPolicy
   end
 
   def director?(event = nil)
-    user.has_role?(:director, event || :any?)
+    user.has_role?(:director, event || :any)
   end
 
   def event_planner?

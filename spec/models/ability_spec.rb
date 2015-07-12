@@ -184,12 +184,6 @@ describe "Ability" do
     it { is_expected.to be_able_to(:export_scores, competition) }
     it { is_expected.not_to be_able_to(:edit, competition) }
     it { is_expected.to be_able_to(:create, DataEntryVolunteer) }
-    it { is_expected.to be_able_to(:summary, Event) }
-
-    describe "with an event not under my direct direction" do
-      let(:other_event_category) { FactoryGirl.create(:event).event_categories.first }
-      it { is_expected.to be_able_to(:sign_ups, other_event_category) }
-    end
 
     describe "with an associated judge to my event" do
       before(:each) do
@@ -209,19 +203,6 @@ describe "Ability" do
         it { is_expected.to be_able_to(:show, @judge) }
       end
     end
-  end
-
-  describe "as event_planner"  do
-    before(:each) do
-      @competition = FactoryGirl.create(:competition)
-      @event_category = @competition.event.event_categories.first
-      @user = FactoryGirl.create(:user)
-      @user.add_role :event_planner
-    end
-    subject { @ability = Ability.new(@user) }
-
-    it { is_expected.to be_able_to(:summary, Event) }
-    it { is_expected.to be_able_to(:sign_ups, @event_category) }
   end
 
   describe "When not logged in" do
