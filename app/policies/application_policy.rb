@@ -51,6 +51,10 @@ class ApplicationPolicy
 
   private
 
+  def membership_admin?
+    user.has_role?(:membership_admin)
+  end
+
   def music_dj?
     user.has_role?(:music_dj)
   end

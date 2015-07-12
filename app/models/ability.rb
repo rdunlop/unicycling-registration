@@ -141,18 +141,11 @@ class Ability
   # #################################################
   # Begin new role definitions
   # #################################################
-  def define_membership_admin_roles(user)
-    if user.has_role?(:membership_admin) && config.usa_membership_config?
-      can :manage, :usa_membership
-    end
-  end
 
   def define_competition_admin_roles(user)
     if user.has_role? :competition_admin
       can [:crud], AgeGroupType
       can [:crud, :set_places, :lock, :unlock], Competition
-      can [:crud], CombinedCompetition
-      can [:crud], CombinedCompetitionEntry
     end
   end
 
@@ -177,7 +170,6 @@ class Ability
     end
 
     define_competition_admin_roles(user)
-    define_membership_admin_roles(user)
     define_volunteer_roles(user)
 
     # #################################################
@@ -186,7 +178,6 @@ class Ability
 
     if user.has_role? :awards_admin
       can [:read, :results, :publish, :unpublish, :award], Competition
-      can :manage, AwardLabel
     end
 
     # Competitor Assignment
@@ -197,7 +188,6 @@ class Ability
       can :manage, Competitor
       can :manage, Member
       can :manage, ImportResult
-      can :manage, AwardLabel
       can :manage, TimeResult
       can :manage, ExternalResult
       can :manage, RegistrantGroup

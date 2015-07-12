@@ -30,6 +30,14 @@ class UserPolicy < ApplicationPolicy
     music_dj? || super_admin?
   end
 
+  def manage_awards?
+    awards_admin? || super_admin?
+  end
+
+  def manage_usa_memberships?
+    config.usa_membership_config? && (membership_admin? || super_admin?)
+  end
+
   # is this user allowed to make manual-received payments/etc?
   def manage_all_payments?
     payment_admin? || super_admin?

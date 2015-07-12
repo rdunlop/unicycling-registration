@@ -1,5 +1,5 @@
 class UsaMembershipsController < ApplicationController
-  authorize_resource class: false
+  before_action :authorize_admin
   before_action :load_family_registrants, only: :index
   before_action :load_registrants, only: [:index, :export]
 
@@ -106,6 +106,10 @@ class UsaMembershipsController < ApplicationController
   end
 
   private
+
+  def authorize_admin
+    authorize current_user, :manage_usa_memberships?
+  end
 
   def load_registrants
     @registrants = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).includes(:contact_detail => [:usa_family_membership_holder]).active
