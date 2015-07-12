@@ -5,6 +5,10 @@ class CompetitionPolicy < ApplicationPolicy
     user.has_role?(:race_official, record) || admin? || super_admin?
   end
 
+  def copy_judges?
+    competition.unlocked? && (director?(competition.event) || super_admin?)
+  end
+
   def create?
     competition_admin? || super_admin?
   end
