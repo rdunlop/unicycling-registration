@@ -7,7 +7,7 @@ class CompetitionsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
 
-  authorize_resource except: :show
+  authorize_resource only: [:publish_age_group_entry, :set_age_group_places]
 
   before_action :add_competition_setup_breadcrumb, only: [:show, :set_sort]
 
@@ -19,12 +19,15 @@ class CompetitionsController < ApplicationController
   end
 
   def set_sort
+    authorize @competition, :sort?
     add_breadcrumb "#{@competition}", competition_path(@competition)
     add_breadcrumb "Manage Competitors", competition_competitors_path(@competition)
     add_breadcrumb "Sort Competitors"
   end
 
   def toggle_final_sort
+    authorize @competition, :sort?
+
     new_value = !@competition.order_finalized?
 
     if new_value
@@ -38,6 +41,8 @@ class CompetitionsController < ApplicationController
   end
 
   def sort_random
+    authorize @competition, :sort?
+
     @competitors = @competition.competitors
     @competitors.shuffle.each_with_index do |comp, index|
       # reload or else the acts_as_restful_list positioning gets screwed up
@@ -61,12 +66,15 @@ class CompetitionsController < ApplicationController
   end
 
   def set_places
+    authorize @competition
+
     @competition.place_all
     Result.update_last_calc_places_time(@competition)
     redirect_to result_competition_path(@competition), notice: "All Places updated"
   end
 
   def result
+    authorize @competition
     @anonymous = params[:anonymous].present?
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Result", result_competition_path(@competition)
@@ -74,6 +82,7 @@ class CompetitionsController < ApplicationController
   end
 
   def export_scores
+    authorize @competition
     if @competition.event_class == 'High/Long'
       csv_string = CSV.generate do |csv|
         csv << ['registrant_external_id', 'distance']
@@ -105,6 +114,7 @@ class CompetitionsController < ApplicationController
   end
 
   def lock
+    authorize @competition
     respond_to do |format|
       if CompetitionStateMachine.new(@competition).lock
         format.html { redirect_to @competition, notice: 'Locked Competition' }
@@ -115,6 +125,8 @@ class CompetitionsController < ApplicationController
   end
 
   def unlock
+    authorize @competition
+
     respond_to do |format|
       if CompetitionStateMachine.new(@competition).unlock
         format.html { redirect_to @competition, notice: 'UnLocked Competition' }
@@ -138,6 +150,8 @@ class CompetitionsController < ApplicationController
   end
 
   def publish
+    authorize @competition
+
     publisher = CompetitionStateMachine.new(@competition)
 
     respond_to do |format|
@@ -150,6 +164,7 @@ class CompetitionsController < ApplicationController
   end
 
   def unpublish
+    authorize @competition
     publisher = CompetitionStateMachine.new(@competition)
 
     respond_to do |format|
@@ -162,6 +177,7 @@ class CompetitionsController < ApplicationController
   end
 
   def award
+    authorize @competition
     if request.post?
       @competition.awarded = true
     elsif request.delete?

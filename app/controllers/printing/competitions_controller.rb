@@ -1,7 +1,7 @@
 class Printing::CompetitionsController < ApplicationController
   before_action :authenticate_user!, except: [:announcer, :start_list]
   before_action :load_competition
-  authorize_resource :competition, parent: false, except: [:announcer, :start_list]
+  authorize_resource :competition, parent: false, except: [:announcer, :start_list, :results]
   before_action :skip_authorization, only: [:announcer, :start_list]
 
   before_action :set_breadcrumbs, only: [:announcer]
@@ -58,6 +58,7 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def results
+    authorize @competition
     name = "#{@config.short_name.tr(' ', '_')}_#{@competition.name.tr(' ', '_')}_results"
     attachment = true unless params[:attachment].nil?
 

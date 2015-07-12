@@ -37,10 +37,6 @@ class Ability
       score.try(:user) == user && !score.competitor.competition.locked?
     end
 
-    can [:create_scores], Competition do |competition|
-      !competition.locked?
-    end
-
     # printing forms:
     can [:announcer, :heat_recording, :single_attempt_recording, :two_attempt_recording], Competition
 
@@ -74,11 +70,6 @@ class Ability
   def set_director_abilities(user)
     set_data_entry_volunteer_abilities(user)
 
-    # Abilities to be able to read data about a competition
-
-    can [:set_sort, :toggle_final_sort, :sort_random, :lock], Competition do |comp|
-      comp.unlocked? && (director_or_competition_admin?(user, comp))
-    end
 
     # Volunteer Abilities
 
@@ -88,10 +79,6 @@ class Ability
 
     can [:read], Score do |score|
       user.has_role? :director, score.competition.event
-    end
-
-    can [:export_scores, :results, :result], Competition do |comp|
-      user.has_role? :director, comp.event
     end
 
     can [:results], Event do |ev|
@@ -130,7 +117,6 @@ class Ability
   def define_competition_admin_roles(user)
     if user.has_role? :competition_admin
       can [:crud], AgeGroupType
-      can [:crud, :set_places, :lock, :unlock], Competition
     end
   end
 
@@ -161,15 +147,10 @@ class Ability
     # End new role definitions
     # #################################################
 
-    if user.has_role? :awards_admin
-      can [:results, :publish, :unpublish, :award], Competition
-    end
-
     # Competitor Assignment
     if user.has_role? :admin
       set_data_entry_volunteer_abilities(user)
       can [:results], Event
-      can [:lock], Competition
       can :manage, Member
       can :manage, ImportResult
       can :manage, TimeResult
