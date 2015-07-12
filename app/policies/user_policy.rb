@@ -58,6 +58,10 @@ class UserPolicy < ApplicationPolicy
     super_admin?
   end
 
+  def view_modification_history?
+    super_admin?
+  end
+
   def logged_in?
     true
   end

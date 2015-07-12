@@ -1,13 +1,10 @@
 class AdditionalRegistrantAccessesController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :user, only: [:create, :index, :new, :invitations]
-  load_and_authorize_resource :additional_registrant_access, through: :user, only: [:index, :new, :invitations]
-  load_and_authorize_resource except: [:create, :index, :new, :invitations]
+  before_action :load_user, only: [:create, :index, :new, :invitations]
+  before_action :load_additional_registrant_accesses, only: [:create, :index, :new, :invitations]
+  before_action :load_additional_registrant_access, except: [:create, :index, :new, :invitations]
   before_action :load_new_additional_registrant_access, only: [:create]
-
-  def load_new_additional_registrant_access
-    @additional_registrant_access = @user.additional_registrant_accesses.build(additional_registrant_access_params)
-  end
+  before_action :authorize_access
 
   # GET /additional_registrant_accesses
   # GET /additional_registrant_accesses.json
@@ -39,8 +36,6 @@ class AdditionalRegistrantAccessesController < ApplicationController
   # POST /additional_registrant_accesses
   # POST /additional_registrant_accesses.json
   def create
-    authorize! :create, @additional_registrant_access
-
     respond_to do |format|
       if @additional_registrant_access.save
         Notifications.request_registrant_access(@additional_registrant_access.registrant, @user).deliver_later
@@ -86,6 +81,26 @@ class AdditionalRegistrantAccessesController < ApplicationController
   end
 
   private
+
+  def authorize_access
+    authorize @additional_registrant_access || AdditionalRegistrantAccess.new
+  end
+
+  def load_new_additional_registrant_access
+    @additional_registrant_access = @user.additional_registrant_accesses.build(additional_registrant_access_params)
+  end
+
+  def load_additional_registrant_accesses
+    @additional_registrant_accesses = @user.additional_registrant_accesses
+  end
+
+  def load_additional_registrant_access
+    @additional_registrant_access = AdditionalRegistrantAccess.find(params[:id])
+  end
+
+  def load_user
+    @user = User.find(params[:user_id])
+  end
 
   def additional_registrant_access_params
     params.require(:additional_registrant_access).permit(:registrant_id)

@@ -15,6 +15,10 @@ class EventConfigurationPolicy < ApplicationPolicy
     competition_admin? || super_admin?
   end
 
+  def advanced_settings?
+    super_admin?
+  end
+
   # Can we arbitrarily assign ourselves to new roles?
   def test_mode_role?
     record.test_mode?

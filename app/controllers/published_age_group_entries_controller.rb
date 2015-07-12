@@ -1,13 +1,12 @@
 class PublishedAgeGroupEntriesController < ApplicationController
-  before_action :authenticate_user!, except: :show
+  before_action :skip_authorization, only: :show
 
   before_action :load_competition
-
-  load_and_authorize_resource only: :show
 
   respond_to :html
 
   def show
+    @published_age_group_entry = PublishedAgeGroupEntry.find(params[:id])
     @ag_entry = @published_age_group_entry.age_group_entry
     @results_list = @competition.results_list_for(@ag_entry)
 
@@ -18,7 +17,7 @@ class PublishedAgeGroupEntriesController < ApplicationController
   end
 
   def preview
-    authorize! :preview, AgeGroupEntry
+    authorize @competition, :view_result_data?
     @ag_entry = AgeGroupEntry.find(params[:id])
     @results_list = @competition.results_list_for(@ag_entry)
     respond_to do |format|

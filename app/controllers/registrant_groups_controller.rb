@@ -1,11 +1,9 @@
 class RegistrantGroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_new_registrant_group, only: [:create]
-  load_and_authorize_resource
 
-  def load_new_registrant_group
-    @registrant_group = RegistrantGroup.new(registrant_group_params)
-  end
+  before_action :load_registrant_group, only: [:address_labels, :show, :update, :destroy]
+  before_action :authorize_user
 
   # GET /registrant_groups
   # GET /registrant_groups.json
@@ -20,6 +18,8 @@ class RegistrantGroupsController < ApplicationController
   end
 
   def list
+    @registrant_groups = RegistrantGroup.all
+
     respond_to do |format|
       format.html
       format.pdf { render_common_pdf("list") }
@@ -98,6 +98,18 @@ class RegistrantGroupsController < ApplicationController
   end
 
   private
+
+  def authorize_user
+    authorize current_user, :under_development?
+  end
+
+  def load_registrant_group
+    @registrant_group = RegistrantGroup.find(params[:id])
+  end
+
+  def load_new_registrant_group
+    @registrant_group = RegistrantGroup.new(registrant_group_params)
+  end
 
   def registrant_group_params
     params.require(:registrant_group).permit(:name, :registrant_id,
