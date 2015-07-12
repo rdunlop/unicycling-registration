@@ -36,6 +36,16 @@ class DistanceAttempt < ActiveRecord::Base
     :competitor_id
   end
 
+  def result
+    distance
+  end
+
+  def disqualified?
+    fault
+  end
+
+  private
+
   def must_not_have_new_attempt_less_than_existing_attempt
     if new_record?
       unless competitor.nil? || distance.nil?
@@ -54,13 +64,5 @@ class DistanceAttempt < ActiveRecord::Base
         end
       end
     end
-  end
-
-  def result
-    distance
-  end
-
-  def disqualified?
-    fault
   end
 end

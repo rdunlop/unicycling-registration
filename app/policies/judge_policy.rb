@@ -28,6 +28,10 @@ class JudgePolicy < ApplicationPolicy
     update?
   end
 
+  def can_judge?
+    record.competition.unlocked? && (user_match? || super_admin?)
+  end
+
   private
 
   def user_match?
