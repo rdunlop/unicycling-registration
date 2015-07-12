@@ -22,7 +22,6 @@ class PaymentsController < ApplicationController
     add_registrant_breadcrumb(registrant)
     add_breadcrumb "Payments"
 
-    authorize! :manage, registrant
     @payments = registrant.payments.completed.uniq
     @refunds = registrant.refunds.uniq
     @title_name = registrant.to_s

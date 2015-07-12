@@ -34,6 +34,6 @@
       %td
       %td
 %hr
-- if can? :create, StandardSkillRoutineEntry
+- if policy(current_user).under_development?
   %h3 Add new Standard Skill Entry
   = render :partial => 'form', :object => @entry

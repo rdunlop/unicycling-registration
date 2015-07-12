@@ -4,7 +4,7 @@
   .judge_type_summary
     = render partial: "judge_type_summary", locals: {judge_type: judge_type, judges: @judges.where(judge_type: judge_type) }
 
-- if can? :create, @judge
+- if policy(@judge).create?
   = render "add_judges"
 - else
   %p You cannot manage Judges (competition is locked, or you lack permissions)

@@ -39,7 +39,7 @@
 
 - if policy(@config).setup_competition?
   = link_to 'Manage Directors', directors_path
-- if can? :crud, AgeGroupType
+- if policy(@config).setup_competition?
   %hr
   %h2 Age Groups
   %li= link_to  'Age Group Type', age_group_types_path
