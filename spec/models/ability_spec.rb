@@ -46,15 +46,6 @@ describe "Ability" do
 
         it { is_expected.to be_able_to(:destroy, @routine) }
       end
-
-      describe "with a required expense_item" do
-        before(:each) do
-          eg = FactoryGirl.create(:expense_group, competitor_required: true)
-          @ei = FactoryGirl.create(:expense_item, expense_group: eg)
-        end
-
-        it { is_expected.not_to be_able_to(:destroy, registration.registrant_expense_items.first) }
-      end
     end
 
     describe "when standard_skill is closed" do
@@ -73,15 +64,8 @@ describe "Ability" do
     end
     subject { @ability = Ability.new(@user) }
 
-    it { is_expected.to be_able_to(:manage, Competitor) }
     it { is_expected.to be_able_to(:read, VolunteerOpportunity) }
 
-    describe "with an rei" do
-      let(:rei) { FactoryGirl.create(:registrant_expense_item) }
-      it { is_expected.to be_able_to(:index, RegistrantExpenseItem) }
-      it { is_expected.to be_able_to(:create, rei) }
-      it { is_expected.to be_able_to(:destroy, rei) }
-    end
     describe "when registration is closed" do
       before(:each) do
         FactoryGirl.create(:registration_period, onsite: false, end_date: 10.days.ago)
@@ -115,7 +99,6 @@ describe "Ability" do
       let(:competition) { FactoryGirl.create(:competition) }
 
       it { is_expected.to be_able_to(:create_scores, competition) }
-      it { is_expected.to be_able_to(:read, Competitor) }
       it { is_expected.not_to be_able_to(:set_sort, competition) }
       it { is_expected.not_to be_able_to(:sort_random, competition) }
       it { is_expected.not_to be_able_to(:review_heat, competition) }
