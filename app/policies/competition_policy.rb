@@ -9,6 +9,10 @@ class CompetitionPolicy < ApplicationPolicy
     record.unlocked? && (director?(record.event) || super_admin?)
   end
 
+  def index?
+    director?(record.event) || super_admin?
+  end
+
   def create?
     competition_admin? || super_admin?
   end
@@ -80,7 +84,7 @@ class CompetitionPolicy < ApplicationPolicy
 
   # DATA MANAGEMENT
   def view_result_data?
-    director?(record) || super_admin?
+    director?(record.event) || super_admin?
   end
 
   def modify_result_data?
@@ -105,7 +109,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def manage_volunteers?
-    director?(record) || super_admin?
+    director?(record.event) || super_admin?
   end
 
 
