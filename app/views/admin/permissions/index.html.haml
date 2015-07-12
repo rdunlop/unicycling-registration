@@ -50,7 +50,7 @@
           %br
           = submit_tag "Set Password"
 
-- if can? :read, :director
+- if policy(@config).setup_competition?
   %div
     = link_to 'Manage Directors', directors_path
 

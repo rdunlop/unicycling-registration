@@ -149,10 +149,7 @@ class Ability
 
   def define_competition_admin_roles(user)
     if user.has_role? :competition_admin
-      can :manage, :director
-      can :manage, :ineligible_registrant
       can [:crud], AgeGroupType
-      can :update_row_order, AgeGroupEntry
       can [:crud, :set_places, :lock, :unlock], Competition
       can [:crud], CombinedCompetition
       can [:crud], CombinedCompetitionEntry
@@ -179,7 +176,6 @@ class Ability
       return # required in order to allow rails_admin to function
     end
 
-    define_event_planner_roles(user)
     define_competition_admin_roles(user)
     define_membership_admin_roles(user)
     define_volunteer_roles(user)

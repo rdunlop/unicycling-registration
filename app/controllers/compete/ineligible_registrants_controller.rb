@@ -1,8 +1,7 @@
 class Compete::IneligibleRegistrantsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_ability
 
   before_action :load_registrant, except: :index
-  authorize_resource :ineligible_registrant, class: false
 
   respond_to :html
 
@@ -28,6 +27,10 @@ class Compete::IneligibleRegistrantsController < ApplicationController
   end
 
   private
+
+  def authenticate_ability
+    authorize @config, :setup_competition?
+  end
 
   def load_registrant
     # 'create' uses :registrant_id
