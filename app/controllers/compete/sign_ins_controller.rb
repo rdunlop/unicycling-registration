@@ -2,9 +2,8 @@ class Compete::SignInsController < ApplicationController
   layout "competition_management"
 
   before_action :authenticate_user!
-  load_resource :competition
-  authorize_resource :competition, parent: false
-
+  before_action :load_competition
+  before_action :authorize_competition
   before_action :set_parent_breadcrumbs
 
   respond_to :html
@@ -44,6 +43,14 @@ class Compete::SignInsController < ApplicationController
   end
 
   private
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def authorize_competition
+    authorize @competition
+  end
 
   def update_competitors_params
     params.require(:competition).permit(competitors_attributes: [:id, :status, :wave, :geared, :riding_wheel_size, :riding_crank_size, :notes])

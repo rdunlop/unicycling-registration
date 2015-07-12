@@ -2,14 +2,14 @@ class CompetitionResultsController < ApplicationController
   layout "competition_management"
 
   before_action :authenticate_user!
-  load_resource :competition
-  load_resource through: :competition
-  authorize_resource :competition
+  before_action :load_competition
+  before_action :authorize_competition
   before_action :set_breadcrumbs
 
   respond_to :html
 
   def index
+    @competition_results = @competition.competition_results
     add_breadcrumb "Additional Results"
   end
 
@@ -42,6 +42,14 @@ class CompetitionResultsController < ApplicationController
   end
 
   private
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def authorize_competition
+    authorize @competition
+  end
 
   def set_breadcrumbs
     add_breadcrumb @competition, competition_path(@competition)

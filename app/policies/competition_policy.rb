@@ -108,6 +108,15 @@ class CompetitionPolicy < ApplicationPolicy
     director?(record) || super_admin?
   end
 
+
+  def publish_age_group_entry?
+    super_admin?
+  end
+
+  def set_age_group_places?
+    super_admin?
+  end
+
   private
 
   class Scope < Scope

@@ -7,8 +7,6 @@ class CompetitionsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
 
-  authorize_resource only: [:publish_age_group_entry, :set_age_group_places]
-
   before_action :add_competition_setup_breadcrumb, only: [:show, :set_sort]
 
   respond_to :html, :js
@@ -55,6 +53,8 @@ class CompetitionsController < ApplicationController
   end
 
   def set_age_group_places
+    authorize @competition
+
     if params[:age_group_entry_id].empty?
       flash[:alert] = "You must specify an age group entry"
     else
@@ -137,6 +137,8 @@ class CompetitionsController < ApplicationController
   end
 
   def publish_age_group_entry
+    authorize @competition
+
     publisher = CompetitionStateMachine.new(@competition)
     entry = params[:age_group_entry]
 

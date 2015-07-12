@@ -2,10 +2,8 @@ require 'csv'
 class Compete::WaveAssignmentsController < ApplicationController
   layout "competition_management"
   before_action :authenticate_user!
-
-  load_resource :competition
-  authorize_resource :competition, parent: false
-
+  before_action :load_competition
+  before_action :authorize_competition
   before_action :set_parent_breadcrumbs
 
   respond_to :html
@@ -69,6 +67,14 @@ class Compete::WaveAssignmentsController < ApplicationController
   end
 
   private
+
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
+  def authorize_competition
+    authorize @competition
+  end
 
   def set_parent_breadcrumbs
     add_breadcrumb "#{@competition}", competition_path(@competition)
