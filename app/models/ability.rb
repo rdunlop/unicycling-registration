@@ -161,14 +161,6 @@ class Ability
   # Begin new role definitions
   # #################################################
 
-  def define_music_dj_roles(user)
-    if user.has_role? :music_dj
-      can :manage, :event_song
-      can :manage, :competition_song
-      # automatically can download music via S3 links
-    end
-  end
-
   def define_payment_admin_roles(user)
     if user.has_role? :payment_admin
       # Can read _any_ payment
@@ -230,7 +222,6 @@ class Ability
       return # required in order to allow rails_admin to function
     end
 
-    define_music_dj_roles(user)
     define_payment_admin_roles(user)
     define_event_planner_roles(user)
     define_competition_admin_roles(user)
@@ -313,7 +304,6 @@ class Ability
       can :create_artistic, Registrant
       can [:index, :create, :destroy], RegistrantExpenseItem
       can :manage, :event_song
-      can :manage, :competition_song
     end
 
     unless artistic_reg_closed?

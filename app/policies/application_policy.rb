@@ -51,6 +51,10 @@ class ApplicationPolicy
 
   private
 
+  def music_dj?
+    user.has_role?(:music_dj)
+  end
+
   def event_planner?
     user.has_role?(:event_planner)
   end
