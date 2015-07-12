@@ -39,8 +39,6 @@ describe "Ability" do
         allow(@user).to receive(:registrants).and_return([registration])
       end
 
-      it { is_expected.to be_able_to(:index, RegistrantExpenseItem) }
-
       describe "with a StandardSkillRoutine" do
         before(:each) do
           @routine = FactoryGirl.create(:standard_skill_routine, registrant: registration)

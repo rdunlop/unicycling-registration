@@ -71,6 +71,10 @@ class ApplicationPolicy
     user.has_role?(:translator)
   end
 
+  def awards_admin?
+    user.has_role?(:awards_admin)
+  end
+
   def convention_admin?
     user.has_role?(:convention_admin)
   end

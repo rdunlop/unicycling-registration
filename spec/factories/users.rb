@@ -51,6 +51,10 @@ FactoryGirl.define do
       after(:create) {|user| user.add_role :competition_admin }
     end
 
+    factory :award_admin_user do
+      after(:create) {|user| user.add_role :awards_admin }
+    end
+
     factory :data_entry_volunteer_user do
       after(:create) {|user| user.add_role :data_entry_volunteer }
     end

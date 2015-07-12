@@ -1,4 +1,4 @@
-class RegistrantExpensePolicy < ApplicationPolicy
+class RegistrantExpenseItemPolicy < ApplicationPolicy
 
   def create?
     manage? || super_admin?
@@ -10,6 +10,7 @@ class RegistrantExpensePolicy < ApplicationPolicy
 
   private
 
+  # need to create specs for this
   def manage?
     (!record.system_managed?) && (user.editable_registrants.include?(record.registrant))
   end
