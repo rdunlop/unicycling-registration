@@ -34,7 +34,7 @@
                 %li= link_to competition, competition
           %td
             %ul.categoryList__eventList
-              - if can? :create, Competition
+              - if policy(Competition.new).create?
                 %li= link_to "Create New Competition", new_event_competition_path(event)
 
 - if policy(@config).setup_competition?

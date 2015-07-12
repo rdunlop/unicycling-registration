@@ -14,7 +14,7 @@
                 %tr
                   %td= song.event
                   %td= song.description
-        - if can? :create, Song
+        - if policy(Song.new).create?
           .non_printable
             = t(".instructions")
             = link_to t(".click_here"), registrant_songs_path(@registrant)

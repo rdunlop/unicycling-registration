@@ -31,7 +31,7 @@ class ScoresController < ApplicationController
 
   # POST /judges/1/competitors/2/scores
   def create
-    authorize @judge, :create_scores?
+    authorize @score, :create?
 
     respond_to do |format|
       if @score.save

@@ -1,7 +1,7 @@
 - cache [current_user] do
   - if policy(@registrant).update?
     .js--showElement{ data: { key: "update_registrant" } }
-  - if can? :create, RegistrantExpenseItem
+  - if policy(RegistrantExpenseItem.new).create?
     .js--showElement{ data: { key: "create_rei" } }
   - if policy(@registrant).payments?
     .js--showElement{ data: { key: "manage_registrant" } }

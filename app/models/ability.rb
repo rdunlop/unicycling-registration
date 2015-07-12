@@ -31,12 +31,6 @@ class Ability
 
     can :read, Judge, user_id: user.id
 
-    # Freestyle
-    can :create, Score
-    can [:read, :update, :destroy], Score do |score|
-      score.try(:user) == user && !score.competitor.competition.locked?
-    end
-
     # data entry
     can :manage, ImportResult do |import_result|
       !import_result.competition.locked?
@@ -69,10 +63,6 @@ class Ability
     can :manage, DataEntryVolunteer
 
     # Judging/Scoring Abilities
-
-    can [:read], Score do |score|
-      user.has_role? :director, score.competition.event
-    end
 
     can [:results], Event do |ev|
       user.has_role? :director, ev
@@ -144,7 +134,6 @@ class Ability
     if user.has_role? :admin
       set_data_entry_volunteer_abilities(user)
       can [:results], Event
-      can :manage, Member
       can :manage, ImportResult
       can :manage, TimeResult
       can :manage, ExternalResult

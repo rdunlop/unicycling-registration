@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::Base
+ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
   include Pundit
@@ -139,7 +139,7 @@ class ApplicationController < ActionController::Base
   end
 
   def add_competition_breadcrumb(competition)
-    add_breadcrumb "#{competition}", (competition_path(competition) if can? :show, competition)
+    add_breadcrumb "#{competition}", (competition_path(competition) if policy(competition).show?
   end
 
   def add_to_competition_breadcrumb(competition)
