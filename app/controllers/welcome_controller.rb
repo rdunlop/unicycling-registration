@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   before_action :authenticate_user!, only: [:index, :data_entry_menu]
-  before_action :skip_authorization only: [:index, :help, :feedback, :confirm]
+  before_action :skip_authorization, only: [:index, :help, :feedback, :confirm]
 
   before_action :check_acceptable_format
 
