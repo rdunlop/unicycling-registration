@@ -2,9 +2,9 @@ class PreliminaryExternalResultsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition, except: [:edit, :update, :destroy]
   before_action :load_new_external_result, only: [:create]
-  load_resource :external_result, parent: false
+  before_action :load_external_result, only: [:edit, :update, :destroy]
   before_action :authorize_res
-  before_action :filter_results_to_preliminary, only: [:index, :review, :approve, :display_csv, :import_csv]
+  before_action :load_external_results, only: [:index, :review, :approve, :display_csv, :import_csv]
 
   before_action :set_breadcrumbs, only: :index
 
@@ -97,7 +97,7 @@ class PreliminaryExternalResultsController < ApplicationController
   private
 
   def authorize_res
-    authorize! :create_preliminary_result, (@competition || @external_result.competition)
+    authorize @competition, :create_preliminary_result?
   end
 
   def set_breadcrumbs
@@ -108,12 +108,17 @@ class PreliminaryExternalResultsController < ApplicationController
     @competition = Competition.find(params[:competition_id])
   end
 
+  def load_external_result
+    @extenal_result = ExtenalResult.find(params[:id])
+    @competition = @external_result.competition
+  end
+
   def load_new_external_result
     @external_result = @competition.external_results.new(external_result_params)
   end
 
-  def filter_results_to_preliminary
-    @external_results = @external_results.preliminary
+  def load_external_results
+    @external_results = @competition.external_results.preliminary
   end
 
   def external_result_params

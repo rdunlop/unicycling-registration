@@ -86,11 +86,12 @@ class CompetitionPolicy < ApplicationPolicy
     true
   end
 
-  private
-
-  def sortable?
-    record.unlocked? && (director?(record.try(:event)) || competition_admin? || super_admin?)
+  # DATA ENTRY
+  def create_preliminary_result?
+    record.unlocked? && (data_entry_volunteer? || director? || super_admin?)
   end
+
+  private
 
   class Scope < Scope
     def resolve
