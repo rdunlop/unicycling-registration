@@ -1,7 +1,9 @@
 class DataEntryVolunteersController < ApplicationController
   layout "competition_management"
 
-  load_and_authorize_resource :competition
+  before_action :load_competition
+  before_action :authorize_competition
+
   before_action :load_new_data_entry_volunteer, only: :index
 
   respond_to :html
@@ -29,7 +31,15 @@ class DataEntryVolunteersController < ApplicationController
 
   private
 
+  def load_competition
+    @competition = Competition.find(params[:competition_id])
+  end
+
   def load_new_data_entry_volunteer
     @data_entry_volunteer = DataEntryVolunteer.new
+  end
+
+  def authorize_competition
+    authorize @competition, :manage_volunteers?
   end
 end

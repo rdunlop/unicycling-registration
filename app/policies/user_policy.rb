@@ -66,6 +66,10 @@ class UserPolicy < ApplicationPolicy
     super_admin?
   end
 
+  def view_data_entry_menu?
+    data_entry_volunteer? || director? || super_admin?
+  end
+
   private
 
   def event_sign_up_closed?

@@ -27,8 +27,6 @@ class Ability
   end
 
   def set_data_entry_volunteer_abilities(user)
-    can :data_entry_menu, :welcome
-
     can :read, Judge, user_id: user.id
 
     # data entry
@@ -51,9 +49,6 @@ class Ability
 
   def set_director_abilities(user)
     set_data_entry_volunteer_abilities(user)
-
-    # Volunteer Abilities
-    can :manage, DataEntryVolunteer
   end
 
   # #################################################

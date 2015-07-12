@@ -104,6 +104,10 @@ class CompetitionPolicy < ApplicationPolicy
     record.unlocked? && (data_entry_volunteer? || director? || super_admin?)
   end
 
+  def manage_volunteers?
+    director?(record) || super_admin?
+  end
+
   private
 
   class Scope < Scope

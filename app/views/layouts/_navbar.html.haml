@@ -22,7 +22,7 @@
   - if user_signed_in? && current_user.roles.any?
     %nav.non_printable.admin_bar
       %ul.navList
-        - if can? :data_entry_menu, :welcome
+        - if policy(current_user).view_data_entry_menu?
           %li= link_to 'Data Entry', welcome_data_entry_menu_path
         - if policy(@config).setup_convention?
           %li= link_to 'Convention Setup', convention_setup_path
