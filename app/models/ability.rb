@@ -37,9 +37,6 @@ class Ability
       score.try(:user) == user && !score.competitor.competition.locked?
     end
 
-    # printing forms:
-    can [:announcer, :heat_recording, :single_attempt_recording, :two_attempt_recording], Competition
-
     # data entry
     can :manage, ImportResult do |import_result|
       !import_result.competition.locked?

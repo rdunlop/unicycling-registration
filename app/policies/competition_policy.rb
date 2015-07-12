@@ -31,19 +31,19 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def unlock?
-    competition_admin?
+    competition_admin? || super_admin?
   end
 
   def publish?
-    awards_admin?
+    awards_admin? || super_admin?
   end
 
   def unpublish?
-    awards_admin?
+    awards_admin? || super_admin?
   end
 
   def award?
-    awards_admin?
+    awards_admin? || super_admin?
   end
   ###### END State Machine transitions ############
 
@@ -61,9 +61,30 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def set_places?
-    competition_admin?
+    competition_admin? || super_admin?
   end
 
+  # PRINTING
+  def announcer?
+    return true # ?? Was "skip_authorization_check" before?
+    data_entry_volunteer? || director?
+  end
+
+  def heat_recording?
+    data_entry_volunteer? || director?
+  end
+
+  def single_attempt_recording?
+    data_entry_volunteer? || director?
+  end
+
+  def two_attempt_recording?
+    data_entry_volunteer? || director?
+  end
+
+  def start_list?
+    true
+  end
 
   private
 

@@ -98,8 +98,6 @@ describe "Ability" do
     describe "with a Competition" do
       let(:competition) { FactoryGirl.create(:competition) }
 
-      it { is_expected.not_to be_able_to(:set_sort, competition) }
-      it { is_expected.not_to be_able_to(:sort_random, competition) }
       it { is_expected.not_to be_able_to(:review_heat, competition) }
       it { is_expected.not_to be_able_to(:approve_heat, competition) }
 
@@ -135,9 +133,6 @@ describe "Ability" do
     subject { @ability = Ability.new(@user) }
 
     describe "when the event is unlocked" do
-      it { is_expected.to be_able_to(:set_sort, competition) }
-      it { is_expected.to be_able_to(:sort_random, competition) }
-      it { is_expected.to be_able_to(:lock, competition) }
       it { is_expected.to be_able_to(:manage, ImportResult) }
       it { is_expected.to be_able_to(:create, Judge) }
     end
@@ -145,17 +140,10 @@ describe "Ability" do
     describe "when the event is locked" do
       let(:competition) { FactoryGirl.create(:competition, :locked) }
 
-      it { is_expected.not_to be_able_to(:set_sort, competition) }
-      it { is_expected.not_to be_able_to(:sort_random, competition) }
-      it { is_expected.not_to be_able_to(:lock, competition) }
       it { is_expected.not_to be_able_to(:create, Judge.new(competition: competition)) }
-      it { is_expected.to be_able_to(:read, competition) }
     end
 
-    it { is_expected.to be_able_to(:read, competition) }
     it { is_expected.not_to be_able_to(:read, competition.event) }
-    it { is_expected.to be_able_to(:export_scores, competition) }
-    it { is_expected.not_to be_able_to(:edit, competition) }
     it { is_expected.to be_able_to(:create, DataEntryVolunteer) }
 
     describe "with an associated judge to my event" do
