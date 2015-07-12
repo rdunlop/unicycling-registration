@@ -3,7 +3,7 @@ class DistanceAttemptsController < ApplicationController
   before_action :load_distance_attempt, only: [:destroy]
 
   before_action :load_competition, only: [:index, :create]
-  skip_authorization only: :competitor_details
+  before_action :skip_authorization only: :competitor_details
   before_action :load_new_distance_attempt, only: [:index, :competitor_details]
 
   before_action :set_judge_breadcrumb, only: [:index, :create]

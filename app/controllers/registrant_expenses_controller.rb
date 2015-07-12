@@ -1,6 +1,6 @@
 class RegistrantExpensesController < ApplicationController
   before_action :authenticate_user!
-  skip_authorization
+  before_action :skip_authorization
 
   respond_to :js
 

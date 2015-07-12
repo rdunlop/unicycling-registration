@@ -1,6 +1,6 @@
 class ErrorsController < ApplicationController
   include Gaffe::Errors
-  skip_authorization
+  before_action :skip_authorization
 
   def not_found
     if @tenant.try(:persisted?)

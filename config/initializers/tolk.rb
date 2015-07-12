@@ -3,9 +3,8 @@
 # Tolk config file. Generated on April 14, 2015 21:06
 # See github.com/tolk/tolk for more informations
 
-require 'cancancan'
 Tolk::ApplicationController.authenticator = proc {
-  authorize :translation, :manage_all_site_translations?
+  Policy(:transaltion).manage_all_site_translations?
 }
 
 Tolk.config do |config|

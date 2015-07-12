@@ -10,9 +10,16 @@
   before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
   protect_from_forgery
-  #after_action :verify_authorized, :except => :index
+  # after_action :verify_authorized, :except => :index
   after_action :verify_authorized, except: :devise_controller?
-  skip_authorization if: :rails_admin_controller?
+
+  before_action :skip_if_rails_admin
+
+  def skip_if_rails_admin
+    if rails_admin_controller? || devise_controller?
+      skip_authorization
+    end
+  end
 
   def rails_admin_controller?
     false
