@@ -12,9 +12,6 @@ describe "standard_skill_routines/show" do
     @routine = assign(:standard_skill_routine, ssre.standard_skill_routine)
     assign(:total, 10.1)
 
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    allow(controller).to receive(:current_ability) { @ability }
     @ability.can :manage, StandardSkillRoutine
     @ability.can :manage, StandardSkillRoutineEntry
   end

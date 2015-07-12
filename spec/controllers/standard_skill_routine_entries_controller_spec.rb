@@ -4,8 +4,6 @@ describe StandardSkillRoutineEntriesController do
   before(:each) do
     @user = FactoryGirl.create(:user)
     sign_in @user
-    @ability = Ability.new(@user)
-
     @registrant = FactoryGirl.create(:registrant, user: @user)
     @routine = FactoryGirl.create(:standard_skill_routine, registrant: @registrant)
     @initial_entry = FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: @routine)
@@ -106,13 +104,6 @@ describe StandardSkillRoutineEntriesController do
       entry = StandardSkillRoutineEntry.create! @valid_attributes
       delete :destroy, standard_skill_routine_id: @routine.id, id: entry.to_param
       expect(response).to redirect_to(standard_skill_routine_path(@routine))
-    end
-    it "is unable to destroy another user's entry" do
-      @other_entry = FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: FactoryGirl.create(:standard_skill_routine))
-      expect(@ability).not_to be_able_to(:destroy, @other_entry)
-    end
-    it "is able to destroy own user's entry" do
-      expect(@ability).to be_able_to(:destroy, @initial_entry)
     end
   end
 end
