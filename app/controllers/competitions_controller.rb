@@ -7,13 +7,14 @@ class CompetitionsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
 
-  load_and_authorize_resource
+  authorize_resource except: :show
 
   before_action :add_competition_setup_breadcrumb, only: [:show, :set_sort]
 
   respond_to :html, :js
 
   def show
+    authorize @competition
     add_breadcrumb "#{@competition}"
   end
 
