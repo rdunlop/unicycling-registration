@@ -19,36 +19,10 @@ class Ability
     end
     # Even Non-Logged-In Users can still:
 
-    can :read, StandardSkillEntry
     can :read, AgeGroupType
     can :show, PublishedAgeGroupEntry do |entry|
       entry.published_at.present?
     end
-  end
-
-  def set_data_entry_volunteer_abilities(user)
-    can :read, Judge, user_id: user.id
-
-    # data entry
-    can :manage, TwoAttemptEntry do |two_attempt_entry|
-      !two_attempt_entry.competition.locked?
-    end
-
-    # High/Long Data Entry
-    can :manage, DistanceAttempt
-    can :manage, TieBreakAdjustment
-  end
-
-  def director_and_unlocked(user, competition)
-    !competition.locked? && user.has_role?(:director, competition.try(:event))
-  end
-
-  def director_or_competition_admin?(user, competition)
-    user.has_role?(:director, competition.try(:event)) || user.has_role?(:competition_admin)
-  end
-
-  def set_director_abilities(user)
-    set_data_entry_volunteer_abilities(user)
   end
 
   # #################################################
@@ -90,34 +64,9 @@ class Ability
 
     # Competitor Assignment
     if user.has_role? :admin
-      set_data_entry_volunteer_abilities(user)
       can :manage, RegistrantGroup
       can :manage, Judge
       can :read, VolunteerOpportunity
-    end
-
-    # Scoring abilities
-    if user.has_role? :data_entry_volunteer
-      set_data_entry_volunteer_abilities(user)
-    end
-
-    if user.has_role? :director, :any
-      set_director_abilities(user)
-    end
-
-    # Standard Skill Routines
-    if user.has_role? :admin
-      can :manage, StandardSkillRoutineEntry
-      can :manage, StandardSkillRoutine
-    end
-    unless config.standard_skill_closed?
-      can [:read, :create, :destroy], StandardSkillRoutine do |routine|
-        user.registrants.include?(routine.registrant)
-      end
-      can :create, StandardSkillRoutine # necessary because we set the registrant in the controller?
-      can :manage, StandardSkillRoutineEntry do |entry|
-        can? :destroy, entry.standard_skill_routine
-      end
     end
 
     # Sharing Registrants across Users

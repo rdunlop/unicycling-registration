@@ -29,7 +29,7 @@ class JudgePolicy < ApplicationPolicy
   end
 
   def can_judge?
-    record.competition.unlocked? && (user_match? || super_admin?)
+    record.competition.unlocked? && (user_match? || super_admin?) #  Allow Director? || director?(record.event)
   end
 
   private

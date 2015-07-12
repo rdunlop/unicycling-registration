@@ -62,7 +62,7 @@ class DistanceAttemptsController < ApplicationController
   # /competitions/#/distance_attempts/list
   def list
     @competition = Competition.find(params[:competition_id])
-    authorize! :list, DistanceAttempt
+    authorize @competition, :view_result_data?
     @distance_attempts = @competition.distance_attempts.includes(:competitor)
     respond_to do |format|
       format.html { render action: "list" }

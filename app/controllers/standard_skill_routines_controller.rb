@@ -1,13 +1,21 @@
 require 'csv'
 class StandardSkillRoutinesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authorize_user
   before_action :load_new_standard_skill_routine, only: [:create]
-  load_and_authorize_resource
   before_action :load_registrant, only: [:create]
+
+  # unless config.standard_skill_closed?
+  #   can [:read, :create, :destroy], StandardSkillRoutine do |routine|
+  #     user.registrants.include?(routine.registrant)
+  #   end
+  #   can :create, StandardSkillRoutine # necessary because we set the registrant in the controller?
+  #   can :manage, StandardSkillRoutineEntry do |entry|
+  #     can? :destroy, entry.standard_skill_routine
+  #   end
+  # end
 
   # POST /registrants/:id/standard_skill_routines/
   def create
-    authorize @registrant, :show?
     @routine.registrant = @registrant
     @routine.save!
 
@@ -28,6 +36,7 @@ class StandardSkillRoutinesController < ApplicationController
 
   # GET /standard_skill_routines
   def index
+    @standard_skill_routines = StandardSkillRoutine.all
     @registrants = current_user.registrants
   end
 
@@ -50,6 +59,10 @@ class StandardSkillRoutinesController < ApplicationController
   end
 
   private
+
+  def authorize_user
+    authorize current_user, :under_development?
+  end
 
   def load_new_standard_skill_routine
     @routine = StandardSkillRoutine.new
