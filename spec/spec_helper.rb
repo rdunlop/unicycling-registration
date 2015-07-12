@@ -8,7 +8,6 @@ require 'delorean'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'cancan/matchers'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require "pundit/rspec"

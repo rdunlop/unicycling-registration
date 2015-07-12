@@ -47,6 +47,14 @@ GIT
       capistrano
       sidekiq
 
+GIT
+  remote: git://github.com/sudosu/rails_admin_pundit.git
+  revision: 285e3e79a37242cf7a527053e9b438782801557a
+  specs:
+    rails_admin_pundit (0.0.1)
+      pundit (>= 0.2.3)
+      rails_admin (>= 0.6.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -648,6 +656,7 @@ DEPENDENCIES
   rails (= 4.2.3)
   rails-i18n (~> 4.0.0)
   rails_admin
+  rails_admin_pundit!
   rake
   recaptcha
   redis-rails

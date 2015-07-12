@@ -49,6 +49,31 @@ class ApplicationPolicy
     false
   end
 
+  def rails_admin?(action)
+    case action
+      when :dashboard
+        super_admin?
+      when :index
+        super_admin?
+      when :show
+        super_admin?
+      when :new
+        super_admin?
+      when :edit
+        super_admin?
+      when :destroy
+        super_admin?
+      when :export
+        super_admin?
+      when :history
+        super_admin?
+      when :show_in_app
+        super_admin?
+      else
+        raise ::Pundit::NotDefinedError, "unable to find policy #{action} for #{record}."
+    end
+  end
+
   private
 
   def data_entry_volunteer?
@@ -103,6 +128,53 @@ class ApplicationPolicy
     reg_closed && !authorized_laptop
   end
 
+  def data_entry_volunteer?
+    user.has_role?(:data_entry_volunteer)
+  end
+
+  def membership_admin?
+    user.has_role?(:membership_admin)
+  end
+
+  def music_dj?
+    user.has_role?(:music_dj)
+  end
+
+  def event_planner?
+    user.has_role?(:event_planner)
+  end
+
+  def payment_admin?
+    user.has_role?(:payment_admin)
+  end
+
+  def translator?
+    user.has_role?(:translator)
+  end
+
+  def awards_admin?
+    user.has_role?(:awards_admin)
+  end
+
+  def convention_admin?
+    user.has_role?(:convention_admin)
+  end
+
+  def competition_admin?
+    user.has_role?(:competition_admin)
+  end
+
+  def director?(event = nil)
+    user.has_role?(:director, event || :any)
+  end
+
+  def super_admin?
+    user.has_role?(:super_admin)
+  end
+
+  def admin?
+    user.has_role?(:admin)
+  end
 
   def scope
     Pundit.policy_scope!(user, record.class)

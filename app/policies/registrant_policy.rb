@@ -43,18 +43,18 @@ class RegistrantPolicy < ApplicationPolicy
     user.editable_registrants.include?(record)
   end
 
-  class Scope < Scope
-    def resolve
-      if payment_admin?
-        scope.all
-      end
+  # class Scope < Scope
+  #   def resolve
+  #     if payment_admin?
+  #       scope.all
+  #     end
 
-      if registration_closed?
-        scope.none
-      else
-        scope.where(user_id: user.id)
-      end
-    end
-  end
+  #     if registration_closed?
+  #       scope.none
+  #     else
+  #       scope.where(user_id: user.id)
+  #     end
+  #   end
+  # end
 
 end
