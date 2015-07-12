@@ -90,11 +90,6 @@ class Ability
       user.has_role?(:director, competition.event) || user.has_role?(:competition_admin)
     end
 
-    # SignUp/Competitor management abilities
-    can [:sign_ups], Event do |ev|
-      user.has_role? :director, ev || user.has_role?(:competition_admin)
-    end
-
     can :sign_ups, EventCategory
     #     #this is the way recommended by rolify...but it must not be called with the class (ie: do not call "can? :results, Event")
     #     can [:read, :results, :sign_ups], Event, id: Event.with_role(:director, user).pluck(:id)
@@ -168,9 +163,7 @@ class Ability
 
   def define_event_planner_roles(user)
     if user.has_role? :event_planner
-      can [:summary, :general_volunteers, :specific_volunteers], Event
       can :sign_ups, EventCategory
-      can :sign_ups, Event
       can [:manage_all, :show_all], :registrant
       can [:add_events, :create_artistic], Registrant
       can [:read, :create, :list], Email
@@ -226,7 +219,7 @@ class Ability
     # Competitor Assignment
     if user.has_role? :admin
       set_data_entry_volunteer_abilities(user)
-      can [:results, :summary], Event
+      can [:results], Event
       can :sign_ups, EventCategory
       can [:read, :lock], Competition
       can :manage, Competitor

@@ -1,13 +1,11 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
-  load_and_authorize_resource
-
   before_action :set_breadcrumb, only: [:summary]
 
   respond_to :html
 
   # GET /events/summary
   def summary
+    authorize Event.new
     @num_male_competitors = Registrant.active.competitor.where(gender: "Male").count
     @num_female_competitors = Registrant.active.competitor.where(gender: "Female").count
     @num_competitors = @num_male_competitors + @num_female_competitors
@@ -27,15 +25,19 @@ class EventsController < ApplicationController
 
   # GET /events/general_volunteers/
   def general_volunteers
+    authorize Event.new
     @volunteers = Registrant.active.where(volunteer: true)
   end
 
   # GET /events/specific_volunteers/:volunteer_opportunity_id
   def specific_volunteers
+    authorize Event.new
     @volunteer_opportunity = VolunteerOpportunity.find(params[:volunteer_opportunity_id])
   end
 
   def sign_ups
+    @event = Event.find(params[:id])
+    authorize @event
     add_category_breadcrumb(@event.category)
     add_breadcrumb "Sign Ups"
     respond_to do |format|
@@ -45,6 +47,10 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def authorize_event
+    authorize current_user, :registrant_information?
+  end
 
   def set_breadcrumb
     add_breadcrumb "Events Report"

@@ -75,6 +75,14 @@ class ApplicationPolicy
     user.has_role?(:competition_admin)
   end
 
+  def director?(event = nil)
+    user.has_role?(:director, event || :any?)
+  end
+
+  def event_planner?
+    user.has_role? :event_planner
+  end
+
   def super_admin?
     user.has_role?(:super_admin)
   end

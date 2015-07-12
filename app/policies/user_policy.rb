@@ -13,6 +13,11 @@ class UserPolicy < ApplicationPolicy
     !registration_closed? || super_admin?
   end
 
+  # view all registrant-information
+  def registrant_information?
+    super_admin?
+  end
+
   def manage_music?
     music_dj? || super_admin?
   end
