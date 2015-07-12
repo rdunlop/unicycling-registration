@@ -15,7 +15,7 @@ class UserPolicy < ApplicationPolicy
 
   # view all registrant-information
   def registrant_information?
-    super_admin?
+    event_planner? || super_admin?
   end
 
   def manage_music?

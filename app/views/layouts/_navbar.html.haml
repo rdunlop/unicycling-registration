@@ -48,7 +48,7 @@
           %li= link_to 'Standard Skill Entries', standard_skill_entries_path
         - if policy(@config).manage_cache?
           %li= link_to 'Cache Management', cache_event_configuration_path
-        - if can?(:manage_all, :registrant)
+        - if policy(current_user).registrant_information?
           %li= link_to  'Registrants (edit/print)', manage_one_registrants_path
         - if can?(:bag_labels, :registrant)
           %li= link_to  'Registrants (bag labels)', bag_labels_registrants_path(:format => :pdf)

@@ -48,10 +48,6 @@ class EventsController < ApplicationController
 
   private
 
-  def authorize_event
-    authorize current_user, :registrant_information?
-  end
-
   def set_breadcrumb
     add_breadcrumb "Events Report"
   end
