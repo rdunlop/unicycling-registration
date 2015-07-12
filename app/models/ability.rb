@@ -160,15 +160,6 @@ class Ability
   # #################################################
   # Begin new role definitions
   # #################################################
-
-  def define_payment_admin_roles(user)
-    if user.has_role? :payment_admin
-      # Allow adding items which only admins can add
-      can :admin_view, ExpenseItem
-      can :details, ExpenseItem
-    end
-  end
-
   def define_membership_admin_roles(user)
     if user.has_role?(:membership_admin) && config.usa_membership_config?
       can :manage, :usa_membership
@@ -218,7 +209,6 @@ class Ability
       return # required in order to allow rails_admin to function
     end
 
-    define_payment_admin_roles(user)
     define_event_planner_roles(user)
     define_competition_admin_roles(user)
     define_membership_admin_roles(user)

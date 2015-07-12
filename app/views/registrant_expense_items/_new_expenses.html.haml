@@ -1,5 +1,4 @@
-
-- if can? :admin_view, ExpenseItem
+- if policy(current_user).manage_all_payments?
   - @groups = ExpenseGroup.admin_visible
 - else
   - @groups = ExpenseGroup.visible
