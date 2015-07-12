@@ -44,7 +44,7 @@ class Compete::AgeGroupTypesController < ApplicationController
   private
 
   def load_age_group_type
-    AgeGroupType.find(params[:id])
+    @age_group_type = AgeGroupType.find(params[:id])
   end
 
   def authorize_admin
