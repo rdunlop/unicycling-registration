@@ -9,6 +9,11 @@ class ScorePolicy < ApplicationPolicy
     (user_match? && data_entry_volunteer?) || director?(record.competition.event) || super_admin?
   end
 
+  # used for steret scores
+  def destroy?
+    create?
+  end
+
   private
 
   def user_match?

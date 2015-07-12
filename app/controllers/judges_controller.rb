@@ -7,7 +7,7 @@ class JudgesController < ApplicationController
   # POST /competitions/#/judges
   # POST /competitions/#/judges.json
   def create
-    @judge = @competition.judges.new(judge_params)
+    @judge = @competition.judges.build(judge_params)
     authorize @judge
     if @judge.save
       flash[:notice] = 'Association was successfully created.'
@@ -79,7 +79,7 @@ class JudgesController < ApplicationController
   end
 
   def index
-    authorize Judge.new
+    authorize Judge.new, :index?
 
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Manage Judges", competition_judges_path(@competition)
