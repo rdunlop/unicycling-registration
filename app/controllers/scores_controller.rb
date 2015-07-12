@@ -3,13 +3,12 @@ class ScoresController < ApplicationController
   before_action :load_judge
   before_action :find_competitor, except: [:index]
   before_action :find_or_create_score, only: [:create, :new] # must be performed before load_and_auth_resource
-  load_and_authorize_resource only: :index
 
   before_action :set_judge_breadcrumb
 
   # GET /judges/1/scores
   def index
-    #authorize @judge.competition, :view_scores? ?? Hmm?
+    authorize @judge, :view_scores?
 
     respond_to do |format|
       format.html

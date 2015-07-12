@@ -57,7 +57,7 @@ class CompetitionPolicy < ApplicationPolicy
 
   # printing/results
   def results?
-    director(record.event) || awards_admin? || super_admin?
+    director?(record.event) || awards_admin? || super_admin?
   end
 
   def result?

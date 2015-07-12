@@ -4,6 +4,10 @@ class JudgePolicy < ApplicationPolicy
     record.competition.unlocked? && (user_match? || super_admin?)
   end
 
+  def view_scores?
+    (user_match? || director? || super_admin?)
+  end
+
   def index?
     director? || super_admin?
   end
