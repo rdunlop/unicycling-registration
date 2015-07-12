@@ -275,8 +275,6 @@ class Ability
       set_director_abilities(user)
     end
 
-    define_payment_ability(user)
-
     define_registrant_ability(user)
 
     # Standard Skill Routines
