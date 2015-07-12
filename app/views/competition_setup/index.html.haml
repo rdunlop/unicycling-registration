@@ -47,5 +47,5 @@
 
 %hr
 %h2 Competition Types
-- if can? :manage, CombinedCompetition
+- if policy(@config).setup_competition?
   %li= link_to 'Overall Champion Calculators', combined_competitions_path

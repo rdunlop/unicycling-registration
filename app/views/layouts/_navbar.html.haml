@@ -28,11 +28,11 @@
           %li= link_to 'Convention Setup', convention_setup_path
         - if policy(:permission).index?
           %li= link_to 'User Management',  permissions_path
-        - if can?(:summary, Event)
+        - if policy(Event.new).summary?
           %li= link_to  'Registration Overview', summary_events_path
         - if policy(@config).setup_competition?
           %li= link_to 'Competition Overview', competition_setup_path
-        - if can?(:manage, AwardLabel)
+        - if policy(current_user).manage_awards?
           %li= link_to  'Print/Create Awards', user_award_labels_path(current_user)
         - if policy(current_user).manage_music?
           %li= link_to  'Manage Music', event_songs_path
@@ -60,7 +60,7 @@
           %li= link_to  'Export Data', export_index_path
         - if can?(:manage, :all)
           %li= link_to  'Import Data', new_import_path
-        - if can?(:manage, :usa_membership) && @config.usa_membership_config?
+        - if policy(current_user).manage_usa_memberships?
           %li= link_to  'USA Membership Management', usa_memberships_path
         - if can?(:read, :research)
           %li= link_to  'Multi-Tenant Research', research_competitions_path

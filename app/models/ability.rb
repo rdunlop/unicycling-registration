@@ -192,9 +192,6 @@ class Ability
       can :manage, ExternalResult
       can :manage, RegistrantGroup
       can :manage, Judge
-      if config.usa_membership_config?
-        can :manage, :usa_membership
-      end
       can :read, VolunteerOpportunity
     end
 
