@@ -6,7 +6,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def copy_judges?
-    competition.unlocked? && (director?(competition.event) || super_admin?)
+    record.unlocked? && (director?(record.event) || super_admin?)
   end
 
   def create?
@@ -80,7 +80,7 @@ class CompetitionPolicy < ApplicationPolicy
 
   # DATA MANAGEMENT
   def view_result_data?
-    director?(record.competition) || super_admin?
+    director?(record) || super_admin?
   end
 
   def modify_result_data?

@@ -111,10 +111,6 @@ describe "Ability" do
     end
     subject { @ability = Ability.new(@user) }
 
-    describe "when the event is unlocked" do
-      it { is_expected.to be_able_to(:manage, ImportResult) }
-    end
-
     it { is_expected.not_to be_able_to(:read, competition.event) }
     it { is_expected.to be_able_to(:create, DataEntryVolunteer) }
 

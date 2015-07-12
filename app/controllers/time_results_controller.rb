@@ -1,7 +1,7 @@
 class TimeResultsController < ApplicationController
-  before_action :authorize_data_entry, except: [:index]
   before_action :load_competition, except: [:edit, :destroy, :update]
   before_action :load_time_result, only: [:edit, :update, :destroy]
+  before_action :authorize_data_entry, except: [:index]
 
   before_action :set_breadcrumbs, only: :index
 
@@ -13,6 +13,7 @@ class TimeResultsController < ApplicationController
     add_breadcrumb "Time Results"
     # @time_results = @competition.time_results.includes(:competitor => [:competition]) # XXX
     @time_result = TimeResult.new # @event.time_results.build
+    @time_results = @competition.time_results
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,7 +29,7 @@ class TimeResultsController < ApplicationController
   # POST event/1/time_results
   # POST event/1/time_results.json
   def create
-    @time_result = @competition.time_results.build(time_result_params)
+    @time_result = TimeResult.new(time_result_params)
     respond_to do |format|
       @time_result.entered_by = current_user
       @time_result.entered_at = DateTime.now
