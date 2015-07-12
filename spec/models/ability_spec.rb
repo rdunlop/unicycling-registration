@@ -93,32 +93,11 @@ describe "Ability" do
     end
     subject { @ability = Ability.new(@user) }
 
-    it { is_expected.to be_able_to(:create, Score) }
-
     describe "with a Competition" do
       let(:competition) { FactoryGirl.create(:competition) }
 
       it { is_expected.not_to be_able_to(:review_heat, competition) }
       it { is_expected.not_to be_able_to(:approve_heat, competition) }
-
-      describe "with a score" do
-        before(:each) do
-          @judge = FactoryGirl.create(:judge, user: @user, competition: competition)
-          competitor = FactoryGirl.create(:event_competitor, competition: competition)
-          @score = FactoryGirl.create(:score, judge: @judge, competitor: competitor)
-          @other_score = FactoryGirl.create(:score, competitor: @score.competitor) # different judge user
-        end
-
-        it { is_expected.to be_able_to(:update, @score) }
-        it { is_expected.not_to be_able_to(:update, @other_score) }
-        it { is_expected.not_to be_able_to(:read, @other_score) }
-
-        describe "when the competition is locked" do
-          let(:competition) { FactoryGirl.create(:competition, :locked) }
-
-          it { is_expected.not_to be_able_to(:update, @score) }
-        end
-      end
     end
   end
 
@@ -134,36 +113,11 @@ describe "Ability" do
 
     describe "when the event is unlocked" do
       it { is_expected.to be_able_to(:manage, ImportResult) }
-      it { is_expected.to be_able_to(:create, Judge) }
-    end
-
-    describe "when the event is locked" do
-      let(:competition) { FactoryGirl.create(:competition, :locked) }
-
-      it { is_expected.not_to be_able_to(:create, Judge.new(competition: competition)) }
     end
 
     it { is_expected.not_to be_able_to(:read, competition.event) }
     it { is_expected.to be_able_to(:create, DataEntryVolunteer) }
 
-    describe "with an associated judge to my event" do
-      before(:each) do
-        @judge = FactoryGirl.create(:judge, competition: competition)
-      end
-      it { is_expected.to be_able_to(:destroy, @judge) }
-      it { is_expected.to be_able_to(:create, Judge) }
-      it { is_expected.to be_able_to(:show, @judge) }
-      it { is_expected.to be_able_to(:read, Score) }
-
-      describe "When the judge has a score" do
-        before :each do
-          @score = FactoryGirl.create(:score, judge: @judge)
-        end
-
-        it { is_expected.not_to be_able_to(:destroy, @judge) }
-        it { is_expected.to be_able_to(:show, @judge) }
-      end
-    end
   end
 
   describe "When not logged in" do

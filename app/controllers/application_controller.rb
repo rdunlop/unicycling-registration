@@ -139,7 +139,7 @@
   end
 
   def add_competition_breadcrumb(competition)
-    add_breadcrumb "#{competition}", (competition_path(competition) if policy(competition).show?
+    add_breadcrumb "#{competition}", (competition_path(competition) if policy(competition).show?)
   end
 
   def add_to_competition_breadcrumb(competition)

@@ -68,16 +68,6 @@ class Ability
       user.has_role? :director, ev
     end
 
-
-    can [:read, :toggle_status], Judge do |judge|
-      user.has_role? :director, judge.competition.try(:event)
-    end
-
-    can [:crud, :copy_judges], Judge do |judge|
-      # Only allow creating judges when there are no scores yet entered
-      (judge.scores.count == 0) && (director_and_unlocked(user, judge.competition))
-    end
-
     # Data Management
     can :manage, ImportResult do |import_result|
       director_and_unlocked(user, import_result.competition)
