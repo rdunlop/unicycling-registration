@@ -7,7 +7,6 @@ gem 'rails', '4.2.3'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-async'
-gem 'cancancan', '~> 1.10'
 gem 'pundit'
 gem 'rolify'
 

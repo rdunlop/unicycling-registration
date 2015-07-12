@@ -1,5 +1,5 @@
 class TenantsController < ApplicationController
-  skip_authorization_check
+  skip_authorization
   load_resource only: :create
   layout "global"
 

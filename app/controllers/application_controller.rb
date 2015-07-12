@@ -10,12 +10,9 @@
   before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
   protect_from_forgery
-  check_authorization unless: :devise_controller_or_pundit_handled?
-  skip_authorization_check if: :rails_admin_controller?
-
-  def devise_controller_or_pundit_handled?
-    devise_controller? || pundit_policy_authorized?
-  end
+  #after_action :verify_authorized, :except => :index
+  after_action :verify_authorized, except: :devise_controller?
+  skip_authorization if: :rails_admin_controller?
 
   def rails_admin_controller?
     false
@@ -28,11 +25,6 @@
 
   def default_url_options(_options = {})
     { locale: I18n.locale }
-  end
-
-  rescue_from CanCan::AccessDenied do |exception|
-    Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
-    user_not_authorized
   end
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

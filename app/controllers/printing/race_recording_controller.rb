@@ -1,6 +1,6 @@
 class Printing::RaceRecordingController < ApplicationController
   before_action :authenticate_user!
-  skip_authorization_check
+  skip_authorization
 
   def instructions
     respond_to do |format|

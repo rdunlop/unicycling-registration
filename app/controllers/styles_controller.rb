@@ -1,5 +1,5 @@
 class StylesController < ApplicationController
-  skip_authorization_check
+  skip_authorization
 
   def index
   end

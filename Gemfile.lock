@@ -120,7 +120,6 @@ GEM
     bullet (4.14.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
-    cancancan (1.10.1)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -609,7 +608,6 @@ DEPENDENCIES
   binding_of_caller
   breadcrumbs_on_rails
   bullet
-  cancancan (~> 1.10)
   capistrano
   capistrano-bundler
   capistrano-rails

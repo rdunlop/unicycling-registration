@@ -1,6 +1,6 @@
 class AdminUpgradesController < ApplicationController
   before_action :authenticate_user!
-  skip_authorization_check
+  skip_authorization
 
   def new
   end
