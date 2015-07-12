@@ -147,12 +147,6 @@ class Ability
     end
   end
 
-  def define_event_planner_roles(user)
-    if user.has_role? :event_planner
-      can [:read, :create, :list], Email
-    end
-  end
-
   def define_competition_admin_roles(user)
     if user.has_role? :competition_admin
       can :manage, :director
@@ -256,10 +250,6 @@ class Ability
   # Registrant
   def define_registrant_ability(user)
     if user.has_role? :admin
-      # can :create, RegFee
-      can :bag_labels, :registrant
-
-      can [:read, :create, :list], Email
       can [:index, :create, :destroy], RegistrantExpenseItem
       can :manage, :event_song
     end

@@ -40,6 +40,11 @@ class UserPolicy < ApplicationPolicy
     super_admin?
   end
 
+  # send e-mails, etc
+  def contact_registrants?
+    event_planner? || super_admin?
+  end
+
   # the old way of doing manual payments
   def manage_old_payment_adjustments?
     super_admin?
@@ -47,6 +52,10 @@ class UserPolicy < ApplicationPolicy
 
   def logged_in?
     true
+  end
+
+  def under_development?
+    super_admin?
   end
 
   private

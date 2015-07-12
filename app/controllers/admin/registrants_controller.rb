@@ -52,7 +52,7 @@ class Admin::RegistrantsController < ApplicationController
   end
 
   def bag_labels
-    authorize! :bag_labels, :registrant
+    authorize current_user, :under_development?
     @registrants = Registrant.includes(:contact_detail).reorder(:sorted_last_name, :first_name).active.all
 
     names = []

@@ -1,5 +1,5 @@
 .non_printable
-  - if can? :bag_labels, :registrant
+  - if policy(current_user).under_development?
     = link_to 'Bag Labels PDF', bag_labels_registrants_path
     %br
   = link_to '(pdf)', manage_all_registrants_path(:format => :pdf)

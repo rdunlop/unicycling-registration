@@ -50,9 +50,9 @@
           %li= link_to 'Cache Management', cache_event_configuration_path
         - if policy(current_user).registrant_information?
           %li= link_to  'Registrants (edit/print)', manage_one_registrants_path
-        - if can?(:bag_labels, :registrant)
+        - if policy(current_user).under_development?
           %li= link_to  'Registrants (bag labels)', bag_labels_registrants_path(:format => :pdf)
-        - if can?(:read, Email)
+        - if policy(current_user).contact_registrants?
           %li= link_to  'Registrants (email)', emails_path
         - if can?(:manage, Registrant)
           %li= link_to  'Registrant Groups', registrant_groups_path
