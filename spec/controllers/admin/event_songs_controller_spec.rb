@@ -15,7 +15,7 @@ describe Admin::EventSongsController do
     describe "as an admin" do
       before :each do
         sign_out @user
-        sign_in FactoryGirl.create(:admin_user)
+        sign_in FactoryGirl.create(:super_admin_user)
       end
       it "views the songs list index" do
         get :index

@@ -3,7 +3,7 @@
     .js--showElement{ data: { key: "update_registrant" } }
   - if can? :create, RegistrantExpenseItem
     .js--showElement{ data: { key: "create_rei" } }
-  - if policy(@registrant).view_payments?
+  - if policy(@registrant).payments?
     .js--showElement{ data: { key: "manage_registrant" } }
 
 - cache_i18n ['header', @registrant] do
