@@ -51,6 +51,10 @@ class ApplicationPolicy
 
   private
 
+  def data_entry_volunteer?
+    user.has_role?(:data_entry_volunteer)
+  end
+
   def membership_admin?
     user.has_role?(:membership_admin)
   end

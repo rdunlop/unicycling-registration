@@ -29,7 +29,6 @@ class Ability
   def set_data_entry_volunteer_abilities(user)
     can :data_entry_menu, :welcome
 
-    can [:read], Competitor
     can :read, Competition
 
     can :read, Judge, user_id: user.id
@@ -80,11 +79,6 @@ class Ability
     # Abilities to be able to read data about a competition
     can :read, Competition do |competition|
       user.has_role?(:director, competition.event) || user.has_role?(:competition_admin)
-    end
-
-    # Abilities to be able to change data about a competition
-    can [:manage, :update_row_order], Competitor do |comp|
-      comp.competition.unlocked? && (director_or_competition_admin?(user, comp.competition))
     end
 
     can :manage, Member do |member|
@@ -185,7 +179,6 @@ class Ability
       set_data_entry_volunteer_abilities(user)
       can [:results], Event
       can [:read, :lock], Competition
-      can :manage, Competitor
       can :manage, Member
       can :manage, ImportResult
       can :manage, TimeResult

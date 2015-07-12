@@ -5,7 +5,7 @@ describe CompetitorsController do
     @ev = FactoryGirl.create(:event)
     @ec = FactoryGirl.create(:competition, event: @ev)
     @ec.save!
-    sign_in FactoryGirl.create(:admin_user)
+    sign_in FactoryGirl.create(:competition_admin_user)
   end
 
   # This should return the minimal set of attributes required to create a valid
