@@ -6,6 +6,10 @@
 - Add ablity for Director to Set/Change scores for a competition's Judges (Freestyle Artistic)
 - Add Street Scoring Links for Judging (see "please update the scoring_link function (Street Final)")
 - As a Judge (or data entry volunteer?), why can I iew the Competition#show page?
+- As a transator, allow access to the transations menu.
+- As USA Membership admin, I do not see the membership admin menu
+- As an EventPlanner, I do not see the evetn#Summary page, even though I should.s
+- Translation Load rake task doesn't work. (failed on deploy)
 -
 
 - CompetitionADmin should be able to enter sign_ins. (separate it from competition policy)
