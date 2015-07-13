@@ -1,7 +1,7 @@
 class EventPolicy < ApplicationPolicy
 
   def sign_ups?
-    director?(record) || competition_admin? || super_admin?
+    director?(record) || event_planner? || competition_admin? || super_admin?
   end
 
   def summary?
@@ -23,6 +23,6 @@ class EventPolicy < ApplicationPolicy
   private
 
   def manage?
-    director? || super_admin?
+    director? || event_planner? || super_admin?
   end
 end
