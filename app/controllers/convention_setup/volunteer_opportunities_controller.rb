@@ -6,6 +6,7 @@ class ConventionSetup::VolunteerOpportunitiesController < ConventionSetupControl
   before_action :add_breadcrumbs
 
   def index
+    @volunteer_opportunities= VolunteerOpportunity.all
   end
 
   def new
@@ -33,7 +34,7 @@ class ConventionSetup::VolunteerOpportunitiesController < ConventionSetupControl
   def destroy
     @volunteer_opportunity.destroy
 
-    redirect_to convention_setup_volunteer_opportunities
+    redirect_to convention_setup_volunteer_opportunities_path
   end
 
   private
