@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StandardSkillRoutineEntriesController do
+xdescribe StandardSkillRoutineEntriesController do
   before(:each) do
     @user = FactoryGirl.create(:user)
     sign_in @user

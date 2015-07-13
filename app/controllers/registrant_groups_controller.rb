@@ -2,7 +2,7 @@ class RegistrantGroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_new_registrant_group, only: [:create]
 
-  before_action :load_registrant_group, only: [:address_labels, :show, :update, :destroy]
+  before_action :load_registrant_group, only: [:address_labels, :edit, :show, :update, :destroy]
   before_action :authorize_user
 
   # GET /registrant_groups

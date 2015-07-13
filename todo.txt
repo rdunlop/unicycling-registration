@@ -1,3 +1,8 @@
+- Use "Scope" in Pundit as it is expected to be used?
+- Test the access control settings from various users
+- Check coverage, and add controller specs for those that are missing.
+- Add specs for policies, based on the old ability_specs.
+
 ================== New Awards/Results Calculation Logic ============================
 - Combine the AwardLabel multiple-lines-of-text with the Registrant#results page, with the Result object data
 - Why are we always listing "Overall" as well as "Age Group" for each competition type?

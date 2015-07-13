@@ -13,6 +13,7 @@ class Compete::AgeGroupTypesController < ApplicationController
   end
 
   def create
+    @age_group_type = AgeGroupType.new(age_group_type_params)
     if @age_group_type.save
       flash[:notice] = 'Age Group Type was successfully created.'
     else

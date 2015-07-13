@@ -16,7 +16,7 @@ class AdditionalRegistrantAccessPolicy < ApplicationPolicy
     record.registrant.user == user
   end
 
-  def invitation?
+  def invitations?
     true
   end
 

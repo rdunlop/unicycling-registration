@@ -24,6 +24,7 @@ class StandardSkillRoutinesController < ApplicationController
 
   # GET /standard_skill_routines/:id
   def show
+    @standard_skill_routine = StandardSkillRoutine.find(params[:id])
     @entries = @standard_skill_routine.standard_skill_routine_entries
     @entry = @standard_skill_routine.standard_skill_routine_entries.build()
     @total = @standard_skill_routine.total_skill_points

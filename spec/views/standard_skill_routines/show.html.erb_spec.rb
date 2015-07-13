@@ -11,9 +11,6 @@ describe "standard_skill_routines/show" do
     assign(:entry, ssre)
     @routine = assign(:standard_skill_routine, ssre.standard_skill_routine)
     assign(:total, 10.1)
-
-    @ability.can :manage, StandardSkillRoutine
-    @ability.can :manage, StandardSkillRoutineEntry
   end
 
   it "renders a list of skills" do

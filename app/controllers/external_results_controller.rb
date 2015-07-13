@@ -10,6 +10,7 @@ class ExternalResultsController < ApplicationController
 
   # GET /competitions/#/external_results
   def index
+    authorize @competition, :view_result_data?
     add_breadcrumb "Points Results"
 
     @external_result = ExternalResult.new

@@ -32,6 +32,7 @@ class DistanceAttemptsController < ApplicationController
   end
 
   def create
+    @distance_attempt = DistanceAttempt.new(distance_attempt_params)
     @distance_attempt.judge = @judge
     respond_to do |format|
       if @distance_attempt.save
@@ -62,7 +63,7 @@ class DistanceAttemptsController < ApplicationController
   # /competitions/#/distance_attempts/list
   def list
     @competition = Competition.find(params[:competition_id])
-    authorize @competition, :view_result_data?
+    authorize current_user, :view_data_entry_menu?
     @distance_attempts = @competition.distance_attempts.includes(:competitor)
     respond_to do |format|
       format.html { render action: "list" }
