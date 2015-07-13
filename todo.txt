@@ -2,7 +2,14 @@
 - Test the access control settings from various users
 - Check coverage, and add controller specs for those that are missing.
 - Add specs for policies, based on the old ability_specs.
+- Add ability for CompetitionAdmin to Unlock a competition
+- Add ablity for Director to Set/Change scores for a competition's Judges (Freestyle Artistic)
+- Add Street Scoring Links for Judging (see "please update the scoring_link function (Street Final)")
+- As a Judge (or data entry volunteer?), why can I iew the Competition#show page?
+-
 
+- CompetitionADmin should be able to enter sign_ins. (separate it from competition policy)
+- remove "dirty check" from STreet Score system (it's auto-save)
 ================== New Awards/Results Calculation Logic ============================
 - Combine the AwardLabel multiple-lines-of-text with the Registrant#results page, with the Result object data
 - Why are we always listing "Overall" as well as "Age Group" for each competition type?
