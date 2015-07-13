@@ -109,7 +109,7 @@ describe User do
   describe "with 3 users" do
     before(:each) do
       @b = FactoryGirl.create(:user, email: "b@b.com")
-      @a = FactoryGirl.create(:admin_user, email: "a@a.com")
+      @a = FactoryGirl.create(:payment_admin, email: "a@a.com")
       @c = FactoryGirl.create(:super_admin_user, email: "c@c.com")
     end
 

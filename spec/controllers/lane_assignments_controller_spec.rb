@@ -2,8 +2,10 @@ require 'spec_helper'
 
 describe LaneAssignmentsController do
   before(:each) do
-    sign_in FactoryGirl.create(:admin_user)
     @competition = FactoryGirl.create(:timed_competition, uses_lane_assignments: true)
+    race_official = FactoryGirl.create(:user)
+    race_official.add_role(:race_official, @competition)
+    sign_in race_official
     @reg = FactoryGirl.create(:registrant)
     @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
     @competitor.members.first.update_attribute(:registrant_id, @reg.id)
@@ -113,7 +115,7 @@ describe LaneAssignmentsController do
 
   describe "DELETE destroy" do
     it "destroys the requested lane_assignment" do
-      lane_assignment = FactoryGirl.create(:lane_assignment)
+      lane_assignment = FactoryGirl.create(:lane_assignment, competition: @competition)
       expect do
         delete :destroy, id: lane_assignment.to_param
       end.to change(LaneAssignment, :count).by(-1)

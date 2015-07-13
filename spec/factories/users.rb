@@ -36,9 +36,6 @@ FactoryGirl.define do
     password "something"
     password_confirmation "something"
 
-    factory :admin_user do
-      after(:create) {|user| user.add_role :admin }
-    end
     factory :super_admin_user do
       after(:create) {|user| user.add_role :super_admin }
     end

@@ -4,6 +4,8 @@
 - Add specs for policies, based on the old ability_specs.
 - Add Street Scoring Links for Judging (see "please update the scoring_link function (Street Final)")
 - As a Judge (or data entry volunteer?), why can I iew the Competition#show page?
+ -  I think that we should have separate views for the awards admin to view the status of competitions
+ - I think that data entry volunteers should NOT have access
 - Translation Load rake task doesn't work. (failed on deploy)
 -
 

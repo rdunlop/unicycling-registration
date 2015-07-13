@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :competition_admin, :payment_admin, :membership_admin, :convention_admin, :admin, :super_admin]
+    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :competition_admin, :payment_admin, :membership_admin, :convention_admin, :super_admin]
   end
 
   # List which roles each roles can add to other users
@@ -103,18 +103,6 @@ class User < ActiveRecord::Base
   def self.role_description(role)
     case (role)
       # when :results_printer
-    when :admin
-      "[e.g. Scott/Connie]
-      Able to create onsite payments,
-      adjust many details of the system.
-      Able to send mass-email to various subsets of users.
-      Can assign Directors, and do anything a director can do:
-      - can create/assign judges
-      Can assign data_entry_volunteers, and do anything they can do:
-      - Can enter recorded Results
-      Can Create Award Labels
-      Can adjust wheel-size settings for users.
-      "
     when :convention_admin
       "[e.g. Olaf Scholte]
       Able to configure the Convention settings with regards to registration settings

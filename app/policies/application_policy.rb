@@ -120,56 +120,8 @@ class ApplicationPolicy
     user.has_role?(:super_admin)
   end
 
-  def admin?
-    user.has_role?(:admin)
-  end
-
   def registration_closed?
     reg_closed && !authorized_laptop
-  end
-
-  def membership_admin?
-    user.has_role?(:membership_admin)
-  end
-
-  def music_dj?
-    user.has_role?(:music_dj)
-  end
-
-  def event_planner?
-    user.has_role?(:event_planner)
-  end
-
-  def payment_admin?
-    user.has_role?(:payment_admin)
-  end
-
-  def translator?
-    user.has_role?(:translator)
-  end
-
-  def awards_admin?
-    user.has_role?(:awards_admin)
-  end
-
-  def convention_admin?
-    user.has_role?(:convention_admin)
-  end
-
-  def competition_admin?
-    user.has_role?(:competition_admin)
-  end
-
-  def director?(event = nil)
-    user.has_role?(:director, event || :any)
-  end
-
-  def super_admin?
-    user.has_role?(:super_admin)
-  end
-
-  def admin?
-    user.has_role?(:admin)
   end
 
   def scope

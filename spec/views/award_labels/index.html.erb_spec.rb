@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "award_labels/index" do
   before(:each) do
-    @user = FactoryGirl.create(:admin_user)
+    @user = FactoryGirl.create(:award_admin_user)
     assign(:user, @user)
     assign(:award_labels, [
       FactoryGirl.create(:award_label,
