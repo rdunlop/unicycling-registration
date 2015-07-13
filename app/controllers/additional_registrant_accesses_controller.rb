@@ -4,7 +4,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
   before_action :load_additional_registrant_accesses, only: [:create, :index, :new, :invitations]
   before_action :load_additional_registrant_access, except: [:create, :index, :new, :invitations]
   before_action :load_new_additional_registrant_access, only: [:create]
-  before_action :authorize_access
+  before_action :authorize_access, except: :new
 
   # GET /additional_registrant_accesses
   # GET /additional_registrant_accesses.json
@@ -25,7 +25,8 @@ class AdditionalRegistrantAccessesController < ApplicationController
   # GET /additional_registrant_accesses/new
   # GET /additional_registrant_accesses/new.json
   def new
-    @additional_registrant_access = AdditionalRegistrantAccess.new
+    @additional_registrant_access = @user.additional_registrant_accesses.build
+    authorize @additional_registrant_access
 
     respond_to do |format|
       format.html # new.html.erb

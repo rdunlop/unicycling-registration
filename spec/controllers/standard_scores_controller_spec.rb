@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StandardScoresController do
+xdescribe StandardScoresController do
   before (:each) do
     @admin = FactoryGirl.create(:super_admin_user)
     @user = FactoryGirl.create(:data_entry_volunteer_user)
