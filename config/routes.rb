@@ -443,7 +443,7 @@ Workspace::Application.routes.draw do
         get :result
 
         post :lock
-        delete :lock, to: 'competitions#unlock'
+        delete :unlock
         post :publish
         delete :publish, to: 'competitions#unpublish'
         post :publish_age_group_entry

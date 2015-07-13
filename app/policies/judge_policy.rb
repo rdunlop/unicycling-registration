@@ -1,7 +1,7 @@
 class JudgePolicy < ApplicationPolicy
 
   def create_scores?
-    record.competition.unlocked? && (user_match? || super_admin?)
+    record.competition.unlocked? && (user_match? || director?(record.competition.event) || super_admin?)
   end
 
   def view_scores?
