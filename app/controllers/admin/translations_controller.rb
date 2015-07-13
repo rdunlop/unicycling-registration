@@ -14,7 +14,7 @@ class Admin::TranslationsController < ApplicationController
   private
 
   def authorize_setup
-    authorize @config, :setup_convention?
+    authorize :translation, :index?
   end
 
   def add_breadcrumbs

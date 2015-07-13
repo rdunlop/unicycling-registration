@@ -4,7 +4,7 @@
 # See github.com/tolk/tolk for more informations
 
 Tolk::ApplicationController.authenticator = proc {
-  Policy(:transaltion).manage_all_site_translations?
+  Pundit.policy!(current_user, :translation).manage_all_site_translations?
 }
 
 Tolk.config do |config|
