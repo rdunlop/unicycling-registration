@@ -16,6 +16,11 @@ require "pundit/rspec"
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+# This is required by CI because sometimes it runs the model specs before
+# other rails specs (which would have initialized/created the following directories)
+require 'fileutils'
+FileUtils.mkdir_p "#{Rails.root}/tmp/cache"
+
 ActiveRecord::Migration.maintain_test_schema!
 
 Capybara.javascript_driver = :poltergeist
