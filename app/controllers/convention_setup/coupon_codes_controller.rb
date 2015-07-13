@@ -9,6 +9,7 @@ class ConventionSetup::CouponCodesController < ConventionSetupController
   # GET /convention_setup/coupon_codes
   def index
     @coupon_code = CouponCode.new
+    @coupon_codes = CouponCode.all
   end
 
   # GET /convention_setup/coupon_codes/1/edit
@@ -48,6 +49,10 @@ class ConventionSetup::CouponCodesController < ConventionSetupController
   end
 
   private
+
+  def load_coupon_code
+    @coupon_code = CouponCode.find(params[:id])
+  end
 
   def authorize_setup
     authorize @config, :setup_convention?
