@@ -8,10 +8,10 @@ describe Admin::PermissionsController do
 
   describe "GET index" do
     it "assigns all users as @users" do
-      admin_user = FactoryGirl.create(:admin_user)
+      convention_admin_user = FactoryGirl.create(:convention_admin_user)
       user = FactoryGirl.create(:user)
       get :index, {}
-      expect(assigns(:users)).to match_array([@super_user, admin_user, user])
+      expect(assigns(:users)).to match_array([@super_user, convention_admin_user, user])
     end
   end
 
