@@ -1,5 +1,5 @@
 - if my_registrants_list.any? || shared_list.any?
-  %fieldset.registrations_box
+  %fieldset.row
     %legend= t(".registrations")
     - my_registrants_list.each do |registrant|
       = render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => false }

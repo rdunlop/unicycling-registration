@@ -6,17 +6,15 @@
     %br
     = t(".#{reg_class}")
   .small-2.columns
-    = print_formatted_currency(registrant.expenses_total)
-  .small-2.columns
     - if policy(registrant).update?
       = link_to t('.edit'), registrant_build_path(registrant, :add_name), :class => "registrant_edit_button " + (reg_class)
-  .small-3.columns
+  .small-4.columns
     - if registrant.validated?
       = link_to t('.see_summary'), registrant_path(registrant), :class => "registrant_edit_button " + (reg_class)
     - else
       %span.incomplete
         = t('.incomplete')
-  .small-2.columns
+  .small-3.columns
     - if @has_print_waiver
       = link_to t(".legal_waiver", first_name: registrant.first_name), waiver_registrant_path(registrant, format: 'pdf'), { class: "print_waiver_link", target: "_blank" }
       %br
