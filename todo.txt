@@ -2,16 +2,13 @@
 - Test the access control settings from various users
 - Check coverage, and add controller specs for those that are missing.
 - Add specs for policies, based on the old ability_specs.
-- Add Street Scoring Links for Judging (see "please update the scoring_link function (Street Final)")
 - As a Judge (or data entry volunteer?), why can I iew the Competition#show page?
  -  I think that we should have separate views for the awards admin to view the status of competitions
  - I think that data entry volunteers should NOT have access
-- Translation Load rake task doesn't work. (failed on deploy)
 - Put a "missing music upload" warning together on the registrants#index page
 - Put a "missing pairs partner name" on the registrants#index pages
 
 - CompetitionADmin should be able to enter sign_ins. (separate it from competition policy)
-- remove "dirty check" from STreet Score system (it's auto-save)
 ================== New Awards/Results Calculation Logic ============================
 - Combine the AwardLabel multiple-lines-of-text with the Registrant#results page, with the Result object data
 - Why are we always listing "Overall" as well as "Age Group" for each competition type?
