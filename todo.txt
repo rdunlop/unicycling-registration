@@ -8,7 +8,9 @@
 - Put a "missing music upload" warning together on the registrants#index page
 - Put a "missing pairs partner name" on the registrants#index pages
 
-- CompetitionADmin should be able to enter sign_ins. (separate it from competition policy)
+- Update the styling of the "My Account" page
+- Add the ability for a user to change their "short name" for their account (same name as is changed by "Data Entry Volunteer")
+
 ================== New Awards/Results Calculation Logic ============================
 - Combine the AwardLabel multiple-lines-of-text with the Registrant#results page, with the Result object data
 - Why are we always listing "Overall" as well as "Age Group" for each competition type?

@@ -1,6 +1,6 @@
 shared_context 'can login' do
   def fill_in_login_form
-    within('.new_user') do
+    within('#new_user') do
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
       click_button 'Log in'
