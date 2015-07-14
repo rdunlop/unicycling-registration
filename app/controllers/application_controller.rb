@@ -15,6 +15,10 @@
 
   before_action :skip_authorization, if: :devise_controller?
 
+  def raise_not_found!
+    raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
+  end
+
   private
 
   def rails_admin_controller?
@@ -31,10 +35,6 @@
   end
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
-  def raise_not_found!
-    raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
-  end
 
   def load_config_object
     @config = EventConfiguration.singleton

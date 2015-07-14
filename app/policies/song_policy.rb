@@ -1,18 +1,22 @@
 class SongPolicy < ApplicationPolicy
 
-  [:create, :update, :destroy, :file_complete, :add_file, :my_songs, :create_guest_song].each do |sym|
+  [:update, :destroy, :file_complete, :add_file, :my_songs, :create_guest_song].each do |sym|
     define_method("#{sym}?") do
-      music_submission_ended?
+      music_management?
     end
   end
 
+  def create?
+    !config.music_submission_ended? || super_admin?
+  end
+
   def index?
-    !music_submission_ended? || super_admin?
+    !config.music_submission_ended? || super_admin?
   end
 
   private
 
-  def music_submission_ended?
+  def music_management?
     (user_song? && !config.music_submission_ended?) || super_admin?
   end
 

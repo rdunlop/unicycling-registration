@@ -1,4 +1,5 @@
 - Remove ":admin" ability from database?
+- Inspect performance of making the (many) .has_role? calls for a user.
 - Use "Scope" in Pundit as it is expected to be used?
 - Test the access control settings from various users
 - Check coverage, and add controller specs for those that are missing.
