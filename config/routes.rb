@@ -479,8 +479,8 @@ Workspace::Application.routes.draw do
       resources :data_entry_volunteers, only: [:index, :create]
       resources :volunteers, only: [:index, :destroy] do
         collection do
-          post ":volunteer_type", to: :create, as: :create
-          delete ":volunteer_type", to: :destroy, as: :destroy
+          post ":volunteer_type", action: :create, as: :create
+          delete ":volunteer_type", action: :destroy, as: :destroy
         end
       end
 
