@@ -8,7 +8,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   before_action :load_event_from_competition, only: [:edit]
   before_action :load_event, only: [:create, :new]
 
-  load_and_authorize_resource
+  before_action :authorize_competition
 
   before_action :add_competition_setup_breadcrumb, only: [:new, :edit]
 
@@ -54,6 +54,10 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   end
 
   private
+
+  def authorize_competition
+    authorize @competition
+  end
 
   def competition_params
     params.require(:competition).permit(:name, :uses_lane_assignments, :start_data_type, :end_data_type,

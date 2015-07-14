@@ -1,11 +1,11 @@
 class ExportRegistrantsController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource class: false
-
   include ExcelOutputter
 
   def download_all
-    headers = ["Registrant ID", "First Name", "Last Name", "Address", "City", "Zip", "Country",
+    authorize current_user, :manage_all_payments?
+
+    headers = ["Registrant ID", "First Name", "Last Name", "Gender", "Address", "City", "Zip", "Country",
                "Place of Birth", "Birthday", "Italian Fiscal Code", "Volunteer", "email", "Phone", "Mobile", "User Email"]
 
     data = []
@@ -14,6 +14,7 @@ class ExportRegistrantsController < ApplicationController
         registrant.bib_number,
         registrant.first_name,
         registrant.last_name,
+        registrant.gender,
         registrant.contact_detail.try(:address),
         registrant.contact_detail.try(:city),
         registrant.contact_detail.try(:zip),
@@ -35,6 +36,8 @@ class ExportRegistrantsController < ApplicationController
   end
 
   def download_with_payment_details
+    authorize current_user, :download_payments?
+
     s = Spreadsheet::Workbook.new
     sheet = s.create_worksheet
 

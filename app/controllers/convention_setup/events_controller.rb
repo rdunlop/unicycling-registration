@@ -1,10 +1,9 @@
 class ConventionSetup::EventsController < ConventionSetupController
   include SortableObject
 
-  before_action :authenticate_user!
   before_action :load_category, only: [:index, :create]
-  before_action :load_new_event, only: [:create]
-  load_and_authorize_resource
+  before_action :load_event, except: [:index, :create]
+  before_action :authorize_setup
   before_action :set_categories_breadcrumb
   before_action :set_events_breadcrumb
 
@@ -27,6 +26,7 @@ class ConventionSetup::EventsController < ConventionSetupController
   # POST /events
   # POST /events.json
   def create
+    @event = @category.events.build(event_params)
     respond_to do |format|
       if @event.save
         format.html { redirect_to convention_setup_category_events_path(@event.category), notice: 'Event was successfully created.' }
@@ -61,6 +61,10 @@ class ConventionSetup::EventsController < ConventionSetupController
 
   private
 
+  def authorize_setup
+    authorize @config, :setup_convention?
+  end
+
   def sortable_object
     Event.find(params[:id])
   end
@@ -80,7 +84,7 @@ class ConventionSetup::EventsController < ConventionSetupController
     @category = Category.find(params[:category_id])
   end
 
-  def load_new_event
-    @event = @category.events.build(event_params)
+  def load_event
+    @event = Event.find(params[:id])
   end
 end

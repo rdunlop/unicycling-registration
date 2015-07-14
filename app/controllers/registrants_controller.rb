@@ -1,19 +1,21 @@
 class RegistrantsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :user, only: [:index]
-  load_resource find_by: :bib_number
-  authorize_resource
+  before_action :load_user, only: [:index]
+  before_action :load_registrant_by_bib_number, only: [:show, :results, :destroy, :waiver]
+  before_action :authorize_registrant, only: [:show, :results, :destroy, :waiver]
+  before_action :authorize_logged_in, only: [:all, :empty_waiver, :subregion_options]
 
   before_action :set_registrants_breadcrumb
   before_action :set_single_registrant_breadcrumb, only: [:show]
 
   # GET /users/12/registrants
   def index
+    authorize @user, :registrants?
     @my_registrants = @user.registrants.active_or_incomplete
     @shared_registrants = @user.accessible_registrants - @my_registrants
     @total_owing = @user.total_owing
     @has_print_waiver = @config.has_print_waiver
-    @registrant = Registrant.new
+    @registrant = Registrant.new(user: @user)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,8 +46,6 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/1/waiver
   def waiver
-    @registrant = Registrant.find_by(bib_number: params[:id])
-
     @today_date = Date.today.in_time_zone.strftime("%B %-d, %Y")
 
     @name = @registrant.to_s
@@ -116,6 +116,22 @@ class RegistrantsController < ApplicationController
 
   private
 
+  def load_user
+    @user = User.find(params[:user_id])
+  end
+
+  def load_registrant_by_bib_number
+    @registrant = Registrant.find_by(bib_number: params[:id])
+  end
+
+  def authorize_registrant
+    authorize @registrant
+  end
+
+  def authorize_logged_in
+    authorize current_user, :logged_in?
+  end
+
   def set_registrants_breadcrumb
     add_breadcrumb t("my_registrants", scope: "breadcrumbs"), user_registrants_path(current_user)
   end
@@ -151,7 +167,7 @@ class RegistrantsController < ApplicationController
 
   def clear_artistic_data!(original_params)
     # XXX Only do this if I'm not an admin-level person
-    return original_params if can? :create_artistic, Registrant
+    return original_params if policy(current_user).add_artistic_events?
     artistic_event_ids = Event.artistic.map(&:id)
     return original_params unless original_params['registrant_event_sign_ups_attributes']
     original_params['registrant_event_sign_ups_attributes'].each do |key, value|
@@ -169,7 +185,7 @@ class RegistrantsController < ApplicationController
   end
 
   def clear_events_data!(original_params)
-    return original_params if can? :add_events, Registrant
+    return original_params if policy(current_user).add_events?
     return original_params unless original_params['registrant_event_sign_ups_attributes']
     original_params['registrant_event_sign_ups_attributes'].each do |key, value|
       event_id = value['event_id'].to_i

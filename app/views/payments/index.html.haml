@@ -14,7 +14,7 @@
         %td= payment.details
         %td= payment.completed_date
         %td
-          - if can? :read, payment
+          - if policy(payment).show?
             = link_to 'Show Details', payment
 %br
 - unless @refunds.empty?
@@ -32,7 +32,7 @@
         %td= refund.refund_date
         %td= refund.note
         %td
-          - if can? :read, refund
+          - if policy(refund).show?
             = link_to "Refund Details", refund
 %br
 = render partial: "/registrants/pay_now", :locals => {:total_owing => current_user.total_owing }

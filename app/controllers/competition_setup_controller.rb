@@ -1,8 +1,9 @@
 class CompetitionSetupController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_breadcrumb
 
   def index
-    authorize! :read, :competition_setup
+    authorize @config, :setup_competition?
 
     @categories = Category.includes(:translations).includes(:events)
   end

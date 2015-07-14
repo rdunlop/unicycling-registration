@@ -113,7 +113,8 @@ describe TimeResultsController do
       end
 
       it "redirects to the event time results" do
-        time_result = FactoryGirl.create(:time_result)
+        other_competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+        time_result = FactoryGirl.create(:time_result, competitor: other_competitor)
         put :update, id: time_result.to_param, time_result: valid_attributes
         expect(response).to redirect_to(competition_time_results_path(@competition))
       end

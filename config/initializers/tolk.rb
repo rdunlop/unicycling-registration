@@ -3,9 +3,10 @@
 # Tolk config file. Generated on April 14, 2015 21:06
 # See github.com/tolk/tolk for more informations
 
-require 'cancancan'
 Tolk::ApplicationController.authenticator = proc {
-  authorize! :manage, :all_site_translations
+  unless Pundit.policy(current_user, :translation).manage_all_site_translations?
+    raise Pundit::NotAuthorizedError.new("You are not allowed")
+  end
 }
 
 Tolk.config do |config|

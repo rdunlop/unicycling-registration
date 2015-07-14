@@ -1,6 +1,5 @@
 class Translations::ExpenseItemsController < Admin::TranslationsController
-  before_action :authenticate_user!
-  load_resource
+  before_action :load_expense_item, except: :index
 
   def index
     @expense_items = ExpenseItem.all
@@ -21,6 +20,10 @@ class Translations::ExpenseItemsController < Admin::TranslationsController
   end
 
   private
+
+  def load_expense_item
+    @expense_item = ExpenseItem.find(params[:id])
+  end
 
   def expense_item_params
     params.require(:expense_item).permit(translations_attributes: [:id, :locale, :name, :details_label])

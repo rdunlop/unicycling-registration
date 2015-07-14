@@ -10,7 +10,7 @@ def create_competitor(competition, _bib_number, heat, lane)
 end
 
 describe RaceDataImporter do
-  let(:admin_user) { FactoryGirl.create(:admin_user) }
+  let(:admin_user) { FactoryGirl.create(:super_admin_user) }
   let(:competition) { FactoryGirl.create(:timed_competition, uses_lane_assignments: true) }
   let(:importer) { RaceDataImporter.new(competition, admin_user) }
 

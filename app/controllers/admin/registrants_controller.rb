@@ -1,12 +1,11 @@
 class Admin::RegistrantsController < ApplicationController
   before_action :authenticate_user!
-
   before_action :set_registrants_breadcrumb
   before_action :load_registrant, only: [:undelete]
 
   # GET /registrants/manage_all
   def manage_all
-    authorize! :manage_all, :registrant
+    authorize current_user, :registrant_information?
 
     @registrants = Registrant.includes(:user, :contact_detail)
     respond_to do |format|
@@ -17,12 +16,12 @@ class Admin::RegistrantsController < ApplicationController
 
   # post /registrants/manage_one
   def manage_one
-    authorize! :manage_all, :registrant
+    authorize current_user, :registrant_information?
   end
 
   # post /registrant/choose_one
   def choose_one
-    authorize! :manage_all, :registrant
+    authorize current_user, :registrant_information?
 
     if params[:registrant_id].blank?
       flash[:error] = "Choose a Registrant"
@@ -38,7 +37,7 @@ class Admin::RegistrantsController < ApplicationController
   end
 
   def undelete
-    authorize! :undelete, :registrant
+    authorize @registrant, :undelete?
     @registrant.deleted = false
 
     respond_to do |format|
@@ -54,7 +53,7 @@ class Admin::RegistrantsController < ApplicationController
   end
 
   def bag_labels
-    authorize! :bag_labels, :registrant
+    authorize current_user, :under_development?
     @registrants = Registrant.includes(:contact_detail).reorder(:sorted_last_name, :first_name).active.all
 
     names = []
@@ -70,7 +69,7 @@ class Admin::RegistrantsController < ApplicationController
   end
 
   def show_all
-    authorize! :show_all, :registrant
+    authorize current_user, :registrant_information?
     @registrants = Registrant.active.reorder(:sorted_last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
 
     if params[:offset]
@@ -93,9 +92,5 @@ class Admin::RegistrantsController < ApplicationController
 
   def load_registrant
     @registrant = Registrant.find_by(bib_number: params[:id])
-  end
-
-  def authorize
-    authorize! :manage, :registrants
   end
 end

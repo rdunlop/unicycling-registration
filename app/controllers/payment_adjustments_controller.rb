@@ -1,9 +1,9 @@
 class PaymentAdjustmentsController < ApplicationController
   before_action :authenticate_user!
-  load_resource :payment
-  authorize_resource class: false
+  before_action :authorize_payment_adjustment, except: :list
 
   def list
+    authorize current_user, :manage_all_payments?
     add_breadcrumb "Payment Management", summary_payments_path
     add_breadcrumb "Payments and Refunds"
     @payments = Payment.includes(:user)
@@ -105,5 +105,12 @@ class PaymentAdjustmentsController < ApplicationController
     else
       render "onsite_pay_confirm"
     end
+  end
+
+  private
+
+
+  def authorize_payment_adjustment
+    authorize current_user, :manage_old_payment_adjustments?
   end
 end

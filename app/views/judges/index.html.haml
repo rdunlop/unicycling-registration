@@ -1,30 +1,14 @@
-- if @competition.uses_judges
-  %h1 Manage #{@competition} Judges
-  %hr
-  - @judge_types.each do |judge_type|
-    .judge_type_summary
-      = render partial: "judge_type_summary", locals: {judge_type: judge_type, judges: @judges.where(judge_type: judge_type) }
+%h1 Manage #{@competition} Judges
+%hr
+- @judge_types.each do |judge_type|
+  .judge_type_summary
+    = render partial: "judge_type_summary", locals: {judge_type: judge_type, judges: @judges.where(judge_type: judge_type) }
 
-  - if can? :create, @judge
-    = render "add_judges"
-  - else
-    %p You cannot manage Judges (competition is locked, or you lack permissions)
+- if policy(@judge).create?
+  = render "add_judges"
+- else
+  %p You cannot manage Judges (competition is locked, or you lack permissions)
 
-- elsif @competition.uses_lane_assignments?
-  %h1 Manage RaceOfficials
-  %p These Users have the ability to assign Lane Assignments, as well as DQ competitors and see who is in each Heat/Lane.
-  %table.sortable
-    %thead
-      %th Email
-    %tbody
-      - @race_officials.each do |official|
-        %tr
-          %td= official
-  %h2 Set User as 'Race Official'
-  = form_tag  create_race_official_permissions_path, method: :post do |f|
-    = hidden_field_tag :competition_id, @competition.id
-    = select_tag :user_id, options_from_collection_for_select(User.with_role(:data_entry_volunteer), "id", "to_s"), include_blank: true, class: "chosen-select"
-    = submit_tag
 %hr
 If the volunteer you need isn't listed, #{link_to "Manage Data Entry Volunteers", competition_data_entry_volunteers_path(@competition)}
 %br

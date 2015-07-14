@@ -2,9 +2,6 @@ require 'spec_helper'
 
 describe "scores/index" do
   before(:each) do
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    allow(controller).to receive(:current_ability) { @ability }
 
     @ec = FactoryGirl.create(:competition)
     @judge = FactoryGirl.create(:judge, competition: @ec)
@@ -63,16 +60,19 @@ describe "scores/index" do
     assert_select "tr>td", text: "5.0".to_s, count: 1
   end
   it "shows the update button" do
-    @ability.can :create_scores, @ec
     render
     assert_select "a", text: "Set Score".to_s, count: 2
   end
   it "doesn't show the update button if event is locked" do
+    allow(view).to receive(:policy).and_return double(create_scores?: false)
+
     render
     assert_select "a", text: "Set Score".to_s, count: 0
   end
 
   it "shows a 'this event is locked' message when the event is locked" do
+    allow(view).to receive(:policy).and_return double(create_scores?: false)
+
     render
     expect(rendered).to match(/Scores for this event are now locked \(closed\)/)
   end

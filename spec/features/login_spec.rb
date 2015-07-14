@@ -20,7 +20,7 @@ describe 'Logging in to the system' do
       specify 'is not allowed to event_configuration' do
         visit '/convention_setup'
         expect(current_path).to eq user_registrants_path(user)
-        expect(page).to have_content 'You are not authorized to access this page'
+        expect(page).to have_content 'You are not authorized to perform this action'
       end
     end
   end

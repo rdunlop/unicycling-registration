@@ -295,7 +295,7 @@ describe Competitor do
       @score.val_3 = 3.0
       @score.val_4 = 4.0
       @score.judge = FactoryGirl.create(:judge,
-                                        user: FactoryGirl.create(:admin_user),
+                                        user: FactoryGirl.create(:user),
                                         judge_type: FactoryGirl.create(:judge_type))
       @score.competitor = @cr
       @score.save

@@ -1,6 +1,6 @@
 shared_context 'can login' do
   def fill_in_login_form
-    within('.new_user') do
+    within('#new_user') do
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
       click_button 'Log in'
@@ -50,7 +50,7 @@ end
 shared_context "points_event" do |options = {}|
   before :each do
     event = FactoryGirl.create(:event, name: options[:name])
-    competition = FactoryGirl.create(:ranked_competition, event: event, name: options[:name], start_data_type: 'One Data Per Line')
+    competition = FactoryGirl.create(:ranked_competition, event: event, name: options[:name], end_data_type: "One Data Per Line")
     FactoryGirl.create(:event_competitor, competition: competition)
     reg = Registrant.first
     reg.first_name = "Robin"

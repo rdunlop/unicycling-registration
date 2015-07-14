@@ -1,12 +1,13 @@
 class RegistrantExpenseItemsController < ApplicationController
-  before_action :load_registrant
-  before_action :load_new_registrant_expense_item, only: [:create]
-  load_and_authorize_resource
   before_action :authenticate_user!
+  before_action :load_registrant
 
   before_action :set_registrant_breadcrumb
 
   def create
+    @registrant_expense_item = RegistrantExpenseItem.new(registrant_expense_item_params)
+    @registrant_expense_item.registrant = @registrant
+    authorize @registrant_expense_item
     respond_to do |format|
       format.html do
         if @registrant_expense_item.save
@@ -22,6 +23,7 @@ class RegistrantExpenseItemsController < ApplicationController
 
   def destroy
     @registrant_expense_item = @registrant.registrant_expense_items.find(params[:id])
+    authorize @registrant_expense_item
 
     respond_to do |format|
       format.html do
@@ -44,11 +46,6 @@ class RegistrantExpenseItemsController < ApplicationController
 
   def load_registrant
     @registrant = Registrant.find_by!(bib_number: params[:registrant_id])
-  end
-
-  def load_new_registrant_expense_item
-    @registrant_expense_item = RegistrantExpenseItem.new(registrant_expense_item_params)
-    @registrant_expense_item.registrant = @registrant
   end
 
   def set_registrant_breadcrumb

@@ -1,6 +1,6 @@
 %h1 Editing #{@event} #{@competition}
 
-- if can? :destroy, @competition
+- if policy(@competition).destroy?
   = link_to 'Delete',  competition_path(@competition), :method => :delete, data: { :confirm => "Are you sure you want to destroy the COMPETITION?" }
 
 %fieldset.form__fieldset

@@ -1,7 +1,7 @@
 class Admin::ManualPaymentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_breadcrumbs
-  authorize_resource class: false
+  before_action :authorize_payment_admin
 
   def new
     @registrants = Registrant.order(:bib_number)
@@ -35,6 +35,10 @@ class Admin::ManualPaymentsController < ApplicationController
   end
 
   private
+
+  def authorize_payment_admin
+    authorize current_user, :manage_all_payments?
+  end
 
   def set_breadcrumbs
     add_breadcrumb "Payments Management", summary_payments_path

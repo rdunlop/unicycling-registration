@@ -44,16 +44,16 @@ describe EventConfigurationsController do
         post 'test_mode_role', role: "normal_user"
         expect(response).to redirect_to(root_path)
       end
-      it "changes my user to admin" do
-        post 'test_mode_role', role: "admin"
+      it "changes my user to convention_admin" do
+        post 'test_mode_role', role: "convention_admin"
         @user.reload
-        expect(@user.has_role?(:admin)).to eq(true)
+        expect(@user.has_role?(:convention_admin)).to eq(true)
       end
       it "cannot change if config test_mode is disabled" do
         event_configuration.update_attribute(:test_mode, false)
-        post 'test_mode_role', role: "admin"
+        post 'test_mode_role', role: "convention_admin"
         @user.reload
-        expect(@user.has_role?(:admin)).to eq(false)
+        expect(@user.has_role?(:convention_admin)).to eq(false)
       end
     end
   end

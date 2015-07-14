@@ -11,9 +11,6 @@ describe "registrants/build/add_events" do
                                               competitor_expense_item: @comp_exp,
                                               noncompetitor_expense_item: @noncomp_exp)
     FactoryGirl.create(:wheel_size_24, id: 3)
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
     allow(view).to receive(:wizard_path).and_return(wizard_path)
   end

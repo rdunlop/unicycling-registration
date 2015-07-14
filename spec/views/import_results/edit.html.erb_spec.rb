@@ -20,21 +20,4 @@ describe "import_results/edit" do
       end
     end
   end
-
-  describe "for a ranked competition" do
-    let(:competition) { FactoryGirl.build_stubbed(:ranked_competition) }
-    before :each do
-      @import_result = assign(:import_result, FactoryGirl.build_stubbed(:import_result, competition: competition))
-    end
-
-    it "renders the edit import_result form" do
-      render
-
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      assert_select "form", action: import_result_path(@import_result), method: "post" do
-        assert_select "select#import_result_bib_number", name: "import_result[bib_number]"
-        assert_select "input#import_result_details", name: "import_result[details]"
-      end
-    end
-  end
 end

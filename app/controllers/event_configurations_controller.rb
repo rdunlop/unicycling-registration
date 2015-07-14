@@ -1,28 +1,20 @@
 class EventConfigurationsController < ConventionSetupController
   before_action :authenticate_user!
   before_action :load_event_configuration
-
-  load_and_authorize_resource
+  before_action :authorize_cache, only: [:cache, :clear_cache, :clear_counter_cache]
 
   EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :important_dates, :payment_settings, :advanced_settings]
 
+  before_action :authorize_convention_setup, only: EVENT_CONFIG_PAGES
+
   EVENT_CONFIG_PAGES.each do |page|
     define_method("update_#{page}") do
+      authorize_convention_setup
       update(page)
     end
     before_action "set_#{page}_breadcrumbs".to_sym, only: ["update_#{page}".to_sym, "#{page}".to_sym]
     define_method("set_#{page}_breadcrumbs") do
       add_breadcrumb page.to_s.humanize
-    end
-  end
-
-  def update(page)
-    @event_configuration.assign_attributes(send("#{page}_params"))
-    @event_configuration.apply_validation(page)
-    if @event_configuration.save
-      redirect_to convention_setup_path, notice: 'Event configuration was successfully updated.'
-    else
-      render action: page
     end
   end
 
@@ -44,6 +36,7 @@ class EventConfigurationsController < ConventionSetupController
   # Toggle a role for the current user
   # Only enabled when the TEST_MODE flag is set
   def test_mode_role
+    authorize @event_configuration
     role = params[:role]
 
     if current_user.has_role? role
@@ -56,6 +49,24 @@ class EventConfigurationsController < ConventionSetupController
   end
 
   private
+
+  def authorize_cache
+    authorize @event_configuration, :manage_cache?
+  end
+
+  def authorize_convention_setup
+    authorize @event_configuration, :setup_convention?
+  end
+
+  def update(page)
+    @event_configuration.assign_attributes(send("#{page}_params"))
+    @event_configuration.apply_validation(page)
+    if @event_configuration.save
+      redirect_to convention_setup_path, notice: 'Event configuration was successfully updated.'
+    else
+      render action: page
+    end
+  end
 
   def load_event_configuration
     @event_configuration = EventConfiguration.singleton

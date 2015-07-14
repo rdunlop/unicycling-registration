@@ -47,6 +47,14 @@ GIT
       capistrano
       sidekiq
 
+GIT
+  remote: git://github.com/sudosu/rails_admin_pundit.git
+  revision: 285e3e79a37242cf7a527053e9b438782801557a
+  specs:
+    rails_admin_pundit (0.0.1)
+      pundit (>= 0.2.3)
+      rails_admin (>= 0.6.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -120,7 +128,6 @@ GEM
     bullet (4.14.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
-    cancancan (1.10.1)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -400,6 +407,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pundit (1.0.1)
+      activesupport (>= 3.0.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -610,7 +619,6 @@ DEPENDENCIES
   binding_of_caller
   breadcrumbs_on_rails
   bullet
-  cancancan (~> 1.10)
   capistrano
   capistrano-bundler
   capistrano-rails
@@ -647,10 +655,12 @@ DEPENDENCIES
   poltergeist
   prawn-labels
   pry
+  pundit
   quiet_assets
   rails (= 4.2.3)
   rails-i18n (~> 4.0.0)
   rails_admin
+  rails_admin_pundit!
   rake
   recaptcha
   redis-rails

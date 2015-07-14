@@ -122,7 +122,7 @@ describe RegistrantsController do
     end
     describe "as an admin" do
       before(:each) do
-        sign_in FactoryGirl.create(:admin_user)
+        sign_in FactoryGirl.create(:convention_admin_user)
       end
       it "Can read other users registrant" do
         registrant = FactoryGirl.create(:competitor, user: @user)

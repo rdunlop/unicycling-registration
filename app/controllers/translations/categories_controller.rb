@@ -1,6 +1,5 @@
 class Translations::CategoriesController < Admin::TranslationsController
-  before_action :authenticate_user!
-  load_resource
+  before_action :load_category, except: :index
 
   def index
     @categories = Category.all
@@ -21,6 +20,10 @@ class Translations::CategoriesController < Admin::TranslationsController
   end
 
   private
+
+  def load_category
+    @category = Category.find_by(params[:id])
+  end
 
   def category_params
     params.require(:category).permit(translations_attributes: [:id, :locale, :name])

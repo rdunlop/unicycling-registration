@@ -5,7 +5,7 @@
 
 = render "reg_closed_banner" if EventConfiguration.closed?
 
-- if can? :create, Registrant # until registration is closed
+- if policy(@registrant).create? # until registration is closed
   - if @config.comp_noncomp_url?
     .sign_up_difference
       = link_to t(".whats_the_difference"), @config.comp_noncomp_url, class: "fancybox", title: t(".difference_tooltip")

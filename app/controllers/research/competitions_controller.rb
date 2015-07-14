@@ -1,6 +1,6 @@
 class Research::CompetitionsController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource :research, class: false
+  before_action :authorize_user
 
   def index
     @tenants = Tenant.all
@@ -8,5 +8,11 @@ class Research::CompetitionsController < ApplicationController
 
   def competitions
     @competitions = Competition.all
+  end
+
+  private
+
+  def authorize_user
+    authorize current_user, :under_development?
   end
 end

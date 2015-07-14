@@ -32,7 +32,7 @@ $(document).ready(function () {
 
 $(document).ready(function() {
   // this conflicts with using a password manager on the log-in page
-  $('form').not(".new_user").areYouSure();
+  $('form').not(".no_dirty_check").areYouSure();
 });
 
 /* Generic sorting dataTable */

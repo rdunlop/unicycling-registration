@@ -1,20 +1,18 @@
 class EmailsController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_contact
 
   def index
-    authorize! :read, Email
     set_email_breadcrumb
     @email_form = Email.new
   end
 
   def list
-    authorize! :list, Email
     set_email_breadcrumb
     @email_form = Email.new(params[:email])
   end
 
   def create
-    authorize! :create, Email
     mass_emailer = MassEmailer.new(params)
 
     respond_to do |format|
@@ -29,6 +27,10 @@ class EmailsController < ApplicationController
   end
 
   private
+
+  def authorize_contact
+    authorize current_user, :contact_registrants?
+  end
 
   def set_email_breadcrumb
     add_breadcrumb "Send Emails"

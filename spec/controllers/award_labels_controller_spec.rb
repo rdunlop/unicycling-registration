@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AwardLabelsController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:admin_user)
+    @admin_user = FactoryGirl.create(:award_admin_user)
     sign_in @admin_user
     @registrant = FactoryGirl.create(:competitor)
   end

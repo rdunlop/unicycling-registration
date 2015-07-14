@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ExternalResultsController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:admin_user)
+    @admin_user = FactoryGirl.create(:super_admin_user)
     sign_in @admin_user
     @competition = FactoryGirl.create(:competition)
     @competitor = FactoryGirl.create(:event_competitor, competition: @competition)

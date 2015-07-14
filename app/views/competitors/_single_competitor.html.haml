@@ -5,5 +5,5 @@
   = render :partial => "/scores/blank_score"
 - else
   = render :partial => "/scores/score_with_total", :object => score
-- if show_update &&  can?(:create_scores, @judge.competition)
+- if show_update && policy(@judge).create_scores?
   %td= link_to 'Set Score', new_judge_competitor_score_path(@judge, competitor), class: 'action_button'

@@ -1,7 +1,7 @@
 class Printing::CompetitionsController < ApplicationController
-  before_action :authenticate_user!, except: [:announcer]
+  before_action :authenticate_user!, except: [:announcer, :start_list]
   before_action :load_competition
-  authorize_resource :competition, parent: false
+  before_action :skip_authorization, only: [:announcer, :start_list]
 
   before_action :set_breadcrumbs, only: [:announcer]
 
@@ -24,6 +24,8 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def heat_recording
+    authorize @competition
+
     @competition_sign_up = CompetitionSignUp.new(@competition)
 
     respond_to do |format|
@@ -33,6 +35,8 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def single_attempt_recording
+    authorize @competition
+
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
 
     @only_registered = true
@@ -45,6 +49,8 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def two_attempt_recording
+    authorize @competition
+
     @is_start_times = params[:is_start_times] && params[:is_start_times] == "true"
 
     @only_registered = true
@@ -57,6 +63,7 @@ class Printing::CompetitionsController < ApplicationController
   end
 
   def results
+    authorize @competition
     name = "#{@config.short_name.tr(' ', '_')}_#{@competition.name.tr(' ', '_')}_results"
     attachment = true unless params[:attachment].nil?
 

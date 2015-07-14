@@ -1,10 +1,9 @@
-- cache_i18n ['footer', @config] do
-  .non_printable#bottom_nav
-    .choose_language
-      %ul
-        - I18n.available_locales.each do |locale|
-          %li= link_to t("language_name", locale: locale), new_locale_path(locale), hreflang: locale, lang: locale
-    = render "/attending/rulebook_link"
+.non_printable#bottom_nav
+  .choose_language
+    %ul
+      - I18n.available_locales.each do |locale|
+        %li= link_to t("language_name", locale: locale), new_locale_path(locale), hreflang: locale, lang: locale
+  = render "/attending/rulebook_link"
 
-    = link_to t('.help'), welcome_help_path
-    %p= t(".developed_by")
+  = link_to t('.help'), welcome_help_path
+  %p= t(".developed_by")

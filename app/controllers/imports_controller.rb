@@ -1,6 +1,6 @@
 class ImportsController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource class: false
+  before_action :authorize_action
 
   def new
   end
@@ -27,4 +27,11 @@ class ImportsController < ApplicationController
     flash[:alert] = "#{error_count} #{class_name} not imported"
     redirect_to new_import_path
   end
+
+  private
+
+  def authorize_action
+    authorize :import
+  end
+
 end

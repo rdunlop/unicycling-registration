@@ -1,18 +1,23 @@
 require 'upload'
 class ImportResultsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_user, except: [:show, :edit, :update, :destroy]
-  before_action :load_competition, except: [:show, :edit, :update, :destroy]
+  before_action :load_user, except: [:edit, :update, :destroy]
+  before_action :load_competition, except: [:edit, :update, :destroy]
+  before_action :load_import_result, only: [:edit, :update, :destroy]
+
   before_action :load_new_import_result, only: [:create]
   before_action :load_import_results, only: [:data_entry, :display_csv, :display_chip, :display_lif, :index, :proof_single]
   before_action :load_results_for_competition, only: [:review, :approve]
   before_action :filter_import_results_by_start_times, only: [:proof_single, :data_entry, :review, :approve]
-  load_and_authorize_resource
+
+  before_action :authorize_competition_data, except: [:approve, :approve_heat]
 
   before_action :set_breadcrumbs
 
   # GET /users/#/competitions/#/import_results
   def index
+    authorize @competition, :view_result_data?
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @import_results }
@@ -37,15 +42,6 @@ class ImportResultsController < ApplicationController
 
     respond_to do |format|
       format.html # review_heat.html.erb
-    end
-  end
-
-  # GET /import_results/1
-  # GET /import_results/1.json
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @import_result }
     end
   end
 
@@ -181,6 +177,7 @@ class ImportResultsController < ApplicationController
   end
 
   def approve_heat
+    authorize @competition, :create_preliminary_result?
     @heat = params[:heat].to_i
 
     import_results = ImportResult.where(competition_id: @competition, heat: @heat)
@@ -216,6 +213,8 @@ class ImportResultsController < ApplicationController
 
   # POST /users/#/competitions/#/import_results/approve
   def approve
+    authorize @competition, :create_preliminary_result?
+
     n = @import_results.count
     begin
       ImportResult.transaction do
@@ -239,6 +238,10 @@ class ImportResultsController < ApplicationController
 
   private
 
+  def authorize_competition_data
+    authorize @competition, :create_preliminary_result?
+  end
+
   def import_result_params
     params.require(:import_result).permit(:bib_number, :status, :minutes, :raw_data,
                                           :number_of_penalties, :seconds, :thousands, :points, :details, :is_start_time)
@@ -250,6 +253,11 @@ class ImportResultsController < ApplicationController
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
+  end
+
+  def load_import_result
+    @import_result = ImportResult.find(params[:id])
+    @competition = @import_result.competition
   end
 
   def load_import_results

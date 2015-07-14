@@ -1,6 +1,6 @@
 class ExportController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource class: false
+  before_action :authorize_action
 
   def index
   end
@@ -171,4 +171,11 @@ class ExportController < ApplicationController
       # format.xls { render text: report.string, :filename => "results.xls" }
     end
   end
+
+  private
+
+  def authorize_action
+    authorize :export
+  end
+
 end

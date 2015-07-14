@@ -57,13 +57,12 @@ class ExternalResult < ActiveRecord::Base
 
   # from CSV to import_result
   def self.build_and_save_imported_result(raw, raw_data, user, competition)
-    ImportResult.create(
-      bib_number: raw[0],
+    ExternalResult.preliminary.new(
+      competitor: CompetitorFinder.new(competition).find_by_bib_number(raw[0]),
       points: raw[1],
       details: raw[2],
-      raw_data: raw_data,
-      user: user,
-      competition: competition)
+      entered_at: DateTime.now,
+      entered_by: user)
   end
 
   def result

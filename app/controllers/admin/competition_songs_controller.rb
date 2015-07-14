@@ -1,5 +1,6 @@
 class Admin::CompetitionSongsController < ApplicationController
-  authorize_resource class: false
+  before_action :authenticate_user!
+  before_action :authorize_music_admin
 
   # GET /competition_songs/:id
   def show
@@ -40,4 +41,11 @@ class Admin::CompetitionSongsController < ApplicationController
       send_data(zip_file, type: 'application/zip', filename: filename)
     end
   end
+
+  private
+
+  def authorize_music_admin
+    authorize current_user, :manage_music?
+  end
+
 end

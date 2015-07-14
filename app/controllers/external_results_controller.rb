@@ -1,28 +1,24 @@
 class ExternalResultsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition, only: [:index, :create]
+  before_action :load_external_result, only: [:edit, :update, :destroy]
+
   before_action :load_new_external_result, only: [:create]
-  load_and_authorize_resource
+  before_action :authorize_data_entry, except: [:index]
 
   before_action :set_breadcrumbs, only: :index
 
   # GET /competitions/#/external_results
   def index
+    authorize @competition, :view_result_data?
     add_breadcrumb "Points Results"
 
     @external_result = ExternalResult.new
-    @external_results = @external_results.active
+    @external_results = @competition.external_results.active
 
     respond_to do |format|
       format.html # index.html.erb
     end
-  end
-
-  # GET /external_results/1/edit
-  def edit
-    @competition = @external_result.competition
-    add_to_competition_breadcrumb(@competition)
-    add_breadcrumb "Edit Result"
   end
 
   # POST /external_results
@@ -43,6 +39,12 @@ class ExternalResultsController < ApplicationController
     end
   end
 
+  # GET /external_results/1/edit
+  def edit
+    add_to_competition_breadcrumb(@competition)
+    add_breadcrumb "Edit Result"
+  end
+
   # PUT /external_results/1
   # PUT /external_results/1.json
   def update
@@ -60,7 +62,6 @@ class ExternalResultsController < ApplicationController
   # DELETE /external_results/1
   # DELETE /external_results/1.json
   def destroy
-    @competition = @external_result.competitor.competition
     @external_result.destroy
 
     respond_to do |format|
@@ -70,6 +71,15 @@ class ExternalResultsController < ApplicationController
   end
 
   private
+
+  def authorize_data_entry
+    authorize @competition, :modify_result_data?
+  end
+
+  def load_external_result
+    @external_result = ExternalResult.find(params[:id])
+    @competition = @external_result.competition
+  end
 
   def set_breadcrumbs
     add_to_competition_breadcrumb(@competition)

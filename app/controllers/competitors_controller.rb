@@ -3,10 +3,8 @@ class CompetitorsController < ApplicationController
   include SortableObject
 
   before_action :authenticate_user!
-  load_and_authorize_resource :competition, except: [:edit, :update, :destroy, :update_row_order]
-  before_action :load_new_competitor, only: [:create]
-  load_and_authorize_resource through: :competition, except: [:edit, :update, :destroy, :update_row_order]
-  load_and_authorize_resource only: [:edit, :update, :destroy, :update_row_order]
+  before_action :load_competition, except: [:edit, :update, :destroy, :update_row_order]
+  before_action :load_competitor, only: [:edit, :update, :destroy, :update_row_order]
 
   before_action :set_parent_breadcrumbs, only: [:index, :new, :edit, :display_candidates]
 
@@ -17,11 +15,13 @@ class CompetitorsController < ApplicationController
     add_breadcrumb "Add Competitor"
     @filtered_registrants = @competition.signed_up_registrants
     @competitor = @competition.competitors.new
+    authorize @competitor
     @competitor.members.build # add an initial member
   end
 
   # GET /competitions/1/competitors
   def index
+    authorize @competition.competitors.new
     add_breadcrumb "Manage Competitors"
     @registrants = @competition.signed_up_registrants
     @competitors = @competition.competitors.includes(members: [:registrant])
@@ -29,12 +29,15 @@ class CompetitorsController < ApplicationController
 
   # show the competitors, their overall places, and their times
   def display_candidates
+    authorize @competition.competitors.new
     add_breadcrumb "Display Competition Candidates"
     @competitors = @competition.signed_up_competitors
   end
 
   # process a form submission which includes HEAT&Lane for each candidate, creating the competitor as well as the lane assignment
   def create_from_candidates
+    authorize @competition.competitors.new
+
     heat = params[:heat].to_i
     competitors = params[:competitors]
     begin
@@ -53,6 +56,8 @@ class CompetitorsController < ApplicationController
   end
 
   def add
+    authorize @competition.competitors.new
+
     respond_to do |format|
       begin
         raise "No Registrants selected" if params[:registrants].nil?
@@ -78,10 +83,14 @@ class CompetitorsController < ApplicationController
 
   # GET /competitors/1/edit
   def edit
+    authorize @competitor
+
     add_breadcrumb "Edit Competitor"
   end
 
   def add_all
+    authorize @competition.competitors.new
+
     @competitor = @competition.competitors.new # so that the form renders ok
     respond_to do |format|
       begin
@@ -98,6 +107,8 @@ class CompetitorsController < ApplicationController
   # POST /competitors
   # POST /competitors.json
   def create
+    @competitor = @competition.competitors.new(competitor_params)
+    authorize @competitor
     if @competitor.save
       flash[:notice] = 'Competition registrant was successfully created.'
       respond_to do |format|
@@ -117,6 +128,8 @@ class CompetitorsController < ApplicationController
   # PUT /competitors/1
   # PUT /competitors/1.json
   def update
+    authorize @competitor
+
     if @competitor.update_attributes(competitor_params)
       flash[:notice] = 'Competition registrant was successfully updated.'
       redirect_to competition_competitors_path(@competitor.competition)
@@ -129,6 +142,7 @@ class CompetitorsController < ApplicationController
   # DELETE /competitors/1
   # DELETE /competitors/1.json
   def destroy
+    authorize @competitor
     @ev_cat = @competitor.competition
     @competitor.destroy
     respond_to do |format|
@@ -139,6 +153,8 @@ class CompetitorsController < ApplicationController
 
   # DELETE /events/10/competitors/destroy_all
   def destroy_all
+    authorize @competition.competitors.new
+
     @competition.competitors.destroy_all
 
     respond_with(@competition, location: new_competition_competitor_path(@competition))
@@ -158,8 +174,12 @@ class CompetitorsController < ApplicationController
     @competition = Competition.find(params[:competition_id])
   end
 
-  def load_new_competitor
-    @competitor = @competition.competitors.new(competitor_params)
+  def load_competitor_through_competition
+    @competitor = @competition.competitors.find(params[:id])
+  end
+
+  def load_competitor
+    @competitor = Competitor.find(params[:id])
   end
 
   def set_parent_breadcrumbs

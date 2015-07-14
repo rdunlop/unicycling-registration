@@ -1,0 +1,16 @@
+%h1 Manage #{role}
+
+%p These Users have the ability to assign Lane Assignments, as well as DQ competitors and see who is in each Heat/Lane.
+%table.sortable
+  %thead
+    %th Email
+  %tbody
+    - volunteers.each do |volunteer|
+      %tr
+        %td= volunteer
+        %td= link_to "Delete", competition_volunteer_path(@competition, role, user_id: volunteer), method: :delete
+
+%h2 Set User as #{role}
+= form_tag  create_competition_volunteers_path(competition, role), method: :post do |f|
+  = select_tag :user_id, options_from_collection_for_select(User.with_role(:data_entry_volunteer), "id", "to_s"), include_blank: true, class: "chosen-select"
+  = submit_tag

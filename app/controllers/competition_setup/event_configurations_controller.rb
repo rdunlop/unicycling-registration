@@ -2,8 +2,7 @@ class CompetitionSetup::EventConfigurationsController < CompetitionSetupControll
   before_action :authenticate_user!
   before_action :load_event_configuration
   before_action :set_breadcrumb
-  authorize_resource :competition_setup, class: false
-  load_resource
+  before_action :authorize_event_configuration
 
   def edit
   end
@@ -18,6 +17,10 @@ class CompetitionSetup::EventConfigurationsController < CompetitionSetupControll
   end
 
   private
+
+  def authorize_event_configuration
+    authorize @event_configuration, :setup_competition?
+  end
 
   def set_breadcrumb
     add_breadcrumb "Competition Setup", competition_setup_path

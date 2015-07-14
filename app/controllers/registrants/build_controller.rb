@@ -2,10 +2,10 @@ class Registrants::BuildController < ApplicationController
   include Wicked::Wizard
   before_action :authenticate_user!
 
-  load_resource :registrant, find_by: :bib_number, except: [:index, :create]
+  before_action :load_registrant_by_bib_number, except: [:index, :create]
   before_action :set_steps
   before_action :setup_wizard
-  authorize_resource :registrant
+  before_action :authorize_registrant_update, except: :create
 
   before_action :load_categories, only: [:show, :update, :add_events]
   layout "wizard"
@@ -26,8 +26,6 @@ class Registrants::BuildController < ApplicationController
   end
 
   def update
-    # this is so that we have a clearer ability.rb specification
-    authorize! :update, @registrant
     case wizard_value(step)
     when :add_name
       @registrant.status = "base_details" if @registrant.status == "blank"
@@ -47,6 +45,8 @@ class Registrants::BuildController < ApplicationController
   def create
     @registrant = Registrant.new(registrant_params)
     @registrant.user = current_user
+    authorize @registrant
+
     @registrant.status = "base_details"
     if @registrant.save
       # drop into the second step
@@ -59,6 +59,14 @@ class Registrants::BuildController < ApplicationController
   end
 
   private
+
+  def authorize_registrant_update
+    authorize @registrant, :update?
+  end
+
+  def load_registrant_by_bib_number
+    @registrant = Registrant.find_by(bib_number: params[:registrant_id])
+  end
 
   def set_steps
     if @registrant.nil? || @registrant.competitor
@@ -110,7 +118,7 @@ class Registrants::BuildController < ApplicationController
 
   def clear_artistic_data!(original_params)
     # XXX Only do this if I'm not an admin-level person
-    return original_params if can? :create_artistic, Registrant
+    return original_params if policy(current_user).add_artistic_events?
     artistic_event_ids = Event.artistic.map(&:id)
     return original_params unless original_params['registrant_event_sign_ups_attributes']
     original_params['registrant_event_sign_ups_attributes'].each do |key, value|
@@ -128,7 +136,7 @@ class Registrants::BuildController < ApplicationController
   end
 
   def clear_events_data!(original_params)
-    return original_params if can? :add_events, Registrant
+    return original_params if policy(current_user).add_events?
     return original_params unless original_params['registrant_event_sign_ups_attributes']
     original_params['registrant_event_sign_ups_attributes'].each do |key, value|
       event_id = value['event_id'].to_i

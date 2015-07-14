@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EmailsController do
   before(:each) do
-    @user = FactoryGirl.create(:admin_user)
+    @user = FactoryGirl.create(:super_admin_user)
     sign_in @user
   end
 

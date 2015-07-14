@@ -1,8 +1,8 @@
 class ExportPaymentsController < ApplicationController
-  before_action :authenticate_user!
-  authorize_resource class: false
-
   include ExcelOutputter
+
+  before_action :authenticate_user!
+  before_action :authorize_payment_admin
 
   def list
     add_breadcrumb "Payments Management", summary_payments_path
@@ -58,5 +58,11 @@ class ExportPaymentsController < ApplicationController
     filename = "#{@config.short_name} PaymentDetails #{Date.today}"
 
     output_spreadsheet(headers, data, filename)
+  end
+
+  private
+
+  def authorize_payment_admin
+    authorize current_user, :manage_all_payments?
   end
 end

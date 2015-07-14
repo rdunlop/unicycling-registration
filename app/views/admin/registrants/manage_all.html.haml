@@ -1,10 +1,10 @@
 .non_printable
-  - if can? :bag_labels, :registrant
+  - if policy(current_user).under_development?
     = link_to 'Bag Labels PDF', bag_labels_registrants_path
     %br
   = link_to '(pdf)', manage_all_registrants_path(:format => :pdf)
   %br
-  - if can? :show_all, :registrant
+  - if policy(current_user).registrant_information?
     = link_to "All Registrants Summaries (pdf)", show_all_registrants_path(:format => :pdf)
 
 %h1 Edit Registrants
@@ -29,9 +29,9 @@
     // # includes 'current_user' because of the 'can? Calls
     - cache_i18n ['index_all.registrant', Registrant, current_user, @config ], expires_in: 1.minute do
       - @registrants.find_each(batch_size: 100) do |registrant|
-        - if can? :edit, registrant
+        - if policy(registrant).edit?
           %span.js--showElement{ data: { key: "edit_registrant#{registrant.id}" } }
-        - if can? :undelete, :registrant
+        - if policy(registrant).undelete?
           %span.js--showElement{ data: { key: "undelete#{registrant.id}" } }
         - cache_i18n [registrant, @config] do
           %tr

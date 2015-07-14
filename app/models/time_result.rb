@@ -84,6 +84,10 @@ class TimeResult < ActiveRecord::Base
     status == "DQ"
   end
 
+  def active?
+    !disqualified?
+  end
+
   def as_json(options = {})
     options = {
       except: [:id, :created_at, :updated_at, :competitor_id],

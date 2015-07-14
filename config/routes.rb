@@ -1,7 +1,7 @@
 Workspace::Application.routes.draw do
   mount Tolk::Engine => '/tolk', :as => 'tolk'
   require 'sidekiq/web'
-  authenticate :user, ->(u) { u.has_role?(:admin) || u.has_role?(:super_admin) } do
+  authenticate :user, ->(u) { u.has_role?(:super_admin) } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
@@ -52,7 +52,6 @@ Workspace::Application.routes.draw do
 
     resources :permissions, only: [:index], controller: "admin/permissions" do
       collection do
-        post :create_race_official
         get :directors
         put :set_role
         put :set_password
@@ -179,7 +178,6 @@ Workspace::Application.routes.draw do
     resources :combined_competitions, except: :show, controller: "compete/combined_competitions" do
       resources :combined_competition_entries, except: [:show], controller: "compete/combined_competition_entries"
     end
-    resources :competition_wheel_sizes
 
     resources :coupon_code_summaries, only: [:show]
 
@@ -294,11 +292,9 @@ Workspace::Application.routes.draw do
       member do
         get :payments, to: "payments#registrant_payments"
       end
-      resources :payments, only: [:index]
       resources :songs, only: [:index, :create]
-      resources :competition_wheel_sizes, only: [:index, :create]
+      resources :competition_wheel_sizes, only: [:index, :create, :destroy]
     end
-    resources :competition_wheel_sizes, only: :destroy
 
     resources :songs, only: [:destroy] do
       member do
@@ -446,7 +442,7 @@ Workspace::Application.routes.draw do
         get :result
 
         post :lock
-        delete :lock, to: 'competitions#unlock'
+        delete :unlock
         post :publish
         delete :publish, to: 'competitions#unpublish'
         post :publish_age_group_entry
@@ -481,6 +477,12 @@ Workspace::Application.routes.draw do
       end
 
       resources :data_entry_volunteers, only: [:index, :create]
+      resources :volunteers, only: [:index, :destroy] do
+        collection do
+          post ":volunteer_type", action: :create, as: :create
+          delete ":volunteer_type", action: :destroy, as: :destroy
+        end
+      end
 
       resources :judges,      only: [:index, :create, :destroy] do
         collection do
@@ -506,6 +508,8 @@ Workspace::Application.routes.draw do
         collection do
           get :review
           post :approve
+          get :display_csv
+          post :import_csv
         end
       end
       resources :published_age_group_entries, only: [:show] do
@@ -545,7 +549,7 @@ Workspace::Application.routes.draw do
         end
       end
     end
-    resources :distance_attempts, only: [:update, :destroy]
+    resources :distance_attempts, only: [:destroy]
     resources :tie_break_adjustments, only: [:destroy]
   end
 

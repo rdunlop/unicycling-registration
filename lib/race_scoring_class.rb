@@ -41,6 +41,10 @@ class RaceScoringClass < BaseScoringClass
     false
   end
 
+  def uses_volunteers
+    [:race_official, :start_line_volunteer, :end_line_volunteer]
+  end
+
   def results_path
     competition_time_results_path(competition)
   end

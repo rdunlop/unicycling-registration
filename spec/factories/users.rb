@@ -36,9 +36,6 @@ FactoryGirl.define do
     password "something"
     password_confirmation "something"
 
-    factory :admin_user do
-      after(:create) {|user| user.add_role :admin }
-    end
     factory :super_admin_user do
       after(:create) {|user| user.add_role :super_admin }
     end
@@ -49,6 +46,10 @@ FactoryGirl.define do
 
     factory :competition_admin_user do
       after(:create) {|user| user.add_role :competition_admin }
+    end
+
+    factory :award_admin_user do
+      after(:create) {|user| user.add_role :awards_admin }
     end
 
     factory :data_entry_volunteer_user do

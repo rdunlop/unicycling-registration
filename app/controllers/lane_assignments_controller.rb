@@ -1,28 +1,14 @@
 class LaneAssignmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_competition, except: [:edit, :update, :destroy]
-  before_action :load_new_lane_assignment, only: [:create]
-  load_and_authorize_resource through: :competition, except: [:edit, :update, :destroy]
-  load_and_authorize_resource only: [:edit, :update, :destroy]
+  before_action :load_and_authorize_competition, except: [:edit, :update, :destroy]
+  before_action :load_lane_assignments, except: [:edit, :update, :destroy, :index, :create]
+  before_action :load_lane_assignment, only: [:edit, :update, :destroy]
+  before_action :authorize_competition, only: [:edit, :update, :destroy]
 
   before_action :set_parent_breadcrumbs, only: [:index, :create]
 
   def review
     @heat_numbers = @lane_assignments.map(&:heat).uniq.sort
-  end
-
-  def create_heat_evt(csv, heat)
-    lane_assignments = LaneAssignment.where(heat: heat, competition: @competition)
-    csv << [@competition.id, 1, heat, @competition]
-    lane_assignments.each do |lane_assignment|
-      member = lane_assignment.competitor.members.first.registrant
-      csv << [nil,
-              lane_assignment.competitor.lowest_member_bib_number,
-              lane_assignment.lane,
-              ActiveSupport::Inflector.transliterate(member.last_name),
-              ActiveSupport::Inflector.transliterate(member.first_name),
-              ActiveSupport::Inflector.transliterate(member.country)]
-    end
   end
 
   def download_heats_evt
@@ -99,6 +85,8 @@ class LaneAssignmentsController < ApplicationController
   # POST /lane_assignments
   # POST /lane_assignments.json
   def create
+    @lane_assignment = @competition.lane_assignments.build(lane_assignment_params)
+
     respond_to do |format|
       if @lane_assignment.save
         format.html { redirect_to competition_lane_assignments_path(@competition), notice: 'Lane assignment was successfully created.' }
@@ -140,6 +128,10 @@ class LaneAssignmentsController < ApplicationController
 
   private
 
+  def authorize_competition
+    authorize @lane_assignment.competition, :manage_lane_assignments?
+  end
+
   def lane_assignment_params
     params.require(:lane_assignment).permit(:competitor_id, :heat, :lane, :registrant_id)
   end
@@ -148,12 +140,32 @@ class LaneAssignmentsController < ApplicationController
     add_to_competition_breadcrumb(@competition)
   end
 
-  def load_competition
+  def load_and_authorize_competition
     @competition = Competition.find(params[:competition_id])
+    authorize @competition, :manage_lane_assignments?
     raise StandardError.new("Competition is not set to use lane assignments") unless @competition.uses_lane_assignments?
   end
 
-  def load_new_lane_assignment
-    @lane_assignment = @competition.lane_assignments.new(lane_assignment_params)
+  def load_lane_assignments
+    @lane_assignments = @competition.lane_assignments
   end
+
+  def load_lane_assignment
+    @lane_assignment = LaneAssignment.find(params[:id])
+  end
+
+  def create_heat_evt(csv, heat)
+    lane_assignments = LaneAssignment.where(heat: heat, competition: @competition)
+    csv << [@competition.id, 1, heat, @competition]
+    lane_assignments.each do |lane_assignment|
+      member = lane_assignment.competitor.members.first.registrant
+      csv << [nil,
+              lane_assignment.competitor.lowest_member_bib_number,
+              lane_assignment.lane,
+              ActiveSupport::Inflector.transliterate(member.last_name),
+              ActiveSupport::Inflector.transliterate(member.first_name),
+              ActiveSupport::Inflector.transliterate(member.country)]
+    end
+  end
+
 end

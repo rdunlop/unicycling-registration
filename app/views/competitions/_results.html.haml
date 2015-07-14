@@ -1,7 +1,7 @@
-- if can? :update, @competition
+- if policy(@competition).update?
   .non_printable
     = @competition.event_class
-- if can? :set_places, @competition
+- if policy(@competition).set_places?
   - if Result.competition_calc_needed?(@competition)
     .calc_needed Places should be re-calculated.
   .non_printable

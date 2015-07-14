@@ -1,7 +1,6 @@
 class WelcomeController < ApplicationController
   before_action :authenticate_user!, only: [:index, :data_entry_menu]
-  skip_authorization_check only: [:index, :help, :feedback, :confirm]
-  authorize_resource class: false, only: [:data_entry_menu]
+  before_action :skip_authorization, only: [:index, :help, :feedback, :confirm]
 
   before_action :check_acceptable_format
 
@@ -34,6 +33,7 @@ class WelcomeController < ApplicationController
   end
 
   def data_entry_menu
+    authorize current_user, :view_data_entry_menu?
     @judges = current_user.judges
     @director_events = Event.with_role(:director, current_user)
   end

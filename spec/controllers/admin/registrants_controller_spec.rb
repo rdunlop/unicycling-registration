@@ -6,10 +6,10 @@ describe Admin::RegistrantsController do
     sign_in @user
   end
 
-  describe "with an admin user" do
+  describe "with a super admin user" do
     before(:each) do
       sign_out @user
-      @admin_user = FactoryGirl.create(:admin_user)
+      @admin_user = FactoryGirl.create(:super_admin_user)
       sign_in @admin_user
     end
 

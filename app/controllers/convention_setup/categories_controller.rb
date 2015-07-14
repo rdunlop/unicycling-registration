@@ -1,13 +1,14 @@
 class ConventionSetup::CategoriesController < ConventionSetupController
   include SortableObject
 
-  before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :authorize_setup
+  before_action :load_category, except: [:index, :create]
   before_action :set_categories_breadcrumb
 
   # GET /categories
   # GET /categories.json
   def index
+    @categories = Category.all
     @category = Category.new
   end
 
@@ -18,6 +19,7 @@ class ConventionSetup::CategoriesController < ConventionSetupController
   # POST /categories
   # POST /categories.json
   def create
+    @category = Category.new(category_params)
     respond_to do |format|
       if @category.save
         format.html { redirect_to convention_setup_categories_path, notice: 'Category was successfully created.' }
@@ -49,6 +51,14 @@ class ConventionSetup::CategoriesController < ConventionSetupController
   end
 
   private
+
+  def authorize_setup
+    authorize @config, :setup_convention?
+  end
+
+  def load_category
+    @category = Category.find(params[:id])
+  end
 
   def sortable_object
     @sortable_object ||= Category.find(params[:id])

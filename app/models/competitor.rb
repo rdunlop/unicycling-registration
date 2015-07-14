@@ -40,8 +40,8 @@ class Competitor < ActiveRecord::Base
   has_many :distance_attempts, -> { order "distance DESC, id DESC" }, dependent: :destroy
   has_one :tie_break_adjustment, dependent: :destroy
   has_many :time_results, dependent: :destroy
-  has_many :start_time_results, -> { active.merge(TimeResult.start_times) }, class_name: "TimeResult"
-  has_many :finish_time_results, -> { active.merge(TimeResult.finish_times) }, class_name: "TimeResult"
+  has_many :start_time_results, -> { merge(TimeResult.start_times) }, class_name: "TimeResult"
+  has_many :finish_time_results, -> { merge(TimeResult.finish_times) }, class_name: "TimeResult"
   has_one :external_result, dependent: :destroy
   has_many :results, dependent: :destroy, inverse_of: :competitor
 
@@ -448,8 +448,8 @@ class Competitor < ActiveRecord::Base
 
   def best_time_in_thousands
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/best_time_in_thousands") do
-      start_times = start_time_results.map(&:full_time_in_thousands)
-      finish_times = finish_time_results.map(&:full_time_in_thousands)
+      start_times = start_time_results.select(&:active?).map(&:full_time_in_thousands)
+      finish_times = finish_time_results.select(&:active?).map(&:full_time_in_thousands)
       TimeResultCalculator.new(start_times, finish_times, competition_start_time, lower_is_better).best_time_in_thousands
     end
   end

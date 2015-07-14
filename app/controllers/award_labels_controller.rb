@@ -1,12 +1,8 @@
 class AwardLabelsController < ApplicationController
-  before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :authenticate_ability
+  before_action :load_award_label, only: [:edit, :update, :destroy]
 
-  before_action :load_user, only: [:index, :create, :create_by_competition, :create_labels, :expert_labels, :announcer_sheet, :normal_labels, :destroy_all, :create_labels_by_registrant]
-
-  def load_user
-    @user = User.find(params[:user_id])
-  end
+  before_action :load_user, except: [:edit, :update, :destroy]
 
   # GET /users/#/award_labels
   def index
@@ -22,6 +18,7 @@ class AwardLabelsController < ApplicationController
   # POST /users/#/award_labels
   # POST /users/#/award_labels.json
   def create
+    @award_label = AwardLabel.new(award_label_params)
     @award_label.user = @user
 
     respond_to do |format|
@@ -53,22 +50,6 @@ class AwardLabelsController < ApplicationController
     @user = @award_label.user
     @award_label.destroy
     redirect_to user_award_labels_path(@user)
-  end
-
-  def set_int_if_present(value, default)
-    if value.present?
-      value.to_i
-    else
-      default
-    end
-  end
-
-  def set_string_if_present(value, default)
-    if value.present?
-      value
-    else
-      default
-    end
   end
 
   # POST /user/:id/award_labels/create_by_competition
@@ -126,88 +107,9 @@ class AwardLabelsController < ApplicationController
     end
   end
 
-  def create_labels_for_competitor(competitor, registrant, user, age_groups, experts, min_place, max_place)
-    n = 0
-    competition = competitor.competition
-    if age_groups
-      if create_label(competitor, registrant, false, min_place, max_place, user)
-        n += 1
-      end
-    end
-
-    if experts
-      if competition.has_experts?
-        if create_label(competitor, registrant, true, min_place, max_place, user)
-          n += 1
-        end
-      end
-    end
-
-    n
-  end
-
-  def create_label(competitor, registrant, experts, min_place, max_place, my_user)
-    if experts || !competitor.competition.has_age_group_entry_results?
-      place = competitor.overall_place
-    else
-      place = competitor.place
-    end
-    return false if place.nil?
-    return false if place == 0
-    return false if place < min_place
-    return false if place > max_place
-
-    aw_label = AwardLabel.new
-    aw_label.user = my_user
-    aw_label.populate_from_competitor(competitor, registrant, place, experts)
-
-    aw_label.save
-  end
-
   def destroy_all
     @user.award_labels.destroy_all
     redirect_to user_award_labels_path(@user)
-  end
-
-  def lines_from_award_label(label)
-    lines = ""
-    lines += label.line_1 + "\n" if label.line_1.present?
-    lines += label.line_2 + "\n" if label.line_2.present?
-    lines += label.line_3 + "\n" if label.line_3.present?
-    lines += label.line_4 + "\n" if label.line_4.present?
-    lines += label.line_5 + "\n" if label.line_5.present?
-    lines += "<b>" + label.line_6 + "</b>" + "\n" if label.line_6.present?
-    lines
-  end
-
-  def initialize_by_skipped_positions
-    skip_positions = 0
-    if params[:skip_positions].present?
-      skip_positions = params[:skip_positions].to_i
-    end
-
-    names = []
-    skip_positions.times do
-      names << ""
-    end
-    names
-  end
-
-  def build_names_from_labels(labels, separate_registrants)
-    previous_bib_number = 0
-    names = []
-    labels.each do |label|
-      if separate_registrants && (previous_bib_number != 0 && label.bib_number != previous_bib_number)
-        # add 3 blanks
-        names << ""
-        names << ""
-        names << ""
-      end
-      previous_bib_number = label.bib_number
-
-      names << lines_from_award_label(label)
-    end
-    names
   end
 
   def normal_labels
@@ -299,10 +201,119 @@ class AwardLabelsController < ApplicationController
 
   private
 
+  def load_user
+    @user = User.find(params[:user_id])
+  end
+
+  def load_award_label
+    @award_label = AwardLabel.find(params[:id])
+  end
+
+  def authenticate_ability
+    authorize current_user, :manage_awards?
+  end
+
   def award_label_params
     params.require(:award_label).permit(:age_group, :bib_number, :competition_name, :details, :competitor_name, :category,
                                         :place, :registrant_id, :team_name, :user_id)
   end
+
+  def set_int_if_present(value, default)
+    if value.present?
+      value.to_i
+    else
+      default
+    end
+  end
+
+  def set_string_if_present(value, default)
+    if value.present?
+      value
+    else
+      default
+    end
+  end
+
+  def create_labels_for_competitor(competitor, registrant, user, age_groups, experts, min_place, max_place)
+    n = 0
+    competition = competitor.competition
+    if age_groups
+      if create_label(competitor, registrant, false, min_place, max_place, user)
+        n += 1
+      end
+    end
+
+    if experts
+      if competition.has_experts?
+        if create_label(competitor, registrant, true, min_place, max_place, user)
+          n += 1
+        end
+      end
+    end
+
+    n
+  end
+
+  def create_label(competitor, registrant, experts, min_place, max_place, my_user)
+    if experts || !competitor.competition.has_age_group_entry_results?
+      place = competitor.overall_place
+    else
+      place = competitor.place
+    end
+    return false if place.nil?
+    return false if place == 0
+    return false if place < min_place
+    return false if place > max_place
+
+    aw_label = AwardLabel.new
+    aw_label.user = my_user
+    aw_label.populate_from_competitor(competitor, registrant, place, experts)
+
+    aw_label.save
+  end
+
+
+  def lines_from_award_label(label)
+    lines = ""
+    lines += label.line_1 + "\n" if label.line_1.present?
+    lines += label.line_2 + "\n" if label.line_2.present?
+    lines += label.line_3 + "\n" if label.line_3.present?
+    lines += label.line_4 + "\n" if label.line_4.present?
+    lines += label.line_5 + "\n" if label.line_5.present?
+    lines += "<b>" + label.line_6 + "</b>" + "\n" if label.line_6.present?
+    lines
+  end
+
+  def initialize_by_skipped_positions
+    skip_positions = 0
+    if params[:skip_positions].present?
+      skip_positions = params[:skip_positions].to_i
+    end
+
+    names = []
+    skip_positions.times do
+      names << ""
+    end
+    names
+  end
+
+  def build_names_from_labels(labels, separate_registrants)
+    previous_bib_number = 0
+    names = []
+    labels.each do |label|
+      if separate_registrants && (previous_bib_number != 0 && label.bib_number != previous_bib_number)
+        # add 3 blanks
+        names << ""
+        names << ""
+        names << ""
+      end
+      previous_bib_number = label.bib_number
+
+      names << lines_from_award_label(label)
+    end
+    names
+  end
+
 end
 
 # Monkey-batch Prawn-labels so that I can adjust the expected line-length requirement.
