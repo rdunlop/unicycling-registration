@@ -1,19 +1,19 @@
 class JudgePolicy < ApplicationPolicy
 
   def create_scores?
-    record.competition.unlocked? && (user_match? || director?(record.competition.event) || super_admin?)
+    record.competition.unlocked? && (user_match? || director?(record.event) || super_admin?)
   end
 
   def view_scores?
-    (user_match? || director? || super_admin?)
+    (user_match? || director?(record.event) || super_admin?)
   end
 
   def index?
-    director? || super_admin?
+    director?(record.event) || super_admin?
   end
 
   def toggle_status?
-    director?(record.competition.event) || super_admin?
+    director?(record.event) || super_admin?
   end
 
   def create?
@@ -21,7 +21,7 @@ class JudgePolicy < ApplicationPolicy
   end
 
   def update?
-    (record.scores.count == 0) && record.competition.unlocked? && (director?(record.competition.event) || super_admin?)
+    (record.scores.count == 0) && record.competition.unlocked? && (director?(record.event) || super_admin?)
   end
 
   def destroy?

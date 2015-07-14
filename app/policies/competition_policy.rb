@@ -30,12 +30,12 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def sort?
-    record.unlocked? && (director?(record.try(:event)) || competition_admin? || super_admin?)
+    record.unlocked? && (director?(record.event) || competition_admin? || super_admin?)
   end
 
   ###### START State Machine transitions ############
   def lock?
-    record.unlocked? && (director?(record.try(:event)) || competition_admin? || super_admin?)
+    record.unlocked? && (director?(record.event) || competition_admin? || super_admin?)
   end
 
   def unlock?
@@ -75,11 +75,11 @@ class CompetitionPolicy < ApplicationPolicy
   # PRINTING
   def announcer?
     return true # ?? Was "skip_authorization_check" before?
-    data_entry_volunteer? || director?
+    data_entry_volunteer? || director?(record.event)
   end
 
   def heat_recording?
-    data_entry_volunteer? || director?
+    data_entry_volunteer? || director?(record.event)
   end
 
   # DATA MANAGEMENT
@@ -92,11 +92,11 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def single_attempt_recording?
-    data_entry_volunteer? || director?
+    data_entry_volunteer? || director?(record.event)
   end
 
   def two_attempt_recording?
-    data_entry_volunteer? || director?
+    data_entry_volunteer? || director?(record.event)
   end
 
   def start_list?
@@ -105,7 +105,7 @@ class CompetitionPolicy < ApplicationPolicy
 
   # DATA ENTRY
   def create_preliminary_result?
-    record.unlocked? && (data_entry_volunteer? || director? || super_admin?)
+    record.unlocked? && (data_entry_volunteer? || director?(record.event)|| super_admin?)
   end
 
   def manage_volunteers?
