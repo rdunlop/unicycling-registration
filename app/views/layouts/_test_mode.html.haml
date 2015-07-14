@@ -4,9 +4,8 @@
     %span
       Current User Roles: #{current_user.roles.map{|role| role.name.humanize}.join(", ")}
     .span.js--hiddenToggleMenu
-      Change Role
-    .js--hiddenToggle
+      = link_to "Change Role", "#"
+    %ul.js--hiddenToggle
       - User.roles.each do |role|
-        = link_to "Toggle #{role.to_s.humanize} Role", test_mode_role_event_configuration_path(role: role), :method => :post
-        %br
+        %li= link_to "Toggle #{role.to_s.humanize} Role", test_mode_role_event_configuration_path(role: role), :method => :post
     %a.close{ href: "#" } &times;
