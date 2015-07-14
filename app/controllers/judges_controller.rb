@@ -80,7 +80,7 @@ class JudgesController < ApplicationController
   end
 
   def index
-    authorize Judge.new, :index?
+    authorize @competition.judges.build, :index?
 
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Manage Judges", competition_judges_path(@competition)
