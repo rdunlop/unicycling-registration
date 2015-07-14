@@ -15,6 +15,8 @@
 
   before_action :skip_if_rails_admin
 
+  private
+
   def skip_if_rails_admin
     if rails_admin_controller? || devise_controller?
       skip_authorization
@@ -97,8 +99,6 @@
            disposition: "inline",
            layout: "pdf.html"
   end
-
-  private
 
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."

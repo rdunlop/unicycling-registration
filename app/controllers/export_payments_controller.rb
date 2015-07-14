@@ -1,6 +1,7 @@
 class ExportPaymentsController < ApplicationController
   include ExcelOutputter
 
+  before_action :authenticate_user!
   before_action :authorize_payment_admin
 
   def list

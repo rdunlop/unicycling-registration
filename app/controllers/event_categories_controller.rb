@@ -1,4 +1,5 @@
 class EventCategoriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_breadcrumb, only: [:sign_ups]
 
   respond_to :html

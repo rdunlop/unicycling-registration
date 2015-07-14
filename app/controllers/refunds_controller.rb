@@ -1,4 +1,5 @@
 class RefundsController < ApplicationController
+  before_action :authenticate_user!
 
   # GET /refunds/1
   # GET /refunds/1.json

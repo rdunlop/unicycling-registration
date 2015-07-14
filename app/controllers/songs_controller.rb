@@ -1,4 +1,5 @@
 class SongsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_and_authorize_song, only: [:add_file, :file_complete, :destroy]
 
   before_action :load_registrant_by_bib_number, only: [:index, :create]

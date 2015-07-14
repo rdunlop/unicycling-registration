@@ -1,4 +1,5 @@
 class TieBreakAdjustmentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_judge, only: [:index, :create]
   before_action :load_tie_break_adjustment, only: [:destroy]
 

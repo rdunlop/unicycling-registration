@@ -1,4 +1,5 @@
 class CompetitionSetup::DirectorsController < ApplicationController
+  before_action :authenticate_user!
   before_action :authorize_director_management
 
   def index

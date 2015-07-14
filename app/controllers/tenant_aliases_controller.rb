@@ -1,4 +1,5 @@
 class TenantAliasesController < ConventionSetupController
+  before_action :authenticate_user!
   before_action :load_tenant_alias, only: [:activate, :destroy]
 
   before_action :authorize_setup

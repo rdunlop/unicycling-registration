@@ -1,4 +1,5 @@
 class Printing::CompetitionsController < ApplicationController
+  before_action :authenticate_user!, except: [:announcer, :start_list]
   before_action :load_competition
   before_action :skip_authorization, only: [:announcer, :start_list]
 

@@ -1,4 +1,5 @@
 class ExportRegistrantsController < ApplicationController
+  before_action :authenticate_user!
   include ExcelOutputter
 
   def download_all

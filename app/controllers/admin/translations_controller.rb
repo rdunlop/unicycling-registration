@@ -1,4 +1,5 @@
 class Admin::TranslationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :authorize_setup
   before_action :add_breadcrumbs
 

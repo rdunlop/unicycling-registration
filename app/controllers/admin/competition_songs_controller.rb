@@ -1,4 +1,5 @@
 class Admin::CompetitionSongsController < ApplicationController
+  before_action :authenticate_user!
   before_action :authorize_music_admin
 
   # GET /competition_songs/:id

@@ -1,6 +1,7 @@
 class CompetitionSetup::CompetitionsController < ApplicationController
   layout "competition_management", except: [:new, :create]
 
+  before_action :authenticate_user!
   before_action :load_new_competition, only: [:create]
   before_action :load_competition, except: [:create, :new]
 

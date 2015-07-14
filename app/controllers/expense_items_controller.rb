@@ -1,4 +1,5 @@
 class ExpenseItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_breadcrumbs
 
   # GET /expense_items/1/details

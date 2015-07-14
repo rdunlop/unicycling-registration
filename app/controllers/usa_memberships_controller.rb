@@ -1,4 +1,5 @@
 class UsaMembershipsController < ApplicationController
+  before_action :authenticate_user!
   before_action :authorize_admin
   before_action :load_family_registrants, only: :index
   before_action :load_registrants, only: [:index, :export]

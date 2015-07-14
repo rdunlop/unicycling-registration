@@ -1,4 +1,5 @@
 class Admin::RegistrantsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_registrants_breadcrumb
   before_action :load_registrant, only: [:undelete]
 

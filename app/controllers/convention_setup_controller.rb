@@ -1,4 +1,5 @@
 class ConventionSetupController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_breadcrumb
 
   layout "convention_setup"

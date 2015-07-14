@@ -1,4 +1,5 @@
 class EventConfigurationsController < ConventionSetupController
+  before_action :authenticate_user!
   before_action :load_event_configuration
   before_action :authorize_cache, only: [:cache, :clear_cache, :clear_counter_cache]
 

@@ -1,4 +1,5 @@
 class Admin::RegFeesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_payments_breadcrumb
   before_action :set_reg_fee_breadcrumb
 

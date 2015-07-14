@@ -1,4 +1,5 @@
 class Admin::ManualRefundsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_breadcrumbs
   before_action :authorize_payment_admin
 

@@ -1,4 +1,5 @@
 class CompetitionWheelSizesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_registrant_by_bib_number
   before_action :authorize_registrant
 

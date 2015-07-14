@@ -1,5 +1,6 @@
 class JudgesController < ApplicationController
   layout "competition_management"
+  before_action :authenticate_user!
   before_action :load_competition, only: [:index, :create, :destroy, :copy_judges]
 
   respond_to :html

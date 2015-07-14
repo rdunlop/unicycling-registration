@@ -1,4 +1,5 @@
 class Compete::IneligibleRegistrantsController < ApplicationController
+  before_action :authenticate_user!
   before_action :authenticate_ability
 
   before_action :load_registrant, except: :index

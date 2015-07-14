@@ -1,4 +1,5 @@
 class RegistrantExpenseItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_registrant
 
   before_action :set_registrant_breadcrumb

@@ -1,4 +1,5 @@
 class TimeResultsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_competition, except: [:edit, :destroy, :update]
   before_action :load_time_result, only: [:edit, :update, :destroy]
   before_action :authorize_data_entry, except: [:index]

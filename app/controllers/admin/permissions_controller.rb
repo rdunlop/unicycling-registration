@@ -1,4 +1,5 @@
 class Admin::PermissionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :authorize_permission
 
   def index

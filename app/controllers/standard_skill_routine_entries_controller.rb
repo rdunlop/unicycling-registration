@@ -1,4 +1,5 @@
 class StandardSkillRoutineEntriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :authorize_user
   before_action :load_standard_skill_routine
   before_action :load_new_standard_skill_routine_entry, only: [:create]

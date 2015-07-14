@@ -1,4 +1,5 @@
 class Printing::EventsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_event
 
   def results

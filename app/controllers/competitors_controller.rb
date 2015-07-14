@@ -2,6 +2,7 @@ class CompetitorsController < ApplicationController
   layout "competition_management"
   include SortableObject
 
+  before_action :authenticate_user!
   before_action :load_competition, except: [:edit, :update, :destroy, :update_row_order]
   before_action :load_competitor, only: [:edit, :update, :destroy, :update_row_order]
 

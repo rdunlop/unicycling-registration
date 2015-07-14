@@ -4,6 +4,7 @@
 class VolunteersController < ApplicationController
   layout "competition_management"
 
+  before_action :authenticate_user!
   before_action :load_competition
   before_action :authorize_competition
 

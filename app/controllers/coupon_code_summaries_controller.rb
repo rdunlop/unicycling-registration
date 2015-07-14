@@ -1,4 +1,5 @@
 class CouponCodeSummariesController < ApplicationController
+  before_action :authenticate_user!
 
   def show
     @coupon_code = CouponCode.find(params[:id])

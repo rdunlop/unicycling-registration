@@ -1,4 +1,5 @@
 class ExportController < ApplicationController
+  before_action :authenticate_user!
   before_action :authorize_action
 
   def index
