@@ -1,3 +1,4 @@
+- Remove ":admin" ability from database?
 - Use "Scope" in Pundit as it is expected to be used?
 - Test the access control settings from various users
 - Check coverage, and add controller specs for those that are missing.

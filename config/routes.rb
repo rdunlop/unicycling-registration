@@ -178,7 +178,6 @@ Workspace::Application.routes.draw do
     resources :combined_competitions, except: :show, controller: "compete/combined_competitions" do
       resources :combined_competition_entries, except: [:show], controller: "compete/combined_competition_entries"
     end
-    resources :competition_wheel_sizes
 
     resources :coupon_code_summaries, only: [:show]
 

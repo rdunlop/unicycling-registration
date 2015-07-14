@@ -13,15 +13,9 @@
   # after_action :verify_authorized, :except => :index
   after_action :verify_authorized, except: :devise_controller?
 
-  before_action :skip_if_rails_admin
+  before_action :skip_authorization, if: :devise_controller?
 
   private
-
-  def skip_if_rails_admin
-    if rails_admin_controller? || devise_controller?
-      skip_authorization
-    end
-  end
 
   def rails_admin_controller?
     false

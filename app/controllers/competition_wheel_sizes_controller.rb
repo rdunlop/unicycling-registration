@@ -26,7 +26,7 @@ class CompetitionWheelSizesController < ApplicationController
 
   # DELETE /registrants/#/competition_wheel_sizes/1
   def destroy
-    @competition_wheel_sizes = @registrant.competition_wheel_sizes.find(params[:id])
+    @competition_wheel_size = @registrant.competition_wheel_sizes.find(params[:id])
     @competition_wheel_size.destroy
     redirect_to registrant_competition_wheel_sizes_path(@registrant), notice: 'Override was successfully deleted.'
   end
