@@ -7,7 +7,8 @@
  -  I think that we should have separate views for the awards admin to view the status of competitions
  - I think that data entry volunteers should NOT have access
 - Translation Load rake task doesn't work. (failed on deploy)
--
+- Put a "missing music upload" warning together on the registrants#index page
+- Put a "missing pairs partner name" on the registrants#index pages
 
 - CompetitionADmin should be able to enter sign_ins. (separate it from competition policy)
 - remove "dirty check" from STreet Score system (it's auto-save)
