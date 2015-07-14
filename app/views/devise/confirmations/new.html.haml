@@ -3,9 +3,12 @@
 %p= t(".spam_reminder")
 = simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, class: "no_dirty_check" }) do |f|
   = devise_error_messages!
-  %div
-    = f.label :email
-    %br
-    = f.email_field :email
-  %div= f.button :submit, t(".title"), :class => "focus_button"
+  .panel.row
+    .row
+      .small-3.columns.text-right
+        = f.label :email
+      .small-9.columns
+        = f.email_field :email
+    .row
+      .small-12.columns= f.button :submit, t(".title"), :class => "focus_button"
 = render "devise/shared/links"
