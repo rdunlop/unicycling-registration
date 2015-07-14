@@ -10,6 +10,7 @@ class Compete::WaveAssignmentsController < ApplicationController
 
   # GET /competitions/1/waves
   def show
+    authorize @competition, :show?
     add_breadcrumb "Current Waves"
     @competitors = @competition.competitors
     respond_to do |format|
@@ -36,6 +37,7 @@ class Compete::WaveAssignmentsController < ApplicationController
 
   # PUT /competitions/1/waves
   def update
+    authorize @competition, :modify_result_data?
     if params[:file].respond_to?(:tempfile)
       file = params[:file].tempfile
     else

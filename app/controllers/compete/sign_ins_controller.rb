@@ -3,13 +3,13 @@ class Compete::SignInsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :load_competition
-  before_action :authorize_competition
   before_action :set_parent_breadcrumbs
 
   respond_to :html
 
   # GET /competitions/1/sign_ins
   def show
+    authorize @competition, :show?
     add_breadcrumb "Sign-In Sheets"
     if @competition.start_list_present?
       @competitors = @competition.competitors.reorder(:wave, :lowest_member_bib_number)
@@ -25,12 +25,14 @@ class Compete::SignInsController < ApplicationController
 
   # GET /competitions/1/sign_ins/edit
   def edit
+    authorize @competition, :modify_result_data?
     add_breadcrumb "Enter Sign-In"
     @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
   end
 
   # PUT /competitions/1/sign_ins
   def update
+    authorize @competition, :modify_result_data?
     respond_to do |format|
       if @competition.update_attributes(update_competitors_params)
         flash[:notice] = 'Competitors successfully updated.'
@@ -46,10 +48,6 @@ class Compete::SignInsController < ApplicationController
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
-  end
-
-  def authorize_competition
-    authorize @competition
   end
 
   def update_competitors_params

@@ -1,4 +1,8 @@
-%h1= "#{@competition} - Heat Assignment"
+%h1= "#{@competition} - Wave Assignment"
+
+= render "download_form"
+- if policy(@competition).modify_result_data?
+  = render "upload_form"
 
 %table.competitor_statuses.sortable
   %caption Competitors
@@ -23,5 +27,3 @@
         %td= competitor.best_time
 %br
 
-= render "download_form"
-= render "upload_form"
