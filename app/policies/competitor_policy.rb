@@ -47,7 +47,7 @@ class CompetitorPolicy < ApplicationPolicy
   private
 
   def director_or_competition_admin?(user, competition)
-    director?(competition.try(:event)) || competition_admin?
+    director?(competition.try(:event)) || competition_admin? || super_admin?
   end
 
   def manage?
