@@ -1,4 +1,6 @@
 =================== New STyling =========================
+- only display the secondary Admin bar if there are contents
+-
 
 Need to be able to print-pdf of Registrant Summary with confidence that it will lay out nicely.
 Change fieldset__form to be .row-like?

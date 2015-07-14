@@ -26,6 +26,14 @@ body.pdf_body {
   div.body {
     height: 100%;
   }
+  table {
+    margin: 0px;
+    width: 100%;
+
+    th, td {
+      padding: 0px 10px;
+    }
+  }
 }
 
 .heading_left {
