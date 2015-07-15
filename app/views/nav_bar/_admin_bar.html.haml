@@ -1,6 +1,6 @@
 -#- cache_i18n ['navbar', current_user, @config, Category, Competition] do
 - if user_signed_in? && current_user.roles.any?
-  %nav.top-bar.hide-for-small-only{ data: { topbar: true }, role: "navigation" }
+  %nav.top-bar.hide-for-small-only#admin_bar{ data: { topbar: true }, role: "navigation" }
     %section.top-bar-section
       %ul.left
         = render "nav_bar/admin_set_one"
