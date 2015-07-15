@@ -5,14 +5,14 @@
     - if resu.event_id == event.id
       - found_resu = resu
   = f.fields_for :registrant_event_sign_ups, found_resu do |resu|
-    %td
+    %td.event_choice
       = resu.hidden_field :event_id
       = resu.check_box :signed_up, :class => "primary_checkbox"
       = resu.label :signed_up, event.to_s
       - if event.event_categories.size == 1
         = resu.hidden_field :event_category_id, :value => event.event_categories.first.id
     - if !(event.event_categories.size == 1)
-      %td
+      %td.event_choice
         = resu.label :event_category_id, t('.category')
         - list = []
         - disabled_list = []
@@ -24,7 +24,7 @@
   - if event.category.max_number_of_event_choices != event.num_choices
     %td{:colspan => category.max_number_of_event_choices - event.num_choices}
   - event.event_choices.each do |choice|
-    %td
+    %td.event_choice
       - found_rc = nil
       - rc = @registrant.registrant_choices.each do |rc|
         - if rc.event_choice_id == choice.id

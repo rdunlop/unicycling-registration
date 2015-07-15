@@ -51,10 +51,19 @@ module FormHelper
     content_tag(:ul, class: "button-group") do
       wizard_steps.collect do |every_step|
         class_str = "secondary"
-        class_str = nil  if every_step == step
-        class_str = "success" if past_step?(every_step)
+        li_class_str = "button secondary disabled"
+        if every_step == step
+          class_str = nil
+          li_class_str = "button"
+        end
+        if past_step?(every_step)
+          class_str = "success"
+          li_class_str = nil
+        else
+          #li_class_str = "button secondary disabled"
+        end
         concat(
-          content_tag(:li) do
+          content_tag(:li, class: li_class_str) do
             link_to_if past_step?(every_step) || allow_navigation, I18n.t("wizard.#{every_step}"), wizard_path(every_step), class: "button #{class_str}"
           end
         )
