@@ -272,7 +272,6 @@ class AwardLabelsController < ApplicationController
     aw_label.save
   end
 
-
   def lines_from_award_label(label)
     lines = ""
     lines += label.line_1 + "\n" if label.line_1.present?
@@ -313,7 +312,6 @@ class AwardLabelsController < ApplicationController
     end
     names
   end
-
 end
 
 # Monkey-batch Prawn-labels so that I can adjust the expected line-length requirement.

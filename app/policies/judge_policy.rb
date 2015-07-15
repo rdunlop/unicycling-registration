@@ -1,5 +1,4 @@
 class JudgePolicy < ApplicationPolicy
-
   def create_scores?
     record.competition.unlocked? && (user_match? || director?(record.event) || super_admin?)
   end
@@ -43,5 +42,4 @@ class JudgePolicy < ApplicationPolicy
       scope.none
     end
   end
-
 end

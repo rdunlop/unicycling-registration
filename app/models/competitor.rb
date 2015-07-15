@@ -455,5 +455,4 @@ class Competitor < ActiveRecord::Base
   end
 
   delegate :lower_is_better, to: :scoring_helper
-
 end

@@ -26,7 +26,7 @@ class ApplicationPolicy
   end
 
   def show?
-    scope.where(:id => record.id).exists?
+    scope.where(id: record.id).exists?
   end
 
   def create?
@@ -51,26 +51,26 @@ class ApplicationPolicy
 
   def rails_admin?(action)
     case action
-      when :dashboard
-        super_admin?
-      when :index
-        super_admin?
-      when :show
-        super_admin?
-      when :new
-        super_admin?
-      when :edit
-        super_admin?
-      when :destroy
-        super_admin?
-      when :export
-        super_admin?
-      when :history
-        super_admin?
-      when :show_in_app
-        super_admin?
-      else
-        raise ::Pundit::NotDefinedError, "unable to find policy #{action} for #{record}."
+    when :dashboard
+      super_admin?
+    when :index
+      super_admin?
+    when :show
+      super_admin?
+    when :new
+      super_admin?
+    when :edit
+      super_admin?
+    when :destroy
+      super_admin?
+    when :export
+      super_admin?
+    when :history
+      super_admin?
+    when :show_in_app
+      super_admin?
+    else
+      raise ::Pundit::NotDefinedError, "unable to find policy #{action} for #{record}."
     end
   end
 

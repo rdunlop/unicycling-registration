@@ -1,5 +1,4 @@
 class ScorePolicy < ApplicationPolicy
-
   def create?
     return false if record.competitor.competition.locked?
     (user_match? && data_entry_volunteer?) || director?(record.competition.event) || super_admin?
@@ -21,5 +20,4 @@ class ScorePolicy < ApplicationPolicy
       scope.none
     end
   end
-
 end

@@ -1,5 +1,4 @@
 class SongPolicy < ApplicationPolicy
-
   [:update, :destroy, :file_complete, :add_file, :my_songs, :create_guest_song].each do |sym|
     define_method("#{sym}?") do
       music_management?
@@ -23,5 +22,4 @@ class SongPolicy < ApplicationPolicy
   def user_song?
     record.user == user
   end
-
 end

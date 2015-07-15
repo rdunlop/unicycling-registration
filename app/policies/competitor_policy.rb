@@ -1,5 +1,4 @@
 class CompetitorPolicy < ApplicationPolicy
-
   def index?
     data_entry_volunteer? || director?(record.competition) || competition_admin? || super_admin?
   end
@@ -46,12 +45,12 @@ class CompetitorPolicy < ApplicationPolicy
 
   private
 
-  def director_or_competition_admin?(user, competition)
+  def director_or_competition_admin?(_user, competition)
     director?(competition.try(:event)) || competition_admin? || super_admin?
   end
 
   def manage?
-    #can [:manage, :update_row_order], Competitor do |comp|
+    # can [:manage, :update_row_order], Competitor do |comp|
 
     record.competition.unlocked? && (director_or_competition_admin?(user, record.competition))
   end
@@ -61,5 +60,4 @@ class CompetitorPolicy < ApplicationPolicy
       scope.none
     end
   end
-
 end

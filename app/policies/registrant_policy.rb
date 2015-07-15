@@ -1,5 +1,4 @@
 class RegistrantPolicy < ApplicationPolicy
-
   def create?
     (user_record? && !registration_closed?) || super_admin?
   end
@@ -56,5 +55,4 @@ class RegistrantPolicy < ApplicationPolicy
   #     end
   #   end
   # end
-
 end

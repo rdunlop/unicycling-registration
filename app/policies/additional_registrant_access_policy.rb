@@ -1,5 +1,4 @@
 class AdditionalRegistrantAccessPolicy < ApplicationPolicy
-
   def index?
     true
   end
@@ -27,8 +26,6 @@ class AdditionalRegistrantAccessPolicy < ApplicationPolicy
   end
 
   def sign_ups?
-
     director? || event_planner? || super_admin?
   end
-
 end

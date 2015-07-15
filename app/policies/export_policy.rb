@@ -1,5 +1,4 @@
 class ExportPolicy < ApplicationPolicy
-
   def index?
     super_admin?
   end

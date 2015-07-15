@@ -47,5 +47,4 @@ class Admin::CompetitionSongsController < ApplicationController
   def authorize_music_admin
     authorize current_user, :manage_music?
   end
-
 end

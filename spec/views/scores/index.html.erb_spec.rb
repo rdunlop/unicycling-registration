@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "scores/index" do
   before(:each) do
-
     @ec = FactoryGirl.create(:competition)
     @judge = FactoryGirl.create(:judge, competition: @ec)
     assign(:judge, @judge)

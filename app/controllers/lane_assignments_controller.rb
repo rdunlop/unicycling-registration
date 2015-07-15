@@ -167,5 +167,4 @@ class LaneAssignmentsController < ApplicationController
               ActiveSupport::Inflector.transliterate(member.country)]
     end
   end
-
 end

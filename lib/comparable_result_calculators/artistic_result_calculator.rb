@@ -15,7 +15,7 @@ class ArtisticResultCalculator
   end
 
   # returns the result to be displayed for this competitor
-  def competitor_result(competitor)
+  def competitor_result(_competitor)
     nil
   end
 

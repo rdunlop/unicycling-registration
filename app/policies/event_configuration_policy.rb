@@ -1,5 +1,4 @@
 class EventConfigurationPolicy < ApplicationPolicy
-
   # Clear the redis caches
   def manage_cache?
     super_admin?

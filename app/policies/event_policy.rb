@@ -1,5 +1,4 @@
 class EventPolicy < ApplicationPolicy
-
   def sign_ups?
     director?(record) || event_planner? || competition_admin? || super_admin?
   end

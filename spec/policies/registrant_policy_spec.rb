@@ -23,7 +23,6 @@ describe RegistrantPolicy do
     let(:user_context) { UserContext.new(user, false, reg_closed?, authorized_laptop?) }
 
     describe "while registration is open" do
-
       it "allows creation" do
         expect(subject).to permit(user_context, my_registrant)
       end
@@ -106,7 +105,6 @@ describe RegistrantPolicy do
     let(:user_context) { UserContext.new(user, false, reg_closed?, authorized_laptop?) }
 
     describe "while registration is open" do
-
       it "allows updates" do
         expect(subject).to permit(user_context, my_registrant)
       end
@@ -138,5 +136,4 @@ describe RegistrantPolicy do
       end
     end
   end
-
 end

@@ -27,5 +27,4 @@ class ExternalResultImporter
     @errors = invalid
     return false
   end
-
 end

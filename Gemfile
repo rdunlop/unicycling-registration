@@ -37,7 +37,7 @@ gem 'exception_notification'
 gem 'redis-store', git: "git://github.com/rdunlop/redis-store.git" # necessary for lambda namespace (https://github.com/redis-store/redis-store/pull/163)
 gem 'redis-rails'
 gem 'rails_admin'
-gem "rails_admin_pundit", :github => "sudosu/rails_admin_pundit"
+gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
 gem "fog"
 gem 'aws-sdk'
 gem 'http_accept_language'

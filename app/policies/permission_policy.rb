@@ -1,5 +1,4 @@
 class PermissionPolicy < ApplicationPolicy
-
   def index?
     convention_admin? || competition_admin? || super_admin?
   end
@@ -16,5 +15,4 @@ class PermissionPolicy < ApplicationPolicy
   def display_acl?
     convention_admin? || super_admin?
   end
-
 end

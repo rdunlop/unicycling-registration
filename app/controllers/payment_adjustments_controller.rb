@@ -109,7 +109,6 @@ class PaymentAdjustmentsController < ApplicationController
 
   private
 
-
   def authorize_payment_adjustment
     authorize current_user, :manage_old_payment_adjustments?
   end

@@ -26,5 +26,4 @@ class DistanceAttemptFinal_2015_Manager < DistanceAttemptManager
       df
     end
   end
-
 end

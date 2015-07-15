@@ -10,5 +10,4 @@ class CompetitorFinder
     registrant = Registrant.find_by!(bib_number: bib_number)
     registrant.competitors.find_by!(competition: competition)
   end
-
 end

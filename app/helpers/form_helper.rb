@@ -59,8 +59,6 @@ module FormHelper
         if past_step?(every_step)
           class_str = "success"
           li_class_str = nil
-        else
-          #li_class_str = "button secondary disabled"
         end
         concat(
           content_tag(:li, class: li_class_str) do

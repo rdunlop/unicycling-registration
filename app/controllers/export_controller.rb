@@ -177,5 +177,4 @@ class ExportController < ApplicationController
   def authorize_action
     authorize :export
   end
-
 end

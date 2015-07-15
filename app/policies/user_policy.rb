@@ -1,5 +1,4 @@
 class UserPolicy < ApplicationPolicy
-
   def registrants?
     record == user || payment_admin? || event_planner? || super_admin?
   end

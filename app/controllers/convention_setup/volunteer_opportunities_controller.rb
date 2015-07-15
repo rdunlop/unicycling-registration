@@ -6,7 +6,7 @@ class ConventionSetup::VolunteerOpportunitiesController < ConventionSetupControl
   before_action :add_breadcrumbs
 
   def index
-    @volunteer_opportunities= VolunteerOpportunity.all
+    @volunteer_opportunities = VolunteerOpportunity.all
   end
 
   def new

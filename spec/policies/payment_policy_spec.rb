@@ -14,7 +14,6 @@ describe PaymentPolicy do
     let(:user_context) { UserContext.new(user, config, reg_closed?, authorized_laptop?) }
 
     describe "while registration is open" do
-
       it "allows creation" do
         expect(subject).to permit(user_context, my_payment)
       end
@@ -50,7 +49,6 @@ describe PaymentPolicy do
     let(:user_context) { UserContext.new(user, config, reg_closed?, authorized_laptop?) }
 
     describe "while registration is open" do
-
       it "doesn't allow fake_complete" do
         expect(subject).not_to permit(user_context, my_payment)
       end

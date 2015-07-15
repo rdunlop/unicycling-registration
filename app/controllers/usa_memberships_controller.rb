@@ -113,7 +113,7 @@ class UsaMembershipsController < ApplicationController
   end
 
   def load_registrants
-    @registrants = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).includes(:contact_detail => [:usa_family_membership_holder]).active
+    @registrants = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).includes(contact_detail: [:usa_family_membership_holder]).active
   end
 
   def load_family_registrants

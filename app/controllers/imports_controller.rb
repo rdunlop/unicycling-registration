@@ -33,5 +33,4 @@ class ImportsController < ApplicationController
   def authorize_action
     authorize :import
   end
-
 end

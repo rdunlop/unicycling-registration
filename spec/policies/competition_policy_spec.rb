@@ -51,5 +51,4 @@ describe CompetitionPolicy do
       it { expect(subject).not_to permit(@director, competition) }
     end
   end
-
 end

@@ -1,5 +1,4 @@
 class PaymentPolicy < ApplicationPolicy
-
   def index?
     true
   end
@@ -53,5 +52,4 @@ class PaymentPolicy < ApplicationPolicy
       end
     end
   end
-
 end

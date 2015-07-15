@@ -1,5 +1,4 @@
 class RegistrantExpenseItemPolicy < ApplicationPolicy
-
   def create?
     manage? || super_admin?
   end

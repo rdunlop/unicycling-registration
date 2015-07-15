@@ -1,5 +1,4 @@
 class TranslationPolicy < ApplicationPolicy
-
   def index?
     convention_admin? || translator? || super_admin?
   end
