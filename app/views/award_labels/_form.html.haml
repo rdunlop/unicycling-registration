@@ -24,6 +24,6 @@
     .small-1.column= f.text_field :category
     .small-1.column= f.text_field :details
     .small-1.column= f.number_field :place, {min: 0}
-    .small-2.column= f.select :registrant_id, Registrant.select_box_options
+    .small-2.column= all_registrant_competitors(f)
   .row
     .small-12.column= f.button :submit
