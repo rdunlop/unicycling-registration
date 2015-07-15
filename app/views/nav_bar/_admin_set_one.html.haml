@@ -14,7 +14,5 @@
   %li= link_to  'Manage Music', event_songs_path
 - if policy(Payment.new).summary?
   %li= link_to  'Payments', summary_payments_path
-- if policy(@config).setup_convention?
-  %li= link_to 'On-Site Registration', onsite_registration_path
-- if policy(:translation).index?
-  %li= link_to "Translations", translations_path
+- if policy(current_user).registrant_information?
+  %li= link_to  'Registrants (edit/print)', manage_one_registrants_path
