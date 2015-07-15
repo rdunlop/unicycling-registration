@@ -12,13 +12,11 @@
 
     = f.input :custom_waiver_text, placeholder: EventConfiguration.default_waiver_text
 
-  %fieldset.form__fieldset
     %h3 Rules
 
     = f.input :rules_file_name
     = f.input :accept_rules, hint: "Enable this to force all registrants to accept the rules attached in PDF"
 
-  %fieldset.form__fieldset
 
     %h3 Rulebook
 
@@ -28,4 +26,4 @@
       The current IUF Rulebook can be found at:
       = link_to "https://unicycling.org/files/current-iuf-rulebook.pdf", "https://unicycling.org/files/current-iuf-rulebook.pdf"
 
-  = f.button :submit
+    = f.button :submit

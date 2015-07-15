@@ -35,7 +35,7 @@
         = label_tag :role_name, "Role"
         = select_tag :role_name, options_for_select(@available_roles), include_blank: true
         %br
-        = submit_tag "Add Permission"
+        = submit_tag "Add Permission", class: "button"
 
   .l--column
     - if policy(:permission).set_password?
@@ -48,7 +48,7 @@
           = label_tag :password
           = text_field_tag :password
           %br
-          = submit_tag "Set Password"
+          = submit_tag "Set Password", class: "button"
 
 - if policy(@config).setup_competition?
   %div
