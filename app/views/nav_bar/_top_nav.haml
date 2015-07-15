@@ -7,7 +7,6 @@
   %section.top-bar-section
     %ul.left
       = render "nav_bar/my_links"
-
-    %ul.right
-      = render "nav_bar/admin_bar"
       %li= link_to t('.sign_out'), destroy_user_session_path, :method => :delete
+
+= render "nav_bar/admin_bar"
