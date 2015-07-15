@@ -60,6 +60,9 @@ module FormHelper
           class_str = "success"
           li_class_str = nil
         end
+        if allow_navigation
+          li_class_str = nil
+        end
         concat(
           content_tag(:li, class: li_class_str) do
             link_to_if past_step?(every_step) || allow_navigation, I18n.t("wizard.#{every_step}"), wizard_path(every_step), class: "button #{class_str}"

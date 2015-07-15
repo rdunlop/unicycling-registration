@@ -16,3 +16,11 @@
   %li= link_to  'Payments', summary_payments_path
 - if policy(current_user).registrant_information?
   %li= link_to  'Registrants (edit/print)', manage_one_registrants_path
+  %li.has-form
+    = form_tag choose_one_registrants_path, method: :post do
+      .row.collapse
+        .small-4.columns
+          = text_field_tag :bib_number, nil, placeholder: "Reg ID#"
+          = hidden_field_tag :summary, "1"
+        .small-8.columns
+          = submit_tag "Summary", class: "button primary expand"
