@@ -9,7 +9,9 @@ describe 'Entering Points data' do
 
   describe "the event on the page" do
     before :each do
-      click_link "Data Entry"
+      within "#admin_bar" do
+        click_link "Data Entry"
+      end
     end
 
     specify { expect(page).to have_content("Basketball") }
