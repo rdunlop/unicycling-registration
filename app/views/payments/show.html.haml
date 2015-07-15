@@ -2,11 +2,10 @@
 = render :partial => "summary", :locals => {:payment => @payment }
 
 - unless @payment.completed
-  = render partial: 'add_coupon'
-
-  = t(".please_proceed_with_payment")
-  \:
-  %div
+  .row
+    = render partial: 'add_coupon'
+  .row
+    = t(".please_proceed_with_payment")
     - if @payment.total_amount > 0
       = form_tag @payment.paypal_post_url do
         = hidden_field_tag :business, EventConfiguration.singleton.paypal_account

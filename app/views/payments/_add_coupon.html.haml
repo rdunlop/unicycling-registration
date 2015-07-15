@@ -1,9 +1,11 @@
 
 - if CouponCode.any?
-  .coupon_offer
-    .js--hiddenToggleMenu.focus_button= t(".have_a_coupon")
-  .js--hiddenToggle
+  .js--toggle.coupon_offer.focus_button{ href: "#", data: { toggle_target: "#coupon_code_box" } }= t(".have_a_coupon")
+  #coupon_code_box
     = form_tag apply_coupon_payment_path(@payment) do |f|
-      = label_tag :coupon_code, t(".coupon_code")
-      = text_field_tag :coupon_code
-      = submit_tag t(".submit"), class: 'focus_button'
+      .row
+        .small-6.columns
+          = label_tag :coupon_code, t(".coupon_code")
+          = text_field_tag :coupon_code
+        .small-6.columns
+          = submit_tag t(".submit"), class: 'focus_button'

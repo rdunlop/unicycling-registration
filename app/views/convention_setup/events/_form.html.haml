@@ -13,8 +13,8 @@
   = f.input :accepts_music_uploads
   = f.input :accepts_wheel_size_override
 
-  .js--hiddenToggleMenu Advanced Settings
-  .js--hiddenToggle
+  %a{ href: "#", class: "js--toggle", data: { toggle_target: "#advanced_settings" } } Advanced Settings
+  #advanced_settings
 
     = f.input :visible
     = f.input :artistic

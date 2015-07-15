@@ -7,5 +7,6 @@ $ ->
     $(target).hide()
 
     $(this).on "click", ->
-      $(target).show()
+      $(target).toggle()
+      return false;
 
