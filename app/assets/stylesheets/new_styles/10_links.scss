@@ -7,7 +7,7 @@
 }
 
 .access_code_link {
-  @include button(160px);
+  @include button; //(160px);
   background-color: lightgreen;
   color: black;
 
