@@ -11,9 +11,7 @@
   %h2 Print Labels Sheet
   = link_to "Announcer Sheet (pdf)", announcer_sheet_user_award_labels_path(@user, format: :pdf)
   .row
-    .small-6.columns
-      = link_to "Download Normal (Round) Labels", expert_labels_user_award_labels_path(@user), class: "button round"
-    .small-6.columns
+    .small-12.columns
       = form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do
         .row#advanced_square
           .small-6.columns
@@ -23,9 +21,14 @@
             = label_tag :skip_positions, "Skip Positions"
             = number_field_tag :skip_positions, nil, {min: 0}
         .row
+          .small-6.columns
+            Square Labels
+            = submit_tag "Square Labels Avery", name: "label_type", value: "Avery5160padded", :class => "multiclick button round"
+          .small-6.columns
+            Round Labels
+            = submit_tag "Round Labels Avery", name: "label_type", value: "Avery8293", :class => "multiclick button"
+        .row
           .small-12.columns
-            = submit_tag "Square Labels", :class => "multiclick button"
-            %br
             %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_square"} } Advanced Options
   %hr
   %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_labels" } } Show Advanced Options

@@ -393,7 +393,6 @@ Workspace::Application.routes.draw do
         collection do
           post :create_by_competition
           post :create_labels
-          get :expert_labels
           get :normal_labels
           delete :destroy_all
           get :announcer_sheet

@@ -112,41 +112,31 @@ class AwardLabelsController < ApplicationController
     redirect_to user_award_labels_path(@user)
   end
 
+  # Create a PDF of labels
+  # Optionally specify that we should separate the labels by registrant (which results in reordering the results by registrant)
+  # Optionally specify a number of labels to gap on the sheet before printing
+  # optionally specify a different label format
+  #  Default: Avery5160padded
+  #  Options: Avery5293, Avery8293
+  #
   def normal_labels
     separate_registrants = false
     unless params[:separate_registrants].nil?
       separate_registrants = true
     end
 
+    label_type = params[:label_type].presence || "Avery8293"
+
     names = initialize_by_skipped_positions
 
-    names += build_names_from_labels(@user.award_labels.order(:bib_number), separate_registrants)
-
-    Prawn::Labels.types = {
-      "Avery5160padded" => {
-        "paper_size" => "LETTER",
-        "top_margin" => 36,
-        "bottom_margin" => 36,
-        "left_margin" => 15.822,
-        "right_margin" => 15.822,
-        "columns" => 3,
-        "rows" => 10,
-        "column_gutter" => 15,
-        "row_gutter" => 2.5 # added padding
-      }
-    }
-    labels = Prawn::Labels.render(names, type: "Avery5160padded", shrink_to_fit: true) do |pdf, name|
-      pdf.text name, align: :center, valign: :center, inline_format: true
+    if separate_registrants
+      labels = @user.award_labels.order(:bib_number)
+    else
+      labels = @user.award_labels
     end
 
-    send_data labels, filename: "normal-labels-#{Date.today}.pdf"
-  end
+    names += build_names_from_labels(labels, separate_registrants)
 
-  def expert_labels
-    names = []
-    @user.award_labels.each do |label|
-      names << lines_from_award_label(label)
-    end
     Prawn::Labels.types = {
       "Avery5293" => {
         "paper_size" => "LETTER",
@@ -178,16 +168,27 @@ class AwardLabelsController < ApplicationController
         "rows" =>  5,
         "column_gutter" =>  55, # 0.391 "
         "row_gutter" =>  50 # 0.391"
+      },
+      "Avery5160padded" => {
+        "paper_size" => "LETTER",
+        "top_margin" => 36,
+        "bottom_margin" => 36,
+        "left_margin" => 15.822,
+        "right_margin" => 15.822,
+        "columns" => 3,
+        "rows" => 10,
+        "column_gutter" => 15,
+        "row_gutter" => 2.5 # added padding
       }
     }
     # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
     #  and it will wrap lines as necessary, and then shrink the text.
 
-    labels = Prawn::Labels.render(names, type: "Avery8293", shrink_to_fit: true) do |pdf, name|
+    labels = Prawn::Labels.render(names, type: label_type, shrink_to_fit: true) do |pdf, name|
       pdf.text name, align: :center, inline_format: true, valign: :center
     end
 
-    send_data labels, filename: "bag-labels-#{Date.today}.pdf", type: "application/pdf"
+    send_data labels, filename: "labels-#{DateTime.now}.pdf", type: "application/pdf"
   end
 
   def announcer_sheet
