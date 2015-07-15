@@ -1,4 +1,18 @@
+@import "foundation/components/grid";
+// This would make the large grid function like a print grid
 @media print {
+  .full_page {
+    @include grid-row();
+  }
+  .print-4 {
+    width: 30%;
+  }
+
+  fieldset {
+    padding: 0 0 0 0;
+    border: 0;
+  }
+
   .non_printable {
     display: none;
   }

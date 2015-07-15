@@ -81,7 +81,7 @@ class RegistrantsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @registrant }
       format.pdf { render_common_pdf("show", "Landscape") }
     end
