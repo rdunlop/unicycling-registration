@@ -132,7 +132,7 @@ class AwardLabelsController < ApplicationController
     if separate_registrants
       labels = @user.award_labels.order(:bib_number)
     else
-      labels = @user.award_labels
+      labels = @user.award_labels.order(:category, :place)
     end
 
     names += build_names_from_labels(labels, separate_registrants)
