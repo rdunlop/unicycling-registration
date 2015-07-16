@@ -1,3 +1,13 @@
+Providing access to event-sign-up and music-entry forms:
+- EventConfiguration - Music Submission End Date
+- EventConfiguration - Event Modification End Date
+ - If these dates are set, and have not passed, a user can still get at those pages and make changes.
+- NOTE: If the user is sitting at a "Authorized Laptop", these rules are STILL in effect...
+ - QUESTION: what additional access does an "Authorized Laptop" have?
+ - ANSWRER: Allows creation of a new registrant, allows payment, allows addition of expense items.
+
+
+
 ======================================================
 - Remove ":admin" ability from database?
 - Inspect performance of making the (many) .has_role? calls for a user.
@@ -59,10 +69,6 @@ WHEN DOING an Import from CSV, fail the whole import, listing the entries which 
 
 PRiorities as per Scott/Robin Discussion:
 - artistic ineligible dismissed
-- Refunds misc column calc
-- High/Long new Rules about Faults/re-attempts (ie: the Hugo Rules) should be separated
-- 12-attempt High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
- - Perhaps just use the existing UI, but auto-load the last 12 attepmts of that competitor once you have entered the competitor Id.
 ?ask scott? - Country-specific competition/announcement, per competitor/ group?
 - Deal with XXX marks
 

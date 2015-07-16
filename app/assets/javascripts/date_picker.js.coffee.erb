@@ -1,10 +1,8 @@
 $ ->
-  $(".datepicker").datetimepicker(
-    timepicker: false,
-    format: "Y/m/d",
-    defaultDate: '<%= EventConfiguration.singleton.start_date.try(:strftime, "%Y/%m/%d") %>'
-    )
-
-  $(".datetimepicker").datetimepicker({
-    defaultDate: '<%= EventConfiguration.singleton.start_date.try(:strftime, "%Y/%m/%d") %>'
-  })
+  # this needs to be in a loop or else the pickers don't work well on the Important Dates page
+  $(".datepicker").each (_, el) =>
+    $(el).datetimepicker(
+      timepicker: false,
+      format: "Y/m/d",
+      defaultDate: '<%= EventConfiguration.singleton.start_date.try(:strftime, "%Y/%m/%d") %>'
+      )

@@ -145,14 +145,6 @@ class EventConfiguration < ActiveRecord::Base
     self.class.default_waiver_text
   end
 
-  def benefits_list(text)
-    if text
-      text.split("\n")
-    else
-      []
-    end
-  end
-
   def competitor_benefits_list
     benefits_list(competitor_benefits)
   end
@@ -168,12 +160,7 @@ class EventConfiguration < ActiveRecord::Base
   # allows creating competitors during lane assignment
   # (only at NAUCC)
   def can_create_competitors_at_lane_assignment
-    usa
-  end
-
-  def clear_of_blank_strings
-    self.rulebook_url = nil if rulebook_url.blank?
-    self.event_url = nil if event_url.blank?
+    usa?
   end
 
   def self.singleton
@@ -191,34 +178,49 @@ class EventConfiguration < ActiveRecord::Base
     end
   end
 
-  def self.closed?(today = Date.today)
-    last_online_rp = RegistrationPeriod.last_online_period
-
-    if last_online_rp.nil?
-      false
-    else
-      last_online_rp.last_day < today
-    end
+  def self.closed?
+    singleton.registration_closed?
   end
 
-  def standard_skill_closed?(today = Date.today)
-    return false if standard_skill_closed_date.nil?
-    standard_skill_closed_date <= today
+  def registration_closed_date
+    RegistrationPeriod.last_online_period.try(:end_date).try(:+, 1.day)
   end
 
-  def artistic_closed?(today = Date.today)
-    return false if artistic_closed_date.nil?
-    artistic_closed_date < today
+  def effective_standard_skill_closed_date
+    standard_skill_closed_date || registration_closed_date
   end
 
-  def event_sign_up_closed?(today = Date.today)
-    return false if event_sign_up_closed_date.nil?
-    event_sign_up_closed_date < today
+  def effective_artistic_closed_date
+    artistic_closed_date || registration_closed_date
   end
 
-  def music_submission_ended?(today = Date.today)
-    return true if music_submission_end_date.nil?
-    music_submission_end_date <= today
+  def effective_music_submission_end_date
+    music_submission_end_date || registration_closed_date
+  end
+
+  def effective_event_sign_up_closed_date
+    event_sign_up_closed_date || registration_closed_date
+  end
+
+  def registration_closed?
+    # allow 1 day of grace to registration_closed_date
+    is_date_in_the_past?(registration_closed_date)
+  end
+
+  def standard_skill_closed?
+    is_date_in_the_past?(effective_standard_skill_closed_date)
+  end
+
+  def artistic_closed?
+    is_date_in_the_past?(effective_artistic_closed_date)
+  end
+
+  def music_submission_ended?
+    is_date_in_the_past?(music_submission_end_date)
+  end
+
+  def event_sign_up_closed?
+    is_date_in_the_past?(effective_event_sign_up_closed_date)
   end
 
   def self.configuration_exists?
@@ -248,4 +250,25 @@ class EventConfiguration < ActiveRecord::Base
   def self.all_available_languages
     [:en, :fr, :de, :hu]
   end
+
+  private
+
+  def is_date_in_the_past?(date)
+    return false if date.nil?
+    date < Date.today
+  end
+
+  def clear_of_blank_strings
+    self.rulebook_url = nil if rulebook_url.blank?
+    self.event_url = nil if event_url.blank?
+  end
+
+  def benefits_list(text)
+    if text
+      text.split("\n")
+    else
+      []
+    end
+  end
+
 end

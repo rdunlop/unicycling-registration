@@ -1,11 +1,33 @@
 %h1 Important Dates
 
+%p If you do not specify a date, access will end when registration closes.
+
 = simple_form_for(@event_configuration, url: update_important_dates_event_configuration_path, method: :put) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
 
-  %fieldset.form__fieldset
-    = f.input :artistic_closed_date, as: :date_picker
-    = f.input :music_submission_end_date, as: :date_picker, include_blank: true
-    = f.input :event_sign_up_closed_date, as: :date_picker
-    = f.input :start_date, as: :date_picker
-    = f.button :submit
+  .row
+    .small-6.columns
+      %b Important Date Type
+    .small-6.columns
+      %b Effective Final Date
+  .row
+    .small-6.columns
+      = f.input :artistic_closed_date, as: :date_picker
+    .small-6.columns
+      = EventConfiguration.singleton.effective_artistic_closed_date
+  .row
+    .small-6.columns
+      = f.input :music_submission_end_date, as: :date_picker
+    .small-6.columns
+      = EventConfiguration.singleton.effective_music_submission_end_date
+  .row
+    .small-6.columns
+      = f.input :event_sign_up_closed_date, as: :date_picker
+    .small-6.columns
+      = EventConfiguration.singleton.effective_event_sign_up_closed_date
+  .row
+    .small-6.columns.end
+      = f.input :start_date, as: :date_picker
+  .row
+    .small-12.columns
+      = f.button :submit
