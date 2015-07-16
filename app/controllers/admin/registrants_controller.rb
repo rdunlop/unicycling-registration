@@ -22,18 +22,20 @@ class Admin::RegistrantsController < ApplicationController
   # post /registrant/choose_one
   def choose_one
     authorize current_user, :registrant_information?
-    if params[:registrant_id].blank? && params[:bib_number].blank?
-      flash[:error] = "Choose a Registrant"
-      redirect_to manage_one_registrants_path
-      return
-    end
 
+    registrant = nil
     if params[:bib_number].present?
       registrant = Registrant.find_by(bib_number: params[:bib_number])
     end
 
     if params[:registrant_id].present?
       registrant = Registrant.find(params[:registrant_id])
+    end
+
+    if registrant.nil?
+      flash[:error] = "Choose a Registrant"
+      redirect_to :back
+      return
     end
 
     if params[:summary] == "1"
