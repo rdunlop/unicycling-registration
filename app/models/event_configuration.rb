@@ -270,5 +270,4 @@ class EventConfiguration < ActiveRecord::Base
       []
     end
   end
-
 end

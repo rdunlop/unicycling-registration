@@ -59,7 +59,6 @@ class RegistrantPolicy < ApplicationPolicy
   # END WIZARD STEPS
   # ###########################
 
-
   # view the mailing address of a registrant
   def show_contact_details?
     user_record? || user.editable_registrants.include?(record) || super_admin?
