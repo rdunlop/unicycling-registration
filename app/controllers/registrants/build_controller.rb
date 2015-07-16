@@ -9,10 +9,14 @@ class Registrants::BuildController < ApplicationController
   before_action :load_categories, only: [:show, :update, :add_events]
   layout "wizard"
 
-  ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses, :music]
+  ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
 
   def finish_wizard_path
-    registrant_path(@registrant)
+    if @registrant.has_event_with_music_allowed?
+      registrant_songs_path(@registrant)
+    else
+      registrant_path(@registrant)
+    end
   end
 
   # redirect to the first step, or back if no steps are allowed

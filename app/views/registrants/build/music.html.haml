@@ -1,8 +1,0 @@
-= form_for(@registrant, url: wizard_path, method: :put) do |f|
-  %h4 Please submit music for your competitions
-
-  %p You can upload mp3 files for your competition(s) here.
-
-  = link_to "Song Submission System", registrant_songs_path(@registrant), class: "button"
-
-  = render partial: "/registrants/form_actions", locals: {f: f}
