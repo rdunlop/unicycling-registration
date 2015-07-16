@@ -9,16 +9,17 @@
 %aside.left-off-canvas-menu
   %ul.off-canvas-list
     = render "nav_bar/my_links"
-    - if user_signed_in? && current_user.roles.any?
-      %li.has-submenu.admin_bar
-        %a{ href: "#" } Primary Admin Bar
-        %ul.left-submenu.admin_bar
-          %li.back
-            %a{ href: "#" } Back
-          = render "nav_bar/admin_set_one"
-      %li.has-submenu.admin_bar
-        %a{ href: "#" } Secondary Admin Bar
-        %ul.left-submenu.admin_bar
-          %li.back
-            %a{ href: "#" } Back
-          = render "nav_bar/admin_set_two"
+    - cache_i18n ['side_nav_admin_bar', current_user, @config] do
+      - if user_signed_in? && current_user.roles.any?
+        %li.has-submenu.admin_bar
+          %a{ href: "#" } Primary Admin Bar
+          %ul.left-submenu.admin_bar
+            %li.back
+              %a{ href: "#" } Back
+            = render "nav_bar/admin_set_one"
+        %li.has-submenu.admin_bar
+          %a{ href: "#" } Secondary Admin Bar
+          %ul.left-submenu.admin_bar
+            %li.back
+              %a{ href: "#" } Back
+            = render "nav_bar/admin_set_two"
