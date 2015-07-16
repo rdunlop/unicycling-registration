@@ -6,6 +6,7 @@ Providing access to event-sign-up and music-entry forms:
  - QUESTION: what additional access does an "Authorized Laptop" have?
  - ANSWRER: Allows creation of a new registrant, allows payment, allows addition of expense items.
 
+TODO: Handle incomplete registrant after registration is closed...what to do, what to do?
 
 
 ======================================================
