@@ -352,6 +352,10 @@ class Registrant < ActiveRecord::Base
     age < 18
   end
 
+  def has_event_with_music_allowed?
+    events.merge(Event.music_uploadable).any?
+  end
+
   # for displaying on the Registrant#Summary page
   # if this user is signed up for an event category which is now "warning" flagged
   def event_warnings

@@ -12,7 +12,6 @@ class SongsController < ApplicationController
 
   # GET /registrants/1/songs
   def index
-    add_breadcrumb "Songs"
     @song = Song.new
     authorize @song
   end

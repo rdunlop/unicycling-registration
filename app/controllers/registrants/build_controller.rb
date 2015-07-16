@@ -9,7 +9,7 @@ class Registrants::BuildController < ApplicationController
   before_action :load_categories, only: [:show, :update, :add_events]
   layout "wizard"
 
-  ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
+  ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses, :music]
 
   def finish_wizard_path
     registrant_path(@registrant)
@@ -81,7 +81,12 @@ class Registrants::BuildController < ApplicationController
 
   # Set the steps to those which are currently accessible to my user
   def set_steps
-    self.steps = ALL_STEPS.select { |step| policy(@registrant).send("#{step}?") }
+    if @registrant.nil?
+      # when creating a registrant
+      self.steps = ALL_STEPS
+    else
+      self.steps = ALL_STEPS.select { |step| policy(@registrant).send("#{step}?") }
+    end
   end
 
   def registrant_type

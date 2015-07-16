@@ -41,13 +41,19 @@ class RegistrantPolicy < ApplicationPolicy
     update?
   end
 
+  def music?
+    return false unless record.has_event_with_music_allowed?
+    return true if super_admin?
+    (user_record? || shared_editable_record?) && !config.music_submission_ended?
+  end
+
   def wicked_finish?
     true
   end
 
   # is there any action to which I am able to update?
   def update_any_data?
-    add_name? || add_events? || set_wheel_sizes? || add_volunteers? || add_contact_details? || expenses?
+    add_name? || add_events? || set_wheel_sizes? || add_volunteers? || add_contact_details? || expenses? || music?
   end
 
   # can I update any of my registration data?
