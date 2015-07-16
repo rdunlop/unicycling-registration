@@ -54,4 +54,6 @@
     %hr.non_printable
     .non_printable
       = link_to t(".done"), user_registrants_path(current_user), {:class => "registration_button"}
+      - if policy(@registrant).results?
+        = link_to "Results", results_registrant_path(@registrant), class: "button primary alert"
     = render :partial => "/registrants/waiver"
