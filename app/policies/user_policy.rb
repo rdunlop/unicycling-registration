@@ -76,10 +76,10 @@ class UserPolicy < ApplicationPolicy
   private
 
   def event_sign_up_closed?
-    registration_closed? || config.event_sign_up_closed?
+    config.event_sign_up_closed?
   end
 
   def artistic_reg_closed?
-    registration_closed? || config.artistic_closed?
+    config.artistic_closed?
   end
 end

@@ -1,7 +1,9 @@
 - cache [current_user] do
-  - if policy(@registrant).update?
-    .js--showElement{ data: { key: "update_registrant" } }
-  - if policy(RegistrantExpenseItem.new).create?
+  - if policy(@registrant).add_name?
+    .js--showElement{ data: { key: "update_registrant_name" } }
+  - if policy(@registrant).add_events?
+    .js--showElement{ data: { key: "update_registrant_events" } }
+  - if policy(@registrant).expenses?
     .js--showElement{ data: { key: "create_rei" } }
   - if policy(@registrant).payments?
     .js--showElement{ data: { key: "manage_registrant" } }
@@ -23,7 +25,7 @@
     // this partial includes conditional-display logic..do not cache it
     = render :partial => "/registrants/summary"
     - cache_i18n ['edit_link', @registrant] do
-      .edit_link_block.js--showElementTarget{ data: { key: "update_registrant" } }
+      .edit_link_block.js--showElementTarget{ data: { key: "update_registrant_name" } }
         = link_to t(".edit_registration"), registrant_build_path(@registrant, :add_name)
   - cache_i18n ['expenses', @registrant, @registrant.members_cache_key] do
     .small-12.medium-4.columns.print-4
@@ -39,7 +41,7 @@
           = render partial: "/registrants/registrant_unconfirmed_events"
         - else
           = render :partial => "/registrants/registrant_events"
-        .edit_link_block.js--showElementTarget{ data: { key: "update_registrant" } }
+        .edit_link_block.js--showElementTarget{ data: { key: "update_registrant_events" } }
           = link_to t(".edit_events"), registrant_build_path(@registrant, :add_events)
 
   // contains caching

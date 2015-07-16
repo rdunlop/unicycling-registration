@@ -29,8 +29,10 @@
     // # includes 'current_user' because of the 'can? Calls
     - cache_i18n ['index_all.registrant', Registrant, current_user, @config ], expires_in: 1.minute do
       - @registrants.find_each(batch_size: 100) do |registrant|
-        - if policy(registrant).edit?
-          %span.js--showElement{ data: { key: "edit_registrant#{registrant.id}" } }
+        - if policy(registrant).add_events?
+          %span.js--showElement{ data: { key: "edit_registrant_events#{registrant.id}" } }
+        - if policy(registrant).expenses?
+          %span.js--showElement{ data: { key: "edit_registrant_expenses#{registrant.id}" } }
         - if policy(registrant).undelete?
           %span.js--showElement{ data: { key: "undelete#{registrant.id}" } }
         - cache_i18n [registrant, @config] do
@@ -48,8 +50,9 @@
               = link_to "Summary", registrant_path(registrant)
               = link_to "(pdf)", registrant_path(registrant, :format => :pdf)
             %td.non_printable
-              %span.js--showElementTarget{ data: { key: "edit_registrant#{registrant.id}" } }
+              %span.js--showElementTarget{ data: { key: "edit_registrant_events#{registrant.id}" } }
                 = link_to "Events", registrant_build_path(registrant, :add_events)
+              %span.js--showElementTarget{ data: { key: "edit_registrant_expenses#{registrant.id}" } }
                 = link_to "Items", registrant_build_path(registrant, :expenses)
             %td.non_printable
               %span.js--showElementTarget{ data: { key: "undelete#{registrant.id}" } }

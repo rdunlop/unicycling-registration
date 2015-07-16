@@ -98,41 +98,79 @@ describe RegistrantPolicy do
     end
   end
 
-  permissions :update? do
+  describe "within the wizard" do
     let(:reg_closed?) { false }
     let(:authorized_laptop?) { false }
     let(:user) { my_user }
-    let(:user_context) { UserContext.new(user, false, reg_closed?, authorized_laptop?) }
+    let(:event_sign_up_closed?) { false }
+    let(:config) { double(event_sign_up_closed?: event_sign_up_closed?) }
+    let(:user_context) { UserContext.new(user, config, reg_closed?, authorized_laptop?) }
 
-    describe "while registration is open" do
-      it "allows updates" do
-        expect(subject).to permit(user_context, my_registrant)
+    permissions :add_events? do
+      describe "while registration is open" do
+        describe "for a non-competitor" do
+          it { expect(subject).not_to permit(user_context, FactoryGirl.create(:noncompetitor)) }
+        end
+
+        describe "for a competitor" do
+          it { expect(subject).not_to permit(user_context, FactoryGirl.create(:noncompetitor)) }
+        end
       end
 
-      describe "as a super_admin" do
-        let(:user) { FactoryGirl.create(:super_admin_user) }
+      describe "when registration is closed" do
+        let(:reg_closed?) { true }
+        let(:event_sign_up_closed?) { true }
 
-        it { expect(subject).to permit(user_context, my_registrant) }
+        describe "on a normal laptop" do
+          it { expect(subject).not_to permit(user_context, my_registrant) }
+        end
+
+        describe "on an authorized laptop" do
+          let(:authorized_laptop?) { true }
+
+          it { expect(subject).not_to permit(user_context, my_registrant) }
+        end
+
+        describe "as a super_admin" do
+          let(:user) { FactoryGirl.create(:super_admin_user) }
+
+          it { expect(subject).to permit(user_context, my_registrant) }
+        end
+      end
+
+      describe "when registration is closed, but event_sign_up is open" do
+        let(:reg_closed?) { true }
+        let(:event_sign_up_closed?) { false }
+
+        describe "on a normal laptop" do
+          it { expect(subject).to permit(user_context, my_registrant) }
+        end
+
+        describe "on an authorized laptop" do
+          let(:authorized_laptop?) { true }
+
+          it { expect(subject).to permit(user_context, my_registrant) }
+        end
+
+        describe "as a super_admin" do
+          let(:user) { FactoryGirl.create(:super_admin_user) }
+
+          it { expect(subject).to permit(user_context, my_registrant) }
+        end
       end
     end
 
-    describe "when registration is closed" do
-      let(:reg_closed?) { true }
-
-      describe "on a normal laptop" do
-        it { expect(subject).not_to permit(user_context, my_registrant) }
+    permissions :set_wheel_sizes? do
+      before do
+        FactoryGirl.create(:event_configuration, start_date: Date.today)
       end
 
-      describe "on an authorized laptop" do
-        let(:authorized_laptop?) { true }
-
-        it { expect(subject).to permit(user_context, my_registrant) }
+      describe "for an adult" do
+        it { expect(subject).not_to permit(user_context, FactoryGirl.create(:minor_competitor, user: my_user, birthday: 11.years.ago)) }
       end
 
-      describe "as a super_admin" do
-        let(:user) { FactoryGirl.create(:super_admin_user) }
-
-        it { expect(subject).to permit(user_context, my_registrant) }
+      describe "for a child" do
+        it { expect(subject).to permit(user_context, FactoryGirl.create(:minor_competitor, user: my_user, birthday: 8.years.ago)) }
       end
     end
   end

@@ -275,7 +275,7 @@ Workspace::Application.routes.draw do
     end
 
     resources :registrants, only: [:show, :destroy] do
-      resources :build, controller: 'registrants/build', only: [:show, :update, :create]
+      resources :build, controller: 'registrants/build', only: [:index, :show, :update, :create]
 
       # normal user
       collection do
