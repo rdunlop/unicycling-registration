@@ -295,9 +295,8 @@ class Competitor < ActiveRecord::Base
       if members.empty?
         "(No registrants)"
       else
-        states = members.map(&:state).uniq.compact
         # display all states if there are more than 1 registrants
-        states.join(",") unless states.empty?
+        members.map(&:state).uniq.compact.join(", ")
       end
     end
   end

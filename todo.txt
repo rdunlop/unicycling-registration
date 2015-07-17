@@ -41,6 +41,8 @@ TODO: Check caching in general.
 - There are times when we need to determine overall, but we don't award it. (like 100m, where the overall is used to determine the experts candidates)
 
 
+- LATE Registrant is unable to create a new Competitor registrant (there is no current registration period?)
+
 - Need to ONLY show results which are for "Awarded" Competitions
 ======================================================================================
 
