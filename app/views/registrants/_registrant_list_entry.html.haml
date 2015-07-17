@@ -19,3 +19,6 @@
       = link_to t(".legal_waiver", first_name: registrant.first_name), waiver_registrant_path(registrant, format: 'pdf'), { class: "print_waiver_link", target: "_blank" }
       %br
     = render partial: "registrant_total_owing", locals: { registrant: registrant }
+    - if registrant.events_with_music_allowed.any? && policy(Song.new).create?
+      .edit_link_block
+        = link_to "Upload music", registrant_songs_path(registrant), class: "button tiny"
