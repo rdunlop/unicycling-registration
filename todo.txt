@@ -7,7 +7,9 @@ Providing access to event-sign-up and music-entry forms:
  - ANSWRER: Allows creation of a new registrant, allows payment, allows addition of expense items.
 
 TODO: Handle incomplete registrant after registration is closed...what to do, what to do?
-
+TODO: Spin up and suspend a backup server (including new redis)
+TODO: check caching using the new pundit service.
+TODO: Check caching in general.
 
 ======================================================
 - Remove ":admin" ability from database?

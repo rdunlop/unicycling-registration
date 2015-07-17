@@ -76,6 +76,10 @@ class ApplicationPolicy
 
   private
 
+  def late_registrant?
+    user.has_role?(:late_registrant)
+  end
+
   def data_entry_volunteer?
     user.has_role?(:data_entry_volunteer)
   end
@@ -121,7 +125,8 @@ class ApplicationPolicy
   end
 
   def registration_closed?
-    reg_closed && !authorized_laptop
+    # Allows to modify your own records as long as you're a `late_registrant` or registration is still open
+    reg_closed && !authorized_laptop && !late_registrant?
   end
 
   def scope

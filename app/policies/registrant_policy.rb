@@ -52,7 +52,8 @@ class RegistrantPolicy < ApplicationPolicy
 
   # can I update any of my registration data?
   def update?
-    event_planner? || ((user_record? || shared_editable_record?) && !registration_closed?) || super_admin?
+    return true if event_planner? || super_admin?
+    (user_record? || shared_editable_record?) && !registration_closed?
   end
 
   # ###########################

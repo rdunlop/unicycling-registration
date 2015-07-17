@@ -77,7 +77,8 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :competition_admin, :payment_admin, :membership_admin, :convention_admin, :super_admin]
+    [:late_registrant, :music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator,
+      :membership_admin, :competition_admin, :payment_admin, :convention_admin, :super_admin]
   end
 
   # List which roles each roles can add to other users
@@ -87,7 +88,7 @@ class User < ActiveRecord::Base
       convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin],
       competition_admin: [:competition_admin, :awards_admin],
       director: [:data_entry_volunteer],
-      payment_admin: [:payment_admin],
+      payment_admin: [:payment_admin, :late_registrant],
       event_planner: [:event_planner],
       music_dj: [:music_dj]
     }
@@ -164,6 +165,11 @@ class User < ActiveRecord::Base
       "[e.g. Olaf]
       Able to access the translation menu.
       Enter new translations, and apply them to the site"
+    when :late_registrant
+      "Able to access the registration system even after the registration period has closed.
+      Able to Create new registrants, update existing registrants, and make payments.
+      You should use this along with the SetRegFee function, to specify the fee they are to be charged.
+      "
     else
       "No Description Available"
     end
