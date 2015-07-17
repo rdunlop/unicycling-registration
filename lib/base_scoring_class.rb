@@ -37,6 +37,10 @@ class BaseScoringClass
     false
   end
 
+  def uses_volunteers
+    false
+  end
+
   def results_path
     nil
   end

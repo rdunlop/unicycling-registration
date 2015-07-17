@@ -18,7 +18,7 @@
         %tr
           %td= competition_wheel_size.event
           %td= competition_wheel_size.wheel_size
-          %td= link_to 'Delete', competition_wheel_size, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete'
+          %td= link_to 'Delete', registrant_competition_wheel_size_path(@registrant, competition_wheel_size), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete'
 
 %hr
 

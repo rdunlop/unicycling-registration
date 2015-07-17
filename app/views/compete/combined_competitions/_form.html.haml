@@ -1,4 +1,4 @@
-= form_for(@combined_competition) do |f|
+= simple_form_for(@combined_competition) do |f|
   = render partial: "shared/error_messages", object: @combined_competition
   .field
     = f.label :name
@@ -13,4 +13,4 @@
     %br
     = f.check_box :percentage_based_calculations
   .actions
-    = f.submit
+    = f.button :submit

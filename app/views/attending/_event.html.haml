@@ -1,5 +1,5 @@
 - @registrant = registrant
-%tr{:class => "event #{cannot?(:create_artistic, Registrant) && event.artistic? ? 'disabled_event' : ''}"}
+%tr{:class => "event #{!policy(current_user).add_artistic_events? && event.artistic? ? 'disabled_event' : ''}"}
   - found_resu = nil
   - @registrant.registrant_event_sign_ups.each do |resu|
     - if resu.event_id == event.id

@@ -1,0 +1,26 @@
+- if policy(current_user).view_data_entry_menu?
+  %li= link_to 'Data Entry', welcome_data_entry_menu_path
+- if policy(@config).setup_convention?
+  %li= link_to 'Convention Setup', convention_setup_path
+- if policy(:permission).index?
+  %li= link_to 'User Management',  permissions_path
+- if policy(Event.new).summary?
+  %li= link_to  'Registration Overview', summary_events_path
+- if policy(@config).setup_competition?
+  %li= link_to 'Competition Overview', competition_setup_path
+- if policy(current_user).manage_awards?
+  %li= link_to  'Print/Create Awards', user_award_labels_path(current_user)
+- if policy(current_user).manage_music?
+  %li= link_to  'Manage Music', event_songs_path
+- if policy(Payment.new).summary?
+  %li= link_to  'Payments', summary_payments_path
+- if policy(current_user).registrant_information?
+  %li= link_to  'Registrants (edit/print)', manage_one_registrants_path
+  %li.has-form
+    = form_tag choose_one_registrants_path, method: :post do
+      .row.collapse
+        .small-4.columns
+          = text_field_tag :bib_number, nil, placeholder: "Reg ID#"
+          = hidden_field_tag :summary, "1"
+        .small-8.columns
+          = submit_tag "Summary", class: "button primary expand"

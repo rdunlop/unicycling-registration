@@ -1,18 +1,8 @@
-= form_for(@import_result.new_record? ? [@user, @competition, @import_result] : [@import_result], |
+= simple_form_for(@import_result.new_record? ? [@user, @competition, @import_result] : [@import_result], |
   {:remote => true, :html => {:class => "data_entry"}}) do |f|                                    |
   = render partial: "/shared/error_messages", object: @import_result
   = f.hidden_field :is_start_time
 
-  - cache ['description', @competition] do
-    - if @competition.imports_points?
-      %p.detailsDescription
-        The Points are used to calculate the result. The Details will be printed on the medals.
-        %br
-        %b Example:
-        %br
-        Points: 5
-        %br
-        Details: 5pts
   %table.import_results
     - cache ['header', @competition] do
       %thead
@@ -20,39 +10,28 @@
           %th ID
           %th Name
           %th Competitor Exists?
-          - if @competition.imports_times?
-            %th Minutes
-            %th Seconds
-            %th Thousands
-            - if @competition.has_penalty?
-              %th Penalties
-          - else
-            %th Points
-            %th Details
+          %th Minutes
+          %th Seconds
+          %th Thousands
+          - if @competition.has_penalty?
+            %th Penalties
           %th Disqualified
           %th
           %th
     %tbody
-      - if @competition.imports_times?
-        = render partial: 'imported_time_result', collection: @import_results, as: :import_result
-      - else
-        = render partial: 'imported_points_result', collection: @import_results, as: :import_result
+      = render partial: 'imported_time_result', collection: @import_results, as: :import_result
 
 
     %tfoot
       %tr
         %td{ colspan: 2}= registrant_bib_number_select_box(f, @competition)
         %td
-        - if @competition.imports_times?
-          %td= f.number_field :minutes, {:min => 0}
-          %td= f.number_field :seconds, {:min => 0}
-          %td= f.number_field :thousands, {:min => 0}
-          - if @competition.has_penalty?
-            %td= f.number_field :number_of_penalties
-        - else
-          %td= f.number_field :points, {min: 0, step: 0.1}
-          %td= f.text_field :details, placeholder: "blank => \"Xpts\""
+        %td= f.number_field :minutes, {:min => 0}
+        %td= f.number_field :seconds, {:min => 0}
+        %td= f.number_field :thousands, {:min => 0}
+        - if @competition.has_penalty?
+          %td= f.number_field :number_of_penalties
         %td= f.select :status, TimeResult.status_values, include_blank: true
-        %td{ colspan: "2"}= f.submit "Submit", :class => "multiclick"
+        %td{ colspan: "2"}= f.button :submit, "Submit", :class => "multiclick"
 
 #notice

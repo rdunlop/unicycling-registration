@@ -1,5 +1,5 @@
 %h1= @competition
-- if can? :update, @competition
+- if policy(@competition).update?
   = link_to 'Edit', edit_competition_path(@competition)
   = @competition.event_class
 

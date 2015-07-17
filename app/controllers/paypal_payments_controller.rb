@@ -1,5 +1,5 @@
 class PaypalPaymentsController < ApplicationController
-  skip_authorization_check
+  before_action :skip_authorization
   skip_before_action :verify_authenticity_token
 
   # PayPal notification endpoint

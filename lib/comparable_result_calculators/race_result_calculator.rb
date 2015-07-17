@@ -13,19 +13,19 @@ class RaceResultCalculator
 
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.time_results.any?
+    competitor.finish_time_results.any?
   end
 
   # returns the result for this competitor
   def competitor_result(competitor)
-    if competitor.has_result?
+    if competitor.has_result? && !competitor.disqualified?
       TimeResultPresenter.new(competitor.best_time_in_thousands).full_time
     end
   end
 
   # returns the result for this competitor
   def competitor_comparable_result(competitor)
-    if competitor.has_result?
+    if competitor.has_result? && !competitor.disqualified?
       competitor.best_time_in_thousands
     else
       0

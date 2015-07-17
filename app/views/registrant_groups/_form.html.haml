@@ -1,5 +1,5 @@
 %h2 All Registrants
-= form_for(setup_registrant_group(@registrant_group)) do |f|
+= simple_form_for(setup_registrant_group(@registrant_group)) do |f|
   - if @registrant_group.errors.any?
     #error_explanation
       %h2
@@ -43,4 +43,4 @@
           %td= ff.object.registrant.registrant_groups.to_a.join(" ")
   %br
   .actions
-    = f.submit
+    = f.button :submit

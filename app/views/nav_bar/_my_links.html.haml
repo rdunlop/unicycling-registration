@@ -1,0 +1,11 @@
+- if !user_signed_in?
+  %li= link_to t(".log_in"), new_user_session_path
+- else
+  %li= link_to t('.my_registrations'), user_registrants_path(current_user)
+  %li= link_to t('.my_payments'), user_payments_path(current_user)
+  - if @config.standard_skill
+    %li= link_to t(".my_standard_skill_routines"), standard_skill_routines_path
+  %li= link_to t('.all_registrants'), all_registrants_path
+  - if Competition.any?
+    %li= link_to t('.results'), results_path
+  %li= link_to t('.my_account'), edit_user_registration_path

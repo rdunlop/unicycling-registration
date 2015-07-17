@@ -6,54 +6,70 @@
     = select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:name), "id", "to_s"), :include_blank => true, class: 'chosen-select'
     %br
     %br
-    = submit_tag "Create Labels for Selected Competition"
+    = submit_tag "Create Labels for Selected Competition", class: "button success"
   %hr
   %h2 Print Labels Sheet
-  = link_to "Normal (Round) Labels", expert_labels_user_award_labels_path(@user)
-  %br
-  = link_to "Announcer Sheet", announcer_sheet_user_award_labels_path(@user, format: :pdf)
-  %br
-  %br
+  = link_to "Announcer Sheet (pdf)", announcer_sheet_user_award_labels_path(@user, format: :pdf)
+  .row
+    .small-12.columns
+      = form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do
+        .row#advanced_square
+          .small-6.columns
+            = label_tag :separate_registrants, "Separate each registrant with a row of blank labels"
+            = check_box_tag :separate_registrants
+          .small-6.columns
+            = label_tag :skip_positions, "Skip Positions"
+            = number_field_tag :skip_positions, nil, {min: 0}
+        .row
+          .small-6.columns
+            Square Labels
+            = submit_tag "Square Labels Avery", name: "label_type", value: "Avery5160padded", :class => "multiclick button"
+          .small-6.columns
+            Round Labels
+            = submit_tag "Round Labels Avery", name: "label_type", value: "Avery8293", :class => "multiclick button round"
+        .row
+          .small-12.columns
+            %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_square"} } Advanced Options
   %hr
-  = form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do
-    = check_box_tag :separate_registrants
-    = label_tag :separate_registrants, "Separate each registrant with a row of blank labels"
-    %br
-    = number_field_tag :skip_positions, nil, {min: 0}
-    = label_tag :skip_positions, "Skip Positions"
-    %br
-    = submit_tag "Square Labels", :class => "multiclick"
-  %hr
-  %a.js--hiddenToggleMenu Show Advanced Options
-.js--hiddenToggle
+  %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_labels" } } Show Advanced Options
+#advanced_labels
   %h2 Create Labels For a specific Registrant/Registrant-Group/Competition
   = form_tag(create_labels_user_award_labels_path(@user), {:method => :post}) do
-    = label_tag :registrant_id, "Single Registrant"
-    = select_tag :registrant_id, options_for_select(Registrant.select_box_options), {:include_blank => true, class: 'chosen-select'}
-    %br
-    = label_tag :registrant_group_id, "Registrant Group"
-    = select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name), "id", "to_s"), :include_blank => true
-    %br
-    = label_tag :competition_id, "Competition"
-    = select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name), "id", "to_s"), :include_blank => true
-    %br
-    %br
-    = label_tag :minimum_place, "Minimum Award Place"
-    = number_field_tag :minimum_place, nil, {min: 0}
-    %br
-    = label_tag :maximum_place, "Maximum Award Place"
-    = number_field_tag :maximum_place, nil, {min: 0}
-    %br
-    = label_tag :age_groups, "Age Groups Labels"
-    = check_box_tag :age_groups, {}, :checked => true
-    %br
-    = label_tag :experts, "Experts Labels"
-    = check_box_tag :experts, {}, :checked => true
-    %br
-    = submit_tag "Create Labels for Selected Registrant(s) or Competition"
+    .row
+      .small-12.columns
+        %h3 Who to create labels for?
+    .row
+      .small-4.columns
+        = label_tag :registrant_id, "Single Registrant"
+        = select_tag :registrant_id, options_for_select(Registrant.select_box_options), {:include_blank => true, class: 'chosen-select'}
+      .small-4.columns
+        = label_tag :registrant_group_id, "Registrant Group"
+        = select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name), "id", "to_s"), :include_blank => true
+      .small-4.columns
+        = label_tag :competition_id, "Competition"
+        = select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:event_id, :name), "id", "to_s"), :include_blank => true
+    .row
+      .small-12.columns
+        %h3 Which Labels to create?
+    .row
+      .small-2.columns
+        = label_tag :minimum_place, "Minimum Award Place"
+        = number_field_tag :minimum_place, nil, {min: 0}
+      .small-2.columns
+        = label_tag :maximum_place, "Maximum Award Place"
+        = number_field_tag :maximum_place, nil, {min: 0}
+      .small-4.columns
+        = label_tag :age_groups, "Age Groups Labels"
+        = check_box_tag :age_groups, {}, :checked => true
+      .small-4.columns
+        = label_tag :experts, "Experts Labels"
+        = check_box_tag :experts, {}, :checked => true
+    .row
+      .small-12.columns
+        = submit_tag "Create Labels for Selected Registrant(s) or Competition", class: "button"
 %hr
 = form_tag(destroy_all_user_award_labels_path(@user), {:method => :delete, :multipart=>true}) do
-  = submit_tag "Clear Table", data: { :confirm => "DELETE. Are you sure?"}, :class => "awards_delete"
+  = submit_tag "Clear Table", data: { :confirm => "DELETE. Are you sure?"}, :class => "tiny alert button"
 %table.sortable.award_labels
   %thead
     %tr

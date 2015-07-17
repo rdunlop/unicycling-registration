@@ -2,10 +2,12 @@ require 'csv'
 
 class StandardSkillEntriesController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :authorize_user
 
   # GET /standard_skill_entries
   def index
+    # This should be visible to "all" (even not-logged in)
+    @standard_skill_entries = StandardSkillEntry.all
   end
 
   # GET /standard_skill_entries/upload_file
@@ -36,5 +38,11 @@ class StandardSkillEntriesController < ApplicationController
     end
     flash[:notice] = "CSV Import Successful,  #{n} new records added to data base"
     redirect_to standard_skill_entries_path
+  end
+
+  private
+
+  def authorize_user
+    authorize current_user, :under_development?
   end
 end

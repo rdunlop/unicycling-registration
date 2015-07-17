@@ -2,19 +2,37 @@ class Registrants::BuildController < ApplicationController
   include Wicked::Wizard
   before_action :authenticate_user!
 
-  load_resource :registrant, find_by: :bib_number, except: [:index, :create]
+  before_action :load_registrant_by_bib_number, except: [:create]
   before_action :set_steps
   before_action :setup_wizard
-  authorize_resource :registrant
 
   before_action :load_categories, only: [:show, :update, :add_events]
   layout "wizard"
 
+  ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
+
   def finish_wizard_path
-    registrant_path(@registrant)
+    if @registrant.events_with_music_allowed.any? && policy(Song.new).create?
+      registrant_songs_path(@registrant)
+    else
+      registrant_path(@registrant)
+    end
+  end
+
+  # redirect to the first step, or back if no steps are allowed
+  def index
+    skip_authorization
+    if steps.any?
+      redirect_to registrant_build_path(@registrant, steps.first)
+    else
+      flash[:alert] = "Unable to Update any Registrant pages"
+      redirect_to :back
+    end
   end
 
   def show
+    authorize @registrant, "#{wizard_value(step)}?".to_sym
+
     case wizard_value(step)
     when :add_name
     when :add_events
@@ -26,8 +44,7 @@ class Registrants::BuildController < ApplicationController
   end
 
   def update
-    # this is so that we have a clearer ability.rb specification
-    authorize! :update, @registrant
+    authorize @registrant, "#{wizard_value(step)}?".to_sym
     case wizard_value(step)
     when :add_name
       @registrant.status = "base_details" if @registrant.status == "blank"
@@ -47,6 +64,8 @@ class Registrants::BuildController < ApplicationController
   def create
     @registrant = Registrant.new(registrant_params)
     @registrant.user = current_user
+    authorize @registrant
+
     @registrant.status = "base_details"
     if @registrant.save
       # drop into the second step
@@ -60,15 +79,17 @@ class Registrants::BuildController < ApplicationController
 
   private
 
+  def load_registrant_by_bib_number
+    @registrant = Registrant.find_by(bib_number: params[:registrant_id])
+  end
+
+  # Set the steps to those which are currently accessible to my user
   def set_steps
-    if @registrant.nil? || @registrant.competitor
-      if @registrant.try(:age) && @registrant.age <= 10
-        self.steps = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
-      else
-        self.steps = [:add_name, :add_events, :add_volunteers, :add_contact_details, :expenses]
-      end
+    if @registrant.nil?
+      # when creating a registrant
+      self.steps = ALL_STEPS
     else
-      self.steps = [:add_name, :add_volunteers, :add_contact_details, :expenses]
+      self.steps = ALL_STEPS.select { |step| policy(@registrant).send("#{step}?") }
     end
   end
 
@@ -110,7 +131,7 @@ class Registrants::BuildController < ApplicationController
 
   def clear_artistic_data!(original_params)
     # XXX Only do this if I'm not an admin-level person
-    return original_params if can? :create_artistic, Registrant
+    return original_params if policy(current_user).add_artistic_events?
     artistic_event_ids = Event.artistic.map(&:id)
     return original_params unless original_params['registrant_event_sign_ups_attributes']
     original_params['registrant_event_sign_ups_attributes'].each do |key, value|
@@ -127,17 +148,20 @@ class Registrants::BuildController < ApplicationController
     reg.registrant_event_sign_ups.where(event_id: event_id).first.try(:signed_up?)
   end
 
+  # OLD CODE, which used to allow users to drop events, but not add events
+  # CURRENTLY disabled, as I don't know whether this is needed
   def clear_events_data!(original_params)
-    return original_params if can? :add_events, Registrant
-    return original_params unless original_params['registrant_event_sign_ups_attributes']
-    original_params['registrant_event_sign_ups_attributes'].each do |key, value|
-      event_id = value['event_id'].to_i
-      signed_up = value['signed_up'] == "1"
-      if !registrant_is_already_signed_up(@registrant, event_id) && signed_up
-        flash[:alert] = "Addition of Events is disabled. #{Event.find(event_id)}"
-        original_params['registrant_event_sign_ups_attributes'].delete(key)
-      end
-    end
     original_params
+    # return original_params if policy(current_user).add_events?
+    # return original_params unless original_params['registrant_event_sign_ups_attributes']
+    # original_params['registrant_event_sign_ups_attributes'].each do |key, value|
+    #   event_id = value['event_id'].to_i
+    #   signed_up = value['signed_up'] == "1"
+    #   if !registrant_is_already_signed_up(@registrant, event_id) && signed_up
+    #     flash[:alert] = "Addition of Events is disabled. #{Event.find(event_id)}"
+    #     original_params['registrant_event_sign_ups_attributes'].delete(key)
+    #   end
+    # end
+    # original_params
   end
 end

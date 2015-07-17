@@ -1,12 +1,11 @@
-
-- if can? :admin_view, ExpenseItem
+- if policy(current_user).manage_all_payments?
   - @groups = ExpenseGroup.admin_visible
 - else
   - @groups = ExpenseGroup.visible
 
-.new_expenses
+.new_expenses.row
   - @groups.includes(:expense_items).each do |expense_group|
-    %fieldset.data_block
+    %fieldset.small-12.medium-6.large-4.columns
       %legend= t(".add", group_name: expense_group)
       %table
         - unless expense_group.info_url.blank?

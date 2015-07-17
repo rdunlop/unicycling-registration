@@ -1,12 +1,11 @@
 - if user_signed_in? && @config.test_mode?
-  .test_mode
-    %a#test_mode_remover.banner_remover{"data-banner-class" => "test_mode", :href => "#", :title => "Remove test banner"} [x]
+  .alert-box.alert.top_banner{ data: { alert: true } }
     %h2 Test Mode Enabled
-    %span
+    %div
       Current User Roles: #{current_user.roles.map{|role| role.name.humanize}.join(", ")}
-    .span.js--hiddenToggleMenu
-      Change Role
-    .js--hiddenToggle
+    %div
+      = link_to "Change Role", "#", class: "js--toggle", data: { toggle_target: "#set_roles"}
+    %ul#set_roles
       - User.roles.each do |role|
-        = link_to "Toggle #{role.to_s.humanize} Role", test_mode_role_event_configuration_path(role: role), :method => :post
-        %br
+        %li= link_to "Toggle #{role.to_s.humanize} Role", test_mode_role_event_configuration_path(role: role), :method => :post
+    %a.close{ href: "#" } &times;

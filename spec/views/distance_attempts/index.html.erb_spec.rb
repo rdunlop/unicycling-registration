@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "distance_attempts/index" do
   before(:each) do
-    @ec = FactoryGirl.create(:competition)
+    @ec = FactoryGirl.create(:distance_competition)
     assign(:competition, @ec)
 
     @comp1 = FactoryGirl.create(:event_competitor, competition: @ec)

@@ -24,5 +24,5 @@
       %p
         %b= t(".default_wheel_size")
         = @registrant.default_wheel_size
-  - if can? :read_contact_info, @registrant
+  - if policy(@registrant).show_contact_details?
     = render :partial => "/registrants/contact_summary", locals: { :contact_detail => @registrant.contact_detail }

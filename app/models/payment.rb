@@ -144,6 +144,14 @@ class Payment < ActiveRecord::Base
     payment_details.reduce(0) { |memo, pd| memo + pd.cost }.to_f
   end
 
+  def self.total_non_refunded_amount
+    total = 0
+    PaymentDetail.refunded.includes(:payment).each do |payment_detail|
+      total += payment_detail.cost
+    end
+    total
+  end
+
   def self.total_received
     total = 0
     Payment.includes(payment_details: [:refund_detail]).completed.each do |payment|

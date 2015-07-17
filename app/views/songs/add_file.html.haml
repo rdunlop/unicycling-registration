@@ -5,6 +5,7 @@
 %fieldset.wizard.wizard_other_step
   %legend= t(".step_1")
   = t(".step_1_description")
+
 %fieldset.wizard
   %legend= t(".step_2")
   = t(".upload_music_file")
@@ -16,6 +17,9 @@
       = t(".max_file_size", size_mb: 40)
       %br
     = f.file_field :song_file_name
-    = f.submit t(".upload")
+    = f.submit t(".upload"), class: "button"
 %br
 = link_to t("back"), registrant_songs_path(@song.registrant)
+
+%hr
+= link_to "#{@song.registrant} Summary", registrant_path(@song.registrant), class: "button secondary"

@@ -2,11 +2,10 @@
 = render :partial => "summary", :locals => {:payment => @payment }
 
 - unless @payment.completed
-  = render partial: 'add_coupon'
-
-  = t(".please_proceed_with_payment")
-  \:
-  %div
+  .row
+    = render partial: 'add_coupon'
+  .row
+    = t(".please_proceed_with_payment")
     - if @payment.total_amount > 0
       = form_tag @payment.paypal_post_url do
         = hidden_field_tag :business, EventConfiguration.singleton.paypal_account
@@ -30,8 +29,7 @@
     - else
       = form_tag complete_payment_path(@payment) do
         = submit_tag "Complete Payment", class: "payment_link registration_button"
-  - if @config.test_mode?
-    .test_mode
-      = link_to "Pretend to pay by credit card #{print_formatted_currency(@payment.total_amount)}", fake_complete_payment_path(@payment), :method => :post
+    - if @config.test_mode?
+      = link_to "Pretend to pay by credit card #{print_formatted_currency(@payment.total_amount)}", fake_complete_payment_path(@payment), :method => :post, class: "button warning"
 
 = link_to t('back'), user_payments_path(current_user)

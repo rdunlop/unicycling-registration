@@ -2,8 +2,11 @@
 %h1 Heat-Data Import
 
 = form_tag(import_lif_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
-    = label_tag :heat, "Heat"
-    = text_field_tag "heat", @heat#, required: true
-    %br
-    = file_field_tag "file", required: true
-    = submit_tag "Load LIF to Temp Table"
+  .row
+    .small-4.columns
+      = label_tag :heat, "Heat"
+      = text_field_tag "heat", @heat#, required: true
+    .small-4.columns
+      = file_field_tag "file", required: true
+    .small-4.columns
+      = submit_tag "Load LIF to Temp Table", class: "button"

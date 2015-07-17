@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require chosen-jquery
 //= require fancybox
 //= require jquery.nested-fields
@@ -19,13 +20,6 @@
 //= require tinymce
 //= require jquery.datetimepicker
 //= require_tree .
-
-$(document).ready(function() {
-  $(document).on("click", ".banner_remover", function() {
-    $("." + $(this).data("banner-class")).remove();
-    return false;
-  });
-});
 
 $(document).ready(function () {
   if (!$('input').hasClass("multiclick")) {
@@ -38,7 +32,7 @@ $(document).ready(function () {
 
 $(document).ready(function() {
   // this conflicts with using a password manager on the log-in page
-  $('form').not(".new_user").areYouSure();
+  $('form').not(".no_dirty_check").areYouSure();
 });
 
 /* Generic sorting dataTable */
@@ -126,3 +120,5 @@ $(function() {
     $(this).attr('title', 'Not Qualified');
   });
 });
+
+$(function(){ $(document).foundation(); });

@@ -12,7 +12,7 @@ describe "registrant_expense_items/_new_expenses" do
     @item4 = FactoryGirl.build_stubbed(:expense_item, expense_group: @group2)
     allow(@group2).to receive(:expense_items).and_return([@item3, @item4])
 
-    expect(ExpenseGroup).to receive_message_chain(:visible, :includes).and_return([@group])
+    expect(ExpenseGroup).to receive_message_chain(:admin_visible, :includes).and_return([@group])
     @registrant = FactoryGirl.build_stubbed(:competitor)
   end
 

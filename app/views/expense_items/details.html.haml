@@ -1,7 +1,7 @@
 %h1 Listing Payment Details for #{@expense_item}
 
 - cache [PaymentDetail.cache_key_for_set(@expense_item.id), CouponCode.cache_key] do
-  %h3 Paid Items (no discount)
+  %h3 Paid Items
   %table.sortable
     %thead
       %tr

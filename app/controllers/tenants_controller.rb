@@ -1,6 +1,5 @@
 class TenantsController < ApplicationController
-  skip_authorization_check
-  load_resource only: :create
+  before_action :skip_authorization
   layout "global"
 
   def index

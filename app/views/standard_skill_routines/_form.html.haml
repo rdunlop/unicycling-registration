@@ -1,5 +1,5 @@
 - # passed in variable named 'form'
-= form_for([@standard_skill_routine, form], :remote => true) do |f|
+= simple_form_for([@standard_skill_routine, form], :remote => true) do |f|
   = render :partial => "/shared/error_messages", :object => form
   %span#errors
   .field
@@ -10,4 +10,4 @@
     %br
     = f.select(:standard_skill_entry_id, StandardSkillEntry.all.map{ |ent| [ent, ent.id]})
   .actions
-    = f.submit 'Insert New', :class => "multiclick"
+    = f.button :submit, 'Insert New', :class => "multiclick"

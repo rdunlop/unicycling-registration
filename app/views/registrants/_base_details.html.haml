@@ -2,13 +2,16 @@
 .required= t(".required_fields")
 %fieldset.data_block
   %legend= t(".base_details")
-  %div
+  %div.row
     = render :partial => "/registrants/name", :locals => {:f => f }
-  .competitor_show.noncompetitor_show
-    = f.label :birthday, t(".birthday"), :class => "required"
-    = f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true }
-  .competitor_show.noncompetitor_show
-    = f.label :gender_male, t('.male'), :class => "required"
+  .competitor_show.noncompetitor_show.row
+    .small-3.columns
+      = f.label :birthday, t(".birthday"), :class => "required inline"
+    .small-9.columns
+      .row
+        = f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true}, class: "small-4 columns"
+  .competitor_show.noncompetitor_show.row
     = f.radio_button :gender, 'Male'
-    = f.label :gender_female, t('.female'), :class => "required"
+    = f.label :gender_male, t('.male'), :class => "required"
     = f.radio_button :gender, 'Female'
+    = f.label :gender_female, t('.female'), :class => "required"

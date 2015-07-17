@@ -2,3 +2,8 @@
 %br
 %h1 New Entered Points Result
 = render 'form'
+
+= render "/competitors/add_last_minute_competitor_form", competition: @competition
+
+%hr
+= link_to "Review and Approve results", review_competition_preliminary_external_results_path(@competition)

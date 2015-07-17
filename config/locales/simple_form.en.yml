@@ -89,8 +89,8 @@ en:
         event_url: Links from the Menubar logo to this URL.
         logo_file: Logo should be 93px x 38px
         contact_email: This is the target for all "Feedback" emails on the "Help" page.
-        artistic_closed_date: From this date, normal registrants cannot ADD any events marked as "Artistic"
-        music_submission_end_date: The date at which music submissions will no longer be allowed
+        artistic_closed_date: After this date, normal registrants cannot ADD any events marked as "Artistic"
+        music_submission_end_date: The last date at which music submissions will be allowed
         event_sign_up_closed_date: After this date, ONLY administrators can add events to registrations. (though they can still remove them)
         start_date: Registrant Ages are calculated based on this date
         usa: This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed

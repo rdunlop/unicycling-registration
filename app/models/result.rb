@@ -28,12 +28,19 @@ class Result < ActiveRecord::Base
   validates :competitor, :place, :result_type, presence: true
   validates :competitor_id, uniqueness: { scope: [:result_type] }
 
+  delegate :competition, to: :competitor
+
   def self.age_group
     where(result_type: "AgeGroup")
   end
 
   def self.overall
     where(result_type: "Overall")
+  end
+
+  # Filter Results to display only those which are marked as "Awarded" in the Database
+  def self.awarded
+    joins(competitor: [:competition]).merge(Competition.awarded)
   end
 
   def self.update_last_data_update_time(competition, datetime = DateTime.now)
@@ -56,6 +63,18 @@ class Result < ActiveRecord::Base
     ldut = last_data_update_time(competition)
     lcpt = last_calc_places_time(competition)
     lcpt.nil? || (ldut.present? && (ldut > lcpt))
+  end
+
+  def age_group_type?
+    result_type == "AgeGroup"
+  end
+
+  def category_description
+    if age_group_type?
+      competitor.age_group_entry_description
+    else
+      "Overall"
+    end
   end
 
   def to_s
@@ -82,10 +101,12 @@ class Result < ActiveRecord::Base
     end
 
     if existing_result
-      if existing_result.place == new_place
+      if existing_result.place == new_place && existing_result.status == status && existing_result.result_subtype == result_subtype
         return
       else
         existing_result.place = new_place
+        existing_result.status = status
+        existing_result.result_subtype = result_subtype
         existing_result.save!
       end
     else

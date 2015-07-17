@@ -1,5 +1,5 @@
 class PermissionsController < ApplicationController
-  authorize_resource class: false
+  before_action :skip_authorization
 
   def acl
   end

@@ -9,7 +9,9 @@ describe 'Entering Points data' do
 
   describe "the event on the page" do
     before :each do
-      click_link "Data Entry"
+      within "#admin_bar" do
+        click_link "Data Entry"
+      end
     end
 
     specify { expect(page).to have_content("Basketball") }
@@ -23,13 +25,13 @@ describe 'Entering Points data' do
       end
 
       it "can add and update scores" do
-        select "Robin Robin", from: 'import_result[bib_number]'
-        fill_in "import_result[points]", with: "1.0"
-        fill_in "import_result[details]", with: "1 pts"
+        select "Robin Robin", from: 'external_result[competitor_id]'
+        fill_in "external_result[points]", with: "1.0"
+        fill_in "external_result[details]", with: "1 pts"
 
         expect do
-          click_button "Submit"
-        end.to change(ImportResult, :count).by(1)
+          click_button "Create External result"
+        end.to change(ExternalResult, :count).by(1)
       end
     end
   end

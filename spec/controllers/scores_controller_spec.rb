@@ -2,10 +2,8 @@ require 'spec_helper'
 
 describe ScoresController do
   before (:each) do
-    @admin = FactoryGirl.create(:admin_user)
     @user = FactoryGirl.create(:data_entry_volunteer_user)
     @other_user = FactoryGirl.create(:data_entry_volunteer_user)
-    sign_in @admin
 
     @judge = FactoryGirl.create(:judge, user_id: @user.id)
     @jt = FactoryGirl.create(:judge_type)
@@ -21,12 +19,9 @@ describe ScoresController do
     @signed_in_scores = [
       FactoryGirl.create(:score, judge: @judge, competitor: @comp),
       FactoryGirl.create(:score, judge: @judge, competitor: @comp2)]
-    sign_out @admin
 
-    # create a chief_judge, so that this lowly judge-user can see the scores page
-    # FactoryGirl.create(:chief_judge, :event => @judge.event_category.event, :user => @user)
-    # XXX
-    @user.add_role :admin
+    # director
+    @user.add_role :director, @judge.competition
 
     sign_in @user
   end

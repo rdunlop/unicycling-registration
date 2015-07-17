@@ -1,23 +1,24 @@
 - registrant = registrant_list_entry
 - reg_class = registrant.registrant_type
-%tr{:class => "#{shared ? "shared" : "my"}_registrant"}
-  %td
-    = link_to registrant.name, registrant_build_path(registrant, :add_name), :class =>  "#{reg_class}_link"
+.row
+  .small-3.columns
+    = link_to_if policy(registrant).update_any_data?, registrant.name, registrant_build_index_path(registrant), :class =>  "#{reg_class}_link"
     %br
     = t(".#{reg_class}")
-  %td
-    = print_formatted_currency(registrant.expenses_total)
-  %td
-    - if can? :update, registrant
-      = link_to t('.edit'), registrant_build_path(registrant, :add_name), :class => "registrant_edit_button " + (reg_class)
-  %td
+  .small-2.columns
+    - if policy(registrant).update_any_data?
+      = link_to t('.edit'), registrant_build_index_path(registrant), :class => "registrant_edit_button #{reg_class}"
+  .small-4.columns
     - if registrant.validated?
       = link_to t('.see_summary'), registrant_path(registrant), :class => "registrant_edit_button " + (reg_class)
     - else
       %span.incomplete
         = t('.incomplete')
-  - if @has_print_waiver
-    %td
+  .small-3.columns
+    - if @has_print_waiver
       = link_to t(".legal_waiver", first_name: registrant.first_name), waiver_registrant_path(registrant, format: 'pdf'), { class: "print_waiver_link", target: "_blank" }
-  %td
+      %br
     = render partial: "registrant_total_owing", locals: { registrant: registrant }
+    - if registrant.events_with_music_allowed.any? && policy(Song.new).create?
+      .edit_link_block
+        = link_to "Upload music", registrant_songs_path(registrant), class: "button tiny"

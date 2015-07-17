@@ -40,6 +40,8 @@ class Competitor < ActiveRecord::Base
   has_many :distance_attempts, -> { order "distance DESC, id DESC" }, dependent: :destroy
   has_one :tie_break_adjustment, dependent: :destroy
   has_many :time_results, dependent: :destroy
+  has_many :start_time_results, -> { merge(TimeResult.start_times) }, class_name: "TimeResult"
+  has_many :finish_time_results, -> { merge(TimeResult.finish_times) }, class_name: "TimeResult"
   has_one :external_result, dependent: :destroy
   has_many :results, dependent: :destroy, inverse_of: :competitor
 
@@ -111,7 +113,7 @@ class Competitor < ActiveRecord::Base
 
     members.each do |member|
       if member.dropped_from_registration?
-        error += "Registrant has dropped this event from their registration<br>"
+        error += "Registrant #{member} has dropped this event from their registration<br>"
       elsif !competition_registrants.include?(member.registrant)
         error += "Registrant #{member} is not in the default list for this competition<br>"
       end
@@ -395,87 +397,15 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  # for distance_attempt logic, there are certain 'states' that a competitor can get into
-  def double_fault?
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{DistanceAttempt.cache_key_for_set(id)}/double_fault") do
-      df = false
-      if distance_attempts.count > 1
-        if distance_attempts[0].fault? && distance_attempts[1].fault? && distance_attempts[0].distance == distance_attempts[1].distance
-          df = true
-        end
-      end
+  delegate :max_attempted_distance, :has_attempt?, :has_successful_attempt?,
+           :max_successful_distance, :max_successful_distance_attempt,
+           :distance_attempt_status, :distance_attempt_status_code,
+           :acceptable_distance_error, :acceptable_distance?,
+           :no_more_jumps?,
+           to: :distance_manager
 
-      df
-    end
-  end
-
-  def distance_attempt_cache_key_base
-    "/competitor/#{id}-#{updated_at}/#{DistanceAttempt.cache_key_for_set(id)}/"
-  end
-
-  def single_fault?
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/single_fault?") do
-      if distance_attempts.count > 0
-        distance_attempts.first.fault?
-      else
-        false
-      end
-    end
-  end
-
-  def max_attempted_distance
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_attempted_distance") do
-      return 0 unless distance_attempts.any?
-
-      distance_attempts.first.distance
-    end
-  end
-
-  def max_successful_distance
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance") do
-      max_successful_distance_attempt.try(:distance) || 0
-    end
-  end
-
-  def max_successful_distance_attempt
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_successful_distance_attempt") do
-      distance_attempts.find_by(fault: false)
-    end
-  end
-
-  def best_distance_attempt
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/best_distance_attempt") do
-      # best non-fault result, or, if there are none of those, best result (which will be a fault)
-      max_successful_distance_attempt || distance_attempts.first
-    end
-  end
-
-  def distance_attempt_status_code
-    if double_fault?
-      "double_fault"
-    else
-      if single_fault?
-        "single_fault"
-      else
-        "can_attempt"
-      end
-    end
-  end
-
-  def distance_attempt_status
-    if distance_attempts.count == 0
-      "Not Attempted"
-    else
-      if double_fault?
-        "Finished. Final Score #{max_successful_distance}"
-      else
-        if single_fault?
-          "Fault. Next Distance #{max_attempted_distance}+"
-        else
-          "Success. Next Distance #{max_attempted_distance + 1}+"
-        end
-      end
-    end
+  def distance_manager
+    @distance_manager ||= competition.distance_attempt_manager.new(self)
   end
 
   def is_top?(search_gender)
@@ -506,23 +436,6 @@ class Competitor < ActiveRecord::Base
     res.join(", ")
   end
 
-  def best_time_in_thousands
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/best_time_in_thousands") do
-      start_times = start_time_results.map(&:full_time_in_thousands)
-      finish_times = finish_time_results.map(&:full_time_in_thousands)
-
-      best_finish_time = 0
-      finish_times.each do |ft|
-        matching_start_time = start_times.select{ |t| t < ft}.sort.max || (competition_start_time * 1000)
-        new_finish_time = ft - matching_start_time
-        if best_finish_time == 0 || (new_finish_time == better_time(best_finish_time, new_finish_time))
-          best_finish_time = new_finish_time
-        end
-      end
-      best_finish_time
-    end
-  end
-
   def num_laps
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/num_laps") do
       finish_time_results.first.try(:number_of_laps) || 0
@@ -533,34 +446,13 @@ class Competitor < ActiveRecord::Base
     competition.wave_time_for(wave) || 0
   end
 
-  def better_time(time_1, time_2)
-    if lower_is_better
-      if time_1 < time_2
-        time_1
-      else
-        time_2
-      end
-    else
-      if time_1 < time_2
-        time_2
-      else
-        time_1
-      end
+  def best_time_in_thousands
+    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/best_time_in_thousands") do
+      start_times = start_time_results.select(&:active?).map(&:full_time_in_thousands)
+      finish_times = finish_time_results.select(&:active?).map(&:full_time_in_thousands)
+      TimeResultCalculator.new(start_times, finish_times, competition_start_time, lower_is_better).best_time_in_thousands
     end
   end
 
   delegate :lower_is_better, to: :scoring_helper
-
-  private
-
-  # time result calculations
-  def start_time_results
-    # time_results.start_times.active
-    time_results.select{ |time_result| time_result.status == "active" && time_result.is_start_time }
-  end
-
-  def finish_time_results
-    # time_results.finish_times.active
-    time_results.select{ |time_result| time_result.status == "active" && time_result.is_start_time == false }
-  end
 end

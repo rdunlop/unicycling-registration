@@ -24,9 +24,10 @@
 require 'spec_helper'
 
 describe Competitor do
+  let(:competition) { FactoryGirl.build_stubbed(:timed_competition) }
+
   before :each do
-    @competition = FactoryGirl.build_stubbed(:timed_competition)
-    @comp = FactoryGirl.build_stubbed(:event_competitor, competition: @competition)
+    @comp = FactoryGirl.build_stubbed(:event_competitor, competition: competition)
     allow(@comp).to receive(:lower_is_better).and_return(true)
     Rails.cache.clear
   end
@@ -58,7 +59,7 @@ describe Competitor do
 
     describe "when there is a matching wave + wave_time" do
       before :each do
-        allow(@competition).to receive(:wave_time_for).with(1).and_return(30)
+        allow(competition).to receive(:wave_time_for).with(1).and_return(30)
       end
 
       it "uses the wave time for start times" do
@@ -115,8 +116,10 @@ describe Competitor do
 end
 
 describe Competitor do
+  let(:competition) { FactoryGirl.create(:competition) }
+
   before(:each) do
-    @comp = FactoryGirl.create(:event_competitor)
+    @comp = FactoryGirl.create(:event_competitor, competition: competition)
   end
 
   it "should join a registrant and a event" do
@@ -292,7 +295,7 @@ describe Competitor do
       @score.val_3 = 3.0
       @score.val_4 = 4.0
       @score.judge = FactoryGirl.create(:judge,
-                                        user: FactoryGirl.create(:admin_user),
+                                        user: FactoryGirl.create(:user),
                                         judge_type: FactoryGirl.create(:judge_type))
       @score.competitor = @cr
       @score.save
@@ -348,6 +351,8 @@ describe Competitor do
     end
   end
   describe "with a distance attempt" do
+    let(:competition) { FactoryGirl.create(:distance_competition) }
+
     before(:each) do
       Delorean.jump 2
       @da = DistanceAttempt.new
@@ -359,9 +364,9 @@ describe Competitor do
     end
 
     it "should delete related distance_attempts if the competitor is deleted" do
-      da = FactoryGirl.create(:distance_attempt)
+      comp = FactoryGirl.create(:event_competitor, competition: competition)
+      da = FactoryGirl.create(:distance_attempt, competitor: comp)
 
-      comp = da.competitor
       expect(DistanceAttempt.count).to eq(1)
       Delorean.jump 2
 
@@ -369,33 +374,33 @@ describe Competitor do
       expect(DistanceAttempt.count).to eq(0)
     end
 
-    it "should indicate double_fault if two attempts at the same distance are found" do
-      expect(@comp.double_fault?).to eq(false)
+    it "should indicate no_more_jumps if two attempts at the same distance are found" do
+      expect(@comp.no_more_jumps?).to eq(false)
       FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
-      expect(@comp.reload.double_fault?).to eq(false)
+      expect(@comp.reload.no_more_jumps?).to eq(false)
 
       Delorean.jump 2
       FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
 
-      expect(@comp.reload.double_fault?).to eq(true)
+      expect(@comp.reload.no_more_jumps?).to eq(true)
     end
 
-    it "should NOT indicate double_fault if two consecutive attempts at different distances are found" do
-      expect(@comp.double_fault?).to eq(false)
+    it "should NOT indicate no_more_jumps if two consecutive attempts at different distances are found" do
+      expect(@comp.no_more_jumps?).to eq(false)
       da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
-      expect(@comp.reload.double_fault?).to eq(false)
+      expect(@comp.reload.no_more_jumps?).to eq(false)
       Delorean.jump 2
       FactoryGirl.create(:distance_attempt, distance: da1.distance + 1, competitor: @comp, fault: true)
 
-      expect(@comp.reload.double_fault?).to eq(false)
+      expect(@comp.reload.no_more_jumps?).to eq(false)
     end
 
     it "should return the max attempted distance" do
       expect(@comp.max_attempted_distance).to eq(0)
-      expect(@comp.max_successful_distance).to eq(0)
+      expect(@comp.max_successful_distance).to be_nil
       da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.max_attempted_distance).to eq(da1.distance)
-      expect(@comp.reload.max_successful_distance).to eq(0)
+      expect(@comp.reload.max_successful_distance).to be_nil
     end
 
     it "should return the attempts is descending distance order" do
@@ -437,7 +442,7 @@ describe Competitor do
         FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
         da = FactoryGirl.build(:distance_attempt, competitor: @comp, distance: 25, fault: false)
 
-        expect(@comp.reload.double_fault?).to eq(true)
+        expect(@comp.reload.no_more_jumps?).to eq(true)
         expect(da.valid?).to eq(false)
       end
 
@@ -446,7 +451,7 @@ describe Competitor do
           @da2 = FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
         end
         it "should allow the 2nd attempt to also be a fault" do
-          expect(@comp.reload.double_fault?).to eq(true)
+          expect(@comp.reload.no_more_jumps?).to eq(true)
           expect(@da2.valid?).to eq(true)
         end
         it "should describe the status" do

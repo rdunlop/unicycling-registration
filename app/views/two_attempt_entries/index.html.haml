@@ -9,7 +9,7 @@
 %h3= start_finish_description(@is_start_time)
 
 %p#notice
-= form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry], {:remote => true, :html => {:class => "data_entry"}}) do |f|
+= simple_form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry], {:remote => true, :html => {:class => "data_entry"}}) do |f|
   = render partial: "/shared/error_messages", object: @two_attempt_entry
   = f.hidden_field :is_start_time
   %table.sortable.two_attempt_entries
@@ -52,6 +52,6 @@
         %td= f.number_field :seconds_2, {:min => 0}
         %td= f.number_field :thousands_2, {:min => 0}
         %td= f.select :status_2, TimeResult.status_values, include_blank: true
-        %td= f.submit "Submit", :class => "multiclick"
+        %td= f.button :submit, "Submit", :class => "multiclick"
         %th
         %th

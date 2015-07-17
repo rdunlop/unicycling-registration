@@ -77,17 +77,18 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator, :competition_admin, :payment_admin, :convention_admin, :admin, :super_admin]
+    [:late_registrant, :music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator,
+      :membership_admin, :competition_admin, :payment_admin, :convention_admin, :super_admin]
   end
 
   # List which roles each roles can add to other users
   def self.role_transfer_permissions
     {
       super_admin: [*roles],
-      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj],
-      competition_admin: [:awards_admin],
-      director: [:data_entry_volunteer, :race_official],
-      payment_admin: [:payment_admin],
+      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin],
+      competition_admin: [:competition_admin, :awards_admin],
+      director: [:data_entry_volunteer],
+      payment_admin: [:payment_admin, :late_registrant],
       event_planner: [:event_planner],
       music_dj: [:music_dj]
     }
@@ -103,18 +104,6 @@ class User < ActiveRecord::Base
   def self.role_description(role)
     case (role)
       # when :results_printer
-    when :admin
-      "[e.g. Scott/Connie]
-      Able to create onsite payments,
-      adjust many details of the system.
-      Able to send mass-email to various subsets of users.
-      Can assign Directors, and do anything a director can do:
-      - can create/assign judges
-      Can assign data_entry_volunteers, and do anything they can do:
-      - Can enter recorded Results
-      Can Create Award Labels
-      Can adjust wheel-size settings for users.
-      "
     when :convention_admin
       "[e.g. Olaf Scholte]
       Able to configure the Convention settings with regards to registration settings
@@ -132,8 +121,11 @@ class User < ActiveRecord::Base
       Able to create competitions, and adjust competition configuration
       Able to create/manage Age Groups
       Can set registrants as ineligible
-      Can create director, data_entry_volunteer, race_official
+      Can create director, data_entry_volunteer
       Can reset user passwords
+      Can View all Event Sign Ups
+      Can Manage all Competition Competitors (while competition is unlocked)
+      Can Lock/Unlock Competition
       "
     when :director
       "[e.g. Wendy Gryzch]
@@ -143,11 +135,6 @@ class User < ActiveRecord::Base
       "
     when :data_entry_volunteer
       "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
-    when :race_official
-      "[e.g. Mary Koehler]
-      Able to DQ at start or end-line of Race
-      Able to download heat-lists for Track E-Timers
-      "
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
     when :payment_admin
@@ -162,6 +149,10 @@ class User < ActiveRecord::Base
       Able to SEARCH & MODIFY any registration.
       Able to Add/Modify event choices, at all times.
       Able to view/send emails to all registrants"
+    when :membership_admin
+      "Able to view the USA Memberships page.
+      Able to update the USA Membership numbers
+      Able to indicate whether a user is up-to-date with USA membership fees"
     when :awards_admin
       "[e.g. Kirsten]
       Able to view the data results
@@ -174,14 +165,42 @@ class User < ActiveRecord::Base
       "[e.g. Olaf]
       Able to access the translation menu.
       Enter new translations, and apply them to the site"
+    when :late_registrant
+      "Able to access the registration system even after the registration period has closed.
+      Able to Create new registrants, update existing registrants, and make payments.
+      You should use this along with the SetRegFee function, to specify the fee they are to be charged.
+      "
     else
       "No Description Available"
     end
   end
 
-  def to_s
-    name || email
+  def self.volunteer_role_descriptions(role)
+    case role
+    when :race_official
+      "[e.g. Mary Koehler]
+      Able to DQ at start or end-line of Race
+      Able to download heat-lists for Track E-Timers
+      "
+    when :start_line_volunteer
+      "Able to enter Start Line results (transcribed)"
+    when :end_line_volunteer
+      "Able to enter Finish Line Results (transcribed)"
+    else
+      "No description"
+    end
   end
+
+  def to_s
+    name.presence || email
+  end
+  #   def additional_editable_registrants
+  #     Registrant.active_or_incomplete.joins(:additional_registrant_accesses).merge(additional_registrant_accesses.full_access)
+  #   end
+
+  #   def additional_accessible_registrants
+  #     Registrant.active_or_incomplete.joins(:additional_registrant_accesses).merge(additional_registrant_accesses.permitted)
+  #   end
 
   def editable_registrants
     (additional_registrant_accesses.full_access.map(&:registrant) + registrants).select{ |reg| !reg.deleted? }

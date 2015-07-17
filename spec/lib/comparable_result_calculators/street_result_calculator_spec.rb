@@ -25,9 +25,9 @@ describe StreetResultCalculator do
       end
 
       it "has values for the total placing points, NOT subtracting high and low (only 2 judges)" do
-        expect(@calc.competitor_result(@comp1)).to eq(2)
-        expect(@calc.competitor_result(@comp2)).to eq(5)
-        expect(@calc.competitor_result(@comp3)).to eq(5)
+        expect(@calc.competitor_comparable_result(@comp1)).to eq(2)
+        expect(@calc.competitor_comparable_result(@comp2)).to eq(5)
+        expect(@calc.competitor_comparable_result(@comp3)).to eq(5)
       end
 
       describe "with a 3rd judge's scores" do
@@ -42,9 +42,9 @@ describe StreetResultCalculator do
         end
 
         it "has non-zero placing points" do
-          expect(@calc.competitor_result(@comp1)).to eq(3)  # 1,1,1
-          expect(@calc.competitor_result(@comp2)).to eq(7)  # 2,3,2
-          expect(@calc.competitor_result(@comp3)).to eq (8) # 3,2,3
+          expect(@calc.competitor_comparable_result(@comp1)).to eq(3)  # 1,1,1
+          expect(@calc.competitor_comparable_result(@comp2)).to eq(7)  # 2,3,2
+          expect(@calc.competitor_comparable_result(@comp3)).to eq (8) # 3,2,3
         end
       end
     end

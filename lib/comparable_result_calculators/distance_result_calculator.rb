@@ -18,9 +18,12 @@ class DistanceResultCalculator
     end
   end
 
+  # Public: a comparable result, for use when determining the relative ranking of a competitor
+  #
+  # Returns an integer. Returns 0 if the competitor has no result, or was disqualified/dnf/etc
   def competitor_comparable_result(competitor)
     if competitor.has_result?
-      competitor.max_successful_distance
+      competitor.max_successful_distance || 0
     else
       0
     end

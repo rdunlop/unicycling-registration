@@ -2,42 +2,23 @@
 
 // Note: this isn't working nicely yet because some events have "overall" results which are not Overall results.
 %table
-  %legend Overall Results
   %thead
     %tr
-      %th Competition
+      %th{colspan: 2} Competition
       %th Place
       %th Status
       %th Detail
   %tbody
-    - @overall_results.each do |result|
+    - @results.each do |result|
       %tr
-        %td= result.competitor.competition
+        %td
+          = result.competition.award_title_name
+          = result.competition.award_subtitle_name
+        %td= result.category_description
         %td= result.place
         %td= result.status
         %td
-          = "#{result.competitor.to_s}<br>".html_safe if result.competitor.members.count > 1
+          - if result.competitor.members.count > 1
+            = result.competitor.to_s
+            %br
           = result.competitor.result
-
-%hr
-
-%table
-  %legend Age Group Results
-  %thead
-    %tr
-      %th Competition
-      %th Age Group
-      %th Place
-      %th Status
-      %th Detail
-  %tbody
-    - @age_group_results.each do |result|
-      %tr
-        %td= result.competitor.competition
-        %td= result.competitor.age_group_entry_description
-        %td= result.place
-        %td= result.status
-        %td
-          = "#{result.competitor.to_s}<br>".html_safe if result.competitor.members.count > 1
-          = result.competitor.result
-

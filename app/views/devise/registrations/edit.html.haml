@@ -1,30 +1,44 @@
 %h1= t(".title")
 
 %h3= t(".change_header")
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
-  %div
-    = f.label :email
-    %br
-    = f.email_field :email
-
-  %fieldset.data_block
-    %legend= t(".change_password")
-    %div
-      = f.label :password
-      %i (#{t(".blank_notice")})
-      %br
-      = f.password_field :password, :autocomplete => "off"
-    %div
-      = f.label :password_confirmation
-      %br
-      = f.password_field :password_confirmation
-  %div
-    = f.label :current_password
-    %i (#{t(".confirm_password_notice")})
-    %br
-    = f.password_field :current_password
-  %div= f.submit t(".action"), :class => "focus_button"
+  .panel.row
+    .row
+      .small-3.columns.text-right
+        = f.label :email
+      .small-9.columns
+        = f.email_field :email
+    %fieldset
+      %legend= t(".users_name")
+      .row
+        .small-3.columns.text-right
+          = f.label :name
+        .small-9.columns
+          = f.text_field :name
+    %fieldset
+      %legend= t(".change_password")
+      .row
+        .small-3.columns.text-right
+          = f.label :password
+          %br
+          %i (#{t(".blank_notice")})
+        .small-9.columns
+          = f.password_field :password, :autocomplete => "off"
+      .row
+        .small-3.columns.text-right
+          = f.label :password_confirmation
+        .small-9.columns
+          = f.password_field :password_confirmation
+    .row
+      .small-3.columns.text-right
+        = f.label :current_password
+        %i (#{t(".confirm_password_notice")})
+      .small-9.columns
+        = f.password_field :current_password
+    .row
+      .small-12.columns
+        = f.button :submit, t(".action"), :class => "focus_button"
 
 - if resource.roles.any?
   %h3= t(".current_permissions")

@@ -1,9 +1,8 @@
 class ConventionSetup::EventCategoriesController < ConventionSetupController
   include SortableObject
 
-  before_action :authenticate_user!
-  load_and_authorize_resource
-
+  before_action :authorize_setup
+  before_action :load_event_category, except: [:index, :create]
   before_action :load_event, only: [:index, :create]
   before_action :set_breadcrumbs
 
@@ -25,6 +24,7 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
   # POST /event_categories
   # POST /event_categories.json
   def create
+    @event_category = EventCategory.new(event_category_params)
     @event_category.event = @event
 
     respond_to do |format|
@@ -60,6 +60,10 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
 
   private
 
+  def authorize_setup
+    authorize @config, :setup_convention?
+  end
+
   def sortable_object
     EventCategory.find(params[:id])
   end
@@ -72,6 +76,10 @@ class ConventionSetup::EventCategoriesController < ConventionSetupController
 
   def load_event
     @event = Event.find(params[:event_id])
+  end
+
+  def load_event_category
+    @event_category = EventCategory.find(params[:id])
   end
 
   def load_categories

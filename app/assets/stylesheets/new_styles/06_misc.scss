@@ -24,13 +24,8 @@ table {
   margin: 0 auto; // centers tables
 }
 
-table.alternate {
-  td {
-    padding: 0px 10px;
-  }
-}
 
-table.alternate,
+table,
 .competitor_sign_up table,
 .non-competitor_sign_up table {
   border-collapse: collapse;

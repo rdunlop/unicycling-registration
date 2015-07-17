@@ -9,11 +9,9 @@ class FlatlandResultCalculator
     competitor.scores.any?
   end
 
-  # returns the result for this competitor
-  def competitor_result(competitor)
-    if competitor.has_result?
-      total_points(competitor)
-    end
+  # returns the result to be displayed for this competitor
+  def competitor_result(_competitor)
+    nil
   end
 
   # returns the result for this competitor

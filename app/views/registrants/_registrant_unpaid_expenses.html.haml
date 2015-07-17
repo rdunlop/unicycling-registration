@@ -12,5 +12,5 @@
       - if include_form
         %td
           - if ce.persisted? and not ce.system_managed?
-            = form_for([@registrant, ce], :url => registrant_registrant_expense_item_path(@registrant, ce), :html => { :method => :delete }) do |ff|
-              = ff.submit t(".delete"), :class => "delete"
+            = simple_form_for([@registrant, ce], :url => registrant_registrant_expense_item_path(@registrant, ce), :html => { :method => :delete }) do |ff|
+              = ff.button :submit, t(".delete"), :class => "delete"

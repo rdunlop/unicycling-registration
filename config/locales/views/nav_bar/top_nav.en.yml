@@ -1,0 +1,12 @@
+---
+en:
+  nav_bar:
+    top_nav:
+      all_registrants: All Registrants
+      log_in: Log In
+      my_account: My Account
+      my_payments: My Payments
+      my_registrations: My Registrations
+      my_standard_skill_routines: My Standard Skill Routines
+      results: Competitions/Results
+      sign_out: Sign out

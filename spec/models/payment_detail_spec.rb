@@ -105,7 +105,8 @@ describe PaymentDetail do
 
     it "doesn't list refunded payments" do
       @ref = FactoryGirl.create(:refund_detail, payment_detail: @pd)
-      expect(PaymentDetail.completed).to eq([])
+      expect(PaymentDetail.not_refunded).to eq([])
+      expect(PaymentDetail.refunded).to eq([@pd])
     end
   end
 

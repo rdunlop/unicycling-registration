@@ -5,7 +5,7 @@
 
   %fieldset.form__fieldset
     %h3 Registrant Types
-    .label Registration Types Available
+    %h4 Registration Types Available
 
     .field
       = check_box_tag :competitor, true, true, disabled: true
@@ -23,4 +23,4 @@
     = f.input :noncompetitor_benefits, as: :text
     = f.input :spectator_benefits, as: :text
 
-  = f.button :submit
+    = f.button :submit

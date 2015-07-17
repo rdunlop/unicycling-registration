@@ -2,8 +2,7 @@
 en:
   registrants:
     registrant_songs:
-      click_here: Click Here
       event: Event
       header: Your Competition Music
-      instructions: To upload music please
+      instructions: Upload Music
       song: Song

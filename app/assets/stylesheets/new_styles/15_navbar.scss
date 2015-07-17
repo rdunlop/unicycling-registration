@@ -5,103 +5,10 @@ $height: 50px;
   height: 38px;
 }
 
-/* Specificity hack */
-.logo_link.logo_link {
-  padding: 0px;
-}
+.admin_bar {
+  background-color: red;
 
-%navElement {
-  font-size: 14px;
-  padding: 0;
-  margin: 0px 10px;
-  text-align: center;
-  color: $text;
-  a, a:visited {
-    color: $text;
-    text-decoration: none;
-  }
-}
-
-nav {
-  .logo {
-    vertical-align: middle;
-  }
   a {
-    background-color: $background;
-  }
-  .accountNav {
-    @extend %navElement;
-    position: absolute;
-    right: 0;
-    padding: 9px;
-    display: inline-block;
-  }
-  display: block;
-  background: $background;
-
-  &.admin_bar {
-    background-color: red;
-
-    a {
-      background-color: inherit;
-    }
+    background-color: inherit;
   }
 }
-
-ul.navList {
-  li:hover {
-    > a {
-      color: $texthover;
-      background-color: $backgroundhover;
-    }
-    a:hover {
-      background-color: $backgroundhover;
-    }
-  }
-  li {
-    margin: 0 5px;
-    display: inline-block;
-    a {
-      padding: 10px 5px;
-      display: block;
-    }
-  }
-  @extend %navElement;
-  list-style: none;
-  position: relative;
-  display: inline-table;
-
-  &:after {
-    content: "";
-    clear: both;
-    display: block;
-  }
-}
-.hamburger {
-  @extend %navElement;
-  display: none;
-  cursor: pointer;
-  padding: 10px;
-}
-
-@media only screen and (max-width: 800px) {
-  ul.navList {
-    display: none;
-    &.is--visible {
-      display: block;
-    }
-
-    li {
-      display: block;
-      a {
-        display: block;
-      }
-      text-align: center;
-      padding: 10px;
-    }
-  }
-  .hamburger {
-    display: block;
-  }
-}
-

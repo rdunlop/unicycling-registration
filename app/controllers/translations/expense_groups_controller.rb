@@ -1,6 +1,5 @@
 class Translations::ExpenseGroupsController < Admin::TranslationsController
-  before_action :authenticate_user!
-  load_resource
+  before_action :load_expense_group, except: :index
 
   def index
     @expense_groups = ExpenseGroup.all
@@ -21,6 +20,10 @@ class Translations::ExpenseGroupsController < Admin::TranslationsController
   end
 
   private
+
+  def load_expense_group
+    @expense_group = ExpenseGroup.find(params[:id])
+  end
 
   def expense_group_params
     params.require(:expense_group).permit(translations_attributes: [:id, :locale, :group_name])

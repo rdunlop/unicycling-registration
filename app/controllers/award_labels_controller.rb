@@ -1,12 +1,8 @@
 class AwardLabelsController < ApplicationController
-  before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :authenticate_ability
+  before_action :load_award_label, only: [:edit, :update, :destroy]
 
-  before_action :load_user, only: [:index, :create, :create_by_competition, :create_labels, :expert_labels, :announcer_sheet, :normal_labels, :destroy_all, :create_labels_by_registrant]
-
-  def load_user
-    @user = User.find(params[:user_id])
-  end
+  before_action :load_user, except: [:edit, :update, :destroy]
 
   # GET /users/#/award_labels
   def index
@@ -22,6 +18,7 @@ class AwardLabelsController < ApplicationController
   # POST /users/#/award_labels
   # POST /users/#/award_labels.json
   def create
+    @award_label = AwardLabel.new(award_label_params)
     @award_label.user = @user
 
     respond_to do |format|
@@ -53,22 +50,6 @@ class AwardLabelsController < ApplicationController
     @user = @award_label.user
     @award_label.destroy
     redirect_to user_award_labels_path(@user)
-  end
-
-  def set_int_if_present(value, default)
-    if value.present?
-      value.to_i
-    else
-      default
-    end
-  end
-
-  def set_string_if_present(value, default)
-    if value.present?
-      value
-    else
-      default
-    end
   end
 
   # POST /user/:id/award_labels/create_by_competition
@@ -126,6 +107,134 @@ class AwardLabelsController < ApplicationController
     end
   end
 
+  def destroy_all
+    @user.award_labels.destroy_all
+    redirect_to user_award_labels_path(@user)
+  end
+
+  # Create a PDF of labels
+  # Optionally specify that we should separate the labels by registrant (which results in reordering the results by registrant)
+  # Optionally specify a number of labels to gap on the sheet before printing
+  # optionally specify a different label format
+  #  Default: Avery5160padded
+  #  Options: Avery5293, Avery8293
+  #
+  def normal_labels
+    separate_registrants = false
+    unless params[:separate_registrants].nil?
+      separate_registrants = true
+    end
+
+    label_type = params[:label_type].presence || "Avery8293"
+
+    names = initialize_by_skipped_positions
+
+    if separate_registrants
+      labels = @user.award_labels.order(:bib_number)
+    else
+      labels = @user.award_labels.order(:category, :place)
+    end
+
+    names += build_names_from_labels(labels, separate_registrants)
+
+    Prawn::Labels.types = {
+      "Avery5293" => {
+        "paper_size" => "LETTER",
+        "top_margin" => 38.23, # 0.531"
+        "bottom_margin" => 38.23, # 0.531"
+        "left_margin" =>  38.23, # 0.406 "
+        "right_margin" =>  29.23, # 0.406"
+        "columns" =>  4,
+        "rows" =>  6,
+        "column_gutter" =>  20.152, # 0.391 "
+        "row_gutter" =>  6.152 # 0.391"
+
+        # "top_margin" => 13.49, # 0.531"
+        # "bottom_margin" => 13.49, # 0.531"
+        # "left_margin" =>  10.31, # 0.406 "
+        # "right_margin" =>  10.31, # 0.406"
+        # "columns" =>  4,
+        # "rows" =>  6,
+        # "column_gutter" =>  9.93, # 0.391 "
+        # "row_gutter" =>  9.93 # 0.391"
+      },
+      "Avery8293" => {
+        "paper_size" => "LETTER",
+        "top_margin" => 65.23, # 0.531"
+        "bottom_margin" => 54.23, # 0.531"
+        "left_margin" =>  52.23, # 0.406 "
+        "right_margin" =>  40.23, # 0.406"
+        "columns" =>  4,
+        "rows" =>  5,
+        "column_gutter" =>  55, # 0.391 "
+        "row_gutter" =>  50 # 0.391"
+      },
+      "Avery5160padded" => {
+        "paper_size" => "LETTER",
+        "top_margin" => 36,
+        "bottom_margin" => 36,
+        "left_margin" => 15.822,
+        "right_margin" => 15.822,
+        "columns" => 3,
+        "rows" => 10,
+        "column_gutter" => 15,
+        "row_gutter" => 2.5 # added padding
+      }
+    }
+    # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
+    #  and it will wrap lines as necessary, and then shrink the text.
+
+    labels = Prawn::Labels.render(names, type: label_type, shrink_to_fit: true) do |pdf, name|
+      pdf.text name, align: :center, inline_format: true, valign: :center
+    end
+
+    send_data labels, filename: "labels-#{DateTime.now}.pdf", type: "application/pdf"
+  end
+
+  def announcer_sheet
+    @award_labels = @user.award_labels.reorder(:category, :place)
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render_common_pdf "announcer_sheet" }
+    end
+  end
+
+  private
+
+  def load_user
+    @user = User.find(params[:user_id])
+  end
+
+  def load_award_label
+    @award_label = AwardLabel.find(params[:id])
+  end
+
+  def authenticate_ability
+    authorize current_user, :manage_awards?
+  end
+
+  def award_label_params
+    params.require(:award_label).permit(:age_group, :bib_number, :competition_name, :details, :competitor_name, :category,
+                                        :place, :registrant_id, :team_name, :user_id)
+  end
+
+  def set_int_if_present(value, default)
+    if value.present?
+      value.to_i
+    else
+      default
+    end
+  end
+
+  def set_string_if_present(value, default)
+    if value.present?
+      value
+    else
+      default
+    end
+  end
+
   def create_labels_for_competitor(competitor, registrant, user, age_groups, experts, min_place, max_place)
     n = 0
     competition = competitor.competition
@@ -162,11 +271,6 @@ class AwardLabelsController < ApplicationController
     aw_label.populate_from_competitor(competitor, registrant, place, experts)
 
     aw_label.save
-  end
-
-  def destroy_all
-    @user.award_labels.destroy_all
-    redirect_to user_award_labels_path(@user)
   end
 
   def lines_from_award_label(label)
@@ -208,100 +312,6 @@ class AwardLabelsController < ApplicationController
       names << lines_from_award_label(label)
     end
     names
-  end
-
-  def normal_labels
-    separate_registrants = false
-    unless params[:separate_registrants].nil?
-      separate_registrants = true
-    end
-
-    names = initialize_by_skipped_positions
-
-    names += build_names_from_labels(@user.award_labels.order(:bib_number), separate_registrants)
-
-    Prawn::Labels.types = {
-      "Avery5160padded" => {
-        "paper_size" => "LETTER",
-        "top_margin" => 36,
-        "bottom_margin" => 36,
-        "left_margin" => 15.822,
-        "right_margin" => 15.822,
-        "columns" => 3,
-        "rows" => 10,
-        "column_gutter" => 15,
-        "row_gutter" => 2.5 # added padding
-      }
-    }
-    labels = Prawn::Labels.render(names, type: "Avery5160padded", shrink_to_fit: true) do |pdf, name|
-      pdf.text name, align: :center, valign: :center, inline_format: true
-    end
-
-    send_data labels, filename: "normal-labels-#{Date.today}.pdf"
-  end
-
-  def expert_labels
-    names = []
-    @user.award_labels.each do |label|
-      names << lines_from_award_label(label)
-    end
-    Prawn::Labels.types = {
-      "Avery5293" => {
-        "paper_size" => "LETTER",
-        "top_margin" => 38.23, # 0.531"
-        "bottom_margin" => 38.23, # 0.531"
-        "left_margin" =>  38.23, # 0.406 "
-        "right_margin" =>  29.23, # 0.406"
-        "columns" =>  4,
-        "rows" =>  6,
-        "column_gutter" =>  20.152, # 0.391 "
-        "row_gutter" =>  6.152 # 0.391"
-
-        # "top_margin" => 13.49, # 0.531"
-        # "bottom_margin" => 13.49, # 0.531"
-        # "left_margin" =>  10.31, # 0.406 "
-        # "right_margin" =>  10.31, # 0.406"
-        # "columns" =>  4,
-        # "rows" =>  6,
-        # "column_gutter" =>  9.93, # 0.391 "
-        # "row_gutter" =>  9.93 # 0.391"
-      },
-      "Avery8293" => {
-        "paper_size" => "LETTER",
-        "top_margin" => 65.23, # 0.531"
-        "bottom_margin" => 54.23, # 0.531"
-        "left_margin" =>  52.23, # 0.406 "
-        "right_margin" =>  40.23, # 0.406"
-        "columns" =>  4,
-        "rows" =>  5,
-        "column_gutter" =>  55, # 0.391 "
-        "row_gutter" =>  50 # 0.391"
-      }
-    }
-    # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
-    #  and it will wrap lines as necessary, and then shrink the text.
-
-    labels = Prawn::Labels.render(names, type: "Avery8293", shrink_to_fit: true) do |pdf, name|
-      pdf.text name, align: :center, inline_format: true, valign: :center
-    end
-
-    send_data labels, filename: "bag-labels-#{Date.today}.pdf", type: "application/pdf"
-  end
-
-  def announcer_sheet
-    @award_labels = @user.award_labels.reorder(:category, :place)
-
-    respond_to do |format|
-      format.html {}
-      format.pdf { render_common_pdf "announcer_sheet" }
-    end
-  end
-
-  private
-
-  def award_label_params
-    params.require(:award_label).permit(:age_group, :bib_number, :competition_name, :details, :competitor_name, :category,
-                                        :place, :registrant_id, :team_name, :user_id)
   end
 end
 

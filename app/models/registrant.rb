@@ -352,6 +352,10 @@ class Registrant < ActiveRecord::Base
     age < 18
   end
 
+  def events_with_music_allowed
+    signed_up_events.joins(:event).includes(:event).merge(Event.music_uploadable).map(&:event)
+  end
+
   # for displaying on the Registrant#Summary page
   # if this user is signed up for an event category which is now "warning" flagged
   def event_warnings
@@ -457,7 +461,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def paid_details
-    payment_details.completed.clone
+    payment_details.completed.not_refunded.clone
   end
 
   def amount_paid
@@ -631,6 +635,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def usa_membership_paid?
+    return false unless validated?
     contact_detail.usa_confirmed_paid || contact_detail.usa_family_membership_holder_id? || paid_individual_usa? || paid_family_usa?
   end
 

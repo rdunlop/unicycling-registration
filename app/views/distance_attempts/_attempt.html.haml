@@ -6,6 +6,5 @@
     %td= attempt.competitor
     %td= attempt.competitor.gender
     %td= attempt.competitor.age
-    %td= attempt.competitor.double_fault? ? "yes": "no"
     - if display_delete
       %td= link_to "Delete", distance_attempt_path(attempt), data: { confirm: 'Are you sure?' }, method: :delete

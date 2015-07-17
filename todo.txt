@@ -1,15 +1,57 @@
+TODO: Spin up and suspend a backup server (including new redis)
+TODO: check caching using the new pundit service.
+TODO: Check caching in general.
+
+======================================================
+- Remove ":admin" ability from database?
+- Inspect performance of making the (many) .has_role? calls for a user.
+- Use "Scope" in Pundit as it is expected to be used?
+- Test the access control settings from various users
+- Check coverage, and add controller specs for those that are missing.
+- Add specs for policies, based on the old ability_specs.
+- As a Judge (or data entry volunteer?), why can I iew the Competition#show page?
+ -  I think that we should have separate views for the awards admin to view the status of competitions
+ - I think that data entry volunteers should NOT have access
+- Put a "missing music upload" warning together on the registrants#index page
+- Put a "missing pairs partner name" on the registrants#index pages
+
+- Add the ability for a user to change their "short name" for their account (same name as is changed by "Data Entry Volunteer")
+
+================== New Awards/Results Calculation Logic ============================
+- Combine the AwardLabel multiple-lines-of-text with the Registrant#results page, with the Result object data
+- Why are we always listing "Overall" as well as "Age Group" for each competition type?
+ - When we do "Award Labels", it doesn't result in both of these...so we shouldn't do it in the results page.
+
+ - Need to determine if a competition should result in:
+  - 1) overall
+  - 2) overall AND age group
+  - 3) age group
+
+- Need to determine if a competition should result in awards for (a combination of):
+ - 1) overall (without Expert naming)
+ - 2) overall (WITH expert naming)
+ - 3) age_group (with age-group-specific subtitle)
+ - 4) age_group (with Competiiton->award_subtitle-Name)
+
+- Inputs:
+ - Competition.has_experts?
+ - Competition.has_age_group_entry_resuls? (aka age_group_type.present?)
+
+- There are times when we need to determine overall, but we don't award it. (like 100m, where the overall is used to determine the experts candidates)
+
+
+- Need to ONLY show results which are for "Awarded" Competitions
+======================================================================================
+
+- Add tests around the new library refactorings
+- How does a Director manage/adjust the high/long scores after a judge has judged?
+
 Want to do:
 - spec which uses import_results_Controller->display_csv -> import_csv to create external results
  - then uses Approve action to convert the results to real results.
 - Determine if the servers have any ImportResults left on them.
 
-- make ExternalResult unique on CompetitorID (since each competitor has ONE external_result)
 - Remove default_scope on ImportResult
-
-Changes for External Data Results Entry:
-- Don't allow people to be entered who are not competitors to have data entry
-- For NAUCC, allow people to be added to a competition easily
-- When entering External Results data, prevent selecting people who already have a result entered (gray out their name?)
 
 NEED to clear up the "target_competition" logic of the import! function (used for the mulitple-10k competition-in-same-dataset problem)
 
@@ -21,10 +63,6 @@ WHEN DOING an Import from CSV, fail the whole import, listing the entries which 
 
 PRiorities as per Scott/Robin Discussion:
 - artistic ineligible dismissed
-- Refunds misc column calc
-- High/Long new Rules about Faults/re-attempts (ie: the Hugo Rules) should be separated
-- 12-attempt High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
- - Perhaps just use the existing UI, but auto-load the last 12 attepmts of that competitor once you have entered the competitor Id.
 ?ask scott? - Country-specific competition/announcement, per competitor/ group?
 - Deal with XXX marks
 
@@ -37,6 +75,7 @@ PRiorities as per Scott/Robin Discussion:
 - Add specs to ensure that data entry volunteers controller works (ie: is "confirm!" deprecated?)
  - Need to upgrade Devise first?
 - Assign Data Entry roles per Competition for volunteers.
+ - XXX FIX Competition permissions...currently "can :read, Competition" is giving access to all the stuff UNDER competition. (oops)
  - Want to be able to track WHO Entered the data. (ie: remove the ImportResults system, and properly manage the data flow.)
  - Unable to data-entry Multi-Lap Races (import doesn'n ask for number of laps)
 - Live Data Entry for Muni
@@ -58,22 +97,15 @@ PRiorities as per Scott/Robin Discussion:
 - If a competition is created with "automatic competitor creation", it should prompt "Should I add all currently configured competitors?" immediately after creating the competition.
 - Handle Ineligible results when calculating placing points?
 - Flatland/etc calculation with "ineligible", does it properly give placing points?
-- Extract "best_result_in_thounsands" out of Competitor, into a RaceResultCalculator?
- - Will this fix the XXX note in competition.rb?
 - Combine the scoring data entry paths, with different partials as necessary?
   - Is this even possible, considering different interaction-requirements?
   - Is this a good idea?
 - Make External Result data entry system smarter, so that it doesn't prompt me to enter scores for a competitor which already has scores. (use chosen's greyed-out-select?)
 - Are the order of age groups important for anything other than Track? Can we clean that up?
-- make the hamburger taller
-  - bring in the svg icons
 
 - Disable start/finish data-entry if you choose certain scoring types (like Street, High/Long, freestyle, Flat?)
 
-- Add a "RefundS" or "misc" column to make the payments page make sense after processing refunds
-
 - After refunding, if the registration can be deleted, prompt the admin whether they want to delete that user.
-- High Jump rules have changed for UNIOEC 12 attempts total, at any height/distance. There are 12, only 12.
 
 
 - Allow creating Expert events without specifynig an age group? (ie: 100m expert shouldn't need an age group)

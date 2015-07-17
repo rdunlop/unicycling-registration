@@ -1,6 +1,6 @@
 - cache_i18n [@config, @registrant], expires_in: 1.hour do
-  - if @registrant.competitor && (@registrant.songs.count > 0 || !@config.music_submission_ended?)
-    .registrant_data_group.non_printable
+  - if @registrant.competitor && (@registrant.events_with_music_allowed.any? || !@config.music_submission_ended?)
+    .small-12.medium-4.columns.print-4
       %fieldset.data_block
         - cache_i18n ['songs_menu', @config, @registrant] do
           %legend= t(".header")
@@ -14,7 +14,6 @@
                 %tr
                   %td= song.event
                   %td= song.description
-        - if can? :create, Song
-          .non_printable
-            = t(".instructions")
-            = link_to t(".click_here"), registrant_songs_path(@registrant)
+      - if policy(Song.new).create?
+        .edit_link_block
+          = link_to t(".instructions"), registrant_songs_path(@registrant)

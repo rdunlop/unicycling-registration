@@ -48,8 +48,8 @@ Another example, with different format:
   = label_tag :number_of_decimal_places
   = number_field_tag :number_of_decimal_places, 3
   %br
-  = submit_tag "Load Chip File to Temp Table"
+  = submit_tag "Load Chip File to Temp Table", class: "button"
 
-= render :partial => "imported_results"
+= render :partial => "imported_time_results"
 
 = link_to "Review", review_user_competition_import_results_path(@user, @competition), class: "action_button"

@@ -1,10 +1,9 @@
 //  If a score is present, displays the score for that competitor.
 // the 'show_competitor' local is to prevent users from clicking away while mid-edit
-%tr
-  - if score.nil?
-    = render :partial => "/competitors/competitor_basic", :object => competitor
-    = render :partial => "/scores/blank_score"
-  - else
-    = render :partial => "/scores/score_with_total", :object => score
-  - if show_update &&  can?(:create_scores, @judge.competition)
-    %td= link_to 'Set Score', new_judge_competitor_score_path(@judge, competitor), class: 'action_button'
+- if score.nil?
+  = render :partial => "/competitors/competitor_basic", :object => competitor
+  = render :partial => "/scores/blank_score"
+- else
+  = render :partial => "/scores/score_with_total", :object => score
+- if show_update && policy(@judge).create_scores?
+  %td= link_to 'Set Score', new_judge_competitor_score_path(@judge, competitor), class: 'action_button'

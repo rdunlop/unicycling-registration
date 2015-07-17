@@ -1,6 +1,6 @@
 class CompetitionSetup::DirectorsController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource class: false
+  before_action :authorize_director_management
 
   def index
     @events = Event.order(:name).all
@@ -22,5 +22,11 @@ class CompetitionSetup::DirectorsController < ApplicationController
     user.remove_role(:director, event)
 
     redirect_to directors_path(event), notice: 'Removed Director'
+  end
+
+  private
+
+  def authorize_director_management
+    authorize @config, :setup_competition?
   end
 end

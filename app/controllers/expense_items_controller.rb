@@ -1,11 +1,11 @@
 class ExpenseItemsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource
-
   before_action :set_breadcrumbs
 
   # GET /expense_items/1/details
   def details
+    @expense_item = ExpenseItem.find(params[:id])
+    authorize current_user, :manage_all_payments?
     @paid_details = @expense_item.paid_items
     @unpaid_details = @expense_item.unpaid_items
     @free_with_registration = @expense_item.free_items

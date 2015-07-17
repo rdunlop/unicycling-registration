@@ -12,6 +12,11 @@
 = f.label :no_reg_accounts, "Users without any registrants"
 = f.check_box :no_reg_accounts
 %br
+- if @config.usa_membership_config?
+  = f.label :non_confirmed_usa, "Users with registrants who aren't confirmed USA members"
+  = f.check_box :non_confirmed_usa
+  %br
+
 = f.label :competition_id, "Users who are assigned to a competition"
 = f.select :competition_id, Competition.event_order.all.map{ |comp| [comp, comp.id] }, {include_blank: true}, class: "chosen-select", multiple: true
 %br

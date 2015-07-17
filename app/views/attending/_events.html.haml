@@ -11,7 +11,7 @@
       - if category.info_url.present?
         .event_link
           = link_to "#{t('.more_info')} [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"}
-      %table.events.alternate
+      %table.events
         - category.events.each do |event|
           - next unless event.visible?
           = render :partial => "/attending/event", :locals => {:f => f, :registrant => @registrant, :category => category}, :object => event

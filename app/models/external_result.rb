@@ -15,7 +15,7 @@
 #
 # Indexes
 #
-#  index_external_results_on_competitor_id  (competitor_id)
+#  index_external_results_on_competitor_id  (competitor_id) UNIQUE
 #
 
 class ExternalResult < ActiveRecord::Base
@@ -27,6 +27,7 @@ class ExternalResult < ActiveRecord::Base
     ["active", "DQ"]
   end
 
+  validates :competitor_id, uniqueness: true
   validates :status, inclusion: { in: ExternalResult.status_values }
 
   belongs_to :entered_by, class_name: 'User', foreign_key: :entered_by_id
@@ -55,18 +56,13 @@ class ExternalResult < ActiveRecord::Base
   end
 
   # from CSV to import_result
-  def self.build_and_save_imported_result(raw, raw_data, user, competition)
-    ImportResult.create(
-      bib_number: raw[0],
+  def self.build_and_save_imported_result(raw, _raw_data, user, competition)
+    ExternalResult.preliminary.new(
+      competitor: CompetitorFinder.new(competition).find_by_bib_number(raw[0]),
       points: raw[1],
       details: raw[2],
-      raw_data: raw_data,
-      user: user,
-      competition: competition)
-  end
-
-  def disqualified?
-    false
+      entered_at: DateTime.now,
+      entered_by: user)
   end
 
   def result

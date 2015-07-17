@@ -1,6 +1,9 @@
 %h1 Event: #{@competition.name} - Street Scores
 %h2 Judge: #{@judge}
 
+- if !policy(@judge).create_scores?
+  %p.event_locked Scores for this event are now locked (closed)
+
 %hr.competitor_separator
 
 %table.top_distance_attempts
@@ -18,9 +21,13 @@
         %td= competitor.bib_number
         %td= competitor.to_s
         %td
-          = form_tag(update_score_judge_street_scores_path(@judge), class: "street_ranking", remote: true, data: { competitor: competitor.id }) do
-            = hidden_field_tag :competitor_id, competitor.id
-            = number_field_tag :score, @street_scores.select{ |s| s.competitor == competitor}.first.try(:val_1), id: "score_#{competitor.id}", class: "street_score", min: 0, max: @judge.judge_type.val_1_max
+          - competitor_score = @street_scores.select{ |s| s.competitor == competitor}.first.try(:val_1)
+          - if policy(@judge).create_scores?
+            = form_tag(update_score_judge_street_scores_path(@judge), class: "street_ranking no_dirty_check", remote: true, data: { competitor: competitor.id }) do
+              = hidden_field_tag :competitor_id, competitor.id
+              = number_field_tag :score, competitor_score, id: "score_#{competitor.id}", class: "street_score", min: 0, max: @judge.judge_type.val_1_max
+          - else
+            = competitor_score
         %td.place{ id: "comp_#{competitor.id}_place"}
 
 
@@ -44,4 +51,6 @@
           %td= ss.val_1
           %td.derived= ss.judged_place
           %td.derived= ss.placing_points
-          %td= link_to 'Delete', judge_street_score_path(@judge, ss), data: { confirm: 'Are you sure?' }, method: :delete
+          %td
+            - if policy(ss).destroy?
+              = link_to 'Delete', judge_street_score_path(@judge, ss), data: { confirm: 'Are you sure?' }, method: :delete

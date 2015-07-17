@@ -26,8 +26,17 @@ module FormHelper
     form.select :registrant_id, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.id] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
   end
 
-  def competitor_select_box(form, competition)
-    form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
+  # The form element which is used to enter data
+  def competitor_select_box(form, competition, options = {})
+    options.merge!(autofocus: true, class: "chosen-select js--autoFocus #{options[:class]}")
+    disabled_ids = options[:disabled_ids]
+    form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true, disabled: disabled_ids}, options
+  end
+
+  # The form element which is used to create a new competitor, if one shows up last minute for a competition
+  def non_signed_up_registrant_select_box(form, competition)
+    registrants = Registrant.active.competitor - competition.competitors.flat_map(&:registrants)
+    form.select(:registrant_id, registrants.map{ |reg| [reg.with_id_to_s, reg.id]}, {include_blank: true}, {class: 'chosen-select'})
   end
 
   def no_form_competitor_select_box(competition)
@@ -39,18 +48,26 @@ module FormHelper
   end
 
   def wizard_progress_bar(allow_navigation = false)
-    content_tag(:div, class: "wizard_progress") do
-      content_tag(:ul) do
-        wizard_steps.collect do |every_step|
-          class_str = "unfinished"
-          class_str = "current"  if every_step == step
-          class_str = "finished" if past_step?(every_step)
-          concat(
-            content_tag(:li, class: class_str) do
-              link_to_if past_step?(every_step) || allow_navigation, I18n.t("wizard.#{every_step}"), wizard_path(every_step)
-            end
-          )
+    content_tag(:ul, class: "button-group") do
+      wizard_steps.collect do |every_step|
+        class_str = "secondary"
+        li_class_str = "button secondary disabled"
+        if every_step == step
+          class_str = nil
+          li_class_str = "button"
         end
+        if past_step?(every_step)
+          class_str = "success"
+          li_class_str = nil
+        end
+        if allow_navigation
+          li_class_str = nil
+        end
+        concat(
+          content_tag(:li, class: li_class_str) do
+            link_to_if past_step?(every_step) || allow_navigation, I18n.t("wizard.#{every_step}"), wizard_path(every_step), class: "button #{class_str}"
+          end
+        )
       end
     end
   end

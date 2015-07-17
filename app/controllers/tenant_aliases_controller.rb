@@ -1,5 +1,8 @@
 class TenantAliasesController < ConventionSetupController
-  load_and_authorize_resource
+  before_action :authenticate_user!
+  before_action :load_tenant_alias, only: [:activate, :destroy]
+
+  before_action :authorize_setup
   before_action :set_breadcrumbs
 
   def index
@@ -33,6 +36,14 @@ class TenantAliasesController < ConventionSetupController
   end
 
   private
+
+  def load_tenant_alias
+    @tenant_alias = TenantAlias.find(params[:id])
+  end
+
+  def authorize_setup
+    authorize @config, :setup_convention?
+  end
 
   def set_breadcrumbs
     add_breadcrumb "Domain Setup", tenant_aliases_path

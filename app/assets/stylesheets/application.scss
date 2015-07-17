@@ -15,6 +15,8 @@
  * Then add this option to the list of EventConfiguration.style_names
  *
  *= require_self
+ *= require foundation_and_overrides
+
  *= require fancybox
  *= require chosen
  *= require_tree ./common

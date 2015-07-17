@@ -1,17 +1,19 @@
 class Compete::AgeGroupTypesController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_admin
   before_action :add_breadcrumbs
-
-  load_and_authorize_resource
+  before_action :load_age_group_type, only: [:edit, :show, :update, :destroy]
 
   respond_to :html
 
   def index
+    @age_group_types = AgeGroupType.all
     @age_group_type = AgeGroupType.new
     @age_group_type.age_group_entries.build # initial one
   end
 
   def create
+    @age_group_type = AgeGroupType.new(age_group_type_params)
     if @age_group_type.save
       flash[:notice] = 'Age Group Type was successfully created.'
     else
@@ -41,6 +43,14 @@ class Compete::AgeGroupTypesController < ApplicationController
   end
 
   private
+
+  def load_age_group_type
+    @age_group_type = AgeGroupType.find(params[:id])
+  end
+
+  def authorize_admin
+    authorize @config, :setup_competition?
+  end
 
   def add_breadcrumbs
     add_breadcrumb "Age Group Types", age_group_types_path

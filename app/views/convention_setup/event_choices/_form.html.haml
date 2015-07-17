@@ -12,4 +12,4 @@
 
   = f.input :required_if_event_choice_id, collection: @event_choices.map{|ec| [ec.label, ec.id]}
 
-  = f.submit
+  = f.button :submit

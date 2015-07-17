@@ -6,7 +6,7 @@ describe ManualPayment do
   end
 
   it "requires that the note be set" do
-    @pay.user = FactoryGirl.create(:admin_user)
+    @pay.user = FactoryGirl.create(:payment_admin)
     expect(@pay.valid?).to eq(false)
     @pay.note = "Hello"
     expect(@pay.valid?).to eq(false)

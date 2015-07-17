@@ -1,0 +1,44 @@
+%h1 Review #{@competition} Entered Results
+
+%table.import_results.sortable
+  - cache [@competition] do
+    %thead
+      %tr
+        %th Entry Number
+        %th ID
+        %th Name
+        %th Points
+        %th Disqualified
+        %th Entered At
+        %th Entered By
+  %tbody
+    - @external_results.each_with_index do |result, index|
+      - cache [result, Registrant, @competition] do
+        %tr
+          %td= index + 1
+          %td= result.competitor.bib_number
+          %td= result.competitor
+          %td= result.points
+          %td= result.disqualified? ? "yes" : ""
+          %td= result.entered_at.to_formatted_s(:short)
+          %td= result.entered_by
+
+%hr
+- imported_competitors = @external_results.map(&:competitor)
+- @competitors_without_results = @competition.competitors - imported_competitors
+%table.sortable
+  %caption Competitors without Results
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Status
+  %tbody
+    - @competitors_without_results.each do |competitor|
+      %tr
+        %td= competitor.bib_number
+        %td= competitor
+        %td= competitor.status
+%hr
+
+= link_to "Approve these results", approve_competition_preliminary_external_results_path(@competition), method: :post, data: { confirm: "Are you sure?" }

@@ -1,0 +1,29 @@
+- if policy(@config).setup_convention?
+  %li= link_to 'On-Site Registration', onsite_registration_path
+- if policy(:translation).index?
+  %li= link_to "Translations", translations_path
+- if policy(current_user).contact_registrants?
+  %li= link_to  'Registrants (email)', emails_path
+- if policy(current_user).manage_usa_memberships?
+  %li= link_to  'USA Membership Management', usa_memberships_path
+- if @config.standard_skill && policy(current_user).under_development?
+  %li= link_to 'Standard Skill Entries', standard_skill_entries_path
+- if policy(@config).manage_cache?
+  %li= link_to 'Cache Management', cache_event_configuration_path
+- if policy(current_user).under_development?
+  %li= link_to  'Registrants (bag labels)', bag_labels_registrants_path(:format => :pdf)
+- if policy(current_user).under_development?
+  %li= link_to  'Registrant Groups', registrant_groups_path
+- if policy(current_user).under_development?
+  %li= link_to  'Export Data', export_index_path
+- if policy(current_user).under_development?
+  %li= link_to  'Import Data', new_import_path
+- if policy(current_user).under_development?
+  %li= link_to  'Multi-Tenant Research', research_competitions_path
+- if policy(current_user).view_modification_history?
+  %li= link_to  'Modification History', rails_admin_path
+- if @config.standard_skill
+  - if policy(current_user).under_development?
+    %li= link_to  'Standard Skill Routines (view)', standard_skill_routines_path
+  - if policy(current_user).under_development?
+    %li= link_to  'Standard Skill Routines (export)', download_file_standard_skill_routines_path

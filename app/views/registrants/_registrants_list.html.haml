@@ -1,17 +1,13 @@
 - if my_registrants_list.any? || shared_list.any?
-  %div
-    %fieldset.registrations_box
-      %legend= t(".registrations")
-      %table.registrant_summary
-        - my_registrants_list.each do |registrant|
-          = render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => false }
-        - shared_list.each do |registrant|
-          = render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => true }
-        %tr
-          %td{:colspan => "4"}
-            %strong
-              = t(".total_amount_owing")
-          %td
-            %strong
-              = print_formatted_currency(@total_owing)
+  %fieldset.row
+    %legend= t(".registrations")
+    - my_registrants_list.each do |registrant|
+      = render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => false }
+    - shared_list.each do |registrant|
+      = render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => true }
+    .row
+      .small-10.columns.text-right
+        %strong= t(".total_amount_owing")
+      .small-2.columns
+        %strong= print_formatted_currency(@total_owing)
 = render :partial => "/registrants/pay_now", :locals => {:total_owing => @total_owing }

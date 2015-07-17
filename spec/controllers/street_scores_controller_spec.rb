@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe StreetScoresController do
   before (:each) do
-    @admin = FactoryGirl.create(:admin_user)
+    @admin = FactoryGirl.create(:super_admin_user)
     @user = FactoryGirl.create(:data_entry_volunteer_user)
     @other_user = FactoryGirl.create(:data_entry_volunteer_user)
     sign_in @admin

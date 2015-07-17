@@ -1,10 +1,9 @@
 class Printing::EventsController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource :event, parent: false
-
   before_action :load_event
 
   def results
+    authorize @event
     @competitions = @event.competitions
 
     @no_page_breaks = true # unless params[:no_page_breaks].nil?

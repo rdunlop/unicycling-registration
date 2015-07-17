@@ -1,4 +1,4 @@
-= form_for([@registrant, @competition_wheel_size]) do |f|
+= simple_form_for([@registrant, @competition_wheel_size]) do |f|
   = render partial: "/shared/error_messages", object: @competition_wheel_size
   .field
     = f.label :event
@@ -7,4 +7,4 @@
     = f.label :wheel_size_id
     = f.collection_select :wheel_size_id, WheelSize.all, :id, :description
   .actions
-    = f.submit 'Set Wheel Size', class: 'focus_button'
+    = f.button :submit, 'Set Wheel Size'

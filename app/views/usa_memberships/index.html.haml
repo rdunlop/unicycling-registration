@@ -27,5 +27,5 @@
 
   %tbody
     - cache [Registrant, @config] do
-      - Registrant.includes(:contact_detail => [:usa_family_membership_holder]).active.each do |reg|
+      - @registrants.each do |reg|
         = render partial: "member_row", object: reg

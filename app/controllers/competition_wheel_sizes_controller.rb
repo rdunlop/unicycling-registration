@@ -1,21 +1,21 @@
 class CompetitionWheelSizesController < ApplicationController
-  load_resource :registrant, find_by: :bib_number, except: :destroy
-  authorize_resource :registrant, except: :destroy
-  load_and_authorize_resource through: :registrant, except: :destroy
-  load_and_authorize_resource only: :destroy
   before_action :authenticate_user!
+  before_action :load_registrant_by_bib_number
+  before_action :authorize_registrant
+
   layout "minimal"
 
   respond_to :html
 
   # GET /registrants/#/competition_wheel_sizes
   def index
+    @competition_wheel_sizes = @registrant.competition_wheel_sizes
     @competition_wheel_size = CompetitionWheelSize.new
   end
 
-  # POST /competition_wheel_sizes
+  # POST /registrants/#/competition_wheel_sizes
   def create
-    authorize! :create, @registrant
+    @competition_wheel_size = @registrant.competition_wheel_sizes.build(competition_wheel_size_params)
     if @competition_wheel_size.save
       redirect_to registrant_competition_wheel_sizes_path(@registrant), notice: 'successfully created.'
     else
@@ -24,15 +24,22 @@ class CompetitionWheelSizesController < ApplicationController
     end
   end
 
-  # DELETE /competition_wheel_sizes/1
+  # DELETE /registrants/#/competition_wheel_sizes/1
   def destroy
-    @registrant = @competition_wheel_size.registrant
-    authorize! :update, @registrant
+    @competition_wheel_size = @registrant.competition_wheel_sizes.find(params[:id])
     @competition_wheel_size.destroy
     redirect_to registrant_competition_wheel_sizes_path(@registrant), notice: 'Override was successfully deleted.'
   end
 
   private
+
+  def load_registrant_by_bib_number
+    @registrant = Registrant.find_by(bib_number: params[:registrant_id])
+  end
+
+  def authorize_registrant
+    authorize @registrant, :update?
+  end
 
   def competition_wheel_size_params
     params.require(:competition_wheel_size).permit(:event_id, :wheel_size_id)

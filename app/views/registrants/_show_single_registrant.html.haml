@@ -1,9 +1,11 @@
 - cache [current_user] do
-  - if can? :update, @registrant
-    .js--showElement{ data: { key: "update_registrant" } }
-  - if can? :create, RegistrantExpenseItem
+  - if policy(@registrant).add_name?
+    .js--showElement{ data: { key: "update_registrant_name" } }
+  - if policy(@registrant).add_events?
+    .js--showElement{ data: { key: "update_registrant_events" } }
+  - if policy(@registrant).expenses?
     .js--showElement{ data: { key: "create_rei" } }
-  - if can? :manage, @registrant
+  - if policy(@registrant).payments?
     .js--showElement{ data: { key: "manage_registrant" } }
 
 - cache_i18n ['header', @registrant] do
@@ -18,28 +20,28 @@
 - cache_i18n ['printable_link', @registrant, @registrant.members_cache_key] do
   .non_printable
     = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
-.registrant_summary{ class: "show_#{@registrant.registrant_type}_elements" }
-  .registrant_summary_block
+.row.full_page{ class: "show_#{@registrant.registrant_type}_elements" }
+  .small-12.medium-4.columns.print-4
     // this partial includes conditional-display logic..do not cache it
     = render :partial => "/registrants/summary"
     - cache_i18n ['edit_link', @registrant] do
-      .edit_link_block.js--showElementTarget{ data: { key: "update_registrant" } }
+      .edit_link_block.js--showElementTarget{ data: { key: "update_registrant_name" } }
         = link_to t(".edit_registration"), registrant_build_path(@registrant, :add_name)
   - cache_i18n ['expenses', @registrant, @registrant.members_cache_key] do
-    .registrant_expenses_block
+    .small-12.medium-4.columns.print-4
       = render :partial => "/registrants/registrant_expenses"
       .edit_link_block.js--showElementTarget{ data: { key: "create_rei" } }
         = link_to t(".edit_items"), registrant_build_path(@registrant, :expenses)
       .non_printable.js--showElementTarget{ data: { key: "manage_registrant" } }
-        = link_to t(".list_payments"), registrant_payments_path(@registrant)
-    .registrant_events_block
+        = link_to t(".list_payments"), payments_registrant_path(@registrant.bib_number)
+    .small-12.medium-4.columns.print-4
       - if @registrant.competitor
         - if @config.display_confirmed_events?
           = render partial: "/registrants/registrant_confirmed_events"
           = render partial: "/registrants/registrant_unconfirmed_events"
         - else
           = render :partial => "/registrants/registrant_events"
-        .edit_link_block.js--showElementTarget{ data: { key: "update_registrant" } }
+        .edit_link_block.js--showElementTarget{ data: { key: "update_registrant_events" } }
           = link_to t(".edit_events"), registrant_build_path(@registrant, :add_events)
 
   // contains caching
@@ -52,4 +54,6 @@
     %hr.non_printable
     .non_printable
       = link_to t(".done"), user_registrants_path(current_user), {:class => "registration_button"}
+      - if policy(@registrant).results?
+        = link_to "Results", results_registrant_path(@registrant), class: "button primary alert"
     = render :partial => "/registrants/waiver"

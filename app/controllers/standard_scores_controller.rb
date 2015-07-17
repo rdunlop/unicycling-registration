@@ -6,10 +6,8 @@ class StandardScoresController < ApplicationController
 
   # GET /judges/29/standard_scores
   def index
+    authorize current_user, :under_development?
     @competitors = @judge.competitors
-    @competitors.each do |c|
-      authorize! :read, c
-    end
 
     respond_to do |format|
       format.html
@@ -18,13 +16,12 @@ class StandardScoresController < ApplicationController
 
   # GET /judges/29/competitors/4/new
   def new
+    authorize current_user, :under_development?
+
     @skills = @competitor.registrants.first.standard_skill_routine.standard_skill_routine_entries
     existing_scores =            @judge.standard_execution_scores.where(competitor_id: @competitor.id)
     existing_difficulty_scores = @judge.standard_difficulty_scores.where(competitor_id: @competitor.id)
 
-    existing_scores.each do |s|
-      authorize! :read, s
-    end
     @skills.each do |skill|
       existing_score = existing_scores.find_by_standard_skill_routine_entry_id(skill.id)
       if existing_score.nil?
@@ -39,9 +36,6 @@ class StandardScoresController < ApplicationController
       end
     end
 
-    existing_difficulty_scores.each do |s|
-      authorize! :read, s
-    end
     @skills.each do |skill|
       existing_score = existing_difficulty_scores.find_by_standard_skill_routine_entry_id(skill.id)
       if existing_score.nil?

@@ -16,7 +16,7 @@
         %td= paid_detail.amount
         %td= paid_detail.details
 
-- if can? :exchange_choose, :payment_adjustment
+- if policy(current_user).manage_old_payment_adjustments?
   = form_tag(exchange_choose_payment_adjustments_path, :method => :post) do
     - @p.registrants.each do |reg|
       = hidden_field_tag "registrant_id[]", reg.id
@@ -24,7 +24,7 @@
 
 %hr
 
-- if can? :onsite_pay_confirm, :payment_adjustment
+- if policy(current_user).manage_old_payment_adjustments?
   %h1 Chosen (but unpaid) Details
   %table.sortable
     %thead

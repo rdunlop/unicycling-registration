@@ -14,15 +14,17 @@ Ensure that your desired volunteer is enabled in the "Data Entry Volunteer Accou
         %th
           = user
 %h3 Set User as 'Data Entry Volunteer'
-= form_for [@competition, @data_entry_volunteer] do |f|
+= simple_form_for [@competition, @data_entry_volunteer] do |f|
   = render partial: "/shared/error_messages", object: @data_entry_volunteer
-  = f.label :user_id, "User Account"
-  = f.select :user_id, User.all.map { |user| [user, user.id] }, { include_blank: true }, class: 'chosen-select'
-  %br
-  = f.label :name, "Name"
-  = f.text_field :name
-  %br
-  = f.submit
+  .row
+    .small-4.columns
+      = f.label :user_id, "User Account"
+      = f.select :user_id, User.all.map { |user| [user, user.id] }, { include_blank: true }, class: 'chosen-select'
+    .small-4.columns
+      = f.label :name, "Name"
+      = f.text_field :name
+    .small-4.columns
+      = f.button :submit
 Allows users to see the Date Entry menu.
 %br
 Doing this also confirms unconfirmed e-mail accounts so that they can immediately log in.

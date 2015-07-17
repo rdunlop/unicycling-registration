@@ -8,9 +8,6 @@ describe "payments/show" do
     @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment)
     @payment.reload
 
-    @ability = Object.new
-    @ability.extend(CanCan::Ability)
-    allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:current_user) { user }
   end
 

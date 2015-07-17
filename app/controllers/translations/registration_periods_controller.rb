@@ -1,6 +1,5 @@
 class Translations::RegistrationPeriodsController < Admin::TranslationsController
-  before_action :authenticate_user!
-  load_resource
+  before_action :load_registration_period, except: :index
 
   def index
     @registration_periods = RegistrationPeriod.all
@@ -21,6 +20,10 @@ class Translations::RegistrationPeriodsController < Admin::TranslationsControlle
   end
 
   private
+
+  def load_registration_period
+    @registration_period = RegistrationPeriod.find(params[:id])
+  end
 
   def registration_period_params
     params.require(:registration_period).permit(translations_attributes: [:id, :locale, :name])

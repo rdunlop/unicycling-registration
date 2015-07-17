@@ -10,13 +10,11 @@
 
     = f.input :enabled_locales, collection: EventConfiguration.all_available_languages, input_html: { multiple: true }
 
-  %fieldset.form__fieldset
     %h3 Tax Settings
     = f.input :italian_requirements
     .description
       Requires collection of BirthPlace from everyone, and Italian Fiscal Code from Italian registrants.
 
-  %fieldset.form__fieldset
     %h3 Unicycling Society of America (USA) Membership Summary
 
     = f.input :usa_membership_config
@@ -25,7 +23,6 @@
     = f.association :usa_family_expense_item, collection: ExpenseItem.user_manageable
 
 
-  %fieldset.form__fieldset
     %h3 Standard Skill
 
     %p
@@ -38,11 +35,11 @@
 
     = f.input :standard_skill_closed_date
 
-  %fieldset.form__fieldset
     = f.input :usa
     = f.input :iuf
     IUF is Unused?
     = f.input :display_confirmed_events
     = f.input :test_mode
 
-  = f.button :submit
+    %hr
+    = f.button :submit

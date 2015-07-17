@@ -47,9 +47,18 @@ GIT
       capistrano
       sidekiq
 
+GIT
+  remote: git://github.com/sudosu/rails_admin_pundit.git
+  revision: 285e3e79a37242cf7a527053e9b438782801557a
+  specs:
+    rails_admin_pundit (0.0.1)
+      pundit (>= 0.2.3)
+      rails_admin (>= 0.6.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.3.1)
     actionmailer (4.2.3)
       actionpack (= 4.2.3)
       actionview (= 4.2.3)
@@ -119,7 +128,6 @@ GEM
     bullet (4.14.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
-    cancancan (1.10.1)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -140,7 +148,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    carrierwave_direct (0.0.14)
+    carrierwave_direct (0.0.15)
       carrierwave
       fog
       uuidtools
@@ -209,7 +217,7 @@ GEM
     exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
-    excon (0.35.0)
+    excon (0.45.3)
     execjs (2.5.2)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
@@ -219,29 +227,110 @@ GEM
     fancybox2-rails (0.2.8)
       railties (>= 3.1.0, < 5.0)
     ffi (1.9.8)
-    fog (1.22.1)
-      fog-brightbox
-      fog-core (~> 1.22)
+    fission (0.5.0)
+      CFPropertyList (~> 2.2)
+    fog (1.32.0)
+      fog-atmos
+      fog-aws (>= 0.6.0)
+      fog-brightbox (~> 0.4)
+      fog-core (~> 1.32)
+      fog-ecloud (= 0.1.1)
+      fog-google (>= 0.0.2)
       fog-json
+      fog-local
+      fog-powerdns (>= 0.1.1)
+      fog-profitbricks
+      fog-radosgw (>= 0.0.2)
+      fog-riakcs
+      fog-sakuracloud (>= 0.0.4)
+      fog-serverlove
+      fog-softlayer
+      fog-storm_on_demand
+      fog-terremark
+      fog-vmfusion
+      fog-voxel
+      fog-xml (~> 0.1.1)
       ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
-    fog-brightbox (0.0.2)
+    fog-atmos (0.1.0)
       fog-core
+      fog-xml
+    fog-aws (0.6.0)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-brightbox (0.7.2)
+      fog-core (~> 1.22)
       fog-json
-    fog-core (1.22.0)
+      inflecto (~> 0.0.2)
+    fog-core (1.32.0)
       builder
-      excon (~> 0.33)
+      excon (~> 0.45)
       formatador (~> 0.2)
       mime-types
       net-scp (~> 1.1)
       net-ssh (>= 2.1.3)
-    fog-json (1.0.0)
-      multi_json (~> 1.0)
+    fog-ecloud (0.1.1)
+      fog-core
+      fog-xml
+    fog-google (0.0.7)
+      fog-core
+      fog-json
+      fog-xml
+    fog-json (1.0.2)
+      fog-core (~> 1.0)
+      multi_json (~> 1.10)
+    fog-local (0.2.1)
+      fog-core (~> 1.27)
+    fog-powerdns (0.1.1)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+    fog-profitbricks (0.0.3)
+      fog-core
+      fog-xml
+      nokogiri
+    fog-radosgw (0.0.4)
+      fog-core (>= 1.21.0)
+      fog-json
+      fog-xml (>= 0.0.1)
+    fog-riakcs (0.1.0)
+      fog-core
+      fog-json
+      fog-xml
+    fog-sakuracloud (1.0.1)
+      fog-core
+      fog-json
+    fog-serverlove (0.1.2)
+      fog-core
+      fog-json
+    fog-softlayer (0.4.7)
+      fog-core
+      fog-json
+    fog-storm_on_demand (0.1.1)
+      fog-core
+      fog-json
+    fog-terremark (0.1.0)
+      fog-core
+      fog-xml
+    fog-vmfusion (0.1.0)
+      fission
+      fog-core
+    fog-voxel (0.1.0)
+      fog-core
+      fog-xml
+    fog-xml (0.1.2)
+      fog-core
+      nokogiri (~> 1.5, >= 1.5.11)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     foreman (0.78.0)
       thor (~> 0.19.1)
     formatador (0.2.5)
+    foundation-rails (5.5.2.1)
+      railties (>= 3.1.0)
+      sass (>= 3.3.0, < 3.5)
     gaffe (1.0.2)
       rails (>= 3.2.0)
     globalid (0.3.5)
@@ -256,6 +345,7 @@ GEM
     http_accept_language (2.0.2)
     i18n (0.7.0)
     ice_nine (0.11.0)
+    inflecto (0.0.2)
     ipaddress (0.8.0)
     jquery-datetimepicker-rails (2.4.1.0)
     jquery-rails (4.0.4)
@@ -286,7 +376,7 @@ GEM
       monetize (~> 1.1.0)
       money (~> 6.5.0)
       railties (>= 3.0)
-    multi_json (1.11.1)
+    multi_json (1.11.2)
     nested_form (0.3.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -317,6 +407,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pundit (1.0.1)
+      activesupport (>= 3.0.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -491,7 +583,7 @@ GEM
       rack
       raindrops (~> 0.7)
     uniform_notifier (1.9.0)
-    uuidtools (2.1.4)
+    uuidtools (2.1.5)
     virtus (1.0.1)
       axiom-types (~> 0.0.5)
       coercible (~> 1.0)
@@ -527,7 +619,6 @@ DEPENDENCIES
   binding_of_caller
   breadcrumbs_on_rails
   bullet
-  cancancan (~> 1.10)
   capistrano
   capistrano-bundler
   capistrano-rails
@@ -550,6 +641,7 @@ DEPENDENCIES
   fog
   font-kit-rails!
   foreman
+  foundation-rails
   gaffe
   globalize (~> 5.0.0)
   http_accept_language
@@ -563,10 +655,12 @@ DEPENDENCIES
   poltergeist
   prawn-labels
   pry
+  pundit
   quiet_assets
   rails (= 4.2.3)
   rails-i18n (~> 4.0.0)
   rails_admin
+  rails_admin_pundit!
   rake
   recaptcha
   redis-rails

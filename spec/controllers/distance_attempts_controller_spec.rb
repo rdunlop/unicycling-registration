@@ -10,7 +10,7 @@ describe DistanceAttemptsController do
     before (:each) do
       @competition = FactoryGirl.create(:distance_competition)
       @comp = FactoryGirl.create(:event_competitor, competition: @competition)
-      @judge = FactoryGirl.create(:judge, competition: @competition)
+      @judge = FactoryGirl.create(:judge, competition: @competition, user: @data_entry_volunteer_user)
     end
     def valid_attributes
       {
@@ -42,7 +42,7 @@ describe DistanceAttemptsController do
     before(:each) do
       @competition = FactoryGirl.create(:distance_competition)
       @comp = FactoryGirl.create(:event_competitor, competition: @competition)
-      @judge = FactoryGirl.create(:judge, competition: @competition)
+      @judge = FactoryGirl.create(:judge, competition: @competition, user: @data_entry_volunteer_user)
     end
     it "should return a list of all distance_attempts" do
       get :list, competition_id: @competition.id

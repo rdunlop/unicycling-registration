@@ -1,17 +1,17 @@
 class StreetScoresController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition, except: [:destroy]
-  load_and_authorize_resource :score
 
   def index
     @score = @judge.scores.new
     @competitors = @competition.competitors.reorder(:position)
-    authorize! :create, @score
+    authorize @judge, :view_scores?
   end
 
   def update_score
     @score = @judge.scores.where(competitor_id: params[:competitor_id]).first
     @score ||= @judge.scores.build(competitor_id: params[:competitor_id])
+    authorize @score, :create?
     if params[:score].present?
       @score.val_1 = params[:score]
       @score.val_2 = 0
@@ -30,7 +30,7 @@ class StreetScoresController < ApplicationController
   def destroy
     @score = Score.find(params[:id])
     @judge = @score.judge
-    authorize! :destroy, @score
+    authorize @score, :destroy?
 
     @score.destroy
 

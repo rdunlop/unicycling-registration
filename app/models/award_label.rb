@@ -39,14 +39,12 @@ class AwardLabel < ActiveRecord::Base
   end
 
   def build_category_name(competitor, expert)
-    if competitor.members.count > 1
-      gender = nil
-    else
-      gender = competitor.gender
-    end
-
     if expert
-      "Expert #{gender}"
+      if competitor.members.count > 1
+        "Expert"
+      else
+        "Expert #{competitor.gender}"
+      end
     else
       if competitor.competition.age_group_type.present?
         competitor.age_group_entry_description

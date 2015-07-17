@@ -2,7 +2,7 @@
   color: green;
 }
 
-.notice {
+.notice_flash {
   display:inline-block;
   clear:none;
   padding: 8px 14px;
@@ -15,7 +15,7 @@
           border-radius: 4px;
 }
 
-.alert {
+.alert_flash {
   display:inline-block;
   clear:none;
   padding: 8px 14px;
@@ -26,6 +26,14 @@
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
+}
+
+.top_banner {
+  margin-bottom: 0;
+
+  a {
+    color: white;
+  }
 }
 
 .reg_access_banner {

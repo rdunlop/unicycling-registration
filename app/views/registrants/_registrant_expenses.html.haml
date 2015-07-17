@@ -4,7 +4,7 @@
   %table.expense_items
     %thead
       %tr
-        %th= RegistrantExpenseItem.model_name.human
+        %th.text-right= RegistrantExpenseItem.model_name.human
         %th= t(".cost")
         %th
           = t(".paid")
@@ -13,5 +13,5 @@
       = render partial: "/registrants/registrant_paid_expenses", locals: { details: false }
       = render partial: "/registrants/registrant_unpaid_expenses", locals: { include_form: false, details: false }
     %tfoot
-      %th{colspan: 4}
+      %th.text-right{colspan: 4}
         = render partial: "/registrants/registrant_total_owing", locals: { registrant: @registrant }

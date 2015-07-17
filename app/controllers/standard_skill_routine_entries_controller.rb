@@ -1,12 +1,8 @@
 class StandardSkillRoutineEntriesController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :standard_skill_routine
+  before_action :authorize_user
+  before_action :load_standard_skill_routine
   before_action :load_new_standard_skill_routine_entry, only: [:create]
-  load_and_authorize_resource :standard_skill_routine_entry, through: :standard_skill_routine, only: [:destroy]
-
-  def load_new_standard_skill_routine_entry
-    @standard_skill_routine_entry = @standard_skill_routine.add_standard_skill_routine_entry(standard_skill_routine_entry_params)
-  end
 
   # POST /standard_skill_routines/:id/standard_skill_routine_entries
   # POST /standard_skill_routines/:id/standard_skill_routine_entries.json
@@ -30,6 +26,7 @@ class StandardSkillRoutineEntriesController < ApplicationController
   # DELETE /standard_skill_routines/:id/standard_skill_routine_entries/1
   # DELETE /standard_skill_routines/:id/standard_skill_routine_entries/1.json
   def destroy
+    @standard_skill_routine_entry = @standard_skill_routine.standard_skill_routine_entries.find(params[:id])
     @standard_skill_routine_entry.destroy
 
     respond_to do |format|
@@ -40,6 +37,18 @@ class StandardSkillRoutineEntriesController < ApplicationController
   end
 
   private
+
+  def authorize_user
+    authorize current_user, :under_development?
+  end
+
+  def load_new_standard_skill_routine_entry
+    @standard_skill_routine_entry = @standard_skill_routine.add_standard_skill_routine_entry(standard_skill_routine_entry_params)
+  end
+
+  def load_standard_skill_routine
+    @standard_skill_routine = StandardSkillRoutine.find(params[:standard_skill_routine_id])
+  end
 
   def standard_skill_routine_entry_params
     params.require(:standard_skill_routine_entry).permit(:standard_skill_entry_id, :position)

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "award_labels/edit" do
   before(:each) do
-    @user = FactoryGirl.create(:admin_user)
+    @user = FactoryGirl.create(:award_admin_user)
     @award_label = FactoryGirl.create(:award_label)
   end
 

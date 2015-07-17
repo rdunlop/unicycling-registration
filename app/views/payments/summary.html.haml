@@ -1,33 +1,27 @@
 %h1 Payments Management
 
-- cache [Payment] do
-  %div
-    %strong Total Amount Received
-    = print_formatted_currency(Payment.total_received)
-
-
-- if can? :set_reg_fee, :registrant
+- if policy(current_user).manage_all_payments?
   = link_to "Adjust a Registrant's Registration Fee", set_reg_fees_path
   %br
   %small If we need to lock a competitor into a previous Registration Period
   %br
 
-- if can? :new, :manual_payment
+- if policy(current_user).manage_all_payments?
   = link_to "Manually Receive Payment", new_manual_payment_path
   %br
 
-- if can? :new, :manual_refund
+- if policy(current_user).manage_all_payments?
   = link_to "Create Refund", new_manual_refund_path
   %br
 
-- if can? :new, :payment_adjustment # change this to a different action
+- if policy(current_user).manage_old_payment_adjustments?
   = link_to "Create Refund/Exchange", new_payment_adjustment_path
   %br
 
-- if can? :list, :payment_adjustment
+- if policy(current_user).manage_all_payments?
   = link_to "View list of Payments/Refunds", list_payment_adjustments_path
 
-- if can? :list, :export_payment
+- if policy(current_user).manage_all_payments?
   = link_to "Download Payments", list_export_payments_path
   %br
 
@@ -35,34 +29,44 @@
 %br
 %br
 
-
 %hr
-%h2 Expenses by Group
 
-%table.sortable
-  %thead
-    %tr
-      %th Group
-      %th Entry
-      %th Num paid (no discount)
-      %th Num paid (with discount or free)
-      %th Total Amount Paid
-      %th Num unpaid
-  %tbody
-    - @expense_items.each do |item|
+- cache [Payment] do
+  %h2 Revenues by Group
+
+  %table.sortable
+    %thead
       %tr
-        %td= item.expense_group
-        %td= link_to item, details_expense_item_path(item)
-        - cache [PaymentDetail.cache_key_for_set(item.id), RegistrantExpenseItem.cache_key_for_set(item.id) ] do
-          %td
-            = item.num_paid_without_coupon
-          %td
-            = item.num_paid_with_coupon + item.num_free
-          %td
-            = print_formatted_currency(item.total_amount_paid)
-          %td
-            - unpaid_count = item.num_unpaid
-            = unpaid_count
+        %th Group
+        %th Item
+        %th Num paid (no discount)
+        %th Num paid (with discount or free)
+        %th Total Amount Paid
+        %th Num unpaid
+    %tbody
+      - @expense_items.each do |item|
+        %tr
+          %td= item.expense_group
+          %td= link_to item, details_expense_item_path(item)
+          - cache [PaymentDetail.cache_key_for_set(item.id), RegistrantExpenseItem.cache_key_for_set(item.id) ] do
+            %td
+              = item.num_paid_without_coupon
+            %td
+              = item.num_paid_with_coupon + item.num_free
+            %td
+              = print_formatted_currency(item.total_amount_paid)
+            %td
+              - unpaid_count = item.num_unpaid
+              = unpaid_count
+    %tfoot
+      %tr
+        %th{colspan: 3}
+        %th Non-Refunded Amount
+        %th= print_formatted_currency(Payment.total_non_refunded_amount)
+      %tr
+        %th{colspan: 3}
+        %th Total
+        %th= print_formatted_currency(Payment.total_received)
 
 - if CouponCode.any?
   %h2 Coupon Codes

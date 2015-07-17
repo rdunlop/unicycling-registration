@@ -12,7 +12,7 @@
   = t(".upload_file")
 
 %br
-
-= link_to t("back"), registrant_path(@registrant)
-%br
 = link_to t(".add_songs_for_others"), my_songs_user_songs_path(current_user)
+
+%hr
+= link_to "#{@registrant} Summary", registrant_path(@registrant), class: "button secondary"

@@ -1,10 +1,9 @@
 class Compete::CombinedCompetitionEntriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :authenticate_ability
 
   before_action :load_combined_competition
   before_action :set_combined_competition_entry, only: [:edit, :update, :destroy]
-
-  load_and_authorize_resource
 
   respond_to :html
 
@@ -49,6 +48,10 @@ class Compete::CombinedCompetitionEntriesController < ApplicationController
   end
 
   private
+
+  def authenticate_ability
+    authorize @config, :setup_competition?
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_combined_competition_entry

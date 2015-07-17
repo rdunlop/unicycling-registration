@@ -1,6 +1,6 @@
 shared_context 'can login' do
   def fill_in_login_form
-    within('.new_user') do
+    within('#new_user') do
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
       click_button 'Log in'
@@ -27,7 +27,7 @@ shared_context 'basic event configuration' do |options = {}|
     FactoryGirl.create(:wheel_size_20)
     FactoryGirl.create(:wheel_size_24)
     FactoryGirl.create(:event_configuration, start_date: Date.today + 6.months,
-                                             iuf: true, usa: false, usa_membership_config: false, test_mode: options[:test_mode], music_submission_end_date: Date.today + 2.months)
+                                             iuf: true, usa: false, usa_membership_config: false, test_mode: options[:test_mode], music_submission_end_date: Date.today + 2.months, event_sign_up_closed_date: Date.today + 2.months)
     exp_comp = FactoryGirl.create(:expense_item, name: "Early Registration - Competitor", cost: 20.00)
     exp_noncomp = FactoryGirl.create(:expense_item, name: "Early Registration - NonCompetitor", cost: 11.00)
     FactoryGirl.create(:registration_period, :current, start_date: Date.today - 1.month, end_date: Date.today + 1.month, competitor_expense_item: exp_comp, noncompetitor_expense_item: exp_noncomp)
@@ -50,7 +50,7 @@ end
 shared_context "points_event" do |options = {}|
   before :each do
     event = FactoryGirl.create(:event, name: options[:name])
-    competition = FactoryGirl.create(:ranked_competition, event: event, name: options[:name], start_data_type: 'One Data Per Line')
+    competition = FactoryGirl.create(:ranked_competition, event: event, name: options[:name], end_data_type: "One Data Per Line")
     FactoryGirl.create(:event_competitor, competition: competition)
     reg = Registrant.first
     reg.first_name = "Robin"

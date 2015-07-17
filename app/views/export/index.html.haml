@@ -2,10 +2,10 @@
 
 %hr
 %b Download Details on registrants who bought:
-= form_for :data, :url => export_download_payment_details_path(:format => :xls), :method => :get do |f|
+= simple_form_for :data, :url => export_download_payment_details_path(:format => :xls), :method => :get do |f|
   = f.select :expense_item_id, ExpenseItem.all.map { |ei| [ei, ei.id] }
   %br
-  = f.submit "Export Registrants who bought this item", :class => "multiclick"
+  = f.button :submit, "Export Registrants who bought this item", :class => "multiclick"
 
 %hr
 = link_to 'Download Event Info', export_download_events_path(:format => :xls)

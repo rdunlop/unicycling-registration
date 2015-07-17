@@ -1,17 +1,21 @@
 class TwoAttemptEntriesController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :user
+  before_action :load_user
   before_action :load_competition, only: [:index, :proof, :create, :approve]
   before_action :load_new_two_attempt_entry, only: [:create]
   before_action :set_is_start_time, only: [:index, :proof, :approve]
   before_action :load_two_attempt_entries, only: [:index, :proof, :approve]
-  load_and_authorize_resource
+
+  before_action :load_two_attempt_entry, only: [:edit, :update, :destroy]
+  before_action :authorize_data_entry, except: [:index]
 
   before_action :set_breadcrumbs
 
   # GET /users/#/two_attempt_entry
   # GET /users/#/two_attempt_entrys.json
   def index
+    authorize @competition, :view_result_data?
+
     add_breadcrumb "Add two-entry data"
 
     @two_attempt_entry = TwoAttemptEntry.new(is_start_time: @is_start_time)
@@ -96,6 +100,19 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   private
+
+  def authorize_data_entry
+    authorize @competition, :modify_result_data?
+  end
+
+  def load_user
+    @user = User.find(params[:user_id])
+  end
+
+  def load_two_attempt_entry
+    @two_attempt_entry = TwoAttemptEntry.find(params[:id])
+    @competition = @two_attempt_entry.competition
+  end
 
   def two_attempt_entry_params
     params.require(:two_attempt_entry).permit(:bib_number, :is_start_time,

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
+  include Pundit
 
   before_action :load_config_object
   before_action :set_locale
@@ -9,25 +10,36 @@ class ApplicationController < ActionController::Base
   before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
   protect_from_forgery
-  check_authorization unless: :devise_controller?
-  skip_authorization_check if: :rails_admin_controller?
+  # after_action :verify_authorized, :except => :index
+  after_action :verify_authorized, except: :devise_controller?
+
+  before_action :skip_authorization, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def raise_not_found!
+    raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
+  end
+
+  private
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:account_update) << [:name]
+  end
 
   def rails_admin_controller?
     false
+  end
+
+  # Override the default pundit_user so that we can pass additional state to the policies
+  def pundit_user
+    @pundit_user ||= UserContext.new(current_user, EventConfiguration.singleton, EventConfiguration.closed?, allow_reg_modifications?)
   end
 
   def default_url_options(_options = {})
     { locale: I18n.locale }
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
-    Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
-    redirect_to root_path, alert: exception.message
-  end
-
-  def raise_not_found!
-    raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
-  end
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def load_config_object
     @config = EventConfiguration.singleton
@@ -87,7 +99,10 @@ class ApplicationController < ActionController::Base
            layout: "pdf.html"
   end
 
-  private
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
+  end
 
   def locale_parameter
     params[:locale] if I18n.available_locales.include?(params[:locale].try(:to_sym))
@@ -122,7 +137,7 @@ class ApplicationController < ActionController::Base
   end
 
   def add_competition_breadcrumb(competition)
-    add_breadcrumb "#{competition}", (competition_path(competition) if can? :show, competition)
+    add_breadcrumb "#{competition}", (competition_path(competition) if policy(competition).show?)
   end
 
   def add_to_competition_breadcrumb(competition)

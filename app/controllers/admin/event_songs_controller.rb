@@ -1,11 +1,11 @@
 class Admin::EventSongsController < ApplicationController
-  authorize_resource class: false
+  before_action :authenticate_user!
+  before_action :authorize_music_admin
   before_action :add_breadcrumbs
 
   # GET /event_songs
   def index
     @event = Event.music_uploadable
-
   end
 
   # GET /event_songs/:id
@@ -17,8 +17,11 @@ class Admin::EventSongsController < ApplicationController
 
   private
 
+  def authorize_music_admin
+    authorize current_user, :manage_music?
+  end
+
   def add_breadcrumbs
     add_breadcrumb "Music"
   end
-
 end

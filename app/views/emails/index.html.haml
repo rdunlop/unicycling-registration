@@ -7,8 +7,8 @@
 
 %h4 Filter
 = render :partial => "/shared/error_messages", :object => @email_form
-= form_for @email_form, url: list_emails_path, method: :get do |f|
+= simple_form_for @email_form, url: list_emails_path, method: :get do |f|
   = render partial: "form", locals: { f: f }
-  = f.submit "Get Email List", :class => "focus_button"
+  = f.button :submit, "Get Email List", :class => "focus_button"
 %hr
 

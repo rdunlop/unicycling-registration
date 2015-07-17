@@ -246,56 +246,12 @@ Registrant Expense Items
     %input{ type: "checkbox", id: 'the_checkbox2' }
     %label.label--checkbox{ for: 'the_checkbox2' } Checkbox label
 
-// Wizard
-%h2.style_head Wizard
-%small Note: The spaces between elements only appear on THIS page.
-.wizard_progress
-  %ul
-    %li.finished
-      %span.progress_bar_text
-        %a{href: '#'} First Step
-    %li.finished
-      %span.progress_bar_text
-        %a{href: '#'} Second Step
-    %li.current
-      %span.progress_bar_text
-        Current Step
-    %li.unfinished
-      %span.progress_bar_text
-        Incompleted Step
-    %li.unfinished
-      %span.progress_bar_text
-        Incompleted Step
-
-// Nav bar
-%h2.style_head Nav Bar
-
-%nav{ style: 'text-align: left' }
-  .hamburger Menu
-  %ul.navList
-    %li= link_to image_tag("http://placehold.it/93x38.jpg", class: "logo"), root_url, {:class => "logo_link"}
-    %li
-      %a{href: '#'} First Link
-    %li
-      %a{href: '#'} List Link
-    %li
-      = link_to "My Account", "/"
-  .accountNav
-    = link_to "Log out user", "/", method: :delete, data: { confirm: "Log Out?" }
-
-%nav.admin_bar{ style: 'text-align: left' }
-  .hamburger Menu
-  %ul.navList
-    %li
-      %a{href: '$'} Admin Menu
-
 // Breadcrumbs
 %h2.style_head Breadcrumbs
 
 %ul.breadcrumbs
   %li
     %a{ href: '#' } First Breadcrumb
-  »
   %li
     %a Second Breadcrumb
 
