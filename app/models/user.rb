@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
 
   # get all users who have registrants with unpaid fees
   def self.unpaid_reg_fees
-    registrants = Registrant.active.select { |reg| !reg.reg_paid? }
+    registrants = Registrant.active.reject(&:reg_paid?)
     registrants.map(&:user).flatten.uniq
   end
 
@@ -203,11 +203,11 @@ class User < ActiveRecord::Base
   #   end
 
   def editable_registrants
-    (additional_registrant_accesses.full_access.map(&:registrant) + registrants).select{ |reg| !reg.deleted? }
+    (additional_registrant_accesses.full_access.map(&:registrant) + registrants).reject(&:deleted?)
   end
 
   def accessible_registrants
-    (additional_registrant_accesses.permitted.map(&:registrant) + registrants).select{ |reg| !reg.deleted? }
+    (additional_registrant_accesses.permitted.map(&:registrant) + registrants).reject(&:deleted?)
   end
 
   def total_owing

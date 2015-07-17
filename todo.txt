@@ -1,3 +1,4 @@
+TODO: Download the db to Scott+Robin's laptops
 TODO: Spin up and suspend a backup server (including new redis)
 TODO: check caching using the new pundit service.
 TODO: Check caching in general.
@@ -23,7 +24,7 @@ TODO: Check caching in general.
  - When we do "Award Labels", it doesn't result in both of these...so we shouldn't do it in the results page.
 
  - Need to determine if a competition should result in:
-  - 1) overall
+  - 1) Age Group Only (ie: If "Expert", they will actually be age-group only?)
   - 2) overall AND age group
   - 3) age group
 
@@ -88,7 +89,7 @@ PRiorities as per Scott/Robin Discussion:
 - Expert T-Shirt
 -
 
-
+- https://github.com/norman/friendly_id instead of 'find_by(bib_number: x)'
 - Fix breadcrumbs on Competition-management sub-screens
  +source 'https://rails-assets.org' do
 > +  gem 'rails-assets-datetimepicker'
