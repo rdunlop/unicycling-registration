@@ -120,6 +120,7 @@ class Competition < ActiveRecord::Base
       errors[:age_group_type_id] << "Must specify an age group to also have Experts chosen"
     end
 
+    # requires_age_groups is true for discance and race scoring classes
     if scoring_helper && scoring_helper.requires_age_groups && age_group_type.nil?
       errors[:age_group_type_id] << "Must specify an age group when using #{scoring_class} scoring class"
     end

@@ -69,6 +69,14 @@ class Result < ActiveRecord::Base
     result_type == "AgeGroup"
   end
 
+  def use_for_awards?
+    if age_group_type?
+      competition.has_age_group_entry_results?
+    else
+      competition.has_experts? || !competition.has_age_group_entry_results?
+    end
+  end
+
   def category_description
     if age_group_type?
       competitor.age_group_entry_description

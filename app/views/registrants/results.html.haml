@@ -4,18 +4,26 @@
 %table
   %thead
     %tr
+      %td
       %th{colspan: 2} Competition
       %th Place
       %th Status
       %th Detail
   %tbody
     - @results.each do |result|
+      -# next unless @result.use_for_awards?
+      - competition = result.competition
+      - display_age_group_results = competition.has_age_group_entry_results?
+      - display_expert_results = (!competition.has_age_group_entry_results? || competition.has_experts?)
+      - display = result.age_group_type? ? display_age_group_results : display_expert_results
       %tr
+        %td= result.competition.id
         %td
+          = result.competition.to_s
           = result.competition.award_title_name
           = result.competition.award_subtitle_name
         %td= result.category_description
-        %td= result.place
+        %td{ class: result.use_for_awards? ? nil : "strike" }= result.place
         %td= result.status
         %td
           - if result.competitor.members.count > 1
