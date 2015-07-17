@@ -10,6 +10,13 @@
       .small-9.columns
         = f.email_field :email
     %fieldset
+      %legend= t(".users_name")
+      .row
+        .small-3.columns.text-right
+          = f.label :name
+        .small-9.columns
+          = f.text_field :name
+    %fieldset
       %legend= t(".change_password")
       .row
         .small-3.columns.text-right

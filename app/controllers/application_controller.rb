@@ -14,12 +14,17 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :devise_controller?
 
   before_action :skip_authorization, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def raise_not_found!
     raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
   end
 
   private
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:account_update) << [:name]
+  end
 
   def rails_admin_controller?
     false

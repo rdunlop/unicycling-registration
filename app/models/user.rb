@@ -192,7 +192,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    name || email
+    name.presence || email
   end
   #   def additional_editable_registrants
   #     Registrant.active_or_incomplete.joins(:additional_registrant_accesses).merge(additional_registrant_accesses.full_access)

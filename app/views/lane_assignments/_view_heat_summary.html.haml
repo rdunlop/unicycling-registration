@@ -12,7 +12,7 @@
         %p= assignment.comments
         %span.unhide_dq.js--toggle{data: {toggle: "dq_option#{assignment.lane}"}} Show DQ option
         %div.dq_option{class: "dq_option#{assignment.lane}"}
-          = simple_form_for DqRequest.new(bib_number: assignment.competitor.bib_number, heat: @heat, lane: lane_number,comments_by: current_user.name ), url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
+          = simple_form_for DqRequest.new(bib_number: assignment.competitor.bib_number, heat: @heat, lane: lane_number,comments_by: current_user.to_s ), url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
             = f.hidden_field :bib_number
             = f.hidden_field :heat
             = f.hidden_field :lane
