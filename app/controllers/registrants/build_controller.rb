@@ -12,7 +12,7 @@ class Registrants::BuildController < ApplicationController
   ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
 
   def finish_wizard_path
-    if @registrant.has_event_with_music_allowed? && policy(Song.new).create?
+    if @registrant.events_with_music_allowed.any? && policy(Song.new).create?
       registrant_songs_path(@registrant)
     else
       registrant_path(@registrant)

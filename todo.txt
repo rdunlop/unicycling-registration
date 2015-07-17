@@ -1,12 +1,3 @@
-Providing access to event-sign-up and music-entry forms:
-- EventConfiguration - Music Submission End Date
-- EventConfiguration - Event Modification End Date
- - If these dates are set, and have not passed, a user can still get at those pages and make changes.
-- NOTE: If the user is sitting at a "Authorized Laptop", these rules are STILL in effect...
- - QUESTION: what additional access does an "Authorized Laptop" have?
- - ANSWRER: Allows creation of a new registrant, allows payment, allows addition of expense items.
-
-TODO: Handle incomplete registrant after registration is closed...what to do, what to do?
 TODO: Spin up and suspend a backup server (including new redis)
 TODO: check caching using the new pundit service.
 TODO: Check caching in general.

@@ -352,8 +352,8 @@ class Registrant < ActiveRecord::Base
     age < 18
   end
 
-  def has_event_with_music_allowed?
-    events.merge(Event.music_uploadable).any?
+  def events_with_music_allowed
+    signed_up_events.joins(:event).includes(:event).merge(Event.music_uploadable).map(&:event)
   end
 
   # for displaying on the Registrant#Summary page

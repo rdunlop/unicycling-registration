@@ -2,7 +2,7 @@
   = render partial: "shared/error_messages", object: @song
   .field
     = f.label :event
-    = f.collection_select :event_id, Event.music_uploadable, :id, :name
+    = f.collection_select :event_id, @registrant.events_with_music_allowed, :id, :name
     = f.label :description
     = f.text_field :description
   = f.button :submit, "Next Step"
