@@ -68,7 +68,7 @@ class Email
     elsif no_reg_accounts
       (User.confirmed - User.all_with_registrants)
     elsif non_confirmed_usa
-      Registrant.active_or_incomplete.all.reject(&:usa_membership_paid?).map(&:user).compact.uniq
+      Registrant.where(registrant_type: ["competitor", "noncompetitor"]).active_or_incomplete.all.reject(&:usa_membership_paid?).map(&:user).compact.uniq
     elsif competitions.any?
       competitions.map(&:registrants).flatten.map(&:user)
     elsif category_id.present?
