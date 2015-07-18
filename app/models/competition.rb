@@ -342,7 +342,7 @@ class Competition < ActiveRecord::Base
   end
 
   def competitors_with_results
-    competitors.active.select{ |competitor| competitor.has_result? }
+    competitors.active.select(&:has_result?)
   end
 
   def expert_results_list(gender)
@@ -350,7 +350,7 @@ class Competition < ActiveRecord::Base
   end
 
   def ungeared_expert_results_list(_gender)
-    competitors_with_results.select{|r| !r.geared? }.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
+    competitors_with_results.reject(&:geared?).sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
   end
 
   def results_list_for(ag_entry)
