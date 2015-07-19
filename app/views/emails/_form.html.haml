@@ -3,17 +3,17 @@
 = f.check_box :confirmed_accounts
 %br
 %br
-= f.label :unpaid_reg_accounts, "Users With Not Yet Paid Registration Fees"
+= f.label :unpaid_reg_accounts, "User Accounts with ANY Registrants who have NOT Paid Reg Fees"
 = f.check_box :unpaid_reg_accounts
 %br
-= f.label :paid_reg_accounts, "Users With ALL Paid Registration Fees"
+= f.label :paid_reg_accounts, "User Accounts with ANY Registrants who have Paid Reg Fees"
 = f.check_box :paid_reg_accounts
 %br
-= f.label :no_reg_accounts, "Users without any registrants"
+= f.label :no_reg_accounts, "User Accounts with No Registrants"
 = f.check_box :no_reg_accounts
 %br
 - if @config.usa_membership_config?
-  = f.label :non_confirmed_usa, "Users with registrants who aren't confirmed USA members"
+  = f.label :non_confirmed_usa, "User Accounts with Registrants who are not USA-Members"
   = f.check_box :non_confirmed_usa
   %br
 
