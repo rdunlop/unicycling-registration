@@ -82,11 +82,6 @@ class RegistrantPolicy < ApplicationPolicy
     super_admin?
   end
 
-  # per-registrant results
-  def results?
-    super_admin?
-  end
-
   private
 
   def user_record?
