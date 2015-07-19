@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   # after_action :verify_authorized, :except => :index
-  after_action :verify_authorized, except: :devise_controller?
+  after_action :verify_authorized, unless: [:devise_controller?, :rails_admin_controller?]
 
   before_action :skip_authorization, if: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -101,7 +101,7 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
-    redirect_to(request.referrer || root_path)
+    redirect_to(request.referrer || "/")
   end
 
   def locale_parameter
