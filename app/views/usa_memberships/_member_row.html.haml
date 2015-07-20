@@ -7,7 +7,7 @@
       %span{ id: "usa_number_form_#{reg.bib_number}" }
         = form_tag usa_memberships_update_number_path(registrant_id: reg.id), method: :put, remote: true do
           = text_field_tag :membership_number, reg.contact_detail.usa_member_number
-          = submit_tag "Update USA #"
+          = submit_tag "Update USA #", class: "button tiny"
     %td= reg.first_name
     %td= reg.last_name
     %td= reg.age
@@ -30,4 +30,4 @@
       - else
         = form_tag usa_memberships_path(registrant_id: reg.id), method: :put, remote: true do
           = select_tag :family_membership_registrant_id, options_from_collection_for_select(@family_registrants, "id", "to_s"), {include_blank: true, required: true, class: 'chosen-select' }
-          = submit_tag "Mark as family member"
+          = submit_tag "Mark as family member", class: "submit tiny"

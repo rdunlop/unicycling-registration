@@ -11,6 +11,6 @@
     = label_tag(:registrant_ids, "Registrants")
     = select_tag(:registrant_ids, options_from_collection_for_select(@registrants, "id", "with_id_to_s"), :multiple => true, class: 'chosen-select')
     %br
-    = submit_tag('Start Payment Refund')
+    = submit_tag 'Start Payment Refund', class: "button"
   %div
     = link_to 'Back', summary_payments_path

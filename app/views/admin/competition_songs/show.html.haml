@@ -34,6 +34,6 @@
             = hidden_field_tag :competition_id, @competition.id
             = hidden_field_tag :song_id, song.id
             = no_form_competitor_select_box(@competition)
-            = submit_tag "Assign"
+            = submit_tag "Assign", class: "small button"
 
 = link_to "Download Zip of Songs", competition_song_download_zip_path(@competition)

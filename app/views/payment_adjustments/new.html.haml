@@ -9,6 +9,6 @@
     = label_tag(:registrant_id, "Registrants")
     = select_tag(:registrant_id, options_from_collection_for_select(@registrants, "id", "with_id_to_s"), :multiple => true, class: 'chosen-select')
     %br
-    = submit_tag('Start Payment Adjustment')
+    = submit_tag 'Start Payment Adjustment', class: "button"
   %div
     = link_to 'Back', list_payment_adjustments_path

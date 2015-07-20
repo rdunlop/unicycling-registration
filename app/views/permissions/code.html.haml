@@ -7,4 +7,4 @@
   = select_tag :registrant_id, options_for_select(Registrant.all_select_box_options, @registrant_id), {include_blank: true, class: 'chosen-select' }
   = label_tag :code, "Access Code"
   = text_field_tag :code, @code
-  = submit_tag "Log In"
+  = submit_tag "Log In", class: "button"
