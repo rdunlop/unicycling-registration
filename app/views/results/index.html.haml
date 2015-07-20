@@ -6,12 +6,12 @@
 %p
   This is <b>Not</b> the official final location of results. That will be the USA or IUF organization website. Results will only be available on this site <u>During</u> the competition.
 
-%fieldset
+%fieldset.row
   %legend View Individual Results
   = form_tag(registrant_results_path, method: :get) do
     = select_tag :registrant_id, options_from_collection_for_select(Registrant.active.competitor, "id", "with_id_to_s"),
       include_blank: true, autofocus: true, class: 'chosen-select js--autoFocus'
-    = submit_tag "View Results"
+    = submit_tag "View Results", class: "button"
 
 %table.sortable
   %thead
