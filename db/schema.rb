@@ -242,8 +242,8 @@ ActiveRecord::Schema.define(version: 20150708013054) do
     t.datetime "updated_at"
     t.boolean  "usa_confirmed_paid",                          default: false, null: false
     t.integer  "usa_family_membership_holder_id"
-    t.string   "birthplace",                      limit: 255
-    t.string   "italian_fiscal_code",             limit: 255
+    t.string   "birthplace"
+    t.string   "italian_fiscal_code"
   end
 
   add_index "contact_details", ["registrant_id"], name: "index_contact_details_on_registrant_id", unique: true, using: :btree
@@ -363,14 +363,14 @@ ActiveRecord::Schema.define(version: 20150708013054) do
     t.boolean  "spectators",                                        default: false,      null: false
     t.boolean  "usa_membership_config",                             default: false,      null: false
     t.string   "paypal_account",                        limit: 255
-    t.string   "waiver",                                limit: 255, default: "none"
+    t.string   "waiver",                                            default: "none"
     t.integer  "validations_applied"
     t.boolean  "italian_requirements",                              default: false,      null: false
-    t.string   "rules_file_name",                       limit: 255
+    t.string   "rules_file_name"
     t.boolean  "accept_rules",                                      default: false,      null: false
-    t.string   "paypal_mode",                           limit: 255, default: "disabled"
+    t.string   "paypal_mode",                                       default: "disabled"
     t.boolean  "offline_payment",                                   default: false,      null: false
-    t.string   "enabled_locales",                       limit: 255, default: "en,fr",    null: false
+    t.string   "enabled_locales",                                   default: "en,fr",    null: false
   end
 
   create_table "events", force: :cascade do |t|

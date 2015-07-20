@@ -27,8 +27,8 @@
 #  updated_at                      :datetime
 #  usa_confirmed_paid              :boolean          default(FALSE), not null
 #  usa_family_membership_holder_id :integer
-#  birthplace                      :string(255)
-#  italian_fiscal_code             :string(255)
+#  birthplace                      :string
+#  italian_fiscal_code             :string
 #
 # Indexes
 #
