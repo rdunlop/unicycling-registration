@@ -21,12 +21,15 @@
             = label_tag :skip_positions, "Skip Positions"
             = number_field_tag :skip_positions, nil, {min: 0}
         .row
-          .small-6.columns
-            Square Labels
+          .small-12.medium-4.columns
+            Square Labels (3 columns, 10 rows)
             = submit_tag "Square Labels Avery", name: "label_type", value: "Avery5160padded", :class => "multiclick button"
-          .small-6.columns
-            Round Labels
+          .small-12.medium-4.columns
+            Round Labels (4 columns, 5 rows)
             = submit_tag "Round Labels Avery", name: "label_type", value: "Avery8293", :class => "multiclick button round"
+          .small-12.medium-4.columns
+            Square Labels (2 columns, 5 rows)
+            = submit_tag "Square Labels Avery", name: "label_type", value: "Avery5434", :class => "multiclick button"
         .row
           .small-12.columns
             %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_square"} } Advanced Options

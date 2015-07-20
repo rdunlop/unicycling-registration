@@ -3,6 +3,8 @@ TODO: Spin up and suspend a backup server (including new redis)
 TODO: check caching using the new pundit service.
 TODO: Check caching in general.
 
+To Gain confidence in any e-mail sent out, I would like to have an e-mail sent to the currently-logged-in-user with the number of e-mail addresses, and the contents of the email.
+
 ======================================================
 - Remove ":admin" ability from database?
 - Inspect performance of making the (many) .has_role? calls for a user.
@@ -40,6 +42,8 @@ TODO: Check caching in general.
 
 - There are times when we need to determine overall, but we don't award it. (like 100m, where the overall is used to determine the experts candidates)
 
+
+- LATE Registrant is unable to create a new Competitor registrant (there is no current registration period?)
 
 - Need to ONLY show results which are for "Awarded" Competitions
 ======================================================================================
