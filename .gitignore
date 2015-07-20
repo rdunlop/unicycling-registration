@@ -12,9 +12,6 @@ config/secrets.yml
 *.dump
 dump.rdb
 
-# Ignore schema downloads
-*.schema
-
 # Ignore bundler config
 /.bundle
 /.capistrano
