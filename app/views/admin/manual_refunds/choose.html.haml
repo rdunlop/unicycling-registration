@@ -5,17 +5,17 @@
   %br
   %br
   %b.payment_instructions
-    Please describe the refund. Examples:
-    %br
-    Canceled. Not Attending.
-    %br
-    Refund, organizer.
-    %br
-  = pf.label :note
-  = pf.text_field :note
-
-  = pf.label :percentage
-  = pf.text_field :percentage
+    Please describe the refund. Examples: "Canceled. Not Attending.", "Refund, organizer."
+  .row
+    .small-6.columns.text-right
+      = pf.label :note
+    .small-6.columns
+      = pf.text_field :note
+  .row
+    .small-6.columns.text-right
+      = pf.label :percentage
+    .small-6.columns
+      = pf.number_field :percentage
 
   %h1 Paid Items
   .payment_instructions
