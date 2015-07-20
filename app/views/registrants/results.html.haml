@@ -5,22 +5,20 @@
 %table
   %thead
     %tr
-      %th{colspan: 2} Competition
+      %th Name
+      %th Competition
+      %th Team Name
+      %th Category
+      %th Detail
       %th Place
       %th Status
-      %th Detail
   %tbody
     - @results.each do |result|
-      - competition = result.competition
       %tr
-        %td
-          = result.competition.award_title_name
-          = result.competition.award_subtitle_name
-        %td= result.category_description
-        %td= result.place
+        %td= result.competitor_name(@registrant) # line 1
+        %td= result.competition_name # line 2
+        %td= result.team_name # line 3
+        %td= result.category_name # line 4
+        %td= result.details # line 5
+        %td= result.place # line 6
         %td= result.status
-        %td
-          - if result.competitor.members.count > 1
-            = result.competitor.to_s
-            %br
-          = result.competitor.result

@@ -73,16 +73,47 @@ class Result < ActiveRecord::Base
     if age_group_type?
       competition.has_age_group_entry_results?
     else
+      # this comparison is used many many places, can we find a good name for it?
       competition.has_experts? || !competition.has_age_group_entry_results?
     end
   end
 
-  def category_description
-    if age_group_type?
-      competitor.age_group_entry_description
-    else
-      "Overall"
+  def competition_name
+    competition.award_title_name
+  end
+
+  def competitor_name(registrant)
+    res = "#{registrant.first_name} #{registrant.last_name}"
+    if competitor.members.count == 2
+      partner = (competitor.registrants - [registrant]).first
+
+      res += " & " + partner.first_name + " " + partner.last_name
     end
+    res
+  end
+
+  def category_name
+    if competition.has_experts? && !age_group_type?
+      if competitor.members.count > 1
+        "Expert"
+      else
+        "Expert #{competitor.gender}"
+      end
+    else
+      if competitor.competition.age_group_type.present?
+        competitor.age_group_entry_description
+      else
+        competitor.competition.award_subtitle_name
+      end
+    end
+  end
+
+  def team_name
+    competitor.team_name
+  end
+
+  def details
+    competitor.result
   end
 
   def to_s

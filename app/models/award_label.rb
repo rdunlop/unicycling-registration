@@ -54,24 +54,53 @@ class AwardLabel < ActiveRecord::Base
     end
   end
 
+  def compare(str1, str2)
+    raise("#{str1} != #{str2}") if str1 != str2
+  end
+
+  def find_result(competitor, expert)
+    if expert || !competitor.competition.has_age_group_entry_results?
+      competitor.results.overall.first
+    else
+      competitor.results.age_group.first
+    end
+  end
+
   def populate_from_competitor(competitor, registrant, place, expert = false)
-    # line 1
-    self.competitor_name = build_name_from_competitor_and_registrant(competitor, registrant)
+    result = find_result(competitor, expert)
 
-    # line 2
-    self.competition_name = competitor.competition.award_title_name
+    # Temporary code to ensure we are identical to the old system:
+    compare(result.competitor_name(registrant), build_name_from_competitor_and_registrant(competitor, registrant))
+    compare(result.competition_name, competitor.competition.award_title_name)
+    compare(result.team_name, competitor.team_name)
+    compare(result.category_name, build_category_name(competitor, expert))
+    compare(result.details, competitor.result)
+    compare(result.place, place)
 
-    # line 3
-    self.team_name = competitor.team_name
+    self.competitor_name = result.competitor_name(registrant)
+    self.competition_name = result.competition_name
+    self.team_name = result.team_name
+    self.category = result.category_name
+    self.details = result.details
+    self.place = result.place
 
-    # line 4
-    self.category = build_category_name(competitor, expert)
+    # # line 1
+    # self.competitor_name = build_name_from_competitor_and_registrant(competitor, registrant)
 
-    # line 5
-    self.details = competitor.result
+    # # line 2
+    # self.competition_name = competitor.competition.award_title_name
 
-    # line 6
-    self.place = place
+    # # line 3
+    # self.team_name = competitor.team_name
+
+    # # line 4
+    # self.category = build_category_name(competitor, expert)
+
+    # # line 5
+    # self.details = competitor.result
+
+    # # line 6
+    # self.place = place
 
     # misc housekeeping
     self.registrant = registrant
