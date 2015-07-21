@@ -3,8 +3,8 @@ class Registrants::BuildController < ApplicationController
   before_action :authenticate_user!
 
   before_action :load_registrant_by_bib_number, except: [:create]
-  before_action :set_steps
-  before_action :setup_wizard
+  before_action :set_steps, except: [:drop_event]
+  before_action :setup_wizard, except: [:drop_event]
 
   before_action :load_categories, only: [:show, :update, :add_events]
   layout "wizard"
@@ -77,6 +77,20 @@ class Registrants::BuildController < ApplicationController
     end
   end
 
+  # DELETE /registrants/:registrant_id/build/drop_event?event_id=:event_id
+  def drop_event
+    authorize @registrant, :add_events?
+    event = Event.find(params[:event_id])
+    @registrant.transaction do
+      sign_up = @registrant.registrant_event_sign_ups.find_by(event: event)
+      choices = @registrant.registrant_choices.includes(event_choice: :event).select{ |ec| ec.event_choice.event == event}
+      sign_up.destroy
+      choices.map(&:destroy)
+    end
+    flash[:notice] = "Successfully dropped #{event}"
+    redirect_to registrant_build_path(@registrant.bib_number, :add_events)
+  end
+
   private
 
   def load_registrant_by_bib_number
@@ -118,50 +132,9 @@ class Registrants::BuildController < ApplicationController
     ]
   end
 
-  # don't allow a registrant to be changed from competitor to non-competitor (or vise-versa)
-  def registrant_update_params
-    attrs = attributes
-    attrs.delete(:registrant_type)
-    clear_events_data!(clear_artistic_data!(params.fetch(:registrant, {}).permit(attrs)))
-  end
 
   def registrant_params
-    clear_events_data!(clear_artistic_data!(params.fetch(:registrant, {}).permit(attributes)))
+    params.require(:registrant).permit(attributes)
   end
 
-  def clear_artistic_data!(original_params)
-    # XXX Only do this if I'm not an admin-level person
-    return original_params if policy(current_user).add_artistic_events?
-    artistic_event_ids = Event.artistic.map(&:id)
-    return original_params unless original_params['registrant_event_sign_ups_attributes']
-    original_params['registrant_event_sign_ups_attributes'].each do |key, value|
-      if artistic_event_ids.include? value['event_id'].to_i
-        flash[:alert] = "Modification of Artistic Events is disabled"
-        original_params['registrant_event_sign_ups_attributes'].delete(key)
-      end
-    end
-    original_params
-  end
-
-  def registrant_is_already_signed_up(reg, event_id)
-    return true if reg.nil? || reg.new_record?
-    reg.registrant_event_sign_ups.where(event_id: event_id).first.try(:signed_up?)
-  end
-
-  # OLD CODE, which used to allow users to drop events, but not add events
-  # CURRENTLY disabled, as I don't know whether this is needed
-  def clear_events_data!(original_params)
-    original_params
-    # return original_params if policy(current_user).add_events?
-    # return original_params unless original_params['registrant_event_sign_ups_attributes']
-    # original_params['registrant_event_sign_ups_attributes'].each do |key, value|
-    #   event_id = value['event_id'].to_i
-    #   signed_up = value['signed_up'] == "1"
-    #   if !registrant_is_already_signed_up(@registrant, event_id) && signed_up
-    #     flash[:alert] = "Addition of Events is disabled. #{Event.find(event_id)}"
-    #     original_params['registrant_event_sign_ups_attributes'].delete(key)
-    #   end
-    # end
-    # original_params
-  end
 end

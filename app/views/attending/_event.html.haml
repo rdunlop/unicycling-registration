@@ -1,11 +1,14 @@
 - @registrant = registrant
-%tr{:class => "event #{!policy(current_user).add_artistic_events? && event.artistic? ? 'disabled_event' : ''}"}
+- disabled_event = event.artistic? && !policy(current_user).add_artistic_events?
+%tr{:class => "event #{disabled_event ? 'disabled_event' : ''}" }
   - found_resu = nil
   - @registrant.registrant_event_sign_ups.each do |resu|
     - if resu.event_id == event.id
       - found_resu = resu
   = f.fields_for :registrant_event_sign_ups, found_resu do |resu|
     %td.event_choice
+      - if disabled_event && resu.object.signed_up?
+        = link_to "Drop Out", drop_event_registrant_build_index_path(@registrant, event_id: event.id), data: { confirm: "If you drop out, you cannot sign back up without admin approval. Continue?" }, class: "button alert tiny", method: :delete
       = resu.hidden_field :event_id
       = resu.check_box :signed_up, :class => "primary_checkbox"
       = resu.label :signed_up, event.to_s

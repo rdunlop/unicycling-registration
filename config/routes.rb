@@ -275,7 +275,11 @@ Workspace::Application.routes.draw do
     end
 
     resources :registrants, only: [:show, :destroy] do
-      resources :build, controller: 'registrants/build', only: [:index, :show, :update, :create]
+      resources :build, controller: 'registrants/build', only: [:index, :show, :update, :create] do
+        collection do
+          delete :drop_event
+        end
+      end
 
       # normal user
       collection do
