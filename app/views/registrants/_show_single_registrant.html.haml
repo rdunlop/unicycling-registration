@@ -13,6 +13,7 @@
     .registrant_header__name
       %h1
         = "#{@registrant.last_name}, #{@registrant.first_name} ##{@registrant.bib_number}"
+        = "(incomplete)" unless @registrant.validated?
     .info_block
       = render partial: "/registrants/unpaid_warnings"
       = render partial: "/registrants/access_code"
