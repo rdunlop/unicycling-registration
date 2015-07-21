@@ -81,12 +81,12 @@ class DistanceAttemptManager
       "Not Attempted"
     else
       if no_more_jumps?
-        "Finished. Final Score #{max_successful_distance}"
+        "Finished. Final Score #{max_successful_distance}cm"
       else
         if single_fault?
           single_fault_message(max_attempted_distance)
         else
-          "Success. Next Distance #{max_attempted_distance + 1}+"
+          "Success. Next Distance #{max_attempted_distance + 1}cm +"
         end
       end
     end
@@ -95,7 +95,7 @@ class DistanceAttemptManager
   private
 
   def single_fault_message(distance)
-    "Fault. Next Distance #{distance}+"
+    "Fault. Next Distance #{distance}cm+"
   end
 
   def distance_attempt_cache_key_base
@@ -128,7 +128,7 @@ class DistanceAttemptManager
 
   def check_current_attempt_is_longer_than_previous_attempt(distance, max_distance)
     if distance <= max_distance
-      "New Distance (#{distance}cm) must be greater than #{max_distance}"
+      "New Distance (#{distance}cm) must be greater than #{max_distance}cm"
     end
   end
 end
