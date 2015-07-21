@@ -1,3 +1,7 @@
+Artistic Date cannot be after the event date.
+Once the Event date pasess, you cannot add/remove from anythincg eles, nor from artistic.
+
+
 TODO: Download the db to Scott+Robin's laptops
 TODO: Spin up and suspend a backup server (including new redis)
 TODO: check caching using the new pundit service.

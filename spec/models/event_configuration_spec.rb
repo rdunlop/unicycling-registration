@@ -128,6 +128,27 @@ describe EventConfiguration do
     expect(@ev.valid?).to eq(true)
   end
 
+  it "requires that the artistic closed date be before the event closed date" do
+    @ev.artistic_closed_date = 1.month.ago
+    @ev.event_sign_up_closed_date = 1.month.ago + 1.day
+    expect(@ev).to be_valid
+  end
+
+  it "doesn't allow the artistic date to be after the event closed date" do
+    @ev.artistic_closed_date = 1.month.ago
+    @ev.event_sign_up_closed_date = 2.months.ago
+    expect(@ev).to be_invalid
+  end
+
+  it "allows the artistic closed date to be nil" do
+    @ev.artistic_closed_date = nil
+    @ev.event_sign_up_closed_date = 2.months.ago
+    expect(@ev).to be_valid
+
+    @ev.event_sign_up_closed_date = nil
+    expect(@ev).to be_valid
+  end
+
   it "must have a test_mode" do
     @ev.test_mode = nil
     @ev.apply_validation(:important_dates)
