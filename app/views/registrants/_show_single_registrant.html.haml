@@ -40,8 +40,7 @@
     .small-12.medium-6.large-4.columns.print-4
       - if @registrant.competitor?
         - if @config.display_confirmed_events?
-          = render partial: "/registrants/registrant_confirmed_events"
-          = render partial: "/registrants/registrant_unconfirmed_events"
+          = render "/registrants/registrant_events_or_competition_assignments"
         - else
           = render :partial => "/registrants/registrant_events"
         .edit_link_block.js--showElementTarget{ data: { key: "update_registrant_events" } }
