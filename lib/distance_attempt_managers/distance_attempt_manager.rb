@@ -22,13 +22,12 @@ class DistanceAttemptManager
     if max_attempt.present?
       if max_attempt.fault?
         if distance < max_attempt.distance
-          "New Distance (#{distance}) must be greater than or equal to #{max_attempt.distance}"
+          "New Distance (#{distance}cm) must be greater than or equal to #{max_attempt.distance}cm"
         end
       else
         # no fault
-        if distance <= max_attempt.distance
-          "New Distance (#{distance}) must be greater than #{max_attempted_distance}"
-        end
+        check_current_attempt_is_longer_than_previous_attempt(distance, max_attempt.distance)
+
       end
     end
   end
@@ -85,7 +84,7 @@ class DistanceAttemptManager
         "Finished. Final Score #{max_successful_distance}"
       else
         if single_fault?
-          "Fault. Next Distance #{max_attempted_distance}+"
+          single_fault_message(max_attempted_distance)
         else
           "Success. Next Distance #{max_attempted_distance + 1}+"
         end
@@ -94,6 +93,10 @@ class DistanceAttemptManager
   end
 
   private
+
+  def single_fault_message(distance)
+    "Fault. Next Distance #{distance}+"
+  end
 
   def distance_attempt_cache_key_base
     "/competitor/#{competitor.id}-#{competitor.updated_at}/#{DistanceAttempt.cache_key_for_set(competitor.id)}/"
@@ -120,6 +123,12 @@ class DistanceAttemptManager
       else
         false
       end
+    end
+  end
+
+  def check_current_attempt_is_longer_than_previous_attempt(distance, max_distance0)
+    if distance <= max_distance
+      "New Distance (#{distance}cm) must be greater than #{max_distance}"
     end
   end
 end
