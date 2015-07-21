@@ -8,7 +8,8 @@
       %th Competitor
       %th Gender
       %th Age
-      %th
+      - if display_delete
+        %th
   %tbody
     - list.each do |da|
       = render partial: "attempt", object: da, locals: {display_delete: display_delete }

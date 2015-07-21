@@ -1,12 +1,22 @@
 = render :partial => "/shared/error_messages", :object => @distance_attempt
 = simple_form_for @distance_attempt, :url => judge_distance_attempts_path(@judge), remote: true do |f|
-  = f.label :registrant_id, "Competitor", class: "distance_label"
-  = competitor_select_box(f, @competition, id: "competitors")
-  %br
-  = f.label :distance, class: "distance_label"
-  = f.number_field :distance, class: "distance_input", autocomplete: 'off', required: true, min: 0
-  %br
-  = f.label :fault, class: "distance_fault_label"
-  = f.check_box :fault, class: "distance_input"
-  %br
-  = f.button :submit, "Enter Attempt", {:class => 'add_distance_attempt_button action_button multiclick' }
+  .row
+    .small-6.columns.text-right
+      = f.label :registrant_id, "Competitor", class: "distance_label"
+    .small-6.columns
+      = competitor_select_box(f, @competition, id: "competitors")
+  .row
+    .small-6.columns.text-right
+      = f.label :distance, class: "distance_label"
+    .small-6.columns
+      = f.number_field :distance, class: "distance_input", autocomplete: 'off', required: true, min: 0
+  .row
+    .small-6.columns.text-right
+      %label.distance_label Fault
+    .small-6.columns.text-left
+      .switch
+        = f.check_box :fault, class: "distance_input"
+        = f.label :fault, class: "distance_fault_label"
+  .row
+    .small-12.columns
+      = f.button :submit, "Enter Attempt", {:class => 'add_distance_attempt_button action_button multiclick' }
