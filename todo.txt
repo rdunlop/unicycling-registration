@@ -1,3 +1,8 @@
+- make the "onsite" registration period automatically selected if no other period's date is in range
+- prevent needing to set the dates for the Onsite registration
+- ensure that
+
+
 TODO: Download the db to Scott+Robin's laptops
 TODO: Spin up and suspend a backup server (including new redis)
 TODO: check caching using the new pundit service.

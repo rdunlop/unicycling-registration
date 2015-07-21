@@ -7,10 +7,13 @@
       - RegistrationPeriod.includes(:competitor_expense_item).includes(:noncompetitor_expense_item).includes(:translations).each do |period|
         %tr{ class: period.past_period? ? "past_reg_period" : period.current_period? ? "current_reg_period" : "" }
           %td= period.name
-          %td= t(".from")
-          %td= l period.start_date, format: :registration_date_format
-          %td= t(".to")
-          %td= l period.end_date, format: :registration_date_format
+          - if period.onsite?
+            %td{ colspan: 4 }
+          - else
+            %td= t(".from")
+            %td= l period.start_date, format: :registration_date_format
+            %td= t(".to")
+            %td= l period.end_date, format: :registration_date_format
           %td
             %b
               - if competitor
