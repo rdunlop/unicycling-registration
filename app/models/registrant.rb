@@ -545,6 +545,28 @@ class Registrant < ActiveRecord::Base
     results
   end
 
+  def signed_up_for(event)
+    return nil unless has_unconfirmed_event?(event)
+
+    res = describe_event_hash(event)
+    {
+      competition_name: res[:description],
+      team_name: nil,
+      additional: [res[:category], res[:additional]].compact.join(" ")
+    }
+  end
+
+  def competitor_for(event)
+    return nil unless has_confirmed_event?(event)
+
+    competitor = active_competitor(event)
+    {
+      competition_name: competitor.competition.award_title,
+      team_name: competitor.team_name,
+      additional: nil
+    }
+  end
+
   # return true/false to show whether an expense_group has been chosen by this registrant
   def has_chosen_free_item_from_expense_group(expense_group)
     registrant_expense_items.each do |rei|
