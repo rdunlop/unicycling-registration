@@ -57,6 +57,7 @@ class DistanceAttemptsController < ApplicationController
 
   def destroy
     @distance_attempt.destroy
+    authorize @distance_attempt.judge, :can_judge?
 
     redirect_to :back
   end

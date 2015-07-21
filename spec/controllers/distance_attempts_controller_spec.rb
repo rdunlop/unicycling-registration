@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe DistanceAttemptsController do
+  let(:competition)  { FactoryGirl.create(:distance_competition) }
+  let(:comp) { FactoryGirl.create(:event_competitor, competition: competition) }
   before(:each) do
     @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)
     sign_in @data_entry_volunteer_user
@@ -8,13 +10,11 @@ describe DistanceAttemptsController do
 
   describe "POST create" do
     before (:each) do
-      @competition = FactoryGirl.create(:distance_competition)
-      @comp = FactoryGirl.create(:event_competitor, competition: @competition)
-      @judge = FactoryGirl.create(:judge, competition: @competition, user: @data_entry_volunteer_user)
+      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
     end
     def valid_attributes
       {
-        registrant_id: @comp.members.first.registrant.id,
+        registrant_id: comp.members.first.registrant.id,
         distance: 1.2,
         fault: false,
       }
@@ -40,18 +40,16 @@ describe DistanceAttemptsController do
 
   describe "GET list" do
     before(:each) do
-      @competition = FactoryGirl.create(:distance_competition)
-      @comp = FactoryGirl.create(:event_competitor, competition: @competition)
-      @judge = FactoryGirl.create(:judge, competition: @competition, user: @data_entry_volunteer_user)
+      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
     end
     it "should return a list of all distance_attempts" do
-      get :list, competition_id: @competition.id
+      get :list, competition_id: competition.id
 
       expect(response).to render_template("list")
     end
     it "should return the distance attempts" do
-      da = FactoryGirl.create(:distance_attempt, judge: @judge, competitor: @comp)
-      get :list, competition_id: @competition.id
+      da = FactoryGirl.create(:distance_attempt, judge: @judge, competitor: comp)
+      get :list, competition_id: competition.id
 
       expect(assigns(:distance_attempts)).to eq([da])
     end
@@ -60,8 +58,27 @@ describe DistanceAttemptsController do
       @normal_user = FactoryGirl.create(:user)
       sign_in @normal_user
 
-      get :list, competition_id: @competition.id
+      get :list, competition_id: competition.id
 
+      expect(response).to redirect_to(root_path)
+    end
+  end
+
+  describe "DELETE destroy" do
+    before do
+      request.env["HTTP_REFERER"] = root_path
+    end
+
+    it "destroys the requested distance_attempt" do
+      distance_attempt = FactoryGirl.create(:distance_attempt, competitor: comp)
+      expect do
+        delete :destroy, id: distance_attempt.to_param
+      end.to change(DistanceAttempt, :count).by(-1)
+    end
+
+    it "redirects to the external_results list" do
+      distance_attempt = FactoryGirl.create(:distance_attempt, competitor: comp)
+      delete :destroy, id: distance_attempt.to_param
       expect(response).to redirect_to(root_path)
     end
   end
