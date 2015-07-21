@@ -126,7 +126,7 @@ class DistanceAttemptManager
     end
   end
 
-  def check_current_attempt_is_longer_than_previous_attempt(distance, max_distance0)
+  def check_current_attempt_is_longer_than_previous_attempt(distance, max_distance)
     if distance <= max_distance
       "New Distance (#{distance}cm) must be greater than #{max_distance}"
     end
