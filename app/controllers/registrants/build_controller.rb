@@ -77,6 +77,8 @@ class Registrants::BuildController < ApplicationController
     end
   end
 
+  # drop out of a single event.
+  # useful only when artistic registration has closed, but event registration has not yet closed.
   # DELETE /registrants/:registrant_id/build/drop_event?event_id=:event_id
   def drop_event
     authorize @registrant, :add_events?
