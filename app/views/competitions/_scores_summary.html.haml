@@ -9,7 +9,7 @@
       %br
       Points
     %th.derived Place
-  - competitors.includes(:overall_results).active.each do |competitor|
+  - competitors.includes(:overall_result).active.each do |competitor|
     - cache [competitor, competitor.competition, Result.cache_key_for_set(competitor.id)] do
       %tr
         %td= competitor.position

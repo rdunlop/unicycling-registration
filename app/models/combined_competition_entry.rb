@@ -41,7 +41,7 @@ class CombinedCompetitionEntry < ActiveRecord::Base
 
   def competitors(gender)
     @competitors ||= {}
-    @competitors[gender] ||= competition.results.overall.includes(competitor: [:age_group_results, :overall_results, :competition]).where("place > 0").map(&:competitor).select{|comp| comp.gender == gender}
+    @competitors[gender] ||= competition.results.overall.includes(competitor: [:age_group_result, :overall_result, :competition]).where("place > 0").map(&:competitor).select{|comp| comp.gender == gender}
   end
 
   def male_competitors

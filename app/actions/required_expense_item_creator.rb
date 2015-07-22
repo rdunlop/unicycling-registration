@@ -18,12 +18,12 @@ class RequiredExpenseItemCreator
 
   def registration_item
     rp = RegistrationPeriod.relevant_period(Date.today)
-    rp.expense_item_for(registrant.competitor) unless rp.nil?
+    rp.expense_item_for(registrant.competitor?) unless rp.nil?
   end
 
   # any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
   def required_expense_items
-    egs = ExpenseGroup.for_competitor_type(@registrant.competitor)
+    egs = ExpenseGroup.for_competitor_type(@registrant.competitor?)
 
     egs.select { |expense_group| expense_group.expense_items.count == 1 }
       .map{ |expense_group| expense_group.expense_items.first }

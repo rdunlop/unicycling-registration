@@ -36,7 +36,7 @@
       .non_printable.js--showElementTarget{ data: { key: "manage_registrant" } }
         = link_to t(".list_payments"), payments_registrant_path(@registrant.bib_number)
     .small-12.medium-4.columns.print-4
-      - if @registrant.competitor
+      - if @registrant.competitor?
         - if @config.display_confirmed_events?
           = render partial: "/registrants/registrant_confirmed_events"
           = render partial: "/registrants/registrant_unconfirmed_events"

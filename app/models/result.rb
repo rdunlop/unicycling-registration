@@ -18,6 +18,7 @@
 
 class Result < ActiveRecord::Base
   include CachedSetModel
+  include CachedModel
 
   def self.cache_set_field
     :competitor_id
@@ -69,13 +70,56 @@ class Result < ActiveRecord::Base
     result_type == "AgeGroup"
   end
 
-  def category_description
+  def use_for_awards?
     if age_group_type?
-      competitor.age_group_entry_description
+      competition.has_age_group_entry_results?
     else
-      "Overall"
+      # this comparison is used many many places, can we find a good name for it?
+      competition.has_experts? || !competition.has_age_group_entry_results?
     end
   end
+
+  # Methods for use in describing this result for awards
+
+  def competitor_name(registrant)
+    res = "#{registrant.first_name} #{registrant.last_name}"
+    if competitor.members.size == 2
+      partner = (competitor.registrants - [registrant]).first
+
+      res += " & " + partner.first_name + " " + partner.last_name
+    end
+    res
+  end
+
+  def competition_name
+    competition.award_title_name
+  end
+
+  def team_name
+    competitor.team_name
+  end
+
+  def category_name
+    if competition.has_experts? && !age_group_type?
+      if competitor.members.size > 1
+        "Expert"
+      else
+        "Expert #{competitor.gender}"
+      end
+    else
+      if competitor.competition.age_group_type.present?
+        competitor.age_group_entry_description
+      else
+        competitor.competition.award_subtitle_name
+      end
+    end
+  end
+
+  def details
+    competitor.result
+  end
+
+  # END OF awards-related methods
 
   def to_s
     return "DQ" if status == "DQ"
@@ -95,9 +139,9 @@ class Result < ActiveRecord::Base
     end
 
     if result_type == "AgeGroup"
-      existing_result = competitor.age_group_results.first
+      existing_result = competitor.age_group_result
     else
-      existing_result = competitor.overall_results.first
+      existing_result = competitor.overall_result
     end
 
     if existing_result

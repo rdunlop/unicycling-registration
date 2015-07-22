@@ -24,7 +24,7 @@
       %th
       %th
   %tbody
-    - @competition.time_results.includes(competitor: [:age_group_results, :overall_results]).each do |time_result|
+    - @competition.time_results.includes(competitor: [:age_group_result, :overall_result]).each do |time_result|
       %tr
         %td= time_result.bib_number
         %td= time_result.competitor

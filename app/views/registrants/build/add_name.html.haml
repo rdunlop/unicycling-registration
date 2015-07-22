@@ -14,5 +14,5 @@
     = render partial: "/registrants/header_and_delete_button"
     = render partial: "/registrants/base_details", locals: {f: f}
 
-    = render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor }
+    = render :partial => "registration_periods/list", :locals => {:competitor => @registrant.competitor? }
   = render partial: "/registrants/form_actions", locals: {f: f}

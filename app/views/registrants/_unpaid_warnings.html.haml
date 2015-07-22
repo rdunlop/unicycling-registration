@@ -5,7 +5,7 @@
   - if @config.usa_membership_config? && !@registrant.usa_membership_paid?
     .unpaid_warning
       USA#
-  - if @registrant.competitor && @registrant.age <= 10
+  - if @registrant.competitor? && @registrant.age <= 10
     .unpaid_warning
       Age <= 10 (wheel size)
   - @registrant.event_warnings.each do |warning|

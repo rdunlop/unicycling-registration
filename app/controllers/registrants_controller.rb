@@ -1,9 +1,10 @@
 class RegistrantsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:results]
   before_action :load_user, only: [:index]
   before_action :load_registrant_by_bib_number, only: [:show, :results, :destroy, :waiver]
-  before_action :authorize_registrant, only: [:show, :results, :destroy, :waiver]
+  before_action :authorize_registrant, only: [:show, :destroy, :waiver]
   before_action :authorize_logged_in, only: [:all, :empty_waiver, :subregion_options]
+  before_action :skip_authorization, only: [:results]
 
   before_action :set_registrants_breadcrumb
   before_action :set_single_registrant_breadcrumb, only: [:show]
@@ -83,7 +84,7 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/1/results
   def results
-    @results = @registrant.results.awarded
+    @results = @registrant.results.awarded.includes(competitor: [:members, competition: :age_group_type]).select(&:use_for_awards?)
     respond_to do |format|
       format.html
     end
@@ -127,7 +128,7 @@ class RegistrantsController < ApplicationController
   end
 
   def set_registrants_breadcrumb
-    add_breadcrumb t("my_registrants", scope: "breadcrumbs"), user_registrants_path(current_user)
+    add_breadcrumb t("my_registrants", scope: "breadcrumbs"), user_registrants_path(current_user) if current_user
   end
 
   def set_single_registrant_breadcrumb

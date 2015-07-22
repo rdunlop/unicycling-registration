@@ -36,7 +36,7 @@ class Registrants::BuildController < ApplicationController
     case wizard_value(step)
     when :add_name
     when :add_events
-      skip_step unless @registrant.competitor
+      skip_step unless @registrant.competitor?
     when :add_volunteers
     end
 
@@ -114,7 +114,7 @@ class Registrants::BuildController < ApplicationController
   end
 
   def load_categories
-    if @registrant.competitor
+    if @registrant.competitor?
       @categories = Category.load_for_form
     end
   end

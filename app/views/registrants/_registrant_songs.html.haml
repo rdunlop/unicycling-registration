@@ -1,5 +1,5 @@
 - cache_i18n [@config, @registrant], expires_in: 1.hour do
-  - if @registrant.competitor && (@registrant.events_with_music_allowed.any? || !@config.music_submission_ended?)
+  - if @registrant.competitor? && (@registrant.events_with_music_allowed.any? || !@config.music_submission_ended?)
     .small-12.medium-4.columns.print-4
       %fieldset.data_block
         - cache_i18n ['songs_menu', @config, @registrant] do

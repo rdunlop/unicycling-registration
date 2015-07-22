@@ -32,7 +32,7 @@
         %th Place
       %th Overall Place
   %tbody
-    - @competition.competitors.includes(:age_group_results, :overall_results, members: [:registrant]).each do |comp|
+    - @competition.competitors.includes(:age_group_result, :overall_result, members: [:registrant]).each do |comp|
       - next unless comp.has_result?
       %tr
         %td= comp.bib_number

@@ -341,6 +341,9 @@ Workspace::Application.routes.draw do
     put "usa_memberships/update_number", to: "usa_memberships#update_number"
 
     resources :results, only: [:index] do
+      collection do
+        get :registrant
+      end
       member do
         get :scores
       end
