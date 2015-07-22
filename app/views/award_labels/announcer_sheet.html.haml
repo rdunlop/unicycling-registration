@@ -15,7 +15,8 @@
   %tbody
     - last_award = nil
     - @award_labels.each do |award_label|
-      - if last_award.try(:category) != award_label.category
+      // Category separator
+      - if last_award.try(:line_4) != award_label.line_4
         %tr
           %td.separator{colspan: 8}
       %tr

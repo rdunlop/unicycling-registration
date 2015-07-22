@@ -2,18 +2,18 @@
 #
 # Table name: award_labels
 #
-#  id               :integer          not null, primary key
-#  bib_number       :integer
-#  competition_name :string(255)
-#  team_name        :string(255)
-#  details          :string(255)
-#  place            :integer
-#  user_id          :integer
-#  registrant_id    :integer
-#  created_at       :datetime
-#  updated_at       :datetime
-#  competitor_name  :string(255)
-#  category         :string(255)
+#  id            :integer          not null, primary key
+#  bib_number    :integer
+#  line_2        :string(255)
+#  line_3        :string(255)
+#  line_5        :string(255)
+#  place         :integer
+#  user_id       :integer
+#  registrant_id :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  line_1        :string(255)
+#  line_4        :string(255)
 #
 # Indexes
 #

@@ -9,20 +9,20 @@
           %li= msg
   .row.collapse
     .small-1.column= f.label :bib_number
-    .small-2.column= f.label :competitor_name
-    .small-2.column= f.label :competition_name
-    .small-2.column= f.label :team_name
-    .small-1.column= f.label :category
-    .small-1.column= f.label :details
+    .small-2.column= f.label :line_1
+    .small-2.column= f.label :line_2
+    .small-2.column= f.label :line_3
+    .small-1.column= f.label :line_4
+    .small-1.column= f.label :line_5
     .small-1.column= f.label :place
     .small-2.column= f.label :registrant_id
   .row.collapse
     .small-1.column= f.number_field :bib_number
-    .small-2.column= f.text_field :competitor_name
-    .small-2.column= f.text_field :competition_name
-    .small-2.column= f.text_field :team_name
-    .small-1.column= f.text_field :category
-    .small-1.column= f.text_field :details
+    .small-2.column= f.text_field :line_1
+    .small-2.column= f.text_field :line_2
+    .small-2.column= f.text_field :line_3
+    .small-1.column= f.text_field :line_4
+    .small-1.column= f.text_field :line_5
     .small-1.column= f.number_field :place, {min: 0}
     .small-2.column= all_registrant_competitors(f)
   .row
