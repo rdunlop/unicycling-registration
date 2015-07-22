@@ -18,6 +18,7 @@
 
 class Result < ActiveRecord::Base
   include CachedSetModel
+  include CachedModel
 
   def self.cache_set_field
     :competitor_id
@@ -82,7 +83,7 @@ class Result < ActiveRecord::Base
 
   def competitor_name(registrant)
     res = "#{registrant.first_name} #{registrant.last_name}"
-    if competitor.members.count == 2
+    if competitor.members.size == 2
       partner = (competitor.registrants - [registrant]).first
 
       res += " & " + partner.first_name + " " + partner.last_name
@@ -100,7 +101,7 @@ class Result < ActiveRecord::Base
 
   def category_name
     if competition.has_experts? && !age_group_type?
-      if competitor.members.count > 1
+      if competitor.members.size > 1
         "Expert"
       else
         "Expert #{competitor.gender}"

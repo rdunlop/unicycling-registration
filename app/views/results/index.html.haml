@@ -31,7 +31,7 @@
           %td= competition.end_time_to_s
           %td= competition.award_title_name
           %td= competition.award_subtitle_name
-          - competition_presenter = CompetitionPresenter.new(competition)
+          // competition_presenter = CompetitionPresenter.new(competition)
           //%td{ class: competition_presenter.status_code}= competition_presenter.status
           %td
             - if competition.num_competitors > 0

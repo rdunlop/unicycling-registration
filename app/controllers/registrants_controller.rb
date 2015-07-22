@@ -90,7 +90,7 @@ class RegistrantsController < ApplicationController
 
   # GET /registrants/1/results
   def results
-    @results = @registrant.results.awarded.select(&:use_for_awards?)
+    @results = @registrant.results.awarded.includes(competitor: [:members, competition: :age_group_type]).select(&:use_for_awards?)
     respond_to do |format|
       format.html
     end

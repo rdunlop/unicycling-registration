@@ -2,23 +2,24 @@
 
 = link_to "View All Competition Results for #{@config.short_name}", results_path
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Competition
-      %th Team Name
-      %th Category
-      %th Detail
-      %th Place
-      %th Status
-  %tbody
-    - @results.each do |result|
+- if true # cache [:registrant_results, @registrant, Result, Competition] do
+  %table
+    %thead
       %tr
-        %td= result.competitor_name(@registrant) # line 1
-        %td= result.competition_name # line 2
-        %td= result.team_name # line 3
-        %td= result.category_name # line 4
-        %td= result.details # line 5
-        %td= result.place # line 6
-        %td= result.status
+        %th Name
+        %th Competition
+        %th Team Name
+        %th Category
+        %th Detail
+        %th Place
+        %th Status
+    %tbody
+      - @results.each do |result|
+        %tr
+          %td= result.competitor_name(@registrant) # line 1
+          %td= result.competition_name # line 2
+          %td= result.team_name # line 3
+          %td= result.category_name # line 4
+          %td= result.details # line 5
+          %td= result.place # line 6
+          %td= result.status
