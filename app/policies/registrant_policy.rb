@@ -17,7 +17,7 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def add_events?
-    return false unless record.competitor
+    return false unless record.competitor?
     return true if event_planner? || super_admin?
     (user_record? || shared_editable_record?) && (!config.event_sign_up_closed?)
     # change this to allow add_events when registration is closed, but events date is open
@@ -26,7 +26,7 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def set_wheel_sizes?
-    record.competitor && update? && record.try(:age).to_i <= 10
+    record.competitor? && update? && record.try(:age).to_i <= 10
   end
 
   def add_volunteers?
@@ -80,6 +80,10 @@ class RegistrantPolicy < ApplicationPolicy
   # view the registrant-specific payments
   def payments?
     super_admin?
+  end
+
+  def results?
+    record.competitor?
   end
 
   private

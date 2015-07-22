@@ -191,7 +191,7 @@ class Registrant < ActiveRecord::Base
     "#{bib_number}" if persisted?
   end
 
-  def competitor
+  def competitor?
     registrant_type == 'competitor'
   end
 
@@ -286,9 +286,9 @@ class Registrant < ActiveRecord::Base
 
   def set_bib_number
     if bib_number.nil?
-      prev_value = Registrant.maximum_bib_number(competitor)
+      prev_value = Registrant.maximum_bib_number(competitor?)
 
-      if competitor
+      if competitor?
         initial_value = 1
       else
         initial_value = 2001
@@ -420,7 +420,7 @@ class Registrant < ActiveRecord::Base
   def reg_paid?
     return true if spectator?
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
-      RegistrationPeriod.paid_for_period(competitor, paid_expense_items).present?
+      RegistrationPeriod.paid_for_period(competitor?, paid_expense_items).present?
     end
   end
 
@@ -582,7 +582,7 @@ class Registrant < ActiveRecord::Base
 
   def expense_item_is_free(expense_item)
     free_options = nil
-    if competitor
+    if competitor?
       free_options = expense_item.expense_group.competitor_free_options
     else
       free_options = expense_item.expense_group.noncompetitor_free_options
@@ -608,7 +608,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def has_necessary_free_items
-    if competitor
+    if competitor?
       free_groups_required = ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
     else
       free_groups_required = ExpenseGroup.where(noncompetitor_free_options: "One Free In Group REQUIRED")
