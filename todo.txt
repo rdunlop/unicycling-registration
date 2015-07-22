@@ -1,3 +1,7 @@
+- Overall champion result should be 'pts', and should be rounded?
+
+
+
 - make the "onsite" registration period automatically selected if no other period's date is in range
 - prevent needing to set the dates for the Onsite registration
 - ensure that
