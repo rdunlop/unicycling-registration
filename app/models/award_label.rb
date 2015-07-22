@@ -61,9 +61,9 @@ class AwardLabel < ActiveRecord::Base
 
   def find_result(competitor, expert)
     if expert || !competitor.competition.has_age_group_entry_results?
-      competitor.results.overall.first
+      competitor.overall_result
     else
-      competitor.results.age_group.first
+      competitor.age_group_result
     end
   end
 

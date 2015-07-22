@@ -138,9 +138,9 @@ class Result < ActiveRecord::Base
     end
 
     if result_type == "AgeGroup"
-      existing_result = competitor.age_group_results.first
+      existing_result = competitor.age_group_result
     else
-      existing_result = competitor.overall_results.first
+      existing_result = competitor.overall_result
     end
 
     if existing_result
