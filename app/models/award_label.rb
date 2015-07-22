@@ -28,6 +28,7 @@ class AwardLabel < ActiveRecord::Base
   belongs_to :user
   belongs_to :registrant
 
+  private
   def build_name_from_competitor_and_registrant(competitor, registrant)
     res = "#{registrant.first_name} #{registrant.last_name}"
     if competitor.members.count == 2
@@ -66,6 +67,7 @@ class AwardLabel < ActiveRecord::Base
     end
   end
 
+  public
   def populate_from_competitor(competitor, registrant, place, expert = false)
     result = find_result(competitor, expert)
 

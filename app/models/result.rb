@@ -78,9 +78,7 @@ class Result < ActiveRecord::Base
     end
   end
 
-  def competition_name
-    competition.award_title_name
-  end
+  # Methods for use in describing this result for awards
 
   def competitor_name(registrant)
     res = "#{registrant.first_name} #{registrant.last_name}"
@@ -90,6 +88,14 @@ class Result < ActiveRecord::Base
       res += " & " + partner.first_name + " " + partner.last_name
     end
     res
+  end
+
+  def competition_name
+    competition.award_title_name
+  end
+
+  def team_name
+    competitor.team_name
   end
 
   def category_name
@@ -108,13 +114,11 @@ class Result < ActiveRecord::Base
     end
   end
 
-  def team_name
-    competitor.team_name
-  end
-
   def details
     competitor.result
   end
+
+  # END OF awards-related methods
 
   def to_s
     return "DQ" if status == "DQ"
