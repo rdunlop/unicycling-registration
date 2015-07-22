@@ -25,7 +25,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def show?
-    director?(record.event) || awards_admin? || data_entry_volunteer? || competition_admin? || super_admin?
+    director?(record.event) || awards_admin? || competition_admin? || super_admin?
   end
 
   def sort?
@@ -78,7 +78,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def heat_recording?
-    data_entry_volunteer? || director?(record.event) || super_admin?
+    race_official?(record) || director?(record.event) || super_admin?
   end
 
   # DATA MANAGEMENT
@@ -91,11 +91,11 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def single_attempt_recording?
-    data_entry_volunteer? || director?(record.event) || super_admin?
+    data_recording_volunteer?(record) || director?(record.event) || super_admin?
   end
 
   def two_attempt_recording?
-    data_entry_volunteer? || director?(record.event) || super_admin?
+    data_recording_volunteer?(record) || director?(record.event) || super_admin?
   end
 
   def start_list?
@@ -104,7 +104,7 @@ class CompetitionPolicy < ApplicationPolicy
 
   # DATA ENTRY
   def create_preliminary_result?
-    record.unlocked? && (data_entry_volunteer? || director?(record.event) || super_admin?)
+    record.unlocked? && (data_recording_volunteer?(record) || director?(record.event) || super_admin?)
   end
 
   def manage_volunteers?

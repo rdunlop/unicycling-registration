@@ -42,7 +42,7 @@ class PointsScoringClass < BaseScoringClass
   end
 
   def uses_volunteers
-    [:end_line_volunteer]
+    [:data_recording_volunteer]
   end
 
   def results_path

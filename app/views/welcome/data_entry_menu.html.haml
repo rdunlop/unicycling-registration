@@ -33,11 +33,7 @@
 
 %h1 Data Entry Menu
 
-- if @judges.any?
-  // hide the data entry by default
-  .js--hiddenToggleMenu.action_button Show Data Entry Menu
-
-.data_entry_choices{ class: @judges.any? ? 'js--hiddenToggle' : '' }
+.data_entry_choices
   Please choose the event that you want to enter data for:
 
   %table.sortable
@@ -49,14 +45,15 @@
         %th Competition
         %th Status
     %tbody
-      - cache_i18n [Competition] do
-        - Competition.all.find_each(batch_size: 10) do |competition|
+      - cache_i18n [Competition, current_user] do
+        - Competition.with_roles([:race_official, :data_recording_volunteer], current_user).find_each(batch_size: 10) do |competition|
           - cache_i18n [competition] do
             %tr
               %td= competition.end_time_to_s
               %td= competition.event.category
               %td= competition.event
-              %td= link_to competition.name, competition
+              %td= # links to data entry recording pages...or perhaps a menu of those pages
+              %td= link_to competition.name, competition # remove this link?
               - competition_presenter = CompetitionPresenter.new(competition)
               %td{ class: competition_presenter.status_code}= competition_presenter.status
   %p

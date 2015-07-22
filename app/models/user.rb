@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:late_registrant, :music_dj, :awards_admin, :event_planner, :data_entry_volunteer, :translator,
+    [:late_registrant, :music_dj, :awards_admin, :event_planner, :translator,
       :membership_admin, :competition_admin, :payment_admin, :convention_admin, :super_admin]
   end
 
@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
       super_admin: [*roles],
       convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin],
       competition_admin: [:competition_admin, :awards_admin],
-      director: [:data_entry_volunteer],
+      director: [],
       payment_admin: [:payment_admin, :late_registrant],
       event_planner: [:event_planner],
       music_dj: [:music_dj]
@@ -133,8 +133,6 @@ class User < ActiveRecord::Base
       Can create judges, volunteers
       Can reset user passwords
       "
-    when :data_entry_volunteer
-      "[e.g. Data Entry Volunteers] Able to view the Data Entry menu, and enter data for any event"
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
     when :payment_admin
@@ -177,15 +175,14 @@ class User < ActiveRecord::Base
 
   def self.volunteer_role_descriptions(role)
     case role
+    when :data_entry_volunteer
+      "Able to be assigned as data-recording volunteer"
     when :race_official
-      "[e.g. Mary Koehler]
-      Able to DQ at start or end-line of Race
+      "Able to DQ at start or end-line of Race
       Able to download heat-lists for Track E-Timers
       "
-    when :start_line_volunteer
-      "Able to enter Start Line results (transcribed)"
-    when :end_line_volunteer
-      "Able to enter Finish Line Results (transcribed)"
+    when :data_recording_volunteer
+      "Able to enter Start/Finish Line results (transcribed)"
     else
       "No description"
     end

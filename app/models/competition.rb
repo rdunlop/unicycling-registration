@@ -35,6 +35,8 @@ class Competition < ActiveRecord::Base
   include CachedModel
   include Slugify
 
+  resourcify
+
   belongs_to :age_group_type, inverse_of: :competitions
   belongs_to :event, inverse_of: :competitions
 

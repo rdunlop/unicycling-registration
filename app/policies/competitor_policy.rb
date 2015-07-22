@@ -1,6 +1,6 @@
 class CompetitorPolicy < ApplicationPolicy
   def index?
-    data_entry_volunteer? || director?(record.competition.event) || competition_admin? || super_admin?
+    director?(record.competition.event) || competition_admin? || super_admin?
   end
 
   def new?

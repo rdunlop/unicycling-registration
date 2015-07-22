@@ -4,6 +4,7 @@
 
 - Allow Payment Admin to see the "Expenses" screen of a registrant, and add/remove elements to their Payments page
 - Fix caching on the Payments#summary page, since it doesn't update the "Unpaid" column properly when people add/remove RegistrantExpenseItems.
+- Need a way to remove Data Entry Volunteer-ness?
 
 - Better handle invalid step problem by redirecting user elsewhere?
  (causes exception right now)
