@@ -32,7 +32,7 @@ class RegFee
   end
 
   def new_registration_item
-    registration_period.expense_item_for(registrant.competitor)
+    registration_period.expense_item_for(registrant.competitor?)
   end
 
   private
