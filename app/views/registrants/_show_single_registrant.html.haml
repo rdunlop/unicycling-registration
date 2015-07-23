@@ -9,33 +9,35 @@
     .js--showElement{ data: { key: "manage_registrant" } }
 
 - cache_i18n ['header', @registrant] do
-  .registrant_header
-    .registrant_header__name
+  .row
+    .small-6.print-4.columns.text-left
       %h1
-        = "#{@registrant.last_name}, #{@registrant.first_name} ##{@registrant.bib_number}"
+        = "##{@registrant.bib_number}"
+        = "#{@registrant.last_name}, #{@registrant.first_name}"
         = "(incomplete)" unless @registrant.validated?
-    .info_block
+    .small-2.print-4.columns.text-center
+      %h2= @registrant.registrant_type.capitalize
+      .non_printable
+        = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
+    .small-4.columns.print-4.text-right
       = render partial: "/registrants/unpaid_warnings"
       = render partial: "/registrants/access_code"
-
-- cache_i18n ['printable_link', @registrant, @registrant.members_cache_key] do
-  .non_printable
-    = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
+  %hr
 .row.full_page{ class: "show_#{@registrant.registrant_type}_elements" }
-  .small-12.medium-4.columns.print-4
+  .small-12.medium-6.large-4.columns.print-4
     // this partial includes conditional-display logic..do not cache it
     = render :partial => "/registrants/summary"
     - cache_i18n ['edit_link', @registrant] do
       .edit_link_block.js--showElementTarget{ data: { key: "update_registrant_name" } }
         = link_to t(".edit_registration"), registrant_build_path(@registrant, :add_name)
-  - cache_i18n ['expenses', @registrant, @registrant.members_cache_key] do
-    .small-12.medium-4.columns.print-4
+  - cache_i18n ['expenses', @registrant, @registrant.members_cache_key, @config] do
+    .small-12.medium-6.large-4.columns.print-4
       = render :partial => "/registrants/registrant_expenses"
       .edit_link_block.js--showElementTarget{ data: { key: "create_rei" } }
         = link_to t(".edit_items"), registrant_build_path(@registrant, :expenses)
       .non_printable.js--showElementTarget{ data: { key: "manage_registrant" } }
         = link_to t(".list_payments"), payments_registrant_path(@registrant.bib_number)
-    .small-12.medium-4.columns.print-4
+    .small-12.medium-6.large-4.columns.print-4
       - if @registrant.competitor?
         - if @config.display_confirmed_events?
           = render partial: "/registrants/registrant_confirmed_events"

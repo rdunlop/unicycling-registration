@@ -1,22 +1,6 @@
-.registrant_header {
-  .registrant_header__name {
-    float: left;
-  }
-  .info_block {
-    float: right;
-    padding: 0 20px;
-    margin: 0 5px;
-  }
-  .unpaid_warning {
-    font-size: 20pt;
-    font-weight: bold;
-  }
-
-  &:after {
-    content: '';
-    clear: both;
-    display: table;
-  }
+.unpaid_warning {
+  font-size: 20pt;
+  font-weight: bold;
 }
 
 .event_heading {
