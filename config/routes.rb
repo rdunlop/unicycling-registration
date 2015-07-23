@@ -271,7 +271,11 @@ Workspace::Application.routes.draw do
       resources :competition_songs, only: [:show, :create] do
         get :download_zip
       end
-      resources :event_songs, only: [:index, :show, :create]
+      resources :event_songs, only: [:index, :show, :create] do
+        collection do
+          get :all
+        end
+      end
     end
 
     resources :registrants, only: [:show, :destroy] do
