@@ -1,35 +1,26 @@
+- registrant_assigned_categories = @registrant.assigned_event_categories
+- has_unconfirmed_event = false
 %fieldset
   %legend Events
   %table.events_summary_table
-    - has_unconfirmed_event = false
     %tbody
-      - printed_categories = []
-      - Category.includes(:events, :translations).each do |cat|
-        - # if this registrant has signed up for an event within this category
-        - # OR is assigned to a competition within this category
-        - cat.events.each do |event|
-          - signed_up_for = @registrant.signed_up_for(event)
-          - competitor_for = @registrant.competitor_for(event)
-          - if signed_up_for || competitor_for
-            - unless cat.in? printed_categories
-              - printed_categories << cat
-              %tr
-                %td.event_heading{colspan: 5}= cat
-            - if competitor_for
-              %tr
-                %td
-                  = competitor_for[:competition_name]
-                  = competitor_for[:team_name]
-                  = competitor_for[:additional]
-            - elsif signed_up_for
-              %tr
-                %td
-                  = signed_up_for[:competition_name]
-                  = signed_up_for[:team_name]
-                  = signed_up_for[:additional]
-                  ^
-                  - has_unconfirmed_event = true
-    - if has_unconfirmed_event
-      %tfoot
-        %tr{colspan: 5}
-          %td ^ indicates unconfirmed event
+      - Category.includes(:translations).all.each do |category|
+        - next unless registrant_assigned_categories[category.to_s].present?
+        %tr
+          %td.event_heading{ colspan: 3 }= category
+        - registrant_assigned_categories[category.to_s].each do |event_name, details|
+          %tr
+            %td= details[:competition_name]
+            %td
+              = details[:team_name]
+              = details[:additional_details]
+            %td
+              - unless details[:confirmed]
+                - has_unconfirmed_event = true
+                %span.unconfirmed_event ^
+    %tfoot
+      - if has_unconfirmed_event
+        %tr
+          %td{ colspan: 3 }
+            %span.unconfirmed_event ^
+            Indicates Unconfirmed Event

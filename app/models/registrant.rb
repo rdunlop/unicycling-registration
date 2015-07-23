@@ -471,23 +471,6 @@ class Registrant < ActiveRecord::Base
   end
 
   ############# Events Selection ########
-  def has_event_in_category?(category)
-    category.events.any?{|event| has_event?(event) }
-  end
-
-  def has_confirmed_event_in_category?(category)
-    category.events.any?{|event| has_confirmed_event?(event) }
-  end
-
-  def has_unconfirmed_event_in_category?(category)
-    category.events.any?{|event| has_unconfirmed_event?(event) }
-  end
-
-  # does this registrant have this event checked off?
-  def has_event?(event)
-    @has_event ||= {}
-    @has_event[event] ||= signed_up_events.where(event_id: event.id).any?
-  end
 
   def active_competitors(event)
     competitors.includes(competition: :event).active.joins(:competition).where("competitions.event_id = ?", event)
@@ -497,15 +480,6 @@ class Registrant < ActiveRecord::Base
     active_competitors(event).first
   end
 
-  def has_confirmed_event?(event)
-    @has_confirmed_event ||= {}
-    @has_confirmed_event[event] ||= (active_competitors(event).count > 0)
-  end
-
-  def has_unconfirmed_event?(event)
-    @has_unconfirmed_event ||= {}
-    @has_unconfirmed_event[event] ||= has_event?(event) && !has_confirmed_event?(event)
-  end
 
   def describe_event(event)
     details = describe_event_hash(event)
@@ -527,44 +501,24 @@ class Registrant < ActiveRecord::Base
 
     resu = signed_up_events.find_by(event_id: event.id)
     # only add the Category if there are more than 1
-    results[:category] = nil
-    if event.event_categories.size > 1
-      results[:category] = resu.event_category.name.to_s unless resu.nil?
-    end
+    results[:category] = (resu.event_category_name unless resu.nil?)
 
-    results[:additional] = nil
-    event.event_choices.each do |ec|
-      my_val = registrant_choices.find_by(event_choice_id: ec.id)
-      unless my_val.nil? || !my_val.has_value?
-        results[:additional] += " - " unless results[:additional].nil?
-        results[:additional] = "" if results[:additional].nil?
-        results[:additional] += ec.label + ": " + my_val.describe_value
-      end
-    end
+    results[:additional] = describe_additional_selection(event)
 
     results
   end
 
-  def signed_up_for(event)
-    return nil unless has_unconfirmed_event?(event)
+  def describe_additional_selection(event)
+    results = []
 
-    res = describe_event_hash(event)
-    {
-      competition_name: res[:description],
-      team_name: nil,
-      additional: [res[:category], res[:additional]].compact.join(" ")
-    }
-  end
+    event.event_choices.each do |ec|
+      my_val = registrant_choices.find_by(event_choice_id: ec.id)
+      if my_val.present? && my_val.has_value?
+        results << ec.label + ": " + my_val.describe_value
+      end
+    end
 
-  def competitor_for(event)
-    return nil unless has_confirmed_event?(event)
-
-    competitor = active_competitor(event)
-    {
-      competition_name: competitor.competition.award_title,
-      team_name: competitor.team_name,
-      additional: nil
-    }
+    results.join(" - ")
   end
 
   # return true/false to show whether an expense_group has been chosen by this registrant
@@ -663,5 +617,57 @@ class Registrant < ActiveRecord::Base
 
   def usa_family_membership_details
     paid_details.select{|pd| pd.expense_item == EventConfiguration.singleton.usa_family_expense_item}.try(:details)
+  end
+
+  # Return a hash of categories, with values of a hash of event names
+  # each event has a hash of details
+  # Example:
+  # {
+  #   "Freestyle" => {
+  #     "Individual" => {
+  #       competition_name: "Individual",
+  #       team_name: nil,
+  #       additional_details: nil,
+  #       confirmed: false,
+  #     },
+  #     "Pairs" =>
+  #     {
+  #       competition_name: "Novice Pairs",
+  #       team_name: nil,
+  #       additional_details: "Partner: Scott W",
+  #       confirmed: true,
+  #     },
+  #   },
+  #   "Track" => {
+  #     "100m" =>
+  #     {
+  #       competition_name: "100m",
+  #       team_name: nil,
+  #       additional_details: nil,
+  #       confirmed: false,
+  #     }
+  #   },
+  # }
+  def assigned_event_categories
+    results = {}
+    signed_up_events.includes(event: [event_choices: [:translations], category: [:translations]]).each do |registrant_sign_up|
+      category_hash = results[registrant_sign_up.event.category.to_s] ||= {}
+      event_hash = category_hash[registrant_sign_up.event.to_s] ||= {}
+      event_hash[:competition_name] = registrant_sign_up.event.to_s
+      event_hash[:team_name] = registrant_sign_up.event_category_name
+      event_hash[:additional_details] = describe_additional_selection(registrant_sign_up.event)
+      event_hash[:confirmed] = false
+    end
+
+    competitors.includes(competition: [event: [category: [:translations]]]).each do |competitor|
+      category_hash = results[competitor.event.category.to_s] ||= {}
+      event_hash = category_hash[competitor.event.to_s] ||= {}
+      event_hash[:competition_name] = competitor.competition.award_title
+      event_hash[:team_name] = competitor.team_name
+      event_hash[:additional_details] = nil
+      event_hash[:confirmed] = true
+    end
+
+    results
   end
 end
