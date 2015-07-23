@@ -11,16 +11,8 @@ describe ChoicesValidator do
       @ec = @event.event_categories.first
       FactoryGirl.create(:registrant_event_sign_up, registrant: @reg, event: @event, event_category: @ec, signed_up: true)
     end
-    it "can determine whether it has the event" do
-      expect(@reg.has_event?(@event)).to eq(true)
-      expect(@reg.has_event?(FactoryGirl.create(:event))).to eq(false)
-    end
     it "can describe the event" do
       expect(@reg.describe_event(@event)).to eq(@event.name)
-    end
-    it "can determine whether it has the category" do
-      expect(@reg.has_event_in_category?(@event.category)).to eq(true)
-      expect(@reg.has_event_in_category?(FactoryGirl.create(:category))).to eq(false)
     end
     describe "and a text field" do
       before(:each) do

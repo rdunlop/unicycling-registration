@@ -518,7 +518,7 @@ class Registrant < ActiveRecord::Base
       end
     end
 
-    results.join(" - ")
+    results.join(" - ") if results.any?
   end
 
   # return true/false to show whether an expense_group has been chosen by this registrant
