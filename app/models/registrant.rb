@@ -670,4 +670,16 @@ class Registrant < ActiveRecord::Base
 
     results
   end
+
+  ############# Events Selection ########
+  def has_event_in_category?(category)
+    category.events.any?{|event| has_event?(event) }
+  end
+
+  # does this registrant have this event checked off?
+  def has_event?(event)
+    @has_event ||= {}
+    @has_event[event] ||= signed_up_events.where(event_id: event.id).any?
+  end
+
 end
