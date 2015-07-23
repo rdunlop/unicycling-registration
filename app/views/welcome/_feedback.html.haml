@@ -1,11 +1,18 @@
 %h4= t(".header")
 = render :partial => "/shared/error_messages", :object => @contact_form
 = simple_form_for @contact_form, url: welcome_feedback_path do |f|
-  = f.label :email, t(".email")
-  = f.text_field :email, placeholder: t(".optional")
-  %br
-  = f.text_area :feedback, {:cols => 100, :rows => 6 }
-  %br
+  .row
+    .small-2.columns.text-right
+      = f.label :email, t(".email")
+    .small-10.columns
+      = f.text_field :email, placeholder: t(".optional")
+  .row
+    .small-12.columns
+      = f.text_area :feedback, {:cols => 100, :rows => 6 }
   - if recaptcha_required?
-    = recaptcha_tags
-  = f.button :submit, t(".submit"), :class => "focus_button"
+    .row
+      .small-12.columns
+        = recaptcha_tags
+  .row
+    .small-12.columns
+      = f.button :submit, t(".submit"), :class => "focus_button"

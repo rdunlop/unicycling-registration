@@ -1,8 +1,8 @@
 class Notifications < TenantAwareMailer
   def send_feedback(form_details)
     @contact_form = ContactForm.deserialize(form_details)
-
     mail to: EventConfiguration.singleton.contact_email.presence,
+         reply_to: @contact_form.reply_to_email,
          cc: Rails.application.secrets.error_emails, subject: 'Feedback'
   end
 

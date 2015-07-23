@@ -153,7 +153,6 @@ MUni - Have network connections.
 - why can a super create a spectator
 - ensure that DQ/DNS competitors have correct points/places
 - improve '/registrant/:id/results' page to honor 'published' status, and also clear up results.
-- Feedback should automatically set the "Reply-to" address to the entered E-mail/logged-in-user's e-mail.
 - Pretend to be any user, so that you can see what they see.
 
 
@@ -448,7 +447,6 @@ Bugs which Robin would like fixed:
 - Fix mailer when mailing from regtest site.
 - RailsAdmin
 - fix sign-out function (due to changes in the js for the navbar)
-- Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.
 - Stop putting "Results" for people who are competitors but didn't race. (e.g. Slow Races ugh).
 - Time Results Edit should have penalties (WTF robin)
 - What happens if a competitor has no members? (do the pages display? do the calculations die?)

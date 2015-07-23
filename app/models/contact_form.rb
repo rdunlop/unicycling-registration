@@ -34,6 +34,11 @@ class ContactForm
     @signed_in = true
   end
 
+  # Specify an e-mail address to reply to for any feedback received.
+  def reply_to_email
+     email.presence || username
+  end
+
   def serialize
     YAML.dump(self)
   end
