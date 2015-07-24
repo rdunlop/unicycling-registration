@@ -1,4 +1,4 @@
-- cache_i18n ['header', @registrant] do
+- cache_i18n ['pdf_header', @registrant] do
   .l--3up
     .l--column
       %h2
@@ -16,7 +16,7 @@
   .l--column
     // this partial includes conditional-display logic..do not cache it
     = render :partial => "/registrants/summary", formats: :html
-    - cache_i18n ['expenses', @registrant, @registrant.members_cache_key, @config] do
+    - cache_i18n ['pdf_expenses', @registrant, @registrant.members_cache_key, @config] do
       = render :partial => "/registrants/registrant_expenses", formats: :html
     // contains caching
     = render partial: "/registrants/registrant_songs", formats: :html
