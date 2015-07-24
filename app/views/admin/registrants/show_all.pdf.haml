@@ -1,0 +1,5 @@
+- @registrants.limit(4).each do |reg|
+  - @registrant = reg
+  .body
+    = render :partial => "/registrants/show_single_registrant"
+  .page-break

@@ -1,19 +1,18 @@
 - cache_i18n [@config, @registrant], expires_in: 1.hour do
   - if @registrant.competitor? && (@registrant.events_with_music_allowed.any? || !@config.music_submission_ended?)
-    .small-12.medium-6.large-4.columns.print-4
-      %fieldset.data_block
-        - cache_i18n ['songs_menu', @config, @registrant] do
-          %legend= t(".header")
-          %table
-            %thead
+    %fieldset.data_block
+      - cache_i18n ['songs_menu', @config, @registrant] do
+        %legend= t(".header")
+        %table
+          %thead
+            %tr
+              %th= t(".event")
+              %th= t(".song")
+          %tbody
+            - @registrant.songs.includes(:event).each do |song|
               %tr
-                %th= t(".event")
-                %th= t(".song")
-            %tbody
-              - @registrant.songs.includes(:event).each do |song|
-                %tr
-                  %td= song.event
-                  %td= song.description
-      - if policy(Song.new).create?
-        .edit_link_block
-          = link_to t(".instructions"), registrant_songs_path(@registrant)
+                %td= song.event
+                %td= song.description
+    - if policy(Song.new).create?
+      .edit_link_block
+        = link_to t(".instructions"), registrant_songs_path(@registrant)

@@ -2,7 +2,11 @@
 - Move the "show confirmed events" feature into competition-admin-space?
 - Strikethrough any competitors who are "DNS"/etc.
 
+- Allow Payment Admin to see the "Expenses" screen of a registrant, and add/remove elements to their Payments page
+- Fix caching on the Payments#summary page, since it doesn't update the "Unpaid" column properly when people add/remove RegistrantExpenseItems.
 
+- Better handle invalid step problem by redirecting user elsewhere?
+ (causes exception right now)
 
 - make the "onsite" registration period automatically selected if no other period's date is in range
 - prevent needing to set the dates for the Onsite registration
