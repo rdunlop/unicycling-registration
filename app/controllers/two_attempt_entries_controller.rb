@@ -14,7 +14,7 @@ class TwoAttemptEntriesController < ApplicationController
   # GET /users/#/two_attempt_entry
   # GET /users/#/two_attempt_entrys.json
   def index
-    authorize @competition, :view_result_data?
+    authorize @competition, :create_preliminary_result?
 
     add_breadcrumb "Add two-entry data"
 
