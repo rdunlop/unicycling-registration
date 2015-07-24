@@ -4,17 +4,7 @@
 
 %p Authorizations are valid for 24 hours unless revoked earlier.
 
-- if policy(:admin_permission).display_acl?
-  %b Administrator
-  To authorize A laptop, <u>on that laptop</u> go to #{acl_permissions_url} and type in the access key
-
-  %p This will also allow that laptop to create user accounts without triggering e-mail confirmations.
-
-  %h2.current_access_key
-    Today's Access Key is
-    = modification_access_key
-- else
-  = form_tag set_acl_permissions_path do
-    = label_tag :access_key, "Access Key"
-    = text_field_tag :access_key
-    = submit_tag "Authorize", class: "button"
+= form_tag set_acl_permissions_path do
+  = label_tag :access_key, "Access Key"
+  = text_field_tag :access_key
+  = submit_tag "Authorize", class: "button"
