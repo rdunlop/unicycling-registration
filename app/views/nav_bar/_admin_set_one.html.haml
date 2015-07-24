@@ -2,7 +2,7 @@
   %li= link_to 'Data Entry', welcome_data_entry_menu_path
 - if policy(@config).setup_convention?
   %li= link_to 'Convention Setup', convention_setup_path
-- if policy(:permission).index?
+- if policy(:admin_permission).index?
   %li= link_to 'User Management',  permissions_path
 - if policy(Event.new).summary?
   %li= link_to  'Registration Overview', summary_events_path

@@ -1,4 +1,4 @@
-class PermissionPolicy < ApplicationPolicy
+class AdminPermissionPolicy < ApplicationPolicy
   def index?
     convention_admin? || competition_admin? || super_admin?
   end

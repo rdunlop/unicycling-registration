@@ -38,7 +38,7 @@
         = submit_tag "Add Permission", class: "button"
 
   .l--column
-    - if policy(:permission).set_password?
+    - if policy(:admin_permission).set_password?
       %fieldset.form__fieldset
         %h3 Set User Password
         = form_tag(set_password_permissions_path, { :method => :put}) do
