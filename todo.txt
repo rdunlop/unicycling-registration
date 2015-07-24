@@ -1,3 +1,9 @@
+- Make imports only Director-level possible
+- Wave time entry is direcor only
+- Volunteer can enter Sign In lists
+- Import Wave assignments
+
+- disable bullets from bulletted lists
 - Accept these results redirects to a page which is "not authorized"
 - Import results->import CSV styling needs to be updated
 - Import results ->delete all in temp table new styling, and flash message on success
