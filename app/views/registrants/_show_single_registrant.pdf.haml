@@ -15,15 +15,15 @@
 .l--2up
   .l--column
     // this partial includes conditional-display logic..do not cache it
-    = render :partial => "/registrants/summary"
+    = render :partial => "/registrants/summary", formats: :html
     - cache_i18n ['expenses', @registrant, @registrant.members_cache_key, @config] do
-      = render :partial => "/registrants/registrant_expenses"
+      = render :partial => "/registrants/registrant_expenses", formats: :html
     // contains caching
-    = render partial: "/registrants/registrant_songs"
+    = render partial: "/registrants/registrant_songs", formats: :html
   .l--column
     - if @registrant.competitor?
       - if @config.display_confirmed_events?
         = render "/registrants/registrant_events_or_competition_assignments"
       - else
-        = render :partial => "/registrants/registrant_events"
+        = render :partial => "/registrants/registrant_events", formats: :html
 
