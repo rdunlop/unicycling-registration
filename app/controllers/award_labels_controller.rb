@@ -195,6 +195,7 @@ class AwardLabelsController < ApplicationController
     #  and it will wrap lines as necessary, and then shrink the text.
 
     labels = Prawn::Labels.render(names, type: label_type, shrink_to_fit: true) do |pdf, name|
+      set_font(pdf)
       pdf.text name, align: :center, inline_format: true, valign: :center
     end
 

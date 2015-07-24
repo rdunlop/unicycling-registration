@@ -77,26 +77,40 @@ class ApplicationController < ActionController::Base
     render pdf: view_name,
            page_size: "Letter",
            print_media_type: true,
-           margin: {top: 2, left: 2, right: 2},
+           margin: {top: 5, bottom: 10, left: 7, right: 7},
+           show_as_html: params[:debug].present?,
            footer: default_footer,
-           formats: [:html],
+           formats: [:pdf, :html],
            orientation: orientation,
            disposition: disposition,
            layout: "pdf.html"
   end
 
   # a prototype, not working (currently cutting off lines)
+  # NOT IN USE
   def render_pdf_with_header(view_name, template, locals)
     render pdf: view_name,
            page_size: "Letter",
            print_media_type: true,
            margin: {top: 60, left: 2, right: 2},
+           show_as_html: params[:debug].present?,
            footer: default_footer,
            formats: [:html],
            header: { html: {template: template, locals: locals}},
            orientation: "Portrait",
            disposition: "inline",
            layout: "pdf.html"
+  end
+
+  # Prawn-Labels font setting
+  def set_font(pdf)
+    pdf.font_families.update("OpenSans" => {
+      :normal => "#{Rails.root}/app/assets/fonts/OpenSans-Regular.ttf",
+      :italic => "#{Rails.root}/app/assets/fonts/OpenSans-Italic.ttf",
+      :bold => "#{Rails.root}/app/assets/fonts/OpenSans-Bold.ttf",
+      :bold_italic => "#{Rails.root}/app/assets/fonts/OpenSans-BoldItalic.ttf"
+    })
+    pdf.font "OpenSans"
   end
 
   def user_not_authorized

@@ -1,0 +1,4 @@
+- @registrants.each do |reg|
+  - @registrant = reg
+  = render :partial => "/registrants/show_single_registrant", formats: :pdf
+  .page-break

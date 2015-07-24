@@ -16,7 +16,7 @@
         %tr
           %td= registrant.bib_number
           %td= registrant
-          %td= registrant.registrant_type
+          %td= registrant.registrant_type.capitalize
           - if @config.usa?
             %td= registrant.state
           - else

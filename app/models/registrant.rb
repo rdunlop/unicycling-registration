@@ -406,6 +406,14 @@ class Registrant < ActiveRecord::Base
 
   delegate :country_code, :country, :state, :club, to: :contact_detail, allow_nil: true
 
+  def state_or_country(usa)
+    if usa
+      state
+    else
+      country
+    end
+  end
+
   def to_s
     name + (deleted ? " (deleted)" : "")
   end

@@ -2,7 +2,7 @@
   - if @registrant.amount_owing > 0
     .unpaid_warning
       UNPAID?
-  - if @config.usa_membership_config? && !@registrant.usa_membership_paid?
+  - if @config.usa_membership_config? && !@registrant.usa_membership_paid? && !@registrant.spectator?
     .unpaid_warning
       USA#
   - if @registrant.competitor? && @registrant.age <= 10

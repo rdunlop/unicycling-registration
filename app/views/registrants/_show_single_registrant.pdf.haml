@@ -1,0 +1,29 @@
+- cache_i18n ['pdf_header', @registrant] do
+  .l--3up
+    .l--column
+      %h2
+        = "##{@registrant.bib_number}"
+        = "#{@registrant.last_name}, #{@registrant.first_name}"
+        = "(incomplete)" unless @registrant.validated?
+    .l--column
+      %h2
+        = @registrant.registrant_type.capitalize
+    .l--column
+      = render partial: "/registrants/unpaid_warnings", formats: :html
+      = render partial: "/registrants/access_code", formats: :html
+  %hr
+.l--2up
+  .l--column
+    // this partial includes conditional-display logic..do not cache it
+    = render :partial => "/registrants/summary", formats: :html
+    - cache_i18n ['pdf_expenses', @registrant, @registrant.members_cache_key, @config] do
+      = render :partial => "/registrants/registrant_expenses", formats: :html
+    // contains caching
+    = render partial: "/registrants/registrant_songs", formats: :html
+  .l--column
+    - if @registrant.competitor?
+      - if @config.display_confirmed_events?
+        = render "/registrants/registrant_events_or_competition_assignments"
+      - else
+        = render :partial => "/registrants/registrant_events", formats: :html
+

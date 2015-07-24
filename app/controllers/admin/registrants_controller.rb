@@ -62,15 +62,17 @@ class Admin::RegistrantsController < ApplicationController
   end
 
   def bag_labels
-    authorize current_user, :under_development?
+    authorize current_user, :registrant_information?
     @registrants = Registrant.includes(:contact_detail).reorder(:sorted_last_name, :first_name).active.all
 
     names = []
     @registrants.each do |reg|
-      names << "\n <b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name} \n #{reg.country}"
+      names << "\n <b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name} \n #{reg.state_or_country(@config.usa?)} \n #{reg.registrant_type.capitalize}"
     end
 
     labels = Prawn::Labels.render(names, type: "Avery5160") do |pdf, name|
+      set_font(pdf)
+
       pdf.text name, align: :center, size: 12, inline_format: true
     end
 
@@ -89,7 +91,7 @@ class Admin::RegistrantsController < ApplicationController
 
     respond_to do |format|
       format.html # show_all.html.erb
-      format.pdf { render_common_pdf  "show_all",  'Landscape' }
+      format.pdf { render_common_pdf  "show_all",  'Portrait' }
     end
   end
 
