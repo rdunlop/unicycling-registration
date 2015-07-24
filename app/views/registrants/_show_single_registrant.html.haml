@@ -10,16 +10,16 @@
 
 - cache_i18n ['header', @registrant] do
   .row
-    .small-6.print-4.columns.text-left
+    .small-12.medium-6.print-4.columns.text-left
       %h1
         = "##{@registrant.bib_number}"
         = "#{@registrant.last_name}, #{@registrant.first_name}"
         = "(incomplete)" unless @registrant.validated?
-    .small-2.print-4.columns.text-center
+    .small-12.medium-2.print-4.columns.text-center
       %h2= @registrant.registrant_type.capitalize
       .non_printable
         = link_to t(".printable_pdf"), registrant_path(@registrant, :format => "pdf"), {:target => "_blank"}
-    .small-4.columns.print-4.text-right
+    .small-12.medium-4.columns.print-4.text-right
       = render partial: "/registrants/unpaid_warnings"
       = render partial: "/registrants/access_code"
   %hr
