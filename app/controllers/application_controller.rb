@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
     render pdf: view_name,
            page_size: "Letter",
            print_media_type: true,
-           margin: {top: 2, left: 2, right: 2},
+           margin: {top: 5, bottom: 10, left: 7, right: 7},
            show_as_html: params[:debug].present?,
            footer: default_footer,
            formats: [:pdf, :html],
@@ -87,6 +87,7 @@ class ApplicationController < ActionController::Base
   end
 
   # a prototype, not working (currently cutting off lines)
+  # NOT IN USE
   def render_pdf_with_header(view_name, template, locals)
     render pdf: view_name,
            page_size: "Letter",
