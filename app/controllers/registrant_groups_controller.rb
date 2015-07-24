@@ -39,6 +39,7 @@ class RegistrantGroupsController < ApplicationController
     end
 
     labels = Prawn::Labels.render(label_text, type: "Avery5160", shrink_to_fit: true) do |pdf, name|
+      set_font(pdf)
       pdf.text name, align: :center, valign: :center, inline_format: true
     end
 
