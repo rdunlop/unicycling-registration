@@ -9,7 +9,7 @@
         %tr
           %td.event_heading{ colspan: 3 }= category
         - registrant_assigned_categories[category.to_s].each do |event_name, details|
-          %tr
+          %tr{ class: details[:status] ? "competitor-#{details[:status]}" : nil }
             %td= details[:competition_name]
             %td
               = details[:team_name]
