@@ -128,7 +128,7 @@ class RegistrationPeriod < ActiveRecord::Base
 
     unless now_period.nil?
       Registrant.all.find_each do |reg|
-        new_item = now_period.expense_item_for(reg.competitor)
+        new_item = now_period.expense_item_for(reg.competitor?)
 
         next if new_item.nil?
 

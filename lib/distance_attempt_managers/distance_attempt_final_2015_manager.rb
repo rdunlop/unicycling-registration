@@ -5,8 +5,20 @@ class DistanceAttemptFinal_2015_Manager < DistanceAttemptManager
 
   def acceptable_distance_error(distance)
     if single_fault? && distance != max_attempted_distance
-      "Riders must successfully complete each distance before moving on to the next distance. Please complete #{max_attempted_distance}"
+      "Riders must successfully complete each distance before moving on to the next distance. Please complete #{max_attempted_distance}cm"
+    else
+      max_attempt = distance_attempts.first
+      if max_attempt.present? && !max_attempt.fault?
+        # no fault
+        check_current_attempt_is_longer_than_previous_attempt(distance, max_attempt.distance)
+      end
     end
+  end
+
+
+  def single_fault_message(distance)
+    # doesn't have the "+" sign on the message
+    "Fault. Next Distance #{distance}cm"
   end
 
   private

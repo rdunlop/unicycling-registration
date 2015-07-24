@@ -49,6 +49,10 @@ class RegistrantEventSignUp < ActiveRecord::Base
     end
   end
 
+  def event_category_name
+    event_category.name.to_s if event.event_categories.size > 1
+  end
+
   def mark_member_as_dropped
     # was signed up and now we are not
     if signed_up_was && signed_up_changed? && !signed_up

@@ -14,7 +14,6 @@
  * For example naucc_2013.scss or unicon_17.scss.
  * Then add this option to the list of EventConfiguration.style_names
  *
- *= require_self
  *= require foundation_and_overrides
 
  *= require fancybox
@@ -24,8 +23,14 @@
  *= require jquery-ui-1.9.2.custom
  *= require font-kit-rails
  *= require jquery.datetimepicker
+ *= require_self
  */
 
 .ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
   min-width: 70px;
+}
+
+// Necessary in order to allow scrolling on small screens
+.off-canvas-wrap {
+  overflow: auto;
 }

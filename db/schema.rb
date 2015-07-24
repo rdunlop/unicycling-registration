@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708013054) do
+ActiveRecord::Schema.define(version: 20150722022045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,16 +57,16 @@ ActiveRecord::Schema.define(version: 20150708013054) do
 
   create_table "award_labels", force: :cascade do |t|
     t.integer  "bib_number"
-    t.string   "competition_name", limit: 255
-    t.string   "team_name",        limit: 255
-    t.string   "details",          limit: 255
+    t.string   "line_2",        limit: 255
+    t.string   "line_3",        limit: 255
+    t.string   "line_5",        limit: 255
     t.integer  "place"
     t.integer  "user_id"
     t.integer  "registrant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "competitor_name",  limit: 255
-    t.string   "category",         limit: 255
+    t.string   "line_1",        limit: 255
+    t.string   "line_4",        limit: 255
   end
 
   add_index "award_labels", ["user_id"], name: "index_award_labels_on_user_id", using: :btree

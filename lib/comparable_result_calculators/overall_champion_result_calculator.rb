@@ -29,7 +29,8 @@ class OverallChampionResultCalculator
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result?
-      competitor_score(competitor)
+      score = competitor_score(competitor)
+      "#{score.round(3)} pts"
     end
   end
 

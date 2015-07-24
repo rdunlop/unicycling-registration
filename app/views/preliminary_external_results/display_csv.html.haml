@@ -10,6 +10,6 @@ Please import a Comma-Separated-File file with the following format (for 'Points
 
 = form_tag(import_csv_competition_preliminary_external_results_path(@competition), {:method => :post, :multipart=>true}) do
   = file_field_tag "file"
-  = submit_tag "Load CSV to Preliminary Results table"
+  = submit_tag "Load CSV to Preliminary Results table", class: "button small"
 
 = render "results"

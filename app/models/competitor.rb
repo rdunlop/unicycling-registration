@@ -46,8 +46,8 @@ class Competitor < ActiveRecord::Base
   has_many :results, dependent: :destroy, inverse_of: :competitor
 
   # these are here to allow eager loading/performance optimization
-  has_many :age_group_results, -> { where "results.result_type = 'AgeGroup'" }, class_name: "Result"
-  has_many :overall_results, -> { where "results.result_type = 'Overall'" }, class_name: "Result"
+  has_one :age_group_result, -> { where "results.result_type = 'AgeGroup'" }, class_name: "Result"
+  has_one :overall_result, -> { where "results.result_type = 'Overall'" }, class_name: "Result"
 
   accepts_nested_attributes_for :members, allow_destroy: true
 
@@ -143,12 +143,12 @@ class Competitor < ActiveRecord::Base
 
   def place
     return 0 if disqualified?
-    age_group_results.first.try(:place)
+    age_group_result.try(:place)
   end
 
   def overall_place
     return 0 if disqualified?
-    overall_results.first.try(:place)
+    overall_result.try(:place)
   end
 
   def sorting_place

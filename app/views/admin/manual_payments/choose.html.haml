@@ -9,14 +9,12 @@
   %br
   %br
   %b.payment_instructions
-    Please describe the payment. Examples:
-    %br
-    Cash
-    %br
-    Cheque
-    %br
-  = pf.label :note
-  = pf.text_field :note
+    Please describe the payment. Examples: Cash, Cheque #123
+  .row
+    .small-6.columns.text-right
+      = pf.label :note
+    .small-6.columns
+      = pf.text_field :note
 
   %h1 Chosen (but unpaid) Items
   .payment_instructions

@@ -2,18 +2,18 @@
 #
 # Table name: award_labels
 #
-#  id               :integer          not null, primary key
-#  bib_number       :integer
-#  competition_name :string(255)
-#  team_name        :string(255)
-#  details          :string(255)
-#  place            :integer
-#  user_id          :integer
-#  registrant_id    :integer
-#  created_at       :datetime
-#  updated_at       :datetime
-#  competitor_name  :string(255)
-#  category         :string(255)
+#  id            :integer          not null, primary key
+#  bib_number    :integer
+#  line_2        :string(255)
+#  line_3        :string(255)
+#  line_5        :string(255)
+#  place         :integer
+#  user_id       :integer
+#  registrant_id :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  line_1        :string(255)
+#  line_4        :string(255)
 #
 # Indexes
 #
@@ -28,74 +28,19 @@ class AwardLabel < ActiveRecord::Base
   belongs_to :user
   belongs_to :registrant
 
-  def build_name_from_competitor_and_registrant(competitor, registrant)
-    res = "#{registrant.first_name} #{registrant.last_name}"
-    if competitor.members.count == 2
-      partner = (competitor.registrants - [registrant]).first
-
-      res += " & " + partner.first_name + " " + partner.last_name
-    end
-    res
-  end
-
-  def build_category_name(competitor, expert)
-    if expert
-      if competitor.members.count > 1
-        "Expert"
-      else
-        "Expert #{competitor.gender}"
-      end
-    else
-      if competitor.competition.age_group_type.present?
-        competitor.age_group_entry_description
-      else
-        competitor.competition.award_subtitle_name
-      end
-    end
-  end
-
   def populate_from_competitor(competitor, registrant, place, expert = false)
-    # line 1
-    self.competitor_name = build_name_from_competitor_and_registrant(competitor, registrant)
+    result = find_result(competitor, expert)
 
-    # line 2
-    self.competition_name = competitor.competition.award_title_name
-
-    # line 3
-    self.team_name = competitor.team_name
-
-    # line 4
-    self.category = build_category_name(competitor, expert)
-
-    # line 5
-    self.details = competitor.result
-
-    # line 6
-    self.place = place
+    self.line_1 = result.competitor_name(registrant)
+    self.line_2 = result.competition_name
+    self.line_3 = result.team_name
+    self.line_4 = result.category_name
+    self.line_5 = result.details
+    self.place = result.place # line 6
 
     # misc housekeeping
     self.registrant = registrant
     self.bib_number = registrant.bib_number
-  end
-
-  def line_1
-    competitor_name
-  end
-
-  def line_2
-    competition_name
-  end
-
-  def line_3
-    team_name
-  end
-
-  def line_4
-    category
-  end
-
-  def line_5
-    details
   end
 
   def line_6
@@ -114,4 +59,15 @@ class AwardLabel < ActiveRecord::Base
       "6th Place"
     end
   end
+
+  private
+
+  def find_result(competitor, expert)
+    if expert || !competitor.competition.has_age_group_entry_results?
+      competitor.overall_result
+    else
+      competitor.age_group_result
+    end
+  end
+
 end

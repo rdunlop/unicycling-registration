@@ -455,7 +455,7 @@ describe Competitor do
           expect(@da2.valid?).to eq(true)
         end
         it "should describe the status" do
-          expect(@comp.reload.distance_attempt_status).to eq("Finished. Final Score 10")
+          expect(@comp.reload.distance_attempt_status).to eq("Finished. Final Score 10cm")
         end
       end
 
@@ -470,7 +470,7 @@ describe Competitor do
       end
 
       it "should describe its status clearly" do
-        expect(@comp.reload.distance_attempt_status).to eq("Fault. Next Distance 15+")
+        expect(@comp.reload.distance_attempt_status).to eq("Fault. Next Distance 15cm+")
       end
 
       describe "the last attempt was a success" do
@@ -478,7 +478,7 @@ describe Competitor do
           FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 20, fault: false)
         end
         it "should have a nice status" do
-          expect(@comp.reload.distance_attempt_status).to eq("Success. Next Distance 21+")
+          expect(@comp.reload.distance_attempt_status).to eq("Success. Next Distance 21cm +")
         end
       end
     end

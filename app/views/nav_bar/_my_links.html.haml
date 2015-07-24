@@ -1,5 +1,7 @@
 - if !user_signed_in?
   %li= link_to t(".log_in"), new_user_session_path
+  - if Competition.any?
+    %li= link_to t('.results'), results_path
 - else
   %li= link_to t('.my_registrations'), user_registrants_path(current_user)
   %li= link_to t('.my_payments'), user_payments_path(current_user)

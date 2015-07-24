@@ -132,7 +132,7 @@ class AwardLabelsController < ApplicationController
     if separate_registrants
       labels = @user.award_labels.order(:bib_number)
     else
-      labels = @user.award_labels.order(:category, :place)
+      labels = @user.award_labels.order(:line_4, :place)
     end
 
     names += build_names_from_labels(labels, separate_registrants)
@@ -202,7 +202,7 @@ class AwardLabelsController < ApplicationController
   end
 
   def announcer_sheet
-    @award_labels = @user.award_labels.reorder(:category, :place)
+    @award_labels = @user.award_labels.reorder(:line_4, :place)
 
     respond_to do |format|
       format.html {}
@@ -225,8 +225,8 @@ class AwardLabelsController < ApplicationController
   end
 
   def award_label_params
-    params.require(:award_label).permit(:age_group, :bib_number, :competition_name, :details, :competitor_name, :category,
-                                        :place, :registrant_id, :team_name, :user_id)
+    params.require(:award_label).permit(:age_group, :bib_number, :line_1, :line_2, :line_3, :line_4, :line_5,
+                                        :place, :registrant_id, :user_id)
   end
 
   def set_int_if_present(value, default)

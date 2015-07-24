@@ -1,4 +1,18 @@
-%h1 Competitions Data
+%h1 Competition and Result Data
+
+%p
+  Results are not guaranteed to be published quickly. We will publish them as soon as reasonable and with the permission/direction of the event organizers.
+
+%p
+  This is <b>Not</b> the official final location of results. That will be the USA or IUF organization website. Results will only be available on this site <u>During</u> the competition.
+
+%fieldset.row
+  %legend View Individual Results
+  = form_tag(registrant_results_path, method: :get) do
+    = select_tag :registrant_id, options_from_collection_for_select(Registrant.active.competitor, "id", "with_id_to_s"),
+      include_blank: true, autofocus: true, class: 'chosen-select js--autoFocus'
+    = submit_tag "View Results", class: "button"
+
 %table.sortable
   %thead
     %tr
@@ -17,7 +31,7 @@
           %td= competition.end_time_to_s
           %td= competition.award_title_name
           %td= competition.award_subtitle_name
-          - competition_presenter = CompetitionPresenter.new(competition)
+          // competition_presenter = CompetitionPresenter.new(competition)
           //%td{ class: competition_presenter.status_code}= competition_presenter.status
           %td
             - if competition.num_competitors > 0
@@ -43,13 +57,6 @@
               - competition.competition_results.active.each do |result|
                 = result.published_date_to_s
                 %br
-
-%p
-  Results are not guaranteed to be published quickly. We will publish them as soon as reasonable and with the permission/direction of the event organizers.
-
-%p
-  This is <b>Not</b> the official final location of results. That will be the USA or IUF organization website. Results will only be available on this site <u>During</u> the competition.
-
 
 
 -#

@@ -6,6 +6,17 @@ describe ExportController do
     sign_in @user
   end
 
+  describe "GET download_competitors_for_timers" do
+    before do
+      FactoryGirl.create(:event_configuration, short_name: "this is the event")
+    end
+
+    it "can download the file" do
+      get :download_competitors_for_timers
+      expect(response).to be_success
+    end
+  end
+
   describe "GET download_events" do
     it "without any events or registrants, only prints the headers" do
       get :download_events, format: 'xls'

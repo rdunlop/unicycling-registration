@@ -56,7 +56,9 @@ class DistanceAttemptsController < ApplicationController
   end
 
   def destroy
+    flash[:notice] = "Distance Deleted"
     @distance_attempt.destroy
+    authorize @distance_attempt.judge, :can_judge?
 
     redirect_to :back
   end

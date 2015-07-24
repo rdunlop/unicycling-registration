@@ -1,3 +1,14 @@
+- Overall champion result should be 'pts', and should be rounded?
+- Move the "show confirmed events" feature into competition-admin-space?
+- Strikethrough any competitors who are "DNS"/etc.
+
+
+
+- make the "onsite" registration period automatically selected if no other period's date is in range
+- prevent needing to set the dates for the Onsite registration
+- ensure that
+
+
 TODO: Download the db to Scott+Robin's laptops
 TODO: Spin up and suspend a backup server (including new redis)
 TODO: check caching using the new pundit service.
@@ -144,7 +155,6 @@ MUni - Have network connections.
 - why can a super create a spectator
 - ensure that DQ/DNS competitors have correct points/places
 - improve '/registrant/:id/results' page to honor 'published' status, and also clear up results.
-- Feedback should automatically set the "Reply-to" address to the entered E-mail/logged-in-user's e-mail.
 - Pretend to be any user, so that you can see what they see.
 
 
@@ -439,7 +449,6 @@ Bugs which Robin would like fixed:
 - Fix mailer when mailing from regtest site.
 - RailsAdmin
 - fix sign-out function (due to changes in the js for the navbar)
-- Add delay to mailer so that we don't get sidekiq errors because it's not committed yet.
 - Stop putting "Results" for people who are competitors but didn't race. (e.g. Slow Races ugh).
 - Time Results Edit should have penalties (WTF robin)
 - What happens if a competitor has no members? (do the pages display? do the calculations die?)

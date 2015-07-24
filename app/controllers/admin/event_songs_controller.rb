@@ -5,14 +5,21 @@ class Admin::EventSongsController < ApplicationController
 
   # GET /event_songs
   def index
-    @event = Event.music_uploadable
+    @events = Event.music_uploadable
   end
 
   # GET /event_songs/:id
   def show
     # Show songs which are not yet assigned to a competitor
     @event = Event.find(params[:id])
+    add_breadcrumb "#{@event} Music"
     @songs = Song.where(competitor: nil, event: @event)
+  end
+
+  # GET /event_songs/all
+  def all
+    add_breadcrumb "All Music"
+    @songs = Song.all
   end
 
   private
@@ -22,6 +29,6 @@ class Admin::EventSongsController < ApplicationController
   end
 
   def add_breadcrumbs
-    add_breadcrumb "Music"
+    add_breadcrumb "Music", event_songs_path
   end
 end

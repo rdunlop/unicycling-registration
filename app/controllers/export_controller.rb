@@ -8,7 +8,7 @@ class ExportController < ApplicationController
   def download_competitors_for_timers
     csv_string = CSV.generate do |csv|
       csv << ['bib_number', 'last_name', 'first_name', 'country']
-      Registrant.active.where(competitor: true).each do |registrant|
+      Registrant.active.competitor.each do |registrant|
         csv << [registrant.bib_number,
                 ActiveSupport::Inflector.transliterate(registrant.last_name),
                 ActiveSupport::Inflector.transliterate(registrant.first_name),

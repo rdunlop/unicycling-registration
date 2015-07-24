@@ -55,4 +55,15 @@ describe Event do
     expect(@cf.username).to eq(@reg.user.email)
     expect(@cf.registrants).to eq("Bob Smith")
   end
+
+  it "returns the email if set for replyto" do
+    @cf.email = "robin@dunlopweb.com"
+    expect(@cf.reply_to_email).to eq("robin@dunlopweb.com")
+  end
+
+  it "returns the username if the email is not set for replyto" do
+    @cf.email = ""
+    @cf.username = "bob@dunlopweb.com"
+    expect(@cf.reply_to_email).to eq("bob@dunlopweb.com")
+  end
 end

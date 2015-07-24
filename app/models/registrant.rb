@@ -191,7 +191,7 @@ class Registrant < ActiveRecord::Base
     "#{bib_number}" if persisted?
   end
 
-  def competitor
+  def competitor?
     registrant_type == 'competitor'
   end
 
@@ -286,9 +286,9 @@ class Registrant < ActiveRecord::Base
 
   def set_bib_number
     if bib_number.nil?
-      prev_value = Registrant.maximum_bib_number(competitor)
+      prev_value = Registrant.maximum_bib_number(competitor?)
 
-      if competitor
+      if competitor?
         initial_value = 1
       else
         initial_value = 2001
@@ -420,7 +420,7 @@ class Registrant < ActiveRecord::Base
   def reg_paid?
     return true if spectator?
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
-      RegistrationPeriod.paid_for_period(competitor, paid_expense_items).present?
+      RegistrationPeriod.paid_for_period(competitor?, paid_expense_items).present?
     end
   end
 
@@ -471,23 +471,6 @@ class Registrant < ActiveRecord::Base
   end
 
   ############# Events Selection ########
-  def has_event_in_category?(category)
-    category.events.any?{|event| has_event?(event) }
-  end
-
-  def has_confirmed_event_in_category?(category)
-    category.events.any?{|event| has_confirmed_event?(event) }
-  end
-
-  def has_unconfirmed_event_in_category?(category)
-    category.events.any?{|event| has_unconfirmed_event?(event) }
-  end
-
-  # does this registrant have this event checked off?
-  def has_event?(event)
-    @has_event ||= {}
-    @has_event[event] ||= signed_up_events.where(event_id: event.id).any?
-  end
 
   def active_competitors(event)
     competitors.includes(competition: :event).active.joins(:competition).where("competitions.event_id = ?", event)
@@ -497,15 +480,6 @@ class Registrant < ActiveRecord::Base
     active_competitors(event).first
   end
 
-  def has_confirmed_event?(event)
-    @has_confirmed_event ||= {}
-    @has_confirmed_event[event] ||= (active_competitors(event).count > 0)
-  end
-
-  def has_unconfirmed_event?(event)
-    @has_unconfirmed_event ||= {}
-    @has_unconfirmed_event[event] ||= has_event?(event) && !has_confirmed_event?(event)
-  end
 
   def describe_event(event)
     details = describe_event_hash(event)
@@ -527,22 +501,24 @@ class Registrant < ActiveRecord::Base
 
     resu = signed_up_events.find_by(event_id: event.id)
     # only add the Category if there are more than 1
-    results[:category] = nil
-    if event.event_categories.size > 1
-      results[:category] = resu.event_category.name.to_s unless resu.nil?
-    end
+    results[:category] = (resu.event_category_name unless resu.nil?)
 
-    results[:additional] = nil
+    results[:additional] = describe_additional_selection(event)
+
+    results
+  end
+
+  def describe_additional_selection(event)
+    results = []
+
     event.event_choices.each do |ec|
       my_val = registrant_choices.find_by(event_choice_id: ec.id)
-      unless my_val.nil? || !my_val.has_value?
-        results[:additional] += " - " unless results[:additional].nil?
-        results[:additional] = "" if results[:additional].nil?
-        results[:additional] += ec.label + ": " + my_val.describe_value
+      if my_val.present? && my_val.has_value?
+        results << ec.label + ": " + my_val.describe_value
       end
     end
 
-    results
+    results.join(" - ") if results.any?
   end
 
   # return true/false to show whether an expense_group has been chosen by this registrant
@@ -582,7 +558,7 @@ class Registrant < ActiveRecord::Base
 
   def expense_item_is_free(expense_item)
     free_options = nil
-    if competitor
+    if competitor?
       free_options = expense_item.expense_group.competitor_free_options
     else
       free_options = expense_item.expense_group.noncompetitor_free_options
@@ -608,7 +584,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def has_necessary_free_items
-    if competitor
+    if competitor?
       free_groups_required = ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
     else
       free_groups_required = ExpenseGroup.where(noncompetitor_free_options: "One Free In Group REQUIRED")
@@ -642,4 +618,68 @@ class Registrant < ActiveRecord::Base
   def usa_family_membership_details
     paid_details.select{|pd| pd.expense_item == EventConfiguration.singleton.usa_family_expense_item}.try(:details)
   end
+
+  # Return a hash of categories, with values of a hash of event names
+  # each event has a hash of details
+  # Example:
+  # {
+  #   "Freestyle" => {
+  #     "Individual" => {
+  #       competition_name: "Individual",
+  #       team_name: nil,
+  #       additional_details: nil,
+  #       confirmed: false,
+  #     },
+  #     "Pairs" =>
+  #     {
+  #       competition_name: "Novice Pairs",
+  #       team_name: nil,
+  #       additional_details: "Partner: Scott W",
+  #       confirmed: true,
+  #     },
+  #   },
+  #   "Track" => {
+  #     "100m" =>
+  #     {
+  #       competition_name: "100m",
+  #       team_name: nil,
+  #       additional_details: nil,
+  #       confirmed: false,
+  #     }
+  #   },
+  # }
+  def assigned_event_categories
+    results = {}
+    signed_up_events.includes(event: [event_choices: [:translations], category: [:translations]]).each do |registrant_sign_up|
+      category_hash = results[registrant_sign_up.event.category.to_s] ||= {}
+      event_hash = category_hash[registrant_sign_up.event.to_s] ||= {}
+      event_hash[:competition_name] = registrant_sign_up.event.to_s
+      event_hash[:team_name] = registrant_sign_up.event_category_name
+      event_hash[:additional_details] = describe_additional_selection(registrant_sign_up.event)
+      event_hash[:confirmed] = false
+    end
+
+    competitors.includes(competition: [event: [category: [:translations]]]).each do |competitor|
+      category_hash = results[competitor.event.category.to_s] ||= {}
+      event_hash = category_hash[competitor.event.to_s] ||= {}
+      event_hash[:competition_name] = competitor.competition.award_title
+      event_hash[:team_name] = competitor.team_name
+      event_hash[:additional_details] = nil
+      event_hash[:confirmed] = true
+    end
+
+    results
+  end
+
+  ############# Events Selection ########
+  def has_event_in_category?(category)
+    category.events.any?{|event| has_event?(event) }
+  end
+
+  # does this registrant have this event checked off?
+  def has_event?(event)
+    @has_event ||= {}
+    @has_event[event] ||= signed_up_events.where(event_id: event.id).any?
+  end
+
 end

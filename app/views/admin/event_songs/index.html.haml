@@ -1,5 +1,7 @@
 %h2 All Songs
 
+= link_to "All Songs on one page", all_event_songs_path
+
 %h3 By Event
 %table.sortable
   %thead
@@ -7,7 +9,7 @@
       %th Event
       %th # uploaded Songs
   %tbody
-    - @event.each do |event|
+    - @events.each do |event|
       %tr
         %td= link_to event, event_song_path(event)
         %td= event.songs.count
@@ -19,7 +21,7 @@
       %th Event
       %th Competition
   %tbody
-    - @event.each do |event|
+    - @events.each do |event|
       - event.competitions.each do |competition|
         %tr
           %td= link_to event, event_song_path(event)

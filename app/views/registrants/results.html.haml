@@ -1,24 +1,25 @@
 %h1 #{@registrant} Results
 
-// Note: this isn't working nicely yet because some events have "overall" results which are not Overall results.
-%table
-  %thead
-    %tr
-      %th{colspan: 2} Competition
-      %th Place
-      %th Status
-      %th Detail
-  %tbody
-    - @results.each do |result|
+= link_to "View All Competition Results for #{@config.short_name}", results_path
+
+- if true # cache [:registrant_results, @registrant, Result, Competition] do
+  %table
+    %thead
       %tr
-        %td
-          = result.competition.award_title_name
-          = result.competition.award_subtitle_name
-        %td= result.category_description
-        %td= result.place
-        %td= result.status
-        %td
-          - if result.competitor.members.count > 1
-            = result.competitor.to_s
-            %br
-          = result.competitor.result
+        %th Name
+        %th Competition
+        %th Team Name
+        %th Category
+        %th Detail
+        %th Place
+        %th Status
+    %tbody
+      - @results.each do |result|
+        %tr
+          %td= result.competitor_name(@registrant) # line 1
+          %td= result.competition_name # line 2
+          %td= result.team_name # line 3
+          %td= result.category_name # line 4
+          %td= result.details # line 5
+          %td= result.to_s # line 6
+          %td= result.status

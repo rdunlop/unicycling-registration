@@ -2,4 +2,4 @@
 = form_tag(import_path, method: :post, multipart: true) do
   = file_field_tag :file
   = select_tag :class_name, options_for_select(["User", "Registrant", "ContactDetail", "RegistrantExpenseItem", "RegistrantEventSignUp"])
-  = submit_tag
+  = submit_tag class: "button"

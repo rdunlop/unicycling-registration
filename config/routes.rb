@@ -271,11 +271,19 @@ Workspace::Application.routes.draw do
       resources :competition_songs, only: [:show, :create] do
         get :download_zip
       end
-      resources :event_songs, only: [:index, :show, :create]
+      resources :event_songs, only: [:index, :show, :create] do
+        collection do
+          get :all
+        end
+      end
     end
 
     resources :registrants, only: [:show, :destroy] do
-      resources :build, controller: 'registrants/build', only: [:index, :show, :update, :create]
+      resources :build, controller: 'registrants/build', only: [:index, :show, :update, :create] do
+        collection do
+          delete :drop_event
+        end
+      end
 
       # normal user
       collection do
@@ -337,6 +345,9 @@ Workspace::Application.routes.draw do
     put "usa_memberships/update_number", to: "usa_memberships#update_number"
 
     resources :results, only: [:index] do
+      collection do
+        get :registrant
+      end
       member do
         get :scores
       end

@@ -1,0 +1,26 @@
+- registrant_assigned_categories = @registrant.assigned_event_categories
+- has_unconfirmed_event = false
+%fieldset
+  %legend Events
+  %table.events_summary_table
+    %tbody
+      - Category.includes(:translations).all.each do |category|
+        - next unless registrant_assigned_categories[category.to_s].present?
+        %tr
+          %td.event_heading{ colspan: 3 }= category
+        - registrant_assigned_categories[category.to_s].each do |event_name, details|
+          %tr
+            %td= details[:competition_name]
+            %td
+              = details[:team_name]
+              = details[:additional_details]
+            %td
+              - unless details[:confirmed]
+                - has_unconfirmed_event = true
+                %span.unconfirmed_event ^
+    %tfoot
+      - if has_unconfirmed_event
+        %tr
+          %td{ colspan: 3 }
+            %span.unconfirmed_event ^
+            Indicates Unconfirmed Event

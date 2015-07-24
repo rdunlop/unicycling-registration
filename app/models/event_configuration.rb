@@ -77,6 +77,8 @@ class EventConfiguration < ActiveRecord::Base
   validates :usa, :iuf, inclusion: { in: [true, false] }
   validates :test_mode, inclusion: { in: [true, false] }
 
+  validates_date :artistic_closed_date, on_or_before: :event_sign_up_closed_date, allow_nil: true, if: -> { event_sign_up_closed_date.present? }
+
   validates :artistic_score_elimination_mode_naucc, inclusion: { in: [true, false] }
   validates :max_award_place, presence: true
 

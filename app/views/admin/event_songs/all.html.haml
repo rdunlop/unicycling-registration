@@ -1,0 +1,26 @@
+%h2 All Songs
+
+%table.sortable
+  %thead
+    %tr
+      %th Event
+      %th Reg ID
+      %th Reg Name
+      %th Guest?
+      %th Description
+      %th File name
+      %th Updated Date
+      %th Download
+  %tbody
+    - @songs.each do |song|
+      %tr
+        %td= link_to song.event, event_song_path(song.event)
+        %td= song.registrant.bib_number
+        %td= song.registrant
+        %td.js--highlightIfNotBlank= song.uploaded_by_guest? ? "Yes (#{song.user})" : ""
+        %td= song.description
+        %td= song.human_name
+        %td= song.updated_at
+        %td
+          - if song.song_file_name.present?
+            = link_to 'Download', song.song_file_name_url, target: '_blank'

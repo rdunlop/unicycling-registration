@@ -50,4 +50,4 @@ When a competition's competitor list is based on the results of other competitio
               %td
                 = comp_f.hidden_field :bib_number, value: comp.bib_number
                 = comp_f.text_field :lane, value: get_lane(comp.overall_place)
-    = submit_tag "Assign Heat/Lanes"
+    = submit_tag "Assign Heat/Lanes", class: "button"
