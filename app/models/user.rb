@@ -188,6 +188,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.data_entry_volunteer
+    with_role(:data_entry_volunteer).reorder(:name)
+  end
+
   def to_s
     name.presence || email
   end

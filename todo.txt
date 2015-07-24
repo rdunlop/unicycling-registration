@@ -1,4 +1,4 @@
-- Overall champion result should be 'pts', and should be rounded?
+- fix small screen view of competition#show
 - Move the "show confirmed events" feature into competition-admin-space?
 - Strikethrough any competitors who are "DNS"/etc.
 

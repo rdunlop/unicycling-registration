@@ -18,6 +18,12 @@ class VolunteersController < ApplicationController
   # POST /competitions/#/volunteers/:volunteer_type
   # Allows setting of roles specific to a particular competition
   def create
+    unless params[:user_id].present?
+      flash[:alert] = "Please choose a user"
+      redirect_to :back
+      return
+    end
+
     @user = User.find(params[:user_id])
     if @user.add_role(@volunteer_type, @competition)
       flash[:notice] = "#{@competition} #{@volunteer_type} was successfully created."

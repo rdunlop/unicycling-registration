@@ -1,30 +1,35 @@
-%h1 Data Entry Volunteers
-= succeed ":" do
-  %b Step 1
-Ensure that your desired volunteer is enabled in the "Data Entry Volunteer Accounts":
-%br
-%table.sortable
-  %thead
-    %th User Account Email
-    %th Name
-  %tbody
-    - @all_data_entry_volunteers.each do |user|
-      %tr
-        %td= user.email
-        %th
-          = user
-%h3 Set User as 'Data Entry Volunteer'
+%h1 Additional UDA Access
+
+%p
+  Adding a user here allows them to view the "Data Entry" menu, and allows them to be assigned as judges and data-entry volunteer.
+
+%h3 Give a user Additional UDA Access
 = simple_form_for [@competition, @data_entry_volunteer] do |f|
   = render partial: "/shared/error_messages", object: @data_entry_volunteer
   .row
-    .small-4.columns
+    .small-12.medium-4.columns
       = f.label :user_id, "User Account"
-      = f.select :user_id, User.all.map { |user| [user, user.id] }, { include_blank: true }, class: 'chosen-select'
-    .small-4.columns
+      = f.select :user_id, User.all.map { |user| [user.email, user.id] }, { include_blank: true }, class: 'chosen-select'
+    .small-12.medium-4.columns
       = f.label :name, "Name"
       = f.text_field :name
-    .small-4.columns
-      = f.button :submit
-Allows users to see the Data Entry menu.
+    .small-12.medium-4.columns
+      = f.button :submit, "Assign Additional Access"
 %br
-Doing this also confirms unconfirmed e-mail accounts so that they can immediately log in.
+%p
+  %b Note
+  Doing this also confirms unconfirmed e-mail accounts so that they can immediately log in.
+
+%hr
+
+%h3 Users with Access
+%table.sortable
+  %thead
+    %th Name
+    %th User Account Email
+  %tbody
+    - @all_data_entry_volunteers.each do |user|
+      %tr
+        %th
+          = user
+        %td= user.email

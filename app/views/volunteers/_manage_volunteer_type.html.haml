@@ -2,17 +2,25 @@
 
 %p= User.volunteer_role_descriptions(role)
 
-%table.sortable
-  %thead
-    %tr
-      %th Email
-      %th
-  %tbody
-    - volunteers.each do |volunteer|
-      %tr
-        %td= volunteer
-        %td= link_to "Delete", competition_volunteer_path(@competition, role, user_id: volunteer), method: :delete, data: { confirm: "Remove this volunteer?" }
 
 = form_tag  create_competition_volunteers_path(competition, role), method: :post do |f|
-  = select_tag :user_id, options_from_collection_for_select(User.with_role(:data_entry_volunteer), "id", "to_s"), include_blank: true, class: "chosen-select"
-  = submit_tag "Create new #{role}", class: "button"
+  .row
+    .small-6.columns
+      = select_tag :user_id, options_from_collection_for_select(User.data_entry_volunteer, "id", "to_s"), include_blank: true, class: "chosen-select"
+    .small-6.columns
+      = submit_tag "Create new #{role}", class: "button"
+
+.row
+  .small-12.columns
+  %table.sortable
+    %thead
+      %tr
+        %th User
+        %th Email
+        %th
+    %tbody
+      - volunteers.each do |volunteer|
+        %tr
+          %td= volunteer
+          %td= volunteer.email
+          %td= link_to "Delete", competition_volunteer_path(@competition, role, user_id: volunteer), method: :delete, data: { confirm: "Remove this volunteer?" }
