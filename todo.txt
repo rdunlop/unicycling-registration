@@ -1,3 +1,5 @@
+- why didn't the cache bust when I changed the admin_set_two?
+- Allow chosen to work on mobile devices
 - fix small screen view of competition#show
 - Move the "show confirmed events" feature into competition-admin-space?
 - Strikethrough any competitors who are "DNS"/etc.

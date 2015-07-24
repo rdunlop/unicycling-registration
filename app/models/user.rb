@@ -173,6 +173,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Public: A list of all possible data-entry roles, what is used on each
+  # competition is dependent upon the type of competition
+  POSSIBLE_DATA_VOLUNTEERS = [:race_official, :data_recording_volunteer]
+
   def self.volunteer_role_descriptions(role)
     case role
     when :data_entry_volunteer

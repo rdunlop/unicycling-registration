@@ -70,7 +70,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def view_data_entry_menu?
-    race_official? || data_recording_volunteer? || director? || super_admin?
+    data_recording_volunteer? || director? || super_admin?
   end
 
   private

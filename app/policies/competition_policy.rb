@@ -82,6 +82,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   # DATA MANAGEMENT
+  # This is the person who can see entered data for all judges/entry for a competition
   def view_result_data?
     director?(record.event) || super_admin?
   end
@@ -103,6 +104,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   # DATA ENTRY
+  # Can enter preliminary data for a competition
   def create_preliminary_result?
     record.unlocked? && (data_recording_volunteer?(record) || director?(record.event) || super_admin?)
   end

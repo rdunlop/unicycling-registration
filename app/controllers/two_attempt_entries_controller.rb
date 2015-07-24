@@ -102,7 +102,7 @@ class TwoAttemptEntriesController < ApplicationController
   private
 
   def authorize_data_entry
-    authorize @competition, :modify_result_data?
+    authorize @competition, :create_preliminary_result?
   end
 
   def load_user

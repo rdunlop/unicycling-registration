@@ -43,18 +43,30 @@
         %th Category
         %th Event
         %th Competition
-        %th Status
+        %th Start Line Data Entry
+        %th Finish Line Data Entry
+        %th Locked?
+        %th Published?
+        - if policy(current_user).under_development?
+          %td Status
     %tbody
       - cache_i18n [Competition, current_user] do
-        - Competition.with_roles([:race_official, :data_recording_volunteer], current_user).find_each(batch_size: 10) do |competition|
+        -# Competition.with_roles(User::POSSIBLE_DATA_VOLUNTEERS, current_user).find_each(batch_size: 10) do |competition|
+        - Competition.limit(10).each do |competition|
           - cache_i18n [competition] do
             %tr
               %td= competition.end_time_to_s
               %td= competition.event.category
               %td= competition.event
-              %td= # links to data entry recording pages...or perhaps a menu of those pages
               %td= link_to competition.name, competition # remove this link?
-              - competition_presenter = CompetitionPresenter.new(competition)
-              %td{ class: competition_presenter.status_code}= competition_presenter.status
+              %td
+                = render "competitions/start_line_data_entry_links", competition: competition
+              %td
+                = render "competitions/finish_line_data_entry_links", competition: competition
+              %td= competition.locked?
+              %td= competition.published?
+              - if policy(current_user).under_development?
+                - competition_presenter = CompetitionPresenter.new(competition)
+                %td{ class: competition_presenter.status_code}= competition_presenter.status
   %p
     If you don't see the event that you need, please contact an administrator (or use the "Help" menu to send me an e-mail).
