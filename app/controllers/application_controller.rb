@@ -78,8 +78,9 @@ class ApplicationController < ActionController::Base
            page_size: "Letter",
            print_media_type: true,
            margin: {top: 2, left: 2, right: 2},
+           show_as_html: params[:debug].present?,
            footer: default_footer,
-           formats: [:html],
+           formats: [:pdf, :html],
            orientation: orientation,
            disposition: disposition,
            layout: "pdf.html"
@@ -91,6 +92,7 @@ class ApplicationController < ActionController::Base
            page_size: "Letter",
            print_media_type: true,
            margin: {top: 60, left: 2, right: 2},
+           show_as_html: params[:debug].present?,
            footer: default_footer,
            formats: [:html],
            header: { html: {template: template, locals: locals}},
