@@ -1,3 +1,8 @@
+- If I withdrew, what do I do on the paper?
+
+- Add indication next to "important dates" part of whether the date has passed (perhps have a countdown of the time remaining)
+- Caching is not clearing on the registrant#summary page if the competitor's status is updated.
+
 - Overall champion result should be 'pts', and should be rounded?
 - Move the "show confirmed events" feature into competition-admin-space?
 - Strikethrough any competitors who are "DNS"/etc.
