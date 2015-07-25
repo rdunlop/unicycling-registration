@@ -1,3 +1,14 @@
+- If reg is signed up for an event currently, they should not show the "Dropped" text
+- Withdrawn but not dropped, you should be pink, with additional text
+
+Dropped is "did I even drop, and I'm not currently signed up".
+
+- on the Sign In list, there should not be any Withdrawn people, and the option for Withdrawn should not appear.
+- On the Data Entry page for 10k, anyone who is not "Active" competitor should not appear in the list.
+-
+- Make the Competitors#Index page not "Delete" but "withdraw"
+- If the competitor is withdrawn and dropped, the text need not be red.
+- Make the Street results preview page sortable on the final results table.
 - If I withdrew, what do I do on the paper?
 
 - Add indication next to "important dates" part of whether the date has passed (perhps have a countdown of the time remaining)

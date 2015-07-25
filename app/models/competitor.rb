@@ -104,6 +104,25 @@ class Competitor < ActiveRecord::Base
     end
   end
 
+  def warn?
+    competition_registrants = competition.signed_up_registrants
+
+    # if status != "active" && status != "withdrawn"
+    #   error += "Competitor is #{status}<br>"
+    # end
+
+    members.each do |member|
+      # if you are withdrawn, but still signed up, you should be warned
+      if status == "withdrawn" && !member.currently_dropped?
+        return true
+      elsif !competition_registrants.include?(member.registrant)
+        return true
+      end
+    end
+
+    false
+  end
+
   def member_warnings
     competition_registrants = competition.signed_up_registrants
     error = ""
@@ -112,7 +131,7 @@ class Competitor < ActiveRecord::Base
     end
 
     members.each do |member|
-      if member.dropped_from_registration?
+      if member.currently_dropped?
         error += "Registrant #{member} has dropped this event from their registration<br>"
       elsif !competition_registrants.include?(member.registrant)
         error += "Registrant #{member} is not in the default list for this competition<br>"
