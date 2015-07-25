@@ -58,7 +58,7 @@
               %td= competition.end_time_to_s
               %td= competition.event.category
               %td= competition.event
-              %td= link_to competition.name, competition # remove this link?
+              %td= competition
               %td
                 = render "competitions/start_line_data_entry_links", competition: competition
               %td
