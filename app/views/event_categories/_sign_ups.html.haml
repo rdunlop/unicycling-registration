@@ -2,7 +2,8 @@
   %thead
     %tr
       %th ID
-      %th Name
+      %th First Name
+      %th Last Name
       %th Age
       %th Gender
       %th Event Category
@@ -15,7 +16,8 @@
     - sign_ups.each do |resu|
       %tr
         %td= resu.registrant.bib_number
-        %td= resu.registrant
+        %td= resu.registrant.first_name
+        %td= resu.registrant.last_name
         %td= resu.registrant.age
         %td= resu.registrant.gender
         %td= resu.event_category.name

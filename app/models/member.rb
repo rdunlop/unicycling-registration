@@ -29,6 +29,8 @@ class Member < ActiveRecord::Base
   after_destroy :update_min_bib_number
   after_save :touch_competitor
 
+  # This is used by the Competitor, in order to update Members
+  # without cascading the change back to the Competitor.
   attr_accessor :no_touch_cascade
 
   def touch_competitor
