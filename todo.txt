@@ -11,6 +11,31 @@
 - why didn't the cache bust when I changed the admin_set_two?
 - Allow chosen to work on mobile devices
 - fix small screen view of competition#show
+
+NNEEEEEEED TO DO:
+- Check to see that people aren't double-competing for an Event.
+- Mark all "dropped" (but not signed-up-again) as "Withdraw"
+- Data Entry Volunteers
+END
+
+- If reg is signed up for an event currently, they should not show the "Dropped" text
+- Withdrawn but not dropped, you should be pink, with additional text
+
+Dropped is "did I even drop, and I'm not currently signed up".
+
+- on the Sign In list, there should not be any Withdrawn people, and the option for Withdrawn should not appear.
+- On the Data Entry page for 10k, anyone who is not "Active" competitor should not appear in the list.
+-
+- Make the Competitors#Index page not "Delete" but "withdraw", and make this ajax
+- If the competitor is withdrawn and dropped, the text need not be red.
+- Make the Street results preview page sortable on the final results table.
+- If I withdrew, what do I do on the paper?
+
+- Add indication next to "important dates" part of whether the date has passed (perhps have a countdown of the time remaining)
+- Caching is not clearing on the registrant#summary page if the competitor's status is updated.
+
+- Overall champion result should be 'pts', and should be rounded?
+>>>>>>> master
 - Move the "show confirmed events" feature into competition-admin-space?
 - Strikethrough any competitors who are "DNS"/etc.
 

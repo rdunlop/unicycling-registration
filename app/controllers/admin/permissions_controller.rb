@@ -38,6 +38,6 @@ class Admin::PermissionsController < ApplicationController
   private
 
   def authorize_permission
-    authorize :permission
+    authorize :admin_permission
   end
 end

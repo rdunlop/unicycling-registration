@@ -58,6 +58,7 @@ Workspace::Application.routes.draw do
 
         get :acl, controller: "permissions"
         post :set_acl, controller: "permissions"
+        get :display_acl, controller: "admin/permissions"
         get :code, controller: "permissions"
         post :use_code, controller: "permissions"
       end
@@ -430,6 +431,7 @@ Workspace::Application.routes.draw do
     ###############################################
 
     resources :competitors, only: [:edit, :update, :destroy] do
+      put :withdraw, on: :member
       post :update_row_order, on: :collection
     end
 
