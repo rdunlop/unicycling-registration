@@ -77,9 +77,8 @@ class RegistrantEventSignUp < ActiveRecord::Base
         member.update_attributes(dropped_from_registration: true) if member
         # NOTE: This is the same as the above function. wtf robin
         competitor = member.competitor
-          if competitor.active? && competition.num_members_per_competitor == "One"
-            competitor.update_attributes(status: "withdrawn")
-          end
+        if competitor.active? && competition.num_members_per_competitor == "One"
+          competitor.update_attributes(status: "withdrawn")
         end
       end
     end
