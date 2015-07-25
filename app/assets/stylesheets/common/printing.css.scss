@@ -213,3 +213,11 @@ table.results {
     content: " (Not Q)";
   }
 }
+
+.competitor-dnf {
+  text-decoration: line-through;
+  & td:first-child:after {
+    text-decoration: initial;
+    content: " (DNF)";
+  }
+}

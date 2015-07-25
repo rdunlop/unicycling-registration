@@ -55,7 +55,7 @@ class Competitor < ActiveRecord::Base
   validates_associated :members
   validate :must_have_3_members_for_custom_name
 
-  enum status: [:active, :not_qualified, :dns, :withdrawn]
+  enum status: [:active, :not_qualified, :dns, :withdrawn, :dnf]
   after_save :touch_members
 
   def touch_members
