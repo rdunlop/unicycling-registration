@@ -20,8 +20,8 @@
       %th{:colspan => "2"} Registrant
       %th{:colspan => "2"}
       - if @competition.has_age_group_entry_results?
-        %td{:colspan => "2"} Age Group
-      %td
+        %th{:colspan => "2"} Age Group
+      %th
     %tr
       %th ID
       %th Name
@@ -33,13 +33,23 @@
       %th Overall Place
   %tbody
     - @competition.competitors.includes(:age_group_result, :overall_result, members: [:registrant]).each do |comp|
-      - next unless comp.has_result?
-      %tr
-        %td= comp.bib_number
-        %td= comp
-        %td= comp.result
-        %td= comp.disqualified? ? "yes" : ""
-        - if @competition.has_age_group_entry_results?
-          %td= comp.age_group_entry_description
-          %td= comp.place_formatted
-        %td= comp.overall_place_formatted
+      - if comp.has_result?
+        %tr
+          %td= comp.bib_number
+          %td= comp
+          %td= comp.result
+          %td= comp.disqualified? ? "yes" : ""
+          - if @competition.has_age_group_entry_results?
+            %td= comp.age_group_entry_description
+            %td= comp.place_formatted
+          %td= comp.overall_place_formatted
+      - else
+        %tr
+          %td= comp.bib_number
+          %td= comp
+          %td.unmatching No Result
+          %td.unmatching
+          - if @competition.has_age_group_entry_results?
+            %td.unmatching
+            %td.unmatching
+          %td.unmatching
