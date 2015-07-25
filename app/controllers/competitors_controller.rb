@@ -155,6 +155,7 @@ class CompetitorsController < ApplicationController
   def withdraw
     authorize @competitor
     @competitor.update_attributes(status: "withdrawn")
+    flash[:notice] = "Competitor #{@competitor} withdrawn"
     redirect_to competition_competitors_path(@competitor.competition)
   end
 
