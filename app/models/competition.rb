@@ -483,7 +483,7 @@ class Competition < ActiveRecord::Base
   def judge_score_calculator
     case event_class
     when "Freestyle", "Street", "Flatland"
-      GenericPlacingPointsCalculator.new
+      GenericPlacingPointsCalculator.new(lower_is_better: scoring_helper.lower_is_better)
     when "Street Final"
       GenericPlacingPointsCalculator.new(points_per_rank: [10, 7, 5, 3, 2, 1])
     when "Artistic Freestyle IUF 2015"

@@ -4,9 +4,11 @@
 # judged_points - convert the place(s) into points (including splitting placing_points for ties)
 class GenericPlacingPointsCalculator
   attr_accessor :points_per_rank
+  attr_accessor :lower_is_better
 
   def initialize(options = {})
     @points_per_rank = options[:points_per_rank] || (1..100).to_a
+    @lower_is_better = options[:lower_is_better] || false
   end
 
   # Return the numeric place of this score, compared to the results of the other scores by this judge
@@ -15,7 +17,12 @@ class GenericPlacingPointsCalculator
   #
   # result an integer place
   def judged_place(scores, score)
-    better_scores = scores.count { |each_score| each_score > score }
+    if lower_is_better
+      better_scores = scores.count { |each_score| each_score > score }
+    else
+      better_scores = scores.count { |each_score| each_score < score }
+    end
+
     better_scores + 1
   end
 
