@@ -9,6 +9,7 @@ describe 'Entering Points data' do
 
   describe "the event on the page" do
     before :each do
+      user.add_role(:data_recording_volunteer, Competition.first)
       within "#admin_bar" do
         click_link "Data Entry"
       end
@@ -18,10 +19,7 @@ describe 'Entering Points data' do
 
     describe "when entering results" do
       before :each do
-        click_link "Basketball"
-        within "#side_nav" do
-          click_link "Entry Form"
-        end
+        click_link "Entry Form"
       end
 
       it "can add and update scores" do
