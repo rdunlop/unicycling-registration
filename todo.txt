@@ -1,3 +1,5 @@
+- Check to see that people aren't double-competing for an Event.
+
 - If reg is signed up for an event currently, they should not show the "Dropped" text
 - Withdrawn but not dropped, you should be pink, with additional text
 

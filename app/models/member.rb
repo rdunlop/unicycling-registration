@@ -50,7 +50,7 @@ class Member < ActiveRecord::Base
   # Should we consider this member dropped?
   # Only do so if they ever dropped, and they are currrently not registered.
   def currently_dropped?
-    dropped_from_registration? && !competitor.competition.signed_up_registrants.includes?(registrant)
+    dropped_from_registration? && !competitor.competition.signed_up_registrants.include?(registrant)
   end
 
   def registrant_once_per_competition

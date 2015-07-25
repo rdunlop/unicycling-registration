@@ -57,6 +57,11 @@ class Competitor < ActiveRecord::Base
 
   enum status: [:active, :not_qualified, :dns, :withdrawn]
 
+  # statuses for use on the sign-ins page
+  def self.sign_in_statuses
+    statuses.keys - ["withdrawn"]
+  end
+
   # not all competitor types require a position
   #:numericality => {:only_integer => true, :greater_than => 0}
 
