@@ -1,3 +1,10 @@
+NNEEEEEEED TO DO:
+- Check to see that people aren't double-competing for an Event.
+- Mark all "dropped" (but not signed-up-again) as "Withdraw"
+- Data Entry Volunteers should be tested, to ensure that they can enter/approve the data necessary
+- Director should be tested to ensure he can see the data ,and lock the competition, and publish? the competition
+END
+
 - Make imports only Director-level possible
 - Wave time entry is direcor only
 - Volunteer can enter Sign In lists
@@ -11,12 +18,7 @@
 - why didn't the cache bust when I changed the admin_set_two?
 - Allow chosen to work on mobile devices
 - fix small screen view of competition#show
-
-NNEEEEEEED TO DO:
-- Check to see that people aren't double-competing for an Event.
-- Mark all "dropped" (but not signed-up-again) as "Withdraw"
-- Data Entry Volunteers
-END
+- Fix chosen on mobile devices? look at http://brianreavis.github.io/selectize.js/
 
 - If reg is signed up for an event currently, they should not show the "Dropped" text
 - Withdrawn but not dropped, you should be pink, with additional text

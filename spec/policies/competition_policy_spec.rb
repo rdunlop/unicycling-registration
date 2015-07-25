@@ -33,7 +33,7 @@ describe CompetitionPolicy do
     describe "as a director" do
       let(:user) { FactoryGirl.create(:user) }
       before do
-        user.add_role(:director, competition)
+        user.add_role(:director, competition.event)
       end
       it "is accessible" do
         expect(subject).to permit(user, competition)
