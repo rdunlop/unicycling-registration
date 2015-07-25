@@ -1,16 +1,24 @@
 class RegistrantExpenseItemPolicy < ApplicationPolicy
   def create?
-    manage? || super_admin?
+    manage?
   end
 
   def destroy?
-    manage? || super_admin?
+    manage?
   end
 
   private
 
   # need to create specs for this
   def manage?
-    (!record.system_managed?) && (user.editable_registrants.include?(record.registrant))
+    can_manage_item? && (user_match? || payment_admin? || super_admin?)
+  end
+
+  def can_manage_item?
+    !record.system_managed?
+  end
+
+  def user_match?
+    user.editable_registrants.include?(record.registrant)
   end
 end
