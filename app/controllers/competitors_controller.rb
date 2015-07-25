@@ -3,8 +3,8 @@ class CompetitorsController < ApplicationController
   include SortableObject
 
   before_action :authenticate_user!
-  before_action :load_competition, except: [:edit, :update, :destroy, :update_row_order]
-  before_action :load_competitor, only: [:edit, :update, :destroy, :update_row_order]
+  before_action :load_competition, except: [:edit, :update, :destroy, :withdraw, :update_row_order]
+  before_action :load_competitor, only:    [:edit, :update, :destroy, :withdraw, :update_row_order]
 
   before_action :set_parent_breadcrumbs, only: [:index, :new, :edit, :display_candidates]
 
@@ -149,6 +149,13 @@ class CompetitorsController < ApplicationController
       format.js {}
       format.html { redirect_to competition_competitors_path(@ev_cat) }
     end
+  end
+
+  # PUT /competitors/1/withdraw
+  def withdraw
+    authorize @competitor
+    @competitor.update_attributes(status: "withdrawn")
+    redirect_to competition_competitors_path(@competitor.competition)
   end
 
   # DELETE /events/10/competitors/destroy_all

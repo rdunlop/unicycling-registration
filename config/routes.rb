@@ -431,6 +431,7 @@ Workspace::Application.routes.draw do
     ###############################################
 
     resources :competitors, only: [:edit, :update, :destroy] do
+      put :withdraw, on: :member
       post :update_row_order, on: :collection
     end
 

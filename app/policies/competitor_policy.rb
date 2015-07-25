@@ -39,6 +39,10 @@ class CompetitorPolicy < ApplicationPolicy
     manage?
   end
 
+  def withdraw?
+    manage?
+  end
+
   def destroy_all?
     manage?
   end
