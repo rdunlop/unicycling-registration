@@ -31,10 +31,11 @@
     %li= link_to "View", review_user_competition_import_results_path(current_user, competition, options)
 
   - when "Chip-Timing"
-    %li= link_to "Import Chip CSV", display_chip_user_competition_import_results_path(current_user, competition)
+    - if policy(competition).modify_result_data?
+      %li= link_to "Import Chip CSV", display_chip_user_competition_import_results_path(current_user, competition)
 
-  - if competition.imports_times?
+  - if competition.imports_times? && policy(competition).modify_result_data?
     %li= link_to "Import CSV", display_csv_user_competition_import_results_path(current_user, competition)
 
-  - if competition.imports_points?
+  - if competition.imports_points? && policy(competition).modify_result_data?
     %li= link_to "Import CSV", display_csv_competition_preliminary_external_results_path(competition)

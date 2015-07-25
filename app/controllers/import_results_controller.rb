@@ -231,7 +231,7 @@ class ImportResultsController < ApplicationController
       if errors
         format.html { redirect_to :back, alert: "Errors: #{errors}" }
       else
-        format.html { redirect_to result_competition_path(@competition), notice: "Added #{n} rows to #{@competition}." }
+        format.html { redirect_to :back, notice: "Added #{n} rows to #{@competition}." }
       end
     end
   end

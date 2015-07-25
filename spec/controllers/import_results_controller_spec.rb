@@ -124,10 +124,11 @@ describe ImportResultsController do
     it "redirects to the competitions' results page" do
       competition = FactoryGirl.create(:timed_competition)
       reg = FactoryGirl.create(:competitor)
+      request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
       @config = FactoryGirl.create(:event_configuration, :with_usa)
       import = FactoryGirl.create(:import_result, competition: competition, bib_number: reg.bib_number)
       post :approve, user_id: import.user, competition_id: competition.id
-      expect(response).to redirect_to(result_competition_path(competition))
+      expect(response).to redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
     end
   end
 
