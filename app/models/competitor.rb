@@ -59,7 +59,7 @@ class Competitor < ActiveRecord::Base
 
   # statuses for use on the sign-ins page
   def self.sign_in_statuses
-    statuses.reject{ |stat| status == "withdrawn"}
+    statuses.reject{ |stat| stat == "withdrawn"}
   end
 
   # not all competitor types require a position
