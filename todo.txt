@@ -35,10 +35,8 @@ Dropped is "did I even drop, and I'm not currently signed up".
 - Caching is not clearing on the registrant#summary page if the competitor's status is updated.
 
 - Overall champion result should be 'pts', and should be rounded?
->>>>>>> master
-- Move the "show confirmed events" feature into competition-admin-space?
-- Strikethrough any competitors who are "DNS"/etc.
 
+- Move the "show confirmed events" feature into competition-admin-space?
 - Allow Payment Admin to see the "Expenses" screen of a registrant, and add/remove elements to their Payments page
 - Fix caching on the Payments#summary page, since it doesn't update the "Unpaid" column properly when people add/remove RegistrantExpenseItems.
 - Need a way to remove Data Entry Volunteer-ness?
