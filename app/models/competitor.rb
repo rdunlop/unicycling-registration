@@ -59,7 +59,7 @@ class Competitor < ActiveRecord::Base
   after_save :touch_members
 
   def touch_members
-    member.each do |member|
+    members.each do |member|
       member.no_touch_cascade = true
       member.save
     end
