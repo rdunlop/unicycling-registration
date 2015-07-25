@@ -56,6 +56,14 @@ class Competitor < ActiveRecord::Base
   validate :must_have_3_members_for_custom_name
 
   enum status: [:active, :not_qualified, :dns, :withdrawn]
+  after_save :touch_members
+
+  def touch_members
+    member.each do |member|
+      member.no_touch_cascade = true
+      member.save
+    end
+  end
 
   # statuses for use on the sign-ins page
   def self.sign_in_statuses

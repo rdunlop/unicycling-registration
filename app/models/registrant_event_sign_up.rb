@@ -75,6 +75,12 @@ class RegistrantEventSignUp < ActiveRecord::Base
       old_category.competitions_being_fed(registrant).each do |competition|
         member = registrant.members.find{|mem| mem.competitor.try(:competition) == competition}
         member.update_attributes(dropped_from_registration: true) if member
+        # NOTE: This is the same as the above function. wtf robin
+        competitor = member.competitor
+          if competitor.active? && competition.num_members_per_competitor == "One"
+            competitor.update_attributes(status: "withdrawn")
+          end
+        end
       end
     end
   end

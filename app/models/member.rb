@@ -18,7 +18,7 @@
 class Member < ActiveRecord::Base
   include CachedSetModel
 
-  belongs_to :competitor, touch: true, inverse_of: :members
+  belongs_to :competitor, inverse_of: :members
   belongs_to :registrant
   after_destroy :destroy_orphaned_competitors
 
@@ -27,6 +27,13 @@ class Member < ActiveRecord::Base
 
   after_save :update_min_bib_number
   after_destroy :update_min_bib_number
+  after_save :touch_competitor
+
+  attr_accessor :no_touch_cascade
+
+  def touch_competitor
+    competitor.touch unless no_touch_cascade
+  end
 
   def self.cache_set_field
     :registrant_id

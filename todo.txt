@@ -2,7 +2,6 @@ NNEEEEEEED TO DO:
 - DEPLOY TO PROD
 - Check to see that people aren't double-competing for an Event.
  -
-- Mark all "dropped" (but not signed-up-again) as "Withdraw"
 res = {}
 Registrant.all.each do |registrant|
   comps = registrant.competitions.pluck(:id).sort
@@ -14,8 +13,20 @@ Registrant.all.each do |registrant|
   comps = registrant.competitors.pluck(:competition_id).sort
   res[registrant.bib_number] = comps - comps.uniq
 end
-
 NEITHER SHOW ANY RESULTS
+
+- Mark all "dropped" (but not signed-up-again) as "Withdraw"
+to_drop = []
+Competitor.all.each do |comp|
+  if comp.members.size == 1
+    member = comp.members.first
+    if member.dropped_from_registration? && comp.active?
+      # to_drop << "I just withdrew #{comp} from #{comp.competition}"
+      comp.update_attributes(status: "withdrawn")
+    end
+  end
+end
+to_drop
 
 - TwoAttemptEntry and Import Result pages should show the competitors who have results on the page, so that importers don't get confused once they have "Approved" the results during Review.
 - Data Entry Volunteers should be tested, to ensure that they can enter/approve the data necessary
@@ -39,6 +50,8 @@ END
 
 - If reg is signed up for an event currently, they should not show the "Dropped" text
 - Withdrawn but not dropped, you should be pink, with additional text
+
+- Registration ManageOne doesn't work on Firefox.WTF robin
 
 Dropped is "did I even drop, and I'm not currently signed up".
 
