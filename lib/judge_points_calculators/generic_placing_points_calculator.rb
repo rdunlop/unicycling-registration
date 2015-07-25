@@ -18,9 +18,9 @@ class GenericPlacingPointsCalculator
   # result an integer place
   def judged_place(scores, score)
     if lower_is_better
-      better_scores = scores.count { |each_score| each_score > score }
-    else
       better_scores = scores.count { |each_score| each_score < score }
+    else
+      better_scores = scores.count { |each_score| each_score > score }
     end
 
     better_scores + 1
