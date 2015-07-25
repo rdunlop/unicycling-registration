@@ -303,7 +303,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def wheel_size_id_for_event(event)
-    competition_wheel_sizes.select{ |cws| cws.event_id == event.id }.try(:wheel_size_id) || wheel_size_id
+    competition_wheel_sizes.select{ |cws| cws.event_id == event.id }.first.try(:wheel_size_id) || wheel_size_id
   end
 
   def set_default_wheel_size
