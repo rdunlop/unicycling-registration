@@ -17,6 +17,7 @@ end
 
 NEITHER SHOW ANY RESULTS
 
+- TwoAttemptEntry and Import Result pages should show the competitors who have results on the page, so that importers don't get confused once they have "Approved" the results during Review.
 - Data Entry Volunteers should be tested, to ensure that they can enter/approve the data necessary
 - Director should be tested to ensure he can see the data ,and lock the competition, and publish? the competition
 END

@@ -42,7 +42,7 @@ class Compete::SignInsController < ApplicationController
   private
 
   def load_competitors_by_order
-    competitors = @competition.competitors.where(status: Competitor.sign_in_statuses)
+    competitors = @competition.competitors.where(status: Competitor.sign_in_statuses.values)
     if @competition.start_list_present?
       @competitors = competitors.reorder(:wave, :lowest_member_bib_number)
     else
