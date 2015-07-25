@@ -242,7 +242,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def matching_competition_in_event(event)
-    competitors.find{ |competitor| competitor.event == event }.try(:competition)
+    competitors.active.find{ |competitor| competitor.event == event }.try(:competition)
   end
 
   def create_associated_required_expense_items
