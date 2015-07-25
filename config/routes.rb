@@ -380,8 +380,6 @@ Workspace::Application.routes.draw do
 
         resources :import_results, only: [:create] do
           collection do
-            get :proof_single
-
             # These 2 don't use @user, move them?
             get :review
             post :approve

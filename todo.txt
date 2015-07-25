@@ -1,6 +1,22 @@
 NNEEEEEEED TO DO:
+- DEPLOY TO PROD
 - Check to see that people aren't double-competing for an Event.
+ -
 - Mark all "dropped" (but not signed-up-again) as "Withdraw"
+res = {}
+Registrant.all.each do |registrant|
+  comps = registrant.competitions.pluck(:id).sort
+  res[registrant.bib_number] = comps - comps.uniq
+end
+
+res = {}
+Registrant.all.each do |registrant|
+  comps = registrant.competitors.pluck(:competition_id).sort
+  res[registrant.bib_number] = comps - comps.uniq
+end
+
+NEITHER SHOW ANY RESULTS
+
 - Data Entry Volunteers should be tested, to ensure that they can enter/approve the data necessary
 - Director should be tested to ensure he can see the data ,and lock the competition, and publish? the competition
 END

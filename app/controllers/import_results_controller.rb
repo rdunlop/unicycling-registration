@@ -6,9 +6,9 @@ class ImportResultsController < ApplicationController
   before_action :load_import_result, only: [:edit, :update, :destroy]
 
   before_action :load_new_import_result, only: [:create]
-  before_action :load_import_results, only: [:data_entry, :display_csv, :display_chip, :display_lif, :index, :proof_single]
+  before_action :load_import_results, only: [:data_entry, :display_csv, :display_chip, :display_lif, :index]
   before_action :load_results_for_competition, only: [:review, :approve]
-  before_action :filter_import_results_by_start_times, only: [:proof_single, :data_entry, :review, :approve]
+  before_action :filter_import_results_by_start_times, only: [:data_entry, :review, :approve]
 
   before_action :authorize_competition_data, except: [:approve, :approve_heat]
 
@@ -26,6 +26,7 @@ class ImportResultsController < ApplicationController
 
   # GET /users/#/competitions/#/import_results/review
   def review
+    add_breadcrumb "Review"
     @import_results = @import_results.entered_order
     respond_to do |format|
       format.html # review.html.erb
@@ -98,17 +99,6 @@ class ImportResultsController < ApplicationController
 
     @import_result = ImportResult.new
     @import_result.is_start_time = @is_start_time
-  end
-
-  def proof_single
-    add_breadcrumb "Proof Data"
-
-    @import_results = @import_results.entered_order
-
-    respond_to do |format|
-      format.html
-      format.pdf { render_common_pdf("proof_single") }
-    end
   end
 
   def display_chip

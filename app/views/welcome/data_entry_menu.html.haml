@@ -48,7 +48,7 @@
         %th Locked?
         %th Published?
         - if policy(current_user).under_development?
-          %td Status
+          %th Status
     %tbody
       - cache_i18n [Competition, current_user] do
         -# Competition.limit(10).each do |competition|
