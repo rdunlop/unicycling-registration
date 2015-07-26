@@ -50,8 +50,13 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def award?
-    awards_admin? || super_admin?
+    !record.awarded? && (awards_admin? || super_admin?)
   end
+
+  def unaward?
+    record.awarded? && (awards_admin? || super_admin?)
+  end
+
   ###### END State Machine transitions ############
 
   def export_scores?

@@ -45,3 +45,13 @@
   %h4 Additional Results
   = link_to "Add Additional Results PDFs", competition_competition_results_path(@competition)
   %p There are currently #{@competition.competition_results.additional.count} Additional Results attached to this event
+
+- if policy(@competition).award?
+  %h4 Set as Awarded
+  = link_to "Mark as Awarded", award_competition_path(@competition), method: :post, data: { confirm: "are you sure" }, class: "button small"
+  %p This will allow registrants to see their results on the per-registrant results page
+
+- if policy(@competition).unaward?
+  %h4 Set as Un-Awarded
+  = link_to "Mark as UnAwarded", award_competition_path(@competition), method: :post, data: { confirm: "are you sure" }, class: "button small"
+  %p This will remove the results from view.
