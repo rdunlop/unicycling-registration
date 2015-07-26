@@ -67,7 +67,7 @@ class PreliminaryExternalResultsController < ApplicationController
 
   # GET /competitions/:competition_id/preliminary_external_results/review
   def review
-    # FIX THis
+    @external_results = @external_results.reorder(:entered_at)
   end
 
   # POST .../approve
