@@ -14,7 +14,7 @@
       %th
       %th
   %tbody
-    - @competition.external_results.preliminary.each_with_index do |external_result, index|
+    - @external_results.each_with_index do |external_result, index|
       - next unless external_result.persisted?
       %tr
         %td= index + 1

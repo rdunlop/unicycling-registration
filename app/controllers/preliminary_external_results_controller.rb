@@ -36,7 +36,7 @@ class PreliminaryExternalResultsController < ApplicationController
       if @external_result.save
         format.html { redirect_to competition_preliminary_external_results_path(@competition), notice: 'External result was successfully created.' }
       else
-        @external_results = @competition.external_results.preliminary
+        load_external_results
         format.html { render action: "index" }
       end
     end
