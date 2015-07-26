@@ -1,3 +1,5 @@
+- Double check to see whether UNICON2014 Street will work properly because the higher-poinst are better?
+
 res = {}
 Registrant.all.each do |registrant|
   comps = registrant.competitions.pluck(:id).sort
