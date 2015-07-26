@@ -20,6 +20,7 @@
 
 - if policy(current_user).manage_all_payments?
   = link_to "View list of Payments/Refunds", list_payment_adjustments_path
+  %br
 
 - if policy(current_user).manage_all_payments?
   = link_to "Download Payments", list_export_payments_path
