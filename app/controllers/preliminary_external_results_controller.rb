@@ -67,7 +67,6 @@ class PreliminaryExternalResultsController < ApplicationController
 
   # GET /competitions/:competition_id/preliminary_external_results/review
   def review
-    @external_results = @external_results.reorder(:entered_at)
   end
 
   # POST .../approve
@@ -119,7 +118,7 @@ class PreliminaryExternalResultsController < ApplicationController
   end
 
   def load_external_results
-    @external_results = @competition.external_results.preliminary
+    @external_results = @competition.external_results.preliminary.reorder(:entered_at)
   end
 
   def external_result_params

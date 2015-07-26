@@ -2,6 +2,7 @@
 %table.sortable
   %thead
     %tr
+      %th Entry Number
       %th Competitor
       %th Points
       %th Details
@@ -13,9 +14,10 @@
       %th
       %th
   %tbody
-    - @competition.external_results.preliminary.each do |external_result|
+    - @competition.external_results.preliminary.each_with_index do |external_result, index|
       - next unless external_result.persisted?
       %tr
+        %td= index + 1
         %td= external_result.competitor
         %td= external_result.points
         %td= external_result.details
