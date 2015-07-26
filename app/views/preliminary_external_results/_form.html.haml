@@ -16,6 +16,6 @@
     %tr
       %td= competitor_select_box(f, @competition, class: "js--competitors", disabled_ids: @competition.competitors_with_results.map(&:id))
       %td= f.input :points, input_html: {min: 0, :step => 0.001 }, label: false
-      %td= f.input :details, label: false
+      %td= f.input :details, label: false, placeholder: "<blank> => '<points> pts'"
       %td= f.input :status, label: false, collection: ExternalResult.status_values, include_blank: false
       %td= f.button :submit

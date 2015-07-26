@@ -67,6 +67,7 @@ class PreliminaryExternalResultsController < ApplicationController
 
   # GET /competitions/:competition_id/preliminary_external_results/review
   def review
+    # FIX THis
   end
 
   # POST .../approve
@@ -109,7 +110,7 @@ class PreliminaryExternalResultsController < ApplicationController
   end
 
   def load_external_result
-    @extenal_result = ExtenalResult.find(params[:id])
+    @external_result = ExternalResult.find(params[:id])
     @competition = @external_result.competition
   end
 

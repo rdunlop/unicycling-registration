@@ -33,6 +33,7 @@ class ExternalResult < ActiveRecord::Base
   belongs_to :entered_by, class_name: 'User', foreign_key: :entered_by_id
 
   validates :points, presence: true
+  before_create :set_details_if_empty
 
   def self.cache_set_field
     :competitor_id
@@ -68,4 +69,12 @@ class ExternalResult < ActiveRecord::Base
   def result
     points
   end
+
+  private
+
+  def set_details_if_empty
+    binding.pry
+    self.details = "#{points} pts" unless details.present?
+  end
+
 end
