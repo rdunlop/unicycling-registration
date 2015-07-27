@@ -1,3 +1,5 @@
+- Add a report which allows comparing whether a registrant has results in 2 different disciplines (like Advanced + Beginner Trials)
+- Director of event should be able to "Set Places"
 - make Preliminary external results AJAX
 - trials should have a sign-in list.
 - Double check to see whether UNICON2014 Street will work properly because the higher-poinst are better?
