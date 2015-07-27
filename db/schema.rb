@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722022045) do
+ActiveRecord::Schema.define(version: 20150727195106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,22 +70,6 @@ ActiveRecord::Schema.define(version: 20150722022045) do
   end
 
   add_index "award_labels", ["user_id"], name: "index_award_labels_on_user_id", using: :btree
-
-  create_table "boundary_scores", force: :cascade do |t|
-    t.integer  "competitor_id"
-    t.integer  "judge_id"
-    t.integer  "number_of_people"
-    t.integer  "major_dismount"
-    t.integer  "minor_dismount"
-    t.integer  "major_boundary"
-    t.integer  "minor_boundary"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "boundary_scores", ["competitor_id"], name: "index_boundary_scores_competitor_id", using: :btree
-  add_index "boundary_scores", ["judge_id", "competitor_id"], name: "index_boundary_scores_on_judge_id_and_competitor_id", unique: true, using: :btree
-  add_index "boundary_scores", ["judge_id"], name: "index_boundary_scores_judge_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.integer  "position"
@@ -175,26 +159,28 @@ ActiveRecord::Schema.define(version: 20150722022045) do
 
   create_table "competitions", force: :cascade do |t|
     t.integer  "event_id"
-    t.string   "name",                          limit: 255
+    t.string   "name",                            limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "age_group_type_id"
-    t.boolean  "has_experts",                               default: false, null: false
-    t.string   "scoring_class",                 limit: 255
-    t.string   "start_data_type",               limit: 255
-    t.string   "end_data_type",                 limit: 255
-    t.boolean  "uses_lane_assignments",                     default: false, null: false
+    t.boolean  "has_experts",                                 default: false, null: false
+    t.string   "scoring_class",                   limit: 255
+    t.string   "start_data_type",                 limit: 255
+    t.string   "end_data_type",                   limit: 255
+    t.boolean  "uses_lane_assignments",                       default: false, null: false
     t.datetime "scheduled_completion_at"
-    t.boolean  "awarded",                                   default: false, null: false
-    t.string   "award_title_name",              limit: 255
-    t.string   "award_subtitle_name",           limit: 255
-    t.string   "num_members_per_competitor",    limit: 255
-    t.boolean  "automatic_competitor_creation",             default: false, null: false
+    t.boolean  "awarded",                                     default: false, null: false
+    t.string   "award_title_name",                limit: 255
+    t.string   "award_subtitle_name",             limit: 255
+    t.string   "num_members_per_competitor",      limit: 255
+    t.boolean  "automatic_competitor_creation",               default: false, null: false
     t.integer  "combined_competition_id"
-    t.boolean  "order_finalized",                           default: false, null: false
+    t.boolean  "order_finalized",                             default: false, null: false
     t.integer  "penalty_seconds"
     t.datetime "locked_at"
     t.datetime "published_at"
+    t.boolean  "enter_separated_dismount_scores",             default: false, null: false
+    t.boolean  "dedicated_dismount_judges",                   default: false, null: false
   end
 
   add_index "competitions", ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true, using: :btree
@@ -266,6 +252,19 @@ ActiveRecord::Schema.define(version: 20150722022045) do
     t.text     "inform_emails"
     t.integer  "price_cents"
   end
+
+  create_table "dismount_scores", force: :cascade do |t|
+    t.integer  "competitor_id"
+    t.integer  "judge_id"
+    t.integer  "major_dismount"
+    t.integer  "minor_dismount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dismount_scores", ["competitor_id"], name: "index_boundary_scores_competitor_id", using: :btree
+  add_index "dismount_scores", ["judge_id", "competitor_id"], name: "index_dismount_scores_on_judge_id_and_competitor_id", unique: true, using: :btree
+  add_index "dismount_scores", ["judge_id"], name: "index_boundary_scores_judge_id", using: :btree
 
   create_table "distance_attempts", force: :cascade do |t|
     t.integer  "competitor_id"

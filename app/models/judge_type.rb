@@ -62,15 +62,4 @@ class JudgeType < ActiveRecord::Base
   def to_s
     name
   end
-
-  def score_calculator
-    case name
-    #when "Presentation"
-
-    when "Dismount"
-      DismountScoreCalculator
-    else
-      SumScoreCalculator
-    end
-  end
 end

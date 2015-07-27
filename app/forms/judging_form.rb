@@ -2,8 +2,8 @@ class JudgingForm < Reform::Form
   include Composition
   model :score
 
-  property :major_dismounts, from: :val_1, on: :dismount_score
-  property :minor_dismounts, from: :val_2, on: :dismount_score
+  property :major_dismounts, from: :major_dismount, on: :dismount_score
+  property :minor_dismounts, from: :minor_dismount, on: :dismount_score
   property :val_2, on: :score
   property :val_3, on: :score
   property :val_4, on: :score
@@ -23,15 +23,12 @@ class JudgingForm < Reform::Form
 
   private
 
+  # Searches up and over for the dismount-version of this user's judges
   def self.dismount_score_for(competitor, judge)
-    dismount_judge_type = JudgeType.find_by(name: "Dismount")
-    dismount_judge = judge.user.judges.where(judge_type: dismount_judge_type).first
-    return nil unless dismount_judge.present?
-    score = competitor.scores.where(judge: dismount_judge).first
-
+    score = competitor.dismount_scores.where(judge: judge).first
     unless score
-      score = competitor.scores.new
-      score.judge = dismount_judge
+      score = competitor.dismount_scores.new
+      score.judge = judge
     end
     score
   end

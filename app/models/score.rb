@@ -45,7 +45,7 @@ class Score < ActiveRecord::Base
   def total
     return nil if invalid? || competitor.ineligible?
 
-    judge_type.score_calculator.new(self, competitor.members.size).calculate
+    judge.calculate_score(self, competitor.members.size)
   end
 
   # Return the numeric place of this score, compared to the results of the other scores by this judge

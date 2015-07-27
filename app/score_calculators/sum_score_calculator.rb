@@ -1,7 +1,7 @@
 class SumScoreCalculator
   attr_accessor :score
 
-  def initialize(score, _number_of_people)
+  def initialize(score)
     @score = score
   end
 

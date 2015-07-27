@@ -26,7 +26,7 @@ class Judge < ActiveRecord::Base
   before_destroy :check_for_scores # must occur before the dependent->destroy
 
   has_many :scores, -> {order("competitors.position").includes(:competitor) }, dependent: :destroy
-  has_many :boundary_scores, -> {order("competitors.position").includes(:competitor) }, dependent: :destroy
+  has_many :dismount_scores, -> {order("competitors.position").includes(:competitor) }, dependent: :destroy
   has_many :standard_execution_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, dependent: :destroy
   has_many :standard_difficulty_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, dependent: :destroy
   has_many :competitors, -> {order "position"}, through: :competition
@@ -74,6 +74,20 @@ class Judge < ActiveRecord::Base
   def score_totals
     Rails.cache.fetch("/judge/#{id}-#{updated_at}/score_totals") do
       active_scores.map(&:total).compact
+    end
+  end
+
+  def calculate_score(score, num_competitors)
+    # XXX Should have some choice which determines whether to use dismount_scores or not
+    case judge_type.name
+    when "Presentation"
+      ds = dismount_scores.where(competitor: score.competitor).first
+      PresentationWithDismountScoreCalculator.new(
+        score,
+        DismountScoreCalculator.new(ds.try(:major_dismount), ds.try(:minor_dismount), num_competitors).calculate
+      ).calculate
+    else
+      SumScoreCalculator.new(score).calculate
     end
   end
 

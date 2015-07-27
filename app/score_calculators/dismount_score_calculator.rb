@@ -1,13 +1,17 @@
 class DismountScoreCalculator
-  attr_accessor :score
+  attr_accessor :major_dismounts
+  attr_accessor :minor_dismounts
   attr_accessor :number_of_people
 
-  def initialize(score, number_of_people = 1)
-    @score = score
+  def initialize(major_dismounts, minor_dismounts, number_of_people = 1)
+    @major_dismounts = major_dismounts
+    @minor_dismounts = minor_dismounts
     @number_of_people = number_of_people
   end
 
   def calculate
+    return 0 unless major_dismounts && minor_dismounts
+
     if effective_people == 1
       score = single_person_score
     else
@@ -34,13 +38,4 @@ class DismountScoreCalculator
       number_of_people
     end
   end
-
-  def major_dismounts
-    score.val_1
-  end
-
-  def minor_dismounts
-    score.val_2
-  end
-
 end

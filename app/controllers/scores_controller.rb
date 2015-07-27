@@ -21,28 +21,23 @@ class ScoresController < ApplicationController
     authorize @judge, :create_scores?
     add_breadcrumb "Set Score"
 
-    @judging_form = JudgingForm.new(
-      dismount_score: dismount_score_for(@competitor, @judge),
-      score: presentation_score_for(@competitor, @judge))
+    @judging_form = JudgingForm.build_from_competitor_judge(@competitor, @judge)
 
     @judging_form.prepopulate!
   end
 
   # POST /judges/1/competitors/2/presentation_scores
   def create_presentation
-    presentation_score = presentation_score_for(@competitor, @judge)
-    authorize presentation_score, :create?
+    @judging_form = JudgingForm.build_from_competitor_judge(@competitor, @judge)
+    authorize @judging_form.model[:score], :create?
 
-    @judging_form = JudgingForm.new(
-      dismount_score: dismount_score_for(@competitor, @judge),
-      score: presentation_score_for(@competitor, @judge))
     if @judging_form.validate(params[:score])
       @judging_form.save do |hash|
-        dismount_score = dismount_score_for(@competitor, @judge)
+        dismount_score = @judging_form.model[:dismount_score]
         dismount_score.assign_attributes(hash[:dismount_score])
         dismount_score.save
 
-        presentation_score = presentation_score_for(@competitor, @judge)
+        presentation_score = @judging_form.model[:score]
         presentation_score.assign_attributes(hash[:score])
         presentation_score.save
       end
@@ -59,9 +54,6 @@ class ScoresController < ApplicationController
     authorize @judge, :create_scores?
     add_breadcrumb "Set Score"
 
-    if @judge.judge_type.boundary_calculation_enabled?
-      @boundary_score = @competitor.boundary_scores.new
-    end
     respond_to do |format|
       format.html
     end
@@ -84,29 +76,6 @@ class ScoresController < ApplicationController
   end
 
   private
-
-  # Searches up and over for the dismount-version of this user's judges
-  def dismount_score_for(competitor, judge)
-    dismount_judge_type = JudgeType.find_by(name: "Dismount")
-    dismount_judge = judge.user.judges.where(judge_type: dismount_judge_type).first
-    return nil unless dismount_judge.present?
-    score = competitor.scores.where(judge: dismount_judge).first
-
-    unless score
-      score = competitor.scores.new
-      score.judge = dismount_judge
-    end
-    score
-  end
-
-  def presentation_score_for(competitor, judge)
-    score = competitor.scores.where(judge: judge).first
-    unless score
-      score = competitor.scores.new
-      score.judge = judge
-    end
-    score
-  end
 
   def load_judge
     @judge = Judge.find(params[:judge_id])

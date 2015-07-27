@@ -31,19 +31,6 @@ JudgeType.find_or_create_by(name: "Technical", event_class: "Freestyle") do |jud
   )
 end
 
-JudgeType.find_or_create_by(name: "Dismount", event_class: "Freestyle") do |judge_type|
-  judge_type.assign_attributes(
-    val_1_description: "Major Dismounts",
-    val_2_description: "Minor Dismounts",
-    val_3_description: "N/A",
-    val_4_description: "N/A",
-    val_1_max: 1000,
-    val_2_max: 1000,
-    val_3_max: 0,
-    val_4_max: 0
-  )
-end
-
 JudgeType.find_or_create_by(name: "Flatland Judge Type", event_class: "Flatland") do |judge_type|
   judge_type.assign_attributes(
     val_1_description: "Variety",
