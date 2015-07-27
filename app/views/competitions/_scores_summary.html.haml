@@ -1,19 +1,21 @@
 // locals: competitors
-%table.scores_outer
-  %tr
-    %th Order
-    %th ID
-    %th Name
-    %th.derived
-      Total Placing
-      %br
-      Points
-    %th.derived Place
-  - competitors.includes(:overall_result).active.each do |competitor|
-    - cache [competitor, competitor.competition, Result.cache_key_for_set(competitor.id)] do
-      %tr
-        %td= competitor.position
-        %td= competitor.bib_number
-        %td= competitor.name
-        %td.derived= competitor.result
-        %td.derived= competitor.overall_place
+%table.scores_outer.sortable
+  %thead
+    %tr
+      %th.derived Place
+      %th Order
+      %th ID
+      %th Name
+      %th.derived
+        Total Placing
+        %br
+        Points
+  %tbody
+    - competitors.includes(:overall_result).active.each do |competitor|
+      - cache [competitor, competitor.competition, Result.cache_key_for_set(competitor.id)] do
+        %tr
+          %td.derived= competitor.overall_place
+          %td= competitor.position
+          %td= competitor.bib_number
+          %td= competitor.name
+          %td.derived= competitor.comparable_score
