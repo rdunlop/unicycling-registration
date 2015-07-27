@@ -482,7 +482,12 @@ class Competition < ActiveRecord::Base
 
   def judge_score_calculator
     case event_class
-    when "Freestyle", "Street", "Flatland"
+    when "Freestyle"
+      GenericPlacingPointsCalculator.new(
+        lower_is_better: false,
+        # For Freestyle, the judges enter higher scores for better riders
+        )
+    when "Street", "Flatland"
       GenericPlacingPointsCalculator.new(
         lower_is_better: scoring_helper.lower_is_better
         )
