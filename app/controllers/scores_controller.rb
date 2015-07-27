@@ -10,7 +10,7 @@ class ScoresController < ApplicationController
   def index
     authorize @judge, :view_scores?
 
-    if @judge.judge_type.name == "Presentation"
+    if @competitor.competition.enter_separated_dismount_scores?
       render :new_presentation
     else
       render :index

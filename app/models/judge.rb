@@ -78,14 +78,16 @@ class Judge < ActiveRecord::Base
   end
 
   def calculate_score(score, num_competitors)
-    # XXX Should have some choice which determines whether to use dismount_scores or not
-    case judge_type.name
-    when "Presentation"
-      ds = dismount_scores.where(competitor: score.competitor).first
-      PresentationWithDismountScoreCalculator.new(
-        score,
-        DismountScoreCalculator.new(ds.try(:major_dismount), ds.try(:minor_dismount), num_competitors).calculate
-      ).calculate
+    if score.competition.enter_separated_dismount_scores? && judge_type.name == "Presentation"
+      if score.competition.dedicated_dismount_judges?
+        raise "NOT IMPLEMENTED"
+      else
+        ds = dismount_scores.where(competitor: score.competitor).first
+        PresentationWithDismountScoreCalculator.new(
+          score,
+          DismountScoreCalculator.new(ds.try(:major_dismount), ds.try(:minor_dismount), num_competitors).calculate
+        ).calculate
+      end
     else
       SumScoreCalculator.new(score).calculate
     end
