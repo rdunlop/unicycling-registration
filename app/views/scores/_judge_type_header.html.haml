@@ -1,0 +1,20 @@
+- if judge_type.val_1_max > 0
+  %th.judging_category
+    = judge_type.val_1_description
+    %br
+    = "(0-" + judge_type.val_1_max.to_s + ")"
+- if judge_type.val_2_max > 0
+  %th.judging_category
+    = judge_type.val_2_description
+    %br
+    = "(0-" + judge_type.val_2_max.to_s + ")"
+- if judge_type.val_3_max > 0
+  %th.judging_category
+    = judge_type.val_3_description
+    %br
+    = "(0-" + judge_type.val_3_max.to_s + ")"
+- if judge_type.val_4_max > 0
+  %th.judging_category
+    = judge_type.val_4_description
+    %br
+    = "(0-" + judge_type.val_4_max.to_s + ")"

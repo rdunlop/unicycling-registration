@@ -211,6 +211,9 @@ GEM
       devise (~> 3.2)
     devise-i18n (0.11.4)
     diff-lcs (1.2.5)
+    disposable (0.1.9)
+      representable (>= 2.2.3, <= 2.3.0)
+      uber
     docile (1.1.5)
     equalizer (0.0.9)
     erubis (2.7.0)
@@ -486,7 +489,14 @@ GEM
       redis-actionpack (~> 4)
       redis-activesupport (~> 4)
       redis-store (~> 1.1.0)
+    reform (2.0.3)
+      disposable (~> 0.1.9)
+      uber (~> 0.0.11)
     remotipart (1.2.1)
+    representable (2.2.3)
+      multi_json
+      nokogiri
+      uber (~> 0.0.7)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rolify (4.0.0)
@@ -578,6 +588,7 @@ GEM
     ttfunk (1.4.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uber (0.0.13)
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -669,6 +680,7 @@ DEPENDENCIES
   recaptcha
   redis-rails
   redis-store!
+  reform
   rolify
   rspec-instafail
   rspec-rails

@@ -30,6 +30,7 @@ gem 'recaptcha'
 gem 'jquery-datetimepicker-rails'
 gem "jc-validates_timeliness"
 gem 'foundation-rails'
+gem 'reform'
 
 # system utils
 gem 'rake'

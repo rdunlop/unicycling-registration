@@ -1,3 +1,22 @@
+- Note: on cb6f7bc there is the "BoundaryScores" logic for presentation and controllers
+
+Tentative plan:
+- Create "Dismounts Judge Type"
+- Add Toggle to "Competition" which enables Dismounts Judge Type
+ - And disables the "Dismounts" column in presentation
+- Dismount Judge type has val1 ,val2, total is calculated as per thing.
+- Change the "judes/:id/scores" view to be "competition/:id/user/:id/scores"
+ - shows all of the judges for that user for that competition as per previous system.
+ - When editing, all data should still be shown.
+- the total score displayed for a user/judge
+ - show the boundary scores as order,Id,name, major, minor, calc points, rank
+ - for the presentation show order,id,name,x,y,z,points, rank
+ - for the tech         show order,id,name,x,y,z,points, rank
+** show all of the judge types for a USER on the scores page at the same time, in one editable form.
+ - E.g. Dismonuts, and Presentation...saved to both tables.
+ - Order, Id, Name, Major, Minor, Dismount CALC, x, y, z, XYZ-Toal, Total-Total, Rank, EDIT
+
+
 - Add a report which allows comparing whether a registrant has results in 2 different disciplines (like Advanced + Beginner Trials)
 - Director of event should be able to "Set Places"
 - make Preliminary external results AJAX

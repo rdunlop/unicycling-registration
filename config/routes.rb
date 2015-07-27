@@ -538,7 +538,12 @@ Workspace::Application.routes.draw do
       end
 
       resources :competitors, only: [] do
-        resources :scores, only: [:new, :create]
+        resources :scores, only: [:new, :create] do
+          collection do
+            get :new_presentation
+            post :create_presentation
+          end
+        end
 
         # display chosen competitors current scores, and update them
         resources :standard_scores, only: [:new, :create]

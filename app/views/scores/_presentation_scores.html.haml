@@ -1,0 +1,9 @@
+%td= judging_form.major_dismounts
+%td= judging_form.minor_dismounts
+%td= judging_form.model[:dismount_score].total
+%td= judging_form.val_2
+%td= judging_form.val_3
+%td= judging_form.val_4
+%td.derived= judging_form.model[:score].total
+%td.derived.js--shouldNotMatch
+  = judging_form.model[:score].judged_place

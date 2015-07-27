@@ -1,0 +1,48 @@
+%h1
+  #{@judge.competition}
+
+- if !policy(@judge).create_scores?
+  %p.event_locked Scores for this event are now locked (closed)
+
+%h3 Judge: #{@judge}
+- # this page displays each competitor, and, IF PRESENT, the score for that competitor
+- # Display the scores, but allow one for editing
+
+- unless @judging_form.nil?
+  = render :partial => "/shared/error_messages", :object => @judging_form
+
+%table.judging
+  %thead
+    %tr
+      %th Order
+      %th ID
+      %th.competitor_name Name
+      = render "scores/judge_type_header", judge_type: JudgeType.find_by(name: "Dismount")
+      = render "scores/judge_type_header", judge_type: JudgeType.find_by(name: "Presentation")
+      %th.derived Total
+      %th.derived Place
+      %th Actions
+
+  =# render :partial => "/scores/judge_header", :object => @judge.judge_type
+  %tbody.js--shouldNotMatchSet
+    - @judge.competitors.active.each do |competitor|
+      %tr{:id => "competitor#{competitor.id}"}
+        - judging_form = JudgingForm.build_from_competitor_judge(competitor, @judge)
+        - if @competitor == competitor
+          = simple_form_for(judging_form, url: judge_competitor_scores_path(@judge, competitor), method: :post) do |f|
+            = render :partial => "/competitors/competitor_basic", :object => competitor
+            %td.judging_category= f.number_field :major_dismounts, autofocus: true
+            %td.judging_category= f.number_field :minor_dismounts
+            %td
+            %td.judging_category= f.number_field :val_2
+            %td.judging_category= f.number_field :val_3
+            %td.judging_category= f.number_field :val_4
+            %td
+            %td
+            %td= f.button :submit, 'Save', class: 'action_button'
+        - else
+          = render :partial => "/competitors/competitor_basic", :object => competitor
+          = render "/scores/presentation_scores", judging_form: judging_form
+          %td{:colspan => "9"}
+
+= link_to 'Back', judge_scores_path(@judge)
