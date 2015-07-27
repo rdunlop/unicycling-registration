@@ -1,5 +1,7 @@
 - Note: on cb6f7bc there is the "BoundaryScores" logic for presentation and controllers
 
+- Add paper_trail to more models (like competition competitors)
+
 Tentative plan:
 - Create "Dismounts Judge Type"
 - Add Toggle to "Competition" which enables Dismounts Judge Type

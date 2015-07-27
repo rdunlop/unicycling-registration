@@ -20,13 +20,6 @@
         - if @score.nil? || @score.competitor_id != competitor.id
           = render :partial => "/competitors/single_competitor", :locals => {competitor: competitor, score: score, show_update: @score.nil? }
         - else
-          = simple_form_for(@judging_form, url: judge_competitor_scores_path(@judge, competitor), method: :post) do |f|
-            = f.number_field :major_dismounts
-            = f.number_field :minor_dismounts
-            = f.number_field :val_2
-            = f.number_field :val_3
-            = f.number_field :val_4
-            = f.button :submit, 'Save', class: 'action_button'
           = simple_form_for(@score, url: judge_competitor_scores_path(@judge, competitor), method: :post) do |f|
             = render :partial => "/competitors/competitor_basic", :object => competitor
             %td.judging_category= f.number_field :val_1, {:min => 0, :max => @judge.judge_type.val_1_max, :step => 0.001, :autofocus => true }

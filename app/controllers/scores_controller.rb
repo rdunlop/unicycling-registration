@@ -10,11 +10,14 @@ class ScoresController < ApplicationController
   def index
     authorize @judge, :view_scores?
 
-    render :new_presentation
+    if @judge.judge_type.name == "Presentation"
+      render :new_presentation
+    else
+      render :index
+    end
   end
 
   def new_presentation
-    presentation_score = presentation_score_for(@competitor, @judge)
     authorize @judge, :create_scores?
     add_breadcrumb "Set Score"
 

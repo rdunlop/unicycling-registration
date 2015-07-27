@@ -8,8 +8,12 @@
 - # this page displays each competitor, and, IF PRESENT, the score for that competitor
 - # Display the scores, but allow one for editing
 
-- unless @judging_form.nil?
+- show_set_scores = true
+- if @judging_form
   = render :partial => "/shared/error_messages", :object => @judging_form
+  - show_set_scores = false
+- else
+  - show_set_scores = true
 
 %table.judging
   %thead
@@ -29,7 +33,7 @@
       %tr{:id => "competitor#{competitor.id}"}
         - judging_form = JudgingForm.build_from_competitor_judge(competitor, @judge)
         - if @competitor == competitor
-          = simple_form_for(judging_form, url: judge_competitor_scores_path(@judge, competitor), method: :post) do |f|
+          = simple_form_for(judging_form, url: create_presentation_judge_competitor_scores_path(@judge, competitor), method: :post) do |f|
             = render :partial => "/competitors/competitor_basic", :object => competitor
             %td.judging_category= f.number_field :major_dismounts, autofocus: true
             %td.judging_category= f.number_field :minor_dismounts
@@ -43,6 +47,7 @@
         - else
           = render :partial => "/competitors/competitor_basic", :object => competitor
           = render "/scores/presentation_scores", judging_form: judging_form
-          %td{:colspan => "9"}
+          - if show_set_scores && policy(@judge).create_scores?
+            %td= link_to 'Set Score', new_presentation_judge_competitor_scores_path(@judge, competitor), class: 'action_button'
 
 = link_to 'Back', judge_scores_path(@judge)
