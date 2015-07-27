@@ -1,3 +1,4 @@
+- BUG: Removing a member from a competition doesn't update the "Name" of the competitor (ie: remove Shelly from Basketball doesn't change the name of the competitor to not include her name)
 - Note: on cb6f7bc there is the "BoundaryScores" logic for presentation and controllers
 
 - Add paper_trail to more models (like competition competitors)
