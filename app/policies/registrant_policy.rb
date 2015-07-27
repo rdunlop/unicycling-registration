@@ -62,7 +62,7 @@ class RegistrantPolicy < ApplicationPolicy
 
   # view the mailing address of a registrant
   def show_contact_details?
-    user_record? || user.editable_registrants.include?(record) || super_admin?
+    user_record? || user.editable_registrants.include?(record) || add_contact_details? || super_admin?
   end
 
   def destroy?
