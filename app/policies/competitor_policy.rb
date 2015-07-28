@@ -28,7 +28,8 @@ class CompetitorPolicy < ApplicationPolicy
   end
 
   def create?
-    manage?
+    return false unless record.competition.unlocked?
+    director_or_competition_admin?(user, record.competition) || config.usa_membership_config?
   end
 
   def update?
