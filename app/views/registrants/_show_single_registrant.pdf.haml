@@ -13,7 +13,7 @@
       = render partial: "/registrants/access_code", formats: :html
   %hr
 .l--2up
-  .l--column
+  .l--column{ class: "show_#{@registrant.registrant_type}_elements" }
     // this partial includes conditional-display logic..do not cache it
     = render :partial => "/registrants/summary", formats: :html
     - cache_i18n ['pdf_expenses', @registrant, @registrant.members_cache_key, @config] do
