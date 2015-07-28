@@ -81,7 +81,11 @@ class Admin::RegistrantsController < ApplicationController
 
   def show_all
     authorize current_user, :registrant_information?
-    @registrants = Registrant.active.reorder(:sorted_last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
+    if params[:order].present? && params[:order] == "id"
+      @registrants = Registrant.active.reorder(:bib_number).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
+    else
+      @registrants = Registrant.active.reorder(:sorted_last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
+    end
 
     if params[:offset]
       max = params[:max]
