@@ -16,5 +16,5 @@
 %h2 Create Director
 = form_tag(directors_path, :method => "post") do |f|
   = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true, class: "chosen-select"
-  = select_tag :event_id, options_from_collection_for_select(Event.all, "id", "to_s"), include_blank: true, class: "chosen-select"
+  = select_tag :event_id, options_from_collection_for_select(@events, "id", "to_s"), include_blank: true, class: "chosen-select"
   = submit_tag "Add Director", :class => "focus_button"

@@ -12,7 +12,7 @@
           - event.competitions.each do |competition|
             %tr
               %td= event
-              %td= link_to "Manage #{competition}", competition, class: 'action_button'
+              %td= link_to "Manage #{competition}", competition, class: "button #{competition.locked? ? 'secondary' : nil}"
     %hr
 
 - unless @judges.empty?
