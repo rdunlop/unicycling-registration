@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728172947) do
+ActiveRecord::Schema.define(version: 20150728221515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -456,6 +456,21 @@ ActiveRecord::Schema.define(version: 20150728172947) do
 
   add_index "external_results", ["competitor_id"], name: "index_external_results_on_competitor_id", unique: true, using: :btree
 
+  create_table "heat_lane_results", force: :cascade do |t|
+    t.integer  "competition_id", null: false
+    t.integer  "heat",           null: false
+    t.integer  "lane",           null: false
+    t.string   "status",         null: false
+    t.integer  "minutes",        null: false
+    t.integer  "seconds",        null: false
+    t.integer  "thousands",      null: false
+    t.string   "raw_data"
+    t.datetime "entered_at",     null: false
+    t.integer  "entered_by_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "import_results", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "raw_data",            limit: 255
@@ -883,6 +898,7 @@ ActiveRecord::Schema.define(version: 20150728172947) do
     t.datetime "entered_at",                                      null: false
     t.integer  "entered_by_id",                                   null: false
     t.boolean  "preliminary"
+    t.integer  "heat_lane_result_id"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_competitor_id", using: :btree

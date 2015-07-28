@@ -18,6 +18,7 @@
 #  entered_at          :datetime         not null
 #  entered_by_id       :integer          not null
 #  preliminary         :boolean
+#  heat_lane_result_id :integer
 #
 # Indexes
 #
