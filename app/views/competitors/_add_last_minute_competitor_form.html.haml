@@ -6,4 +6,4 @@
     = simple_form_for(competitor, url: competition_competitors_path(competition), method: :post, remote: true) do |f|
       = f.fields_for :members do |m|
         = non_signed_up_registrant_select_box(m, competition)
-      = f.button :submit, class: "multiclick"
+      = f.button :submit, class: "multiclick tiny"

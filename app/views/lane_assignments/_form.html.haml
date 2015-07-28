@@ -5,7 +5,7 @@
       - if @lane_assignment.persisted? || !@config.can_create_competitors_at_lane_assignment
         = f.label :competitor_id
         %br
-        = competitor_select_box(f, @competition)
+        = competitor_select_box(f, @competition, class: "js--competitors")
       - else
         = f.label :registrant_id
         %br
