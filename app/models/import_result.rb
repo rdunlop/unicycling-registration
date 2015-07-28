@@ -51,14 +51,6 @@ class ImportResult < ActiveRecord::Base
 
   scope :entered_order, -> { reorder(:id) }
 
-  def competitor_name
-    matching_registrant
-  end
-
-  def competitor_has_results?
-    matching_competitor.has_result? if competitor_exists?
-  end
-
   def disqualified?
     status == "DQ"
   end

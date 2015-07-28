@@ -37,7 +37,7 @@ class ImportResultsController < ApplicationController
   def review_heat
     @heat = params[:heat]
 
-    @import_results = ImportResult.where(competition_id: @competition, heat: @heat)
+    @heat_lane_results = HeatLaneResult.where(competition_id: @competition, heat: @heat)
 
     @lane_assignments = LaneAssignment.where(competition: @competition, heat: @heat)
 
@@ -170,14 +170,13 @@ class ImportResultsController < ApplicationController
     authorize @competition, :create_preliminary_result?
     @heat = params[:heat].to_i
 
-    import_results = ImportResult.where(competition_id: @competition, heat: @heat)
+    heat_lane_results = HeatLaneResult.where(competition_id: @competition, heat: @heat)
 
     begin
-      ImportResult.transaction do
-        import_results.each do |ir|
-          ir.import!
+      HeatLaneResult.transaction do
+        heat_lane_results.each do |hlr|
+          hlr.import!
         end
-        import_results.destroy_all
       end
     rescue Exception => ex
       errors = ex
@@ -195,8 +194,8 @@ class ImportResultsController < ApplicationController
   def delete_heat
     @heat = params[:heat].to_i
 
-    import_results = ImportResult.where(competition_id: @competition, heat: @heat)
-    import_results.destroy_all
+    heat_lane_results = HeatLaneResult.where(competition_id: @competition, heat: @heat)
+    heat_lane_results.destroy_all
 
     redirect_to display_lif_user_competition_import_results_path(current_user, @competition, heat: @heat), notice: "deleted Heat # #{@heat} results. Try Again?"
   end

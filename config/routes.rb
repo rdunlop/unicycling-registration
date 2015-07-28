@@ -513,6 +513,7 @@ Workspace::Application.routes.draw do
           get :list
         end
       end
+      resources :heat_lane_results, shallow: true, only: [:edit, :update, :create, :destroy]
       resources :external_results, shallow: true, except: [:new, :show]
       resources :preliminary_external_results, shallow: true, except: [:new, :show] do
         collection do

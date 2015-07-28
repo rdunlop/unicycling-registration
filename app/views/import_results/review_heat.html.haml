@@ -14,12 +14,12 @@
       %th Raw data
       %th Time
       %th Disqualified
-      %th Is Start Time?
       %th Entered By
+      %th Entered At
       %th
       %th
   %tbody
-    - @import_results.each do |result|
+    - @heat_lane_results.each do |result|
       %tr
         %th.js--shouldNotMatch= result.lane
         %td= result.bib_number
@@ -28,12 +28,12 @@
         %td= result.raw_data
         %td= result.full_time
         %td= result.disqualified? ? "DQ" : ""
-        %td= result.is_start_time? ? "Yes" : ""
-        %td= result.user
-        %td= link_to 'Edit', edit_import_result_path(result)
+        %td= result.entered_by
+        %td= result.entered_at
+        %td= link_to 'Edit', edit_heat_lane_result_path(result)
         %td= link_to 'Delete', result, method: :delete, data: { confirm: 'Are you sure?' }
     - @lane_assignments.each do |assignment|
-      - if @import_results.where(lane: assignment.lane).empty?
+      - if @heat_lane_results.where(lane: assignment.lane).empty?
         %tr
           %td.js--shouldNotMatch= assignment.lane
           %td.missing_data Not Found
@@ -54,6 +54,6 @@
 %br
 %br
 
-%p= link_to "Delete These Resuls without Approving", delete_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :delete, data: { confirm: "Deleting, Are you sure?" }
+%p= link_to "Delete These Resuls without Approving", delete_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :delete, data: { confirm: "Deleting, Are you sure?" }, class: "button warn"
 
 = link_to "Back to Heat Import", import_lif_user_competition_import_results_path(@user, @competition)

@@ -19,6 +19,7 @@
 
 class HeatLaneResult < ActiveRecord::Base
   include TimePrintable
+  include FindsMatchingCompetitor
 
   validates :competition_id, :heat, :lane, :status, presence: true
   validates :entered_at, :entered_by_id, presence: true
@@ -41,8 +42,28 @@ class HeatLaneResult < ActiveRecord::Base
     self.status ||= "active"
   end
 
+  def bib_number
+    get_id_from_lane_assignment(competition, heat, lane) || 0
+  end
+
   def disqualified?
     status == "DQ"
+  end
+
+  def import!
+    tr = TimeResult.new(
+      heat_lane_result: self,
+      competitor: matching_competitor,
+      minutes: minutes,
+      seconds: seconds,
+      thousands: thousands,
+      status: status,
+      is_start_time: false,
+      preliminary: false,
+      entered_at: entered_at,
+      entered_by: entered_by
+    )
+    tr.save!
   end
 
   private
@@ -54,4 +75,13 @@ class HeatLaneResult < ActiveRecord::Base
     self.thousands ||= 0
   end
 
+  def get_id_from_lane_assignment(comp, heat, lane)
+    la = LaneAssignment.find_by(competition: comp, heat: heat, lane: lane)
+    if la.nil?
+      id = nil
+    else
+      id = la.competitor.first_bib_number
+    end
+    id
+  end
 end

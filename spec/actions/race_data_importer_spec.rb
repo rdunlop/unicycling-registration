@@ -79,7 +79,7 @@ describe RaceDataImporter do
     importer = RaceDataImporter.new(competition, admin_user)
     expect do
       expect(importer.process_lif(sample_input, 10)).to be_truthy
-    end.to change(ImportResult, :count).by(8)
+    end.to change(HeatLaneResult, :count).by(8)
   end
 
   it "gives good error message upon failure" do
@@ -94,7 +94,7 @@ describe RaceDataImporter do
 
     expect do
       expect(importer.process_lif(sample_input, 10)).to be_truthy
-    end.to change(ImportResult, :count).by(8)
+    end.to change(HeatLaneResult, :count).by(8)
 
     expect(importer.errors).to_not be_nil
   end

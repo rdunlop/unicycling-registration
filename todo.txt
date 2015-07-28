@@ -1,3 +1,4 @@
+- Rename "Can create competitors at lane assignment" to something more clear to its use.
 - Data Entry person should be able to DNS a competitor.
 - How to enter wheelsize/crank length on Time Trial (one-data-per-line event)
 - Add a report which allows comparing whether a registrant has results in 2 different disciplines (like Advanced + Beginner Trials)

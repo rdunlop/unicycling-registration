@@ -15,4 +15,13 @@ module FindsMatchingCompetitor
   def competitor_exists?
     matching_competitor.present?
   end
+
+  def competitor_name
+    matching_registrant
+  end
+
+  def competitor_has_results?
+    matching_competitor.has_result? if competitor_exists?
+  end
+
 end
