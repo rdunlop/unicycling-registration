@@ -53,5 +53,5 @@
 
 - if policy(@competition).unaward?
   %h4 Set as Un-Awarded
-  = link_to "Mark as UnAwarded", award_competition_path(@competition), method: :post, data: { confirm: "are you sure" }, class: "button small"
+  = link_to "Mark as UnAwarded", award_competition_path(@competition), method: :delete, data: { confirm: "are you sure" }, class: "button small"
   %p This will remove the results from view.
