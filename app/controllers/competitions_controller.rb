@@ -179,10 +179,11 @@ class CompetitionsController < ApplicationController
   end
 
   def award
-    authorize @competition
     if request.post?
+      authorize @competition, :award?
       @competition.awarded = true
     elsif request.delete?
+      authorize @competition, :unaward?
       @competition.awarded = false
     end
 
