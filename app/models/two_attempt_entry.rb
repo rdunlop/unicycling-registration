@@ -46,7 +46,7 @@ class TwoAttemptEntry < ActiveRecord::Base
   def import!
     # TODO: this should only create a competitor if in the correct "mode"
     competitor = matching_competitor
-    if competitor.nil? && EventConfiguration.singleton.can_create_competitors_at_lane_assignment
+    if competitor.nil? && EventConfiguration.singleton.can_create_competitors_at_lane_assignment?
       registrant = matching_registrant
       competition.create_competitor_from_registrants([registrant], nil)
       competitor = competition.find_competitor_with_bib_number(bib_number)

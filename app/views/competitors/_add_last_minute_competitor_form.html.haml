@@ -1,4 +1,4 @@
-- if @config.usa_membership_config?
+- if @config.can_create_competitors_at_lane_assignment?
   .add_competitor
     %h3 Add Last-Minute Competitor
     - competitor = Competitor.new

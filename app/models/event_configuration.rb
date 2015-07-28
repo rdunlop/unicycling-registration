@@ -161,7 +161,7 @@ class EventConfiguration < ActiveRecord::Base
 
   # allows creating competitors during lane assignment
   # (only at NAUCC)
-  def can_create_competitors_at_lane_assignment
+  def can_create_competitors_at_lane_assignment?
     usa?
   end
 

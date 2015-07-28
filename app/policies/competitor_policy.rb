@@ -29,7 +29,7 @@ class CompetitorPolicy < ApplicationPolicy
 
   def create?
     return false unless record.competition.unlocked?
-    director_or_competition_admin?(user, record.competition) || config.usa_membership_config?
+    director_or_competition_admin?(user, record.competition) || config.can_create_competitors_at_lane_assignment?
   end
 
   def update?
