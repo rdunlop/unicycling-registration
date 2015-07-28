@@ -15,7 +15,7 @@ module FormHelper
   end
 
   def eligible_registrants(competition)
-    if @config.usa_membership_config?
+    if @config.can_create_competitors_at_lane_assignment?
       Registrant.active.competitor
     else
       competition.registrants.reorder(:bib_number)

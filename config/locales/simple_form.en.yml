@@ -97,7 +97,9 @@ en:
         music_submission_end_date: The last date at which music submissions will be allowed
         event_sign_up_closed_date: After this date, ONLY administrators can add events to registrations. (though they can still remove them)
         start_date: Registrant Ages are calculated based on this date
-        usa: This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed
+        usa: |
+          This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed.
+          It also allows last-minute sign-up of competitors (by data-entry people)
         iuf: Enabling this allows IUF membership questions.
         display_confirmed_events: Enabling this displays the confirmed events/unconfirmed events on the Registrant-summary page.
         test_mode: Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.
