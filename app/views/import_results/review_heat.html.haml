@@ -54,6 +54,6 @@
 %br
 %br
 
-%p= link_to "Delete These Resuls without Approving", delete_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :delete, data: { confirm: "Deleting, Are you sure?" }, class: "button warn"
+%p= link_to "Delete These Resuls without Approving", delete_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :delete, data: { confirm: "Deleting, Are you sure?" }, class: "button alert small"
 
 = link_to "Back to Heat Import", import_lif_user_competition_import_results_path(@user, @competition)

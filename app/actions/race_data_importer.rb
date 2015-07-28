@@ -26,7 +26,7 @@ class RaceDataImporter
             entered_at: DateTime.now,
             heat: heat,
             lane: lane,
-            raw_data: raw_data,
+            raw_data: raw,
             competition: @competition,
             minutes: lif_hash[:minutes],
             seconds: lif_hash[:seconds],
