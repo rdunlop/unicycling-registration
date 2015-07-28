@@ -22,10 +22,6 @@ module FormHelper
     end
   end
 
-  def registrant_id_select_box(form, competition)
-    form.select :registrant_id, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.id] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
-  end
-
   # The form element which is used to enter data
   def competitor_select_box(form, competition, options = {})
     options.merge!(autofocus: true, class: "chosen-select js--autoFocus #{options[:class]}")

@@ -10,8 +10,8 @@
         %p.registrant.js--shrinkToFit= "#{assignment.competitor}"
         %p{class: "status-#{assignment.status}"}= assignment.status
         %p= assignment.comments
-        %span.unhide_dq.js--toggle{data: {toggle: "dq_option#{assignment.lane}"}} Show DQ option
-        %div.dq_option{class: "dq_option#{assignment.lane}"}
+        %a.js--toggle{ href: "#", data: {toggle_target: ".dq_option#{assignment.lane}"}} Show DQ option
+        %div{class: "dq_option#{assignment.lane}"}
           = simple_form_for DqRequest.new(bib_number: assignment.competitor.bib_number, heat: @heat, lane: lane_number,comments_by: current_user.to_s ), url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
             = f.hidden_field :bib_number
             = f.hidden_field :heat
