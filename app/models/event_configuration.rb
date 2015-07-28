@@ -37,7 +37,7 @@
 #  accept_rules                          :boolean          default(FALSE), not null
 #  paypal_mode                           :string(255)      default("disabled")
 #  offline_payment                       :boolean          default(FALSE), not null
-#  enabled_locales                       :string(255)      default("en,fr"), not null
+#  enabled_locales                       :string           default("en,fr"), not null
 #
 
 class EventConfiguration < ActiveRecord::Base

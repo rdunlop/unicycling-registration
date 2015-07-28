@@ -24,6 +24,7 @@
 #  penalty_seconds               :integer
 #  locked_at                     :datetime
 #  published_at                  :datetime
+#  sign_in_list_enabled          :boolean          default(FALSE), not null
 #
 # Indexes
 #

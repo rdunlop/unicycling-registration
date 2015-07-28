@@ -1,3 +1,5 @@
+- Data Entry person should be able to DNS a competitor.
+- How to enter wheelsize/crank length on Time Trial (one-data-per-line event)
 - Add a report which allows comparing whether a registrant has results in 2 different disciplines (like Advanced + Beginner Trials)
 - Director of event should be able to "Set Places"
 - make Preliminary external results AJAX

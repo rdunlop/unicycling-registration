@@ -37,6 +37,9 @@
   = f.input :end_data_type, collection: Competition.data_recording_types, :include_blank => true
 
   %br
+  = f.input :sign_in_list_enabled
+
+  %br
   = f.label :automatic_competitor_creation
   = f.check_box :automatic_competitor_creation
 

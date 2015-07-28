@@ -20,17 +20,20 @@
     %li= link_to "Verification", review_user_competition_import_results_path(current_user, competition, options)
 
   - when "Mass Start"
-    %li
-      = link_to "Start Lists", competition_sign_ins_path(competition)
-      = link_to "(pdf)", competition_sign_ins_path(competition, :format => :pdf)
     - if policy(competition).modify_result_data?
       %li= link_to "Set Competition Wave Times", competition_wave_times_path(competition)
-    %li= link_to "Enter Sign-Ins", edit_competition_sign_ins_path(competition)
     - if policy(competition).modify_result_data?
       %li= link_to "Import Wave Assignments", competition_wave_assignments_path(competition)
 
   - when "Externally Ranked"
     %li= link_to "View", review_user_competition_import_results_path(current_user, competition, options)
+
+  - if policy(competition).view_sign_ins?
+    %li
+      = link_to "Sign-In List", competition_sign_ins_path(competition)
+      = link_to "(pdf)", competition_sign_ins_path(competition, :format => :pdf)
+  - if policy(competition).enter_sign_ins?
+    %li= link_to "Enter Sign-Ins", edit_competition_sign_ins_path(competition)
 
   - if competition.uses_lane_assignments?
     %li

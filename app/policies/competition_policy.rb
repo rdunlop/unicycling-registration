@@ -83,7 +83,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def heat_recording?
-    race_official?(record) || director?(record.event) || super_admin?
+    view_access?
   end
 
   # DATA MANAGEMENT
@@ -97,11 +97,11 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def single_attempt_recording?
-    data_recording_volunteer?(record) || director?(record.event) || super_admin?
+    view_access?
   end
 
   def two_attempt_recording?
-    data_recording_volunteer?(record) || director?(record.event) || super_admin?
+    view_access?
   end
 
   def start_list?
@@ -111,7 +111,15 @@ class CompetitionPolicy < ApplicationPolicy
   # DATA ENTRY
   # Can enter preliminary data for a competition
   def create_preliminary_result?
-    record.unlocked? && (data_recording_volunteer?(record) || director?(record.event) || super_admin?)
+    record.unlocked? && view_access?
+  end
+
+  def enter_sign_ins?
+    record.sign_in_list? && create_preliminary_result?
+  end
+
+  def view_sign_ins?
+    record.sign_in_list? && view_access?
   end
 
   def manage_volunteers?
@@ -127,6 +135,10 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   private
+
+  def view_access?
+    data_recording_volunteer?(record) || director?(record.event) || super_admin?
+  end
 
   class Scope < Scope
     def resolve

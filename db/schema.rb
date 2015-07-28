@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722022045) do
+ActiveRecord::Schema.define(version: 20150728172947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -195,6 +195,7 @@ ActiveRecord::Schema.define(version: 20150722022045) do
     t.integer  "penalty_seconds"
     t.datetime "locked_at"
     t.datetime "published_at"
+    t.boolean  "sign_in_list_enabled",                      default: false, null: false
   end
 
   add_index "competitions", ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true, using: :btree
@@ -370,7 +371,7 @@ ActiveRecord::Schema.define(version: 20150722022045) do
     t.boolean  "accept_rules",                                      default: false,      null: false
     t.string   "paypal_mode",                           limit: 255, default: "disabled"
     t.boolean  "offline_payment",                                   default: false,      null: false
-    t.string   "enabled_locales",                       limit: 255, default: "en,fr",    null: false
+    t.string   "enabled_locales",                                   default: "en,fr",    null: false
   end
 
   create_table "events", force: :cascade do |t|

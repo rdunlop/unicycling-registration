@@ -64,6 +64,10 @@ en:
           Selecting this checkbox will cause Expert Awards to be created, separately from age-group results
           If this competition is ONLY experts, then this checkbox is not required, as they will be placed in a single age group/result.
           You MUST Also have an Age Group specified
+        sign_in_list_enabled: |
+          The Sign in form is enabled automatically for some events (like Track). Use this option
+          if you want to enter crank-length, and other details for an event which doesn't have sign-in
+          forms by default.
       event_choice:
         tooltip: This will be presented when the user hovers over the label
         optional: Allows the user to choose not to enter data in this field

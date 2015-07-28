@@ -24,6 +24,7 @@
 #  penalty_seconds               :integer
 #  locked_at                     :datetime
 #  published_at                  :datetime
+#  sign_in_list_enabled          :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -179,6 +180,11 @@ class Competition < ActiveRecord::Base
   # should this competition have a start list?
   def start_list?
     uses_lane_assignments? || compete_in_order? || start_data_type == "Mass Start"
+  end
+
+  # should this competition display a sign_in list
+  def sign_in_list?
+    start_data_type == "Mass Start" || sign_in_list_enabled?
   end
 
   # Public: Is there any data to put on a start list?
