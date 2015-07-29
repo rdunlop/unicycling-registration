@@ -3,8 +3,9 @@
 
 - max_assigned_lane = @lane_assignments.map(&:lane).max || 0
 - max_import_lane = @heat_lane_results.map(&:lane).max || 0
+- max_dq_lane = @heat_lane_judge_notes.map(&:lane).max || 0
 
-- max_lane = [max_assigned_lane, max_import_lane].max
+- max_lane = [max_assigned_lane, max_import_lane, max_dq_lane].max
 %h3 Summary
 %table.sortable.import_results.js--shouldNotMatchSet
   %thead
@@ -110,9 +111,8 @@
       %th Entered By
       %th Entered At
   %tbody
-    - max_dq_lane = 0 # XXX
     - 1.upto(max_dq_lane) do |lane_number|
-      - matching_dq_request = @dq_requests.find_by(lane: lane_number)
+      - matching_dq_request = @heat_lane_judge_notes.find_by(lane: lane_number)
       - next unless matching_dq_request.present?
       %tr
         %td= lane_number

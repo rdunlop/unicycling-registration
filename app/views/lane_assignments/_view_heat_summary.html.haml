@@ -10,17 +10,6 @@
         %p.registrant.js--shrinkToFit= "#{assignment.competitor}"
         %p{class: "status-#{assignment.status}"}= assignment.status
         %p= assignment.comments
-        %a.js--toggle{ href: "#", data: {toggle_target: ".dq_option#{assignment.lane}"}} Show DQ option
-        %div{class: "dq_option#{assignment.lane}"}
-          = simple_form_for DqRequest.new(bib_number: assignment.competitor.bib_number, heat: @heat, lane: lane_number,comments_by: current_user.to_s ), url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
-            = f.hidden_field :bib_number
-            = f.hidden_field :heat
-            = f.hidden_field :lane
-            = f.label :comments
-            = f.text_field :comments, {required: true }
-            = f.label :comments_by
-            = f.text_field :comments_by, {required: true }
-            = f.button :submit, "DQ this competitor", data: { confirm: "Are you sure?" }
     - else
       %li.unoccupied_lane
         %p.lane= lane_number
@@ -28,3 +17,7 @@
 - if max_lane == 0 && @other_competition
   There don't appear to be any lane assignments for this heat in this competition.
   = link_to  "Change to #{@other_competition} Heat ##{@heat}", view_heat_competition_lane_assignments_path(@other_competition, heat: @heat), class: 'next_action'
+
+.row
+  .small-12.columns
+    = render "dq_form"

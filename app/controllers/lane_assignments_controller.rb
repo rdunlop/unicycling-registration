@@ -28,34 +28,27 @@ class LaneAssignmentsController < ApplicationController
     @heat = params[:heat].to_i if params[:heat]
     @heat ||= @competition.lane_assignments.minimum(:heat) || 0
     @lane_assignments = @competition.lane_assignments.where(heat: @heat)
+    @heat_lane_judge_note = HeatLaneJudgeNote.new(heat: @heat)
     if @lane_assignments.empty?
       @other_competition = LaneAssignment.where(heat: @heat).first.try(:competition)
     end
   end
 
   def dq_competitor
-    @dq_request = DqRequest.new(params[:dq_request])
+    @heat_lane_judge_note = HeatLaneJudgeNote.new(heat_lane_judge_note_params)
 
-    bib_number = @dq_request.bib_number
-    @heat = @dq_request.heat.to_i
-    @lane = @dq_request.lane.to_i
-
-    ir = ImportResult.new(
-      heat: @heat,
-      lane: @lane,
-      bib_number: bib_number,
-      status: "DQ",
-      comments: @dq_request.comments,
-      comments_by: @dq_request.comments_by,
-      competition: @competition,
-      user: current_user
-    )
+    @heat_lane_judge_note.competition = @competition
+    @heat_lane_judge_note.entered_by = current_user
+    @heat_lane_judge_note.entered_at = DateTime.now
+    @heat_lane_judge_note.status = "DQ"
 
     respond_to do |format|
-      if ir.save
+      if @heat_lane_judge_note.save
         format.html { redirect_to :back, notice: 'Competitor successfully dq.' }
       else
+        flash.now[:alert] = "Error marking Heat #{@heat_lane_judge_note.heat} lane #{@heat_lane_judge_note.lane} as DQ"
         add_breadcrumb "View Heat"
+        @heat = @heat_lane_judge_note.heat
         @lane_assignments = @competition.lane_assignments.where(heat: @heat)
         format.html { render action: "view_heat" }
       end
@@ -127,6 +120,10 @@ class LaneAssignmentsController < ApplicationController
   end
 
   private
+
+  def heat_lane_judge_note_params
+    params.require(:heat_lane_judge_note).permit(:heat, :lane, :status, :comments)
+  end
 
   def authorize_competition
     authorize @lane_assignment.competition, :manage_lane_assignments?

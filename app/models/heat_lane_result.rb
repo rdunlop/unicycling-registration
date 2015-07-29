@@ -20,9 +20,10 @@
 class HeatLaneResult < ActiveRecord::Base
   include TimePrintable
   include FindsMatchingCompetitor
+  include TracksEnteredBy
+  include FindsBibNumberFromHeatLane
 
   validates :competition_id, :heat, :lane, :status, presence: true
-  validates :entered_at, :entered_by_id, presence: true
   validates :minutes, :seconds, :thousands, presence: true
 
   validates :minutes, :seconds, :thousands, numericality: { greater_than_or_equal_to: 0 }
@@ -32,7 +33,6 @@ class HeatLaneResult < ActiveRecord::Base
 
   has_one :time_result, inverse_of: :heat_lane_result
   belongs_to :competition
-  belongs_to :entered_by, class_name: 'User', foreign_key: :entered_by_id
 
   scope :heat_lane_order, -> { order(:heat, :lane) }
 
@@ -40,10 +40,6 @@ class HeatLaneResult < ActiveRecord::Base
 
   def init
     self.status ||= "active"
-  end
-
-  def bib_number
-    get_id_from_lane_assignment(competition, heat, lane) || 0
   end
 
   def disqualified?
@@ -73,15 +69,5 @@ class HeatLaneResult < ActiveRecord::Base
     self.minutes ||= 0
     self.seconds ||= 0
     self.thousands ||= 0
-  end
-
-  def get_id_from_lane_assignment(comp, heat, lane)
-    la = LaneAssignment.find_by(competition: comp, heat: heat, lane: lane)
-    if la.nil?
-      id = nil
-    else
-      id = la.competitor.first_bib_number
-    end
-    id
   end
 end

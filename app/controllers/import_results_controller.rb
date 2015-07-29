@@ -41,6 +41,8 @@ class ImportResultsController < ApplicationController
 
     @lane_assignments = LaneAssignment.where(competition: @competition, heat: @heat)
 
+    @heat_lane_judge_notes = HeatLaneJudgeNote.where(competition: @competition, heat: @heat)
+
     respond_to do |format|
       format.html # review_heat.html.erb
     end

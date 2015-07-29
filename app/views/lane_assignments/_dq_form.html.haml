@@ -1,0 +1,15 @@
+= simple_form_for @heat_lane_judge_note, url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
+  = render partial: "/shared/error_messages", object: @heat_lane_judge_note
+
+  .row
+    .small-6.columns
+      = f.input :heat, readonly: true
+    .small-6.columns
+      = f.input :lane, required: true
+  .row
+    .small-12.columns
+      = f.label :comments
+      = f.text_field :comments, {required: true }
+  .row
+    .small-12.columns
+      = f.button :submit, "DQ this competitor", data: { confirm: "Are you sure?" }

@@ -56,6 +56,8 @@ class Competition < ActiveRecord::Base
   has_many :published_age_group_entries, dependent: :destroy
   has_many :wave_times, inverse_of: :competition, dependent: :destroy
   has_many :competition_results, dependent: :destroy
+  has_many :heat_lane_judge_notes, dependent: :destroy, inverse_of: :competition
+  has_many :heat_lane_results, dependent: :destroy, inverse_of: :competition
   belongs_to :combined_competition
 
   accepts_nested_attributes_for :competition_sources, reject_if: :no_source_selected, allow_destroy: true
