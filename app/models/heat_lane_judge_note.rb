@@ -14,4 +14,7 @@ class HeatLaneJudgeNote < ActiveRecord::Base
     status == "DQ"
   end
 
+  def to_s
+    (comments || "") + " - by #{entered_by}"
+  end
 end

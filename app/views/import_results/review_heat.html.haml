@@ -14,6 +14,7 @@
       %th{ colspan: 2 } Lane Assignments
       %th{ colspan: 2 } Entered Results
       %th Warnings
+      %th{ colspan: 1 } Judge Notes
     %tr
       %th Lane #
       %th ID
@@ -21,10 +22,12 @@
       %th Time
       %th Disqualified
       %th
+      %th
   %tbody
     - 1.upto(max_lane) do |lane_number|
       - matching_lane_assignment = @lane_assignments.find_by(lane: lane_number)
       - matching_import_result = @heat_lane_results.find_by(lane: lane_number)
+      - judges_notes = @heat_lane_judge_notes.where(lane: lane_number)
       %tr
         %td= lane_number
         - if matching_lane_assignment.present?
@@ -42,6 +45,14 @@
           %td.missing_data
           %td.missing_data
           %td
+        - if judges_notes.any?
+          %td
+            - judges_notes.each do |note|
+              = note
+              %br
+        - else
+          %td
+
 
 %h3 Menu of actions
 
