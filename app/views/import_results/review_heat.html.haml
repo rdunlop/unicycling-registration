@@ -1,35 +1,26 @@
 %h1
   Review Heat ##{@heat} Data for #{@competition}
 
-.heat_assignment_summary
-  = render partial: "/lane_assignments/view_heat_summary"
+- max_assigned_lane = @lane_assignments.map(&:lane).max || 0
+- max_import_lane = @heat_lane_results.map(&:lane).max || 0
 
--# Summary Table
--# Import Detail Table
--# DQ Judge Detail Table
-
+- max_lane = [max_assigned_lane, max_import_lane].max
+%h3 Summary
 %table.sortable.import_results.js--shouldNotMatchSet
   %thead
     %tr
-      %th{ colspan: 3 } Lane Assignments
-      %th{ colspan: 7 } Entered Results
+      %th
+      %th{ colspan: 2 } Lane Assignments
+      %th{ colspan: 2 } Entered Results
       %th Warnings
     %tr
       %th Lane #
       %th ID
       %th Competitor
-      %th Raw data
       %th Time
       %th Disqualified
-      %th Entered By
-      %th Entered At
-      %th
-      %th
       %th
   %tbody
-    - max_assigned_lane = @lane_assignments.map(&:lane).max || 0
-    - max_import_lane = @heat_lane_results.map(&:lane).max || 0
-    - max_lane = [max_assigned_lane, max_import_lane].max
     - 1.upto(max_lane) do |lane_number|
       - matching_lane_assignment = @lane_assignments.find_by(lane: lane_number)
       - matching_import_result = @heat_lane_results.find_by(lane: lane_number)
@@ -43,20 +34,10 @@
           %td.missing_data
 
         - if matching_import_result.present?
-          %td= matching_import_result.raw_data
           %td= matching_import_result.full_time
           %td= matching_import_result.disqualified? ? "DQ" : ""
-          %td= matching_import_result.entered_by
-          %td= matching_import_result.entered_at
-          %td= link_to 'Edit', edit_heat_lane_result_path(matching_import_result)
-          %td= link_to 'Delete', matching_import_result, method: :delete, data: { confirm: 'Are you sure?' }
           %td.js--highlightIfNotBlank= matching_import_result.competitor_has_results? ? "WARN: Competitor already has result" : ""
         - else
-          %td.missing_data
-          %td.missing_data
-          %td.missing_data
-          %td.missing_data
-          %td.missing_data
           %td.missing_data
           %td.missing_data
           %td
@@ -64,10 +45,82 @@
 %h3 Menu of actions
 
 %p= link_to "Accept these Results", approve_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :post, data: {:confirm => "Are you Sure?" }, class: "button success"
-
-%br
 %br
 
 %p= link_to "Delete These Resuls without Approving", delete_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :delete, data: { confirm: "Deleting, Are you sure?" }, class: "button alert small"
+
+%hr
+
+%h3 Lane Assignment Details
+%table.sortable
+  %thead
+    %tr
+      %th Lane Number
+      %th ID
+      %th Competitor
+  %tbody
+    - 1.upto(max_assigned_lane) do |lane_number|
+      - matching_lane_assignment = @lane_assignments.find_by(lane: lane_number)
+      - next unless matching_lane_assignment.present?
+      %tr
+        %td= lane_number
+        %td= matching_lane_assignment.competitor.bib_number
+        %td= matching_lane_assignment.competitor.to_s
+
+%h3 Import Details
+%table.sortable
+  %thead
+    %tr
+      %th Lane Number
+      %th ID
+      %th Competitor
+      %th Raw Data
+      %th Full Time
+      %th DQ
+      %th Entered By
+      %th Entered At
+      %th
+      %th
+  %tbody
+    - 1.upto(max_import_lane) do |lane_number|
+      - matching_import_result = @heat_lane_results.find_by(lane: lane_number)
+      - next unless matching_import_result.present?
+      %tr
+        %td= lane_number
+        %td= matching_import_result.bib_number
+        %td= matching_import_result.competitor_name
+        %td= matching_import_result.raw_data
+        %td= matching_import_result.full_time
+        %td= matching_import_result.disqualified? ? "DQ" : ""
+        %td= matching_import_result.entered_by
+        %td= matching_import_result.entered_at
+        %td= link_to 'Edit', edit_heat_lane_result_path(matching_import_result)
+        %td= link_to 'Delete', matching_import_result, method: :delete, data: { confirm: 'Are you sure?' }
+
+%h3 DQ Details
+
+%table.sortable
+  %thead
+    %tr
+      %th Lane Number
+      %th ID
+      %th Competitor
+      %th DQ
+      %th Comments
+      %th Entered By
+      %th Entered At
+  %tbody
+    - max_dq_lane = 0 # XXX
+    - 1.upto(max_dq_lane) do |lane_number|
+      - matching_dq_request = @dq_requests.find_by(lane: lane_number)
+      - next unless matching_dq_request.present?
+      %tr
+        %td= lane_number
+        %td= matching_dq_request.bib_number
+        %td= matching_dq_request.competitor_name
+        %td= matching_dq_request.disqualified?
+        %td= matching_dq_request.comments
+        %td= matching_dq_request.entered_by
+        %td= matching_dq_request.entered_at
 
 = link_to "Back to Heat Import", import_lif_user_competition_import_results_path(@user, @competition)
