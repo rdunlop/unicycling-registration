@@ -1,6 +1,8 @@
+- Create a role which is able to perform the race data heat/lane actions
 - Don't have the import routine automatically move to the next heat after import
 - Have an easy way to consolidate judge results and imported results into real results.
 - Why is the LIF importing hundreds instead of thousands?
+- Test the LIF import from new data files from the timer
 - Move logic out of the ImportResultsController into another controller
 - Include Judge Notes in resulting time-Results record
 - Allow Publishing of Age Group data easily

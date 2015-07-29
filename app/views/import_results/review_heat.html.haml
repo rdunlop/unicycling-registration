@@ -59,8 +59,6 @@
 %p= link_to "Accept these Results", approve_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :post, data: {:confirm => "Are you Sure?" }, class: "button success"
 %br
 
-%p= link_to "Delete These Resuls without Approving", delete_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :delete, data: { confirm: "Deleting, Are you sure?" }, class: "button alert small"
-
 %hr
 
 %h3 Lane Assignment Details
@@ -108,6 +106,7 @@
         %td= matching_import_result.entered_at
         %td= link_to 'Edit', edit_heat_lane_result_path(matching_import_result)
         %td= link_to 'Delete', matching_import_result, method: :delete, data: { confirm: 'Are you sure?' }
+%p= link_to "Delete The Imported Resuls without Approving", delete_heat_user_competition_import_results_path(@user, @competition, heat: @heat), method: :delete, data: { confirm: "Deleting, Are you sure?" }, class: "button alert small"
 
 %h3 DQ Details
 
