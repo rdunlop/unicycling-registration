@@ -58,6 +58,11 @@ class HeatLaneResultsController < ApplicationController
     authorize @competition, :create_preliminary_result?
   end
 
+  def load_heat_lane_result
+    @heat_lane_result = HeatLaneResult.find(params[:id])
+    @competition = @heat_lane_result.competition
+  end
+
   def heat_lane_result_params
     params.require(:heat_lane_result).permit(:heat, :lane, :status, :minutes, :seconds, :thousands, :raw_data)
   end
