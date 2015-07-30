@@ -1,0 +1,40 @@
+%h1
+  Review Heat ##{@heat} Data for #{@competition}
+
+.row
+  .small-6.columns.text-left
+    - unless @heat == 1
+      = link_to "Previous Heat (#{@heat - 1})", competition_heat_review_path(@competition, @heat - 1)
+  .small-6.columns.text-right
+    = link_to "Next Heat (#{@heat + 1})", competition_heat_review_path(@competition, @heat + 1)
+
+.row
+  .small-12.columns
+    = render "summary"
+  .small-12.columns
+    = render "time_results_details"
+.row
+  .small-12.medium-6.large-4.columns
+    = render "lane_assignments_details"
+  .small-12.medium-6.large-4.columns
+    = render "heat_lane_results_summary"
+    - if @heat_lane_results.any?
+      .row
+        .small-6.columns
+          = link_to "Delete The Imported Resuls without Approving", competition_heat_review_path(@competition, @heat), method: :delete, data: { confirm: "Deleting, Are you sure?" }, class: "button alert small"
+        .small-6.columns
+          = link_to "Import these Results", approve_heat_competition_heat_review_path(@competition, @heat), method: :post, data: {:confirm => "Are you Sure?" }, class: "button success"
+
+    - else
+      = render "lif_import_form"
+
+    %br
+
+  .small-12.medium-6.large-4.columns
+    = render "heat_lane_judge_results_summary"
+.row
+
+  .small-12.columns
+    = render "heat_lane_judge_results_details"
+
+= link_to "Back to Heat Chooser", competition_heat_review_index_path(@competition)

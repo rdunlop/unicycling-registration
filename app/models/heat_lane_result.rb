@@ -42,6 +42,10 @@ class HeatLaneResult < ActiveRecord::Base
     self.status ||= "active"
   end
 
+  def self.heat(heat_number)
+    where(heat: heat_number)
+  end
+
   def disqualified?
     status == "DQ"
   end

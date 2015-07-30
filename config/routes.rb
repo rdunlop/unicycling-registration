@@ -384,17 +384,11 @@ Workspace::Application.routes.draw do
             get :review
             post :approve
 
-            get :review_heat
-            post :approve_heat
-            delete :delete_heat
-
             get  :data_entry
             get :import_csv, as: "display_csv", action: :display_csv
             post :import_csv
             get :import_chip, as: "display_chip", action: :display_chip
             post :import_chip
-            get :import_lif, as: "display_lif", action: :display_lif
-            post :import_lif
             delete :destroy_all
           end
         end
@@ -506,6 +500,12 @@ Workspace::Application.routes.draw do
           post :dq_competitor
           get :review
           get :download_heats_evt
+        end
+      end
+      resources :heat_review, param: :heat, only: [:index, :show, :destroy] do
+        member do
+          post :approve_heat
+          post :import_lif
         end
       end
       resources :distance_attempts, only: [] do

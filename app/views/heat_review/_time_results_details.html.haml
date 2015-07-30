@@ -1,0 +1,21 @@
+%h3 Time Results
+%table.sortable
+  %thead
+    %tr
+      %th Lane Number
+      %th ID
+      %th Competitor
+      %th Full Time
+      %th DQ
+      %th
+      %th
+  %tbody
+    - @time_results.each do |time_result|
+      %tr
+        %td= time_result.heat_lane_result.lane
+        %td= time_result.bib_number
+        %td= time_result.competitor
+        %td= time_result.full_time
+        %td= time_result.disqualified? ? "DQ" : ""
+        %td= link_to 'Edit', edit_time_result_path(time_result)
+        %td= link_to 'Delete', time_result, method: :delete, data: { confirm: 'Are you sure?' }

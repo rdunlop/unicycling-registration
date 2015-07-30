@@ -6,11 +6,11 @@ class ImportResultsController < ApplicationController
   before_action :load_import_result, only: [:edit, :update, :destroy]
 
   before_action :load_new_import_result, only: [:create]
-  before_action :load_import_results, only: [:data_entry, :display_csv, :display_chip, :display_lif, :index]
+  before_action :load_import_results, only: [:data_entry, :display_csv, :display_chip, :index]
   before_action :load_results_for_competition, only: [:review, :approve]
   before_action :filter_import_results_by_start_times, only: [:data_entry, :review, :approve]
 
-  before_action :authorize_competition_data, except: [:approve, :approve_heat]
+  before_action :authorize_competition_data, except: [:approve]
 
   before_action :set_breadcrumbs
 
@@ -30,21 +30,6 @@ class ImportResultsController < ApplicationController
     @import_results = @import_results.entered_order
     respond_to do |format|
       format.html # review.html.erb
-    end
-  end
-
-  # GET /users/#/competitions/#/import_results/review_heat?heat=1
-  def review_heat
-    @heat = params[:heat]
-
-    @heat_lane_results = HeatLaneResult.where(competition_id: @competition, heat: @heat)
-
-    @lane_assignments = LaneAssignment.where(competition: @competition, heat: @heat)
-
-    @heat_lane_judge_notes = HeatLaneJudgeNote.where(competition: @competition, heat: @heat)
-
-    respond_to do |format|
-      format.html # review_heat.html.erb
     end
   end
 
@@ -138,68 +123,10 @@ class ImportResultsController < ApplicationController
     redirect_to display_csv_user_competition_import_results_path(@user, @competition)
   end
 
-  def display_lif
-    add_breadcrumb "Import Lif (Heat Data)"
-    @heat = params[:heat]
-  end
-
-  # FOR LIF (track racing) data:
-  # GET /users/#/competitions/#/import_results/import_lif
-  def import_lif
-    importer = RaceDataImporter.new(@competition, @user)
-    @heat = params[:heat].to_i
-    if params[:file].nil? || params[:heat].blank?
-      flash[:alert] = "Please specify a file and heat"
-      redirect_to display_lif_user_competition_import_results_path(@user, @competition, heat: @heat)
-      return
-    end
-
-    if importer.process_lif(params[:file], @heat)
-      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
-    else
-      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
-    end
-    redirect_to review_heat_user_competition_import_results_path(@user, @competition, heat: params[:heat])
-  end
-
   # DELETE /users/#/competitions/#/import_results/destroy_all
   def destroy_all
     @user.import_results.where(competition_id: @competition).destroy_all
     redirect_to :back
-  end
-
-  def approve_heat
-    authorize @competition, :create_preliminary_result?
-    @heat = params[:heat].to_i
-
-    heat_lane_results = HeatLaneResult.where(competition_id: @competition, heat: @heat)
-
-    begin
-      HeatLaneResult.transaction do
-        heat_lane_results.each do |hlr|
-          hlr.import!
-        end
-      end
-    rescue Exception => ex
-      errors = ex
-    end
-
-    respond_to do |format|
-      if errors
-        format.html { redirect_to :back, alert: "Errors: #{errors}" }
-      else
-        format.html { redirect_to display_lif_user_competition_import_results_path(current_user, @competition, heat: @heat + 1), notice: "Added Heat # #{@heat} results" }
-      end
-    end
-  end
-
-  def delete_heat
-    @heat = params[:heat].to_i
-
-    heat_lane_results = HeatLaneResult.where(competition_id: @competition, heat: @heat)
-    heat_lane_results.destroy_all
-
-    redirect_to display_lif_user_competition_import_results_path(current_user, @competition, heat: @heat), notice: "deleted Heat # #{@heat} results. Try Again?"
   end
 
   # POST /users/#/competitions/#/import_results/approve

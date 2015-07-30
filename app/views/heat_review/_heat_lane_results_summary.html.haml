@@ -1,0 +1,17 @@
+%h3 E-Timer Summary
+%table.sortable
+  %thead
+    %tr
+      %th Lane Number
+      %th Full Time
+      %th DQ
+      %th
+      %th
+  %tbody
+    - @heat_lane_results.each do |heat_lane_result|
+      %tr
+        %td= heat_lane_result.lane
+        %td= heat_lane_result.full_time
+        %td= heat_lane_result.disqualified? ? "DQ" : ""
+        %td= link_to 'Edit', edit_heat_lane_result_path(heat_lane_result)
+        %td= link_to 'Delete', heat_lane_result, method: :delete, data: { confirm: 'Are you sure?' }

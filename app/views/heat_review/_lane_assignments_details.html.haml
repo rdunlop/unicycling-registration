@@ -1,0 +1,13 @@
+%h3 Lane Assignments
+%table.sortable
+  %thead
+    %tr
+      %th Lane Number
+      %th ID
+      %th Competitor
+  %tbody
+    - @lane_assignments.each do |lane_assignment|
+      %tr
+        %td= lane_assignment.lane
+        %td= lane_assignment.competitor.bib_number
+        %td= lane_assignment.competitor.to_s

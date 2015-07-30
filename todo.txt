@@ -1,3 +1,10 @@
+- Street Scoring should honor DNS/Active/etc.
+
+- How are people able to upload music after the music closed date?
+- How are they able to upload a wmv file?
+- Make logging in a judge easier (easier than having to create a new user, etc etc.)
+- Make "Hockey" data entry not automatically add "pts" to the external results preliminaries. (but other events DO do this (like trials))
+
 - Create a role which is able to perform the race data heat/lane actions
 - Don't have the import routine automatically move to the next heat after import
 - Have an easy way to consolidate judge results and imported results into real results.
