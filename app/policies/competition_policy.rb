@@ -131,7 +131,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def set_age_group_places?
-    super_admin?
+    track_data_importer?(record) || director?(record.event) || super_admin?
   end
 
   private
