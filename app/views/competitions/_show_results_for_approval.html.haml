@@ -25,7 +25,7 @@
   = link_to 'Lock', lock_competition_path(@competition), :method => :post, data: { confirm: "No more results can be changed. This cannot be undone by a Director. Continue?" }, class: "action_button"
 - if @competition.locked? && policy(@competition).unlock?
   = link_to 'Unlock', unlock_competition_path(@competition), :method => :delete, data: { confirm: "Are you sure?" }
-- if policy(@competition).publish?
+- if policy(@competition).publish_age_group_entry?
 
   - if @competition.has_age_group_entry_results?
     %h2 Preliminary Age Group Entry Results

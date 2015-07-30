@@ -41,6 +41,10 @@ class CompetitionPolicy < ApplicationPolicy
     competition_admin? || super_admin?
   end
 
+  def publish_age_group_entry?
+    track_data_importer?(record) || publish?
+  end
+
   def publish?
     awards_admin? || super_admin?
   end
@@ -124,10 +128,6 @@ class CompetitionPolicy < ApplicationPolicy
 
   def manage_volunteers?
     director?(record.event) || super_admin?
-  end
-
-  def publish_age_group_entry?
-    super_admin?
   end
 
   def set_age_group_places?

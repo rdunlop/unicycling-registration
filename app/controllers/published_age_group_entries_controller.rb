@@ -11,6 +11,9 @@ class PublishedAgeGroupEntriesController < ApplicationController
     @ag_entry = @published_age_group_entry.age_group_entry
     @results_list = @competition.results_list_for(@ag_entry)
 
+    name = "#{@competition} {@ag_entry}"
+    attachment = false
+
     respond_to do |format|
       format.html
       format.pdf { render_common_pdf(name, "Portrait", attachment) }
@@ -18,7 +21,7 @@ class PublishedAgeGroupEntriesController < ApplicationController
   end
 
   def preview
-    authorize @competition, :view_result_data?
+    authorize @competition, :publish_age_group_entry?
     @ag_entry = AgeGroupEntry.find(params[:id])
     @results_list = @competition.results_list_for(@ag_entry)
     respond_to do |format|
