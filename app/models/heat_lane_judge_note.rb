@@ -39,14 +39,28 @@ class HeatLaneJudgeNote < ActiveRecord::Base
   end
 
   # Set these results into the final Time Results table
+  # creates a new time_result if one doesn't exist
   def merge
     heat_lane_result = competition.heat_lane_results.find_by(heat: heat, lane: lane)
     time_result = heat_lane_result.try(:time_result)
     if time_result
       time_result.update_attributes(status: "DQ", comments: comments, comments_by: entered_by)
-      return true
+      true
     else
-      return false
+      competitor = heat_lane_result.matching_competitor
+      time_result = competitor.time_results.build(
+        minutes: 0,
+        seconds: 0,
+        thousands: 0,
+        status: "DQ",
+        comments: comments,
+        comments_by: entered_by,
+        entered_by: heat_lane_result.entered_by,
+        entered_at: heat_lane_result.entered_at,
+        preliminary: false,
+        heat_lane_result: heat_lane_result
+      )
+      time_result.save
     end
   end
 end

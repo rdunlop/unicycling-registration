@@ -1,3 +1,8 @@
+- Can't use "Last minute add" if the registrant is a "withdrawn" competitor (100m)
+- Improve the "Expert Heat" display:
+ - Needs to "Calculate All Results"
+ - Needs to "Display Candidates"
+ -
 - Use is able to sign up for an event with Event Category but without checking the "Signup" checkbox?
 - Street Scoring should honor DNS/Active/etc.
 
