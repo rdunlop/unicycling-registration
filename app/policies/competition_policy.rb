@@ -67,6 +67,10 @@ class CompetitionPolicy < ApplicationPolicy
     director?(record.event) || super_admin?
   end
 
+  def export_times?
+    director?(record.event) || super_admin?
+  end
+
   # printing/results
   def results?
     director?(record.event) || awards_admin? || super_admin?

@@ -113,6 +113,33 @@ class CompetitionsController < ApplicationController
               filename: filename)
   end
 
+  def export_times
+    authorize @competition
+    if @competition.event_class == 'Shortest Time'
+      csv_string = CSV.generate do |csv|
+        csv << ['registrant_external_id', 'gender', 'age', 'heat', 'lane', 'thousands', 'result']
+        @competition.competitors.each do |comp|
+          if comp.has_result?
+            tr = comp.time_results.first
+            heat = tr.heat_lane_result
+
+            csv << [comp.export_id,
+                    comp.gender,
+                    comp.age,
+                    heat.try(:heat),
+                    heat.try(:lane),
+                    comp.best_time_in_thousands,
+                    comp.result]
+          end
+        end
+      end
+    end
+    filename = @competition.name.downcase.gsub(/[^0-9a-z]/, "_") + ".csv"
+    send_data(csv_string,
+              type: 'text/csv; charset=utf-8; header=present',
+              filename: filename)
+  end
+
   def lock
     authorize @competition
     respond_to do |format|

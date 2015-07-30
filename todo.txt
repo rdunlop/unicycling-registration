@@ -1,3 +1,4 @@
+- Start Line judge (Amanada) should be able to add new lane assignments/adjust them too.
 - Can't use "Last minute add" if the registrant is a "withdrawn" competitor (100m)
 - Improve the "Expert Heat" display:
  - Needs to "Calculate All Results"

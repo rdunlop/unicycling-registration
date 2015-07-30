@@ -442,6 +442,7 @@ Workspace::Application.routes.draw do
         post :set_age_group_places
         post :set_places
         get :export_scores
+        get :export_times
         # view scores
         get :result
 

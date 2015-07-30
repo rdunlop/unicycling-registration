@@ -2,3 +2,6 @@
   Time Results - #{@competition}
 = render :partial => "/competitions/results"
 = render :partial => "/time_results/results"
+
+- if policy(@competition).export_times?
+  = link_to 'Download Scores CSV', export_times_competition_path(@competition)
