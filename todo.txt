@@ -1,3 +1,4 @@
+- Use is able to sign up for an event with Event Category but without checking the "Signup" checkbox?
 - Street Scoring should honor DNS/Active/etc.
 
 - How are people able to upload music after the music closed date?

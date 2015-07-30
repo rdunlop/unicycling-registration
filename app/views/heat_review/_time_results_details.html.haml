@@ -1,8 +1,8 @@
-%h3 Time Results
+%h3 Official Results
 %table.sortable
   %thead
     %tr
-      %th Lane Number
+      %th Lane #
       %th ID
       %th Competitor
       %th Full Time
@@ -17,5 +17,5 @@
         %td= time_result.competitor
         %td= time_result.full_time
         %td= time_result.disqualified? ? "DQ" : ""
-        %td= link_to 'Edit', edit_time_result_path(time_result)
+        %td= link_to 'Edit', edit_time_result_path(time_result), target: "_blank"
         %td= link_to 'Delete', time_result, method: :delete, data: { confirm: 'Are you sure?' }

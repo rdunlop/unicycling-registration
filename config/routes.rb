@@ -514,6 +514,11 @@ Workspace::Application.routes.draw do
         end
       end
       resources :heat_lane_results, shallow: true, only: [:edit, :update, :create, :destroy]
+      resources :heat_lane_judge_notes, only: [] do
+        member do
+          put :merge
+        end
+      end
       resources :external_results, shallow: true, except: [:new, :show]
       resources :preliminary_external_results, shallow: true, except: [:new, :show] do
         collection do

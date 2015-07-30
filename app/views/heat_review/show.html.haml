@@ -10,9 +10,10 @@
 
 .row
   .small-12.columns
-    = render "summary"
-  .small-12.columns
     = render "time_results_details"
+  .small-12.columns
+    = render "summary"
+%hr
 .row
   .small-12.medium-6.large-4.columns
     = render "lane_assignments_details"
@@ -32,9 +33,13 @@
 
   .small-12.medium-6.large-4.columns
     = render "heat_lane_judge_results_summary"
-.row
 
+%hr
+
+.row
   .small-12.columns
     = render "heat_lane_judge_results_details"
+  .small-12.columns
+    = render "heat_lane_results_details"
 
 = link_to "Back to Heat Chooser", competition_heat_review_index_path(@competition)
