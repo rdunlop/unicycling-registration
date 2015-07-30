@@ -62,7 +62,7 @@ class CompetitionsController < ApplicationController
       @competition.place_age_group_entry(age_group_entry)
       flash[:notice] = "All Places updated for #{age_group_entry}"
     end
-    redirect_to result_competition_path(@competition)
+    redirect_to :back
   end
 
   def set_places
