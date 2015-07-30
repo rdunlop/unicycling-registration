@@ -142,13 +142,12 @@ class CompetitionsController < ApplicationController
     publisher = CompetitionStateMachine.new(@competition)
     entry = params[:age_group_entry]
 
-    respond_to do |format|
-      if publisher.publish_age_group_entry(entry)
-        format.html { redirect_to @competition, notice: 'Published Competition Age Group Entry' }
-      else
-        format.html { redirect_to @competition, alert: 'Unable to publish competition age group entry' }
-      end
+    if publisher.publish_age_group_entry(entry)
+      flash[:notice] = 'Published Competition Age Group Entry'
+    else
+      flash[:alert] = 'Unable to publish competition age group entry'
     end
+    redirect_to :back
   end
 
   def publish
