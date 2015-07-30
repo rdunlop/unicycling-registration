@@ -9,6 +9,7 @@ class HeatReviewController < ApplicationController
 
   # GET /competitions/#/heat_review/
   def index
+    @max_heat = LaneAssignment.where(competition: @competition).maximum(:heat)
   end
 
   # GET /competitions/#/heat_review/:heat_id/

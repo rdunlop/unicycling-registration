@@ -89,7 +89,7 @@ class CompetitionPolicy < ApplicationPolicy
   # DATA MANAGEMENT
   # This is the person who can see entered data for all judges/entry for a competition
   def view_result_data?
-    director?(record.event) || super_admin?
+    track_data_importer?(record) || director?(record.event) || super_admin?
   end
 
   def modify_result_data?
@@ -137,7 +137,7 @@ class CompetitionPolicy < ApplicationPolicy
   private
 
   def view_access?
-    data_recording_volunteer?(record) || director?(record.event) || super_admin?
+    track_data_importer?(record) || data_recording_volunteer?(record) || director?(record.event) || super_admin?
   end
 
   class Scope < Scope

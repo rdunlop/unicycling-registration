@@ -36,9 +36,10 @@
     %li= link_to "Enter Sign-Ins", edit_competition_sign_ins_path(competition)
 
   - if competition.uses_lane_assignments?
-    %li
-      = link_to "Recording Sheet", heat_recording_printing_competition_path(competition)
-      = link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf)
+    - if policy(competition).heat_recording?
+      %li
+        = link_to "Recording Sheet", heat_recording_printing_competition_path(competition)
+        = link_to "(pdf)", heat_recording_printing_competition_path(competition, :format => :pdf)
     - if policy(competition).manage_lane_assignments?
       %li= link_to "Display Heat", view_heat_competition_lane_assignments_path(competition)
       %li= link_to "Set Lane Assignments", competition_lane_assignments_path(competition)

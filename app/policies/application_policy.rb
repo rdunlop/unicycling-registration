@@ -92,6 +92,10 @@ class ApplicationPolicy
     user.has_role?(:race_official, competition)
   end
 
+  def track_data_importer?(competition)
+    user.has_role?(:track_data_importer, competition)
+  end
+
   def membership_admin?
     user.has_role?(:membership_admin)
   end

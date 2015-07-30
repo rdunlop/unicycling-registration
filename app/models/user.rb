@@ -175,7 +175,7 @@ class User < ActiveRecord::Base
 
   # Public: A list of all possible data-entry roles, what is used on each
   # competition is dependent upon the type of competition
-  POSSIBLE_DATA_VOLUNTEERS = [:race_official, :data_recording_volunteer]
+  POSSIBLE_DATA_VOLUNTEERS = [:race_official, :data_recording_volunteer, :track_data_importer]
 
   def self.volunteer_role_descriptions(role)
     case role
@@ -185,6 +185,9 @@ class User < ActiveRecord::Base
       "Able to DQ at start or end-line of Race
       Able to download heat-lists for Track E-Timers
       "
+    when :track_data_importer
+      "Able to import e-timer data for track day.
+      Able to adjust time results"
     when :data_recording_volunteer
       "Able to enter Start/Finish Line results (transcribed)"
     else
