@@ -182,6 +182,22 @@ class OverallChampionResultCalculator
     end
   end
 
+  def adjust_ties_by_firsts(scores)
+    firsts_counts = scores.map{ |score| score[:firsts] }
+    adjustment = 0
+    firsts_counts.uniq.sort.reverse_each do |most_firsts|
+      scores_with_this_number_of_firsts = scores.select{ |score| score[:firsts] == most_firsts}
+      scores_with_this_number_of_firsts.each do |score|
+        score[:score] -= adjustment
+      end
+      adjustment += 0.1
+    end
+    scores
+  end
+
+  def adjust_ties_by_tie_breaker(scores)
+  end
+
   def num_firsts(gender, bib_number)
     registrants(gender)[bib_number].count{ |comp| get_place(comp) == 1}
   end
@@ -210,9 +226,12 @@ class OverallChampionResultCalculator
         firsts_counts << num_firsts(gender, bib_number)
       end
       calc_score = score
+      adjustment = 0.1
       firsts_counts.uniq.sort.reverse_each do |most_firsts|
         bib_numbers_with_this_number_of_firsts = bib_numbers.select{ |bib_number| num_firsts(gender, bib_number) == most_firsts}
 
+        # PROBLEM: At this point, if there is only 1 competition, it should come in ahead of the next
+        # loop of the 'most_firsts'
         places_in_tie_breaker = bib_numbers_with_this_number_of_firsts.map{ |bib_number| place_of_tie_breaker(gender, bib_number) }
         places_in_tie_breaker.uniq.sort.each do |place|
           bib_numbers_with_this_number_of_firsts.each do |bib_number|
@@ -220,8 +239,9 @@ class OverallChampionResultCalculator
               results << [calc_score, bib_number]
             end
           end
-          calc_score -= 0.1
+          calc_score -= adjustment
         end
+        adjustment += 0.1 # each number of firsts should be more adjusted than the previous
       end
       results
     else

@@ -49,18 +49,19 @@ describe OverallChampionResultCalculator do
   #   30 - Jim   - M - 1st (50)   TT - 5th (18)   Crit - 5th (7)  Total (75)
   #
   #   #Results:
-  #   1 - Jim   (1 first, 1st in tie-breaker (M))
-  #   2 - Robin (1 first)
-  #   3 - Scott (0 first)
+  #   1 - 10 - Robin (2 firsts)
+  #   2 - 30 - Jim (1 first (also, 1st in tie-breaker (M)))
+  #   3 - 20 - Scott (0 first)
   def configure_cce(combined_competition_entry, options = {})
-    allow(combined_competition_entry).to receive("points_#{options[:place]}".to_sym).and_return(options[:points])
+    combined_competition_entry.update_attribute("points_#{options[:place]}".to_sym, options[:points])
+    #allow(combined_competition_entry).to receive("points_#{options[:place]}".to_sym).and_return(options[:points])
   end
 
   describe "when there is a tie" do
     before(:each) do
-      competition1 = FactoryGirl.build_stubbed(:competition)
-      competition2 = FactoryGirl.build_stubbed(:competition)
-      competition3 = FactoryGirl.build_stubbed(:competition)
+      competition1 = FactoryGirl.create(:competition)
+      competition2 = FactoryGirl.create(:competition)
+      competition3 = FactoryGirl.create(:competition)
       competitor1m    = build_competitor(place: 2, bib_number: 10, competition: competition1)
       competitor1tt   = build_competitor(place: 1, bib_number: 10, competition: competition2)
       competitor1crit = build_competitor(place: 10, bib_number: 10, competition: competition3)
@@ -70,15 +71,15 @@ describe OverallChampionResultCalculator do
       competitor3m    = build_competitor(place: 1, bib_number: 30, competition: competition1)
       competitor3tt   = build_competitor(place: 5, bib_number: 30, competition: competition2)
       competitor3crit = build_competitor(place: 5, bib_number: 30, competition: competition3)
-      m_combined_competition_entry = FactoryGirl.build_stubbed(:combined_competition_entry, abbreviation: "M", tie_breaker: true, competition: competition1)
+      m_combined_competition_entry = FactoryGirl.create(:combined_competition_entry, abbreviation: "M", tie_breaker: true, competition: competition1, combined_competition: combined_competition)
       # allow(competitor1m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
       # allow(competitor2m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
       # allow(competitor3m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
-      tt_combined_competition_entry = FactoryGirl.build_stubbed(:combined_competition_entry, abbreviation: "TT", tie_breaker: false, competition: competition2)
+      tt_combined_competition_entry = FactoryGirl.create(:combined_competition_entry, abbreviation: "TT", tie_breaker: false, competition: competition2, combined_competition: combined_competition)
       # allow(competitor1tt).to receive_message_chain(:competition, :combined_competition_entries).and_return([tt_combined_competition_entry])
       # allow(competitor2tt).to receive_message_chain(:competition, :combined_competition_entries).and_return([tt_combined_competition_entry])
       # allow(competitor3tt).to receive_message_chain(:competition, :combined_competition_entries).and_return([tt_combined_competition_entry])
-      crit_combined_competition_entry = FactoryGirl.build_stubbed(:combined_competition_entry, abbreviation: "Crit", tie_breaker: false, competition: competition3)
+      crit_combined_competition_entry = FactoryGirl.create(:combined_competition_entry, abbreviation: "Crit", tie_breaker: false, competition: competition3, combined_competition: combined_competition)
       # allow(competitor1crit).to receive_message_chain(:competition, :combined_competition_entries).and_return([crit_combined_competition_entry])
       # allow(competitor2crit).to receive_message_chain(:competition, :combined_competition_entries).and_return([crit_combined_competition_entry])
       # allow(competitor3crit).to receive_message_chain(:competition, :combined_competition_entries).and_return([crit_combined_competition_entry])
@@ -90,14 +91,14 @@ describe OverallChampionResultCalculator do
       configure_cce(crit_combined_competition_entry, place: 10, points: 1)
       configure_cce(crit_combined_competition_entry, place: 2, points: 12)
       configure_cce(crit_combined_competition_entry, place: 5, points: 7)
-      allow(m_combined_competition_entry).to receive(:competitors).and_return([competitor1m, competitor2m, competitor3m])
-      allow(tt_combined_competition_entry).to receive(:competitors).and_return([competitor1tt, competitor2tt, competitor3tt])
-      allow(crit_combined_competition_entry).to receive(:competitors).and_return([competitor1crit, competitor2crit, competitor3crit])
-      allow(combined_competition).to receive(:combined_competition_entries).and_return([m_combined_competition_entry, tt_combined_competition_entry, crit_combined_competition_entry])
-      allow(combined_competition).to receive(:tie_breaker_competition).and_return(competition1)
+      # allow(m_combined_competition_entry).to receive(:competitors).and_return([competitor1m, competitor2m, competitor3m])
+      # allow(tt_combined_competition_entry).to receive(:competitors).and_return([competitor1tt, competitor2tt, competitor3tt])
+      # allow(crit_combined_competition_entry).to receive(:competitors).and_return([competitor1crit, competitor2crit, competitor3crit])
+      # allow(combined_competition).to receive(:combined_competition_entries).and_return([m_combined_competition_entry, tt_combined_competition_entry, crit_combined_competition_entry])
+      # allow(combined_competition).to receive(:tie_breaker_competition).and_return(competition1)
     end
 
-    xit "lists the 3 places" do
+    it "lists the 3 places" do
       result_1 = combined_competition_result
       expect(result_1.length).to eq(3)
       expect(result_1[0][:place]).to eq(1)
@@ -120,6 +121,74 @@ describe OverallChampionResultCalculator do
     end
     context "when I am in second place" do
       specify { expect(result.calc_perc_points(best_time: 300, time: 330, base_points: 50, bonus_percentage: 10)).to be_within(0.1).of(50) }
+    end
+  end
+
+  context "when there are ties, but different numbers of firsts" do
+    it "adjusts the points" do
+      scores = [
+        { bib_number: 10,
+          score: 75,
+          firsts: 1,
+        },
+        { bib_number: 20,
+          score: 75,
+          firsts: 2,
+        },
+        { bib_number: 30,
+          score: 75,
+          firsts: 0,
+        }
+      ]
+      expected_hash = [
+        { bib_number: 10,
+          score: 74.9,
+          firsts: 1,
+        },
+        { bib_number: 20,
+          score: 75,
+          firsts: 2,
+        },
+        { bib_number: 30,
+          score: 74.8,
+          firsts: 0,
+        }
+      ]
+      expect(result.adjust_ties_by_firsts(scores)).to eq(expected_hash)
+    end
+  end
+
+  context "when there are ties, but different places in the tie breaker competition" do
+    xit "adjusts the points" do
+      scores = [
+        { bib_number: 10,
+          score: 75,
+          place_in_tie_breaker: 1,
+        },
+        { bib_number: 20,
+          score: 75,
+          place_in_tie_breaker: 2,
+        },
+        { bib_number: 30,
+          score: 75,
+          place_in_tie_breaker: 3,
+        }
+      ]
+      expected_hash = [
+        { bib_number: 10,
+          score: 75,
+          place_in_tie_breaker: 1,
+        },
+        { bib_number: 20,
+          score: 74.99,
+          place_in_tie_breaker: 2,
+        },
+        { bib_number: 30,
+          score: 74.98,
+          place_in_tie_breaker: 3,
+        }
+      ]
+      expect(result.adjust_ties_by_tie_breaker(scores)).to eq(expected_hash)
     end
   end
 end
