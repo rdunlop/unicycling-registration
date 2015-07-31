@@ -84,6 +84,10 @@ class CompetitionPolicy < ApplicationPolicy
     competition_admin? || super_admin?
   end
 
+  def add_additional_results?
+    director?(record.event) || competition_admin? || super_admin?
+  end
+
   # PRINTING
   def announcer?
     return true # ?? Was "skip_authorization_check" before?
