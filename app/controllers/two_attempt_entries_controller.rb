@@ -1,6 +1,6 @@
 class TwoAttemptEntriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_user
+  before_action :load_user, only: [:index, :create, :proof, :approve]
   before_action :load_competition, only: [:index, :proof, :create, :approve]
   before_action :load_new_two_attempt_entry, only: [:create]
   before_action :set_is_start_time, only: [:index, :proof, :approve]
