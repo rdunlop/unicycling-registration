@@ -183,7 +183,7 @@ class OverallChampionResultCalculator
     # return the resulting score, per competitor
 
     # break ties
-    break_ties_by_firsts = true
+    break_ties_by_firsts = combined_competition.tie_break_by_firsts?
     if break_ties_by_firsts
       new_scores = break_ties_by_num_firsts(gender, @scores)
       @scores = new_scores
