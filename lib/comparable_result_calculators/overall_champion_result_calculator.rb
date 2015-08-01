@@ -29,7 +29,7 @@ class OverallChampionResultCalculator
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result?
-      score = competitor_score(competitor)
+      score = competitor_display_score(competitor)
       "#{score.round(3)} pts"
     end
   end
@@ -58,26 +58,32 @@ class OverallChampionResultCalculator
     calc_res.try(:[], :total_points) || 0
   end
 
+  def competitor_display_score(competitor)
+    calc_res = results(competitor.gender).find{ |res| res[:bib_number] == competitor.lowest_member_bib_number }
+    calc_res.try(:[], :display_points) || 0
+  end
+
   # bib_number of registrant
   # [place, points] for each type
   #
   # Example:
   # [
   #   {
-  #     :place => 1,
   #     :bib_number => 10,
-  #     :total_points => 188,
+  #     :total_points => 187.9,
+  #     :display_points => 188,
   #     :results => {
-  #       10 => { :entry_place => 1, :entry_points => 50 },
-  #       11 => { :entry_place => 1, :entry_points => 33 }
+  #       "M" => { :entry_place => 1, :entry_points => 50 },
+  #       "TT" => { :entry_place => 1, :entry_points => 33 }
   #     }
   #   },
-  #   { :place => 2,
+  #   {
   #     :bib_number => 13,
   #     :total_points => 155,
+  #     :display_points => 155,
   #     :results => {
-  #       10 => { :entry_place => 1, :entry_points => 50 },
-  #       11 => { :entry_place => 1, :entry_points => 33 }
+  #       "M" => { :entry_place => 1, :entry_points => 50 },
+  #       "TT" => { :entry_place => 1, :entry_points => 33 }
   #     }
   #   }
   # }
@@ -121,6 +127,13 @@ class OverallChampionResultCalculator
     end
   end
 
+  # creates the initial hash of results for a registrant
+  # {
+  #   bib_number: the id of the registrant
+  #   results: a hash of each competition result
+  #   total_points: the comparable_result (including tie-break adjustments)
+  #   display_points: the total points
+  # }
   def create_registrant_entry(bib_number, gender)
     competitor_results = {}
     combined_competition.combined_competition_entries.each do |entry|
@@ -135,10 +148,12 @@ class OverallChampionResultCalculator
     end
     total_points = 0
     competitor_results.keys.map { |race| total_points += competitor_results[race][:entry_points] }
+
     {
       bib_number: bib_number,
       results: competitor_results,
-      total_points: total_points
+      total_points: total_points,
+      display_points: total_points,
     }
   end
 
@@ -154,13 +169,26 @@ class OverallChampionResultCalculator
   def gather_results(gender)
     results = {}
     @scores = {}
+
+    # Create an entry for every competitor
+    # store the number of placing points for each competitor
     registrant_bib_numbers(gender).each do |bib_number|
       results[bib_number] = create_registrant_entry(bib_number, gender)
       next if results[bib_number][:total_points] == 0
       store_score(results[bib_number][:total_points], bib_number)
     end
 
+    # for each tie, adjust the placing points by num firsts
+    # for each tie, adjust the placing points by tie breaker competition
+    # return the resulting score, per competitor
+
     # break ties
+    break_ties_by_firsts = true
+    if break_ties_by_firsts
+      new_scores = break_ties_by_num_firsts(gender, @scores)
+      @scores = new_scores
+    end
+
     if tie_breaker_competition
       new_results = []
       sorted_scores.each do |score|
@@ -182,17 +210,67 @@ class OverallChampionResultCalculator
     end
   end
 
-  def adjust_ties_by_firsts(scores)
-    firsts_counts = scores.map{ |score| score[:firsts] }
-    adjustment = 0
-    firsts_counts.uniq.sort.reverse_each do |most_firsts|
-      scores_with_this_number_of_firsts = scores.select{ |score| score[:firsts] == most_firsts}
-      scores_with_this_number_of_firsts.each do |score|
-        score[:score] -= adjustment
+  # inputs: gender, and a hash:
+  # {
+  #   10 => [1,2,3], # bib numbers 1,2 and 3 have score 10
+  #   11 => [5], # bib number 5 has score 11
+  # }
+  # output: a hash:
+  # {
+  #   10 => [3], # bib number 3 has a score of 10
+  #   9.9 => [1,2], # bib numbers 1 and 2 have a score of 9.9
+  #   11 => [5], # bib number 5 has a score of 11
+  # }
+  def break_ties_by_num_firsts(gender, initial_scores)
+    new_scores = {}
+
+    initial_scores.keys.each do |single_score|
+      if initial_scores[single_score].length > 1
+        tie_breakers_for_bib_numbers = {}
+        initial_scores[single_score].each do |bib_number|
+          tie_breakers_for_bib_numbers[bib_number] = num_firsts(gender, bib_number)
+        end
+        tie_broken_scores = adjust_ties_by_firsts(single_score, initial_scores[single_score], tie_breakers_for_bib_numbers)
+        tie_broken_scores.keys.each do |tie_score|
+          new_scores[tie_score] = tie_broken_scores[tie_score]
+        end
+      else
+        new_scores[single_score] = initial_scores[single_score]
       end
+    end
+
+    new_scores
+  end
+
+  # Input:
+  # score, competitors-with-score, and firsts-for-competitors.
+  # e.g.
+  # score: 10
+  # competitors-with-score: [3,2]
+  # firsts-for-competitors:
+  # {
+  #   3 => 1,
+  #   2 => 0,
+  # }
+  #
+  # Output:
+  # {
+  #   10 => [3]
+  #   9.9 => [2]
+  # }
+  def adjust_ties_by_firsts(score, bib_numbers, competitor_firsts_counts)
+    firsts_counts = competitor_firsts_counts.values
+    adjustment = 0
+    result = {}
+
+    firsts_counts.uniq.sort.reverse_each do |num_firsts|
+      competitors_with_this_number_of_firsts = competitor_firsts_counts.select{ |el| competitor_firsts_counts[el] == num_firsts }.keys
+      current_score = score - adjustment
+      competitors_with_this_number_of_firsts
+      result[current_score] = competitors_with_this_number_of_firsts
       adjustment += 0.1
     end
-    scores
+    result
   end
 
   def adjust_ties_by_tie_breaker(scores)
@@ -212,36 +290,37 @@ class OverallChampionResultCalculator
     @place_of_tie_breaker[bib_number] ||= get_place(registrants(gender)[bib_number].find{ |comp| comp.competition == tie_breaker_competition }) || 999
   end
 
+  # inputs:
+  # gender: "Male"
+  # score: 10
+  # bib_numbers: [1,2,3]
+  #
   # returns
   # [
   #   [score, bib_number],
   #   [score, bib_number],
   #   [score, bib_number]
   # ]
+  #
+  # example outputs:
+  # [
+  #   [9.99, 1],
+  #   [9.98, 2],
+  #   [10, 3]
+  # ]
   def tie_breaking_scores(gender, score, bib_numbers)
     if bib_numbers.length > 1
       results = []
-      firsts_counts = []
-      bib_numbers.each do |bib_number|
-        firsts_counts << num_firsts(gender, bib_number)
-      end
       calc_score = score
-      adjustment = 0.1
-      firsts_counts.uniq.sort.reverse_each do |most_firsts|
-        bib_numbers_with_this_number_of_firsts = bib_numbers.select{ |bib_number| num_firsts(gender, bib_number) == most_firsts}
-
-        # PROBLEM: At this point, if there is only 1 competition, it should come in ahead of the next
-        # loop of the 'most_firsts'
-        places_in_tie_breaker = bib_numbers_with_this_number_of_firsts.map{ |bib_number| place_of_tie_breaker(gender, bib_number) }
-        places_in_tie_breaker.uniq.sort.each do |place|
-          bib_numbers_with_this_number_of_firsts.each do |bib_number|
-            if place == place_of_tie_breaker(gender, bib_number)
-              results << [calc_score, bib_number]
-            end
+      places_in_tie_breaker = bib_numbers.map{ |bib_number| place_of_tie_breaker(gender, bib_number) }
+      places_in_tie_breaker.uniq.sort.each do |place|
+        # each time through this loop is a different (increasing) place in the tie breaker
+        bib_numbers.each do |bib_number|
+          if place == place_of_tie_breaker(gender, bib_number)
+            results << [calc_score, bib_number]
           end
-          calc_score -= adjustment
         end
-        adjustment += 0.1 # each number of firsts should be more adjusted than the previous
+        calc_score -= 0.01
       end
       results
     else
