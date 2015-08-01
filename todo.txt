@@ -1,3 +1,12 @@
+- Import CSV  from External fails poorly when a registrant doesn't exist. It should show a nicer error message.
+- The Competition#New form date-choosing field doesn't appear.
+- Add report name to the header or footer of all PDFs
+- Add page numbers to all PDFs
+
+- Overall Calculations http://naucc2015.unicycling-software.com/en/combined_competitions is sorted randomly
+- Display Competitors doesn't work if there are no members in a competitor. (how did that happen?)
+- Fix the sort-action causing "no authorization performed" issue.
+- Add ability to easily set the number of laps (in bulk) for a competition (like criterium)
 - Fix the sortable data table "No results" when adding to the table ajaxy
 - Start Line judge (Amanada) should be able to add new lane assignments/adjust them too.
 - Can't use "Last minute add" if the registrant is a "withdrawn" competitor (100m)
