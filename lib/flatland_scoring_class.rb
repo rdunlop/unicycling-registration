@@ -26,6 +26,10 @@ class FlatlandScoringClass < BaseScoringClass
     nil
   end
 
+  def compete_in_order?
+    true
+  end
+
   def uses_judges
     "Flatland"
   end
