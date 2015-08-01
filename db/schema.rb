@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729120143) do
+ActiveRecord::Schema.define(version: 20150801011800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20150729120143) do
     t.datetime "updated_at"
     t.boolean  "use_age_group_places",                      default: false, null: false
     t.boolean  "percentage_based_calculations",             default: false, null: false
+    t.boolean  "tie_break_by_firsts",                       default: true,  null: false
   end
 
   add_index "combined_competitions", ["name"], name: "index_combined_competitions_on_name", unique: true, using: :btree

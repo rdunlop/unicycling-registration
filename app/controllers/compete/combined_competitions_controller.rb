@@ -57,6 +57,6 @@ class Compete::CombinedCompetitionsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def combined_competition_params
-    params.require(:combined_competition).permit(:name, :use_age_group_places, :percentage_based_calculations)
+    params.require(:combined_competition).permit(:name, :tie_break_by_firsts, :use_age_group_places, :percentage_based_calculations)
   end
 end

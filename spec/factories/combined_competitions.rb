@@ -8,6 +8,7 @@
 #  updated_at                    :datetime
 #  use_age_group_places          :boolean          default(FALSE), not null
 #  percentage_based_calculations :boolean          default(FALSE), not null
+#  tie_break_by_firsts           :boolean          default(TRUE), not null
 #
 # Indexes
 #
@@ -19,5 +20,6 @@
 FactoryGirl.define do
   factory :combined_competition do
     sequence(:name) { |n| "MyString #{n}" }
+    tie_break_by_firsts true
   end
 end
