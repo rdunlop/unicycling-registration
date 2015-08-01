@@ -8,7 +8,7 @@ module EventsHelper
     when 'Freestyle', "Artistic Freestyle IUF 2015"
       link_to "#{judge.competition} - #{judge.judge_type.name}", judge_scores_path(judge), options
     when 'Flatland'
-      link_to judge.judge_type.name, judge_scores_path(judge), options
+      link_to "#{judge.competition} - #{judge.judge_type.name}", judge_scores_path(judge), options
     when 'Street', 'Street Final'
       link_to judge.judge_type.name, judge_street_scores_path(judge), options
     when 'Standard'
