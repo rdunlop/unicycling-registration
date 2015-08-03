@@ -1,3 +1,42 @@
+POST-NAUCC 2015 thoughts
+=========================
+
+Things that caused the most grief:
+---------------------------------
+- Multi-lap racing data recording was inaccurate enough that it took a lot of manual effort (and time) post-race to get accurate results.
+- Double-tab when using chosen-select boxes.
+- Import CSV of external Results doesn't work
+- Competitors without Members causes the competitors#show page to 500
+- Track Day Race Officials were unable to adjust lane assignments for heats (unable to add people to competition)
+- Set Sort order causes permissions exception
+- "Withdrawn" competitors cause issues for Last-minute-add and other start-line things.
+- Having registrants choose a wheel size doesn't translate into an age group (under 10 age)
+- Creating Expert Heats of 100m/etc were very manual, and didn't split up by gender.
+- Ineligible competitors are not indicated as such on the Announcer Sheet
+- Registrant is able to sign up for an event without choosing the "Signup" checkbox.
+- External Results had "pts" added next to the name many places
+- Time data entry had some issues entering hours:minutes:seconds instead of minutes:seconds:thousands
+- Automatically attempting to import data into other competition-within-event was faught against a lot
+- Many Reports have "unknown" as the rank place for people who were DNS or DNF.
+ - Should be marked as such, and should show up at the END of the list.
+-
+
+Requests:
+---------
+- Copy Competition
+
+Minor:
+------
+- Lane Assignment Race Officials needed to use 2 select boxes in order to add last-minute registrants.
+- Combined Competition is confusingly still a "Competition"
+- The Combined Competition Results are not published for competitors to see.
+
+
+===================================================
+Robin's ToDo List, re-organized August 3, 2015
+- R
+
+- Change DQ in High/Long to DNS
 - Import CSV  from External fails poorly when a registrant doesn't exist. It should show a nicer error message.
 - The Competition#New form date-choosing field doesn't appear.
 - Add report name to the header or footer of all PDFs
@@ -83,7 +122,6 @@ END
 - Import results->import CSV styling needs to be updated
 - Import results ->delete all in temp table new styling, and flash message on success
 
-- why didn't the cache bust when I changed the admin_set_two?
 - Allow chosen to work on mobile devices
 - fix small screen view of competition#show
 - Fix chosen on mobile devices? look at http://brianreavis.github.io/selectize.js/
@@ -93,7 +131,7 @@ END
 
 - Registration ManageOne doesn't work on Firefox.WTF robin
 
-Dropped is "did I even drop, and I'm not currently signed up".
+Dropped is "did I ever drop, and I'm not currently signed up".
 
 - on the Sign In list, there should not be any Withdrawn people, and the option for Withdrawn should not appear.
 - On the Data Entry page for 10k, anyone who is not "Active" competitor should not appear in the list.

@@ -1,3 +1,6 @@
+# To use this concern:
+# Define a `sortable_object` method which returns the object being sorted.
+# also be sure to use a `before_action` to call `authorize` before this method is called.
 module SortableObject
   # POST /<object>/:id/update_row_order (via AJAX)
   def update_row_order
