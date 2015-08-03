@@ -13,5 +13,10 @@
 %p
   The Event Director will need to assign/randomize the competitor list.
 
+= form_tag(new_event_competition_path(@event), method: :get) do
+  = label_tag :copy_from, "Copy From Another Competition"
+  = select_tag :copy_from, options_from_collection_for_select(Competition.event_order.all, "id", "to_s"), include_blank: true , class: "chosen-select"
+  = submit_tag "Initialize", class: "button tiny"
+
 %fieldset.form__fieldset
   = render 'form'

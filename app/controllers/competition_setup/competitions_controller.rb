@@ -17,6 +17,10 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   # /events/#/competitions/new
   def new
     add_breadcrumb "New Competition"
+    if params[:copy_from]
+      attributes = Competition.find(params[:copy_from]).attributes
+      @competition.assign_attributes(attributes.except("id"))
+    end
   end
 
   # POST /competitions/#/create
