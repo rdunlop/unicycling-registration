@@ -62,6 +62,7 @@ class ExternalResult < ActiveRecord::Base
       competitor: CompetitorFinder.new(competition).find_by_bib_number(raw[0]),
       points: raw[1],
       details: raw[2],
+      status: "active",
       entered_at: DateTime.now,
       entered_by: user)
   end

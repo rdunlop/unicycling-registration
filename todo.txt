@@ -8,7 +8,6 @@ Things that caused the most grief:
 - Import CSV of external Results doesn't work
 - Competitors without Members causes the competitors#show page to 500
 - Track Day Race Officials were unable to adjust lane assignments for heats (unable to add people to competition)
-- Set Sort order causes permissions exception
 - "Withdrawn" competitors cause issues for Last-minute-add and other start-line things.
 - Having registrants choose a wheel size doesn't translate into an age group (under 10 age)
 - Creating Expert Heats of 100m/etc were very manual, and didn't split up by gender.

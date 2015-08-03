@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-def create_competitor(competition, _bib_number, heat, lane)
-  reg = FactoryGirl.create(:registrant, bib_number: 101)
+def create_competitor(competition, bib_number, heat, lane)
+  reg = FactoryGirl.create(:registrant, bib_number: bib_number)
   competitor = FactoryGirl.create(:event_competitor, competition: competition)
   FactoryGirl.create(:member, competitor: competitor, registrant: reg)
   if heat && lane
