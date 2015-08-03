@@ -6,7 +6,7 @@ class PreliminaryExternalResultsController < ApplicationController
   before_action :authorize_res
   before_action :load_external_results, only: [:index, :review, :approve, :display_csv, :import_csv]
 
-  before_action :set_breadcrumbs, only: :index
+  before_action :set_breadcrumbs#, only: :index
 
   # GET /competitions/#/preliminary_external_results
   def index
@@ -67,6 +67,7 @@ class PreliminaryExternalResultsController < ApplicationController
 
   # GET /competitions/:competition_id/preliminary_external_results/review
   def review
+    add_breadcrumb "Review Entered Results"
   end
 
   # POST .../approve
@@ -81,9 +82,9 @@ class PreliminaryExternalResultsController < ApplicationController
     add_breadcrumb "Import CSV"
   end
 
-  # POST /users/#/competitions/#/preliminary_external_results/import_csv
+  # POST /competitions/#/preliminary_external_results/import_csv
   def import_csv
-    importer = ExternalResultImporter.new(@competition, @user)
+    importer = ExternalResultImporter.new(@competition, current_user)
 
     if importer.process_csv(params[:file])
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
@@ -91,7 +92,7 @@ class PreliminaryExternalResultsController < ApplicationController
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
     end
 
-    redirect_to display_csv_competition_preliminary_external_results(@competition)
+    redirect_to display_csv_competition_preliminary_external_results_path(@competition)
   end
 
   private
@@ -101,7 +102,7 @@ class PreliminaryExternalResultsController < ApplicationController
   end
 
   def set_breadcrumbs
-    add_to_competition_breadcrumb(@competition)
+    add_to_competition_breadcrumb(@competition) if @competition
   end
 
   def load_competition
