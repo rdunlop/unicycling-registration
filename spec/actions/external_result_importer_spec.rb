@@ -1,12 +1,13 @@
 require 'spec_helper'
 
-def create_competitor(competition, bib_number)
-  competitor = FactoryGirl.create(:event_competitor, competition: competition)
-  reg = competitor.members.first.registrant
-  reg.update_attribute(:bib_number, bib_number)
-end
 
 describe ExternalResultImporter do
+  def create_competitor(competition, bib_number)
+    competitor = FactoryGirl.create(:event_competitor, competition: competition)
+    reg = competitor.members.first.registrant
+    reg.update_attribute(:bib_number, bib_number)
+  end
+
   let(:admin_user) { FactoryGirl.create(:super_admin_user) }
   let(:competition) { FactoryGirl.create(:ranked_competition) }
   let(:importer) { described_class.new(competition, admin_user) }
