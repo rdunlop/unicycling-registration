@@ -8,6 +8,7 @@
 #  updated_at                    :datetime
 #  use_age_group_places          :boolean          default(FALSE), not null
 #  percentage_based_calculations :boolean          default(FALSE), not null
+#  tie_break_by_firsts           :boolean          default(TRUE), not null
 #
 # Indexes
 #

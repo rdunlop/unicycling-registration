@@ -1,0 +1,19 @@
+%h3 DQ Summary
+
+%table.sortable
+  %thead
+    %tr
+      %th Lane #
+      %th DQ
+      %th Comments
+      %th Entered By
+      %th
+  %tbody
+    - @heat_lane_judge_notes.each do |heat_lane_note|
+      %tr
+        %td= heat_lane_note.lane
+        %td= heat_lane_note.disqualified?
+        %td= heat_lane_note.comments
+        %td= heat_lane_note.entered_by
+        %td
+          = link_to "Merge", merge_competition_heat_lane_judge_note_path(@competition, heat_lane_note), method: :put, class: "button tiny"

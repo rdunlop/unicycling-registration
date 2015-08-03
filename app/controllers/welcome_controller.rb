@@ -34,8 +34,8 @@ class WelcomeController < ApplicationController
 
   def data_entry_menu
     authorize current_user, :view_data_entry_menu?
-    @judges = current_user.judges
-    @director_events = Event.with_role(:director, current_user)
+    @judges = current_user.judges.joins(:competition).merge(Competition.order(scheduled_completion_at: :desc))
+    @director_events = Event.with_role(:director, current_user).order(:name)
   end
 
   private

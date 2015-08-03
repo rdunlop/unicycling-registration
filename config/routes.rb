@@ -58,6 +58,7 @@ Workspace::Application.routes.draw do
 
         get :acl, controller: "permissions"
         post :set_acl, controller: "permissions"
+        get :display_acl, controller: "admin/permissions"
         get :code, controller: "permissions"
         post :use_code, controller: "permissions"
       end
@@ -379,23 +380,15 @@ Workspace::Application.routes.draw do
 
         resources :import_results, only: [:create] do
           collection do
-            get :proof_single
-
             # These 2 don't use @user, move them?
             get :review
             post :approve
-
-            get :review_heat
-            post :approve_heat
-            delete :delete_heat
 
             get  :data_entry
             get :import_csv, as: "display_csv", action: :display_csv
             post :import_csv
             get :import_chip, as: "display_chip", action: :display_chip
             post :import_chip
-            get :import_lif, as: "display_lif", action: :display_lif
-            post :import_lif
             delete :destroy_all
           end
         end
@@ -430,6 +423,7 @@ Workspace::Application.routes.draw do
     ###############################################
 
     resources :competitors, only: [:edit, :update, :destroy] do
+      put :withdraw, on: :member
       post :update_row_order, on: :collection
     end
 
@@ -448,6 +442,7 @@ Workspace::Application.routes.draw do
         post :set_age_group_places
         post :set_places
         get :export_scores
+        get :export_times
         # view scores
         get :result
 
@@ -508,9 +503,21 @@ Workspace::Application.routes.draw do
           get :download_heats_evt
         end
       end
+      resources :heat_review, param: :heat, only: [:index, :show, :destroy] do
+        member do
+          post :approve_heat
+          post :import_lif
+        end
+      end
       resources :distance_attempts, only: [] do
         collection do
           get :list
+        end
+      end
+      resources :heat_lane_results, shallow: true, only: [:edit, :update, :create, :destroy]
+      resources :heat_lane_judge_notes, only: [] do
+        member do
+          put :merge
         end
       end
       resources :external_results, shallow: true, except: [:new, :show]

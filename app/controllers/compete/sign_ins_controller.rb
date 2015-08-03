@@ -4,18 +4,14 @@ class Compete::SignInsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
   before_action :set_parent_breadcrumbs
+  before_action :load_competitors_by_order, only: [:show, :edit]
 
   respond_to :html
 
   # GET /competitions/1/sign_ins
   def show
-    authorize @competition, :show?
+    authorize @competition, :create_preliminary_result?
     add_breadcrumb "Sign-In Sheets"
-    if @competition.start_list_present?
-      @competitors = @competition.competitors.reorder(:wave, :lowest_member_bib_number)
-    else
-      @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
-    end
 
     respond_to do |format|
       format.html
@@ -25,14 +21,13 @@ class Compete::SignInsController < ApplicationController
 
   # GET /competitions/1/sign_ins/edit
   def edit
-    authorize @competition, :modify_result_data?
+    authorize @competition, :create_preliminary_result?
     add_breadcrumb "Enter Sign-In"
-    @competitors = @competition.competitors.reorder(:lowest_member_bib_number)
   end
 
   # PUT /competitions/1/sign_ins
   def update
-    authorize @competition, :modify_result_data?
+    authorize @competition, :create_preliminary_result?
     respond_to do |format|
       if @competition.update_attributes(update_competitors_params)
         flash[:notice] = 'Competitors successfully updated.'
@@ -45,6 +40,15 @@ class Compete::SignInsController < ApplicationController
   end
 
   private
+
+  def load_competitors_by_order
+    competitors = @competition.competitors.where(status: Competitor.sign_in_statuses.values)
+    if @competition.start_list_present?
+      @competitors = competitors.reorder(:wave, :lowest_member_bib_number)
+    else
+      @competitors = competitors.reorder(:lowest_member_bib_number)
+    end
+  end
 
   def load_competition
     @competition = Competition.find(params[:competition_id])

@@ -35,6 +35,6 @@ class LaneAssignment < ActiveRecord::Base
   end
 
   def matching_record
-    @matching_record ||= ImportResult.find_by(competition: competition, bib_number: competitor.first_bib_number)
+    @matching_record ||= HeatLaneJudgeNote.find_by(competition: competition, heat: heat, lane: lane)
   end
 end

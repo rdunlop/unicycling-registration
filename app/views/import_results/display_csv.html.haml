@@ -20,3 +20,5 @@ Please import a Comma-Separated-File file with the following format (for 'Distan
   %br
   = submit_tag "Load CSV to Temp Table", class: "button"
 = render :partial => "imported_time_results"
+
+= link_to "Review Results", review_user_competition_import_results_path(@user, @competition), class: "button"

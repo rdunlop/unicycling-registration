@@ -42,7 +42,7 @@ class RaceScoringClass < BaseScoringClass
   end
 
   def uses_volunteers
-    [:race_official, :start_line_volunteer, :end_line_volunteer]
+    [:data_recording_volunteer, :race_official, :track_data_importer]
   end
 
   def results_path

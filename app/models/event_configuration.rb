@@ -37,7 +37,7 @@
 #  accept_rules                          :boolean          default(FALSE), not null
 #  paypal_mode                           :string(255)      default("disabled")
 #  offline_payment                       :boolean          default(FALSE), not null
-#  enabled_locales                       :string(255)      default("en,fr"), not null
+#  enabled_locales                       :string           default("en,fr"), not null
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -161,7 +161,7 @@ class EventConfiguration < ActiveRecord::Base
 
   # allows creating competitors during lane assignment
   # (only at NAUCC)
-  def can_create_competitors_at_lane_assignment
+  def can_create_competitors_at_lane_assignment?
     usa?
   end
 

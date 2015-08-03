@@ -2,22 +2,29 @@
 
 #notice
 
-.lane_assignment_entry_form
-  = render partial: 'form', locals: { remote: true }
+.row
+  .small-12.medium-6.columns
+    .row
+      .small-12.columns
+        = render partial: 'form', locals: { remote: true }
+    .row
+      .small-12.columns
+        %hr
+        = render "/competitors/add_last_minute_competitor_form", competition: @competition
 
-.lane_assignment_entries
-  %table.sortable.lane_assignments
-    %thead
-      %tr
-        %th Heat
-        %th Lane
-        %th ID
-        %th Competitor
-        %th Age Group
-        %th Gender
-        %th
-        %th
+  .small-12.medium-6.columns
+    %table.sortable.lane_assignments
+      %thead
+        %tr
+          %th Heat
+          %th Lane
+          %th ID
+          %th Competitor
+          %th Age Group
+          %th Gender
+          %th
+          %th
 
-    %tbody
-      - @lane_assignments.each do |lane_assignment|
-        = render partial: "lane_assignment", object: lane_assignment
+      %tbody
+        - @lane_assignments.each do |lane_assignment|
+          = render partial: "lane_assignment", object: lane_assignment

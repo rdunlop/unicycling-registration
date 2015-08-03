@@ -186,9 +186,9 @@ class AwardLabelsController < ApplicationController
         "rows" => 5,
         "top_margin" => 36,      # 0.5 inch
         "bottom_margin" => 36,   # 0.5 inch
-        "column_gutter" => 3.6, # 0.05 inch
-        "left_margin" => 34.2,  # 0.475 inch
-        "right_margin" => 34.2,  # 0.475 inch
+        "column_gutter" => 18, # 0.05 inch + 0.2 inch padding
+        "left_margin" => 41.4,  # 0.475 inch + 0.1 inch padding
+        "right_margin" => 41.4,  # 0.475 inch + 0.1 inch padding
       },
     }
     # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,

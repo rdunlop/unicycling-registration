@@ -24,6 +24,7 @@
 #  penalty_seconds               :integer
 #  locked_at                     :datetime
 #  published_at                  :datetime
+#  sign_in_list_enabled          :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -34,6 +35,8 @@
 class Competition < ActiveRecord::Base
   include CachedModel
   include Slugify
+
+  resourcify
 
   belongs_to :age_group_type, inverse_of: :competitions
   belongs_to :event, inverse_of: :competitions
@@ -53,6 +56,8 @@ class Competition < ActiveRecord::Base
   has_many :published_age_group_entries, dependent: :destroy
   has_many :wave_times, inverse_of: :competition, dependent: :destroy
   has_many :competition_results, dependent: :destroy
+  has_many :heat_lane_judge_notes, dependent: :destroy, inverse_of: :competition
+  has_many :heat_lane_results, dependent: :destroy, inverse_of: :competition
   belongs_to :combined_competition
 
   accepts_nested_attributes_for :competition_sources, reject_if: :no_source_selected, allow_destroy: true
@@ -177,6 +182,11 @@ class Competition < ActiveRecord::Base
   # should this competition have a start list?
   def start_list?
     uses_lane_assignments? || compete_in_order? || start_data_type == "Mass Start"
+  end
+
+  # should this competition display a sign_in list
+  def sign_in_list?
+    start_data_type == "Mass Start" || sign_in_list_enabled?
   end
 
   # Public: Is there any data to put on a start list?
@@ -419,7 +429,7 @@ class Competition < ActiveRecord::Base
     when "Street"
       @ssc ||= StreetScoringClass.new(self)
     when "Street Final"
-      @ssc ||= StreetScoringClass.new(self, false)
+      @ssc ||= StreetScoringClass.new(self, false) # this interacts with the judge_score_calculator
 
     when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"
       @dsc ||= DistanceScoringClass.new(self)
@@ -480,10 +490,23 @@ class Competition < ActiveRecord::Base
 
   def judge_score_calculator
     case event_class
-    when "Freestyle", "Street", "Flatland"
-      GenericPlacingPointsCalculator.new
+    when "Freestyle"
+      GenericPlacingPointsCalculator.new(
+        lower_is_better: false,
+        # For Freestyle, the judges enter higher scores for better riders
+        )
+    when "Street", "Flatland"
+      GenericPlacingPointsCalculator.new(
+        lower_is_better: scoring_helper.lower_is_better
+        )
     when "Street Final"
-      GenericPlacingPointsCalculator.new(points_per_rank: [10, 7, 5, 3, 2, 1])
+      GenericPlacingPointsCalculator.new(
+        lower_is_better: true,
+        # We know that Street Finals Are ALWAYS lower is better to assign the points
+        # But, we want to leave StreetScoringClass as higher_is_better because
+        # that way the higher resulting points win.
+        points_per_rank: [10, 7, 5, 3, 2, 1],
+        )
     when "Artistic Freestyle IUF 2015"
       Freestyle_2015_JudgePointsCalculator.new
     end

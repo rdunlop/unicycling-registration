@@ -11,9 +11,9 @@ class DataEntryVolunteersController < ApplicationController
 
   def index
     add_to_competition_breadcrumb(@competition)
-    add_breadcrumb "Manage Data Entry Volunteers", competition_data_entry_volunteers_path(@competition)
+    add_breadcrumb "Manage Additional UDA Access", competition_data_entry_volunteers_path(@competition)
 
-    @all_data_entry_volunteers = User.with_role(:data_entry_volunteer).order(:email)
+    @all_data_entry_volunteers = User.data_entry_volunteer
 
     @events = Event.all
   end
@@ -23,7 +23,7 @@ class DataEntryVolunteersController < ApplicationController
   def create
     @data_entry_volunteer = DataEntryVolunteer.new(params[:data_entry_volunteer])
     if @data_entry_volunteer.save
-      flash[:notice] = 'Data Entry Volunteer was successfully created.'
+      flash[:notice] = 'Additional UDA Access was successfully created.'
     else
       index
     end

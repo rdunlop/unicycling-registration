@@ -41,4 +41,4 @@
         %td= competitor.status
 %hr
 
-= link_to "Approve these results", approve_competition_preliminary_external_results_path(@competition), method: :post, data: { confirm: "Are you sure?" }
+= link_to "Approve these results", approve_competition_preliminary_external_results_path(@competition), method: :post, data: { confirm: "Are you sure?" }, class: "button"

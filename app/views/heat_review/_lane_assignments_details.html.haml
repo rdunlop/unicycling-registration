@@ -1,0 +1,18 @@
+%h3 Lane Assignments
+%table.sortable
+  %thead
+    %tr
+      %th Lane #
+      %th ID
+      %th Competitor
+  %tbody
+    - @lane_assignments.each do |lane_assignment|
+      %tr
+        %td= lane_assignment.lane
+        %td= lane_assignment.competitor.bib_number
+        %td= lane_assignment.competitor.to_s
+
+%h3 Age Groups in Heat #{@heat}
+- @lane_assignments.map(&:competitor).map(&:age_group_entry_description).uniq.each do |age_group|
+  = age_group
+  %br

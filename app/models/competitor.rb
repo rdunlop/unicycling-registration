@@ -55,7 +55,20 @@ class Competitor < ActiveRecord::Base
   validates_associated :members
   validate :must_have_3_members_for_custom_name
 
-  enum status: [:active, :not_qualified, :dns, :withdrawn]
+  enum status: [:active, :not_qualified, :dns, :withdrawn, :dnf]
+  after_save :touch_members
+
+  def touch_members
+    members.each do |member|
+      member.no_touch_cascade = true
+      member.save
+    end
+  end
+
+  # statuses for use on the sign-ins page
+  def self.sign_in_statuses
+    statuses.reject{ |stat| stat == "withdrawn"}
+  end
 
   # not all competitor types require a position
   #:numericality => {:only_integer => true, :greater_than => 0}
@@ -104,6 +117,25 @@ class Competitor < ActiveRecord::Base
     end
   end
 
+  def warn?
+    competition_registrants = competition.signed_up_registrants
+
+    # if status != "active" && status != "withdrawn"
+    #   error += "Competitor is #{status}<br>"
+    # end
+
+    members.each do |member|
+      # if you are withdrawn, but still signed up, you should be warned
+      if status == "withdrawn" && !member.currently_dropped?
+        return true
+      elsif !competition_registrants.include?(member.registrant)
+        return true
+      end
+    end
+
+    false
+  end
+
   def member_warnings
     competition_registrants = competition.signed_up_registrants
     error = ""
@@ -112,7 +144,7 @@ class Competitor < ActiveRecord::Base
     end
 
     members.each do |member|
-      if member.dropped_from_registration?
+      if member.currently_dropped?
         error += "Registrant #{member} has dropped this event from their registration<br>"
       elsif !competition_registrants.include?(member.registrant)
         error += "Registrant #{member} is not in the default list for this competition<br>"

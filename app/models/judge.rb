@@ -52,8 +52,8 @@ class Judge < ActiveRecord::Base
   end
 
   def num_scored_competitors
-    if scores.count > 0
-      scores.count
+    if active_scores.count > 0
+      active_scores.count
     else
       distance_attempts.count("DISTINCT competitor_id")
     end
@@ -73,15 +73,19 @@ class Judge < ActiveRecord::Base
 
   def score_totals
     Rails.cache.fetch("/judge/#{id}-#{updated_at}/score_totals") do
-      scores.map(&:total).compact
+      active_scores.map(&:total).compact
     end
   end
 
   private
 
+  def active_scores
+    scores.includes(:competitor).merge(Competitor.active)
+  end
+
   # Note, this appears to be duplicated in ability.rb
   def check_for_scores
-    if scores.count > 0
+    if active_scores.count > 0
       errors[:base] << "cannot delete judge containing a score"
       return false
     end

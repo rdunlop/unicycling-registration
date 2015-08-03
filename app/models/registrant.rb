@@ -242,7 +242,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def matching_competition_in_event(event)
-    competitors.find{ |competitor| competitor.event == event }.try(:competition)
+    competitors.active.find{ |competitor| competitor.event == event }.try(:competition)
   end
 
   def create_associated_required_expense_items
@@ -303,7 +303,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def wheel_size_id_for_event(event)
-    competition_wheel_sizes.select{ |cws| cws.event_id == event.id }.try(:wheel_size_id) || wheel_size_id
+    competition_wheel_sizes.select{ |cws| cws.event_id == event.id }.first.try(:wheel_size_id) || wheel_size_id
   end
 
   def set_default_wheel_size
@@ -637,6 +637,7 @@ class Registrant < ActiveRecord::Base
   #       team_name: nil,
   #       additional_details: nil,
   #       confirmed: false,
+  #       status: nil, # always 'nil' when !confirmed
   #     },
   #     "Pairs" =>
   #     {
@@ -644,6 +645,7 @@ class Registrant < ActiveRecord::Base
   #       team_name: nil,
   #       additional_details: "Partner: Scott W",
   #       confirmed: true,
+  #       status: "active", # possible values: ["active", "withdrawn", "dns", "not_qualified"]
   #     },
   #   },
   #   "Track" => {
@@ -653,6 +655,7 @@ class Registrant < ActiveRecord::Base
   #       team_name: nil,
   #       additional_details: nil,
   #       confirmed: false,
+  #       status: nil,
   #     }
   #   },
   # }
@@ -665,6 +668,7 @@ class Registrant < ActiveRecord::Base
       event_hash[:team_name] = registrant_sign_up.event_category_name
       event_hash[:additional_details] = describe_additional_selection(registrant_sign_up.event)
       event_hash[:confirmed] = false
+      event_hash[:status] = nil
     end
 
     competitors.includes(competition: [event: [category: [:translations]]]).each do |competitor|
@@ -674,6 +678,7 @@ class Registrant < ActiveRecord::Base
       event_hash[:team_name] = competitor.team_name
       event_hash[:additional_details] = nil
       event_hash[:confirmed] = true
+      event_hash[:status] = competitor.status
     end
 
     results

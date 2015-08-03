@@ -13,5 +13,8 @@
         %td
           = link_to "Preview", preview_competition_published_age_group_entry_path(@competition, entry)
           = link_to "(pdf)", preview_competition_published_age_group_entry_path(@competition, entry, format: :pdf)
-        %td= link_to "Publish", publish_age_group_entry_competition_path(@competition, age_group_entry: entry.id), method: :post, data: { confirm: "are you sure?" }
-        %td= published_entry.try(:published_formatted)
+        %td= link_to "Publish", publish_age_group_entry_competition_path(@competition, age_group_entry: entry.id), method: :post, data: { confirm: "are you sure?" }, class: "button tiny"
+        %td
+          - if published_entry
+            = link_to published_entry, competition_published_age_group_entry_path(@competition, published_entry), title: "published at #{published_entry.published_formatted}"
+            = link_to "(pdf)", competition_published_age_group_entry_path(@competition, published_entry,  format: :pdf), title: "published at #{published_entry.published_formatted}"

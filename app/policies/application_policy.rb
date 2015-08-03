@@ -84,6 +84,18 @@ class ApplicationPolicy
     user.has_role?(:data_entry_volunteer)
   end
 
+  def data_recording_volunteer?(competition = :any)
+    user.has_role?(:data_recording_volunteer, competition)
+  end
+
+  def race_official?(competition = :any)
+    user.has_role?(:race_official, competition)
+  end
+
+  def track_data_importer?(competition)
+    user.has_role?(:track_data_importer, competition)
+  end
+
   def membership_admin?
     user.has_role?(:membership_admin)
   end
@@ -116,8 +128,8 @@ class ApplicationPolicy
     user.has_role?(:competition_admin)
   end
 
-  def director?(event = nil)
-    user.has_role?(:director, event || :any)
+  def director?(event = :any)
+    user.has_role?(:director, event)
   end
 
   def super_admin?

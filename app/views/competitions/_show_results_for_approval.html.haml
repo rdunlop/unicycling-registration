@@ -25,7 +25,7 @@
   = link_to 'Lock', lock_competition_path(@competition), :method => :post, data: { confirm: "No more results can be changed. This cannot be undone by a Director. Continue?" }, class: "action_button"
 - if @competition.locked? && policy(@competition).unlock?
   = link_to 'Unlock', unlock_competition_path(@competition), :method => :delete, data: { confirm: "Are you sure?" }
-- if policy(@competition).publish?
+- if policy(@competition).publish_age_group_entry?
 
   - if @competition.has_age_group_entry_results?
     %h2 Preliminary Age Group Entry Results
@@ -45,3 +45,13 @@
   %h4 Additional Results
   = link_to "Add Additional Results PDFs", competition_competition_results_path(@competition)
   %p There are currently #{@competition.competition_results.additional.count} Additional Results attached to this event
+
+- if policy(@competition).award?
+  %h4 Set as Awarded
+  = link_to "Mark as Awarded", award_competition_path(@competition), method: :post, data: { confirm: "are you sure" }, class: "button small"
+  %p This will allow registrants to see their results on the per-registrant results page
+
+- if policy(@competition).unaward?
+  %h4 Set as Un-Awarded
+  = link_to "Mark as UnAwarded", award_competition_path(@competition), method: :delete, data: { confirm: "are you sure" }, class: "button small"
+  %p This will remove the results from view.

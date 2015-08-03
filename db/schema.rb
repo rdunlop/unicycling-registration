@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722022045) do
+ActiveRecord::Schema.define(version: 20150801011800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20150722022045) do
     t.datetime "updated_at"
     t.boolean  "use_age_group_places",                      default: false, null: false
     t.boolean  "percentage_based_calculations",             default: false, null: false
+    t.boolean  "tie_break_by_firsts",                       default: true,  null: false
   end
 
   add_index "combined_competitions", ["name"], name: "index_combined_competitions_on_name", unique: true, using: :btree
@@ -195,6 +196,7 @@ ActiveRecord::Schema.define(version: 20150722022045) do
     t.integer  "penalty_seconds"
     t.datetime "locked_at"
     t.datetime "published_at"
+    t.boolean  "sign_in_list_enabled",                      default: false, null: false
   end
 
   add_index "competitions", ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true, using: :btree
@@ -370,7 +372,7 @@ ActiveRecord::Schema.define(version: 20150722022045) do
     t.boolean  "accept_rules",                                      default: false,      null: false
     t.string   "paypal_mode",                           limit: 255, default: "disabled"
     t.boolean  "offline_payment",                                   default: false,      null: false
-    t.string   "enabled_locales",                       limit: 255, default: "en,fr",    null: false
+    t.string   "enabled_locales",                                   default: "en,fr",    null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -454,6 +456,35 @@ ActiveRecord::Schema.define(version: 20150722022045) do
   end
 
   add_index "external_results", ["competitor_id"], name: "index_external_results_on_competitor_id", unique: true, using: :btree
+
+  create_table "heat_lane_judge_notes", force: :cascade do |t|
+    t.integer  "competition_id", null: false
+    t.integer  "heat",           null: false
+    t.integer  "lane",           null: false
+    t.string   "status",         null: false
+    t.string   "comments"
+    t.datetime "entered_at",     null: false
+    t.integer  "entered_by_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "heat_lane_judge_notes", ["competition_id"], name: "index_heat_lane_judge_notes_on_competition_id", using: :btree
+
+  create_table "heat_lane_results", force: :cascade do |t|
+    t.integer  "competition_id", null: false
+    t.integer  "heat",           null: false
+    t.integer  "lane",           null: false
+    t.string   "status",         null: false
+    t.integer  "minutes",        null: false
+    t.integer  "seconds",        null: false
+    t.integer  "thousands",      null: false
+    t.string   "raw_data"
+    t.datetime "entered_at",     null: false
+    t.integer  "entered_by_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "import_results", force: :cascade do |t|
     t.integer  "user_id"
@@ -882,6 +913,7 @@ ActiveRecord::Schema.define(version: 20150722022045) do
     t.datetime "entered_at",                                      null: false
     t.integer  "entered_by_id",                                   null: false
     t.boolean  "preliminary"
+    t.integer  "heat_lane_result_id"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_competitor_id", using: :btree

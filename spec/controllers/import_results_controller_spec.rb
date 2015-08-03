@@ -126,8 +126,9 @@ describe ImportResultsController do
       reg = FactoryGirl.create(:competitor)
       @config = FactoryGirl.create(:event_configuration, :with_usa)
       import = FactoryGirl.create(:import_result, competition: competition, bib_number: reg.bib_number)
+      request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
       post :approve, user_id: import.user, competition_id: competition.id
-      expect(response).to redirect_to(result_competition_path(competition))
+      expect(response).to redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
     end
   end
 

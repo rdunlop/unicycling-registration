@@ -33,6 +33,7 @@ class ExternalResult < ActiveRecord::Base
   belongs_to :entered_by, class_name: 'User', foreign_key: :entered_by_id
 
   validates :points, presence: true
+  before_create :set_details_if_empty
 
   def self.cache_set_field
     :competitor_id
@@ -57,7 +58,7 @@ class ExternalResult < ActiveRecord::Base
 
   # from CSV to import_result
   def self.build_and_save_imported_result(raw, _raw_data, user, competition)
-    ExternalResult.preliminary.new(
+    ExternalResult.preliminary.create(
       competitor: CompetitorFinder.new(competition).find_by_bib_number(raw[0]),
       points: raw[1],
       details: raw[2],
@@ -68,4 +69,11 @@ class ExternalResult < ActiveRecord::Base
   def result
     points
   end
+
+  private
+
+  def set_details_if_empty
+    self.details = "#{points} pts" unless details.present?
+  end
+
 end

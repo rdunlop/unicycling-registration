@@ -18,6 +18,7 @@
 #  entered_at          :datetime         not null
 #  entered_by_id       :integer          not null
 #  preliminary         :boolean
+#  heat_lane_result_id :integer
 #
 # Indexes
 #
@@ -43,6 +44,7 @@ class TimeResult < ActiveRecord::Base
   validates :status, inclusion: { in: TimeResult.status_values, allow_nil: true }
 
   belongs_to :entered_by, class_name: 'User', foreign_key: :entered_by_id
+  belongs_to :heat_lane_result, inverse_of: :time_result
 
   validates :is_start_time, inclusion: { in: [true, false] } # because it's a boolean
 

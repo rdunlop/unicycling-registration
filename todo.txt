@@ -1,9 +1,117 @@
-- Overall champion result should be 'pts', and should be rounded?
-- Move the "show confirmed events" feature into competition-admin-space?
-- Strikethrough any competitors who are "DNS"/etc.
+- Import CSV  from External fails poorly when a registrant doesn't exist. It should show a nicer error message.
+- The Competition#New form date-choosing field doesn't appear.
+- Add report name to the header or footer of all PDFs
+- Add page numbers to all PDFs
 
+- Overall Calculations http://naucc2015.unicycling-software.com/en/combined_competitions is sorted randomly
+- Display Competitors doesn't work if there are no members in a competitor. (how did that happen?)
+- Fix the sort-action causing "no authorization performed" issue.
+- Add ability to easily set the number of laps (in bulk) for a competition (like criterium)
+- Fix the sortable data table "No results" when adding to the table ajaxy
+- Start Line judge (Amanada) should be able to add new lane assignments/adjust them too.
+- Can't use "Last minute add" if the registrant is a "withdrawn" competitor (100m)
+- Improve the "Expert Heat" display:
+ - Needs to "Calculate All Results"
+ - Needs to "Display Candidates"
+ -
+- Use is able to sign up for an event with Event Category but without checking the "Signup" checkbox?
+- Street Scoring should honor DNS/Active/etc.
+
+- How are people able to upload music after the music closed date?
+- How are they able to upload a wmv file?
+- Make logging in a judge easier (easier than having to create a new user, etc etc.)
+- Make "Hockey" data entry not automatically add "pts" to the external results preliminaries. (but other events DO do this (like trials))
+
+- Create a role which is able to perform the race data heat/lane actions
+- Don't have the import routine automatically move to the next heat after import
+- Have an easy way to consolidate judge results and imported results into real results.
+- Why is the LIF importing hundreds instead of thousands?
+- Test the LIF import from new data files from the timer
+- Move logic out of the ImportResultsController into another controller
+- Include Judge Notes in resulting time-Results record
+- Allow Publishing of Age Group data easily
+- MINOR: Allow DNS
+
+- Rename "Can create competitors at lane assignment" to something more clear to its use.
+- Data Entry person should be able to DNS a competitor.
+- How to enter wheelsize/crank length on Time Trial (one-data-per-line event)
+- Add a report which allows comparing whether a registrant has results in 2 different disciplines (like Advanced + Beginner Trials)
+- Director of event should be able to "Set Places"
+- make Preliminary external results AJAX
+- trials should have a sign-in list.
+- Double check to see whether UNICON2014 Street will work properly because the higher-poinst are better?
+
+res = {}
+Registrant.all.each do |registrant|
+  comps = registrant.competitions.pluck(:id).sort
+  res[registrant.bib_number] = comps - comps.uniq
+end
+
+res = {}
+Registrant.all.each do |registrant|
+  comps = registrant.competitors.pluck(:competition_id).sort
+  res[registrant.bib_number] = comps - comps.uniq
+end
+NEITHER SHOW ANY RESULTS
+
+- Mark all "dropped" (but not signed-up-again) as "Withdraw"
+to_drop = []
+Competitor.all.each do |comp|
+  if comp.members.size == 1
+    member = comp.members.first
+    if member.dropped_from_registration? && comp.active?
+      # to_drop << "I just withdrew #{comp} from #{comp.competition}"
+      comp.update_attributes(status: "withdrawn")
+    end
+  end
+end
+to_drop
+
+- Deleting a registrant should "Withdraw" them from all competitions that they are competitors for.
+- TwoAttemptEntry and Import Result pages should show the competitors who have results on the page, so that importers don't get confused once they have "Approved" the results during Review.
+- Data Entry Volunteers should be tested, to ensure that they can enter/approve the data necessary
+- Director should be tested to ensure he can see the data ,and lock the competition, and publish? the competition
+END
+
+- Make imports only Director-level possible
+- Wave time entry is direcor only
+- Volunteer can enter Sign In lists
+- Import Wave assignments
+
+- disable bullets from bulletted lists
+- Accept these results redirects to a page which is "not authorized"
+- Import results->import CSV styling needs to be updated
+- Import results ->delete all in temp table new styling, and flash message on success
+
+- why didn't the cache bust when I changed the admin_set_two?
+- Allow chosen to work on mobile devices
+- fix small screen view of competition#show
+- Fix chosen on mobile devices? look at http://brianreavis.github.io/selectize.js/
+
+- If reg is signed up for an event currently, they should not show the "Dropped" text
+- Withdrawn but not dropped, you should be pink, with additional text
+
+- Registration ManageOne doesn't work on Firefox.WTF robin
+
+Dropped is "did I even drop, and I'm not currently signed up".
+
+- on the Sign In list, there should not be any Withdrawn people, and the option for Withdrawn should not appear.
+- On the Data Entry page for 10k, anyone who is not "Active" competitor should not appear in the list.
+-
+- Make the Competitors#Index page not "Delete" but "withdraw", and make this ajax
+- If the competitor is withdrawn and dropped, the text need not be red.
+- Make the Street results preview page sortable on the final results table.
+- If I withdrew, what do I do on the paper?
+
+- Add indication next to "important dates" part of whether the date has passed (perhps have a countdown of the time remaining)
+- Caching is not clearing on the registrant#summary page if the competitor's status is updated.
+
+- Overall champion result should be 'pts', and should be rounded?
+
+- Move the "show confirmed events" feature into competition-admin-space?
 - Allow Payment Admin to see the "Expenses" screen of a registrant, and add/remove elements to their Payments page
 - Fix caching on the Payments#summary page, since it doesn't update the "Unpaid" column properly when people add/remove RegistrantExpenseItems.
+- Need a way to remove Data Entry Volunteer-ness?
 
 - Better handle invalid step problem by redirecting user elsewhere?
  (causes exception right now)

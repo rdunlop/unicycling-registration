@@ -25,6 +25,16 @@ describe CompetitionPolicy do
     describe "as data_entry volunteer" do
       let(:user) { FactoryGirl.create(:data_entry_volunteer_user) }
 
+      it "is not accessible" do
+        expect(subject).not_to permit(user, competition)
+      end
+    end
+
+    describe "as a director" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        user.add_role(:director, competition.event)
+      end
       it "is accessible" do
         expect(subject).to permit(user, competition)
       end

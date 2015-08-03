@@ -16,7 +16,7 @@ class CompetitionResultsController < ApplicationController
 
   # POST /competitions/#/competition_results
   def create
-    authorize @competition, :modify_result_data?
+    authorize @competition, :add_additional_results?
     @competition_result = @competition.competition_results.build
     @competition_result.results_file = params[:results_file]
     @competition_result.name = params[:custom_name]
@@ -39,7 +39,7 @@ class CompetitionResultsController < ApplicationController
 
   # DELETE /competitions/#/competition_results/1
   def destroy
-    authorize @competition, :modify_result_data?
+    authorize @competition, :add_additional_results?
     @competition_result = CompetitionResult.find(params[:id])
     @competition_result.destroy
 

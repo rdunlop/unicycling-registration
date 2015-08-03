@@ -1,0 +1,6 @@
+%h1 Track importer heat index
+
+%p Choose which heat:
+%ul
+  - 1.upto(@max_heat) do |heat|
+    %li= link_to "Heat #{heat}", competition_heat_review_path(@competition, heat)

@@ -1,0 +1,23 @@
+%h3 E-Timer Imported Details
+%table.sortable
+  %thead
+    %tr
+      %th Lane #
+      %th Raw Data
+      %th Full Time
+      %th DQ
+      %th Entered By
+      %th Entered At
+      %th
+      %th
+  %tbody
+    - @heat_lane_results.each do |heat_lane_result|
+      %tr
+        %td= heat_lane_result.lane
+        %td= heat_lane_result.raw_data
+        %td= heat_lane_result.full_time
+        %td= heat_lane_result.disqualified? ? "DQ" : ""
+        %td= heat_lane_result.entered_by
+        %td= heat_lane_result.entered_at
+        %td= link_to 'Edit', edit_heat_lane_result_path(heat_lane_result)
+        %td= link_to 'Delete', heat_lane_result, method: :delete, data: { confirm: 'Are you sure?' }

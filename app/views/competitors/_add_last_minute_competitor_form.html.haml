@@ -1,4 +1,4 @@
-- if @config.usa_membership_config?
+- if @config.can_create_competitors_at_lane_assignment?
   .add_competitor
     %h3 Add Last-Minute Competitor
     - competitor = Competitor.new
@@ -6,4 +6,4 @@
     = simple_form_for(competitor, url: competition_competitors_path(competition), method: :post, remote: true) do |f|
       = f.fields_for :members do |m|
         = non_signed_up_registrant_select_box(m, competition)
-      = f.button :submit, class: "multiclick"
+      = f.button :submit, class: "multiclick tiny"

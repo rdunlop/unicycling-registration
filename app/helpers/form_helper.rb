@@ -15,15 +15,11 @@ module FormHelper
   end
 
   def eligible_registrants(competition)
-    if @config.usa_membership_config?
+    if @config.can_create_competitors_at_lane_assignment?
       Registrant.active.competitor
     else
       competition.registrants.reorder(:bib_number)
     end
-  end
-
-  def registrant_id_select_box(form, competition)
-    form.select :registrant_id, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.id] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
   end
 
   # The form element which is used to enter data
@@ -39,8 +35,8 @@ module FormHelper
     form.select(:registrant_id, registrants.map{ |reg| [reg.with_id_to_s, reg.id]}, {include_blank: true}, {class: 'chosen-select'})
   end
 
-  def no_form_competitor_select_box(competition)
-    select_tag :competitor_id, options_from_collection_for_select(competition.competitors.active, "id", "to_s_with_id"), include_blank: true, class: "chosen-select js--autoFocus"
+  def no_form_competitor_select_box(competition, options = {})
+    select_tag :competitor_id, options_from_collection_for_select(competition.competitors.active, "id", "to_s_with_id"), include_blank: true, class: "chosen-select js--autoFocus #{options[:class]}"
   end
 
   def all_registrant_competitors(form)

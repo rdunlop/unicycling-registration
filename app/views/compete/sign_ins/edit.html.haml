@@ -28,7 +28,7 @@
             %td= comp_f.object.detailed_name
             %td= comp_f.object.age
             %td= comp_f.object.gender
-            %td= comp_f.select :status, Competitor.statuses.keys
+            %td= comp_f.select :status, Competitor.sign_in_statuses.keys
             %Th= comp_f.number_field :wave, class: "sign_in_heat"
             %td= comp_f.check_box :geared
             %td= comp_f.number_field :riding_wheel_size, class: "sign_in_wheel_size"

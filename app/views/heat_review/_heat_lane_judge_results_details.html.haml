@@ -1,0 +1,22 @@
+%h3 DQ Details
+
+%table.sortable
+  %thead
+    %tr
+      %th Lane #
+      %th ID
+      %th Competitor
+      %th DQ
+      %th Comments
+      %th Entered By
+      %th Entered At
+  %tbody
+    - @heat_lane_judge_notes.each do |heat_lane_note|
+      %tr
+        %td= heat_lane_note.lane
+        %td= heat_lane_note.bib_number
+        %td= heat_lane_note.competitor_name
+        %td= heat_lane_note.disqualified?
+        %td= heat_lane_note.comments
+        %td= heat_lane_note.entered_by
+        %td= heat_lane_note.entered_at

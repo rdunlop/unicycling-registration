@@ -64,6 +64,10 @@ en:
           Selecting this checkbox will cause Expert Awards to be created, separately from age-group results
           If this competition is ONLY experts, then this checkbox is not required, as they will be placed in a single age group/result.
           You MUST Also have an Age Group specified
+        sign_in_list_enabled: |
+          The Sign in form is enabled automatically for some events (like Track). Use this option
+          if you want to enter crank-length, and other details for an event which doesn't have sign-in
+          forms by default.
       event_choice:
         tooltip: This will be presented when the user hovers over the label
         optional: Allows the user to choose not to enter data in this field
@@ -93,7 +97,9 @@ en:
         music_submission_end_date: The last date at which music submissions will be allowed
         event_sign_up_closed_date: After this date, ONLY administrators can add events to registrations. (though they can still remove them)
         start_date: Registrant Ages are calculated based on this date
-        usa: This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed
+        usa: |
+          This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed.
+          It also allows last-minute sign-up of competitors (by data-entry people)
         iuf: Enabling this allows IUF membership questions.
         display_confirmed_events: Enabling this displays the confirmed events/unconfirmed events on the Registrant-summary page.
         test_mode: Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.

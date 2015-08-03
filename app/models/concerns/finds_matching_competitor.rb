@@ -9,10 +9,19 @@ module FindsMatchingCompetitor
   end
 
   def matching_competitor
-    @matching_competitor ||= matching_registrant.competitors.find_by(competition: competition) if matching_registrant
+    @matching_competitor ||= matching_registrant.competitors.active.find_by(competition: competition) if matching_registrant
   end
 
   def competitor_exists?
     matching_competitor.present?
   end
+
+  def competitor_name
+    matching_registrant
+  end
+
+  def competitor_has_results?
+    matching_competitor.has_result? if competitor_exists?
+  end
+
 end

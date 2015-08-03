@@ -1,0 +1,52 @@
+- max_assigned_lane = @lane_assignments.maximum(:lane) || 0
+- max_import_lane = @heat_lane_results.maximum(:lane) || 0
+- max_dq_lane = @heat_lane_judge_notes.maximum(:lane) || 0
+
+- max_lane = [max_assigned_lane, max_import_lane, max_dq_lane].max
+
+%h3 Judging Summary
+%table.sortable.import_results.js--shouldNotMatchSet
+  %thead
+    %tr
+      %th
+      %th{ colspan: 2 } Lane Assignments
+      %th{ colspan: 2 } Entered Results
+      %th Warnings
+      %th{ colspan: 1 } Judge Notes
+    %tr
+      %th Lane #
+      %th ID
+      %th Competitor
+      %th Time
+      %th Disqualified
+      %th
+      %th
+  %tbody
+    - 1.upto(max_lane) do |lane_number|
+      - matching_lane_assignment = @lane_assignments.find_by(lane: lane_number)
+      - matching_import_result = @heat_lane_results.find_by(lane: lane_number)
+      - judges_notes = @heat_lane_judge_notes.where(lane: lane_number)
+      %tr
+        %td= lane_number
+        - if matching_lane_assignment.present?
+          %td= matching_lane_assignment.competitor.bib_number
+          %td= matching_lane_assignment.competitor.to_s
+        - else
+          %td.missing_data
+          %td.missing_data
+
+        - if matching_import_result.present?
+          %td= matching_import_result.full_time
+          %td= matching_import_result.disqualified? ? "DQ" : ""
+          %td.js--highlightIfNotBlank= matching_import_result.competitor_has_results? ? "WARN: Competitor already has result" : ""
+        - else
+          %td.missing_data
+          %td.missing_data
+          %td
+        - if judges_notes.any?
+          %td
+            - judges_notes.each do |note|
+              = note
+              %br
+        - else
+          %td

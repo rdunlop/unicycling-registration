@@ -51,14 +51,6 @@ class ImportResult < ActiveRecord::Base
 
   scope :entered_order, -> { reorder(:id) }
 
-  def competitor_name
-    matching_registrant
-  end
-
-  def competitor_has_results?
-    matching_competitor.has_result? if competitor_exists?
-  end
-
   def disqualified?
     status == "DQ"
   end
@@ -78,7 +70,7 @@ class ImportResult < ActiveRecord::Base
         target_competition = matching_competition
       end
     end
-    if competitor.nil? && EventConfiguration.singleton.can_create_competitors_at_lane_assignment
+    if competitor.nil? && EventConfiguration.singleton.can_create_competitors_at_lane_assignment?
       # still no competitor, create one in the current event
       registrant = matching_registrant
       target_competition.create_competitor_from_registrants([registrant], nil)

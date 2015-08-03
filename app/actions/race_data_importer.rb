@@ -16,27 +16,23 @@ class RaceDataImporter
     self.errors = nil
     raw_data.shift # drop header row
     begin
-      ImportResult.transaction do
+      HeatLaneResult.transaction do
         raw_data.each do |raw|
           lif_hash = upload.convert_lif_to_hash(raw)
           lane = lif_hash[:lane]
-          id = get_id_from_lane_assignment(@competition, heat, lane)
 
-          if id.nil?
-            add_error "Unable to find Lane Assignment for heat #{heat} lane #{lane}"
-            id = 0
-          end
-
-          result = @user.import_results.build
-          result.heat = heat
-          result.lane = lane
-          result.raw_data = upload.convert_array_to_string(raw)
-          result.competition = @competition
-          result.bib_number = id
-          result.minutes = lif_hash[:minutes]
-          result.seconds = lif_hash[:seconds]
-          result.thousands = lif_hash[:thousands]
-          result.status = "DQ" if  lif_hash[:disqualified]
+          result = HeatLaneResult.new(
+            entered_by: @user,
+            entered_at: DateTime.now,
+            heat: heat,
+            lane: lane,
+            raw_data: raw,
+            competition: @competition,
+            minutes: lif_hash[:minutes],
+            seconds: lif_hash[:seconds],
+            thousands: lif_hash[:thousands],
+            status: (lif_hash[:disqualified] ? "DQ" : "active"),
+          )
           if result.save!
             self.num_rows_processed += 1
           end
@@ -130,13 +126,4 @@ class RaceDataImporter
     end
   end
 
-  def get_id_from_lane_assignment(comp, heat, lane)
-    la = LaneAssignment.find_by(competition: comp, heat: heat, lane: lane)
-    if la.nil?
-      id = nil
-    else
-      id = la.competitor.first_bib_number
-    end
-    id
-  end
 end

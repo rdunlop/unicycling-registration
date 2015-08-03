@@ -4,7 +4,7 @@
     .small-6.columns.text-right
       = f.label :registrant_id, "Competitor", class: "distance_label"
     .small-6.columns
-      = competitor_select_box(f, @competition, id: "competitors")
+      = competitor_select_box(f, @competition, id: "competitors", class: "js--competitors")
   .row
     .small-6.columns.text-right
       = f.label :distance, class: "distance_label"

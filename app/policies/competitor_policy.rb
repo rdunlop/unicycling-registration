@@ -1,6 +1,6 @@
 class CompetitorPolicy < ApplicationPolicy
   def index?
-    data_entry_volunteer? || director?(record.competition.event) || competition_admin? || super_admin?
+    director?(record.competition.event) || competition_admin? || super_admin?
   end
 
   def new?
@@ -28,7 +28,8 @@ class CompetitorPolicy < ApplicationPolicy
   end
 
   def create?
-    manage?
+    return false unless record.competition.unlocked?
+    director_or_competition_admin?(user, record.competition) || config.can_create_competitors_at_lane_assignment?
   end
 
   def update?
@@ -36,6 +37,10 @@ class CompetitorPolicy < ApplicationPolicy
   end
 
   def destroy?
+    manage?
+  end
+
+  def withdraw?
     manage?
   end
 

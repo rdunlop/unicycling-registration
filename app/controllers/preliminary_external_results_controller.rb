@@ -36,7 +36,7 @@ class PreliminaryExternalResultsController < ApplicationController
       if @external_result.save
         format.html { redirect_to competition_preliminary_external_results_path(@competition), notice: 'External result was successfully created.' }
       else
-        @external_results = @competition.external_results.preliminary
+        load_external_results
         format.html { render action: "index" }
       end
     end
@@ -73,7 +73,7 @@ class PreliminaryExternalResultsController < ApplicationController
   def approve
     @external_results.map{ |er| er.update_attributes(preliminary: false) }
     flash[:notice] = "Results Approved"
-    redirect_to result_competition_path(@competition)
+    redirect_to :back
   end
 
   # GET /competitions/:competition_id/preliminary_external_results/display_csv
@@ -109,7 +109,7 @@ class PreliminaryExternalResultsController < ApplicationController
   end
 
   def load_external_result
-    @extenal_result = ExtenalResult.find(params[:id])
+    @external_result = ExternalResult.find(params[:id])
     @competition = @external_result.competition
   end
 
@@ -118,7 +118,7 @@ class PreliminaryExternalResultsController < ApplicationController
   end
 
   def load_external_results
-    @external_results = @competition.external_results.preliminary
+    @external_results = @competition.external_results.preliminary.reorder(:entered_at)
   end
 
   def external_result_params

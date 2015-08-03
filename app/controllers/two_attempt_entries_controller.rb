@@ -1,6 +1,6 @@
 class TwoAttemptEntriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_user
+  before_action :load_user, only: [:index, :create, :proof, :approve]
   before_action :load_competition, only: [:index, :proof, :create, :approve]
   before_action :load_new_two_attempt_entry, only: [:create]
   before_action :set_is_start_time, only: [:index, :proof, :approve]
@@ -14,7 +14,7 @@ class TwoAttemptEntriesController < ApplicationController
   # GET /users/#/two_attempt_entry
   # GET /users/#/two_attempt_entrys.json
   def index
-    authorize @competition, :view_result_data?
+    authorize @competition, :create_preliminary_result?
 
     add_breadcrumb "Add two-entry data"
 
@@ -94,7 +94,7 @@ class TwoAttemptEntriesController < ApplicationController
       if errors
         format.html { redirect_to :back, alert: "Errors: #{errors}" }
       else
-        format.html { redirect_to result_competition_path(@competition), notice: "Added #{n} rows to #{@competition}." }
+        format.html { redirect_to :back, notice: "Added #{n} rows to #{@competition}." }
       end
     end
   end
@@ -102,7 +102,7 @@ class TwoAttemptEntriesController < ApplicationController
   private
 
   def authorize_data_entry
-    authorize @competition, :modify_result_data?
+    authorize @competition, :create_preliminary_result?
   end
 
   def load_user

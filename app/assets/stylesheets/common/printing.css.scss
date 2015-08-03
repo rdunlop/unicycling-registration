@@ -187,3 +187,37 @@ table.results {
     }
   }
 }
+
+
+// For the different competitor statuses
+.competitor-active {
+  // nothing
+}
+
+.competitor-withdrawn {
+  text-decoration: line-through;
+}
+
+.competitor-dns {
+  text-decoration: line-through;
+  & td:first-child:after {
+    text-decoration: initial;
+    content: " (DNS)";
+  }
+}
+
+.competitor-not_qualified {
+  text-decoration: line-through;
+  & td:first-child:after {
+    text-decoration: initial;
+    content: " (Not Q)";
+  }
+}
+
+.competitor-dnf {
+  text-decoration: line-through;
+  & td:first-child:after {
+    text-decoration: initial;
+    content: " (DNF)";
+  }
+}

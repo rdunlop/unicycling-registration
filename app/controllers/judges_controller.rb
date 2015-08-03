@@ -86,7 +86,7 @@ class JudgesController < ApplicationController
     add_breadcrumb "Manage Judges", competition_judges_path(@competition)
 
     @judge_types = JudgeType.order(:name).where(event_class: @competition.uses_judges)
-    @all_data_entry_volunteers = User.with_role(:data_entry_volunteer).order(:email)
+    @all_data_entry_volunteers = User.data_entry_volunteer
 
     @judges = @competition.judges
     @competitions_with_judges = Competition.event_order.select{ |comp| comp.uses_judges } - [@competition]

@@ -25,7 +25,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def show?
-    director?(record.event) || awards_admin? || data_entry_volunteer? || competition_admin? || super_admin?
+    director?(record.event) || awards_admin? || competition_admin? || super_admin?
   end
 
   def sort?
@@ -41,6 +41,10 @@ class CompetitionPolicy < ApplicationPolicy
     competition_admin? || super_admin?
   end
 
+  def publish_age_group_entry?
+    track_data_importer?(record) || publish?
+  end
+
   def publish?
     awards_admin? || super_admin?
   end
@@ -50,11 +54,20 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def award?
-    awards_admin? || super_admin?
+    !record.awarded? && (awards_admin? || super_admin?)
   end
+
+  def unaward?
+    record.awarded? && (awards_admin? || super_admin?)
+  end
+
   ###### END State Machine transitions ############
 
   def export_scores?
+    director?(record.event) || super_admin?
+  end
+
+  def export_times?
     director?(record.event) || super_admin?
   end
 
@@ -71,6 +84,10 @@ class CompetitionPolicy < ApplicationPolicy
     competition_admin? || super_admin?
   end
 
+  def add_additional_results?
+    director?(record.event) || competition_admin? || super_admin?
+  end
+
   # PRINTING
   def announcer?
     return true # ?? Was "skip_authorization_check" before?
@@ -78,12 +95,13 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def heat_recording?
-    data_entry_volunteer? || director?(record.event) || super_admin?
+    view_access?
   end
 
   # DATA MANAGEMENT
+  # This is the person who can see entered data for all judges/entry for a competition
   def view_result_data?
-    director?(record.event) || super_admin?
+    track_data_importer?(record) || director?(record.event) || super_admin?
   end
 
   def modify_result_data?
@@ -91,11 +109,11 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def single_attempt_recording?
-    data_entry_volunteer? || director?(record.event) || super_admin?
+    view_access?
   end
 
   def two_attempt_recording?
-    data_entry_volunteer? || director?(record.event) || super_admin?
+    view_access?
   end
 
   def start_list?
@@ -103,23 +121,32 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   # DATA ENTRY
+  # Can enter preliminary data for a competition
   def create_preliminary_result?
-    record.unlocked? && (data_entry_volunteer? || director?(record.event) || super_admin?)
+    record.unlocked? && view_access?
+  end
+
+  def enter_sign_ins?
+    record.sign_in_list? && create_preliminary_result?
+  end
+
+  def view_sign_ins?
+    record.sign_in_list? && view_access?
   end
 
   def manage_volunteers?
     director?(record.event) || super_admin?
   end
 
-  def publish_age_group_entry?
-    super_admin?
-  end
-
   def set_age_group_places?
-    super_admin?
+    track_data_importer?(record) || director?(record.event) || super_admin?
   end
 
   private
+
+  def view_access?
+    track_data_importer?(record) || data_recording_volunteer?(record) || director?(record.event) || super_admin?
+  end
 
   class Scope < Scope
     def resolve
