@@ -35,10 +35,22 @@ Minor:
 Robin's ToDo List, re-organized August 3, 2015
 - Finish the "Preliminary" data concept, as the ExternalResult/TimeResults currently as quite confused with "active" vs "preliminary"
 - Improve the error messaging when importing external data and registrants are missing
-
+- Don't display "Wave #" in the sign-in list page unless waves are configured/configurable
+- Allow data entry people to enter crank-length/etc data easily.
 ===================================================
 
-
+- Create an integrated landing page where people might find the different unicycling events available on the registration system. (ie: naucc.com, or similar)
+- Improve the music upload system to be 1 fewer steps by automatically creating the storage record when a user signs up for a music-enabled event?
+- Improve the automatic sign-up/un-sign-up syste to be clearer for users
+- Add ability to Delete a Competition
+- Code the Distance overall calculation.
+- integrate with the USA membership site in some way
+- Integrate Stripe Payment system.
+- create a Checklist for what needs to be asked for each competition:
+ - If it is a team/pairs, make sure to ask for a team name/partner name
+ - If it has < 24" wheel size categories, be sure to set the "allow wheel size override" option for the event(s) so that users might set their wheel size?
+- Be able to publish the combined-competition results more easily.
+- When adding a role, don't remove the role if you try to add it to a user who already has that role again. (ie: adding Payment admin to someone with payment admin shouldn't result in them losing it)
 - Change DQ in High/Long to DNS
 - Import CSV  from External fails poorly when a registrant doesn't exist. It should show a nicer error message.
 - The Competition#New form date-choosing field doesn't appear.

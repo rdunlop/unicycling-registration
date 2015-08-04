@@ -81,7 +81,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def set_places?
-    competition_admin? || super_admin?
+    director?(record.event) || competition_admin? || super_admin?
   end
 
   def add_additional_results?
