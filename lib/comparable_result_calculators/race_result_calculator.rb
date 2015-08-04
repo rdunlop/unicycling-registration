@@ -28,11 +28,7 @@ class RaceResultCalculator
     if competitor.has_result? && !competitor.disqualified?
       competitor.best_time_in_thousands
     else
-      if lower_is_better
-        Float::INFINITY
-      else
-        -Float::INFINITY
-      end
+      0
     end
   end
 
