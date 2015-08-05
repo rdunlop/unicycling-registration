@@ -45,6 +45,7 @@ Robin's ToDo List, re-organized August 3, 2015
  - If the start time is marked as DQ, or the end time is marked as DQ...then mark the competitor as DQ...unless they have another attempt without DQ..etc.
 ===================================================
 
+- Allow changing the "Name" in My Account without specifying the current password.
 - When using Import function, allow a "clear all data" function...to allow restarting the import.
 - Po request: Right now on the Manage Competitors page for Group there is no easy way to add people to an already existing group. You have to go to edit and then type in their numbers. This requires memorizing or writing down their numbers. What would be easier would be to check their boxes and then have a new button next to "Create Pair/Group from Selected Registrants" that says "Add to Existing Pair/Group". That button would have a drop down with the already existing group names.
 - Create an integrated landing page where people might find the different unicycling events available on the registration system. (ie: naucc.com, or similar)
