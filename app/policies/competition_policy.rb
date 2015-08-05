@@ -88,6 +88,10 @@ class CompetitionPolicy < ApplicationPolicy
     director?(record.event) || competition_admin? || super_admin?
   end
 
+  def destroy_all_results?
+    (record.imports_times? || record.imports_points?) && create_preliminary_result?
+  end
+
   # PRINTING
   def announcer?
     return true # ?? Was "skip_authorization_check" before?

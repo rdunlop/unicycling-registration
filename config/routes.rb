@@ -445,6 +445,7 @@ Workspace::Application.routes.draw do
         get :export_times
         # view scores
         get :result
+        delete :destroy_all_results
 
         post :lock
         delete :unlock
