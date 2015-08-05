@@ -18,7 +18,7 @@ Things that caused the most grief:
 - Automatically attempting to import data into other competition-within-event was faught against a lot
 - Many Reports have "unknown" as the rank place for people who were DNS or DNF.
  - Should be marked as such, and should show up at the END of the list.
--
+- Unclear how to Import Start time data, ...and the review shows nothing because the 'is-start-time' isn't passed to the review page properly.
 
 Requests:
 ---------
@@ -39,8 +39,14 @@ Robin's ToDo List, re-organized August 3, 2015
 - Allow data entry people to enter crank-length/etc data easily.
 - Show a page which lists the Locked/Published/Awarded status of each competition.
 - Unable to add new race recording data which is a Start Time directly (must go through verification)
+- make the rounding of results more predictable (ie: 0.520 vs 0.500 should be rounded the same)
+ - This will be taken care of during the competition-data-entry-configuration changes which account for hours/minutes/seconds/hundreds/thousands configuration....I think.
+- Make races which have start times required REQUIRE that a start time be entered for each competitor result.
+ - If the start time is marked as DQ, or the end time is marked as DQ...then mark the competitor as DQ...unless they have another attempt without DQ..etc.
 ===================================================
 
+- When using Import function, allow a "clear all data" function...to allow restarting the import.
+- Po request: Right now on the Manage Competitors page for Group there is no easy way to add people to an already existing group. You have to go to edit and then type in their numbers. This requires memorizing or writing down their numbers. What would be easier would be to check their boxes and then have a new button next to "Create Pair/Group from Selected Registrants" that says "Add to Existing Pair/Group". That button would have a drop down with the already existing group names.
 - Create an integrated landing page where people might find the different unicycling events available on the registration system. (ie: naucc.com, or similar)
 - Improve the music upload system to be 1 fewer steps by automatically creating the storage record when a user signs up for a music-enabled event?
 - Improve the automatic sign-up/un-sign-up syste to be clearer for users

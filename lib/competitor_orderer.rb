@@ -16,6 +16,8 @@ class CompetitorOrderer
   # return 0 if they are the same
   # return -1 if the first score is better than the second score
   def compare_competitors(a, b)
+    return incorrect_scores_last(a,b) if either_score_is_invalid(a,b)
+
     if lower_is_better
       first_competitor = a
       second_competitor = b
@@ -29,6 +31,36 @@ class CompetitorOrderer
       first_competitor.comparable_tie_break_score <=> second_competitor.comparable_tie_break_score
     else
       res
+    end
+  end
+
+  def either_score_is_invalid(a,b)
+    return true if score_is_invalid(a.comparable_score)
+    return true if score_is_invalid(b.comparable_score)
+    false
+  end
+
+  def score_is_invalid(score)
+    return true if score.is_a?(Float) && score.nan?
+    return true if score.nil?
+
+    false
+  end
+
+  # return 1 if first score is invalid, but the second is valid
+  # return 0 if they are the same
+  # return -1 if the first score is valid, and the second is invalid
+  def incorrect_scores_last(a, b)
+    invalid_a = score_is_invalid(a.comparable_score)
+    invalid_b = score_is_invalid(b.comparable_score)
+    if invalid_a && invalid_b
+      0
+    elsif invalid_a && !invalid_b
+      1
+    elsif !invalid_a && invalid_b
+      -1
+    else
+      0
     end
   end
 end
