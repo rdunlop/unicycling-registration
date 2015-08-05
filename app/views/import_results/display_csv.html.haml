@@ -2,7 +2,7 @@
 
 %h2 CSV Import Instructions
 
-Please import a Comma-Separated-File file with the following format (for 'Distance' competitions):
+Please import a Comma-Separated-File (Windows CSV Format) file with the following format (for 'Distance' competitions):
 
 %ul
   %li Column 1: ID
@@ -12,13 +12,16 @@ Please import a Comma-Separated-File file with the following format (for 'Distan
   %li Column 5: "DQ" or empty
 
 = form_tag(import_csv_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
-  = label_tag :file, "Source File"
-  = file_field_tag :file
-  %br
-  = label_tag :start_times, "Start Times?"
-  = check_box_tag :start_times
-  %br
-  = submit_tag "Load CSV to Temp Table", class: "button"
+  .row
+    .small-4.columns
+      = label_tag :file, "Source File"
+      = file_field_tag :file
+    .small-4.columns
+      = label_tag :start_times, "Start Times?"
+      = check_box_tag :start_times
+    .small-4.columns
+      = submit_tag "Load CSV to Temp Table", class: "button"
+
 = render :partial => "imported_time_results"
 
 = link_to "Review Results", review_user_competition_import_results_path(@user, @competition), class: "button"
