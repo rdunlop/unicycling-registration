@@ -61,6 +61,21 @@ describe CompetitorOrderer do
     end
   end
 
+  describe "competitors with tie break scores, and no tie break score" do
+    before do
+      @comp1 = double(:competitor, comparable_score: 1, comparable_tie_break_score: nil)
+      @comp2 = double(:competitor, comparable_score: 2, comparable_tie_break_score: nil)
+      @comp3 = double(:competitor, comparable_score: 2, comparable_tie_break_score: 1)
+      @comp4 = double(:competitor, comparable_score: 4, comparable_tie_break_score: 3)
+    end
+
+    subject { described_class.new([@comp1, @comp2, @comp3, @comp4]).sort }
+
+    it "sorts the competitors by tie break places" do
+      expect(subject).to eq([@comp1, @comp3, @comp2, @comp4])
+    end
+  end
+
   describe "when calculating the placing of higher-points-is-better races" do
     before :each do
       @comp1 = double(:competitor, comparable_score: 1, comparable_tie_break_score: nil)
