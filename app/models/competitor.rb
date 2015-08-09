@@ -413,7 +413,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def has_music?
-    music_file.present?
+    music_file.present? && music_file.has_file?
   end
 
   def club

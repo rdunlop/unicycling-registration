@@ -19,6 +19,7 @@ Things that caused the most grief:
 - Many Reports have "unknown" as the rank place for people who were DNS or DNF.
  - Should be marked as such, and should show up at the END of the list.
 - Unclear how to Import Start time data, ...and the review shows nothing because the 'is-start-time' isn't passed to the review page properly.
+- pundit use of authorize (user must be logged in) is strange.
 
 Requests:
 ---------
@@ -45,6 +46,8 @@ Robin's ToDo List, re-organized August 3, 2015
  - If the start time is marked as DQ, or the end time is marked as DQ...then mark the competitor as DQ...unless they have another attempt without DQ..etc.
 ===================================================
 
+- Patricia Request For group freestyle many times people have alternates planned in case of injury or whatever. These alternates sign up for the group and many times they get added to a group and then they have to be removed and it is up to the person dealing with the data (me) to remember that they are the alternates. There have also been situations when the alternates have emailed me asking me why their names aren't showing up as associated with their group.  If there was a way to add these people to a group and then mark them as alternates that would be cool. Then they could still be listed with the group but would not be counted in the group number total (as used for the fall count). It would then also be possible for the chief judge to easily add them officially to the group in the case that they are needed to actually perform.
+- Automatically capitalize any name which is input with all lower, or all upper characters. (must handle i18n though)
 - Allow changing the "Name" in My Account without specifying the current password.
 - When using Import function, allow a "clear all data" function...to allow restarting the import.
 - Po request: Right now on the Manage Competitors page for Group there is no easy way to add people to an already existing group. You have to go to edit and then type in their numbers. This requires memorizing or writing down their numbers. What would be easier would be to check their boxes and then have a new button next to "Create Pair/Group from Selected Registrants" that says "Add to Existing Pair/Group". That button would have a drop down with the already existing group names.

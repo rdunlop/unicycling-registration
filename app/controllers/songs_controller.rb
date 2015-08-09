@@ -38,7 +38,7 @@ class SongsController < ApplicationController
   # GET /songs/1/add_file
   def add_file
     add_breadcrumb "#{@song.event} - Add File"
-    if @song.song_file_name.present?
+    if @song.has_file?
       redirect_to registrant_songs_path(@song.registrant), alert: "Song already associated, please destroy and re-create if you need to change the music"
     end
     @uploader = @song.song_file_name

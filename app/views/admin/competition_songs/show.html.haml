@@ -26,7 +26,7 @@
         %td= song.human_name
         %td= song.updated_at
         %td
-          - if song.song_file_name.present?
+          - if song.has_file?
             = link_to 'Download', song.song_file_name_url, target: '_blank'
         %td.js--highlightIfBlank= song.competitor
         %td
