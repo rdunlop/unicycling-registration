@@ -2,14 +2,23 @@
 
 %h2 CSV Import Instructions
 
-Please import a Comma-Separated-File file with the following format (for 'Points' Competitions):
-%ul
-  %li Column 1: ID
-  %li Column 2: Points
-  %li Column 3: Details (to be printed on awards)
+%p Please import a Comma-Separated-File (Windows CSV Format) file with the following format (for 'Points' Competitions):
+.row
+  .small-12.columns
+    %ul
+      %li Column 1: ID
+      %li Column 2: Points
+      %li Column 3: Details (to be printed on awards)
 
 = form_tag(import_csv_competition_preliminary_external_results_path(@competition), {:method => :post, :multipart=>true}) do
-  = file_field_tag "file"
-  = submit_tag "Load CSV to Preliminary Results table", class: "button small"
+  .row
+    .small-6.columns
+      = file_field_tag "file"
+    .small-6.columns
+      = submit_tag "Load CSV to Preliminary Results table", class: "button small"
 
 = render "results"
+
+%hr
+
+= link_to "Review", review_competition_preliminary_external_results_path(@competition), class: "button"

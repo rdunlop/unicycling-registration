@@ -6,7 +6,7 @@ class ArtisticScoringClass_2015 < BaseScoringClass
   end
 
   def lower_is_better
-    true
+    false
   end
 
   # describes how to label the results of this competition

@@ -11,7 +11,8 @@
 
 table {
   .separator {
-    background-color: black;
+    // !important is necessary in order to override foundation styling
+    background-color: black !important;
   }
 }
 

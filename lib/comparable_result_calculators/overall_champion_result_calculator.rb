@@ -266,7 +266,6 @@ class OverallChampionResultCalculator
     firsts_counts.uniq.sort.reverse_each do |num_firsts|
       competitors_with_this_number_of_firsts = competitor_firsts_counts.select{ |el| competitor_firsts_counts[el] == num_firsts }.keys
       current_score = score - adjustment
-      competitors_with_this_number_of_firsts
       result[current_score] = competitors_with_this_number_of_firsts
       adjustment += 0.1
     end

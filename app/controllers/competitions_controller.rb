@@ -222,6 +222,25 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  # Delete all the result data for this competition.
+  # Note: only works for Time Results and External Results....
+  # (Judged events do not work).
+  def destroy_all_results
+    authorize @competition
+
+    results = @competition.scoring_helper.all_competitor_results
+    if results.present?
+      Competition.transaction do
+        results.each(&:destroy)
+      end
+      flash[:notice] = "Deleted all data for this competition"
+    else
+      flash[:alert] = "No results to be deleted"
+    end
+
+    redirect_to @competition
+  end
+
   private
 
   def load_competition

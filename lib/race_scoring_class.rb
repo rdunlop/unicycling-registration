@@ -28,8 +28,10 @@ class RaceScoringClass < BaseScoringClass
     "time_results"
   end
 
+  # Determine whether a competitor is disqualified
+  # NOTE: this should be improved to indicate DNS/DNF/DQ, if at all possible
   def competitor_dq?(competitor)
-    competitor.has_result? && competitor.time_results.all?(&:disqualified?)
+    competitor.has_result? && (competitor.time_results.all?(&:disqualified?) || competitor.best_time_in_thousands == 0)
   end
 
   # Used when trying to destroy all results for a competition

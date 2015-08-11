@@ -1,3 +1,69 @@
+POST-NAUCC 2015 thoughts
+=========================
+
+Things that caused the most grief:
+---------------------------------
+- Multi-lap racing data recording was inaccurate enough that it took a lot of manual effort (and time) post-race to get accurate results.
+- Double-tab when using chosen-select boxes.
+- Import CSV of external Results doesn't work
+- Competitors without Members causes the competitors#show page to 500
+- Track Day Race Officials were unable to adjust lane assignments for heats (unable to add people to competition)
+- "Withdrawn" competitors cause issues for Last-minute-add and other start-line things.
+- Having registrants choose a wheel size doesn't translate into an age group (under 10 age)
+- Creating Expert Heats of 100m/etc were very manual, and didn't split up by gender.
+- Ineligible competitors are not indicated as such on the Announcer Sheet
+- Registrant is able to sign up for an event without choosing the "Signup" checkbox.
+- External Results had "pts" added next to the name many places
+- Time data entry had some issues entering hours:minutes:seconds instead of minutes:seconds:thousands
+- Automatically attempting to import data into other competition-within-event was faught against a lot
+- Many Reports have "unknown" as the rank place for people who were DNS or DNF.
+ - Should be marked as such, and should show up at the END of the list.
+- Unclear how to Import Start time data, ...and the review shows nothing because the 'is-start-time' isn't passed to the review page properly.
+- pundit use of authorize (user must be logged in) is strange.
+
+Requests:
+---------
+- Copy Competition
+
+Minor:
+------
+- Lane Assignment Race Officials needed to use 2 select boxes in order to add last-minute registrants.
+- Combined Competition is confusingly still a "Competition"
+- The Combined Competition Results are not published for competitors to see.
+
+
+===================================================
+Robin's ToDo List, re-organized August 3, 2015
+- Finish the "Preliminary" data concept, as the ExternalResult/TimeResults currently as quite confused with "active" vs "preliminary"
+- Improve the error messaging when importing external data and registrants are missing
+- Don't display "Wave #" in the sign-in list page unless waves are configured/configurable
+- Allow data entry people to enter crank-length/etc data easily.
+- Show a page which lists the Locked/Published/Awarded status of each competition.
+- Unable to add new race recording data which is a Start Time directly (must go through verification)
+- make the rounding of results more predictable (ie: 0.520 vs 0.500 should be rounded the same)
+ - This will be taken care of during the competition-data-entry-configuration changes which account for hours/minutes/seconds/hundreds/thousands configuration....I think.
+- Make races which have start times required REQUIRE that a start time be entered for each competitor result.
+ - If the start time is marked as DQ, or the end time is marked as DQ...then mark the competitor as DQ...unless they have another attempt without DQ..etc.
+===================================================
+
+- Patricia Request For group freestyle many times people have alternates planned in case of injury or whatever. These alternates sign up for the group and many times they get added to a group and then they have to be removed and it is up to the person dealing with the data (me) to remember that they are the alternates. There have also been situations when the alternates have emailed me asking me why their names aren't showing up as associated with their group.  If there was a way to add these people to a group and then mark them as alternates that would be cool. Then they could still be listed with the group but would not be counted in the group number total (as used for the fall count). It would then also be possible for the chief judge to easily add them officially to the group in the case that they are needed to actually perform.
+- Automatically capitalize any name which is input with all lower, or all upper characters. (must handle i18n though)
+- Allow changing the "Name" in My Account without specifying the current password.
+- When using Import function, allow a "clear all data" function...to allow restarting the import.
+- Po request: Right now on the Manage Competitors page for Group there is no easy way to add people to an already existing group. You have to go to edit and then type in their numbers. This requires memorizing or writing down their numbers. What would be easier would be to check their boxes and then have a new button next to "Create Pair/Group from Selected Registrants" that says "Add to Existing Pair/Group". That button would have a drop down with the already existing group names.
+- Create an integrated landing page where people might find the different unicycling events available on the registration system. (ie: naucc.com, or similar)
+- Improve the music upload system to be 1 fewer steps by automatically creating the storage record when a user signs up for a music-enabled event?
+- Improve the automatic sign-up/un-sign-up syste to be clearer for users
+- Add ability to Delete a Competition
+- Code the Distance overall calculation.
+- integrate with the USA membership site in some way
+- Integrate Stripe Payment system.
+- create a Checklist for what needs to be asked for each competition:
+ - If it is a team/pairs, make sure to ask for a team name/partner name
+ - If it has < 24" wheel size categories, be sure to set the "allow wheel size override" option for the event(s) so that users might set their wheel size?
+- Be able to publish the combined-competition results more easily.
+- When adding a role, don't remove the role if you try to add it to a user who already has that role again. (ie: adding Payment admin to someone with payment admin shouldn't result in them losing it)
+- Change DQ in High/Long to DNS
 - Import CSV  from External fails poorly when a registrant doesn't exist. It should show a nicer error message.
 - The Competition#New form date-choosing field doesn't appear.
 - Add report name to the header or footer of all PDFs
@@ -83,7 +149,6 @@ END
 - Import results->import CSV styling needs to be updated
 - Import results ->delete all in temp table new styling, and flash message on success
 
-- why didn't the cache bust when I changed the admin_set_two?
 - Allow chosen to work on mobile devices
 - fix small screen view of competition#show
 - Fix chosen on mobile devices? look at http://brianreavis.github.io/selectize.js/
@@ -93,7 +158,7 @@ END
 
 - Registration ManageOne doesn't work on Firefox.WTF robin
 
-Dropped is "did I even drop, and I'm not currently signed up".
+Dropped is "did I ever drop, and I'm not currently signed up".
 
 - on the Sign In list, there should not be any Withdrawn people, and the option for Withdrawn should not appear.
 - On the Data Entry page for 10k, anyone who is not "Active" competitor should not appear in the list.

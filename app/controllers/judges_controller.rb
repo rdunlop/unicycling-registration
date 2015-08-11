@@ -51,6 +51,7 @@ class JudgesController < ApplicationController
 
   # this is used to toggle the active-status of a judge
   def toggle_status
+    @judge = Judge.find(params[:id])
     authorize @judge
 
     if @judge.active?

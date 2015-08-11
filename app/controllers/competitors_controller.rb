@@ -7,6 +7,7 @@ class CompetitorsController < ApplicationController
   before_action :load_competitor, only:    [:edit, :update, :destroy, :withdraw, :update_row_order]
 
   before_action :set_parent_breadcrumbs, only: [:index, :new, :edit, :display_candidates]
+  before_action :authorize_sort, only: :update_row_order
 
   respond_to :html
 
@@ -169,6 +170,10 @@ class CompetitorsController < ApplicationController
   end
 
   private
+
+  def authorize_sort
+    authorize @competitor, :sort?
+  end
 
   def sortable_object
     Competitor.find(params[:id])

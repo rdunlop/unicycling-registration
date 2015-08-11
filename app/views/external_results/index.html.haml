@@ -1,3 +1,5 @@
+- if policy(@competition).destroy_all_results?
+  = link_to "Delete All", destroy_all_results_competition_path(@competition), method: :delete, class: "button small alert", data: { confirm: "This will delete ALL Points Data for this competition. Are you sure?" }
 = render :partial => "results"
 %br
 %h1 New Entered Points Result

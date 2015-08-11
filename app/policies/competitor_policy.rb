@@ -48,6 +48,10 @@ class CompetitorPolicy < ApplicationPolicy
     manage?
   end
 
+  def sort?
+    manage?
+  end
+
   private
 
   def director_or_competition_admin?(_user, competition)
