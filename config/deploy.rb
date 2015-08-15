@@ -31,7 +31,7 @@ namespace :deploy do
     end
   end
 end
-#after 'deploy:published', 'deploy:install_translations'
+after 'deploy:published', 'deploy:install_translations'
 
 # rubocop:disable Rails/Output
 namespace :translation do
