@@ -58,7 +58,7 @@ Once you have a translator account, a "Translation" menu item will appear, which
 
 If we want to add a new language to the list of possible translations:
 
-1. First create a root-level `base.en.yml` file, and set the "language_name"
+1. First create a root-level `base.en.yml` file, and set the "language_name" (this should be the only entry in the file)
 
 2. Add the language to the `all_available_languages` in the EventConfiguration class
 
