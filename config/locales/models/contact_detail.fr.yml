@@ -4,6 +4,7 @@ fr:
     attributes:
       contact_detail:
         address: Adresse
+        birthplace: Place de Naissance
         city: Ville
         club: Nom de l’équipe principale ou de l’association
         club_contact: Nom du contact de l’équipe principale ou de l’association
