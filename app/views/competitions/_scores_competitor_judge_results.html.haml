@@ -1,7 +1,7 @@
 // locals: competitor, judges
 %tr
   %td= competitor.position
-  %td= competitor.bib_number
+  %td= competitor.lowest_member_bib_number.to_s
   %td.right_edge= competitor.name
   - judges.each do |judge|
     - score = competitor.scores.find{ |score| score.judge_id == judge.id}
