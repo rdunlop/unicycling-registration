@@ -1,0 +1,32 @@
+---
+es:
+  are_you_sure: Are you sure?
+  back: Back
+  breadcrumbs:
+    home: Home
+    my_registrants: My Registrants
+    new_payment: New Payment
+  cancel: Cancel
+  competitor: Competitor
+  date:
+    formats:
+      registration_date_format: "%b %d, %Y"
+    order:
+    - :month
+    - :day
+    - :year
+  language_name: Spanish
+  'no': 'No'
+  noncompetitor: Non-Competitor
+  prices_increase_at_date: Prices Increase in %{end_date}
+  prices_increase_soon: Prices Increase in less than 1 day
+  spectator: Spectator
+  wizard:
+    add_contact_details: Contact Details
+    add_events: Events
+    add_name: Name
+    add_volunteers: Volunteers
+    expenses: Expenses
+    music: Music
+    set_wheel_sizes: Wheel Sizes
+  'yes': 'Yes'

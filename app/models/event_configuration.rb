@@ -250,7 +250,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.all_available_languages
-    [:en, :fr, :de, :hu]
+    [:en, :fr, :de, :hu, :es]
   end
 
   private

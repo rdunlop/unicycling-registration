@@ -50,7 +50,6 @@ gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', require: nil # necessary for sidekiq routing
 gem 'unicorn', require: false
 gem 'whenever'
-gem 'rubocop', require: false
 gem 'gaffe'
 gem 'rubyzip'
 
@@ -89,6 +88,7 @@ group :naucc, :development, :caching do
   gem 'better_errors'
   gem "binding_of_caller"
   gem 'simplecov', require: false, group: :test
+  gem 'rubocop', require: false
 end
 
 group :unicon, :naucc, :development, :test, :cucumber, :caching do

@@ -1,3 +1,8 @@
+PRE-UNICON-2016
+===============
+- Add Spanish as a possible translated language
+
+
 POST-NAUCC 2015 thoughts
 =========================
 
