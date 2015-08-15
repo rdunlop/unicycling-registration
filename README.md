@@ -60,9 +60,11 @@ If we want to add a new language to the list of possible translations:
 
 1. First create a root-level `base.en.yml` file, and set the "language_name" (this should be the only entry in the file)
 
-2. Add the language to the `all_available_languages` in the EventConfiguration class
+2. Add the language to the `available_locales` in the config/application.rb
 
-3. Add the language to the `available_locales` in the config/application.rb
+2a. At this point, you can publish the changes, and translators can create the translations as necessary
+
+3. Add the language to the `all_available_languages` in the EventConfiguration class
 
 4. Choose the language in your Event Configuration.
 
