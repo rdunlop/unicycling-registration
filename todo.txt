@@ -46,6 +46,7 @@ Robin's ToDo List, re-organized August 3, 2015
  - If the start time is marked as DQ, or the end time is marked as DQ...then mark the competitor as DQ...unless they have another attempt without DQ..etc.
 ===================================================
 
+- Gossi/Scott: Implement X-Style scoring system/rules (ask Scott/Gossi for details)
 - Patricia Request For group freestyle many times people have alternates planned in case of injury or whatever. These alternates sign up for the group and many times they get added to a group and then they have to be removed and it is up to the person dealing with the data (me) to remember that they are the alternates. There have also been situations when the alternates have emailed me asking me why their names aren't showing up as associated with their group.  If there was a way to add these people to a group and then mark them as alternates that would be cool. Then they could still be listed with the group but would not be counted in the group number total (as used for the fall count). It would then also be possible for the chief judge to easily add them officially to the group in the case that they are needed to actually perform.
 - Automatically capitalize any name which is input with all lower, or all upper characters. (must handle i18n though)
 - Allow changing the "Name" in My Account without specifying the current password.
