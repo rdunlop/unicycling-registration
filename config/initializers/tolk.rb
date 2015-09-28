@@ -4,7 +4,7 @@
 # See github.com/tolk/tolk for more informations
 
 Tolk::ApplicationController.authenticator = proc {
-  unless Pundit.policy(current_user, :translation).manage_all_site_translations?
+  unless user_signed_in? && Pundit.policy(current_user, :translation).manage_all_site_translations?
     raise Pundit::NotAuthorizedError.new("You are not allowed")
   end
 }

@@ -1,5 +1,8 @@
 POST-NAUCC 2015 thoughts
 =========================
+- More Info Link language dependent (put it into th db)
+- Copy all Events from other Instance
+- Payment THrough PayPal?
 
 Things that caused the most grief:
 ---------------------------------
