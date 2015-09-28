@@ -5,7 +5,8 @@
 
 Tolk::ApplicationController.authenticator = proc {
   unless user_signed_in? && Pundit.policy(current_user, :translation).manage_all_site_translations?
-    raise Pundit::NotAuthorizedError.new("You are not allowed")
+    flash[:alert] = "You are not allowed"
+    redirect_to "/"
   end
 }
 
