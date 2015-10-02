@@ -1,0 +1,11 @@
+---
+es:
+  nav_bar:
+    top_nav:
+      all_registrants: Todos los solicitantes
+      log_in: Iniciar sesión
+      my_account: Mi cuenta
+      my_payments: Mis pagos
+      my_registrations: Mis incripciones
+      results: Competitiones/Resultados
+      sign_out: Cerrar la sesión

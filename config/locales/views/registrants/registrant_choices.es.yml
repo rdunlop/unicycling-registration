@@ -1,0 +1,8 @@
+---
+es:
+  registrants:
+    registrant_choices:
+      create_new_competitor: Crear nuevo participante
+      create_new_spectator: Crear nuevo espectador
+      recommended: Recomendado
+      registration: Inscripción

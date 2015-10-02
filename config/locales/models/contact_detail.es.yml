@@ -1,0 +1,27 @@
+---
+es:
+  activerecord:
+    attributes:
+      contact_detail:
+        address: Dirección
+        birthplace: Lugar de nacimiento
+        city: Cuidad
+        club: Nombre del equipo pricipal o del club
+        club_contact: Contacto del equipo pricipal o del club
+        country_representing: País representado
+        country_residence: País
+        email: Correo electrónico
+        emergency_name: Nombre
+        emergency_other_phone: Otro teléfono
+        emergency_primary_phone: Teléfono principal
+        emergency_relationship: Relación
+        mobile: Móvil
+        phone: Teléfono
+        responsible_adulte_name: Nombre
+        responsible_adult_phone: Teléfono principal
+        usa_member_number: EE.UU número de socio
+        zip: Código postal
+    models:
+      contact_detail:
+        one: Detalle de contacto
+        other: Detalles de contacto

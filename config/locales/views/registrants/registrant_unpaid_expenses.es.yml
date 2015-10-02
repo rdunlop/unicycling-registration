@@ -1,0 +1,5 @@
+---
+es:
+  registrants:
+    registrant_unpaid_expenses:
+      delete: Borrar

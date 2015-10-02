@@ -1,0 +1,6 @@
+---
+es:
+  registrant_expense_items:
+    new_expenses:
+      add: Añadir %{group_name}
+      info: Más informaciones

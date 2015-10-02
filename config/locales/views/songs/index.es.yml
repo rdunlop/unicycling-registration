@@ -1,0 +1,10 @@
+---
+es:
+  songs:
+    index:
+      add_songs_for_others: Añadir canciones para otros solicitantes
+      new_song: Nueva canción (Paso 1)
+      step_1: Paso 1
+      step_2: Paso 2
+      title: "%{name}'s canciones"
+      upload_file: Subir un archivo de música

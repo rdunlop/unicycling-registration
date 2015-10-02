@@ -1,0 +1,7 @@
+---
+es:
+  registrants:
+    contact_summary:
+      emergency_contact_name: Nombre del contacto de emergencia
+      emergency_contact_phone: Teléfono del contacto de emergencia
+      responsible_adult: Adulto responsable

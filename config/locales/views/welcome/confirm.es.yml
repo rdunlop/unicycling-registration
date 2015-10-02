@@ -1,0 +1,7 @@
+---
+es:
+  welcome:
+    confirm:
+      check_email: Por favor, compruebe tu correo electrónico para un mensaje de confirmación.
+      confirm_header: Confirma tu correo electrónico
+      verify_account: Tienes que verificar tu cuenta antes de poder iniciar sesión

@@ -1,0 +1,10 @@
+---
+es:
+  devise:
+    shared:
+      links:
+        already_have_an_account: Ya tienes una cuenta?
+        forgot_your_password: Has olvidado tu contraseña?
+        log_in_here: Inicia sesión aquí
+        new_user: Eres un nuevo usario?
+        sign_up_here: Incríbete aquí

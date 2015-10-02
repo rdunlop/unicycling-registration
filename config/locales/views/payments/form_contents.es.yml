@@ -1,0 +1,10 @@
+---
+es:
+  payments:
+    form_contents:
+      cost: Costes
+      details: Detalles
+      select_all: Seleccionar todo
+      start_payment: Empezar pago
+      total_cost: Coste total
+      unselect_all: Deseleccionar todo

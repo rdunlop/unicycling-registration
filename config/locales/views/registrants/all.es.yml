@@ -1,0 +1,9 @@
+---
+es:
+  registrants:
+    all:
+      all_registrants: Todos los solicitantes
+      country: País
+      id: ID
+      name: Nombre
+      registrant_type: Tipo

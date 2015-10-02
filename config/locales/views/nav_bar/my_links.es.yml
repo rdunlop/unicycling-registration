@@ -1,0 +1,10 @@
+---
+es:
+  nav_bar:
+    my_links:
+      all_registrants: Todos los solicitantes de la inscripción
+      log_in: Iniciar sesión
+      my_account: Mi cuenta
+      my_payments: Mis pagos
+      my_registrations: Mis inscripciones
+      results: Competiciones/Resultados

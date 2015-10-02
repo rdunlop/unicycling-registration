@@ -1,0 +1,11 @@
+---
+es:
+  registrants:
+    show_single_registrant:
+      done: Hecho
+      edit_events: Editar eventos
+      edit_items: Editar artículos
+      edit_registration: Editar inscripción
+      list_payments: Listar pagos
+      printable_pdf: Imprimible (Pdf)
+      registration_summary: Resumen de la inscripción

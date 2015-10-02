@@ -1,0 +1,14 @@
+---
+es:
+  registrants:
+    contact_detail:
+      address: Dirección
+      attending: Dirección
+      contact_information: Información de contacto
+      copy_from_other_registrant: Copiar dirección de %{other_name}
+      emergency_contact: Contacto de emergencia
+      in_case_of_emergency: En caso de emergencia
+      responsible_adult: Adulto responsable
+      responsible_adult_detail: "(para solicitantes menores de 18 años)"
+      state: Estado
+      state_province: Estado/Provincia

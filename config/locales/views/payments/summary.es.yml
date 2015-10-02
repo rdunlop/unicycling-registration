@@ -1,0 +1,9 @@
+---
+es:
+  payments:
+    summary:
+      cost: Costes
+      payment_details: Detalles del pago
+      registrant: Solicitante
+      tax: Impuesto
+      total_cost: Costes totales

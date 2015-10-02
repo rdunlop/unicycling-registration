@@ -1,0 +1,25 @@
+---
+es:
+  simple_form:
+    hints:
+      wave_time:
+        scheduled_time: P.ej. 02:00, 03:00
+    labels:
+      event_configuration:
+        artistic_score_elimination_mode_naucc: Grupo pequeño
+        rulebook_url: Reglamento PDF URL
+      expense_item:
+        details_label: Pregunta
+        has_custom_cost: Donativo
+    'no': 'No'
+    placeholders:
+      competitor_expense_item:
+        cost: P.ej. 12.00
+      coupon_code:
+        code: Código para usario para entrar
+      noncompetitor_expense_item:
+        cost: P.ej. 12.00
+    required:
+      mark: "*"
+      text: necesario
+    'yes': Sí

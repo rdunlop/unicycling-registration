@@ -1,0 +1,9 @@
+---
+es:
+  registrants:
+    registrant_list_entry:
+      competitor: "(Participante)"
+      incomplete: Incompleto
+      noncompetitor: "(No competidor)"
+      see_summary: Ver resumen
+      spectator: Espectador

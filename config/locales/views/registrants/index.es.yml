@@ -1,0 +1,10 @@
+---
+es:
+  registrants:
+    index:
+      difference_tooltip: Haz clic aquí para más informaciones
+      link_end: página para detalles
+      registrant_access_page_title: Acceso para solicitantes
+      registration: Inscripción
+      registration_time: La inscripción tarda aproximadamente 15 minutos.
+      whats_the_difference: Qué es la diferencia?

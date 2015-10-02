@@ -1,0 +1,11 @@
+---
+es:
+  devise:
+    mailer:
+      confirmation_instructions:
+        action: Confirmar mi cuenta
+        confirm_your_account_instructions: 'Haz clic en el enlace aquí debajo para
+          confirmar tu correo electrónico:'
+        copy_paste_instructions: Si el enlace no funciona, copie y pegue la URL en
+          un browser.
+        welcome_message: Bienvenido %{email} a la inscripción de monociclo!

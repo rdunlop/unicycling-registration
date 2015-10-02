@@ -1,0 +1,15 @@
+---
+es:
+  devise:
+    registrations:
+      edit:
+        action: Actualización
+        blank_notice: Deja en blanco si no quieres cambiarlo
+        change_header: Cambiar correo electrónico o contraseña
+        change_password: 'Cambiar contraseña:'
+        confirm_password_notice: Necesitamos tu contraseña actual para confirmar tus
+          cambios
+        current_permissions: Permisos actuales
+        title: Mi cuenta
+        upgrade_to_admin_action: Permisos actuales
+        users_name: Nombre de usuario

@@ -1,0 +1,6 @@
+---
+es:
+  devise:
+    sessions:
+      new:
+        action: Iniciar sesión

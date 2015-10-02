@@ -1,0 +1,8 @@
+---
+es:
+  registration_periods:
+    list:
+      competitor_registration_cost: Tasa de inscripción para competidores
+      from: De
+      noncompetitor_registration_cost: Tasa de inscripción para no competidores
+      online_registration_closes: Inscripción en línea cierra

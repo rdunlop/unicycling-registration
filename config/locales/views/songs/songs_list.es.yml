@@ -1,0 +1,7 @@
+---
+es:
+  songs:
+    songs_list:
+      add_song: Añadir canción
+      download: Download
+      remove: Borrar

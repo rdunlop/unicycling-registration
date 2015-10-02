@@ -1,0 +1,6 @@
+---
+es:
+  payments:
+    index:
+      my_payments: Mis pagos
+      persons_payments: "%{registrant}'s pagos"

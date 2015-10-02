@@ -1,0 +1,6 @@
+---
+es:
+  registrant_expense_items:
+    new_expense:
+      add_item: Añadir artículo
+      sold_out: Agotado

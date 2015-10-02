@@ -1,0 +1,8 @@
+---
+es:
+  welcome:
+    feedback:
+      email: Tu correo electrónico
+      header: Retroalimentación
+      optional: Opcional
+      submit: Dar retroalimentación

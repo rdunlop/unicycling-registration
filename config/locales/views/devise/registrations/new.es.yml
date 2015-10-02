@@ -1,0 +1,11 @@
+---
+es:
+  devise:
+    registrations:
+      new:
+        confirmation_reminder: Después de la inscripción, recibirás un correo eletrónico
+          de confirmation que tienes que abrir para confirmar tu dirección de correo
+          electrónico.
+        header: Inscribirse
+        password_min_length: "(mínimo 6 caracteres)"
+        sign_up: Inscribirse

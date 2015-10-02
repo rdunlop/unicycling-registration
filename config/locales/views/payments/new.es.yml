@@ -1,0 +1,6 @@
+---
+es:
+  payments:
+    new:
+      select_the_items_to_pay_for: Selecciona el artículo para pagar
+      title: Nuevo pago

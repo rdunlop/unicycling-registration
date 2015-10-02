@@ -1,0 +1,11 @@
+---
+es:
+  songs:
+    add_file:
+      note: 'NOTA:'
+      step_1: Paso 1
+      step_1_description: Entrar evento/descripción
+      step_2: Paso 2
+      title: Subir música (Paso 2)
+      upload: Subir música
+      upload_music_file: Subir un archivo de música

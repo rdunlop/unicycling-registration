@@ -1,0 +1,6 @@
+---
+es:
+  payments:
+    show:
+      payment_summary: Resumen del pago
+      pay_with_paypal: Pagar con Paypol

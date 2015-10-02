@@ -1,0 +1,10 @@
+---
+es:
+  registrants:
+    summary:
+      age: Edad
+      birthday: Fecha de nacimiento
+      gender: Sexo
+      name: Nombre
+      registration_summary: Resumen de la inscripción
+      volunteer: Voluntario

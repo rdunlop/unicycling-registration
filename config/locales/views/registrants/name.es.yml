@@ -1,0 +1,7 @@
+---
+es:
+  registrants:
+    name:
+      first_name: Primero
+      last_name: "Último"
+      name: Nombre

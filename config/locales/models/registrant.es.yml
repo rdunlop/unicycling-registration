@@ -1,0 +1,11 @@
+---
+es:
+  activerecord:
+    attributes:
+      registrant:
+        bib_number: ID
+        online_waiver_signature: Firma
+    models:
+      registrant:
+        one: Solicitante de la inscripción
+        other: Solicitantes de la inscripción

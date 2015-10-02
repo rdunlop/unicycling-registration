@@ -1,0 +1,10 @@
+---
+es:
+  activerecord:
+    attributes:
+      registrant_expense_item:
+        tax: Impuestos
+    models:
+      registrant_expense_item:
+        one: Artículo
+        other: Artículos

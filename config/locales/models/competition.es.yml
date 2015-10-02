@@ -1,0 +1,11 @@
+---
+es:
+  activerecord:
+    attributes:
+      competition:
+        name: Nombre del concurso
+        num_members_per_competitor: Tamaño del equipo
+    models:
+      competition:
+        one: Competición
+        other: Competiciones
