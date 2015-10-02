@@ -174,6 +174,21 @@ Workspace::Application.routes.draw do
 
     scope module: "convention_setup" do
       resources :registration_periods, except: :show
+      # /convention_setup/migrate
+      # /convention_setup/migrate/from/:tenant
+      # /convention_setup/migrate/from/:tenant/events
+      # /convention_setup/migrate/from/:tenant/events POST
+      # /convention_setup/migrate/from/:tenant/categories
+      # /convention_setup/migrate/from/:tenant/categories POST
+      namespace "migrate" do
+        get :index, path: "/", controller: "migrations"
+        scope "from/:tenant" do
+          get :events, controller: "migrations"
+          post :create_events, controller: "migrations"
+          get :categories, controller: "migrations"
+          post :create_categories, controller: "migrations"
+        end
+      end
     end
 
     resources :combined_competitions, except: :show, controller: "compete/combined_competitions" do

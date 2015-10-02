@@ -1,0 +1,8 @@
+
+%h1 Copy Event Settings from another Tenant
+
+%h2 Migrate Events from: Choose Convention
+
+%ul
+  - @tenants.each do |tenant|
+    %li= link_to tenant.subdomain, migrate_events_path(tenant: tenant.subdomain)
