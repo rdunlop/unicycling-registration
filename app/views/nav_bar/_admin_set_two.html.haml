@@ -23,6 +23,8 @@
   %li= link_to  'Import Data', new_import_path
 - if policy(current_user).under_development?
   %li= link_to  'Multi-Tenant Research', research_competitions_path
+- if policy(@config).setup_convention?
+  %li= link_to 'Copy Events from previous Convention', migrate_index_path
 - if policy(current_user).view_modification_history?
   %li= link_to  'Modification History', rails_admin_path
 - if @config.standard_skill

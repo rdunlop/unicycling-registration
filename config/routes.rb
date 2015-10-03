@@ -185,8 +185,6 @@ Workspace::Application.routes.draw do
         scope "from/:tenant" do
           get :events, controller: "migrations"
           post :create_events, controller: "migrations"
-          get :categories, controller: "migrations"
-          post :create_categories, controller: "migrations"
         end
       end
     end

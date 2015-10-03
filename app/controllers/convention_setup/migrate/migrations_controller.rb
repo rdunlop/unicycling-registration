@@ -7,13 +7,6 @@ class ConventionSetup::Migrate::MigrationsController < ApplicationController
     @tenants = Tenant.all - [@tenant]
   end
 
-  def categories
-  end
-
-  # receives a single tenant, and creates its categories in the current tenant
-  def create_categories
-  end
-
   def events
     Apartment::Tenant.switch @source_tenant.subdomain do
       @events = Event.all.load
