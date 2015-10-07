@@ -126,6 +126,8 @@ Workspace::Application.routes.draw do
 
     resources :refunds, only: [:show]
 
+    resources :pages, only: [:show], param: :slug
+
     resource :export_payments, only: [] do
       collection do
         get :list
