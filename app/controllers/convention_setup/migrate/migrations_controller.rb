@@ -47,7 +47,6 @@ class ConventionSetup::Migrate::MigrationsController < ApplicationController
           if ec.optional_if_event_choice_id.present?
             optional_ec = event.event_choices.find { |search_ec| search_ec.id == ec.optional_if_event_choice_id }
             new_ec.optional_if_event_choice = new_event.event_choices.find_by(label: optional_ec.label)
-            binding.pry
             new_ec.save
           end
           if ec.required_if_event_choice_id.present?

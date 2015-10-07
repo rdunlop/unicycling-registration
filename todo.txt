@@ -2,6 +2,9 @@ POST-NAUCC 2015 thoughts
 =========================
 - More Info Link language dependent (put it into th db)
 - Copy all Events from other Instance
+ - Re-Adds the "All"
+ - DOesn't play nice with existing Events.
+ - Sholudn't copy the lightbox URL
 - Payment THrough PayPal?
 
 Things that caused the most grief:
