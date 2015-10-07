@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150801011800) do
+ActiveRecord::Schema.define(version: 20151007124421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -565,6 +565,26 @@ ActiveRecord::Schema.define(version: 20150801011800) do
 
   add_index "members", ["competitor_id"], name: "index_members_competitor_id", using: :btree
   add_index "members", ["registrant_id"], name: "index_members_registrant_id", using: :btree
+
+  create_table "page_translations", force: :cascade do |t|
+    t.integer  "page_id",    null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "title"
+    t.text     "body"
+  end
+
+  add_index "page_translations", ["locale"], name: "index_page_translations_on_locale", using: :btree
+  add_index "page_translations", ["page_id"], name: "index_page_translations_on_page_id", using: :btree
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "slug",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
 
   create_table "payment_detail_coupon_codes", force: :cascade do |t|
     t.integer  "payment_detail_id"

@@ -1,0 +1,5 @@
+%h1 Translate Pages
+
+%ul
+  - @pages.each do |page|
+    %li= link_to page, edit_translations_page_path(page)

@@ -70,6 +70,7 @@ Workspace::Application.routes.draw do
       resource :event_configuration, only: [:edit, :update]
       resources :categories, only: [:index, :edit, :update]
       resources :event_choices, only: [:index, :edit, :update]
+      resources :pages, only: [:index, :edit, :update]
       resources :expense_groups, only: [:index, :edit, :update]
       resources :expense_items, only: [:index, :edit, :update]
       resources :registration_periods, only: [:index, :edit, :update]
@@ -237,6 +238,7 @@ Workspace::Application.routes.draw do
       resources :volunteer_opportunities, except: [:show] do
         post :update_row_order, on: :collection
       end
+      resources :pages
     end
     scope "convention_setup", module: "convention_setup" do
       resources :coupon_codes, except: [:show]

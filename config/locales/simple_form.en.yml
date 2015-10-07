@@ -110,6 +110,8 @@ en:
       registrant:
         wheel_size_id: Used to choose Age Groups when applicable.
           (track, Standard-class events)
+      page:
+        slug: "The URL slug, use only normal characters (must not contain spaces)"
       wave_time:
         scheduled_time: "E.g. 02:00, 03:00"
     options:

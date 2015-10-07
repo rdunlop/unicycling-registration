@@ -1,0 +1,8 @@
+= simple_form_for([:convention_setup, @page]) do |f|
+  = render partial: "shared/error_messages", object: @page
+
+  = f.input :slug
+  = f.input :title
+  = f.input :body, as: :text, input_html: { class: "tinymce" }
+
+  = f.button :submit
