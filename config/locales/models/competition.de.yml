@@ -1,0 +1,18 @@
+---
+de:
+  activerecord:
+    attributes:
+      competition:
+        award_subtitle_name: Ehrungsuntertitel
+        award_title_name: Ehrungstitel
+        combined_competition_id: Gesamtsieger Berechnung
+        end_data_type: Ziellinien Dateneingabe
+        has_experts: Auch Expert berechnen
+        name: Wettkampfname
+        num_members_per_competitor: Teamgröße
+        penalty_seconds: Sekunden pro Strafe
+        scheduled_completion_at: Geplante Vervollständigungszeit
+        scoring_class: Wertungstyp
+        start_data_type: Starliniendaten Eingabe
+        uses_lane_assignments: Teilnahme in Reihen / Läufen
+    models: 

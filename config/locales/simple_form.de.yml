@@ -8,6 +8,31 @@ de:
         info_url: Dieser Link erscheint auf der Kategorien Seite und kann als ein
           Link zu zusätzlichen Informationen über die Wettbewerbe dieser Kategorie
           verwendet werden.
+      competition:
+        award_subtitle_name: "Gib eine freiwillige Zeile Ehrungstext ein. HINWEIS:
+          Nur OHNE Altersgruppe erlaubt\r\nz.B. Anfänger Männlich"
+        award_title_name: "Text, der auf offiziellen Ergebnissen und Ehrungen erscheint\r\nz.B.
+          Einzelkür"
+        combined_competition_id: "Dies sollte nur für die Gesamtwertung verfügbar
+          sein und nicht für die einzenen Wettbewerbe, die einen Teil dieser darstellen.\r\n(d.h.
+          nicht für 10k, nur für die \"Gesamtwertung Straßenrennen\")"
+        has_experts: "Wähle dies aus, wenn die hier eingegebenen Ergebnisse AUCH ohne
+          Altersgruppen geehrt werden sollen.\r\nWenn dieses Kästchen angehakt wird,
+          werden Expertergebnisse separat von den Altersgruppenergebnissen ausgewertet.\r\nSoll
+          dieser Wettkampf NUR als Expert gewertet werden ist es nicht nötig dieses
+          Kästchen anzuhaken, da alle Ergebnisse in einer Altersklasse / Ergebnisliste
+          gelistet werden.\r\nEs MUSS eine Altersgruppe definiert werden."
+        num_members_per_competitor: Für die meisten Veranstaltungen ist dies "Eins"
+        penalty_seconds: Ist es möglich einen Teilnehmer mit "X" Sekunden für einen
+          Regelverstoß (wie vom Einrad abzusteigen) zu bestrafen?
+        scheduled_completion_at: Wird genutzt um die Ergebnisse in einer Administratorübersicht
+          anzufordern
+        scoring_class: Wähle das Berechnungssystem
+        sign_in_list_enabled: "Für manche Wettkämpfe (wie Bahnrennen) ist das Registrierungsformular
+          automatisch aktiviert. Verwende diese Option\r\nfalls du die Kurbellänge
+          und andere Details für einen Wettbewerb angeben möchtest, die nicht automatisch\r\naktiviert
+          sind."
+        uses_lane_assignments: Aktiviert das Werkzeug zur Generierung der Läufe
       coupon_code:
         inform_emails: Eine Komma separierte Liste von E-Mail Adressen die informiert
           werden wenn jemand diesen Coupon verwendet
@@ -34,7 +59,8 @@ de:
           fährt
       event_configuration:
         artistic_closed_date: Ab diesem Datum können normale Teilnehmer keine Wettbewerbe
-          mehr hinzufügen die als "Artistik" markiert sind
+          mehr hinzufügen die als "Artistik" markiert sind. Bis zum Registrierungsschluss
+          können jedoch noch Wettbewerbe gelöscht werden.
         competitor_benefits: Erscheint auf der Anmelde Startseite, beschreibt welche
           Vorteile eine Teilnehmer Anmeldung bietet
         comp_noncomp_url: Definiert einen Link der die Unterschiede zwischen den verschiedenen
@@ -52,8 +78,8 @@ de:
         event_url: Links vom Menü Bar Logo zu dieser URL
         iuf: Das aktivieren dieser Funktion erlaubt IUF Mitgliedschafts Fragen.
         logo_file: Das Logo sollte 93x38 Pixel haben
-        music_submission_end_date: Das Datum nachdem die Zustellung von Musik nicht
-          mehr erlaubt ist
+        music_submission_end_date: Der letzte Tag an dem die Zustellung von Musik
+          erlaubt ist
         noncompetitor_benefits: Erscheint auf der Anmeldungs Startseite und beschreibt
           die Vorteile einer Anmeldung als Begleiter
         paypal_test: Erlaubt es vorzutäuschen eine Zahlungsbestätigung von Paypal
@@ -65,8 +91,9 @@ de:
         start_date: Das Alter der Teilnehmer wird auf dieses Datum berechnet
         test_mode: Das aktivieren dieses Feldes erlaubt es jedem Nutzer Super User
           zu werden und auch vorzutäuschen eine Zahlung vorgenommen zu haben.
-        usa: Diese Funktion priorisiert die USA und Kanada in der Länder Auswahl Box
-          und zeigt die Bundesstaaten an
+        usa: "Diese Funktion priorisiert die USA und Kanada in der Länder Auswahl
+          Box und zeigt die Bundesstaaten an.\r\nEbenfalls erlaubt sie die last-minute
+          Anmeldung von Teilnehmern (durch die Zuständigen für die Dateneingabe)"
       expense_group:
         competitor_required: Ein Artikel dieser Ausgaben Gruppe MUSS vom Teilnehmer
           ausgewählt werden (wenn es nur einen Artikel gibt wird dieser automatisch
@@ -82,6 +109,8 @@ de:
       volunteer_opportunity:
         inform_emails: Wenn jemand sich für diese Helfer Position anmeldet wird eine
           E-Mail an diese E-Mail Adresse gesendet
+      wave_time:
+        scheduled_time: Z.B. 02:00, 03:00
     labels:
       coupon_code:
         inform_emails: E-Mail um über jeden Coupon Gebrauch zu informieren

@@ -5,6 +5,7 @@ de:
       registrant:
         bib_number: ID
         online_waiver_signature: Unterschrift
+        wheel_size_id: Standard Rennradgröße
     models:
       registrant:
         one: Angemeldeter
