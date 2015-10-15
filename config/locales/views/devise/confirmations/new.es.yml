@@ -5,3 +5,4 @@ es:
       new:
         spam_reminder: Si no has recibido tu correo electrónico de confirmación, comprueba
           tu filtro de spam.
+        title: Reenviar instrucciones de confirmación

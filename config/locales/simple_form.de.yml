@@ -103,6 +103,8 @@ de:
         noncompetitor_required: Ein Artikel dieser Ausgaben Gruppe MUSS vom Teilnehmer
           ausgewählt werden (wenn es nur einen Artikel gibt wird dieser automatisch
           ausgewählt)
+      page:
+        slug: Der URL Text, verwende nur normale Buchstaben und keine Leerzeichen
       registrant:
         wheel_size_id: Verwendet um Altersklassen zu wählen soweit zutreffend. (Rennbahn,
           Standard Wettkämpfe)

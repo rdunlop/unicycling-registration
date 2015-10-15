@@ -2,8 +2,15 @@
 es:
   registrants:
     index:
+      be_sure_to_submit_payment: Una vez que haya creado sus registraciones, asegúrese
+        de enviar el pago.
+      can_change_events: Después de haber terminado su registración, todavía puede
+        ser capaz de cambiar sus datos de eventos.
       difference_tooltip: Haz clic aquí para más informaciones
       link_end: página para detalles
+      onsite_restricted_events: Con el fin de programar los eventos correctamente,
+        registrarse en las instalaciones no puede ofrecer todos los eventos / elementos
+        que permite la pre-inscripción.
       registrant_access_page_title: Acceso para solicitantes
       registration: Inscripción
       registration_time: La inscripción tarda aproximadamente 15 minutos.

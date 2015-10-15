@@ -2,4 +2,8 @@
 es:
   registrants:
     reg_closed_banner:
+      no_changes_permitted: Usted no puede hacer más cambios en sus datos de registración.
       online_registration_is_closed: Inscripción en línea está cerrada ahora
+      onsite_changes_explanation: Si tiene algunos pagos pendientes, es posible que
+        pueda continuar con esta registración en las en las instalaciones (a discreción
+        de los organizadores del evento)

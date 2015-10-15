@@ -9,6 +9,7 @@ es:
         location: Lugar
         long_name: Nombre completo
         noncompetitor_benefits: Ventajas para los acompañantes
+        offline_payment: Proporcione detalles sobre el pago fuera de línea
         offline_payment_description: Detalles para el pago fuera de línea
         short_name: Nombre corto
         spectator_benefits: Ventajas para los espectadores

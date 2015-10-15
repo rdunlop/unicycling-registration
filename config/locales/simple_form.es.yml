@@ -1,17 +1,69 @@
 ---
 es:
   simple_form:
+    error_notification:
+      default_message: 'Por favor revise los problemas siguientes:'
     hints:
+      category:
+        info_url: Este enlace aparece en la página de Categoría, y puede servir como
+          un enlace para obtener más información sobre los eventos en esta categoría.
+      competition:
+        award_title_name: "Texto que aparece en los resultados oficiales y premios\r\nPor
+          ejemplo: Freestyle Individual"
+        num_members_per_competitor: Para la mayoría de los eventos esto será "Uno"
+        penalty_seconds: ¿Se puede penalizar a un competidor "X" segundos por una
+          infracción (como desmontarse del monociclo)?
+        scheduled_completion_at: Se utiliza para ordenar los resultados en el resumen
+          de administración
+        scoring_class: Elija el sistema de cálculo
+        sign_in_list_enabled: "La Forma firmada se activa automáticamente para algunos
+          eventos (como Pista). Utilice esta opción\r\nsi quieres entrar la longitud
+          de las bielas, y otros detalles para un evento que no tiene de forma predeterminada\r\nun
+          formulario para firmar."
+      coupon_code:
+        inform_emails: Una lista, separada por comas, de direcciones de correo electrónico
+          que serán informados cuando alguien use este cupón
+        price: El precio que se cobrará al utilizar este cupón.
+      event:
+        accepts_music_uploads: Marque esta casilla si cada competidor puede elegir
+          la música para su competencia
+        accepts_wheel_size_override: Al establecer esta opción le presenta los niños
+          de 10 años o menos con la capacidad de especificar una re-definición del
+          tamaño de la rueda.
+      event_category:
+        warning_on_registration_summary: Cualquier registrante que se inscribia en
+          esta categoría tendrá una advertencia en su formulario de inscripción.
+      event_choice:
+        optional: Permite al usuario elegir a no introducir datos en este campo
+      event_configuration:
+        display_confirmed_events: La activación de esto muestra los eventos confirmados
+          / eventos sin confirmar en la página de Resumen de Registrante.
+        iuf: Al habilitar esto permite  preguntas de membresía de la IUF.
+        logo_file: El logo debe ser de 93px x 38px
       wave_time:
         scheduled_time: P.ej. 02:00, 03:00
     labels:
+      coupon_code:
+        inform_emails: Correos electrónicos para notificar cada uso de cupones
+      event:
+        accepts_music_uploads: Solicitar Música sea Subida
       event_configuration:
         artistic_score_elimination_mode_naucc: Grupo pequeño
+        comp_noncomp_url: Explicación Competidor / No-Competidor
         rulebook_url: Reglamento PDF URL
       expense_item:
         details_label: Pregunta
         has_custom_cost: Donativo
+        has_details: Haga una pregunta del registrante
+        maximum_per_registrant: Máximo por registrante
+      volunteer_opportunity: Direcciones de correo electrónico para notificar cada
+        voluntario que se inscriba
     'no': 'No'
+    options:
+      event_configuration:
+        waiver:
+          online: Relevo de Responsabilidad en linea
+          print: Imprimir Relevo de Responsabilida
     placeholders:
       competitor_expense_item:
         cost: P.ej. 12.00
@@ -19,6 +71,8 @@ es:
         code: Código para usario para entrar
       noncompetitor_expense_item:
         cost: P.ej. 12.00
+      volunteer_opportunity:
+        inform_emails: lista de direcciones de correo electrónico separada por comas
     required:
       mark: "*"
       text: necesario

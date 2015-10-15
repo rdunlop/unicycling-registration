@@ -8,4 +8,8 @@ es:
       header: Ayuda
       i_cannot_login: No puedo iniciar sesión
       registration: Cómo puedo inscribirme?
+      sharing_registration_details: Cómo compartir Detalles de Inscripción
+      sharing_registration_details_help: Como Capitán del Equipo o Líder del Club
+        puedes solicitar acceso para que puedas pagar por la registración de otros
+        miembros, así como ver los eventos que se han inscrito.
       translations: Translaciones

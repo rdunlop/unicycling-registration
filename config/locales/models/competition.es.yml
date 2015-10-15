@@ -3,8 +3,14 @@ es:
   activerecord:
     attributes:
       competition:
+        end_data_type: Entrada de datos en línea de meta
         name: Nombre del concurso
         num_members_per_competitor: Tamaño del equipo
+        penalty_seconds: Segundos por penalización
+        scheduled_completion_at: Tiempo de finalización Programado
+        scoring_class: Tipo de puntuación
+        start_data_type: Entrada de datos de la Linea de Salida
+        uses_lane_assignments: Compite en Carriles / Series
     models:
       competition:
         one: Competición

@@ -4,7 +4,9 @@ es:
     summary:
       age: Edad
       birthday: Fecha de nacimiento
+      default_wheel_size: Tamaño Predeterminado de la rueda de Pista
       gender: Sexo
       name: Nombre
       registration_summary: Resumen de la inscripción
+      user_account_email: Correo Electrónico de la Cuenta del Usuario
       volunteer: Voluntario

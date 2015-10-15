@@ -4,3 +4,4 @@ es:
     sessions:
       new:
         action: Iniciar sesión
+        use_access_code: Utilice un código de acceso

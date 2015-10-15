@@ -5,3 +5,4 @@ es:
       birthday: Fecha de nacimiento
       female: Femenino
       male: Masculino
+      required_fields: Campos requeridos

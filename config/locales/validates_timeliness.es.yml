@@ -1,5 +1,14 @@
 ---
 es:
+  errors:
+    messages:
+      after: debe ser después %{restriction}
+      before: debe ser antes %{restriction}
+      invalid_date: no es una fecha válida
+      invalid_datetime: no es una fecha/hora válida
+      invalid_time: no es una hora válida
+      on_or_after: debe ser en o después %{restriction}
+      on_or_before: debe estar en o antes %{restriction}
   validates_timeliness:
     error_value_formats:
       date: "%Y-%m-%d"

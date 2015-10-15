@@ -2,5 +2,7 @@
 es:
   registrant_expense_items:
     new_expense:
+      add_free_item: Agregar artículo GRATIS
       add_item: Añadir artículo
+      one_is_free: Uno es gratis con su registración
       sold_out: Agotado

@@ -1,0 +1,13 @@
+---
+es:
+  registrants:
+    online_waiver:
+      by_having_your_parent_sign_you_agree: Al tener su pariente / tutor legal firmando
+        en el cuadro de abajo, ellos están de acuerdo con el Relevo de Responsabilidad
+        anterior.
+      by_signing_you_agree: Con su firma en el cuadro de abajo, usted está de acuerdo
+        con el Relevo de Responsabilidad anterior.
+      by_signing_you_agree_by_age: Con su firma en el cuadro de abajo, usted está
+        de acuerdo con el Relevo de Responsabilidad anterior.Si usted es menor de
+        18, debe tener un pariente / tutor legal firmando para usted.
+      header: Relevo de Responsabilidad

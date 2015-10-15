@@ -6,9 +6,18 @@ es:
       attending: Dirección
       contact_information: Información de contacto
       copy_from_other_registrant: Copiar dirección de %{other_name}
+      country_representing_description: Si usted representa un país diferente al de
+        su lugar de residencia, ingreselo aquí
+      email_tooltip: Proporcione su dirección de correo electrónico para recibir actualizaciones
+        de la registración, itinerario y nuevos eventos.
       emergency_contact: Contacto de emergencia
       in_case_of_emergency: En caso de emergencia
       responsible_adult: Adulto responsable
       responsible_adult_detail: "(para solicitantes menores de 18 años)"
+      responsible_adult_tooltip: El "Adulto Responsable" será responsable del menor
+        registrado.
       state: Estado
       state_province: Estado/Provincia
+      team_affiliation: Afiliación al Equipo
+      usa_membership_number_tooltip: Se requiere una membresía a la USA para participar
+        en %{convention_name}
