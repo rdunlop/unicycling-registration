@@ -4,7 +4,7 @@ class PagesController < ApplicationController
 
   # GET /pages/:slug
   def show
-    @page = Page.find_by(slug: params[:slug])
+    @page = Page.find_by!(slug: params[:slug])
   end
 
   private

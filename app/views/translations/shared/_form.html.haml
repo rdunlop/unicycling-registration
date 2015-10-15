@@ -16,6 +16,8 @@
             - else
               - if defined?(wysiwyg) && wysiwyg.include?(attr_sym)
                 = g.text_area attr_sym, class: "tinymce"
+              - elsif defined?(full_wysiwyg) && full_wysiwyg.include?(attr_sym)
+                = g.text_area attr_sym, class: "full_tinymce"
               - else
                 = g.text_area attr_sym
   %br
