@@ -5,6 +5,7 @@ en:
       registrant:
         bib_number: ID
         online_waiver_signature: Signature
+        online_waiver_acceptance: "I confirm that I read, understand and accept the Terms"
         wheel_size_id: Default Track Racing Wheel Size
     models:
       registrant:

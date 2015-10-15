@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007124421) do
+ActiveRecord::Schema.define(version: 20151015024531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -728,26 +728,27 @@ ActiveRecord::Schema.define(version: 20151007124421) do
   add_index "registrant_groups", ["registrant_id"], name: "index_registrant_groups_registrant_id", using: :btree
 
   create_table "registrants", force: :cascade do |t|
-    t.string   "first_name",              limit: 255
-    t.string   "middle_initial",          limit: 255
-    t.string   "last_name",               limit: 255
+    t.string   "first_name",               limit: 255
+    t.string   "middle_initial",           limit: 255
+    t.string   "last_name",                limit: 255
     t.date     "birthday"
-    t.string   "gender",                  limit: 255
+    t.string   "gender",                   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.boolean  "deleted",                             default: false,        null: false
+    t.boolean  "deleted",                              default: false,        null: false
     t.integer  "bib_number"
     t.integer  "wheel_size_id"
     t.integer  "age"
-    t.boolean  "ineligible",                          default: false,        null: false
-    t.boolean  "volunteer",                           default: false,        null: false
-    t.string   "online_waiver_signature", limit: 255
-    t.string   "access_code",             limit: 255
-    t.string   "sorted_last_name",        limit: 255
-    t.string   "status",                  limit: 255, default: "active",     null: false
-    t.string   "registrant_type",         limit: 255, default: "competitor"
-    t.boolean  "rules_accepted",                      default: false,        null: false
+    t.boolean  "ineligible",                           default: false,        null: false
+    t.boolean  "volunteer",                            default: false,        null: false
+    t.string   "online_waiver_signature",  limit: 255
+    t.string   "access_code",              limit: 255
+    t.string   "sorted_last_name",         limit: 255
+    t.string   "status",                   limit: 255, default: "active",     null: false
+    t.string   "registrant_type",          limit: 255, default: "competitor"
+    t.boolean  "rules_accepted",                       default: false,        null: false
+    t.boolean  "online_waiver_acceptance",             default: false,        null: false
   end
 
   add_index "registrants", ["deleted"], name: "index_registrants_deleted", using: :btree
