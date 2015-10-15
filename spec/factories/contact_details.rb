@@ -47,7 +47,7 @@ FactoryGirl.define do
     zip "12345"
     phone "PhoMyString"
     mobile "IMobMyString"
-    email "EmailMyString"
+    sequence(:email) { |n| "EmailMyString+#{n}@example.com" }
     club "TCUC"
     club_contact "Connie Cotter"
     usa_member_number "00001"

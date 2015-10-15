@@ -1,5 +1,5 @@
 - Add Basque Country to the set of available countries?
-
+- Be able to LOCK a previous/future Convention
 
 POST-NAUCC 2015 thoughts
 =========================
