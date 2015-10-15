@@ -1,3 +1,6 @@
+- Add Basque Country to the set of available countries?
+
+
 POST-NAUCC 2015 thoughts
 =========================
 - More Info Link language dependent (put it into th db)

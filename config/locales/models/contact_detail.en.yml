@@ -19,7 +19,7 @@ en:
         mobile: Mobile
         phone: Phone
         responsible_adult_phone: Primary Phone
-        responsible_adulte_name: Name
+        responsible_adult_name: Name
         usa_member_number: USA Membership Number
         zip: Zip
     models:
