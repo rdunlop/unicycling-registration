@@ -32,7 +32,10 @@ class WelcomeController < ApplicationController
     if Page.exists?(slug: "home")
       redirect_to page_path("home")
     else
-      redirect_to user_registrants_path(current_user)
+      authenticate_user!
+      if user_signed_in?
+        redirect_to user_registrants_path(current_user)
+      end
     end
   end
 
