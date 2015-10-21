@@ -112,6 +112,7 @@ en:
           (track, Standard-class events)
       page:
         slug: "The URL slug, use only normal characters (must not contain spaces)"
+        parent_page: "[Optional] Group this page under this parent page"
       wave_time:
         scheduled_time: "E.g. 02:00, 03:00"
     options:

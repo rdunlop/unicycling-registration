@@ -1,0 +1,17 @@
+- cache_i18n ['pages_bar', Page] do
+  - if Page.ordinary.any?
+    %nav.top-bar.hide-for-small-only#page_bar{ data: { options: "is_hover: false", topbar: true }, role: "navigation" }
+      %section.top-bar-section
+        %ul.left
+          - Page.ordinary.parent_or_single.ordered.each do |page|
+            - if page.parent?
+              %li.has-dropdown
+                %a{href: "#"}= page.title
+                %ul.dropdown
+                  %li
+                    %a{href: "#"}= link_to page.title, page_path(page.slug)
+                  - page.children.ordered.each do |page|
+                    %li
+                      %a{href: "#"}= link_to page.title, page_path(page.slug)
+            - else
+              %li= link_to page.title, page_path(page.slug)

@@ -28,10 +28,10 @@ class ConventionSetup::PagesController < ConventionSetupController
     @page = Page.new(page_params)
     if @page.save
       flash[:notice] = 'Page was successfully created.'
+      redirect_to convention_setup_page_path(@page)
     else
-      load_pages
+      render :new
     end
-    respond_with(@page, location: convention_setup_page_path(@page), action: "index")
   end
 
   # PUT /event_choices/1
@@ -68,7 +68,7 @@ class ConventionSetup::PagesController < ConventionSetupController
   end
 
   def page_params
-    params.require(:page).permit(:slug, :title, :body,
+    params.require(:page).permit(:slug, :title, :body, :position, :parent_page_id,
                                  translations_attributes: [:id, :locale, :title, :body])
   end
 end

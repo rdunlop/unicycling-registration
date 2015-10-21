@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015024531) do
+ActiveRecord::Schema.define(version: 20151021030859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -579,11 +579,15 @@ ActiveRecord::Schema.define(version: 20151015024531) do
   add_index "page_translations", ["page_id"], name: "index_page_translations_on_page_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
-    t.string   "slug",       null: false
+    t.string   "slug",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
+    t.integer  "parent_page_id"
   end
 
+  add_index "pages", ["parent_page_id", "position"], name: "index_pages_on_parent_page_id_and_position", using: :btree
+  add_index "pages", ["position"], name: "index_pages_on_position", using: :btree
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
 
   create_table "payment_detail_coupon_codes", force: :cascade do |t|

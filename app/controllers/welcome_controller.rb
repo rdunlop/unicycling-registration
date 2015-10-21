@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :data_entry_menu]
+  before_action :authenticate_user!, only: [:data_entry_menu]
   before_action :skip_authorization, only: [:index, :help, :feedback, :confirm]
 
   before_action :check_acceptable_format
@@ -29,7 +29,11 @@ class WelcomeController < ApplicationController
 
   def index
     flash.keep
-    redirect_to user_registrants_path(current_user)
+    if Page.exists?(slug: "home")
+      redirect_to page_path("home")
+    else
+      redirect_to user_registrants_path(current_user)
+    end
   end
 
   def data_entry_menu
