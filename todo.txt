@@ -1,3 +1,10 @@
+- Add a "Last Updated" date to the privacy policy
+- Add an SSL Certificate
+- Add an "Opt-out" instruction to the bottom of each e-mail that we send.
+- Look into CAN-SPAM compliance
+- Look into COPPA compliance
+- Look into the CALOPPA compliance
+
 - Add Basque Country to the set of available countries?
 - Be able to LOCK a previous/future Convention
 

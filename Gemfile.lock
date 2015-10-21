@@ -16,6 +16,15 @@ GIT
     acts_as_restful_list (0.6)
 
 GIT
+  remote: git://github.com/rdunlop/countries.git
+  revision: 09024fbee43778159dcae393ecbe8353fb696c4f
+  branch: iuf_country_changes
+  specs:
+    countries (1.1.0)
+      currencies (~> 0.4.2)
+      i18n_data (~> 0.7.0)
+
+GIT
   remote: git://github.com/rdunlop/redis-store.git
   revision: 89a77957f1e1f66fff15cf161ecc6306553278e1
   specs:
@@ -206,9 +215,6 @@ GEM
       sprockets (< 2.13)
     connection_pool (2.2.0)
     consistency_fail (0.3.3)
-    countries (1.1.0)
-      currencies (~> 0.4.2)
-      i18n_data (~> 0.7.0)
     country_select (2.4.0)
       countries (~> 1.1.0)
       sort_alphabetical (~> 1.0)
@@ -668,6 +674,7 @@ DEPENDENCIES
   chosen-rails
   coffee-rails
   consistency_fail
+  countries!
   country_select
   delorean
   devise

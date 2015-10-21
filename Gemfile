@@ -18,6 +18,7 @@ gem 'prawn-labels'
 
 # Front-end
 gem 'simple_form'
+gem 'countries', github: 'rdunlop/countries', branch: 'iuf_country_changes' # necessary to be able to specify non-ISO3166 countries
 gem 'country_select'
 gem 'money-rails'
 gem 'chosen-rails'
@@ -37,7 +38,7 @@ gem "haml-rails", "~> 0.9"
 gem 'rake'
 gem 'paper_trail', '~> 3.0.1'
 gem 'exception_notification'
-gem 'redis-store', git: "git://github.com/rdunlop/redis-store.git" # necessary for lambda namespace (https://github.com/redis-store/redis-store/pull/163)
+gem 'redis-store', github: "rdunlop/redis-store" # necessary for lambda namespace (https://github.com/redis-store/redis-store/pull/163)
 gem 'redis-rails'
 gem 'rails_admin'
 gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
