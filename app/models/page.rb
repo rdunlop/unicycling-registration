@@ -17,7 +17,7 @@
 #
 
 class Page < ActiveRecord::Base
-  includes CachedModel
+  include CachedModel
 
   validate :slug_cannot_have_special_characters
   validates :slug, presence: true, uniqueness: true
