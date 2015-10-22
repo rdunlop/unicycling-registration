@@ -154,5 +154,18 @@ describe "registrants/build/add_events" do
         end
       end
     end
+
+    describe "for a best_time_format" do
+      before do
+        @ev1.update_attributes(best_time_format: "hh:mm")
+      end
+
+      it "presents me with a text input for the source" do
+        render
+
+        assert_select "input#registrant_registrant_best_times_attributes_0_source"
+        assert_select "input#registrant_registrant_best_times_attributes_0_value"
+      end
+    end
   end
 end

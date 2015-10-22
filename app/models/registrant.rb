@@ -44,6 +44,7 @@ class Registrant < ActiveRecord::Base
   has_one :standard_skill_routine, dependent: :destroy
 
   # may move into another object
+  has_many :registrant_best_times, dependent: :destroy, inverse_of: :registrant
   has_many :registrant_choices, dependent: :destroy, inverse_of: :registrant
   has_many :registrant_event_sign_ups, dependent: :destroy, inverse_of: :registrant
   has_many :signed_up_events, -> { where ["signed_up = ?", true] }, class_name: 'RegistrantEventSignUp'

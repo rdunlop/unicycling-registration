@@ -14,6 +14,7 @@
 #  accepts_wheel_size_override :boolean          default(FALSE), not null
 #  event_categories_count      :integer          default(0), not null
 #  event_choices_count         :integer          default(0), not null
+#  best_time_format            :string           default("none"), not null
 #
 # Indexes
 #
@@ -28,5 +29,9 @@ FactoryGirl.define do
     category # FactoryGirl
     sequence(:name) {|n| "Teh event number #{n}" }
     visible true
+
+    trait :marathon_best_time_format do
+      best_time_format "hh:mm"
+    end
   end
 end

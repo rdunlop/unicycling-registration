@@ -14,6 +14,7 @@
 #  accepts_wheel_size_override :boolean          default(FALSE), not null
 #  event_categories_count      :integer          default(0), not null
 #  event_choices_count         :integer          default(0), not null
+#  best_time_format            :string           default("none"), not null
 #
 # Indexes
 #
@@ -43,6 +44,23 @@ describe Event do
 
   it "should have name as to_s" do
     expect(@ev.to_s).to eq(@ev.name)
+  end
+
+  context "#best_time_format" do
+    it "requires a best_time_format" do
+      @ev.best_time_format = nil
+      expect(@ev).to be_invalid
+    end
+
+    it "allows hh:mm best_time format" do
+      @ev.best_time_format = "hh:mm"
+      expect(@ev).to be_valid
+    end
+
+    it "doesn't allow strange formats" do
+      @ev.best_time_format = "bogus"
+      expect(@ev).to be_invalid
+    end
   end
 
   it "describes itself as StandardSkill if named so" do

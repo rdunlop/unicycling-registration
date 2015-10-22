@@ -14,6 +14,7 @@
 #  accepts_wheel_size_override :boolean          default(FALSE), not null
 #  event_categories_count      :integer          default(0), not null
 #  event_choices_count         :integer          default(0), not null
+#  best_time_format            :string           default("none"), not null
 #
 # Indexes
 #
@@ -55,6 +56,13 @@ class Event < ActiveRecord::Base
 
   validates :name, presence: true
   validates :category_id, presence: true
+
+  BEST_TIME_FORMATS = [
+    "none",
+    "hh:mm"
+  ].freeze
+
+  validates :best_time_format, presence: true, inclusion: BEST_TIME_FORMATS
 
   before_validation :build_event_category
 
