@@ -25,4 +25,17 @@ class RegistrantBestTime < ActiveRecord::Base
   belongs_to :event
   belongs_to :registrant, inverse_of: :registrant_best_times, touch: true
 
+  def formatted_value=(new_value)
+    self.value = formatter.from_string(new_value)
+  end
+
+  def formatted_value
+    formatter.to_string(value)
+  end
+
+  private
+
+  def formatter
+    HourMinuteFormatter
+  end
 end

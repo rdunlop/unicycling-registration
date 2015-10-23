@@ -32,4 +32,16 @@ describe RegistrantBestTime do
     @rb.save
     expect(@rb).to be_valid
   end
+
+  context "with a hh:mm event" do
+    before do
+      ev = @rb.event
+      ev.update_attributes(best_time_format: "hh:mm")
+    end
+
+    it "stores the converted time in the value" do
+      @rb.formatted_value = "1:0"
+      expect(@rb.value).to eq(6000)
+    end
+  end
 end

@@ -10,6 +10,7 @@
     = f.simple_fields_for :event_categories do |ec|
       = ec.input :name, label: "Event Category Name", hint: "specify 'All' if there is only 1 category (note: advanced options are available under 'Event Categories')"
 
+  = f.input :best_time_format, collection: Event.BEST_TIME_FORMATS
   = f.input :accepts_music_uploads
   = f.input :accepts_wheel_size_override
 

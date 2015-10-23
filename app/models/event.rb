@@ -64,6 +64,10 @@ class Event < ActiveRecord::Base
 
   validates :best_time_format, presence: true, inclusion: BEST_TIME_FORMATS
 
+  def best_time?
+    best_time_format != "none"
+  end
+
   before_validation :build_event_category
 
   def build_event_category

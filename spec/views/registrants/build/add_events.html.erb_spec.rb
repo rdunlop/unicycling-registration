@@ -163,8 +163,8 @@ describe "registrants/build/add_events" do
       it "presents me with a text input for the source" do
         render
 
-        assert_select "input#registrant_registrant_best_times_attributes_0_source"
-        assert_select "input#registrant_registrant_best_times_attributes_0_value"
+        assert_select "input#registrant_registrant_best_times_attributes_0_source_location"
+        assert_select "input#registrant_registrant_best_times_attributes_0_formatted_value"
       end
     end
   end

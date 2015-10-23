@@ -125,6 +125,7 @@ class Registrants::BuildController < ApplicationController
      volunteer_opportunity_ids: [],
      registrant_choices_attributes: [:event_choice_id, :value, :id],
      registrant_event_sign_ups_attributes: [:event_category_id, :signed_up, :event_id, :id],
+     registrant_best_times_attributes: [:source_location, :formatted_value, :event_id, :id],
      contact_detail_attributes: [:id, :email,
                                  :birthplace, :italian_fiscal_code,
                                  :address, :city, :country_residence, :country_representing,

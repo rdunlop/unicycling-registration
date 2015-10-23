@@ -75,7 +75,7 @@ class ConventionSetup::EventsController < ConventionSetupController
 
   def event_params
     params.require(:event).permit(:category_id, :name, :visible, :artistic, :accepts_music_uploads,
-                                  :accepts_wheel_size_override,
+                                  :accepts_wheel_size_override, :best_time_format,
                                   event_choices_attributes: [:cell_type, :label, :multiple_values, :id],
                                   event_categories_attributes: [:name, :id])
   end

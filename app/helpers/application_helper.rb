@@ -16,6 +16,9 @@ module ApplicationHelper
       if registrant.registrant_event_sign_ups.select { |resu| resu.event_id == ev.id}.empty?
         registrant.registrant_event_sign_ups.build(event: ev)
       end
+      if ev.best_time? && registrant.registrant_best_times.select { |bt| bt.event_id == ev.id }.empty?
+        registrant.registrant_best_times.build(event: ev)
+      end
     end
     registrant
   end

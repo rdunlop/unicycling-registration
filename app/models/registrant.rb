@@ -83,6 +83,7 @@ class Registrant < ActiveRecord::Base
   accepts_nested_attributes_for :contact_detail
   accepts_nested_attributes_for :registrant_choices
   accepts_nested_attributes_for :registrant_event_sign_ups
+  accepts_nested_attributes_for :registrant_best_times
   accepts_nested_attributes_for :volunteer_choices
 
   before_create :create_associated_required_expense_items

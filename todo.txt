@@ -1,3 +1,5 @@
+- Add a way to export the data for olaf into mailjet format.
+
 - "Additional Info" should be "Page"-using
 - Add an SSL Certificate
 - Add an "Opt-out" instruction to the bottom of each e-mail that we send.
