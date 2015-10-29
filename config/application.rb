@@ -13,6 +13,7 @@ module Workspace
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/lib/judge_points_calculators #{config.root}/lib/comparable_result_calculators #{config.root}/lib/distance_attempt_managers)
+    config.autoload_paths += %W(#{config.root}/app/models/best_time_formatters)
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

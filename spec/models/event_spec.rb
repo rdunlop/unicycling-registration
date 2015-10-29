@@ -109,6 +109,14 @@ describe Event do
     expect(@ev.event_categories).to eq([@ecat1, @ecat2])
   end
 
+  context "with a best time" do
+    let(:event) { FactoryGirl.create(:event, :marathon_best_time_format) }
+
+    it "counts more choices" do
+      expect(event.num_choices).to eq(2)
+    end
+  end
+
   describe "when a user has chosen an event" do
     before(:each) do
       @ev = FactoryGirl.create(:event)

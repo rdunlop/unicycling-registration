@@ -17,8 +17,7 @@
         = f.password_field :password
     - if devise_mapping.rememberable?
       .small-12.columns
-        = f.check_box :remember_me
-        = f.label :remember_me
+        = f.input :remember_me, as: :boolean
     .row
       .small-12.columns= f.button :submit, t(".action"), :class => "focus_button"
 = render "devise/shared/links"

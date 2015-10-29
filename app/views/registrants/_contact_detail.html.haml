@@ -102,7 +102,7 @@
           .small-6.columns= f.text_field :emergency_relationship
         .row
           .small-6.columns= f.label :emergency_attending, "#{t(".attending")} #{@config.short_name}?"
-          .small-6.columns= f.check_box :emergency_attending
+          .small-6.columns= f.input :emergency_attending, label: false
         .row
           .small-6.columns= f.label :emergency_primary_phone, :class => "required"
           .small-6.columns= f.telephone_field :emergency_primary_phone

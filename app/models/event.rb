@@ -118,6 +118,9 @@ class Event < ActiveRecord::Base
     if accepts_music_uploads?
       total += 1
     end
+    if best_time?
+      total += 1
+    end
     total + event_choices.size
   end
 end

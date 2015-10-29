@@ -43,5 +43,21 @@ describe RegistrantBestTime do
       @rb.formatted_value = "1:0"
       expect(@rb.value).to eq(6000)
     end
+
+    it "gives the correct hint" do
+      expect(@rb.hint).to eq("hh:mm")
+    end
+  end
+
+  context "doesn't allow incorrectly formatted values" do
+    it "gives an error message" do
+      @rb.formatted_value = "12"
+      expect(@rb).to be_invalid
+    end
+
+    it "allows properly formatted values" do
+      @rb.formatted_value = "1:20"
+      expect(@rb).to be_valid
+    end
   end
 end

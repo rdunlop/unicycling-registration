@@ -30,6 +30,9 @@ en:
       volunteer_opportunity: "E-mail addresses to notify on each volunteer sign-up"
       event:
         accepts_music_uploads: "Request Music be Uploaded"
+      registrant_best_times:
+        source_location: Convention Name
+        formatted_value: Best Time
     placeholders:
       coupon_code:
         code: "Code for user to enter"
@@ -113,6 +116,8 @@ en:
       page:
         slug: "The URL slug, use only normal characters (must not contain spaces)"
         parent_page: "[Optional] Group this page under this parent page"
+      registrant_best_times:
+        source_location: Enter Name and Date
       wave_time:
         scheduled_time: "E.g. 02:00, 03:00"
     options:

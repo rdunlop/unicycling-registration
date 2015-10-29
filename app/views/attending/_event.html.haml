@@ -10,8 +10,7 @@
       - if disabled_event && resu.object.signed_up?
         = link_to "Drop Out", drop_event_registrant_build_index_path(@registrant, event_id: event.id), data: { confirm: "If you drop out, you cannot sign back up without admin approval. Continue?" }, class: "button alert tiny", method: :delete
       = resu.hidden_field :event_id
-      = resu.check_box :signed_up, :class => "primary_checkbox"
-      = resu.label :signed_up, event.to_s
+      = resu.input :signed_up, :class => "primary_checkbox", label: event.to_s
       - if event.event_categories.size == 1
         = resu.hidden_field :event_category_id, :value => event.event_categories.first.id
     - if !(event.event_categories.size == 1)
@@ -37,8 +36,7 @@
         = ec.hidden_field :event_choice_id
         - case ec.object.event_choice.cell_type
         - when "boolean"
-          = ec.check_box :value, :title => choice.tooltip
-          = ec.label :value, choice.label, :title => choice.tooltip
+          = ec.input :value, as: :boolean, label: choice.label, :title => choice.tooltip
         - when "text"
           = ec.text_field :value, :placeholder => ec.object.event_choice.label, :title => choice.tooltip
         - when "multiple"
@@ -52,10 +50,16 @@
       - if bt.event_id == event.id
         - found_bt = bt
     %td
-      = f.fields_for :registrant_best_times, found_bt do |rbt|
+      .row
+        .small-12.columns
+          = t(".best_time")
+      = f.simple_fields_for :registrant_best_times, found_bt do |rbt|
         = rbt.hidden_field :event_id
-        = rbt.text_field :source_location
-        = rbt.text_field :formatted_value
+        .row
+          .small-12.medium-6.columns
+            = rbt.input :source_location
+          .small-12.medium-6.columns
+            = rbt.input :formatted_value, placeholder: rbt.object.hint
 
   - if event.accepts_music_uploads?
     %td

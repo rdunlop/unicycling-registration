@@ -1,4 +1,4 @@
-= form_for(@registrant, url: wizard_path, method: :put) do |f|
+= simple_form_for(@registrant, url: wizard_path, method: :put) do |f|
   - if @registrant.errors.any?
     #error_explanation
       %h2
@@ -19,7 +19,7 @@
     - if VolunteerOpportunity.any?
       = render partial: "/registrants/volunteer_choices", locals: {f: f}
     - else
-      = f.label :volunteer, t(".i_am_interested_in_volunteering")
-      = f.check_box :volunteer, :title => t(".i_accept_to_be_contacted")
+      = f.input :volunteer, label: t(".i_am_interested_in_volunteering")
+      = t(".i_accept_to_be_contacted")
 
   = render partial: "/registrants/form_actions", locals: {f: f}

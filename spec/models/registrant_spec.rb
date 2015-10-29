@@ -345,6 +345,16 @@ describe Registrant do
       expect(RegistrantChoice.all.count).to eq(0)
     end
   end
+
+  describe "with a registrant best time" do
+    let(:registrant_best_time) { FactoryGirl.create(:registrant_best_time, registrant: @reg, formatted_value: "12:30") }
+
+    it "has the correct output of registrant describe_event_hash" do
+      the_hash = @reg.describe_event_hash(registrant_best_time.event)
+      expect(the_hash[:additional]).to eq("Best Time: 12:30")
+    end
+  end
+
   describe "with a standard_skill registrant_choice" do
     before(:each) do
       event = FactoryGirl.create(:event, name: "Standard Skill")

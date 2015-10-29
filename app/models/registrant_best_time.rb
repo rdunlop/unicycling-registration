@@ -19,23 +19,41 @@
 class RegistrantBestTime < ActiveRecord::Base
   validates :event_id, presence: true, uniqueness: {scope: [:registrant_id]}
   validates :registrant, presence: true
+  validate :formatted_value_is_formatted
 
   has_paper_trail meta: { registrant_id: :registrant_id }
 
   belongs_to :event
   belongs_to :registrant, inverse_of: :registrant_best_times, touch: true
 
+  delegate :hint, to: :formatter
+
   def formatted_value=(new_value)
-    self.value = formatter.from_string(new_value)
+    @entered_value = new_value
+    self.value = formatter.from_string(new_value) if formatter.valid?(entered_value)
   end
 
   def formatted_value
-    formatter.to_string(value)
+    entered_value || formatter.to_string(value)
+  end
+
+  def to_s
+    "Best Time: #{formatted_value}"
   end
 
   private
 
+  attr_accessor :entered_value
+
   def formatter
     HourMinuteFormatter
+  end
+
+  def formatted_value_is_formatted
+    return unless entered_value
+
+    unless formatter.valid?(entered_value)
+      errors[:formatted_value] << "Value must match format #{formatter.hint}"
+    end
   end
 end

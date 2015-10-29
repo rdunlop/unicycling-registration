@@ -1,5 +1,9 @@
 class HourMinuteFormatter
 
+  def self.hint
+    "hh:mm"
+  end
+
   def self.valid?(string)
     string.split(":").count == 2
   end
@@ -11,6 +15,8 @@ class HourMinuteFormatter
   end
 
   def self.to_string(int)
+    return "" if int.nil?
+
     seconds = int / 100
     minutes = seconds / 60
     seconds = seconds % 60

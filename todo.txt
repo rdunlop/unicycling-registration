@@ -12,17 +12,6 @@
 Best Time Thoughts
 ==================
 - Add best_time_format to Events (none, "h:m:s", "m:s.t", "h:m")
-- Create RegistrantBestTime table:
- - registrant_id
- - event_id
- - value (string)
- - source_location
- - timestamps
-
- - make all fields required.
- - Validate that the data entered matches the format provided.
-- On the Attending form, display the fields, and allow entry of none, or both fields.
-- Adjust the Event#num_choices call to include the 2 columns for the Best Time
 
 POST-NAUCC 2015 thoughts
 =========================

@@ -83,7 +83,7 @@ class Registrant < ActiveRecord::Base
   accepts_nested_attributes_for :contact_detail
   accepts_nested_attributes_for :registrant_choices
   accepts_nested_attributes_for :registrant_event_sign_ups
-  accepts_nested_attributes_for :registrant_best_times
+  accepts_nested_attributes_for :registrant_best_times, reject_if: :no_best_time_entered
   accepts_nested_attributes_for :volunteer_choices
 
   before_create :create_associated_required_expense_items
@@ -137,6 +137,7 @@ class Registrant < ActiveRecord::Base
 
   # contact info
   validates_associated :contact_detail, if: :validated?
+  validates_associated :registrant_best_times, if: :past_step_2?
 
   # Expense items
   validate :not_exceeding_expense_item_limits
@@ -529,6 +530,10 @@ class Registrant < ActiveRecord::Base
       end
     end
 
+    registrant_best_times.where(event: event).each do |rbt|
+      results << rbt.to_s
+    end
+
     results.join(" - ") if results.any?
   end
 
@@ -696,6 +701,10 @@ class Registrant < ActiveRecord::Base
   def has_event?(event)
     @has_event ||= {}
     @has_event[event] ||= signed_up_events.where(event_id: event.id).any?
+  end
+
+  def no_best_time_entered(attributes)
+    attributes['source_location'].blank? && attributes['formatted_value'].blank?
   end
 
 end
