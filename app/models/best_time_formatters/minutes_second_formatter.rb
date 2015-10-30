@@ -1,7 +1,7 @@
-class HourMinuteFormatter
+class MinuteSecondFormatter
 
   def self.hint
-    "hh:mm"
+    "(m)m:ss.xx"
   end
 
   def self.valid?(string)
@@ -12,9 +12,10 @@ class HourMinuteFormatter
 
   # Convert from a string "10:59" to hundreds (65900)
   def self.from_string(string)
-    hours, minutes = string.split(":").map(&:to_i).map(&:abs)
-    seconds = (hours * 60 * 60) +(minutes * 60)
-    seconds * 100
+    minutes, sec_hund = string.split(":")
+    seconds, hundreds = sec_hund.split(".")
+    hundreds = hundreds.to_i * 10 if hundreds && hundreds.length == 1
+    (((minutes.to_i * 60) + seconds.to_i) * 100) + hundreds.to_i
   end
 
   # Convert from hundreds (65900) to a string "10:59"
@@ -23,8 +24,8 @@ class HourMinuteFormatter
 
     seconds = int / 100
     minutes = seconds / 60
-    hours = minutes / 60
-    remaining_minutes = minutes % 60
-    "%d:%02d" % [hours, remaining_minutes]
+    hundreds = int % 100
+    seconds = (seconds % 60) - hundreds
+    "%d:%02d.%02d" % [minutes, seconds, hundreds]
   end
 end

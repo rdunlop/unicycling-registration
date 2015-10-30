@@ -20,14 +20,30 @@
 
 require 'spec_helper'
 
-describe HourMinuteFormatter do
+describe MinuteSecondFormatter do
 
   it "converts one minute to hundreds" do
-    expect(described_class.from_string("0:01")).to eq(6000)
+    expect(described_class.from_string("1:00.00")).to eq(6000)
+  end
+
+  it "converts hundreds" do
+    expect(described_class.from_string("0:00.59")).to eq(59)
+  end
+
+  it "converts full case" do
+    expect(described_class.from_string("1:23.45")).to eq(8345)
+  end
+
+  it "doesn't allow seconds/hundreds only" do
+    expect(described_class.valid?("0.10")).to be_falsey
   end
 
   it "converts 6000 to 1 minute" do
-    expect(described_class.to_string(6000)).to eq("0:01")
+    expect(described_class.to_string(6000)).to eq("1:00.00")
+  end
+
+  it "converts tens of seconds to hundreds" do
+    expect(described_class.from_string("0:00.1")).to eq(10)
   end
 
   it "marks empty as invalid" do
@@ -35,14 +51,14 @@ describe HourMinuteFormatter do
   end
 
   it "marks real string as valid" do
-    expect(described_class.valid?("1:00")).to be_truthy
+    expect(described_class.valid?("1:00.00")).to be_truthy
   end
 
-  it "doesnt't allow minutes over 59" do
+  it "doesnt't allow seconds over 59" do
     expect(described_class.valid?("0:60")).to be_falsey
   end
 
-  it "doesn't allow negative hours" do
+  it "doesn't allow negative minutes" do
     expect(described_class.valid?("-1:0")).to be_falsey
   end
 end

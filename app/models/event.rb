@@ -59,7 +59,8 @@ class Event < ActiveRecord::Base
 
   BEST_TIME_FORMATS = [
     "none",
-    "hh:mm"
+    "hh:mm",
+    "(m)m:ss.xx"
   ].freeze
 
   validates :best_time_format, presence: true, inclusion: BEST_TIME_FORMATS
