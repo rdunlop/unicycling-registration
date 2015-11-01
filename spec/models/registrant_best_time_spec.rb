@@ -28,7 +28,7 @@ describe RegistrantBestTime do
   end
 
   it "can store a large value" do
-    @rb.value = 3 * 60 * 60 * 1000 # hours, in miliseconds
+    @rb.value = 3 * 60 * 60 * 100 # hours, in hundreds-of-seconds
     @rb.save
     expect(@rb).to be_valid
   end
@@ -40,7 +40,7 @@ describe RegistrantBestTime do
     end
 
     it "stores the converted time in the value" do
-      @rb.formatted_value = "1:0"
+      @rb.formatted_value = "0:01"
       expect(@rb.value).to eq(6000)
     end
 
