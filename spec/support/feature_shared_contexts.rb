@@ -107,6 +107,7 @@ shared_context 'basic registrant data' do
 end
 shared_context "basic address data" do
   before :each do
+    fill_in 'Email',  with: 'email@example.com'
     fill_in 'Address', with: "123 Fake street"
     fill_in "City", with: "Springfield"
     find(:select, 'registrant_contact_detail_attributes_country_residence').first(:option, 'United States').select_option
