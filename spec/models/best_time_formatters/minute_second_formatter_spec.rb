@@ -34,6 +34,18 @@ describe MinuteSecondFormatter do
     expect(described_class.from_string("1:23.45")).to eq(8345)
   end
 
+  it "allows hour/minute only" do
+    expect(described_class.valid?("1:30")).to be_truthy
+  end
+
+  it "requires that minutes be specified" do
+    expect(described_class.valid?("30")).to be_falsey
+  end
+
+  it "requires hours be specified" do
+    expect(described_class.valid?("30.12")).to be_falsey
+  end
+
   it "doesn't allow seconds/hundreds only" do
     expect(described_class.valid?("0.10")).to be_falsey
   end
@@ -60,5 +72,13 @@ describe MinuteSecondFormatter do
 
   it "doesn't allow negative minutes" do
     expect(described_class.valid?("-1:0")).to be_falsey
+  end
+
+  it "allows minutes greater than 60" do
+    expect(described_class.valid?("65:30")).to be_truthy
+  end
+
+  it "Doesn't allow strings" do
+    expect(described_class.valid?("none")).to be_falsey
   end
 end

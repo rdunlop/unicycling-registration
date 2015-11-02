@@ -7,6 +7,7 @@ class MinuteSecondFormatter
   def self.valid?(string)
     numbers = string.split(":")
     return false unless numbers.count == 2
+    string = add_hundreds(string) unless string.index(".")
     to_string(from_string(string)) == string
   end
 
@@ -27,5 +28,11 @@ class MinuteSecondFormatter
     hundreds = int % 100
     seconds = (seconds % 60) - hundreds
     "%d:%02d.%02d" % [minutes, seconds, hundreds]
+  end
+
+  private
+
+  def self.add_hundreds(string)
+    "#{string}.00"
   end
 end
