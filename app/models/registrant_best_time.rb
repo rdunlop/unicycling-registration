@@ -38,7 +38,7 @@ class RegistrantBestTime < ActiveRecord::Base
   end
 
   def to_s
-    "Best Time: #{formatted_value}"
+    "Best Time: #{formatted_value} @ #{source_location}"
   end
 
   private

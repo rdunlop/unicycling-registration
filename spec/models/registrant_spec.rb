@@ -347,11 +347,11 @@ describe Registrant do
   end
 
   describe "with a registrant best time" do
-    let(:registrant_best_time) { FactoryGirl.create(:registrant_best_time, registrant: @reg, formatted_value: "12:30") }
+    let(:registrant_best_time) { FactoryGirl.create(:registrant_best_time, registrant: @reg, formatted_value: "12:30", source_location: "NAUCC 2014") }
 
     it "has the correct output of registrant describe_event_hash" do
       the_hash = @reg.describe_event_hash(registrant_best_time.event)
-      expect(the_hash[:additional]).to eq("Best Time: 12:30")
+      expect(the_hash[:additional]).to eq("Best Time: 12:30 @ NAUCC 2014")
     end
   end
 

@@ -27,6 +27,12 @@ describe RegistrantBestTime do
     expect(@rb).to be_valid
   end
 
+  describe "#to_s" do
+    it "includes formatted value and location" do
+      expect(@rb.to_s).to eq("Best Time: 0:10 @ Nationals 2012")
+    end
+  end
+
   it "can store a large value" do
     @rb.value = 3 * 60 * 60 * 100 # hours, in hundreds-of-seconds
     @rb.save
