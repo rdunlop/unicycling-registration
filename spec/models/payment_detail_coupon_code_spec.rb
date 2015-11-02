@@ -8,6 +8,11 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #
+# Indexes
+#
+#  index_payment_detail_coupon_codes_on_coupon_code_id     (coupon_code_id)
+#  index_payment_detail_coupon_codes_on_payment_detail_id  (payment_detail_id)
+#
 
 require 'spec_helper'
 

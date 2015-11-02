@@ -9,6 +9,10 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #
+# Indexes
+#
+#  index_published_age_group_entries_on_competition_id  (competition_id)
+#
 
 class PublishedAgeGroupEntry < ActiveRecord::Base
   belongs_to :competition, touch: true

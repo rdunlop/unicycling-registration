@@ -13,6 +13,10 @@
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer
 #
+# Indexes
+#
+#  index_event_choices_on_event_id_and_position  (event_id,position)
+#
 
 require 'spec_helper'
 

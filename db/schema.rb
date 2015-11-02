@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021132008) do
+ActiveRecord::Schema.define(version: 20151102140409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,6 +258,9 @@ ActiveRecord::Schema.define(version: 20151021132008) do
     t.datetime "updated_at"
   end
 
+  add_index "coupon_code_expense_items", ["coupon_code_id"], name: "index_coupon_code_expense_items_on_coupon_code_id", using: :btree
+  add_index "coupon_code_expense_items", ["expense_item_id"], name: "index_coupon_code_expense_items_on_expense_item_id", using: :btree
+
   create_table "coupon_codes", force: :cascade do |t|
     t.string   "name",          limit: 255
     t.string   "code",          limit: 255
@@ -318,6 +321,8 @@ ActiveRecord::Schema.define(version: 20151021132008) do
     t.integer  "optional_if_event_choice_id"
     t.integer  "required_if_event_choice_id"
   end
+
+  add_index "event_choices", ["event_id", "position"], name: "index_event_choices_on_event_id_and_position", using: :btree
 
   create_table "event_configuration_translations", force: :cascade do |t|
     t.integer  "event_configuration_id",                  null: false
@@ -598,6 +603,9 @@ ActiveRecord::Schema.define(version: 20151021132008) do
     t.datetime "updated_at"
   end
 
+  add_index "payment_detail_coupon_codes", ["coupon_code_id"], name: "index_payment_detail_coupon_codes_on_coupon_code_id", using: :btree
+  add_index "payment_detail_coupon_codes", ["payment_detail_id"], name: "index_payment_detail_coupon_codes_on_payment_detail_id", using: :btree
+
   create_table "payment_details", force: :cascade do |t|
     t.integer  "payment_id"
     t.integer  "registrant_id"
@@ -636,6 +644,8 @@ ActiveRecord::Schema.define(version: 20151021132008) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "published_age_group_entries", ["competition_id"], name: "index_published_age_group_entries_on_competition_id", using: :btree
 
   create_table "rails_admin_histories", force: :cascade do |t|
     t.text     "message"
@@ -998,6 +1008,8 @@ ActiveRecord::Schema.define(version: 20151021132008) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "two_attempt_entries", ["competition_id", "is_start_time", "id"], name: "index_two_attempt_entries_ids", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false

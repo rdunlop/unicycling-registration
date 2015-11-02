@@ -18,6 +18,10 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #
+# Indexes
+#
+#  index_two_attempt_entries_ids  (competition_id,is_start_time,id)
+#
 
 class TwoAttemptEntry < ActiveRecord::Base
   include FindsMatchingCompetitor

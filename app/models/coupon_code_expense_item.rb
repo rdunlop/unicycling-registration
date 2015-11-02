@@ -8,6 +8,11 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #
+# Indexes
+#
+#  index_coupon_code_expense_items_on_coupon_code_id   (coupon_code_id)
+#  index_coupon_code_expense_items_on_expense_item_id  (expense_item_id)
+#
 
 class CouponCodeExpenseItem < ActiveRecord::Base
   belongs_to :coupon_code, inverse_of: :coupon_code_expense_items, touch: true
