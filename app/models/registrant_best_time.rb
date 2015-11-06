@@ -47,7 +47,7 @@ class RegistrantBestTime < ActiveRecord::Base
   attr_accessor :entered_value
 
   def convert_time_to_integer
-    self.value = formatter.from_string(entered_value) if formatter.valid?(entered_value)
+    self.value = formatter.from_string(entered_value) if entered_value && formatter.valid?(entered_value)
   end
 
   def formatter
