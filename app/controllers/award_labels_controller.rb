@@ -181,7 +181,7 @@ class AwardLabelsController < ApplicationController
         "row_gutter" => 2.5 # added padding
       },
       "Avery5434" => {
-        "paper_size" => [288,432], # 4x6 inch
+        "paper_size" => [288, 432], # 4x6 inch
         "columns" => 2,
         "rows" => 5,
         "top_margin" => 36,      # 0.5 inch
@@ -279,7 +279,7 @@ class AwardLabelsController < ApplicationController
 
     aw_label = AwardLabel.new
     aw_label.user = my_user
-    aw_label.populate_from_competitor(competitor, registrant, place, experts)
+    aw_label.populate_from_competitor(competitor, registrant, experts)
 
     aw_label.save
   end

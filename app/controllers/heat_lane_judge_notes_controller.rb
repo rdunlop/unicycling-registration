@@ -30,5 +30,4 @@ class HeatLaneJudgeNotesController < ApplicationController
   def load_competition
     @competition = Competition.find(params[:competition_id])
   end
-
 end

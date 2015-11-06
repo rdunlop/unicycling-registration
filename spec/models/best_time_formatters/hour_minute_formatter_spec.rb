@@ -21,7 +21,6 @@
 require 'spec_helper'
 
 describe HourMinuteFormatter do
-
   it "converts one minute to hundreds" do
     expect(described_class.from_string("0:01")).to eq(6000)
   end

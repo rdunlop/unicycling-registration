@@ -98,14 +98,12 @@ describe Result do
 
       it "uses the age group and the gender as line 4" do
         allow(@comp).to receive(:age_group_entry_description).and_return("This is the age group")
-        #@al.populate_from_competitor(@comp, @reg, 3, false)
         expect(@al.category_name).to eq("This is the age group")
       end
 
       it "sets the age group to Expert Male when expert" do
         allow(@comp.competition).to receive(:has_experts?).and_return(true)
         allow(@al).to receive(:age_group_type?).and_return(false)
-        #@al.populate_from_competitor(@comp, @reg, 3, true)
         expect(@al.category_name).to eq("Expert Male")
       end
     end

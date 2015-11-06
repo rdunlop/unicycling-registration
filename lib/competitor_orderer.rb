@@ -16,7 +16,7 @@ class CompetitorOrderer
   # return 0 if they are the same
   # return -1 if the first score is better than the second score
   def compare_competitors(a, b)
-    if either_score_is_invalid(a,b)
+    if either_score_is_invalid(a, b)
       return incorrect_scores_last(a.comparable_score, b.comparable_score)
     end
 
@@ -39,7 +39,7 @@ class CompetitorOrderer
     end
   end
 
-  def either_score_is_invalid(a,b)
+  def either_score_is_invalid(a, b)
     return true if score_is_invalid(a.comparable_score)
     return true if score_is_invalid(b.comparable_score)
     false

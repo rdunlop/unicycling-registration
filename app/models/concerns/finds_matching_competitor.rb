@@ -23,5 +23,4 @@ module FindsMatchingCompetitor
   def competitor_has_results?
     matching_competitor.has_result? if competitor_exists?
   end
-
 end

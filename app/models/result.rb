@@ -95,9 +95,7 @@ class Result < ActiveRecord::Base
     competition.award_title_name
   end
 
-  def team_name
-    competitor.team_name
-  end
+  delegate :team_name, to: :competitor
 
   def category_name
     if competition.has_experts? && !age_group_type?

@@ -1,4 +1,4 @@
-ValidatesTimeliness.setup do |config|
+ValidatesTimeliness.setup do |_config|
   # Extend ORM/ODMs for full support (:active_record, :mongoid).
   # config.extend_orms = [ :active_record ]
   #

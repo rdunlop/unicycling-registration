@@ -33,7 +33,6 @@ gem "jc-validates_timeliness"
 gem 'foundation-rails'
 gem "haml-rails", "~> 0.9"
 
-
 # system utils
 gem 'rake'
 gem 'paper_trail', '~> 3.0.1'

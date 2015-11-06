@@ -54,7 +54,7 @@ describe OverallChampionResultCalculator do
   #   3 - 20 - Scott (1 first)
   def configure_cce(combined_competition_entry, options = {})
     combined_competition_entry.update_attribute("points_#{options[:place]}".to_sym, options[:points])
-    #allow(combined_competition_entry).to receive("points_#{options[:place]}".to_sym).and_return(options[:points])
+    # allow(combined_competition_entry).to receive("points_#{options[:place]}".to_sym).and_return(options[:points])
   end
 
   describe "when there is a tie" do
@@ -135,7 +135,7 @@ describe OverallChampionResultCalculator do
 
   it "adjusts points by number of firsts" do
     score = 10
-    bib_numbers = [3,2]
+    bib_numbers = [3, 2]
     firsts_counts = { 3 => 1, 2 => 0}
 
     expected_hash = { 10 => [3], 9.9 => [2] }
@@ -145,12 +145,12 @@ describe OverallChampionResultCalculator do
   it "adjusts the scores based on the number of firsts ties" do
     gender = "Male"
     initial_scores = {
-      10 => [1,2,3],
+      10 => [1, 2, 3],
       11 => [5],
     }
     expected_hash = {
       10 => [3],
-      9.9 => [1,2],
+      9.9 => [1, 2],
       11 => [5],
     }
     allow(result).to receive(:num_firsts).with("Male", 1).and_return(1)
@@ -163,12 +163,12 @@ describe OverallChampionResultCalculator do
   it "calculates tie break adjustments by tie breakers" do
     gender = "Male"
     score = 10
-    bib_numbers = [1,2,3]
+    bib_numbers = [1, 2, 3]
 
     expected_array = [
-        [9.99, 1],
-        [9.98, 2],
-        [10, 3]
+      [9.99, 1],
+      [9.98, 2],
+      [10, 3]
     ]
 
     allow(result).to receive(:place_of_tie_breaker).with("Male", 1).and_return(2)

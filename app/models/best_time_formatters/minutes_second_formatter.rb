@@ -1,5 +1,4 @@
 class MinuteSecondFormatter
-
   def self.hint
     "(m)m:ss.xx"
   end

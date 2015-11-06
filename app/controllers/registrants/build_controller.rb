@@ -135,9 +135,7 @@ class Registrants::BuildController < ApplicationController
     ]
   end
 
-
   def registrant_params
     params.require(:registrant).permit(attributes)
   end
-
 end

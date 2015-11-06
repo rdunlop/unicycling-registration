@@ -28,7 +28,7 @@ class AwardLabel < ActiveRecord::Base
   belongs_to :user
   belongs_to :registrant
 
-  def populate_from_competitor(competitor, registrant, place, expert = false)
+  def populate_from_competitor(competitor, registrant, expert = false)
     result = find_result(competitor, expert)
 
     self.line_1 = result.competitor_name(registrant)
@@ -69,5 +69,4 @@ class AwardLabel < ActiveRecord::Base
       competitor.age_group_result
     end
   end
-
 end

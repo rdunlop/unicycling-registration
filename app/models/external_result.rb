@@ -76,5 +76,4 @@ class ExternalResult < ActiveRecord::Base
   def set_details_if_empty
     self.details = "#{points} pts" unless details.present?
   end
-
 end

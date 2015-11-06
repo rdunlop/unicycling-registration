@@ -493,12 +493,12 @@ class Competition < ActiveRecord::Base
     when "Freestyle"
       GenericPlacingPointsCalculator.new(
         lower_is_better: false,
-        # For Freestyle, the judges enter higher scores for better riders
-        )
+      # For Freestyle, the judges enter higher scores for better riders
+      )
     when "Street", "Flatland"
       GenericPlacingPointsCalculator.new(
         lower_is_better: scoring_helper.lower_is_better
-        )
+      )
     when "Street Final"
       GenericPlacingPointsCalculator.new(
         lower_is_better: true,
@@ -506,7 +506,7 @@ class Competition < ActiveRecord::Base
         # But, we want to leave StreetScoringClass as higher_is_better because
         # that way the higher resulting points win.
         points_per_rank: [10, 7, 5, 3, 2, 1],
-        )
+      )
     when "Artistic Freestyle IUF 2015"
       Freestyle_2015_JudgePointsCalculator.new
     end

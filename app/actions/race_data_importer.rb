@@ -125,5 +125,4 @@ class RaceDataImporter
       self.errors += error_message
     end
   end
-
 end

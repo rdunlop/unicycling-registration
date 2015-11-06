@@ -1,5 +1,4 @@
 class HourMinuteFormatter
-
   def self.hint
     "hh:mm"
   end
@@ -13,7 +12,7 @@ class HourMinuteFormatter
   # Convert from a string "10:59" to hundreds (65900)
   def self.from_string(string)
     hours, minutes = string.split(":").map(&:to_i).map(&:abs)
-    seconds = (hours * 60 * 60) +(minutes * 60)
+    seconds = (hours * 60 * 60) + (minutes * 60)
     seconds * 100
   end
 

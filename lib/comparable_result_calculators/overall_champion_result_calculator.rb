@@ -258,7 +258,7 @@ class OverallChampionResultCalculator
   #   10 => [3]
   #   9.9 => [2]
   # }
-  def adjust_ties_by_firsts(score, bib_numbers, competitor_firsts_counts)
+  def adjust_ties_by_firsts(score, _bib_numbers, competitor_firsts_counts)
     firsts_counts = competitor_firsts_counts.values
     adjustment = 0
     result = {}
@@ -272,7 +272,7 @@ class OverallChampionResultCalculator
     result
   end
 
-  def adjust_ties_by_tie_breaker(scores)
+  def adjust_ties_by_tie_breaker(_scores)
   end
 
   def num_firsts(gender, bib_number)

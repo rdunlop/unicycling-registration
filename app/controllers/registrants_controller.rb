@@ -134,5 +134,4 @@ class RegistrantsController < ApplicationController
   def set_single_registrant_breadcrumb
     add_registrant_breadcrumb(@registrant)
   end
-
 end

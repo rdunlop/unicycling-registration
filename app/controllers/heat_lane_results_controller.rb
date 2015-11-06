@@ -12,7 +12,7 @@ class HeatLaneResultsController < ApplicationController
     add_breadcrumb "Edit Heat Lane Result"
   end
 
-# PUT /heat_lane_results/1
+  # PUT /heat_lane_results/1
   def update
     respond_to do |format|
       if @heat_lane_result.update_attributes(heat_lane_result_params)

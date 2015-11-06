@@ -6,7 +6,7 @@ class PreliminaryExternalResultsController < ApplicationController
   before_action :authorize_res
   before_action :load_external_results, only: [:index, :review, :approve, :display_csv, :import_csv]
 
-  before_action :set_breadcrumbs#, only: :index
+  before_action :set_breadcrumbss
 
   # GET /competitions/#/preliminary_external_results
   def index

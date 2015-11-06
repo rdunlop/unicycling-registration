@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe RaceDataImporter do
   def create_competitor(competition, bib_number, heat, lane)
     competitor = FactoryGirl.create(:event_competitor, competition: competition)

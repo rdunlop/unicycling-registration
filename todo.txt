@@ -8,6 +8,7 @@
 - Look into the CALOPPA compliance
 
 - Be able to LOCK a previous/future Convention
+- Fix the broken specs (changed because of Scott at end of last convention)
 
 Best Time Thoughts
 ==================

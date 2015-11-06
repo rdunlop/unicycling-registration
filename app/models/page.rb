@@ -59,5 +59,4 @@ class Page < ActiveRecord::Base
       errors[:base] << "Slug cannot have spaces"
     end
   end
-
 end

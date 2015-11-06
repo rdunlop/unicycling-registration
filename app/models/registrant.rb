@@ -307,7 +307,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def wheel_size_id_for_event(event)
-    competition_wheel_sizes.select{ |cws| cws.event_id == event.id }.first.try(:wheel_size_id) || wheel_size_id
+    competition_wheel_sizes.find{ |cws| cws.event_id == event.id }.try(:wheel_size_id) || wheel_size_id
   end
 
   def set_default_wheel_size
@@ -492,7 +492,6 @@ class Registrant < ActiveRecord::Base
     active_competitors(event).first
   end
 
-
   def describe_event(event)
     details = describe_event_hash(event)
     description = details[:description]
@@ -530,7 +529,7 @@ class Registrant < ActiveRecord::Base
       end
     end
 
-    registrant_best_times.where(event: event).each do |rbt|
+    registrant_best_times.where(event: event).find_each do |rbt|
       results << rbt.to_s
     end
 
@@ -706,5 +705,4 @@ class Registrant < ActiveRecord::Base
   def no_best_time_entered(attributes)
     attributes['source_location'].blank? && attributes['formatted_value'].blank?
   end
-
 end

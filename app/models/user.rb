@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
     [:late_registrant, :music_dj, :awards_admin, :event_planner, :translator,
-      :membership_admin, :competition_admin, :payment_admin, :convention_admin, :super_admin]
+     :membership_admin, :competition_admin, :payment_admin, :convention_admin, :super_admin]
   end
 
   # List which roles each roles can add to other users

@@ -26,5 +26,4 @@ describe ConventionSetup::Migrate::MigrationsController do
       expect(Event.count).to eq(1)
     end
   end
-
 end

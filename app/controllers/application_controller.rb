@@ -105,11 +105,11 @@ class ApplicationController < ActionController::Base
   # Prawn-Labels font setting
   def set_font(pdf)
     pdf.font_families.update("OpenSans" => {
-      :normal => "#{Rails.root}/app/assets/fonts/OpenSans-Regular.ttf",
-      :italic => "#{Rails.root}/app/assets/fonts/OpenSans-Italic.ttf",
-      :bold => "#{Rails.root}/app/assets/fonts/OpenSans-Bold.ttf",
-      :bold_italic => "#{Rails.root}/app/assets/fonts/OpenSans-BoldItalic.ttf"
-    })
+                               normal: "#{Rails.root}/app/assets/fonts/OpenSans-Regular.ttf",
+                               italic: "#{Rails.root}/app/assets/fonts/OpenSans-Italic.ttf",
+                               bold: "#{Rails.root}/app/assets/fonts/OpenSans-Bold.ttf",
+                               bold_italic: "#{Rails.root}/app/assets/fonts/OpenSans-BoldItalic.ttf"
+                             })
     pdf.font "OpenSans"
   end
 

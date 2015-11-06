@@ -69,7 +69,6 @@ class HeatReviewController < ApplicationController
 
   # DELETE /competitions/#/heat_review/:heat_id
   def destroy
-
     heat_lane_results = HeatLaneResult.where(competition_id: @competition, heat: @heat)
     heat_lane_results.destroy_all
 

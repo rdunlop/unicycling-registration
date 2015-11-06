@@ -36,7 +36,7 @@ class ContactForm
 
   # Specify an e-mail address to reply to for any feedback received.
   def reply_to_email
-     email.presence || username
+    email.presence || username
   end
 
   def serialize

@@ -15,7 +15,6 @@ class DistanceAttemptFinal_2015_Manager < DistanceAttemptManager
     end
   end
 
-
   def single_fault_message(distance)
     # doesn't have the "+" sign on the message
     "Fault. Next Distance #{distance}cm"
