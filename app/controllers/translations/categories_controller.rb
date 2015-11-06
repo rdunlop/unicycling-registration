@@ -22,7 +22,7 @@ class Translations::CategoriesController < Admin::TranslationsController
   private
 
   def load_category
-    @category = Category.find_by(params[:id])
+    @category = Category.find(params[:id])
   end
 
   def category_params
