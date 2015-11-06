@@ -6,6 +6,7 @@ class MinuteSecondFormatter
   def self.valid?(string)
     numbers = string.split(":")
     return false unless numbers.count == 2
+    string[0] = '' if numbers.first.start_with?("0")
     string = add_hundreds(string) unless string.index(".")
     to_string(from_string(string)) == string
   end
