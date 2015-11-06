@@ -4,7 +4,9 @@ es:
     attributes:
       registrant:
         bib_number: ID
+        online_waiver_acceptance: Confirmo que he leído, entiendo y acepto las condiciones
         online_waiver_signature: Firma
+        wheel_size_id: Tamaño Predeterminado de rueda para Pista de carreras
     models:
       registrant:
         one: Solicitante de la inscripción

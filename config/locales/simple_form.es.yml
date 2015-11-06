@@ -36,10 +36,35 @@ es:
       event_choice:
         optional: Permite al usuario elegir a no introducir datos en este campo
       event_configuration:
+        artistic_closed_date: Después de esta fecha, los registrantes normales no
+          pueden añadir eventos marcados como "artístico". Pueden sin embargo dejarlos,
+          hasta la Fecha de Cierre para la Registración de Eventos.
+        competitor_benefits: Aparece en la Página de Inicio de inscripción, que describe
+          los beneficios de la Registración de Competidor
+        comp_noncomp_url: Especifica un enlace que explica la diferencia entre los
+          Tipos de Inscripción ofrecidas
         display_confirmed_events: La activación de esto muestra los eventos confirmados
           / eventos sin confirmar en la página de Resumen de Registrante.
+        event_sign_up_closed_date: Después de esta fecha, SOLO los administradores
+          pueden añadir eventos a las registraciones. (aunque aún pueden eliminarlos)
+        event_url: Enlaces desde el logotipo de la Barra de menús a esta URL.
         iuf: Al habilitar esto permite  preguntas de membresía de la IUF.
         logo_file: El logo debe ser de 93px x 38px
+        music_submission_end_date: La última fecha en la que se les permitirá presentar
+          la musica
+        noncompetitor_benefits: Aparece en la Página de Inicio de la Registración,
+          que describe los beneficios de registrarse como No-Competidor
+        paypal_test: permitir pretender que recibe la confirmación del pago de PayPal
+        spectator_benefits: Aparece en la Página de Inicio de la Registración, que
+          describe los beneficios de registrarse como Espectador
+        spectators: Los espectadores no pagan "Cuotas de Inscripción", y pueden comprar
+          artículos sin pagar por la registración
+        start_date: La edad de los Registrantes se calcula basándose en esta fecha
+        test_mode: La activación de esta permite a cualquier usuario convertirse en
+          un Super Usuario, y también para "pretender completar" un pago.
+      volunteer_opportunity:
+        inform_emails: cuando alguien se registra para este puesto de voluntario,
+          un correo electrónico será enviado a estas direcciones de correo electrónico
       wave_time:
         scheduled_time: P.ej. 02:00, 03:00
     labels:
@@ -50,11 +75,17 @@ es:
       event_configuration:
         artistic_score_elimination_mode_naucc: Grupo pequeño
         comp_noncomp_url: Explicación Competidor / No-Competidor
+        paypal_account: Correo electrónico de Cuenta Mercantil de Paypal
         rulebook_url: Reglamento PDF URL
+        standard_skill: Activar Sistema de Sumisión de Standard Skill
+        standard_skill_closed_date: "Último día para presentar rutinas de Standard
+          Skill en línea"
+        usa_membership_config: Mostrar páginas de administración de USA
       expense_item:
         details_label: Pregunta
         has_custom_cost: Donativo
         has_details: Haga una pregunta del registrante
+        maximum_available: Número total Max en Venta
         maximum_per_registrant: Máximo por registrante
       volunteer_opportunity: Direcciones de correo electrónico para notificar cada
         voluntario que se inscriba

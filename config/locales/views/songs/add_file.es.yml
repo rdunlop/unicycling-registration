@@ -2,6 +2,7 @@
 es:
   songs:
     add_file:
+      max_file_size: El tamaño máximo de archivo es %{size_mb} MB
       note: 'NOTA:'
       step_1: Paso 1
       step_1_description: Entrar evento/descripción

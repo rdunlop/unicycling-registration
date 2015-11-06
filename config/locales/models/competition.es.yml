@@ -3,6 +3,9 @@ es:
   activerecord:
     attributes:
       competition:
+        award_subtitle_name: Sub Título del Premio
+        award_title_name: Título del Premio
+        combined_competition_id: Cálculo del Campeón Global
         end_data_type: Entrada de datos en línea de meta
         name: Nombre del concurso
         num_members_per_competitor: Tamaño del equipo

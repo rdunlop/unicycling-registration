@@ -3,5 +3,13 @@ es:
   songs:
     songs_list:
       add_song: Añadir canción
+      changes_after_deadline: Después de ese tiempo, si usted necesita cambiar su
+        música, por favor comuníquese con el Director / organizadores (o use "Ayuda"
+        -> "Feedback").
       download: Download
+      guest: Esta canción fue subida por otro participante?
+      music_deadline: La música puede ser subida hasta %{end_date}
       remove: Borrar
+      requirements: Usted todavía es requerido a tener la música en un CD o un reproductor
+        de MP3 en la competencia. Esto es para que si hay dificultades técnicas con
+        la versión cargada, haya una copia alternativa disponible.

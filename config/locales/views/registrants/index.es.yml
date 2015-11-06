@@ -8,6 +8,8 @@ es:
         ser capaz de cambiar sus datos de eventos.
       difference_tooltip: Haz clic aquí para más informaciones
       link_end: página para detalles
+      note_date_of_payment_html: NOTA! - Es el día <b> de su pago lo que define la
+        cuota de registración </b>, NO la fecha de registración.
       onsite_restricted_events: Con el fin de programar los eventos correctamente,
         registrarse en las instalaciones no puede ofrecer todos los eventos / elementos
         que permite la pre-inscripción.

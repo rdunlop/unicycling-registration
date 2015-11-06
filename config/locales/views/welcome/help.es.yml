@@ -7,9 +7,20 @@ es:
         envía un comentario más abajo
       header: Ayuda
       i_cannot_login: No puedo iniciar sesión
+      login_help: Una vez que se haya registrado, revise su correo electrónico para
+        un mensaje de confirmación. Revise todos los filtros de spam. Seleccione la
+        opción "Volver a enviar la confirmación de correo electrónico" si usted no
+        puede encontrar el mensaje
       registration: Cómo puedo inscribirme?
+      sharing_link: Solicite el acceso a los registros de su equipo a través del Formulario
+        %{link}
       sharing_registration_details: Cómo compartir Detalles de Inscripción
       sharing_registration_details_help: Como Capitán del Equipo o Líder del Club
         puedes solicitar acceso para que puedas pagar por la registración de otros
         miembros, así como ver los eventos que se han inscrito.
+      subheader: Este sitio es para la registración de la Convención de Monociclismo
+        %{domain}
+      translation_help: He encontrado una falta / error en la traducción. Enviar los
+        detalles de traducción aquí en el 'feedback', o aplicar para ser un traductor,
+        y ayudar a hacer más de las traducciones para un idioma
       translations: Translaciones

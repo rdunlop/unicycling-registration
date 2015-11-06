@@ -2,6 +2,7 @@
 es:
   registrants:
     base_details:
+      base_details: Detalles Base
       birthday: Fecha de nacimiento
       female: Femenino
       male: Masculino

@@ -104,6 +104,7 @@ de:
           ausgewählt werden (wenn es nur einen Artikel gibt wird dieser automatisch
           ausgewählt)
       page:
+        parent_page: "[Optional] Gruppiere diese Seite unter der vorigen Seite"
         slug: Der URL Text, verwende nur normale Buchstaben und keine Leerzeichen
       registrant:
         wheel_size_id: Verwendet um Altersklassen zu wählen soweit zutreffend. (Rennbahn,
