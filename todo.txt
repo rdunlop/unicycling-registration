@@ -1,7 +1,6 @@
 - add page for ease of conversion from old best time to new best time using above field?
 - Add a way to export the data for olaf into mailjet format.
 
-- "Additional Info" should be "Page"-using
 - Add an SSL Certificate
 - Add an "Opt-out" instruction to the bottom of each e-mail that we send.
 - Look into CAN-SPAM compliance
@@ -16,7 +15,6 @@ Best Time Thoughts
 
 POST-NAUCC 2015 thoughts
 =========================
-- More Info Link language dependent (put it into th db)
 - Copy all Events from other Instance
  - Re-Adds the "All"
  - DOesn't play nice with existing Events.
