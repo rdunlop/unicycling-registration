@@ -68,6 +68,7 @@ describe MinuteSecondFormatter do
   it "allows 00:15.50" do
     expect(described_class.valid?("00:15.50")).to be_truthy
     expect(described_class.to_string(described_class.from_string("00:15.50"))).to eq("0:15.50")
+    expect(described_class.valid?("0:15.50")).to be_truthy
   end
 
   it "marks empty as invalid" do
