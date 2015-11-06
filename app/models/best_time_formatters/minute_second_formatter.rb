@@ -23,9 +23,10 @@ class MinuteSecondFormatter
     return "" if int.nil?
 
     seconds = int / 100
-    minutes = seconds / 60
     hundreds = int % 100
-    seconds = (seconds % 60) - hundreds
+
+    minutes = seconds / 60
+    seconds = seconds % 60
     "%d:%02d.%02d" % [minutes, seconds, hundreds]
   end
 

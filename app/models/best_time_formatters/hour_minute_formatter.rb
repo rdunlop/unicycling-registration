@@ -1,6 +1,6 @@
 class HourMinuteFormatter
   def self.hint
-    "hh:mm"
+    "h:mm"
   end
 
   def self.valid?(string)

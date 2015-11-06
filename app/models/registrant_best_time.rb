@@ -26,11 +26,12 @@ class RegistrantBestTime < ActiveRecord::Base
   belongs_to :event
   belongs_to :registrant, inverse_of: :registrant_best_times, touch: true
 
+  before_validation :convert_time_to_integer
+
   delegate :hint, to: :formatter
 
   def formatted_value=(new_value)
     @entered_value = new_value
-    self.value = formatter.from_string(new_value) if formatter.valid?(entered_value)
   end
 
   def formatted_value
@@ -45,8 +46,17 @@ class RegistrantBestTime < ActiveRecord::Base
 
   attr_accessor :entered_value
 
+  def convert_time_to_integer
+    self.value = formatter.from_string(entered_value) if formatter.valid?(entered_value)
+  end
+
   def formatter
-    HourMinuteFormatter
+    case event.best_time_format
+    when "h:mm"
+      HourMinuteFormatter
+    when "(m)m:ss.xx"
+      MinuteSecondFormatter
+    end
   end
 
   def formatted_value_is_formatted

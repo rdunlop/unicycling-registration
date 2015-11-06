@@ -33,6 +33,10 @@ describe MinuteSecondFormatter do
     expect(described_class.from_string("1:23.45")).to eq(8345)
   end
 
+  it "allows full case with double-digit minutes" do
+    expect(described_class.valid?("10:23.45")).to be_truthy
+  end
+
   it "allows hour/minute only" do
     expect(described_class.valid?("1:30")).to be_truthy
   end
@@ -51,6 +55,10 @@ describe MinuteSecondFormatter do
 
   it "converts 6000 to 1 minute" do
     expect(described_class.to_string(6000)).to eq("1:00.00")
+  end
+
+  it "converts 62345 to 10 minutes" do
+    expect(described_class.to_string(60001)).to eq("10:00.01")
   end
 
   it "converts tens of seconds to hundreds" do
