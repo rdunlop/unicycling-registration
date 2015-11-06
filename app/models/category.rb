@@ -48,13 +48,13 @@ class Category < ActiveRecord::Base
   end
 
   def additional_info?
-    info_url.present? || info_page_id
+    info_url.present? || info_page.present?
   end
 
   private
 
   def only_one_info_type
-    if info_url.present? && info_page_id
+    if info_url.present? && info_page.present?
       errors[:info_page_id] << "Unable to specify both Info URL and Info Page"
     end
   end

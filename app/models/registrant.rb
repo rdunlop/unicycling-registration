@@ -83,7 +83,7 @@ class Registrant < ActiveRecord::Base
   accepts_nested_attributes_for :contact_detail
   accepts_nested_attributes_for :registrant_choices
   accepts_nested_attributes_for :registrant_event_sign_ups
-  accepts_nested_attributes_for :registrant_best_times, reject_if: :no_best_time_entered
+  accepts_nested_attributes_for :registrant_best_times, reject_if: :no_best_time_entered, allow_destroy: true
   accepts_nested_attributes_for :volunteer_choices
 
   before_create :create_associated_required_expense_items
@@ -702,7 +702,18 @@ class Registrant < ActiveRecord::Base
     @has_event[event] ||= signed_up_events.where(event_id: event.id).any?
   end
 
+  # returns true if it should be rejected
+  # but returns false if it exists, and needs to be cleared.
   def no_best_time_entered(attributes)
-    attributes['source_location'].blank? && attributes['formatted_value'].blank?
+    if attributes['source_location'].blank? && attributes['formatted_value'].blank?
+      if attributes['id'].present?
+        attributes['_destroy'] = 1
+        false
+      else
+        true
+      end
+    else
+      false
+    end
   end
 end

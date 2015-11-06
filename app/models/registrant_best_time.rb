@@ -18,7 +18,7 @@
 
 class RegistrantBestTime < ActiveRecord::Base
   validates :event_id, presence: true, uniqueness: {scope: [:registrant_id]}
-  validates :registrant, presence: true
+  validates :registrant, :source_location, :value, presence: true
   validate :formatted_value_is_formatted
 
   has_paper_trail meta: { registrant_id: :registrant_id }
