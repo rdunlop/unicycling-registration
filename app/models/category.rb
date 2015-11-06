@@ -2,11 +2,12 @@
 #
 # Table name: categories
 #
-#  id         :integer          not null, primary key
-#  position   :integer
-#  created_at :datetime
-#  updated_at :datetime
-#  info_url   :string(255)
+#  id           :integer          not null, primary key
+#  position     :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  info_url     :string(255)
+#  info_page_id :integer
 #
 
 class Category < ActiveRecord::Base
@@ -16,8 +17,10 @@ class Category < ActiveRecord::Base
   default_scope { order(:position) }
 
   has_many :events, -> {order("events.position") }, dependent: :destroy, inverse_of: :category
+  belongs_to :info_page, class_name: "Page"
 
   validates :name, presence: true
+  validate :only_one_info_type
 
   translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
@@ -42,5 +45,17 @@ class Category < ActiveRecord::Base
   # load all the dependent models necessary to display the event-choices form efficiently
   def self.load_for_form
     includes(:translations, events: [event_choices: :translations, event_categories: []])
+  end
+
+  def additional_info?
+    info_url.present? || info_page_id
+  end
+
+  private
+
+  def only_one_info_type
+    if info_url.present? && info_page_id
+      errors[:info_page_id] << "Unable to specify both Info URL and Info Page"
+    end
   end
 end

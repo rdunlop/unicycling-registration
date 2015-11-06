@@ -2,5 +2,6 @@
   = f.input :name
   = f.input :info_url, input_html: { class: "js--fancyboxUrl" }
   = link_to 'Test this URL', '#', class: "fancybox js--dynamicFancybox"
+  = f.input :info_page_id, collection: Page.ordinary
   %br
   = f.button :submit

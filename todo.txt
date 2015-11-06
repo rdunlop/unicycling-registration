@@ -1,4 +1,3 @@
-- display event/date in reg summary for best time
 - add page for ease of conversion from old best time to new best time using above field?
 - Add a way to export the data for olaf into mailjet format.
 

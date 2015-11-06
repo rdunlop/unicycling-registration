@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102140409) do
+ActiveRecord::Schema.define(version: 20151102225652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,7 +91,8 @@ ActiveRecord::Schema.define(version: 20151102140409) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "info_url",   limit: 255
+    t.string   "info_url",     limit: 255
+    t.integer  "info_page_id"
   end
 
   create_table "category_translations", force: :cascade do |t|

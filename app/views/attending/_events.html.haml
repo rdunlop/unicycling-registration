@@ -8,9 +8,9 @@
         %a{:href => "#tabs-#{category.id}"}= category
   - @categories.each do |category|
     %div{:id => "tabs-#{category.id}"}
-      - if category.info_url.present?
+      - if category.additional_info?
         .event_link
-          = link_to "#{t('.more_info')} [#{category}]", category.info_url, {:target => "_blank", :class=> "external_link fancybox"}
+          = link_to "#{t('.more_info')} [#{category}]", additional_information_url(category, I18n.locale), {:target => "_blank", :class=> "external_link fancybox"}
       %table.events
         - category.events.each do |event|
           - next unless event.visible?

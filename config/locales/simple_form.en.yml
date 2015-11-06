@@ -45,6 +45,7 @@ en:
     hints:
       category:
         info_url: This link appears on the Category page, and can serve as a link to additional information about the events in this category.
+        info_page_id: Choose a 'Page' which describes this Category. This will serve the correct translation of that Page to the user.
       event_category:
         warning_on_registration_summary: Any registrant who is signed up for this category will have a warning on their registration form.
       competition:

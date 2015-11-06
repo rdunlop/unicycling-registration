@@ -2,11 +2,12 @@
 #
 # Table name: categories
 #
-#  id         :integer          not null, primary key
-#  position   :integer
-#  created_at :datetime
-#  updated_at :datetime
-#  info_url   :string(255)
+#  id           :integer          not null, primary key
+#  position     :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  info_url     :string(255)
+#  info_page_id :integer
 #
 
 require 'spec_helper'
@@ -57,5 +58,28 @@ describe Category do
     expect(Event.all.count).to eq(1)
     cat.destroy
     expect(Event.all.count).to eq(0)
+  end
+
+  describe "info_url/info_page" do
+    let(:cat) { FactoryGirl.create(:category) }
+
+    before do
+      cat.update_attribute(:info_page, FactoryGirl.create(:page))
+      cat.update_attribute(:info_url, nil)
+    end
+
+    it "is valid" do
+      expect(cat).to be_valid
+    end
+
+    it "does allow a blank info_url and a specified info_page" do
+      cat.info_url = ""
+      expect(cat).to be_valid
+    end
+
+    it "doesn't allow setting both info blocks" do
+      cat.info_url = "hello"
+      expect(cat).to be_invalid
+    end
   end
 end
