@@ -31,7 +31,7 @@ FactoryGirl.define do
     visible true
 
     trait :marathon_best_time_format do
-      best_time_format "hh:mm"
+      best_time_format "h:mm"
     end
   end
 end

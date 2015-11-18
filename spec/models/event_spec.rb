@@ -52,8 +52,8 @@ describe Event do
       expect(@ev).to be_invalid
     end
 
-    it "allows hh:mm best_time format" do
-      @ev.best_time_format = "hh:mm"
+    it "allows h:mm best_time format" do
+      @ev.best_time_format = "h:mm"
       expect(@ev).to be_valid
     end
 

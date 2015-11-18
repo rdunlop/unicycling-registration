@@ -19,8 +19,9 @@
 require 'spec_helper'
 
 describe RegistrantBestTime do
+  let(:event) { FactoryGirl.create :event, :marathon_best_time_format }
   before do
-    @rb = FactoryGirl.create(:registrant_best_time)
+    @rb = FactoryGirl.create(:registrant_best_time, event: event)
   end
 
   it "is valid from FactoryGirl" do
@@ -39,19 +40,20 @@ describe RegistrantBestTime do
     expect(@rb).to be_valid
   end
 
-  context "with a hh:mm event" do
+  context "with a h:mm event" do
     before do
       ev = @rb.event
-      ev.update_attributes(best_time_format: "hh:mm")
+      ev.update_attributes(best_time_format: "h:mm")
     end
 
     it "stores the converted time in the value" do
       @rb.formatted_value = "0:01"
+      @rb.valid? # cause conversion
       expect(@rb.value).to eq(6000)
     end
 
     it "gives the correct hint" do
-      expect(@rb.hint).to eq("hh:mm")
+      expect(@rb.hint).to eq("h:mm")
     end
   end
 
