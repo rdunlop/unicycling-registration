@@ -12,15 +12,14 @@
 
 class Category < ActiveRecord::Base
   include CachedModel
+  include PageOrUrlLink
 
   acts_as_restful_list
   default_scope { order(:position) }
 
   has_many :events, -> {order("events.position") }, dependent: :destroy, inverse_of: :category
-  belongs_to :info_page, class_name: "Page"
 
   validates :name, presence: true
-  validate :only_one_info_type
 
   translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
@@ -45,17 +44,5 @@ class Category < ActiveRecord::Base
   # load all the dependent models necessary to display the event-choices form efficiently
   def self.load_for_form
     includes(:translations, events: [event_choices: :translations, event_categories: []])
-  end
-
-  def additional_info?
-    info_url.present? || info_page.present?
-  end
-
-  private
-
-  def only_one_info_type
-    if info_url.present? && info_page.present?
-      errors[:info_page_id] << "Unable to specify both Info URL and Info Page"
-    end
   end
 end

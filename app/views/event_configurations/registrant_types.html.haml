@@ -18,6 +18,7 @@
 
     = f.input :comp_noncomp_url, input_html: { class: "js--fancyboxUrl" }
     = link_to 'Test this URL', '#', class: "fancybox js--dynamicFancybox"
+    = f.input :comp_noncomp_page_id, collection: Page.ordinary
 
     = f.input :competitor_benefits, as: :text
     = f.input :noncompetitor_benefits, as: :text

@@ -38,10 +38,12 @@
 #  paypal_mode                           :string(255)      default("disabled")
 #  offline_payment                       :boolean          default(FALSE), not null
 #  enabled_locales                       :string           default("en,fr"), not null
+#  comp_noncomp_page_id                  :integer
 #
 
 class EventConfiguration < ActiveRecord::Base
   include MultiLevelValidation
+
   specify_validations :base_settings, :name_logo, :payment_settings, :important_dates
 
   translates :short_name, :long_name, :location, :dates_description, fallbacks_for_empty_translations: true
@@ -55,6 +57,7 @@ class EventConfiguration < ActiveRecord::Base
   validates :event_url, format: URI.regexp(%w(http https)), unless: "event_url.nil?"
   validates :comp_noncomp_url, format: URI.regexp(%w(http https)), unless: "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
   validates :enabled_locales, presence: true
+  validate :only_one_info_type
 
   def self.style_names
     [["Blue and Pink", "unicon_17"], ["Green and Blue", "naucc_2013"], ["Blue Purple Green", "naucc_2014"], ["Purple Blue Green", "naucc_2015"]]
@@ -92,12 +95,18 @@ class EventConfiguration < ActiveRecord::Base
 
   mount_uploader :rules_file_name, PdfUploader
 
+  belongs_to :comp_noncomp_page, class_name: "Page"
+
   after_initialize :init
 
   def init
     self.style_name ||= "naucc_2013"
     self.currency_code ||= "USD"
     self.max_award_place ||= 5
+  end
+
+  def additional_info?
+    comp_noncomp_page_id.present? || comp_noncomp_page.present?
   end
 
   def currency
@@ -270,6 +279,12 @@ class EventConfiguration < ActiveRecord::Base
       text.split("\n")
     else
       []
+    end
+  end
+
+  def only_one_info_type
+    if comp_noncomp_url.present? && comp_noncomp_page.present?
+      errors[:comp_noncomp_page_id] << "Unable to specify both Comp-NonComp URL and Comp-NonComp Page"
     end
   end
 end

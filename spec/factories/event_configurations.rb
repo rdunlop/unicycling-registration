@@ -38,6 +38,7 @@
 #  paypal_mode                           :string(255)      default("disabled")
 #  offline_payment                       :boolean          default(FALSE), not null
 #  enabled_locales                       :string           default("en,fr"), not null
+#  comp_noncomp_page_id                  :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

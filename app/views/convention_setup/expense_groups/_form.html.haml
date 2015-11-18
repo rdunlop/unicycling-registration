@@ -3,6 +3,7 @@
   = f.input :group_name
   = f.input :info_url, input_html: { class: "js--fancyboxUrl" }
   = link_to 'Test this URL', '#', class: "fancybox js--dynamicFancybox"
+  = f.input :info_page_id, collection: Page.ordinary
 
   %h3 Does a Competitor get one free?
   = f.input :competitor_free_options, collection: ExpenseGroup.free_options

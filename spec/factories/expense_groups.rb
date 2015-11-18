@@ -13,6 +13,7 @@
 #  competitor_required        :boolean          default(FALSE), not null
 #  noncompetitor_required     :boolean          default(FALSE), not null
 #  registration_items         :boolean          default(FALSE), not null
+#  info_page_id               :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

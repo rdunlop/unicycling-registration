@@ -13,9 +13,12 @@
 #  competitor_required        :boolean          default(FALSE), not null
 #  noncompetitor_required     :boolean          default(FALSE), not null
 #  registration_items         :boolean          default(FALSE), not null
+#  info_page_id               :integer
 #
 
 class ExpenseGroup < ActiveRecord::Base
+  include PageOrUrlLink
+
   validates :group_name, presence: true
   validates :visible, :competitor_required, :noncompetitor_required, inclusion: { in: [true, false] } # because it's a boolean
 

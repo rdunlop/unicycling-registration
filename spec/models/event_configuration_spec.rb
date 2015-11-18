@@ -38,6 +38,7 @@
 #  paypal_mode                           :string(255)      default("disabled")
 #  offline_payment                       :boolean          default(FALSE), not null
 #  enabled_locales                       :string           default("en,fr"), not null
+#  comp_noncomp_page_id                  :integer
 #
 
 require 'spec_helper'
@@ -126,6 +127,17 @@ describe EventConfiguration do
   it "can have a blank comp_noncomp_url" do
     @ev.comp_noncomp_url = ""
     expect(@ev.valid?).to eq(true)
+  end
+
+  it "cannot have both url and page" do
+    @ev.comp_noncomp_url = "http://www.google.com"
+    @ev.comp_noncomp_page_id = FactoryGirl.create(:page).id
+    expect(@ev).to be_invalid
+  end
+
+  it "Can have a info page" do
+    @ev.comp_noncomp_page_id = FactoryGirl.create(:page).id
+    expect(@ev).to be_valid
   end
 
   it "requires that the artistic closed date be before the event closed date" do

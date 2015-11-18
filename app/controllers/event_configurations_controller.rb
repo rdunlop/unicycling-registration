@@ -75,7 +75,7 @@ class EventConfigurationsController < ConventionSetupController
   def registrant_types_params
     params.require(:event_configuration).permit(:spectators,
                                                 :competitor_benefits, :noncompetitor_benefits, :spectator_benefits,
-                                                :comp_noncomp_url)
+                                                :comp_noncomp_url, :comp_noncomp_page_id)
   end
 
   def rules_waiver_params
