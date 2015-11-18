@@ -39,6 +39,7 @@
 #  offline_payment                       :boolean          default(FALSE), not null
 #  enabled_locales                       :string           default("en,fr"), not null
 #  comp_noncomp_page_id                  :integer
+#  under_construction                    :boolean          default(TRUE), not null
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -214,6 +215,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def registration_closed?
+    return true if under_construction?
     # allow 1 day of grace to registration_closed_date
     is_date_in_the_past?(registration_closed_date)
   end

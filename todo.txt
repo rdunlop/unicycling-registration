@@ -1,8 +1,4 @@
-- change "what's the difference" into a "page".
-- Add ability to "Lock" Sign-ups.
- - This will prevent users from creating new registrations, though they can create accounts.
- - It will also add a banner to the main sign-in page which says "Not yet open"
- -
+- add a banner to the main sign-in page which says "Not yet open"
 - remove unicon18.es (ensure that Paypal isn't being received there?)
 
 - Add a way to export the data for olaf into mailjet format.

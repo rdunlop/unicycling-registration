@@ -3,7 +3,7 @@ class EventConfigurationsController < ConventionSetupController
   before_action :load_event_configuration
   before_action :authorize_cache, only: [:cache, :clear_cache, :clear_counter_cache]
 
-  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :important_dates, :payment_settings, :advanced_settings]
+  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :important_dates, :payment_settings, :advanced_settings, :go_live]
 
   before_action :authorize_convention_setup, only: EVENT_CONFIG_PAGES
 
@@ -109,5 +109,9 @@ class EventConfigurationsController < ConventionSetupController
   def important_dates_params
     params.require(:event_configuration).permit(:artistic_closed_date, :music_submission_end_date, :event_sign_up_closed_date,
                                                 :start_date)
+  end
+
+  def go_live_params
+    params.require(:event_configuration).permit(:under_construction)
   end
 end

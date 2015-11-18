@@ -14,6 +14,7 @@
       %li= link_to "Events", convention_setup_categories_path
       %li= link_to "Volunteer Options", convention_setup_volunteer_opportunities_path
       %li= link_to "Payment Settings", payment_settings_event_configuration_path
+      %li= link_to "Go Live", go_live_event_configuration_path
       - if policy(@config).advanced_settings?
         %li= link_to "Advanced Settings", advanced_settings_event_configuration_path
       -#%li Access Settings

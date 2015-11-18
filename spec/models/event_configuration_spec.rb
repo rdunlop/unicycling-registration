@@ -39,6 +39,7 @@
 #  offline_payment                       :boolean          default(FALSE), not null
 #  enabled_locales                       :string           default("en,fr"), not null
 #  comp_noncomp_page_id                  :integer
+#  under_construction                    :boolean          default(TRUE), not null
 #
 
 require 'spec_helper'
@@ -174,6 +175,11 @@ describe EventConfiguration do
 
   it "should be open if no periods are defined" do
     expect(EventConfiguration.closed?).to eq(false)
+  end
+
+  it "should be closed if it is under construction" do
+    @ev.under_construction = true
+    expect(@ev.registration_closed?).to be_truthy
   end
 
   it "should NOT have standard_skill_closed by default " do

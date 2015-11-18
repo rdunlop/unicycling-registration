@@ -39,6 +39,7 @@
 #  offline_payment                       :boolean          default(FALSE), not null
 #  enabled_locales                       :string           default("en,fr"), not null
 #  comp_noncomp_page_id                  :integer
+#  under_construction                    :boolean          default(TRUE), not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -70,6 +71,7 @@ FactoryGirl.define do
     paypal_account "ROBIN+merchant@dunlopweb.com"
     paypal_mode "enabled"
     offline_payment false
+    under_construction false
 
     trait :with_usa do
       usa true
