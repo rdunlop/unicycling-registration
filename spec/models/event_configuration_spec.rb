@@ -174,6 +174,7 @@ describe EventConfiguration do
   end
 
   it "should be open if no periods are defined" do
+    @ev.save
     expect(EventConfiguration.closed?).to eq(false)
   end
 
@@ -205,6 +206,7 @@ describe EventConfiguration do
 
   describe "with a registration period" do
     before(:each) do
+      FactoryGirl.create(:event_configuration)
       @rp = FactoryGirl.create(:registration_period, start_date: Date.new(2012, 11, 03), end_date: Date.new(2012, 11, 07))
     end
     it "should be open on the last day of registration" do
