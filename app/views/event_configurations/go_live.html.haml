@@ -1,0 +1,13 @@
+%h1 Go Live
+
+%p The Current system is #{EventConfiguration.singleton.under_construction? ? "Under Construction" : "Live" }
+
+%p Setting "Under Construction" to False will enable users to create registrations (assuming that there is a current Registration Period)
+
+%fieldset.form__fieldset
+  = simple_form_for(@event_configuration, url: update_go_live_event_configuration_path, method: :put) do |f|
+    = render partial: "/shared/error_messages", object: @event_configuration
+
+    = f.input :under_construction
+
+    = f.button :submit
