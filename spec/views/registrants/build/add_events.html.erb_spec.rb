@@ -157,7 +157,7 @@ describe "registrants/build/add_events" do
 
     describe "for a best_time_format" do
       before do
-        @ev1.update_attributes(best_time_format: "hh:mm")
+        @ev1.update_attributes(best_time_format: "h:mm")
       end
 
       it "presents me with a text input for the source" do
