@@ -6,3 +6,5 @@ $ ->
       format: "Y/m/d",
       defaultDate: '<%= EventConfiguration.singleton.start_date.try(:strftime, "%Y/%m/%d") %>'
       )
+
+  $('.datetimepicker').datetimepicker();
