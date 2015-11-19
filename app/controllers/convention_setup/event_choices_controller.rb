@@ -41,7 +41,7 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
     if @event_choice.update_attributes(event_choice_params)
       flash[:notice] = 'Event choice was successfully updated.'
     end
-    respond_with(@event_choice, location: [:convention_setup, @event_choice], action: "edit")
+    respond_with(@event_choice, location: [:convention_setup, @event_choice.event, :event_choices], action: "edit")
   end
 
   # DELETE /event_choices/1
