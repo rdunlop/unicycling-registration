@@ -10,7 +10,7 @@ describe OverallChampionResultCalculator do
     mem.registrant = reg
     Delorean.jump 2
     mem.save!
-    FactoryGirl.create(:time_result, competitor: comp)
+    FactoryGirl.create(:time_result, competitor: comp, minutes: 1)
     comp
   end
 

@@ -25,6 +25,7 @@ class Member < ActiveRecord::Base
   validates :registrant, presence: true
   validate :registrant_once_per_competition
 
+  after_touch :update_min_bib_number
   after_save :update_min_bib_number
   after_destroy :update_min_bib_number
   after_save :touch_competitor

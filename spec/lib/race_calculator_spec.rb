@@ -72,13 +72,13 @@ describe OrderedResultCalculator do
       end
     end
 
-    it "places everyone as 0 if they have no time" do
+    it "places everyone as DQ if they have no time" do
       recalc
 
-      expect(@tr1.competitor.place_formatted).to eq("Unknown")
-      expect(@tr2.competitor.place_formatted).to eq("Unknown")
-      expect(@tr3.competitor.place_formatted).to eq("Unknown")
-      expect(@tr4.competitor.place_formatted).to eq("Unknown")
+      expect(@tr1.competitor.place_formatted).to eq("DQ")
+      expect(@tr2.competitor.place_formatted).to eq("DQ")
+      expect(@tr3.competitor.place_formatted).to eq("DQ")
+      expect(@tr4.competitor.place_formatted).to eq("DQ")
     end
 
     it "places the first place as first" do
