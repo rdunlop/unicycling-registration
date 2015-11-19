@@ -153,9 +153,10 @@ describe ConventionSetup::EventChoicesController do
   end
 
   describe "PUT update" do
+    let(:event_choice) { EventChoice.create! valid_attributes.merge(event: @event) }
+
     describe "with valid params" do
       it "updates the requested event_choice" do
-        event_choice = EventChoice.create! valid_attributes
         # Assuming there are no other event_choices in the database, this
         # specifies that the EventChoice created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -165,34 +166,24 @@ describe ConventionSetup::EventChoicesController do
       end
 
       it "assigns the requested event_choice as @event_choice" do
-        event_choice = EventChoice.create! valid_attributes
         put :update, id: event_choice.to_param, event_choice: valid_attributes
         expect(assigns(:event_choice)).to eq(event_choice)
       end
 
-      it "redirects to the event_choice" do
-        event_choice = EventChoice.create! valid_attributes
+      it "redirects to the event's event_choices page" do
         put :update, id: event_choice.to_param, event_choice: valid_attributes
-        expect(response).to redirect_to([:convention_setup, event_choice])
+        expect(response).to redirect_to([:convention_setup, @event, :event_choices])
       end
     end
 
     describe "with invalid params" do
       it "assigns the event_choice as @event_choice" do
-        event_choice = EventChoice.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
-        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
-        put :update, id: event_choice.to_param, event_choice: {optional: false}
+        put :update, id: event_choice.to_param, event_choice: {cell_type: "fake", optional: false}
         expect(assigns(:event_choice)).to eq(event_choice)
       end
 
       it "re-renders the 'edit' template" do
-        event_choice = EventChoice.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
-        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
-        put :update, id: event_choice.to_param, event_choice: {optional: false}
+        put :update, id: event_choice.to_param, event_choice: {cell_type: "fake", optional: false}
         expect(response).to render_template("edit")
       end
     end

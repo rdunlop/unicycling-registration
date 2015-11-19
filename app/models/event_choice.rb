@@ -25,7 +25,7 @@ class EventChoice < ActiveRecord::Base
   belongs_to :optional_if_event_choice, class_name: "EventChoice"
   belongs_to :required_if_event_choice, class_name: "EventChoice"
 
-  validates :label, :cell_type, presence: true
+  validates :label, :cell_type, :event, presence: true
 
   translates :label, :tooltip, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
