@@ -62,15 +62,33 @@ describe OverallChampionResultCalculator do
       competition1 = FactoryGirl.create(:competition)
       competition2 = FactoryGirl.create(:competition)
       competition3 = FactoryGirl.create(:competition)
-      competitor1m    = build_competitor(place: 2, bib_number: 10, competition: competition1)
-      competitor1tt   = build_competitor(place: 1, bib_number: 10, competition: competition2)
-      competitor1crit = build_competitor(place: 10, bib_number: 10, competition: competition3)
-      competitor2m    = build_competitor(place: 2, bib_number: 20, competition: competition1)
-      competitor2tt   = build_competitor(place: 2, bib_number: 20, competition: competition2)
-      competitor2crit = build_competitor(place: 1, bib_number: 20, competition: competition3)
-      competitor3m    = build_competitor(place: 1, bib_number: 30, competition: competition1)
-      competitor3tt   = build_competitor(place: 5, bib_number: 30, competition: competition2)
-      competitor3crit = build_competitor(place: 5, bib_number: 30, competition: competition3)
+      # competitor1m    =
+      build_competitor(place: 2, bib_number: 10, competition: competition1)
+
+      # competitor1tt   =
+      build_competitor(place: 1, bib_number: 10, competition: competition2)
+
+      # competitor1crit =
+      build_competitor(place: 10, bib_number: 10, competition: competition3)
+
+      # competitor2m    =
+      build_competitor(place: 2, bib_number: 20, competition: competition1)
+
+      # competitor2tt   =
+      build_competitor(place: 2, bib_number: 20, competition: competition2)
+
+      # competitor2crit =
+      build_competitor(place: 1, bib_number: 20, competition: competition3)
+
+      # competitor3m    =
+      build_competitor(place: 1, bib_number: 30, competition: competition1)
+
+      # competitor3tt   =
+      build_competitor(place: 5, bib_number: 30, competition: competition2)
+
+      # competitor3crit =
+      build_competitor(place: 5, bib_number: 30, competition: competition3)
+
       m_combined_competition_entry = FactoryGirl.create(:combined_competition_entry, abbreviation: "M", tie_breaker: true, competition: competition1, combined_competition: combined_competition)
       # allow(competitor1m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
       # allow(competitor2m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])

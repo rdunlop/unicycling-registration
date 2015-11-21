@@ -24,6 +24,6 @@ class HourMinuteFormatter
     minutes = seconds / 60
     hours = minutes / 60
     remaining_minutes = minutes % 60
-    "%d:%02d" % [hours, remaining_minutes]
+    format("%d:%02d", hours, remaining_minutes)
   end
 end

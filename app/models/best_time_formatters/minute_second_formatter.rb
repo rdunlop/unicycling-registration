@@ -28,12 +28,11 @@ class MinuteSecondFormatter
 
     minutes = seconds / 60
     seconds = seconds % 60
-    "%d:%02d.%02d" % [minutes, seconds, hundreds]
+    format("%d:%02d.%02d", minutes, seconds, hundreds)
   end
-
-  private
 
   def self.add_hundreds(string)
     "#{string}.00"
   end
+  private_class_method :add_hundreds
 end

@@ -365,7 +365,7 @@ describe Competitor do
 
     it "should delete related distance_attempts if the competitor is deleted" do
       comp = FactoryGirl.create(:event_competitor, competition: competition)
-      da = FactoryGirl.create(:distance_attempt, competitor: comp)
+      FactoryGirl.create(:distance_attempt, competitor: comp)
 
       expect(DistanceAttempt.count).to eq(1)
       Delorean.jump 2
