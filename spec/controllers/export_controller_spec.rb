@@ -20,7 +20,7 @@ describe ExportController do
   describe "GET download_events" do
     it "without any events or registrants, only prints the headers" do
       get :download_events, format: 'xls'
-      expect(assigns(:data)).to eq([["ID", "Registrant Name", "Age", "Gender"]])
+      expect(assigns(:headers)).to eq(["ID", "Registrant Name", "Age", "Gender"])
     end
     describe "with some events defined" do
       before(:each) do
@@ -28,14 +28,14 @@ describe ExportController do
       end
       it "lists the event titles" do
         get :download_events, format: 'xls'
-        data = assigns(:data)
-        expect(data[0]).to eq(["ID", "Registrant Name", "Age", "Gender", @ev.event_categories.first.to_s])
+        headers = assigns(:headers)
+        expect(headers).to eq(["ID", "Registrant Name", "Age", "Gender", @ev.event_categories.first.to_s])
       end
       it "lists the each event_choice separately, with event-prefixed" do
         get :download_events, format: 'xls'
         ec = EventCategory.all.first
-        data = assigns(:data)
-        expect(data[0]).to eq(["ID", "Registrant Name", "Age", "Gender", ec.to_s])
+        headers = assigns(:headers)
+        expect(headers).to eq(["ID", "Registrant Name", "Age", "Gender", ec.to_s])
       end
 
       describe "with a competitor" do
@@ -45,7 +45,7 @@ describe ExportController do
         it "has a row for that competitor" do
           get :download_events, format: 'xls'
           data = assigns(:data)
-          expect(data[1]).to eq([@reg.bib_number, @reg.name, @reg.age, @reg.gender, nil])
+          expect(data[0]).to eq([@reg.bib_number, @reg.name, @reg.age, @reg.gender, nil])
         end
         describe "with a registration choice for the event" do
           before(:each) do
@@ -55,7 +55,7 @@ describe ExportController do
           it "has a value in the target column" do
             get :download_events, format: 'xls'
             data = assigns(:data)
-            expect(data[1][4]).to eq(true)
+            expect(data[0][4]).to eq(true)
           end
         end
       end

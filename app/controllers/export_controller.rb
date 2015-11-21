@@ -69,9 +69,9 @@ class ExportController < ApplicationController
       end
       competitor_data << ([reg.bib_number, reg.name, reg.age, reg.gender] + reg_sign_up_data + reg_event_data)
     end
-    headers = titles
-    data = competitor_data
-    output_spreadsheet(headers, data, "download_events#{Date.today}.xls")
+    @headers = titles
+    @data = competitor_data
+    output_spreadsheet(@headers, @data, "download_events#{Date.today}.xls")
   end
 
   def download_payment_details
