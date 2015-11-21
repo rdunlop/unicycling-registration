@@ -32,7 +32,7 @@
 #  index_registrants_on_user_id          (user_id)
 #
 
-class Registrant < ActiveRecord::Base
+class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   include Eligibility
   include CachedModel
 
