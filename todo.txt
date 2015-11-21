@@ -1,7 +1,5 @@
-- add a banner to the main sign-in page which says "Not yet open"
+- add a banner to the main sign-in page which says "Not yet open" (when "under construction")
 - remove unicon18.es (ensure that Paypal isn't being received there?)
-
-- Add a way to export the data for olaf into mailjet format.
 
 - Add an SSL Certificate
 - Add an "Opt-out" instruction to the bottom of each e-mail that we send.

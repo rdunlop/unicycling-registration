@@ -270,6 +270,7 @@ Workspace::Application.routes.draw do
     resources :emails, only: [:index, :create] do
       collection do
         get :list
+        get :download
       end
     end
 
