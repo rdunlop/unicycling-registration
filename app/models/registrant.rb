@@ -473,7 +473,7 @@ class Registrant < ActiveRecord::Base
   end
 
   def paid_details
-    payment_details.completed.not_refunded.clone
+    payment_details.includes(expense_item: [:translations, expense_group: :translations]).completed.not_refunded.clone
   end
 
   def amount_paid

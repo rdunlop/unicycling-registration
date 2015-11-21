@@ -38,54 +38,47 @@ class ExportRegistrantsController < ApplicationController
   def download_with_payment_details
     authorize current_user, :download_payments?
 
-    s = Spreadsheet::Workbook.new
-    sheet = s.create_worksheet
+    headers = [
+      "ID",
+      "USA#",
+      "First Name",
+      "Last Name",
+      "Birthday",
+      "Address Line1",
+      "City",
+      "State",
+      "Zip",
+      "Country",
+      "Phone",
+      "Email",
+      "Club"
+    ]
 
-    row = 0
-    sheet[0, 0] = "ID"
-    sheet[0, 1] = "USA#"
-    sheet[0, 2] = "First Name"
-    sheet[0, 3] = "Last Name"
-    sheet[0, 4] = "Birthday"
-    sheet[0, 5] = "Address Line1"
-    sheet[0, 6] = "City"
-    sheet[0, 7] = "State"
-    sheet[0, 8] = "Zip"
-    sheet[0, 9] = "Country"
-    sheet[0, 10] = "Phone"
-    sheet[0, 11] = "Email"
-    sheet[0, 12] = "Club"
+    data = []
+    Registrant.active.includes(:contact_detail).each do |reg|
+      row = [
+        reg.bib_number,
+        reg.contact_detail.usa_member_number,
+        reg.first_name,
+        reg.last_name,
+        reg.birthday,
+        reg.contact_detail.address,
+        reg.contact_detail.city,
+        reg.contact_detail.state,
+        reg.contact_detail.zip,
+        reg.contact_detail.country_residence,
+        reg.contact_detail.phone,
+        reg.contact_detail.email,
+        reg.club
+      ]
 
-    row = 1
-    Registrant.active.includes(payment_details: [:payment]).each do |reg|
-      sheet[row, 0] = reg.bib_number
-      sheet[row, 1] = reg.contact_detail.usa_member_number
-      sheet[row, 2] = reg.first_name
-      sheet[row, 3] = reg.last_name
-      sheet[row, 4] = reg.birthday
-      sheet[row, 5] = reg.contact_detail.address
-      sheet[row, 6] = reg.contact_detail.city
-      sheet[row, 7] = reg.contact_detail.state
-      sheet[row, 8] = reg.contact_detail.zip
-      sheet[row, 9] = reg.contact_detail.country_residence
-      sheet[row, 10] = reg.contact_detail.phone
-      sheet[row, 11] = reg.contact_detail.email
-      sheet[row, 12] = reg.club
-      column = 13
       reg.paid_details.each do |pd|
-        sheet[row, column] = pd.expense_item.to_s
-        column += 1
-        sheet[row, column] = pd.details
-        column += 1
+        row << pd.expense_item.to_s
+        row << pd.details
       end
-      row += 1
+      data << row
     end
 
-    report = StringIO.new
-    s.write report
-
-    respond_to do |format|
-      format.xls { send_data report.string, filename: "registrants_with_payments.xls" }
-    end
+    output_spreadsheet(headers, data, "registrants_with_payments.xls")
   end
 end
