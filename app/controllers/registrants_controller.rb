@@ -30,7 +30,7 @@ class RegistrantsController < ApplicationController
 
     respond_to do |format|
       format.html # all.html.erb
-      format.pdf { render_common_pdf  "all",  'Landscape' }
+      format.pdf { render_common_pdf "all", 'Landscape' }
     end
   end
 

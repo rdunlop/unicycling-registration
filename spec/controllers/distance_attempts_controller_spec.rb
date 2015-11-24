@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe DistanceAttemptsController do
-  let(:competition)  { FactoryGirl.create(:distance_competition) }
+  let(:competition) { FactoryGirl.create(:distance_competition) }
   let(:comp) { FactoryGirl.create(:event_competitor, competition: competition) }
   before(:each) do
     @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)

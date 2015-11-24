@@ -14,7 +14,7 @@ class RemoveStreetScoreTable < ActiveRecord::Migration
     create_table :street_scores do |t|
       t.integer  "competitor_id"
       t.integer  "judge_id"
-      t.decimal  "val_1",         precision: 5, scale: 3
+      t.decimal  "val_1", precision: 5, scale: 3
       t.timestamps
     end
 

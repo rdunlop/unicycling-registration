@@ -20,7 +20,7 @@ class ChangeNameOfDistanceToHighLong < ActiveRecord::Migration
   def down
     Competition.reset_column_information
     Competition.where(scoring_class: "High/Long").each do |c|
-      c.update_attribute(:scoring_class,  "Two Attempt Distance")
+      c.update_attribute(:scoring_class, "Two Attempt Distance")
     end
     JudgeType.where(event_class: "High/Long").each do |j|
       j.update_attribute(:event_class, "Two Attempt Distance")

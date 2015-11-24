@@ -296,7 +296,7 @@ describe Payment do
 
       @reg_with_reg_item = FactoryGirl.create(:competitor)
       @pd.registrant = @reg_with_reg_item
-      @pd.expense_item  = @reg_period.competitor_expense_item
+      @pd.expense_item = @reg_period.competitor_expense_item
       @pd.save
     end
 

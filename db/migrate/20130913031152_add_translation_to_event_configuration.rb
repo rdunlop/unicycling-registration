@@ -9,7 +9,7 @@ class AddTranslationToEventConfiguration < ActiveRecord::Migration
                                                    long_name: :string,
                                                    location: :string,
                                                    dates_description: :string
-                                                 },                                                    {migrate_data: true})
+                                                 }, {migrate_data: true})
   end
 
   def down

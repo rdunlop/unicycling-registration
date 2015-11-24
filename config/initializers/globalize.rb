@@ -31,6 +31,7 @@ module Globalize
           def after_save
             init_translations
           end
+
           # Builds an empty translation for each available
           # locale not in use after creation
           def init_translations

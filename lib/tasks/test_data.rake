@@ -75,7 +75,7 @@ task create_fake_data: :environment do
   @hockey_events = ["A", "B"]
   @hockey = create_event(@collective, "Hockey", @hockey_events)
 
-  @distance =  create_category("Distance")
+  @distance = create_category("Distance")
   @marathon = create_event(@distance, "Marathon")
   @t10k_events = ["Standard", "Unlimited"]
   @t10k = create_event(@distance, "10k", @t10k_events)

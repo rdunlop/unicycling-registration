@@ -5,7 +5,7 @@ class TimeResultCalculator
 
   def initialize(start_times, finish_times, competition_start_time, lower_is_better)
     @start_times = start_times
-    @finish_times =  finish_times
+    @finish_times = finish_times
     @competition_start_time = competition_start_time
     @lower_is_better = lower_is_better
   end

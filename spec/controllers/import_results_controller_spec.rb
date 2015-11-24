@@ -12,7 +12,7 @@ describe ImportResultsController do
   # ImportResult. As you add validations to ImportResult, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "details" => "100pts", "points" => "1", "bib_number" => "123",  }
+    { "details" => "100pts", "points" => "1", "bib_number" => "123", }
   end
 
   describe "GET edit" do

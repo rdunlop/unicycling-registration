@@ -55,6 +55,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     def self.all_registration_expense_items
       RegistrationPeriod.all.collect{|rp| rp.competitor_expense_item} + RegistrationPeriod.all.collect{|rp| rp.noncompetitor_expense_item}
     end
+
     def self.relevant_period(date)
       RegistrationPeriod.includes(:competitor_expense_item, :noncompetitor_expense_item).all.each do |rp|
         if rp.current_period?(date)

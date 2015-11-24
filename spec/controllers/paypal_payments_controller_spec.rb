@@ -39,7 +39,7 @@ describe PaypalPaymentsController do
 
       describe "with a valid post" do
         before(:each) do
-          @attributes =  {
+          @attributes = {
             receiver_email: paypal_account,
             payment_status: "Completed",
             txn_id: "12345",
@@ -77,7 +77,7 @@ describe PaypalPaymentsController do
       end
       describe "with an incorrect payment_id" do
         before(:each) do
-          @attributes =  {
+          @attributes = {
             receiver_email: paypal_account,
             payment_status: "Completed",
             txn_id: "12345",

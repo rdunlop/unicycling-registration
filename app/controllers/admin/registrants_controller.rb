@@ -95,7 +95,7 @@ class Admin::RegistrantsController < ApplicationController
 
     respond_to do |format|
       format.html # show_all.html.erb
-      format.pdf { render_common_pdf  "show_all",  'Portrait' }
+      format.pdf { render_common_pdf "show_all", 'Portrait' }
     end
   end
 

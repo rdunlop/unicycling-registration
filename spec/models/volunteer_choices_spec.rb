@@ -5,7 +5,7 @@ describe VolunteerChoice do
     let(:volunteer_opportunity) { FactoryGirl.create(:volunteer_opportunity) }
     let!(:registrant) { FactoryGirl.create(:registrant) }
 
-    let(:subject) {  VolunteerChoice.new(volunteer_opportunity: volunteer_opportunity, registrant: registrant) }
+    let(:subject) { VolunteerChoice.new(volunteer_opportunity: volunteer_opportunity, registrant: registrant) }
 
     before { ActionMailer::Base.deliveries.clear }
 

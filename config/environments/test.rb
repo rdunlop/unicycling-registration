@@ -19,7 +19,7 @@ Rails.application.configure do
   config.active_record.maintain_test_schema = true
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_files  = true
+  config.serve_static_files = true
   config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching.

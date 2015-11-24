@@ -77,7 +77,7 @@ class CompetitorsController < ApplicationController
       rescue Exception => ex
         index
         flash.now[:alert] = "Error adding Registrants (0 added) #{ex}"
-        format.html { render "index"  }
+        format.html { render "index" }
       end
     end
   end

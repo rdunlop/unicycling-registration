@@ -33,7 +33,7 @@ describe FlatlandResultCalculator do
         end
 
         it "has non-zero placing points" do
-          expect(@calc.competitor_comparable_result(@comp1)).to eq(10)  # 11,9,10 (remain: 10)
+          expect(@calc.competitor_comparable_result(@comp1)).to eq(10) # 11,9,10 (remain: 10)
         end
 
         describe "when checking a tie" do

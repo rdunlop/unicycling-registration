@@ -118,7 +118,7 @@ class ExportController < ApplicationController
   end
 
   def results
-    headers = ["ID", "Name", "Gender", "Age", "Competition", "Place", "Result Type", "Result",  "Details",  "Age Group"]
+    headers = ["ID", "Name", "Gender", "Age", "Competition", "Place", "Result Type", "Result", "Details", "Age Group"]
 
     data = []
     Result.includes(competitor: [competition: [], members: [registrant: [:competition_wheel_sizes]], external_results: [], time_results: [], distance_attempts: [], scores: []]).all.each do |result|

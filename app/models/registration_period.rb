@@ -118,7 +118,7 @@ class RegistrationPeriod < ActiveRecord::Base
     # update the last-run date, even if we aren't going to change periods
     Rails.cache.write("/registration_period/last_update_run_date", date)
 
-    if (now_period == old_period)
+    if now_period == old_period
       return false
     end
 
@@ -143,7 +143,7 @@ class RegistrationPeriod < ActiveRecord::Base
     end
 
     old_period.update_attribute(:current_period, false) unless old_period.nil?
-    now_period.update_attribute(:current_period,  true) unless now_period.nil?
+    now_period.update_attribute(:current_period, true) unless now_period.nil?
 
     true
   end

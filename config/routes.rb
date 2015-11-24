@@ -164,7 +164,7 @@ Workspace::Application.routes.draw do
       end
     end
 
-    resources :payment_adjustments, only: [:new]  do
+    resources :payment_adjustments, only: [:new] do
       collection do
         get :list
         post :adjust_payment_choose
@@ -508,7 +508,7 @@ Workspace::Application.routes.draw do
         end
       end
 
-      resources :judges,      only: [:index, :create, :destroy] do
+      resources :judges, only: [:index, :create, :destroy] do
         collection do
           post :copy_judges
         end

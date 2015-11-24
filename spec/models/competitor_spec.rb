@@ -156,7 +156,7 @@ describe Competitor do
     expect(comps[1].position).to eq(2)
   end
   it "should have name/id from the registrant" do
-    reg  = @comp.registrants.first
+    reg = @comp.registrants.first
 
     expect(@comp.name).to eq(reg.name)
     expect(@comp.bib_number).to eq(reg.external_id.to_s)
