@@ -7,9 +7,10 @@
       %ul
         - @additional_registrant_access.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :registrant_id
-    %br
-    = f.select :registrant_id, Registrant.active.reorder("first_name, last_name").map{ |reg| [reg, reg.id] }, {include_blank: true}, class: 'chosen-select'
+  .field.row
+    .small-12.medium-6.columns.text-right
+      = f.label :registrant_id
+    .small-12.medium-6.columns
+      = f.select :registrant_id, Registrant.active.reorder("first_name, last_name").map{ |reg| [reg, reg.id] }, {include_blank: true}, class: 'chosen-select'
   .actions
     = f.button :submit, "Send Request"

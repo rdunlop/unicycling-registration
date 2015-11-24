@@ -3,8 +3,16 @@
 %p Registration forms have access codes printed on them which can be used to access their registration information.
 
 = form_tag use_code_permissions_path do
-  = label_tag :registrant_id
-  = select_tag :registrant_id, options_for_select(Registrant.all_select_box_options, @registrant_id), {include_blank: true, class: 'chosen-select' }
-  = label_tag :code, "Access Code"
-  = text_field_tag :code, @code
-  = submit_tag "Log In", class: "button"
+  .row
+    .small-12.medium-6.columns.text-right
+      = label_tag :registrant_id
+    .small-12.medium-6.columns
+      = select_tag :registrant_id, options_for_select(Registrant.all_select_box_options, @registrant_id), {include_blank: true, class: 'chosen-select' }
+  .row
+    .small-12.medium-6.columns.text-right
+      = label_tag :code, "Access Code"
+    .small-12.medium-6.columns
+      = text_field_tag :code, @code
+  .row
+    .small-12.columns
+      = submit_tag "Log In", class: "button"

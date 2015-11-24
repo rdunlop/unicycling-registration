@@ -15,8 +15,10 @@
   var value = $("#distance_attempt_distance").val();
   $("form").trigger("reset");
   $("#distance_attempt_distance").val(value);
-  $(".js--autoFocus").trigger("chosen:updated");
-  $(".js--autoFocus").trigger('chosen:activate');
+  $(".chosen-select").trigger("change");
+  $(".js--autoFocus").each(function() {
+    $(this).select2("open");
+  });
 
   $('#notice').empty();
   <%= render "load_competitor_details" %>

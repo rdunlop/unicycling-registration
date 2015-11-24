@@ -24,9 +24,8 @@ $ ->
     # store the state so that the ajax callback can select the correct state
     $('select#registrant_contact_detail_attributes_country_residence').data("state-to-be", $(this).data("state"));
 
-    $('select#registrant_contact_detail_attributes_country_residence').trigger('chosen:updated');
     $('select#registrant_contact_detail_attributes_country_residence').trigger("change");
-    $('select#registrant_contact_detail_attributes_country_representing').trigger('chosen:updated');
+    $('select#registrant_contact_detail_attributes_country_representing').trigger('change');
     return false;
 
 $(document).ready ->
@@ -65,5 +64,5 @@ $ ->
       state = $('select#registrant_contact_detail_attributes_country_residence').data("state-to-be");
       if state != undefined
         $('#registrant_contact_detail_attributes_state_code').val(state);
-        $('select#registrant_contact_detail_attributes_state_code').trigger("chosen:updated");
+        $('select#registrant_contact_detail_attributes_state_code').trigger("change");
 

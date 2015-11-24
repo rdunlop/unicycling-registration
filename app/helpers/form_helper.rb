@@ -10,8 +10,8 @@ module FormHelper
     registrant_group
   end
 
-  def registrant_bib_number_select_box(form, competition)
-    form.select :bib_number, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.bib_number] }, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
+  def registrant_bib_number_select_box(form, competition, options = {})
+    form.select :bib_number, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.bib_number] }, {include_blank: true}, {autofocus: true, class: "chosen-select #{options[:class]}"}
   end
 
   def eligible_registrants(competition)
@@ -24,7 +24,7 @@ module FormHelper
 
   # The form element which is used to enter data
   def competitor_select_box(form, competition, options = {})
-    options.merge!(autofocus: true, class: "chosen-select js--autoFocus #{options[:class]}")
+    options.merge!(autofocus: true, class: "chosen-select #{options[:class]}")
     disabled_ids = options[:disabled_ids]
     form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true, disabled: disabled_ids}, options
   end
@@ -36,11 +36,11 @@ module FormHelper
   end
 
   def no_form_competitor_select_box(competition, options = {})
-    select_tag :competitor_id, options_from_collection_for_select(competition.competitors.active, "id", "to_s_with_id"), include_blank: true, class: "chosen-select js--autoFocus #{options[:class]}"
+    select_tag :competitor_id, options_from_collection_for_select(competition.competitors.active, "id", "to_s_with_id"), include_blank: true, class: "chosen-select #{options[:class]}"
   end
 
   def all_registrant_competitors(form)
-    form.select :registrant_id,  Registrant.select_box_options, {include_blank: true}, {autofocus: true, class: 'chosen-select js--autoFocus'}
+    form.select :registrant_id,  Registrant.select_box_options, {include_blank: true}, {class: 'chosen-select'}
   end
 
   def wizard_progress_bar(allow_navigation = false)

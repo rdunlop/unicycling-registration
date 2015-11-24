@@ -14,8 +14,10 @@
   new_row.appendTo(".two_attempt_entries");
   new_row.effect("highlight", {}, 3000);
   $(".data_entry").trigger("reset");
-  $(".js--autoFocus").trigger("chosen:updated");
-  $(".js--autoFocus").trigger('chosen:activate');
+  $(".chosen-select").trigger("change");
+  $(".js--autoFocus").each(function() {
+    $(this).select2("open");
+  });
 
   $('#notice').empty();
 <% end %>

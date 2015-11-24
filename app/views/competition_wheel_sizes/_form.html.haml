@@ -1,10 +1,16 @@
 = simple_form_for([@registrant, @competition_wheel_size]) do |f|
   = render partial: "/shared/error_messages", object: @competition_wheel_size
   .field
-    = f.label :event
-    = f.collection_select :event_id, Event.where(accepts_wheel_size_override: true).order(:name), :id, :name, {include_blank: true}, class: "chosen-select"
+    .row
+      .small-12.medium-6.columns.text-right
+        = f.label :event
+      .small-12.medium-6.columns
+        = f.collection_select :event_id, Event.where(accepts_wheel_size_override: true).order(:name), :id, :name, {include_blank: true}, class: "chosen-select"
   .field
-    = f.label :wheel_size_id
-    = f.collection_select :wheel_size_id, WheelSize.all, :id, :description
+    .row
+      .small-12.medium-6.columns.text-right
+        = f.label :wheel_size_id
+      .small-12.medium-6.columns.text-right
+        = f.collection_select :wheel_size_id, WheelSize.all, :id, :description
   .actions
     = f.button :submit, 'Set Wheel Size'

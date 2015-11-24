@@ -24,7 +24,7 @@
 
     %tfoot
       %tr
-        %td{ colspan: 2}= registrant_bib_number_select_box(f, @competition)
+        %td{ colspan: 2}= registrant_bib_number_select_box(f, @competition, class: "js--autoFocus")
         %td
         %td= f.number_field :minutes, {:min => 0}
         %td= f.number_field :seconds, {:min => 0}

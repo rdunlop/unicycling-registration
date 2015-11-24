@@ -1,11 +1,18 @@
 
 = form_tag choose_one_registrants_path, method: :post do
-  = label_tag :registrant_id, "Registrant"
-  = select_tag :registrant_id, options_for_select(Registrant.all_select_box_options), :include_blank => true, class: 'chosen-select js--autoFocus'
-  %br
+  .row
+    .small-12.medium-6.columns.text-right
+      = label_tag :registrant_id, "Registrant"
+    .small-12.medium-6.columns
+      = select_tag :registrant_id, options_for_select(Registrant.all_select_box_options), :include_blank => true, class: 'chosen-select js--autoFocus'
 
-  = label_tag :summary, "Summary"
-  = check_box_tag :summary
-  = submit_tag "Edit/Summary", class: "button"
+  .row
+    .small-12.medium-6.columns.text-right
+      = label_tag :summary, "Summary"
+    .small-12.medium-6.columns.text-left
+      = check_box_tag :summary
+  .row
+    .small-12.columns
+      = submit_tag "Edit/Summary", class: "button"
 
 = link_to "Full List", manage_all_registrants_path

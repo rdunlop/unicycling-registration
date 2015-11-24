@@ -16,66 +16,66 @@
               href: "#" }
               = t(".copy_from_other_registrant", other_name: other_registrant.name)
       .row
-        .small-6.columns
+        .small-5.columns
           = f.label :address, :class => "required"
-        .small-6.columns
+        .small-7.columns
           = f.text_field :address
       .row
-        .small-6.columns
+        .small-5.columns
           = f.label :city, :class => "required"
-        .small-6.columns
+        .small-7.columns
           = f.text_field :city
       .row
-        .small-6.columns
+        .small-5.columns
           = f.label :country_residence, :class => "required"
-        .small-6.columns
+        .small-7.columns
           - if @config.usa?
             = f.country_select :country_residence, {priority_countries: %w(US CA), prompt: ' '}, class: "chosen-select"
           - else
             = f.country_select :country_residence, {prompt: ' '}, class: "chosen-select"
       .row
-        .small-6.columns
+        .small-5.columns
           - if @config.usa?
             = f.label :state_code, t(".state"), :class => "required"
           - else
             = f.label :state_code, t(".state_province")
-        .small-6.columns
+        .small-7.columns
           = render partial: '/registrants/subregion_select', locals: {parent_region: f.object.country_residence, f: f, from_object: true}
       .row
-        .small-6.columns
+        .small-5.columns
           = f.label :country_representing, :title => t(".country_representing_description")
-        .small-6.columns
+        .small-7.columns
           - if @config.usa?
             = f.country_select(:country_representing, {priority_countries: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
           - else
             = f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
       .row
-        .small-6.columns
+        .small-5.columns
           = f.label :zip, :class => "required"
-        .small-6.columns
+        .small-7.columns
           = f.text_field :zip
       .row
-        .small-6.columns
+        .small-5.columns
           = f.label :phone
-        .small-6.columns
+        .small-7.columns
           = f.telephone_field :phone
       .row
-        .small-6.columns
+        .small-5.columns
           = f.label :mobile
-        .small-6.columns
+        .small-7.columns
           = f.telephone_field :mobile
       .row
-        .small-6.columns
+        .small-5.columns
           = f.label :email
-        .small-6.columns
+        .small-7.columns
           = f.email_field :email, :class => "ui-tooltip", title: t(".email_tooltip")
       - if EventConfiguration.singleton.italian_requirements?
         .row
-          .small-6.columns= f.label :birthplace
-          .small-6.columns= f.text_field :birthplace
+          .small-5.columns= f.label :birthplace
+          .small-7.columns= f.text_field :birthplace
         .row
-          .small-6.columns= f.label :italian_fiscal_code
-          .small-6.columns= f.text_field :italian_fiscal_code
+          .small-5.columns= f.label :italian_fiscal_code
+          .small-7.columns= f.text_field :italian_fiscal_code
     .small-12.medium-6.columns
       %fieldset
         %legend= t(".team_affiliation")

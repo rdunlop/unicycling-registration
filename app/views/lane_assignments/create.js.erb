@@ -13,8 +13,10 @@
   new_row.appendTo(".lane_assignments");
   new_row.effect("highlight", {}, 3000);
   $("form").trigger("reset");
-  $(".js--autoFocus").trigger("chosen:updated");
-  $(".js--autoFocus").trigger('chosen:activate');
+  $(".chosen-select").trigger("change");
+  $(".js--autoFocus").each(function() {
+    $(this).select2("open");
+  });
 
   $('#notice').empty();
 <% end %>

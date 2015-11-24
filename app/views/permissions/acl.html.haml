@@ -5,6 +5,11 @@
 %p Authorizations are valid for 24 hours unless revoked earlier.
 
 = form_tag set_acl_permissions_path do
-  = label_tag :access_key, "Access Key"
-  = text_field_tag :access_key
-  = submit_tag "Authorize", class: "button"
+  .row
+    .small-12.medium-6.columns.text-right
+      = label_tag :access_key, "Access Key"
+    .small-12.medium-6.columns.text-left
+      = text_field_tag :access_key
+  .row
+    .small-12.columns
+      = submit_tag "Authorize", class: "button"

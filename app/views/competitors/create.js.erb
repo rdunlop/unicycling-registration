@@ -13,6 +13,6 @@
     value: <%= @competitor.id %>,
     text : "<%= @competitor.to_s_with_id %>"
   }));
-  el.trigger("chosen:updated");
+  el.trigger("change");
   alert("I have updated the competitor drop-downs on the page.")
 <% end %>

@@ -1,5 +1,6 @@
 = simple_form_for :copy_judges, :url=> copy_judges_competition_judges_path(@competition) do |f|
-  = f.label :competition_id
-  = f.select :competition_id, @competitions_with_judges.map{|e| [e, e.id]}, {include_blank: true }, class: "chosen-select"
-  %br
-  = f.button :submit, 'Copy Judges List', class: "action_button"
+  .row.small-12.columns
+    = f.label :competition_id
+    = f.select :competition_id, @competitions_with_judges.map{|e| [e, e.id]}, {include_blank: true }, class: "chosen-select"
+  .row.small-12.columns
+    = f.button :submit, 'Copy Judges List', class: "action_button"

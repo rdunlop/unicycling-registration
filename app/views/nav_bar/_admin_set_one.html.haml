@@ -21,6 +21,6 @@
       .row.collapse
         .small-4.columns
           = text_field_tag :bib_number, nil, placeholder: "Reg ID#"
-          = hidden_field_tag :summary, "1"
+          = hidden_field_tag :summary, "1", id: "unimportant"
         .small-8.columns
           = submit_tag "Summary", class: "button primary expand"

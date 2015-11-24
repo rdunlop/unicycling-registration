@@ -1,5 +1,8 @@
 class @ChosenEnabler
-  constructor: (@selects)->
+  constructor: (@selects) ->
+    @selects.select2
+      placeholder: "Select an Option"
+  oldconstructor: (@selects)->
     # enable chosen js
     @selects.chosen
       allow_single_deselect: true

@@ -83,4 +83,5 @@ $ ->
       $("." + $(this).data("hide-target")).hide()
 
 $ ->
-  $(".js--autoFocus").trigger('chosen:activate');
+    $(".js--autoFocus").each ->
+      $(@).select2('open');

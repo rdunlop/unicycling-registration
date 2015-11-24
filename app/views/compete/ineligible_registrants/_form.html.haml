@@ -1,5 +1,10 @@
 = form_tag(ineligible_registrants_path) do
-  = label_tag(:registrant_id, "Registrant")
-  = select_tag(:registrant_id, options_from_collection_for_select(@registrants, "id", "with_id_to_s"), class: 'chosen-select', include_blank: true)
-  = submit_tag "Mark as Ineligible", class: "button"
+  .row
+    .small-12.medium-6.columns.text-right
+      = label_tag(:registrant_id, "Registrant")
+    .small-12.medium-6.columns
+      = select_tag(:registrant_id, options_from_collection_for_select(@registrants, "id", "with_id_to_s"), class: 'chosen-select', include_blank: true)
+  .row
+    .small-12.columns
+      = submit_tag "Mark as Ineligible", class: "button"
 

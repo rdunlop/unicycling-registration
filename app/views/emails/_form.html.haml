@@ -1,26 +1,30 @@
 // locals: f
-= f.label :confirmed_accounts, "All Confirmed User Accounts"
-= f.check_box :confirmed_accounts
-%br
-%br
-= f.label :unpaid_reg_accounts, "User Accounts with ANY Registrants who have NOT Paid Reg Fees"
-= f.check_box :unpaid_reg_accounts
-%br
-= f.label :paid_reg_accounts, "User Accounts with ANY Registrants who have Paid Reg Fees"
-= f.check_box :paid_reg_accounts
-%br
-= f.label :no_reg_accounts, "User Accounts with No Registrants"
-= f.check_box :no_reg_accounts
-%br
+.row
+  .small-12.columns
+    = f.label :confirmed_accounts, "All Confirmed User Accounts"
+    = f.check_box :confirmed_accounts
+.row
+  .small-12.columns
+    = f.label :unpaid_reg_accounts, "User Accounts with ANY Registrants who have NOT Paid Reg Fees"
+    = f.check_box :unpaid_reg_accounts
+.row
+  .small-12.columns
+    = f.label :paid_reg_accounts, "User Accounts with ANY Registrants who have Paid Reg Fees"
+    = f.check_box :paid_reg_accounts
+.row
+  .small-12.columns
+    = f.label :no_reg_accounts, "User Accounts with No Registrants"
+    = f.check_box :no_reg_accounts
 - if @config.usa_membership_config?
-  = f.label :non_confirmed_usa, "User Accounts with Registrants who are not USA-Members"
-  = f.check_box :non_confirmed_usa
-  %br
-
-= f.label :competition_id, "Users who are assigned to a competition"
-= f.select :competition_id, Competition.event_order.all.map{ |comp| [comp, comp.id] }, {include_blank: true}, class: "chosen-select", multiple: true
-%br
-= f.label :category_id, "Users who are assigned to any competition in this category"
-= f.select :category_id, Category.all.map{ |category| [category, category.id] }, include_blank: true
-%br
-
+  .row
+    .small-12.columns
+      = f.label :non_confirmed_usa, "User Accounts with Registrants who are not USA-Members"
+      = f.check_box :non_confirmed_usa
+.row
+  .small-12.columns
+    = f.label :competition_id, "Users who are assigned to a competition"
+    = f.select :competition_id, Competition.event_order.all.map{ |comp| [comp, comp.id] }, {include_blank: true}, class: "chosen-select", multiple: true
+.row
+  .small-12.columns
+    = f.label :category_id, "Users who are assigned to any competition in this category"
+    = f.select :category_id, Category.all.map{ |category| [category, category.id] }, include_blank: true

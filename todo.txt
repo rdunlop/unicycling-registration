@@ -1,3 +1,5 @@
+- select2 should open on focus? (or at least allow typing to start the search?)
+  - autofocus not allowing typing into the form without first opening it up?
 - add a banner to the main sign-in page which says "Not yet open" (when "under construction")
 - remove unicon18.es (ensure that Paypal isn't being received there?)
 

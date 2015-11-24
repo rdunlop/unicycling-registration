@@ -13,7 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require chosen-jquery
+//= require select2
+//= require select2_locale_fr
+//= require select2_locale_de
+//= require select2_locale_hu
+//= require select2_locale_es
+// NOTE: not available select2_locale_ja
 //= require fancybox
 //= require jquery.nested-fields
 //= require jquery.are-you-sure
