@@ -4,7 +4,7 @@
   <% @standard_skill_routine_entry.errors.full_messages.each do |error| %>
     errors.append('<li><%= escape_javascript( error ) %></li>');
   <% end %>
-        
+
   // Display errors on form
   $('#errors').html($("<div id=\"error_explanation\" />").append(errors));
 <% else %>
