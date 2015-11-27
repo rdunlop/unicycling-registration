@@ -488,7 +488,8 @@ GEM
     rainbow (2.0.0)
     raindrops (0.13.0)
     rake (10.4.2)
-    recaptcha (0.4.0)
+    recaptcha (0.6.0)
+      json
     redis (3.2.1)
     redis-actionpack (4.0.0)
       actionpack (~> 4)
