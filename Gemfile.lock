@@ -580,7 +580,7 @@ GEM
     tilt (1.4.1)
     timeliness (0.3.7)
     tins (1.6.0)
-    tinymce-rails (4.1.6)
+    tinymce-rails (4.3.0)
       railties (>= 3.1.1)
     ttfunk (1.4.0)
     tzinfo (1.2.2)

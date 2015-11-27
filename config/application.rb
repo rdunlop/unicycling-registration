@@ -46,5 +46,7 @@ module Workspace
       g.routing_specs false
       g.helper false
     end
+
+    config.tinymce.install = :compile
   end
 end
