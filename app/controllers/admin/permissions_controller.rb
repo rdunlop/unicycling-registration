@@ -31,7 +31,7 @@ class Admin::PermissionsController < ApplicationController
     @user.password = new_password
     @user.save!
     @user.confirm
-
+    flash[:notice] = "Updated Password for #{@user}"
     redirect_to permissions_path
   end
 
