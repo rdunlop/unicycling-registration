@@ -17,7 +17,7 @@ class ApplicationPolicy
       @authorized_laptop = false
     end
 
-    raise Pundit::NotAuthorizedError, "must be logged in" unless @user
+    @user ||= User.new
     @record = record
   end
 

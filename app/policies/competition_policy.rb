@@ -93,11 +93,6 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   # PRINTING
-  def announcer?
-    return true # ?? Was "skip_authorization_check" before?
-    data_entry_volunteer? || director?(record.event) || super_admin?
-  end
-
   def heat_recording?
     view_access?
   end
