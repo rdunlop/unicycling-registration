@@ -5,12 +5,14 @@ class Redis
       # by Redis's volatile-lru setting.
       # http://redis.io/topics/lru-cache
       config[:expires_in] = 1.year
+      # Provided by redis-namespace gem
       config[:namespace] = -> { "CACHE_#{Apartment::Tenant.current}" }
     end
   end
 
   def self.sidekiq_configuration
     configuration do |config|
+      # Provided by redis-namespace gem
       config[:namespace] = 'SIDEKIQ'
     end
   end
