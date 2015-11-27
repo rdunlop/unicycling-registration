@@ -33,10 +33,10 @@ GIT
 
 GIT
   remote: git://github.com/rdunlop/tolk.git
-  revision: 510ad3fde1a820af8f89cff1c1f19e41d789feff
+  revision: 66e5ddfe48f5ea1d04d68bb02a76a9f86e737b5d
   branch: improve_import_export
   specs:
-    tolk (1.9.1)
+    tolk (1.9.3)
       rails (>= 4.0, < 4.3)
       safe_yaml (>= 0.8.6)
 
