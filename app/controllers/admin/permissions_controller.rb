@@ -30,7 +30,7 @@ class Admin::PermissionsController < ApplicationController
 
     @user.password = new_password
     @user.save!
-    @user.confirm!
+    @user.confirm
 
     redirect_to permissions_path
   end

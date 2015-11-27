@@ -23,7 +23,7 @@ class DataEntryVolunteer
   def save
     return false unless valid?
     begin
-      user.confirm! unless user.confirmed?
+      user.confirm unless user.confirmed?
       user.update_attributes!(name: name)
       user.add_role(:data_entry_volunteer)
     rescue ActiveRecord::RecordInvalid
