@@ -26,8 +26,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << [:name]
   end
 
+  # a true rails_admin_controller? method was removed from rails_admin:
+  # https://github.com/sferik/rails_admin/issues/2268
   def rails_admin_controller?
-    false
+    (self.class.to_s =~ /RailsAdmin::/) == 0
   end
 
   # Override the default pundit_user so that we can pass additional state to the policies
