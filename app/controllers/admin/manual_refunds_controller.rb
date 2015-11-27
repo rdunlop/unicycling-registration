@@ -10,6 +10,11 @@ class Admin::ManualRefundsController < ApplicationController
   def choose
     add_breadcrumb "Choose Refund Items"
 
+    if params[:registrant_ids].nil?
+      redirect_to action: :new
+      return
+    end
+
     @manual_refund = ManualRefund.new
     params[:registrant_ids].each do |reg_id|
       registrant = Registrant.find(reg_id)

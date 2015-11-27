@@ -10,6 +10,11 @@ class Admin::ManualPaymentsController < ApplicationController
   def choose
     add_breadcrumb "Choose Payment Items"
 
+    if params[:registrant_ids].nil?
+      redirect_to action: :new
+      return
+    end
+
     @manual_payment = ManualPayment.new
     params[:registrant_ids].each do |reg_id|
       registrant = Registrant.find(reg_id)
