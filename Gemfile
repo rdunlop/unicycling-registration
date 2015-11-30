@@ -88,24 +88,26 @@ group :naucc, :development, :caching do
   gem 'consistency_fail'
   gem 'better_errors'
   gem "binding_of_caller"
-  gem 'simplecov', require: false, group: :test
   gem 'rubocop', require: false
 end
 
-group :unicon, :naucc, :development, :test, :cucumber, :caching do
+group :test do
+  gem 'simplecov', require: false
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'poltergeist'
-  gem 'annotate'
-  gem 'bullet'
-  # gem 'brakeman'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'rspec_junit_formatter', '0.2.2'
   gem 'rspec-instafail', require: false
-  gem 'syntax'
+  gem 'delorean'
+end
+
+group :unicon, :naucc, :development, :cucumber, :caching do
+  gem 'annotate'
+  gem 'bullet'
+  # gem 'brakeman'
   gem 'watchr'
   gem 'foreman'
-  gem 'delorean'
   gem 'pry'
 end
 
