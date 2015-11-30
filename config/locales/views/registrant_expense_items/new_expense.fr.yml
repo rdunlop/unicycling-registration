@@ -4,3 +4,5 @@ fr:
     new_expense:
       add_free_item: Ajouter gratuitement cet item
       add_item: Ajouter l’item
+      one_is_free: Un article gratuit avec l'inscription
+      sold_out: Stock épuisé

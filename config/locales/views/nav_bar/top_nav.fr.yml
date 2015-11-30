@@ -3,8 +3,10 @@ fr:
   nav_bar:
     top_nav:
       all_registrants: Tous les participants
+      log_in: S'identifier
       my_account: My Account
       my_payments: Mes paiements
       my_registrations: Mes inscriptions
+      my_standard_skill_routines: Ma routine de standard Skill
       results: Compétitions/Resultat
       sign_out: Déconnexion

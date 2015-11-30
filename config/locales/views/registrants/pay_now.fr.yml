@@ -2,5 +2,6 @@
 fr:
   registrants:
     pay_now:
+      offline_payment: Instructions pour le paiment
       pay_now: Payer maintenant
       unknown: quand?

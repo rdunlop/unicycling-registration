@@ -15,8 +15,14 @@ fr:
         emergency_other_phone: Autre numéro de téléphone
         emergency_primary_phone: Numéro de téléphone principal
         emergency_relationship: Lien
+        italian_fiscal_code: Code fiscal (Requis pour les participants Italiens)
         mobile: Numéro de portable
         phone: Numéro de téléphone
+        responsible_adult_name: Nom
         responsible_adult_phone: Numéro de téléphone principal
+        usa_member_number: Numéro de membre de la USA
         zip: Code postal
-    models: 
+    models:
+      contact_detail:
+        one: Contact
+        other: Contact

@@ -1,6 +1,12 @@
 ---
 fr:
+  are_you_sure: "Êtes-vous certain?"
   back: Retour
+  breadcrumbs:
+    home: Accueil
+    my_registrants: Mes inscriptions
+    new_payment: Nouveau paiement
+  cancel: Annuler
   competitor: Compétiteur
   date:
     formats:
@@ -21,5 +27,6 @@ fr:
     add_name: Nom
     add_volunteers: Bénévole
     expenses: Frais
+    music: Musique
     set_wheel_sizes: Taille de la roue
   'yes': Oui

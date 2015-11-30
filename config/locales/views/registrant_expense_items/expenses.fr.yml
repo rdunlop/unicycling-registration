@@ -5,3 +5,4 @@ fr:
       cost: Prix
       paid: Payé
       registrants_expenses: Frais de %{registrant}
+      total: Total

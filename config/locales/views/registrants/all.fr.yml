@@ -4,4 +4,6 @@ fr:
     all:
       all_registrants: Tous les participants
       country: Pays
+      id: Numéro d'identification
       name: Nom
+      registrant_type: Type

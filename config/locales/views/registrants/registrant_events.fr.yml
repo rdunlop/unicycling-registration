@@ -7,3 +7,4 @@ fr:
       confirmed_events: Compétitions Non-Confirmé
       event: Compétition
       events: Compétitions
+      unconfirmed_events: "Événement non-confirmé"
