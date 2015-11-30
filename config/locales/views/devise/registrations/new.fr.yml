@@ -1,0 +1,10 @@
+---
+fr:
+  devise:
+    registrations:
+      new:
+        confirmation_reminder: Après l'inscription, vous recevrez un courriel de confirmation
+          que vous devrez ouvrir pour confirmer votre adresse e-mail.
+        header: S'inscrire
+        password_min_length: "(minimum de 6 caractères)"
+        sign_up: S'inscrire

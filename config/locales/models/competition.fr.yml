@@ -1,0 +1,18 @@
+---
+fr:
+  activerecord:
+    attributes:
+      competition:
+        award_subtitle_name: Sous-titre du prix
+        award_title_name: Titre du prix
+        has_experts: Calculer les experts également
+        name: Nom de la compétition
+        num_members_per_competitor: Grandeur de l'équipe
+        penalty_seconds: Secondes par pénalités
+        scheduled_completion_at: Temps d'achèvement de l'horaire
+        scoring_class: Type de score
+        uses_lane_assignments: Sera attribué à la ligne/vague
+    models:
+      competition:
+        one: Compétition
+        other: Compétitions

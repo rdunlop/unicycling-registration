@@ -1,0 +1,8 @@
+---
+fr:
+  welcome:
+    feedback:
+      email: Votre e-mail
+      header: Commentaires
+      optional: Optionnel
+      submit: Envoyez un commentaire

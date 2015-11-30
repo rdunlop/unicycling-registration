@@ -1,0 +1,13 @@
+---
+fr:
+  payment_mailer:
+    manual_payment_completed:
+      body: "%{event_name} - Paiement reçu.\r\n\r\nUn paiement à été reçu.\r\n\r\nIdentifiez
+        vous et cliquez sur «Mes paiements» pour tous les détails.\r\n\r\nPaiement
+        #%{payment_number} à été completé."
+      subject: Paiement reçu
+    payment_completed:
+      body: "%{event_name} - Paiement reçu.\r\n\r\nUn paiement de %{amount} à été
+        reçu.\r\n\r\nIdentifiez vous et cliquez sur «Mes paiements» pour tous les
+        détails.\r\n\r\nPaiement #%{payment_number} à été complété."
+      subject: Paiement complété

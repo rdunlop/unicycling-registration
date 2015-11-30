@@ -1,0 +1,8 @@
+---
+fr:
+  devise:
+    confirmations:
+      new:
+        spam_reminder: Si vous n'avez pas reçu votre e-mail de confirmation, veuillez
+          vérifier votre dossier Spam/Pourriel
+        title: Renvoyer les instructions de confirmation

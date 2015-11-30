@@ -1,0 +1,8 @@
+---
+fr:
+  registrants:
+    registrant_songs:
+      event: "Événement"
+      header: Musique de routine
+      instructions: Télécharger votre musique
+      song: Morceau musical

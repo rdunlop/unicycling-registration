@@ -1,0 +1,11 @@
+---
+fr:
+  devise:
+    mailer:
+      confirmation_instructions:
+        action: Confirmation de mon compte
+        confirm_your_account_instructions: 'Vous pouvez confirmer votre compte en
+          cliquant ce lien:'
+        copy_paste_instructions: Si le lien de fonctionne pas, veuillez le copier
+          et le coller dans l'url de votre navigateur.
+        welcome_message: Bienvenue %{email} aux inscriptions pour monocyclistes!

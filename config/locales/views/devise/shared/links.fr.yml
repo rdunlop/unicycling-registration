@@ -1,0 +1,11 @@
+---
+fr:
+  devise:
+    shared:
+      links:
+        already_have_an_account: Vous avez déjà un compte?
+        forgot_your_password: Mot de passe oublié?
+        log_in_here: S'identifier ici
+        need_confirmation_instructions: Vous n'avez pas reçu les instruction de confirmation?
+        new_user: Nouvel utilisateur?
+        sign_up_here: S'inscrire ici

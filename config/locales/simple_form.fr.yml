@@ -1,0 +1,48 @@
+---
+fr:
+  simple_form:
+    error_notification:
+      default_message: 'Veuillez régler ces problèmes:'
+    hints:
+      category:
+        info_page_id: Choisissez une 'Page' qui décris cette catégorie. Ceci servira
+          de modèle pour la traduction de la page pour les autres utilisateurs.
+        info_url: Le lien apparait sur la page des catégories et sert comme lien vers
+          de l'information additionnelle sur les événement de cette catégorie.
+      competition:
+        award_subtitle_name: "Inscrire une ligne facultative pour le prix. NOTE: Seulement
+          permis SANS les groupes d'âge\r\ne.g. Novice Hommes"
+        award_title_name: "Texte aparaissant sur les résultats officiel\r\ne.g. Freestyle
+          individuel"
+        combined_competition_id: "Ceci devrait être activé sur la compétition globale
+          et non sur les compétitions y faisant parti.\r\n(e.g. pas pour le 10k, mais
+          pour la «Compétition de route»)"
+        num_members_per_competitor: Pour la plupart des événements, ceci sera «Un»
+        scoring_class: Choisir le système de calcul
+      coupon_code:
+        price: Le prix à charger en utilisant ce coupon
+    labels:
+      registrant_best_times:
+        source_location: Nom de la convention
+      volunteer_opportunity: Adresses e-mail à notifier pour chaque inscription de
+        bénévole.
+    'no': Non
+    options:
+      event_configuration:
+        waiver:
+          none: Pas de décharge
+          online: Décharge en ligne
+          print: Imprimer la décharge
+    placeholders:
+      competitor_expense_item:
+        cost: e.g. 12.00
+      coupon_code:
+        code: Code promo à inscrire pour l'utilisateur
+      noncompetitor_expense_item:
+        cost: e.g. 12.00
+      volunteer_opportunity:
+        inform_emails: liste des adresses e-mail séparé de virgules
+    required:
+      mark: "*"
+      text: Requis
+    'yes': Oui

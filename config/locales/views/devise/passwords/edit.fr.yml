@@ -1,0 +1,9 @@
+---
+fr:
+  devise:
+    passwords:
+      edit:
+        action: Changer votre mot de passe
+        password_confirmation_label: Confirmation du mot de passe
+        password_label: Nouveau mot de passe
+        title: Changer votre mot de passe

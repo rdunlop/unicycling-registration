@@ -1,0 +1,21 @@
+---
+fr:
+  activerecord:
+    attributes:
+      event_configuration:
+        competitor_benefits: Avantages des compétiteurs
+        dates_description: Descriptions des dates
+        event_url: Site principal
+        location: Lieu
+        long_name: Nom complet
+        noncompetitor_benefits: Avantages des Non-Compétiteurs
+        offline_payment: Configuration des détails sur le paiement hors ligne
+        offline_payment_description: Détails pour le paiement hors ligne
+        short_name: Nom écourté
+        spectator_benefits: Avantages des spectateurs
+        start_date: Premier jour de compétition
+  helpers:
+    submit:
+      event_configuration:
+        create: Sauvegarder et continuer
+        update: Sauvegarder et continuer

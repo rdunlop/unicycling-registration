@@ -1,0 +1,9 @@
+---
+fr:
+  registrants:
+    additional_registrant_access_banners:
+      link_end: page pour les détails
+      please_share_your_registration: Vous avez demander de partager votre inscription
+        avec un autre utilisateur.
+      registrant_access_page_title: Voir l'accès d'inscription
+      you_have_shared: Vous avez partagé votre inscription avec un autre utilisateur

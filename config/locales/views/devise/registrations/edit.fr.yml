@@ -1,0 +1,15 @@
+---
+fr:
+  devise:
+    registrations:
+      edit:
+        action: Mise à jour
+        blank_notice: Laissez vide si vous désirez ne pas changer
+        change_header: Changer d'adresse e-mail ou de mot de passe
+        change_password: Changer de mot de passe
+        confirm_password_notice: Entrez votre mot de passe actuel pour confirmer les
+          changements
+        current_permissions: Permissions actuelles
+        title: Mon compte
+        upgrade_to_admin_action: Promouvoir mon compte pour devenir Administrateur
+        users_name: Nom de compte

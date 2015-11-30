@@ -1,0 +1,7 @@
+---
+fr:
+  devise:
+    passwords:
+      new:
+        action: M'envoyer les information pour changer le mot de passe
+        title: Mot de passe oublié?

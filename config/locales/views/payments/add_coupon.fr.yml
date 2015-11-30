@@ -1,0 +1,7 @@
+---
+fr:
+  payments:
+    add_coupon:
+      coupon_code: Code promo
+      have_a_coupon: Vous avez un code promo?
+      submit: Appliquez le code promo

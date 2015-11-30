@@ -1,0 +1,12 @@
+---
+fr:
+  registrants:
+    online_waiver:
+      by_having_your_parent_sign_you_agree: En apposant la signature de votre parent/gardien
+        légal, ils acceptent la décharge ci haut.
+      by_signing_you_agree: En signant dans cette boîte, vous acceptez la décharge
+        ci-haut.
+      by_signing_you_agree_by_age: En sigant dans la boîte, vous acceptez la décharge
+        ci-haut. Si vous êtes mineur (moins de 18 ans), votre parent/gardien légal
+        doit signer pour vous.
+      header: Contrat

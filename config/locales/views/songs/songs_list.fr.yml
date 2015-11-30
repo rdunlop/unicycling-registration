@@ -1,0 +1,13 @@
+---
+fr:
+  songs:
+    songs_list:
+      add_song: Ajouter une musique
+      changes_after_deadline: Si vous désirez changer votre musique après cette date,
+        veuillez contacter le directeur ou l'organisateur. (ou utiliser «Aide» ->
+        «Commentaires»)
+      download: Télécharger
+      guest: Cette chanson à déjà été soumise par un autre participant?
+      music_deadline: La musique doit être soumise avant %{end_date}
+      reg_name: Nom d'inscription
+      remove: Enlever
