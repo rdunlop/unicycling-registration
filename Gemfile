@@ -86,7 +86,7 @@ gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
 group :naucc, :development, :caching do
   gem 'quiet_assets'
   gem 'consistency_fail'
-  gem 'better_errors'
+  gem 'web-console', '~> 2.0'
   gem "binding_of_caller"
   gem 'rubocop', require: false
 end

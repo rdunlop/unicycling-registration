@@ -130,9 +130,6 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.10)
-    better_errors (1.1.0)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     breadcrumbs_on_rails (2.3.1)
@@ -607,6 +604,11 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     watchr (0.7)
+    web-console (2.2.1)
+      activemodel (>= 4.0)
+      binding_of_caller (>= 0.7.2)
+      railties (>= 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
     websocket-driver (0.5.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -630,7 +632,6 @@ DEPENDENCIES
   apartment-sidekiq
   awesome_nested_fields
   aws-sdk-rails
-  better_errors
   binding_of_caller
   breadcrumbs_on_rails
   bullet
@@ -702,6 +703,7 @@ DEPENDENCIES
   unicorn
   virtus
   watchr
+  web-console (~> 2.0)
   whenever
   wicked
   wicked_pdf
