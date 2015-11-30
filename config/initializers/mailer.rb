@@ -11,7 +11,7 @@ Rails.application.config.action_mailer.default_url_options[:host] = Rails.applic
 
 unless Rails.env.test?
   if Rails.application.secrets.aws_access_key.present?
-    ActionMailer::Base.delivery_method = :amazon_ses
+    ActionMailer::Base.delivery_method = :aws_sdk
   else
     ActionMailer::Base.smtp_settings = {
       address:              Rails.application.secrets.mail_server,

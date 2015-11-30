@@ -42,7 +42,7 @@ gem 'redis-rails'
 gem 'rails_admin'
 gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
 gem "fog"
-gem 'aws-sdk'
+gem 'aws-sdk-rails'
 gem 'http_accept_language'
 gem 'newrelic_rpm'
 gem 'redis-namespace'
