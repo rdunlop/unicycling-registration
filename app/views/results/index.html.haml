@@ -12,7 +12,7 @@
     .row
       .small-12.medium-6.columns
         = label_tag :registrant_id, "Registrant"
-        = select_tag :registrant_id, options_from_collection_for_select(Registrant.active.competitor, "id", "with_id_to_s"), include_blank: true, autofocus: true, class: 'chosen-select js--autoFocus'
+        = select_tag :registrant_id, options_from_collection_for_select(Registrant.active.competitor, "id", "with_id_to_s"), include_blank: true, autofocus: true, class: 'chosen-select'
       .small-12.medium-6.columns.text-left
         = submit_tag "View Results", class: "button"
 
