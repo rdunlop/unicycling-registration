@@ -29,5 +29,9 @@ FactoryGirl.define do
     points 1
     status "active"
     preliminary false
+
+    trait :preliminary do
+      preliminary true
+    end
   end
 end
