@@ -96,7 +96,7 @@ class Registrants::BuildController < ApplicationController
   private
 
   def load_registrant_by_bib_number
-    @registrant = Registrant.find_by(bib_number: params[:registrant_id])
+    @registrant = Registrant.find_by!(bib_number: params[:registrant_id])
   end
 
   # Set the steps to those which are currently accessible to my user

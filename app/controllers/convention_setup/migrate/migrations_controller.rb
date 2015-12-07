@@ -72,7 +72,7 @@ class ConventionSetup::Migrate::MigrationsController < ApplicationController
   private
 
   def load_source_tenant
-    @source_tenant = Tenant.find_by(subdomain: params[:tenant])
+    @source_tenant = Tenant.find_by!(subdomain: params[:tenant])
   end
 
   def authorize_setup

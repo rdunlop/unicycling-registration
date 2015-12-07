@@ -116,7 +116,7 @@ class RegistrantsController < ApplicationController
   end
 
   def load_registrant_by_bib_number
-    @registrant = Registrant.find_by(bib_number: params[:id])
+    @registrant = Registrant.find_by!(bib_number: params[:id])
   end
 
   def authorize_registrant

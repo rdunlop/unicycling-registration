@@ -25,7 +25,7 @@ class Admin::RegistrantsController < ApplicationController
 
     registrant = nil
     if params[:bib_number].present?
-      registrant = Registrant.find_by(bib_number: params[:bib_number])
+      registrant = Registrant.find_by!(bib_number: params[:bib_number])
     end
 
     if params[:registrant_id].present?
@@ -106,6 +106,6 @@ class Admin::RegistrantsController < ApplicationController
   end
 
   def load_registrant
-    @registrant = Registrant.find_by(bib_number: params[:id])
+    @registrant = Registrant.find_by!(bib_number: params[:id])
   end
 end

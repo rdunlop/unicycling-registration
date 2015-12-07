@@ -51,7 +51,7 @@ class ScoresController < ApplicationController
   end
 
   def find_competitor
-    @competitor = Competitor.find_by_id(params[:competitor_id])
+    @competitor = Competitor.find(params[:competitor_id])
   end
 
   def score_params

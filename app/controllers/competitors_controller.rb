@@ -44,7 +44,7 @@ class CompetitorsController < ApplicationController
     begin
       LaneAssignment.transaction do
         competitors.each do |_, competitor|
-          reg = Registrant.find_by(bib_number: competitor[:bib_number])
+          reg = Registrant.find_by!(bib_number: competitor[:bib_number])
           lane_assignment = LaneAssignment.new(registrant_id: reg.id, lane: competitor[:lane].to_i, heat: heat, competition: @competition)
           lane_assignment.save!
         end

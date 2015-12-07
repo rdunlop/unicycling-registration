@@ -95,7 +95,7 @@ class SongsController < ApplicationController
   private
 
   def load_registrant_by_bib_number
-    @registrant = Registrant.find_by(bib_number: params[:registrant_id])
+    @registrant = Registrant.find_by!(bib_number: params[:registrant_id])
   end
 
   def load_user

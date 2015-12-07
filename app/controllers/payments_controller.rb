@@ -16,7 +16,7 @@ class PaymentsController < ApplicationController
 
   # GET /registrants/1/payments
   def registrant_payments
-    registrant = Registrant.find_by(bib_number: params[:id])
+    registrant = Registrant.find_by!(bib_number: params[:id])
     authorize registrant, :payments?
 
     add_registrant_breadcrumb(registrant)

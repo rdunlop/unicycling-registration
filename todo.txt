@@ -42,7 +42,6 @@ Things that caused the most grief:
 - Many Reports have "unknown" as the rank place for people who were DNS or DNF.
  - Should be marked as such, and should show up at the END of the list.
 - Unclear how to Import Start time data, ...and the review shows nothing because the 'is-start-time' isn't passed to the review page properly.
-- pundit use of authorize (user must be logged in) is strange.
 
 Requests:
 ---------
