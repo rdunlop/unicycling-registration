@@ -79,6 +79,6 @@ class ExportRegistrantsController < ApplicationController
       data << row
     end
 
-    output_spreadsheet(headers, data, "registrants_with_payments.xls")
+    output_spreadsheet(headers, data, "registrants_with_payments")
   end
 end

@@ -71,7 +71,7 @@ class ExportController < ApplicationController
     end
     @headers = titles
     @data = competitor_data
-    output_spreadsheet(@headers, @data, "download_events#{Date.today}.xls")
+    output_spreadsheet(@headers, @data, "download_events#{Date.today}")
   end
 
   def download_payment_details
@@ -111,7 +111,7 @@ class ExportController < ApplicationController
       ]
     end
 
-    output_spreadsheet(headers, data, "#{ei.name}.xls")
+    output_spreadsheet(headers, data, ei.name)
   end
 
   def results
@@ -133,7 +133,7 @@ class ExportController < ApplicationController
       ]
     end
 
-    output_spreadsheet(headers, data, "results.xls")
+    output_spreadsheet(headers, data, "results")
   end
 
   private
