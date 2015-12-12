@@ -180,6 +180,8 @@ GEM
     country_select (2.4.0)
       countries (~> 1.1.0)
       sort_alphabetical (~> 1.0)
+    css_splitter (0.4.3)
+      sprockets (>= 2.0.0)
     currencies (0.4.2)
     debug_inspector (0.0.2)
     delorean (2.1.0)
@@ -648,6 +650,7 @@ DEPENDENCIES
   consistency_fail
   countries!
   country_select
+  css_splitter
   delorean
   devise
   devise-async
