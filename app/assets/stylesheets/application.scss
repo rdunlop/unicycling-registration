@@ -17,7 +17,6 @@
  *= require foundation_and_overrides
 
  *= require fancybox
- *= require_tree ./common
  *= require jquery.dataTables
  *= require jquery-ui-1.9.2.custom
  *= require select2
@@ -25,6 +24,7 @@
  *= require jquery.datetimepicker
  *= require_self
  */
+@import "old_styles_list";
 
 .ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
   min-width: 70px;
