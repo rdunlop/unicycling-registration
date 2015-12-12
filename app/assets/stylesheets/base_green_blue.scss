@@ -1,15 +1,13 @@
 /*
- * This is a manifest file that'll be compiled into naucc_2013.css, which will include all the files
- * listed below incluing all common styles.
- *
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
  * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * Add NAUCC 2013 specific styles here. They will override common styles.
  *
  *= require application
  *= require_self
  */
+
+// Buttons are blue
+// Competitors are green
 
 // Import default colors
 @import "new_styles/default_hue_variables";

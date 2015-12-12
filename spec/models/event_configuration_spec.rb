@@ -102,7 +102,7 @@ describe EventConfiguration do
   end
 
   it "has a style_name even without having any entries" do
-    expect(EventConfiguration.new.style_name).to eq("naucc_2013")
+    expect(EventConfiguration.new.style_name).to eq("base_green_blue")
   end
 
   it "has a long name" do

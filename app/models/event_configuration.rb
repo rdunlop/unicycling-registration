@@ -61,7 +61,7 @@ class EventConfiguration < ActiveRecord::Base
   validate :only_one_info_type
 
   def self.style_names
-    [["Blue and Pink", "unicon_17"], ["Green and Blue", "naucc_2013"], ["Blue Purple Green", "naucc_2014"], ["Purple Blue Green", "naucc_2015"]]
+    [["Blue and Pink", "base_blue_pink"], ["Green and Blue", "base_green_blue"], ["Blue Purple Green", "base_blue_purple"], ["Purple Blue Green", "base_purple_blue"]]
   end
 
   def self.currency_codes
@@ -101,7 +101,7 @@ class EventConfiguration < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.style_name ||= "naucc_2013"
+    self.style_name ||= "base_green_blue"
     self.currency_code ||= "USD"
     self.max_award_place ||= 5
   end

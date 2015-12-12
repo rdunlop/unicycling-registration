@@ -20,7 +20,7 @@ describe EventConfigurationsController do
           long_name: "Something Long"
         }
       },
-      style_name: "unicon_17"
+      style_name: "base_blue_pink"
     }
   end
 

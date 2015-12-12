@@ -1,16 +1,14 @@
 /*
- * This is a manifest file that'll be compiled into unicon_17.css, which will include all the files
- * listed below incluing all common styles.
- *
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
  * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * Add Unicon 17 specific styles here. They will override common styles.
  *
  *= require font-kit-rails
  *= require application
  *= require_self
  */
+
+// Competitor: Blue
+//  on-hover: Pink
 
 // Import default colors
 @import "new_styles/default_hue_variables";

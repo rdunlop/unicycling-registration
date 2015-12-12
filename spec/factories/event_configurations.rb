@@ -65,7 +65,7 @@ FactoryGirl.define do
     event_sign_up_closed_date "2013-5-10"
     comp_noncomp_url nil
     test_mode true
-    style_name "naucc_2013"
+    style_name "base_green_blue"
     max_award_place 5
     spectators false
     paypal_account "ROBIN+merchant@dunlopweb.com"
