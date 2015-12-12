@@ -19,7 +19,7 @@
   %li= link_to  'Registrant Groups', registrant_groups_path
 - if policy(current_user).under_development?
   %li= link_to  'Export Data', export_index_path
-- if policy(current_user).under_development?
+- if policy(:export).index?
   %li= link_to  'Import Data', new_import_path
 - if policy(current_user).under_development?
   %li= link_to  'Multi-Tenant Research', research_competitions_path

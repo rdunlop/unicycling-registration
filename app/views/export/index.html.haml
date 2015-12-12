@@ -1,20 +1,25 @@
 %h1 Export Menu
 
 %hr
-= simple_form_for :data, :url => export_download_payment_details_path(:format => :xls), :method => :get do |f|
-  .row
-    .small-4.columns
-      %b Download Details on registrants who bought:
-    .small-4.columns
-      = f.select :expense_item_id, ExpenseItem.all.map { |ei| [ei, ei.id] }
-    .small-4.columns
-      = f.button :submit, "Export Registrants who bought this item", :class => "multiclick button"
+- if policy(:export).download_payment_details?
+  = simple_form_for :data, :url => export_download_payment_details_path(:format => :xls), :method => :get do |f|
+    .row
+      .small-4.columns
+        %b Download Details on registrants who bought:
+      .small-4.columns
+        = f.select :expense_item_id, ExpenseItem.all.map { |ei| [ei, ei.id] }
+      .small-4.columns
+        = f.button :submit, "Export Registrants who bought this item", :class => "multiclick button"
 
-%hr
-= link_to 'Download Event Info', export_download_events_path(:format => :xls)
+  %hr
+- if policy(:export).download_events?
+  = link_to 'Download Event Info', export_download_events_path(:format => :xls)
 
-%hr
-= link_to "Download all Registrants and their paid payments", export_download_all_payments_path(:format => :xls)
+  %hr
 
-%hr
-= link_to "Download all results", export_results_path(format: :xls)
+- if policy(current_user).download_payments?
+  = link_to "Download all Registrants and their paid payments", export_download_all_payments_path(:format => :xls)
+  %hr
+
+- if policy(:export).results?
+  = link_to "Download all results", export_results_path(format: :xls)

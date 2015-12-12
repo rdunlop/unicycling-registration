@@ -1,6 +1,6 @@
 class ExportPolicy < ApplicationPolicy
   def index?
-    super_admin?
+    download_payment_details? || download_events? || results?
   end
 
   def download_competitors_for_timers?
@@ -12,7 +12,7 @@ class ExportPolicy < ApplicationPolicy
   end
 
   def download_payment_details?
-    super_admin?
+    user.has_role?(:export_payment_lists) || super_admin?
   end
 
   def results?

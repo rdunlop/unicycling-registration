@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:late_registrant, :music_dj, :awards_admin, :event_planner, :translator,
+    [:late_registrant, :export_payment_lists, :music_dj, :awards_admin, :event_planner, :translator,
      :membership_admin, :competition_admin, :payment_admin, :convention_admin, :super_admin]
   end
 
@@ -85,10 +85,10 @@ class User < ActiveRecord::Base
   def self.role_transfer_permissions
     {
       super_admin: [*roles],
-      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin],
+      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin, :export_payment_lists],
       competition_admin: [:competition_admin, :awards_admin],
       director: [],
-      payment_admin: [:payment_admin, :late_registrant],
+      payment_admin: [:payment_admin, :late_registrant, :export_payment_lists],
       event_planner: [:event_planner],
       music_dj: [:music_dj]
     }
@@ -163,6 +163,8 @@ class User < ActiveRecord::Base
       "[e.g. Olaf]
       Able to access the translation menu.
       Enter new translations, and apply them to the site"
+    when :export_payment_lists
+      "Able to use the Export menu to download Excel file of registrants who have paid for lodging"
     when :late_registrant
       "Able to access the registration system even after the registration period has closed.
       Able to Create new registrants, update existing registrants, and make payments.

@@ -80,15 +80,14 @@ class ExportController < ApplicationController
     headers = []
     headers << "Expense Item"
     headers << "Details: #{ei.details_label}"
+    headers << "ID"
     headers << "First Name"
     headers << "Last Name"
-    headers << "Birthday"
-    headers << "Address Line1"
+    headers << "Age"
     headers << "City"
     headers << "State"
-    headers << "Zip"
-    headers << "Country"
-    headers << "Phone"
+    headers << "Country of Residence"
+    headers << "Country Representing"
     headers << "Email"
     headers << "Club"
 
@@ -99,16 +98,14 @@ class ExportController < ApplicationController
       data << [
         payment_detail.expense_item.to_s,
         payment_detail.details,
+        reg.bib_number,
         reg.first_name,
         reg.last_name,
-        reg.birthday,
-        reg.contact_detail.address,
+        reg.age,
         reg.contact_detail.city,
         reg.contact_detail.state,
-        reg.contact_detail.zip,
         reg.contact_detail.country_residence,
         reg.contact_detail.country_representing,
-        reg.contact_detail.phone,
         reg.contact_detail.email,
         reg.club
       ]
