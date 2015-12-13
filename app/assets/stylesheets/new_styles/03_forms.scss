@@ -62,15 +62,11 @@ div.required {
 
 #volunteer_opportunities .three_columns {
     columns: 3;
-    -webkit-columns: 3;
-    -moz-columns: 3;
     li {
       padding-right: 10px;
     }
     @media only screen and (max-width: 800px) {
       columns: 1;
-      -webkit-columns: 1;
-      -moz-columns: 1;
     }
   }
 
