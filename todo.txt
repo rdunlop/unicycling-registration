@@ -1,3 +1,8 @@
+- set up letsencrypt
+ - document it
+ - back up the keys
+- set up log rotation/eye?
+- Feedback should ensure that the "Email" field does not contain any spaces (preferably should be an e-mail address too)
 - select2 should open on focus? (or at least allow typing to start the search?)
   - autofocus not allowing typing into the form without first opening it up?
 - add a banner to the main sign-in page which says "Not yet open" (when "under construction")
