@@ -485,6 +485,35 @@ should set the timezone of the server.
 
     $ cat "TZ='America/New_York'; export TZ" >> ~/.profile
 
+Setting up the Production Server
+================================
+
+This application is designed to be run in production using nginx and unicorn.
+
+An nginx configuration template can be found at [/server_config/nginx-server.conf.template](/server_config/nginx-server.conf.template).
+
+It will need to be modified according to the exact layout of your application server. It can be set up to serve
+http, https, or both.
+
+SSL Certificates
+----------------
+
+**Note: This section is under construction **
+
+In order to provide a secure connection, we are using [letsencrypt.org](https://letsencrypt.org) to
+automatically create ssl certificates for the various domains which the server will run on.
+
+In order for this to work, the letsencrypt application must be installed on the server.
+
+    On Amazon Linux, we had to `yum install python27-devel` before we could successfully run `./letsencrypt-auto --debug -v`
+    By the time that you read this, they may officially support Amazon Linux, which would make this step simple.
+
+Whenever a new domain is added to the application, we run letsencrypt in order to generate a new certificate.
+
+We also have a scheduled monthly job which renews the certificates.
+
+The template for running letsencrypt can be found in [/server_config/letsencrypt-command.template](/server_config/letsencrypt-command.template)
+
 Comments on the database schema
 ===============================
 
