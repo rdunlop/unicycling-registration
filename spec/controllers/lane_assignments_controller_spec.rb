@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: lane_assignments
+#
+#  id             :integer          not null, primary key
+#  competition_id :integer
+#  heat           :integer
+#  lane           :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  competitor_id  :integer
+#
+# Indexes
+#
+#  index_lane_assignments_on_competition_id                    (competition_id)
+#  index_lane_assignments_on_competition_id_and_heat_and_lane  (competition_id,heat,lane) UNIQUE
+#
+
 require 'spec_helper'
 
 describe LaneAssignmentsController do

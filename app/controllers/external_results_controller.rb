@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: external_results
+#
+#  id            :integer          not null, primary key
+#  competitor_id :integer
+#  details       :string(255)
+#  points        :decimal(6, 3)    not null
+#  created_at    :datetime
+#  updated_at    :datetime
+#  entered_by_id :integer          not null
+#  entered_at    :datetime         not null
+#  status        :string           not null
+#  preliminary   :boolean          not null
+#
+# Indexes
+#
+#  index_external_results_on_competitor_id  (competitor_id) UNIQUE
+#
+
 class ExternalResultsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition, only: [:index, :create]

@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: standard_skill_routines
+#
+#  id            :integer          not null, primary key
+#  registrant_id :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+# Indexes
+#
+#  index_standard_skill_routines_on_registrant_id  (registrant_id) UNIQUE
+#
+
 require 'csv'
 class StandardSkillRoutinesController < ApplicationController
   before_action :authenticate_user!

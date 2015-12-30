@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id                          :integer          not null, primary key
+#  category_id                 :integer
+#  position                    :integer
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#  name                        :string(255)
+#  visible                     :boolean          default(TRUE), not null
+#  accepts_music_uploads       :boolean          default(FALSE), not null
+#  artistic                    :boolean          default(FALSE), not null
+#  accepts_wheel_size_override :boolean          default(FALSE), not null
+#  event_categories_count      :integer          default(0), not null
+#  event_choices_count         :integer          default(0), not null
+#  best_time_format            :string           default("none"), not null
+#
+# Indexes
+#
+#  index_events_category_id                     (category_id)
+#  index_events_on_accepts_wheel_size_override  (accepts_wheel_size_override)
+#
+
 require 'spec_helper'
 
 describe EventsController do

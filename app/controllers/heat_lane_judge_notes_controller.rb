@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: heat_lane_judge_notes
+#
+#  id             :integer          not null, primary key
+#  competition_id :integer          not null
+#  heat           :integer          not null
+#  lane           :integer          not null
+#  status         :string           not null
+#  comments       :string
+#  entered_at     :datetime         not null
+#  entered_by_id  :integer          not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+# Indexes
+#
+#  index_heat_lane_judge_notes_on_competition_id  (competition_id)
+#
+
 class HeatLaneJudgeNotesController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition

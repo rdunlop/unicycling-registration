@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: distance_attempts
+#
+#  id            :integer          not null, primary key
+#  competitor_id :integer
+#  distance      :decimal(4, )
+#  fault         :boolean          default(FALSE), not null
+#  judge_id      :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+# Indexes
+#
+#  index_distance_attempts_competitor_id  (competitor_id)
+#  index_distance_attempts_judge_id       (judge_id)
+#
+
 class DistanceAttemptsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_and_authorize_judge, only: [:index, :create, :new, :competitor_details]

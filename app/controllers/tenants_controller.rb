@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: public.tenants
+#
+#  id                 :integer          not null, primary key
+#  subdomain          :string(255)
+#  description        :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  admin_upgrade_code :string(255)
+#
+
 class TenantsController < ApplicationController
   before_action :skip_authorization
   layout "global"

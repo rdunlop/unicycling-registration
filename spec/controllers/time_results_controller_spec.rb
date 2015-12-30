@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: time_results
+#
+#  id                  :integer          not null, primary key
+#  competitor_id       :integer
+#  minutes             :integer
+#  seconds             :integer
+#  thousands           :integer
+#  created_at          :datetime
+#  updated_at          :datetime
+#  is_start_time       :boolean          default(FALSE), not null
+#  number_of_laps      :integer
+#  status              :string(255)      not null
+#  comments            :text
+#  comments_by         :string(255)
+#  number_of_penalties :integer
+#  entered_at          :datetime         not null
+#  entered_by_id       :integer          not null
+#  preliminary         :boolean
+#  heat_lane_result_id :integer
+#
+# Indexes
+#
+#  index_time_results_on_competitor_id  (competitor_id)
+#
+
 require 'spec_helper'
 
 describe TimeResultsController do

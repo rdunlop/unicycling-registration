@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: distance_attempts
+#
+#  id            :integer          not null, primary key
+#  competitor_id :integer
+#  distance      :decimal(4, )
+#  fault         :boolean          default(FALSE), not null
+#  judge_id      :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+# Indexes
+#
+#  index_distance_attempts_competitor_id  (competitor_id)
+#  index_distance_attempts_judge_id       (judge_id)
+#
+
 require 'spec_helper'
 
 describe DistanceAttemptsController do

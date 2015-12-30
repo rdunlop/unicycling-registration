@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: public.tenant_aliases
+#
+#  id             :integer          not null, primary key
+#  tenant_id      :integer          not null
+#  website_alias  :string(255)      not null
+#  primary_domain :boolean          default(FALSE), not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#  verified       :boolean          default(FALSE), not null
+#
+
 class TenantAliasesController < ConventionSetupController
   before_action :authenticate_user!
   before_action :load_tenant_alias, only: [:activate, :destroy]

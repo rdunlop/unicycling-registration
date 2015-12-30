@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: registrant_groups
+#
+#  id            :integer          not null, primary key
+#  name          :string(255)
+#  registrant_id :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+# Indexes
+#
+#  index_registrant_groups_registrant_id  (registrant_id)
+#
+
 require 'spec_helper'
 
 describe RegistrantGroupsController do

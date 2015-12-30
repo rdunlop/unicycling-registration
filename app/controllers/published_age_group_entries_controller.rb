@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: published_age_group_entries
+#
+#  id                 :integer          not null, primary key
+#  competition_id     :integer
+#  age_group_entry_id :integer
+#  published_at       :datetime
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+# Indexes
+#
+#  index_published_age_group_entries_on_competition_id  (competition_id)
+#
+
 class PublishedAgeGroupEntriesController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :skip_authorization, only: :show
