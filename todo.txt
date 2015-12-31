@@ -1,3 +1,4 @@
+- Change TenantAlias flow to REQUIRE that the alias be verified before being set as primary
 - set up letsencrypt
  - document it
  - back up the keys

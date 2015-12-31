@@ -22,6 +22,24 @@ class TenantAlias < ActiveRecord::Base
     where(primary_domain: true)
   end
 
+  # Determine whether this alias is properly configured
+  # Causes makes a request to a remote server (which should be THIS server)
+  # and determines whether the request was properly received
+  def properly_configured?
+    Net::HTTP.start(website_alias, open_timeout: 5) do |http|
+      response = http.get("/tenant_aliases/#{id}/verify")
+
+      return false unless response.is_a?(Net::HTTPSuccess)
+
+      response.body == "TRUE"
+    end
+  rescue SocketError, Net::OpenTimeout, Errno::ECONNREFUSED
+    # SocketError if the server name doesn't exist in DNS
+    # OpenTimeout if no server responds
+    # ECONNREFUSED if the server responds with "No"
+    false
+  end
+
   def to_s
     website_alias
   end

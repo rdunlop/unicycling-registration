@@ -12,10 +12,11 @@
 #
 
 class TenantAliasesController < ConventionSetupController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:verify]
   before_action :load_tenant_alias, only: [:activate, :destroy]
 
-  before_action :authorize_setup
+  before_action :authorize_setup, except: [:verify]
+  before_action :skip_authorization, only: [:verify]
   before_action :set_breadcrumbs
 
   def index
@@ -33,6 +34,23 @@ class TenantAliasesController < ConventionSetupController
     else
       flash[:alert] = "Unable to create Alias"
       render :index
+    end
+  end
+
+  # A request is made to this endpoint to verify that the particular domain is
+  # properly configured in the DNS settings
+  #
+  # Example Request:
+  # http://mydomain.com/tenant_aliases/14/verify
+  #
+  # If there is a TenantAlias#14 with website_alias of mydomain.com, return TRUE
+  # If not, returne FALSE
+  def verify
+    tenant_alias = TenantAlias.find_by(id: params[:id])
+    if tenant_alias.present? && tenant_alias.website_alias == request.host
+      render text: "TRUE"
+    else
+      render text: "FALSE"
     end
   end
 

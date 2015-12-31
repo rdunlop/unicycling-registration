@@ -30,3 +30,4 @@ dump.rdb
 # Ignore simplecov report
 /coverage
 /config/initializers/wicked_pdf_osx.rb
+/server_config/certs.yml

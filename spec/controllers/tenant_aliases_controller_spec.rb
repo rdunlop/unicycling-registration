@@ -14,8 +14,9 @@
 require 'spec_helper'
 
 describe TenantAliasesController do
+  let(:user) { FactoryGirl.create(:super_admin_user) }
+
   before(:each) do
-    user = FactoryGirl.create(:super_admin_user)
     sign_in user
   end
 
@@ -47,6 +48,36 @@ describe TenantAliasesController do
     it "Cannot read aliases" do
       get :index
       expect(response).to redirect_to(root_path)
+    end
+  end
+
+  describe "#verify" do
+    before do
+      sign_out user
+    end
+
+    let!(:tenant_alias) { FactoryGirl.create(:tenant_alias) }
+
+    it "returns False by default" do
+      get :verify, id: 99
+      expect(response).to be_success
+      expect(response.body).to eq("FALSE")
+    end
+
+    it "returns false if the request is from a different domain" do
+      @request.host = "otherdomain.com"
+      get :verify, id: tenant_alias.id
+
+      expect(response).to be_success
+      expect(response.body).to eq("FALSE")
+    end
+
+    it "returns true if the request in from the correct domain" do
+      @request.host = tenant_alias.website_alias
+      get :verify, id: tenant_alias.id
+
+      expect(response).to be_success
+      expect(response.body).to eq("TRUE")
     end
   end
 end

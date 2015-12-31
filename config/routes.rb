@@ -593,7 +593,7 @@ Workspace::Application.routes.draw do
   resources :tenants, only: [:index, :create]
   resources :tenant_aliases, only: [:index, :create, :destroy] do
     member do
-      post :verify
+      get :verify
       post :activate
     end
   end

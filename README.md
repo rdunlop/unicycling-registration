@@ -495,6 +495,40 @@ An nginx configuration template can be found at [/server_config/nginx-server.con
 It will need to be modified according to the exact layout of your application server. It can be set up to serve
 http, https, or both.
 
+Amazon Server Setup
+-------------------
+
+- Create a new "Small" instance, be sure to attach the correct SSH key.
+- Add the new server's address to the config/deploy/stage.rb (or production.rb)
+- SSH into that instance, and update packages `sudo yum update`
+- Install letsencrypt
+  - `sudo yum install git`
+  - `git clone https://github.com/letsencrypt/letsencrypt`
+- install rvm
+  - `gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  - `\curl -sSL https://get.rvm.io | bash -s stable`
+- `cap stage deploy` (or `cap prod deploy`)
+  - NOTE: this will fail because the configuration files aren't present...but it will create the necessary directory structure
+- Copy the configuration files (database.yml, secrets.yml, newrelic.yml)
+- copy the robots.txt file (public/robots.txt)
+- install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
+- install PostgreSQL `sudo yum install postgresql postgresql-devel`
+- install bundler `gem install bundler`
+- install a JavaScript runtime
+  - See http://stackoverflow.com/questions/27350634/how-to-yum-install-node-js-on-amazon-linux#answer-32664598
+  - e.g. `curl https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz > node.tgz`
+  - `tar xvf node.tgz`
+  - echo 'export PATH="$PATH:/home/ec2-user/node-v4.2.4-linux-x64/bin"' >> ~/.bashrc
+- install and configure nginx
+  - `sudo yum install nginx`
+  - set the `/etc/nginx/nginx.conf` to be `user ec2-user`
+  - copy the `/etc/nginx/conf.d/registration.conf` (based on the template in this git repo)
+  - `service start nginx`
+- Install a redis-server on the server:
+  - See https://gist.github.com/four43/e00d01ca084c5972f229
+  - `./install-redis.sh`
+- Copy the existing certificates from production `/etc/letsencrypt/*`
+
 SSL Certificates
 ----------------
 
@@ -510,7 +544,21 @@ In order for this to work, the letsencrypt application must be installed on the 
 
 Whenever a new domain is added to the application, we run letsencrypt in order to generate a new certificate.
 
-We also have a scheduled monthly job which renews the certificates.
+There is a scheduled job which runs every month to update the certificates. Additionally, the certificates are updated each time a new Tenant or Primary Domain are specified.
+
+How the Encryption process works:
+---------------------------------
+
+1. A list of domains which are served by this server is created.
+2. A shell script for letsencrypt is generated
+3. The shell script is run, generating a new SSL Certificate
+4. [Necessary?] Nginx is restarted to pick up the new certificate.
+5. An e-mail is sent to the ERROR_EMAILS list if any issues occur.
+
+Preconditions:
+
+1. secrets.yml must have specified the letsencrypt binary location
+2. all of the domains listed in the list are correct (accessible, and properly mapped)
 
 The template for running letsencrypt can be found in [/server_config/letsencrypt-command.template](/server_config/letsencrypt-command.template)
 
