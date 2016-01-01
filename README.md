@@ -519,20 +519,21 @@ Amazon Server Setup
 - Install a redis-server on the server:
   - See https://gist.github.com/four43/e00d01ca084c5972f229
   - `./install-redis.sh`
+- KNOWN ISSUE: unable to write to /etc/nginx/conf.d files. (worked around using `chmod o+w /etc/nginx/conf.d/`)
 - install and configure nginx
   - `sudo yum install nginx`
   - set the `/etc/nginx/nginx.conf` to be `user ec2-user`
   - create a new nginx `registration.conf` using the rake command `sudo rake create_base_nginx_configuration`
   - `sudo service start nginx`
 - At this point, point your DNS to this server, so that all requests go through this server
-- Determine all domains which are possible through this server `sudo rake update_domain_certs`
+- Determine all domains which are possible through this server `cd server_config && sudo ruby ./renew_certs.rb -u -p && sudo ruby ./renew_certs.rb -r`
 - Install letsencrypt
   - `sudo yum install git`
   - `git clone https://github.com/letsencrypt/letsencrypt`
   - Install letsencrypt `cd letsencrypt && ./letsencrypt-auto --debug -v`
   - If you already have certificates on a server:
     - Copy the existing certificates from production `/etc/letsencrypt/*`
-  - Otherwise, create new certificates using `sudo rake update_domain_certs`
+  - Otherwise, create new certificates using `sudo ruby renew_certs.rb -n && sudo service nginx restart`
 
 SSL Certificates
 ----------------

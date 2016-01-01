@@ -11,8 +11,8 @@ task update_domain_certs: :environment do
   puts "Updating list of domains"
   CertificateManager.update_domains_file
   puts "Updating SSL Certificates"
-  `#{cmd} -u`
-  `#{cmd} -r`
+  `ruby #{cmd} -u`
+  `ruby #{cmd} -r`
   # puts "Updating nginx configuration to use the new SSL Certificate"
   # `#{cmd} -n`
   # puts "Restarting nginx"
@@ -26,6 +26,6 @@ task create_base_nginx_configuration: :environment do
   CertificateManager.update_domains_file(true)
   puts "Updating Ngnix Configuration"
   cmd = Rails.root.join("server_config", "renew_certs.rb")
-  `#{cmd} -n --no-ssl`
+  `ruby #{cmd} -n --no-ssl`
   puts "done."
 end

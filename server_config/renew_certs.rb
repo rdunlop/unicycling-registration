@@ -43,7 +43,7 @@ command = "#{CMD} certonly"
 puts "Command:"
 puts command
 
-def update_config
+def update_config(_config, _options)
   template = %q(
 # This is an example of the kind of things you can do in a configuration file.
 # All flags used by the client can be configured here. Run Let's Encrypt with
@@ -157,7 +157,7 @@ server {
   bytes_written = File.write(NGINX_CONFIG, ERB.new(template).result())
 end
 
-def load_config
+def load_config(options)
   config = YAML.load_file(options[:config_file])
 
   unless config[:domains]
@@ -173,14 +173,14 @@ def load_config
 end
 
 if options[:update]
-  config = load_config
+  config = load_config(options)
   puts "Writing to #{LETSENCRYPT_CONFIG}"
-  update_config
+  update_config(config, options)
 end
 
 if options[:update_nginx]
   config = {}
-  config = load_config if options[:include_ssl]
+  config = load_config(options) if options[:include_ssl]
   puts "Writing to #{NGINX_CONFIG}"
   update_nginx_config(config, options)
 end
