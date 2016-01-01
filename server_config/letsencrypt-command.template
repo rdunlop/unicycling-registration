@@ -1,2 +1,0 @@
-# Repeat the "-d domain name" block as many times as necessary.
-./letsencrypt-auto certonly --webroot -w /home/ec2-user/unicycling-registrationtest/current/public -d registrationtest.regtest.unicycling-software.com

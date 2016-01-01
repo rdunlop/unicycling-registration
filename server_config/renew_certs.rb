@@ -7,6 +7,7 @@ options[:config_file] = "certs.yml"
 options[:webroot_path] = "/home/ec2-user/unicycling-registration/current/public"
 options[:base_domain] = "regtest.unicycling-software.com"
 options[:socket_path] = "/tmp/unicorn-unicycling-registration.socket"
+options[:include_ssl] = true
 LETSENCRYPT_CONFIG = "/etc/letsencrypt/cli.ini"
 NGINX_CONFIG = "/etc/nginx/conf.d/registration.conf"
 
@@ -17,6 +18,7 @@ OptionParser.new do |opts|
   opts.on('-r', '--really', 'Really Run command') { |_v| options[:really_run] = true }
   opts.on('-p', '--production', 'Run against production cert server') { |_v| options[:production] = true }
   opts.on('-u', '--update', 'Update the letsencrypt configuration file') { |_v| options[:update] = true }
+  opts.on('-b', '--no-ssl', 'Create nginx configuration WITHOUT SSL') { |_v| options[:include_ssl] = false }
   opts.on('-n', '--update-nginx', 'Update the nginx configuration file') { |_v| options[:update_nginx] = true }
   opts.on('-d', '--domain DOMAIN', "Base Domain path (default: #{options[:base_domain]})") { |v| options[:base_domain] = v }
   opts.on('-s', '--socket SOCKET_PATH', "Unix Socket path for Unicorn (default: #{options[:socket_path]})") { |v| options[:socket_path] = v }
@@ -27,17 +29,6 @@ puts "----------------"
 puts "OPTIONS:"
 puts options
 puts "----------------"
-config = YAML.load_file(options[:config_file])
-
-unless config[:domains]
-  puts "Config file should contain list of domains like:"
-  puts "---"
-  puts ":domains:"
-  puts "- hello"
-  puts "- goodbye"
-  puts
-  return 1
-end
 
 unless File.exist?(options[:webroot_path])
   puts "Webroot path #{options[:webroot_path]} Not found"
@@ -104,14 +95,17 @@ webroot-path = <%= options[:webroot_path] %>
   bytes_written = File.write(LETSENCRYPT_CONFIG, ERB.new(template).result())
 end
 
-def update_nginx_config(config)
-  @first_domain = config[:domains].first
+def update_nginx_config(config, options)
+  if options[:include_ssl]
+    @first_domain = config[:domains].first
+  end
+
   template = '
 #
 # A virtual host using mix of IP-, name-, and port-based configuration
 #
 
-upstream regapptest {
+upstream regapp {
     # Path to Unicorn SOCK file, as defined previously
     server unix:<%= options[:socket_path] %> fail_timeout=0;
 }
@@ -120,7 +114,6 @@ server {
 
     # FOR HTTPS
     listen 80;
-    listen 443 default_server ssl;
     # server_name registrationtest.regtest.unicycling-software.com;
 
     # FOR HTTP:
@@ -146,6 +139,8 @@ server {
     keepalive_timeout 10;
 
     # BELOW THIS LINE FOR HTTPS
+    <% if options[:include_ssl] %>
+    listen 443 default_server ssl;
     ssl on;
 
     ssl_certificate /etc/letsencrypt/live/<%= @first_domain %>/cert.pem;
@@ -156,19 +151,38 @@ server {
     ssl_trusted_certificate /etc/letsencrypt/live/<%= @first_domain %>/fullchain.pem;
 
     ssl_session_timeout 5m;
+    <% end %>
 }
 '
   bytes_written = File.write(NGINX_CONFIG, ERB.new(template).result())
 end
 
+def load_config
+  config = YAML.load_file(options[:config_file])
+
+  unless config[:domains]
+    puts "Config file should contain list of domains like:"
+    puts "---"
+    puts ":domains:"
+    puts "- hello"
+    puts "- goodbye"
+    puts
+    return 1
+  end
+  config
+end
+
 if options[:update]
+  config = load_config
   puts "Writing to #{LETSENCRYPT_CONFIG}"
   update_config
 end
 
 if options[:update_nginx]
+  config = {}
+  config = load_config if options[:include_ssl]
   puts "Writing to #{NGINX_CONFIG}"
-  update_nginx_config(config)
+  update_nginx_config(config, options)
 end
 
 if options[:really_run]

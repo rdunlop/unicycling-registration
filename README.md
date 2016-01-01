@@ -501,9 +501,6 @@ Amazon Server Setup
 - Create a new "Small" instance, be sure to attach the correct SSH key.
 - Add the new server's address to the config/deploy/stage.rb (or production.rb)
 - SSH into that instance, and update packages `sudo yum update`
-- Install letsencrypt
-  - `sudo yum install git`
-  - `git clone https://github.com/letsencrypt/letsencrypt`
 - install rvm
   - `gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
   - `\curl -sSL https://get.rvm.io | bash -s stable`
@@ -519,15 +516,23 @@ Amazon Server Setup
   - e.g. `curl https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz > node.tgz`
   - `tar xvf node.tgz`
   - echo 'export PATH="$PATH:/home/ec2-user/node-v4.2.4-linux-x64/bin"' >> ~/.bashrc
-- install and configure nginx
-  - `sudo yum install nginx`
-  - set the `/etc/nginx/nginx.conf` to be `user ec2-user`
-  - copy the `/etc/nginx/conf.d/registration.conf` (based on the template in this git repo)
-  - `service start nginx`
 - Install a redis-server on the server:
   - See https://gist.github.com/four43/e00d01ca084c5972f229
   - `./install-redis.sh`
-- Copy the existing certificates from production `/etc/letsencrypt/*`
+- install and configure nginx
+  - `sudo yum install nginx`
+  - set the `/etc/nginx/nginx.conf` to be `user ec2-user`
+  - create a new nginx `registration.conf` using the rake command `sudo rake create_base_nginx_configuration`
+  - `sudo service start nginx`
+- At this point, point your DNS to this server, so that all requests go through this server
+- Determine all domains which are possible through this server `sudo rake update_domain_certs`
+- Install letsencrypt
+  - `sudo yum install git`
+  - `git clone https://github.com/letsencrypt/letsencrypt`
+  - Install letsencrypt `cd letsencrypt && ./letsencrypt-auto --debug -v`
+  - If you already have certificates on a server:
+    - Copy the existing certificates from production `/etc/letsencrypt/*`
+  - Otherwise, create new certificates using `sudo rake update_domain_certs`
 
 SSL Certificates
 ----------------
