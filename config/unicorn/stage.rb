@@ -5,13 +5,13 @@
 worker_processes 1
 
 # listen
-listen "/tmp/unicorn-unicycling-registrationtest.socket", backlog: 64
+listen "/tmp/unicorn-unicycling-registration.socket", backlog: 64
 
 # preload
 preload_app true
 
 # paths
-app_path = "/home/ec2-user/unicycling-registrationtest"
+app_path = "/home/ec2-user/unicycling-registration"
 working_directory "#{app_path}/current"
 pid               "tmp/pids/unicorn.pid"
 

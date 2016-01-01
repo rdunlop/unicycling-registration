@@ -4,9 +4,11 @@ require "erb"
 
 options = {}
 options[:config_file] = "certs.yml"
-options[:webroot_path] = "/home/ec2-user/unicycling-registrationtest/current/public"
+options[:webroot_path] = "/home/ec2-user/unicycling-registration/current/public"
+options[:base_domain] = "regtest.unicycling-software.com"
+options[:socket_path] = "/tmp/unicorn-unicycling-registration.socket"
 LETSENCRYPT_CONFIG = "/etc/letsencrypt/cli.ini"
-NGINX_CONFIG = "/etc/nginx/conf.d/registrationtest.conf"
+NGINX_CONFIG = "/etc/nginx/conf.d/registration.conf"
 
 OptionParser.new do |opts|
   opts.banner = "Usage: renew_certs.rb [options]"
@@ -16,7 +18,9 @@ OptionParser.new do |opts|
   opts.on('-p', '--production', 'Run against production cert server') { |_v| options[:production] = true }
   opts.on('-u', '--update', 'Update the letsencrypt configuration file') { |_v| options[:update] = true }
   opts.on('-n', '--update-nginx', 'Update the nginx configuration file') { |_v| options[:update_nginx] = true }
-  opts.on('-w', '--webroot', "Webroot Path (default #{options[:webroot_path]})") { |v| options[:webroot_path] = v }
+  opts.on('-d', '--domain DOMAIN', "Base Domain path (default: #{options[:base_domain]})") { |v| options[:base_domain] = v }
+  opts.on('-s', '--socket SOCKET_PATH', "Unix Socket path for Unicorn (default: #{options[:socket_path]})") { |v| options[:socket_path] = v }
+  opts.on('-w', '--webroot WEB_ROOT_PATH', "Webroot Path (default #{options[:webroot_path]})") { |v| options[:webroot_path] = v }
 end.parse!
 
 puts "----------------"
@@ -109,7 +113,7 @@ def update_nginx_config(config)
 
 upstream regapptest {
     # Path to Unicorn SOCK file, as defined previously
-    server unix:/tmp/unicorn-unicycling-registrationtest.socket fail_timeout=0;
+    server unix:<%= options[:socket_path] %> fail_timeout=0;
 }
 
 server {
@@ -121,20 +125,20 @@ server {
 
     # FOR HTTP:
     # listen 80 default_server;
-    server_name *.regtest.unicycling-software.com;
+    server_name *.<%= options[:base_domain] %>;
 
     gzip on;
 
     # Application root, as defined previously
     root <%= options[:webroot_path] %>;
 
-    try_files $uri/index.html $uri @regapptest;
+    try_files $uri/index.html $uri @regapp;
 
-    location @regapptest {
+    location @regapp {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
         proxy_redirect off;
-        proxy_pass http://regapptest;
+        proxy_pass http://regapp;
     }
 
     error_page 500 502 503 504 /500.html;

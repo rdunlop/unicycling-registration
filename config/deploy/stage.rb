@@ -1,4 +1,4 @@
-set :deploy_to, '/home/ec2-user/unicycling-registrationtest'
+set :deploy_to, '/home/ec2-user/unicycling-registration'
 set :rails_env, 'stage'
 set :branch, ENV['BRANCH'] || 'master'
 
