@@ -8,7 +8,8 @@ set :stages, %w(prod)
 set :linked_files, %w(config/database.yml config/secrets.yml config/newrelic.yml public/robots.txt)
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps)
+# .well-known is for letsencrypt
+set :linked_dirs, %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps public/.well-known)
 
 before 'deploy', 'sidekiq:stop'
 after 'deploy:publishing', 'deploy:restart'
