@@ -29,7 +29,7 @@ class CertificateManager
     Notifications.certificate_renewal_command_status("Starting nginx config [#{Rails.env}]", "", "", true).deliver_later
     cmd = Rails.root.join("server_config", "renew_certs.rb")
     run_command("sudo ruby #{cmd} -n -c #{certs_path} -d #{Rails.application.secrets.domain}")
-    run_command("sudo service restart nginx")
+    run_command("sudo service nginx restart")
     Rails.logger.info "DONE setting up nginx"
   end
 
