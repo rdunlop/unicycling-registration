@@ -2,6 +2,10 @@
 - set up letsencrypt
  - document it
  - back up the keys
+ - Cause E-mail to be sent on scheduled job run/success/failure
+ - Set up dunlopweb.com email address to receive configuration settings/email
+ - Figure out how to determine the location of the keys being written (consistency)
+ - Schedule the Stage/prod running of the re-certification process
 - set up log rotation/eye?
 - Feedback should ensure that the "Email" field does not contain any spaces (preferably should be an e-mail address too)
 - select2 should open on focus? (or at least allow typing to start the search?)
