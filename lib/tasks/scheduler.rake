@@ -5,18 +5,10 @@ task update_registration_period: :environment do
   puts "done."
 end
 
-desc "Update the SSL Certificates"
-task update_domain_certs: :environment do
-  cmd = Rails.root.join("server_config", "renew_certs.rb")
-  puts "Updating list of domains"
-  CertificateManager.update_domains_file
-  puts "Updating SSL Certificates"
-  `ruby #{cmd} -u`
-  `ruby #{cmd} -r`
-  # puts "Updating nginx configuration to use the new SSL Certificate"
-  # `#{cmd} -n`
-  # puts "Restarting nginx"
-  # `#{cmd} -d`
+desc "Update the nginx_configuration"
+task update_nginx_config: :environment do
+  puts "updating nginx configuration"
+  CertificateManager.update_nginx
   puts "done."
 end
 
@@ -28,4 +20,12 @@ task create_base_nginx_configuration: :environment do
   cmd = Rails.root.join("server_config", "renew_certs.rb")
   `ruby #{cmd} -n --no-ssl`
   puts "done."
+end
+
+desc "Update SSL Certificates with letsencrypt.org"
+task update_ssl_certificate: :environment do
+  puts "updating certs.yml file to ensure all are ping-able"
+  CertificateManager.update_domains_file(true)
+  puts "Updating Certificate"
+  CertificateManager.renew_certificate
 end

@@ -526,7 +526,6 @@ Amazon Server Setup
   - create a new nginx `registration.conf` using the rake command `sudo rake create_base_nginx_configuration`
   - `sudo service start nginx`
 - At this point, point your DNS to this server, so that all requests go through this server
-- Determine all domains which are possible through this server `cd server_config && sudo ruby ./renew_certs.rb -u -p && sudo ruby ./renew_certs.rb -r`
 - Install letsencrypt
   - `sudo yum install git`
   - `git clone https://github.com/letsencrypt/letsencrypt`
@@ -534,6 +533,7 @@ Amazon Server Setup
   - If you already have certificates on a server:
     - Copy the existing certificates from production `/etc/letsencrypt/*`
   - Otherwise, create new certificates using `sudo ruby renew_certs.rb -n && sudo service nginx restart`
+- Determine all domains which are possible through this server `cd server_config && sudo ruby ./renew_certs.rb -u -p && sudo ruby ./renew_certs.rb -r`
 
 SSL Certificates
 ----------------

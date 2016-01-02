@@ -40,4 +40,13 @@ class Notifications < TenantAwareMailer
 
     mail to: Rails.application.secrets.error_emails, subject: "Registration Items Missing!"
   end
+
+  def certificate_renewal_command_status(command, stdout_lines, stderr_lines, success)
+    @command = command
+    @stdout_lines = stdout_lines
+    @stderr_lines = stderr_lines
+    @success = success
+
+    mail to: Rails.application.secrets.server_admin_email, subject: "Certificates Renewed"
+  end
 end

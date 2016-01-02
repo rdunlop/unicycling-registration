@@ -32,7 +32,7 @@ puts "----------------"
 
 unless File.exist?(options[:webroot_path])
   puts "Webroot path #{options[:webroot_path]} Not found"
-  return 1
+  exit(1)
 end
 
 # Repeat the "-d domain name" block as many times as necessary.
@@ -92,7 +92,13 @@ text = True
 authenticator = webroot
 webroot-path = <%= options[:webroot_path] %>
 )
-  bytes_written = File.write(LETSENCRYPT_CONFIG, ERB.new(template).result())
+  result = ERB.new(template).result()
+
+  puts "START letsencrypt cli.ini -------------"
+  puts result
+  puts "END letsencrypt cli.ini -------------"
+
+  bytes_written = File.write(LETSENCRYPT_CONFIG, result)
 end
 
 def update_nginx_config(config, options)
@@ -141,7 +147,9 @@ server {
     # BELOW THIS LINE FOR HTTPS
     <% if options[:include_ssl] %>
     listen 443 default_server ssl;
-    ssl on;
+
+    # The following should be enabled once everything is SSL
+    # ssl on;
 
     ssl_certificate /etc/letsencrypt/live/<%= @first_domain %>/cert.pem;
     ssl_certificate_key /etc/letsencrypt/live/<%= @first_domain %>/privkey.pem;
@@ -154,7 +162,13 @@ server {
     <% end %>
 }
 '
-  bytes_written = File.write(NGINX_CONFIG, ERB.new(template).result())
+  result = ERB.new(template).result()
+
+  puts "START NGINX_CONFIG -----------------"
+  puts result
+  puts "END NGINX_CONFIG -----------------"
+
+  bytes_written = File.write(NGINX_CONFIG, result)
 end
 
 def load_config(options)
