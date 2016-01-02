@@ -1,7 +1,15 @@
 require 'simplecov'
+
+# save to CircleCI's artifacts directory if we're on CircleCI
+if ENV['CIRCLE_ARTIFACTS']
+  dir = File.join(ENV['CIRCLE_ARTIFACTS'], "coverage")
+  SimpleCov.coverage_dir(dir)
+end
+
 SimpleCov.start 'rails' do
   add_filter '/spec/'
 end
+
 require 'rubygems'
 require 'delorean'
 # This file is copied to spec/ when you run 'rails generate rspec:install'
