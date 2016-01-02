@@ -8,6 +8,7 @@
 #  created_at                :datetime
 #  updated_at                :datetime
 #  dropped_from_registration :boolean          default(FALSE), not null
+#  alternate                 :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -40,6 +41,10 @@ class Member < ActiveRecord::Base
 
   def self.cache_set_field
     :registrant_id
+  end
+
+  def self.active
+    where(alternate: false)
   end
 
   def update_min_bib_number
@@ -75,5 +80,13 @@ class Member < ActiveRecord::Base
     end
   end
 
-  delegate :club, :state, :country, :ineligible?, :gender, :to_s, :external_id, :age, to: :registrant
+  def to_s
+    if alternate
+      registrant.to_s + "(alternate)"
+    else
+      registrant.to_s
+    end
+  end
+
+  delegate :club, :state, :country, :ineligible?, :gender, :external_id, :age, to: :registrant
 end

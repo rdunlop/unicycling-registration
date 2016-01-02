@@ -6,12 +6,16 @@
       %fieldset.items
         %legend Registrants
         = f.nested_fields_for :members do |member_f|
-          .item
-            = member_f.label :registrant
-            = all_registrant_competitors(member_f)
-            %a.remove{:href => "#"} remove
-            = member_f.hidden_field :id
-            = member_f.hidden_field :_destroy
+          .item.row
+            .small-6.columns
+              = member_f.label :registrant
+              = all_registrant_competitors(member_f)
+            .small-3.columns
+              = member_f.input :alternate
+            .small-3.columns
+              %a.remove{:href => "#"} remove
+              = member_f.hidden_field :id
+              = member_f.hidden_field :_destroy
       %a.add{:href => "#"} add registrant
     .small-3.columns
       = f.label :custom_name, "Group/Team Name (optional)"

@@ -8,6 +8,7 @@
 #  created_at                :datetime
 #  updated_at                :datetime
 #  dropped_from_registration :boolean          default(FALSE), not null
+#  alternate                 :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -18,6 +19,8 @@
 require 'spec_helper'
 
 describe Member do
+  let(:member) { FactoryGirl.build(:member) }
+
   it "must have a competitor and registrant" do
     member = Member.new
 
@@ -30,5 +33,17 @@ describe Member do
     member.registrant = FactoryGirl.create(:registrant)
 
     expect(member.valid?).to eq(true)
+  end
+
+  describe "#to_s" do
+    it "adds (alternate)" do
+      member.alternate = true
+
+      expect(member.to_s).to eq(member.registrant.to_s + "(alternate)")
+    end
+
+    it "has normal to_s" do
+      expect(member.to_s).to eq(member.registrant.to_s)
+    end
   end
 end

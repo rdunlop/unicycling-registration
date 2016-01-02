@@ -203,7 +203,7 @@ class CompetitorsController < ApplicationController
   end
 
   def competitor_params
-    params.require(:competitor).permit(:status, :custom_name, members_attributes: [:registrant_id, :id, :_destroy])
+    params.require(:competitor).permit(:status, :custom_name, members_attributes: [:registrant_id, :id, :alternate, :_destroy])
   end
 
   def load_competition
