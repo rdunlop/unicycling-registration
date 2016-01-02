@@ -49,23 +49,26 @@ class CertificateManager
       end
     end
 
-    # this should be an E-mail message, or, at minimum, Rails.logger?
-    puts "the domains are: #{domains}"
-    puts "the rejected domains are: #{rejected_domains}"
-
-    write_domains_file(domains)
+    # puts "the domains are: #{domains}"
+    # puts "the rejected domains are: #{rejected_domains}"
+    Notifications.certificate_renewal_command_status(
+      "Updating certs.yml file",
+      "good domains: #{domains.join(' ')}",
+      "rejected domains: #{rejected_domains.join(' ')}",
+      write_domains_file(domains))
   end
 
   private
 
+  # returns true if successful
   def write_domains_file(domains)
-    File.write(certs_path, YAML.dump(domains: domains))
+    File.write(certs_path, YAML.dump(domains: domains)) > 0
   end
 
   def run_command(command)
     Open3.popen3(command) do |_stdin, stdout, stderr, wait_thr|
       stdout_lines = stdout.read
-      puts "stdout is:" + stdout_lines
+      # puts "stdout is:" + stdout_lines
 
       # to watch the output as it runs:
       # while line = stdout.gets
@@ -73,7 +76,7 @@ class CertificateManager
       # end
 
       stderr_lines = stderr.read
-      puts "stderr is:" + stderr_lines
+      # puts "stderr is:" + stderr_lines
       exit_status = wait_thr.value
 
       Notifications.certificate_renewal_command_status(command, stdout_lines, stderr_lines, exit_status.success?).deliver_later
@@ -86,5 +89,5 @@ class CertificateManager
 
   def certs_path
     Rails.root.join("public", "system", "certs.yml")
- end
+  end
 end

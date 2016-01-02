@@ -98,7 +98,7 @@ webroot-path = <%= options[:webroot_path] %>
   puts result
   puts "END letsencrypt cli.ini -------------"
 
-  bytes_written = File.write(LETSENCRYPT_CONFIG, result)
+  File.write(LETSENCRYPT_CONFIG, result)
 end
 
 def update_nginx_config(config, options)
@@ -168,7 +168,7 @@ server {
   puts result
   puts "END NGINX_CONFIG -----------------"
 
-  bytes_written = File.write(NGINX_CONFIG, result)
+  File.write(NGINX_CONFIG, result)
 end
 
 def load_config(options)
