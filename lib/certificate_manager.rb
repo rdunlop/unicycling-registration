@@ -18,7 +18,6 @@ class CertificateManager
   def renew_certificate
     Rails.logger.info "Renewing Certificate"
     Notifications.certificate_renewal_command_status("Starting Certificate Renewal [#{Rails.env}]", "", "", true).deliver_later
-    certs_path = Rails.root.join("server_config", "certs.yml")
     cmd = Rails.root.join("server_config", "renew_certs.rb")
     run_command("sudo ruby #{cmd} -u -p -c #{certs_path}")
     run_command("sudo ruby #{cmd} -r -c #{certs_path}")
@@ -28,7 +27,6 @@ class CertificateManager
   def update_nginx
     Rails.logger.info "Creating new nginx configuration"
     Notifications.certificate_renewal_command_status("Starting nginx config [#{Rails.env}]", "", "", true).deliver_later
-    certs_path = Rails.root.join("server_config", "certs.yml")
     cmd = Rails.root.join("server_config", "renew_certs.rb")
     run_command("sudo ruby #{cmd} -n -c #{certs_path} -d #{Rails.application.secrets.domain}")
     run_command("sudo service restart nginx")
@@ -61,7 +59,7 @@ class CertificateManager
   private
 
   def write_domains_file(domains)
-    File.write(Rails.root.join("server_config", "certs.yml"), YAML.dump(domains: domains))
+    File.write(certs_path, YAML.dump(domains: domains))
   end
 
   def run_command(command)
@@ -85,4 +83,8 @@ class CertificateManager
       end
     end
   end
+
+  def certs_path
+    Rails.root.join("public", "system", "certs.yml")
+ end
 end
