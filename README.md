@@ -523,6 +523,7 @@ Amazon Server Setup
 - install and configure nginx
   - `sudo yum install nginx`
   - set the `/etc/nginx/nginx.conf` to be `user ec2-user`
+  - update the tmp folder permissions `chown -R ec2-user /var/lib/nginx`
   - create a new nginx `registration.conf` using the rake command `sudo rake create_base_nginx_configuration`
   - `sudo service start nginx`
 - At this point, point your DNS to this server, so that all requests go through this server
