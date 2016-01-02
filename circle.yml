@@ -5,4 +5,4 @@ test:
 
 notify:
   webhooks:
-    - url: https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN
+    - url: https://coveralls.io/webhook?repo_token=6PyGrBaNF95OSrHiKABzuuTtTpO7rkPrQ
