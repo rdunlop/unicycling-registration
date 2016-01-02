@@ -47,6 +47,6 @@ class Notifications < TenantAwareMailer
     @stderr_lines = stderr_lines
     @success = success
 
-    mail to: Rails.application.secrets.server_admin_email, subject: "Certificates Renewed"
+    mail to: Rails.application.secrets.server_admin_email, subject: "Certificates Renewed [#{Rails.env}]"
   end
 end
