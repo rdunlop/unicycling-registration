@@ -1,9 +1,9 @@
 require 'simplecov'
+require 'coveralls'
 
-# save to CircleCI's artifacts directory if we're on CircleCI
-if ENV['CIRCLE_ARTIFACTS']
-  dir = File.join(ENV['CIRCLE_ARTIFACTS'], "coverage")
-  SimpleCov.coverage_dir(dir)
+# save to Coveralls when on CI
+if ENV['CI']
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 end
 
 SimpleCov.start 'rails' do
