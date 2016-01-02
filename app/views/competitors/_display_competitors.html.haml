@@ -29,7 +29,7 @@
         %td= competitor.bib_number
         %td= competitor.detailed_name
         - if display_group_size
-          %td= competitor.members.count
+          %td= competitor.members.active.count
         %td= competitor.age
         %td= competitor.gender
         - if @config.usa?
