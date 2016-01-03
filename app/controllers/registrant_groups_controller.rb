@@ -82,6 +82,7 @@ class RegistrantGroupsController < ApplicationController
         format.html { redirect_to @registrant_group, notice: 'Registrant group was successfully created.' }
         format.json { render json: @registrant_group, status: :created, location: @registrant_group }
       else
+        @registrant_groups = RegistrantGroup.all
         format.html { render action: "index" }
         format.json { render json: @registrant_group.errors, status: :unprocessable_entity }
       end

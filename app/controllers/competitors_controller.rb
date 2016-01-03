@@ -32,8 +32,6 @@ class CompetitorsController < ApplicationController
   before_action :set_parent_breadcrumbs, only: [:index, :new, :edit, :display_candidates]
   before_action :authorize_sort, only: :update_row_order
 
-  respond_to :html
-
   # GET /competitions/:competition_id/1/competitors/new
   def new
     add_breadcrumb "Add Competitor"
@@ -189,7 +187,7 @@ class CompetitorsController < ApplicationController
 
     @competition.competitors.destroy_all
 
-    respond_with(@competition, location: new_competition_competitor_path(@competition))
+    redirect_to new_competition_competitor_path(@competition)
   end
 
   private
