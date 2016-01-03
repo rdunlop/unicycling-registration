@@ -4,7 +4,7 @@ Registration Site
 [![Circle CI](https://circleci.com/gh/rdunlop/unicycling-registration.svg?style=svg)](https://circleci.com/gh/rdunlop/unicycling-registration)
 [![Dependency Status](https://gemnasium.com/rdunlop/unicycling-registration.png)](https://gemnasium.com/rdunlop/unicycling-registration)
 [![Code Climate](https://codeclimate.com/github/rdunlop/unicycling-registration.png)](https://codeclimate.com/github/rdunlop/unicycling-registration)
-
+[![Coverage Status](https://coveralls.io/repos/rdunlop/unicycling-registration/badge.svg?branch=master&service=github)](https://coveralls.io/github/rdunlop/unicycling-registration?branch=master)
 
 Welcome to the Unicycling Registration Application.
 ==================================================
