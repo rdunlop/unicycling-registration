@@ -29,6 +29,7 @@ describe EventsController do
     user = FactoryGirl.create(:super_admin_user)
     sign_in user
   end
+  let(:event) { FactoryGirl.create(:event) }
 
   # This should return the minimal set of attributes required to create a valid
   # Event. As you add validations to Event, be sure to
@@ -53,7 +54,7 @@ describe EventsController do
 
   describe "GET summary" do
     it "assigns all events as @events" do
-      event = FactoryGirl.create(:event)
+      event
       get :summary, {}
       expect(response).to be_success
       expect(assigns(:events)).to eq([event])
@@ -76,6 +77,29 @@ describe EventsController do
         get :summary, {}
         expect(assigns(:num_noncompetitors)).to eq(1)
       end
+    end
+  end
+
+  describe "GET general_volunteers" do
+    it "returns all general volunteers" do
+      get :general_volunteers
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET specific_volunteers" do
+    let(:volunteer_opportunity) { FactoryGirl.create(:volunteer_opportunity) }
+
+    it "returns a list" do
+      get :specific_volunteers, volunteer_opportunity_id: volunteer_opportunity.id
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET sign_ups" do
+    it "returns all sign ups" do
+      get :sign_ups, id: event.id
+      expect(response).to be_success
     end
   end
 end
