@@ -94,7 +94,6 @@ describe ConventionSetup::EventChoicesController do
       it "assigns a newly created but unsaved event_choice as @event_choice" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
-        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
         post :create, event_id: @event.id, event_choice: {optional: false}
         expect(assigns(:event_choice)).to be_a_new(EventChoice)
       end
@@ -102,13 +101,11 @@ describe ConventionSetup::EventChoicesController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
-        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
         post :create, event_id: @event.id, event_choice: {optional: false}
         expect(response).to render_template("index")
       end
       it "loads the event" do
         allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
-        allow_any_instance_of(EventChoice).to receive(:errors).and_return("something")
         post :create, event_id: @event.id, event_choice: {optional: false}
         expect(assigns(:event)).to eq(@event)
       end

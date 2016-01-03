@@ -14,8 +14,6 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
   def index
     load_choices
     @event_choice = EventChoice.new
-
-    respond_with([:convention_setup, @event_choices])
   end
 
   # GET /event_choices/1/edit
@@ -29,10 +27,11 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
     @event_choice = @event.event_choices.new(event_choice_params)
     if @event_choice.save
       flash[:notice] = 'Event choice was successfully created.'
+      redirect_to convention_setup_event_event_choices_path(@event)
     else
       load_choices
+      render :index
     end
-    respond_with(@event_choice, location: convention_setup_event_event_choices_path(@event), action: "index")
   end
 
   # PUT /event_choices/1
@@ -40,8 +39,11 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
   def update
     if @event_choice.update_attributes(event_choice_params)
       flash[:notice] = 'Event choice was successfully updated.'
+      redirect_to [:convention_setup, @event_choice.event, :event_choices]
+    else
+      edit
+      render :edit
     end
-    respond_with(@event_choice, location: [:convention_setup, @event_choice.event, :event_choices], action: "edit")
   end
 
   # DELETE /event_choices/1
@@ -50,7 +52,7 @@ class ConventionSetup::EventChoicesController < ConventionSetupController
     event = @event_choice.event
     @event_choice.destroy
 
-    respond_with(@event_choice, location: convention_setup_event_event_choices_path(event))
+    redirect_to convention_setup_event_event_choices_path(event)
   end
 
   private
