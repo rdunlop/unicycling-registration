@@ -64,7 +64,6 @@ describe JudgesController do
       it "assigns a newly created but unsaved judge as @judge" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:valid?).and_return(false)
-        allow_any_instance_of(Judge).to receive(:errors).and_return("something")
         post :create, judge: {user_id: 1}, competition_id: @ec.id
         expect(assigns(:judge)).to be_a_new(Judge)
         expect(assigns(:judge_types)).to eq([@judge_type])
@@ -74,7 +73,6 @@ describe JudgesController do
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:valid?).and_return(false)
-        allow_any_instance_of(Judge).to receive(:errors).and_return("something")
         post :create, judge: {user_id: 1}, competition_id: @ec.id
         expect(response).to render_template("index")
       end
@@ -103,6 +101,30 @@ describe JudgesController do
 
       post :copy_judges, competition_id: @ec.id, copy_judges: {competition_id: @new_competition }
       expect(response).to redirect_to(root_path)
+    end
+  end
+
+  describe "PUT update" do
+    let(:judge) { FactoryGirl.create(:judge) }
+
+    it "updates the judge" do
+      put :update, id: judge.id, judge: { judge_type_id: @other_judge_type.id }
+      expect(judge.reload.judge_type_id).to eq(@other_judge_type.id)
+    end
+  end
+
+  describe "#toggle_status" do
+    let(:judge) { FactoryGirl.create(:judge) }
+
+    it "toggles the active status" do
+      request.env["HTTP_REFERER"] = root_path
+      put :toggle_status, id: judge.id
+      expect(judge.reload).not_to be_active
+
+      # toggle back
+      request.env["HTTP_REFERER"] = root_path
+      put :toggle_status, id: judge.id
+      expect(judge.reload).to be_active
     end
   end
 
