@@ -27,4 +27,5 @@
 
       %tbody
         - @lane_assignments.each do |lane_assignment|
+          - next if lane_assignment.new_record?
           = render partial: "lane_assignment", object: lane_assignment

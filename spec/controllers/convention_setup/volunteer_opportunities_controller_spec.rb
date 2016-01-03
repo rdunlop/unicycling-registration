@@ -45,6 +45,15 @@ describe ConventionSetup::VolunteerOpportunitiesController do
         post :create, volunteer_opportunity: valid_attributes
       end.to change(VolunteerOpportunity, :count).by(1)
     end
+
+    describe "with invalid params" do
+      it "re-renders the 'new' template" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        allow_any_instance_of(VolunteerOpportunity).to receive(:save).and_return(false)
+        post :create, volunteer_opportunity: valid_attributes
+        expect(response).to render_template("new")
+      end
+    end
   end
 
   describe "PUT update" do
@@ -56,6 +65,16 @@ describe ConventionSetup::VolunteerOpportunitiesController do
       end.to change(VolunteerOpportunity, :count).by(0)
 
       expect(volunteer_opportunity.reload.description).to eq("New description")
+    end
+
+    describe "with invalid params" do
+      it "re-renders the 'edit' template" do
+        volunteer_opportunity = FactoryGirl.create(:volunteer_opportunity)
+        # Trigger the behavior that occurs when invalid params are submitted
+        allow_any_instance_of(VolunteerOpportunity).to receive(:save).and_return(false)
+        put :update, volunteer_opportunity: { description: "New description" }, id: volunteer_opportunity.id
+        expect(response).to render_template("edit")
+      end
     end
   end
 
