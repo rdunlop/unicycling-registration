@@ -27,14 +27,10 @@ class Judge < ActiveRecord::Base
 
   has_many :scores, -> {order("competitors.position").includes(:competitor) }, dependent: :destroy
   has_many :boundary_scores, -> {order("competitors.position").includes(:competitor) }, dependent: :destroy
-  has_many :standard_execution_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, dependent: :destroy
-  has_many :standard_difficulty_scores, -> {order("standard_skill_routine_entries.position").includes(:standard_skill_routine_entry)}, dependent: :destroy
+  has_many :standard_skill_scores, -> { includes(standard_skill_score_entries: [:standard_skill_routine_entry]) }, dependent: :destroy
   has_many :competitors, -> {order "position"}, through: :competition
   has_many :distance_attempts, -> {order "id DESC"}, dependent: :destroy
   has_many :tie_break_adjustments, dependent: :destroy
-
-  accepts_nested_attributes_for :standard_execution_scores
-  accepts_nested_attributes_for :standard_difficulty_scores
 
   validates :competition_id, presence: true
   validates :judge_type_id, presence: true, uniqueness: {scope: [:competition_id, :user_id] }

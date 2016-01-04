@@ -1,0 +1,32 @@
+%h2= @judge
+%h2= @competitor
+.skills
+  = simple_form_for [@judge, @competitor, @standard_skill_score] do |f|
+    %table
+      %thead
+        %tr
+          %th{:rowspan => "2"} No
+          %th{:rowspan => "2"} Skill
+          %th{:rowspan => "2"} Description
+          %th{:colspan => "1"} Difficulty
+          %th{:colspan => "4"} Execution
+        %tr
+          %th 50% or 100%
+          %th -
+          %th /
+          %th +
+          %th 0
+      %tbody
+        = f.fields_for :standard_skill_score_entries do |standard_skill_score_entry_form|
+          %tr
+            - ssre = standard_skill_score_entry_form.object.standard_skill_routine_entry
+            = standard_skill_score_entry_form.hidden_field :standard_skill_routine_entry_id
+            %td= ssre.position
+            %td= ssre.skill_number_and_letter
+            %td= ssre.description
+            %td= standard_skill_score_entry_form.text_field :devaluation, :size => 5
+            %td= standard_skill_score_entry_form.text_field :wave, :size => 5
+            %td= standard_skill_score_entry_form.text_field :line, :size => 5
+            %td= standard_skill_score_entry_form.text_field :cross, :size => 5
+            %td= standard_skill_score_entry_form.text_field :circle, :size => 5
+    = f.button :submit

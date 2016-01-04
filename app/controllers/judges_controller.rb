@@ -53,22 +53,6 @@ class JudgesController < ApplicationController
     redirect_to competition_judges_path(@competition), notice: "Copied Judges"
   end
 
-  # this is used to update standard_execution_scores
-  # PUT /judge/1
-  def update
-    @judge = Judge.find(params[:id])
-    authorize @judge
-
-    respond_to do |format|
-      if @judge.update_attributes(judge_params)
-        format.html { redirect_to judge_standard_scores_path(@judge), notice: 'Judge Scores successfully created.' }
-      else
-        new # call new function (above), to load the correct variables
-        format.html { render action: "standard_scores/new" }
-      end
-    end
-  end
-
   # this is used to toggle the active-status of a judge
   def toggle_status
     @judge = Judge.find(params[:id])
@@ -121,6 +105,6 @@ class JudgesController < ApplicationController
   end
 
   def judge_params
-    params.require(:judge).permit(:judge_type_id, :user_id, :standard_execution_scores_attributes, :standard_difficulty_scores_attributes)
+    params.require(:judge).permit(:judge_type_id, :user_id)
   end
 end

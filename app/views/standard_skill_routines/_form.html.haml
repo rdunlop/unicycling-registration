@@ -2,12 +2,14 @@
 = simple_form_for([@standard_skill_routine, form], :remote => true) do |f|
   = render :partial => "/shared/error_messages", :object => form
   %span#errors
-  .field
-    = f.label :position, 'Insert at position'
-    = f.number_field :position, { :min => 1, :max => 18 }
-  .field
-    = f.label :standard_skill_entry_id, 'Skill'
-    %br
-    = f.select(:standard_skill_entry_id, StandardSkillEntry.all.map{ |ent| [ent, ent.id]})
+  .row
+    .small-4.columns
+      = f.label :position, 'Insert at position'
+      %br
+      = f.number_field :position, { :min => 1, :max => 18 }
+    .small-8.columns
+      = f.label :standard_skill_entry_id, 'Skill'
+      %br
+      = f.select :standard_skill_entry_id, StandardSkillEntry.all.map{ |ent| [ent, ent.id]}, {}, class: "chosen-select"
   .actions
     = f.button :submit, 'Insert New', :class => "multiclick"

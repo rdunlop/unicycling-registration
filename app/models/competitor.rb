@@ -31,12 +31,10 @@ class Competitor < ActiveRecord::Base
   acts_as_restful_list scope: :competition
 
   has_one :music_file, class_name: "Song", foreign_key: "competitor_id", dependent: :nullify
-
   has_many :lane_assignments, dependent: :destroy
   has_many :scores, dependent: :destroy
   has_many :boundary_scores, dependent: :destroy
-  has_many :standard_execution_scores, dependent: :destroy
-  has_many :standard_difficulty_scores, dependent: :destroy
+  has_many :standard_skill_scores, dependent: :destroy
   has_many :distance_attempts, -> { order "distance DESC, id DESC" }, dependent: :destroy
   has_one :tie_break_adjustment, dependent: :destroy
   has_many :time_results, dependent: :destroy

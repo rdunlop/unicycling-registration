@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "standard_scores/index" do
+describe "standard_skill_scores/index" do
   it "renders successfully all competitors" do
     assign(:judge, FactoryGirl.create(:judge))
     c = FactoryGirl.create(:event_competitor)

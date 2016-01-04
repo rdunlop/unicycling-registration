@@ -558,7 +558,7 @@ Workspace::Application.routes.draw do
 
     resources :time_results, except: [:index, :new, :show, :create]
 
-    resources :judges, only: [:update] do
+    resources :judges, only: [] do
       member do
         put :toggle_status
       end
@@ -567,12 +567,12 @@ Workspace::Application.routes.draw do
         resources :scores, only: [:new, :create]
 
         # display chosen competitors current scores, and update them
-        resources :standard_scores, only: [:new, :create]
+        resources :standard_skill_scores, only: [:new, :create, :edit, :update]
       end
 
       # choose the desired competitor to add scores to
       resources :scores, only: [:index]
-      resources :standard_scores, only: [:index]
+      resources :standard_skill_scores, only: [:index]
       resources :distance_attempts, only: [:index, :create] do
         collection do
           get :competitor_details

@@ -17,7 +17,9 @@
 class StandardSkillScore < ActiveRecord::Base
   include Competeable
   belongs_to :judge
-  has_many :standard_skill_score_entries, dependent: :destroy
+  has_many :standard_skill_score_entries, dependent: :destroy, inverse_of: :standard_skill_score
 
   validates :judge_id, presence: true, uniqueness: {scope: [:competitor_id]}
+
+  accepts_nested_attributes_for :standard_skill_score_entries
 end

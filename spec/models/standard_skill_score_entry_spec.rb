@@ -57,6 +57,8 @@ describe StandardSkillScoreEntry do
   end
 
   it { is_expected.to validate_inclusion_of(:devaluation).in_array([0, 50, 100]) }
+  it { is_expected.to validate_presence_of(:standard_skill_score) }
+  it { is_expected.to validate_presence_of(:standard_skill_routine_entry_id) }
   it { is_expected.to validate_presence_of(:wave) }
   it { is_expected.to validate_presence_of(:line) }
   it { is_expected.to validate_presence_of(:cross) }

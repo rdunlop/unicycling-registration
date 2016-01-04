@@ -319,13 +319,13 @@ describe Competitor do
       expect(@cr.scores).to eq([@score])
     end
   end
-  describe "with a standard execution score" do
+  describe "with a standard skill score" do
     before(:each) do
-      @st_score = FactoryGirl.create(:standard_execution_score)
+      @st_score = FactoryGirl.create(:standard_skill_score)
     end
 
     it "should be able to get the scores from the competitor" do
-      expect(@st_score.competitor.standard_execution_scores).to eq([@st_score])
+      expect(@st_score.competitor.standard_skill_scores).to eq([@st_score])
     end
   end
   describe "with a score" do

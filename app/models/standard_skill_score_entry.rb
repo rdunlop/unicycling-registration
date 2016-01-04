@@ -20,9 +20,9 @@
 
 class StandardSkillScoreEntry < ActiveRecord::Base
   belongs_to :standard_skill_routine_entry
-  belongs_to :standard_skill_score
+  belongs_to :standard_skill_score, inverse_of: :standard_skill_score_entries
 
-  validates :standard_skill_score_id, presence: true
+  validates :standard_skill_score, presence: true
   validates :standard_skill_routine_entry_id, presence: true
 
   validates :devaluation, presence: true, inclusion: { in: [0, 50, 100] }
