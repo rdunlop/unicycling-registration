@@ -5,12 +5,6 @@ class RaceResultCalculator
     @lower_is_better = lower_is_better
   end
 
-  def scoring_description
-    "Each competitor may have multiple time results. A time result is made up
-    of an optional 'start time' and a required 'end time'. The #{lower_is_better ? 'Faster' : 'Slower'} time
-    is used to determine the placing of the competitor."
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.finish_time_results.any?

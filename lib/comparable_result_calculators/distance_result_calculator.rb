@@ -1,10 +1,4 @@
 class DistanceResultCalculator
-  def scoring_description
-    "Å competitor can attempt repeatedly, scoring higher distances. Eventually the competitor
-    will double-fault, and their last successful distance will be their final score.
-    The competitor with the highest max distance will win."
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.distance_attempts.any?

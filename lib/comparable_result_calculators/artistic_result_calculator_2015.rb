@@ -1,10 +1,4 @@
 class ArtisticResultCalculator_2015
-  def scoring_description
-    "Using the Freestyle scoring rules, multiple Performance and Technical judges
-    will score each competitor, and then the resulting points (converted to percentage of points) will be used to
-    calculate the winner. As per the IUF 2015 Rulebook"
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.scores.any?

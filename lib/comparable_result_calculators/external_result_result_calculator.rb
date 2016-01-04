@@ -5,12 +5,6 @@ class ExternalResultResultCalculator
     @lower_is_better = lower_is_better
   end
 
-  def scoring_description
-    "Externally scored competition results are entered, in which the points
-    of competitors is entered, and a 'details' column, which is a description of the result
-    (for use on the awards/results sheets). #{lower_is_better ? 'Lower' : 'Higher'} points are better"
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.external_result.try(:active?)

@@ -1,8 +1,4 @@
 class StreetResultCalculator
-  def scoring_description
-    "A varation of the artistic scoring, for use in street comp"
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.scores.any?

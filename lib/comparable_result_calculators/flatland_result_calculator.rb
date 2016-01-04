@@ -1,9 +1,4 @@
 class FlatlandResultCalculator
-  def scoring_description
-    "A variation of the Artistic Scoring Class, we calculate last-trick
-    scores and follow the rulebook (or do we?)"
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.scores.any?

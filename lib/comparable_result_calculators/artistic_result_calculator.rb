@@ -3,12 +3,6 @@ class ArtisticResultCalculator
     @unicon_scoring = unicon_scoring
   end
 
-  def scoring_description
-    "Using the Freestyle scoring rules, multiple Presentation and Technical judges
-    will score each competitor, and then the resulting placing points will be used to
-    calculate the winner"
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.scores.any?

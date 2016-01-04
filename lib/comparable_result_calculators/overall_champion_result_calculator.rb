@@ -16,11 +16,6 @@ class OverallChampionResultCalculator
     false
   end
 
-  def scoring_description
-    "Uses the chosen Overall Champion Calculation to determine the input competitors.
-    Calculates the Overall Champion, and stores their final scores and places"
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(_competitor)
     true # always indicate that we have a result, so that all competitors are created.

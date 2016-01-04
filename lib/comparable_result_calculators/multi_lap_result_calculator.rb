@@ -1,11 +1,4 @@
 class MultiLapResultCalculator
-  def scoring_description
-    "Each competitor may have multiple time results. A time result is made up
-    of an optional 'start time' and a required 'end time'. The 'Faster' time
-    is used to determine the placing of the competitor. The Higher 'Number of Laps' always place higher
-    than lower ones."
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.time_results.finish_times.any?
