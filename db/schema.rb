@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102162900) do
+ActiveRecord::Schema.define(version: 20160103062316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -863,31 +863,6 @@ ActiveRecord::Schema.define(version: 20160102162900) do
   add_index "songs", ["registrant_id"], name: "index_songs_registrant_id", using: :btree
   add_index "songs", ["user_id", "registrant_id", "event_id"], name: "index_songs_on_user_id_and_registrant_id_and_event_id", unique: true, using: :btree
 
-  create_table "standard_difficulty_scores", force: :cascade do |t|
-    t.integer  "competitor_id"
-    t.integer  "standard_skill_routine_entry_id"
-    t.integer  "judge_id"
-    t.integer  "devaluation"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "standard_difficulty_scores", ["judge_id", "standard_skill_routine_entry_id", "competitor_id"], name: "standard_diff_judge_routine_comp", unique: true, using: :btree
-
-  create_table "standard_execution_scores", force: :cascade do |t|
-    t.integer  "competitor_id"
-    t.integer  "standard_skill_routine_entry_id"
-    t.integer  "judge_id"
-    t.integer  "wave"
-    t.integer  "line"
-    t.integer  "cross"
-    t.integer  "circle"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "standard_execution_scores", ["judge_id", "standard_skill_routine_entry_id", "competitor_id"], name: "standard_exec_judge_routine_comp", unique: true, using: :btree
-
   create_table "standard_skill_entries", force: :cascade do |t|
     t.integer  "number"
     t.string   "letter",      limit: 255
@@ -914,6 +889,30 @@ ActiveRecord::Schema.define(version: 20160102162900) do
   end
 
   add_index "standard_skill_routines", ["registrant_id"], name: "index_standard_skill_routines_on_registrant_id", unique: true, using: :btree
+
+  create_table "standard_skill_score_entries", force: :cascade do |t|
+    t.integer  "standard_skill_score_id",         null: false
+    t.integer  "standard_skill_routine_entry_id", null: false
+    t.integer  "devaluation",                     null: false
+    t.integer  "wave",                            null: false
+    t.integer  "line",                            null: false
+    t.integer  "cross",                           null: false
+    t.integer  "circle",                          null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "standard_skill_score_entries", ["standard_skill_score_id", "standard_skill_routine_entry_id"], name: "standard_skill_entries_unique", unique: true, using: :btree
+
+  create_table "standard_skill_scores", force: :cascade do |t|
+    t.integer  "competitor_id", null: false
+    t.integer  "judge_id",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "standard_skill_scores", ["competitor_id"], name: "index_standard_skill_scores_on_competitor_id", using: :btree
+  add_index "standard_skill_scores", ["judge_id", "competitor_id"], name: "index_standard_skill_scores_on_judge_id_and_competitor_id", using: :btree
 
   create_table "tenant_aliases", force: :cascade do |t|
     t.integer  "tenant_id",                                  null: false

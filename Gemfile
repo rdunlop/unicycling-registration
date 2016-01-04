@@ -103,6 +103,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'rspec_junit_formatter', '0.2.2' # locked to 0.2.2 as per circleCI https://circleci.com/docs/test-metadata
+  gem "shoulda-matchers", require: false
   gem 'rspec-instafail', require: false
   gem 'delorean'
 end
