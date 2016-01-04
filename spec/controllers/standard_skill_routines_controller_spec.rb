@@ -14,9 +14,9 @@
 
 require 'spec_helper'
 
-xdescribe StandardSkillRoutinesController do
+describe StandardSkillRoutinesController do
   before (:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryGirl.create(:user)
     @registrant = FactoryGirl.create(:competitor, user: @user)
     sign_in @user
   end
@@ -35,18 +35,18 @@ xdescribe StandardSkillRoutinesController do
     describe "with valid params" do
       it "creates a new routine" do
         expect do
-          post :create, registrant_id: @registrant.id
+          post :create, registrant_id: @registrant.to_param
         end.to change(StandardSkillRoutine, :count).by(1)
       end
 
       it "redirects to the created routine" do
-        post :create, registrant_id: @registrant.id
+        post :create, registrant_id: @registrant.to_param
         expect(response).to redirect_to(StandardSkillRoutine.last)
       end
     end
 
     it "Cannot create a routine for another user" do
-      post :create, registrant_id: FactoryGirl.create(:registrant).id
+      post :create, registrant_id: FactoryGirl.create(:registrant).to_param
       expect(response).to redirect_to(root_path)
     end
 
@@ -56,7 +56,7 @@ xdescribe StandardSkillRoutinesController do
       end
 
       it "cannot create a new routine" do
-        post :create, registrant_id: @registrant.id
+        post :create, registrant_id: @registrant.to_param
         expect(response).to redirect_to(root_path)
       end
     end

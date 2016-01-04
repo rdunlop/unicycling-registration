@@ -4,4 +4,8 @@
     %td= competitor.bib_number
     %td= competitor.name
     %td
-      = link_to 'score', new_judge_competitor_standard_skill_score_path(@judge, competitor)
+      - score = competitor.standard_skill_scores.where(judge: @judge).first
+      - if score.present?
+        = link_to 'score', edit_judge_competitor_standard_skill_score_path(@judge, competitor, score)
+      - else
+        = link_to 'score', new_judge_competitor_standard_skill_score_path(@judge, competitor)

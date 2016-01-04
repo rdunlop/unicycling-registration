@@ -122,6 +122,19 @@ JudgeType.find_or_create_by(name: "Technical", event_class: "Artistic Freestyle 
   )
 end
 
+JudgeType.find_or_create_by(name: "Writing", event_class: "Standard Skill") do |judge_type|
+  judge_type.assign_attributes(
+    val_1_description: "n/a",
+    val_2_description: "n/a",
+    val_3_description: "n/a",
+    val_4_description: "n/a",
+    val_1_max: 0,
+    val_2_max: 0,
+    val_3_max: 0,
+    val_4_max: 0
+  )
+end
+
 if WheelSize.count == 0
   WheelSize.create(position: 1, description: "16\" Wheel")
   WheelSize.create(position: 2, description: "20\" Wheel")
