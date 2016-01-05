@@ -22,7 +22,7 @@ class StandardSkillRoutineEntry < ActiveRecord::Base
   validate :no_more_than_12_non_riding_skills
   validate :each_skill_must_be_different_number
 
-  delegate :skill_number_and_letter, to: :standard_skill_entry
+  delegate :skill_number_and_letter, :points, to: :standard_skill_entry
 
   delegate :description, to: :standard_skill_entry
 

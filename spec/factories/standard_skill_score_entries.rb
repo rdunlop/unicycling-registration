@@ -5,7 +5,7 @@
 #  id                              :integer          not null, primary key
 #  standard_skill_score_id         :integer          not null
 #  standard_skill_routine_entry_id :integer          not null
-#  devaluation                     :integer          not null
+#  difficulty_devaluation_percent  :integer          not null
 #  wave                            :integer          not null
 #  line                            :integer          not null
 #  cross                           :integer          not null
@@ -24,10 +24,10 @@ FactoryGirl.define do
   factory :standard_skill_score_entry do
     association :standard_skill_score
     standard_skill_routine_entry # FactoryGirl
-    devaluation 50
-    wave 1
-    line 1
-    cross 1
-    circle 1
+    difficulty_devaluation_percent 0
+    wave 0
+    line 0
+    cross 0
+    circle 0
   end
 end

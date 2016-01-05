@@ -12,7 +12,7 @@ class CreateStandardSkillScores < ActiveRecord::Migration
     create_table :standard_skill_score_entries do |t|
       t.integer :standard_skill_score_id, null: false
       t.integer :standard_skill_routine_entry_id, null: false
-      t.integer :devaluation, null: false
+      t.integer :difficulty_devaluation_percent, null: false
       t.integer :wave, null: false
       t.integer :line, null: false
       t.integer :cross, null: false

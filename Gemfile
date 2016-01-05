@@ -108,7 +108,7 @@ group :test do
   gem 'delorean'
 end
 
-group :unicon, :naucc, :development, :cucumber, :caching do
+group :unicon, :naucc, :development, :test, :cucumber, :caching do
   gem 'annotate'
   gem 'bullet'
   # gem 'brakeman'

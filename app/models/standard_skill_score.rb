@@ -22,4 +22,33 @@ class StandardSkillScore < ActiveRecord::Base
   validates :judge_id, presence: true, uniqueness: {scope: [:competitor_id]}
 
   accepts_nested_attributes_for :standard_skill_score_entries
+
+  def total_difficulty_devaluation
+    standard_skill_score_entries.to_a.sum(&:difficulty_devaluation_score)
+  end
+
+  def wave_count
+    standard_skill_score_entries.sum(:wave)
+  end
+
+  def line_count
+    standard_skill_score_entries.sum(:line)
+  end
+
+  def cross_count
+    standard_skill_score_entries.sum(:cross)
+  end
+
+  def circle_count
+    standard_skill_score_entries.sum(:circle)
+  end
+
+  def total_execution_devaluation
+    (wave_count * 0.5) + (line_count) + (cross_count * 2) + (circle_count * 3)
+  end
+
+  # total score, from the routine value
+  def total
+    standard_skill_score_entries.to_a.sum(&:score)
+  end
 end

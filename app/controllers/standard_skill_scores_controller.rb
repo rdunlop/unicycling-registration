@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: standard_skill_scores
+#
+#  id            :integer          not null, primary key
+#  competitor_id :integer          not null
+#  judge_id      :integer          not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+# Indexes
+#
+#  index_standard_skill_scores_on_competitor_id               (competitor_id)
+#  index_standard_skill_scores_on_judge_id_and_competitor_id  (judge_id,competitor_id)
+#
+
 class StandardSkillScoresController < ApplicationController
   before_action :authenticate_user!
 
@@ -67,6 +83,8 @@ class StandardSkillScoresController < ApplicationController
   end
 
   def standard_skill_score_params
-    params.require(:standard_skill_score).permit(standard_skill_score_entries_attributes: [:id, :standard_skill_routine_entry_id, :devaluation, :wave, :line, :cross, :circle])
+    params.require(:standard_skill_score).permit(standard_skill_score_entries_attributes: [
+      :id, :standard_skill_routine_entry_id, :difficulty_devaluation_percent, :wave, :line, :cross, :circle]
+                                                )
   end
 end

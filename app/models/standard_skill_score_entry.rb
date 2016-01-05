@@ -5,7 +5,7 @@
 #  id                              :integer          not null, primary key
 #  standard_skill_score_id         :integer          not null
 #  standard_skill_routine_entry_id :integer          not null
-#  devaluation                     :integer          not null
+#  difficulty_devaluation_percent  :integer          not null
 #  wave                            :integer          not null
 #  line                            :integer          not null
 #  cross                           :integer          not null
@@ -25,9 +25,13 @@ class StandardSkillScoreEntry < ActiveRecord::Base
   validates :standard_skill_score, presence: true
   validates :standard_skill_routine_entry_id, presence: true
 
-  validates :devaluation, presence: true, inclusion: { in: [0, 50, 100] }
+  validates :difficulty_devaluation_percent, presence: true, inclusion: { in: [0, 50, 100] }
   validates :wave, presence: true, numericality: {greater_than_or_equal_to: 0}
   validates :line, presence: true, numericality: {greater_than_or_equal_to: 0}
   validates :cross, presence: true, numericality: {greater_than_or_equal_to: 0}
   validates :circle, presence: true, numericality: {greater_than_or_equal_to: 0}
+
+  def difficulty_devaluation_score
+    standard_skill_routine_entry.points * ((difficulty_devaluation_percent) / 100.0)
+  end
 end
