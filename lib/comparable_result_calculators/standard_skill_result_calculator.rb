@@ -5,7 +5,7 @@ class StandardSkillResultCalculator
   end
 
   # returns the result to be displayed for this competitor
-  def competitor_result(_competitor)
+  def competitor_result(competitor)
     if competitor.has_result?
       total_points(competitor)
     end

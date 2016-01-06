@@ -1,3 +1,4 @@
+- Error saving standing skill doesn't say which field failed.
 - Change TenantAlias flow to REQUIRE that the alias be verified before being set as primary
 - set up letsencrypt
  - document it
