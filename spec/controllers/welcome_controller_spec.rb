@@ -21,7 +21,7 @@ describe WelcomeController do
     describe "when there is no 'Home' page" do
       it "redirects to log_in page" do
         get :index
-        expect(response).to redirect_to(new_user_session_path(locale: nil))
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
