@@ -73,7 +73,23 @@ class Competition < ActiveRecord::Base
   validates :start_data_type, :end_data_type, inclusion: { in: data_recording_types, allow_nil: true }
 
   def self.scoring_classes
-    ["Freestyle", "Artistic Freestyle IUF 2015", "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015", "Flatland", "Street", "Street Final", "Points Low to High", "Points High to Low", "Timed Multi-Lap", "Longest Time", "Shortest Time", "Overall Champion"]
+    [
+      "Freestyle",
+      "Artistic Freestyle IUF 2015",
+      "High/Long",
+      "High/Long Preliminary IUF 2015",
+      "High/Long Final IUF 2015",
+      "Flatland",
+      "Street",
+      "Street Final",
+      "Points Low to High",
+      "Points High to Low",
+      "Timed Multi-Lap",
+      "Longest Time",
+      "Shortest Time",
+      "Overall Champion",
+      "Standard Skill"
+    ]
   end
 
   validates :scoring_class, inclusion: { in: scoring_classes, allow_nil: false }
@@ -436,6 +452,9 @@ class Competition < ActiveRecord::Base
 
     when "Overall Champion"
       @oc ||= OverallChampionScoringClass.new(self)
+
+    when "Standard Skill"
+      @ss ||= StandardSkillScoringClass.new(self)
     end
   end
 
@@ -485,6 +504,8 @@ class Competition < ActiveRecord::Base
       @scdsc ||= DistanceResultCalculator.new
     when "Overall Champion"
       @ascoc ||= OverallChampionResultCalculator.new(combined_competition, self)
+    when "Standard Skill"
+      @sscs ||= StandardSkillResultCalculator.new
     end
   end
 

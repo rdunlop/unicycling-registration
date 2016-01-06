@@ -75,6 +75,10 @@ FactoryGirl.define do
       age_group_type # factory Girl
     end
 
+    trait :standard_skill do
+      scoring_class "Standard Skill"
+    end
+
     trait :locked do
       locked_at DateTime.now
     end
