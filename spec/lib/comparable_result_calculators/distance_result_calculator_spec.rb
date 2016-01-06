@@ -6,10 +6,6 @@ describe DistanceResultCalculator do
   let(:competition) { FactoryGirl.create(:distance_competition) }
   let(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
 
-  describe "#scoring_description" do
-    it { expect(calc.scoring_description).not_to eq("") }
-  end
-
   describe "#competitor_has_result?" do
     it "doesn't have results by default" do
       expect(calc.competitor_has_result?(competitor)).to be_falsey

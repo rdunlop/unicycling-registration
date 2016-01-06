@@ -104,15 +104,6 @@ describe JudgesController do
     end
   end
 
-  describe "PUT update" do
-    let(:judge) { FactoryGirl.create(:judge) }
-
-    it "updates the judge" do
-      put :update, id: judge.id, judge: { judge_type_id: @other_judge_type.id }
-      expect(judge.reload.judge_type_id).to eq(@other_judge_type.id)
-    end
-  end
-
   describe "#toggle_status" do
     let(:judge) { FactoryGirl.create(:judge) }
 

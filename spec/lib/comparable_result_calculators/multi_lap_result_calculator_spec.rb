@@ -24,10 +24,6 @@ describe MultiLapResultCalculator do
     expect(calc(quit_competitor) > calc(slow_competitor)).to be_truthy
   end
 
-  describe "#scoring_description" do
-    it { expect(described_class.new.scoring_description).not_to eq("") }
-  end
-
   describe "#competitor_has_result?" do
     it "doesn't have results by default" do
       expect(described_class.new.competitor_has_result?(competitor)).to be_falsey
