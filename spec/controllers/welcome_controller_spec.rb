@@ -8,6 +8,24 @@ describe WelcomeController do
     end
   end
 
+  describe "GET index" do
+    describe "when there is a 'Home' page" do
+      let!(:home_page) { FactoryGirl.create(:page, :home) }
+
+      it "redirects to homepage" do
+        get :index
+        expect(response).to redirect_to(page_path(home_page.slug))
+      end
+    end
+
+    describe "when there is no 'Home' page" do
+      it "redirects to log_in page" do
+        get :index
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
   # handle case where a machine queries for a non-locale
   describe "GET 'humans.txt'" do
     it "returns 404-not-found" do

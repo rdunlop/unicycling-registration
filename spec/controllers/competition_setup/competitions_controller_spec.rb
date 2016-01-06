@@ -24,6 +24,14 @@ describe CompetitionSetup::CompetitionsController do
       get :new, event_id: @event.id
       expect(assigns(:event)).to eq(@event)
     end
+
+    describe "with a copy_from argument" do
+      it "sets the arguments from an existing competition" do
+        first_competition = FactoryGirl.create(:competition)
+        get :new, event_id: @event.id, copy_from: first_competition.id
+        expect(assigns(:competition).name).to eq(first_competition.name)
+      end
+    end
   end
 
   describe "GET edit" do
@@ -65,7 +73,6 @@ describe CompetitionSetup::CompetitionsController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
-        allow_any_instance_of(Competition).to receive(:errors).and_return("anything")
         post :create, event_id: @event.id, competition: {name: "comp"}
         expect(response).to render_template("new")
       end
@@ -107,7 +114,6 @@ describe CompetitionSetup::CompetitionsController do
         competition = FactoryGirl.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
-        allow_any_instance_of(Competition).to receive(:errors).and_return("anything")
         put :update, id: competition.to_param, competition: {name: "fake"}
         expect(assigns(:competition)).to eq(competition)
       end
@@ -116,7 +122,6 @@ describe CompetitionSetup::CompetitionsController do
         competition = FactoryGirl.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
-        allow_any_instance_of(Competition).to receive(:errors).and_return("anything")
         put :update, id: competition.to_param, competition: {name: "comp"}
         expect(response).to render_template("edit")
       end

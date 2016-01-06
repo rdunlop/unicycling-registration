@@ -23,8 +23,6 @@ class JudgesController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition, only: [:index, :create, :destroy, :copy_judges]
 
-  respond_to :html
-
   # POST /competitions/#/judges
   # POST /competitions/#/judges.json
   def create
@@ -32,10 +30,11 @@ class JudgesController < ApplicationController
     authorize @judge
     if @judge.save
       flash[:notice] = 'Association was successfully created.'
+      redirect_to competition_judges_path(@competition)
     else
       index
+      render :index
     end
-    respond_with(@judge, location: competition_judges_path(@competition), action: "index")
   end
 
   # POST /event/#/judges/copy_judges

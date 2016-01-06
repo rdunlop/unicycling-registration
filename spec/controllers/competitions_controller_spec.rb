@@ -41,6 +41,53 @@ describe CompetitionsController do
     @event = FactoryGirl.create(:event)
     @event_category = @event.event_categories.first
   end
+  let(:competition) { FactoryGirl.create(:competition, event: @event) }
+
+  describe "#show" do
+    it "renders successfully" do
+      get :show, id: competition.id
+      expect(response).to be_success
+    end
+  end
+
+  describe "#toggle_final_sort" do
+    it "changes the final_sort status" do
+      put :toggle_final_sort, id: competition.id
+      expect(competition.reload).to be_order_finalized
+
+      # and back again
+      put :toggle_final_sort, id: competition.id
+      expect(competition.reload).not_to be_order_finalized
+    end
+  end
+
+  describe "#set_sort" do
+    it "renders" do
+      get :set_sort, id: competition.id
+      expect(response).to be_success
+    end
+  end
+
+  describe "#sort_random" do
+    it "redirects to sort path" do
+      post :sort_random, id: competition.id
+      expect(response).to redirect_to(set_sort_competition_path(competition))
+    end
+  end
+
+  describe "#set_places" do
+    it "renders" do
+      post :set_places, id: competition.id
+      expect(response).to redirect_to(result_competition_path(competition))
+    end
+  end
+
+  describe "#result" do
+    it "renders" do
+      get :result, id: competition.id
+      expect(response).to be_success
+    end
+  end
 
   describe "POST lock" do
     it "locks the competition" do

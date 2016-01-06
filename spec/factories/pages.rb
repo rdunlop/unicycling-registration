@@ -24,5 +24,9 @@ FactoryGirl.define do
     title "Page Title"
     body "Page Body"
     sequence(:position) { |n| n }
+
+    trait :home do
+      slug "home"
+    end
   end
 end

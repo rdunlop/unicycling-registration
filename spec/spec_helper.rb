@@ -1,7 +1,15 @@
 require 'simplecov'
+require 'coveralls'
+
+# save to Coveralls when on CI
+if ENV['CI']
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+end
+
 SimpleCov.start 'rails' do
   add_filter '/spec/'
 end
+
 require 'rubygems'
 require 'delorean'
 # This file is copied to spec/ when you run 'rails generate rspec:install'
@@ -32,6 +40,7 @@ RSpec.configure do |config|
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
 
+  config.render_views
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

@@ -8,7 +8,8 @@ class DistanceResultCalculator
   def competitor_result(competitor)
     if competitor.has_result?
       max_distance = competitor.max_successful_distance
-      "#{max_distance} cm" unless max_distance == 0
+      return if max_distance.nil? || max_distance == 0
+      "#{max_distance} cm"
     end
   end
 

@@ -98,6 +98,7 @@ end
 
 group :test do
   gem 'simplecov', require: false
+  gem 'coveralls', require: false
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'poltergeist'
   gem 'factory_girl_rails'

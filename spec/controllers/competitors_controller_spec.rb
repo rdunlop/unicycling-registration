@@ -164,7 +164,6 @@ describe CompetitorsController do
       it "re-renders the 'competitors#new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
-        allow_any_instance_of(Competitor).to receive(:errors).and_return("anything")
         post :create, competitor: {custom_name: "name"}, competition_id: @ec.id
         expect(response).to render_template("new")
       end
@@ -201,7 +200,6 @@ describe CompetitorsController do
         competitor = FactoryGirl.create(:event_competitor, competition: @ec)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
-        allow_any_instance_of(Competitor).to receive(:errors).and_return("anything")
         put :update, id: competitor.to_param, competitor: {custom_name: "name"}
         expect(assigns(:competitor)).to eq(competitor)
       end
@@ -210,7 +208,6 @@ describe CompetitorsController do
         competitor = FactoryGirl.create(:event_competitor, competition: @ec)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
-        allow_any_instance_of(Competitor).to receive(:errors).and_return("anything")
         put :update, id: competitor.to_param, competitor: {custom_name: "name"}
         expect(response).to render_template("edit")
       end

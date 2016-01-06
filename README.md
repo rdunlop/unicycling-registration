@@ -4,7 +4,7 @@ Registration Site
 [![Circle CI](https://circleci.com/gh/rdunlop/unicycling-registration.svg?style=svg)](https://circleci.com/gh/rdunlop/unicycling-registration)
 [![Dependency Status](https://gemnasium.com/rdunlop/unicycling-registration.png)](https://gemnasium.com/rdunlop/unicycling-registration)
 [![Code Climate](https://codeclimate.com/github/rdunlop/unicycling-registration.png)](https://codeclimate.com/github/rdunlop/unicycling-registration)
-
+[![Coverage Status](https://coveralls.io/repos/rdunlop/unicycling-registration/badge.svg?branch=master&service=github)](https://coveralls.io/github/rdunlop/unicycling-registration?branch=master)
 
 Welcome to the Unicycling Registration Application.
 ==================================================
@@ -523,6 +523,7 @@ Amazon Server Setup
 - install and configure nginx
   - `sudo yum install nginx`
   - set the `/etc/nginx/nginx.conf` to be `user ec2-user`
+  - update the tmp folder permissions `chown -R ec2-user /var/lib/nginx`
   - create a new nginx `registration.conf` using the rake command `sudo rake create_base_nginx_configuration`
   - `sudo service start nginx`
 - At this point, point your DNS to this server, so that all requests go through this server

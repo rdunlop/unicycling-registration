@@ -12,8 +12,6 @@ class CompetitionSetup::CompetitionsController < ApplicationController
 
   before_action :add_competition_setup_breadcrumb, only: [:new, :edit]
 
-  respond_to :html
-
   # /events/#/competitions/new
   def new
     add_breadcrumb "New Competition"
@@ -43,10 +41,11 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   def update
     if @competition.update_attributes(competition_params)
       flash[:notice] = 'Competition was successfully updated.'
+      redirect_to @competition
     else
       @event = @competition.event
+      render :edit
     end
-    respond_with(@competition)
   end
 
   # DELETE /competitions/1
@@ -54,7 +53,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   def destroy
     @competition.destroy
 
-    respond_with(@competition, location: competition_setup_path)
+    redirect_to competition_setup_path
   end
 
   private
