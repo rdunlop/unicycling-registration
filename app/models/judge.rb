@@ -31,6 +31,7 @@ class Judge < ActiveRecord::Base
   has_many :competitors, -> {order "position"}, through: :competition
   has_many :distance_attempts, -> {order "id DESC"}, dependent: :destroy
   has_many :tie_break_adjustments, dependent: :destroy
+  has_many :standard_skill_scores, dependent: :destroy
 
   validates :competition_id, presence: true
   validates :judge_type_id, presence: true, uniqueness: {scope: [:competition_id, :user_id] }
@@ -76,7 +77,11 @@ class Judge < ActiveRecord::Base
   private
 
   def active_scores
-    scores.includes(:competitor).merge(Competitor.active)
+    if judge_type.event_class == "Standard Skill"
+      standard_skill_scores.joins(:competitor).merge(Competitor.active)
+    else
+      scores.joins(:competitor).merge(Competitor.active)
+    end
   end
 
   # Note, this appears to be duplicated in ability.rb

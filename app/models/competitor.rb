@@ -155,6 +155,10 @@ class Competitor < ActiveRecord::Base
     registrants.first.registrant_choices.joins(:event_choice).merge(EventChoice.where(cell_type: "best_time", event: event)).first.try(:describe_value)
   end
 
+  def standard_skill_routine
+    registrants.first.standard_skill_routine
+  end
+
   delegate :scoring_helper, to: :competition
 
   def disqualified?
