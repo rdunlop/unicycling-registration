@@ -1,36 +1,36 @@
 - if policy(@config).setup_convention?
-  %li= link_to 'On-Site Registration', onsite_registration_path
+  %li= link_to t('.on_site_registration'), onsite_registration_path
 - if policy(:translation).index?
-  %li= link_to "Translations", translations_path
+  %li= link_to t('.translations'), translations_path
 - if policy(current_user).contact_registrants?
-  %li= link_to  'Registrants (email)', emails_path
+  %li= link_to t('.send_email_to_registrants'), emails_path
 - if policy(current_user).manage_usa_memberships?
-  %li= link_to  'USA Membership Management', usa_memberships_path
+  %li= link_to t('.manage_usa_memberships'), usa_memberships_path
 - if @config.standard_skill && policy(current_user).under_development?
-  %li= link_to 'Standard Skill Entries', standard_skill_entries_path
+  %li= link_to t('.manage_standard_skill_entries'), standard_skill_entries_path
 - if policy(@config).manage_cache?
-  %li= link_to 'Cache Management', cache_event_configuration_path
+  %li= link_to t('.manage_cache'), cache_event_configuration_path
 - if policy(current_user).registrant_information?
-  %li= link_to  'Registrants (bag labels)', bag_labels_registrants_path(:format => :pdf)
+  %li= link_to t('.registrant_bag_labels'), bag_labels_registrants_path(:format => :pdf)
 - if policy(current_user).registrant_information?
-  %li= link_to "All Registrants Summaries Sorted By Last Name (pdf)", show_all_registrants_path(:format => :pdf)
-  %li= link_to "All Registrants Summaries Sorted By ID (pdf)", show_all_registrants_path(order: :id, :format => :pdf)
+  %li= link_to t('.registrant_summaries_by_last_name'), show_all_registrants_path(:format => :pdf)
+  %li= link_to t('.registrant_summaries_by_id'), show_all_registrants_path(order: :id, :format => :pdf)
 - if policy(current_user).under_development?
-  %li= link_to  'Registrant Groups', registrant_groups_path
+  %li= link_to 'Registrant Groups', registrant_groups_path
 - if policy(:export).index?
-  %li= link_to  'Export Data', export_index_path
+  %li= link_to t('.export_data'), export_index_path
 - if policy(current_user).under_development?
   %li= link_to  'Import Data', new_import_path
 - if policy(current_user).under_development?
   %li= link_to  'Multi-Tenant Research', research_competitions_path
 - if policy(@config).setup_convention?
-  %li= link_to 'Copy Events from previous Convention', migrate_index_path
+  %li= link_to t('.copy_events'), migrate_index_path
 - if policy(@config).setup_convention?
-  %li= link_to 'Pages', convention_setup_pages_path
+  %li= link_to t('.static_web_pages'), convention_setup_pages_path
 - if policy(current_user).view_modification_history?
-  %li= link_to  'Modification History', rails_admin_path
+  %li= link_to 'Modification History', rails_admin_path
 - if @config.standard_skill
   - if policy(current_user).under_development?
-    %li= link_to  'Standard Skill Routines (view)', standard_skill_routines_path
+    %li= link_to t('.standard_skill_routines_view'), standard_skill_routines_path
   - if policy(current_user).under_development?
-    %li= link_to  'Standard Skill Routines (export)', download_file_standard_skill_routines_path
+    %li= link_to t('.standard_skill_routines_export'), download_file_standard_skill_routines_path

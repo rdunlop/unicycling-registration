@@ -12,14 +12,14 @@
     - cache_i18n ['side_nav_admin_bar', current_user, @config] do
       - if user_signed_in? && current_user.roles.any?
         %li.has-submenu.admin_bar
-          %a{ href: "#" } Primary Admin Bar
+          %a{ href: "#" }= t('.primary_admin_bar_header')
           %ul.left-submenu.admin_bar
             %li.back
-              %a{ href: "#" } Back
+              %a{ href: "#" }= t('back')
             = render "nav_bar/admin_set_one"
         %li.has-submenu.admin_bar
-          %a{ href: "#" } Secondary Admin Bar
+          %a{ href: "#" }= t('.secondary_admin_bar_header')
           %ul.left-submenu.admin_bar
             %li.back
-              %a{ href: "#" } Back
+              %a{ href: "#" }= t('back')
             = render "nav_bar/admin_set_two"

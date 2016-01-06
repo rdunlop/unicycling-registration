@@ -1,0 +1,18 @@
+---
+en:
+  nav_bar:
+    admin_set_two:
+      on_site_registration: 'On-Site Registration'
+      translations: Translations
+      send_email_to_registrants: 'Registrants (email)'
+      manage_usa_memberships: USA Membership Management
+      manage_standard_skill_entries: Standard Skill Entries
+      manage_cache: Cache Management
+      registrant_bag_labels: 'Registrants Bag Labels (pdf)'
+      registrant_summaries_by_last_name: "All Registrants Summaries Sorted By Last Name (pdf)"
+      registrant_summaries_by_id: "All Registrants Summaries Sorted By ID (pdf)"
+      export_data: Export Data
+      copy_events: Copy Events from previous Convention
+      static_web_pages: Static Pages
+      standard_skill_routines_view: 'Standard Skill Routines (view)'
+      standard_skill_routines_export: 'Standard Skill Routines (export)'
