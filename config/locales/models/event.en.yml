@@ -4,3 +4,7 @@ en:
     attributes:
       event:
         id: ID
+    models:
+      event:
+        one: Event
+        other: Events

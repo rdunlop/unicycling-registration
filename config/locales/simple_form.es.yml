@@ -68,8 +68,6 @@ es:
       wave_time:
         scheduled_time: P.ej. 02:00, 03:00
     labels:
-      coupon_code:
-        inform_emails: Correos electrónicos para notificar cada uso de cupones
       event:
         accepts_music_uploads: Solicitar Música sea Subida
       event_configuration:

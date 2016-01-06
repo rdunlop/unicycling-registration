@@ -1,0 +1,6 @@
+---
+de:
+  activerecord:
+    attributes:
+      coupon_code:
+        inform_emails: E-Mail um über jeden Coupon Gebrauch zu informieren

@@ -25,8 +25,6 @@ en:
         details_label: "Question"
         maximum_available: "Max Total Number for Sale"
         maximum_per_registrant: "Max per registrant"
-      coupon_code:
-        inform_emails: E-mails to notify on each coupon use
       volunteer_opportunity: "E-mail addresses to notify on each volunteer sign-up"
       event:
         accepts_music_uploads: "Request Music be Uploaded"

@@ -1,0 +1,13 @@
+---
+en:
+  layouts:
+    convention_setup:
+      registrant_types: Offered Registrant Types
+      rules_and_waiver: Rules and Waiver
+      custom_domain: Domain Setup
+      name_and_logo: "Name & Logo"
+      registration_costs: Registration Costs
+      date_deadlines: Important Dates
+      items_for_sale: Items for Sale
+      payment_settings: Payment Settings
+      go_live: Go Live

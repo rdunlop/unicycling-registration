@@ -115,8 +115,6 @@ de:
       wave_time:
         scheduled_time: Z.B. 02:00, 03:00
     labels:
-      coupon_code:
-        inform_emails: E-Mail um über jeden Coupon Gebrauch zu informieren
       event:
         accepts_music_uploads: Anfrage um Musik hoch zu laden
       event_configuration:

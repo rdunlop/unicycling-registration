@@ -1,0 +1,5 @@
+---
+en:
+  layouts:
+    admin_headers:
+      registration_system_access_notice: This Browser has access to the Registration System

@@ -1,0 +1,15 @@
+---
+en:
+  activerecord:
+    attributes:
+      coupon_code:
+        name: Name
+        code: Code
+        description: Description
+        max_num_uses: Max Number of Uses
+        inform_emails: E-mails to notify on each coupon use
+        price: Price
+    models:
+      coupon_code:
+        one: Coupon Code
+        other: Coupon Codes
