@@ -1,5 +1,9 @@
-%h1 Translate Expense Item
+.row
+  .small-12.columns
+    %h1 Translate Expense Item
 
-%ul
-  - @expense_items.each do |expense_item|
-    %li= link_to expense_item, edit_translations_expense_item_path(expense_item)
+.row
+  .small-12.columns
+    %ul
+      - @expense_items.each do |expense_item|
+        %li= link_to expense_item, edit_translations_expense_item_path(expense_item)

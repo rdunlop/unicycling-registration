@@ -1,25 +1,25 @@
-%h1 Translate #{class_name}
+%h1 Translate #{class_name.model_name.human}
 
--#
-  - class_name.translates?
-= simple_form_for(object, url: target_path, method: :put) do |f|
-  = render partial: "/shared/error_messages", object: object
-  - languages.each do |lang|
-    .translation_language
-      %strong= long_language_name(lang)
-      = f.globalize_fields_for lang do |g|
-        - class_name.translated_attribute_names.each do |attr_sym|
-          %label.translation_element
-            = class_name.human_attribute_name(attr_sym)
-            - if class_name.translation_class.columns_hash[attr_sym.to_s].type == :string
-              = g.text_field attr_sym
-            - else
-              - if defined?(wysiwyg) && wysiwyg.include?(attr_sym)
-                = g.text_area attr_sym, class: "tinymce"
-              - elsif defined?(full_wysiwyg) && full_wysiwyg.include?(attr_sym)
-                = g.text_area attr_sym, class: "full_tinymce"
-              - else
-                = g.text_area attr_sym
-  %br
-  = f.button :submit
+.row
+  .small-12.columns
+    = simple_form_for(object, url: target_path, method: :put) do |f|
+      = render partial: "/shared/error_messages", object: object
+      - languages.each do |lang|
+        .translation_language
+          %strong= long_language_name(lang)
+          = f.globalize_fields_for lang do |g|
+            - class_name.translated_attribute_names.each do |attr_sym|
+              %label.translation_element
+                = class_name.human_attribute_name(attr_sym)
+                - if class_name.translation_class.columns_hash[attr_sym.to_s].type == :string
+                  = g.text_field attr_sym
+                - else
+                  - if defined?(wysiwyg) && wysiwyg.include?(attr_sym)
+                    = g.text_area attr_sym, class: "tinymce"
+                  - elsif defined?(full_wysiwyg) && full_wysiwyg.include?(attr_sym)
+                    = g.text_area attr_sym, class: "full_tinymce"
+                  - else
+                    = g.text_area attr_sym
+      %br
+      = f.button :submit
 

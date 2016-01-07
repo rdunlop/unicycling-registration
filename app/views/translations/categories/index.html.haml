@@ -1,5 +1,9 @@
-%h1 Translate Categories
 
-%ul
-  - @categories.each do |category|
-    %li= link_to category, edit_translations_category_path(category)
+.row
+  .small-12.columns
+    %h1 Translate Categories
+.row
+  .small-12.columns
+    %ul
+      - @categories.each do |category|
+        %li= link_to category, edit_translations_category_path(category)

@@ -1,5 +1,8 @@
-%h1 Translate Pages
-
-%ul
-  - @pages.each do |page|
-    %li= link_to page, edit_translations_page_path(page)
+.row
+  .small-12.columns
+    %h1 Translate Pages
+.row
+  .small-12.columns
+    %ul
+      - @pages.each do |page|
+        %li= link_to page, edit_translations_page_path(page)
