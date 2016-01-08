@@ -1,5 +1,6 @@
 class ConventionSetup::Migrate::MigrationsController < ApplicationController
   before_action :load_source_tenant, except: :index
+  before_action :authenticate_user!
   before_action :authorize_setup
 
   # Choose the tenant to copy from

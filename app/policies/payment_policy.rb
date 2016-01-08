@@ -21,9 +21,7 @@ class PaymentPolicy < ApplicationPolicy
     end
   end
 
-  def offline_payment?
-    true
-  end
+  delegate :offline_payment?, to: :config
 
   def summary?
     payment_admin? || super_admin?

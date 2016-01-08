@@ -40,6 +40,14 @@ describe AwardLabelsController do
   end
 
   describe "GET index" do
+    describe "When not signed in" do
+      before { sign_out @admin_user }
+      it "redirects to root path" do
+        get :index, user_id: @admin_user
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
     it "assigns all award_labels as @award_labels" do
       aw_label = FactoryGirl.create(:award_label, user: @admin_user)
       get :index, user_id: @admin_user
