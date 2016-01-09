@@ -4,11 +4,14 @@ describe "registrants/build/add_name" do
   before(:each) do
     @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
     @noncomp_exp = FactoryGirl.create(:expense_item, cost: 50)
-    @registration_period = FactoryGirl.create(:registration_period,
-                                              start_date: Date.new(2012, 01, 10),
-                                              end_date: Date.new(2012, 02, 11),
-                                              competitor_expense_item: @comp_exp,
-                                              noncompetitor_expense_item: @noncomp_exp)
+    FactoryGirl.create(:registration_cost, :competitor,
+                       start_date: Date.new(2012, 01, 10),
+                       end_date: Date.new(2012, 02, 11),
+                       expense_item: @comp_exp)
+    FactoryGirl.create(:registration_cost, :noncompetitor,
+                       start_date: Date.new(2012, 01, 10),
+                       end_date: Date.new(2012, 02, 11),
+                       expense_item: @noncomp_exp)
     FactoryGirl.create(:wheel_size_24, id: 3)
     allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
     allow(view).to receive(:wizard_path).and_return("/")

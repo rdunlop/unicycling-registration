@@ -204,10 +204,10 @@ describe EventConfiguration do
     end
   end
 
-  describe "with a registration period" do
+  describe "with a registration cost" do
     before(:each) do
       FactoryGirl.create(:event_configuration)
-      @rp = FactoryGirl.create(:registration_period, start_date: Date.new(2012, 11, 03), end_date: Date.new(2012, 11, 07))
+      @rp = FactoryGirl.create(:registration_cost, start_date: Date.new(2012, 11, 03), end_date: Date.new(2012, 11, 07))
     end
     it "should be open on the last day of registration" do
       Delorean.time_travel_to(Date.new(2012, 11, 07)) do

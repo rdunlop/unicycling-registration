@@ -290,19 +290,19 @@ describe Payment do
   end
   describe "when paying for registration item" do
     before(:each) do
-      @reg_period = FactoryGirl.create(:registration_period)
+      @reg_cost = FactoryGirl.create(:registration_cost, :competitor)
       @pay = FactoryGirl.create(:payment)
-      @pd = FactoryGirl.create(:payment_detail, payment: @pay, amount: @reg_period.competitor_expense_item.cost)
+      @pd = FactoryGirl.create(:payment_detail, payment: @pay, amount: @reg_cost.expense_item.cost)
 
       @reg_with_reg_item = FactoryGirl.create(:competitor)
       @pd.registrant = @reg_with_reg_item
-      @pd.expense_item = @reg_period.competitor_expense_item
+      @pd.expense_item = @reg_cost.expense_item
       @pd.save
     end
 
     it "initially has the reg_item" do
       expect(@reg_with_reg_item.registrant_expense_items.count).to eq(1)
-      expect(@reg_with_reg_item.registrant_expense_items.first.expense_item).to eq(@reg_period.competitor_expense_item)
+      expect(@reg_with_reg_item.registrant_expense_items.first.expense_item).to eq(@reg_cost.expense_item)
     end
 
     it "sends no e-mail" do

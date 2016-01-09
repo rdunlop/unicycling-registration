@@ -46,7 +46,7 @@ xdescribe Registrants::BuildController do
 
     describe "when the system is 'closed'" do
       before(:each) do
-        FactoryGirl.create(:registration_period, start_date: Date.new(2010, 01, 01), end_date: Date.new(2010, 02, 02))
+        FactoryGirl.create(:registration_cost, start_date: Date.new(2010, 01, 01), end_date: Date.new(2010, 02, 02))
       end
       it "should not succeed" do
         expect(EventConfiguration.closed?).to eq(true)

@@ -10,7 +10,7 @@ class Admin::RegFeesController < ApplicationController
   end
 
   # POST /payments/update_reg_fee
-  # Params: { reg_fee: { registrant_id, registration_period_id } }
+  # Params: { reg_fee: { registrant_id, registration_cost_id } }
   def update_reg_fee
     authorize current_user, :manage_all_payments?
 
@@ -28,7 +28,7 @@ class Admin::RegFeesController < ApplicationController
   private
 
   def reg_fee_params
-    params.require(:reg_fee).permit(:registrant_id, :registration_period_id)
+    params.require(:reg_fee).permit(:registrant_id, :registration_cost_id)
   end
 
   private

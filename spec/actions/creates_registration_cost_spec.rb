@@ -1,9 +1,8 @@
 require 'spec_helper'
 
-describe CreatesRegistrationPeriod do
+describe CreatesRegistrationCost do
   let(:comp_expense_item) { ExpenseItem.new cost: 100, tax: 0 }
-  let(:noncomp_expense_item) { ExpenseItem.new cost: 10, tax: 0 }
-  let(:reg_period) { FactoryGirl.build :registration_period, competitor_expense_item: comp_expense_item, noncompetitor_expense_item: noncomp_expense_item }
+  let(:reg_period) { FactoryGirl.build :registration_cost, expense_item: comp_expense_item }
 
   def perform
     described_class.new(reg_period).perform
@@ -30,7 +29,7 @@ describe CreatesRegistrationPeriod do
     end
 
     it "creates two new expense items" do
-      expect { perform }.to change(ExpenseItem, :count).by(2)
+      expect { perform }.to change(ExpenseItem, :count).by(1)
     end
   end
 end

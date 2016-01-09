@@ -1,0 +1,8 @@
+%h1 Editing #{@registration_cost} Registration Cost
+
+%fieldset.form__fieldset
+  = render 'form'
+
+= link_to 'Delete', @registration_cost, method: :delete, data: { confirm: 'Are you sure?' }
+|
+= link_to 'Back', registration_costs_path

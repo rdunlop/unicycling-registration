@@ -153,7 +153,7 @@ describe PaymentsController do
 
     describe "for a user with a registrant owing money" do
       before(:each) do
-        @reg_period = FactoryGirl.create(:registration_period)
+        @reg_period = FactoryGirl.create(:registration_cost, :competitor)
         @reg = FactoryGirl.create(:competitor, user: @user)
       end
       it "assigns a new payment_detail for the registrant" do
@@ -166,17 +166,17 @@ describe PaymentsController do
         expect(@user.registrants.count).to eq(1)
         get :new
         pd = assigns(:payment).payment_details.first
-        expect(pd.amount).to eq(@reg_period.competitor_expense_item.cost)
+        expect(pd.amount).to eq(@reg_period.expense_item.cost)
       end
       it "associates the payment_detail with the expense_item" do
         get :new
         pd = assigns(:payment).payment_details.first
-        expect(pd.expense_item).to eq(@reg_period.competitor_expense_item)
+        expect(pd.expense_item).to eq(@reg_period.expense_item)
       end
       it "only assigns registrants that owe money" do
         @other_reg = FactoryGirl.create(:competitor, user: @user)
         @payment = FactoryGirl.create(:payment)
-        @pd = FactoryGirl.create(:payment_detail, registrant: @other_reg, payment: @payment, amount: 100, expense_item: @reg_period.competitor_expense_item)
+        @pd = FactoryGirl.create(:payment_detail, registrant: @other_reg, payment: @payment, amount: 100, expense_item: @reg_period.expense_item)
         @payment.reload
         @payment.completed = true
         @payment.save
@@ -189,7 +189,7 @@ describe PaymentsController do
         before(:each) do
           @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, details: "Additional Details")
           @payment = FactoryGirl.create(:payment)
-          @pd = FactoryGirl.create(:payment_detail, registrant: @reg, payment: @payment, amount: 100, expense_item: @reg_period.competitor_expense_item)
+          @pd = FactoryGirl.create(:payment_detail, registrant: @reg, payment: @payment, amount: 100, expense_item: @reg_period.expense_item)
           @payment.reload
           @payment.completed = true
           @payment.save

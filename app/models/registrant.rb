@@ -259,7 +259,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   end
 
   def registration_item
-    all_reg_items = RegistrationPeriod.all_registration_expense_items
+    all_reg_items = RegistrationCost.all_registration_expense_items
     registrant_expense_items.find_by(system_managed: true, expense_item_id: all_reg_items)
   end
 
@@ -432,7 +432,8 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   def reg_paid?
     return true if spectator?
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
-      RegistrationPeriod.paid_for_period(competitor?, paid_expense_items).present?
+      registration_cost_items = RegistrationCost.all_registration_expense_items
+      paid_expense_items.any? { |item| registration_cost_items.include?(item) }
     end
   end
 

@@ -1,0 +1,8 @@
+.row
+  .small-12.columns
+    %h1 Translate Registration Cost
+.row
+  .small-12.columns
+    %ul
+      - @registration_costs.each do |registration_cost|
+        %li= link_to registration_cost, edit_translations_registration_cost_path(registration_cost)

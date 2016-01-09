@@ -100,7 +100,9 @@ class Payment < ActiveRecord::Base
       end
 
       if rei.nil?
-        all_reg_items = RegistrationPeriod.all_registration_expense_items
+        # this is used when PayPal eventually approves a payment, but the registration
+        # period has moved forward, and we have changed the associated registration_item?
+        all_reg_items = RegistrationCost.all_registration_expense_items
         if all_reg_items.include?(pd.expense_item)
           # the pd is a reg_item, see if there is another reg_item in the registrant's list
           rei = pd.registrant.registration_item

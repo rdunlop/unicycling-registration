@@ -30,14 +30,14 @@ describe RefundDetail do
     expect(@rd.valid?).to eq(false)
   end
 
-  describe "when there is an active registration_period", caching: true do
+  describe "when there is an active registration_cost", caching: true do
     before(:each) do
-      @rp = FactoryGirl.create(:registration_period)
+      @rp = FactoryGirl.create(:registration_cost, :competitor)
     end
     it "re-creates the registration_expense_item successfully" do
       @reg = FactoryGirl.create(:competitor)
       expect(@reg.registrant_expense_items.count).to eq(1)
-      @pd = FactoryGirl.create(:payment_detail, registrant: @reg, expense_item: @rp.competitor_expense_item)
+      @pd = FactoryGirl.create(:payment_detail, registrant: @reg, expense_item: @rp.expense_item)
       payment = @pd.payment
       payment.reload
       payment.completed = true
@@ -51,14 +51,14 @@ describe RefundDetail do
       expect(@reg.registrant_expense_items.count).to eq(1)
     end
 
-    describe "when there is a previous active registration_period", caching: true do
+    describe "when there is a previous active registration_cost", caching: true do
       before(:each) do
-        @rp_prev = FactoryGirl.create(:registration_period, start_date: Date.new(2010, 1, 1), end_date: Date.new(2011, 1, 1))
+        @rp_prev = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2010, 1, 1), end_date: Date.new(2011, 1, 1))
       end
 
       it "Doesn't re-add any items if the refund is a non-system-managed item (not the competition item)" do
         @reg = FactoryGirl.create(:competitor)
-        @pd = FactoryGirl.create(:payment_detail, registrant: @reg, expense_item: @rp_prev.competitor_expense_item)
+        @pd = FactoryGirl.create(:payment_detail, registrant: @reg, expense_item: @rp_prev.expense_item)
         @pd2 = FactoryGirl.create(:payment_detail, registrant: @reg)
         payment = @pd.payment
         payment.reload

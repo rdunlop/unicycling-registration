@@ -24,7 +24,7 @@ describe Admin::RegistrantsController do
 
     describe "POST undelete" do
       before(:each) do
-        FactoryGirl.create(:registration_period)
+        FactoryGirl.create(:registration_cost)
       end
       it "un-deletes a deleted registration" do
         registrant = FactoryGirl.create(:competitor, deleted: true)

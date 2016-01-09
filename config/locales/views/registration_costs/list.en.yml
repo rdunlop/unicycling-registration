@@ -1,9 +1,9 @@
 ---
 en:
-  registration_periods:
+  registration_costs:
     list:
       competitor_registration_cost: Competitor Registration Cost
-      from: From
       noncompetitor_registration_cost: Non-Competitor Registration Cost
+      from: From
       online_registration_closes: Online Registration Closes
       to: to

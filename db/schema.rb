@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103062316) do
+ActiveRecord::Schema.define(version: 20160108055603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -786,6 +786,31 @@ ActiveRecord::Schema.define(version: 20160103062316) do
   add_index "registrants", ["deleted"], name: "index_registrants_deleted", using: :btree
   add_index "registrants", ["registrant_type"], name: "index_registrants_on_registrant_type", using: :btree
   add_index "registrants", ["user_id"], name: "index_registrants_on_user_id", using: :btree
+
+  create_table "registration_cost_translations", force: :cascade do |t|
+    t.integer  "registration_cost_id", null: false
+    t.string   "locale",               null: false
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "registration_cost_translations", ["locale"], name: "index_registration_cost_translations_on_locale", using: :btree
+  add_index "registration_cost_translations", ["registration_cost_id"], name: "index_registration_cost_translations_on_registration_cost_id", using: :btree
+
+  create_table "registration_costs", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "expense_item_id"
+    t.string   "registrant_type",                 null: false
+    t.boolean  "onsite",          default: false, null: false
+    t.boolean  "current_period",  default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "registration_costs", ["current_period"], name: "index_registration_costs_on_current_period", using: :btree
+  add_index "registration_costs", ["registrant_type", "current_period"], name: "index_registration_costs_on_registrant_type_and_current_period", using: :btree
 
   create_table "registration_period_translations", force: :cascade do |t|
     t.integer  "registration_period_id",             null: false

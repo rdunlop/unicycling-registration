@@ -1,0 +1,11 @@
+- reg_cost = RegistrationCost.relevant_period("competitor", Date.today)
+- if reg_cost.present?
+  .prices_increase
+    = t("competitor")
+    = print_time_until_prices_increase(reg_cost)
+
+- reg_cost = RegistrationCost.relevant_period("noncompetitor", Date.today)
+- if reg_cost.present?
+  .prices_increase
+    = t("noncompetitor")
+    = print_time_until_prices_increase(reg_cost)

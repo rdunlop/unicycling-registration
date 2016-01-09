@@ -21,9 +21,9 @@
       = render partial: "/registrants/base_details", locals: {f: f}
 
       .competitor_show
-        = render :partial => "registration_periods/list", locals: {competitor: true }
+        = render :partial => "registration_costs/list", locals: { registrant_type: "competitor" }
       .noncompetitor_show
-        = render :partial => "registration_periods/list", locals: {competitor: false}
+        = render :partial => "registration_costs/list", locals: {registrant_type: "noncompetitor" }
 
     = render partial: "/registrants/form_actions", locals: {f: f}
     = link_to t("cancel"), "#", class: "js--hide_new_registrant"

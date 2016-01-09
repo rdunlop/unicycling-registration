@@ -228,10 +228,11 @@ describe ExpenseItem do
     end
   end
 
-  describe "when a registration has a registration_period" do
+  describe "when a registration has a registration_cost" do
     before(:each) do
-      @rp = FactoryGirl.create(:registration_period, competitor_expense_item: @item)
-      @nc_item = @rp.noncompetitor_expense_item
+      @comp_reg_cost = FactoryGirl.create(:registration_cost, :competitor, expense_item: @item)
+      @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor)
+      @nc_item = @noncomp_reg_cost.expense_item
     end
     describe "with a single competitor" do
       before(:each) do

@@ -13,7 +13,7 @@ describe Email do
   end
   describe "with one confirmed account, and one with unpaid registrant" do
     before(:each) do
-      @reg_period = FactoryGirl.create(:registration_period)
+      @reg_period = FactoryGirl.create(:registration_cost)
       @reg = FactoryGirl.create(:competitor)
       @user = FactoryGirl.create(:user)
     end

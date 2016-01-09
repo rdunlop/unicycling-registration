@@ -20,6 +20,8 @@
 
 class RegistrantEventSignUp < ActiveRecord::Base
   validates :event, :registrant, presence: true
+  # The following should be re-enabled? first double-check to see which conventions have violating data.
+  # also ensure that flow still works with this. (do we have any events which do not have event_categories?)
   # validates :event_category, :presence => true, :if  => "signed_up"
   validates :signed_up, inclusion: {in: [true, false] } # because it's a boolean
   validate :category_chosen_when_signed_up

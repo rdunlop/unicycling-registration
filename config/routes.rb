@@ -73,7 +73,7 @@ Workspace::Application.routes.draw do
       resources :pages, only: [:index, :edit, :update]
       resources :expense_groups, only: [:index, :edit, :update]
       resources :expense_items, only: [:index, :edit, :update]
-      resources :registration_periods, only: [:index, :edit, :update]
+      resources :registration_costs, only: [:index, :edit, :update]
     end
 
     namespace :export do
@@ -176,7 +176,7 @@ Workspace::Application.routes.draw do
     end
 
     scope module: "convention_setup" do
-      resources :registration_periods, except: :show
+      resources :registration_costs, except: :show
       # /convention_setup/migrate
       # /convention_setup/migrate/from/:tenant
       # /convention_setup/migrate/from/:tenant/events

@@ -6,15 +6,11 @@ class RegFee
   include ActiveModel::Validations
 
   attribute :registrant_id, Integer
-  attribute :registration_period_id, Integer
+  attribute :registration_cost_id, Integer
 
-  validates :registrant_id, :registration_period_id, presence: true
+  validates :registrant_id, :registration_cost_id, presence: true
   validate :registrant_is_not_paid
-
-  def registrant_is_not_paid
-    return unless registrant.present?
-    errors[:base] << "This registrant is already paid" if registrant.reg_paid?
-  end
+  validate :registrant_type_matches_registration_cost
 
   def persisted?
     false
@@ -32,12 +28,20 @@ class RegFee
   end
 
   def new_registration_item
-    registration_period.expense_item_for(registrant.competitor?)
+    RegistrationCost.for_type(registrant.registrant_type).find_by(id: registration_cost_id).expense_item
   end
 
   private
 
-  def registration_period
-    RegistrationPeriod.find(registration_period_id)
+  def registrant_is_not_paid
+    return unless registrant.present?
+    errors[:base] << "This registrant is already paid" if registrant.reg_paid?
+  end
+
+  def registrant_type_matches_registration_cost
+    return unless registrant.present?
+    if new_registration_item.nil?
+      errors[:base] << "Registrant is #{registrant.registrant_type}, doesn't match RegistrationCost type"
+    end
   end
 end

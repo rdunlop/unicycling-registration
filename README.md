@@ -582,7 +582,7 @@ The Base Schema (used for all other data)
 
 The Event-Registration Schema (for registration details)
 --------------------------------------------------------
-* RegistrationPeriod: the date-range that each registration price will be
+* RegistrationCost: the date-range that each registration price will be
   available
 
 * AdditionalRegistrantAccess: allows sharing registration details between User

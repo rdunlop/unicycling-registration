@@ -39,12 +39,12 @@ module ApplicationHelper
     print_formatted_currency(cost)
   end
 
-  def print_time_until_prices_increase(reg_period)
+  def print_time_until_prices_increase(reg_cost)
     if EventConfiguration.singleton.online_payment?
-      if DateTime.now > reg_period.end_date
+      if DateTime.now > reg_cost.end_date
         t("prices_increase_soon")
       else
-        end_date = distance_of_time_in_words(DateTime.now, reg_period.last_day) + " (" + (l (reg_period.last_day), format: :short) + ")"
+        end_date = distance_of_time_in_words(DateTime.now, reg_cost.last_day) + " (" + (l (reg_cost.last_day), format: :short) + ")"
         t("prices_increase_at_date", end_date: end_date)
       end
     end

@@ -1,0 +1,33 @@
+%h1 Registration Costs
+%p
+  Each registration cost will define the range of dates that a user can register for the event at each price.
+%p
+  = succeed ":" do
+    %b Note
+  Because the users may live in different timezones, in order to be fair to everyone, the system will ALLOW paying the initial price until up to 1 full day after the registration period ends.(depending on the location of the server)
+  %br
+  = succeed ":" do
+    %b Example
+  If the first registration period is Until April 20th, Registrants will be able to pay the initial price until the server thinks that it is April 22nd.
+  %br
+%table
+  %thead
+    %tr
+      %th Name
+      %th Type
+      %th Start date
+      %th End date
+      %th Cost
+      %th
+  %tbody
+    - @registration_costs.each do |registration_cost|
+      %tr
+        %td= registration_cost.name
+        %td= registration_cost.registrant_type
+        %td= registration_cost.start_date
+        %td= registration_cost.end_date
+        %td= registration_cost.expense_item.cost
+        %td= link_to 'Edit', edit_registration_cost_path(registration_cost)
+
+%br
+= link_to 'New Registration period', new_registration_cost_path

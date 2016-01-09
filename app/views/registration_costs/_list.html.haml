@@ -1,0 +1,25 @@
+// Note: the associated expense_item
+// is also necessary, but doesn't cache-invalidete
+- cache_i18n [registrant_type, RegistrationCost], expires_in: 30.minutes do
+  %fieldset.registration_period_block
+    %legend= t(".#{registrant_type}_registration_cost")
+    %table
+      - RegistrationCost.for_type(registrant_type).includes(:expense_item).includes(:translations).each do |cost|
+        %tr{ class: cost.past_period? ? "past_reg_period" : cost.current_period? ? "current_reg_period" : "" }
+          %td= cost.name
+          - if cost.onsite?
+            %td{ colspan: 4 }
+          - else
+            %td= t(".from")
+            %td= l cost.start_date, format: :registration_date_format
+            %td= t(".to")
+            %td= l cost.end_date, format: :registration_date_format
+          %td
+            %b
+              = print_formatted_currency(cost.expense_item.cost)
+
+        - if cost.last_online_period?
+          %tr
+            %td{ colspan: "6", class: "registration_closes_notice"}
+              = t(".online_registration_closes")
+              = l cost.end_date, format: :registration_date_format

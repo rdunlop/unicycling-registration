@@ -195,7 +195,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def registration_closed_date
-    RegistrationPeriod.last_online_period.try(:end_date).try(:+, 1.day)
+    RegistrationCost.for_type("competitor").last_online_period.try(:end_date).try(:+, 1.day)
   end
 
   def effective_standard_skill_closed_date

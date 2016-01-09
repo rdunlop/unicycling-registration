@@ -3,12 +3,8 @@
   - if @config.online_payment? && policy(current_user).create_payments?
     .payment_process
       = link_to t(".pay_now"), new_payment_path, :class => "payment_link"
-    .prices_increase
-      - rp = RegistrationPeriod.relevant_period(Date.today)
-      - if rp.nil?
-        = "[#{t(".unknown")}]"
-      - else
-        = print_time_until_prices_increase(rp)
+    = render "registration_costs/prices_increase"
+
   - if policy(Payment).offline_payment?
     .payment_process
       = link_to t(".offline_payment"), offline_payments_path, class: "payment_link"

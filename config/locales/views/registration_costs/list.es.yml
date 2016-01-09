@@ -1,6 +1,6 @@
 ---
 es:
-  registration_periods:
+  registration_costs:
     list:
       competitor_registration_cost: Tasa de inscripción para competidores
       from: De
