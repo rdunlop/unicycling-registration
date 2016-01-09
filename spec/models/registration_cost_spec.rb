@@ -271,11 +271,12 @@ describe "when testing the update function for registration costs", caching: tru
         Delorean.time_travel_to Date.new(2020, 12, 1) do
           ActionMailer::Base.deliveries.clear
           @ret = RegistrationCost.update_current_period("competitor")
+          @ret = RegistrationCost.update_current_period("noncompetitor")
         end
       end
 
       it "updates the current_period" do
-        expect(RegistrationCost.current_period).to eq(@comp_registration_cost2)
+        expect(RegistrationCost.for_type("competitor").current_period).to eq(@comp_registration_cost2)
       end
 
       it "sends an e-mail when it changes the reg period" do
