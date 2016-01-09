@@ -4,7 +4,7 @@
     .small-4.columns
       = f.input :name
     .small-4.columns
-      = f.input :registrant_type, as: :select, collection: %w(competitor, noncompetitor)
+      = f.input :registrant_type, as: :select, collection: %w(competitor noncompetitor)
     .small-4.columns
       = f.input :onsite
       .help_bubble{ title: "This causes the 'Online Registration Closes' banner to be displayed appropriately in the Cost tables" }
@@ -28,7 +28,7 @@
       .input_details
         Because many people only pay at the last possible minute, the price automatically increases ~36 hours after end of the End Date. This allows last-minute registrants a reprieve.
 
-  %h3.row Competitor
+  %h3.row Cost
   = f.simple_fields_for :expense_item do |ce|
     .row
       .small-4.columns

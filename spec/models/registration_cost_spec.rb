@@ -206,6 +206,7 @@ describe "when testing the update function for registration costs", caching: tru
       ActionMailer::Base.deliveries.clear
       Delorean.time_travel_to Date.new(2020, 12, 1) do
         @ret = RegistrationCost.update_current_period("competitor")
+        @ret = RegistrationCost.update_current_period("noncompetitor")
       end
     end
 
@@ -245,12 +246,12 @@ describe "when testing the update function for registration costs", caching: tru
     end
 
     it "updates the current_period (which is nil)" do
-      expect(RegistrationCost.current_period).to be_nil
+      expect(RegistrationCost.for_type("competitor").current_period).to be_nil
     end
 
     it "sends an e-mail when it changes the reg period" do
       num_deliveries = ActionMailer::Base.deliveries.size
-      expect(num_deliveries).to eq(2) # 1 for Comp, 1 for NonComp
+      expect(num_deliveries).to eq(1)
       email = ActionMailer::Base.deliveries.first
       expect(email.subject).to eq("Updated Registration Period")
     end
@@ -265,10 +266,10 @@ describe "when testing the update function for registration costs", caching: tru
 
     describe "when updating to a now-existent period" do
       before(:each) do
-        ActionMailer::Base.deliveries.clear
+        @comp_registration_cost2 = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
+        @noncomp_registration_cost2 = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
         Delorean.time_travel_to Date.new(2020, 12, 1) do
-          @comp_registration_cost2 = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
-          @noncomp_registration_cost2 = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
+          ActionMailer::Base.deliveries.clear
           @ret = RegistrationCost.update_current_period("competitor")
         end
       end
@@ -279,7 +280,7 @@ describe "when testing the update function for registration costs", caching: tru
 
       it "sends an e-mail when it changes the reg period" do
         num_deliveries = ActionMailer::Base.deliveries.size
-        expect(num_deliveries).to eq(2) # 1 for Comp, 1 for NonComp
+        expect(num_deliveries).not_to eq(0)
         email = ActionMailer::Base.deliveries.first
         expect(email.subject).to eq("Updated Registration Period")
       end

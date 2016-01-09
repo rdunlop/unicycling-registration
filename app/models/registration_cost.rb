@@ -50,7 +50,7 @@ class RegistrationCost < ActiveRecord::Base
   end
 
   def self.all_registration_expense_items
-    all.collect{|rp| rp.expense_item}
+    includes(:expense_item).all.collect{|rp| rp.expense_item}
   end
 
   def self.relevant_period(registrant_type, date)
@@ -153,8 +153,7 @@ class RegistrationCost < ActiveRecord::Base
   private
 
   def clear_cache
-    Rails.cache.delete("/registration_cost/by_date/#{Date.today}")
-    RegistrationCost.update_current_period("competitor")
-    RegistrationCost.update_current_period("noncompetitor")
+    Rails.cache.delete("/registration_cost/by_date/#{registrant_type}/#{Date.today}")
+    RegistrationCost.update_current_period(registrant_type)
   end
 end
