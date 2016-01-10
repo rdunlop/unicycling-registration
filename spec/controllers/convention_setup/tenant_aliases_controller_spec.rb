@@ -13,7 +13,7 @@
 
 require 'spec_helper'
 
-describe TenantAliasesController do
+describe ConventionSetup::TenantAliasesController do
   let(:user) { FactoryGirl.create(:super_admin_user) }
 
   before(:each) do

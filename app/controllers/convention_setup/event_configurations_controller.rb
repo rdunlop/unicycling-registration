@@ -42,7 +42,7 @@
 #  under_construction                    :boolean          default(TRUE), not null
 #
 
-class EventConfigurationsController < ConventionSetupController
+class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConventionSetupController
   before_action :authenticate_user!
   before_action :load_event_configuration
   before_action :authorize_cache, only: [:cache, :clear_cache, :clear_counter_cache]

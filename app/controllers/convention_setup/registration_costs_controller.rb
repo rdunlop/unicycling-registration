@@ -1,4 +1,4 @@
-class ConventionSetup::RegistrationCostsController < ConventionSetupController
+class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConventionSetupController
   before_action :authorize_setup
   before_action :load_registration_cost, except: [:index, :new, :create]
 

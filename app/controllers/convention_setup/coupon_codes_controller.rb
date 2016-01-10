@@ -1,4 +1,4 @@
-class ConventionSetup::CouponCodesController < ConventionSetupController
+class ConventionSetup::CouponCodesController < ConventionSetup::BaseConventionSetupController
   before_action :load_coupon_code, except: [:index, :create]
   before_action :authorize_setup
 

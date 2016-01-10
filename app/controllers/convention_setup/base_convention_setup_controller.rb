@@ -1,12 +1,8 @@
-class ConventionSetupController < ApplicationController
+class ConventionSetup::BaseConventionSetupController < ApplicationController
   before_action :authenticate_user!
   before_action :set_breadcrumb
 
   layout "convention_setup"
-
-  def index
-    authorize @config, :setup_convention?
-  end
 
   private
 

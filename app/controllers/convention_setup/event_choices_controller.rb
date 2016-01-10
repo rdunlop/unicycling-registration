@@ -1,4 +1,4 @@
-class ConventionSetup::EventChoicesController < ConventionSetupController
+class ConventionSetup::EventChoicesController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
   before_action :load_event, only: [:index, :create]

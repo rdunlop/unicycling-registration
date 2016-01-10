@@ -1,0 +1,13 @@
+// List the Costs for different events
+- events = Event.joins(:expense_item).all
+- if events.any?
+  %table
+    %thead
+      %tr
+        %th Event
+        %th Cost
+    %tbody
+      - Event.joins(:expense_item).all.each do |event|
+        %tr
+          %td= event
+          %td= print_formatted_currency(event.expense_item.cost)

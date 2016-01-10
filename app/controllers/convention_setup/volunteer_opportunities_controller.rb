@@ -1,4 +1,4 @@
-class ConventionSetup::VolunteerOpportunitiesController < ConventionSetupController
+class ConventionSetup::VolunteerOpportunitiesController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
   before_action :authorize_setup

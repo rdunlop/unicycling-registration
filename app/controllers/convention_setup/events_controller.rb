@@ -1,4 +1,4 @@
-class ConventionSetup::EventsController < ConventionSetupController
+class ConventionSetup::EventsController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
   before_action :load_category, only: [:index, :create]
@@ -22,6 +22,7 @@ class ConventionSetup::EventsController < ConventionSetupController
   # GET /events/1/edit
   def edit
     @form = EventForm.new(@event)
+    @form.cost = @event.expense_item.cost if @event.expense_item
   end
 
   # POST /events

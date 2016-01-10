@@ -44,7 +44,7 @@
 
 require 'spec_helper'
 
-describe EventConfigurationsController do
+describe ConventionSetup::EventConfigurationsController do
   before(:each) do
     @user = FactoryGirl.create(:super_admin_user)
     sign_in @user

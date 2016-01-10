@@ -1,4 +1,4 @@
-class ConventionSetup::CategoriesController < ConventionSetupController
+class ConventionSetup::CategoriesController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
   before_action :authorize_setup

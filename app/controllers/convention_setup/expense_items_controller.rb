@@ -1,4 +1,4 @@
-class ConventionSetup::ExpenseItemsController < ConventionSetupController
+class ConventionSetup::ExpenseItemsController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
   before_action :load_expense_group

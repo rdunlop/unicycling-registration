@@ -11,7 +11,7 @@
 #  verified       :boolean          default(FALSE), not null
 #
 
-class TenantAliasesController < ConventionSetupController
+class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConventionSetupController
   before_action :authenticate_user!, except: [:verify]
   before_action :load_tenant_alias, only: [:activate, :destroy]
 

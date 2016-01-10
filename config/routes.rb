@@ -177,6 +177,27 @@ Workspace::Application.routes.draw do
 
     scope module: "convention_setup" do
       resources :registration_costs, except: :show
+      resource :event_configuration, only: [] do
+        collection do
+          get :cache
+          delete :clear_cache
+          delete :clear_counter_cache
+          post :test_mode_role
+        end
+
+        collection do
+          ConventionSetup::EventConfigurationsController::EVENT_CONFIG_PAGES.each do |page|
+            get page
+            put "update_#{page}"
+          end
+        end
+      end
+      resources :tenant_aliases, only: [:index, :create, :destroy] do
+        member do
+          get :verify
+          post :activate
+        end
+      end
       # /convention_setup/migrate
       # /convention_setup/migrate/from/:tenant
       # /convention_setup/migrate/from/:tenant/events
@@ -217,7 +238,8 @@ Workspace::Application.routes.draw do
       end
     end
 
-    get '/convention_setup', to: 'convention_setup#index'
+    get '/convention_setup', to: 'convention_setup/convention_setup#index'
+    get '/convention_setup/costs', to: 'convention_setup/convention_setup#costs'
     namespace :convention_setup do
       resources :categories, except: [:new, :show] do
         post :update_row_order, on: :collection
@@ -339,22 +361,6 @@ Workspace::Application.routes.draw do
     resources :registrant_expenses, only: [] do
       collection do
         post 'single'
-      end
-    end
-
-    resource :event_configuration, except: [:show, :new, :edit, :create, :update] do
-      collection do
-        get :cache
-        delete :clear_cache
-        delete :clear_counter_cache
-        post :test_mode_role
-      end
-
-      collection do
-        EventConfigurationsController::EVENT_CONFIG_PAGES.each do |page|
-          get page
-          put "update_#{page}"
-        end
       end
     end
 
@@ -591,12 +597,6 @@ Workspace::Application.routes.draw do
 
   resources :admin_upgrades, only: [:new, :create]
   resources :tenants, only: [:index, :create]
-  resources :tenant_aliases, only: [:index, :create, :destroy] do
-    member do
-      get :verify
-      post :activate
-    end
-  end
   resources :styles, only: :index
 
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'

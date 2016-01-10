@@ -1,4 +1,4 @@
-class ConventionSetup::ExpenseGroupsController < ConventionSetupController
+class ConventionSetup::ExpenseGroupsController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
   before_action :authorize_permissions

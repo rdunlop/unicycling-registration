@@ -1,4 +1,4 @@
-class ConventionSetup::PagesController < ConventionSetupController
+class ConventionSetup::PagesController < ConventionSetup::BaseConventionSetupController
   before_action :load_page, except: [:index, :new, :create]
   before_action :authorize_setup
 

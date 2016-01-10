@@ -1,0 +1,63 @@
+%h2 Convention Setup
+
+%p The Registration System can be configured to charge competitors with different settings:
+
+%h3 How much to charge the Registrants:
+%ul
+  %li
+    Charge a price for Competitors, and Non-Competitors
+    (e.g. $50 for Early Competitor, $100 for Late Competitor)
+    %br
+    This is configured through the
+    = link_to "Registration Costs", registration_costs_path
+    menu
+  %li
+    Charge by Event
+    (e.g. $5 for Individual Freestyle, $6 for Large Group.)
+    %br
+    This is configured on each individual
+    = link_to "Event", convention_setup_categories_path
+
+= render "registration_costs/list", registrant_type: "competitor"
+= render "registration_costs/list", registrant_type: "noncompetitor"
+= render "registration_costs/events"
+
+%h3 Other Items for sale
+%p
+  You may also have
+  = link_to "Other Items for Sale", expense_groups_path
+  (e.g. Lodging, Meals)
+
+
+%h3 How to charge Registrants
+%ul
+  %li
+    You can set the currency through
+    = link_to "Payment Settings", payment_settings_event_configuration_path
+  %li
+    Charge with Paypal.
+    %br
+    This is configured through the
+    = link_to "Payment Settings", payment_settings_event_configuration_path
+  %li
+    Receive via Bank Transfer.
+    %br
+    You can specify instructions to the registrants for sending Bank Transfers on the
+    = link_to "Payment Settings", payment_settings_event_configuration_path
+
+%h3 Discounts
+%ul
+  %li
+    You can configure Coupons which can specify a discount to items through the
+    = link_to "Coupon Codes", coupon_codes_path
+
+%h3 Wire/Bank Transfer
+%ul
+  %li
+    If you receive money directly from a Registrant, you should mark that money as
+    received so that their registration record is marked as "Paid".
+    %br
+    Set up a "Payment Admin" role through the
+    = link_to "User Management", permissions_path
+    page, and they will be able to process received payments.
+
