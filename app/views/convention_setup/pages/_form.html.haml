@@ -1,10 +1,17 @@
 = simple_form_for([:convention_setup, @page]) do |f|
   = render partial: "shared/error_messages", object: @page
 
-  = f.input :slug
-  = f.input :title
-  = f.input :parent_page_id, collection: Page.ordinary.parent_or_single
-  = f.input :position
-  = f.input :body, as: :text, input_html: { class: "full_tinymce" }
+  .row
+    .small-6.columns= f.input :title
+    .small-4.columns= f.input :slug
+    .small-2.columns= f.input :position
+  .row
+    .small-4.columns.last
+      = f.input :parent_page_id, collection: Page.ordinary.parent_or_single
+  .row
+    .small-12.columns
+      = f.input :body, as: :text, input_html: { class: "full_tinymce" }
 
-  = f.button :submit
+  .row
+    .small-12.columns
+      = f.button :submit

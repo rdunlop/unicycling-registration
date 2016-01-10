@@ -116,6 +116,7 @@ en:
       page:
         slug: "The URL slug, use only normal characters (must not contain spaces)"
         parent_page: "[Optional] Group this page under this parent page"
+        position: Order the pages under a single parent page
       registrant_best_times:
         source_location: Enter Name and Date
       wave_time:
