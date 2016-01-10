@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108055603) do
+ActiveRecord::Schema.define(version: 20160110004434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -424,6 +424,7 @@ ActiveRecord::Schema.define(version: 20160108055603) do
     t.boolean  "noncompetitor_required",                 default: false, null: false
     t.boolean  "registration_items",                     default: false, null: false
     t.integer  "info_page_id"
+    t.boolean  "system_managed",                         default: false, null: false
   end
 
   create_table "expense_item_translations", force: :cascade do |t|
@@ -449,8 +450,11 @@ ActiveRecord::Schema.define(version: 20160108055603) do
     t.integer  "maximum_per_registrant", default: 0
     t.integer  "cost_cents"
     t.integer  "tax_cents",              default: 0,     null: false
+    t.integer  "cost_element_id"
+    t.string   "cost_element_type"
   end
 
+  add_index "expense_items", ["cost_element_type", "cost_element_id"], name: "index_expense_items_on_cost_element_type_and_cost_element_id", using: :btree
   add_index "expense_items", ["expense_group_id"], name: "index_expense_items_expense_group_id", using: :btree
 
   create_table "external_results", force: :cascade do |t|

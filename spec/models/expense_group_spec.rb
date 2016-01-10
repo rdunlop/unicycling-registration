@@ -14,6 +14,7 @@
 #  noncompetitor_required     :boolean          default(FALSE), not null
 #  registration_items         :boolean          default(FALSE), not null
 #  info_page_id               :integer
+#  system_managed             :boolean          default(FALSE), not null
 #
 
 require 'spec_helper'

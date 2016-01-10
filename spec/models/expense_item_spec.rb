@@ -13,10 +13,13 @@
 #  maximum_per_registrant :integer          default(0)
 #  cost_cents             :integer
 #  tax_cents              :integer          default(0), not null
+#  cost_element_id        :integer
+#  cost_element_type      :string
 #
 # Indexes
 #
-#  index_expense_items_expense_group_id  (expense_group_id)
+#  index_expense_items_expense_group_id                          (expense_group_id)
+#  index_expense_items_on_cost_element_type_and_cost_element_id  (cost_element_type,cost_element_id)
 #
 
 require 'spec_helper'
@@ -225,6 +228,15 @@ describe ExpenseItem do
       it "should not count the expense_item as num_unpaid" do
         expect(@item.num_unpaid).to eq(0)
       end
+    end
+  end
+
+  describe "when associated with an event" do
+    let(:event) { FactoryGirl.create(:event, name: "The Event") }
+    let(:expense_item) { FactoryGirl.create(:expense_item, cost_element: event) }
+
+    it "describes the name of the expense_item based on the name of the event" do
+      expect(expense_item.to_s).to eq("The Event")
     end
   end
 

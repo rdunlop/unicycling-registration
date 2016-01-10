@@ -13,10 +13,13 @@
 #  maximum_per_registrant :integer          default(0)
 #  cost_cents             :integer
 #  tax_cents              :integer          default(0), not null
+#  cost_element_id        :integer
+#  cost_element_type      :string
 #
 # Indexes
 #
-#  index_expense_items_expense_group_id  (expense_group_id)
+#  index_expense_items_expense_group_id                          (expense_group_id)
+#  index_expense_items_on_cost_element_type_and_cost_element_id  (cost_element_type,cost_element_id)
 #
 
 class ExpenseItem < ActiveRecord::Base
@@ -34,6 +37,7 @@ class ExpenseItem < ActiveRecord::Base
   translates :name, :details_label, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
+  belongs_to :cost_element, polymorphic: true
   belongs_to :expense_group, inverse_of: :expense_items
   validates :expense_group_id, uniqueness: true, if: "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
 
@@ -48,7 +52,7 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def self.user_manageable
-    includes(:expense_group).where(expense_groups: { registration_items: false })
+    joins(:expense_group).merge(ExpenseGroup.user_manageable)
   end
 
   # items paid for
@@ -125,7 +129,11 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def to_s
-    expense_group.to_s + " - " + name
+    if cost_element.present?
+      cost_element.to_s
+    else
+      expense_group.to_s + " - " + name
+    end
   end
 
   def total_cost_cents

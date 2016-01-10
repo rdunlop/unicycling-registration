@@ -14,6 +14,7 @@
 #  noncompetitor_required     :boolean          default(FALSE), not null
 #  registration_items         :boolean          default(FALSE), not null
 #  info_page_id               :integer
+#  system_managed             :boolean          default(FALSE), not null
 #
 
 class ExpenseGroup < ActiveRecord::Base
@@ -40,7 +41,7 @@ class ExpenseGroup < ActiveRecord::Base
   acts_as_restful_list scope: :registration_items # must keep the position for registration_items only
 
   def self.admin_visible
-    where.not(registration_items: true).not_a_required_item_group
+    user_manageable.not_a_required_item_group
   end
 
   # If an Item from this group is required (ie: automatically added).
@@ -55,6 +56,7 @@ class ExpenseGroup < ActiveRecord::Base
 
   def self.create_registration_items_group
     create(visible: false,
+           system_managed: true,
            registration_items: true,
            competitor_required: false,
            noncompetitor_required: false,
@@ -62,7 +64,7 @@ class ExpenseGroup < ActiveRecord::Base
   end
 
   def self.user_manageable
-    where(registration_items: false)
+    where(system_managed: false)
   end
 
   def self.for_competitor_type(is_competitor)

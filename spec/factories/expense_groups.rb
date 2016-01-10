@@ -14,6 +14,7 @@
 #  noncompetitor_required     :boolean          default(FALSE), not null
 #  registration_items         :boolean          default(FALSE), not null
 #  info_page_id               :integer
+#  system_managed             :boolean          default(FALSE), not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -27,6 +28,7 @@ FactoryGirl.define do
     noncompetitor_required false
 
     trait :registration do
+      system_managed true
       registration_items true
     end
   end

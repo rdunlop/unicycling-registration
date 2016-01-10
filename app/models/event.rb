@@ -23,6 +23,7 @@
 #
 
 class Event < ActiveRecord::Base
+  include CostItem
   resourcify
 
   has_many :event_choices, -> {order "event_choices.position"}, dependent: :destroy, inverse_of: :event
