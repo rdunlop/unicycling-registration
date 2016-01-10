@@ -2,7 +2,13 @@
 
 %p
   These are all of the competitors configured for this competition
-  %br
+
+%p
+  %b Note
+  If you want to specify the wave assignments for multiple competitors at once, see the
+  = link_to "Import Wave Assignments", competition_wave_assignments_path(@competition)
+  page.
+
 = render partial: "shared/error_messages", object: @competition
 = simple_form_for @competition, url: competition_sign_ins_path(@competition), method: :put do |f|
   %table.competitor_statuses
@@ -19,7 +25,6 @@
         %th Wheel Size
         %th Crank Size (mm)
         %th Notes
-        %th
     %tbody
       - @competitors.each do |competitor|
         = f.fields_for :competitors, competitor do |comp_f|
