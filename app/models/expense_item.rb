@@ -37,7 +37,7 @@ class ExpenseItem < ActiveRecord::Base
   translates :name, :details_label, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
-  belongs_to :cost_element, polymorphic: true
+  belongs_to :cost_element, polymorphic: true, inverse_of: :expense_item
   belongs_to :expense_group, inverse_of: :expense_items
   validates :expense_group_id, uniqueness: true, if: "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
 

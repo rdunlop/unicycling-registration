@@ -4,7 +4,7 @@ module CostItem
   extend ActiveSupport::Concern
 
   included do
-    has_one :expense_item, as: :cost_element
+    has_one :expense_item, as: :cost_element, inverse_of: :cost_element
   end
 
   def has_cost?
