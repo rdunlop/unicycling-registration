@@ -1,9 +1,10 @@
-= simple_form_for(@event.persisted? ? [:convention_setup, @event] : [:convention_setup, @category, @event] ) do |f|
-  = render partial: "shared/error_messages", object: @event
+= simple_form_for(@form.persisted? ? [:convention_setup, @form] : [:convention_setup, @category, @form] ) do |f|
+  = render partial: "shared/error_messages", object: @form
   = f.input :name
+  = f.input :cost
 
-  - if @event.persisted?
-    = f.association :category, collection: Category.all, label_method: :name, include_blank: false
+  - if @form.persisted?
+    = f.input :category, collection: Category.all, label_method: :name, include_blank: false
 
   %fieldset
     %h3 Event Categories

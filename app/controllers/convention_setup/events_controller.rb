@@ -13,23 +13,26 @@ class ConventionSetup::EventsController < ConventionSetupController
   # GET /events.json
   def index
     @events = @category.events.includes(:event_choices)
-    @event = Event.new
-    @event.event_categories.build
+    @form = EventForm.new(Event.new)
+    @form.event_categories.build
 
     respond_with(@events)
   end
 
   # GET /events/1/edit
   def edit
+    @form = EventForm.new(@event)
   end
 
   # POST /events
   # POST /events.json
   def create
-    @event = @category.events.build(event_params)
+    event = @category.events.build
+    @form = EventForm.new(event)
+    @form.assign_attributes(event_params)
     respond_to do |format|
-      if @event.save
-        format.html { redirect_to convention_setup_category_events_path(@event.category), notice: 'Event was successfully created.' }
+      if @form.save
+        format.html { redirect_to convention_setup_category_events_path(@form.category), notice: 'Event was successfully created.' }
       else
         load_category
         @events = @category.events
@@ -41,9 +44,11 @@ class ConventionSetup::EventsController < ConventionSetupController
   # PUT /events/1
   # PUT /events/1.json
   def update
+    @form = EventForm.new(@event)
+    @form.assign_attributes(event_params)
     respond_to do |format|
-      if @event.update_attributes(event_params)
-        format.html { redirect_to convention_setup_category_events_path(@event.category), notice: 'Event was successfully updated.' }
+      if @form.save
+        format.html { redirect_to convention_setup_category_events_path(@form.category), notice: 'Event was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
@@ -74,7 +79,7 @@ class ConventionSetup::EventsController < ConventionSetupController
   end
 
   def event_params
-    params.require(:event).permit(:category_id, :name, :visible, :artistic, :accepts_music_uploads,
+    params.require(:event).permit(:category_id, :name, :cost, :visible, :artistic, :accepts_music_uploads,
                                   :accepts_wheel_size_override, :best_time_format,
                                   event_choices_attributes: [:cell_type, :label, :multiple_values, :id],
                                   event_categories_attributes: [:name, :id])

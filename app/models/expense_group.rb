@@ -50,6 +50,7 @@ class ExpenseGroup < ActiveRecord::Base
     where(competitor_required: false, noncompetitor_required: false)
   end
 
+  # ################### SYSTEM MANAGED #######################
   def self.registration_items_group
     find_by(registration_items: true) || create_registration_items_group
   end
@@ -62,6 +63,20 @@ class ExpenseGroup < ActiveRecord::Base
            noncompetitor_required: false,
            group_name: "Registration",)
   end
+
+  def self.event_items_group
+    find_by(system_managed: true, registration_items: false) || create_event_items_group
+  end
+
+  def self.create_event_items_group
+    create(visible: false,
+           system_managed: true,
+           registration_items: false,
+           competitor_required: false,
+           noncompetitor_required: false,
+           group_name: "System-Event",)
+  end
+  # ################### END SYSTEM MANAGED #######################
 
   def self.user_manageable
     where(system_managed: false)

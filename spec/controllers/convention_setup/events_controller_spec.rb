@@ -34,7 +34,7 @@ describe ConventionSetup::EventsController do
       FactoryGirl.create(:event)
       get :index, category_id: @category.id
       expect(assigns(:events)).to eq([event])
-      expect(assigns(:event)).to be_a_new(Event)
+      expect(assigns(:form)).to be_a_new(EventForm)
       expect(assigns(:category)).to eq(@category)
     end
   end
@@ -43,7 +43,7 @@ describe ConventionSetup::EventsController do
     it "assigns the requested event as @event" do
       event = FactoryGirl.create(:event, category: @category)
       get :edit, id: event.to_param
-      expect(assigns(:event)).to eq(event)
+      expect(assigns(:form)).to eq(event)
     end
   end
 
@@ -55,10 +55,16 @@ describe ConventionSetup::EventsController do
         end.to change(Event, :count).by(1)
       end
 
+      it "creates a new expense_item if cost is set" do
+        expect do
+          post :create, event: valid_attributes.merge(cost: 1), category_id: @category.id
+        end.to change(ExpenseItem, :count).by(1)
+      end
+
       it "assigns a newly created event as @event" do
         post :create, event: valid_attributes, category_id: @category.id
-        expect(assigns(:event)).to be_a(Event)
-        expect(assigns(:event)).to be_persisted
+        expect(assigns(:form)).to be_a(EventForm)
+        expect(assigns(:form)).to be_persisted
       end
 
       it "redirects to the created event" do
@@ -84,7 +90,7 @@ describe ConventionSetup::EventsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
         post :create, event: {name: "event"}, category_id: @category.id
-        expect(assigns(:event)).to be_a_new(Event)
+        expect(assigns(:form)).to be_a_new(EventForm)
       end
 
       it "re-renders the 'new' template" do
@@ -102,16 +108,16 @@ describe ConventionSetup::EventsController do
         event = FactoryGirl.create(:event)
         # Assuming there are no other events in the database, this
         # specifies that the Event created on the previous line
-        # receives the :update_attributes message with whatever params are
+        # receives the :assign_attributes message with whatever params are
         # submitted in the request.
-        expect_any_instance_of(Event).to receive(:update_attributes).with({})
+        expect_any_instance_of(Event).to receive(:assign_attributes).with({})
         put :update, id: event.to_param, event: {'these' => 'params'}
       end
 
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
         put :update, id: event.to_param, event: valid_attributes
-        expect(assigns(:event)).to eq(event)
+        expect(assigns(:form)).to eq(event)
       end
 
       it "redirects to the event" do
@@ -127,7 +133,7 @@ describe ConventionSetup::EventsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
         put :update, id: event.to_param, event: {name: "event"}
-        expect(assigns(:event)).to eq(event)
+        expect(assigns(:form)).to eq(event)
       end
 
       it "re-renders the 'edit' template" do

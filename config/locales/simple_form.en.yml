@@ -109,6 +109,7 @@ en:
         accepts_music_uploads: Check this box if each competitor may choose music for their competition
         accepts_wheel_size_override: Setting this option presents children 10-and-younger with the ability to specify a wheel size override.
         artistic: "Setting this boolean will automatically restrict changes after the Artistic Closed Date."
+        cost: Specify the registration cost for this event (optional).
       registrant:
         wheel_size_id: Used to choose Age Groups when applicable.
           (track, Standard-class events)
