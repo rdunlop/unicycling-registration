@@ -11,7 +11,9 @@ describe 'Creating an Event' do
 
   describe "when on the new event page" do
     before do
-      click_link "Events"
+      within "#side_content" do
+        click_link "Events"
+      end
     end
 
     it "can create a category" do
